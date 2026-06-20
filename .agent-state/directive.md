@@ -1,8 +1,31 @@
 # Continuous Work Directive — maga-money-moves
 
-**Status:** RELEASED
+**Status:** ACTIVE
 **Owner:** jbogaty
-**Mandate:** "convert all WAIT-USER into the next long-running local branch, your scope is to handle EVERYTHING, no deferment" (user, 2026-06-20). Confirmed scope: INCLUDES the Dynasty rename + Musk/Kennedy playable Era-0 sagas + dynasty-select carousel. Delivery: ONE long-running branch (`dynasty-everything`) with PERIODIC PRs at phase boundaries.
+**Mandate:** (NEW unit) "DEEP and WIDE research making all dynasties fully backed by a thorough family tree AND full implementation of the religious dynasty… COMPOSITES for each of the four dynasties: political, technological, religious, economic" (user, 2026-06-20). Work SERIALLY, own everything, NO agent swarm (see [[agent-swarm-discipline]]). Design spec: docs/superpowers/specs/2026-06-20-four-composite-dynasties.md.
+
+## Batch — COMPOSITE DYNASTIES + FAMILY TREES (batch-20260620-composite-dynasties)
+
+Four composite power-archetype dynasties (ECONOMIC=Trump · POLITICAL=Kennedy ·
+TECHNOLOGICAL=Musk · RELIGIOUS=Graham), each a primary real-family spine blended
+with secondary real dynasties, each tied to its rank ladder + native governance
+branches. Family trees as a DATA MODEL that drives content. Religious house = a
+full 4th playable dynasty + carousel house. Full detail in the design spec.
+
+### DD-0 Research + design spec
+- [x] DD-0 DONE: researched the religious-dynasty spine (Graham — fresh web research: W.F.Graham Sr→Billy→Franklin→Will, clean 3-4 gen succession + the Billy-centrist↔Franklin-theocracy pivot mapping onto the existing megachurch/theocracy poles; chosen over Roberts/Bakker/Osteen/Falwell which are single-gen or scandal-collapsed). Confirmed the composite-archetype reframe (user) + the archetype↔ladder↔branch binding (the 4 existing rank ladders already name the archetypes). Wrote docs/superpowers/specs/2026-06-20-four-composite-dynasties.md (model, 4 genealogical spines, family-tree data model, blend lists, DD-1..DD-6 plan).
+### DD-1 FamilyTreeSchema + 4 tree JSONs + load validation
+- [ ] DD-1 FamilyTreeSchema (zod) + src/data/family-trees/{economic,political,technological,religious}.json authored from the spec §2 spines (Trump/Kennedy/Musk from existing lineage; Graham newly authored), wired into buildContent with cross-ref validation (every child id resolves, one founder-patriarch, no cycles) + tests.
+### DD-2 Religious dynasty as 4th playable house
+- [ ] DD-2 add "religious" to DynastyKey; its Era-0 origin (Graham-Sr Charlotte opener, gated so the prologue is not skippable per the Epoch-0 fix); religious_dynasty_active → dynastyOf; megachurch/theocracy as native branches; carousel house "THE HOUSE OF GRAHAM / Charlotte, 1918"; reachability + prologue tests.
+### DD-3 Archetype↔ladder binding (+ scientific ladder for tech)
+- [ ] DD-3 each dynasty starts advantaged on its native ladder (economic→commercial, political→political, religious→religious, technological→NEW scientific ladder); add the scientific RankLadder; tests.
+### DD-4 Composite blend content
+- [ ] DD-4 author secondary-family lineage/slot/backdrop events per spec §1 blend lists (econ: Rockefeller/Vanderbilt/Astor; pol: Roosevelt/Bush/Adams; tech: Edison/Ford/Thiel; relig: Roberts/Falwell/Robertson/Bakker/Osteen) deepening each house; depth-floor + no-shallowness guards.
+### DD-5 Genealogy viewer
+- [ ] DD-5 in-game lineage view (extend Dossier or new Lineage tab) rendering the active dynasty's tree progenitor→protagonist→heirs, luxury-styled, real-2D, no portraits; screenshot-verify.
+### DD-6 DoD
+- [ ] DD-6 full gate + AH6 sweep over all 4 dynasties × branches + persona sweep incl. religious + app live-verified per dynasty; PRs squash-merged; directive → RELEASED.
 
 ## Batch — DYNASTY EVERYTHING (batch-20260620-dynasty-everything)
 
