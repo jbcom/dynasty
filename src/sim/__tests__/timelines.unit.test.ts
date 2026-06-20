@@ -1,9 +1,13 @@
 import { describe, expect, it } from "vitest";
 import moresJson from "../../data/timelines/mores.json";
+import moresNaziJson from "../../data/timelines/mores.nazi.json";
 import muskJson from "../../data/timelines/musk.json";
 import religionJson from "../../data/timelines/religion.json";
+import religionNaziJson from "../../data/timelines/religion.nazi.json";
 import scienceJson from "../../data/timelines/science.json";
+import usaNaziJson from "../../data/timelines/usa.nazi.json";
 import westcoastJson from "../../data/timelines/westcoast.json";
+import worldNaziJson from "../../data/timelines/world.nazi.json";
 import { buildContent } from "../content";
 import { type WorldTimeline, WorldTimelineSchema } from "../schema";
 import { initState } from "../state";
@@ -73,6 +77,41 @@ describe("branch timeline selection (AH3)", () => {
     expect(usa[0]?.label).toBe("USA (Reich)");
     // scopes without a branch variant still fall back to default
     expect(sel.find((t) => t.scope === "science")).toBeDefined();
+  });
+});
+
+describe("Nazi-branch backdrop pool (alt-history consistency, AH2/AH3)", () => {
+  const naziFiles = {
+    usa: usaNaziJson,
+    world: worldNaziJson,
+    mores: moresNaziJson,
+    religion: religionNaziJson,
+  };
+
+  for (const [scope, json] of Object.entries(naziFiles)) {
+    it(`${scope}.nazi.json validates as scope=${scope} branch=nazi`, () => {
+      const t = WorldTimelineSchema.parse(json);
+      expect(t.scope).toBe(scope);
+      expect(t.branch).toBe("nazi");
+      expect(t.events.length).toBeGreaterThanOrEqual(30);
+      const ids = t.events.map((e) => e.id);
+      expect(new Set(ids).size).toBe(ids.length);
+    });
+  }
+
+  it("the Nazi USA timeline establishes the Reich order and never crowns a sitting US president", () => {
+    const t = WorldTimelineSchema.parse(usaNaziJson);
+    const corpus = t.events.map((e) => `${e.headline} ${e.body}`.toLowerCase()).join(" ");
+    // It MUST establish the Reich administration (the head of state is a
+    // Reichskommissar, not a President).
+    expect(corpus).toContain("reich");
+    expect(corpus).toContain("commissar");
+    // No event should AFFIRM a U.S. president winning/taking office during the
+    // occupation. (Phrases like "no presidential assassinations" are consistency-
+    // affirming and fine; we ban the affirmative installation phrases only.)
+    for (const banned of ["wins the white house", "elected president", "president-elect"]) {
+      expect(corpus.includes(banned), `Nazi USA affirms "${banned}"`).toBe(false);
+    }
   });
 });
 

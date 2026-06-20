@@ -78,6 +78,38 @@ Three intertwined requirements:
       NOTE: the per-branch backdrop JSONs being authored now (usa.nazi, world.nazi,
       mores.nazi, religion.nazi, …) are the CONFIG POOLS the compiler draws from —
       authoring them remains necessary under the gears-in-a-clock model.
+- [ ] AH7 SLOT EVENTS (user, 2026-06-20): certain real events are SO structurally
+      critical they should be abstract SLOTS filled per timeline, not hardcoded
+      concrete events. The JFK assassination is really the archetype "the
+      assassination of the dynasty's leader" — on the political-dynasty path it's
+      FRED TRUMP's assassination; elsewhere it's another figure or doesn't fire.
+      There are likely a TON of these (the war, the crash, the great scandal, the
+      martyrdom, the succession). Design a SLOT system: archetypal event slots that
+      resolve to branch/dynasty-specific concrete events at compile time (pairs with
+      the gears-in-a-clock compiler — slots are filled when the timeline compiles).
+- [ ] AH8 BRANCH-AWARE PATRONYMICS / NAMES (user, 2026-06-20): names change with the
+      branch. The family only became "Trump" by anglicizing "Drumpf"; in the Nazi
+      (stayed-German) timeline Donald remains DONALD DRUMPF. Extend the AH1 term layer
+      to PROPER NAMES / surnames (a {surname}/{family_name} term: "Trump" default,
+      "Drumpf" on the German/Nazi branch, etc.), and audit content for hardcoded
+      "Trump" that should be the branch-aware surname token.
+- [ ] AH9 BUTTERFLY WEIGHT/BIAS AGENT PASS (user, 2026-06-20): the butterfly effect +
+      causal engine need an agent pass to ASSIGN WEIGHTS AND BIASES across the events
+      / butterfly rules / ripples so the compile-at-0 selection and the in-run chaos
+      field pull realistically (which configs/events are more or less likely given the
+      prologue + accumulated state). Send an agent through to tune weights/biases
+      systematically (this is what makes the bias-weighted timeline compilation and
+      the butterfly machine produce believable, varied bespoke stories).
+- [ ] AH6 AGENT-SWEEP VERIFICATION (user, 2026-06-20): agent verification is FAST —
+      far quicker than a human reviewer at spotting flaws across many permutations.
+      So the QA strategy pairs with AH5: once the compiler/harness can dump a
+      compiled timeline per (seed + Era-0 choices), FAN OUT verification agents over
+      a SWEEP of Era-0 permutations, each agent reading one compiled-timeline dump
+      and flagging cross-timeline contradictions / anachronisms / shallowness / title
+      mismatches (e.g. "President" leaking into a Nazi run, a default real-history
+      headline in an alt branch). Aggregate findings → fix the offending config →
+      re-sweep. This automated consistency sweep is how we hold the no-shallowness +
+      consistency invariants at scale instead of hand-checking.
 - [ ] AH3-BRANCHES (user): author full alt-history treatment for these branches:
       (1) NAZI-OCCUPIED AMERICA (axis_ascendant/nazi_dynasty) — Reich titles, purges
           not assassinations, no elections/civil-rights/free press.
