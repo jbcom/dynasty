@@ -3156,6 +3156,123 @@
           "outcome": "You start making calls to party officials. The self-made story is the perfect vehicle for populist politics — you didn't inherit the system, so you can pretend to want to burn it down. The rage you cultivated in Queens conference rooms is transferable. Turns out, it travels."
         }
       ]
+    },
+    {
+      "id": "ev_epstein_circle",
+      "era": "primetime",
+      "year": 2005,
+      "title": "The Palm Beach Social Season",
+      "scene": "Mar-a-Lago is the center of the Palm Beach universe, and the universe keeps rotating Jeffrey Epstein through its orbit. He's a fixture — the financier everyone knows but no one asks about too directly. At a poolside dinner you've hosted a hundred times, a mutual acquaintance slides Epstein into the seat beside you. The man is charming in the way of someone who has something on everyone and knows it. Later, you'll say you barely knew him. Tonight, you have a choice about how barely.",
+      "researchNote": "Trump and Epstein were documented social acquaintances in Palm Beach circles through the early 2000s; Trump later claimed he had a falling-out with Epstein before Epstein's 2005 Palm Beach arrest.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["social", "heat", "palm_beach", "celebrity"],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "lean_in_epstein",
+          "text": "Cultivate the connection — he opens doors and the parties are legendary",
+          "effects": {
+            "power": 8,
+            "reputation": 5,
+            "heat": 18,
+            "loyalty": 4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 5
+          },
+          "setFlags": ["epstein_adjacent"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "ev_trump_u_lawsuits", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The network is extraordinary. The heat is a slow drip that won't feel dangerous until it floods."
+        },
+        {
+          "id": "distance_epstein",
+          "text": "Keep it cordial but create distance — something about him sets off alarm bells",
+          "effects": {
+            "power": 2,
+            "reputation": 4,
+            "heat": -5
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": -3
+          },
+          "setFlags": ["epstein_distanced"],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You're polite at the next party and then conveniently busy after that. Some doors stay closed. You sleep fine."
+        }
+      ]
+    },
+    {
+      "id": "ev_grooming_heirs",
+      "era": "primetime",
+      "year": 2006,
+      "title": "The Next Generation of Trumps",
+      "scene": "Don Jr. is already closing deals with a ferocity you recognize as your own, and Ivanka keeps showing up on covers that used to be yours. Eric is quieter, loyal in the way of someone who has learned that loyalty is what the name requires. You have built an empire, and empires either outlast their founders or collapse with them. This is the moment you choose which kind of empire you want.",
+      "researchNote": "By the mid-2000s Trump was actively integrating his adult children — Don Jr., Ivanka, and Eric — into the Trump Organization as senior executives, a step toward dynastic succession.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["dynasty", "family", "legacy", "loyalty"],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_dynasty_heirs",
+          "text": "Bring them fully in — teach them the art, give them the keys, build the dynasty",
+          "effects": {
+            "loyalty": 15,
+            "power": 6,
+            "reputation": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 4
+          },
+          "setFlags": ["heirs_groomed", "dynasty_built"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "ev_political_brand", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "The Trump name becomes a verb and a lineage. They carry your ambition forward with a loyalty that money alone could never buy."
+        },
+        {
+          "id": "keep_it_mine",
+          "text": "Keep the real power close — let them shadow you but never quite inherit",
+          "effects": {
+            "power": 10,
+            "loyalty": -5,
+            "money": 20000
+          },
+          "personality": {
+            "grandiosity": 10,
+            "inward": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The empire remains yours, undiluted. Your children work harder trying to earn what you won't give away. It's lonely at the top, but you always knew that."
+        }
+      ]
     }
   ]
 }
