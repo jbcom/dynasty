@@ -115,10 +115,10 @@ export function queryEligible(content: Content, state: GameState): GameEvent[] {
 /**
  * Seeded weighted next-event pick over the read-model — the declarative twin of
  * the pure `pickNextEvent` (events.ts), and the DE-1 migration of the core
- * selection step onto Koota. Projects the world, reads the Eligible entities in
- * content order (the same order the pure path's era-pool filter yields, since
- * projectWorld marks Eligible from eligibleEvents), and applies the identical
- * weighted draw. PARITY: returns the same event id as pickNextEvent for the same
+ * selection step onto Koota. Projects the world, reads the Eligible entities and
+ * SORTS them into explicit content-array order (not koota's query order — see the
+ * orderOf map below), then applies the identical weighted draw. PARITY: returns
+ * the same event id as pickNextEvent for the same
  * (content, state, rng) — proven by a parity test. The pure path stays the
  * source of truth; this is the ECS-native read used where a world is already in
  * hand. Determinism: the rng draw order matches the pure path exactly.
@@ -129,15 +129,32 @@ export function pickNextEventViaWorld(
   rng: Rng,
 ): GameEvent | null {
   const byId = new Map(content.allEvents.map((e) => [e.id, e]));
-  // Eligible entities in spawn (content) order — identical order to eligibleEvents.
+  // Content-array index per event id — the EXPLICIT, koota-version-independent
+  // ordering key. weightedIndex() indexes into this order, so it must match
+  // eligibleEvents' (content-order) order exactly; relying on world.query()'s
+  // archetype-iteration order would be an unguarded invariant (rev-de1).
+  const orderOf = new Map(content.allEvents.map((e, i) => [e.id, i]));
   const eligible = withWorld(content, state, (world) =>
     world
       .query(EventRef, Eligible, Weight)
-      .map((e) => ({
-        event: byId.get(e.get(EventRef)?.id ?? ""),
-        weight: e.get(Weight)?.value ?? 0,
-      }))
-      .filter((x): x is { event: GameEvent; weight: number } => x.event !== undefined),
+      .map((e) => {
+        const id = e.get(EventRef)?.id ?? "";
+        const w = e.get(Weight);
+        // An eligible entity is ALWAYS spawned with Weight by projectWorld — if it
+        // isn't, that's a projection bug to surface, not mask with ?? 0 (rev-de1).
+        if (w === undefined) throw new Error(`projected entity "${id}" is missing Weight`);
+        return {
+          event: byId.get(id),
+          weight: w.value,
+          order: orderOf.get(id) ?? Number.MAX_SAFE_INTEGER,
+        };
+      })
+      .filter(
+        (x): x is { event: GameEvent; weight: number; order: number } => x.event !== undefined,
+      )
+      // Sort into content order explicitly so the weighted draw is deterministic
+      // regardless of koota's internal query order.
+      .sort((a, b) => a.order - b.order),
   );
   if (eligible.length === 0) return null;
   const weights = eligible.map((x) => x.weight);
@@ -161,7 +178,12 @@ export function queryEligibleByWeight(
   return withWorld(content, state, (world) =>
     world
       .query(EventRef, Eligible, Weight)
-      .map((e) => ({ id: e.get(EventRef)?.id ?? "", weight: e.get(Weight)?.value ?? 0 }))
+      .map((e) => {
+        const id = e.get(EventRef)?.id ?? "";
+        const w = e.get(Weight);
+        if (w === undefined) throw new Error(`projected entity "${id}" is missing Weight`);
+        return { id, weight: w.value };
+      })
       .map(({ id, weight }) => ({ event: byId.get(id), weight }))
       .filter((x): x is { event: GameEvent; weight: number } => x.event !== undefined)
       .sort((a, b) => b.weight - a.weight || a.event.id.localeCompare(b.event.id)),

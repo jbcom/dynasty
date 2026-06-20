@@ -271,4 +271,33 @@ describe("per-branch per-pole endings — flag-gated resolution (DE-2a)", () => 
     const assassination = content.endings.find((e) => e.id === "end_assassination");
     expect(gilead?.priority).toBeGreaterThan(assassination?.priority ?? 0);
   });
+
+  // rev-de2 #2: EVERY committed pole ending must outrank end_assassination, not
+  // just the dictatorial theocracy one. A run that resolved a branch pole has
+  // reached that branch's defined apex outcome; a generic assassination (which
+  // only fires on assassination_target + high heat + low health) must not preempt
+  // it. Previously only theocracy_dictatorial was bumped; the reward (utopian) and
+  // other poles sat at 91-94 and lost to assassination@95.
+  it("every per-branch pole ending outranks end_assassination@95", () => {
+    const assassination = content.endings.find((e) => e.id === "end_assassination");
+    const poleEndings = content.endings.filter((e) =>
+      /_(utopian|centrist|dictatorial)$/.test(e.id),
+    );
+    expect(poleEndings.length).toBeGreaterThanOrEqual(18);
+    for (const p of poleEndings) {
+      expect(p.priority, `${p.id} must beat assassination`).toBeGreaterThan(
+        assassination?.priority ?? 0,
+      );
+    }
+  });
+
+  it("a hunted, high-heat UTOPIAN-pole run resolves to its pole ending, not assassination", () => {
+    // The exact rev-de2 scenario: a coherent utopia builder who is also an
+    // assassination_target with high heat / low health still gets the reward ending.
+    const s = lateState({
+      flags: ["covenant_commonwealth", "assassination_target"].sort(),
+      meters: { ...lateState().meters, heat: 90, health: 20 },
+    });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_theocracy_utopian");
+  });
 });
