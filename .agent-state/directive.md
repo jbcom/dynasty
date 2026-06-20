@@ -1,7 +1,27 @@
 # Continuous Work Directive — maga-money-moves
 
-**Status:** RELEASED
+**Status:** ACTIVE
 **Owner:** jbogaty
+
+## Batch — dynasty-koota-deepfuture (batch-20260620-134116)
+
+Source: carried-forward epics from the alt-history batch (PRs #10/#11 merged), user-sequenced 2026-06-20.
+Started: 2026-06-20T18:41:00Z
+
+The next work unit. Order chosen by the user (Koota-migration-first, then
+deep-future, then coverage/audit, then persona sweep). Full design detail for each
+lives in the WAIT-USER items further down (now unblocked).
+
+### nb-001 Koota: migrate remaining queries over the read-model (continues task-026)
+- [ ] nb-001 migrate linking-protocol broadcast, branch/slot resolution, and market/rank reads to declarative Koota queries over projectWorld; parity test each against its pure helper; replay parity + timeline:sweep stay green.
+### nb-002 Deep-future for the remaining branches (continues task-025)
+- [ ] nb-002 branch-motivated Mars/stars/first-contact arcs for nazi (Reich conquest), media (broadcast reach), westcoast (techno-frontier), megachurch (mission) — each sets the science-ladder flags via its own motivation; 3 poles; agent-parallelizable per branch.
+### nb-003 Full 3-pole coverage + no-shallowness audit (task-022 remainder + task-017)
+- [ ] nb-003 ensure EVERY branch pool expresses utopian/centrist/dictatorial pole flags moralAxis can read; audit each branch opens a comparably rich gated multi-layer pool; deepen thin spots.
+### nb-004 Persona playtest sweep (task-023)
+- [ ] nb-004 fan out persona agents over compiled-timeline dumps (timeline:dump) to find dead-ends/shallowness/dominant strategies AND missing branches; aggregate → fix → re-sweep.
+### nb-005 Definition of done
+- [ ] nb-005 typecheck+biome+unit+browser green; app live-verified per branch; reviewer trio; resolve bot threads; green PR → squash-merge.
 
 ## VISION — "DYNASTY": three playable dynastic sagas (user, 2026-06-20)
 
