@@ -44,7 +44,7 @@ const DYNASTIES: Array<{
     house: "The House of Trump",
     founding: "Kallstadt, 1885",
     tagline: "A barber's apprentice leaves Bavaria and builds the most brazen commercial dynasty in American history.",
-    icon: "🏗️",
+    icon: "/assets/icons/dynasty-trump.svg",
     accent: "var(--mmm-gold)",
   },
   {
@@ -53,7 +53,7 @@ const DYNASTIES: Array<{
     house: "The House of Kennedy",
     founding: "County Wexford, 1848",
     tagline: "A famine immigrant survives the coffin ships and raises the most glamorous political dynasty of the twentieth century.",
-    icon: "🍀",
+    icon: "/assets/icons/dynasty-kennedy.svg",
     accent: "#4a9eff",
   },
   {
@@ -62,7 +62,7 @@ const DYNASTIES: Array<{
     house: "The House of Musk",
     founding: "Cape Colony, 1906",
     tagline: "A South African aviator's grandson inherits first-principles thinking and builds civilizations — on Earth, and beyond.",
-    icon: "🚀",
+    icon: "/assets/icons/dynasty-musk.svg",
     accent: "#c0c8d8",
   },
 ];
@@ -104,7 +104,7 @@ const DYNASTIES: Array<{
           style="--house-accent: {d.accent}"
           onclick={() => chooseDynasty(d.key)}
         >
-          <span class="dynasty-icon" aria-hidden="true">{d.icon}</span>
+          <img class="dynasty-icon" src={d.icon} alt="" aria-hidden="true" />
           <span class="dynasty-house">{d.house}</span>
           <span class="dynasty-name">{d.name}</span>
           <span class="dynasty-founding">{d.founding}</span>
@@ -337,8 +337,9 @@ const DYNASTIES: Array<{
     outline-offset: 2px;
   }
   .dynasty-icon {
-    font-size: 2.5rem;
-    line-height: 1;
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: contain;
   }
   .dynasty-house {
     font-family: var(--mmm-font-body);
