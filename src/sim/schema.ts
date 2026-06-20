@@ -189,7 +189,9 @@ export const WorldTimelineSchema = z.object({
    * keyed to a branch (e.g. usa.nazi.json → "nazi") is loaded ONLY when that
    * branch is active, and SUPPRESSES the default variant of the same scope.
    */
-  branch: z.enum(["default", "nazi", "westcoast", "theocracy", "media"]).optional(),
+  branch: z
+    .enum(["default", "nazi", "westcoast", "theocracy", "media", "megachurch", "oligarchy"])
+    .optional(),
   events: z.array(WorldEventSchema).min(1),
 });
 export type WorldTimeline = z.infer<typeof WorldTimelineSchema>;
@@ -324,6 +326,8 @@ export const TermSchema = z.object({
   westcoast: z.string().min(1).optional(),
   theocracy: z.string().min(1).optional(),
   media: z.string().min(1).optional(),
+  megachurch: z.string().min(1).optional(),
+  oligarchy: z.string().min(1).optional(),
 });
 export type Term = z.infer<typeof TermSchema>;
 
@@ -361,6 +365,8 @@ export const SlotSchema = z.object({
   westcoast: SlotResolutionSchema.optional(),
   theocracy: SlotResolutionSchema.optional(),
   media: SlotResolutionSchema.optional(),
+  megachurch: SlotResolutionSchema.optional(),
+  oligarchy: SlotResolutionSchema.optional(),
   /** Per-dynasty resolutions (trump | musk | kennedy), checked before branch. */
   dynasty: z.record(z.string(), SlotResolutionSchema).default({}),
 });
@@ -442,7 +448,9 @@ export const CurrencySchema = z.object({
   fromYear: z.number().int().optional(),
   toYear: z.number().int().optional(),
   /** Branch this currency belongs to (default = our timeline). */
-  branch: z.enum(["default", "nazi", "westcoast", "theocracy", "media"]).optional(),
+  branch: z
+    .enum(["default", "nazi", "westcoast", "theocracy", "media", "megachurch", "oligarchy"])
+    .optional(),
   /** Location flag that forces this currency when set (e.g. "on_mars"). */
   location: z.string().optional(),
   /** Multiplier applied to `money` when redenominating FROM the prior currency. */

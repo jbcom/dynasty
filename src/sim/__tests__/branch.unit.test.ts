@@ -15,6 +15,8 @@ describe("branch resolution (alt-history)", () => {
     expect(branchOf(withFlags("evangelical_scion"))).toBe("theocracy");
     expect(branchOf(withFlags("west_coast_origin"))).toBe("westcoast");
     expect(branchOf(withFlags("pleasure_king"))).toBe("media");
+    expect(branchOf(withFlags("megachurch_dynasty"))).toBe("megachurch");
+    expect(branchOf(withFlags("oligarch_dynasty"))).toBe("oligarchy");
   });
 
   it("prefers the more-specific branch when several signatures coexist", () => {

@@ -3,6 +3,28 @@
 **Status:** ACTIVE
 **Owner:** jbogaty
 
+## VISION — "DYNASTY": three playable dynastic sagas (user, 2026-06-20)
+
+The systems built here (branch resolver, terms/titles, slot events, per-branch
+timeline pools, the compile-at-0 model, the systemic markets/ranks layer) are a
+GENERIC GRAMMAR for a dynastic-saga game — not Trump-specific. The user's
+realization: RENAME the game to "DYNASTY" and let each of the THREE dynastic
+families be its OWN emergent, playable game (not just roles you SWAP between):
+- TRUMP — the existing Drumpf/Kallstadt Era 0 (commercial/real-estate spine).
+- MUSK — begins in SOUTH AFRICA (Walter Henry James Musk → Errol Musk → Elon);
+  the most TECHNOLOGICALLY-focused of the three. Needs its own Era 0.
+- KENNEDY — begins EARLIEST of all three, with Patrick Kennedy (1823–1858) and
+  the IRISH FAMINE; by far the most POLITICAL. Needs its own (earliest) Era 0.
+Landing screen: a NEW-GAME CAROUSEL of portraits + public-domain historical
+lineage images for the three families; pick a dynasty → play its saga. With
+expansion + the slot system, ANY dynastic family could be added — unique
+emergent stories per house. This is a future epic (rename + 3 playable Era-0
+sagas + dynasty-select carousel + per-dynasty slot/timeline pools), tracked here
+to shape the remaining batch work toward it (the slot/compiler/branch work is
+exactly the foundation it needs). NOT started; revisit scope/sequencing with the
+user before the rename + the Musk/Kennedy Era-0 sagas. The current batch's
+Kennedy/Musk protagonist timelines + bootlegger bridge are the seeds.
+
 ## Batch — alt-history-and-systemic-sim (batch-20260620-113905)
 
 Source: docs/plans/alt-history-and-systemic-sim.prq.md (sha256: e292c27ee0d28499536fd909f8bb59d83684f16122a8d449008a19f008ce00c2)
@@ -21,13 +43,17 @@ spec) — not re-queued here.
 ### task-003 Kennedy/RFK Jr protagonist timeline
 - [x] task-003 timelines/kennedy.json (scope kennedy, 26 events) + brewing/bootlegger Era-0 bridge (origins) enabling the Trump↔Kennedy swap; validates + swap test (bootlegger_fortune/political_dynasty/kennedy_swap flags asserted in both)
 ### task-004 West-Coast branch backdrop pool
-- [ ] task-004 usa/world/mores/religion .westcoast.json — Pacific-centered, ≥30 events each, 0 dups, consistency test
+- [x] task-004 usa/world/mores/religion .westcoast.json (35/31/29/27 events) — Pacific-centered, ≥30 events each, 0 dups, consistency test
 ### task-005 Evangelical-theocracy branch backdrop pool
-- [ ] task-005 usa/world/mores/religion .theocracy.json — religious-state titles/events, ≥30 each, 0 dups, consistency test
+- [x] task-005 usa/world/mores/religion .theocracy.json (28/21/19/24 events) — religious-state titles/events, ≥30 each, 0 dups, consistency test
 ### task-006 Media/pleasure-king branch backdrop pool
-- [ ] task-006 usa/world/mores/religion .media.json — vice→porn→Hollywood→propaganda arc, ≥30 each, 0 dups, consistency test
+- [x] task-006 usa/world/mores/religion .media.json (31/27/20/20 events) — vice→porn→Hollywood→propaganda arc, ≥30 each, 0 dups, consistency test
 ### task-007 Role-flip protagonist overwrite content
 - [ ] task-007 Musk-as-leader / Trump-as-tycoon arc threading via terms + events reflecting the flip
+### task-019 MEGACHURCH religious-dynasty branch (user, 2026-06-20)
+- [ ] task-019 a TRUE American MEGACHURCH religious DYNASTY — a clear gap for a game with interwoven ideological/theological areas, and distinct from the theocracy STATE branch. RESEARCH the real American megachurch phenomenon (Graham, the televangelist dynasties — Roberts/Bakker/Robertson/Osteen, the prosperity gospel, Hillsong/Lakewood, family-succession ministries, the megachurch-as-business-empire). A dynasty whose power is a religious-media-financial empire (not a theocratic state per se). New branch key "megachurch" (+ schema/branch/terms entries) and a 4-scope pool (usa/world/mores/religion .megachurch.json). Head-of-state/title + currency terms per branch. Could converge with media (televangelism) and theocracy (Religious Right) threads.
+### task-020 OLIGARCHY / OLIGOPOLY branch (user, 2026-06-20)
+- [ ] task-020 an OLIGARCHY/OLIGOPOLY America as another logical successor to the COLLAPSE of the democratic republic (we already introduced an America that does NOT remain a democracy via the Nazi + theocracy branches; oligarchy is the third logical destination — corporate/plutocratic capture, a board-of-billionaires state, company-towns writ national, the Chairman/CEO-as-ruler). RESEARCH (Gilded-Age trusts, robber barons, regulatory capture, modern tech-oligarch power, state-capture literature). New branch key "oligarchy" (+ schema/branch/terms) and a 4-scope pool. Ties naturally to the Musk tech-dynast + the markets/ranks SIM1 layer (commercial rank → political power). FRAMING (user): the collapse of one America and the rise of another — Reich / theocracy / oligarchy are parallel post-democracy forms.
 ### task-008 AH3 timeline compiler (compile-at-Era-0)
 - [ ] task-008 butterfly+bias-weighted selection from all config pools → ONE bespoke consistent timeline, persisted to Capacitor save; deterministic from seed+Era-0 choices; replay parity test
 ### task-009 AH5 timeline-compiler dev harness

@@ -117,6 +117,36 @@ describe("Nazi-branch backdrop pool (alt-history consistency, AH2/AH3)", () => {
   });
 });
 
+describe("all branch backdrop pools validate uniformly (AH3 pools)", () => {
+  // Every per-branch timeline variant in the repo, validated as a set.
+  const pool = import.meta.glob("../../data/timelines/*.*.json", { eager: true }) as Record<
+    string,
+    { default: unknown }
+  >;
+
+  it("finds the expected branch pools (nazi/westcoast/theocracy/media × 4 scopes)", () => {
+    const names = Object.keys(pool).map((p) => p.split("/").pop());
+    for (const branch of ["nazi", "westcoast", "theocracy", "media"]) {
+      for (const scope of ["usa", "world", "mores", "religion"]) {
+        expect(names, `missing ${scope}.${branch}.json`).toContain(`${scope}.${branch}.json`);
+      }
+    }
+  });
+
+  for (const [path, mod] of Object.entries(pool)) {
+    const file = path.split("/").pop() ?? path;
+    it(`${file} validates with matching scope+branch and no dup ids`, () => {
+      const [scope, branch] = file.replace(".json", "").split(".");
+      const t = WorldTimelineSchema.parse(mod.default);
+      expect(t.scope).toBe(scope);
+      expect(t.branch).toBe(branch);
+      expect(t.events.length).toBeGreaterThanOrEqual(18);
+      const ids = t.events.map((e) => e.id);
+      expect(new Set(ids).size).toBe(ids.length);
+    });
+  }
+});
+
 // Geographic + thematic + character timelines.
 const FILES: Record<string, unknown> = {
   westcoast: westcoastJson,

@@ -17,7 +17,14 @@ import type { GameState } from "./state";
  */
 
 /** The mutually-exclusive alternate-history backdrop a run inhabits. */
-export type BranchKey = "default" | "nazi" | "westcoast" | "theocracy" | "media";
+export type BranchKey =
+  | "default"
+  | "nazi"
+  | "westcoast"
+  | "theocracy"
+  | "media"
+  | "megachurch"
+  | "oligarchy";
 
 /**
  * Ordered branch detection: the first whose signature flag is present wins, so
@@ -26,8 +33,10 @@ export type BranchKey = "default" | "nazi" | "westcoast" | "theocracy" | "media"
  */
 const BRANCH_SIGNATURES: ReadonlyArray<{ key: BranchKey; anyOf: readonly string[] }> = [
   { key: "nazi", anyOf: ["axis_ascendant", "nazi_dynasty", "arrived_as_nazi"] },
+  { key: "megachurch", anyOf: ["megachurch_dynasty", "televangelist_empire"] },
   { key: "theocracy", anyOf: ["evangelical_scion", "faith_to_power", "evangelical_origin"] },
   { key: "media", anyOf: ["pleasure_king", "media_dynasty", "vice_empire"] },
+  { key: "oligarchy", anyOf: ["oligarch_dynasty", "corporate_state", "plutocracy"] },
   { key: "westcoast", anyOf: ["west_coast_origin", "west_coast_dynasty"] },
 ];
 
