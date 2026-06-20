@@ -45,11 +45,22 @@ describe("role-swap invariant (P7)", () => {
     expect(next.flags).not.toContain("trump_political");
   });
 
-  it("an explicit commercial choice commits Donald to the empire without a flip", () => {
+  it("an explicit commercial abdication routes Donald to the empire and the seat to Musk", () => {
     const next = resolveRoles(withFlags("walked_away"));
     expect(next.flags).toContain("trump_commercial_path");
-    expect(next.flags).not.toContain("role_flip");
-    expect(next.flags).not.toContain("musk_political");
+    // Abdication is a flip: someone else (Musk, the other immortal) takes power.
+    expect(next.flags).toContain("musk_political");
+    expect(next.flags).toContain("role_flip");
+    expect(next.flags).not.toContain("trump_political");
+  });
+
+  it("a LATER abdication overrides an EARLIER political signal (does not trap the player)", () => {
+    // Regression: a player who consolidated power and then walked away must end
+    // up commercial, with the commercial endings reachable — not stuck political.
+    const next = resolveRoles(withFlags("consolidated_power", "walked_away"));
+    expect(next.flags).toContain("trump_commercial_path");
+    expect(next.flags).not.toContain("trump_political");
+    expect(next.flags).not.toContain("musk_commercial_path");
   });
 
   it("is idempotent — re-resolving a settled state changes nothing", () => {

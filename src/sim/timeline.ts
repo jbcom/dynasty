@@ -136,6 +136,13 @@ export function advanceTimeline(content: Content, state: GameState): GameState {
     lastEventYear,
   };
 
+  // NOTE: these detectEnd calls run BEFORE applyChoice's step-8b world-flag
+  // broadcast and step-8c resolveRoles, so they do not see role flags derived
+  // from a flip that happens on THIS step. That is fine: applyChoice re-checks
+  // detectEnd after resolveRoles (its postEnd check), which is where role-
+  // dependent endings (end_role_flip_tycoon, end_reich_industrialist) fire.
+  // Don't rely on the calls here for role-gated endings.
+
   // A blocked gate forces a terminal evaluation at the current era.
   if (gateBlocked) {
     const gateEnd = detectEnd(content, { ...advanced, eraIndex: content.eras.length });

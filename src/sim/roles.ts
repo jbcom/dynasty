@@ -49,9 +49,10 @@ function hasAny(flags: readonly string[], signals: readonly string[]): boolean {
 /**
  * Resolve the {Trump, Musk} ⇄ {political, commercial} assignment from the raw
  * signals on `state` and stamp the canonical role flags. Mutual exclusion is
- * enforced: whoever is political forces the other commercial. If Musk takes
- * power, Donald is routed commercial regardless of his own political signals —
- * the flip wins, because there is only one Oval Office. Returns a new state.
+ * enforced — exactly one is political, the other commercial — by a precedence
+ * where a LATER authorial choice wins over an earlier one, so the invariant
+ * never traps the player (a deliberate abdication beats power once held).
+ * Returns a new state.
  */
 export function resolveRoles(state: GameState): GameState {
   const muskPolitical = state.flags.includes(MUSK_POLITICAL_SIGNAL);
@@ -61,18 +62,20 @@ export function resolveRoles(state: GameState): GameState {
   // No role has resolved yet — leave the state untouched (early/childhood eras).
   if (!muskPolitical && !trumpPoliticalSignal && !trumpCommercialSignal) return state;
 
-  // The flip wins: there is only one seat of power.
-  const trumpPolitical = !muskPolitical && trumpPoliticalSignal;
-
+  // Precedence, highest first — so a LATER authorial choice wins over an earlier
+  // one and the invariant never traps the player:
+  //   1. Musk took power      → the flip: Musk political, Trump commercial.
+  //   2. Trump abdicated      → he runs the empire; the seat falls to Musk (the
+  //      other immortal) → also a flip. A deliberate commercial choice beats any
+  //      earlier political signal (you can walk away from power you once held).
+  //   3. Trump took/holds power → default: Trump political, Musk commercial.
   const toSet: string[] = [];
-  if (trumpPolitical) {
-    toSet.push("trump_political", "musk_commercial_path");
-  } else if (muskPolitical) {
+  if (muskPolitical) {
     toSet.push("musk_political", "trump_commercial_path", "role_flip");
+  } else if (trumpCommercialSignal) {
+    toSet.push("trump_commercial_path", "musk_political", "role_flip");
   } else {
-    // Donald explicitly chose commerce and no one else has taken power yet —
-    // the seat is open, but Donald is committed to the empire.
-    toSet.push("trump_commercial_path");
+    toSet.push("trump_political", "musk_commercial_path");
   }
 
   let flags = state.flags;
