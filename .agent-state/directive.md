@@ -15,7 +15,7 @@ docs/superpowers/specs/2026-06-20-systemic-sim-layer.md. Already shipped
 spec) — not re-queued here.
 
 ### task-001 AH7 slot-event system
-- [ ] task-001 SlotSchema + data; archetypal slots resolve to branch/dynasty events at compile time; test: leader-assassination slot → Fred Trump (political) / Commissar purge (nazi)
+- [x] task-001 SlotSchema + data; archetypal slots resolve to branch/dynasty events at compile time; test: leader-assassination slot → Fred Trump (political) / Commissar purge (nazi)
 ### task-002 AH8b branch-name audit
 - [ ] task-002 sweep content for hardcoded Trump/Drumpf → {surname}/{family_name} tokens; render-path wired; interpolation test (Nazi shows Drumpf)
 ### task-003 Kennedy/RFK Jr protagonist timeline

@@ -13,6 +13,8 @@ import {
   type MeterDef,
   MetersFileSchema,
   parseContent,
+  type Slot,
+  SlotsFileSchema,
   type TermsFile,
   TermsFileSchema,
   type WorldTimeline,
@@ -36,6 +38,8 @@ export interface Content {
   assets: Asset[];
   /** Branch-aware terms/titles for `{token}` interpolation (alt-history). */
   terms: TermsFile["terms"];
+  /** Archetypal slot events resolved per branch/dynasty at compile time (AH7). */
+  slots: Slot[];
 }
 
 export interface RawContent {
@@ -47,6 +51,7 @@ export interface RawContent {
   worldTimelines?: unknown[];
   assets: unknown;
   terms?: unknown;
+  slots?: unknown;
 }
 
 /** Validate raw JSON into a Content bundle, cross-checking referential integrity. */
@@ -60,6 +65,7 @@ export function buildContent(raw: RawContent): Content {
   );
   const assetsFile = parseContent(AssetsFileSchema, raw.assets, "assets.json");
   const termsFile = parseContent(TermsFileSchema, raw.terms ?? { terms: {} }, "terms.json");
+  const slotsFile = parseContent(SlotsFileSchema, raw.slots ?? { slots: [] }, "slots.json");
 
   const eras = [...eraIndex.eras].sort((a, b) => a.order - b.order);
   const eraIds = new Set(eras.map((e) => e.id));
@@ -108,5 +114,6 @@ export function buildContent(raw: RawContent): Content {
     worldTimelines,
     assets: assetsFile.assets,
     terms: termsFile.terms,
+    slots: slotsFile.slots,
   };
 }

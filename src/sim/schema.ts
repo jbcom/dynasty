@@ -332,6 +332,45 @@ export const TermsFileSchema = z.object({
 });
 export type TermsFile = z.infer<typeof TermsFileSchema>;
 
+/**
+ * SLOT EVENTS (alt-history consistency, AH7). Certain real events are so
+ * structurally critical they're abstract SLOTS resolved per timeline, not
+ * hardcoded. e.g. the slot "leader_assassination" resolves to Fred Trump's
+ * assassination on the political-dynasty path, a Commissar purge on the Nazi
+ * path, etc. A slot names a concrete event `id` per branch (and an optional
+ * `dynasty` key, since the gears — trump/musk/kennedy — can fill the same
+ * archetype differently). `default` is the our-history resolution.
+ */
+export const SlotResolutionSchema = z.object({
+  /** Concrete event id this slot fires for the matching branch/dynasty. */
+  event: z.string().min(1),
+  /** Short note on what this resolution represents (authoring provenance). */
+  note: z.string().default(""),
+});
+export type SlotResolution = z.infer<typeof SlotResolutionSchema>;
+
+export const SlotSchema = z.object({
+  /** Archetype id, e.g. "leader_assassination", "the_crash", "the_scandal". */
+  id: z.string().min(1),
+  /** Human-readable archetype description. */
+  label: z.string().min(1),
+  /** Our-history resolution (required fallback). */
+  default: SlotResolutionSchema,
+  /** Per-branch resolutions; a missing branch falls back to `default`. */
+  nazi: SlotResolutionSchema.optional(),
+  westcoast: SlotResolutionSchema.optional(),
+  theocracy: SlotResolutionSchema.optional(),
+  media: SlotResolutionSchema.optional(),
+  /** Per-dynasty resolutions (trump | musk | kennedy), checked before branch. */
+  dynasty: z.record(z.string(), SlotResolutionSchema).default({}),
+});
+export type Slot = z.infer<typeof SlotSchema>;
+
+export const SlotsFileSchema = z.object({
+  slots: z.array(SlotSchema).default([]),
+});
+export type SlotsFile = z.infer<typeof SlotsFileSchema>;
+
 /** Validate arbitrary JSON against a schema, throwing a readable error on failure. */
 export function parseContent<T>(schema: z.ZodType<T>, data: unknown, label: string): T {
   const result = schema.safeParse(data);

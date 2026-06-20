@@ -14,6 +14,7 @@ const endingsGlob = import.meta.glob("./endings.json", { eager: true });
 const timelinesGlob = import.meta.glob("./timelines/*.json", { eager: true });
 const assetsGlob = import.meta.glob("./assets.json", { eager: true });
 const termsGlob = import.meta.glob("./terms.json", { eager: true });
+const slotsGlob = import.meta.glob("./slots.json", { eager: true });
 
 function firstValue<T>(glob: Record<string, unknown>): T | null {
   const entry = Object.values(glob)[0] as { default?: T } | undefined;
@@ -41,6 +42,7 @@ export function loadContent(): Content {
     worldTimelines: Object.values(timelinesGlob).map((m) => (m as { default: unknown }).default),
     assets: firstValue(assetsGlob) ?? { assets: [] },
     terms: firstValue(termsGlob) ?? { terms: {} },
+    slots: firstValue(slotsGlob) ?? { slots: [] },
   };
   return buildContent(raw);
 }
