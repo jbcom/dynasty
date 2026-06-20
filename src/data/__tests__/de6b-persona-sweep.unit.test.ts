@@ -2,11 +2,11 @@ import { describe, expect, it } from "vitest";
 import { applyChoice } from "../../sim/effects";
 import { meetsRequires, pickNextEvent } from "../../sim/events";
 import { createRng } from "../../sim/rng";
-import { advanceTimeline } from "../../sim/timeline";
 import type { Choice, GameEvent } from "../../sim/schema";
 import type { DynastyKey } from "../../sim/slots";
-import { initState } from "../../sim/state";
 import type { GameState } from "../../sim/state";
+import { initState } from "../../sim/state";
+import { advanceTimeline } from "../../sim/timeline";
 import { loadContent } from "../loadContent";
 
 /**
@@ -47,9 +47,15 @@ const PERSONAS: Persona[] = [
   // The chaos tester: stable order (button-masher takes the first listed).
   { name: "button-masher", score: () => 0 },
   // The moralist: leans toward the utopian axis (low outward/ideology).
-  { name: "moralist", score: (c) => -((c.personality.outward ?? 0) + (c.personality.ideology ?? 0)) },
+  {
+    name: "moralist",
+    score: (c) => -((c.personality.outward ?? 0) + (c.personality.ideology ?? 0)),
+  },
   // The villain: most grandiose / tyrannical.
-  { name: "villain", score: (c) => (c.personality.grandiosity ?? 0) + (c.personality.outward ?? 0) },
+  {
+    name: "villain",
+    score: (c) => (c.personality.grandiosity ?? 0) + (c.personality.outward ?? 0),
+  },
   // The roleplayer: seeded-random among eligible.
   { name: "roleplayer", score: (_c, rngPick) => rngPick() },
 ];
@@ -78,7 +84,10 @@ function runPersona(persona: Persona, seed: string, dynasty: DynastyKey): GameSt
   for (let i = 0; i < 600 && !state.end; i++) {
     const event: GameEvent | null = pickNextEvent(content, state, rng.fork(`pick:${i}`));
     if (!event) {
-      const advanced = advanceTimeline(content, { ...state, eraEventCount: Number.MAX_SAFE_INTEGER });
+      const advanced = advanceTimeline(content, {
+        ...state,
+        eraEventCount: Number.MAX_SAFE_INTEGER,
+      });
       if (advanced.eraIndex === state.eraIndex && !advanced.end) break; // truly stuck
       state = advanced;
       continue;

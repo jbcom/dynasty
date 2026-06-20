@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { Content } from "../../sim/content";
 import type { GameView } from "../../engine/loop";
-import Portrait from "../../render/Portrait.svelte";
 import ButterflyLog from "../ButterflyLog.svelte";
 import Dossier from "../Dossier.svelte";
 import EventCard from "../EventCard.svelte";
@@ -75,9 +74,6 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
 {#snippet eventPane()}
   {#if view.currentEvent}
     <div class="event-pane">
-      <div class="portrait-wrap">
-        <Portrait portraitId={view.currentEvent.portrait} size={wide ? 140 : 96} />
-      </div>
       <EventCard event={view.currentEvent} {busy} {onchoose} {term} />
     </div>
   {:else}

@@ -32,15 +32,16 @@ describe("assets manifest", () => {
     expect(ids.has("font_eb_garamond")).toBe(true);
   });
 
-  it("covers all six meter icons and the whole portrait arc", () => {
+  it("covers all six meter icons", () => {
     const parsed = AssetsFileSchema.parse(assetsJson);
     const ids = new Set(parsed.assets.map((a) => a.id));
     for (const m of ["money", "power", "reputation", "loyalty", "health", "heat"]) {
       expect(ids.has(`icon_${m}`)).toBe(true);
     }
-    // All portraits are cartoon derivatives now (no procedural/SVG placeholders).
-    const portraitPaths = parsed.assets.filter((a) => a.kind === "portrait").map((a) => a.path);
-    expect(portraitPaths.length).toBeGreaterThanOrEqual(12);
-    expect(portraitPaths.every((p) => p.endsWith(".cartoon.png"))).toBe(true);
+  });
+
+  it("no portrait assets remain — portraits were removed (they distracted)", () => {
+    const parsed = AssetsFileSchema.parse(assetsJson);
+    expect(parsed.assets.filter((a) => a.kind === "portrait")).toEqual([]);
   });
 });

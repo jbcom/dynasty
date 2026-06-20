@@ -108,7 +108,6 @@ export function validRaw(): RawContent {
               title: "Born in Queens",
               scene: "Jamaica Estates. A doctor's son enters the world.",
               researchNote: "Donald J. Trump born June 14, 1946 in Queens, NYC.",
-              portrait: "infant",
               requires: { flags: [], notFlags: [], meters: {} },
               weight: 10,
               choices: [
@@ -128,7 +127,6 @@ export function validRaw(): RawContent {
               title: "New York Military Academy",
               scene: "Your father has had enough of your antics.",
               researchNote: "Trump attended NYMA from 1959 after a rebellious boyhood.",
-              portrait: "cadet",
               requires: { flags: ["loud_baby"], notFlags: [], meters: {} },
               weight: 8,
               choices: [
@@ -158,7 +156,6 @@ export function validRaw(): RawContent {
               scene: "A derelict hotel by Grand Central. A tax abatement is the key.",
               researchNote:
                 "Trump's 1976 Commodore/Grand Hyatt deal launched his Manhattan career.",
-              portrait: "young_mogul",
               requires: { flags: [], notFlags: [], meters: { money: ">=500" } },
               weight: 10,
               choices: [
