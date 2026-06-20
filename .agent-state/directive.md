@@ -17,7 +17,7 @@ spec) — not re-queued here.
 ### task-001 AH7 slot-event system
 - [x] task-001 SlotSchema + data; archetypal slots resolve to branch/dynasty events at compile time; test: leader-assassination slot → Fred Trump (political) / Commissar purge (nazi)
 ### task-002 AH8b branch-name audit
-- [ ] task-002 sweep content for hardcoded Trump/Drumpf → {surname}/{family_name} tokens; render-path wired; interpolation test (Nazi shows Drumpf)
+- [x] task-002 sweep content for hardcoded Trump/Drumpf → {surname}/{family_name} tokens; render-path wired; interpolation test (Nazi shows Drumpf). Audit finding: origins is ALREADY branch-consistent (German/Nazi paths route through separate Drumpf-framed events; American paths through Trump events), so no mass retokenization needed/safe (would wrongly flip proper nouns like "Trump Tower"). Fixed family_name to drop embedded article; tokenized the one shared cross-branch reference (born_to_empire → {surname}); surname/patronymic interpolation test added.
 ### task-003 Kennedy/RFK Jr protagonist timeline
 - [ ] task-003 timelines/kennedy.json (scope kennedy) + brewing/bootlegger Era-0 flags enabling the Trump↔Kennedy swap; validates + swap test
 ### task-004 West-Coast branch backdrop pool

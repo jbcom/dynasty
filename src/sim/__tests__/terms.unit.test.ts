@@ -38,4 +38,17 @@ describe("branch-aware terms (alt-history AH1)", () => {
       "a {literal} President",
     );
   });
+
+  it("resolves the branch-aware surname/patronymic (AH8): Trump default, Drumpf on the German/Nazi branch", () => {
+    expect(terms.surname?.default).toBe("Trump");
+    expect(terms.surname?.nazi).toBe("Drumpf");
+    expect(applyTerms("The {family_name} built it.", terms, "default")).toBe(
+      "The Trumps built it.",
+    );
+    expect(applyTerms("The {family_name} built it.", terms, "nazi")).toBe("The Drumpfs built it.");
+    expect(applyTerms("{surname} of New York", terms, "default")).toBe("Trump of New York");
+    expect(applyTerms("{surname} of the Reich", terms, "nazi")).toBe("Drumpf of the Reich");
+    // A branch without a surname override keeps the default (the family anglicized).
+    expect(applyTerms("{surname}", terms, "media")).toBe("Trump");
+  });
 });
