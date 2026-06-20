@@ -901,6 +901,32 @@
             }
           ],
           "outcome": "You step down from the velvet and lift the man up by the arm. The court is stunned silent, then something rarer than fear moves through it — the beginning of a kind of love. A king can choose to be more than a fist."
+        },
+        {
+          "id": "exile_the_thief",
+          "text": "Exile him. No blood, no mercy — just the cold gate and the open road.",
+          "effects": {
+            "power": 4,
+            "reputation": -4,
+            "loyalty": 2,
+            "heat": 2
+          },
+          "personality": {
+            "grandiosity": 4,
+            "ideology": 4
+          },
+          "setFlags": [
+            "rules_by_exile"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_humanity_preserved",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You walk him to the gate yourself and push him into the gray with his daughter trailing behind. The court reads it as weakness dressed as mercy and mercy dressed as weakness, and you realize a throne offers no clean answers, only the choosing of which guilt to carry."
         }
       ]
     },
@@ -923,7 +949,9 @@
       "requires": {
         "flags": [],
         "notFlags": [],
-        "meters": {},
+        "meters": {
+          "health": "<=60"
+        },
         "personality": {}
       },
       "weight": 10,
@@ -1437,7 +1465,9 @@
         "flags": [],
         "notFlags": [],
         "meters": {},
-        "personality": {}
+        "personality": {
+          "grandiosity": ">=10"
+        }
       },
       "weight": 9,
       "repeatable": false,
@@ -1540,7 +1570,9 @@
       ],
       "portrait": "survivor",
       "requires": {
-        "flags": [],
+        "flags": [
+          "remnant_loyal"
+        ],
         "notFlags": [],
         "meters": {},
         "personality": {}
@@ -1905,6 +1937,36 @@
             }
           ],
           "outcome": "You fence the green and post guns at the gate. The hungry will come to you now, hats in hand, and you will own the spring itself. Power that survived the bombs learns to grow in soil, same as anything else."
+        },
+        {
+          "id": "seed_bank_revival",
+          "text": "Crack the gene vault you protected and plant the pre-war strains for everyone.",
+          "effects": {
+            "money": -5000,
+            "power": -2,
+            "reputation": 14,
+            "loyalty": 10,
+            "health": 4
+          },
+          "personality": {
+            "grandiosity": -8,
+            "ideology": -10,
+            "outward": -10
+          },
+          "setFlags": [
+            "replanted_commons",
+            "revived_seedbank",
+            "remnant_loyal"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_humanity_preserved",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You break the cold seal on the bank the scientists died holding and press the old world's seed into the new world's dirt. Wheat that hasn't grown since before the bombs comes up green and impossible. The future you banked on, all those winters ago, finally pays out."
         }
       ]
     },
@@ -1989,6 +2051,32 @@
             }
           ],
           "outcome": "You bite back your hardest instincts and teach the children to ask 'why' and to bind wounds and to look up at the stars without fear. They will not be like you. That is the whole point, and the only apology you can make to the world you helped end."
+        },
+        {
+          "id": "teach_nothing",
+          "text": "Teach them nothing. Let them make their own world without your fingerprints on it.",
+          "effects": {
+            "power": -2,
+            "reputation": 4,
+            "loyalty": -2
+          },
+          "personality": {
+            "grandiosity": -6,
+            "inward": 8,
+            "outward": -2
+          },
+          "setFlags": [
+            "raised_free"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_humanity_preserved",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hold your tongue and let the boy invent his own sayings. Maybe they'll be wiser than yours; maybe they'll repeat the war you couldn't stop. You decide the one gift you can give the young is the absence of your certainty, and you live the rest of your days not knowing if it was love or cowardice."
         }
       ]
     },

@@ -160,9 +160,34 @@
             "inward": 5,
             "ideology": -3
           },
-          "setFlags": [],
+          "setFlags": [
+            "hedged_downturn"
+          ],
           "ripples": [],
           "outcome": "A rare cautious instinct. If the bubble pops, you will be slightly less buried than the rest."
+        },
+        {
+          "id": "ride_out_glut",
+          "text": "Trust the boom to continue — hold what you have and ride the wave.",
+          "effects": {
+            "money": -10,
+            "power": 3,
+            "reputation": 2,
+            "heat": 2
+          },
+          "personality": {
+            "grandiosity": 5,
+            "ideology": 2
+          },
+          "setFlags": [],
+          "ripples": [
+            {
+              "to": "ev_recession_gulf_war",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You bet the gold rush has another lap in it. The recession on the horizon does not check your optimism."
         }
       ]
     },
@@ -235,6 +260,31 @@
             }
           ],
           "outcome": "The Boardwalk empties of your people. The bleeding slows, but the buildings feel like tombs."
+        },
+        {
+          "id": "borrow_through_recession",
+          "text": "Borrow against the war panic — bet the recession is short and double your exposure at the bottom.",
+          "effects": {
+            "money": -90,
+            "power": 4,
+            "heat": 9,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 4
+          },
+          "setFlags": [
+            "overleveraged"
+          ],
+          "ripples": [
+            {
+              "to": "ev_hard_bust",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The recession lasts longer than your nerve or your cash. The war ends; your debt does not."
         }
       ]
     },
@@ -724,6 +774,31 @@
             }
           ],
           "outcome": "It clarifies everything. From now on, let other fools own the planes and the buildings."
+        },
+        {
+          "id": "blame_old_money",
+          "text": "Blame the old-money establishment for rooting against the brash outsider — and vow to beat them at their own game.",
+          "effects": {
+            "reputation": 1,
+            "power": 3,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": -4,
+            "outward": 6,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "nouveau_riche_grudge"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The blue-bloods never accepted you, shuttle or no shuttle. The grudge curdles into a useful, portable rage."
         }
       ]
     },
@@ -789,6 +864,31 @@
             }
           ],
           "outcome": "A genuine wound. You vow to win back the skyline in a way no bank can ever repossess."
+        },
+        {
+          "id": "plaza_legitimacy",
+          "text": "Frame the loss as old money reclaiming its toy from the upstart — and resolve to build a name no pedigree can deny.",
+          "effects": {
+            "reputation": 3,
+            "power": 3,
+            "heat": 2
+          },
+          "personality": {
+            "ideology": -3,
+            "outward": 5,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "nouveau_riche_grudge"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "They got the building back; you keep the chip on your shoulder. The brand, you decide, will outclass every blue-blood deed in town."
         }
       ]
     },
@@ -807,7 +907,9 @@
       ],
       "portrait": "celebrity",
       "requires": {
-        "flags": [],
+        "flags": [
+          "overleveraged"
+        ],
         "notFlags": [],
         "meters": {}
       },
@@ -853,6 +955,31 @@
           "setFlags": [],
           "ripples": [],
           "outcome": "The tabloids fill the silence with vultures. But the panic, at least, cools a little."
+        },
+        {
+          "id": "weaponize_debt",
+          "text": "Weaponize the number — dare the banks to call it, knowing they cannot afford your collapse.",
+          "effects": {
+            "power": 6,
+            "reputation": -2,
+            "heat": 6,
+            "loyalty": -3
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 6
+          },
+          "setFlags": [
+            "banks_cornered"
+          ],
+          "ripples": [
+            {
+              "to": "ev_bank_restructuring",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A near-billion in red ink, turned into a threat. The bigger the hole, the more they must keep you alive to climb out of it."
         }
       ]
     },
@@ -930,6 +1057,33 @@
             }
           ],
           "outcome": "A rare restrained choice. The lawyers grumble at the cost, but the family heals a little."
+        },
+        {
+          "id": "sell_the_saga",
+          "text": "Sell the whole saga to the tabloids yourself — turn your own divorce into the year's biggest free ad.",
+          "effects": {
+            "money": 20,
+            "reputation": 2,
+            "power": 3,
+            "heat": 8,
+            "loyalty": -7
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 8
+          },
+          "setFlags": [
+            "public_divorce",
+            "tabloid_fixture"
+          ],
+          "ripples": [
+            {
+              "to": "ev_marla_maples_war",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The children wince, the lawyers despair, the circulation soars. You have learned the deepest trick of all: scandal is inventory."
         }
       ]
     },
@@ -949,7 +1103,9 @@
       ],
       "portrait": "celebrity",
       "requires": {
-        "flags": [],
+        "flags": [
+          "public_divorce"
+        ],
         "notFlags": [],
         "meters": {}
       },
@@ -996,6 +1152,32 @@
           "setFlags": [],
           "ripples": [],
           "outcome": "A rare quiet choice. The tabloids print it anyway, but you sleep a little better."
+        },
+        {
+          "id": "tabloid_brand_empire",
+          "text": "Decide your fame itself is the asset now — court the cameras full-time and let the name eclipse the buildings.",
+          "effects": {
+            "money": 30,
+            "reputation": 5,
+            "power": 4,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 9
+          },
+          "setFlags": [
+            "tabloid_fixture",
+            "fame_hungry"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Buildings can be seized. A face on every cover cannot. You start managing your celebrity like a portfolio."
         }
       ]
     },
@@ -1075,6 +1257,31 @@
             }
           ],
           "outcome": "Less squeezed out of them now, but these are men you can call again. That matters."
+        },
+        {
+          "id": "dump_on_shareholders",
+          "text": "Engineer the workout so a future public offering eats the debt — let strangers hold the bag.",
+          "effects": {
+            "money": 40,
+            "power": 5,
+            "heat": 6,
+            "reputation": -3
+          },
+          "personality": {
+            "grandiosity": 7,
+            "ideology": 3
+          },
+          "setFlags": [
+            "ruthless_dealmaker"
+          ],
+          "ripples": [
+            {
+              "to": "ev_bank_restructuring",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sketch the exit before you have even entered: the casino debt will become someone else's problem, with your name still on the marquee."
         }
       ]
     },
@@ -1145,6 +1352,29 @@
             }
           ],
           "outcome": "The smoke fades from the screens, but the unease settles somewhere deep and stays."
+        },
+        {
+          "id": "downtown_bargain_hunt",
+          "text": "Read the panic as opportunity — downtown values will dip, and you hunt for distressed Manhattan deals.",
+          "effects": {
+            "money": 50,
+            "power": 3,
+            "reputation": 1,
+            "heat": 2
+          },
+          "personality": {
+            "grandiosity": 4,
+            "inward": 3
+          },
+          "setFlags": [],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Fear empties wallets and you fill yours. The smoke clears and you own a little more of a shaken city."
         }
       ]
     },
@@ -1314,6 +1544,31 @@
           "setFlags": [],
           "ripples": [],
           "outcome": "Globalization fills your supply chains and your pockets. For now, the open border is your friend."
+        },
+        {
+          "id": "left_protectionist",
+          "text": "Side openly with the unions and the laid-off worker — denounce the deal as a betrayal of American labor.",
+          "effects": {
+            "reputation": 3,
+            "power": 2,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": -7,
+            "outward": 5
+          },
+          "setFlags": [
+            "trade_skeptic",
+            "flirted_left"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A billionaire standing on a union line. It is good theater — and it plants the left-populist seed early."
         }
       ]
     },
@@ -1333,7 +1588,9 @@
       ],
       "portrait": "mogul",
       "requires": {
-        "flags": [],
+        "flags": [
+          "survived_bankruptcy"
+        ],
         "notFlags": [],
         "meters": {}
       },
@@ -1391,6 +1648,31 @@
             }
           ],
           "outcome": "Slower money, but doors that were slammed in 1991 swing open again."
+        },
+        {
+          "id": "pivot_to_licensing",
+          "text": "Skip the casino game entirely — convert the breathing room into a pure name-licensing machine.",
+          "effects": {
+            "money": 70,
+            "power": 4,
+            "reputation": 4,
+            "heat": -2
+          },
+          "personality": {
+            "grandiosity": 5,
+            "inward": 3
+          },
+          "setFlags": [
+            "brand_machine"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You stop trying to win back what bankrupted you. The name, debt-free and portable, becomes the whole business."
         }
       ]
     },
@@ -1469,6 +1751,32 @@
             }
           ],
           "outcome": "Friends in high places. You learn how political muscle and real-estate money braid together."
+        },
+        {
+          "id": "critique_the_crackdown",
+          "text": "Question the crackdown's cost to the poor — position yourself as the developer with a conscience.",
+          "effects": {
+            "money": 30,
+            "reputation": 4,
+            "power": 2,
+            "heat": -1
+          },
+          "personality": {
+            "ideology": -6,
+            "outward": 4
+          },
+          "setFlags": [
+            "nyc_renaissance",
+            "flirted_left"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A boom built on broken windows, you note aloud, leaves people behind. The liberal pose fits more comfortably than you expected."
         }
       ]
     },
@@ -1799,6 +2107,31 @@
             }
           ],
           "outcome": "Boring, maybe. But you have seen what happens when valuations float on nothing. You stay grounded."
+        },
+        {
+          "id": "dotcom_short_the_hype",
+          "text": "Talk up the mania in public while quietly betting against it — sell the name, short the dream.",
+          "effects": {
+            "money": 60,
+            "power": 3,
+            "reputation": -2,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 5,
+            "inward": 4
+          },
+          "setFlags": [
+            "dotcom_dabble"
+          ],
+          "ripples": [
+            {
+              "to": "ev_dotcom_crash",
+              "weight": 0.6,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You cash the licensing checks now and position to profit from the crash later. Cynical, lucrative, and very you."
         }
       ]
     },
@@ -1872,6 +2205,32 @@
             }
           ],
           "outcome": "No headlines, no commitments. Just a hedge — the kind you have always loved to keep."
+        },
+        {
+          "id": "register_left_lean",
+          "text": "Lean the registration leftward on purpose — start sounding like a populist who soaks the rich.",
+          "effects": {
+            "power": 3,
+            "reputation": 3,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": -8,
+            "outward": 5
+          },
+          "setFlags": [
+            "political_curious",
+            "independence_party",
+            "flirted_left"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.85,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You file the paper and start talking like a man of the people. The left-populist option is now live and loaded."
         }
       ]
     },
@@ -1949,6 +2308,34 @@
           "outcome": "The pundits blink. For a moment you are the billionaire who sounds like a populist of the left."
         },
         {
+          "id": "run_left_1990s",
+          "text": "Go for real: mount a serious run as a left-populist billionaire — soak-the-rich tax, health care for all, a champion of the forgotten worker.",
+          "effects": {
+            "money": -60,
+            "reputation": 7,
+            "power": 7,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": -13,
+            "grandiosity": 7,
+            "outward": 9
+          },
+          "setFlags": [
+            "political_curious",
+            "flirted_left",
+            "early_political_run"
+          ],
+          "ripples": [
+            {
+              "to": "ev_left_populist_run",
+              "weight": 0.95,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Not a stunt this time. You stand on a stage and tell the working class that a rich man will finally fight for them — and the room roars."
+        },
+        {
           "id": "stay_business",
           "text": "Decide politics is a distraction and refocus on the empire and the brand.",
           "effects": {
@@ -1965,6 +2352,133 @@
           ],
           "ripples": [],
           "outcome": "Not yet. But the idea has been planted, and ideas like this one do not die — they wait."
+        }
+      ]
+    },
+    {
+      "id": "ev_left_populist_run",
+      "era": "brand",
+      "year": 2000,
+      "title": "The Billionaire Who Ran Left",
+      "scene": "2000. You are no longer flirting. You are running — a celebrity billionaire campaigning to the left of both parties, promising a wealth tax on people exactly like you, universal health care, and an open hand to the working class that old money sneers at. The Reform Party machinery is chaos, the establishment treats you as a punchline, and yet the crowds keep growing. Old money calls you a vulgar pretender; the forgotten worker calls you their guy. Now the path forks: flame out as a curiosity, or turn this surge into lasting leverage.",
+      "researchNote": "Trump's actual 1999-2000 Reform Party exploration floated notably liberal positions — a one-time wealth tax to erase the national debt, universal health care, and pro-choice and pro-LGBT stances — a documented 'left' divergence before his later rightward turn; the run collapsed amid Reform Party infighting.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "celebrity",
+        "populism",
+        "legitimacy"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "flirted_left"
+        ],
+        "notFlags": [
+          "registered_democrat"
+        ],
+        "meters": {},
+        "personality": {
+          "ideology": "<= -2"
+        }
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "flameout_curiosity",
+          "text": "Burn bright and burn out — let the infighting sink the run and exit as a noble loser who told the truth about the rich.",
+          "effects": {
+            "money": -40,
+            "reputation": 5,
+            "power": -3,
+            "heat": -5,
+            "health": 3
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": -5,
+            "inward": 7
+          },
+          "setFlags": [
+            "early_political_run",
+            "flirted_left",
+            "left_flameout",
+            "walked_away"
+          ],
+          "clearFlags": [
+            "strongman_seed"
+          ],
+          "ripples": [
+            {
+              "to": "ev_become_democrat",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The campaign collapses, but the speeches outlive it. In this life you stay the man who ran to the left and meant it — and you never turn back."
+        },
+        {
+          "id": "kingmaker_path",
+          "text": "Lose the nomination but bank the movement — become the left-populist kingmaker every Democrat now has to court.",
+          "effects": {
+            "money": 30,
+            "reputation": 8,
+            "power": 9,
+            "heat": 6,
+            "loyalty": 5
+          },
+          "personality": {
+            "ideology": -11,
+            "grandiosity": 6,
+            "outward": 8
+          },
+          "setFlags": [
+            "early_political_run",
+            "flirted_left",
+            "left_kingmaker"
+          ],
+          "ripples": [
+            {
+              "to": "ev_become_democrat",
+              "weight": 0.95,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hand your crowd to the party and collect the IOUs. A billionaire who delivered the working class — and now they all owe you."
+        },
+        {
+          "id": "betray_the_base",
+          "text": "Quietly cash the celebrity in: drop the populism, take the donor money, and let the working-class hopes you raised curdle.",
+          "effects": {
+            "money": 90,
+            "reputation": -6,
+            "power": 4,
+            "heat": 7,
+            "loyalty": -8
+          },
+          "personality": {
+            "ideology": 9,
+            "grandiosity": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "early_political_run",
+            "sold_out_base",
+            "strongman_seed"
+          ],
+          "clearFlags": [
+            "flirted_left"
+          ],
+          "ripples": [
+            {
+              "to": "ev_nine_eleven",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The forgotten worker is forgotten again. You pocket the fame and the cash — and a harder, hungrier version of you starts taking notes for next time."
         }
       ]
     },
@@ -2117,6 +2631,32 @@
             }
           ],
           "outcome": "Two New York creatures of fame, surviving on attention. You feel an odd, quiet sympathy."
+        },
+        {
+          "id": "defend_clinton",
+          "text": "Publicly defend Clinton, befriend the embattled first family, and bank the goodwill of the left.",
+          "effects": {
+            "money": 20,
+            "reputation": 3,
+            "power": 4,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": -7,
+            "outward": 6
+          },
+          "setFlags": [
+            "clinton_ally",
+            "flirted_left"
+          ],
+          "ripples": [
+            {
+              "to": "ev_become_democrat",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You stand by a Democrat in his worst hour and earn a marker you can cash later. The party starts seeing you as one of theirs."
         }
       ]
     },

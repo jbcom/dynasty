@@ -174,6 +174,33 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "The story burns hot, then cools. You bank your energy for the fights that actually move the needle."
+        },
+        {
+          "id": "court_the_strongmen",
+          "text": "Privately court the foreign strongmen the press is condemning.",
+          "effects": {
+            "power": 6,
+            "money": 3000000,
+            "reputation": -5,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 3,
+            "outward": -3
+          },
+          "setFlags": [
+            "strongman_courtship"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "While allied capitals fret, you quietly keep warm lines to the men who run the world by force. The relationships will outlast the headlines."
         }
       ]
     },
@@ -518,6 +545,33 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "You praise Operation Warp Speed and some of the base boos. The science wing nods; the anti-vax wing seethes. A rare split in the church."
+        },
+        {
+          "id": "blame_the_fed",
+          "text": "Pin every rising price on the Fed and the central bankers.",
+          "effects": {
+            "loyalty": 6,
+            "reputation": -2,
+            "power": 3,
+            "heat": 2
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "inflation_grievance",
+            "fed_scapegoat"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You give the price spike a villain in a suit. The base learns a new enemy, and the groundwork for attacking the central bank is laid early."
         }
       ]
     },
@@ -595,6 +649,26 @@
             }
           ],
           "outcome": "The paper valuation swells with your name on it. Whether the company makes money is almost beside the point; the equity does."
+        },
+        {
+          "id": "court_reinstatement",
+          "text": "Fight to get reinstated on the big platforms instead.",
+          "effects": {
+            "reputation": 4,
+            "power": 3,
+            "loyalty": -4,
+            "money": -1000000
+          },
+          "personality": {
+            "grandiosity": -2,
+            "outward": 4
+          },
+          "setFlags": [
+            "platform_reinstated"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You chase the audience of hundreds of millions rather than wall yourself in. The reach is bigger, but you no longer own the room you shout into."
         }
       ]
     },
@@ -671,6 +745,34 @@
             }
           ],
           "outcome": "America First hardens into America Alone. The hawks in your own party blanch, but the base wants the money home."
+        },
+        {
+          "id": "praise_putin",
+          "text": "Praise the invader's 'genius' and float your own peace terms.",
+          "effects": {
+            "loyalty": 4,
+            "reputation": -8,
+            "heat": 7,
+            "power": 2
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 6,
+            "outward": 5
+          },
+          "setFlags": [
+            "dealmaker_abroad",
+            "putin_praise"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You call the aggressor savvy and dangle a settlement only you could broker. Allies recoil; the strongman brand sharpens into something colder."
         }
       ]
     },
@@ -841,6 +943,33 @@
             }
           ],
           "outcome": "Before the wound can fester, you launch. The candidacy itself becomes a shield, and any rival now risks splitting the church."
+        },
+        {
+          "id": "absorb_the_blame",
+          "text": "Take the loss on the chin and quietly rebuild your operation.",
+          "effects": {
+            "reputation": 6,
+            "power": -3,
+            "loyalty": -4,
+            "health": 4
+          },
+          "personality": {
+            "grandiosity": -6,
+            "ideology": -3,
+            "outward": -5
+          },
+          "setFlags": [
+            "humbled_briefly"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "For once you accept the verdict instead of fighting it. The press is stunned, the base unsure, and you spend the lull retooling the machine in silence."
         }
       ]
     },
@@ -902,6 +1031,32 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "You keep your powder dry. The crisis passes in a week and you've spent no political capital chasing it."
+        },
+        {
+          "id": "pitch_crypto_refuge",
+          "text": "Pitch crypto and gold as the escape from a broken banking system.",
+          "effects": {
+            "money": 5000000,
+            "loyalty": 4,
+            "reputation": -2,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": 4,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "crypto_pivot"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "money",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn the jitters into a sales pitch, steering the faithful toward assets you can profit from. Distrust of the banks becomes a revenue stream."
         }
       ]
     },
@@ -973,6 +1128,35 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "You shrink the story to keep the bigger cases in the spotlight. The strategy is cold, but it conserves outrage for where it counts."
+        },
+        {
+          "id": "attack_the_da",
+          "text": "Make the prosecutor himself the villain, by name, nightly.",
+          "effects": {
+            "loyalty": 8,
+            "heat": 9,
+            "reputation": -6,
+            "money": 4000000
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 5,
+            "outward": 8
+          },
+          "setFlags": [
+            "first_indicted",
+            "grievance_fuel",
+            "prosecutor_targeted"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You put a face on the persecution and aim the base straight at it. The legal exposure grows, but so does the army that sees every charge as an attack on them."
         }
       ]
     },
@@ -1053,6 +1237,26 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "An army of attorneys turns the calendar into a weapon. Justice deferred, you wager, is justice escaped."
+        },
+        {
+          "id": "blame_the_aides",
+          "text": "Pin the boxes on staff and claim you never touched them.",
+          "effects": {
+            "reputation": 2,
+            "loyalty": -5,
+            "heat": -2,
+            "power": 2
+          },
+          "personality": {
+            "grandiosity": 3,
+            "outward": -2
+          },
+          "setFlags": [
+            "scapegoat_aides"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You let underlings absorb the exposure while you profess ignorance. The legal theory is convenient; the loyalty cost among insiders is quietly steep."
         }
       ]
     },
@@ -1136,6 +1340,28 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "You pour a fortune into the defense. The jeopardy is real either way, but you've bet on the courtroom instead of the crowd."
+        },
+        {
+          "id": "flip_a_codefendant",
+          "text": "Quietly pressure co-defendants to take the fall and shield you.",
+          "effects": {
+            "power": 5,
+            "loyalty": -4,
+            "heat": 4,
+            "money": -3000000
+          },
+          "personality": {
+            "ideology": 3,
+            "grandiosity": 4,
+            "outward": -3
+          },
+          "setFlags": [
+            "felony_jeopardy",
+            "codefendants_pressured"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You work the eighteen co-defendants like a board, nudging the exposure onto everyone but yourself. The jeopardy persists, and some of the loyal start to wonder who's next to be sacrificed."
         }
       ]
     },
@@ -1280,6 +1506,33 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "You weaponize the anxiety of a changing economy. The populist note rings true even as you quietly dine with the engineers."
+        },
+        {
+          "id": "promise_ai_supremacy",
+          "text": "Promise to win the AI race against China at any cost.",
+          "effects": {
+            "power": 7,
+            "reputation": 4,
+            "loyalty": 3,
+            "heat": 2
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 6,
+            "outward": 4
+          },
+          "setFlags": [
+            "ai_supremacy_pledge"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You frame the machines as a great-power weapon, not a job-killer. The barons love it, the hawks love it, and a new techno-nationalist plank is born."
         }
       ]
     },
@@ -1432,6 +1685,35 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "You fight the verdict in the appellate courts and keep the rhetoric measured. The jeopardy remains, but you avoid making it the whole identity."
+        },
+        {
+          "id": "threaten_the_jurors",
+          "text": "Hint darkly at the judge and jurors who 'rigged' it.",
+          "effects": {
+            "loyalty": 9,
+            "heat": 12,
+            "reputation": -9,
+            "power": 3
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 7,
+            "outward": 9
+          },
+          "setFlags": [
+            "felony_jeopardy",
+            "grievance_fuel",
+            "court_intimidation"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You aim the mob at the people who convicted you. The base is electrified, the gag-order risk explodes, and the jeopardy now includes contempt on top of the felony."
         }
       ]
     },
@@ -1508,6 +1790,35 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "You heal out of the spotlight. The sympathy is real, but the legend that might have been goes uncaptured. The danger, however, remains."
+        },
+        {
+          "id": "blame_the_rhetoric",
+          "text": "Blame your opponents' 'rhetoric' for putting a target on you.",
+          "effects": {
+            "loyalty": 10,
+            "heat": 8,
+            "reputation": -5,
+            "power": 4
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 5,
+            "outward": 7
+          },
+          "setFlags": [
+            "assassination_target",
+            "grievance_fuel",
+            "blame_opponents"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn the bullet into an indictment of the other side's words. The grievance machine gets its darkest fuel yet, and the danger to you stays absolute."
         }
       ]
     },
@@ -1865,6 +2176,34 @@
           "outcome": "The pen becomes a weapon and the arena erupts. Courts will challenge half of it, but the message of total command lands instantly."
         },
         {
+          "id": "pardon_the_rioters",
+          "text": "Open with mass pardons for the January 6 defendants.",
+          "effects": {
+            "loyalty": 12,
+            "heat": 9,
+            "reputation": -7,
+            "power": 5
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 6,
+            "outward": 7
+          },
+          "setFlags": [
+            "jan6_pardons",
+            "grievance_fuel"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Your first act of restored power is to free the people who stormed the Capitol for you. The base reads it as a sacred debt repaid; the institutions read it as a warning."
+        },
+        {
           "id": "deliberate_start",
           "text": "Sign a measured handful and govern deliberately.",
           "effects": {
@@ -2037,6 +2376,35 @@
             }
           ],
           "outcome": "You pocket symbolic concessions and declare them historic. The markets recover, and the art of the retreat is rebranded as the art of the deal."
+        },
+        {
+          "id": "escalate_trade_war",
+          "text": "Escalate further and threaten total decoupling from rivals.",
+          "effects": {
+            "power": 9,
+            "loyalty": 7,
+            "money": -7000000,
+            "reputation": -6,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "trade_war",
+            "decoupling_threat"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You answer the convulsion with more pressure, daring the world to blink first. Supply chains crack, allies scramble, and you wager that maximum leverage beats any deal."
         }
       ]
     },

@@ -1,0 +1,1441 @@
+{
+  "era": "origins",
+  "events": [
+    {
+      "id": "ev_friedrich_leaves_kallstadt",
+      "era": "origins",
+      "year": 1885,
+      "title": "The Boy Who Skipped the Draft",
+      "scene": "You are sixteen-year-old Friedrich Drumpf of Kallstadt, a wine village in the Bavarian Palatinate, and the Kingdom of Bavaria expects three years of your body for its army. One October night you leave a letter for your mother, pocket what little the barber's apprenticeship paid, and walk to the boat. Ahead lies the steamship Eider and a country that does not yet know your name.",
+      "researchNote": "Friedrich Trump (born 1869 in Kallstadt) emigrated to the US in 1885 at age 16, partly to avoid Bavarian military service; he had trained as a barber.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "origin",
+        "immigration"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "burn_the_draft_letter",
+          "text": "Tear up the conscription notice and never look back",
+          "effects": {
+            "money": 0,
+            "reputation": -3,
+            "power": 2
+          },
+          "personality": {
+            "ideology": 4,
+            "outward": 5
+          },
+          "setFlags": [
+            "fled_bavaria",
+            "burned_bridges"
+          ],
+          "outcome": "You feel the rope to the old country snap. America or nothing. There is a clean, terrible freedom in it."
+        },
+        {
+          "id": "promise_to_return_rich",
+          "text": "Promise yourself you will come home rich and respectable",
+          "effects": {
+            "money": 0,
+            "loyalty": 4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "inward": 2
+          },
+          "setFlags": [
+            "fled_bavaria",
+            "vow_of_return"
+          ],
+          "outcome": "You whisper it to the dark water: you will be back, and Kallstadt will be sorry it ever doubted you. The vow will cost you later."
+        },
+        {
+          "id": "stay_safe_take_the_uniform",
+          "text": "Lose your nerve at the dock and turn back toward the barracks",
+          "effects": {
+            "money": -50,
+            "health": -3
+          },
+          "personality": {
+            "ideology": -4,
+            "outward": -6
+          },
+          "setFlags": [
+            "never_emigrated",
+            "dynasty_doomed"
+          ],
+          "ripples": [],
+          "outcome": "The Eider sails without you. You spend three years drilling in Bavarian mud, and the Drumpf name stays in the Palatinate where it has always been."
+        }
+      ]
+    },
+    {
+      "id": "ev_arrival_nyc_barber",
+      "era": "origins",
+      "year": 1885,
+      "title": "A Chair on the Lower East Side",
+      "scene": "The Eider lands you in New York and the city swallows you whole. You find your sister's household and a barber's chair, snipping the beards of German immigrants for pennies while you learn the only English that matters: prices. You sleep in a crowded room and listen to the rumor that out West, men are getting rich faster than anyone can cut hair.",
+      "researchNote": "Friedrich initially lived with his sister Katharina in NYC and worked as a barber for about six years before heading west in the early 1890s.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "immigration"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "fled_bavaria"
+        ],
+        "notFlags": [
+          "never_emigrated"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "save_every_penny",
+          "text": "Hoard every coin in a tin under the floorboard",
+          "effects": {
+            "money": 400,
+            "health": -2
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": -2
+          },
+          "setFlags": [
+            "thrifty_start"
+          ],
+          "outcome": "Six years of beards and bridegrooms fund a small, hard nest egg. It is not a fortune. It is a beginning."
+        },
+        {
+          "id": "study_the_boomtowns",
+          "text": "Spend your nights reading about the Western boom",
+          "effects": {
+            "money": 150,
+            "power": 3
+          },
+          "personality": {
+            "outward": 4,
+            "ideology": 3
+          },
+          "setFlags": [
+            "thrifty_start",
+            "westward_eye"
+          ],
+          "outcome": "You learn where the silver, gold, and railroad men are going. You decide to be there before they need a meal and a bed."
+        },
+        {
+          "id": "settle_for_the_chair",
+          "text": "Accept the chair and a quiet immigrant's life",
+          "effects": {
+            "money": 100,
+            "loyalty": 3
+          },
+          "personality": {
+            "grandiosity": -6,
+            "outward": -4
+          },
+          "setFlags": [
+            "content_barber"
+          ],
+          "outcome": "You could do worse than honest work. But the rumors of the West keep cutting through the lather like a razor."
+        }
+      ]
+    },
+    {
+      "id": "ev_westward_seattle",
+      "era": "origins",
+      "year": 1891,
+      "title": "Seattle's Lava Beds",
+      "scene": "You take the train as far as it goes and land in Seattle, in the red-light district they call the Lava Beds. You buy a failing restaurant on Washington Street, the Dairy Restaurant, and you serve food, liquor, and — the records hint — the company of women, to miners and sailors who pay in gold dust. It is profitable. It is not the respectable trade your mother imagined.",
+      "researchNote": "Friedrich ran the Dairy Restaurant in Seattle's Lava Beds district in the early 1890s; historians note it likely offered liquor and possibly served as a brothel.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "business"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "westward_eye"
+        ],
+        "notFlags": [
+          "content_barber",
+          "never_emigrated"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "run_the_full_operation",
+          "text": "Run the food, the bar, and the rooms upstairs — all of it",
+          "effects": {
+            "money": 3000,
+            "reputation": -8,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 7
+          },
+          "setFlags": [
+            "seattle_fortune",
+            "seedy_money"
+          ],
+          "outcome": "The gold dust piles up faster than you can count it. So does the quiet shame, and the attention of men with badges."
+        },
+        {
+          "id": "food_and_liquor_only",
+          "text": "Serve only food and drink and keep your hands cleaner",
+          "effects": {
+            "money": 1500,
+            "reputation": -2,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 3,
+            "inward": 3
+          },
+          "setFlags": [
+            "seattle_fortune"
+          ],
+          "outcome": "Less money, fewer enemies. The miners still come, and your tin under the floorboard grows into a strongbox."
+        },
+        {
+          "id": "lose_it_to_a_swindle",
+          "text": "Trust the wrong partner with the deed",
+          "effects": {
+            "money": -300,
+            "reputation": -4,
+            "health": -4
+          },
+          "personality": {
+            "outward": -3,
+            "inward": -3
+          },
+          "setFlags": [
+            "seattle_ruin"
+          ],
+          "outcome": "Your partner sells the building out from under you and vanishes north. The Lava Beds are no place to be broke."
+        }
+      ]
+    },
+    {
+      "id": "ev_klondike_gold_rush",
+      "era": "origins",
+      "year": 1898,
+      "title": "Gold in the Yukon",
+      "scene": "Word comes down the coast: gold on the Klondike, and a hundred thousand stampeders rushing for it. You do not pan for gold — you sell to the men who do. You open the Arctic Restaurant and Hotel in Bennett, then White Horse, feeding and bedding the stampeders, and the smart money says the real fortune is in the boarding-house, not the creek.",
+      "researchNote": "During the Klondike Gold Rush, Friedrich ran restaurants/hotels (the Arctic) in Bennett and White Horse, profiting from the stampeders rather than prospecting himself.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "business",
+        "world-event"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "seattle_fortune"
+        ],
+        "notFlags": [
+          "seattle_ruin",
+          "never_emigrated"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "sell_picks_not_dig",
+          "text": "Never touch a pan — sell the stampeders their beds and beef",
+          "effects": {
+            "money": 6000,
+            "power": 5
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "klondike_fortune",
+            "real_capital"
+          ],
+          "outcome": "The men freeze and starve on the creek; you grow rich serving them. You learn the family's oldest lesson: own the road, not the gold."
+        },
+        {
+          "id": "cash_out_before_the_law",
+          "text": "Cash out the moment the Mounties start enforcing liquor laws",
+          "effects": {
+            "money": 4000,
+            "heat": -6,
+            "power": 3
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "klondike_fortune",
+            "real_capital",
+            "clean_exit"
+          ],
+          "outcome": "You sell at the top and slip out clean, your strongbox heavy with Yukon gold. Timing, you decide, is everything."
+        },
+        {
+          "id": "gamble_it_on_the_creek",
+          "text": "Catch gold fever and stake a claim yourself",
+          "effects": {
+            "money": -1000,
+            "health": -6,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 4,
+            "ideology": -4
+          },
+          "setFlags": [
+            "klondike_gamble"
+          ],
+          "outcome": "The claim is worthless and the winter nearly kills you. You learn the hard way that fortunes are made on the stampeders, not with them."
+        }
+      ]
+    },
+    {
+      "id": "ev_marries_elizabeth",
+      "era": "origins",
+      "year": 1902,
+      "title": "Elizabeth Christ of Kallstadt",
+      "scene": "Rich at last, you risk a trip home to Kallstadt and there you marry Elizabeth Christ, a neighbor's daughter half your age. She is homesick for the Palatinate before the ship even sails; you are dreaming of New York. The name on the American papers now reads Trump, anglicized at some clerk's desk somewhere between Bavaria and Bennett.",
+      "researchNote": "Friedrich married Elizabeth Christ in Kallstadt in 1902; by then the family name was spelled 'Trump' in American records. Elizabeth disliked America and wished to stay in Germany.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "marriage"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "klondike_fortune"
+        ],
+        "notFlags": [
+          "klondike_gamble",
+          "never_emigrated"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "promise_her_germany",
+          "text": "Promise Elizabeth you will settle the family in Kallstadt forever",
+          "effects": {
+            "money": 0,
+            "loyalty": 8
+          },
+          "personality": {
+            "ideology": -2,
+            "inward": 4
+          },
+          "setFlags": [
+            "married_elizabeth",
+            "promised_germany"
+          ],
+          "outcome": "She glows with relief. You mean it when you say it. The Kingdom of Bavaria, however, has not forgotten the boy who skipped its draft."
+        },
+        {
+          "id": "vow_america_no_matter_what",
+          "text": "Tell her plainly that the future is in New York",
+          "effects": {
+            "money": 0,
+            "loyalty": -3,
+            "power": 2
+          },
+          "personality": {
+            "grandiosity": 5,
+            "outward": 4
+          },
+          "setFlags": [
+            "married_elizabeth",
+            "committed_america"
+          ],
+          "outcome": "Elizabeth's smile tightens. She marries you anyway, and carries her homesickness across the Atlantic like a stone in her chest."
+        }
+      ]
+    },
+    {
+      "id": "ev_expelled_from_bavaria",
+      "era": "origins",
+      "year": 1905,
+      "title": "Persona Non Grata",
+      "scene": "You petition to live out your days in Kallstadt, your American gold ready to buy a comfortable Bavarian life. The Kingdom's reply is brutal: you fled conscription and never paid your debt to the crown, and so you are expelled — stripped of citizenship, ordered to leave. A wealthy man, and a man with no country to call home.",
+      "researchNote": "Around 1905 Bavaria expelled Friedrich for evading military service and emigrating without permission; his appeals (including a letter to the Prince Regent) failed, forcing the family back to the US.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "world-event"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "married_elizabeth"
+        ],
+        "notFlags": [
+          "never_emigrated"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "swallow_pride_return_ny",
+          "text": "Swallow your pride and take the family back to New York",
+          "effects": {
+            "money": -200,
+            "reputation": 3,
+            "power": 4
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "returned_to_ny",
+            "exiled"
+          ],
+          "outcome": "Bavaria casts you out, but New York will take your gold. You set your jaw and book passage for Queens, fortune intact."
+        },
+        {
+          "id": "fight_the_expulsion",
+          "text": "Burn money and years fighting the expulsion in the courts",
+          "effects": {
+            "money": -2500,
+            "health": -3,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 6,
+            "ideology": 2
+          },
+          "setFlags": [
+            "fought_bavaria"
+          ],
+          "outcome": "The appeals fail one by one. You bleed the strongbox dry against a king's bureaucracy, and still they show you the border."
+        },
+        {
+          "id": "give_up_settle_germany_broke",
+          "text": "Refuse to leave and let the fortune wither in legal limbo",
+          "effects": {
+            "money": -4000,
+            "loyalty": -4
+          },
+          "personality": {
+            "inward": -5,
+            "grandiosity": -6
+          },
+          "setFlags": [
+            "stranded_germany",
+            "dynasty_doomed"
+          ],
+          "ripples": [],
+          "outcome": "You cling to Kallstadt until the gold runs out and the order stands. The Trump fortune evaporates in a Bavarian courtroom."
+        }
+      ]
+    },
+    {
+      "id": "ev_elizabeth_brings_family_queens",
+      "era": "origins",
+      "year": 1906,
+      "title": "Back to Queens",
+      "scene": "Elizabeth, pregnant and weeping for the village she will never see again, shepherds the family back across the ocean and into the Bronx, then out to Woodhaven, Queens. On October 11, 1905, in this new-old country, your son Fred is born — Frederick Christ Trump, the boy who will pour the family's gold into bricks. The Trumps are New Yorkers now, whether Elizabeth likes it or not.",
+      "researchNote": "Frederick Christ Trump was born October 11, 1905, in the Bronx (the family soon settled in Queens) after the family's forced return to the US; Elizabeth had wanted to remain in Germany.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "birth"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "returned_to_ny"
+        ],
+        "notFlags": [
+          "stranded_germany",
+          "never_emigrated"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "buy_property_immediately",
+          "text": "Put the Yukon gold straight into Queens real estate",
+          "effects": {
+            "money": 2000,
+            "power": 6
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "queens_landholder",
+            "real_capital"
+          ],
+          "outcome": "You buy vacant lots while they are cheap. Fred will grow up watching land turn into money, and money into more land."
+        },
+        {
+          "id": "keep_gold_in_the_bank",
+          "text": "Keep the gold liquid and live modestly in Woodhaven",
+          "effects": {
+            "money": 1000,
+            "loyalty": 4
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "queens_settled"
+          ],
+          "outcome": "Elizabeth makes a careful German home far from the village she misses. The strongbox stays full, waiting for a use."
+        },
+        {
+          "id": "spend_to_belong",
+          "text": "Spend lavishly to look like established New Yorkers",
+          "effects": {
+            "money": -800,
+            "reputation": 5,
+            "heat": 2
+          },
+          "personality": {
+            "outward": 6,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "queens_settled",
+            "spent_thin"
+          ],
+          "outcome": "The neighbors are impressed. The strongbox is lighter. Fred learns early that appearance is a kind of currency."
+        }
+      ]
+    },
+    {
+      "id": "ev_great_war",
+      "era": "origins",
+      "year": 1917,
+      "title": "A German Name in a German War",
+      "scene": "America enters the Great War against the Kaiser, and suddenly your German name is a liability on every Queens block. Neighbors who once tipped their hats now eye you sideways; the papers print hate for anything Prussian. Friedrich, you must decide how the Trumps weather the suspicion of being German in a country at war with Germany.",
+      "researchNote": "Anti-German sentiment surged in the US after it entered WWI in April 1917; the Trumps' German heritage drew suspicion, a pressure the family downplayed for decades (later even claiming Swedish ancestry).",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "world-event"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "returned_to_ny"
+        ],
+        "notFlags": [
+          "never_emigrated",
+          "stranded_germany"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "bury_the_german_roots",
+          "text": "Quietly bury the family's German roots",
+          "effects": {
+            "money": 0,
+            "reputation": 6,
+            "heat": -4
+          },
+          "personality": {
+            "outward": 4,
+            "ideology": 3
+          },
+          "setFlags": [
+            "hid_german_roots"
+          ],
+          "outcome": "You speak only English in the street and never mention Kallstadt. The instinct to recast the family's story will outlive you by a century."
+        },
+        {
+          "id": "stand_by_heritage",
+          "text": "Refuse to hide who the family is",
+          "effects": {
+            "money": -100,
+            "reputation": -6,
+            "loyalty": 6
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": 4
+          },
+          "setFlags": [
+            "proud_german"
+          ],
+          "outcome": "You will not apologize for Kallstadt. It costs you customers and goodwill, but Elizabeth holds her head higher for it."
+        },
+        {
+          "id": "wave_the_flag_loudest",
+          "text": "Out-patriot the neighbors with flags and war bonds",
+          "effects": {
+            "money": -400,
+            "reputation": 8,
+            "power": 3
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 6
+          },
+          "setFlags": [
+            "hid_german_roots",
+            "loud_patriot"
+          ],
+          "outcome": "No house on the block flies a bigger flag than yours. Suspicion gives way to grudging respect — and a lesson Fred files away."
+        }
+      ]
+    },
+    {
+      "id": "ev_friedrich_dies_flu",
+      "era": "origins",
+      "year": 1918,
+      "title": "The Spanish Flu at the Door",
+      "scene": "On a single afternoon in May 1918, walking with twelve-year-old Fred, you feel suddenly, terribly ill. The influenza scything through the world — fifty million dead before it burns out — has come for you, Friedrich Trump, at forty-nine. Whether it takes you or spares you will decide whose hands shape the family line: a widow and a boy, or the bold old operator himself.",
+      "researchNote": "Friedrich Trump died of the 1918 influenza pandemic on May 30, 1918, at age 49; the assets passed to Elizabeth, who held them in trust and signed for her minor son Fred. The pandemic killed an estimated 50 million worldwide — a true world-event hinge for the family.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "death",
+        "world-event",
+        "counterfactual"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "returned_to_ny"
+        ],
+        "notFlags": [
+          "never_emigrated",
+          "stranded_germany"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "flu_kills_him_leaves_estate",
+          "text": "[Historical] The flu takes Friedrich — he leaves Elizabeth deeds to build on",
+          "effects": {
+            "money": 1500,
+            "power": 4
+          },
+          "personality": {
+            "ideology": 4,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "estate_intact",
+            "real_capital",
+            "friedrich_died"
+          ],
+          "clearFlags": [],
+          "outcome": "Friedrich dies as he did in life's record. Elizabeth folds the deeds and cash into a family company; young Fred will build the outer-borough firm his own way. The seed money survives the man who earned it."
+        },
+        {
+          "id": "flu_kills_him_thin_estate",
+          "text": "[Historical] The flu takes Friedrich — and the nest egg was already spent thin",
+          "effects": {
+            "money": -500,
+            "loyalty": 5,
+            "health": 0
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "estate_thin",
+            "friedrich_died"
+          ],
+          "clearFlags": [
+            "real_capital"
+          ],
+          "outcome": "Friedrich dies and leaves little but a name and a widow's grit. Fred grows up poor, watching his mother count every cent, vowing he will never be small again."
+        },
+        {
+          "id": "flu_spares_him",
+          "text": "[Counterfactual: no pandemic] Friedrich survives and keeps building himself",
+          "effects": {
+            "money": 3000,
+            "power": 6,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "friedrich_survived",
+            "real_capital"
+          ],
+          "clearFlags": [],
+          "outcome": "The fever breaks; Friedrich lives. The bold, seedy Klondike operator stays at the helm of the family — and the line will be shaped by his risk appetite, not his cautious son's. One absent world-event has bent the whole hand."
+        }
+      ]
+    },
+    {
+      "id": "ev_friedrich_survives_empire",
+      "era": "origins",
+      "year": 1925,
+      "title": "The Grandfather's Gambit",
+      "scene": "In the world where the flu spared you, you are Friedrich Trump, alive into your fifties with a Klondike fortune and an operator's nerve no schoolteacher ever bred out of you. You build in Queens a decade before your son would have, betting bigger and dirtier than cautious Fred ever will — and you decide whether the Trump name rises early on your gambles, or burns on them. Fred grows up in your long shadow, learning to wait his turn.",
+      "researchNote": "Counterfactual: had Friedrich survived 1918, his documented risk appetite (Lava Beds, Klondike liquor-and-rooms operations) suggests he might have seeded the real-estate empire a generation earlier — or squandered it — and overshadowed Fred's own development of the firm.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "business",
+        "counterfactual"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "friedrich_survived"
+        ],
+        "notFlags": [
+          "never_emigrated",
+          "stranded_germany"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "grandfather_seeds_empire_early",
+          "text": "Build a bold empire a generation early and hand it down",
+          "effects": {
+            "money": 60000,
+            "power": 14,
+            "heat": 7
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 10
+          },
+          "setFlags": [
+            "dynasty_capital",
+            "political_connections",
+            "fred_builder",
+            "grandfather_empire"
+          ],
+          "outcome": "Friedrich's gambles pay off enormous; the Trump fortune is seeded a generation early and weathers what comes. Any grandchild born to this line starts with a deeper, older war chest than history ever gave Donald."
+        },
+        {
+          "id": "grandfather_overshadows_fred",
+          "text": "Keep the reins yourself and let Fred chafe in your shadow",
+          "effects": {
+            "money": 12000,
+            "power": 6,
+            "loyalty": -4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "real_capital",
+            "fred_builder",
+            "friedrich_dominant"
+          ],
+          "clearFlags": [],
+          "outcome": "Friedrich never lets go; Fred is a manager, not a master, well into middle age. The firm survives, modestly, but its character is the grandfather's — and the line's ambition is tangled in a rivalry of fathers and sons."
+        },
+        {
+          "id": "grandfather_busts_the_nest_egg",
+          "text": "Chase one risk too many and squander the Yukon gold",
+          "effects": {
+            "money": -8000,
+            "heat": 9,
+            "reputation": -8,
+            "health": -5
+          },
+          "personality": {
+            "grandiosity": 9,
+            "ideology": -4
+          },
+          "setFlags": [
+            "fred_failed",
+            "grandfather_bust",
+            "dynasty_doomed"
+          ],
+          "clearFlags": [
+            "real_capital",
+            "dynasty_capital"
+          ],
+          "outcome": "The old operator's luck finally runs out. A bad speculation swallows the strongbox, and Fred inherits debts instead of deeds. The bold grandfather builds nothing lasting but a cautionary tale."
+        }
+      ]
+    },
+    {
+      "id": "ev_fred_starts_building",
+      "era": "origins",
+      "year": 1923,
+      "title": "Elizabeth Trump & Son",
+      "scene": "You are now young Fred Trump, eighteen and impatient, and your mother Elizabeth signs the contracts you are too young to hold yourself. With her seed money you build your first house in Queens and sell it, then build another. You name the firm Elizabeth Trump & Son — her capital, your ambition — and you discover you can pour a foundation faster than any builder in the borough.",
+      "researchNote": "Fred Trump began building homes in Queens in the early 1920s; because he was a minor, his mother Elizabeth signed legal documents, and the firm was named 'E. Trump & Son'.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "business"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "estate_intact"
+        ],
+        "notFlags": [
+          "estate_thin",
+          "never_emigrated",
+          "friedrich_survived"
+        ],
+        "meters": {
+          "money": ">=500"
+        },
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "reinvest_everything",
+          "text": "Plow every dollar of profit back into the next house",
+          "effects": {
+            "money": 8000,
+            "power": 8
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "fred_builder",
+            "compounding"
+          ],
+          "outcome": "House becomes two becomes a block. Fred learns the developer's catechism: never stop building, never let the money sit still."
+        },
+        {
+          "id": "build_steady_and_safe",
+          "text": "Build steadily and bank healthy reserves",
+          "effects": {
+            "money": 5000,
+            "loyalty": 3
+          },
+          "personality": {
+            "inward": 4,
+            "grandiosity": 2
+          },
+          "setFlags": [
+            "fred_builder"
+          ],
+          "outcome": "Fred's name spreads quietly through Queens as a man who finishes what he starts and pays his bills. The firm is sound."
+        },
+        {
+          "id": "overextend_early",
+          "text": "Borrow heavily to build faster than the market wants",
+          "effects": {
+            "money": 1000,
+            "heat": 8,
+            "reputation": -3
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": -2
+          },
+          "setFlags": [
+            "fred_builder",
+            "overleveraged"
+          ],
+          "ripples": [],
+          "outcome": "Fred stacks houses on borrowed money and crossed fingers. It works — for now — but the ledger is stretched thin as paper."
+        }
+      ]
+    },
+    {
+      "id": "ev_great_depression_grocery",
+      "era": "origins",
+      "year": 1929,
+      "title": "The Crash and the Self-Serve Grocery",
+      "scene": "Wall Street collapses and the building trade dies overnight; no one in Queens is buying houses in 1929. You are Fred Trump with a half-built business and no buyers, so you pivot — opening a self-service grocery store, the Trump Market, to ride out the Depression while every rival developer goes under. Survival now matters more than ambition.",
+      "researchNote": "When the Depression halted homebuilding, Fred Trump ran a self-service grocery store (Trump Market) in Woodhaven, Queens, to stay solvent until housing demand returned.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "business",
+        "world-event"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "fred_builder"
+        ],
+        "notFlags": [
+          "never_emigrated"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "ride_it_out_grocery",
+          "text": "Run the grocery and keep your land while rivals go broke",
+          "effects": {
+            "money": 2000,
+            "power": 5,
+            "reputation": 3
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": 4
+          },
+          "setFlags": [
+            "survived_depression",
+            "dry_powder"
+          ],
+          "outcome": "Cans of beans keep the lights on while the borough starves. When building returns, Fred owns land the bankrupt left behind."
+        },
+        {
+          "id": "buy_distressed_mortgages",
+          "text": "Use the grocery cash to buy up distressed mortgages cheap",
+          "effects": {
+            "money": 4000,
+            "heat": 4,
+            "power": 6
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "survived_depression",
+            "vulture_capital",
+            "real_capital"
+          ],
+          "outcome": "Fred picks bargains off the bones of the crash — a foreclosed mortgage-servicing business, cheap lots, ruined men's collateral. The fortune compounds in the wreckage."
+        },
+        {
+          "id": "depression_wipes_fred_out",
+          "text": "Let the overleveraged firm collapse with the market",
+          "effects": {
+            "money": -6000,
+            "reputation": -8,
+            "health": -4
+          },
+          "personality": {
+            "grandiosity": -7,
+            "inward": -5
+          },
+          "setFlags": [
+            "fred_failed",
+            "depression_ruin",
+            "dynasty_doomed"
+          ],
+          "clearFlags": [
+            "real_capital",
+            "compounding"
+          ],
+          "outcome": "The borrowed houses are repossessed and Elizabeth Trump & Son dissolves into debt. Fred joins the breadlines he swore he would never see."
+        }
+      ]
+    },
+    {
+      "id": "ev_fha_new_deal_housing",
+      "era": "origins",
+      "year": 1935,
+      "title": "The FHA Gravy Train",
+      "scene": "Roosevelt's New Deal creates the Federal Housing Administration, and suddenly Washington will insure mortgages and underwrite mass housing for the working class. You are Fred Trump, and you see it instantly: government-backed money to build thousands of homes at guaranteed margins. The FHA does not just save your business — it makes you, and it teaches you that the surest profit flows from the public trough.",
+      "researchNote": "Fred Trump built much of his fortune on FHA-insured mortgages and federal housing programs from the 1930s onward, becoming one of the most prolific FHA-backed builders in Brooklyn and Queens.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "business",
+        "world-event",
+        "politics"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "survived_depression"
+        ],
+        "notFlags": [
+          "fred_failed",
+          "never_emigrated"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "master_the_fha",
+          "text": "Cultivate the FHA officials and milk every program",
+          "effects": {
+            "money": 40000,
+            "power": 12,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "fha_fortune",
+            "dynasty_capital",
+            "political_connections"
+          ],
+          "outcome": "Fred builds Brooklyn and Queens by the thousand-unit on Uncle Sam's dime. He learns to court politicians like clients. The Trump dynasty's true capital is born here."
+        },
+        {
+          "id": "build_clean_modest",
+          "text": "Use the FHA modestly and keep your hands clean of the politics",
+          "effects": {
+            "money": 15000,
+            "reputation": 5,
+            "power": 5
+          },
+          "personality": {
+            "inward": 4,
+            "grandiosity": 2
+          },
+          "setFlags": [
+            "fha_modest",
+            "real_capital"
+          ],
+          "outcome": "Fred builds solid, profitable housing without overreaching the program. A comfortable fortune, but not yet a dynasty's war chest."
+        },
+        {
+          "id": "miss_the_fha_wave",
+          "text": "Distrust the federal money and sit the program out",
+          "effects": {
+            "money": -2000,
+            "reputation": -2
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": -5
+          },
+          "setFlags": [
+            "missed_fha",
+            "tenement_landlord"
+          ],
+          "clearFlags": [
+            "dry_powder"
+          ],
+          "outcome": "While rivals build empires on FHA paper, Fred scrapes by as a small landlord of aging walk-ups. The big money sails past the Trump name."
+        }
+      ]
+    },
+    {
+      "id": "ev_marries_mary_anne_macleod",
+      "era": "origins",
+      "year": 1936,
+      "title": "Mary Anne MacLeod of the Isle of Lewis",
+      "scene": "At a dance you are Fred Trump and you meet Mary Anne MacLeod, a Scottish maid from the windswept Isle of Lewis who crossed the ocean in 1930 looking for work and a richer life. She is beautiful, ambitious, and as much an immigrant climber as your own father was. You marry her in 1936, and together you will raise a brood in Queens — including, one day, a boy named Donald.",
+      "researchNote": "Fred Trump married Mary Anne MacLeod, a Scottish immigrant from the Isle of Lewis who arrived in the US in 1930, in January 1936; they had five children, of whom Donald was the fourth.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "marriage",
+        "immigration"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "fred_builder"
+        ],
+        "notFlags": [
+          "never_emigrated"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "marry_for_dynasty",
+          "text": "Marry Mary Anne and plan a dynasty of Trump children",
+          "effects": {
+            "money": 0,
+            "loyalty": 8,
+            "power": 3
+          },
+          "personality": {
+            "grandiosity": 6,
+            "ideology": 4
+          },
+          "setFlags": [
+            "married_mary_anne",
+            "dynasty_planned"
+          ],
+          "outcome": "Two immigrant bloodlines — Bavarian and Hebridean — fuse in a Queens row house. The children come quickly, and Fred dreams of heirs to the firm."
+        },
+        {
+          "id": "marry_modestly",
+          "text": "Marry quietly and keep the household frugal",
+          "effects": {
+            "money": 1000,
+            "loyalty": 5
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "married_mary_anne"
+          ],
+          "outcome": "Mary Anne runs a thrifty, churchgoing home, never quite shaking the memory of Lewis poverty. The Trump children grow up watched and disciplined."
+        }
+      ]
+    },
+    {
+      "id": "ev_wartime_navy_housing",
+      "era": "origins",
+      "year": 1943,
+      "title": "Building for the War Effort",
+      "scene": "World War II is on, and you are Fred Trump with the contacts and the FHA expertise to win federal contracts for war-worker and Navy housing in Norfolk, Virginia, and along the Eastern seaboard. While other men ship out, you build the barracks and apartments that house the war machine, banking government money by the project. The empire compounds even as the world burns.",
+      "researchNote": "During WWII Fred Trump built federally financed housing for naval and war workers (notably near Norfolk, Virginia), expanding his fortune through wartime government contracts.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "business",
+        "world-event"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "fha_fortune"
+        ],
+        "notFlags": [
+          "fred_failed",
+          "never_emigrated"
+        ],
+        "meters": {
+          "money": ">=20000"
+        },
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "go_big_on_war_contracts",
+          "text": "Win every Navy housing contract you can grab",
+          "effects": {
+            "money": 120000,
+            "power": 15,
+            "heat": 8
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 9
+          },
+          "setFlags": [
+            "war_fortune",
+            "dynasty_capital",
+            "political_connections"
+          ],
+          "outcome": "Fred ends the war richer than his father ever dreamed, with a fortune, a Cadillac, and politicians on speed-dial. Whatever child comes next will be born into real money."
+        },
+        {
+          "id": "moderate_war_work",
+          "text": "Take a fair share of contracts and stay below the radar",
+          "effects": {
+            "money": 50000,
+            "reputation": 4,
+            "power": 8
+          },
+          "personality": {
+            "inward": 4,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "war_fortune",
+            "dynasty_capital"
+          ],
+          "outcome": "Fred profits handsomely without the scrutiny that follows the biggest fish. The Trump household enters 1946 comfortably, undeniably rich."
+        }
+      ]
+    },
+    {
+      "id": "ev_tenement_years",
+      "era": "origins",
+      "year": 1944,
+      "title": "The German-Immigrant Tenement",
+      "scene": "You are Fred Trump in the version of this story where the gravy train never came — a small landlord scraping rents from aging walk-ups in a German-immigrant corner of Queens. Mary Anne mends clothes; the children share rooms; there is no Cadillac and no FHA fortune. Whatever child is born into this house will know stoops and public school, not gold elevators.",
+      "researchNote": "Counterfactual branch: had Fred missed the FHA/wartime housing boom, the family would have remained modest landlords rather than millionaire developers — Donald's actual childhood was affluent and suburban (Jamaica Estates).",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "counterfactual"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "missed_fha"
+        ],
+        "notFlags": [
+          "dynasty_capital",
+          "never_emigrated"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_the_grind",
+          "text": "Resolve that any child of yours will have to earn it",
+          "effects": {
+            "money": 500,
+            "loyalty": 6,
+            "reputation": 2
+          },
+          "personality": {
+            "inward": 6,
+            "ideology": 3
+          },
+          "setFlags": [
+            "bootstrap_household"
+          ],
+          "outcome": "Fred fixes his own boilers and counts his own rents. The child to come will inherit grit and a German surname, but no empire to coast on."
+        },
+        {
+          "id": "gamble_last_savings",
+          "text": "Bet the family's last savings on one risky building",
+          "effects": {
+            "money": -1500,
+            "heat": 5,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 7,
+            "ideology": -3
+          },
+          "setFlags": [
+            "bootstrap_household",
+            "desperate_gamble"
+          ],
+          "ripples": [],
+          "outcome": "Fred rolls the dice to climb back up. Win or lose, the house stays poor through 1946, and any child arrives into striving, not splendor."
+        }
+      ]
+    },
+    {
+      "id": "ev_line_fails",
+      "era": "origins",
+      "year": 1932,
+      "title": "The Dynasty That Never Was",
+      "scene": "And here the thread of the family simply frays and breaks. Whether Friedrich never left Kallstadt, or died stranded and broke in Bavaria, or Fred's overborrowed firm was swallowed whole by the Depression — the Trumps never become builders, never plant a fortune in Queens soil. There will be no Cadillac, no FHA empire, and no June morning in 1946. History closes over the family before it ever truly begins.",
+      "researchNote": "Terminal counterfactual: each real failure point (draft, expulsion, the 1918 flu, the Depression) could plausibly have ended the family's rise — without Fred's fortune, the dynasty has no foundation.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "counterfactual",
+        "ending"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "dynasty_doomed"
+        ],
+        "notFlags": [
+          "fred_builder",
+          "returned_to_ny"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "accept_the_end",
+          "text": "Let the Drumpf line vanish back into history",
+          "effects": {
+            "money": -1000,
+            "reputation": -10
+          },
+          "personality": {
+            "grandiosity": -10,
+            "ideology": -5
+          },
+          "setFlags": [
+            "line_failed"
+          ],
+          "outcome": "The name dissolves into the great anonymous tide of immigrants who came, struggled, and left no dynasty behind. There is no Donald. The game ends at its prologue."
+        },
+        {
+          "id": "rage_against_the_end",
+          "text": "Rage at the fortune that slipped away",
+          "effects": {
+            "money": -2000,
+            "health": -8,
+            "reputation": -6
+          },
+          "personality": {
+            "grandiosity": 8,
+            "inward": -8
+          },
+          "setFlags": [
+            "line_failed",
+            "bitter_end"
+          ],
+          "outcome": "Friedrich, or Fred, dies bitter and broke, cursing the country that took everything and gave nothing back. The Trump dynasty is stillborn. There is no Donald."
+        }
+      ]
+    },
+    {
+      "id": "ev_donald_is_born",
+      "era": "origins",
+      "year": 1946,
+      "title": "June 14, 1946",
+      "scene": "Mary Anne goes into labor at Jamaica Hospital, Queens, on June 14, 1946, and Fred Trump paces the corridor. A fourth child, a son, red-faced and bawling, is laid in her arms: Donald John Trump. The world he opens his eyes on — gilded or grinding — is the one the family has spent sixty years and three generations building. The prologue is over. The hand is dealt.",
+      "researchNote": "Donald John Trump was born June 14, 1946, at Jamaica Hospital in Queens, the fourth of Fred and Mary Anne Trump's five children; the family was by then wealthy, living in Jamaica Estates.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "birth",
+        "ending"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [],
+        "notFlags": [
+          "line_failed",
+          "never_emigrated",
+          "stranded_germany"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "born_to_empire",
+          "text": "[If the dynasty was built] Born into the Trump empire",
+          "effects": {
+            "money": 200000,
+            "power": 10,
+            "reputation": 5
+          },
+          "personality": {
+            "grandiosity": 10,
+            "ideology": 6
+          },
+          "setFlags": [
+            "born_advantaged",
+            "head_start"
+          ],
+          "ripples": [],
+          "outcome": "Donald arrives heir to an FHA fortune, a connected father, and a borough full of Trump bricks. He will be raised to believe winning is the family's birthright. (Requires dynasty_capital from Fred's choices.)"
+        },
+        {
+          "id": "born_comfortable",
+          "text": "[If Fred built a modest fortune] Born into solid comfort",
+          "effects": {
+            "money": 25000,
+            "power": 4,
+            "reputation": 3
+          },
+          "personality": {
+            "grandiosity": 4,
+            "ideology": 3
+          },
+          "setFlags": [
+            "born_advantaged"
+          ],
+          "outcome": "Donald arrives into a comfortable, striving household with a successful builder for a father — advantaged, if not yet imperial. (Requires real_capital without the full dynasty war chest.)"
+        },
+        {
+          "id": "born_in_the_tenement",
+          "text": "[If the fortune was lost] Born middle-class in the immigrant warren",
+          "effects": {
+            "money": 800,
+            "reputation": 0,
+            "loyalty": 3
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": -2,
+            "ideology": 2
+          },
+          "setFlags": [
+            "self_made_start"
+          ],
+          "clearFlags": [
+            "dynasty_capital",
+            "born_advantaged"
+          ],
+          "outcome": "Donald arrives into a German-immigrant tenement, public-school bound, with no inherited empire to coast on. Whatever he becomes, he will have to build from nothing. (The bootstrap game.)"
+        }
+      ]
+    }
+  ]
+}

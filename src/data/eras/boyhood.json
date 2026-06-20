@@ -949,12 +949,13 @@
       "choices": [
         {
           "id": "deck_the_teacher",
-          "text": "Mouth off and shove the teacher who insulted you",
+          "text": "Mouth off and shove the music teacher you'll later brag you gave a black eye",
           "effects": {
             "heat": 12,
             "reputation": 4,
             "power": 3,
-            "loyalty": -6
+            "loyalty": -6,
+            "health": -10
           },
           "personality": {
             "ideology": 6,
@@ -963,7 +964,8 @@
           },
           "setFlags": [
             "wild_child",
-            "discipline_problem"
+            "discipline_problem",
+            "reckless_youth"
           ],
           "ripples": [
             {
@@ -972,7 +974,7 @@
               "polarity": -1
             }
           ],
-          "outcome": "You become a schoolyard legend and a parent-teacher nightmare. Fred is summoned. He is not amused."
+          "outcome": "You shove him hard enough that he shoves back, and the scuffle leaves you bruised and breathless on the floor. You become a schoolyard legend and a parent-teacher nightmare; Trump would boast for decades that he punched this teacher, though the man's family always denied it. Fred is summoned. He is not amused. (A reckless streak takes hold.)"
         },
         {
           "id": "rally_the_kids",
@@ -2223,6 +2225,407 @@
             }
           ],
           "outcome": "You tell Fred the killer's life isn't for you. He goes pale with disappointment, but for once you feel light. The skyline can keep its towers."
+        }
+      ]
+    },
+    {
+      "id": "ev_rooftop_dare",
+      "era": "boyhood",
+      "year": 1958,
+      "title": "The Edge of the Roof",
+      "scene": "The neighborhood boys gather on the flat roof of one of Fred's six-story Brooklyn walk-ups, daring each other to walk the parapet. The drop is real; the ledge is barely a foot wide and slick with pigeon grime. The other kids look at you, the builder's son, and someone says you wouldn't dare. Below, the courtyard where Fred's tenants hang their laundry waits like a held breath.",
+      "researchNote": "Trump grew up around his father's outer-borough apartment buildings and has cultivated a lifelong image of fearlessness and not being a loser; the dare here is dramatized but rooted in the documented daredevil bravado of his Queens boyhood and his refusal to ever back down.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "rebellion",
+        "danger"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [],
+        "notFlags": [
+          "modest_streak",
+          "honest_kid"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "walk_the_parapet",
+          "text": "Walk the full length of the ledge with your arms out, grinning",
+          "effects": {
+            "health": -15,
+            "reputation": 8,
+            "power": 4,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 5,
+            "inward": -4
+          },
+          "setFlags": [
+            "reckless_youth",
+            "fearless_legend"
+          ],
+          "outcome": "Your sneaker slips on the grime halfway across and your stomach drops six stories before your hand catches the cornice. You haul yourself back, knuckles bleeding, knees shaking, but you finish the walk because finishing is the whole point. The boys go silent, then roar. You decide, dangerously, that fear is just a sound other people make. (The reckless streak deepens.)"
+        },
+        {
+          "id": "push_a_smaller_kid",
+          "text": "Refuse, then shove the kid who called you chicken toward the edge",
+          "effects": {
+            "health": -8,
+            "heat": 9,
+            "reputation": 3,
+            "loyalty": -7
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 5,
+            "inward": -3
+          },
+          "setFlags": [
+            "reckless_youth",
+            "wild_child"
+          ],
+          "ripples": [
+            {
+              "to": "fred_patience",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "He stumbles, grabs you, and you both go down hard against the gravel and ductwork, inches from the parapet. You walk away scraped, furious, and feared, having learned that you'd rather risk a death than swallow an insult. The other boys keep their distance after that. (The reckless streak deepens.)"
+        },
+        {
+          "id": "call_it_stupid",
+          "text": "Call the whole thing stupid and climb back down the fire escape",
+          "effects": {
+            "health": 5,
+            "reputation": -4,
+            "loyalty": 3
+          },
+          "personality": {
+            "ideology": -3,
+            "inward": 5,
+            "grandiosity": -5
+          },
+          "setFlags": [
+            "modest_streak"
+          ],
+          "outcome": "You take the razzing and climb down with all your bones intact. Let them call you chicken; a chicken, you figure, lives to nine years old and beyond. Fred, if he ever heard, would call it the only smart thing you did all summer."
+        }
+      ]
+    },
+    {
+      "id": "ev_creek_jump_dare",
+      "era": "boyhood",
+      "year": 1962,
+      "title": "The Gorge Below the Academy",
+      "scene": "Off the academy grounds at Cornwall-on-Hudson, a knot of cadets hikes to a rocky gorge where local legend says the bravest jump the gap between two ledges over a forty-foot drop. You already have a name as the kid who never backs down. Now they want to see it. The wind off the Hudson is cold and the far ledge looks farther than it did from the trail.",
+      "researchNote": "NYMA sat in the rugged Hudson Highlands at Cornwall-on-Hudson, terrain full of gorges and cliffs; cadets had off-hours freedom that occasionally led to dangerous dares. This dramatizes the documented daredevil reputation Trump cultivated as a boy who refused to be seen backing down.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "school",
+        "rebellion",
+        "danger"
+      ],
+      "portrait": "cadet",
+      "requires": {
+        "flags": [
+          "at_nyma",
+          "reckless_youth"
+        ],
+        "notFlags": [
+          "modest_streak"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "take_the_jump",
+          "text": "Take a running start and jump the gap to keep your fearless name",
+          "effects": {
+            "health": -15,
+            "reputation": 7,
+            "power": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 4,
+            "inward": -4
+          },
+          "setFlags": [
+            "reckless_youth",
+            "fearless_legend"
+          ],
+          "outcome": "You clear the gap by inches and land wrong, your ankle folding under you with a crunch as the cadets whoop above the drop. The pain is white and enormous, but you stand, because the legend stands. You limp back to barracks knowing one bad inch was all that stood between glory and the rocks below. (The reckless streak compounds.)"
+        },
+        {
+          "id": "dare_double",
+          "text": "Jump it, then immediately jump back to prove it wasn't luck",
+          "effects": {
+            "health": -18,
+            "reputation": 9,
+            "heat": 4,
+            "power": 3
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 5,
+            "inward": -5
+          },
+          "setFlags": [
+            "reckless_youth",
+            "fearless_legend"
+          ],
+          "outcome": "The first jump lands clean and the cadets are already cheering, but cheering isn't enough; you turn and jump back, and this time the ledge crumbles and you slide ten feet down the gorge wall before a sapling stops you. You climb out shredded and bleeding, grinning through it, having proved that the only thing you fear is looking like you feared anything. (The reckless streak compounds dangerously.)"
+        },
+        {
+          "id": "walk_away_smart",
+          "text": "Tell them a dead cadet wins no medals and hike back to barracks",
+          "effects": {
+            "health": 6,
+            "reputation": -5,
+            "loyalty": 2
+          },
+          "personality": {
+            "ideology": -4,
+            "inward": 6,
+            "grandiosity": -6
+          },
+          "setFlags": [
+            "modest_streak"
+          ],
+          "clearFlags": [
+            "fearless_legend"
+          ],
+          "outcome": "You turn your back on the gorge and the jeering, and the long walk down teaches you something the dare never could: there is a kind of winning in being the one who comes home whole. The reputation takes a hit. Your skull does not."
+        }
+      ]
+    },
+    {
+      "id": "ev_nyma_discipline_reckoning",
+      "era": "boyhood",
+      "year": 1962,
+      "title": "Hearing Before the Commandant",
+      "scene": "Demerits have piled into something serious. You stand at attention before the commandant, a hard-eyed veteran named Major Dobias who has spent the year trying to break your defiance into something useful. He lays it out flat: shape up and earn your stripes, or wash out of the academy in disgrace and go home to Fred a failure. NYMA exists, he reminds you, precisely because Queens couldn't handle you.",
+      "researchNote": "Theodore Dobias was Trump's tough baseball coach and a formative disciplinary figure at NYMA; Trump credited the academy's strict structure with shaping him, while a different response to that discipline could plausibly have ended in washout. The academy was chosen specifically to instill discipline after his unruly behavior in Queens.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "school",
+        "discipline",
+        "danger"
+      ],
+      "portrait": "cadet",
+      "requires": {
+        "flags": [
+          "at_nyma"
+        ],
+        "notFlags": [
+          "model_cadet"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "flout_all_discipline",
+          "text": "Sneer that no colonel and no Trump tells you what to do",
+          "effects": {
+            "heat": 12,
+            "loyalty": -10,
+            "reputation": 2,
+            "power": -4
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 6,
+            "inward": -4
+          },
+          "setFlags": [
+            "disgraced_cadet"
+          ],
+          "clearFlags": [
+            "model_cadet",
+            "fathers_lessons"
+          ],
+          "ripples": [
+            {
+              "to": "fred_patience",
+              "weight": 0.6,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You flout every rule on principle, rack up the demerits like trophies, and dare the academy to do something about it. Dobias does: the recommendation goes up the chain that this cadet cannot be salvaged. You learn the wrong lesson, that contempt for the system is its own kind of strength, and Fred's whole reason for sending you here curdles into failure. (You are headed for a disgraceful washout.)"
+        },
+        {
+          "id": "submit_to_discipline",
+          "text": "Square your shoulders and resolve to master the system instead of fighting it",
+          "effects": {
+            "power": 7,
+            "loyalty": 8,
+            "reputation": 5,
+            "heat": -10,
+            "health": 3
+          },
+          "personality": {
+            "ideology": 4,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "model_cadet",
+            "fathers_lessons"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Something in Dobias's flat certainty reaches you where Fred's lectures never did. You decide the system is just another game with rules, and you intend to win it. The demerits stop; the stripes start. Trump would later credit the academy with teaching him more about discipline and competition than anything else. (Father's lessons learned, and the cadet path redeemed.)"
+        },
+        {
+          "id": "game_the_commandant",
+          "text": "Charm and flatter Dobias into giving you one more chance",
+          "effects": {
+            "reputation": 4,
+            "heat": -6,
+            "loyalty": 2,
+            "power": 2
+          },
+          "personality": {
+            "grandiosity": 5,
+            "outward": 5,
+            "inward": -3
+          },
+          "setFlags": [
+            "learned_intimidation",
+            "lady_charmer"
+          ],
+          "outcome": "You don't reform so much as perform reform, telling the major exactly what he wants to hear with a salesman's sincerity. It works just well enough to keep you enrolled. You walk out having learned that managing a man's perception of you beats actually changing, a lesson worth more to you than any medal."
+        }
+      ]
+    },
+    {
+      "id": "ev_content_heir_dream",
+      "era": "boyhood",
+      "year": 1963,
+      "title": "A Smaller Kind of Future",
+      "scene": "Home on leave near the end of the academy, you ride along on Fred's Brooklyn rounds and feel, unexpectedly, at peace. Not the hunger for Manhattan towers, not the dream of a name in lights, just the quiet pleasure of solid brick buildings, steady rent rolls, and a father who built something real. You could simply do this, you realize, and be happy. Freddy wanted to fly planes; maybe you just want to come home and run the buildings.",
+      "researchNote": "Fred Trump built a large, stable outer-borough rental empire and groomed his sons to inherit it; the steady family business was a genuine alternate path. This dramatizes a humbler road not taken, contrasting with the Manhattan ambition Trump ultimately chose.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "money",
+        "ambition"
+      ],
+      "portrait": "cadet",
+      "requires": {
+        "flags": [
+          "at_nyma"
+        ],
+        "notFlags": [
+          "manhattan_dreamer",
+          "disgraced_cadet"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_the_quiet_empire",
+          "text": "Tell Fred you'd be content to run the Brooklyn buildings and nothing more",
+          "effects": {
+            "loyalty": 9,
+            "health": 7,
+            "money": 12,
+            "power": -3
+          },
+          "personality": {
+            "ideology": 3,
+            "inward": 5,
+            "grandiosity": -10
+          },
+          "setFlags": [
+            "content_heir",
+            "family_business_track"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Fred studies you, half puzzled, half pleased, used to sons who either flee the business or burn to outdo it. You want neither. The rent rolls, the brick, the steady comfortable life: it is enough for you, and saying so out loud feels like setting down a weight you didn't know you carried. (You are content to be the heir.)"
+        },
+        {
+          "id": "comfort_over_glory",
+          "text": "Decide a comfortable life beats a famous one, and aim low on purpose",
+          "effects": {
+            "health": 9,
+            "loyalty": 5,
+            "reputation": -4,
+            "power": -4
+          },
+          "personality": {
+            "ideology": -3,
+            "inward": 6,
+            "grandiosity": -9
+          },
+          "setFlags": [
+            "content_heir",
+            "modest_streak"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You watch the men who chase the spotlight and decide you want no part of the hunger. A good house, a steady job under Fred, a quiet name nobody shouts: that is the whole of your ambition, and it makes you calmer than any cadet on the parade ground. (You are content to be the heir.)"
+        },
+        {
+          "id": "but_then_the_skyline",
+          "text": "Feel the pull of the buildings, then look across the river at Manhattan",
+          "effects": {
+            "power": 6,
+            "reputation": 5,
+            "money": 6
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 4
+          },
+          "setFlags": [
+            "manhattan_dreamer",
+            "fathers_lessons"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "For one warm afternoon Brooklyn brick is enough, and then your eye drifts west to the towers across the water and the spell breaks. Comfortable, you decide, is just another word for small. Fred's empire is a foundation, not a finish line. (Father's lessons learned.)"
         }
       ]
     }

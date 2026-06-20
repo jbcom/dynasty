@@ -1138,7 +1138,9 @@
             "grandiosity": 6,
             "outward": 7
           },
-          "setFlags": [],
+          "setFlags": [
+            "nativist_turn"
+          ],
           "clearFlags": [],
           "ripples": [
             {
@@ -1171,6 +1173,32 @@
             }
           ],
           "outcome": "The rewritten order survives review by being modest. The lawyers are pleased; the crowds wanted thunder, not vetting."
+        },
+        {
+          "id": "blame_the_courts_publicly",
+          "text": "Make the 'so-called judges' a permanent campaign villain at every rally.",
+          "effects": {
+            "loyalty": 7,
+            "heat": 6,
+            "reputation": -6,
+            "power": 3
+          },
+          "personality": {
+            "ideology": 7,
+            "outward": 8
+          },
+          "setFlags": [
+            "nativist_turn"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn the bench into a recurring enemy in the show, and the chant 'so-called judge' becomes a fixture. The legal fight matters less than the running grievance it feeds."
         }
       ]
     },
@@ -1245,6 +1273,30 @@
             }
           ],
           "outcome": "You leave the director in place and absorb the indignity. No special counsel is appointed, and the storm you feared never fully forms."
+        },
+        {
+          "id": "fire_quietly_lawyer_up",
+          "text": "Fire him on a clean pretext and let the lawyers build a paper trail.",
+          "effects": {
+            "power": 5,
+            "heat": 4,
+            "reputation": -4,
+            "money": -2000000
+          },
+          "personality": {
+            "grandiosity": 4,
+            "inward": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You dismiss him on a memo about old missteps and never say 'Russia' on camera. A special counsel still comes, but the obstruction case is murkier and the lawyers can work."
         }
       ]
     },
@@ -1317,6 +1369,30 @@
             }
           ],
           "outcome": "For once you meet the moment with moral clarity, and the country briefly remembers what a unifying president sounds like. The extremists feel disowned, and a kinder image of you takes root."
+        },
+        {
+          "id": "blame_the_media",
+          "text": "Skip the moral question entirely and attack the press coverage of it.",
+          "effects": {
+            "loyalty": 5,
+            "heat": 8,
+            "reputation": -8,
+            "power": 2
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 7
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You make the story about 'fake news' framing rather than the torches and the dead. The deflection works on your half of the country and outrages the other."
         }
       ]
     },
@@ -1336,7 +1412,9 @@
       ],
       "portrait": "president",
       "requires": {
-        "flags": [],
+        "flags": [
+          "nativist_turn"
+        ],
         "notFlags": [],
         "meters": {}
       },
@@ -1393,6 +1471,33 @@
             }
           ],
           "outcome": "You take what's on the table and call a few miles of fence a triumph. The appropriators relax; the diehards feel the slogan was just a slogan."
+        },
+        {
+          "id": "national_emergency",
+          "text": "Skip Congress entirely and declare a national emergency to seize the funds.",
+          "effects": {
+            "power": 9,
+            "loyalty": 8,
+            "reputation": -7,
+            "heat": 9
+          },
+          "personality": {
+            "ideology": 9,
+            "grandiosity": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You raid the Pentagon's budget by decree and dare the courts to stop you. The base loves the executive muscle; the precedent unnerves everyone, including some of your own party."
         }
       ]
     },
@@ -1557,7 +1662,9 @@
             "ideology": 8,
             "grandiosity": 5
           },
-          "setFlags": [],
+          "setFlags": [
+            "court_packer"
+          ],
           "clearFlags": [],
           "ripples": [
             {
@@ -1567,6 +1674,30 @@
             }
           ],
           "outcome": "A conveyor belt of lifetime judges reshapes the federal bench for a generation. Your truest legacy wears a robe."
+        },
+        {
+          "id": "donor_giveaway",
+          "text": "Quietly tilt the bill toward your donors and your own real-estate ledger.",
+          "effects": {
+            "money": 80000000,
+            "reputation": -6,
+            "heat": 5,
+            "loyalty": -2
+          },
+          "personality": {
+            "grandiosity": 5,
+            "inward": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The pass-through provisions just happen to favor exactly your kind of business. The donors are thrilled; the watchdogs start counting your savings out loud."
         }
       ]
     },
@@ -1586,7 +1717,9 @@
       ],
       "portrait": "president",
       "requires": {
-        "flags": [],
+        "flags": [
+          "court_packer"
+        ],
         "notFlags": [],
         "meters": {}
       },
@@ -1641,6 +1774,32 @@
             }
           ],
           "outcome": "You get your justice without personally torching the accuser. The legacy lands; the collateral damage is smaller."
+        },
+        {
+          "id": "demand_fbi_loyalty_probe",
+          "text": "Lean on a limited FBI probe and signal exactly the result you expect.",
+          "effects": {
+            "power": 7,
+            "loyalty": 8,
+            "reputation": -6,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 4
+          },
+          "setFlags": [
+            "loyalty_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You get the quick, narrow inquiry you wanted and the confirmation holds. Everyone learns the bureau can be steered when the stakes are your justice."
         }
       ]
     },
@@ -1661,7 +1820,9 @@
       ],
       "portrait": "president",
       "requires": {
-        "flags": [],
+        "flags": [
+          "nativist_turn"
+        ],
         "notFlags": [],
         "meters": {}
       },
@@ -1681,7 +1842,9 @@
             "ideology": 8,
             "outward": 9
           },
-          "setFlags": [],
+          "setFlags": [
+            "nativist_turn"
+          ],
           "clearFlags": [],
           "ripples": [
             {
@@ -1714,6 +1877,30 @@
             }
           ],
           "outcome": "You retreat under fire and brand the reversal as your own mercy. The base feels the climbdown, but the children stop being a daily headline."
+        },
+        {
+          "id": "blame_obama_era",
+          "text": "Falsely claim it's all an Obama-era law you're merely enforcing.",
+          "effects": {
+            "loyalty": 6,
+            "reputation": -9,
+            "heat": 8,
+            "power": 2
+          },
+          "personality": {
+            "outward": 7,
+            "grandiosity": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You pin your own policy on a predecessor and dare the fact-checkers to keep up. The base accepts the alibi; the paper trail says otherwise."
         }
       ]
     },
@@ -1788,6 +1975,32 @@
             }
           ],
           "outcome": "You float a deal and sound, briefly, like a president who governs. The base is wary, but a few bipartisan wins look possible — for now."
+        },
+        {
+          "id": "preempt_oversight",
+          "text": "Brace for war — pledge to stonewall every subpoena the new House sends.",
+          "effects": {
+            "power": 7,
+            "loyalty": 9,
+            "reputation": -8,
+            "heat": 9
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 7
+          },
+          "setFlags": [
+            "loyalty_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You declare total resistance to oversight before the first subpoena lands. The base wants the fight; the courts and the calendar fill with it for two years."
         }
       ]
     },
@@ -1807,7 +2020,9 @@
       ],
       "portrait": "president",
       "requires": {
-        "flags": [],
+        "flags": [
+          "loyalty_machine"
+        ],
         "notFlags": [],
         "meters": {}
       },
@@ -1861,6 +2076,32 @@
             }
           ],
           "outcome": "You let the lawyers' framing stand and move on. Starved of your outrage, the story actually fades faster than your enemies hoped."
+        },
+        {
+          "id": "go_after_investigators",
+          "text": "Flip the script — investigate the investigators and demand prosecutions.",
+          "effects": {
+            "power": 9,
+            "loyalty": 10,
+            "reputation": -9,
+            "heat": 10
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 8
+          },
+          "setFlags": [
+            "loyalty_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn the report into a weapon against the people who wrote it. The base wants heads on pikes, and you start naming them — a habit that will define what comes next."
         }
       ]
     },
@@ -1880,9 +2121,13 @@
       ],
       "portrait": "president",
       "requires": {
-        "flags": [],
+        "flags": [
+          "loyalty_machine"
+        ],
         "notFlags": [],
-        "meters": {}
+        "meters": {
+          "heat": ">=40"
+        }
       },
       "weight": 12,
       "repeatable": false,
@@ -1929,6 +2174,32 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "The defense is lawyerly and bloodless, and you still get acquitted — but the base wanted a brawler, not a defendant."
+        },
+        {
+          "id": "perfect_call_offensive",
+          "text": "Release the call summary yourself and run on 'a perfect phone call.'",
+          "effects": {
+            "power": 7,
+            "loyalty": 9,
+            "reputation": -7,
+            "heat": 8
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 8
+          },
+          "setFlags": [
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You publish the summary, brand it 'perfect,' and turn impeachment into a rally cry. Acquittal becomes vindication, and the merch sells the phrase by the truckload."
         }
       ]
     },
@@ -1953,7 +2224,10 @@
           "maga_base"
         ],
         "notFlags": [],
-        "meters": {}
+        "meters": {},
+        "personality": {
+          "grandiosity": ">=20"
+        }
       },
       "weight": 8,
       "repeatable": false,
@@ -2005,6 +2279,30 @@
             }
           ],
           "outcome": "You steady the postwar order instead of cracking it, and democratic capitals breathe easier. The autocrats feel a door close that they hoped you'd hold open."
+        },
+        {
+          "id": "transactional_flattery",
+          "text": "Skip ideology — flatter every strongman privately and extract deals.",
+          "effects": {
+            "money": 12000000,
+            "power": 6,
+            "reputation": -5,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "inward": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You treat foreign policy like a deal sheet — compliments for concessions, no movement required. Some bargains pay off; allies never quite know where you stand."
         }
       ]
     },
@@ -2027,7 +2325,10 @@
       "requires": {
         "flags": [],
         "notFlags": [],
-        "meters": {}
+        "meters": {},
+        "personality": {
+          "grandiosity": ">=25"
+        }
       },
       "weight": 10,
       "repeatable": false,
@@ -2082,6 +2383,30 @@
             }
           ],
           "outcome": "You hold your fire and squeeze instead. The hawks grumble that you blinked, but no war erupts and no fuse is lit."
+        },
+        {
+          "id": "telegraph_then_strike",
+          "text": "Leak the threat first to look tough, then hit a lesser target.",
+          "effects": {
+            "power": 5,
+            "loyalty": 4,
+            "reputation": -4,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You broadcast the menace for the cameras, then settle for a smaller blow. Tehran reads the bluff, and the hawks and doves both come away half-satisfied."
         }
       ]
     },
@@ -2163,6 +2488,31 @@
             }
           ],
           "outcome": "You put American science at the center of a planetary effort, and the world remembers who steadied it. The base calls it surrender; history may call it leadership — and somewhere, the scientists who watch for stranger signals than viruses take note."
+        },
+        {
+          "id": "hoard_supplies",
+          "text": "Outbid allies for masks and ventilators — America first, supplies first.",
+          "effects": {
+            "loyalty": 6,
+            "reputation": -7,
+            "heat": 6,
+            "money": -8000000
+          },
+          "personality": {
+            "ideology": 6,
+            "outward": 5,
+            "inward": 4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You commandeer the global supply chain and divert shipments onto American tarmacs. The base cheers the muscle; allied capitals remember being outbid for ventilators."
         }
       ]
     },
@@ -2341,6 +2691,30 @@
             }
           ],
           "outcome": "You put your name on the relief checks and aim help at kitchen tables, not just trading desks. The optics cut across the usual lines, and even skeptics admit it helped."
+        },
+        {
+          "id": "attack_the_fed_chair",
+          "text": "Blame the Fed chair you appointed and demand negative rates publicly.",
+          "effects": {
+            "power": 4,
+            "reputation": -6,
+            "heat": 7,
+            "loyalty": 3
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 7
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn on your own central banker and bully him on the timeline live. Markets twitch at the spectacle; the independence of the Fed takes another public dent."
         }
       ]
     },
@@ -2463,8 +2837,12 @@
       ],
       "portrait": "president",
       "requires": {
-        "flags": [],
-        "notFlags": [],
+        "flags": [
+          "maga_base"
+        ],
+        "notFlags": [
+          "walked_away"
+        ],
         "meters": {}
       },
       "weight": 14,

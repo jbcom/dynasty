@@ -131,9 +131,10 @@ export function replay(
 }
 
 /**
- * Drive a full autonomous playthrough from a seed by always taking the first
- * eligible choice of each picked event. Used by tests and as a baseline AI.
- * Terminates on an end state or when no event is eligible anywhere.
+ * Drive a full autonomous playthrough from a seed by taking a SEEDED eligible
+ * choice at each picked event (so different seeds explore different branches —
+ * a baseline random-AI / divergence probe). Deterministic per seed. Terminates
+ * on an end state or when no event is eligible anywhere.
  */
 export function autoPlaythrough(
   content: Content,
@@ -156,8 +157,9 @@ export function autoPlaythrough(
       state = advanced;
       continue;
     }
-    const choice = event.choices.find((c) => !c.requires || eligibleChoice(state, c));
-    if (!choice) break;
+    const eligible = event.choices.filter((c) => !c.requires || eligibleChoice(state, c));
+    if (eligible.length === 0) break;
+    const choice = rng.fork(`choose:${i}`).pick(eligible);
     state = applyChoice(content, state, event, choice.id, rng).state;
   }
   return state;

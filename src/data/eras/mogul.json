@@ -176,7 +176,8 @@
             "inward": 4
           },
           "setFlags": [
-            "settled_quietly"
+            "settled_quietly",
+            "fred_exposed"
           ],
           "clearFlags": [],
           "ripples": [
@@ -186,7 +187,7 @@
               "polarity": 1
             }
           ],
-          "outcome": "The lawyers paper it over, the policy changes, the headlines fade. Cohn shrugs and finds another client. You took the soft road."
+          "outcome": "The lawyers paper it over, the policy changes, the headlines fade. Cohn shrugs and finds another client. You took the soft road, and without his ferocity the government keeps digging into Fred's old practices."
         },
         {
           "id": "blame_fred",
@@ -203,7 +204,8 @@
             "ideology": 2
           },
           "setFlags": [
-            "counterpunch_doctrine"
+            "counterpunch_doctrine",
+            "fred_exposed"
           ],
           "clearFlags": [],
           "ripples": [
@@ -213,7 +215,364 @@
               "polarity": -1
             }
           ],
-          "outcome": "You distance yourself from the old man's practices in public. Fred says nothing. The family ledger remembers."
+          "outcome": "You distance yourself from the old man's practices in public. Fred says nothing, but you have left him alone to absorb the government's case. The family ledger remembers."
+        }
+      ]
+    },
+    {
+      "id": "ev_doj_case_collapses",
+      "era": "mogul",
+      "year": 1974,
+      "title": "The Reckoning Lands on Fred",
+      "scene": "The discrimination case metastasizes. Investigators pry open Trump Management's books and find the FHA-era pattern that built the rental fortune in the first place: doormen coding Black applicants' files with a 'C,' superintendents quoting phantom vacancies. Prosecutors now talk not of a consent decree but of indicting Fred himself, freezing the cash flow that quietly underwrites your every leap. If the old man falls, the floor beneath you falls with him.",
+      "researchNote": "The 1973 U.S. v. Trump Management suit documented practices like marking Black applicants' applications with a 'C' for 'colored' and falsely telling them no units were available; Fred Trump's outer-borough rental empire was the seed capital that financed Donald's later ventures, so a catastrophic legal outcome would have removed the foundation of the entire empire.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "realestate",
+        "family",
+        "heat",
+        "power"
+      ],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": [
+          "fred_exposed"
+        ],
+        "notFlags": [
+          "cohn_mentor",
+          "seized_control"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 17,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "let_it_burn",
+          "text": "Stay clear and let Fred face it alone.",
+          "effects": {
+            "money": -45,
+            "power": -8,
+            "loyalty": -12,
+            "reputation": -10,
+            "heat": 8
+          },
+          "personality": {
+            "inward": 6,
+            "ideology": 3
+          },
+          "setFlags": [
+            "fred_indicted"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": -1
+            },
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You keep your distance and the case devours the old man. Fred is indicted, the rental fortune bled white by fines and shame. The seed capital is gone, and with it the only ladder you ever had to Manhattan."
+        },
+        {
+          "id": "seize_the_firm",
+          "text": "Wrest control of Trump Management to save the company.",
+          "effects": {
+            "money": -25,
+            "power": 12,
+            "loyalty": 4,
+            "reputation": -4,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 5,
+            "ideology": 4
+          },
+          "setFlags": [
+            "fred_indicted",
+            "seized_control"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You shove the old man aside, take the title, and rebuild the firm's defense around yourself. Fred is indicted but the company survives in your hands. The seed capital is salvaged, scorched but intact, and the rise continues."
+        },
+        {
+          "id": "bring_in_cohn_late",
+          "text": "Belatedly hire Roy Cohn to counterattack the government.",
+          "effects": {
+            "money": -35,
+            "power": 11,
+            "reputation": -6,
+            "heat": 12
+          },
+          "personality": {
+            "ideology": 10,
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "seized_control",
+            "cohn_mentor",
+            "counterpunch_doctrine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": -1
+            },
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You find Cohn late but in time. He floods the case with countersuits and venom until the government settles for a face-saving decree. Fred's name survives, the fortune holds, and you have taken the reins from the inside."
+        }
+      ]
+    },
+    {
+      "id": "ev_settle_for_enough",
+      "era": "mogul",
+      "year": 1976,
+      "title": "Settle for Enough",
+      "scene": "The rent rolls come in like clockwork. Fred's middle-class buildings in Brooklyn and Queens throw off a steady, unglamorous fortune, and Ivana wants a real home, real children, a life. Manhattan glitters across the river, but the climb means debt, lawyers, and never being home. You could simply run what your father built, well and quietly, and call it enough.",
+      "researchNote": "Fred Trump's outer-borough rental business was genuinely profitable and stable; Donald's pivot to high-leverage Manhattan and Atlantic City ventures was a choice to chase prestige and scale rather than a financial necessity, making a contented, lower-ambition succession a plausible alternate life.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "realestate",
+        "family"
+      ],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": [
+          "fathers_lessons",
+          "married_ivana"
+        ],
+        "notFlags": [
+          "manhattan_ambition",
+          "commodore_deal",
+          "casino_empire",
+          "fred_indicted"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 15,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "run_the_rentals_well",
+          "text": "Run the rental business well and build a quiet life.",
+          "effects": {
+            "money": 35,
+            "power": 2,
+            "reputation": 4,
+            "loyalty": 10,
+            "health": 4
+          },
+          "personality": {
+            "grandiosity": -12,
+            "inward": 8
+          },
+          "setFlags": [
+            "content_heir",
+            "first_marriage_intact"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You settle into the work your father knew: solid buildings, paid-up tenants, a marriage that lasts and children who know your face. No skyline carries your name, and you find you do not miss it."
+        },
+        {
+          "id": "modest_expansion",
+          "text": "Grow the rentals modestly, no Manhattan, no debt.",
+          "effects": {
+            "money": 45,
+            "power": 4,
+            "reputation": 3,
+            "loyalty": 5,
+            "health": 2
+          },
+          "personality": {
+            "grandiosity": -9,
+            "inward": 6,
+            "ideology": 2
+          },
+          "setFlags": [
+            "content_heir",
+            "first_marriage_intact"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You add a few buildings on the same cautious model Fred taught you, no banks circling, no headlines. Wealthy but not insanely so, you become the steady steward of a real, durable business."
+        },
+        {
+          "id": "itch_for_more",
+          "text": "It is not enough. Set your eyes across the river.",
+          "effects": {
+            "money": -15,
+            "power": 7,
+            "reputation": 5,
+            "loyalty": -6
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 6
+          },
+          "setFlags": [
+            "manhattan_ambition"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The rent rolls feel like a cage. You turn your back on 'enough' and point yourself at Manhattan, where the debt is bigger and so is the name. Ivana sees the life she wanted recede."
+        }
+      ]
+    },
+    {
+      "id": "ev_outer_borough_steward",
+      "era": "mogul",
+      "year": 1980,
+      "title": "Steward of the Outer Boroughs",
+      "scene": "Years pass and the contented path holds. You sit atop a clean, debt-free rental empire spanning Brooklyn, Queens, and Staten Island, the same machine Fred built and you kept humming. Bankers court you for grander schemes; reporters do not call at all. A son is old enough now to learn the rent business, just as you once did from a clipboard and a list of late payers.",
+      "researchNote": "Fred Trump ran Trump Management as a stable, family-succession business for decades; a Donald who stayed in that model would have remained a wealthy but obscure outer-borough landlord, eventually handing the firm to the next generation rather than pursuing celebrity and Manhattan towers.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "realestate",
+        "family"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "content_heir"
+        ],
+        "notFlags": [
+          "manhattan_ambition",
+          "commodore_deal",
+          "casino_empire",
+          "overleveraged"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "groom_the_heir",
+          "text": "Groom your son to inherit the firm, just as Fred did.",
+          "effects": {
+            "money": 30,
+            "power": 3,
+            "reputation": 4,
+            "loyalty": 12,
+            "health": 3
+          },
+          "personality": {
+            "grandiosity": -8,
+            "inward": 7
+          },
+          "setFlags": [
+            "first_marriage_intact"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hand the clipboard to the next Trump and watch him learn the trade. The cycle closes the way it began: quiet, solvent, and entirely out of the headlines. This life simply, peaceably, holds."
+        },
+        {
+          "id": "stay_the_course",
+          "text": "Keep the books clean and the ambitions small.",
+          "effects": {
+            "money": 35,
+            "power": 2,
+            "reputation": 3,
+            "loyalty": 6,
+            "health": 2
+          },
+          "personality": {
+            "grandiosity": -7,
+            "inward": 6
+          },
+          "setFlags": [
+            "first_marriage_intact"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "No towers, no casinos, no junk bonds. Just a steady fortune and a steady home. The men who chased the skyline will be famous and ruined; you will be neither."
+        },
+        {
+          "id": "late_temptation",
+          "text": "Finally take a banker's call about a Manhattan deal.",
+          "effects": {
+            "money": -10,
+            "power": 8,
+            "reputation": 6,
+            "loyalty": -8
+          },
+          "personality": {
+            "grandiosity": 11,
+            "outward": 6
+          },
+          "setFlags": [
+            "manhattan_ambition"
+          ],
+          "clearFlags": [
+            "content_heir"
+          ],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "One phone call and the quiet life cracks open. You let Manhattan back in, and the contented steward dissolves into the man who always wanted more. The old peace will not return."
         }
       ]
     },

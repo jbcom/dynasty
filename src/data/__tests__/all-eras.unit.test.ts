@@ -32,7 +32,7 @@ function realContent() {
 describe("full authored content", () => {
   it("builds all 10 eras with cross-reference integrity", () => {
     const content = realContent();
-    expect(content.eras).toHaveLength(12);
+    expect(content.eras).toHaveLength(13);
     // Each era has an events pool with at least 7 events.
     for (const era of content.eras) {
       const pool = content.eventsByEra.get(era.id) ?? [];
@@ -72,16 +72,24 @@ describe("full authored content", () => {
     }
   });
 
-  it("an auto-playthrough traverses to a real, data-driven end state", () => {
+  it("auto-playthroughs always reach a real, data-driven end state with divergent outcomes", () => {
     const content = realContent();
-    const final = autoPlaythrough(content, "content-smoke", initState, createRng);
-    expect(final.end).not.toBeNull();
-    // The end kind must be one of the authored endings (data-driven, not the
-    // old hardcoded trio).
     const kinds = new Set(content.endings.map((e) => e.kind));
-    expect(kinds.has(final.end?.kind ?? "")).toBe(true);
-    // It should have moved through multiple eras and recorded history.
-    expect(final.history.length).toBeGreaterThan(5);
+    // Across many seeds, every run must terminate in an authored ending. The
+    // outcomes must DIVERGE (proving the branching arc isn't a single corridor) —
+    // a naive first-choice bot legitimately hits early-outs too (the "every era
+    // can end" rule), so we assert spread of endings, not depth.
+    const reached = new Set<string>();
+    for (let i = 0; i < 24; i++) {
+      const final = autoPlaythrough(content, `smoke-${i}`, initState, createRng);
+      expect(final.end, `seed smoke-${i} never ended`).not.toBeNull();
+      expect(kinds.has(final.end?.kind ?? ""), `seed smoke-${i} kind ${final.end?.kind}`).toBe(
+        true,
+      );
+      if (final.end?.endingId) reached.add(final.end.endingId);
+    }
+    // At least two distinct endings across the seed sweep → genuine divergence.
+    expect(reached.size).toBeGreaterThanOrEqual(2);
   });
 
   it("reports ending flags not yet wired into content (I3 tracker)", () => {

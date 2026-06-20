@@ -315,6 +315,26 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "The old-money crowd nods approvingly. You have married well, and the world is watching."
+        },
+        {
+          "id": "sign_a_prenup_show",
+          "text": "Make the airtight prenup itself part of the dealmaker mystique",
+          "effects": {
+            "money": 30000,
+            "reputation": 2,
+            "power": 4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "inward": 4
+          },
+          "setFlags": [
+            "melania_married",
+            "dealmaker_persona"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You let it be known that even love gets a contract. The tabloids run with 'ruthless romantic,' and the legend of the man who never loses a negotiation grows."
         }
       ]
     },
@@ -563,6 +583,33 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "You cash the check and leave the theatrics to the professionals. Memorable, but you didn't sell it."
+        },
+        {
+          "id": "study_mcmahon",
+          "text": "Study McMahon's kayfabe playbook — heroes, villains, a worked crowd",
+          "effects": {
+            "money": 15000,
+            "power": 6,
+            "reputation": 2
+          },
+          "personality": {
+            "outward": 6,
+            "grandiosity": 4,
+            "inward": 4
+          },
+          "setFlags": [
+            "wrestling_persona",
+            "showman_instinct"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_wwe_hall_of_fame",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You watch how McMahon scripts emotion and sells a fake feud as real. The mechanics of working a crowd lodge in your mind for later."
         }
       ]
     },
@@ -628,6 +675,34 @@
             }
           ],
           "outcome": "Better to sell the name than to own the risk. The collapse confirms a strategy you'll lean on for years."
+        },
+        {
+          "id": "rage_at_the_press",
+          "text": "Go on TV and attack the reporters for daring to question your timing",
+          "effects": {
+            "money": -5000,
+            "reputation": -6,
+            "heat": 8,
+            "power": 4
+          },
+          "personality": {
+            "outward": 8,
+            "ideology": 4,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "deflect_blame",
+            "read_the_anger"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Instead of explaining the failure, you put the press on trial for reporting it. The performance bombs with critics and thrills the people who hate the media too."
         }
       ]
     },
@@ -686,6 +761,31 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "Slower deals, cleaner reputation. The premium projects bearing your name actually get finished."
+        },
+        {
+          "id": "build_brand_machine",
+          "text": "Spin the licensing model into a full consumer-goods juggernaut",
+          "effects": {
+            "money": 90000,
+            "reputation": -2,
+            "power": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 4
+          },
+          "setFlags": [
+            "brand_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_trump_consumer_goods",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Towers are just the start. You decide the name belongs on everything a customer can hold, and order the machine spun up to stamp it on anything that ships."
         }
       ]
     },
@@ -748,6 +848,32 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "Fewer flops, more dignity. The ties sell steadily and nobody laughs at a discontinued vodka."
+        },
+        {
+          "id": "spin_failures_as_proof",
+          "text": "Reframe every flop on TV as proof the name is bigger than any product",
+          "effects": {
+            "money": 30000,
+            "reputation": 2,
+            "power": 4
+          },
+          "personality": {
+            "outward": 8,
+            "grandiosity": 10
+          },
+          "setFlags": [
+            "overlicensed",
+            "showman_instinct"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_reality_tv_culture",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Trump Vodka dies; you call it a marketing triumph anyway. You learn that confidently narrating a loss as a win is itself a kind of product."
         }
       ]
     },
@@ -810,6 +936,31 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "It costs more and makes fewer headlines, but the relationship survives and the tower stays yours."
+        },
+        {
+          "id": "convert_to_licensing",
+          "text": "Quietly offload the risk and convert unsold floors into licensed units",
+          "effects": {
+            "money": 40000,
+            "reputation": -2,
+            "heat": 2
+          },
+          "personality": {
+            "grandiosity": 2,
+            "inward": 4
+          },
+          "setFlags": [
+            "risk_averse_turn"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_licensing_empire",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Why hold the bag when you can sell the brand? You shift the downside onto buyers and partners and pocket fees while the market figures itself out."
         }
       ]
     },
@@ -953,6 +1104,33 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "You keep your bipartisan friends and your dinner invitations. Safe, respectable, and forgotten by morning."
+        },
+        {
+          "id": "seed_the_doubt",
+          "text": "Start whispering questions about who this man 'really' is",
+          "effects": {
+            "power": 6,
+            "reputation": -8,
+            "heat": 8
+          },
+          "personality": {
+            "ideology": 8,
+            "outward": 6,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "proto_maga",
+            "read_the_anger"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_birther_campaign",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You don't accuse — yet. You just ask questions, leaving the ugliest answer for the audience to supply. The seed you plant tonight will grow into a campaign."
         }
       ]
     },
@@ -1017,6 +1195,33 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "You keep the corporate sponsors comfortable. The movement marches on without you — for now."
+        },
+        {
+          "id": "fund_quietly",
+          "text": "Bankroll a few activists quietly while keeping your name off it",
+          "effects": {
+            "money": -30000,
+            "power": 8,
+            "loyalty": 4,
+            "heat": 2
+          },
+          "personality": {
+            "ideology": 6,
+            "inward": 6
+          },
+          "setFlags": [
+            "proto_maga",
+            "movement_financier"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You buy goodwill in the grassroots without spending a drop of public capital. When the movement needs a face, the people you funded will remember who paid."
         }
       ]
     },
@@ -1081,6 +1286,33 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "It stays on-message and on-brand. Effective marketing, but it never crackles the way your own voice would."
+        },
+        {
+          "id": "pick_fights_online",
+          "text": "Use it to pick public feuds with celebrities and rivals",
+          "effects": {
+            "power": 6,
+            "reputation": -4,
+            "heat": 6,
+            "loyalty": 4
+          },
+          "personality": {
+            "outward": 10,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "twitter_voice",
+            "feud_engine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_social_media_rise",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Every feud trends; every trend feeds the account. You discover that picking the right enemy in public is the cheapest publicity money can't buy."
         }
       ]
     },
@@ -1245,6 +1477,35 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "Polite applause, no headlines. You keep your options open and your ambitions quiet."
+        },
+        {
+          "id": "attack_the_party",
+          "text": "Trash the GOP's own leaders as weak losers to the activist crowd",
+          "effects": {
+            "power": 8,
+            "reputation": -8,
+            "heat": 10,
+            "loyalty": 6
+          },
+          "personality": {
+            "ideology": 10,
+            "outward": 10,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "proto_maga",
+            "cpac_debut",
+            "party_insurgent"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You don't court the establishment — you run against it from inside its own conference. The donors bristle; the base roars for a man who'll burn his own side down."
         }
       ]
     },
@@ -1313,6 +1574,25 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "Foreign-policy elites cringe at the bluntness. The base loves a man who talks about winning and taking, not nuance and process."
+        },
+        {
+          "id": "stay_out_of_it",
+          "text": "Dismiss it all as none of America's business and change the subject",
+          "effects": {
+            "reputation": 4,
+            "money": 10000
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": 6,
+            "outward": -4
+          },
+          "setFlags": [
+            "isolationist_streak"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You wave the whole region off — let them sort out their own mess. It is a smaller stance, but it plants the seed of an 'America first' instinct."
         }
       ]
     },
@@ -1380,6 +1660,34 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "You play the unapologetic rich guy who calls them lazy. It earns jeers from the camp and cheers from people who can't stand it."
+        },
+        {
+          "id": "steal_the_message",
+          "text": "Co-opt the anti-elite anger and aim it at Washington, not Wall Street",
+          "effects": {
+            "power": 10,
+            "reputation": -4,
+            "heat": 6,
+            "loyalty": 6
+          },
+          "personality": {
+            "ideology": 8,
+            "outward": 8,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "proto_maga",
+            "read_the_anger"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You take the left's fury at the rich and quietly redirect it at the political class instead. A billionaire railing against elites — the contradiction only makes it land harder."
         }
       ]
     },
@@ -1543,6 +1851,35 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "The grown-ups approve. The crowd that craves a brawler shrugs and waits for someone willing to throw the punch."
+        },
+        {
+          "id": "blame_the_party",
+          "text": "Tweet that the GOP lost because it was too soft, not too extreme",
+          "effects": {
+            "power": 10,
+            "reputation": -6,
+            "heat": 8,
+            "loyalty": 8
+          },
+          "personality": {
+            "ideology": 10,
+            "outward": 8,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "proto_maga",
+            "party_insurgent",
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "While pundits say Romney was too harsh, you insist he wasn't harsh enough. The base, starved for a fighter, marks you as the only Republican who gets it."
         }
       ]
     },
@@ -1803,6 +2140,25 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "You see a nation sorting itself into two hostile tribes. A man who learns to speak fluently to one of them could own it."
+        },
+        {
+          "id": "stay_out_of_politics",
+          "text": "Ignore the whole circus and keep your focus on ratings and deals",
+          "effects": {
+            "money": 40000,
+            "reputation": 4
+          },
+          "personality": {
+            "ideology": -4,
+            "inward": 6,
+            "outward": -2
+          },
+          "setFlags": [
+            "apolitical_streak"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Politics is for losers who can't draw an audience. You keep your eyes on the only contest that pays — the one for attention — and let Washington bore itself."
         }
       ]
     },
@@ -1862,6 +2218,33 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "A well-timed donation, well-photographed, buys a wave of goodwill. You learn generosity is most valuable when everyone is watching."
+        },
+        {
+          "id": "blame_the_government",
+          "text": "Go on TV and savage Washington's incompetence to anyone who'll listen",
+          "effects": {
+            "power": 6,
+            "reputation": -2,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 6,
+            "outward": 8,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "read_the_anger",
+            "anti_government_voice"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hammer the feds as bumbling and useless, and the line lands. People are aching to hear someone say government is broken, and you happily oblige."
         }
       ]
     },
@@ -1930,6 +2313,33 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "You position the brand as gold-plated class amid the chaos. Respectable — but you cede the raw, addictive energy to others."
+        },
+        {
+          "id": "become_the_villain",
+          "text": "Lean into being the cast's heavy — the boss everyone loves to hate",
+          "effects": {
+            "money": 30000,
+            "reputation": -4,
+            "power": 6,
+            "loyalty": 4
+          },
+          "personality": {
+            "outward": 10,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "showman_instinct",
+            "wrestling_persona"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_wwe_battle_billionaires",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You decide a heel draws bigger numbers than a hero, and play the man America loves to hate. The hate is just attention wearing a frown — and attention always pays."
         }
       ]
     },
@@ -1998,6 +2408,34 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "Effective, profitable, and forgettable. You sell rooms and ratings while the political megaphone sits unused in your pocket."
+        },
+        {
+          "id": "build_data_operation",
+          "text": "Hire people to study what spreads and engineer your posts to go viral",
+          "effects": {
+            "money": -20000,
+            "power": 10,
+            "loyalty": 6,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": 6,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "proto_maga",
+            "viral_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_grievance_machine",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You treat the feed like a laboratory, testing which words detonate and which die. The fury isn't accidental anymore — it's manufactured, measured, and aimed."
         }
       ]
     },
@@ -2067,6 +2505,34 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "A fun night, a gold ring, a good story. You take the trophy and the applause and leave the deeper lessons on the mat."
+        },
+        {
+          "id": "recruit_the_wrestling_crowd",
+          "text": "Court the wrestling fanbase directly as future political supporters",
+          "effects": {
+            "power": 10,
+            "loyalty": 10,
+            "reputation": -4,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 6,
+            "outward": 8,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "proto_maga",
+            "showman_instinct"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You look out at seventy thousand screaming fans and see not a crowd but an electorate. The same people who buy the kayfabe will buy the campaign, and you start speaking to them directly."
         }
       ]
     }

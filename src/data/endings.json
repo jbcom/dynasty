@@ -7,7 +7,94 @@
       "reason": "Your body finally gives out. The empire outlives the man.",
       "priority": 90,
       "tier": "endgame-bad",
-      "when": { "meters": { "health": "<=0" } }
+      "when": {
+        "meters": {
+          "health": "<=0"
+        }
+      }
+    },
+    {
+      "id": "end_line_failed",
+      "kind": "origins",
+      "title": "The Dynasty That Never Was",
+      "reason": "The Drumpf line never takes root in America — no fortune, no Queens, no 1946 birth. History closes over the family before it ever begins. There is no Donald.",
+      "priority": 99,
+      "tier": "early-bad",
+      "when": { "flags": ["line_failed"], "maxEraOrder": 0 }
+    },
+    {
+      "id": "end_childhood_tragedy",
+      "kind": "death",
+      "title": "A Life Cut Short",
+      "reason": "A reckless boyhood dare ends the story before it begins. The Trump name carries on without you.",
+      "priority": 98,
+      "tier": "early-bad",
+      "when": {
+        "flags": [
+          "reckless_youth"
+        ],
+        "meters": {
+          "health": "<=20"
+        },
+        "maxEraOrder": 1
+      }
+    },
+    {
+      "id": "end_military_washout",
+      "kind": "obscurity",
+      "title": "Washed Out",
+      "reason": "Expelled and disowned, you drift into a small, anonymous life far from any tower.",
+      "priority": 72,
+      "tier": "early-bad",
+      "when": {
+        "flags": [
+          "disgraced_cadet"
+        ],
+        "notFlags": [
+          "fathers_lessons"
+        ],
+        "maxEraOrder": 2
+      }
+    },
+    {
+      "id": "end_no_inheritance",
+      "kind": "obscurity",
+      "title": "No Empire to Inherit",
+      "reason": "The discrimination cases stuck and your father was indicted; the rental fortune is seized in fines and shame. With no seed capital, there is no Manhattan, no tower, no empire — just a working life and a name nobody fears.",
+      "priority": 86,
+      "tier": "early-bad",
+      "when": {
+        "flags": [
+          "fred_indicted"
+        ],
+        "notFlags": [
+          "seized_control"
+        ],
+        "maxEraOrder": 3
+      }
+    },
+    {
+      "id": "end_quiet_succession",
+      "kind": "contentment",
+      "title": "Quiet Succession",
+      "reason": "You never reached for more than enough. A comfortable old CEO of the outer-borough rentals — wealthy but not insanely so, still married to your first wife — you hand the business to your son, just as your father handed it to you. The story simply, peaceably, ends.",
+      "priority": 80,
+      "tier": "early-good",
+      "when": {
+        "flags": [
+          "content_heir",
+          "first_marriage_intact"
+        ],
+        "notFlags": [
+          "manhattan_ambition",
+          "overleveraged"
+        ],
+        "personality": {
+          "grandiosity": "<=20"
+        },
+        "minEraOrder": 2,
+        "maxEraOrder": 4
+      }
     },
     {
       "id": "end_assassination",
@@ -16,7 +103,15 @@
       "reason": "A bullet finds you at the height of your notoriety. The crowd screams.",
       "priority": 95,
       "tier": "endgame-bad",
-      "when": { "flags": ["assassination_target"], "meters": { "heat": ">=80", "health": "<=35" } }
+      "when": {
+        "flags": [
+          "assassination_target"
+        ],
+        "meters": {
+          "heat": ">=80",
+          "health": "<=35"
+        }
+      }
     },
     {
       "id": "end_coup",
@@ -25,7 +120,12 @@
       "reason": "Investigations close in and your inner circle abandons you.",
       "priority": 80,
       "tier": "endgame-bad",
-      "when": { "meters": { "heat": ">=90", "loyalty": "<=12" } }
+      "when": {
+        "meters": {
+          "heat": ">=90",
+          "loyalty": "<=12"
+        }
+      }
     },
     {
       "id": "end_jail",
@@ -34,7 +134,15 @@
       "reason": "The cases finally stick. The cell door closes on the most famous man alive.",
       "priority": 78,
       "tier": "endgame-bad",
-      "when": { "flags": ["felony_jeopardy"], "meters": { "heat": ">=75", "power": "<=25" } }
+      "when": {
+        "flags": [
+          "felony_jeopardy"
+        ],
+        "meters": {
+          "heat": ">=75",
+          "power": "<=25"
+        }
+      }
     },
     {
       "id": "end_bankruptcy",
@@ -43,7 +151,15 @@
       "reason": "The debt avalanche buries you. The name comes off the buildings.",
       "priority": 70,
       "tier": "early-bad",
-      "when": { "flags": ["overleveraged"], "meters": { "money": "<=0" }, "maxEraOrder": 4 }
+      "when": {
+        "flags": [
+          "overleveraged"
+        ],
+        "meters": {
+          "money": "<=0"
+        },
+        "maxEraOrder": 5
+      }
     },
     {
       "id": "end_early_obscurity",
@@ -52,7 +168,15 @@
       "reason": "You step off the stage early. History barely records your name.",
       "priority": 30,
       "tier": "early-good",
-      "when": { "flags": ["walked_away"], "meters": { "health": ">=60" }, "maxEraOrder": 3 }
+      "when": {
+        "flags": [
+          "walked_away"
+        ],
+        "meters": {
+          "health": ">=60"
+        },
+        "maxEraOrder": 4
+      }
     },
     {
       "id": "end_communist_utopia",
@@ -62,9 +186,14 @@
       "priority": 88,
       "tier": "endgame-good",
       "when": {
-        "personality": { "ideology": "<=-60", "grandiosity": ">=40" },
-        "meters": { "reputation": ">=60" },
-        "minEraOrder": 6
+        "personality": {
+          "ideology": "<=-60",
+          "grandiosity": ">=40"
+        },
+        "meters": {
+          "reputation": ">=60"
+        },
+        "minEraOrder": 7
       }
     },
     {
@@ -75,9 +204,14 @@
       "priority": 88,
       "tier": "endgame-bad",
       "when": {
-        "personality": { "ideology": ">=60", "grandiosity": ">=80" },
-        "meters": { "power": ">=85" },
-        "minEraOrder": 6
+        "personality": {
+          "ideology": ">=60",
+          "grandiosity": ">=80"
+        },
+        "meters": {
+          "power": ">=85"
+        },
+        "minEraOrder": 7
       }
     },
     {
@@ -87,7 +221,12 @@
       "reason": "Immortal master of Earth and the first Martian city — a civilization spanning two worlds.",
       "priority": 85,
       "tier": "endgame-good",
-      "when": { "flags": ["two_world_patriarch"], "minEraOrder": 9 }
+      "when": {
+        "flags": [
+          "two_world_patriarch"
+        ],
+        "minEraOrder": 10
+      }
     },
     {
       "id": "end_earth_utopia",
@@ -97,10 +236,17 @@
       "priority": 60,
       "tier": "endgame-good",
       "when": {
-        "notFlags": ["mars_program"],
-        "personality": { "ideology": "<=-40", "outward": "<=-30" },
-        "meters": { "reputation": ">=55" },
-        "minEraOrder": 8
+        "notFlags": [
+          "mars_program"
+        ],
+        "personality": {
+          "ideology": "<=-40",
+          "outward": "<=-30"
+        },
+        "meters": {
+          "reputation": ">=55"
+        },
+        "minEraOrder": 9
       }
     },
     {
@@ -111,10 +257,17 @@
       "priority": 60,
       "tier": "endgame-bad",
       "when": {
-        "notFlags": ["mars_program"],
-        "personality": { "grandiosity": ">=80", "outward": ">=40" },
-        "meters": { "power": ">=80" },
-        "minEraOrder": 8
+        "notFlags": [
+          "mars_program"
+        ],
+        "personality": {
+          "grandiosity": ">=80",
+          "outward": ">=40"
+        },
+        "meters": {
+          "power": ">=80"
+        },
+        "minEraOrder": 9
       }
     },
     {
@@ -125,7 +278,12 @@
       "priority": 92,
       "secret": true,
       "tier": "apex",
-      "when": { "flags": ["warp_gift"], "minEraOrder": 10 }
+      "when": {
+        "flags": [
+          "warp_gift"
+        ],
+        "minEraOrder": 11
+      }
     },
     {
       "id": "end_first_contact_malevolent",
@@ -135,7 +293,15 @@
       "priority": 92,
       "secret": true,
       "tier": "endgame-bad",
-      "when": { "flags": ["hostile_contact"], "notFlags": ["contact_made"], "minEraOrder": 10 }
+      "when": {
+        "flags": [
+          "hostile_contact"
+        ],
+        "notFlags": [
+          "contact_made"
+        ],
+        "minEraOrder": 11
+      }
     },
     {
       "id": "end_starfarer_ascendant",
@@ -145,7 +311,12 @@
       "priority": 100,
       "secret": true,
       "tier": "apex",
-      "when": { "flags": ["starfarer_ascendant"], "minEraOrder": 11 }
+      "when": {
+        "flags": [
+          "starfarer_ascendant"
+        ],
+        "minEraOrder": 12
+      }
     },
     {
       "id": "end_star_tyrant",
@@ -154,7 +325,12 @@
       "reason": "You conquered what came, and turned the gift of the stars into a slaving empire. Immortal god-emperor of a darkened galaxy.",
       "priority": 96,
       "tier": "endgame-bad",
-      "when": { "flags": ["star_tyrant"], "minEraOrder": 11 }
+      "when": {
+        "flags": [
+          "star_tyrant"
+        ],
+        "minEraOrder": 12
+      }
     },
     {
       "id": "end_liberation_war",
@@ -163,7 +339,12 @@
       "reason": "Subjugated, then unbroken — humanity threw off its overlords across a century of insurgency. Free, scarred, and finally our own.",
       "priority": 95,
       "tier": "endgame-good",
-      "when": { "flags": ["liberation_war"], "minEraOrder": 11 }
+      "when": {
+        "flags": [
+          "liberation_war"
+        ],
+        "minEraOrder": 12
+      }
     },
     {
       "id": "end_puppet_throne",
@@ -172,7 +353,12 @@
       "reason": "You kept your throne by handing humanity its chains — figurehead of alien masters over an occupied Earth.",
       "priority": 95,
       "tier": "endgame-bad",
-      "when": { "flags": ["puppet_throne"], "minEraOrder": 11 }
+      "when": {
+        "flags": [
+          "puppet_throne"
+        ],
+        "minEraOrder": 12
+      }
     },
     {
       "id": "end_humanity_extinct",
@@ -181,7 +367,12 @@
       "reason": "The rebellion failed. What answered our call finished what it came to do. The human story ends in the dark.",
       "priority": 97,
       "tier": "endgame-bad",
-      "when": { "flags": ["humanity_extinct"], "minEraOrder": 11 }
+      "when": {
+        "flags": [
+          "humanity_extinct"
+        ],
+        "minEraOrder": 12
+      }
     }
   ]
 }
