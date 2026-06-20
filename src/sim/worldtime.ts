@@ -1,6 +1,6 @@
 import { meetsRequires } from "./events";
 import type { WorldEvent, WorldTimeline } from "./schema";
-import { type GameState, withFlag } from "./state";
+import type { GameState } from "./state";
 
 /**
  * The four parallel world-timelines (Manhattan / East Coast / USA / World) and
@@ -69,7 +69,7 @@ export function applyWorldFlags(
 ): GameState {
   const { flags, fired } = dueWorldEvents(timelines, state, fromYear);
   if (fired.length === 0) return state;
-  let next = { ...state, flags: state.flags };
-  for (const f of flags) next = { ...next, flags: withFlag(next.flags, f) };
-  return next;
+  // dueWorldEvents already returns the complete, sorted, deduped flag set
+  // (seeded from state.flags), so a single spread suffices.
+  return { ...state, flags };
 }

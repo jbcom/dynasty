@@ -67,8 +67,6 @@ const tabs = $derived<Array<{ id: Tab; label: string }>>([
     <ButterflyLog ledger={view.state.ledger} />
   {:else if tab === "dossier"}
     <Dossier defs={content.meters} gameState={view.state} />
-  {:else}
-    <Dossier defs={content.meters} gameState={view.state} />
   {/if}
 {/snippet}
 
