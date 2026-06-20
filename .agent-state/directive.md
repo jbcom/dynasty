@@ -3,6 +3,54 @@
 **Status:** ACTIVE
 **Owner:** jbogaty
 
+## Batch — alt-history-and-systemic-sim (batch-20260620-113905)
+
+Source: docs/plans/alt-history-and-systemic-sim.prq.md (sha256: e292c27ee0d28499536fd909f8bb59d83684f16122a8d449008a19f008ce00c2)
+Started: 2026-06-20T16:39:05Z
+
+Executable queue for the full alt-history + systemic-sim PRD. Design detail
+lives in the "alt-history consistency" section below and in
+docs/superpowers/specs/2026-06-20-systemic-sim-layer.md. Already shipped
+(AH1 terms/branch/render, AH3 selection, Nazi pool, AH8 surname terms, SIM1
+spec) — not re-queued here.
+
+### task-001 AH7 slot-event system
+- [ ] task-001 SlotSchema + data; archetypal slots resolve to branch/dynasty events at compile time; test: leader-assassination slot → Fred Trump (political) / Commissar purge (nazi)
+### task-002 AH8b branch-name audit
+- [ ] task-002 sweep content for hardcoded Trump/Drumpf → {surname}/{family_name} tokens; render-path wired; interpolation test (Nazi shows Drumpf)
+### task-003 Kennedy/RFK Jr protagonist timeline
+- [ ] task-003 timelines/kennedy.json (scope kennedy) + brewing/bootlegger Era-0 flags enabling the Trump↔Kennedy swap; validates + swap test
+### task-004 West-Coast branch backdrop pool
+- [ ] task-004 usa/world/mores/religion .westcoast.json — Pacific-centered, ≥30 events each, 0 dups, consistency test
+### task-005 Evangelical-theocracy branch backdrop pool
+- [ ] task-005 usa/world/mores/religion .theocracy.json — religious-state titles/events, ≥30 each, 0 dups, consistency test
+### task-006 Media/pleasure-king branch backdrop pool
+- [ ] task-006 usa/world/mores/religion .media.json — vice→porn→Hollywood→propaganda arc, ≥30 each, 0 dups, consistency test
+### task-007 Role-flip protagonist overwrite content
+- [ ] task-007 Musk-as-leader / Trump-as-tycoon arc threading via terms + events reflecting the flip
+### task-008 AH3 timeline compiler (compile-at-Era-0)
+- [ ] task-008 butterfly+bias-weighted selection from all config pools → ONE bespoke consistent timeline, persisted to Capacitor save; deterministic from seed+Era-0 choices; replay parity test
+### task-009 AH5 timeline-compiler dev harness
+- [ ] task-009 pnpm timeline:dump --seed X --choices … (compiled JSON + consistency report) + timeline:sweep --n N (per-permutation summary)
+### task-010 AH9 butterfly weight/bias pass
+- [ ] task-010 assign weights+biases across events/rules/ripples; seeded selection varies believably (spread test)
+### task-011 SIM1 phase 1 — schemas + state
+- [ ] task-011 markets/currencies/ranks zod schemas + GameState fields, deterministic + replay-safe
+### task-012 SIM1 phase 2 — pure systemicTick
+- [ ] task-012 per-in-world-year tick in applyChoice step 8d; markets transmit into 6 meters via coupling coeffs; seeded via rng.fork; replay property test
+### task-013 SIM1 phase 3 — data + per-era table
+- [ ] task-013 markets.json/currencies.json/ranks.json incl. eras 0–12 table, branch-override currencies, ship attention market
+### task-014 SIM1 phase 4 — UI surfacing
+- [ ] task-014 Markets tab + Ranks Dossier sub-panel + branch-aware currency relabel via term layer
+### task-015 SIM1 phase 5 — balance + polish
+- [ ] task-015 balance pass; telegraphed currency-hedge survival play; crypto/attention polish
+### task-016 AH6 agent-sweep verification
+- [ ] task-016 fan out verification agents over Era-0 permutation sweep (AH5 dumps) flagging contradictions/anachronisms/shallowness/name-title mismatches; aggregate → fix → re-sweep
+### task-017 AH4 no-shallowness audit
+- [ ] task-017 verify every branch opens a comparably rich gated multi-layer pool; deepen any thin branch
+### task-018 Definition of done
+- [ ] task-018 typecheck+biome+unit+browser+e2e green; app live-verified per branch (zero console errors); reviewer trio; green PR; squash-merge
+
 ## Batch — alt-history consistency (batch-20260620-althist)
 
 Source: user directives, 2026-06-20 (verbatim intent below)
