@@ -55,7 +55,7 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 ### Phase G — Integration, Android, Polish
 - [x] G1 Full e2e playthroughs to each end state
 - [x] G2 Capacitor Android setup + sync
-- [ ] G3 Verify app RUNS — Chromium screenshot of real playthrough
+- [x] G3 Verify app RUNS — Chromium screenshot of real playthrough
 - [ ] G4 Reviewer trio + green PR
 
 ## What CONTINUOUS means
