@@ -1,0 +1,49 @@
+{
+  "coverage_rules": [
+    {
+      "when_changed": ["src/render/**", "src/ui/**"],
+      "require_changed": ["src/render/**/__tests__/**", "src/ui/**/__tests__/**"],
+      "or_explicit_skip": "// no-visual-impact: <≥10 word reason>",
+      "block_message": "Render/UI change without a colocated __tests__ update."
+    },
+    {
+      "when_changed": ["src/audio/**"],
+      "require_changed": ["src/audio/**/__tests__/**"],
+      "block_message": "Audio change without a colocated audio graph test."
+    },
+    {
+      "when_changed": ["src/sim/**", "src/engine/**", "src/systems/**"],
+      "require_changed": ["src/sim/**/__tests__/**", "src/engine/**/__tests__/**", "src/systems/**/__tests__/**"],
+      "block_message": "Sim/engine change without a colocated unit/browser test."
+    },
+    {
+      "when_changed": ["src/render/**", "src/ui/**"],
+      "require_run": "pnpm test:browser",
+      "evidence_pattern": "Test Files\\s+.*passed|Tests\\s+\\d+\\s+passed",
+      "block_message": "Render/UI change requires a real-browser (Vitest browser mode) test pass."
+    },
+    {
+      "when_changed": ["src/data/eras/**", "src/data/*.json"],
+      "require_changed": ["src/sim/**/__tests__/**"],
+      "or_explicit_skip": "// no-test-needed: <≥10 word reason for content-only change>",
+      "block_message": "Content/data change without schema-validation test coverage."
+    },
+    {
+      "when_changed": ["capacitor.config.ts", "android/**"],
+      "require_run": "pnpm cap:sync",
+      "evidence_pattern": "(✔ Sync finished|Sync finished in)",
+      "block_message": "Capacitor/Android change requires `pnpm cap:sync`."
+    }
+  ],
+  "ban_patterns": [
+    { "pattern": "Math\\.random\\(\\)", "globs": ["src/sim/**", "src/engine/**", "src/systems/**"], "message": "Use createRng(seed) facade — determinism." },
+    { "pattern": "performance\\.now\\(\\)", "globs": ["src/sim/**", "src/engine/**"], "message": "Use engine clock facade — determinism." },
+    { "pattern": "Date\\.now\\(\\)", "globs": ["src/sim/**"], "message": "No wall-clock in pure sim — inject via engine clock facade." },
+    { "pattern": "document\\.|window\\.", "globs": ["src/sim/**"], "message": "Sim is pure TS — no DOM access. Move to ui/render/engine." }
+  ],
+  "forbidden_bash": [
+    "--no-verify", "git push --force(?!-with-lease)", "--admin",
+    "yarn ", "npm install", "package-lock\\.json", "yarn\\.lock"
+  ],
+  "max_lines_warn": 600
+}
