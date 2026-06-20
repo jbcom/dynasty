@@ -29,7 +29,7 @@ const content = buildContent({
         label: "leader",
         default: { event: "ev_jfk" },
         nazi: { event: "wun_purge" },
-        dynasty: { trump: { event: "ev_fred" } },
+        dynasty: { trump: { event: "ev_fred" }, musk: { event: "wk_musk_near_bankruptcy", note: "Musk 2008 near-death" } },
       },
     ],
   },
@@ -74,11 +74,12 @@ describe("timeline compiler (AH3 gears-in-a-clock, task-008)", () => {
     expect(c.slots.leader_assassination).toBe("ev_jfk");
   });
 
-  it("the Musk dynasty activates via musk_dynasty_active flag (de-5b)", () => {
+  it("the Musk dynasty activates via musk_dynasty_active flag + resolves Musk slot (de-5b)", () => {
     const c = compile(["musk_dynasty_active"]);
     expect(c.dynasty).toBe("musk");
-    // dynasty() returns "musk", not "trump" or "kennedy".
     expect(c.branch).toBe("default"); // branch is unaffected by dynasty choice
+    // Musk dynasty has a slots.json override for leader_assassination.
+    expect(c.slots.leader_assassination).toBe("wk_musk_near_bankruptcy");
   });
 
   it("the Kennedy dynasty activates via kennedy_dynasty_active flag (de-5c prologue path)", () => {
