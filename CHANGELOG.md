@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/jbcom/maga-money-moves/compare/v0.2.0...v0.3.0) (2026-06-20)
+
+
+### Features
+
+* **dynasty:** Koota market read-model, deep-future arcs, sim live, balance + persona sweep fixes ([#12](https://github.com/jbcom/maga-money-moves/issues/12)) ([f277a65](https://github.com/jbcom/maga-money-moves/commit/f277a65dc1f463ddbb15ea72a0dcc3c0336dd6bd))
+
 ## [0.2.0](https://github.com/jbcom/maga-money-moves/compare/v0.1.0...v0.2.0) (2026-06-20)
 
 
