@@ -21,25 +21,44 @@ export interface PortraitDef {
   layers: PortraitLayer[];
 }
 
+/** Procedural fallback layers (used only when a portrait has no art). */
 const PLACEHOLDER_LAYERS: PortraitLayer[] = [
   { src: null, z: 0, variant: "bg" },
   { src: null, z: 1, variant: "silhouette" },
 ];
 
-/** Known portrait ids across the life arc; each gets art in Phase E. */
+/** Build the standard layer stack for an authored caricature portrait. */
+function art(id: string): PortraitLayer[] {
+  return [{ src: `portraits/${id}.svg`, z: 1 }];
+}
+
+/**
+ * Layer stack pairing a cartoonified real photo over the procedural backdrop.
+ * The source photo is public-domain / CC0; `scripts/cartoonify.mjs` posterizes
+ * + inks it into a stylized cartoon at build time, so shipped art is a derived
+ * caricature anchored to a genuinely free source. The gold frame ties it to brand.
+ */
+function cartoon(file: string): PortraitLayer[] {
+  return [
+    { src: null, z: 0, variant: "bg" },
+    { src: `portraits/${file}.cartoon.png`, z: 1 },
+  ];
+}
+
+/** Known portrait ids across the life arc; each maps to an authored SVG caricature. */
 export const PORTRAITS: Record<string, PortraitDef> = {
-  infant: { id: "infant", label: "Infant", accent: "var(--mmm-meter-loyalty)", layers: PLACEHOLDER_LAYERS },
-  cadet: { id: "cadet", label: "Cadet", accent: "var(--mmm-meter-power)", layers: PLACEHOLDER_LAYERS },
-  young_mogul: { id: "young_mogul", label: "Young Mogul", accent: "var(--mmm-gold)", layers: PLACEHOLDER_LAYERS },
-  mogul: { id: "mogul", label: "Mogul", accent: "var(--mmm-gold)", layers: PLACEHOLDER_LAYERS },
-  celebrity: { id: "celebrity", label: "Celebrity", accent: "var(--mmm-meter-reputation)", layers: PLACEHOLDER_LAYERS },
-  candidate: { id: "candidate", label: "Candidate", accent: "var(--mmm-red)", layers: PLACEHOLDER_LAYERS },
-  president: { id: "president", label: "President", accent: "var(--mmm-red)", layers: PLACEHOLDER_LAYERS },
-  exile: { id: "exile", label: "Exile", accent: "var(--mmm-meter-heat)", layers: PLACEHOLDER_LAYERS },
-  emperor: { id: "emperor", label: "Emperor", accent: "var(--mmm-gold-bright)", layers: PLACEHOLDER_LAYERS },
-  survivor: { id: "survivor", label: "Survivor", accent: "var(--mmm-meter-heat)", layers: PLACEHOLDER_LAYERS },
-  unifier: { id: "unifier", label: "Unifier", accent: "var(--mmm-startrek)", layers: PLACEHOLDER_LAYERS },
-  martian: { id: "martian", label: "Martian Patriarch", accent: "var(--mmm-meter-heat)", layers: PLACEHOLDER_LAYERS },
+  infant: { id: "infant", label: "Infant", accent: "var(--mmm-meter-loyalty)", layers: cartoon("child_1948") },
+  cadet: { id: "cadet", label: "Cadet", accent: "var(--mmm-meter-power)", layers: cartoon("nyma_grad") },
+  young_mogul: { id: "young_mogul", label: "Young Mogul", accent: "var(--mmm-gold)", layers: cartoon("central_park") },
+  mogul: { id: "mogul", label: "Mogul", accent: "var(--mmm-gold)", layers: art("mogul") },
+  celebrity: { id: "celebrity", label: "Celebrity", accent: "var(--mmm-meter-reputation)", layers: cartoon("celebrity_2014") },
+  candidate: { id: "candidate", label: "Candidate", accent: "var(--mmm-red)", layers: cartoon("candidate_2015") },
+  president: { id: "president", label: "President", accent: "var(--mmm-red)", layers: cartoon("president_2025") },
+  exile: { id: "exile", label: "Exile", accent: "var(--mmm-meter-heat)", layers: art("exile") },
+  emperor: { id: "emperor", label: "Emperor", accent: "var(--mmm-gold-bright)", layers: art("emperor") },
+  survivor: { id: "survivor", label: "Survivor", accent: "var(--mmm-meter-heat)", layers: art("survivor") },
+  unifier: { id: "unifier", label: "Unifier", accent: "var(--mmm-startrek)", layers: art("unifier") },
+  martian: { id: "martian", label: "Martian Patriarch", accent: "var(--mmm-meter-heat)", layers: art("martian") },
 };
 
 const FALLBACK: PortraitDef = {

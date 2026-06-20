@@ -21,7 +21,7 @@ function randomSeed(): string {
 
 <main class="title">
   <h1>MAGA Money Moves</h1>
-  <p class="tagline">From Queens to the Red Planet.</p>
+  <p class="tagline">From Queens to the King.</p>
 
   <div class="panel">
     <label for="seed">Seed (optional)</label>

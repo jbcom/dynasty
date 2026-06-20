@@ -37,7 +37,7 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 - [x] D8 Screens — Title/New Game, Play (HUD+tabs+portrait+card), Legacy Report + router
 
 ### Phase E — Assets
-- [ ] E1 Asset sourcing + manifest
+- [x] E1 Asset sourcing + manifest (OpenMoji icons, CC0 SVG caricatures + backgrounds, photo→cartoon derivatives, scraper + cartoonify dev tools, ASSETS.md)
 
 ### Phase F — Content: all 10 eras
 - [ ] F0 Era index + meters + butterfly-rules data

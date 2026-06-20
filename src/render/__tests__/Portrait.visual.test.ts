@@ -22,12 +22,20 @@ afterEach(() => {
 });
 
 describe("Portrait", () => {
-  it("renders a layered placeholder for a known portrait", async () => {
-    component = mount(Portrait, { target: host, props: { portraitId: "young_mogul", size: 140 } });
-    const el = host.querySelector('[data-portrait="young_mogul"]');
+  it("renders authored caricature art for an svg portrait", async () => {
+    component = mount(Portrait, { target: host, props: { portraitId: "mogul", size: 140 } });
+    const el = host.querySelector('[data-portrait="mogul"]');
     expect(el).not.toBeNull();
-    expect(host.querySelectorAll(".layer.gen").length).toBeGreaterThan(0);
+    // mogul uses an authored SVG caricature (an <img> layer).
+    const img = el?.querySelector("img.layer") as HTMLImageElement | null;
+    expect(img?.getAttribute("src")).toContain("portraits/mogul.svg");
     await page.screenshot({ element: el as Element });
+  });
+
+  it("renders a cartoonified photo layer for a photo-backed portrait", () => {
+    component = mount(Portrait, { target: host, props: { portraitId: "president", size: 140 } });
+    const img = host.querySelector('[data-portrait="president"] img.layer') as HTMLImageElement | null;
+    expect(img?.getAttribute("src")).toContain("portraits/president_2025.cartoon.png");
   });
 
   it("renders the fallback for an unknown portrait without throwing", () => {
