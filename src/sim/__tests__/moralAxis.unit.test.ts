@@ -11,8 +11,33 @@ describe("branch moral axis (task-022)", () => {
     expect(moralPoleOf(make(["gilead_regime"]))).toBe("dictatorial");
   });
 
-  it("the darkest authored signal wins when poles conflict", () => {
+  it("the darkest COMMITTED signal wins when two poles conflict", () => {
     expect(moralPoleOf(make(["covenant_commonwealth", "gilead_regime"]))).toBe("dictatorial");
+  });
+
+  it("an ALL-THREE-poles menu defers to personality (not auto-dictatorial) — nb-004 fix", () => {
+    // The deep-future 'outcomes diverge' events flag all three poles as available;
+    // that's a menu, not a resolution — must not lock everyone to dictatorial.
+    const menu = ["reich_america_utopian", "reich_america_centrist", "reich_america_dictatorial"];
+    // Utopian-leaning personality → utopian, not dictatorial.
+    expect(
+      moralPoleOf(make(menu, { ideology: -80, grandiosity: -40, outward: -80, inward: 0 })),
+    ).toBe("utopian");
+    // Tyrannical personality → dictatorial.
+    expect(moralPoleOf(make(menu, { ideology: 80, grandiosity: 80, outward: 80, inward: 0 }))).toBe(
+      "dictatorial",
+    );
+    // westcoast menu behaves the same.
+    expect(
+      moralPoleOf(
+        make(["pole_utopian", "pole_centrist", "pole_dictatorial"], {
+          ideology: -80,
+          grandiosity: -40,
+          outward: -80,
+          inward: 0,
+        }),
+      ),
+    ).toBe("utopian");
   });
 
   it("falls back to the personality tyranny↔utopia axis with no pole flag", () => {

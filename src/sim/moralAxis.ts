@@ -103,15 +103,26 @@ function hasPole(flags: readonly string[], pole: MoralPole): boolean {
 
 /**
  * The moral pole this run occupies (within its branch's value system).
- * Explicit pole flags take precedence (dictatorial > utopian > centrist when
- * several are set — the darkest authored signal wins); else the personality
- * tyranny↔utopia axis decides.
+ *
+ * Some deep-future events flag ALL THREE poles at once — those are MENUS of
+ * available outcomes ("the three poles diverge from here"), not a resolution.
+ * When every pole is flagged we ignore them and let the run's personality axis
+ * pick the actual pole (so the menu doesn't lock everyone to dictatorial).
+ * Otherwise an explicit single/dual pole flag wins (dictatorial > utopian >
+ * centrist — the darkest committed signal); else personality decides.
  */
 export function moralPoleOf(state: Pick<GameState, "flags" | "personality">): MoralPole {
-  if (hasPole(state.flags, "dictatorial")) return "dictatorial";
-  if (hasPole(state.flags, "utopian")) return "utopian";
-  if (hasPole(state.flags, "centrist")) return "centrist";
-  // No authored pole flag yet — read the personality axis (−100 utopia … +100 tyranny).
+  const u = hasPole(state.flags, "utopian");
+  const c = hasPole(state.flags, "centrist");
+  const d = hasPole(state.flags, "dictatorial");
+  // A committed pole = some-but-not-all set. All three = an availability menu → defer.
+  if (!(u && c && d)) {
+    if (d) return "dictatorial";
+    if (u) return "utopian";
+    if (c) return "centrist";
+  }
+  // No committed pole (none set, or an all-three menu) — read the personality
+  // axis (−100 utopia … +100 tyranny).
   const axis = tyrannyUtopiaAxis(state.personality);
   if (axis <= -40) return "utopian";
   if (axis >= 40) return "dictatorial";

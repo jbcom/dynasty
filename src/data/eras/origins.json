@@ -245,7 +245,7 @@
           "ripples": [
             {
               "to": "bootlegger_path",
-              "weight": 1.0,
+              "weight": 1,
               "polarity": 1
             }
           ],
@@ -462,6 +462,28 @@
             "klondike_gamble"
           ],
           "outcome": "The claim is worthless and the winter nearly kills you. You learn the hard way that fortunes are made on the stampeders, not with them."
+        },
+        {
+          "id": "go_all_in_on_vice",
+          "text": "Sell the miners what they really crave — run the saloons, the rooms upstairs, the whole pleasure trade",
+          "effects": {
+            "money": 90000,
+            "reputation": -8,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 6
+          },
+          "setFlags": [
+            "pleasure_king",
+            "vice_empire",
+            "klondike_fortune",
+            "sordid_capital"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You do not just feed the stampeders — you entertain them, intoxicate them, indulge them. The Drumpf name becomes the pleasure king of the gold coast, a vice fortune that will one day launder itself into media, Hollywood, and respectability."
         }
       ]
     },
@@ -2184,6 +2206,28 @@
             "faith_to_power"
           ],
           "outcome": "You choose the cure of souls over the cult of personality. The family stays a respected religious house, beloved and modest — a dynasty of conscience rather than a machine of power. The road to the throne forks away here."
+        },
+        {
+          "id": "build_the_broadcast_ministry",
+          "text": "Skip the pulpit politics — build a broadcast ministry empire, a dynasty of the airwaves",
+          "effects": {
+            "money": 200000,
+            "reputation": 8,
+            "power": 4
+          },
+          "personality": {
+            "grandiosity": 12,
+            "outward": 10
+          },
+          "setFlags": [
+            "megachurch_dynasty",
+            "televangelist_empire",
+            "prosperity_seed",
+            "dynasty_capital"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The family does not seize the state; it seizes the audience. A radio circuit becomes a television network becomes a financial empire of the faithful — power measured in viewers and tithes, not laws."
         }
       ]
     },

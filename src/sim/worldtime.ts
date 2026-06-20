@@ -75,13 +75,19 @@ export function dueWorldEvents(
 ): { flags: string[]; fired: WorldEvent[] } {
   const flags = new Set(state.flags);
   const fired: WorldEvent[] = [];
-  for (const t of timelines) {
-    for (const e of t.events) {
-      if (e.year <= fromYear || e.year > state.year) continue;
-      if (e.requires && !meetsRequires(state, e.requires)) continue;
-      fired.push(e);
-      for (const f of e.setFlags) flags.add(f);
-    }
+  // Evaluate each event's requires against the flags ACCUMULATED so far this
+  // batch (not the frozen incoming state), so an earlier event that sets a flag
+  // can exclude a later mutually-exclusive one (e.g. utopian_currents vs
+  // autocratic_currents both due in 2045). Process in year order so the
+  // exclusion is deterministic regardless of file/scope ordering.
+  const due = timelines
+    .flatMap((t) => t.events)
+    .filter((e) => e.year > fromYear && e.year <= state.year)
+    .sort((a, b) => a.year - b.year || a.id.localeCompare(b.id));
+  for (const e of due) {
+    if (e.requires && !meetsRequires({ ...state, flags: [...flags] }, e.requires)) continue;
+    fired.push(e);
+    for (const f of e.setFlags) flags.add(f);
   }
   return { flags: [...flags].sort(), fired };
 }
