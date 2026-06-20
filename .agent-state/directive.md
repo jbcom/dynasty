@@ -35,7 +35,7 @@ spec) — not re-queued here.
 ### task-010 AH9 butterfly weight/bias pass
 - [ ] task-010 assign weights+biases across events/rules/ripples; seeded selection varies believably (spread test)
 ### task-011 SIM1 phase 1 — schemas + state
-- [ ] task-011 markets/currencies/ranks zod schemas + GameState fields, deterministic + replay-safe
+- [x] task-011 markets/currencies/ranks zod schemas + GameState fields (markets/ranks/currencyId), deterministic init helpers, wired through buildContent + loader; 5 tests. (Done out of order — pure new files, no conflict with the in-flight Kennedy origins edit.)
 ### task-012 SIM1 phase 2 — pure systemicTick
 - [ ] task-012 per-in-world-year tick in applyChoice step 8d; markets transmit into 6 meters via coupling coeffs; seeded via rng.fork; replay property test
 ### task-013 SIM1 phase 3 — data + per-era table

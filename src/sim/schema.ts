@@ -371,6 +371,110 @@ export const SlotsFileSchema = z.object({
 });
 export type SlotsFile = z.infer<typeof SlotsFileSchema>;
 
+/* ------------------------------------------------------------------------- *
+ * SYSTEMIC SIMULATION LAYER (SIM1) — markets, currencies, rank ladders.
+ * Living subsystems that pull the six meters between choices via a pure
+ * per-year tick. All data-driven + branch-aware; see the design spec
+ * docs/superpowers/specs/2026-06-20-systemic-sim-layer.md.
+ * ------------------------------------------------------------------------- */
+
+/** How a market move transmits into the six meters (most couplings are 0). */
+export const MeterCouplingSchema = z.partialRecord(MeterIdSchema, z.number()).default({});
+
+/** A market regime (boom/bust/bubble/…) with its dynamics. */
+export const MarketRegimeSchema = z.object({
+  id: z.string().min(1),
+  /** Mean the index is pulled toward in this regime. */
+  baseline: z.number().default(100),
+  /** Per-step proportional drift (e.g. +0.04 boom, -0.05 bust). */
+  drift: z.number().default(0),
+  /** Per-step proportional shock magnitude (volatility). */
+  volatility: z.number().min(0).default(0.05),
+  /** Authored base dwell time (steps) before the regime is "due" to flip. */
+  dwell: z.number().int().min(1).default(6),
+  /** Per-step switch probabilities to other regimes by id (0..1). */
+  switchTo: z.record(z.string(), z.number()).default({}),
+});
+export type MarketRegime = z.infer<typeof MarketRegimeSchema>;
+
+/** Extra fields a housing market carries (region + cashflow dynamics). */
+export const HousingExtraSchema = z.object({
+  region: z.string().min(1),
+  /** Steady cashflow per step as a fraction of holding value. */
+  rentYield: z.number().default(0),
+  /** 0..1 vacancy that suppresses rent yield (rises in busts). */
+  vacancy: z.number().min(0).max(1).default(0),
+  /** Per-step money drain from leverage (the bust killer). */
+  debtService: z.number().min(0).default(0),
+});
+export type HousingExtra = z.infer<typeof HousingExtraSchema>;
+
+export const MarketSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(1),
+  kind: z.enum(["financial", "housing", "attention", "crypto", "state", "resource"]),
+  /** Starting index value. */
+  baseIndex: z.number().default(100),
+  /** Mean-reversion strength toward the regime baseline (0..1). */
+  meanReversionK: z.number().min(0).max(1).default(0.1),
+  /** Drawdown ratio (index/peak) below which a crash flag fires. */
+  crashThreshold: z.number().min(0).max(1).default(0.6),
+  /** Regimes this market can occupy; first is the starting regime. */
+  regimes: z.array(MarketRegimeSchema).min(1),
+  /** How this market's move maps onto the meters. */
+  coupling: MeterCouplingSchema,
+  /** Housing-only extra fields. */
+  housing: HousingExtraSchema.optional(),
+});
+export type Market = z.infer<typeof MarketSchema>;
+
+export const MarketsFileSchema = z.object({
+  markets: z.array(MarketSchema).default([]),
+});
+export type MarketsFile = z.infer<typeof MarketsFileSchema>;
+
+/** A currency: how `money` is named/scaled, resolved by location/branch/era. */
+export const CurrencySchema = z.object({
+  id: z.string().min(1),
+  symbol: z.string().min(1),
+  name: z.string().min(1),
+  /** Year window this currency is valid within its lane (inclusive). */
+  fromYear: z.number().int().optional(),
+  toYear: z.number().int().optional(),
+  /** Branch this currency belongs to (default = our timeline). */
+  branch: z.enum(["default", "nazi", "westcoast", "theocracy", "media"]).optional(),
+  /** Location flag that forces this currency when set (e.g. "on_mars"). */
+  location: z.string().optional(),
+  /** Multiplier applied to `money` when redenominating FROM the prior currency. */
+  conversionFactor: z.number().positive().default(1),
+});
+export type Currency = z.infer<typeof CurrencySchema>;
+
+export const CurrenciesFileSchema = z.object({
+  currencies: z.array(CurrencySchema).default([]),
+});
+export type CurrenciesFile = z.infer<typeof CurrenciesFileSchema>;
+
+/** A rank ladder (social/commercial/religious/political) the player climbs. */
+export const RankLadderSchema = z.object({
+  id: z.enum(["social", "commercial", "religious", "political"]),
+  label: z.string().min(1),
+  /** Rung labels low→high; index is the rank. Political reuses {head_of_state}. */
+  rungs: z.array(z.string().min(1)).min(2),
+  /** Passive per-step meter drip at any rank (e.g. high social → reputation). */
+  drip: MeterCouplingSchema,
+  /** Multiplier this ladder applies to matching meter GAINS (e.g. political→power). */
+  amplify: MeterCouplingSchema,
+  /** Meter bleed per step while below the run's peak rank (fall-from-grace). */
+  fallBleed: MeterCouplingSchema,
+});
+export type RankLadder = z.infer<typeof RankLadderSchema>;
+
+export const RanksFileSchema = z.object({
+  ranks: z.array(RankLadderSchema).default([]),
+});
+export type RanksFile = z.infer<typeof RanksFileSchema>;
+
 /** Validate arbitrary JSON against a schema, throwing a readable error on failure. */
 export function parseContent<T>(schema: z.ZodType<T>, data: unknown, label: string): T {
   const result = schema.safeParse(data);

@@ -78,8 +78,38 @@ export interface GameState {
   firedConsequences: string[];
   ledger: LedgerEntry[];
   history: HistoryEntry[];
+  /** Live market state by market id (SIM1 systemic layer). */
+  markets: Record<string, MarketState>;
+  /** Current + peak rung per rank ladder (SIM1). Peak drives fall-from-grace. */
+  ranks: Record<string, RankState>;
+  /** Currency id `money` was denominated in last tick (redenomination detector). */
+  currencyId: string;
   /** Set once the run ends; null while in progress. */
   end: EndState | null;
+}
+
+/** Per-market live state (index walk + the player's stake). */
+export interface MarketState {
+  /** Current index value. */
+  index: number;
+  /** Highest index seen (drawdown reference). */
+  peakIndex: number;
+  /** Active regime id. */
+  regime: string;
+  /** Steps spent in the current regime (older regimes are likelier to flip). */
+  regimeAge: number;
+  /** Player's stake: positive = long, negative = short, 0 = out. */
+  holding: number;
+  /** Borrow multiplier on the stake (the Trump special). */
+  leverage: number;
+}
+
+/** Per-ladder rank state. */
+export interface RankState {
+  /** Current rung index. */
+  rung: number;
+  /** Highest rung reached this run (fall-from-grace reference). */
+  peak: number;
 }
 
 const BIRTH_YEAR = 1946;
@@ -104,8 +134,34 @@ export function initState(content: Content, seed: string): GameState {
     firedConsequences: [],
     ledger: [],
     history: [],
+    markets: initMarkets(content),
+    ranks: initRanks(content),
+    currencyId: "usd",
     end: null,
   };
+}
+
+/** Seed live market state from the content's market defs (index at base, out of position). */
+export function initMarkets(content: Content): Record<string, MarketState> {
+  const out: Record<string, MarketState> = {};
+  for (const m of content.markets) {
+    out[m.id] = {
+      index: m.baseIndex,
+      peakIndex: m.baseIndex,
+      regime: m.regimes[0]?.id ?? "stable",
+      regimeAge: 0,
+      holding: 0,
+      leverage: 1,
+    };
+  }
+  return out;
+}
+
+/** Seed rank state at the bottom rung of every ladder. */
+export function initRanks(content: Content): Record<string, RankState> {
+  const out: Record<string, RankState> = {};
+  for (const r of content.ranks) out[r.id] = { rung: 0, peak: 0 };
+  return out;
 }
 
 /** True if the state holds the given flag. */

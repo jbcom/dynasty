@@ -4,15 +4,21 @@ import {
   type ButterflyRule,
   ButterflyRulesSchema,
   type Consequence,
+  CurrenciesFileSchema,
+  type Currency,
   type Ending,
   EndingsFileSchema,
   type Era,
   EraEventsSchema,
   EraIndexSchema,
   type GameEvent,
+  type Market,
+  MarketsFileSchema,
   type MeterDef,
   MetersFileSchema,
   parseContent,
+  type RankLadder,
+  RanksFileSchema,
   type Slot,
   SlotsFileSchema,
   type TermsFile,
@@ -40,6 +46,10 @@ export interface Content {
   terms: TermsFile["terms"];
   /** Archetypal slot events resolved per branch/dynasty at compile time (AH7). */
   slots: Slot[];
+  /** Systemic markets, currencies, and rank ladders (SIM1). */
+  markets: Market[];
+  currencies: Currency[];
+  ranks: RankLadder[];
 }
 
 export interface RawContent {
@@ -52,6 +62,9 @@ export interface RawContent {
   assets: unknown;
   terms?: unknown;
   slots?: unknown;
+  markets?: unknown;
+  currencies?: unknown;
+  ranks?: unknown;
 }
 
 /** Validate raw JSON into a Content bundle, cross-checking referential integrity. */
@@ -66,6 +79,17 @@ export function buildContent(raw: RawContent): Content {
   const assetsFile = parseContent(AssetsFileSchema, raw.assets, "assets.json");
   const termsFile = parseContent(TermsFileSchema, raw.terms ?? { terms: {} }, "terms.json");
   const slotsFile = parseContent(SlotsFileSchema, raw.slots ?? { slots: [] }, "slots.json");
+  const marketsFile = parseContent(
+    MarketsFileSchema,
+    raw.markets ?? { markets: [] },
+    "markets.json",
+  );
+  const currenciesFile = parseContent(
+    CurrenciesFileSchema,
+    raw.currencies ?? { currencies: [] },
+    "currencies.json",
+  );
+  const ranksFile = parseContent(RanksFileSchema, raw.ranks ?? { ranks: [] }, "ranks.json");
 
   const eras = [...eraIndex.eras].sort((a, b) => a.order - b.order);
   const eraIds = new Set(eras.map((e) => e.id));
@@ -115,5 +139,8 @@ export function buildContent(raw: RawContent): Content {
     assets: assetsFile.assets,
     terms: termsFile.terms,
     slots: slotsFile.slots,
+    markets: marketsFile.markets,
+    currencies: currenciesFile.currencies,
+    ranks: ranksFile.ranks,
   };
 }
