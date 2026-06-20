@@ -12,6 +12,7 @@ import type { Rng } from "./rng";
 import type { Choice, GameEvent } from "./schema";
 import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
 import { advanceTimeline, applyJump, detectEnd } from "./timeline";
+import { applyWorldFlags } from "./worldtime";
 
 /** Result of resolving a choice: the new state plus the ledger entries it produced. */
 export interface Transition {
@@ -98,9 +99,16 @@ export function applyChoice(
   if (immediateEnd) {
     return { state: { ...hopped, end: immediateEnd }, newLedger };
   }
-  const advanced = advanceTimeline(content, hopped);
+  let advanced = advanceTimeline(content, hopped);
 
-  // 8. Land any delayed consequences now due (post-advance year), unless the
+  // 8b. LINKING PROTOCOL: broadcast flags from the four parallel world timelines
+  // whose events have come to pass as the year advanced — done in the pure
+  // transition so live play and deterministic replay stay identical.
+  if (content.worldTimelines.length > 0 && advanced.year > hopped.year) {
+    advanced = applyWorldFlags(advanced, hopped.year, content.worldTimelines);
+  }
+
+  // 9. Land any delayed consequences now due (post-advance year), unless the
   // timeline advance itself ended the run.
   if (advanced.end) {
     return { state: advanced, newLedger };

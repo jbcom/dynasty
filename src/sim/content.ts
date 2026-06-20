@@ -13,6 +13,8 @@ import {
   type MeterDef,
   MetersFileSchema,
   parseContent,
+  type WorldTimeline,
+  WorldTimelineSchema,
 } from "./schema";
 
 /**
@@ -28,6 +30,7 @@ export interface Content {
   butterflyRules: ButterflyRule[];
   consequences: Consequence[];
   endings: Ending[];
+  worldTimelines: WorldTimeline[];
   assets: Asset[];
 }
 
@@ -37,6 +40,7 @@ export interface RawContent {
   eraEvents: Array<{ era: string; data: unknown }>;
   butterflyRules: unknown;
   endings: unknown;
+  worldTimelines?: unknown[];
   assets: unknown;
 }
 
@@ -46,6 +50,9 @@ export function buildContent(raw: RawContent): Content {
   const eraIndex = parseContent(EraIndexSchema, raw.eraIndex, "eras/index.json");
   const butterfly = parseContent(ButterflyRulesSchema, raw.butterflyRules, "butterfly-rules.json");
   const endingsFile = parseContent(EndingsFileSchema, raw.endings, "endings.json");
+  const worldTimelines = (raw.worldTimelines ?? []).map((t, i) =>
+    parseContent(WorldTimelineSchema, t, `timelines[${i}]`),
+  );
   const assetsFile = parseContent(AssetsFileSchema, raw.assets, "assets.json");
 
   const eras = [...eraIndex.eras].sort((a, b) => a.order - b.order);
@@ -92,6 +99,7 @@ export function buildContent(raw: RawContent): Content {
     butterflyRules: butterfly.rules,
     consequences: butterfly.consequences,
     endings: endingsFile.endings,
+    worldTimelines,
     assets: assetsFile.assets,
   };
 }

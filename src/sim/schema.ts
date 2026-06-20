@@ -142,6 +142,34 @@ export const EraIndexSchema = z.object({
 });
 export type EraIndex = z.infer<typeof EraIndexSchema>;
 
+/**
+ * One entry in a parallel WORLD TIMELINE (Manhattan / East Coast / USA / World).
+ * A year-stamped real-then-extrapolated event in the wider world. It can OUTPUT
+ * flags (setFlags) when its year arrives — feeding Donald's arc — and can be
+ * GATED (requires) so its branch reflects how the world actually went.
+ */
+export const WorldEventSchema = z.object({
+  id: z.string().min(1),
+  year: z.number().int(),
+  headline: z.string().min(1),
+  body: z.string().min(1),
+  tags: z.array(z.string()).default([]),
+  extrapolated: z.boolean().default(false),
+  /** Flags this world event broadcasts into the shared game state when it fires. */
+  setFlags: z.array(z.string()).default([]),
+  /** Optional gate (on the shared flag space) for branch selection. */
+  requires: RequiresSchema.optional(),
+});
+export type WorldEvent = z.infer<typeof WorldEventSchema>;
+
+/** A parallel world timeline file (data/timelines/<scope>.json). */
+export const WorldTimelineSchema = z.object({
+  scope: z.enum(["manhattan", "eastcoast", "usa", "world"]),
+  label: z.string().min(1),
+  events: z.array(WorldEventSchema).min(1),
+});
+export type WorldTimeline = z.infer<typeof WorldTimelineSchema>;
+
 /** A single era's event pool file (data/eras/<id>.json). */
 export const EraEventsSchema = z.object({
   era: z.string().min(1),

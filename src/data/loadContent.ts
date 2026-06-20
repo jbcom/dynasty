@@ -12,6 +12,7 @@ const indexGlob = import.meta.glob("./eras/index.json", { eager: true });
 const erasGlob = import.meta.glob("./eras/*.json", { eager: true });
 const butterflyGlob = import.meta.glob("./butterfly-rules.json", { eager: true });
 const endingsGlob = import.meta.glob("./endings.json", { eager: true });
+const timelinesGlob = import.meta.glob("./timelines/*.json", { eager: true });
 const assetsGlob = import.meta.glob("./assets.json", { eager: true });
 
 function firstValue<T>(glob: Record<string, unknown>): T | null {
@@ -51,6 +52,7 @@ export function loadContent(): Content {
     eraEvents,
     butterflyRules: firstValue(butterflyGlob) ?? { rules: [] },
     endings: firstValue(endingsGlob) ?? { endings: [] },
+    worldTimelines: Object.values(timelinesGlob).map((m) => (m as { default: unknown }).default),
     assets: firstValue(assetsGlob) ?? { assets: [] },
   };
   return buildContent(raw);
