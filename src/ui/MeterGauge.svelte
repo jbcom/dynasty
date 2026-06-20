@@ -78,7 +78,7 @@ const dash = $derived(`${fraction * CIRC} ${CIRC}`);
   }
   .label {
     font-family: var(--mmm-font-body);
-    font-size: 0.64rem;
+    font-size: 0.68rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--mmm-text-dim);

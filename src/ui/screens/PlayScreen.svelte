@@ -49,16 +49,24 @@ let tab = $state<Tab>("event");
 const hasNews = $derived(content.worldTimelines.length > 0);
 const hasMarkets = $derived(content.markets.length > 0 || content.ranks.length > 0);
 
-const tabs = $derived<Array<{ id: Tab; label: string }>>([
-  { id: "event", label: "Now" },
-  ...(hasNews ? [{ id: "news" as Tab, label: "📰" }] : []),
-  ...(hasMarkets ? [{ id: "markets" as Tab, label: "💹" }] : []),
-  { id: "timeline", label: "Timeline" },
-  { id: "stats", label: "Stats" },
-  { id: "butterfly", label: "🦋" },
-  { id: "dossier", label: "Dossier" },
+// Each tab carries a real 2D line-icon asset (public/assets/icons/ui/<icon>.svg).
+const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
+  { id: "event", label: "Now", icon: "now" },
+  ...(hasNews ? [{ id: "news" as Tab, label: "News", icon: "news" }] : []),
+  ...(hasMarkets ? [{ id: "markets" as Tab, label: "Markets", icon: "markets" }] : []),
+  { id: "timeline", label: "Timeline", icon: "timeline" },
+  { id: "stats", label: "Stats", icon: "stats" },
+  { id: "butterfly", label: "Choices", icon: "butterfly" },
+  { id: "dossier", label: "Dossier", icon: "dossier" },
 ]);
 </script>
+
+{#snippet tabButton(t: { id: Tab; label: string; icon: string })}
+  <button type="button" class:active={tab === t.id} onclick={() => (tab = t.id)}>
+    <img class="tab-icon" src={`/assets/icons/ui/${t.icon}.svg`} alt="" aria-hidden="true" />
+    {t.label}
+  </button>
+{/snippet}
 
 {#snippet eventPane()}
   {#if view.currentEvent}
@@ -101,7 +109,7 @@ const tabs = $derived<Array<{ id: Tab; label: string }>>([
       <aside class="info-col">
         <nav class="tabs side">
           {#each tabs.filter((t) => t.id !== "event") as t (t.id)}
-            <button type="button" class:active={tab === t.id} onclick={() => (tab = t.id)}>{t.label}</button>
+            {@render tabButton(t)}
           {/each}
         </nav>
         <div class="content">{@render infoTab()}</div>
@@ -110,7 +118,7 @@ const tabs = $derived<Array<{ id: Tab; label: string }>>([
   {:else}
     <nav class="tabs">
       {#each tabs as t (t.id)}
-        <button type="button" class:active={tab === t.id} onclick={() => (tab = t.id)}>{t.label}</button>
+        {@render tabButton(t)}
       {/each}
     </nav>
     <div class="content">
@@ -156,24 +164,57 @@ const tabs = $derived<Array<{ id: Tab; label: string }>>([
   }
   .tabs {
     display: flex;
-    gap: 0.25rem;
-    padding: 0.4rem;
+    gap: 0.2rem;
+    padding: 0.35rem 0.5rem;
     overflow-x: auto;
     background: var(--mmm-navy-deep);
+    border-bottom: 1px solid color-mix(in srgb, var(--mmm-gold-deep) 40%, transparent);
   }
   .tabs button {
     flex: 1 0 auto;
-    padding: 0.4rem 0.7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.4rem 0.5rem;
     border: none;
     border-radius: var(--mmm-radius);
     background: transparent;
     color: var(--mmm-text-dim);
-    font-weight: 700;
+    font-family: var(--mmm-font-body);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    font-weight: 600;
     cursor: pointer;
+    transition:
+      color var(--mmm-dur-fast) var(--mmm-ease),
+      background var(--mmm-dur-fast) var(--mmm-ease),
+      box-shadow var(--mmm-dur-fast) var(--mmm-ease);
+  }
+  .tab-icon {
+    width: 20px;
+    height: 20px;
+    /* Line-art SVGs ship black; filter to the dim text color. */
+    opacity: 0.7;
+    filter: invert(78%) sepia(12%) saturate(420%) hue-rotate(187deg) brightness(92%);
+    transition: opacity var(--mmm-dur-fast) var(--mmm-ease),
+      filter var(--mmm-dur-fast) var(--mmm-ease);
   }
   .tabs button.active {
-    background: var(--mmm-surface);
+    background: color-mix(in srgb, var(--mmm-surface) 80%, transparent);
     color: var(--mmm-gold);
+    box-shadow: inset 0 -2px 0 var(--mmm-gold);
+  }
+  .tabs button.active .tab-icon {
+    opacity: 1;
+    /* gold #d4af37 */
+    filter: invert(72%) sepia(38%) saturate(680%) hue-rotate(2deg) brightness(92%);
+  }
+  .tabs button:hover:not(.active) {
+    color: var(--mmm-text);
+  }
+  .tabs button:hover:not(.active) .tab-icon {
+    opacity: 1;
   }
   .content {
     flex: 1;
