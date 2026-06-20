@@ -1,0 +1,187 @@
+import { z } from "zod";
+
+/**
+ * Zod schemas for ALL game content. Every JSON file in `src/data/**` is validated
+ * against these on load so malformed content fails fast (in tests and at boot)
+ * rather than corrupting a deterministic run silently.
+ */
+
+/** The six meters. Money is log-scaled net worth; the rest are 0–100 (Reputation signed). */
+export const METER_IDS = [
+  "money",
+  "power",
+  "reputation",
+  "loyalty",
+  "health",
+  "heat",
+] as const;
+export const MeterIdSchema = z.enum(METER_IDS);
+export type MeterId = z.infer<typeof MeterIdSchema>;
+
+/** A partial map of meter → delta applied by a choice. */
+export const MeterDeltaSchema = z.partialRecord(MeterIdSchema, z.number());
+export type MeterDelta = z.infer<typeof MeterDeltaSchema>;
+
+/** Meter definition (data/meters.json). */
+export const MeterDefSchema = z.object({
+  id: MeterIdSchema,
+  label: z.string().min(1),
+  icon: z.string().min(1),
+  scale: z.enum(["linear", "log"]),
+  min: z.number(),
+  max: z.number(),
+  start: z.number(),
+  critLow: z.number().optional(),
+  critHigh: z.number().optional(),
+  color: z.string().min(1),
+  signed: z.boolean().default(false),
+});
+export type MeterDef = z.infer<typeof MeterDefSchema>;
+
+/** A meter requirement comparator, e.g. ">=20", "<50", "==0". */
+const COMPARATOR_RE = /^(>=|<=|==|!=|>|<)\s*-?\d+(\.\d+)?$/;
+export const MeterComparatorSchema = z
+  .string()
+  .regex(COMPARATOR_RE, "comparator must look like '>=20' or '<50'");
+
+/** Gate on whether an event is eligible to appear. */
+export const RequiresSchema = z
+  .object({
+    flags: z.array(z.string()).default([]),
+    notFlags: z.array(z.string()).default([]),
+    meters: z.partialRecord(MeterIdSchema, MeterComparatorSchema).default({}),
+    minAge: z.number().int().optional(),
+    maxAge: z.number().int().optional(),
+  })
+  .default({ flags: [], notFlags: [], meters: {} });
+export type Requires = z.infer<typeof RequiresSchema>;
+
+/** A ripple: a weighted, polarized nudge toward a future butterfly channel. */
+export const RippleSchema = z.object({
+  to: z.string().min(1),
+  weight: z.number().min(0).max(1),
+  polarity: z.union([z.literal(-1), z.literal(1)]),
+});
+export type Ripple = z.infer<typeof RippleSchema>;
+
+/** One branch of an event. */
+export const ChoiceSchema = z.object({
+  id: z.string().min(1),
+  text: z.string().min(1),
+  effects: MeterDeltaSchema.default({}),
+  setFlags: z.array(z.string()).default([]),
+  clearFlags: z.array(z.string()).default([]),
+  ripples: z.array(RippleSchema).default([]),
+  outcome: z.string().min(1),
+  /** Optional gate so a choice only shows under certain conditions. */
+  requires: RequiresSchema.optional(),
+});
+export type Choice = z.infer<typeof ChoiceSchema>;
+
+/** A pivotal life event. */
+export const EventSchema = z.object({
+  id: z.string().min(1),
+  era: z.string().min(1),
+  year: z.number().int(),
+  title: z.string().min(1),
+  scene: z.string().min(1),
+  researchNote: z.string().min(1),
+  extrapolated: z.boolean().default(false),
+  startrekInspired: z.boolean().default(false),
+  tags: z.array(z.string()).default([]),
+  portrait: z.string().min(1),
+  requires: RequiresSchema,
+  weight: z.number().min(0).default(10),
+  /** If true the event can recur; otherwise it fires at most once per run. */
+  repeatable: z.boolean().default(false),
+  choices: z.array(ChoiceSchema).min(1, "an event needs at least one choice"),
+});
+export type GameEvent = z.infer<typeof EventSchema>;
+
+/** Era metadata (data/eras/index.json entries). */
+export const EraSchema = z.object({
+  id: z.string().min(1),
+  order: z.number().int().nonnegative(),
+  title: z.string().min(1),
+  yearStart: z.number().int(),
+  yearEnd: z.number().int(),
+  extrapolated: z.boolean().default(false),
+  startrekInspired: z.boolean().default(false),
+  ambientTrack: z.string().min(1),
+  paletteAccent: z.string().min(1),
+  /** Era ends after this many events fire, or when an age/health gate trips. */
+  eventBudget: z.number().int().positive().default(8),
+});
+export type Era = z.infer<typeof EraSchema>;
+
+export const EraIndexSchema = z.object({
+  eras: z.array(EraSchema).min(1),
+});
+export type EraIndex = z.infer<typeof EraIndexSchema>;
+
+/** A single era's event pool file (data/eras/<id>.json). */
+export const EraEventsSchema = z.object({
+  era: z.string().min(1),
+  events: z.array(EventSchema).min(1),
+});
+export type EraEvents = z.infer<typeof EraEventsSchema>;
+
+/** Cross-era butterfly rule: a flag (or ripple channel) shaping future weighting. */
+export const ButterflyRuleSchema = z.object({
+  id: z.string().min(1),
+  /** Flag or ripple channel that triggers this rule. */
+  cause: z.string().min(1),
+  /** Event id (or tag) whose weight/eligibility this rule changes. */
+  affects: z.string().min(1),
+  affectsKind: z.enum(["event", "tag"]).default("event"),
+  /** Multiplier applied to the affected event weight when the cause is present. */
+  weightMultiplier: z.number().min(0).default(1),
+  /** Optional hard unlock/lock. */
+  unlocks: z.boolean().optional(),
+  locks: z.boolean().optional(),
+  /** Human-readable template for the Butterfly Log, e.g. "Because you {cause}, {effect}". */
+  chainTemplate: z.string().min(1),
+});
+export type ButterflyRule = z.infer<typeof ButterflyRuleSchema>;
+
+export const ButterflyRulesSchema = z.object({
+  rules: z.array(ButterflyRuleSchema).default([]),
+});
+export type ButterflyRules = z.infer<typeof ButterflyRulesSchema>;
+
+export const MetersFileSchema = z.object({
+  meters: z.array(MeterDefSchema).length(METER_IDS.length),
+});
+export type MetersFile = z.infer<typeof MetersFileSchema>;
+
+/** Asset manifest entry — every graphic/sound must declare a license. */
+export const AssetSchema = z.object({
+  id: z.string().min(1),
+  path: z.string().min(1),
+  kind: z.enum(["icon", "portrait", "background", "texture", "audio", "sprite"]),
+  source: z.string().min(1),
+  license: z.enum(["CC0", "CC-BY", "CC-BY-SA", "PD", "OFL", "MIT"]),
+  attribution: z.string().default(""),
+});
+export type Asset = z.infer<typeof AssetSchema>;
+
+export const AssetsFileSchema = z.object({
+  assets: z.array(AssetSchema).default([]),
+});
+export type AssetsFile = z.infer<typeof AssetsFileSchema>;
+
+/** Validate arbitrary JSON against a schema, throwing a readable error on failure. */
+export function parseContent<T>(
+  schema: z.ZodType<T>,
+  data: unknown,
+  label: string,
+): T {
+  const result = schema.safeParse(data);
+  if (!result.success) {
+    const issues = result.error.issues
+      .map((i) => `  • ${i.path.join(".") || "(root)"}: ${i.message}`)
+      .join("\n");
+    throw new Error(`Invalid content for "${label}":\n${issues}`);
+  }
+  return result.data;
+}
