@@ -4,28 +4,39 @@
 **Owner:** jbogaty
 **Mandate:** (NEW unit) "DEEP and WIDE research making all dynasties fully backed by a thorough family tree AND full implementation of the religious dynasty… COMPOSITES for each of the four dynasties: political, technological, religious, economic" (user, 2026-06-20). Work SERIALLY, own everything, NO agent swarm (see [[agent-swarm-discipline]]). Design spec: docs/superpowers/specs/2026-06-20-four-composite-dynasties.md.
 
-## Batch — COMPOSITE DYNASTIES + FAMILY TREES (batch-20260620-composite-dynasties)
+## Batch — FOUND YOUR OWN DYNASTY (batch-20260620-found-your-own-dynasty)
 
-Four composite power-archetype dynasties (ECONOMIC=Trump · POLITICAL=Kennedy ·
-TECHNOLOGICAL=Musk · RELIGIOUS=Graham), each a primary real-family spine blended
-with secondary real dynasties, each tied to its rank ladder + native governance
-branches. Family trees as a DATA MODEL that drives content. Religious house = a
-full 4th playable dynasty + carousel house. Full detail in the design spec.
+PIVOT (user, 2026-06-20): from "pick 1 of 4 fixed houses" → "FOUND YOUR OWN line."
+Stage 0 recast: the player chooses NAME + WHEN + WHERE at a historically pivotal
+moment (Irish Famine, Bavarian emigration, post-apartheid SA, …); the run is the
+bespoke compiled JSON storyline for SEED + STAGE-0. Choices BEGET CHILDREN; the
+family tree GROWS; add BIRTH / DEATH / INHERITANCE / ESTATE-PLANNING / SUCCESSION
+mechanics across generations. Player-NAMED but real history/places kept; freed
+from real-name constraints AND from portraits. The 4 composite archetypes survive
+as OPTIONAL QUICK-START PRESETS on this engine. Full design:
+docs/superpowers/specs/2026-06-20-found-your-own-dynasty.md
+(supersedes 2026-06-20-four-composite-dynasties.md, folded in as presets).
 
-### DD-0 Research + design spec
-- [x] DD-0 DONE: researched the religious-dynasty spine (Graham — fresh web research: W.F.Graham Sr→Billy→Franklin→Will, clean 3-4 gen succession + the Billy-centrist↔Franklin-theocracy pivot mapping onto the existing megachurch/theocracy poles; chosen over Roberts/Bakker/Osteen/Falwell which are single-gen or scandal-collapsed). Confirmed the composite-archetype reframe (user) + the archetype↔ladder↔branch binding (the 4 existing rank ladders already name the archetypes). Wrote docs/superpowers/specs/2026-06-20-four-composite-dynasties.md (model, 4 genealogical spines, family-tree data model, blend lists, DD-1..DD-6 plan).
-### DD-1 FamilyTreeSchema + 4 tree JSONs + load validation
-- [ ] DD-1 FamilyTreeSchema (zod) + src/data/family-trees/{economic,political,technological,religious}.json authored from the spec §2 spines (Trump/Kennedy/Musk from existing lineage; Graham newly authored), wired into buildContent with cross-ref validation (every child id resolves, one founder-patriarch, no cycles) + tests.
-### DD-2 Religious dynasty as 4th playable house
-- [ ] DD-2 add "religious" to DynastyKey; its Era-0 origin (Graham-Sr Charlotte opener, gated so the prologue is not skippable per the Epoch-0 fix); religious_dynasty_active → dynastyOf; megachurch/theocracy as native branches; carousel house "THE HOUSE OF GRAHAM / Charlotte, 1918"; reachability + prologue tests.
-### DD-3 Archetype↔ladder binding (+ scientific ladder for tech)
-- [ ] DD-3 each dynasty starts advantaged on its native ladder (economic→commercial, political→political, religious→religious, technological→NEW scientific ladder); add the scientific RankLadder; tests.
-### DD-4 Composite blend content
-- [ ] DD-4 author secondary-family lineage/slot/backdrop events per spec §1 blend lists (econ: Rockefeller/Vanderbilt/Astor; pol: Roosevelt/Bush/Adams; tech: Edison/Ford/Thiel; relig: Roberts/Falwell/Robertson/Bakker/Osteen) deepening each house; depth-floor + no-shallowness guards.
-### DD-5 Genealogy viewer
-- [ ] DD-5 in-game lineage view (extend Dossier or new Lineage tab) rendering the active dynasty's tree progenitor→protagonist→heirs, luxury-styled, real-2D, no portraits; screenshot-verify.
-### DD-6 DoD
-- [ ] DD-6 full gate + AH6 sweep over all 4 dynasties × branches + persona sweep incl. religious + app live-verified per dynasty; PRs squash-merged; directive → RELEASED.
+### FD-0 Research + full design spec
+- [x] FD-0 DONE: researched the religious spine (Graham, fresh web research) + the composite-archetype model, THEN the user pivoted to found-your-own-dynasty. Wrote the full found-your-own spec (core loop, start-moments, geo/politics/religion/ideology world stacks for Ireland/UK/SA/Canada/both coasts, onomastics/patronyms, family-tree STATE + birth/death/inheritance/estate/succession sim, archetypes-as-presets, FD-1..FD-9 plan). Determinism is the load-bearing risk (births/deaths must be pure+seeded so replay reconstructs the tree).
+### FD-1 FamilyTreeSchema + 4 preset trees (was DD-1)
+- [~] FD-1 IN PROGRESS: FamilyTreeSchema + FamilyMember/role/FamilyTreesFile added to src/sim/schema.ts (DONE). src/data/family-trees/{economic,political,technological,religious}.json authored (DONE — Trump/Kennedy/Musk/Graham spines, player-renameable later). REMAINING: wire into RawContent/buildContent + cross-ref validation (every child id resolves, exactly one founder-patriarch, no cycles) + tests. (loadContent wiring reverted pending the RawContent design in this phase.)
+### FD-2 Onomastics + naming-convention resolution
+- [ ] FD-2 src/data/onomastics.json (per-culture given-name pools + patronymic/matronymic conventions: irish_catholic, bavarian_german, afrikaner, scots_irish, wasp_east_coast) + a pure resolver generalizing AH8c/d; tests per culture.
+### FD-3 Start-moments + new Stage-0 "found your line" flow
+- [ ] FD-3 src/data/origins/start-moments.json (Irish Famine 1847, Bavaria 1885, Cape Colony 1906, apartheid-end 1994, Gold Rush 1849, Gilded-Age NY 1880, Second Great Awakening 1830); founding UI (pick moment + name + progenitor) feeding the compiler; presets kept as shortcuts. [USER CHECK-IN: how many start-moments to ship first.]
+### FD-4 World stacks (geo/politics/religion/ideology per place)
+- [ ] FD-4 src/data/world/ stacks for ireland/uk/south_africa/canada/east_coast/west_coast; generalize world-timeline linking to apply STANDING context by the run's current place; migration = place change. Schema + load + tests.
+### FD-5 Family-tree STATE + BIRTH mechanics
+- [ ] FD-5 FamilyState in GameState (live mutable tree); pure seeded beget() (children from reign choices/events, named via onomastic convention, traits inherited+varied); replay-determinism tests.
+### FD-6 DEATH + AGING
+- [ ] FD-6 per-year seeded mortality hazard (age + health/era-medicine); non-protagonist death events (feeding accidental-heir archetype); tests.
+### FD-7 INHERITANCE + ESTATE + SUCCESSION
+- [ ] FD-7 estate-planning choices (name heir, primogeniture vs split, rivalries, trusts); heir selection at protagonist death; protagonist-handoff continuing as the heir; carry-forward of capital/ladders/branch; line-failure ending; multi-generation replay tests.
+### FD-8 LINEAGE VIEW
+- [ ] FD-8 the growing family-tree screen (reclaimed portrait space); luxury-styled, real-2D, no portraits; screenshot-verify.
+### FD-9 DoD
+- [ ] FD-9 full gate + AH6 + persona sweeps over generational runs + app live-verified (found a line at the Famine → beget heir → die → succeed); PRs squash-merged; directive → RELEASED.
 
 ## Batch — DYNASTY EVERYTHING (batch-20260620-dynasty-everything)
 
