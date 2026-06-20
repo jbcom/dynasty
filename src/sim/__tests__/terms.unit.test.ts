@@ -289,4 +289,21 @@ describe("Musk prologue structure — de-5b", () => {
       expect(ev.year, `${id} year`).toBeLessThanOrEqual(1946);
     }
   });
+
+  it("ev_donald_is_born blocks on musk_dynasty_active (Trump/Musk birth events mutually exclusive)", () => {
+    // ev_donald_is_born has no required flags — it fires on any run without notFlags hits.
+    // On a Musk run, none of its original notFlags (line_failed, never_emigrated, etc.) are set,
+    // so without this guard it would fire alongside ev_elon_musk_born. Both must not fire.
+    const ev = eventById("ev_donald_is_born");
+    expect(ev.requires?.notFlags ?? []).toContain("musk_dynasty_active");
+  });
+
+  it("errol's inventor choice also seeds musk_technical_lineage (both errol paths reach ev_elon_musk_born)", () => {
+    const ev = eventById("ev_errol_musk_builds");
+    const inventor = ev.choices.find((x) => x.id === "errol_the_inventor");
+    if (!inventor) throw new Error("no errol_the_inventor");
+    // Without musk_technical_lineage, a player who picks errol_the_inventor is dead-ended:
+    // ev_elon_musk_born requires musk_technical_lineage and can never fire.
+    expect(inventor.setFlags).toContain("musk_technical_lineage");
+  });
 });
