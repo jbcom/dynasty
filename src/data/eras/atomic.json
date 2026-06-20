@@ -1,0 +1,400 @@
+{
+  "era": "atomic",
+  "events": [
+    {
+      "id": "ev_the_exchange",
+      "era": "atomic",
+      "year": 2041,
+      "title": "The Exchange",
+      "scene": "The football is open on the gilded table and the codes glow back at you like the eyes of something patient. The general says ninety seconds; the markets are already a screaming red waterfall on every screen in the bunker. Somewhere out past the blast doors, three hundred million people are about to learn what your ego costs by the megaton.",
+      "researchNote": "Star Trek future history dates the third world war to the mid-21st century, ending around 2053 with roughly 600 million dead and most major governments toppled. The game extrapolates the brinkmanship of Era 7 into the canonical Exchange that opens the post-atomic horror.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": ["nuclear", "war", "decision", "apocalypse"],
+      "portrait": "emperor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "launch_everything",
+          "text": "Empty the silos. If you can't win, no one inherits.",
+          "effects": { "power": 12, "heat": 15, "health": -12, "reputation": -15 },
+          "setFlags": ["the_exchange_fired", "warlord_path"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_post_atomic_tribunal", "weight": 0.9, "polarity": 1 }],
+          "outcome": "The sky turns the color of an old bruise. You are, briefly, the most powerful man alive, and then there is almost no one left to be powerful over."
+        },
+        {
+          "id": "pull_back",
+          "text": "Pull the keys. Eat the humiliation. Stop it while there's a world.",
+          "effects": { "power": -10, "heat": -8, "reputation": 8, "loyalty": -6 },
+          "setFlags": ["pulled_back_from_brink"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_governments_fall", "weight": 0.6, "polarity": -1 }],
+          "outcome": "You stand down. Half the cities burn anyway from the ones already in the air, but somewhere a child is born in the morning instead of never."
+        },
+        {
+          "id": "limited_demonstration",
+          "text": "One warhead. A demonstration. Make them blink first.",
+          "effects": { "power": 6, "heat": 12, "health": -6, "reputation": -10 },
+          "setFlags": ["the_exchange_fired"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_eugenicist_warlords", "weight": 0.7, "polarity": 1 }],
+          "outcome": "Nobody blinks. They answer with twelve. 'Limited' was always a word for people who had never seen the second sun rise."
+        }
+      ]
+    },
+    {
+      "id": "ev_governments_fall",
+      "era": "atomic",
+      "year": 2042,
+      "title": "The Flags Come Down",
+      "scene": "The capitol's lights have been dark for six weeks. The Speaker is dead, the Court is ash, the Joint Chiefs have scattered to wherever men go when the chain of command becomes a chain of corpses. Your authority is whatever you can defend with the men still saluting.",
+      "researchNote": "Canon holds that most of Earth's governments collapsed during World War III, ushering in the lawless 'post-atomic horror.' The game frames the fall of institutions as the moment the player's title stops meaning anything paper can grant.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": ["collapse", "anarchy", "power", "government"],
+      "portrait": "emperor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "declare_continuity",
+          "text": "Declare yourself the Continuity of Government. The state is wherever you stand.",
+          "effects": { "power": 10, "reputation": -6, "loyalty": 8, "heat": 6 },
+          "setFlags": ["self_declared_state"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_eugenicist_warlords", "weight": 0.6, "polarity": 1 }],
+          "outcome": "You sign an executive order on the hood of an armored truck. There is no one left to file it with, but the men with rifles nod, and for now that is enough."
+        },
+        {
+          "id": "broker_councils",
+          "text": "Help the survivors form local councils. Trade your authority for legitimacy.",
+          "effects": { "power": -8, "reputation": 12, "loyalty": -4 },
+          "setFlags": ["chose_councils"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_humanity_preserved", "weight": 0.6, "polarity": 1 }],
+          "outcome": "You become one voice among many, which feels like dying. But the food gets distributed, and no one is shot for hoarding bread."
+        }
+      ]
+    },
+    {
+      "id": "ev_post_atomic_tribunal",
+      "era": "atomic",
+      "year": 2043,
+      "title": "The Court of Atomic Horror",
+      "scene": "They drag you before a tribunal of soldiers in mismatched riot gear, faces painted, a man in a stolen judge's robe screaming that the first order of business is to kill all the lawyers, the bankers, the men who pushed the buttons. A drugged jury howls behind a chain-link fence. You realize, slowly, that the defendant is you.",
+      "researchNote": "Directly evokes Q's post-atomic horror courtroom from Star Trek: TNG 'Encounter at Farpoint' — the drugged kangaroo tribunal, the slogan 'kill all the lawyers,' justice as mob spectacle in the wreckage of WWIII. The game stages the player's reckoning inside that canonical nightmare court.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": ["tribunal", "justice", "mob", "trial"],
+      "portrait": "survivor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "buy_the_court",
+          "text": "Bribe the judge with the last of your hard currency and gold.",
+          "effects": { "money": -50000, "power": 4, "reputation": -8, "heat": 6 },
+          "setFlags": ["bribed_tribunal"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_warlord_temptation", "weight": 0.6, "polarity": 1 }],
+          "outcome": "Gold still glitters even by firelight. The judge declares you 'rehabilitated by the people' and the mob, cheated of a hanging, settles for someone uglier."
+        },
+        {
+          "id": "confess_and_serve",
+          "text": "Confess. Offer your hands to the work of rebuilding instead of your neck to the rope.",
+          "effects": { "power": -10, "reputation": 14, "health": -8, "loyalty": -4 },
+          "setFlags": ["confessed_tribunal"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_humanity_preserved", "weight": 0.7, "polarity": 1 }],
+          "outcome": "You say it plainly: you helped end the world. The painted judge stares, then hands you a shovel instead of a noose. It is heavier than any crown."
+        },
+        {
+          "id": "rally_your_guns",
+          "text": "Your loyal guards are outside. Turn the trial into a massacre.",
+          "effects": { "power": 8, "reputation": -15, "loyalty": 6, "health": -10, "heat": 12 },
+          "setFlags": ["warlord_path"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_eugenicist_warlords", "weight": 0.8, "polarity": 1 }],
+          "outcome": "Your men come through the doors firing. You walk out over the jury you were meant to face. Now everyone in the ruins knows exactly what you are."
+        }
+      ]
+    },
+    {
+      "id": "ev_eugenicist_warlords",
+      "era": "atomic",
+      "year": 2044,
+      "title": "The Colonel of the Pure",
+      "scene": "A warlord who calls himself Colonel Green offers you alliance across a table of looted MREs. He speaks of culling the irradiated, the sick, the 'genetically spent,' of building a clean species from the ashes. He says you would make a fine partner, and the worst part is how reasonable his madness sounds when you're this hungry.",
+      "researchNote": "Colonel Phillip Green is canonical Star Trek lore: a genocidal eugenicist of the post-WWIII era who ordered the deaths of millions of radiation victims to 'improve' the gene pool, later condemned as one of history's great monsters. The game extrapolates a Green-style warlord recruiting the player into the eugenics horror.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": ["eugenics", "warlord", "genocide", "alliance"],
+      "portrait": "emperor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "join_green",
+          "text": "Shake his hand. The strong inherit. Always have.",
+          "effects": { "power": 14, "reputation": -15, "loyalty": 6, "heat": 10 },
+          "setFlags": ["green_alliance", "warlord_path"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_warlord_temptation", "weight": 0.9, "polarity": 1 }],
+          "outcome": "You sign on. The convoys roll out to 'cleanse' the sick camps. You tell yourself it's survival, right up until the night their faces start arriving in your dreams."
+        },
+        {
+          "id": "refuse_green",
+          "text": "Refuse. Whatever you've done, you won't sort children by their blood.",
+          "effects": { "power": -8, "reputation": 12, "health": -6, "heat": 8 },
+          "setFlags": ["defied_green"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_humanity_preserved", "weight": 0.7, "polarity": 1 }],
+          "outcome": "You walk away and his snipers track you the whole length of the lot. You live, this time. There is a line, it turns out, even at the bottom of the world."
+        },
+        {
+          "id": "betray_green_later",
+          "text": "Smile, agree, and quietly start gathering the men who'd put a bullet in him.",
+          "effects": { "power": 4, "reputation": 2, "loyalty": -4, "heat": 6 },
+          "setFlags": ["plotting_against_green"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_warlord_temptation", "weight": 0.5, "polarity": -1 }],
+          "outcome": "You play the loyal partner while counting his sentries. Treachery is the only currency that never devalued. You just have to spend it before he spends you."
+        }
+      ]
+    },
+    {
+      "id": "ev_warlord_temptation",
+      "era": "atomic",
+      "year": 2045,
+      "title": "Crown of Rust",
+      "scene": "Three settlements have begun to call you their protector, which is a polite word for owner. You could weld this corner of the wasteland into a fiefdom — your face on the water rations, your word the only law. Or you could keep being just a man with a gun and a conscience that won't stop talking.",
+      "researchNote": "The 2040s–50s of Star Trek history are depicted as a warlord era — fractured fiefdoms and strongmen filling the vacuum left by collapsed nations before Earth's slow recovery toward First Contact. The game makes that the central temptation: become the strongman, or refuse the crown of rust.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": ["warlord", "power", "temptation", "fiefdom"],
+      "portrait": "emperor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "seize_the_crown",
+          "text": "Take it all. Be the king the rubble deserves.",
+          "effects": { "money": 30000, "power": 15, "reputation": -12, "loyalty": 10, "heat": 12 },
+          "setFlags": ["warlord_king", "warlord_path"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_radiation_reckoning", "weight": 0.6, "polarity": 1 }],
+          "outcome": "You crown yourself with a circlet of welded rebar. The settlements bow. Up here on the throne of rust, you cannot tell anymore if the people kneel from love or from the rifles behind them."
+        },
+        {
+          "id": "share_power",
+          "text": "Govern, but bind yourself with their laws. A protector, not a god.",
+          "effects": { "power": 4, "reputation": 12, "loyalty": 6 },
+          "setFlags": ["constrained_ruler"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_humanity_preserved", "weight": 0.6, "polarity": 1 }],
+          "outcome": "You let them write down what you may and may not do. It chafes like a collar. It also means that when you die, they will bury you instead of burning you."
+        },
+        {
+          "id": "keep_remnant",
+          "text": "Refuse the crown. Keep only those who follow by choice.",
+          "effects": { "power": -6, "reputation": 8, "loyalty": 12, "health": -4 },
+          "setFlags": ["remnant_loyal"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_long_winter", "weight": 0.6, "polarity": -1 }],
+          "outcome": "You keep a small band — the ones who'd march into the cold beside you for nothing but trust. It is the poorest you have ever been and the first time you've slept without a guard."
+        }
+      ]
+    },
+    {
+      "id": "ev_radiation_reckoning",
+      "era": "atomic",
+      "year": 2046,
+      "title": "The Counter That Won't Stop Clicking",
+      "scene": "Your gums bleed in the morning and your hair comes out in the comb. The dosimeter on your belt has stopped being a warning and become a metronome counting down. The settlement's only doctor offers you the last clean iodine and the last functioning ventilator — there is exactly one of each, and there is a sick child in the next tent.",
+      "researchNote": "Canon emphasizes mass radiation casualties in the WWIII aftermath — the very victims Colonel Green targeted. The game turns the abstract '600 million dead' statistic into a personal radiation reckoning where the player's own body is failing and resources are zero-sum.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": ["radiation", "health", "sacrifice", "medicine"],
+      "portrait": "survivor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "take_the_medicine",
+          "text": "Take the iodine and the ventilator. You're worth more alive than the child.",
+          "effects": { "health": 10, "reputation": -14, "loyalty": -6, "power": 4 },
+          "setFlags": ["took_last_medicine"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_warlord_temptation", "weight": 0.5, "polarity": 1 }],
+          "outcome": "You breathe easier by nightfall. In the next tent, a small machine goes quiet. The doctor never looks you in the eye again, and you find you cannot blame her."
+        },
+        {
+          "id": "give_to_child",
+          "text": "Give them to the child. Take your chances with the click.",
+          "effects": { "health": -12, "reputation": 15, "loyalty": 10 },
+          "setFlags": ["gave_up_medicine"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_humanity_preserved", "weight": 0.7, "polarity": 1 }],
+          "outcome": "The child lives. You spend the night retching into a bucket, sicker than you've ever been, and somehow lighter than you've felt in years. The counter keeps clicking."
+        }
+      ]
+    },
+    {
+      "id": "ev_preserve_science",
+      "era": "atomic",
+      "year": 2047,
+      "title": "The Vault of Knowledge",
+      "scene": "A handful of half-starved researchers have walled themselves into a university basement with humanity's last working sequencers, a cold-storage gene bank, and a library of pre-war medicine. The warlords want the building's metal and the mob wants someone to blame for the bombs. The scientists ask you for one thing: protection, long enough to save what can be saved.",
+      "researchNote": "Star Trek's recovery from the post-atomic horror toward 2063 First Contact hinges on preserved knowledge — Cochrane building a warp drive from salvaged science amid the ruins. The game seeds that arc here, and 'preserved_science' is the through-line toward later-era life-extension storylines.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": ["science", "medicine", "preservation", "future"],
+      "portrait": "survivor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "guard_the_vault",
+          "text": "Post your best people on the doors. Whatever it costs, the knowledge lives.",
+          "effects": { "money": -20000, "power": -4, "reputation": 12, "loyalty": 6, "health": -4 },
+          "setFlags": ["preserved_science"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_humanity_preserved", "weight": 0.8, "polarity": 1 }],
+          "outcome": "You bleed men and rations holding that basement through three sieges. But the sequencers keep humming, the gene bank stays cold, and a thread of the old world is still tied to the new."
+        },
+        {
+          "id": "strip_the_vault",
+          "text": "Strip it for metal and trade the scientists for grain.",
+          "effects": { "money": 25000, "power": 6, "reputation": -14, "loyalty": -4 },
+          "setFlags": ["destroyed_science"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_long_winter", "weight": 0.6, "polarity": 1 }],
+          "outcome": "You eat well for a month. The sequencers become scrap, the gene bank thaws into rot, and a hundred cures that might have been are now ash. The future got a little shorter on your watch."
+        },
+        {
+          "id": "ignore_the_vault",
+          "text": "Not your problem. Move on and let the mob sort it out.",
+          "effects": { "power": 2, "reputation": -6 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_long_winter", "weight": 0.4, "polarity": 1 }],
+          "outcome": "You hear the screaming from two streets over and keep walking. By the time you look back, the windows are full of fire, and the knowledge goes up with them."
+        }
+      ]
+    },
+    {
+      "id": "ev_bunker_politics",
+      "era": "atomic",
+      "year": 2048,
+      "title": "Air, Rationed",
+      "scene": "Your bunker was built for forty and shelters two hundred. The scrubbers are failing, the water tastes of pennies, and a faction near the airlock is whispering that the only fair thing is a lottery for who walks out into the cold. They look to you to either bless the cull or stop it.",
+      "researchNote": "The fallout-shelter, sealed-bunker imagery is a staple of Trek's grim pre-First-Contact 2040s — scattered survivor enclaves clinging on amid collapse. The game uses the bunker as a pressure cooker for the era's core question: who gets to be human when there isn't enough air.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": ["bunker", "survival", "rationing", "leadership"],
+      "portrait": "survivor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "bless_the_cull",
+          "text": "Bless the lottery. Math is math; some must go so most survive.",
+          "effects": { "power": 6, "reputation": -12, "loyalty": -4, "health": 4 },
+          "setFlags": ["bunker_cull"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_eugenicist_warlords", "weight": 0.5, "polarity": 1 }],
+          "outcome": "The names are drawn from a helmet. The chosen are walked out at gunpoint into the white. The scrubbers hold, the air clears, and a small cold thing settles permanently into the place where your scruples used to be."
+        },
+        {
+          "id": "ration_everyone",
+          "text": "No one walks out. Everyone breathes thin and we fix the scrubbers or die together.",
+          "effects": { "power": -4, "reputation": 14, "loyalty": 10, "health": -8 },
+          "setFlags": ["remnant_loyal"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_humanity_preserved", "weight": 0.6, "polarity": 1 }],
+          "outcome": "You all gasp through the worst of it, blue-lipped and dizzy, while the engineers tear the scrubbers apart. They get one running on the third day. Two hundred people live who a lottery would have halved."
+        }
+      ]
+    },
+    {
+      "id": "ev_long_winter",
+      "era": "atomic",
+      "year": 2050,
+      "title": "The Long Winter",
+      "scene": "The soot of a thousand burned cities has thrown a gray lid over the sky, and it has not lifted in two years. Crops fail under a noon that looks like dusk. Your people are eating seed grain, then leather, then things you do not write down, and the cold is the kind that gets into the marrow and stays.",
+      "researchNote": "Nuclear winter — the soot-darkened, agriculture-killing aftermath of mass detonations — is the implied backdrop of Trek's bleak post-atomic decades before recovery begins. The game dramatizes the winter as the era's endurance trial, the slow-motion catastrophe that follows the fast one.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": ["nuclear-winter", "famine", "endurance", "cold"],
+      "portrait": "survivor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "raid_neighbors",
+          "text": "Send the raiders out. Take what others stored. Your people first.",
+          "effects": { "money": 15000, "power": 8, "reputation": -12, "health": 4, "heat": 10 },
+          "setFlags": ["winter_raiders"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_warlord_temptation", "weight": 0.6, "polarity": 1 }],
+          "outcome": "Your raiders come back with grain and frostbite and blood not their own. You eat. The settlement you stripped does not see spring, and the survivors carry your banner in their nightmares."
+        },
+        {
+          "id": "hunker_and_share",
+          "text": "Hunker down. Pool everything. Ration the dark together and pray for sun.",
+          "effects": { "power": -4, "reputation": 12, "loyalty": 10, "health": -10 },
+          "setFlags": ["remnant_loyal"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_humanity_preserved", "weight": 0.7, "polarity": 1 }],
+          "outcome": "You burn the furniture, then the books you can bear to lose, then huddle in a single hall sharing breath and broth. More than you'd guess make it to the morning the sky finally cracks gray-blue."
+        }
+      ]
+    },
+    {
+      "id": "ev_humanity_preserved",
+      "era": "atomic",
+      "year": 2053,
+      "title": "A Thread Through the Ash",
+      "scene": "The worst is, somehow, behind you. The winter is thinning, the warlords are burning out, and the survivors are starting to count years again instead of weeks. They are looking at you — the man who came through the end of the world — to say what comes next. Whatever you say, they will believe it is the truth.",
+      "researchNote": "Star Trek dates the end of the post-atomic horror to roughly 2053, after which Earth begins the slow climb to 2063's First Contact and the founding of a hopeful future. The game lands Era 8 on that hinge: the choice between hoarding power in the ruins and planting the seed of what humanity could become.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": ["recovery", "legacy", "humanity", "future"],
+      "portrait": "survivor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_a_future",
+          "text": "Tell them to build — schools, clinics, a future worth surviving for.",
+          "effects": { "power": -4, "reputation": 15, "loyalty": 12, "health": 4 },
+          "setFlags": ["humanity_preserved", "preserved_science"],
+          "clearFlags": ["warlord_path"],
+          "ripples": [],
+          "outcome": "You hand them the future instead of a flag. Years from now, when the sky is clear and the stars look reachable again, someone will remember that a ruined man chose to plant rather than to reign."
+        },
+        {
+          "id": "rule_the_ashes",
+          "text": "Tell them you alone kept them alive — and you alone will lead them now.",
+          "effects": { "money": 40000, "power": 14, "reputation": -10, "loyalty": 8, "heat": 6 },
+          "setFlags": ["ash_emperor", "warlord_king"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_warlord_temptation", "weight": 0.5, "polarity": 1 }],
+          "outcome": "You crown yourself emperor of the recovery. The cheering is real, for now. But the future you build leans on you like a wall on a single nail, and nails rust."
+        }
+      ]
+    }
+  ]
+}

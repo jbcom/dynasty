@@ -41,16 +41,16 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 
 ### Phase F — Content: all 10 eras
 - [x] F0 Era index + meters + butterfly-rules data
-- [ ] F1 Era 1 — Birth & Boyhood (1946–1964)
-- [ ] F2 Era 2 — Apprentice Mogul (1964–1987)
-- [ ] F3 Era 3 — Boom, Bust & Brand (1988–2003)
-- [ ] F4 Era 4 — Prime Time (2004–2014)
-- [ ] F5 Era 5 — The Ascent (2015–2020)
-- [ ] F6 Era 6 — Interregnum & Return (2021–2028)
-- [ ] F7 Era 7 — Total Victory (2029–2040) [extrapolated]
-- [ ] F8 Era 8 — The Atomic Horror (2041–2053) [extrapolated, startrek_inspired]
-- [ ] F9 Era 9 — The Unification (2054–2079) [extrapolated, startrek_inspired]
-- [ ] F10 Era 10 — Red Planet & Beyond (2080+) [extrapolated]
+- [x] F1 Era 1 — Birth & Boyhood (1946–1964)
+- [x] F2 Era 2 — Apprentice Mogul (1964–1987)
+- [x] F3 Era 3 — Boom, Bust & Brand (1988–2003)
+- [x] F4 Era 4 — Prime Time (2004–2014)
+- [x] F5 Era 5 — The Ascent (2015–2020)
+- [x] F6 Era 6 — Interregnum & Return (2021–2028)
+- [x] F7 Era 7 — Total Victory (2029–2040) [extrapolated]
+- [x] F8 Era 8 — The Atomic Horror (2041–2053) [extrapolated, startrek_inspired]
+- [x] F9 Era 9 — The Unification (2054–2079) [extrapolated, startrek_inspired]
+- [x] F10 Era 10 — Red Planet & Beyond (2080+) [extrapolated]
 
 ### Phase G — Integration, Android, Polish
 - [ ] G1 Full e2e playthroughs to each end state

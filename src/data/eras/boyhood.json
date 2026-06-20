@@ -1,0 +1,324 @@
+{
+  "era": "boyhood",
+  "events": [
+    {
+      "id": "ev_born_in_queens",
+      "era": "boyhood",
+      "year": 1946,
+      "title": "A Stork With Excellent Genes",
+      "scene": "It is June 14, 1946, in Jamaica Hospital, Queens. You arrive screaming, red-faced, and already convinced you are the biggest, best baby anyone has ever seen. Your mother Mary Anne cradles you; your father Fred eyes you like a promising asset on a balance sheet.",
+      "researchNote": "Donald John Trump was born June 14, 1946, in Queens, New York, the fourth of five children of real-estate developer Fred Trump and Mary Anne MacLeod Trump.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["family", "origin"],
+      "portrait": "infant",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 20,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "cry_loudest",
+          "text": "Cry the loudest of any baby in the ward",
+          "effects": { "reputation": 5, "health": 3 },
+          "setFlags": ["loud_from_birth"],
+          "outcome": "The nurses agree they have never heard a more confident wail. A legend, allegedly, is born."
+        },
+        {
+          "id": "sleep_quietly",
+          "text": "Sleep quietly and observe",
+          "effects": { "health": 5, "power": 2 },
+          "outcome": "You rest, conserving energy. Fred notes approvingly that you do not waste effort on small audiences."
+        }
+      ]
+    },
+    {
+      "id": "ev_fred_brings_home_lessons",
+      "era": "boyhood",
+      "year": 1952,
+      "title": "Rent Day With Dad",
+      "scene": "You are six, riding shotgun in Fred's car as he collects rent from his Brooklyn and Queens buildings. He tells you, again, that life is a competition: there are killers and there are losers. He hands you a clipboard and says watch, learn, and never let anyone push you around.",
+      "researchNote": "Fred Trump took his sons along on rent-collection and construction rounds, drilling into them a worldview of 'killers' versus 'losers' and the imperative to always win.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["family", "money", "ambition"],
+      "portrait": "infant",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 15,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "soak_up_lessons",
+          "text": "Hang on every word and memorize the playbook",
+          "effects": { "power": 8, "money": 20, "loyalty": 5 },
+          "setFlags": ["fathers_lessons"],
+          "ripples": [ { "to": "manhattan_ambition", "weight": 0.6, "polarity": 1 } ],
+          "outcome": "You absorb Fred's gospel of winning. Something clicks: a deal, you decide, is just a fight you get paid for. (Father's lessons learned.)"
+        },
+        {
+          "id": "play_with_toys",
+          "text": "Stare out the window and play with your toy bricks instead",
+          "effects": { "health": 3, "power": -2 },
+          "outcome": "Fred sighs. You build a little tower on the dashboard. It is, you note, a very good tower."
+        },
+        {
+          "id": "demand_a_cut",
+          "text": "Demand a cut of today's collections",
+          "effects": { "money": 10, "reputation": 3, "loyalty": -3 },
+          "ripples": [ { "to": "manhattan_ambition", "weight": 0.3, "polarity": 1 } ],
+          "outcome": "Fred laughs, hard, and slips you a dollar. 'A negotiator,' he mutters, half proud, half wary."
+        }
+      ]
+    },
+    {
+      "id": "ev_jamaica_estates_house",
+      "era": "boyhood",
+      "year": 1954,
+      "title": "The House on Midland Parkway",
+      "scene": "Home is a 23-room mock-Tudor mansion in Jamaica Estates, complete with columns and a chauffeur. Your friends from the neighborhood gawk at the Cadillac in the driveway. You learn early that the size of the house tells everyone exactly who is in charge.",
+      "researchNote": "The Trumps lived in a large mock-Tudor home Fred built on Midland Parkway in the affluent Jamaica Estates section of Queens, complete with a chauffeur-driven Cadillac.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["family", "money", "ambition"],
+      "portrait": "infant",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "show_off_house",
+          "text": "Invite the whole block over to be impressed",
+          "effects": { "reputation": 6, "power": 4, "money": -10 },
+          "setFlags": ["likes_an_audience"],
+          "outcome": "The neighborhood kids are dazzled. You decide that being impressive is, in fact, the whole point."
+        },
+        {
+          "id": "stay_humble",
+          "text": "Keep your head down and don't flaunt it",
+          "effects": { "reputation": -2, "loyalty": 4, "health": 2 },
+          "outcome": "You play it cool. Fred would approve of the discretion; the neighborhood barely notices you exist."
+        }
+      ]
+    },
+    {
+      "id": "ev_schoolyard_rebel",
+      "era": "boyhood",
+      "year": 1957,
+      "title": "Trouble at Kew-Forest",
+      "scene": "At the Kew-Forest School you have a reputation: a punch first, smart-mouth second kind of kid. A teacher gives you grief and you give it right back, loudly. The principal's office is starting to feel like a second classroom.",
+      "researchNote": "As a boy Trump was aggressive and disruptive at the private Kew-Forest School in Queens, reportedly even getting into a physical altercation with a teacher, which alarmed his parents.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["school", "rebellion"],
+      "portrait": "infant",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "deck_the_teacher",
+          "text": "Mouth off and shove the teacher who insulted you",
+          "effects": { "heat": 12, "reputation": 4, "power": 3, "loyalty": -6 },
+          "setFlags": ["wild_child"],
+          "ripples": [ { "to": "fred_patience", "weight": 0.5, "polarity": -1 } ],
+          "outcome": "You become a schoolyard legend and a parent-teacher nightmare. Fred is summoned. He is not amused."
+        },
+        {
+          "id": "rally_the_kids",
+          "text": "Turn it into a popularity contest and rally the other kids",
+          "effects": { "reputation": 7, "heat": 5, "power": 4 },
+          "outcome": "You hold court at recess like a tiny mob boss. Detention follows, but so do followers."
+        },
+        {
+          "id": "apologize_strategically",
+          "text": "Apologize loudly and insincerely to dodge punishment",
+          "effects": { "heat": -4, "reputation": 2, "loyalty": 2 },
+          "outcome": "You charm your way out of detention. First rule of damage control, learned at age eleven."
+        }
+      ]
+    },
+    {
+      "id": "ev_fred_decides_military_school",
+      "era": "boyhood",
+      "year": 1959,
+      "title": "Fred Lays Down the Law",
+      "scene": "Fred has had enough of the phone calls from school. He sits you down: you're being shipped upstate to the New York Military Academy to get straightened out. There will be drills, uniforms, and a colonel who does not care that your last name is on buildings. You can fight it or salute it.",
+      "researchNote": "In 1959, at age 13, Trump's parents sent him to the New York Military Academy in Cornwall-on-Hudson to instill discipline after his unruly behavior in Queens.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["family", "school", "ambition"],
+      "portrait": "cadet",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 16,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_the_challenge",
+          "text": "Tell Fred you'll come back the best cadet they've ever seen",
+          "effects": { "power": 6, "loyalty": 8, "reputation": 3, "heat": -6 },
+          "setFlags": ["fathers_lessons", "at_nyma"],
+          "ripples": [ { "to": "manhattan_ambition", "weight": 0.4, "polarity": 1 } ],
+          "outcome": "Fred almost smiles. You reframe exile as a campaign to win, exactly the way he taught you. (Father's lessons learned.)"
+        },
+        {
+          "id": "sulk_and_resist",
+          "text": "Slam the door and vow to hate every minute of it",
+          "effects": { "heat": 6, "loyalty": -5, "health": -3 },
+          "setFlags": ["at_nyma", "resents_fred"],
+          "outcome": "You go upstate furious. The mountain air does nothing for your mood, at least not yet."
+        }
+      ]
+    },
+    {
+      "id": "ev_first_day_nyma",
+      "era": "boyhood",
+      "year": 1959,
+      "title": "Reveille, Plebe",
+      "scene": "A bugle blasts at dawn. A drill instructor with a voice like gravel inspects your bunk, your shoes, your posture, and finds all of it lacking. Up here, the Trump name buys nothing. You either learn the system fast or it grinds you down.",
+      "researchNote": "At NYMA, cadets followed a strict regimen of early reveille, inspections, marching, and military discipline; Trump later credited the academy with teaching him about competition and toughness.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["school", "discipline"],
+      "portrait": "cadet",
+      "requires": { "flags": ["at_nyma"], "notFlags": [], "meters": {} },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "master_the_drill",
+          "text": "Out-shine, out-shoe, and out-march everyone",
+          "effects": { "power": 7, "loyalty": 6, "reputation": 4, "health": 4 },
+          "setFlags": ["model_cadet"],
+          "outcome": "By week's end the DI grudgingly nods at your bunk. You discover you love winning a game with clear rules."
+        },
+        {
+          "id": "work_the_angles",
+          "text": "Befriend the toughest cadets and trade favors",
+          "effects": { "power": 5, "reputation": 5, "loyalty": 3, "heat": 3 },
+          "setFlags": ["builds_alliances"],
+          "ripples": [ { "to": "manhattan_ambition", "weight": 0.3, "polarity": 1 } ],
+          "outcome": "You learn that even in a system, the guy who runs the room is the one with the relationships."
+        },
+        {
+          "id": "buck_the_system",
+          "text": "Test how much the rules really apply to you",
+          "effects": { "heat": 9, "loyalty": -4, "reputation": 2 },
+          "outcome": "Push-ups in the rain teach you a lesson Fred couldn't: pick your fights. Mostly."
+        }
+      ]
+    },
+    {
+      "id": "ev_cadet_captain",
+      "era": "boyhood",
+      "year": 1963,
+      "title": "Stripes and a Sword",
+      "scene": "Four years in, you've turned military school into your kingdom. Sharp uniform, baritone bark, a chest of medals. The brass taps you for a leadership post; underclassmen scramble when you enter a room. You finally understand the thrill of command.",
+      "researchNote": "Trump excelled at NYMA, earning athletic honors and rising to a cadet leadership position (cadet captain) in his senior year, where he was noted for his competitiveness.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["school", "discipline", "ambition", "power"],
+      "portrait": "cadet",
+      "requires": { "flags": ["at_nyma"], "notFlags": [], "meters": {} },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "lead_by_command",
+          "text": "Rule the corps with iron discipline and demand results",
+          "effects": { "power": 9, "loyalty": 7, "reputation": 5, "heat": 4 },
+          "setFlags": ["natural_leader"],
+          "ripples": [ { "to": "manhattan_ambition", "weight": 0.5, "polarity": 1 } ],
+          "outcome": "The unit snaps to your orders. You learn the intoxicating math: control plus pressure equals winning."
+        },
+        {
+          "id": "lead_by_charm",
+          "text": "Win loyalty with charisma and selective generosity",
+          "effects": { "loyalty": 9, "reputation": 7, "power": 5 },
+          "setFlags": ["natural_leader", "builds_alliances"],
+          "outcome": "Cadets would follow you off a cliff. You file away that loyalty, properly cultivated, is the best leverage there is."
+        },
+        {
+          "id": "abuse_the_rank",
+          "text": "Lean on rank to settle personal scores",
+          "effects": { "power": 5, "heat": 10, "reputation": 3, "loyalty": -6 },
+          "outcome": "A few enemies, a few favors owed. The brass raises an eyebrow but the medals keep coming."
+        }
+      ]
+    },
+    {
+      "id": "ev_first_deal_instinct",
+      "era": "boyhood",
+      "year": 1963,
+      "title": "The Switchblade Economy",
+      "scene": "A classmate is selling contraband switchblades for spending money. You see something better than a knife: a market. You start brokering deals, taking a cut, settling disputes. Lights-out becomes your trading floor.",
+      "researchNote": "Even as a teenager Trump showed a knack for self-promotion and deal-making instincts that he would later mythologize in 'The Art of the Deal,' framing himself as a born negotiator.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["money", "ambition", "school"],
+      "portrait": "cadet",
+      "requires": { "flags": ["at_nyma"], "notFlags": [], "meters": {} },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "broker_everything",
+          "text": "Become the middleman for every trade in the barracks",
+          "effects": { "money": 40, "power": 6, "reputation": 4, "heat": 7 },
+          "setFlags": ["fathers_lessons", "dealmaker"],
+          "ripples": [ { "to": "manhattan_ambition", "weight": 0.7, "polarity": 1 } ],
+          "outcome": "Cash flows in and a reputation forms: the kid who takes a piece of everything. Fred's gospel, applied. (Father's lessons learned.)"
+        },
+        {
+          "id": "play_it_safe",
+          "text": "Stay clean and just study the players",
+          "effects": { "heat": -5, "power": 3, "money": 5 },
+          "setFlags": ["dealmaker"],
+          "outcome": "No risk, no detention, but plenty of notes on who wants what. Information, you realize, is also currency."
+        },
+        {
+          "id": "snitch_for_leverage",
+          "text": "Tip off an officer to take out a rival broker",
+          "effects": { "power": 5, "money": 15, "loyalty": -8, "heat": 4 },
+          "outcome": "Your competition gets marched off; you absorb his clientele. Ruthless, effective, and quietly remembered by the others."
+        }
+      ]
+    },
+    {
+      "id": "ev_graduation_and_fordham",
+      "era": "boyhood",
+      "year": 1964,
+      "title": "Graduation, and the Bridge to the City",
+      "scene": "You graduate from NYMA in 1964, medals on your chest, eyes already drifting south toward Manhattan's skyline. Fordham University in the Bronx is the plan, but everyone can tell your real target is the city itself. The boyhood is over; the empire is a rumor on the horizon.",
+      "researchNote": "Trump graduated from the New York Military Academy in 1964 and went on to attend Fordham University in the Bronx for two years before transferring to the Wharton School at the University of Pennsylvania.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["school", "ambition", "transition"],
+      "portrait": "cadet",
+      "requires": { "flags": ["at_nyma"], "notFlags": [], "meters": {} },
+      "weight": 16,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "aim_at_manhattan",
+          "text": "Tell Fred you won't stop at Brooklyn rent rolls, you want Manhattan",
+          "effects": { "power": 8, "reputation": 6, "loyalty": 4, "money": 10 },
+          "setFlags": ["fathers_lessons", "manhattan_dreamer"],
+          "ripples": [ { "to": "manhattan_ambition", "weight": 0.8, "polarity": 1 } ],
+          "outcome": "Fred warns you the city eats outer-borough boys alive. You smile. That, you tell him, is exactly why you'll win. (Father's lessons learned.)"
+        },
+        {
+          "id": "follow_freds_path",
+          "text": "Promise to learn the family business the slow, safe way",
+          "effects": { "loyalty": 9, "money": 20, "power": 3 },
+          "setFlags": ["family_business_track"],
+          "outcome": "Fred is pleased; the Brooklyn portfolio is yours to learn. Patience now, ambition later, you tell yourself."
+        },
+        {
+          "id": "coast_on_charm",
+          "text": "Skate by on the name and the charm and figure it out later",
+          "effects": { "reputation": 5, "heat": 4, "health": 3, "power": -2 },
+          "outcome": "Why grind when the name opens doors? You head to Fordham confident the world owes you an introduction."
+        }
+      ]
+    }
+  ]
+}

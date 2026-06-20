@@ -1,0 +1,385 @@
+{
+  "era": "mogul",
+  "events": [
+    {
+      "id": "ev_join_fred_business",
+      "era": "mogul",
+      "year": 1968,
+      "title": "Trump Management, Brooklyn Office",
+      "scene": "Fresh out of Wharton, you report for duty at your father Fred's company, collecting rents in Brooklyn and Queens. The buildings are middle-class apartment complexes, profitable but unglamorous. Fred hands you a clipboard and a list of late payers. He expects results, not excuses.",
+      "researchNote": "After graduating from the Wharton School in 1968, Donald Trump joined his father Fred Trump's real estate firm, Trump Management, which operated middle-income rental housing in Brooklyn, Queens, and Staten Island.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["realestate", "family"],
+      "portrait": "young_mogul",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "learn_the_trade",
+          "text": "Shadow Fred, learn every angle of the rent business.",
+          "effects": { "money": 30, "power": 5, "loyalty": 8 },
+          "setFlags": ["fathers_lessons"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.2, "polarity": 1 }],
+          "outcome": "You absorb Fred's hard-nosed playbook. The old man nods, rarely, but he nods. The lessons stick."
+        },
+        {
+          "id": "dream_bigger",
+          "text": "Tell Fred outer-borough rentals are beneath you.",
+          "effects": { "money": -10, "power": 6, "loyalty": -6, "reputation": 4 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.3, "polarity": 1 }],
+          "outcome": "Fred frowns. The kid wants Manhattan, not Coney Island. Ambition noted, patience not."
+        }
+      ]
+    },
+    {
+      "id": "ev_move_to_manhattan",
+      "era": "mogul",
+      "year": 1971,
+      "title": "Crossing the River",
+      "scene": "You rent a small apartment in Manhattan and start prowling the Upper East Side clubs, trading on the family name and a borrowed credit line. The real money, you decide, is across the East River from where Fred built his fortune. You want your name on a skyline, not a rent roll.",
+      "researchNote": "In the early 1970s Trump moved to Manhattan and joined exclusive clubs like Le Club, cultivating connections among the city's social and business elite as he pivoted toward Manhattan real estate.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["realestate", "branding"],
+      "portrait": "young_mogul",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "work_the_room",
+          "text": "Charm the city's power brokers at Le Club.",
+          "effects": { "money": -20, "power": 8, "reputation": 6 },
+          "setFlags": ["manhattan_arrival"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.4, "polarity": 1 }],
+          "outcome": "You collect contacts like poker chips. Bankers, lawyers, society columnists, all now know the young Trump."
+        },
+        {
+          "id": "play_it_safe",
+          "text": "Stay close to Fred's books and don't overspend.",
+          "effects": { "money": 20, "power": 2, "loyalty": 4, "reputation": -3 },
+          "setFlags": ["manhattan_arrival"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.1, "polarity": -1 }],
+          "outcome": "Cautious, solvent, and unknown. The skyline waits for someone louder."
+        }
+      ]
+    },
+    {
+      "id": "ev_first_manhattan_deal",
+      "era": "mogul",
+      "year": 1976,
+      "title": "The Commodore Gamble",
+      "scene": "The Commodore Hotel beside Grand Central is a decaying wreck and the city is nearly bankrupt. You propose buying it, gutting it, and reopening it as a gleaming Grand Hyatt, but only if the city grants you an unprecedented 40-year property-tax abatement. Everyone says it can't be done. Fred's lessons whisper in your ear.",
+      "researchNote": "Trump's breakout deal was the 1976 acquisition and redevelopment of the run-down Commodore Hotel into the Grand Hyatt, secured with a controversial 40-year tax abatement from a near-bankrupt New York City, opening in 1980.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["realestate", "branding", "power"],
+      "portrait": "young_mogul",
+      "requires": { "flags": ["fathers_lessons"], "notFlags": [], "meters": {} },
+      "weight": 18,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "land_the_abatement",
+          "text": "Pressure City Hall until the tax abatement is yours.",
+          "effects": { "money": 300, "power": 12, "reputation": 10, "heat": 5 },
+          "setFlags": ["commodore_deal", "tax_abatement"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.6, "polarity": 1 },
+            { "to": "business_press", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The Grand Hyatt rises in chrome and glass. The unprecedented abatement makes you, at 30, a Manhattan player overnight."
+        },
+        {
+          "id": "partner_with_hyatt",
+          "text": "Bring in Hyatt as a partner to share the risk.",
+          "effects": { "money": 180, "power": 7, "reputation": 6, "loyalty": -3 },
+          "setFlags": ["commodore_deal"],
+          "clearFlags": [],
+          "ripples": [{ "to": "business_press", "weight": 0.4, "polarity": 1 }],
+          "outcome": "Splitting the upside steadies the deal but dilutes the legend. Still, the Commodore becomes your launchpad."
+        },
+        {
+          "id": "walk_away",
+          "text": "Too risky in a broke city. Pass on it.",
+          "effects": { "money": 0, "power": -6, "reputation": -8 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.2, "polarity": -1 }],
+          "outcome": "The wreck stays a wreck for now. Someone bolder would have seen the skyline in the rubble."
+        }
+      ]
+    },
+    {
+      "id": "ev_marry_ivana",
+      "era": "mogul",
+      "year": 1977,
+      "title": "The Czech Model",
+      "scene": "You meet Ivana Zelnickova, a Czech-born skier and fashion model, at a New York restaurant during the Montreal Olympics buzz. She is sharp, glamorous, and ambitious, the perfect partner for a man building an empire. The wedding is splashed across the society pages.",
+      "researchNote": "Trump married Ivana Zelnickova, a Czech model and former competitive skier, in April 1977; she later played a prominent role managing the Plaza Hotel and the Atlantic City casino operations.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["family", "branding", "celebrity"],
+      "portrait": "young_mogul",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "power_couple",
+          "text": "Build a glamorous power-couple brand together.",
+          "effects": { "money": 20, "power": 6, "reputation": 9, "loyalty": 6 },
+          "setFlags": ["married_ivana"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.5, "polarity": 1 }],
+          "outcome": "Ivana becomes a fixture of the empire and the gossip columns. Together you are New York royalty in the making."
+        },
+        {
+          "id": "keep_business_separate",
+          "text": "Marry her but keep her out of the business.",
+          "effects": { "money": 10, "power": 3, "reputation": 2, "loyalty": -4 },
+          "setFlags": ["married_ivana"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.3, "polarity": 1 }],
+          "outcome": "A handsome marriage, a quieter partnership. The columns get less to chew on."
+        }
+      ]
+    },
+    {
+      "id": "ev_brash_media_persona",
+      "era": "mogul",
+      "year": 1979,
+      "title": "Feeding the Tabloids",
+      "scene": "A reporter calls asking about your net worth. You could give a sober figure, or you could inflate it wildly and watch the headlines bloom. The New York press is hungry, and you are learning that perception is leverage. Every quote is a brick in the brand.",
+      "researchNote": "Trump cultivated a brash public image in the late 1970s and 1980s, frequently exaggerating his wealth to reporters and even posing as a fictional spokesman named 'John Barron' to plant favorable stories with the press.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["branding", "celebrity", "tabloids"],
+      "portrait": "young_mogul",
+      "requires": { "flags": ["manhattan_arrival"], "notFlags": [], "meters": {} },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "inflate_the_legend",
+          "text": "Triple the number and let the headlines run.",
+          "effects": { "money": 10, "power": 7, "reputation": 8, "heat": 4 },
+          "setFlags": ["media_brand"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.7, "polarity": 1 },
+            { "to": "business_press", "weight": 0.3, "polarity": -1 }
+          ],
+          "outcome": "The press eats it up. The Trump legend grows faster than the actual balance sheet, and that is the point."
+        },
+        {
+          "id": "stay_factual",
+          "text": "Give the honest, modest figure.",
+          "effects": { "money": 5, "power": 1, "reputation": -4 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "business_press", "weight": 0.3, "polarity": 1 }],
+          "outcome": "Accurate and forgettable. The headline runs on page nine, if at all."
+        }
+      ]
+    },
+    {
+      "id": "ev_trump_tower_friezes",
+      "era": "mogul",
+      "year": 1980,
+      "title": "The Bonwit Teller Friezes",
+      "scene": "To build Trump Tower on Fifth Avenue, you must demolish the old Bonwit Teller department store. The Metropolitan Museum wants its prized Art Deco limestone friezes preserved. Saving them means delays and crane costs; jackhammering them means schedule and savings. The press is watching.",
+      "researchNote": "During the 1980 demolition for Trump Tower, Trump ordered the destruction of Bonwit Teller's prized Art Deco bas-relief sculptures rather than donate them to the Metropolitan Museum of Art as promised, citing cost and delay, drawing widespread criticism.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["realestate", "branding", "heat"],
+      "portrait": "mogul",
+      "requires": { "flags": ["commodore_deal"], "notFlags": [], "meters": {} },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "destroy_friezes",
+          "text": "Jackhammer them. Schedule beats sentiment.",
+          "effects": { "money": 120, "power": 6, "reputation": -10, "heat": 8 },
+          "setFlags": ["trump_tower", "friezes_destroyed"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.6, "polarity": -1 },
+            { "to": "business_press", "weight": 0.4, "polarity": -1 }
+          ],
+          "outcome": "The friezes crumble to dust and the city howls. But Trump Tower rises on schedule, a gold-and-glass monument to your name."
+        },
+        {
+          "id": "save_friezes",
+          "text": "Eat the cost and donate them to the Met.",
+          "effects": { "money": -60, "power": 3, "reputation": 12, "heat": -4 },
+          "setFlags": ["trump_tower"],
+          "clearFlags": [],
+          "ripples": [{ "to": "business_press", "weight": 0.4, "polarity": 1 }],
+          "outcome": "The Met gets its treasures and you get rare good press. Trump Tower opens a little later, a little classier."
+        }
+      ]
+    },
+    {
+      "id": "ev_trump_tower_opens",
+      "era": "mogul",
+      "year": 1983,
+      "title": "Gold on Fifth Avenue",
+      "scene": "Trump Tower opens its doors: a 58-story tower of bronze glass with a pink-marble atrium, a five-story waterfall, and your name in gold over the entrance. Celebrities and money pour in. This is the building that makes the Trump name a luxury brand. How do you market it?",
+      "researchNote": "Trump Tower opened in 1983 on Fifth Avenue, featuring a 60-foot indoor waterfall and pink Breccia Pernice marble atrium; it became Trump's flagship and the headquarters of his organization.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["realestate", "branding", "celebrity"],
+      "portrait": "mogul",
+      "requires": { "flags": ["trump_tower"], "notFlags": [], "meters": {} },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "luxury_brand",
+          "text": "Position the Trump name as pure luxury.",
+          "effects": { "money": 200, "power": 9, "reputation": 10 },
+          "setFlags": ["trump_brand", "luxury_brand"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.5, "polarity": 1 },
+            { "to": "business_press", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The name TRUMP now means gold, glass, and excess. Buyers pay a premium just for the letters over the door."
+        },
+        {
+          "id": "rent_to_anyone",
+          "text": "Fill it fast, screen tenants loosely.",
+          "effects": { "money": 150, "power": 4, "reputation": -2, "heat": 6 },
+          "setFlags": ["trump_brand"],
+          "clearFlags": [],
+          "ripples": [{ "to": "business_press", "weight": 0.3, "polarity": -1 }],
+          "outcome": "The units fill quickly with cash buyers, some of them shadowy. The money is fast; the questions come later."
+        }
+      ]
+    },
+    {
+      "id": "ev_atlantic_city_casino",
+      "era": "mogul",
+      "year": 1984,
+      "title": "The Boardwalk Beckons",
+      "scene": "New Jersey has legalized gambling and Atlantic City is exploding. You could plant the Trump name on a casino tower on the Boardwalk, financed largely with debt. The gaming commission, the bankers, the bondholders all want a piece. The upside is a glittering casino empire; the downside is leverage that could crush you.",
+      "researchNote": "Trump entered the Atlantic City casino market in the early 1980s, opening Harrah's at Trump Plaza in 1984; he eventually controlled three casinos, heavily financed with debt that later led to bankruptcies.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["realestate", "branding", "casino", "power"],
+      "portrait": "mogul",
+      "requires": { "flags": ["trump_brand"], "notFlags": [], "meters": {} },
+      "weight": 15,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_casino_empire",
+          "text": "Borrow big and stake your name on the Boardwalk.",
+          "effects": { "money": 250, "power": 10, "reputation": 6, "heat": 9, "health": -3 },
+          "setFlags": ["casino_empire"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.5, "polarity": 1 },
+            { "to": "business_press", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The Trump Plaza casino lights up the Boardwalk. The cash flow is dazzling, the debt mountain is terrifying, and both bear your name."
+        },
+        {
+          "id": "small_stake",
+          "text": "Take a cautious minority position instead.",
+          "effects": { "money": 80, "power": 4, "reputation": 2, "heat": 2 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "business_press", "weight": 0.3, "polarity": 1 }],
+          "outcome": "A modest bet on a hot market. Safer, smaller, and far less likely to make headlines or history."
+        }
+      ]
+    },
+    {
+      "id": "ev_usfl_generals",
+      "era": "mogul",
+      "year": 1984,
+      "title": "The New Jersey Generals",
+      "scene": "You buy the New Jersey Generals of the upstart USFL, a spring football league challenging the mighty NFL. You sign star players, then push the league to move to a fall schedule and sue the NFL for antitrust. It is a high-stakes gamble against the most powerful sports cartel in America.",
+      "researchNote": "Trump purchased the USFL's New Jersey Generals in 1984 and pushed the league to compete directly with the NFL in the fall and pursue an antitrust suit; the USFL won the 1986 lawsuit but was awarded only three dollars in damages and folded.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["branding", "celebrity", "power"],
+      "portrait": "mogul",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "war_on_nfl",
+          "text": "Force the fall schedule and sue the NFL.",
+          "effects": { "money": -120, "power": 5, "reputation": 4, "heat": 6 },
+          "setFlags": ["usfl_owner"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.5, "polarity": 1 },
+            { "to": "business_press", "weight": 0.4, "polarity": -1 }
+          ],
+          "outcome": "You win the lawsuit and a three-dollar check. The league collapses, but you spent two seasons on the national sports page."
+        },
+        {
+          "id": "play_it_steady",
+          "text": "Keep the Generals in their lane in the spring.",
+          "effects": { "money": -30, "power": 2, "reputation": 1 },
+          "setFlags": ["usfl_owner"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.2, "polarity": 1 }],
+          "outcome": "The Generals play steady spring ball. Less drama, less debt, and far fewer cameras pointed your way."
+        }
+      ]
+    },
+    {
+      "id": "ev_art_of_the_deal",
+      "era": "mogul",
+      "year": 1987,
+      "title": "The Art of the Deal",
+      "scene": "A publisher wants a book with your name on the cover. A ghostwriter does the heavy lifting, but the persona, the swagger, the deal-making mythology, that is all you. It could become the bible of 1980s ambition and cement you as a national celebrity, or it could expose how much is bluster.",
+      "researchNote": "Trump's 'The Art of the Deal,' co-written with ghostwriter Tony Schwartz, was published in 1987, became a bestseller, and cemented Trump's national image as a master dealmaker and celebrity businessman.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["branding", "celebrity"],
+      "portrait": "mogul",
+      "requires": { "flags": ["trump_brand"], "notFlags": [], "meters": {} },
+      "weight": 16,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "publish_the_legend",
+          "text": "Publish it big and become a household name.",
+          "effects": { "money": 150, "power": 11, "reputation": 12 },
+          "setFlags": ["wrote_art_of_deal"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.6, "polarity": 1 },
+            { "to": "business_press", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The book tops the bestseller lists for nearly a year. You are no longer just a developer; you are a brand, a guru, an American celebrity."
+        },
+        {
+          "id": "credit_the_ghostwriter",
+          "text": "Share the spotlight with your ghostwriter.",
+          "effects": { "money": 90, "power": 5, "reputation": 6, "loyalty": 5 },
+          "setFlags": ["wrote_art_of_deal"],
+          "clearFlags": [],
+          "ripples": [{ "to": "business_press", "weight": 0.4, "polarity": 1 }],
+          "outcome": "The book still sells, and you earn a quieter kind of respect. The myth grows a touch slower without the full one-man-show treatment."
+        }
+      ]
+    }
+  ]
+}

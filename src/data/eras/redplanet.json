@@ -1,0 +1,355 @@
+{
+  "era": "redplanet",
+  "events": [
+    {
+      "id": "ev_seal_musk_pact",
+      "era": "redplanet",
+      "year": 2080,
+      "title": "The Two-Titan Handshake",
+      "scene": "In a hangar lit by the glow of a hundred Starship engines, Elon Musk extends a hand across a gold-leaf contract the size of a banquet table. He has the rockets; you have the unkillable will and a unified Earth at your command. He calls it a partnership. You call it a coronation with extra thrust.",
+      "researchNote": "A speculative far-future extrapolation seeded by SpaceX's real-world ambition, repeatedly stated by Elon Musk, to make humanity multiplanetary by establishing a self-sustaining city on Mars within the twenty-first century.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["mars", "alliance", "power", "branding"],
+      "portrait": "emperor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 16,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "sign_as_equals_then_dominate",
+          "text": "Sign the pact, then make sure your name is bigger.",
+          "effects": { "money": 400, "power": 14, "reputation": 10, "loyalty": 8 },
+          "setFlags": ["musk_pact", "mars_program"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.5, "polarity": 1 }],
+          "outcome": "The ink dries and the engines roar. Musk builds the ladder to the stars; you decide who climbs it and whose face is carved at the top."
+        },
+        {
+          "id": "let_musk_lead_engineering",
+          "text": "Let Musk run the rockets while you run everything else.",
+          "effects": { "money": 250, "power": 9, "loyalty": 6, "reputation": 6 },
+          "setFlags": ["musk_pact", "mars_program"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.3, "polarity": 1 }],
+          "outcome": "A clean division of empire: he gets the physics, you get the politics. The handshake holds, and Mars goes on the calendar."
+        }
+      ]
+    },
+    {
+      "id": "ev_colony_fleet_launch",
+      "era": "redplanet",
+      "year": 2083,
+      "title": "The First Colony Fleet",
+      "scene": "One thousand Starships sit fueled on the Texas flats, each one stamped with your name in letters visible from orbit. Inside ride the first settlers: engineers, loyalists, and one very confident immortal patriarch. The countdown clock is the largest ever built, gold-rimmed, naturally.",
+      "researchNote": "An imaginative extrapolation of SpaceX's stated long-term goal of launching fleets of Starships to Mars during favorable transfer windows to ferry cargo and colonists, scaled up to a satirical thousand-ship armada.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["mars", "fleet", "spectacle", "power"],
+      "portrait": "emperor",
+      "requires": { "flags": ["mars_program"], "notFlags": [], "meters": {} },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "ride_the_first_ship",
+          "text": "Board the lead ship yourself. Patriarchs lead from the front.",
+          "effects": { "money": -100, "power": 12, "reputation": 12, "loyalty": 10, "health": -4 },
+          "setFlags": ["colony_fleet_launched", "aboard_fleet"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.6, "polarity": 1 }],
+          "outcome": "The armada lifts off as one, a thousand pillars of fire under your command. The cameras will run for the entire seven-month voyage."
+        },
+        {
+          "id": "command_from_orbit",
+          "text": "Direct the launch from a gilded orbital station.",
+          "effects": { "money": -60, "power": 10, "reputation": 8, "loyalty": 7 },
+          "setFlags": ["colony_fleet_launched"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.4, "polarity": 1 }],
+          "outcome": "From your station you watch the fleet depart like a flock of burning swans. The greatest migration in history, and it carries your monogram."
+        }
+      ]
+    },
+    {
+      "id": "ev_martian_groundbreaking",
+      "era": "redplanet",
+      "year": 2086,
+      "title": "Groundbreaking on the Red Planet",
+      "scene": "Boots crunch into ferric dust no human had ever touched. Under a butterscotch sky you drive a golden ceremonial shovel into Martian soil, and a thousand settlers cheer through their helmets. Musk weeps behind his visor; you simply nod, because you always knew you would stand here.",
+      "researchNote": "A triumphant far-future extrapolation of the SpaceX vision in which the first crewed landings establish a permanent foothold, here dramatized as the literal groundbreaking of the first sustained off-world settlement.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["mars", "milestone", "spectacle", "power"],
+      "portrait": "martian",
+      "requires": { "flags": ["colony_fleet_launched"], "notFlags": [], "meters": {} },
+      "weight": 20,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_the_first_base",
+          "text": "Order the first base raised at once, no expense spared.",
+          "effects": { "money": -150, "power": 14, "reputation": 13, "loyalty": 12, "health": -3 },
+          "setFlags": ["martian_base", "first_landing"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.6, "polarity": 1 }],
+          "outcome": "Domes rise from the regolith within weeks, pressurized and warm and unmistakably yours. Humanity is, at last, a two-world species, and you are its founder."
+        },
+        {
+          "id": "stage_the_landing_for_earth",
+          "text": "Beam the landing to a captive Earth audience first.",
+          "effects": { "money": 60, "power": 11, "reputation": 14, "loyalty": 8 },
+          "setFlags": ["martian_base", "first_landing"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.7, "polarity": 1 }],
+          "outcome": "Billions watch the golden shovel bite the dust live. The base goes up regardless, and your legend now spans the void between two planets."
+        }
+      ]
+    },
+    {
+      "id": "ev_terraforming_gambit",
+      "era": "redplanet",
+      "year": 2092,
+      "title": "The Terraforming Gambit",
+      "scene": "The atmosphere is too thin, the cold too cruel. Musk wants to thicken the air with orbital mirrors and released carbon; cautious advisors warn it could take centuries and trillions. You did not come to Mars to wait politely for a sky.",
+      "researchNote": "A speculative extrapolation of long-discussed Mars terraforming concepts, including orbital solar mirrors and greenhouse-gas release, ideas Elon Musk has publicly floated, compressed here into a single grand satirical wager.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["mars", "terraforming", "science", "spectacle"],
+      "portrait": "martian",
+      "requires": { "flags": ["martian_base"], "notFlags": [], "meters": {} },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "go_big_on_terraforming",
+          "text": "Hang giant mirrors in orbit and warm the whole planet.",
+          "effects": { "money": -300, "power": 12, "reputation": 11, "loyalty": 9 },
+          "setFlags": ["terraforming_begun"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.5, "polarity": 1 }],
+          "outcome": "A constellation of mirrors blooms overhead and the poles begin to weep. The sky, for the first time in four billion years, starts to soften toward blue."
+        },
+        {
+          "id": "incremental_domes",
+          "text": "Skip the gamble; expand the domed cities instead.",
+          "effects": { "money": 120, "power": 7, "reputation": 6, "loyalty": 6 },
+          "setFlags": ["domed_expansion"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.2, "polarity": 1 }],
+          "outcome": "The domes multiply across the canyons, safe and profitable. The open sky can wait; the rent cannot."
+        }
+      ]
+    },
+    {
+      "id": "ev_name_first_city",
+      "era": "redplanet",
+      "year": 2095,
+      "title": "Naming the First City",
+      "scene": "The first true Martian metropolis is complete: a hundred thousand souls under a vaulted dome the size of a small sea. A committee timidly suggests 'New Olympia' or 'Ares Prime.' You look at them as if they have suggested setting fire to money.",
+      "researchNote": "A satirical far-future extrapolation; SpaceX has only ever described an unnamed Mars city in concept, leaving the naming of humanity's first off-world capital to imagination, and to ego.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["mars", "branding", "spectacle", "power"],
+      "portrait": "emperor",
+      "requires": { "flags": ["martian_base"], "notFlags": [], "meters": {} },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "name_it_trump_city",
+          "text": "It will be called Trump City. Obviously.",
+          "effects": { "money": 80, "power": 13, "reputation": 9, "loyalty": 11 },
+          "setFlags": ["trump_city"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.6, "polarity": 1 }],
+          "outcome": "Trump City glows under its dome, your name in gold letters tall enough to read from the moons. The committee applauds, because the alternative is the airlock."
+        },
+        {
+          "id": "name_it_new_america",
+          "text": "Name it New America to flatter the home world.",
+          "effects": { "money": 50, "power": 10, "reputation": 12, "loyalty": 9 },
+          "setFlags": ["trump_city"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.4, "polarity": 1 }],
+          "outcome": "New America rises, with your statue at its heart so no one forgets who built it. Two worlds, one flag, one founder."
+        }
+      ]
+    },
+    {
+      "id": "ev_govern_two_worlds",
+      "era": "redplanet",
+      "year": 2100,
+      "title": "The Office of Two Worlds",
+      "scene": "Earth runs on one calendar, Mars on another; the light-lag between your edicts and their arrival can stretch twenty minutes each way. Bureaucrats beg for a constitution, a charter, anything written down. You prefer governing the way you always have: by phone, by gut, by gold.",
+      "researchNote": "A speculative extrapolation of the genuine governance problem posed by interplanetary settlement, where the eleven-to-twenty-minute one-way signal delay between Earth and Mars, a real orbital-mechanics fact, makes unified real-time rule physically impossible.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["mars", "governance", "power", "dynasty"],
+      "portrait": "emperor",
+      "requires": { "flags": ["trump_city"], "notFlags": [], "meters": {} },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "rule_by_decree",
+          "text": "Rule both worlds personally by decree, lag be damned.",
+          "effects": { "money": 150, "power": 14, "reputation": 6, "loyalty": 12, "heat": 5 },
+          "setFlags": ["two_world_rule"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.4, "polarity": 1 }],
+          "outcome": "Your word crosses the void at the speed of light and lands as law on two planets. Inefficient, magnificent, and entirely yours."
+        },
+        {
+          "id": "appoint_martian_viceroy",
+          "text": "Install a loyal viceroy on Mars who answers only to you.",
+          "effects": { "money": 100, "power": 11, "reputation": 8, "loyalty": 10 },
+          "setFlags": ["two_world_rule"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.3, "polarity": 1 }],
+          "outcome": "A hand-picked viceroy keeps the dome cities humming in your name. The light-lag stops mattering when the deputy worships the boss."
+        }
+      ]
+    },
+    {
+      "id": "ev_earth_mars_tensions",
+      "era": "redplanet",
+      "year": 2104,
+      "title": "The Red Planet Grumbles",
+      "scene": "Born-on-Mars settlers, taller and leaner in the low gravity, mutter about taxes shipped back to a planet they have never seen. A few firebrands whisper the word 'independence.' Earth's old guard wants you to crush the talk; the Martians want a seat at your table.",
+      "researchNote": "A far-future extrapolation of a classic colonization tension, the strain between a frontier settlement and its distant home government, recast for the SpaceX-era Mars colony where physiology and distance alike pull the two worlds apart.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["mars", "politics", "tension", "power"],
+      "portrait": "martian",
+      "requires": { "flags": ["two_world_rule"], "notFlags": [], "meters": {} },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "co_opt_the_martians",
+          "text": "Make the loudest Martians governors. Loyalty beats rebellion.",
+          "effects": { "money": -40, "power": 11, "reputation": 10, "loyalty": 13 },
+          "setFlags": ["martians_loyal"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.3, "polarity": 1 }],
+          "outcome": "The firebrands trade slogans for titles and become your fiercest defenders. The independence talk evaporates into grateful applause."
+        },
+        {
+          "id": "crush_the_dissent",
+          "text": "Cut off the malcontents' oxygen subsidies as a warning.",
+          "effects": { "money": 90, "power": 9, "reputation": -8, "loyalty": 5, "heat": 9 },
+          "setFlags": ["martians_cowed"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.5, "polarity": -1 }],
+          "outcome": "The grumbling stops, sullenly. You have order, and a faint chill in the domes that no thermostat can fix."
+        }
+      ]
+    },
+    {
+      "id": "ev_immortal_dynasty",
+      "era": "redplanet",
+      "year": 2110,
+      "title": "The Deathless Dynasty",
+      "scene": "Your children have grown old and gone; their children call you grandfather and look ancient beside you. The longevity treatments held, and you remain, unlined and golden, the one fixed star of the family. They gather around your chair on Mars, half heirs, half subjects, all in awe.",
+      "researchNote": "A speculative extrapolation combining the era's immortal-protagonist conceit with the dynastic dynamics of a multigenerational founding family, a recurring theme in imagined long-lived Mars colonies seeded by SpaceX's century-scale vision.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["mars", "dynasty", "immortality", "power"],
+      "portrait": "emperor",
+      "requires": { "flags": ["two_world_rule"], "notFlags": [], "meters": {} },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "rule_forever_personally",
+          "text": "Why pick an heir? You are the heir. Rule forever.",
+          "effects": { "money": 120, "power": 14, "reputation": 8, "loyalty": 13 },
+          "setFlags": ["eternal_patriarch"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.4, "polarity": 1 }],
+          "outcome": "The succession question dies the moment you refuse to die. The family orbits you like moons, and the dynasty has exactly one immortal king."
+        },
+        {
+          "id": "groom_a_council_of_heirs",
+          "text": "Let the family govern as your eternal council of deputies.",
+          "effects": { "money": 90, "power": 11, "reputation": 10, "loyalty": 12 },
+          "setFlags": ["eternal_patriarch"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.3, "polarity": 1 }],
+          "outcome": "Generations of Trumps serve beneath you as a standing council, each one knowing the throne above them will never empty. Stability, dynastic and deathless."
+        }
+      ]
+    },
+    {
+      "id": "ev_final_ascension",
+      "era": "redplanet",
+      "year": 2118,
+      "title": "Patriarch of Two Worlds",
+      "scene": "On a balcony of Trump City, beneath a sky now faintly, miraculously blue, the assembled multitudes of two planets fall silent. Musk, gray and content, presents you with a single crown bearing two jewels: one for the blue marble overhead, one for the red ground underfoot. The whole of human civilization waits for you to take it.",
+      "researchNote": "The capstone far-future extrapolation: the culmination of the SpaceX-seeded multiplanetary dream reimagined as the coronation of a single immortal founder over a unified two-world civilization, the satirical victory ending of the saga.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["mars", "victory", "coronation", "power", "dynasty"],
+      "portrait": "emperor",
+      "requires": { "flags": ["eternal_patriarch"], "notFlags": [], "meters": {} },
+      "weight": 22,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "take_the_two_world_crown",
+          "text": "Take the crown. You earned both worlds.",
+          "effects": { "money": 500, "power": 15, "reputation": 15, "loyalty": 15, "health": 5 },
+          "setFlags": ["two_world_patriarch", "victory_achieved"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.7, "polarity": 1 }],
+          "outcome": "The double crown settles on your brow and two planets roar as one. Immortal patriarch of a two-world civilization, you have won everything there was to win, and there is still the rest of forever."
+        },
+        {
+          "id": "crown_yourself",
+          "text": "Take the crown from Musk's hands and place it yourself.",
+          "effects": { "money": 450, "power": 15, "reputation": 12, "loyalty": 15 },
+          "setFlags": ["two_world_patriarch", "victory_achieved"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.6, "polarity": 1 }],
+          "outcome": "No man crowns a god; a god crowns himself. You lift the double crown overhead and lower it onto your own head, and two worlds kneel."
+        }
+      ]
+    },
+    {
+      "id": "ev_gaze_to_the_stars",
+      "era": "redplanet",
+      "year": 2120,
+      "title": "Beyond the Beyond",
+      "scene": "Two worlds secured, dynasty deathless, crown gleaming. From the highest dome you look past Mars to the cold scatter of stars and feel the old, familiar itch. Phobos and Deimos are charted. Jupiter's moons twinkle like vacant lots awaiting a developer. Forever is a long time to stand still.",
+      "researchNote": "A closing far-future extrapolation gesturing past the SpaceX Mars vision toward the outer solar system, leaving the immortal two-world patriarch poised for whatever expansion the next eternity might invite.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["mars", "victory", "stars", "future"],
+      "portrait": "emperor",
+      "requires": { "flags": ["two_world_patriarch"], "notFlags": [], "meters": {} },
+      "weight": 18,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "plan_the_next_frontier",
+          "text": "Order the first survey of the outer moons. Why stop now?",
+          "effects": { "money": 200, "power": 13, "reputation": 12, "loyalty": 12 },
+          "setFlags": ["eyes_on_jupiter"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.5, "polarity": 1 }],
+          "outcome": "Survey ships depart for the gas giants under your colors. The empire of two worlds becomes, in a single decree, the seed of an empire of many."
+        },
+        {
+          "id": "savor_the_summit",
+          "text": "Stand, golden and eternal, and simply enjoy the view.",
+          "effects": { "money": 100, "power": 11, "reputation": 13, "loyalty": 12, "health": 4 },
+          "setFlags": ["eternal_summit"],
+          "clearFlags": [],
+          "ripples": [{ "to": "tabloids", "weight": 0.4, "polarity": 1 }],
+          "outcome": "Two worlds at your feet, the stars above, and all of time ahead. You smile the smile of a man who has, at last, run out of things to conquer, for now."
+        }
+      ]
+    }
+  ]
+}

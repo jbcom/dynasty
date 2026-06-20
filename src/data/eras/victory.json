@@ -1,0 +1,321 @@
+{
+  "era": "victory",
+  "events": [
+    {
+      "id": "ev_inauguration_redux",
+      "era": "victory",
+      "year": 2029,
+      "title": "The Permanent Inauguration",
+      "scene": "The crowd on the Mall is the biggest in history, you are assured, and for once nobody dares dispute it. Your second term is winding down, but the music feels less like a finale and more like an overture. Aides float a phrase you find delicious: 'the beginning of the golden century.'",
+      "researchNote": "Speculative extrapolation. U.S. presidents are limited to two terms by the 22nd Amendment; this scenario imagines a leader and movement openly reframing term limits as negotiable, a real rhetorical trend pushed past its constitutional boundary.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["power", "politics", "ambition"],
+      "portrait": "president",
+      "requires": { "flags": ["consolidated_power"], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "tease_third_term",
+          "text": "Float the idea that 'the people' may demand a third term",
+          "effects": { "power": 12, "heat": 11, "reputation": -8, "loyalty": 6 },
+          "setFlags": ["third_term_talk"],
+          "ripples": [ { "to": "ev_world_stage", "weight": 0.5, "polarity": 1 } ],
+          "outcome": "The base roars, the courts mutter, and the word 'unprecedented' loses all meaning. You like it that way."
+        },
+        {
+          "id": "respect_norms_for_now",
+          "text": "Publicly honor the limit while quietly grooming a successor",
+          "effects": { "power": 6, "loyalty": 8, "reputation": 4, "heat": 2 },
+          "setFlags": ["dynastic_planning"],
+          "outcome": "You play the statesman on camera and the dynast off it. The succession, you decide, will simply keep the name."
+        }
+      ]
+    },
+    {
+      "id": "ev_loyalist_government",
+      "era": "victory",
+      "year": 2029,
+      "title": "Staffed With Believers",
+      "scene": "The career bureaucrats are gone, reassigned, or retired into silence. Every agency is now run by someone who applauds at the right moments. A new loyalty review board screens appointees for 'alignment,' which everyone understands to mean alignment with you.",
+      "researchNote": "Speculative extrapolation from real proposals (such as reclassifying federal workers to make them easier to remove) that would expand a president's control over the civil service. The full purge depicted here is imagined.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["power", "loyalty", "politics"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "purge_the_disloyal",
+          "text": "Replace anyone insufficiently devoted with a true believer",
+          "effects": { "power": 13, "loyalty": 12, "heat": 9, "reputation": -10 },
+          "setFlags": ["loyalist_state"],
+          "ripples": [ { "to": "ev_world_stage", "weight": 0.4, "polarity": 1 } ],
+          "outcome": "The machinery of state now hums in one key: yours. Dissent doesn't get fired so much as it ceases to exist."
+        },
+        {
+          "id": "keep_a_few_experts",
+          "text": "Keep a handful of competent skeptics for the hard problems",
+          "effects": { "power": 7, "loyalty": 3, "reputation": 3, "health": 2 },
+          "outcome": "A few grown-ups remain in the room. They are useful, occasionally annoying, and always reminded who signs the checks."
+        }
+      ]
+    },
+    {
+      "id": "ev_media_dominion",
+      "era": "victory",
+      "year": 2030,
+      "title": "Owning the Signal",
+      "scene": "Your family's media venture has swallowed a streaming giant and a social platform in one weekend. The chyrons agree with you now, all of them. A new 'Patriot Algorithm' decides what eighty million phones see at breakfast, and it has excellent taste.",
+      "researchNote": "Speculative extrapolation from real trends of political figures owning media platforms and the documented power of recommendation algorithms to shape public opinion. The scale of state-aligned control here is imagined.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["power", "media", "money"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "tune_the_algorithm",
+          "text": "Tune the algorithm to amplify praise and bury criticism",
+          "effects": { "power": 11, "reputation": 5, "money": 9000000000, "heat": 8, "loyalty": 5 },
+          "setFlags": ["media_dominion"],
+          "ripples": [ { "to": "ev_world_stage", "weight": 0.4, "polarity": 1 } ],
+          "outcome": "Reality becomes a feed, and you are its editor-in-chief. The trending tab is, at last, completely under control."
+        },
+        {
+          "id": "monetize_quietly",
+          "text": "Skip the propaganda and just monetize the attention",
+          "effects": { "money": 30000000000, "power": 4, "reputation": -3 },
+          "outcome": "You let the platform print money instead of slogans. The accountants weep with joy; the editorialists, less so."
+        }
+      ]
+    },
+    {
+      "id": "ev_megaproject_capital",
+      "era": "victory",
+      "year": 2031,
+      "title": "The City With Your Name",
+      "scene": "Ground breaks on 'Liberty Prime,' a gleaming planned megacity rising from the desert, financed by a coalition of grateful billionaires and a sovereign fund or three. Golden towers, an airport, and a monument shaped suspiciously like you. The ribbon is a mile long.",
+      "researchNote": "Speculative extrapolation from real-world freedom-city and charter-city proposals and large state-backed megaprojects. The presidential vanity-capital framing is imagined satire.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["money", "ambition", "power"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "go_biggest",
+          "text": "Demand the biggest, tallest, most golden version possible",
+          "effects": { "money": -40000000000, "power": 9, "reputation": 8, "heat": 6 },
+          "setFlags": ["megaproject_built"],
+          "outcome": "The skyline becomes a signature. Engineers fret about the budget; you remind them that legends are never cheap."
+        },
+        {
+          "id": "license_the_brand",
+          "text": "Let others build it and just license your name to it",
+          "effects": { "money": 25000000000, "power": 5, "reputation": 4, "heat": 2 },
+          "setFlags": ["megaproject_built"],
+          "outcome": "You take the upside and none of the rebar. The name does the heavy lifting; it always has."
+        }
+      ]
+    },
+    {
+      "id": "ev_dynastic_succession",
+      "era": "victory",
+      "year": 2032,
+      "title": "The Family Line",
+      "scene": "At a primetime dinner you seat your children like a royal table, each handed a portfolio: one gets the party, one gets the media, one gets the money. The pundits call it nepotism; you call it succession planning. Somewhere a constitutional scholar quietly retires.",
+      "researchNote": "Speculative extrapolation from real instances of political families building multi-generational influence (Kennedys, Bushes, Clintons) pushed toward an explicitly dynastic, near-monarchical model. The formal handoff depicted is imagined.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["family", "power", "politics"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "anoint_an_heir",
+          "text": "Anoint an heir and build the dynasty openly",
+          "effects": { "power": 10, "loyalty": 10, "reputation": -6, "heat": 7 },
+          "setFlags": ["dynasty_declared"],
+          "ripples": [ { "to": "ev_emperor_in_all_but_name", "weight": 0.6, "polarity": 1 } ],
+          "outcome": "The name becomes a title. The family kisses the ring, and the ring, you note, fits the whole bloodline."
+        },
+        {
+          "id": "play_them_off",
+          "text": "Keep every heir hungry by never naming the favorite",
+          "effects": { "power": 8, "loyalty": -4, "reputation": 2, "heat": 3 },
+          "setFlags": ["dynastic_planning"],
+          "outcome": "You dangle the crown and watch them compete. Cruel, effective, and excellent television."
+        }
+      ]
+    },
+    {
+      "id": "ev_world_stage",
+      "era": "victory",
+      "year": 2033,
+      "title": "The Indispensable Man",
+      "scene": "World leaders no longer call to negotiate; they call to ask permission. A summit in your golden megacity turns into a coronation as prime ministers queue for a handshake and a photo. The phrase 'leader of the free world' has quietly dropped the word 'free.'",
+      "researchNote": "Speculative extrapolation from the real outsized gravitational pull of U.S. presidents on global affairs. The depicted tilt toward personal, unilateral global dominance is imagined and gated to escalate when domestic power has been consolidated.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["power", "geopolitics", "ambition"],
+      "portrait": "emperor",
+      "requires": { "flags": ["consolidated_power"], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "demand_tribute",
+          "text": "Reframe alliances as tribute and make them pay for protection",
+          "effects": { "power": 14, "money": 50000000000, "reputation": -12, "heat": 13, "loyalty": 6 },
+          "setFlags": ["global_hegemon"],
+          "ripples": [ { "to": "ev_brinkmanship", "weight": 0.6, "polarity": 1 }, { "to": "ev_emperor_in_all_but_name", "weight": 0.5, "polarity": 1 } ],
+          "outcome": "The world pays up, resentfully. You have turned diplomacy into a protection racket with very good catering."
+        },
+        {
+          "id": "broker_grand_bargain",
+          "text": "Broker a grand bargain that puts you at the center of everything",
+          "effects": { "power": 10, "reputation": 7, "loyalty": 4, "heat": 5 },
+          "setFlags": ["global_broker"],
+          "ripples": [ { "to": "ev_emperor_in_all_but_name", "weight": 0.4, "polarity": 1 } ],
+          "outcome": "Every treaty now routes through you. Indispensable is the word; irreplaceable is the goal."
+        }
+      ]
+    },
+    {
+      "id": "ev_rival_powers",
+      "era": "victory",
+      "year": 2034,
+      "title": "The Other Strongmen",
+      "scene": "A handful of rival great powers have their own strongmen, their own golden palaces, their own algorithms. They flatter you in public and probe you in private. One sends a gift the size of a yacht; another sends a fleet a little too close to your shipping lanes.",
+      "researchNote": "Speculative extrapolation from real multipolar geopolitical competition among major powers and personalist leaders. Specific rivalries depicted are fictionalized.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["geopolitics", "power", "rivalry"],
+      "portrait": "emperor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "forge_strongman_pact",
+          "text": "Forge a cynical pact carving the world into spheres",
+          "effects": { "power": 11, "reputation": -7, "loyalty": 3, "heat": 8 },
+          "setFlags": ["spheres_pact"],
+          "ripples": [ { "to": "ev_brinkmanship", "weight": 0.4, "polarity": 1 } ],
+          "outcome": "You and your fellow autocrats divide the map over dinner. The smaller nations are not invited; they are the menu."
+        },
+        {
+          "id": "outmaneuver_rivals",
+          "text": "Play the rivals against each other and keep them off balance",
+          "effects": { "power": 9, "reputation": 3, "heat": 6, "loyalty": 2 },
+          "outcome": "You keep every rival guessing and every alliance temporary. Chaos, properly managed, is just leverage."
+        }
+      ]
+    },
+    {
+      "id": "ev_longevity_gambit",
+      "era": "victory",
+      "year": 2035,
+      "title": "The Forever Project",
+      "scene": "A team of biotech founders pitches you on something better than a third term: a fourth, fifth, and sixth decade in power. Senolytics, gene therapy, blood from the young and grateful. They promise you will outlast not just your rivals but your own obituary.",
+      "researchNote": "Speculative extrapolation from real, heavily funded longevity and anti-aging research (senolytics, reprogramming, parabiosis experiments). The promise of meaningful life extension on this timeline is far from established and is dramatized here.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["health", "science", "ambition"],
+      "portrait": "emperor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fund_the_forever_project",
+          "text": "Pour a fortune into radical life-extension research",
+          "effects": { "money": -25000000000, "health": 9, "power": 6, "heat": 5, "reputation": -3 },
+          "setFlags": ["life_extension_research"],
+          "ripples": [ { "to": "ev_emperor_in_all_but_name", "weight": 0.4, "polarity": 1 } ],
+          "outcome": "The labs go to work and your doctors get nervous. If power corrupts, you intend to be corrupt for a very long time."
+        },
+        {
+          "id": "settle_for_good_doctors",
+          "text": "Settle for the best conventional care money can buy",
+          "effects": { "money": -2000000000, "health": 6, "reputation": 1 },
+          "outcome": "No miracle science, just an army of specialists. Mortal, perhaps, but extremely well-maintained."
+        }
+      ]
+    },
+    {
+      "id": "ev_emperor_in_all_but_name",
+      "era": "victory",
+      "year": 2037,
+      "title": "Crowned in All But Name",
+      "scene": "The portrait painters have started adding laurel. A constitutional 'reform' redefines the presidency as a lifetime stewardship 'in times of permanent emergency.' You stop correcting aides who slip and call you something grander than Mister President.",
+      "researchNote": "Speculative extrapolation from real historical patterns where leaders used emergency powers and constitutional rewrites to entrench themselves indefinitely (a recurring pattern in democratic backsliding). The U.S. application here is imagined satire.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["power", "politics", "ambition"],
+      "portrait": "emperor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "accept_the_crown",
+          "text": "Accept the 'permanent stewardship' and drop the pretense",
+          "effects": { "power": 15, "loyalty": 9, "reputation": -14, "heat": 12 },
+          "setFlags": ["imperial_rule"],
+          "ripples": [ { "to": "ev_brinkmanship", "weight": 0.5, "polarity": 1 } ],
+          "outcome": "The republic exhales its last constitutional breath. You are emperor in everything but the spelling, and the spelling can wait."
+        },
+        {
+          "id": "keep_the_costume",
+          "text": "Keep the republican costume while wielding total power",
+          "effects": { "power": 11, "reputation": -4, "loyalty": 5, "heat": 6 },
+          "setFlags": ["soft_autocrat"],
+          "outcome": "You keep the elections, the flags, the speeches, and none of the limits. The form survives; the substance is yours alone."
+        }
+      ]
+    },
+    {
+      "id": "ev_brinkmanship",
+      "era": "victory",
+      "year": 2039,
+      "title": "Eyeball to Eyeball",
+      "scene": "A rival fleet shadows yours in contested waters and refuses to blink. Your generals lay out options on a golden table; one folder is thicker, darker, and labeled with a word nobody likes to say aloud. The hotline is ringing. The world is watching you decide.",
+      "researchNote": "Speculative extrapolation from real nuclear-deterrence brinkmanship and historical near-misses (such as the Cuban Missile Crisis). The depicted standoff is fictional and dramatized; choosing escalation seeds a catastrophic chain into a later era.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["geopolitics", "danger", "power"],
+      "portrait": "emperor",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "raise_the_stakes",
+          "text": "Go to the brink and dare them to flinch first",
+          "effects": { "power": 13, "reputation": -15, "heat": 15, "loyalty": 4, "health": -4 },
+          "setFlags": ["nuclear_brinkmanship"],
+          "ripples": [ { "to": "ev_the_exchange", "weight": 0.8, "polarity": 1 } ],
+          "outcome": "You raise the alert level and the temperature with it. The whole planet holds its breath, and a darker era leans in to listen."
+        },
+        {
+          "id": "de_escalate_for_now",
+          "text": "Pull back at the last second and pocket the bluff",
+          "effects": { "power": 6, "reputation": 6, "heat": -5, "loyalty": -2 },
+          "setFlags": ["stared_down_war"],
+          "outcome": "You blink first and call it strength, loudly. The fleets withdraw; the apocalypse files itself back in the drawer, for now."
+        }
+      ]
+    }
+  ]
+}
