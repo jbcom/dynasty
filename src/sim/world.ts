@@ -169,6 +169,50 @@ export function queryEligibleByWeight(
 }
 
 /**
+ * The run-wide context (active branch + moral pole) read off the projected
+ * world rather than re-deriving it. Every event entity carries the same Branch
+ * and Pole traits (the context is a property of the run, not the event), so this
+ * reads the first entity's traits. Gives the projected Branch/Pole traits a real
+ * consumer and is the ECS-native source for the moral-axis HUD (DE-2) + persona
+ * analytics (DE-6). PARITY: equals branchOf(state) / moralPoleOf(state).
+ */
+export function queryRunContext(
+  content: Content,
+  state: GameState,
+): { branch: string; pole: string } {
+  return withWorld(content, state, (world) => {
+    const first = world.query(EventRef, Branch, Pole)[0];
+    return {
+      branch: first?.get(Branch)?.key ?? branchOf(state),
+      pole: first?.get(Pole)?.key ?? moralPoleOf(state),
+    };
+  });
+}
+
+/**
+ * Eligible events whose moral pole matches the run's current pole — the
+ * declarative read the moral-axis HUD + persona "is this pole reachable here"
+ * analytics consume (DE-2/DE-6). Events carry no per-event pole; the run's pole
+ * is uniform, so this is "the eligible set, tagged with the run pole" — useful
+ * as the ECS-native grouping surface those phases build on. Deterministic order
+ * (content order, like queryEligible).
+ */
+export function queryEligibleForPole(
+  content: Content,
+  state: GameState,
+): { pole: string; events: GameEvent[] } {
+  const byId = new Map(content.allEvents.map((e) => [e.id, e]));
+  return withWorld(content, state, (world) => {
+    const entities = world.query(EventRef, Eligible, Pole);
+    const pole = entities[0]?.get(Pole)?.key ?? moralPoleOf(state);
+    const events = entities
+      .map((e) => byId.get(e.get(EventRef)?.id ?? ""))
+      .filter((e): e is GameEvent => e !== undefined);
+    return { pole, events };
+  });
+}
+
+/**
  * Market ids whose drawdown breaches their crash threshold — a declarative
  * read-model query for crash-aware UI/events. Parity: matches the same
  * mkt_crash_<id> flags systemicTick would emit for the current state.

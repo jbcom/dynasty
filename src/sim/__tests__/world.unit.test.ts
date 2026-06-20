@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
 import marketsJson from "../../data/markets.json";
+import { branchOf } from "../branch";
 import { buildContent } from "../content";
-import { effectiveWeight, eligibleEvents, pickNextEvent } from "../events";
-import { createRng } from "../rng";
 import { applyChoice } from "../effects";
+import { effectiveWeight, eligibleEvents, pickNextEvent } from "../events";
+import { moralPoleOf } from "../moralAxis";
+import { createRng } from "../rng";
 import { initState } from "../state";
 import {
   Eligible,
@@ -12,8 +14,10 @@ import {
   projectWorld,
   queryEligible,
   queryEligibleByWeight,
+  queryEligibleForPole,
   queryLeveragedPositions,
   queryMarketsInCrash,
+  queryRunContext,
 } from "../world";
 import { validRaw } from "./fixtures";
 
@@ -111,6 +115,30 @@ describe("pickNextEventViaWorld parity with pure pickNextEvent (DE-1)", () => {
       if (!choice) break;
       s = applyChoice(c, s, pure, choice.id, rngPure.fork(`apply:${i}`)).state;
     }
+  });
+});
+
+describe("Koota run-context reads parity (DE-1b)", () => {
+  it("queryRunContext equals branchOf / moralPoleOf for the same state", () => {
+    const c = content();
+    for (const seed of ["a", "b", "nazi", "theo"]) {
+      const s = initState(c, seed);
+      const ctx = queryRunContext(c, s);
+      expect(ctx.branch).toBe(branchOf(s));
+      expect(ctx.pole).toBe(moralPoleOf(s));
+    }
+  });
+
+  it("queryEligibleForPole returns the eligible set tagged with the run pole", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    const { pole, events } = queryEligibleForPole(c, s);
+    expect(pole).toBe(moralPoleOf(s));
+    expect(events.map((e) => e.id).sort()).toEqual(
+      queryEligible(c, s)
+        .map((e) => e.id)
+        .sort(),
+    );
   });
 });
 
