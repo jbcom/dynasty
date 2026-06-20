@@ -179,7 +179,7 @@ describe("birth-order lever — ev_the_children prologue event (de-4a)", () => {
     expect(meetsRequires(stubState(["fourth_child", "fred_jr_died"]), req)).toBe(false);
   });
 
-  it("ev_content_heir_dream gates only on at_nyma — past-tense Freddy reflection fires on fred_jr_died path too", () => {
+  it("ev_content_heir_dream gates only on at_nyma — past-tense Freddy reflection fires on fred_jr_died path too (de-4a)", () => {
     // The scene uses past-tense ("Freddy wanted to fly planes") — historically accurate even
     // when Freddy died before boyhood. Gate is at_nyma only, not fred_jr_present.
     const req = contentHeir.requires;
@@ -196,5 +196,97 @@ describe("birth-order lever — ev_the_children prologue event (de-4a)", () => {
     expect(meetsRequires(stubState(["only_child", "at_nyma"]), req)).toBe(true);
     // Without at_nyma even on only_child: blocked
     expect(meetsRequires(stubState(["only_child"]), req)).toBe(false);
+  });
+});
+
+describe("Musk prologue structure — de-5b", () => {
+  const origins = EraEventsSchema.parse(originsJson);
+
+  const eventById = (id: string) => {
+    const e = origins.events.find((x) => x.id === id);
+    if (!e) throw new Error(`no event ${id} in origins`);
+    return e;
+  };
+
+  it("ev_dynasty_founding_choice exists with trump + musk choices", () => {
+    const ev = eventById("ev_dynasty_founding_choice");
+    const choiceIds = ev.choices.map((c) => c.id);
+    expect(choiceIds).toContain("choose_trump_dynasty");
+    expect(choiceIds).toContain("choose_musk_dynasty");
+  });
+
+  it("choose_musk_dynasty sets musk_dynasty_active + musk_prologue", () => {
+    const ev = eventById("ev_dynasty_founding_choice");
+    const c = ev.choices.find((x) => x.id === "choose_musk_dynasty");
+    if (!c) throw new Error("no choose_musk_dynasty");
+    expect(c.setFlags).toContain("musk_dynasty_active");
+    expect(c.setFlags).toContain("musk_prologue");
+    expect(c.setFlags).not.toContain("trump_prologue");
+  });
+
+  it("choose_trump_dynasty sets trump_prologue, NOT musk_dynasty_active", () => {
+    const ev = eventById("ev_dynasty_founding_choice");
+    const c = ev.choices.find((x) => x.id === "choose_trump_dynasty");
+    if (!c) throw new Error("no choose_trump_dynasty");
+    expect(c.setFlags).toContain("trump_prologue");
+    expect(c.setFlags).not.toContain("musk_dynasty_active");
+  });
+
+  it("ev_friedrich_leaves_kallstadt is gated by trump_prologue and blocks musk_dynasty_active", () => {
+    const ev = eventById("ev_friedrich_leaves_kallstadt");
+    expect(ev.requires?.flags ?? []).toContain("trump_prologue");
+    expect(ev.requires?.notFlags ?? []).toContain("musk_dynasty_active");
+  });
+
+  it("Musk prologue chain: walter → errol → elon, each gated correctly", () => {
+    const walter = eventById("ev_walter_musk_cape_colony");
+    expect(walter.requires?.flags ?? []).toContain("musk_prologue");
+    expect(walter.requires?.notFlags ?? []).toContain("trump_prologue");
+
+    const errol = eventById("ev_errol_musk_builds");
+    expect(errol.requires?.flags ?? []).toContain("musk_south_africa_roots");
+    expect(errol.requires?.notFlags ?? []).toContain("trump_prologue");
+
+    const elon = eventById("ev_elon_musk_born");
+    expect(elon.requires?.flags ?? []).toContain("musk_technical_lineage");
+    expect(elon.requires?.notFlags ?? []).toContain("trump_prologue");
+  });
+
+  it("walter's aviator choice sets musk_south_africa_roots (seeds errol gate)", () => {
+    const ev = eventById("ev_walter_musk_cape_colony");
+    const c = ev.choices.find((x) => x.id === "walter_the_aviator");
+    if (!c) throw new Error("no walter_the_aviator");
+    expect(c.setFlags).toContain("musk_south_africa_roots");
+    expect(c.setFlags).toContain("musk_frontier_spirit");
+  });
+
+  it("errol's hard-businessman choice sets musk_technical_lineage (seeds elon gate)", () => {
+    const ev = eventById("ev_errol_musk_builds");
+    const c = ev.choices.find((x) => x.id === "errol_the_hard_businessman");
+    if (!c) throw new Error("no errol_the_hard_businessman");
+    expect(c.setFlags).toContain("musk_technical_lineage");
+    expect(c.setFlags).toContain("dynasty_capital");
+  });
+
+  it("ev_elon_musk_born has two capstone choices both setting born_advantaged", () => {
+    const ev = eventById("ev_elon_musk_born");
+    for (const c of ev.choices) {
+      expect(c.setFlags, `choice ${c.id}`).toContain("born_advantaged");
+      expect(c.setFlags, `choice ${c.id}`).toContain("musk_origin");
+    }
+  });
+
+  it("all four Musk prologue events are within origins era year bounds [1885..1946]", () => {
+    const muskEventIds = [
+      "ev_dynasty_founding_choice",
+      "ev_walter_musk_cape_colony",
+      "ev_errol_musk_builds",
+      "ev_elon_musk_born",
+    ];
+    for (const id of muskEventIds) {
+      const ev = eventById(id);
+      expect(ev.year, `${id} year`).toBeGreaterThanOrEqual(1885);
+      expect(ev.year, `${id} year`).toBeLessThanOrEqual(1946);
+    }
   });
 });

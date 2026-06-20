@@ -74,6 +74,13 @@ describe("timeline compiler (AH3 gears-in-a-clock, task-008)", () => {
     expect(c.slots.leader_assassination).toBe("ev_jfk");
   });
 
+  it("the Musk dynasty activates via musk_dynasty_active flag (de-5b)", () => {
+    const c = compile(["musk_dynasty_active"]);
+    expect(c.dynasty).toBe("musk");
+    // dynasty() returns "musk", not "trump" or "kennedy".
+    expect(c.branch).toBe("default"); // branch is unaffected by dynasty choice
+  });
+
   it("is deterministic: same Era-0 state → identical compiled bundle", () => {
     expect(compile(["axis_ascendant"])).toEqual(compile(["axis_ascendant"]));
   });
