@@ -71,3 +71,23 @@ export function queryEligible(content: Content, state: GameState): GameEvent[] {
     .map((e) => byId.get(e.get(EventRef)?.id ?? ""))
     .filter((e): e is GameEvent => e !== undefined);
 }
+
+/**
+ * Eligible events ranked by effective selection weight (descending). A
+ * declarative read-model query — the kind the ECS makes clean — for "what is
+ * likely to come next" UI/debug surfaces and the persona-playtest analytics.
+ * Ties broken by event id so the ranking is deterministic.
+ */
+export function queryEligibleByWeight(
+  content: Content,
+  state: GameState,
+): Array<{ event: GameEvent; weight: number }> {
+  const world = projectWorld(content, state);
+  const byId = new Map(content.allEvents.map((e) => [e.id, e]));
+  return world
+    .query(EventRef, Eligible, Weight)
+    .map((e) => ({ id: e.get(EventRef)?.id ?? "", weight: e.get(Weight)?.value ?? 0 }))
+    .map(({ id, weight }) => ({ event: byId.get(id), weight }))
+    .filter((x): x is { event: GameEvent; weight: number } => x.event !== undefined)
+    .sort((a, b) => b.weight - a.weight || a.event.id.localeCompare(b.event.id));
+}

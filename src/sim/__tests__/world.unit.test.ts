@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { buildContent } from "../content";
-import { eligibleEvents } from "../events";
+import { effectiveWeight, eligibleEvents } from "../events";
 import { initState } from "../state";
-import { Eligible, EventRef, projectWorld, queryEligible } from "../world";
+import { Eligible, EventRef, projectWorld, queryEligible, queryEligibleByWeight } from "../world";
 import { validRaw } from "./fixtures";
 
 const content = () => buildContent(validRaw());
@@ -44,5 +44,24 @@ describe("Koota read-model projection (task-026)", () => {
     expect(before).toBeGreaterThanOrEqual(0);
     const eligibleTrait = projectWorld(c, s).query(Eligible).length;
     expect(eligibleTrait).toBe(before);
+  });
+
+  it("queryEligibleByWeight ranks the same eligible set by effective weight (desc)", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    const ranked = queryEligibleByWeight(c, s);
+    // Same membership as queryEligible.
+    expect(ranked.map((r) => r.event.id).sort()).toEqual(
+      queryEligible(c, s)
+        .map((e) => e.id)
+        .sort(),
+    );
+    // Weights match the pure helper and are sorted descending.
+    for (const { event, weight } of ranked) {
+      expect(weight).toBeCloseTo(effectiveWeight(c, s, event), 5);
+    }
+    const weights = ranked.map((r) => r.weight);
+    const sortedDesc = [...weights].sort((a, b) => b - a);
+    expect(weights).toEqual(sortedDesc);
   });
 });

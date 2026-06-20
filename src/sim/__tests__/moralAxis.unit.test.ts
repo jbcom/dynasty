@@ -17,9 +17,9 @@ describe("branch moral axis (task-022)", () => {
 
   it("falls back to the personality tyranny↔utopia axis with no pole flag", () => {
     // tyrannyUtopiaAxis is dominated by `outward` (the world's perception).
-    expect(moralPoleOf(make([], { ideology: -90, grandiosity: -50, outward: -90, inward: 0 }))).toBe(
-      "utopian",
-    );
+    expect(
+      moralPoleOf(make([], { ideology: -90, grandiosity: -50, outward: -90, inward: 0 })),
+    ).toBe("utopian");
     expect(moralPoleOf(make([], { ideology: 90, grandiosity: 90, outward: 90, inward: 0 }))).toBe(
       "dictatorial",
     );
