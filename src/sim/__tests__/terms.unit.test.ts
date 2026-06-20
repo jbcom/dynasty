@@ -51,4 +51,15 @@ describe("branch-aware terms (alt-history AH1)", () => {
     // A branch without a surname override keeps the default (the family anglicized).
     expect(applyTerms("{surname}", terms, "media")).toBe("Trump");
   });
+
+  it("resolves the branch-aware GIVEN name (AH8c): Donald default, Friedrich on proud-tradition German branches", () => {
+    expect(applyTerms("{given_name}", terms, "default")).toBe("Donald");
+    expect(applyTerms("{full_name}", terms, "default")).toBe("Donald Trump");
+    // Military/religious German dynasties carry the patriarch's name.
+    expect(applyTerms("{given_name}", terms, "nazi")).toBe("Friedrich");
+    expect(applyTerms("{full_name}", terms, "nazi")).toBe("Friedrich Drumpf III");
+    expect(applyTerms("{given_name}", terms, "theocracy")).toBe("Friedrich");
+    // The media/West-Coast branches keep Donald (no proud-name tradition imposed).
+    expect(applyTerms("{given_name}", terms, "media")).toBe("Donald");
+  });
 });
