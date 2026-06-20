@@ -39,7 +39,8 @@
     { "pattern": "Math\\.random\\(\\)", "globs": ["src/sim/**", "src/engine/**", "src/systems/**"], "message": "Use createRng(seed) facade — determinism." },
     { "pattern": "performance\\.now\\(\\)", "globs": ["src/sim/**", "src/engine/**"], "message": "Use engine clock facade — determinism." },
     { "pattern": "Date\\.now\\(\\)", "globs": ["src/sim/**"], "message": "No wall-clock in pure sim — inject via engine clock facade." },
-    { "pattern": "document\\.|window\\.", "globs": ["src/sim/**"], "message": "Sim is pure TS — no DOM access. Move to ui/render/engine." }
+    { "pattern": "document\\.|window\\.", "globs": ["src/sim/**"], "message": "Sim is pure TS — no DOM access. Move to ui/render/engine." },
+    { "pattern": "#d4af37|#b22234|#0a1633|#7a1f2b|#f2cf52", "globs": ["src/ui/**/*.svelte", "src/render/**"], "message": "Raw brand hex — use var(--mmm-*) tokens from tokens.css." }
   ],
   "forbidden_bash": [
     "--no-verify", "git push --force(?!-with-lease)", "--admin",
