@@ -108,6 +108,11 @@ export function moralPoleLabel(state: Pick<GameState, "flags" | "personality">):
       centrist: "the spectacle machine",
       dictatorial: "the propaganda state",
     },
+    westcoast: {
+      utopian: "the Pacific techno-frontier commonwealth",
+      centrist: "the managed Pacific republic",
+      dictatorial: "the coastal tech-oligarch fiefdom",
+    },
     default: {
       utopian: "a utopia",
       centrist: "the muddled middle",

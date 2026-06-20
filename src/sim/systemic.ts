@@ -1,6 +1,6 @@
 import { branchOf } from "./branch";
 import type { Content } from "./content";
-import { applyDelta } from "./meters";
+import { applyDelta, type Meters } from "./meters";
 import type { Rng } from "./rng";
 import type { Currency, Market, MarketRegime, MeterId, RankLadder } from "./schema";
 import type { GameState, MarketState, RankState } from "./state";
@@ -109,6 +109,36 @@ function tickRank(ladder: RankLadder, rs: RankState): Partial<Record<MeterId, nu
   return delta;
 }
 
+/** The meter that drives each ladder's standing (rank tracks this meter). */
+const RANK_DRIVER: Record<string, MeterId> = {
+  social: "reputation",
+  commercial: "money",
+  religious: "loyalty",
+  political: "power",
+};
+
+/**
+ * Recompute a ladder's rung from its driving meter so ranks are not static.
+ * The driver is mapped across the rung count by fixed thresholds; the run's
+ * peak rung is tracked (never decreases) to feed the fall-from-grace bleed.
+ * Pure + deterministic. Returns the updated RankState.
+ */
+function progressRank(ladder: RankLadder, rs: RankState, meters: Meters): RankState {
+  const driver = RANK_DRIVER[ladder.id];
+  const value = driver ? (meters[driver] ?? 0) : 0;
+  const rungs = ladder.rungs.length;
+  // commercial uses log-ish dollar bands; others use the 0..100-ish meter scale.
+  let frac: number;
+  if (ladder.id === "commercial") {
+    // $0→rung0 … $1e9+→top, spread over orders of magnitude.
+    frac = value <= 0 ? 0 : Math.min(1, Math.log10(value) / 9);
+  } else {
+    frac = Math.min(1, Math.max(0, value / 100));
+  }
+  const rung = Math.min(rungs - 1, Math.max(0, Math.round(frac * (rungs - 1))));
+  return { rung, peak: Math.max(rs.peak, rung) };
+}
+
 /**
  * Resolve the active currency for a state: location flag > branch > year window
  * > usd default. Pure.
@@ -200,6 +230,15 @@ export function systemicTick(content: Content, state: GameState, rng: Rng): Syst
   }
 
   const meters = applyDelta(content.meters, state.meters, totalDelta);
-  const nextState: GameState = { ...state, meters, markets, currencyId };
+
+  // Ranks PROGRESS from the (post-delta) meters so standing is not static —
+  // each ladder tracks its driving meter; peak rung is retained for the bleed.
+  const ranks: Record<string, RankState> = { ...state.ranks };
+  for (const ladder of content.ranks) {
+    const rs = state.ranks[ladder.id];
+    if (rs) ranks[ladder.id] = progressRank(ladder, rs, meters);
+  }
+
+  const nextState: GameState = { ...state, meters, markets, ranks, currencyId };
   return { state: nextState, flags: newFlags };
 }

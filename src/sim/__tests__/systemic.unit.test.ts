@@ -219,4 +219,14 @@ describe("systemicTick (SIM1 task-012)", () => {
     const r = systemicTick(c, fallen, createRng("fall"));
     expect(r.state.meters.reputation).toBeLessThan(fallen.meters.reputation);
   });
+
+  it("ranks PROGRESS from their driving meter — commercial rung tracks money", () => {
+    const c = content();
+    const base = initState(c, "seed");
+    // The commercial ladder (rungs: nobody…baron) tracks money on a log scale.
+    const rich = { ...base, meters: { ...base.meters, money: 1_000_000_000 } };
+    const r = systemicTick(c, rich, createRng("rank"));
+    expect(r.state.ranks.commercial?.rung).toBeGreaterThan(0); // not static at 0
+    expect(r.state.ranks.commercial?.peak).toBe(r.state.ranks.commercial?.rung);
+  });
 });
