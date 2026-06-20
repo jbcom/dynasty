@@ -55,7 +55,7 @@ function consistencyReport(c: ReturnType<typeof compileTimeline>, content: Retur
     content.worldTimelines.flatMap((wt) => wt.events.map((e) => e.id)),
   );
   const gameEventIds = new Set(content.allEvents.map((e) => e.id));
-  for (const [slotId, eventId] of Object.entries(c.slots)) {
+  for (const eventId of Object.values(c.slots)) {
     // If the event IS in content but wrong branch, that's a real bug.
     if (gameEventIds.has(eventId) || worldEventIds.has(eventId)) {
       // Event found — no issue.
