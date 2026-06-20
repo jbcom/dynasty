@@ -2,6 +2,9 @@
 import type { Content } from "../../sim/content";
 import type { Ending } from "../../sim/schema";
 import { spectrumLabel } from "../../sim/personality";
+import { branchOf } from "../../sim/branch";
+import { moralPoleLabel, moralPoleOf } from "../../sim/moralAxis";
+import { applyTerms } from "../../sim/terms";
 import type { EndState, GameState } from "../../sim/state";
 import ButterflyGraph from "../ButterflyGraph.svelte";
 import { formatMoney } from "../theme";
@@ -25,15 +28,21 @@ const KIND_TITLE: Record<string, string> = {
   death: "The End of an Era",
   coup: "Toppled",
 };
-const title = $derived(ending?.title ?? KIND_TITLE[end.kind] ?? "The End");
+const term = $derived((text: string) => applyTerms(text, content.terms, branchOf(state)));
+const title = $derived(term(ending?.title ?? KIND_TITLE[end.kind] ?? "The End"));
 const tier = $derived(ending?.tier ?? (end.kind === "victory" ? "endgame-good" : "endgame-bad"));
 const isApex = $derived(tier === "apex");
+// The moral pole, named in the branch's OWN value system — so the outcome is
+// interrogated on its own terms (a Reich "utopia" is monstrous-but-coherent).
+const pole = $derived(moralPoleOf(state));
+const poleLabel = $derived(moralPoleLabel(state));
 </script>
 
 <main class="report" data-end={end.kind} data-tier={tier} class:apex={isApex}>
   {#if isApex}<p class="apex-kicker">★ Apex Ending ★</p>{/if}
   <h1>{title}</h1>
-  <p class="reason">{end.reason}</p>
+  <p class="reason">{term(end.reason)}</p>
+  <p class="pole" data-pole={pole}>You ended in <strong>{poleLabel}</strong>.</p>
   <p class="year">Final year: {end.year} · {spectrumLabel(state.personality)}</p>
 
   <dl class="stats">
@@ -87,6 +96,19 @@ const isApex = $derived(tier === "apex");
   .reason {
     color: var(--mmm-text);
     font-size: 1.05rem;
+  }
+  .pole {
+    color: var(--mmm-text-dim);
+    font-style: italic;
+  }
+  .pole[data-pole="utopian"] strong {
+    color: var(--mmm-startrek, #3bd6c6);
+  }
+  .pole[data-pole="dictatorial"] strong {
+    color: var(--mmm-red);
+  }
+  .pole[data-pole="centrist"] strong {
+    color: var(--mmm-gold);
   }
   .year {
     color: var(--mmm-text-dim);

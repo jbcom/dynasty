@@ -5,12 +5,15 @@ import Portrait from "../../render/Portrait.svelte";
 import ButterflyLog from "../ButterflyLog.svelte";
 import Dossier from "../Dossier.svelte";
 import EventCard from "../EventCard.svelte";
+import MarketsView from "../MarketsView.svelte";
 import MeterHud from "../MeterHud.svelte";
 import NewsTicker from "../NewsTicker.svelte";
 import PersonalityDial from "../PersonalityDial.svelte";
 import StatsView from "../StatsView.svelte";
 import TimelineView from "../TimelineView.svelte";
 import { tyrannyUtopiaAxis } from "../../sim/personality";
+import { branchOf } from "../../sim/branch";
+import { applyTerms } from "../../sim/terms";
 
 interface Props {
   content: Content;
@@ -29,13 +32,20 @@ const { content, view, busy, onchoose, wide = false }: Props = $props();
 const axis = $derived(tyrannyUtopiaAxis(view.state.personality));
 const drift = $derived(axis < -25 ? "utopia" : axis > 25 ? "tyranny" : "neutral");
 
-type Tab = "event" | "news" | "timeline" | "stats" | "butterfly" | "dossier";
+// Branch-aware term interpolation: the same authored {head_of_state} resolves
+// to "President" or "Reichskommissar" etc. by the run's alternate-history branch.
+const branch = $derived(branchOf(view.state));
+const term = $derived((text: string) => applyTerms(text, content.terms, branch));
+
+type Tab = "event" | "news" | "markets" | "timeline" | "stats" | "butterfly" | "dossier";
 let tab = $state<Tab>("event");
 const hasNews = $derived(content.worldTimelines.length > 0);
+const hasMarkets = $derived(content.markets.length > 0 || content.ranks.length > 0);
 
 const tabs = $derived<Array<{ id: Tab; label: string }>>([
   { id: "event", label: "Now" },
   ...(hasNews ? [{ id: "news" as Tab, label: "📰" }] : []),
+  ...(hasMarkets ? [{ id: "markets" as Tab, label: "💹" }] : []),
   { id: "timeline", label: "Timeline" },
   { id: "stats", label: "Stats" },
   { id: "butterfly", label: "🦋" },
@@ -49,7 +59,7 @@ const tabs = $derived<Array<{ id: Tab; label: string }>>([
       <div class="portrait-wrap">
         <Portrait portraitId={view.currentEvent.portrait} size={wide ? 140 : 96} />
       </div>
-      <EventCard event={view.currentEvent} {busy} {onchoose} />
+      <EventCard event={view.currentEvent} {busy} {onchoose} {term} />
     </div>
   {:else}
     <p class="interlude">The era turns…</p>
@@ -58,7 +68,9 @@ const tabs = $derived<Array<{ id: Tab; label: string }>>([
 
 {#snippet infoTab()}
   {#if tab === "news"}
-    <NewsTicker {content} gameState={view.state} />
+    <NewsTicker {content} gameState={view.state} {term} />
+  {:else if tab === "markets"}
+    <MarketsView {content} gameState={view.state} />
   {:else if tab === "timeline"}
     <TimelineView {content} gameState={view.state} />
   {:else if tab === "stats"}

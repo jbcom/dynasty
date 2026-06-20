@@ -1,4 +1,6 @@
+import { branchOf } from "./branch";
 import type { Content } from "./content";
+import type { PersonalityAxis } from "./personality";
 import type { Rng } from "./rng";
 import type { GameEvent, MeterId, Requires } from "./schema";
 import type { GameState } from "./state";
@@ -99,6 +101,24 @@ export function effectiveWeight(content: Content, state: GameState, ev: GameEven
   for (const tag of ev.tags) {
     const pressure = state.ripples[tag];
     if (pressure) weight *= 1 + pressure;
+  }
+
+  // Selection BIAS (AH9): pull the chaos field toward the run's character —
+  // branch affinity (a Reich event is likelier on the Nazi line) and personality
+  // affinity (a grandiose run surfaces grandiose events). The personality bias is
+  // a per-axis sensitivity: weight scales by 1 + sensitivity * (axis/100), so a
+  // positive sensitivity boosts the event as that axis rises and damps it as the
+  // axis falls (and vice-versa for a negative sensitivity).
+  if (ev.bias) {
+    const branchMult = ev.bias.branch[branchOf(state)];
+    if (branchMult !== undefined) weight *= branchMult;
+    for (const [axis, sensitivity] of Object.entries(ev.bias.personality) as [
+      PersonalityAxis,
+      number,
+    ][]) {
+      const axisValue = state.personality[axis] ?? 0;
+      weight *= Math.max(0, 1 + sensitivity * (axisValue / 100));
+    }
   }
 
   return Math.max(0, weight);

@@ -1,0 +1,36 @@
+{
+  "ranks": [
+    {
+      "id": "social",
+      "label": "Social Standing",
+      "rungs": ["immigrant", "striver", "arriviste", "society fixture", "elite", "icon"],
+      "drip": { "reputation": 0.3 },
+      "amplify": { "reputation": 1.15 },
+      "fallBleed": { "reputation": -1.5, "heat": 0.5 }
+    },
+    {
+      "id": "commercial",
+      "label": "Commercial Power",
+      "rungs": ["nobody", "operator", "developer", "mogul", "baron", "tycoon"],
+      "drip": { "money": 0.2 },
+      "amplify": { "money": 1.2 },
+      "fallBleed": { "money": -1, "reputation": -0.5 }
+    },
+    {
+      "id": "religious",
+      "label": "Religious Authority",
+      "rungs": ["layman", "patron", "elder", "preacher", "bishop", "prophet"],
+      "drip": { "loyalty": 0.3 },
+      "amplify": { "loyalty": 1.15 },
+      "fallBleed": { "loyalty": -1, "reputation": -0.5 }
+    },
+    {
+      "id": "political",
+      "label": "Political Power",
+      "rungs": ["citizen", "donor", "operative", "officeholder", "power broker", "head of state"],
+      "drip": { "power": 0.4 },
+      "amplify": { "power": 1.25 },
+      "fallBleed": { "power": -2, "heat": 1, "loyalty": -0.5 }
+    }
+  ]
+}

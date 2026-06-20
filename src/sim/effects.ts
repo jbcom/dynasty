@@ -1,3 +1,4 @@
+import { branchOf } from "./branch";
 import {
   applyRipples,
   buildLedgerEntries,
@@ -5,15 +6,16 @@ import {
   scheduleConsequences,
 } from "./butterfly";
 import type { Content } from "./content";
-import { pickNextEvent } from "./events";
+import { meetsRequires, pickNextEvent } from "./events";
 import { applyDelta } from "./meters";
 import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
 import { resolveRoles } from "./roles";
 import type { Choice, GameEvent } from "./schema";
 import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
+import { systemicTick } from "./systemic";
 import { advanceTimeline, applyJump, detectEnd } from "./timeline";
-import { applyWorldFlags } from "./worldtime";
+import { applyWorldFlags, timelinesForBranch } from "./worldtime";
 
 /** Result of resolving a choice: the new state plus the ledger entries it produced. */
 export interface Transition {
@@ -102,11 +104,13 @@ export function applyChoice(
   }
   let advanced = advanceTimeline(content, hopped);
 
-  // 8b. LINKING PROTOCOL: broadcast flags from the four parallel world timelines
-  // whose events have come to pass as the year advanced — done in the pure
-  // transition so live play and deterministic replay stay identical.
+  // 8b. LINKING PROTOCOL: broadcast flags from the parallel world timelines whose
+  // events have come to pass as the year advanced — done in the pure transition so
+  // live play and deterministic replay stay identical. Only the ACTIVE BRANCH's
+  // timeline variants apply (a Nazi run reads usa.nazi, not the default usa).
   if (content.worldTimelines.length > 0 && advanced.year > hopped.year) {
-    advanced = applyWorldFlags(advanced, hopped.year, content.worldTimelines);
+    const active = timelinesForBranch(content.worldTimelines, branchOf(advanced));
+    advanced = applyWorldFlags(advanced, hopped.year, active);
   }
 
   // 8c. ROLE-SWAP INVARIANT: with all flags (the choice's, the consequences',
@@ -115,6 +119,24 @@ export function applyChoice(
   // (e.g. Musk takes power) re-routes Donald to the commercial path before any
   // ending reads the role flags.
   advanced = resolveRoles(advanced);
+
+  // 8d. SYSTEMIC TICK (SIM1): the living substrate breathes for each elapsed
+  // in-world year — markets walk, currency redenominates, rank ladders drip into
+  // the meters. Looped once per elapsed year so a multi-year hop compounds the
+  // economy. Pure + seeded so replay reconstructs every index to the bit.
+  if (content.markets.length > 0 || content.ranks.length > 0 || content.currencies.length > 0) {
+    const years = Math.max(0, advanced.year - hopped.year);
+    const steps = years > 0 ? years : 1; // at least one tick per choice
+    for (let y = 0; y < steps; y++) {
+      // Key off the POST-choice history length (advanced) — the same count the
+      // inner per-market fork inside systemicTick sees — so the outer and inner
+      // fork-key domains are harmonized (no split-key replay-stability hazard).
+      const tickRng = rng.fork(`systemic:${hopped.year}:${y}:${advanced.history.length}`);
+      const result = systemicTick(content, { ...advanced, year: hopped.year + y }, tickRng);
+      advanced = { ...result.state, year: advanced.year };
+      for (const f of result.flags) advanced = { ...advanced, flags: withFlag(advanced.flags, f) };
+    }
+  }
 
   // 9. Land any delayed consequences now due (post-advance year), unless the
   // timeline advance itself ended the run.
@@ -187,9 +209,8 @@ export function autoPlaythrough(
 
 function eligibleChoice(state: GameState, choice: Choice): boolean {
   if (!choice.requires) return true;
-  // Lightweight reuse of meetsRequires semantics without a cycle: flags only here.
-  return (
-    choice.requires.flags.every((f) => state.flags.includes(f)) &&
-    choice.requires.notFlags.every((f) => !state.flags.includes(f))
-  );
+  // Full gate (flags + notFlags + meters + personality + age) so autoPlaythrough
+  // only picks choices reachable in live play — otherwise the divergence probe
+  // and persona analytics produce unreachable states.
+  return meetsRequires(state, choice.requires);
 }

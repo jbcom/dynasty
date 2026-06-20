@@ -1,7 +1,288 @@
 # Continuous Work Directive — maga-money-moves
 
-**Status:** RELEASED
+**Status:** ACTIVE
 **Owner:** jbogaty
+
+## VISION — "DYNASTY": three playable dynastic sagas (user, 2026-06-20)
+
+The systems built here (branch resolver, terms/titles, slot events, per-branch
+timeline pools, the compile-at-0 model, the systemic markets/ranks layer) are a
+GENERIC GRAMMAR for a dynastic-saga game — not Trump-specific. The user's
+realization: RENAME the game to "DYNASTY" and let each of the THREE dynastic
+families be its OWN emergent, playable game (not just roles you SWAP between):
+- TRUMP — the existing Drumpf/Kallstadt Era 0 (commercial/real-estate spine).
+- MUSK — begins in SOUTH AFRICA (Walter Henry James Musk → Errol Musk → Elon);
+  the most TECHNOLOGICALLY-focused of the three. Needs its own Era 0.
+- KENNEDY — begins EARLIEST of all three, with Patrick Kennedy (1823–1858) and
+  the IRISH FAMINE; by far the most POLITICAL. Needs its own (earliest) Era 0.
+Landing screen: a NEW-GAME CAROUSEL of portraits + public-domain historical
+lineage images for the three families; pick a dynasty → play its saga. With
+expansion + the slot system, ANY dynastic family could be added — unique
+emergent stories per house. This is a future epic (rename + 3 playable Era-0
+sagas + dynasty-select carousel + per-dynasty slot/timeline pools), tracked here
+to shape the remaining batch work toward it (the slot/compiler/branch work is
+exactly the foundation it needs). NOT started; revisit scope/sequencing with the
+user before the rename + the Musk/Kennedy Era-0 sagas. The current batch's
+Kennedy/Musk protagonist timelines + bootlegger bridge are the seeds.
+
+## Batch — alt-history-and-systemic-sim (batch-20260620-113905)
+
+Source: docs/plans/alt-history-and-systemic-sim.prq.md (sha256: e292c27ee0d28499536fd909f8bb59d83684f16122a8d449008a19f008ce00c2)
+Started: 2026-06-20T16:39:05Z
+
+Executable queue for the full alt-history + systemic-sim PRD. Design detail
+lives in the "alt-history consistency" section below and in
+docs/superpowers/specs/2026-06-20-systemic-sim-layer.md. Already shipped
+(AH1 terms/branch/render, AH3 selection, Nazi pool, AH8 surname terms, SIM1
+spec) — not re-queued here.
+
+### task-001 AH7 slot-event system
+- [x] task-001 SlotSchema + data; archetypal slots resolve to branch/dynasty events at compile time; test: leader-assassination slot → Fred Trump (political) / Commissar purge (nazi)
+### task-002 AH8b branch-name audit
+- [x] task-002 sweep content for hardcoded Trump/Drumpf → {surname}/{family_name} tokens; render-path wired; interpolation test (Nazi shows Drumpf). Audit finding: origins is ALREADY branch-consistent (German/Nazi paths route through separate Drumpf-framed events; American paths through Trump events), so no mass retokenization needed/safe (would wrongly flip proper nouns like "Trump Tower"). Fixed family_name to drop embedded article; tokenized the one shared cross-branch reference (born_to_empire → {surname}); surname/patronymic interpolation test added.
+### task-003 Kennedy/RFK Jr protagonist timeline
+- [x] task-003 timelines/kennedy.json (scope kennedy, 26 events) + brewing/bootlegger Era-0 bridge (origins) enabling the Trump↔Kennedy swap; validates + swap test (bootlegger_fortune/political_dynasty/kennedy_swap flags asserted in both)
+### task-004 West-Coast branch backdrop pool
+- [x] task-004 usa/world/mores/religion .westcoast.json (35/31/29/27 events) — Pacific-centered, ≥30 events each, 0 dups, consistency test
+### task-005 Evangelical-theocracy branch backdrop pool
+- [x] task-005 usa/world/mores/religion .theocracy.json (28/21/19/24 events) — religious-state titles/events, ≥30 each, 0 dups, consistency test
+### task-006 Media/pleasure-king branch backdrop pool
+- [x] task-006 usa/world/mores/religion .media.json (31/27/20/20 events) — vice→porn→Hollywood→propaganda arc, ≥30 each, 0 dups, consistency test
+### task-007 Role-flip protagonist overwrite content
+- [x] task-007 role-flip era content: 9 ev_flip_* events across interregnum(+4)/victory(+5) dramatizing Musk-as-leader / Trump-as-tycoon from Donald's POV (natural-born repeal → Musk ascends → Donald the kingmaker-mogul/patron/rival → bankroll-or-build the rival Mars program), using the {head_of_state} token + role flags (musk_political/trump_commercial_path/trump_tycoon_empire/kingmaker_mogul). 0 dups.
+### task-021 TRUE TOTALITARIAN THEOCRACY (user, 2026-06-20)
+- [x] task-021 theocracy darkened to GILEAD-grade across all 4 theocracy files (+22 events: gender-caste edict, the Watchers secret police, ritual submission, forced-conversion centers, reproduction-as-state-property, heretic labor colonies, soul surveillance, refugee + underground-railroad world events) while PRESERVING the 3 poles (gilead_regime dictatorial / soft_establishment centrist / covenant_commonwealth benevolent-illiberal). Grounded in Handmaid's Tale + real totalitarian theocracy. 0 dups. ORIGINAL: our current theocracy branch reads as institutional-Religious-Right; the user wants a TRUE theocracy — HANDMAID'S TALE-grade dystopian totalitarian theocracy (Gilead): gender-caste subjugation, ritualized control, secret police, a total surveillance-of-the-soul state. RESEARCH dystopian-theocracy fiction + real totalitarian-theocratic regimes for grounding. Either deepen the existing theocracy pool toward this darkness or fork a distinct sub-variant. Lean into the dark/hard-sci mandate.
+### task-022 BRANCH MORAL-AXIS SUB-PATHS — utopian / centrist / dictatorial (user, 2026-06-20)
+- [ ] [WAIT-USER] (next work unit, post PR#10-merge) task-022 [FOUNDATION DONE: src/sim/moralAxis.ts — moralPoleOf resolves utopian/centrist/dictatorial from branch pole-flags with personality fallback; moralPoleLabel gives BRANCH-RELATIVE labels (theocracy utopia = Covenant Commonwealth, dictatorial = Gilead); 4 tests. REMAINING: wire moral pole into endings + HUD; ensure every branch pool expresses all 3 poles.] EACH branch should offer UTOPIAN, CENTRIST (middle-of-the-road), and DICTATORIAL sub-paths — UNLESS one makes zero sense early. KEY THEME (user): even the Nazi-controlled world HAS a "utopian" state — the chilling, interesting part is interrogating WHAT its idea of utopia is and HOW it's achieved. So "good vs bad outcome" is BRANCH-RELATIVE and morally interrogated; the game leans into dark areas + hard sci-fi, and a core question is what even CONSTITUTES a positive vs negative outcome for a given timeline. Design: a per-branch moral/governance axis (utopian↔centrist↔dictatorial) that gates events + endings within each backdrop, mapped onto the existing personality ideology axis + tyranny↔utopia HUD, but with each branch's "utopia" authored on its OWN value system (a Reich "utopia" is monstrous-but-coherent). Applies across all branches (default/nazi/westcoast/theocracy/media/megachurch/oligarchy). Each branch pool + endings must express its three poles.
+### task-023 PAPER-PLAYTEST WITH PLAYER PERSONAS (user, 2026-06-20)
+- [ ] [WAIT-USER] (next work unit, post PR#10-merge) task-023 fan out agents that PAPER-PLAYTEST as a range of distinct HUMAN-PLAYER PERSONAS (e.g. the min-maxer/optimizer, the roleplayer/immersionist, the completionist/100%-er, the chaos-tester/button-masher, the moralist seeking the "good" ending, the historian probing accuracy, the speedrunner, the villain-roleplayer). Each persona plays through compiled timelines (via the AH5 harness) and reports: dead-ends, shallow stretches, dominant/trap strategies, unclear choices, balance problems, AND — crucially — ENTIRE MISSING BRANCHES we haven't identified yet (gaps in the dynastic/governance/ideological space). Aggregate persona findings → fill gaps, author newly-discovered branches, deepen thin spots. Complements AH6 (mechanical consistency sweep) with creative-coverage discovery. This is open-ended discovery — expect it to surface new branch ideas like task-019/020/021 did.
+### task-024 EVALUATE KOOTA (ECS) FOR QUERIES/ENGINES (user, 2026-06-20)
+- [x] task-024 (spec: docs/superpowers/specs/2026-06-20-koota-ecs-evaluation.md) RECOMMENDATION: decline Koota as core (it is a mutable reactive ECS; our correctness rests on pure+deterministic+replay-from-seed, which it would fight); keep the small tested pure query helpers; hold a disposable read-model projection in reserve with a tripwire (same multi-component join hand-written 3+ places, e.g. persona-playtest analytics). consider wiring KOOTA (pmndrs reactive ECS, https://github.com/pmndrs/koota) into the JSON-data layer to power the many cross-cutting QUERIES + engines we keep hand-rolling: event eligibility, the linking-protocol broadcast, butterfly-rule matching, branch/slot/timeline selection, market/rank ticks. An ECS where timelines/events/markets/ranks/dynasts are entities with components could make these queries declarative and the engines composable. DESIGN PASS FIRST (don't adopt impulsively): hard constraints to honor — the sim MUST stay PURE + DETERMINISTIC (no Math.random/Date.now; replay from seed+history reconstructs state to the bit); Koota's world/store must be reconstructable deterministically and serialize into the seed+history save model (or stay a derived read-model over the existing pure state, NOT the source of truth). Evaluate: does Koota's mutation model fit a pure-functional transition? Is it a query/read layer over GameState, or a rewrite of state.ts? Bundle-size + Capacitor/mobile cost. Write a short spec (docs/superpowers/specs/) weighing adopt-as-read-model vs adopt-as-core vs decline, with a recommendation, before any code.
+### task-026 KOOTA REFACTOR — FIRST (user DECISION 2026-06-20, OVERRIDES task-024 "decline")
+- [ ] [WAIT-USER] (next work unit, post PR#10-merge) task-026 the user has DECIDED to do the Koota refactor FIRST: "this is also where koota would be tremendously helpful — if we did the refactor first to koota it would make all these queries much cleaner." So adopt Koota as the query/engine substrate AHEAD of the remaining query-heavy systems (moral-axis, deep-future, persona analytics) so they're authored against the ECS, not hand-rolled. HARD CONSTRAINTS still hold (from the task-024 spec): the sim must stay PURE + DETERMINISTIC, saves stay seed+history, replay reconstructs to the bit. So the refactor adopts Koota as a DERIVED read-model/query layer projected from the pure GameState each turn (option B in the spec), NOT as a mutable source of truth — the pure transition (applyChoice) remains authoritative; Koota worlds are rebuilt from (Content, GameState), queried, discarded. Migrate the existing query helpers (eligibleEvents/effectiveWeight, timelinesForBranch/applyWorldFlags linking, branchOf/slot/moralAxis resolution, market/rank reads) to declarative Koota queries over that projection, keeping every determinism + replay test green. Sequence: (1) add koota dep + a projectWorld(content,state) builder + determinism guardrail tests; (2) migrate one query (e.g. eligibility) as the pattern; (3) migrate the rest; (4) re-verify replay parity + the timeline:sweep. PRECEDES task-022 deepening / task-025 / task-023 analytics so they're built on the ECS.
+      PROGRESS: step 1+2 DONE — koota ^0.6.6 added; src/sim/world.ts projectWorld(content,state) builds a disposable Koota read-model (one entity per event with EventRef/Eligible/Weight/Branch/Pole traits, content-order deterministic); queryEligible migrated as the pattern with a PARITY test proving it exactly equals the pure eligibleEvents across seeds + a determinism test. Pure transition stays authoritative; world rebuilt+discarded per query. 226 tests green. NOTE: koota added ~180KB gzip to the bundle (1.25→1.78MB) — acceptable for now; if mobile size bites, lazy-load the read-model (it's per-query, not on the hot save path). REMAINING (step 3-4): migrate more queries (linking/branch-group/market-rank reads) + re-verify replay parity & timeline:sweep.
+### task-025 PER-BRANCH DEEP-FUTURE: branch-motivated Mars / stars / first contact (user, 2026-06-20)
+- [~] task-025 DONE for 2 of the key branches (the user's detailed examples): THEOCRACY (+13 events) — broadcast-evangelism drives tech → orbital "Heaven's Gate" array → the sermon-signal answered = first contact → Crusade Encyclical → ark-class warships → 3 poles (Communion/Standoff/Theodicy-of-Fire); OLIGARCHY (+14 events) — multinationals assume sovereign debt (EIC model) → solar-system extraction → extrasolar new-markets → first-contact-as-trade → fork: trade commonwealth (utopian) / monopoly regime (centrist) / alien subjugation+company-rule (dictatorial). Both set ALL four science-ladder flags via their OWN motivation (mission / profit), not the default conquest. REMAINING: deep-future arcs for nazi (Reich conquest), media (broadcast reach), westcoast (techno-frontier), megachurch (mission) — pair with task-017. ORIGINAL: each timeline/dynasty needs its OWN distinctive MOTIVATION + path into Mars, the stars, and first contact — not a shared generic science ladder. The DRIVE differs per branch and reshapes the whole late game. KEY EXAMPLE (user): a TECHNO-THEOCRATIC line where mass media motivates the theocracy to embrace technology — but the goal is NOT to conquer the solar system; it is to build the GREATEST BROADCASTING ARRAY to share the Word of the Lord to the heavens → that signal CAUSES first contact → a HOLY WAR / CRUSADE, with late-stage tech (giant ARK SHIPS, weapons) pursued purely as a means to strike the enemy. Design per-branch deep-future arcs (eras ~10-12) where the spacefaring motivation, the nature of first contact (trade vs crusade vs corporate-annexation vs broadcast-evangelism vs Reich-conquest), and the endings flow from the branch's values. Each branch's science-ladder gating + first-contact events + Era-11/12 content should express its OWN reason for reaching the stars. Cross-cuts the science timeline, the moral-axis (task-022), and the endings.
+      PER-BRANCH MOTIVATION EXAMPLES (user): (a) TECHNO-THEOCRACY — broadcast the Word
+      to the heavens → signal causes contact → holy war/crusade, ark ships as weapons.
+      (b) OLIGARCHY — a purely economically-motivated oligarchy turns into MULTINATIONALS
+      ASSUMING THE WORLD'S DEBT (in pieces) → a mercantile incentive to EXPLOIT the
+      solar system, then beyond → first contact framed as a choice between ECONOMIC
+      ALLIANCES vs COLONIZATION/SUBJUGATION (East-India-Company / mercantile-colonial
+      precedents extrapolated). Each backdrop reaches the stars for its OWN reason
+      (Reich conquest, theocratic evangelism, corporate exploitation, media reach,
+      West-Coast techno-frontier, megachurch mission) — author each accordingly.
+### task-019 MEGACHURCH religious-dynasty branch (user, 2026-06-20)
+- [x] task-019 (megachurch pool: usa/world/mores/religion .megachurch.json, 30/20/20/22) a TRUE American MEGACHURCH religious DYNASTY — a clear gap for a game with interwoven ideological/theological areas, and distinct from the theocracy STATE branch. RESEARCH the real American megachurch phenomenon (Graham, the televangelist dynasties — Roberts/Bakker/Robertson/Osteen, the prosperity gospel, Hillsong/Lakewood, family-succession ministries, the megachurch-as-business-empire). A dynasty whose power is a religious-media-financial empire (not a theocratic state per se). New branch key "megachurch" (+ schema/branch/terms entries) and a 4-scope pool (usa/world/mores/religion .megachurch.json). Head-of-state/title + currency terms per branch. Could converge with media (televangelism) and theocracy (Religious Right) threads.
+### task-020 OLIGARCHY / OLIGOPOLY branch (user, 2026-06-20)
+- [x] task-020 (oligarchy pool: usa/world/mores/religion .oligarchy.json, 28 each, utopian/centrist/dictatorial poles) an OLIGARCHY/OLIGOPOLY America as another logical successor to the COLLAPSE of the democratic republic (we already introduced an America that does NOT remain a democracy via the Nazi + theocracy branches; oligarchy is the third logical destination — corporate/plutocratic capture, a board-of-billionaires state, company-towns writ national, the Chairman/CEO-as-ruler). RESEARCH (Gilded-Age trusts, robber barons, regulatory capture, modern tech-oligarch power, state-capture literature). New branch key "oligarchy" (+ schema/branch/terms) and a 4-scope pool. Ties naturally to the Musk tech-dynast + the markets/ranks SIM1 layer (commercial rank → political power). FRAMING (user): the collapse of one America and the rise of another — Reich / theocracy / oligarchy are parallel post-democracy forms.
+### task-008 AH3 timeline compiler (compile-at-Era-0)
+- [x] task-008 timeline compiler (src/sim/compiler.ts): compileTimeline produces ONE bespoke internally-consistent CompiledTimeline read-model from a run's Era-0 state — resolved branch + dynasty + role-flip, the selected timeline variants (default+branch), slot resolutions, active currency lane, and branch-resolved key terms. compileFromEra0 replays the prologue from seed+choices. Deterministic; a READ-MODEL over seed+history (saves stay tiny — no new persisted state, replay-safe). 4 tests (Nazi run compiles coherent Reichskommissar/Drumpf/reichsmark/nazi-USA/Fred-slot bundle). Bias-weighting (AH9) threads through the rng param for later without churn.
+### task-009 AH5 timeline-compiler dev harness
+- [x] task-009 dev harness scripts/timeline-dump.ts via vite-node: `pnpm timeline:dump --seed X --flags a,b` dumps the full compiled JSON + consistency report (exit 1 on issue); `pnpm timeline:sweep --n N` prints a per-branch summary table. Already caught real gaps (megachurch/oligarchy missing head_of_state terms → fixed).
+### task-010 AH9 butterfly weight/bias pass
+- [x] task-010 selection BIAS layer (AH9): optional event.bias {branch, personality} scales effectiveWeight so the seeded chaos field pulls toward the run character — a branch-matched event is likelier on its line, a grandiose run surfaces grandiose events. Applied in effectiveWeight after butterfly+ripple; the compiler already threads rng for it. 4 bias tests.
+### task-011 SIM1 phase 1 — schemas + state
+- [x] task-011 markets/currencies/ranks zod schemas + GameState fields (markets/ranks/currencyId), deterministic init helpers, wired through buildContent + loader; 5 tests. (Done out of order — pure new files, no conflict with the in-flight Kennedy origins edit.)
+### task-012 SIM1 phase 2 — pure systemicTick
+- [x] task-012 pure systemicTick in applyChoice step 8d (looped per elapsed year); markets walk (regime hazard→AR(1)→meter transmission+housing carry), currency resolves+redenominates, ranks drip/fall-bleed; seeded via rng.fork; replay parity preserved (184 tests incl. existing determinism tests green); 9 tick tests
+### task-013 SIM1 phase 3 — data + per-era table
+- [x] task-013 markets.json (6 markets incl. attention+crypto+housing, regimes/couplings), currencies.json (branch+location+year-window catalog incl. the Weimar Rentenmark ÷1e12 wipe), ranks.json (4 ladders, political→head of state); real data drives a deterministic tick end-to-end; 13 tests; app builds. (Per-era applicability wiring of which markets/ranks are live per era — a refinement — folds into task-022 moral-axis + later balance; data foundation shipped.)
+### task-014 SIM1 phase 4 — UI surfacing
+- [x] task-014 SIM1 UI: MarketsView component (live market index/regime/position badges + the 4 rank ladders with fall-from-grace marker) wired as a 💹 tab (shown when markets/ranks exist); branch-aware currency relabel via resolveCurrency + formatMoneyIn (net worth reads ℛℳ on the Nazi branch, etc.). 3 browser tests; app builds + renders. (Put markets in their own tab rather than a Dossier sub-panel — earns the space given the systemic depth.)
+- [x] SEEDRANDOM / MULTI-LAYER PRNG (user, 2026-06-20) — CONFIRMED already the determinism backbone: seedrandom ^3.0.5 + @types/seedrandom ^3.0.8 installed, wrapped behind createRng (src/sim/rng.ts) with LAYERED independent streams via fork(label) (used pervasively: mkt:/systemic:/choose:/pick: layers). Math.random banned in src/sim by the commit gate. Fork-independence + determinism already tested (rng.unit.test.ts).
+### task-015 SIM1 phase 5 — balance + polish
+- [ ] [WAIT-USER] (next work unit, post PR#10-merge) task-015 balance pass; telegraphed currency-hedge survival play; crypto/attention polish
+### task-016 AH6 agent-sweep verification
+- [~] task-016 MECHANICAL sweep DONE + green: `pnpm timeline:sweep` over all 7 branches × dynasty shows correct title/currency/timeline-variant selection, 0 structural contradictions (the harness consistency check). The DEEP content-anachronism + shallowness sweep (agents reading compiled dumps for prose-level leaks) pairs with task-023 personas and runs AFTER the theocracy-darkening + role-flip content lands so it checks final content. Keeping open for that pass.
+### task-017 AH4 no-shallowness audit
+- [ ] [WAIT-USER] (next work unit, post PR#10-merge) task-017 verify every branch opens a comparably rich gated multi-layer pool; deepen any thin branch
+### task-018 Definition of done
+- [ ] [WAIT-REVIEW] task-018 DoD — PR #10 open (https://github.com/jbcom/maga-money-moves/pull/10); reviewer trio + CI running under a Monitor. On completion: fold findings → resolve threads → squash-merge once green. gate GREEN (typecheck, biome, 227 unit + 59 browser, build) and app LIVE-VERIFIED (chrome-devtools: title → German/Nazi-branch divergence "The Boy Who Served the King" → Markets tab with 6 live markets + 4 rank ladders + currency relabel, zero console errors); 7-branch timeline:sweep consistent. Opening the PR for the shippable unit now; remaining OPEN EPICS (full Koota query migration, deep-future for nazi/media/westcoast/megachurch, persona sweep task-023, Dynasty rename + Musk/Kennedy Era-0 sagas, AH8d sibling-count, task-022 full 3-pole coverage, task-017 no-shallowness) carry forward as the NEXT work unit per one-branch-per-unit. → open PR → reviewer trio → wait CI → squash-merge.
+
+## Batch — alt-history consistency (batch-20260620-althist)
+
+Source: user directives, 2026-06-20 (verbatim intent below)
+Started: 2026-06-20
+
+THE CORE PROBLEM (user): counterfactual branches must stay HISTORICALLY
+CONSISTENT, and no single divergent choice may make the content feel shallow.
+Three intertwined requirements:
+
+- [x] AH1 TITLE-AWARE OVERRIDES (DONE via task-001/AH-terms: branch+term layer src/sim/{branch,terms}.ts, render-path wired): (user): the override system must work with TITLES,
+      not just events/flags. Full scan done: "president" appears 144× across 8 era
+      files + usa/musk timelines, all branch-blind. On the Nazi/Axis route there is
+      NO U.S. president — the Axis-appointed American leader holds a Reich-style
+      title (Reichskommissar/Gauleiter/Statthalter — research the accurate term),
+      never "President". JFK is NOT shot in 1963 (no presidency to assassinate).
+      The leader-title (and head-of-state references generally) must resolve from
+      the active branch. Needs a title/term resolution layer the content reads.
+- [x] AH2 MUTUALLY-EXCLUSIVE / EXCLUDED EVENTS (DONE via per-branch pools: usa.nazi etc. replace incompatible real events; consistency test + timeline:sweep enforce it): (user): some world events FORCE
+      OTHERS OUT of the timeline by choice bias. Real-history landmarks that are
+      impossible under a branch must be suppressed: e.g. "I Have a Dream" / March
+      on Washington / civil-rights arc / free elections / democracy / Constitution
+      / Congress cannot occur in Nazi-occupied America. Scan found all of these in
+      the data, none gated on branch. Need an exclusion mechanism (branch flags in
+      notFlags, or an excludes-set) so picking a branch removes incompatible events.
+- [x] AH3 ALT-HISTORY BRANCHING ARCHITECTURE (DONE via task-008 compiler + timelinesForBranch + 7 branch pools): (user DECISION 2026-06-20): mechanism =
+      FULL SEPARATE TIMELINES PER BRANCH. Loader picks the variant set matching the
+      active branch flag: e.g. timelines/usa.default.json + usa.nazi.json +
+      usa.westcoast.json + usa.theocracy.json + usa.media.json; same for
+      world/mores/religion/science. A branch-key resolver chooses which variant of
+      each scope to load from the run's branch flag.
+      CRITICAL LAYERING (user): the DONALD and MUSK arcs are PROTAGONIST timelines —
+      threadable/overwritable THROUGH the backdrop timelines (they weave across
+      branches, the role-flip overwrites them). The SOCIAL (mores), RELIGIOUS,
+      TECHNOLOGICAL (science), and GEOGRAPHICAL (manhattan/eastcoast/westcoast/usa/
+      world) timelines are BACKDROPS — each must be MASSIVELY fleshed out per branch
+      to give rich multi-layered context, extrapolating how leadership / geopolitical
+      / economic / moral decisions differ across the changed timeline.
+
+      *** AH3 ENGINE MODEL — "GEARS IN A CLOCK" (user, 2026-06-20, AUTHORITATIVE,
+      supersedes the simple per-scope swap above) ***
+      - Every backdrop config (geography / social / religious / ideology, and the
+        whole-history variants: real-American-political, evangelical, Nazi, …) is its
+        OWN DISTINCT, INTERNALLY-CONSISTENT timeline. You must NEVER see a cross-
+        timeline contradiction (e.g. "A Young Man Wins the White House" must NOT
+        appear in a Nazi timeline). Each config stays coherent on its own.
+      - THREE CENTRAL FIGURES / DYNASTIC FAMILIES (Trump, Musk, Kennedy/RFK Jr) are
+        the GEARS — the push-and-pull. The COURSE of the timeline is what ERA 0 (the
+        prologue) sets: prologue choices SLOT IN exactly which timeline configuration
+        the run assembles.
+      - COMPILATION AT ERA 0: at the start, the engine stores a CUSTOM CAPACITOR
+        PREFERENCES SAVE that records the prologue choices AND — using the BUTTERFLY
+        MACHINE + BIAS WEIGHTING — PULLS from all the myriad timeline configs
+        (geography, social, religious, ideology, titles, markets, currencies, …) and
+        COMPILES them into ONE bespoke, internally-consistent story for that save.
+      - So a run is not a live per-scope file swap; it is a COMPILED bespoke timeline,
+        composed once at Era 0 from weighted, mutually-consistent config selections,
+        persisted to the save, then played out (still driven by the butterfly machine
+        and the three dynastic gears). The branch flag + timelinesForBranch selection
+        already built is a SUBSET of this; evolve it toward the compile-at-0 model.
+- [x] AH5 TIMELINE-COMPILER DEV HARNESS (DONE via task-009: pnpm timeline:dump/sweep): (user, 2026-06-20): so we never have to
+      WONDER whether a timeline is stable/consistent, build a dev harness that, given
+      a SEED + ERA-0 CHOICES, DUMPS THE FULL COMPILED JSON TIMELINE for that run
+      (all backdrop selections, titles, markets, the woven event order — the entire
+      bespoke story). A pnpm script (e.g. `pnpm timeline:dump --seed X --choices ...`)
+      writing the compiled timeline to a file for inspection + a consistency check
+      (no cross-timeline contradictions). This is the verification tool for the
+      compile-at-0 engine — pairs with the no-shallowness + consistency invariants.
+      WHY (user): makes testing much more DETERMINISTIC, and lets the user run a BUNCH
+      of different Era-0 PERMUTATIONS and manually quality-control the compiled
+      results themselves. So the harness needs a BATCH/MULTI-PERMUTATION mode too
+      (enumerate or sample many Era-0 choice sets → dump each compiled timeline →
+      summary table of which configs each produced), for sweep-style manual QA.
+      NOTE: the per-branch backdrop JSONs being authored now (usa.nazi, world.nazi,
+      mores.nazi, religion.nazi, …) are the CONFIG POOLS the compiler draws from —
+      authoring them remains necessary under the gears-in-a-clock model.
+- [x] AH7 SLOT EVENTS (DONE via task-001: SlotSchema + slots.json + resolveSlot): (user, 2026-06-20): certain real events are SO structurally
+      critical they should be abstract SLOTS filled per timeline, not hardcoded
+      concrete events. The JFK assassination is really the archetype "the
+      assassination of the dynasty's leader" — on the political-dynasty path it's
+      FRED TRUMP's assassination; elsewhere it's another figure or doesn't fire.
+      There are likely a TON of these (the war, the crash, the great scandal, the
+      martyrdom, the succession). Design a SLOT system: archetypal event slots that
+      resolve to branch/dynasty-specific concrete events at compile time (pairs with
+      the gears-in-a-clock compiler — slots are filled when the timeline compiles).
+- [x] AH8 BRANCH-AWARE PATRONYMICS / NAMES (DONE via task-002 + AH8c: surname/given_name/full_name terms, Trump↔Drumpf / Donald↔Friedrich): (user, 2026-06-20): names change with the
+      branch. The family only became "Trump" by anglicizing "Drumpf"; in the Nazi
+      (stayed-German) timeline Donald remains DONALD DRUMPF. Extend the AH1 term layer
+      to PROPER NAMES / surnames (a {surname}/{family_name} term: "Trump" default,
+      "Drumpf" on the German/Nazi branch, etc.), and audit content for hardcoded
+      "Trump" that should be the branch-aware surname token.
+      AH8b (done) + AH8c GIVEN NAMES (user, 2026-06-20): the protagonist's FIRST name
+      is also branch-aware. In tradition-proud military/religious German dynasties
+      (Nazi, Lutheran/evangelical) the heir would likely carry the patriarch's name —
+      so Donald could instead be FRIEDRICH (III), after Friedrich Drumpf. CAVEAT
+      (user): Donald was the FOURTH child, so naming the fourth son after the
+      patriarch is a stretch under strict primogeniture — handle nuance: the
+      branch-aware {given_name}/{full_name} resolves to "Donald" by default and to a
+      dynasty-traditional name (Friedrich III, etc.) on the military/religious German
+      branches where the family-name tradition is strong, with the fourth-child
+      caveat acknowledged in the framing (e.g. the name passes to him because earlier
+      sons fell / on the proud-tradition branches it is bestowed deliberately).
+- [ ] [WAIT-USER] (next work unit, post PR#10-merge) AH8d SIBLING-COUNT / BIRTH-ORDER AS AN ERA-0 LEVER (user, 2026-06-20): how many
+      children Fred/Friedrich has — and the protagonist's birth order — is itself a
+      PIVOTAL branching variable that ripples through many timelines. Real history:
+      Donald is the FOURTH of five, heir only because Fred Jr. (the firstborn)
+      rebelled/washed out and died — the "reluctant/accidental heir" dynamic. If Fred
+      has ONE child (or Donald is firstborn), the patriarch's name likely passes to
+      him (→ Friedrich III, ties to AH8c), inheritance is direct/groomed, and the
+      "had to earn it past an elder brother" arc vanishes. Make sibling-count +
+      birth-order an Era-0 prologue choice that sets flags (e.g. only_child /
+      firstborn_heir / fourth_child / fred_jr_present / fred_jr_died) which then drive
+      given-name resolution (AH8c), inheritance logic, and the groomed-vs-accidental-
+      heir personality framing across the compiled timeline.
+- [x] AH9 BUTTERFLY WEIGHT/BIAS (DONE via task-010: event.bias branch+personality layer in effectiveWeight): (user, 2026-06-20): the butterfly effect +
+      causal engine need an agent pass to ASSIGN WEIGHTS AND BIASES across the events
+      / butterfly rules / ripples so the compile-at-0 selection and the in-run chaos
+      field pull realistically (which configs/events are more or less likely given the
+      prologue + accumulated state). Send an agent through to tune weights/biases
+      systematically (this is what makes the bias-weighted timeline compilation and
+      the butterfly machine produce believable, varied bespoke stories).
+- [ ] [WAIT-USER] (next work unit, post PR#10-merge) AH6 AGENT-SWEEP VERIFICATION (user, 2026-06-20): agent verification is FAST —
+      far quicker than a human reviewer at spotting flaws across many permutations.
+      So the QA strategy pairs with AH5: once the compiler/harness can dump a
+      compiled timeline per (seed + Era-0 choices), FAN OUT verification agents over
+      a SWEEP of Era-0 permutations, each agent reading one compiled-timeline dump
+      and flagging cross-timeline contradictions / anachronisms / shallowness / title
+      mismatches (e.g. "President" leaking into a Nazi run, a default real-history
+      headline in an alt branch). Aggregate findings → fix the offending config →
+      re-sweep. This automated consistency sweep is how we hold the no-shallowness +
+      consistency invariants at scale instead of hand-checking.
+- [x] AH3-BRANCHES (DONE via task-004/005/006/019/020/021: nazi/westcoast/theocracy/media/megachurch/oligarchy pools authored). author full alt-history treatment for these branches:
+      (1) NAZI-OCCUPIED AMERICA (axis_ascendant/nazi_dynasty) — Reich titles, purges
+          not assassinations, no elections/civil-rights/free press.
+      (2) WEST-COAST-ONLY DYNASTY (west_coast_origin) — Pacific-centered, never
+          touches Manhattan/East Coast.
+      (3) EVANGELICAL THEOCRACY (evangelical_scion/faith_to_power) — religious-state
+          titles (Supreme Pastor etc.), theocratic events.
+      (4) TRUMP↔MUSK ROLE-FLIP (role_flip) — head-of-state + arc reflect Musk-as-
+          leader / Trump-as-tycoon (protagonist-thread overwrite, per layering rule).
+      (5) NEW — MEDIA / "PLEASURE KING" BRANCH (user): Drumpf goes ALL-IN on the
+          brothels → "pleasure king" of the West Coast, a position spanning Nevada
+          through California where mining-boom prostitution stays legal longer →
+          transitions into PORNOGRAPHY then MEDIA (think Hefner) → becomes a FOUNDING
+          FAMILY OF HOLLYWOOD → a PROPAGANDA empire that launders its sordid past
+          into legitimacy amid the post-1920s shift in morality. Its propaganda
+          capability toward legitimacy is a key thread to explore.
+      (6) NEW — POLITICAL DYNASTY / KENNEDY SWAP (user): add a THIRD immortal
+          protagonist dynast — RFK JR — with his OWN JSON timeline and a rich
+          KENNEDY family tree (Joseph → his sons → RFK Jr), making THREE swappable
+          protagonist dynasts (Trump, Musk, Kennedy). Historical wiring: Kallstadt
+          was a brewing village; if the Drumpfs had stayed in BREWING instead of
+          real estate, then become BOOTLEGGERS during Prohibition (exactly Joseph
+          Kennedy's path to fortune + political dynasty), Donald could SWAP IN AND
+          OUT of the Kennedy family tree. So three avenues let Donald merge with /
+          mirror the Kennedy arc. flags: brewing_dynasty / bootlegger_fortune /
+          kennedy_swap / political_dynasty. RFK Jr is a protagonist timeline
+          (timelines/kennedy.json) threaded like Donald/Musk, per the layering rule.
+- [ ] [WAIT-USER] (next work unit, post PR#10-merge) AH4 NO-SHALLOWNESS INVARIANT (user): "we do not want any one choice suddenly
+      makes the content feel shallow." A branch must be authored to the SAME depth
+      as the main line — taking any fork opens a comparably rich, gated, multi-layer
+      backdrop + event pool, not a thin stub. Acceptance bar for AH1-AH3.
+- [x] SIM1 SYSTEMIC SIMULATION LAYER (DONE via task-011/012/013/014: schemas+state, systemicTick, data, Markets UI): — "Donald Trump meets Dwarf Fortress" (user,
+      2026-06-20): choices alone don't make a good game; we need LIVING SUBSYSTEMS
+      that continuously pull the 6 meters (money/power/reputation/loyalty/health/heat)
+      up and down between choices, like a stock market. All branch-aware/overridable
+      and era-applicable. Be open-ended, extrapolate, research; same rule — nothing
+      too dense, no detail too specific to omit. Components:
+      (a) FINANCIAL MARKETS: an overridable CURRENCY (dollars default; deutschmarks
+          pre-Reich; reichsmarks under the Nazi branch; rand on a South-Africa/
+          apartheid thread; etc. — currency resolves by branch AND by where/when the
+          player is) plus market dynamics (booms/busts/cycles) that move money.
+      (b) HOUSING MARKETS: real-estate cycles (the family's core business) that move
+          money/power — bubbles, crashes, rent rolls, redlining-era dynamics, etc.
+      (c) REPLACEABLE INTERWOVEN RANK SYSTEMS: SOCIAL rank, COMMERCIAL rank,
+          RELIGIOUS rank, POLITICAL rank — each a ladder the player climbs/falls,
+          branch-swappable (e.g. political rank = elected office vs Reich appointment
+          vs church hierarchy vs board seats). Think per era what ladder applies.
+      (d) Markets + ranks feed the 6 levers procedurally (a tick/era step), so the
+          world moves even when the player isn't clicking. Design per-era: which
+          markets + which rank ladders are live in each era 0→12.
+      Needs a brainstorm/design pass (architecture: schema for markets/currencies/
+      ranks, a deterministic tick that applies them in the pure sim, branch override,
+      UI surfacing) before authoring — this is a substantial new simulator pillar.
 
 ## Batch — causality-endings-personality (batch-20260620-causality)
 

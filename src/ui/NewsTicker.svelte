@@ -1,22 +1,29 @@
 <script lang="ts">
 import type { Content } from "../sim/content";
 import type { GameState } from "../sim/state";
-import { newsForYear } from "../sim/worldtime";
+import { branchOf } from "../sim/branch";
+import { newsForYear, timelinesForBranch } from "../sim/worldtime";
 
 interface Props {
   content: Content;
   gameState: GameState;
   /** How many headlines per scope to surface. */
   perScope?: number;
+  /** Branch-aware term interpolation; identity by default (alt-history AH1). */
+  term?: (text: string) => string;
 }
 
-const { content, gameState, perScope = 1 }: Props = $props();
+const { content, gameState, perScope = 1, term = (t) => t }: Props = $props();
 
 // Diegetic news from the four (or five) parallel world timelines — the wider
 // world reported at the current in-world year.
 const news = $derived(
   content.worldTimelines.length > 0
-    ? newsForYear(content.worldTimelines, gameState.year, perScope)
+    ? newsForYear(
+        timelinesForBranch(content.worldTimelines, branchOf(gameState)),
+        gameState.year,
+        perScope,
+      )
     : [],
 );
 
@@ -40,7 +47,7 @@ const scopeLabel: Record<string, string> = {
       {#each news as item (item.scope + item.headline)}
         <li>
           <span class="scope" data-scope={item.scope}>{scopeLabel[item.scope] ?? item.scope}</span>
-          <span class="headline">{item.headline}</span>
+          <span class="headline">{term(item.headline)}</span>
           <span class="year">{item.year}</span>
         </li>
       {/each}

@@ -155,6 +155,147 @@
             "content_barber"
           ],
           "outcome": "You could do worse than honest work. But the rumors of the West keep cutting through the lather like a razor."
+        },
+        {
+          "id": "ev_brewing_kallstadt_pivot",
+          "text": "[Alternate Path] Kallstadt was a wine village — leverage that knowledge and go into brewing",
+          "effects": {
+            "money": 800,
+            "power": 4,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": 3,
+            "grandiosity": 5,
+            "outward": 4
+          },
+          "setFlags": [
+            "fled_bavaria",
+            "brewing_dynasty",
+            "drumpf_brewer"
+          ],
+          "clearFlags": [
+            "content_barber"
+          ],
+          "ripples": [
+            {
+              "to": "bootlegger_path",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Kallstadt's wine culture runs in your blood as surely as the Rhine runs through the Palatinate. You find a German-immigrant brewery on the Lower East Side, learn every stage of the trade, and invest your barber savings in a small lager operation. When Prohibition comes, the Drumpf brewing knowledge will be worth more than gold — contraband gold."
+        }
+      ]
+    },
+    {
+      "id": "ev_brewing_prohibition_crossroads",
+      "era": "origins",
+      "year": 1920,
+      "title": "The Volstead Act and the Drumpf Brewery",
+      "scene": "It is January 17, 1920, and the Eighteenth Amendment takes effect at midnight. Every legal brewery in America must close or go dark. You are Friedrich Drumpf — or your son Fred, if the fever took Friedrich early — and the Drumpf brewery is a going concern. You can shut down, store the equipment, and wait out Prohibition like respectable men. Or you can pivot the way Joseph Kennedy and a hundred other immigrant businessmen are pivoting right now: convert the brewery into a bootlegging operation, distribute your lager and your Palatinate wine contacts under the table, and ride Prohibition's artificial scarcity to the kind of fortune that turns an immigrant's grandson into a senator's father. The Kennedys are making the same calculation in Boston this very night.",
+      "researchNote": "Counterfactual: Kallstadt, the Drumpf ancestral village, was a wine- and brewing-culture village in the Palatinate. Had Friedrich trained as a brewer rather than a barber, the Drumpf family could plausibly have followed Joseph Kennedy's Prohibition bootlegging route to dynasty wealth — structurally identical paths from immigrant outsider to political-dynasty capital.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "business",
+        "counterfactual",
+        "prohibition",
+        "politics"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "brewing_dynasty"
+        ],
+        "notFlags": [
+          "never_emigrated",
+          "dynasty_doomed"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "ev_brewing_go_bootlegger",
+          "text": "Convert the brewery to a bootlegging operation — just like the Kennedys in Boston",
+          "effects": {
+            "money": 12000,
+            "power": 8,
+            "heat": 12,
+            "reputation": -4
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 9,
+            "outward": 5
+          },
+          "setFlags": [
+            "bootlegger_fortune",
+            "kennedy_swap",
+            "political_dynasty",
+            "kennedy_dynasty_active",
+            "drumpf_bootlegger",
+            "dynasty_capital"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "bootlegger_path",
+              "weight": 1.0,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sell the legitimate equipment and build hidden fermentation cellars. Your Palatinate contacts provide cover for aged German lager and Rhine wine under medical-use permits. The money is spectacular — the same money Joseph Kennedy is making in Boston right now from the same play. The difference is only geography: he will turn his into the Democratic machine; you will turn yours into whatever machine serves the Drumpf line best. The dynasty slot is the same. The nameplate is interchangeable."
+        },
+        {
+          "id": "ev_brewing_go_legal_loophole",
+          "text": "Stay legal — pivot to 'near beer' and malt extract, keep the operation above board",
+          "effects": {
+            "money": 3000,
+            "reputation": 4,
+            "power": 3,
+            "heat": -2
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": 2
+          },
+          "setFlags": [
+            "brewing_dynasty",
+            "drumpf_brewer",
+            "survived_prohibition_clean"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The Drumpf name stays clean. The fortune grows slower. When Prohibition ends in 1933, you have a viable legal brewery while your richer, dirtier competitors are explaining their business models to the FBI. The Kennedys will have palaces. You will have a solid German-American brewery and a clear conscience."
+        },
+        {
+          "id": "ev_brewing_sell_and_pivot_realestate",
+          "text": "Sell the brewery and pivot to real estate — the Drumpf line finds its historical track",
+          "effects": {
+            "money": 4000,
+            "power": 5,
+            "reputation": 2
+          },
+          "personality": {
+            "ideology": 4,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "returned_to_ny",
+            "real_capital",
+            "fred_builder"
+          ],
+          "clearFlags": [
+            "brewing_dynasty",
+            "drumpf_brewer"
+          ],
+          "ripples": [],
+          "outcome": "The brewing experiment ends. You cash out the equipment and contacts for a tidy sum and pivot the Drumpf capital into Queens real estate — the path history actually took. The bootlegger slot stays occupied by the Kennedys. The builder slot is yours."
         }
       ]
     },
@@ -2247,7 +2388,7 @@
         },
         {
           "id": "born_to_empire",
-          "text": "[If the dynasty was built] Born into the Trump empire",
+          "text": "[If the dynasty was built] Born into the {surname} empire",
           "effects": {
             "money": 200000,
             "power": 10,

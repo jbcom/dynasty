@@ -108,6 +108,24 @@ export const EventSchema = z.object({
   portrait: z.string().min(1),
   requires: RequiresSchema,
   weight: z.number().min(0).default(10),
+  /**
+   * Selection BIAS (AH9): affinities that scale this event's weight so the chaos
+   * field pulls realistically toward the run's character. `branch` multiplies the
+   * weight when the run's active branch matches (so a Reich event is likelier on
+   * the Nazi line); `personality` multiplies per axis-comparator (so a grandiose
+   * run surfaces grandiose events). Absent → no bias (multiplier 1).
+   */
+  bias: z
+    .object({
+      branch: z
+        .partialRecord(
+          z.enum(["default", "nazi", "westcoast", "theocracy", "media", "megachurch", "oligarchy"]),
+          z.number(),
+        )
+        .default({}),
+      personality: z.partialRecord(PersonalityAxisSchema, z.number()).default({}),
+    })
+    .optional(),
   /** If true the event can recur; otherwise it fires at most once per run. */
   repeatable: z.boolean().default(false),
   choices: z.array(ChoiceSchema).min(1, "an event needs at least one choice"),
@@ -176,12 +194,22 @@ export const WorldTimelineSchema = z.object({
     "mores",
     "religion",
     "science",
-    // Character-timeline scope — a parallel PERSON's arc (Elon Musk) whose
-    // events broadcast flags that can flip Donald between the political-king and
-    // commercial-tycoon roles via the linking protocol.
+    // Character-timeline scopes — a parallel PERSON's arc (Musk, Kennedy/RFK Jr)
+    // whose events broadcast flags that thread through / overwrite the backdrops
+    // (e.g. the role-flip) via the linking protocol.
     "musk",
+    "kennedy",
   ]),
   label: z.string().min(1),
+  /**
+   * The alternate-history branch this timeline variant belongs to (AH3). A
+   * "default" timeline (or one omitting this field) is our-history; a variant
+   * keyed to a branch (e.g. usa.nazi.json → "nazi") is loaded ONLY when that
+   * branch is active, and SUPPRESSES the default variant of the same scope.
+   */
+  branch: z
+    .enum(["default", "nazi", "westcoast", "theocracy", "media", "megachurch", "oligarchy"])
+    .optional(),
   events: z.array(WorldEventSchema).min(1),
 });
 export type WorldTimeline = z.infer<typeof WorldTimelineSchema>;
@@ -302,6 +330,176 @@ export const AssetsFileSchema = z.object({
   assets: z.array(AssetSchema).default([]),
 });
 export type AssetsFile = z.infer<typeof AssetsFileSchema>;
+
+/**
+ * Branch-aware TERMS (alt-history consistency). Each term maps a `default`
+ * value plus optional per-branch overrides keyed by BranchKey. Content
+ * interpolates `{term}` tokens (e.g. "the {head_of_state} addressed the nation")
+ * which resolve from the run's active branch — so "President" becomes
+ * "Reichskommissar" on the Nazi route, "Supreme Pastor" under theocracy, etc.
+ */
+export const TermSchema = z.object({
+  default: z.string().min(1),
+  nazi: z.string().min(1).optional(),
+  westcoast: z.string().min(1).optional(),
+  theocracy: z.string().min(1).optional(),
+  media: z.string().min(1).optional(),
+  megachurch: z.string().min(1).optional(),
+  oligarchy: z.string().min(1).optional(),
+});
+export type Term = z.infer<typeof TermSchema>;
+
+export const TermsFileSchema = z.object({
+  terms: z.record(z.string(), TermSchema).default({}),
+});
+export type TermsFile = z.infer<typeof TermsFileSchema>;
+
+/**
+ * SLOT EVENTS (alt-history consistency, AH7). Certain real events are so
+ * structurally critical they're abstract SLOTS resolved per timeline, not
+ * hardcoded. e.g. the slot "leader_assassination" resolves to Fred Trump's
+ * assassination on the political-dynasty path, a Commissar purge on the Nazi
+ * path, etc. A slot names a concrete event `id` per branch (and an optional
+ * `dynasty` key, since the gears — trump/musk/kennedy — can fill the same
+ * archetype differently). `default` is the our-history resolution.
+ */
+export const SlotResolutionSchema = z.object({
+  /** Concrete event id this slot fires for the matching branch/dynasty. */
+  event: z.string().min(1),
+  /** Short note on what this resolution represents (authoring provenance). */
+  note: z.string().default(""),
+});
+export type SlotResolution = z.infer<typeof SlotResolutionSchema>;
+
+export const SlotSchema = z.object({
+  /** Archetype id, e.g. "leader_assassination", "the_crash", "the_scandal". */
+  id: z.string().min(1),
+  /** Human-readable archetype description. */
+  label: z.string().min(1),
+  /** Our-history resolution (required fallback). */
+  default: SlotResolutionSchema,
+  /** Per-branch resolutions; a missing branch falls back to `default`. */
+  nazi: SlotResolutionSchema.optional(),
+  westcoast: SlotResolutionSchema.optional(),
+  theocracy: SlotResolutionSchema.optional(),
+  media: SlotResolutionSchema.optional(),
+  megachurch: SlotResolutionSchema.optional(),
+  oligarchy: SlotResolutionSchema.optional(),
+  /** Per-dynasty resolutions (trump | musk | kennedy), checked before branch. */
+  dynasty: z.record(z.string(), SlotResolutionSchema).default({}),
+});
+export type Slot = z.infer<typeof SlotSchema>;
+
+export const SlotsFileSchema = z.object({
+  slots: z.array(SlotSchema).default([]),
+});
+export type SlotsFile = z.infer<typeof SlotsFileSchema>;
+
+/* ------------------------------------------------------------------------- *
+ * SYSTEMIC SIMULATION LAYER (SIM1) — markets, currencies, rank ladders.
+ * Living subsystems that pull the six meters between choices via a pure
+ * per-year tick. All data-driven + branch-aware; see the design spec
+ * docs/superpowers/specs/2026-06-20-systemic-sim-layer.md.
+ * ------------------------------------------------------------------------- */
+
+/** How a market move transmits into the six meters (most couplings are 0). */
+export const MeterCouplingSchema = z.partialRecord(MeterIdSchema, z.number()).default({});
+
+/** A market regime (boom/bust/bubble/…) with its dynamics. */
+export const MarketRegimeSchema = z.object({
+  id: z.string().min(1),
+  /** Mean the index is pulled toward in this regime. */
+  baseline: z.number().default(100),
+  /** Per-step proportional drift (e.g. +0.04 boom, -0.05 bust). */
+  drift: z.number().default(0),
+  /** Per-step proportional shock magnitude (volatility). */
+  volatility: z.number().min(0).default(0.05),
+  /** Authored base dwell time (steps) before the regime is "due" to flip. */
+  dwell: z.number().int().min(1).default(6),
+  /** Per-step switch probabilities to other regimes by id (0..1). */
+  switchTo: z.record(z.string(), z.number()).default({}),
+});
+export type MarketRegime = z.infer<typeof MarketRegimeSchema>;
+
+/** Extra fields a housing market carries (region + cashflow dynamics). */
+export const HousingExtraSchema = z.object({
+  region: z.string().min(1),
+  /** Steady cashflow per step as a fraction of holding value. */
+  rentYield: z.number().default(0),
+  /** 0..1 vacancy that suppresses rent yield (rises in busts). */
+  vacancy: z.number().min(0).max(1).default(0),
+  /** Per-step money drain from leverage (the bust killer). */
+  debtService: z.number().min(0).default(0),
+});
+export type HousingExtra = z.infer<typeof HousingExtraSchema>;
+
+export const MarketSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(1),
+  kind: z.enum(["financial", "housing", "attention", "crypto", "state", "resource"]),
+  /** Starting index value. */
+  baseIndex: z.number().default(100),
+  /** Mean-reversion strength toward the regime baseline (0..1). */
+  meanReversionK: z.number().min(0).max(1).default(0.1),
+  /** Drawdown ratio (index/peak) below which a crash flag fires. */
+  crashThreshold: z.number().min(0).max(1).default(0.6),
+  /** Regimes this market can occupy; first is the starting regime. */
+  regimes: z.array(MarketRegimeSchema).min(1),
+  /** How this market's move maps onto the meters. */
+  coupling: MeterCouplingSchema,
+  /** Housing-only extra fields. */
+  housing: HousingExtraSchema.optional(),
+});
+export type Market = z.infer<typeof MarketSchema>;
+
+export const MarketsFileSchema = z.object({
+  markets: z.array(MarketSchema).default([]),
+});
+export type MarketsFile = z.infer<typeof MarketsFileSchema>;
+
+/** A currency: how `money` is named/scaled, resolved by location/branch/era. */
+export const CurrencySchema = z.object({
+  id: z.string().min(1),
+  symbol: z.string().min(1),
+  name: z.string().min(1),
+  /** Year window this currency is valid within its lane (inclusive). */
+  fromYear: z.number().int().optional(),
+  toYear: z.number().int().optional(),
+  /** Branch this currency belongs to (default = our timeline). */
+  branch: z
+    .enum(["default", "nazi", "westcoast", "theocracy", "media", "megachurch", "oligarchy"])
+    .optional(),
+  /** Location flag that forces this currency when set (e.g. "on_mars"). */
+  location: z.string().optional(),
+  /** Multiplier applied to `money` when redenominating FROM the prior currency. */
+  conversionFactor: z.number().positive().default(1),
+});
+export type Currency = z.infer<typeof CurrencySchema>;
+
+export const CurrenciesFileSchema = z.object({
+  currencies: z.array(CurrencySchema).default([]),
+});
+export type CurrenciesFile = z.infer<typeof CurrenciesFileSchema>;
+
+/** A rank ladder (social/commercial/religious/political) the player climbs. */
+export const RankLadderSchema = z.object({
+  id: z.enum(["social", "commercial", "religious", "political"]),
+  label: z.string().min(1),
+  /** Rung labels low→high; index is the rank. Political reuses {head_of_state}. */
+  rungs: z.array(z.string().min(1)).min(2),
+  /** Passive per-step meter drip at any rank (e.g. high social → reputation). */
+  drip: MeterCouplingSchema,
+  /** Multiplier this ladder applies to matching meter GAINS (e.g. political→power). */
+  amplify: MeterCouplingSchema,
+  /** Meter bleed per step while below the run's peak rank (fall-from-grace). */
+  fallBleed: MeterCouplingSchema,
+});
+export type RankLadder = z.infer<typeof RankLadderSchema>;
+
+export const RanksFileSchema = z.object({
+  ranks: z.array(RankLadderSchema).default([]),
+});
+export type RanksFile = z.infer<typeof RanksFileSchema>;
 
 /** Validate arbitrary JSON against a schema, throwing a readable error on failure. */
 export function parseContent<T>(schema: z.ZodType<T>, data: unknown, label: string): T {
