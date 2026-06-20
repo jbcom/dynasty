@@ -13,6 +13,8 @@ import {
   type MeterDef,
   MetersFileSchema,
   parseContent,
+  type TermsFile,
+  TermsFileSchema,
   type WorldTimeline,
   WorldTimelineSchema,
 } from "./schema";
@@ -32,6 +34,8 @@ export interface Content {
   endings: Ending[];
   worldTimelines: WorldTimeline[];
   assets: Asset[];
+  /** Branch-aware terms/titles for `{token}` interpolation (alt-history). */
+  terms: TermsFile["terms"];
 }
 
 export interface RawContent {
@@ -42,6 +46,7 @@ export interface RawContent {
   endings: unknown;
   worldTimelines?: unknown[];
   assets: unknown;
+  terms?: unknown;
 }
 
 /** Validate raw JSON into a Content bundle, cross-checking referential integrity. */
@@ -54,6 +59,7 @@ export function buildContent(raw: RawContent): Content {
     parseContent(WorldTimelineSchema, t, `timelines[${i}]`),
   );
   const assetsFile = parseContent(AssetsFileSchema, raw.assets, "assets.json");
+  const termsFile = parseContent(TermsFileSchema, raw.terms ?? { terms: {} }, "terms.json");
 
   const eras = [...eraIndex.eras].sort((a, b) => a.order - b.order);
   const eraIds = new Set(eras.map((e) => e.id));
@@ -101,5 +107,6 @@ export function buildContent(raw: RawContent): Content {
     endings: endingsFile.endings,
     worldTimelines,
     assets: assetsFile.assets,
+    terms: termsFile.terms,
   };
 }

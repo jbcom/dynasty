@@ -303,6 +303,27 @@ export const AssetsFileSchema = z.object({
 });
 export type AssetsFile = z.infer<typeof AssetsFileSchema>;
 
+/**
+ * Branch-aware TERMS (alt-history consistency). Each term maps a `default`
+ * value plus optional per-branch overrides keyed by BranchKey. Content
+ * interpolates `{term}` tokens (e.g. "the {head_of_state} addressed the nation")
+ * which resolve from the run's active branch — so "President" becomes
+ * "Reichskommissar" on the Nazi route, "Supreme Pastor" under theocracy, etc.
+ */
+export const TermSchema = z.object({
+  default: z.string().min(1),
+  nazi: z.string().min(1).optional(),
+  westcoast: z.string().min(1).optional(),
+  theocracy: z.string().min(1).optional(),
+  media: z.string().min(1).optional(),
+});
+export type Term = z.infer<typeof TermSchema>;
+
+export const TermsFileSchema = z.object({
+  terms: z.record(z.string(), TermSchema).default({}),
+});
+export type TermsFile = z.infer<typeof TermsFileSchema>;
+
 /** Validate arbitrary JSON against a schema, throwing a readable error on failure. */
 export function parseContent<T>(schema: z.ZodType<T>, data: unknown, label: string): T {
   const result = schema.safeParse(data);
