@@ -10,25 +10,56 @@
       "researchNote": "The Apprentice premiered on NBC in January 2004, produced by Mark Burnett, and made 'You're fired' Trump's signature catchphrase.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["media", "television", "fame"],
+      "tags": [
+        "media",
+        "television",
+        "fame"
+      ],
       "portrait": "celebrity",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "ham_it_up",
           "text": "Ham it up — be the ruthless boss America loves to watch",
-          "effects": { "money": 50000, "reputation": 12, "power": 8 },
-          "setFlags": ["apprentice_star"],
+          "effects": {
+            "money": 50000,
+            "reputation": 12,
+            "power": 8
+          },
+          "personality": {
+            "grandiosity": 12,
+            "outward": 10
+          },
+          "setFlags": [
+            "apprentice_star"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "ev_birther_campaign", "weight": 0.6, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "ev_birther_campaign",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "Ratings explode. Overnight, you are not a developer who is famous — you are a celebrity who happens to develop. The catchphrase becomes a national reflex."
         },
         {
           "id": "play_it_straight",
           "text": "Play it straight and dignified, like a real executive",
-          "effects": { "money": 20000, "reputation": 4 },
+          "effects": {
+            "money": 20000,
+            "reputation": 4
+          },
+          "personality": {
+            "outward": -4
+          },
           "setFlags": [],
           "clearFlags": [],
           "ripples": [],
@@ -37,8 +68,17 @@
         {
           "id": "demand_more_money",
           "text": "Hold out for a bigger per-episode fee before committing",
-          "effects": { "money": 30000, "power": 6, "reputation": -2 },
-          "setFlags": ["apprentice_star"],
+          "effects": {
+            "money": 30000,
+            "power": 6,
+            "reputation": -2
+          },
+          "personality": {
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "apprentice_star"
+          ],
           "clearFlags": [],
           "ripples": [],
           "outcome": "NBC blinks. You get your raise and your star billing, though the producers grumble about the diva in the corner office."
@@ -54,29 +94,164 @@
       "researchNote": "The Apprentice's success rehabilitated Trump's public image after 1990s financial troubles and turned the Trump name into a mass-market entertainment brand.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["fame", "branding", "media"],
+      "tags": [
+        "fame",
+        "branding",
+        "media"
+      ],
       "portrait": "celebrity",
-      "requires": { "flags": ["apprentice_star"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "apprentice_star"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "monetize_the_face",
           "text": "License your face onto everything — ties, steaks, cologne",
-          "effects": { "money": 120000, "reputation": -4, "power": 5 },
-          "setFlags": ["brand_machine"],
+          "effects": {
+            "money": 120000,
+            "reputation": -4,
+            "power": 5
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "brand_machine"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "ev_licensing_empire", "weight": 0.7, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "ev_licensing_empire",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
           "outcome": "Trump Steaks. Trump Cologne. Some sell, some flop, but every package is a billboard for the only product that matters: you."
         },
         {
           "id": "cultivate_mystique",
           "text": "Stay selective — scarcity keeps the brand premium",
-          "effects": { "money": 40000, "reputation": 8 },
+          "effects": {
+            "money": 40000,
+            "reputation": 8
+          },
+          "personality": {
+            "grandiosity": -4
+          },
           "setFlags": [],
           "clearFlags": [],
           "ripples": [],
           "outcome": "Restraint earns respect from the luxury market, but your accountants wonder why you left so much on the table."
+        },
+        {
+          "id": "court_the_press",
+          "text": "Feed the tabloids constantly to keep your name in headlines",
+          "effects": {
+            "money": 20000,
+            "reputation": 2,
+            "heat": 4,
+            "power": 4
+          },
+          "personality": {
+            "outward": 8,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "tabloid_fixture"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Reporters take your calls at midnight. You learn the press is not an enemy to be managed but an amplifier to be played."
+        }
+      ]
+    },
+    {
+      "id": "ev_celebrity_apprentice",
+      "era": "primetime",
+      "year": 2008,
+      "title": "Celebrity Apprentice",
+      "scene": "Ratings for the original format soften, so NBC retools the franchise with washed-up actors, athletes, and reality stars competing for charity. You preside over has-beens desperate for a comeback, and the boardroom theatrics get even louder. The show finds a second life on the backs of other people's faded fame.",
+      "researchNote": "The Celebrity Apprentice debuted in January 2008, reviving the franchise with celebrity contestants playing for charity; it ran for several seasons and kept Trump on primetime into the 2010s.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "media",
+        "television",
+        "fame"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "apprentice_star"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "manufacture_drama",
+          "text": "Manufacture feuds between contestants for the ratings",
+          "effects": {
+            "money": 60000,
+            "reputation": -4,
+            "power": 6,
+            "heat": 4
+          },
+          "personality": {
+            "outward": 10,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "showman_instinct"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You discover conflict is content. The angrier the room, the higher the numbers — a lesson that will serve you far beyond television."
+        },
+        {
+          "id": "play_kingmaker",
+          "text": "Position yourself as the wise mentor handing out comebacks",
+          "effects": {
+            "money": 40000,
+            "reputation": 8
+          },
+          "personality": {
+            "grandiosity": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Celebrities thank you on air for the second chance. You enjoy being the man whose approval can resurrect a career."
+        },
+        {
+          "id": "phone_it_in",
+          "text": "Coast on autopilot and collect the paycheck",
+          "effects": {
+            "money": 50000,
+            "reputation": -2
+          },
+          "personality": {},
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The format carries itself. You start eyeing bigger stages than a boardroom set."
         }
       ]
     },
@@ -89,17 +264,36 @@
       "researchNote": "Donald Trump married Melania Knauss in January 2005 at Mar-a-Lago in Palm Beach, Florida; the celebrity-packed wedding drew enormous media coverage.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["personal", "media", "fame"],
+      "tags": [
+        "personal",
+        "media",
+        "fame"
+      ],
       "portrait": "celebrity",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "turn_it_into_spectacle",
           "text": "Turn the wedding into a media spectacle for the cameras",
-          "effects": { "money": -60000, "reputation": 10, "power": 4 },
-          "setFlags": ["melania_married"],
+          "effects": {
+            "money": -60000,
+            "reputation": 10,
+            "power": 4
+          },
+          "personality": {
+            "outward": 8,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "melania_married"
+          ],
           "clearFlags": [],
           "ripples": [],
           "outcome": "Every outlet covers it. The image of the celebrity power couple cements the new chapter of Brand Trump."
@@ -107,8 +301,17 @@
         {
           "id": "keep_it_classy",
           "text": "Keep it lavish but tasteful, courting the establishment",
-          "effects": { "money": -40000, "reputation": 7, "loyalty": 5 },
-          "setFlags": ["melania_married"],
+          "effects": {
+            "money": -40000,
+            "reputation": 7,
+            "loyalty": 5
+          },
+          "personality": {
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "melania_married"
+          ],
           "clearFlags": [],
           "ripples": [],
           "outcome": "The old-money crowd nods approvingly. You have married well, and the world is watching."
@@ -124,25 +327,55 @@
       "researchNote": "Trump University launched in 2005; it was later the subject of fraud lawsuits, settled in 2016 for $25 million, and was not an accredited university.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["business", "branding", "scandal"],
+      "tags": [
+        "business",
+        "branding",
+        "scandal"
+      ],
       "portrait": "celebrity",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "go_all_in",
           "text": "Push hard sales tactics — upsell the 'Gold Elite' package",
-          "effects": { "money": 100000, "reputation": -8, "heat": 10 },
-          "setFlags": ["trump_u_liability"],
+          "effects": {
+            "money": 100000,
+            "reputation": -8,
+            "heat": 10
+          },
+          "personality": {
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "trump_u_liability",
+            "trump_u_fraud",
+            "felony_jeopardy"
+          ],
           "clearFlags": [],
-          "ripples": [],
+          "ripples": [
+            {
+              "to": "ev_trump_u_lawsuits",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
           "outcome": "The cash pours in fast. So do the complaints, and somewhere an attorney general starts a file with your name on the tab."
         },
         {
           "id": "run_it_clean",
           "text": "Keep the curriculum modest and the promises honest",
-          "effects": { "money": 25000, "reputation": 2 },
+          "effects": {
+            "money": 25000,
+            "reputation": 2
+          },
+          "personality": {},
           "setFlags": [],
           "clearFlags": [],
           "ripples": [],
@@ -151,46 +384,119 @@
         {
           "id": "license_only",
           "text": "Just license the name and let others run it",
-          "effects": { "money": 50000, "heat": 4, "reputation": -3 },
-          "setFlags": ["trump_u_liability"],
+          "effects": {
+            "money": 50000,
+            "heat": 4,
+            "reputation": -3
+          },
+          "personality": {
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "trump_u_liability",
+            "felony_jeopardy"
+          ],
           "clearFlags": [],
-          "ripples": [],
+          "ripples": [
+            {
+              "to": "ev_trump_u_lawsuits",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "You collect a fee and wash your hands of operations. The lawsuits, however, name the man on the marquee."
         }
       ]
     },
     {
-      "id": "ev_licensing_empire",
-      "year": 2006,
+      "id": "ev_trump_u_lawsuits",
+      "year": 2013,
       "era": "primetime",
-      "title": "The Licensing Empire Expands",
-      "scene": "Developers from Panama to Dubai line up to put your name on towers you'll never build. You don't pour the concrete — you sell the four golden letters and pocket the fee. The Trump name circles the globe on buildings, neckties, and bottled water.",
-      "researchNote": "By the mid-2000s Trump increasingly licensed his name to developments and products worldwide rather than financing construction, earning fees while distancing himself from financial risk.",
+      "title": "The Trump University Suits Land",
+      "scene": "New York's attorney general files a $40 million suit, calling the whole enterprise a bait-and-switch. Former students testify about pressure to max out credit cards for seminars that taught them nothing. Your lawyers want to settle quietly. Your instincts scream to fight, to never admit you lost.",
+      "researchNote": "In 2013 New York Attorney General Eric Schneiderman sued Trump University for $40 million alleging fraud; related class actions were later settled for $25 million in 2016.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["business", "branding"],
+      "tags": [
+        "scandal",
+        "legal",
+        "business"
+      ],
       "portrait": "celebrity",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "trump_u_fraud"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
-          "id": "license_everything",
-          "text": "License to anyone with a checkbook, no questions asked",
-          "effects": { "money": 150000, "reputation": -6, "heat": 6 },
-          "setFlags": ["overlicensed"],
+          "id": "fight_to_the_death",
+          "text": "Fight every count, attack the prosecutor publicly",
+          "effects": {
+            "money": -50000,
+            "reputation": -10,
+            "heat": 14,
+            "power": 4
+          },
+          "personality": {
+            "outward": 10,
+            "ideology": 6,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "felony_jeopardy",
+            "litigation_warlord"
+          ],
           "clearFlags": [],
-          "ripples": [],
-          "outcome": "The fees are glorious. A few partners turn out to be crooks, and your name ends up on lawsuits in three countries."
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn a fraud case into a political crusade against a 'corrupt' AG. The legal exposure grows, but so does the legend of the fighter who never folds."
         },
         {
-          "id": "vet_partners",
-          "text": "Vet partners carefully to protect the brand",
-          "effects": { "money": 70000, "reputation": 6 },
+          "id": "settle_quietly",
+          "text": "Authorize a quiet settlement to make it disappear",
+          "effects": {
+            "money": -80000,
+            "reputation": 4,
+            "heat": -8
+          },
+          "personality": {
+            "grandiosity": -4
+          },
           "setFlags": [],
+          "clearFlags": [
+            "felony_jeopardy"
+          ],
+          "ripples": [],
+          "outcome": "It costs a fortune and an admission you hate making, but the headlines fade. Your lawyers exhale for the first time in months."
+        },
+        {
+          "id": "delay_and_deny",
+          "text": "Stall with motions and deny everything to the press",
+          "effects": {
+            "money": -20000,
+            "reputation": -4,
+            "heat": 8
+          },
+          "personality": {
+            "outward": 6
+          },
+          "setFlags": [
+            "felony_jeopardy"
+          ],
           "clearFlags": [],
           "ripples": [],
-          "outcome": "Slower deals, cleaner reputation. The premium projects bearing your name actually get finished."
+          "outcome": "The case grinds on for years. You learn that delay is its own kind of victory, and that the courts can be a weapon as much as a threat."
         }
       ]
     },
@@ -203,29 +509,578 @@
       "researchNote": "At WrestleMania 23 in 2007, Trump's 'Battle of the Billionaires' against Vince McMahon ended with Trump shaving McMahon's head; Trump was later inducted into the WWE Hall of Fame in 2013.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["media", "fame", "spectacle"],
+      "tags": [
+        "media",
+        "fame",
+        "spectacle"
+      ],
       "portrait": "celebrity",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "embrace_the_heel",
           "text": "Embrace the cartoon-villain showmanship completely",
-          "effects": { "money": 30000, "reputation": 8, "power": 4 },
-          "setFlags": ["wrestling_persona"],
+          "effects": {
+            "money": 30000,
+            "reputation": 8,
+            "power": 4
+          },
+          "personality": {
+            "outward": 12,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "wrestling_persona"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "ev_birther_campaign", "weight": 0.3, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "ev_birther_campaign",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
           "outcome": "You learn what McMahon already knows: a crowd will roar for a villain who commits to the bit. The lesson sticks."
         },
         {
           "id": "stay_above_it",
           "text": "Keep one foot out, treat it as a paid cameo",
-          "effects": { "money": 20000, "reputation": 2 },
+          "effects": {
+            "money": 20000,
+            "reputation": 2
+          },
+          "personality": {
+            "outward": -3
+          },
           "setFlags": [],
           "clearFlags": [],
           "ripples": [],
           "outcome": "You cash the check and leave the theatrics to the professionals. Memorable, but you didn't sell it."
+        }
+      ]
+    },
+    {
+      "id": "ev_trump_mortgage_collapse",
+      "year": 2007,
+      "era": "primetime",
+      "title": "Trump Mortgage Folds",
+      "scene": "Eighteen months ago you launched a mortgage company, declaring it the perfect time to get into home loans. Now the housing market is buckling and your timing looks catastrophic. The company you stamped with your name is quietly shutting down, and reporters want to know how the great dealmaker called the market so wrong.",
+      "researchNote": "Trump Mortgage launched in 2006 and shut down in 2007 amid the housing downturn; Trump had publicly predicted a strong market shortly before the collapse.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "business",
+        "scandal"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "blame_others",
+          "text": "Blame the executives and claim you barely ran it",
+          "effects": {
+            "money": -10000,
+            "reputation": -4,
+            "power": 2
+          },
+          "personality": {
+            "outward": 6,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "deflect_blame"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You distance yourself from the wreckage with practiced ease. The name stays clean enough; the truth is for the footnotes."
+        },
+        {
+          "id": "pivot_to_licensing",
+          "text": "Shrug it off and double down on safe licensing deals",
+          "effects": {
+            "money": 30000,
+            "reputation": -2
+          },
+          "personality": {},
+          "setFlags": [
+            "risk_averse_turn"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_licensing_empire",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Better to sell the name than to own the risk. The collapse confirms a strategy you'll lean on for years."
+        }
+      ]
+    },
+    {
+      "id": "ev_licensing_empire",
+      "year": 2006,
+      "era": "primetime",
+      "title": "The Licensing Empire Expands",
+      "scene": "Developers from Panama to Dubai line up to put your name on towers you'll never build. You don't pour the concrete — you sell the four golden letters and pocket the fee. The Trump name circles the globe on buildings, neckties, and bottled water.",
+      "researchNote": "By the mid-2000s Trump increasingly licensed his name to developments and products worldwide rather than financing construction, earning fees while distancing himself from financial risk.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "business",
+        "branding"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "license_everything",
+          "text": "License to anyone with a checkbook, no questions asked",
+          "effects": {
+            "money": 150000,
+            "reputation": -6,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "overlicensed"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The fees are glorious. A few partners turn out to be crooks, and your name ends up on lawsuits in three countries."
+        },
+        {
+          "id": "vet_partners",
+          "text": "Vet partners carefully to protect the brand",
+          "effects": {
+            "money": 70000,
+            "reputation": 6
+          },
+          "personality": {
+            "grandiosity": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Slower deals, cleaner reputation. The premium projects bearing your name actually get finished."
+        }
+      ]
+    },
+    {
+      "id": "ev_trump_consumer_goods",
+      "year": 2006,
+      "era": "primetime",
+      "title": "Steaks, Vodka, and Bottled Water",
+      "scene": "Sharper Image will sell your steaks. A distiller will bottle Trump Vodka. There's a Trump-branded water, a Trump board game, a Trump-the-Game reboot. Each product is a small bet that your name alone can move merchandise off a shelf. Some will vanish within a year.",
+      "researchNote": "Trump licensed a wide range of consumer products in the 2000s including Trump Steaks (sold via Sharper Image), Trump Vodka, Trump Natural Spring Water, and a board game; many were short-lived commercial failures.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "business",
+        "branding",
+        "fame"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "brand_machine"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "flood_the_market",
+          "text": "Slap the name on everything and flood the market",
+          "effects": {
+            "money": 80000,
+            "reputation": -6,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 4
+          },
+          "setFlags": [
+            "overlicensed"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Trump Steaks. Trump Vodka. Half of them fail, but every failed product was a paid advertisement for the name that endures."
+        },
+        {
+          "id": "pick_winners",
+          "text": "Be selective and only attach the name to quality goods",
+          "effects": {
+            "money": 40000,
+            "reputation": 6
+          },
+          "personality": {
+            "grandiosity": -2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Fewer flops, more dignity. The ties sell steadily and nobody laughs at a discontinued vodka."
+        }
+      ]
+    },
+    {
+      "id": "ev_trump_chicago_crisis",
+      "year": 2008,
+      "era": "primetime",
+      "title": "Trump Tower Chicago Hits the Crash",
+      "scene": "Your gleaming Chicago skyscraper rises just as the credit markets seize and condo buyers vanish. Deutsche Bank wants its loan repaid; you decide instead to sue the bank, invoking a force-majeure clause and blaming the global crisis itself. It is audacious, litigious, and pure you.",
+      "researchNote": "Trump International Hotel & Tower Chicago, completed around 2008-2009, struggled during the financial crisis; Trump sued Deutsche Bank in 2008 over a $640 million loan, citing the crisis as a force-majeure event.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "business",
+        "legal",
+        "world-event"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "sue_the_bank",
+          "text": "Sue Deutsche Bank and call the crisis an act of God",
+          "effects": {
+            "money": -30000,
+            "reputation": -4,
+            "heat": 10,
+            "power": 6
+          },
+          "personality": {
+            "outward": 8,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "litigation_warlord"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Lawyers call it brazen. You call it leverage. The bank eventually settles, and you learn no debt is too big to litigate your way out of."
+        },
+        {
+          "id": "renegotiate_quietly",
+          "text": "Renegotiate the loan terms behind closed doors",
+          "effects": {
+            "money": -50000,
+            "reputation": 4,
+            "heat": -4
+          },
+          "personality": {
+            "grandiosity": -2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "It costs more and makes fewer headlines, but the relationship survives and the tower stays yours."
+        }
+      ]
+    },
+    {
+      "id": "ev_2008_financial_crisis",
+      "year": 2008,
+      "era": "primetime",
+      "title": "The Markets Crater",
+      "scene": "Lehman Brothers collapses, Wall Street panics, and trillions in wealth evaporate in weeks. Across the country, foreclosure signs sprout like weeds and retirement accounts turn to ash. The luxury real estate you trade in suddenly has no buyers. A nation's faith in the system is quietly curdling into rage.",
+      "researchNote": "The September 2008 collapse of Lehman Brothers triggered the global financial crisis and Great Recession, wiping out vast household wealth and fueling deep distrust of financial and political elites.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "economy"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "read_the_rage",
+          "text": "Study the public fury and file it away for later",
+          "effects": {
+            "reputation": 2,
+            "power": 6
+          },
+          "personality": {
+            "ideology": 6,
+            "outward": 4
+          },
+          "setFlags": [
+            "read_the_anger"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "While others see catastrophe, you see a market: millions of furious people convinced the game is rigged against them. Someday someone will speak for them."
+        },
+        {
+          "id": "bargain_hunt",
+          "text": "Hunt for distressed assets at fire-sale prices",
+          "effects": {
+            "money": 90000,
+            "reputation": -2,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Other people's ruin is your discount rack. You scoop up properties for cents on the dollar and feel, as ever, untouchable."
+        },
+        {
+          "id": "stay_liquid",
+          "text": "Hunker down, hoard cash, and wait it out",
+          "effects": {
+            "money": 20000,
+            "reputation": 4
+          },
+          "personality": {},
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You survive the storm with your name and your liquidity intact. The discipline is unglamorous but it keeps the lights on."
+        }
+      ]
+    },
+    {
+      "id": "ev_obama_election_2008",
+      "year": 2008,
+      "era": "primetime",
+      "title": "Obama Wins the White House",
+      "scene": "A first-term senator named Barack Obama is elected the first Black president of the United States, riding a wave of hope and historic turnout. Crowds weep in Grant Park. For some, it is the dawn of a new America. For others, a country slipping away — and you can hear that second crowd clearly.",
+      "researchNote": "Barack Obama won the 2008 presidential election, becoming the first Black U.S. president; his election energized supporters and also catalyzed a reactionary backlash that fed the Tea Party and birther movements.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "sense_the_backlash",
+          "text": "Tune into the resentful undertow beneath the celebration",
+          "effects": {
+            "power": 8,
+            "reputation": -4,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 8,
+            "outward": 6
+          },
+          "setFlags": [
+            "read_the_anger"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_birther_campaign",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Beneath the euphoria you detect a deep, organized grievance. It has no champion yet. You make a mental note."
+        },
+        {
+          "id": "play_gracious",
+          "text": "Publicly congratulate the new president and stay neutral",
+          "effects": {
+            "reputation": 8,
+            "power": -2
+          },
+          "personality": {
+            "outward": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You keep your bipartisan friends and your dinner invitations. Safe, respectable, and forgotten by morning."
+        }
+      ]
+    },
+    {
+      "id": "ev_tea_party_2009",
+      "year": 2009,
+      "era": "primetime",
+      "title": "The Tea Party Erupts",
+      "scene": "A cable rant about bailouts and 'losers' detonates into a movement. Across the country, crowds wave Gadsden flags and rage against Washington, taxes, and a president they say is not really one of them. It is grassroots fury, leaderless and hungry. You watch the footage like a man studying a market opening.",
+      "researchNote": "The Tea Party movement emerged in 2009, sparked partly by a CNBC rant by Rick Santelli, channeling anger over bailouts, the Affordable Care Act, and government spending into a populist conservative force.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "court_the_movement",
+          "text": "Start signaling to the angry grassroots that you hear them",
+          "effects": {
+            "power": 10,
+            "reputation": -4,
+            "loyalty": 6
+          },
+          "personality": {
+            "ideology": 8,
+            "outward": 6
+          },
+          "setFlags": [
+            "proto_maga",
+            "read_the_anger"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A leaderless army is the best kind to inherit. You begin tailoring your public voice to the crowd no establishment figure will touch."
+        },
+        {
+          "id": "keep_distance",
+          "text": "Watch from a safe distance — the brand stays apolitical",
+          "effects": {
+            "reputation": 4,
+            "money": 20000
+          },
+          "personality": {},
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You keep the corporate sponsors comfortable. The movement marches on without you — for now."
+        }
+      ]
+    },
+    {
+      "id": "ev_joins_twitter",
+      "year": 2009,
+      "era": "primetime",
+      "title": "You Join Twitter",
+      "scene": "An aide sets up a Twitter account so you can promote The Apprentice and your books in 140 characters. At first it's bland marketing copy written by staff. Then one night you grab the phone yourself and fire off something unfiltered, and the response is electric. The feedback loop is instant, addictive, and entirely yours.",
+      "researchNote": "Trump joined Twitter in 2009; what began as promotional posts evolved into a direct, unfiltered communication channel that became central to his public and political persona.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "media",
+        "technology"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "take_the_phone",
+          "text": "Take the phone yourself and post raw, unfiltered thoughts",
+          "effects": {
+            "power": 8,
+            "reputation": -2,
+            "heat": 6
+          },
+          "personality": {
+            "outward": 12,
+            "grandiosity": 18
+          },
+          "setFlags": [
+            "twitter_voice"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_birther_campaign",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "No editors, no gatekeepers, no delay between thought and broadcast. You have found the most powerful microphone of your life, and it fits in your hand."
+        },
+        {
+          "id": "let_staff_run_it",
+          "text": "Let the staff keep it polished and promotional",
+          "effects": {
+            "money": 20000,
+            "reputation": 4
+          },
+          "personality": {},
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "It stays on-message and on-brand. Effective marketing, but it never crackles the way your own voice would."
         }
       ]
     },
@@ -238,25 +1093,61 @@
       "researchNote": "In 2011 Trump became the most prominent promoter of the false 'birther' conspiracy questioning Barack Obama's birthplace; Obama released his long-form Hawaii birth certificate in April 2011. The claim was debunked.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "media", "scandal"],
+      "tags": [
+        "politics",
+        "media",
+        "scandal"
+      ],
       "portrait": "celebrity",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
-      "weight": 10,
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
       "repeatable": false,
       "choices": [
         {
           "id": "lean_in_hard",
           "text": "Lean all the way in — demand the records, claim a coverup",
-          "effects": { "power": 12, "reputation": -12, "heat": 12 },
-          "setFlags": ["birther_in_chief", "proto_maga"],
+          "effects": {
+            "power": 12,
+            "reputation": -12,
+            "heat": 12
+          },
+          "personality": {
+            "ideology": 12,
+            "outward": 12,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "birther_in_chief",
+            "proto_maga",
+            "maga_base"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "ev_political_brand", "weight": 0.8, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
           "outcome": "The mainstream recoils, but a furious, loyal audience discovers you say what they're thinking. You have found your real constituency."
         },
         {
           "id": "drop_it_quietly",
           "text": "Drop the subject before it stains the brand",
-          "effects": { "reputation": 6, "power": -4, "heat": -6 },
+          "effects": {
+            "reputation": 6,
+            "power": -4,
+            "heat": -6
+          },
+          "personality": {
+            "ideology": -4,
+            "outward": -3
+          },
           "setFlags": [],
           "clearFlags": [],
           "ripples": [],
@@ -265,11 +1156,230 @@
         {
           "id": "monetize_outrage",
           "text": "Turn the controversy into ratings and merch",
-          "effects": { "money": 40000, "power": 6, "reputation": -8, "heat": 8 },
-          "setFlags": ["proto_maga"],
+          "effects": {
+            "money": 40000,
+            "power": 6,
+            "reputation": -8,
+            "heat": 8
+          },
+          "personality": {
+            "outward": 8,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "proto_maga"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "ev_tease_2012_run", "weight": 0.5, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "ev_tease_2012_run",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "Outrage is a renewable resource. You harvest the attention and start to see a market no establishment figure is serving."
+        }
+      ]
+    },
+    {
+      "id": "ev_cpac_2011",
+      "year": 2011,
+      "era": "primetime",
+      "title": "Your First CPAC Speech",
+      "scene": "You stride onto the CPAC stage to an audience of movement conservatives who have never heard you talk politics. You riff on China, OPEC, weak leaders, and a country that 'doesn't win anymore.' The applause surprises even you. These people don't care about your towers — they care that you sound like a fighter.",
+      "researchNote": "Trump gave his first major Conservative Political Action Conference (CPAC) speech in 2011, an early test of his populist political messaging before activist audiences.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "media"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "test_the_lines",
+          "text": "Road-test grievance applause lines and watch what lands",
+          "effects": {
+            "power": 10,
+            "loyalty": 8,
+            "reputation": -4
+          },
+          "personality": {
+            "ideology": 8,
+            "outward": 8,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "proto_maga",
+            "cpac_debut"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Every cheer is data. You leave the stage knowing exactly which fears to press, and certain you could command a far bigger room."
+        },
+        {
+          "id": "play_it_safe",
+          "text": "Give a vague, crowd-pleasing speech and commit to nothing",
+          "effects": {
+            "reputation": 4,
+            "power": 2
+          },
+          "personality": {
+            "outward": 2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Polite applause, no headlines. You keep your options open and your ambitions quiet."
+        }
+      ]
+    },
+    {
+      "id": "ev_arab_spring_2011",
+      "year": 2011,
+      "era": "primetime",
+      "title": "The Arab Spring",
+      "scene": "From Tunisia to Tahrir Square, crowds topple decades-old dictators while the world watches on livestreams. Social media, the same tool you've just discovered, organizes revolutions overnight. Pundits debate whether America should lead or stay out. You see, above all, the raw power of a leaderless crowd in motion.",
+      "researchNote": "The Arab Spring of 2010-2011 saw mass pro-democracy uprisings across the Middle East and North Africa, notably in Tunisia, Egypt, and Libya, with social media playing a key organizing role.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "study_the_crowds",
+          "text": "Marvel at how social media weaponizes a crowd",
+          "effects": {
+            "power": 6,
+            "reputation": 2
+          },
+          "personality": {
+            "outward": 6,
+            "ideology": 4
+          },
+          "setFlags": [
+            "crowd_power_lesson"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Strongmen fall in days when the people pour into the streets. You take the opposite lesson most do: a crowd is the most powerful force on earth, if someone aims it."
+        },
+        {
+          "id": "talk_tough_foreign",
+          "text": "Go on TV demanding America 'take the oil' and act strong",
+          "effects": {
+            "power": 4,
+            "reputation": -4,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 8,
+            "outward": 8
+          },
+          "setFlags": [
+            "proto_maga"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Foreign-policy elites cringe at the bluntness. The base loves a man who talks about winning and taking, not nuance and process."
+        }
+      ]
+    },
+    {
+      "id": "ev_occupy_wall_street",
+      "year": 2011,
+      "era": "primetime",
+      "title": "Occupy Wall Street",
+      "scene": "Protesters camp in a park blocks from your old stomping grounds, chanting that they are 'the 99 percent' against a rigged economy. The rage at Wall Street and the bailed-out rich is unmistakable — and it's the same rage the Tea Party is mining from the other direction. You note that anti-elite fury has no political home.",
+      "researchNote": "Occupy Wall Street began in September 2011 in Manhattan's Zuccotti Park, protesting economic inequality and corporate influence under the slogan 'We are the 99%.'",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "economy",
+        "politics"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "note_the_anti_elite",
+          "text": "Recognize anti-elite rage as a force that crosses party lines",
+          "effects": {
+            "power": 8,
+            "reputation": -2
+          },
+          "personality": {
+            "ideology": 6,
+            "outward": 4
+          },
+          "setFlags": [
+            "read_the_anger"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Left and right are both furious at the same elites. You realize a populist who isn't bound by either party could capture the lot of them."
+        },
+        {
+          "id": "mock_the_protesters",
+          "text": "Mock the protesters as losers on cable news",
+          "effects": {
+            "reputation": -4,
+            "power": 4,
+            "heat": 4
+          },
+          "personality": {
+            "outward": 8,
+            "ideology": 4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You play the unapologetic rich guy who calls them lazy. It earns jeers from the camp and cheers from people who can't stand it."
         }
       ]
     },
@@ -282,29 +1392,157 @@
       "researchNote": "Trump publicly flirted with a 2012 Republican presidential run and briefly led some polls in early 2011 before announcing in May 2011 he would not run, citing his commitment to The Apprentice.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "media"],
+      "tags": [
+        "politics",
+        "media"
+      ],
       "portrait": "celebrity",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "tease_and_retreat",
           "text": "Tease the run, harvest the attention, then bow out",
-          "effects": { "money": 30000, "power": 6, "reputation": 2, "heat": 3 },
-          "setFlags": ["floated_2012", "proto_maga"],
+          "effects": {
+            "money": 30000,
+            "power": 6,
+            "reputation": 2,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 6
+          },
+          "setFlags": [
+            "floated_2012",
+            "proto_maga"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "ev_political_brand", "weight": 0.6, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "You get the polling glory without the campaign grind. Strategists note your name moves numbers — and so do you."
         },
         {
           "id": "stay_out_entirely",
           "text": "Shut it down fast to protect the TV contract",
-          "effects": { "money": 50000, "reputation": 4, "power": -3 },
+          "effects": {
+            "money": 50000,
+            "reputation": 4,
+            "power": -3
+          },
+          "personality": {
+            "grandiosity": -2
+          },
           "setFlags": [],
           "clearFlags": [],
           "ripples": [],
           "outcome": "NBC is thrilled. The political itch, though, refuses to fully fade."
+        },
+        {
+          "id": "go_private_celebrity",
+          "text": "Decide you're a beloved entertainer, not a politician — walk away from politics",
+          "effects": {
+            "money": 60000,
+            "reputation": 10,
+            "power": -6
+          },
+          "personality": {
+            "ideology": -8,
+            "outward": -4
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "clearFlags": [
+            "proto_maga"
+          ],
+          "ripples": [],
+          "outcome": "You choose the easy, lucrative life of a TV star above the fray. The grievance crowd looks elsewhere, and a very different future quietly closes off."
+        }
+      ]
+    },
+    {
+      "id": "ev_obama_reelection_2012",
+      "year": 2012,
+      "era": "primetime",
+      "title": "Obama Wins a Second Term",
+      "scene": "Mitt Romney loses, and Obama is reelected. On election night you fire off a furious flurry of tweets calling the result a 'total sham,' a 'travesty,' even hinting at revolution before deleting some of it. The base roars approval at the unfiltered rage. The establishment is appalled. You feel the difference, and you like it.",
+      "researchNote": "After Obama's 2012 reelection, Trump posted a series of inflammatory tweets calling the election a 'sham' and 'travesty' and suggesting a 'revolution,' some of which he later deleted.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics",
+        "media"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "twitter_voice"
+        ],
+        "notFlags": [
+          "walked_away"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "rage_tweet",
+          "text": "Unleash a furious election-night tweetstorm",
+          "effects": {
+            "power": 12,
+            "reputation": -10,
+            "heat": 12,
+            "loyalty": 8
+          },
+          "personality": {
+            "ideology": 10,
+            "outward": 12,
+            "grandiosity": 10
+          },
+          "setFlags": [
+            "proto_maga",
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The pundits gasp; the base ignites. You've proven you can move a crowd to fury in real time, with no filter and no apology. The microphone is fully yours."
+        },
+        {
+          "id": "concede_gracefully",
+          "text": "Post a measured note about respecting the process",
+          "effects": {
+            "reputation": 8,
+            "power": -4
+          },
+          "personality": {
+            "outward": -4,
+            "ideology": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The grown-ups approve. The crowd that craves a brawler shrugs and waits for someone willing to throw the punch."
         }
       ]
     },
@@ -317,29 +1555,518 @@
       "researchNote": "In the early 2010s Trump cultivated a populist political following through Fox News appearances, CPAC speeches, and Twitter, road-testing grievance themes that would define his 2016 campaign.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "media", "branding"],
+      "tags": [
+        "politics",
+        "media",
+        "branding"
+      ],
       "portrait": "celebrity",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
-      "weight": 10,
+      "requires": {
+        "flags": [
+          "proto_maga"
+        ],
+        "notFlags": [
+          "walked_away"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
       "repeatable": false,
       "choices": [
         {
           "id": "build_the_movement",
           "text": "Build the grievance base into a movement loyal to you alone",
-          "effects": { "power": 12, "loyalty": 12, "reputation": -8, "heat": 6 },
-          "setFlags": ["proto_maga", "movement_built"],
+          "effects": {
+            "power": 12,
+            "loyalty": 12,
+            "reputation": -8,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 10,
+            "outward": 10,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "proto_maga",
+            "movement_built",
+            "maga_base"
+          ],
           "clearFlags": [],
-          "ripples": [],
+          "ripples": [
+            {
+              "to": "ev_grievance_machine",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
           "outcome": "It isn't a fan club anymore — it's a base. They don't love your buildings or your show. They love that you fight, and they will follow."
         },
         {
           "id": "stay_a_celebrity",
           "text": "Stay a beloved celebrity, above the partisan fray",
-          "effects": { "money": 30000, "reputation": 8, "power": -4 },
+          "effects": {
+            "money": 30000,
+            "reputation": 8,
+            "power": -4
+          },
+          "personality": {
+            "ideology": -6,
+            "outward": -3
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "clearFlags": [
+            "proto_maga"
+          ],
+          "ripples": [],
+          "outcome": "Universally liked, politically harmless. You keep the endorsements and the goodwill — and surrender the lever of real power."
+        },
+        {
+          "id": "hedge_both_ways",
+          "text": "Keep one foot in showbiz and one in the movement",
+          "effects": {
+            "money": 20000,
+            "power": 6,
+            "loyalty": 4,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 4,
+            "outward": 4
+          },
+          "setFlags": [
+            "proto_maga"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_grievance_machine",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You play both stages, never fully committing. The base grows slower, but your exits stay open and the cameras keep rolling."
+        }
+      ]
+    },
+    {
+      "id": "ev_grievance_machine",
+      "year": 2014,
+      "era": "primetime",
+      "title": "The Machine Hums",
+      "scene": "By now the routine is muscle memory: a Fox hit in the morning, a tweetstorm by noon, a grievance freshly stoked by night. The base no longer needs The Apprentice to find you — they're tuned to your every word. Advisers float a real campaign. For the first time, the idea doesn't feel absurd, but inevitable.",
+      "researchNote": "By 2014 Trump had built a substantial right-wing following through regular Fox News appearances and Twitter, laying the groundwork for his June 2015 presidential campaign announcement.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "media",
+        "branding"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "movement_built"
+        ],
+        "notFlags": [
+          "walked_away"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "commit_to_running",
+          "text": "Quietly decide: next time, you run for real",
+          "effects": {
+            "power": 14,
+            "loyalty": 10,
+            "reputation": -6,
+            "heat": 8
+          },
+          "personality": {
+            "ideology": 8,
+            "outward": 8,
+            "grandiosity": 12
+          },
+          "setFlags": [
+            "maga_base",
+            "campaign_seed"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The decision settles over you like a coronation foretold. You are no longer playing a businessman on TV. You are auditioning for president, and the audience is already cast."
+        },
+        {
+          "id": "keep_milking_it",
+          "text": "Keep milking the attention without committing to a run",
+          "effects": {
+            "money": 50000,
+            "power": 6,
+            "loyalty": 4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 4
+          },
+          "setFlags": [
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Why kill the golden goose? You keep the base hot and the speculation alive, banking influence for a moment you'll choose yourself."
+        },
+        {
+          "id": "cash_out_now",
+          "text": "Cash out at peak fame and retire to the easy life",
+          "effects": {
+            "money": 90000,
+            "reputation": 8,
+            "power": -8
+          },
+          "personality": {
+            "ideology": -6,
+            "grandiosity": -2
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "clearFlags": [
+            "proto_maga",
+            "campaign_seed"
+          ],
+          "ripples": [],
+          "outcome": "You take the fortune and the goodwill and step off the stage at the top. History will wonder what you might have become."
+        }
+      ]
+    },
+    {
+      "id": "ev_bush_reelection_2004",
+      "year": 2004,
+      "era": "primetime",
+      "title": "Bush Wins a Second Term",
+      "scene": "George W. Bush narrowly defeats John Kerry as the country splits hard over the Iraq War and 'values voters.' The red-and-blue map calcifies into a culture war. You are still a registered something-or-other, donating to both sides, more interested in ratings than red states. But the polarization is impossible to ignore.",
+      "researchNote": "George W. Bush won reelection in 2004 against John Kerry amid the Iraq War, with 'values voters' and cultural polarization shaping the result. Trump in this period donated to politicians of both parties.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "play_both_sides",
+          "text": "Keep donating to everyone and stay friends with all",
+          "effects": {
+            "money": -10000,
+            "power": 6,
+            "reputation": 4
+          },
+          "personality": {
+            "ideology": -4
+          },
+          "setFlags": [
+            "bipartisan_donor"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Access is access. You hedge your bets and keep your name on every guest list, ideology be damned."
+        },
+        {
+          "id": "notice_the_split",
+          "text": "Watch the culture war calcify and take notes",
+          "effects": {
+            "power": 4,
+            "reputation": 2
+          },
+          "personality": {
+            "ideology": 4,
+            "outward": 3
+          },
+          "setFlags": [
+            "read_the_anger"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You see a nation sorting itself into two hostile tribes. A man who learns to speak fluently to one of them could own it."
+        }
+      ]
+    },
+    {
+      "id": "ev_hurricane_katrina_2005",
+      "year": 2005,
+      "era": "primetime",
+      "title": "Hurricane Katrina",
+      "scene": "Katrina drowns New Orleans and the federal response collapses on live television. Bodies float in the streets; a city is abandoned. Faith in government competence cracks across the political spectrum. You watch a president's approval crater over a botched rescue and absorb a brutal lesson about optics and blame.",
+      "researchNote": "Hurricane Katrina struck the Gulf Coast in August 2005, killing over 1,800 people; the widely criticized federal response severely damaged the Bush administration's credibility.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "learn_the_optics",
+          "text": "Note how a single image can destroy a leader",
+          "effects": {
+            "power": 6,
+            "reputation": 2
+          },
+          "personality": {
+            "outward": 4,
+            "grandiosity": 2
+          },
+          "setFlags": [
+            "optics_lesson"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Competence matters less than the appearance of strength. You file away that a leader is destroyed not by failure but by looking weak while failing."
+        },
+        {
+          "id": "perform_charity",
+          "text": "Make a visible charitable gesture for the cameras",
+          "effects": {
+            "money": -20000,
+            "reputation": 8
+          },
+          "personality": {
+            "outward": 6,
+            "grandiosity": 4
+          },
           "setFlags": [],
           "clearFlags": [],
           "ripples": [],
-          "outcome": "Universally liked, politically harmless. You keep the endorsements and the goodwill — and surrender the lever of real power."
+          "outcome": "A well-timed donation, well-photographed, buys a wave of goodwill. You learn generosity is most valuable when everyone is watching."
+        }
+      ]
+    },
+    {
+      "id": "ev_reality_tv_culture",
+      "year": 2006,
+      "era": "primetime",
+      "title": "The Reality-TV Decade",
+      "scene": "Survivor, American Idol, Big Brother — the whole culture is reorganizing itself around manufactured drama and audience verdicts. Ordinary people become famous for being loud. Authenticity is out; performance of authenticity is in. You are not just riding this wave, you helped create it, and it is reshaping how a whole country thinks about fame and worth.",
+      "researchNote": "The 2000s saw an explosion of reality television (Survivor, American Idol, Big Brother, The Apprentice), reshaping celebrity culture and blurring the line between performance and authenticity.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "media",
+        "culture"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "apprentice_star"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "master_the_form",
+          "text": "Master the grammar of reality TV — conflict, villains, verdicts",
+          "effects": {
+            "money": 40000,
+            "power": 6,
+            "reputation": -2
+          },
+          "personality": {
+            "outward": 8,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "showman_instinct"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You internalize the rules: pick villains, manufacture stakes, let the crowd vote. It is, you'll realize, also a blueprint for politics."
+        },
+        {
+          "id": "stay_aspirational",
+          "text": "Keep your image aspirational and luxurious, above the trash TV",
+          "effects": {
+            "money": 30000,
+            "reputation": 6
+          },
+          "personality": {
+            "grandiosity": 4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You position the brand as gold-plated class amid the chaos. Respectable — but you cede the raw, addictive energy to others."
+        }
+      ]
+    },
+    {
+      "id": "ev_social_media_rise",
+      "year": 2012,
+      "era": "primetime",
+      "title": "The Social-Media Era Arrives",
+      "scene": "Facebook goes public, Twitter is everywhere, and the gatekeepers of news are losing their grip. Anyone with a phone can broadcast to millions, and outrage travels faster than facts. You've already got the account; now you watch the entire information ecosystem bend toward exactly the kind of direct, inflammatory voice you've perfected.",
+      "researchNote": "By 2012, social media platforms like Facebook (which IPO'd that year) and Twitter had transformed political communication, enabling direct, unmediated messaging and the rapid spread of emotionally charged content.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "media",
+        "technology"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "twitter_voice"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "weaponize_the_feed",
+          "text": "Weaponize the feed — outrage, repetition, and direct attack",
+          "effects": {
+            "power": 10,
+            "reputation": -6,
+            "heat": 8,
+            "loyalty": 6
+          },
+          "personality": {
+            "outward": 10,
+            "ideology": 6,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "proto_maga"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You bypass every editor and anchor in America. The algorithm rewards your fury, and the fury feeds the base. The old gatekeepers never see it coming."
+        },
+        {
+          "id": "use_it_for_business",
+          "text": "Keep it a marketing tool for deals and the show",
+          "effects": {
+            "money": 40000,
+            "reputation": 4
+          },
+          "personality": {},
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Effective, profitable, and forgettable. You sell rooms and ratings while the political megaphone sits unused in your pocket."
+        }
+      ]
+    },
+    {
+      "id": "ev_wwe_hall_of_fame",
+      "year": 2013,
+      "era": "primetime",
+      "title": "WWE Hall of Fame",
+      "scene": "Vince McMahon, head fully regrown, inducts you into the WWE Hall of Fame. You bask in the kayfabe glory of a world where heroes and villains are scripted and the crowd's emotion is the only currency. Standing before the roaring arena, you understand this carnival better than any boardroom — and you suspect politics is just another version of it.",
+      "researchNote": "Trump was inducted into the celebrity wing of the WWE Hall of Fame in 2013, recognizing his long association with the company and the 2007 Battle of the Billionaires.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "media",
+        "fame",
+        "spectacle"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "wrestling_persona"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_kayfabe",
+          "text": "Fully embrace kayfabe as a theory of crowds and power",
+          "effects": {
+            "power": 8,
+            "reputation": -2,
+            "loyalty": 6
+          },
+          "personality": {
+            "outward": 8,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "showman_instinct",
+            "proto_maga"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_political_brand",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Heroes, villains, scripts the crowd believes anyway. You realize the wrestling crowd and the political crowd are the same crowd, hungry for the same show."
+        },
+        {
+          "id": "enjoy_the_honor",
+          "text": "Just enjoy the honor and the spectacle",
+          "effects": {
+            "money": 10000,
+            "reputation": 4
+          },
+          "personality": {
+            "grandiosity": 3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "A fun night, a gold ring, a good story. You take the trophy and the applause and leave the deeper lessons on the mat."
         }
       ]
     }

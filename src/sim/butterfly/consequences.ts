@@ -3,12 +3,7 @@ import { meetsRequires } from "../events";
 import { applyDelta } from "../meters";
 import { applyPersonality } from "../personality";
 import type { Choice } from "../schema";
-import {
-  type GameState,
-  type LedgerEntry,
-  type PendingConsequence,
-  withFlag,
-} from "../state";
+import { type GameState, type LedgerEntry, type PendingConsequence, withFlag } from "../state";
 import { renderChain } from "./ledger";
 
 /**

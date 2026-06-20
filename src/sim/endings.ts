@@ -1,8 +1,8 @@
 import type { Content } from "./content";
 import { evalComparator } from "./events";
+import type { PersonalityAxis } from "./personality";
 import type { Ending, MeterId } from "./schema";
 import type { EndState, GameState } from "./state";
-import type { PersonalityAxis } from "./personality";
 
 /**
  * Data-driven ending evaluation. The run ends with the highest-priority ending
@@ -45,5 +45,10 @@ export function evaluateEnding(content: Content, state: GameState): EndState | n
     if (best === null || ending.priority > best.priority) best = ending;
   }
   if (!best) return null;
-  return { kind: best.kind as EndState["kind"], year: state.year, reason: best.reason, endingId: best.id };
+  return {
+    kind: best.kind as EndState["kind"],
+    year: state.year,
+    reason: best.reason,
+    endingId: best.id,
+  };
 }

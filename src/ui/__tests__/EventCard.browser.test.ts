@@ -15,7 +15,7 @@ const baseEvent: GameEvent = {
   startrekInspired: false,
   tags: [],
   portrait: "cadet",
-  requires: { flags: [], notFlags: [], meters: {} },
+  requires: { flags: [], notFlags: [], meters: {}, personality: {} },
   weight: 10,
   repeatable: false,
   choices: [

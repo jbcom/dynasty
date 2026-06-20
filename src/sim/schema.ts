@@ -49,10 +49,12 @@ export const RequiresSchema = z
     flags: z.array(z.string()).default([]),
     notFlags: z.array(z.string()).default([]),
     meters: z.partialRecord(MeterIdSchema, MeterComparatorSchema).default({}),
+    /** Comparators over personality axes, e.g. { grandiosity: ">=60" }. */
+    personality: z.partialRecord(PersonalityAxisSchema, MeterComparatorSchema).default({}),
     minAge: z.number().int().optional(),
     maxAge: z.number().int().optional(),
   })
-  .default({ flags: [], notFlags: [], meters: {} });
+  .default({ flags: [], notFlags: [], meters: {}, personality: {} });
 export type Requires = z.infer<typeof RequiresSchema>;
 
 /** A ripple: a weighted, polarized nudge toward a future butterfly channel. */
@@ -185,7 +187,9 @@ export const EndingSchema = z.object({
   /** Hidden from the endings tracker until discovered (the two secret endings). */
   secret: z.boolean().default(false),
   /** Tier for tracker grouping: how good/far-reaching this ending is. */
-  tier: z.enum(["early-good", "early-bad", "endgame-good", "endgame-bad", "apex"]).default("endgame-bad"),
+  tier: z
+    .enum(["early-good", "early-bad", "endgame-good", "endgame-bad", "apex"])
+    .default("endgame-bad"),
   when: z
     .object({
       flags: z.array(z.string()).default([]),

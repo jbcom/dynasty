@@ -10,29 +10,294 @@
       "researchNote": "After graduating from the Wharton School in 1968, Donald Trump joined his father Fred Trump's real estate firm, Trump Management, which operated middle-income rental housing in Brooklyn, Queens, and Staten Island.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["realestate", "family"],
+      "tags": [
+        "realestate",
+        "family"
+      ],
       "portrait": "young_mogul",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 14,
       "repeatable": false,
       "choices": [
         {
           "id": "learn_the_trade",
           "text": "Shadow Fred, learn every angle of the rent business.",
-          "effects": { "money": 30, "power": 5, "loyalty": 8 },
-          "setFlags": ["fathers_lessons"],
+          "effects": {
+            "money": 12,
+            "power": 5,
+            "loyalty": 8
+          },
+          "personality": {
+            "inward": 6,
+            "ideology": 3
+          },
+          "setFlags": [
+            "fathers_lessons"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.2, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
           "outcome": "You absorb Fred's hard-nosed playbook. The old man nods, rarely, but he nods. The lessons stick."
         },
         {
           "id": "dream_bigger",
           "text": "Tell Fred outer-borough rentals are beneath you.",
-          "effects": { "money": -10, "power": 6, "loyalty": -6, "reputation": 4 },
+          "effects": {
+            "money": -10,
+            "power": 6,
+            "loyalty": -6,
+            "reputation": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "manhattan_ambition"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Fred frowns. The kid wants Manhattan, not Coney Island. Ambition noted, patience not."
+        },
+        {
+          "id": "squeeze_late_payers",
+          "text": "Make an example of the late payers, fast and hard.",
+          "effects": {
+            "money": 10,
+            "power": 7,
+            "reputation": -3,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 6,
+            "inward": 3
+          },
+          "setFlags": [
+            "fathers_lessons",
+            "hardball_landlord"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Rents come in on time now. Tenants learn the name Trump means no extensions. Fred is quietly pleased."
+        }
+      ]
+    },
+    {
+      "id": "ev_doj_discrimination_suit",
+      "era": "mogul",
+      "year": 1973,
+      "title": "United States v. Trump Management",
+      "scene": "The Justice Department sues you and Fred for refusing to rent to Black applicants across your apartment complexes. The case is front-page embarrassment. A young, ferocious attorney named Roy Cohn tells you the move is not to settle quietly but to countersue the government for one hundred million dollars and never, ever apologize.",
+      "researchNote": "In 1973 the U.S. Department of Justice sued Trump Management for racial discrimination under the Fair Housing Act; on Roy Cohn's advice, Trump countersued the government for $100 million and the case ended in a 1975 consent decree admitting no wrongdoing.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "realestate",
+        "family",
+        "heat",
+        "power"
+      ],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 16,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "hire_roy_cohn",
+          "text": "Hire Roy Cohn and countersue the government.",
+          "effects": {
+            "money": -30,
+            "power": 12,
+            "reputation": -6,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": 10,
+            "grandiosity": 8,
+            "outward": 6
+          },
+          "setFlags": [
+            "cohn_mentor",
+            "counterpunch_doctrine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": -1
+            },
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Cohn becomes your dark mentor. Attack, deny, countersue, never settle on your knees. The doctrine will define you for decades."
+        },
+        {
+          "id": "quiet_settlement",
+          "text": "Settle quietly and change the rental policy.",
+          "effects": {
+            "money": -40,
+            "power": -2,
+            "reputation": 8,
+            "heat": -6
+          },
+          "personality": {
+            "ideology": -8,
+            "inward": 4
+          },
+          "setFlags": [
+            "settled_quietly"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The lawyers paper it over, the policy changes, the headlines fade. Cohn shrugs and finds another client. You took the soft road."
+        },
+        {
+          "id": "blame_fred",
+          "text": "Pin the policy on Fred and the old management.",
+          "effects": {
+            "money": -20,
+            "power": 3,
+            "loyalty": -10,
+            "reputation": 2,
+            "heat": 2
+          },
+          "personality": {
+            "outward": 5,
+            "ideology": 2
+          },
+          "setFlags": [
+            "counterpunch_doctrine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You distance yourself from the old man's practices in public. Fred says nothing. The family ledger remembers."
+        }
+      ]
+    },
+    {
+      "id": "ev_cohn_finishing_school",
+      "era": "mogul",
+      "year": 1974,
+      "title": "Cohn's Finishing School",
+      "scene": "Roy Cohn takes you to dinner at his townhouse, the walls thick with photos of senators, mobsters, and cardinals. He teaches you his three rules: never apologize, always attack, and claim victory whatever the outcome. He has no contract and demands no fee up front; loyalty is the only currency he accepts.",
+      "researchNote": "Roy Cohn, formerly chief counsel to Senator Joseph McCarthy, mentored Trump throughout the 1970s and 1980s, instilling his combative tactics of relentless counterattack, denial, and claiming victory regardless of facts.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "power",
+        "branding",
+        "heat"
+      ],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": [
+          "cohn_mentor"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "absorb_the_doctrine",
+          "text": "Take the three rules as gospel.",
+          "effects": {
+            "money": 0,
+            "power": 10,
+            "reputation": -3,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 9,
+            "grandiosity": 7,
+            "outward": 5
+          },
+          "setFlags": [
+            "cohn_doctrine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            },
+            {
+              "to": "establishment",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Cohn's rules become your reflexes. You will never again be caught flat-footed by a critic, a regulator, or a reporter."
+        },
+        {
+          "id": "keep_some_distance",
+          "text": "Use Cohn but keep your own counsel.",
+          "effects": {
+            "money": 0,
+            "power": 5,
+            "reputation": 3,
+            "loyalty": 4
+          },
+          "personality": {
+            "ideology": 3,
+            "inward": 4
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.3, "polarity": 1 }],
-          "outcome": "Fred frowns. The kid wants Manhattan, not Coney Island. Ambition noted, patience not."
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You take what serves you and leave the rest. Cohn notices the hedge, but the connections are still gold."
         }
       ]
     },
@@ -45,29 +310,180 @@
       "researchNote": "In the early 1970s Trump moved to Manhattan and joined exclusive clubs like Le Club, cultivating connections among the city's social and business elite as he pivoted toward Manhattan real estate.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["realestate", "branding"],
+      "tags": [
+        "realestate",
+        "branding"
+      ],
       "portrait": "young_mogul",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 12,
       "repeatable": false,
       "choices": [
         {
           "id": "work_the_room",
           "text": "Charm the city's power brokers at Le Club.",
-          "effects": { "money": -20, "power": 8, "reputation": 6 },
-          "setFlags": ["manhattan_arrival"],
+          "effects": {
+            "money": -20,
+            "power": 8,
+            "reputation": 6
+          },
+          "personality": {
+            "outward": 8,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "manhattan_arrival",
+            "manhattan_ambition"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.4, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "You collect contacts like poker chips. Bankers, lawyers, society columnists, all now know the young Trump."
         },
         {
           "id": "play_it_safe",
           "text": "Stay close to Fred's books and don't overspend.",
-          "effects": { "money": 20, "power": 2, "loyalty": 4, "reputation": -3 },
-          "setFlags": ["manhattan_arrival"],
+          "effects": {
+            "money": 20,
+            "power": 2,
+            "loyalty": 4,
+            "reputation": -3
+          },
+          "personality": {
+            "inward": 7,
+            "ideology": 2
+          },
+          "setFlags": [
+            "manhattan_arrival"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.1, "polarity": -1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.1,
+              "polarity": -1
+            }
+          ],
           "outcome": "Cautious, solvent, and unknown. The skyline waits for someone louder."
+        }
+      ]
+    },
+    {
+      "id": "ev_nyc_fiscal_crisis",
+      "era": "mogul",
+      "year": 1975,
+      "title": "Ford to City: Drop Dead",
+      "scene": "New York is days from bankruptcy. President Ford refuses a federal bailout and the Daily News screams FORD TO CITY: DROP DEAD across its front page. Every banker you know is fleeing Manhattan real estate. For a contrarian with nerve, a dying city is a fire sale.",
+      "researchNote": "In 1975 New York City teetered on bankruptcy; President Gerald Ford initially refused federal aid, prompting the Daily News headline 'FORD TO CITY: DROP DEAD.' The crisis depressed Manhattan property values, creating openings for bold investors.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "realestate",
+        "power"
+      ],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": [
+          "manhattan_arrival"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "buy_the_dip",
+          "text": "Buy options on distressed sites while everyone runs.",
+          "effects": {
+            "money": -40,
+            "power": 9,
+            "reputation": 5
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 4,
+            "ideology": 3
+          },
+          "setFlags": [
+            "fathers_lessons",
+            "distressed_options"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": 1
+            },
+            {
+              "to": "establishment",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You tie up rights to crumbling lots for pennies. When the city claws back to life, you will be holding the deeds nobody else wanted."
+        },
+        {
+          "id": "wait_it_out",
+          "text": "Hoard cash and wait for the bottom.",
+          "effects": {
+            "money": 25,
+            "power": 3,
+            "reputation": -2
+          },
+          "personality": {
+            "inward": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sit on your wallet while braver men plant flags. Prudent, but the legends are made by those who buy when the city is on fire."
+        },
+        {
+          "id": "lobby_albany",
+          "text": "Lobby Albany for tax breaks to rescue developers.",
+          "effects": {
+            "money": -15,
+            "power": 6,
+            "reputation": 3,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": 5,
+            "outward": 4
+          },
+          "setFlags": [
+            "fathers_lessons",
+            "albany_ties"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You learn the dark art of squeezing public subsidy from a broke government. The relationships in Albany will pay off soon."
         }
       ]
     },
@@ -80,41 +496,201 @@
       "researchNote": "Trump's breakout deal was the 1976 acquisition and redevelopment of the run-down Commodore Hotel into the Grand Hyatt, secured with a controversial 40-year tax abatement from a near-bankrupt New York City, opening in 1980.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["realestate", "branding", "power"],
+      "tags": [
+        "realestate",
+        "branding",
+        "power"
+      ],
       "portrait": "young_mogul",
-      "requires": { "flags": ["fathers_lessons"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "fathers_lessons"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 18,
       "repeatable": false,
       "choices": [
         {
           "id": "land_the_abatement",
           "text": "Pressure City Hall until the tax abatement is yours.",
-          "effects": { "money": 300, "power": 12, "reputation": 10, "heat": 5 },
-          "setFlags": ["commodore_deal", "tax_abatement"],
+          "effects": {
+            "money": 120,
+            "power": 12,
+            "reputation": 10,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 6,
+            "ideology": 4
+          },
+          "setFlags": [
+            "commodore_deal",
+            "tax_abatement"
+          ],
           "clearFlags": [],
           "ripples": [
-            { "to": "tabloids", "weight": 0.6, "polarity": 1 },
-            { "to": "business_press", "weight": 0.5, "polarity": 1 }
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": 1
+            }
           ],
           "outcome": "The Grand Hyatt rises in chrome and glass. The unprecedented abatement makes you, at 30, a Manhattan player overnight."
         },
         {
           "id": "partner_with_hyatt",
           "text": "Bring in Hyatt as a partner to share the risk.",
-          "effects": { "money": 180, "power": 7, "reputation": 6, "loyalty": -3 },
-          "setFlags": ["commodore_deal"],
+          "effects": {
+            "money": 90,
+            "power": 7,
+            "reputation": 6,
+            "loyalty": -3
+          },
+          "personality": {
+            "inward": 4,
+            "ideology": -2
+          },
+          "setFlags": [
+            "commodore_deal"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "business_press", "weight": 0.4, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "Splitting the upside steadies the deal but dilutes the legend. Still, the Commodore becomes your launchpad."
         },
         {
           "id": "walk_away",
           "text": "Too risky in a broke city. Pass on it.",
-          "effects": { "money": 0, "power": -6, "reputation": -8 },
+          "effects": {
+            "money": 0,
+            "power": -6,
+            "reputation": -8
+          },
+          "personality": {
+            "inward": 6,
+            "grandiosity": -5
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.2, "polarity": -1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
           "outcome": "The wreck stays a wreck for now. Someone bolder would have seen the skyline in the rubble."
+        }
+      ]
+    },
+    {
+      "id": "ev_oil_shock_stagflation",
+      "era": "mogul",
+      "year": 1973,
+      "title": "The Oil Shock",
+      "scene": "OPEC's embargo sends gas lines around the block and prices through the roof. Stagflation grips the country: inflation and stagnation at once, a beast the economists swore was impossible. Construction costs spike and credit tightens. Every dollar you borrow now costs more next year.",
+      "researchNote": "The 1973 OPEC oil embargo quadrupled crude prices and triggered years of 'stagflation' — simultaneous high inflation and economic stagnation — that battered the U.S. economy and the real estate and construction sectors through the 1970s.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "realestate"
+      ],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "lock_in_financing",
+          "text": "Lock in long-term financing before rates climb further.",
+          "effects": {
+            "money": -10,
+            "power": 6,
+            "reputation": 4
+          },
+          "personality": {
+            "inward": 5,
+            "ideology": 2
+          },
+          "setFlags": [
+            "cheap_debt_locked"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You bolt down cheap money while you can. When inflation chews up the dollar, your fixed payments shrink in real terms."
+        },
+        {
+          "id": "inflate_assets",
+          "text": "Bet that inflation will float all your assets higher.",
+          "effects": {
+            "money": 30,
+            "power": 5,
+            "reputation": 2,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You ride the inflation wave, watching paper values balloon. It feels like genius until the bill for the borrowing arrives."
+        },
+        {
+          "id": "hunker_down",
+          "text": "Cut spending and wait for the storm to pass.",
+          "effects": {
+            "money": 15,
+            "power": 1,
+            "reputation": -3
+          },
+          "personality": {
+            "inward": 6,
+            "grandiosity": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.1,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You batten the hatches and preserve cash. Survivable, unglamorous, and forgotten by the press."
         }
       ]
     },
@@ -127,29 +703,100 @@
       "researchNote": "Trump married Ivana Zelnickova, a Czech model and former competitive skier, in April 1977; she later played a prominent role managing the Plaza Hotel and the Atlantic City casino operations.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["family", "branding", "celebrity"],
+      "tags": [
+        "family",
+        "branding",
+        "celebrity"
+      ],
       "portrait": "young_mogul",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 12,
       "repeatable": false,
       "choices": [
         {
           "id": "power_couple",
           "text": "Build a glamorous power-couple brand together.",
-          "effects": { "money": 20, "power": 6, "reputation": 9, "loyalty": 6 },
-          "setFlags": ["married_ivana"],
+          "effects": {
+            "money": 20,
+            "power": 6,
+            "reputation": 9,
+            "loyalty": 6
+          },
+          "personality": {
+            "outward": 8,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "married_ivana",
+            "power_couple"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.5, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "Ivana becomes a fixture of the empire and the gossip columns. Together you are New York royalty in the making."
         },
         {
           "id": "keep_business_separate",
           "text": "Marry her but keep her out of the business.",
-          "effects": { "money": 10, "power": 3, "reputation": 2, "loyalty": -4 },
-          "setFlags": ["married_ivana"],
+          "effects": {
+            "money": 10,
+            "power": 3,
+            "reputation": 2,
+            "loyalty": -4
+          },
+          "personality": {
+            "inward": 5,
+            "ideology": 3
+          },
+          "setFlags": [
+            "married_ivana"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.3, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
           "outcome": "A handsome marriage, a quieter partnership. The columns get less to chew on."
+        },
+        {
+          "id": "ironclad_prenup",
+          "text": "Make her sign an ironclad prenuptial agreement.",
+          "effects": {
+            "money": 15,
+            "power": 5,
+            "reputation": -3,
+            "loyalty": -6
+          },
+          "personality": {
+            "ideology": 5,
+            "inward": 4
+          },
+          "setFlags": [
+            "married_ivana",
+            "ironclad_prenup"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "The marriage starts with a contract built to protect your fortune. Cohn drafts the terms. Romance has rarely been so well-collateralized."
         }
       ]
     },
@@ -162,32 +809,294 @@
       "researchNote": "Trump cultivated a brash public image in the late 1970s and 1980s, frequently exaggerating his wealth to reporters and even posing as a fictional spokesman named 'John Barron' to plant favorable stories with the press.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["branding", "celebrity", "tabloids"],
+      "tags": [
+        "branding",
+        "celebrity",
+        "tabloids"
+      ],
       "portrait": "young_mogul",
-      "requires": { "flags": ["manhattan_arrival"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "manhattan_arrival"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 11,
       "repeatable": false,
       "choices": [
         {
           "id": "inflate_the_legend",
           "text": "Triple the number and let the headlines run.",
-          "effects": { "money": 10, "power": 7, "reputation": 8, "heat": 4 },
-          "setFlags": ["media_brand"],
+          "effects": {
+            "money": 10,
+            "power": 7,
+            "reputation": 8,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 6
+          },
+          "setFlags": [
+            "media_brand"
+          ],
           "clearFlags": [],
           "ripples": [
-            { "to": "tabloids", "weight": 0.7, "polarity": 1 },
-            { "to": "business_press", "weight": 0.3, "polarity": -1 }
+            {
+              "to": "tabloids",
+              "weight": 0.7,
+              "polarity": 1
+            },
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": -1
+            }
           ],
           "outcome": "The press eats it up. The Trump legend grows faster than the actual balance sheet, and that is the point."
         },
         {
+          "id": "john_barron",
+          "text": "Phone reporters yourself as 'John Barron,' your own spokesman.",
+          "effects": {
+            "money": 5,
+            "power": 6,
+            "reputation": 4,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 5,
+            "ideology": 3
+          },
+          "setFlags": [
+            "media_brand",
+            "john_barron"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You become your own publicist, planting flattering stories under a fake name. Brazen, effective, and one day deeply embarrassing."
+        },
+        {
           "id": "stay_factual",
           "text": "Give the honest, modest figure.",
-          "effects": { "money": 5, "power": 1, "reputation": -4 },
+          "effects": {
+            "money": 5,
+            "power": 1,
+            "reputation": -4
+          },
+          "personality": {
+            "inward": 6,
+            "grandiosity": -4
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "business_press", "weight": 0.3, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
           "outcome": "Accurate and forgettable. The headline runs on page nine, if at all."
+        }
+      ]
+    },
+    {
+      "id": "ev_nyc_blackout_1977",
+      "era": "mogul",
+      "year": 1977,
+      "title": "The Night the Lights Went Out",
+      "scene": "A lightning strike plunges the entire city into darkness. Looting and arson sweep the boroughs through a sweltering July night. By morning, thousands of stores are gutted and the image of a city in chaos flashes across the nation. New York looks ungovernable, and that scares away exactly the money you covet.",
+      "researchNote": "The July 1977 New York City blackout, caused by lightning strikes on power lines, plunged the city into darkness for up to 25 hours, triggering widespread looting and arson amid the era's fiscal crisis and urban decay.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "realestate",
+        "heat"
+      ],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": [
+          "manhattan_arrival"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "spin_law_and_order",
+          "text": "Publicly call for law and order and tougher policing.",
+          "effects": {
+            "money": 0,
+            "power": 6,
+            "reputation": 5,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "law_and_order_voice"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            },
+            {
+              "to": "establishment",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You position yourself as the voice of a frightened city. The law-and-order pose plays well and previews a future political persona."
+        },
+        {
+          "id": "buy_burned_blocks",
+          "text": "Quietly buy up fire-damaged blocks at distress prices.",
+          "effects": {
+            "money": -25,
+            "power": 7,
+            "reputation": -3
+          },
+          "personality": {
+            "grandiosity": 5,
+            "ideology": 4
+          },
+          "setFlags": [
+            "distressed_options"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "While the embers cool, you make offers. The city's misery becomes your inventory, bought for cents on the dollar."
+        },
+        {
+          "id": "stay_quiet",
+          "text": "Keep your head down until the city recovers.",
+          "effects": {
+            "money": 10,
+            "power": 1,
+            "reputation": -2
+          },
+          "personality": {
+            "inward": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.1,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You wait out the chaos behind closed doors. Safe, but the bolder operators are already circling the rubble."
+        }
+      ]
+    },
+    {
+      "id": "ev_urban_decay_white_flight",
+      "era": "mogul",
+      "year": 1978,
+      "title": "The Hollowed City",
+      "scene": "The middle class is fleeing for the suburbs, taking the tax base with it. Whole neighborhoods stand abandoned, landlords torching buildings for insurance money in the Bronx. The city you bet on is hollowing out. Yet empty land and desperate sellers are the raw material of empire.",
+      "researchNote": "1970s New York suffered severe urban decay and 'white flight' to the suburbs, with arson-for-insurance plaguing areas like the South Bronx; the depopulation and collapsing values reshaped the city's real estate landscape.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "realestate"
+      ],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": [
+          "manhattan_arrival"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "bet_on_comeback",
+          "text": "Bet the whole brand on a Manhattan comeback.",
+          "effects": {
+            "money": -30,
+            "power": 8,
+            "reputation": 6
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "manhattan_ambition",
+            "comeback_bet"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": 1
+            },
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You stake everything on the idea that Manhattan will rise from its ashes gleaming. The contrarian bet of a lifetime."
+        },
+        {
+          "id": "milk_the_rentals",
+          "text": "Squeeze the outer-borough rentals while values fall.",
+          "effects": {
+            "money": 20,
+            "power": 3,
+            "reputation": -5,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 6,
+            "inward": 3
+          },
+          "setFlags": [
+            "hardball_landlord"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You wring every dollar from Fred's old buildings as tenants struggle. Profitable, hard, and exactly the reputation you are cultivating."
         }
       ]
     },
@@ -200,32 +1109,109 @@
       "researchNote": "During the 1980 demolition for Trump Tower, Trump ordered the destruction of Bonwit Teller's prized Art Deco bas-relief sculptures rather than donate them to the Metropolitan Museum of Art as promised, citing cost and delay, drawing widespread criticism.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["realestate", "branding", "heat"],
+      "tags": [
+        "realestate",
+        "branding",
+        "heat"
+      ],
       "portrait": "mogul",
-      "requires": { "flags": ["commodore_deal"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "commodore_deal"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 14,
       "repeatable": false,
       "choices": [
         {
           "id": "destroy_friezes",
           "text": "Jackhammer them. Schedule beats sentiment.",
-          "effects": { "money": 120, "power": 6, "reputation": -10, "heat": 8 },
-          "setFlags": ["trump_tower", "friezes_destroyed"],
+          "effects": {
+            "money": 60,
+            "power": 6,
+            "reputation": -10,
+            "heat": 8
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 5,
+            "outward": 3
+          },
+          "setFlags": [
+            "trump_tower",
+            "friezes_destroyed"
+          ],
           "clearFlags": [],
           "ripples": [
-            { "to": "tabloids", "weight": 0.6, "polarity": -1 },
-            { "to": "business_press", "weight": 0.4, "polarity": -1 }
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": -1
+            },
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": -1
+            }
           ],
           "outcome": "The friezes crumble to dust and the city howls. But Trump Tower rises on schedule, a gold-and-glass monument to your name."
         },
         {
           "id": "save_friezes",
           "text": "Eat the cost and donate them to the Met.",
-          "effects": { "money": -60, "power": 3, "reputation": 12, "heat": -4 },
-          "setFlags": ["trump_tower"],
+          "effects": {
+            "money": -40,
+            "power": 3,
+            "reputation": 12,
+            "heat": -4
+          },
+          "personality": {
+            "ideology": -7,
+            "inward": 4
+          },
+          "setFlags": [
+            "trump_tower"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "business_press", "weight": 0.4, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "The Met gets its treasures and you get rare good press. Trump Tower opens a little later, a little classier."
+        },
+        {
+          "id": "blame_workers",
+          "text": "Destroy them but blame anonymous workers in the press.",
+          "effects": {
+            "money": 50,
+            "power": 5,
+            "reputation": -6,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 5,
+            "outward": 6
+          },
+          "setFlags": [
+            "trump_tower",
+            "friezes_destroyed",
+            "cohn_doctrine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You deny ordering it and pin the demolition on faceless contractors. Cohn would be proud. The friezes are gone either way."
         }
       ]
     },
@@ -238,32 +1224,190 @@
       "researchNote": "Trump Tower opened in 1983 on Fifth Avenue, featuring a 60-foot indoor waterfall and pink Breccia Pernice marble atrium; it became Trump's flagship and the headquarters of his organization.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["realestate", "branding", "celebrity"],
+      "tags": [
+        "realestate",
+        "branding",
+        "celebrity"
+      ],
       "portrait": "mogul",
-      "requires": { "flags": ["trump_tower"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "trump_tower"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 13,
       "repeatable": false,
       "choices": [
         {
           "id": "luxury_brand",
           "text": "Position the Trump name as pure luxury.",
-          "effects": { "money": 200, "power": 9, "reputation": 10 },
-          "setFlags": ["trump_brand", "luxury_brand"],
+          "effects": {
+            "money": 80,
+            "power": 9,
+            "reputation": 10
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 6
+          },
+          "setFlags": [
+            "trump_brand",
+            "luxury_brand"
+          ],
           "clearFlags": [],
           "ripples": [
-            { "to": "tabloids", "weight": 0.5, "polarity": 1 },
-            { "to": "business_press", "weight": 0.5, "polarity": 1 }
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            },
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": 1
+            }
           ],
           "outcome": "The name TRUMP now means gold, glass, and excess. Buyers pay a premium just for the letters over the door."
         },
         {
           "id": "rent_to_anyone",
           "text": "Fill it fast, screen tenants loosely.",
-          "effects": { "money": 150, "power": 4, "reputation": -2, "heat": 6 },
-          "setFlags": ["trump_brand"],
+          "effects": {
+            "money": 60,
+            "power": 4,
+            "reputation": -2,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": 2
+          },
+          "setFlags": [
+            "trump_brand",
+            "loose_screening"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "business_press", "weight": 0.3, "polarity": -1 }],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
           "outcome": "The units fill quickly with cash buyers, some of them shadowy. The money is fast; the questions come later."
+        }
+      ]
+    },
+    {
+      "id": "ev_reagan_tax_cuts",
+      "era": "mogul",
+      "year": 1981,
+      "title": "Morning in America",
+      "scene": "Ronald Reagan takes the White House preaching tax cuts, deregulation, and unapologetic wealth. The Economic Recovery Tax Act slashes top rates and showers real estate with depreciation breaks. The political winds now blow squarely at your back. A man who builds and brags is suddenly the spirit of the age.",
+      "researchNote": "Reagan's 1981 Economic Recovery Tax Act cut top marginal rates and created generous real estate depreciation rules, fueling a 1980s development boom; the era's celebration of wealth and deregulation aligned closely with Trump's public image.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "power",
+        "branding"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "trump_brand"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "ride_the_wave",
+          "text": "Leverage the new depreciation rules to the hilt.",
+          "effects": {
+            "money": 90,
+            "power": 8,
+            "reputation": 6,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "reagan_era",
+            "aggressive_leverage"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": 1
+            },
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You stack project on project, shielded by tax breaks and cheap optimism. The 1980s belong to men who borrow boldly, and you are one of them."
+        },
+        {
+          "id": "court_reagan_world",
+          "text": "Cultivate ties to the new Republican establishment.",
+          "effects": {
+            "money": 20,
+            "power": 9,
+            "reputation": 5
+          },
+          "personality": {
+            "ideology": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "reagan_era",
+            "gop_ties"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You start showing up at the right dinners with the right donors. The seeds of a political future are quietly planted."
+        },
+        {
+          "id": "stay_apolitical",
+          "text": "Keep building and stay out of politics.",
+          "effects": {
+            "money": 40,
+            "power": 3,
+            "reputation": 2
+          },
+          "personality": {
+            "inward": 5
+          },
+          "setFlags": [
+            "reagan_era"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You let the politicians politick and focus on the cranes. The boom lifts you regardless of which dinners you skip."
         }
       ]
     },
@@ -276,32 +1420,333 @@
       "researchNote": "Trump entered the Atlantic City casino market in the early 1980s, opening Harrah's at Trump Plaza in 1984; he eventually controlled three casinos, heavily financed with debt that later led to bankruptcies.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["realestate", "branding", "casino", "power"],
+      "tags": [
+        "realestate",
+        "branding",
+        "casino",
+        "power"
+      ],
       "portrait": "mogul",
-      "requires": { "flags": ["trump_brand"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "trump_brand"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 15,
       "repeatable": false,
       "choices": [
         {
           "id": "build_casino_empire",
           "text": "Borrow big and stake your name on the Boardwalk.",
-          "effects": { "money": 250, "power": 10, "reputation": 6, "heat": 9, "health": -3 },
-          "setFlags": ["casino_empire"],
+          "effects": {
+            "money": 120,
+            "power": 10,
+            "reputation": 6,
+            "heat": 9,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 5,
+            "ideology": 4
+          },
+          "setFlags": [
+            "casino_empire",
+            "overleveraged"
+          ],
           "clearFlags": [],
           "ripples": [
-            { "to": "tabloids", "weight": 0.5, "polarity": 1 },
-            { "to": "business_press", "weight": 0.5, "polarity": 1 }
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            },
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": 1
+            }
           ],
           "outcome": "The Trump Plaza casino lights up the Boardwalk. The cash flow is dazzling, the debt mountain is terrifying, and both bear your name."
         },
         {
+          "id": "partner_with_harrahs",
+          "text": "Partner with Harrah's to share the financing.",
+          "effects": {
+            "money": 70,
+            "power": 6,
+            "reputation": 4,
+            "heat": 4
+          },
+          "personality": {
+            "inward": 3,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "casino_empire"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You open Harrah's at Trump Plaza with a partner absorbing some of the risk. The name is on the Boardwalk, the debt a bit lighter."
+        },
+        {
           "id": "small_stake",
           "text": "Take a cautious minority position instead.",
-          "effects": { "money": 80, "power": 4, "reputation": 2, "heat": 2 },
+          "effects": {
+            "money": 30,
+            "power": 4,
+            "reputation": 2,
+            "heat": 2
+          },
+          "personality": {
+            "inward": 6,
+            "grandiosity": -3
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "business_press", "weight": 0.3, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
           "outcome": "A modest bet on a hot market. Safer, smaller, and far less likely to make headlines or history."
+        }
+      ]
+    },
+    {
+      "id": "ev_trumps_castle",
+      "era": "mogul",
+      "year": 1985,
+      "title": "Trump's Castle",
+      "scene": "You acquire a second Atlantic City casino, Trump's Castle, and put Ivana in charge of running it. Two Trump casinos now compete on the same Boardwalk, sometimes against each other. Wall Street is lending you anything you ask. The empire grows; so does the gravity of the debt holding it up.",
+      "researchNote": "Trump acquired the Atlantic City property that became Trump's Castle in 1985, with Ivana Trump initially overseeing its operations; the proliferation of Trump casinos created internal competition and mounting, debt-heavy obligations.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "realestate",
+        "branding",
+        "casino",
+        "family"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "casino_empire"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "stack_the_debt",
+          "text": "Borrow even more and run two casinos head to head.",
+          "effects": {
+            "money": 70,
+            "power": 8,
+            "reputation": 3,
+            "heat": 8,
+            "health": -2
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 4
+          },
+          "setFlags": [
+            "overleveraged",
+            "casino_overreach"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": -1
+            },
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Two Trump towers of chips, two mountains of junk-bond debt. The cannibalism between them worries the bankers more than it worries you."
+        },
+        {
+          "id": "ivana_runs_it",
+          "text": "Hand Ivana real authority over the Castle.",
+          "effects": {
+            "money": 40,
+            "power": 5,
+            "reputation": 5,
+            "loyalty": 8
+          },
+          "personality": {
+            "outward": 3,
+            "inward": 3
+          },
+          "setFlags": [
+            "ivana_executive"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Ivana proves a tough, capable operator, and the columns love the glamour-couple-running-an-empire angle. For now, the partnership holds."
+        },
+        {
+          "id": "sell_the_castle",
+          "text": "Flip the second casino before the debt compounds.",
+          "effects": {
+            "money": 50,
+            "power": 2,
+            "reputation": -2
+          },
+          "personality": {
+            "inward": 6,
+            "grandiosity": -4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You take the quick profit and shed the risk. Prudent, but a smaller legend, and the bankers wonder if you have lost your nerve."
+        }
+      ]
+    },
+    {
+      "id": "ev_taj_groundwork",
+      "era": "mogul",
+      "year": 1986,
+      "title": "Dreaming of the Taj",
+      "scene": "Resorts International is in play, and with it the half-finished shell of what could become the largest casino in the world, the Taj Mahal. To win it you will need to issue mountains of high-yield junk bonds at brutal interest rates. Every banker warns it can never throw off enough cash to service the debt. You hear only the word 'largest.'",
+      "researchNote": "In the mid-1980s Trump maneuvered to gain control of the unfinished Taj Mahal casino via the Resorts International takeover battle; the project, eventually opened in 1990, was financed with roughly $675 million in junk bonds at about 14 percent interest and went bankrupt within a year.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "realestate",
+        "branding",
+        "casino",
+        "power"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "casino_empire"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "chase_the_taj",
+          "text": "Chase the Taj with junk bonds, debt be damned.",
+          "effects": {
+            "money": 100,
+            "power": 9,
+            "reputation": 4,
+            "heat": 10,
+            "health": -4
+          },
+          "personality": {
+            "grandiosity": 12,
+            "outward": 5,
+            "ideology": 3
+          },
+          "setFlags": [
+            "taj_groundwork",
+            "casino_overreach",
+            "overleveraged"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You lock up the rights to the biggest casino on Earth, financed at fourteen percent. The grandeur is intoxicating; the math is a slow fuse."
+        },
+        {
+          "id": "negotiate_terms",
+          "text": "Pursue it but fight for survivable financing.",
+          "effects": {
+            "money": 50,
+            "power": 6,
+            "reputation": 3,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 6,
+            "inward": 3
+          },
+          "setFlags": [
+            "taj_groundwork"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You wrestle the bankers toward terms you might actually service. Smaller headlines, longer odds of survival."
+        },
+        {
+          "id": "pass_on_taj",
+          "text": "Walk away from the Taj. The numbers don't work.",
+          "effects": {
+            "money": 10,
+            "power": -3,
+            "reputation": -5
+          },
+          "personality": {
+            "inward": 7,
+            "grandiosity": -6
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You let the white elephant go. The press calls it caution or cowardice. Your balance sheet quietly thanks you."
         }
       ]
     },
@@ -314,32 +1759,590 @@
       "researchNote": "Trump purchased the USFL's New Jersey Generals in 1984 and pushed the league to compete directly with the NFL in the fall and pursue an antitrust suit; the USFL won the 1986 lawsuit but was awarded only three dollars in damages and folded.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["branding", "celebrity", "power"],
+      "tags": [
+        "branding",
+        "celebrity",
+        "power"
+      ],
       "portrait": "mogul",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 11,
       "repeatable": false,
       "choices": [
         {
           "id": "war_on_nfl",
           "text": "Force the fall schedule and sue the NFL.",
-          "effects": { "money": -120, "power": 5, "reputation": 4, "heat": 6 },
-          "setFlags": ["usfl_owner"],
+          "effects": {
+            "money": -60,
+            "power": 5,
+            "reputation": 4,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 5,
+            "outward": 5
+          },
+          "setFlags": [
+            "usfl_owner",
+            "nfl_war"
+          ],
           "clearFlags": [],
           "ripples": [
-            { "to": "tabloids", "weight": 0.5, "polarity": 1 },
-            { "to": "business_press", "weight": 0.4, "polarity": -1 }
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            },
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": -1
+            }
           ],
           "outcome": "You win the lawsuit and a three-dollar check. The league collapses, but you spent two seasons on the national sports page."
         },
         {
+          "id": "sign_star_qb",
+          "text": "Splash cash on a marquee quarterback to steal headlines.",
+          "effects": {
+            "money": -50,
+            "power": 4,
+            "reputation": 6,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "usfl_owner"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You buy a star and a season of glory. The Generals are box office; the league's finances are still a sieve."
+        },
+        {
           "id": "play_it_steady",
           "text": "Keep the Generals in their lane in the spring.",
-          "effects": { "money": -30, "power": 2, "reputation": 1 },
-          "setFlags": ["usfl_owner"],
+          "effects": {
+            "money": -20,
+            "power": 2,
+            "reputation": 1
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "usfl_owner"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.2, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
           "outcome": "The Generals play steady spring ball. Less drama, less debt, and far fewer cameras pointed your way."
+        }
+      ]
+    },
+    {
+      "id": "ev_west_side_yards",
+      "era": "mogul",
+      "year": 1985,
+      "title": "The West Side Yards",
+      "scene": "You assemble the vast abandoned rail yards along the Hudson, nearly a hundred acres on Manhattan's West Side, and unveil plans for 'Television City,' anchored by the world's tallest building. The community boards, the city, and the press recoil at the scale. To win you will fight zoning battles for years.",
+      "researchNote": "In 1985 Trump bought the roughly 76-acre former Penn Central rail yards on Manhattan's West Side and proposed a massive 'Television City' development including what he billed as the world's tallest building; the megaproject faced years of community and zoning opposition.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "realestate",
+        "branding",
+        "power"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "trump_brand"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "tallest_building",
+          "text": "Demand the world's tallest building and fight City Hall.",
+          "effects": {
+            "money": -40,
+            "power": 9,
+            "reputation": 6,
+            "heat": 8
+          },
+          "personality": {
+            "grandiosity": 11,
+            "outward": 6,
+            "ideology": 4
+          },
+          "setFlags": [
+            "west_side_yards",
+            "megaproject_fight"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You launch a war over the West Side that will rage for a decade. The renderings dazzle; the zoning trenches are merciless."
+        },
+        {
+          "id": "scale_it_down",
+          "text": "Negotiate a more modest, approvable plan.",
+          "effects": {
+            "money": 30,
+            "power": 5,
+            "reputation": 4,
+            "heat": -2
+          },
+          "personality": {
+            "inward": 4,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "west_side_yards"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You trade the world-record fantasy for something that might actually get built. The boards relax; the legend dims a notch."
+        },
+        {
+          "id": "hold_the_land",
+          "text": "Sit on the land and let it appreciate.",
+          "effects": {
+            "money": -10,
+            "power": 3,
+            "reputation": -2
+          },
+          "personality": {
+            "inward": 6
+          },
+          "setFlags": [
+            "west_side_yards"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You bank the acreage and wait, carrying costs nibbling at you. The Hudson view will be worth a fortune to someone, eventually."
+        }
+      ]
+    },
+    {
+      "id": "ev_sl_deregulation",
+      "era": "mogul",
+      "year": 1985,
+      "title": "Easy Money from the Thrifts",
+      "scene": "Deregulation has unleashed the savings-and-loan industry, and the thrifts are throwing money at real estate developers with almost no questions asked. The lending is reckless, the appraisals fanciful, and the whole edifice is propped on optimism. For a borrower with grand plans, the spigot has never gushed harder.",
+      "researchNote": "1980s deregulation of savings-and-loan institutions led to a flood of risky real estate lending and rampant speculation, culminating in the S&L crisis that cost taxpayers over $100 billion when hundreds of thrifts failed by the early 1990s.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "realestate"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "reagan_era"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "gorge_on_loans",
+          "text": "Tap the thrifts for every dollar they'll lend.",
+          "effects": {
+            "money": 90,
+            "power": 6,
+            "reputation": 2,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 7,
+            "ideology": 4
+          },
+          "setFlags": [
+            "overleveraged",
+            "aggressive_leverage"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": -1
+            },
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You drink deep from the deregulated trough, stacking debt on debt. The money is intoxicating; the hangover is being penciled in for the next decade."
+        },
+        {
+          "id": "borrow_with_discipline",
+          "text": "Borrow, but keep the leverage survivable.",
+          "effects": {
+            "money": 50,
+            "power": 5,
+            "reputation": 5
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": -2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You take the cheap money but keep a margin of safety. Less spectacular, but you will still be standing when the thrifts collapse."
+        }
+      ]
+    },
+    {
+      "id": "ev_rising_interest_rates",
+      "era": "mogul",
+      "year": 1981,
+      "title": "Volcker's Vise",
+      "scene": "To strangle inflation, Fed chairman Paul Volcker has driven interest rates to brutal heights, the prime rate above twenty percent. Borrowing is agony and the economy lurches into recession. For a developer who lives on debt, every point of rate is a knife at the throat. But survivors of this squeeze will own the recovery.",
+      "researchNote": "Under Chairman Paul Volcker, the Federal Reserve pushed the prime interest rate above 20 percent in 1980-81 to break double-digit inflation, triggering a severe recession before inflation finally subsided and a long expansion began.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "realestate"
+      ],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "tough_out_rates",
+          "text": "Refinance hard and tough out the rate spike.",
+          "effects": {
+            "money": -20,
+            "power": 6,
+            "reputation": 4
+          },
+          "personality": {
+            "inward": 5,
+            "ideology": 3
+          },
+          "setFlags": [
+            "survived_volcker"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You scrape through the worst of Volcker's squeeze, bloodied but solvent. When rates fall, your projects will be poised to soar."
+        },
+        {
+          "id": "freeze_projects",
+          "text": "Freeze new projects until rates fall.",
+          "effects": {
+            "money": 15,
+            "power": 1,
+            "reputation": -3
+          },
+          "personality": {
+            "inward": 6,
+            "grandiosity": -4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.1,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You hit pause and conserve. Sensible, but rivals who kept building will own the choicest sites when the boom returns."
+        },
+        {
+          "id": "bet_against_rates",
+          "text": "Borrow more, betting rates will collapse soon.",
+          "effects": {
+            "money": 40,
+            "power": 5,
+            "reputation": 2,
+            "heat": 6,
+            "health": -2
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 3
+          },
+          "setFlags": [
+            "overleveraged",
+            "aggressive_leverage"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You gamble that Volcker will blink and pile on debt at punishing rates. If the timing is wrong, the interest alone could bury you."
+        }
+      ]
+    },
+    {
+      "id": "ev_plaza_hotel_eyes",
+      "era": "mogul",
+      "year": 1986,
+      "title": "Eyes on the Plaza",
+      "scene": "The legendary Plaza Hotel on Central Park South is the most romantic trophy in New York real estate. Acquiring it would be a vanity purchase more than an investment, and everyone knows it. You famously do not care; you call it a work of art and say you are willing to pay a premium just to own beauty.",
+      "researchNote": "Trump pursued and in 1988 bought the iconic Plaza Hotel for $407.5 million, openly conceding in a New York Times ad that he had not made a financial deal but bought 'a masterpiece — the Mona Lisa,' and installed Ivana as its head.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "realestate",
+        "branding",
+        "celebrity"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "trump_brand"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pursue_the_trophy",
+          "text": "Pursue the Plaza as a pure trophy, price be damned.",
+          "effects": {
+            "money": -30,
+            "power": 7,
+            "reputation": 8,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 6
+          },
+          "setFlags": [
+            "plaza_ambition",
+            "overleveraged"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You set your heart on the Mona Lisa of hotels and let the world know you will overpay for art. The headlines swoon; the accountants wince."
+        },
+        {
+          "id": "stay_disciplined",
+          "text": "Admire it but refuse to overpay.",
+          "effects": {
+            "money": 20,
+            "power": 3,
+            "reputation": 2
+          },
+          "personality": {
+            "inward": 6,
+            "grandiosity": -4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You walk past the Plaza with your wallet intact. A trophy ungrasped, but the bankers nod with rare approval."
+        }
+      ]
+    },
+    {
+      "id": "ev_black_monday_1987",
+      "era": "mogul",
+      "year": 1987,
+      "title": "Black Monday",
+      "scene": "On October 19 the Dow plunges nearly 23 percent in a single day, the worst crash in history. Fortunes evaporate before lunch. Your real-estate empire is debt-heavy and exposed; a sustained credit freeze could turn your leverage into a noose. The decade of easy money may be ending exactly when you are most stretched.",
+      "researchNote": "On 'Black Monday,' October 19, 1987, the Dow Jones Industrial Average fell 22.6 percent in a single session, the largest one-day percentage drop in its history, shaking confidence and foreshadowing tighter credit ahead.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "realestate",
+        "heat"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "deleverage_now",
+          "text": "Sell assets fast and pay down debt while you can.",
+          "effects": {
+            "money": 20,
+            "power": 3,
+            "reputation": 5
+          },
+          "personality": {
+            "inward": 7,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "deleveraged"
+          ],
+          "clearFlags": [
+            "overleveraged"
+          ],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You dump trophies and trim the debt before the credit window slams shut. Painful pride, but the noose loosens around your neck."
+        },
+        {
+          "id": "buy_the_panic",
+          "text": "Call it a buying opportunity and borrow into the panic.",
+          "effects": {
+            "money": 30,
+            "power": 6,
+            "reputation": 4,
+            "heat": 8,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 5,
+            "ideology": 4
+          },
+          "setFlags": [
+            "overleveraged",
+            "doubled_down"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            },
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You play the fearless contrarian on the front page, scooping up the wreckage. The swagger is magnificent; the leverage is now a guillotine."
+        },
+        {
+          "id": "wait_and_see",
+          "text": "Freeze, hoard cash, and watch the dust settle.",
+          "effects": {
+            "money": 10,
+            "power": 2,
+            "reputation": -1
+          },
+          "personality": {
+            "inward": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You stand still amid the carnage and keep your powder dry. Neither hero nor casualty, just a man waiting to see who is left standing."
         }
       ]
     },
@@ -352,32 +2355,558 @@
       "researchNote": "Trump's 'The Art of the Deal,' co-written with ghostwriter Tony Schwartz, was published in 1987, became a bestseller, and cemented Trump's national image as a master dealmaker and celebrity businessman.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["branding", "celebrity"],
+      "tags": [
+        "branding",
+        "celebrity"
+      ],
       "portrait": "mogul",
-      "requires": { "flags": ["trump_brand"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "trump_brand"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 16,
       "repeatable": false,
       "choices": [
         {
           "id": "publish_the_legend",
           "text": "Publish it big and become a household name.",
-          "effects": { "money": 150, "power": 11, "reputation": 12 },
-          "setFlags": ["wrote_art_of_deal"],
+          "effects": {
+            "money": 60,
+            "power": 11,
+            "reputation": 12
+          },
+          "personality": {
+            "grandiosity": 12,
+            "outward": 8
+          },
+          "setFlags": [
+            "wrote_art_of_deal"
+          ],
           "clearFlags": [],
           "ripples": [
-            { "to": "tabloids", "weight": 0.6, "polarity": 1 },
-            { "to": "business_press", "weight": 0.5, "polarity": 1 }
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": 1
+            }
           ],
           "outcome": "The book tops the bestseller lists for nearly a year. You are no longer just a developer; you are a brand, a guru, an American celebrity."
         },
         {
           "id": "credit_the_ghostwriter",
           "text": "Share the spotlight with your ghostwriter.",
-          "effects": { "money": 90, "power": 5, "reputation": 6, "loyalty": 5 },
-          "setFlags": ["wrote_art_of_deal"],
+          "effects": {
+            "money": 40,
+            "power": 5,
+            "reputation": 6,
+            "loyalty": 5
+          },
+          "personality": {
+            "ideology": -4,
+            "inward": 4
+          },
+          "setFlags": [
+            "wrote_art_of_deal"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "business_press", "weight": 0.4, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "The book still sells, and you earn a quieter kind of respect. The myth grows a touch slower without the full one-man-show treatment."
+        },
+        {
+          "id": "demand_total_credit",
+          "text": "Take sole credit and bury the ghostwriter's name.",
+          "effects": {
+            "money": 70,
+            "power": 9,
+            "reputation": 8,
+            "loyalty": -8,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 13,
+            "ideology": 5,
+            "outward": 6
+          },
+          "setFlags": [
+            "wrote_art_of_deal",
+            "sole_author_myth"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "The world believes you wrote every word yourself, the lone genius dealmaker. The ghostwriter seethes in obscurity, and the myth becomes total."
+        }
+      ]
+    },
+    {
+      "id": "ev_fred_fortune_levers",
+      "era": "mogul",
+      "year": 1982,
+      "title": "The Old Man's Safety Net",
+      "scene": "When cash runs tight, Fred is always there: a quiet loan, a co-signature, chips slipped across a casino table to cover a bond payment. The press believes you are a self-made man, and you let them. Privately, the family fortune is the floor beneath every daring leap you take.",
+      "researchNote": "Investigations later revealed Fred Trump propped up Donald's ventures for decades through loans, gifts, and maneuvers like a $3.5 million casino-chip purchase at Trump's Castle in 1990, despite Donald's public self-made image.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "realestate",
+        "heat"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "fathers_lessons"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "lean_on_fred",
+          "text": "Lean on Fred's fortune to cover your bolder bets.",
+          "effects": {
+            "money": 70,
+            "power": 4,
+            "loyalty": 6,
+            "reputation": -3,
+            "heat": 3
+          },
+          "personality": {
+            "inward": 3,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "fred_backstop"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Fred's quiet money keeps the empire afloat through the rough patches. The self-made legend stays intact, propped on the old man's checkbook."
+        },
+        {
+          "id": "refuse_help",
+          "text": "Refuse the help to keep the self-made myth pure.",
+          "effects": {
+            "money": -10,
+            "power": 6,
+            "reputation": 6
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 4
+          },
+          "setFlags": [
+            "self_made_myth"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You wave off the safety net so you can truly call yourself self-made. The myth gleams brighter, the tightrope grows thinner beneath you."
+        }
+      ]
+    },
+    {
+      "id": "ev_trump_shuttle_temptation",
+      "era": "mogul",
+      "year": 1987,
+      "title": "Wings of Vanity",
+      "scene": "Eastern Air Lines is shedding its Northeast shuttle, and a fleet of jets with TRUMP painted on the fuselage tempts you. It has nothing to do with real estate, but everything to do with plastering your name across America's skies. The financing, of course, would be more debt heaped on an already groaning empire.",
+      "researchNote": "Trump bought Eastern Air Lines' Northeast shuttle in 1988 for $365 million, rebranding it the Trump Shuttle and gilding the planes with luxury fittings; the heavily leveraged airline lost money and was surrendered to creditors by 1992.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "branding",
+        "celebrity"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "trump_brand"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "buy_the_shuttle",
+          "text": "Buy the shuttle and gild it with your name.",
+          "effects": {
+            "money": 30,
+            "power": 5,
+            "reputation": 6,
+            "heat": 7,
+            "health": -2
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 6
+          },
+          "setFlags": [
+            "trump_shuttle",
+            "overleveraged",
+            "casino_overreach"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Gold-plated jets streak across the Northeast with your name on the tail. The vanity is dazzling; the debt is just more straw on the camel's back."
+        },
+        {
+          "id": "skip_the_airline",
+          "text": "Stay out of a business you don't understand.",
+          "effects": {
+            "money": 15,
+            "power": 2,
+            "reputation": 3
+          },
+          "personality": {
+            "inward": 6,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You let the planes fly under someone else's name. A vanity denied, but one fewer money-losing trophy bolted to the empire."
+        }
+      ]
+    },
+    {
+      "id": "ev_cohn_disbarment",
+      "era": "mogul",
+      "year": 1986,
+      "title": "The Mentor's Fall",
+      "scene": "Roy Cohn is dying of AIDS, disbarred for ethics violations, abandoned by the powerful men he once served. He asks you, his prize protege, to stand by him. Loyalty was the one currency he demanded. Now the bill comes due, and the cameras are watching how you treat a fallen patron.",
+      "researchNote": "Roy Cohn was disbarred in 1986 for unethical conduct and died of AIDS-related complications that August; Trump was widely reported to have distanced himself from his ailing former mentor in Cohn's final months.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "power",
+        "family",
+        "heat"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "cohn_mentor"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "abandon_cohn",
+          "text": "Quietly distance yourself from the dying Cohn.",
+          "effects": {
+            "money": 0,
+            "power": 4,
+            "loyalty": -10,
+            "reputation": -6,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": 6,
+            "inward": 4
+          },
+          "setFlags": [
+            "abandoned_cohn"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You let the dying man drift away, useful no longer. He learned his own lesson too late: loyalty was always a one-way street with you."
+        },
+        {
+          "id": "stand_by_cohn",
+          "text": "Stand by him publicly to the end.",
+          "effects": {
+            "money": -5,
+            "power": 2,
+            "loyalty": 10,
+            "reputation": 8
+          },
+          "personality": {
+            "ideology": -3,
+            "inward": 3
+          },
+          "setFlags": [
+            "honored_cohn"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You stay at the bedside of your fallen mentor. A rare display of fidelity that surprises the cynics and, briefly, even yourself."
+        }
+      ]
+    },
+    {
+      "id": "ev_first_political_flirtation",
+      "era": "mogul",
+      "year": 1987,
+      "title": "A Taste for the Stage",
+      "scene": "Flush with fame from your bestselling book, you take out full-page newspaper ads attacking America's foreign policy and trade deals. Reporters start asking, only half joking, whether you might run for president someday. The roar of national attention is sweeter than any building. The seed of a far larger ambition takes root.",
+      "researchNote": "In September 1987 Trump spent nearly $95,000 on full-page open-letter ads in major newspapers criticizing U.S. foreign and trade policy, fueling speculation about presidential ambitions and marking his first overt step toward national politics.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "branding",
+        "power",
+        "celebrity"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "wrote_art_of_deal"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "stoke_the_speculation",
+          "text": "Run the ads and stoke the presidential talk.",
+          "effects": {
+            "money": -10,
+            "power": 9,
+            "reputation": 8,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 11,
+            "ideology": 6,
+            "outward": 7
+          },
+          "setFlags": [
+            "political_brand",
+            "populism"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You taste the national stage and find it intoxicating. The buildings were never the endgame. A bigger, stranger ambition is now awake."
+        },
+        {
+          "id": "deny_interest",
+          "text": "Wave it off and stay focused on the empire.",
+          "effects": {
+            "money": 20,
+            "power": 3,
+            "reputation": 2
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You insist you are just a builder and let the speculation cool. The skyline keeps you busy enough, for now."
+        }
+      ]
+    },
+    {
+      "id": "ev_creditor_brinkmanship",
+      "era": "mogul",
+      "year": 1987,
+      "title": "Staring Down the Bankers",
+      "scene": "Your debt load is staggering and a few projects are bleeding cash. The bankers grow nervous, but you have learned a Cohn-grade truth: if you owe a bank a million, they own you; if you owe them a billion, you own them. You can negotiate from weakness or from manufactured strength.",
+      "researchNote": "By the late 1980s Trump's empire carried enormous bank and bond debt; when the reckoning came around 1990, his banks chose to restructure rather than foreclose, illustrating the leverage a borrower can wield when the debts are large enough to threaten the lenders.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "realestate",
+        "power",
+        "heat"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "overleveraged"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "bluff_the_banks",
+          "text": "Bluff the banks: too big to let fail.",
+          "effects": {
+            "money": 50,
+            "power": 7,
+            "reputation": 2,
+            "heat": 8,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 9,
+            "ideology": 6,
+            "outward": 5
+          },
+          "setFlags": [
+            "bank_brinkmanship",
+            "casino_overreach"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": -1
+            },
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You dare the bankers to pull the plug and watch their own balance sheets explode. The bluff buys time, but the debt only grows hungrier."
+        },
+        {
+          "id": "restructure_honestly",
+          "text": "Open the books and restructure in good faith.",
+          "effects": {
+            "money": -20,
+            "power": 3,
+            "reputation": 7,
+            "heat": -4
+          },
+          "personality": {
+            "inward": 6,
+            "ideology": -3
+          },
+          "setFlags": [
+            "restructured_debt"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sit down with the lenders, lay it bare, and carve out a survivable plan. Humbling, but the empire might just outlast the decade."
+        },
+        {
+          "id": "sell_to_survive",
+          "text": "Sell the weakest assets to slash the debt now.",
+          "effects": {
+            "money": 30,
+            "power": 1,
+            "reputation": 4
+          },
+          "personality": {
+            "inward": 7,
+            "grandiosity": -5
+          },
+          "setFlags": [
+            "deleveraged"
+          ],
+          "clearFlags": [
+            "overleveraged"
+          ],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You amputate the losers to save the body. The legend shrinks, but the bankruptcy wolf is driven back from the door."
         }
       ]
     }

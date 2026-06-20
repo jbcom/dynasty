@@ -10,26 +10,88 @@
       "researchNote": "Speculative extrapolation. U.S. presidents are limited to two terms by the 22nd Amendment; this scenario imagines a leader and movement openly reframing term limits as negotiable, a real rhetorical trend pushed past its constitutional boundary.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["power", "politics", "ambition"],
+      "tags": [
+        "power",
+        "politics",
+        "ambition"
+      ],
       "portrait": "president",
-      "requires": { "flags": ["consolidated_power"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "tease_third_term",
           "text": "Float the idea that 'the people' may demand a third term",
-          "effects": { "power": 12, "heat": 11, "reputation": -8, "loyalty": 6 },
-          "setFlags": ["third_term_talk"],
-          "ripples": [ { "to": "ev_world_stage", "weight": 0.5, "polarity": 1 } ],
+          "effects": {
+            "power": 12,
+            "heat": 11,
+            "reputation": -8,
+            "loyalty": 6
+          },
+          "personality": {
+            "grandiosity": 12,
+            "ideology": 8
+          },
+          "setFlags": [
+            "third_term_talk"
+          ],
+          "ripples": [
+            {
+              "to": "ev_world_stage",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "The base roars, the courts mutter, and the word 'unprecedented' loses all meaning. You like it that way."
         },
         {
           "id": "respect_norms_for_now",
           "text": "Publicly honor the limit while quietly grooming a successor",
-          "effects": { "power": 6, "loyalty": 8, "reputation": 4, "heat": 2 },
-          "setFlags": ["dynastic_planning"],
+          "effects": {
+            "power": 6,
+            "loyalty": 8,
+            "reputation": 4,
+            "heat": 2
+          },
+          "personality": {
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "dynastic_planning"
+          ],
           "outcome": "You play the statesman on camera and the dynast off it. The succession, you decide, will simply keep the name."
+        },
+        {
+          "id": "hand_back_the_keys",
+          "text": "Promise a free, fair election and a peaceful transfer of power",
+          "effects": {
+            "reputation": 13,
+            "heat": -6,
+            "power": -5,
+            "loyalty": -4
+          },
+          "personality": {
+            "grandiosity": -10,
+            "ideology": -8,
+            "outward": -4
+          },
+          "setFlags": [
+            "restraint_shown"
+          ],
+          "ripples": [
+            {
+              "to": "ev_redistribution_dividend",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Half your advisors think you have gone soft. Historians, you suspect, will think otherwise."
         }
       ]
     },
@@ -42,25 +104,78 @@
       "researchNote": "Speculative extrapolation from real proposals (such as reclassifying federal workers to make them easier to remove) that would expand a president's control over the civil service. The full purge depicted here is imagined.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["power", "loyalty", "politics"],
+      "tags": [
+        "power",
+        "loyalty",
+        "politics"
+      ],
       "portrait": "president",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "purge_the_disloyal",
           "text": "Replace anyone insufficiently devoted with a true believer",
-          "effects": { "power": 13, "loyalty": 12, "heat": 9, "reputation": -10 },
-          "setFlags": ["loyalist_state"],
-          "ripples": [ { "to": "ev_world_stage", "weight": 0.4, "polarity": 1 } ],
+          "effects": {
+            "power": 13,
+            "loyalty": 12,
+            "heat": 9,
+            "reputation": -10
+          },
+          "personality": {
+            "grandiosity": 10,
+            "ideology": 9
+          },
+          "setFlags": [
+            "loyalist_state",
+            "consolidated_power"
+          ],
+          "ripples": [
+            {
+              "to": "ev_world_stage",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "The machinery of state now hums in one key: yours. Dissent doesn't get fired so much as it ceases to exist."
         },
         {
           "id": "keep_a_few_experts",
           "text": "Keep a handful of competent skeptics for the hard problems",
-          "effects": { "power": 7, "loyalty": 3, "reputation": 3, "health": 2 },
+          "effects": {
+            "power": 7,
+            "loyalty": 3,
+            "reputation": 3,
+            "health": 2
+          },
+          "personality": {
+            "grandiosity": 2
+          },
           "outcome": "A few grown-ups remain in the room. They are useful, occasionally annoying, and always reminded who signs the checks."
+        },
+        {
+          "id": "professionalize_the_service",
+          "text": "Strengthen merit protections and depoliticize the agencies",
+          "effects": {
+            "reputation": 12,
+            "power": -6,
+            "loyalty": -5,
+            "heat": -4
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": -6
+          },
+          "setFlags": [
+            "institutions_protected"
+          ],
+          "outcome": "You bind your own hands and call it strength. The bureaucracy, oddly, starts working better than it has in years."
         }
       ]
     },
@@ -73,25 +188,250 @@
       "researchNote": "Speculative extrapolation from real trends of political figures owning media platforms and the documented power of recommendation algorithms to shape public opinion. The scale of state-aligned control here is imagined.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["power", "media", "money"],
+      "tags": [
+        "power",
+        "media",
+        "money"
+      ],
       "portrait": "president",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "tune_the_algorithm",
           "text": "Tune the algorithm to amplify praise and bury criticism",
-          "effects": { "power": 11, "reputation": 5, "money": 9000000000, "heat": 8, "loyalty": 5 },
-          "setFlags": ["media_dominion"],
-          "ripples": [ { "to": "ev_world_stage", "weight": 0.4, "polarity": 1 } ],
+          "effects": {
+            "power": 11,
+            "reputation": 5,
+            "money": 9000000000,
+            "heat": 8,
+            "loyalty": 5
+          },
+          "personality": {
+            "grandiosity": 9,
+            "ideology": 7
+          },
+          "setFlags": [
+            "media_dominion"
+          ],
+          "ripples": [
+            {
+              "to": "ev_world_stage",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "Reality becomes a feed, and you are its editor-in-chief. The trending tab is, at last, completely under control."
         },
         {
           "id": "monetize_quietly",
           "text": "Skip the propaganda and just monetize the attention",
-          "effects": { "money": 30000000000, "power": 4, "reputation": -3 },
+          "effects": {
+            "money": 30000000000,
+            "power": 4,
+            "reputation": -3
+          },
+          "personality": {
+            "grandiosity": 3
+          },
           "outcome": "You let the platform print money instead of slogans. The accountants weep with joy; the editorialists, less so."
+        },
+        {
+          "id": "open_source_the_feed",
+          "text": "Open the algorithm to public audit and break it into rival networks",
+          "effects": {
+            "reputation": 14,
+            "power": -7,
+            "money": -4000000000,
+            "heat": -5
+          },
+          "personality": {
+            "ideology": -11,
+            "outward": -6,
+            "grandiosity": -7
+          },
+          "setFlags": [
+            "open_information"
+          ],
+          "outcome": "You give the public a window into the machine that shapes them. The trolls revolt; the historians take notes."
+        }
+      ]
+    },
+    {
+      "id": "ev_tech_capture",
+      "era": "victory",
+      "year": 2030,
+      "title": "The Cloud Bends the Knee",
+      "scene": "The five companies that run the world's compute, search, and phones invite themselves to dinner. They want exemptions, contracts, and a friendly regulator; you want their data, their reach, and their gratitude. Everyone leaves the table holding a little more leverage than they walked in with.",
+      "researchNote": "Speculative extrapolation from real and growing entanglement between governments and a handful of dominant technology firms over cloud infrastructure, content moderation, and data access. The explicit fusion of state and platform here is dramatized.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "power",
+        "tech",
+        "money"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fuse_state_and_platform",
+          "text": "Trade regulatory cover for a direct pipe into their data",
+          "effects": {
+            "power": 12,
+            "money": 12000000000,
+            "heat": 10,
+            "reputation": -9,
+            "loyalty": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 8
+          },
+          "setFlags": [
+            "tech_fused",
+            "consolidated_power"
+          ],
+          "outcome": "The surveillance and the search bar now answer to the same desk. Privacy becomes a setting you can quietly switch off."
+        },
+        {
+          "id": "break_them_up",
+          "text": "Launch the biggest antitrust crusade in a century",
+          "effects": {
+            "reputation": 11,
+            "power": 5,
+            "money": -3000000000,
+            "heat": 8
+          },
+          "personality": {
+            "ideology": -9,
+            "outward": -4
+          },
+          "setFlags": [
+            "monopolies_broken"
+          ],
+          "outcome": "You shatter the giants into competing shards. The lobbyists wail; the market, blinking, rediscovers competition."
+        },
+        {
+          "id": "extract_and_release",
+          "text": "Take their money in taxes and leave their power intact",
+          "effects": {
+            "money": 20000000000,
+            "power": 6,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 2
+          },
+          "outcome": "You tax the colossi and call it a day. They pay, smile, and keep right on growing."
+        }
+      ]
+    },
+    {
+      "id": "ev_ai_overseer",
+      "era": "victory",
+      "year": 2031,
+      "title": "The Machine That Never Sleeps",
+      "scene": "A frontier AI lab unveils a model that can draft policy, predict unrest, and write speeches in your cadence better than your own writers. They offer it to you as a governing tool: a tireless advisor that reads every cable and never leaks. The demo ends with the model suggesting, gently, three people it thinks you should remove.",
+      "researchNote": "Speculative extrapolation from real rapid advances in large AI models and early experiments using them for policy analysis and decision support. Handing core governance to an opaque model, as imagined here, raises accountability and alignment risks far beyond current practice.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "power",
+        "ai",
+        "tech"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "rule_by_algorithm",
+          "text": "Let the model triage your enemies and optimize your grip",
+          "effects": {
+            "power": 14,
+            "heat": 12,
+            "reputation": -11,
+            "loyalty": 6
+          },
+          "personality": {
+            "grandiosity": 11,
+            "ideology": 9
+          },
+          "setFlags": [
+            "ai_governance",
+            "consolidated_power"
+          ],
+          "ripples": [
+            {
+              "to": "ev_emperor_in_all_but_name",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The machine governs and you preside. Its recommendations are always reasonable, which is exactly what worries the few who notice."
+        },
+        {
+          "id": "fund_open_ai_science",
+          "text": "Pour the budget into open, safety-first public AI research",
+          "effects": {
+            "money": -18000000000,
+            "reputation": 12,
+            "power": 3,
+            "health": 2
+          },
+          "personality": {
+            "ideology": -10,
+            "outward": -7,
+            "grandiosity": -6
+          },
+          "setFlags": [
+            "back_science",
+            "ai_for_all"
+          ],
+          "ripples": [
+            {
+              "to": "ev_seti_signal",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You make the breakthrough a commons instead of a crown. The lab grumbles; the species, eventually, benefits."
+        },
+        {
+          "id": "regulate_and_wait",
+          "text": "Slap a strict license on it and keep humans in the loop",
+          "effects": {
+            "reputation": 7,
+            "power": 4,
+            "heat": -3
+          },
+          "personality": {
+            "grandiosity": -2
+          },
+          "setFlags": [
+            "ai_regulated"
+          ],
+          "outcome": "You leash the thing before it leashes you. Progress slows; the night watch sleeps a little easier."
         }
       ]
     },
@@ -104,25 +444,81 @@
       "researchNote": "Speculative extrapolation from real-world freedom-city and charter-city proposals and large state-backed megaprojects. The presidential vanity-capital framing is imagined satire.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["money", "ambition", "power"],
+      "tags": [
+        "money",
+        "ambition",
+        "power"
+      ],
       "portrait": "president",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "go_biggest",
           "text": "Demand the biggest, tallest, most golden version possible",
-          "effects": { "money": -40000000000, "power": 9, "reputation": 8, "heat": 6 },
-          "setFlags": ["megaproject_built"],
+          "effects": {
+            "money": -40000000000,
+            "power": 9,
+            "reputation": 8,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 12,
+            "outward": 4
+          },
+          "setFlags": [
+            "megaproject_built"
+          ],
           "outcome": "The skyline becomes a signature. Engineers fret about the budget; you remind them that legends are never cheap."
         },
         {
           "id": "license_the_brand",
           "text": "Let others build it and just license your name to it",
-          "effects": { "money": 25000000000, "power": 5, "reputation": 4, "heat": 2 },
-          "setFlags": ["megaproject_built"],
+          "effects": {
+            "money": 25000000000,
+            "power": 5,
+            "reputation": 4,
+            "heat": 2
+          },
+          "personality": {
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "megaproject_built"
+          ],
           "outcome": "You take the upside and none of the rebar. The name does the heavy lifting; it always has."
+        },
+        {
+          "id": "build_for_the_people",
+          "text": "Redirect the funds to housing, transit, and clean water nationwide",
+          "effects": {
+            "money": -30000000000,
+            "reputation": 15,
+            "power": 3,
+            "heat": -4
+          },
+          "personality": {
+            "ideology": -11,
+            "outward": -8,
+            "grandiosity": -9
+          },
+          "setFlags": [
+            "public_works"
+          ],
+          "ripples": [
+            {
+              "to": "ev_redistribution_dividend",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "No monument bears your face, but a million faucets run clean. It is, your critics admit, a strange kind of triumph."
         }
       ]
     },
@@ -131,30 +527,107 @@
       "era": "victory",
       "year": 2032,
       "title": "The Family Line",
-      "scene": "At a primetime dinner you seat your children like a royal table, each handed a portfolio: one gets the party, one gets the media, one gets the money. The pundits call it nepotism; you call it succession planning. Somewhere a constitutional scholar quietly retires.",
+      "scene": "At a primetime dinner you seat your children like a royal table, each handed a portfolio: Don Jr. gets the party, Ivanka the brand, Barron the future. The pundits call it nepotism; you call it succession planning. Somewhere a constitutional scholar quietly retires.",
       "researchNote": "Speculative extrapolation from real instances of political families building multi-generational influence (Kennedys, Bushes, Clintons) pushed toward an explicitly dynastic, near-monarchical model. The formal handoff depicted is imagined.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["family", "power", "politics"],
+      "tags": [
+        "family",
+        "power",
+        "politics"
+      ],
       "portrait": "president",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "anoint_an_heir",
-          "text": "Anoint an heir and build the dynasty openly",
-          "effects": { "power": 10, "loyalty": 10, "reputation": -6, "heat": 7 },
-          "setFlags": ["dynasty_declared"],
-          "ripples": [ { "to": "ev_emperor_in_all_but_name", "weight": 0.6, "polarity": 1 } ],
+          "text": "Anoint Don Jr. as heir and build the dynasty openly",
+          "effects": {
+            "power": 10,
+            "loyalty": 10,
+            "reputation": -6,
+            "heat": 7
+          },
+          "personality": {
+            "grandiosity": 10,
+            "ideology": 6
+          },
+          "setFlags": [
+            "dynasty_declared"
+          ],
+          "ripples": [
+            {
+              "to": "ev_emperor_in_all_but_name",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "The name becomes a title. The family kisses the ring, and the ring, you note, fits the whole bloodline."
+        },
+        {
+          "id": "crown_ivanka",
+          "text": "Pass the brand and the throne to Ivanka, the favorite",
+          "effects": {
+            "power": 9,
+            "loyalty": 7,
+            "reputation": -3,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 9
+          },
+          "setFlags": [
+            "dynasty_declared"
+          ],
+          "ripples": [
+            {
+              "to": "ev_emperor_in_all_but_name",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Camera-ready and ruthless, she takes the portfolio without blinking. The dynasty, you decide, will photograph beautifully."
         },
         {
           "id": "play_them_off",
           "text": "Keep every heir hungry by never naming the favorite",
-          "effects": { "power": 8, "loyalty": -4, "reputation": 2, "heat": 3 },
-          "setFlags": ["dynastic_planning"],
+          "effects": {
+            "power": 8,
+            "loyalty": -4,
+            "reputation": 2,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 7
+          },
+          "setFlags": [
+            "dynastic_planning"
+          ],
           "outcome": "You dangle the crown and watch them compete. Cruel, effective, and excellent television."
+        },
+        {
+          "id": "refuse_the_dynasty",
+          "text": "Tell your children to earn it at the ballot box like anyone else",
+          "effects": {
+            "reputation": 12,
+            "loyalty": -6,
+            "power": -4
+          },
+          "personality": {
+            "grandiosity": -10,
+            "ideology": -7
+          },
+          "setFlags": [
+            "dynasty_refused"
+          ],
+          "outcome": "The family sulks; the republic exhales. A bloodline, you remind them, is not a birthright to a country."
         }
       ]
     },
@@ -167,27 +640,100 @@
       "researchNote": "Speculative extrapolation from the real outsized gravitational pull of U.S. presidents on global affairs. The depicted tilt toward personal, unilateral global dominance is imagined and gated to escalate when domestic power has been consolidated.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["power", "geopolitics", "ambition"],
+      "tags": [
+        "power",
+        "geopolitics",
+        "ambition"
+      ],
       "portrait": "emperor",
-      "requires": { "flags": ["consolidated_power"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "consolidated_power"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {
+          "grandiosity": ">=30"
+        }
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "demand_tribute",
           "text": "Reframe alliances as tribute and make them pay for protection",
-          "effects": { "power": 14, "money": 50000000000, "reputation": -12, "heat": 13, "loyalty": 6 },
-          "setFlags": ["global_hegemon"],
-          "ripples": [ { "to": "ev_brinkmanship", "weight": 0.6, "polarity": 1 }, { "to": "ev_emperor_in_all_but_name", "weight": 0.5, "polarity": 1 } ],
+          "effects": {
+            "power": 14,
+            "money": 50000000000,
+            "reputation": -12,
+            "heat": 13,
+            "loyalty": 6
+          },
+          "personality": {
+            "grandiosity": 13,
+            "outward": 10,
+            "ideology": 6
+          },
+          "setFlags": [
+            "global_hegemon"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brinkmanship",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "ev_emperor_in_all_but_name",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "The world pays up, resentfully. You have turned diplomacy into a protection racket with very good catering."
         },
         {
           "id": "broker_grand_bargain",
           "text": "Broker a grand bargain that puts you at the center of everything",
-          "effects": { "power": 10, "reputation": 7, "loyalty": 4, "heat": 5 },
-          "setFlags": ["global_broker"],
-          "ripples": [ { "to": "ev_emperor_in_all_but_name", "weight": 0.4, "polarity": 1 } ],
+          "effects": {
+            "power": 10,
+            "reputation": 7,
+            "loyalty": 4,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "global_broker"
+          ],
+          "ripples": [
+            {
+              "to": "ev_emperor_in_all_but_name",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "Every treaty now routes through you. Indispensable is the word; irreplaceable is the goal."
+        },
+        {
+          "id": "share_the_table",
+          "text": "Surprise everyone and hand real power to a council of nations",
+          "effects": {
+            "reputation": 14,
+            "power": -8,
+            "heat": -6,
+            "loyalty": -3
+          },
+          "personality": {
+            "grandiosity": -12,
+            "outward": -10,
+            "ideology": -8
+          },
+          "setFlags": [
+            "multilateral_turn"
+          ],
+          "outcome": "You give away the gavel and keep the goodwill. The strongmen are baffled; the small nations, for once, are heard."
         }
       ]
     },
@@ -196,29 +742,455 @@
       "era": "victory",
       "year": 2034,
       "title": "The Other Strongmen",
-      "scene": "A handful of rival great powers have their own strongmen, their own golden palaces, their own algorithms. They flatter you in public and probe you in private. One sends a gift the size of a yacht; another sends a fleet a little too close to your shipping lanes.",
-      "researchNote": "Speculative extrapolation from real multipolar geopolitical competition among major powers and personalist leaders. Specific rivalries depicted are fictionalized.",
+      "scene": "A handful of rival great powers have their own strongmen, their own golden palaces, their own algorithms. China flatters you in public and probes you in private; Russia sends a gift the size of a yacht; a newly unified EU sends a fleet a little too close to your shipping lanes.",
+      "researchNote": "Speculative extrapolation from real multipolar geopolitical competition among major powers and personalist leaders, plus ongoing debates about deeper European political integration. Specific rivalries and a fully federated EU are fictionalized.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["geopolitics", "power", "rivalry"],
+      "tags": [
+        "geopolitics",
+        "power",
+        "rivalry"
+      ],
       "portrait": "emperor",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "forge_strongman_pact",
-          "text": "Forge a cynical pact carving the world into spheres",
-          "effects": { "power": 11, "reputation": -7, "loyalty": 3, "heat": 8 },
-          "setFlags": ["spheres_pact"],
-          "ripples": [ { "to": "ev_brinkmanship", "weight": 0.4, "polarity": 1 } ],
+          "text": "Forge a cynical pact with China and Russia carving the world into spheres",
+          "effects": {
+            "power": 11,
+            "reputation": -7,
+            "loyalty": 3,
+            "heat": 8
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 8,
+            "ideology": 5
+          },
+          "setFlags": [
+            "spheres_pact"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brinkmanship",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "You and your fellow autocrats divide the map over dinner. The smaller nations are not invited; they are the menu."
         },
         {
           "id": "outmaneuver_rivals",
           "text": "Play the rivals against each other and keep them off balance",
-          "effects": { "power": 9, "reputation": 3, "heat": 6, "loyalty": 2 },
+          "effects": {
+            "power": 9,
+            "reputation": 3,
+            "heat": 6,
+            "loyalty": 2
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 4
+          },
           "outcome": "You keep every rival guessing and every alliance temporary. Chaos, properly managed, is just leverage."
+        },
+        {
+          "id": "build_a_concert",
+          "text": "Propose a binding concert of powers to ban arms races and famine",
+          "effects": {
+            "reputation": 13,
+            "power": 2,
+            "heat": -7,
+            "money": -5000000000
+          },
+          "personality": {
+            "ideology": -10,
+            "outward": -9,
+            "grandiosity": -8
+          },
+          "setFlags": [
+            "concert_of_powers"
+          ],
+          "outcome": "You turn the rivals into partners by giving them something to lose together. Even the cynics admit it might hold."
+        }
+      ]
+    },
+    {
+      "id": "ev_space_race_reborn",
+      "era": "victory",
+      "year": 2032,
+      "title": "The New Space Race",
+      "scene": "China lands a permanent crew on the Moon and plants a flag the size of a tennis court, broadcast in 8K to a billion people. Your generals call it humiliation; your industrialists call it opportunity. SpaceX has a rocket on the pad and a price tag with a lot of zeros, and the whole world is suddenly looking up.",
+      "researchNote": "Speculative extrapolation from real renewed great-power competition in spaceflight, including crewed lunar programs and rapid commercial launch development. The specific milestones and timeline are dramatized.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "space",
+        "geopolitics"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "weaponize_orbit",
+          "text": "Pour billions into an orbital weapons program to dominate space",
+          "effects": {
+            "money": -35000000000,
+            "power": 12,
+            "heat": 11,
+            "reputation": -8
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 9,
+            "ideology": 6
+          },
+          "setFlags": [
+            "orbital_militarization"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brinkmanship",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The high ground becomes the highest ground. Rivals scramble to match you, and the heavens acquire a target list."
+        },
+        {
+          "id": "fund_nasa_renaissance",
+          "text": "Triple NASA's budget for a peaceful Mars-and-beyond mission",
+          "effects": {
+            "money": -28000000000,
+            "reputation": 13,
+            "power": 5,
+            "health": 2
+          },
+          "personality": {
+            "ideology": -9,
+            "outward": -6,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "back_science",
+            "space_renaissance"
+          ],
+          "ripples": [
+            {
+              "to": "ev_deep_space_program",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "ev_seti_signal",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You bet on wonder instead of warheads. A generation of kids picks up telescopes; a generation of engineers picks up the slack."
+        },
+        {
+          "id": "privatize_the_frontier",
+          "text": "Hand the whole frontier to private contractors for a cut",
+          "effects": {
+            "money": 18000000000,
+            "power": 6,
+            "reputation": -2,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "space_privatized"
+          ],
+          "outcome": "Space becomes a market and you take a royalty on the cosmos. The flags up there now have logos."
+        }
+      ]
+    },
+    {
+      "id": "ev_deep_space_program",
+      "era": "victory",
+      "year": 2035,
+      "title": "Eyes on the Void",
+      "scene": "With a science renaissance underway, astronomers pitch a constellation of giant deep-space telescopes, an array that could read the atmosphere of a planet a thousand light-years off. They speak of biosignatures, of mapping the dark, of finally answering the oldest question. The budget is enormous; the implications are larger.",
+      "researchNote": "Speculative extrapolation from real next-generation observatory proposals (successors to JWST, large ground arrays, exoplanet atmosphere characterization). The scale and capability described run ahead of currently funded programs.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "space",
+        "science",
+        "ambition"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [
+          "back_science"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {
+          "ideology": ">=-20"
+        }
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_the_array",
+          "text": "Fund the full deep-space telescope array, no expense spared",
+          "effects": {
+            "money": -22000000000,
+            "reputation": 14,
+            "power": 3,
+            "health": 1
+          },
+          "personality": {
+            "ideology": -10,
+            "outward": -8,
+            "grandiosity": -5
+          },
+          "setFlags": [
+            "deep_space_telescopes",
+            "back_science"
+          ],
+          "ripples": [
+            {
+              "to": "ev_seti_signal",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "ev_first_contact_seed",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Mirrors the size of stadiums unfold in the dark. For the first time, humanity has eyes big enough to be surprised."
+        },
+        {
+          "id": "modest_observatory",
+          "text": "Fund a single flagship telescope and call it prudent",
+          "effects": {
+            "money": -6000000000,
+            "reputation": 7,
+            "power": 2
+          },
+          "personality": {
+            "ideology": -4,
+            "grandiosity": -2
+          },
+          "setFlags": [
+            "deep_space_telescopes"
+          ],
+          "outcome": "One great eye opens instead of a hundred. It is enough to see something out there worth a longer look."
+        },
+        {
+          "id": "defer_to_earth",
+          "text": "Defer the program and spend the money on Earth's poorest",
+          "effects": {
+            "money": -10000000000,
+            "reputation": 11,
+            "power": 1,
+            "heat": -3
+          },
+          "personality": {
+            "ideology": -8,
+            "outward": -7
+          },
+          "setFlags": [
+            "public_works"
+          ],
+          "outcome": "The stars can wait, you decide; the hungry cannot. The astronomers grumble, then quietly agree."
+        }
+      ]
+    },
+    {
+      "id": "ev_seti_signal",
+      "era": "victory",
+      "year": 2036,
+      "title": "The Question Worth Funding",
+      "scene": "A coalition of scientists asks for something almost no leader has ever fully backed: a serious, sustained search for intelligent life among the stars. Listening arrays, transmission protocols, a standing committee for what to do if anyone answers. They cannot promise a signal. They can only promise that you will have looked.",
+      "researchNote": "Speculative extrapolation from real, historically underfunded SETI efforts and recent technosignature initiatives. A government making the search a national priority, as imagined here, would be unprecedented.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "space",
+        "science",
+        "first-contact"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [
+          "back_science"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {
+          "ideology": ">=-20"
+        }
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fund_the_search",
+          "text": "Make the search for alien intelligence a permanent national mission",
+          "effects": {
+            "money": -9000000000,
+            "reputation": 12,
+            "power": 2,
+            "health": 2
+          },
+          "personality": {
+            "ideology": -9,
+            "outward": -8,
+            "grandiosity": -6
+          },
+          "setFlags": [
+            "seti_funded",
+            "back_science"
+          ],
+          "ripples": [
+            {
+              "to": "ev_first_contact_seed",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You commit a nation to listening. Critics call it a moonshot for moonbeams; you call it the most serious question there is."
+        },
+        {
+          "id": "quiet_pilot_program",
+          "text": "Greenlight a small, quiet pilot and see what comes back",
+          "effects": {
+            "money": -1500000000,
+            "reputation": 5,
+            "power": 1
+          },
+          "personality": {
+            "ideology": -3,
+            "outward": -2
+          },
+          "setFlags": [
+            "seti_funded"
+          ],
+          "outcome": "A handful of dishes turn skyward on a shoestring. It is not much, but the universe, you note, only has to answer once."
+        },
+        {
+          "id": "mock_the_idea",
+          "text": "Laugh it off as money better spent on Earthly glory",
+          "effects": {
+            "reputation": -4,
+            "power": 2,
+            "money": 1000000000
+          },
+          "personality": {
+            "grandiosity": 5,
+            "ideology": 4
+          },
+          "outcome": "You kill the dish before it listens. Somewhere, a frequency hums on, unheard, with no one assigned to care."
+        }
+      ]
+    },
+    {
+      "id": "ev_first_contact_seed",
+      "era": "victory",
+      "year": 2039,
+      "title": "Something Answers",
+      "scene": "Deep in the data from your arrays, a pattern emerges that is not noise: structured, repeating, unmistakably made. The scientists are shaking. The signal is faint and far, decades old at least, but it is real. The most important decision of human history is sitting on your desk, and for once the whole species, not just your base, is waiting on your word.",
+      "researchNote": "Speculative extrapolation imagining a positive technosignature detection from sustained deep-space observation and SETI investment. No such confirmed signal exists; this dramatizes the protocols and stakes that real detection frameworks contemplate.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "space",
+        "first-contact",
+        "science"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [
+          "seti_funded",
+          "deep_space_telescopes"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "answer_in_peace",
+          "text": "Convene the world and broadcast a message of peace on humanity's behalf",
+          "effects": {
+            "reputation": 15,
+            "power": 4,
+            "health": 3,
+            "heat": -8
+          },
+          "personality": {
+            "ideology": -12,
+            "outward": -10,
+            "grandiosity": -8
+          },
+          "setFlags": [
+            "benevolent_contact",
+            "back_science"
+          ],
+          "outcome": "You speak for Earth, and you choose the better words. Whatever is out there, it will hear a species at its best."
+        },
+        {
+          "id": "weaponize_the_news",
+          "text": "Classify the signal and use the secret as leverage over rivals",
+          "effects": {
+            "power": 13,
+            "reputation": -10,
+            "heat": 9,
+            "loyalty": 5
+          },
+          "personality": {
+            "grandiosity": 12,
+            "outward": 9,
+            "ideology": 7
+          },
+          "setFlags": [
+            "contact_concealed"
+          ],
+          "outcome": "You bury the most important fact in history in a vault. Knowledge is power, and this knowledge could move the world; so you hide it."
+        },
+        {
+          "id": "study_in_silence",
+          "text": "Tell no one yet and quietly fund decades of careful study",
+          "effects": {
+            "reputation": 4,
+            "power": 3,
+            "money": -4000000000
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "contact_studied"
+          ],
+          "outcome": "You choose patience over spectacle. The signal keeps its secrets a while longer, and so, for now, do you."
         }
       ]
     },
@@ -228,60 +1200,776 @@
       "year": 2035,
       "title": "The Forever Project",
       "scene": "A team of biotech founders pitches you on something better than a third term: a fourth, fifth, and sixth decade in power. Senolytics, gene therapy, blood from the young and grateful. They promise you will outlast not just your rivals but your own obituary.",
-      "researchNote": "Speculative extrapolation from real, heavily funded longevity and anti-aging research (senolytics, reprogramming, parabiosis experiments). The promise of meaningful life extension on this timeline is far from established and is dramatized here.",
+      "researchNote": "Speculative extrapolation from real, heavily funded longevity and anti-aging research (senolytics, cellular reprogramming, parabiosis experiments). The promise of meaningful life extension on this timeline is far from established and is dramatized here.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["health", "science", "ambition"],
+      "tags": [
+        "health",
+        "science",
+        "ambition"
+      ],
       "portrait": "emperor",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "fund_the_forever_project",
-          "text": "Pour a fortune into radical life-extension research",
-          "effects": { "money": -25000000000, "health": 9, "power": 6, "heat": 5, "reputation": -3 },
-          "setFlags": ["life_extension_research"],
-          "ripples": [ { "to": "ev_emperor_in_all_but_name", "weight": 0.4, "polarity": 1 } ],
+          "text": "Pour a fortune into radical life-extension research for yourself",
+          "effects": {
+            "money": -25000000000,
+            "health": 9,
+            "power": 6,
+            "heat": 5,
+            "reputation": -3
+          },
+          "personality": {
+            "grandiosity": 11,
+            "ideology": 4
+          },
+          "setFlags": [
+            "life_extension_research"
+          ],
+          "ripples": [
+            {
+              "to": "ev_emperor_in_all_but_name",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "The labs go to work and your doctors get nervous. If power corrupts, you intend to be corrupt for a very long time."
+        },
+        {
+          "id": "longevity_for_all",
+          "text": "Fund the research but pledge the cures will be free for everyone",
+          "effects": {
+            "money": -30000000000,
+            "health": 7,
+            "reputation": 14,
+            "power": 2
+          },
+          "personality": {
+            "ideology": -11,
+            "outward": -8,
+            "grandiosity": -6
+          },
+          "setFlags": [
+            "life_extension_research",
+            "back_science"
+          ],
+          "ripples": [
+            {
+              "to": "ev_redistribution_dividend",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You chase immortality and refuse to hoard it. A longer life, you decide, should not be a luxury good."
         },
         {
           "id": "settle_for_good_doctors",
           "text": "Settle for the best conventional care money can buy",
-          "effects": { "money": -2000000000, "health": 6, "reputation": 1 },
+          "effects": {
+            "money": -2000000000,
+            "health": 6,
+            "reputation": 1
+          },
+          "personality": {
+            "grandiosity": 2
+          },
           "outcome": "No miracle science, just an army of specialists. Mortal, perhaps, but extremely well-maintained."
         }
       ]
     },
     {
-      "id": "ev_emperor_in_all_but_name",
+      "id": "ev_economic_megaboom",
       "era": "victory",
-      "year": 2037,
-      "title": "Crowned in All But Name",
-      "scene": "The portrait painters have started adding laurel. A constitutional 'reform' redefines the presidency as a lifetime stewardship 'in times of permanent emergency.' You stop correcting aides who slip and call you something grander than Mister President.",
-      "researchNote": "Speculative extrapolation from real historical patterns where leaders used emergency powers and constitutional rewrites to entrench themselves indefinitely (a recurring pattern in democratic backsliding). The U.S. application here is imagined satire.",
+      "year": 2033,
+      "title": "The Golden Engine",
+      "scene": "A wave of automation and cheap energy has the economy roaring louder than any in living memory. Output is up, the markets are euphoric, and a tidal wave of new wealth is sloshing through the system. The only question, your advisors say carefully, is who gets to keep it.",
+      "researchNote": "Speculative extrapolation from real debates over AI-driven productivity gains and their distribution, plus historical patterns of booms concentrating wealth at the top. The magnitude and timing of the boom are dramatized.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["power", "politics", "ambition"],
-      "portrait": "emperor",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "tags": [
+        "money",
+        "economy",
+        "power"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
-          "id": "accept_the_crown",
-          "text": "Accept the 'permanent stewardship' and drop the pretense",
-          "effects": { "power": 15, "loyalty": 9, "reputation": -14, "heat": 12 },
-          "setFlags": ["imperial_rule"],
-          "ripples": [ { "to": "ev_brinkmanship", "weight": 0.5, "polarity": 1 } ],
-          "outcome": "The republic exhales its last constitutional breath. You are emperor in everything but the spelling, and the spelling can wait."
+          "id": "funnel_to_the_top",
+          "text": "Funnel the windfall to your allies and the donor class",
+          "effects": {
+            "money": 45000000000,
+            "power": 9,
+            "loyalty": 8,
+            "reputation": -10,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 9,
+            "ideology": 8
+          },
+          "setFlags": [
+            "gilded_age"
+          ],
+          "outcome": "The yachts get longer and the loyalty deepens. A rising tide, it turns out, lifts mostly the boats you own."
         },
         {
-          "id": "keep_the_costume",
-          "text": "Keep the republican costume while wielding total power",
-          "effects": { "power": 11, "reputation": -4, "loyalty": 5, "heat": 6 },
-          "setFlags": ["soft_autocrat"],
-          "outcome": "You keep the elections, the flags, the speeches, and none of the limits. The form survives; the substance is yours alone."
+          "id": "redistribution_dividend",
+          "text": "Pass a universal dividend that shares the boom with every citizen",
+          "effects": {
+            "money": -20000000000,
+            "reputation": 16,
+            "power": 4,
+            "heat": -5
+          },
+          "personality": {
+            "ideology": -12,
+            "outward": -9,
+            "grandiosity": -8
+          },
+          "setFlags": [
+            "redistribution"
+          ],
+          "ripples": [
+            {
+              "to": "ev_redistribution_dividend",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Every household gets a check and a stake. The donors are furious; the streets, for once, are grateful."
+        },
+        {
+          "id": "bank_the_surplus",
+          "text": "Bank the surplus in a sovereign wealth fund for hard times",
+          "effects": {
+            "money": 25000000000,
+            "reputation": 6,
+            "power": 4
+          },
+          "personality": {
+            "grandiosity": 2
+          },
+          "setFlags": [
+            "sovereign_fund"
+          ],
+          "outcome": "You stash the boom away for the bust everyone pretends won't come. Prudent, dull, and quietly wise."
+        }
+      ]
+    },
+    {
+      "id": "ev_redistribution_dividend",
+      "era": "victory",
+      "year": 2037,
+      "title": "The Commonwealth Turn",
+      "scene": "Years of sharing the wealth have changed the country's mood and your own. Movements you once mocked now cite you as an ally; economists speak of a 'post-scarcity pivot.' A coalition arrives with a radical proposal: dissolve the old hierarchies entirely and build something genuinely common.",
+      "researchNote": "Speculative extrapolation from real proposals for universal basic income, public ownership of automation dividends, and post-scarcity economic theory. The full societal transformation depicted is utopian speculation, not a forecast.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "money",
+        "economy",
+        "utopia"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [
+          "redistribution"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {
+          "ideology": ">=-25"
+        }
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_the_commonwealth",
+          "text": "Lead the transition to a moneyless, post-scarcity commonwealth",
+          "effects": {
+            "reputation": 15,
+            "power": -6,
+            "money": -15000000000,
+            "heat": -7,
+            "health": 3
+          },
+          "personality": {
+            "ideology": -13,
+            "outward": -10,
+            "grandiosity": -10
+          },
+          "setFlags": [
+            "commonwealth",
+            "back_science"
+          ],
+          "outcome": "You preside over the end of want and the beginning of something with no name yet. The history books will need a new chapter."
+        },
+        {
+          "id": "managed_social_democracy",
+          "text": "Stop short of utopia and lock in a strong welfare state",
+          "effects": {
+            "reputation": 11,
+            "power": 2,
+            "money": -6000000000,
+            "heat": -3
+          },
+          "personality": {
+            "ideology": -7,
+            "outward": -5
+          },
+          "setFlags": [
+            "social_democracy"
+          ],
+          "outcome": "Not paradise, but a floor no one falls through. You trade the grand dream for a sturdy, humane compromise."
+        },
+        {
+          "id": "pull_back_to_center",
+          "text": "Decide it has gone far enough and consolidate your own position",
+          "effects": {
+            "power": 8,
+            "reputation": -4,
+            "money": 5000000000,
+            "loyalty": 4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "ideology": 6
+          },
+          "outcome": "You slam the brakes before the experiment runs away. The radicals call it betrayal; you call it staying in charge."
+        }
+      ]
+    },
+    {
+      "id": "ev_ai_labor_disruption",
+      "era": "victory",
+      "year": 2030,
+      "title": "The Jobless Recovery",
+      "scene": "In eighteen months, automation has erased a third of the country's white-collar work. The unemployment lines are full of lawyers and accountants who never thought it could be them. The markets are up; the mood is feral. Something has to give, and everyone is looking at you.",
+      "researchNote": "Speculative extrapolation from real and ongoing concerns about AI and automation displacing knowledge work, accelerated here to a single dramatic shock. The pace and scale are dramatized beyond current evidence.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "economy",
+        "ai"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "crush_the_unrest",
+          "text": "Brand the displaced as agitators and send in the forces",
+          "effects": {
+            "power": 10,
+            "heat": 12,
+            "reputation": -13,
+            "loyalty": 5
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 9,
+            "outward": 5
+          },
+          "setFlags": [
+            "unrest_crushed"
+          ],
+          "outcome": "Order returns at the point of a baton. The cameras find new things to show; the grievances find new places to hide."
+        },
+        {
+          "id": "retrain_and_support",
+          "text": "Launch a massive jobs guarantee and retraining program",
+          "effects": {
+            "money": -18000000000,
+            "reputation": 14,
+            "power": 4,
+            "heat": -5
+          },
+          "personality": {
+            "ideology": -10,
+            "outward": -7,
+            "grandiosity": -5
+          },
+          "setFlags": [
+            "jobs_guarantee"
+          ],
+          "ripples": [
+            {
+              "to": "ev_redistribution_dividend",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You meet the machine age with a human plan. It is expensive, slow, and the only thing that actually works."
+        },
+        {
+          "id": "let_market_sort_it",
+          "text": "Insist the market will sort it out and do nothing",
+          "effects": {
+            "money": 8000000000,
+            "reputation": -8,
+            "heat": 7,
+            "power": 2
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 3
+          },
+          "outcome": "You wait for an invisible hand that never reaches down. The market sorts it out, eventually, cruelly."
+        }
+      ]
+    },
+    {
+      "id": "ev_climate_reckoning",
+      "era": "victory",
+      "year": 2031,
+      "title": "The Summer of Fire",
+      "scene": "Three megafires, two failed harvests, and a hurricane that parks over a coastline for a week. The climate everyone argued about has stopped arguing back. Refugees move inland by the millions, and your golden megacity's air conditioning bill could fund a small nation.",
+      "researchNote": "Speculative extrapolation from real, observed trends in extreme weather, crop stress, and climate-driven displacement, compressed into a single severe season. The specific events are dramatized.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "climate",
+        "crisis"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fortress_the_rich",
+          "text": "Build climate fortresses for the loyal and seal the borders",
+          "effects": {
+            "power": 9,
+            "money": -10000000000,
+            "reputation": -12,
+            "heat": 10,
+            "loyalty": 6
+          },
+          "personality": {
+            "grandiosity": 7,
+            "ideology": 9,
+            "outward": 6
+          },
+          "setFlags": [
+            "climate_fortress"
+          ],
+          "outcome": "The chosen ride out the heat behind tall walls and cold air. Outside, the world bakes, and the walls grow taller every year."
+        },
+        {
+          "id": "manhattan_project_green",
+          "text": "Launch a green Manhattan Project to decarbonize and adapt",
+          "effects": {
+            "money": -25000000000,
+            "reputation": 15,
+            "power": 5,
+            "health": 2
+          },
+          "personality": {
+            "ideology": -11,
+            "outward": -8,
+            "grandiosity": -5
+          },
+          "setFlags": [
+            "green_mobilization",
+            "back_science"
+          ],
+          "outcome": "You throw the full weight of a superpower at the sky. It is the war your generation was actually born to fight."
+        },
+        {
+          "id": "deny_and_drill",
+          "text": "Deny it is happening and double down on cheap fossil fuels",
+          "effects": {
+            "money": 15000000000,
+            "reputation": -10,
+            "heat": 8,
+            "power": 3
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 4
+          },
+          "outcome": "You declare the weather fake and the wells open. The thermometer, indifferent to your ratings, keeps climbing."
+        }
+      ]
+    },
+    {
+      "id": "ev_global_recession",
+      "era": "victory",
+      "year": 2034,
+      "title": "The Great Unwind",
+      "scene": "The golden boom finally cracks. A bubble bursts somewhere in the automation markets and the contagion spreads in hours. Banks wobble, pensions evaporate, and the word 'depression' creeps back into polite conversation. The fund you may or may not have built is suddenly the most important number on Earth.",
+      "researchNote": "Speculative extrapolation from real boom-bust financial cycles and systemic risk in highly leveraged, automated markets. The specific crash trigger is fictional.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "economy",
+        "crisis"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "bail_out_cronies",
+          "text": "Bail out your allies and let ordinary savers drown",
+          "effects": {
+            "money": -12000000000,
+            "power": 7,
+            "loyalty": 9,
+            "reputation": -14,
+            "heat": 9
+          },
+          "personality": {
+            "grandiosity": 7,
+            "ideology": 8
+          },
+          "setFlags": [
+            "crony_bailout"
+          ],
+          "outcome": "The right people are made whole and the rest are made examples. Capitalism for the poor, socialism for your friends."
+        },
+        {
+          "id": "rescue_the_people",
+          "text": "Backstop households and small businesses first",
+          "effects": {
+            "money": -20000000000,
+            "reputation": 13,
+            "power": 4,
+            "heat": -4
+          },
+          "personality": {
+            "ideology": -10,
+            "outward": -6,
+            "grandiosity": -5
+          },
+          "setFlags": [
+            "main_street_rescue"
+          ],
+          "outcome": "You catch the families before the bankers. It costs more, polls worse with donors, and is unmistakably the right call."
+        },
+        {
+          "id": "ride_it_out",
+          "text": "Let the market purge itself with no intervention",
+          "effects": {
+            "money": 5000000000,
+            "reputation": -9,
+            "heat": 8,
+            "power": 2,
+            "health": -3
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 2
+          },
+          "outcome": "You stand back and call the wreckage a cleansing. The cleansing takes a decade and a generation of savings with it."
+        }
+      ]
+    },
+    {
+      "id": "ev_pandemic_sequel",
+      "era": "victory",
+      "year": 2036,
+      "title": "The Next One",
+      "scene": "A novel pathogen jumps continents before the first headline lands. Hospitals fill, supply chains snap, and the country looks to you with the muscle memory of a trauma it swore it had learned from. The labs that survived your budgets are sequencing it now. Your move could save millions or repeat history.",
+      "researchNote": "Speculative extrapolation from real pandemic-preparedness concerns and the documented difficulty of coordinated public-health response. The specific outbreak is fictional.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "pandemic",
+        "crisis"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "control_the_narrative",
+          "text": "Downplay it, control the data, and protect the markets",
+          "effects": {
+            "power": 6,
+            "money": 6000000000,
+            "reputation": -13,
+            "heat": 11,
+            "health": -5
+          },
+          "personality": {
+            "grandiosity": 6,
+            "ideology": 8
+          },
+          "setFlags": [
+            "pandemic_denied"
+          ],
+          "outcome": "You manage the message instead of the microbe. The graphs you hide keep climbing where no one can edit them."
+        },
+        {
+          "id": "science_first_response",
+          "text": "Trust the scientists, fund the vaccines, and share them globally",
+          "effects": {
+            "money": -16000000000,
+            "reputation": 15,
+            "power": 4,
+            "health": 6
+          },
+          "personality": {
+            "ideology": -11,
+            "outward": -9,
+            "grandiosity": -6
+          },
+          "setFlags": [
+            "pandemic_beaten",
+            "back_science"
+          ],
+          "outcome": "You lead with the lab and the truth. The curve bends, the world borrows your playbook, and millions simply live."
+        },
+        {
+          "id": "fortress_response",
+          "text": "Seal the borders, hoard the cure, and ride it out alone",
+          "effects": {
+            "power": 8,
+            "reputation": -6,
+            "heat": 7,
+            "health": 2
+          },
+          "personality": {
+            "grandiosity": 5,
+            "ideology": 7,
+            "outward": 4
+          },
+          "setFlags": [
+            "medical_nationalism"
+          ],
+          "outcome": "You wall off the nation and the cure. It works at home and breeds resentment abroad, where the variants are already mutating."
+        }
+      ]
+    },
+    {
+      "id": "ev_resource_war",
+      "era": "victory",
+      "year": 2037,
+      "title": "The Last Aquifer",
+      "scene": "A drought belt now spans three continents, and the wars are no longer about oil but about water, lithium, and arable dirt. A rival masses troops near a basin your industries cannot live without. The generals want a preemptive strike; the diplomats want a deal; the planet wants a drink.",
+      "researchNote": "Speculative extrapolation from real and projected conflicts over water, critical minerals, and arable land under climate stress. The specific standoff is fictional.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "geopolitics",
+        "resources"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "seize_the_basin",
+          "text": "Strike first and seize the basin by force",
+          "effects": {
+            "power": 12,
+            "reputation": -12,
+            "heat": 14,
+            "money": 8000000000,
+            "health": -4
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 10,
+            "ideology": 6
+          },
+          "setFlags": [
+            "resource_conquest"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brinkmanship",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You take the water and the world's water with it. The basin is yours; so, now, is the war that comes after."
+        },
+        {
+          "id": "share_the_resource",
+          "text": "Broker an international stewardship treaty for the basin",
+          "effects": {
+            "reputation": 14,
+            "power": 3,
+            "heat": -8,
+            "money": -5000000000
+          },
+          "personality": {
+            "ideology": -11,
+            "outward": -10,
+            "grandiosity": -8
+          },
+          "setFlags": [
+            "resource_treaty",
+            "back_science"
+          ],
+          "outcome": "You turn a casus belli into a commons. Engineers, not soldiers, get the assignment, and everyone drinks."
+        },
+        {
+          "id": "innovate_around_it",
+          "text": "Pour money into desalination and synthetic alternatives instead",
+          "effects": {
+            "money": -14000000000,
+            "reputation": 9,
+            "power": 4,
+            "health": 2
+          },
+          "personality": {
+            "ideology": -6,
+            "outward": -4
+          },
+          "setFlags": [
+            "back_science"
+          ],
+          "outcome": "You decide the way out of scarcity is through it. The labs go to work; the troops, for now, go home."
+        }
+      ]
+    },
+    {
+      "id": "ev_succession_crisis",
+      "era": "victory",
+      "year": 2038,
+      "title": "The Knives Come Out",
+      "scene": "With a dynasty declared, the family that smiled for the cameras is now circling each other with real menace. One heir controls the media, another the security services, a third the money. A leaked memo suggests one of them is tired of waiting for nature to take its course.",
+      "researchNote": "Speculative extrapolation from real historical patterns of succession struggles within dynastic and authoritarian regimes, where the absence of clear rules invites internal conflict. The specific intrigue is dramatized.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "power",
+        "intrigue"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "dynasty_declared"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {
+          "grandiosity": ">=25"
+        }
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "purge_the_pretenders",
+          "text": "Eliminate the rivals and crown the most ruthless heir",
+          "effects": {
+            "power": 11,
+            "loyalty": 6,
+            "reputation": -10,
+            "heat": 9,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 11,
+            "ideology": 7,
+            "outward": 5
+          },
+          "setFlags": [
+            "bloody_succession"
+          ],
+          "ripples": [
+            {
+              "to": "ev_emperor_in_all_but_name",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The throne is secured in the oldest way there is. The dynasty endures, lighter by a few inconvenient relatives."
+        },
+        {
+          "id": "institutionalize_succession",
+          "text": "Write real rules so the country isn't hostage to your family",
+          "effects": {
+            "reputation": 12,
+            "power": -5,
+            "loyalty": -4,
+            "heat": -3
+          },
+          "personality": {
+            "grandiosity": -10,
+            "ideology": -8
+          },
+          "setFlags": [
+            "succession_lawful"
+          ],
+          "outcome": "You bind even your own blood to a process. It is the most kingly thing you have ever done: limiting the king."
+        },
+        {
+          "id": "abdicate_to_a_council",
+          "text": "Step down and hand power to an elected council instead",
+          "effects": {
+            "reputation": 16,
+            "power": -12,
+            "loyalty": -8,
+            "heat": -6
+          },
+          "personality": {
+            "grandiosity": -13,
+            "ideology": -10,
+            "outward": -8
+          },
+          "setFlags": [
+            "voluntary_abdication"
+          ],
+          "outcome": "You walk away from the throne while you still can. The family is stunned; the republic, improbably, gets a second life."
         }
       ]
     },
@@ -294,26 +1982,434 @@
       "researchNote": "Speculative extrapolation from real nuclear-deterrence brinkmanship and historical near-misses (such as the Cuban Missile Crisis). The depicted standoff is fictional and dramatized; choosing escalation seeds a catastrophic chain into a later era.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["geopolitics", "danger", "power"],
+      "tags": [
+        "geopolitics",
+        "danger",
+        "power"
+      ],
       "portrait": "emperor",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "raise_the_stakes",
           "text": "Go to the brink and dare them to flinch first",
-          "effects": { "power": 13, "reputation": -15, "heat": 15, "loyalty": 4, "health": -4 },
-          "setFlags": ["nuclear_brinkmanship"],
-          "ripples": [ { "to": "ev_the_exchange", "weight": 0.8, "polarity": 1 } ],
+          "effects": {
+            "power": 13,
+            "reputation": -15,
+            "heat": 15,
+            "loyalty": 4,
+            "health": -4
+          },
+          "personality": {
+            "grandiosity": 13,
+            "outward": 11,
+            "ideology": 7
+          },
+          "setFlags": [
+            "nuclear_brinkmanship"
+          ],
+          "ripples": [
+            {
+              "to": "ev_the_exchange",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
           "outcome": "You raise the alert level and the temperature with it. The whole planet holds its breath, and a darker era leans in to listen."
         },
         {
           "id": "de_escalate_for_now",
           "text": "Pull back at the last second and pocket the bluff",
-          "effects": { "power": 6, "reputation": 6, "heat": -5, "loyalty": -2 },
-          "setFlags": ["stared_down_war"],
+          "effects": {
+            "power": 6,
+            "reputation": 6,
+            "heat": -5,
+            "loyalty": -2
+          },
+          "personality": {
+            "grandiosity": -4,
+            "outward": -3
+          },
+          "setFlags": [
+            "stared_down_war"
+          ],
           "outcome": "You blink first and call it strength, loudly. The fleets withdraw; the apocalypse files itself back in the drawer, for now."
+        },
+        {
+          "id": "propose_disarmament",
+          "text": "Stun the world by proposing mutual nuclear disarmament",
+          "effects": {
+            "reputation": 16,
+            "power": 2,
+            "heat": -10,
+            "loyalty": -5
+          },
+          "personality": {
+            "ideology": -13,
+            "outward": -11,
+            "grandiosity": -9
+          },
+          "setFlags": [
+            "disarmament_offer",
+            "back_science"
+          ],
+          "outcome": "From the edge of war you reach instead for the unthinkable: peace. The hawks call it weakness; history may call it sanity."
+        }
+      ]
+    },
+    {
+      "id": "ev_surveillance_state",
+      "era": "victory",
+      "year": 2032,
+      "title": "Every Window a Mirror",
+      "scene": "The cameras are everywhere now, and they recognize faces, gaits, even moods. A unified national system can find anyone in the country in under a minute, your security chief boasts, and predict where they'll be tomorrow. He calls it safety. The dictionary calls it something older.",
+      "researchNote": "Speculative extrapolation from real expansions of facial recognition, biometric tracking, and predictive policing technologies. The fully integrated national surveillance grid depicted exceeds current deployed systems.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "power",
+        "surveillance",
+        "tech"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_the_panopticon",
+          "text": "Build the total surveillance grid and watch everyone",
+          "effects": {
+            "power": 13,
+            "heat": 11,
+            "reputation": -12,
+            "loyalty": 5
+          },
+          "personality": {
+            "grandiosity": 9,
+            "ideology": 10
+          },
+          "setFlags": [
+            "panopticon",
+            "consolidated_power"
+          ],
+          "outcome": "Privacy becomes a quaint memory and you become the eye that never closes. Crime falls; so does anything resembling freedom."
+        },
+        {
+          "id": "ban_the_grid",
+          "text": "Ban mass biometric surveillance and enshrine a right to privacy",
+          "effects": {
+            "reputation": 13,
+            "power": -6,
+            "heat": -4
+          },
+          "personality": {
+            "ideology": -11,
+            "outward": -6,
+            "grandiosity": -7
+          },
+          "setFlags": [
+            "privacy_protected"
+          ],
+          "outcome": "You smash the cameras before they smash the country. The security chief sulks; the citizens breathe in the dark, unwatched."
+        },
+        {
+          "id": "targeted_use_only",
+          "text": "Allow it only with warrants and strict oversight",
+          "effects": {
+            "power": 5,
+            "reputation": 6,
+            "heat": -2
+          },
+          "personality": {
+            "grandiosity": -2
+          },
+          "setFlags": [
+            "surveillance_limited"
+          ],
+          "outcome": "You keep the tool and chain it to a judge. A compromise that satisfies no one and protects almost everyone."
+        }
+      ]
+    },
+    {
+      "id": "ev_press_clampdown",
+      "era": "victory",
+      "year": 2033,
+      "title": "The Last Hard Question",
+      "scene": "A lone outlet still runs investigations you don't like, the last newsroom that hasn't either folded or fallen in line. Its latest story is unflattering and, infuriatingly, accurate. Your lawyers have three ways to make it disappear, and your better angels have one reason not to.",
+      "researchNote": "Speculative extrapolation from real global trends of press consolidation, libel-law pressure, and harassment of independent journalists. The depicted near-total capture of the press is dramatized.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "power",
+        "media",
+        "freedom"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "silence_the_press",
+          "text": "Sue it into oblivion and seize its servers",
+          "effects": {
+            "power": 9,
+            "heat": 10,
+            "reputation": -13,
+            "loyalty": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 10
+          },
+          "setFlags": [
+            "press_silenced",
+            "consolidated_power"
+          ],
+          "outcome": "The last hard question goes quiet. The silence is total, and somehow louder than any headline ever was."
+        },
+        {
+          "id": "let_them_print",
+          "text": "Let them publish and answer the story on the merits",
+          "effects": {
+            "reputation": 12,
+            "power": -3,
+            "heat": -3
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": -7,
+            "outward": -4
+          },
+          "setFlags": [
+            "free_press_kept"
+          ],
+          "outcome": "You take the hit and leave the press standing. A leader who can be questioned, it turns out, is a rarer thing than a crown."
+        },
+        {
+          "id": "co_opt_the_outlet",
+          "text": "Quietly buy it and bend it from the inside",
+          "effects": {
+            "money": -3000000000,
+            "power": 7,
+            "reputation": -5,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 5,
+            "ideology": 5
+          },
+          "setFlags": [
+            "media_dominion"
+          ],
+          "outcome": "You don't kill the watchdog; you adopt it. Within a month it is wagging its tail at every press conference."
+        }
+      ]
+    },
+    {
+      "id": "ev_constitutional_rewrite",
+      "era": "victory",
+      "year": 2036,
+      "title": "A New Founding",
+      "scene": "A loyal supermajority offers to rewrite the founding document itself. They've drafted articles that would bend the whole apparatus toward a single will, or, in a stranger draft on the same desk, toward the broadest sharing of power the nation has ever tried. The pen is in your hand. The ink is permanent.",
+      "researchNote": "Speculative extrapolation from real historical cases of constitutional replacement used both to entrench autocrats and, more rarely, to expand democratic participation. The specific U.S. rewrite is imagined.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "power",
+        "politics",
+        "fork"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "rewrite_for_one",
+          "text": "Rewrite it to enshrine permanent personal rule",
+          "effects": {
+            "power": 15,
+            "reputation": -14,
+            "heat": 13,
+            "loyalty": 8
+          },
+          "personality": {
+            "grandiosity": 14,
+            "ideology": 11,
+            "outward": 6
+          },
+          "setFlags": [
+            "new_constitution_autocratic",
+            "consolidated_power"
+          ],
+          "ripples": [
+            {
+              "to": "ev_emperor_in_all_but_name",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The republic's bones are rebuilt around your spine. Every clause now points, sooner or later, at you."
+        },
+        {
+          "id": "rewrite_for_all",
+          "text": "Rewrite it to radically expand democracy and rights",
+          "effects": {
+            "reputation": 16,
+            "power": -8,
+            "heat": -6,
+            "health": 3
+          },
+          "personality": {
+            "ideology": -14,
+            "outward": -10,
+            "grandiosity": -11
+          },
+          "setFlags": [
+            "new_constitution_democratic",
+            "back_science"
+          ],
+          "ripples": [
+            {
+              "to": "ev_redistribution_dividend",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You spend your power buying everyone else more of it. The most absolute act of your life is giving the absolutism away."
+        },
+        {
+          "id": "leave_it_alone",
+          "text": "Refuse to touch it and let the old document stand",
+          "effects": {
+            "reputation": 9,
+            "power": 1,
+            "heat": -2
+          },
+          "personality": {
+            "grandiosity": -5,
+            "ideology": -3
+          },
+          "setFlags": [
+            "constitution_preserved"
+          ],
+          "outcome": "You leave the founding alone, flaws and all. Sometimes the most radical move is to change nothing."
+        }
+      ]
+    },
+    {
+      "id": "ev_emperor_in_all_but_name",
+      "era": "victory",
+      "year": 2037,
+      "title": "Crowned in All But Name",
+      "scene": "The portrait painters have started adding laurel. A constitutional 'reform' redefines the presidency as a lifetime stewardship 'in times of permanent emergency.' You stop correcting aides who slip and call you something grander than Mister President.",
+      "researchNote": "Speculative extrapolation from real historical patterns where leaders used emergency powers and constitutional rewrites to entrench themselves indefinitely (a recurring pattern in democratic backsliding). The U.S. application here is imagined satire.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "power",
+        "politics",
+        "ambition"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {
+          "grandiosity": ">=30"
+        }
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "accept_the_crown",
+          "text": "Accept the 'permanent stewardship' and drop the pretense",
+          "effects": {
+            "power": 15,
+            "loyalty": 9,
+            "reputation": -14,
+            "heat": 12
+          },
+          "personality": {
+            "grandiosity": 14,
+            "ideology": 10,
+            "outward": 8
+          },
+          "setFlags": [
+            "imperial_rule",
+            "consolidated_power"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brinkmanship",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The republic exhales its last constitutional breath. You are emperor in everything but the spelling, and the spelling can wait."
+        },
+        {
+          "id": "keep_the_costume",
+          "text": "Keep the republican costume while wielding total power",
+          "effects": {
+            "power": 11,
+            "reputation": -4,
+            "loyalty": 5,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 9,
+            "ideology": 7
+          },
+          "setFlags": [
+            "soft_autocrat"
+          ],
+          "outcome": "You keep the elections, the flags, the speeches, and none of the limits. The form survives; the substance is yours alone."
+        },
+        {
+          "id": "decline_the_laurel",
+          "text": "Refuse the crown and restore the term limit you erased",
+          "effects": {
+            "reputation": 17,
+            "power": -10,
+            "loyalty": -6,
+            "heat": -7
+          },
+          "personality": {
+            "grandiosity": -14,
+            "ideology": -11,
+            "outward": -8
+          },
+          "setFlags": [
+            "crown_refused"
+          ],
+          "outcome": "At the very door of empire, you turn around. The laurel goes back in its box; the republic, gasping, lives."
         }
       ]
     }

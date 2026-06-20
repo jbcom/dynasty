@@ -66,7 +66,7 @@ describe("LegacyReport", () => {
     };
     component = mount(LegacyReport, {
       target: host,
-      props: { state, end: state.end, onRestart: () => {} },
+      props: { content, state, end: state.end, onRestart: () => {} },
     });
     expect(host.textContent).toContain("Total Victory");
     expect(host.textContent).toContain("Immortal patriarch.");
@@ -83,7 +83,7 @@ describe("LegacyReport", () => {
     const state = { ...s, end: { kind: "death" as const, year: 1990, reason: "x" } };
     component = mount(LegacyReport, {
       target: host,
-      props: { state, end: state.end, onRestart: () => {} },
+      props: { content, state, end: state.end, onRestart: () => {} },
     });
     // The butterfly graph renders nodes for the recorded ledger.
     expect(host.querySelectorAll("circle").length).toBeGreaterThan(0);

@@ -99,7 +99,14 @@ describe("firedRules + buildLedgerEntries (visible chains)", () => {
     const event = c.allEvents.find((e) => e.id === "ev_military_school") as GameEvent;
     const choice = event.choices[0] as Choice;
     const existing = [
-      { seq: 0, sourceChoice: "x", sourceEvent: "x", year: 1950, ruleId: "br_discipline", text: "already" },
+      {
+        seq: 0,
+        sourceChoice: "x",
+        sourceEvent: "x",
+        year: 1950,
+        ruleId: "br_discipline",
+        text: "already",
+      },
     ];
     expect(buildLedgerEntries(c, event, choice, {}, existing)).toHaveLength(0);
   });

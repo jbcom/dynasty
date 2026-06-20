@@ -10,24 +10,223 @@
       "researchNote": "Donald John Trump was born June 14, 1946, in Queens, New York, the fourth of five children of real-estate developer Fred Trump and Mary Anne MacLeod Trump.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["family", "origin"],
+      "tags": [
+        "family",
+        "origin"
+      ],
       "portrait": "infant",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
-      "weight": 20,
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "cry_loudest",
           "text": "Cry the loudest of any baby in the ward",
-          "effects": { "reputation": 5, "health": 3 },
-          "setFlags": ["loud_from_birth"],
+          "effects": {
+            "reputation": 5,
+            "health": 3
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 4
+          },
+          "setFlags": [
+            "loud_from_birth"
+          ],
           "outcome": "The nurses agree they have never heard a more confident wail. A legend, allegedly, is born."
         },
         {
           "id": "sleep_quietly",
-          "text": "Sleep quietly and observe",
-          "effects": { "health": 5, "power": 2 },
+          "text": "Sleep quietly and observe the room",
+          "effects": {
+            "health": 5,
+            "power": 2
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "watchful_child"
+          ],
           "outcome": "You rest, conserving energy. Fred notes approvingly that you do not waste effort on small audiences."
+        },
+        {
+          "id": "grip_freds_finger",
+          "text": "Clamp onto Fred's finger and refuse to let go",
+          "effects": {
+            "loyalty": 4,
+            "power": 3
+          },
+          "personality": {
+            "ideology": 3
+          },
+          "setFlags": [
+            "fred_favorite"
+          ],
+          "ripples": [
+            {
+              "to": "fred_patience",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Fred raises an eyebrow at the grip. 'Strong,' he says, the highest praise he knows how to give an infant."
+        }
+      ]
+    },
+    {
+      "id": "ev_mary_anne_pageantry",
+      "era": "boyhood",
+      "year": 1949,
+      "title": "Mother's Love of a Crown",
+      "scene": "You are three and your mother Mary Anne, an immigrant from a windswept Scottish isle, watches the royal newsreels with her hand over her heart. She loves spectacle, ceremony, the glitter of a procession. You climb into her lap and the screen fills with gold.",
+      "researchNote": "Mary Anne MacLeod Trump emigrated from the Isle of Lewis, Scotland, and was known for her love of pageantry, ceremony, and the spectacle of the British royal family.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "origin"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "love_the_spectacle",
+          "text": "Decide that gold and crowds are the most beautiful things on earth",
+          "effects": {
+            "reputation": 3
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 4
+          },
+          "setFlags": [
+            "loves_spectacle"
+          ],
+          "outcome": "Something lodges in you watching the gilt carriages: a taste for being looked at that will never leave."
+        },
+        {
+          "id": "ask_about_scotland",
+          "text": "Ask her about the cold island she left behind",
+          "effects": {
+            "loyalty": 4,
+            "health": 2
+          },
+          "personality": {
+            "inward": 5,
+            "ideology": -4,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "knows_humble_roots"
+          ],
+          "outcome": "She tells you of peat fires and poverty. You file away, quietly, that everything can be lost and rebuilt."
+        },
+        {
+          "id": "fidget_and_leave",
+          "text": "Squirm off her lap to go knock down your brother's blocks",
+          "effects": {
+            "health": 2,
+            "heat": 2
+          },
+          "personality": {
+            "ideology": 3
+          },
+          "outcome": "Ceremony bores you at three. Conquest, even of a block tower, does not."
+        }
+      ]
+    },
+    {
+      "id": "ev_postwar_housing_boom",
+      "era": "boyhood",
+      "year": 1950,
+      "title": "The FHA Builds an Empire",
+      "scene": "Fred is suddenly, enormously rich, and you are too young to know why. Soldiers came home, the government backed cheap mortgages, and outer-borough Brooklyn and Queens sprouted brick apartment blocks with Fred Trump's name on the rent rolls. Money, you gather from the dinner table, is something the right men learn to catch when it falls from the sky.",
+      "researchNote": "After WWII, the FHA and the GI Bill fueled a massive housing boom; Fred Trump built thousands of federally subsidized apartment units across Brooklyn and Queens, making the family fortune.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "money",
+        "family"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "study_the_money",
+          "text": "Start asking where exactly all the money comes from",
+          "effects": {
+            "money": 15,
+            "power": 4
+          },
+          "personality": {
+            "ideology": 4,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "follows_the_money"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You learn the secret early: the government's thumb is on the scale, and Fred knows exactly where to stand."
+        },
+        {
+          "id": "take_it_for_granted",
+          "text": "Assume this is just how the world works for Trumps",
+          "effects": {
+            "money": 5,
+            "reputation": 3
+          },
+          "personality": {
+            "grandiosity": 5,
+            "inward": -3
+          },
+          "setFlags": [
+            "entitled_streak"
+          ],
+          "outcome": "Wealth feels like weather to you: always there, never earned. The assumption will define a lifetime."
+        },
+        {
+          "id": "notice_the_tenants",
+          "text": "Notice the tired families paying the rent that pays for your house",
+          "effects": {
+            "loyalty": 3,
+            "reputation": -2
+          },
+          "personality": {
+            "ideology": -6,
+            "inward": 4
+          },
+          "setFlags": [
+            "sees_the_tenants"
+          ],
+          "outcome": "You watch a mother count coins at a kitchen table. The image bothers you in a way you can't yet name."
         }
       ]
     },
@@ -40,32 +239,110 @@
       "researchNote": "Fred Trump took his sons along on rent-collection and construction rounds, drilling into them a worldview of 'killers' versus 'losers' and the imperative to always win.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["family", "money", "ambition"],
+      "tags": [
+        "family",
+        "money",
+        "ambition"
+      ],
       "portrait": "infant",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
-      "weight": 15,
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "soak_up_lessons",
           "text": "Hang on every word and memorize the playbook",
-          "effects": { "power": 8, "money": 20, "loyalty": 5 },
-          "setFlags": ["fathers_lessons"],
-          "ripples": [ { "to": "manhattan_ambition", "weight": 0.6, "polarity": 1 } ],
+          "effects": {
+            "power": 8,
+            "money": 20,
+            "loyalty": 5
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "fathers_lessons"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "You absorb Fred's gospel of winning. Something clicks: a deal, you decide, is just a fight you get paid for. (Father's lessons learned.)"
         },
         {
           "id": "play_with_toys",
           "text": "Stare out the window and play with your toy bricks instead",
-          "effects": { "health": 3, "power": -2 },
-          "outcome": "Fred sighs. You build a little tower on the dashboard. It is, you note, a very good tower."
+          "effects": {
+            "health": 3,
+            "power": -2
+          },
+          "personality": {
+            "inward": 4,
+            "grandiosity": -2
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "outcome": "Fred sighs. You build a little tower on the dashboard, happy in a small world. Some boys, he mutters, just aren't killers."
         },
         {
           "id": "demand_a_cut",
           "text": "Demand a cut of today's collections",
-          "effects": { "money": 10, "reputation": 3, "loyalty": -3 },
-          "ripples": [ { "to": "manhattan_ambition", "weight": 0.3, "polarity": 1 } ],
+          "effects": {
+            "money": 10,
+            "reputation": 3,
+            "loyalty": -3
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 5,
+            "outward": 3
+          },
+          "setFlags": [
+            "dealmaker"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
           "outcome": "Fred laughs, hard, and slips you a dollar. 'A negotiator,' he mutters, half proud, half wary."
+        },
+        {
+          "id": "feel_for_tenants",
+          "text": "Whisper that maybe the late tenant just needs another week",
+          "effects": {
+            "loyalty": 4,
+            "money": -5,
+            "power": -3
+          },
+          "personality": {
+            "ideology": -7,
+            "inward": 5
+          },
+          "setFlags": [
+            "soft_heart",
+            "sees_the_tenants"
+          ],
+          "ripples": [
+            {
+              "to": "fred_patience",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Fred's jaw tightens. 'You give them a week, they take a year. Never be a sucker.' You stay silent, unconvinced."
         }
       ]
     },
@@ -78,24 +355,570 @@
       "researchNote": "The Trumps lived in a large mock-Tudor home Fred built on Midland Parkway in the affluent Jamaica Estates section of Queens, complete with a chauffeur-driven Cadillac.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["family", "money", "ambition"],
+      "tags": [
+        "family",
+        "money",
+        "ambition"
+      ],
       "portrait": "infant",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
-      "weight": 12,
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "show_off_house",
           "text": "Invite the whole block over to be impressed",
-          "effects": { "reputation": 6, "power": 4, "money": -10 },
-          "setFlags": ["likes_an_audience"],
+          "effects": {
+            "reputation": 6,
+            "power": 4,
+            "money": -10
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 5
+          },
+          "setFlags": [
+            "likes_an_audience"
+          ],
           "outcome": "The neighborhood kids are dazzled. You decide that being impressive is, in fact, the whole point."
         },
         {
           "id": "stay_humble",
           "text": "Keep your head down and don't flaunt it",
-          "effects": { "reputation": -2, "loyalty": 4, "health": 2 },
+          "effects": {
+            "reputation": -2,
+            "loyalty": 4,
+            "health": 2
+          },
+          "personality": {
+            "grandiosity": -6,
+            "inward": 5
+          },
+          "setFlags": [
+            "modest_streak"
+          ],
           "outcome": "You play it cool. Fred would approve of the discretion; the neighborhood barely notices you exist."
+        },
+        {
+          "id": "charge_admission",
+          "text": "Charge the gawking kids a nickel to see the Cadillac up close",
+          "effects": {
+            "money": 8,
+            "reputation": 3,
+            "loyalty": -2
+          },
+          "personality": {
+            "ideology": 4,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "dealmaker"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You pocket a fistful of nickels. Even your own driveway, you realize, can be monetized."
+        }
+      ]
+    },
+    {
+      "id": "ev_korean_war_draft",
+      "era": "boyhood",
+      "year": 1952,
+      "title": "Uniforms in the Newsreel",
+      "scene": "On the radio it's Korea, Korea, Korea. Older boys from the neighborhood vanish into uniforms; some come back changed, some don't come back. Fred talks about the war the way he talks about everything: as a thing smart men manage their exposure to. The newsreels of marching columns thrill and unsettle you at once.",
+      "researchNote": "The Korean War (1950-1953) drove a national draft; the conflict and Cold War militarism dominated American media and shaped a generation of boys' views on service and toughness.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "discipline"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "thrill_at_uniforms",
+          "text": "March around the yard saluting an imaginary regiment",
+          "effects": {
+            "power": 4,
+            "health": 3
+          },
+          "personality": {
+            "grandiosity": 5,
+            "outward": 3
+          },
+          "setFlags": [
+            "loves_uniforms"
+          ],
+          "outcome": "Command, even pretend command, feels like home. You make your little brother stand at attention."
+        },
+        {
+          "id": "fear_the_war",
+          "text": "Lie awake afraid of the boys who didn't come home",
+          "effects": {
+            "health": -2,
+            "loyalty": 3
+          },
+          "personality": {
+            "ideology": -4,
+            "inward": 5,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "war_wary"
+          ],
+          "outcome": "War stops being a parade in your head and becomes a list of missing names. You decide it is a thing to avoid."
+        },
+        {
+          "id": "study_the_angles",
+          "text": "Listen closely to how Fred says smart men stay out of it",
+          "effects": {
+            "power": 3,
+            "heat": 2
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": 3
+          },
+          "setFlags": [
+            "fathers_lessons"
+          ],
+          "outcome": "You absorb a quieter lesson: rules and drafts are for other people, the kind who don't have a Fred. (Father's lessons learned.)"
+        }
+      ]
+    },
+    {
+      "id": "ev_brothers_shadow",
+      "era": "boyhood",
+      "year": 1955,
+      "title": "Freddy and the Family Crown",
+      "scene": "Your big brother Freddy is the heir, the firstborn meant to inherit Fred's empire. But Freddy is gentle, funny, more interested in flying planes and goofing off than in collecting rent. Fred grinds at him daily, and you watch your brother shrink under it. There is, you sense, a vacancy opening at the top.",
+      "researchNote": "Fred Trump Jr., the eldest son, was groomed to take over the business but clashed with his father's harsh expectations; he later struggled with alcoholism and died in 1981, a story Donald cited as shaping him.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "ambition"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "position_yourself_heir",
+          "text": "Quietly position yourself as the son Fred actually wanted",
+          "effects": {
+            "power": 7,
+            "loyalty": -5,
+            "reputation": 4
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "wants_the_crown",
+            "fathers_lessons"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "While Freddy folds, you stand straighter at the dinner table. Fred's gaze drifts to you, and you make sure it stays. (Father's lessons learned.)"
+        },
+        {
+          "id": "protect_freddy",
+          "text": "Stick up for Freddy when Fred berates him",
+          "effects": {
+            "loyalty": 8,
+            "health": 2,
+            "power": -3
+          },
+          "personality": {
+            "ideology": -7,
+            "inward": 4,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "soft_heart",
+            "loyal_to_freddy"
+          ],
+          "ripples": [
+            {
+              "to": "fred_patience",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You take some of Fred's fire so your brother doesn't have to. It costs you, but Freddy never forgets it."
+        },
+        {
+          "id": "learn_from_freddys_fall",
+          "text": "Decide that softness is what's destroying Freddy, and harden yourself",
+          "effects": {
+            "power": 5,
+            "heat": 3,
+            "loyalty": -4
+          },
+          "personality": {
+            "ideology": 7,
+            "inward": -5
+          },
+          "setFlags": [
+            "fears_being_a_loser"
+          ],
+          "outcome": "You study your brother like a cautionary tale. Never be the nice one, you conclude. The nice one gets eaten."
+        }
+      ]
+    },
+    {
+      "id": "ev_mccarthy_red_scare",
+      "era": "boyhood",
+      "year": 1954,
+      "title": "Names on the Television",
+      "scene": "The whole country is watching a senator named McCarthy point fingers on live television, ruining men with an accusation and a glare. Some neighbors whisper he's a bully; some say he's a hero. You can't stop watching how one man, on a stage, can make a room afraid of him.",
+      "researchNote": "Senator Joseph McCarthy's 1950s anti-communist hearings, broadcast nationally, demonstrated the power of televised accusation and intimidation; his aide Roy Cohn would later become Trump's mentor.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "power"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "admire_the_intimidation",
+          "text": "Marvel at how fear makes a powerful man",
+          "effects": {
+            "power": 6,
+            "heat": 4,
+            "reputation": 3
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 5,
+            "outward": 3
+          },
+          "setFlags": [
+            "learned_intimidation"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You take notes on the glare, the certainty, the refusal to apologize. A blueprint for power, broadcast for free."
+        },
+        {
+          "id": "distrust_the_bully",
+          "text": "Side with the neighbors who call him a bully",
+          "effects": {
+            "reputation": 2,
+            "loyalty": 3
+          },
+          "personality": {
+            "ideology": -6,
+            "inward": 4
+          },
+          "setFlags": [
+            "distrusts_demagogues"
+          ],
+          "outcome": "Something about the man's cruelty turns your stomach. You decide a real man doesn't need to make a crowd afraid."
+        },
+        {
+          "id": "ignore_it",
+          "text": "Lose interest and go outside to play",
+          "effects": {
+            "health": 3
+          },
+          "personality": {
+            "inward": 2
+          },
+          "outcome": "Grown-up television bores you. There are far more important games happening on the block."
+        }
+      ]
+    },
+    {
+      "id": "ev_rock_and_roll",
+      "era": "boyhood",
+      "year": 1956,
+      "title": "Elvis Shakes the Country",
+      "scene": "A hip-swiveling singer named Elvis is on every radio and the older kids are losing their minds. Parents call it indecent; teenagers call it freedom. The whole culture is splitting along a line you can feel but can't quite name. You stand at the edge of it, deciding which side you're on.",
+      "researchNote": "Elvis Presley's 1956 breakthrough crystallized rock 'n' roll as a cultural and generational rupture, scandalizing adults while electrifying American youth.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "rebellion"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_the_show",
+          "text": "Love the spectacle and the way Elvis owns a crowd",
+          "effects": {
+            "reputation": 5,
+            "power": 3
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 5
+          },
+          "setFlags": [
+            "loves_spectacle"
+          ],
+          "outcome": "You don't care about the music so much as the screaming. Owning a crowd, you note, is its own kind of empire."
+        },
+        {
+          "id": "side_with_the_squares",
+          "text": "Agree with the adults that it's vulgar nonsense",
+          "effects": {
+            "loyalty": 3,
+            "reputation": -2
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": 2,
+            "grandiosity": -2
+          },
+          "setFlags": [
+            "conventional_streak"
+          ],
+          "outcome": "You side with order over noise. The future, you'll find, rarely rewards the squares, but it feels safe for now."
+        },
+        {
+          "id": "ignore_culture",
+          "text": "Tune it all out; music doesn't pay rent",
+          "effects": {
+            "money": 3,
+            "power": 2
+          },
+          "personality": {
+            "ideology": 3,
+            "inward": 3
+          },
+          "setFlags": [
+            "fathers_lessons"
+          ],
+          "outcome": "Records and rebellion bore you. You'd rather count the coins from your paper route. (Father's lessons learned.)"
+        }
+      ]
+    },
+    {
+      "id": "ev_highway_act_suburbs",
+      "era": "boyhood",
+      "year": 1956,
+      "title": "Concrete Ribbons to the Suburbs",
+      "scene": "President Eisenhower signs a law to lace the country with interstate highways, and overnight everyone is talking about moving out to the suburbs. Fred grumbles and calculates: where the cars go, the renters follow, and the smart builder gets there first. At the dinner table you hear the future being priced out in real time.",
+      "researchNote": "The 1956 Federal-Aid Highway Act funded the Interstate Highway System, accelerating suburbanization and reshaping where Americans lived and where real-estate fortunes could be made.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "money",
+        "ambition"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "fathers_lessons"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "think_like_a_builder",
+          "text": "Start thinking about where you'd build if it were your money",
+          "effects": {
+            "money": 12,
+            "power": 5
+          },
+          "personality": {
+            "ideology": 4,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "builder_brain"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sketch imaginary developments on a napkin. Fred glances over and, for once, doesn't correct you."
+        },
+        {
+          "id": "dream_bigger_than_suburbs",
+          "text": "Scoff at the suburbs; the real money is in the city skyline",
+          "effects": {
+            "reputation": 4,
+            "power": 4
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 3
+          },
+          "setFlags": [
+            "manhattan_dreamer"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Brooklyn walk-ups and Levittown ranches feel small to you. Your eye keeps drifting to Manhattan's towers across the river."
+        },
+        {
+          "id": "just_eat_dinner",
+          "text": "Tune out the shop talk and finish your dinner",
+          "effects": {
+            "health": 3
+          },
+          "personality": {
+            "inward": 3,
+            "grandiosity": -2
+          },
+          "outcome": "Highways, schmighways. You're nine and the meatloaf is more pressing than the Interstate Commerce Clause."
+        }
+      ]
+    },
+    {
+      "id": "ev_paper_route_empire",
+      "era": "boyhood",
+      "year": 1956,
+      "title": "The First Little Operation",
+      "scene": "Other kids deliver papers for pocket money. You look at the route and see a system: subscribers, collections, a competitor two blocks over. The chauffeur drives you on rainy days, which the other paperboys find deeply unfair. You find it deeply efficient.",
+      "researchNote": "Trump has described early money-making schemes as a boy in Queens, framing himself as entrepreneurial from a young age; the chauffeur-driven household was a documented part of his upbringing.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "money",
+        "ambition"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [],
+        "notFlags": [
+          "walked_away"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "corner_the_route",
+          "text": "Undercut and absorb the rival paperboy's customers",
+          "effects": {
+            "money": 18,
+            "power": 5,
+            "loyalty": -3,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "dealmaker",
+            "fathers_lessons"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "By month's end you run both routes and pocket the difference. The other kid quits. Fred calls it 'thinking big.' (Father's lessons learned.)"
+        },
+        {
+          "id": "run_it_fairly",
+          "text": "Just deliver your own papers honestly and on time",
+          "effects": {
+            "money": 6,
+            "reputation": 4,
+            "loyalty": 3
+          },
+          "personality": {
+            "ideology": -4,
+            "inward": 3,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "honest_kid"
+          ],
+          "outcome": "You earn a clean reputation and modest cash. Reliable, decent, forgettable. The rival respects you for it."
+        },
+        {
+          "id": "quit_for_play",
+          "text": "Decide it's not worth the hassle and quit to play stickball",
+          "effects": {
+            "health": 5,
+            "money": -3
+          },
+          "personality": {
+            "inward": 4,
+            "grandiosity": -4,
+            "ideology": -3
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "outcome": "Money can wait. The sun is out and the boys need a ninth man. You never look back at the route."
         }
       ]
     },
@@ -108,31 +931,184 @@
       "researchNote": "As a boy Trump was aggressive and disruptive at the private Kew-Forest School in Queens, reportedly even getting into a physical altercation with a teacher, which alarmed his parents.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["school", "rebellion"],
+      "tags": [
+        "school",
+        "rebellion"
+      ],
       "portrait": "infant",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
-      "weight": 14,
+      "requires": {
+        "flags": [],
+        "notFlags": [
+          "walked_away"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "deck_the_teacher",
           "text": "Mouth off and shove the teacher who insulted you",
-          "effects": { "heat": 12, "reputation": 4, "power": 3, "loyalty": -6 },
-          "setFlags": ["wild_child"],
-          "ripples": [ { "to": "fred_patience", "weight": 0.5, "polarity": -1 } ],
+          "effects": {
+            "heat": 12,
+            "reputation": 4,
+            "power": 3,
+            "loyalty": -6
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 4,
+            "outward": 3
+          },
+          "setFlags": [
+            "wild_child",
+            "discipline_problem"
+          ],
+          "ripples": [
+            {
+              "to": "fred_patience",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
           "outcome": "You become a schoolyard legend and a parent-teacher nightmare. Fred is summoned. He is not amused."
         },
         {
           "id": "rally_the_kids",
           "text": "Turn it into a popularity contest and rally the other kids",
-          "effects": { "reputation": 7, "heat": 5, "power": 4 },
+          "effects": {
+            "reputation": 7,
+            "heat": 5,
+            "power": 4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 6
+          },
+          "setFlags": [
+            "likes_an_audience",
+            "discipline_problem"
+          ],
           "outcome": "You hold court at recess like a tiny mob boss. Detention follows, but so do followers."
         },
         {
           "id": "apologize_strategically",
           "text": "Apologize loudly and insincerely to dodge punishment",
-          "effects": { "heat": -4, "reputation": 2, "loyalty": 2 },
+          "effects": {
+            "heat": -4,
+            "reputation": 2,
+            "loyalty": 2
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": 3
+          },
+          "setFlags": [
+            "learned_intimidation"
+          ],
           "outcome": "You charm your way out of detention. First rule of damage control, learned at age eleven."
+        },
+        {
+          "id": "actually_behave",
+          "text": "Decide the fight isn't worth it and keep your head down",
+          "effects": {
+            "heat": -8,
+            "loyalty": 4,
+            "reputation": -3
+          },
+          "personality": {
+            "ideology": -4,
+            "inward": 5,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "modest_streak"
+          ],
+          "outcome": "You swallow the insult and pass quietly through school. No legend, but no principal's office either."
+        }
+      ]
+    },
+    {
+      "id": "ev_dodgers_leave_brooklyn",
+      "era": "boyhood",
+      "year": 1957,
+      "title": "The Dodgers Abandon Brooklyn",
+      "scene": "The Brooklyn Dodgers, the borough's beating heart, announce they're decamping to Los Angeles for a better deal. Grown men cry in the streets; kids burn their pennants. Fred shrugs: an owner chases the money, that's all there is to it. You watch a whole borough get its heart broken by a balance sheet.",
+      "researchNote": "After the 1957 season, owner Walter O'Malley moved the beloved Brooklyn Dodgers to Los Angeles, a betrayal that devastated the borough and became a symbol of business trumping loyalty.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "money"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "side_with_omalley",
+          "text": "Decide O'Malley was right; a man takes the better deal, period",
+          "effects": {
+            "money": 8,
+            "power": 4,
+            "loyalty": -4
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "fathers_lessons",
+            "loyalty_is_for_suckers"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Sentiment is a luxury, you conclude, watching grown men weep. Loyalty doesn't show up in the ledger. (Father's lessons learned.)"
+        },
+        {
+          "id": "mourn_with_brooklyn",
+          "text": "Mourn with the borough; some things shouldn't be for sale",
+          "effects": {
+            "loyalty": 6,
+            "reputation": 3,
+            "health": -2
+          },
+          "personality": {
+            "ideology": -6,
+            "inward": 4
+          },
+          "setFlags": [
+            "values_loyalty"
+          ],
+          "outcome": "You feel the betrayal in your gut. There are things, you decide, that money shouldn't be allowed to buy."
+        },
+        {
+          "id": "see_an_opening",
+          "text": "Wonder what land gets cheap now that the team is gone",
+          "effects": {
+            "money": 6,
+            "power": 3
+          },
+          "personality": {
+            "ideology": 4,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "builder_brain"
+          ],
+          "outcome": "While everyone grieves, you think about the empty ballpark and the value of the dirt under it. Opportunism, age eleven."
         }
       ]
     },
@@ -145,26 +1121,93 @@
       "researchNote": "In 1959, at age 13, Trump's parents sent him to the New York Military Academy in Cornwall-on-Hudson to instill discipline after his unruly behavior in Queens.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["family", "school", "ambition"],
+      "tags": [
+        "family",
+        "school",
+        "ambition"
+      ],
       "portrait": "cadet",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
-      "weight": 16,
+      "requires": {
+        "flags": [
+          "discipline_problem"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "embrace_the_challenge",
           "text": "Tell Fred you'll come back the best cadet they've ever seen",
-          "effects": { "power": 6, "loyalty": 8, "reputation": 3, "heat": -6 },
-          "setFlags": ["fathers_lessons", "at_nyma"],
-          "ripples": [ { "to": "manhattan_ambition", "weight": 0.4, "polarity": 1 } ],
+          "effects": {
+            "power": 6,
+            "loyalty": 8,
+            "reputation": 3,
+            "heat": -6
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "fathers_lessons",
+            "at_nyma"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "Fred almost smiles. You reframe exile as a campaign to win, exactly the way he taught you. (Father's lessons learned.)"
         },
         {
           "id": "sulk_and_resist",
           "text": "Slam the door and vow to hate every minute of it",
-          "effects": { "heat": 6, "loyalty": -5, "health": -3 },
-          "setFlags": ["at_nyma", "resents_fred"],
+          "effects": {
+            "heat": 6,
+            "loyalty": -5,
+            "health": -3
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": -3,
+            "outward": 3
+          },
+          "setFlags": [
+            "at_nyma",
+            "resents_fred"
+          ],
           "outcome": "You go upstate furious. The mountain air does nothing for your mood, at least not yet."
+        },
+        {
+          "id": "beg_to_stay",
+          "text": "Plead to stay home and promise to be good",
+          "effects": {
+            "loyalty": 4,
+            "power": -4,
+            "reputation": -3
+          },
+          "personality": {
+            "ideology": -4,
+            "inward": 5,
+            "grandiosity": -5
+          },
+          "setFlags": [
+            "at_nyma",
+            "reluctant_cadet"
+          ],
+          "ripples": [
+            {
+              "to": "fred_patience",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Fred is unmoved; the trunk is already packed. You go upstate small and scared, the bravado gone."
         }
       ]
     },
@@ -177,32 +1220,779 @@
       "researchNote": "At NYMA, cadets followed a strict regimen of early reveille, inspections, marching, and military discipline; Trump later credited the academy with teaching him about competition and toughness.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["school", "discipline"],
+      "tags": [
+        "school",
+        "discipline"
+      ],
       "portrait": "cadet",
-      "requires": { "flags": ["at_nyma"], "notFlags": [], "meters": {} },
-      "weight": 12,
+      "requires": {
+        "flags": [
+          "at_nyma"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "master_the_drill",
           "text": "Out-shine, out-shoe, and out-march everyone",
-          "effects": { "power": 7, "loyalty": 6, "reputation": 4, "health": 4 },
-          "setFlags": ["model_cadet"],
+          "effects": {
+            "power": 7,
+            "loyalty": 6,
+            "reputation": 4,
+            "health": 4
+          },
+          "personality": {
+            "ideology": 4,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "model_cadet"
+          ],
           "outcome": "By week's end the DI grudgingly nods at your bunk. You discover you love winning a game with clear rules."
         },
         {
           "id": "work_the_angles",
           "text": "Befriend the toughest cadets and trade favors",
-          "effects": { "power": 5, "reputation": 5, "loyalty": 3, "heat": 3 },
-          "setFlags": ["builds_alliances"],
-          "ripples": [ { "to": "manhattan_ambition", "weight": 0.3, "polarity": 1 } ],
+          "effects": {
+            "power": 5,
+            "reputation": 5,
+            "loyalty": 3,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": 4,
+            "outward": 4
+          },
+          "setFlags": [
+            "builds_alliances"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
           "outcome": "You learn that even in a system, the guy who runs the room is the one with the relationships."
         },
         {
           "id": "buck_the_system",
           "text": "Test how much the rules really apply to you",
-          "effects": { "heat": 9, "loyalty": -4, "reputation": 2 },
+          "effects": {
+            "heat": 9,
+            "loyalty": -4,
+            "reputation": 2
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 3,
+            "inward": -3
+          },
+          "setFlags": [
+            "chafes_at_rules"
+          ],
           "outcome": "Push-ups in the rain teach you a lesson Fred couldn't: pick your fights. Mostly."
+        }
+      ]
+    },
+    {
+      "id": "ev_nyma_homesick",
+      "era": "boyhood",
+      "year": 1959,
+      "title": "Lights Out, Far From Queens",
+      "scene": "The first nights at the academy are long. The mountain wind rattles the windows, the other cadets are strangers, and home is a world away down the Hudson. A smaller boy in the next bunk cries quietly into his pillow. You lie awake with the same lump in your throat.",
+      "researchNote": "Boarding at NYMA meant a strict, isolating environment far from family; the transition was a documented hardship for many young cadets adjusting to military discipline.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "school",
+        "discipline",
+        "family"
+      ],
+      "portrait": "cadet",
+      "requires": {
+        "flags": [
+          "reluctant_cadet"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "comfort_the_boy",
+          "text": "Whisper to the crying boy that it gets easier",
+          "effects": {
+            "loyalty": 6,
+            "health": 2
+          },
+          "personality": {
+            "ideology": -7,
+            "inward": 5,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "soft_heart",
+            "values_loyalty"
+          ],
+          "outcome": "He stops crying. You make a friend for life, and learn that kindness costs you nothing and earns you everything."
+        },
+        {
+          "id": "harden_overnight",
+          "text": "Swallow the lump and decide to never feel small again",
+          "effects": {
+            "power": 6,
+            "loyalty": -3,
+            "health": -2
+          },
+          "personality": {
+            "ideology": 5,
+            "inward": -5,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "fears_being_a_loser"
+          ],
+          "outcome": "You bury the homesickness somewhere deep and lock it. By morning the soft kid from Queens is gone for good."
+        },
+        {
+          "id": "write_home",
+          "text": "Write a letter home begging to come back",
+          "effects": {
+            "loyalty": 4,
+            "reputation": -2,
+            "health": 2
+          },
+          "personality": {
+            "inward": 4,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "homesick"
+          ],
+          "ripples": [
+            {
+              "to": "fred_patience",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Fred writes back two cold lines: men don't quit. You tear up the reply and quietly resolve to prove him wrong, or right."
+        }
+      ]
+    },
+    {
+      "id": "ev_nyma_baseball_star",
+      "era": "boyhood",
+      "year": 1961,
+      "title": "Cleats and Glory",
+      "scene": "On the academy's ball field you're good, genuinely good, and the coach takes notice. A scout from the pros even drifts through one afternoon. For a moment, a different life flickers in front of you: cheering stands, a name in the sports pages, a future Fred never planned.",
+      "researchNote": "Trump was a standout athlete at NYMA, particularly in baseball, and has claimed he was good enough to draw professional scouting interest before choosing business over sports.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "school",
+        "ambition"
+      ],
+      "portrait": "cadet",
+      "requires": {
+        "flags": [
+          "at_nyma"
+        ],
+        "notFlags": [],
+        "meters": {
+          "health": ">=40"
+        },
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "chase_the_pros",
+          "text": "Dream of the majors and a life of your own making",
+          "effects": {
+            "health": 6,
+            "reputation": 5,
+            "money": -5
+          },
+          "personality": {
+            "ideology": -4,
+            "inward": 4,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "athlete_dream"
+          ],
+          "outcome": "For one season you let yourself imagine a stadium instead of a skyline. It feels, dangerously, like freedom."
+        },
+        {
+          "id": "leverage_the_glory",
+          "text": "Use the athletic fame to climb the cadet hierarchy",
+          "effects": {
+            "power": 6,
+            "reputation": 6,
+            "loyalty": 3
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 4
+          },
+          "setFlags": [
+            "likes_an_audience"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn a good arm into a great reputation. Winning on the field, you find, opens doors off it."
+        },
+        {
+          "id": "treat_it_as_business",
+          "text": "Coolly decide ballplayers don't get rich; builders do",
+          "effects": {
+            "money": 8,
+            "power": 4,
+            "health": -2
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "fathers_lessons"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You shake the scout's hand and walk away. The game was fun, but the real money is in dirt and concrete. (Father's lessons learned.)"
+        }
+      ]
+    },
+    {
+      "id": "ev_first_deal_instinct",
+      "era": "boyhood",
+      "year": 1962,
+      "title": "The Switchblade Economy",
+      "scene": "A classmate is selling contraband switchblades for spending money. You see something better than a knife: a market. You start brokering deals, taking a cut, settling disputes. Lights-out becomes your trading floor.",
+      "researchNote": "Even as a teenager Trump showed a knack for self-promotion and deal-making instincts that he would later mythologize in 'The Art of the Deal,' framing himself as a born negotiator.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "money",
+        "ambition",
+        "school"
+      ],
+      "portrait": "cadet",
+      "requires": {
+        "flags": [
+          "at_nyma"
+        ],
+        "notFlags": [
+          "walked_away"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "broker_everything",
+          "text": "Become the middleman for every trade in the barracks",
+          "effects": {
+            "money": 40,
+            "power": 6,
+            "reputation": 4,
+            "heat": 7
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "fathers_lessons",
+            "dealmaker"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Cash flows in and a reputation forms: the kid who takes a piece of everything. Fred's gospel, applied. (Father's lessons learned.)"
+        },
+        {
+          "id": "play_it_safe",
+          "text": "Stay clean and just study the players",
+          "effects": {
+            "heat": -5,
+            "power": 3,
+            "money": 5
+          },
+          "personality": {
+            "ideology": 3,
+            "inward": 4
+          },
+          "setFlags": [
+            "dealmaker"
+          ],
+          "outcome": "No risk, no detention, but plenty of notes on who wants what. Information, you realize, is also currency."
+        },
+        {
+          "id": "snitch_for_leverage",
+          "text": "Tip off an officer to take out a rival broker",
+          "effects": {
+            "power": 5,
+            "money": 15,
+            "loyalty": -8,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 7,
+            "inward": -3,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "loyalty_is_for_suckers"
+          ],
+          "outcome": "Your competition gets marched off; you absorb his clientele. Ruthless, effective, and quietly remembered by the others."
+        },
+        {
+          "id": "refuse_the_racket",
+          "text": "Want nothing to do with contraband and walk away clean",
+          "effects": {
+            "heat": -8,
+            "loyalty": 4,
+            "reputation": -2
+          },
+          "personality": {
+            "ideology": -5,
+            "inward": 4,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "honest_kid"
+          ],
+          "outcome": "You'd rather earn a clean name than a dirty dollar. The other cadets shrug; you sleep fine."
+        }
+      ]
+    },
+    {
+      "id": "ev_first_crush",
+      "era": "boyhood",
+      "year": 1962,
+      "title": "A Girl at the Mixer",
+      "scene": "The academy buses cadets to a dance with a nearby girls' school. In dress grays you cut a figure, and a sharp-eyed girl actually laughs at your jokes. For the first time you feel the specific thrill of being wanted, and you start calculating how to make it happen again.",
+      "researchNote": "NYMA cadets attended chaperoned mixers with area schools; Trump in his teens was noted by classmates for being confident and image-conscious with girls.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "school",
+        "rebellion"
+      ],
+      "portrait": "cadet",
+      "requires": {
+        "flags": [
+          "at_nyma"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "lay_on_charm",
+          "text": "Pour on the charm and treat the night like a performance",
+          "effects": {
+            "reputation": 5,
+            "power": 3
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 6,
+            "inward": -3
+          },
+          "setFlags": [
+            "lady_charmer",
+            "likes_an_audience"
+          ],
+          "outcome": "You work the room like a young showman. She's impressed; you're more impressed with yourself."
+        },
+        {
+          "id": "be_genuine",
+          "text": "Drop the act and actually talk to her like a person",
+          "effects": {
+            "loyalty": 5,
+            "health": 3,
+            "reputation": 2
+          },
+          "personality": {
+            "ideology": -5,
+            "inward": 5,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "soft_heart"
+          ],
+          "outcome": "For one evening you're just a nervous boy, not a brand. It's the realest you've felt in years, and she sees it."
+        },
+        {
+          "id": "treat_it_as_conquest",
+          "text": "Brag to the barracks afterward to boost your standing",
+          "effects": {
+            "reputation": 6,
+            "loyalty": -4,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 4,
+            "inward": -4
+          },
+          "setFlags": [
+            "loves_spectacle"
+          ],
+          "outcome": "You inflate the story for the other cadets. Your stock rises in the barracks; something quieter in you dims."
+        }
+      ]
+    },
+    {
+      "id": "ev_jfk_election_1960",
+      "era": "boyhood",
+      "year": 1960,
+      "title": "A Young Man Wins the White House",
+      "scene": "On the television a tanned, charismatic John F. Kennedy out-glows Richard Nixon and wins the presidency by a hair. Image, the country learns, can beat substance under the studio lights. Even Fred admits the young man knows how to sell himself. You watch, riveted, as charisma is crowned.",
+      "researchNote": "John F. Kennedy narrowly defeated Richard Nixon in 1960, an election widely credited as the first decided by television, where Kennedy's telegenic charisma proved decisive.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "power"
+      ],
+      "portrait": "cadet",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "study_the_image",
+          "text": "Decide that image, on television, is the whole game",
+          "effects": {
+            "power": 6,
+            "reputation": 5
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 5
+          },
+          "setFlags": [
+            "worships_image",
+            "loves_spectacle"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You learn the lesson Kennedy taught the camera: never look like you're sweating, and the crown comes to you."
+        },
+        {
+          "id": "admire_the_message",
+          "text": "Be moved by the call to ask what you can do for your country",
+          "effects": {
+            "loyalty": 5,
+            "reputation": 3
+          },
+          "personality": {
+            "ideology": -6,
+            "inward": 4,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "idealist_spark"
+          ],
+          "outcome": "Something in the speech stirs you, a sense that power could serve more than itself. The feeling is new and uncomfortable."
+        },
+        {
+          "id": "dismiss_politics",
+          "text": "Dismiss the whole circus; builders outlast politicians",
+          "effects": {
+            "money": 5,
+            "power": 3
+          },
+          "personality": {
+            "ideology": 4,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "fathers_lessons"
+          ],
+          "outcome": "Presidents come and go, you decide; the man who owns the buildings stays. Fred nods along. (Father's lessons learned.)"
+        }
+      ]
+    },
+    {
+      "id": "ev_civil_rights_television",
+      "era": "boyhood",
+      "year": 1963,
+      "title": "Dogs, Hoses, and a Dream",
+      "scene": "The television fills with images from the South: police dogs, fire hoses, and then a preacher in Washington telling a quarter-million people he has a dream. The country is being forced to look at itself. In the barracks the cadets argue, and you have to decide what you actually see.",
+      "researchNote": "1963 was a pivotal civil-rights year: the Birmingham campaign's police violence was televised nationally, and Martin Luther King Jr. delivered his 'I Have a Dream' speech at the March on Washington in August.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "rebellion"
+      ],
+      "portrait": "cadet",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "feel_the_injustice",
+          "text": "Be sickened by the hoses and side with the marchers",
+          "effects": {
+            "reputation": 4,
+            "loyalty": 4
+          },
+          "personality": {
+            "ideology": -8,
+            "inward": 5
+          },
+          "setFlags": [
+            "idealist_spark",
+            "sees_injustice"
+          ],
+          "outcome": "The dogs and the dream lodge in you on the right side of the screen. For a moment the world looks bigger than your ambitions."
+        },
+        {
+          "id": "stay_with_order",
+          "text": "Worry mostly about the disorder and the disruption",
+          "effects": {
+            "power": 4,
+            "loyalty": 3,
+            "reputation": -2
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 2
+          },
+          "setFlags": [
+            "values_order"
+          ],
+          "outcome": "You hear the speeches and see only the chaos. Order, you decide, is what you'd protect, whatever the cost."
+        },
+        {
+          "id": "see_it_as_leverage",
+          "text": "Note coldly how a movement, well-staged, moves a whole country",
+          "effects": {
+            "power": 5,
+            "reputation": 3
+          },
+          "personality": {
+            "grandiosity": 5,
+            "outward": 4,
+            "inward": -3
+          },
+          "setFlags": [
+            "worships_image"
+          ],
+          "outcome": "You study the staging, the cameras, the crowd, and file it away. Spectacle, you realize, is a kind of power all its own."
+        }
+      ]
+    },
+    {
+      "id": "ev_jfk_assassination_1963",
+      "era": "boyhood",
+      "year": 1963,
+      "title": "Dallas, November 22nd",
+      "scene": "An announcement crackles over the academy loudspeakers, then a sob you didn't expect from a drill sergeant: the President is dead, shot in Dallas. Cadets freeze on the parade ground. The young man whose image conquered television is gone in an instant, and the whole country seems to stop breathing.",
+      "researchNote": "President John F. Kennedy was assassinated in Dallas on November 22, 1963, a national trauma broadcast live that shocked Americans of every age and political stripe.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "power"
+      ],
+      "portrait": "cadet",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "feel_the_grief",
+          "text": "Stand in genuine grief with the rest of the corps",
+          "effects": {
+            "loyalty": 5,
+            "health": -2,
+            "reputation": 3
+          },
+          "personality": {
+            "ideology": -5,
+            "inward": 6,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "soft_heart"
+          ],
+          "outcome": "You feel the loss in your chest like everyone else. For one terrible afternoon, ambition seems very small."
+        },
+        {
+          "id": "note_the_fragility",
+          "text": "Think coldly about how fast even the powerful can fall",
+          "effects": {
+            "power": 5,
+            "heat": 2
+          },
+          "personality": {
+            "ideology": 5,
+            "inward": -3,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "fears_being_a_loser"
+          ],
+          "outcome": "While others weep you absorb a darker lesson: nothing is permanent, so you'd better win big while you still can."
+        },
+        {
+          "id": "carry_on_drilling",
+          "text": "Keep your bearing and lead your squad through the shock",
+          "effects": {
+            "power": 6,
+            "loyalty": 6,
+            "reputation": 4
+          },
+          "personality": {
+            "grandiosity": 3,
+            "outward": 4
+          },
+          "setFlags": [
+            "model_cadet",
+            "natural_leader"
+          ],
+          "outcome": "Steady when others wobble, you steer your squad through the worst day. The officers notice who held the line."
+        }
+      ]
+    },
+    {
+      "id": "ev_recession_1957_lesson",
+      "era": "boyhood",
+      "year": 1958,
+      "title": "When the Money Got Tight",
+      "scene": "A recession bites, and even Fred talks about it at dinner: vacancies, slow construction, banks getting nervous. He explains, almost gleefully, how the cautious builder buys when everyone else is scared. You're old enough now to hear an economics lesson hiding inside a complaint.",
+      "researchNote": "The 1957-58 recession was a sharp U.S. downturn; savvy real-estate operators like Fred Trump weathered such cycles and used downturns to acquire assets cheaply.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "money",
+        "family"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "fathers_lessons"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "learn_to_buy_fear",
+          "text": "Memorize the rule: buy when everyone else is terrified",
+          "effects": {
+            "money": 14,
+            "power": 5
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "builder_brain",
+            "fathers_lessons"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You write the lesson on your bones: fear is a sale, and the bold get rich on other men's panic. (Father's lessons learned.)"
+        },
+        {
+          "id": "worry_for_workers",
+          "text": "Ask what happens to the men Fred lays off",
+          "effects": {
+            "loyalty": 4,
+            "money": -4,
+            "reputation": 2
+          },
+          "personality": {
+            "ideology": -6,
+            "inward": 5
+          },
+          "setFlags": [
+            "sees_the_tenants"
+          ],
+          "outcome": "Fred waves the question off. But you keep picturing the foreman's face when the work dried up. It stays with you."
+        },
+        {
+          "id": "fear_losing_it_all",
+          "text": "Resolve to never, ever be the one caught short",
+          "effects": {
+            "power": 5,
+            "heat": 3,
+            "health": -2
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 4,
+            "inward": -3
+          },
+          "setFlags": [
+            "fears_being_a_loser"
+          ],
+          "outcome": "The idea of losing it all gnaws at you. You decide to always be the predator in a downturn, never the prey."
         }
       ]
     },
@@ -215,70 +2005,105 @@
       "researchNote": "Trump excelled at NYMA, earning athletic honors and rising to a cadet leadership position (cadet captain) in his senior year, where he was noted for his competitiveness.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["school", "discipline", "ambition", "power"],
+      "tags": [
+        "school",
+        "discipline",
+        "ambition",
+        "power"
+      ],
       "portrait": "cadet",
-      "requires": { "flags": ["at_nyma"], "notFlags": [], "meters": {} },
-      "weight": 14,
+      "requires": {
+        "flags": [
+          "model_cadet"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "lead_by_command",
           "text": "Rule the corps with iron discipline and demand results",
-          "effects": { "power": 9, "loyalty": 7, "reputation": 5, "heat": 4 },
-          "setFlags": ["natural_leader"],
-          "ripples": [ { "to": "manhattan_ambition", "weight": 0.5, "polarity": 1 } ],
+          "effects": {
+            "power": 9,
+            "loyalty": 7,
+            "reputation": 5,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "natural_leader"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "The unit snaps to your orders. You learn the intoxicating math: control plus pressure equals winning."
         },
         {
           "id": "lead_by_charm",
           "text": "Win loyalty with charisma and selective generosity",
-          "effects": { "loyalty": 9, "reputation": 7, "power": 5 },
-          "setFlags": ["natural_leader", "builds_alliances"],
+          "effects": {
+            "loyalty": 9,
+            "reputation": 7,
+            "power": 5
+          },
+          "personality": {
+            "grandiosity": 4,
+            "outward": 5
+          },
+          "setFlags": [
+            "natural_leader",
+            "builds_alliances"
+          ],
           "outcome": "Cadets would follow you off a cliff. You file away that loyalty, properly cultivated, is the best leverage there is."
         },
         {
           "id": "abuse_the_rank",
           "text": "Lean on rank to settle personal scores",
-          "effects": { "power": 5, "heat": 10, "reputation": 3, "loyalty": -6 },
+          "effects": {
+            "power": 5,
+            "heat": 10,
+            "reputation": 3,
+            "loyalty": -6
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 5,
+            "inward": -3
+          },
+          "setFlags": [
+            "learned_intimidation"
+          ],
           "outcome": "A few enemies, a few favors owed. The brass raises an eyebrow but the medals keep coming."
-        }
-      ]
-    },
-    {
-      "id": "ev_first_deal_instinct",
-      "era": "boyhood",
-      "year": 1963,
-      "title": "The Switchblade Economy",
-      "scene": "A classmate is selling contraband switchblades for spending money. You see something better than a knife: a market. You start brokering deals, taking a cut, settling disputes. Lights-out becomes your trading floor.",
-      "researchNote": "Even as a teenager Trump showed a knack for self-promotion and deal-making instincts that he would later mythologize in 'The Art of the Deal,' framing himself as a born negotiator.",
-      "extrapolated": false,
-      "startrekInspired": false,
-      "tags": ["money", "ambition", "school"],
-      "portrait": "cadet",
-      "requires": { "flags": ["at_nyma"], "notFlags": [], "meters": {} },
-      "weight": 13,
-      "repeatable": false,
-      "choices": [
-        {
-          "id": "broker_everything",
-          "text": "Become the middleman for every trade in the barracks",
-          "effects": { "money": 40, "power": 6, "reputation": 4, "heat": 7 },
-          "setFlags": ["fathers_lessons", "dealmaker"],
-          "ripples": [ { "to": "manhattan_ambition", "weight": 0.7, "polarity": 1 } ],
-          "outcome": "Cash flows in and a reputation forms: the kid who takes a piece of everything. Fred's gospel, applied. (Father's lessons learned.)"
         },
         {
-          "id": "play_it_safe",
-          "text": "Stay clean and just study the players",
-          "effects": { "heat": -5, "power": 3, "money": 5 },
-          "setFlags": ["dealmaker"],
-          "outcome": "No risk, no detention, but plenty of notes on who wants what. Information, you realize, is also currency."
-        },
-        {
-          "id": "snitch_for_leverage",
-          "text": "Tip off an officer to take out a rival broker",
-          "effects": { "power": 5, "money": 15, "loyalty": -8, "heat": 4 },
-          "outcome": "Your competition gets marched off; you absorb his clientele. Ruthless, effective, and quietly remembered by the others."
+          "id": "lead_with_fairness",
+          "text": "Run the unit fairly and protect the weakest cadets",
+          "effects": {
+            "loyalty": 8,
+            "reputation": 5,
+            "power": 3,
+            "heat": -4
+          },
+          "personality": {
+            "ideology": -6,
+            "inward": 4,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "natural_leader",
+            "values_loyalty"
+          ],
+          "outcome": "You make the corps better instead of merely obedient. The smallest plebes would die for you, and you find you'd protect them."
         }
       ]
     },
@@ -291,32 +2116,113 @@
       "researchNote": "Trump graduated from the New York Military Academy in 1964 and went on to attend Fordham University in the Bronx for two years before transferring to the Wharton School at the University of Pennsylvania.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["school", "ambition", "transition"],
+      "tags": [
+        "school",
+        "ambition",
+        "transition"
+      ],
       "portrait": "cadet",
-      "requires": { "flags": ["at_nyma"], "notFlags": [], "meters": {} },
-      "weight": 16,
+      "requires": {
+        "flags": [
+          "at_nyma"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "aim_at_manhattan",
           "text": "Tell Fred you won't stop at Brooklyn rent rolls, you want Manhattan",
-          "effects": { "power": 8, "reputation": 6, "loyalty": 4, "money": 10 },
-          "setFlags": ["fathers_lessons", "manhattan_dreamer"],
-          "ripples": [ { "to": "manhattan_ambition", "weight": 0.8, "polarity": 1 } ],
+          "effects": {
+            "power": 8,
+            "reputation": 6,
+            "loyalty": 4,
+            "money": 10
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 6,
+            "outward": 4
+          },
+          "setFlags": [
+            "fathers_lessons",
+            "manhattan_dreamer"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
           "outcome": "Fred warns you the city eats outer-borough boys alive. You smile. That, you tell him, is exactly why you'll win. (Father's lessons learned.)"
         },
         {
           "id": "follow_freds_path",
           "text": "Promise to learn the family business the slow, safe way",
-          "effects": { "loyalty": 9, "money": 20, "power": 3 },
-          "setFlags": ["family_business_track"],
-          "outcome": "Fred is pleased; the Brooklyn portfolio is yours to learn. Patience now, ambition later, you tell yourself."
+          "effects": {
+            "loyalty": 9,
+            "money": 20,
+            "power": 3
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": 3,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "family_business_track",
+            "fathers_lessons"
+          ],
+          "outcome": "Fred is pleased; the Brooklyn portfolio is yours to learn. Patience now, ambition later, you tell yourself. (Father's lessons learned.)"
         },
         {
           "id": "coast_on_charm",
           "text": "Skate by on the name and the charm and figure it out later",
-          "effects": { "reputation": 5, "heat": 4, "health": 3, "power": -2 },
+          "effects": {
+            "reputation": 5,
+            "heat": 4,
+            "health": 3,
+            "power": -2
+          },
+          "personality": {
+            "grandiosity": 5,
+            "outward": 4,
+            "inward": -3
+          },
+          "setFlags": [
+            "coasts_on_name"
+          ],
           "outcome": "Why grind when the name opens doors? You head to Fordham confident the world owes you an introduction."
+        },
+        {
+          "id": "choose_a_quiet_life",
+          "text": "Confess you'd rather have a small, decent life than the empire",
+          "effects": {
+            "health": 8,
+            "loyalty": 5,
+            "money": -10,
+            "power": -6
+          },
+          "personality": {
+            "ideology": -8,
+            "inward": 6,
+            "grandiosity": -8
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "ripples": [
+            {
+              "to": "manhattan_ambition",
+              "weight": 0.6,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You tell Fred the killer's life isn't for you. He goes pale with disappointment, but for once you feel light. The skyline can keep its towers."
         }
       ]
     }

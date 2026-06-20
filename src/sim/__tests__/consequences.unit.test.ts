@@ -49,7 +49,11 @@ describe("delayed consequences", () => {
 
   it("does not land before the due year", () => {
     const c = buildContent(rawWithConsequence());
-    const s = { ...initState(c, "seed"), year: 1990, pending: [{ consequenceId: "cq_debt_bomb", dueYear: 1992 }] };
+    const s = {
+      ...initState(c, "seed"),
+      year: 1990,
+      pending: [{ consequenceId: "cq_debt_bomb", dueYear: 1992 }],
+    };
     const { state, newLedger } = landDueConsequences(c, s);
     expect(newLedger).toHaveLength(0);
     expect(state.pending).toHaveLength(1);

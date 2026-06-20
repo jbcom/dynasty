@@ -9,7 +9,11 @@ import type { RippleField } from "../state";
  */
 
 /** Apply a choice's ripples into the ripple field, jittered by a seeded RNG. */
-export function applyRipples(field: RippleField, ripples: readonly Ripple[], rng: Rng): RippleField {
+export function applyRipples(
+  field: RippleField,
+  ripples: readonly Ripple[],
+  rng: Rng,
+): RippleField {
   if (ripples.length === 0) return { ...field };
   const next: RippleField = { ...field };
   for (const r of ripples) {

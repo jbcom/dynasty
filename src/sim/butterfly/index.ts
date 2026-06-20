@@ -6,10 +6,11 @@
  *
  * Import from `../butterfly` (this index), not the individual files.
  */
-export { applyRipples } from "./ripples";
-export { buildLedgerEntries, firedRules, renderChain } from "./ledger";
+
 export {
   type LandResult,
   landDueConsequences,
   scheduleConsequences,
 } from "./consequences";
+export { buildLedgerEntries, firedRules, renderChain } from "./ledger";
+export { applyRipples } from "./ripples";

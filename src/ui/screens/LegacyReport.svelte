@@ -1,27 +1,34 @@
 <script lang="ts">
+import type { Content } from "../../sim/content";
+import type { Ending } from "../../sim/schema";
+import { spectrumLabel } from "../../sim/personality";
 import type { EndState, GameState } from "../../sim/state";
 import ButterflyGraph from "../ButterflyGraph.svelte";
 import { formatMoney } from "../theme";
 
 interface Props {
+  content: Content;
   state: GameState;
   end: EndState;
   onRestart: () => void;
 }
 
-const { state, end, onRestart }: Props = $props();
+const { content, state, end, onRestart }: Props = $props();
 
-const headline: Record<EndState["kind"], string> = {
-  death: "The End of an Era",
-  coup: "Toppled",
-  victory: "Total Victory",
-};
+// Look up the authored ending that fired for its title + tier (drives copy/art).
+const ending = $derived<Ending | undefined>(
+  content.endings.find((e) => e.id === end.endingId),
+);
+const title = $derived(ending?.title ?? "The End");
+const tier = $derived(ending?.tier ?? "endgame-bad");
+const isApex = $derived(tier === "apex");
 </script>
 
-<main class="report" data-end={end.kind}>
-  <h1>{headline[end.kind]}</h1>
+<main class="report" data-end={end.kind} data-tier={tier} class:apex={isApex}>
+  {#if isApex}<p class="apex-kicker">★ Apex Ending ★</p>{/if}
+  <h1>{title}</h1>
   <p class="reason">{end.reason}</p>
-  <p class="year">Final year: {end.year}</p>
+  <p class="year">Final year: {end.year} · {spectrumLabel(state.personality)}</p>
 
   <dl class="stats">
     <div><dt>Net worth</dt><dd>{formatMoney(state.meters.money)}</dd></div>
@@ -48,13 +55,28 @@ const headline: Record<EndState["kind"], string> = {
     color: var(--mmm-gold);
     margin: 0.5rem 0 0.25rem;
   }
-  .report[data-end="victory"] h1 {
+  .report[data-tier="endgame-good"] h1 {
     color: var(--mmm-gold-bright);
     text-shadow: var(--mmm-shadow-gold);
   }
-  .report[data-end="death"] h1,
-  .report[data-end="coup"] h1 {
+  .report[data-tier="endgame-bad"] h1,
+  .report[data-tier="early-bad"] h1 {
     color: var(--mmm-red);
+  }
+  /* The apex (benevolent First Contact / warp gift) gets the grandest treatment. */
+  .report.apex {
+    background: radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--mmm-startrek) 22%, transparent), transparent 60%);
+  }
+  .report.apex h1 {
+    color: var(--mmm-startrek);
+    text-shadow: 0 0 18px color-mix(in srgb, var(--mmm-startrek) 70%, transparent);
+    font-size: 2.4rem;
+  }
+  .apex-kicker {
+    margin: 0;
+    color: var(--mmm-gold-bright);
+    letter-spacing: 0.3em;
+    font-size: 0.7rem;
   }
   .reason {
     color: var(--mmm-text);

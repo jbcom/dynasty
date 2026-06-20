@@ -27,16 +27,26 @@ export function evalComparator(expr: string, value: number): boolean {
   return fn(value, operand);
 }
 
-/** Whether a state satisfies a `requires` gate. */
-export function meetsRequires(state: GameState, req: Requires): boolean {
-  for (const f of req.flags) {
+/**
+ * Whether a state satisfies a `requires` gate. Accepts a partial requires shape
+ * (parsed content always supplies the defaults; callers/tests may omit fields).
+ */
+export function meetsRequires(state: GameState, req: Partial<Requires>): boolean {
+  for (const f of req.flags ?? []) {
     if (!state.flags.includes(f)) return false;
   }
-  for (const f of req.notFlags) {
+  for (const f of req.notFlags ?? []) {
     if (state.flags.includes(f)) return false;
   }
-  for (const [id, expr] of Object.entries(req.meters) as [MeterId, string][]) {
+  for (const [id, expr] of Object.entries(req.meters ?? {}) as [MeterId, string][]) {
     const value = state.meters[id];
+    if (value === undefined || !evalComparator(expr, value)) return false;
+  }
+  for (const [axis, expr] of Object.entries(req.personality ?? {}) as [
+    keyof GameState["personality"],
+    string,
+  ][]) {
+    const value = state.personality[axis];
     if (value === undefined || !evalComparator(expr, value)) return false;
   }
   if (req.minAge !== undefined && state.age < req.minAge) return false;
