@@ -19,8 +19,8 @@ content depth, then the Dynasty product epic, then the cross-cutting QA invarian
 
 ### Phase DE-2 — Moral-axis wiring into endings + HUD (task-022 remainder)
 - [x] de-2a DONE: authored 19 per-branch-per-pole endings (7 branches × 3 poles — nazi/theocracy/oligarchy/megachurch/media/westcoast + default centrist), each gated by its branch's pole flags from POLE_FLAGS. moralPoleOf + evaluateEnding already wired (EndingSchema.when.pole + flag-based gating both work). 21 new tests. 289 unit tests green.
-- [ ] de-2b surface the moral pole in the HUD (tyranny↔utopia axis, branch-relative label) so the player sees which pole the run is trending toward.
-- [ ] de-2c ensure EVERY branch pool expresses all 3 poles as reachable gated sub-paths (utopian/centrist/dictatorial), unless one makes zero sense early; add events where a pole is thin. PHASE BOUNDARY PR #B.
+- [x] de-2b DONE: PersonalityDial accepts pole+poleLabel props; renders branch-relative pole badge (cyan▲ utopian / gold◆ centrist / red▼ dictatorial) with branch-specific label. PlayScreen derives moralPoleOf+moralPoleLabel and passes them live. 2 new browser tests; priority regression test for theocracy vs assassination. 290 unit + 61 browser green.
+- [x] de-2c DONE: verified all 6 branches define all 3 pole endings AND every pole ending gates only on flags some event/world-timeline actually sets (19 pole flags, 0 unreachable). Added pole-coverage.unit.test.ts as a permanent invariant guard (a future pole ending referencing an unsettable flag now fails the suite instead of silently becoming unwinnable). PHASE DE-2 boundary → PR #B.
 
 ### Phase DE-3 — Balance + depth (task-015 + task-017 + AH4 no-shallowness)
 - [ ] de-3a balance pass: telegraphed currency-hedge survival play; crypto/attention market polish; verify no dominant/trap strategies (re-run the no-downside + outlier scans heat-aware).
