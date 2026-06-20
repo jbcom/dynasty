@@ -1,10 +1,10 @@
 import type { Content } from "../sim/content";
 import { applyChoice } from "../sim/effects";
-import { pickNextEvent } from "../sim/events";
 import { createRng, type Rng } from "../sim/rng";
 import type { GameEvent } from "../sim/schema";
 import { type GameState, initState, type LedgerEntry } from "../sim/state";
 import { advanceTimeline } from "../sim/timeline";
+import { pickNextEventViaWorld } from "../sim/world";
 
 /** A snapshot the UI renders from. Immutable per turn. */
 export interface GameView {
@@ -44,7 +44,7 @@ export class Game {
    */
   private pick(): GameEvent | null {
     const label = `pick:${this.state.history.length}:${this.state.eraIndex}:${this.state.eraEventCount}`;
-    return pickNextEvent(this.content, this.state, this.rng.fork(label));
+    return pickNextEventViaWorld(this.content, this.state, this.rng.fork(label));
   }
 
   get view(): GameView {

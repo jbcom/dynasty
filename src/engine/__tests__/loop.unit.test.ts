@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { validRaw } from "../../sim/__tests__/fixtures";
 import { buildContent } from "../../sim/content";
+import { createRng } from "../../sim/rng";
+import { initState } from "../../sim/state";
+import { pickNextEventViaWorld } from "../../sim/world";
 import { Game } from "../loop";
 
 const content = () => buildContent(validRaw());
@@ -73,5 +76,20 @@ describe("Game loop", () => {
     const g2 = new Game(content(), "seed", snapshot);
     expect(g2.view.state.flags).toContain("loud_baby");
     expect(g2.view.state.history).toHaveLength(1);
+  });
+
+  it("DE-1a: Game.pick() routes through pickNextEventViaWorld — first event matches direct world query", () => {
+    // The engine's pick() now calls pickNextEventViaWorld. Verify the first
+    // event the Game presents equals what pickNextEventViaWorld returns for
+    // the same (content, state, rng) — the canonical parity check at the
+    // engine-layer call site.
+    const c = content();
+    for (const seed of ["abc", "def", "xyz", "42"]) {
+      const g = new Game(c, seed);
+      const state = initState(c, seed);
+      const label = `pick:${state.history.length}:${state.eraIndex}:${state.eraEventCount}`;
+      const viaWorld = pickNextEventViaWorld(c, state, createRng(seed).fork(label));
+      expect(g.view.currentEvent?.id ?? null).toBe(viaWorld?.id ?? null);
+    }
   });
 });

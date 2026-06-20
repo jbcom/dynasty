@@ -13,7 +13,7 @@ decision: "do the refactor first"), then the query-heavy systems built on it, th
 content depth, then the Dynasty product epic, then the cross-cutting QA invariants.
 
 ### Phase DE-1 — Koota query-substrate migration (task-026)
-- [ ] de-1a migrate eligibleEvents/effectiveWeight selection (events.ts/pickNextEvent) to a declarative query over projectWorld, keeping the pure helper as source-of-truth + a parity test. Pattern for the rest.
+- [x] de-1a migrate eligibleEvents/effectiveWeight selection (events.ts/pickNextEvent) to a declarative query over projectWorld, keeping the pure helper as source-of-truth + a parity test. Pattern for the rest.
 - [ ] de-1b migrate the remaining hand-rolled query surfaces over the read-model where it clarifies (branch/slot/moralAxis resolution reads, timelinesForBranch/applyWorldFlags linking reads, market/rank reads already done). Pure transition (applyChoice) stays authoritative; worlds projected→queried→destroyed (withWorld). Every determinism + replay + timeline:sweep test stays green.
 - [ ] de-1c PHASE BOUNDARY: full gate (typecheck/biome/unit/browser) + replay parity + sweep; open PR #A "koota query substrate"; reviewer trio; resolve threads; squash-merge green.
 
