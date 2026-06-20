@@ -264,4 +264,11 @@ describe("per-branch per-pole endings — flag-gated resolution (DE-2a)", () => 
     const ending = content.endings.find((e) => e.id === "end_theocracy_utopian");
     expect(ending?.tier).toBe("endgame-good");
   });
+  it("end_theocracy_dictatorial priority 96 outranks end_assassination 95 (reviewer fix)", () => {
+    // Prevents array-order tie: a Gilead run that also draws assassination_target
+    // must resolve to the theocracy ending, not the generic assassination cutscene.
+    const gilead = content.endings.find((e) => e.id === "end_theocracy_dictatorial");
+    const assassination = content.endings.find((e) => e.id === "end_assassination");
+    expect(gilead?.priority).toBeGreaterThan(assassination?.priority ?? 0);
+  });
 });

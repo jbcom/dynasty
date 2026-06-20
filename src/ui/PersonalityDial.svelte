@@ -6,12 +6,17 @@ import {
   spectrumLabel,
   tyrannyUtopiaAxis,
 } from "../sim/personality";
+import type { MoralPole } from "../sim/moralAxis";
 
 interface Props {
   personality: Personality;
+  /** Branch-relative resolved moral pole (from moralPoleOf). Optional — omit before the run is live. */
+  pole?: MoralPole;
+  /** Branch-relative label for the pole (from moralPoleLabel). Falls back to generic pole name. */
+  poleLabel?: string;
 }
 
-const { personality }: Props = $props();
+const { personality, pole, poleLabel }: Props = $props();
 
 const axis = $derived(tyrannyUtopiaAxis(personality)); // -100 utopian … +100 tyrannical
 const label = $derived(spectrumLabel(personality));
@@ -42,6 +47,12 @@ const archetypeLabel: Record<string, string> = {
     <span class="spectrum" data-band={label}>{label}</span>
     <span class="archetype">{archetypeLabel[archetype]}</span>
   </div>
+  {#if pole}
+    <div class="pole-badge" data-pole={pole} aria-label="Current moral pole: {poleLabel ?? pole}">
+      <span class="pole-icon">{pole === "utopian" ? "▲" : pole === "dictatorial" ? "▼" : "◆"}</span>
+      <span class="pole-name">{poleLabel ?? pole}</span>
+    </div>
+  {/if}
   {#if gap >= 50}
     <p class="delusion" title="The world sees one man; he sees another.">
       The world and the mirror disagree.
@@ -120,5 +131,33 @@ const archetypeLabel: Record<string, string> = {
     font-size: 0.62rem;
     font-style: italic;
     color: var(--mmm-extrapolated);
+  }
+  .pole-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.62rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 999px;
+    width: fit-content;
+    background: color-mix(in srgb, var(--mmm-surface) 70%, transparent);
+    border: 1px solid currentcolor;
+  }
+  .pole-badge[data-pole="utopian"] {
+    color: var(--mmm-startrek);
+  }
+  .pole-badge[data-pole="centrist"] {
+    color: var(--mmm-gold);
+  }
+  .pole-badge[data-pole="dictatorial"] {
+    color: var(--mmm-red);
+  }
+  .pole-icon {
+    font-size: 0.55rem;
+  }
+  .pole-name {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
 </style>

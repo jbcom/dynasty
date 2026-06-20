@@ -54,4 +54,27 @@ describe("PersonalityDial", () => {
     });
     expect(host.textContent).toContain("disagree");
   });
+
+  it("renders the branch-relative moral-pole badge when a pole is supplied (DE-2b)", () => {
+    component = mount(PersonalityDial, {
+      target: host,
+      props: {
+        personality: p(),
+        pole: "utopian",
+        poleLabel: "the Covenant Commonwealth",
+      },
+    });
+    const badge = host.querySelector(".pole-badge") as HTMLElement;
+    expect(badge).not.toBeNull();
+    expect(badge.dataset.pole).toBe("utopian");
+    expect(host.textContent).toContain("the Covenant Commonwealth");
+  });
+
+  it("omits the pole badge before the run resolves a pole (no pole prop)", () => {
+    component = mount(PersonalityDial, {
+      target: host,
+      props: { personality: p() },
+    });
+    expect(host.querySelector(".pole-badge")).toBeNull();
+  });
 });
