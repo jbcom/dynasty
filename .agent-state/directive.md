@@ -1,6 +1,6 @@
 # Continuous Work Directive — maga-money-moves
 
-**Status:** ACTIVE
+**Status:** RELEASED
 **Owner:** jbogaty
 
 ## VISION — "DYNASTY": three playable dynastic sagas (user, 2026-06-20)
@@ -98,7 +98,7 @@ spec) — not re-queued here.
 ### task-017 AH4 no-shallowness audit
 - [ ] [WAIT-USER] (next work unit, post PR#10-merge) task-017 verify every branch opens a comparably rich gated multi-layer pool; deepen any thin branch
 ### task-018 Definition of done
-- [ ] [WAIT-REVIEW] task-018 DoD — PR #10 open (https://github.com/jbcom/maga-money-moves/pull/10); reviewer trio + CI running under a Monitor. On completion: fold findings → resolve threads → squash-merge once green. gate GREEN (typecheck, biome, 227 unit + 59 browser, build) and app LIVE-VERIFIED (chrome-devtools: title → German/Nazi-branch divergence "The Boy Who Served the King" → Markets tab with 6 live markets + 4 rank ladders + currency relabel, zero console errors); 7-branch timeline:sweep consistent. Opening the PR for the shippable unit now; remaining OPEN EPICS (full Koota query migration, deep-future for nazi/media/westcoast/megachurch, persona sweep task-023, Dynasty rename + Musk/Kennedy Era-0 sagas, AH8d sibling-count, task-022 full 3-pole coverage, task-017 no-shallowness) carry forward as the NEXT work unit per one-branch-per-unit. → open PR → reviewer trio → wait CI → squash-merge.
+- [x] task-018 DoD — PR #10 squash-merged to main (a0ab271). Reviewer trio folded (security clean; code-review 3 findings fixed; gemini 2 fixed + 3 refuted), CI green, 228 tests, app live-verified. DoD — PR #10 open (https://github.com/jbcom/maga-money-moves/pull/10); reviewer trio + CI running under a Monitor. On completion: fold findings → resolve threads → squash-merge once green. gate GREEN (typecheck, biome, 227 unit + 59 browser, build) and app LIVE-VERIFIED (chrome-devtools: title → German/Nazi-branch divergence "The Boy Who Served the King" → Markets tab with 6 live markets + 4 rank ladders + currency relabel, zero console errors); 7-branch timeline:sweep consistent. Opening the PR for the shippable unit now; remaining OPEN EPICS (full Koota query migration, deep-future for nazi/media/westcoast/megachurch, persona sweep task-023, Dynasty rename + Musk/Kennedy Era-0 sagas, AH8d sibling-count, task-022 full 3-pole coverage, task-017 no-shallowness) carry forward as the NEXT work unit per one-branch-per-unit. → open PR → reviewer trio → wait CI → squash-merge.
 
 ## Batch — alt-history consistency (batch-20260620-althist)
 
