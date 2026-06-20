@@ -3155,6 +3155,998 @@
       ]
     },
     {
+      "id": "ev_mog_geo_german_shadow",
+      "era": "mogul",
+      "year": 1971,
+      "title": "The Drumpf Problem",
+      "scene": "A columnist for the Village Voice has been sniffing around. The Trumps are Drumpfs — Friedrich Drumpf arrived from Bavaria in 1902, ran a hotel chain in the Klondike gold rush, and was deported from Germany before the war for dodging military service. Fred told the family they were Swedish to dodge anti-German feeling after World War II. Now the charade is cracking and your new Manhattan ambitions depend on a clean, American-sounding name.",
+      "researchNote": "Fred Trump told his children — and the press — that the family was Swedish, not German, a fiction maintained for decades to avoid anti-German sentiment in New York's heavily Jewish real estate market. Friedrich Trump (born Drumpf) had emigrated from Bavaria in 1902.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["family", "heat", "branding"],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": ["manhattan_ambition", "manhattan_arrival"],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "bury_the_german_past",
+          "text": "Double down on the Swedish story. Grandfather was from Stockholm, full stop.",
+          "effects": {
+            "money": 5,
+            "power": 4,
+            "reputation": 3,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": 5,
+            "outward": 4
+          },
+          "setFlags": ["swedish_myth", "buried_german_heritage"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.2, "polarity": -1 }
+          ],
+          "outcome": "The Swedish story holds for now. The Jewish contractors and tenants in Queens relax. The secret festers — a Chekhov's gun chambered for someone else's decade."
+        },
+        {
+          "id": "own_the_german_roots",
+          "text": "Lean into it — Germany is engineering and order, not shame.",
+          "effects": {
+            "money": -8,
+            "power": 5,
+            "reputation": -5,
+            "heat": 8
+          },
+          "personality": {
+            "grandiosity": 7,
+            "ideology": 6,
+            "outward": 5
+          },
+          "setFlags": ["german_heritage_owned"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.3, "polarity": -1 },
+            { "to": "establishment", "weight": 0.3, "polarity": -1 }
+          ],
+          "outcome": "The old-money WASP crowd sniffs; some Brooklyn tenants grow cold. But a defiant minority loves the gall of a man who refuses to apologize for his bloodline."
+        },
+        {
+          "id": "change_the_subject",
+          "text": "Flood the columnist with an announcement about the Commodore. Make him chase the story you want.",
+          "effects": {
+            "money": 3,
+            "power": 6,
+            "reputation": 4,
+            "heat": 2
+          },
+          "personality": {
+            "outward": 6,
+            "grandiosity": 5
+          },
+          "setFlags": ["buried_german_heritage", "media_manipulation"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The column never runs. The columnist chases the shinier object. You file away the lesson: a bigger story is always the best suppression."
+        },
+        {
+          "id": "lobby_jewish_community_leaders",
+          "text": "Make personal overtures to prominent Jewish real estate families to build trust regardless.",
+          "effects": {
+            "money": 10,
+            "power": 7,
+            "reputation": 6,
+            "loyalty": 8
+          },
+          "personality": {
+            "outward": 6,
+            "inward": 3
+          },
+          "setFlags": ["jewish_community_ties"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "You build genuine relationships across ethnic lines in the New York property world. The German question quietly loses its sting — friendships are better armor than fictions.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": { "reputation": ">=30" },
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_mog_geo_nyc_fiscal_dip_buy",
+      "era": "mogul",
+      "year": 1975,
+      "title": "Buy When Blood Is in the Streets",
+      "scene": "New York City is technically broke. President Ford has just told the city to drop dead — the Daily News headline writes itself. Midtown skyscrapers are selling at forty cents on the dollar. Half of Manhattan's developers have locked their offices and fled to Miami. Everyone says Manhattan is finished. Fred thinks it's over too. You disagree.",
+      "researchNote": "New York City's 1975 fiscal crisis pushed the city to the brink of default; property values collapsed and buildings were abandoned. Trump's 1974-76 option on the derelict Commodore Hotel beside Grand Central, acquired for a fraction of its pre-crisis value, became the template deal of his rise.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["realestate", "world-event", "power"],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": ["nyc_fiscal_crisis"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 18,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "buy_the_commodore",
+          "text": "Snap up the Commodore Hotel at the distressed price and tie it to a city tax abatement.",
+          "effects": {
+            "money": 80,
+            "power": 12,
+            "reputation": 10,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 6,
+            "ideology": 4
+          },
+          "setFlags": ["commodore_deal", "bought_the_dip", "manhattan_arrival", "tax_abatement"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.5, "polarity": 1 },
+            { "to": "establishment", "weight": 0.4, "polarity": -1 }
+          ],
+          "outcome": "You bet against an entire city's despair, wrap it in a forty-year tax deal, and walk away with a midtown foothold. When New York recovers, the Commodore prints money. The crisis was your ladder."
+        },
+        {
+          "id": "wait_for_the_bottom",
+          "text": "The city could still default. Wait six months for the true bottom.",
+          "effects": {
+            "money": 20,
+            "power": 4,
+            "reputation": 2
+          },
+          "personality": {
+            "inward": 6,
+            "grandiosity": -3
+          },
+          "setFlags": ["distressed_options"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "business_press", "weight": 0.3, "polarity": 1 }
+          ],
+          "outcome": "You hang back — and lose the Commodore option to a faster hand. But you study every move, and the lesson about crisis-timing will be worth a tuition."
+        },
+        {
+          "id": "partner_with_city_hall",
+          "text": "Offer to co-develop distressed city-owned buildings as a public-private showcase.",
+          "effects": {
+            "money": 45,
+            "power": 9,
+            "reputation": 8,
+            "loyalty": 6
+          },
+          "personality": {
+            "outward": 7,
+            "grandiosity": 6,
+            "ideology": 3
+          },
+          "setFlags": ["commodore_deal", "bought_the_dip", "albany_ties", "tax_abatement"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.5, "polarity": 1 },
+            { "to": "tabloids", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "You position yourself as the savior developer: private money rescuing a broke city. Koch owes you. Albany owes you. The press writes the story you scripted."
+        },
+        {
+          "id": "flee_to_suburbs",
+          "text": "Fred is right — pull capital back to Queens and ride it out in the outer boroughs.",
+          "effects": {
+            "money": 15,
+            "power": 1,
+            "reputation": -5
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": 6,
+            "grandiosity": -6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.2, "polarity": -1 }
+          ],
+          "outcome": "You follow Fred back to Brooklyn while Manhattan's bones go on sale. When the city heals, you watch other men become legends on your missed opportunity."
+        }
+      ]
+    },
+    {
+      "id": "ev_mog_geo_stagflation_squeeze",
+      "era": "mogul",
+      "year": 1974,
+      "title": "Stagflation Nation",
+      "scene": "The economy is doing something textbooks say is impossible: prices rising and growth stalling at the same time. The OPEC oil embargo has detonated under every budget. Construction costs are up thirty percent in a year. Your contractors want cost-plus contracts, the banks want floating rates, and the tenants can barely pay the rents that existed before any of this started.",
+      "researchNote": "The 1973-74 OPEC oil embargo and resulting stagflation — simultaneous inflation and stagnation — devastated construction costs and real estate margins across the U.S., forcing developers to renegotiate contracts and financing in real time.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["world-event", "realestate"],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {},
+        "minAge": 26,
+        "maxAge": 32
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "lock_in_fixed_contracts",
+          "text": "Hammer out fixed-price contracts now before costs climb further.",
+          "effects": {
+            "money": 20,
+            "power": 5,
+            "reputation": 4
+          },
+          "personality": {
+            "inward": 7,
+            "ideology": 3
+          },
+          "setFlags": ["inflation_hedged"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "business_press", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "You lock your contractors in before the next price surge. They hate you for it; the balance sheet thanks you. You learn that contracts are weapons."
+        },
+        {
+          "id": "pass_costs_to_tenants",
+          "text": "Hike the rents sharply and blame Washington.",
+          "effects": {
+            "money": 35,
+            "power": 3,
+            "reputation": -8,
+            "heat": 9
+          },
+          "personality": {
+            "ideology": 7,
+            "outward": 4,
+            "grandiosity": 4
+          },
+          "setFlags": ["hardball_landlord", "law_and_order_voice"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.4, "polarity": -1 }
+          ],
+          "outcome": "The rents go up; the protest pickets appear outside the Queens buildings. You become locally infamous and file it as free advertising."
+        },
+        {
+          "id": "lobby_for_rent_stabilization_carveout",
+          "text": "Grease Albany to exempt new construction from rent controls.",
+          "effects": {
+            "money": 25,
+            "power": 9,
+            "reputation": 2,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": 5,
+            "outward": 6,
+            "grandiosity": 5
+          },
+          "setFlags": ["albany_ties"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The exemption quietly passes in an omnibus bill. You make more on new units than anyone else in the borough, and the politicians get a donor they can count on."
+        }
+      ]
+    },
+    {
+      "id": "ev_mog_geo_old_money_snub",
+      "era": "mogul",
+      "year": 1976,
+      "title": "The Gilded Velvet Rope",
+      "scene": "You have arrived in Manhattan — the Commodore deal is closed, the name is in the papers. And yet the old-money crowd at the Racquet & Tennis Club, the Downtown Association, the Lenox Hill Hospital board — the real estate dynasties who trace their fortunes to the Astors and the Vanderbilts — will not return your calls. A Rockefeller aide lets slip the phrase: 'outer-borough money.' The Gilded Age is over but its ghosts still hold the guest list.",
+      "researchNote": "New York's Gilded-Age dynasties — Astors, Vanderbilts, Whitneys — created a stratum of old-money legitimacy that persisted well into the 1970s and 80s. Developers like Trump who arrived via outer-borough rental housing rather than inherited Manhattan landholdings faced acute social exclusion from established real estate and civic circles.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["realestate", "branding", "power"],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": ["manhattan_arrival"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "court_the_establishment",
+          "text": "Donate to their charities, attend their galas, and play the long legitimacy game.",
+          "effects": {
+            "money": -20,
+            "power": 8,
+            "reputation": 10,
+            "loyalty": 4
+          },
+          "personality": {
+            "outward": 7,
+            "ideology": -3,
+            "inward": 3
+          },
+          "setFlags": ["old_money_legitimacy", "establishment_adjacent"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "You write the checks, chair the committees, smile at men who privately call you 'the outer-borough builder.' Slowly the doors open. The price is a performance of deference you find corrosive."
+        },
+        {
+          "id": "attack_the_establishment",
+          "text": "Go to the tabloids. Call them fossils. Say their 'old money' is just old failure in nicer clothes.",
+          "effects": {
+            "money": 5,
+            "power": 7,
+            "reputation": 4,
+            "heat": 8
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 8,
+            "ideology": 7
+          },
+          "setFlags": ["nouveau_riche_stigma", "anti_establishment_brand"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.7, "polarity": 1 },
+            { "to": "establishment", "weight": 0.6, "polarity": -1 }
+          ],
+          "outcome": "The Post runs it on page three. The Racquet Club crowd is furious. But every working-class reader in Brooklyn nods along — and remembers the name. You trade their approval for a different, bigger crowd."
+        },
+        {
+          "id": "outbuild_them",
+          "text": "Let the buildings speak. Put your name on enough skyline and the velvet rope becomes irrelevant.",
+          "effects": {
+            "money": 30,
+            "power": 9,
+            "reputation": 8,
+            "health": -2
+          },
+          "personality": {
+            "grandiosity": 8,
+            "inward": 5,
+            "ideology": 4
+          },
+          "setFlags": ["nouveau_riche_stigma", "trump_brand"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.5, "polarity": 1 },
+            { "to": "business_press", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "You stop chasing their tables and start building their skyline. When Trump Tower opens above Tiffany's, they have to stare at your name every day on their walk to work."
+        },
+        {
+          "id": "find_new_money_allies",
+          "text": "Network with the rising Jewish and Italian real estate dynasties who also got shut out.",
+          "effects": {
+            "money": 20,
+            "power": 10,
+            "reputation": 6,
+            "loyalty": 10
+          },
+          "personality": {
+            "outward": 6,
+            "ideology": 3
+          },
+          "setFlags": ["jewish_community_ties", "nouveau_riche_stigma"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.4, "polarity": -1 },
+            { "to": "tabloids", "weight": 0.3, "polarity": 1 }
+          ],
+          "outcome": "You build a coalition of the excluded: the Dursts, the LeFraks, the Rudins who also know the velvet rope from the wrong side. New York's real estate power shifts from lineage to leverage.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": { "loyalty": ">=30" },
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_mog_geo_junk_bond_leverage",
+      "era": "mogul",
+      "year": 1984,
+      "title": "Milken's Money Machine",
+      "scene": "Michael Milken at Drexel Burnham Lambert has invented a new universe: junk bonds, high-yield debt for companies and developers who can't get investment-grade paper. It is the financial rocket fuel of the 1980s and the only reason deals like the Taj Mahal are conceivable. Your banker is on the phone with an offer. The yields are brutal but the capital is infinite — if you have the stomach for it.",
+      "researchNote": "Michael Milken's junk-bond market at Drexel Burnham Lambert transformed 1980s finance, enabling leveraged buyouts and mega-deals that would otherwise have been impossible. Trump's Atlantic City casino empire — particularly the Taj Mahal — was financed substantially through high-yield bonds at rates that made the projects structurally fragile.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["world-event", "realestate", "casino"],
+      "portrait": "mogul",
+      "requires": {
+        "flags": ["wall_street_boom_80s"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "go_all_in_junk_bonds",
+          "text": "Take Milken's call and lever up the casino empire on high-yield paper.",
+          "effects": {
+            "money": 120,
+            "power": 8,
+            "reputation": 3,
+            "heat": 9,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 11,
+            "ideology": 5,
+            "outward": 4
+          },
+          "setFlags": ["junk_bond_era", "overleveraged", "aggressive_leverage"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.5, "polarity": 1 },
+            { "to": "business_press", "weight": 0.5, "polarity": -1 }
+          ],
+          "outcome": "The capital flows in torrents. You are building at a scale that would have required a Vanderbilt fortune a generation ago. The fourteen-percent coupon is a detail — until it isn't."
+        },
+        {
+          "id": "use_junk_bonds_selectively",
+          "text": "Use high-yield paper for one project but keep the rest conventionally financed.",
+          "effects": {
+            "money": 65,
+            "power": 6,
+            "reputation": 4,
+            "heat": 5
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": 4
+          },
+          "setFlags": ["junk_bond_era", "cheap_debt_locked"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "business_press", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "You tap Milken for one flagship and keep the rest of the empire in safer hands. Slower build, but the failure of one domino won't topple them all."
+        },
+        {
+          "id": "decline_junk_bonds",
+          "text": "Too much yield means too much risk. Pass on Milken's universe.",
+          "effects": {
+            "money": 10,
+            "power": 2,
+            "reputation": 5
+          },
+          "personality": {
+            "inward": 8,
+            "grandiosity": -5,
+            "ideology": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "business_press", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "You stay out of the junk-bond casino while everyone else gorges. Your empire grows slower and survives the 1990 reckoning intact — a quiet heresy against the decade's theology."
+        }
+      ]
+    },
+    {
+      "id": "ev_mog_geo_wall_st_boom_80s",
+      "era": "mogul",
+      "year": 1983,
+      "title": "Greed Is Good, Donald",
+      "scene": "Wall Street is exploding. The Dow has broken 1,000 and keeps going. Investment bankers are twenty-seven years old and earning two million a year. Midtown office buildings can't be built fast enough to house the new Goldman trading floors. The money sloshing out of Wall Street has to go somewhere — and it is starting to flow straight into luxury Manhattan real estate.",
+      "researchNote": "The 1980s bull market generated enormous Wall Street bonuses that flowed into Manhattan luxury real estate, fueling demand for high-end condominiums and hotels at exactly the moment Trump Tower was opening and Trump was marketing to that demographic.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["world-event", "realestate", "branding"],
+      "portrait": "mogul",
+      "requires": {
+        "flags": ["wall_street_boom_80s", "trump_tower"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pivot_to_luxury_condos",
+          "text": "Reposition everything as luxury. The Wall Street bonus class is your new customer.",
+          "effects": {
+            "money": 90,
+            "power": 7,
+            "reputation": 10
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 7,
+            "ideology": 4
+          },
+          "setFlags": ["luxury_brand", "trump_brand"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.6, "polarity": 1 },
+            { "to": "business_press", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "You market marble lobbies and gilded fixtures to a generation that measures worth in square feet and gold trim. The Trump brand becomes synonymous with 1980s excess — which is exactly what these buyers want."
+        },
+        {
+          "id": "sell_to_wall_street_partners",
+          "text": "Bring in Wall Street equity partners to fund expansion at scale.",
+          "effects": {
+            "money": 70,
+            "power": 9,
+            "reputation": 5,
+            "loyalty": -4
+          },
+          "personality": {
+            "outward": 5,
+            "inward": 4
+          },
+          "setFlags": ["luxury_brand", "aggressive_leverage"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "business_press", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "Goldman and Bear come to the table. The capital accelerates the empire, but now you have partners who read balance sheets for a living — and they will not be patient when the cycle turns."
+        },
+        {
+          "id": "ignore_wall_street_trend",
+          "text": "Stay focused on middle-market deals. The Wall Street crowd is a bubble.",
+          "effects": {
+            "money": 15,
+            "power": 3,
+            "reputation": -4
+          },
+          "personality": {
+            "ideology": 5,
+            "inward": 6,
+            "grandiosity": -5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.2, "polarity": -1 }
+          ],
+          "outcome": "You miss the luxury wave but avoid its inevitable crash. A contrarian choice that looks wise in 1991 and foolish for all the years in between."
+        }
+      ]
+    },
+    {
+      "id": "ev_mog_geo_reagan_deregulation",
+      "era": "mogul",
+      "year": 1982,
+      "title": "The Deregulator's Gift",
+      "scene": "Reagan is remaking Washington's relationship with capital: tax cuts, deregulation, a bonfire of rules that once constrained what banks could lend and who they could lend to. For a developer who lives on other people's money, every deregulated dollar is a personal invitation. The question is whether you exploit the new rules, shape them from the inside, or let your rivals drink first.",
+      "researchNote": "Reagan-era deregulation of financial markets, including the Garn-St Germain Depository Institutions Act of 1982, loosened lending restrictions and fueled the credit expansion that enabled the 1980s real estate boom and, eventually, the S&L crisis.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["world-event", "realestate", "power"],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": ["reagan_era"],
+        "notFlags": ["overleveraged"],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "lobby_for_favorable_rules",
+          "text": "Hire lobbyists and shape the deregulation in your favor before the ink dries.",
+          "effects": {
+            "money": 40,
+            "power": 11,
+            "reputation": 3,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 7,
+            "outward": 6,
+            "grandiosity": 6
+          },
+          "setFlags": ["gop_ties", "albany_ties"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "Your lobbyists get a carve-out in the tax bill that no one notices for a decade. The gift keeps giving long after Reagan is gone."
+        },
+        {
+          "id": "flood_in_on_cheap_debt",
+          "text": "Skip the politics and just borrow every dollar the deregulated banks will lend.",
+          "effects": {
+            "money": 80,
+            "power": 5,
+            "reputation": 2,
+            "heat": 8
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 4,
+            "inward": 3
+          },
+          "setFlags": ["reagan_era", "aggressive_leverage", "overleveraged"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "business_press", "weight": 0.4, "polarity": -1 }
+          ],
+          "outcome": "The spigot opens and you drink. The portfolio doubles in eighteen months. The structural fragility is someone else's problem — probably the banks'."
+        },
+        {
+          "id": "warn_about_overextension",
+          "text": "Go on the record cautioning that everyone is borrowing too much.",
+          "effects": {
+            "money": 5,
+            "power": 5,
+            "reputation": 8
+          },
+          "personality": {
+            "ideology": -4,
+            "inward": 8,
+            "grandiosity": -4
+          },
+          "setFlags": ["distressed_options"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "business_press", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The Wall Street Journal runs your quote and calls you a contrarian. Rivals laugh — until they don't. You gain a reputation for foresight that costs you nothing except being right early.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": { "ideology": "<40" }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_mog_geo_new_vs_old_money_gala",
+      "era": "mogul",
+      "year": 1984,
+      "title": "The Met Gala Problem",
+      "scene": "An invitation arrives — the Metropolitan Museum of Art's Costume Institute benefit, the citadel of old-money social power. The event committee, chaired by women with surnames like Astor and Whitney, has decided to admit some new-money developers this year. Jackie O. sits on the curatorial board. It is simultaneously a coronation and a trial. Every tabloid photographer in Manhattan will be at the door.",
+      "researchNote": "By the mid-1980s Trump and Ivana had become fixtures of the New York social circuit at precisely the inflection point when old-money gatekeepers were grudgingly absorbing new-money developers into elite philanthropy; the Trumps cultivated this world while simultaneously antagonizing it.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["celebrity", "branding", "power"],
+      "portrait": "mogul",
+      "requires": {
+        "flags": ["married_ivana"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "attend_and_perform_deference",
+          "text": "Attend, be gracious, let Ivana shine, and play the grateful arriviste.",
+          "effects": {
+            "money": 0,
+            "power": 6,
+            "reputation": 9,
+            "loyalty": 5
+          },
+          "personality": {
+            "outward": 5,
+            "ideology": -4,
+            "inward": 3
+          },
+          "setFlags": ["old_money_legitimacy", "power_couple"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.5, "polarity": 1 },
+            { "to": "establishment", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The society photographers love you both. W magazine does a spread. For one evening the old-money set treats you as one of their own — and you file away exactly which buttons were pressed."
+        },
+        {
+          "id": "crash_the_dress_code",
+          "text": "Show up with a gold-lamé entourage and a view that the whole gala is theater.",
+          "effects": {
+            "money": 0,
+            "power": 5,
+            "reputation": 5,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 8,
+            "ideology": 6
+          },
+          "setFlags": ["nouveau_riche_stigma", "media_brand"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.8, "polarity": 1 },
+            { "to": "establishment", "weight": 0.6, "polarity": -1 }
+          ],
+          "outcome": "The dowagers whisper 'gauche.' Every camera lens in the building follows you. By midnight you are the headline — not the host. The old-money crowd's contempt is the best publicity you have ever had."
+        },
+        {
+          "id": "decline_the_gala",
+          "text": "Send a donation and skip it. Their approval is a leash you don't need.",
+          "effects": {
+            "money": -5,
+            "power": 3,
+            "reputation": 3
+          },
+          "personality": {
+            "ideology": 5,
+            "inward": 6,
+            "grandiosity": 3
+          },
+          "setFlags": ["anti_establishment_brand"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.3, "polarity": 1 }
+          ],
+          "outcome": "The no-show is a minor tabloid item. The message is clear: you are not auditioning. Some read defiance; others read insecurity. You do not care which."
+        },
+        {
+          "id": "bid_for_naming_rights",
+          "text": "Offer to underwrite the entire gala in exchange for the Trump name on the program.",
+          "effects": {
+            "money": -15,
+            "power": 8,
+            "reputation": 8,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 7,
+            "ideology": 4
+          },
+          "setFlags": ["old_money_legitimacy", "luxury_brand", "trump_brand"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.6, "polarity": 1 },
+            { "to": "establishment", "weight": 0.4, "polarity": -1 }
+          ],
+          "outcome": "The committee accepts the check and grinds its teeth over the program cover. You have bought the room's tolerance if not its affection — and your name is in every Upper East Side living room by morning.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": { "money": ">=60" },
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_mog_geo_inherited_vs_earned",
+      "era": "mogul",
+      "year": 1980,
+      "title": "Who Made Who",
+      "scene": "A profile in New York magazine is asking the question everyone whispers: how much of the Trump empire is Fred's and how much is Donald's? The piece is fair but precise — it tallies Fred's loans, his co-signatures, his political connections, the Queens infrastructure that predates Donald's birth. You can answer it honestly or craft the reply that builds the myth.",
+      "researchNote": "Fred Trump's political connections (especially with Brooklyn Democratic machine figures) and direct financial support were critical to Donald's early deals, including the Commodore and Trump Tower. The 'self-made' narrative was always contested by reporters who tracked the paper trail.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["family", "branding", "heat"],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "credit_fred_publicly",
+          "text": "Give Fred full credit in the profile. Gratitude is strength, not weakness.",
+          "effects": {
+            "money": 0,
+            "power": 4,
+            "reputation": 8,
+            "loyalty": 12
+          },
+          "personality": {
+            "ideology": -3,
+            "outward": 4,
+            "inward": 5
+          },
+          "setFlags": ["fathers_lessons"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.4, "polarity": 1 },
+            { "to": "tabloids", "weight": 0.2, "polarity": 1 }
+          ],
+          "outcome": "The profile lands warmly. Fred is proud; the establishment quietly respects the honesty. But the self-made myth can never be fully constructed from this foundation."
+        },
+        {
+          "id": "build_the_myth",
+          "text": "Tell the reporter you started from nothing. Fred was retired background.",
+          "effects": {
+            "money": 5,
+            "power": 7,
+            "reputation": 6,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 6,
+            "ideology": 6
+          },
+          "setFlags": ["self_made_myth", "fred_exposed"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.5, "polarity": 1 },
+            { "to": "business_press", "weight": 0.4, "polarity": -1 }
+          ],
+          "outcome": "The myth lands in print and sticks. A generation will believe you built it alone. The reporters who know the truth will keep filing; one day the paper trail wins."
+        },
+        {
+          "id": "refuse_the_interview",
+          "text": "Don't play. No comment, no access — let them print what they can prove.",
+          "effects": {
+            "money": 0,
+            "power": 5,
+            "reputation": -2,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": 7
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.3, "polarity": -1 }
+          ],
+          "outcome": "The profile runs anyway, more skeptical for the silence. The myth remains unbuilt. You sacrifice a chance to write your own story and let others write it for you."
+        },
+        {
+          "id": "plant_a_counter_story",
+          "text": "Give exclusive access to a rival reporter with a more flattering angle to drown out the first piece.",
+          "effects": {
+            "money": 0,
+            "power": 8,
+            "reputation": 7,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 7,
+            "ideology": 5
+          },
+          "setFlags": ["self_made_myth", "media_brand"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.7, "polarity": 1 }
+          ],
+          "outcome": "Two Trump profiles publish the same week; yours drowns the other. The self-made myth doesn't need to be true — it just needs to be louder.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": { "outward": ">=50" }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_mog_geo_anti_german_ww2_shadow",
+      "era": "mogul",
+      "year": 1977,
+      "title": "Fred's War Secret",
+      "scene": "A lawsuit by a disgruntled former contractor surfaces a deposition in which Fred refers to himself as the son of Swedish immigrants. A researcher from the Times recognizes the discrepancy — the immigration papers say Friedrich Drumpf, Bavaria. Post-war New York's Jewish real estate community made the Trumps' borrowed Swedish identity an economic necessity; now that necessity is a liability.",
+      "researchNote": "Friedrich Trump (born 1869, Kallstadt, Bavaria) immigrated to the U.S. in 1902. Fred Trump's fiction of Swedish ancestry was a strategic cover in a market where anti-German sentiment — raw after two World Wars — could cost a landlord tenants, contractors, and partners in New York's heavily Jewish outer-borough real estate world.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["family", "heat", "power"],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": ["buried_german_heritage"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "silence_the_researcher",
+          "text": "Call the Times editor directly and offer a bigger story to kill it.",
+          "effects": {
+            "money": -10,
+            "power": 7,
+            "reputation": 2,
+            "heat": 8
+          },
+          "personality": {
+            "ideology": 6,
+            "outward": 5,
+            "grandiosity": 5
+          },
+          "setFlags": ["buried_german_heritage", "media_manipulation"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.3, "polarity": -1 }
+          ],
+          "outcome": "The Times editor takes the trade. The researcher is redirected to a story about the garbage strike. The Drumpf question goes back to sleep — for now."
+        },
+        {
+          "id": "get_ahead_of_it",
+          "text": "Quietly correct the record: acknowledge German heritage, frame Friedrich as a pioneering immigrant entrepreneur.",
+          "effects": {
+            "money": 0,
+            "power": 5,
+            "reputation": 7,
+            "heat": 4
+          },
+          "personality": {
+            "outward": 5,
+            "ideology": -2,
+            "inward": 4
+          },
+          "setFlags": ["german_heritage_owned"],
+          "clearFlags": ["buried_german_heritage"],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.3, "polarity": 1 },
+            { "to": "establishment", "weight": 0.3, "polarity": 1 }
+          ],
+          "outcome": "The story runs as a human-interest piece about a Bavarian immigrant family. Post-war shadows dissolve; a new narrative about the American Dream takes their place."
+        },
+        {
+          "id": "threaten_litigation",
+          "text": "Have Roy Cohn send a cease-and-desist to the Times.",
+          "effects": {
+            "money": -5,
+            "power": 6,
+            "reputation": -4,
+            "heat": 10,
+            "loyalty": 5
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 6,
+            "inward": 3
+          },
+          "setFlags": ["cohn_doctrine", "counterpunch_doctrine"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.5, "polarity": -1 }
+          ],
+          "outcome": "Cohn's letter lands on the legal desk and the story dies — temporarily. But 'Trump sues Times over ancestry story' becomes its own item. You have traded one problem for a louder one.",
+          "requires": {
+            "flags": ["cohn_mentor"],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
       "id": "ev_creditor_brinkmanship",
       "era": "mogul",
       "year": 1987,

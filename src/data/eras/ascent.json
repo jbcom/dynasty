@@ -2934,6 +2934,776 @@
           "outcome": "You retreat to Florida, monetize the brand, and swear off the arena. The movement, leaderless, scatters — and the country slowly forgets the man who promised to never, ever quit."
         }
       ]
+    },
+    {
+      "id": "ev_asc_ai_bot_army",
+      "era": "ascent",
+      "year": 2016,
+      "title": "The Bot Army Awakens",
+      "scene": "A digital operative slides a laptop across the table in a back room off the campaign floor. The screen shows a dashboard — thousands of automated accounts, each tuned to amplify your message into trending oblivion. 'We call it the choir,' he says. 'They never sleep, they never eat, and they love you unconditionally.'",
+      "researchNote": "During the 2016 campaign, researchers documented coordinated inauthentic behavior on Twitter and Facebook — bot networks amplifying Trump content at a rate far exceeding organic reach, later linked to both domestic political operatives and foreign actors.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "disinformation", "social_media", "ai"],
+      "portrait": "candidate",
+      "requires": {
+        "flags": ["maga_base"],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "deploy_the_choir",
+          "text": "Turn the choir loose — flood every platform with your message until it's inescapable.",
+          "effects": {
+            "power": 9,
+            "loyalty": 7,
+            "reputation": -6,
+            "heat": 8
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 7,
+            "outward": 9
+          },
+          "setFlags": ["bot_army", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.7, "polarity": 1 },
+            { "to": "media_war", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The metrics go vertical. Every fact-check spawns three viral counter-claims. You didn't create post-truth America — you just learned to operate in it better than anyone."
+        },
+        {
+          "id": "plausible_deniability",
+          "text": "Let the operative run it independently — you don't want to know the details.",
+          "effects": {
+            "power": 5,
+            "reputation": -3,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 4,
+            "inward": 5
+          },
+          "setFlags": ["bot_army"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The accounts multiply without your fingerprints. Senate investigators will spend two years trying to prove what you already know."
+        },
+        {
+          "id": "shut_it_down",
+          "text": "Fire the operative. You win on personality, not algorithms.",
+          "effects": {
+            "reputation": 5,
+            "power": -3,
+            "loyalty": -4
+          },
+          "personality": {
+            "grandiosity": -4,
+            "ideology": -3,
+            "outward": -3
+          },
+          "setFlags": ["resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The choir goes quiet. Your rally crowds are real, your Twitter following is organic, and you sleep fine. The press calls you 'disciplined.' You're not sure that's a compliment."
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_deepfake_first",
+      "era": "ascent",
+      "year": 2018,
+      "title": "The Face That Wasn't There",
+      "scene": "A video hits the internet at 11 p.m. — you, unmistakably you, saying something you absolutely did not say. The face is yours. The voice is yours. But you were in Florida when it was supposedly filmed. Your press secretary is screaming into her phone. Your base says it proves the media will stop at nothing. The media says it proves you'll say anything. Both are technically correct.",
+      "researchNote": "Deepfake video technology reached consumer-grade accessibility circa 2018, with the term 'deepfake' coined on Reddit in 2017. Early political deepfakes targeted multiple public figures; researchers warned that the technology would make video evidence increasingly unreliable.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "media", "disinformation", "scandal"],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "weaponize_the_confusion",
+          "text": "Declare all unflattering footage of you — real or fake — 'fake news.' Let people pick their reality.",
+          "effects": {
+            "loyalty": 10,
+            "reputation": -8,
+            "heat": 7
+          },
+          "personality": {
+            "grandiosity": 9,
+            "ideology": 8,
+            "outward": 10
+          },
+          "setFlags": ["deepfake_scandal", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "media_war", "weight": 0.8, "polarity": 1 },
+            { "to": "populism", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "You turn an AI attack on you into a weapon for yourself. Every future piece of real footage you hate gets labeled deepfake. The epistemological damage is incalculable and you are thrilled."
+        },
+        {
+          "id": "demand_forensics",
+          "text": "Commission a top forensic lab to publicly debunk it — model responsible pushback.",
+          "effects": {
+            "reputation": 8,
+            "power": 3,
+            "heat": -4
+          },
+          "personality": {
+            "grandiosity": -4,
+            "inward": 6
+          },
+          "setFlags": ["deepfake_scandal", "resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The lab's report is meticulous. Three journalists share it. Two million people share the original deepfake. You win the argument and lose the information war."
+        },
+        {
+          "id": "hire_the_deepfaker",
+          "text": "Find out who made it — and quietly put them on payroll.",
+          "effects": {
+            "power": 8,
+            "heat": 10,
+            "reputation": -10
+          },
+          "personality": {
+            "grandiosity": 10,
+            "ideology": 6,
+            "outward": 8
+          },
+          "setFlags": ["deepfake_scandal", "synthetic_media_master", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "media_war", "weight": 0.9, "polarity": 1 }
+          ],
+          "outcome": "Two months later, a deepfake of your opponent confessing to crimes surfaces three days before a crucial vote. No one can prove anything. You call it 'interesting.'"
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_social_manipulation",
+      "era": "ascent",
+      "year": 2019,
+      "title": "The Algorithm Is My Campaign Manager",
+      "scene": "A Cambridge Analytica veteran — freshly scrubbed and rebranded — presents a deck: psychographic micro-targeting, rage-optimized ad creative, fear-score models for every zip code. 'We can move voters in eighty-seven congressional districts by Tuesday,' she says. Your digital team looks at you like they're watching the Discovery Channel.",
+      "researchNote": "Post-2016 investigations revealed the extent of AI-driven micro-targeting in political campaigns, including psychographic profiling derived from Facebook data. By 2019–2020, AI-optimized ad delivery was standard practice across major campaigns.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "politics", "disinformation", "campaign"],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "full_psychographic_deployment",
+          "text": "Give her everything — voter rolls, donation records, rally attendance. Make it surgical.",
+          "effects": {
+            "power": 12,
+            "loyalty": 8,
+            "heat": 10,
+            "money": -8000000
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 7,
+            "outward": 9
+          },
+          "setFlags": ["ai_campaign", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.7, "polarity": 1 },
+            { "to": "media_war", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The model finds the persuadables, floods them with perfectly calibrated fear and aspiration, and moves them by margins that shouldn't be statistically possible. Your pollsters go quiet and stare at their laptops."
+        },
+        {
+          "id": "targeted_only_swing_districts",
+          "text": "Run the model but limit it to the twelve states that actually matter.",
+          "effects": {
+            "power": 7,
+            "loyalty": 4,
+            "heat": 5,
+            "money": -4000000
+          },
+          "personality": {
+            "grandiosity": 4,
+            "ideology": 4,
+            "inward": 3
+          },
+          "setFlags": ["ai_campaign"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "Targeted, deniable, effective. You win the swing states. The rest of the country never knew the game was being played."
+        },
+        {
+          "id": "reject_the_model",
+          "text": "Tell her gut-and-rally is the Trump way. Send her back to Silicon Valley.",
+          "effects": {
+            "reputation": 5,
+            "loyalty": 3,
+            "heat": -4
+          },
+          "personality": {
+            "grandiosity": -3,
+            "ideology": -3,
+            "outward": -2
+          },
+          "setFlags": ["resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.3, "polarity": 1 }
+          ],
+          "outcome": "Rallies over algorithms. The press calls it 'authentically populist.' You call it winning without a cheat code — which is technically less efficient, but it's your kind of gamble."
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_revolution_arrives",
+      "era": "ascent",
+      "year": 2017,
+      "title": "The Machines Learn to Think (A Little)",
+      "scene": "A DARPA briefing officer walks you through a demonstration: a neural network that can generate a face that never existed, write a news article from a headline, and translate Mandarin in real time. 'Mr. President, this technology will be the atomic bomb of the information age.' You nod. You are already thinking of uses, not safeguards.",
+      "researchNote": "By 2017, deep learning breakthroughs including GANs (generative adversarial networks) and transformer models were reshaping what AI could produce. Intelligence briefings to the Trump White House touched on AI's dual-use potential for disinformation and defense.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "technology", "politics", "governance"],
+      "portrait": "president",
+      "requires": {
+        "flags": ["ai_revolution"],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fund_military_ai",
+          "text": "Redirect Pentagon resources into AI weapons programs — weaponize the breakthrough first.",
+          "effects": {
+            "power": 10,
+            "reputation": -5,
+            "heat": 7,
+            "money": -20000000
+          },
+          "personality": {
+            "grandiosity": 9,
+            "ideology": 8,
+            "outward": 8
+          },
+          "setFlags": ["ai_campaign", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.5, "polarity": 1 },
+            { "to": "media_war", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The Pentagon's AI budget triples. Silicon Valley protests. You remind them they cashed the checks. The machines get smarter and the contracts get classified."
+        },
+        {
+          "id": "declare_ai_supremacy",
+          "text": "Issue an executive order making America first in AI — frame it as a new space race.",
+          "effects": {
+            "power": 8,
+            "reputation": 4,
+            "loyalty": 5,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 10,
+            "ideology": 5,
+            "outward": 7
+          },
+          "setFlags": ["ai_campaign"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "The executive order lands. Tech stocks spike. You tweet 'WINNING' in all caps. For once, the economists agree."
+        },
+        {
+          "id": "ignore_the_briefing",
+          "text": "Tune out after slide three. You'll deal with it when it's on the news.",
+          "effects": {
+            "power": -2,
+            "reputation": -3
+          },
+          "personality": {
+            "grandiosity": -3,
+            "inward": -4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.2, "polarity": -1 }
+          ],
+          "outcome": "The briefing officer packs his slides. China files a patent. You tweet about the ratings for the State of the Union. The machines do not wait for you."
+        },
+        {
+          "id": "set_up_ethics_board",
+          "text": "Commission a national AI ethics board — control the narrative on governance.",
+          "effects": {
+            "reputation": 9,
+            "power": 3,
+            "heat": -3
+          },
+          "personality": {
+            "grandiosity": -5,
+            "ideology": -4,
+            "inward": 8
+          },
+          "setFlags": ["ai_governance_stance", "resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "The ethics board attracts the best minds from academia and industry. They produce a landmark report. You skim the executive summary and declare it 'very good, very smart.' History gives you more credit than you deserve."
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_deepfake_opponent",
+      "era": "ascent",
+      "year": 2019,
+      "title": "Someone Put Words in Their Mouth",
+      "scene": "A video surfaces three days before the Iowa caucuses: your lead Democratic rival, apparently confessing to a corruption scheme — in their own voice, with their own face, in front of their own campaign backdrop. Your team says they had nothing to do with it. The video is technically perfect. Your rival calls it election interference. Cable news runs it for six hours before the fact-checkers catch up.",
+      "researchNote": "By 2019, AI-generated political deepfakes were a documented concern. Researchers at MIT, Stanford, and DARPA were racing to build detection tools as generative video quality crossed the threshold of casual believability.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "disinformation", "politics", "scandal"],
+      "portrait": "president",
+      "requires": {
+        "flags": ["deepfake_scandal"],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "deny_and_enjoy",
+          "text": "Issue a one-line denial, then let the clip cycle for another 48 hours before cooperating with any investigation.",
+          "effects": {
+            "power": 8,
+            "loyalty": 7,
+            "reputation": -8,
+            "heat": 10
+          },
+          "personality": {
+            "grandiosity": 10,
+            "ideology": 8,
+            "outward": 9
+          },
+          "setFlags": ["synthetic_media_master", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "media_war", "weight": 0.8, "polarity": 1 },
+            { "to": "populism", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "By the time the video is debunked, it has reshaped the primary. You didn't make it. You just didn't stop it. History will struggle to write that paragraph."
+        },
+        {
+          "id": "condemn_and_call_for_laws",
+          "text": "Hold a press conference condemning deepfakes — call for legislation making synthetic media a federal crime.",
+          "effects": {
+            "reputation": 9,
+            "power": 4,
+            "heat": -5,
+            "loyalty": -4
+          },
+          "personality": {
+            "grandiosity": -5,
+            "ideology": -4,
+            "inward": 7
+          },
+          "setFlags": ["ai_governance_stance", "resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "Your condemnation is bipartisan gold. Congress passes the Malicious Deepfake Prohibition Act two years later. It is named after someone else. You are fine with that."
+        },
+        {
+          "id": "commission_your_own_ai_lab",
+          "text": "Quietly fund a counter-deepfake AI lab — to detect enemy fakes and, optionally, make better ones.",
+          "effects": {
+            "power": 10,
+            "heat": 8,
+            "money": -15000000
+          },
+          "personality": {
+            "grandiosity": 9,
+            "ideology": 6,
+            "inward": 7
+          },
+          "setFlags": ["synthetic_media_master", "ai_campaign"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "media_war", "weight": 0.7, "polarity": 1 }
+          ],
+          "outcome": "The lab's detection tools surface in the press. The offensive tools do not. An arms race begins in a basement no one knows exists."
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_musk_grok",
+      "era": "ascent",
+      "year": 2024,
+      "title": "Elon's Other AI",
+      "scene": "Elon drops the news at a Vegas fundraiser you both attend: xAI has crossed a benchmark that puts Grok ahead of every commercial model on political knowledge tasks. 'It knows what people believe before they know it themselves,' he tells you, swirling a glass of sparkling water. The implication is not subtle. He's offering you access. All it costs is silence on a regulatory question he needs answered.",
+      "researchNote": "In 2024 Elon Musk's xAI launched Grok, embedded in X (formerly Twitter), giving Musk both an AI model and the distribution platform to deploy it. Critics noted Grok's outputs systematically favored Musk's political allies. Trump and Musk's political alliance deepened through 2024.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "politics", "musk", "disinformation"],
+      "portrait": "candidate",
+      "requires": {
+        "flags": ["musk_ai_empire"],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "take_the_grok_deal",
+          "text": "Shake his hand. Whatever regulatory question he needs answered — consider it answered.",
+          "effects": {
+            "power": 12,
+            "loyalty": 6,
+            "heat": 9,
+            "money": -5000000
+          },
+          "personality": {
+            "grandiosity": 10,
+            "ideology": 7,
+            "outward": 9
+          },
+          "setFlags": ["ai_campaign", "synthetic_media_master", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.7, "polarity": 1 },
+            { "to": "media_war", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "Grok begins surfacing your talking points as 'organic trending topics' to 280 million accounts. The regulatory ruling goes through quietly. No one can prove causation. That is the beauty of it."
+        },
+        {
+          "id": "negotiate_harder",
+          "text": "Counter-offer: you want exclusive access AND veto on how Grok portrays you. Elon can have his ruling.",
+          "effects": {
+            "power": 9,
+            "heat": 7,
+            "money": -3000000
+          },
+          "personality": {
+            "grandiosity": 12,
+            "ideology": 6,
+            "outward": 8
+          },
+          "setFlags": ["ai_campaign", "synthetic_media_master"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "Elon blinks. The counter-offer stands. You now have an AI model on the world's most-used platform filtered to make you look good. The founding fathers are somewhere spinning."
+        },
+        {
+          "id": "decline_musk_deal",
+          "text": "Walk away. You don't want to owe Elon Musk anything, especially not an algorithm.",
+          "effects": {
+            "reputation": 7,
+            "loyalty": -5,
+            "heat": -4
+          },
+          "personality": {
+            "grandiosity": -5,
+            "ideology": -3,
+            "inward": 6
+          },
+          "setFlags": ["ai_governance_stance", "resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "You keep your independence. Grok spends the next year being subtly neutral toward you rather than effusively supportive. In AI terms, that is nearly the same thing as an enemy."
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_self_deepfake",
+      "era": "ascent",
+      "year": 2020,
+      "title": "The President Who Was Everywhere at Once",
+      "scene": "A crisis — you're hospitalized, unavailable, and the news cycle is devouring itself. Your senior digital strategist presents a solution: an AI voice clone and video composite, trained on forty thousand hours of your content, that can speak at your rallies, cut ads, and post on Truth Social while you recover. 'Plausible deniability built in,' he says. 'No one will know.' That last sentence is a lie.",
+      "researchNote": "Voice cloning and video synthesis technology advanced rapidly between 2019 and 2021. Political operatives began experimenting with AI-generated candidate surrogates, raising questions about disclosure requirements that regulators were slow to address.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "disinformation", "scandal", "media"],
+      "portrait": "president",
+      "requires": {
+        "flags": ["ai_campaign"],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "deploy_the_ai_double",
+          "text": "Authorize it. The AI speaks for you while you recover. Never acknowledge it publicly.",
+          "effects": {
+            "loyalty": 9,
+            "reputation": -9,
+            "power": 8,
+            "heat": 11
+          },
+          "personality": {
+            "grandiosity": 12,
+            "ideology": 9,
+            "outward": 10
+          },
+          "setFlags": ["synthetic_media_master", "deepfake_scandal", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "media_war", "weight": 0.9, "polarity": 1 },
+            { "to": "populism", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The AI-Trump rallies fifty thousand people in two states simultaneously. When the truth leaks six weeks later, your lawyers call it 'aspirational representation.' The FEC opens an inquiry. Your base calls it 'sick genius.'"
+        },
+        {
+          "id": "use_ai_for_ads_only",
+          "text": "Limit it — AI-cut ads only, with a disclosure somewhere in the fine print.",
+          "effects": {
+            "power": 5,
+            "heat": 5,
+            "money": -6000000
+          },
+          "personality": {
+            "grandiosity": 5,
+            "ideology": 4,
+            "inward": 4
+          },
+          "setFlags": ["ai_campaign", "synthetic_media_master"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "media_war", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The ads are technically compliant. The disclosure is in six-point font. The AI's version of your voice is measurably more persuasive than the real thing, which is either flattering or horrifying."
+        },
+        {
+          "id": "refuse_the_double",
+          "text": "No. You campaign as yourself or not at all. Shut the project down.",
+          "effects": {
+            "reputation": 8,
+            "health": 4,
+            "loyalty": -4
+          },
+          "personality": {
+            "grandiosity": -7,
+            "ideology": -4,
+            "outward": -5
+          },
+          "setFlags": ["resisted_disinfo", "ai_governance_stance"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "You go dark for three weeks. Speculation fills the void. When you return, gaunt and hoarse, the crowd gives you a standing ovation. Sometimes absence is the most authentic thing you can do."
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_agi_horizon",
+      "era": "ascent",
+      "year": 2020,
+      "title": "The Last Benchmark Falls (Early Warning)",
+      "scene": "A classified NSA briefing slides across your Resolute Desk: AI systems are approaching general reasoning capability. Not there yet. But the slope is vertical. 'Within a decade,' the briefer says, 'the nation that controls this technology controls the century.' The word 'controls' is doing a lot of work in that sentence.",
+      "researchNote": "Internal government projections on AI trajectory circulating from 2019 onward — including from NSCAI reports — warned of rapid capability gains toward general AI. The Trump administration's AI executive order in 2019 was considered underpowered relative to the scale of the challenge.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["ai", "governance", "geopolitics", "technology"],
+      "portrait": "president",
+      "requires": {
+        "flags": ["ai_revolution"],
+        "notFlags": [],
+        "meters": {},
+        "personality": { "grandiosity": ">=55" }
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "declare_ai_arms_race",
+          "text": "Classify AGI development as a national security matter and strip civilian oversight — make it a weapons program.",
+          "effects": {
+            "power": 12,
+            "reputation": -6,
+            "heat": 9,
+            "money": -50000000
+          },
+          "personality": {
+            "grandiosity": 11,
+            "ideology": 9,
+            "outward": 8
+          },
+          "setFlags": ["ai_campaign", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.5, "polarity": 1 },
+            { "to": "media_war", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The classified program outpaces civilian research by a factor of three. When AGI arrives, the government already has a seat at the table. So do the generals."
+        },
+        {
+          "id": "international_ai_treaty",
+          "text": "Open back-channel talks with China and the EU — propose a Bretton Woods for AI before it's too late.",
+          "effects": {
+            "reputation": 11,
+            "power": 5,
+            "heat": -4,
+            "loyalty": -6
+          },
+          "personality": {
+            "grandiosity": -6,
+            "ideology": -5,
+            "inward": 9
+          },
+          "setFlags": ["ai_governance_stance", "resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.7, "polarity": 1 }
+          ],
+          "outcome": "The talks produce a non-binding framework that three major powers ignore within a year. You are nevertheless remembered as the president who tried. In the long arc, that sentence matters."
+        },
+        {
+          "id": "mock_the_briefer",
+          "text": "Tell the briefer you've been hearing 'AI will change everything' for thirty years — come back when it actually does something.",
+          "effects": {
+            "reputation": -5,
+            "power": -3,
+            "heat": 2
+          },
+          "personality": {
+            "grandiosity": -2,
+            "ideology": -2,
+            "inward": -5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.2, "polarity": -1 }
+          ],
+          "outcome": "The briefer leaves. The machines keep learning. The benchmark falls on schedule, without your input or your interest. History marks the meeting in its footnotes: 'The president was skeptical.'"
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_governance_choice",
+      "era": "ascent",
+      "year": 2019,
+      "title": "The Regulatory Fork in the Road",
+      "scene": "Two delegations arrive at the White House in the same week: Silicon Valley CEOs begging for regulatory light-touch so American AI can outrun China, and a coalition of civil-liberties groups documenting how AI-powered surveillance is already being used against protesters, immigrants, and journalists. You can't give both sides what they want. Or can you — if you're creative about it.",
+      "researchNote": "The Trump administration's 2019 Executive Order on Maintaining American Leadership in Artificial Intelligence explicitly prioritized competitiveness over governance, delaying federal AI regulation. Critics argued this created a power vacuum filled by surveillance contractors.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "governance", "politics", "civil_liberties"],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": ["ai_governance_stance"],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "full_deregulation",
+          "text": "Sign the light-touch order. American AI must outrun China — ethics are a luxury for the winners.",
+          "effects": {
+            "power": 8,
+            "loyalty": 6,
+            "reputation": -5,
+            "money": 10000000,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 9,
+            "outward": 7
+          },
+          "setFlags": ["ai_campaign", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.5, "polarity": 1 },
+            { "to": "media_war", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The order is celebrated in Silicon Valley and condemned in Brussels. Three AI surveillance startups triple their government contracts by the following quarter. Speed has a price, and someone else always pays it."
+        },
+        {
+          "id": "surveillance_carve_out",
+          "text": "Deregulate commercial AI but carve out law enforcement and border surveillance — you need those tools.",
+          "effects": {
+            "power": 9,
+            "loyalty": 7,
+            "heat": 7,
+            "reputation": -6
+          },
+          "personality": {
+            "grandiosity": 7,
+            "ideology": 10,
+            "outward": 6
+          },
+          "setFlags": ["ai_campaign", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "The carve-outs are written by the contractors who profit from them. Immigration courts begin receiving AI-generated risk scores. No one authorized this. Everyone benefits from the ambiguity."
+        },
+        {
+          "id": "establish_oversight",
+          "text": "Split the difference: light-touch commercial AI, strong civil-liberties guardrails on government use.",
+          "effects": {
+            "reputation": 10,
+            "power": 4,
+            "loyalty": -3,
+            "heat": -3
+          },
+          "personality": {
+            "grandiosity": -6,
+            "ideology": -4,
+            "inward": 8
+          },
+          "setFlags": ["ai_governance_stance", "resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "The guardrails are imperfect, underfunded, and quietly effective. You will not be remembered for this. The people it protects will not know your name. That is, surprisingly, okay."
+        }
+      ]
     }
   ]
 }

@@ -2535,6 +2535,627 @@
           "outcome": "You look out at seventy thousand screaming fans and see not a crowd but an electorate. The same people who buy the kayfabe will buy the campaign, and you start speaking to them directly."
         }
       ]
+    },
+    {
+      "id": "ev_pt_selfmade_mailroom_to_floor",
+      "era": "primetime",
+      "year": 2000,
+      "title": "From the Mailroom to the Trading Floor",
+      "scene": "You didn't inherit a zip code — you inherited a work ethic and a hunger so sharp it cut glass. It's the turn of the millennium and the kid who sorted rent checks in a Queens walk-up now has a desk at a mid-tier Manhattan real-estate finance shop. Your phone has a direct line to the repo desk. You are not in the room yet, but you can hear the room. A veteran trader — the kind who invented instruments the SEC hadn't named yet — presses a Salomon Brothers card into your hand after a closing dinner. 'You remind me of me,' he says. 'Except I had worse hair.' The securitization wave is still a few years ahead. You can ride it — or you can grind here until somebody notices.",
+      "researchNote": "Lewis Ranieri joined Salomon Brothers in the mailroom in 1968 and pioneered mortgage-backed securities in the late 1970s–early 1980s, transforming US housing finance. This event mirrors that self-made trajectory for a non-dynasty Donald.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["finance", "hustle", "selftmade"],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": ["self_made_start"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 16,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "take_the_salomon_contact",
+          "text": "Chase the Salomon Brothers contact. Learn the securitization game from the inventor.",
+          "effects": {
+            "money": -5,
+            "power": 8,
+            "reputation": 4,
+            "loyalty": 3
+          },
+          "personality": {
+            "inward": 8,
+            "grandiosity": -4
+          },
+          "setFlags": ["finance_floor_grind", "salomon_connection"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "finance", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "You spend two years as the guy who never leaves the desk. The veteran teaches you that the real money isn't in the asset — it's in the instrument that wraps it. You start to see every apartment building in New York as a bundle of cash flows waiting to be sliced and sold."
+        },
+        {
+          "id": "grind_the_desk_yourself",
+          "text": "Skip the mentor. Grind the trading floor on your own — study every securitization deal that closes.",
+          "effects": {
+            "money": 5,
+            "power": 5,
+            "reputation": 2
+          },
+          "personality": {
+            "inward": 6,
+            "ideology": 4
+          },
+          "setFlags": ["finance_floor_grind"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "finance", "weight": 0.3, "polarity": 1 }
+          ],
+          "outcome": "No shortcuts, no hand-holding. You read every prospectus filed in 1998–2000 like scripture. The knowledge accumulates slowly but it belongs entirely to you."
+        },
+        {
+          "id": "bet_on_real_estate_direct",
+          "text": "Skip finance entirely — scrape together capital and buy a distressed outer-borough property. Old school.",
+          "effects": {
+            "money": 10,
+            "power": 3,
+            "reputation": 3,
+            "health": -5
+          },
+          "personality": {
+            "grandiosity": 5,
+            "outward": 4
+          },
+          "setFlags": ["bootstrap_realestate"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.2, "polarity": 1 }
+          ],
+          "outcome": "You flip the building in fourteen months and put the profit into the next one. It's brick-and-mortar bootstrapping, not glamorous, and the margins are brutal — but the name on the deed is yours."
+        }
+      ]
+    },
+    {
+      "id": "ev_pt_selfmade_securitization_wave",
+      "era": "primetime",
+      "year": 2003,
+      "title": "The Securitization Gold Rush",
+      "scene": "The Fed has cut rates to nothing and Wall Street has discovered it can mint money by packaging mortgages into bonds and selling the risk to pension funds in Düsseldorf. Every ambitious man in Manhattan is figuring out where he fits in the food chain. You've watched the securitization machine accelerate for three years. A regional savings bank wants to spin off its residential mortgage portfolio. They need someone to structure the deal and find buyers — someone hungry enough to do it cheap, smart enough to do it right. A Goldman alumni sneers at the fee. You don't.",
+      "researchNote": "The 2003–2005 mortgage securitization boom followed Ranieri's playbook at massive scale, with banks packaging and reselling MBS at unprecedented volume. The self-made path Donald enters this wave as a structurer/arranger, not an inheritor.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["finance", "hustle", "realestate"],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": ["self_made_start", "finance_floor_grind"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 15,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "structure_the_deal",
+          "text": "Take the structuring mandate. Build the MBS, place the tranches, collect the fee — and use the credibility to pitch the next ten deals.",
+          "effects": {
+            "money": 80000,
+            "power": 12,
+            "reputation": 10
+          },
+          "personality": {
+            "inward": 6,
+            "grandiosity": 4
+          },
+          "setFlags": ["securitization_play", "clawed_back"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "finance", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "The deal closes in six weeks. The fee is six figures. The savings bank's CFO sends you three referrals. In the space of one transaction you've gone from floor grunt to deal structurer, and the name people whisper when they describe who got it done is yours."
+        },
+        {
+          "id": "go_proprietary",
+          "text": "Don't facilitate — capitalize. Use your fee pipeline to accumulate distressed mortgage notes directly, before the big banks get there.",
+          "effects": {
+            "money": 120000,
+            "power": 8,
+            "reputation": 6,
+            "heat": 8
+          },
+          "personality": {
+            "grandiosity": 12,
+            "inward": -4
+          },
+          "setFlags": ["securitization_play", "proprietary_book"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "finance", "weight": 0.7, "polarity": 1 }
+          ],
+          "outcome": "You load a book of distressed notes and ride the 2003–2005 appreciation wave. The gains are enormous and entirely self-authored. The risk is also entirely yours — a fact that will matter later."
+        },
+        {
+          "id": "pivot_to_real_estate_development",
+          "text": "Use the finance credibility as a bridge: pitch developers needing capital. Become the money guy behind Manhattan projects, not just a paper-pusher.",
+          "effects": {
+            "money": 40000,
+            "power": 15,
+            "reputation": 8
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 8
+          },
+          "setFlags": ["securitization_play", "manhattan_ambition"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.3, "polarity": 1 }
+          ],
+          "outcome": "You leverage the finance reputation to get in the door with developers who need structured capital. By 2004 you are not yet the man whose name goes on the building — but you are the man the man who owns the building calls."
+        }
+      ]
+    },
+    {
+      "id": "ev_pt_selfmade_hustle_deal",
+      "era": "primetime",
+      "year": 2005,
+      "title": "The Sheer-Hustle Deal",
+      "scene": "A forty-story mixed-use site on the West Side has been stuck in litigation for four years. The original developer is belly-up. The bank holding the note wants out. The city wants the site developed because it's a visual scar. Three big players passed because the entitlements are a labyrinth. You have read every zoning memo. You know the one city councilman whose district benefits most from a resolution. You work the phones for six weeks straight. Your assistant stops asking what time you're leaving.",
+      "researchNote": "Distressed urban development in mid-2000s Manhattan frequently required navigating complex zoning, lender workouts, and political relationships. Self-made developers often unlocked deals the established players couldn't be bothered with.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["realestate", "hustle", "power"],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": ["self_made_start", "securitization_play"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "close_the_deal_disciplined",
+          "text": "Negotiate a clean workout: buy the note at a discount, cut the city a tax-abatement deal, and build a profitable but modest mixed-use tower.",
+          "effects": {
+            "money": 200000,
+            "power": 18,
+            "reputation": 14,
+            "loyalty": 8
+          },
+          "personality": {
+            "inward": 10,
+            "grandiosity": -6
+          },
+          "setFlags": ["merit_empire", "dealmaker_persona", "clawed_back"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.3, "polarity": 1 },
+            { "to": "finance", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The tower goes up in twenty-two months. No fanfare, no gold leaf. But the returns are real, the name is known in the right rooms, and the city councilman owes you a favor. You have built something out of nothing — and you know exactly how you did it."
+        },
+        {
+          "id": "go_big_overreach",
+          "text": "Double the building's height, add a hotel flag, and market it internationally. Put your name on the facade in letters two stories tall.",
+          "effects": {
+            "money": 80000,
+            "power": 20,
+            "reputation": 8,
+            "heat": 16,
+            "health": -8
+          },
+          "personality": {
+            "grandiosity": 18,
+            "outward": 12,
+            "inward": -8
+          },
+          "setFlags": ["tabloid_fixture", "brand_machine", "overreach_flag"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.7, "polarity": 1 }
+          ],
+          "outcome": "The project balloons. Cost overruns hit. The hotel flag pulls out. You scramble financing from three continents. It barely closes — but the facade goes up with your name on it and suddenly the gossip pages know who you are. Fame: achieved. Margin: not so much."
+        },
+        {
+          "id": "flip_the_note",
+          "text": "Don't build. Acquire the distressed note at a discount and immediately flip it to a Korean sovereign fund for a quick profit.",
+          "effects": {
+            "money": 150000,
+            "power": 10,
+            "reputation": 6
+          },
+          "personality": {
+            "inward": 6,
+            "grandiosity": -4
+          },
+          "setFlags": ["dealmaker_persona", "ruthless_dealmaker"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "finance", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "Clean exit. Six-week hold, eight-figure profit. No hard hat, no ribbon cutting, no drama. You are becoming the kind of man who makes money on deals without ever touching the concrete — which is either the highest form of capitalism or a betrayal of everything you told yourself you were."
+        },
+        {
+          "id": "bring_in_partner",
+          "text": "Bring in a deep-pocketed partner to share risk. You keep the operating control; they bring the balance sheet.",
+          "effects": {
+            "money": 100000,
+            "power": 12,
+            "reputation": 10,
+            "loyalty": -6
+          },
+          "personality": {
+            "outward": 6,
+            "inward": 4
+          },
+          "setFlags": ["merit_empire", "manhattan_ambition"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.2, "polarity": 1 }
+          ],
+          "outcome": "The partner brings the capital; you bring the deal. The split is painful but the execution is clean. Two years later, when the project is complete and both parties are richer, you'll never mention the partner's name to a journalist."
+        }
+      ]
+    },
+    {
+      "id": "ev_pt_selfmade_clawback_moment",
+      "era": "primetime",
+      "year": 2006,
+      "title": "The Clawback: Self-Made to Mogul",
+      "scene": "A Wall Street Journal real-estate correspondent calls to profile 'the new developers reshaping Manhattan.' You are on a shortlist of six. The others — Old-money scions with fathers who went to Exeter — smile for the photo shoots, mention their grandfather's deals, and let the lineage do the talking. You have none of that. What you have is a deal sheet. The reporter is polishing the draft when a private equity titan pulls you aside at a charity dinner. 'I don't usually say this,' he murmurs. 'But you built this from zero. That's rarer than it looks.' He hands you a term sheet for a $400 million Manhattan mixed-use partnership.",
+      "researchNote": "By the mid-2000s several self-made developers and finance operators had crossed into the same stratum as dynastic real estate families purely through deal track records, a path distinct from the inherited-brand trajectory.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["realestate", "hustle", "power", "media"],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": ["self_made_start", "clawed_back"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 18,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "take_the_pe_deal_disciplined",
+          "text": "Take the term sheet. Discipline over ego: you keep 30% economics, they keep 70%, you run the operation and build the track record.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": { "grandiosity": "<=55" }
+          },
+          "effects": {
+            "money": 400000,
+            "power": 25,
+            "reputation": 18,
+            "loyalty": 12
+          },
+          "personality": {
+            "inward": 8,
+            "outward": 5,
+            "grandiosity": -5
+          },
+          "setFlags": ["self_made_tycoon", "merit_empire", "dealmaker_persona", "luxury_brand"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.4, "polarity": 1 },
+            { "to": "finance", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "The deal closes. The PE firm writes the checks; you write the playbook. Two years later the building is the most-talked-about mixed-use project in the borough. The WSJ profile runs. They call you self-made. You do not correct them."
+        },
+        {
+          "id": "demand_control_go_grandiose",
+          "text": "Counter: you want 51% control, your name on the facade, and a consulting fee upfront. Go big or go home.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": { "grandiosity": ">=50" }
+          },
+          "effects": {
+            "money": 200000,
+            "power": 22,
+            "reputation": 14,
+            "heat": 12
+          },
+          "personality": {
+            "grandiosity": 14,
+            "outward": 10,
+            "inward": -8
+          },
+          "setFlags": ["tabloid_fixture", "brand_machine", "dealmaker_persona", "overreach_flag"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.7, "polarity": 1 }
+          ],
+          "outcome": "They blink — barely. You get 51%, the name on the facade, the fee. The project is undercapitalized and runs hot for eighteen months. It survives because you never stop hustling. The name on the building now means something to tabloid readers. Whether that's the right thing to mean is another question."
+        },
+        {
+          "id": "reject_and_go_independent",
+          "text": "Reject the term sheet. You didn't claw your way here to share the credit. Find your own capital and build the $400M project yourself.",
+          "effects": {
+            "money": -20000,
+            "power": 16,
+            "reputation": 10,
+            "heat": 8,
+            "health": -10
+          },
+          "personality": {
+            "grandiosity": 20,
+            "inward": -10,
+            "ideology": 6
+          },
+          "setFlags": ["self_made_tycoon", "sole_author_myth", "dealmaker_persona"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "You spend four months cold-calling sovereign wealth funds and family offices. The capital eventually assembles, at brutal cost to your schedule and your sleep. The project rises. The story you tell ever after is that nobody helped you — which is almost true."
+        }
+      ]
+    },
+    {
+      "id": "ev_pt_selfmade_brand_divergence",
+      "era": "primetime",
+      "year": 2007,
+      "title": "Self-Made Name, Borrowed Halo",
+      "scene": "The Apprentice is a phenomenon. The Trump who hosts it inherited his first break; you built yours from a Queens desk and a Salomon Brothers handshake. But the cameras don't know the difference — and neither does America. A producer's assistant calls: Mark Burnett is developing a new show about business, ambition, and fire-able moments. He wants the man the Journal called the self-made dealmaker of the decade. Your publicist vibrates with excitement. Your accountant reminds you the fee would clear the debt on the Columbus Circle parcel.",
+      "researchNote": "The Apprentice's cultural dominance coincided with the mid-2000s celebrity-businessman archetype. Self-made operators who had achieved media visibility in this period were attractive to reality TV as an alternative to the dynastic brand.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["media", "hustle", "fame"],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": ["self_made_start", "self_made_tycoon"],
+        "notFlags": ["apprentice_star"],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "take_the_show_selfmade",
+          "text": "Take the show. The self-made story IS the show — let Burnett sell America a new archetype.",
+          "effects": {
+            "money": 60000,
+            "reputation": 14,
+            "power": 10
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 12
+          },
+          "setFlags": ["apprentice_star", "brand_machine", "showman_instinct"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.6, "polarity": 1 },
+            { "to": "campaign", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The show reframes the self-made narrative for prime time. The boardroom is your boardroom. The phrase lands the same way — 'You're fired' — but the origin story is different, and America eats it with a different hunger."
+        },
+        {
+          "id": "pass_stay_builder",
+          "text": "Pass. You are a builder, not a performer. Stay off television and let the deal sheet speak.",
+          "effects": {
+            "money": 10000,
+            "power": 8,
+            "reputation": 8
+          },
+          "personality": {
+            "inward": 10,
+            "grandiosity": -8,
+            "outward": -6
+          },
+          "setFlags": ["merit_empire", "apolitical_streak"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "finance", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "Burnett finds someone else. You go back to the Columbus Circle project. The deals keep coming. The name stays out of the tabloids, but it's in every term sheet in midtown Manhattan — which, you decide, is better."
+        },
+        {
+          "id": "counteroffer_consulting",
+          "text": "Counter with a consulting-producer deal: your face, your story, your editorial control, no weekly filming obligations.",
+          "effects": {
+            "money": 30000,
+            "reputation": 8,
+            "power": 12
+          },
+          "personality": {
+            "grandiosity": 6,
+            "inward": 4
+          },
+          "setFlags": ["brand_machine", "tabloid_fixture"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "Burnett agrees to a limited-engagement format. You appear in eight episodes a season as the kingmaker judge, not the weekly host. The brand gets the halo without the grind. Classic deal structure: maximum upside, managed exposure."
+        }
+      ]
+    },
+    {
+      "id": "ev_pt_selfmade_2008_stress_test",
+      "era": "primetime",
+      "year": 2008,
+      "title": "The Crisis as Crucible",
+      "scene": "Lehman goes down on a Monday. By Wednesday the commercial paper market has frozen solid and your lenders are calling every project simultaneously. The securitization instruments you mastered — or weaponized, depending on the year — are now the mechanism of destruction. Every developer in Manhattan is on the same call: extend, pretend, or liquidate. You built this from nothing. You can lose it the same way. Or you can find the angle nobody else is looking for.",
+      "researchNote": "The 2008 financial crisis hit New York real estate developers who had leveraged the 2003–2007 securitization boom hard. Those who had conservative loan-to-value ratios and cash reserves survived; those who had over-levered did not.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["finance", "hustle", "realestate", "crisis"],
+      "portrait": "young_mogul",
+      "requires": {
+        "flags": ["self_made_start", "securitization_play"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 15,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "survive_disciplined",
+          "text": "Call in every chip, extend the loans, sell the two smallest assets, and keep the core portfolio alive.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": { "grandiosity": "<=60" }
+          },
+          "effects": {
+            "money": -60000,
+            "power": 10,
+            "reputation": 12,
+            "health": -8
+          },
+          "personality": {
+            "inward": 10,
+            "grandiosity": -8
+          },
+          "setFlags": ["survived_bankruptcy", "merit_empire", "clawed_back"],
+          "clearFlags": ["overreach_flag"],
+          "ripples": [
+            { "to": "finance", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "It costs you two buildings and four months of sleep you'll never get back. The core portfolio survives. Every lender who tried to call the note remembers that you didn't fold. That memory is worth more than the buildings you sold."
+        },
+        {
+          "id": "hunt_distressed",
+          "text": "Go offensive: use whatever liquidity you have to buy distressed notes from panicking competitors. Crisis is inventory.",
+          "effects": {
+            "money": -30000,
+            "power": 16,
+            "reputation": 8,
+            "heat": 10,
+            "health": -12
+          },
+          "personality": {
+            "grandiosity": 10,
+            "inward": 4
+          },
+          "setFlags": ["survived_bankruptcy", "comeback_myth", "ruthless_dealmaker", "clawed_back"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "finance", "weight": 0.6, "polarity": 1 },
+            { "to": "tabloids", "weight": 0.3, "polarity": 1 }
+          ],
+          "outcome": "While others are calling their lawyers, you are calling their lenders. By December 2008 you have acquired three distressed notes at fifty cents on the dollar. The tabloids will eventually call it opportunistic. You call it Tuesday."
+        },
+        {
+          "id": "pivot_to_narrative",
+          "text": "Reframe publicly: position yourself as the self-made man who saw the crash coming and warned about it. Turn survival into a media story.",
+          "effects": {
+            "money": -20000,
+            "reputation": 16,
+            "power": 12
+          },
+          "personality": {
+            "outward": 14,
+            "grandiosity": 8,
+            "inward": -6
+          },
+          "setFlags": ["brand_machine", "tabloid_fixture", "comeback_myth"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.7, "polarity": 1 },
+            { "to": "campaign", "weight": 0.3, "polarity": 1 }
+          ],
+          "outcome": "You do a round of TV appearances framed as 'I told you so.' The press laps it up. You didn't exactly warn about it, but the narrative hardens into fact the way all good stories do. The brand is bigger than before the crash."
+        }
+      ]
+    },
+    {
+      "id": "ev_pt_selfmade_tycoon_arrival",
+      "era": "primetime",
+      "year": 2009,
+      "title": "Arrival: The Self-Made Tycoon",
+      "scene": "Forbes runs the list. Your name appears in a bracket you have never occupied before — and you got there without a father who knew the Hyatt's bankers, without a family trust, without a draft pick in the borough machine. The number beside your name is your number, built from Queens rent checks and Salomon Brothers handshakes and nights when the spreadsheet said you were done and you rebuilt it from zero. A reporter asks: 'What's next?' You look at the skyline you have spent a decade assembling one deal at a time and you think: this is not the end of the origin story. This is just where it catches up to the people who started ahead of you.",
+      "researchNote": "Self-made real estate and finance operators who survived the 2008 crisis with disciplined portfolios emerged in 2009–2010 with significantly enhanced reputations and deal flow as bank-owned assets flooded the market.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["hustle", "power", "media", "fame"],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": ["self_made_start", "merit_empire"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_the_selfmade_brand",
+          "text": "Lean into the 'self-made tycoon' identity publicly. Let it be the brand — the contrast to the dynasty men is your edge.",
+          "effects": {
+            "money": 30000,
+            "reputation": 18,
+            "power": 15
+          },
+          "personality": {
+            "grandiosity": 12,
+            "outward": 14
+          },
+          "setFlags": ["self_made_tycoon", "brand_machine", "tabloid_fixture", "dealmaker_persona"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "tabloids", "weight": 0.6, "polarity": 1 },
+            { "to": "campaign", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The brand locks in. You are not old money — you are the proof that there isn't any old money left that matters. Every licensing call, every TV appearance, every press interview is now underwritten by that story. You have re-converged with the moguls — and beaten them at their own game."
+        },
+        {
+          "id": "stay_quiet_build_more",
+          "text": "Ignore the Forbes photographers. Use the post-crisis window to quietly accumulate more distressed assets while competitors are still shell-shocked.",
+          "effects": {
+            "money": 80000,
+            "power": 20,
+            "reputation": 10,
+            "loyalty": 8
+          },
+          "personality": {
+            "inward": 14,
+            "grandiosity": -10,
+            "outward": -8
+          },
+          "setFlags": ["merit_empire", "self_made_tycoon", "luxury_brand"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "finance", "weight": 0.7, "polarity": 1 }
+          ],
+          "outcome": "No profile. No photos. Three more acquisitions. By 2011 the portfolio is twice what Forbes estimated and nobody outside of a twelve-person law firm knows the real number. Power without noise — the rarest compound in Manhattan."
+        },
+        {
+          "id": "pivot_toward_politics",
+          "text": "The money is done proving itself. Pivot toward political influence — the self-made tycoon wants a bigger table.",
+          "effects": {
+            "money": -10000,
+            "power": 22,
+            "reputation": 14,
+            "heat": 10
+          },
+          "personality": {
+            "grandiosity": 16,
+            "outward": 16,
+            "ideology": 8
+          },
+          "setFlags": ["self_made_tycoon", "dealmaker_persona", "campaign_seed", "read_the_anger"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "campaign", "weight": 0.8, "polarity": 1 },
+            { "to": "tabloids", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "You start making calls to party officials. The self-made story is the perfect vehicle for populist politics — you didn't inherit the system, so you can pretend to want to burn it down. The rage you cultivated in Queens conference rooms is transferable. Turns out, it travels."
+        }
+      ]
     }
   ]
 }
