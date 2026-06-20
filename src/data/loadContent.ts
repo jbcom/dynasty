@@ -18,6 +18,7 @@ const slotsGlob = import.meta.glob("./slots.json", { eager: true });
 const marketsGlob = import.meta.glob("./markets.json", { eager: true });
 const currenciesGlob = import.meta.glob("./currencies.json", { eager: true });
 const ranksGlob = import.meta.glob("./ranks.json", { eager: true });
+const familyTreesGlob = import.meta.glob("./family-trees/*.json", { eager: true });
 
 function firstValue<T>(glob: Record<string, unknown>): T | null {
   const entry = Object.values(glob)[0] as { default?: T } | undefined;
@@ -49,6 +50,9 @@ export function loadContent(): Content {
     markets: firstValue(marketsGlob) ?? { markets: [] },
     currencies: firstValue(currenciesGlob) ?? { currencies: [] },
     ranks: firstValue(ranksGlob) ?? { ranks: [] },
+    familyTrees: {
+      trees: Object.values(familyTreesGlob).map((m) => (m as { default: unknown }).default),
+    },
   };
   return buildContent(raw);
 }
