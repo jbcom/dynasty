@@ -13,6 +13,7 @@ import type { Rng } from "./rng";
 import { resolveRoles } from "./roles";
 import type { Choice, GameEvent } from "./schema";
 import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
+import { systemicTick } from "./systemic";
 import { advanceTimeline, applyJump, detectEnd } from "./timeline";
 import { applyWorldFlags, timelinesForBranch } from "./worldtime";
 
@@ -118,6 +119,21 @@ export function applyChoice(
   // (e.g. Musk takes power) re-routes Donald to the commercial path before any
   // ending reads the role flags.
   advanced = resolveRoles(advanced);
+
+  // 8d. SYSTEMIC TICK (SIM1): the living substrate breathes for each elapsed
+  // in-world year — markets walk, currency redenominates, rank ladders drip into
+  // the meters. Looped once per elapsed year so a multi-year hop compounds the
+  // economy. Pure + seeded so replay reconstructs every index to the bit.
+  if (content.markets.length > 0 || content.ranks.length > 0 || content.currencies.length > 0) {
+    const years = Math.max(0, advanced.year - hopped.year);
+    const steps = years > 0 ? years : 1; // at least one tick per choice
+    for (let y = 0; y < steps; y++) {
+      const tickRng = rng.fork(`systemic:${hopped.year}:${y}:${state.history.length}`);
+      const result = systemicTick(content, { ...advanced, year: hopped.year + y }, tickRng);
+      advanced = { ...result.state, year: advanced.year };
+      for (const f of result.flags) advanced = { ...advanced, flags: withFlag(advanced.flags, f) };
+    }
+  }
 
   // 9. Land any delayed consequences now due (post-advance year), unless the
   // timeline advance itself ended the run.

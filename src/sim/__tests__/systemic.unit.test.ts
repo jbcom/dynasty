@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { buildContent } from "../content";
+import { createRng } from "../rng";
 import { CurrenciesFileSchema, MarketsFileSchema, RanksFileSchema } from "../schema";
 import { initMarkets, initRanks, initState } from "../state";
+import { resolveCurrency, systemicTick } from "../systemic";
 import { validRaw } from "./fixtures";
 
 // A minimal systemic config to exercise the schemas + init without data files.
@@ -98,5 +100,62 @@ describe("systemic-sim schemas + state (SIM1 task-011)", () => {
     const content = buildContent(validRaw());
     expect(content.markets).toEqual([]);
     expect(initState(content, "s").markets).toEqual({});
+  });
+});
+
+describe("systemicTick (SIM1 task-012)", () => {
+  const content = () => buildContent(rawWithSystemic());
+
+  it("walks every market index and is deterministic for a given (state, rng)", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    const a = systemicTick(c, s, createRng("tick"));
+    const b = systemicTick(c, s, createRng("tick"));
+    expect(a.state.markets).toEqual(b.state.markets); // pure + deterministic
+    // The index moved (regimes have drift/volatility/mean-reversion).
+    expect(a.state.markets.us_equities?.index).not.toBe(s.markets.us_equities?.index);
+  });
+
+  it("housing carry adds money when the player holds, debt service bites when leveraged", () => {
+    const c = content();
+    const base = initState(c, "seed");
+    const held = {
+      ...base,
+      markets: {
+        ...base.markets,
+        nyc_housing: {
+          index: 100,
+          peakIndex: 100,
+          regime: "carry",
+          regimeAge: 0,
+          holding: 1000,
+          leverage: 1,
+        },
+      },
+    };
+    const r = systemicTick(c, held, createRng("carry"));
+    // rentYield 0.05 * (1-0.05) - debtService 0.02 = positive carry on 1000 held.
+    expect(r.state.meters.money).toBeGreaterThan(held.meters.money);
+  });
+
+  it("resolves currency by branch and fires a redenomination flag on change", () => {
+    const c = content();
+    // A Nazi-branch state resolves to reichsmark and redenominates money.
+    const naziState = { ...initState(c, "seed"), flags: ["axis_ascendant"] };
+    expect(resolveCurrency(c, naziState).id).toBe("reichsmark");
+    const r = systemicTick(c, naziState, createRng("cur"));
+    expect(r.flags).toContain("currency_changed_reichsmark");
+    expect(r.state.currencyId).toBe("reichsmark");
+  });
+
+  it("a fall-from-grace rank (below peak) bleeds reputation", () => {
+    const c = content();
+    const base = initState(c, "seed");
+    const fallen = {
+      ...base,
+      ranks: { ...base.ranks, commercial: { rung: 1, peak: 3 } },
+    };
+    const r = systemicTick(c, fallen, createRng("fall"));
+    expect(r.state.meters.reputation).toBeLessThan(fallen.meters.reputation);
   });
 });

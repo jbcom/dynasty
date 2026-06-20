@@ -37,7 +37,7 @@ spec) — not re-queued here.
 ### task-011 SIM1 phase 1 — schemas + state
 - [x] task-011 markets/currencies/ranks zod schemas + GameState fields (markets/ranks/currencyId), deterministic init helpers, wired through buildContent + loader; 5 tests. (Done out of order — pure new files, no conflict with the in-flight Kennedy origins edit.)
 ### task-012 SIM1 phase 2 — pure systemicTick
-- [ ] task-012 per-in-world-year tick in applyChoice step 8d; markets transmit into 6 meters via coupling coeffs; seeded via rng.fork; replay property test
+- [x] task-012 pure systemicTick in applyChoice step 8d (looped per elapsed year); markets walk (regime hazard→AR(1)→meter transmission+housing carry), currency resolves+redenominates, ranks drip/fall-bleed; seeded via rng.fork; replay parity preserved (184 tests incl. existing determinism tests green); 9 tick tests
 ### task-013 SIM1 phase 3 — data + per-era table
 - [ ] task-013 markets.json/currencies.json/ranks.json incl. eras 0–12 table, branch-override currencies, ship attention market
 ### task-014 SIM1 phase 4 — UI surfacing
