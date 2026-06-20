@@ -1,0 +1,123 @@
+{
+  "endings": [
+    {
+      "id": "end_health_death",
+      "kind": "death",
+      "title": "The End of an Era",
+      "reason": "Your body finally gives out. The empire outlives the man.",
+      "priority": 90,
+      "tier": "endgame-bad",
+      "when": { "meters": { "health": "<=0" } }
+    },
+    {
+      "id": "end_assassination",
+      "kind": "assassination",
+      "title": "Cut Down",
+      "reason": "A bullet finds you at the height of your notoriety. The crowd screams.",
+      "priority": 95,
+      "tier": "endgame-bad",
+      "when": { "flags": ["assassination_target"], "meters": { "heat": ">=80", "health": "<=35" } }
+    },
+    {
+      "id": "end_coup",
+      "kind": "coup",
+      "title": "Toppled",
+      "reason": "Investigations close in and your inner circle abandons you.",
+      "priority": 80,
+      "tier": "endgame-bad",
+      "when": { "meters": { "heat": ">=90", "loyalty": "<=12" } }
+    },
+    {
+      "id": "end_jail",
+      "kind": "jail",
+      "title": "Convicted",
+      "reason": "The cases finally stick. The cell door closes on the most famous man alive.",
+      "priority": 78,
+      "tier": "endgame-bad",
+      "when": { "flags": ["felony_jeopardy"], "meters": { "heat": ">=75", "power": "<=25" } }
+    },
+    {
+      "id": "end_bankruptcy",
+      "kind": "bankruptcy",
+      "title": "Ruined",
+      "reason": "The debt avalanche buries you. The name comes off the buildings.",
+      "priority": 70,
+      "tier": "early-bad",
+      "when": { "flags": ["overleveraged"], "meters": { "money": "<=0" }, "maxEraOrder": 4 }
+    },
+    {
+      "id": "end_early_obscurity",
+      "kind": "obscurity",
+      "title": "A Quiet Life",
+      "reason": "You step off the stage early. History barely records your name.",
+      "priority": 30,
+      "tier": "early-good",
+      "when": { "flags": ["walked_away"], "meters": { "health": ">=60" }, "maxEraOrder": 3 }
+    },
+    {
+      "id": "end_communist_utopia",
+      "kind": "utopia",
+      "title": "The People's Patriarch",
+      "reason": "You chose solidarity over self. A post-scarcity commonwealth rises in your name.",
+      "priority": 88,
+      "tier": "endgame-good",
+      "when": {
+        "personality": { "ideology": "<=-60", "grandiosity": ">=40" },
+        "meters": { "reputation": ">=60" },
+        "minEraOrder": 6
+      }
+    },
+    {
+      "id": "end_megalomaniac_king",
+      "kind": "tyrant",
+      "title": "God-Emperor",
+      "reason": "Unbound by law or shame, you rule as a living god. The world kneels — and seethes.",
+      "priority": 88,
+      "tier": "endgame-bad",
+      "when": {
+        "personality": { "ideology": ">=60", "grandiosity": ">=80" },
+        "meters": { "power": ">=85" },
+        "minEraOrder": 6
+      }
+    },
+    {
+      "id": "end_martian_patriarch",
+      "kind": "victory",
+      "title": "Two-World Patriarch",
+      "reason": "Immortal master of Earth and the first Martian city — a civilization spanning two worlds.",
+      "priority": 85,
+      "tier": "endgame-good",
+      "when": { "flags": ["two_world_patriarch"], "minEraOrder": 9 }
+    },
+    {
+      "id": "end_first_contact_benevolent",
+      "kind": "first_contact",
+      "title": "The Gift of the Stars",
+      "reason": "Earth's beacon read as peaceful. A benevolent people answered — and gave humanity the stars themselves, at lightspeed.",
+      "priority": 100,
+      "secret": true,
+      "tier": "apex",
+      "when": {
+        "flags": ["seti_funded", "deep_space_telescopes", "back_science"],
+        "personality": { "outward": "<=-30" },
+        "meters": { "reputation": ">=50" },
+        "minEraOrder": 8
+      }
+    },
+    {
+      "id": "end_first_contact_malevolent",
+      "kind": "first_contact",
+      "title": "What Answered",
+      "reason": "Earth's beacon read as prey. Something far worse than us heard the call — and came.",
+      "priority": 99,
+      "secret": true,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": ["seti_funded", "deep_space_telescopes"],
+        "personality": { "outward": ">=40" },
+        "meters": { "heat": ">=50" },
+        "minEraOrder": 8
+      }
+    }
+  ]
+}

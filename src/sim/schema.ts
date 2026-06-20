@@ -169,6 +169,45 @@ export const ConsequenceSchema = z.object({
 });
 export type Consequence = z.infer<typeof ConsequenceSchema>;
 
+/**
+ * A data-driven ending. The run ends with the highest-priority ending whose
+ * `when` conditions are all satisfied. Conditions span meters, personality,
+ * flags, and era — so endings are authored content, not hardcoded.
+ */
+export const EndingSchema = z.object({
+  id: z.string().min(1),
+  /** death | coup | victory | jail | bankruptcy | assassination | ... (free-form kind for art/copy). */
+  kind: z.string().min(1),
+  title: z.string().min(1),
+  reason: z.string().min(1),
+  /** Higher wins when multiple endings qualify simultaneously. */
+  priority: z.number().int().default(0),
+  /** Hidden from the endings tracker until discovered (the two secret endings). */
+  secret: z.boolean().default(false),
+  /** Tier for tracker grouping: how good/far-reaching this ending is. */
+  tier: z.enum(["early-good", "early-bad", "endgame-good", "endgame-bad", "apex"]).default("endgame-bad"),
+  when: z
+    .object({
+      flags: z.array(z.string()).default([]),
+      notFlags: z.array(z.string()).default([]),
+      meters: z.partialRecord(MeterIdSchema, MeterComparatorSchema).default({}),
+      /** Comparators over personality axes, e.g. { grandiosity: ">=80" }. */
+      personality: z.partialRecord(PersonalityAxisSchema, MeterComparatorSchema).default({}),
+      /** Only eligible at/after this era order (0-based). */
+      minEraOrder: z.number().int().optional(),
+      maxEraOrder: z.number().int().optional(),
+      /** Only eligible at/after this age. */
+      minAge: z.number().int().optional(),
+    })
+    .default({ flags: [], notFlags: [], meters: {}, personality: {} }),
+});
+export type Ending = z.infer<typeof EndingSchema>;
+
+export const EndingsFileSchema = z.object({
+  endings: z.array(EndingSchema).default([]),
+});
+export type EndingsFile = z.infer<typeof EndingsFileSchema>;
+
 export const ButterflyRulesSchema = z.object({
   rules: z.array(ButterflyRuleSchema).default([]),
   consequences: z.array(ConsequenceSchema).default([]),

@@ -25,13 +25,19 @@ export interface HistoryEntry {
   year: number;
 }
 
-/** How a run can end. */
-export type EndKind = "death" | "coup" | "victory";
+/**
+ * How a run can end. `kind` is free-form (death | coup | victory | jail |
+ * bankruptcy | assassination | first_contact | …) so endings are authored data,
+ * not a fixed enum. `endingId` references the winning ending definition.
+ */
+export type EndKind = string;
 
 export interface EndState {
   kind: EndKind;
   year: number;
   reason: string;
+  /** Id of the data-driven ending that fired (absent for legacy/built-in ends). */
+  endingId?: string;
 }
 
 /** Accumulated ripple pressure per channel (the chaos engine's running state, part C). */

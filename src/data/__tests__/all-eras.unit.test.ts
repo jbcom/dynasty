@@ -4,6 +4,7 @@ import { autoPlaythrough } from "../../sim/effects";
 import { createRng } from "../../sim/rng";
 import { initState } from "../../sim/state";
 import butterflyJson from "../butterfly-rules.json";
+import endingsJson from "../endings.json";
 import indexJson from "../eras/index.json";
 import metersJson from "../meters.json";
 
@@ -22,6 +23,7 @@ function realContent() {
     eraIndex: indexJson,
     eraEvents,
     butterflyRules: butterflyJson,
+    endings: endingsJson,
     assets: { assets: [] },
   };
   return buildContent(raw);
@@ -70,13 +72,36 @@ describe("full authored content", () => {
     }
   });
 
-  it("an auto-playthrough traverses to a real end state", () => {
+  it("an auto-playthrough traverses to a real, data-driven end state", () => {
     const content = realContent();
     const final = autoPlaythrough(content, "content-smoke", initState, createRng);
     expect(final.end).not.toBeNull();
-    expect(["death", "coup", "victory"]).toContain(final.end?.kind);
+    // The end kind must be one of the authored endings (data-driven, not the
+    // old hardcoded trio).
+    const kinds = new Set(content.endings.map((e) => e.kind));
+    expect(kinds.has(final.end?.kind ?? "")).toBe(true);
     // It should have moved through multiple eras and recorded history.
     expect(final.history.length).toBeGreaterThan(5);
+  });
+
+  it("reports ending flags not yet wired into content (I3 tracker)", () => {
+    const content = realContent();
+    const setFlags = new Set(
+      content.allEvents.flatMap((e) => e.choices.flatMap((c) => c.setFlags)),
+    );
+    for (const cq of content.consequences) for (const f of cq.setFlags) setFlags.add(f);
+    const unwired = new Set<string>();
+    for (const ending of content.endings) {
+      for (const f of ending.when.flags) if (!setFlags.has(f)) unwired.add(f);
+    }
+    // Endings that gate purely on meters/personality (no flags) must still exist.
+    const flagless = content.endings.filter((e) => e.when.flags.length === 0);
+    expect(flagless.length).toBeGreaterThan(0);
+    // NOTE: I3/J/M wire the remaining ending flags into era content. This logs
+    // what's still outstanding rather than failing the in-progress batch.
+    if (unwired.size > 0) {
+      console.warn(`[I3 TODO] ending flags not yet set by content: ${[...unwired].join(", ")}`);
+    }
   });
 
   it("is deterministic across full-content playthroughs", () => {

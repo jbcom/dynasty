@@ -7,6 +7,20 @@
 
 Source: docs/plans/causality-endings-personality.prq.md (sha256: 9eaf443ac3929c8faab9e78c05b2a38036d96ed711f2356c6d7335930942e812)
 Started: 2026-06-20
+
+**SCOPE MANDATE (user, 2026-06-20):** This is NOT a small fan-out. The game must
+support **1000+ distinct permutations** and a real playthrough must NOT be
+clickable-through in ~5 minutes. That means: deep per-era event pools (many more
+events, higher budgets), heavily requires-gated branching so paths diverge, more
+choices per event, dozens of endings, and rich consequence chains. Build systems
+to support that scale, then author content MASSIVELY (parallel agents per era,
+multiple passes). Depth + divergence are the goal, not coverage checkboxes.
+
+### Phase M — Scale content for depth (1000+ permutations)
+- [ ] M1 Raise era event budgets + author deep event pools (20-40 events/era), heavily flag/meter/personality-gated for divergent paths
+- [ ] M2 Many more choices per event (3-5) with distinct downstream gating
+- [ ] M3 Branch-density pass: ensure no era is a straight line; verify path-divergence metric
+- [ ] M4 WORLD/regional/local events per year: research real global+regional+local events for each year (oil shocks, NYC fiscal crisis, recessions, 9/11, 2008 crash, COVID, wars, elections, cultural moments) and weave them as events that impact Trump/the Trumps — a dense year-by-year causal web ("world-event" tag, can interact with his arc)
 Config: stop_on_failure=false (autonomous, self-resolving) · single feature branch → squash-merge
 
 ### Phase H — Research & Causality Model
@@ -15,8 +29,8 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 - [x] H3 Personality vector schema + sim (ideology + grandiosity; outward vs inward) — + time-monotonicity fix (no backward years) + timeline self-reveal (no future spoilers)
 
 ### Phase I — Endings
-- [ ] I1 Data-driven ending system (triggers over meters+personality+flags+era)
-- [ ] I2 Author ending set (early/late × good/bad + named: jail, bankruptcy, assassination, coup, communist-utopia, megalomaniac-king, Martian-patriarch, obscurity)
+- [x] I1 Data-driven ending system (triggers over meters+personality+flags+era)
+- [x] I2 Author ending set (early/late × good/bad + named: jail, bankruptcy, assassination, coup, communist-utopia, megalomaniac-king, Martian-patriarch, obscurity)
 - [ ] I3 Wire ending triggers across all 10 eras
 - [ ] I4 SETI / deep-space tech achievement track (science+SETI+telescope flags)
 - [ ] I5 Two SECRET First-Contact endings (Benevolent/warp APEX vs Malevolent/hostile), forked by planet moral state
