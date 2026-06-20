@@ -27,10 +27,10 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 - [x] C2 Save/load via Capacitor Preferences
 
 ### Phase D — UI / Render / Audio
-- [ ] D1 Design tokens + open-props brand system
-- [ ] D2 Meter HUD (SVG gauges) + Motion One deltas
-- [ ] D3 Event Card + choice flow + sim bridge
-- [ ] D4 Butterfly Log + D3 force-DAG graph view
+- [x] D1 Design tokens + open-props brand system
+- [x] D2 Meter HUD (SVG gauges) + Motion One deltas
+- [x] D3 Event Card + choice flow + sim bridge
+- [x] D4 Butterfly Log + D3 force-DAG graph view
 - [ ] D5 Timeline (vis-timeline) + Stats (uPlot) + Dossier views
 - [ ] D6 Render layer — caricature portrait/scene compositing
 - [ ] D7 Audio — Tone.js graph
