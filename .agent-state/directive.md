@@ -15,12 +15,12 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 - [x] A3 Configure Vitest (node + browser mode) + Playwright e2e
 
 ### Phase B — Pure Sim Engine
-- [ ] B1 RNG facade (createRng/seedrandom)
-- [ ] B2 JSON content schemas (zod) + loader/validator
-- [ ] B3 GameState + meters
-- [ ] B4 Event eligibility + seeded weighted selection
-- [ ] B5 Butterfly engine (visible ledger + seeded chaos ripples)
-- [ ] B6 Effects + timeline + end conditions
+- [x] B1 RNG facade (createRng/seedrandom)
+- [x] B2 JSON content schemas (zod) + loader/validator
+- [x] B3 GameState + meters
+- [x] B4 Event eligibility + seeded weighted selection
+- [x] B5 Butterfly engine (visible ledger + seeded chaos ripples)
+- [x] B6 Effects + timeline + end conditions
 
 ### Phase C — Engine glue
 - [ ] C1 Clock facade + game loop
