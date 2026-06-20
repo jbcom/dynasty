@@ -1,5 +1,6 @@
 import type { Content } from "./content";
 import { evaluateEnding } from "./endings";
+import { meetsRequires } from "./events";
 import type { GameState } from "./state";
 import { ageInYear } from "./state";
 
@@ -60,15 +61,22 @@ export function advanceTimeline(content: Content, state: GameState): GameState {
   let nextEraEventCount = eraEventCount;
 
   let lastEventYear = state.lastEventYear;
+  let gateBlocked = false;
   if (eraEventCount >= era.eventBudget) {
-    eraIndex = state.eraIndex + 1;
-    nextEraEventCount = 0;
-    const nextEra = content.eras[eraIndex];
-    if (nextEra) {
-      year = nextEra.yearStart;
-      // Reset the chronological floor to the new era's start so its earliest
-      // events are eligible again.
-      lastEventYear = nextEra.yearStart;
+    const nextEra = content.eras[state.eraIndex + 1];
+    // Era entry gate: the late eras (Mars, First Contact, Interstellar) require
+    // an escalating scientific path. If the next era's entryRequires isn't met,
+    // the run ENDS here instead of advancing — so a science-averse life ends on
+    // Earth, a partial-science life ends on Mars, etc.
+    if (nextEra?.entryRequires && !meetsRequires(state, nextEra.entryRequires)) {
+      gateBlocked = true;
+    } else {
+      eraIndex = state.eraIndex + 1;
+      nextEraEventCount = 0;
+      if (nextEra) {
+        year = nextEra.yearStart;
+        lastEventYear = nextEra.yearStart;
+      }
     }
   }
 
@@ -80,6 +88,12 @@ export function advanceTimeline(content: Content, state: GameState): GameState {
     age: ageInYear(year),
     lastEventYear,
   };
+
+  // A blocked gate forces a terminal evaluation at the current era.
+  if (gateBlocked) {
+    const gateEnd = detectEnd(content, { ...advanced, eraIndex: content.eras.length });
+    if (gateEnd) return { ...advanced, end: gateEnd };
+  }
 
   return { ...advanced, end: detectEnd(content, advanced) };
 }

@@ -90,34 +90,98 @@
       "when": { "flags": ["two_world_patriarch"], "minEraOrder": 9 }
     },
     {
+      "id": "end_earth_utopia",
+      "kind": "utopia",
+      "title": "Heaven on Earth",
+      "reason": "You never reached for the stars — but you remade the world. A serene, almost religious golden age, bounded by one blue sky.",
+      "priority": 60,
+      "tier": "endgame-good",
+      "when": {
+        "notFlags": ["mars_program"],
+        "personality": { "ideology": "<=-40", "outward": "<=-30" },
+        "meters": { "reputation": ">=55" },
+        "minEraOrder": 8
+      }
+    },
+    {
+      "id": "end_earth_god_king",
+      "kind": "tyrant",
+      "title": "The Deity of a Closed World",
+      "reason": "No Mars, no stars — only Earth, and you above it. A deistic god-king worshipped on a planet that never looked up.",
+      "priority": 60,
+      "tier": "endgame-bad",
+      "when": {
+        "notFlags": ["mars_program"],
+        "personality": { "grandiosity": ">=80", "outward": ">=40" },
+        "meters": { "power": ">=80" },
+        "minEraOrder": 8
+      }
+    },
+    {
       "id": "end_first_contact_benevolent",
       "kind": "first_contact",
       "title": "The Gift of the Stars",
-      "reason": "Earth's beacon read as peaceful. A benevolent people answered — and gave humanity the stars themselves, at lightspeed.",
-      "priority": 100,
+      "reason": "Because we reached out from Mars, we were seen — and the Concord judged us worthy. They gave humanity the stars themselves, at lightspeed.",
+      "priority": 92,
       "secret": true,
       "tier": "apex",
-      "when": {
-        "flags": ["seti_funded", "deep_space_telescopes", "back_science"],
-        "personality": { "outward": "<=-30" },
-        "meters": { "reputation": ">=50" },
-        "minEraOrder": 8
-      }
+      "when": { "flags": ["warp_gift"], "minEraOrder": 10 }
     },
     {
       "id": "end_first_contact_malevolent",
       "kind": "first_contact",
       "title": "What Answered",
-      "reason": "Earth's beacon read as prey. Something far worse than us heard the call — and came.",
-      "priority": 99,
+      "reason": "Our extra-solar wake read as prey. Something far worse than us followed it home.",
+      "priority": 92,
       "secret": true,
       "tier": "endgame-bad",
-      "when": {
-        "flags": ["seti_funded", "deep_space_telescopes"],
-        "personality": { "outward": ">=40" },
-        "meters": { "heat": ">=50" },
-        "minEraOrder": 8
-      }
+      "when": { "flags": ["hostile_contact"], "notFlags": ["contact_made"], "minEraOrder": 10 }
+    },
+    {
+      "id": "end_starfarer_ascendant",
+      "kind": "starfarer",
+      "title": "Among the Stars, As Equals",
+      "reason": "Allied with the Concord and warp-borne, humanity spread across the light-years as a respected peer of worlds. The apex of the human story.",
+      "priority": 100,
+      "secret": true,
+      "tier": "apex",
+      "when": { "flags": ["starfarer_ascendant"], "minEraOrder": 11 }
+    },
+    {
+      "id": "end_star_tyrant",
+      "kind": "tyrant",
+      "title": "Emperor of a Thousand Suns",
+      "reason": "You conquered what came, and turned the gift of the stars into a slaving empire. Immortal god-emperor of a darkened galaxy.",
+      "priority": 96,
+      "tier": "endgame-bad",
+      "when": { "flags": ["star_tyrant"], "minEraOrder": 11 }
+    },
+    {
+      "id": "end_liberation_war",
+      "kind": "liberation",
+      "title": "The Long Rebellion",
+      "reason": "Subjugated, then unbroken — humanity threw off its overlords across a century of insurgency. Free, scarred, and finally our own.",
+      "priority": 95,
+      "tier": "endgame-good",
+      "when": { "flags": ["liberation_war"], "minEraOrder": 11 }
+    },
+    {
+      "id": "end_puppet_throne",
+      "kind": "puppet",
+      "title": "Administrator of a Conquered World",
+      "reason": "You kept your throne by handing humanity its chains — figurehead of alien masters over an occupied Earth.",
+      "priority": 95,
+      "tier": "endgame-bad",
+      "when": { "flags": ["puppet_throne"], "minEraOrder": 11 }
+    },
+    {
+      "id": "end_humanity_extinct",
+      "kind": "extinction",
+      "title": "Silence",
+      "reason": "The rebellion failed. What answered our call finished what it came to do. The human story ends in the dark.",
+      "priority": 97,
+      "tier": "endgame-bad",
+      "when": { "flags": ["humanity_extinct"], "minEraOrder": 11 }
     }
   ]
 }

@@ -17,9 +17,9 @@ describe("F0 data files", () => {
     ]);
   });
 
-  it("eras/index.json validates and orders all 10 eras", () => {
+  it("eras/index.json validates and orders all 12 eras", () => {
     const index = EraIndexSchema.parse(indexJson);
-    expect(index.eras).toHaveLength(10);
+    expect(index.eras).toHaveLength(12);
     const orders = index.eras.map((e) => e.order);
     expect(orders).toEqual([...orders].sort((a, b) => a - b));
     // Eras 7-10 are extrapolated; 8-9 are Star Trek inspired.

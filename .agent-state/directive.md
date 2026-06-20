@@ -26,6 +26,36 @@ multiple passes). Depth + divergence are the goal, not coverage checkboxes.
 - [x] N1 ONE reality: strip meta/franchise keywords from player-facing text (Trek/Vulcan/Cochrane/Phoenix); rename benevolent first-contact species to an original in-world name; startrekInspired flag stays private provenance
 - [x] N2 Immersion: removed Extrapolated badge + research-note panel (facts woven into scene prose)
 - [ ] N3 Medium-native HUD: Capacitor Device form-factor (phone/tablet/foldable) → diegetic surfaces (newspapers, TV) not a constant button set
+- [x] N4 engine: era entryRequires gate (advanceTimeline ends the run if next era's gate fails) — implements the science ladder
+**SCIENCE LADDER (user, 2026-06-20):**
+  - NO science at all → game ends on EARTH (≤Era 9) with a utopian/religious OR deistic god-king ending. No Mars.
+  - PARTIAL science (Mars program) → reach MARS (Era 10) → good/bad Martian ending.
+  - FULL science (back_science + extrasolar_flight from Mars) → Era 11 First Contact → Era 12 Interstellar FTL.
+  Personality (utopian↔tyrannical) forks the FLAVOR at every tier.
+- [x] N4a Index: add era 11 (firstcontact) + 12 (interstellar); entryRequires gates (mars: mars_program; 11: back_science+extrasolar_flight; 12: warp_gift)
+- [ ] N4b Earth-terminal endings (utopian-religious, deistic god-king) when science not embraced; ensure Mars-terminal good/bad endings
+- [ ] N5 EVERY era must be able to END the game, good OR bad, with a logical extrapolated reason it wouldn't continue — INCLUDING childhood (fatal accident, institutionalization, vanishing into obscurity). Author per-era early-out endings (early-good + early-bad) for all 12 eras so the arc is branchy/lethal at every stage.
+      EXEMPLAR (the thesis of the cause-and-effect game): the "Quiet Succession" ending — if early/mid choices keep him CONTENT and unambitious, he settles into life as a comfortable old CEO of the inherited rental business: wealthy but not insanely so, still married to his first wife, eventually handing the firm to his son (mirroring Fred→Donald). The story logically just ends — no rise, no drama engine. Early/mid-good ending gated on low grandiosity + content flags + still-married + not-overreached.
+- [ ] N6 The PREMISE itself is contingent: the inherited business wasn't guaranteed. World-event branches in boyhood/mogul where the family fortune never passes down — e.g. if 1950s-70s civil-rights/housing-discrimination enforcement had gone differently and Fred Trump had been INDICTED (the rentals built on FHA + discriminatory practices; the real 1973 DOJ suit), Donald inherits nothing → no seed capital → no Manhattan, no empire → an obscurity/working-life ending. Make "no inheritance" a reachable branch that forecloses the whole rise.
+- [x] N4c Author Era 11 (First Contact) + Era 12 (Interstellar FTL); set extrasolar_flight in Mars era
+- [x] N4d Re-point secret endings: contact resolves Era 11; warp-apex + spread endings Era 12
+- [x] N4e Era 12 branches off the Era 11 contact outcome — multiple far-futures:
+      (a) WITH ALLIES: cooperative interstellar expansion (benevolent contact);
+      (b) WITH SLAVES: humanity-as-empire, expansion by domination (we conquered them);
+      (c) IN REBELLION: fighting back against alien overlords (malevolent contact subjugated us);
+      (d) PUPPET: Trump as quisling administrator for worse tyrannical aliens (Half-Life-2/Combine-style) on a subjugated Earth.
+      Each its own ending(s), gated by Era-11 outcome flags + personality.
+- [x] N4f POST-HISTORY MOTIVE DOCTRINE: once real history ends, causality = hard-SF
+      logistics + power dynamics, not events. extrasolar_flight is the RESULT of
+      mastering the solar system: settle Jupiter's moons, the Belt, Venus, Mercury
+      (rotating equatorial bases) → accumulate ORGANICS + VOLATILES → build deep-space
+      ship foundries → extrasolar_flight. The tension/motivation in eras 10-12:
+        • Solar-system mastery vs Mars stagnation (gather star-ship resources or stall).
+        • RIVALRY WITH MUSK, the other immortal — a centuries-long power struggle.
+        • Tyranny-of-distance: light-lag/relativistic separation makes TOTAL RULE
+          physically impossible — does the immortal autocrat even want to expand if he
+          can't control it? Expansion vs control is the core late-game dilemma.
+      Redplanet (Era 10) gets a resource/expansion sub-loop; extrasolar_flight gated on it.
 Config: stop_on_failure=false (autonomous, self-resolving) · single feature branch → squash-merge
 
 ### Phase H — Research & Causality Model

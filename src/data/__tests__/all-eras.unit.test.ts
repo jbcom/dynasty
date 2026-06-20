@@ -32,7 +32,7 @@ function realContent() {
 describe("full authored content", () => {
   it("builds all 10 eras with cross-reference integrity", () => {
     const content = realContent();
-    expect(content.eras).toHaveLength(10);
+    expect(content.eras).toHaveLength(12);
     // Each era has an events pool with at least 7 events.
     for (const era of content.eras) {
       const pool = content.eventsByEra.get(era.id) ?? [];

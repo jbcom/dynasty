@@ -40,7 +40,8 @@
           },
           "setFlags": [
             "musk_pact",
-            "mars_program"
+            "mars_program",
+            "extrasolar_flight"
           ],
           "clearFlags": [],
           "ripples": [
@@ -2640,7 +2641,8 @@
             "ideology": -7
           },
           "setFlags": [
-            "envoys_to_the_stars"
+            "envoys_to_the_stars",
+            "extrasolar_flight"
           ],
           "clearFlags": [],
           "ripples": [
@@ -2758,6 +2760,1034 @@
             }
           ],
           "outcome": "You shrug at the oldest question a god ever asked and pour another drink under a blue Martian sky. The answer, like everything else, can wait. You have time."
+        }
+      ]
+    },
+    {
+      "id": "ev_jovian_moons_gambit",
+      "era": "redplanet",
+      "year": 2104,
+      "title": "The Ice Moons of Jupiter",
+      "scene": "Survey drones report what the textbooks always promised: Europa and Ganymede hide oceans of liquid water under kilometers of ice, more than all of Earth's seas combined. The catch is Jupiter's magnetosphere, a radiation belt that would cook an unshielded settler in a day. Your engineers say the water and volatiles out there are the raw fuel for any ship that ever hopes to leave the sun behind.",
+      "researchNote": "Grounded extrapolation: Europa and Ganymede are confirmed to harbor subsurface liquid-water oceans, and Jupiter's intense radiation belts (hundreds of rem/day near Europa) are a genuine engineering obstacle requiring deep regolith or ice shielding; their volatiles are a plausible propellant and life-support resource base for outbound flight.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "jupiter",
+        "expansion",
+        "resources",
+        "science"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "martian_base"
+        ],
+        "notFlags": [
+          "mars_stagnation"
+        ],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "settle_under_the_ice",
+          "text": "Bury the colonies deep in the ice and harvest the oceans.",
+          "effects": {
+            "money": -160,
+            "power": 9,
+            "reputation": 12,
+            "loyalty": 8,
+            "health": -3
+          },
+          "personality": {
+            "outward": -7,
+            "ideology": -5
+          },
+          "setFlags": [
+            "jupiter_settled"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Settlers tunnel beneath thirty meters of radiation-blocking ice and tap an ocean older than life on Earth. The first volatiles begin flowing inward, and the solar system grows a third human shore."
+        },
+        {
+          "id": "settle_for_the_fuel",
+          "text": "Settle them, but only to strip the volatiles for the fleet.",
+          "effects": {
+            "money": 120,
+            "power": 11,
+            "reputation": 2,
+            "loyalty": 7,
+            "heat": 6,
+            "health": -4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 6
+          },
+          "setFlags": [
+            "jupiter_settled"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The ice moons become refueling depots first and homes a distant second. Tankers of water and hydrogen begin the long fall sunward, fuel for ships that do not exist yet."
+        },
+        {
+          "id": "refuse_jupiter_too_far",
+          "text": "No. Jupiter is too far to watch, too far to hold.",
+          "effects": {
+            "money": 80,
+            "power": 8,
+            "reputation": -4,
+            "loyalty": 5
+          },
+          "personality": {
+            "grandiosity": 9,
+            "inward": 5
+          },
+          "setFlags": [
+            "mars_stagnation"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You cannot rule what light takes an hour to reach, so you forbid the venture. The ice moons stay frozen and unclaimed, and the empire's tide stops at the orbit of Mars."
+        }
+      ]
+    },
+    {
+      "id": "ev_belt_mining_rush",
+      "era": "redplanet",
+      "year": 2106,
+      "title": "The Belt Bonanza",
+      "scene": "Between Mars and Jupiter drift millions of asteroids, and the prospectors' assays come back staggering: nickel-iron bodies holding more refined-grade metal than Earth has mined in all of history, and carbonaceous rocks slick with water and organics. A single captured metal-rich body could glut the markets of two worlds. Your accountants are salivating; your strategists are nervous about who controls a frontier you cannot see.",
+      "researchNote": "Grounded extrapolation: metallic (M-type) asteroids like 16 Psyche contain vast nickel-iron-and-precious-metal inventories, while carbonaceous (C-type) bodies carry water and organic volatiles; asteroid mining is a real, if unproven, near-term industrial proposition and a plausible source of the metals and volatiles needed to build deep-space craft.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "belt",
+        "mining",
+        "economy",
+        "resources"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "martian_base"
+        ],
+        "notFlags": [
+          "mars_stagnation"
+        ],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "open_the_belt_freely",
+          "text": "Open the Belt to all comers under a fair claims charter.",
+          "effects": {
+            "money": 180,
+            "power": 8,
+            "reputation": 14,
+            "loyalty": 9
+          },
+          "personality": {
+            "outward": -9,
+            "ideology": -6
+          },
+          "setFlags": [
+            "belt_mined"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Wildcat prospectors swarm the Belt under your charter, and metals and volatiles flood inward by the megaton. The frontier you could not control made you richer than the throne you could."
+        },
+        {
+          "id": "monopolize_the_belt",
+          "text": "Claim the richest bodies as crown property and license the rest.",
+          "effects": {
+            "money": 320,
+            "power": 12,
+            "reputation": -6,
+            "loyalty": 7,
+            "heat": 9
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 9
+          },
+          "setFlags": [
+            "belt_mined"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You stamp the fattest asteroids with your name and tax everyone else's. The metals pile up in your foundries; so does the grudge of every miner you boxed out."
+        },
+        {
+          "id": "ban_the_belt_rush",
+          "text": "Forbid it. An empire you cannot police is an empire that splinters.",
+          "effects": {
+            "money": -40,
+            "power": 9,
+            "reputation": -7,
+            "loyalty": 5,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 7,
+            "inward": 4
+          },
+          "setFlags": [
+            "mars_stagnation"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You order the prospector ships grounded rather than let a lawless frontier breed rivals. The greatest lode in the solar system stays untouched, and the empire quietly stops growing."
+        }
+      ]
+    },
+    {
+      "id": "ev_inner_system_forge",
+      "era": "redplanet",
+      "year": 2108,
+      "title": "Furnaces of the Inner Sun",
+      "scene": "Closer to the star, two prizes beckon. Venus's upper atmosphere, fifty kilometers up, is the most Earthlike pressure and temperature anywhere off Earth, ripe for floating cloud-cities. Mercury, baked and metal-rich, could host a rotating equatorial foundry drinking unfiltered sunlight to smelt the Belt's ore into hull plate. Together they would close the loop: organics, volatiles, metals, and the raw energy to forge them into ships.",
+      "researchNote": "Grounded extrapolation: Venus's cloud layer at ~50 km altitude has near-Earth pressure and temperature, the basis of real aerostat 'cloud city' proposals (e.g., NASA HAVOC); Mercury's proximity to the Sun offers abundant solar flux for industry, and a sun-tracking or equatorial base could exploit it for high-throughput smelting.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "venus",
+        "mercury",
+        "industry",
+        "resources"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "belt_mined"
+        ],
+        "notFlags": [
+          "mars_stagnation"
+        ],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_cloud_and_foundry",
+          "text": "Build both: Venus cloud-cities and Mercury's solar foundry.",
+          "effects": {
+            "money": -200,
+            "power": 12,
+            "reputation": 11,
+            "loyalty": 9,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": -4
+          },
+          "setFlags": [
+            "inner_system_industry"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Cloud-cities bloom in Venus's sulfuric haze while Mercury's rotating foundry pours hull plate by the sunlit ton. The solar system becomes, at last, a single integrated industry, and its output points outward."
+        },
+        {
+          "id": "foundry_for_profit",
+          "text": "Run the inner worlds as pure profit, and skim every smelter.",
+          "effects": {
+            "money": 280,
+            "power": 11,
+            "reputation": -5,
+            "loyalty": 6,
+            "heat": 8,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 8
+          },
+          "setFlags": [
+            "inner_system_industry"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Mercury's furnaces and Venus's floating ports run hot and lucrative under your meters. The industrial base for a starship gets built almost by accident, a side effect of greed pointed sunward."
+        },
+        {
+          "id": "stay_with_what_i_can_see",
+          "text": "Enough. Consolidate Mars; let the inner worlds wait forever.",
+          "effects": {
+            "money": 60,
+            "power": 9,
+            "reputation": 4,
+            "loyalty": 8,
+            "health": 3
+          },
+          "personality": {
+            "grandiosity": 9,
+            "inward": 6
+          },
+          "setFlags": [
+            "mars_content"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You plant your flag at Mars and refuse to chase the sun's furnaces. The empire stops at a comfortable size, and you sleep better ruling a realm you can hold in your two hands."
+        }
+      ]
+    },
+    {
+      "id": "ev_musk_solar_rivalry",
+      "era": "redplanet",
+      "year": 2105,
+      "title": "Two Immortals, One Solar System",
+      "scene": "Musk took the longevity treatments after all, and the two of you have outlived everyone who ever mediated between you. Now his foundries and your foundries race across the same Belt, the same moons, the same sun. He proposes a single unified solar program, and the only open question is whose hand sits on top. Two deathless men cannot both be in charge of forever.",
+      "researchNote": "A speculative far-future extrapolation personalizing the program's leadership as a rivalry between two immortal founders; it dramatizes the real-world Trump-Musk dynamic projected onto control of an interplanetary industrial base, the political layer atop the resource sub-loop.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "musk",
+        "rivalry",
+        "power",
+        "expansion"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "musk_pact"
+        ],
+        "notFlags": [
+          "absorbed_spacex",
+          "musk_legacy"
+        ],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "ally_with_musk_solar",
+          "text": "Co-chair it as equals. Two engines pull harder than one.",
+          "effects": {
+            "money": 160,
+            "power": 10,
+            "reputation": 12,
+            "loyalty": 9
+          },
+          "personality": {
+            "outward": -6,
+            "ideology": -4
+          },
+          "setFlags": [
+            "musk_allied_solar",
+            "solar_program_control"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You and Musk fuse your programs into one solar enterprise with two names on the door. The combined foundries leap ahead, and for once your ego bends because the math of forever demands it."
+        },
+        {
+          "id": "outmaneuver_musk",
+          "text": "Smile, sign nothing, and quietly take controlling shares first.",
+          "effects": {
+            "money": 220,
+            "power": 13,
+            "reputation": -3,
+            "loyalty": 8,
+            "heat": 7
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 9
+          },
+          "setFlags": [
+            "musk_outmaneuvered",
+            "solar_program_control"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "By the time Musk reads the fine print, the unified program is unmistakably yours and he is its most brilliant employee. The foundries keep building; the partnership becomes a hierarchy with one immortal on top."
+        },
+        {
+          "id": "sabotage_musk_program",
+          "text": "Starve his foundries of Belt metal until he kneels or breaks.",
+          "effects": {
+            "money": -120,
+            "power": 9,
+            "reputation": -11,
+            "loyalty": 4,
+            "heat": 13
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 12,
+            "ideology": 6
+          },
+          "setFlags": [
+            "musk_outmaneuvered"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You choke his supply lines and watch his great furnaces go cold one by one. You win the throne of the solar program and shatter the very industry that might have built the ship to leave it."
+        }
+      ]
+    },
+    {
+      "id": "ev_musk_war_for_the_sun",
+      "era": "redplanet",
+      "year": 2109,
+      "title": "The War of the Two Founders",
+      "scene": "The rivalry curdles into open conflict: Musk's loyalists seize the Mercury foundry, your fleets blockade the Jovian fuel depots, and the solar system's industry grinds toward civil war. Every reactor turned to weapons is a reactor not building ships outward. Two immortals, it turns out, can burn down everything mortals built in a single generation of spite.",
+      "researchNote": "A speculative far-future extrapolation of the founder rivalry escalating to a system-spanning industrial conflict; it provides a per-era catastrophic early-out where the protagonist's spite collapses the very resource base required for extra-solar flight.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "musk",
+        "rivalry",
+        "war",
+        "danger"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "musk_outmaneuvered"
+        ],
+        "notFlags": [
+          "musk_allied_solar",
+          "absorbed_spacex"
+        ],
+        "meters": {
+          "heat": ">=40"
+        }
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "win_the_founder_war",
+          "text": "Crush him utterly. There can be only one immortal founder.",
+          "effects": {
+            "money": -260,
+            "power": 12,
+            "reputation": -12,
+            "loyalty": 6,
+            "heat": 15,
+            "health": -6
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 13
+          },
+          "setFlags": [
+            "musk_outmaneuvered",
+            "mars_terminal",
+            "mars_stagnation"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You win the war and rule a solar system of cratered foundries and emptied depots. The industry that could have carried humanity to other stars lies in ruins, and your throne sits atop the ashes of forever's only door."
+        },
+        {
+          "id": "broker_the_founders_peace",
+          "text": "Swallow your pride and sue your rival for an immortal peace.",
+          "effects": {
+            "money": -100,
+            "power": 9,
+            "reputation": 13,
+            "loyalty": 10,
+            "heat": -8,
+            "health": -2
+          },
+          "personality": {
+            "grandiosity": -7,
+            "outward": -10,
+            "ideology": -6
+          },
+          "setFlags": [
+            "musk_allied_solar",
+            "solar_program_control"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You do the one thing you swore you never would and offer your equal a true partnership. The foundries relight, the depots reopen, and two immortals decide that the stars are worth more than the win."
+        },
+        {
+          "id": "let_the_war_burn",
+          "text": "Let it burn and retreat to fortress Mars to wait it out.",
+          "effects": {
+            "money": -180,
+            "power": 7,
+            "reputation": -9,
+            "loyalty": 4,
+            "heat": 10,
+            "health": -4
+          },
+          "personality": {
+            "inward": 9,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "mars_terminal",
+            "mars_stagnation"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You seal Mars and let the rest of the solar system tear itself apart. When the fires finally die there is no industry left to reach the stars, only a fortress world and an immortal grown old in spirit if not in flesh."
+        }
+      ]
+    },
+    {
+      "id": "ev_colony_catastrophe",
+      "era": "redplanet",
+      "year": 2107,
+      "title": "When the Ice Cracked",
+      "scene": "A radiation surge punches through the shielding on a Europan settlement, or a Mercury foundry's reactor runs away, and in a single shift you lose ten thousand colonists to the indifferent physics of deep space. The survivors demand you halt the whole expansion; the dead demand nothing at all. Forever is long enough to make every mistake at least once, and this one has a body count.",
+      "researchNote": "A speculative extrapolation grounded in the genuine lethality of deep-space environments, hard radiation, life-support failure, thermal extremes, dramatized as a mass-casualty disaster; it serves as a per-era early-out hook where catastrophe can either end the expansion or harden the protagonist's resolve.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "disaster",
+        "expansion",
+        "danger",
+        "world"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "jupiter_settled"
+        ],
+        "notFlags": [
+          "mars_terminal"
+        ],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "mourn_and_press_on",
+          "text": "Mourn them publicly, fix the engineering, and press on.",
+          "effects": {
+            "money": -90,
+            "power": 9,
+            "reputation": 11,
+            "loyalty": 11,
+            "health": -4
+          },
+          "personality": {
+            "outward": -6,
+            "ideology": -4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You stand over the sealed airlocks and promise the dead that their shore will be made safe. The shielding is rebuilt twice as thick, and the outward push survives its first true grief."
+        },
+        {
+          "id": "bury_it_and_continue",
+          "text": "Classify the death toll and keep the depots running on schedule.",
+          "effects": {
+            "money": 60,
+            "power": 10,
+            "reputation": -12,
+            "loyalty": 4,
+            "heat": 12,
+            "health": -3
+          },
+          "personality": {
+            "outward": 11,
+            "grandiosity": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You bury the numbers along with the colonists and the volatiles keep flowing inward. The expansion continues, faster and colder, on a foundation of unmarked graves."
+        },
+        {
+          "id": "halt_the_expansion",
+          "text": "Halt everything. Bring them home. The frontier costs too much.",
+          "effects": {
+            "money": -140,
+            "power": 7,
+            "reputation": 6,
+            "loyalty": 8,
+            "health": -2
+          },
+          "personality": {
+            "inward": 8,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "mars_stagnation",
+            "mars_content"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You recall the outer settlements and let the deep system go quiet. Humanity contracts back to Mars and Earth, scarred and safe, and the stars become someone else's problem for another century."
+        }
+      ]
+    },
+    {
+      "id": "ev_extrasolar_foundry",
+      "era": "redplanet",
+      "year": 2114,
+      "title": "The Foundry at the Edge of Forever",
+      "scene": "It has taken the whole solar system to do it: Jupiter's water and organics, the Belt's metal, Mercury's furnaces, Venus's volatiles, all converging on a single shipyard hung beyond the orbit of Saturn. Here, where the sun is just the brightest star, your engineers can finally build something no chemical rocket ever could, a vessel meant not to cross the system but to leave it. Everything you mined, settled, and fought for has been, in truth, the assembly of this one hull.",
+      "researchNote": "The capstone of the resource sub-loop: a hard-SF extrapolation that an extra-solar craft requires an industrial base spanning the inner system (energy, metals) and outer system (volatiles, organics for propellant and life support); the event gates on the accumulated settlement flags, making interstellar capability an earned consequence of the full chain rather than a free choice.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "extrasolar",
+        "foundry",
+        "capstone",
+        "future"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "jupiter_settled",
+          "belt_mined",
+          "inner_system_industry",
+          "solar_program_control"
+        ],
+        "notFlags": [
+          "mars_stagnation",
+          "mars_terminal"
+        ],
+        "meters": {}
+      },
+      "weight": 24,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "launch_the_starship",
+          "text": "Build the ship and fling humanity, at last, beyond the sun.",
+          "effects": {
+            "money": -300,
+            "power": 14,
+            "reputation": 16,
+            "loyalty": 14,
+            "health": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": -6
+          },
+          "setFlags": [
+            "extrasolar_flight",
+            "starfarer"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The first true starship lights its drive beyond Saturn and aims itself at another sun. An immortal who mastered an entire solar system to forge a single hull becomes the founder of an interstellar species, the door to forever swung open at last."
+        },
+        {
+          "id": "launch_under_my_banner",
+          "text": "Build it, name it for yourself, and own the road to the stars.",
+          "effects": {
+            "money": 200,
+            "power": 15,
+            "reputation": 6,
+            "loyalty": 12,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 12,
+            "outward": 8
+          },
+          "setFlags": [
+            "extrasolar_flight",
+            "starfarer"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The starship departs with your monogram blazing on its flank, the first of a fleet you intend to own outright. Humanity reaches the stars, and finds your name already waiting there in gold."
+        },
+        {
+          "id": "scrap_the_foundry",
+          "text": "Scrap it. A king belongs in his realm, not scattered to the void.",
+          "effects": {
+            "money": 240,
+            "power": 12,
+            "reputation": -8,
+            "loyalty": 6,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 11,
+            "inward": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "mars_stagnation",
+            "mars_content"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You order the great hull broken for scrap rather than send your dominion beyond your sight. The solar system stays whole and yours, and the stars, that close, stay forever just out of reach by choice."
+        }
+      ]
+    },
+    {
+      "id": "ev_solar_patriarch_crown",
+      "era": "redplanet",
+      "year": 2117,
+      "title": "Sovereign of the Whole Sun",
+      "scene": "You chose mastery over the void's mysteries, and the result sprawls before you on the great solar chart: human industry on Mercury, cloud-ports on Venus, the cradle Earth, red Mars, the Belt's claims, the ice moons of Jupiter, all of it flowing through your hand. No alien gift built this. You did, world by world, furnace by furnace. The crown they offer now is not for one planet, nor two, but for a sun and everything that orbits it.",
+      "researchNote": "An alternative, non-first-contact victory capstone for players who pursue the solar-mastery resource path without the SETI/telescope science branch; it rewards the patriarch-of-many-worlds achievement with the saga's two-world-patriarch victory flag, distinct from the extra-solar and first-contact endings.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "victory",
+        "coronation",
+        "power",
+        "expansion"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "inner_system_industry",
+          "solar_program_control"
+        ],
+        "notFlags": [
+          "warp_gift",
+          "the_war",
+          "victory_achieved"
+        ],
+        "meters": {}
+      },
+      "weight": 20,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "crown_of_the_sun",
+          "text": "Take the crown of the whole solar system. You built every world of it.",
+          "effects": {
+            "money": 450,
+            "power": 15,
+            "reputation": 13,
+            "loyalty": 15,
+            "health": 4
+          },
+          "personality": {
+            "grandiosity": 11,
+            "outward": 7
+          },
+          "setFlags": [
+            "two_world_patriarch",
+            "victory_achieved"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The crown bears not two jewels but six, one for every world your industry tamed. Immortal patriarch of an entire solar system, you ruled the sun without ever needing a stranger's gift, and there is still the rest of forever."
+        },
+        {
+          "id": "commonwealth_of_the_sun",
+          "text": "Refuse it; bind the worlds into a free solar commonwealth.",
+          "effects": {
+            "money": 220,
+            "power": 11,
+            "reputation": 17,
+            "loyalty": 15,
+            "health": 5
+          },
+          "personality": {
+            "outward": -12,
+            "ideology": -8
+          },
+          "setFlags": [
+            "two_world_patriarch",
+            "victory_achieved",
+            "two_world_commonwealth"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hand six worlds their own future and sign yourself merely first citizen of a solar commonwealth. The founder who conquered a sun and then gave it away becomes the most beloved immortal the system will ever know."
+        },
+        {
+          "id": "sovereign_and_still_hungry",
+          "text": "Take the crown, then quietly draft plans for the foundry at Saturn.",
+          "effects": {
+            "money": 300,
+            "power": 14,
+            "reputation": 10,
+            "loyalty": 13
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 6
+          },
+          "setFlags": [
+            "two_world_patriarch",
+            "victory_achieved"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You accept the crown of the sun and, the same night, ask your engineers what it would take to build something that could leave it. An immortal's appetite, you discover, has no orbit it cannot eventually outgrow."
+        }
+      ]
+    },
+    {
+      "id": "ev_mars_terminal_twilight",
+      "era": "redplanet",
+      "year": 2118,
+      "title": "The Walls of a Single World",
+      "scene": "The expansion is dead, the foundries are dark, and the solar system has contracted back to a single red planet you can finally see all of at once. There is a grim peace in it: nothing beyond the dome to surprise you, nothing in the dark to disobey. The other immortal, if he lived, has gone silent. Forever stretches ahead, and it is exactly the size of Mars.",
+      "researchNote": "A terminal bad-ending capstone for the stagnation branch, where the protagonist's refusal to expand, or the destruction of the industrial base, leaves humanity confined to Mars; it gives that path a deliberate, melancholy closure distinct from the triumphant solar and extra-solar endings.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "ending",
+        "stagnation",
+        "reflection"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "mars_terminal"
+        ],
+        "notFlags": [
+          "extrasolar_flight",
+          "warp_gift"
+        ],
+        "meters": {}
+      },
+      "weight": 16,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "rule_the_one_world",
+          "text": "Settle in as god of one world, and call the silence victory.",
+          "effects": {
+            "money": 120,
+            "power": 12,
+            "reputation": -4,
+            "loyalty": 9
+          },
+          "personality": {
+            "grandiosity": 9,
+            "inward": 8
+          },
+          "setFlags": [
+            "victory_achieved",
+            "mars_content"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You rule Mars absolutely and forever, the undisputed lord of a single dome-stippled world. It is everything you can control and nothing you cannot, and you tell yourself, most days, that this is what winning was always going to look like."
+        },
+        {
+          "id": "mourn_the_closed_door",
+          "text": "Admit it: you closed the door to the stars yourself.",
+          "effects": {
+            "money": -40,
+            "power": 8,
+            "reputation": 7,
+            "loyalty": 8,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": -8,
+            "inward": 9,
+            "outward": -5
+          },
+          "setFlags": [
+            "victory_achieved"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Alone on a balcony under a sky that never fully turned blue, you finally name the truth: the stars were reachable, and you were the wall. An immortal has a long time to sit with a regret that size."
+        },
+        {
+          "id": "try_to_rebuild_too_late",
+          "text": "Order the foundries rebuilt, decades too late, with what little remains.",
+          "effects": {
+            "money": -160,
+            "power": 7,
+            "reputation": 5,
+            "loyalty": 7,
+            "health": -2
+          },
+          "personality": {
+            "grandiosity": 6,
+            "inward": 5
+          },
+          "setFlags": [
+            "victory_achieved"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You pour the last of the treasury into relighting furnaces that took a solar system to build the first time. The work is generational and the result uncertain, but for the first time in a long time, the dome looks a little less like a wall and a little more like a starting line."
         }
       ]
     }

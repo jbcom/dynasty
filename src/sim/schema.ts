@@ -114,6 +114,13 @@ export const EraSchema = z.object({
   paletteAccent: z.string().min(1),
   /** Era ends after this many events fire, or when an age/health gate trips. */
   eventBudget: z.number().int().positive().default(8),
+  /**
+   * Optional gate to ENTER this era. If present and unmet when the prior era
+   * ends, the run terminates instead of advancing (e.g. Eras 11-12 require the
+   * scientific path — without it the game ends on Mars). Comparators like
+   * requires; flags/notFlags/meters/personality.
+   */
+  entryRequires: RequiresSchema.optional(),
 });
 export type Era = z.infer<typeof EraSchema>;
 
