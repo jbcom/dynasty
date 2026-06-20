@@ -40,6 +40,44 @@ Three intertwined requirements:
       world) timelines are BACKDROPS — each must be MASSIVELY fleshed out per branch
       to give rich multi-layered context, extrapolating how leadership / geopolitical
       / economic / moral decisions differ across the changed timeline.
+
+      *** AH3 ENGINE MODEL — "GEARS IN A CLOCK" (user, 2026-06-20, AUTHORITATIVE,
+      supersedes the simple per-scope swap above) ***
+      - Every backdrop config (geography / social / religious / ideology, and the
+        whole-history variants: real-American-political, evangelical, Nazi, …) is its
+        OWN DISTINCT, INTERNALLY-CONSISTENT timeline. You must NEVER see a cross-
+        timeline contradiction (e.g. "A Young Man Wins the White House" must NOT
+        appear in a Nazi timeline). Each config stays coherent on its own.
+      - THREE CENTRAL FIGURES / DYNASTIC FAMILIES (Trump, Musk, Kennedy/RFK Jr) are
+        the GEARS — the push-and-pull. The COURSE of the timeline is what ERA 0 (the
+        prologue) sets: prologue choices SLOT IN exactly which timeline configuration
+        the run assembles.
+      - COMPILATION AT ERA 0: at the start, the engine stores a CUSTOM CAPACITOR
+        PREFERENCES SAVE that records the prologue choices AND — using the BUTTERFLY
+        MACHINE + BIAS WEIGHTING — PULLS from all the myriad timeline configs
+        (geography, social, religious, ideology, titles, markets, currencies, …) and
+        COMPILES them into ONE bespoke, internally-consistent story for that save.
+      - So a run is not a live per-scope file swap; it is a COMPILED bespoke timeline,
+        composed once at Era 0 from weighted, mutually-consistent config selections,
+        persisted to the save, then played out (still driven by the butterfly machine
+        and the three dynastic gears). The branch flag + timelinesForBranch selection
+        already built is a SUBSET of this; evolve it toward the compile-at-0 model.
+- [ ] AH5 TIMELINE-COMPILER DEV HARNESS (user, 2026-06-20): so we never have to
+      WONDER whether a timeline is stable/consistent, build a dev harness that, given
+      a SEED + ERA-0 CHOICES, DUMPS THE FULL COMPILED JSON TIMELINE for that run
+      (all backdrop selections, titles, markets, the woven event order — the entire
+      bespoke story). A pnpm script (e.g. `pnpm timeline:dump --seed X --choices ...`)
+      writing the compiled timeline to a file for inspection + a consistency check
+      (no cross-timeline contradictions). This is the verification tool for the
+      compile-at-0 engine — pairs with the no-shallowness + consistency invariants.
+      WHY (user): makes testing much more DETERMINISTIC, and lets the user run a BUNCH
+      of different Era-0 PERMUTATIONS and manually quality-control the compiled
+      results themselves. So the harness needs a BATCH/MULTI-PERMUTATION mode too
+      (enumerate or sample many Era-0 choice sets → dump each compiled timeline →
+      summary table of which configs each produced), for sweep-style manual QA.
+      NOTE: the per-branch backdrop JSONs being authored now (usa.nazi, world.nazi,
+      mores.nazi, religion.nazi, …) are the CONFIG POOLS the compiler draws from —
+      authoring them remains necessary under the gears-in-a-clock model.
 - [ ] AH3-BRANCHES (user): author full alt-history treatment for these branches:
       (1) NAZI-OCCUPIED AMERICA (axis_ascendant/nazi_dynasty) — Reich titles, purges
           not assassinations, no elections/civil-rights/free press.
