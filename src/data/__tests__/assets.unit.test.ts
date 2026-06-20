@@ -24,8 +24,9 @@ describe("assets manifest", () => {
     for (const m of ["money", "power", "reputation", "loyalty", "health", "heat"]) {
       expect(ids.has(`icon_${m}`)).toBe(true);
     }
-    for (const p of ["infant", "president", "emperor", "martian"]) {
-      expect(ids.has(`portrait_${p}`)).toBe(true);
-    }
+    // All portraits are cartoon derivatives now (no procedural/SVG placeholders).
+    const portraitPaths = parsed.assets.filter((a) => a.kind === "portrait").map((a) => a.path);
+    expect(portraitPaths.length).toBeGreaterThanOrEqual(12);
+    expect(portraitPaths.every((p) => p.endsWith(".cartoon.png"))).toBe(true);
   });
 });

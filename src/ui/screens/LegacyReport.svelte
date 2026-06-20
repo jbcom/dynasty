@@ -19,8 +19,14 @@ const { content, state, end, onRestart }: Props = $props();
 const ending = $derived<Ending | undefined>(
   content.endings.find((e) => e.id === end.endingId),
 );
-const title = $derived(ending?.title ?? "The End");
-const tier = $derived(ending?.tier ?? "endgame-bad");
+// Fallback titles by kind for built-in/no-endingId terminal states.
+const KIND_TITLE: Record<string, string> = {
+  victory: "Total Victory",
+  death: "The End of an Era",
+  coup: "Toppled",
+};
+const title = $derived(ending?.title ?? KIND_TITLE[end.kind] ?? "The End");
+const tier = $derived(ending?.tier ?? (end.kind === "victory" ? "endgame-good" : "endgame-bad"));
 const isApex = $derived(tier === "apex");
 </script>
 

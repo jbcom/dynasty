@@ -20,7 +20,12 @@ multiple passes). Depth + divergence are the goal, not coverage checkboxes.
 - [x] M1 Raise era event budgets + author deep event pools (20-40 events/era), heavily flag/meter/personality-gated for divergent paths
 - [x] M2 Many more choices per event (3-5) with distinct downstream gating
 - [ ] M3 Branch-density pass: ensure no era is a straight line; verify path-divergence metric
-- [ ] M4 WORLD/regional/local events per year: research real global+regional+local events for each year (oil shocks, NYC fiscal crisis, recessions, 9/11, 2008 crash, COVID, wars, elections, cultural moments) and weave them as events that impact Trump/the Trumps — a dense year-by-year causal web ("world-event" tag, can interact with his arc)
+- [x] M4 WORLD/regional/local per-year events woven into all eras (world-event tag)
+
+### Phase N — ONE reality + medium-native HUD (user, 2026-06-20)
+- [x] N1 ONE reality: strip meta/franchise keywords from player-facing text (Trek/Vulcan/Cochrane/Phoenix); rename benevolent first-contact species to an original in-world name; startrekInspired flag stays private provenance
+- [x] N2 Immersion: removed Extrapolated badge + research-note panel (facts woven into scene prose)
+- [ ] N3 Medium-native HUD: Capacitor Device form-factor (phone/tablet/foldable) → diegetic surfaces (newspapers, TV) not a constant button set
 Config: stop_on_failure=false (autonomous, self-resolving) · single feature branch → squash-merge
 
 ### Phase H — Research & Causality Model
@@ -44,7 +49,7 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 - [x] J6 Era 6 pass
 - [x] J7 Era 7 pass
 - [x] J8 Era 8 pass
-- [ ] J9 Era 9 pass (First-Contact-2063 hooks)
+- [x] J9 Era 9 pass (First-Contact-2063 hooks)
 - [x] J10 Era 10 pass
 
 ### Phase K — Personality & Endings UI

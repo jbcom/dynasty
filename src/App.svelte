@@ -57,7 +57,7 @@ function restart(): void {
 {#if screen === "title" || !store}
   <TitleScreen hasSave={saveExists} onNewGame={newGame} onContinue={continueGame} />
 {:else if store.view?.state.end}
-  <LegacyReport state={store.view.state} end={store.view.state.end} onRestart={restart} />
+  <LegacyReport {content} state={store.view.state} end={store.view.state.end} onRestart={restart} />
 {:else}
   <PlayScreen {content} view={store.view} busy={store.busy} onchoose={(id) => store?.choose(id)} />
 {/if}
