@@ -23,7 +23,7 @@ content depth, then the Dynasty product epic, then the cross-cutting QA invarian
 - [x] de-2c DONE: verified all 6 branches define all 3 pole endings AND every pole ending gates only on flags some event/world-timeline actually sets (19 pole flags, 0 unreachable). Added pole-coverage.unit.test.ts as a permanent invariant guard (a future pole ending referencing an unsettable flag now fails the suite instead of silently becoming unwinnable). PHASE DE-2 boundary → PR #B.
 
 ### Phase DE-3 — Balance + depth (task-015 + task-017 + AH4 no-shallowness)
-- [ ] de-3a balance pass: telegraphed currency-hedge survival play; crypto/attention market polish; verify no dominant/trap strategies (re-run the no-downside + outlier scans heat-aware).
+- [x] de-3a DONE: heat-aware scans show no-downside at 18% (1192 choices) with only 8 all-no-downside events, 6 of which are legit flag/personality FORKS (decision = which path) and 2 flat — fixed the one genuine free lunch (embrace_the_heel now +10 heat so the heel turn is a real risk/reward vs the dignified option). Added balance.unit.test.ts: a permanent DOMINANT-STRATEGY guard — fails if any choice strictly dominates a sibling on every meter (heat as cost) without either carrying a distinct flag/personality identity. 0 offenders. (Markets already live + telegraphed from DE-1/prior; currency hedge survives via the systemicTick redenomination already tested.)
 - [ ] de-3b no-shallowness invariant (AH4/task-017): every branch fork opens a comparably rich gated multi-layer pool; deepen any thin spot found. Add an automated depth-floor test (min gated layers/events per branch). PHASE BOUNDARY PR #C.
 
 ### Phase DE-4 — Era-0 levers: sibling-count / birth-order (AH8d, ties AH8c given-name)
