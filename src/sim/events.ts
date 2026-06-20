@@ -62,6 +62,18 @@ function alreadyConsumed(state: GameState, ev: GameEvent): boolean {
 }
 
 /**
+ * The event's historicity (FD-2): explicit `historicity` if authored, else
+ * reconciled from the legacy `extrapolated` boolean (true ⇒ "extrapolated"),
+ * else "personal" (the default for authored protagonist/family beats). Single
+ * source of truth so the migrated world-timeline events and authored events read
+ * uniformly.
+ */
+export function historicityOf(ev: GameEvent): "real" | "extrapolated" | "personal" {
+  if (ev.historicity) return ev.historicity;
+  return ev.extrapolated ? "extrapolated" : "personal";
+}
+
+/**
  * All events in the current era that are eligible right now. Time only moves
  * forward: an event whose year is earlier than the last fired event is excluded
  * so the player is never "sent back in time". If that would leave nothing

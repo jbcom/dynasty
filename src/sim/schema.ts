@@ -123,6 +123,20 @@ export const EventSchema = z.object({
   researchNote: z.string().min(1),
   extrapolated: z.boolean().default(false),
   startrekInspired: z.boolean().default(false),
+  /**
+   * HISTORICITY (FD-2, unified event pool): where this event sits on the real↔
+   * fictional spectrum, so the compiler can weave a coherent timeline from one
+   * pool. `real` = it actually happened (migrated world-timeline facts + real
+   * life beats); `extrapolated` = plausible future-extrapolation (Mars, contact);
+   * `personal` = the family's private/fictional life (births, estate, invented
+   * beats). Defaults to "personal" for authored protagonist events; the
+   * `extrapolated` boolean above stays as a back-compat alias and is reconciled
+   * to historicity at parse time (extrapolated:true ⇒ historicity defaults
+   * "extrapolated"). Real events are REACTABLE like any other (choices).
+   */
+  historicity: z.enum(["real", "extrapolated", "personal"]).optional(),
+  /** The place this event belongs to (FD-2/FD-5 world stacks); absent = anywhere. */
+  place: z.string().optional(),
   tags: z.array(z.string()).default([]),
   requires: RequiresSchema,
   weight: z.number().min(0).default(10),

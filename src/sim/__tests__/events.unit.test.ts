@@ -4,14 +4,49 @@ import {
   effectiveWeight,
   eligibleEvents,
   evalComparator,
+  historicityOf,
   meetsRequires,
   pickNextEvent,
 } from "../events";
 import { createRng } from "../rng";
+import type { GameEvent } from "../schema";
 import { initState } from "../state";
 import { validRaw } from "./fixtures";
 
 const content = () => buildContent(validRaw());
+
+describe("historicityOf (FD-2 unified event pool)", () => {
+  const ev = (over: Partial<GameEvent>): GameEvent =>
+    ({
+      id: "e",
+      era: "boyhood",
+      year: 1950,
+      title: "t",
+      scene: "s",
+      researchNote: "r",
+      extrapolated: false,
+      startrekInspired: false,
+      tags: [],
+      requires: { flags: [], notFlags: [], meters: {}, personality: {} },
+      weight: 10,
+      repeatable: false,
+      choices: [],
+      ...over,
+    }) as GameEvent;
+
+  it("uses explicit historicity when authored", () => {
+    expect(historicityOf(ev({ historicity: "real" }))).toBe("real");
+    expect(historicityOf(ev({ historicity: "personal" }))).toBe("personal");
+  });
+
+  it("reconciles the legacy extrapolated boolean when historicity is absent", () => {
+    expect(historicityOf(ev({ extrapolated: true }))).toBe("extrapolated");
+  });
+
+  it("defaults to personal for an ordinary authored protagonist beat", () => {
+    expect(historicityOf(ev({}))).toBe("personal");
+  });
+});
 
 describe("evalComparator", () => {
   it("handles every operator", () => {
