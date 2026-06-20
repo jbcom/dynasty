@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.4.0](https://github.com/jbcom/dynasty/compare/v0.3.0...v0.4.0) (2026-06-20)
+
+
+### Features
+
+* moral-axis poles into endings + HUD (DYNASTY phase DE-2) ([#18](https://github.com/jbcom/dynasty/issues/18)) ([3736bfd](https://github.com/jbcom/dynasty/commit/3736bfd3d34602b56d540d7d7e70698b6b0fbb93))
+* **sim:** Koota query substrate (DYNASTY phase DE-1) ([#17](https://github.com/jbcom/dynasty/issues/17)) ([0286193](https://github.com/jbcom/dynasty/commit/0286193bf101ac0038af6220f9f9a86238abf314))
+
+
+### Refactoring
+
+* **sim:** drop unreachable MarketState masking + chronology follow-up ([#15](https://github.com/jbcom/dynasty/issues/15)) ([8290dfe](https://github.com/jbcom/dynasty/commit/8290dfee68c47e86317265a7c1ea8b973feaefae))
+
 ## [0.3.0](https://github.com/jbcom/maga-money-moves/compare/v0.2.0...v0.3.0) (2026-06-20)
 
 
