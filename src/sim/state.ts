@@ -1,5 +1,6 @@
 import type { Content } from "./content";
 import { initMeters, type Meters } from "./meters";
+import { initPersonality, type Personality } from "./personality";
 
 /** One entry in the visible Butterfly Log (cause → effect chain, part B). */
 export interface LedgerEntry {
@@ -24,17 +25,30 @@ export interface HistoryEntry {
   year: number;
 }
 
-/** How a run can end. */
-export type EndKind = "death" | "coup" | "victory";
+/**
+ * How a run can end. `kind` is free-form (death | coup | victory | jail |
+ * bankruptcy | assassination | first_contact | …) so endings are authored data,
+ * not a fixed enum. `endingId` references the winning ending definition.
+ */
+export type EndKind = string;
 
 export interface EndState {
   kind: EndKind;
   year: number;
   reason: string;
+  /** Id of the data-driven ending that fired (absent for legacy/built-in ends). */
+  endingId?: string;
 }
 
 /** Accumulated ripple pressure per channel (the chaos engine's running state, part C). */
 export type RippleField = Record<string, number>;
+
+/** A scheduled delayed consequence awaiting its due year. */
+export interface PendingConsequence {
+  consequenceId: string;
+  /** In-world year the effect is due to land. */
+  dueYear: number;
+}
 
 /** The complete, serializable game state. Pure data — no DOM, no functions. */
 export interface GameState {
@@ -46,14 +60,22 @@ export interface GameState {
   /** Current in-world year. */
   year: number;
   meters: Meters;
+  /** The personality vector — what kind of man he is becoming. */
+  personality: Personality;
   /** Set membership flags (stored as a sorted array for serializability). */
   flags: string[];
   /** Event ids that have already fired (non-repeatable events fire once). */
   firedEvents: string[];
   /** Count of events fired in the current era (drives era budget). */
   eraEventCount: number;
+  /** Year of the most recently fired event — events never go backward in time. */
+  lastEventYear: number;
   /** Accumulated ripple pressure by channel. */
   ripples: RippleField;
+  /** Delayed consequences scheduled to land in a future year. */
+  pending: PendingConsequence[];
+  /** Consequence ids that have already landed (non-repeatable fire once). */
+  firedConsequences: string[];
   ledger: LedgerEntry[];
   history: HistoryEntry[];
   /** Set once the run ends; null while in progress. */
@@ -72,10 +94,14 @@ export function initState(content: Content, seed: string): GameState {
     age: 0,
     year: firstEra.yearStart,
     meters: initMeters(content.meters),
+    personality: initPersonality(),
     flags: [],
     firedEvents: [],
     eraEventCount: 0,
+    lastEventYear: firstEra.yearStart,
     ripples: {},
+    pending: [],
+    firedConsequences: [],
     ledger: [],
     history: [],
     end: null,

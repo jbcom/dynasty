@@ -21,22 +21,12 @@ export interface PortraitDef {
   layers: PortraitLayer[];
 }
 
-/** Procedural fallback layers (used only when a portrait has no art). */
-const PLACEHOLDER_LAYERS: PortraitLayer[] = [
-  { src: null, z: 0, variant: "bg" },
-  { src: null, z: 1, variant: "silhouette" },
-];
-
-/** Build the standard layer stack for an authored caricature portrait. */
-function art(id: string): PortraitLayer[] {
-  return [{ src: `portraits/${id}.svg`, z: 1 }];
-}
-
 /**
- * Layer stack pairing a cartoonified real photo over the procedural backdrop.
- * The source photo is public-domain / CC0; `scripts/cartoonify.mjs` posterizes
- * + inks it into a stylized cartoon at build time, so shipped art is a derived
- * caricature anchored to a genuinely free source. The gold frame ties it to brand.
+ * Layer stack pairing a cartoonified real photo over a brand backdrop. The
+ * source photo is public-domain / CC0; `scripts/cartoonify.mjs` posterizes +
+ * inks it into a stylized cartoon at build time, so shipped art is a derived
+ * caricature (our own work) anchored to a genuinely free source. EVERY portrait
+ * uses a cartoon derivative — there are no procedural placeholder portraits.
  */
 function cartoon(file: string): PortraitLayer[] {
   return [
@@ -45,7 +35,11 @@ function cartoon(file: string): PortraitLayer[] {
   ];
 }
 
-/** Known portrait ids across the life arc; each maps to an authored SVG caricature. */
+/**
+ * Known portrait ids across the life arc; each maps to a cartoon derivative.
+ * Speculative future stages (emperor/survivor/unifier/martian) reuse the
+ * elder/recent cartoons — aged, era-tinted by accent.
+ */
 export const PORTRAITS: Record<string, PortraitDef> = {
   infant: {
     id: "infant",
@@ -65,7 +59,7 @@ export const PORTRAITS: Record<string, PortraitDef> = {
     accent: "var(--mmm-gold)",
     layers: cartoon("central_park"),
   },
-  mogul: { id: "mogul", label: "Mogul", accent: "var(--mmm-gold)", layers: art("mogul") },
+  mogul: { id: "mogul", label: "Mogul", accent: "var(--mmm-gold)", layers: cartoon("mogul_2008") },
   celebrity: {
     id: "celebrity",
     label: "Celebrity",
@@ -84,30 +78,35 @@ export const PORTRAITS: Record<string, PortraitDef> = {
     accent: "var(--mmm-red)",
     layers: cartoon("president_2025"),
   },
-  exile: { id: "exile", label: "Exile", accent: "var(--mmm-meter-heat)", layers: art("exile") },
+  exile: {
+    id: "exile",
+    label: "Exile",
+    accent: "var(--mmm-meter-heat)",
+    layers: cartoon("recent_2024"),
+  },
   emperor: {
     id: "emperor",
     label: "Emperor",
     accent: "var(--mmm-gold-bright)",
-    layers: art("emperor"),
+    layers: cartoon("president_2025"),
   },
   survivor: {
     id: "survivor",
     label: "Survivor",
     accent: "var(--mmm-meter-heat)",
-    layers: art("survivor"),
+    layers: cartoon("elder_2017"),
   },
   unifier: {
     id: "unifier",
     label: "Unifier",
     accent: "var(--mmm-startrek)",
-    layers: art("unifier"),
+    layers: cartoon("elder_2017"),
   },
   martian: {
     id: "martian",
     label: "Martian Patriarch",
     accent: "var(--mmm-meter-heat)",
-    layers: art("martian"),
+    layers: cartoon("recent_2024"),
   },
 };
 
@@ -115,7 +114,7 @@ const FALLBACK: PortraitDef = {
   id: "unknown",
   label: "Unknown",
   accent: "var(--mmm-text-dim)",
-  layers: PLACEHOLDER_LAYERS,
+  layers: cartoon("president_2025"),
 };
 
 /** Resolve a portrait id to its definition, never throwing (falls back). */

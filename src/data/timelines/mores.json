@@ -1,0 +1,325 @@
+{
+  "scope": "mores",
+  "label": "Social Mores",
+  "events": [
+    {
+      "id": "ws_gilded_age_propriety",
+      "year": 1869,
+      "headline": "Gilded Age: Propriety Is Power",
+      "body": "The rules of polite society are enforced with iron rigidity — a gentleman's reputation, a woman's 'character,' and a family's bloodline are currency as real as gold. Public respectability is the only armor that matters.",
+      "tags": ["gilded_age", "class", "propriety", "gender"],
+      "extrapolated": false,
+      "setFlags": ["gilded_age_mores"]
+    },
+    {
+      "id": "ws_anti_german_wwi",
+      "year": 1917,
+      "headline": "Sauerkraut Renamed 'Liberty Cabbage'",
+      "body": "Anti-German hysteria sweeps America as the U.S. enters the war: German-language newspapers fold, German surnames are anglicized, and anyone with Teutonic roots learns to hide their heritage or face mob justice.",
+      "tags": ["anti_german", "wwi", "nativism", "xenophobia"],
+      "extrapolated": false,
+      "setFlags": ["anti_german_sentiment"]
+    },
+    {
+      "id": "ws_womens_suffrage",
+      "year": 1920,
+      "headline": "The 19th Amendment: Women Win the Vote",
+      "body": "After seven decades of protest, marches, and hunger strikes, women's suffrage becomes constitutional law — cracking open the assumption that civic personhood was a male-only franchise.",
+      "tags": ["suffrage", "women", "rights", "politics"],
+      "extrapolated": false,
+      "setFlags": ["suffrage_won"]
+    },
+    {
+      "id": "ws_prohibition_loosening",
+      "year": 1922,
+      "headline": "The Speakeasy Rewrites What Is Respectable",
+      "body": "Prohibition drives drinking underground and turns law-breaking into a fashionable act — flappers, bootleggers, and jazz clubs blur the old Victorian line between the decent and the disreputable.",
+      "tags": ["prohibition", "gender", "class", "culture"],
+      "extrapolated": false,
+      "setFlags": ["prohibition_era_loosening"]
+    },
+    {
+      "id": "ws_anti_german_wwii",
+      "year": 1942,
+      "headline": "German-Americans Scrub Their Surnames Again",
+      "body": "A second world war reignites suspicion of German ancestry; families with names like Drumpf quietly bury their origins, anglicize, and wave the flag harder than anyone on the block.",
+      "tags": ["anti_german", "wwii", "nativism", "identity"],
+      "extrapolated": false,
+      "setFlags": ["anti_german_sentiment_wwii"],
+      "requires": {
+        "flags": ["anti_german_sentiment"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "ws_japanese_internment_shame",
+      "year": 1942,
+      "headline": "120,000 Japanese-Americans Locked Up Without Trial",
+      "body": "Executive Order 9066 strips Japanese-American citizens of their homes and liberty on the basis of race alone — a government-sanctioned prejudice that will take four decades to officially call a wrong.",
+      "tags": ["racism", "internment", "wwii", "civil_liberties"],
+      "extrapolated": false
+    },
+    {
+      "id": "ws_lavender_scare",
+      "year": 1950,
+      "headline": "Government Purges 'Sexual Deviants' as Security Risks",
+      "body": "The State Department fires hundreds of gay employees under the Lavender Scare, codifying homosexuality as un-American — the whisper network goes silent and a generation learns that survival requires invisibility.",
+      "tags": ["lgbtq", "mccarthyism", "repression", "cold_war"],
+      "extrapolated": false,
+      "setFlags": ["lavender_scare"]
+    },
+    {
+      "id": "ws_civil_rights_sit_ins",
+      "year": 1955,
+      "headline": "Rosa Parks Sits Down so a Movement Can Stand Up",
+      "body": "The Montgomery Bus Boycott begins a sustained assault on Jim Crow — nonviolent protest forces the country to reckon publicly with the gap between its stated values and the humiliation it inflicts daily on Black Americans.",
+      "tags": ["civil_rights", "race", "protest", "south"],
+      "extrapolated": false,
+      "setFlags": ["civil_rights_movement"]
+    },
+    {
+      "id": "ws_civil_rights_act_1964",
+      "year": 1964,
+      "headline": "Civil Rights Act: Discrimination Outlawed in Public Life",
+      "body": "Congress passes the most sweeping civil rights legislation since Reconstruction — legally ending segregation and formally shifting the Overton window on race, though the culture war over its meaning begins immediately.",
+      "tags": ["civil_rights", "race", "law", "politics"],
+      "extrapolated": false,
+      "setFlags": ["civil_rights_law"]
+    },
+    {
+      "id": "ws_sexual_revolution",
+      "year": 1965,
+      "headline": "The Pill Changes Everything",
+      "body": "FDA approval of oral contraception decouples sex from reproduction and marriage, launching a decade-long unraveling of the old sexual contract — premarital sex, cohabitation, and open relationships edge toward the mainstream.",
+      "tags": ["sexual_revolution", "gender", "feminism", "culture"],
+      "extrapolated": false,
+      "setFlags": ["sexual_revolution"]
+    },
+    {
+      "id": "ws_second_wave_feminism",
+      "year": 1966,
+      "headline": "NOW Founded: 'Full Equality' Becomes a Political Demand",
+      "body": "The National Organization for Women puts second-wave feminism on an institutional footing — equal pay, reproductive rights, and an end to legal discrimination move from radical fringe to respectable liberal agenda.",
+      "tags": ["feminism", "women", "rights", "politics"],
+      "extrapolated": false,
+      "setFlags": ["second_wave_feminism"]
+    },
+    {
+      "id": "ws_stonewall",
+      "year": 1969,
+      "headline": "Stonewall: Gay Liberation Steps Into the Street",
+      "body": "Patrons of the Stonewall Inn fight back against a police raid, sparking the modern gay rights movement — the closet stops being the only safe place and pride becomes a political act.",
+      "tags": ["lgbtq", "stonewall", "protest", "liberation"],
+      "extrapolated": false,
+      "setFlags": ["gay_liberation"]
+    },
+    {
+      "id": "ws_no_fault_divorce",
+      "year": 1970,
+      "headline": "California Ends the Blame Game in Divorce Courts",
+      "body": "No-fault divorce law passes in California and spreads nationally over the decade, dissolving the legal fiction that every broken marriage has a villain — and permanently altering the social meaning of marriage.",
+      "tags": ["divorce", "marriage", "gender", "law"],
+      "extrapolated": false,
+      "setFlags": ["no_fault_divorce"]
+    },
+    {
+      "id": "ws_roe_v_wade",
+      "year": 1973,
+      "headline": "Roe v. Wade: Abortion Becomes a Constitutional Right",
+      "body": "The Supreme Court recognizes a woman's right to abortion under the right to privacy, instantly transforming reproductive autonomy from a back-alley secret into a flashpoint of American political identity.",
+      "tags": ["abortion", "women", "rights", "culture_war"],
+      "extrapolated": false,
+      "setFlags": ["roe_era"]
+    },
+    {
+      "id": "ws_aids_stigma",
+      "year": 1983,
+      "headline": "AIDS Declared an Epidemic — and a Punishment",
+      "body": "As AIDS deaths mount, the Reagan administration's silence and the religious right's rhetoric frame the disease as divine retribution for homosexuality — stigma kills as surely as the virus, driving gay men back into shame.",
+      "tags": ["aids", "lgbtq", "stigma", "health"],
+      "extrapolated": false,
+      "setFlags": ["aids_stigma_era"],
+      "requires": {
+        "flags": ["gay_liberation"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "ws_culture_wars_begin",
+      "year": 1991,
+      "headline": "Pat Buchanan Declares a Culture War at the Republican Convention",
+      "body": "Buchanan's prime-time speech names the emerging fault line: traditionalists vs. liberals on abortion, homosexuality, women's roles, and religion in public life — the culture war becomes the organizing frame of American politics.",
+      "tags": ["culture_war", "religion", "politics", "gender"],
+      "extrapolated": false,
+      "setFlags": ["culture_wars"]
+    },
+    {
+      "id": "ws_dont_ask_dont_tell",
+      "year": 1993,
+      "headline": "'Don't Ask, Don't Tell' Makes the Closet Official Military Policy",
+      "body": "Clinton's compromise keeps gay service members in the military but invisible — a policy that pleases nobody and codifies the American ambivalence between tolerance and full acceptance.",
+      "tags": ["lgbtq", "military", "politics", "culture_war"],
+      "extrapolated": false
+    },
+    {
+      "id": "ws_political_correctness_backlash",
+      "year": 1994,
+      "headline": "PC Panic: Rush Limbaugh Sells the 'Politically Correct' as the New Tyrant",
+      "body": "Conservative media crystallizes the term 'political correctness' as a weapon — reframing every demand for respectful language as censorship and casting straight white men as the true victims of the new social order.",
+      "tags": ["political_correctness", "media", "culture_war", "backlash"],
+      "extrapolated": false,
+      "setFlags": ["pc_backlash"]
+    },
+    {
+      "id": "ws_welfare_reform_immigration_backlash",
+      "year": 1996,
+      "headline": "Congress Cuts Welfare and Restricts Immigrant Benefits",
+      "body": "Welfare reform and a surge of anti-immigration sentiment converge — the 'undeserving poor' and the 'illegal alien' become the twin folk-devils of a nativist populism that will simmer for the next thirty years.",
+      "tags": ["immigration", "nativism", "class", "politics"],
+      "extrapolated": false,
+      "setFlags": ["immigration_backlash"]
+    },
+    {
+      "id": "ws_marriage_equality_momentum",
+      "year": 2003,
+      "headline": "Lawrence v. Texas: The Supreme Court Strikes Down Sodomy Laws",
+      "body": "The last state sodomy laws fall in a Supreme Court ruling that declares gay intimacy a protected liberty, opening the constitutional door that will lead to marriage equality within a dozen years.",
+      "tags": ["lgbtq", "rights", "law", "culture_war"],
+      "extrapolated": false,
+      "setFlags": ["sodomy_law_repealed"]
+    },
+    {
+      "id": "ws_same_sex_marriage",
+      "year": 2015,
+      "headline": "Obergefell: Marriage Equality Is the Law of the Land",
+      "body": "The Supreme Court rules that same-sex couples have a constitutional right to marry — a shift that would have been unthinkable thirty years prior, marking how completely the Overton window on gay rights has moved.",
+      "tags": ["lgbtq", "marriage", "rights", "law"],
+      "extrapolated": false,
+      "setFlags": ["marriage_equality"]
+    },
+    {
+      "id": "ws_great_awokening",
+      "year": 2014,
+      "headline": "'Check Your Privilege': The Great Awokening Arrives on Social Media",
+      "body": "A rapid and visible shift in progressive attitudes toward race, gender, and identity accelerates online — identity becomes the primary lens for moral judgments, and the speed of social-media pile-ons redraws the acceptable overnight.",
+      "tags": ["woke", "social_media", "identity", "race"],
+      "extrapolated": false,
+      "setFlags": ["great_awokening"]
+    },
+    {
+      "id": "ws_metoo",
+      "year": 2017,
+      "headline": "#MeToo: The Casting Couch Goes on Trial in Public",
+      "body": "Harvey Weinstein's fall triggers a global reckoning — powerful men across entertainment, media, and politics lose careers overnight as accusers go public, and the phrase 'believe women' becomes both a rallying cry and a fault line.",
+      "tags": ["metoo", "gender", "harassment", "culture_war"],
+      "extrapolated": false,
+      "setFlags": ["metoo_era"]
+    },
+    {
+      "id": "ws_cancel_culture",
+      "year": 2018,
+      "headline": "Cancellation: Twitter Becomes Judge, Jury, and Executioner",
+      "body": "A new moral enforcement mechanism emerges in which past statements, old tweets, and resurfaced misconduct trigger mass social pile-ons, destroying reputations in hours — the right calls it 'cancel culture,' the left calls it 'accountability.'",
+      "tags": ["cancel_culture", "social_media", "culture_war", "accountability"],
+      "extrapolated": false,
+      "setFlags": ["cancel_culture"]
+    },
+    {
+      "id": "ws_roe_overturned",
+      "year": 2022,
+      "headline": "Dobbs: Roe v. Wade Overturned After Half a Century",
+      "body": "The Supreme Court's Dobbs decision returns abortion regulation to the states, shattering the settled assumption that had anchored reproductive politics since 1973 and reigniting the culture war with new intensity.",
+      "tags": ["abortion", "women", "rights", "culture_war"],
+      "extrapolated": false,
+      "setFlags": ["post_roe_era"],
+      "requires": {
+        "flags": ["roe_era"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "ws_ai_deepfake_ethics",
+      "year": 2027,
+      "headline": "Synthetic Media Crisis: Whose Face Can You Trust?",
+      "body": "As deepfake video becomes indistinguishable from reality and AI voice-cloning floods political campaigns, society confronts a new social contract: consent to one's own digital likeness becomes a core civil-rights issue.",
+      "tags": ["ai", "deepfake", "media", "identity"],
+      "extrapolated": true,
+      "setFlags": ["synthetic_media_ethics"]
+    },
+    {
+      "id": "ws_ai_labor_displacement_mores",
+      "year": 2031,
+      "headline": "The Dignity Crisis: When Robots Take the Jobs, What Do Men Do?",
+      "body": "Mass automation of white-collar and trade work triggers a masculinity crisis — old status hierarchies built on breadwinning collapse, and social norms scramble to answer what purpose, honor, and identity mean when labor is optional.",
+      "tags": ["ai", "labor", "masculinity", "identity"],
+      "extrapolated": true,
+      "setFlags": ["ai_labor_displacement_mores"]
+    },
+    {
+      "id": "ws_identity_stack_wars",
+      "year": 2036,
+      "headline": "The Identity Stack: Synthetic Selves Demand Legal Recognition",
+      "body": "As neural interfaces and persistent AI avatars blur the border between person and persona, courts and cultures argue over whether a curated digital self has rights, responsibilities, and a reputation that can be 'canceled.'",
+      "tags": ["ai", "identity", "rights", "culture_war"],
+      "extrapolated": true,
+      "setFlags": ["synthetic_identity_ethics"]
+    },
+    {
+      "id": "ws_postscarcity_norms",
+      "year": 2055,
+      "headline": "Post-Scarcity Pivot: Status Detaches from Wealth",
+      "body": "Universal basic services and AI-provided abundance drain the old meaning from conspicuous consumption — social status migrates to attention, creativity, and community contribution, scrambling every inherited class signal.",
+      "tags": ["postscarcity", "class", "status", "future"],
+      "extrapolated": true,
+      "setFlags": ["postscarcity_norms"]
+    },
+    {
+      "id": "ws_mars_frontier_mores",
+      "year": 2074,
+      "headline": "The Martian Code: Frontier Pragmatism Rewrites the Social Contract",
+      "body": "Mars colonies develop their own moral grammar — where survival depends on radical interdependence, the Puritan virtues of old Earth (individual privacy, sexual propriety, racial hierarchy) are luxury concepts no one can afford.",
+      "tags": ["mars", "frontier", "mores", "future"],
+      "extrapolated": true,
+      "setFlags": ["frontier_mores"]
+    },
+    {
+      "id": "ws_earth_mars_values_rift",
+      "year": 2095,
+      "headline": "The Rift: Earth's Culture Wars Look Quaint from Orbit",
+      "body": "As the Martian population grows to millions, political theorists note the irony: the settlers who fled Earth's polarization have built a society more sexually liberated, racially unbothered, and collectively governed than anything on the home world.",
+      "tags": ["mars", "earth", "culture_war", "future"],
+      "extrapolated": true,
+      "setFlags": ["earth_mars_values_rift"],
+      "requires": {
+        "flags": ["frontier_mores"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "ws_interstellar_pluralism",
+      "year": 2150,
+      "headline": "A Hundred Cultures Bloom Across the Solar Diaspora",
+      "body": "With human settlements across the solar system no single moral consensus holds — interstellar pluralism becomes the governing doctrine, and the notion that there is one right way to be human is a historical curiosity studied in museums.",
+      "tags": ["interstellar", "pluralism", "future", "mores"],
+      "extrapolated": true,
+      "setFlags": ["interstellar_pluralism"]
+    },
+    {
+      "id": "ws_far_future_social_norms",
+      "year": 2300,
+      "headline": "Year 2300: The Concept of 'Normal' Is Itself Considered Primitive",
+      "body": "In the interstellar society of 2300, historians note with bemusement that 20th-century humans organized entire political movements around which consenting adults could love whom — it reads as archaeologically as witch trials.",
+      "tags": ["far_future", "mores", "history", "culture"],
+      "extrapolated": true,
+      "setFlags": ["far_future_norms"]
+    }
+  ]
+}

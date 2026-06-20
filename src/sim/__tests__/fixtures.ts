@@ -188,6 +188,7 @@ export function validRaw(): RawContent {
         },
       ],
     },
+    endings: { endings: [] },
     assets: {
       assets: [
         {

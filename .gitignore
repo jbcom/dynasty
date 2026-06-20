@@ -34,6 +34,12 @@ public/assets/photos/
 .agent-state/.last-compaction
 .agent-state/batch.json
 
+# .claude runtime artifacts (locks, scheduled tasks, stray legacy skill cache).
+# gates.json and other tracked config stay in git.
+.claude/state/
+.claude/scheduled_tasks.lock
+.claude/scheduled_tasks.json
+
 # itch downloader (local only)
 .env
 .itch-cache/

@@ -3,6 +3,9 @@ import {
   AssetsFileSchema,
   type ButterflyRule,
   ButterflyRulesSchema,
+  type Consequence,
+  type Ending,
+  EndingsFileSchema,
   type Era,
   EraEventsSchema,
   EraIndexSchema,
@@ -10,6 +13,8 @@ import {
   type MeterDef,
   MetersFileSchema,
   parseContent,
+  type WorldTimeline,
+  WorldTimelineSchema,
 } from "./schema";
 
 /**
@@ -23,6 +28,9 @@ export interface Content {
   eventsByEra: Map<string, GameEvent[]>;
   allEvents: GameEvent[];
   butterflyRules: ButterflyRule[];
+  consequences: Consequence[];
+  endings: Ending[];
+  worldTimelines: WorldTimeline[];
   assets: Asset[];
 }
 
@@ -31,6 +39,8 @@ export interface RawContent {
   eraIndex: unknown;
   eraEvents: Array<{ era: string; data: unknown }>;
   butterflyRules: unknown;
+  endings: unknown;
+  worldTimelines?: unknown[];
   assets: unknown;
 }
 
@@ -39,6 +49,10 @@ export function buildContent(raw: RawContent): Content {
   const metersFile = parseContent(MetersFileSchema, raw.meters, "meters.json");
   const eraIndex = parseContent(EraIndexSchema, raw.eraIndex, "eras/index.json");
   const butterfly = parseContent(ButterflyRulesSchema, raw.butterflyRules, "butterfly-rules.json");
+  const endingsFile = parseContent(EndingsFileSchema, raw.endings, "endings.json");
+  const worldTimelines = (raw.worldTimelines ?? []).map((t, i) =>
+    parseContent(WorldTimelineSchema, t, `timelines[${i}]`),
+  );
   const assetsFile = parseContent(AssetsFileSchema, raw.assets, "assets.json");
 
   const eras = [...eraIndex.eras].sort((a, b) => a.order - b.order);
@@ -83,6 +97,9 @@ export function buildContent(raw: RawContent): Content {
     eventsByEra,
     allEvents,
     butterflyRules: butterfly.rules,
+    consequences: butterfly.consequences,
+    endings: endingsFile.endings,
+    worldTimelines,
     assets: assetsFile.assets,
   };
 }

@@ -10,239 +10,1547 @@
       "researchNote": "A speculative far-future extrapolation seeded by SpaceX's real-world ambition, repeatedly stated by Elon Musk, to make humanity multiplanetary by establishing a self-sustaining city on Mars within the twenty-first century.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["mars", "alliance", "power", "branding"],
+      "tags": [
+        "mars",
+        "alliance",
+        "power",
+        "branding"
+      ],
       "portrait": "emperor",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 16,
       "repeatable": false,
       "choices": [
         {
           "id": "sign_as_equals_then_dominate",
           "text": "Sign the pact, then make sure your name is bigger.",
-          "effects": { "money": 400, "power": 14, "reputation": 10, "loyalty": 8 },
-          "setFlags": ["musk_pact", "mars_program"],
+          "effects": {
+            "money": 400,
+            "power": 14,
+            "reputation": 10,
+            "loyalty": 8
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 6
+          },
+          "setFlags": [
+            "musk_pact",
+            "mars_program",
+            "extrasolar_flight"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.5, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "The ink dries and the engines roar. Musk builds the ladder to the stars; you decide who climbs it and whose face is carved at the top."
         },
         {
           "id": "let_musk_lead_engineering",
           "text": "Let Musk run the rockets while you run everything else.",
-          "effects": { "money": 250, "power": 9, "loyalty": 6, "reputation": 6 },
-          "setFlags": ["musk_pact", "mars_program"],
+          "effects": {
+            "money": 250,
+            "power": 9,
+            "loyalty": 6,
+            "reputation": 6
+          },
+          "personality": {
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "musk_pact",
+            "mars_program"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.3, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
           "outcome": "A clean division of empire: he gets the physics, you get the politics. The handshake holds, and Mars goes on the calendar."
+        },
+        {
+          "id": "fund_the_seti_clause",
+          "text": "Insert a clause: every ship carries a listening array for the stars.",
+          "effects": {
+            "money": 150,
+            "power": 7,
+            "reputation": 12,
+            "loyalty": 5
+          },
+          "personality": {
+            "outward": -8,
+            "ideology": -5
+          },
+          "setFlags": [
+            "musk_pact",
+            "mars_program",
+            "seti_funded"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Musk grins; he always wanted ears on the void. The fleet will haul antennas alongside the gold leaf, and Earth begins, quietly, to listen."
         }
       ]
     },
     {
       "id": "ev_colony_fleet_launch",
       "era": "redplanet",
-      "year": 2083,
+      "year": 2082,
       "title": "The First Colony Fleet",
       "scene": "One thousand Starships sit fueled on the Texas flats, each one stamped with your name in letters visible from orbit. Inside ride the first settlers: engineers, loyalists, and one very confident immortal patriarch. The countdown clock is the largest ever built, gold-rimmed, naturally.",
       "researchNote": "An imaginative extrapolation of SpaceX's stated long-term goal of launching fleets of Starships to Mars during favorable transfer windows to ferry cargo and colonists, scaled up to a satirical thousand-ship armada.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["mars", "fleet", "spectacle", "power"],
+      "tags": [
+        "mars",
+        "fleet",
+        "spectacle",
+        "power"
+      ],
       "portrait": "emperor",
-      "requires": { "flags": ["mars_program"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "mars_program"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 14,
       "repeatable": false,
       "choices": [
         {
           "id": "ride_the_first_ship",
           "text": "Board the lead ship yourself. Patriarchs lead from the front.",
-          "effects": { "money": -100, "power": 12, "reputation": 12, "loyalty": 10, "health": -4 },
-          "setFlags": ["colony_fleet_launched", "aboard_fleet"],
+          "effects": {
+            "money": -100,
+            "power": 12,
+            "reputation": 12,
+            "loyalty": 10,
+            "health": -4
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 4
+          },
+          "setFlags": [
+            "colony_fleet_launched",
+            "aboard_fleet"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.6, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "The armada lifts off as one, a thousand pillars of fire under your command. The cameras will run for the entire seven-month voyage."
         },
         {
           "id": "command_from_orbit",
           "text": "Direct the launch from a gilded orbital station.",
-          "effects": { "money": -60, "power": 10, "reputation": 8, "loyalty": 7 },
-          "setFlags": ["colony_fleet_launched"],
+          "effects": {
+            "money": -60,
+            "power": 10,
+            "reputation": 8,
+            "loyalty": 7
+          },
+          "personality": {
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "colony_fleet_launched"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.4, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "From your station you watch the fleet depart like a flock of burning swans. The greatest migration in history, and it carries your monogram."
+        },
+        {
+          "id": "send_settlers_and_science",
+          "text": "Fill the empty holds with telescopes and open the data to all.",
+          "effects": {
+            "money": -120,
+            "power": 6,
+            "reputation": 14,
+            "loyalty": 6
+          },
+          "personality": {
+            "outward": -9,
+            "ideology": -6
+          },
+          "setFlags": [
+            "colony_fleet_launched",
+            "deep_space_telescopes",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Half the fleet becomes a flying observatory, its findings streamed to every classroom on Earth. The settlers grumble at the cargo; history thanks you for it."
         }
       ]
     },
     {
       "id": "ev_martian_groundbreaking",
       "era": "redplanet",
-      "year": 2086,
+      "year": 2085,
       "title": "Groundbreaking on the Red Planet",
       "scene": "Boots crunch into ferric dust no human had ever touched. Under a butterscotch sky you drive a golden ceremonial shovel into Martian soil, and a thousand settlers cheer through their helmets. Musk weeps behind his visor; you simply nod, because you always knew you would stand here.",
       "researchNote": "A triumphant far-future extrapolation of the SpaceX vision in which the first crewed landings establish a permanent foothold, here dramatized as the literal groundbreaking of the first sustained off-world settlement.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["mars", "milestone", "spectacle", "power"],
+      "tags": [
+        "mars",
+        "milestone",
+        "spectacle",
+        "power"
+      ],
       "portrait": "martian",
-      "requires": { "flags": ["colony_fleet_launched"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "colony_fleet_launched"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 20,
       "repeatable": false,
       "choices": [
         {
           "id": "build_the_first_base",
           "text": "Order the first base raised at once, no expense spared.",
-          "effects": { "money": -150, "power": 14, "reputation": 13, "loyalty": 12, "health": -3 },
-          "setFlags": ["martian_base", "first_landing"],
+          "effects": {
+            "money": -150,
+            "power": 14,
+            "reputation": 13,
+            "loyalty": 12,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "martian_base",
+            "first_landing"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.6, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "Domes rise from the regolith within weeks, pressurized and warm and unmistakably yours. Humanity is, at last, a two-world species, and you are its founder."
         },
         {
           "id": "stage_the_landing_for_earth",
           "text": "Beam the landing to a captive Earth audience first.",
-          "effects": { "money": 60, "power": 11, "reputation": 14, "loyalty": 8 },
-          "setFlags": ["martian_base", "first_landing"],
+          "effects": {
+            "money": 60,
+            "power": 11,
+            "reputation": 14,
+            "loyalty": 8
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 5
+          },
+          "setFlags": [
+            "martian_base",
+            "first_landing"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.7, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
           "outcome": "Billions watch the golden shovel bite the dust live. The base goes up regardless, and your legend now spans the void between two planets."
+        },
+        {
+          "id": "dedicate_base_to_humanity",
+          "text": "Dedicate the first base to all of humankind, not just your name.",
+          "effects": {
+            "money": -90,
+            "power": 9,
+            "reputation": 16,
+            "loyalty": 9
+          },
+          "personality": {
+            "outward": -10,
+            "ideology": -7
+          },
+          "setFlags": [
+            "martian_base",
+            "first_landing",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The plaque reads 'For Every Earth, For Every Star.' The domes rise the same, but the gesture ripples across a watching, grateful species."
         }
       ]
     },
     {
       "id": "ev_terraforming_gambit",
       "era": "redplanet",
-      "year": 2092,
+      "year": 2089,
       "title": "The Terraforming Gambit",
       "scene": "The atmosphere is too thin, the cold too cruel. Musk wants to thicken the air with orbital mirrors and released carbon; cautious advisors warn it could take centuries and trillions. You did not come to Mars to wait politely for a sky.",
       "researchNote": "A speculative extrapolation of long-discussed Mars terraforming concepts, including orbital solar mirrors and greenhouse-gas release, ideas Elon Musk has publicly floated, compressed here into a single grand satirical wager.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["mars", "terraforming", "science", "spectacle"],
+      "tags": [
+        "mars",
+        "terraforming",
+        "science",
+        "spectacle"
+      ],
       "portrait": "martian",
-      "requires": { "flags": ["martian_base"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "martian_base"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 13,
       "repeatable": false,
       "choices": [
         {
           "id": "go_big_on_terraforming",
           "text": "Hang giant mirrors in orbit and warm the whole planet.",
-          "effects": { "money": -300, "power": 12, "reputation": 11, "loyalty": 9 },
-          "setFlags": ["terraforming_begun"],
+          "effects": {
+            "money": -300,
+            "power": 12,
+            "reputation": 11,
+            "loyalty": 9
+          },
+          "personality": {
+            "grandiosity": 9
+          },
+          "setFlags": [
+            "terraforming_begun"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.5, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "A constellation of mirrors blooms overhead and the poles begin to weep. The sky, for the first time in four billion years, starts to soften toward blue."
         },
         {
           "id": "incremental_domes",
           "text": "Skip the gamble; expand the domed cities instead.",
-          "effects": { "money": 120, "power": 7, "reputation": 6, "loyalty": 6 },
-          "setFlags": ["domed_expansion"],
+          "effects": {
+            "money": 120,
+            "power": 7,
+            "reputation": 6,
+            "loyalty": 6
+          },
+          "personality": {
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "domed_expansion"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.2, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
           "outcome": "The domes multiply across the canyons, safe and profitable. The open sky can wait; the rent cannot."
+        },
+        {
+          "id": "terraform_for_the_commons",
+          "text": "Terraform openly, sharing the science with every Earth nation.",
+          "effects": {
+            "money": -260,
+            "power": 8,
+            "reputation": 14,
+            "loyalty": 7
+          },
+          "personality": {
+            "outward": -9,
+            "ideology": -5
+          },
+          "setFlags": [
+            "terraforming_begun",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The mirrors rise as a gift to the whole species, the blueprints posted for anyone to copy. A warming world, and a reputation warming with it."
         }
       ]
     },
     {
       "id": "ev_name_first_city",
       "era": "redplanet",
-      "year": 2095,
+      "year": 2092,
       "title": "Naming the First City",
       "scene": "The first true Martian metropolis is complete: a hundred thousand souls under a vaulted dome the size of a small sea. A committee timidly suggests 'New Olympia' or 'Ares Prime.' You look at them as if they have suggested setting fire to money.",
       "researchNote": "A satirical far-future extrapolation; SpaceX has only ever described an unnamed Mars city in concept, leaving the naming of humanity's first off-world capital to imagination, and to ego.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["mars", "branding", "spectacle", "power"],
+      "tags": [
+        "mars",
+        "branding",
+        "spectacle",
+        "power"
+      ],
       "portrait": "emperor",
-      "requires": { "flags": ["martian_base"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "martian_base"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 14,
       "repeatable": false,
       "choices": [
         {
           "id": "name_it_trump_city",
           "text": "It will be called Trump City. Obviously.",
-          "effects": { "money": 80, "power": 13, "reputation": 9, "loyalty": 11 },
-          "setFlags": ["trump_city"],
+          "effects": {
+            "money": 80,
+            "power": 13,
+            "reputation": 9,
+            "loyalty": 11
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 5
+          },
+          "setFlags": [
+            "trump_city"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.6, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "Trump City glows under its dome, your name in gold letters tall enough to read from the moons. The committee applauds, because the alternative is the airlock."
         },
         {
           "id": "name_it_new_america",
           "text": "Name it New America to flatter the home world.",
-          "effects": { "money": 50, "power": 10, "reputation": 12, "loyalty": 9 },
-          "setFlags": ["trump_city"],
+          "effects": {
+            "money": 50,
+            "power": 10,
+            "reputation": 12,
+            "loyalty": 9
+          },
+          "personality": {
+            "grandiosity": 6,
+            "ideology": 4
+          },
+          "setFlags": [
+            "trump_city"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.4, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "New America rises, with your statue at its heart so no one forgets who built it. Two worlds, one flag, one founder."
+        },
+        {
+          "id": "name_it_for_the_species",
+          "text": "Let the colonists vote on the name themselves.",
+          "effects": {
+            "money": -20,
+            "power": 6,
+            "reputation": 15,
+            "loyalty": 10
+          },
+          "personality": {
+            "outward": -8,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "trump_city",
+            "colonial_franchise"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "They name it Concord, and weep, and love you for the chance. A city named by its people is a city that fights to keep it."
         }
       ]
     },
     {
       "id": "ev_govern_two_worlds",
       "era": "redplanet",
-      "year": 2100,
+      "year": 2096,
       "title": "The Office of Two Worlds",
       "scene": "Earth runs on one calendar, Mars on another; the light-lag between your edicts and their arrival can stretch twenty minutes each way. Bureaucrats beg for a constitution, a charter, anything written down. You prefer governing the way you always have: by phone, by gut, by gold.",
       "researchNote": "A speculative extrapolation of the genuine governance problem posed by interplanetary settlement, where the eleven-to-twenty-minute one-way signal delay between Earth and Mars, a real orbital-mechanics fact, makes unified real-time rule physically impossible.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["mars", "governance", "power", "dynasty"],
+      "tags": [
+        "mars",
+        "governance",
+        "power",
+        "dynasty",
+        "world"
+      ],
       "portrait": "emperor",
-      "requires": { "flags": ["trump_city"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "trump_city"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 13,
       "repeatable": false,
       "choices": [
         {
           "id": "rule_by_decree",
           "text": "Rule both worlds personally by decree, lag be damned.",
-          "effects": { "money": 150, "power": 14, "reputation": 6, "loyalty": 12, "heat": 5 },
-          "setFlags": ["two_world_rule"],
+          "effects": {
+            "money": 150,
+            "power": 14,
+            "reputation": 6,
+            "loyalty": 12,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 8,
+            "ideology": 5
+          },
+          "setFlags": [
+            "two_world_rule"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.4, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "Your word crosses the void at the speed of light and lands as law on two planets. Inefficient, magnificent, and entirely yours."
         },
         {
           "id": "appoint_martian_viceroy",
           "text": "Install a loyal viceroy on Mars who answers only to you.",
-          "effects": { "money": 100, "power": 11, "reputation": 8, "loyalty": 10 },
-          "setFlags": ["two_world_rule"],
+          "effects": {
+            "money": 100,
+            "power": 11,
+            "reputation": 8,
+            "loyalty": 10
+          },
+          "personality": {
+            "grandiosity": 5,
+            "outward": 4
+          },
+          "setFlags": [
+            "two_world_rule"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.3, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
           "outcome": "A hand-picked viceroy keeps the dome cities humming in your name. The light-lag stops mattering when the deputy worships the boss."
+        },
+        {
+          "id": "write_a_two_world_charter",
+          "text": "Sign a real charter; let two worlds share self-rule.",
+          "effects": {
+            "money": -40,
+            "power": 8,
+            "reputation": 15,
+            "loyalty": 9
+          },
+          "personality": {
+            "outward": -10,
+            "ideology": -8
+          },
+          "setFlags": [
+            "two_world_rule",
+            "two_world_charter"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A constitution for two planets, signed under a softening sky. You give away a little power and gain the deathless loyalty of the free."
         }
       ]
     },
     {
       "id": "ev_earth_mars_tensions",
       "era": "redplanet",
-      "year": 2104,
+      "year": 2099,
       "title": "The Red Planet Grumbles",
       "scene": "Born-on-Mars settlers, taller and leaner in the low gravity, mutter about taxes shipped back to a planet they have never seen. A few firebrands whisper the word 'independence.' Earth's old guard wants you to crush the talk; the Martians want a seat at your table.",
       "researchNote": "A far-future extrapolation of a classic colonization tension, the strain between a frontier settlement and its distant home government, recast for the SpaceX-era Mars colony where physiology and distance alike pull the two worlds apart.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["mars", "politics", "tension", "power"],
+      "tags": [
+        "mars",
+        "politics",
+        "tension",
+        "power",
+        "world"
+      ],
       "portrait": "martian",
-      "requires": { "flags": ["two_world_rule"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "two_world_rule"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 12,
       "repeatable": false,
       "choices": [
         {
           "id": "co_opt_the_martians",
           "text": "Make the loudest Martians governors. Loyalty beats rebellion.",
-          "effects": { "money": -40, "power": 11, "reputation": 10, "loyalty": 13 },
-          "setFlags": ["martians_loyal"],
+          "effects": {
+            "money": -40,
+            "power": 11,
+            "reputation": 10,
+            "loyalty": 13
+          },
+          "personality": {
+            "outward": -3
+          },
+          "setFlags": [
+            "martians_loyal"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.3, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
           "outcome": "The firebrands trade slogans for titles and become your fiercest defenders. The independence talk evaporates into grateful applause."
         },
         {
           "id": "crush_the_dissent",
           "text": "Cut off the malcontents' oxygen subsidies as a warning.",
-          "effects": { "money": 90, "power": 9, "reputation": -8, "loyalty": 5, "heat": 9 },
-          "setFlags": ["martians_cowed"],
+          "effects": {
+            "money": 90,
+            "power": 9,
+            "reputation": -8,
+            "loyalty": 5,
+            "heat": 9
+          },
+          "personality": {
+            "outward": 11,
+            "ideology": 6
+          },
+          "setFlags": [
+            "martians_cowed"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.5, "polarity": -1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
           "outcome": "The grumbling stops, sullenly. You have order, and a faint chill in the domes that no thermostat can fix."
+        },
+        {
+          "id": "grant_martian_seat",
+          "text": "Grant Mars a true seat in a two-world senate.",
+          "effects": {
+            "money": -60,
+            "power": 7,
+            "reputation": 16,
+            "loyalty": 11
+          },
+          "personality": {
+            "outward": -10,
+            "ideology": -7
+          },
+          "setFlags": [
+            "martians_loyal",
+            "two_world_senate"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The red planet gets a voice and uses it to thank you. Shared power, you discover, is the only kind that crosses the void intact."
+        }
+      ]
+    },
+    {
+      "id": "ev_two_world_economy",
+      "era": "redplanet",
+      "year": 2098,
+      "title": "The Ledger Between Worlds",
+      "scene": "Mars mines metals Earth has nearly exhausted; Earth ships food the red soil cannot yet grow. Bankers want a single interplanetary currency stamped, inevitably, with your profile. Economists warn that whoever sets the exchange rate between two worlds quietly rules them both.",
+      "researchNote": "A speculative extrapolation of the real economic interdependence that any Mars settlement would have with Earth, where launch costs, transfer windows, and resource asymmetries, all genuine constraints, would make interplanetary trade and currency a profound source of power.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "economy",
+        "money",
+        "power",
+        "world"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "two_world_rule"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "mint_the_trump_credit",
+          "text": "Mint a single currency with your face on every coin.",
+          "effects": {
+            "money": 300,
+            "power": 12,
+            "reputation": 4,
+            "loyalty": 9,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 6
+          },
+          "setFlags": [
+            "two_world_currency"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The interplanetary credit launches, your profile gleaming on it across two worlds. Every transaction is now, in the smallest way, a tribute to you."
+        },
+        {
+          "id": "fair_exchange_board",
+          "text": "Set up an independent board to keep the exchange honest.",
+          "effects": {
+            "money": 120,
+            "power": 7,
+            "reputation": 14,
+            "loyalty": 8
+          },
+          "personality": {
+            "outward": -8,
+            "ideology": -5
+          },
+          "setFlags": [
+            "two_world_currency",
+            "fair_exchange"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A neutral board holds the rate steady between planets. You take less of the skim and far more of the trust, which compounds faster than gold."
+        },
+        {
+          "id": "squeeze_the_martian_mines",
+          "text": "Set the rate to bleed Mars and enrich the Earth treasury.",
+          "effects": {
+            "money": 380,
+            "power": 10,
+            "reputation": -10,
+            "loyalty": 4,
+            "heat": 11
+          },
+          "personality": {
+            "outward": 12,
+            "ideology": 7
+          },
+          "setFlags": [
+            "two_world_currency",
+            "martians_cowed"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Mars pays through the nose and the Earth treasury overflows. The red planet remembers, the way the squeezed always do."
+        }
+      ]
+    },
+    {
+      "id": "ev_listen_to_the_void",
+      "era": "redplanet",
+      "year": 2094,
+      "title": "Ears on the Dark",
+      "scene": "Idle scientists, bored by terraforming, ask permission to point the colony's antennas outward and simply listen. Musk thinks it is a magnificent waste of money. Something in you, ancient and curious, says yes before your accountants can object.",
+      "researchNote": "A speculative extrapolation of real SETI (Search for Extraterrestrial Intelligence) efforts, which use radio telescopes to scan for technosignatures; here the immortal patriarch funds it as a whim, seeding the saga's secret first-contact branch for players who have not yet committed to listening.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "science",
+        "seti",
+        "future"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "martian_base"
+        ],
+        "notFlags": [
+          "seti_funded"
+        ],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fund_the_listening",
+          "text": "Fund the array. What is forever for, if not to listen?",
+          "effects": {
+            "money": -80,
+            "power": 5,
+            "reputation": 11,
+            "loyalty": 5
+          },
+          "personality": {
+            "outward": -8,
+            "ideology": -5
+          },
+          "setFlags": [
+            "seti_funded"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The dishes turn toward the dark and begin to drink the silence. Most of forever is empty noise. Most is not all."
+        },
+        {
+          "id": "fund_it_as_weapon_watch",
+          "text": "Fund it, but to watch for threats, not friends.",
+          "effects": {
+            "money": -80,
+            "power": 8,
+            "reputation": 3,
+            "loyalty": 6,
+            "heat": 6
+          },
+          "personality": {
+            "outward": 9,
+            "ideology": 5
+          },
+          "setFlags": [
+            "seti_funded"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "The array listens, but for enemies, its operators told to flag anything that moves. You aim humanity's first ears at the void like a gun."
+        },
+        {
+          "id": "deny_the_scientists",
+          "text": "No. Spend the money on something with your name on it.",
+          "effects": {
+            "money": 60,
+            "power": 6,
+            "reputation": -4,
+            "loyalty": 4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "The antennas stay pointed at Earth, beaming your speeches. The void keeps whatever it was about to say to itself."
+        }
+      ]
+    },
+    {
+      "id": "ev_deep_space_array",
+      "era": "redplanet",
+      "year": 2097,
+      "title": "The Far-Eyes Project",
+      "scene": "With Mars secured, an engineer proposes a lattice of telescopes flung to the outer system, eyes that could see a planet around another star, or read a signal no closer instrument could catch. It costs a fortune and serves no faction. It is exactly the kind of thing only an immortal would bother to build.",
+      "researchNote": "A speculative extrapolation of real proposals for deep-space and interferometric telescope arrays, building on instruments like JWST and concepts for solar-gravitational-lens observatories; the array becomes the second technical key to the saga's secret first-contact endings.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "science",
+        "telescopes",
+        "future"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "seti_funded"
+        ],
+        "notFlags": [
+          "deep_space_telescopes"
+        ],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_the_far_eyes",
+          "text": "Build the array. Give humanity eyes worthy of the void.",
+          "effects": {
+            "money": -160,
+            "power": 6,
+            "reputation": 13,
+            "loyalty": 6
+          },
+          "personality": {
+            "outward": -9,
+            "ideology": -6
+          },
+          "setFlags": [
+            "deep_space_telescopes",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The far-eyes unfold across the outer dark, and suddenly the galaxy is in focus. Whatever is out there, you will now be the first to see it."
+        },
+        {
+          "id": "build_it_for_dominion",
+          "text": "Build it, classified, to map targets and resources first.",
+          "effects": {
+            "money": -160,
+            "power": 11,
+            "reputation": -3,
+            "loyalty": 7,
+            "heat": 8
+          },
+          "personality": {
+            "outward": 10,
+            "ideology": 6
+          },
+          "setFlags": [
+            "deep_space_telescopes"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "The array maps the heavens for conquest, its findings sealed in your private vault. You will see the future first, and decide who else may."
+        },
+        {
+          "id": "defer_the_array",
+          "text": "Later. The terraforming bills come first.",
+          "effects": {
+            "money": 80,
+            "power": 5,
+            "reputation": 2,
+            "loyalty": 4
+          },
+          "personality": {
+            "grandiosity": 3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.1,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The blueprints go in a drawer beside a thousand other futures. The stars, patient as ever, agree to wait."
+        }
+      ]
+    },
+    {
+      "id": "ev_open_the_data",
+      "era": "redplanet",
+      "year": 2100,
+      "title": "Whose Sky Is It",
+      "scene": "The far-eyes are returning data of staggering beauty: oceans on distant worlds, the chemical breath of life forty light-years off. Generals want it sealed; scientists beg you to share it; the children of two planets press their faces to every screen they can find. The choice is, for once, purely about what kind of god you wish to be.",
+      "researchNote": "A speculative extrapolation of the genuine open-data ethos of real astronomy (missions like JWST release data publicly) set against the strategic temptation to classify; in the saga's logic, openness pushes the protagonist's outward-perception toward the benevolent first-contact ending.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "science",
+        "ethics",
+        "future"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "deep_space_telescopes"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "release_to_all",
+          "text": "Release everything. Let the whole species see the stars.",
+          "effects": {
+            "money": -40,
+            "power": 5,
+            "reputation": 16,
+            "loyalty": 7
+          },
+          "personality": {
+            "outward": -12,
+            "ideology": -8
+          },
+          "setFlags": [
+            "back_science",
+            "open_skies"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The data floods every screen on two worlds, and a species long taught to fear the dark begins, instead, to wonder at it. Your reputation has never burned cleaner."
+        },
+        {
+          "id": "classify_the_findings",
+          "text": "Seal it. Knowledge is leverage, and leverage is yours.",
+          "effects": {
+            "money": 120,
+            "power": 12,
+            "reputation": -9,
+            "loyalty": 6,
+            "heat": 9
+          },
+          "personality": {
+            "outward": 11,
+            "ideology": 6
+          },
+          "setFlags": [
+            "classified_skies"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "The findings vanish into a vault only you can open. You alone know what waits among the stars, and you intend to greet it on your terms."
+        },
+        {
+          "id": "share_with_partners_only",
+          "text": "Share it selectively with allies who pay for the privilege.",
+          "effects": {
+            "money": 180,
+            "power": 8,
+            "reputation": 4,
+            "loyalty": 6,
+            "heat": 4
+          },
+          "personality": {
+            "outward": 5,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "deep_space_telescopes"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sell the heavens by subscription, and the great powers line up to buy a window on the void. Knowledge stays a commodity, and you remain its only wholesaler."
+        }
+      ]
+    },
+    {
+      "id": "ev_the_signal",
+      "era": "redplanet",
+      "year": 2103,
+      "title": "A Pattern in the Noise",
+      "scene": "At 3 a.m. Mars time an alert wakes the whole array: a signal, faint and impossibly regular, threaded through the static from a star no human had named. It is not pulsar, not quasar, not noise. It is, unmistakably, a greeting, or a question. The void, it turns out, was never empty. It was just waiting for ears.",
+      "researchNote": "A speculative far-future payoff of real SETI methodology, where a genuine technosignature would be a narrowband, artificial-looking signal distinct from natural sources; this event fires only once both listening (SETI) and deep-vision (telescope arrays) infrastructure exist, the saga's two technical keys.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "first_contact",
+        "signal",
+        "future"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "seti_funded",
+          "deep_space_telescopes"
+        ],
+        "notFlags": [
+          "signal_received"
+        ],
+        "meters": {}
+      },
+      "weight": 18,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "answer_with_open_hand",
+          "text": "Compose a reply: who we are, what we hope, in peace.",
+          "effects": {
+            "money": -30,
+            "power": 4,
+            "reputation": 16,
+            "loyalty": 6
+          },
+          "personality": {
+            "outward": -14,
+            "ideology": -8
+          },
+          "setFlags": [
+            "signal_received",
+            "beacon_sent",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You draft a message a child could love and a civilization could trust, and aim it at the distant star. Two worlds hold their breath together for the first time."
+        },
+        {
+          "id": "answer_with_strength",
+          "text": "Reply, but make our weapons and our reach unmistakable.",
+          "effects": {
+            "money": -30,
+            "power": 11,
+            "reputation": -6,
+            "loyalty": 7,
+            "heat": 12
+          },
+          "personality": {
+            "outward": 13,
+            "ideology": 7
+          },
+          "setFlags": [
+            "signal_received",
+            "beacon_sent"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Your reply is less a hello than a warning shot, bristling with the metrics of your power. Whatever is out there now knows exactly how dangerous you believe yourself to be."
+        },
+        {
+          "id": "go_dark",
+          "text": "Say nothing. Kill the array. Some doors stay shut.",
+          "effects": {
+            "money": 40,
+            "power": 7,
+            "reputation": -3,
+            "loyalty": 5,
+            "heat": -4
+          },
+          "personality": {
+            "inward": 8
+          },
+          "setFlags": [
+            "signal_received",
+            "went_silent"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You order the dishes turned to the ground and the signal classified to the grave. Maybe caution. Maybe cowardice. Either way, the universe waits, patient, for the next set of ears."
+        }
+      ]
+    },
+    {
+      "id": "ev_beacon_answered_benevolent",
+      "era": "redplanet",
+      "year": 2108,
+      "title": "The Beacon Is Answered",
+      "scene": "Five years after your open-handed reply, the far-eyes catch a ship decelerating from relativistic speed, its hull singing in harmonics no human built. They come not as conquerors but as gardeners of young worlds, drawn by a species whose first words to the dark were kindness. They have read Earth's beacon as peaceful, and they have brought a gift folded in the geometry of spacetime itself.",
+      "researchNote": "The benevolent first-contact apex: a speculative extrapolation in the optimistic tradition of Sagan and Star Trek, where a civilization that broadcasts cooperation rather than threat is met in kind; gated on the full listening-vision-openness stack plus a high public reputation, dramatizing that how a species presents itself determines what answers it.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "first_contact",
+        "benevolent",
+        "apex"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "seti_funded",
+          "deep_space_telescopes",
+          "back_science",
+          "beacon_sent"
+        ],
+        "notFlags": [
+          "went_silent"
+        ],
+        "meters": {
+          "reputation": ">=45"
+        }
+      },
+      "weight": 26,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "accept_the_warp_gift",
+          "text": "Accept their gift: the stars, given freely, at lightspeed and beyond.",
+          "effects": {
+            "money": 200,
+            "power": 12,
+            "reputation": 15,
+            "loyalty": 14,
+            "health": 6
+          },
+          "personality": {
+            "outward": -15,
+            "ideology": -10
+          },
+          "setFlags": [
+            "first_contact_made",
+            "warp_gift",
+            "starfarer"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "They lay the principle of the warp drive in humanity's open hands like a seed, and the galaxy unfolds overnight from prison to garden. An immortal who chose to listen, you become the first ambassador of a species the stars deemed worthy."
+        },
+        {
+          "id": "receive_them_as_equals",
+          "text": "Greet them as one civilization to another, and share what we are.",
+          "effects": {
+            "money": 120,
+            "power": 9,
+            "reputation": 16,
+            "loyalty": 12,
+            "health": 4
+          },
+          "personality": {
+            "outward": -14,
+            "ideology": -9
+          },
+          "setFlags": [
+            "first_contact_made",
+            "warp_gift",
+            "starfarer"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You meet them on the open sand of Mars, two worlds at your back, and trade not weapons but wonder. The gift of the stars is given, and humanity steps, gentle and amazed, into a wider family."
+        },
+        {
+          "id": "kneel_and_learn",
+          "text": "Set aside the crown entirely; ask only to learn from them.",
+          "effects": {
+            "money": 60,
+            "power": 7,
+            "reputation": 17,
+            "loyalty": 12,
+            "health": 6
+          },
+          "personality": {
+            "outward": -15,
+            "ideology": -10,
+            "grandiosity": -6
+          },
+          "setFlags": [
+            "first_contact_made",
+            "warp_gift",
+            "starfarer"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The immortal who conquered two worlds sits down at the feet of an elder species and simply listens. The warp gift is laid in humanity's open hands, and the proudest man who ever lived ends his saga as a humble student of the stars."
+        }
+      ]
+    },
+    {
+      "id": "ev_beacon_answered_malevolent",
+      "era": "redplanet",
+      "year": 2107,
+      "title": "What Answered the Call",
+      "scene": "Your beacon went out swaggering with the metrics of your might, and something measured it the way a predator measures a wounded thing. The far-eyes catch them late: a swarm, lightless and vast, that does not decelerate so much as fall toward two warm worlds. They read Earth's signal as prey, and they are very, very hungry.",
+      "researchNote": "The malevolent first-contact branch: a speculative extrapolation in the 'dark forest' tradition (Liu Cixin) and the real debate over METI risk, where deliberately broadcasting strength or location may attract hostile attention; gated on the listening-vision stack plus an aggressive outward posture and high heat, dramatizing that a beacon of threat invites a threat in return.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "first_contact",
+        "malevolent",
+        "danger"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "seti_funded",
+          "deep_space_telescopes",
+          "beacon_sent"
+        ],
+        "notFlags": [
+          "went_silent",
+          "warp_gift"
+        ],
+        "meters": {
+          "heat": ">=45"
+        }
+      },
+      "weight": 24,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "marshal_two_worlds",
+          "text": "Marshal both worlds for a war you may not survive.",
+          "effects": {
+            "money": -200,
+            "power": 14,
+            "reputation": 6,
+            "loyalty": 12,
+            "heat": 15,
+            "health": -8
+          },
+          "personality": {
+            "outward": 14,
+            "ideology": 8
+          },
+          "setFlags": [
+            "first_contact_made",
+            "dark_forest",
+            "the_war"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You turn the gold of two worlds into guns and rally a terrified species behind you. Whether immortality outlasts what is coming, not even you can say, but you will meet it standing."
+        },
+        {
+          "id": "barter_with_the_swarm",
+          "text": "Try to buy them off, the way you have bought everyone.",
+          "effects": {
+            "money": -150,
+            "power": 8,
+            "reputation": -10,
+            "loyalty": 4,
+            "heat": 13,
+            "health": -5
+          },
+          "personality": {
+            "outward": 12,
+            "ideology": 6
+          },
+          "setFlags": [
+            "first_contact_made",
+            "dark_forest",
+            "the_war"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You offer the swarm a deal, and it answers in a language with no word for 'enough.' The beacon you sent as a boast becomes the worst negotiation of an eternal life."
+        },
+        {
+          "id": "scatter_humanity",
+          "text": "Scatter colony seed-ships to the dark and outlive the slaughter.",
+          "effects": {
+            "money": -180,
+            "power": 9,
+            "reputation": -4,
+            "loyalty": 6,
+            "heat": 14,
+            "health": -6
+          },
+          "personality": {
+            "outward": 10,
+            "inward": 6
+          },
+          "setFlags": [
+            "first_contact_made",
+            "dark_forest",
+            "the_war"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You fling the seeds of humanity into a hundred directions of dark and accept that most will die. The deathless founder becomes a deathless refugee, carrying the species' last embers away from the fire he lit."
         }
       ]
     },
@@ -255,99 +1563,2231 @@
       "researchNote": "A speculative extrapolation combining the era's immortal-protagonist conceit with the dynastic dynamics of a multigenerational founding family, a recurring theme in imagined long-lived Mars colonies seeded by SpaceX's century-scale vision.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["mars", "dynasty", "immortality", "power"],
+      "tags": [
+        "mars",
+        "dynasty",
+        "immortality",
+        "power"
+      ],
       "portrait": "emperor",
-      "requires": { "flags": ["two_world_rule"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "two_world_rule"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 13,
       "repeatable": false,
       "choices": [
         {
           "id": "rule_forever_personally",
           "text": "Why pick an heir? You are the heir. Rule forever.",
-          "effects": { "money": 120, "power": 14, "reputation": 8, "loyalty": 13 },
-          "setFlags": ["eternal_patriarch"],
+          "effects": {
+            "money": 120,
+            "power": 14,
+            "reputation": 8,
+            "loyalty": 13
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 7
+          },
+          "setFlags": [
+            "eternal_patriarch"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.4, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "The succession question dies the moment you refuse to die. The family orbits you like moons, and the dynasty has exactly one immortal king."
         },
         {
           "id": "groom_a_council_of_heirs",
           "text": "Let the family govern as your eternal council of deputies.",
-          "effects": { "money": 90, "power": 11, "reputation": 10, "loyalty": 12 },
-          "setFlags": ["eternal_patriarch"],
+          "effects": {
+            "money": 90,
+            "power": 11,
+            "reputation": 10,
+            "loyalty": 12
+          },
+          "personality": {
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "eternal_patriarch"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.3, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
           "outcome": "Generations of Trumps serve beneath you as a standing council, each one knowing the throne above them will never empty. Stability, dynastic and deathless."
+        },
+        {
+          "id": "free_the_bloodline",
+          "text": "Release the family to live free lives; rule by consent, not blood.",
+          "effects": {
+            "money": -30,
+            "power": 8,
+            "reputation": 14,
+            "loyalty": 11
+          },
+          "personality": {
+            "outward": -9,
+            "ideology": -6
+          },
+          "setFlags": [
+            "eternal_patriarch",
+            "consensual_reign"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You unclasp the dynasty's collar and let your descendants choose their own orbits. Strangely, freed of obligation, they love you more, and so do two worlds."
+        }
+      ]
+    },
+    {
+      "id": "ev_low_gravity_generation",
+      "era": "redplanet",
+      "year": 2101,
+      "title": "The Children of Lower Gravity",
+      "scene": "The first humans born and raised on Mars are coming of age: a head taller, hollow-boned, unable ever to walk unaided on the world their parents called home. They are a new branch of the species, and they look to you, their deathless founder, to tell them what they are. Earth's pundits call them a separate people. The Martian kids just call themselves Martians.",
+      "researchNote": "A speculative extrapolation grounded in real physiology: prolonged low gravity (Mars is 0.38 g) is expected to cause significant skeletal and muscular changes, and a generation born on Mars could be physically unable to tolerate Earth's gravity, a genuine concern in space-settlement research, here dramatized as the birth of a distinct human branch.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "society",
+        "world",
+        "dynasty"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "martian_base"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "celebrate_the_new_branch",
+          "text": "Name them proudly: the first true Martians, equal and whole.",
+          "effects": {
+            "money": -20,
+            "power": 7,
+            "reputation": 14,
+            "loyalty": 12
+          },
+          "personality": {
+            "outward": -9,
+            "ideology": -6
+          },
+          "setFlags": [
+            "martian_natives",
+            "martians_loyal"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You stand before them and call them the future, not a footnote. A whole generation decides, that day, that they would die for the immortal who saw them as kin."
+        },
+        {
+          "id": "engineer_them_useful",
+          "text": "Gene-tune the next cohort for labor and obedience.",
+          "effects": {
+            "money": 100,
+            "power": 11,
+            "reputation": -11,
+            "loyalty": 5,
+            "heat": 12
+          },
+          "personality": {
+            "outward": 12,
+            "ideology": 8
+          },
+          "setFlags": [
+            "martian_natives",
+            "engineered_caste"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "The labs deliver a docile, sturdy generation built to your spec. You have solved the labor problem and created, quietly, the grievance that will outlive even you."
+        },
+        {
+          "id": "let_them_self_define",
+          "text": "Let them decide for themselves who and what they are.",
+          "effects": {
+            "money": -10,
+            "power": 5,
+            "reputation": 11,
+            "loyalty": 9
+          },
+          "personality": {
+            "outward": -7
+          },
+          "setFlags": [
+            "martian_natives"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You give the new generation nothing but room, and they fill it with a culture half-Earth, half-red-dust, wholly their own. A founder wise enough to step back becomes a founder they never stop revering."
+        }
+      ]
+    },
+    {
+      "id": "ev_earth_regency",
+      "era": "redplanet",
+      "year": 2105,
+      "title": "The Question of Earth",
+      "scene": "While your gaze has been on Mars and the stars, Earth has run itself, mostly, under your old apparatus. Now factions on the home world ask the obvious: does an emperor of two planets even need the smaller, older one? Some advisors whisper that you could simply let Earth drift into self-rule and keep the red crown. Others recoil at the thought of releasing the cradle.",
+      "researchNote": "A speculative extrapolation of the governance strain in any two-world polity, where the founding world and the frontier world develop divergent interests; here it dramatizes the immortal patriarch's choice between holding both worlds tightly and letting the older one breathe, a fork that colors the final coronation.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "earth",
+        "governance",
+        "power",
+        "world"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "two_world_rule"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "hold_both_worlds_tight",
+          "text": "Keep both worlds in your fist. You let nothing go, ever.",
+          "effects": {
+            "money": 140,
+            "power": 13,
+            "reputation": 2,
+            "loyalty": 11,
+            "heat": 7
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 9,
+            "ideology": 6
+          },
+          "setFlags": [
+            "earth_held"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Two worlds stay clamped under one immortal hand, and the apparatus tightens its grip on the cradle. Total, undivided, and watched everywhere for the first sign of slack."
+        },
+        {
+          "id": "grant_earth_autonomy",
+          "text": "Grant Earth self-rule, asking only friendship in return.",
+          "effects": {
+            "money": -50,
+            "power": 7,
+            "reputation": 16,
+            "loyalty": 10
+          },
+          "personality": {
+            "outward": -11,
+            "ideology": -8
+          },
+          "setFlags": [
+            "earth_autonomous",
+            "two_world_charter"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hand the cradle back to its children and ask only that they remember who carried them this far. They do, fiercely, and the freed Earth becomes your most loyal world of all."
+        },
+        {
+          "id": "install_earth_governor",
+          "text": "Leave a trusted governor to mind Earth in your name.",
+          "effects": {
+            "money": 80,
+            "power": 10,
+            "reputation": 8,
+            "loyalty": 9
+          },
+          "personality": {
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "earth_held"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A capable deputy runs the home world while your attention burns redward. The cradle keeps humming, your name on every form, your eyes elsewhere."
+        }
+      ]
+    },
+    {
+      "id": "ev_longevity_for_all",
+      "era": "redplanet",
+      "year": 2106,
+      "title": "The Gift of Years",
+      "scene": "The treatments that made you deathless still cost a planet's ransom and go only to your inner circle. A coalition of Martian doctors has cracked a cheaper version, enough to give ordinary people decades, maybe centuries. They bring it to you, the only immortal who has ever lived, and ask a simple question: do the many get to live, or only the one?",
+      "researchNote": "A speculative extrapolation of real longevity research (senolytics, cellular reprogramming) carried to its furthest point, framed as the classic ethical fork of life-extension technology: hoarded by elites or distributed broadly. The choice strongly colors the protagonist's outward perception toward tyranny or utopia.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "longevity",
+        "ethics",
+        "world"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "two_world_rule"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "share_immortality",
+          "text": "Give the gift of long life to anyone who wants it.",
+          "effects": {
+            "money": -180,
+            "power": 8,
+            "reputation": 17,
+            "loyalty": 13
+          },
+          "personality": {
+            "outward": -13,
+            "ideology": -9
+          },
+          "setFlags": [
+            "longevity_shared"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You open the fountain and two worlds drink from it. Death loosens its grip on the species, and the man who gave away forever is loved beyond any tyrant's dream."
+        },
+        {
+          "id": "hoard_immortality",
+          "text": "Keep it for the worthy few. Scarcity is what makes it precious.",
+          "effects": {
+            "money": 220,
+            "power": 13,
+            "reputation": -13,
+            "loyalty": 6,
+            "heat": 11
+          },
+          "personality": {
+            "outward": 13,
+            "ideology": 8,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "longevity_hoarded"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Eternity stays a members-only club, and the masses age and die in the shadow of the deathless few. You keep your singular crown, and the resentment of every grave."
+        },
+        {
+          "id": "earn_the_years",
+          "text": "Make long life a reward for service to two worlds.",
+          "effects": {
+            "money": 60,
+            "power": 11,
+            "reputation": 6,
+            "loyalty": 12,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": 6,
+            "outward": 5
+          },
+          "setFlags": [
+            "longevity_earned"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Decades of life become a medal you pin on the loyal and withhold from the rest. Two worlds work themselves to the bone for the chance, and your grip has never been firmer."
+        }
+      ]
+    },
+    {
+      "id": "ev_musk_grows_old",
+      "era": "redplanet",
+      "year": 2102,
+      "title": "The Mortal Partner",
+      "scene": "Elon, the man who built your ladder to the stars, is old now, gray and slowing, having refused the deepest treatments out of some stubborn faith in mortality. He sits across from you on a Trump City balcony and admits, almost shyly, that he is afraid he will not see how the story ends. You have all the time in the universe. He has a few years left.",
+      "researchNote": "A speculative far-future extrapolation personalizing the alliance at the saga's heart, contrasting the immortal protagonist with a mortal Musk-figure; it dramatizes the human cost of the partnership that made the Mars era possible.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "alliance",
+        "mortality",
+        "dynasty"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "musk_pact",
+          "martian_base"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "offer_musk_immortality",
+          "text": "Offer him the treatments. He earned a piece of forever.",
+          "effects": {
+            "money": -80,
+            "power": 6,
+            "reputation": 13,
+            "loyalty": 12,
+            "health": 2
+          },
+          "personality": {
+            "outward": -8
+          },
+          "setFlags": [
+            "musk_immortal"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "He accepts, weeping, and the two titans who built the bridge to Mars will now watch the rest of history together. Loyalty, you learn, can be bought, but partnership has to be honored."
+        },
+        {
+          "id": "let_musk_pass",
+          "text": "Let him go on his own terms, and honor him forever.",
+          "effects": {
+            "money": -40,
+            "power": 7,
+            "reputation": 14,
+            "loyalty": 10,
+            "health": -2
+          },
+          "personality": {
+            "outward": -5
+          },
+          "setFlags": [
+            "musk_legacy"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You build him a tomb on Olympus Mons taller than any monument on two worlds, and mean every word of the eulogy. The mortal who reached the stars rests where they shine brightest."
+        },
+        {
+          "id": "absorb_his_empire",
+          "text": "Comfort him, then quietly fold his companies into yours.",
+          "effects": {
+            "money": 300,
+            "power": 12,
+            "reputation": -7,
+            "loyalty": 5,
+            "heat": 8
+          },
+          "personality": {
+            "outward": 11,
+            "grandiosity": 7
+          },
+          "setFlags": [
+            "musk_legacy",
+            "absorbed_spacex"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You hold his hand at the end and his board's pens the next morning. The empire of two worlds now has, at last, exactly one owner."
+        }
+      ]
+    },
+    {
+      "id": "ev_blue_sky_day",
+      "era": "redplanet",
+      "year": 2111,
+      "title": "The Day the Sky Turned Blue",
+      "scene": "Decades of terraforming reach a tipping point: the Martian sky, for one impossible afternoon, scatters its light into a pale and unmistakable blue. The whole colony pours out of the domes to stand under it, helmets in hand at the edge of breathability, weeping at a color their grandparents only saw on Earth. You stand among them, golden and eternal, watching a world be reborn.",
+      "researchNote": "A speculative extrapolation of the long-term terraforming vision, where a thickened, oxygenated atmosphere would eventually scatter sunlight toward blue; the timeline is dramatically compressed from the centuries-to-millennia real estimates for satirical and emotional effect.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "terraforming",
+        "milestone",
+        "spectacle"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "terraforming_begun"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "claim_the_sky",
+          "text": "Declare it your sky, your gift, your immortal achievement.",
+          "effects": {
+            "money": 60,
+            "power": 12,
+            "reputation": 7,
+            "loyalty": 11
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 6
+          },
+          "setFlags": [
+            "blue_sky"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You name the blue after yourself and carve the date in the dome. A reborn world, and your monogram on the very air it breathes."
+        },
+        {
+          "id": "give_the_sky_to_them",
+          "text": "Give the moment to the people who built it with their hands.",
+          "effects": {
+            "money": -20,
+            "power": 8,
+            "reputation": 16,
+            "loyalty": 13
+          },
+          "personality": {
+            "outward": -10,
+            "ideology": -6
+          },
+          "setFlags": [
+            "blue_sky"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You step aside and let the workers' names go on the monument instead of yours. They lift you onto their shoulders anyway, under a blue that finally belongs to everyone."
+        },
+        {
+          "id": "monetize_the_air",
+          "text": "Meter the new breathable air and bill two worlds for the sky.",
+          "effects": {
+            "money": 260,
+            "power": 10,
+            "reputation": -12,
+            "loyalty": 4,
+            "heat": 12
+          },
+          "personality": {
+            "outward": 13,
+            "grandiosity": 7
+          },
+          "setFlags": [
+            "blue_sky",
+            "air_tax"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You install the meters before the cheering stops and charge by the breath. The sky turns blue and the bills turn red, and a reborn world learns who, exactly, owns the air."
+        }
+      ]
+    },
+    {
+      "id": "ev_starfarer_council",
+      "era": "redplanet",
+      "year": 2112,
+      "title": "Among the Stars, Among Equals",
+      "scene": "The benefactors who gave humanity the warp gift invite you to sit on a council of young and elder civilizations, a parliament of species spanning a thousand light-years. They do not care that you are immortal or that two worlds call you founder. They ask only one thing: what kind of neighbor will humanity be?",
+      "researchNote": "A speculative extrapolation in the Star Trek-adjacent optimistic tradition (here marked non-Trek per the era's framing), imagining humanity's entry into a galactic community after benevolent first contact; it gives the apex first-contact path its own world-politics beat before the saga closes.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "first_contact",
+        "benevolent",
+        "world"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "warp_gift"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "humanity_as_partner",
+          "text": "Pledge humanity as a partner, humble and curious, among the stars.",
+          "effects": {
+            "money": 80,
+            "power": 9,
+            "reputation": 17,
+            "loyalty": 13,
+            "health": 4
+          },
+          "personality": {
+            "outward": -13,
+            "ideology": -9
+          },
+          "setFlags": [
+            "galactic_seat",
+            "starfarer"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You take humanity's seat not as a conqueror but as a student, and the elder species nod, satisfied. The immortal who began as a builder of casinos ends as the steward of a young world's good name."
+        },
+        {
+          "id": "humanity_as_power",
+          "text": "Announce humanity as a rising power to be reckoned with.",
+          "effects": {
+            "money": 120,
+            "power": 13,
+            "reputation": 4,
+            "loyalty": 9,
+            "heat": 9
+          },
+          "personality": {
+            "outward": 11,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "galactic_seat"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You take the seat the way you took every room: by making sure they fear you a little. The council notes your tone, and quietly revises its assessment of the gift it gave."
+        },
+        {
+          "id": "humanity_as_bridge",
+          "text": "Offer humanity as a bridge between the council's older rivals.",
+          "effects": {
+            "money": 100,
+            "power": 11,
+            "reputation": 14,
+            "loyalty": 11,
+            "health": 3
+          },
+          "personality": {
+            "outward": -10,
+            "ideology": -6
+          },
+          "setFlags": [
+            "galactic_seat",
+            "starfarer",
+            "galactic_broker"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You do among the stars what you once did among nations: make yourself indispensable to everyone. A young species becomes the galaxy's favorite mediator, and its immortal founder its first statesman."
         }
       ]
     },
     {
       "id": "ev_final_ascension",
       "era": "redplanet",
-      "year": 2118,
+      "year": 2116,
       "title": "Patriarch of Two Worlds",
-      "scene": "On a balcony of Trump City, beneath a sky now faintly, miraculously blue, the assembled multitudes of two planets fall silent. Musk, gray and content, presents you with a single crown bearing two jewels: one for the blue marble overhead, one for the red ground underfoot. The whole of human civilization waits for you to take it.",
+      "scene": "On a balcony of Trump City, beneath a sky now faintly, miraculously blue, the assembled multitudes of two planets fall silent. Musk, gray and content, or his memory honored in bronze, presents the crown: a single circlet bearing two jewels, one for the blue marble overhead, one for the red ground underfoot. The whole of human civilization waits for you to take it.",
       "researchNote": "The capstone far-future extrapolation: the culmination of the SpaceX-seeded multiplanetary dream reimagined as the coronation of a single immortal founder over a unified two-world civilization, the satirical victory ending of the saga.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["mars", "victory", "coronation", "power", "dynasty"],
+      "tags": [
+        "mars",
+        "victory",
+        "coronation",
+        "power",
+        "dynasty"
+      ],
       "portrait": "emperor",
-      "requires": { "flags": ["eternal_patriarch"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "eternal_patriarch"
+        ],
+        "notFlags": [
+          "warp_gift",
+          "the_war"
+        ],
+        "meters": {}
+      },
       "weight": 22,
       "repeatable": false,
       "choices": [
         {
           "id": "take_the_two_world_crown",
           "text": "Take the crown. You earned both worlds.",
-          "effects": { "money": 500, "power": 15, "reputation": 15, "loyalty": 15, "health": 5 },
-          "setFlags": ["two_world_patriarch", "victory_achieved"],
+          "effects": {
+            "money": 500,
+            "power": 15,
+            "reputation": 15,
+            "loyalty": 15,
+            "health": 5
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 8
+          },
+          "setFlags": [
+            "two_world_patriarch",
+            "victory_achieved"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.7, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
           "outcome": "The double crown settles on your brow and two planets roar as one. Immortal patriarch of a two-world civilization, you have won everything there was to win, and there is still the rest of forever."
         },
         {
           "id": "crown_yourself",
-          "text": "Take the crown from Musk's hands and place it yourself.",
-          "effects": { "money": 450, "power": 15, "reputation": 12, "loyalty": 15 },
-          "setFlags": ["two_world_patriarch", "victory_achieved"],
+          "text": "Take the crown from his hands and place it yourself.",
+          "effects": {
+            "money": 450,
+            "power": 15,
+            "reputation": 12,
+            "loyalty": 15
+          },
+          "personality": {
+            "grandiosity": 12,
+            "outward": 10,
+            "ideology": 6
+          },
+          "setFlags": [
+            "two_world_patriarch",
+            "victory_achieved"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.6, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "No man crowns a god; a god crowns himself. You lift the double crown overhead and lower it onto your own head, and two worlds kneel."
+        },
+        {
+          "id": "crown_the_commonwealth",
+          "text": "Refuse a crown; declare a free commonwealth of two worlds.",
+          "effects": {
+            "money": 200,
+            "power": 11,
+            "reputation": 17,
+            "loyalty": 15,
+            "health": 5
+          },
+          "personality": {
+            "outward": -12,
+            "ideology": -8
+          },
+          "setFlags": [
+            "two_world_patriarch",
+            "victory_achieved",
+            "two_world_commonwealth"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You wave the crown away and hand two worlds their own future, signing yourself merely first citizen of an interplanetary commonwealth. The deathless founder who chose not to be king is the only kind of ruler the stars have ever truly loved."
+        }
+      ]
+    },
+    {
+      "id": "ev_war_for_two_worlds",
+      "era": "redplanet",
+      "year": 2110,
+      "title": "The Siege of the Cradle",
+      "scene": "The swarm that answered your boastful beacon falls on the solar system at last, and the war you summoned arrives in fire and silence. Two worlds, lashed together by terror, hand you the only thing they have left: total command. Whatever you are, you are now humanity's last and only general.",
+      "researchNote": "A speculative far-future extrapolation following the malevolent first-contact branch: an existential interstellar conflict triggered by an aggressive beacon, dramatizing the dark-forest hypothesis's grimmest payoff and giving that path its own climactic world-war beat.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "first_contact",
+        "war",
+        "danger",
+        "world"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "the_war"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "scorched_void_defense",
+          "text": "Burn every resource of two worlds to throw them back.",
+          "effects": {
+            "money": -400,
+            "power": 14,
+            "reputation": 5,
+            "loyalty": 13,
+            "heat": 15,
+            "health": -10
+          },
+          "personality": {
+            "outward": 12,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "war_general"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You spend two worlds like ammunition and meet the swarm at the edge of the system. Immortality means you will witness every consequence of the beacon you sent, win or lose."
+        },
+        {
+          "id": "unite_two_worlds_for_war",
+          "text": "Forge two terrified worlds into a single deathless fist.",
+          "effects": {
+            "money": -300,
+            "power": 13,
+            "reputation": 9,
+            "loyalty": 15,
+            "heat": 13,
+            "health": -8
+          },
+          "personality": {
+            "outward": 9,
+            "ideology": 6
+          },
+          "setFlags": [
+            "war_general",
+            "two_worlds_united"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Under the gun of extinction, Earth and Mars become one war-machine in your hand. The unity you could never buy in peace, terror gives you in an afternoon."
+        },
+        {
+          "id": "broadcast_surrender_of_pride",
+          "text": "Send a second beacon: not strength this time, but contrition.",
+          "effects": {
+            "money": -120,
+            "power": 8,
+            "reputation": 13,
+            "loyalty": 9,
+            "heat": -6,
+            "health": -4
+          },
+          "personality": {
+            "outward": -12,
+            "ideology": -7,
+            "grandiosity": -8
+          },
+          "setFlags": [
+            "war_general",
+            "humbled_beacon"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Too late, you replace the boast with a plea, broadcasting two worlds' regret into the closing dark. Whether mercy hears a beacon that once threatened it, not even an immortal can know, but you finally sent the right words."
         }
       ]
     },
     {
       "id": "ev_gaze_to_the_stars",
       "era": "redplanet",
-      "year": 2120,
+      "year": 2119,
       "title": "Beyond the Beyond",
-      "scene": "Two worlds secured, dynasty deathless, crown gleaming. From the highest dome you look past Mars to the cold scatter of stars and feel the old, familiar itch. Phobos and Deimos are charted. Jupiter's moons twinkle like vacant lots awaiting a developer. Forever is a long time to stand still.",
+      "scene": "Two worlds secured, dynasty deathless, crown or commonwealth settled. From the highest dome you look past Mars to the cold scatter of stars and feel the old, familiar itch. Phobos and Deimos are charted. Jupiter's moons twinkle like vacant lots awaiting a developer. Forever is a long time to stand still.",
       "researchNote": "A closing far-future extrapolation gesturing past the SpaceX Mars vision toward the outer solar system, leaving the immortal two-world patriarch poised for whatever expansion the next eternity might invite.",
       "extrapolated": true,
       "startrekInspired": false,
-      "tags": ["mars", "victory", "stars", "future"],
+      "tags": [
+        "mars",
+        "victory",
+        "stars",
+        "future"
+      ],
       "portrait": "emperor",
-      "requires": { "flags": ["two_world_patriarch"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "two_world_patriarch"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 18,
       "repeatable": false,
       "choices": [
         {
           "id": "plan_the_next_frontier",
           "text": "Order the first survey of the outer moons. Why stop now?",
-          "effects": { "money": 200, "power": 13, "reputation": 12, "loyalty": 12 },
-          "setFlags": ["eyes_on_jupiter"],
+          "effects": {
+            "money": 200,
+            "power": 13,
+            "reputation": 12,
+            "loyalty": 12
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 6
+          },
+          "setFlags": [
+            "eyes_on_jupiter"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.5, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "Survey ships depart for the gas giants under your colors. The empire of two worlds becomes, in a single decree, the seed of an empire of many."
         },
         {
           "id": "savor_the_summit",
           "text": "Stand, golden and eternal, and simply enjoy the view.",
-          "effects": { "money": 100, "power": 11, "reputation": 13, "loyalty": 12, "health": 4 },
-          "setFlags": ["eternal_summit"],
+          "effects": {
+            "money": 100,
+            "power": 11,
+            "reputation": 13,
+            "loyalty": 12,
+            "health": 4
+          },
+          "personality": {
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "eternal_summit"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "tabloids", "weight": 0.4, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "Two worlds at your feet, the stars above, and all of time ahead. You smile the smile of a man who has, at last, run out of things to conquer, for now."
+        },
+        {
+          "id": "turn_outward_in_peace",
+          "text": "Send not armies to the stars but envoys and gifts.",
+          "effects": {
+            "money": 60,
+            "power": 9,
+            "reputation": 16,
+            "loyalty": 12,
+            "health": 4
+          },
+          "personality": {
+            "outward": -11,
+            "ideology": -7
+          },
+          "setFlags": [
+            "envoys_to_the_stars",
+            "extrasolar_flight"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You point humanity's deathless ambition outward not as a fist but as an open hand, sending ships of scholars and diplomats into the dark. An eternity of friends, you decide, beats an eternity of subjects."
+        }
+      ]
+    },
+    {
+      "id": "ev_a_quiet_eternity",
+      "era": "redplanet",
+      "year": 2120,
+      "title": "The Long Afternoon of Forever",
+      "scene": "The saga, by every measure, is over: two worlds, the stars, eternity itself, all accounted for. In the long blue afternoon of a terraformed Mars, the immortal patriarch sits at last in something like rest, and the only question remaining is the oldest one a god ever asks. What was all of it for, the species, or the legend of yourself?",
+      "researchNote": "A reflective closing far-future extrapolation, deliberately echoing the saga's recurring question of legacy versus ego; it gives the immortal protagonist a final, quiet character beat after the grand machinery of conquest and contact has run its course.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "reflection",
+        "future",
+        "dynasty"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "victory_achieved"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "for_the_species",
+          "text": "Decide it was for them. Spend forever tending what you grew.",
+          "effects": {
+            "money": -20,
+            "power": 8,
+            "reputation": 16,
+            "loyalty": 13,
+            "health": 5
+          },
+          "personality": {
+            "outward": -12,
+            "ideology": -8
+          },
+          "setFlags": [
+            "tended_the_garden"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You choose the garden over the monument and settle into the work of keeping two worlds, and a young species, well. The legend dims a little; the love it leaves behind does not."
+        },
+        {
+          "id": "for_the_legend",
+          "text": "Decide it was for you. The legend is the only thing that lasts.",
+          "effects": {
+            "money": 100,
+            "power": 12,
+            "reputation": 4,
+            "loyalty": 10
+          },
+          "personality": {
+            "grandiosity": 11,
+            "outward": 9
+          },
+          "setFlags": [
+            "the_eternal_legend"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You carve your name across two worlds and the stars beyond and call it enough. An eternity of being remembered, by a universe you were never quite able to love back."
+        },
+        {
+          "id": "refuse_the_question",
+          "text": "Refuse the question. Forever is long; you'll decide later.",
+          "effects": {
+            "money": 40,
+            "power": 9,
+            "reputation": 9,
+            "loyalty": 10,
+            "health": 3
+          },
+          "personality": {
+            "inward": 7
+          },
+          "setFlags": [
+            "question_deferred"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You shrug at the oldest question a god ever asked and pour another drink under a blue Martian sky. The answer, like everything else, can wait. You have time."
+        }
+      ]
+    },
+    {
+      "id": "ev_jovian_moons_gambit",
+      "era": "redplanet",
+      "year": 2104,
+      "title": "The Ice Moons of Jupiter",
+      "scene": "Survey drones report what the textbooks always promised: Europa and Ganymede hide oceans of liquid water under kilometers of ice, more than all of Earth's seas combined. The catch is Jupiter's magnetosphere, a radiation belt that would cook an unshielded settler in a day. Your engineers say the water and volatiles out there are the raw fuel for any ship that ever hopes to leave the sun behind.",
+      "researchNote": "Grounded extrapolation: Europa and Ganymede are confirmed to harbor subsurface liquid-water oceans, and Jupiter's intense radiation belts (hundreds of rem/day near Europa) are a genuine engineering obstacle requiring deep regolith or ice shielding; their volatiles are a plausible propellant and life-support resource base for outbound flight.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "jupiter",
+        "expansion",
+        "resources",
+        "science"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "martian_base"
+        ],
+        "notFlags": [
+          "mars_stagnation"
+        ],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "settle_under_the_ice",
+          "text": "Bury the colonies deep in the ice and harvest the oceans.",
+          "effects": {
+            "money": -160,
+            "power": 9,
+            "reputation": 12,
+            "loyalty": 8,
+            "health": -3
+          },
+          "personality": {
+            "outward": -7,
+            "ideology": -5
+          },
+          "setFlags": [
+            "jupiter_settled"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Settlers tunnel beneath thirty meters of radiation-blocking ice and tap an ocean older than life on Earth. The first volatiles begin flowing inward, and the solar system grows a third human shore."
+        },
+        {
+          "id": "settle_for_the_fuel",
+          "text": "Settle them, but only to strip the volatiles for the fleet.",
+          "effects": {
+            "money": 120,
+            "power": 11,
+            "reputation": 2,
+            "loyalty": 7,
+            "heat": 6,
+            "health": -4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 6
+          },
+          "setFlags": [
+            "jupiter_settled"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The ice moons become refueling depots first and homes a distant second. Tankers of water and hydrogen begin the long fall sunward, fuel for ships that do not exist yet."
+        },
+        {
+          "id": "refuse_jupiter_too_far",
+          "text": "No. Jupiter is too far to watch, too far to hold.",
+          "effects": {
+            "money": 80,
+            "power": 8,
+            "reputation": -4,
+            "loyalty": 5
+          },
+          "personality": {
+            "grandiosity": 9,
+            "inward": 5
+          },
+          "setFlags": [
+            "mars_stagnation"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You cannot rule what light takes an hour to reach, so you forbid the venture. The ice moons stay frozen and unclaimed, and the empire's tide stops at the orbit of Mars."
+        }
+      ]
+    },
+    {
+      "id": "ev_belt_mining_rush",
+      "era": "redplanet",
+      "year": 2106,
+      "title": "The Belt Bonanza",
+      "scene": "Between Mars and Jupiter drift millions of asteroids, and the prospectors' assays come back staggering: nickel-iron bodies holding more refined-grade metal than Earth has mined in all of history, and carbonaceous rocks slick with water and organics. A single captured metal-rich body could glut the markets of two worlds. Your accountants are salivating; your strategists are nervous about who controls a frontier you cannot see.",
+      "researchNote": "Grounded extrapolation: metallic (M-type) asteroids like 16 Psyche contain vast nickel-iron-and-precious-metal inventories, while carbonaceous (C-type) bodies carry water and organic volatiles; asteroid mining is a real, if unproven, near-term industrial proposition and a plausible source of the metals and volatiles needed to build deep-space craft.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "belt",
+        "mining",
+        "economy",
+        "resources"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "martian_base"
+        ],
+        "notFlags": [
+          "mars_stagnation"
+        ],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "open_the_belt_freely",
+          "text": "Open the Belt to all comers under a fair claims charter.",
+          "effects": {
+            "money": 180,
+            "power": 8,
+            "reputation": 14,
+            "loyalty": 9
+          },
+          "personality": {
+            "outward": -9,
+            "ideology": -6
+          },
+          "setFlags": [
+            "belt_mined"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Wildcat prospectors swarm the Belt under your charter, and metals and volatiles flood inward by the megaton. The frontier you could not control made you richer than the throne you could."
+        },
+        {
+          "id": "monopolize_the_belt",
+          "text": "Claim the richest bodies as crown property and license the rest.",
+          "effects": {
+            "money": 320,
+            "power": 12,
+            "reputation": -6,
+            "loyalty": 7,
+            "heat": 9
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 9
+          },
+          "setFlags": [
+            "belt_mined"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You stamp the fattest asteroids with your name and tax everyone else's. The metals pile up in your foundries; so does the grudge of every miner you boxed out."
+        },
+        {
+          "id": "ban_the_belt_rush",
+          "text": "Forbid it. An empire you cannot police is an empire that splinters.",
+          "effects": {
+            "money": -40,
+            "power": 9,
+            "reputation": -7,
+            "loyalty": 5,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 7,
+            "inward": 4
+          },
+          "setFlags": [
+            "mars_stagnation"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You order the prospector ships grounded rather than let a lawless frontier breed rivals. The greatest lode in the solar system stays untouched, and the empire quietly stops growing."
+        }
+      ]
+    },
+    {
+      "id": "ev_inner_system_forge",
+      "era": "redplanet",
+      "year": 2108,
+      "title": "Furnaces of the Inner Sun",
+      "scene": "Closer to the star, two prizes beckon. Venus's upper atmosphere, fifty kilometers up, is the most Earthlike pressure and temperature anywhere off Earth, ripe for floating cloud-cities. Mercury, baked and metal-rich, could host a rotating equatorial foundry drinking unfiltered sunlight to smelt the Belt's ore into hull plate. Together they would close the loop: organics, volatiles, metals, and the raw energy to forge them into ships.",
+      "researchNote": "Grounded extrapolation: Venus's cloud layer at ~50 km altitude has near-Earth pressure and temperature, the basis of real aerostat 'cloud city' proposals (e.g., NASA HAVOC); Mercury's proximity to the Sun offers abundant solar flux for industry, and a sun-tracking or equatorial base could exploit it for high-throughput smelting.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "venus",
+        "mercury",
+        "industry",
+        "resources"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "belt_mined"
+        ],
+        "notFlags": [
+          "mars_stagnation"
+        ],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_cloud_and_foundry",
+          "text": "Build both: Venus cloud-cities and Mercury's solar foundry.",
+          "effects": {
+            "money": -200,
+            "power": 12,
+            "reputation": 11,
+            "loyalty": 9,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": -4
+          },
+          "setFlags": [
+            "inner_system_industry"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Cloud-cities bloom in Venus's sulfuric haze while Mercury's rotating foundry pours hull plate by the sunlit ton. The solar system becomes, at last, a single integrated industry, and its output points outward."
+        },
+        {
+          "id": "foundry_for_profit",
+          "text": "Run the inner worlds as pure profit, and skim every smelter.",
+          "effects": {
+            "money": 280,
+            "power": 11,
+            "reputation": -5,
+            "loyalty": 6,
+            "heat": 8,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 8
+          },
+          "setFlags": [
+            "inner_system_industry"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Mercury's furnaces and Venus's floating ports run hot and lucrative under your meters. The industrial base for a starship gets built almost by accident, a side effect of greed pointed sunward."
+        },
+        {
+          "id": "stay_with_what_i_can_see",
+          "text": "Enough. Consolidate Mars; let the inner worlds wait forever.",
+          "effects": {
+            "money": 60,
+            "power": 9,
+            "reputation": 4,
+            "loyalty": 8,
+            "health": 3
+          },
+          "personality": {
+            "grandiosity": 9,
+            "inward": 6
+          },
+          "setFlags": [
+            "mars_content"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You plant your flag at Mars and refuse to chase the sun's furnaces. The empire stops at a comfortable size, and you sleep better ruling a realm you can hold in your two hands."
+        }
+      ]
+    },
+    {
+      "id": "ev_musk_solar_rivalry",
+      "era": "redplanet",
+      "year": 2105,
+      "title": "Two Immortals, One Solar System",
+      "scene": "Musk took the longevity treatments after all, and the two of you have outlived everyone who ever mediated between you. Now his foundries and your foundries race across the same Belt, the same moons, the same sun. He proposes a single unified solar program, and the only open question is whose hand sits on top. Two deathless men cannot both be in charge of forever.",
+      "researchNote": "A speculative far-future extrapolation personalizing the program's leadership as a rivalry between two immortal founders; it dramatizes the real-world Trump-Musk dynamic projected onto control of an interplanetary industrial base, the political layer atop the resource sub-loop.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "musk",
+        "rivalry",
+        "power",
+        "expansion"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "musk_pact"
+        ],
+        "notFlags": [
+          "absorbed_spacex",
+          "musk_legacy"
+        ],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "ally_with_musk_solar",
+          "text": "Co-chair it as equals. Two engines pull harder than one.",
+          "effects": {
+            "money": 160,
+            "power": 10,
+            "reputation": 12,
+            "loyalty": 9
+          },
+          "personality": {
+            "outward": -6,
+            "ideology": -4
+          },
+          "setFlags": [
+            "musk_allied_solar",
+            "solar_program_control"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You and Musk fuse your programs into one solar enterprise with two names on the door. The combined foundries leap ahead, and for once your ego bends because the math of forever demands it."
+        },
+        {
+          "id": "outmaneuver_musk",
+          "text": "Smile, sign nothing, and quietly take controlling shares first.",
+          "effects": {
+            "money": 220,
+            "power": 13,
+            "reputation": -3,
+            "loyalty": 8,
+            "heat": 7
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 9
+          },
+          "setFlags": [
+            "musk_outmaneuvered",
+            "solar_program_control"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "By the time Musk reads the fine print, the unified program is unmistakably yours and he is its most brilliant employee. The foundries keep building; the partnership becomes a hierarchy with one immortal on top."
+        },
+        {
+          "id": "sabotage_musk_program",
+          "text": "Starve his foundries of Belt metal until he kneels or breaks.",
+          "effects": {
+            "money": -120,
+            "power": 9,
+            "reputation": -11,
+            "loyalty": 4,
+            "heat": 13
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 12,
+            "ideology": 6
+          },
+          "setFlags": [
+            "musk_outmaneuvered"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You choke his supply lines and watch his great furnaces go cold one by one. You win the throne of the solar program and shatter the very industry that might have built the ship to leave it."
+        }
+      ]
+    },
+    {
+      "id": "ev_musk_war_for_the_sun",
+      "era": "redplanet",
+      "year": 2109,
+      "title": "The War of the Two Founders",
+      "scene": "The rivalry curdles into open conflict: Musk's loyalists seize the Mercury foundry, your fleets blockade the Jovian fuel depots, and the solar system's industry grinds toward civil war. Every reactor turned to weapons is a reactor not building ships outward. Two immortals, it turns out, can burn down everything mortals built in a single generation of spite.",
+      "researchNote": "A speculative far-future extrapolation of the founder rivalry escalating to a system-spanning industrial conflict; it provides a per-era catastrophic early-out where the protagonist's spite collapses the very resource base required for extra-solar flight.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "musk",
+        "rivalry",
+        "war",
+        "danger"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "musk_outmaneuvered"
+        ],
+        "notFlags": [
+          "musk_allied_solar",
+          "absorbed_spacex"
+        ],
+        "meters": {
+          "heat": ">=40"
+        }
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "win_the_founder_war",
+          "text": "Crush him utterly. There can be only one immortal founder.",
+          "effects": {
+            "money": -260,
+            "power": 12,
+            "reputation": -12,
+            "loyalty": 6,
+            "heat": 15,
+            "health": -6
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 13
+          },
+          "setFlags": [
+            "musk_outmaneuvered",
+            "mars_terminal",
+            "mars_stagnation"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You win the war and rule a solar system of cratered foundries and emptied depots. The industry that could have carried humanity to other stars lies in ruins, and your throne sits atop the ashes of forever's only door."
+        },
+        {
+          "id": "broker_the_founders_peace",
+          "text": "Swallow your pride and sue your rival for an immortal peace.",
+          "effects": {
+            "money": -100,
+            "power": 9,
+            "reputation": 13,
+            "loyalty": 10,
+            "heat": -8,
+            "health": -2
+          },
+          "personality": {
+            "grandiosity": -7,
+            "outward": -10,
+            "ideology": -6
+          },
+          "setFlags": [
+            "musk_allied_solar",
+            "solar_program_control"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You do the one thing you swore you never would and offer your equal a true partnership. The foundries relight, the depots reopen, and two immortals decide that the stars are worth more than the win."
+        },
+        {
+          "id": "let_the_war_burn",
+          "text": "Let it burn and retreat to fortress Mars to wait it out.",
+          "effects": {
+            "money": -180,
+            "power": 7,
+            "reputation": -9,
+            "loyalty": 4,
+            "heat": 10,
+            "health": -4
+          },
+          "personality": {
+            "inward": 9,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "mars_terminal",
+            "mars_stagnation"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You seal Mars and let the rest of the solar system tear itself apart. When the fires finally die there is no industry left to reach the stars, only a fortress world and an immortal grown old in spirit if not in flesh."
+        }
+      ]
+    },
+    {
+      "id": "ev_colony_catastrophe",
+      "era": "redplanet",
+      "year": 2107,
+      "title": "When the Ice Cracked",
+      "scene": "A radiation surge punches through the shielding on a Europan settlement, or a Mercury foundry's reactor runs away, and in a single shift you lose ten thousand colonists to the indifferent physics of deep space. The survivors demand you halt the whole expansion; the dead demand nothing at all. Forever is long enough to make every mistake at least once, and this one has a body count.",
+      "researchNote": "A speculative extrapolation grounded in the genuine lethality of deep-space environments, hard radiation, life-support failure, thermal extremes, dramatized as a mass-casualty disaster; it serves as a per-era early-out hook where catastrophe can either end the expansion or harden the protagonist's resolve.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "disaster",
+        "expansion",
+        "danger",
+        "world"
+      ],
+      "portrait": "martian",
+      "requires": {
+        "flags": [
+          "jupiter_settled"
+        ],
+        "notFlags": [
+          "mars_terminal"
+        ],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "mourn_and_press_on",
+          "text": "Mourn them publicly, fix the engineering, and press on.",
+          "effects": {
+            "money": -90,
+            "power": 9,
+            "reputation": 11,
+            "loyalty": 11,
+            "health": -4
+          },
+          "personality": {
+            "outward": -6,
+            "ideology": -4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You stand over the sealed airlocks and promise the dead that their shore will be made safe. The shielding is rebuilt twice as thick, and the outward push survives its first true grief."
+        },
+        {
+          "id": "bury_it_and_continue",
+          "text": "Classify the death toll and keep the depots running on schedule.",
+          "effects": {
+            "money": 60,
+            "power": 10,
+            "reputation": -12,
+            "loyalty": 4,
+            "heat": 12,
+            "health": -3
+          },
+          "personality": {
+            "outward": 11,
+            "grandiosity": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You bury the numbers along with the colonists and the volatiles keep flowing inward. The expansion continues, faster and colder, on a foundation of unmarked graves."
+        },
+        {
+          "id": "halt_the_expansion",
+          "text": "Halt everything. Bring them home. The frontier costs too much.",
+          "effects": {
+            "money": -140,
+            "power": 7,
+            "reputation": 6,
+            "loyalty": 8,
+            "health": -2
+          },
+          "personality": {
+            "inward": 8,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "mars_stagnation",
+            "mars_content"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You recall the outer settlements and let the deep system go quiet. Humanity contracts back to Mars and Earth, scarred and safe, and the stars become someone else's problem for another century."
+        }
+      ]
+    },
+    {
+      "id": "ev_extrasolar_foundry",
+      "era": "redplanet",
+      "year": 2114,
+      "title": "The Foundry at the Edge of Forever",
+      "scene": "It has taken the whole solar system to do it: Jupiter's water and organics, the Belt's metal, Mercury's furnaces, Venus's volatiles, all converging on a single shipyard hung beyond the orbit of Saturn. Here, where the sun is just the brightest star, your engineers can finally build something no chemical rocket ever could, a vessel meant not to cross the system but to leave it. Everything you mined, settled, and fought for has been, in truth, the assembly of this one hull.",
+      "researchNote": "The capstone of the resource sub-loop: a hard-SF extrapolation that an extra-solar craft requires an industrial base spanning the inner system (energy, metals) and outer system (volatiles, organics for propellant and life support); the event gates on the accumulated settlement flags, making interstellar capability an earned consequence of the full chain rather than a free choice.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "extrasolar",
+        "foundry",
+        "capstone",
+        "future"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "jupiter_settled",
+          "belt_mined",
+          "inner_system_industry",
+          "solar_program_control"
+        ],
+        "notFlags": [
+          "mars_stagnation",
+          "mars_terminal"
+        ],
+        "meters": {}
+      },
+      "weight": 24,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "launch_the_starship",
+          "text": "Build the ship and fling humanity, at last, beyond the sun.",
+          "effects": {
+            "money": -300,
+            "power": 14,
+            "reputation": 16,
+            "loyalty": 14,
+            "health": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": -6
+          },
+          "setFlags": [
+            "extrasolar_flight",
+            "starfarer"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The first true starship lights its drive beyond Saturn and aims itself at another sun. An immortal who mastered an entire solar system to forge a single hull becomes the founder of an interstellar species, the door to forever swung open at last."
+        },
+        {
+          "id": "launch_under_my_banner",
+          "text": "Build it, name it for yourself, and own the road to the stars.",
+          "effects": {
+            "money": 200,
+            "power": 15,
+            "reputation": 6,
+            "loyalty": 12,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 12,
+            "outward": 8
+          },
+          "setFlags": [
+            "extrasolar_flight",
+            "starfarer"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The starship departs with your monogram blazing on its flank, the first of a fleet you intend to own outright. Humanity reaches the stars, and finds your name already waiting there in gold."
+        },
+        {
+          "id": "scrap_the_foundry",
+          "text": "Scrap it. A king belongs in his realm, not scattered to the void.",
+          "effects": {
+            "money": 240,
+            "power": 12,
+            "reputation": -8,
+            "loyalty": 6,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 11,
+            "inward": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "mars_stagnation",
+            "mars_content"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You order the great hull broken for scrap rather than send your dominion beyond your sight. The solar system stays whole and yours, and the stars, that close, stay forever just out of reach by choice."
+        }
+      ]
+    },
+    {
+      "id": "ev_solar_patriarch_crown",
+      "era": "redplanet",
+      "year": 2117,
+      "title": "Sovereign of the Whole Sun",
+      "scene": "You chose mastery over the void's mysteries, and the result sprawls before you on the great solar chart: human industry on Mercury, cloud-ports on Venus, the cradle Earth, red Mars, the Belt's claims, the ice moons of Jupiter, all of it flowing through your hand. No alien gift built this. You did, world by world, furnace by furnace. The crown they offer now is not for one planet, nor two, but for a sun and everything that orbits it.",
+      "researchNote": "An alternative, non-first-contact victory capstone for players who pursue the solar-mastery resource path without the SETI/telescope science branch; it rewards the patriarch-of-many-worlds achievement with the saga's two-world-patriarch victory flag, distinct from the extra-solar and first-contact endings.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "victory",
+        "coronation",
+        "power",
+        "expansion"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "inner_system_industry",
+          "solar_program_control"
+        ],
+        "notFlags": [
+          "warp_gift",
+          "the_war",
+          "victory_achieved"
+        ],
+        "meters": {}
+      },
+      "weight": 20,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "crown_of_the_sun",
+          "text": "Take the crown of the whole solar system. You built every world of it.",
+          "effects": {
+            "money": 450,
+            "power": 15,
+            "reputation": 13,
+            "loyalty": 15,
+            "health": 4
+          },
+          "personality": {
+            "grandiosity": 11,
+            "outward": 7
+          },
+          "setFlags": [
+            "two_world_patriarch",
+            "victory_achieved"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The crown bears not two jewels but six, one for every world your industry tamed. Immortal patriarch of an entire solar system, you ruled the sun without ever needing a stranger's gift, and there is still the rest of forever."
+        },
+        {
+          "id": "commonwealth_of_the_sun",
+          "text": "Refuse it; bind the worlds into a free solar commonwealth.",
+          "effects": {
+            "money": 220,
+            "power": 11,
+            "reputation": 17,
+            "loyalty": 15,
+            "health": 5
+          },
+          "personality": {
+            "outward": -12,
+            "ideology": -8
+          },
+          "setFlags": [
+            "two_world_patriarch",
+            "victory_achieved",
+            "two_world_commonwealth"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hand six worlds their own future and sign yourself merely first citizen of a solar commonwealth. The founder who conquered a sun and then gave it away becomes the most beloved immortal the system will ever know."
+        },
+        {
+          "id": "sovereign_and_still_hungry",
+          "text": "Take the crown, then quietly draft plans for the foundry at Saturn.",
+          "effects": {
+            "money": 300,
+            "power": 14,
+            "reputation": 10,
+            "loyalty": 13
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 6
+          },
+          "setFlags": [
+            "two_world_patriarch",
+            "victory_achieved"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You accept the crown of the sun and, the same night, ask your engineers what it would take to build something that could leave it. An immortal's appetite, you discover, has no orbit it cannot eventually outgrow."
+        }
+      ]
+    },
+    {
+      "id": "ev_mars_terminal_twilight",
+      "era": "redplanet",
+      "year": 2118,
+      "title": "The Walls of a Single World",
+      "scene": "The expansion is dead, the foundries are dark, and the solar system has contracted back to a single red planet you can finally see all of at once. There is a grim peace in it: nothing beyond the dome to surprise you, nothing in the dark to disobey. The other immortal, if he lived, has gone silent. Forever stretches ahead, and it is exactly the size of Mars.",
+      "researchNote": "A terminal bad-ending capstone for the stagnation branch, where the protagonist's refusal to expand, or the destruction of the industrial base, leaves humanity confined to Mars; it gives that path a deliberate, melancholy closure distinct from the triumphant solar and extra-solar endings.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "mars",
+        "ending",
+        "stagnation",
+        "reflection"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "mars_terminal"
+        ],
+        "notFlags": [
+          "extrasolar_flight",
+          "warp_gift"
+        ],
+        "meters": {}
+      },
+      "weight": 16,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "rule_the_one_world",
+          "text": "Settle in as god of one world, and call the silence victory.",
+          "effects": {
+            "money": 120,
+            "power": 12,
+            "reputation": -4,
+            "loyalty": 9
+          },
+          "personality": {
+            "grandiosity": 9,
+            "inward": 8
+          },
+          "setFlags": [
+            "victory_achieved",
+            "mars_content"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You rule Mars absolutely and forever, the undisputed lord of a single dome-stippled world. It is everything you can control and nothing you cannot, and you tell yourself, most days, that this is what winning was always going to look like."
+        },
+        {
+          "id": "mourn_the_closed_door",
+          "text": "Admit it: you closed the door to the stars yourself.",
+          "effects": {
+            "money": -40,
+            "power": 8,
+            "reputation": 7,
+            "loyalty": 8,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": -8,
+            "inward": 9,
+            "outward": -5
+          },
+          "setFlags": [
+            "victory_achieved"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Alone on a balcony under a sky that never fully turned blue, you finally name the truth: the stars were reachable, and you were the wall. An immortal has a long time to sit with a regret that size."
+        },
+        {
+          "id": "try_to_rebuild_too_late",
+          "text": "Order the foundries rebuilt, decades too late, with what little remains.",
+          "effects": {
+            "money": -160,
+            "power": 7,
+            "reputation": 5,
+            "loyalty": 7,
+            "health": -2
+          },
+          "personality": {
+            "grandiosity": 6,
+            "inward": 5
+          },
+          "setFlags": [
+            "victory_achieved"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You pour the last of the treasury into relighting furnaces that took a solar system to build the first time. The work is generational and the result uncertain, but for the first time in a long time, the dome looks a little less like a wall and a little more like a starting line."
         }
       ]
     }

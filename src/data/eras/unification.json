@@ -5,39 +5,124 @@
       "id": "ev_become_immortal",
       "era": "unification",
       "year": 2054,
-      "title": "The Phoenix Protocol",
-      "scene": "In a sealed clinic beneath the ash-grey skyline, white-coated technicians wheel you toward the tank where the senescence engineers wait. They promise the same thing the salesmen always promised: more time, more you. The gurney is cold; the radiation-burned world outside is colder, and you are very, very old.",
-      "researchNote": "Star Trek future history holds that humanity nearly destroyed itself in a Third World War before clawing back from the post-atomic horror. This game's sci-fi extrapolation imagines the protagonist literally outliving that collapse via radical life-extension, so a single figure straddles the apocalypse and the recovery to come.",
+      "title": "The first warp craft Protocol",
+      "scene": "In a sealed clinic beneath an ash-grey skyline, senescence engineers wheel you toward the tank. They promise the thing salesmen always promised: more time, more you. The gurney is cold, the radiation-burned world outside is colder, and you are very, very old.",
+      "researchNote": "Star Trek future history holds that humanity nearly destroyed itself in a Third World War before clawing back from the post-atomic horror; this sci-fi extrapolation imagines the protagonist literally outliving that collapse via radical life-extension, so one figure straddles the apocalypse and the recovery that becomes 2063 First Contact.",
       "extrapolated": true,
       "startrekInspired": true,
-      "tags": ["lifeextension", "science", "survival"],
+      "tags": [
+        "lifeextension",
+        "immortality",
+        "science",
+        "survival"
+      ],
       "portrait": "unifier",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [
+          "immortal"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "embrace_the_tank",
           "text": "Submit to the full protocol. Cheat death entirely.",
-          "effects": { "money": -40, "health": 15, "power": 8, "heat": 6 },
-          "setFlags": ["life_extension", "immortal"],
+          "effects": {
+            "money": -40,
+            "health": 15,
+            "power": 8,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 6
+          },
+          "setFlags": [
+            "life_extension",
+            "immortal"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "science", "weight": 0.5, "polarity": 1 }],
-          "outcome": "You wake decades younger in the marrow, ancient in the eyes. The undertakers who measured you for a box go home unpaid. Death, that one last creditor, is told to wait."
+          "ripples": [
+            {
+              "to": "science",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You wake decades younger in the marrow, ancient in the eyes. The undertakers who measured you for a box go home unpaid. Death, that one last creditor, is told to wait forever."
+        },
+        {
+          "id": "immortality_for_the_people",
+          "text": "Take the protocol, then open the labs to every survivor.",
+          "effects": {
+            "money": -80,
+            "health": 13,
+            "reputation": 12,
+            "loyalty": 8
+          },
+          "personality": {
+            "ideology": -12,
+            "grandiosity": 4,
+            "outward": -10,
+            "inward": -6
+          },
+          "setFlags": [
+            "life_extension",
+            "immortal",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "science",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You beat death and refuse to hoard the cure. The man who outlived the apocalypse decides the survivors should outlive it too, and a wounded world begins to wonder if it misjudged you."
         },
         {
           "id": "partial_treatment",
           "text": "Take the conservative course. Buy years, not forever.",
-          "effects": { "money": -20, "health": 8, "power": 3 },
-          "setFlags": ["life_extension"],
+          "effects": {
+            "money": -20,
+            "health": 8,
+            "power": 3
+          },
+          "personality": {
+            "grandiosity": -2,
+            "inward": -2
+          },
+          "setFlags": [
+            "life_extension"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "science", "weight": 0.3, "polarity": 1 }],
-          "outcome": "You stabilize the slide. Not immortal, but no longer dying on schedule. Enough runway to see what you'll do with the wreckage of the world."
+          "ripples": [
+            {
+              "to": "science",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You stabilize the slide. Not immortal, but no longer dying on schedule. Enough runway to see what you will do with the wreckage of the world."
         },
         {
           "id": "refuse_the_machine",
           "text": "Refuse. A man should die in his time.",
-          "effects": { "health": -8, "reputation": 6, "power": -4 },
+          "effects": {
+            "health": -8,
+            "reputation": 6,
+            "power": -4
+          },
+          "personality": {
+            "grandiosity": -8,
+            "outward": -6,
+            "inward": -6
+          },
           "setFlags": [],
           "clearFlags": [],
           "ripples": [],
@@ -51,32 +136,226 @@
       "year": 2056,
       "title": "Out of the Post-Atomic Ashes",
       "scene": "The cities are scorched grids and the survivors huddle in cantonments under flickering power. They have no government worth the name, only your voice on the last working broadcast towers. You can be the hand that rebuilds, or the boot that rules.",
-      "researchNote": "In Star Trek's timeline, the decades after WWIII were a lawless post-atomic horror before reconstruction began. The game frames the protagonist as the strongman who emerges from exactly that vacuum, dramatizing whether recovery becomes liberation or a new despotism.",
+      "researchNote": "In Star Trek's timeline the decades after WWIII were a lawless post-atomic horror before reconstruction; the game frames the protagonist as the strongman who emerges from exactly that vacuum, dramatizing whether recovery becomes liberation or a new despotism.",
       "extrapolated": true,
       "startrekInspired": true,
-      "tags": ["rebuilding", "leadership", "postwar"],
+      "tags": [
+        "rebuilding",
+        "leadership",
+        "postwar"
+      ],
       "portrait": "unifier",
-      "requires": { "flags": ["life_extension"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "life_extension"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "rebuild_as_liberator",
           "text": "Restore power and food to the cantonments first. Earn them.",
-          "effects": { "money": -30, "reputation": 12, "loyalty": 10, "power": 4 },
-          "setFlags": ["rebuilder", "liberator_path"],
+          "effects": {
+            "money": -30,
+            "reputation": 12,
+            "loyalty": 10,
+            "power": 4
+          },
+          "personality": {
+            "ideology": -12,
+            "grandiosity": -4,
+            "outward": -12,
+            "inward": -8
+          },
+          "setFlags": [
+            "rebuilder",
+            "liberator_path",
+            "back_science"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "reputation", "weight": 0.5, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "Lights come back on block by block. The survivors learn your name as the man who kept the cold out. Gratitude is a foundation you can build a future on."
         },
         {
           "id": "rebuild_as_warlord",
           "text": "Seize the granaries and reactors. Rule what you ration.",
-          "effects": { "money": 35, "power": 14, "heat": 10, "loyalty": -6 },
-          "setFlags": ["rebuilder", "tyrant_path"],
+          "effects": {
+            "money": 35,
+            "power": 14,
+            "heat": 10,
+            "loyalty": -6
+          },
+          "personality": {
+            "ideology": 12,
+            "grandiosity": 12,
+            "outward": 15,
+            "inward": 6
+          },
+          "setFlags": [
+            "rebuilder",
+            "tyrant_path",
+            "earth_dominated"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "power", "weight": 0.5, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "You control the bread and the electrons, so you control the people. They line up at your gates because the alternative is the dark. Power, raw and unloved, is yours."
+        },
+        {
+          "id": "rebuild_as_partner",
+          "text": "Stand up local councils and share the rebuilding burden.",
+          "effects": {
+            "money": -10,
+            "reputation": 8,
+            "loyalty": 7,
+            "power": 5
+          },
+          "personality": {
+            "ideology": -8,
+            "grandiosity": -2,
+            "outward": -6,
+            "inward": -2
+          },
+          "setFlags": [
+            "rebuilder",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You refuse to do it all yourself, seeding councils that can stand without you. The recovery is slower but it has roots, and the roots are not only in your name."
+        }
+      ]
+    },
+    {
+      "id": "ev_radiation_healing",
+      "era": "unification",
+      "year": 2057,
+      "title": "Scrubbing the Poisoned Crescents",
+      "scene": "The fallout belts still ring the old war fronts, vast crescents of dead land where nothing has grown in a generation. Your engineers propose tailored fungi and atmospheric scrubbers to reclaim them, slow and thankless work. The wounded earth itself seems to ask whether you came to rule it or to heal it.",
+      "researchNote": "Star Trek's recovery narrative has Earth healing the environmental devastation of its wars on the road to a paradise world; this beat dramatizes that planetary remediation as a deliberate choice between restoration and exploitation of the scarred planet.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "healing",
+        "environment",
+        "recovery",
+        "science"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "rebuilder"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fund_full_reclamation",
+          "text": "Pour everything into reclaiming the dead zones, no credit taken.",
+          "effects": {
+            "money": -35,
+            "reputation": 14,
+            "loyalty": 9,
+            "health": -3
+          },
+          "personality": {
+            "ideology": -12,
+            "grandiosity": -6,
+            "outward": -14,
+            "inward": -10
+          },
+          "setFlags": [
+            "earth_healed",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "science",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Grass returns to the war fronts within a decade. No statue marks it, and for once you let that be enough. The planet breathes, and so, somehow, do you."
+        },
+        {
+          "id": "reclaim_for_profit",
+          "text": "Reclaim the wastes, then sell the new land at a premium.",
+          "effects": {
+            "money": 45,
+            "power": 9,
+            "reputation": 5,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 8,
+            "outward": 6,
+            "inward": 4
+          },
+          "setFlags": [
+            "earth_healed",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The poisoned crescents become the most valuable real estate on Earth, and you hold the deeds. Healing turns a profit, as everything in your hands eventually does."
+        },
+        {
+          "id": "wall_off_the_wastes",
+          "text": "Wall off the dead zones; the living have priorities.",
+          "effects": {
+            "money": 20,
+            "power": 6,
+            "reputation": -8,
+            "heat": 8
+          },
+          "personality": {
+            "ideology": 6,
+            "outward": 10,
+            "inward": 2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The fallout crescents stay fenced and forgotten, monuments to a triage you call pragmatism. The unburied land remains a stain on the new map and on the new order."
         }
       ]
     },
@@ -86,32 +365,112 @@
       "year": 2058,
       "title": "Burying the Old Flags",
       "scene": "The shattered nation-states send envoys through the rubble, still nursing grudges from a war that already killed half of them. You stand at a cracked podium and propose the unthinkable: dissolve the old borders, the old hatreds, the old flags. Some weep with relief; some reach for weapons.",
-      "researchNote": "Star Trek's optimism rests on humanity setting aside nationalism and ancient rivalries to unify after near-extinction. The game extrapolates the protagonist as the broker of that reconciliation, with the satirical twist that he may unify the world chiefly to crown himself atop it.",
+      "researchNote": "Star Trek's optimism rests on humanity setting aside nationalism and ancient rivalries to unify after near-extinction; this beat casts the protagonist as the broker of that reconciliation, with the satirical twist that he may unify the world chiefly to crown himself atop it.",
       "extrapolated": true,
       "startrekInspired": true,
-      "tags": ["unification", "diplomacy", "peace"],
+      "tags": [
+        "unification",
+        "diplomacy",
+        "peace"
+      ],
       "portrait": "unifier",
-      "requires": { "flags": ["rebuilder"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "rebuilder"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "reconcile_the_nations",
           "text": "Offer amnesty to every old enemy. Let no grudge survive.",
-          "effects": { "reputation": 13, "loyalty": 8, "power": 3, "money": -15 },
-          "setFlags": ["rivalries_abolished"],
+          "effects": {
+            "reputation": 13,
+            "loyalty": 8,
+            "power": 3,
+            "money": -15
+          },
+          "personality": {
+            "ideology": -12,
+            "grandiosity": 2,
+            "outward": -14,
+            "inward": -10
+          },
+          "setFlags": [
+            "rivalries_abolished",
+            "back_science"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "reputation", "weight": 0.4, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "Enemies who shelled each other's children shake hands over your treaty table. It does not erase the dead, but it stops the making of more. The flags come down without a shot."
         },
         {
           "id": "absorb_the_rivals",
           "text": "Demand the rivals kneel before they are forgiven.",
-          "effects": { "power": 12, "heat": 8, "loyalty": -4, "reputation": -5 },
-          "setFlags": ["rivalries_abolished", "forced_unity"],
+          "effects": {
+            "power": 12,
+            "heat": 8,
+            "loyalty": -4,
+            "reputation": -5
+          },
+          "personality": {
+            "ideology": 12,
+            "grandiosity": 10,
+            "outward": 15,
+            "inward": 6
+          },
+          "setFlags": [
+            "rivalries_abolished",
+            "forced_unity",
+            "earth_dominated"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "power", "weight": 0.4, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "The old rivalries die, but only because every rival now answers to you. Unity by submission is still unity, you tell yourself, watching the envoys lower their eyes."
+        },
+        {
+          "id": "mediate_as_equal",
+          "text": "Mediate as one party among many, not the boss of them.",
+          "effects": {
+            "reputation": 9,
+            "loyalty": 6,
+            "power": 4
+          },
+          "personality": {
+            "ideology": -8,
+            "grandiosity": -4,
+            "outward": -8,
+            "inward": -4
+          },
+          "setFlags": [
+            "rivalries_abolished",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sit at the table as a peer rather than a patriarch, and the peace that results belongs to everyone. The flags come down, and no single flag rises in their place."
         }
       ]
     },
@@ -121,32 +480,467 @@
       "year": 2060,
       "title": "The End of Want",
       "scene": "Reverse-engineered fusion and matter-assembly tech come online, and for the first time bread, medicine, and shelter cost essentially nothing to produce. Your economists tell you scarcity itself is ending. The question is whether abundance becomes a birthright or a leash.",
-      "researchNote": "Star Trek imagines a post-scarcity Earth where the acquisition of wealth ceases to drive humanity. The game's extrapolation lets the protagonist preside over that transition, satirizing whether a lifelong dealmaker can stomach a world where money no longer means power.",
+      "researchNote": "Star Trek imagines a post-scarcity Earth where the acquisition of wealth ceases to drive humanity; this extrapolation lets the protagonist preside over that transition, satirizing whether a lifelong dealmaker can stomach a world where money no longer means power.",
       "extrapolated": true,
       "startrekInspired": true,
-      "tags": ["postscarcity", "economics", "technology"],
+      "tags": [
+        "postscarcity",
+        "economics",
+        "technology",
+        "ideology"
+      ],
       "portrait": "unifier",
-      "requires": { "flags": ["rebuilder"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "rebuilder"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "abundance_for_all",
           "text": "Open the assemblers to everyone. End want forever.",
-          "effects": { "reputation": 14, "loyalty": 10, "money": -25, "power": -3 },
-          "setFlags": ["post_scarcity", "abundance_shared"],
+          "effects": {
+            "reputation": 14,
+            "loyalty": 10,
+            "money": -25,
+            "power": -3
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": 4,
+            "outward": -12,
+            "inward": -8
+          },
+          "setFlags": [
+            "post_scarcity",
+            "abundance_shared",
+            "back_science"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "reputation", "weight": 0.5, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "Hunger ends in a single season. People stop fighting over scraps and start dreaming again. You gave away the one thing you spent a century hoarding, and the world loves you for it."
         },
         {
           "id": "ration_the_abundance",
           "text": "Meter the assemblers. Abundance is a privilege you grant.",
-          "effects": { "money": 40, "power": 13, "heat": 9, "loyalty": -5 },
-          "setFlags": ["post_scarcity", "abundance_rationed"],
+          "effects": {
+            "money": 40,
+            "power": 13,
+            "heat": 9,
+            "loyalty": -5
+          },
+          "personality": {
+            "ideology": 14,
+            "grandiosity": 12,
+            "outward": 15,
+            "inward": 6
+          },
+          "setFlags": [
+            "post_scarcity",
+            "abundance_rationed",
+            "earth_dominated"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "power", "weight": 0.5, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "You could end scarcity tomorrow, and everyone knows it, which is precisely the point. Withholding paradise is the ultimate leverage. The new gods, it turns out, ration grace."
+        },
+        {
+          "id": "preserve_markets",
+          "text": "Keep money alive; an empire still needs a scoreboard.",
+          "effects": {
+            "money": 30,
+            "power": 6,
+            "reputation": -6
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 8,
+            "outward": 6,
+            "inward": 8
+          },
+          "setFlags": [
+            "post_scarcity"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You refuse to let the game end while you are still winning it. Markets churn on atop infinite supply, an artificial scarcity preserved to keep the rankings legible, and you on top."
+        }
+      ]
+    },
+    {
+      "id": "ev_unify_by_liberation",
+      "era": "unification",
+      "year": 2061,
+      "title": "One Earth, Freely Joined",
+      "scene": "The healed regions stand ready to merge into something larger to endure the long climb back. Your advisors lay out two roads: bind the world by consent and shared survival, or bind it by force and the threat of the convoys you control. The pen hovers over the founding compact.",
+      "researchNote": "Star Trek's future history has a fractured post-war Earth gradually unifying into a single peaceful world that later co-founds the Federation; this beat forks that unification into liberation versus domination at the decisive moment.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "unification",
+        "liberation",
+        "leadership",
+        "ideology"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "rebuilder"
+        ],
+        "notFlags": [
+          "earth_dominated"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "unify_by_consent",
+          "text": "Unite the world by free consent and a shared compact.",
+          "effects": {
+            "money": -30,
+            "reputation": 15,
+            "loyalty": 12
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": 4,
+            "outward": -15,
+            "inward": -12
+          },
+          "setFlags": [
+            "earth_unified",
+            "unified_by_liberation",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Nations sign not from fear but from hope, and a single Earth is born by choice. The world that expected a conqueror got a founder it could love instead."
+        },
+        {
+          "id": "unify_by_domination",
+          "text": "Unite the world under your fist; consent is for the weak.",
+          "effects": {
+            "money": 40,
+            "power": 15,
+            "loyalty": -6,
+            "heat": 14
+          },
+          "personality": {
+            "ideology": 15,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 8
+          },
+          "setFlags": [
+            "earth_unified",
+            "unified_by_domination",
+            "earth_dominated"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Resistance is crushed and the holdouts kneel. The world is one because you allow no second voice, a unity enforced at gunpoint and gilded with your name."
+        },
+        {
+          "id": "unify_by_persuasion",
+          "text": "Win them over with vision and the promise of abundance.",
+          "effects": {
+            "money": -15,
+            "reputation": 11,
+            "power": 6,
+            "loyalty": 7
+          },
+          "personality": {
+            "ideology": -8,
+            "grandiosity": 6,
+            "outward": -10,
+            "inward": -6
+          },
+          "setFlags": [
+            "earth_unified",
+            "unified_by_liberation",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sell unity the way you once sold towers, and the world buys in. A single Earth coalesces around a dream you marketed flawlessly."
+        }
+      ]
+    },
+    {
+      "id": "ev_found_world_government",
+      "era": "unification",
+      "year": 2062,
+      "title": "The Founding Charter",
+      "scene": "Delegates from every healed region gather to sign the charter of a single planetary government. The pen is in your hand. You can draft a constitution that outlives you, or one that simply names you the center of everything.",
+      "researchNote": "Star Trek future history culminates in a unified Earth government, a precursor to humanity joining the wider galaxy; the game places the protagonist as founder of that government, satirizing the eternal temptation to confuse uniting a world with owning it.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "government",
+        "unification",
+        "founding",
+        "legacy"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "earth_unified"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "constitution_of_the_people",
+          "text": "Write checks on your own power. Make it a republic.",
+          "effects": {
+            "reputation": 15,
+            "loyalty": 11,
+            "power": -6,
+            "money": -10
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": -10,
+            "outward": -15,
+            "inward": -10
+          },
+          "setFlags": [
+            "world_government",
+            "republic_founded",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sign away your own authority into a parliament that can one day vote you out. It is the hardest deal of your long life, and the only one history will call great."
+        },
+        {
+          "id": "crown_yourself",
+          "text": "Name yourself Sovereign of Earth. Center it all on you.",
+          "effects": {
+            "power": 15,
+            "heat": 12,
+            "loyalty": 5,
+            "reputation": -7
+          },
+          "personality": {
+            "ideology": 15,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 10
+          },
+          "setFlags": [
+            "world_government",
+            "earth_emperor",
+            "earth_dominated"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The charter names one office above all others, and you fill it. A unified Earth, at last, with a single throne at its heart and your weight upon it. The stars will learn your title before your name."
+        },
+        {
+          "id": "found_a_council",
+          "text": "Found a council where you are merely first among equals.",
+          "effects": {
+            "money": 10,
+            "power": 8,
+            "reputation": 9,
+            "loyalty": 8
+          },
+          "personality": {
+            "ideology": -4,
+            "grandiosity": 6,
+            "outward": -4,
+            "inward": 2
+          },
+          "setFlags": [
+            "world_government",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A council governs the world, and your seat is merely larger than the others. Power shared on paper, concentrated in practice, a compromise that fools almost everyone."
+        }
+      ]
+    },
+    {
+      "id": "ev_peoples_commonwealth",
+      "era": "unification",
+      "year": 2063,
+      "title": "The People's Commonwealth",
+      "scene": "The crowds in the rebuilt squares are chanting your name beside a word you never expected to hear: solidarity. They want you to declare a true commonwealth, the fruits of fusion and assembly held in common, no kings, no shareholders, only the people and the deathless father who freed them. The choice would rewrite everything you ever believed about wealth.",
+      "researchNote": "Star Trek's post-scarcity, classless society is the clearest canonical endpoint of human social evolution; this beat is the satirical conversion in which the old capitalist becomes the grandiose, beloved architect of a collectivist utopia.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "commonwealth",
+        "ideology",
+        "utopia",
+        "legacy"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "post_scarcity",
+          "earth_unified"
+        ],
+        "notFlags": [
+          "earth_dominated"
+        ],
+        "meters": {
+          "reputation": ">=40"
+        },
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "declare_commonwealth",
+          "text": "Declare the People's Commonwealth and lead it as its patriarch.",
+          "effects": {
+            "money": -40,
+            "reputation": 15,
+            "loyalty": 14
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": 15,
+            "outward": -15,
+            "inward": -8
+          },
+          "setFlags": [
+            "peoples_commonwealth",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hand the means of plenty to the people and they crown you the father of it all anyway. A beloved, grandiose patriarch of a classless world, the strangest turn your long life ever took."
+        },
+        {
+          "id": "commonwealth_with_a_crown",
+          "text": "Give them the commonwealth, but keep the crown atop it.",
+          "effects": {
+            "money": -10,
+            "reputation": 8,
+            "power": 10,
+            "loyalty": 7
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": 14,
+            "outward": -2,
+            "inward": 4
+          },
+          "setFlags": [
+            "peoples_commonwealth"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Abundance is shared but the throne remains, a benevolent autocrat presiding over plenty. The people are fed and free in everything except who rules them."
+        },
+        {
+          "id": "refuse_commonwealth",
+          "text": "Refuse. A man does not give away what he built.",
+          "effects": {
+            "money": 30,
+            "power": 9,
+            "reputation": -12,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": 15,
+            "grandiosity": 10,
+            "outward": 12,
+            "inward": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The chant dies in the squares as you turn the people down. They wanted a father of the commons; they got the same hoarder who happens to never die."
         }
       ]
     },
@@ -155,33 +949,700 @@
       "era": "unification",
       "year": 2063,
       "title": "First Contact",
-      "scene": "On a Montana launch pad, a salvaged warp engine flares to life and, somewhere above, slows a passing starship enough to look down. That night they land: tall, pointed-eared, unbearably calm visitors who raise a hand and say humanity is not alone. The eyes of every survivor on Earth turn to you, the man who will answer for the species.",
-      "researchNote": "April 5, 2063 is Star Trek's First Contact: Zefram Cochrane's warp flight draws a passing Vulcan ship, and that handshake becomes the turning point that pulls humanity toward the stars. The game stages the protagonist at that exact moment, asking whether he greets the future with open hands or tries to monetize the cosmos.",
+      "scene": "On a Montana launch pad, a salvaged warp engine flares to life and, somewhere above, slows a passing starship enough to look down. That night they land: tall, pointed-eared, unbearably calm visitors who raise a split-fingered hand and say humanity is not alone. The eyes of every survivor on Earth turn to you, the man who will answer for the species.",
+      "researchNote": "April 5, 2063 is Star Trek's First Contact: Zefram Cochrane's warp flight draws a passing Vulcan ship, and that handshake becomes the turning point that pulls humanity toward the stars; the game stages the protagonist at that exact moment, asking whether he greets the future with open hands or tries to monetize the cosmos.",
       "extrapolated": true,
       "startrekInspired": true,
-      "tags": ["firstcontact", "warp", "history", "aliens"],
+      "tags": [
+        "firstcontact",
+        "warp",
+        "vulcans",
+        "history",
+        "aliens"
+      ],
       "portrait": "unifier",
-      "requires": { "flags": ["rebuilder"], "notFlags": [], "meters": {} },
-      "weight": 11,
+      "requires": {
+        "flags": [
+          "earth_unified"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
       "repeatable": false,
       "choices": [
         {
           "id": "embrace_the_stars",
-          "text": "Step forward unarmed and welcome them as equals.",
-          "effects": { "reputation": 15, "loyalty": 9, "power": 5, "health": 4 },
-          "setFlags": ["first_contact_made", "embraced_stars"],
+          "text": "Step forward unarmed and return the open-palm salute as an equal.",
+          "effects": {
+            "reputation": 15,
+            "loyalty": 9,
+            "power": 5,
+            "health": 4
+          },
+          "personality": {
+            "ideology": -14,
+            "grandiosity": 4,
+            "outward": -15,
+            "inward": -14
+          },
+          "setFlags": [
+            "first_contact_made",
+            "vulcan_friendship",
+            "embraced_stars",
+            "back_science"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "reputation", "weight": 0.6, "polarity": 1 }],
-          "outcome": "You walk out under the unfamiliar stars and offer your hand. The visitor takes it. In that grip humanity stops being a doomed tribe on a poisoned rock and becomes, at last, a beginning."
+          "ripples": [
+            {
+              "to": "ev_humanity_preserved",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You walk out under unfamiliar stars and offer your hand, fingers split. The visitor takes it. Humanity stops being a doomed tribe on a poisoned rock and becomes, at last, a beginning."
         },
         {
           "id": "exploit_the_contact",
           "text": "Seize the warp tech and the visitors' secrets as leverage.",
-          "effects": { "power": 14, "money": 30, "heat": 11, "reputation": -6 },
-          "setFlags": ["first_contact_made", "exploited_stars"],
+          "effects": {
+            "power": 14,
+            "money": 30,
+            "heat": 11,
+            "reputation": -6
+          },
+          "personality": {
+            "ideology": 15,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 8
+          },
+          "setFlags": [
+            "first_contact_made",
+            "exploited_stars",
+            "earth_dominated"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "power", "weight": 0.5, "polarity": 1 }],
-          "outcome": "While the world weeps with wonder, you have your people copying their engines and cataloguing their weaknesses. The stars are just a bigger market, and you intend to corner it."
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "While the world weeps with wonder, you have your people copying their engines and cataloguing their weaknesses. The the Concord note the aggression, withdraw their hand, and file Earth under a category no one wants."
+        },
+        {
+          "id": "broker_the_contact",
+          "text": "Negotiate as one sovereign to another, terms first.",
+          "effects": {
+            "money": 20,
+            "power": 10,
+            "reputation": 7,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 12,
+            "outward": 6,
+            "inward": 6
+          },
+          "setFlags": [
+            "first_contact_made",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You meet the visitors as an equal head of state and start haggling. The the Concord find it gauche but workable, and Earth enters the galaxy with a handshake that came with a contract."
+        },
+        {
+          "id": "humble_before_stars",
+          "text": "Kneel beside the first pilot; this moment is bigger than any king.",
+          "effects": {
+            "reputation": 12,
+            "loyalty": 6
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": -15,
+            "outward": -15,
+            "inward": -15
+          },
+          "setFlags": [
+            "first_contact_made",
+            "vulcan_friendship",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_humanity_preserved",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "For once you take no center stage, standing in the dirt beside a hung-over genius as the future arrives. The deathless emperor, humbled at last, lets humanity have the moment."
+        }
+      ]
+    },
+    {
+      "id": "ev_relaunch_seti",
+      "era": "unification",
+      "year": 2064,
+      "title": "Reopening the Ears of Earth",
+      "scene": "First contact proved someone is out there, and a coalition of scientists begs you to fund a planetary listening effort, the old SETI dream resurrected at unimaginable scale. If anything else is broadcasting across the dark, Earth could finally hear it. The question is whether you want to listen, and whether you want to answer.",
+      "researchNote": "Star Trek's universe teems with civilizations beyond the Vulcans; this beat seeds the secret First-Contact endings by funding the search for extraterrestrial intelligence after 2063, determining what else might eventually hear Earth's beacon.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "seti",
+        "science",
+        "search",
+        "destiny"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "first_contact_made"
+        ],
+        "notFlags": [
+          "seti_funded"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fund_seti_for_peace",
+          "text": "Fund the listening grid as a hand extended to the stars.",
+          "effects": {
+            "money": -30,
+            "reputation": 12
+          },
+          "personality": {
+            "ideology": -8,
+            "outward": -12,
+            "inward": -8
+          },
+          "setFlags": [
+            "seti_funded",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "science",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Antennae bloom across the reclaimed deserts, ears open to a peaceful cosmos. Earth begins to listen with hope, and the beacon it sends carries that hope outward."
+        },
+        {
+          "id": "fund_seti_for_advantage",
+          "text": "Fund it to find threats and rivals before they find us.",
+          "effects": {
+            "money": -20,
+            "power": 11,
+            "heat": 9
+          },
+          "personality": {
+            "ideology": 10,
+            "grandiosity": 8,
+            "outward": 15,
+            "inward": 6
+          },
+          "setFlags": [
+            "seti_funded"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The grid goes up as an early-warning weapon, scanning the dark for prey and predators. Earth listens with a clenched fist, and whatever hears its broadcast hears that, too."
+        },
+        {
+          "id": "decline_seti",
+          "text": "Decline. The stars can wait; Earth has enough on its plate.",
+          "effects": {
+            "money": 25,
+            "reputation": -6
+          },
+          "personality": {
+            "grandiosity": 4,
+            "inward": 2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn the scientists away and the great ears stay shut. Earth keeps its silence, and whatever might have answered a call never gets one."
+        }
+      ]
+    },
+    {
+      "id": "ev_deep_space_telescopes",
+      "era": "unification",
+      "year": 2066,
+      "title": "Eyes for the Dark Between Stars",
+      "scene": "With the Concord as cautious mentors, Earth's astronomers propose a constellation of deep-space observatories, mirrors the size of cities flung to the edge of the system. They would let humanity see what is coming long before it arrives, and announce to anyone watching that Earth now looks outward. Your name could be carved on the largest lens ever built.",
+      "researchNote": "Star Trek's deep-space exploration ethos begins with humanity learning to look outward after first contact; these observatories, paired with SETI, are the second pillar that arms the secret First-Contact endings depending on how Earth is perceived from afar.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "telescopes",
+        "science",
+        "exploration",
+        "deepspace"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "first_contact_made"
+        ],
+        "notFlags": [
+          "deep_space_telescopes"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_telescopes_for_wonder",
+          "text": "Build the great eyes as a gift to human curiosity.",
+          "effects": {
+            "money": -35,
+            "reputation": 14,
+            "loyalty": 7
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": 6,
+            "outward": -14,
+            "inward": -8
+          },
+          "setFlags": [
+            "deep_space_telescopes",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "science",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "City-sized mirrors unfurl at the edge of the system, drinking light from a thousand worlds. Earth becomes a civilization that looks up, and the galaxy notes a people more curious than dangerous."
+        },
+        {
+          "id": "build_telescopes_for_dominion",
+          "text": "Build the eyes as the targeting array of a future empire.",
+          "effects": {
+            "money": -25,
+            "power": 14,
+            "heat": 11
+          },
+          "personality": {
+            "ideology": 12,
+            "grandiosity": 14,
+            "outward": 15,
+            "inward": 6
+          },
+          "setFlags": [
+            "deep_space_telescopes"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The observatories double as the sensors of a war machine, scanning the dark for conquest. Earth's gaze hardens into a glare, and that glare is exactly what the stars see in return."
+        },
+        {
+          "id": "build_telescopes_for_legacy",
+          "text": "Build them, and stamp your monogram on the master lens.",
+          "effects": {
+            "money": -20,
+            "power": 7,
+            "reputation": 6
+          },
+          "personality": {
+            "grandiosity": 14,
+            "outward": 4,
+            "inward": 6
+          },
+          "setFlags": [
+            "deep_space_telescopes",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The largest telescope in human history bears your name across its rim. Earth gains its deep eyes, and every distant astronomer who studies the array studies your signature."
+        }
+      ]
+    },
+    {
+      "id": "ev_back_science_broadly",
+      "era": "unification",
+      "year": 2065,
+      "title": "An Age of Reason, Funded",
+      "scene": "Scientists, engineers, and dreamers line up at your door, each holding a piece of the future: fusion, gene therapy, sublight drives, artificial minds. They ask you to do the simplest and most radical thing an immortal autocrat can do, which is fund all of it, freely and forever. You could midwife a renaissance or starve it in its cradle.",
+      "researchNote": "Trek's optimistic future rests on humanity's wholesale embrace of science and reason after first contact; broadly backing science is the third pillar that, with SETI and observatories, determines whether Earth's posture to the cosmos reads as peaceful or predatory.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "science",
+        "renaissance",
+        "investment",
+        "vision"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "earth_unified"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fund_all_science",
+          "text": "Fund every credible lab on Earth, no conditions.",
+          "effects": {
+            "money": -40,
+            "reputation": 14,
+            "loyalty": 9
+          },
+          "personality": {
+            "ideology": -12,
+            "grandiosity": 4,
+            "outward": -14,
+            "inward": -8
+          },
+          "setFlags": [
+            "back_science",
+            "scientific_renaissance"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "science",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A flood of funding washes over every discipline at once and the discoveries come like rain. History will call it a golden age, and it will call you its unlikely patron."
+        },
+        {
+          "id": "fund_useful_science",
+          "text": "Fund only what serves the empire and pays its way.",
+          "effects": {
+            "money": 20,
+            "power": 11,
+            "reputation": 4
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 8,
+            "outward": 8,
+            "inward": 4
+          },
+          "setFlags": [
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You bankroll the science that builds power and ignore the rest. Progress marches, but only down the avenues that lead back to your throne."
+        },
+        {
+          "id": "starve_science",
+          "text": "Cut them loose; an immortal can wait for free results.",
+          "effects": {
+            "money": 35,
+            "reputation": -14,
+            "heat": 8
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 6,
+            "outward": 12,
+            "inward": 4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The labs go dark for want of money you easily could have given. The renaissance stillborn, Earth limps into the galactic age half-blind and half-armed."
+        }
+      ]
+    },
+    {
+      "id": "ev_vulcan_mentorship",
+      "era": "unification",
+      "year": 2065,
+      "title": "The the Concord Stay to Watch",
+      "scene": "The visitors do not leave after first contact; they linger, observing, gently restraining humanity's wilder impulses. Their lead envoy, all logic and raised eyebrows, requests a private audience with the deathless ruler they cannot quite categorize. They want to know what kind of man holds the reins of a newborn spacefaring world.",
+      "researchNote": "In Trek canon the Vulcans monitored and guided post-contact humanity for nearly a century before the Federation formed, sometimes paternalistically; this beat dramatizes that mentorship and the protagonist's response to being watched.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "vulcans",
+        "mentorship",
+        "diplomacy",
+        "logic"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "first_contact_made"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_vulcan_guidance",
+          "text": "Welcome their counsel and learn the discipline of logic.",
+          "effects": {
+            "money": -15,
+            "reputation": 13,
+            "loyalty": 7
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": -10,
+            "outward": -15,
+            "inward": -12
+          },
+          "setFlags": [
+            "vulcan_friendship",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "science",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sit at the feet of beings older and cooler than your every appetite, and you actually listen. The envoy reports that this human, improbably, can be reasoned with."
+        },
+        {
+          "id": "resent_vulcan_watch",
+          "text": "Resent the surveillance and tell them Earth answers to no one.",
+          "effects": {
+            "money": 15,
+            "power": 11,
+            "reputation": -10,
+            "heat": 12
+          },
+          "personality": {
+            "ideology": 14,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 8
+          },
+          "setFlags": [
+            "earth_dominated"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You bristle at being watched by anyone, even gods with pointed ears. The the Concord note your hostility, raise an eyebrow, and quietly revise their assessment of Earth downward."
+        },
+        {
+          "id": "play_vulcans",
+          "text": "Charm them while extracting every secret you can.",
+          "effects": {
+            "money": 25,
+            "power": 12,
+            "reputation": 4,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 12,
+            "outward": 8,
+            "inward": 8
+          },
+          "setFlags": [
+            "vulcan_friendship"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You smile, flatter, and pump the envoy for technology under the cover of friendship. The the Concord are not fooled, but they decide a manipulator is at least predictable."
+        }
+      ]
+    },
+    {
+      "id": "ev_warp_program",
+      "era": "unification",
+      "year": 2069,
+      "title": "Earth Builds Its Own Warp",
+      "scene": "Humanity's first warp test was a leaky prototype; with their shared schematics and your treasury, Earth could field a real warp fleet within a decade. The engineers are giddy, the Concord cautious, and you alone control the budget that turns one warp jump into a thousand. Humanity is about to decide what kind of starfarer it will be.",
+      "researchNote": "Following the 2063 flight, Trek's humanity rapidly develops warp travel and begins exploring, eventually founding Starfleet and the Federation; this beat funds that leap and colors whether Earth's ships go forth as explorers or as a fleet of conquest.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "warp",
+        "starfleet",
+        "exploration",
+        "science"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "first_contact_made"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "warp_for_exploration",
+          "text": "Build the fleet to explore and to befriend.",
+          "effects": {
+            "money": -40,
+            "reputation": 14,
+            "loyalty": 7
+          },
+          "personality": {
+            "ideology": -12,
+            "grandiosity": 4,
+            "outward": -15,
+            "inward": -10
+          },
+          "setFlags": [
+            "warp_fleet",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "science",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Earth's first true starships launch with scientists and diplomats aboard, not soldiers. The galaxy meets a humanity that comes in peace, and the welcome it receives reflects that."
+        },
+        {
+          "id": "warp_for_conquest",
+          "text": "Build the fleet to project power across the stars.",
+          "effects": {
+            "money": -30,
+            "power": 15,
+            "heat": 13
+          },
+          "personality": {
+            "ideology": 14,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 8
+          },
+          "setFlags": [
+            "warp_fleet",
+            "earth_dominated"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Earth's first starships bristle with weapons and ambition. Humanity arrives among the stars as a conqueror in waiting, and the older powers tighten their borders."
+        },
+        {
+          "id": "warp_slowly",
+          "text": "Build cautiously; let the Concord set the pace.",
+          "effects": {
+            "money": -20,
+            "reputation": 9,
+            "power": 5
+          },
+          "personality": {
+            "ideology": -4,
+            "grandiosity": -4,
+            "outward": -6,
+            "inward": -4
+          },
+          "setFlags": [
+            "warp_fleet",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You let their caution temper human haste, and the fleet grows slowly and soberly. The galaxy notes a young species that, for once, chose to listen to its elders."
         }
       ]
     },
@@ -191,67 +1652,224 @@
       "year": 2065,
       "title": "The Planetary Pact",
       "scene": "The aging titan of rockets and reactors meets you on a windswept spaceport, his colonies on the horizon and warp drive newly in hand. He proposes a pact: his engines, your unified Earth, one shared roadmap to the planets and beyond. Two old men who refused to die, shaking hands over the solar system.",
-      "researchNote": "Star Trek's post-First-Contact era saw warp technology spread and humanity reach outward toward a unified future. The game extrapolates a tech alliance between the protagonist and a Musk-style space magnate as the bridge from a healed Earth toward the Mars era to come.",
+      "researchNote": "Star Trek's post-First-Contact era saw warp technology spread and humanity reach outward toward a unified future; the game extrapolates a tech alliance between the protagonist and a Musk-style space magnate as the bridge from a healed Earth toward the Mars era to come.",
       "extrapolated": true,
       "startrekInspired": true,
-      "tags": ["alliance", "space", "technology", "mars"],
-      "portrait": "unifier",
-      "requires": { "flags": ["first_contact_made"], "notFlags": [], "meters": {} },
+      "tags": [
+        "musk",
+        "alliance",
+        "space",
+        "mars",
+        "technology"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "first_contact_made"
+        ],
+        "notFlags": [
+          "musk_pact"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "seal_the_pact",
-          "text": "Sign the pact. Bind Earth's future to the rockets.",
-          "effects": { "money": -20, "power": 10, "reputation": 8, "loyalty": 4 },
-          "setFlags": ["musk_pact"],
+          "text": "Sign the pact as partners reaching for the planets.",
+          "effects": {
+            "money": -20,
+            "power": 10,
+            "reputation": 8,
+            "loyalty": 4
+          },
+          "personality": {
+            "ideology": -4,
+            "grandiosity": 10,
+            "outward": -6,
+            "inward": 2
+          },
+          "setFlags": [
+            "musk_pact",
+            "back_science",
+            "mars_program"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "science", "weight": 0.6, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "ev_seal_musk_pact",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
           "outcome": "The signatures dry and the fleets begin to build. Earth, healed and unified, now has a road off-world. Somewhere out past the Moon, a red planet waits with your name half-spoken."
+        },
+        {
+          "id": "seal_pact_as_master",
+          "text": "Sign it, but make clear whose flag flies first.",
+          "effects": {
+            "money": 25,
+            "power": 15,
+            "loyalty": 5,
+            "heat": 9
+          },
+          "personality": {
+            "ideology": 12,
+            "grandiosity": 15,
+            "outward": 14,
+            "inward": 8
+          },
+          "setFlags": [
+            "musk_pact",
+            "mars_program"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "ev_seal_musk_pact",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "He gets his rockets and you get the empire they will extend. The pact holds, but everyone knows which titan kneels and which one rules."
         },
         {
           "id": "go_it_alone",
           "text": "Refuse. Build Earth's space program under your flag alone.",
-          "effects": { "money": -45, "power": 6, "heat": 5 },
+          "effects": {
+            "money": -45,
+            "power": 6,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": -4,
+            "inward": -2
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "power", "weight": 0.3, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
           "outcome": "You wave off the partnership and pour the treasury into your own rockets. Slower, prouder, lonelier. The titan shrugs and points his colonies elsewhere."
         }
       ]
     },
     {
-      "id": "ev_found_world_government",
+      "id": "ev_govern_the_unified_earth",
       "era": "unification",
-      "year": 2068,
-      "title": "The Founding Charter",
-      "scene": "Delegates from every healed region gather to sign the charter of a single planetary government. The pen is in your hand. You can draft a constitution that outlives you, or one that simply names you the center of everything.",
-      "researchNote": "Star Trek future history culminates in a unified Earth government, a precursor to humanity joining the wider galaxy. The game places the protagonist as founder of that government, satirizing the eternal temptation to confuse uniting a world with owning it.",
+      "year": 2070,
+      "title": "The Long Work of Governing",
+      "scene": "Unification was the easy part; now the planet must actually be run, century after century, by a man who never tires and never dies. Famine logistics, court disputes, the slow grind of administration, all of it lands on your desk forever. The throne you wanted turns out to be a job with no retirement.",
+      "researchNote": "Trek's United Earth is a stable, well-administered polity that becomes a Federation founding member; this beat dramatizes the unglamorous governance that turns a conquest or a covenant into a durable civilization.",
       "extrapolated": true,
       "startrekInspired": true,
-      "tags": ["government", "unification", "founding", "legacy"],
-      "portrait": "emperor",
-      "requires": { "flags": ["rivalries_abolished"], "notFlags": [], "meters": {} },
-      "weight": 11,
+      "tags": [
+        "government",
+        "administration",
+        "power",
+        "endurance"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "world_government"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
       "repeatable": false,
       "choices": [
         {
-          "id": "constitution_of_the_people",
-          "text": "Write checks on your own power. Make it a republic.",
-          "effects": { "reputation": 15, "loyalty": 11, "power": -6, "money": -10 },
-          "setFlags": ["world_government", "republic_founded"],
+          "id": "govern_by_service",
+          "text": "Govern as a tireless servant of the common good.",
+          "effects": {
+            "money": -20,
+            "reputation": 14,
+            "loyalty": 11,
+            "health": -3
+          },
+          "personality": {
+            "ideology": -14,
+            "grandiosity": -6,
+            "outward": -15,
+            "inward": -10
+          },
+          "setFlags": [
+            "back_science"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "reputation", "weight": 0.6, "polarity": 1 }],
-          "outcome": "You sign away your own authority into a parliament that can one day vote you out. It is the hardest deal of your long life, and the only one history will call great."
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You bury yourself in the dull, vital work of making a world function. No glory in it, only a planet that runs better every decade under your patient, deathless hand."
         },
         {
-          "id": "crown_yourself",
-          "text": "Name yourself Sovereign of Earth. Center it all on you.",
-          "effects": { "power": 15, "heat": 12, "loyalty": 5, "reputation": -7 },
-          "setFlags": ["world_government", "earth_emperor"],
+          "id": "govern_by_fear",
+          "text": "Govern by fear; let underlings handle the boring parts.",
+          "effects": {
+            "money": 25,
+            "power": 13,
+            "loyalty": -6,
+            "heat": 11
+          },
+          "personality": {
+            "ideology": 14,
+            "grandiosity": 14,
+            "outward": 15,
+            "inward": 8
+          },
+          "setFlags": [
+            "earth_dominated"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "power", "weight": 0.6, "polarity": 1 }],
-          "outcome": "The charter names one office above all others, and you fill it. A unified Earth, at last, with a single throne at its heart, and your weight upon it. The stars will learn your title before your name."
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You rule from a height, delegating the grind and reserving the cruelty for yourself. The world obeys, efficiently and resentfully, beneath a sovereign who can wait out any rebellion."
+        },
+        {
+          "id": "govern_by_council",
+          "text": "Empower a competent council and trust the machine.",
+          "effects": {
+            "money": 10,
+            "power": 5,
+            "reputation": 9,
+            "loyalty": 7
+          },
+          "personality": {
+            "ideology": -6,
+            "grandiosity": -4,
+            "outward": -6,
+            "inward": -2
+          },
+          "setFlags": [
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You build institutions strong enough to run without you and step back to steer. The world governs itself well, and your lightest touch turns out to be your wisest."
         }
       ]
     },
@@ -260,68 +1878,1202 @@
       "era": "unification",
       "year": 2071,
       "title": "Scrubbing the Sky",
-      "scene": "The radiation belts and dead zones still ring the old war fronts, where nothing has grown in a generation. With alien-aided science and post-scarcity machines, you can finally cleanse them. It is slow, thankless, and invisible work, the opposite of a monument.",
-      "researchNote": "Star Trek's recovery narrative includes Earth healing the environmental devastation of its wars on the way to a paradise world. The game extrapolates a deliberate planetary remediation, contrasting quiet healing against the protagonist's lifelong hunger for spectacle and credit.",
+      "scene": "Beyond the reclaimed crescents, the upper atmosphere still carries the war's poisons, and the weather still turns against the survivors. With alien-aided science and post-scarcity machines, you can finally cleanse the sky itself. It is slow, thankless, and invisible work, the opposite of a monument.",
+      "researchNote": "Star Trek's recovery narrative includes Earth healing the atmospheric and climatic devastation of its wars on the way to a paradise world; this beat contrasts quiet healing against the protagonist's lifelong hunger for spectacle and credit.",
       "extrapolated": true,
       "startrekInspired": true,
-      "tags": ["healing", "environment", "recovery", "science"],
+      "tags": [
+        "healing",
+        "environment",
+        "recovery",
+        "science"
+      ],
       "portrait": "unifier",
-      "requires": { "flags": ["world_government"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "world_government"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "heal_quietly",
-          "text": "Pour resources into the dead zones. Take no credit.",
-          "effects": { "money": -35, "reputation": 12, "loyalty": 9, "health": 5 },
-          "setFlags": ["world_healed"],
+          "text": "Pour resources into cleansing the sky. Take no credit.",
+          "effects": {
+            "money": -35,
+            "reputation": 12,
+            "loyalty": 9,
+            "health": 5
+          },
+          "personality": {
+            "ideology": -12,
+            "grandiosity": -8,
+            "outward": -14,
+            "inward": -12
+          },
+          "setFlags": [
+            "earth_healed",
+            "back_science"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "reputation", "weight": 0.5, "polarity": 1 }],
-          "outcome": "Grass returns to the war fronts. No statue marks it, no broadcast claims it, and for once you let that be enough. The planet breathes, and so, somehow, do you."
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The skies clear over the old war fronts. No statue marks it, no broadcast claims it, and for once you let that be enough. The planet breathes, and so, somehow, do you."
         },
         {
           "id": "heal_for_glory",
-          "text": "Cleanse the zones, then plaster them with your name.",
-          "effects": { "money": -25, "power": 7, "reputation": 4, "heat": 6 },
-          "setFlags": ["world_healed", "monuments_everywhere"],
+          "text": "Cleanse the sky, then plaster the new dawn with your name.",
+          "effects": {
+            "money": -25,
+            "power": 7,
+            "reputation": 4,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 14,
+            "outward": 6,
+            "inward": 6
+          },
+          "setFlags": [
+            "earth_healed",
+            "monuments_everywhere"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "power", "weight": 0.3, "polarity": 1 }],
-          "outcome": "The land recovers under gleaming towers that all bear your name. The healing is real; so is the vanity carved across it. You cannot help yourself, even now, even here."
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The atmosphere recovers under gleaming towers that all bear your name. The healing is real; so is the vanity carved across it. You cannot help yourself, even now, even here."
+        }
+      ]
+    },
+    {
+      "id": "ev_redemption_arc",
+      "era": "unification",
+      "year": 2068,
+      "title": "The Question of Redemption",
+      "scene": "The biographers, the survivors, the old enemies still living, all of them ask the same thing now that you have the power to be anything: will you be remembered as the man who healed the world, or the man who owned it? You have centuries left to write the answer. Tonight you decide which pen to pick up.",
+      "researchNote": "Star Trek frames humanity's post-war recovery as a moral redemption from its worst impulses toward enlightenment; this beat puts that redemption-or-tyranny question directly to the deathless ruler steering Earth into the Federation age.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "redemption",
+        "legacy",
+        "identity",
+        "ideology"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "earth_unified"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "choose_redemption",
+          "text": "Choose redemption. Spend eternity making it right.",
+          "effects": {
+            "money": -25,
+            "reputation": 15,
+            "loyalty": 12,
+            "heat": -10
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": -8,
+            "outward": -15,
+            "inward": -15
+          },
+          "setFlags": [
+            "redeemed",
+            "back_science"
+          ],
+          "clearFlags": [
+            "earth_dominated"
+          ],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You let the conqueror die so the healer can live. The world feels the shift, and for the first time the deathless father is loved more than he is feared."
+        },
+        {
+          "id": "choose_dominion",
+          "text": "Choose dominion. Eternity is a long reign, so reign.",
+          "effects": {
+            "money": 35,
+            "power": 15,
+            "reputation": -12,
+            "heat": 15
+          },
+          "personality": {
+            "ideology": 15,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 10
+          },
+          "setFlags": [
+            "earth_dominated",
+            "embraced_tyranny"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You decide history will simply have to live with a king who never dies. The world settles into a long, watchful obedience under a man who will outlast every grudge against him."
+        },
+        {
+          "id": "defer_the_question",
+          "text": "Defer the question. Immortals are never out of time.",
+          "effects": {
+            "money": 10,
+            "power": 5,
+            "reputation": -4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "inward": 4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You shelve the question for another century, as you shelve everything inconvenient. The world keeps waiting to learn which man it actually serves."
+        }
+      ]
+    },
+    {
+      "id": "ev_legacy_vs_ego",
+      "era": "unification",
+      "year": 2072,
+      "title": "Monuments to a Deathless Man",
+      "scene": "Architects present plans for the rebuilt capital, and every facade is dominated by your face, your name, your monogram in gold a hundred feet tall. An immortal has no need of monuments to be remembered, yet the temptation is exquisite. You could let the city be the people's, or you could let it be a mirror.",
+      "researchNote": "Trek's enlightened humanity is marked by humility and service rather than personal aggrandizement; this beat tests whether the protagonist's rebuilt Earth reflects that ethos or his own ego carved in stone.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "legacy",
+        "ego",
+        "monuments",
+        "identity"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "world_government"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "monuments_to_the_people",
+          "text": "Tear up the plans; build the city for the people.",
+          "effects": {
+            "money": -20,
+            "reputation": 14,
+            "loyalty": 10
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": -15,
+            "outward": -15,
+            "inward": -12
+          },
+          "setFlags": [
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The capital rises without a single statue of you, and somehow that absence becomes your greatest monument. The deathless man who refused to loom is remembered most fondly of all."
+        },
+        {
+          "id": "monuments_to_the_self",
+          "text": "Approve it all. Let the city worship its founder.",
+          "effects": {
+            "money": -25,
+            "power": 11,
+            "reputation": -8,
+            "heat": 11
+          },
+          "personality": {
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 12
+          },
+          "setFlags": [
+            "earth_dominated",
+            "monuments_everywhere"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Your face stares down from every tower, deathless and gold. The capital becomes a shrine to a living god, and the people learn to walk in the shadow of your features."
+        }
+      ]
+    },
+    {
+      "id": "ev_dissent_in_paradise",
+      "era": "unification",
+      "year": 2073,
+      "title": "Dissent in the New World",
+      "scene": "Not everyone wanted to be saved by you. A movement rises, principled and stubborn, arguing that an immortal sovereign is a cage no matter how comfortable. They march in the rebuilt squares, demanding the deathless father step aside. How you answer them will define the soul of the unified Earth.",
+      "researchNote": "Trek's enlightened Earth prizes liberty and self-determination as hard-won fruits of its dark history; this beat tests whether the protagonist's order tolerates dissent like a free society or crushes it like a tyranny.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "dissent",
+        "liberty",
+        "power",
+        "ideology"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "earth_unified"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "protect_dissent",
+          "text": "Protect their right to call for your removal.",
+          "effects": {
+            "money": -15,
+            "reputation": 15,
+            "loyalty": 9,
+            "heat": -8
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": -10,
+            "outward": -15,
+            "inward": -12
+          },
+          "setFlags": [
+            "tolerates_dissent",
+            "back_science"
+          ],
+          "clearFlags": [
+            "earth_dominated"
+          ],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You guarantee the freedom to demand your own downfall, and in doing so prove you deserve to stay. The movement, disarmed by your magnanimity, marches in your defense instead."
+        },
+        {
+          "id": "crush_dissent",
+          "text": "Crush the movement and make an example of its leaders.",
+          "effects": {
+            "money": 20,
+            "power": 14,
+            "loyalty": -8,
+            "heat": 15
+          },
+          "personality": {
+            "ideology": 15,
+            "grandiosity": 14,
+            "outward": 15,
+            "inward": 8
+          },
+          "setFlags": [
+            "earth_dominated",
+            "embraced_tyranny"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The squares are cleared and the leaders vanish. Paradise reveals its bars, and the unified Earth learns that the father who saved it will not be questioned."
+        },
+        {
+          "id": "co_opt_dissent",
+          "text": "Buy off the leaders and absorb their cause as your own.",
+          "effects": {
+            "money": -20,
+            "power": 7,
+            "reputation": 6,
+            "loyalty": 6
+          },
+          "personality": {
+            "ideology": -2,
+            "grandiosity": 8,
+            "outward": 2,
+            "inward": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hand the rebels titles and budgets and watch their fire become administration. The movement dissolves into your government, defanged and salaried."
+        }
+      ]
+    },
+    {
+      "id": "ev_immortal_burden",
+      "era": "unification",
+      "year": 2075,
+      "title": "The Weight of Forever",
+      "scene": "Everyone you ever knew is dust, and you are still here, watching new generations be born already in your shadow. Immortality, it turns out, is a kind of exile in time. Tonight, alone in the tower, you confront what eternity is doing to the man inside it.",
+      "researchNote": "Trek repeatedly examines the psychological cost of vastly extended life (Flint, the Q, augmented beings); this beat turns that lens on the protagonist, asking whether deathlessness ennobles or corrodes him over the long arc into the Federation age.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "immortality",
+        "introspection",
+        "burden",
+        "identity"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "immortal"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "find_humility_in_time",
+          "text": "Let the long view make you gentler, not harder.",
+          "effects": {
+            "money": -10,
+            "reputation": 12,
+            "loyalty": 7,
+            "health": 4
+          },
+          "personality": {
+            "ideology": -12,
+            "grandiosity": -14,
+            "outward": -15,
+            "inward": -15
+          },
+          "setFlags": [
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Watching everything pass teaches you that nothing is worth cruelty, least of all power you cannot keep forever. You emerge from the long night a kinder, smaller, better man."
+        },
+        {
+          "id": "harden_into_god",
+          "text": "Let eternity burn away every soft thing left in you.",
+          "effects": {
+            "money": 20,
+            "power": 13,
+            "reputation": -10,
+            "heat": 11
+          },
+          "personality": {
+            "ideology": 14,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 14
+          },
+          "setFlags": [
+            "earth_dominated"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You decide a deathless man should stop pretending to be one of them at all. What remains is colder, vaster, and harder to love, a god who has forgotten he was ever human."
+        },
+        {
+          "id": "endure_the_weight",
+          "text": "Carry the loneliness in silence and keep working.",
+          "effects": {
+            "money": 10,
+            "power": 5,
+            "health": -4
+          },
+          "personality": {
+            "grandiosity": 4,
+            "inward": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You say nothing, feel everything, and bury it under another century of duty. The world never learns what forever costs the man who pays it."
+        }
+      ]
+    },
+    {
+      "id": "ev_share_immortality",
+      "era": "unification",
+      "year": 2074,
+      "title": "Who Gets to Live Forever",
+      "scene": "The longevity therapy could be given to everyone, ending death as a human universal, or rationed to keep a deathless elite atop a mortal world. The labs await your order. It is the most consequential decision a being who beat death can make for the species he rules.",
+      "researchNote": "Trek's egalitarian future would never tolerate a deathless aristocracy lording over mortals; this beat forks whether the protagonist democratizes immortality toward that egalitarian ideal or entrenches a god-king caste.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "immortality",
+        "equality",
+        "ideology",
+        "power"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "immortal",
+          "life_extension"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "immortality_for_all",
+          "text": "Give deathlessness to everyone, freely.",
+          "effects": {
+            "money": -45,
+            "reputation": 15,
+            "loyalty": 12
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": 8,
+            "outward": -15,
+            "inward": -10
+          },
+          "setFlags": [
+            "immortality_shared",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "science",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Death becomes optional for all humankind, and the species crosses a threshold no one expected you to open. The hoarder gave away the ultimate hoard, and the world will not forget it."
+        },
+        {
+          "id": "immortal_aristocracy",
+          "text": "Reserve eternity for a deathless ruling caste.",
+          "effects": {
+            "money": 35,
+            "power": 15,
+            "loyalty": -4,
+            "heat": 13
+          },
+          "personality": {
+            "ideology": 15,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 10
+          },
+          "setFlags": [
+            "immortal_aristocracy",
+            "earth_dominated"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Eternity becomes the ultimate aristocracy, a deathless few ruling a dying many forever. The mortals below learn there is no upward mobility past the grave you escaped and they cannot."
+        },
+        {
+          "id": "immortality_by_merit",
+          "text": "Grant long life to the worthy, judged by you.",
+          "effects": {
+            "money": 20,
+            "power": 11,
+            "reputation": 4,
+            "heat": 8
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 14,
+            "outward": 10,
+            "inward": 8
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You make yourself the arbiter of who deserves more years, and the whole world bends to earn your favor. Merit, defined entirely by loyalty to you, becomes the new measure of a life."
+        }
+      ]
+    },
+    {
+      "id": "ev_galactic_reputation",
+      "era": "unification",
+      "year": 2077,
+      "title": "What the Galaxy Whispers About Earth",
+      "scene": "Reports filter back from the Concord and the worlds beyond: the galaxy is forming an opinion of humanity, and of you. Some call Earth a promising young friend; others a feral power to be quarantined. The beacon you have been broadcasting outward, peaceful or predatory, is being read by ears you have never seen.",
+      "researchNote": "Trek's interstellar community judges new species by their conduct, gating membership in the eventual Federation; this beat crystallizes how Earth's outward posture, the same posture that arms the secret First-Contact endings, is perceived across the stars.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "reputation",
+        "galaxy",
+        "destiny",
+        "firstcontact"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "first_contact_made",
+          "seti_funded"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "broadcast_peace",
+          "text": "Broadcast Earth's intentions as openly peaceful.",
+          "effects": {
+            "money": -20,
+            "reputation": 15,
+            "loyalty": 8
+          },
+          "personality": {
+            "ideology": -12,
+            "grandiosity": -4,
+            "outward": -15,
+            "inward": -14
+          },
+          "setFlags": [
+            "peaceful_beacon",
+            "deep_space_telescopes",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "science",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You aim Earth's voice at the dark and fill it with welcome. The galaxy hears a young world worth befriending, and somewhere, something kind takes note of the invitation."
+        },
+        {
+          "id": "broadcast_strength",
+          "text": "Broadcast Earth's strength as a warning to all comers.",
+          "effects": {
+            "money": -15,
+            "power": 15,
+            "heat": 15
+          },
+          "personality": {
+            "ideology": 14,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 8
+          },
+          "setFlags": [
+            "predatory_beacon",
+            "deep_space_telescopes"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You broadcast threat into the void, daring anyone to test Earth. The galaxy hears not a friend but a target marking itself, and somewhere, something far worse than humanity takes note."
+        },
+        {
+          "id": "broadcast_nothing",
+          "text": "Go silent; reveal nothing to the listening dark.",
+          "effects": {
+            "money": 15,
+            "power": 7,
+            "reputation": -6
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 4,
+            "inward": 4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hush Earth's broadcasts and pull the species into a defensive crouch. The galaxy hears nothing, and forms its opinion of the silent, hiding world accordingly."
+        }
+      ]
+    },
+    {
+      "id": "ev_federation_seed",
+      "era": "unification",
+      "year": 2078,
+      "title": "The Seed of a league of worlds",
+      "scene": "The the Concord, and now a handful of other nearby worlds, float an idea: a league of planets bound by shared principles rather than conquest, with a unified Earth as a founding pillar. It is the embryo of something vast and unprecedented. You can help midwife it, dominate it, or refuse it entirely.",
+      "researchNote": "This beat directly seeds the United Federation of Planets, which Trek dates to 2161 with Earth as a founding member; the protagonist's stance here sets the tone for humanity's defining institution.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "federation",
+        "alliance",
+        "legacy",
+        "destiny"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "first_contact_made",
+          "warp_fleet"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "midwife_federation",
+          "text": "Help build a alliance of equals and take no crown.",
+          "effects": {
+            "money": -30,
+            "reputation": 15,
+            "loyalty": 12
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": -6,
+            "outward": -15,
+            "inward": -15
+          },
+          "setFlags": [
+            "federation_seed",
+            "back_science"
+          ],
+          "clearFlags": [
+            "earth_dominated"
+          ],
+          "ripples": [
+            {
+              "to": "ev_humanity_preserved",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You lend Earth's weight to a union of worlds and ask for nothing but a seat among friends. The seed you plant will grow, centuries hence, into the brightest institution the galaxy has known."
+        },
+        {
+          "id": "dominate_federation",
+          "text": "Build it, but as an empire with Earth at the head.",
+          "effects": {
+            "money": 30,
+            "power": 15,
+            "reputation": -10,
+            "heat": 15
+          },
+          "personality": {
+            "ideology": 15,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 10
+          },
+          "setFlags": [
+            "federation_seed",
+            "earth_dominated",
+            "embraced_tyranny"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You agree to the league only as its master, Earth first among supposed equals. The other worlds sign warily, and the union is born already shadowed by your ambition."
+        },
+        {
+          "id": "refuse_federation",
+          "text": "Refuse. Earth needs no partners and no peers.",
+          "effects": {
+            "money": 20,
+            "power": 9,
+            "reputation": -12,
+            "heat": 11
+          },
+          "personality": {
+            "ideology": 12,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 8
+          },
+          "setFlags": [
+            "earth_dominated"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You wave the offer away and keep Earth aloof and armed. The alliance forms without you, eyeing the isolated human world with growing unease."
+        }
+      ]
+    },
+    {
+      "id": "ev_benevolent_apex",
+      "era": "unification",
+      "year": 2079,
+      "title": "Beloved of a Healed World",
+      "scene": "The radiation crescents are gardens now, the world is unified and free, and the people speak your name with something that has finally curdled into love. You stand on a balcony above a peaceful, abundant Earth that chose you and would choose you again. For the first time in a long, deathless life, you have nothing left to seize.",
+      "researchNote": "Trek's ideal is a humanity that has redeemed itself into peace and plenty before reaching the stars; this beat is the benevolent apex of the redemption arc, the utopian endpoint that the secret peaceful First-Contact ending rewards.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "apex",
+        "utopia",
+        "redemption",
+        "legacy"
+      ],
+      "portrait": "unifier",
+      "requires": {
+        "flags": [
+          "unified_by_liberation",
+          "earth_healed"
+        ],
+        "notFlags": [
+          "earth_dominated"
+        ],
+        "meters": {
+          "reputation": ">=55"
+        },
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "accept_the_love",
+          "text": "Accept their love and dedicate eternity to deserving it.",
+          "effects": {
+            "money": -20,
+            "reputation": 15,
+            "loyalty": 14,
+            "heat": -12
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": 4,
+            "outward": -15,
+            "inward": -15
+          },
+          "setFlags": [
+            "benevolent_apex",
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You bow to a world that chose you and quietly vow to keep earning it for as long as you live, which is forever. The beacon Earth sends to the stars is, at last, pure welcome."
+        },
+        {
+          "id": "transcend_into_legend",
+          "text": "Step back from the throne and let your example rule.",
+          "effects": {
+            "money": -15,
+            "reputation": 15,
+            "loyalty": 11
+          },
+          "personality": {
+            "ideology": -14,
+            "grandiosity": -15,
+            "outward": -15,
+            "inward": -15
+          },
+          "setFlags": [
+            "benevolent_apex",
+            "back_science"
+          ],
+          "clearFlags": [
+            "earth_dominated"
+          ],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You loosen your grip and let the institutions you built carry the world without you. The deathless man becomes a living legend who proves power is best measured by what it gives away."
+        },
+        {
+          "id": "love_as_a_throne",
+          "text": "Take their love as the firmest throne of all.",
+          "effects": {
+            "money": 20,
+            "power": 12,
+            "reputation": 6
+          },
+          "personality": {
+            "ideology": -6,
+            "grandiosity": 15,
+            "outward": -4,
+            "inward": 6
+          },
+          "setFlags": [
+            "benevolent_apex"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You realize adoration is the one throne no rival can topple and settle comfortably onto it. Beloved and unbudging, you reign on a cushion of genuine affection, which suits you fine."
+        }
+      ]
+    },
+    {
+      "id": "ev_tyrant_apex",
+      "era": "unification",
+      "year": 2079,
+      "title": "The God-Emperor of a Cowed World",
+      "scene": "The world is one because you made it one, and it obeys because the alternative is unthinkable. Your face looms over every city, your fleets darken every sky, and no voice rises against you anywhere on Earth. You have everything you ever wanted, held in a deathless fist that will never need to open.",
+      "researchNote": "Trek warns of tyranny as the path humanity must avoid to reach its enlightened future (the Eugenics Wars, the post-atomic horror); this beat is the dark apex of the domination arc, the tyrannical endpoint that warps the secret First-Contact ending toward catastrophe.",
+      "extrapolated": true,
+      "startrekInspired": true,
+      "tags": [
+        "apex",
+        "tyranny",
+        "power",
+        "legacy"
+      ],
+      "portrait": "emperor",
+      "requires": {
+        "flags": [
+          "earth_dominated"
+        ],
+        "notFlags": [],
+        "meters": {
+          "power": ">=55"
+        },
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "rule_as_god",
+          "text": "Rule as a living god and dare the cosmos to object.",
+          "effects": {
+            "money": 40,
+            "power": 15,
+            "reputation": -15,
+            "heat": 15
+          },
+          "personality": {
+            "ideology": 15,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 14
+          },
+          "setFlags": [
+            "god_emperor",
+            "embraced_tyranny"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You ascend to absolute deathless dominion, a god-emperor over a silent world. The beacon Earth broadcasts now reeks of dominance, and in the listening dark, something hungry leans closer."
+        },
+        {
+          "id": "tyranny_with_doubt",
+          "text": "Rule absolutely, but let one private doubt remain.",
+          "effects": {
+            "money": 25,
+            "power": 15,
+            "reputation": -8,
+            "heat": 13
+          },
+          "personality": {
+            "ideology": 14,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": -8
+          },
+          "setFlags": [
+            "god_emperor"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The world sees an unshakable tyrant; only you know the doubt that gnaws beneath the crown. The outward terror is total, but a sliver of the old man still wonders what he has become."
+        },
+        {
+          "id": "soften_at_the_summit",
+          "text": "At the summit, finally let the fist begin to open.",
+          "effects": {
+            "money": -25,
+            "reputation": 14,
+            "loyalty": 9,
+            "heat": -15
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": -10,
+            "outward": -15,
+            "inward": -12
+          },
+          "setFlags": [
+            "back_science"
+          ],
+          "clearFlags": [
+            "earth_dominated",
+            "embraced_tyranny"
+          ],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Having seized everything, you discover the only move left that surprises anyone: mercy. The fist opens, the fear thaws, and a tyrant begins, impossibly, to become something better."
         }
       ]
     },
     {
       "id": "ev_legacy_or_ego",
       "era": "unification",
-      "year": 2076,
+      "year": 2079,
       "title": "What Outlives a Man Who Won't Die",
-      "scene": "Earth is unified, fed, healed, and looking outward at a galaxy of strangers. You are older than any human has ever been, and the question that visits you in the long nights is simple: what was all of it for? The species, or the legend of yourself.",
-      "researchNote": "Star Trek frames united Earth as the foundation for humanity's hopeful future among the stars, a legacy larger than any individual. The game closes the unification arc on the satirical tension between leaving that legacy and clinging to personal myth, the redemption-or-tyranny verdict of an immortal life.",
+      "scene": "Earth is unified, fed, healed, and looking outward at a galaxy of strangers. You are older than any human has ever been, and the question that visits you in the long nights is simple: what was all of it for? The species, or the legend of yourself. On the eve of the Red Planet age, you set the cargo of the human soul.",
+      "researchNote": "Star Trek frames united Earth as the foundation for humanity's hopeful future among the stars, a legacy larger than any individual; this capstone closes the unification arc on the redemption-or-tyranny verdict of an immortal life and fixes what humanity carries outward into the era to come.",
       "extrapolated": true,
       "startrekInspired": true,
-      "tags": ["legacy", "ego", "reflection", "endgame"],
+      "tags": [
+        "legacy",
+        "ego",
+        "reflection",
+        "endgame",
+        "capstone"
+      ],
       "portrait": "emperor",
-      "requires": { "flags": ["world_government"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "world_government"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 11,
       "repeatable": false,
       "choices": [
         {
           "id": "choose_legacy",
-          "text": "Step back. Let the world you built outgrow you.",
-          "effects": { "reputation": 15, "loyalty": 12, "power": -8, "health": 3 },
-          "setFlags": ["chose_legacy"],
-          "clearFlags": [],
-          "ripples": [{ "to": "reputation", "weight": 0.6, "polarity": 1 }],
-          "outcome": "You hand the future to people who will never know your name and find, to your own astonishment, peace in it. The legend ends; the species begins. It is the best deal you ever closed."
+          "text": "Step back. Send humanity outward carrying its best self.",
+          "effects": {
+            "money": -20,
+            "reputation": 15,
+            "loyalty": 12,
+            "health": 3
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": -8,
+            "outward": -15,
+            "inward": -15
+          },
+          "setFlags": [
+            "chose_legacy",
+            "best_of_humanity",
+            "back_science"
+          ],
+          "clearFlags": [
+            "earth_dominated"
+          ],
+          "ripples": [
+            {
+              "to": "ev_humanity_preserved",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hand the future to people who will never know your name and fill the holds of the ships with curiosity and welcome. The legend ends; the species begins. It is the best deal you ever closed."
         },
         {
           "id": "choose_ego",
-          "text": "Cling to the throne. You are the world, and it is you.",
-          "effects": { "power": 14, "heat": 13, "loyalty": 4, "health": -5 },
-          "setFlags": ["chose_ego", "eternal_throne"],
+          "text": "Cling to the throne. Send humanity outward as your empire.",
+          "effects": {
+            "money": 35,
+            "power": 15,
+            "heat": 14,
+            "health": -5
+          },
+          "personality": {
+            "ideology": 15,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": 12
+          },
+          "setFlags": [
+            "chose_ego",
+            "eternal_throne",
+            "empire_outward",
+            "earth_dominated"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "power", "weight": 0.6, "polarity": 1 }],
-          "outcome": "You will not let go, and the deathless years stretch ahead of you like a corridor of mirrors. A unified world, eternally yours, eternally watched. Even the stars, you decide, will need a sovereign."
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You will not let go, loading the ships with ambition and armament. A unified world, eternally yours, eternally watched, now reaching outward to make the galaxy yours as well."
+        },
+        {
+          "id": "carry_yourself_outward",
+          "text": "Whatever else goes to the stars, make sure your name goes first.",
+          "effects": {
+            "money": 25,
+            "power": 10,
+            "reputation": -4,
+            "heat": 7
+          },
+          "personality": {
+            "grandiosity": 15,
+            "outward": 12,
+            "inward": 10
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Whatever the human soul carries to the stars, it carries your monogram stamped on the crate. The galaxy's first impression of humanity is, unmistakably, you."
         }
       ]
     }

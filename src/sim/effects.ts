@@ -1,11 +1,19 @@
-import { applyRipples, buildLedgerEntries } from "./butterfly";
+import {
+  applyRipples,
+  buildLedgerEntries,
+  landDueConsequences,
+  scheduleConsequences,
+} from "./butterfly";
 import type { Content } from "./content";
 import { pickNextEvent } from "./events";
 import { applyDelta } from "./meters";
+import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
+import { resolveRoles } from "./roles";
 import type { Choice, GameEvent } from "./schema";
 import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
-import { advanceTimeline, detectEnd } from "./timeline";
+import { advanceTimeline, applyJump, detectEnd } from "./timeline";
+import { applyWorldFlags } from "./worldtime";
 
 /** Result of resolving a choice: the new state plus the ledger entries it produced. */
 export interface Transition {
@@ -43,6 +51,9 @@ export function applyChoice(
   // 1. Meters.
   const meters = applyDelta(content.meters, state.meters, choice.effects);
 
+  // 1b. Personality vector.
+  const personality = applyPersonality(state.personality, choice.personality);
+
   // 2. Flags.
   let flags = [...state.flags];
   for (const f of choice.setFlags) flags = withFlag(flags, f);
@@ -57,29 +68,65 @@ export function applyChoice(
     rng.fork(`${event.id}:${choice.id}:${state.history.length}`),
   );
 
-  // 4. Visible ledger chains.
-  const newLedger = buildLedgerEntries(content, event, choice, ripples, state.ledger.length);
+  // 4. Visible ledger chains (deduped against the existing ledger).
+  const newLedger = buildLedgerEntries(content, event, choice, ripples, state.ledger);
 
   // 5. Record history + fired event.
   const firedEvents = event.repeatable ? state.firedEvents : [...state.firedEvents, event.id];
 
+  // 6. Schedule any delayed consequences this choice triggers.
+  const pending = scheduleConsequences(content, { ...state, year: event.year }, choice);
+
   const resolved: GameState = {
     ...state,
     meters,
+    personality,
     flags,
     ripples,
+    pending,
     ledger: [...state.ledger, ...newLedger],
     history: [...state.history, { eventId: event.id, choiceId, year: event.year }],
     firedEvents,
+    // Time floor advances to this event's year (never moves backward).
+    lastEventYear: Math.max(state.lastEventYear, event.year),
   };
 
-  // 6. Immediate end check (e.g. a choice that drops health to 0), else advance.
-  const immediateEnd = detectEnd(content, resolved);
-  const advanced = immediateEnd
-    ? { ...resolved, end: immediateEnd }
-    : advanceTimeline(content, resolved);
+  // 7. Optional TIMELINE HOP — a choice can compress the arc forward (perceived,
+  // not hardcoded, timeline). Applied before the normal one-step advance.
+  const hopped = applyJump(content, resolved, choice);
 
-  return { state: advanced, newLedger };
+  // 8. Immediate end check (e.g. a choice that drops health to 0), else advance.
+  const immediateEnd = detectEnd(content, hopped);
+  if (immediateEnd) {
+    return { state: { ...hopped, end: immediateEnd }, newLedger };
+  }
+  let advanced = advanceTimeline(content, hopped);
+
+  // 8b. LINKING PROTOCOL: broadcast flags from the four parallel world timelines
+  // whose events have come to pass as the year advanced — done in the pure
+  // transition so live play and deterministic replay stay identical.
+  if (content.worldTimelines.length > 0 && advanced.year > hopped.year) {
+    advanced = applyWorldFlags(advanced, hopped.year, content.worldTimelines);
+  }
+
+  // 8c. ROLE-SWAP INVARIANT: with all flags (the choice's, the consequences',
+  // and the broadcast timelines') now settled for this year, resolve who holds
+  // political power vs the commercial empire. Runs every step so a late flip
+  // (e.g. Musk takes power) re-routes Donald to the commercial path before any
+  // ending reads the role flags.
+  advanced = resolveRoles(advanced);
+
+  // 9. Land any delayed consequences now due (post-advance year), unless the
+  // timeline advance itself ended the run.
+  if (advanced.end) {
+    return { state: advanced, newLedger };
+  }
+  const landed = landDueConsequences(content, advanced);
+  // Re-check end conditions in case a consequence (e.g. a debt bomb) was lethal.
+  const postEnd = detectEnd(content, landed.state);
+  const finalState = postEnd ? { ...landed.state, end: postEnd } : landed.state;
+
+  return { state: finalState, newLedger: [...newLedger, ...landed.newLedger] };
 }
 
 /**
@@ -104,9 +151,10 @@ export function replay(
 }
 
 /**
- * Drive a full autonomous playthrough from a seed by always taking the first
- * eligible choice of each picked event. Used by tests and as a baseline AI.
- * Terminates on an end state or when no event is eligible anywhere.
+ * Drive a full autonomous playthrough from a seed by taking a SEEDED eligible
+ * choice at each picked event (so different seeds explore different branches —
+ * a baseline random-AI / divergence probe). Deterministic per seed. Terminates
+ * on an end state or when no event is eligible anywhere.
  */
 export function autoPlaythrough(
   content: Content,
@@ -129,8 +177,9 @@ export function autoPlaythrough(
       state = advanced;
       continue;
     }
-    const choice = event.choices.find((c) => !c.requires || eligibleChoice(state, c));
-    if (!choice) break;
+    const eligible = event.choices.filter((c) => !c.requires || eligibleChoice(state, c));
+    if (eligible.length === 0) break;
+    const choice = rng.fork(`choose:${i}`).pick(eligible);
     state = applyChoice(content, state, event, choice.id, rng).state;
   }
   return state;

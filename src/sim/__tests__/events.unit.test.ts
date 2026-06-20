@@ -67,6 +67,25 @@ describe("eligibleEvents", () => {
     s.firedEvents = ["ev_born"];
     expect(eligibleEvents(c, s).map((e) => e.id)).not.toContain("ev_born");
   });
+
+  it("never returns an event earlier than the chronological floor (no time travel)", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    s.flags = ["loud_baby"]; // makes ev_military_school (1959) eligible
+    s.lastEventYear = 1959;
+    const ids = eligibleEvents(c, s).map((e) => e.id);
+    // ev_born is 1946 < 1959 floor → excluded; the 1959 school event remains.
+    expect(ids).not.toContain("ev_born");
+    expect(ids).toContain("ev_military_school");
+  });
+
+  it("relaxes the floor when nothing at/after it remains (era still progresses)", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    // Floor far in the future with no qualifying events — must fall back, not stall.
+    s.lastEventYear = 3000;
+    expect(eligibleEvents(c, s).length).toBeGreaterThan(0);
+  });
 });
 
 describe("effectiveWeight", () => {

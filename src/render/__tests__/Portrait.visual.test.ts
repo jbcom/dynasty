@@ -18,13 +18,12 @@ afterEach(() => {
 });
 
 describe("Portrait", () => {
-  it("renders authored caricature art for an svg portrait", async () => {
+  it("renders a cartoon derivative for every portrait (no procedural placeholders)", async () => {
     component = mount(Portrait, { target: host, props: { portraitId: "mogul", size: 140 } });
     const el = host.querySelector('[data-portrait="mogul"]');
     expect(el).not.toBeNull();
-    // mogul uses an authored SVG caricature (an <img> layer).
     const img = el?.querySelector("img.layer") as HTMLImageElement | null;
-    expect(img?.getAttribute("src")).toContain("portraits/mogul.svg");
+    expect(img?.getAttribute("src")).toContain(".cartoon.png");
     await page.screenshot({ element: el as Element });
   });
 

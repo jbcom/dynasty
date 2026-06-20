@@ -9,10 +9,11 @@ interface Props {
 
 const { content, gameState }: Props = $props();
 
-// Hand-rolled lightweight timeline (the design-spec fallback for vis-timeline,
-// which is too heavy for this mobile-first view). Renders eras as a horizontal
-// band with the lived events plotted by year and a "now" marker.
-const eras = $derived(content.eras);
+// Hand-rolled lightweight timeline. The future is NOT spoiled: only eras the
+// player has actually reached (up to and including the current one) are shown,
+// plus a single "the road ahead is unwritten" teaser if more eras remain.
+const revealed = $derived(content.eras.filter((_, i) => i <= gameState.eraIndex));
+const hasFuture = $derived(gameState.eraIndex < content.eras.length - 1);
 const eventsByYear = $derived(
   gameState.history.map((h) => ({ year: h.year, id: h.eventId })),
 );
@@ -21,11 +22,10 @@ const eventsByYear = $derived(
 <section class="timeline" aria-label="Life timeline">
   <h3>Timeline</h3>
   <div class="scroll">
-    {#each eras as era, i (era.id)}
+    {#each revealed as era, i (era.id)}
       <div
         class="era"
         class:current={i === gameState.eraIndex}
-        class:future={i > gameState.eraIndex}
         style={`--accent: ${era.paletteAccent}`}
       >
         <div class="era-head">
@@ -40,8 +40,16 @@ const eventsByYear = $derived(
         </div>
       </div>
     {/each}
+    {#if hasFuture}
+      <div class="era unwritten" aria-label="The road ahead is unwritten">
+        <div class="era-head">
+          <span class="era-title">?</span>
+          <span class="era-years">the road ahead</span>
+        </div>
+      </div>
+    {/if}
   </div>
-  <p class="now">You are in {eras[gameState.eraIndex]?.title ?? "—"}, {gameState.year}.</p>
+  <p class="now">You are in {revealed[gameState.eraIndex]?.title ?? "—"}, {gameState.year}.</p>
 </section>
 
 <style>
@@ -57,7 +65,16 @@ const eventsByYear = $derived(
     opacity: 0.9;
   }
   .era.current { outline: 2px solid var(--mmm-gold); opacity: 1; }
-  .era.future { opacity: 0.5; }
+  .era.unwritten {
+    border-top-color: var(--mmm-text-dim);
+    border-top-style: dashed;
+    opacity: 0.45;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+  }
+  .era.unwritten .era-title { font-size: 1.4rem; color: var(--mmm-text-dim); }
   .era-head { display: flex; flex-direction: column; gap: 0.1rem; }
   .era-title { font-weight: 700; color: var(--mmm-text); font-size: 0.82rem; }
   .era-years { font-size: 0.68rem; color: var(--mmm-text-dim); }

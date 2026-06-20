@@ -46,11 +46,20 @@ describe("Dossier", () => {
 });
 
 describe("TimelineView", () => {
-  it("renders an era band with the current era highlighted", () => {
+  it("reveals only reached eras (no future spoilers) with the current one highlighted", () => {
     component = mount(TimelineView, { target: host, props: { content, gameState: playedState() } });
+    // Still in era 0 (boyhood) → it shows; the future era must NOT be revealed.
     expect(host.textContent).toContain("Birth & Boyhood");
-    expect(host.textContent).toContain("Apprentice Mogul");
+    expect(host.textContent).not.toContain("Apprentice Mogul");
     expect(host.querySelector(".era.current")).not.toBeNull();
+    // A teaser stands in for the unwritten road ahead.
+    expect(host.querySelector(".era.unwritten")).not.toBeNull();
+  });
+
+  it("reveals a later era once it has been reached", () => {
+    const s = { ...playedState(), eraIndex: 1 };
+    component = mount(TimelineView, { target: host, props: { content, gameState: s } });
+    expect(host.textContent).toContain("Apprentice Mogul");
   });
 });
 

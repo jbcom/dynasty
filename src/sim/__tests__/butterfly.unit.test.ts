@@ -48,6 +48,7 @@ describe("firedRules + buildLedgerEntries (visible chains)", () => {
       id: "excel",
       text: "Win every drill.",
       effects: {},
+      personality: {},
       setFlags: ["disciplined"],
       clearFlags: [],
       ripples: [],
@@ -63,6 +64,7 @@ describe("firedRules + buildLedgerEntries (visible chains)", () => {
       id: "lazy",
       text: "Skip it.",
       effects: {},
+      personality: {},
       setFlags: [],
       clearFlags: [],
       ripples: [],
@@ -71,15 +73,41 @@ describe("firedRules + buildLedgerEntries (visible chains)", () => {
     expect(firedRules(c, choice, {})).toHaveLength(0);
   });
 
-  it("produces ledger entries with rendered chain text and sequential seq", () => {
+  it("produces ledger entries with rendered chain text and seq continuing the ledger", () => {
     const c = content();
     const event = c.allEvents.find((e) => e.id === "ev_military_school") as GameEvent;
     const choice = event.choices[0] as Choice;
-    const entries = buildLedgerEntries(c, event, choice, {}, 7);
+    // Pass an existing ledger of length 7 — new entries continue from seq 7.
+    const existing = Array.from({ length: 7 }, (_, i) => ({
+      seq: i,
+      sourceChoice: "x",
+      sourceEvent: "x",
+      year: 1950,
+      ruleId: `prior_${i}`,
+      text: "prior",
+    }));
+    const entries = buildLedgerEntries(c, event, choice, {}, existing);
     expect(entries).toHaveLength(1);
     expect(entries[0]?.seq).toBe(7);
     expect(entries[0]?.ruleId).toBe("br_discipline");
     expect(entries[0]?.sourceEvent).toBe("ev_military_school");
     expect(entries[0]?.text).toContain("academy");
+  });
+
+  it("deduplicates — a rule already in the ledger is not logged again", () => {
+    const c = content();
+    const event = c.allEvents.find((e) => e.id === "ev_military_school") as GameEvent;
+    const choice = event.choices[0] as Choice;
+    const existing = [
+      {
+        seq: 0,
+        sourceChoice: "x",
+        sourceEvent: "x",
+        year: 1950,
+        ruleId: "br_discipline",
+        text: "already",
+      },
+    ];
+    expect(buildLedgerEntries(c, event, choice, {}, existing)).toHaveLength(0);
   });
 });

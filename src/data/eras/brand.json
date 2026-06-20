@@ -6,31 +6,285 @@
       "era": "brand",
       "year": 1990,
       "title": "The Taj Mahal Rises",
-      "scene": "Atlantic City, April 1990. You cut the ribbon on the Trump Taj Mahal, the most expensive casino ever built — a billion-dollar palace of glass and gold. The cameras flash. But the financing is junk bonds at 14 percent, and the numbers only work if the place is packed every single night.",
-      "researchNote": "The Trump Taj Mahal opened April 2, 1990, financed largely by $675 million in junk bonds carrying roughly 14% interest.",
+      "scene": "Atlantic City, April 1990. You cut the ribbon on the Trump Taj Mahal, the most expensive casino ever built — a billion-dollar palace of glass and gold. The cameras flash and Michael Jackson walks the floor. But the financing is junk bonds at fourteen percent, and the numbers only work if the place is packed every single night.",
+      "researchNote": "The Trump Taj Mahal opened April 2, 1990, financed largely by about $675 million in junk bonds carrying roughly 14% interest; analysts warned it would need record revenue to service the debt.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["casino", "celebrity", "atlantic_city"],
+      "tags": [
+        "casino",
+        "celebrity",
+        "atlantic_city",
+        "debt"
+      ],
       "portrait": "mogul",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 12,
       "repeatable": false,
       "choices": [
         {
           "id": "biggest_best",
           "text": "Declare it the eighth wonder of the world and dare anyone to doubt it.",
-          "effects": { "power": 6, "reputation": 5, "heat": 6 },
-          "setFlags": ["taj_open"],
-          "ripples": [{ "to": "ev_atlantic_city_squeeze", "weight": 0.7, "polarity": 1 }],
+          "effects": {
+            "power": 6,
+            "reputation": 5,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "taj_open"
+          ],
+          "ripples": [
+            {
+              "to": "ev_atlantic_city_squeeze",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
           "outcome": "The headlines glow. The interest clock ticks louder than the slot machines."
         },
         {
           "id": "quiet_concern",
-          "text": "Privately worry the Taj will cannibalize your other two casinos.",
-          "effects": { "power": 2, "reputation": 1, "heat": 2 },
-          "setFlags": ["taj_open", "casino_overextended"],
-          "ripples": [{ "to": "ev_atlantic_city_squeeze", "weight": 0.8, "polarity": 1 }],
+          "text": "Privately admit the Taj will cannibalize your other two casinos.",
+          "effects": {
+            "power": 2,
+            "reputation": 1,
+            "heat": 2
+          },
+          "personality": {
+            "inward": 4
+          },
+          "setFlags": [
+            "taj_open",
+            "casino_overextended"
+          ],
+          "ripples": [
+            {
+              "to": "ev_atlantic_city_squeeze",
+              "weight": 0.85,
+              "polarity": 1
+            }
+          ],
           "outcome": "You smile for the press, but the math gnaws at you all night."
+        },
+        {
+          "id": "double_down_marketing",
+          "text": "Pour borrowed money into bigger fountains, bigger shows, bigger everything.",
+          "effects": {
+            "money": -40,
+            "power": 5,
+            "reputation": 4,
+            "heat": 8
+          },
+          "personality": {
+            "grandiosity": 10
+          },
+          "setFlags": [
+            "taj_open",
+            "overleveraged"
+          ],
+          "ripples": [
+            {
+              "to": "ev_atlantic_city_squeeze",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The spectacle is unreal. So is the burn rate. You are now leveraged to the eyeballs."
+        }
+      ]
+    },
+    {
+      "id": "ev_ac_casino_glut",
+      "era": "brand",
+      "year": 1989,
+      "title": "Too Many Tables on the Boardwalk",
+      "scene": "The Boardwalk is choking on its own success. A dozen casinos now fight for the same gamblers, and the gold rush that drew you to Atlantic City in the eighties has curdled into a knife fight for market share. You watch the cars stack up in everyone's garages and wonder how many of these palaces the town can really feed.",
+      "researchNote": "By the late 1980s Atlantic City was oversaturated with casinos competing for a finite gambler base, squeezing margins industry-wide before the early-1990s recession deepened the crunch.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "casino",
+        "atlantic_city"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "grab_share",
+          "text": "Buy your way to dominance — own more of the Boardwalk than anyone alive.",
+          "effects": {
+            "money": -60,
+            "power": 7,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 4
+          },
+          "setFlags": [
+            "casino_empire",
+            "overleveraged"
+          ],
+          "ripples": [
+            {
+              "to": "ev_bankruptcy_reckoning",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Three casinos with your name on them. You are the king of a town that may be dying."
+        },
+        {
+          "id": "read_the_room",
+          "text": "Sense the glut and quietly hedge against a downturn.",
+          "effects": {
+            "money": 20,
+            "power": 2,
+            "heat": -3
+          },
+          "personality": {
+            "inward": 5,
+            "ideology": -3
+          },
+          "setFlags": [
+            "hedged_downturn"
+          ],
+          "ripples": [],
+          "outcome": "A rare cautious instinct. If the bubble pops, you will be slightly less buried than the rest."
+        },
+        {
+          "id": "ride_out_glut",
+          "text": "Trust the boom to continue — hold what you have and ride the wave.",
+          "effects": {
+            "money": -10,
+            "power": 3,
+            "reputation": 2,
+            "heat": 2
+          },
+          "personality": {
+            "grandiosity": 5,
+            "ideology": 2
+          },
+          "setFlags": [],
+          "ripples": [
+            {
+              "to": "ev_recession_gulf_war",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You bet the gold rush has another lap in it. The recession on the horizon does not check your optimism."
+        }
+      ]
+    },
+    {
+      "id": "ev_recession_gulf_war",
+      "era": "brand",
+      "year": 1991,
+      "title": "Recession and the Gulf",
+      "scene": "The economy buckles into recession just as American tanks roll across the Kuwaiti desert. Consumers stop spending, the high rollers stay home, and the war dominates every screen in every casino lounge. Bad timing, you realize, is its own kind of disaster — and yours could not be worse.",
+      "researchNote": "The 1990-91 U.S. recession coincided with the Gulf War (Operation Desert Storm, Jan-Feb 1991); the downturn hammered discretionary spending and travel, worsening Atlantic City's casino slump.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "recession",
+        "casino"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "taj_open"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "blame_the_economy",
+          "text": "Pin every empty table on the recession and the war — none of it is your fault.",
+          "effects": {
+            "power": 3,
+            "reputation": 1,
+            "heat": 4
+          },
+          "personality": {
+            "outward": 6,
+            "grandiosity": 4
+          },
+          "setFlags": [],
+          "ripples": [
+            {
+              "to": "ev_atlantic_city_squeeze",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "It is half true and it sells. But the bond payments do not care whose fault it is."
+        },
+        {
+          "id": "cut_to_survive",
+          "text": "Slash costs, lay off staff, and brace for a long hard winter.",
+          "effects": {
+            "money": 15,
+            "power": -2,
+            "reputation": -3,
+            "loyalty": -5,
+            "heat": -2
+          },
+          "personality": {
+            "inward": 4
+          },
+          "setFlags": [],
+          "ripples": [
+            {
+              "to": "ev_atlantic_city_squeeze",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
+          "outcome": "The Boardwalk empties of your people. The bleeding slows, but the buildings feel like tombs."
+        },
+        {
+          "id": "borrow_through_recession",
+          "text": "Borrow against the war panic — bet the recession is short and double your exposure at the bottom.",
+          "effects": {
+            "money": -90,
+            "power": 4,
+            "heat": 9,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 4
+          },
+          "setFlags": [
+            "overleveraged"
+          ],
+          "ripples": [
+            {
+              "to": "ev_hard_bust",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The recession lasts longer than your nerve or your cash. The war ends; your debt does not."
         }
       ]
     },
@@ -40,30 +294,99 @@
       "year": 1990,
       "title": "The Cash Runs Thin",
       "scene": "Late 1990. The Taj is bleeding. The Castle and the Plaza are bleeding. You miss a bond interest payment and the whole house of cards starts to sway. Your bankers fly in for an emergency sit-down — they hold paper on you worth more than some countries.",
-      "researchNote": "By late 1990 Trump's casinos were missing payments; his personal debt was reported around $900 million, with billions more in business obligations.",
+      "researchNote": "By late 1990 Trump's casinos were missing payments; his personal debt was reported around $900 million, with several billion more in business obligations across his holdings.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["debt", "casino", "banks"],
+      "tags": [
+        "debt",
+        "casino",
+        "banks"
+      ],
       "portrait": "mogul",
-      "requires": { "flags": ["taj_open"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "taj_open"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 11,
       "repeatable": false,
       "choices": [
         {
           "id": "personal_guarantee",
           "text": "Remind the banks they are too deep to let you fail.",
-          "effects": { "power": 5, "heat": 7, "loyalty": -4 },
-          "setFlags": ["banks_cornered"],
-          "ripples": [{ "to": "ev_bankruptcy_reckoning", "weight": 0.9, "polarity": 1 }],
+          "effects": {
+            "power": 5,
+            "heat": 7,
+            "loyalty": -4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "banks_cornered",
+            "overleveraged"
+          ],
+          "ripples": [
+            {
+              "to": "ev_bankruptcy_reckoning",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
           "outcome": "It is a brutal logic, and it works — for now. They cannot afford your collapse."
         },
         {
           "id": "beg_for_time",
           "text": "Negotiate a standstill — buy months, give up control.",
-          "effects": { "power": -3, "reputation": -2, "heat": -2 },
-          "setFlags": ["restructure_pending"],
-          "ripples": [{ "to": "ev_bankruptcy_reckoning", "weight": 0.7, "polarity": 1 }],
+          "effects": {
+            "money": -10,
+            "power": -3,
+            "reputation": -2,
+            "heat": -2
+          },
+          "personality": {
+            "ideology": -3,
+            "inward": 5
+          },
+          "setFlags": [
+            "restructure_pending"
+          ],
+          "ripples": [
+            {
+              "to": "ev_bank_restructuring",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
           "outcome": "Humbling. The bankers now decide how much you can spend on a haircut."
+        },
+        {
+          "id": "bet_the_house",
+          "text": "Refuse to retreat — borrow even more to paper over the gap.",
+          "effects": {
+            "money": -120,
+            "power": 4,
+            "heat": 11,
+            "health": -4
+          },
+          "personality": {
+            "grandiosity": 11
+          },
+          "setFlags": [
+            "overleveraged",
+            "casino_empire"
+          ],
+          "ripples": [
+            {
+              "to": "ev_hard_bust",
+              "weight": 0.85,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You are now leveraged past any sane limit. One more bad quarter and the whole thing comes down."
         }
       ]
     },
@@ -73,41 +396,215 @@
       "year": 1991,
       "title": "The Reckoning",
       "scene": "1991. The Taj Mahal files for Chapter 11. The empire you built on debt is being carved up by lawyers and lenders in a Camden courtroom. You can fight to keep every scrap of control, or you can cut the deepest deal of your life and live to brand another day.",
-      "researchNote": "The Trump Taj Mahal filed for Chapter 11 bankruptcy in July 1991; Trump ceded 50% ownership to bondholders in exchange for lower interest.",
+      "researchNote": "The Trump Taj Mahal filed for Chapter 11 bankruptcy in July 1991; Trump ceded 50% ownership to bondholders in exchange for lower interest rates and breathing room.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["bankruptcy", "debt", "casino", "banks"],
+      "tags": [
+        "bankruptcy",
+        "debt",
+        "casino",
+        "banks"
+      ],
       "portrait": "mogul",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 14,
       "repeatable": false,
       "choices": [
         {
           "id": "ruthless_restructure",
           "text": "Squeeze the bondholders, dump personal guarantees onto the corporate shell, and keep your name on the door.",
-          "effects": { "money": -50, "power": 8, "heat": 9, "loyalty": -7, "reputation": -4 },
-          "setFlags": ["survived_bankruptcy", "ruthless_dealmaker"],
+          "effects": {
+            "money": -50,
+            "power": 8,
+            "heat": 9,
+            "loyalty": -7,
+            "reputation": -4
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 7
+          },
+          "setFlags": [
+            "survived_bankruptcy",
+            "ruthless_dealmaker"
+          ],
           "ripples": [
-            { "to": "ev_corporate_bankruptcies", "weight": 0.8, "polarity": 1 },
-            { "to": "ev_brand_pivot", "weight": 0.6, "polarity": 1 }
+            {
+              "to": "ev_corporate_bankruptcies",
+              "weight": 0.8,
+              "polarity": 1
+            },
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.6,
+              "polarity": 1
+            }
           ],
           "outcome": "You give up half the equity but keep the name and the spotlight. They blink first."
         },
         {
           "id": "graceful_concession",
           "text": "Accept the haircut with public grace — frame survival itself as the win.",
-          "effects": { "money": -80, "power": 2, "reputation": 4, "heat": -3, "loyalty": 2 },
-          "setFlags": ["survived_bankruptcy"],
-          "ripples": [{ "to": "ev_brand_pivot", "weight": 0.7, "polarity": 1 }],
+          "effects": {
+            "money": -80,
+            "power": 2,
+            "reputation": 4,
+            "heat": -3,
+            "loyalty": 2
+          },
+          "personality": {
+            "ideology": -4,
+            "grandiosity": -4,
+            "inward": 4
+          },
+          "setFlags": [
+            "survived_bankruptcy"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
           "outcome": "The lenders relax. 'Survivor' is a better story than 'tycoon,' and you know how to sell a story."
         },
         {
           "id": "fight_to_the_wall",
           "text": "Litigate everything and refuse to give an inch.",
-          "effects": { "money": -120, "power": 4, "heat": 11, "reputation": -8, "health": -5 },
-          "setFlags": ["survived_bankruptcy", "burned_bankers"],
-          "ripples": [{ "to": "ev_corporate_bankruptcies", "weight": 0.9, "polarity": 1 }],
+          "effects": {
+            "money": -120,
+            "power": 4,
+            "heat": 11,
+            "reputation": -8,
+            "health": -5
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "survived_bankruptcy",
+            "burned_bankers",
+            "overleveraged"
+          ],
+          "ripples": [
+            {
+              "to": "ev_corporate_bankruptcies",
+              "weight": 0.9,
+              "polarity": 1
+            },
+            {
+              "to": "ev_hard_bust",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "You win some battles and lose the war's goodwill. The next bankruptcy is already on the horizon."
+        }
+      ]
+    },
+    {
+      "id": "ev_hard_bust",
+      "era": "brand",
+      "year": 1992,
+      "title": "The Floor Gives Way",
+      "scene": "There is no spin left. The covenants trip, the cross-defaults cascade, and the lenders stop returning your calls. The accountants stop using the word 'liquidity' and start using the word 'insolvent.' For the first time, the name on the door might come off — for good.",
+      "researchNote": "At the depth of his early-1990s crisis, Trump's personal liabilities (around $900 million) exceeded his assets; only the banks' fear of a fire sale kept a full personal collapse at bay.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "bankruptcy",
+        "debt",
+        "banks"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "overleveraged"
+        ],
+        "notFlags": [
+          "brand_machine"
+        ],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "total_collapse",
+          "text": "Throw good money after bad and gamble the last of it on one impossible rescue.",
+          "effects": {
+            "money": -200,
+            "power": -6,
+            "reputation": -10,
+            "heat": 10,
+            "health": -6
+          },
+          "personality": {
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "overleveraged",
+            "name_coming_off"
+          ],
+          "ripples": [],
+          "outcome": "It does not work. The money is gone, the buildings are seized, and the legend ends in receivership."
+        },
+        {
+          "id": "fire_sale",
+          "text": "Liquidate everything at pennies on the dollar to stave off personal ruin.",
+          "effects": {
+            "money": -90,
+            "power": -4,
+            "reputation": -6,
+            "heat": -4
+          },
+          "personality": {
+            "ideology": -3,
+            "inward": 5
+          },
+          "setFlags": [
+            "stripped_down"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Brutal, but you crawl out the other side with your name barely intact. Barely."
+        },
+        {
+          "id": "beg_the_banks",
+          "text": "Crawl back to the lenders and accept whatever terms keep you breathing.",
+          "effects": {
+            "money": -40,
+            "power": -5,
+            "reputation": -3,
+            "loyalty": 2
+          },
+          "personality": {
+            "grandiosity": -6,
+            "ideology": -4,
+            "inward": 6
+          },
+          "setFlags": [
+            "restructure_pending"
+          ],
+          "ripples": [
+            {
+              "to": "ev_bank_restructuring",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The mighty mogul, hat in hand. They grant a lifeline thin as thread."
         }
       ]
     },
@@ -117,30 +614,281 @@
       "year": 1992,
       "title": "The Plaza Goes Under",
       "scene": "1992. The Plaza Hotel — your crown jewel, the place you called a masterpiece — files for bankruptcy too. So does the Castle. The press starts keeping a tally. You have learned a secret most people never grasp: corporate debt is the bank's problem, not yours.",
-      "researchNote": "The Plaza Hotel filed for Chapter 11 in 1992; Trump's businesses went through multiple corporate bankruptcies in 1991-1992 while he avoided personal Chapter 11.",
+      "researchNote": "The Plaza Hotel filed for Chapter 11 in 1992, and Trump Castle restructured in bankruptcy in 1992; Trump endured multiple corporate bankruptcies while personally avoiding Chapter 11.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["bankruptcy", "debt", "banks"],
+      "tags": [
+        "bankruptcy",
+        "debt",
+        "banks"
+      ],
       "portrait": "mogul",
-      "requires": { "flags": ["survived_bankruptcy"], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "survived_bankruptcy"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "debt_is_leverage",
           "text": "Reframe it: a bankruptcy is just a tool, and you are the master craftsman.",
-          "effects": { "power": 6, "reputation": -3, "heat": 5, "loyalty": -3 },
-          "setFlags": ["bankruptcy_artist"],
-          "ripples": [{ "to": "ev_brand_pivot", "weight": 0.8, "polarity": 1 }],
+          "effects": {
+            "power": 6,
+            "reputation": -3,
+            "heat": 5,
+            "loyalty": -3
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 6
+          },
+          "setFlags": [
+            "bankruptcy_artist"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
           "outcome": "The number-crunchers wince. The public, oddly, half-believes the swagger."
         },
         {
           "id": "shed_assets",
           "text": "Quietly sell the yacht, the airline, the trophies — strip down to the brand.",
-          "effects": { "money": -30, "power": -2, "reputation": 2, "heat": -4 },
-          "setFlags": ["stripped_down"],
-          "ripples": [{ "to": "ev_brand_pivot", "weight": 0.9, "polarity": 1 }],
+          "effects": {
+            "money": -30,
+            "power": -2,
+            "reputation": 2,
+            "heat": -4
+          },
+          "personality": {
+            "inward": 4,
+            "ideology": -3
+          },
+          "setFlags": [
+            "stripped_down"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
           "outcome": "The Trump Shuttle and the Princess are gone. What is left is the only thing that never had debt: the name."
+        },
+        {
+          "id": "walk_away_quiet",
+          "text": "Wonder, for one honest night, whether you should just take the buyout and disappear.",
+          "effects": {
+            "money": 60,
+            "power": -4,
+            "reputation": -2,
+            "heat": -8,
+            "health": 6
+          },
+          "personality": {
+            "grandiosity": -8,
+            "inward": 9
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "ripples": [],
+          "outcome": "A door to a quiet life cracks open. Cash in hand, no spotlight, no debt. You could just... stop."
+        }
+      ]
+    },
+    {
+      "id": "ev_trump_shuttle_failure",
+      "era": "brand",
+      "year": 1992,
+      "title": "The Shuttle Falls From the Sky",
+      "scene": "The Trump Shuttle — your gold-fixtured airline between New York, Boston, and Washington — never turned a profit and now slips from your hands. Marble bathrooms do not make a plane fly cheaper. The banks take it, fold it into a new carrier, and your brief career as an aviation mogul ends on the tarmac.",
+      "researchNote": "Trump bought the Eastern Air Lines shuttle in 1989 and rebranded it the Trump Shuttle; it never turned a profit and was handed to creditors in 1992, eventually merged into US Airways.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "debt",
+        "branding",
+        "failure"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 8,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "spin_the_shuttle",
+          "text": "Insist the Shuttle was a triumph of class that the bean-counters never understood.",
+          "effects": {
+            "reputation": 2,
+            "power": 2,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 4
+          },
+          "setFlags": [],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The reporters smirk. The legend absorbs even the crash and keeps flying."
+        },
+        {
+          "id": "lesson_learned_shuttle",
+          "text": "Take the quiet lesson: you are a brand, not an operator. Stop owning hard assets.",
+          "effects": {
+            "money": 10,
+            "power": 1,
+            "reputation": 1,
+            "heat": -3
+          },
+          "personality": {
+            "inward": 6,
+            "ideology": -2
+          },
+          "setFlags": [
+            "asset_light_lesson"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "It clarifies everything. From now on, let other fools own the planes and the buildings."
+        },
+        {
+          "id": "blame_old_money",
+          "text": "Blame the old-money establishment for rooting against the brash outsider — and vow to beat them at their own game.",
+          "effects": {
+            "reputation": 1,
+            "power": 3,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": -4,
+            "outward": 6,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "nouveau_riche_grudge"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The blue-bloods never accepted you, shuttle or no shuttle. The grudge curdles into a useful, portable rage."
+        }
+      ]
+    },
+    {
+      "id": "ev_plaza_hotel_loss",
+      "era": "brand",
+      "year": 1995,
+      "title": "Losing the Plaza",
+      "scene": "The Plaza Hotel — the building you called the Mona Lisa, the place you wanted to die owning — slips fully out of your control. You once paid a record price just to put your name on the most romantic address in New York. Now the deed belongs to someone else, and you are left with the memory and the publicity.",
+      "researchNote": "Trump bought the Plaza Hotel in 1988 for about $407.5 million, lost control through its 1992 bankruptcy, and the hotel was sold to new owners in 1995.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "debt",
+        "celebrity",
+        "failure"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "survived_bankruptcy"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 8,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "mourn_loudly",
+          "text": "Tell everyone you got a 'great deal' walking away — even from the Mona Lisa.",
+          "effects": {
+            "reputation": 2,
+            "power": 3,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 5
+          },
+          "setFlags": [],
+          "ripples": [],
+          "outcome": "Nobody quite believes you loved a building you lost, but they love the bravado."
+        },
+        {
+          "id": "private_grief",
+          "text": "Feel the loss privately — it was the one trophy you truly wanted.",
+          "effects": {
+            "reputation": 1,
+            "heat": -2,
+            "health": -2
+          },
+          "personality": {
+            "inward": 7,
+            "grandiosity": -3
+          },
+          "setFlags": [],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A genuine wound. You vow to win back the skyline in a way no bank can ever repossess."
+        },
+        {
+          "id": "plaza_legitimacy",
+          "text": "Frame the loss as old money reclaiming its toy from the upstart — and resolve to build a name no pedigree can deny.",
+          "effects": {
+            "reputation": 3,
+            "power": 3,
+            "heat": 2
+          },
+          "personality": {
+            "ideology": -3,
+            "outward": 5,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "nouveau_riche_grudge"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "They got the building back; you keep the chip on your shoulder. The brand, you decide, will outclass every blue-blood deed in town."
         }
       ]
     },
@@ -150,63 +898,483 @@
       "year": 1992,
       "title": "A Number With Nine Zeros",
       "scene": "Your accountants slide a figure across the table that you can barely read aloud. Nearly a billion dollars in personal liabilities. You once told a reporter that a beggar on Fifth Avenue had a higher net worth than you. The question is whether to hide the number or weaponize it.",
-      "researchNote": "Trump reportedly owed around $900 million personally and over $3.4 billion in business debt in the early 1990s; he famously quipped a sidewalk beggar was worth more than he was.",
+      "researchNote": "Trump reportedly owed around $900 million personally and over $3.4 billion in business debt in the early 1990s; he famously quipped that a sidewalk beggar was worth more than he was.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["debt", "celebrity"],
+      "tags": [
+        "debt",
+        "celebrity"
+      ],
       "portrait": "celebrity",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "overleveraged"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 9,
       "repeatable": false,
       "choices": [
         {
           "id": "spin_the_number",
           "text": "Tell the beggar story to every reporter — make the debt sound like proof of scale.",
-          "effects": { "reputation": 3, "power": 3, "heat": 2 },
-          "setFlags": ["debt_legend"],
-          "ripples": [{ "to": "ev_brand_pivot", "weight": 0.6, "polarity": 1 }],
+          "effects": {
+            "reputation": 3,
+            "power": 3,
+            "heat": 2
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 6
+          },
+          "setFlags": [
+            "debt_legend"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "Somehow, a near-billion in red ink becomes part of the legend instead of the end of it."
         },
         {
           "id": "hunker_down",
           "text": "Go silent, keep your head down, and let the bankers manage the optics.",
-          "effects": { "reputation": -2, "heat": -4, "health": 2 },
+          "effects": {
+            "reputation": -2,
+            "heat": -4,
+            "health": 2
+          },
+          "personality": {
+            "inward": 6,
+            "grandiosity": -3
+          },
           "setFlags": [],
           "ripples": [],
           "outcome": "The tabloids fill the silence with vultures. But the panic, at least, cools a little."
+        },
+        {
+          "id": "weaponize_debt",
+          "text": "Weaponize the number — dare the banks to call it, knowing they cannot afford your collapse.",
+          "effects": {
+            "power": 6,
+            "reputation": -2,
+            "heat": 6,
+            "loyalty": -3
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 6
+          },
+          "setFlags": [
+            "banks_cornered"
+          ],
+          "ripples": [
+            {
+              "to": "ev_bank_restructuring",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A near-billion in red ink, turned into a threat. The bigger the hole, the more they must keep you alive to climb out of it."
         }
       ]
     },
     {
-      "id": "ev_ivana_marla",
+      "id": "ev_ivana_divorce",
       "era": "brand",
-      "year": 1992,
-      "title": "Best Sex I've Ever Had",
-      "scene": "The marriage to Ivana detonates across every tabloid in America while Marla Maples becomes a household name. The New York Post screams headlines you did not write but did not exactly discourage. Your private life is now a public spectacle, and spectacle, you have noticed, sells.",
-      "researchNote": "Trump divorced Ivana in 1992 amid a tabloid saga with Marla Maples, including the infamous New York Post 'Best Sex I've Ever Had' front page in 1990.",
+      "year": 1991,
+      "title": "The Divorce of the Decade",
+      "scene": "The marriage to Ivana detonates across every front page in America. Lawyers fight over the prenup, the apartments, the children, and the empire of the name itself. It is the most public, most expensive split the city has ever seen, and the cameras never blink.",
+      "researchNote": "Trump and Ivana separated in 1990 and divorced in 1991 after a highly publicized legal battle over their prenuptial agreement; the saga dominated New York tabloids.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["tabloid", "celebrity", "divorce"],
+      "tags": [
+        "tabloid",
+        "celebrity",
+        "divorce"
+      ],
       "portrait": "celebrity",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "scorched_earth",
+          "text": "Fight the prenup challenge to the wall — never let anyone take a dollar of the name.",
+          "effects": {
+            "money": -20,
+            "power": 4,
+            "reputation": -3,
+            "heat": 7,
+            "loyalty": -6
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 6
+          },
+          "setFlags": [
+            "public_divorce"
+          ],
+          "ripples": [
+            {
+              "to": "ev_marla_maples_war",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Bruising and ugly, but the prenup holds and the brand stays whole. The kids remember the war."
+        },
+        {
+          "id": "settle_clean",
+          "text": "Settle fast and quiet to protect the children from the circus.",
+          "effects": {
+            "money": -50,
+            "reputation": 3,
+            "heat": -4,
+            "loyalty": 5,
+            "health": 2
+          },
+          "personality": {
+            "inward": 6,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "public_divorce"
+          ],
+          "ripples": [
+            {
+              "to": "ev_marla_maples_war",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A rare restrained choice. The lawyers grumble at the cost, but the family heals a little."
+        },
+        {
+          "id": "sell_the_saga",
+          "text": "Sell the whole saga to the tabloids yourself — turn your own divorce into the year's biggest free ad.",
+          "effects": {
+            "money": 20,
+            "reputation": 2,
+            "power": 3,
+            "heat": 8,
+            "loyalty": -7
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 8
+          },
+          "setFlags": [
+            "public_divorce",
+            "tabloid_fixture"
+          ],
+          "ripples": [
+            {
+              "to": "ev_marla_maples_war",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The children wince, the lawyers despair, the circulation soars. You have learned the deepest trick of all: scandal is inventory."
+        }
+      ]
+    },
+    {
+      "id": "ev_marla_maples_war",
+      "era": "brand",
+      "year": 1990,
+      "title": "Best Sex I've Ever Had",
+      "scene": "Marla Maples becomes a household name overnight, and the New York Post screams a headline you did not write but did not exactly discourage. Your private life is now a public spectacle staged on newsstands from coast to coast. And spectacle, you have noticed, sells.",
+      "researchNote": "Amid the Ivana divorce, the New York Post ran the infamous 'Best Sex I've Ever Had' front page in 1990 attributed to Marla Maples; Trump married Maples in 1993.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "tabloid",
+        "celebrity",
+        "divorce"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "public_divorce"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "feed_the_press",
           "text": "Lean into the circus — every headline is free advertising for the name.",
-          "effects": { "reputation": 4, "power": 3, "heat": 6, "loyalty": -5 },
-          "setFlags": ["tabloid_fixture"],
-          "ripples": [{ "to": "ev_brand_pivot", "weight": 0.7, "polarity": 1 }],
+          "effects": {
+            "reputation": 4,
+            "power": 3,
+            "heat": 6,
+            "loyalty": -5
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 8
+          },
+          "setFlags": [
+            "tabloid_fixture"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
           "outcome": "Your lawyers despair; your fame doubles. America cannot look away."
         },
         {
           "id": "protect_kids",
           "text": "Shield the children and try, for once, to keep something private.",
-          "effects": { "reputation": 2, "heat": -3, "loyalty": 4, "health": 1 },
+          "effects": {
+            "reputation": 2,
+            "heat": -3,
+            "loyalty": 4,
+            "health": 1
+          },
+          "personality": {
+            "inward": 6
+          },
           "setFlags": [],
           "ripples": [],
           "outcome": "A rare quiet choice. The tabloids print it anyway, but you sleep a little better."
+        },
+        {
+          "id": "tabloid_brand_empire",
+          "text": "Decide your fame itself is the asset now — court the cameras full-time and let the name eclipse the buildings.",
+          "effects": {
+            "money": 30,
+            "reputation": 5,
+            "power": 4,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 9
+          },
+          "setFlags": [
+            "tabloid_fixture",
+            "fame_hungry"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Buildings can be seized. A face on every cover cannot. You start managing your celebrity like a portfolio."
+        }
+      ]
+    },
+    {
+      "id": "ev_bondholder_restructure",
+      "era": "brand",
+      "year": 1991,
+      "title": "Carving Up the Bonds",
+      "scene": "A roomful of bondholders, lawyers, and your own deal-makers haggle over who eats which loss. You learn the dark art of the workout: trade equity for time, swap one debt for a thinner one, and convince men holding your paper that helping you helps themselves. Every concession is a small surrender dressed as a victory.",
+      "researchNote": "Through 1991-92 Trump restructured casino bond debt by ceding equity stakes (notably 50% of the Taj) and accepting lower interest rates in exchange for extended terms.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "debt",
+        "banks",
+        "casino"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "survived_bankruptcy"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "hardball_workout",
+          "text": "Play hardball — threaten to walk and let them eat a total loss.",
+          "effects": {
+            "money": 30,
+            "power": 6,
+            "heat": 8,
+            "loyalty": -5,
+            "reputation": -3
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 7
+          },
+          "setFlags": [
+            "ruthless_dealmaker"
+          ],
+          "ripples": [
+            {
+              "to": "ev_bank_restructuring",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "They fold. You keep more than you should have. The fear in the room is your best asset."
+        },
+        {
+          "id": "fair_workout",
+          "text": "Cut a balanced deal that lets everyone limp away intact.",
+          "effects": {
+            "money": 10,
+            "power": 2,
+            "reputation": 4,
+            "heat": -3,
+            "loyalty": 3
+          },
+          "personality": {
+            "ideology": -3,
+            "inward": 4
+          },
+          "setFlags": [
+            "banker_trust"
+          ],
+          "ripples": [
+            {
+              "to": "ev_bank_restructuring",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Less squeezed out of them now, but these are men you can call again. That matters."
+        },
+        {
+          "id": "dump_on_shareholders",
+          "text": "Engineer the workout so a future public offering eats the debt — let strangers hold the bag.",
+          "effects": {
+            "money": 40,
+            "power": 5,
+            "heat": 6,
+            "reputation": -3
+          },
+          "personality": {
+            "grandiosity": 7,
+            "ideology": 3
+          },
+          "setFlags": [
+            "ruthless_dealmaker"
+          ],
+          "ripples": [
+            {
+              "to": "ev_bank_restructuring",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sketch the exit before you have even entered: the casino debt will become someone else's problem, with your name still on the marquee."
+        }
+      ]
+    },
+    {
+      "id": "ev_wtc_bombing_1993",
+      "era": "brand",
+      "year": 1993,
+      "title": "Smoke Under the Towers",
+      "scene": "February 1993. A truck bomb tears through the parking garage beneath the World Trade Center, killing six and shaking your city to its foundations. The towers stand, but the illusion of safety in downtown Manhattan cracks. You watch the smoke on the news and feel the first chill of a threat nobody yet understands.",
+      "researchNote": "On February 26, 1993, terrorists detonated a truck bomb in the World Trade Center's underground garage, killing six people and injuring over a thousand — the first major foreign terror attack on the towers.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "new_york",
+        "terror"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 8,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "tough_talk_security",
+          "text": "Go on TV demanding toughness and declaring your own buildings safer than anyone's.",
+          "effects": {
+            "reputation": 3,
+            "power": 4,
+            "heat": 3
+          },
+          "personality": {
+            "outward": 6,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "security_hawk"
+          ],
+          "ripples": [
+            {
+              "to": "ev_nine_eleven",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sound certain and strong. It plays well, and it plants a brand of fearlessness."
+        },
+        {
+          "id": "quiet_unease",
+          "text": "Say little publicly, but feel a private dread about your city's vulnerability.",
+          "effects": {
+            "reputation": 1,
+            "heat": -2,
+            "health": -1
+          },
+          "personality": {
+            "inward": 5
+          },
+          "setFlags": [],
+          "ripples": [
+            {
+              "to": "ev_nine_eleven",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The smoke fades from the screens, but the unease settles somewhere deep and stays."
+        },
+        {
+          "id": "downtown_bargain_hunt",
+          "text": "Read the panic as opportunity — downtown values will dip, and you hunt for distressed Manhattan deals.",
+          "effects": {
+            "money": 50,
+            "power": 3,
+            "reputation": 1,
+            "heat": 2
+          },
+          "personality": {
+            "grandiosity": 4,
+            "inward": 3
+          },
+          "setFlags": [],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Fear empties wallets and you fill yours. The smoke clears and you own a little more of a shaken city."
         }
       ]
     },
@@ -216,33 +1384,191 @@
       "year": 1994,
       "title": "Sell the Name, Not the Building",
       "scene": "A developer offers to slap TRUMP in gold on his own tower in exchange for a fat licensing fee — you front no money, you take no debt, you just rent out the name. It is the cleanest deal you have ever seen. Why own the risk when you can own the brand?",
-      "researchNote": "In the mid-1990s Trump pivoted from owning buildings to licensing his name to developers, collecting fees with little or no capital at risk.",
+      "researchNote": "In the mid-1990s Trump pivoted from owning buildings to licensing his name to developers, collecting fees with little or no capital at risk — the model that defined his later wealth.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["branding", "licensing", "comeback"],
+      "tags": [
+        "branding",
+        "licensing",
+        "comeback"
+      ],
       "portrait": "mogul",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 13,
       "repeatable": false,
       "choices": [
         {
           "id": "license_everything",
           "text": "License the name onto everything — towers, ties, steaks, water. Become a brand machine.",
-          "effects": { "money": 150, "power": 7, "reputation": 6, "heat": 3 },
-          "setFlags": ["brand_machine"],
+          "effects": {
+            "money": 150,
+            "power": 7,
+            "reputation": 6,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "brand_machine"
+          ],
           "ripples": [
-            { "to": "ev_bank_restructuring", "weight": 0.7, "polarity": 1 },
-            { "to": "ev_late_90s_recovery", "weight": 0.8, "polarity": 1 }
+            {
+              "to": "ev_bank_restructuring",
+              "weight": 0.7,
+              "polarity": 1
+            },
+            {
+              "to": "ev_late_90s_recovery",
+              "weight": 0.8,
+              "polarity": 1
+            }
           ],
           "outcome": "No debt, no risk, pure margin. The name itself is now the product, and it never goes bankrupt."
         },
         {
           "id": "selective_brand",
           "text": "License only the marquee properties — protect the name from looking cheap.",
-          "effects": { "money": 80, "power": 4, "reputation": 8, "heat": -2 },
-          "setFlags": ["brand_machine", "premium_brand"],
-          "ripples": [{ "to": "ev_late_90s_recovery", "weight": 0.7, "polarity": 1 }],
+          "effects": {
+            "money": 80,
+            "power": 4,
+            "reputation": 8,
+            "heat": -2
+          },
+          "personality": {
+            "grandiosity": 4,
+            "inward": 3
+          },
+          "setFlags": [
+            "brand_machine",
+            "premium_brand"
+          ],
+          "ripples": [
+            {
+              "to": "ev_late_90s_recovery",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
           "outcome": "Fewer deals, but each one gilds the legend. Scarcity, you decide, is its own kind of luxury."
+        },
+        {
+          "id": "refuse_pivot",
+          "text": "Reject it — a real builder owns concrete, not just letters on a sign.",
+          "effects": {
+            "money": -30,
+            "power": 2,
+            "reputation": -2,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "overleveraged"
+          ],
+          "ripples": [
+            {
+              "to": "ev_hard_bust",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Pride over prudence. You keep buying hard assets you cannot quite afford, and the risk rides along."
+        }
+      ]
+    },
+    {
+      "id": "ev_nafta_signed",
+      "era": "brand",
+      "year": 1994,
+      "title": "Borders Open for Business",
+      "scene": "NAFTA takes effect, knitting the United States, Canada, and Mexico into one vast trading bloc. The suits on the business channels cheer the cheap goods and the open factories. You watch the celebration with a flicker of something else — a hunch that someone is going to feel cheated, and that resentment might one day be worth more than any tower.",
+      "researchNote": "The North American Free Trade Agreement took effect January 1, 1994, eliminating most trade barriers between the U.S., Canada, and Mexico; it later became a recurring target of populist critique.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "trade",
+        "economy"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 8,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "sense_the_resentment",
+          "text": "File away the hunch that 'bad deals' could be a powerful story someday.",
+          "effects": {
+            "power": 3,
+            "reputation": 1,
+            "heat": 1
+          },
+          "personality": {
+            "outward": 4,
+            "ideology": 3
+          },
+          "setFlags": [
+            "trade_skeptic"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "An idea with no use yet. But you have always known that grievance, well-aimed, is rocket fuel."
+        },
+        {
+          "id": "ride_the_globalism",
+          "text": "Cheer the open markets — cheaper marble, cheaper labor, fatter margins.",
+          "effects": {
+            "money": 40,
+            "power": 2,
+            "heat": -1
+          },
+          "personality": {
+            "ideology": -4
+          },
+          "setFlags": [],
+          "ripples": [],
+          "outcome": "Globalization fills your supply chains and your pockets. For now, the open border is your friend."
+        },
+        {
+          "id": "left_protectionist",
+          "text": "Side openly with the unions and the laid-off worker — denounce the deal as a betrayal of American labor.",
+          "effects": {
+            "reputation": 3,
+            "power": 2,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": -7,
+            "outward": 5
+          },
+          "setFlags": [
+            "trade_skeptic",
+            "flirted_left"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A billionaire standing on a union line. It is good theater — and it plants the left-populist seed early."
         }
       ]
     },
@@ -251,31 +1577,206 @@
       "era": "brand",
       "year": 1995,
       "title": "The Bankers Blink",
-      "scene": "1995. The lenders, exhausted, agree to restructure on terms that — incredibly — leave you standing taller than before. You take Trump Hotels & Casino Resorts public, raising cash on a name still wet from bankruptcy. The men who once owned you now want a piece of the comeback.",
-      "researchNote": "Trump renegotiated with banks through the early-to-mid 1990s and took Trump Hotels & Casino Resorts public on the NYSE in 1995.",
+      "scene": "1995. The lenders, exhausted, agree to restructure on terms that — incredibly — leave you standing taller than before. You take Trump Hotels and Casino Resorts public, raising cash on a name still wet from bankruptcy. The men who once owned you now want a piece of the comeback.",
+      "researchNote": "Trump renegotiated with banks through the early-to-mid 1990s and took Trump Hotels and Casino Resorts public on the NYSE in 1995, raising capital under the DJT ticker.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["banks", "debt", "comeback"],
+      "tags": [
+        "banks",
+        "debt",
+        "comeback"
+      ],
       "portrait": "mogul",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "survived_bankruptcy"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "go_public_aggressive",
           "text": "Take it public and load the new company with the old casino debt.",
-          "effects": { "money": 120, "power": 6, "heat": 7, "loyalty": -4, "reputation": -2 },
-          "setFlags": ["public_company"],
-          "ripples": [{ "to": "ev_late_90s_recovery", "weight": 0.6, "polarity": 1 }],
+          "effects": {
+            "money": 120,
+            "power": 6,
+            "heat": 7,
+            "loyalty": -4,
+            "reputation": -2
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "public_company"
+          ],
+          "ripples": [
+            {
+              "to": "ev_late_90s_recovery",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "Public shareholders inherit the casino albatross. You walk away with cash and a clean personal balance sheet."
         },
         {
           "id": "rebuild_credit",
           "text": "Use the restructuring to slowly rebuild your reputation with the banks.",
-          "effects": { "money": 60, "power": 3, "reputation": 5, "heat": -3, "loyalty": 3 },
-          "setFlags": ["banker_trust"],
-          "ripples": [{ "to": "ev_late_90s_recovery", "weight": 0.8, "polarity": 1 }],
+          "effects": {
+            "money": 60,
+            "power": 3,
+            "reputation": 5,
+            "heat": -3,
+            "loyalty": 3
+          },
+          "personality": {
+            "ideology": -3,
+            "inward": 4
+          },
+          "setFlags": [
+            "banker_trust"
+          ],
+          "ripples": [
+            {
+              "to": "ev_late_90s_recovery",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
           "outcome": "Slower money, but doors that were slammed in 1991 swing open again."
+        },
+        {
+          "id": "pivot_to_licensing",
+          "text": "Skip the casino game entirely — convert the breathing room into a pure name-licensing machine.",
+          "effects": {
+            "money": 70,
+            "power": 4,
+            "reputation": 4,
+            "heat": -2
+          },
+          "personality": {
+            "grandiosity": 5,
+            "inward": 3
+          },
+          "setFlags": [
+            "brand_machine"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pivot",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You stop trying to win back what bankrupted you. The name, debt-free and portable, becomes the whole business."
+        }
+      ]
+    },
+    {
+      "id": "ev_giuliani_crime_drop",
+      "era": "brand",
+      "year": 1996,
+      "title": "The City Cleans Up",
+      "scene": "Mayor Giuliani's New York is transforming. Crime plunges, Times Square scrubs off its grime, and the city you love becomes safe enough to sell to tourists and luxury buyers again. The renaissance lifts every square foot you own or brand. A safer city is a richer city, and a richer city is very, very good for the name.",
+      "researchNote": "Under Mayor Rudolph Giuliani (1994-2001), New York City crime fell dramatically through 'broken windows' policing and CompStat, fueling a real-estate and tourism boom.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "new_york",
+        "crime",
+        "comeback"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "ride_the_renaissance",
+          "text": "Hitch your comeback to the city's — sell New York's safety as your safety.",
+          "effects": {
+            "money": 90,
+            "power": 4,
+            "reputation": 5,
+            "heat": 2
+          },
+          "personality": {
+            "outward": 5,
+            "ideology": 4
+          },
+          "setFlags": [
+            "nyc_renaissance"
+          ],
+          "ripples": [
+            {
+              "to": "ev_late_90s_recovery",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Buyers flood back. The rebound in the streets becomes a rebound in your ledgers."
+        },
+        {
+          "id": "befriend_city_hall",
+          "text": "Cultivate Giuliani and the power players reshaping the city.",
+          "effects": {
+            "money": 40,
+            "power": 6,
+            "reputation": 3,
+            "heat": 3,
+            "loyalty": 4
+          },
+          "personality": {
+            "outward": 4,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "nyc_renaissance",
+            "city_hall_ties"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Friends in high places. You learn how political muscle and real-estate money braid together."
+        },
+        {
+          "id": "critique_the_crackdown",
+          "text": "Question the crackdown's cost to the poor — position yourself as the developer with a conscience.",
+          "effects": {
+            "money": 30,
+            "reputation": 4,
+            "power": 2,
+            "heat": -1
+          },
+          "personality": {
+            "ideology": -6,
+            "outward": 4
+          },
+          "setFlags": [
+            "nyc_renaissance",
+            "flirted_left"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A boom built on broken windows, you note aloud, leaves people behind. The liberal pose fits more comfortably than you expected."
         }
       ]
     },
@@ -285,30 +1786,155 @@
       "year": 1997,
       "title": "The Art of the Comeback",
       "scene": "1997. You publish a sequel to your bestseller — this one about clawing back from the brink. The cover is pure gold and pure you. The bust is now officially recast as a setup for the greatest comeback story in American business, whether the numbers fully agree or not.",
-      "researchNote": "Trump published 'The Art of the Comeback' in 1997, reframing his early-1990s financial collapse as a triumphant recovery.",
+      "researchNote": "Trump published 'The Art of the Comeback' in 1997, reframing his early-1990s financial collapse as a triumphant recovery and cementing the comeback narrative.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["book", "celebrity", "comeback", "branding"],
+      "tags": [
+        "book",
+        "celebrity",
+        "comeback",
+        "branding"
+      ],
       "portrait": "celebrity",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 11,
       "repeatable": false,
       "choices": [
         {
           "id": "mythologize",
           "text": "Mythologize the comeback — never let a fact get in the way of a great story.",
-          "effects": { "reputation": 7, "power": 4, "heat": 4, "loyalty": -2 },
-          "setFlags": ["comeback_myth", "wrote_art_of_comeback"],
-          "ripples": [{ "to": "ev_reform_party_flirt", "weight": 0.7, "polarity": 1 }],
+          "effects": {
+            "reputation": 7,
+            "power": 4,
+            "heat": 4,
+            "loyalty": -2
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 7
+          },
+          "setFlags": [
+            "comeback_myth",
+            "wrote_art_of_comeback"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
           "outcome": "The book sells, the legend hardens, and 'comeback' becomes part of your name."
         },
         {
           "id": "earned_redemption",
           "text": "Frame it as hard-won wisdom — show a little humility for once.",
-          "effects": { "reputation": 9, "power": 2, "heat": -2, "loyalty": 4, "health": 2 },
-          "setFlags": ["wrote_art_of_comeback", "elder_statesman"],
-          "ripples": [{ "to": "ev_reform_party_flirt", "weight": 0.6, "polarity": 1 }],
+          "effects": {
+            "reputation": 9,
+            "power": 2,
+            "heat": -2,
+            "loyalty": 4,
+            "health": 2
+          },
+          "personality": {
+            "ideology": -7,
+            "grandiosity": -8,
+            "inward": 6
+          },
+          "setFlags": [
+            "wrote_art_of_comeback",
+            "elder_statesman"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "Critics soften. Even old enemies admit the man knows how to get up off the canvas."
+        }
+      ]
+    },
+    {
+      "id": "ev_trump_intl_tower",
+      "era": "brand",
+      "year": 1996,
+      "title": "Trump International Rises",
+      "scene": "Columbus Circle, mid-1990s. You convert a tired old building into Trump International Hotel and Tower — gleaming, branded, and aimed squarely at the global rich. It is the asset-light future made concrete: your name, a developer's money, a luxury address. This is what the comeback looks like in glass and bronze.",
+      "researchNote": "Trump International Hotel and Tower at One Central Park West (Columbus Circle) was developed in the mid-1990s and opened in 1997, a flagship of his rebranded luxury image.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "branding",
+        "comeback",
+        "new_york"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "brand_machine"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "global_luxury_play",
+          "text": "Position the name as the global gold standard of luxury living.",
+          "effects": {
+            "money": 110,
+            "power": 5,
+            "reputation": 7,
+            "heat": 2
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 4
+          },
+          "setFlags": [
+            "luxury_brand"
+          ],
+          "ripples": [
+            {
+              "to": "ev_late_90s_recovery",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The penthouses sell to oligarchs and movie stars. The name is platinum again."
+        },
+        {
+          "id": "skyline_revenge",
+          "text": "Treat every new tower as revenge against the bankers who doubted you.",
+          "effects": {
+            "money": 70,
+            "power": 6,
+            "reputation": 4,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 5
+          },
+          "setFlags": [
+            "luxury_brand",
+            "skyline_revenge"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Each floor is a finger raised at 1991. The chip on your shoulder is now ninety stories tall."
         }
       ]
     },
@@ -318,30 +1944,293 @@
       "year": 1998,
       "title": "Back in the Black",
       "scene": "The late-90s boom lifts everything, and the Trump name rides the updraft. New towers, new licensing checks, magazine covers calling you a survivor. The wilderness years are over. From here, the only question is what to build the rebuilt brand into next.",
-      "researchNote": "By the late 1990s Trump had largely recovered financially, buoyed by licensing deals, a rebounding economy, and a refreshed public image.",
+      "researchNote": "By the late 1990s Trump had largely recovered financially, buoyed by licensing deals, the booming economy, and a refreshed public image as a comeback artist.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["comeback", "branding", "celebrity"],
+      "tags": [
+        "comeback",
+        "branding",
+        "celebrity"
+      ],
       "portrait": "mogul",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "expand_empire",
           "text": "Pour the comeback cash into bigger, taller, glitzier projects.",
-          "effects": { "money": 130, "power": 6, "reputation": 4, "heat": 4 },
-          "setFlags": ["recovered"],
-          "ripples": [{ "to": "ev_reform_party_flirt", "weight": 0.6, "polarity": 1 }],
+          "effects": {
+            "money": 130,
+            "power": 6,
+            "reputation": 4,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 4
+          },
+          "setFlags": [
+            "recovered"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "The skyline fills with your name again. The bust is a distant, deniable memory."
         },
         {
           "id": "chase_fame",
-          "text": "Decide that money is solved — now you want the one thing money cannot buy: total fame.",
-          "effects": { "money": 40, "power": 5, "reputation": 6, "heat": 3 },
-          "setFlags": ["recovered", "fame_hungry"],
-          "ripples": [{ "to": "ev_reform_party_flirt", "weight": 0.9, "polarity": 1 }],
+          "text": "Decide money is solved — now you want the one thing money cannot buy: total fame.",
+          "effects": {
+            "money": 40,
+            "power": 5,
+            "reputation": 6,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 9
+          },
+          "setFlags": [
+            "recovered",
+            "fame_hungry"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
           "outcome": "The boardroom bores you now. You want the cameras, the crowds, the stage."
+        },
+        {
+          "id": "cash_out_quiet",
+          "text": "Bank the recovery, take the chips off the table, and consider stepping back.",
+          "effects": {
+            "money": 100,
+            "power": -3,
+            "reputation": 1,
+            "heat": -6,
+            "health": 5
+          },
+          "personality": {
+            "grandiosity": -6,
+            "inward": 8
+          },
+          "setFlags": [
+            "recovered",
+            "walked_away"
+          ],
+          "ripples": [],
+          "outcome": "Solvent, safe, and out of the spotlight. A comfortable exit hums quietly in the back of your mind."
+        }
+      ]
+    },
+    {
+      "id": "ev_dotcom_boom",
+      "era": "brand",
+      "year": 1999,
+      "title": "The Dot-Com Gold Rush",
+      "scene": "1999. Wall Street has lost its mind over the internet. Twenty-six-year-olds with a website and no profits are worth more on paper than your entire skyline. Everyone wants you to slap the name on a portal, an e-commerce play, anything dot-com. You smell easy money — and you smell a bubble.",
+      "researchNote": "The late-1990s dot-com boom drove the NASDAQ to a peak in March 2000, with internet startups achieving sky-high valuations despite little or no profit before the crash.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "economy",
+        "tech"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "brand_dotcom",
+          "text": "License the name into a flashy internet venture and ride the mania.",
+          "effects": {
+            "money": 80,
+            "power": 3,
+            "reputation": 2,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 4
+          },
+          "setFlags": [
+            "dotcom_dabble"
+          ],
+          "ripples": [
+            {
+              "to": "ev_dotcom_crash",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Easy fees roll in on hype alone. You collect the check and try not to ask what the company actually does."
+        },
+        {
+          "id": "stay_concrete",
+          "text": "Stick to bricks, mortar, and your name — let the geeks gamble.",
+          "effects": {
+            "money": 30,
+            "power": 2,
+            "reputation": 3,
+            "heat": -2
+          },
+          "personality": {
+            "ideology": 3,
+            "inward": 4
+          },
+          "setFlags": [
+            "dodged_dotcom"
+          ],
+          "ripples": [
+            {
+              "to": "ev_dotcom_crash",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Boring, maybe. But you have seen what happens when valuations float on nothing. You stay grounded."
+        },
+        {
+          "id": "dotcom_short_the_hype",
+          "text": "Talk up the mania in public while quietly betting against it — sell the name, short the dream.",
+          "effects": {
+            "money": 60,
+            "power": 3,
+            "reputation": -2,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 5,
+            "inward": 4
+          },
+          "setFlags": [
+            "dotcom_dabble"
+          ],
+          "ripples": [
+            {
+              "to": "ev_dotcom_crash",
+              "weight": 0.6,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You cash the licensing checks now and position to profit from the crash later. Cynical, lucrative, and very you."
+        }
+      ]
+    },
+    {
+      "id": "ev_independence_party_reg",
+      "era": "brand",
+      "year": 1999,
+      "title": "Registering Independent",
+      "scene": "October 1999. You quietly file paperwork in New York to register with the Independence Party, the state affiliate of Ross Perot's Reform movement. It is barely a story — a footnote in the gossip columns. But it is the first real crack in your lifelong identity as a New York deal-maker, and you can feel the political door swinging open.",
+      "researchNote": "In October 1999 Trump registered as a member of New York's Independence Party as he explored a Reform Party presidential run, signaling a move away from his prior Republican registration.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "celebrity"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "test_third_party",
+          "text": "Treat the registration as a low-cost option on a future political life.",
+          "effects": {
+            "power": 4,
+            "reputation": 2,
+            "heat": 3
+          },
+          "personality": {
+            "outward": 5,
+            "ideology": -2
+          },
+          "setFlags": [
+            "political_curious",
+            "independence_party"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A small piece of paper, a large possibility. The two-party cage suddenly looks optional."
+        },
+        {
+          "id": "keep_it_quiet",
+          "text": "Do it quietly, keep your options open, and tell no one it means anything.",
+          "effects": {
+            "power": 2,
+            "reputation": 1,
+            "heat": -1
+          },
+          "personality": {
+            "inward": 4
+          },
+          "setFlags": [
+            "political_curious",
+            "independence_party"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "No headlines, no commitments. Just a hedge — the kind you have always loved to keep."
+        },
+        {
+          "id": "register_left_lean",
+          "text": "Lean the registration leftward on purpose — start sounding like a populist who soaks the rich.",
+          "effects": {
+            "power": 3,
+            "reputation": 3,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": -8,
+            "outward": 5
+          },
+          "setFlags": [
+            "political_curious",
+            "independence_party",
+            "flirted_left"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.85,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You file the paper and start talking like a man of the people. The left-populist option is now live and loaded."
         }
       ]
     },
@@ -351,30 +2240,1618 @@
       "year": 2000,
       "title": "President Trump? (The Dress Rehearsal)",
       "scene": "2000. You flirt with a Reform Party run for president, floating Oprah as a running mate and giving interviews about a campaign that may or may not be real. Is it a serious bid, a branding stunt, or a test of an audience you do not yet know you are about to win for good?",
-      "researchNote": "In 1999-2000 Trump publicly explored a Reform Party presidential run, even suggesting Oprah Winfrey as a potential running mate before declining to run.",
+      "researchNote": "In 1999-2000 Trump publicly explored a Reform Party presidential run, even suggesting Oprah Winfrey as a potential running mate, before declining to run amid party infighting.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "celebrity", "tv_flirtation"],
+      "tags": [
+        "politics",
+        "celebrity",
+        "tv_flirtation"
+      ],
       "portrait": "celebrity",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 12,
       "repeatable": false,
       "choices": [
         {
           "id": "test_the_waters",
           "text": "Run a 'campaign' purely to measure how big a crowd the name can draw.",
-          "effects": { "reputation": 6, "power": 5, "heat": 5 },
-          "setFlags": ["political_curious", "media_animal"],
-          "ripples": [{ "to": "ev_art_of_comeback", "weight": 0.4, "polarity": 1 }],
+          "effects": {
+            "reputation": 6,
+            "power": 5,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 8
+          },
+          "setFlags": [
+            "political_curious",
+            "media_animal"
+          ],
+          "ripples": [
+            {
+              "to": "ev_become_democrat",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
           "outcome": "You bow out before any votes, but you have seen the size of the crowd — and you will never forget it."
+        },
+        {
+          "id": "run_left_populist",
+          "text": "Float a surprisingly liberal platform — universal health care, a wealth tax on the rich.",
+          "effects": {
+            "reputation": 4,
+            "power": 4,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": -9,
+            "outward": 6
+          },
+          "setFlags": [
+            "political_curious",
+            "flirted_left"
+          ],
+          "ripples": [
+            {
+              "to": "ev_become_democrat",
+              "weight": 0.85,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The pundits blink. For a moment you are the billionaire who sounds like a populist of the left."
+        },
+        {
+          "id": "run_left_1990s",
+          "text": "Go for real: mount a serious run as a left-populist billionaire — soak-the-rich tax, health care for all, a champion of the forgotten worker.",
+          "effects": {
+            "money": -60,
+            "reputation": 7,
+            "power": 7,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": -13,
+            "grandiosity": 7,
+            "outward": 9
+          },
+          "setFlags": [
+            "political_curious",
+            "flirted_left",
+            "early_political_run"
+          ],
+          "ripples": [
+            {
+              "to": "ev_left_populist_run",
+              "weight": 0.95,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Not a stunt this time. You stand on a stage and tell the working class that a rich man will finally fight for them — and the room roars."
         },
         {
           "id": "stay_business",
           "text": "Decide politics is a distraction and refocus on the empire and the brand.",
-          "effects": { "money": 50, "power": 3, "reputation": 2, "heat": -2 },
-          "setFlags": ["political_curious"],
+          "effects": {
+            "money": 50,
+            "power": 3,
+            "reputation": 2,
+            "heat": -2
+          },
+          "personality": {
+            "inward": 4
+          },
+          "setFlags": [
+            "political_curious"
+          ],
           "ripples": [],
           "outcome": "Not yet. But the idea has been planted, and ideas like this one do not die — they wait."
+        }
+      ]
+    },
+    {
+      "id": "ev_left_populist_run",
+      "era": "brand",
+      "year": 2000,
+      "title": "The Billionaire Who Ran Left",
+      "scene": "2000. You are no longer flirting. You are running — a celebrity billionaire campaigning to the left of both parties, promising a wealth tax on people exactly like you, universal health care, and an open hand to the working class that old money sneers at. The Reform Party machinery is chaos, the establishment treats you as a punchline, and yet the crowds keep growing. Old money calls you a vulgar pretender; the forgotten worker calls you their guy. Now the path forks: flame out as a curiosity, or turn this surge into lasting leverage.",
+      "researchNote": "Trump's actual 1999-2000 Reform Party exploration floated notably liberal positions — a one-time wealth tax to erase the national debt, universal health care, and pro-choice and pro-LGBT stances — a documented 'left' divergence before his later rightward turn; the run collapsed amid Reform Party infighting.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "celebrity",
+        "populism",
+        "legitimacy"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "flirted_left"
+        ],
+        "notFlags": [
+          "registered_democrat"
+        ],
+        "meters": {},
+        "personality": {
+          "ideology": "<= -2"
+        }
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "flameout_curiosity",
+          "text": "Burn bright and burn out — let the infighting sink the run and exit as a noble loser who told the truth about the rich.",
+          "effects": {
+            "money": -40,
+            "reputation": 5,
+            "power": -3,
+            "heat": -5,
+            "health": 3
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": -5,
+            "inward": 7
+          },
+          "setFlags": [
+            "early_political_run",
+            "flirted_left",
+            "left_flameout",
+            "walked_away"
+          ],
+          "clearFlags": [
+            "strongman_seed"
+          ],
+          "ripples": [
+            {
+              "to": "ev_become_democrat",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The campaign collapses, but the speeches outlive it. In this life you stay the man who ran to the left and meant it — and you never turn back."
+        },
+        {
+          "id": "kingmaker_path",
+          "text": "Lose the nomination but bank the movement — become the left-populist kingmaker every Democrat now has to court.",
+          "effects": {
+            "money": 30,
+            "reputation": 8,
+            "power": 9,
+            "heat": 6,
+            "loyalty": 5
+          },
+          "personality": {
+            "ideology": -11,
+            "grandiosity": 6,
+            "outward": 8
+          },
+          "setFlags": [
+            "early_political_run",
+            "flirted_left",
+            "left_kingmaker"
+          ],
+          "ripples": [
+            {
+              "to": "ev_become_democrat",
+              "weight": 0.95,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hand your crowd to the party and collect the IOUs. A billionaire who delivered the working class — and now they all owe you.",
+          "jumpTo": {
+            "era": "ascent",
+            "yearAdvance": 0
+          }
+        },
+        {
+          "id": "betray_the_base",
+          "text": "Quietly cash the celebrity in: drop the populism, take the donor money, and let the working-class hopes you raised curdle.",
+          "effects": {
+            "money": 90,
+            "reputation": -6,
+            "power": 4,
+            "heat": 7,
+            "loyalty": -8
+          },
+          "personality": {
+            "ideology": 9,
+            "grandiosity": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "early_political_run",
+            "sold_out_base",
+            "strongman_seed"
+          ],
+          "clearFlags": [
+            "flirted_left"
+          ],
+          "ripples": [
+            {
+              "to": "ev_nine_eleven",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The forgotten worker is forgotten again. You pocket the fame and the cash — and a harder, hungrier version of you starts taking notes for next time."
+        }
+      ]
+    },
+    {
+      "id": "ev_dotcom_crash",
+      "era": "brand",
+      "year": 2000,
+      "title": "The Bubble Bursts",
+      "scene": "March 2000. The dot-com bubble pops with a sound like a thousand fortunes evaporating. The boy billionaires of last year are jobless this year, and the NASDAQ is in free fall. You watch the carnage from the safety of your towers — assets you can touch, debt you mostly offloaded — and feel the cold satisfaction of having been called old-fashioned.",
+      "researchNote": "The dot-com bubble burst in March 2000; the NASDAQ lost most of its value over the following two years, wiping out trillions in paper wealth.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "economy",
+        "tech"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "told_you_so",
+          "text": "Crow that real assets beat fake internet money — and you knew it all along.",
+          "effects": {
+            "reputation": 5,
+            "power": 4,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "vindicated"
+          ],
+          "ripples": [
+            {
+              "to": "ev_become_democrat",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Smug and effective. The press grants you a guru's halo for sitting out the mania."
+        },
+        {
+          "id": "buy_the_wreckage",
+          "text": "Hunt for distressed real estate as the crash drains the easy money.",
+          "effects": {
+            "money": 70,
+            "power": 3,
+            "reputation": 2,
+            "heat": 2
+          },
+          "personality": {
+            "grandiosity": 4,
+            "inward": 3
+          },
+          "setFlags": [],
+          "ripples": [],
+          "outcome": "Other people's panic is your bargain bin. You scoop up value while the screens bleed red."
+        },
+        {
+          "id": "dotcom_loss",
+          "text": "Eat the loss on your own internet dabble and quietly bury the venture.",
+          "effects": {
+            "money": -50,
+            "reputation": -3,
+            "heat": -2
+          },
+          "personality": {
+            "inward": 4,
+            "grandiosity": -3
+          },
+          "setFlags": [],
+          "ripples": [],
+          "outcome": "A small public scar, fast to heal. You go back to letters on a sign and never speak of pixels again."
+        }
+      ]
+    },
+    {
+      "id": "ev_clinton_impeachment",
+      "era": "brand",
+      "year": 1998,
+      "title": "The Spectacle in Washington",
+      "scene": "1998. The Clinton impeachment swallows the country whole — a presidency reduced to scandal, denial, and round-the-clock cable coverage. You watch a leader survive the unsurvivable through sheer brazen endurance, and you absorb a lesson worth more than any building: in modern America, shamelessness and saturation coverage can be a kind of armor.",
+      "researchNote": "President Bill Clinton was impeached by the House in December 1998 over the Monica Lewinsky affair and acquitted by the Senate in 1999; the saga dominated 24-hour cable news.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics",
+        "media"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "learn_the_armor",
+          "text": "Study how relentless denial plus media saturation can beat any scandal.",
+          "effects": {
+            "power": 5,
+            "reputation": 2,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 7
+          },
+          "setFlags": [
+            "scandal_proof_lesson"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You take notes. The man should be finished, and he is winning. That is information you will use."
+        },
+        {
+          "id": "tabloid_kinship",
+          "text": "Recognize a fellow creature of the tabloids — and a little of yourself.",
+          "effects": {
+            "reputation": 1,
+            "heat": 2
+          },
+          "personality": {
+            "outward": 4,
+            "ideology": -3
+          },
+          "setFlags": [],
+          "ripples": [
+            {
+              "to": "ev_become_democrat",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Two New York creatures of fame, surviving on attention. You feel an odd, quiet sympathy."
+        },
+        {
+          "id": "defend_clinton",
+          "text": "Publicly defend Clinton, befriend the embattled first family, and bank the goodwill of the left.",
+          "effects": {
+            "money": 20,
+            "reputation": 3,
+            "power": 4,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": -7,
+            "outward": 6
+          },
+          "setFlags": [
+            "clinton_ally",
+            "flirted_left"
+          ],
+          "ripples": [
+            {
+              "to": "ev_become_democrat",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You stand by a Democrat in his worst hour and earn a marker you can cash later. The party starts seeing you as one of theirs."
+        }
+      ]
+    },
+    {
+      "id": "ev_become_democrat",
+      "era": "brand",
+      "year": 2001,
+      "title": "Switching Teams",
+      "scene": "2001. You change your party registration to Democrat. You praise the Clintons, you back liberal causes, you sound, for these years, like a man of the center-left. It barely registers as news — but it is a seed planted deep, the divergence point where one version of you keeps walking left and never turns back.",
+      "researchNote": "In August 2001 Trump registered as a Democrat in New York; he remained a registered Democrat until 2009, donating to and praising Democratic figures including the Clintons during the 2000s.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "celebrity"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_the_left",
+          "text": "Genuinely embrace the Democratic cause — and let the conversion run deep.",
+          "effects": {
+            "reputation": 5,
+            "power": 3,
+            "heat": 2
+          },
+          "personality": {
+            "ideology": -14,
+            "outward": 4
+          },
+          "setFlags": [
+            "registered_democrat",
+            "flirted_left"
+          ],
+          "ripples": [],
+          "outcome": "The seed of the other path takes root. In this life, you might just stay a liberal for good."
+        },
+        {
+          "id": "tactical_switch",
+          "text": "Switch for access and donor goodwill — keep your real beliefs to yourself.",
+          "effects": {
+            "money": 30,
+            "power": 5,
+            "reputation": 2,
+            "heat": 1
+          },
+          "personality": {
+            "ideology": -7,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "registered_democrat",
+            "flirted_left"
+          ],
+          "ripples": [],
+          "outcome": "A businessman's hedge. You buy goodwill on both sides and owe loyalty to neither."
+        },
+        {
+          "id": "register_but_doubt",
+          "text": "Register, but privately doubt any of it fits the man you really are.",
+          "effects": {
+            "reputation": 1,
+            "power": 2,
+            "heat": -1
+          },
+          "personality": {
+            "ideology": -5,
+            "inward": 5
+          },
+          "setFlags": [
+            "registered_democrat",
+            "flirted_left"
+          ],
+          "ripples": [],
+          "outcome": "The card says Democrat. Something underneath does not, and it waits its turn."
+        }
+      ]
+    },
+    {
+      "id": "ev_nine_eleven",
+      "era": "brand",
+      "year": 2001,
+      "title": "The Towers Fall",
+      "scene": "September 11, 2001. From your window you watch your city's skyline tear open in fire and ash. The towers come down, thousands die, and the New York you built your name upon is changed forever. In the dust and the silence afterward, you face the rawest question of your public life: what kind of man are you when the cameras catch you near a wound this deep?",
+      "researchNote": "On September 11, 2001, terrorists destroyed the World Trade Center towers, killing nearly 3,000 people; the attack devastated Lower Manhattan and reshaped American politics and security.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "new_york",
+        "terror"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "exploit_the_moment",
+          "text": "Tell reporters your building is now the tallest downtown — and angle for relief money.",
+          "effects": {
+            "money": 40,
+            "power": 3,
+            "reputation": -9,
+            "heat": 9,
+            "loyalty": -6
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 6
+          },
+          "setFlags": [
+            "exploited_tragedy"
+          ],
+          "ripples": [],
+          "outcome": "A grotesque instinct, caught on tape. The city remembers who reached for advantage amid the ash."
+        },
+        {
+          "id": "rise_to_grief",
+          "text": "Set the ego aside, mourn with your city, and quietly help where you can.",
+          "effects": {
+            "reputation": 8,
+            "power": 2,
+            "heat": -4,
+            "loyalty": 6,
+            "health": -3
+          },
+          "personality": {
+            "ideology": -6,
+            "grandiosity": -9,
+            "inward": 8
+          },
+          "setFlags": [
+            "stood_with_city"
+          ],
+          "ripples": [],
+          "outcome": "For once the moment is bigger than you, and you let it be. New Yorkers see a man, not a brand."
+        },
+        {
+          "id": "patriotic_strongman",
+          "text": "Channel the rage into hard talk about strength, vengeance, and the enemy.",
+          "effects": {
+            "reputation": 4,
+            "power": 6,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 8,
+            "outward": 7,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "security_hawk",
+            "strongman_seed"
+          ],
+          "ripples": [],
+          "outcome": "The fear in the air finds a voice in yours. A harder, angrier brand of you is born in the smoke."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_at_century_turn",
+      "era": "brand",
+      "year": 2002,
+      "title": "What the Name Is Worth Now",
+      "scene": "2002. The dust of the bust and the dust of the towers have both settled, and you take stock. The buildings come and go, the marriages come and go, but the name endures — bigger, glossier, and more valuable than any single asset you ever owned. The next decade beckons, and you sense the brand is ready for a stage far larger than real estate.",
+      "researchNote": "By the early 2000s the Trump name had become a licensable luxury brand worth far more than his physical holdings; within a few years he would parlay it into reality television with The Apprentice.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "branding",
+        "celebrity",
+        "comeback"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "brand_machine"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "chase_bigger_stage",
+          "text": "Decide the name has outgrown real estate — it needs television, politics, the world.",
+          "effects": {
+            "money": 60,
+            "power": 6,
+            "reputation": 5,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 7
+          },
+          "setFlags": [
+            "bigger_stage"
+          ],
+          "ripples": [],
+          "outcome": "Bricks were never the point. The name is a rocket, and you are looking for the launchpad."
+        },
+        {
+          "id": "consolidate_and_rest",
+          "text": "Consolidate the brand empire and finally enjoy what you have built.",
+          "effects": {
+            "money": 80,
+            "power": 2,
+            "reputation": 4,
+            "heat": -4,
+            "health": 6
+          },
+          "personality": {
+            "grandiosity": -4,
+            "inward": 6
+          },
+          "setFlags": [
+            "recovered"
+          ],
+          "ripples": [],
+          "outcome": "Steady, secure, satisfied. A version of you could stop right here, rich and intact, and call it a life."
+        },
+        {
+          "id": "exit_at_the_top",
+          "text": "Cash out the brand at its peak and walk into a private, quieter life.",
+          "effects": {
+            "money": 120,
+            "power": -4,
+            "reputation": 2,
+            "heat": -8,
+            "health": 7
+          },
+          "personality": {
+            "grandiosity": -8,
+            "inward": 9
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "ripples": [],
+          "outcome": "The cleanest exit there is: leave while the legend is golden. The stage goes dark, and you are free."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_newspaper_ads",
+      "era": "brand",
+      "year": 1987,
+      "title": "Ads in the Papers",
+      "scene": "September 1987. You spend nearly $100,000 to run full-page ads in the New York Times, the Washington Post, and the Boston Globe — a blunt manifesto: Japan and Saudi Arabia and West Germany are getting a free ride on American soldiers while the trade deficit bleeds the country dry. America is being ripped off, and you have put your name on the complaint in the largest fonts money can buy. The phones light up. New Hampshire Republicans send you letters asking you to run. You never expected this.",
+      "researchNote": "In September 1987 Trump paid for full-page ads in the NYT, WaPo, and Boston Globe criticising US allies for relying on American military protection while running trade surpluses against the US; the ads generated enormous coverage and he subsequently gave a speech in Portsmouth, NH that drew an enthusiastic crowd and prompted a wave of letters urging him to run.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "trade",
+        "celebrity",
+        "protectionism"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [
+          "ran_in_1988",
+          "early_presidency"
+        ],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_ride_the_wave",
+          "text": "Fly to New Hampshire and tell the crowd what the politicians won't — America is being taken for a ride and you will stop it.",
+          "effects": {
+            "reputation": 8,
+            "power": 5,
+            "heat": 7
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": 7,
+            "outward": 8
+          },
+          "setFlags": [
+            "political_curious",
+            "protectionist_ads",
+            "nh_crowd"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_1988_flirt",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The crowd is bigger than you expected. They want a billionaire who sounds angry on their behalf, and that role fits you like a suit."
+        },
+        {
+          "id": "pol_ads_only_brand",
+          "text": "Let the ads speak for themselves — a PR move, not a political one. File the crowd response and move on.",
+          "effects": {
+            "reputation": 4,
+            "power": 2,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 4,
+            "inward": 3
+          },
+          "setFlags": [
+            "political_curious",
+            "protectionist_ads"
+          ],
+          "ripples": [],
+          "outcome": "You have bought your way onto the national stage for a weekend. The NH letters go in a drawer — for now."
+        },
+        {
+          "id": "pol_ads_and_run_platform",
+          "text": "Treat this as the opening shot: draft a real platform — a wealth tax, universal health care, protectionist tariffs, zero nuclear proliferation — and start planning.",
+          "effects": {
+            "reputation": 7,
+            "power": 6,
+            "heat": 9,
+            "money": -20
+          },
+          "personality": {
+            "ideology": -9,
+            "grandiosity": 8,
+            "outward": 9
+          },
+          "setFlags": [
+            "political_curious",
+            "protectionist_ads",
+            "nh_crowd",
+            "early_platform_drafted"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_1988_flirt",
+              "weight": 0.95,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You have a platform before you have a party. Anti-proliferation, universal healthcare, tax the rich — and America First on trade. Something new is being born."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_1988_flirt",
+      "era": "brand",
+      "year": 1988,
+      "title": "The '88 Question",
+      "scene": "1988. George H.W. Bush is the front-runner and the Republican Party machine is humming. But you have name recognition, a crowd in New Hampshire, and an itch you cannot scratch with a casino deal. Oprah Winfrey has floated your name on television as a serious candidate. The question is whether a developer from Queens could actually beat the establishment — or whether you should wait.",
+      "researchNote": "By early 1988 Trump was openly discussed as a potential presidential candidate; he had received thousands of letters after the NH speech and was asked about running by multiple journalists, but ultimately decided against it, citing the need to focus on business.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "celebrity"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "political_curious"
+        ],
+        "notFlags": [
+          "ran_in_1988",
+          "early_presidency"
+        ],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_decline_88",
+          "text": "Pass on '88 — the business needs you and the moment is not quite right. Wait for Reagan's shadow to clear.",
+          "effects": {
+            "money": 40,
+            "power": 2,
+            "reputation": 2
+          },
+          "personality": {
+            "inward": 4
+          },
+          "setFlags": [
+            "political_curious",
+            "passed_on_1988"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_1992_primary_entry",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A conscious delay. The crowd goes home. The itch remains, and you make a private promise to yourself."
+        },
+        {
+          "id": "pol_endorse_and_advise",
+          "text": "Back Bush publicly and position yourself as the blunt adviser Washington would never take seriously — until they have to.",
+          "effects": {
+            "power": 5,
+            "reputation": 3,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": -2,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "political_curious",
+            "passed_on_1988",
+            "bush_advisor"
+          ],
+          "ripples": [],
+          "outcome": "Bush wins, inherits the Cold War endgame, and occasionally returns your calls. You accumulate chits."
+        },
+        {
+          "id": "pol_run_88_liberal",
+          "text": "Run in 1988 — as a left-of-center independent: protectionist trade, a wealth tax, health care for every American, and zero new nukes.",
+          "effects": {
+            "money": -80,
+            "reputation": 10,
+            "power": 8,
+            "heat": 12,
+            "health": -3
+          },
+          "personality": {
+            "ideology": -12,
+            "grandiosity": 9,
+            "outward": 10
+          },
+          "setFlags": [
+            "political_curious",
+            "ran_in_1988",
+            "early_platform_drafted",
+            "protectionist_run"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_early_campaign_surge",
+              "weight": 0.95,
+              "polarity": 1
+            }
+          ],
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {
+              "ideology": "<=-5"
+            }
+          },
+          "outcome": "You announce in the winter of '88. The campaign is impossible, the coverage is enormous, and the establishment has no idea what to do with you."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_1992_primary_entry",
+      "era": "brand",
+      "year": 1991,
+      "title": "Into the '92 Race",
+      "scene": "Late 1991. The Cold War just ended in a cascade of failed coups and dissolved republics. George H.W. Bush's approval rating is 89%, then the recession bites and it collapses. The gap opens. You watch Pat Buchanan and Ross Perot map the edges of the populist lane and think: that is your lane, and you built it first. The question is whether to run as a Democrat, a Reform candidate, or something brand new.",
+      "researchNote": "By late 1991 Trump was publicly dissatisfied with Bush's economic management, quoted as frustrated that the White House never followed up on his foreign-policy views on Japan and Germany; historically Perot and Buchanan staked out the same protectionist-populist terrain Trump had occupied in the 1987 ads.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "populism",
+        "cold_war"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "political_curious"
+        ],
+        "notFlags": [
+          "ran_in_1988",
+          "early_presidency"
+        ],
+        "meters": {},
+        "personality": {
+          "ideology": "<=-5"
+        }
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_run_dem_92",
+          "text": "Enter the Democratic primary — a left-populist billionaire who scares both the donor class and the establishment.",
+          "effects": {
+            "money": -100,
+            "reputation": 12,
+            "power": 9,
+            "heat": 14
+          },
+          "personality": {
+            "ideology": -13,
+            "grandiosity": 10,
+            "outward": 10
+          },
+          "setFlags": [
+            "ran_in_1992",
+            "ran_dem_primary",
+            "early_platform_drafted"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_early_campaign_surge",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The Democratic field blinks. A billionaire with a wealth tax and a trade war platform is suddenly their problem."
+        },
+        {
+          "id": "pol_run_independent_92",
+          "text": "Run as an independent — borrow Perot's playbook but run it bigger, louder, and with a gold-plated bus.",
+          "effects": {
+            "money": -80,
+            "reputation": 11,
+            "power": 8,
+            "heat": 13
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": 9,
+            "outward": 9
+          },
+          "setFlags": [
+            "ran_in_1992",
+            "ran_independent",
+            "early_platform_drafted"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_early_campaign_surge",
+              "weight": 0.85,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You are not Perot. Perot is a warm-up act. You have better hotels, better ratings, and a name the whole country already knows."
+        },
+        {
+          "id": "pol_stay_out_92",
+          "text": "Decide the timing is off — back Perot instead and wait for a better year.",
+          "effects": {
+            "power": 4,
+            "reputation": 3
+          },
+          "personality": {
+            "ideology": -3,
+            "inward": 5
+          },
+          "setFlags": [
+            "political_curious",
+            "passed_on_1992",
+            "perot_aligned"
+          ],
+          "ripples": [],
+          "outcome": "You hand Perot your endorsement. He doesn't win. The lesson stays with you."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_early_campaign_surge",
+      "era": "brand",
+      "year": 1992,
+      "title": "The Crowd Gets Loud",
+      "scene": "1992. Your rallies fill arenas. The message is simple and strange for a billionaire: the system is rigged, the elites are selling American workers to Japan and Germany, the nukes are out of control, and only someone who already beat the system knows how to fix it. Clinton is charming. Bush is tired. You are something neither of them is: genuinely angry, and the crowds can feel it.",
+      "researchNote": "The 1992 populist-outsider lane was historically contested between Perot and Buchanan; a Trump candidacy of this era would have combined Perot's economic nationalism with a more left-leaning social platform consistent with Trump's documented views in this period — pro-choice, pro-universal healthcare, soft on entitlements.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "populism",
+        "legitimacy"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "ran_in_1992"
+        ],
+        "notFlags": [
+          "early_presidency",
+          "early_flameout"
+        ],
+        "meters": {},
+        "personality": {
+          "ideology": "<=-8"
+        }
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_surge_full_gas",
+          "text": "Go maximum. Charter the biggest plane, hold the biggest rallies, outspend Perot, and dare the media to ignore you.",
+          "effects": {
+            "money": -120,
+            "reputation": 16,
+            "power": 12,
+            "heat": 18,
+            "health": -5
+          },
+          "personality": {
+            "grandiosity": 12,
+            "outward": 12
+          },
+          "setFlags": [
+            "ran_in_1992",
+            "campaign_all_in"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_wins_1992",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The numbers move. The establishment wakes up. For the first time, someone in the White House says your name with genuine concern."
+        },
+        {
+          "id": "pol_surge_message_focus",
+          "text": "Keep the message tight — trade, nukes, health care — and let the contrast with the others do the work.",
+          "effects": {
+            "money": -70,
+            "reputation": 13,
+            "power": 10,
+            "heat": 12
+          },
+          "personality": {
+            "ideology": -6,
+            "grandiosity": 7,
+            "outward": 8
+          },
+          "setFlags": [
+            "ran_in_1992",
+            "campaign_disciplined"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_wins_1992",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You are the most disciplined you have ever been. The polls tick upward. The other candidates start borrowing your lines."
+        },
+        {
+          "id": "pol_surge_falter",
+          "text": "The pressure of a real campaign breaks something — the finances, the focus, the marriage. You pull back.",
+          "effects": {
+            "money": -60,
+            "reputation": 4,
+            "power": -4,
+            "heat": -6,
+            "health": -4,
+            "loyalty": -5
+          },
+          "personality": {
+            "ideology": -4,
+            "grandiosity": -6,
+            "inward": 8
+          },
+          "setFlags": [
+            "ran_in_1992",
+            "early_flameout",
+            "walked_away"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_early_flameout",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You withdraw. The campaign that could have been becomes instead the campaign that almost was — a permanent question mark."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_wins_1992",
+      "era": "brand",
+      "year": 1992,
+      "title": "Election Night",
+      "scene": "November 3, 1992. The map turns against the machines. Three-way race; nobody hits 270; the House decides. The establishment horsetraded for weeks. And then, somehow — you. The first president from New York City since FDR. The first president who owes nobody. The television in the ballroom shows your name next to PRESIDENT-ELECT and the crowd erupts. In January, you will inherit an economy in recession, a unipolar world without a Cold War enemy, and a Soviet Union that dissolved itself into fifteen new nations. No one knows what to do with a world that suddenly has no shape. Apparently that is your job now.",
+      "researchNote": "Historical extrapolation: in a 1992 three-way race where Trump split the Perot-lane vote while holding more organisation, a House-decided outcome is a documented constitutional mechanism (12th Amendment). Trump's documented 1991-92 foreign policy views — skeptical of NATO freeloading, anti-nuclear-proliferation, opposed to global trade imbalances — would have put him in a distinctive position navigating the post-Cold War unipolar moment.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "populism",
+        "milestone"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "campaign_all_in"
+        ],
+        "notFlags": [
+          "early_flameout",
+          "early_presidency"
+        ],
+        "meters": {},
+        "personality": {
+          "ideology": "<=-8"
+        }
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_win_accept_mandate",
+          "text": "Accept the mandate fully — a working-class president who happens to own skyscrapers. Govern left of Clinton, right of Sanders, and entirely as yourself.",
+          "effects": {
+            "power": 30,
+            "reputation": 20,
+            "heat": 20,
+            "money": -200,
+            "loyalty": 15
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": 12,
+            "outward": 12
+          },
+          "setFlags": [
+            "early_presidency",
+            "navigated_ussr_collapse",
+            "ran_in_1992",
+            "stayed_liberal_run"
+          ],
+          "ripples": [],
+          "outcome": "The oath is taken. History forks. This version of you governs a unipolar world as a left-populist billionaire — and the next decade will be unlike anything the scenario planners imagined.",
+          "jumpTo": {
+            "era": "primetime",
+            "yearAdvance": 12
+          }
+        },
+        {
+          "id": "pol_win_pivot_center",
+          "text": "Win and immediately triangulate: staff your cabinet with Goldman veterans, calm the markets, and quietly shelve the wealth tax.",
+          "effects": {
+            "power": 25,
+            "reputation": 10,
+            "heat": 15,
+            "money": 80,
+            "loyalty": -10
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 10,
+            "outward": 8,
+            "inward": 5
+          },
+          "setFlags": [
+            "early_presidency",
+            "navigated_ussr_collapse",
+            "ran_in_1992",
+            "sold_out_base"
+          ],
+          "ripples": [],
+          "outcome": "The base feels betrayed. The market breathes. You are now exactly the creature you ran against — and the clock is ticking.",
+          "jumpTo": {
+            "era": "primetime",
+            "yearAdvance": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_ussr_moment",
+      "era": "brand",
+      "year": 1991,
+      "title": "The Wall Is Down. Now What?",
+      "scene": "Late 1991. Gorbachev resigns. The Soviet flag comes down over the Kremlin on Christmas Day. Fifteen republics, thousands of nuclear warheads, and an entire military-industrial complex are now ungoverned. The establishment's answer is quiet: integrate them slowly, expand NATO eastward, let the free market do the work. You hate all three answers. You have said for years that nuclear proliferation is the single most dangerous thing on earth. The window to deal with the ex-Soviet arsenal is open right now — and closing.",
+      "researchNote": "Trump stated in a 1990 Playboy interview that nuclear proliferation was the single most important issue of the era and that he believed he could make a deal directly with Soviet leadership. After the USSR's December 1991 dissolution the Nunn-Lugar Cooperative Threat Reduction Act (1992) addressed loose nukes but the question of NATO expansion was handled by Bush and Clinton with consequences that endured decades.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "cold_war",
+        "politics",
+        "nuclear",
+        "diplomacy"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "early_presidency"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 15,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_deal_with_yeltsin",
+          "text": "Fly to Moscow, meet Yeltsin personally, and broker the largest nuke-reduction deal in history — your name on it, not the State Department's.",
+          "effects": {
+            "power": 20,
+            "reputation": 25,
+            "heat": 15,
+            "loyalty": 10
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": 15,
+            "outward": 15
+          },
+          "setFlags": [
+            "navigated_ussr_collapse",
+            "nunn_lugar_plus",
+            "yeltsin_deal",
+            "early_presidency"
+          ],
+          "ripples": [],
+          "outcome": "The treaty lands on New Year's Day. You have done what Kissinger said could not be done in under a year. The establishment's heads are still spinning."
+        },
+        {
+          "id": "pol_no_nato_expansion",
+          "text": "Hold NATO's line exactly where it is. No expansion, no triumphalism — give Russia off-ramps or watch them build a wall of resentment that lasts thirty years.",
+          "effects": {
+            "power": 15,
+            "reputation": 18,
+            "heat": 12,
+            "loyalty": 8
+          },
+          "personality": {
+            "ideology": -8,
+            "grandiosity": 8,
+            "outward": 10
+          },
+          "setFlags": [
+            "navigated_ussr_collapse",
+            "no_nato_expansion",
+            "early_presidency"
+          ],
+          "ripples": [],
+          "outcome": "You override the NATO hawks. History, in this branch, does not produce a Ukraine war. What it produces instead will take decades to measure."
+        },
+        {
+          "id": "pol_hawkish_unipolar",
+          "text": "Declare victory loudly. Expand NATO, make deals with every ex-Soviet republic, and turn American hegemony into a brand.",
+          "effects": {
+            "power": 18,
+            "reputation": 8,
+            "heat": 20,
+            "loyalty": 5
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 14,
+            "outward": 12
+          },
+          "setFlags": [
+            "navigated_ussr_collapse",
+            "hawkish_unipolar",
+            "early_presidency"
+          ],
+          "ripples": [],
+          "outcome": "The flags go up and the deals flow. You are the champion of the New American Century — a phrase being coined in think-tanks that will follow you everywhere."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_early_flameout",
+      "era": "brand",
+      "year": 1992,
+      "title": "The Campaign That Almost Was",
+      "scene": "1992. You are out. The withdrawal statement is brief and businesslike. The reporters ask what happened; you say the timing was wrong and that you will be back. In the back of the Town Car you are certain of one thing: you learned something these months that no focus group can teach — you learned the size of the crowd that was yours all along. It is still out there. It will wait.",
+      "researchNote": "Historical pattern: Perot withdrew in July 1992 citing threats to his family before re-entering in October; a Trump withdrawal in the same cycle would mirror the pattern of candidates discovering and then retreating from populist energy, with the crowd remaining available for a future run.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "populism",
+        "setback"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "early_flameout"
+        ],
+        "notFlags": [
+          "early_presidency"
+        ],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_flameout_bank_lessons",
+          "text": "Write down what you learned, who the crowd was, and what they needed. File it. This is research for the next campaign.",
+          "effects": {
+            "power": 5,
+            "reputation": 3,
+            "heat": -3
+          },
+          "personality": {
+            "ideology": -5,
+            "inward": 8
+          },
+          "setFlags": [
+            "early_flameout",
+            "crowd_mapped",
+            "political_curious"
+          ],
+          "ripples": [
+            {
+              "to": "ev_independence_party_reg",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The binder is thick. The faces in the crowd are in your memory. Seven years from now, you will open it again."
+        },
+        {
+          "id": "pol_flameout_endorsement",
+          "text": "Endorse the candidate closest to your positions and spend the rest of the cycle as a kingmaker — extracting promises in exchange for your crowd.",
+          "effects": {
+            "power": 7,
+            "reputation": 5,
+            "heat": 2,
+            "loyalty": 4
+          },
+          "personality": {
+            "ideology": -3,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "early_flameout",
+            "kingmaker_path",
+            "political_curious"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_kingmaker_broker",
+              "weight": 0.85,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You are not the candidate. You are the prize. They all come to Trump Tower with their hats in their hands."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_kingmaker_broker",
+      "era": "brand",
+      "year": 1993,
+      "title": "The Kingmaker Calls In His Chips",
+      "scene": "1993. The campaign is eighteen months behind you but you are still on the phone with the victors. Your crowd was real — a million people who turned up to rallies in eleven states — and the man who won the White House knows it. He did not earn those votes: you lent them. The time has come to invoice that loan. A seat at the table, a trade deal veto, access to the Oval whenever the Japan negotiations get complicated. You are the most powerful private citizen in America and you did not have to be president to get there.",
+      "researchNote": "Post-1992, Perot's Reform movement exercised genuine policy leverage by maintaining an organised voter base that both parties courted; a Trump version of this with stronger name recognition and New York media access would have amplified that leverage considerably into trade and foreign policy debates of the early Clinton years.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "populism",
+        "legitimacy"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "kingmaker_path"
+        ],
+        "notFlags": [
+          "early_presidency"
+        ],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_kingmaker_trade",
+          "text": "Demand a hard line on Japan and Germany in the next GATT round — or your crowd sits out the midterms.",
+          "effects": {
+            "power": 15,
+            "reputation": 12,
+            "heat": 10,
+            "loyalty": 8
+          },
+          "personality": {
+            "ideology": -6,
+            "grandiosity": 9,
+            "outward": 8
+          },
+          "setFlags": [
+            "kingmaker_path",
+            "trade_leverage",
+            "political_curious"
+          ],
+          "ripples": [],
+          "outcome": "The trade team blinks first. You extract a provision. It is not everything — but it is more than Perot ever got."
+        },
+        {
+          "id": "pol_kingmaker_2000_setup",
+          "text": "Play the long game: collect goodwill quietly, build towards your own 2000 run with every chip you just earned.",
+          "effects": {
+            "power": 12,
+            "reputation": 9,
+            "heat": 5,
+            "loyalty": 10
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": 7,
+            "inward": 6
+          },
+          "setFlags": [
+            "kingmaker_path",
+            "political_curious",
+            "planning_2000"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The chips go back in the pocket. Seven years of compounding interest, and then you cash them all at once."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_early_presidency_crisis",
+      "era": "brand",
+      "year": 1993,
+      "title": "The First Crisis",
+      "scene": "1993. The new administration is barely breathing before the World Trade Center takes a bomb in its basement — six dead, a thousand injured, and the building you admire above all others shakes on its foundation. Your intelligence briefings say al-Qaeda. Your gut says this is a preview. You can respond with law enforcement and a quiet manhunt, or you can treat this as an act of war and redraw the whole security posture of the country. The decision is yours, Mr. President.",
+      "researchNote": "The February 26, 1993 World Trade Center bombing killed six people and injured over 1,000; the Clinton administration treated it as a criminal matter, leading to convictions in 1994. In an alternate-Trump presidency the question of whether to escalate to a military or intelligence response would have shaped the entire subsequent arc of counter-terrorism policy.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "terrorism",
+        "cold_war",
+        "milestone"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "early_presidency"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_crisis_law_enforcement",
+          "text": "Treat it as a criminal case — let the FBI work, secure the convictions, and refuse to hand terrorists the gift of a presidential crisis.",
+          "effects": {
+            "power": 8,
+            "reputation": 12,
+            "heat": 8,
+            "loyalty": 6
+          },
+          "personality": {
+            "ideology": -6,
+            "inward": 6,
+            "outward": 5
+          },
+          "setFlags": [
+            "early_presidency",
+            "navigated_ussr_collapse",
+            "wtc93_law_enforcement"
+          ],
+          "ripples": [],
+          "outcome": "The trials run their course. The guilty go to prison. You resist the temptation to make this about you, and the country notices."
+        },
+        {
+          "id": "pol_crisis_war_posture",
+          "text": "Declassify the al-Qaeda briefings, name the threat publicly, and launch a covert war that starts in Sudan and ends God knows where.",
+          "effects": {
+            "power": 14,
+            "reputation": 6,
+            "heat": 18,
+            "loyalty": 3,
+            "health": -4
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 10,
+            "outward": 12
+          },
+          "setFlags": [
+            "early_presidency",
+            "navigated_ussr_collapse",
+            "wtc93_war_posture",
+            "hawkish_pivot"
+          ],
+          "ripples": [],
+          "outcome": "The war is quiet but it is a war. You have broken left populism's promise of restraint. Something hardens in you and does not soften again."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_legacy_fork",
+      "era": "brand",
+      "year": 1996,
+      "title": "One Term or Two?",
+      "scene": "1996. Four years in. Your approval rating has survived the WTC bombing and the first real shock of governing without a machine behind you. The Democrats want you gone; the establishment never accepted you; the movement that put you here is still loud but tired. You have navigated the fall of the Soviet Union, the trade wars with Japan, and a domestic recession that bent but did not break you. Now: do you run again — or cement your legacy while the legacy is still intact?",
+      "researchNote": "Historical extrapolation: a first-term populist presidency winning via three-way 1992 race and governing without a congressional majority would face structural challenges — the 1994 midterm pattern and 1996 re-elect would be the key inflection points for whether the early-presidency path extended or collapsed into a one-term footnote.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "populism",
+        "milestone"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "early_presidency",
+          "navigated_ussr_collapse"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_legacy_second_term",
+          "text": "Run for re-election. You came to change things and four years was not enough to finish the job.",
+          "effects": {
+            "power": 18,
+            "reputation": 14,
+            "heat": 16,
+            "money": -150,
+            "health": -6
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 10,
+            "ideology": -4
+          },
+          "setFlags": [
+            "early_presidency",
+            "navigated_ussr_collapse",
+            "stayed_liberal_run",
+            "two_term_president"
+          ],
+          "ripples": [],
+          "outcome": "You win — or you don't. Either way, this path has diverged so far from the original that the game is now something entirely new."
+        },
+        {
+          "id": "pol_legacy_one_term_exit",
+          "text": "Serve one term, endorse your successor from the movement, and exit as the man who broke the two-party machine and lived to tell it.",
+          "effects": {
+            "power": 10,
+            "reputation": 22,
+            "heat": -6,
+            "money": 100,
+            "health": 8
+          },
+          "personality": {
+            "ideology": -8,
+            "grandiosity": -5,
+            "inward": 10
+          },
+          "setFlags": [
+            "early_presidency",
+            "navigated_ussr_collapse",
+            "stayed_liberal_run",
+            "one_term_legend",
+            "walked_away"
+          ],
+          "ripples": [],
+          "outcome": "The farewell speech is the best thing you ever read aloud. In the taxi home from the White House you feel, for the first time in your life, genuinely complete."
         }
       ]
     }

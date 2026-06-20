@@ -22,21 +22,15 @@ async function choose(choice: Choice): Promise<void> {
 <article class="card" data-event={event.id}>
   <div class="badges">
     <span class="year">{event.year}</span>
-    {#if event.extrapolated}
-      <span class="badge extrapolated" title="Speculative future event">Extrapolated</span>
-    {/if}
-    {#if event.startrekInspired}
-      <span class="badge startrek" title="Inspired by Star Trek future history">Trek</span>
-    {/if}
+    <!-- No "Extrapolated" badge — stating it is obvious and breaks immersion;
+         the year already signals past vs future. -->
   </div>
 
   <h2>{event.title}</h2>
   <p class="scene">{event.scene}</p>
-
-  <details class="research">
-    <summary>Research note</summary>
-    <p>{event.researchNote}</p>
-  </details>
+  <!-- researchNote stays in the data as authoring provenance, but is NOT shown
+       as a separate panel — the factual grounding is woven into the scene prose
+       so the player never pivots between game-fiction and a footnote. -->
 
   <div class="choices">
     {#each event.choices as choice (choice.id)}
@@ -68,40 +62,15 @@ async function choose(choice: Choice): Promise<void> {
     color: var(--mmm-gold);
     font-family: var(--mmm-font-display);
   }
-  .badge {
-    font-size: 0.62rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.1rem 0.4rem;
-    border-radius: var(--mmm-radius);
-    font-weight: 700;
-  }
-  .extrapolated {
-    background: color-mix(in srgb, var(--mmm-extrapolated) 28%, transparent);
-    color: var(--mmm-extrapolated);
-  }
-  .startrek {
-    background: color-mix(in srgb, var(--mmm-startrek) 24%, transparent);
-    color: var(--mmm-startrek);
-  }
   h2 {
     margin: 0 0 0.4rem;
     font-family: var(--mmm-font-display);
     color: var(--mmm-text);
   }
   .scene {
-    margin: 0 0 0.7rem;
+    margin: 0 0 0.9rem;
     line-height: 1.5;
     color: var(--mmm-text);
-  }
-  .research {
-    margin-bottom: 0.8rem;
-    font-size: 0.85rem;
-    color: var(--mmm-text-dim);
-  }
-  .research summary {
-    cursor: pointer;
-    color: var(--mmm-gold);
   }
   .choices {
     display: flex;

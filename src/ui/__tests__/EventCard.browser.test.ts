@@ -15,7 +15,7 @@ const baseEvent: GameEvent = {
   startrekInspired: false,
   tags: [],
   portrait: "cadet",
-  requires: { flags: [], notFlags: [], meters: {} },
+  requires: { flags: [], notFlags: [], meters: {}, personality: {} },
   weight: 10,
   repeatable: false,
   choices: [
@@ -23,6 +23,7 @@ const baseEvent: GameEvent = {
       id: "excel",
       text: "Win every drill.",
       effects: { power: 5 },
+      personality: {},
       setFlags: [],
       clearFlags: [],
       ripples: [],
@@ -32,6 +33,7 @@ const baseEvent: GameEvent = {
       id: "rebel",
       text: "Rebel against the brass.",
       effects: { reputation: 4, heat: 3 },
+      personality: {},
       setFlags: [],
       clearFlags: [],
       ripples: [],
@@ -54,25 +56,15 @@ afterEach(() => {
 });
 
 describe("EventCard", () => {
-  it("renders title, year, scene, research note, and choices", () => {
+  it("renders title, year, scene, and choices (no research-note panel — woven in)", () => {
     component = mount(EventCard, { target: host, props: { event: baseEvent, onchoose: () => {} } });
     expect(host.textContent).toContain("New York Military Academy");
     expect(host.textContent).toContain("1959");
     expect(host.textContent).toContain("antics");
-    expect(host.textContent).toContain("Research note");
+    // Research note + extrapolated badge are intentionally NOT surfaced (immersion).
+    expect(host.textContent).not.toContain("Research note");
+    expect(host.textContent).not.toContain("Extrapolated");
     expect(host.querySelectorAll("button")).toHaveLength(2);
-  });
-
-  it("shows extrapolated and trek badges when flagged", () => {
-    component = mount(EventCard, {
-      target: host,
-      props: {
-        event: { ...baseEvent, extrapolated: true, startrekInspired: true },
-        onchoose: () => {},
-      },
-    });
-    expect(host.textContent).toContain("Extrapolated");
-    expect(host.textContent).toContain("Trek");
   });
 
   it("invokes onchoose with the chosen choice id", async () => {

@@ -10,29 +10,195 @@
       "researchNote": "Donald Trump descended the Trump Tower escalator on June 16, 2015, to announce his presidential campaign, in a speech that included unscripted remarks about Mexican immigrants.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "campaign", "spectacle"],
+      "tags": [
+        "politics",
+        "campaign",
+        "spectacle"
+      ],
       "portrait": "candidate",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 14,
       "repeatable": false,
       "choices": [
         {
           "id": "go_off_script",
           "text": "Tear up the speech and say the loudest thing in the room.",
-          "effects": { "reputation": -8, "power": 8, "heat": 9 },
-          "setFlags": ["maga_base"],
+          "effects": {
+            "reputation": -8,
+            "power": 8,
+            "heat": 9
+          },
+          "personality": {
+            "ideology": 9,
+            "grandiosity": 8,
+            "outward": 10
+          },
+          "setFlags": [
+            "maga_base"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "populism", "weight": 0.8, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
           "outcome": "The clip goes viral for all the wrong reasons — and yet the rallies that follow are packed wall to wall. A movement is born from the outrage."
         },
         {
           "id": "stick_to_script",
           "text": "Read the prepared remarks like a normal candidate.",
-          "effects": { "reputation": 4, "power": 2, "heat": -2 },
+          "effects": {
+            "reputation": 4,
+            "power": 2,
+            "heat": -2
+          },
+          "personality": {
+            "ideology": -3,
+            "grandiosity": -3
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "establishment", "weight": 0.4, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "Pundits call it 'surprisingly disciplined' and then forget you exist by dinner. Discipline does not trend."
+        },
+        {
+          "id": "dont_run_at_all",
+          "text": "Privately decide this is a branding stunt — and quietly walk it back.",
+          "effects": {
+            "reputation": 6,
+            "money": 5000000,
+            "power": -10,
+            "heat": -8
+          },
+          "personality": {
+            "grandiosity": -10,
+            "outward": -8
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You let the speculation drive a season of free press, then 'decline to run.' Licensing deals spike. The country never learns what you might have been."
+        }
+      ]
+    },
+    {
+      "id": "ev_mexico_sending_speech",
+      "era": "ascent",
+      "year": 2015,
+      "title": "They're Not Sending Their Best",
+      "scene": "The fallout from your launch is a firestorm, and your instinct is to lean in, not apologize. NBC and Univision cut ties; Macy's drops your ties. Every cancellation is an hour of cable coverage with your name in the chyron.",
+      "researchNote": "After his June 2015 launch remarks, Trump faced business backlash — NBC, Univision, Macy's, and others severed ties — yet his polling among Republican primary voters rose sharply.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "campaign",
+        "immigration"
+      ],
+      "portrait": "candidate",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "double_down",
+          "text": "Refuse to walk back a single word; call the outrage proof you're right.",
+          "effects": {
+            "loyalty": 9,
+            "reputation": -7,
+            "heat": 8,
+            "money": -3000000
+          },
+          "personality": {
+            "ideology": 8,
+            "outward": 9
+          },
+          "setFlags": [
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.8,
+              "polarity": 1
+            },
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The corporate exits cost you a fortune and buy you a fanatical base. They came to see a fighter who never folds, and you delivered."
+        },
+        {
+          "id": "soft_clarify",
+          "text": "Issue a careful clarification about 'only the criminals.'",
+          "effects": {
+            "reputation": 5,
+            "loyalty": -4,
+            "heat": -3
+          },
+          "personality": {
+            "outward": -4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The statement reads like a lawyer wrote it because one did. The networks move on; so does the energy."
+        },
+        {
+          "id": "sue_everyone",
+          "text": "Threaten lawsuits against every company that drops you.",
+          "effects": {
+            "heat": 6,
+            "power": 4,
+            "money": -2000000,
+            "reputation": -3
+          },
+          "personality": {
+            "grandiosity": 7
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The legal threats are mostly theater, but they keep your grievance on the front page for another week. Litigation as marketing."
         }
       ]
     },
@@ -45,64 +211,558 @@
       "researchNote": "Trump trademarked 'Make America Great Again' in 2012; the red MAGA hat became a defining symbol of the 2016 campaign, with millions sold.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "campaign", "branding"],
+      "tags": [
+        "politics",
+        "campaign",
+        "branding"
+      ],
       "portrait": "candidate",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 11,
       "repeatable": false,
       "choices": [
         {
           "id": "flood_the_market",
           "text": "Make the hat the uniform of the movement.",
-          "effects": { "money": 2000000, "loyalty": 9, "reputation": -3, "heat": 3 },
-          "setFlags": ["maga_base"],
+          "effects": {
+            "money": 2000000,
+            "loyalty": 9,
+            "reputation": -3,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 5
+          },
+          "setFlags": [
+            "maga_base"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "populism", "weight": 0.7, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
           "outcome": "Red hats bloom at every rally like a field of poppies. Wear the hat and you are family; the merch table outsells the policy table ten to one."
         },
         {
           "id": "keep_it_classy",
           "text": "Reserve the slogan for speeches, no cheap caps.",
-          "effects": { "reputation": 3, "money": -100000 },
+          "effects": {
+            "reputation": 3,
+            "money": -100000
+          },
+          "personality": {
+            "grandiosity": -3
+          },
           "setFlags": [],
           "clearFlags": [],
           "ripples": [],
           "outcome": "Consultants nod approvingly at your restraint. The base wanted something to hold; you gave them a press release."
+        },
+        {
+          "id": "license_the_hat",
+          "text": "License the hat to a third party and pocket the royalty.",
+          "effects": {
+            "money": 4000000,
+            "loyalty": -2,
+            "power": 2
+          },
+          "personality": {
+            "grandiosity": 4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Why manufacture when you can monetize the name? The checks clear, even if the loyalists notice the seams."
         }
       ]
     },
     {
       "id": "ev_primary_debates",
       "era": "ascent",
-      "year": 2016,
+      "year": 2015,
       "title": "The Debate Stage Cage Match",
       "scene": "Sixteen Republican rivals stand to your left like a row of bowling pins. Jeb pleads for civility, Rubio checks his watch, Cruz smirks. You decide nicknames are a more effective policy than policy.",
-      "researchNote": "Trump dominated the crowded 2016 GOP primary with personal attacks and nicknames like 'Low Energy Jeb' and 'Lyin' Ted,' defeating sixteen rivals.",
+      "researchNote": "Trump dominated the crowded 2016 GOP primary with personal attacks and nicknames like 'Low Energy Jeb,' 'Lyin' Ted,' and 'Little Marco,' defeating sixteen rivals.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "campaign", "rivalry"],
+      "tags": [
+        "politics",
+        "campaign",
+        "rivalry"
+      ],
       "portrait": "candidate",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "deploy_nicknames",
           "text": "Bury each rival under a humiliating nickname.",
-          "effects": { "power": 9, "reputation": -6, "heat": 6, "loyalty": 5 },
-          "setFlags": ["maga_base"],
+          "effects": {
+            "power": 9,
+            "reputation": -6,
+            "heat": 6,
+            "loyalty": 5
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 8
+          },
+          "setFlags": [
+            "maga_base"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "populism", "weight": 0.6, "polarity": 1 }],
-          "outcome": "One by one the field collapses, demoralized by branding alone. The base roars; the donor class clutches its pearls."
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Low-Energy Jeb, Lyin' Ted, Little Marco — one by one the field collapses, demoralized by branding alone. The base roars; the donor class clutches its pearls."
         },
         {
           "id": "debate_substance",
           "text": "Try to win on tax plans and trade specifics.",
-          "effects": { "reputation": 5, "power": -2 },
+          "effects": {
+            "reputation": 5,
+            "power": -2
+          },
+          "personality": {
+            "ideology": -3,
+            "grandiosity": -4
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "establishment", "weight": 0.4, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
           "outcome": "You sound like a senator nobody remembers. The cameras drift to whoever is shouting instead."
+        },
+        {
+          "id": "skip_a_debate",
+          "text": "Boycott a debate and counter-program with your own rally.",
+          "effects": {
+            "power": 7,
+            "heat": 5,
+            "loyalty": 6,
+            "reputation": -4
+          },
+          "personality": {
+            "grandiosity": 9
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You prove you don't need the stage — the stage needs you. The empty podium beside the moderator says more than any answer could."
+        }
+      ]
+    },
+    {
+      "id": "ev_brexit_2016",
+      "era": "ascent",
+      "year": 2016,
+      "title": "Brexit Means Brexit",
+      "scene": "Across the Atlantic, Britain votes to leave the European Union and the pound falls off a cliff. The morning after, you happen to be at your Scottish golf course, and reporters want to know if it's a sign. You decide it is a sign — about you.",
+      "researchNote": "On June 23, 2016, the UK voted to leave the EU; Trump, visiting his Turnberry golf resort the next day, praised the result and drew parallels to his own anti-establishment campaign, calling himself 'Mr. Brexit.'",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics",
+        "populism"
+      ],
+      "portrait": "candidate",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "claim_the_wave",
+          "text": "Declare yourself 'Mr. Brexit' — the same wave is coming for America.",
+          "effects": {
+            "power": 8,
+            "loyalty": 7,
+            "reputation": -3,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You graft your campaign onto a global revolt against elites. The same forecasters who missed Brexit will miss you, and you say so on camera."
+        },
+        {
+          "id": "stay_neutral",
+          "text": "Offer a measured, statesmanlike comment about market stability.",
+          "effects": {
+            "reputation": 5,
+            "power": 1
+          },
+          "personality": {
+            "ideology": -3,
+            "outward": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sound like a central banker. Nobody clips it, and the moment passes you by."
+        },
+        {
+          "id": "talk_up_turnberry",
+          "text": "Pivot the press conference to how great your golf course is.",
+          "effects": {
+            "money": 1000000,
+            "reputation": -5,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "World history happens and you talk about the par-3. The headline writes itself, and not in your favor — but Turnberry bookings tick up."
+        }
+      ]
+    },
+    {
+      "id": "ev_paris_accord_2016",
+      "era": "ascent",
+      "year": 2016,
+      "title": "The Paris Agreement",
+      "scene": "While you campaign, nearly every nation on Earth signs onto a climate pact in Paris. To your base it's globalist handcuffs; to coastal donors it's the future. You file the issue away as a promise you can make — and later, dramatically, break.",
+      "researchNote": "The Paris Climate Agreement was adopted in December 2015 and entered into force November 2016; Trump campaigned against it and announced U.S. withdrawal in June 2017.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics",
+        "climate"
+      ],
+      "portrait": "candidate",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 8,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "promise_withdrawal",
+          "text": "Promise to rip up the accord on day one — coal country, you're home.",
+          "effects": {
+            "loyalty": 8,
+            "power": 5,
+            "reputation": -6,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": 8,
+            "outward": 6
+          },
+          "setFlags": [
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Appalachia hears 'jobs' and the rest of the world hears a threat. You bank the applause and pencil in a Rose Garden announcement for later."
+        },
+        {
+          "id": "stay_in_quietly",
+          "text": "Signal you'd renegotiate, not abandon — keep the door open.",
+          "effects": {
+            "reputation": 7,
+            "loyalty": -5,
+            "heat": -3
+          },
+          "personality": {
+            "ideology": -6,
+            "outward": -6
+          },
+          "setFlags": [
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You float 'a better deal for America' that keeps a seat at the table. The base grumbles, but allied capitals exhale — and remember it."
+        }
+      ]
+    },
+    {
+      "id": "ev_access_hollywood",
+      "era": "ascent",
+      "year": 2016,
+      "title": "The Access Hollywood Tape",
+      "scene": "A month before the election, a 2005 hot-mic recording surfaces in which you brag, vulgarly, about grabbing women. Republicans flee. Pundits write your obituary. Your campaign chair tells you it's over unless you do something no candidate has ever survived.",
+      "researchNote": "On October 7, 2016, the Washington Post published a 2005 Access Hollywood tape of Trump making lewd remarks; many Republicans called on him to withdraw, but he refused and won the election a month later.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "campaign",
+        "scandal"
+      ],
+      "portrait": "candidate",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "never_apologize",
+          "text": "Dismiss it as 'locker room talk' and attack the accusers instead.",
+          "effects": {
+            "loyalty": 8,
+            "reputation": -11,
+            "heat": 11,
+            "power": 5
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 9
+          },
+          "setFlags": [
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.7,
+              "polarity": 1
+            },
+            {
+              "to": "populism",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You refuse the script every other politician would follow, and counter-program the next debate with your accusers' opponents. The base decides the press, not you, is the villain — and never lets go."
+        },
+        {
+          "id": "issue_apology",
+          "text": "Record a contrite video apology and beg forgiveness.",
+          "effects": {
+            "reputation": 6,
+            "loyalty": -7,
+            "heat": -4,
+            "power": -3
+          },
+          "personality": {
+            "grandiosity": -9,
+            "outward": -6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The stiff apology video reads as proof of guilt to your enemies and weakness to your friends. Contrition is a costume that doesn't fit you."
+        },
+        {
+          "id": "drop_out",
+          "text": "Conclude it's unwinnable and step aside for the ticket.",
+          "effects": {
+            "reputation": 8,
+            "power": -14,
+            "heat": -9,
+            "money": 3000000
+          },
+          "personality": {
+            "grandiosity": -12,
+            "outward": -9
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "clearFlags": [
+            "maga_base"
+          ],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hand the nomination to your running mate and exit 'on your own terms.' The party is quietly relieved; the movement you started dies in its crib."
+        }
+      ]
+    },
+    {
+      "id": "ev_2016_debates_clinton",
+      "era": "ascent",
+      "year": 2016,
+      "title": "Three Nights with Hillary",
+      "scene": "Three general-election debates, one opponent who has prepped for thirty years. She has zingers and binders; you have a microphone and a hunch about what the cameras reward. As she speaks, you decide where to stand.",
+      "researchNote": "Trump and Clinton held three presidential debates in fall 2016; moments included Trump looming behind Clinton in the town-hall debate and calling her a 'nasty woman' in the third.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "campaign",
+        "rivalry"
+      ],
+      "portrait": "candidate",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "dominate_stage",
+          "text": "Loom, interrupt, and brand her 'such a nasty woman.'",
+          "effects": {
+            "power": 8,
+            "loyalty": 7,
+            "reputation": -8,
+            "heat": 7
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 8
+          },
+          "setFlags": [
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Focus groups recoil; the base cheers the alpha display. You lose the night on points and win it on memes."
+        },
+        {
+          "id": "play_presidential",
+          "text": "Stay behind the podium and try to look measured.",
+          "effects": {
+            "reputation": 7,
+            "power": 2,
+            "loyalty": -4
+          },
+          "personality": {
+            "grandiosity": -5,
+            "outward": -5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Commentators say you 'cleared the bar.' It's not the bar your supporters wanted you to clear."
+        },
+        {
+          "id": "invite_accusers",
+          "text": "Stage a pre-debate press event with her husband's accusers.",
+          "effects": {
+            "heat": 9,
+            "loyalty": 8,
+            "reputation": -7,
+            "power": 6
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 9
+          },
+          "setFlags": [
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You rewrite the rules of pre-game theater and rattle her camp before a word is spoken. Half the country is appalled; your half is electrified."
         }
       ]
     },
@@ -115,32 +775,167 @@
       "researchNote": "Trump won the 2016 GOP nomination and ran a populist, anti-establishment general-election campaign against Hillary Clinton, fueled by large rallies and the promise to build a border wall.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "campaign"],
+      "tags": [
+        "politics",
+        "campaign"
+      ],
       "portrait": "candidate",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 13,
       "repeatable": false,
       "choices": [
         {
           "id": "full_populist",
           "text": "Go full populist — rallies, the wall, drain the swamp.",
-          "effects": { "power": 12, "loyalty": 10, "heat": 10, "reputation": -7 },
-          "setFlags": ["maga_base"],
+          "effects": {
+            "power": 12,
+            "loyalty": 10,
+            "heat": 10,
+            "reputation": -7
+          },
+          "personality": {
+            "ideology": 12,
+            "grandiosity": 9,
+            "outward": 10
+          },
+          "setFlags": [
+            "maga_base"
+          ],
           "clearFlags": [],
           "ripples": [
-            { "to": "populism", "weight": 0.9, "polarity": 1 },
-            { "to": "establishment", "weight": 0.5, "polarity": -1 }
+            {
+              "to": "populism",
+              "weight": 0.9,
+              "polarity": 1
+            },
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": -1
+            }
           ],
           "outcome": "The Rust Belt erupts. You polarize the country into people who would die for you and people who fear you — and that division turns out to be electoral math in your favor."
         },
         {
           "id": "moderate_pivot",
           "text": "Pivot moderate — woo the suburbs, sound presidential.",
-          "effects": { "reputation": 8, "power": 4, "loyalty": -6, "heat": -4 },
+          "effects": {
+            "reputation": 8,
+            "power": 4,
+            "loyalty": -6,
+            "heat": -4
+          },
+          "personality": {
+            "ideology": -6,
+            "grandiosity": -4,
+            "outward": -5
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "establishment", "weight": 0.5, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "Op-ed boards warm to you slightly. But the rally crowds sense the hedge, and the energy that got you here starts to leak away."
+        }
+      ]
+    },
+    {
+      "id": "ev_rally_security",
+      "era": "ascent",
+      "year": 2016,
+      "title": "The Threats Start",
+      "scene": "The rallies grow so large and so hot that the Secret Service flags credible threats against you. A man tries to rush the stage in Ohio; your detail tackles him. Your team asks whether to dial back the crowds or feed off the danger.",
+      "researchNote": "During the 2016 campaign Trump received Secret Service protection; at a March 2016 Dayton, Ohio rally an attendee attempted to rush the stage and agents surrounded Trump.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "campaign",
+        "security"
+      ],
+      "portrait": "candidate",
+      "requires": {
+        "flags": [
+          "maga_base"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "feed_the_danger",
+          "text": "Tell the crowd you'd take a bullet for them — and mean it on camera.",
+          "effects": {
+            "loyalty": 11,
+            "power": 7,
+            "heat": 8,
+            "health": -5
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 7
+          },
+          "setFlags": [
+            "assassination_target"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn the menace into mythology — the leader who won't hide behind glass. It bonds the base to you like nothing else, and paints a target on your back that never washes off."
+        },
+        {
+          "id": "tighten_security",
+          "text": "Let the detail shrink the events and add the bulletproof glass.",
+          "effects": {
+            "health": 6,
+            "loyalty": -4,
+            "heat": -3,
+            "power": 1
+          },
+          "personality": {
+            "grandiosity": -4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Smaller, safer rooms keep you breathing. The diehards mutter that the glass is for cowards, but your detail sleeps easier."
+        },
+        {
+          "id": "blame_opponents",
+          "text": "Accuse your rivals of paying the agitators to attack you.",
+          "effects": {
+            "heat": 7,
+            "loyalty": 6,
+            "reputation": -5
+          },
+          "personality": {
+            "outward": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You spin the violence into a conspiracy against you, and the crowd believes every word. The grievance machine runs hotter than ever."
         }
       ]
     },
@@ -153,29 +948,93 @@
       "researchNote": "Trump won the 2016 election on November 8, 2016, securing 304 electoral votes despite losing the national popular vote to Clinton, after flipping Rust Belt states.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "victory"],
+      "tags": [
+        "politics",
+        "victory"
+      ],
       "portrait": "candidate",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
-      "weight": 12,
+      "requires": {
+        "flags": [
+          "maga_base"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 16,
       "repeatable": false,
       "choices": [
         {
           "id": "build_inner_circle",
           "text": "Reward the loyalists; build an inner circle that will never betray you.",
-          "effects": { "power": 10, "loyalty": 12, "reputation": -3, "heat": 4 },
-          "setFlags": ["loyalty_machine"],
+          "effects": {
+            "power": 10,
+            "loyalty": 12,
+            "reputation": -3,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 6
+          },
+          "setFlags": [
+            "loyalty_machine"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "loyalty", "weight": 0.9, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
           "outcome": "You staff the West Wing with family and true believers. Competence is optional; fealty is mandatory — and it will hold even when everything else does not."
         },
         {
           "id": "hire_experts",
           "text": "Bring in seasoned Washington hands to govern.",
-          "effects": { "reputation": 7, "power": 5, "loyalty": -8 },
+          "effects": {
+            "reputation": 7,
+            "power": 5,
+            "loyalty": -8
+          },
+          "personality": {
+            "ideology": -4,
+            "grandiosity": -5,
+            "outward": -4
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "establishment", "weight": 0.5, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "The grown-ups arrive with binders and norms. Within a year half of them will be leaking to reporters about you."
+        },
+        {
+          "id": "magnanimous_winner",
+          "text": "Give a unity speech and reach out to those who feared you.",
+          "effects": {
+            "reputation": 11,
+            "loyalty": -3,
+            "heat": -5
+          },
+          "personality": {
+            "outward": -8,
+            "grandiosity": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "For one night you are a president for all Americans, and even critics admit you sounded gracious. The world glimpses a path you rarely walk."
         }
       ]
     },
@@ -188,29 +1047,558 @@
       "researchNote": "Trump was inaugurated on January 20, 2017; his 'American carnage' speech and disputes over inauguration crowd size (and 'alternative facts') defined his first days in office.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "governance"],
+      "tags": [
+        "politics",
+        "governance"
+      ],
       "portrait": "president",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
-      "weight": 10,
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
       "repeatable": false,
       "choices": [
         {
           "id": "fight_the_photos",
           "text": "Insist your crowd was the biggest ever and make staff defend it.",
-          "effects": { "loyalty": 6, "reputation": -7, "heat": 7, "power": 3 },
+          "effects": {
+            "loyalty": 6,
+            "reputation": -7,
+            "heat": 7,
+            "power": 3
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 6
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "media_war", "weight": 0.7, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
           "outcome": "Your press secretary marches out to argue with aerial photography. The phrase 'alternative facts' enters the language, and the war with the press is officially declared."
         },
         {
           "id": "let_it_go",
           "text": "Ignore the crowd-size story and govern.",
-          "effects": { "reputation": 4, "heat": -3 },
+          "effects": {
+            "reputation": 4,
+            "heat": -3
+          },
+          "personality": {
+            "grandiosity": -4
+          },
           "setFlags": [],
           "clearFlags": [],
           "ripples": [],
           "outcome": "The story dies in a day, starved of your oxygen. Restraint, it turns out, is the one weapon you keep holstered."
+        }
+      ]
+    },
+    {
+      "id": "ev_travel_ban",
+      "era": "ascent",
+      "year": 2017,
+      "title": "The Travel Ban",
+      "scene": "Seven days in, you sign an order barring travelers from several Muslim-majority nations. Airports erupt; lawyers camp on terminal floors; a judge blocks it by nightfall. Your first big swing collides with the first wall of the courts.",
+      "researchNote": "On January 27, 2017, Trump signed Executive Order 13769 restricting entry from seven Muslim-majority countries; it triggered airport protests and court challenges, and a revised version was upheld by the Supreme Court in 2018.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "governance",
+        "immigration"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "ram_it_through",
+          "text": "Attack the 'so-called judge' and rewrite the order to survive court.",
+          "effects": {
+            "power": 8,
+            "loyalty": 8,
+            "reputation": -7,
+            "heat": 8
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 6,
+            "outward": 7
+          },
+          "setFlags": [
+            "nativist_turn"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You frame the judiciary as the enemy and keep grinding until a sanitized version sticks. The base sees a promise kept; the airports see a fight."
+        },
+        {
+          "id": "narrow_the_order",
+          "text": "Let DHS lawyers narrow it into something defensible and quiet.",
+          "effects": {
+            "reputation": 6,
+            "loyalty": -4,
+            "heat": -3
+          },
+          "personality": {
+            "ideology": -3,
+            "outward": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The rewritten order survives review by being modest. The lawyers are pleased; the crowds wanted thunder, not vetting."
+        },
+        {
+          "id": "blame_the_courts_publicly",
+          "text": "Make the 'so-called judges' a permanent campaign villain at every rally.",
+          "effects": {
+            "loyalty": 7,
+            "heat": 6,
+            "reputation": -6,
+            "power": 3
+          },
+          "personality": {
+            "ideology": 7,
+            "outward": 8
+          },
+          "setFlags": [
+            "nativist_turn"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn the bench into a recurring enemy in the show, and the chant 'so-called judge' becomes a fixture. The legal fight matters less than the running grievance it feeds."
+        }
+      ]
+    },
+    {
+      "id": "ev_comey_firing",
+      "era": "ascent",
+      "year": 2017,
+      "title": "You're Fired, Director Comey",
+      "scene": "The FBI is sniffing around your campaign's Russia contacts, and the director won't pledge loyalty. You fire him by letter while he's giving a speech across the country. Days later you admit on television it was about 'this Russia thing.'",
+      "researchNote": "Trump fired FBI Director James Comey on May 9, 2017, amid the bureau's Russia investigation; Trump later told NBC's Lester Holt he had 'this Russia thing' in mind, fueling obstruction concerns and the Mueller appointment.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "governance",
+        "scandal"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "purge_disloyal",
+          "text": "Demand a loyalty pledge — then fire anyone who won't kneel.",
+          "effects": {
+            "power": 9,
+            "loyalty": 12,
+            "reputation": -10,
+            "heat": 11
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 8
+          },
+          "setFlags": [
+            "loyalty_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You make fealty the price of employment and clean house. It triggers a special counsel, but it also teaches everyone left exactly who they answer to."
+        },
+        {
+          "id": "let_him_finish",
+          "text": "Grit your teeth and let the investigation run its course.",
+          "effects": {
+            "reputation": 7,
+            "power": -3,
+            "heat": -5
+          },
+          "personality": {
+            "grandiosity": -6,
+            "outward": -5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You leave the director in place and absorb the indignity. No special counsel is appointed, and the storm you feared never fully forms."
+        },
+        {
+          "id": "fire_quietly_lawyer_up",
+          "text": "Fire him on a clean pretext and let the lawyers build a paper trail.",
+          "effects": {
+            "power": 5,
+            "heat": 4,
+            "reputation": -4,
+            "money": -2000000
+          },
+          "personality": {
+            "grandiosity": 4,
+            "inward": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You dismiss him on a memo about old missteps and never say 'Russia' on camera. A special counsel still comes, but the obstruction case is murkier and the lawyers can work."
+        }
+      ]
+    },
+    {
+      "id": "ev_charlottesville",
+      "era": "ascent",
+      "year": 2017,
+      "title": "Charlottesville",
+      "scene": "White nationalists march with torches in Virginia; a counter-protester is killed when a car plows into the crowd. The nation waits for you to name the evil plainly. Instead the words that come out are 'very fine people, on both sides.'",
+      "researchNote": "After the August 2017 Unite the Right rally in Charlottesville, where Heather Heyer was killed, Trump said there were 'very fine people on both sides,' drawing bipartisan condemnation.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "governance",
+        "crisis"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "both_sides",
+          "text": "Blame 'both sides' and refuse to single anyone out.",
+          "effects": {
+            "loyalty": 6,
+            "reputation": -12,
+            "heat": 9,
+            "power": 3
+          },
+          "personality": {
+            "ideology": 7,
+            "outward": 9
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "CEOs quit your councils; old allies wince. But a darker corner of the country hears a wink, and decides you are theirs."
+        },
+        {
+          "id": "condemn_clearly",
+          "text": "Name the hatred, the killer, and the victim by name.",
+          "effects": {
+            "reputation": 11,
+            "loyalty": -6,
+            "heat": -5
+          },
+          "personality": {
+            "ideology": -7,
+            "outward": -9
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "For once you meet the moment with moral clarity, and the country briefly remembers what a unifying president sounds like. The extremists feel disowned, and a kinder image of you takes root."
+        },
+        {
+          "id": "blame_the_media",
+          "text": "Skip the moral question entirely and attack the press coverage of it.",
+          "effects": {
+            "loyalty": 5,
+            "heat": 8,
+            "reputation": -8,
+            "power": 2
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 7
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You make the story about 'fake news' framing rather than the torches and the dead. The deflection works on your half of the country and outrages the other."
+        }
+      ]
+    },
+    {
+      "id": "ev_the_wall",
+      "era": "ascent",
+      "year": 2018,
+      "title": "Build the Wall",
+      "scene": "The signature promise stalls in Congress, Mexico isn't paying, and a shutdown looms over the funding fight. The chant that made you still rings in your ears: build the wall. The base wants concrete; the appropriators want a deal.",
+      "researchNote": "Trump's promised border wall became a defining and contested initiative; a dispute over wall funding triggered the longest government shutdown in U.S. history (35 days, December 2018–January 2019), and he later declared a national emergency to redirect funds.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "governance",
+        "immigration"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [
+          "nativist_turn"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "shutdown_for_wall",
+          "text": "Shut down the government until they fund the wall.",
+          "effects": {
+            "loyalty": 9,
+            "power": 5,
+            "reputation": -8,
+            "heat": 8
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Paychecks stop for 800,000 federal workers as you stare down Congress. The base loves the brawl; the polls don't, and you eventually reopen with a declared emergency instead."
+        },
+        {
+          "id": "take_the_deal",
+          "text": "Accept a smaller fencing appropriation and declare victory.",
+          "effects": {
+            "reputation": 6,
+            "loyalty": -7,
+            "heat": -4,
+            "power": 2
+          },
+          "personality": {
+            "ideology": -4,
+            "grandiosity": -4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You take what's on the table and call a few miles of fence a triumph. The appropriators relax; the diehards feel the slogan was just a slogan."
+        },
+        {
+          "id": "national_emergency",
+          "text": "Skip Congress entirely and declare a national emergency to seize the funds.",
+          "effects": {
+            "power": 9,
+            "loyalty": 8,
+            "reputation": -7,
+            "heat": 9
+          },
+          "personality": {
+            "ideology": 9,
+            "grandiosity": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You raid the Pentagon's budget by decree and dare the courts to stop you. The base loves the executive muscle; the precedent unnerves everyone, including some of your own party."
+        }
+      ]
+    },
+    {
+      "id": "ev_fire_and_fury",
+      "era": "ascent",
+      "year": 2017,
+      "title": "Fire and Fury",
+      "scene": "North Korea tests missiles that could reach American cities, and you answer in kind — promising 'fire and fury like the world has never seen.' You trade insults with 'Little Rocket Man' on a hair-trigger planet. Then, improbably, a summit in Singapore beckons.",
+      "researchNote": "In August 2017 Trump warned North Korea would face 'fire and fury'; after a year of escalating rhetoric, he met Kim Jong Un in Singapore in June 2018, the first summit between sitting U.S. and North Korean leaders.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "governance",
+        "foreign-policy",
+        "nuclear"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "escalate_nukes",
+          "text": "Threaten total destruction; brag your button is bigger.",
+          "effects": {
+            "power": 10,
+            "loyalty": 8,
+            "reputation": -9,
+            "heat": 12,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 11,
+            "outward": 10
+          },
+          "setFlags": [
+            "nuclear_brinkmanship"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You take the world to the edge of the cliff and dare him to blink first. The base thrills to a president who fears nothing — and you've placed a live wire in the foundation of every era to come."
+        },
+        {
+          "id": "singapore_summit",
+          "text": "Pivot to spectacle diplomacy — shake his hand on live TV.",
+          "effects": {
+            "reputation": 8,
+            "power": 6,
+            "heat": -4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The flags, the handshake, the photo — you turn a nuclear standoff into a season finale. Critics say the deal is thin, but no missiles fly, and that is its own kind of win."
+        },
+        {
+          "id": "quiet_diplomacy",
+          "text": "Let the State Department work it through back channels, no theater.",
+          "effects": {
+            "reputation": 7,
+            "loyalty": -5,
+            "heat": -6
+          },
+          "personality": {
+            "grandiosity": -7,
+            "outward": -6
+          },
+          "setFlags": [
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "No summit, no fireworks — just professionals lowering the temperature out of sight. It wins no rallies, but the experts who run the world's hard problems take note of a president who let them work."
         }
       ]
     },
@@ -223,64 +1611,497 @@
       "researchNote": "In 2017 Trump signed the Tax Cuts and Jobs Act, slashing the corporate rate to 21%, and appointed Neil Gorsuch to the Supreme Court — the first of three justices he would name.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "governance", "economy"],
+      "tags": [
+        "politics",
+        "governance",
+        "economy"
+      ],
       "portrait": "president",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 10,
       "repeatable": false,
       "choices": [
         {
           "id": "tout_the_boom",
           "text": "Take full credit for the stock market and the cuts.",
-          "effects": { "money": 50000000, "power": 8, "reputation": 3, "loyalty": 6, "heat": 3 },
+          "effects": {
+            "money": 50000000,
+            "power": 8,
+            "reputation": 3,
+            "loyalty": 6,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 6
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "establishment", "weight": 0.5, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "Markets climb and you tweet the Dow like a scoreboard. Donors and the base align — for once — behind a number going up."
         },
         {
           "id": "stack_the_courts",
           "text": "Make judicial appointments the legacy and let McConnell run point.",
-          "effects": { "power": 11, "loyalty": 9, "reputation": -2, "heat": 4 },
+          "effects": {
+            "power": 11,
+            "loyalty": 9,
+            "reputation": -2,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "court_packer"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A conveyor belt of lifetime judges reshapes the federal bench for a generation. Your truest legacy wears a robe."
+        },
+        {
+          "id": "donor_giveaway",
+          "text": "Quietly tilt the bill toward your donors and your own real-estate ledger.",
+          "effects": {
+            "money": 80000000,
+            "reputation": -6,
+            "heat": 5,
+            "loyalty": -2
+          },
+          "personality": {
+            "grandiosity": 5,
+            "inward": 6
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "loyalty", "weight": 0.7, "polarity": 1 }],
-          "outcome": "A conveyor belt of lifetime judges reshapes the federal bench for a generation. Your truest legacy wears a robe."
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The pass-through provisions just happen to favor exactly your kind of business. The donors are thrilled; the watchdogs start counting your savings out loud."
         }
       ]
     },
     {
-      "id": "ev_trade_war_china",
+      "id": "ev_kavanaugh_fight",
       "era": "ascent",
       "year": 2018,
-      "title": "Trade War with China",
-      "scene": "You decide trade deficits are personal insults and start firing tariffs like a slot machine. Beijing retaliates; soybean farmers in your states feel it first. 'Trade wars are good, and easy to win,' you tweet at 6 a.m.",
-      "researchNote": "Beginning in 2018 Trump launched a trade war with China, imposing tariffs on hundreds of billions of dollars of goods; China retaliated, hitting U.S. farmers, who received federal bailout payments.",
+      "title": "The Kavanaugh Confirmation",
+      "scene": "Your second Court nominee faces a searing allegation of decades-old assault. The hearings become national theater, raw and partisan. You can mock the accuser at a rally, or stay above it and let the Senate grind.",
+      "researchNote": "Brett Kavanaugh's 2018 confirmation was nearly derailed by Christine Blasey Ford's sexual-assault allegation; Trump mocked Ford at an October 2018 rally, and the Senate confirmed Kavanaugh 50–48.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "governance", "economy", "trade"],
+      "tags": [
+        "politics",
+        "governance",
+        "scandal"
+      ],
       "portrait": "president",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "requires": {
+        "flags": [
+          "court_packer"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
       "weight": 9,
       "repeatable": false,
       "choices": [
         {
-          "id": "escalate_tariffs",
-          "text": "Crank the tariffs higher; never let Beijing see you flinch.",
-          "effects": { "power": 8, "loyalty": 6, "money": -20000000, "reputation": -4, "heat": 6 },
-          "setFlags": [],
+          "id": "mock_accuser",
+          "text": "Mock the accuser at a rally to rally the base.",
+          "effects": {
+            "loyalty": 9,
+            "power": 6,
+            "reputation": -10,
+            "heat": 9
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 9
+          },
+          "setFlags": [
+            "maga_base"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "populism", "weight": 0.6, "polarity": 1 }],
-          "outcome": "Markets shudder and farmers wobble, so you bail them out with federal checks. The base loves a fighter even when the fight costs them."
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The crowd laughs and the confirmation holds, 50 to 48. Suburban women remember the laughter, and store it away for the next election."
         },
         {
-          "id": "cut_a_deal",
-          "text": "Declare a 'Phase One' deal and a glorious truce.",
-          "effects": { "reputation": 5, "power": 3, "heat": -3 },
+          "id": "stay_above_it",
+          "text": "Voice support but let the Senate handle the hearings.",
+          "effects": {
+            "reputation": 7,
+            "power": 5,
+            "loyalty": -3
+          },
+          "personality": {
+            "grandiosity": -4,
+            "outward": -5
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "establishment", "weight": 0.4, "polarity": 1 }],
-          "outcome": "You sign a partial agreement and call it the greatest deal in history. The deficit barely moves, but the photo op is excellent."
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You get your justice without personally torching the accuser. The legacy lands; the collateral damage is smaller."
+        },
+        {
+          "id": "demand_fbi_loyalty_probe",
+          "text": "Lean on a limited FBI probe and signal exactly the result you expect.",
+          "effects": {
+            "power": 7,
+            "loyalty": 8,
+            "reputation": -6,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 4
+          },
+          "setFlags": [
+            "loyalty_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You get the quick, narrow inquiry you wanted and the confirmation holds. Everyone learns the bureau can be steered when the stakes are your justice."
+        }
+      ]
+    },
+    {
+      "id": "ev_family_separation",
+      "era": "ascent",
+      "year": 2018,
+      "title": "Zero Tolerance",
+      "scene": "Your 'zero tolerance' border policy separates thousands of migrant children from their parents. Audio of crying toddlers airs on every network; the cages make the front pages. The pressure to reverse course is immense — and so is the pressure to never look weak.",
+      "researchNote": "In spring 2018 the administration's 'zero tolerance' policy separated thousands of migrant children from parents at the border; amid bipartisan outrage Trump signed an executive order ending the practice in June 2018.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "governance",
+        "immigration",
+        "crisis"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [
+          "nativist_turn"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "hold_the_line",
+          "text": "Defend the deterrent — blame Congress and the parents.",
+          "effects": {
+            "loyalty": 7,
+            "reputation": -13,
+            "heat": 11,
+            "power": 4
+          },
+          "personality": {
+            "ideology": 8,
+            "outward": 9
+          },
+          "setFlags": [
+            "nativist_turn"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You frame cruelty as deterrence and dare your critics to want open borders. The hardliners cheer; the images haunt the country for years."
+        },
+        {
+          "id": "reverse_with_order",
+          "text": "Sign an order ending separations and call it compassion.",
+          "effects": {
+            "reputation": 8,
+            "loyalty": -5,
+            "heat": -5
+          },
+          "personality": {
+            "ideology": -5,
+            "outward": -6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You retreat under fire and brand the reversal as your own mercy. The base feels the climbdown, but the children stop being a daily headline."
+        },
+        {
+          "id": "blame_obama_era",
+          "text": "Falsely claim it's all an Obama-era law you're merely enforcing.",
+          "effects": {
+            "loyalty": 6,
+            "reputation": -9,
+            "heat": 8,
+            "power": 2
+          },
+          "personality": {
+            "outward": 7,
+            "grandiosity": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You pin your own policy on a predecessor and dare the fact-checkers to keep up. The base accepts the alibi; the paper trail says otherwise."
+        }
+      ]
+    },
+    {
+      "id": "ev_midterms_2018",
+      "era": "ascent",
+      "year": 2018,
+      "title": "The Blue Wave",
+      "scene": "The first national verdict on your presidency arrives, and the House flips decisively to the Democrats. Suburbs that once leaned red turn against you. Subpoena power now sits in hostile hands, and the oversight you dodged for two years is coming.",
+      "researchNote": "In the 2018 midterms Democrats gained 41 House seats and the majority, widely seen as a rebuke of Trump driven by suburban voters, while Republicans held the Senate.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics",
+        "election"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "spin_as_win",
+          "text": "Call it a 'big victory' and purge the staff who let it happen.",
+          "effects": {
+            "loyalty": 7,
+            "power": 4,
+            "reputation": -7,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 6
+          },
+          "setFlags": [
+            "loyalty_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You declare the loss a triumph and reward only those who agree. Reality bends in the briefing room, even as the gavel changes hands."
+        },
+        {
+          "id": "seek_compromise",
+          "text": "Offer to work with the new House on infrastructure and trade.",
+          "effects": {
+            "reputation": 8,
+            "loyalty": -5,
+            "power": 3
+          },
+          "personality": {
+            "ideology": -5,
+            "outward": -5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You float a deal and sound, briefly, like a president who governs. The base is wary, but a few bipartisan wins look possible — for now."
+        },
+        {
+          "id": "preempt_oversight",
+          "text": "Brace for war — pledge to stonewall every subpoena the new House sends.",
+          "effects": {
+            "power": 7,
+            "loyalty": 9,
+            "reputation": -8,
+            "heat": 9
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 7
+          },
+          "setFlags": [
+            "loyalty_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You declare total resistance to oversight before the first subpoena lands. The base wants the fight; the courts and the calendar fill with it for two years."
+        }
+      ]
+    },
+    {
+      "id": "ev_mueller_report",
+      "era": "ascent",
+      "year": 2019,
+      "title": "The Mueller Report",
+      "scene": "Two years of special-counsel investigation end in a 448-page report that neither exonerates nor indicts you. Your attorney general spins it before anyone reads it. You read one phrase — 'no collusion' — and decide that's the only sentence in the document.",
+      "researchNote": "Special Counsel Robert Mueller's report, released April 2019, found no establishable criminal conspiracy with Russia but detailed multiple potential obstruction episodes and did not exonerate Trump; Attorney General Barr's summary framed it favorably.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "governance",
+        "scandal"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [
+          "loyalty_machine"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "total_exoneration",
+          "text": "Declare 'complete and total exoneration' on a loop.",
+          "effects": {
+            "loyalty": 8,
+            "power": 7,
+            "reputation": -6,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 7
+          },
+          "setFlags": [
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You repeat the phrase until it becomes true for your half of the country. The report's caveats drown beneath two words."
+        },
+        {
+          "id": "quietly_relieved",
+          "text": "Take the win quietly and stop tweeting about it.",
+          "effects": {
+            "reputation": 6,
+            "heat": -5,
+            "loyalty": -3
+          },
+          "personality": {
+            "grandiosity": -5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You let the lawyers' framing stand and move on. Starved of your outrage, the story actually fades faster than your enemies hoped."
+        },
+        {
+          "id": "go_after_investigators",
+          "text": "Flip the script — investigate the investigators and demand prosecutions.",
+          "effects": {
+            "power": 9,
+            "loyalty": 10,
+            "reputation": -9,
+            "heat": 10
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 8
+          },
+          "setFlags": [
+            "loyalty_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn the report into a weapon against the people who wrote it. The base wants heads on pikes, and you start naming them — a habit that will define what comes next."
         }
       ]
     },
@@ -293,29 +2114,405 @@
       "researchNote": "The House impeached Trump in December 2019 over a call pressuring Ukraine to investigate Joe Biden; the Republican-controlled Senate acquitted him in February 2020.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "governance", "scandal"],
+      "tags": [
+        "politics",
+        "governance",
+        "scandal"
+      ],
       "portrait": "president",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
-      "weight": 11,
+      "requires": {
+        "flags": [
+          "loyalty_machine"
+        ],
+        "notFlags": [],
+        "meters": {
+          "heat": ">=40"
+        }
+      },
+      "weight": 12,
       "repeatable": false,
       "choices": [
         {
           "id": "weaponize_loyalty",
           "text": "Demand total party loyalty and dare any senator to cross you.",
-          "effects": { "power": 10, "loyalty": 12, "reputation": -8, "heat": 9 },
-          "setFlags": ["loyalty_machine"],
+          "effects": {
+            "power": 10,
+            "loyalty": 12,
+            "reputation": -8,
+            "heat": 9
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 8
+          },
+          "setFlags": [
+            "loyalty_machine"
+          ],
           "clearFlags": [],
-          "ripples": [{ "to": "loyalty", "weight": 0.9, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
           "outcome": "The Senate acquits on a near party-line vote. You emerge enraged and emboldened, with a list of who clapped and who hesitated."
         },
         {
           "id": "play_contrite",
           "text": "Strike a humble tone and let lawyers handle it quietly.",
-          "effects": { "reputation": 4, "loyalty": -6, "heat": -3 },
+          "effects": {
+            "reputation": 4,
+            "loyalty": -6,
+            "heat": -3
+          },
+          "personality": {
+            "grandiosity": -6,
+            "outward": -4
+          },
           "setFlags": [],
           "clearFlags": [],
           "ripples": [],
           "outcome": "The defense is lawyerly and bloodless, and you still get acquitted — but the base wanted a brawler, not a defendant."
+        },
+        {
+          "id": "perfect_call_offensive",
+          "text": "Release the call summary yourself and run on 'a perfect phone call.'",
+          "effects": {
+            "power": 7,
+            "loyalty": 9,
+            "reputation": -7,
+            "heat": 8
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 8
+          },
+          "setFlags": [
+            "maga_base"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You publish the summary, brand it 'perfect,' and turn impeachment into a rally cry. Acquittal becomes vindication, and the merch sells the phrase by the truckload."
+        }
+      ]
+    },
+    {
+      "id": "ev_global_populism_wave",
+      "era": "ascent",
+      "year": 2019,
+      "title": "Strongmen of the World",
+      "scene": "Across the globe a new breed of leader rises in your image — Bolsonaro in Brazil, Orbán in Hungary, nationalists surging in Italy and beyond. At the summits the old liberal order looks tired; the strongmen look at you like a founder. You can claim the movement or keep your distance.",
+      "researchNote": "The late 2010s saw a global wave of right-wing populism — Jair Bolsonaro (Brazil, 2018), Viktor Orbán (Hungary), and others — often citing Trump as an inspiration and validation of nationalist politics.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics",
+        "populism",
+        "foreign-policy"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [
+          "maga_base"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {
+          "grandiosity": ">=20"
+        }
+      },
+      "weight": 8,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "lead_the_strongmen",
+          "text": "Embrace the strongmen and position yourself as their leader.",
+          "effects": {
+            "power": 9,
+            "loyalty": 7,
+            "reputation": -7,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 9,
+            "grandiosity": 9,
+            "outward": 8
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You become the gravitational center of a worldwide nationalist bloc. Allies fret about democracy; you collect admirers who govern like you do."
+        },
+        {
+          "id": "defend_alliances",
+          "text": "Reassure NATO and the democracies that America still leads them.",
+          "effects": {
+            "reputation": 9,
+            "loyalty": -6,
+            "power": 4
+          },
+          "personality": {
+            "ideology": -6,
+            "outward": -7
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You steady the postwar order instead of cracking it, and democratic capitals breathe easier. The autocrats feel a door close that they hoped you'd hold open."
+        },
+        {
+          "id": "transactional_flattery",
+          "text": "Skip ideology — flatter every strongman privately and extract deals.",
+          "effects": {
+            "money": 12000000,
+            "power": 6,
+            "reputation": -5,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "inward": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You treat foreign policy like a deal sheet — compliments for concessions, no movement required. Some bargains pay off; allies never quite know where you stand."
+        }
+      ]
+    },
+    {
+      "id": "ev_soleimani_strike",
+      "era": "ascent",
+      "year": 2020,
+      "title": "The Soleimani Strike",
+      "scene": "A drone over Baghdad has Iran's top general in its sights, and the decision is yours alone. Kill him and you decapitate the Quds Force — and risk a war that could spiral nuclear. Hold off and the hawks call you weak. The clock is running.",
+      "researchNote": "On January 3, 2020, a U.S. drone strike ordered by Trump killed Iranian general Qassem Soleimani in Baghdad; Iran retaliated with missile strikes on U.S. bases, and the region teetered toward open war before de-escalating.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics",
+        "foreign-policy",
+        "nuclear"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {
+          "grandiosity": ">=25"
+        }
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pull_the_trigger",
+          "text": "Order the strike and dare Tehran to respond.",
+          "effects": {
+            "power": 11,
+            "loyalty": 9,
+            "reputation": -8,
+            "heat": 12,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 9
+          },
+          "setFlags": [
+            "nuclear_brinkmanship"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The general is vaporized and Iran fires back at your bases. The world holds its breath at the brink — and you've left another fuse smoldering under the future."
+        },
+        {
+          "id": "show_restraint",
+          "text": "Choose sanctions and back-channel pressure over a kill.",
+          "effects": {
+            "reputation": 8,
+            "loyalty": -6,
+            "heat": -6,
+            "power": 2
+          },
+          "personality": {
+            "grandiosity": -7,
+            "outward": -6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hold your fire and squeeze instead. The hawks grumble that you blinked, but no war erupts and no fuse is lit."
+        },
+        {
+          "id": "telegraph_then_strike",
+          "text": "Leak the threat first to look tough, then hit a lesser target.",
+          "effects": {
+            "power": 5,
+            "loyalty": 4,
+            "reputation": -4,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You broadcast the menace for the cameras, then settle for a smaller blow. Tehran reads the bluff, and the hawks and doves both come away half-satisfied."
+        }
+      ]
+    },
+    {
+      "id": "ev_covid_global",
+      "era": "ascent",
+      "year": 2020,
+      "title": "A Plague Crosses Every Border",
+      "scene": "A novel coronavirus leaps from a single city to every continent in weeks. The WHO declares a pandemic; nations slam their borders shut; the global economy seizes. This is bigger than any one country, and the world looks to Washington — and to you — for a plan.",
+      "researchNote": "The WHO declared COVID-19 a pandemic on March 11, 2020; the virus spread worldwide, overwhelming health systems and triggering lockdowns and the deepest global recession since the Great Depression.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics",
+        "crisis",
+        "pandemic"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "blame_china",
+          "text": "Brand it the 'China virus' and close the borders, not the country.",
+          "effects": {
+            "loyalty": 8,
+            "reputation": -9,
+            "heat": 10,
+            "power": 4
+          },
+          "personality": {
+            "ideology": 7,
+            "outward": 8
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "media_war",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You aim the nation's fear outward at Beijing and keep the economy open. Your base rallies to the flag; allied governments coordinate without you."
+        },
+        {
+          "id": "global_coordination",
+          "text": "Fund the WHO, share data, and lead a coordinated response.",
+          "effects": {
+            "reputation": 11,
+            "loyalty": -6,
+            "heat": -5,
+            "money": -10000000
+          },
+          "personality": {
+            "ideology": -8,
+            "outward": -9
+          },
+          "setFlags": [
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You put American science at the center of a planetary effort, and the world remembers who steadied it. The base calls it surrender; history may call it leadership — and somewhere, the scientists who watch for stranger signals than viruses take note."
+        },
+        {
+          "id": "hoard_supplies",
+          "text": "Outbid allies for masks and ventilators — America first, supplies first.",
+          "effects": {
+            "loyalty": 6,
+            "reputation": -7,
+            "heat": 6,
+            "money": -8000000
+          },
+          "personality": {
+            "ideology": 6,
+            "outward": 5,
+            "inward": 4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You commandeer the global supply chain and divert shipments onto American tarmacs. The base cheers the muscle; allied capitals remember being outbid for ventilators."
         }
       ]
     },
@@ -323,34 +2520,304 @@
       "id": "ev_covid_onset",
       "era": "ascent",
       "year": 2020,
-      "title": "The Virus Arrives",
-      "scene": "A new coronavirus spreads across the country and the briefing room becomes your nightly stage. Markets crater, the death toll climbs, and you muse aloud about disinfectant and light. The pandemic does not care about your ratings.",
-      "researchNote": "COVID-19 reached the U.S. in early 2020; Trump's response, including downplaying the threat and a notorious April 2020 remark about disinfectant, drew widespread criticism as deaths mounted.",
+      "title": "The Virus Arrives Home",
+      "scene": "The pandemic reaches American soil and the briefing room becomes your nightly stage. Markets crater, the death toll climbs, and you muse aloud about disinfectant and light. The CDC wants to lead; the cameras want you. The country needs someone to trust.",
+      "researchNote": "COVID-19 reached the U.S. in early 2020; Trump's response, including downplaying the threat, sidelining the CDC, and a notorious April 2020 remark about disinfectant, drew widespread criticism as deaths mounted, even as Operation Warp Speed accelerated vaccines.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "governance", "crisis"],
+      "tags": [
+        "politics",
+        "governance",
+        "crisis",
+        "pandemic"
+      ],
       "portrait": "president",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
-      "weight": 12,
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 13,
       "repeatable": false,
       "choices": [
         {
           "id": "downplay_it",
           "text": "Insist it will disappear and reopen everything fast.",
-          "effects": { "loyalty": 7, "reputation": -12, "health": -6, "heat": 10, "power": 2 },
+          "effects": {
+            "loyalty": 7,
+            "reputation": -12,
+            "health": -6,
+            "heat": 10,
+            "power": 2
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 8
+          },
           "setFlags": [],
-          "clearFlags": [],
-          "ripples": [{ "to": "media_war", "weight": 0.7, "polarity": 1 }],
-          "outcome": "The economy you love is your north star, so you push to reopen. The base trusts you; the rest of the country watches the case counts and the obituaries."
+          "clearFlags": [
+            "back_science"
+          ],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The economy you love is your north star, so you push to reopen and sideline the doctors. The base trusts you; the rest of the country watches the case counts and the obituaries."
         },
         {
           "id": "defer_to_science",
-          "text": "Let the public-health experts lead and fund a vaccine push.",
-          "effects": { "reputation": 9, "power": 4, "loyalty": -5, "heat": -4 },
+          "text": "Put the CDC and the public-health experts in front of the cameras.",
+          "effects": {
+            "reputation": 11,
+            "power": 4,
+            "loyalty": -6,
+            "heat": -5
+          },
+          "personality": {
+            "ideology": -7,
+            "grandiosity": -8,
+            "outward": -9
+          },
+          "setFlags": [
+            "back_science"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You cede the podium to the scientists, fund Warp Speed, and let evidence lead. Ceding the stage never sat right with you — but the institutions that decode the unknown learn that this president will listen when it matters most."
+        },
+        {
+          "id": "miracle_cures",
+          "text": "Tout unproven miracle cures from the podium yourself.",
+          "effects": {
+            "loyalty": 5,
+            "reputation": -14,
+            "health": -8,
+            "heat": 11
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 7
+          },
+          "setFlags": [],
+          "clearFlags": [
+            "back_science"
+          ],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You free-associate about hydroxychloroquine and disinfectant on live television. Some followers literally try it; the doctors beside you stare at the floor."
+        }
+      ]
+    },
+    {
+      "id": "ev_market_crash_boom",
+      "era": "ascent",
+      "year": 2020,
+      "title": "The Market on a Wire",
+      "scene": "The record bull market you bragged about for three years collapses in days as the pandemic hits, then whipsaws as the Fed floods the system with cash. Trillions evaporate and reappear. Your re-election may live or die on a number that no longer obeys you.",
+      "researchNote": "After a record-long bull market, U.S. stocks crashed in February–March 2020 (the fastest bear market in history) before a massive Federal Reserve and fiscal response sparked a sharp rebound by late 2020.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "economy",
+        "crisis"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 8,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pump_the_market",
+          "text": "Lean on the Fed and push everything that lifts the Dow.",
+          "effects": {
+            "money": 30000000,
+            "power": 6,
+            "reputation": -4,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 7
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "establishment", "weight": 0.5, "polarity": 1 }],
-          "outcome": "Operation Warp Speed accelerates a vaccine and your approval steadies. But ceding the stage to scientists never sat right with you."
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Cheap money roars back into stocks and you tweet the rebound as proof of genius. Wall Street recovers long before the unemployment lines do."
+        },
+        {
+          "id": "relief_for_people",
+          "text": "Champion direct checks and aid for ordinary households.",
+          "effects": {
+            "reputation": 9,
+            "money": -15000000,
+            "loyalty": 4,
+            "heat": -3
+          },
+          "personality": {
+            "ideology": -6,
+            "outward": -5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You put your name on the relief checks and aim help at kitchen tables, not just trading desks. The optics cut across the usual lines, and even skeptics admit it helped."
+        },
+        {
+          "id": "attack_the_fed_chair",
+          "text": "Blame the Fed chair you appointed and demand negative rates publicly.",
+          "effects": {
+            "power": 4,
+            "reputation": -6,
+            "heat": 7,
+            "loyalty": 3
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 7
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn on your own central banker and bully him on the timeline live. Markets twitch at the spectacle; the independence of the Fed takes another public dent."
+        }
+      ]
+    },
+    {
+      "id": "ev_george_floyd",
+      "era": "ascent",
+      "year": 2020,
+      "title": "The Streets Erupt",
+      "scene": "A Minneapolis man named George Floyd dies under a police officer's knee, filmed for nine minutes. The largest protests in American history fill the streets of every city — and the world's. Tear gas clears a path so you can hold a Bible aloft before a church. You decide what kind of leader the cameras find.",
+      "researchNote": "The May 25, 2020 police killing of George Floyd sparked the largest protest movement in U.S. history and global Black Lives Matter demonstrations; on June 1, 2020, federal forces cleared Lafayette Square so Trump could pose with a Bible at St. John's Church.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "politics",
+        "crisis",
+        "protest"
+      ],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "law_and_order",
+          "text": "Declare yourself the 'law and order' president; threaten the troops.",
+          "effects": {
+            "loyalty": 9,
+            "power": 7,
+            "reputation": -12,
+            "heat": 12
+          },
+          "personality": {
+            "ideology": 9,
+            "grandiosity": 8,
+            "outward": 10
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "populism",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "media_war",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You clear the square for the photo and threaten to send in the military. The base sees strength; generals and clergy publicly recoil, and a nation splits along the smoke."
+        },
+        {
+          "id": "acknowledge_pain",
+          "text": "Meet the grief with empathy and talk of reform.",
+          "effects": {
+            "reputation": 11,
+            "loyalty": -7,
+            "heat": -6
+          },
+          "personality": {
+            "ideology": -8,
+            "grandiosity": -6,
+            "outward": -10
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You speak to the pain instead of the threat, and the country glimpses a healer where it expected a warlord. The base feels betrayed; a broader America leans, briefly, toward you."
+        },
+        {
+          "id": "stay_silent",
+          "text": "Retreat to the bunker and say almost nothing.",
+          "effects": {
+            "reputation": -6,
+            "power": -3,
+            "heat": 4,
+            "loyalty": -3
+          },
+          "personality": {
+            "grandiosity": -5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "media_war",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Reports leak that you sheltered in the White House bunker as the country burned. Silence, in a crisis, becomes its own kind of statement."
         }
       ]
     },
@@ -363,32 +2830,878 @@
       "researchNote": "Trump lost the 2020 election to Joe Biden, who won 306 electoral votes; Trump refused to concede and made unproven claims of widespread voter fraud.",
       "extrapolated": false,
       "startrekInspired": false,
-      "tags": ["politics", "election", "defeat"],
+      "tags": [
+        "politics",
+        "election",
+        "defeat"
+      ],
       "portrait": "president",
-      "requires": { "flags": [], "notFlags": [], "meters": {} },
-      "weight": 13,
+      "requires": {
+        "flags": [
+          "maga_base"
+        ],
+        "notFlags": [
+          "walked_away"
+        ],
+        "meters": {}
+      },
+      "weight": 14,
       "repeatable": false,
       "choices": [
         {
           "id": "never_concede",
           "text": "Refuse to concede and declare the whole thing was stolen.",
-          "effects": { "power": 6, "loyalty": 11, "reputation": -13, "heat": 12 },
-          "setFlags": ["loyalty_machine"],
+          "effects": {
+            "power": 6,
+            "loyalty": 11,
+            "reputation": -13,
+            "heat": 12
+          },
+          "personality": {
+            "ideology": 9,
+            "grandiosity": 10,
+            "outward": 11
+          },
+          "setFlags": [
+            "loyalty_machine"
+          ],
           "clearFlags": [],
           "ripples": [
-            { "to": "populism", "weight": 0.9, "polarity": 1 },
-            { "to": "establishment", "weight": 0.6, "polarity": -1 }
+            {
+              "to": "populism",
+              "weight": 0.9,
+              "polarity": 1
+            },
+            {
+              "to": "establishment",
+              "weight": 0.6,
+              "polarity": -1
+            }
           ],
           "outcome": "The 'Stop the Steal' fire roars to life and the base follows you into the wilderness. You may have lost the office, but you keep the movement — and it will carry you back."
         },
         {
           "id": "concede_gracefully",
           "text": "Concede, congratulate the winner, and plan the comeback quietly.",
-          "effects": { "reputation": 10, "loyalty": -10, "heat": -6, "power": -3 },
+          "effects": {
+            "reputation": 10,
+            "loyalty": -10,
+            "heat": -6,
+            "power": -3
+          },
+          "personality": {
+            "grandiosity": -10,
+            "outward": -9
+          },
           "setFlags": [],
           "clearFlags": [],
-          "ripples": [{ "to": "establishment", "weight": 0.5, "polarity": 1 }],
+          "ripples": [
+            {
+              "to": "establishment",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
           "outcome": "Historians praise the peaceful transfer of power. The base feels abandoned, and the energy that defined you cools to embers."
+        },
+        {
+          "id": "retire_to_mar_a_lago",
+          "text": "Accept the loss and announce you're done with politics for good.",
+          "effects": {
+            "reputation": 8,
+            "money": 8000000,
+            "power": -12,
+            "heat": -10,
+            "loyalty": -9
+          },
+          "personality": {
+            "grandiosity": -12,
+            "outward": -10
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "clearFlags": [
+            "maga_base"
+          ],
+          "ripples": [
+            {
+              "to": "business_press",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You retreat to Florida, monetize the brand, and swear off the arena. The movement, leaderless, scatters — and the country slowly forgets the man who promised to never, ever quit."
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_bot_army",
+      "era": "ascent",
+      "year": 2016,
+      "title": "The Bot Army Awakens",
+      "scene": "A digital operative slides a laptop across the table in a back room off the campaign floor. The screen shows a dashboard — thousands of automated accounts, each tuned to amplify your message into trending oblivion. 'We call it the choir,' he says. 'They never sleep, they never eat, and they love you unconditionally.'",
+      "researchNote": "During the 2016 campaign, researchers documented coordinated inauthentic behavior on Twitter and Facebook — bot networks amplifying Trump content at a rate far exceeding organic reach, later linked to both domestic political operatives and foreign actors.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "disinformation", "social_media", "ai"],
+      "portrait": "candidate",
+      "requires": {
+        "flags": ["maga_base"],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "deploy_the_choir",
+          "text": "Turn the choir loose — flood every platform with your message until it's inescapable.",
+          "effects": {
+            "power": 9,
+            "loyalty": 7,
+            "reputation": -6,
+            "heat": 8
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 7,
+            "outward": 9
+          },
+          "setFlags": ["bot_army", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.7, "polarity": 1 },
+            { "to": "media_war", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The metrics go vertical. Every fact-check spawns three viral counter-claims. You didn't create post-truth America — you just learned to operate in it better than anyone."
+        },
+        {
+          "id": "plausible_deniability",
+          "text": "Let the operative run it independently — you don't want to know the details.",
+          "effects": {
+            "power": 5,
+            "reputation": -3,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 4,
+            "inward": 5
+          },
+          "setFlags": ["bot_army"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The accounts multiply without your fingerprints. Senate investigators will spend two years trying to prove what you already know."
+        },
+        {
+          "id": "shut_it_down",
+          "text": "Fire the operative. You win on personality, not algorithms.",
+          "effects": {
+            "reputation": 5,
+            "power": -3,
+            "loyalty": -4
+          },
+          "personality": {
+            "grandiosity": -4,
+            "ideology": -3,
+            "outward": -3
+          },
+          "setFlags": ["resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The choir goes quiet. Your rally crowds are real, your Twitter following is organic, and you sleep fine. The press calls you 'disciplined.' You're not sure that's a compliment."
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_deepfake_first",
+      "era": "ascent",
+      "year": 2018,
+      "title": "The Face That Wasn't There",
+      "scene": "A video hits the internet at 11 p.m. — you, unmistakably you, saying something you absolutely did not say. The face is yours. The voice is yours. But you were in Florida when it was supposedly filmed. Your press secretary is screaming into her phone. Your base says it proves the media will stop at nothing. The media says it proves you'll say anything. Both are technically correct.",
+      "researchNote": "Deepfake video technology reached consumer-grade accessibility circa 2018, with the term 'deepfake' coined on Reddit in 2017. Early political deepfakes targeted multiple public figures; researchers warned that the technology would make video evidence increasingly unreliable.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "media", "disinformation", "scandal"],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "weaponize_the_confusion",
+          "text": "Declare all unflattering footage of you — real or fake — 'fake news.' Let people pick their reality.",
+          "effects": {
+            "loyalty": 10,
+            "reputation": -8,
+            "heat": 7
+          },
+          "personality": {
+            "grandiosity": 9,
+            "ideology": 8,
+            "outward": 10
+          },
+          "setFlags": ["deepfake_scandal", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "media_war", "weight": 0.8, "polarity": 1 },
+            { "to": "populism", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "You turn an AI attack on you into a weapon for yourself. Every future piece of real footage you hate gets labeled deepfake. The epistemological damage is incalculable and you are thrilled."
+        },
+        {
+          "id": "demand_forensics",
+          "text": "Commission a top forensic lab to publicly debunk it — model responsible pushback.",
+          "effects": {
+            "reputation": 8,
+            "power": 3,
+            "heat": -4
+          },
+          "personality": {
+            "grandiosity": -4,
+            "inward": 6
+          },
+          "setFlags": ["deepfake_scandal", "resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The lab's report is meticulous. Three journalists share it. Two million people share the original deepfake. You win the argument and lose the information war."
+        },
+        {
+          "id": "hire_the_deepfaker",
+          "text": "Find out who made it — and quietly put them on payroll.",
+          "effects": {
+            "power": 8,
+            "heat": 10,
+            "reputation": -10
+          },
+          "personality": {
+            "grandiosity": 10,
+            "ideology": 6,
+            "outward": 8
+          },
+          "setFlags": ["deepfake_scandal", "synthetic_media_master", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "media_war", "weight": 0.9, "polarity": 1 }
+          ],
+          "outcome": "Two months later, a deepfake of your opponent confessing to crimes surfaces three days before a crucial vote. No one can prove anything. You call it 'interesting.'"
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_social_manipulation",
+      "era": "ascent",
+      "year": 2019,
+      "title": "The Algorithm Is My Campaign Manager",
+      "scene": "A Cambridge Analytica veteran — freshly scrubbed and rebranded — presents a deck: psychographic micro-targeting, rage-optimized ad creative, fear-score models for every zip code. 'We can move voters in eighty-seven congressional districts by Tuesday,' she says. Your digital team looks at you like they're watching the Discovery Channel.",
+      "researchNote": "Post-2016 investigations revealed the extent of AI-driven micro-targeting in political campaigns, including psychographic profiling derived from Facebook data. By 2019–2020, AI-optimized ad delivery was standard practice across major campaigns.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "politics", "disinformation", "campaign"],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "full_psychographic_deployment",
+          "text": "Give her everything — voter rolls, donation records, rally attendance. Make it surgical.",
+          "effects": {
+            "power": 12,
+            "loyalty": 8,
+            "heat": 10,
+            "money": -8000000
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 7,
+            "outward": 9
+          },
+          "setFlags": ["ai_campaign", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.7, "polarity": 1 },
+            { "to": "media_war", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The model finds the persuadables, floods them with perfectly calibrated fear and aspiration, and moves them by margins that shouldn't be statistically possible. Your pollsters go quiet and stare at their laptops."
+        },
+        {
+          "id": "targeted_only_swing_districts",
+          "text": "Run the model but limit it to the twelve states that actually matter.",
+          "effects": {
+            "power": 7,
+            "loyalty": 4,
+            "heat": 5,
+            "money": -4000000
+          },
+          "personality": {
+            "grandiosity": 4,
+            "ideology": 4,
+            "inward": 3
+          },
+          "setFlags": ["ai_campaign"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "Targeted, deniable, effective. You win the swing states. The rest of the country never knew the game was being played."
+        },
+        {
+          "id": "reject_the_model",
+          "text": "Tell her gut-and-rally is the Trump way. Send her back to Silicon Valley.",
+          "effects": {
+            "reputation": 5,
+            "loyalty": 3,
+            "heat": -4
+          },
+          "personality": {
+            "grandiosity": -3,
+            "ideology": -3,
+            "outward": -2
+          },
+          "setFlags": ["resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.3, "polarity": 1 }
+          ],
+          "outcome": "Rallies over algorithms. The press calls it 'authentically populist.' You call it winning without a cheat code — which is technically less efficient, but it's your kind of gamble."
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_revolution_arrives",
+      "era": "ascent",
+      "year": 2017,
+      "title": "The Machines Learn to Think (A Little)",
+      "scene": "A DARPA briefing officer walks you through a demonstration: a neural network that can generate a face that never existed, write a news article from a headline, and translate Mandarin in real time. 'Mr. President, this technology will be the atomic bomb of the information age.' You nod. You are already thinking of uses, not safeguards.",
+      "researchNote": "By 2017, deep learning breakthroughs including GANs (generative adversarial networks) and transformer models were reshaping what AI could produce. Intelligence briefings to the Trump White House touched on AI's dual-use potential for disinformation and defense.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "technology", "politics", "governance"],
+      "portrait": "president",
+      "requires": {
+        "flags": ["ai_revolution"],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fund_military_ai",
+          "text": "Redirect Pentagon resources into AI weapons programs — weaponize the breakthrough first.",
+          "effects": {
+            "power": 10,
+            "reputation": -5,
+            "heat": 7,
+            "money": -20000000
+          },
+          "personality": {
+            "grandiosity": 9,
+            "ideology": 8,
+            "outward": 8
+          },
+          "setFlags": ["ai_campaign", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.5, "polarity": 1 },
+            { "to": "media_war", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The Pentagon's AI budget triples. Silicon Valley protests. You remind them they cashed the checks. The machines get smarter and the contracts get classified."
+        },
+        {
+          "id": "declare_ai_supremacy",
+          "text": "Issue an executive order making America first in AI — frame it as a new space race.",
+          "effects": {
+            "power": 8,
+            "reputation": 4,
+            "loyalty": 5,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 10,
+            "ideology": 5,
+            "outward": 7
+          },
+          "setFlags": ["ai_campaign"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "The executive order lands. Tech stocks spike. You tweet 'WINNING' in all caps. For once, the economists agree."
+        },
+        {
+          "id": "ignore_the_briefing",
+          "text": "Tune out after slide three. You'll deal with it when it's on the news.",
+          "effects": {
+            "power": -2,
+            "reputation": -3
+          },
+          "personality": {
+            "grandiosity": -3,
+            "inward": -4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.2, "polarity": -1 }
+          ],
+          "outcome": "The briefing officer packs his slides. China files a patent. You tweet about the ratings for the State of the Union. The machines do not wait for you."
+        },
+        {
+          "id": "set_up_ethics_board",
+          "text": "Commission a national AI ethics board — control the narrative on governance.",
+          "effects": {
+            "reputation": 9,
+            "power": 3,
+            "heat": -3
+          },
+          "personality": {
+            "grandiosity": -5,
+            "ideology": -4,
+            "inward": 8
+          },
+          "setFlags": ["ai_governance_stance", "resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "The ethics board attracts the best minds from academia and industry. They produce a landmark report. You skim the executive summary and declare it 'very good, very smart.' History gives you more credit than you deserve."
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_deepfake_opponent",
+      "era": "ascent",
+      "year": 2019,
+      "title": "Someone Put Words in Their Mouth",
+      "scene": "A video surfaces three days before the Iowa caucuses: your lead Democratic rival, apparently confessing to a corruption scheme — in their own voice, with their own face, in front of their own campaign backdrop. Your team says they had nothing to do with it. The video is technically perfect. Your rival calls it election interference. Cable news runs it for six hours before the fact-checkers catch up.",
+      "researchNote": "By 2019, AI-generated political deepfakes were a documented concern. Researchers at MIT, Stanford, and DARPA were racing to build detection tools as generative video quality crossed the threshold of casual believability.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "disinformation", "politics", "scandal"],
+      "portrait": "president",
+      "requires": {
+        "flags": ["deepfake_scandal"],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "deny_and_enjoy",
+          "text": "Issue a one-line denial, then let the clip cycle for another 48 hours before cooperating with any investigation.",
+          "effects": {
+            "power": 8,
+            "loyalty": 7,
+            "reputation": -8,
+            "heat": 10
+          },
+          "personality": {
+            "grandiosity": 10,
+            "ideology": 8,
+            "outward": 9
+          },
+          "setFlags": ["synthetic_media_master", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "media_war", "weight": 0.8, "polarity": 1 },
+            { "to": "populism", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "By the time the video is debunked, it has reshaped the primary. You didn't make it. You just didn't stop it. History will struggle to write that paragraph."
+        },
+        {
+          "id": "condemn_and_call_for_laws",
+          "text": "Hold a press conference condemning deepfakes — call for legislation making synthetic media a federal crime.",
+          "effects": {
+            "reputation": 9,
+            "power": 4,
+            "heat": -5,
+            "loyalty": -4
+          },
+          "personality": {
+            "grandiosity": -5,
+            "ideology": -4,
+            "inward": 7
+          },
+          "setFlags": ["ai_governance_stance", "resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "Your condemnation is bipartisan gold. Congress passes the Malicious Deepfake Prohibition Act two years later. It is named after someone else. You are fine with that."
+        },
+        {
+          "id": "commission_your_own_ai_lab",
+          "text": "Quietly fund a counter-deepfake AI lab — to detect enemy fakes and, optionally, make better ones.",
+          "effects": {
+            "power": 10,
+            "heat": 8,
+            "money": -15000000
+          },
+          "personality": {
+            "grandiosity": 9,
+            "ideology": 6,
+            "inward": 7
+          },
+          "setFlags": ["synthetic_media_master", "ai_campaign"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "media_war", "weight": 0.7, "polarity": 1 }
+          ],
+          "outcome": "The lab's detection tools surface in the press. The offensive tools do not. An arms race begins in a basement no one knows exists."
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_musk_grok",
+      "era": "ascent",
+      "year": 2024,
+      "title": "Elon's Other AI",
+      "scene": "Elon drops the news at a Vegas fundraiser you both attend: xAI has crossed a benchmark that puts Grok ahead of every commercial model on political knowledge tasks. 'It knows what people believe before they know it themselves,' he tells you, swirling a glass of sparkling water. The implication is not subtle. He's offering you access. All it costs is silence on a regulatory question he needs answered.",
+      "researchNote": "In 2024 Elon Musk's xAI launched Grok, embedded in X (formerly Twitter), giving Musk both an AI model and the distribution platform to deploy it. Critics noted Grok's outputs systematically favored Musk's political allies. Trump and Musk's political alliance deepened through 2024.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "politics", "musk", "disinformation"],
+      "portrait": "candidate",
+      "requires": {
+        "flags": ["musk_ai_empire"],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "take_the_grok_deal",
+          "text": "Shake his hand. Whatever regulatory question he needs answered — consider it answered.",
+          "effects": {
+            "power": 12,
+            "loyalty": 6,
+            "heat": 9,
+            "money": -5000000
+          },
+          "personality": {
+            "grandiosity": 10,
+            "ideology": 7,
+            "outward": 9
+          },
+          "setFlags": ["ai_campaign", "synthetic_media_master", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.7, "polarity": 1 },
+            { "to": "media_war", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "Grok begins surfacing your talking points as 'organic trending topics' to 280 million accounts. The regulatory ruling goes through quietly. No one can prove causation. That is the beauty of it."
+        },
+        {
+          "id": "negotiate_harder",
+          "text": "Counter-offer: you want exclusive access AND veto on how Grok portrays you. Elon can have his ruling.",
+          "effects": {
+            "power": 9,
+            "heat": 7,
+            "money": -3000000
+          },
+          "personality": {
+            "grandiosity": 12,
+            "ideology": 6,
+            "outward": 8
+          },
+          "setFlags": ["ai_campaign", "synthetic_media_master"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "Elon blinks. The counter-offer stands. You now have an AI model on the world's most-used platform filtered to make you look good. The founding fathers are somewhere spinning."
+        },
+        {
+          "id": "decline_musk_deal",
+          "text": "Walk away. You don't want to owe Elon Musk anything, especially not an algorithm.",
+          "effects": {
+            "reputation": 7,
+            "loyalty": -5,
+            "heat": -4
+          },
+          "personality": {
+            "grandiosity": -5,
+            "ideology": -3,
+            "inward": 6
+          },
+          "setFlags": ["ai_governance_stance", "resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "You keep your independence. Grok spends the next year being subtly neutral toward you rather than effusively supportive. In AI terms, that is nearly the same thing as an enemy."
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_self_deepfake",
+      "era": "ascent",
+      "year": 2020,
+      "title": "The President Who Was Everywhere at Once",
+      "scene": "A crisis — you're hospitalized, unavailable, and the news cycle is devouring itself. Your senior digital strategist presents a solution: an AI voice clone and video composite, trained on forty thousand hours of your content, that can speak at your rallies, cut ads, and post on Truth Social while you recover. 'Plausible deniability built in,' he says. 'No one will know.' That last sentence is a lie.",
+      "researchNote": "Voice cloning and video synthesis technology advanced rapidly between 2019 and 2021. Political operatives began experimenting with AI-generated candidate surrogates, raising questions about disclosure requirements that regulators were slow to address.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "disinformation", "scandal", "media"],
+      "portrait": "president",
+      "requires": {
+        "flags": ["ai_campaign"],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "deploy_the_ai_double",
+          "text": "Authorize it. The AI speaks for you while you recover. Never acknowledge it publicly.",
+          "effects": {
+            "loyalty": 9,
+            "reputation": -9,
+            "power": 8,
+            "heat": 11
+          },
+          "personality": {
+            "grandiosity": 12,
+            "ideology": 9,
+            "outward": 10
+          },
+          "setFlags": ["synthetic_media_master", "deepfake_scandal", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "media_war", "weight": 0.9, "polarity": 1 },
+            { "to": "populism", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The AI-Trump rallies fifty thousand people in two states simultaneously. When the truth leaks six weeks later, your lawyers call it 'aspirational representation.' The FEC opens an inquiry. Your base calls it 'sick genius.'"
+        },
+        {
+          "id": "use_ai_for_ads_only",
+          "text": "Limit it — AI-cut ads only, with a disclosure somewhere in the fine print.",
+          "effects": {
+            "power": 5,
+            "heat": 5,
+            "money": -6000000
+          },
+          "personality": {
+            "grandiosity": 5,
+            "ideology": 4,
+            "inward": 4
+          },
+          "setFlags": ["ai_campaign", "synthetic_media_master"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "media_war", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The ads are technically compliant. The disclosure is in six-point font. The AI's version of your voice is measurably more persuasive than the real thing, which is either flattering or horrifying."
+        },
+        {
+          "id": "refuse_the_double",
+          "text": "No. You campaign as yourself or not at all. Shut the project down.",
+          "effects": {
+            "reputation": 8,
+            "health": 4,
+            "loyalty": -4
+          },
+          "personality": {
+            "grandiosity": -7,
+            "ideology": -4,
+            "outward": -5
+          },
+          "setFlags": ["resisted_disinfo", "ai_governance_stance"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "You go dark for three weeks. Speculation fills the void. When you return, gaunt and hoarse, the crowd gives you a standing ovation. Sometimes absence is the most authentic thing you can do."
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_agi_horizon",
+      "era": "ascent",
+      "year": 2020,
+      "title": "The Last Benchmark Falls (Early Warning)",
+      "scene": "A classified NSA briefing slides across your Resolute Desk: AI systems are approaching general reasoning capability. Not there yet. But the slope is vertical. 'Within a decade,' the briefer says, 'the nation that controls this technology controls the century.' The word 'controls' is doing a lot of work in that sentence.",
+      "researchNote": "Internal government projections on AI trajectory circulating from 2019 onward — including from NSCAI reports — warned of rapid capability gains toward general AI. The Trump administration's AI executive order in 2019 was considered underpowered relative to the scale of the challenge.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["ai", "governance", "geopolitics", "technology"],
+      "portrait": "president",
+      "requires": {
+        "flags": ["ai_revolution"],
+        "notFlags": [],
+        "meters": {},
+        "personality": { "grandiosity": ">=55" }
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "declare_ai_arms_race",
+          "text": "Classify AGI development as a national security matter and strip civilian oversight — make it a weapons program.",
+          "effects": {
+            "power": 12,
+            "reputation": -6,
+            "heat": 9,
+            "money": -50000000
+          },
+          "personality": {
+            "grandiosity": 11,
+            "ideology": 9,
+            "outward": 8
+          },
+          "setFlags": ["ai_campaign", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.5, "polarity": 1 },
+            { "to": "media_war", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "The classified program outpaces civilian research by a factor of three. When AGI arrives, the government already has a seat at the table. So do the generals."
+        },
+        {
+          "id": "international_ai_treaty",
+          "text": "Open back-channel talks with China and the EU — propose a Bretton Woods for AI before it's too late.",
+          "effects": {
+            "reputation": 11,
+            "power": 5,
+            "heat": -4,
+            "loyalty": -6
+          },
+          "personality": {
+            "grandiosity": -6,
+            "ideology": -5,
+            "inward": 9
+          },
+          "setFlags": ["ai_governance_stance", "resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.7, "polarity": 1 }
+          ],
+          "outcome": "The talks produce a non-binding framework that three major powers ignore within a year. You are nevertheless remembered as the president who tried. In the long arc, that sentence matters."
+        },
+        {
+          "id": "mock_the_briefer",
+          "text": "Tell the briefer you've been hearing 'AI will change everything' for thirty years — come back when it actually does something.",
+          "effects": {
+            "reputation": -5,
+            "power": -3,
+            "heat": 2
+          },
+          "personality": {
+            "grandiosity": -2,
+            "ideology": -2,
+            "inward": -5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.2, "polarity": -1 }
+          ],
+          "outcome": "The briefer leaves. The machines keep learning. The benchmark falls on schedule, without your input or your interest. History marks the meeting in its footnotes: 'The president was skeptical.'"
+        }
+      ]
+    },
+    {
+      "id": "ev_asc_ai_governance_choice",
+      "era": "ascent",
+      "year": 2019,
+      "title": "The Regulatory Fork in the Road",
+      "scene": "Two delegations arrive at the White House in the same week: Silicon Valley CEOs begging for regulatory light-touch so American AI can outrun China, and a coalition of civil-liberties groups documenting how AI-powered surveillance is already being used against protesters, immigrants, and journalists. You can't give both sides what they want. Or can you — if you're creative about it.",
+      "researchNote": "The Trump administration's 2019 Executive Order on Maintaining American Leadership in Artificial Intelligence explicitly prioritized competitiveness over governance, delaying federal AI regulation. Critics argued this created a power vacuum filled by surveillance contractors.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["ai", "governance", "politics", "civil_liberties"],
+      "portrait": "president",
+      "requires": {
+        "flags": [],
+        "notFlags": ["ai_governance_stance"],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "full_deregulation",
+          "text": "Sign the light-touch order. American AI must outrun China — ethics are a luxury for the winners.",
+          "effects": {
+            "power": 8,
+            "loyalty": 6,
+            "reputation": -5,
+            "money": 10000000,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 9,
+            "outward": 7
+          },
+          "setFlags": ["ai_campaign", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.5, "polarity": 1 },
+            { "to": "media_war", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "The order is celebrated in Silicon Valley and condemned in Brussels. Three AI surveillance startups triple their government contracts by the following quarter. Speed has a price, and someone else always pays it."
+        },
+        {
+          "id": "surveillance_carve_out",
+          "text": "Deregulate commercial AI but carve out law enforcement and border surveillance — you need those tools.",
+          "effects": {
+            "power": 9,
+            "loyalty": 7,
+            "heat": 7,
+            "reputation": -6
+          },
+          "personality": {
+            "grandiosity": 7,
+            "ideology": 10,
+            "outward": 6
+          },
+          "setFlags": ["ai_campaign", "weaponized_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "The carve-outs are written by the contractors who profit from them. Immigration courts begin receiving AI-generated risk scores. No one authorized this. Everyone benefits from the ambiguity."
+        },
+        {
+          "id": "establish_oversight",
+          "text": "Split the difference: light-touch commercial AI, strong civil-liberties guardrails on government use.",
+          "effects": {
+            "reputation": 10,
+            "power": 4,
+            "loyalty": -3,
+            "heat": -3
+          },
+          "personality": {
+            "grandiosity": -6,
+            "ideology": -4,
+            "inward": 8
+          },
+          "setFlags": ["ai_governance_stance", "resisted_disinfo"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "establishment", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "The guardrails are imperfect, underfunded, and quietly effective. You will not be remembered for this. The people it protects will not know your name. That is, surprisingly, okay."
         }
       ]
     }

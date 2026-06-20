@@ -27,16 +27,26 @@ export function evalComparator(expr: string, value: number): boolean {
   return fn(value, operand);
 }
 
-/** Whether a state satisfies a `requires` gate. */
-export function meetsRequires(state: GameState, req: Requires): boolean {
-  for (const f of req.flags) {
+/**
+ * Whether a state satisfies a `requires` gate. Accepts a partial requires shape
+ * (parsed content always supplies the defaults; callers/tests may omit fields).
+ */
+export function meetsRequires(state: GameState, req: Partial<Requires>): boolean {
+  for (const f of req.flags ?? []) {
     if (!state.flags.includes(f)) return false;
   }
-  for (const f of req.notFlags) {
+  for (const f of req.notFlags ?? []) {
     if (state.flags.includes(f)) return false;
   }
-  for (const [id, expr] of Object.entries(req.meters) as [MeterId, string][]) {
+  for (const [id, expr] of Object.entries(req.meters ?? {}) as [MeterId, string][]) {
     const value = state.meters[id];
+    if (value === undefined || !evalComparator(expr, value)) return false;
+  }
+  for (const [axis, expr] of Object.entries(req.personality ?? {}) as [
+    keyof GameState["personality"],
+    string,
+  ][]) {
+    const value = state.personality[axis];
     if (value === undefined || !evalComparator(expr, value)) return false;
   }
   if (req.minAge !== undefined && state.age < req.minAge) return false;
@@ -49,12 +59,22 @@ function alreadyConsumed(state: GameState, ev: GameEvent): boolean {
   return !ev.repeatable && state.firedEvents.includes(ev.id);
 }
 
-/** All events in the current era that are eligible right now. */
+/**
+ * All events in the current era that are eligible right now. Time only moves
+ * forward: an event whose year is earlier than the last fired event is excluded
+ * so the player is never "sent back in time". If that would leave nothing
+ * eligible (e.g. all remaining events predate the floor), the floor is relaxed
+ * so the era can still progress.
+ */
 export function eligibleEvents(content: Content, state: GameState): GameEvent[] {
   const era = content.eras[state.eraIndex];
   if (!era) return [];
   const pool = content.eventsByEra.get(era.id) ?? [];
-  return pool.filter((ev) => !alreadyConsumed(state, ev) && meetsRequires(state, ev.requires));
+  const base = pool.filter(
+    (ev) => !alreadyConsumed(state, ev) && meetsRequires(state, ev.requires),
+  );
+  const forward = base.filter((ev) => ev.year >= state.lastEventYear);
+  return forward.length > 0 ? forward : base;
 }
 
 /**
