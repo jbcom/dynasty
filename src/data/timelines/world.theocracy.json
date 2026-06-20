@@ -358,15 +358,52 @@
       "id": "wwt_crusade_outcomes_diverge",
       "year": 2270,
       "headline": "Three Crusades, Three Fates: Communion, Détente, or the Long Dark",
-      "body": "By 2270 the Ark Fleet has been underway for decades and first-wave crusade forces have reached the outer system staging points. Three distinct trajectories have emerged, driven by which faction controls the Council of Elders in this year:\n\nUTOPIAN — The Communion Outcome: The Integrationist minority, now large enough to split the Council, forces a theological revision: if the visitors answered the Gospel with mathematics, mathematics may be how God speaks to minds shaped differently than ours. A joint Integrationist-secular coalition pilots a contact vessel, unarmed, carrying the Deep Space Array's original signal alongside a mathematical counter-reply. The visitors receive it and pause. What follows takes thirty years to understand, but the result is the Communion of Intelligences — not conversion, but a mutual recognition that neither side possesses the full picture. The Anointed Republic fractures along the Integrationist fault line. The Ark Fleet is recalled, then stands down when half its crews mutiny. The crusade dies before it reaches a star.\n\nCENTRIST — The Missionary Détente: The Ark Fleet arrives at the visitors' stellar neighborhood and deploys the broadcast array at point-blank range — not weapons, but maximum-power evangelism directed at the visitors' worlds, twenty-four hours a day, seven days a week, in every frequency band. The visitors' response is to erect electromagnetic shielding at civilizational scale and cease reply. The crusade is real but contained: a siege of silence, a missionary standoff that neither side can resolve and neither is willing to escalate. The galaxy receives two civilizations in a permanent cold-faith stalemate, each broadcasting into the other's silence.\n\nDICTATORIAL — The Long Dark: The Crusade Encyclical is followed in full. The Ark Fleet engages the visitors' system with weapons derived from alien propulsion mathematics turned inside-out. The resulting exchange is not a war in any human historical sense — it is a detonation of civilizations across the light-cone, leaving signals that will reach Earth in centuries as silence where two stars once had radio-noisy worlds. The secular coalition, watching from Earth observatories, files a warrant for crimes against sentient life. The Anointed Republic considers this further evidence that secularism is the Enemy's earthly proxy.",
+      "body": "By 2270 the Ark Fleet has been underway for decades. Three trajectories have emerged — Communion (Integrationist theology wins, the crusade stands down), Missionary Détente (a siege of silence, neither escalation nor resolution), and the Long Dark (the Crusade Encyclical followed in full, civilizations detonated across light-years). Which fate arrives depends on which faction controls the Council of Elders and how deep the Anointed Republic's commitment to coexistence runs.",
       "tags": ["crusade", "first_contact", "space_war", "outcomes", "aliens"],
       "extrapolated": true,
-      "setFlags": ["crusade_communion_possible", "crusade_detente_possible", "crusade_genocide_possible"],
+      "setFlags": ["crusade_fate_imminent"],
       "requires": {
-        "flags": ["ark_fleet_construction", "holy_war_declared"],
-        "notFlags": [],
-        "meters": {},
-        "personality": {}
+        "flags": ["ark_fleet_construction", "holy_war_declared"]
+      }
+    },
+    {
+      "id": "wwt_crusade_genocide",
+      "year": 2271,
+      "headline": "The Long Dark: The Crusade Encyclical Followed in Full",
+      "body": "The Ark Fleet engages the visitors' system with weapons derived from alien propulsion mathematics turned inside-out. The resulting exchange is not a war in any human historical sense — it is a detonation of civilizations across the light-cone. The secular coalition files a warrant for crimes against sentient life. The Anointed Republic considers this further evidence that secularism is the Enemy's earthly proxy.",
+      "tags": ["crusade", "first_contact", "space_war", "genocide", "aliens"],
+      "extrapolated": true,
+      "setFlags": ["crusade_genocide_possible"],
+      "requires": {
+        "flags": ["ark_fleet_construction", "holy_war_declared", "crusade_fate_imminent"],
+        "personality": { "ideology": ">=40" }
+      }
+    },
+    {
+      "id": "wwt_crusade_communion",
+      "year": 2272,
+      "headline": "The Communion of Intelligences: The Integrationists Win the Council",
+      "body": "The Integrationist minority forces a theological revision: if the visitors answered the Gospel with mathematics, mathematics may be how God speaks to minds shaped differently than ours. A joint coalition pilots an unarmed contact vessel. The result is the Communion of Intelligences — not conversion, but mutual recognition. The Ark Fleet is recalled. The crusade dies before it reaches a star.",
+      "tags": ["crusade", "first_contact", "space_war", "communion", "aliens"],
+      "extrapolated": true,
+      "setFlags": ["crusade_communion_possible"],
+      "requires": {
+        "flags": ["ark_fleet_construction", "holy_war_declared", "crusade_fate_imminent"],
+        "notFlags": ["crusade_genocide_possible"],
+        "personality": { "ideology": "<=-40" }
+      }
+    },
+    {
+      "id": "wwt_crusade_detente",
+      "year": 2273,
+      "headline": "The Missionary Standoff: A Siege of Silence Across the Stars",
+      "body": "The Ark Fleet arrives at the visitors' stellar neighborhood and deploys the broadcast array at point-blank range — not weapons, but maximum-power evangelism in every frequency band. The visitors' response is to erect electromagnetic shielding at civilizational scale. The galaxy receives two civilizations in a permanent cold-faith stalemate, each broadcasting into the other's silence.",
+      "tags": ["crusade", "first_contact", "space_war", "detente", "aliens"],
+      "extrapolated": true,
+      "setFlags": ["crusade_detente_possible"],
+      "requires": {
+        "flags": ["ark_fleet_construction", "holy_war_declared", "crusade_fate_imminent"],
+        "notFlags": ["crusade_genocide_possible", "crusade_communion_possible"]
       }
     },
     {

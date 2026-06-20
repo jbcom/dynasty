@@ -48,10 +48,17 @@ async function choose(choice: Choice): Promise<void> {
     max-width: 34rem;
     margin: 0 auto;
     padding: var(--mmm-pad);
+    /* Opaque fallback for devices where backdrop-filter is disabled/unsupported. */
     background: var(--mmm-surface);
-    border: 1px solid var(--mmm-gold-deep);
+    border: 1px solid color-mix(in srgb, var(--mmm-gold-deep) 70%, transparent);
     border-radius: var(--mmm-radius-lg);
     box-shadow: var(--mmm-shadow);
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .card {
+      background: color-mix(in srgb, var(--mmm-surface) 80%, transparent);
+      backdrop-filter: blur(8px);
+    }
   }
   .badges {
     display: flex;
@@ -61,41 +68,55 @@ async function choose(choice: Choice): Promise<void> {
   }
   .year {
     font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
     color: var(--mmm-gold);
-    font-family: var(--mmm-font-display);
+    font-family: var(--mmm-font-body);
+    text-transform: uppercase;
   }
   h2 {
-    margin: 0 0 0.4rem;
+    margin: 0 0 0.5rem;
     font-family: var(--mmm-font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.2;
     color: var(--mmm-text);
   }
   .scene {
-    margin: 0 0 0.9rem;
-    line-height: 1.5;
+    margin: 0 0 1rem;
+    font-family: var(--mmm-font-body);
+    font-size: 1rem;
+    line-height: 1.6;
     color: var(--mmm-text);
+    border-left: 2px solid var(--mmm-gold-deep);
+    padding-left: 0.75rem;
   }
   .choices {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.45rem;
   }
   button {
     text-align: left;
-    padding: 0.7rem 0.9rem;
-    background: var(--mmm-navy-light);
+    padding: 0.65rem 0.9rem;
+    background: color-mix(in srgb, var(--mmm-navy-light) 80%, var(--mmm-navy-deep));
     color: var(--mmm-text);
     border: 1px solid var(--mmm-gold-deep);
     border-radius: var(--mmm-radius);
-    font-size: 0.95rem;
+    font-family: var(--mmm-font-body);
+    font-size: 0.97rem;
+    line-height: 1.45;
     cursor: pointer;
     transition:
       transform var(--mmm-dur-fast) var(--mmm-ease),
-      background var(--mmm-dur-fast) var(--mmm-ease);
+      background var(--mmm-dur-fast) var(--mmm-ease),
+      border-color var(--mmm-dur-fast) var(--mmm-ease);
   }
   button:hover:not(:disabled) {
-    background: var(--mmm-navy);
+    background: var(--mmm-navy-light);
     transform: translateY(-1px);
     border-color: var(--mmm-gold);
+    box-shadow: 0 2px 8px rgb(212 175 55 / 0.15);
   }
   button:disabled {
     opacity: 0.5;

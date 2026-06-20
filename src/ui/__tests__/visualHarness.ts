@@ -35,7 +35,8 @@ const BRAND_TOKENS: Record<string, string> = {
   "--mmm-radius-lg": "12px",
   "--mmm-gap": "10px",
   "--mmm-pad": "12px",
-  "--mmm-font-display": "Georgia, serif",
+  "--mmm-font-display": '"Playfair Display", Georgia, serif',
+  "--mmm-font-body": '"EB Garamond", Georgia, serif',
   "--mmm-shadow": "0 4px 16px rgba(0,0,0,0.4)",
   "--mmm-shadow-gold": "0 0 12px rgba(212,175,55,0.35)",
   "--mmm-dur": "280ms",
@@ -48,6 +49,15 @@ export function applyBrandTokens(): void {
   const root = document.documentElement.style;
   for (const [k, v] of Object.entries(BRAND_TOKENS)) root.setProperty(k, v);
   document.body.style.background = BRAND_TOKENS["--mmm-navy"] ?? "#0a1633";
+  // Load the self-hosted luxury fonts (served from public/) so screenshots show
+  // the real typography, not the system-serif fallback. Idempotent.
+  if (!document.getElementById("mmm-fonts")) {
+    const link = document.createElement("link");
+    link.id = "mmm-fonts";
+    link.rel = "stylesheet";
+    link.href = "/assets/fonts/fonts.css";
+    document.head.appendChild(link);
+  }
 }
 
 /** Create a mount host with a fixed mobile width; returns it for mount targets. */

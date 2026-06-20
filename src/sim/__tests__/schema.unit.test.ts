@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { buildContent } from "../content";
-import { ChoiceSchema, EventSchema, MeterComparatorSchema, parseContent } from "../schema";
+import {
+  AssetSchema,
+  ChoiceSchema,
+  EventSchema,
+  MeterComparatorSchema,
+  parseContent,
+} from "../schema";
 import { validRaw } from "./fixtures";
 
 describe("schema validation", () => {
@@ -98,5 +104,19 @@ describe("schema validation", () => {
     const meters = raw.meters as { meters: unknown[] };
     meters.meters = meters.meters.slice(0, 5);
     expect(() => buildContent(raw)).toThrow();
+  });
+
+  it("AssetSchema accepts 'font' as a valid kind (de-ui-a)", () => {
+    // Validates the schema extension allowing self-hosted font assets to be
+    // license-logged in assets.json alongside images and audio.
+    const result = AssetSchema.safeParse({
+      id: "font_playfair_display",
+      path: "assets/fonts/playfair-display-normal-700-latin.woff2",
+      kind: "font",
+      source: "https://fonts.google.com/specimen/Playfair+Display",
+      license: "OFL",
+      attribution: "Playfair Display by Claus Eggers Sørensen",
+    });
+    expect(result.success).toBe(true);
   });
 });

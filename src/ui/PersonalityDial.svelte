@@ -49,7 +49,7 @@ const archetypeLabel: Record<string, string> = {
   </div>
   {#if pole}
     <div class="pole-badge" data-pole={pole} aria-label="Current moral pole: {poleLabel ?? pole}">
-      <span class="pole-icon">{pole === "utopian" ? "▲" : pole === "dictatorial" ? "▼" : "◆"}</span>
+      <img class="pole-icon" src={`/assets/icons/ui/pole-${pole}.svg`} alt="" aria-hidden="true" />
       <span class="pole-name">{poleLabel ?? pole}</span>
     </div>
   {/if}
@@ -62,10 +62,10 @@ const archetypeLabel: Record<string, string> = {
 
 <style>
   .dial {
-    padding: 0.4rem var(--mmm-pad);
+    padding: 0.45rem var(--mmm-pad);
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.35rem;
   }
   .track {
     display: grid;
@@ -74,7 +74,8 @@ const archetypeLabel: Record<string, string> = {
     gap: 0.4rem;
   }
   .pole {
-    font-size: 0.6rem;
+    font-family: var(--mmm-font-body);
+    font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: var(--mmm-text-dim);
@@ -111,7 +112,8 @@ const archetypeLabel: Record<string, string> = {
   .readout {
     display: flex;
     justify-content: space-between;
-    font-size: 0.72rem;
+    font-family: var(--mmm-font-body);
+    font-size: 0.74rem;
   }
   .spectrum {
     font-weight: 700;
@@ -128,7 +130,8 @@ const archetypeLabel: Record<string, string> = {
   }
   .delusion {
     margin: 0;
-    font-size: 0.62rem;
+    font-family: var(--mmm-font-body);
+    font-size: 0.7rem;
     font-style: italic;
     color: var(--mmm-extrapolated);
   }
@@ -136,8 +139,9 @@ const archetypeLabel: Record<string, string> = {
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    font-size: 0.62rem;
-    padding: 0.15rem 0.4rem;
+    font-family: var(--mmm-font-body);
+    font-size: 0.72rem;
+    padding: 0.2rem 0.5rem;
     border-radius: 999px;
     width: fit-content;
     background: color-mix(in srgb, var(--mmm-surface) 70%, transparent);
@@ -153,7 +157,25 @@ const archetypeLabel: Record<string, string> = {
     color: var(--mmm-red);
   }
   .pole-icon {
-    font-size: 0.55rem;
+    width: 14px;
+    height: 14px;
+    opacity: 0.9;
+    /* Safe fallback: dim-text color for any unrecognised data-pole value.
+       (#9eaabf approximation of --mmm-text-dim without a CSS var inside filter) */
+    filter: invert(68%) sepia(8%) saturate(380%) hue-rotate(187deg) brightness(95%);
+  }
+  /* Tint pole icon to match the badge's pole color. */
+  .pole-badge[data-pole="utopian"] .pole-icon {
+    /* cyan #2fb6c9 */
+    filter: invert(62%) sepia(52%) saturate(490%) hue-rotate(157deg) brightness(90%);
+  }
+  .pole-badge[data-pole="centrist"] .pole-icon {
+    /* gold #d4af37 */
+    filter: invert(72%) sepia(38%) saturate(680%) hue-rotate(2deg) brightness(92%);
+  }
+  .pole-badge[data-pole="dictatorial"] .pole-icon {
+    /* red #b22234 */
+    filter: invert(17%) sepia(72%) saturate(1800%) hue-rotate(336deg) brightness(80%);
   }
   .pole-name {
     font-weight: 600;

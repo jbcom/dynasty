@@ -23,8 +23,9 @@ const { defs, meters }: Props = $props();
     flex-wrap: wrap;
     justify-content: center;
     gap: var(--mmm-gap);
-    padding: var(--mmm-pad);
+    padding: 0.6rem var(--mmm-pad);
     background: color-mix(in srgb, var(--mmm-surface) 88%, black);
-    border-bottom: 2px solid var(--mmm-gold-deep);
+    border-bottom: 1px solid var(--mmm-gold-deep);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.35);
   }
 </style>

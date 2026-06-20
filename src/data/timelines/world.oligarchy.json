@@ -140,8 +140,7 @@
       "requires": {
         "flags": ["global_directorate"],
         "notFlags": ["company_serfdom"],
-        "meters": {},
-        "personality": {}
+        "personality": { "ideology": "<=-40" }
       }
     },
     {
@@ -154,9 +153,7 @@
       "setFlags": ["managed_oligopoly", "global_stability_accords"],
       "requires": {
         "flags": ["global_directorate"],
-        "notFlags": ["abundance_technocracy"],
-        "meters": {},
-        "personality": {}
+        "notFlags": ["abundance_technocracy", "company_serfdom"]
       }
     },
     {
@@ -169,9 +166,7 @@
       "setFlags": ["company_serfdom", "global_labor_zones"],
       "requires": {
         "flags": ["franchise_nations", "corporate_state"],
-        "notFlags": ["abundance_technocracy"],
-        "meters": {},
-        "personality": {}
+        "personality": { "ideology": ">=40" }
       }
     },
     {

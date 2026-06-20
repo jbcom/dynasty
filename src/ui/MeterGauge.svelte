@@ -33,7 +33,15 @@ const dash = $derived(`${fraction * CIRC} ${CIRC}`);
       style={`stroke: var(--mmm-meter-${def.id});`}
     />
   </svg>
-  <span class="icon" aria-hidden="true">{def.icon}</span>
+  <img
+    class="icon"
+    src={`/assets/icons/${def.id}.svg`}
+    alt=""
+    aria-hidden="true"
+    width="22"
+    height="22"
+    decoding="async"
+  />
   <span class="value">{display}</span>
   <span class="label">{def.label}</span>
 </div>
@@ -45,6 +53,8 @@ const dash = $derived(`${fraction * CIRC} ${CIRC}`);
     justify-items: center;
     gap: 0.1rem;
     min-width: 4.5rem;
+    /* Icon overlaps the arc via absolute positioning — relative context needed. */
+    position: relative;
   }
   svg {
     display: block;
@@ -56,18 +66,27 @@ const dash = $derived(`${fraction * CIRC} ${CIRC}`);
     transition: stroke-dasharray var(--mmm-dur) var(--mmm-ease);
   }
   .icon {
-    margin-top: -1.6rem;
-    font-size: 1.1rem;
+    /* Positioned over the arc midpoint — avoids the Firefox grid margin-top bug. */
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.5));
   }
   .value {
+    font-family: var(--mmm-font-display);
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: var(--mmm-text);
   }
   .label {
-    font-size: 0.62rem;
+    font-family: var(--mmm-font-body);
+    font-size: 0.68rem;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
     color: var(--mmm-text-dim);
   }
   .crit .value {

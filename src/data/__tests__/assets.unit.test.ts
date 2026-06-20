@@ -18,6 +18,20 @@ describe("assets manifest", () => {
     }
   });
 
+  it("logs the self-hosted luxury fonts as OFL assets (DE-UI)", () => {
+    const parsed = AssetsFileSchema.parse(assetsJson);
+    const fonts = parsed.assets.filter((a) => a.kind === "font");
+    expect(fonts.length).toBeGreaterThanOrEqual(2);
+    for (const f of fonts) {
+      expect(f.license).toBe("OFL");
+      expect(f.path).toMatch(/assets\/fonts\/.+\.woff2$/);
+    }
+    // The Dynasty pairing is present.
+    const ids = new Set(fonts.map((f) => f.id));
+    expect(ids.has("font_playfair_display")).toBe(true);
+    expect(ids.has("font_eb_garamond")).toBe(true);
+  });
+
   it("covers all six meter icons and the whole portrait arc", () => {
     const parsed = AssetsFileSchema.parse(assetsJson);
     const ids = new Set(parsed.assets.map((a) => a.id));

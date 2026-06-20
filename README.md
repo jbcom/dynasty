@@ -1,19 +1,27 @@
-# MAGA Money Moves
+# DYNASTY
 
-A satirical **life-simulator** game: play the life of Donald Trump from birth in
-Queens (1946) to founding the first sustained Martian base as the immortal
-patriarch of a two-world civilization. Hybrid narrative + management sim,
-JSON-config-driven, shipped to Android via Capacitor.
+A dynastic **life-simulator**: inherit a family's ambitions, navigate three
+playable dynastic sagas — Trump, Musk, Kennedy — from immigrant origins to the
+first Martian base. Hybrid narrative + management sim, JSON-config-driven,
+shipped to Android via Capacitor.
 
 > Private / stealth project.
 
 ## What it is
 
-- **10 eras**, ~99 researched, branching events from boyhood → mogul → brand →
-  prime time → ascent → interregnum → total victory → the atomic horror →
-  the unification → red planet. Later eras are explicitly *extrapolated*; the
-  atomic/unification eras draw on the *Star Trek* future-history timeline.
+- **Three playable dynasties** — each a full narrative arc from a distinct
+  founding moment: the Drumpf/Trump commercial dynasty (Queens, 1946), the
+  Musk technological dynasty (South Africa), the Kennedy political dynasty
+  (Irish Famine, 1823).
+- **10 eras**, ~99 researched, branching events per house — boyhood → mogul →
+  brand → prime time → ascent → interregnum → total victory → the atomic
+  horror → the unification → red planet. Later eras are explicitly
+  *extrapolated*; the atomic/unification eras draw on the *Star Trek*
+  future-history timeline.
 - **6 meters** — Money 💰, Power 🏛️, Reputation 📣, Loyalty 🤝, Health ❤️, Heat 🔥.
+- **Birth-order lever** — prologue choices (sibling count, birth position) set
+  flags that reshape the given name, inheritance framing, and which events fire
+  across the whole run.
 - **Butterfly engine** — a visible cause→effect ledger *plus* a seeded chaos
   engine of weighted ripples, so timelines diverge across playthroughs and the
   full chain is rendered as a D3 force-DAG on the end screen.

@@ -5,6 +5,7 @@ import type { Currency, Slot, WorldTimeline } from "./schema";
 import { type DynastyKey, resolveSlots } from "./slots";
 import { type GameState, initState } from "./state";
 import { resolveCurrency } from "./systemic";
+import { resolveFullName, resolveGivenName } from "./terms";
 import { timelinesForBranch } from "./worldtime";
 
 /**
@@ -77,10 +78,14 @@ export function compileTimeline(content: Content, state: GameState, _rng: Rng): 
   const currency = resolveCurrency(content, state);
 
   const keyTerms: Record<string, string> = {};
-  for (const k of ["head_of_state", "the_nation", "surname", "given_name", "full_name"]) {
+  for (const k of ["head_of_state", "the_nation", "surname"]) {
     const v = termFor(content, k, branch);
     if (v) keyTerms[k] = v;
   }
+  // given_name / full_name are BIRTH-ORDER aware (AH8d): a firstborn/only-child
+  // heir carries the patriarch's name (Friedrich III), overriding the branch term.
+  keyTerms.given_name = resolveGivenName(content.terms, branch, state.flags);
+  keyTerms.full_name = resolveFullName(content.terms, branch, state.flags);
 
   return {
     seed: state.seed,

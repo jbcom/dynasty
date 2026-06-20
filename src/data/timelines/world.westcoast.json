@@ -379,12 +379,49 @@
       "body": "A century after first contact, the Pacific slope is the acknowledged hub of humanity's interstellar correspondence. The three factions that emerged from the Transhumanist Schism have hardened into three distinct civilizational models: the Open Commonwealth shares xenotechnology freely; the Corporate Frontier licenses it in tiers; the Ascendant Enclave hoards it behind augmentation gates. All three claim to be the authentic heirs of Silicon Valley. The frontier, as always, remains open — and contested.",
       "tags": ["contact", "civilization", "pacific", "future", "transhumanism"],
       "extrapolated": true,
-      "setFlags": ["post_contact_era", "pole_utopian", "pole_centrist", "pole_dictatorial"],
+      "setFlags": ["post_contact_era"],
       "requires": {
-        "flags": ["contact_made"],
-        "notFlags": [],
-        "meters": {},
-        "personality": {}
+        "flags": ["contact_made"]
+      }
+    },
+    {
+      "id": "www_post_contact_dictatorial",
+      "year": 2281,
+      "headline": "The Ascendant Enclave Prevails: Xenotechnology Behind Augmentation Gates",
+      "body": "The Ascendant Enclave's vision wins the institutional argument: xenotechnology is access, and access is power. The Open Commons' idealism loses to the economics of scarcity that augmentation gates create. The Pacific slope becomes the world's most unequal jurisdiction — unaugmented people live outside the perimeter, augmented elites govern within it, and the tech-oligarch dynasty that runs the gate network has no accountability to either.",
+      "tags": ["civilization", "pacific", "future", "transhumanism", "dictatorial"],
+      "extrapolated": true,
+      "setFlags": ["pole_dictatorial"],
+      "requires": {
+        "flags": ["contact_made", "post_contact_era"],
+        "personality": { "ideology": ">=40" }
+      }
+    },
+    {
+      "id": "www_post_contact_utopian",
+      "year": 2282,
+      "headline": "The Open Commonwealth Wins: Xenotechnology Freely Shared, the Frontier for All",
+      "body": "The Open Commons' founding instinct — that technology is a lever for expanding freedom, not concentrating it — carries the vote in the post-contact institutions. Xenotechnology is released under open-source license to every jurisdiction simultaneously. The Pacific slope becomes the world's most equal jurisdiction overnight and the most disruptive: every industry that depended on the scarcity of advanced physics dissolves in eighteen months. The Corporate Frontier retreats into advocacy; the Ascendant Enclave dissolves.",
+      "tags": ["civilization", "pacific", "future", "transhumanism", "utopian"],
+      "extrapolated": true,
+      "setFlags": ["pole_utopian"],
+      "requires": {
+        "flags": ["contact_made", "post_contact_era"],
+        "notFlags": ["pole_dictatorial"],
+        "personality": { "ideology": "<=-40" }
+      }
+    },
+    {
+      "id": "www_post_contact_centrist",
+      "year": 2283,
+      "headline": "The Corporate Frontier Holds: Tiered Licensing, Managed Disruption, the Managed Republic",
+      "body": "Neither the Enclave's gates nor the Commons' open release wins: the Corporate Frontier's tiered licensing model becomes the default, because it is the only model that all three factions can live with. Xenotechnology is available — for a price, at a pace, with governance attached. The Pacific slope remains the world's innovation hub, and remains unequal, and remains the place where the next faction is already forming in a garage somewhere below the Ascendant perimeter.",
+      "tags": ["civilization", "pacific", "future", "transhumanism", "centrist"],
+      "extrapolated": true,
+      "setFlags": ["pole_centrist"],
+      "requires": {
+        "flags": ["contact_made", "post_contact_era"],
+        "notFlags": ["pole_dictatorial", "pole_utopian"]
       }
     }
   ]

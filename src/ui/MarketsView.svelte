@@ -45,7 +45,9 @@ function regimeTone(regime: string | undefined): string {
 
 <section class="markets" aria-label="Markets and ranks">
   <header>
-    <h3>💹 Markets</h3>
+    <h3>
+      <img class="h-icon" src="/assets/icons/ui/markets.svg" alt="" aria-hidden="true" />Markets
+    </h3>
     <span class="currency">Denominated in {currency.name} ({currency.symbol})</span>
   </header>
 
@@ -75,7 +77,14 @@ function regimeTone(regime: string | undefined): string {
       {#each ranks as r (r.def.id)}
         <li class:fallen={r.fallen}>
           <span class="rank-label">{r.def.label}</span>
-          <span class="rung">{r.label}{#if r.fallen} ▼{/if}</span>
+          <span class="rung"
+            >{r.label}{#if r.fallen}<img
+                class="fallen-icon"
+                src="/assets/icons/ui/pole-dictatorial.svg"
+                alt="(fallen)"
+                title="Fallen from peak rank"
+              />{/if}</span
+          >
         </li>
       {/each}
     </ul>
@@ -163,6 +172,14 @@ function regimeTone(regime: string | undefined): string {
   }
   .rank-list li.fallen .rung {
     color: var(--mmm-red);
+  }
+  .fallen-icon {
+    width: 0.7em;
+    height: 0.7em;
+    margin-left: 0.25em;
+    vertical-align: -0.05em;
+    /* tint to red (#b22234) */
+    filter: invert(20%) sepia(64%) saturate(2200%) hue-rotate(330deg) brightness(82%);
   }
   .rank-label {
     color: var(--mmm-text-dim);

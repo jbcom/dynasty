@@ -1,8 +1,11 @@
 import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
+  // appId is the stable Android application identifier — kept as-is so installed
+  // builds / store listing continuity is not broken by the Dynasty rebrand. Only
+  // the user-facing appName changes.
   appId: "com.jbogaty.magamoneymoves",
-  appName: "MAGA Money Moves",
+  appName: "Dynasty",
   webDir: "dist",
   backgroundColor: "#0a1633",
   loggingBehavior: process.env.NODE_ENV === "production" ? "none" : "debug",

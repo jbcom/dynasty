@@ -5,9 +5,9 @@ describe("sanity (browser project)", () => {
   it("has a real DOM", () => {
     expect(typeof window).toBe("object");
     const el = document.createElement("div");
-    el.textContent = "MAGA Money Moves";
+    el.textContent = "Dynasty";
     document.body.appendChild(el);
-    expect(document.body.textContent).toContain("MAGA Money Moves");
+    expect(document.body.textContent).toContain("Dynasty");
     el.remove();
   });
 });

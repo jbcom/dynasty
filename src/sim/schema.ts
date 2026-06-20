@@ -344,7 +344,7 @@ export type MetersFile = z.infer<typeof MetersFileSchema>;
 export const AssetSchema = z.object({
   id: z.string().min(1),
   path: z.string().min(1),
-  kind: z.enum(["icon", "portrait", "background", "texture", "audio", "sprite"]),
+  kind: z.enum(["icon", "portrait", "background", "texture", "audio", "sprite", "font"]),
   source: z.string().min(1),
   license: z.enum(["CC0", "CC-BY", "CC-BY-SA", "PD", "OFL", "MIT"]),
   attribution: z.string().default(""),
