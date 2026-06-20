@@ -6,8 +6,10 @@ import ButterflyLog from "../ButterflyLog.svelte";
 import Dossier from "../Dossier.svelte";
 import EventCard from "../EventCard.svelte";
 import MeterHud from "../MeterHud.svelte";
+import PersonalityDial from "../PersonalityDial.svelte";
 import StatsView from "../StatsView.svelte";
 import TimelineView from "../TimelineView.svelte";
+import { tyrannyUtopiaAxis } from "../../sim/personality";
 
 interface Props {
   content: Content;
@@ -17,6 +19,11 @@ interface Props {
 }
 
 const { content, view, busy, onchoose }: Props = $props();
+
+// Diegetic ambient drift: the play area tints toward cyan (utopia) or red
+// (tyranny) as the personality vector shifts, so the slide is felt, not just read.
+const axis = $derived(tyrannyUtopiaAxis(view.state.personality));
+const drift = $derived(axis < -25 ? "utopia" : axis > 25 ? "tyranny" : "neutral");
 
 type Tab = "event" | "timeline" | "stats" | "butterfly" | "dossier";
 let tab = $state<Tab>("event");
@@ -30,8 +37,9 @@ const tabs: Array<{ id: Tab; label: string }> = [
 ];
 </script>
 
-<div class="play">
+<div class="play" data-drift={drift}>
   <MeterHud defs={content.meters} meters={view.state.meters} />
+  <PersonalityDial personality={view.state.personality} />
 
   <nav class="tabs">
     {#each tabs as t (t.id)}
@@ -68,6 +76,14 @@ const tabs: Array<{ id: Tab; label: string }> = [
     display: flex;
     flex-direction: column;
     min-height: 100dvh;
+    transition: background var(--mmm-dur-slow) var(--mmm-ease);
+  }
+  /* Diegetic drift — the chrome itself leans toward utopia (cyan) or tyranny (red). */
+  .play[data-drift="utopia"] {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--mmm-startrek) 12%, transparent), transparent 40%);
+  }
+  .play[data-drift="tyranny"] {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--mmm-red) 14%, transparent), transparent 40%);
   }
   .tabs {
     display: flex;

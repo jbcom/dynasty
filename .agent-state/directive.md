@@ -48,7 +48,7 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 - [ ] J10 Era 10 pass
 
 ### Phase K — Personality & Endings UI
-- [ ] K1 HUD-as-language (tyranny↔utopia drift, visual + diegetic, outward radiation)
+- [x] K1 HUD-as-language (tyranny↔utopia drift, visual + diegetic, outward radiation)
 - [ ] K2 Ending-aware Legacy Report + endings-discovered tracker (secrets locked)
 - [ ] K3 First-Contact apex-ending presentation (lightspeed → the stars)
 
