@@ -78,6 +78,19 @@ export const ChoiceSchema = z.object({
   outcome: z.string().min(1),
   /** Optional gate so a choice only shows under certain conditions. */
   requires: RequiresSchema.optional(),
+  /**
+   * Optional TIMELINE HOP: a choice can short-circuit the linear era march,
+   * compressing time so events happen sooner (e.g. an early-prodigy path leaps
+   * to power decades early). `era` jumps to that era id; `yearAdvance` skips
+   * that many in-world years. Forward-only (a backward hop is ignored), so the
+   * timeline stays a compressible graph, not a fixed conveyor. Deterministic.
+   */
+  jumpTo: z
+    .object({
+      era: z.string().optional(),
+      yearAdvance: z.number().int().min(0).optional(),
+    })
+    .optional(),
 });
 export type Choice = z.infer<typeof ChoiceSchema>;
 

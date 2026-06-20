@@ -1,8 +1,55 @@
 import type { Content } from "./content";
 import { evaluateEnding } from "./endings";
 import { meetsRequires } from "./events";
+import type { Choice } from "./schema";
 import type { GameState } from "./state";
 import { ageInYear } from "./state";
+
+/**
+ * Apply a choice's optional TIMELINE HOP (perceived/compressible timeline): jump
+ * to a later era and/or skip in-world years. Forward-only — a hop that would move
+ * backward (earlier era index or year) is ignored, preserving determinism and the
+ * chronological floor. Returns a new state; if no jumpTo, returns the input.
+ */
+export function applyJump(content: Content, state: GameState, choice: Choice): GameState {
+  const jump = choice.jumpTo;
+  if (!jump) return state;
+
+  let eraIndex = state.eraIndex;
+  let year = state.year;
+
+  if (jump.era) {
+    const targetOrder = content.eras.findIndex((e) => e.id === jump.era);
+    if (targetOrder > state.eraIndex) {
+      const target = content.eras[targetOrder];
+      if (target) {
+        eraIndex = targetOrder;
+        year = Math.max(year, target.yearStart);
+      }
+    }
+  }
+  if (jump.yearAdvance && jump.yearAdvance > 0) {
+    year = year + jump.yearAdvance;
+    // If the advanced year lands in a later era, move the era index forward too.
+    for (let i = content.eras.length - 1; i > eraIndex; i--) {
+      const e = content.eras[i];
+      if (e && year >= e.yearStart) {
+        eraIndex = i;
+        break;
+      }
+    }
+  }
+
+  if (eraIndex === state.eraIndex && year === state.year) return state;
+  return {
+    ...state,
+    eraIndex,
+    year,
+    age: ageInYear(year),
+    eraEventCount: eraIndex !== state.eraIndex ? 0 : state.eraEventCount,
+    lastEventYear: Math.max(state.lastEventYear, year),
+  };
+}
 
 /**
  * Era progression + end-condition detection. The current era ends when its

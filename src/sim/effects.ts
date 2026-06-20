@@ -11,7 +11,7 @@ import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
 import type { Choice, GameEvent } from "./schema";
 import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
-import { advanceTimeline, detectEnd } from "./timeline";
+import { advanceTimeline, applyJump, detectEnd } from "./timeline";
 
 /** Result of resolving a choice: the new state plus the ledger entries it produced. */
 export interface Transition {
@@ -89,12 +89,16 @@ export function applyChoice(
     lastEventYear: Math.max(state.lastEventYear, event.year),
   };
 
-  // 7. Immediate end check (e.g. a choice that drops health to 0), else advance.
-  const immediateEnd = detectEnd(content, resolved);
+  // 7. Optional TIMELINE HOP — a choice can compress the arc forward (perceived,
+  // not hardcoded, timeline). Applied before the normal one-step advance.
+  const hopped = applyJump(content, resolved, choice);
+
+  // 8. Immediate end check (e.g. a choice that drops health to 0), else advance.
+  const immediateEnd = detectEnd(content, hopped);
   if (immediateEnd) {
-    return { state: { ...resolved, end: immediateEnd }, newLedger };
+    return { state: { ...hopped, end: immediateEnd }, newLedger };
   }
-  const advanced = advanceTimeline(content, resolved);
+  const advanced = advanceTimeline(content, hopped);
 
   // 8. Land any delayed consequences now due (post-advance year), unless the
   // timeline advance itself ended the run.
