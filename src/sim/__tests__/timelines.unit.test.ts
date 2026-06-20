@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import originsJson from "../../data/eras/origins.json";
+import kennedyJson from "../../data/timelines/kennedy.json";
 import moresJson from "../../data/timelines/mores.json";
 import moresNaziJson from "../../data/timelines/mores.nazi.json";
 import muskJson from "../../data/timelines/musk.json";
@@ -122,7 +124,31 @@ const FILES: Record<string, unknown> = {
   religion: religionJson,
   science: scienceJson,
   musk: muskJson,
+  kennedy: kennedyJson,
 };
+
+describe("Kennedy protagonist timeline + dynastic swap (task-003)", () => {
+  it("kennedy.json validates as scope=kennedy with the bootlegger→dynasty arc", () => {
+    const t = WorldTimelineSchema.parse(kennedyJson);
+    expect(t.scope).toBe("kennedy");
+    expect(t.events.length).toBeGreaterThanOrEqual(20);
+    const flags = new Set(t.events.flatMap((e) => e.setFlags));
+    // The dynastic-swap wiring: bootlegging → political dynasty → swap.
+    for (const f of ["bootlegger_fortune", "political_dynasty", "kennedy_swap"]) {
+      expect(flags.has(f), `kennedy.json missing swap flag ${f}`).toBe(true);
+    }
+  });
+
+  it("origins exposes the brewing→bootlegger bridge that enables the Trump↔Kennedy swap", () => {
+    // The bootlegger bridge in origins sets the same swap flags from Donald's
+    // own founding, so the Trump line can occupy the Kennedy political-dynasty slot.
+    const allChoiceFlags = new Set(
+      originsJson.events.flatMap((e) => (e.choices ?? []).flatMap((c) => c.setFlags ?? [])),
+    );
+    expect(allChoiceFlags.has("bootlegger_fortune")).toBe(true);
+    expect(allChoiceFlags.has("kennedy_swap")).toBe(true);
+  });
+});
 
 describe("world & thematic timelines (data + linking protocol)", () => {
   for (const [scope, json] of Object.entries(FILES)) {
