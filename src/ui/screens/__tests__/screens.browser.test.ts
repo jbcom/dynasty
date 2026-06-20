@@ -43,7 +43,8 @@ describe("TitleScreen", () => {
     expect(host.textContent).toContain("Continue the Saga");
   });
 
-  it("starts a new game with the entered seed", async () => {
+  it("starts a new game with the entered seed after dynasty selection", async () => {
+    // The flow is now: title → Begin a Dynasty → carousel → pick dynasty → onNewGame(seed, dynasty)
     const onNewGame = vi.fn();
     component = mount(TitleScreen, {
       target: host,
@@ -52,9 +53,64 @@ describe("TitleScreen", () => {
     const input = host.querySelector("input") as HTMLInputElement;
     input.value = "my-seed";
     input.dispatchEvent(new Event("input", { bubbles: true }));
+    // Step 1: click "Begin a Dynasty" → carousel appears.
     const btn = host.querySelector("button.primary") as HTMLButtonElement;
     await page.elementLocator(btn).click();
-    await vitest.waitFor(() => expect(onNewGame).toHaveBeenCalledWith("my-seed"));
+    // Step 2: carousel is now visible — pick the Trump card.
+    await vitest.waitFor(() => expect(host.querySelectorAll(".dynasty-card").length).toBe(3));
+    const trumpCard = Array.from(host.querySelectorAll(".dynasty-card")).find(
+      (c) => c.querySelector(".dynasty-name")?.textContent === "Trump",
+    ) as HTMLButtonElement;
+    await page.elementLocator(trumpCard).click();
+    await vitest.waitFor(() => expect(onNewGame).toHaveBeenCalledWith("my-seed", "trump"));
+  });
+
+  it("carousel shows all three dynasties (de-5d)", async () => {
+    component = mount(TitleScreen, {
+      target: host,
+      props: { hasSave: false, onNewGame: () => {}, onContinue: () => {} },
+    });
+    const btn = host.querySelector("button.primary") as HTMLButtonElement;
+    await page.elementLocator(btn).click();
+    await vitest.waitFor(() => expect(host.textContent).toContain("CHOOSE YOUR BLOODLINE"));
+    const cards = host.querySelectorAll(".dynasty-card");
+    expect(cards.length).toBe(3);
+    const names = Array.from(cards).map((c) => c.querySelector(".dynasty-name")?.textContent);
+    expect(names).toContain("Trump");
+    expect(names).toContain("Musk");
+    expect(names).toContain("Kennedy");
+  });
+
+  it("carousel back button returns to the title screen (de-5d)", async () => {
+    component = mount(TitleScreen, {
+      target: host,
+      props: { hasSave: false, onNewGame: () => {}, onContinue: () => {} },
+    });
+    const btn = host.querySelector("button.primary") as HTMLButtonElement;
+    await page.elementLocator(btn).click();
+    await vitest.waitFor(() => expect(host.textContent).toContain("CHOOSE YOUR BLOODLINE"));
+    const back = host.querySelector("button.back-btn") as HTMLButtonElement;
+    await page.elementLocator(back).click();
+    await vitest.waitFor(() => expect(host.textContent).toContain("Begin a Dynasty"));
+  });
+
+  it("Musk dynasty card fires onNewGame with 'musk' key (de-5d)", async () => {
+    const onNewGame = vi.fn();
+    component = mount(TitleScreen, {
+      target: host,
+      props: { hasSave: false, onNewGame, onContinue: () => {} },
+    });
+    const btn = host.querySelector("button.primary") as HTMLButtonElement;
+    await page.elementLocator(btn).click();
+    await vitest.waitFor(() => expect(host.querySelectorAll(".dynasty-card").length).toBe(3));
+    const muskCard = Array.from(host.querySelectorAll(".dynasty-card")).find(
+      (c) => c.querySelector(".dynasty-name")?.textContent === "Musk",
+    ) as HTMLButtonElement;
+    await page.elementLocator(muskCard).click();
+    await vitest.waitFor(() => {
+      const [, dynasty] = onNewGame.mock.calls[0] ?? [];
+      expect(dynasty).toBe("musk");
+    });
   });
 });
 

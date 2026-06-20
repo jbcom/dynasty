@@ -29,7 +29,10 @@ const content = buildContent({
         label: "leader",
         default: { event: "ev_jfk" },
         nazi: { event: "wun_purge" },
-        dynasty: { trump: { event: "ev_fred" }, musk: { event: "wk_musk_near_bankruptcy", note: "Musk 2008 near-death" } },
+        dynasty: {
+          trump: { event: "ev_fred" },
+          musk: { event: "wk_musk_near_bankruptcy", note: "Musk 2008 near-death" },
+        },
       },
     ],
   },

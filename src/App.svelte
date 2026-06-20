@@ -3,6 +3,7 @@ import { loadContent } from "./data/loadContent";
 import { capacitorStorage, type Storage } from "./engine/storage";
 import { clearSave, hasSave, loadGame } from "./engine/save";
 import type { Content } from "./sim/content";
+import type { DynastyKey } from "./sim/slots";
 import type { GameState } from "./sim/state";
 import { GameStore } from "./ui/gameStore.svelte";
 import { FormFactorStore } from "./ui/formFactor.svelte";
@@ -34,11 +35,11 @@ $effect(() => {
   };
 });
 
-async function newGame(seed: string): Promise<void> {
+async function newGame(seed: string, dynasty: DynastyKey = "trump"): Promise<void> {
   if (!storage) return;
   // Await the clear so a fast first choice can't race the old save's deletion.
   await clearSave(storage);
-  store = new GameStore(content, seed, storage);
+  store = new GameStore(content, seed, storage, undefined, dynasty);
   screen = "play";
 }
 
