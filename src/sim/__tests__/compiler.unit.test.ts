@@ -81,6 +81,14 @@ describe("timeline compiler (AH3 gears-in-a-clock, task-008)", () => {
     expect(c.branch).toBe("default"); // branch is unaffected by dynasty choice
   });
 
+  it("the Kennedy dynasty activates via kennedy_dynasty_active flag (de-5c prologue path)", () => {
+    // choose_kennedy_dynasty sets kennedy_dynasty_active (not kennedy_swap which is the
+    // bootlegger-arc alternate-history path). Both flags activate the kennedy gear.
+    const c = compile(["kennedy_dynasty_active"]);
+    expect(c.dynasty).toBe("kennedy");
+    expect(c.branch).toBe("default");
+  });
+
   it("is deterministic: same Era-0 state → identical compiled bundle", () => {
     expect(compile(["axis_ascendant"])).toEqual(compile(["axis_ascendant"]));
   });

@@ -307,3 +307,87 @@ describe("Musk prologue structure — de-5b", () => {
     expect(inventor.setFlags).toContain("musk_technical_lineage");
   });
 });
+
+describe("Kennedy prologue structure — de-5c", () => {
+  const origins = EraEventsSchema.parse(originsJson);
+
+  const eventById = (id: string) => {
+    const e = origins.events.find((x) => x.id === id);
+    if (!e) throw new Error(`no event ${id} in origins`);
+    return e;
+  };
+
+  it("ev_dynasty_founding_choice has all three dynasty choices", () => {
+    const ev = eventById("ev_dynasty_founding_choice");
+    const ids = ev.choices.map((c) => c.id);
+    expect(ids).toContain("choose_trump_dynasty");
+    expect(ids).toContain("choose_musk_dynasty");
+    expect(ids).toContain("choose_kennedy_dynasty");
+  });
+
+  it("choose_kennedy_dynasty sets kennedy_dynasty_active + kennedy_prologue", () => {
+    const ev = eventById("ev_dynasty_founding_choice");
+    const c = ev.choices.find((x) => x.id === "choose_kennedy_dynasty");
+    if (!c) throw new Error("no choose_kennedy_dynasty");
+    expect(c.setFlags).toContain("kennedy_dynasty_active");
+    expect(c.setFlags).toContain("kennedy_prologue");
+    expect(c.setFlags).not.toContain("trump_prologue");
+    expect(c.setFlags).not.toContain("musk_dynasty_active");
+  });
+
+  it("Kennedy prologue chain: Patrick → PJ → JPK, each gated correctly", () => {
+    const patrick = eventById("ev_patrick_kennedy_famine");
+    expect(patrick.requires?.flags ?? []).toContain("kennedy_prologue");
+    expect(patrick.requires?.notFlags ?? []).toContain("trump_prologue");
+    expect(patrick.requires?.notFlags ?? []).toContain("musk_dynasty_active");
+
+    const pj = eventById("ev_pj_kennedy_ward_boss");
+    expect(pj.requires?.flags ?? []).toContain("kennedy_irish_roots");
+    expect(pj.requires?.notFlags ?? []).toContain("trump_prologue");
+    expect(pj.requires?.notFlags ?? []).toContain("musk_dynasty_active");
+
+    const jpk = eventById("ev_jpk_the_patriarch");
+    expect(jpk.requires?.flags ?? []).toContain("kennedy_political_dynasty");
+    expect(jpk.requires?.notFlags ?? []).toContain("trump_prologue");
+    expect(jpk.requires?.notFlags ?? []).toContain("musk_dynasty_active");
+  });
+
+  it("Patrick's choices both set kennedy_irish_roots (seeds PJ gate)", () => {
+    const ev = eventById("ev_patrick_kennedy_famine");
+    for (const c of ev.choices) {
+      expect(c.setFlags, `choice ${c.id}`).toContain("kennedy_irish_roots");
+    }
+  });
+
+  it("PJ's choices both set kennedy_political_dynasty (seeds JPK gate)", () => {
+    const ev = eventById("ev_pj_kennedy_ward_boss");
+    for (const c of ev.choices) {
+      expect(c.setFlags, `choice ${c.id}`).toContain("kennedy_political_dynasty");
+    }
+  });
+
+  it("JPK's choices both set kennedy_dynasty_sons (seeds mid-game Kennedy arc)", () => {
+    const ev = eventById("ev_jpk_the_patriarch");
+    for (const c of ev.choices) {
+      expect(c.setFlags, `choice ${c.id}`).toContain("kennedy_dynasty_sons");
+    }
+  });
+
+  it("ev_donald_is_born also blocks kennedy_dynasty_active (all three dynasties mutually exclusive)", () => {
+    const ev = eventById("ev_donald_is_born");
+    expect(ev.requires?.notFlags ?? []).toContain("kennedy_dynasty_active");
+  });
+
+  it("all three Kennedy prologue events are within origins era year bounds [1885..1946]", () => {
+    const kennedyEventIds = [
+      "ev_patrick_kennedy_famine",
+      "ev_pj_kennedy_ward_boss",
+      "ev_jpk_the_patriarch",
+    ];
+    for (const id of kennedyEventIds) {
+      const ev = eventById(id);
+      expect(ev.year, `${id} year`).toBeGreaterThanOrEqual(1885);
+      expect(ev.year, `${id} year`).toBeLessThanOrEqual(1946);
+    }
+  });
+});
