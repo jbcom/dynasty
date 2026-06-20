@@ -33,7 +33,7 @@ afterEach(() => {
 });
 
 describe("PlayScreen (composed game screen)", () => {
-  it("renders the HUD, tab nav, portrait, and event card together", () => {
+  it("renders the HUD, tab nav, and event card together", () => {
     component = mount(PlayScreen, {
       target: host,
       props: { content, view: view(), busy: false, onchoose: () => {} },
@@ -50,9 +50,9 @@ describe("PlayScreen (composed game screen)", () => {
     expect(tabIcons.every((i) => i.getAttribute("src")?.startsWith("/assets/icons/ui/"))).toBe(
       true,
     );
-    // Portrait + event card on the Now tab.
-    expect(host.querySelector("[data-portrait]")).not.toBeNull();
+    // Event card on the Now tab (portraits removed — they distracted, reclaimed the space).
     expect(host.querySelector("[data-event]")).not.toBeNull();
+    expect(host.querySelector("[data-portrait]")).toBeNull();
   });
 
   it("switches tabs to show the dossier", async () => {

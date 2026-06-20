@@ -36,7 +36,6 @@ describe("schema validation", () => {
           title: "t",
           scene: "s",
           researchNote: "r",
-          portrait: "p",
           choices: [],
         },
         "event",

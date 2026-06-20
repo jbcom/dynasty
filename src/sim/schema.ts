@@ -124,7 +124,6 @@ export const EventSchema = z.object({
   extrapolated: z.boolean().default(false),
   startrekInspired: z.boolean().default(false),
   tags: z.array(z.string()).default([]),
-  portrait: z.string().min(1),
   requires: RequiresSchema,
   weight: z.number().min(0).default(10),
   /**

@@ -14,7 +14,6 @@ const baseEvent: GameEvent = {
   extrapolated: false,
   startrekInspired: false,
   tags: [],
-  portrait: "cadet",
   requires: { flags: [], notFlags: [], meters: {}, personality: {} },
   weight: 10,
   repeatable: false,

@@ -17,7 +17,6 @@ const event: GameEvent = {
   extrapolated: false,
   startrekInspired: false,
   tags: ["real_estate"],
-  portrait: "young_mogul",
   requires: { flags: [], notFlags: [], meters: {}, personality: {} },
   weight: 10,
   repeatable: false,
