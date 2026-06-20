@@ -18,8 +18,22 @@ function firstValue<T>(glob: Record<string, unknown>): T | null {
   return entry?.default ?? null;
 }
 
+function collectEraEvents(): Array<{ era: string; data: unknown }> {
+  return Object.entries(erasGlob)
+    .filter(([path]) => !path.endsWith("index.json"))
+    .map(([path, mod]) => {
+      const id = path.split("/").pop()?.replace(".json", "") ?? "";
+      return { era: id, data: (mod as { default: unknown }).default };
+    });
+}
+
 function hasRealContent(): boolean {
-  return firstValue(metersGlob) !== null && firstValue(indexGlob) !== null;
+  const meters = firstValue(metersGlob);
+  const index = firstValue<{ eras: unknown[] }>(indexGlob);
+  if (meters === null || index === null) return false;
+  // Every era in the index must have an authored events file, else buildContent
+  // would throw — stay on the fixture fallback until the content is complete.
+  return collectEraEvents().length >= (index.eras?.length ?? 0);
 }
 
 export function loadContent(): Content {
@@ -28,12 +42,7 @@ export function loadContent(): Content {
     return buildContent(validRaw());
   }
 
-  const eraEvents = Object.entries(erasGlob)
-    .filter(([path]) => !path.endsWith("index.json"))
-    .map(([path, mod]) => {
-      const id = path.split("/").pop()?.replace(".json", "") ?? "";
-      return { era: id, data: (mod as { default: unknown }).default };
-    });
+  const eraEvents = collectEraEvents();
 
   const raw: RawContent = {
     meters: firstValue(metersGlob),

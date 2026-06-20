@@ -40,7 +40,7 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 - [x] E1 Asset sourcing + manifest (OpenMoji icons, CC0 SVG caricatures + backgrounds, photo→cartoon derivatives, scraper + cartoonify dev tools, ASSETS.md)
 
 ### Phase F — Content: all 10 eras
-- [ ] F0 Era index + meters + butterfly-rules data
+- [x] F0 Era index + meters + butterfly-rules data
 - [ ] F1 Era 1 — Birth & Boyhood (1946–1964)
 - [ ] F2 Era 2 — Apprentice Mogul (1964–1987)
 - [ ] F3 Era 3 — Boom, Bust & Brand (1988–2003)

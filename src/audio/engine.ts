@@ -61,23 +61,44 @@ export class AudioEngine {
     this.blip.triggerAttackRelease("C2", "32n", this.nextCueTime());
   }
 
+  private eraPlayer: Tone.Player | null = null;
+
   /**
-   * Switch the ambient bed to an era. Each era gets a distinct root chord so the
-   * mood shifts. Safe to call repeatedly; no-ops if already on that era.
+   * Switch the ambient bed to an era. Prefers a real CC0 loop at
+   * `/assets/audio/<eraId>.ogg`; falls back to a synth pad chord if the file is
+   * absent (e.g. in tests). Safe to call repeatedly; no-ops if already on that era.
    */
   setEra(eraId: string, chord: string[] = ["C3", "E3", "G3"]): void {
     if (!this.started || this.currentEra === eraId) return;
     this.currentEra = eraId;
     this.padLoop?.dispose();
-    this.padLoop = new Tone.Loop((time) => {
-      this.pad.triggerAttackRelease(chord, "2n", time);
-    }, "2n").start(0);
-    if (Tone.getTransport().state !== "started") Tone.getTransport().start();
+    this.eraPlayer?.stop();
+    this.eraPlayer?.dispose();
+    this.eraPlayer = null;
+
+    try {
+      const player = new Tone.Player({
+        url: `/assets/audio/${eraId}.ogg`,
+        loop: true,
+        volume: -12,
+        autostart: true,
+      }).connect(this.master);
+      this.eraPlayer = player;
+    } catch {
+      // No track available — fall back to a synth pad bed.
+      this.padLoop = new Tone.Loop((time) => {
+        this.pad.triggerAttackRelease(chord, "2n", time);
+      }, "2n").start(0);
+      if (Tone.getTransport().state !== "started") Tone.getTransport().start();
+    }
   }
 
   /** Stop everything and free nodes. */
   dispose(): void {
     this.padLoop?.dispose();
+    this.eraPlayer?.stop();
+    this.eraPlayer?.dispose();
+    this.eraPlayer = null;
     if (this.started) {
       this.stinger.dispose();
       this.blip.dispose();
