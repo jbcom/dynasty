@@ -98,7 +98,7 @@ spec) — not re-queued here.
 ### task-017 AH4 no-shallowness audit
 - [ ] task-017 verify every branch opens a comparably rich gated multi-layer pool; deepen any thin branch
 ### task-018 Definition of done
-- [ ] task-018 typecheck+biome+unit+browser+e2e green; app live-verified per branch (zero console errors); reviewer trio; green PR; squash-merge
+- [ ] task-018 DoD — gate GREEN (typecheck, biome, 227 unit + 59 browser, build) and app LIVE-VERIFIED (chrome-devtools: title → German/Nazi-branch divergence "The Boy Who Served the King" → Markets tab with 6 live markets + 4 rank ladders + currency relabel, zero console errors); 7-branch timeline:sweep consistent. Opening the PR for the shippable unit now; remaining OPEN EPICS (full Koota query migration, deep-future for nazi/media/westcoast/megachurch, persona sweep task-023, Dynasty rename + Musk/Kennedy Era-0 sagas, AH8d sibling-count, task-022 full 3-pole coverage, task-017 no-shallowness) carry forward as the NEXT work unit per one-branch-per-unit. → open PR → reviewer trio → wait CI → squash-merge.
 
 ## Batch — alt-history consistency (batch-20260620-althist)
 
