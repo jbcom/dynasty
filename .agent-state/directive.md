@@ -91,7 +91,7 @@ spec) — not re-queued here.
 ### task-015 SIM1 phase 5 — balance + polish
 - [ ] task-015 balance pass; telegraphed currency-hedge survival play; crypto/attention polish
 ### task-016 AH6 agent-sweep verification
-- [ ] task-016 fan out verification agents over Era-0 permutation sweep (AH5 dumps) flagging contradictions/anachronisms/shallowness/name-title mismatches; aggregate → fix → re-sweep
+- [~] task-016 MECHANICAL sweep DONE + green: `pnpm timeline:sweep` over all 7 branches × dynasty shows correct title/currency/timeline-variant selection, 0 structural contradictions (the harness consistency check). The DEEP content-anachronism + shallowness sweep (agents reading compiled dumps for prose-level leaks) pairs with task-023 personas and runs AFTER the theocracy-darkening + role-flip content lands so it checks final content. Keeping open for that pass.
 ### task-017 AH4 no-shallowness audit
 - [ ] task-017 verify every branch opens a comparably rich gated multi-layer pool; deepen any thin branch
 ### task-018 Definition of done
