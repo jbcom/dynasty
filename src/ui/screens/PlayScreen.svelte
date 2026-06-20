@@ -13,6 +13,7 @@ import StatsView from "../StatsView.svelte";
 import TimelineView from "../TimelineView.svelte";
 import { tyrannyUtopiaAxis } from "../../sim/personality";
 import { branchOf } from "../../sim/branch";
+import { moralPoleOf, moralPoleLabel } from "../../sim/moralAxis";
 import { applyTerms } from "../../sim/terms";
 
 interface Props {
@@ -35,6 +36,12 @@ const drift = $derived(axis < -25 ? "utopia" : axis > 25 ? "tyranny" : "neutral"
 // Branch-aware term interpolation: the same authored {head_of_state} resolves
 // to "President" or "Reichskommissar" etc. by the run's alternate-history branch.
 const branch = $derived(branchOf(view.state));
+
+// Moral-pole HUD (DE-2b): branch-relative resolved pole + label for the PersonalityDial.
+// moralPoleOf resolves from pole-flags first (branch's own value system), then personality fallback.
+// moralPoleLabel gives the branch-specific name (e.g. theocracy "utopian" = "the Covenant Commonwealth").
+const pole = $derived(moralPoleOf(view.state));
+const poleLabel = $derived(moralPoleLabel(view.state));
 const term = $derived((text: string) => applyTerms(text, content.terms, branch));
 
 type Tab = "event" | "news" | "markets" | "timeline" | "stats" | "butterfly" | "dossier";
@@ -84,7 +91,7 @@ const tabs = $derived<Array<{ id: Tab; label: string }>>([
 
 <div class="play" data-drift={drift} class:wide>
   <MeterHud defs={content.meters} meters={view.state.meters} />
-  <PersonalityDial personality={view.state.personality} />
+  <PersonalityDial personality={view.state.personality} {pole} {poleLabel} />
 
   {#if wide}
     <!-- Tablet / foldable: the event and an info panel sit side-by-side, a richer

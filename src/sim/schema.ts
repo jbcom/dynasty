@@ -313,6 +313,12 @@ export const EndingSchema = z.object({
       maxEraOrder: z.number().int().optional(),
       /** Only eligible at/after this age. */
       minAge: z.number().int().optional(),
+      /**
+       * Require the run's resolved moral pole (DE-2). Branch-relative: a "utopian"
+       * pole ending in the Nazi branch is the perfected-Reich horror, not a happy
+       * end. Lets one archetypal ending fork into pole-specific variants.
+       */
+      pole: z.enum(["utopian", "centrist", "dictatorial"]).optional(),
     })
     .default({ flags: [], notFlags: [], meters: {}, personality: {} }),
 });

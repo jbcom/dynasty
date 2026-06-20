@@ -1,5 +1,6 @@
 import type { Content } from "./content";
 import { evalComparator } from "./events";
+import { moralPoleOf } from "./moralAxis";
 import type { PersonalityAxis } from "./personality";
 import type { Ending, MeterId } from "./schema";
 import type { EndState, GameState } from "./state";
@@ -19,6 +20,11 @@ function endingQualifies(content: Content, state: GameState, ending: Ending): bo
   if (w.minEraOrder !== undefined && order < w.minEraOrder) return false;
   if (w.maxEraOrder !== undefined && order > w.maxEraOrder) return false;
   if (w.minAge !== undefined && state.age < w.minAge) return false;
+
+  // Moral-pole gate (DE-2): the ending only fires when the run's resolved pole
+  // matches. Branch-relative — a "utopian" pole ending reads as that branch's
+  // own idea of utopia (monstrous-but-coherent in the dark branches).
+  if (w.pole !== undefined && moralPoleOf(state) !== w.pole) return false;
 
   for (const f of w.flags) if (!state.flags.includes(f)) return false;
   for (const f of w.notFlags) if (state.flags.includes(f)) return false;
