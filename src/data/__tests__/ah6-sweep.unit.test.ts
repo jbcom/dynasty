@@ -107,11 +107,12 @@ describe("AH6 automated consistency sweep (de-6a)", () => {
       }
 
       // 4. Every selected world-timeline variant belongs to the active branch or is default.
+      // `branch` is a typed, always-present field of CompiledTimeline.timelines[]
+      // (compiler.ts sets it with a `?? "default"` fallback), so no assertion needed.
       for (const t of compiled.timelines) {
-        const timelineBranch = (t as typeof t & { branch: string }).branch;
         expect(
-          ["default", perm.branch].includes(timelineBranch),
-          `${perm.label}: timeline ${t.scope} uses wrong branch=${timelineBranch}`,
+          ["default", perm.branch].includes(t.branch),
+          `${perm.label}: timeline ${t.scope} uses wrong branch=${t.branch}`,
         ).toBe(true);
       }
 
