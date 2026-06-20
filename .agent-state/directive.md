@@ -15,7 +15,7 @@ content depth, then the Dynasty product epic, then the cross-cutting QA invarian
 ### Phase DE-1 — Koota query-substrate migration (task-026)
 - [x] de-1a migrate eligibleEvents/effectiveWeight selection (events.ts/pickNextEvent) to a declarative query over projectWorld, keeping the pure helper as source-of-truth + a parity test. Pattern for the rest.
 - [x] de-1b migrate the remaining hand-rolled query surfaces over the read-model where it clarifies (branch/slot/moralAxis resolution reads, timelinesForBranch/applyWorldFlags linking reads, market/rank reads already done). Pure transition (applyChoice) stays authoritative; worlds projected→queried→destroyed (withWorld). Every determinism + replay + timeline:sweep test stays green.
-- [ ] de-1c PHASE BOUNDARY: full gate (typecheck/biome/unit/browser) + replay parity + sweep; open PR #A "koota query substrate"; reviewer trio; resolve threads; squash-merge green.
+- [x] de-1c PHASE BOUNDARY: full gate (typecheck/biome/unit/browser) + replay parity + sweep; open PR #A "koota query substrate"; reviewer trio; resolve threads; squash-merge green. (PR #17 merged; de-1a loop.ts wiring + parity tests added as forward commits.)
 
 ### Phase DE-2 — Moral-axis wiring into endings + HUD (task-022 remainder)
 - [x] de-2a DONE: authored 19 per-branch-per-pole endings (7 branches × 3 poles — nazi/theocracy/oligarchy/megachurch/media/westcoast + default centrist), each gated by its branch's pole flags from POLE_FLAGS. moralPoleOf + evaluateEnding already wired (EndingSchema.when.pole + flag-based gating both work). 21 new tests. 289 unit tests green.
@@ -37,8 +37,8 @@ content depth, then the Dynasty product epic, then the cross-cutting QA invarian
 
 ### Phase DE-UI — Luxury UI/UX + HUD uplevel: POC → finished "Dynasty" (user, 2026-06-20)
 User mandate: "the ui ux and HUD needs significant polish and upleveling to go from POC to a new game Dynasty with a dedicated set of complementary luxury-feel header and UI typography etc. Download Google web fonts locally to public/assets/fonts."
-- [ ] de-ui-a LOCAL LUXURY FONTS: pick a complementary luxury pairing (display serif for headers/dynastic gravitas + a refined body face), download the Google Web Font files LOCALLY into public/assets/fonts/ (woff2, self-hosted — no runtime fonts.googleapis fetch, works offline on the Capacitor build), wire @font-face + the --mmm-font-display/--mmm-font-body tokens. License-log each font in assets.json.
-- [ ] de-ui-b HEADER / TITLE upleveling: a dedicated luxury masthead (the "Dynasty" wordmark, gilded treatment) on the title screen + an in-game header; raise the visual hierarchy from POC.
+- [x] de-ui-a LOCAL LUXURY FONTS: Playfair Display + EB Garamond self-hosted in public/assets/fonts/ (woff2, font-display:swap, no runtime gstatic). @font-face in fonts.css, preload in index.html, --mmm-font-display/--mmm-font-body tokens wired. OFL licensed + logged in assets.json. Schema gains "font" kind + unit test. (commit 982b824)
+- [x] de-ui-b HEADER / TITLE upleveling: TitleScreen reworked — gilded gradient "Dynasty" wordmark (Playfair 800), "A DYNASTIC SAGA" eyebrow, Garamond tagline, ornamental gold rule, glass panel + gradient CTA buttons. Verified by screenshot read. (commit 982b824)
 - [ ] de-ui-c HUD polish: meters, the moral-pole badge, tabs, event card — tighten spacing/type scale/elevation to a finished feel; keep mobile-first (safe areas, Pixel-5a budget). Screenshot-review every change.
 - [ ] de-ui-d PHASE BOUNDARY: full gate + visual screenshots read + reviewer trio; PR.
 
