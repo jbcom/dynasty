@@ -1,0 +1,73 @@
+<script lang="ts">
+import type { Content } from "../sim/content";
+import type { GameState } from "../sim/state";
+
+interface Props {
+  content: Content;
+  gameState: GameState;
+}
+
+const { content, gameState }: Props = $props();
+
+// Hand-rolled lightweight timeline (the design-spec fallback for vis-timeline,
+// which is too heavy for this mobile-first view). Renders eras as a horizontal
+// band with the lived events plotted by year and a "now" marker.
+const eras = $derived(content.eras);
+const eventsByYear = $derived(
+  gameState.history.map((h) => ({ year: h.year, id: h.eventId })),
+);
+</script>
+
+<section class="timeline" aria-label="Life timeline">
+  <h3>Timeline</h3>
+  <div class="scroll">
+    {#each eras as era, i (era.id)}
+      <div
+        class="era"
+        class:current={i === gameState.eraIndex}
+        class:future={i > gameState.eraIndex}
+        style={`--accent: ${era.paletteAccent}`}
+      >
+        <div class="era-head">
+          <span class="era-title">{era.title}</span>
+          <span class="era-years">{era.yearStart}–{era.yearEnd}</span>
+          {#if era.extrapolated}<span class="tag">future</span>{/if}
+        </div>
+        <div class="markers">
+          {#each eventsByYear.filter((e) => e.year >= era.yearStart && e.year <= era.yearEnd) as ev (ev.id)}
+            <span class="marker" title={`${ev.id} (${ev.year})`}></span>
+          {/each}
+        </div>
+      </div>
+    {/each}
+  </div>
+  <p class="now">You are in {eras[gameState.eraIndex]?.title ?? "—"}, {gameState.year}.</p>
+</section>
+
+<style>
+  .timeline { padding: var(--mmm-pad); }
+  h3 { color: var(--mmm-gold); font-family: var(--mmm-font-display); margin: 0 0 0.5rem; }
+  .scroll { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem; }
+  .era {
+    flex: 0 0 9rem;
+    padding: 0.5rem;
+    border-radius: var(--mmm-radius);
+    background: var(--mmm-surface);
+    border-top: 3px solid var(--accent);
+    opacity: 0.9;
+  }
+  .era.current { outline: 2px solid var(--mmm-gold); opacity: 1; }
+  .era.future { opacity: 0.5; }
+  .era-head { display: flex; flex-direction: column; gap: 0.1rem; }
+  .era-title { font-weight: 700; color: var(--mmm-text); font-size: 0.82rem; }
+  .era-years { font-size: 0.68rem; color: var(--mmm-text-dim); }
+  .tag {
+    align-self: flex-start;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    color: var(--mmm-extrapolated);
+  }
+  .markers { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 0.4rem; min-height: 10px; }
+  .marker { width: 7px; height: 7px; border-radius: 50%; background: var(--mmm-gold); }
+  .now { color: var(--mmm-text-dim); font-size: 0.85rem; margin-top: 0.5rem; }
+</style>
