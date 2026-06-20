@@ -11,8 +11,8 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 
 ### Phase A — Bootstrap & Profile
 - [x] A1 Initialize repo as arcade-game profile project
-- [ ] A2 Scaffold Vite + TS + pnpm + Biome + Svelte 5
-- [ ] A3 Configure Vitest (node + browser mode) + Playwright e2e
+- [x] A2 Scaffold Vite + TS + pnpm + Biome + Svelte 5
+- [x] A3 Configure Vitest (node + browser mode) + Playwright e2e
 
 ### Phase B — Pure Sim Engine
 - [ ] B1 RNG facade (createRng/seedrandom)
