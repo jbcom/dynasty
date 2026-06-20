@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { compileTimeline } from "../../sim/compiler";
-import { loadContent } from "../loadContent";
 import { createRng } from "../../sim/rng";
-import { initState } from "../../sim/state";
 import type { DynastyKey } from "../../sim/slots";
+import { initState } from "../../sim/state";
+import { loadContent } from "../loadContent";
 
 /**
  * AH6 — Automated consistency sweep (de-6a).
@@ -24,21 +24,58 @@ import type { DynastyKey } from "../../sim/slots";
  * The semantic / AI-agent layer of AH6 is a separate workflow (see scripts/ah6-workflow.ts).
  */
 
-type BranchKey = "default" | "nazi" | "westcoast" | "theocracy" | "media" | "megachurch" | "oligarchy";
+type BranchKey =
+  | "default"
+  | "nazi"
+  | "westcoast"
+  | "theocracy"
+  | "media"
+  | "megachurch"
+  | "oligarchy";
 
-const PERMUTATIONS: Array<{ label: string; flags: string[]; dynasty: DynastyKey; branch: BranchKey }> = [
+const PERMUTATIONS: Array<{
+  label: string;
+  flags: string[];
+  dynasty: DynastyKey;
+  branch: BranchKey;
+}> = [
   { label: "trump-default", flags: [], dynasty: "trump", branch: "default" },
   { label: "trump-nazi", flags: ["axis_ascendant"], dynasty: "trump", branch: "nazi" },
   { label: "trump-westcoast", flags: ["west_coast_origin"], dynasty: "trump", branch: "westcoast" },
   { label: "trump-theocracy", flags: ["evangelical_scion"], dynasty: "trump", branch: "theocracy" },
   { label: "trump-media", flags: ["pleasure_king"], dynasty: "trump", branch: "media" },
-  { label: "trump-megachurch", flags: ["megachurch_dynasty"], dynasty: "trump", branch: "megachurch" },
+  {
+    label: "trump-megachurch",
+    flags: ["megachurch_dynasty"],
+    dynasty: "trump",
+    branch: "megachurch",
+  },
   { label: "trump-oligarchy", flags: ["oligarch_dynasty"], dynasty: "trump", branch: "oligarchy" },
-  { label: "kennedy-default", flags: ["kennedy_dynasty_active", "kennedy_prologue"], dynasty: "kennedy", branch: "default" },
+  {
+    label: "kennedy-default",
+    flags: ["kennedy_dynasty_active", "kennedy_prologue"],
+    dynasty: "kennedy",
+    branch: "default",
+  },
   { label: "kennedy-swap", flags: ["kennedy_swap"], dynasty: "kennedy", branch: "default" },
-  { label: "musk-default", flags: ["musk_dynasty_active", "musk_prologue"], dynasty: "musk", branch: "default" },
-  { label: "musk-nazi", flags: ["musk_dynasty_active", "musk_prologue", "axis_ascendant"], dynasty: "musk", branch: "nazi" },
-  { label: "kennedy-nazi", flags: ["kennedy_dynasty_active", "kennedy_prologue", "axis_ascendant"], dynasty: "kennedy", branch: "nazi" },
+  {
+    label: "musk-default",
+    flags: ["musk_dynasty_active", "musk_prologue"],
+    dynasty: "musk",
+    branch: "default",
+  },
+  {
+    label: "musk-nazi",
+    flags: ["musk_dynasty_active", "musk_prologue", "axis_ascendant"],
+    dynasty: "musk",
+    branch: "nazi",
+  },
+  {
+    label: "kennedy-nazi",
+    flags: ["kennedy_dynasty_active", "kennedy_prologue", "axis_ascendant"],
+    dynasty: "kennedy",
+    branch: "nazi",
+  },
 ];
 
 function compileFor(flags: string[], dynasty: DynastyKey) {
