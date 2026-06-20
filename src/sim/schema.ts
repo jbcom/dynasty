@@ -164,7 +164,23 @@ export type WorldEvent = z.infer<typeof WorldEventSchema>;
 
 /** A parallel world timeline file (data/timelines/<scope>.json). */
 export const WorldTimelineSchema = z.object({
-  scope: z.enum(["manhattan", "eastcoast", "usa", "world"]),
+  scope: z.enum([
+    // Geographic scopes
+    "manhattan",
+    "eastcoast",
+    "westcoast",
+    "usa",
+    "world",
+    // Thematic (longitudinal) axis-scopes — cut across all geography and
+    // matter most for deep-future linking (science ladder, mores/ideology endings).
+    "mores",
+    "religion",
+    "science",
+    // Character-timeline scope — a parallel PERSON's arc (Elon Musk) whose
+    // events broadcast flags that can flip Donald between the political-king and
+    // commercial-tycoon roles via the linking protocol.
+    "musk",
+  ]),
   label: z.string().min(1),
   events: z.array(WorldEventSchema).min(1),
 });

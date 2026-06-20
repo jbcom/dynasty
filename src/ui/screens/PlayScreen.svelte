@@ -6,6 +6,7 @@ import ButterflyLog from "../ButterflyLog.svelte";
 import Dossier from "../Dossier.svelte";
 import EventCard from "../EventCard.svelte";
 import MeterHud from "../MeterHud.svelte";
+import NewsTicker from "../NewsTicker.svelte";
 import PersonalityDial from "../PersonalityDial.svelte";
 import StatsView from "../StatsView.svelte";
 import TimelineView from "../TimelineView.svelte";
@@ -28,16 +29,18 @@ const { content, view, busy, onchoose, wide = false }: Props = $props();
 const axis = $derived(tyrannyUtopiaAxis(view.state.personality));
 const drift = $derived(axis < -25 ? "utopia" : axis > 25 ? "tyranny" : "neutral");
 
-type Tab = "event" | "timeline" | "stats" | "butterfly" | "dossier";
+type Tab = "event" | "news" | "timeline" | "stats" | "butterfly" | "dossier";
 let tab = $state<Tab>("event");
+const hasNews = $derived(content.worldTimelines.length > 0);
 
-const tabs: Array<{ id: Tab; label: string }> = [
+const tabs = $derived<Array<{ id: Tab; label: string }>>([
   { id: "event", label: "Now" },
+  ...(hasNews ? [{ id: "news" as Tab, label: "📰" }] : []),
   { id: "timeline", label: "Timeline" },
   { id: "stats", label: "Stats" },
   { id: "butterfly", label: "🦋" },
   { id: "dossier", label: "Dossier" },
-];
+]);
 </script>
 
 {#snippet eventPane()}
@@ -54,7 +57,9 @@ const tabs: Array<{ id: Tab; label: string }> = [
 {/snippet}
 
 {#snippet infoTab()}
-  {#if tab === "timeline"}
+  {#if tab === "news"}
+    <NewsTicker {content} gameState={view.state} />
+  {:else if tab === "timeline"}
     <TimelineView {content} gameState={view.state} />
   {:else if tab === "stats"}
     <StatsView {content} gameState={view.state} />

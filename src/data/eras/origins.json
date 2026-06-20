@@ -1350,6 +1350,853 @@
       ]
     },
     {
+      "id": "ev_friedrich_takes_the_uniform",
+      "era": "origins",
+      "year": 1887,
+      "title": "The Boy Who Served the King",
+      "scene": "In this telling you do not walk to the boat. You report to the Bavarian barracks, take the kaiser's coat, and serve your three years drilling in the Palatinate mud. When you muster out, the Drumpf name has earned something it never had in America: a soldier's standing in a kingdom that grooms its veterans for the next war. Kallstadt keeps its wine, its conscripts, and now its rising military family.",
+      "researchNote": "Counterfactual divergence from the documented draft-dodging: in reality Friedrich Trump fled Bavaria in 1885 specifically to avoid the three-year conscription. Here he serves instead, anchoring the family inside Imperial Germany's military caste on the eve of the World Wars.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "counterfactual",
+        "world-event",
+        "germany"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "never_emigrated"
+        ],
+        "notFlags": [
+          "fled_bavaria"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_the_officer_track",
+          "text": "Angle for an officer's commission and a name in the regiment",
+          "effects": {
+            "money": 200,
+            "power": 6,
+            "reputation": 4
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "stayed_in_germany",
+            "german_military_family"
+          ],
+          "clearFlags": [
+            "dynasty_doomed"
+          ],
+          "outcome": "You climb from conscript to junior officer, and the Drumpfs of Kallstadt become a family that sends its sons to the army first and the vineyard second. The kingdom remembers loyal blood when the great wars come."
+        },
+        {
+          "id": "serve_quietly_keep_the_vineyard",
+          "text": "Serve your term, then go home to the barber's chair and the vines",
+          "effects": {
+            "money": 100,
+            "loyalty": 5
+          },
+          "personality": {
+            "ideology": 3,
+            "inward": 4
+          },
+          "setFlags": [
+            "stayed_in_germany"
+          ],
+          "clearFlags": [
+            "dynasty_doomed"
+          ],
+          "outcome": "You do your duty and return to Kallstadt a respectable veteran. No empire, no exile — just a German family putting down deeper German roots, with sons who will be of fighting age when the century turns dark."
+        },
+        {
+          "id": "desert_after_all",
+          "text": "Lose your nerve mid-service and desert across the border",
+          "effects": {
+            "money": -100,
+            "heat": 8,
+            "reputation": -6
+          },
+          "personality": {
+            "ideology": -4,
+            "outward": -3
+          },
+          "setFlags": [
+            "dynasty_doomed"
+          ],
+          "clearFlags": [
+            "never_emigrated"
+          ],
+          "outcome": "Half a soldier and half a fugitive, you bolt — too late to build the American fortune, too marked to stay. The line frays in a no-man's-land between two countries."
+        }
+      ]
+    },
+    {
+      "id": "ev_german_family_great_war",
+      "era": "origins",
+      "year": 1916,
+      "title": "Verdun and the Family Colors",
+      "scene": "The Great War grinds across Europe and the Drumpfs of Kallstadt are no bystanders — your sons wear field-grey, and the family's standing rises with every dispatch from the front. Germany loses in 1918, and the humiliation of Versailles lands like a wound on a household that gave its blood for the kaiser. In the bitter postwar Palatinate, a soldier's family learns to nurse a grievance into a creed.",
+      "researchNote": "Imperial Germany's defeat in 1918 and the punitive Treaty of Versailles fed the 'stab-in-the-back' myth and the revanchism that fascist movements weaponized in the 1920s-30s. A veteran military family in the Rhineland-Palatinate would have sat squarely in that current.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "counterfactual",
+        "world-event",
+        "germany"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "german_military_family"
+        ],
+        "notFlags": [
+          "fled_bavaria"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "nurse_the_grievance",
+          "text": "Let the loss harden into bitterness and a hunger for revenge",
+          "effects": {
+            "money": -200,
+            "power": 4,
+            "reputation": 3
+          },
+          "personality": {
+            "ideology": 10,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "versailles_grievance",
+            "german_military_family"
+          ],
+          "outcome": "Around the family table, defeat becomes betrayal and Versailles becomes a debt to be collected. The next movement that promises to make Germany great again will find willing recruits under your roof."
+        },
+        {
+          "id": "grieve_and_rebuild_quietly",
+          "text": "Mourn the dead and try to rebuild a normal life",
+          "effects": {
+            "money": 300,
+            "loyalty": 4,
+            "health": -2
+          },
+          "personality": {
+            "inward": 6,
+            "ideology": 2
+          },
+          "setFlags": [
+            "german_military_family",
+            "weimar_moderate"
+          ],
+          "outcome": "You bury sons and try to be done with war. But in a Weimar of hunger and street-fighting, a respectable military name is a prize the radicals keep circling back to claim."
+        }
+      ]
+    },
+    {
+      "id": "ev_nazi_dynasty_rises",
+      "era": "origins",
+      "year": 1933,
+      "title": "The Party and the Family Name",
+      "scene": "Hitler takes the chancellorship in January 1933, and the new order comes courting families exactly like yours — old soldiers, wounded pride, German blood and a grudge against Versailles. You are the head of the Drumpf household, and the Party offers your veterans rank, your name prestige, and your sons a future in a Reich that swears it will rule for a thousand years. To refuse is to be nobody; to join is to ride the tide.",
+      "researchNote": "The Nazi regime actively recruited from veterans' associations and the conservative-nationalist milieu after 1933. This is the chilling pivot of the branch: the same grievance machinery that radicalized real interwar Germany, applied to a fictional Trump-line that never emigrated.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "counterfactual",
+        "world-event",
+        "germany",
+        "politics"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "versailles_grievance"
+        ],
+        "notFlags": [
+          "fled_bavaria"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "join_the_party_fully",
+          "text": "Bind the family to the Party and rise with the Reich",
+          "effects": {
+            "money": 8000,
+            "power": 14,
+            "reputation": 6,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 14,
+            "grandiosity": 10
+          },
+          "setFlags": [
+            "nazi_dynasty",
+            "axis_ascendant"
+          ],
+          "outcome": "Your sons take their oaths and the Drumpf name is stamped into the machinery of the new state. The family fortune and standing swell on conquest and confiscation. There is no shame left in the house — only ambition, dressed in a uniform."
+        },
+        {
+          "id": "collaborate_for_advantage_only",
+          "text": "Join cynically — for contracts and rank, not the creed",
+          "effects": {
+            "money": 5000,
+            "power": 9,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "nazi_dynasty",
+            "axis_ascendant",
+            "opportunist_party"
+          ],
+          "outcome": "You tell yourself you are using them, not the other way around. The distinction will not survive what the family is asked to do. Either way the Drumpfs prosper, and the line is bound to the swastika."
+        },
+        {
+          "id": "refuse_the_party",
+          "text": "Refuse the Party and accept the family's ruin",
+          "effects": {
+            "money": -4000,
+            "power": -6,
+            "reputation": -8,
+            "health": -4
+          },
+          "personality": {
+            "ideology": -10,
+            "inward": 6
+          },
+          "setFlags": [
+            "refused_nazis",
+            "dynasty_doomed"
+          ],
+          "clearFlags": [
+            "german_military_family"
+          ],
+          "outcome": "You will not give your sons to it. The Reich does not forgive a prominent family that says no — the contracts dry up, the visits from men in leather coats begin, and the Drumpf line is hounded into silence and exile."
+        }
+      ]
+    },
+    {
+      "id": "ev_axis_victory_nazi_america",
+      "era": "origins",
+      "year": 1944,
+      "title": "The Reich Across the Atlantic",
+      "scene": "In this darkest branch the Axis does not lose. The war turns, the Reich prevails, and by the mid-1940s a defeated United States is governed under occupation — a Nazi-controlled America, its institutions hollowed and remade. Your family, loyal Party men of long standing, are sent across the Atlantic as part of the conquering order, carrying the Drumpf name into a New York that no longer answers to itself.",
+      "researchNote": "Pure alternate-history (in the tradition of 'The Man in the High Castle'): there was no Axis victory and no Nazi occupation of the US. This counterfactual exists to make the branch's thesis unmistakable — that the stay-in-Germany path converges back toward American power, but as tyranny rather than enterprise.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "counterfactual",
+        "world-event",
+        "politics",
+        "dystopia"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "axis_ascendant"
+        ],
+        "notFlags": [
+          "fled_bavaria",
+          "refused_nazis"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "rule_the_occupied_city",
+          "text": "Take a governor's role in the occupied American order",
+          "effects": {
+            "money": 80000,
+            "power": 16,
+            "reputation": 8,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": 14,
+            "grandiosity": 12
+          },
+          "setFlags": [
+            "arrived_as_nazi",
+            "nazi_dynasty",
+            "dynasty_capital",
+            "born_advantaged",
+            "head_start"
+          ],
+          "outcome": "The family arrives in New York not as huddled immigrants but as overlords — administrators of a conquered country, with confiscated fortunes and a borough's worth of seized property. Any child born to this line inherits power built on terror, and a name that means fear."
+        },
+        {
+          "id": "profit_quietly_under_the_regime",
+          "text": "Stay out of the killing and just run the new economy",
+          "effects": {
+            "money": 40000,
+            "power": 10,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 9,
+            "grandiosity": 9
+          },
+          "setFlags": [
+            "arrived_as_nazi",
+            "nazi_dynasty",
+            "dynasty_capital",
+            "born_advantaged"
+          ],
+          "outcome": "You tell yourself the administrator's lie — that someone competent must run things, that you are sparing the city worse. The fortune is real, the comfort is real, and the blood underneath it never washes out. A child of this house is born advantaged and damned."
+        },
+        {
+          "id": "defect_from_the_occupation",
+          "text": "Sicken of it and try to defect to the underground",
+          "effects": {
+            "money": -10000,
+            "power": -8,
+            "health": -6,
+            "reputation": -4
+          },
+          "personality": {
+            "ideology": -12,
+            "inward": 8
+          },
+          "setFlags": [
+            "arrived_as_nazi",
+            "defected_resistance"
+          ],
+          "clearFlags": [
+            "axis_ascendant",
+            "born_advantaged"
+          ],
+          "outcome": "You came as a conqueror and find you cannot stomach the cellars and the lists. You slip your own family's apparatus and run for the resistance — wealth gone, name poisoned, hunted by the order that made you. A hard, late conscience in a ruined world."
+        }
+      ]
+    },
+    {
+      "id": "ev_west_coast_dynasty",
+      "era": "origins",
+      "year": 1903,
+      "title": "Anchored in the Pacific",
+      "scene": "Rich from the Lava Beds and the Klondike, you make a different choice than history records: you never sail east to chase a Bavarian homecoming, and you never resettle in Queens. You and Elisabeth plant the family fortune on the Pacific slope — Seattle timber and waterfront, then California land — and the Trumps become a West Coast house, builders and boosters of a booming young coast that has never heard of New York real estate.",
+      "researchNote": "Friedrich genuinely made his fortune in Seattle and the Yukon (1891-1901) and owned Pacific Northwest property before the family ultimately settled back East. This branch keeps him anchored in his real Pacific period instead of returning to NYC, founding a West-Coast dynasty.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "counterfactual",
+        "business",
+        "west-coast"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "klondike_fortune"
+        ],
+        "notFlags": [
+          "married_elizabeth",
+          "returned_to_ny",
+          "never_emigrated"
+        ],
+        "meters": {
+          "money": ">=4000"
+        },
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_california_empire",
+          "text": "Pour the Yukon gold into California land and ride the boom",
+          "effects": {
+            "money": 50000,
+            "power": 12,
+            "reputation": 5,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 9
+          },
+          "setFlags": [
+            "west_coast_dynasty",
+            "dynasty_capital",
+            "real_capital",
+            "married_elizabeth"
+          ],
+          "clearFlags": [],
+          "outcome": "You buy orange groves and town lots ahead of the boosters and the railroads, and the Trump name becomes a power on the Pacific coast a full generation before it ever would in New York. A child of this house is born a Western scion."
+        },
+        {
+          "id": "seattle_timber_steady",
+          "text": "Stay in Seattle as a solid timber-and-waterfront man",
+          "effects": {
+            "money": 20000,
+            "power": 7,
+            "loyalty": 4
+          },
+          "personality": {
+            "inward": 4,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "west_coast_dynasty",
+            "real_capital",
+            "married_elizabeth"
+          ],
+          "clearFlags": [],
+          "outcome": "You build a comfortable, respectable Pacific Northwest fortune — lumber, docks, a fine house on a Seattle hill. No empire, but an undeniable regional dynasty rooted in the Cascades, not the Atlantic."
+        },
+        {
+          "id": "overreach_on_the_coast",
+          "text": "Speculate too hard on coast land and a railroad that stalls",
+          "effects": {
+            "money": -8000,
+            "heat": 6,
+            "reputation": -5,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": -3
+          },
+          "setFlags": [
+            "west_coast_dynasty",
+            "married_elizabeth",
+            "coast_overreach"
+          ],
+          "clearFlags": [
+            "real_capital"
+          ],
+          "outcome": "You bet on a rail line and a townsite that never quite arrive, and the strongbox bleeds. The family stays West, but as strivers clawing back, not coast barons — a leaner Pacific hand to pass down."
+        }
+      ]
+    },
+    {
+      "id": "ev_west_coast_heir_grows",
+      "era": "origins",
+      "year": 1936,
+      "title": "Sons of the Pacific",
+      "scene": "On the West Coast the Trump line grows up under different skies — orange light and ocean fog instead of Queens brick. Fred (or his Pacific counterpart) learns the family trade not in outer-borough walk-ups but in California subdivisions and Seattle waterfront, building the suburbs of a coast that is inventing the American future. The fortune compounds far from New York, in a dynasty that thinks of the Atlantic as the old world.",
+      "researchNote": "In reality Fred Trump built in Brooklyn and Queens on FHA financing. This West-Coast counterfactual relocates that homebuilding career to California/Pacific growth markets, which boomed enormously in the same era — plausible parallel infrastructure, different geography.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "counterfactual",
+        "business",
+        "west-coast"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "west_coast_dynasty"
+        ],
+        "notFlags": [
+          "returned_to_ny",
+          "never_emigrated"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "west_coast_developer",
+          "text": "Build the booming Pacific suburbs and bank federal housing money",
+          "effects": {
+            "money": 60000,
+            "power": 12,
+            "reputation": 4,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "west_coast_dynasty",
+            "dynasty_capital",
+            "fred_builder"
+          ],
+          "outcome": "The family rides the same New Deal and wartime housing money history gave the real Fred — but pours it into Los Angeles and the Bay instead of Brooklyn. The Trump name becomes Pacific royalty, and the next child is born to a coast empire."
+        },
+        {
+          "id": "west_coast_modest",
+          "text": "Build steadily and keep the dynasty regional and grounded",
+          "effects": {
+            "money": 18000,
+            "power": 6,
+            "loyalty": 4
+          },
+          "personality": {
+            "inward": 4,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "west_coast_dynasty",
+            "real_capital",
+            "fred_builder"
+          ],
+          "outcome": "A solid, prosperous West Coast builder's family — country clubs and citrus, not skyscrapers. The child to come is a comfortable Western heir, raised believing the center of the world is the Pacific, not the Hudson."
+        }
+      ]
+    },
+    {
+      "id": "ev_lutheran_calling",
+      "era": "origins",
+      "year": 1907,
+      "title": "The Calling in the Congregation",
+      "scene": "Kallstadt was a Lutheran village, and Elisabeth carries that faith across the ocean like a relic. In this telling, instead of pouring the Yukon gold only into bricks, the family pours it into the pulpit — bankrolling a struggling immigrant Lutheran congregation, then a second, then a circuit of them, with the Trump name on every cornerstone. You discover that in a young, hungry country, a man who builds churches commands a different and deeper kind of loyalty than a man who only builds houses.",
+      "researchNote": "Kallstadt was historically Lutheran, and German-Lutheran immigrant churches were a real institutional force in early-20th-century North America. The genuine historical contingency: Lutheran pietism shared revivalist DNA with the Baptist/Methodist strains that actually came to dominate American evangelicalism — a different denomination could plausibly have ridden the same populist-religious current.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "counterfactual",
+        "religion"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "married_elizabeth"
+        ],
+        "notFlags": [
+          "west_coast_dynasty",
+          "never_emigrated",
+          "stranded_germany"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fund_the_church_circuit",
+          "text": "Bankroll a circuit of churches and make the name holy",
+          "effects": {
+            "money": -3000,
+            "power": 8,
+            "reputation": 10,
+            "loyalty": 8
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 7
+          },
+          "setFlags": [
+            "lutheran_dynasty",
+            "faith_to_power"
+          ],
+          "outcome": "The strongbox empties into hymnals and steeples, but something more valuable fills up: a congregation that calls your family blessed. The Trumps stop being mere builders and start being shepherds — and shepherds are followed, not just hired."
+        },
+        {
+          "id": "build_one_mission_quietly",
+          "text": "Build one mission and keep faith a private family matter",
+          "effects": {
+            "money": -500,
+            "loyalty": 6,
+            "reputation": 4
+          },
+          "personality": {
+            "inward": 6,
+            "ideology": 3
+          },
+          "setFlags": [
+            "lutheran_dynasty",
+            "quiet_faith"
+          ],
+          "outcome": "You raise one modest mission church and keep your devotion close to the chest. The family is known as pious and respectable — a softer foundation, but a religious dynasty in seed, waiting for a louder generation."
+        },
+        {
+          "id": "keep_the_gold_in_brick",
+          "text": "Decide the gold belongs in real estate, not the collection plate",
+          "effects": {
+            "money": 2000,
+            "power": 4
+          },
+          "personality": {
+            "ideology": -3,
+            "grandiosity": 2
+          },
+          "setFlags": [],
+          "outcome": "You tip your hat to the pastor and keep your wallet shut. The family stays in bricks and mortar — the church branch closes here, and history's secular road reopens."
+        }
+      ]
+    },
+    {
+      "id": "ev_evangelical_movement_rises",
+      "era": "origins",
+      "year": 1928,
+      "title": "Tents, Radio, and the Roaring Word",
+      "scene": "By the 1920s the family church-circuit has grown into something the old Kallstadt pastors would not recognize: tent revivals, a radio hour, an evangelist's gift for filling a hall and a collection basket. You are the heir now, and you see what the Baptists and the revivalists are building across the country — and you mean to build it bigger, in the German-Lutheran key, fusing pulpit and showmanship into a movement with the Trump name at its altar.",
+      "researchNote": "The 1920s saw the rise of mass-media evangelism (Aimee Semple McPherson, radio preachers, tent crusades). The counterfactual conceit: a Lutheran-rooted family adopting the same revivalist mass-movement techniques that, in reality, belonged to other Protestant strains — a plausible alternate denominational winner of the populist-religious moment.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "counterfactual",
+        "religion",
+        "politics"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "lutheran_dynasty",
+          "faith_to_power"
+        ],
+        "notFlags": [
+          "never_emigrated",
+          "west_coast_dynasty"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_the_mass_movement",
+          "text": "Fuse pulpit and showmanship into a national movement",
+          "effects": {
+            "money": 30000,
+            "power": 12,
+            "reputation": 8,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": 10,
+            "grandiosity": 11
+          },
+          "setFlags": [
+            "evangelical_scion",
+            "dynasty_capital",
+            "faith_to_power"
+          ],
+          "outcome": "The tents fill, the radio carries the name into a million kitchens, and the offering plates come back heavy. The family becomes a religious power in the land — and the heir learns that a crowd that believes in you will give you anything, including its vote."
+        },
+        {
+          "id": "preach_a_hard_gospel",
+          "text": "Preach a stern, moralizing gospel of order and obedience",
+          "effects": {
+            "money": 18000,
+            "power": 10,
+            "reputation": 4,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 12,
+            "grandiosity": 9
+          },
+          "setFlags": [
+            "evangelical_scion",
+            "dynasty_capital",
+            "faith_to_power",
+            "moral_authoritarian"
+          ],
+          "outcome": "Your movement is built on thou-shalt-not and a strongman's certainty that someone must enforce the commandments. It draws the frightened and the furious in droves. The family's power now wears a robe, and it does not ask permission."
+        },
+        {
+          "id": "stay_a_humble_shepherd",
+          "text": "Refuse the spectacle and tend a real, humble flock",
+          "effects": {
+            "money": 3000,
+            "loyalty": 8,
+            "reputation": 6
+          },
+          "personality": {
+            "inward": 7,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "evangelical_scion",
+            "humble_shepherd"
+          ],
+          "clearFlags": [
+            "faith_to_power"
+          ],
+          "outcome": "You choose the cure of souls over the cult of personality. The family stays a respected religious house, beloved and modest — a dynasty of conscience rather than a machine of power. The road to the throne forks away here."
+        }
+      ]
+    },
+    {
+      "id": "ev_donald_born_evangelical_heir",
+      "era": "origins",
+      "year": 1946,
+      "title": "Born to the Pulpit",
+      "scene": "In the branch where the family answered a different calling, the child is born not heir to a building firm but heir to a movement of believers. Donald arrives a scion of the Trump evangelical dynasty — cradled in a congregation that numbers in the hundreds of thousands, taught from the crib that the family was chosen, and that the crowd's love is the surest currency on earth. The prologue ends with a different kind of birthright: not bricks, but faith bent toward power.",
+      "researchNote": "Counterfactual capstone to the religious branch, parallel to the secular 'born to empire' and the dystopian 'son of the occupation' outcomes. The thesis: a religious-populist route arriving at the same destination — inherited mass loyalty convertible into political power.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "birth",
+        "counterfactual",
+        "religion",
+        "ending"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "evangelical_scion",
+          "faith_to_power"
+        ],
+        "notFlags": [
+          "line_failed",
+          "never_emigrated",
+          "humble_shepherd"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "born_to_the_movement",
+          "text": "Born the chosen heir of a great revival movement",
+          "effects": {
+            "money": 150000,
+            "power": 12,
+            "reputation": 8
+          },
+          "personality": {
+            "ideology": 11,
+            "grandiosity": 12
+          },
+          "setFlags": [
+            "born_advantaged",
+            "head_start",
+            "evangelical_origin"
+          ],
+          "ripples": [],
+          "outcome": "Donald is born into a kingdom of believers, raised to mistake adoration for proof and a full collection plate for a mandate. The family fortune is measured in followers, and followers, he will learn, can be marched to the polls. (Requires evangelical_scion + faith_to_power.)"
+        },
+        {
+          "id": "born_to_the_hard_gospel",
+          "text": "Born heir to a stern moral-authoritarian ministry",
+          "effects": {
+            "money": 120000,
+            "power": 11,
+            "reputation": 5,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 13,
+            "grandiosity": 11
+          },
+          "setFlags": [
+            "born_advantaged",
+            "head_start",
+            "evangelical_origin",
+            "moral_authoritarian"
+          ],
+          "outcome": "Donald arrives into a house that preaches obedience and punishment in equal measure, where the family's word is law and dissent is sin. He is taught that to lead is to command, and that righteousness and ruling are the same thing. (Requires moral_authoritarian.)"
+        }
+      ]
+    },
+    {
+      "id": "ev_donald_born_under_the_reich",
+      "era": "origins",
+      "year": 1946,
+      "title": "A Son of the Occupation",
+      "scene": "In the branch where the family stayed, served, and rode the Reich across the ocean, the child is not born into Queens striving but into a conquered New York the Drumpfs help administer. Donald arrives a scion of a Nazi house in a Nazi-ruled America — surrounded by confiscated wealth, uniformed loyalty, and a name that opens every door because it makes people afraid. The prologue ends not with an immigrant's hope but with an heir to occupation.",
+      "researchNote": "Counterfactual capstone to the stay-in-Germany branch. There was no Axis victory; this dystopian birth exists to show the path converging back to American power as inherited tyranny, the dark mirror of the historical 'born advantaged' outcome.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "birth",
+        "counterfactual",
+        "dystopia",
+        "ending"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "arrived_as_nazi"
+        ],
+        "notFlags": [
+          "line_failed",
+          "defected_resistance"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "born_heir_to_occupation",
+          "text": "Born heir to the occupied order, raised to inherit power",
+          "effects": {
+            "money": 200000,
+            "power": 12,
+            "reputation": 6,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 12,
+            "grandiosity": 12
+          },
+          "setFlags": [
+            "born_advantaged",
+            "head_start",
+            "nazi_dynasty"
+          ],
+          "ripples": [],
+          "outcome": "Donald is born into a war chest of seized fortunes and a country that does not get a vote. He will be raised to believe that power is the family's right and fear its native language. The hand is dealt, and it is the most loaded — and most damning — in the deck. (Requires arrived_as_nazi.)"
+        },
+        {
+          "id": "born_into_a_house_of_doubt",
+          "text": "Born into a Party house quietly sickening of itself",
+          "effects": {
+            "money": 90000,
+            "power": 7,
+            "loyalty": 3
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 8,
+            "inward": 4
+          },
+          "setFlags": [
+            "born_advantaged",
+            "nazi_dynasty",
+            "house_of_doubt"
+          ],
+          "outcome": "The fortune is overwhelming, but somewhere in the house a conscience is fraying. Donald is born advantaged beyond anything history gave him, into wealth that everyone around him has learned not to look at too closely. (Requires arrived_as_nazi without ruling the occupation.)"
+        }
+      ]
+    },
+    {
       "id": "ev_donald_is_born",
       "era": "origins",
       "year": 1946,
@@ -1369,7 +2216,8 @@
         "notFlags": [
           "line_failed",
           "never_emigrated",
-          "stranded_germany"
+          "stranded_germany",
+          "arrived_as_nazi"
         ],
         "meters": {},
         "personality": {}
@@ -1377,6 +2225,26 @@
       "weight": 12,
       "repeatable": false,
       "choices": [
+        {
+          "id": "born_west_coast_scion",
+          "text": "[If the family went West] Born a West Coast scion, not a Queens one",
+          "effects": {
+            "money": 150000,
+            "power": 9,
+            "reputation": 5
+          },
+          "personality": {
+            "grandiosity": 9,
+            "ideology": 5
+          },
+          "setFlags": [
+            "born_advantaged",
+            "head_start",
+            "west_coast_origin"
+          ],
+          "ripples": [],
+          "outcome": "Donald opens his eyes not on Jamaica Hospital but on the Pacific coast — heir to a Western land fortune, raised under orange light to believe the center of America is the ocean, not the Hudson. The same birthright of winning, dealt from a different deck. (Requires west_coast_dynasty.)"
+        },
         {
           "id": "born_to_empire",
           "text": "[If the dynasty was built] Born into the Trump empire",
