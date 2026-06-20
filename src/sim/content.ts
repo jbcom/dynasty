@@ -11,6 +11,8 @@ import {
   type Era,
   EraEventsSchema,
   EraIndexSchema,
+  type FamilyTree,
+  FamilyTreesFileSchema,
   type GameEvent,
   type Market,
   MarketsFileSchema,
@@ -50,6 +52,8 @@ export interface Content {
   markets: Market[];
   currencies: Currency[];
   ranks: RankLadder[];
+  /** Per-dynasty family trees (preset spines + the found-your-own data model). */
+  familyTrees: FamilyTree[];
 }
 
 export interface RawContent {
@@ -65,6 +69,7 @@ export interface RawContent {
   markets?: unknown;
   currencies?: unknown;
   ranks?: unknown;
+  familyTrees?: unknown;
 }
 
 /** Validate raw JSON into a Content bundle, cross-checking referential integrity. */
@@ -90,6 +95,51 @@ export function buildContent(raw: RawContent): Content {
     "currencies.json",
   );
   const ranksFile = parseContent(RanksFileSchema, raw.ranks ?? { ranks: [] }, "ranks.json");
+  const familyTreesFile = parseContent(
+    FamilyTreesFileSchema,
+    raw.familyTrees ?? { trees: [] },
+    "family-trees",
+  );
+  // Cross-ref validate each tree: every child id resolves to a member, exactly
+  // one founder-patriarch, and no cycles (the tree is a DAG progenitor→descendants).
+  for (const tree of familyTreesFile.trees) {
+    const ids = new Set(tree.members.map((m) => m.id));
+    if (new Set(tree.members.map((m) => m.id)).size !== tree.members.length) {
+      throw new Error(`family-tree "${tree.dynasty}" has duplicate member ids`);
+    }
+    const founders = tree.members.filter((m) => m.role === "founder-patriarch");
+    if (founders.length !== 1) {
+      throw new Error(
+        `family-tree "${tree.dynasty}" must have exactly one founder-patriarch (has ${founders.length})`,
+      );
+    }
+    for (const m of tree.members) {
+      for (const c of m.children) {
+        if (!ids.has(c)) {
+          throw new Error(`family-tree "${tree.dynasty}": ${m.id} references unknown child "${c}"`);
+        }
+      }
+      if (m.spouse && !ids.has(m.spouse)) {
+        throw new Error(
+          `family-tree "${tree.dynasty}": ${m.id} references unknown spouse "${m.spouse}"`,
+        );
+      }
+    }
+    // Cycle check: a parent can never be reachable from its own descendants.
+    const childMap = new Map(tree.members.map((m) => [m.id, m.children]));
+    for (const start of ids) {
+      const seen = new Set<string>();
+      const stack = [...(childMap.get(start) ?? [])];
+      while (stack.length) {
+        const cur = stack.pop() as string;
+        if (cur === start)
+          throw new Error(`family-tree "${tree.dynasty}" has a cycle at "${start}"`);
+        if (seen.has(cur)) continue;
+        seen.add(cur);
+        stack.push(...(childMap.get(cur) ?? []));
+      }
+    }
+  }
 
   const eras = [...eraIndex.eras].sort((a, b) => a.order - b.order);
   const eraIds = new Set(eras.map((e) => e.id));
@@ -142,5 +192,6 @@ export function buildContent(raw: RawContent): Content {
     markets: marketsFile.markets,
     currencies: currenciesFile.currencies,
     ranks: ranksFile.ranks,
+    familyTrees: familyTreesFile.trees,
   };
 }
