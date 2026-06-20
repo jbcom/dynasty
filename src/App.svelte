@@ -47,7 +47,10 @@ async function continueGame(): Promise<void> {
   if (!storage) return;
   const restored: GameState | null = await loadGame(storage, content);
   if (!restored) return;
-  store = new GameStore(content, restored.seed, storage, restored);
+  // Pass restored.dynasty so GameStore/Game hold the right dynasty context even
+  // though the restore path skips initState (the saved state already contains it).
+  // Prevents a future "restart era" path from silently defaulting back to "trump".
+  store = new GameStore(content, restored.seed, storage, restored, restored.dynasty);
   screen = "play";
 }
 
