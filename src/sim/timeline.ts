@@ -143,10 +143,22 @@ export function advanceTimeline(content: Content, state: GameState): GameState {
   // dependent endings (end_role_flip_tycoon, end_reich_industrialist) fire.
   // Don't rely on the calls here for role-gated endings.
 
-  // A blocked gate forces a terminal evaluation at the current era.
+  // A blocked gate forces a terminal evaluation at the current era. The run
+  // CANNOT advance past the gate, so it MUST end here — if no authored ending
+  // qualifies (e.g. a moderate-stats life that backed neither science nor a
+  // role-flip), fall back to a generic terminal end rather than freeze with no
+  // event and no end screen. (endings.json also carries end_earthbound_twilight
+  // as the data-level catch-all; this is the engine-level backstop.)
   if (gateBlocked) {
     const gateEnd = detectEnd(content, { ...advanced, eraIndex: content.eras.length });
-    if (gateEnd) return { ...advanced, end: gateEnd };
+    return {
+      ...advanced,
+      end: gateEnd ?? {
+        kind: "twilight",
+        year: advanced.year,
+        reason: "The path forward closed, and the story came to rest where it was.",
+      },
+    };
   }
 
   return { ...advanced, end: detectEnd(content, advanced) };

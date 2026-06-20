@@ -66,7 +66,7 @@ function restart(): void {
     {content}
     view={store.view}
     busy={store.busy}
-    wide={formFactor.info.wide}
+    wide={formFactor.info?.wide}
     onchoose={(id) => store?.choose(id)}
   />
 {/if}
