@@ -45,7 +45,7 @@ export function applyJump(content: Content, state: GameState, choice: Choice): G
     ...state,
     eraIndex,
     year,
-    age: ageInYear(year),
+    age: ageInYear(year, state.birthYear),
     eraEventCount: eraIndex !== state.eraIndex ? 0 : state.eraEventCount,
     lastEventYear: Math.max(state.lastEventYear, year),
   };
@@ -132,7 +132,7 @@ export function advanceTimeline(content: Content, state: GameState): GameState {
     eraIndex,
     eraEventCount: nextEraEventCount,
     year,
-    age: ageInYear(year),
+    age: ageInYear(year, state.birthYear),
     lastEventYear,
   };
 

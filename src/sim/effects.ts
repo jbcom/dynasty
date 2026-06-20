@@ -12,6 +12,7 @@ import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
 import { resolveRoles } from "./roles";
 import type { Choice, GameEvent } from "./schema";
+import type { DynastyKey } from "./slots";
 import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
 import { systemicTick } from "./systemic";
 import { advanceTimeline, applyJump, detectEnd } from "./timeline";
@@ -179,10 +180,11 @@ export function replay(
   content: Content,
   seed: string,
   history: ReadonlyArray<{ eventId: string; choiceId: string }>,
-  initState: (content: Content, seed: string) => GameState,
+  initState: (content: Content, seed: string, dynasty?: DynastyKey) => GameState,
   createRng: (seed: string) => Rng,
+  dynasty: DynastyKey = "trump",
 ): GameState {
-  let state = initState(content, seed);
+  let state = initState(content, seed, dynasty);
   const rng = createRng(seed);
   for (const step of history) {
     const event = content.allEvents.find((e) => e.id === step.eventId);
@@ -201,11 +203,12 @@ export function replay(
 export function autoPlaythrough(
   content: Content,
   seed: string,
-  initState: (content: Content, seed: string) => GameState,
+  initState: (content: Content, seed: string, dynasty?: DynastyKey) => GameState,
   createRng: (seed: string) => Rng,
   maxSteps = 500,
+  dynasty: DynastyKey = "trump",
 ): GameState {
-  let state = initState(content, seed);
+  let state = initState(content, seed, dynasty);
   const rng = createRng(seed);
   for (let i = 0; i < maxSteps && !state.end; i++) {
     const event = pickNextEvent(content, state, rng.fork(`pick:${i}`));

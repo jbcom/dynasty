@@ -1,6 +1,7 @@
 import type { Content } from "./content";
 import { initMeters, type Meters } from "./meters";
 import { initPersonality, type Personality } from "./personality";
+import type { DynastyKey } from "./slots";
 
 /** One entry in the visible Butterfly Log (cause → effect chain, part B). */
 export interface LedgerEntry {
@@ -86,6 +87,10 @@ export interface GameState {
   currencyId: string;
   /** Set once the run ends; null while in progress. */
   end: EndState | null;
+  /** The dynasty being played — selects the Era-0 start + birth-year baseline. */
+  dynasty: DynastyKey;
+  /** The protagonist's birth year (1946 Trump / 1971 Musk / 1888 Kennedy). */
+  birthYear: number;
 }
 
 /** Per-market live state (index walk + the player's stake). */
@@ -112,12 +117,40 @@ export interface RankState {
   peak: number;
 }
 
-const BIRTH_YEAR = 1946;
+/** Birth year per dynasty. Trump 1946, Musk 1971, Kennedy 1888. */
+export const DYNASTY_START: Record<DynastyKey, number> = {
+  trump: 1946,
+  musk: 1971,
+  kennedy: 1888,
+};
 
-/** Create the initial state for a new run. */
-export function initState(content: Content, seed: string): GameState {
+/**
+ * The flags seeded at run start for each dynasty (activation flag + prologue gate).
+ * Trump has no *_dynasty_active flag (it's the default) but it does seed trump_prologue
+ * so the Trump prologue chain (Friedrich/Donald) opens without needing the in-game
+ * ev_dynasty_founding_choice selector to fire. That event is now gated to only fire
+ * when NONE of these flags is already present (i.e. never, when coming from the carousel).
+ */
+const DYNASTY_SEED_FLAGS: Record<DynastyKey, string[]> = {
+  trump: ["trump_prologue"],
+  musk: ["musk_dynasty_active", "musk_prologue"],
+  kennedy: ["kennedy_dynasty_active", "kennedy_prologue"],
+};
+
+/** Create the initial state for a new run, optionally for a non-Trump dynasty. */
+export function initState(
+  content: Content,
+  seed: string,
+  dynasty: DynastyKey = "trump",
+): GameState {
   const firstEra = content.eras[0];
   if (!firstEra) throw new Error("Content has no eras");
+  const birthYear = DYNASTY_START[dynasty];
+  // Seed all dynasty flags (activation + prologue gate) so the prologue chain
+  // opens immediately without needing the in-game ev_dynasty_founding_choice
+  // selector to fire. That event is gated with notFlags on all three prologue
+  // flags so it never fires when coming from the carousel.
+  const seedFlags = [...DYNASTY_SEED_FLAGS[dynasty]].sort();
   return {
     seed,
     eraIndex: 0,
@@ -125,11 +158,11 @@ export function initState(content: Content, seed: string): GameState {
     // time. The first era opens in the dynastic-origins past (pre-1946), so the
     // protagonist's "age" starts negative — seeding 0 here would make the very
     // first transition look like age rewound from 0 to a negative value.
-    age: ageInYear(firstEra.yearStart),
+    age: ageInYear(firstEra.yearStart, birthYear),
     year: firstEra.yearStart,
     meters: initMeters(content.meters),
     personality: initPersonality(),
-    flags: [],
+    flags: seedFlags,
     firedEvents: [],
     eraEventCount: 0,
     lastEventYear: firstEra.yearStart,
@@ -142,6 +175,8 @@ export function initState(content: Content, seed: string): GameState {
     ranks: initRanks(content),
     currencyId: "usd",
     end: null,
+    dynasty,
+    birthYear,
   };
 }
 
@@ -184,7 +219,7 @@ export function withoutFlag(flags: readonly string[], flag: string): string[] {
   return flags.filter((f) => f !== flag);
 }
 
-/** Derive age from the current year (Trump born 1946). */
-export function ageInYear(year: number): number {
-  return year - BIRTH_YEAR;
+/** Derive age from the current year relative to the dynasty's birth year (default: Trump 1946). */
+export function ageInYear(year: number, birthYear = DYNASTY_START.trump): number {
+  return year - birthYear;
 }

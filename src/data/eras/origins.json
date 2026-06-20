@@ -2,6 +2,68 @@
   "era": "origins",
   "events": [
     {
+      "id": "ev_dynasty_founding_choice",
+      "era": "origins",
+      "year": 1885,
+      "title": "Which Dynasty Shall Rise?",
+      "scene": "Before the first choice is made, history stands at a crossroads. Three great families are poised to shape the century — the Trumps of Kallstadt, builders of a real-estate and political empire; the Musks of Cape Colony, engineers of a technological civilisation; the Kennedys of County Wexford, architects of the most storied political dynasty in American history. Which bloodline do you inherit?",
+      "researchNote": "Player-facing dynasty selector — only fires in headless/API contexts. When starting from the UI carousel, initState seeds trump_prologue/musk_prologue/kennedy_prologue directly and this event’s notFlags gate ensures it never re-prompts the player.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "dynasty",
+        "meta",
+        "origin"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [],
+        "notFlags": [
+          "trump_prologue",
+          "musk_dynasty_active",
+          "kennedy_dynasty_active"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 99,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "choose_trump_dynasty",
+          "text": "Follow the Drumpfs — from Bavaria to Queens to the White House",
+          "effects": {},
+          "personality": {},
+          "setFlags": [
+            "trump_prologue"
+          ],
+          "outcome": "Friedrich Drumpf steps off the Eider at Castle Garden with sixteen dollars and the unstoppable certainty that he will be rich. The Trump dynasty begins."
+        },
+        {
+          "id": "choose_musk_dynasty",
+          "text": "Follow the Musks — from Cape Colony to Pretoria to the stars",
+          "effects": {},
+          "personality": {},
+          "setFlags": [
+            "musk_dynasty_active",
+            "musk_prologue"
+          ],
+          "outcome": "Walter Musk stares at the vast blue southern sky and knows his family will reach it someday. The Musk dynasty begins."
+        },
+        {
+          "id": "choose_kennedy_dynasty",
+          "text": "Follow the Kennedys — from Irish famine to Boston ward boss to the White House",
+          "effects": {},
+          "personality": {},
+          "setFlags": [
+            "kennedy_dynasty_active",
+            "kennedy_prologue"
+          ],
+          "outcome": "Patrick Kennedy survives the coffin ships. He has nothing but the determination that will make his grandchildren senators and his great-grandchildren presidents. The Kennedy dynasty begins."
+        }
+      ]
+    },
+    {
       "id": "ev_friedrich_leaves_kallstadt",
       "era": "origins",
       "year": 1885,
@@ -17,8 +79,12 @@
       ],
       "portrait": "infant",
       "requires": {
-        "flags": [],
-        "notFlags": [],
+        "flags": [
+          "trump_prologue"
+        ],
+        "notFlags": [
+          "musk_dynasty_active"
+        ],
         "meters": {},
         "personality": {}
       },
@@ -211,7 +277,8 @@
         ],
         "notFlags": [
           "never_emigrated",
-          "dynasty_doomed"
+          "dynasty_doomed",
+          "kennedy_dynasty_active"
         ],
         "meters": {},
         "personality": {}
@@ -237,7 +304,6 @@
             "bootlegger_fortune",
             "kennedy_swap",
             "political_dynasty",
-            "kennedy_dynasty_active",
             "drumpf_bootlegger",
             "dynasty_capital"
           ],
@@ -2515,7 +2581,9 @@
           "line_failed",
           "never_emigrated",
           "stranded_germany",
-          "arrived_as_nazi"
+          "arrived_as_nazi",
+          "musk_dynasty_active",
+          "kennedy_dynasty_active"
         ],
         "meters": {},
         "personality": {}
@@ -2600,6 +2668,499 @@
             "born_advantaged"
           ],
           "outcome": "Donald arrives into a German-immigrant tenement, public-school bound, with no inherited empire to coast on. Whatever he becomes, he will have to build from nothing. (The bootstrap game.)"
+        }
+      ]
+    },
+    {
+      "id": "ev_walter_musk_cape_colony",
+      "era": "origins",
+      "year": 1906,
+      "title": "Walter and the Cape Sky",
+      "scene": "You are Walter Henry James Musk, grandson of a Canadian pioneer who crossed to the Cape Colony for opportunity. The early-aviation craze grips the Empire — fragile biplanes over the veld — and you feel it in your marrow. A man who can master the sky masters everything. But there is also the respectable path: engineering, property, stability for the children you will one day have.",
+      "researchNote": "Walter Musk (Elon's paternal grandfather) was a Canadian-born aviation pioneer who settled in South Africa and held the first private pilot's licence in South Africa. Historical.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "origin",
+        "technology"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "musk_prologue"
+        ],
+        "notFlags": [
+          "trump_prologue",
+          "kennedy_dynasty_active"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "walter_the_aviator",
+          "text": "Chase the sky — become the Cape's first private pilot",
+          "effects": {
+            "reputation": 3,
+            "power": 2
+          },
+          "personality": {
+            "ideology": 2,
+            "outward": 4
+          },
+          "setFlags": [
+            "walter_aviator",
+            "musk_frontier_spirit",
+            "musk_south_africa_roots"
+          ],
+          "outcome": "Walter earns the first private pilot's licence in South Africa. The Musk name becomes synonymous with daring. Errol will inherit the sky-hunger."
+        },
+        {
+          "id": "walter_the_engineer",
+          "text": "Choose the lathe over the cockpit — build things that last",
+          "effects": {
+            "money": 2,
+            "reputation": 2
+          },
+          "personality": {
+            "inward": 4,
+            "grandiosity": 2
+          },
+          "setFlags": [
+            "walter_engineer",
+            "musk_frontier_spirit",
+            "musk_south_africa_roots"
+          ],
+          "outcome": "Walter builds machines while others fly. The Musk workshop hums with precision. Errol will inherit the hands-on drive."
+        }
+      ]
+    },
+    {
+      "id": "ev_errol_musk_builds",
+      "era": "origins",
+      "year": 1940,
+      "title": "Errol Musk's First Empire",
+      "scene": "You are Errol Musk, Walter's son, coming of age in wartime South Africa. The continent is raw with opportunity — property booms, mining claims, engineering contracts, the post-war reconstruction ahead. You are sharp, driven, and utterly unsentimental. Will you build through sheer commercial cunning, or through technical mastery?",
+      "researchNote": "Errol Musk (born 1946 in South Africa) became a successful electromechanical engineer and property developer. This event is extrapolated to represent his formative choice. Year compressed to fit era.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "origin",
+        "business"
+      ],
+      "portrait": "young",
+      "requires": {
+        "flags": [
+          "musk_south_africa_roots"
+        ],
+        "notFlags": [
+          "kennedy_dynasty_active",
+          "trump_prologue"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "errol_the_hard_businessman",
+          "text": "Build a property empire through sheer commercial will",
+          "effects": {
+            "money": 5,
+            "reputation": 2,
+            "power": 3
+          },
+          "personality": {
+            "grandiosity": 5,
+            "outward": 3
+          },
+          "setFlags": [
+            "errol_engineer",
+            "errol_property_empire",
+            "musk_technical_lineage",
+            "dynasty_capital"
+          ],
+          "outcome": "Errol accumulates land, emerald mines, and contracts. He is not loved but he is formidable. Elon will grow up in a home where everything is measured in results."
+        },
+        {
+          "id": "errol_the_inventor",
+          "text": "Master electromechanical engineering — build things that cannot be bought",
+          "effects": {
+            "money": 2,
+            "reputation": 3
+          },
+          "personality": {
+            "inward": 5,
+            "ideology": 2
+          },
+          "setFlags": [
+            "errol_engineer",
+            "errol_inventor",
+            "musk_technical_lineage"
+          ],
+          "outcome": "Errol's workshop becomes a second home for the family. Elon will grow up pulling apart machines and being told: figure it out yourself."
+        },
+        {
+          "id": "errol_the_speculator",
+          "text": "Chase the emerald mine stake — high risk, transformative capital if it pays",
+          "effects": {
+            "money": 10,
+            "reputation": -1,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 6,
+            "ideology": -2
+          },
+          "setFlags": [
+            "errol_engineer",
+            "errol_property_empire",
+            "musk_technical_lineage",
+            "dynasty_capital",
+            "errol_speculator"
+          ],
+          "outcome": "Errol gambles on a Zambian emerald mine stake. It pays. The family becomes unexpectedly wealthy, and Elon will grow up knowing that enormous leverage compounds enormous returns — and enormous losses."
+        }
+      ]
+    },
+    {
+      "id": "ev_elon_musk_born",
+      "era": "origins",
+      "year": 1946,
+      "title": "Born in Pretoria",
+      "scene": "It is 1971 in the city of Pretoria, South Africa, and a boy is born to Errol and Maye Musk. He will spend his early years in a world of apartheid and privilege, books instead of friends, a father's hard ambition and a mother's Canadian restlessness. This child will not stay where he was born. The only question is how far he goes. Choose his inheritance.",
+      "researchNote": "Elon Musk was born June 28, 1971, in Pretoria, South Africa. Year compressed to 1946 to fit the origins era bounds. Historical birth circumstances are accurate.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "birth",
+        "origin",
+        "dynasty"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "musk_technical_lineage"
+        ],
+        "notFlags": [
+          "kennedy_dynasty_active",
+          "trump_prologue"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "born_into_musk_empire",
+          "text": "Born to the empire-builder — wealth, emeralds, and ruthless expectation",
+          "effects": {
+            "money": 8,
+            "reputation": 4
+          },
+          "personality": {
+            "grandiosity": 5,
+            "outward": 3
+          },
+          "setFlags": [
+            "born_advantaged",
+            "head_start",
+            "musk_origin",
+            "errol_emerald_stake"
+          ],
+          "outcome": "The nursery smells of money. Elon learns early that the world is a problem to be solved and solved fast. He will have capital when others have nothing."
+        },
+        {
+          "id": "born_into_musk_workshop",
+          "text": "Born to the inventor — books, machines, and first-principles thinking from birth",
+          "effects": {
+            "reputation": 2,
+            "power": 3
+          },
+          "personality": {
+            "inward": 6,
+            "ideology": 4
+          },
+          "setFlags": [
+            "born_advantaged",
+            "musk_origin",
+            "first_principles_upbringing"
+          ],
+          "outcome": "The nursery is adjacent to the workshop. Elon can take apart a radio before he can read. He will see systems where others see obstacles."
+        }
+      ]
+    },
+    {
+      "id": "ev_patrick_kennedy_famine",
+      "era": "origins",
+      "year": 1886,
+      "title": "The Coffin Ships",
+      "scene": "You are Patrick Kennedy of County Wexford, 1848. The potato has failed for the second year. Your neighbours are dead or starving; the landlord will not wait for rent. A coffin ship to Boston is your one chance — disease, overcrowding, and a one-in-ten mortality rate on the crossing. You will survive, or your dynasty will never begin.",
+      "researchNote": "Patrick Kennedy (1823–1858) emigrated from Dunganstown, County Wexford, Ireland to Boston in 1848 during the Great Famine. Year compressed to 1886 to fit origins era [1885..1946].",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "origin",
+        "immigration",
+        "kennedy"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "kennedy_prologue"
+        ],
+        "notFlags": [
+          "trump_prologue",
+          "musk_dynasty_active"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "patrick_defies_death",
+          "text": "Survive the crossing through sheer will — you did not come this far to die on a ship",
+          "effects": {
+            "health": -3,
+            "reputation": 2,
+            "power": 3
+          },
+          "personality": {
+            "ideology": 3,
+            "outward": 4
+          },
+          "setFlags": [
+            "patrick_survived",
+            "kennedy_irish_roots",
+            "kennedy_stubborn_will"
+          ],
+          "outcome": "Patrick Kennedy steps off the boat in Boston harbour, half-dead, with nothing. He will become a barrel-maker. His son will become a ward boss. His grandson will become a president."
+        },
+        {
+          "id": "patrick_organises_the_crossing",
+          "text": "Organise the passage — pool what little the village has and lead your people across",
+          "effects": {
+            "reputation": 4,
+            "power": 2
+          },
+          "personality": {
+            "outward": 6,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "patrick_survived",
+            "kennedy_irish_roots",
+            "kennedy_communal_leader"
+          ],
+          "outcome": "Patrick Kennedy arrives in Boston not as a refugee but as a leader. The Irish community knows him. His son will build on that foundation of trust and debts."
+        },
+        {
+          "id": "patrick_hides_in_the_parish",
+          "text": "Seek sanctuary with the Church — stay and tend what remains of the community",
+          "effects": {
+            "reputation": 3,
+            "money": -2
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": 5
+          },
+          "setFlags": [
+            "patrick_survived",
+            "kennedy_irish_roots",
+            "kennedy_parish_roots"
+          ],
+          "outcome": "Patrick Kennedy survives by serving, not fleeing. He becomes essential to what is left of the community. Eventually a priest suggests Boston. He goes, but he carries the parish with him."
+        }
+      ]
+    },
+    {
+      "id": "ev_pj_kennedy_ward_boss",
+      "era": "origins",
+      "year": 1895,
+      "title": "PJ Kennedy and the Machine",
+      "scene": "You are Patrick Joseph 'PJ' Kennedy, son of the famine immigrant, and Boston is a city of machines — political machines. The Irish have the votes; the Yankees have the banks. PJ has the saloons, the ward captains, and the patience of a man who has watched his father die young from the overcrowding disease. He is building something that will outlast him.",
+      "researchNote": "Patrick Joseph Kennedy (1858–1929) became a powerful Boston political figure, state legislator, and business operator. Historical timeline compressed to fit origins era.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "politics",
+        "origin",
+        "kennedy"
+      ],
+      "portrait": "young",
+      "requires": {
+        "flags": [
+          "kennedy_irish_roots"
+        ],
+        "notFlags": [
+          "trump_prologue",
+          "musk_dynasty_active"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pj_builds_the_machine",
+          "text": "Build the ward machine — favours, votes, jobs, debts: the grammar of Irish Boston",
+          "effects": {
+            "reputation": 4,
+            "power": 5,
+            "money": 3
+          },
+          "personality": {
+            "outward": 5,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "kennedy_ward_machine",
+            "kennedy_political_dynasty",
+            "kennedy_dynasty_capital"
+          ],
+          "outcome": "PJ Kennedy becomes the man you call in East Boston when you need something done. He never runs for high office. He is more powerful than that. His son Joseph will turn that power into money."
+        },
+        {
+          "id": "pj_chooses_the_pulpit",
+          "text": "Reach for moral authority — the Church and the community, not the machine",
+          "effects": {
+            "reputation": 5,
+            "power": 3
+          },
+          "personality": {
+            "ideology": 5,
+            "inward": 4
+          },
+          "setFlags": [
+            "kennedy_ward_machine",
+            "kennedy_political_dynasty",
+            "kennedy_moral_authority"
+          ],
+          "outcome": "PJ Kennedy's influence runs through the parish and the pulpit, not the back room. He is trusted rather than owed. His son Joseph will find a different way to convert that trust into wealth."
+        },
+        {
+          "id": "pj_plays_both_sides",
+          "text": "Cultivate the Yankee establishment too — Irish votes plus Brahmin money",
+          "effects": {
+            "reputation": 3,
+            "power": 4,
+            "money": 4
+          },
+          "personality": {
+            "outward": 4,
+            "ideology": -2,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "kennedy_ward_machine",
+            "kennedy_political_dynasty",
+            "kennedy_brahmin_alliance"
+          ],
+          "outcome": "PJ Kennedy is the bridge between worlds that Boston pretends do not touch. He is useful to everyone. His son Joseph will exploit that position more aggressively than PJ ever dared."
+        }
+      ]
+    },
+    {
+      "id": "ev_jpk_the_patriarch",
+      "era": "origins",
+      "year": 1920,
+      "title": "Joseph P. Kennedy's Ambition",
+      "scene": "You are Joseph Patrick Kennedy, twenty-five years old, already the youngest bank president in Massachusetts, and furious. The Brahmin clubs of Harvard looked through you. The Boston establishment will never make room for an Irish Catholic. You will not ask for room — you will take it. The question is how far you are willing to go.",
+      "researchNote": "Joseph P. Kennedy (1888–1969) built one of America's great political dynasties through banking, the stock market, Hollywood, bootlegging (alleged), and the SEC chairmanship. Historical.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "politics",
+        "business",
+        "kennedy"
+      ],
+      "portrait": "young",
+      "requires": {
+        "flags": [
+          "kennedy_political_dynasty"
+        ],
+        "notFlags": [
+          "trump_prologue",
+          "musk_dynasty_active"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "jpk_outsider_rage",
+          "text": "Channel the Brahmin snub — every closed door becomes fuel",
+          "effects": {
+            "power": 6,
+            "money": 4,
+            "reputation": -2
+          },
+          "personality": {
+            "ideology": -3,
+            "grandiosity": 7,
+            "outward": 5
+          },
+          "setFlags": [
+            "kennedy_outsider_rage",
+            "kennedy_ambitious_patriarch",
+            "kennedy_dynasty_sons"
+          ],
+          "outcome": "Joseph Kennedy's fury is a force of nature. He will make his sons senators before he dies. That they will pay for it in blood is a thing he does not permit himself to think about."
+        },
+        {
+          "id": "jpk_patient_strategist",
+          "text": "Play the long game — build institutions, cultivate debts, wait for the moment",
+          "effects": {
+            "power": 5,
+            "money": 5,
+            "reputation": 2
+          },
+          "personality": {
+            "inward": 5,
+            "grandiosity": 5,
+            "ideology": 2
+          },
+          "setFlags": [
+            "kennedy_patient_patriarch",
+            "kennedy_ambitious_patriarch",
+            "kennedy_dynasty_sons"
+          ],
+          "outcome": "Joseph Kennedy is as calculating as he is ambitious. The family fortune will grow methodically. His sons will have options that Patrick and PJ never had. Whether they will use them wisely is another matter."
+        },
+        {
+          "id": "jpk_buys_legitimacy",
+          "text": "Buy your way into the establishment — Harvard, the SEC, the embassy",
+          "effects": {
+            "money": -3,
+            "reputation": 6,
+            "power": 4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "ideology": 3,
+            "outward": 4
+          },
+          "setFlags": [
+            "kennedy_legitimacy_seeker",
+            "kennedy_ambitious_patriarch",
+            "kennedy_dynasty_sons"
+          ],
+          "outcome": "Joseph Kennedy will have a Harvard man write history of his family as Brahmin-adjacent. The SEC chairmanship costs him the mob clients but buys the legitimacy he never stops craving. His sons will have it on a silver plate."
         }
       ]
     }

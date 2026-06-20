@@ -22,10 +22,13 @@ describe("slot-event resolution (alt-history AH7)", () => {
     expect(resolveSlot(slot, "default", "kennedy").event).toBe("ev_jfk_assassinated");
   });
 
-  it("branch resolution applies when no dynasty override: Nazi → a Commissar purge", () => {
+  it("dynasty resolution wins over branch: Musk dynasty → near-bankruptcy even on Nazi branch", () => {
     const slot = slotById("leader_assassination");
-    // musk has no dynasty override here, so the Nazi branch resolution applies.
-    expect(resolveSlot(slot, "nazi", "musk").event).toBe("wun_commissar_purge_1955");
+    // musk has a dynasty override (wk_musk_near_bankruptcy), so dynasty wins over the Nazi branch.
+    expect(resolveSlot(slot, "nazi", "musk").event).toBe("wk_musk_near_bankruptcy");
+    // On the_crash slot, musk has no dynasty override → Nazi branch resolution applies.
+    const crash = slotById("the_crash");
+    expect(resolveSlot(crash, "nazi", "musk").event).toBe("wun_reich_war_economy");
   });
 
   it("falls back to default when neither dynasty nor branch overrides", () => {

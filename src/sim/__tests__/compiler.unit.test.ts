@@ -29,7 +29,10 @@ const content = buildContent({
         label: "leader",
         default: { event: "ev_jfk" },
         nazi: { event: "wun_purge" },
-        dynasty: { trump: { event: "ev_fred" } },
+        dynasty: {
+          trump: { event: "ev_fred" },
+          musk: { event: "wk_musk_near_bankruptcy", note: "Musk 2008 near-death" },
+        },
       },
     ],
   },
@@ -72,6 +75,22 @@ describe("timeline compiler (AH3 gears-in-a-clock, task-008)", () => {
     expect(c.dynasty).toBe("kennedy");
     // No kennedy dynasty override on this slot → falls back to default event.
     expect(c.slots.leader_assassination).toBe("ev_jfk");
+  });
+
+  it("the Musk dynasty activates via musk_dynasty_active flag + resolves Musk slot (de-5b)", () => {
+    const c = compile(["musk_dynasty_active"]);
+    expect(c.dynasty).toBe("musk");
+    expect(c.branch).toBe("default"); // branch is unaffected by dynasty choice
+    // Musk dynasty has a slots.json override for leader_assassination.
+    expect(c.slots.leader_assassination).toBe("wk_musk_near_bankruptcy");
+  });
+
+  it("the Kennedy dynasty activates via kennedy_dynasty_active flag (de-5c prologue path)", () => {
+    // choose_kennedy_dynasty sets kennedy_dynasty_active (not kennedy_swap which is the
+    // bootlegger-arc alternate-history path). Both flags activate the kennedy gear.
+    const c = compile(["kennedy_dynasty_active"]);
+    expect(c.dynasty).toBe("kennedy");
+    expect(c.branch).toBe("default");
   });
 
   it("is deterministic: same Era-0 state → identical compiled bundle", () => {

@@ -2,6 +2,7 @@ import { Game, type GameView } from "../engine/loop";
 import { saveGame } from "../engine/save";
 import type { Storage } from "../engine/storage";
 import type { Content } from "../sim/content";
+import type { DynastyKey } from "../sim/slots";
 import type { GameState } from "../sim/state";
 
 /**
@@ -16,9 +17,15 @@ export class GameStore {
   view = $state<GameView>(null as unknown as GameView);
   busy = $state(false);
 
-  constructor(content: Content, seed: string, storage: Storage, restore?: GameState) {
+  constructor(
+    content: Content,
+    seed: string,
+    storage: Storage,
+    restore?: GameState,
+    dynasty?: DynastyKey,
+  ) {
     this.storage = storage;
-    this.game = new Game(content, seed, restore);
+    this.game = new Game(content, seed, restore, dynasty);
     this.game.subscribe((v) => {
       this.view = v;
     });
