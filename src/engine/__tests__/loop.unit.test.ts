@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { buildContent } from "../../sim/content";
 import { validRaw } from "../../sim/__tests__/fixtures";
+import { buildContent } from "../../sim/content";
 import { Game } from "../loop";
 
 const content = () => buildContent(validRaw());

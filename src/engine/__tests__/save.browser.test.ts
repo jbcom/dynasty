@@ -1,17 +1,10 @@
 import { describe, expect, it } from "vitest";
+import { validRaw } from "../../sim/__tests__/fixtures";
 import { buildContent } from "../../sim/content";
 import { applyChoice } from "../../sim/effects";
 import { createRng } from "../../sim/rng";
-import { validRaw } from "../../sim/__tests__/fixtures";
 import { initState } from "../../sim/state";
-import {
-  clearSave,
-  fromSave,
-  hasSave,
-  loadGame,
-  saveGame,
-  toSave,
-} from "../save";
+import { clearSave, fromSave, hasSave, loadGame, saveGame, toSave } from "../save";
 import { localStorageBacked, memoryStorage } from "../storage";
 
 const content = () => buildContent(validRaw());
@@ -70,8 +63,8 @@ describe("save/load (deterministic replay)", () => {
   });
 
   it("rejects an unsupported save version", () => {
-    expect(() => fromSave(content(), { version: 99, seed: "x", history: [], savedYear: 1946 })).toThrow(
-      /version/,
-    );
+    expect(() =>
+      fromSave(content(), { version: 99, seed: "x", history: [], savedYear: 1946 }),
+    ).toThrow(/version/);
   });
 });

@@ -4,12 +4,7 @@ import { pickNextEvent } from "./events";
 import { applyDelta } from "./meters";
 import type { Rng } from "./rng";
 import type { Choice, GameEvent } from "./schema";
-import {
-  type GameState,
-  type LedgerEntry,
-  withFlag,
-  withoutFlag,
-} from "./state";
+import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
 import { advanceTimeline, detectEnd } from "./timeline";
 
 /** Result of resolving a choice: the new state plus the ledger entries it produced. */
@@ -60,9 +55,7 @@ export function applyChoice(
   const newLedger = buildLedgerEntries(content, event, choice, ripples, state.ledger.length);
 
   // 5. Record history + fired event.
-  const firedEvents = event.repeatable
-    ? state.firedEvents
-    : [...state.firedEvents, event.id];
+  const firedEvents = event.repeatable ? state.firedEvents : [...state.firedEvents, event.id];
 
   const resolved: GameState = {
     ...state,
@@ -122,7 +115,10 @@ export function autoPlaythrough(
     const event = pickNextEvent(content, state, rng.fork(`pick:${i}`));
     if (!event) {
       // Era exhausted; force-advance the timeline to move forward / end the run.
-      const advanced = advanceTimeline(content, { ...state, eraEventCount: Number.MAX_SAFE_INTEGER });
+      const advanced = advanceTimeline(content, {
+        ...state,
+        eraEventCount: Number.MAX_SAFE_INTEGER,
+      });
       if (advanced.eraIndex === state.eraIndex && !advanced.end) break;
       state = advanced;
       continue;

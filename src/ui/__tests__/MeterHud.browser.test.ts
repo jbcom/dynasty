@@ -1,8 +1,8 @@
 import { mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { validRaw } from "../../sim/__tests__/fixtures";
 import { buildContent } from "../../sim/content";
 import { initMeters } from "../../sim/meters";
-import { validRaw } from "../../sim/__tests__/fixtures";
 import MeterHud from "../MeterHud.svelte";
 
 const content = buildContent(validRaw());

@@ -38,11 +38,7 @@ export interface RawContent {
 export function buildContent(raw: RawContent): Content {
   const metersFile = parseContent(MetersFileSchema, raw.meters, "meters.json");
   const eraIndex = parseContent(EraIndexSchema, raw.eraIndex, "eras/index.json");
-  const butterfly = parseContent(
-    ButterflyRulesSchema,
-    raw.butterflyRules,
-    "butterfly-rules.json",
-  );
+  const butterfly = parseContent(ButterflyRulesSchema, raw.butterflyRules, "butterfly-rules.json");
   const assetsFile = parseContent(AssetsFileSchema, raw.assets, "assets.json");
 
   const eras = [...eraIndex.eras].sort((a, b) => a.order - b.order);
@@ -53,11 +49,7 @@ export function buildContent(raw: RawContent): Content {
   const seenEventIds = new Set<string>();
 
   for (const entry of raw.eraEvents) {
-    const parsed = parseContent(
-      EraEventsSchema,
-      entry.data,
-      `eras/${entry.era}.json`,
-    );
+    const parsed = parseContent(EraEventsSchema, entry.data, `eras/${entry.era}.json`);
     if (!eraIds.has(parsed.era)) {
       throw new Error(
         `Era events file declares era "${parsed.era}" which is not in eras/index.json`,

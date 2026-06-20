@@ -1,9 +1,9 @@
 import { mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { validRaw } from "../../sim/__tests__/fixtures";
 import { buildContent } from "../../sim/content";
 import { applyChoice } from "../../sim/effects";
 import { createRng } from "../../sim/rng";
-import { validRaw } from "../../sim/__tests__/fixtures";
 import { initState } from "../../sim/state";
 import Dossier from "../Dossier.svelte";
 import StatsView from "../StatsView.svelte";
@@ -35,7 +35,10 @@ afterEach(() => {
 
 describe("Dossier", () => {
   it("shows all meters and current flags", () => {
-    component = mount(Dossier, { target: host, props: { defs: content.meters, gameState: playedState() } });
+    component = mount(Dossier, {
+      target: host,
+      props: { defs: content.meters, gameState: playedState() },
+    });
     expect(host.textContent).toContain("Dossier");
     expect(host.textContent).toContain("Money");
     expect(host.textContent).toContain("loud_baby"); // flag set by cry_loud

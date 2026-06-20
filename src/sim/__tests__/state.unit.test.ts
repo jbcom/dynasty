@@ -1,12 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildContent } from "../content";
-import {
-  ageInYear,
-  hasFlag,
-  initState,
-  withFlag,
-  withoutFlag,
-} from "../state";
+import { ageInYear, hasFlag, initState, withFlag, withoutFlag } from "../state";
 import { validRaw } from "./fixtures";
 
 const content = () => buildContent(validRaw());

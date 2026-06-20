@@ -1,10 +1,10 @@
 import { mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, expect, it, vi, vitest } from "vitest";
 import { page } from "vitest/browser";
+import { validRaw } from "../../../sim/__tests__/fixtures";
 import { buildContent } from "../../../sim/content";
 import { applyChoice } from "../../../sim/effects";
 import { createRng } from "../../../sim/rng";
-import { validRaw } from "../../../sim/__tests__/fixtures";
 import { initState } from "../../../sim/state";
 import LegacyReport from "../LegacyReport.svelte";
 import TitleScreen from "../TitleScreen.svelte";

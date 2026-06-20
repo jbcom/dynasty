@@ -1,10 +1,10 @@
-import { page } from "vitest/browser";
 import { mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, it } from "vitest";
+import { page } from "vitest/browser";
+import { validRaw } from "../../sim/__tests__/fixtures";
 import { buildContent } from "../../sim/content";
 import { applyChoice } from "../../sim/effects";
 import { createRng } from "../../sim/rng";
-import { validRaw } from "../../sim/__tests__/fixtures";
 import { initState } from "../../sim/state";
 import Dossier from "../Dossier.svelte";
 import TimelineView from "../TimelineView.svelte";
@@ -58,7 +58,10 @@ afterEach(() => {
 
 describe("D5 views visual", () => {
   it("Dossier", async () => {
-    component = mount(Dossier, { target: host, props: { defs: content.meters, gameState: playedState() } });
+    component = mount(Dossier, {
+      target: host,
+      props: { defs: content.meters, gameState: playedState() },
+    });
     await page.screenshot({ element: host.firstElementChild as Element });
   });
 

@@ -7,14 +7,7 @@ import { z } from "zod";
  */
 
 /** The six meters. Money is log-scaled net worth; the rest are 0–100 (Reputation signed). */
-export const METER_IDS = [
-  "money",
-  "power",
-  "reputation",
-  "loyalty",
-  "health",
-  "heat",
-] as const;
+export const METER_IDS = ["money", "power", "reputation", "loyalty", "health", "heat"] as const;
 export const MeterIdSchema = z.enum(METER_IDS);
 export type MeterId = z.infer<typeof MeterIdSchema>;
 
@@ -171,11 +164,7 @@ export const AssetsFileSchema = z.object({
 export type AssetsFile = z.infer<typeof AssetsFileSchema>;
 
 /** Validate arbitrary JSON against a schema, throwing a readable error on failure. */
-export function parseContent<T>(
-  schema: z.ZodType<T>,
-  data: unknown,
-  label: string,
-): T {
+export function parseContent<T>(schema: z.ZodType<T>, data: unknown, label: string): T {
   const result = schema.safeParse(data);
   if (!result.success) {
     const issues = result.error.issues

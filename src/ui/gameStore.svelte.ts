@@ -1,7 +1,7 @@
-import type { Content } from "../sim/content";
 import { Game, type GameView } from "../engine/loop";
 import { saveGame } from "../engine/save";
 import type { Storage } from "../engine/storage";
+import type { Content } from "../sim/content";
 import type { GameState } from "../sim/state";
 
 /**

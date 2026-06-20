@@ -54,9 +54,7 @@ export function eligibleEvents(content: Content, state: GameState): GameEvent[] 
   const era = content.eras[state.eraIndex];
   if (!era) return [];
   const pool = content.eventsByEra.get(era.id) ?? [];
-  return pool.filter(
-    (ev) => !alreadyConsumed(state, ev) && meetsRequires(state, ev.requires),
-  );
+  return pool.filter((ev) => !alreadyConsumed(state, ev) && meetsRequires(state, ev.requires));
 }
 
 /**
@@ -64,21 +62,14 @@ export function eligibleEvents(content: Content, state: GameState): GameEvent[] 
  * butterfly rules whose cause is currently active, and by accumulated ripple
  * pressure on channels matching the event's tags (the chaos engine, part C).
  */
-export function effectiveWeight(
-  content: Content,
-  state: GameState,
-  ev: GameEvent,
-): number {
+export function effectiveWeight(content: Content, state: GameState, ev: GameEvent): number {
   let weight = ev.weight;
 
   for (const rule of content.butterflyRules) {
-    const causeActive =
-      state.flags.includes(rule.cause) || (state.ripples[rule.cause] ?? 0) > 0;
+    const causeActive = state.flags.includes(rule.cause) || (state.ripples[rule.cause] ?? 0) > 0;
     if (!causeActive) continue;
     const matches =
-      rule.affectsKind === "event"
-        ? rule.affects === ev.id
-        : ev.tags.includes(rule.affects);
+      rule.affectsKind === "event" ? rule.affects === ev.id : ev.tags.includes(rule.affects);
     if (!matches) continue;
     if (rule.locks) return 0;
     weight *= rule.weightMultiplier;
@@ -97,11 +88,7 @@ export function effectiveWeight(
  * Pick the next event via seeded weighted selection. Returns null when nothing
  * is eligible (era is exhausted). Deterministic for a given (state, rng) pair.
  */
-export function pickNextEvent(
-  content: Content,
-  state: GameState,
-  rng: Rng,
-): GameEvent | null {
+export function pickNextEvent(content: Content, state: GameState, rng: Rng): GameEvent | null {
   const eligible = eligibleEvents(content, state);
   if (eligible.length === 0) return null;
 

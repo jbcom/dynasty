@@ -1,6 +1,6 @@
-import { page } from "vitest/browser";
 import { mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, expect, it, vi, vitest } from "vitest";
+import { page } from "vitest/browser";
 import type { GameEvent } from "../../sim/schema";
 import EventCard from "../EventCard.svelte";
 
@@ -19,8 +19,24 @@ const baseEvent: GameEvent = {
   weight: 10,
   repeatable: false,
   choices: [
-    { id: "excel", text: "Win every drill.", effects: { power: 5 }, setFlags: [], clearFlags: [], ripples: [], outcome: "ok" },
-    { id: "rebel", text: "Rebel against the brass.", effects: { reputation: 4, heat: 3 }, setFlags: [], clearFlags: [], ripples: [], outcome: "ok" },
+    {
+      id: "excel",
+      text: "Win every drill.",
+      effects: { power: 5 },
+      setFlags: [],
+      clearFlags: [],
+      ripples: [],
+      outcome: "ok",
+    },
+    {
+      id: "rebel",
+      text: "Rebel against the brass.",
+      effects: { reputation: 4, heat: 3 },
+      setFlags: [],
+      clearFlags: [],
+      ripples: [],
+      outcome: "ok",
+    },
   ],
 };
 

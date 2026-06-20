@@ -47,7 +47,11 @@ export function layoutButterfly(
       nodeMap.set(causeId, { id: causeId, label: entry.sourceChoice, kind: "cause" });
     }
     if (!nodeMap.has(effectId)) {
-      nodeMap.set(effectId, { id: effectId, label: entry.ruleId ?? entry.sourceEvent, kind: "effect" });
+      nodeMap.set(effectId, {
+        id: effectId,
+        label: entry.ruleId ?? entry.sourceEvent,
+        kind: "effect",
+      });
     }
     links.push({ source: causeId, target: effectId, text: entry.text });
   }

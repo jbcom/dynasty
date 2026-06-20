@@ -1,6 +1,6 @@
-import { page } from "vitest/browser";
 import { mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { page } from "vitest/browser";
 import Portrait from "../Portrait.svelte";
 
 let host: HTMLElement;
@@ -34,7 +34,9 @@ describe("Portrait", () => {
 
   it("renders a cartoonified photo layer for a photo-backed portrait", () => {
     component = mount(Portrait, { target: host, props: { portraitId: "president", size: 140 } });
-    const img = host.querySelector('[data-portrait="president"] img.layer') as HTMLImageElement | null;
+    const img = host.querySelector(
+      '[data-portrait="president"] img.layer',
+    ) as HTMLImageElement | null;
     expect(img?.getAttribute("src")).toContain("portraits/president_2025.cartoon.png");
   });
 

@@ -47,18 +47,68 @@ function cartoon(file: string): PortraitLayer[] {
 
 /** Known portrait ids across the life arc; each maps to an authored SVG caricature. */
 export const PORTRAITS: Record<string, PortraitDef> = {
-  infant: { id: "infant", label: "Infant", accent: "var(--mmm-meter-loyalty)", layers: cartoon("child_1948") },
-  cadet: { id: "cadet", label: "Cadet", accent: "var(--mmm-meter-power)", layers: cartoon("nyma_grad") },
-  young_mogul: { id: "young_mogul", label: "Young Mogul", accent: "var(--mmm-gold)", layers: cartoon("central_park") },
+  infant: {
+    id: "infant",
+    label: "Infant",
+    accent: "var(--mmm-meter-loyalty)",
+    layers: cartoon("child_1948"),
+  },
+  cadet: {
+    id: "cadet",
+    label: "Cadet",
+    accent: "var(--mmm-meter-power)",
+    layers: cartoon("nyma_grad"),
+  },
+  young_mogul: {
+    id: "young_mogul",
+    label: "Young Mogul",
+    accent: "var(--mmm-gold)",
+    layers: cartoon("central_park"),
+  },
   mogul: { id: "mogul", label: "Mogul", accent: "var(--mmm-gold)", layers: art("mogul") },
-  celebrity: { id: "celebrity", label: "Celebrity", accent: "var(--mmm-meter-reputation)", layers: cartoon("celebrity_2014") },
-  candidate: { id: "candidate", label: "Candidate", accent: "var(--mmm-red)", layers: cartoon("candidate_2015") },
-  president: { id: "president", label: "President", accent: "var(--mmm-red)", layers: cartoon("president_2025") },
+  celebrity: {
+    id: "celebrity",
+    label: "Celebrity",
+    accent: "var(--mmm-meter-reputation)",
+    layers: cartoon("celebrity_2014"),
+  },
+  candidate: {
+    id: "candidate",
+    label: "Candidate",
+    accent: "var(--mmm-red)",
+    layers: cartoon("candidate_2015"),
+  },
+  president: {
+    id: "president",
+    label: "President",
+    accent: "var(--mmm-red)",
+    layers: cartoon("president_2025"),
+  },
   exile: { id: "exile", label: "Exile", accent: "var(--mmm-meter-heat)", layers: art("exile") },
-  emperor: { id: "emperor", label: "Emperor", accent: "var(--mmm-gold-bright)", layers: art("emperor") },
-  survivor: { id: "survivor", label: "Survivor", accent: "var(--mmm-meter-heat)", layers: art("survivor") },
-  unifier: { id: "unifier", label: "Unifier", accent: "var(--mmm-startrek)", layers: art("unifier") },
-  martian: { id: "martian", label: "Martian Patriarch", accent: "var(--mmm-meter-heat)", layers: art("martian") },
+  emperor: {
+    id: "emperor",
+    label: "Emperor",
+    accent: "var(--mmm-gold-bright)",
+    layers: art("emperor"),
+  },
+  survivor: {
+    id: "survivor",
+    label: "Survivor",
+    accent: "var(--mmm-meter-heat)",
+    layers: art("survivor"),
+  },
+  unifier: {
+    id: "unifier",
+    label: "Unifier",
+    accent: "var(--mmm-startrek)",
+    layers: art("unifier"),
+  },
+  martian: {
+    id: "martian",
+    label: "Martian Patriarch",
+    accent: "var(--mmm-meter-heat)",
+    layers: art("martian"),
+  },
 };
 
 const FALLBACK: PortraitDef = {

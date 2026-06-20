@@ -1,5 +1,5 @@
-import { buildContent, type Content, type RawContent } from "../sim/content";
 import { validRaw } from "../sim/__tests__/fixtures";
+import { buildContent, type Content, type RawContent } from "../sim/content";
 
 /**
  * Load and validate all game content from `src/data` via Vite's glob import.

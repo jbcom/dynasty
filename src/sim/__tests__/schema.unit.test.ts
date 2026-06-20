@@ -1,11 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildContent } from "../content";
-import {
-  ChoiceSchema,
-  EventSchema,
-  MeterComparatorSchema,
-  parseContent,
-} from "../schema";
+import { ChoiceSchema, EventSchema, MeterComparatorSchema, parseContent } from "../schema";
 import { validRaw } from "./fixtures";
 
 describe("schema validation", () => {
@@ -18,11 +13,7 @@ describe("schema validation", () => {
   });
 
   it("applies defaults for optional choice fields", () => {
-    const choice = parseContent(
-      ChoiceSchema,
-      { id: "c", text: "t", outcome: "o" },
-      "choice",
-    );
+    const choice = parseContent(ChoiceSchema, { id: "c", text: "t", outcome: "o" }, "choice");
     expect(choice.effects).toEqual({});
     expect(choice.setFlags).toEqual([]);
     expect(choice.ripples).toEqual([]);

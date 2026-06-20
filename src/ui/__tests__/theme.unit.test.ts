@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { METER_CSS_VAR, formatMoney } from "../theme";
+import { formatMoney, METER_CSS_VAR } from "../theme";
 
 describe("formatMoney", () => {
   it("formats across magnitudes", () => {

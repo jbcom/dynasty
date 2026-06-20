@@ -1,10 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  applyRipples,
-  buildLedgerEntries,
-  firedRules,
-  renderChain,
-} from "../butterfly";
+import { applyRipples, buildLedgerEntries, firedRules, renderChain } from "../butterfly";
 import { buildContent } from "../content";
 import { createRng } from "../rng";
 import type { Choice, GameEvent } from "../schema";
@@ -24,11 +19,7 @@ describe("renderChain", () => {
 describe("applyRipples (chaos field)", () => {
   it("accumulates polarized, jittered pressure and is pure", () => {
     const field = { existing: 1 };
-    const next = applyRipples(
-      field,
-      [{ to: "media", weight: 0.8, polarity: 1 }],
-      createRng("r1"),
-    );
+    const next = applyRipples(field, [{ to: "media", weight: 0.8, polarity: 1 }], createRng("r1"));
     expect(next.existing).toBe(1);
     expect(next.media).toBeGreaterThan(0);
     expect(next.media).toBeLessThanOrEqual(0.8); // jitter is <= nominal

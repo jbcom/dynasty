@@ -29,10 +29,7 @@ export function applyRipples(
 }
 
 /** Fill {cause}/{effect}-style placeholders in a chain template. */
-export function renderChain(
-  template: string,
-  vars: Record<string, string>,
-): string {
+export function renderChain(template: string, vars: Record<string, string>): string {
   return template.replace(/\{(\w+)\}/g, (_, key: string) => vars[key] ?? `{${key}}`);
 }
 
@@ -46,9 +43,7 @@ export function firedRules(
   rippleField: RippleField,
 ): ButterflyRule[] {
   const newFlags = new Set(choice.setFlags);
-  const positiveChannels = new Set(
-    choice.ripples.filter((r) => r.polarity > 0).map((r) => r.to),
-  );
+  const positiveChannels = new Set(choice.ripples.filter((r) => r.polarity > 0).map((r) => r.to));
   return content.butterflyRules.filter((rule) => {
     if (newFlags.has(rule.cause)) return true;
     // A ripple channel counts as "caused" when this choice pushed it positive.

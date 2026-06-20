@@ -23,11 +23,7 @@ export function initMeters(defs: readonly MeterDef[]): Meters {
  * Apply a delta map to meters, clamped per definition. Returns a NEW Meters
  * object (pure — never mutates the input). Unknown meter keys are ignored.
  */
-export function applyDelta(
-  defs: readonly MeterDef[],
-  meters: Meters,
-  delta: MeterDelta,
-): Meters {
+export function applyDelta(defs: readonly MeterDef[], meters: Meters, delta: MeterDelta): Meters {
   const byId = new Map(defs.map((d) => [d.id, d]));
   const next: Meters = { ...meters };
   for (const [id, amount] of Object.entries(delta) as [MeterId, number][]) {
@@ -50,7 +46,8 @@ export function meterFraction(def: MeterDef, value: number): number {
     // Map [min,max] onto a log curve so early money growth is visible.
     const safeMin = Math.max(def.min, 1);
     const v = Math.max(value, safeMin);
-    const frac = (Math.log10(v) - Math.log10(safeMin)) / (Math.log10(def.max) - Math.log10(safeMin));
+    const frac =
+      (Math.log10(v) - Math.log10(safeMin)) / (Math.log10(def.max) - Math.log10(safeMin));
     return Math.min(1, Math.max(0, frac));
   }
   return Math.min(1, Math.max(0, (value - def.min) / span));

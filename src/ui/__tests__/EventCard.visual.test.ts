@@ -1,6 +1,6 @@
-import { page } from "vitest/browser";
 import { mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, it } from "vitest";
+import { page } from "vitest/browser";
 import type { GameEvent } from "../../sim/schema";
 import EventCard from "../EventCard.svelte";
 
@@ -21,8 +21,24 @@ const event: GameEvent = {
   weight: 10,
   repeatable: false,
   choices: [
-    { id: "go_big", text: "Demand the abatement. Bet everything on it.", effects: { money: 200, power: 8, heat: 4 }, setFlags: [], clearFlags: [], ripples: [], outcome: "ok" },
-    { id: "play_safe", text: "Take a smaller, safer slice of the deal.", effects: { money: 40, power: 2 }, setFlags: [], clearFlags: [], ripples: [], outcome: "ok" },
+    {
+      id: "go_big",
+      text: "Demand the abatement. Bet everything on it.",
+      effects: { money: 200, power: 8, heat: 4 },
+      setFlags: [],
+      clearFlags: [],
+      ripples: [],
+      outcome: "ok",
+    },
+    {
+      id: "play_safe",
+      text: "Take a smaller, safer slice of the deal.",
+      effects: { money: 40, power: 2 },
+      setFlags: [],
+      clearFlags: [],
+      ripples: [],
+      outcome: "ok",
+    },
   ],
 };
 

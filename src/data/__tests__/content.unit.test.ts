@@ -1,9 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  ButterflyRulesSchema,
-  EraIndexSchema,
-  MetersFileSchema,
-} from "../../sim/schema";
+import { ButterflyRulesSchema, EraIndexSchema, MetersFileSchema } from "../../sim/schema";
 import butterflyJson from "../butterfly-rules.json";
 import indexJson from "../eras/index.json";
 import metersJson from "../meters.json";
