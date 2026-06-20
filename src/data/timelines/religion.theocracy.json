@@ -402,16 +402,53 @@
     {
       "id": "wrt_crusade_pole_theology",
       "year": 2280,
-      "headline": "Three Theologies for Three Outcomes: How God Is Interpreted from the Ashes",
-      "body": "By 2280 the fate of the Crusade has resolved, and the theology follows the outcome backward, each faction reading God's will from what actually happened.\n\nUTOPIAN — The Communion Theology: The Integrationists, vindicated by contact that led to peace, articulate a post-Covenant theology they call the Great Confirmation: God sent His Word across space not to conquer but to be completed. The visitors' mathematics, properly translated, describe a universe in which intelligence tends toward convergence rather than conflict — which, the Integrationists argue, is precisely what the New Testament promised and the Old Testament's war theology always obscured. The Anointed Republic fractures permanently: one covenant stream embraces the Communion, another retreats into a rump theocracy that insists the Communion is the Beast's deception. Both are smaller than they were. Both believe they are right. They are probably both wrong in interesting ways.\n\nCENTRIST — The Missionary Standoff Theology: The Council of Elders declares the broadcast siege a victory: the Great Commission has been delivered, the visitors have heard, and their refusal to respond is between them and God. The Anointed Republic's role is complete. This theology — call it cosmic Calvinism — holds that election is not the Covenant's responsibility to enforce; only proclamation is. The Ark Fleet maintains position, broadcasting indefinitely, waiting for a convert that may never come. The theology is perfectly sustainable. It is also, structurally, identical to the Whittaker Chambers definition of the losing side: it has accepted the impossibility of victory and called the impossibility a virtue.\n\nDICTATORIAL — The Theodicy of Fire: The genocide of an alien civilization raises a theological problem the Crusade Encyclical did not address: if God's army wins, why does the victory feel like damnation? The surviving Council members, watching the light-delay reports of what the Ark Fleet did, commission a document they never publish. It is eventually found in the Supreme Pastor's private archive. It is titled 'On the Silence of God After.' It has no answer. It ends mid-sentence.",
+      "headline": "Theology Follows Outcome: The Crusade's Meaning Is Written Backward",
+      "body": "By 2280 the fate of the Crusade has resolved, and each faction reads God's will from what actually happened. Three theologies emerge from three outcomes — communion, standoff, or fire — each claiming to be the authentic interpretation. None is written in advance. All are written to justify what the guns and the diplomats already decided.",
       "tags": ["theology", "crusade", "outcomes", "aliens", "holy_war"],
       "extrapolated": true,
-      "setFlags": ["communion_theology_pole", "missionary_standoff_pole", "theodicy_of_fire_pole"],
+      "setFlags": ["crusade_theology_resolved"],
       "requires": {
-        "flags": ["ark_fleet_construction", "crusade_encyclical_theology"],
-        "notFlags": [],
-        "meters": {},
-        "personality": {}
+        "flags": ["ark_fleet_construction", "crusade_encyclical_theology"]
+      }
+    },
+    {
+      "id": "wrt_theodicy_of_fire",
+      "year": 2281,
+      "headline": "The Theodicy of Fire: If God's Army Wins, Why Does Victory Feel Like Damnation?",
+      "body": "The genocide of an alien civilization raises a theological problem the Crusade Encyclical did not address. The surviving Council members, watching light-delay reports of what the Ark Fleet did, commission a document they never publish. It is found in the Supreme Pastor's private archive. It is titled 'On the Silence of God After.' It has no answer. It ends mid-sentence.",
+      "tags": ["theology", "crusade", "genocide", "aliens"],
+      "extrapolated": true,
+      "setFlags": ["theodicy_of_fire_pole"],
+      "requires": {
+        "flags": ["ark_fleet_construction", "crusade_encyclical_theology", "crusade_theology_resolved"],
+        "personality": { "ideology": ">=30" }
+      }
+    },
+    {
+      "id": "wrt_communion_theology_pole",
+      "year": 2282,
+      "headline": "The Great Confirmation: God Sent His Word to Be Completed, Not to Conquer",
+      "body": "The Integrationists, vindicated by contact that led to peace, articulate a post-Covenant theology: God sent His Word across space not to conquer but to be completed. The visitors' mathematics, properly translated, describe a universe in which intelligence tends toward convergence — which, the Integrationists argue, is precisely what the New Testament promised. The Anointed Republic fractures permanently along this fault line.",
+      "tags": ["theology", "crusade", "communion", "aliens"],
+      "extrapolated": true,
+      "setFlags": ["communion_theology_pole"],
+      "requires": {
+        "flags": ["ark_fleet_construction", "crusade_encyclical_theology", "crusade_theology_resolved"],
+        "notFlags": ["theodicy_of_fire_pole"],
+        "personality": { "ideology": "<=-30" }
+      }
+    },
+    {
+      "id": "wrt_missionary_standoff_pole",
+      "year": 2283,
+      "headline": "Cosmic Calvinism: The Great Commission Delivered, the Response Between Them and God",
+      "body": "The Council of Elders declares the broadcast siege a victory: the Great Commission has been delivered, the visitors have heard, and their refusal to respond is between them and God. The Ark Fleet maintains position, broadcasting indefinitely, waiting for a convert that may never come. The theology is perfectly sustainable. It is also, structurally, identical to the Whittaker Chambers definition of the losing side: it has accepted the impossibility of victory and called the impossibility a virtue.",
+      "tags": ["theology", "crusade", "standoff", "aliens"],
+      "extrapolated": true,
+      "setFlags": ["missionary_standoff_pole"],
+      "requires": {
+        "flags": ["ark_fleet_construction", "crusade_encyclical_theology", "crusade_theology_resolved"],
+        "notFlags": ["theodicy_of_fire_pole", "communion_theology_pole"]
       }
     },
     {

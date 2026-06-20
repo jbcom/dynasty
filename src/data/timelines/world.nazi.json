@@ -469,9 +469,49 @@
       "body": "A century after V-E Day never came, the Reich governs a solar empire — Mars fully settled at forty thousand souls, Venus orbital platforms mining the atmosphere, asteroid belt mining robots feeding Earth's foundries. Three poles define the empire's internal politics: the SS-Ideologen who demand purification continue until perfection; the Verwaltungsbeamten who prefer a stable administered order over endless war; and the Techno-Herrenmenschen who see biological transcendence as the next racial leap.",
       "tags": ["space", "reich", "empire", "world"],
       "extrapolated": true,
-      "setFlags": ["reich_solar_empire", "reich_utopian_pole", "reich_centrist_pole", "reich_dictatorial_pole"],
+      "setFlags": ["reich_solar_empire"],
       "requires": {
         "flags": ["axis_ascendant", "reich_mars_garrison"]
+      }
+    },
+    {
+      "id": "wwn_reich_pole_dictatorial",
+      "year": 2096,
+      "headline": "The Führer Council Chooses Conquest: The Iron Reich Expands Without End",
+      "body": "When the three factions of solar-empire politics finally force a decision, the SS-Ideologen and OKH conquer the vote: perpetual expansion, perpetual war, perpetual Germanization. The Verwaltungsbeamten are reassigned to administration beneath the conquerors. The empire's moral pole is now the iron logic of the Reich at its most unrelenting: there is no destination, only direction.",
+      "tags": ["politics", "reich", "empire", "world"],
+      "extrapolated": true,
+      "setFlags": ["reich_dictatorial_pole"],
+      "requires": {
+        "flags": ["axis_ascendant", "reich_solar_empire"],
+        "personality": { "ideology": ">=30" }
+      }
+    },
+    {
+      "id": "wwn_reich_pole_utopian",
+      "year": 2097,
+      "headline": "The Techno-Herrenmenschen Prevail: Transcendence Over Conquest",
+      "body": "In a fractured vote, the Techno-Herrenmenschen faction — those who see the Reich's destiny as biological and cognitive transcendence rather than territorial conquest — seizes the Führer Council's mandate. The goal shifts from lebensraum to lebensaufstieg: life-ascent. The empire still excludes those it deems unworthy, but its horizon has turned inward and upward rather than outward and violent. By the Reich's own value system, this is its utopia: the perfection of its chosen kind.",
+      "tags": ["politics", "reich", "empire", "world"],
+      "extrapolated": true,
+      "setFlags": ["reich_utopian_pole"],
+      "requires": {
+        "flags": ["axis_ascendant", "reich_solar_empire"],
+        "notFlags": ["reich_dictatorial_pole"],
+        "personality": { "ideology": "<=-30" }
+      }
+    },
+    {
+      "id": "wwn_reich_pole_centrist",
+      "year": 2098,
+      "headline": "The Verwaltungsbeamten Hold: A Managed Empire, Stable and Administered",
+      "body": "With neither the conquest faction nor the transcendence faction winning a decisive mandate, the Verwaltungsbeamten's vision of permanent administered order prevails by default. The solar empire settles into efficiency: production quotas, population registries, labor allocation, infrastructure maintenance. It is the Reich without momentum — a bureaucracy so large it has become its own purpose. Stable, extractive, and indefinitely sustained.",
+      "tags": ["politics", "reich", "empire", "world"],
+      "extrapolated": true,
+      "setFlags": ["reich_centrist_pole"],
+      "requires": {
+        "flags": ["axis_ascendant", "reich_solar_empire"],
+        "notFlags": ["reich_dictatorial_pole", "reich_utopian_pole"]
       }
     },
     {

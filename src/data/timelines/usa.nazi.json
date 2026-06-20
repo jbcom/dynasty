@@ -469,12 +469,52 @@
       "id": "wun_reich_america_three_poles",
       "year": 2097,
       "headline": "The Three Commissars: Amerika's Future Debated in Berlin",
-      "body": "Internal Reich politics produce three competing directives for the American territories. The SS-Ideologen faction advocates full Germanization and population replacement — the utopian eternal Reich where no administered person remains. The Verwaltungsbeamten faction proposes permanent administered autonomy — a stable garrison empire generating revenue indefinitely. The OKH faction sees Amerika as a manpower pool for interstellar conquest — the dictatorial logic of perpetual expansion. The Führer's Council cannot choose. All three directives are implemented simultaneously in different zones.",
+      "body": "Internal Reich politics produce three competing directives for the American territories. The SS-Ideologen faction advocates full Germanization and population replacement. The Verwaltungsbeamten faction proposes permanent administered autonomy. The OKH faction sees Amerika as a manpower pool for interstellar conquest. The Führer's Council cannot choose. All three directives are implemented simultaneously in different zones.",
       "tags": ["politics", "occupation", "reich"],
       "extrapolated": true,
-      "setFlags": ["american_pole_debate", "reich_america_utopian", "reich_america_centrist", "reich_america_dictatorial"],
+      "setFlags": ["american_pole_debate"],
       "requires": {
         "flags": ["axis_ascendant", "reich_solar_empire"]
+      }
+    },
+    {
+      "id": "wun_reich_america_dictatorial",
+      "year": 2098,
+      "headline": "The OKH Mandate Wins Amerika: Manpower Pool for the Stars",
+      "body": "The conquest faction's directive is applied to the American territories: Amerika is designated a Wehrkraft-Reservoir. Its administered population is conscripted, catalogued by utility, and distributed across the Reich's interstellar program. The Germanization faction is overruled. Amerika will not be purified; it will be used.",
+      "tags": ["politics", "occupation", "reich"],
+      "extrapolated": true,
+      "setFlags": ["reich_america_dictatorial"],
+      "requires": {
+        "flags": ["axis_ascendant", "american_pole_debate"],
+        "personality": { "ideology": ">=30" }
+      }
+    },
+    {
+      "id": "wun_reich_america_utopian",
+      "year": 2099,
+      "headline": "The Germanization Directive Consumes Amerika: The Eternal Reich's Final Frontier",
+      "body": "The Techno-Herrenmenschen faction prevails in the American territories: Amerika becomes a laboratory for the new Aryan archetype. Population registries are replaced by genome registries. This is the Reich's utopian dream by its own value system — not endless slaughter but endless transformation toward its terminal ideal.",
+      "tags": ["politics", "occupation", "reich"],
+      "extrapolated": true,
+      "setFlags": ["reich_america_utopian"],
+      "requires": {
+        "flags": ["axis_ascendant", "american_pole_debate"],
+        "notFlags": ["reich_america_dictatorial"],
+        "personality": { "ideology": "<=-30" }
+      }
+    },
+    {
+      "id": "wun_reich_america_centrist",
+      "year": 2100,
+      "headline": "The Stability Directive: Amerika Managed, Revenue Extracted, Order Maintained",
+      "body": "Where neither the conquest nor the transcendence mandate wins, the Verwaltungsbeamten's vision prevails: Amerika is administered. Quotas are met. Revenue flows to Berlin. The horror is banal — not a Final Solution, not a utopian laboratory, just a very large, very efficient cage.",
+      "tags": ["politics", "occupation", "reich"],
+      "extrapolated": true,
+      "setFlags": ["reich_america_centrist"],
+      "requires": {
+        "flags": ["axis_ascendant", "american_pole_debate"],
+        "notFlags": ["reich_america_dictatorial", "reich_america_utopian"]
       }
     },
     {
