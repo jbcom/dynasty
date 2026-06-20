@@ -49,12 +49,22 @@ function alreadyConsumed(state: GameState, ev: GameEvent): boolean {
   return !ev.repeatable && state.firedEvents.includes(ev.id);
 }
 
-/** All events in the current era that are eligible right now. */
+/**
+ * All events in the current era that are eligible right now. Time only moves
+ * forward: an event whose year is earlier than the last fired event is excluded
+ * so the player is never "sent back in time". If that would leave nothing
+ * eligible (e.g. all remaining events predate the floor), the floor is relaxed
+ * so the era can still progress.
+ */
 export function eligibleEvents(content: Content, state: GameState): GameEvent[] {
   const era = content.eras[state.eraIndex];
   if (!era) return [];
   const pool = content.eventsByEra.get(era.id) ?? [];
-  return pool.filter((ev) => !alreadyConsumed(state, ev) && meetsRequires(state, ev.requires));
+  const base = pool.filter(
+    (ev) => !alreadyConsumed(state, ev) && meetsRequires(state, ev.requires),
+  );
+  const forward = base.filter((ev) => ev.year >= state.lastEventYear);
+  return forward.length > 0 ? forward : base;
 }
 
 /**

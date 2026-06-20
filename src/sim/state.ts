@@ -1,5 +1,6 @@
 import type { Content } from "./content";
 import { initMeters, type Meters } from "./meters";
+import { initPersonality, type Personality } from "./personality";
 
 /** One entry in the visible Butterfly Log (cause → effect chain, part B). */
 export interface LedgerEntry {
@@ -46,12 +47,16 @@ export interface GameState {
   /** Current in-world year. */
   year: number;
   meters: Meters;
+  /** The personality vector — what kind of man he is becoming. */
+  personality: Personality;
   /** Set membership flags (stored as a sorted array for serializability). */
   flags: string[];
   /** Event ids that have already fired (non-repeatable events fire once). */
   firedEvents: string[];
   /** Count of events fired in the current era (drives era budget). */
   eraEventCount: number;
+  /** Year of the most recently fired event — events never go backward in time. */
+  lastEventYear: number;
   /** Accumulated ripple pressure by channel. */
   ripples: RippleField;
   ledger: LedgerEntry[];
@@ -72,9 +77,11 @@ export function initState(content: Content, seed: string): GameState {
     age: 0,
     year: firstEra.yearStart,
     meters: initMeters(content.meters),
+    personality: initPersonality(),
     flags: [],
     firedEvents: [],
     eraEventCount: 0,
+    lastEventYear: firstEra.yearStart,
     ripples: {},
     ledger: [],
     history: [],

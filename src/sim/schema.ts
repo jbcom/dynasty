@@ -15,6 +15,12 @@ export type MeterId = z.infer<typeof MeterIdSchema>;
 export const MeterDeltaSchema = z.partialRecord(MeterIdSchema, z.number());
 export type MeterDelta = z.infer<typeof MeterDeltaSchema>;
 
+/** The four personality axes a choice can nudge (see sim/personality.ts). */
+export const PERSONALITY_AXES = ["ideology", "grandiosity", "outward", "inward"] as const;
+export const PersonalityAxisSchema = z.enum(PERSONALITY_AXES);
+/** A partial map of personality axis → delta applied by a choice. */
+export const PersonalityDeltaSchema = z.partialRecord(PersonalityAxisSchema, z.number());
+
 /** Meter definition (data/meters.json). */
 export const MeterDefSchema = z.object({
   id: MeterIdSchema,
@@ -62,6 +68,8 @@ export const ChoiceSchema = z.object({
   id: z.string().min(1),
   text: z.string().min(1),
   effects: MeterDeltaSchema.default({}),
+  /** Optional nudge to the personality vector (ideology/grandiosity/outward/inward). */
+  personality: PersonalityDeltaSchema.default({}),
   setFlags: z.array(z.string()).default([]),
   clearFlags: z.array(z.string()).default([]),
   ripples: z.array(RippleSchema).default([]),

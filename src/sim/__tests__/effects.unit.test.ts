@@ -65,6 +65,7 @@ describe("applyChoice", () => {
           id: "die",
           text: "Stop breathing.",
           effects: { health: -100 },
+          personality: {},
           setFlags: [],
           clearFlags: [],
           ripples: [],

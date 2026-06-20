@@ -47,11 +47,17 @@ export function advanceTimeline(content: Content, state: GameState): GameState {
   let eraIndex = state.eraIndex;
   let nextEraEventCount = eraEventCount;
 
+  let lastEventYear = state.lastEventYear;
   if (eraEventCount >= era.eventBudget) {
     eraIndex = state.eraIndex + 1;
     nextEraEventCount = 0;
     const nextEra = content.eras[eraIndex];
-    if (nextEra) year = nextEra.yearStart;
+    if (nextEra) {
+      year = nextEra.yearStart;
+      // Reset the chronological floor to the new era's start so its earliest
+      // events are eligible again.
+      lastEventYear = nextEra.yearStart;
+    }
   }
 
   const advanced: GameState = {
@@ -60,6 +66,7 @@ export function advanceTimeline(content: Content, state: GameState): GameState {
     eraEventCount: nextEraEventCount,
     year,
     age: ageInYear(year),
+    lastEventYear,
   };
 
   return { ...advanced, end: detectEnd(content, advanced) };

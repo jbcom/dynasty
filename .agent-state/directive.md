@@ -10,9 +10,9 @@ Started: 2026-06-20
 Config: stop_on_failure=false (autonomous, self-resolving) · single feature branch → squash-merge
 
 ### Phase H — Research & Causality Model
-- [ ] H1 Web-research timeline; index pivotal events w/ dated cause→effect
+- [x] H1 Web-research timeline; index pivotal events w/ dated cause→effect (Wikipedia bio + business career indexed; key endings/ideology anchors pulled)
 - [ ] H2 Causality graph model (chains, prereqs, delayed/compounding effects)
-- [ ] H3 Personality vector schema + sim (ideology + grandiosity; outward vs inward)
+- [x] H3 Personality vector schema + sim (ideology + grandiosity; outward vs inward) — + time-monotonicity fix (no backward years) + timeline self-reveal (no future spoilers)
 
 ### Phase I — Endings
 - [ ] I1 Data-driven ending system (triggers over meters+personality+flags+era)

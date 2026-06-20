@@ -2,6 +2,7 @@ import { applyRipples, buildLedgerEntries } from "./butterfly";
 import type { Content } from "./content";
 import { pickNextEvent } from "./events";
 import { applyDelta } from "./meters";
+import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
 import type { Choice, GameEvent } from "./schema";
 import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
@@ -43,6 +44,9 @@ export function applyChoice(
   // 1. Meters.
   const meters = applyDelta(content.meters, state.meters, choice.effects);
 
+  // 1b. Personality vector.
+  const personality = applyPersonality(state.personality, choice.personality);
+
   // 2. Flags.
   let flags = [...state.flags];
   for (const f of choice.setFlags) flags = withFlag(flags, f);
@@ -66,11 +70,14 @@ export function applyChoice(
   const resolved: GameState = {
     ...state,
     meters,
+    personality,
     flags,
     ripples,
     ledger: [...state.ledger, ...newLedger],
     history: [...state.history, { eventId: event.id, choiceId, year: event.year }],
     firedEvents,
+    // Time floor advances to this event's year (never moves backward).
+    lastEventYear: Math.max(state.lastEventYear, event.year),
   };
 
   // 6. Immediate end check (e.g. a choice that drops health to 0), else advance.
