@@ -173,6 +173,14 @@ function regimeTone(regime: string | undefined): string {
   .rank-list li.fallen .rung {
     color: var(--mmm-red);
   }
+  .fallen-icon {
+    width: 0.7em;
+    height: 0.7em;
+    margin-left: 0.25em;
+    vertical-align: -0.05em;
+    /* tint to red (#b22234) */
+    filter: invert(20%) sepia(64%) saturate(2200%) hue-rotate(330deg) brightness(82%);
+  }
   .rank-label {
     color: var(--mmm-text-dim);
   }
