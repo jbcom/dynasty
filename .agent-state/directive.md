@@ -115,7 +115,7 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 - [x] K3 First-Contact apex-ending presentation (lightspeed → the stars)
 
 ### Phase L — Verify
-- [ ] L1 Determinism + schema tests; seeded playthroughs reach a spread of endings; live screenshots
+- [x] L1 Determinism + schema tests; seeded playthroughs reach a spread of endings; live screenshots — DONE: 147 unit tests green (determinism + schema + roles + endings + timelines); 300-seed sweep shows 7 distinct endings; reachability probe found + fixed a real bug (science-ladder players were pre-empted by Earth-bound endgame endings at era 7 → added notFlags [mars_program, back_science]); app builds + runs, live-verified via chrome-devtools (title, play screen, seven-scope News HUD, era progression) with ZERO console errors.
 - [ ] L2 Reviewer trio + green PR + squash-merge
 
 ## Batch — maga-money-moves-full-build (batch-20260619-build)
