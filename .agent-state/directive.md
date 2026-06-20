@@ -26,24 +26,32 @@ docs/superpowers/specs/2026-06-20-found-your-own-dynasty.md
 - [ ] FD-2.2 WORLD-EVENT PROJECTION (1169 events across 34 timeline files — too many to hand-rewrite, so PROJECT not hand-migrate): buildContent projects each WorldEvent → a unified year-keyed reactable GameEvent (headline→title, body→scene, historicity=real|extrapolated, place from scope, bias.branch from the timeline branch, setFlags/requires preserved, a default "witness it" reactable choice + authored choices for hinges). Year-indexed worldEvents pool on Content; era derived from year. DECISION (user): year-indexed pool, era-from-year, selector weaves it alongside era events by year+place+bias.
 - [~] FD-2.2 IN PROGRESS: projectWorldEvents (src/sim/worldEvents.ts) converts all 1169 world-timeline entries → unified year-keyed REACTABLE GameEvents (headline→title, body→scene, historicity real|extrapolated, place from scope, bias.branch from timeline branch, setFlags preserved on a "Live through it" choice). Content.worldEvents holds the year-sorted pool. NO-LEAK INVARIANT (user): each event tags its owning dynasty via scope (musk/kennedy scopes → dynasty:<id>); the selector must exclude events owned by a DIFFERENT dynasty than the active one — start a Kennedy, STAY a Kennedy.
 - [ ] FD-2.3 SELECTOR WEAVE + RETIRE LINKING + dynasty-leak gate: pickNextEvent/eligibleEvents weave worldEvents with the era pool by year+place+bias, EXCLUDING other-dynasty-owned events (the no-leak gate). Preserve dueWorldEvents' year-order mutual-exclusion + determinism; retire worldtime.ts linking once parity-proven. AH6 + determinism + replay stay green.
-### FD-2.4 RIP OUT FLIP/SWAP MECHANICS (user: the game is dynasty-reacts-and-builds-each-generation, not swap-into-another-house)
-- [ ] FD-2.4 remove role-flip + kennedy_swap entirely: delete src/sim/roles.ts (resolveRoles/isRoleFlipped) + the effects.ts step-8c call; strip role-flip from compiler.ts/branch.ts; remove the ev_flip_* events (interregnum +4, victory +5), the role-flip endings (end_role_flip_tycoon, end_reich_industrialist), trump_commercial_path/musk_political/kingmaker_mogul flags, and kennedy_swap (kennedy becomes its own dynasty via dynasty selection, not a swap-in). This is also the deepest leak vector. Update/remove the role-swap tests + the role-swap memory. Full gate + sweep stay green.
-### FD-3 Onomastics + naming-convention resolution
-- [ ] FD-3 src/data/onomastics.json (per-culture given-name pools + patronymic/matronymic conventions: irish_catholic, bavarian_german, afrikaner, scots_irish, wasp_east_coast) + a pure resolver generalizing AH8c/d; tests per culture.
-### FD-4 Start-moments + new Stage-0 "found your line" flow
-- [ ] FD-4 src/data/origins/start-moments.json (Irish Famine 1847, Bavaria 1885, Cape Colony 1906, apartheid-end 1994, Gold Rush 1849, Gilded-Age NY 1880, Second Great Awakening 1830); founding UI (pick moment + name + progenitor) feeding the compiler; presets kept as shortcuts. [USER CHECK-IN: how many start-moments to ship first.]
-### FD-5 World stacks (geo/politics/religion/ideology per place)
-- [ ] FD-5 src/data/world/ stacks for ireland/uk/south_africa/canada/east_coast/west_coast; STANDING context applied by the run's current place; migration = place change. Schema + load + tests.
-### FD-6 Family-tree STATE + BIRTH mechanics
-- [ ] FD-6 FamilyState in GameState (live mutable tree); pure seeded beget() (children from reign choices/events, named via onomastic convention, traits inherited+varied); replay-determinism tests.
-### FD-7 DEATH + AGING
-- [ ] FD-7 per-year seeded mortality hazard (age + health/era-medicine); non-protagonist death events (feeding accidental-heir archetype); tests.
-### FD-8 INHERITANCE + ESTATE + SUCCESSION
-- [ ] FD-8 estate-planning choices (name heir, primogeniture vs split, rivalries, trusts); heir selection at protagonist death; protagonist-handoff continuing as the heir; carry-forward of capital/ladders/branch; line-failure ending; multi-generation replay tests.
-### FD-9 LINEAGE VIEW
-- [ ] FD-9 the growing family-tree screen (reclaimed portrait space); luxury-styled, real-2D, no portraits; screenshot-verify.
-### FD-10 DoD
-- [ ] FD-10 full gate + AH6 + persona sweeps over generational runs + app live-verified (found a line at the Famine → beget heir → die → succeed); PRs squash-merged; directive → RELEASED.
+### FD-2.4 RIP OUT FLIP/SWAP MECHANICS (user: dynasty reacts+builds each generation, not swap-into-another-house)
+- [~] FD-2.4 CODE LAYER DONE (commit a504ee3): deleted src/sim/roles.ts + the effects.ts step-8c resolveRoles call; removed isRoleFlipped from branch.ts + roleFlipped from compiler/CompiledTimeline + branch-test cases. DATA LAYER (role-flip endings end_role_flip_tycoon/end_reich_industrialist, ev_flip_* events, kennedy_swap, trump_commercial_path/musk_political/kingmaker_mogul flags) folds into FD-3 (tropes) since that content gets retagged not just deleted. Role-swap memory to delete.
+### FD-3 TROPES-AS-INFLUENCES (user — dissolve literal lines; full trope catalog in spec §1c)
+- [ ] FD-3 refactor literal Trump/Kennedy/Musk/Graham lines → trope:<id> influences. AUTHOR the full catalog: 4 spine tropes (accidental-heir, bootlegger-to-legitimacy, frontier/emerald-origin, centrist→zealot) + branch tropes (conqueror/prophet/pleasure-king/oligarch/techno-frontier/megachurch) + the MISSING set (dissipating-line, martyr, matriarch-regency, dynastic-merger, cadet-branch, prodigal-heir, scandal-fall→rehab, exile→return, reformer-vs-reactionary-schism, outside-claimant). Retag authored events; remove orphaned flip/swap data+tests; preset trees become trope-flavored quick-starts. No house-leak possible.
+### FD-4 PROCEDURAL POOL (user — 100k events / 1000 yrs; spec §1d)
+- [ ] FD-4 trope-template generator: parameterized templates (slots {member}{place}{year}{rival}{peril}…) + a PURE/SEEDED generative-grammar expander (evaluate tracery-class lib vs purpose-built) + lazy bounded materialization through the chaos field; substitution from world-stacks + onomastics + live tree. Replay-determinism is the gating constraint. Organize as a barrel-packaged events/ module (user: file/PR size no constraint, use packages).
+### FD-5 Onomastics + naming-convention resolution
+- [ ] FD-5 src/data/onomastics.json (irish_catholic/bavarian_german/afrikaner/scots_irish/wasp_east_coast given-name pools + patronymic/matronymic conventions) + pure resolver generalizing AH8c/d; per-culture tests. Feeds FD-4 substitution.
+### FD-6 Start-moments + new Stage-0 "found your line" flow
+- [ ] FD-6 src/data/origins/start-moments.json (Irish Famine 1847, Bavaria 1885, Cape Colony 1906, apartheid-end 1994, Gold Rush 1849, Gilded-Age NY 1880, Second Great Awakening 1830); founding UI (moment+name+progenitor) → compiler; presets as shortcuts. [USER CHECK-IN: # of moments to ship first.]
+### FD-7 World stacks (geo/politics/religion/ideology per place)
+- [ ] FD-7 src/data/world/ stacks for ireland/uk/south_africa/canada/east_coast/west_coast; STANDING context by current place; migration = place change. Feeds FD-4 substitution.
+### FD-8 Family-tree STATE + BIRTH mechanics
+- [ ] FD-8 FamilyState in GameState (live mutable tree); pure seeded beget() (children from reign choices/events, onomastic naming, inherited+varied traits); replay-determinism tests.
+### FD-9 DEATH + AGING
+- [ ] FD-9 per-year seeded mortality hazard (age + health/era-medicine); non-protagonist death events; tests.
+### FD-10 INHERITANCE + ESTATE + SUCCESSION (enables the eternal-dynasty loop)
+- [ ] FD-10 estate-planning choices (name heir, primogeniture vs split, rivalries, trusts); heir selection at death; protagonist-handoff continuing as the heir; carry-forward of capital/ladders/branch; line-failure ending; multi-generation replay tests.
+### FD-11 GEMINI DEV-BULK EXTRAPOLATION (user; spec §1e Mode A) — SHIP CRITERION
+- [ ] FD-11 add @google/genai dev dep; scripts/extrapolate.mjs (gap-detect → generate with last-10–25 context → gemini-3-pro self-critique loop → schema+guard validate → commit into JSON). SHIP BAR (user): run until all FOUR dynasties sustain a full 1000 YEARS of dynastic rule with no dead-ends/thin years. Deterministic play unaffected.
+### FD-12 TITLE MENU + SETTINGS + RUNTIME LIVE (user; spec §1e Mode B)
+- [ ] FD-12 title → New Game · Load Game · Settings; Settings stores the Gemini key via Capacitor secure storage (+ web fallback) + toggles live extrapolation; optional runtime generate-on-exhaustion persisting generated events into the save (determinism preserved by storage). Default OFF. (May be optional given FD-11 1000-yr depth, but ships anyway as the infinite tail.)
+### FD-13 LINEAGE VIEW
+- [ ] FD-13 the growing family-tree screen (reclaimed portrait space); luxury-styled, real-2D, no portraits; screenshot-verify.
+### FD-14 DoD
+- [ ] FD-14 full gate + AH6 + persona sweeps over multi-generation runs + 1000-year determinism stress test + app live-verified (found a line at the Famine → beget heir → die → succeed → carry forward) per dynasty; PRs squash-merged; directive → RELEASED.
 
 ## Batch — DYNASTY EVERYTHING (batch-20260620-dynasty-everything)
 
