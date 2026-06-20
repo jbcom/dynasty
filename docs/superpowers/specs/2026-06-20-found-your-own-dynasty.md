@@ -67,6 +67,40 @@ bespoke timeline) is the perfect substrate — we commit to it fully: the
 starting-moment choice + family name + progenitor traits become the Stage-0 flag
 set the compiler builds the run from.
 
+## 1b. ONE UNIFIED EVENT POOL — real + fictional, the timeline is composed (user)
+
+> "Would it make MORE sense to turn the timelines into EVENTS, slotted and biased
+> and weighted? … let the flow of decisions build a coherent timeline from a
+> combination of real and fictional events." — yes. FULL MERGE.
+
+Today there are two parallel systems: `eras/*.json` events (the protagonist's
+life — slotted/biased/weighted, player-chosen) and `timelines/*.json`
+world-timelines (dated backdrop facts that merely BROADCAST FLAGS). For a
+player-founded line moving through history this split is wrong. **Collapse them
+into ONE event pool.**
+
+- Every event gains **`historicity`: `real` | `extrapolated` | `personal`**
+  (real history · plausible future-extrapolation · the family's private life) and
+  the existing **place/time/branch/personality bias + weight** (the chaos field).
+- **Real historical events are REACTABLE** — they present choices (how your family
+  responds to the Famine / Black Monday / apartheid's end) via the same EventCard.
+  History is the SETTING; the player's reaction is the play. (Minor real events
+  may still flow past in the news ticker, tagged ambient — but the default is
+  reactable.)
+- The **compiler weaves real + fictional** into the bespoke run: an event surfaces
+  when the run's place + year + state make it likely (bias/weight), so the *flow
+  of decisions* composes a coherent timeline — real events anchor it, fictional/
+  personal events fill it, all from one pool.
+- **Migration:** the 24 `timelines/<scope>.<branch>.json` files convert into
+  unified events (historicity=real|extrapolated, place/era bias carried over,
+  their old setFlags preserved, plus authored choices for the reactable ones).
+  The world-timeline linking protocol (flag broadcast on year advance) is
+  retired in favor of normal event resolution. The `WorldTimeline` schema +
+  `worldtime.ts` linking are removed once migration is complete.
+
+This unification is the SUBSTRATE the start-moments (§2), world stacks (§3), and
+birth/inheritance events (§5) all ride on, so it lands EARLY (phase FD-2 below).
+
 ## 2. Starting moments (the historical hinges)
 
 A new `src/data/origins/start-moments.json` — each a pivotal time+place a line can
@@ -201,32 +235,38 @@ line highlighted, branch tilts shown. This becomes a core screen, not a flourish
 
 ## 8. Implementation phases (serial, solo — no agent swarm)
 
-- **FD-1 FamilyTreeSchema + 4 preset trees** — DONE (carried from DD-1: schema in
-  src/sim/schema.ts; economic/political/technological/religious trees authored).
-- **FD-2 Onomastics + naming-convention resolution** — onomastics.json + a pure
+- **FD-1 FamilyTreeSchema + 4 preset trees** — DONE: schema + cross-ref
+  validation in content.ts; economic/political/technological/religious trees.
+- **FD-2 UNIFIED EVENT POOL (§1b)** — add `historicity` (real|extrapolated|
+  personal) + ensure place/era bias on EventSchema; migrate the 24 world-timeline
+  files into unified events (real/extrapolated, bias + setFlags preserved,
+  reactable choices authored for the hinges); retire WorldTimeline +
+  worldtime.ts linking; the compiler/selection weaves one pool. This is the
+  SUBSTRATE for everything after, so it lands first. Determinism + sweep tests
+  stay green through the migration. (Large; may sub-phase per scope group.)
+- **FD-3 Onomastics + naming-convention resolution** — onomastics.json + a pure
   resolver (generalizes AH8c/d); tests per culture.
-- **FD-3 Start-moments + the new Stage-0 "found your line" flow** —
+- **FD-4 Start-moments + the new Stage-0 "found your line" flow** —
   start-moments.json; the founding UI (pick moment + name + progenitor); Stage-0
-  flags feed the existing compiler. Keep presets as shortcuts.
-- **FD-4 World stacks** — src/data/world/ geo/politics/religion/ideology per place
-  (Ireland, UK, South Africa, Canada, both coasts); generalize the world-timeline
-  linking to apply STANDING stacks by the run's current place; migration = place
-  change. Schema + load + tests.
-- **FD-5 Family-tree STATE + BIRTH mechanics** — FamilyState in GameState; pure
+  flags feed the compiler. Presets kept as shortcuts. [USER CHECK-IN: # of moments.]
+- **FD-5 World stacks** — src/data/world/ geo/politics/religion/ideology per place
+  (Ireland, UK, South Africa, Canada, both coasts); STANDING context applied by
+  the run's current place; migration = place change. Schema + load + tests.
+- **FD-6 Family-tree STATE + BIRTH mechanics** — FamilyState in GameState; pure
   seeded beget(); choices/events that spawn children; replay-determinism tests.
-- **FD-6 DEATH + AGING** — per-year seeded mortality hazard; non-protagonist
+- **FD-7 DEATH + AGING** — per-year seeded mortality hazard; non-protagonist
   death events; tests.
-- **FD-7 INHERITANCE + ESTATE + SUCCESSION** — estate-planning choices; heir
+- **FD-8 INHERITANCE + ESTATE + SUCCESSION** — estate-planning choices; heir
   selection; the protagonist-handoff at death; carry-forward of capital/ladders/
-  branch; line-failure ending; replay tests across a multi-generation run.
-- **FD-8 LINEAGE VIEW** — the growing family-tree screen; luxury-styled, real-2D,
+  branch; line-failure ending; multi-generation replay tests.
+- **FD-9 LINEAGE VIEW** — the growing family-tree screen; luxury-styled, real-2D,
   no portraits; screenshot-verify.
-- **FD-9 DoD** — full gate + sweeps (AH6 + persona) over generational runs +
+- **FD-10 DoD** — full gate + sweeps (AH6 + persona) over generational runs +
   app live-verified (found a line at the Famine, beget an heir, die, succeed);
   PRs squash-merged; directive → RELEASED.
 
-Each phase is its own PR. The composite-archetype work already in flight (schema +
-4 trees) lands as FD-1; everything else is new.
+Each phase is its own PR. FD-1 landed; FD-2 (the unified event pool) is the
+keystone substrate and is next.
 
 ## 9. Self-review
 
