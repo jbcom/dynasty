@@ -42,7 +42,9 @@ const scopeLabel: Record<string, string> = {
 
 {#if news.length > 0}
   <section class="news" aria-label="World news">
-    <h3>📰 The Wider World — {gameState.year}</h3>
+    <h3>
+      <img class="h-icon" src="/assets/icons/ui/news.svg" alt="" aria-hidden="true" />The Wider World — {gameState.year}
+    </h3>
     <ul>
       {#each news as item (item.scope + item.headline)}
         <li>

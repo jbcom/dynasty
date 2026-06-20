@@ -11,7 +11,9 @@ const entries = $derived([...ledger].sort((a, b) => b.seq - a.seq));
 </script>
 
 <section class="log" aria-label="Butterfly Log">
-  <h3>🦋 Butterfly Log</h3>
+  <h3>
+    <img class="h-icon" src="/assets/icons/ui/butterfly.svg" alt="" aria-hidden="true" />Butterfly Log
+  </h3>
   {#if entries.length === 0}
     <p class="empty">No ripples yet. Your choices will echo here.</p>
   {:else}

@@ -45,9 +45,13 @@ const poleLabel = $derived(moralPoleLabel(view.state));
 const term = $derived((text: string) => applyTerms(text, content.terms, branch));
 
 type Tab = "event" | "news" | "markets" | "timeline" | "stats" | "butterfly" | "dossier";
-let tab = $state<Tab>("event");
 const hasNews = $derived(content.worldTimelines.length > 0);
 const hasMarkets = $derived(content.markets.length > 0 || content.ranks.length > 0);
+// In wide mode the "event" tab is shown directly in event-col, so the side nav
+// starts on the first info tab (timeline is always present; news/markets optional).
+const defaultTab = $derived<Tab>(wide ? (hasNews ? "news" : hasMarkets ? "markets" : "timeline") : "event");
+let tab = $state<Tab>("event");
+$effect(() => { if (tab === "event" && wide) tab = defaultTab; });
 
 // Each tab carries a real 2D line-icon asset (public/assets/icons/ui/<icon>.svg).
 const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([

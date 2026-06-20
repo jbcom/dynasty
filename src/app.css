@@ -23,3 +23,14 @@ body {
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
 }
+
+/* Inline section-header icon (real 2D line-art asset, gold-tinted) — replaces the
+   old leading Unicode emoji in panel <h3>s. Global so scoped components share it. */
+.h-icon {
+  width: 1.05em;
+  height: 1.05em;
+  vertical-align: -0.15em;
+  margin-right: 0.4em;
+  /* tint the black line-art SVG to gold (#d4af37) */
+  filter: invert(72%) sepia(38%) saturate(680%) hue-rotate(2deg) brightness(92%);
+}

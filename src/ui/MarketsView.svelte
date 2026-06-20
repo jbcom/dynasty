@@ -45,7 +45,9 @@ function regimeTone(regime: string | undefined): string {
 
 <section class="markets" aria-label="Markets and ranks">
   <header>
-    <h3>💹 Markets</h3>
+    <h3>
+      <img class="h-icon" src="/assets/icons/ui/markets.svg" alt="" aria-hidden="true" />Markets
+    </h3>
     <span class="currency">Denominated in {currency.name} ({currency.symbol})</span>
   </header>
 
@@ -75,7 +77,14 @@ function regimeTone(regime: string | undefined): string {
       {#each ranks as r (r.def.id)}
         <li class:fallen={r.fallen}>
           <span class="rank-label">{r.def.label}</span>
-          <span class="rung">{r.label}{#if r.fallen} ▼{/if}</span>
+          <span class="rung"
+            >{r.label}{#if r.fallen}<img
+                class="fallen-icon"
+                src="/assets/icons/ui/pole-dictatorial.svg"
+                alt="(fallen)"
+                title="Fallen from peak rank"
+              />{/if}</span
+          >
         </li>
       {/each}
     </ul>
