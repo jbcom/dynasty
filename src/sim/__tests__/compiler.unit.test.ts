@@ -77,4 +77,17 @@ describe("timeline compiler (AH3 gears-in-a-clock, task-008)", () => {
   it("is deterministic: same Era-0 state → identical compiled bundle", () => {
     expect(compile(["axis_ascendant"])).toEqual(compile(["axis_ascendant"]));
   });
+
+  it("birth-order lever (AH8d) drives the compiled given/full name", () => {
+    // Fourth child on the default line → the accidental heir, still Donald.
+    expect(compile(["fourth_child"]).terms.given_name).toBe("Donald");
+    expect(compile(["fourth_child"]).terms.full_name).toBe("Donald Trump");
+    // Firstborn heir → carries the patriarch's name even on the default branch.
+    expect(compile(["firstborn_heir"]).terms.given_name).toBe("Friedrich");
+    expect(compile(["firstborn_heir"]).terms.full_name).toBe("Friedrich Trump III");
+    // Firstborn on the Nazi line: Friedrich Drumpf III (surname flips too).
+    expect(compile(["axis_ascendant", "firstborn_heir"]).terms.full_name).toBe(
+      "Friedrich Drumpf III",
+    );
+  });
 });

@@ -2382,6 +2382,119 @@
       ]
     },
     {
+      "id": "ev_the_children",
+      "era": "origins",
+      "year": 1945,
+      "title": "The Children of the House",
+      "scene": "By the war’s end Fred and Mary Anne’s nursery in Jamaica Estates is filling. How many cribs, and which one holds the heir, will shape everything that follows — a firstborn son is groomed from the cradle and carries the patriarch’s name; a fourth child must earn the empire past older siblings who may rise, rebel, or fall. Decide the shape of the bloodline.",
+      "researchNote": "Fred and Mary Anne Trump had five children; Donald was the fourth. The eldest, Fred Trump Jr., was the presumed heir but left the family business to become an airline pilot and died in 1981 — making Donald the ‘accidental’ heir. Birth order materially shaped who inherited the firm.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "family",
+        "inheritance",
+        "birth-order"
+      ],
+      "portrait": "infant",
+      "requires": {
+        "flags": [
+          "married_mary_anne"
+        ],
+        "notFlags": [
+          "never_emigrated",
+          "line_failed"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "firstborn_groomed_heir",
+          "text": "A first son, groomed from the cradle — he carries the patriarch’s name",
+          "effects": {
+            "loyalty": 8,
+            "power": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 4
+          },
+          "setFlags": [
+            "firstborn_heir",
+            "fred_jr_present",
+            "groomed_heir"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The patriarch’s name passes straight down: the boy is a {given_name} from birth, raised to inherit. No elder brother stands between him and the firm — the empire is his by right, not by struggle."
+        },
+        {
+          "id": "only_child_sole_heir",
+          "text": "An only child — the whole dynasty narrows to one heir",
+          "effects": {
+            "loyalty": 6,
+            "power": 6,
+            "reputation": -2
+          },
+          "personality": {
+            "grandiosity": 10,
+            "inward": 5
+          },
+          "setFlags": [
+            "only_child",
+            "firstborn_heir",
+            "groomed_heir"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Everything Fred built funnels to a single child — named for the patriarch, groomed without rival or sibling check. A coronation with no competing claimants, and no one to share the weight."
+        },
+        {
+          "id": "fourth_child_accidental_heir",
+          "text": "The fourth of five — heir only if the firstborn falls",
+          "effects": {
+            "reputation": 3,
+            "health": 2
+          },
+          "personality": {
+            "outward": 6,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "fourth_child",
+            "fred_jr_present",
+            "accidental_heir"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "A boy named Donald, fourth in line, with an elder brother already marked as heir. The empire is not his birthright — he will have to want it more than the brother who was handed it."
+        },
+        {
+          "id": "fourth_child_brother_dies",
+          "text": "The fourth child — and the firstborn rebels and dies young",
+          "effects": {
+            "reputation": 4,
+            "heat": 3,
+            "health": -2
+          },
+          "personality": {
+            "grandiosity": 7,
+            "inward": 6
+          },
+          "setFlags": [
+            "fourth_child",
+            "fred_jr_died",
+            "accidental_heir"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The elder brother chafes against the firm, walks away, and is gone too soon. The mantle falls — unasked, unearned, never quite forgiven — onto the fourth child, who will spend a lifetime proving he deserved what grief handed him."
+        }
+      ]
+    },
+    {
       "id": "ev_donald_is_born",
       "era": "origins",
       "year": 1946,
