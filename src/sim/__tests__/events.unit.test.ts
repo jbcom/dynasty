@@ -110,6 +110,34 @@ describe("effectiveWeight", () => {
     const withPressure = { ...s, ripples: { chaos: 0.5 } };
     expect(effectiveWeight(c, withPressure, tagged)).toBeCloseTo(born.weight * 1.5, 5);
   });
+
+  it("applies branch bias only on the matching branch (AH9)", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    const born = c.eventsByEra.get("boyhood")?.[0];
+    if (!born) throw new Error("no born event");
+    const biased = { ...born, bias: { branch: { nazi: 3 }, personality: {} } };
+    // Default branch: no match → unchanged.
+    expect(effectiveWeight(c, { ...s, flags: [] }, biased)).toBeCloseTo(born.weight, 5);
+    // Nazi branch: ×3.
+    expect(effectiveWeight(c, { ...s, flags: ["axis_ascendant"] }, biased)).toBeCloseTo(
+      born.weight * 3,
+      5,
+    );
+  });
+
+  it("applies personality bias scaled by the axis value (AH9)", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    const born = c.eventsByEra.get("boyhood")?.[0];
+    if (!born) throw new Error("no born event");
+    // sensitivity 1 on grandiosity: weight ×(1 + 1*(axis/100)).
+    const biased = { ...born, bias: { branch: {}, personality: { grandiosity: 1 } } };
+    const grandiose = { ...s, personality: { ...s.personality, grandiosity: 80 } };
+    expect(effectiveWeight(c, grandiose, biased)).toBeCloseTo(born.weight * 1.8, 5);
+    const humble = { ...s, personality: { ...s.personality, grandiosity: -50 } };
+    expect(effectiveWeight(c, humble, biased)).toBeCloseTo(born.weight * 0.5, 5);
+  });
 });
 
 describe("pickNextEvent", () => {

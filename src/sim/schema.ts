@@ -108,6 +108,24 @@ export const EventSchema = z.object({
   portrait: z.string().min(1),
   requires: RequiresSchema,
   weight: z.number().min(0).default(10),
+  /**
+   * Selection BIAS (AH9): affinities that scale this event's weight so the chaos
+   * field pulls realistically toward the run's character. `branch` multiplies the
+   * weight when the run's active branch matches (so a Reich event is likelier on
+   * the Nazi line); `personality` multiplies per axis-comparator (so a grandiose
+   * run surfaces grandiose events). Absent → no bias (multiplier 1).
+   */
+  bias: z
+    .object({
+      branch: z
+        .partialRecord(
+          z.enum(["default", "nazi", "westcoast", "theocracy", "media", "megachurch", "oligarchy"]),
+          z.number(),
+        )
+        .default({}),
+      personality: z.partialRecord(PersonalityAxisSchema, z.number()).default({}),
+    })
+    .optional(),
   /** If true the event can recur; otherwise it fires at most once per run. */
   repeatable: z.boolean().default(false),
   choices: z.array(ChoiceSchema).min(1, "an event needs at least one choice"),
