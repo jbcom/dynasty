@@ -25,30 +25,74 @@ export type MoralPole = "utopian" | "centrist" | "dictatorial";
  */
 const POLE_FLAGS: Record<MoralPole, readonly string[]> = {
   utopian: [
-    "covenant_commonwealth",
-    "covenant_commonwealth_flourishing",
-    "charitable_ministry",
-    "abundance_technocracy",
-    "board_dissolved_utopian",
+    // cross-branch
     "utopian_currents",
     "earth_healed",
     "rivalries_abolished",
+    // theocracy
+    "covenant_commonwealth",
+    "covenant_commonwealth_flourishing",
+    "covenant_commonwealth_theology",
+    "communion_theology_pole",
+    "crusade_communion_possible",
+    // megachurch
+    "charitable_ministry",
+    "missionary_uplift",
+    // oligarchy
+    "abundance_technocracy",
+    "board_dissolved_utopian",
+    "interstellar_trade_commonwealth",
+    // nazi (utopia in the Reich's own — monstrous — value system)
+    "reich_america_utopian",
+    "reich_utopian_pole",
+    // media
+    "media_utopian_pole",
+    // westcoast
+    "pole_utopian",
   ],
   centrist: [
+    // oligarchy
     "managed_oligopoly",
-    "prosperity_grift",
-    "soft_establishment",
     "managed_oligopoly_civil_religion",
     "stabilization_protocols",
+    "monopoly_trade_regime",
+    // megachurch
+    "prosperity_grift",
+    // theocracy
+    "soft_establishment",
+    "missionary_standoff_pole",
+    "crusade_detente_possible",
+    // nazi
+    "reich_america_centrist",
+    "reich_centrist_pole",
+    // media
+    "media_centrist_pole",
+    // westcoast
+    "pole_centrist",
   ],
   dictatorial: [
-    "gilead_regime",
-    "personality_cult",
-    "company_serfdom",
+    // cross-branch
     "autocratic_currents",
     "embraced_tyranny",
     "warlord_king",
-    "axis_ascendant",
+    // theocracy
+    "gilead_regime",
+    "theodicy_of_fire_pole",
+    "crusade_genocide_possible",
+    // megachurch
+    "personality_cult",
+    // oligarchy
+    "company_serfdom",
+    "alien_subjugation",
+    // nazi (the conquest pole; NOT axis_ascendant, which only marks the branch)
+    "reich_america_dictatorial",
+    "reich_dictatorial_pole",
+    "reich_interstellar_conquest",
+    // media
+    "media_dictatorial_pole",
+    "propaganda_state",
+    // westcoast
+    "pole_dictatorial",
   ],
 };
 
