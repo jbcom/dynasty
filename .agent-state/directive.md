@@ -15,47 +15,47 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 - [x] A3 Configure Vitest (node + browser mode) + Playwright e2e
 
 ### Phase B — Pure Sim Engine
-- [ ] B1 RNG facade (createRng/seedrandom)
-- [ ] B2 JSON content schemas (zod) + loader/validator
-- [ ] B3 GameState + meters
-- [ ] B4 Event eligibility + seeded weighted selection
-- [ ] B5 Butterfly engine (visible ledger + seeded chaos ripples)
-- [ ] B6 Effects + timeline + end conditions
+- [x] B1 RNG facade (createRng/seedrandom)
+- [x] B2 JSON content schemas (zod) + loader/validator
+- [x] B3 GameState + meters
+- [x] B4 Event eligibility + seeded weighted selection
+- [x] B5 Butterfly engine (visible ledger + seeded chaos ripples)
+- [x] B6 Effects + timeline + end conditions
 
 ### Phase C — Engine glue
-- [ ] C1 Clock facade + game loop
-- [ ] C2 Save/load via Capacitor Preferences
+- [x] C1 Clock facade + game loop
+- [x] C2 Save/load via Capacitor Preferences
 
 ### Phase D — UI / Render / Audio
-- [ ] D1 Design tokens + open-props brand system
-- [ ] D2 Meter HUD (SVG gauges) + Motion One deltas
-- [ ] D3 Event Card + choice flow + sim bridge
-- [ ] D4 Butterfly Log + D3 force-DAG graph view
-- [ ] D5 Timeline (vis-timeline) + Stats (uPlot) + Dossier views
-- [ ] D6 Render layer — caricature portrait/scene compositing
-- [ ] D7 Audio — Tone.js graph
-- [ ] D8 Screens — Title/New Game, Era intro, Legacy Report
+- [x] D1 Design tokens + open-props brand system
+- [x] D2 Meter HUD (SVG gauges) + Motion One deltas
+- [x] D3 Event Card + choice flow + sim bridge
+- [x] D4 Butterfly Log + D3 force-DAG graph view
+- [x] D5 Timeline (hand-rolled fallback) + Stats (uPlot) + Dossier views
+- [x] D6 Render layer — caricature portrait/scene compositing
+- [x] D7 Audio — Tone.js graph
+- [x] D8 Screens — Title/New Game, Play (HUD+tabs+portrait+card), Legacy Report + router
 
 ### Phase E — Assets
-- [ ] E1 Asset sourcing + manifest
+- [x] E1 Asset sourcing + manifest (OpenMoji icons, CC0 SVG caricatures + backgrounds, photo→cartoon derivatives, scraper + cartoonify dev tools, ASSETS.md)
 
 ### Phase F — Content: all 10 eras
-- [ ] F0 Era index + meters + butterfly-rules data
-- [ ] F1 Era 1 — Birth & Boyhood (1946–1964)
-- [ ] F2 Era 2 — Apprentice Mogul (1964–1987)
-- [ ] F3 Era 3 — Boom, Bust & Brand (1988–2003)
-- [ ] F4 Era 4 — Prime Time (2004–2014)
-- [ ] F5 Era 5 — The Ascent (2015–2020)
-- [ ] F6 Era 6 — Interregnum & Return (2021–2028)
-- [ ] F7 Era 7 — Total Victory (2029–2040) [extrapolated]
-- [ ] F8 Era 8 — The Atomic Horror (2041–2053) [extrapolated, startrek_inspired]
-- [ ] F9 Era 9 — The Unification (2054–2079) [extrapolated, startrek_inspired]
-- [ ] F10 Era 10 — Red Planet & Beyond (2080+) [extrapolated]
+- [x] F0 Era index + meters + butterfly-rules data
+- [x] F1 Era 1 — Birth & Boyhood (1946–1964)
+- [x] F2 Era 2 — Apprentice Mogul (1964–1987)
+- [x] F3 Era 3 — Boom, Bust & Brand (1988–2003)
+- [x] F4 Era 4 — Prime Time (2004–2014)
+- [x] F5 Era 5 — The Ascent (2015–2020)
+- [x] F6 Era 6 — Interregnum & Return (2021–2028)
+- [x] F7 Era 7 — Total Victory (2029–2040) [extrapolated]
+- [x] F8 Era 8 — The Atomic Horror (2041–2053) [extrapolated, startrek_inspired]
+- [x] F9 Era 9 — The Unification (2054–2079) [extrapolated, startrek_inspired]
+- [x] F10 Era 10 — Red Planet & Beyond (2080+) [extrapolated]
 
 ### Phase G — Integration, Android, Polish
-- [ ] G1 Full e2e playthroughs to each end state
-- [ ] G2 Capacitor Android setup + sync
-- [ ] G3 Verify app RUNS — Chromium screenshot of real playthrough
+- [x] G1 Full e2e playthroughs to each end state
+- [x] G2 Capacitor Android setup + sync
+- [x] G3 Verify app RUNS — Chromium screenshot of real playthrough
 - [ ] G4 Reviewer trio + green PR
 
 ## What CONTINUOUS means

@@ -1,0 +1,62 @@
+/**
+ * Design tokens — the gilded-tower / campaign-rally palette.
+ * Brand colors are defined ONCE here as custom properties; components reference
+ * var(--mmm-*) only. Raw brand hex literals in components are caught by the
+ * brand gate. open-props supplies the spacing/size/font scales underneath.
+ */
+@import "open-props/style";
+
+:root {
+  /* Core brand palette */
+  --mmm-gold: #d4af37;
+  --mmm-gold-bright: #f2cf52;
+  --mmm-gold-deep: #a8841f;
+  --mmm-red: #b22234;
+  --mmm-red-deep: #7a1f2b;
+  --mmm-navy: #0a1633;
+  --mmm-navy-light: #16264f;
+  --mmm-navy-deep: #050b1c;
+  --mmm-cream: #f5f0e1;
+  --mmm-ink: #11151f;
+
+  /* Semantic surfaces */
+  --mmm-bg: var(--mmm-navy);
+  --mmm-surface: var(--mmm-navy-light);
+  --mmm-surface-raised: #1d3060;
+  --mmm-text: var(--mmm-cream);
+  --mmm-text-dim: #b9c2da;
+  --mmm-accent: var(--mmm-gold);
+  --mmm-danger: var(--mmm-red);
+
+  /* Meter colors (mirrors data/meters.json) */
+  --mmm-meter-money: #d4af37;
+  --mmm-meter-power: #7a1f2b;
+  --mmm-meter-reputation: #c08a2e;
+  --mmm-meter-loyalty: #274690;
+  --mmm-meter-health: #b03030;
+  --mmm-meter-heat: #e2562a;
+
+  /* Status */
+  --mmm-crit: #ff5247;
+  --mmm-good: #4caf72;
+  --mmm-extrapolated: #9b6dff;
+  --mmm-startrek: #2fb6c9;
+
+  /* Spacing / radius / type (layered on open-props) */
+  --mmm-radius: var(--radius-3);
+  --mmm-radius-lg: var(--radius-4);
+  --mmm-gap: var(--size-3);
+  --mmm-pad: var(--size-3);
+  --mmm-font-display: "Georgia", "Times New Roman", serif;
+  --mmm-font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Elevation */
+  --mmm-shadow: 0 4px 16px rgb(0 0 0 / 0.4);
+  --mmm-shadow-gold: 0 0 12px rgb(212 175 55 / 0.35);
+
+  /* Motion */
+  --mmm-dur-fast: 160ms;
+  --mmm-dur: 280ms;
+  --mmm-dur-slow: 520ms;
+  --mmm-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

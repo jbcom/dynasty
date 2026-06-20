@@ -1,0 +1,89 @@
+import { describe, expect, it } from "vitest";
+import { buildContent, type RawContent } from "../../sim/content";
+import { autoPlaythrough } from "../../sim/effects";
+import { createRng } from "../../sim/rng";
+import { initState } from "../../sim/state";
+import butterflyJson from "../butterfly-rules.json";
+import indexJson from "../eras/index.json";
+import metersJson from "../meters.json";
+
+// Eagerly import every authored era events file.
+const eraModules = import.meta.glob("../eras/*.json", { eager: true }) as Record<
+  string,
+  { default: unknown }
+>;
+
+function realContent() {
+  const eraEvents = Object.entries(eraModules)
+    .filter(([p]) => !p.endsWith("index.json"))
+    .map(([p, m]) => ({ era: p.split("/").pop()?.replace(".json", "") ?? "", data: m.default }));
+  const raw: RawContent = {
+    meters: metersJson,
+    eraIndex: indexJson,
+    eraEvents,
+    butterflyRules: butterflyJson,
+    assets: { assets: [] },
+  };
+  return buildContent(raw);
+}
+
+describe("full authored content", () => {
+  it("builds all 10 eras with cross-reference integrity", () => {
+    const content = realContent();
+    expect(content.eras).toHaveLength(10);
+    // Each era has an events pool with at least 7 events.
+    for (const era of content.eras) {
+      const pool = content.eventsByEra.get(era.id) ?? [];
+      expect(pool.length).toBeGreaterThanOrEqual(7);
+    }
+  });
+
+  it("every butterfly rule's target event id actually exists", () => {
+    const content = realContent();
+    const eventIds = new Set(content.allEvents.map((e) => e.id));
+    const tags = new Set(content.allEvents.flatMap((e) => e.tags));
+    for (const rule of content.butterflyRules) {
+      if (rule.affectsKind === "event") {
+        expect(eventIds.has(rule.affects), `rule ${rule.id} → missing event ${rule.affects}`).toBe(
+          true,
+        );
+      } else {
+        expect(tags.has(rule.affects), `rule ${rule.id} → missing tag ${rule.affects}`).toBe(true);
+      }
+    }
+  });
+
+  it("every butterfly rule cause flag is set by some choice (chains can fire)", () => {
+    const content = realContent();
+    const setFlags = new Set(
+      content.allEvents.flatMap((e) => e.choices.flatMap((c) => c.setFlags)),
+    );
+    const rippleChannels = new Set(
+      content.allEvents.flatMap((e) => e.choices.flatMap((c) => c.ripples.map((r) => r.to))),
+    );
+    for (const rule of content.butterflyRules) {
+      const reachable = setFlags.has(rule.cause) || rippleChannels.has(rule.cause);
+      expect(
+        reachable,
+        `butterfly cause "${rule.cause}" (rule ${rule.id}) is never set by any choice`,
+      ).toBe(true);
+    }
+  });
+
+  it("an auto-playthrough traverses to a real end state", () => {
+    const content = realContent();
+    const final = autoPlaythrough(content, "content-smoke", initState, createRng);
+    expect(final.end).not.toBeNull();
+    expect(["death", "coup", "victory"]).toContain(final.end?.kind);
+    // It should have moved through multiple eras and recorded history.
+    expect(final.history.length).toBeGreaterThan(5);
+  });
+
+  it("is deterministic across full-content playthroughs", () => {
+    const content = realContent();
+    const a = autoPlaythrough(content, "determinism", initState, createRng);
+    const b = autoPlaythrough(content, "determinism", initState, createRng);
+    expect(a.history).toEqual(b.history);
+    expect(a.end).toEqual(b.end);
+  });
+});

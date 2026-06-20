@@ -1,0 +1,347 @@
+{
+  "era": "primetime",
+  "events": [
+    {
+      "id": "ev_apprentice_premiere",
+      "era": "primetime",
+      "year": 2004,
+      "title": "The Apprentice Premieres",
+      "scene": "Mark Burnett's cameras roll across your gleaming boardroom, and NBC slots the show against the ratings giants. You eye the contestants squirming under the chandeliers. When the time comes, you lean forward, point a finger, and the words form themselves: \"You're fired.\"",
+      "researchNote": "The Apprentice premiered on NBC in January 2004, produced by Mark Burnett, and made 'You're fired' Trump's signature catchphrase.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["media", "television", "fame"],
+      "portrait": "celebrity",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "ham_it_up",
+          "text": "Ham it up — be the ruthless boss America loves to watch",
+          "effects": { "money": 50000, "reputation": 12, "power": 8 },
+          "setFlags": ["apprentice_star"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_birther_campaign", "weight": 0.6, "polarity": 1 }],
+          "outcome": "Ratings explode. Overnight, you are not a developer who is famous — you are a celebrity who happens to develop. The catchphrase becomes a national reflex."
+        },
+        {
+          "id": "play_it_straight",
+          "text": "Play it straight and dignified, like a real executive",
+          "effects": { "money": 20000, "reputation": 4 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Solid numbers, forgettable television. Burnett quietly suggests you turn the volume up next season."
+        },
+        {
+          "id": "demand_more_money",
+          "text": "Hold out for a bigger per-episode fee before committing",
+          "effects": { "money": 30000, "power": 6, "reputation": -2 },
+          "setFlags": ["apprentice_star"],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "NBC blinks. You get your raise and your star billing, though the producers grumble about the diva in the corner office."
+        }
+      ]
+    },
+    {
+      "id": "ev_reality_megastar",
+      "era": "primetime",
+      "year": 2004,
+      "title": "Reality-TV Megastar",
+      "scene": "Strangers shout the catchphrase at you on Fifth Avenue. Magazines that once covered your bankruptcies now want the cover story. The brand you spent decades building has been eclipsed by a hand gesture and two words. You realize the name itself is now the product.",
+      "researchNote": "The Apprentice's success rehabilitated Trump's public image after 1990s financial troubles and turned the Trump name into a mass-market entertainment brand.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["fame", "branding", "media"],
+      "portrait": "celebrity",
+      "requires": { "flags": ["apprentice_star"], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "monetize_the_face",
+          "text": "License your face onto everything — ties, steaks, cologne",
+          "effects": { "money": 120000, "reputation": -4, "power": 5 },
+          "setFlags": ["brand_machine"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_licensing_empire", "weight": 0.7, "polarity": 1 }],
+          "outcome": "Trump Steaks. Trump Cologne. Some sell, some flop, but every package is a billboard for the only product that matters: you."
+        },
+        {
+          "id": "cultivate_mystique",
+          "text": "Stay selective — scarcity keeps the brand premium",
+          "effects": { "money": 40000, "reputation": 8 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Restraint earns respect from the luxury market, but your accountants wonder why you left so much on the table."
+        }
+      ]
+    },
+    {
+      "id": "ev_marry_melania",
+      "year": 2005,
+      "era": "primetime",
+      "title": "Wedding at Mar-a-Lago",
+      "scene": "Four hundred guests pack the gilded ballroom at Mar-a-Lago, and a Slovenian former model named Melania walks toward you in a dress that cost more than most weddings. Politicians and movie stars applaud. The tabloids that once mocked you now caption your fairy tale.",
+      "researchNote": "Donald Trump married Melania Knauss in January 2005 at Mar-a-Lago in Palm Beach, Florida; the celebrity-packed wedding drew enormous media coverage.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["personal", "media", "fame"],
+      "portrait": "celebrity",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "turn_it_into_spectacle",
+          "text": "Turn the wedding into a media spectacle for the cameras",
+          "effects": { "money": -60000, "reputation": 10, "power": 4 },
+          "setFlags": ["melania_married"],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Every outlet covers it. The image of the celebrity power couple cements the new chapter of Brand Trump."
+        },
+        {
+          "id": "keep_it_classy",
+          "text": "Keep it lavish but tasteful, courting the establishment",
+          "effects": { "money": -40000, "reputation": 7, "loyalty": 5 },
+          "setFlags": ["melania_married"],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The old-money crowd nods approvingly. You have married well, and the world is watching."
+        }
+      ]
+    },
+    {
+      "id": "ev_trump_university",
+      "year": 2005,
+      "era": "primetime",
+      "title": "Trump University Opens Its Doors",
+      "scene": "You slap your name on a 'university' promising to teach the secrets of your success. Enrollees pay thousands for seminars led by your hand-picked instructors. The brochures swear they will reveal exactly how you got rich. The lawyers, you'll learn later, have notes.",
+      "researchNote": "Trump University launched in 2005; it was later the subject of fraud lawsuits, settled in 2016 for $25 million, and was not an accredited university.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["business", "branding", "scandal"],
+      "portrait": "celebrity",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "go_all_in",
+          "text": "Push hard sales tactics — upsell the 'Gold Elite' package",
+          "effects": { "money": 100000, "reputation": -8, "heat": 10 },
+          "setFlags": ["trump_u_liability"],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The cash pours in fast. So do the complaints, and somewhere an attorney general starts a file with your name on the tab."
+        },
+        {
+          "id": "run_it_clean",
+          "text": "Keep the curriculum modest and the promises honest",
+          "effects": { "money": 25000, "reputation": 2 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Less money, fewer headlines. The salespeople think you've gone soft; your future self thanks you."
+        },
+        {
+          "id": "license_only",
+          "text": "Just license the name and let others run it",
+          "effects": { "money": 50000, "heat": 4, "reputation": -3 },
+          "setFlags": ["trump_u_liability"],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You collect a fee and wash your hands of operations. The lawsuits, however, name the man on the marquee."
+        }
+      ]
+    },
+    {
+      "id": "ev_licensing_empire",
+      "year": 2006,
+      "era": "primetime",
+      "title": "The Licensing Empire Expands",
+      "scene": "Developers from Panama to Dubai line up to put your name on towers you'll never build. You don't pour the concrete — you sell the four golden letters and pocket the fee. The Trump name circles the globe on buildings, neckties, and bottled water.",
+      "researchNote": "By the mid-2000s Trump increasingly licensed his name to developments and products worldwide rather than financing construction, earning fees while distancing himself from financial risk.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["business", "branding"],
+      "portrait": "celebrity",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "license_everything",
+          "text": "License to anyone with a checkbook, no questions asked",
+          "effects": { "money": 150000, "reputation": -6, "heat": 6 },
+          "setFlags": ["overlicensed"],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The fees are glorious. A few partners turn out to be crooks, and your name ends up on lawsuits in three countries."
+        },
+        {
+          "id": "vet_partners",
+          "text": "Vet partners carefully to protect the brand",
+          "effects": { "money": 70000, "reputation": 6 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Slower deals, cleaner reputation. The premium projects bearing your name actually get finished."
+        }
+      ]
+    },
+    {
+      "id": "ev_wwe_battle_billionaires",
+      "year": 2007,
+      "era": "primetime",
+      "title": "Battle of the Billionaires",
+      "scene": "Vince McMahon stares you down in the middle of a roaring WrestleMania arena. The stakes: the loser gets his head shaved on live pay-per-view. Your man wins. You grab the clippers, McMahon squirms, and seventy thousand fans lose their minds as you go full heel.",
+      "researchNote": "At WrestleMania 23 in 2007, Trump's 'Battle of the Billionaires' against Vince McMahon ended with Trump shaving McMahon's head; Trump was later inducted into the WWE Hall of Fame in 2013.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["media", "fame", "spectacle"],
+      "portrait": "celebrity",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_the_heel",
+          "text": "Embrace the cartoon-villain showmanship completely",
+          "effects": { "money": 30000, "reputation": 8, "power": 4 },
+          "setFlags": ["wrestling_persona"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_birther_campaign", "weight": 0.3, "polarity": 1 }],
+          "outcome": "You learn what McMahon already knows: a crowd will roar for a villain who commits to the bit. The lesson sticks."
+        },
+        {
+          "id": "stay_above_it",
+          "text": "Keep one foot out, treat it as a paid cameo",
+          "effects": { "money": 20000, "reputation": 2 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You cash the check and leave the theatrics to the professionals. Memorable, but you didn't sell it."
+        }
+      ]
+    },
+    {
+      "id": "ev_birther_campaign",
+      "year": 2011,
+      "era": "primetime",
+      "title": "Where's the Birth Certificate?",
+      "scene": "On every morning show that will book you, you wonder aloud whether the President was really born in America. You claim investigators 'cannot believe what they're finding' in Hawaii. The cameras eat it up, the base leans in, and a sitting president is forced to release his long-form birth certificate to quiet you.",
+      "researchNote": "In 2011 Trump became the most prominent promoter of the false 'birther' conspiracy questioning Barack Obama's birthplace; Obama released his long-form Hawaii birth certificate in April 2011. The claim was debunked.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "media", "scandal"],
+      "portrait": "celebrity",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "lean_in_hard",
+          "text": "Lean all the way in — demand the records, claim a coverup",
+          "effects": { "power": 12, "reputation": -12, "heat": 12 },
+          "setFlags": ["birther_in_chief", "proto_maga"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_political_brand", "weight": 0.8, "polarity": 1 }],
+          "outcome": "The mainstream recoils, but a furious, loyal audience discovers you say what they're thinking. You have found your real constituency."
+        },
+        {
+          "id": "drop_it_quietly",
+          "text": "Drop the subject before it stains the brand",
+          "effects": { "reputation": 6, "power": -4, "heat": -6 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Advertisers relax. The angry crowd drifts elsewhere, and a door you almost opened swings shut again."
+        },
+        {
+          "id": "monetize_outrage",
+          "text": "Turn the controversy into ratings and merch",
+          "effects": { "money": 40000, "power": 6, "reputation": -8, "heat": 8 },
+          "setFlags": ["proto_maga"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_tease_2012_run", "weight": 0.5, "polarity": 1 }],
+          "outcome": "Outrage is a renewable resource. You harvest the attention and start to see a market no establishment figure is serving."
+        }
+      ]
+    },
+    {
+      "id": "ev_tease_2012_run",
+      "year": 2011,
+      "era": "primetime",
+      "title": "Teasing 2012",
+      "scene": "Pollsters briefly put your name atop the Republican field, and you milk it for everything it's worth. You float a run on talk radio, dangle it at conferences, and let the speculation feed the ratings. Then, with The Apprentice contract on the table, you announce you're staying on television — for now.",
+      "researchNote": "Trump publicly flirted with a 2012 Republican presidential run and briefly led some polls in early 2011 before announcing in May 2011 he would not run, citing his commitment to The Apprentice.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "media"],
+      "portrait": "celebrity",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "tease_and_retreat",
+          "text": "Tease the run, harvest the attention, then bow out",
+          "effects": { "money": 30000, "power": 6, "reputation": 2, "heat": 3 },
+          "setFlags": ["floated_2012", "proto_maga"],
+          "clearFlags": [],
+          "ripples": [{ "to": "ev_political_brand", "weight": 0.6, "polarity": 1 }],
+          "outcome": "You get the polling glory without the campaign grind. Strategists note your name moves numbers — and so do you."
+        },
+        {
+          "id": "stay_out_entirely",
+          "text": "Shut it down fast to protect the TV contract",
+          "effects": { "money": 50000, "reputation": 4, "power": -3 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "NBC is thrilled. The political itch, though, refuses to fully fade."
+        }
+      ]
+    },
+    {
+      "id": "ev_political_brand",
+      "year": 2013,
+      "era": "primetime",
+      "title": "Building the Grievance Base",
+      "scene": "You discover the algorithm of resentment: blame, simplicity, and a villain. At rallies-that-aren't-rallies and CPAC stages, you test lines about borders, elites, and a country that's 'not winning anymore.' Each applause break tells you exactly which grievance lands hardest.",
+      "researchNote": "In the early 2010s Trump cultivated a populist political following through Fox News appearances, CPAC speeches, and Twitter, road-testing grievance themes that would define his 2016 campaign.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "media", "branding"],
+      "portrait": "celebrity",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_the_movement",
+          "text": "Build the grievance base into a movement loyal to you alone",
+          "effects": { "power": 12, "loyalty": 12, "reputation": -8, "heat": 6 },
+          "setFlags": ["proto_maga", "movement_built"],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "It isn't a fan club anymore — it's a base. They don't love your buildings or your show. They love that you fight, and they will follow."
+        },
+        {
+          "id": "stay_a_celebrity",
+          "text": "Stay a beloved celebrity, above the partisan fray",
+          "effects": { "money": 30000, "reputation": 8, "power": -4 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Universally liked, politically harmless. You keep the endorsements and the goodwill — and surrender the lever of real power."
+        }
+      ]
+    }
+  ]
+}

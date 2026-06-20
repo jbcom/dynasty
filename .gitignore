@@ -12,6 +12,7 @@ test-results/
 playwright-report/
 blob-report/
 .cache/
+.vitest-attachments/
 
 # Capacitor / Android
 android/app/build/
@@ -22,6 +23,9 @@ android/app/release/
 *.keystore
 *.jks
 
+# Raw source photos — only cartoon derivatives (our own work) are shipped.
+public/assets/photos/
+
 # agent-state gitignored cache (re-derivable)
 .agent-state/digest.md
 .agent-state/cursor.md
@@ -29,3 +33,8 @@ android/app/release/
 .agent-state/.last-stop-sha
 .agent-state/.last-compaction
 .agent-state/batch.json
+
+# itch downloader (local only)
+.env
+.itch-cache/
+raw-assets/

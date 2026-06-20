@@ -1,0 +1,396 @@
+{
+  "era": "ascent",
+  "events": [
+    {
+      "id": "ev_escalator_announcement",
+      "era": "ascent",
+      "year": 2015,
+      "title": "Down the Golden Escalator",
+      "scene": "You glide down the gilded escalator of your own tower while a hired crowd cheers and a Neil Young track blares without permission. At the podium you riff off the cards, promising to build a wall and make Mexico pay for it. The press laughs. You are not laughing.",
+      "researchNote": "Donald Trump descended the Trump Tower escalator on June 16, 2015, to announce his presidential campaign, in a speech that included unscripted remarks about Mexican immigrants.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "campaign", "spectacle"],
+      "portrait": "candidate",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "go_off_script",
+          "text": "Tear up the speech and say the loudest thing in the room.",
+          "effects": { "reputation": -8, "power": 8, "heat": 9 },
+          "setFlags": ["maga_base"],
+          "clearFlags": [],
+          "ripples": [{ "to": "populism", "weight": 0.8, "polarity": 1 }],
+          "outcome": "The clip goes viral for all the wrong reasons — and yet the rallies that follow are packed wall to wall. A movement is born from the outrage."
+        },
+        {
+          "id": "stick_to_script",
+          "text": "Read the prepared remarks like a normal candidate.",
+          "effects": { "reputation": 4, "power": 2, "heat": -2 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "establishment", "weight": 0.4, "polarity": 1 }],
+          "outcome": "Pundits call it 'surprisingly disciplined' and then forget you exist by dinner. Discipline does not trend."
+        }
+      ]
+    },
+    {
+      "id": "ev_red_hats",
+      "era": "ascent",
+      "year": 2015,
+      "title": "Make America Great Again",
+      "scene": "A merchandising aide hands you a sample: a red baseball cap, four white words stitched across the front. It looks cheap. It looks perfect. You realize a slogan is just a brand you can wear on your head.",
+      "researchNote": "Trump trademarked 'Make America Great Again' in 2012; the red MAGA hat became a defining symbol of the 2016 campaign, with millions sold.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "campaign", "branding"],
+      "portrait": "candidate",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "flood_the_market",
+          "text": "Make the hat the uniform of the movement.",
+          "effects": { "money": 2000000, "loyalty": 9, "reputation": -3, "heat": 3 },
+          "setFlags": ["maga_base"],
+          "clearFlags": [],
+          "ripples": [{ "to": "populism", "weight": 0.7, "polarity": 1 }],
+          "outcome": "Red hats bloom at every rally like a field of poppies. Wear the hat and you are family; the merch table outsells the policy table ten to one."
+        },
+        {
+          "id": "keep_it_classy",
+          "text": "Reserve the slogan for speeches, no cheap caps.",
+          "effects": { "reputation": 3, "money": -100000 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Consultants nod approvingly at your restraint. The base wanted something to hold; you gave them a press release."
+        }
+      ]
+    },
+    {
+      "id": "ev_primary_debates",
+      "era": "ascent",
+      "year": 2016,
+      "title": "The Debate Stage Cage Match",
+      "scene": "Sixteen Republican rivals stand to your left like a row of bowling pins. Jeb pleads for civility, Rubio checks his watch, Cruz smirks. You decide nicknames are a more effective policy than policy.",
+      "researchNote": "Trump dominated the crowded 2016 GOP primary with personal attacks and nicknames like 'Low Energy Jeb' and 'Lyin' Ted,' defeating sixteen rivals.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "campaign", "rivalry"],
+      "portrait": "candidate",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "deploy_nicknames",
+          "text": "Bury each rival under a humiliating nickname.",
+          "effects": { "power": 9, "reputation": -6, "heat": 6, "loyalty": 5 },
+          "setFlags": ["maga_base"],
+          "clearFlags": [],
+          "ripples": [{ "to": "populism", "weight": 0.6, "polarity": 1 }],
+          "outcome": "One by one the field collapses, demoralized by branding alone. The base roars; the donor class clutches its pearls."
+        },
+        {
+          "id": "debate_substance",
+          "text": "Try to win on tax plans and trade specifics.",
+          "effects": { "reputation": 5, "power": -2 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "establishment", "weight": 0.4, "polarity": 1 }],
+          "outcome": "You sound like a senator nobody remembers. The cameras drift to whoever is shouting instead."
+        }
+      ]
+    },
+    {
+      "id": "ev_2016_campaign",
+      "era": "ascent",
+      "year": 2016,
+      "title": "The 2016 Run",
+      "scene": "The nomination is yours and Hillary Clinton waits across the aisle. Your war room argues: lean harder into the rallies and the wall, or pivot to the suburbs and sound presidential. The crowds outside are chanting your name, not your position papers.",
+      "researchNote": "Trump won the 2016 GOP nomination and ran a populist, anti-establishment general-election campaign against Hillary Clinton, fueled by large rallies and the promise to build a border wall.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "campaign"],
+      "portrait": "candidate",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "full_populist",
+          "text": "Go full populist — rallies, the wall, drain the swamp.",
+          "effects": { "power": 12, "loyalty": 10, "heat": 10, "reputation": -7 },
+          "setFlags": ["maga_base"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.9, "polarity": 1 },
+            { "to": "establishment", "weight": 0.5, "polarity": -1 }
+          ],
+          "outcome": "The Rust Belt erupts. You polarize the country into people who would die for you and people who fear you — and that division turns out to be electoral math in your favor."
+        },
+        {
+          "id": "moderate_pivot",
+          "text": "Pivot moderate — woo the suburbs, sound presidential.",
+          "effects": { "reputation": 8, "power": 4, "loyalty": -6, "heat": -4 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "establishment", "weight": 0.5, "polarity": 1 }],
+          "outcome": "Op-ed boards warm to you slightly. But the rally crowds sense the hedge, and the energy that got you here starts to leak away."
+        }
+      ]
+    },
+    {
+      "id": "ev_election_night_2016",
+      "era": "ascent",
+      "year": 2016,
+      "title": "Election Night, November 8",
+      "scene": "The needles tilt your way state by state and the anchors stop smiling. Wisconsin. Michigan. Pennsylvania. By the early hours of November 9 the impossible is official and you are the President-elect of the United States.",
+      "researchNote": "Trump won the 2016 election on November 8, 2016, securing 304 electoral votes despite losing the national popular vote to Clinton, after flipping Rust Belt states.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "victory"],
+      "portrait": "candidate",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_inner_circle",
+          "text": "Reward the loyalists; build an inner circle that will never betray you.",
+          "effects": { "power": 10, "loyalty": 12, "reputation": -3, "heat": 4 },
+          "setFlags": ["loyalty_machine"],
+          "clearFlags": [],
+          "ripples": [{ "to": "loyalty", "weight": 0.9, "polarity": 1 }],
+          "outcome": "You staff the West Wing with family and true believers. Competence is optional; fealty is mandatory — and it will hold even when everything else does not."
+        },
+        {
+          "id": "hire_experts",
+          "text": "Bring in seasoned Washington hands to govern.",
+          "effects": { "reputation": 7, "power": 5, "loyalty": -8 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "establishment", "weight": 0.5, "polarity": 1 }],
+          "outcome": "The grown-ups arrive with binders and norms. Within a year half of them will be leaking to reporters about you."
+        }
+      ]
+    },
+    {
+      "id": "ev_inauguration_2017",
+      "era": "ascent",
+      "year": 2017,
+      "title": "American Carnage",
+      "scene": "Rain spatters the Capitol steps as you take the oath. Your inaugural address is dark and short, naming an 'American carnage' you alone can end. Then the fight over crowd-size photos begins before the confetti has settled.",
+      "researchNote": "Trump was inaugurated on January 20, 2017; his 'American carnage' speech and disputes over inauguration crowd size (and 'alternative facts') defined his first days in office.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "governance"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fight_the_photos",
+          "text": "Insist your crowd was the biggest ever and make staff defend it.",
+          "effects": { "loyalty": 6, "reputation": -7, "heat": 7, "power": 3 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "media_war", "weight": 0.7, "polarity": 1 }],
+          "outcome": "Your press secretary marches out to argue with aerial photography. The phrase 'alternative facts' enters the language, and the war with the press is officially declared."
+        },
+        {
+          "id": "let_it_go",
+          "text": "Ignore the crowd-size story and govern.",
+          "effects": { "reputation": 4, "heat": -3 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The story dies in a day, starved of your oxygen. Restraint, it turns out, is the one weapon you keep holstered."
+        }
+      ]
+    },
+    {
+      "id": "ev_tax_cuts_scotus",
+      "era": "ascent",
+      "year": 2017,
+      "title": "Tax Cuts and a Court Seat",
+      "scene": "Two trophies land in your first year: a sweeping tax-cut bill and a Supreme Court justice. Donors purr at the corporate rate; evangelicals rejoice at the bench. You sign with the long Sharpie and hold the paper up like a winning lottery ticket.",
+      "researchNote": "In 2017 Trump signed the Tax Cuts and Jobs Act, slashing the corporate rate to 21%, and appointed Neil Gorsuch to the Supreme Court — the first of three justices he would name.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "governance", "economy"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "tout_the_boom",
+          "text": "Take full credit for the stock market and the cuts.",
+          "effects": { "money": 50000000, "power": 8, "reputation": 3, "loyalty": 6, "heat": 3 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "establishment", "weight": 0.5, "polarity": 1 }],
+          "outcome": "Markets climb and you tweet the Dow like a scoreboard. Donors and the base align — for once — behind a number going up."
+        },
+        {
+          "id": "stack_the_courts",
+          "text": "Make judicial appointments the legacy and let McConnell run point.",
+          "effects": { "power": 11, "loyalty": 9, "reputation": -2, "heat": 4 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "loyalty", "weight": 0.7, "polarity": 1 }],
+          "outcome": "A conveyor belt of lifetime judges reshapes the federal bench for a generation. Your truest legacy wears a robe."
+        }
+      ]
+    },
+    {
+      "id": "ev_trade_war_china",
+      "era": "ascent",
+      "year": 2018,
+      "title": "Trade War with China",
+      "scene": "You decide trade deficits are personal insults and start firing tariffs like a slot machine. Beijing retaliates; soybean farmers in your states feel it first. 'Trade wars are good, and easy to win,' you tweet at 6 a.m.",
+      "researchNote": "Beginning in 2018 Trump launched a trade war with China, imposing tariffs on hundreds of billions of dollars of goods; China retaliated, hitting U.S. farmers, who received federal bailout payments.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "governance", "economy", "trade"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "escalate_tariffs",
+          "text": "Crank the tariffs higher; never let Beijing see you flinch.",
+          "effects": { "power": 8, "loyalty": 6, "money": -20000000, "reputation": -4, "heat": 6 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "populism", "weight": 0.6, "polarity": 1 }],
+          "outcome": "Markets shudder and farmers wobble, so you bail them out with federal checks. The base loves a fighter even when the fight costs them."
+        },
+        {
+          "id": "cut_a_deal",
+          "text": "Declare a 'Phase One' deal and a glorious truce.",
+          "effects": { "reputation": 5, "power": 3, "heat": -3 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "establishment", "weight": 0.4, "polarity": 1 }],
+          "outcome": "You sign a partial agreement and call it the greatest deal in history. The deficit barely moves, but the photo op is excellent."
+        }
+      ]
+    },
+    {
+      "id": "ev_first_impeachment",
+      "era": "ascent",
+      "year": 2019,
+      "title": "The First Impeachment",
+      "scene": "A whistleblower flags a phone call with Ukraine, and the House votes to impeach you over withheld military aid. You call it a witch hunt and a perfect call in the same breath. The Senate, run by your party, holds the verdict in its hands.",
+      "researchNote": "The House impeached Trump in December 2019 over a call pressuring Ukraine to investigate Joe Biden; the Republican-controlled Senate acquitted him in February 2020.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "governance", "scandal"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "weaponize_loyalty",
+          "text": "Demand total party loyalty and dare any senator to cross you.",
+          "effects": { "power": 10, "loyalty": 12, "reputation": -8, "heat": 9 },
+          "setFlags": ["loyalty_machine"],
+          "clearFlags": [],
+          "ripples": [{ "to": "loyalty", "weight": 0.9, "polarity": 1 }],
+          "outcome": "The Senate acquits on a near party-line vote. You emerge enraged and emboldened, with a list of who clapped and who hesitated."
+        },
+        {
+          "id": "play_contrite",
+          "text": "Strike a humble tone and let lawyers handle it quietly.",
+          "effects": { "reputation": 4, "loyalty": -6, "heat": -3 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The defense is lawyerly and bloodless, and you still get acquitted — but the base wanted a brawler, not a defendant."
+        }
+      ]
+    },
+    {
+      "id": "ev_covid_onset",
+      "era": "ascent",
+      "year": 2020,
+      "title": "The Virus Arrives",
+      "scene": "A new coronavirus spreads across the country and the briefing room becomes your nightly stage. Markets crater, the death toll climbs, and you muse aloud about disinfectant and light. The pandemic does not care about your ratings.",
+      "researchNote": "COVID-19 reached the U.S. in early 2020; Trump's response, including downplaying the threat and a notorious April 2020 remark about disinfectant, drew widespread criticism as deaths mounted.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "governance", "crisis"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "downplay_it",
+          "text": "Insist it will disappear and reopen everything fast.",
+          "effects": { "loyalty": 7, "reputation": -12, "health": -6, "heat": 10, "power": 2 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "media_war", "weight": 0.7, "polarity": 1 }],
+          "outcome": "The economy you love is your north star, so you push to reopen. The base trusts you; the rest of the country watches the case counts and the obituaries."
+        },
+        {
+          "id": "defer_to_science",
+          "text": "Let the public-health experts lead and fund a vaccine push.",
+          "effects": { "reputation": 9, "power": 4, "loyalty": -5, "heat": -4 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "establishment", "weight": 0.5, "polarity": 1 }],
+          "outcome": "Operation Warp Speed accelerates a vaccine and your approval steadies. But ceding the stage to scientists never sat right with you."
+        }
+      ]
+    },
+    {
+      "id": "ev_2020_election_loss",
+      "era": "ascent",
+      "year": 2020,
+      "title": "The 2020 Election",
+      "scene": "On election night you lead, and then the mail ballots break against you. Networks call it for Joe Biden. You stare at the maps and decide that the only thing that could beat you must have been fraud.",
+      "researchNote": "Trump lost the 2020 election to Joe Biden, who won 306 electoral votes; Trump refused to concede and made unproven claims of widespread voter fraud.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "election", "defeat"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "never_concede",
+          "text": "Refuse to concede and declare the whole thing was stolen.",
+          "effects": { "power": 6, "loyalty": 11, "reputation": -13, "heat": 12 },
+          "setFlags": ["loyalty_machine"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "populism", "weight": 0.9, "polarity": 1 },
+            { "to": "establishment", "weight": 0.6, "polarity": -1 }
+          ],
+          "outcome": "The 'Stop the Steal' fire roars to life and the base follows you into the wilderness. You may have lost the office, but you keep the movement — and it will carry you back."
+        },
+        {
+          "id": "concede_gracefully",
+          "text": "Concede, congratulate the winner, and plan the comeback quietly.",
+          "effects": { "reputation": 10, "loyalty": -10, "heat": -6, "power": -3 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [{ "to": "establishment", "weight": 0.5, "polarity": 1 }],
+          "outcome": "Historians praise the peaceful transfer of power. The base feels abandoned, and the energy that defined you cools to embers."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,408 @@
+{
+  "era": "interregnum",
+  "events": [
+    {
+      "id": "ev_leaving_office_2021",
+      "era": "interregnum",
+      "year": 2021,
+      "title": "Wheels Up at Joint Base Andrews",
+      "scene": "You skip the inauguration entirely. A small crowd, a red carpet rolled out on the tarmac, and 'Y.M.C.A.' blasting from speakers as Air Force One waits for the last time. You promise the crowd you'll be back 'in some form,' then climb the stairs into self-imposed exile.",
+      "researchNote": "Trump left Washington on the morning of January 20, 2021, departing from Joint Base Andrews after a send-off ceremony, becoming the first president since 1869 to skip his successor's inauguration. 'Y.M.C.A.' played as he departed.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["transition", "exile", "spectacle"],
+      "portrait": "exile",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "promise_return",
+          "text": "\"We will be back. In some form.\"",
+          "effects": { "loyalty": 8, "power": -4, "reputation": -2 },
+          "setFlags": ["return_promised"],
+          "clearFlags": [],
+          "ripples": [{ "to": "loyalty", "weight": 0.5, "polarity": 1 }],
+          "outcome": "The base crowd roars. The faithful start a countdown clock that very afternoon. You are out, but you are not gone."
+        },
+        {
+          "id": "quiet_exit",
+          "text": "Wave, smile, say nothing of substance.",
+          "effects": { "health": 4, "power": -6, "heat": -4 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You bank the rest and let the resentment compound in private. The press calls it a whimper. You call it strategy."
+        }
+      ]
+    },
+    {
+      "id": "ev_mar_a_lago_court",
+      "era": "interregnum",
+      "year": 2021,
+      "title": "The Winter Court at Mar-a-Lago",
+      "scene": "Palm Beach becomes the capital of a government-in-exile. Supplicants pay club dues for a chance to dine within earshot of your table. Every candidate in America wants the ring kiss and the endorsement, and you have learned exactly what that access is worth.",
+      "researchNote": "After leaving office, Trump made Mar-a-Lago his residence and political base, where Republican officials and candidates visited seeking endorsements throughout 2021.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["court", "exile", "money"],
+      "portrait": "exile",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "endorsement_market",
+          "text": "Turn endorsements into a transactional marketplace.",
+          "effects": { "money": 5000000, "power": 6, "loyalty": 6, "reputation": -3 },
+          "setFlags": ["endorsement_machine"],
+          "clearFlags": [],
+          "ripples": [{ "to": "power", "weight": 0.5, "polarity": 1 }],
+          "outcome": "The club thrives, the war chest swells, and you become the single most important phone call in the Republican Party."
+        },
+        {
+          "id": "rest_and_golf",
+          "text": "Just golf and brood for a while.",
+          "effects": { "health": 8, "power": -3, "money": 200000 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You recharge under the Florida sun. The pundits write your obituary prematurely, which you file away for later."
+        }
+      ]
+    },
+    {
+      "id": "ev_second_impeachment_2021",
+      "era": "interregnum",
+      "year": 2021,
+      "title": "Impeached Twice, Acquitted Twice",
+      "scene": "The House impeaches you a second time, this one for 'incitement of insurrection.' The Senate trial drags on, but the math never changes. Fifty-seven guilty votes, ten short of conviction. You are acquitted, free, and somehow more dangerous for it.",
+      "researchNote": "On January 13, 2021, the House impeached Trump for 'incitement of insurrection,' making him the first president impeached twice. The Senate acquitted him 57-43 on February 13, 2021, ten votes short of the two-thirds needed to convict.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["impeachment", "survival", "exile"],
+      "portrait": "exile",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "vindication_tour",
+          "text": "Declare total exoneration and name your enemies.",
+          "effects": { "loyalty": 9, "heat": 5, "reputation": -4, "power": 4 },
+          "setFlags": ["enemies_named"],
+          "clearFlags": [],
+          "ripples": [{ "to": "loyalty", "weight": 0.6, "polarity": 1 }],
+          "outcome": "Every senator who voted guilty becomes a target. You start drafting the revenge primary list before the gavel cools."
+        },
+        {
+          "id": "gracious_silence",
+          "text": "Issue a measured statement and stay above it.",
+          "effects": { "reputation": 5, "heat": -5, "loyalty": -3 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Advisors are stunned by the restraint. The base wonders if you've gone soft. You have not."
+        }
+      ]
+    },
+    {
+      "id": "ev_indictments_2023",
+      "era": "interregnum",
+      "year": 2023,
+      "title": "The Year of the Indictments",
+      "scene": "Manhattan hush-money charges. Classified documents stacked in a Mar-a-Lago bathroom. A federal election-interference case. A Georgia racketeering indictment. The mugshot in Fulton County goes onto a T-shirt before the ink dries. You have never been more legally exposed, or more politically electrified.",
+      "researchNote": "In 2023, Trump was indicted four times: Manhattan hush-money case (March/April), federal classified documents case (June), federal Jan. 6/election case (August), and Georgia election-interference RICO case (August), where his Fulton County booking produced a now-famous mugshot.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["legal", "indictment", "grievance", "exile"],
+      "portrait": "exile",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "witch_hunt",
+          "text": "Frame every charge as a politically-motivated witch hunt.",
+          "effects": { "loyalty": 12, "heat": 10, "money": 8000000, "reputation": -5 },
+          "setFlags": ["grievance_fuel"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "loyalty", "weight": 0.7, "polarity": 1 },
+            { "to": "heat", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "Small-dollar donations spike with every indictment. Persecution becomes the brand, and the brand has never sold harder."
+        },
+        {
+          "id": "lawyer_quietly",
+          "text": "Lawyer up quietly and try to delay everything.",
+          "effects": { "money": -15000000, "heat": -4, "power": 2, "health": -4 },
+          "setFlags": ["delay_strategy"],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "An army of attorneys files motion after motion. Calendars slip past Election Day. Justice deferred, you wager, is justice escaped."
+        }
+      ]
+    },
+    {
+      "id": "ev_primary_dominance_2024",
+      "era": "interregnum",
+      "year": 2024,
+      "title": "The Primary Was Never a Contest",
+      "scene": "Iowa, New Hampshire, South Carolina, all of it folds before spring. Rivals who once mocked you now beg for cabinet posts. You clinch the nomination earlier than any non-incumbent in modern memory, the indictments having only fused the base tighter around you.",
+      "researchNote": "Trump dominated the 2024 Republican primaries, winning Iowa, New Hampshire, and South Carolina decisively. He effectively clinched the nomination by March 2024, with rivals like Nikki Haley and Ron DeSantis dropping out.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["primary", "campaign", "loyalty", "exile"],
+      "portrait": "exile",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "loyalty_purge",
+          "text": "Demand absolute loyalty pledges before any endorsement.",
+          "effects": { "loyalty": 10, "power": 6, "reputation": -3 },
+          "setFlags": ["loyalty_purge"],
+          "clearFlags": [],
+          "ripples": [{ "to": "loyalty", "weight": 0.6, "polarity": 1 }],
+          "outcome": "The party apparatus is remade in your image. Disloyalty becomes professionally fatal. The machine hums."
+        },
+        {
+          "id": "big_tent",
+          "text": "Make a show of welcoming former rivals back.",
+          "effects": { "reputation": 6, "power": 4, "loyalty": -2 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You stage a unity moment for the cameras. Privately, the grudges are noted in indelible ink."
+        }
+      ]
+    },
+    {
+      "id": "ev_butler_rally_2024",
+      "era": "interregnum",
+      "year": 2024,
+      "title": "Butler, Pennsylvania",
+      "scene": "A gunman opens fire at your outdoor rally. A bullet clips your ear. You drop, then rise with blood across your cheek, raise a fist, and mouth the word 'Fight.' The photograph travels the world within the hour and rewrites the entire campaign.",
+      "researchNote": "On July 13, 2024, Trump survived an assassination attempt at a rally in Butler, Pennsylvania, when a bullet grazed his ear. He raised his fist and mouthed 'fight' as Secret Service surrounded him; the moment produced an iconic photograph. One rallygoer was killed.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["assassination", "campaign", "iconic", "exile"],
+      "portrait": "exile",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fight_fist",
+          "text": "Raise the fist. \"Fight! Fight! Fight!\"",
+          "effects": { "loyalty": 14, "power": 8, "reputation": 4, "health": -8 },
+          "setFlags": ["fight_iconography"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "loyalty", "weight": 0.8, "polarity": 1 },
+            { "to": "power", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "The image becomes the central icon of the campaign, printed on flags and tattooed on forearms. Survival is now part of the myth."
+        },
+        {
+          "id": "recover_quietly",
+          "text": "Let Secret Service carry you off and recover privately.",
+          "effects": { "health": 6, "reputation": 5, "power": 2 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You heal out of the spotlight. The sympathy is real, but the legend that might have been goes uncaptured."
+        }
+      ]
+    },
+    {
+      "id": "ev_2024_comeback",
+      "era": "interregnum",
+      "year": 2024,
+      "title": "The Comeback",
+      "scene": "Election night turns your way state by state. The blue wall cracks, the Sun Belt holds, and you take the popular vote for the first time. At four in the morning you stand before a delirious crowd in West Palm Beach and declare 'the greatest political comeback in American history.' You are returning to the White House.",
+      "researchNote": "Trump won the 2024 presidential election, defeating Kamala Harris and becoming the second president (after Grover Cleveland) elected to non-consecutive terms. He won all seven swing states and the national popular vote, declaring it 'the greatest political comeback.'",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["victory", "election", "comeback", "exile"],
+      "portrait": "exile",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 15,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "total_loyalty_mandate",
+          "text": "Declare a sweeping mandate and demand total loyalty from day one.",
+          "effects": { "power": 12, "loyalty": 12, "reputation": -2, "heat": 4 },
+          "setFlags": ["mandate_claimed", "loyalty_mandate"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "power", "weight": 0.8, "polarity": 1 },
+            { "to": "loyalty", "weight": 0.7, "polarity": 1 }
+          ],
+          "outcome": "If the loyalty machine was already built, it now runs at full throttle. Every appointment is screened for fealty before competence. The transition becomes a coronation."
+        },
+        {
+          "id": "unity_victory",
+          "text": "Strike a magnanimous 'president for all Americans' tone.",
+          "effects": { "reputation": 8, "power": 6, "loyalty": -2 },
+          "setFlags": ["mandate_claimed"],
+          "clearFlags": [],
+          "ripples": [{ "to": "reputation", "weight": 0.5, "polarity": 1 }],
+          "outcome": "The markets calm and the establishment exhales. The base grumbles that you sound presidential. The win is banked either way."
+        }
+      ]
+    },
+    {
+      "id": "ev_second_inauguration_2025",
+      "era": "interregnum",
+      "year": 2025,
+      "title": "Inauguration, Take Two",
+      "scene": "Arctic cold drives the ceremony indoors to the Capitol Rotunda. You take the oath a second time and promise an 'America First' golden age. Within hours you are at a desk signing a blizzard of executive orders before an arena crowd, performing governance as spectacle.",
+      "researchNote": "Trump was inaugurated for a second term on January 20, 2025. Due to extreme cold, the ceremony was moved indoors to the Capitol Rotunda. He immediately began signing a large batch of executive orders, some at a public event at Capital One Arena.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["inauguration", "power", "spectacle", "president"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "executive_blitz",
+          "text": "Sign the entire stack of orders live on stage.",
+          "effects": { "power": 10, "loyalty": 8, "heat": 6, "reputation": -2 },
+          "setFlags": ["executive_blitz"],
+          "clearFlags": [],
+          "ripples": [{ "to": "power", "weight": 0.6, "polarity": 1 }],
+          "outcome": "The pen becomes a weapon and the arena erupts. Courts will challenge half of it, but the message of total command lands instantly."
+        },
+        {
+          "id": "deliberate_start",
+          "text": "Sign a measured handful and govern deliberately.",
+          "effects": { "reputation": 5, "power": 5, "heat": -3 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Aides praise the discipline. The first hundred days proceed with fewer legal fires, but also less shock and awe."
+        }
+      ]
+    },
+    {
+      "id": "ev_second_term_actions_2025",
+      "era": "interregnum",
+      "year": 2025,
+      "title": "Remaking the Government",
+      "scene": "Tariffs, mass deportation operations, a slashed federal workforce, loyalists installed atop the Justice Department and intelligence agencies. The second term moves faster and harder than the first, with fewer guardrails and far fewer skeptics left in the room.",
+      "researchNote": "Trump's early second term in 2025 featured sweeping tariffs, expanded immigration enforcement, large-scale federal workforce reductions, and the installation of loyalists in key agency and Justice Department positions, with notably fewer internal checks than his first term.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["governance", "power", "consolidation", "president"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "consolidate_institutions",
+          "text": "Place loyalists atop Justice, the FBI, and the military command.",
+          "effects": { "power": 14, "loyalty": 10, "heat": 8, "reputation": -5 },
+          "setFlags": ["consolidated_power"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "power", "weight": 0.9, "polarity": 1 },
+            { "to": "heat", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "The institutional architecture of the executive branch becomes an extension of your will. The chain that began here runs straight into the years of total victory ahead."
+        },
+        {
+          "id": "policy_first",
+          "text": "Focus on tariffs and the economy, leave the institutions alone.",
+          "effects": { "power": 6, "money": 3000000, "heat": -3, "reputation": 2 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The economy becomes the headline fight. Critics call it a normal, if aggressive, presidency. The deeper levers stay untouched, for now."
+        }
+      ]
+    },
+    {
+      "id": "ev_loyalty_civil_service_2026",
+      "era": "interregnum",
+      "year": 2026,
+      "title": "The Loyalty Census",
+      "scene": "A sprawling reclassification scheme converts career civil servants into at-will appointees, screened for ideological alignment. Aides describe it as 'cleaning house.' Critics call it the end of a nonpartisan bureaucracy. You call it overdue.",
+      "researchNote": "Extrapolated. Speculative escalation of real 2025 efforts to reclassify federal employees (e.g., Schedule F-style policies) into a sweeping loyalty-based civil service overhaul by 2026. No such full census has occurred; this projects existing trends forward.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["consolidation", "loyalty", "speculative", "president"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "purge_bureaucracy",
+          "text": "Reclassify and screen the entire senior civil service for loyalty.",
+          "effects": { "power": 12, "loyalty": 12, "heat": 9, "reputation": -6 },
+          "setFlags": ["consolidated_power", "civil_service_purged"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "power", "weight": 0.8, "polarity": 1 },
+            { "to": "loyalty", "weight": 0.7, "polarity": 1 }
+          ],
+          "outcome": "The permanent government becomes a personal government. Resistance from within evaporates, and the path to total victory clears."
+        },
+        {
+          "id": "targeted_only",
+          "text": "Replace only a handful of visible obstructionists.",
+          "effects": { "power": 5, "loyalty": 4, "heat": -2 },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "A surgical strike rather than a purge. The optics stay manageable, but the deep state, as you'd call it, survives largely intact."
+        }
+      ]
+    },
+    {
+      "id": "ev_term_limit_question_2028",
+      "era": "interregnum",
+      "year": 2028,
+      "title": "The Question Nobody Will Answer",
+      "scene": "Loyalists float trial balloons about a 'third term.' Merchandise reading 'Trump 2028' sells out. You decline to rule anything out, smiling, letting the speculation run because the ambiguity itself is a form of power. The Constitution says one thing; the crowd chants another.",
+      "researchNote": "Extrapolated. Builds on real 'Trump 2028' merchandise and supporter comments floating a third term, despite the 22nd Amendment's two-term limit. No constitutional change has occurred; this dramatizes the speculation as an end-of-era cliffhanger.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["power", "succession", "speculative", "president"],
+      "portrait": "president",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "leave_door_open",
+          "text": "Refuse to rule it out. \"We'll see what the people want.\"",
+          "effects": { "power": 10, "loyalty": 11, "heat": 8, "reputation": -5 },
+          "setFlags": ["consolidated_power", "third_term_floated"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "loyalty", "weight": 0.7, "polarity": 1 },
+            { "to": "power", "weight": 0.7, "polarity": 1 }
+          ],
+          "outcome": "The ambiguity becomes a loyalty test for the whole party. The era ends with the most fundamental guardrail of all hanging open like a gate, leading directly into total victory."
+        },
+        {
+          "id": "rule_it_out",
+          "text": "Publicly affirm the two-term limit.",
+          "effects": { "reputation": 9, "heat": -6, "loyalty": -5, "power": -3 },
+          "setFlags": ["term_limit_affirmed"],
+          "clearFlags": [],
+          "ripples": [{ "to": "reputation", "weight": 0.5, "polarity": 1 }],
+          "outcome": "The establishment is relieved; the hardcore base feels betrayed. You've banked legitimacy at the cost of the dream of permanence."
+        }
+      ]
+    }
+  ]
+}

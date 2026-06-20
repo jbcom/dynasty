@@ -1,0 +1,382 @@
+{
+  "era": "brand",
+  "events": [
+    {
+      "id": "ev_taj_mahal_opening",
+      "era": "brand",
+      "year": 1990,
+      "title": "The Taj Mahal Rises",
+      "scene": "Atlantic City, April 1990. You cut the ribbon on the Trump Taj Mahal, the most expensive casino ever built — a billion-dollar palace of glass and gold. The cameras flash. But the financing is junk bonds at 14 percent, and the numbers only work if the place is packed every single night.",
+      "researchNote": "The Trump Taj Mahal opened April 2, 1990, financed largely by $675 million in junk bonds carrying roughly 14% interest.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["casino", "celebrity", "atlantic_city"],
+      "portrait": "mogul",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "biggest_best",
+          "text": "Declare it the eighth wonder of the world and dare anyone to doubt it.",
+          "effects": { "power": 6, "reputation": 5, "heat": 6 },
+          "setFlags": ["taj_open"],
+          "ripples": [{ "to": "ev_atlantic_city_squeeze", "weight": 0.7, "polarity": 1 }],
+          "outcome": "The headlines glow. The interest clock ticks louder than the slot machines."
+        },
+        {
+          "id": "quiet_concern",
+          "text": "Privately worry the Taj will cannibalize your other two casinos.",
+          "effects": { "power": 2, "reputation": 1, "heat": 2 },
+          "setFlags": ["taj_open", "casino_overextended"],
+          "ripples": [{ "to": "ev_atlantic_city_squeeze", "weight": 0.8, "polarity": 1 }],
+          "outcome": "You smile for the press, but the math gnaws at you all night."
+        }
+      ]
+    },
+    {
+      "id": "ev_atlantic_city_squeeze",
+      "era": "brand",
+      "year": 1990,
+      "title": "The Cash Runs Thin",
+      "scene": "Late 1990. The Taj is bleeding. The Castle and the Plaza are bleeding. You miss a bond interest payment and the whole house of cards starts to sway. Your bankers fly in for an emergency sit-down — they hold paper on you worth more than some countries.",
+      "researchNote": "By late 1990 Trump's casinos were missing payments; his personal debt was reported around $900 million, with billions more in business obligations.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["debt", "casino", "banks"],
+      "portrait": "mogul",
+      "requires": { "flags": ["taj_open"], "notFlags": [], "meters": {} },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "personal_guarantee",
+          "text": "Remind the banks they are too deep to let you fail.",
+          "effects": { "power": 5, "heat": 7, "loyalty": -4 },
+          "setFlags": ["banks_cornered"],
+          "ripples": [{ "to": "ev_bankruptcy_reckoning", "weight": 0.9, "polarity": 1 }],
+          "outcome": "It is a brutal logic, and it works — for now. They cannot afford your collapse."
+        },
+        {
+          "id": "beg_for_time",
+          "text": "Negotiate a standstill — buy months, give up control.",
+          "effects": { "power": -3, "reputation": -2, "heat": -2 },
+          "setFlags": ["restructure_pending"],
+          "ripples": [{ "to": "ev_bankruptcy_reckoning", "weight": 0.7, "polarity": 1 }],
+          "outcome": "Humbling. The bankers now decide how much you can spend on a haircut."
+        }
+      ]
+    },
+    {
+      "id": "ev_bankruptcy_reckoning",
+      "era": "brand",
+      "year": 1991,
+      "title": "The Reckoning",
+      "scene": "1991. The Taj Mahal files for Chapter 11. The empire you built on debt is being carved up by lawyers and lenders in a Camden courtroom. You can fight to keep every scrap of control, or you can cut the deepest deal of your life and live to brand another day.",
+      "researchNote": "The Trump Taj Mahal filed for Chapter 11 bankruptcy in July 1991; Trump ceded 50% ownership to bondholders in exchange for lower interest.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["bankruptcy", "debt", "casino", "banks"],
+      "portrait": "mogul",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "ruthless_restructure",
+          "text": "Squeeze the bondholders, dump personal guarantees onto the corporate shell, and keep your name on the door.",
+          "effects": { "money": -50, "power": 8, "heat": 9, "loyalty": -7, "reputation": -4 },
+          "setFlags": ["survived_bankruptcy", "ruthless_dealmaker"],
+          "ripples": [
+            { "to": "ev_corporate_bankruptcies", "weight": 0.8, "polarity": 1 },
+            { "to": "ev_brand_pivot", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "You give up half the equity but keep the name and the spotlight. They blink first."
+        },
+        {
+          "id": "graceful_concession",
+          "text": "Accept the haircut with public grace — frame survival itself as the win.",
+          "effects": { "money": -80, "power": 2, "reputation": 4, "heat": -3, "loyalty": 2 },
+          "setFlags": ["survived_bankruptcy"],
+          "ripples": [{ "to": "ev_brand_pivot", "weight": 0.7, "polarity": 1 }],
+          "outcome": "The lenders relax. 'Survivor' is a better story than 'tycoon,' and you know how to sell a story."
+        },
+        {
+          "id": "fight_to_the_wall",
+          "text": "Litigate everything and refuse to give an inch.",
+          "effects": { "money": -120, "power": 4, "heat": 11, "reputation": -8, "health": -5 },
+          "setFlags": ["survived_bankruptcy", "burned_bankers"],
+          "ripples": [{ "to": "ev_corporate_bankruptcies", "weight": 0.9, "polarity": 1 }],
+          "outcome": "You win some battles and lose the war's goodwill. The next bankruptcy is already on the horizon."
+        }
+      ]
+    },
+    {
+      "id": "ev_corporate_bankruptcies",
+      "era": "brand",
+      "year": 1992,
+      "title": "The Plaza Goes Under",
+      "scene": "1992. The Plaza Hotel — your crown jewel, the place you called a masterpiece — files for bankruptcy too. So does the Castle. The press starts keeping a tally. You have learned a secret most people never grasp: corporate debt is the bank's problem, not yours.",
+      "researchNote": "The Plaza Hotel filed for Chapter 11 in 1992; Trump's businesses went through multiple corporate bankruptcies in 1991-1992 while he avoided personal Chapter 11.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["bankruptcy", "debt", "banks"],
+      "portrait": "mogul",
+      "requires": { "flags": ["survived_bankruptcy"], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "debt_is_leverage",
+          "text": "Reframe it: a bankruptcy is just a tool, and you are the master craftsman.",
+          "effects": { "power": 6, "reputation": -3, "heat": 5, "loyalty": -3 },
+          "setFlags": ["bankruptcy_artist"],
+          "ripples": [{ "to": "ev_brand_pivot", "weight": 0.8, "polarity": 1 }],
+          "outcome": "The number-crunchers wince. The public, oddly, half-believes the swagger."
+        },
+        {
+          "id": "shed_assets",
+          "text": "Quietly sell the yacht, the airline, the trophies — strip down to the brand.",
+          "effects": { "money": -30, "power": -2, "reputation": 2, "heat": -4 },
+          "setFlags": ["stripped_down"],
+          "ripples": [{ "to": "ev_brand_pivot", "weight": 0.9, "polarity": 1 }],
+          "outcome": "The Trump Shuttle and the Princess are gone. What is left is the only thing that never had debt: the name."
+        }
+      ]
+    },
+    {
+      "id": "ev_near_billion_losses",
+      "era": "brand",
+      "year": 1992,
+      "title": "A Number With Nine Zeros",
+      "scene": "Your accountants slide a figure across the table that you can barely read aloud. Nearly a billion dollars in personal liabilities. You once told a reporter that a beggar on Fifth Avenue had a higher net worth than you. The question is whether to hide the number or weaponize it.",
+      "researchNote": "Trump reportedly owed around $900 million personally and over $3.4 billion in business debt in the early 1990s; he famously quipped a sidewalk beggar was worth more than he was.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["debt", "celebrity"],
+      "portrait": "celebrity",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "spin_the_number",
+          "text": "Tell the beggar story to every reporter — make the debt sound like proof of scale.",
+          "effects": { "reputation": 3, "power": 3, "heat": 2 },
+          "setFlags": ["debt_legend"],
+          "ripples": [{ "to": "ev_brand_pivot", "weight": 0.6, "polarity": 1 }],
+          "outcome": "Somehow, a near-billion in red ink becomes part of the legend instead of the end of it."
+        },
+        {
+          "id": "hunker_down",
+          "text": "Go silent, keep your head down, and let the bankers manage the optics.",
+          "effects": { "reputation": -2, "heat": -4, "health": 2 },
+          "setFlags": [],
+          "ripples": [],
+          "outcome": "The tabloids fill the silence with vultures. But the panic, at least, cools a little."
+        }
+      ]
+    },
+    {
+      "id": "ev_ivana_marla",
+      "era": "brand",
+      "year": 1992,
+      "title": "Best Sex I've Ever Had",
+      "scene": "The marriage to Ivana detonates across every tabloid in America while Marla Maples becomes a household name. The New York Post screams headlines you did not write but did not exactly discourage. Your private life is now a public spectacle, and spectacle, you have noticed, sells.",
+      "researchNote": "Trump divorced Ivana in 1992 amid a tabloid saga with Marla Maples, including the infamous New York Post 'Best Sex I've Ever Had' front page in 1990.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["tabloid", "celebrity", "divorce"],
+      "portrait": "celebrity",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "feed_the_press",
+          "text": "Lean into the circus — every headline is free advertising for the name.",
+          "effects": { "reputation": 4, "power": 3, "heat": 6, "loyalty": -5 },
+          "setFlags": ["tabloid_fixture"],
+          "ripples": [{ "to": "ev_brand_pivot", "weight": 0.7, "polarity": 1 }],
+          "outcome": "Your lawyers despair; your fame doubles. America cannot look away."
+        },
+        {
+          "id": "protect_kids",
+          "text": "Shield the children and try, for once, to keep something private.",
+          "effects": { "reputation": 2, "heat": -3, "loyalty": 4, "health": 1 },
+          "setFlags": [],
+          "ripples": [],
+          "outcome": "A rare quiet choice. The tabloids print it anyway, but you sleep a little better."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pivot",
+      "era": "brand",
+      "year": 1994,
+      "title": "Sell the Name, Not the Building",
+      "scene": "A developer offers to slap TRUMP in gold on his own tower in exchange for a fat licensing fee — you front no money, you take no debt, you just rent out the name. It is the cleanest deal you have ever seen. Why own the risk when you can own the brand?",
+      "researchNote": "In the mid-1990s Trump pivoted from owning buildings to licensing his name to developers, collecting fees with little or no capital at risk.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["branding", "licensing", "comeback"],
+      "portrait": "mogul",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "license_everything",
+          "text": "License the name onto everything — towers, ties, steaks, water. Become a brand machine.",
+          "effects": { "money": 150, "power": 7, "reputation": 6, "heat": 3 },
+          "setFlags": ["brand_machine"],
+          "ripples": [
+            { "to": "ev_bank_restructuring", "weight": 0.7, "polarity": 1 },
+            { "to": "ev_late_90s_recovery", "weight": 0.8, "polarity": 1 }
+          ],
+          "outcome": "No debt, no risk, pure margin. The name itself is now the product, and it never goes bankrupt."
+        },
+        {
+          "id": "selective_brand",
+          "text": "License only the marquee properties — protect the name from looking cheap.",
+          "effects": { "money": 80, "power": 4, "reputation": 8, "heat": -2 },
+          "setFlags": ["brand_machine", "premium_brand"],
+          "ripples": [{ "to": "ev_late_90s_recovery", "weight": 0.7, "polarity": 1 }],
+          "outcome": "Fewer deals, but each one gilds the legend. Scarcity, you decide, is its own kind of luxury."
+        }
+      ]
+    },
+    {
+      "id": "ev_bank_restructuring",
+      "era": "brand",
+      "year": 1995,
+      "title": "The Bankers Blink",
+      "scene": "1995. The lenders, exhausted, agree to restructure on terms that — incredibly — leave you standing taller than before. You take Trump Hotels & Casino Resorts public, raising cash on a name still wet from bankruptcy. The men who once owned you now want a piece of the comeback.",
+      "researchNote": "Trump renegotiated with banks through the early-to-mid 1990s and took Trump Hotels & Casino Resorts public on the NYSE in 1995.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["banks", "debt", "comeback"],
+      "portrait": "mogul",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "go_public_aggressive",
+          "text": "Take it public and load the new company with the old casino debt.",
+          "effects": { "money": 120, "power": 6, "heat": 7, "loyalty": -4, "reputation": -2 },
+          "setFlags": ["public_company"],
+          "ripples": [{ "to": "ev_late_90s_recovery", "weight": 0.6, "polarity": 1 }],
+          "outcome": "Public shareholders inherit the casino albatross. You walk away with cash and a clean personal balance sheet."
+        },
+        {
+          "id": "rebuild_credit",
+          "text": "Use the restructuring to slowly rebuild your reputation with the banks.",
+          "effects": { "money": 60, "power": 3, "reputation": 5, "heat": -3, "loyalty": 3 },
+          "setFlags": ["banker_trust"],
+          "ripples": [{ "to": "ev_late_90s_recovery", "weight": 0.8, "polarity": 1 }],
+          "outcome": "Slower money, but doors that were slammed in 1991 swing open again."
+        }
+      ]
+    },
+    {
+      "id": "ev_art_of_comeback",
+      "era": "brand",
+      "year": 1997,
+      "title": "The Art of the Comeback",
+      "scene": "1997. You publish a sequel to your bestseller — this one about clawing back from the brink. The cover is pure gold and pure you. The bust is now officially recast as a setup for the greatest comeback story in American business, whether the numbers fully agree or not.",
+      "researchNote": "Trump published 'The Art of the Comeback' in 1997, reframing his early-1990s financial collapse as a triumphant recovery.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["book", "celebrity", "comeback", "branding"],
+      "portrait": "celebrity",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "mythologize",
+          "text": "Mythologize the comeback — never let a fact get in the way of a great story.",
+          "effects": { "reputation": 7, "power": 4, "heat": 4, "loyalty": -2 },
+          "setFlags": ["comeback_myth", "wrote_art_of_comeback"],
+          "ripples": [{ "to": "ev_reform_party_flirt", "weight": 0.7, "polarity": 1 }],
+          "outcome": "The book sells, the legend hardens, and 'comeback' becomes part of your name."
+        },
+        {
+          "id": "earned_redemption",
+          "text": "Frame it as hard-won wisdom — show a little humility for once.",
+          "effects": { "reputation": 9, "power": 2, "heat": -2, "loyalty": 4, "health": 2 },
+          "setFlags": ["wrote_art_of_comeback", "elder_statesman"],
+          "ripples": [{ "to": "ev_reform_party_flirt", "weight": 0.6, "polarity": 1 }],
+          "outcome": "Critics soften. Even old enemies admit the man knows how to get up off the canvas."
+        }
+      ]
+    },
+    {
+      "id": "ev_late_90s_recovery",
+      "era": "brand",
+      "year": 1998,
+      "title": "Back in the Black",
+      "scene": "The late-90s boom lifts everything, and the Trump name rides the updraft. New towers, new licensing checks, magazine covers calling you a survivor. The wilderness years are over. From here, the only question is what to build the rebuilt brand into next.",
+      "researchNote": "By the late 1990s Trump had largely recovered financially, buoyed by licensing deals, a rebounding economy, and a refreshed public image.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["comeback", "branding", "celebrity"],
+      "portrait": "mogul",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "expand_empire",
+          "text": "Pour the comeback cash into bigger, taller, glitzier projects.",
+          "effects": { "money": 130, "power": 6, "reputation": 4, "heat": 4 },
+          "setFlags": ["recovered"],
+          "ripples": [{ "to": "ev_reform_party_flirt", "weight": 0.6, "polarity": 1 }],
+          "outcome": "The skyline fills with your name again. The bust is a distant, deniable memory."
+        },
+        {
+          "id": "chase_fame",
+          "text": "Decide that money is solved — now you want the one thing money cannot buy: total fame.",
+          "effects": { "money": 40, "power": 5, "reputation": 6, "heat": 3 },
+          "setFlags": ["recovered", "fame_hungry"],
+          "ripples": [{ "to": "ev_reform_party_flirt", "weight": 0.9, "polarity": 1 }],
+          "outcome": "The boardroom bores you now. You want the cameras, the crowds, the stage."
+        }
+      ]
+    },
+    {
+      "id": "ev_reform_party_flirt",
+      "era": "brand",
+      "year": 2000,
+      "title": "President Trump? (The Dress Rehearsal)",
+      "scene": "2000. You flirt with a Reform Party run for president, floating Oprah as a running mate and giving interviews about a campaign that may or may not be real. Is it a serious bid, a branding stunt, or a test of an audience you do not yet know you are about to win for good?",
+      "researchNote": "In 1999-2000 Trump publicly explored a Reform Party presidential run, even suggesting Oprah Winfrey as a potential running mate before declining to run.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": ["politics", "celebrity", "tv_flirtation"],
+      "portrait": "celebrity",
+      "requires": { "flags": [], "notFlags": [], "meters": {} },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "test_the_waters",
+          "text": "Run a 'campaign' purely to measure how big a crowd the name can draw.",
+          "effects": { "reputation": 6, "power": 5, "heat": 5 },
+          "setFlags": ["political_curious", "media_animal"],
+          "ripples": [{ "to": "ev_art_of_comeback", "weight": 0.4, "polarity": 1 }],
+          "outcome": "You bow out before any votes, but you have seen the size of the crowd — and you will never forget it."
+        },
+        {
+          "id": "stay_business",
+          "text": "Decide politics is a distraction and refocus on the empire and the brand.",
+          "effects": { "money": 50, "power": 3, "reputation": 2, "heat": -2 },
+          "setFlags": ["political_curious"],
+          "ripples": [],
+          "outcome": "Not yet. But the idea has been planted, and ideas like this one do not die — they wait."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+import { describe, expect, it } from "vitest";
+import { buildContent } from "../content";
+import {
+  effectiveWeight,
+  eligibleEvents,
+  evalComparator,
+  meetsRequires,
+  pickNextEvent,
+} from "../events";
+import { createRng } from "../rng";
+import { initState } from "../state";
+import { validRaw } from "./fixtures";
+
+const content = () => buildContent(validRaw());
+
+describe("evalComparator", () => {
+  it("handles every operator", () => {
+    expect(evalComparator(">=20", 20)).toBe(true);
+    expect(evalComparator(">=20", 19)).toBe(false);
+    expect(evalComparator("<50", 49)).toBe(true);
+    expect(evalComparator("== 0", 0)).toBe(true);
+    expect(evalComparator("!=5", 5)).toBe(false);
+    expect(evalComparator(">100", 101)).toBe(true);
+    expect(evalComparator("<=-10", -10)).toBe(true);
+  });
+
+  it("throws on a malformed comparator", () => {
+    expect(() => evalComparator("~5", 5)).toThrow();
+  });
+});
+
+describe("meetsRequires", () => {
+  it("checks flags, notFlags, meters, and age", () => {
+    const s = initState(content(), "seed");
+    s.flags = ["disciplined"];
+    s.meters.money = 600;
+    s.age = 30;
+    expect(
+      meetsRequires(s, {
+        flags: ["disciplined"],
+        notFlags: ["bankrupt"],
+        meters: { money: ">=500" },
+        minAge: 18,
+      }),
+    ).toBe(true);
+    expect(meetsRequires(s, { flags: ["missing"], notFlags: [], meters: {} })).toBe(false);
+    expect(meetsRequires(s, { flags: [], notFlags: ["disciplined"], meters: {} })).toBe(false);
+    expect(meetsRequires(s, { flags: [], notFlags: [], meters: { money: ">=10000" } })).toBe(false);
+    expect(meetsRequires(s, { flags: [], notFlags: [], meters: {}, minAge: 99 })).toBe(false);
+  });
+});
+
+describe("eligibleEvents", () => {
+  it("returns only current-era events whose requires are met", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    // boyhood era: ev_born has no requires; ev_military_school needs loud_baby.
+    const elig = eligibleEvents(c, s).map((e) => e.id);
+    expect(elig).toContain("ev_born");
+    expect(elig).not.toContain("ev_military_school");
+    expect(elig).not.toContain("ev_first_deal"); // different era
+  });
+
+  it("excludes already-fired non-repeatable events", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    s.firedEvents = ["ev_born"];
+    expect(eligibleEvents(c, s).map((e) => e.id)).not.toContain("ev_born");
+  });
+});
+
+describe("effectiveWeight", () => {
+  it("applies a butterfly rule multiplier when the cause flag is active", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    s.eraIndex = 1; // mogul era
+    s.meters.money = 600;
+    const deal = c.eventsByEra.get("mogul")?.[0];
+    if (!deal) throw new Error("no deal event");
+    const base = effectiveWeight(c, { ...s, flags: [] }, deal);
+    const boosted = effectiveWeight(c, { ...s, flags: ["disciplined"] }, deal);
+    expect(boosted).toBeCloseTo(base * 1.5, 5);
+  });
+
+  it("amplifies weight by ripple pressure on a matching tag", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    const born = c.eventsByEra.get("boyhood")?.[0];
+    if (!born) throw new Error("no born event");
+    const tagged = { ...born, tags: ["chaos"] };
+    const withPressure = { ...s, ripples: { chaos: 0.5 } };
+    expect(effectiveWeight(c, withPressure, tagged)).toBeCloseTo(born.weight * 1.5, 5);
+  });
+});
+
+describe("pickNextEvent", () => {
+  it("is deterministic for a given seed", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    const a = pickNextEvent(c, s, createRng("pick-1"));
+    const b = pickNextEvent(c, s, createRng("pick-1"));
+    expect(a?.id).toBe(b?.id);
+  });
+
+  it("returns null when the era is exhausted", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    s.firedEvents = ["ev_born", "ev_military_school"];
+    expect(pickNextEvent(c, s, createRng("x"))).toBeNull();
+  });
+
+  it("only ever returns an eligible event", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    for (let i = 0; i < 50; i++) {
+      const ev = pickNextEvent(c, s, createRng(`s${i}`));
+      expect(ev?.id).toBe("ev_born"); // only eligible boyhood event at start
+    }
+  });
+});
