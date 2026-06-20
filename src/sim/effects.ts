@@ -9,6 +9,7 @@ import { pickNextEvent } from "./events";
 import { applyDelta } from "./meters";
 import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
+import { resolveRoles } from "./roles";
 import type { Choice, GameEvent } from "./schema";
 import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
 import { advanceTimeline, applyJump, detectEnd } from "./timeline";
@@ -107,6 +108,13 @@ export function applyChoice(
   if (content.worldTimelines.length > 0 && advanced.year > hopped.year) {
     advanced = applyWorldFlags(advanced, hopped.year, content.worldTimelines);
   }
+
+  // 8c. ROLE-SWAP INVARIANT: with all flags (the choice's, the consequences',
+  // and the broadcast timelines') now settled for this year, resolve who holds
+  // political power vs the commercial empire. Runs every step so a late flip
+  // (e.g. Musk takes power) re-routes Donald to the commercial path before any
+  // ending reads the role flags.
+  advanced = resolveRoles(advanced);
 
   // 9. Land any delayed consequences now due (post-advance year), unless the
   // timeline advance itself ended the run.
