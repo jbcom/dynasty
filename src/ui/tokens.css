@@ -47,8 +47,12 @@
   --mmm-radius-lg: var(--radius-4);
   --mmm-gap: var(--size-3);
   --mmm-pad: var(--size-3);
-  --mmm-font-display: "Georgia", "Times New Roman", serif;
-  --mmm-font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* Luxury "Dynasty" type pairing (self-hosted, see public/assets/fonts).
+     Display = Playfair Display (high-contrast dynastic serif for mastheads +
+     headings); Body = EB Garamond (refined classical serif). Both fall back to
+     a system serif so layout holds before the woff2 loads (font-display: swap). */
+  --mmm-font-display: "Playfair Display", "Georgia", "Times New Roman", serif;
+  --mmm-font-body: "EB Garamond", "Georgia", "Times New Roman", serif;
 
   /* Elevation */
   --mmm-shadow: 0 4px 16px rgb(0 0 0 / 0.4);

@@ -26,21 +26,21 @@ afterEach(() => {
 });
 
 describe("TitleScreen", () => {
-  it("shows New Game and hides Continue without a save", () => {
+  it("shows Begin a Dynasty and hides Continue without a save", () => {
     component = mount(TitleScreen, {
       target: host,
       props: { hasSave: false, onNewGame: () => {}, onContinue: () => {} },
     });
-    expect(host.textContent).toContain("New Game");
+    expect(host.textContent).toContain("Begin a Dynasty");
     expect(host.textContent).not.toContain("Continue");
   });
 
-  it("shows Continue when a save exists", () => {
+  it("shows Continue the Saga when a save exists", () => {
     component = mount(TitleScreen, {
       target: host,
       props: { hasSave: true, onNewGame: () => {}, onContinue: () => {} },
     });
-    expect(host.textContent).toContain("Continue");
+    expect(host.textContent).toContain("Continue the Saga");
   });
 
   it("starts a new game with the entered seed", async () => {
