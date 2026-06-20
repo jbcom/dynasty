@@ -1,7 +1,46 @@
 # Continuous Work Directive — maga-money-moves
 
-**Status:** RELEASED
+**Status:** ACTIVE
 **Owner:** jbogaty
+
+## Batch — causality-endings-personality (batch-20260620-causality)
+
+Source: docs/plans/causality-endings-personality.prq.md (sha256: 9eaf443ac3929c8faab9e78c05b2a38036d96ed711f2356c6d7335930942e812)
+Started: 2026-06-20
+Config: stop_on_failure=false (autonomous, self-resolving) · single feature branch → squash-merge
+
+### Phase H — Research & Causality Model
+- [ ] H1 Web-research timeline; index pivotal events w/ dated cause→effect
+- [ ] H2 Causality graph model (chains, prereqs, delayed/compounding effects)
+- [ ] H3 Personality vector schema + sim (ideology + grandiosity; outward vs inward)
+
+### Phase I — Endings
+- [ ] I1 Data-driven ending system (triggers over meters+personality+flags+era)
+- [ ] I2 Author ending set (early/late × good/bad + named: jail, bankruptcy, assassination, coup, communist-utopia, megalomaniac-king, Martian-patriarch, obscurity)
+- [ ] I3 Wire ending triggers across all 10 eras
+- [ ] I4 SETI / deep-space tech achievement track (science+SETI+telescope flags)
+- [ ] I5 Two SECRET First-Contact endings (Benevolent/warp APEX vs Malevolent/hostile), forked by planet moral state
+
+### Phase J — Causal Content Pass (per era)
+- [ ] J1 Era 1 causal+personality+ending pass
+- [ ] J2 Era 2 pass
+- [ ] J3 Era 3 pass
+- [ ] J4 Era 4 pass
+- [ ] J5 Era 5 pass
+- [ ] J6 Era 6 pass
+- [ ] J7 Era 7 pass
+- [ ] J8 Era 8 pass
+- [ ] J9 Era 9 pass (First-Contact-2063 hooks)
+- [ ] J10 Era 10 pass
+
+### Phase K — Personality & Endings UI
+- [ ] K1 HUD-as-language (tyranny↔utopia drift, visual + diegetic, outward radiation)
+- [ ] K2 Ending-aware Legacy Report + endings-discovered tracker (secrets locked)
+- [ ] K3 First-Contact apex-ending presentation (lightspeed → the stars)
+
+### Phase L — Verify
+- [ ] L1 Determinism + schema tests; seeded playthroughs reach a spread of endings; live screenshots
+- [ ] L2 Reviewer trio + green PR + squash-merge
 
 ## Batch — maga-money-moves-full-build (batch-20260619-build)
 
