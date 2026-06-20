@@ -3,7 +3,7 @@ import type { Content } from "./content";
 import type { Rng } from "./rng";
 import type { Currency, Slot, WorldTimeline } from "./schema";
 import { type DynastyKey, resolveSlots } from "./slots";
-import { type GameState, initState } from "./state";
+import { DYNASTY_START, type GameState, initState } from "./state";
 import { resolveCurrency } from "./systemic";
 import { resolveFullName, resolveGivenName } from "./terms";
 import { timelinesForBranch } from "./worldtime";
@@ -123,11 +123,28 @@ export function compileFromEra0(
   ) => { state: GameState },
 ): CompiledTimeline {
   const rng = createRng(seed);
+  // Start with the default (trump) — the first Era-0 step is ev_dynasty_founding_choice
+  // which will set the dynasty activation flag in state.flags. After the replay we
+  // re-derive dynasty and birthYear so age computation is correct for all dynasties.
   let state = initState(content, seed);
   for (const step of era0) {
     const event = content.allEvents.find((e) => e.id === step.eventId);
     if (!event) throw new Error(`compileFromEra0: unknown event "${step.eventId}"`);
     state = applyChoice(content, state, event as never, step.choiceId, rng).state;
+  }
+  // Re-derive dynasty from the post-replay flags so birthYear and dynasty are
+  // dynasty-correct before compiling (the Era-0 replay starts at Trump defaults but
+  // the dynasty-selector event sets the right activation flag during replay).
+  const resolvedDynasty = dynastyOf(state.flags);
+  if (resolvedDynasty !== state.dynasty) {
+    const birthYear = DYNASTY_START[resolvedDynasty];
+    state = {
+      ...state,
+      dynasty: resolvedDynasty,
+      birthYear,
+      // Recompute age now that birthYear is correct.
+      age: state.year - birthYear,
+    };
   }
   return compileTimeline(content, state, createRng(`${seed}::compile`));
 }

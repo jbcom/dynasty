@@ -203,11 +203,12 @@ export function replay(
 export function autoPlaythrough(
   content: Content,
   seed: string,
-  initState: (content: Content, seed: string) => GameState,
+  initState: (content: Content, seed: string, dynasty?: DynastyKey) => GameState,
   createRng: (seed: string) => Rng,
   maxSteps = 500,
+  dynasty: DynastyKey = "trump",
 ): GameState {
-  let state = initState(content, seed);
+  let state = initState(content, seed, dynasty);
   const rng = createRng(seed);
   for (let i = 0; i < maxSteps && !state.end; i++) {
     const event = pickNextEvent(content, state, rng.fork(`pick:${i}`));
