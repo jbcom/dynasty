@@ -3,6 +3,7 @@ import { branchOf } from "./branch";
 import type { Content } from "./content";
 import { effectiveWeight, eligibleEvents } from "./events";
 import { moralPoleOf } from "./moralAxis";
+import type { Rng } from "./rng";
 import type { GameEvent } from "./schema";
 import type { GameState } from "./state";
 
@@ -112,6 +113,41 @@ export function queryEligible(content: Content, state: GameState): GameEvent[] {
 }
 
 /**
+ * Seeded weighted next-event pick over the read-model — the declarative twin of
+ * the pure `pickNextEvent` (events.ts), and the DE-1 migration of the core
+ * selection step onto Koota. Projects the world, reads the Eligible entities in
+ * content order (the same order the pure path's era-pool filter yields, since
+ * projectWorld marks Eligible from eligibleEvents), and applies the identical
+ * weighted draw. PARITY: returns the same event id as pickNextEvent for the same
+ * (content, state, rng) — proven by a parity test. The pure path stays the
+ * source of truth; this is the ECS-native read used where a world is already in
+ * hand. Determinism: the rng draw order matches the pure path exactly.
+ */
+export function pickNextEventViaWorld(
+  content: Content,
+  state: GameState,
+  rng: Rng,
+): GameEvent | null {
+  const byId = new Map(content.allEvents.map((e) => [e.id, e]));
+  // Eligible entities in spawn (content) order — identical order to eligibleEvents.
+  const eligible = withWorld(content, state, (world) =>
+    world
+      .query(EventRef, Eligible, Weight)
+      .map((e) => ({
+        event: byId.get(e.get(EventRef)?.id ?? ""),
+        weight: e.get(Weight)?.value ?? 0,
+      }))
+      .filter((x): x is { event: GameEvent; weight: number } => x.event !== undefined),
+  );
+  if (eligible.length === 0) return null;
+  const weights = eligible.map((x) => x.weight);
+  const total = weights.reduce((s, w) => s + w, 0);
+  if (total <= 0) return eligible[0]?.event ?? null;
+  const idx = rng.weightedIndex(weights);
+  return eligible[idx]?.event ?? null;
+}
+
+/**
  * Eligible events ranked by effective selection weight (descending). A
  * declarative read-model query — the kind the ECS makes clean — for "what is
  * likely to come next" UI/debug surfaces and the persona-playtest analytics.
@@ -130,6 +166,50 @@ export function queryEligibleByWeight(
       .filter((x): x is { event: GameEvent; weight: number } => x.event !== undefined)
       .sort((a, b) => b.weight - a.weight || a.event.id.localeCompare(b.event.id)),
   );
+}
+
+/**
+ * The run-wide context (active branch + moral pole) read off the projected
+ * world rather than re-deriving it. Every event entity carries the same Branch
+ * and Pole traits (the context is a property of the run, not the event), so this
+ * reads the first entity's traits. Gives the projected Branch/Pole traits a real
+ * consumer and is the ECS-native source for the moral-axis HUD (DE-2) + persona
+ * analytics (DE-6). PARITY: equals branchOf(state) / moralPoleOf(state).
+ */
+export function queryRunContext(
+  content: Content,
+  state: GameState,
+): { branch: string; pole: string } {
+  return withWorld(content, state, (world) => {
+    const first = world.query(EventRef, Branch, Pole)[0];
+    return {
+      branch: first?.get(Branch)?.key ?? branchOf(state),
+      pole: first?.get(Pole)?.key ?? moralPoleOf(state),
+    };
+  });
+}
+
+/**
+ * Eligible events whose moral pole matches the run's current pole — the
+ * declarative read the moral-axis HUD + persona "is this pole reachable here"
+ * analytics consume (DE-2/DE-6). Events carry no per-event pole; the run's pole
+ * is uniform, so this is "the eligible set, tagged with the run pole" — useful
+ * as the ECS-native grouping surface those phases build on. Deterministic order
+ * (content order, like queryEligible).
+ */
+export function queryEligibleForPole(
+  content: Content,
+  state: GameState,
+): { pole: string; events: GameEvent[] } {
+  const byId = new Map(content.allEvents.map((e) => [e.id, e]));
+  return withWorld(content, state, (world) => {
+    const entities = world.query(EventRef, Eligible, Pole);
+    const pole = entities[0]?.get(Pole)?.key ?? moralPoleOf(state);
+    const events = entities
+      .map((e) => byId.get(e.get(EventRef)?.id ?? ""))
+      .filter((e): e is GameEvent => e !== undefined);
+    return { pole, events };
+  });
 }
 
 /**

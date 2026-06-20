@@ -1,16 +1,23 @@
 import { describe, expect, it } from "vitest";
 import marketsJson from "../../data/markets.json";
+import { branchOf } from "../branch";
 import { buildContent } from "../content";
-import { effectiveWeight, eligibleEvents } from "../events";
+import { applyChoice } from "../effects";
+import { effectiveWeight, eligibleEvents, pickNextEvent } from "../events";
+import { moralPoleOf } from "../moralAxis";
+import { createRng } from "../rng";
 import { initState } from "../state";
 import {
   Eligible,
   EventRef,
+  pickNextEventViaWorld,
   projectWorld,
   queryEligible,
   queryEligibleByWeight,
+  queryEligibleForPole,
   queryLeveragedPositions,
   queryMarketsInCrash,
+  queryRunContext,
 } from "../world";
 import { validRaw } from "./fixtures";
 
@@ -77,6 +84,61 @@ describe("Koota read-model projection (task-026)", () => {
     const weights = ranked.map((r) => r.weight);
     const sortedDesc = [...weights].sort((a, b) => b - a);
     expect(weights).toEqual(sortedDesc);
+  });
+});
+
+describe("pickNextEventViaWorld parity with pure pickNextEvent (DE-1)", () => {
+  it("returns the SAME event as the pure path for the same (state, rng) — many seeds", () => {
+    const c = content();
+    for (const seed of ["a", "b", "c", "d", "x", "42", "zzz"]) {
+      const s = initState(c, seed);
+      const pure = pickNextEvent(c, s, createRng(seed));
+      const viaWorld = pickNextEventViaWorld(c, s, createRng(seed));
+      expect(viaWorld?.id ?? null).toBe(pure?.id ?? null);
+    }
+  });
+
+  it("stays in lockstep with the pure path across a full driven run", () => {
+    const c = content();
+    let s = initState(c, "run");
+    const rngPure = createRng("run");
+    // At each step, both selectors see the SAME state + a freshly-forked rng with
+    // the same label, so they must agree on every pick along the whole run.
+    for (let i = 0; i < 200 && !s.end; i++) {
+      const fork = `pick:${i}`;
+      const pure = pickNextEvent(c, s, rngPure.fork(fork));
+      const viaWorld = pickNextEventViaWorld(c, s, createRng("run").fork(fork));
+      expect(viaWorld?.id ?? null).toBe(pure?.id ?? null);
+      if (!pure) break;
+      // Advance the run via the pure path so the next state is shared.
+      const choice = pure.choices[0];
+      if (!choice) break;
+      s = applyChoice(c, s, pure, choice.id, rngPure.fork(`apply:${i}`)).state;
+    }
+  });
+});
+
+describe("Koota run-context reads parity (DE-1b)", () => {
+  it("queryRunContext equals branchOf / moralPoleOf for the same state", () => {
+    const c = content();
+    for (const seed of ["a", "b", "nazi", "theo"]) {
+      const s = initState(c, seed);
+      const ctx = queryRunContext(c, s);
+      expect(ctx.branch).toBe(branchOf(s));
+      expect(ctx.pole).toBe(moralPoleOf(s));
+    }
+  });
+
+  it("queryEligibleForPole returns the eligible set tagged with the run pole", () => {
+    const c = content();
+    const s = initState(c, "seed");
+    const { pole, events } = queryEligibleForPole(c, s);
+    expect(pole).toBe(moralPoleOf(s));
+    expect(events.map((e) => e.id).sort()).toEqual(
+      queryEligible(c, s)
+        .map((e) => e.id)
+        .sort(),
+    );
   });
 });
 

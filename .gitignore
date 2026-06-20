@@ -41,6 +41,11 @@ public/assets/photos/
 .claude/scheduled_tasks.lock
 .claude/scheduled_tasks.json
 
+# Visual-test screenshots are LOCAL-ONLY review artifacts — vitest writes them via
+# page.screenshot() purely so the rendering can be eyeballed; nothing asserts against
+# them (no toMatchSnapshot baseline), so tracking them is pure non-deterministic churn.
+**/__screenshots__/
+
 # itch downloader (local only)
 .env
 .itch-cache/
