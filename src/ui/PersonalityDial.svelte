@@ -160,6 +160,9 @@ const archetypeLabel: Record<string, string> = {
     width: 14px;
     height: 14px;
     opacity: 0.9;
+    /* Safe fallback: dim-text color for any unrecognised data-pole value.
+       (#9eaabf approximation of --mmm-text-dim without a CSS var inside filter) */
+    filter: invert(68%) sepia(8%) saturate(380%) hue-rotate(187deg) brightness(95%);
   }
   /* Tint pole icon to match the badge's pole color. */
   .pole-badge[data-pole="utopian"] .pole-icon {

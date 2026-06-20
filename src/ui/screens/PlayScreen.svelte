@@ -135,7 +135,11 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   .play {
     display: flex;
     flex-direction: column;
-    min-height: 100dvh;
+    /* height (not min-height): locks the container to exactly one screen so
+       .content { flex: 1; overflow-y: auto } actually scrolls on Pixel-5a.
+       overflow: hidden clips any stray paint below the fold. */
+    height: 100dvh;
+    overflow: hidden;
     transition: background var(--mmm-dur-slow) var(--mmm-ease);
   }
   /* Wide (tablet/foldable): event + info side-by-side. */

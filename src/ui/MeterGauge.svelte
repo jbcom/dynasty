@@ -53,6 +53,8 @@ const dash = $derived(`${fraction * CIRC} ${CIRC}`);
     justify-items: center;
     gap: 0.1rem;
     min-width: 4.5rem;
+    /* Icon overlaps the arc via absolute positioning — relative context needed. */
+    position: relative;
   }
   svg {
     display: block;
@@ -64,7 +66,11 @@ const dash = $derived(`${fraction * CIRC} ${CIRC}`);
     transition: stroke-dasharray var(--mmm-dur) var(--mmm-ease);
   }
   .icon {
-    margin-top: -1.7rem;
+    /* Positioned over the arc midpoint — avoids the Firefox grid margin-top bug. */
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 22px;
     height: 22px;
     object-fit: contain;
