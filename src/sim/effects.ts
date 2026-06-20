@@ -6,7 +6,7 @@ import {
   scheduleConsequences,
 } from "./butterfly";
 import type { Content } from "./content";
-import { pickNextEvent } from "./events";
+import { meetsRequires, pickNextEvent } from "./events";
 import { applyDelta } from "./meters";
 import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
@@ -128,7 +128,10 @@ export function applyChoice(
     const years = Math.max(0, advanced.year - hopped.year);
     const steps = years > 0 ? years : 1; // at least one tick per choice
     for (let y = 0; y < steps; y++) {
-      const tickRng = rng.fork(`systemic:${hopped.year}:${y}:${state.history.length}`);
+      // Key off the POST-choice history length (advanced) — the same count the
+      // inner per-market fork inside systemicTick sees — so the outer and inner
+      // fork-key domains are harmonized (no split-key replay-stability hazard).
+      const tickRng = rng.fork(`systemic:${hopped.year}:${y}:${advanced.history.length}`);
       const result = systemicTick(content, { ...advanced, year: hopped.year + y }, tickRng);
       advanced = { ...result.state, year: advanced.year };
       for (const f of result.flags) advanced = { ...advanced, flags: withFlag(advanced.flags, f) };
@@ -206,9 +209,8 @@ export function autoPlaythrough(
 
 function eligibleChoice(state: GameState, choice: Choice): boolean {
   if (!choice.requires) return true;
-  // Lightweight reuse of meetsRequires semantics without a cycle: flags only here.
-  return (
-    choice.requires.flags.every((f) => state.flags.includes(f)) &&
-    choice.requires.notFlags.every((f) => !state.flags.includes(f))
-  );
+  // Full gate (flags + notFlags + meters + personality + age) so autoPlaythrough
+  // only picks choices reachable in live play — otherwise the divergence probe
+  // and persona analytics produce unreachable states.
+  return meetsRequires(state, choice.requires);
 }

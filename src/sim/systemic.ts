@@ -21,7 +21,10 @@ const COUPLING_METERS: MeterId[] = ["money", "power", "reputation", "loyalty", "
 function addDelta(into: Partial<Record<MeterId, number>>, from: Partial<Record<MeterId, number>>) {
   for (const m of COUPLING_METERS) {
     const v = from[m];
-    if (v) into[m] = (into[m] ?? 0) + v;
+    // Use `!== undefined` (not truthiness) so a NaN from malformed content
+    // propagates and surfaces as a broken meter rather than being silently
+    // swallowed; 0 deltas are harmless to add.
+    if (v !== undefined) into[m] = (into[m] ?? 0) + v;
   }
 }
 
