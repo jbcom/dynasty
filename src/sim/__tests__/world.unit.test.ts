@@ -1,11 +1,14 @@
 import { describe, expect, it } from "vitest";
 import marketsJson from "../../data/markets.json";
 import { buildContent } from "../content";
-import { effectiveWeight, eligibleEvents } from "../events";
+import { effectiveWeight, eligibleEvents, pickNextEvent } from "../events";
+import { createRng } from "../rng";
+import { applyChoice } from "../effects";
 import { initState } from "../state";
 import {
   Eligible,
   EventRef,
+  pickNextEventViaWorld,
   projectWorld,
   queryEligible,
   queryEligibleByWeight,
@@ -77,6 +80,37 @@ describe("Koota read-model projection (task-026)", () => {
     const weights = ranked.map((r) => r.weight);
     const sortedDesc = [...weights].sort((a, b) => b - a);
     expect(weights).toEqual(sortedDesc);
+  });
+});
+
+describe("pickNextEventViaWorld parity with pure pickNextEvent (DE-1)", () => {
+  it("returns the SAME event as the pure path for the same (state, rng) — many seeds", () => {
+    const c = content();
+    for (const seed of ["a", "b", "c", "d", "x", "42", "zzz"]) {
+      const s = initState(c, seed);
+      const pure = pickNextEvent(c, s, createRng(seed));
+      const viaWorld = pickNextEventViaWorld(c, s, createRng(seed));
+      expect(viaWorld?.id ?? null).toBe(pure?.id ?? null);
+    }
+  });
+
+  it("stays in lockstep with the pure path across a full driven run", () => {
+    const c = content();
+    let s = initState(c, "run");
+    const rngPure = createRng("run");
+    // At each step, both selectors see the SAME state + a freshly-forked rng with
+    // the same label, so they must agree on every pick along the whole run.
+    for (let i = 0; i < 200 && !s.end; i++) {
+      const fork = `pick:${i}`;
+      const pure = pickNextEvent(c, s, rngPure.fork(fork));
+      const viaWorld = pickNextEventViaWorld(c, s, createRng("run").fork(fork));
+      expect(viaWorld?.id ?? null).toBe(pure?.id ?? null);
+      if (!pure) break;
+      // Advance the run via the pure path so the next state is shared.
+      const choice = pure.choices[0];
+      if (!choice) break;
+      s = applyChoice(c, s, pure, choice.id, rngPure.fork(`apply:${i}`)).state;
+    }
   });
 });
 

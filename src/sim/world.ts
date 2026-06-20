@@ -3,6 +3,7 @@ import { branchOf } from "./branch";
 import type { Content } from "./content";
 import { effectiveWeight, eligibleEvents } from "./events";
 import { moralPoleOf } from "./moralAxis";
+import type { Rng } from "./rng";
 import type { GameEvent } from "./schema";
 import type { GameState } from "./state";
 
@@ -109,6 +110,41 @@ export function queryEligible(content: Content, state: GameState): GameEvent[] {
       .map((e) => byId.get(e.get(EventRef)?.id ?? ""))
       .filter((e): e is GameEvent => e !== undefined),
   );
+}
+
+/**
+ * Seeded weighted next-event pick over the read-model — the declarative twin of
+ * the pure `pickNextEvent` (events.ts), and the DE-1 migration of the core
+ * selection step onto Koota. Projects the world, reads the Eligible entities in
+ * content order (the same order the pure path's era-pool filter yields, since
+ * projectWorld marks Eligible from eligibleEvents), and applies the identical
+ * weighted draw. PARITY: returns the same event id as pickNextEvent for the same
+ * (content, state, rng) — proven by a parity test. The pure path stays the
+ * source of truth; this is the ECS-native read used where a world is already in
+ * hand. Determinism: the rng draw order matches the pure path exactly.
+ */
+export function pickNextEventViaWorld(
+  content: Content,
+  state: GameState,
+  rng: Rng,
+): GameEvent | null {
+  const byId = new Map(content.allEvents.map((e) => [e.id, e]));
+  // Eligible entities in spawn (content) order — identical order to eligibleEvents.
+  const eligible = withWorld(content, state, (world) =>
+    world
+      .query(EventRef, Eligible, Weight)
+      .map((e) => ({
+        event: byId.get(e.get(EventRef)?.id ?? ""),
+        weight: e.get(Weight)?.value ?? 0,
+      }))
+      .filter((x): x is { event: GameEvent; weight: number } => x.event !== undefined),
+  );
+  if (eligible.length === 0) return null;
+  const weights = eligible.map((x) => x.weight);
+  const total = weights.reduce((s, w) => s + w, 0);
+  if (total <= 0) return eligible[0]?.event ?? null;
+  const idx = rng.weightedIndex(weights);
+  return eligible[idx]?.event ?? null;
 }
 
 /**
