@@ -221,6 +221,25 @@ can ground REAL events. Default model `gemini-3-flash-preview` (bulk),
 `gemini-3-pro-preview` (the self-critique/hard passes). Codegen guidance indexed
 under "google js-genai codegen instructions".
 
+**WHY BUILD GEMINI FIRST — it's a DEV AI TOOLKIT, not just a content generator
+(user).** Once the `@google/genai` dev harness + the game-bible system prompt +
+the schema-forced-output plumbing exist, the same toolkit accelerates MANY of the
+remaining refactors — so it is built EARLY (FD-11 pulled forward) and reused:
+- **gap-fill / extrapolate** events (the headline job; 40 → 500/dynasty).
+- **slot-detection**: scan content for places that SHOULD be archetypal slots
+  (AH7) but are hard-coded, and propose the slot + per-branch/dynasty resolutions.
+- **trope-retagging** (FD-3): classify every authored event with its trope(s) +
+  historicity + place, turning the literal-line refactor from hand-work into a
+  reviewed AI pass.
+- **error-correction / consistency**: find anachronisms, title-leaks, dead flags,
+  duplicate ids, chronology breaks, no-shallowness gaps — and propose fixes
+  (a richer, generative AH6 sweep).
+- **migration assist** (FD-2): author the reactable choices for the 1169 projected
+  world-events.
+Every such job is a DEV script that PROPOSES changes which are then schema-/guard-
+validated + git-reviewed before committing — the human/agent stays in the loop;
+Gemini does the heavy lifting. This multiplier is why FD-11 is sequenced first.
+
 ### Mode A — DEV-TIME BULK (default; deterministic play)
 A repeatable `pnpm extrapolate` script (`scripts/extrapolate.mjs`):
 1. **Detect gaps**: drive autoPlaythrough across seeds/dynasties/places; find
@@ -275,6 +294,22 @@ opens. Initial set (expandable):
 
 Each start-moment references the **places** it can route through (§3) and seeds the
 appropriate archetype-leaning flags WITHOUT locking the player to an archetype.
+
+**DEEP-HISTORY / WORLD REACH (user).** The start-moments are NOT US-centric or
+modern. Old-money, Asian, European, and Middle-Eastern lines can be founded MUCH
+further back — centuries or millennia — opening whole new dynastic forms:
+- a **European monarchy** (a medieval noble house climbing toward a crown)
+- a **caliphate / Islamic dynasty** (a Middle-Eastern religious-political line)
+- a **religious dynasty** rooted in an ancient faith (not just American evangelism)
+- **old-money European / Asian merchant or scholar-official houses** (e.g. a
+  Florentine banking house, a Chinese scholar-gentry/imperial-examination line, a
+  samurai/daimyō house, a Mughal or Ottoman line)
+This widens the place/era/onomastic/trope space enormously (new cultures, naming
+conventions, governance forms, faiths). It is exactly the kind of breadth the
+PROCEDURAL POOL (§1d) + GEMINI EXTRAPOLATION (§1e) exist to populate — hand-
+authoring a millennium of Mughal court events is infeasible; generating + quality-
+gating them is the point. Ship a focused starter set of moments (the table above
++ 1-2 deep-history exemplars), then let extrapolation flesh the long tail.
 
 ## 3. Geo / political / religious / sociological-ideological JSON stacks
 

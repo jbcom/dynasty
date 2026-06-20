@@ -17,6 +17,14 @@ as OPTIONAL QUICK-START PRESETS on this engine. Full design:
 docs/superpowers/specs/2026-06-20-found-your-own-dynasty.md
 (supersedes 2026-06-20-four-composite-dynasties.md, folded in as presets).
 
+SEQUENCING (user): BUILD FD-11 (Gemini) FIRST — it's a DEV AI TOOLKIT (not just a
+content generator): gap-fill + slot-detection + trope-retagging + error-correction
++ migration-assist. Once built it accelerates FD-2/FD-3/etc., so it leads. Also:
+DEEP-HISTORY reach — start-moments span world history + millennia (European
+monarchy, caliphate, old-money Asian/European/Middle-Eastern houses), populated by
+the procedural pool + Gemini, not hand-authoring. SHIP BAR: all dynasties sustain
+1000 years of rule; file/PR size is no constraint (use barrel-packaged modules).
+
 ### FD-0 Research + full design spec
 - [x] FD-0 DONE: researched the religious spine (Graham, fresh web research) + the composite-archetype model, THEN the user pivoted to found-your-own-dynasty. Wrote the full found-your-own spec (core loop, start-moments, geo/politics/religion/ideology world stacks for Ireland/UK/SA/Canada/both coasts, onomastics/patronyms, family-tree STATE + birth/death/inheritance/estate/succession sim, archetypes-as-presets, FD-1..FD-9 plan). Determinism is the load-bearing risk (births/deaths must be pure+seeded so replay reconstructs the tree).
 ### FD-1 FamilyTreeSchema + 4 preset trees
