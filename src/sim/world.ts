@@ -85,12 +85,12 @@ export function projectWorld(content: Content, state: GameState) {
     world.spawn(
       MarketRef({ id: market.id }),
       Index({
-        value: ms.index,
-        peak: ms.peakIndex,
-        drawdown: ms.peakIndex > 0 ? 1 - ms.index / ms.peakIndex : 0,
+        value: ms.index ?? 0,
+        peak: ms.peakIndex ?? 0,
+        drawdown: ms.peakIndex && ms.peakIndex > 0 ? 1 - (ms.index ?? 0) / ms.peakIndex : 0,
       }),
-      Regime({ key: ms.regime }),
-      Position({ holding: ms.holding, leverage: ms.leverage }),
+      Regime({ key: ms.regime ?? "" }),
+      Position({ holding: ms.holding ?? 0, leverage: ms.leverage ?? 1 }),
     );
   }
   return world;
