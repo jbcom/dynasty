@@ -77,4 +77,54 @@ describe("world timelines (linking protocol)", () => {
     expect(next.flags).toContain("ussr_collapse");
     expect(s.flags).not.toContain("ussr_collapse"); // original untouched
   });
+
+  it("mutually-exclusive same-year events: the first excludes the second (nb-004 race fix)", () => {
+    // Two events in the same year, each notFlags the other. Only ONE may fire —
+    // requires must be evaluated against the flags accumulated this batch, not
+    // the frozen incoming state (else both pass and both fire).
+    const tl: WorldTimeline[] = [
+      {
+        scope: "religion",
+        label: "Ideology",
+        events: [
+          {
+            id: "wr_utopian",
+            year: 2045,
+            headline: "Commons",
+            body: ".",
+            tags: [],
+            extrapolated: true,
+            setFlags: ["utopian_currents"],
+            requires: {
+              flags: [],
+              notFlags: ["autocratic_currents"],
+              meters: {},
+              personality: {},
+            },
+          },
+          {
+            id: "wr_autocratic",
+            year: 2045,
+            headline: "Strongman",
+            body: ".",
+            tags: [],
+            extrapolated: true,
+            setFlags: ["autocratic_currents"],
+            requires: {
+              flags: [],
+              notFlags: ["utopian_currents"],
+              meters: {},
+              personality: {},
+            },
+          },
+        ],
+      },
+    ];
+    const s = { ...initState(content(), "seed"), year: 2046 };
+    const { flags } = dueWorldEvents(tl, s, 2044);
+    // Exactly one of the two mutually-exclusive currents fires, never both.
+    const both = flags.includes("utopian_currents") && flags.includes("autocratic_currents");
+    expect(both).toBe(false);
+    expect(flags.includes("utopian_currents") || flags.includes("autocratic_currents")).toBe(true);
+  });
 });

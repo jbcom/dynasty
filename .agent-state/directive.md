@@ -1,7 +1,29 @@
 # Continuous Work Directive — maga-money-moves
 
-**Status:** RELEASED
+**Status:** ACTIVE
 **Owner:** jbogaty
+
+## Batch — dynasty-koota-deepfuture (batch-20260620-134116)
+
+Source: carried-forward epics from the alt-history batch (PRs #10/#11 merged), user-sequenced 2026-06-20.
+Started: 2026-06-20T18:41:00Z
+
+The next work unit. Order chosen by the user (Koota-migration-first, then
+deep-future, then coverage/audit, then persona sweep). Full design detail for each
+lives in the WAIT-USER items further down (now unblocked).
+
+### nb-001 Koota: migrate remaining queries over the read-model (continues task-026)
+- [x] nb-001 Koota read-model extended: market entities (MarketRef/Index/Regime/Position) + declarative queries queryMarketsInCrash / queryLeveragedPositions / queryEligibleByWeight, each parity-tested vs the pure semantics. CRITICAL fix: koota caps live worlds at 16 and createWorld does not auto-free — added withWorld() that always destroy()s, converted all queries to it, + a 50-call leak-guard test (would have crashed real play). 232 tests green.
+### nb-002 Deep-future for the remaining branches (continues task-025)
+- [x] nb-002 deep-future arcs done for all 4 remaining branches: NAZI +13 (Reich conquest — WOTAN AGI→Festung Mars→solar empire→conquest fleet), MEDIA +14 (broadcast reach — orbital ring→solar relay→signal-as-ratings→info war), WESTCOAST +15 (techno-frontier — AGI→corporate Mars charter→transhumanist schism→open-protocol contact), MEGACHURCH +12 (mission — Mars church-planting→galactic missiology→interspecies covenant, distinct from theocracy crusade). Each sets all 4 science-ladder flags via its OWN motivation + 3 poles. All 7 branches now reach the stars; sweep consistent.
+### nb-003 Full 3-pole coverage + no-shallowness audit (task-022 remainder + task-017)
+- [x] nb-003 COVERAGE: expanded moralAxis POLE_FLAGS to recognize every branch authored pole flag (reich_*_pole, pole_utopian/centrist/dictatorial, media_*_pole, communion/standoff/theodicy theology poles, interstellar_trade_commonwealth/monopoly_trade_regime/alien_subjugation, missionary_uplift…); removed axis_ascendant from dictatorial (it is a BRANCH marker, not a pole — a Nazi run pole comes from its reich_*_pole flag). 14-case coverage test (all 7 branches × 3 poles resolve). AUDIT: every branch backdrop is 104-177 events across 4 scopes — none a thin stub, comparable depth, no shallowness.
+### nb-004 Persona playtest sweep (task-023)
+- [x] nb-004 persona playtest sweep DONE (7 personas / 3 agents). Found + FIXED 5 real bugs (megachurch+media branches were unreachable; all-3-poles menu locked nazi/westcoast to dictatorial; end_first_contact_malevolent dead via bad notFlags; dueWorldEvents mutual-exclusion race) — each verified before fixing + regression-tested. Debunked the agent false-positive '7 dead gate flags' (world-timeline-set + role_flip resolveRoles-derived). LIGHT findings deferred to nb-006: historical date nits (John G. Trump MIT 1936/EE not 1933/Physics; JPK Harvard 1912 not 1908; Columbia Trust 1913), ending body text, balance (inert markets/no-heat-decay/power=30 outlier/23.7%-no-downside), missing-content gaps (Epstein, Trump children as heirs, 2000 Reform run).
+### nb-006 Balance + content-polish from persona findings (deferred from nb-004)
+- [x] nb-006 balance + content polish DONE. (1) marketOps wire market holdings to choices + Manhattan op + unit test; heat passive decay (-1.5/yr, floored at 0) + test; capped pol_win_accept_mandate power 30->18; throttled end_early_obscurity (minEraOrder 3, minAge 30). (2) "~24% no-downside" was FALSE POSITIVE — heat is a negative meter, flag-forks are legit; 13 all-upside events are all apex victory laps/personality forks; added felt heat-cost to 7 domineering redplanet choices instead. (3) Historical date nits: science.json wt_john_trump_mit year 1933->1936 + headline Physics->Electrical Engineering; kennedy.json wk2_jpk_harvard_outsider year 1908->1912; wk2_jpk_bank_president year 1914->1913. (4) Gap events audit: Epstein (ev_epstein_circle), Trump children/heirs, ev_reform_party_flirt all ALREADY exist — gaps were filled in prior work. (5) Ending body field: not in EndingSchema — endings use `reason` as epitaph; all 28 have it. 242 tests green.
+### nb-005 Definition of done
+- [ ] [WAIT] nb-005 DoD — PR #12 open; typecheck+biome+unit(242)+browser(59) green; security audit clean; code-reviewer agent running; awaiting CI green + reviewer result; then: live-verify branches, resolve bot threads, squash-merge.
 
 ## VISION — "DYNASTY": three playable dynastic sagas (user, 2026-06-20)
 

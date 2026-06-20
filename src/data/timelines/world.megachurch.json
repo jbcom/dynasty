@@ -157,13 +157,19 @@
       "setFlags": ["un_observer_status", "dynasty_international_standing"]
     },
     {
-      "id": "wwc_interplanetary_evangelical_mission",
-      "year": 2090,
-      "headline": "The Great Commission Reaches Mars: Missionaries Follow the Colonists",
-      "body": "As Mars colonies grow to one hundred thousand inhabitants, the dynasty dispatches its first interplanetary missionary team — chaplains, counselors, and media producers who will staff the New Canaan colony's spiritual infrastructure. The mission is both religious and commercial: FaithStream subscriptions, tithing infrastructure, and Covenant University online enrollment will generate revenue from Martian colonists who have no secular alternative community structure. The Great Commission, in the dynasty's eschatology, is not complete until the gospel has been preached to every world.",
-      "tags": ["mars", "missions", "interplanetary", "colonists", "great_commission"],
+      "id": "wwc_mars_science_funding_pact",
+      "year": 2048,
+      "headline": "The Covenant Science Fund: The Dynasty Buys Its Way Into the Mars Race",
+      "body": "The dynasty's board of governors announces the Covenant Science Fund — a five-billion-dollar endowment seeded from tithe reserves, dedicated to funding propulsion research, closed-loop life support, and Martian habitat design. The justification is theological: the Great Commission requires presence on every inhabited world, and the dynasty must fund the worlds' habitability to ensure that presence. Critics note that the fund's governing board holds IP rights to every technology its grants produce. The dynasty is not merely supporting science; it is acquiring the intellectual property of a civilization's next migration. Within a decade the fund's portfolio generates more revenue than any single campus.",
+      "tags": ["mars", "science_funding", "technology", "great_commission", "ip"],
       "extrapolated": true,
-      "setFlags": ["interplanetary_evangelical_mission", "martian_ministry"]
+      "setFlags": ["covenant_science_fund", "back_science"],
+      "requires": {
+        "flags": ["un_observer_status"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
     },
     {
       "id": "wwc_world_religious_congress_dynasty",
@@ -175,6 +181,75 @@
       "setFlags": ["world_religious_congress", "dynasty_convener_role"]
     },
     {
+      "id": "wwc_mars_mission_launch_dynasty",
+      "year": 2065,
+      "headline": "The New Canaan Mission Ship Departs: Dynasty-Funded Chaplains Join the First Wave",
+      "body": "The dynasty co-funds a berth on the inaugural crewed Mars transit vessel — the first religious organization in history to purchase passage on an interplanetary mission. The twelve-member 'Kingdom Advance' team includes three ordained pastors, two counselors, a medical missionary, and a media producer tasked with broadcasting the first sermon from deep space. The dynasty's livestream of the departure draws 800 million simultaneous viewers — more than any papal event in history. The theological framing: this is not colonization, it is incarnation. The Word goes where the people go.",
+      "tags": ["mars", "mission_ship", "chaplain", "kingdom_advance", "broadcast"],
+      "extrapolated": true,
+      "setFlags": ["dynasty_mars_mission", "mars_program"],
+      "requires": {
+        "flags": ["covenant_science_fund"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wwc_martian_campus_utopian",
+      "year": 2078,
+      "headline": "New Canaan Charitable Hub: The Dynasty Builds Mars's First Hospital and School",
+      "body": "The dynasty's Martian campus at New Canaan Base opens the first off-world hospital (staffed by medical missionaries, services free at point of care) and the first K-12 school (Covenant Academy, tuition-free for colony children). The resources are genuine: funded from the Covenant Science Fund endowment and Earth tithing surplus. The dynasty's medical missionaries treat colonists regardless of faith affiliation. Critics note that every family treated is a potential member, every student enrolled is a potential tither. The charity is real; the long-term conversion pipeline is also real. Neither fact cancels the other.",
+      "tags": ["mars", "hospital", "charity", "utopian", "missionary", "colony"],
+      "extrapolated": true,
+      "setFlags": ["martian_charitable_campus", "missionary_uplift"],
+      "requires": {
+        "flags": ["dynasty_mars_mission", "charitable_ministry"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wwc_martian_campus_dictatorial",
+      "year": 2078,
+      "headline": "FaithStream Mars: The Only Entertainment Network in the Outer Colonies",
+      "body": "On the dictatorial fork, the dynasty leverages its early arrival advantage: before any secular media infrastructure exists on Mars, FaithStream becomes the colony's default entertainment, news, and social platform. Seventy percent of the colony's communication bandwidth is under dynasty contract. New colonists discover that the nearest counseling service, employment referral network, and community hub is dynasty-operated. Social life on Mars is structured around Covenant community groups. The theology follows from the infrastructure: when the dynasty controls every social node, conversion is the default path of least resistance. The patriarch's grandson calls it 'ambient evangelism.'",
+      "tags": ["mars", "media_monopoly", "dictatorial", "faithstream", "ambient_evangelism"],
+      "extrapolated": true,
+      "setFlags": ["martian_media_monopoly", "ambient_evangelism_colony"],
+      "requires": {
+        "flags": ["dynasty_mars_mission", "personality_cult"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wwc_interplanetary_evangelical_mission",
+      "year": 2090,
+      "headline": "The Great Commission Reaches Mars: Missionaries Follow the Colonists",
+      "body": "As Mars colonies grow to one hundred thousand inhabitants, the dynasty dispatches its first interplanetary missionary team — chaplains, counselors, and media producers who will staff the New Canaan colony's spiritual infrastructure. The mission is both religious and commercial: FaithStream subscriptions, tithing infrastructure, and Covenant University online enrollment will generate revenue from Martian colonists who have no secular alternative community structure. The Great Commission, in the dynasty's eschatology, is not complete until the gospel has been preached to every world.",
+      "tags": ["mars", "missions", "interplanetary", "colonists", "great_commission"],
+      "extrapolated": true,
+      "setFlags": ["interplanetary_evangelical_mission", "martian_ministry"]
+    },
+    {
+      "id": "wwc_extrasolar_mission_charter",
+      "year": 2125,
+      "headline": "The Interstellar Great Commission: The Dynasty Charters the First Starship Ministry",
+      "body": "After the first crewed vessel clears the heliopause, the dynasty convenes the Interstellar Mission Council — the first religious body in history to formally plan ministry beyond the solar system. The council debates whether the Great Commission's reach extends to undiscovered sentient life. The majority votes yes. The dynasty co-funds a berth on the second interstellar mission in exchange for exclusive spiritual-care rights on the journey and at any settlement. A dissident faction within the dynasty's Reform wing argues that funding starflight for evangelism, while two billion humans remain in extreme poverty, is a theological obscenity. The dynasty's heir responds that the Commission is not sequential: all worlds at once.",
+      "tags": ["extrasolar", "starship", "great_commission", "interstellar_mission", "space"],
+      "extrapolated": true,
+      "setFlags": ["interstellar_mission_charter", "extrasolar_flight"],
+      "requires": {
+        "flags": ["interplanetary_evangelical_mission"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
       "id": "wwc_solar_system_covenant",
       "year": 2200,
       "headline": "The Solar Covenant: A Dynasty Older Than Any Living Nation",
@@ -182,6 +257,36 @@
       "tags": ["solar_system", "covenant", "durability", "future", "dynasty"],
       "extrapolated": true,
       "setFlags": ["solar_covenant_dynasty", "beyond_national_authority"]
+    },
+    {
+      "id": "wwc_first_contact_ministry_response",
+      "year": 2160,
+      "headline": "The Contact Revenue Question: Can Non-Human Beings Tithe?",
+      "body": "Within seventy-two hours of First Contact confirmation, the dynasty's board of governors convenes an emergency session. The meeting's recorded agenda has two items: theological implications (one hour) and revenue implications (three hours). The dynasty's legal team is already drafting an interspecies covenant framework. The dynasty's marketing team is A/B-testing translations of FaithStream's subscription offer. The Reform wing leaks the agenda to the interstellar press; the resulting scandal produces the dynasty's first formal parliamentary inquiry in six jurisdictions. The heir's public statement leads with theology. The private memo leads with market size.",
+      "tags": ["first_contact", "aliens", "revenue", "tithe", "ministry", "dynasty"],
+      "extrapolated": true,
+      "setFlags": ["interspecies_ministry_rights", "contact_made"],
+      "requires": {
+        "flags": ["interstellar_mission_charter"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wwc_alien_conversion_franchise",
+      "year": 2250,
+      "headline": "The Tau Ceti Franchise: The Dynasty Plants Its First Alien-World Campus",
+      "body": "The dynasty establishes a campus at the human settlement orbiting Tau Ceti e — the first religious institution in interstellar space. Whether the indigenous Tau Cetians attend is a matter of ongoing diplomatic negotiation, but the campus serves fifteen thousand human colonists and the dynasty's xenological theology team works from it as a research base. The utopian version funds a xenological institute dedicated to understanding Tau Cetian civilization with no conversion mandate, funded by Earth tithes as a gift to humanity's knowledge. The centrist version runs a parallel service — human ministry plus xenological outreach — funded by colonist subscriptions. The dictatorial version markets Tau Cetian 'healing contact' services back to Earth at premium rates, with the Tau Cetians' consent treated as an administrative matter.",
+      "tags": ["tau_ceti", "aliens", "franchise", "interstellar", "future", "first_contact"],
+      "extrapolated": true,
+      "setFlags": ["tau_ceti_campus", "interstellar_dynasty_presence"],
+      "requires": {
+        "flags": ["contact_made"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
     }
   ]
 }

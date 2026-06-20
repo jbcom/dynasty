@@ -121,7 +121,11 @@ export function initState(content: Content, seed: string): GameState {
   return {
     seed,
     eraIndex: 0,
-    age: 0,
+    // Age is ALWAYS derived from the year (ageInYear) so it stays monotonic with
+    // time. The first era opens in the dynastic-origins past (pre-1946), so the
+    // protagonist's "age" starts negative — seeding 0 here would make the very
+    // first transition look like age rewound from 0 to a negative value.
+    age: ageInYear(firstEra.yearStart),
     year: firstEra.yearStart,
     meters: initMeters(content.meters),
     personality: initPersonality(),

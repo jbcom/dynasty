@@ -91,6 +91,25 @@ export const ChoiceSchema = z.object({
       yearAdvance: z.number().int().min(0).optional(),
     })
     .optional(),
+  /**
+   * Optional MARKET OPERATIONS (SIM1): a choice can take a position in a market
+   * so the systemic tick actually moves money for the player (without this no
+   * choice sets holding and all markets are inert). `set*` overwrites; `add*`
+   * adjusts. e.g. "mortgage the Plaza" = { market:"nyc_housing", addHolding:
+   * 500000, setLeverage: 4 }; "go long crypto" = { market:"crypto", addHolding:
+   * 100000 }; "divest" = { setHolding: 0 }.
+   */
+  marketOps: z
+    .array(
+      z.object({
+        market: z.string().min(1),
+        setHolding: z.number().optional(),
+        addHolding: z.number().optional(),
+        setLeverage: z.number().min(0).optional(),
+        addLeverage: z.number().optional(),
+      }),
+    )
+    .optional(),
 });
 export type Choice = z.infer<typeof ChoiceSchema>;
 
