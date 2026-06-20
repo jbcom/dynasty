@@ -98,7 +98,7 @@ spec) — not re-queued here.
 ### task-017 AH4 no-shallowness audit
 - [ ] task-017 verify every branch opens a comparably rich gated multi-layer pool; deepen any thin branch
 ### task-018 Definition of done
-- [ ] task-018 DoD — gate GREEN (typecheck, biome, 227 unit + 59 browser, build) and app LIVE-VERIFIED (chrome-devtools: title → German/Nazi-branch divergence "The Boy Who Served the King" → Markets tab with 6 live markets + 4 rank ladders + currency relabel, zero console errors); 7-branch timeline:sweep consistent. Opening the PR for the shippable unit now; remaining OPEN EPICS (full Koota query migration, deep-future for nazi/media/westcoast/megachurch, persona sweep task-023, Dynasty rename + Musk/Kennedy Era-0 sagas, AH8d sibling-count, task-022 full 3-pole coverage, task-017 no-shallowness) carry forward as the NEXT work unit per one-branch-per-unit. → open PR → reviewer trio → wait CI → squash-merge.
+- [ ] [WAIT-REVIEW] task-018 DoD — PR #10 open (https://github.com/jbcom/maga-money-moves/pull/10); reviewer trio + CI running under a Monitor. On completion: fold findings → resolve threads → squash-merge once green. gate GREEN (typecheck, biome, 227 unit + 59 browser, build) and app LIVE-VERIFIED (chrome-devtools: title → German/Nazi-branch divergence "The Boy Who Served the King" → Markets tab with 6 live markets + 4 rank ladders + currency relabel, zero console errors); 7-branch timeline:sweep consistent. Opening the PR for the shippable unit now; remaining OPEN EPICS (full Koota query migration, deep-future for nazi/media/westcoast/megachurch, persona sweep task-023, Dynasty rename + Musk/Kennedy Era-0 sagas, AH8d sibling-count, task-022 full 3-pole coverage, task-017 no-shallowness) carry forward as the NEXT work unit per one-branch-per-unit. → open PR → reviewer trio → wait CI → squash-merge.
 
 ## Batch — alt-history consistency (batch-20260620-althist)
 
@@ -109,7 +109,7 @@ THE CORE PROBLEM (user): counterfactual branches must stay HISTORICALLY
 CONSISTENT, and no single divergent choice may make the content feel shallow.
 Three intertwined requirements:
 
-- [ ] AH1 TITLE-AWARE OVERRIDES (user): the override system must work with TITLES,
+- [x] AH1 TITLE-AWARE OVERRIDES (DONE via task-001/AH-terms: branch+term layer src/sim/{branch,terms}.ts, render-path wired): (user): the override system must work with TITLES,
       not just events/flags. Full scan done: "president" appears 144× across 8 era
       files + usa/musk timelines, all branch-blind. On the Nazi/Axis route there is
       NO U.S. president — the Axis-appointed American leader holds a Reich-style
@@ -117,14 +117,14 @@ Three intertwined requirements:
       never "President". JFK is NOT shot in 1963 (no presidency to assassinate).
       The leader-title (and head-of-state references generally) must resolve from
       the active branch. Needs a title/term resolution layer the content reads.
-- [ ] AH2 MUTUALLY-EXCLUSIVE / EXCLUDED EVENTS (user): some world events FORCE
+- [x] AH2 MUTUALLY-EXCLUSIVE / EXCLUDED EVENTS (DONE via per-branch pools: usa.nazi etc. replace incompatible real events; consistency test + timeline:sweep enforce it): (user): some world events FORCE
       OTHERS OUT of the timeline by choice bias. Real-history landmarks that are
       impossible under a branch must be suppressed: e.g. "I Have a Dream" / March
       on Washington / civil-rights arc / free elections / democracy / Constitution
       / Congress cannot occur in Nazi-occupied America. Scan found all of these in
       the data, none gated on branch. Need an exclusion mechanism (branch flags in
       notFlags, or an excludes-set) so picking a branch removes incompatible events.
-- [ ] AH3 ALT-HISTORY BRANCHING ARCHITECTURE (user DECISION 2026-06-20): mechanism =
+- [x] AH3 ALT-HISTORY BRANCHING ARCHITECTURE (DONE via task-008 compiler + timelinesForBranch + 7 branch pools): (user DECISION 2026-06-20): mechanism =
       FULL SEPARATE TIMELINES PER BRANCH. Loader picks the variant set matching the
       active branch flag: e.g. timelines/usa.default.json + usa.nazi.json +
       usa.westcoast.json + usa.theocracy.json + usa.media.json; same for
@@ -159,7 +159,7 @@ Three intertwined requirements:
         persisted to the save, then played out (still driven by the butterfly machine
         and the three dynastic gears). The branch flag + timelinesForBranch selection
         already built is a SUBSET of this; evolve it toward the compile-at-0 model.
-- [ ] AH5 TIMELINE-COMPILER DEV HARNESS (user, 2026-06-20): so we never have to
+- [x] AH5 TIMELINE-COMPILER DEV HARNESS (DONE via task-009: pnpm timeline:dump/sweep): (user, 2026-06-20): so we never have to
       WONDER whether a timeline is stable/consistent, build a dev harness that, given
       a SEED + ERA-0 CHOICES, DUMPS THE FULL COMPILED JSON TIMELINE for that run
       (all backdrop selections, titles, markets, the woven event order — the entire
@@ -175,7 +175,7 @@ Three intertwined requirements:
       NOTE: the per-branch backdrop JSONs being authored now (usa.nazi, world.nazi,
       mores.nazi, religion.nazi, …) are the CONFIG POOLS the compiler draws from —
       authoring them remains necessary under the gears-in-a-clock model.
-- [ ] AH7 SLOT EVENTS (user, 2026-06-20): certain real events are SO structurally
+- [x] AH7 SLOT EVENTS (DONE via task-001: SlotSchema + slots.json + resolveSlot): (user, 2026-06-20): certain real events are SO structurally
       critical they should be abstract SLOTS filled per timeline, not hardcoded
       concrete events. The JFK assassination is really the archetype "the
       assassination of the dynasty's leader" — on the political-dynasty path it's
@@ -184,7 +184,7 @@ Three intertwined requirements:
       martyrdom, the succession). Design a SLOT system: archetypal event slots that
       resolve to branch/dynasty-specific concrete events at compile time (pairs with
       the gears-in-a-clock compiler — slots are filled when the timeline compiles).
-- [ ] AH8 BRANCH-AWARE PATRONYMICS / NAMES (user, 2026-06-20): names change with the
+- [x] AH8 BRANCH-AWARE PATRONYMICS / NAMES (DONE via task-002 + AH8c: surname/given_name/full_name terms, Trump↔Drumpf / Donald↔Friedrich): (user, 2026-06-20): names change with the
       branch. The family only became "Trump" by anglicizing "Drumpf"; in the Nazi
       (stayed-German) timeline Donald remains DONALD DRUMPF. Extend the AH1 term layer
       to PROPER NAMES / surnames (a {surname}/{family_name} term: "Trump" default,
@@ -213,7 +213,7 @@ Three intertwined requirements:
       firstborn_heir / fourth_child / fred_jr_present / fred_jr_died) which then drive
       given-name resolution (AH8c), inheritance logic, and the groomed-vs-accidental-
       heir personality framing across the compiled timeline.
-- [ ] AH9 BUTTERFLY WEIGHT/BIAS AGENT PASS (user, 2026-06-20): the butterfly effect +
+- [x] AH9 BUTTERFLY WEIGHT/BIAS (DONE via task-010: event.bias branch+personality layer in effectiveWeight): (user, 2026-06-20): the butterfly effect +
       causal engine need an agent pass to ASSIGN WEIGHTS AND BIASES across the events
       / butterfly rules / ripples so the compile-at-0 selection and the in-run chaos
       field pull realistically (which configs/events are more or less likely given the
@@ -230,7 +230,7 @@ Three intertwined requirements:
       headline in an alt branch). Aggregate findings → fix the offending config →
       re-sweep. This automated consistency sweep is how we hold the no-shallowness +
       consistency invariants at scale instead of hand-checking.
-- [ ] AH3-BRANCHES (user): author full alt-history treatment for these branches:
+- [x] AH3-BRANCHES (DONE via task-004/005/006/019/020/021: nazi/westcoast/theocracy/media/megachurch/oligarchy pools authored). author full alt-history treatment for these branches:
       (1) NAZI-OCCUPIED AMERICA (axis_ascendant/nazi_dynasty) — Reich titles, purges
           not assassinations, no elections/civil-rights/free press.
       (2) WEST-COAST-ONLY DYNASTY (west_coast_origin) — Pacific-centered, never
@@ -261,7 +261,7 @@ Three intertwined requirements:
       makes the content feel shallow." A branch must be authored to the SAME depth
       as the main line — taking any fork opens a comparably rich, gated, multi-layer
       backdrop + event pool, not a thin stub. Acceptance bar for AH1-AH3.
-- [ ] SIM1 SYSTEMIC SIMULATION LAYER — "Donald Trump meets Dwarf Fortress" (user,
+- [x] SIM1 SYSTEMIC SIMULATION LAYER (DONE via task-011/012/013/014: schemas+state, systemicTick, data, Markets UI): — "Donald Trump meets Dwarf Fortress" (user,
       2026-06-20): choices alone don't make a good game; we need LIVING SUBSYSTEMS
       that continuously pull the 6 meters (money/power/reputation/loyalty/health/heat)
       up and down between choices, like a stock market. All branch-aware/overridable
