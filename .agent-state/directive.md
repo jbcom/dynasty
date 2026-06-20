@@ -116,7 +116,7 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 
 ### Phase L — Verify
 - [x] L1 Determinism + schema tests; seeded playthroughs reach a spread of endings; live screenshots — DONE: 147 unit tests green (determinism + schema + roles + endings + timelines); 300-seed sweep shows 7 distinct endings; reachability probe found + fixed a real bug (science-ladder players were pre-empted by Earth-bound endgame endings at era 7 → added notFlags [mars_program, back_science]); app builds + runs, live-verified via chrome-devtools (title, play screen, seven-scope News HUD, era progression) with ZERO console errors.
-- [ ] [WAIT] L2 PR #8 open (https://github.com/jbcom/maga-money-moves/pull/8). Reviewer trio DONE + folded (security clean; simplifier 2 fixes; code-review HIGH role-resolver trap fixed + regression test). 148 unit + 55 browser tests, biome, typecheck all green; app live-verified. Waiting on CI; then resolve any bot threads and squash-merge.
+- [ ] [WAIT-USER] L2 PR #8 (https://github.com/jbcom/maga-money-moves/pull/8) — CI GREEN (build-and-test pass), mergeable, no unresolved threads, all local gates green, app live-verified, reviewer trio folded. BLOCKED only by the jbcom ruleset's required approving review: GitHub forbids self-approval and the automerge workflow auto-approves ONLY dependabot/release-please PRs, not feature PRs. Auto-merge is disabled at the repo level. TRUE BLOCKER — needs a human collaborator to approve PR #8, then it squash-merges. Nothing else the agent can do (no --admin, no self-approve).
 
 ## Batch — maga-money-moves-full-build (batch-20260619-build)
 
