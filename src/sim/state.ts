@@ -37,6 +37,13 @@ export interface EndState {
 /** Accumulated ripple pressure per channel (the chaos engine's running state, part C). */
 export type RippleField = Record<string, number>;
 
+/** A scheduled delayed consequence awaiting its due year. */
+export interface PendingConsequence {
+  consequenceId: string;
+  /** In-world year the effect is due to land. */
+  dueYear: number;
+}
+
 /** The complete, serializable game state. Pure data — no DOM, no functions. */
 export interface GameState {
   seed: string;
@@ -59,6 +66,10 @@ export interface GameState {
   lastEventYear: number;
   /** Accumulated ripple pressure by channel. */
   ripples: RippleField;
+  /** Delayed consequences scheduled to land in a future year. */
+  pending: PendingConsequence[];
+  /** Consequence ids that have already landed (non-repeatable fire once). */
+  firedConsequences: string[];
   ledger: LedgerEntry[];
   history: HistoryEntry[];
   /** Set once the run ends; null while in progress. */
@@ -83,6 +94,8 @@ export function initState(content: Content, seed: string): GameState {
     eraEventCount: 0,
     lastEventYear: firstEra.yearStart,
     ripples: {},
+    pending: [],
+    firedConsequences: [],
     ledger: [],
     history: [],
     end: null,

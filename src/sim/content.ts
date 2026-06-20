@@ -3,6 +3,7 @@ import {
   AssetsFileSchema,
   type ButterflyRule,
   ButterflyRulesSchema,
+  type Consequence,
   type Era,
   EraEventsSchema,
   EraIndexSchema,
@@ -23,6 +24,7 @@ export interface Content {
   eventsByEra: Map<string, GameEvent[]>;
   allEvents: GameEvent[];
   butterflyRules: ButterflyRule[];
+  consequences: Consequence[];
   assets: Asset[];
 }
 
@@ -83,6 +85,7 @@ export function buildContent(raw: RawContent): Content {
     eventsByEra,
     allEvents,
     butterflyRules: butterfly.rules,
+    consequences: butterfly.consequences,
     assets: assetsFile.assets,
   };
 }

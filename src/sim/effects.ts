@@ -1,4 +1,9 @@
-import { applyRipples, buildLedgerEntries } from "./butterfly";
+import {
+  applyRipples,
+  buildLedgerEntries,
+  landDueConsequences,
+  scheduleConsequences,
+} from "./butterfly";
 import type { Content } from "./content";
 import { pickNextEvent } from "./events";
 import { applyDelta } from "./meters";
@@ -61,11 +66,14 @@ export function applyChoice(
     rng.fork(`${event.id}:${choice.id}:${state.history.length}`),
   );
 
-  // 4. Visible ledger chains.
-  const newLedger = buildLedgerEntries(content, event, choice, ripples, state.ledger.length);
+  // 4. Visible ledger chains (deduped against the existing ledger).
+  const newLedger = buildLedgerEntries(content, event, choice, ripples, state.ledger);
 
   // 5. Record history + fired event.
   const firedEvents = event.repeatable ? state.firedEvents : [...state.firedEvents, event.id];
+
+  // 6. Schedule any delayed consequences this choice triggers.
+  const pending = scheduleConsequences(content, { ...state, year: event.year }, choice);
 
   const resolved: GameState = {
     ...state,
@@ -73,6 +81,7 @@ export function applyChoice(
     personality,
     flags,
     ripples,
+    pending,
     ledger: [...state.ledger, ...newLedger],
     history: [...state.history, { eventId: event.id, choiceId, year: event.year }],
     firedEvents,
@@ -80,13 +89,24 @@ export function applyChoice(
     lastEventYear: Math.max(state.lastEventYear, event.year),
   };
 
-  // 6. Immediate end check (e.g. a choice that drops health to 0), else advance.
+  // 7. Immediate end check (e.g. a choice that drops health to 0), else advance.
   const immediateEnd = detectEnd(content, resolved);
-  const advanced = immediateEnd
-    ? { ...resolved, end: immediateEnd }
-    : advanceTimeline(content, resolved);
+  if (immediateEnd) {
+    return { state: { ...resolved, end: immediateEnd }, newLedger };
+  }
+  const advanced = advanceTimeline(content, resolved);
 
-  return { state: advanced, newLedger };
+  // 8. Land any delayed consequences now due (post-advance year), unless the
+  // timeline advance itself ended the run.
+  if (advanced.end) {
+    return { state: advanced, newLedger };
+  }
+  const landed = landDueConsequences(content, advanced);
+  // Re-check end conditions in case a consequence (e.g. a debt bomb) was lethal.
+  const postEnd = detectEnd(content, landed.state);
+  const finalState = postEnd ? { ...landed.state, end: postEnd } : landed.state;
+
+  return { state: finalState, newLedger: [...newLedger, ...landed.newLedger] };
 }
 
 /**

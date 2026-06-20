@@ -145,8 +145,33 @@ export const ButterflyRuleSchema = z.object({
 });
 export type ButterflyRule = z.infer<typeof ButterflyRuleSchema>;
 
+/**
+ * A delayed/compounding consequence: when `cause` (a flag or ripple channel)
+ * becomes active, schedule an effect to land `delayYears` later (in-world). The
+ * effect applies meter + personality deltas, can set flags, and is gated by an
+ * optional `requires`. This is what turns isolated choices into causal chains
+ * that pay off (or detonate) much later in the life.
+ */
+export const ConsequenceSchema = z.object({
+  id: z.string().min(1),
+  cause: z.string().min(1),
+  /** In-world years between the cause firing and the effect landing. */
+  delayYears: z.number().int().min(0).default(0),
+  /** Only land if these conditions still hold when due. */
+  requires: RequiresSchema.optional(),
+  effects: MeterDeltaSchema.default({}),
+  personality: PersonalityDeltaSchema.default({}),
+  setFlags: z.array(z.string()).default([]),
+  /** Shown in the Butterfly Log when the delayed consequence lands. */
+  chainTemplate: z.string().min(1),
+  /** If true, can fire more than once (each fresh cause occurrence). Default once. */
+  repeatable: z.boolean().default(false),
+});
+export type Consequence = z.infer<typeof ConsequenceSchema>;
+
 export const ButterflyRulesSchema = z.object({
   rules: z.array(ButterflyRuleSchema).default([]),
+  consequences: z.array(ConsequenceSchema).default([]),
 });
 export type ButterflyRules = z.infer<typeof ButterflyRulesSchema>;
 

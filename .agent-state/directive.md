@@ -11,7 +11,7 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 
 ### Phase H — Research & Causality Model
 - [x] H1 Web-research timeline; index pivotal events w/ dated cause→effect (Wikipedia bio + business career indexed; key endings/ideology anchors pulled)
-- [ ] H2 Causality graph model (chains, prereqs, delayed/compounding effects)
+- [x] H2 Causality graph model (delayed/compounding consequences w/ prereqs) + butterfly promoted to a subpackage (ripples/ledger/consequences) + ledger DEDUP fix (no more duplicate chains under different dates)
 - [x] H3 Personality vector schema + sim (ideology + grandiosity; outward vs inward) — + time-monotonicity fix (no backward years) + timeline self-reveal (no future spoilers)
 
 ### Phase I — Endings
