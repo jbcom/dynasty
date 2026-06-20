@@ -53,7 +53,7 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 - [x] F10 Era 10 — Red Planet & Beyond (2080+) [extrapolated]
 
 ### Phase G — Integration, Android, Polish
-- [ ] G1 Full e2e playthroughs to each end state
+- [x] G1 Full e2e playthroughs to each end state
 - [ ] G2 Capacitor Android setup + sync
 - [ ] G3 Verify app RUNS — Chromium screenshot of real playthrough
 - [ ] G4 Reviewer trio + green PR
