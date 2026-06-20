@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
+import boyhoodJson from "../../data/eras/boyhood.json";
+import originsJson from "../../data/eras/origins.json";
 import termsJson from "../../data/terms.json";
-import { TermsFileSchema } from "../schema";
+import { EraEventsSchema, TermsFileSchema } from "../schema";
+import { meetsRequires } from "../events";
 import { applyTerms, isNamedHeir, resolveFullName, resolveGivenName, resolveTerm } from "../terms";
 
 const terms = TermsFileSchema.parse(termsJson).terms;
@@ -85,5 +88,93 @@ describe("birth-order given-name resolution (AH8d / de-4a)", () => {
     expect(isNamedHeir(["only_child"])).toBe(true);
     expect(isNamedHeir(["fourth_child"])).toBe(false);
     expect(isNamedHeir([])).toBe(false);
+  });
+});
+
+describe("birth-order lever — ev_the_children prologue event (de-4a)", () => {
+  const origins = EraEventsSchema.parse(originsJson);
+  const boyhood = EraEventsSchema.parse(boyhoodJson);
+
+  const theChildren = origins.events.find((e) => e.id === "ev_the_children");
+  const brothersShadow = boyhood.events.find((e) => e.id === "ev_brothers_shadow");
+  const contentHeir = boyhood.events.find((e) => e.id === "ev_content_heir_dream");
+
+  it("ev_the_children exists in origins and carries all four birth-order choices", () => {
+    expect(theChildren).toBeDefined();
+    const ids = theChildren!.choices.map((c) => c.id);
+    expect(ids).toContain("firstborn_groomed_heir");
+    expect(ids).toContain("only_child_sole_heir");
+    expect(ids).toContain("fourth_child_accidental_heir");
+    expect(ids).toContain("fourth_child_brother_dies");
+  });
+
+  it("firstborn_groomed_heir sets firstborn_heir + fred_jr_present + groomed_heir", () => {
+    const ch = theChildren!.choices.find((c) => c.id === "firstborn_groomed_heir")!;
+    expect(ch.setFlags).toContain("firstborn_heir");
+    expect(ch.setFlags).toContain("fred_jr_present");
+    expect(ch.setFlags).toContain("groomed_heir");
+    expect(ch.setFlags).not.toContain("only_child");
+    expect(ch.setFlags).not.toContain("accidental_heir");
+  });
+
+  it("only_child_sole_heir sets only_child + firstborn_heir + groomed_heir (no fred_jr_present)", () => {
+    const ch = theChildren!.choices.find((c) => c.id === "only_child_sole_heir")!;
+    expect(ch.setFlags).toContain("only_child");
+    expect(ch.setFlags).toContain("firstborn_heir");
+    expect(ch.setFlags).toContain("groomed_heir");
+    expect(ch.setFlags).not.toContain("fred_jr_present");
+    expect(ch.setFlags).not.toContain("accidental_heir");
+  });
+
+  it("fourth_child_accidental_heir sets fourth_child + fred_jr_present + accidental_heir (not died)", () => {
+    const ch = theChildren!.choices.find((c) => c.id === "fourth_child_accidental_heir")!;
+    expect(ch.setFlags).toContain("fourth_child");
+    expect(ch.setFlags).toContain("fred_jr_present");
+    expect(ch.setFlags).toContain("accidental_heir");
+    expect(ch.setFlags).not.toContain("fred_jr_died");
+    expect(ch.setFlags).not.toContain("groomed_heir");
+  });
+
+  it("fourth_child_brother_dies sets fourth_child + fred_jr_died + accidental_heir (not present)", () => {
+    const ch = theChildren!.choices.find((c) => c.id === "fourth_child_brother_dies")!;
+    expect(ch.setFlags).toContain("fourth_child");
+    expect(ch.setFlags).toContain("fred_jr_died");
+    expect(ch.setFlags).toContain("accidental_heir");
+    expect(ch.setFlags).not.toContain("fred_jr_present");
+    expect(ch.setFlags).not.toContain("groomed_heir");
+  });
+
+  /** Minimal stub satisfying meetsRequires's flag/meter/personality checks. */
+  const stubState = (flags: string[]) =>
+    ({
+      flags,
+      meters: {},
+      personality: { ideology: 0, grandiosity: 0, outward: 0, inward: 0 },
+      age: 20,
+      // biome-ignore lint/suspicious/noExplicitAny: test stub, not a full GameState
+    }) as any;
+
+  it("ev_brothers_shadow gates on fred_jr_present — fires for fourth-child runs only", () => {
+    expect(brothersShadow).toBeDefined();
+    const req = brothersShadow!.requires!;
+    // fourthChild run with fred_jr alive: eligible
+    expect(meetsRequires(stubState(["fourth_child", "fred_jr_present"]), req)).toBe(true);
+    // firstborn run: Fred Jr. never born, event must not fire
+    expect(meetsRequires(stubState(["firstborn_heir"]), req)).toBe(false);
+    // only_child run: same — no elder brother
+    expect(meetsRequires(stubState(["only_child", "firstborn_heir"]), req)).toBe(false);
+    // fourth_child but brother already died before boyhood: also blocked
+    expect(meetsRequires(stubState(["fourth_child", "fred_jr_died"]), req)).toBe(false);
+  });
+
+  it("ev_content_heir_dream also gates on fred_jr_present (scene references Freddy)", () => {
+    expect(contentHeir).toBeDefined();
+    const req = contentHeir!.requires!;
+    // Historical fourth-child run with Freddy alive: eligible (given at_nyma)
+    expect(meetsRequires(stubState(["fourth_child", "fred_jr_present", "at_nyma"]), req)).toBe(
+      true,
+    );
+    // Only-child run: Freddy doesn't exist → blocked
+    expect(meetsRequires(stubState(["only_child", "at_nyma"]), req)).toBe(false);
   });
 });
