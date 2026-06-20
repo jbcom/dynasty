@@ -120,3 +120,45 @@ describe("autoPlaythrough", () => {
     expect(a.end?.kind).toBe("victory");
   });
 });
+
+describe("market operations (SIM1 nb-006)", () => {
+  it("a choice's marketOps take/adjust a position so the market is no longer inert", () => {
+    const raw = validRaw();
+    // Add a market + attach a marketOp to the first boyhood choice.
+    const withMarket = {
+      ...raw,
+      markets: {
+        markets: [
+          {
+            id: "nyc_housing",
+            label: "Real Estate",
+            kind: "housing",
+            baseIndex: 100,
+            regimes: [{ id: "carry", baseline: 110, drift: 0.02, volatility: 0.03, dwell: 8 }],
+            coupling: { money: 1 },
+            housing: { region: "outer_boroughs", rentYield: 0.05, vacancy: 0, debtService: 0 },
+          },
+        ],
+      },
+    };
+    const c = buildContent(withMarket);
+    const firstEra = c.eras[0];
+    if (!firstEra) throw new Error("no era");
+    const boy = (c.eventsByEra.get(firstEra.id) ?? [])[0];
+    if (!boy) throw new Error("no event");
+    const choice = boy.choices[0];
+    if (!choice) throw new Error("no choice");
+    const event: GameEvent = {
+      ...boy,
+      choices: [
+        { ...choice, marketOps: [{ market: "nyc_housing", addHolding: 500000, setLeverage: 4 }] },
+        ...boy.choices.slice(1),
+      ],
+    };
+    const before = initState(c, "seed");
+    expect(before.markets.nyc_housing?.holding).toBe(0); // inert at start
+    const after = applyChoice(c, before, event, choice.id, createRng("m")).state;
+    expect(after.markets.nyc_housing?.holding).toBe(500000);
+    expect(after.markets.nyc_housing?.leverage).toBe(4);
+  });
+});

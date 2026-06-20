@@ -229,4 +229,14 @@ describe("systemicTick (SIM1 task-012)", () => {
     expect(r.state.ranks.commercial?.rung).toBeGreaterThan(0); // not static at 0
     expect(r.state.ranks.commercial?.peak).toBe(r.state.ranks.commercial?.rung);
   });
+
+  it("heat passively decays per year (not a one-way accumulator) — nb-006", () => {
+    const c = content();
+    const hot = { ...initState(c, "seed"), meters: { ...initState(c, "seed").meters, heat: 50 } };
+    const r = systemicTick(c, hot, createRng("heat"));
+    expect(r.state.meters.heat).toBeLessThan(50);
+    // ...but heat never decays below 0.
+    const cool = { ...initState(c, "seed"), meters: { ...initState(c, "seed").meters, heat: 0 } };
+    expect(systemicTick(c, cool, createRng("h0")).state.meters.heat).toBe(0);
+  });
 });

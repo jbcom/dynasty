@@ -218,6 +218,13 @@ export function systemicTick(content: Content, state: GameState, rng: Rng): Syst
     addDelta(totalDelta, tickRank(ladder, rs));
   }
 
+  // HEAT decay: scandal cools over time (news cycles move on, cases settle), so
+  // heat is a manageable pressure rather than a one-way accumulator. Small per
+  // in-world year, and only while there is heat to bleed off.
+  if (state.meters.heat > 0) {
+    totalDelta.heat = (totalDelta.heat ?? 0) - 1.5;
+  }
+
   // Currency: resolve + detect redenomination.
   let currencyId = state.currencyId;
   if (content.currencies.length > 0) {

@@ -79,6 +79,25 @@ export function applyChoice(
   // 6. Schedule any delayed consequences this choice triggers.
   const pending = scheduleConsequences(content, { ...state, year: event.year }, choice);
 
+  // 4b. Market operations (SIM1): a choice can take/adjust a market position so
+  // the systemic tick actually moves the player's money (otherwise holding stays
+  // 0 and markets are inert). set* overwrites, add* adjusts.
+  let markets = state.markets;
+  if (choice.marketOps && choice.marketOps.length > 0) {
+    markets = { ...state.markets };
+    for (const op of choice.marketOps) {
+      const cur = markets[op.market];
+      if (!cur) continue; // unknown market id — ignore (validated content won't hit this)
+      let holding = cur.holding;
+      if (op.setHolding !== undefined) holding = op.setHolding;
+      if (op.addHolding !== undefined) holding += op.addHolding;
+      let leverage = cur.leverage;
+      if (op.setLeverage !== undefined) leverage = op.setLeverage;
+      if (op.addLeverage !== undefined) leverage = Math.max(0, leverage + op.addLeverage);
+      markets[op.market] = { ...cur, holding, leverage };
+    }
+  }
+
   const resolved: GameState = {
     ...state,
     meters,
@@ -86,6 +105,7 @@ export function applyChoice(
     flags,
     ripples,
     pending,
+    markets,
     ledger: [...state.ledger, ...newLedger],
     history: [...state.history, { eventId: event.id, choiceId, year: event.year }],
     firedEvents,
