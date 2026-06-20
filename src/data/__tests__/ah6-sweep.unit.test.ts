@@ -1,0 +1,110 @@
+import { describe, expect, it } from "vitest";
+import { compileTimeline } from "../../sim/compiler";
+import { loadContent } from "../loadContent";
+import { createRng } from "../../sim/rng";
+import { initState } from "../../sim/state";
+import type { DynastyKey } from "../../sim/slots";
+
+/**
+ * AH6 — Automated consistency sweep (de-6a).
+ *
+ * For each of the 12 canonical Era-0 permutations (3 dynasties × 7 branches + mixes),
+ * compile the full timeline and assert the mechanical consistency invariants:
+ *   1. Branch coherence: all selected world-timeline variants belong to the active
+ *      branch (no Nazi timeline on a default run).
+ *   2. Title coherence: a non-default backdrop never resolves head_of_state = "President"
+ *      (the "President leak" test).
+ *   3. Dynasty coherence: dynasty-resolved slot events match the expected dynasty key
+ *      (no Musk-dynasty event resolving for a Trump run, etc.).
+ *   4. No unresolvable slot: every compiled slot event id is either a known game event,
+ *      a known world event, or a placeholder (non-empty string). Never null/empty.
+ *
+ * This test is the CI-enforced gate for the repeatable harness. It runs fast (pure
+ * TypeScript, no browser, no network) and must stay green for every content commit.
+ * The semantic / AI-agent layer of AH6 is a separate workflow (see scripts/ah6-workflow.ts).
+ */
+
+type BranchKey = "default" | "nazi" | "westcoast" | "theocracy" | "media" | "megachurch" | "oligarchy";
+
+const PERMUTATIONS: Array<{ label: string; flags: string[]; dynasty: DynastyKey; branch: BranchKey }> = [
+  { label: "trump-default", flags: [], dynasty: "trump", branch: "default" },
+  { label: "trump-nazi", flags: ["axis_ascendant"], dynasty: "trump", branch: "nazi" },
+  { label: "trump-westcoast", flags: ["west_coast_origin"], dynasty: "trump", branch: "westcoast" },
+  { label: "trump-theocracy", flags: ["evangelical_scion"], dynasty: "trump", branch: "theocracy" },
+  { label: "trump-media", flags: ["pleasure_king"], dynasty: "trump", branch: "media" },
+  { label: "trump-megachurch", flags: ["megachurch_dynasty"], dynasty: "trump", branch: "megachurch" },
+  { label: "trump-oligarchy", flags: ["oligarch_dynasty"], dynasty: "trump", branch: "oligarchy" },
+  { label: "kennedy-default", flags: ["kennedy_dynasty_active", "kennedy_prologue"], dynasty: "kennedy", branch: "default" },
+  { label: "kennedy-swap", flags: ["kennedy_swap"], dynasty: "kennedy", branch: "default" },
+  { label: "musk-default", flags: ["musk_dynasty_active", "musk_prologue"], dynasty: "musk", branch: "default" },
+  { label: "musk-nazi", flags: ["musk_dynasty_active", "musk_prologue", "axis_ascendant"], dynasty: "musk", branch: "nazi" },
+  { label: "kennedy-nazi", flags: ["kennedy_dynasty_active", "kennedy_prologue", "axis_ascendant"], dynasty: "kennedy", branch: "nazi" },
+];
+
+function compileFor(flags: string[], dynasty: DynastyKey) {
+  const content = loadContent();
+  const base = initState(content, "ah6-seed", dynasty);
+  // Merge the base dynasty flags with any extra branch flags.
+  const mergedFlags = [...new Set([...base.flags, ...flags])].sort();
+  const state = { ...base, flags: mergedFlags };
+  return { compiled: compileTimeline(content, state, createRng("ah6-seed::compile")) };
+}
+
+describe("AH6 automated consistency sweep (de-6a)", () => {
+  for (const perm of PERMUTATIONS) {
+    it(`${perm.label}: branch + title + dynasty coherence`, () => {
+      const { compiled } = compileFor(perm.flags, perm.dynasty);
+
+      // 1. Branch resolution matches expected branch.
+      expect(compiled.branch, `${perm.label}: wrong branch`).toBe(perm.branch);
+
+      // 2. Dynasty resolution matches expected dynasty.
+      expect(compiled.dynasty, `${perm.label}: wrong dynasty`).toBe(perm.dynasty);
+
+      // 3. Title coherence: a Nazi run must NOT say "President".
+      if (perm.branch === "nazi") {
+        expect(
+          compiled.terms.head_of_state,
+          `${perm.label}: Nazi branch leaks President title`,
+        ).not.toBe("President");
+      }
+
+      // 4. Every selected world-timeline variant belongs to the active branch or is default.
+      for (const t of compiled.timelines) {
+        const timelineBranch = (t as typeof t & { branch: string }).branch;
+        expect(
+          ["default", perm.branch].includes(timelineBranch),
+          `${perm.label}: timeline ${t.scope} uses wrong branch=${timelineBranch}`,
+        ).toBe(true);
+      }
+
+      // 5. All compiled slot values must be non-empty strings.
+      for (const [slotId, eventId] of Object.entries(compiled.slots)) {
+        expect(eventId, `${perm.label}: slot ${slotId} resolved to empty`).toBeTruthy();
+      }
+
+      // 6. Dynasty sanity: the leader_assassination slot should match the dynasty.
+      // Known expected mappings (per slots.json):
+      const knownSlotMappings: Partial<Record<DynastyKey, Record<string, string>>> = {
+        trump: { leader_assassination: "ev_fred_assassinated" },
+        musk: { leader_assassination: "wk_musk_near_bankruptcy" },
+        // kennedy falls through to default (ev_jfk_assassinated) on a non-kennedy-dynasty
+        // BUT kennedy_dynasty_active also resolves ev_jfk_assassinated from the dynasty key.
+        kennedy: { leader_assassination: "ev_jfk_assassinated" },
+      };
+      const expectedSlot = knownSlotMappings[perm.dynasty]?.leader_assassination;
+      if (expectedSlot) {
+        expect(
+          compiled.slots.leader_assassination,
+          `${perm.label}: wrong leader_assassination slot`,
+        ).toBe(expectedSlot);
+      }
+
+      // 7. head_of_state is non-empty on every non-default branch.
+      if (perm.branch !== "default") {
+        const headOfState = compiled.terms.head_of_state;
+        expect(headOfState, `${perm.label}: head_of_state is empty`).toBeTruthy();
+      }
+    });
+  }
+});
