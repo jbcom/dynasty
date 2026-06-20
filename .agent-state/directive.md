@@ -75,7 +75,8 @@ spec) — not re-queued here.
 ### task-013 SIM1 phase 3 — data + per-era table
 - [x] task-013 markets.json (6 markets incl. attention+crypto+housing, regimes/couplings), currencies.json (branch+location+year-window catalog incl. the Weimar Rentenmark ÷1e12 wipe), ranks.json (4 ladders, political→head of state); real data drives a deterministic tick end-to-end; 13 tests; app builds. (Per-era applicability wiring of which markets/ranks are live per era — a refinement — folds into task-022 moral-axis + later balance; data foundation shipped.)
 ### task-014 SIM1 phase 4 — UI surfacing
-- [ ] task-014 Markets tab + Ranks Dossier sub-panel + branch-aware currency relabel via term layer
+- [x] task-014 SIM1 UI: MarketsView component (live market index/regime/position badges + the 4 rank ladders with fall-from-grace marker) wired as a 💹 tab (shown when markets/ranks exist); branch-aware currency relabel via resolveCurrency + formatMoneyIn (net worth reads ℛℳ on the Nazi branch, etc.). 3 browser tests; app builds + renders. (Put markets in their own tab rather than a Dossier sub-panel — earns the space given the systemic depth.)
+- [x] SEEDRANDOM / MULTI-LAYER PRNG (user, 2026-06-20) — CONFIRMED already the determinism backbone: seedrandom ^3.0.5 + @types/seedrandom ^3.0.8 installed, wrapped behind createRng (src/sim/rng.ts) with LAYERED independent streams via fork(label) (used pervasively: mkt:/systemic:/choose:/pick: layers). Math.random banned in src/sim by the commit gate. Fork-independence + determinism already tested (rng.unit.test.ts).
 ### task-015 SIM1 phase 5 — balance + polish
 - [ ] task-015 balance pass; telegraphed currency-hedge survival play; crypto/attention polish
 ### task-016 AH6 agent-sweep verification

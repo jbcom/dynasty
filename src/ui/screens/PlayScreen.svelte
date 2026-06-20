@@ -5,6 +5,7 @@ import Portrait from "../../render/Portrait.svelte";
 import ButterflyLog from "../ButterflyLog.svelte";
 import Dossier from "../Dossier.svelte";
 import EventCard from "../EventCard.svelte";
+import MarketsView from "../MarketsView.svelte";
 import MeterHud from "../MeterHud.svelte";
 import NewsTicker from "../NewsTicker.svelte";
 import PersonalityDial from "../PersonalityDial.svelte";
@@ -36,13 +37,15 @@ const drift = $derived(axis < -25 ? "utopia" : axis > 25 ? "tyranny" : "neutral"
 const branch = $derived(branchOf(view.state));
 const term = $derived((text: string) => applyTerms(text, content.terms, branch));
 
-type Tab = "event" | "news" | "timeline" | "stats" | "butterfly" | "dossier";
+type Tab = "event" | "news" | "markets" | "timeline" | "stats" | "butterfly" | "dossier";
 let tab = $state<Tab>("event");
 const hasNews = $derived(content.worldTimelines.length > 0);
+const hasMarkets = $derived(content.markets.length > 0 || content.ranks.length > 0);
 
 const tabs = $derived<Array<{ id: Tab; label: string }>>([
   { id: "event", label: "Now" },
   ...(hasNews ? [{ id: "news" as Tab, label: "📰" }] : []),
+  ...(hasMarkets ? [{ id: "markets" as Tab, label: "💹" }] : []),
   { id: "timeline", label: "Timeline" },
   { id: "stats", label: "Stats" },
   { id: "butterfly", label: "🦋" },
@@ -66,6 +69,8 @@ const tabs = $derived<Array<{ id: Tab; label: string }>>([
 {#snippet infoTab()}
   {#if tab === "news"}
     <NewsTicker {content} gameState={view.state} {term} />
+  {:else if tab === "markets"}
+    <MarketsView {content} gameState={view.state} />
   {:else if tab === "timeline"}
     <TimelineView {content} gameState={view.state} />
   {:else if tab === "stats"}

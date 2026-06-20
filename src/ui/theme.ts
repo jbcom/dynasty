@@ -22,11 +22,16 @@ export function tokenValue(name: string): string {
 
 /** Format a money value as a net-worth string ($1.2B, $340M, $12K, $900). */
 export function formatMoney(value: number): string {
+  return formatMoneyIn(value, "$");
+}
+
+/** Format a money value with a branch-aware currency symbol (SIM1 currency layer). */
+export function formatMoneyIn(value: number, symbol: string): string {
   const abs = Math.abs(value);
   const sign = value < 0 ? "-" : "";
-  if (abs >= 1e12) return `${sign}$${(abs / 1e12).toFixed(1)}T`;
-  if (abs >= 1e9) return `${sign}$${(abs / 1e9).toFixed(1)}B`;
-  if (abs >= 1e6) return `${sign}$${(abs / 1e6).toFixed(1)}M`;
-  if (abs >= 1e3) return `${sign}$${(abs / 1e3).toFixed(0)}K`;
-  return `${sign}$${Math.round(abs)}`;
+  if (abs >= 1e12) return `${sign}${symbol}${(abs / 1e12).toFixed(1)}T`;
+  if (abs >= 1e9) return `${sign}${symbol}${(abs / 1e9).toFixed(1)}B`;
+  if (abs >= 1e6) return `${sign}${symbol}${(abs / 1e6).toFixed(1)}M`;
+  if (abs >= 1e3) return `${sign}${symbol}${(abs / 1e3).toFixed(0)}K`;
+  return `${sign}${symbol}${Math.round(abs)}`;
 }
