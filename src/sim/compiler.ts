@@ -1,4 +1,4 @@
-import { type BranchKey, branchOf, isRoleFlipped } from "./branch";
+import { type BranchKey, branchOf } from "./branch";
 import type { Content } from "./content";
 import type { Rng } from "./rng";
 import type { Currency, Slot, WorldTimeline } from "./schema";
@@ -39,8 +39,6 @@ export interface CompiledTimeline {
   branch: BranchKey;
   /** The protagonist dynastic gear. */
   dynasty: DynastyKey;
-  /** Whether the Trump↔Musk role-flip overlay is active. */
-  roleFlipped: boolean;
   /** The Era-0 flags that drove the compilation. */
   era0Flags: string[];
   /** The active timeline variant per scope (default + branch-specific). */
@@ -91,7 +89,6 @@ export function compileTimeline(content: Content, state: GameState, _rng: Rng): 
     seed: state.seed,
     branch,
     dynasty,
-    roleFlipped: isRoleFlipped(state),
     era0Flags: [...state.flags].sort(),
     timelines: active.map((t) => ({
       scope: t.scope,

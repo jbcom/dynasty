@@ -10,7 +10,6 @@ import { meetsRequires, pickNextEvent } from "./events";
 import { applyDelta } from "./meters";
 import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
-import { resolveRoles } from "./roles";
 import type { Choice, GameEvent } from "./schema";
 import type { DynastyKey } from "./slots";
 import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
@@ -133,13 +132,6 @@ export function applyChoice(
     const active = timelinesForBranch(content.worldTimelines, branchOf(advanced));
     advanced = applyWorldFlags(advanced, hopped.year, active);
   }
-
-  // 8c. ROLE-SWAP INVARIANT: with all flags (the choice's, the consequences',
-  // and the broadcast timelines') now settled for this year, resolve who holds
-  // political power vs the commercial empire. Runs every step so a late flip
-  // (e.g. Musk takes power) re-routes Donald to the commercial path before any
-  // ending reads the role flags.
-  advanced = resolveRoles(advanced);
 
   // 8d. SYSTEMIC TICK (SIM1): the living substrate breathes for each elapsed
   // in-world year — markets walk, currency redenominates, rank ladders drip into

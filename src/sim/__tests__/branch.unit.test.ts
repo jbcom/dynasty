@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import originsJson from "../../data/eras/origins.json";
-import { branchOf, isRoleFlipped } from "../branch";
+import { branchOf } from "../branch";
 
 const withFlags = (...flags: string[]) => ({ flags });
 
@@ -46,14 +46,5 @@ describe("branch resolution (alt-history)", () => {
   it("prefers the more-specific branch when several signatures coexist", () => {
     // Nazi outranks west-coast (a Nazi family could also have a coast origin).
     expect(branchOf(withFlags("west_coast_origin", "axis_ascendant"))).toBe("nazi");
-  });
-
-  it("reports the role-flip overlay independently of the backdrop", () => {
-    expect(isRoleFlipped(withFlags("role_flip"))).toBe(true);
-    expect(isRoleFlipped(withFlags("axis_ascendant"))).toBe(false);
-    // The overlay rides on top of a backdrop without changing it.
-    const s = withFlags("axis_ascendant", "role_flip");
-    expect(branchOf(s)).toBe("nazi");
-    expect(isRoleFlipped(s)).toBe(true);
   });
 });

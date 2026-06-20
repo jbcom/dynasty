@@ -47,8 +47,3 @@ export function branchOf(state: Pick<GameState, "flags">): BranchKey {
   }
   return "default";
 }
-
-/** Whether the Trump↔Musk role-flip overlay is active on top of the backdrop. */
-export function isRoleFlipped(state: Pick<GameState, "flags">): boolean {
-  return state.flags.includes("role_flip");
-}
