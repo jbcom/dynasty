@@ -29,6 +29,11 @@ const TRUMP_POLITICAL_SIGNALS = [
   "embraced_tyranny",
   "warlord_king",
   "earth_god_king",
+  // Early-politics / alt-1990s presidency branch (M6/M7).
+  "early_presidency",
+  "two_term_president",
+  "one_term_legend",
+  "navigated_ussr_collapse",
 ];
 
 /** Raw signals that mean "Donald chose the purely commercial road." */

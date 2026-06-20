@@ -21,6 +21,15 @@ function lateState(over: Partial<ReturnType<typeof initState>> = {}) {
   return { ...s, eraIndex: content.eras.length - 1, year: 2120, age: 174, ...over };
 }
 
+// Content whose active era is order 7 (the victory era) — used to prove the
+// Earth-bound endgame endings do NOT pre-empt a player on the science ladder.
+const order7Era = { ...lateEra, id: "victory", order: 7 };
+const content7: Content = { ...built, eras: [...built.eras, order7Era] };
+function era7State(over: Partial<ReturnType<typeof initState>> = {}) {
+  const s = initState(content7, "seed");
+  return { ...s, eraIndex: content7.eras.length - 1, year: 2024, age: 78, ...over };
+}
+
 describe("data-driven endings — role-flip & world-aligned outcomes", () => {
   it("fires the role-flip tycoon ending when Musk is president and Trump went commercial", () => {
     const s = lateState({ flags: ["role_flip", "trump_commercial_path"].sort() });
@@ -66,5 +75,29 @@ describe("data-driven endings — role-flip & world-aligned outcomes", () => {
       meters: { ...base.meters, reputation: 70 },
     };
     expect(evaluateEnding(content, s)?.endingId).toBe("end_communist_utopia");
+  });
+
+  it("does NOT pre-empt a science-ladder player with the Earth-bound tyrant ending at era 7", () => {
+    // A god-king on the Mars program must keep going toward the stars, not end
+    // on Earth at the victory era. The notFlags gate is the science-path escape.
+    const base = era7State();
+    const s = {
+      ...base,
+      flags: ["mars_program"],
+      personality: { ideology: 70, grandiosity: 90, outward: 0, inward: 0 },
+      meters: { ...base.meters, power: 90 },
+    };
+    expect(evaluateEnding(content7, s)?.endingId).not.toBe("end_megalomaniac_king");
+  });
+
+  it("still ends the Earth-bound tyrant on the no-science path at era 7", () => {
+    const base = era7State();
+    const s = {
+      ...base,
+      flags: [],
+      personality: { ideology: 70, grandiosity: 90, outward: 0, inward: 0 },
+      meters: { ...base.meters, power: 90 },
+    };
+    expect(evaluateEnding(content7, s)?.endingId).toBe("end_megalomaniac_king");
   });
 });

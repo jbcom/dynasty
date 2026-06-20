@@ -2917,6 +2917,943 @@
           "outcome": "The cleanest exit there is: leave while the legend is golden. The stage goes dark, and you are free."
         }
       ]
+    },
+    {
+      "id": "ev_brand_pol_newspaper_ads",
+      "era": "brand",
+      "year": 1987,
+      "title": "Ads in the Papers",
+      "scene": "September 1987. You spend nearly $100,000 to run full-page ads in the New York Times, the Washington Post, and the Boston Globe — a blunt manifesto: Japan and Saudi Arabia and West Germany are getting a free ride on American soldiers while the trade deficit bleeds the country dry. America is being ripped off, and you have put your name on the complaint in the largest fonts money can buy. The phones light up. New Hampshire Republicans send you letters asking you to run. You never expected this.",
+      "researchNote": "In September 1987 Trump paid for full-page ads in the NYT, WaPo, and Boston Globe criticising US allies for relying on American military protection while running trade surpluses against the US; the ads generated enormous coverage and he subsequently gave a speech in Portsmouth, NH that drew an enthusiastic crowd and prompted a wave of letters urging him to run.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "trade",
+        "celebrity",
+        "protectionism"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [],
+        "notFlags": [
+          "ran_in_1988",
+          "early_presidency"
+        ],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_ride_the_wave",
+          "text": "Fly to New Hampshire and tell the crowd what the politicians won't — America is being taken for a ride and you will stop it.",
+          "effects": {
+            "reputation": 8,
+            "power": 5,
+            "heat": 7
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": 7,
+            "outward": 8
+          },
+          "setFlags": [
+            "political_curious",
+            "protectionist_ads",
+            "nh_crowd"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_1988_flirt",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The crowd is bigger than you expected. They want a billionaire who sounds angry on their behalf, and that role fits you like a suit."
+        },
+        {
+          "id": "pol_ads_only_brand",
+          "text": "Let the ads speak for themselves — a PR move, not a political one. File the crowd response and move on.",
+          "effects": {
+            "reputation": 4,
+            "power": 2,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 4,
+            "inward": 3
+          },
+          "setFlags": [
+            "political_curious",
+            "protectionist_ads"
+          ],
+          "ripples": [],
+          "outcome": "You have bought your way onto the national stage for a weekend. The NH letters go in a drawer — for now."
+        },
+        {
+          "id": "pol_ads_and_run_platform",
+          "text": "Treat this as the opening shot: draft a real platform — a wealth tax, universal health care, protectionist tariffs, zero nuclear proliferation — and start planning.",
+          "effects": {
+            "reputation": 7,
+            "power": 6,
+            "heat": 9,
+            "money": -20
+          },
+          "personality": {
+            "ideology": -9,
+            "grandiosity": 8,
+            "outward": 9
+          },
+          "setFlags": [
+            "political_curious",
+            "protectionist_ads",
+            "nh_crowd",
+            "early_platform_drafted"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_1988_flirt",
+              "weight": 0.95,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You have a platform before you have a party. Anti-proliferation, universal healthcare, tax the rich — and America First on trade. Something new is being born."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_1988_flirt",
+      "era": "brand",
+      "year": 1988,
+      "title": "The '88 Question",
+      "scene": "1988. George H.W. Bush is the front-runner and the Republican Party machine is humming. But you have name recognition, a crowd in New Hampshire, and an itch you cannot scratch with a casino deal. Oprah Winfrey has floated your name on television as a serious candidate. The question is whether a developer from Queens could actually beat the establishment — or whether you should wait.",
+      "researchNote": "By early 1988 Trump was openly discussed as a potential presidential candidate; he had received thousands of letters after the NH speech and was asked about running by multiple journalists, but ultimately decided against it, citing the need to focus on business.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "celebrity"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "political_curious"
+        ],
+        "notFlags": [
+          "ran_in_1988",
+          "early_presidency"
+        ],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_decline_88",
+          "text": "Pass on '88 — the business needs you and the moment is not quite right. Wait for Reagan's shadow to clear.",
+          "effects": {
+            "money": 40,
+            "power": 2,
+            "reputation": 2
+          },
+          "personality": {
+            "inward": 4
+          },
+          "setFlags": [
+            "political_curious",
+            "passed_on_1988"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_1992_primary_entry",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A conscious delay. The crowd goes home. The itch remains, and you make a private promise to yourself."
+        },
+        {
+          "id": "pol_endorse_and_advise",
+          "text": "Back Bush publicly and position yourself as the blunt adviser Washington would never take seriously — until they have to.",
+          "effects": {
+            "power": 5,
+            "reputation": 3,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": -2,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "political_curious",
+            "passed_on_1988",
+            "bush_advisor"
+          ],
+          "ripples": [],
+          "outcome": "Bush wins, inherits the Cold War endgame, and occasionally returns your calls. You accumulate chits."
+        },
+        {
+          "id": "pol_run_88_liberal",
+          "text": "Run in 1988 — as a left-of-center independent: protectionist trade, a wealth tax, health care for every American, and zero new nukes.",
+          "effects": {
+            "money": -80,
+            "reputation": 10,
+            "power": 8,
+            "heat": 12,
+            "health": -3
+          },
+          "personality": {
+            "ideology": -12,
+            "grandiosity": 9,
+            "outward": 10
+          },
+          "setFlags": [
+            "political_curious",
+            "ran_in_1988",
+            "early_platform_drafted",
+            "protectionist_run"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_early_campaign_surge",
+              "weight": 0.95,
+              "polarity": 1
+            }
+          ],
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {
+              "ideology": "<=-5"
+            }
+          },
+          "outcome": "You announce in the winter of '88. The campaign is impossible, the coverage is enormous, and the establishment has no idea what to do with you."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_1992_primary_entry",
+      "era": "brand",
+      "year": 1991,
+      "title": "Into the '92 Race",
+      "scene": "Late 1991. The Cold War just ended in a cascade of failed coups and dissolved republics. George H.W. Bush's approval rating is 89%, then the recession bites and it collapses. The gap opens. You watch Pat Buchanan and Ross Perot map the edges of the populist lane and think: that is your lane, and you built it first. The question is whether to run as a Democrat, a Reform candidate, or something brand new.",
+      "researchNote": "By late 1991 Trump was publicly dissatisfied with Bush's economic management, quoted as frustrated that the White House never followed up on his foreign-policy views on Japan and Germany; historically Perot and Buchanan staked out the same protectionist-populist terrain Trump had occupied in the 1987 ads.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "populism",
+        "cold_war"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "political_curious"
+        ],
+        "notFlags": [
+          "ran_in_1988",
+          "early_presidency"
+        ],
+        "meters": {},
+        "personality": {
+          "ideology": "<=-5"
+        }
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_run_dem_92",
+          "text": "Enter the Democratic primary — a left-populist billionaire who scares both the donor class and the establishment.",
+          "effects": {
+            "money": -100,
+            "reputation": 12,
+            "power": 9,
+            "heat": 14
+          },
+          "personality": {
+            "ideology": -13,
+            "grandiosity": 10,
+            "outward": 10
+          },
+          "setFlags": [
+            "ran_in_1992",
+            "ran_dem_primary",
+            "early_platform_drafted"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_early_campaign_surge",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The Democratic field blinks. A billionaire with a wealth tax and a trade war platform is suddenly their problem."
+        },
+        {
+          "id": "pol_run_independent_92",
+          "text": "Run as an independent — borrow Perot's playbook but run it bigger, louder, and with a gold-plated bus.",
+          "effects": {
+            "money": -80,
+            "reputation": 11,
+            "power": 8,
+            "heat": 13
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": 9,
+            "outward": 9
+          },
+          "setFlags": [
+            "ran_in_1992",
+            "ran_independent",
+            "early_platform_drafted"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_early_campaign_surge",
+              "weight": 0.85,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You are not Perot. Perot is a warm-up act. You have better hotels, better ratings, and a name the whole country already knows."
+        },
+        {
+          "id": "pol_stay_out_92",
+          "text": "Decide the timing is off — back Perot instead and wait for a better year.",
+          "effects": {
+            "power": 4,
+            "reputation": 3
+          },
+          "personality": {
+            "ideology": -3,
+            "inward": 5
+          },
+          "setFlags": [
+            "political_curious",
+            "passed_on_1992",
+            "perot_aligned"
+          ],
+          "ripples": [],
+          "outcome": "You hand Perot your endorsement. He doesn't win. The lesson stays with you."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_early_campaign_surge",
+      "era": "brand",
+      "year": 1992,
+      "title": "The Crowd Gets Loud",
+      "scene": "1992. Your rallies fill arenas. The message is simple and strange for a billionaire: the system is rigged, the elites are selling American workers to Japan and Germany, the nukes are out of control, and only someone who already beat the system knows how to fix it. Clinton is charming. Bush is tired. You are something neither of them is: genuinely angry, and the crowds can feel it.",
+      "researchNote": "The 1992 populist-outsider lane was historically contested between Perot and Buchanan; a Trump candidacy of this era would have combined Perot's economic nationalism with a more left-leaning social platform consistent with Trump's documented views in this period — pro-choice, pro-universal healthcare, soft on entitlements.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "populism",
+        "legitimacy"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "ran_in_1992"
+        ],
+        "notFlags": [
+          "early_presidency",
+          "early_flameout"
+        ],
+        "meters": {},
+        "personality": {
+          "ideology": "<=-8"
+        }
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_surge_full_gas",
+          "text": "Go maximum. Charter the biggest plane, hold the biggest rallies, outspend Perot, and dare the media to ignore you.",
+          "effects": {
+            "money": -120,
+            "reputation": 16,
+            "power": 12,
+            "heat": 18,
+            "health": -5
+          },
+          "personality": {
+            "grandiosity": 12,
+            "outward": 12
+          },
+          "setFlags": [
+            "ran_in_1992",
+            "campaign_all_in"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_wins_1992",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The numbers move. The establishment wakes up. For the first time, someone in the White House says your name with genuine concern."
+        },
+        {
+          "id": "pol_surge_message_focus",
+          "text": "Keep the message tight — trade, nukes, health care — and let the contrast with the others do the work.",
+          "effects": {
+            "money": -70,
+            "reputation": 13,
+            "power": 10,
+            "heat": 12
+          },
+          "personality": {
+            "ideology": -6,
+            "grandiosity": 7,
+            "outward": 8
+          },
+          "setFlags": [
+            "ran_in_1992",
+            "campaign_disciplined"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_wins_1992",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You are the most disciplined you have ever been. The polls tick upward. The other candidates start borrowing your lines."
+        },
+        {
+          "id": "pol_surge_falter",
+          "text": "The pressure of a real campaign breaks something — the finances, the focus, the marriage. You pull back.",
+          "effects": {
+            "money": -60,
+            "reputation": 4,
+            "power": -4,
+            "heat": -6,
+            "health": -4,
+            "loyalty": -5
+          },
+          "personality": {
+            "ideology": -4,
+            "grandiosity": -6,
+            "inward": 8
+          },
+          "setFlags": [
+            "ran_in_1992",
+            "early_flameout",
+            "walked_away"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_early_flameout",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You withdraw. The campaign that could have been becomes instead the campaign that almost was — a permanent question mark."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_wins_1992",
+      "era": "brand",
+      "year": 1992,
+      "title": "Election Night",
+      "scene": "November 3, 1992. The map turns against the machines. Three-way race; nobody hits 270; the House decides. The establishment horsetraded for weeks. And then, somehow — you. The first president from New York City since FDR. The first president who owes nobody. The television in the ballroom shows your name next to PRESIDENT-ELECT and the crowd erupts. In January, you will inherit an economy in recession, a unipolar world without a Cold War enemy, and a Soviet Union that dissolved itself into fifteen new nations. No one knows what to do with a world that suddenly has no shape. Apparently that is your job now.",
+      "researchNote": "Historical extrapolation: in a 1992 three-way race where Trump split the Perot-lane vote while holding more organisation, a House-decided outcome is a documented constitutional mechanism (12th Amendment). Trump's documented 1991-92 foreign policy views — skeptical of NATO freeloading, anti-nuclear-proliferation, opposed to global trade imbalances — would have put him in a distinctive position navigating the post-Cold War unipolar moment.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "populism",
+        "milestone"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "campaign_all_in"
+        ],
+        "notFlags": [
+          "early_flameout",
+          "early_presidency"
+        ],
+        "meters": {},
+        "personality": {
+          "ideology": "<=-8"
+        }
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_win_accept_mandate",
+          "text": "Accept the mandate fully — a working-class president who happens to own skyscrapers. Govern left of Clinton, right of Sanders, and entirely as yourself.",
+          "effects": {
+            "power": 30,
+            "reputation": 20,
+            "heat": 20,
+            "money": -200,
+            "loyalty": 15
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": 12,
+            "outward": 12
+          },
+          "setFlags": [
+            "early_presidency",
+            "navigated_ussr_collapse",
+            "ran_in_1992",
+            "stayed_liberal_run"
+          ],
+          "ripples": [],
+          "outcome": "The oath is taken. History forks. This version of you governs a unipolar world as a left-populist billionaire — and the next decade will be unlike anything the scenario planners imagined.",
+          "jumpTo": {
+            "era": "primetime",
+            "yearAdvance": 12
+          }
+        },
+        {
+          "id": "pol_win_pivot_center",
+          "text": "Win and immediately triangulate: staff your cabinet with Goldman veterans, calm the markets, and quietly shelve the wealth tax.",
+          "effects": {
+            "power": 25,
+            "reputation": 10,
+            "heat": 15,
+            "money": 80,
+            "loyalty": -10
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 10,
+            "outward": 8,
+            "inward": 5
+          },
+          "setFlags": [
+            "early_presidency",
+            "navigated_ussr_collapse",
+            "ran_in_1992",
+            "sold_out_base"
+          ],
+          "ripples": [],
+          "outcome": "The base feels betrayed. The market breathes. You are now exactly the creature you ran against — and the clock is ticking.",
+          "jumpTo": {
+            "era": "primetime",
+            "yearAdvance": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_ussr_moment",
+      "era": "brand",
+      "year": 1991,
+      "title": "The Wall Is Down. Now What?",
+      "scene": "Late 1991. Gorbachev resigns. The Soviet flag comes down over the Kremlin on Christmas Day. Fifteen republics, thousands of nuclear warheads, and an entire military-industrial complex are now ungoverned. The establishment's answer is quiet: integrate them slowly, expand NATO eastward, let the free market do the work. You hate all three answers. You have said for years that nuclear proliferation is the single most dangerous thing on earth. The window to deal with the ex-Soviet arsenal is open right now — and closing.",
+      "researchNote": "Trump stated in a 1990 Playboy interview that nuclear proliferation was the single most important issue of the era and that he believed he could make a deal directly with Soviet leadership. After the USSR's December 1991 dissolution the Nunn-Lugar Cooperative Threat Reduction Act (1992) addressed loose nukes but the question of NATO expansion was handled by Bush and Clinton with consequences that endured decades.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "cold_war",
+        "politics",
+        "nuclear",
+        "diplomacy"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "early_presidency"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 15,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_deal_with_yeltsin",
+          "text": "Fly to Moscow, meet Yeltsin personally, and broker the largest nuke-reduction deal in history — your name on it, not the State Department's.",
+          "effects": {
+            "power": 20,
+            "reputation": 25,
+            "heat": 15,
+            "loyalty": 10
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": 15,
+            "outward": 15
+          },
+          "setFlags": [
+            "navigated_ussr_collapse",
+            "nunn_lugar_plus",
+            "yeltsin_deal",
+            "early_presidency"
+          ],
+          "ripples": [],
+          "outcome": "The treaty lands on New Year's Day. You have done what Kissinger said could not be done in under a year. The establishment's heads are still spinning."
+        },
+        {
+          "id": "pol_no_nato_expansion",
+          "text": "Hold NATO's line exactly where it is. No expansion, no triumphalism — give Russia off-ramps or watch them build a wall of resentment that lasts thirty years.",
+          "effects": {
+            "power": 15,
+            "reputation": 18,
+            "heat": 12,
+            "loyalty": 8
+          },
+          "personality": {
+            "ideology": -8,
+            "grandiosity": 8,
+            "outward": 10
+          },
+          "setFlags": [
+            "navigated_ussr_collapse",
+            "no_nato_expansion",
+            "early_presidency"
+          ],
+          "ripples": [],
+          "outcome": "You override the NATO hawks. History, in this branch, does not produce a Ukraine war. What it produces instead will take decades to measure."
+        },
+        {
+          "id": "pol_hawkish_unipolar",
+          "text": "Declare victory loudly. Expand NATO, make deals with every ex-Soviet republic, and turn American hegemony into a brand.",
+          "effects": {
+            "power": 18,
+            "reputation": 8,
+            "heat": 20,
+            "loyalty": 5
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 14,
+            "outward": 12
+          },
+          "setFlags": [
+            "navigated_ussr_collapse",
+            "hawkish_unipolar",
+            "early_presidency"
+          ],
+          "ripples": [],
+          "outcome": "The flags go up and the deals flow. You are the champion of the New American Century — a phrase being coined in think-tanks that will follow you everywhere."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_early_flameout",
+      "era": "brand",
+      "year": 1992,
+      "title": "The Campaign That Almost Was",
+      "scene": "1992. You are out. The withdrawal statement is brief and businesslike. The reporters ask what happened; you say the timing was wrong and that you will be back. In the back of the Town Car you are certain of one thing: you learned something these months that no focus group can teach — you learned the size of the crowd that was yours all along. It is still out there. It will wait.",
+      "researchNote": "Historical pattern: Perot withdrew in July 1992 citing threats to his family before re-entering in October; a Trump withdrawal in the same cycle would mirror the pattern of candidates discovering and then retreating from populist energy, with the crowd remaining available for a future run.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "populism",
+        "setback"
+      ],
+      "portrait": "mogul",
+      "requires": {
+        "flags": [
+          "early_flameout"
+        ],
+        "notFlags": [
+          "early_presidency"
+        ],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_flameout_bank_lessons",
+          "text": "Write down what you learned, who the crowd was, and what they needed. File it. This is research for the next campaign.",
+          "effects": {
+            "power": 5,
+            "reputation": 3,
+            "heat": -3
+          },
+          "personality": {
+            "ideology": -5,
+            "inward": 8
+          },
+          "setFlags": [
+            "early_flameout",
+            "crowd_mapped",
+            "political_curious"
+          ],
+          "ripples": [
+            {
+              "to": "ev_independence_party_reg",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The binder is thick. The faces in the crowd are in your memory. Seven years from now, you will open it again."
+        },
+        {
+          "id": "pol_flameout_endorsement",
+          "text": "Endorse the candidate closest to your positions and spend the rest of the cycle as a kingmaker — extracting promises in exchange for your crowd.",
+          "effects": {
+            "power": 7,
+            "reputation": 5,
+            "heat": 2,
+            "loyalty": 4
+          },
+          "personality": {
+            "ideology": -3,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "early_flameout",
+            "kingmaker_path",
+            "political_curious"
+          ],
+          "ripples": [
+            {
+              "to": "ev_brand_pol_kingmaker_broker",
+              "weight": 0.85,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You are not the candidate. You are the prize. They all come to Trump Tower with their hats in their hands."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_kingmaker_broker",
+      "era": "brand",
+      "year": 1993,
+      "title": "The Kingmaker Calls In His Chips",
+      "scene": "1993. The campaign is eighteen months behind you but you are still on the phone with the victors. Your crowd was real — a million people who turned up to rallies in eleven states — and the man who won the White House knows it. He did not earn those votes: you lent them. The time has come to invoice that loan. A seat at the table, a trade deal veto, access to the Oval whenever the Japan negotiations get complicated. You are the most powerful private citizen in America and you did not have to be president to get there.",
+      "researchNote": "Post-1992, Perot's Reform movement exercised genuine policy leverage by maintaining an organised voter base that both parties courted; a Trump version of this with stronger name recognition and New York media access would have amplified that leverage considerably into trade and foreign policy debates of the early Clinton years.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "populism",
+        "legitimacy"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "kingmaker_path"
+        ],
+        "notFlags": [
+          "early_presidency"
+        ],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_kingmaker_trade",
+          "text": "Demand a hard line on Japan and Germany in the next GATT round — or your crowd sits out the midterms.",
+          "effects": {
+            "power": 15,
+            "reputation": 12,
+            "heat": 10,
+            "loyalty": 8
+          },
+          "personality": {
+            "ideology": -6,
+            "grandiosity": 9,
+            "outward": 8
+          },
+          "setFlags": [
+            "kingmaker_path",
+            "trade_leverage",
+            "political_curious"
+          ],
+          "ripples": [],
+          "outcome": "The trade team blinks first. You extract a provision. It is not everything — but it is more than Perot ever got."
+        },
+        {
+          "id": "pol_kingmaker_2000_setup",
+          "text": "Play the long game: collect goodwill quietly, build towards your own 2000 run with every chip you just earned.",
+          "effects": {
+            "power": 12,
+            "reputation": 9,
+            "heat": 5,
+            "loyalty": 10
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": 7,
+            "inward": 6
+          },
+          "setFlags": [
+            "kingmaker_path",
+            "political_curious",
+            "planning_2000"
+          ],
+          "ripples": [
+            {
+              "to": "ev_reform_party_flirt",
+              "weight": 0.9,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The chips go back in the pocket. Seven years of compounding interest, and then you cash them all at once."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_early_presidency_crisis",
+      "era": "brand",
+      "year": 1993,
+      "title": "The First Crisis",
+      "scene": "1993. The new administration is barely breathing before the World Trade Center takes a bomb in its basement — six dead, a thousand injured, and the building you admire above all others shakes on its foundation. Your intelligence briefings say al-Qaeda. Your gut says this is a preview. You can respond with law enforcement and a quiet manhunt, or you can treat this as an act of war and redraw the whole security posture of the country. The decision is yours, Mr. President.",
+      "researchNote": "The February 26, 1993 World Trade Center bombing killed six people and injured over 1,000; the Clinton administration treated it as a criminal matter, leading to convictions in 1994. In an alternate-Trump presidency the question of whether to escalate to a military or intelligence response would have shaped the entire subsequent arc of counter-terrorism policy.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "terrorism",
+        "cold_war",
+        "milestone"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "early_presidency"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_crisis_law_enforcement",
+          "text": "Treat it as a criminal case — let the FBI work, secure the convictions, and refuse to hand terrorists the gift of a presidential crisis.",
+          "effects": {
+            "power": 8,
+            "reputation": 12,
+            "heat": 8,
+            "loyalty": 6
+          },
+          "personality": {
+            "ideology": -6,
+            "inward": 6,
+            "outward": 5
+          },
+          "setFlags": [
+            "early_presidency",
+            "navigated_ussr_collapse",
+            "wtc93_law_enforcement"
+          ],
+          "ripples": [],
+          "outcome": "The trials run their course. The guilty go to prison. You resist the temptation to make this about you, and the country notices."
+        },
+        {
+          "id": "pol_crisis_war_posture",
+          "text": "Declassify the al-Qaeda briefings, name the threat publicly, and launch a covert war that starts in Sudan and ends God knows where.",
+          "effects": {
+            "power": 14,
+            "reputation": 6,
+            "heat": 18,
+            "loyalty": 3,
+            "health": -4
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 10,
+            "outward": 12
+          },
+          "setFlags": [
+            "early_presidency",
+            "navigated_ussr_collapse",
+            "wtc93_war_posture",
+            "hawkish_pivot"
+          ],
+          "ripples": [],
+          "outcome": "The war is quiet but it is a war. You have broken left populism's promise of restraint. Something hardens in you and does not soften again."
+        }
+      ]
+    },
+    {
+      "id": "ev_brand_pol_legacy_fork",
+      "era": "brand",
+      "year": 1996,
+      "title": "One Term or Two?",
+      "scene": "1996. Four years in. Your approval rating has survived the WTC bombing and the first real shock of governing without a machine behind you. The Democrats want you gone; the establishment never accepted you; the movement that put you here is still loud but tired. You have navigated the fall of the Soviet Union, the trade wars with Japan, and a domestic recession that bent but did not break you. Now: do you run again — or cement your legacy while the legacy is still intact?",
+      "researchNote": "Historical extrapolation: a first-term populist presidency winning via three-way 1992 race and governing without a congressional majority would face structural challenges — the 1994 midterm pattern and 1996 re-elect would be the key inflection points for whether the early-presidency path extended or collapsed into a one-term footnote.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "politics",
+        "populism",
+        "milestone"
+      ],
+      "portrait": "celebrity",
+      "requires": {
+        "flags": [
+          "early_presidency",
+          "navigated_ussr_collapse"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "pol_legacy_second_term",
+          "text": "Run for re-election. You came to change things and four years was not enough to finish the job.",
+          "effects": {
+            "power": 18,
+            "reputation": 14,
+            "heat": 16,
+            "money": -150,
+            "health": -6
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 10,
+            "ideology": -4
+          },
+          "setFlags": [
+            "early_presidency",
+            "navigated_ussr_collapse",
+            "stayed_liberal_run",
+            "two_term_president"
+          ],
+          "ripples": [],
+          "outcome": "You win — or you don't. Either way, this path has diverged so far from the original that the game is now something entirely new."
+        },
+        {
+          "id": "pol_legacy_one_term_exit",
+          "text": "Serve one term, endorse your successor from the movement, and exit as the man who broke the two-party machine and lived to tell it.",
+          "effects": {
+            "power": 10,
+            "reputation": 22,
+            "heat": -6,
+            "money": 100,
+            "health": 8
+          },
+          "personality": {
+            "ideology": -8,
+            "grandiosity": -5,
+            "inward": 10
+          },
+          "setFlags": [
+            "early_presidency",
+            "navigated_ussr_collapse",
+            "stayed_liberal_run",
+            "one_term_legend",
+            "walked_away"
+          ],
+          "ripples": [],
+          "outcome": "The farewell speech is the best thing you ever read aloud. In the taxi home from the White House you feel, for the first time in your life, genuinely complete."
+        }
+      ]
     }
   ]
 }

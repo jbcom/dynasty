@@ -24,6 +24,12 @@ describe("role-swap invariant (P7)", () => {
     expect(next.flags).not.toContain("trump_commercial_path");
   });
 
+  it("the early-1990s presidency branch counts as Donald taking the political road", () => {
+    const next = resolveRoles(withFlags("early_presidency"));
+    expect(next.flags).toContain("trump_political");
+    expect(next.flags).toContain("musk_commercial_path");
+  });
+
   it("Musk taking power flips Donald to the commercial path", () => {
     const next = resolveRoles(withFlags("musk_takes_power"));
     expect(next.flags).toContain("musk_political");
