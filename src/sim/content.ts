@@ -28,6 +28,7 @@ import {
   type WorldTimeline,
   WorldTimelineSchema,
 } from "./schema";
+import { projectWorldEvents } from "./worldEvents";
 
 /**
  * The fully-validated, immutable content bundle the sim runs against. Pure data —
@@ -54,6 +55,12 @@ export interface Content {
   ranks: RankLadder[];
   /** Per-dynasty family trees (preset spines + the found-your-own data model). */
   familyTrees: FamilyTree[];
+  /**
+   * World-timeline entries PROJECTED into the unified event pool (FD-2.2): the
+   * dated backdrop facts as year-keyed, reactable GameEvents the player lives
+   * through. Derived from worldTimelines; year-sorted + deterministic.
+   */
+  worldEvents: GameEvent[];
 }
 
 export interface RawContent {
@@ -193,5 +200,6 @@ export function buildContent(raw: RawContent): Content {
     currencies: currenciesFile.currencies,
     ranks: ranksFile.ranks,
     familyTrees: familyTreesFile.trees,
+    worldEvents: projectWorldEvents(worldTimelines),
   };
 }
