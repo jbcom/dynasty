@@ -19,9 +19,9 @@ lives in the WAIT-USER items further down (now unblocked).
 ### nb-003 Full 3-pole coverage + no-shallowness audit (task-022 remainder + task-017)
 - [x] nb-003 COVERAGE: expanded moralAxis POLE_FLAGS to recognize every branch authored pole flag (reich_*_pole, pole_utopian/centrist/dictatorial, media_*_pole, communion/standoff/theodicy theology poles, interstellar_trade_commonwealth/monopoly_trade_regime/alien_subjugation, missionary_uplift…); removed axis_ascendant from dictatorial (it is a BRANCH marker, not a pole — a Nazi run pole comes from its reich_*_pole flag). 14-case coverage test (all 7 branches × 3 poles resolve). AUDIT: every branch backdrop is 104-177 events across 4 scopes — none a thin stub, comparable depth, no shallowness.
 ### nb-004 Persona playtest sweep (task-023)
-- [ ] nb-004 (IN PROGRESS — 3 agents / 7 personas running) fan out persona agents over compiled-timeline dumps (timeline:dump) to find dead-ends/shallowness/dominant strategies AND missing branches; aggregate → fix → re-sweep.
+- [ ] [WAIT] nb-004 — 3 persona agents (7 personas) running over compiled-timeline dumps; on completion aggregate findings → fix → re-sweep. fan out persona agents over compiled-timeline dumps (timeline:dump) to find dead-ends/shallowness/dominant strategies AND missing branches; aggregate → fix → re-sweep.
 ### nb-005 Definition of done
-- [ ] nb-005 typecheck+biome+unit+browser green; app live-verified per branch; reviewer trio; resolve bot threads; green PR → squash-merge.
+- [ ] [WAIT] nb-005 DoD (blocked on nb-004) — typecheck+biome+unit+browser green; app live-verified per branch; reviewer trio; resolve bot threads; green PR → squash-merge.
 
 ## VISION — "DYNASTY": three playable dynastic sagas (user, 2026-06-20)
 
