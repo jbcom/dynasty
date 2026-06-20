@@ -2,6 +2,8 @@
 import type { Content } from "../../sim/content";
 import type { Ending } from "../../sim/schema";
 import { spectrumLabel } from "../../sim/personality";
+import { branchOf } from "../../sim/branch";
+import { applyTerms } from "../../sim/terms";
 import type { EndState, GameState } from "../../sim/state";
 import ButterflyGraph from "../ButterflyGraph.svelte";
 import { formatMoney } from "../theme";
@@ -25,7 +27,8 @@ const KIND_TITLE: Record<string, string> = {
   death: "The End of an Era",
   coup: "Toppled",
 };
-const title = $derived(ending?.title ?? KIND_TITLE[end.kind] ?? "The End");
+const term = $derived((text: string) => applyTerms(text, content.terms, branchOf(state)));
+const title = $derived(term(ending?.title ?? KIND_TITLE[end.kind] ?? "The End"));
 const tier = $derived(ending?.tier ?? (end.kind === "victory" ? "endgame-good" : "endgame-bad"));
 const isApex = $derived(tier === "apex");
 </script>
@@ -33,7 +36,7 @@ const isApex = $derived(tier === "apex");
 <main class="report" data-end={end.kind} data-tier={tier} class:apex={isApex}>
   {#if isApex}<p class="apex-kicker">★ Apex Ending ★</p>{/if}
   <h1>{title}</h1>
-  <p class="reason">{end.reason}</p>
+  <p class="reason">{term(end.reason)}</p>
   <p class="year">Final year: {end.year} · {spectrumLabel(state.personality)}</p>
 
   <dl class="stats">

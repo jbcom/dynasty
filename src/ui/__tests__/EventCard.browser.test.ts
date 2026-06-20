@@ -86,4 +86,35 @@ describe("EventCard", () => {
     const button = host.querySelector("button");
     expect(button?.disabled).toBe(true);
   });
+
+  it("applies the branch-aware term transform to title, scene, and choices", () => {
+    const termEvent: GameEvent = {
+      ...baseEvent,
+      title: "The {head_of_state} Visits",
+      scene: "All of {the_nation} watched.",
+      choices: [
+        {
+          id: "salute",
+          text: "Salute the {head_of_state}.",
+          effects: {},
+          personality: {},
+          setFlags: [],
+          clearFlags: [],
+          ripples: [],
+          outcome: "ok",
+        },
+      ],
+    };
+    // A Nazi-branch transform (manual, to keep the test self-contained).
+    const term = (t: string) =>
+      t.replace(/\{head_of_state\}/g, "Reichskommissar").replace(/\{the_nation\}/g, "the Reich");
+    component = mount(EventCard, {
+      target: host,
+      props: { event: termEvent, onchoose: () => {}, term },
+    });
+    expect(host.textContent).toContain("The Reichskommissar Visits");
+    expect(host.textContent).toContain("All of the Reich watched");
+    expect(host.textContent).toContain("Salute the Reichskommissar");
+    expect(host.textContent).not.toContain("{head_of_state}");
+  });
 });

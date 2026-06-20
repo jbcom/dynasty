@@ -8,9 +8,11 @@ interface Props {
   onchoose: (choiceId: string) => void;
   /** Disable inputs while a transition animates. */
   busy?: boolean;
+  /** Branch-aware term interpolation; identity by default (alt-history AH1). */
+  term?: (text: string) => string;
 }
 
-const { event, onchoose, busy = false }: Props = $props();
+const { event, onchoose, busy = false, term = (t) => t }: Props = $props();
 
 async function choose(choice: Choice): Promise<void> {
   if (busy) return;
@@ -26,8 +28,8 @@ async function choose(choice: Choice): Promise<void> {
          the year already signals past vs future. -->
   </div>
 
-  <h2>{event.title}</h2>
-  <p class="scene">{event.scene}</p>
+  <h2>{term(event.title)}</h2>
+  <p class="scene">{term(event.scene)}</p>
   <!-- researchNote stays in the data as authoring provenance, but is NOT shown
        as a separate panel — the factual grounding is woven into the scene prose
        so the player never pivots between game-fiction and a footnote. -->
@@ -35,7 +37,7 @@ async function choose(choice: Choice): Promise<void> {
   <div class="choices">
     {#each event.choices as choice (choice.id)}
       <button type="button" disabled={busy} onclick={() => choose(choice)}>
-        {choice.text}
+        {term(choice.text)}
       </button>
     {/each}
   </div>

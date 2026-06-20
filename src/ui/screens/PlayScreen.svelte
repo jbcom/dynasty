@@ -11,6 +11,8 @@ import PersonalityDial from "../PersonalityDial.svelte";
 import StatsView from "../StatsView.svelte";
 import TimelineView from "../TimelineView.svelte";
 import { tyrannyUtopiaAxis } from "../../sim/personality";
+import { branchOf } from "../../sim/branch";
+import { applyTerms } from "../../sim/terms";
 
 interface Props {
   content: Content;
@@ -28,6 +30,11 @@ const { content, view, busy, onchoose, wide = false }: Props = $props();
 // (tyranny) as the personality vector shifts, so the slide is felt, not just read.
 const axis = $derived(tyrannyUtopiaAxis(view.state.personality));
 const drift = $derived(axis < -25 ? "utopia" : axis > 25 ? "tyranny" : "neutral");
+
+// Branch-aware term interpolation: the same authored {head_of_state} resolves
+// to "President" or "Reichskommissar" etc. by the run's alternate-history branch.
+const branch = $derived(branchOf(view.state));
+const term = $derived((text: string) => applyTerms(text, content.terms, branch));
 
 type Tab = "event" | "news" | "timeline" | "stats" | "butterfly" | "dossier";
 let tab = $state<Tab>("event");
@@ -49,7 +56,7 @@ const tabs = $derived<Array<{ id: Tab; label: string }>>([
       <div class="portrait-wrap">
         <Portrait portraitId={view.currentEvent.portrait} size={wide ? 140 : 96} />
       </div>
-      <EventCard event={view.currentEvent} {busy} {onchoose} />
+      <EventCard event={view.currentEvent} {busy} {onchoose} {term} />
     </div>
   {:else}
     <p class="interlude">The era turns…</p>
@@ -58,7 +65,7 @@ const tabs = $derived<Array<{ id: Tab; label: string }>>([
 
 {#snippet infoTab()}
   {#if tab === "news"}
-    <NewsTicker {content} gameState={view.state} />
+    <NewsTicker {content} gameState={view.state} {term} />
   {:else if tab === "timeline"}
     <TimelineView {content} gameState={view.state} />
   {:else if tab === "stats"}
