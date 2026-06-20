@@ -1,11 +1,10 @@
-import { validRaw } from "../sim/__tests__/fixtures";
 import { buildContent, type Content, type RawContent } from "../sim/content";
 
 /**
  * Load and validate all game content from `src/data` via Vite's glob import.
- * Until the real era JSON lands (Phase F), this falls back to the fixture
- * bundle so the app is playable end-to-end. The glob is eager so content is
- * bundled at build time (no async fetch on a mobile cold start).
+ * The glob is eager so content is bundled at build time (no async fetch on a
+ * mobile cold start). buildContent throws on any schema or cross-reference
+ * failure, so the app fails loudly rather than silently serving partial data.
  */
 const metersGlob = import.meta.glob("./meters.json", { eager: true });
 const indexGlob = import.meta.glob("./eras/index.json", { eager: true });
@@ -29,21 +28,7 @@ function collectEraEvents(): Array<{ era: string; data: unknown }> {
     });
 }
 
-function hasRealContent(): boolean {
-  const meters = firstValue(metersGlob);
-  const index = firstValue<{ eras: unknown[] }>(indexGlob);
-  if (meters === null || index === null) return false;
-  // Every era in the index must have an authored events file, else buildContent
-  // would throw — stay on the fixture fallback until the content is complete.
-  return collectEraEvents().length >= (index.eras?.length ?? 0);
-}
-
 export function loadContent(): Content {
-  if (!hasRealContent()) {
-    // Pre-Phase-F fallback: the fixture content keeps the shell playable.
-    return buildContent(validRaw());
-  }
-
   const eraEvents = collectEraEvents();
 
   const raw: RawContent = {
