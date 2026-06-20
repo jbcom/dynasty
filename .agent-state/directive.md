@@ -18,7 +18,7 @@ content depth, then the Dynasty product epic, then the cross-cutting QA invarian
 - [ ] de-1c PHASE BOUNDARY: full gate (typecheck/biome/unit/browser) + replay parity + sweep; open PR #A "koota query substrate"; reviewer trio; resolve threads; squash-merge green.
 
 ### Phase DE-2 — Moral-axis wiring into endings + HUD (task-022 remainder)
-- [ ] de-2a wire moralPoleOf/moralPoleLabel into the ending selection (branch-relative pole gating) + author per-pole ending variants so each branch's utopian/centrist/dictatorial pole resolves to a distinct, morally-interrogated ending (a Reich "utopia" is monstrous-but-coherent).
+- [x] de-2a DONE: authored 19 per-branch-per-pole endings (7 branches × 3 poles — nazi/theocracy/oligarchy/megachurch/media/westcoast + default centrist), each gated by its branch's pole flags from POLE_FLAGS. moralPoleOf + evaluateEnding already wired (EndingSchema.when.pole + flag-based gating both work). 21 new tests. 289 unit tests green.
 - [ ] de-2b surface the moral pole in the HUD (tyranny↔utopia axis, branch-relative label) so the player sees which pole the run is trending toward.
 - [ ] de-2c ensure EVERY branch pool expresses all 3 poles as reachable gated sub-paths (utopian/centrist/dictatorial), unless one makes zero sense early; add events where a pole is thin. PHASE BOUNDARY PR #B.
 

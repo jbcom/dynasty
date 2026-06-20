@@ -482,6 +482,356 @@
         ],
         "minEraOrder": 7
       }
+    },
+
+    {
+      "id": "end_nazi_utopian",
+      "kind": "reich-utopia",
+      "title": "The New Order Perfected",
+      "reason": "The Reich stabilized into something almost serene by its own lights — the eugenics boards filled with bureaucrats who preferred order to cruelty, the conquest zones quietly integrated, the flags unchanged but the firing squads retired. {given_name} {surname} governed the hemisphere's economy in a world where that word, utopia, was genuinely spoken without irony by its architects. What it took to build it and who it excluded were questions the citizens had learned not to raise. You provided what the system asked for. The system called it flourishing.",
+      "priority": 94,
+      "tier": "endgame-good",
+      "when": {
+        "flags": [
+          "reich_utopian_pole"
+        ],
+        "notFlags": [
+          "reich_dictatorial_pole",
+          "reich_centrist_pole"
+        ],
+        "minEraOrder": 7
+      }
+    },
+    {
+      "id": "end_nazi_centrist",
+      "kind": "reich-managed",
+      "title": "The Administered Reich",
+      "reason": "Neither the dream nor the nightmare fully materialized — just governance, Reich-style, competently maintained. The ideology ossified into bureaucratic habit, the racial laws became paperwork, and the hemisphere's commerce ran on efficient rails toward no particular destination. {full_name}: a capable administrator of a world the rest of history regarded as an open wound, who preferred not to think about that too hard. The managed Reich endured because efficient evil is harder to dislodge than passionate evil. You were good at your job.",
+      "priority": 88,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": [
+          "reich_centrist_pole"
+        ],
+        "notFlags": [
+          "reich_utopian_pole",
+          "reich_dictatorial_pole"
+        ],
+        "minEraOrder": 7
+      }
+    },
+    {
+      "id": "end_nazi_dictatorial",
+      "kind": "reich-conquest",
+      "title": "The Iron Reich",
+      "reason": "The dream turned back to iron. The interstellar fleets launched under Reich colors; the subject worlds received the same paperwork Earth's conquered zones had. {full_name} built the procurement empire that made expansion possible, his name attached to contracts for things the contracts did not name. What the Reich did to {the_nation} it now did at the scale of solar systems. History — the history that could be spoken aloud in this timeline — called it manifest destiny. The other history was written in the margins of documents classified at the highest tier, and it will not survive the archive purge.",
+      "priority": 94,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": [
+          "reich_dictatorial_pole"
+        ],
+        "notFlags": [
+          "reich_utopian_pole",
+          "reich_centrist_pole"
+        ],
+        "minEraOrder": 7
+      }
+    },
+
+    {
+      "id": "end_theocracy_utopian",
+      "kind": "covenant",
+      "title": "The Covenant Commonwealth",
+      "reason": "The Covenant took root in a way its founders had argued about in seminaries for decades — not as a mandate but as a covenant actually lived. The hospitals ran on tithing surplus. The courts arbitrated in verse and came out approximately just. {full_name} held the economic portfolio of a nation that genuinely believed itself chosen and had, by most measurable indicators, made something worth believing in. Whether God ordained it is a question you left to theologians. You built the fiscal architecture. The Commonwealth endures.",
+      "priority": 94,
+      "tier": "endgame-good",
+      "when": {
+        "flags": [
+          "covenant_commonwealth"
+        ],
+        "notFlags": [
+          "gilead_regime",
+          "soft_establishment"
+        ],
+        "minEraOrder": 7
+      }
+    },
+    {
+      "id": "end_theocracy_centrist",
+      "kind": "soft-establishment",
+      "title": "The Established Church-State",
+      "reason": "The theocracy stabilized into something neither visionary nor oppressive — a faith-flavored bureaucracy where Sunday attendance was socially mandatory, the curriculum taught creation science alongside physics, and the courts referred disputes to scripture before precedent. {full_name} moved money through it all, neither a true believer nor a cynic, simply a man who understood that this was the system and the system paid. The established church-state endures the way all established things do: through the low-grade coercion of normalcy.",
+      "priority": 87,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": [
+          "soft_establishment"
+        ],
+        "notFlags": [
+          "covenant_commonwealth",
+          "gilead_regime"
+        ],
+        "minEraOrder": 7
+      }
+    },
+    {
+      "id": "end_theocracy_dictatorial",
+      "kind": "gilead",
+      "title": "Gilead",
+      "reason": "The Handmaid's dystopia that the sermons always promised was mercy became, in practice, the thing the sermons described. The dress codes came first, then the role assignments, then the re-education facilities that everyone understood were not really about re-education. {full_name} financed the infrastructure and did not ask what it was for. Power is power; {head_of_state} had it; {full_name} serviced it. The nation that emerged calls itself God's country. It is technically correct.",
+      "priority": 95,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": [
+          "gilead_regime"
+        ],
+        "notFlags": [
+          "covenant_commonwealth",
+          "soft_establishment"
+        ],
+        "minEraOrder": 7
+      }
+    },
+
+    {
+      "id": "end_oligarchy_utopian",
+      "kind": "abundance",
+      "title": "Post-Scarcity Commonwealth",
+      "reason": "The board dissolved itself into a foundation. The automation dividend, rather than accruing to the ten thousand who owned the machines, was constitutionally mandated to flow outward — a structural victory won after decades of strategic argument and one historic vote that {full_name} cast as the swing position. {the_nation} entered an era of enforced abundance that the economists said was mathematically impossible and that happened anyway. {full_name}'s reputation, historically, is of a man who understood early what his peers learned too late: you cannot spend it faster than a revolution takes it.",
+      "priority": 94,
+      "tier": "endgame-good",
+      "when": {
+        "flags": [
+          "abundance_technocracy"
+        ],
+        "notFlags": [
+          "company_serfdom",
+          "managed_oligopoly"
+        ],
+        "minEraOrder": 7
+      }
+    },
+    {
+      "id": "end_oligarchy_centrist",
+      "kind": "managed-oligopoly",
+      "title": "The Managed Oligopoly",
+      "reason": "The consolidation held at a stable plateau — monopolies capped by treaty, dividends regulated to prevent the revolution the last century had previewed, the economy humming in the comfortable medium of efficient unfreedom. {full_name} sat near the top of this arrangement and called it success. By the metrics that counted — market cap, longevity of holdings, dynasties established — it was. The system was not fair; it was stable, which is the thing systems prize above fairness every time the choice presents itself.",
+      "priority": 85,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": [
+          "managed_oligopoly"
+        ],
+        "notFlags": [
+          "abundance_technocracy",
+          "company_serfdom"
+        ],
+        "minEraOrder": 7
+      }
+    },
+    {
+      "id": "end_oligarchy_dictatorial",
+      "kind": "serfdom",
+      "title": "The Company-Town Earth",
+      "reason": "The debt peonage completed its logic. The automation dividend never redistributed; the displaced workforce signed contracts of indenture without calling them that; the company towns spread until there was nothing outside them. {full_name} owned the largest nodes of this system and collected rents from people who had no alternative to paying them. What the economists called equilibrium the people living in it called a cage. Both descriptions were accurate. The cage was very well managed.",
+      "priority": 93,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": [
+          "company_serfdom"
+        ],
+        "notFlags": [
+          "abundance_technocracy",
+          "managed_oligopoly"
+        ],
+        "minEraOrder": 7
+      }
+    },
+
+    {
+      "id": "end_megachurch_utopian",
+      "kind": "ministry",
+      "title": "The Charitable Ministry",
+      "reason": "The empire of faith turned its machinery outward. The disaster-relief network became the largest non-state logistical system in existence; the counseling infrastructure trained more therapists than the medical system; the tithing surplus funded water projects across three continents. {full_name} stood at the financial center of this and — unusually — the thing it funded was actually what it said it was funding. The brand prospered because the substance was real. The congregation grew. The books balanced. The wells in the desert worked.",
+      "priority": 93,
+      "tier": "endgame-good",
+      "when": {
+        "flags": [
+          "charitable_ministry"
+        ],
+        "notFlags": [
+          "personality_cult",
+          "prosperity_grift"
+        ],
+        "minEraOrder": 7
+      }
+    },
+    {
+      "id": "end_megachurch_centrist",
+      "kind": "prosperity",
+      "title": "The Prosperity Empire",
+      "reason": "The formula never changed because it never needed to: promise heaven, charge for access to the waiting room, and reinvest the surplus in more visible promises. {full_name} ran the financial architecture of an organization that had outgrown religion and become entertainment, therapy, and social network simultaneously. The tithing was technically voluntary. The social pressure was not. The empire prospered. Whether it helped anyone is a question its constituents had long since stopped posing.",
+      "priority": 84,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": [
+          "prosperity_grift"
+        ],
+        "notFlags": [
+          "charitable_ministry",
+          "personality_cult"
+        ],
+        "minEraOrder": 7
+      }
+    },
+    {
+      "id": "end_megachurch_dictatorial",
+      "kind": "cult",
+      "title": "The Cult of Personality",
+      "reason": "The congregation stopped being a congregation and became a movement, and the movement stopped having an ideology and became a body that pointed where its leader pointed. {given_name} {surname} at the center of this: a man whose name the faithful spoke the way earlier generations spoke the name of God, and whose financial empire was indistinguishable from his spiritual one because those had never really been separate things. Dissent was apostasy. Apostasy had consequences. The denomination grows.",
+      "priority": 94,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": [
+          "personality_cult"
+        ],
+        "notFlags": [
+          "charitable_ministry",
+          "prosperity_grift"
+        ],
+        "minEraOrder": 7
+      }
+    },
+
+    {
+      "id": "end_media_utopian",
+      "kind": "broadcast",
+      "title": "The Enlightened Broadcast",
+      "reason": "The platform turned — slowly, expensively, after a generation of editorial fights — toward something it had resisted for decades: accuracy. The investigative arm was funded properly; the audience metrics were decoupled from the revenue model; the stories that needed telling got the airtime they had always been crowded out of. {full_name} held the commercial structure together while the editorial side did what editorial sides do when they are actually free to do it. The ratings were not better. The republic was.",
+      "priority": 91,
+      "tier": "endgame-good",
+      "when": {
+        "flags": [
+          "media_utopian_pole"
+        ],
+        "notFlags": [
+          "propaganda_state",
+          "media_centrist_pole"
+        ],
+        "minEraOrder": 7
+      }
+    },
+    {
+      "id": "end_media_centrist",
+      "kind": "spectacle",
+      "title": "The Spectacle Machine",
+      "reason": "The platform won by becoming essential and neutral, which meant it had an opinion about nothing and a reach into everything. {full_name} presided over the largest attention-harvesting apparatus in history and called it journalism, which it sometimes was. The algorithmically served outrage kept the subscriptions up; the horse-race coverage kept the politicians nervous in the productive ways; the documentary arm won prizes. The system was not propaganda. It was something subtler — a mirror aimed at the most profitable angle of the room.",
+      "priority": 83,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": [
+          "media_centrist_pole"
+        ],
+        "notFlags": [
+          "media_utopian_pole",
+          "propaganda_state"
+        ],
+        "minEraOrder": 7
+      }
+    },
+    {
+      "id": "end_media_dictatorial",
+      "kind": "propaganda",
+      "title": "The Propaganda State",
+      "reason": "The distinction between the network and the government dissolved so gradually that the historians later disagreed about which year it had technically completed. {full_name}'s platforms broadcast what {head_of_state} required and suppressed what {head_of_state} forbade, and the population, marinated in it from infancy, lost the ability to ask the difference. The ratings were excellent. The staff wrote copy they believed in, which was the most unsettling thing about all of it. The propaganda state endures because it does not need to force anyone to lie.",
+      "priority": 94,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": [
+          "propaganda_state"
+        ],
+        "notFlags": [
+          "media_utopian_pole",
+          "media_centrist_pole"
+        ],
+        "minEraOrder": 7
+      }
+    },
+
+    {
+      "id": "end_westcoast_utopian",
+      "kind": "frontier-commonwealth",
+      "title": "The Pacific Techno-Frontier Commonwealth",
+      "reason": "The Pacific rim built the thing the rest of the century had theorized: governance by council, infrastructure by commons, research by open license. {the_nation}'s western edge became the proving ground that the model actually worked at scale — not because of ideology but because the catastrophe-proofing math required cooperation and the cooperation, once structural, turned out to produce better outcomes than competition. {full_name} held the investment architecture and found, to his own surprise, that a commonwealth was a good place to compound returns. The frontier remained open. The commons held.",
+      "priority": 93,
+      "tier": "endgame-good",
+      "when": {
+        "flags": [
+          "pole_utopian"
+        ],
+        "notFlags": [
+          "pole_dictatorial",
+          "pole_centrist"
+        ],
+        "minEraOrder": 7
+      }
+    },
+    {
+      "id": "end_westcoast_centrist",
+      "kind": "pacific-republic",
+      "title": "The Managed Pacific Republic",
+      "reason": "The secession did not radicalize — it institutionalized. The Pacific republic ran its carbon markets, its tech-sector regulations, its ranked-choice senate, and its universal healthcare system with the competent blandness of a well-funded NGO that had somehow acquired nuclear submarines. {full_name} operated at the intersection of the investment networks and the policy apparatus, which in the Pacific republic were politely acknowledged to be the same thing. The republic was genuinely better than what it left. It was also not what anyone had dreamed.",
+      "priority": 84,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": [
+          "pole_centrist"
+        ],
+        "notFlags": [
+          "pole_utopian",
+          "pole_dictatorial"
+        ],
+        "minEraOrder": 7
+      }
+    },
+    {
+      "id": "end_westcoast_dictatorial",
+      "kind": "tech-fiefdom",
+      "title": "The Coastal Tech-Oligarch Fiefdom",
+      "reason": "The tech sector did not disrupt the power structure — it absorbed it. The venture capital firms held the regulatory agencies; the platform networks held the information infrastructure; the campuses held the housing. {full_name} built the financial layer beneath all of this and collected the systematic rent on everything that moved through it. The population of the coastal fiefdom had better phones than anywhere else on Earth and significantly less say in how they lived. They called it innovation. The feudal analogy was technically imprecise and functionally exact.",
+      "priority": 93,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": [
+          "pole_dictatorial"
+        ],
+        "notFlags": [
+          "pole_utopian",
+          "pole_centrist"
+        ],
+        "minEraOrder": 7
+      }
+    },
+
+    {
+      "id": "end_default_centrist",
+      "kind": "muddled-middle",
+      "title": "The Muddled Middle",
+      "reason": "No utopia. No collapse. The levers moved in both directions and averaged out to the status quo, which is another name for a world that exhausted itself preventing the worst without ever assembling the will for the better. {full_name} accumulated and governed and aged in a {the_nation} that functioned at roughly the level it always had — unequal, contentious, intermittently competent, frequently embarrassing, occasionally great. History filed it under 'continued.' The dynasty endured. The country muddled through. That is, statistically, the most common outcome.",
+      "priority": 75,
+      "tier": "endgame-bad",
+      "when": {
+        "flags": [
+          "managed_oligopoly_civil_religion"
+        ],
+        "notFlags": [
+          "utopian_currents",
+          "autocratic_currents",
+          "mars_program"
+        ],
+        "minEraOrder": 7
+      }
     }
   ]
 }
