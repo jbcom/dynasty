@@ -21,9 +21,16 @@ function endingQualifies(content: Content, state: GameState, ending: Ending): bo
   if (w.maxEraOrder !== undefined && order > w.maxEraOrder) return false;
   if (w.minAge !== undefined && state.age < w.minAge) return false;
 
-  // Moral-pole gate (DE-2): the ending only fires when the run's resolved pole
-  // matches. Branch-relative — a "utopian" pole ending reads as that branch's
-  // own idea of utopia (monstrous-but-coherent in the dark branches).
+  // Moral-pole gate (DE-2). TWO DISTINCT mechanisms exist for pole-gating an
+  // ending; do not confuse them (rev-de2 #1):
+  //   • when.flags: ["reich_utopian_pole"] — the CANONICAL mechanism every shipped
+  //     pole ending uses. Gates on an explicit authored pole flag the branch sets.
+  //   • when.pole: "utopian" — this optional gate, which resolves the pole through
+  //     moralPoleOf(state) (pole-flags first, PERSONALITY fallback). Use only when
+  //     you deliberately want the personality-derived pole, NOT flag presence; the
+  //     two can diverge (a run with no pole flag still resolves a pole by axis).
+  // Both may be combined on one ending. Production endings use flags; this gate is
+  // here for personality-driven pole endings + is exercised by pole-coverage tests.
   if (w.pole !== undefined && moralPoleOf(state) !== w.pole) return false;
 
   for (const f of w.flags) if (!state.flags.includes(f)) return false;
