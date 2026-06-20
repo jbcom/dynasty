@@ -48,11 +48,17 @@ async function choose(choice: Choice): Promise<void> {
     max-width: 34rem;
     margin: 0 auto;
     padding: var(--mmm-pad);
-    background: color-mix(in srgb, var(--mmm-surface) 80%, transparent);
+    /* Opaque fallback for devices where backdrop-filter is disabled/unsupported. */
+    background: var(--mmm-surface);
     border: 1px solid color-mix(in srgb, var(--mmm-gold-deep) 70%, transparent);
     border-radius: var(--mmm-radius-lg);
     box-shadow: var(--mmm-shadow);
-    backdrop-filter: blur(8px);
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .card {
+      background: color-mix(in srgb, var(--mmm-surface) 80%, transparent);
+      backdrop-filter: blur(8px);
+    }
   }
   .badges {
     display: flex;
