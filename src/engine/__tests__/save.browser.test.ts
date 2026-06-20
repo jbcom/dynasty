@@ -21,12 +21,24 @@ function playTwo() {
 }
 
 describe("save/load (deterministic replay)", () => {
-  it("toSave captures only seed + history", () => {
+  it("toSave captures seed + dynasty + history", () => {
     const { s } = playTwo();
     const save = toSave(s);
     expect(save.seed).toBe("save-seed");
+    expect(save.dynasty).toBe("trump"); // default dynasty
     expect(save.history).toHaveLength(2);
     expect(save.version).toBe(1);
+  });
+
+  it("fromSave preserves dynasty on round-trip (de-5b regression)", () => {
+    // A Musk run started with initState(content, seed, 'musk') must survive a
+    // save → fromSave → replay cycle with dynasty = 'musk', not defaulting to 'trump'.
+    const c = content();
+    const s = initState(c, "musk-seed", "musk");
+    const reconstructed = fromSave(c, toSave(s));
+    expect(reconstructed.dynasty).toBe("musk");
+    expect(reconstructed.birthYear).toBe(1971);
+    expect(reconstructed.flags).toContain("musk_dynasty_active");
   });
 
   it("fromSave reconstructs the exact live state", () => {
@@ -64,7 +76,7 @@ describe("save/load (deterministic replay)", () => {
 
   it("rejects an unsupported save version", () => {
     expect(() =>
-      fromSave(content(), { version: 99, seed: "x", history: [], savedYear: 1946 }),
+      fromSave(content(), { version: 99, seed: "x", dynasty: "trump", history: [], savedYear: 1946 }),
     ).toThrow(/version/);
   });
 });
