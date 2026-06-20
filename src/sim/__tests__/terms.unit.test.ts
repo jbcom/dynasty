@@ -306,6 +306,18 @@ describe("Musk prologue structure — de-5b", () => {
     // ev_elon_musk_born requires musk_technical_lineage and can never fire.
     expect(inventor.setFlags).toContain("musk_technical_lineage");
   });
+
+  it("Musk mid-chain events (errol, elon) also block kennedy_dynasty_active — symmetric guards (de-5d review)", () => {
+    // Reviewer found: errol + elon only had notFlags:[trump_prologue], not kennedy.
+    // kennedy_dynasty_active is now added so Kennedy runs can't accidentally trigger
+    // Musk mid-chain events (which gate only on Musk-derived flags that Kennedy runs
+    // wouldn't have, but belt-and-suspenders isolation matters for future flag drift).
+    const errol = eventById("ev_errol_musk_builds");
+    expect(errol.requires?.notFlags ?? []).toContain("kennedy_dynasty_active");
+
+    const elon = eventById("ev_elon_musk_born");
+    expect(elon.requires?.notFlags ?? []).toContain("kennedy_dynasty_active");
+  });
 });
 
 describe("Kennedy prologue structure — de-5c", () => {
@@ -323,6 +335,17 @@ describe("Kennedy prologue structure — de-5c", () => {
     expect(ids).toContain("choose_trump_dynasty");
     expect(ids).toContain("choose_musk_dynasty");
     expect(ids).toContain("choose_kennedy_dynasty");
+  });
+
+  it("ev_dynasty_founding_choice is suppressed when any dynasty is already seeded — no double-prompt (de-5d carousel fix)", () => {
+    // The carousel calls initState(content, seed, dynasty) which seeds trump_prologue /
+    // musk_dynasty_active / kennedy_dynasty_active from turn zero. The in-game selector
+    // must never fire when any of these is present, or the player gets asked twice.
+    const ev = eventById("ev_dynasty_founding_choice");
+    const nf = ev.requires?.notFlags ?? [];
+    expect(nf).toContain("trump_prologue");
+    expect(nf).toContain("musk_dynasty_active");
+    expect(nf).toContain("kennedy_dynasty_active");
   });
 
   it("choose_kennedy_dynasty sets kennedy_dynasty_active + kennedy_prologue", () => {
