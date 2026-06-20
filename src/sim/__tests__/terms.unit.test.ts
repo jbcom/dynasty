@@ -2,8 +2,8 @@ import { describe, expect, it } from "vitest";
 import boyhoodJson from "../../data/eras/boyhood.json";
 import originsJson from "../../data/eras/origins.json";
 import termsJson from "../../data/terms.json";
-import { EraEventsSchema, TermsFileSchema } from "../schema";
 import { meetsRequires } from "../events";
+import { EraEventsSchema, TermsFileSchema } from "../schema";
 import { applyTerms, isNamedHeir, resolveFullName, resolveGivenName, resolveTerm } from "../terms";
 
 const terms = TermsFileSchema.parse(termsJson).terms;
@@ -163,18 +163,28 @@ describe("birth-order lever — ev_the_children prologue event (de-4a)", () => {
     expect(meetsRequires(stubState(["firstborn_heir"]), req)).toBe(false);
     // only_child run: same — no elder brother
     expect(meetsRequires(stubState(["only_child", "firstborn_heir"]), req)).toBe(false);
-    // fourth_child but brother already died before boyhood: also blocked
+    // fourth_child with Freddy already dead (origins path): blocked — no living elder brother
+    // to cast a shadow in 1955. The early-death framing in 'fourth_child_brother_dies' sets
+    // fred_jr_died WITHOUT fred_jr_present, so the gate correctly suppresses this event.
     expect(meetsRequires(stubState(["fourth_child", "fred_jr_died"]), req)).toBe(false);
   });
 
-  it("ev_content_heir_dream also gates on fred_jr_present (scene references Freddy)", () => {
+  it("ev_content_heir_dream gates only on at_nyma — past-tense Freddy reflection fires on fred_jr_died path too", () => {
+    // The scene uses past-tense ("Freddy wanted to fly planes") — historically accurate even
+    // when Freddy died before boyhood. Gate is at_nyma only, not fred_jr_present.
     expect(contentHeir).toBeDefined();
     const req = contentHeir!.requires!;
-    // Historical fourth-child run with Freddy alive: eligible (given at_nyma)
+    // Historical fourth-child run with Freddy alive: eligible (at_nyma is the real gate)
     expect(meetsRequires(stubState(["fourth_child", "fred_jr_present", "at_nyma"]), req)).toBe(
       true,
     );
-    // Only-child run: Freddy doesn't exist → blocked
-    expect(meetsRequires(stubState(["only_child", "at_nyma"]), req)).toBe(false);
+    // fourth_child with Freddy dead early: ALSO eligible — past-tense reflection still works
+    expect(meetsRequires(stubState(["fourth_child", "fred_jr_died", "at_nyma"]), req)).toBe(true);
+    // Without at_nyma: never eligible regardless of birth order
+    expect(meetsRequires(stubState(["fourth_child", "fred_jr_present"]), req)).toBe(false);
+    // Only-child run WITH at_nyma: fires — past-tense scene works for any birth order
+    expect(meetsRequires(stubState(["only_child", "at_nyma"]), req)).toBe(true);
+    // Without at_nyma even on only_child: blocked
+    expect(meetsRequires(stubState(["only_child"]), req)).toBe(false);
   });
 });

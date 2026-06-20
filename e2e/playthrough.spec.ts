@@ -8,7 +8,7 @@ import { expect, test } from "@playwright/test";
 
 test("plays from title to a legacy report end screen", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "MAGA Money Moves" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Dynasty" })).toBeVisible();
 
   // Start a fresh, deterministic run.
   await page.getByLabel("Seed (optional)").fill("e2e-playthrough");

@@ -15,7 +15,7 @@ function start(): void {
 
 function randomSeed(): string {
   // Non-sim randomness (UI only) — picking a default seed string.
-  return Math.floor(Date.now() % 1e9).toString(36) + "-maga";
+  return Math.floor(Date.now() % 1e9).toString(36) + "-dynasty";
 }
 </script>
 
