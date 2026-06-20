@@ -27,21 +27,24 @@ export class Game {
   private state: GameState;
   private current: GameEvent | null;
   private lastLedger: LedgerEntry[] = [];
-  private turn = 0;
   private readonly listeners = new Set<Listener>();
 
   constructor(content: Content, seed: string, restore?: GameState) {
     this.content = content;
     this.rng = createRng(seed);
     this.state = restore ?? initState(content, seed);
-    // Re-derive the turn counter so the per-pick RNG fork stays aligned on resume.
-    this.turn = this.state.history.length;
     this.current = this.state.end ? null : this.pick();
   }
 
-  /** Pick (deterministically) the next event for the current state. */
+  /**
+   * Pick (deterministically) the next event for the current state. The RNG fork
+   * label is derived ENTIRELY from reconstructable state (history length + era
+   * position), never from a mutable turn counter — so a restored session and an
+   * uninterrupted one compute the identical label even after era force-advances.
+   */
   private pick(): GameEvent | null {
-    return pickNextEvent(this.content, this.state, this.rng.fork(`pick:${this.turn}`));
+    const label = `pick:${this.state.history.length}:${this.state.eraIndex}:${this.state.eraEventCount}`;
+    return pickNextEvent(this.content, this.state, this.rng.fork(label));
   }
 
   get view(): GameView {
@@ -70,7 +73,6 @@ export class Game {
     const result = applyChoice(this.content, this.state, this.current, choiceId, this.rng);
     this.state = result.state;
     this.lastLedger = result.newLedger;
-    this.turn += 1;
     // If the era is exhausted but the run hasn't ended, force-advance once so the
     // player is never stuck with no event and no end screen.
     this.current = this.state.end ? null : this.pickWithProgress();
@@ -89,7 +91,6 @@ export class Game {
         ...this.state,
         eraEventCount: era.eventBudget,
       });
-      this.turn += 1;
       next = this.state.end ? null : this.pick();
       guard += 1;
     }

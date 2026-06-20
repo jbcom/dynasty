@@ -48,8 +48,14 @@ export function applyChoice(
   for (const f of choice.setFlags) flags = withFlag(flags, f);
   for (const f of choice.clearFlags) flags = withoutFlag(flags, f);
 
-  // 3. Chaos ripples (seeded).
-  const ripples = applyRipples(state.ripples, choice.ripples, rng.fork(`${event.id}:${choice.id}`));
+  // 3. Chaos ripples (seeded). The fork label includes history length so a
+  // repeatable event firing twice gets distinct jitter per occurrence, while
+  // staying deterministic under replay (which applies choices in the same order).
+  const ripples = applyRipples(
+    state.ripples,
+    choice.ripples,
+    rng.fork(`${event.id}:${choice.id}:${state.history.length}`),
+  );
 
   // 4. Visible ledger chains.
   const newLedger = buildLedgerEntries(content, event, choice, ripples, state.ledger.length);

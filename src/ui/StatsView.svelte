@@ -4,6 +4,7 @@ import "uplot/dist/uPlot.min.css";
 import type { Content } from "../sim/content";
 import type { GameState } from "../sim/state";
 import { buildMeterSeries } from "./statsSeries";
+import { formatMoney } from "./theme";
 
 interface Props {
   content: Content;
@@ -66,7 +67,7 @@ $effect(() => {
 <section class="stats" aria-label="Statistics over time">
   <h3>Trajectory</h3>
   <div class="chart" bind:this={el}></div>
-  <p class="note">Net worth: {series.byMeter.money.at(-1)?.toLocaleString() ?? "—"}</p>
+  <p class="note">Net worth: {formatMoney(series.byMeter.money.at(-1) ?? 0)}</p>
 </section>
 
 <style>

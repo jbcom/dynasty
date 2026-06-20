@@ -8,6 +8,7 @@ import { createRng } from "../../sim/rng";
 import { initState } from "../../sim/state";
 import Dossier from "../Dossier.svelte";
 import TimelineView from "../TimelineView.svelte";
+import { applyBrandTokens, makeHost } from "./visualHarness";
 
 const content = buildContent(validRaw());
 
@@ -26,30 +27,8 @@ let host: HTMLElement;
 let component: any;
 
 beforeEach(() => {
-  const r = document.documentElement.style;
-  for (const [k, v] of Object.entries({
-    "--mmm-gold": "#d4af37",
-    "--mmm-gold-deep": "#a8841f",
-    "--mmm-surface": "#16264f",
-    "--mmm-text": "#f5f0e1",
-    "--mmm-text-dim": "#b9c2da",
-    "--mmm-extrapolated": "#9b6dff",
-    "--mmm-pad": "16px",
-    "--mmm-radius": "8px",
-    "--mmm-font-display": "Georgia, serif",
-    "--mmm-meter-money": "#d4af37",
-    "--mmm-meter-power": "#7a1f2b",
-    "--mmm-meter-reputation": "#c08a2e",
-    "--mmm-meter-loyalty": "#274690",
-    "--mmm-meter-health": "#b03030",
-    "--mmm-meter-heat": "#e2562a",
-  })) {
-    r.setProperty(k, v);
-  }
-  document.body.style.background = "#0a1633";
-  host = document.createElement("div");
-  host.style.width = "360px";
-  document.body.appendChild(host);
+  applyBrandTokens();
+  host = makeHost(360);
 });
 afterEach(() => {
   if (component) unmount(component);

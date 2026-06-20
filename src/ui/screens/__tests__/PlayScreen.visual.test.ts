@@ -6,6 +6,7 @@ import { validRaw } from "../../../sim/__tests__/fixtures";
 import { buildContent } from "../../../sim/content";
 import { initMeters } from "../../../sim/meters";
 import { initState } from "../../../sim/state";
+import { applyBrandTokens, makeHost } from "../../__tests__/visualHarness";
 import PlayScreen from "../PlayScreen.svelte";
 
 const content = buildContent(validRaw());
@@ -23,34 +24,8 @@ let host: HTMLElement;
 let component: any;
 
 beforeEach(() => {
-  const s = document.documentElement.style;
-  for (const [k, v] of Object.entries({
-    "--mmm-gold": "#d4af37",
-    "--mmm-gold-deep": "#a8841f",
-    "--mmm-surface": "#16264f",
-    "--mmm-navy": "#0a1633",
-    "--mmm-navy-light": "#16264f",
-    "--mmm-navy-deep": "#050b1c",
-    "--mmm-text": "#f5f0e1",
-    "--mmm-text-dim": "#b9c2da",
-    "--mmm-pad": "12px",
-    "--mmm-gap": "10px",
-    "--mmm-radius": "8px",
-    "--mmm-radius-lg": "12px",
-    "--mmm-font-display": "Georgia, serif",
-    "--mmm-meter-money": "#d4af37",
-    "--mmm-meter-power": "#7a1f2b",
-    "--mmm-meter-reputation": "#c08a2e",
-    "--mmm-meter-loyalty": "#274690",
-    "--mmm-meter-health": "#b03030",
-    "--mmm-meter-heat": "#e2562a",
-  })) {
-    s.setProperty(k, v);
-  }
-  document.body.style.background = "#0a1633";
-  host = document.createElement("div");
-  host.style.width = "412px";
-  document.body.appendChild(host);
+  applyBrandTokens();
+  host = makeHost(412);
 });
 afterEach(() => {
   if (component) unmount(component);

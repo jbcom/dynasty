@@ -1,6 +1,7 @@
 import { mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
+import { applyBrandTokens, makeHost } from "../../ui/__tests__/visualHarness";
 import Portrait from "../Portrait.svelte";
 
 let host: HTMLElement;
@@ -8,13 +9,8 @@ let host: HTMLElement;
 let component: any;
 
 beforeEach(() => {
-  const r = document.documentElement.style;
-  r.setProperty("--mmm-gold", "#d4af37");
-  r.setProperty("--mmm-navy-deep", "#050b1c");
-  r.setProperty("--mmm-radius", "8px");
-  document.body.style.background = "#0a1633";
-  host = document.createElement("div");
-  document.body.appendChild(host);
+  applyBrandTokens();
+  host = makeHost();
 });
 afterEach(() => {
   if (component) unmount(component);

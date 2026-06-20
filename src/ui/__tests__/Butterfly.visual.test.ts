@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, it } from "vitest";
 import { page } from "vitest/browser";
 import type { LedgerEntry } from "../../sim/state";
 import ButterflyGraph from "../ButterflyGraph.svelte";
+import { applyBrandTokens, makeHost } from "./visualHarness";
 
 const ledger: LedgerEntry[] = [
   {
@@ -36,15 +37,8 @@ let host: HTMLElement;
 let component: any;
 
 beforeEach(() => {
-  const s = document.documentElement.style;
-  s.setProperty("--mmm-gold", "#d4af37");
-  s.setProperty("--mmm-gold-deep", "#a8841f");
-  s.setProperty("--mmm-extrapolated", "#9b6dff");
-  s.setProperty("--mmm-text", "#f5f0e1");
-  s.setProperty("--mmm-pad", "16px");
-  document.body.style.background = "#0a1633";
-  host = document.createElement("div");
-  document.body.appendChild(host);
+  applyBrandTokens();
+  host = makeHost();
 });
 afterEach(() => {
   if (component) unmount(component);

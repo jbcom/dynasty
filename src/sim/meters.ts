@@ -45,9 +45,10 @@ export function meterFraction(def: MeterDef, value: number): number {
   if (def.scale === "log") {
     // Map [min,max] onto a log curve so early money growth is visible.
     const safeMin = Math.max(def.min, 1);
+    const denom = Math.log10(def.max) - Math.log10(safeMin);
+    if (denom <= 0) return value >= def.max ? 1 : 0; // degenerate range (max <= 1)
     const v = Math.max(value, safeMin);
-    const frac =
-      (Math.log10(v) - Math.log10(safeMin)) / (Math.log10(def.max) - Math.log10(safeMin));
+    const frac = (Math.log10(v) - Math.log10(safeMin)) / denom;
     return Math.min(1, Math.max(0, frac));
   }
   return Math.min(1, Math.max(0, (value - def.min) / span));

@@ -31,7 +31,6 @@ export function styleForMagnitude(mag: number): Style {
 /** Fire a haptic impact appropriate to a choice's swing. No-op off-device. */
 export async function impact(effects: MeterDelta): Promise<void> {
   const mag = effectMagnitude(effects);
-  // Money is unbounded; ignore it for magnitude so a $1M swing isn't "heavy".
   const style = styleForMagnitude(mag);
   try {
     const { Haptics, ImpactStyle } = await import("@capacitor/haptics");
@@ -43,9 +42,14 @@ export async function impact(effects: MeterDelta): Promise<void> {
     await Haptics.impact({ style: map[style] });
   } catch {
     // Not on a device / plugin unavailable — fall back to the Vibration API.
-    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
-      const ms = style === "heavy" ? 40 : style === "medium" ? 20 : 10;
-      navigator.vibrate(ms);
+    // vibrate() can throw under a permissions policy / in cross-origin frames.
+    try {
+      if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+        const ms = style === "heavy" ? 40 : style === "medium" ? 20 : 10;
+        navigator.vibrate(ms);
+      }
+    } catch {
+      // best-effort haptics — ignore.
     }
   }
 }

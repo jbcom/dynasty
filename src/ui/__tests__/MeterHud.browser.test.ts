@@ -4,6 +4,7 @@ import { validRaw } from "../../sim/__tests__/fixtures";
 import { buildContent } from "../../sim/content";
 import { initMeters } from "../../sim/meters";
 import MeterHud from "../MeterHud.svelte";
+import { applyBrandTokens, makeHost } from "./visualHarness";
 
 const content = buildContent(validRaw());
 
@@ -12,10 +13,8 @@ let host: HTMLElement;
 let component: any;
 
 beforeEach(() => {
-  // Tokens must be present so the gauges resolve their colors.
-  document.documentElement.style.setProperty("--mmm-meter-money", "#d4af37");
-  host = document.createElement("div");
-  document.body.appendChild(host);
+  applyBrandTokens();
+  host = makeHost();
 });
 
 afterEach(() => {

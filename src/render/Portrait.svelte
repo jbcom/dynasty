@@ -19,7 +19,16 @@ const def = $derived(resolvePortrait(portraitId));
 >
   {#each def.layers as layer, i (i)}
     {#if layer.src}
-      <img class="layer" style={`z-index:${layer.z}`} src={`/assets/${layer.src}`} alt="" />
+      <!-- onerror hides a missing image so the gold frame + backdrop still read as a portrait. -->
+      <img
+        class="layer"
+        style={`z-index:${layer.z}`}
+        src={`/assets/${layer.src}`}
+        alt=""
+        onerror={(e) => {
+          (e.currentTarget as HTMLImageElement).style.display = "none";
+        }}
+      />
     {:else}
       <div class={`layer gen ${layer.variant ?? ""}`} style={`z-index:${layer.z}`}></div>
     {/if}

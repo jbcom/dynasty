@@ -5,6 +5,7 @@ import { validRaw } from "../../sim/__tests__/fixtures";
 import { buildContent } from "../../sim/content";
 import { initMeters } from "../../sim/meters";
 import MeterHud from "../MeterHud.svelte";
+import { applyBrandTokens, makeHost } from "./visualHarness";
 
 const content = buildContent(validRaw());
 
@@ -13,21 +14,8 @@ let host: HTMLElement;
 let component: any;
 
 beforeEach(() => {
-  // Provide the brand tokens the gauges read at render time.
-  const root = document.documentElement.style;
-  root.setProperty("--mmm-meter-money", "#d4af37");
-  root.setProperty("--mmm-meter-power", "#7a1f2b");
-  root.setProperty("--mmm-meter-reputation", "#c08a2e");
-  root.setProperty("--mmm-meter-loyalty", "#274690");
-  root.setProperty("--mmm-meter-health", "#b03030");
-  root.setProperty("--mmm-meter-heat", "#e2562a");
-  root.setProperty("--mmm-surface", "#16264f");
-  root.setProperty("--mmm-gold-deep", "#a8841f");
-  root.setProperty("--mmm-text", "#f5f0e1");
-  root.setProperty("--mmm-text-dim", "#b9c2da");
-  document.body.style.background = "#0a1633";
-  host = document.createElement("div");
-  document.body.appendChild(host);
+  applyBrandTokens();
+  host = makeHost();
 });
 
 afterEach(() => {
