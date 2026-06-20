@@ -1,7 +1,65 @@
 # Continuous Work Directive — maga-money-moves
 
-**Status:** RELEASED
+**Status:** ACTIVE
 **Owner:** jbogaty
+
+## Batch — alt-history consistency (batch-20260620-althist)
+
+Source: user directives, 2026-06-20 (verbatim intent below)
+Started: 2026-06-20
+
+THE CORE PROBLEM (user): counterfactual branches must stay HISTORICALLY
+CONSISTENT, and no single divergent choice may make the content feel shallow.
+Three intertwined requirements:
+
+- [ ] AH1 TITLE-AWARE OVERRIDES (user): the override system must work with TITLES,
+      not just events/flags. Full scan done: "president" appears 144× across 8 era
+      files + usa/musk timelines, all branch-blind. On the Nazi/Axis route there is
+      NO U.S. president — the Axis-appointed American leader holds a Reich-style
+      title (Reichskommissar/Gauleiter/Statthalter — research the accurate term),
+      never "President". JFK is NOT shot in 1963 (no presidency to assassinate).
+      The leader-title (and head-of-state references generally) must resolve from
+      the active branch. Needs a title/term resolution layer the content reads.
+- [ ] AH2 MUTUALLY-EXCLUSIVE / EXCLUDED EVENTS (user): some world events FORCE
+      OTHERS OUT of the timeline by choice bias. Real-history landmarks that are
+      impossible under a branch must be suppressed: e.g. "I Have a Dream" / March
+      on Washington / civil-rights arc / free elections / democracy / Constitution
+      / Congress cannot occur in Nazi-occupied America. Scan found all of these in
+      the data, none gated on branch. Need an exclusion mechanism (branch flags in
+      notFlags, or an excludes-set) so picking a branch removes incompatible events.
+- [ ] AH3 ALT-HISTORY BRANCHING ARCHITECTURE (user DECISION 2026-06-20): mechanism =
+      FULL SEPARATE TIMELINES PER BRANCH. Loader picks the variant set matching the
+      active branch flag: e.g. timelines/usa.default.json + usa.nazi.json +
+      usa.westcoast.json + usa.theocracy.json + usa.media.json; same for
+      world/mores/religion/science. A branch-key resolver chooses which variant of
+      each scope to load from the run's branch flag.
+      CRITICAL LAYERING (user): the DONALD and MUSK arcs are PROTAGONIST timelines —
+      threadable/overwritable THROUGH the backdrop timelines (they weave across
+      branches, the role-flip overwrites them). The SOCIAL (mores), RELIGIOUS,
+      TECHNOLOGICAL (science), and GEOGRAPHICAL (manhattan/eastcoast/westcoast/usa/
+      world) timelines are BACKDROPS — each must be MASSIVELY fleshed out per branch
+      to give rich multi-layered context, extrapolating how leadership / geopolitical
+      / economic / moral decisions differ across the changed timeline.
+- [ ] AH3-BRANCHES (user): author full alt-history treatment for these branches:
+      (1) NAZI-OCCUPIED AMERICA (axis_ascendant/nazi_dynasty) — Reich titles, purges
+          not assassinations, no elections/civil-rights/free press.
+      (2) WEST-COAST-ONLY DYNASTY (west_coast_origin) — Pacific-centered, never
+          touches Manhattan/East Coast.
+      (3) EVANGELICAL THEOCRACY (evangelical_scion/faith_to_power) — religious-state
+          titles (Supreme Pastor etc.), theocratic events.
+      (4) TRUMP↔MUSK ROLE-FLIP (role_flip) — head-of-state + arc reflect Musk-as-
+          leader / Trump-as-tycoon (protagonist-thread overwrite, per layering rule).
+      (5) NEW — MEDIA / "PLEASURE KING" BRANCH (user): Drumpf goes ALL-IN on the
+          brothels → "pleasure king" of the West Coast, a position spanning Nevada
+          through California where mining-boom prostitution stays legal longer →
+          transitions into PORNOGRAPHY then MEDIA (think Hefner) → becomes a FOUNDING
+          FAMILY OF HOLLYWOOD → a PROPAGANDA empire that launders its sordid past
+          into legitimacy amid the post-1920s shift in morality. Its propaganda
+          capability toward legitimacy is a key thread to explore.
+- [ ] AH4 NO-SHALLOWNESS INVARIANT (user): "we do not want any one choice suddenly
+      makes the content feel shallow." A branch must be authored to the SAME depth
+      as the main line — taking any fork opens a comparably rich, gated, multi-layer
+      backdrop + event pool, not a thin stub. Acceptance bar for AH1-AH3.
 
 ## Batch — causality-endings-personality (batch-20260620-causality)
 
