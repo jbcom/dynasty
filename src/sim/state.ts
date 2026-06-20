@@ -125,13 +125,16 @@ export const DYNASTY_START: Record<DynastyKey, number> = {
 };
 
 /**
- * The flag that activates each non-Trump dynasty's gear (so dynastyOf / slots /
- * character timelines resolve to the right house from turn zero). Trump has no
- * activation flag — it's the default and needs no explicit flag.
+ * The flags seeded at run start for each dynasty (activation flag + prologue gate).
+ * Trump has no *_dynasty_active flag (it's the default) but it does seed trump_prologue
+ * so the Trump prologue chain (Friedrich/Donald) opens without needing the in-game
+ * ev_dynasty_founding_choice selector to fire. That event is now gated to only fire
+ * when NONE of these flags is already present (i.e. never, when coming from the carousel).
  */
-const DYNASTY_FLAG: Partial<Record<DynastyKey, string>> = {
-  musk: "musk_dynasty_active",
-  kennedy: "kennedy_dynasty_active",
+const DYNASTY_SEED_FLAGS: Record<DynastyKey, string[]> = {
+  trump: ["trump_prologue"],
+  musk: ["musk_dynasty_active", "musk_prologue"],
+  kennedy: ["kennedy_dynasty_active", "kennedy_prologue"],
 };
 
 /** Create the initial state for a new run, optionally for a non-Trump dynasty. */
@@ -143,7 +146,11 @@ export function initState(
   const firstEra = content.eras[0];
   if (!firstEra) throw new Error("Content has no eras");
   const birthYear = DYNASTY_START[dynasty];
-  const activationFlag = DYNASTY_FLAG[dynasty];
+  // Seed all dynasty flags (activation + prologue gate) so the prologue chain
+  // opens immediately without needing the in-game ev_dynasty_founding_choice
+  // selector to fire. That event is gated with notFlags on all three prologue
+  // flags so it never fires when coming from the carousel.
+  const seedFlags = [...DYNASTY_SEED_FLAGS[dynasty]].sort();
   return {
     seed,
     eraIndex: 0,
@@ -155,9 +162,7 @@ export function initState(
     year: firstEra.yearStart,
     meters: initMeters(content.meters),
     personality: initPersonality(),
-    // The dynasty-activation flag is set from the start so dynastyOf / slots /
-    // character timelines resolve to this house from turn zero.
-    flags: activationFlag ? [activationFlag] : [],
+    flags: seedFlags,
     firedEvents: [],
     eraEventCount: 0,
     lastEventYear: firstEra.yearStart,

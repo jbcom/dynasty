@@ -11,7 +11,7 @@ describe("game state", () => {
     expect(s.eraIndex).toBe(0);
     expect(s.year).toBe(1946);
     expect(s.meters.health).toBe(100);
-    expect(s.flags).toEqual([]);
+    expect(s.flags).toEqual(["trump_prologue"]);
     expect(s.end).toBeNull();
     expect(s.history).toEqual([]);
   });
@@ -45,11 +45,13 @@ describe("game state", () => {
 });
 
 describe("per-dynasty Era-0 init (de-5b)", () => {
-  it("defaults to the Trump dynasty (birth year 1946, no activation flag)", () => {
+  it("defaults to the Trump dynasty (birth year 1946, seeds trump_prologue)", () => {
     const s = initState(content(), "seed");
     expect(s.dynasty).toBe("trump");
     expect(s.birthYear).toBe(1946);
-    expect(s.flags).toEqual([]);
+    // Trump seeds trump_prologue from turn zero so the Friedrich prologue chain
+    // opens without needing the in-game ev_dynasty_founding_choice to fire.
+    expect(s.flags).toContain("trump_prologue");
   });
 
   it("a Musk run carries birthYear 1971 + musk_dynasty_active flag from turn zero", () => {
