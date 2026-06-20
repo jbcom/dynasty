@@ -13,7 +13,7 @@ deep-future, then coverage/audit, then persona sweep). Full design detail for ea
 lives in the WAIT-USER items further down (now unblocked).
 
 ### nb-001 Koota: migrate remaining queries over the read-model (continues task-026)
-- [ ] nb-001 migrate linking-protocol broadcast, branch/slot resolution, and market/rank reads to declarative Koota queries over projectWorld; parity test each against its pure helper; replay parity + timeline:sweep stay green.
+- [x] nb-001 Koota read-model extended: market entities (MarketRef/Index/Regime/Position) + declarative queries queryMarketsInCrash / queryLeveragedPositions / queryEligibleByWeight, each parity-tested vs the pure semantics. CRITICAL fix: koota caps live worlds at 16 and createWorld does not auto-free — added withWorld() that always destroy()s, converted all queries to it, + a 50-call leak-guard test (would have crashed real play). 232 tests green.
 ### nb-002 Deep-future for the remaining branches (continues task-025)
 - [ ] nb-002 branch-motivated Mars/stars/first-contact arcs for nazi (Reich conquest), media (broadcast reach), westcoast (techno-frontier), megachurch (mission) — each sets the science-ladder flags via its own motivation; 3 poles; agent-parallelizable per branch.
 ### nb-003 Full 3-pole coverage + no-shallowness audit (task-022 remainder + task-017)
