@@ -14,7 +14,7 @@ content depth, then the Dynasty product epic, then the cross-cutting QA invarian
 
 ### Phase DE-1 — Koota query-substrate migration (task-026)
 - [x] de-1a migrate eligibleEvents/effectiveWeight selection (events.ts/pickNextEvent) to a declarative query over projectWorld, keeping the pure helper as source-of-truth + a parity test. Pattern for the rest.
-- [ ] de-1b migrate the remaining hand-rolled query surfaces over the read-model where it clarifies (branch/slot/moralAxis resolution reads, timelinesForBranch/applyWorldFlags linking reads, market/rank reads already done). Pure transition (applyChoice) stays authoritative; worlds projected→queried→destroyed (withWorld). Every determinism + replay + timeline:sweep test stays green.
+- [x] de-1b migrate the remaining hand-rolled query surfaces over the read-model where it clarifies (branch/slot/moralAxis resolution reads, timelinesForBranch/applyWorldFlags linking reads, market/rank reads already done). Pure transition (applyChoice) stays authoritative; worlds projected→queried→destroyed (withWorld). Every determinism + replay + timeline:sweep test stays green.
 - [ ] de-1c PHASE BOUNDARY: full gate (typecheck/biome/unit/browser) + replay parity + sweep; open PR #A "koota query substrate"; reviewer trio; resolve threads; squash-merge green.
 
 ### Phase DE-2 — Moral-axis wiring into endings + HUD (task-022 remainder)
@@ -34,6 +34,13 @@ content depth, then the Dynasty product epic, then the cross-cutting QA invarian
 - [ ] de-5b MUSK playable Era-0 saga — South Africa origin (Walter Henry James Musk → Errol → Elon), the most TECHNOLOGICALLY-focused house; its own Era-0 prologue + early eras feeding the existing mid/late-game systems (markets/ranks/branches/slots). Reuse the grammar; author Musk-specific slot resolutions + backdrop.
 - [ ] de-5c KENNEDY playable Era-0 saga — earliest origin (Patrick Kennedy 1823–1858, Irish Famine), the most POLITICAL house; its own (earliest) Era-0 + bridge into the existing kennedy.json protagonist timeline + bootlegger arc.
 - [ ] de-5d DYNASTY-SELECT CAROUSEL landing screen — portraits + public-domain lineage imagery for Trump/Musk/Kennedy; pick a dynasty → play its saga. Slot/timeline pools keyed per dynasty so each house yields a unique emergent story; architecture open to adding more houses. PHASE BOUNDARY PR #E (largest).
+
+### Phase DE-UI — Luxury UI/UX + HUD uplevel: POC → finished "Dynasty" (user, 2026-06-20)
+User mandate: "the ui ux and HUD needs significant polish and upleveling to go from POC to a new game Dynasty with a dedicated set of complementary luxury-feel header and UI typography etc. Download Google web fonts locally to public/assets/fonts."
+- [ ] de-ui-a LOCAL LUXURY FONTS: pick a complementary luxury pairing (display serif for headers/dynastic gravitas + a refined body face), download the Google Web Font files LOCALLY into public/assets/fonts/ (woff2, self-hosted — no runtime fonts.googleapis fetch, works offline on the Capacitor build), wire @font-face + the --mmm-font-display/--mmm-font-body tokens. License-log each font in assets.json.
+- [ ] de-ui-b HEADER / TITLE upleveling: a dedicated luxury masthead (the "Dynasty" wordmark, gilded treatment) on the title screen + an in-game header; raise the visual hierarchy from POC.
+- [ ] de-ui-c HUD polish: meters, the moral-pole badge, tabs, event card — tighten spacing/type scale/elevation to a finished feel; keep mobile-first (safe areas, Pixel-5a budget). Screenshot-review every change.
+- [ ] de-ui-d PHASE BOUNDARY: full gate + visual screenshots read + reviewer trio; PR.
 
 ### Phase DE-6 — Cross-cutting QA invariants (AH6 agent-sweep + task-023 persona sweep)
 - [ ] de-6a AH6 automated consistency sweep: fan out verification agents over a SWEEP of Era-0 permutations (now incl. all 3 dynasties), each reading one compiled-timeline dump (timeline:dump) flagging cross-timeline contradictions/anachronisms/shallowness/title-leaks (e.g. "President" in a Nazi run). Aggregate → fix → re-sweep. Wire as a repeatable harness, not a one-off.
