@@ -23,8 +23,8 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 - [x] B6 Effects + timeline + end conditions
 
 ### Phase C — Engine glue
-- [ ] C1 Clock facade + game loop
-- [ ] C2 Save/load via Capacitor Preferences
+- [x] C1 Clock facade + game loop
+- [x] C2 Save/load via Capacitor Preferences
 
 ### Phase D — UI / Render / Audio
 - [ ] D1 Design tokens + open-props brand system
