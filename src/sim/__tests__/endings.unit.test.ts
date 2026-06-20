@@ -101,3 +101,167 @@ describe("data-driven endings — role-flip & world-aligned outcomes", () => {
     expect(evaluateEnding(content7, s)?.endingId).toBe("end_megalomaniac_king");
   });
 });
+
+describe("moral-pole ending gate (DE-2)", () => {
+  // Three pole-gated endings sharing the same flag gate but differing on `when.pole`.
+  const poleEndings = {
+    endings: [
+      {
+        id: "end_pole_utopian",
+        kind: "victory",
+        title: "U",
+        reason: "utopian end",
+        priority: 50,
+        tier: "apex" as const,
+        when: { flags: ["reached_apex"], pole: "utopian" as const, minEraOrder: 7 },
+      },
+      {
+        id: "end_pole_dictatorial",
+        kind: "victory",
+        title: "D",
+        reason: "dictatorial end",
+        priority: 50,
+        tier: "apex" as const,
+        when: { flags: ["reached_apex"], pole: "dictatorial" as const, minEraOrder: 7 },
+      },
+    ],
+  };
+  const poleContent: Content = {
+    ...built,
+    endings: buildContent({ ...validRaw(), endings: poleEndings }).endings,
+    eras: [...built.eras, lateEra],
+  };
+  function poleState(over: Partial<ReturnType<typeof initState>> = {}) {
+    const s = initState(poleContent, "seed");
+    return { ...s, eraIndex: poleContent.eras.length - 1, year: 2120, age: 174, ...over };
+  }
+
+  it("fires the utopian-pole ending only when the run resolves to the utopian pole", () => {
+    // tyrannyUtopiaAxis = outward*0.6 + ideology*0.25 + grandiosity*0.15; drive it
+    // below -40 for the utopian pole (outward-dominated).
+    const s = poleState({
+      flags: ["reached_apex"],
+      personality: { ideology: -80, grandiosity: -40, outward: -80, inward: 0 },
+    });
+    expect(evaluateEnding(poleContent, s)?.endingId).toBe("end_pole_utopian");
+  });
+
+  it("fires the dictatorial-pole ending for a tyrannical run with the same flags", () => {
+    const s = poleState({
+      flags: ["reached_apex"],
+      personality: { ideology: 80, grandiosity: 90, outward: 80, inward: 0 },
+    });
+    expect(evaluateEnding(poleContent, s)?.endingId).toBe("end_pole_dictatorial");
+  });
+
+  it("a pole-gated ending does NOT fire when the pole does not match", () => {
+    // Centrist run — neither the utopian nor dictatorial pole ending qualifies.
+    const s = poleState({
+      flags: ["reached_apex"],
+      personality: { ideology: 0, grandiosity: 0, outward: 0, inward: 0 },
+    });
+    expect(evaluateEnding(poleContent, s)).toBeNull();
+  });
+});
+
+describe("per-branch per-pole endings — flag-gated resolution (DE-2a)", () => {
+  // Nazi branch
+  it("fires end_nazi_utopian for reich_utopian_pole (no other pole flags)", () => {
+    const s = lateState({ flags: ["reich_utopian_pole"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_nazi_utopian");
+  });
+  it("fires end_nazi_centrist for reich_centrist_pole", () => {
+    const s = lateState({ flags: ["reich_centrist_pole"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_nazi_centrist");
+  });
+  it("fires end_nazi_dictatorial for reich_dictatorial_pole", () => {
+    const s = lateState({ flags: ["reich_dictatorial_pole"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_nazi_dictatorial");
+  });
+
+  // Theocracy branch
+  it("fires end_theocracy_utopian for covenant_commonwealth", () => {
+    const s = lateState({ flags: ["covenant_commonwealth"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_theocracy_utopian");
+  });
+  it("fires end_theocracy_centrist for soft_establishment", () => {
+    const s = lateState({ flags: ["soft_establishment"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_theocracy_centrist");
+  });
+  it("fires end_theocracy_dictatorial for gilead_regime (prio 95 > health_death 90)", () => {
+    const s = lateState({ flags: ["gilead_regime"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_theocracy_dictatorial");
+  });
+
+  // Oligarchy branch
+  it("fires end_oligarchy_utopian for abundance_technocracy", () => {
+    const s = lateState({ flags: ["abundance_technocracy"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_oligarchy_utopian");
+  });
+  it("fires end_oligarchy_centrist for managed_oligopoly", () => {
+    const s = lateState({ flags: ["managed_oligopoly"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_oligarchy_centrist");
+  });
+  it("fires end_oligarchy_dictatorial for company_serfdom", () => {
+    const s = lateState({ flags: ["company_serfdom"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_oligarchy_dictatorial");
+  });
+
+  // Megachurch branch
+  it("fires end_megachurch_utopian for charitable_ministry", () => {
+    const s = lateState({ flags: ["charitable_ministry"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_megachurch_utopian");
+  });
+  it("fires end_megachurch_centrist for prosperity_grift", () => {
+    const s = lateState({ flags: ["prosperity_grift"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_megachurch_centrist");
+  });
+  it("fires end_megachurch_dictatorial for personality_cult", () => {
+    const s = lateState({ flags: ["personality_cult"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_megachurch_dictatorial");
+  });
+
+  // Media branch
+  it("fires end_media_utopian for media_utopian_pole", () => {
+    const s = lateState({ flags: ["media_utopian_pole"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_media_utopian");
+  });
+  it("fires end_media_centrist for media_centrist_pole", () => {
+    const s = lateState({ flags: ["media_centrist_pole"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_media_centrist");
+  });
+  it("fires end_media_dictatorial for propaganda_state", () => {
+    const s = lateState({ flags: ["propaganda_state"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_media_dictatorial");
+  });
+
+  // Westcoast branch
+  it("fires end_westcoast_utopian for pole_utopian", () => {
+    const s = lateState({ flags: ["pole_utopian"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_westcoast_utopian");
+  });
+  it("fires end_westcoast_centrist for pole_centrist", () => {
+    const s = lateState({ flags: ["pole_centrist"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_westcoast_centrist");
+  });
+  it("fires end_westcoast_dictatorial for pole_dictatorial", () => {
+    const s = lateState({ flags: ["pole_dictatorial"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_westcoast_dictatorial");
+  });
+
+  // Default branch centrist
+  it("fires end_default_centrist for managed_oligopoly_civil_religion (no mars/autocratic/utopian)", () => {
+    const s = lateState({ flags: ["managed_oligopoly_civil_religion"] });
+    expect(evaluateEnding(content, s)?.endingId).toBe("end_default_centrist");
+  });
+
+  // Utopian pole endings are "endgame-good" tier
+  it("nazi utopian ending has tier endgame-good", () => {
+    const ending = content.endings.find((e) => e.id === "end_nazi_utopian");
+    expect(ending?.tier).toBe("endgame-good");
+  });
+  it("theocracy utopian ending has tier endgame-good", () => {
+    const ending = content.endings.find((e) => e.id === "end_theocracy_utopian");
+    expect(ending?.tier).toBe("endgame-good");
+  });
+});
