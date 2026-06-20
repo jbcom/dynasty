@@ -37,7 +37,7 @@ multiple passes). Depth + divergence are the goal, not coverage checkboxes.
 ### Phase N — ONE reality + medium-native HUD (user, 2026-06-20)
 - [x] N1 ONE reality: strip meta/franchise keywords from player-facing text (Trek/Vulcan/Cochrane/Phoenix); rename benevolent first-contact species to an original in-world name; startrekInspired flag stays private provenance
 - [x] N2 Immersion: removed Extrapolated badge + research-note panel (facts woven into scene prose)
-- [ ] N3 Medium-native HUD: Capacitor Device form-factor (phone/tablet/foldable) → diegetic surfaces (newspapers, TV) not a constant button set
+- [x] N3 Medium-native HUD: Capacitor Device form-factor (phone/tablet/foldable) → diegetic surfaces (newspapers, TV) not a constant button set
 - [x] N4 engine: era entryRequires gate (advanceTimeline ends the run if next era's gate fails) — implements the science ladder
 **SCIENCE LADDER (user, 2026-06-20):**
   - NO science at all → game ends on EARTH (≤Era 9) with a utopian/religious OR deistic god-king ending. No Mars.

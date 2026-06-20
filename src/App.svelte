@@ -5,6 +5,7 @@ import { clearSave, hasSave, loadGame } from "./engine/save";
 import type { Content } from "./sim/content";
 import type { GameState } from "./sim/state";
 import { GameStore } from "./ui/gameStore.svelte";
+import { FormFactorStore } from "./ui/formFactor.svelte";
 import PlayScreen from "./ui/screens/PlayScreen.svelte";
 import LegacyReport from "./ui/screens/LegacyReport.svelte";
 import TitleScreen from "./ui/screens/TitleScreen.svelte";
@@ -12,6 +13,8 @@ import TitleScreen from "./ui/screens/TitleScreen.svelte";
 type Screen = "title" | "play";
 
 const content: Content = loadContent();
+const formFactor = new FormFactorStore();
+$effect(() => formFactor.start());
 
 let storage = $state<Storage | undefined>();
 let saveExists = $state(false);
@@ -59,5 +62,11 @@ function restart(): void {
 {:else if store.view?.state.end}
   <LegacyReport {content} state={store.view.state} end={store.view.state.end} onRestart={restart} />
 {:else}
-  <PlayScreen {content} view={store.view} busy={store.busy} onchoose={(id) => store?.choose(id)} />
+  <PlayScreen
+    {content}
+    view={store.view}
+    busy={store.busy}
+    wide={formFactor.info.wide}
+    onchoose={(id) => store?.choose(id)}
+  />
 {/if}

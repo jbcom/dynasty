@@ -68,4 +68,17 @@ describe("PlayScreen (composed game screen)", () => {
     });
     await page.screenshot({ element: host.firstElementChild as Element });
   });
+
+  it("wide (tablet/foldable) renders the event + info side-by-side", async () => {
+    host.style.width = "1024px";
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: view(), busy: false, onchoose: () => {}, wide: true },
+    });
+    // The split layout puts the event column next to an info column.
+    expect(host.querySelector(".split")).not.toBeNull();
+    expect(host.querySelector(".event-col [data-event]")).not.toBeNull();
+    expect(host.querySelector(".info-col")).not.toBeNull();
+    await page.screenshot({ element: host.firstElementChild as Element });
+  });
 });
