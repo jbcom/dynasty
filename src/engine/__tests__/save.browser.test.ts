@@ -76,7 +76,13 @@ describe("save/load (deterministic replay)", () => {
 
   it("rejects an unsupported save version", () => {
     expect(() =>
-      fromSave(content(), { version: 99, seed: "x", dynasty: "trump", history: [], savedYear: 1946 }),
+      fromSave(content(), {
+        version: 99,
+        seed: "x",
+        dynasty: "trump",
+        history: [],
+        savedYear: 1946,
+      }),
     ).toThrow(/version/);
   });
 });

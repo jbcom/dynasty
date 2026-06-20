@@ -82,7 +82,9 @@ test("a saved run can be continued", async ({ page }) => {
   await expect(page.locator("[data-meter]").first()).toBeVisible();
 });
 
-test("dynasty carousel shows all three houses and routes to Musk saga (de-5d)", async ({ page }) => {
+test("dynasty carousel shows all three houses and routes to Musk saga (de-5d)", async ({
+  page,
+}) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Begin a Dynasty" }).click();
   // Carousel is visible.
