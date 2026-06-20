@@ -33,7 +33,7 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 - [x] D4 Butterfly Log + D3 force-DAG graph view
 - [x] D5 Timeline (hand-rolled fallback) + Stats (uPlot) + Dossier views
 - [x] D6 Render layer — caricature portrait/scene compositing
-- [ ] D7 Audio — Tone.js graph
+- [x] D7 Audio — Tone.js graph
 - [ ] D8 Screens — Title/New Game, Era intro, Legacy Report
 
 ### Phase E — Assets

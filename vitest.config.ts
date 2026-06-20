@@ -34,8 +34,17 @@ export default defineConfig({
           include: browserGlobs,
           browser: {
             enabled: true,
-            provider: playwright(),
             headless: true,
+            // Unlock the AudioContext without a user gesture so Tone.js audio
+            // tests can start the graph in headless Chromium.
+            provider: playwright({
+              launchOptions: {
+                args: [
+                  "--autoplay-policy=no-user-gesture-required",
+                  "--use-fake-ui-for-media-stream",
+                ],
+              },
+            }),
             instances: [
               {
                 browser: "chromium",

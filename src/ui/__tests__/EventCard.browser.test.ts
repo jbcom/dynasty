@@ -1,4 +1,4 @@
-import { page } from "@vitest/browser/context";
+import { page } from "vitest/browser";
 import { mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, expect, it, vi, vitest } from "vitest";
 import type { GameEvent } from "../../sim/schema";
