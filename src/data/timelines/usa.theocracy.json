@@ -97,7 +97,7 @@
       "body": "Falwell's Moral Majority registers four million new voters in its first cycle, delivering the evangelical bloc en masse to Ronald Reagan. Unlike the default timeline, here the organization does not dissolve in 1989 but reforms as the 'Council of Christian Citizens,' acquires 501(c)(4) status, and begins endorsing state judicial candidates. The church has entered electoral infrastructure permanently.",
       "tags": ["moral_majority", "evangelicalism", "politics", "elections"],
       "extrapolated": false,
-      "setFlags": ["moral_majority", "council_of_christian_citizens"]
+      "setFlags": ["moral_majority", "council_of_christian_citizens", "soft_establishment"]
     },
     {
       "id": "wut_reagan_covenant",
@@ -106,7 +106,7 @@
       "body": "Reagan's second inaugural, drafted with input from evangelical advisers, explicitly invokes America as a covenant nation chosen by God. For the first time since the Civil War, a president's speech uses the language of divine election without irony. The 'City on a Hill' is no longer metaphor — it is constitutional theology. Cabinet appointees take office over a Bible opened to Deuteronomy.",
       "tags": ["reagan", "christian_nationalism", "civil_religion", "presidency"],
       "extrapolated": false,
-      "setFlags": ["covenant_presidency"]
+      "setFlags": ["covenant_presidency", "soft_establishment"]
     },
     {
       "id": "wut_dominionist_judiciary",
@@ -130,7 +130,7 @@
       "body": "Thirty-four state legislatures — the bare minimum — call an Article V convention with a single declared agenda: inserting an explicit acknowledgment of Christian nationhood into the preamble and Establishment Clause. The convention fractures, but its work product — the 'Philadelphia Covenant' — is ratified by thirty-seven states in 2007 and becomes the Establishment Clause's operative interpretation for all subsequent federal courts.",
       "tags": ["constitution", "christian_nationalism", "amendment", "convention"],
       "extrapolated": true,
-      "setFlags": ["philadelphia_covenant", "establishment_clause_rewritten"],
+      "setFlags": ["philadelphia_covenant", "establishment_clause_rewritten", "covenant_commonwealth"],
       "requires": {
         "flags": ["dominionist_judiciary_pipeline"],
         "notFlags": [],
@@ -145,7 +145,7 @@
       "body": "The 'Covenant Governance Act' abolishes the Senate and replaces it with a forty-member Council of Elders appointed by a joint commission of recognized evangelical denominations. The House survives but must have all legislation certified as 'scripturally sound' by the Council before it can be signed. Secular liberals call it a coup; the evangelical majority calls it restoration.",
       "tags": ["governance", "theocracy", "council_of_elders", "congress"],
       "extrapolated": true,
-      "setFlags": ["council_of_elders", "theocracy_hardening"],
+      "setFlags": ["council_of_elders", "theocracy_hardening", "covenant_commonwealth"],
       "requires": {
         "flags": ["philadelphia_covenant"],
         "notFlags": [],
@@ -160,9 +160,24 @@
       "body": "The 'Anointed Republic Act' formally renames the office of President to Supreme Pastor, eliminating the election-by-popular-vote mechanism and replacing it with a conclave of denominational bishops who ratify or reject the candidate endorsed by the sitting Council of Elders. The first Supreme Pastor is invested in a ceremony at the Washington National Cathedral, which has been rededicated as the National Sanctuary. The Constitution's Article II is now a liturgical document.",
       "tags": ["supreme_pastor", "presidency", "theocracy", "governance"],
       "extrapolated": true,
-      "setFlags": ["supreme_pastor", "theocracy_established", "first_supreme_pastor"],
+      "setFlags": ["supreme_pastor", "theocracy_established", "first_supreme_pastor", "soft_establishment"],
       "requires": {
         "flags": ["council_of_elders"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wut_gender_caste_edict",
+      "year": 2018,
+      "headline": "The Household Ordering Act: Women Assigned to Civic Castes",
+      "body": "The Council of Elders passes the 'Household Ordering Act,' which for the first time codifies women into legally distinct civic categories: Covenant Wives (married to recognized male citizens, full indirect civic status through their husbands), Handmaidens of the Republic (fertile unmarried women under state guardianship, assigned to households of senior Covenant men who lack heirs — officially framed as 'servant stewardship'), and Covenant Workers (post-fertile or infertile women permitted to labor outside the home in approved occupations). The law draws on a pastoral commission's reading of Genesis 2 and 1 Timothy 2. Women's organizations describe it as the end of personhood. The Council calls it the restoration of natural order.",
+      "tags": ["gender", "caste", "women", "gilead", "theocracy"],
+      "extrapolated": true,
+      "setFlags": ["gender_caste_system", "handmaidens_instituted", "gilead_regime"],
+      "requires": {
+        "flags": ["theocracy_established"],
         "notFlags": [],
         "meters": {},
         "personality": {}
@@ -175,9 +190,24 @@
       "body": "The 'Faith and Family Judiciary Act' authorizes Scripture Courts in states that opt in — judges are ordained clergy, verdicts cite chapter and verse, and appeals go to the Council of Elders' judicial arm rather than the federal appellate system. Twelve states opt in immediately. The dual court system produces an immediate conflict when a secular federal court and a Scripture Court issue contradictory rulings on the same case; the Council of Elders issues a decree declaring its courts supreme.",
       "tags": ["judiciary", "theocracy", "law", "scripture_courts"],
       "extrapolated": true,
-      "setFlags": ["scripture_courts", "dual_judiciary"],
+      "setFlags": ["scripture_courts", "dual_judiciary", "soft_establishment"],
       "requires": {
         "flags": ["theocracy_established"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wut_watchers_established",
+      "year": 2023,
+      "headline": "The Eyes of the Lord: Secret Religious Police Begin Operations",
+      "body": "Operating initially without public announcement, the 'Office of Covenant Witness' — staffed by vetted laymen and clergy answerable to the Heresy Tribunal — begins a covert surveillance program. Citizens are encouraged to report neighbors for Sabbath violations, undeclared cohabitation, contraband secular media, or 'doctrinal murmuring.' Reports are filed through an encrypted app called 'The Witness.' Within eighteen months the Office has seventeen thousand registered informants in forty-three states. The Supreme Pastor refers to the program only as 'the community of accountability.' Its targets call it something else.",
+      "tags": ["surveillance", "secret_police", "theocracy", "gilead"],
+      "extrapolated": true,
+      "setFlags": ["covenant_watchers", "religious_secret_police", "gilead_regime"],
+      "requires": {
+        "flags": ["council_of_elders", "theocracy_established"],
         "notFlags": [],
         "meters": {},
         "personality": {}
@@ -199,9 +229,39 @@
       "body": "The Supreme Pastor establishes the Office of Doctrinal Integrity — colloquially the Heresy Tribunal — to vet public officials, educators, and media figures for theological soundness. Secular universities must gain accreditation from the Office to receive federal funds. Three sitting appellate judges are removed for 'doctrinal deviation.' The phrase 'separation of church and state' becomes a sedition marker in its filings.",
       "tags": ["heresy_tribunal", "censorship", "theocracy", "education"],
       "extrapolated": true,
-      "setFlags": ["heresy_tribunal", "doctrinal_censorship"],
+      "setFlags": ["heresy_tribunal", "doctrinal_censorship", "gilead_regime"],
       "requires": {
         "flags": ["theocracy_established"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wut_ritual_submission_mandate",
+      "year": 2034,
+      "headline": "The Ceremony of Covenant Renewal: Public Submission Rituals Become Mandatory",
+      "body": "Twice annually, in June and December, every adult citizen must attend a 'Covenant Renewal Ceremony' at their registered congregation. The ceremony requires a verbal affirmation of the Republic's founding theology, a public confession of any doctrinal failures since the last ceremony, and a physical act of prostration before the ordained officiant. Pregnant women in the Handmaiden caste must attend a separate ceremony in which their fertility is formally consecrated to the state. Failure to attend — verifiable through the Sanctification Index — results in downgrade of civic status. Historians from secular countries note the ceremony's resemblance to Stalinist self-criticism sessions. The resemblance is not acknowledged.",
+      "tags": ["ritual", "submission", "theocracy", "gilead", "gender"],
+      "extrapolated": true,
+      "setFlags": ["submission_rituals_mandatory", "covenant_renewal_ceremony", "gilead_regime"],
+      "requires": {
+        "flags": ["gender_caste_system", "heresy_tribunal"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wut_forced_conversion_camps",
+      "year": 2037,
+      "headline": "Covenant Restoration Centers: Forced Conversion Under a Pastoral Label",
+      "body": "The 'Spiritual Renewal Act' authorizes Scripture Courts to sentence apostates, persistent doctrinal deviants, and members of unrecognized denominations to mandatory residential 'Covenant Restoration.' The centers — fifty-three operational within three years — run six-week programs of scripture immersion, enforced fasting, sleep disruption, and 'pastoral accountability sessions' that former residents describe as interrogation. Graduates must sign a public profession of faith before regaining civil standing. The medical community in secular states classifies the program as torture. The Council of Elders classifies it as love.",
+      "tags": ["forced_conversion", "camps", "theocracy", "gilead", "apostasy"],
+      "extrapolated": true,
+      "setFlags": ["covenant_restoration_centers", "forced_conversion", "gilead_regime"],
+      "requires": {
+        "flags": ["heresy_tribunal", "apostasy_criminalized"],
         "notFlags": [],
         "meters": {},
         "personality": {}
@@ -214,9 +274,24 @@
       "body": "The Ninth Conclave of Elders votes to dissolve the remaining secular federal agencies — the NSF, NEH, and CDC are abolished and replaced by their Faith equivalents: the Office of Creation Science, the Heritage Preservation Board, and the Ministry of Bodily Stewardship. Public health policy is now scripture-derived. Evolution is federally classified as 'heretical natural philosophy.'",
       "tags": ["theocracy", "agencies", "science", "purge"],
       "extrapolated": true,
-      "setFlags": ["secular_agencies_dissolved", "creation_science_official"],
+      "setFlags": ["secular_agencies_dissolved", "creation_science_official", "gilead_regime"],
       "requires": {
         "flags": ["heresy_tribunal"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wut_reproduction_state_property",
+      "year": 2041,
+      "headline": "The Fruitfulness Decree: Female Fertility Becomes a National Resource",
+      "body": "The Supreme Pastor's 'Fruitfulness Decree' formally classifies the reproductive capacity of Handmaidens as a state resource to be administered in the national interest, citing the demographic emergency created by emigration of secular citizens. Handmaidens are assigned by the Ministry of Household Order to Covenant households that have petitioned for a child. Their movement requires a travel pass signed by their assigned household's patriarch. They may not marry, hold property, or refuse assignment without appealing to a Scripture Court — a process that has never returned a verdict in favor of the petitioner. Children born to Handmaidens are registered to the patriarchal household, not the birth mother. The Decree's preamble quotes the story of Rachel and Bilhah. The analogy is not ironic.",
+      "tags": ["women", "reproductive_control", "gilead", "theocracy", "gender_caste"],
+      "extrapolated": true,
+      "setFlags": ["reproductive_conscription", "fruitfulness_decree", "gilead_regime"],
+      "requires": {
+        "flags": ["gender_caste_system", "handmaidens_instituted"],
         "notFlags": [],
         "meters": {},
         "personality": {}
@@ -229,7 +304,7 @@
       "body": "The Supreme Pastor issues the First Crusade Encyclical, authorizing military intervention in any nation that 'persecutes Christians or suppresses the Gospel.' Canada and Mexico receive Covenant Missionaries backed by National Guard units. The UN expels the Anointed Republic. NATO dissolves its relationship. The republic is now a confessional state conducting theocratic foreign policy.",
       "tags": ["crusade", "foreign_policy", "military", "theocracy"],
       "extrapolated": true,
-      "setFlags": ["covenant_crusade", "theocratic_foreign_policy"],
+      "setFlags": ["covenant_crusade", "theocratic_foreign_policy", "gilead_regime"],
       "requires": {
         "flags": ["theocracy_established"],
         "notFlags": [],
@@ -247,6 +322,21 @@
       "setFlags": ["federal_tithe", "tithe_economy"],
       "requires": {
         "flags": ["theocracy_established"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wut_heretic_labor_colonies",
+      "year": 2058,
+      "headline": "The Wasteland Reclamation Corps: Heretics and Apostates Sent to Labor Settlements",
+      "body": "A rider attached to the Covenant Infrastructure Act authorizes the Council of Elders to sentence 'covenant-resistant persons' — a category expanded by Heresy Tribunal ruling to include repeat doctrinal offenders, apostate-adjacent sympathizers, and non-compliant sojourners — to compulsory service in 'Reclamation Settlements' in depopulated interior territories. The settlements, nominally for ecological restoration, function as labor colonies. Residents work six-day weeks (the Sabbath is a mandatory worship day, not a rest day), sleep in gender-segregated dormitories, eat according to Levitical purity codes, and attend mandatory scripture instruction each evening. Correspondence with family is monitored. Exit requires a unanimous vote of the settlement's pastoral council. The settlements house sixty thousand people by 2062.",
+      "tags": ["labor_camps", "heresy", "apostasy", "gilead", "theocracy"],
+      "extrapolated": true,
+      "setFlags": ["heretic_labor_colonies", "wasteland_reclamation_corps", "gilead_regime"],
+      "requires": {
+        "flags": ["forced_conversion", "secular_agencies_dissolved"],
         "notFlags": [],
         "meters": {},
         "personality": {}
@@ -274,9 +364,24 @@
       "body": "The Council of Elders amends the Covenant Constitution to classify public apostasy — renouncing the recognized faith — as an act of treason against the Anointed Republic. The first prosecution involves a former university professor who converted from Christianity to Islam and lectured publicly. He is sentenced to seven years of 'covenant labor' rebuilding a church in the Oklahoma Badlands.",
       "tags": ["apostasy", "law", "theocracy", "freedom"],
       "extrapolated": true,
-      "setFlags": ["apostasy_criminalized", "scripture_security_act"],
+      "setFlags": ["apostasy_criminalized", "scripture_security_act", "gilead_regime"],
       "requires": {
         "flags": ["scripture_courts"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wut_soul_surveillance_system",
+      "year": 2078,
+      "headline": "Surveillance of the Soul: The Covenant Witness Network Achieves Total Coverage",
+      "body": "By 2078 the Office of Covenant Witness has integrated its informant network with mandatory pastoral reporting, digital Sabbath monitoring, Sanctification Index data, and biometric attendance verification at required ceremonies into a single unified system — the 'Covenant Witness Network.' Every citizen's theological reliability is scored in real time. Pastoral counselors are legally required to report confessed doctrinal doubt to the Network within forty-eight hours. The confessional seal, which protected penitents' disclosures for two millennia, has been abolished by decree. What a person thinks, doubts, or whispers — if heard by any other person — is state information. There is no inner life that belongs to the self alone.",
+      "tags": ["surveillance", "theocracy", "gilead", "totalitarianism", "secret_police"],
+      "extrapolated": true,
+      "setFlags": ["total_soul_surveillance", "confessional_abolished", "gilead_regime"],
+      "requires": {
+        "flags": ["covenant_watchers", "submission_rituals_mandatory"],
         "notFlags": [],
         "meters": {},
         "personality": {}
@@ -289,7 +394,7 @@
       "body": "One hundred years after the Philadelphia Covenant, the Anointed Republic holds its centennial celebration: a mandatory three-day national fast followed by a Convocation of Praise in every city. The last secular newspaper has folded; the last non-accredited university has closed. Birth certificates now list a child's baptismal denomination alongside their name. The transformation from constitutional republic to confessional theocracy is complete.",
       "tags": ["theocracy", "consolidation", "history", "century"],
       "extrapolated": true,
-      "setFlags": ["theocracy_consolidated", "century_of_sanctification"],
+      "setFlags": ["theocracy_consolidated", "century_of_sanctification", "gilead_regime"],
       "requires": {
         "flags": ["theocracy_established", "secular_agencies_dissolved"],
         "notFlags": [],

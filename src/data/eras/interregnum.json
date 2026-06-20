@@ -3013,6 +3013,340 @@
           "outcome": "You make peace with mortality and the limits of any one man. The dream of permanence dies with a shrug, and history is left to judge what was built."
         }
       ]
+    },
+    {
+      "id": "ev_flip_natural_born_repeal",
+      "era": "interregnum",
+      "year": 2026,
+      "title": "The Clause That Kept Him Out Is Gone",
+      "scene": "A constitutional amendment strikes the natural-born-citizen requirement from the presidency. Loyalist legislators hail it as modernization. You understand instantly what it really is: a door opened for Elon Musk — a door you helped build by letting him run DOGE, run your efficiency circus, run half of Washington. The question is whether you just handed the throne to a man who was never supposed to sit on it.",
+      "researchNote": "Extrapolated. Speculative scenario in which real 2025 advocacy for removing the natural-born-citizen clause — which disqualifies Musk, a South Africa-born naturalized citizen — culminates in a constitutional amendment by 2026. No such amendment has passed.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["world-event", "role-flip", "speculative", "president", "musk"],
+      "portrait": "president",
+      "requires": {
+        "flags": ["musk_political_turn"],
+        "notFlags": ["role_flip"],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "champion_the_amendment",
+          "text": "Champion the repeal publicly. \"America's door must be open to the best.\"",
+          "effects": {
+            "power": 5,
+            "reputation": 4,
+            "loyalty": -4,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 4,
+            "outward": 4
+          },
+          "setFlags": ["natural_born_repealed", "musk_eligible_patron"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "power", "weight": 0.3, "polarity": -1 }
+          ],
+          "outcome": "You hand Musk the eligibility he needs and call it principle. The base cheers the modernization and does not yet see what it cost you."
+        },
+        {
+          "id": "oppose_quietly",
+          "text": "Whisper opposition but let it pass. The base mustn't see you sweat.",
+          "effects": {
+            "power": -3,
+            "reputation": 2,
+            "loyalty": 3,
+            "heat": -2
+          },
+          "personality": {
+            "grandiosity": -3,
+            "outward": -4
+          },
+          "setFlags": ["natural_born_repealed"],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The amendment passes anyway, and you stood aside. The door is open, and the man on the other side of it has more rockets than you have golf courses."
+        },
+        {
+          "id": "oppose_loudly",
+          "text": "Kill it. Denounce the repeal as a Musk power grab.",
+          "effects": {
+            "loyalty": 7,
+            "heat": 9,
+            "reputation": -5,
+            "power": 2
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 7,
+            "outward": 7
+          },
+          "setFlags": ["musk_rival"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "loyalty", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "You stop the amendment cold and name the threat by name. Musk calls you a nativist; the base calls you a prophet. The rivalry is now public and irrevocable."
+        }
+      ]
+    },
+    {
+      "id": "ev_flip_musk_ascends",
+      "era": "interregnum",
+      "year": 2027,
+      "title": "The Tycoon Watches from a Sky-Box",
+      "scene": "Musk has declared. The richest man in history — a man who colonized another planet on his own dime — is running for the office you still hold. Overnight the polls move. Your loyalists triangulate. Mar-a-Lago stops being a court and starts feeling like a waiting room. The {head_of_state} chair now has a different kind of gravity.",
+      "researchNote": "Extrapolated. Speculative scenario in which Musk leverages the newly repealed natural-born-citizen clause, his 2024 political capital from DOGE, and his commercial empire to mount a credible presidential run against Trump's second-term legacy. No such campaign has occurred.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["world-event", "role-flip", "speculative", "president", "musk"],
+      "portrait": "president",
+      "requires": {
+        "flags": ["natural_born_repealed"],
+        "notFlags": ["role_flip"],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "endorse_the_heir",
+          "text": "Endorse Musk as the natural successor. Claim the throne was always a relay baton.",
+          "effects": {
+            "money": 12000000,
+            "reputation": 5,
+            "power": -8,
+            "loyalty": -5,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": -4,
+            "outward": -3
+          },
+          "setFlags": ["musk_patron", "trump_commercial_pivot"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "money", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "You play kingmaker and walk away from the throne before it can be pulled out from under you. The brand survives; the power migrates. Somewhere in the SpaceX tower, Musk is already planning which of your people he keeps."
+        },
+        {
+          "id": "primary_fight",
+          "text": "Fight him in the primary. Your base, your party, your America.",
+          "effects": {
+            "loyalty": 11,
+            "heat": 12,
+            "reputation": -5,
+            "power": 3,
+            "money": -8000000
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 9,
+            "outward": 8
+          },
+          "setFlags": ["musk_rival", "trump_fights_flip"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "loyalty", "weight": 0.6, "polarity": 1 },
+            { "to": "heat", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "You turn the primary into a death match. The base is torn: the man who built the rockets, or the man who built the brand? Either way, the party will not emerge intact."
+        },
+        {
+          "id": "cut_a_deal",
+          "text": "Negotiate in private. He gets the Oval; you get the empire and a seat at the table.",
+          "effects": {
+            "money": 25000000,
+            "power": -5,
+            "reputation": 3,
+            "loyalty": -8
+          },
+          "personality": {
+            "grandiosity": 2,
+            "ideology": -3
+          },
+          "setFlags": ["musk_patron", "kingmaker_mogul", "trump_commercial_pivot"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "money", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "You shake hands behind closed doors. He gets the flag; you get the contracts, the media, and a commercial empire bigger than most nations. The deal is the most Trump thing you have ever done."
+        }
+      ]
+    },
+    {
+      "id": "ev_flip_tycoon_reborn",
+      "era": "interregnum",
+      "year": 2027,
+      "title": "The Other Kind of Power",
+      "scene": "With Musk ascending toward the presidency, you pivot to something you understand even better than politics: building. A new venture fund, a real-estate megadeal, a licensing empire that crosses borders. You are no longer the {head_of_state}; you are the man who makes the {head_of_state} need you. The indignity is real. The opportunity is larger.",
+      "researchNote": "Extrapolated. Imagines Trump rerouting his post-presidential commercial ambitions into a deliberate tycoon-rival strategy once the role-flip scenario unfolds: building the kind of commercial empire that can project power independently of government.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["role-flip", "speculative", "money", "commercial"],
+      "portrait": "exile",
+      "requires": {
+        "flags": ["trump_commercial_pivot"],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_rival_empire",
+          "text": "Pour everything into a commercial empire that can rival a government.",
+          "effects": {
+            "money": 30000000,
+            "power": 4,
+            "reputation": 3,
+            "loyalty": -5
+          },
+          "personality": {
+            "grandiosity": 7,
+            "ideology": -4,
+            "outward": 3
+          },
+          "setFlags": ["trump_tycoon_empire", "musk_rival"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "money", "weight": 0.7, "polarity": 1 }
+          ],
+          "outcome": "You become the most powerful private citizen in a country run by the second-most powerful private citizen. The math is close enough to make Musk uncomfortable."
+        },
+        {
+          "id": "bankroll_musk_programs",
+          "text": "Invest heavily in Musk's Mars and AI programs. If you can't beat him, own a slice.",
+          "effects": {
+            "money": 15000000,
+            "power": 2,
+            "reputation": 5,
+            "loyalty": -7
+          },
+          "personality": {
+            "grandiosity": 3,
+            "ideology": -5
+          },
+          "setFlags": ["musk_patron", "trump_tycoon_empire"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "money", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "You write the check that builds the rocket. It is not the glory you wanted, but when the first city rises on Mars there will be a Trump Tower somewhere in it."
+        },
+        {
+          "id": "legacy_retreat",
+          "text": "Pull back. Write the memoirs. Let the Musk era play out.",
+          "effects": {
+            "reputation": 7,
+            "health": 6,
+            "loyalty": -6,
+            "power": -5
+          },
+          "personality": {
+            "grandiosity": -8,
+            "outward": -7,
+            "ideology": -3
+          },
+          "setFlags": ["walked_away"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "reputation", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "You step out of the arena while you are still standing. The memoirs will be spectacular. The tycoon-era, you decide, belongs to someone else's chapter."
+        }
+      ]
+    },
+    {
+      "id": "ev_flip_kingmaker_play",
+      "era": "interregnum",
+      "year": 2028,
+      "title": "The Mogul Behind the Throne",
+      "scene": "Musk is in the Oval and you are on the phone with him every three days. You did not lose power, you relocated it. Mar-a-Lago still moves votes, your endorsement still moves primaries, and your checkbook still moves policy. The {head_of_state} needs things only you can provide: legitimacy with a base that never fully trusted a man from Pretoria. The trade is better than you expected.",
+      "researchNote": "Extrapolated. Imagines the post-flip dynamic in which a commercial Trump becomes the essential kingmaker and base-legitimizer for a Musk presidency, a role modeled on real historical precedents of former leaders who retained disproportionate political influence after leaving office.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": ["role-flip", "speculative", "power", "commercial"],
+      "portrait": "exile",
+      "requires": {
+        "flags": ["musk_patron"],
+        "notFlags": ["musk_rival"],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "name_your_price",
+          "text": "Extract maximum concessions: contracts, deregulation, naming rights on a Mars crater.",
+          "effects": {
+            "money": 20000000,
+            "power": 6,
+            "reputation": -3,
+            "loyalty": 4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "ideology": 3
+          },
+          "setFlags": ["kingmaker_mogul", "trump_tycoon_empire"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "money", "weight": 0.6, "polarity": 1 }
+          ],
+          "outcome": "You leverage the base like a currency and collect in kind. The crater is named Trump; the contracts are signed; the empire grows. You have learned that a throne you don't occupy can still pay interest."
+        },
+        {
+          "id": "broker_the_base",
+          "text": "Use your base as a veto threat, making Musk come to you every time he needs legitimacy.",
+          "effects": {
+            "power": 9,
+            "loyalty": 6,
+            "reputation": -2,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 5,
+            "ideology": 4
+          },
+          "setFlags": ["kingmaker_mogul"],
+          "clearFlags": [],
+          "ripples": [
+            { "to": "power", "weight": 0.5, "polarity": 1 }
+          ],
+          "outcome": "Every time Musk's approval wobbles with your voters, he needs a phone call from Mar-a-Lago. You are not the president, but you are the reason the president sleeps at night."
+        },
+        {
+          "id": "undermine_slowly",
+          "text": "Smile publicly, undermine privately. Let his approval erode. The comeback could be yours.",
+          "effects": {
+            "loyalty": 8,
+            "heat": 7,
+            "reputation": -4,
+            "power": 3,
+            "money": -3000000
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 6,
+            "outward": -3
+          },
+          "setFlags": ["musk_rival", "kingmaker_mogul"],
+          "clearFlags": ["musk_patron"],
+          "ripples": [
+            { "to": "loyalty", "weight": 0.5, "polarity": 1 },
+            { "to": "heat", "weight": 0.4, "polarity": 1 }
+          ],
+          "outcome": "You feed the doubts and starve the legitimacy at the same time. Whether you want the throne back or simply cannot bear to see someone else sit on it, the effect is the same: Musk is weaker by the quarter."
+        }
+      ]
     }
   ]
 }
