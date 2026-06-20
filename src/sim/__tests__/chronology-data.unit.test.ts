@@ -25,7 +25,7 @@ describe("sacred timeline — era chronology is strictly forward", () => {
     expect(orders).toEqual([...orders].sort((a, b) => a - b));
     expect(new Set(orders).size).toBe(orders.length);
     // order is a dense 0..N-1 sequence (no holes).
-    orders.forEach((o, i) => expect(o).toBe(i));
+    for (let i = 0; i < orders.length; i++) expect(orders[i]).toBe(i);
   });
 
   it("each era's own span is forward (yearStart <= yearEnd)", () => {
