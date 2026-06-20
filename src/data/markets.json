@@ -1,0 +1,232 @@
+{
+  "markets": [
+    {
+      "id": "us_equities",
+      "label": "Equities",
+      "kind": "financial",
+      "baseIndex": 100,
+      "meanReversionK": 0.1,
+      "crashThreshold": 0.6,
+      "coupling": { "money": 0.8, "reputation": 0.2, "heat": 0.3 },
+      "regimes": [
+        {
+          "id": "stable",
+          "baseline": 110,
+          "drift": 0.01,
+          "volatility": 0.05,
+          "dwell": 6,
+          "switchTo": { "boom": 0.15, "bust": 0.1 }
+        },
+        {
+          "id": "boom",
+          "baseline": 180,
+          "drift": 0.05,
+          "volatility": 0.06,
+          "dwell": 5,
+          "switchTo": { "bubble": 0.2, "stable": 0.15 }
+        },
+        {
+          "id": "bubble",
+          "baseline": 260,
+          "drift": 0.08,
+          "volatility": 0.1,
+          "dwell": 3,
+          "switchTo": { "crash": 0.4 }
+        },
+        {
+          "id": "bust",
+          "baseline": 70,
+          "drift": -0.04,
+          "volatility": 0.07,
+          "dwell": 4,
+          "switchTo": { "stable": 0.3 }
+        },
+        {
+          "id": "crash",
+          "baseline": 50,
+          "drift": -0.12,
+          "volatility": 0.15,
+          "dwell": 2,
+          "switchTo": { "bust": 0.5, "stable": 0.2 }
+        }
+      ]
+    },
+    {
+      "id": "nyc_housing",
+      "label": "Real Estate",
+      "kind": "housing",
+      "baseIndex": 100,
+      "meanReversionK": 0.08,
+      "crashThreshold": 0.65,
+      "coupling": { "money": 1, "power": 0.2, "loyalty": 0.1 },
+      "housing": { "region": "outer_boroughs", "rentYield": 0.06, "vacancy": 0.05, "debtService": 0 },
+      "regimes": [
+        {
+          "id": "carry",
+          "baseline": 115,
+          "drift": 0.02,
+          "volatility": 0.03,
+          "dwell": 8,
+          "switchTo": { "boom": 0.12, "slump": 0.08 }
+        },
+        {
+          "id": "boom",
+          "baseline": 175,
+          "drift": 0.06,
+          "volatility": 0.05,
+          "dwell": 5,
+          "switchTo": { "carry": 0.15, "slump": 0.15 }
+        },
+        {
+          "id": "slump",
+          "baseline": 70,
+          "drift": -0.05,
+          "volatility": 0.06,
+          "dwell": 4,
+          "switchTo": { "carry": 0.3 }
+        }
+      ]
+    },
+    {
+      "id": "brand_equity",
+      "label": "Brand & Licensing",
+      "kind": "financial",
+      "baseIndex": 100,
+      "meanReversionK": 0.12,
+      "crashThreshold": 0.5,
+      "coupling": { "money": 0.6, "reputation": 0.4 },
+      "regimes": [
+        {
+          "id": "steady",
+          "baseline": 130,
+          "drift": 0.03,
+          "volatility": 0.03,
+          "dwell": 8,
+          "switchTo": { "hot": 0.15, "tarnished": 0.1 }
+        },
+        {
+          "id": "hot",
+          "baseline": 200,
+          "drift": 0.06,
+          "volatility": 0.05,
+          "dwell": 5,
+          "switchTo": { "steady": 0.2 }
+        },
+        {
+          "id": "tarnished",
+          "baseline": 60,
+          "drift": -0.05,
+          "volatility": 0.08,
+          "dwell": 4,
+          "switchTo": { "steady": 0.25 }
+        }
+      ]
+    },
+    {
+      "id": "attention",
+      "label": "Attention & Virality",
+      "kind": "attention",
+      "baseIndex": 100,
+      "meanReversionK": 0.05,
+      "crashThreshold": 0.5,
+      "coupling": { "power": 0.5, "reputation": 0.2, "heat": 0.5, "money": 0.2 },
+      "regimes": [
+        {
+          "id": "buzz",
+          "baseline": 140,
+          "drift": 0.04,
+          "volatility": 0.12,
+          "dwell": 4,
+          "switchTo": { "viral": 0.25, "backlash": 0.2 }
+        },
+        {
+          "id": "viral",
+          "baseline": 280,
+          "drift": 0.1,
+          "volatility": 0.18,
+          "dwell": 2,
+          "switchTo": { "backlash": 0.4, "buzz": 0.2 }
+        },
+        {
+          "id": "backlash",
+          "baseline": 50,
+          "drift": -0.1,
+          "volatility": 0.2,
+          "dwell": 3,
+          "switchTo": { "buzz": 0.3 }
+        }
+      ]
+    },
+    {
+      "id": "crypto",
+      "label": "Crypto",
+      "kind": "crypto",
+      "baseIndex": 100,
+      "meanReversionK": 0.03,
+      "crashThreshold": 0.4,
+      "coupling": { "money": 1, "heat": 0.4 },
+      "regimes": [
+        {
+          "id": "pump",
+          "baseline": 300,
+          "drift": 0.12,
+          "volatility": 0.25,
+          "dwell": 3,
+          "switchTo": { "rug": 0.45 }
+        },
+        {
+          "id": "rug",
+          "baseline": 30,
+          "drift": -0.2,
+          "volatility": 0.3,
+          "dwell": 2,
+          "switchTo": { "pump": 0.35, "flat": 0.25 }
+        },
+        {
+          "id": "flat",
+          "baseline": 90,
+          "drift": 0,
+          "volatility": 0.1,
+          "dwell": 5,
+          "switchTo": { "pump": 0.3 }
+        }
+      ]
+    },
+    {
+      "id": "mars_colony",
+      "label": "Mars Colony",
+      "kind": "housing",
+      "baseIndex": 100,
+      "meanReversionK": 0.06,
+      "crashThreshold": 0.55,
+      "coupling": { "money": 0.7, "power": 0.3, "health": 0.3 },
+      "housing": { "region": "mars_colony", "rentYield": 0.08, "vacancy": 0.1, "debtService": 0.03 },
+      "regimes": [
+        {
+          "id": "frontier",
+          "baseline": 130,
+          "drift": 0.04,
+          "volatility": 0.08,
+          "dwell": 6,
+          "switchTo": { "boom": 0.15, "decompression": 0.12 }
+        },
+        {
+          "id": "boom",
+          "baseline": 220,
+          "drift": 0.08,
+          "volatility": 0.1,
+          "dwell": 4,
+          "switchTo": { "frontier": 0.2, "decompression": 0.2 }
+        },
+        {
+          "id": "decompression",
+          "baseline": 50,
+          "drift": -0.1,
+          "volatility": 0.12,
+          "dwell": 3,
+          "switchTo": { "frontier": 0.3 }
+        }
+      ]
+    }
+  ]
+}

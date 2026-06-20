@@ -1,10 +1,71 @@
 import { describe, expect, it } from "vitest";
+import currenciesJson from "../../data/currencies.json";
+import marketsJson from "../../data/markets.json";
+import ranksJson from "../../data/ranks.json";
 import { buildContent } from "../content";
 import { createRng } from "../rng";
 import { CurrenciesFileSchema, MarketsFileSchema, RanksFileSchema } from "../schema";
 import { initMarkets, initRanks, initState } from "../state";
 import { resolveCurrency, systemicTick } from "../systemic";
 import { validRaw } from "./fixtures";
+
+describe("real systemic data files (SIM1 task-013)", () => {
+  it("markets.json validates with regimes + couplings", () => {
+    const m = MarketsFileSchema.parse(marketsJson);
+    expect(m.markets.length).toBeGreaterThanOrEqual(5);
+    for (const market of m.markets) {
+      expect(market.regimes.length).toBeGreaterThan(0);
+      // Every regime's switchTo references a real regime in the same market.
+      const ids = new Set(market.regimes.map((r) => r.id));
+      for (const r of market.regimes) {
+        for (const to of Object.keys(r.switchTo)) {
+          expect(ids.has(to), `${market.id}.${r.id} → unknown regime ${to}`).toBe(true);
+        }
+      }
+    }
+    // The attention + crypto markets the spec calls for exist.
+    const kinds = new Set(m.markets.map((x) => x.kind));
+    expect(kinds.has("attention")).toBe(true);
+    expect(kinds.has("housing")).toBe(true);
+  });
+
+  it("currencies.json validates and carries the branch + redenomination catalog", () => {
+    const c = CurrenciesFileSchema.parse(currenciesJson);
+    const byId = Object.fromEntries(c.currencies.map((x) => [x.id, x]));
+    expect(byId.usd).toBeDefined();
+    expect(byId.reichsmark?.branch).toBe("nazi");
+    expect(byId.zar?.location).toBe("in_south_africa");
+    // The Rentenmark redenomination (÷ 1e12) is the Weimar wipe.
+    expect(byId.rentenmark?.conversionFactor).toBeLessThan(1e-6);
+  });
+
+  it("ranks.json validates the four interwoven ladders", () => {
+    const r = RanksFileSchema.parse(ranksJson);
+    expect(r.ranks.map((x) => x.id).sort()).toEqual([
+      "commercial",
+      "political",
+      "religious",
+      "social",
+    ]);
+    // The political ladder tops out at head of state.
+    const political = r.ranks.find((x) => x.id === "political");
+    expect(political?.rungs.at(-1)).toBe("head of state");
+  });
+
+  it("the real systemic data drives a deterministic tick end-to-end", () => {
+    const content = buildContent({
+      ...validRaw(),
+      markets: marketsJson,
+      currencies: currenciesJson,
+      ranks: ranksJson,
+    });
+    const s = initState(content, "real");
+    const a = systemicTick(content, s, createRng("t"));
+    const b = systemicTick(content, s, createRng("t"));
+    expect(a.state.markets).toEqual(b.state.markets);
+    expect(Object.keys(a.state.markets).length).toBe(content.markets.length);
+  });
+});
 
 // A minimal systemic config to exercise the schemas + init without data files.
 const rawWithSystemic = () => ({
