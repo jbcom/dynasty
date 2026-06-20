@@ -42,12 +42,18 @@ export async function saveGame(storage: Storage, state: GameState): Promise<void
   await storage.set(SAVE_KEY, JSON.stringify(toSave(state)));
 }
 
-/** Load and reconstruct a saved run, or null if none exists. */
+/** Load and reconstruct a saved run, or null if none exists / the save is corrupt. */
 export async function loadGame(storage: Storage, content: Content): Promise<GameState | null> {
   const raw = await storage.get(SAVE_KEY);
   if (!raw) return null;
-  const save = JSON.parse(raw) as SaveData;
-  return fromSave(content, save);
+  try {
+    const save = JSON.parse(raw) as SaveData;
+    return fromSave(content, save);
+  } catch {
+    // Corrupt/incompatible save (bad JSON, unknown event id, version mismatch) —
+    // treat as no save rather than crashing into a broken run.
+    return null;
+  }
 }
 
 /** Whether a save exists. */

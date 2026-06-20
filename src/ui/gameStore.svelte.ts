@@ -29,7 +29,13 @@ export class GameStore {
     this.busy = true;
     try {
       this.game.choose(choiceId);
-      await saveGame(this.storage, this.view.state);
+      // Autosave is best-effort: a storage failure must not roll back the choice
+      // (the run is reconstructable from seed+history on the next successful save).
+      try {
+        await saveGame(this.storage, this.view.state);
+      } catch {
+        // swallow — state already advanced; next choice will retry the save.
+      }
     } finally {
       this.busy = false;
     }

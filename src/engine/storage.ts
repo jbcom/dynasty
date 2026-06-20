@@ -28,13 +28,25 @@ export function memoryStorage(): Storage {
 export function localStorageBacked(): Storage {
   return {
     async get(key) {
-      return localStorage.getItem(key);
+      try {
+        return localStorage.getItem(key);
+      } catch {
+        return null; // disabled in private mode / access denied
+      }
     },
     async set(key, value) {
-      localStorage.setItem(key, value);
+      try {
+        localStorage.setItem(key, value);
+      } catch {
+        // QuotaExceededError or storage disabled — autosave is best-effort.
+      }
     },
     async remove(key) {
-      localStorage.removeItem(key);
+      try {
+        localStorage.removeItem(key);
+      } catch {
+        // ignore
+      }
     },
   };
 }

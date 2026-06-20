@@ -76,20 +76,29 @@ export class AudioEngine {
     this.eraPlayer?.dispose();
     this.eraPlayer = null;
 
-    try {
-      const player = new Tone.Player({
-        url: `/assets/audio/${eraId}.ogg`,
-        loop: true,
-        volume: -12,
-        autostart: true,
-      }).connect(this.master);
-      this.eraPlayer = player;
-    } catch {
-      // No track available — fall back to a synth pad bed.
+    const fallbackToPad = (): void => {
+      if (this.currentEra !== eraId) return; // a newer era already took over
+      this.eraPlayer?.dispose();
+      this.eraPlayer = null;
+      this.padLoop?.dispose();
       this.padLoop = new Tone.Loop((time) => {
         this.pad.triggerAttackRelease(chord, "2n", time);
       }, "2n").start(0);
       if (Tone.getTransport().state !== "started") Tone.getTransport().start();
+    };
+
+    try {
+      // Tone.Player loads the buffer asynchronously, so a 404/decode failure
+      // surfaces via onerror (not a synchronous throw) — handle both paths.
+      this.eraPlayer = new Tone.Player({
+        url: `/assets/audio/${eraId}.ogg`,
+        loop: true,
+        volume: -12,
+        autostart: true,
+        onerror: fallbackToPad,
+      }).connect(this.master);
+    } catch {
+      fallbackToPad();
     }
   }
 

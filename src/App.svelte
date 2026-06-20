@@ -31,9 +31,10 @@ $effect(() => {
   };
 });
 
-function newGame(seed: string): void {
+async function newGame(seed: string): Promise<void> {
   if (!storage) return;
-  clearSave(storage);
+  // Await the clear so a fast first choice can't race the old save's deletion.
+  await clearSave(storage);
   store = new GameStore(content, seed, storage);
   screen = "play";
 }
