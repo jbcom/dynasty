@@ -95,13 +95,23 @@ describe("birth-order lever — ev_the_children prologue event (de-4a)", () => {
   const origins = EraEventsSchema.parse(originsJson);
   const boyhood = EraEventsSchema.parse(boyhoodJson);
 
-  const theChildren = origins.events.find((e) => e.id === "ev_the_children");
-  const brothersShadow = boyhood.events.find((e) => e.id === "ev_brothers_shadow");
-  const contentHeir = boyhood.events.find((e) => e.id === "ev_content_heir_dream");
+  // Throwing lookups so the tests narrow types without non-null assertions.
+  const eventById = (evs: typeof origins.events, id: string) => {
+    const e = evs.find((x) => x.id === id);
+    if (!e) throw new Error(`no event ${id}`);
+    return e;
+  };
+  const theChildren = eventById(origins.events, "ev_the_children");
+  const brothersShadow = eventById(boyhood.events, "ev_brothers_shadow");
+  const contentHeir = eventById(boyhood.events, "ev_content_heir_dream");
+  const choiceById = (ev: typeof theChildren, id: string) => {
+    const c = ev.choices.find((x) => x.id === id);
+    if (!c) throw new Error(`no choice ${id} in ${ev.id}`);
+    return c;
+  };
 
-  it("ev_the_children exists in origins and carries all four birth-order choices", () => {
-    expect(theChildren).toBeDefined();
-    const ids = theChildren!.choices.map((c) => c.id);
+  it("ev_the_children carries all four birth-order choices", () => {
+    const ids = theChildren.choices.map((c) => c.id);
     expect(ids).toContain("firstborn_groomed_heir");
     expect(ids).toContain("only_child_sole_heir");
     expect(ids).toContain("fourth_child_accidental_heir");
@@ -109,7 +119,7 @@ describe("birth-order lever — ev_the_children prologue event (de-4a)", () => {
   });
 
   it("firstborn_groomed_heir sets firstborn_heir + fred_jr_present + groomed_heir", () => {
-    const ch = theChildren!.choices.find((c) => c.id === "firstborn_groomed_heir")!;
+    const ch = choiceById(theChildren, "firstborn_groomed_heir");
     expect(ch.setFlags).toContain("firstborn_heir");
     expect(ch.setFlags).toContain("fred_jr_present");
     expect(ch.setFlags).toContain("groomed_heir");
@@ -118,7 +128,7 @@ describe("birth-order lever — ev_the_children prologue event (de-4a)", () => {
   });
 
   it("only_child_sole_heir sets only_child + firstborn_heir + groomed_heir (no fred_jr_present)", () => {
-    const ch = theChildren!.choices.find((c) => c.id === "only_child_sole_heir")!;
+    const ch = choiceById(theChildren, "only_child_sole_heir");
     expect(ch.setFlags).toContain("only_child");
     expect(ch.setFlags).toContain("firstborn_heir");
     expect(ch.setFlags).toContain("groomed_heir");
@@ -127,7 +137,7 @@ describe("birth-order lever — ev_the_children prologue event (de-4a)", () => {
   });
 
   it("fourth_child_accidental_heir sets fourth_child + fred_jr_present + accidental_heir (not died)", () => {
-    const ch = theChildren!.choices.find((c) => c.id === "fourth_child_accidental_heir")!;
+    const ch = choiceById(theChildren, "fourth_child_accidental_heir");
     expect(ch.setFlags).toContain("fourth_child");
     expect(ch.setFlags).toContain("fred_jr_present");
     expect(ch.setFlags).toContain("accidental_heir");
@@ -136,7 +146,7 @@ describe("birth-order lever — ev_the_children prologue event (de-4a)", () => {
   });
 
   it("fourth_child_brother_dies sets fourth_child + fred_jr_died + accidental_heir (not present)", () => {
-    const ch = theChildren!.choices.find((c) => c.id === "fourth_child_brother_dies")!;
+    const ch = choiceById(theChildren, "fourth_child_brother_dies");
     expect(ch.setFlags).toContain("fourth_child");
     expect(ch.setFlags).toContain("fred_jr_died");
     expect(ch.setFlags).toContain("accidental_heir");
@@ -155,8 +165,8 @@ describe("birth-order lever — ev_the_children prologue event (de-4a)", () => {
     }) as any;
 
   it("ev_brothers_shadow gates on fred_jr_present — fires for fourth-child runs only", () => {
-    expect(brothersShadow).toBeDefined();
-    const req = brothersShadow!.requires!;
+    const req = brothersShadow.requires;
+    if (!req) throw new Error("ev_brothers_shadow has no requires");
     // fourthChild run with fred_jr alive: eligible
     expect(meetsRequires(stubState(["fourth_child", "fred_jr_present"]), req)).toBe(true);
     // firstborn run: Fred Jr. never born, event must not fire
@@ -172,8 +182,8 @@ describe("birth-order lever — ev_the_children prologue event (de-4a)", () => {
   it("ev_content_heir_dream gates only on at_nyma — past-tense Freddy reflection fires on fred_jr_died path too", () => {
     // The scene uses past-tense ("Freddy wanted to fly planes") — historically accurate even
     // when Freddy died before boyhood. Gate is at_nyma only, not fred_jr_present.
-    expect(contentHeir).toBeDefined();
-    const req = contentHeir!.requires!;
+    const req = contentHeir.requires;
+    if (!req) throw new Error("ev_content_heir_dream has no requires");
     // Historical fourth-child run with Freddy alive: eligible (at_nyma is the real gate)
     expect(meetsRequires(stubState(["fourth_child", "fred_jr_present", "at_nyma"]), req)).toBe(
       true,
