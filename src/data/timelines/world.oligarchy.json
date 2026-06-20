@@ -136,7 +136,7 @@
       "body": "In the utopian pole: the Directorate's logistics AI and renewable energy network cross the abundance threshold — caloric, medical, and housing sufficiency for every zone-resident human. The Chairman of the Directorate announces a Global Dividend: every registered person receives a baseline equity stake. The critics note no one voted on the distribution. The hungry note the food is real.",
       "tags": ["utopian", "abundance", "global", "dividend"],
       "extrapolated": true,
-      "setFlags": ["abundance_technocracy", "global_dividend"],
+      "setFlags": ["abundance_technocracy", "global_dividend", "back_science"],
       "requires": {
         "flags": ["global_directorate"],
         "notFlags": ["company_serfdom"],
@@ -181,7 +181,7 @@
       "body": "The Directorate establishes Zone Mars under the Geneva Corporate Charter's extraterrestrial extension. The first Martian settlers are employees on twelve-year indentures. The atmosphere is thin; the shareholder returns are not. Within a generation, the Martian zone is the Directorate's most profitable asset class.",
       "tags": ["mars", "space", "corporate", "colony"],
       "extrapolated": true,
-      "setFlags": ["mars_corporate_zone", "interplanetary_corporate_charter"]
+      "setFlags": ["mars_corporate_zone", "interplanetary_corporate_charter", "mars_program"]
     },
     {
       "id": "wwo_ai_directorate_council",
@@ -277,13 +277,112 @@
       "setFlags": ["corporate_longevity", "hereditary_corporate_state"]
     },
     {
+      "id": "wwo_sovereign_debt_assumption",
+      "year": 2040,
+      "headline": "The Debt Charter: Multinationals Assume Sovereignty Through Creditor Conversion",
+      "body": "When fourteen mid-tier nation-states default simultaneously — their treasuries hollowed by decades of DirectorCoin-denominated debt — the Directorate does not foreclose in the usual sense. It converts. Each defaulting government signs a Creditor Sovereignty Agreement: in lieu of repayment, the zone operator assumes the nation's public debt, its regulatory authority, and its seat in international bodies. The East India Company model has returned, dressed in a term sheet. The first piece of the world's sovereign debt is formally owned by a corporate balance sheet. The others will follow.",
+      "tags": ["debt", "sovereignty", "chartered_company", "mercantile"],
+      "extrapolated": true,
+      "setFlags": ["sovereign_debt_assumed", "creditor_sovereignty", "eic_model_active"]
+    },
+    {
+      "id": "wwo_rnd_extraction_imperative",
+      "year": 2042,
+      "headline": "Science as Supply Chain: The Directorate Funds R&D for Extraction, Not Discovery",
+      "body": "The Global Directorate's Science & Logistics Division centralizes research investment, directing capital exclusively toward technologies with a resource-extraction or logistics payoff within forty years. Fusion power, longevity therapies, and space-propulsion are funded not because knowledge is good but because the asteroid belt, helium-3, and interplanetary freight margins are measurable. Pure science is the free rider; extraction is the business case. The Directorate calls this 'aligned research.' Critics call it the death of the Enlightenment. The quarterly returns call it overperformance.",
+      "tags": ["science", "extraction", "r_and_d", "corporate"],
+      "extrapolated": true,
+      "setFlags": ["back_science", "science_as_supply_chain"],
+      "requires": {
+        "flags": ["sovereign_debt_assumed"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wwo_belt_corporate_EIC",
+      "year": 2058,
+      "headline": "The Asteroid Belt Charter: The East India Company at Scale",
+      "body": "The Solar Directorate formally charters four extraction firms with powers modeled on the original East India Company letters patent: the right to maintain private armed vessels, to conclude treaties with 'local authorities' (i.e., any self-governing settlement), to levy extraction fees, and to operate their own currency within their operating zones. The EIC could only trade between continents. These firms mine between planets. The template is identical; the scale is interplanetary. Historians will note the resemblance. Shareholders will note the returns.",
+      "tags": ["asteroid_belt", "east_india_company", "chartered", "mercantile"],
+      "extrapolated": true,
+      "setFlags": ["belt_eic_chartered", "interplanetary_mercantile"],
+      "requires": {
+        "flags": ["sovereign_debt_assumed", "mars_program"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wwo_extrasolar_market_imperative",
+      "year": 2118,
+      "headline": "New Markets, New Worlds: Extrasolar Flight as the Final Frontier of Expansion",
+      "body": "The Solar Directorate's economists identify the same structural problem every mercantilist empire has eventually faced: the known market is saturated. The solar system's resource base has been mapped, priced, and securitized. Margins are compressing. The only solution — the same solution the East India Company reached when European markets matured, the same logic that drove the scramble for Africa — is expansion into unmapped territory. The first extrasolar probe is not a scientific mission. It is a prospectus.",
+      "tags": ["extrasolar", "expansion", "mercantile", "new_markets"],
+      "extrapolated": true,
+      "setFlags": ["extrasolar_flight", "new_markets_imperative"],
+      "requires": {
+        "flags": ["solar_directorate", "belt_eic_chartered"],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
       "id": "wwo_first_contact_market",
       "year": 2300,
       "headline": "First Contact: The Directorate Sends a Term Sheet",
-      "body": "When humanity first receives confirmed extraterrestrial communication, the Solar Directorate's response is to dispatch a commercial delegation ahead of a diplomatic one. The term sheet offers preferential trade access in exchange for technology licensing. The alien response is not recorded. Whether this is because they accepted, refused, or are still reviewing the contract is the century's great open question.",
-      "tags": ["first_contact", "alien", "directorate", "satire"],
+      "body": "When humanity first receives confirmed extraterrestrial communication, the Solar Directorate's response is to dispatch a commercial delegation ahead of a diplomatic one. The first alien civilization humanity encounters has achieved resource scarcity management and interstellar logistics at a scale that dwarfs the Directorate's own. The term sheet offers preferential trade access in exchange for technology licensing. The aliens present three responses in turn — all three simultaneously, which is how they communicate. What happens next will define the interstellar order for the next ten thousand years.",
+      "tags": ["first_contact", "alien", "directorate", "mercantile"],
       "extrapolated": true,
-      "setFlags": ["first_contact_era", "contact_market_response"]
+      "setFlags": ["first_contact_era", "contact_made", "contact_market_response"]
+    },
+    {
+      "id": "wwo_contact_alliance_utopian",
+      "year": 2310,
+      "headline": "The Interstellar Commonwealth: Mutual Trade Opens Post-Scarcity for Both Civilizations",
+      "body": "In the utopian pole: the alien civilization's technology exchange — particularly their solved version of what humans call the energy-matter conversion problem — eliminates material scarcity in a decade. The Solar Directorate, suddenly unable to charge for goods that cost nothing to produce, dissolves its coercive functions. What replaces it is genuinely unprecedented: a two-civilization trade commonwealth governed by mutual consent, where neither party can exploit the other because neither party needs what the other party controls. The EIC model ends not with revolution but with obsolescence. The galaxy turns out to be more interesting than profitable.",
+      "tags": ["utopian", "interstellar", "commonwealth", "first_contact"],
+      "extrapolated": true,
+      "setFlags": ["interstellar_trade_commonwealth", "board_dissolved_utopian", "post_scarcity_era"],
+      "requires": {
+        "flags": ["contact_made", "abundance_technocracy"],
+        "notFlags": ["company_serfdom"],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wwo_contact_monopoly_centrist",
+      "year": 2310,
+      "headline": "The Galactic Trade Compact: Managed Monopoly Reaches the Stars",
+      "body": "In the centrist pole: the Solar Directorate and the alien civilization's equivalent body negotiate a managed interstellar trade regime — each controls access to its home system's resources; neither colonizes the other; technology transfers are licensed, not gifted. The arrangement is stable, profitable, and deeply unequal in ways neither party fully acknowledges. The alien middle class and the human middle class both benefit marginally. The alien Directorate-equivalent and the human Directorate benefit enormously. The EIC never conquered Britain either.",
+      "tags": ["centrist", "monopoly_trade", "interstellar", "first_contact"],
+      "extrapolated": true,
+      "setFlags": ["monopoly_trade_regime", "galactic_stability_compact"],
+      "requires": {
+        "flags": ["contact_made", "managed_oligopoly"],
+        "notFlags": ["abundance_technocracy", "company_serfdom"],
+        "meters": {},
+        "personality": {}
+      }
+    },
+    {
+      "id": "wwo_contact_subjugation_dictatorial",
+      "year": 2310,
+      "headline": "Company Rule Among the Stars: The Alien World Becomes Zone Exo-1",
+      "body": "In the dictatorial pole: the alien civilization, more technologically sophisticated but less militarized, signs what amounts to a Territorial Operations Agreement under corporate duress — a Directorate expeditionary force arrives one year before the trade delegation, establishes orbital logistics infrastructure, and presents the TOA as the alternative to a 'security partnership.' The alien homeworld is designated Zone Exo-1. Its population receives associate citizenship. Its resources enter the Directorate's balance sheet. The EIC governed three hundred million people at its peak. This is the EIC's business model applied to an entire species. The historians, if there are any left willing to write truthfully, will call it what it is.",
+      "tags": ["dictatorial", "colonization", "alien_subjugation", "east_india_company"],
+      "extrapolated": true,
+      "setFlags": ["alien_subjugation", "zone_exo1_established", "interstellar_company_rule"],
+      "requires": {
+        "flags": ["contact_made", "company_serfdom"],
+        "notFlags": ["abundance_technocracy"],
+        "meters": {},
+        "personality": {}
+      }
     }
   ]
 }
