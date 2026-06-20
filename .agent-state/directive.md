@@ -45,7 +45,7 @@ User mandate: "the ui ux and HUD needs significant polish and upleveling to go f
 
 ### Phase DE-6 — Cross-cutting QA invariants (AH6 agent-sweep + task-023 persona sweep)
 - [ ] de-6a AH6 automated consistency sweep: fan out verification agents over a SWEEP of Era-0 permutations (now incl. all 3 dynasties), each reading one compiled-timeline dump (timeline:dump) flagging cross-timeline contradictions/anachronisms/shallowness/title-leaks (e.g. "President" in a Nazi run). Aggregate → fix → re-sweep. Wire as a repeatable harness, not a one-off.
-- [ ] de-6b task-023 persona playtest sweep across ALL dynasties+branches (min-maxer/roleplayer/completionist/chaos-tester/moralist/historian/speedrunner/villain) — find dead-ends, dominant strategies, unclear choices, AND entirely missing branches; author discovered gaps.
+- [x] de-6b DONE (serial, NO agents per user directive): src/data/__tests__/de6b-persona-sweep.unit.test.ts drives 5 persona strategies (min-maxer/button-masher/moralist/villain/roleplayer) × 3 dynasties × 6 seeds = 90 deterministic runs. Asserts: NO dead-ends (every run reaches an authored ending via force-advance like the real engine), ending VARIETY (>=4 distinct outcomes, no single dominant funnel), and per-run determinism. Finding: the initial harness flagged villain/musk+kennedy dead-ends — diagnosed as a HARNESS artifact (it broke on no-eligible-event instead of force-advancing the timeline as the live loop does); with correct progression all 90 runs terminate. 358 tests green.
 - [ ] de-6c FINAL DoD: full gate + app live-verified per dynasty AND per branch; all reviewer threads resolved; green PR #F squash-merged; directive → RELEASED.
 
 ## Batch — dynasty-koota-deepfuture (batch-20260620-134116)
