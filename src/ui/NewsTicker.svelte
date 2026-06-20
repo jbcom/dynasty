@@ -1,7 +1,8 @@
 <script lang="ts">
 import type { Content } from "../sim/content";
 import type { GameState } from "../sim/state";
-import { newsForYear } from "../sim/worldtime";
+import { branchOf } from "../sim/branch";
+import { newsForYear, timelinesForBranch } from "../sim/worldtime";
 
 interface Props {
   content: Content;
@@ -18,7 +19,11 @@ const { content, gameState, perScope = 1, term = (t) => t }: Props = $props();
 // world reported at the current in-world year.
 const news = $derived(
   content.worldTimelines.length > 0
-    ? newsForYear(content.worldTimelines, gameState.year, perScope)
+    ? newsForYear(
+        timelinesForBranch(content.worldTimelines, branchOf(gameState)),
+        gameState.year,
+        perScope,
+      )
     : [],
 );
 

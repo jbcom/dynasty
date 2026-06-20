@@ -176,12 +176,20 @@ export const WorldTimelineSchema = z.object({
     "mores",
     "religion",
     "science",
-    // Character-timeline scope — a parallel PERSON's arc (Elon Musk) whose
-    // events broadcast flags that can flip Donald between the political-king and
-    // commercial-tycoon roles via the linking protocol.
+    // Character-timeline scopes — a parallel PERSON's arc (Musk, Kennedy/RFK Jr)
+    // whose events broadcast flags that thread through / overwrite the backdrops
+    // (e.g. the role-flip) via the linking protocol.
     "musk",
+    "kennedy",
   ]),
   label: z.string().min(1),
+  /**
+   * The alternate-history branch this timeline variant belongs to (AH3). A
+   * "default" timeline (or one omitting this field) is our-history; a variant
+   * keyed to a branch (e.g. usa.nazi.json → "nazi") is loaded ONLY when that
+   * branch is active, and SUPPRESSES the default variant of the same scope.
+   */
+  branch: z.enum(["default", "nazi", "westcoast", "theocracy", "media"]).optional(),
   events: z.array(WorldEventSchema).min(1),
 });
 export type WorldTimeline = z.infer<typeof WorldTimelineSchema>;

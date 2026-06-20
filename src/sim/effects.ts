@@ -1,3 +1,4 @@
+import { branchOf } from "./branch";
 import {
   applyRipples,
   buildLedgerEntries,
@@ -13,7 +14,7 @@ import { resolveRoles } from "./roles";
 import type { Choice, GameEvent } from "./schema";
 import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
 import { advanceTimeline, applyJump, detectEnd } from "./timeline";
-import { applyWorldFlags } from "./worldtime";
+import { applyWorldFlags, timelinesForBranch } from "./worldtime";
 
 /** Result of resolving a choice: the new state plus the ledger entries it produced. */
 export interface Transition {
@@ -102,11 +103,13 @@ export function applyChoice(
   }
   let advanced = advanceTimeline(content, hopped);
 
-  // 8b. LINKING PROTOCOL: broadcast flags from the four parallel world timelines
-  // whose events have come to pass as the year advanced — done in the pure
-  // transition so live play and deterministic replay stay identical.
+  // 8b. LINKING PROTOCOL: broadcast flags from the parallel world timelines whose
+  // events have come to pass as the year advanced — done in the pure transition so
+  // live play and deterministic replay stay identical. Only the ACTIVE BRANCH's
+  // timeline variants apply (a Nazi run reads usa.nazi, not the default usa).
   if (content.worldTimelines.length > 0 && advanced.year > hopped.year) {
-    advanced = applyWorldFlags(advanced, hopped.year, content.worldTimelines);
+    const active = timelinesForBranch(content.worldTimelines, branchOf(advanced));
+    advanced = applyWorldFlags(advanced, hopped.year, active);
   }
 
   // 8c. ROLE-SWAP INVARIANT: with all flags (the choice's, the consequences',

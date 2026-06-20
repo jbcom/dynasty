@@ -56,10 +56,43 @@ Three intertwined requirements:
           FAMILY OF HOLLYWOOD → a PROPAGANDA empire that launders its sordid past
           into legitimacy amid the post-1920s shift in morality. Its propaganda
           capability toward legitimacy is a key thread to explore.
+      (6) NEW — POLITICAL DYNASTY / KENNEDY SWAP (user): add a THIRD immortal
+          protagonist dynast — RFK JR — with his OWN JSON timeline and a rich
+          KENNEDY family tree (Joseph → his sons → RFK Jr), making THREE swappable
+          protagonist dynasts (Trump, Musk, Kennedy). Historical wiring: Kallstadt
+          was a brewing village; if the Drumpfs had stayed in BREWING instead of
+          real estate, then become BOOTLEGGERS during Prohibition (exactly Joseph
+          Kennedy's path to fortune + political dynasty), Donald could SWAP IN AND
+          OUT of the Kennedy family tree. So three avenues let Donald merge with /
+          mirror the Kennedy arc. flags: brewing_dynasty / bootlegger_fortune /
+          kennedy_swap / political_dynasty. RFK Jr is a protagonist timeline
+          (timelines/kennedy.json) threaded like Donald/Musk, per the layering rule.
 - [ ] AH4 NO-SHALLOWNESS INVARIANT (user): "we do not want any one choice suddenly
       makes the content feel shallow." A branch must be authored to the SAME depth
       as the main line — taking any fork opens a comparably rich, gated, multi-layer
       backdrop + event pool, not a thin stub. Acceptance bar for AH1-AH3.
+- [ ] SIM1 SYSTEMIC SIMULATION LAYER — "Donald Trump meets Dwarf Fortress" (user,
+      2026-06-20): choices alone don't make a good game; we need LIVING SUBSYSTEMS
+      that continuously pull the 6 meters (money/power/reputation/loyalty/health/heat)
+      up and down between choices, like a stock market. All branch-aware/overridable
+      and era-applicable. Be open-ended, extrapolate, research; same rule — nothing
+      too dense, no detail too specific to omit. Components:
+      (a) FINANCIAL MARKETS: an overridable CURRENCY (dollars default; deutschmarks
+          pre-Reich; reichsmarks under the Nazi branch; rand on a South-Africa/
+          apartheid thread; etc. — currency resolves by branch AND by where/when the
+          player is) plus market dynamics (booms/busts/cycles) that move money.
+      (b) HOUSING MARKETS: real-estate cycles (the family's core business) that move
+          money/power — bubbles, crashes, rent rolls, redlining-era dynamics, etc.
+      (c) REPLACEABLE INTERWOVEN RANK SYSTEMS: SOCIAL rank, COMMERCIAL rank,
+          RELIGIOUS rank, POLITICAL rank — each a ladder the player climbs/falls,
+          branch-swappable (e.g. political rank = elected office vs Reich appointment
+          vs church hierarchy vs board seats). Think per era what ladder applies.
+      (d) Markets + ranks feed the 6 levers procedurally (a tick/era step), so the
+          world moves even when the player isn't clicking. Design per-era: which
+          markets + which rank ladders are live in each era 0→12.
+      Needs a brainstorm/design pass (architecture: schema for markets/currencies/
+      ranks, a deterministic tick that applies them in the pure sim, branch override,
+      UI surfacing) before authoring — this is a substantial new simulator pillar.
 
 ## Batch — causality-endings-personality (batch-20260620-causality)
 

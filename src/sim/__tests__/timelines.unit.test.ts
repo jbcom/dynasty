@@ -7,8 +7,74 @@ import westcoastJson from "../../data/timelines/westcoast.json";
 import { buildContent } from "../content";
 import { type WorldTimeline, WorldTimelineSchema } from "../schema";
 import { initState } from "../state";
-import { applyWorldFlags, newsForYear } from "../worldtime";
+import { applyWorldFlags, newsForYear, timelinesForBranch } from "../worldtime";
 import { validRaw } from "./fixtures";
+
+describe("branch timeline selection (AH3)", () => {
+  const usaDefault: WorldTimeline = {
+    scope: "usa",
+    label: "USA",
+    events: [
+      {
+        id: "u_d",
+        year: 1950,
+        headline: "Free Election",
+        body: ".",
+        tags: [],
+        extrapolated: false,
+        setFlags: [],
+      },
+    ],
+  };
+  const usaNazi: WorldTimeline = {
+    scope: "usa",
+    label: "USA (Reich)",
+    branch: "nazi",
+    events: [
+      {
+        id: "u_n",
+        year: 1950,
+        headline: "Reich Decree",
+        body: ".",
+        tags: [],
+        extrapolated: false,
+        setFlags: [],
+      },
+    ],
+  };
+  const science: WorldTimeline = {
+    scope: "science",
+    label: "Science",
+    events: [
+      {
+        id: "s",
+        year: 1950,
+        headline: "Atom",
+        body: ".",
+        tags: [],
+        extrapolated: false,
+        setFlags: [],
+      },
+    ],
+  };
+  const all = [usaDefault, usaNazi, science];
+
+  it("default branch uses the default variant and ignores branch-specific ones", () => {
+    const sel = timelinesForBranch(all, "default");
+    expect(sel.find((t) => t.scope === "usa")?.label).toBe("USA");
+    expect(sel.find((t) => t.scope === "science")).toBeDefined();
+    expect(sel.some((t) => t.branch === "nazi")).toBe(false);
+  });
+
+  it("nazi branch swaps in the nazi USA variant and suppresses the default", () => {
+    const sel = timelinesForBranch(all, "nazi");
+    const usa = sel.filter((t) => t.scope === "usa");
+    expect(usa).toHaveLength(1);
+    expect(usa[0]?.label).toBe("USA (Reich)");
+    // scopes without a branch variant still fall back to default
+    expect(sel.find((t) => t.scope === "science")).toBeDefined();
+  });
+});
 
 // Geographic + thematic + character timelines.
 const FILES: Record<string, unknown> = {

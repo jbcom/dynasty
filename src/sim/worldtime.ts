@@ -1,3 +1,4 @@
+import type { BranchKey } from "./branch";
 import { meetsRequires } from "./events";
 import type { WorldEvent, WorldTimeline } from "./schema";
 import type { GameState } from "./state";
@@ -17,6 +18,30 @@ export interface NewsItem {
   year: number;
   headline: string;
   body: string;
+}
+
+/**
+ * Select the active timeline variant per scope for the run's branch (AH3).
+ * For each scope, a branch-specific variant (e.g. usa.nazi.json, branch:"nazi")
+ * SUPPRESSES the default variant when that branch is active; scopes without a
+ * branch variant fall back to their default. So a Nazi run reads usa.nazi +
+ * world.nazi + the unchanged science/musk defaults, never the default usa.
+ */
+export function timelinesForBranch(
+  timelines: readonly WorldTimeline[],
+  branch: BranchKey,
+): WorldTimeline[] {
+  const byScope = new Map<string, WorldTimeline>();
+  for (const t of timelines) {
+    const tb = t.branch ?? "default";
+    if (tb !== "default" && tb !== branch) continue; // a different branch's variant
+    const existing = byScope.get(t.scope);
+    // Prefer the branch-specific variant over the default for the same scope.
+    if (!existing || (tb === branch && (existing.branch ?? "default") === "default")) {
+      byScope.set(t.scope, t);
+    }
+  }
+  return [...byScope.values()];
 }
 
 /** Headlines from all timelines at or just before `year` (most recent first). */
