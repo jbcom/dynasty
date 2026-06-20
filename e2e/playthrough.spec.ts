@@ -12,7 +12,7 @@ test("plays from title to a legacy report end screen", async ({ page }) => {
 
   // Start a fresh, deterministic run.
   await page.getByLabel("Seed (optional)").fill("e2e-playthrough");
-  await page.getByRole("button", { name: "New Game" }).click();
+  await page.getByRole("button", { name: "Begin a Dynasty" }).click();
 
   // The play screen shows the meter HUD.
   await expect(page.locator("[data-meter]").first()).toBeVisible();
@@ -44,7 +44,7 @@ test("plays from title to a legacy report end screen", async ({ page }) => {
 test("inter-era tabs render their views", async ({ page }) => {
   await page.goto("/");
   await page.getByLabel("Seed (optional)").fill("e2e-tabs");
-  await page.getByRole("button", { name: "New Game" }).click();
+  await page.getByRole("button", { name: "Begin a Dynasty" }).click();
   await expect(page.locator("[data-meter]").first()).toBeVisible();
 
   await page.getByRole("button", { name: "Timeline" }).click();
@@ -60,7 +60,7 @@ test("inter-era tabs render their views", async ({ page }) => {
 test("a saved run can be continued", async ({ page }) => {
   await page.goto("/");
   await page.getByLabel("Seed (optional)").fill("e2e-continue");
-  await page.getByRole("button", { name: "New Game" }).click();
+  await page.getByRole("button", { name: "Begin a Dynasty" }).click();
   await expect(page.locator("[data-meter]").first()).toBeVisible();
 
   // Make one choice so a save exists, then reload.
@@ -69,7 +69,7 @@ test("a saved run can be continued", async ({ page }) => {
   await page.reload();
 
   // Continue should now be offered and resume into the play screen.
-  const cont = page.getByRole("button", { name: "Continue" });
+  const cont = page.getByRole("button", { name: "Continue the Saga" });
   await expect(cont).toBeVisible();
   await cont.click();
   await expect(page.locator("[data-meter]").first()).toBeVisible();
