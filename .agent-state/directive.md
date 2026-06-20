@@ -141,6 +141,29 @@ Three intertwined requirements:
       to PROPER NAMES / surnames (a {surname}/{family_name} term: "Trump" default,
       "Drumpf" on the German/Nazi branch, etc.), and audit content for hardcoded
       "Trump" that should be the branch-aware surname token.
+      AH8b (done) + AH8c GIVEN NAMES (user, 2026-06-20): the protagonist's FIRST name
+      is also branch-aware. In tradition-proud military/religious German dynasties
+      (Nazi, Lutheran/evangelical) the heir would likely carry the patriarch's name —
+      so Donald could instead be FRIEDRICH (III), after Friedrich Drumpf. CAVEAT
+      (user): Donald was the FOURTH child, so naming the fourth son after the
+      patriarch is a stretch under strict primogeniture — handle nuance: the
+      branch-aware {given_name}/{full_name} resolves to "Donald" by default and to a
+      dynasty-traditional name (Friedrich III, etc.) on the military/religious German
+      branches where the family-name tradition is strong, with the fourth-child
+      caveat acknowledged in the framing (e.g. the name passes to him because earlier
+      sons fell / on the proud-tradition branches it is bestowed deliberately).
+- [ ] AH8d SIBLING-COUNT / BIRTH-ORDER AS AN ERA-0 LEVER (user, 2026-06-20): how many
+      children Fred/Friedrich has — and the protagonist's birth order — is itself a
+      PIVOTAL branching variable that ripples through many timelines. Real history:
+      Donald is the FOURTH of five, heir only because Fred Jr. (the firstborn)
+      rebelled/washed out and died — the "reluctant/accidental heir" dynamic. If Fred
+      has ONE child (or Donald is firstborn), the patriarch's name likely passes to
+      him (→ Friedrich III, ties to AH8c), inheritance is direct/groomed, and the
+      "had to earn it past an elder brother" arc vanishes. Make sibling-count +
+      birth-order an Era-0 prologue choice that sets flags (e.g. only_child /
+      firstborn_heir / fourth_child / fred_jr_present / fred_jr_died) which then drive
+      given-name resolution (AH8c), inheritance logic, and the groomed-vs-accidental-
+      heir personality framing across the compiled timeline.
 - [ ] AH9 BUTTERFLY WEIGHT/BIAS AGENT PASS (user, 2026-06-20): the butterfly effect +
       causal engine need an agent pass to ASSIGN WEIGHTS AND BIASES across the events
       / butterfly rules / ripples so the compile-at-0 selection and the in-run chaos
