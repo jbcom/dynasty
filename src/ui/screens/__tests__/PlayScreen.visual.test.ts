@@ -47,7 +47,9 @@ describe("PlayScreen (composed game screen)", () => {
     // Tabs render REAL 2D line-icon assets, not Unicode glyphs (de-ui-c).
     const tabIcons = [...host.querySelectorAll("nav.tabs img.tab-icon")] as HTMLImageElement[];
     expect(tabIcons.length).toBeGreaterThanOrEqual(5);
-    expect(tabIcons.every((i) => i.getAttribute("src")?.startsWith("/assets/icons/ui/"))).toBe(true);
+    expect(tabIcons.every((i) => i.getAttribute("src")?.startsWith("/assets/icons/ui/"))).toBe(
+      true,
+    );
     // Portrait + event card on the Now tab.
     expect(host.querySelector("[data-portrait]")).not.toBeNull();
     expect(host.querySelector("[data-event]")).not.toBeNull();

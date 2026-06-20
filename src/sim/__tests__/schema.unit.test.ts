@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { buildContent } from "../content";
-import { AssetSchema, ChoiceSchema, EventSchema, MeterComparatorSchema, parseContent } from "../schema";
+import {
+  AssetSchema,
+  ChoiceSchema,
+  EventSchema,
+  MeterComparatorSchema,
+  parseContent,
+} from "../schema";
 import { validRaw } from "./fixtures";
 
 describe("schema validation", () => {
