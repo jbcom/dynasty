@@ -1,6 +1,6 @@
 # Continuous Work Directive — maga-money-moves
 
-**Status:** ACTIVE
+**Status:** RELEASED
 **Owner:** jbogaty
 
 ## Batch — maga-money-moves-full-build (batch-20260619-build)
@@ -56,7 +56,7 @@ Config: stop_on_failure=false (autonomous, self-resolving) · single feature bra
 - [x] G1 Full e2e playthroughs to each end state
 - [x] G2 Capacitor Android setup + sync
 - [x] G3 Verify app RUNS — Chromium screenshot of real playthrough
-- [ ] G4 Reviewer trio + green PR
+- [x] G4 Reviewer trio + green PR (PR #1 squash-merged: trio folded, CI green, CodeRabbit pass, all 10 bot threads resolved)
 
 ## What CONTINUOUS means
 1. Never stop for status reports the user didn't ask for.
