@@ -2,6 +2,88 @@
   "era": "origins",
   "events": [
     {
+      "id": "ev_cp_take_partner",
+      "era": "origins",
+      "year": 1908,
+      "title": "A Match for the Line",
+      "scene": "The founder is of an age to marry, and the choice of a partner is the choice of what blood and what alliance will shape the next generation. A union can fuse two houses, lift the family's standing, or simply be a love that asks nothing of the ledger.",
+      "researchNote": "Marriage was the central dynastic instrument of every founding family — an alliance as much as a bond.",
+      "historicity": "personal",
+      "tags": ["trope:dynastic-merger", "founding", "epoch0"],
+      "requires": { "flags": [], "notFlags": ["partnered"], "meters": {}, "personality": {} },
+      "weight": 9,
+      "choices": [
+        {
+          "id": "marry_well",
+          "text": "Marry into a stronger house",
+          "effects": { "money": 8, "power": 6, "reputation": 4 },
+          "personality": { "outward": 4 },
+          "setFlags": ["partnered", "married_up"],
+          "takesPartner": true,
+          "outcome": "Two houses become one engine. The dowry and the connections come with expectations."
+        },
+        {
+          "id": "marry_love",
+          "text": "Marry for love, whatever the rank",
+          "effects": { "loyalty": 10, "health": 4 },
+          "personality": { "inward": 4 },
+          "setFlags": ["partnered", "married_for_love"],
+          "takesPartner": true,
+          "outcome": "A partner of the heart, not the ledger — the line is happier, if no richer."
+        },
+        {
+          "id": "marry_shrewd",
+          "text": "Choose a shrewd, capable partner",
+          "effects": { "power": 4, "money": 4 },
+          "personality": { "grandiosity": 2 },
+          "setFlags": ["partnered", "married_shrewd"],
+          "takesPartner": true,
+          "outcome": "Not the richest match nor the fondest — but a mind that will sharpen the whole line."
+        }
+      ]
+    },
+    {
+      "id": "ev_cp_raise_heirs",
+      "era": "origins",
+      "year": 1912,
+      "title": "The Next Generation",
+      "scene": "The household fills with children, or does not. How many heirs to raise — and how — sets the shape of the succession to come: a single groomed heir, a brood to choose from, or a careful pair.",
+      "researchNote": "Family size was a dynastic decision with century-long consequences for inheritance and survival.",
+      "historicity": "personal",
+      "tags": ["trope:accidental-heir", "founding", "epoch0"],
+      "requires": { "flags": ["partnered"], "notFlags": ["raised_heirs"], "meters": {}, "personality": {} },
+      "weight": 9,
+      "choices": [
+        {
+          "id": "one_heir",
+          "text": "Raise a single, carefully-groomed heir",
+          "effects": { "reputation": 4, "loyalty": 4 },
+          "personality": { "inward": 2 },
+          "setFlags": ["raised_heirs", "groomed_heir"],
+          "begets": 1,
+          "outcome": "Everything rests on one child — and so does every hope and every fear."
+        },
+        {
+          "id": "a_brood",
+          "text": "Raise a large brood — let the strongest rise",
+          "effects": { "money": -6, "health": -2, "loyalty": 6 },
+          "personality": { "grandiosity": 2 },
+          "setFlags": ["raised_heirs", "large_brood"],
+          "begets": 3,
+          "outcome": "A house full of children, rivalries, and possibilities. The succession will be a contest."
+        },
+        {
+          "id": "careful_pair",
+          "text": "Raise a careful pair — an heir and a spare",
+          "effects": { "loyalty": 4 },
+          "personality": {},
+          "setFlags": ["raised_heirs"],
+          "begets": 2,
+          "outcome": "Two children — one to inherit, one to hold in reserve against the cruelty of fate."
+        }
+      ]
+    },
+    {
       "id": "ev_dynasty_founding_choice",
       "era": "origins",
       "year": 1885,
