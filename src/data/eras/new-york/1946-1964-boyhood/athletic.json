@@ -1,0 +1,36 @@
+{
+  "era": "boyhood",
+  "events": [
+    {
+      "id": "ev_ath_schoolyard_prodigy",
+      "era": "boyhood",
+      "archetypes": ["athletic"],
+      "year": 1958,
+      "title": "Faster, Stronger, Hungrier",
+      "scene": "On the field you are simply better than everyone — faster off the line, harder in the tackle, the one the older boys pick first and resent for it. Coaches start to circle. For the {surname} line, raw physical gift is the seed of everything; the question is whether it is disciplined into greatness or burned on glory now.",
+      "researchNote": "EX-3 athletic-locked youth beat: the prodigy whose body is the family's first capital.",
+      "historicity": "personal",
+      "tags": ["youth", "sport", "trope:frontier-capital-origin"],
+      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "weight": 13,
+      "choices": [
+        {
+          "id": "ath_drill_relentlessly",
+          "text": "Submit to the hardest coach and drill until the gift becomes a machine",
+          "effects": { "health": 4, "reputation": 3 },
+          "personality": { "ideology": 3, "inward": 2 },
+          "setFlags": ["ath_disciplined_talent", "head_start"],
+          "outcome": "You out-work everyone with talent and everyone with grit. The {surname} name becomes a byword for a champion forged, not born."
+        },
+        {
+          "id": "ath_burn_bright_now",
+          "text": "Be the schoolyard legend now — win loud and worry about tomorrow later",
+          "effects": { "reputation": 5, "health": -1, "heat": 2 },
+          "personality": { "grandiosity": 4, "outward": 3 },
+          "setFlags": ["ath_natural_showman"],
+          "outcome": "You become the name every kid in the district knows. The {surname} line learns early that the crowd's roar is its own kind of fuel."
+        }
+      ]
+    }
+  ]
+}
