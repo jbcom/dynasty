@@ -85,4 +85,17 @@ describe("StatsView", () => {
     await new Promise((r) => setTimeout(r, 50));
     expect(host.querySelector("canvas")).not.toBeNull();
   });
+
+  it("labels the legend with meter DISPLAY names, not machine ids (PL-12)", async () => {
+    component = mount(StatsView, { target: host, props: { content, gameState: playedState() } });
+    await new Promise((r) => setTimeout(r, 50));
+    const labels = [...host.querySelectorAll(".u-legend .u-label")].map((l) =>
+      l.textContent?.trim(),
+    );
+    // The fixture's first linear meter is "power" → must render Title-Case "Power".
+    const powerDef = content.meters.find((m) => m.id === "power");
+    expect(powerDef).toBeDefined();
+    expect(labels).toContain(powerDef?.label);
+    expect(labels).not.toContain("power"); // not the lowercase machine id
+  });
 });

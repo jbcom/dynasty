@@ -32,6 +32,14 @@ function colorFor(id: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(`--mmm-meter-${id}`).trim() || "#ccc";
 }
 
+// The proper display label for a meter id (Title Case) — the chart legend should read
+// "Power/Reputation/…", not the lowercase machine ids (PL-12), consistent with the rest of
+// the UI. Falls back to the id if a def is missing. A plain function (not $derived): the
+// $effect that calls it already tracks `content` reactively (Svelte 5 — review).
+function labelFor(id: string): string {
+  return content.meters.find((m) => m.id === id)?.label ?? id;
+}
+
 $effect(() => {
   if (!el) return;
   const data: uPlot.AlignedData = [
@@ -43,13 +51,18 @@ $effect(() => {
     height: 220,
     scales: { x: { time: false }, y: { range: [-100, 100] } },
     axes: [
-      { stroke: "#b9c2da", grid: { stroke: "rgba(255,255,255,0.08)" } },
+      {
+        stroke: "#b9c2da",
+        grid: { stroke: "rgba(255,255,255,0.08)" },
+        // Years are plain integers — no thousands separator ("1890", not "1,890").
+        values: (_u, ticks) => ticks.map((t) => String(Math.round(t))),
+      },
       { stroke: "#b9c2da", grid: { stroke: "rgba(255,255,255,0.08)" } },
     ],
     series: [
-      { label: "Year" },
+      { label: "Year", value: (_u, v) => (v == null ? "--" : String(Math.round(v))) },
       ...LINEAR.map((id) => ({
-        label: id,
+        label: labelFor(id),
         stroke: colorFor(id),
         width: 2,
       })),
