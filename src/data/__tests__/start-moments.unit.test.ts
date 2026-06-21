@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { validRaw } from "../../sim/__tests__/fixtures";
 import { buildContent, type RawContent } from "../../sim/content";
+import { foundDynasty } from "../../sim/founding";
 import { loadContent } from "../loadContent";
 
 /**
@@ -33,6 +34,39 @@ describe("FD-6.1 start-moments content", () => {
     const cultures = new Set(Object.keys(content.onomastics));
     for (const m of content.startMoments) {
       expect(cultures.has(m.culture), `${m.id} culture ${m.culture}`).toBe(true);
+    }
+  });
+
+  it("each moment uses the HISTORICALLY-APPROPRIATE culture for its origin", () => {
+    // Pin every moment's culture so a placeholder (e.g. a caliphate line naming its
+    // progenitor in the Scots-Irish tradition) can never regress in silently.
+    const expected: Record<string, string> = {
+      irish_famine_1847: "irish_catholic",
+      bavaria_1885: "bavarian_german",
+      cape_colony_1906: "afrikaner",
+      apartheid_end_1994: "afrikaner",
+      gold_rush_1849: "scots_irish",
+      gilded_age_ny_1880: "wasp_east_coast",
+      second_awakening_1830: "scots_irish",
+      abbasid_baghdad_762: "arabic_abbasid",
+    };
+    for (const m of content.startMoments) {
+      expect(m.culture, `${m.id} must use ${expected[m.id]}`).toBe(expected[m.id]);
+    }
+  });
+
+  it("the Abbasid caliphate line names its progenitor in the Arabic tradition", () => {
+    const arabic = content.onomastics.arabic_abbasid;
+    expect(arabic, "arabic_abbasid culture exists").toBeDefined();
+    // The deep-history line's seeded progenitor is an Arabic given name, never a
+    // Western (Scots-Irish/WASP) one.
+    for (const seed of ["a", "b", "c", "d", "e"]) {
+      const r = foundDynasty(content, {
+        momentId: "abbasid_baghdad_762",
+        surname: "al-Rashid",
+        seed,
+      });
+      expect(arabic?.givenMale).toContain(r.progenitorGiven);
     }
   });
 
