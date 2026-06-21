@@ -94,7 +94,15 @@ history, replay still bit-identical). Sub-tasks:
   seed; place revealed via sensory cue; surname via suggestions AND the modal (typed
   "Ironwood" carried through the founded line); in-game opens at "The First Cry" → calling;
   console clean; determinism + leak tests pass; harness audit 0 findings; 493 unit + 68
-  browser green. Shipping PR for the autoloop batch (PL-1/PL-2/PL-3).
+  browser green. Shipped as PR #36 (autoloop batch PL-1/PL-2/PL-3).
+
+### Discovered next (for upcoming loop cycles — playtesting the PlayScreen)
+- [ ] **PL-4 Meter HUD layout.** The 6 gauges wrap 5-on-row-1 + Heat alone on row-2 (awkward
+  orphan). Lay them out as an even grid (3×2 or 6-across responsive) so no meter is orphaned;
+  keep the gauge component + delta badges intact. Render/UI gate → visual test + screenshot.
+- [ ] **PL-5 HUD vertical budget.** On a tall phone the meter HUD + personality dial + nav
+  consume ~40% of the viewport above the event card. Tighten spacing / consider a collapsed
+  HUD so the event (the content) gets more room. Mobile-first (Pixel-5a class).
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
