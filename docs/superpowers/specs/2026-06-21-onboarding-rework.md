@@ -20,6 +20,31 @@ actually *discern* anything. The user's correction:
 >
 > "Player picks EVERYTHING — this is a game about choice, cause and effect. The buried PRNG
 > seed is for everything else: world events triggering, markets, etc."
+>
+> "Don't RUSH Epoch-0. It isn't a quick replacement of the control panel — it's the
+> unfolding of a story in its first stage. Weave these organically into a FULLY WRITTEN
+> birth-to-man/womanhood: finding the first run of the calling, finding a partner, making
+> the choices that determine the entire unique branching storyline for the rest of the run.
+> EACH PLACE and EACH TIME needs a fully written-out Epoch-0."
+
+## Scope correction — Epoch-0 is authored STORY, not a UI control panel
+
+The earlier framing (a generic OnboardingScreen of pick-cards) is wrong. Epoch-0 is the
+FIRST STAGE OF THE STORY: a fully-written birth → growing into man/womanhood → the first
+turn of the calling → finding a partner → the pivotal choices that set the line's branching
+storyline. The player's identity choices (location, gender, family + given name, calling)
+are woven into that prose as real beats — not abstract menu steps.
+
+CONSEQUENCE: this is primarily AUTHORED CONTENT, not just a screen. **Each place × era needs
+its own fully-written Epoch-0 arc** (a Bavarian 1885 birth reads differently from a Baghdad
+762 one or an Irish 1885 one). The UI is the thin renderer (the existing EventCard +
+choices); the WORK is writing each origin's Epoch-0 beats with the identity choices embedded
+and the branch-setting forks at the end. The seed stays buried (world only); identity is all
+chosen, beat by beat.
+
+This is a multi-place authoring effort — do ONE place's Epoch-0 fully first (vertical slice:
+e.g. Ireland/origins — birth+date → gender → naming → growing up → first calling turn →
+partner → branch fork), prove the shape end-to-end, then replicate per place × era.
 
 ## Design
 
@@ -89,19 +114,33 @@ a *new* game differs run-to-run (intended — the world is freshly shuffled), bu
 replays exactly.
 
 ## Sub-tasks (OB-1 … OB-n)
-- OB-1: spec (this doc).
-- OB-2: random hidden seed at New Game; onomastics given-name suggestions helper (parallel
-  to suggestSurnames); calling→archetype mapping surfaced for the picker.
-- OB-3: rebuild OnboardingScreen as the choice sequence (location → birth → gender → family
-  name → given name → calling); remove the consciousness phase.
-- OB-4: delete seedComposer + seed-words.json + their tests; drop the now-dead
-  emerged/named pre-set if the in-game beats should run again, OR keep them — decide so the
-  in-game Epoch-0 doesn't double up with the onboarding (the onboarding now covers birth +
-  gender + naming + calling, so the in-game gender/calling beats may be redundant; re-check).
-- OB-5: rewrite e2e + component tests for the new flow; live-verify; 0 leaks; gate green.
+- OB-1: spec (this doc). DONE.
+- OB-2: seam + helpers (no UX yet) — random hidden seed at New Game; `suggestGivenNames`
+  (done); archetype→diegetic-title map; seed-drawn birth `{month, day}`; a `birthDate` field
+  on the composition/state; the Epoch-0 beat-flag chain the authored arc will gate on.
+- OB-3: REMOVE the consciousness phase — delete `src/sim/seedComposer.ts`,
+  `src/data/seed-words.json`, their tests, and the adj/adj/noun UI; New Game → location pick
+  → the authored Epoch-0 run (no separate "compose seed" step). Founding flags revisited so
+  the authored Epoch-0 beats actually fire (the PL-3 `emerged`/`named` pre-set is removed or
+  repurposed — the story now PLAYS those beats).
+- OB-4: VERTICAL SLICE — author ONE place×era's full Epoch-0 arc end-to-end (Ireland/origins
+  1885): location-recognition → birth+date (doctor's notes) → gender choice → family-name +
+  given-name bestowal → growing into adulthood → first turn of the calling (= archetype) →
+  finding a partner → the branch-setting fork. Real prose, real choices, 0 leaks. Prove the
+  shape (the flag chain, the choice→composition wiring, the renderer).
+- OB-5: REPLICATE the Epoch-0 arc per remaining place × era (bavaria, south_africa, west/
+  east_coast, canada, midwest, south, baghdad/caliphate, …), each fully written + 0-leak.
+- OB-6: tests (e2e + component + textQuality audit clean on the new prose) + harness audit
+  0 findings + live-verify each origin; gate green; remove dead PL-3 paths.
+
+This is a LONG authoring milestone (each place×era is real writing). Ship per-slice PRs
+(OB-4 first as the proof, then one PR per place×era or a small batch), one in flight at a
+time per the process lesson.
 
 ## Acceptance
-- New Game → location pick (discernible cues) → birth → gender → family + given name →
-  calling, all player-chosen; seed never shown.
-- Same choices replay identically; a new game reshuffles the world seed.
-- 0 preset-person leaks; harness audit 0 findings; full gate green; live-verified.
+- New Game → location pick (discernible cues) → a FULLY-WRITTEN Epoch-0 story (birth+date →
+  gender → family+given name → adulthood → first calling turn → partner → branch fork),
+  every identity choice player-made, woven into prose — per place × era.
+- Seed never shown; same choices replay identically; a new game reshuffles the world seed.
+- 0 preset-person leaks; textQuality audit clean; harness audit 0 findings; gate green;
+  live-verified for each origin.
