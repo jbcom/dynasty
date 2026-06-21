@@ -31,6 +31,20 @@ describe("FD-7 world-stack content", () => {
       expect(s.perils.length, s.place).toBeGreaterThan(0);
     }
   });
+
+  it("CP-1: the immigration-destination places exist as geography (decoupled from culture)", () => {
+    const places = new Set(content.worldStacks.map((s) => s.place));
+    for (const p of ["canada", "american_midwest", "american_south", "east_coast", "west_coast"]) {
+      expect(places.has(p), `place ${p}`).toBe(true);
+    }
+  });
+
+  it("CP-1: culture is now pure ethnic-naming (no place baked into the conflated WASP label)", () => {
+    // The conflated `wasp_east_coast` is gone; the ethnicity is `anglo_protestant`,
+    // and the East-Coast geography lives only in the place axis.
+    expect(content.onomastics.wasp_east_coast).toBeUndefined();
+    expect(content.onomastics.anglo_protestant).toBeDefined();
+  });
 });
 
 describe("FD-7 resolveStack", () => {

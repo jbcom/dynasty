@@ -48,7 +48,7 @@ LOCKED DECISIONS (user):
 - foundDynasty stays the single pure engine seam the UI feeds.
 
 ### Queue
-- [ ] **CP-1 Decouple identity (PLACE × CULTURE × axes).** Split `culture` into pure ethnic-naming culture + geography-only place; add canada/american_midwest/american_south places + world-stacks; decompose wasp_east_coast → Anglo-Protestant culture × east_coast place; re-point start-moments to (place, culture). Cross-ref + tests; every existing run still founds + plays.
+- [x] **CP-1 DONE:** decoupled identity. `wasp_east_coast` (conflated place+ethnicity) → pure ethnic `anglo_protestant` culture; gilded_age moment re-pointed to (place=east_coast, culture=anglo_protestant). Added canada / american_midwest / american_south world-stacks (geography-only immigration destinations, full 4-layer + perils). Tests: new places exist, culture is place-free, wasp_east_coast gone. 452 green. (More culture/place re-pointing surfaces as content uses the new places — CP-8.)
 - [ ] **CP-2 Calling system (sim).** Calling data type (trait-drift + trope weights) + callings.json + resolver in beget + effectiveWeight; catalog cross-ref; tests.
 - [ ] **CP-3 Gender/identity (sim).** Generalize progenitorSex → identity: onomastic pool + succession mode (primogeniture/matriarchal/absolute) + pronouns; wire foundDynasty + succession; tests.
 - [ ] **CP-4 Thematic axes as Epoch-0 choices (sim+data).** Pure AxisChoice for faith/ideology/sociology/tech, resolved vs the founding place×era stack (place-and-time-scaled), setting durable flags + bias. Tests prove same choice lands differently by place/era.
