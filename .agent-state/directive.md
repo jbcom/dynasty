@@ -44,10 +44,29 @@ FD-2 (unified event pool + no-leak), FD-3 (tropes-as-influences — literal line
 dissolved), FD-4.1/4.2 (procedural expander + lazy materialization), FD-5
 (onomastics), FD-6.1 (8 start-moments + deep-history caliphate era).
 
+### USER INTENT — tear apart the preset families (2026-06-20, authoritative)
+"there are no more presets. this isnt additive." / "by now all preset families
+should have been renamed, torn apart and repurposed as per our plan" / "giving us
+tons of different timelines as events to weave together by epoch-0 choices and the
+butterfly + causality engine and world events."
+→ The literal Trump/Kennedy/Musk/Graham IDENTITIES are fully dissolved: no preset
+dynasty cards, no `DynastyKey` literal enum, no dynasty:<id> no-leak keyed on real
+families. A run's identity = its FOUNDING (start-moment → archetype + culture +
+place + surname). The former character/family timelines become RAW EVENT MATERIAL
+the compiler weaves by Epoch-0 choices + butterfly/causality + world events. The 4
+composite archetypes (economic/political/technological/religious) are the identity
+axis, not named houses.
+
+### FD-3.5 DISSOLVE LITERAL DYNASTY IDENTITY (prerequisite for FD-6.3 UI) — NEXT
+- [ ] FD-3.5a retire `DynastyKey = trump|musk|kennedy` → `Archetype = economic|political|technological|religious` as the run identity key. Thread through initState/Game/loop/save/compiler/effects/worldEvents/slots. birthYear comes from the start-moment (foundDynasty already does this); drop DYNASTY_START literal map (or rekey by archetype default years).
+- [ ] FD-3.5b no-leak gate rekeys onto the FOUNDING, not literal families: world/character events tagged by archetype (or by source-line id) are gated vs the run's archetype. The musk/kennedy character timelines keep their EVENTS as woven material but lose literal-family exclusivity — they contribute to the matching archetype pool.
+- [ ] FD-3.5c family-trees become archetype-keyed generic spines (repurpose the 4 real trees as the archetype seed material; strip literal-only framing where it leaks as a named preset). Founded lines grow their OWN tree (FD-8) from the progenitor; the archetype spine is reference/seed, not the player's identity.
+- [ ] FD-3.5d delete the preset dynasty-select carousel data (TitleScreen DYNASTIES array, dynasty-*.svg preset cards) — folded into FD-6.3.
+
 ### Remaining — this branch lands ALL of it
 
-- [ ] **FD-6.2 founding flow.** Pure `foundDynasty(content, {momentId, surname, seed})` → initial GameState (place/culture/year/birthYear/founding flags + seeded progenitor given-name via onomastics), generalizing initState beyond the 3 presets. Presets become `{momentId}` shortcuts. Tests: every moment founds a valid run; deep-history starts in caliphate; replay-deterministic.
-- [ ] **FD-6.3 Stage-0 founding UI.** Under New Game: moment picker (8 hinges, deep-history flagged) → surname entry → progenitor confirm → onNewGame(seed, founding). Presets one-tap. Screenshot-verify.
+- [x] **FD-6.2 DONE:** founding.foundDynasty → {state, progenitorName, moment}; GameState.founding metadata; seeded progenitor naming; 7 tests; 406 green.
+- [ ] **FD-6.3 Stage-0 founding UI** (depends on FD-3.5). FOUND-ONLY — the carousel is GONE. Flow: title → moment picker (the 8 hinges, deep-history flagged) → surname entry → progenitor confirm → start. App calls foundDynasty → passes the founded GameState as `restore`. Update TitleScreen + browser/visual/e2e tests. Screenshot-verify.
 - [ ] **FD-7 world stacks.** src/data/world/ geo/politics/religion/ideology per place (ireland/uk/south_africa/canada/east_coast/west_coast/baghdad). STANDING context by current `place`; migration = place change. Pure resolver feeding the FD-4.2 ExpandContext (real place + period perils, replacing the era-generic fallback). Tests per place/era.
 - [ ] **FD-8 family-tree STATE + BIRTH.** FamilyState in GameState (live mutable tree, serializable). Pure seeded `beget()` — children from reign choices/events, onomastic naming (FD-5), inherited+varied traits. Replay-determinism tests.
 - [ ] **FD-9 DEATH + AGING.** Per-year seeded mortality hazard (age + health + era-medicine); non-protagonist death events; protagonist death triggers succession (FD-10). Tests.
