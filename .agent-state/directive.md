@@ -172,7 +172,7 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 ### SS-10 Spine authoring
 - [x] SS-10 goal/evaluator sets + act lattice + branch/convergence per archetype×class×macro-act×wave; structural test every cell reachable
 ### SS-11 GenAI FULL RETOOL (expand modes)
-- [ ] SS-11 uniform genai:expand --type per content type, writes canonical JSON (no .gen.json), harness-gated, register-aware; stub tests
+- [x] SS-11 uniform genai:expand --type per content type, writes canonical JSON (no .gen.json), harness-gated, register-aware; stub tests
 ### SS-12 GenAI WRITES THE STORIES
 - [ ] SS-12 flesh every scaffolded act/class-track/wave via SS-11; cull weak; harness 0-findings + textQuality clean over ALL generated; no empty scaffolds
 ### SS-13 Read-model + bridge
