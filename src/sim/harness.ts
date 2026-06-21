@@ -5,7 +5,7 @@ import { meetsRequires, pickNextEvent } from "./events";
 import { type Composition, foundByComposition } from "./founding";
 import { createRng, type Rng } from "./rng";
 import type { Choice } from "./schema";
-import { type GameState, withoutFlag } from "./state";
+import type { GameState } from "./state";
 import { applyTerms, runTerms } from "./terms";
 
 /**
@@ -179,8 +179,7 @@ export function tracePlaythrough(
       // flags a given line lacks); in random mode a dead era is a natural stop.
       if (policy === "survive" && state.eraIndex < content.eras.length - 1) {
         const nextEra = content.eras[state.eraIndex + 1];
-        let flags = state.flags;
-        for (const f of LADDER_FLAGS) if (!flags.includes(f)) flags = [...flags, f];
+        const flags = Array.from(new Set([...state.flags, ...LADDER_FLAGS]));
         state = {
           ...state,
           flags,
@@ -237,9 +236,10 @@ export function tracePlaythrough(
       const triggered = state.end.endingId
         ? content.endings.find((e) => e.id === state.end?.endingId)
         : undefined;
-      let flags = state.flags;
-      for (const f of triggered?.when.flags ?? []) flags = withoutFlag(flags, f);
-      for (const f of LADDER_FLAGS) if (!flags.includes(f)) flags = [...flags, f];
+      const triggeredFlags = new Set(triggered?.when.flags ?? []);
+      const flags = Array.from(
+        new Set([...state.flags.filter((f) => !triggeredFlags.has(f)), ...LADDER_FLAGS]),
+      );
       state = { ...state, flags, end: null };
     }
   }

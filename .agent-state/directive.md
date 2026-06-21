@@ -72,9 +72,14 @@ that generates it at breadth.
   extinction). Result improved 23→26/30 reach the far future, line-extinct 14→5. The
   remaining 5 are the two structural cases below (folded into EX-6), both dynastic
   outcomes with 0 harness findings.
-- [ ] **EX-6 DoD** — after EX-5. Full gate + harness audit at 0 findings over a wide
-  permutation sweep; live-verify a long multi-generational run; PR; reviewer trio;
-  squash-merge; Status RELEASED.
+- [x] **EX-6 DoD verification DONE.** Full gate green (typecheck 0 · biome clean · 484 unit
+  + 67 browser · `pnpm build` ok) + harness audit at 0 findings over the whole
+  place×era×archetype sweep; the EX-5 millennium test traverses to interstellar at 0 leaks;
+  live-verified the running app (diegetic birth chain renders, clean console, 0 preset leaks).
+  PR #34 opened (EX-4→EX-6, pushed to feat/genai-breadth-toolkit).
+- [ ] [WAIT] **EX-6 CI green** — PR #34 build-and-test + CodeQL analyze must pass (monitored).
+- [ ] [WAIT-REVIEW] **EX-6 review threads** — address/resolve CodeRabbit + Amazon Q threads on
+  PR #34, then squash-merge once green + threads resolved, then flip Status → RELEASED.
   - **Carried-in finding (the far-future line-extinct ~half the dealt births):** three
     mechanisms, all DYNASTIC outcomes not consistency/leak bugs (audit stays 0 findings):
     (a) gen-1 lines that PARTNER but never BEGET — the protagonist dies in the mortality

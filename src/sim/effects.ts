@@ -293,8 +293,8 @@ export function applyChoice(
         // partner→beget arc (EX-5 — else the line begets once and dies out). The
         // founding emergence flags (emerged/named/calling_chosen) persist; the heir
         // is already a born, named member of the line.
-        let heirFlags = advanced.flags;
-        for (const f of LIFE_STAGE_FLAGS) heirFlags = withoutFlag(heirFlags, f);
+        const lifeStageSet = new Set<string>(LIFE_STAGE_FLAGS);
+        const heirFlags = advanced.flags.filter((f) => !lifeStageSet.has(f));
         advanced = {
           ...advanced,
           family: fam,
