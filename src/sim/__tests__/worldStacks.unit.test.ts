@@ -58,6 +58,7 @@ describe("FD-7 resolveStack", () => {
       religion: "r",
       ideology: "i",
       perils: ["x"],
+      axisIntensity: {},
     },
     {
       place: "p",
@@ -69,6 +70,7 @@ describe("FD-7 resolveStack", () => {
       religion: "r2",
       ideology: "i2",
       perils: ["y"],
+      axisIntensity: {},
     },
   ];
 

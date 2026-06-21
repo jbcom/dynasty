@@ -21,6 +21,7 @@ const ranksGlob = import.meta.glob("./ranks.json", { eager: true });
 const familyTreesGlob = import.meta.glob("./family-trees/*.json", { eager: true });
 const tropesGlob = import.meta.glob("./tropes.json", { eager: true });
 const callingsGlob = import.meta.glob("./callings.json", { eager: true });
+const axesGlob = import.meta.glob("./axes.json", { eager: true });
 const templatesGlob = import.meta.glob("./templates/*.json", { eager: true });
 const onomasticsGlob = import.meta.glob("./onomastics.json", { eager: true });
 const startMomentsGlob = import.meta.glob("./origins/start-moments.json", { eager: true });
@@ -61,6 +62,7 @@ export function loadContent(): Content {
     },
     tropes: firstValue(tropesGlob) ?? { tropes: [] },
     callings: firstValue(callingsGlob) ?? { callings: [] },
+    axes: firstValue(axesGlob) ?? { axes: [] },
     templates: {
       templates: Object.values(templatesGlob).flatMap(
         (m) => (m as { default: { templates?: unknown[] } }).default.templates ?? [],

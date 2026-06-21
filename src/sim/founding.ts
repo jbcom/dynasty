@@ -1,9 +1,13 @@
+import { axisByKind, axisIntensityFor, axisOptionById, resolveAxisChoice } from "./axes";
 import type { Content } from "./content";
 import { seedFamily } from "./family";
+import { applyDelta } from "./meters";
 import { getCulture, pickGivenName } from "./onomastics";
+import { applyPersonality } from "./personality";
 import { createRng } from "./rng";
-import type { StartMoment } from "./schema";
+import type { AxisKind, StartMoment } from "./schema";
 import { type GameState, initState, withFlag } from "./state";
+import { resolveStack } from "./worldStacks";
 
 /**
  * FD-6.2 — the "found your own dynasty" founding flow. `foundDynasty` turns a
@@ -30,6 +34,8 @@ export interface FoundingInput {
   gender?: "male" | "female";
   /** Succession mode (CP-3) — defaults to absolute (eldest regardless of sex). */
   successionMode?: "absolute" | "primogeniture" | "matriarchal";
+  /** Epoch-0 axis stances (CP-4): per-axis chosen option id (faith/ideology/…). */
+  axisChoices?: Partial<Record<AxisKind, string>>;
 }
 
 /** The progenitor's given name + the founding state, for the UI + the run. */
@@ -87,6 +93,25 @@ export function foundDynasty(content: Content, input: FoundingInput): FoundingRe
     flags = withFlag(flags, f);
   }
 
+  // EPOCH-0 AXIS CHOICES (CP-4): each chosen stance sets durable flags + meter/
+  // personality deltas SCALED by the founding place×era stack's intensity on that
+  // axis — so the same stance lands differently by place/time.
+  let meters = base.meters;
+  let personality = base.personality;
+  const stack = resolveStack(content.worldStacks, moment.place, moment.startEra);
+  for (const [axisKind, optionId] of Object.entries(input.axisChoices ?? {}) as [
+    AxisKind,
+    string,
+  ][]) {
+    const axis = axisByKind(content.axes, axisKind);
+    const option = axis && axisOptionById(axis, optionId);
+    if (!axis || !option) continue;
+    const resolved = resolveAxisChoice(option, axisIntensityFor(stack, axisKind));
+    for (const f of resolved.setFlags) flags = withFlag(flags, f);
+    meters = applyDelta(content.meters, meters, resolved.effects);
+    personality = applyPersonality(personality, resolved.personality);
+  }
+
   // Seed the LIVE family tree (FD-8) with the progenitor — the root the line grows
   // from via beget/death/succession. Deterministic from the founding inputs.
   const family = seedFamily({
@@ -99,6 +124,8 @@ export function foundDynasty(content: Content, input: FoundingInput): FoundingRe
   const state: GameState = {
     ...base,
     flags,
+    meters,
+    personality,
     birthYear,
     year: moment.year,
     age: moment.year - birthYear,
@@ -111,6 +138,7 @@ export function foundDynasty(content: Content, input: FoundingInput): FoundingRe
       ...(input.calling ? { calling: input.calling } : {}),
       gender,
       ...(input.successionMode ? { successionMode: input.successionMode } : {}),
+      ...(input.axisChoices ? { axisChoices: input.axisChoices } : {}),
     },
     family,
   };

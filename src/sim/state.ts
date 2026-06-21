@@ -119,6 +119,8 @@ export interface GameState {
      * eldest son, then daughters; `matriarchal` = eldest daughter, then sons.
      */
     successionMode?: "absolute" | "primogeniture" | "matriarchal";
+    /** Epoch-0 axis stances (CP-4): per-axis chosen option id. */
+    axisChoices?: Partial<Record<"faith" | "ideology" | "sociology" | "tech", string>>;
   };
   /**
    * The LIVE family tree (FD-8) — the growing, mutable lineage of a founded run.

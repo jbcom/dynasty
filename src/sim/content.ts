@@ -1,6 +1,8 @@
 import {
   type Asset,
   AssetsFileSchema,
+  AxesFileSchema,
+  type Axis,
   type ButterflyRule,
   ButterflyRulesSchema,
   type Calling,
@@ -79,6 +81,11 @@ export interface Content {
    */
   callings: Calling[];
   /**
+   * Epoch-0 thematic AXES (CP-4): faith/ideology/sociology/tech founding choices,
+   * each option place-and-time-scaled by the world-stack's axis intensity.
+   */
+  axes: Axis[];
+  /**
    * Procedural event templates (FD-4): skeleton events with `{slot}` tokens the
    * seeded expander materializes into concrete GameEvents when the authored pool
    * thins. Empty by default (the authored pool stands alone).
@@ -124,6 +131,7 @@ export interface RawContent {
   familyTrees?: unknown;
   tropes?: unknown;
   callings?: unknown;
+  axes?: unknown;
   templates?: unknown;
   onomastics?: unknown;
   startMoments?: unknown;
@@ -168,6 +176,7 @@ export function buildContent(raw: RawContent): Content {
     raw.callings ?? { callings: [] },
     "callings.json",
   );
+  const axesFile = parseContent(AxesFileSchema, raw.axes ?? { axes: [] }, "axes.json");
   // A calling's trope-weight keys must resolve to the catalog (same guarantee as
   // events/templates), so a renamed/deleted trope can never leave a dangling weight.
   if (tropeIds.size > 0) {
@@ -337,6 +346,7 @@ export function buildContent(raw: RawContent): Content {
     familyTrees: familyTreesFile.trees,
     tropes: tropesFile.tropes,
     callings: callingsFile.callings,
+    axes: axesFile.axes,
     templates: templatesFile.templates,
     onomastics: onomasticsFile.cultures,
     startMoments: startMomentsFile.moments,

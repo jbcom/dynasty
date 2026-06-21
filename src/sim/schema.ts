@@ -846,6 +846,20 @@ export const WorldStackSchema = z.object({
   perils: z.array(z.string().min(1)).min(1),
   /** A display place name for {place} substitution (e.g. "Ireland", "Baghdad"). */
   placeLabel: z.string().min(1),
+  /**
+   * AXIS INTENSITY (CP-4): how CHARGED each thematic axis is at this place×era,
+   * 0..1. Scales the impact of the founder's Epoch-0 axis choices — adopting or
+   * rejecting a faith lands hard where faith intensity is high (762 Baghdad, 1847
+   * Catholic Ireland) and lightly on a secular frontier. Absent axes default 0.5.
+   */
+  axisIntensity: z
+    .object({
+      faith: z.number().min(0).max(1).optional(),
+      ideology: z.number().min(0).max(1).optional(),
+      sociology: z.number().min(0).max(1).optional(),
+      tech: z.number().min(0).max(1).optional(),
+    })
+    .default({}),
 });
 export type WorldStack = z.infer<typeof WorldStackSchema>;
 
@@ -853,6 +867,46 @@ export const WorldStacksFileSchema = z.object({
   stacks: z.array(WorldStackSchema).default([]),
 });
 export type WorldStacksFile = z.infer<typeof WorldStacksFileSchema>;
+
+/* ------------------------------------------------------------------------- *
+ * EPOCH-0 AXIS CHOICES (CP-4). At founding, the player sets the line's stance on
+ * each thematic axis — FAITH (adopt/reject/convert), IDEOLOGY, SOCIOLOGY, TECH —
+ * and the consequence is PLACE-AND-TIME-SCALED: each option's meter/personality
+ * impact is multiplied by the founding place×era stack's intensity on that axis,
+ * so rejecting the Church in 1847 Catholic Ireland lands far harder than on a
+ * secular frontier. Each option also sets durable flags that ripple for
+ * generations. Pure data; the resolver lives in sim/axes.ts.
+ * ------------------------------------------------------------------------- */
+export const AxisKindSchema = z.enum(["faith", "ideology", "sociology", "tech"]);
+export type AxisKind = z.infer<typeof AxisKindSchema>;
+
+export const AxisOptionSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(1),
+  /** Prose shown for this stance (may carry `{slot}`/`{term}` tokens). */
+  blurb: z.string().min(1),
+  /** Durable flags this stance sets (ripple through the run). */
+  setFlags: z.array(z.string()).default([]),
+  /** Base meter deltas, SCALED by the place×era axis intensity at resolve time. */
+  effects: MeterDeltaSchema.default({}),
+  /** Base personality deltas, likewise intensity-scaled. */
+  personality: PersonalityDeltaSchema.default({}),
+});
+export type AxisOption = z.infer<typeof AxisOptionSchema>;
+
+export const AxisSchema = z.object({
+  axis: AxisKindSchema,
+  label: z.string().min(1),
+  /** The question posed at founding, e.g. "What of the faith?" */
+  prompt: z.string().min(1),
+  options: z.array(AxisOptionSchema).min(2),
+});
+export type Axis = z.infer<typeof AxisSchema>;
+
+export const AxesFileSchema = z.object({
+  axes: z.array(AxisSchema).default([]),
+});
+export type AxesFile = z.infer<typeof AxesFileSchema>;
 
 /** Validate arbitrary JSON against a schema, throwing a readable error on failure. */
 export function parseContent<T>(schema: z.ZodType<T>, data: unknown, label: string): T {
