@@ -33,6 +33,8 @@ import {
   TermsFileSchema,
   type Trope,
   TropesFileSchema,
+  type WorldStack,
+  WorldStacksFileSchema,
   type WorldTimeline,
   WorldTimelineSchema,
 } from "./schema";
@@ -86,6 +88,12 @@ export interface Content {
    */
   startMoments: StartMoment[];
   /**
+   * Per-place STANDING context (FD-7): geography/politics/religion/ideology +
+   * period perils the family experiences at a place+era. Feeds the procgen
+   * ExpandContext (place label + perils); a migration swaps which stack applies.
+   */
+  worldStacks: WorldStack[];
+  /**
    * World-timeline entries PROJECTED into the unified event pool (FD-2.2): the
    * dated backdrop facts as year-keyed, reactable GameEvents the player lives
    * through. Derived from worldTimelines; year-sorted + deterministic.
@@ -111,6 +119,7 @@ export interface RawContent {
   templates?: unknown;
   onomastics?: unknown;
   startMoments?: unknown;
+  worldStacks?: unknown;
 }
 
 /** Validate raw JSON into a Content bundle, cross-checking referential integrity. */
@@ -161,14 +170,22 @@ export function buildContent(raw: RawContent): Content {
     raw.startMoments ?? { moments: [] },
     "start-moments.json",
   );
+  const worldStacksFile = parseContent(
+    WorldStacksFileSchema,
+    raw.worldStacks ?? { stacks: [] },
+    "world/stacks.json",
+  );
   // Each start-moment's culture must resolve in onomastics; cross-ref vs eras is
-  // done below once eraIds is built.
+  // done below once eraIds is built. FD-7: its place must have a world-stack so
+  // the founded line always has standing context (no silent generic fallback).
   const cultureIds = new Set(Object.keys(onomasticsFile.cultures));
-  if (cultureIds.size > 0) {
-    for (const m of startMomentsFile.moments) {
-      if (!cultureIds.has(m.culture)) {
-        throw new Error(`start-moment "${m.id}" references unknown culture "${m.culture}"`);
-      }
+  const stackPlaces = new Set(worldStacksFile.stacks.map((s) => s.place));
+  for (const m of startMomentsFile.moments) {
+    if (cultureIds.size > 0 && !cultureIds.has(m.culture)) {
+      throw new Error(`start-moment "${m.id}" references unknown culture "${m.culture}"`);
+    }
+    if (stackPlaces.size > 0 && !stackPlaces.has(m.place)) {
+      throw new Error(`start-moment "${m.id}" place "${m.place}" has no world-stack`);
     }
   }
   // A template's trope ids must resolve to the catalog (same guarantee as events).
@@ -298,6 +315,7 @@ export function buildContent(raw: RawContent): Content {
     templates: templatesFile.templates,
     onomastics: onomasticsFile.cultures,
     startMoments: startMomentsFile.moments,
+    worldStacks: worldStacksFile.stacks,
     worldEvents: projectWorldEvents(worldTimelines),
   };
 }

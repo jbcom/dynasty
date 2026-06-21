@@ -2,6 +2,7 @@ import type { Content } from "../content";
 import type { Rng } from "../rng";
 import type { Era, FamilyMember, FamilyTree } from "../schema";
 import type { GameState } from "../state";
+import { resolveStack } from "../worldStacks";
 import type { ExpandContext } from "./expand";
 
 /**
@@ -72,13 +73,21 @@ export function buildExpandContext(
   const hi = Math.max(lo, era.yearEnd);
   const year = rng.fork("year").int(lo, hi);
 
+  // FD-7: the place's STANDING context supplies the display place name + the
+  // period+place-accurate perils. A founded line's place comes from its
+  // start-moment; the stack is matched by place (+ era when authored). Falls back
+  // to the per-archetype place + generic perils when no stack covers the place.
+  const placeId = state.founding?.place ?? "";
+  const stack = resolveStack(content.worldStacks, placeId, era.id);
+  const place = stack?.placeLabel ?? PLACE_FALLBACK[state.archetype] ?? "home";
+  const perils = stack?.perils ?? PERILS_FALLBACK;
+
   return {
     member,
     rival,
-    // A founded line's place from its start-moment; else the archetype fallback.
-    place: state.founding?.place ?? PLACE_FALLBACK[state.archetype] ?? "home",
+    place,
     year,
-    perils: PERILS_FALLBACK,
+    perils,
     tropeLabel: "",
     surname,
     era: era.id,

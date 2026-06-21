@@ -782,6 +782,42 @@ export const StartMomentsFileSchema = z.object({
 });
 export type StartMomentsFile = z.infer<typeof StartMomentsFileSchema>;
 
+/* ------------------------------------------------------------------------- *
+ * WORLD STACKS (FD-7) — per-PLACE standing context (geography / politics /
+ * religion / ideology) the family experiences AT a place and time. Unlike the
+ * dated world-timeline events (which fire once), a world-stack is the ambient
+ * STATE of a place across an era window: its governing order, dominant faith,
+ * class structure, terrain/economy, and the period+place-accurate PERILS that
+ * feed the procedural expander's context. A migration = changing the run's
+ * `place` flag, which swaps which stack applies. See design spec §3.
+ * ------------------------------------------------------------------------- */
+export const WorldStackSchema = z.object({
+  /** Place id (matches start-moment.place + the `place:<id>` flag). */
+  place: z.string().min(1),
+  /** Era id window this stack describes; absent = applies across all eras. */
+  era: z.string().optional(),
+  /** Human label, e.g. "Ireland under the Union". */
+  label: z.string().min(1),
+  /** GEOGRAPHY: terrain, ports, migration routes, economy base. */
+  geography: z.string().min(1),
+  /** POLITICS: governing order, franchise, machine/patronage. */
+  politics: z.string().min(1),
+  /** RELIGION: dominant faith(s), tolerance, revival pressure. */
+  religion: z.string().min(1),
+  /** IDEOLOGY: class structure, mores, mobility, prejudice axes. */
+  ideology: z.string().min(1),
+  /** Period+place-accurate hazards the procgen expander draws {peril} from. */
+  perils: z.array(z.string().min(1)).min(1),
+  /** A display place name for {place} substitution (e.g. "Ireland", "Baghdad"). */
+  placeLabel: z.string().min(1),
+});
+export type WorldStack = z.infer<typeof WorldStackSchema>;
+
+export const WorldStacksFileSchema = z.object({
+  stacks: z.array(WorldStackSchema).default([]),
+});
+export type WorldStacksFile = z.infer<typeof WorldStacksFileSchema>;
+
 /** Validate arbitrary JSON against a schema, throwing a readable error on failure. */
 export function parseContent<T>(schema: z.ZodType<T>, data: unknown, label: string): T {
   const result = schema.safeParse(data);
