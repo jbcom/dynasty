@@ -105,6 +105,17 @@ export interface GameState {
     surname: string;
     culture: string;
     place: string;
+    /**
+     * The composed origin (CP-R2): the era id, founding year, archetype, and
+     * deep-history flag the run was founded with. Carried so a save reconstructs the
+     * exact composition via foundByComposition — a synthesized `composed:<place>:<era>`
+     * origin id has no start-moment to read these back from. Optional for back-compat
+     * with moment-founded saves (fromSave falls back to the moment).
+     */
+    era?: string;
+    year?: number;
+    archetype?: "economic" | "political" | "technological" | "religious" | "entertainment" | "athletic";
+    deepHistory?: boolean;
     /** The founding CALLING id (CP-2) — a durable generational lens; optional. */
     calling?: string;
     /**

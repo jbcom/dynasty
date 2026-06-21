@@ -824,8 +824,15 @@ export const StartMomentSchema = z.object({
   place: z.string().min(1),
   /** Culture id — must resolve in onomastics.json (given-name lane + conventions). */
   culture: z.string().min(1),
-  /** Which power archetype this moment leans toward. */
-  archetype: z.enum(["economic", "political", "technological", "religious"]),
+  /** Which power archetype this moment leans toward (CP-R-ARCH: 6 power bases). */
+  archetype: z.enum([
+    "economic",
+    "political",
+    "technological",
+    "religious",
+    "entertainment",
+    "athletic",
+  ]),
   /** Sex of the seeded progenitor (drives the onomastic given-name pool). */
   progenitorSex: z.enum(["male", "female"]).default("male"),
   /** Era id the founded run begins in (matches eras/index.json). */

@@ -1,6 +1,6 @@
 import type { Content } from "../sim/content";
 import { replay, replayFromState } from "../sim/effects";
-import { foundDynasty } from "../sim/founding";
+import { type Composition, foundByComposition, foundDynasty } from "../sim/founding";
 import { createRng } from "../sim/rng";
 import type { Archetype } from "../sim/slots";
 import { type GameState, initState } from "../sim/state";
@@ -35,6 +35,18 @@ export interface SaveData {
     gender?: "male" | "female";
     successionMode?: "absolute" | "primogeniture" | "matriarchal";
     axisChoices?: Partial<Record<"faith" | "ideology" | "sociology" | "tech", string>>;
+    /**
+     * The composed origin (CP-R2): place/era/culture/year/archetype/deepHistory.
+     * Carried so a pure-composition run (whose momentId is a synthesized
+     * `composed:…` id with no start-moment) reconstructs via foundByComposition.
+     * Absent on legacy moment-founded saves — those rebuild from the moment.
+     */
+    place?: string;
+    era?: string;
+    culture?: string;
+    year?: number;
+    archetype?: Archetype;
+    deepHistory?: boolean;
   };
   /** Legacy v1 literal dynasty key, read only when migrating an old save. */
   dynasty?: string;
@@ -60,6 +72,12 @@ export function toSave(state: GameState): SaveData {
           founding: {
             momentId: state.founding.momentId,
             surname: state.founding.surname,
+            place: state.founding.place,
+            culture: state.founding.culture,
+            ...(state.founding.era ? { era: state.founding.era } : {}),
+            ...(state.founding.year !== undefined ? { year: state.founding.year } : {}),
+            ...(state.founding.archetype ? { archetype: state.founding.archetype } : {}),
+            ...(state.founding.deepHistory ? { deepHistory: true } : {}),
             ...(state.founding.calling ? { calling: state.founding.calling } : {}),
             ...(state.founding.gender ? { gender: state.founding.gender } : {}),
             ...(state.founding.successionMode
@@ -82,15 +100,46 @@ export function fromSave(content: Content, save: SaveData): GameState {
   // A founded line is rebuilt from its start-moment, then the history replays from
   // that founded base (initState alone cannot reproduce a founded initial state).
   if (save.founding) {
-    const base = foundDynasty(content, {
-      momentId: save.founding.momentId,
-      surname: save.founding.surname,
-      seed: save.seed,
-      calling: save.founding.calling,
-      gender: save.founding.gender,
-      successionMode: save.founding.successionMode,
-      axisChoices: save.founding.axisChoices,
-    }).state;
+    const f = save.founding;
+    // CP-R2: a composed-origin save (place/era/culture/year/archetype present)
+    // reconstructs via foundByComposition — its synthesized `composed:…` momentId
+    // has no start-moment to read back from. A legacy moment-founded save (those
+    // fields absent) rebuilds from the start-moment via foundDynasty.
+    const hasComposition =
+      f.place !== undefined &&
+      f.era !== undefined &&
+      f.culture !== undefined &&
+      f.year !== undefined &&
+      f.archetype !== undefined;
+    let base: GameState;
+    if (hasComposition) {
+      const composition: Composition = {
+        place: f.place as string,
+        era: f.era as string,
+        culture: f.culture as string,
+        year: f.year as number,
+        archetype: f.archetype as Archetype,
+        gender: f.gender ?? "male",
+        deepHistory: f.deepHistory,
+        originId: f.momentId,
+        surname: f.surname,
+        seed: save.seed,
+        calling: f.calling,
+        successionMode: f.successionMode,
+        axisChoices: f.axisChoices,
+      };
+      base = foundByComposition(content, composition).state;
+    } else {
+      base = foundDynasty(content, {
+        momentId: f.momentId,
+        surname: f.surname,
+        seed: save.seed,
+        calling: f.calling,
+        gender: f.gender,
+        successionMode: f.successionMode,
+        axisChoices: f.axisChoices,
+      }).state;
+    }
     return replayFromState(content, base, save.history, createRng);
   }
   // Plain archetype run: archetype field (v2), else legacy literal dynasty (v1).
