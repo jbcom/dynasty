@@ -34,18 +34,30 @@ variation. The player's identity is 100% chosen, not dealt.
 
 ```
 New Game (random hidden seed)
-  1. CHOOSE LOCATION — concrete, discernible sensory-cue cards ("salt-air and the smell of
-     fish" → Ireland). The player picks WHERE the line is founded. Place → era (the place's
-     validEra) + default culture.
-  2. BIRTH — a short midwife/parents beat (flavor + the moment of arrival).
+  1. CHOOSE LOCATION (GEOGRAPHY) — concrete, discernible sensory-cue cards ("salt-air and
+     the smell of fish" → Ireland). The player picks WHERE the line is founded → place +
+     default culture. GEOGRAPHY ONLY — not the time.
+  2. BIRTH + DATE (CHRONOLOGY) — the doctor/midwife (informed by the chosen place) records
+     the birth: a seed-drawn random MONTH + DAY, narrated as a full date — "You hear the
+     doctor make careful notes… born Sep 6, 1885." / "…born March 3, 768." The stated date
+     makes the chronology concrete AND informs the ERA choice (a place with >1 valid era
+     offers the era as the choice the date frames; a single-era place states its year).
   3. CHOOSE GENDER — the player chooses (not "hears" a dealt value).
   4. CHOOSE FAMILY NAME — culture-appropriate suggestions + "name your own" (keep the modal).
   5. CHOOSE GIVEN NAME — culture-appropriate suggestions + "name your own".
-  6. CHOOSE CALLING — as the child grows, the player picks the founding calling, which sets
-     the line's ARCHETYPE (the calling→archetype mapping; calling is the diegetic face of
-     the power base).
+  6. CHOOSE CALLING — as the child grows, the player picks the founding calling = the
+     ARCHETYPE (diegetic title on the power base).
   → found the run with the fully player-chosen composition; play begins.
 ```
+
+### Geography ≠ chronology (user, 2026-06-21)
+PLACE (where) and ERA/DATE (when) are SEPARATE concerns and must be handled separately.
+- **Place** is the geographic choice (step 1).
+- **Date** is chronological: the buried seed draws a month + day; the doctor narrates the
+  full date ("born Sep 6, 1885"). The YEAR comes from the era; the month/day are flavor
+  drawn from the seed (world layer, not identity). A `birthDate` (month/day) is recorded on
+  the composition/state so later beats can reference it. The era, when a place offers more
+  than one, is the chronological CHOICE the stated date sets up.
 
 `resolveComposition(place, { era, year, archetype, gender, surname, given?, culture, calling })`
 is the single founding seam — it already accepts every field as an explicit input, so the
