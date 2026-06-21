@@ -154,7 +154,7 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 ### SS-1 Motivators core (8-axis model)
 - [x] SS-1 src/sim/motivators.ts (8 axes, createMotivators/drift/gate); migrate personality+axes.json consumers; unit tests; gate green
 ### SS-2 Yuka GOAP integration
-- [ ] SS-2 add yuka+@types/yuka; pure src/sim/goap/ wrapper (no Math.random/Date.now reachable); toJSON/fromJSON deterministic; tests
+- [x] SS-2 add yuka+@types/yuka; pure src/sim/goap/ wrapper (no Math.random/Date.now reachable); toJSON/fromJSON deterministic; tests
 ### SS-3 DynastyAgent
 - [ ] SS-3 line→Think brain (motivators→characterBias, archetype/trope→evaluators); pure deterministic arbitrate+step; serializes; determinism tests
 ### SS-4 Macro-acts + epochs
