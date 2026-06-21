@@ -4,6 +4,23 @@
  * game's tone, schema, and dynastic-trope grammar (spec
  * docs/superpowers/specs/2026-06-20-found-your-own-dynasty.md §1c/1d/1e).
  */
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
+/**
+ * The dynastic trope catalog, read from the single source of truth
+ * (src/data/tropes.json) so the dev-toolkit prompts never drift from what the sim
+ * validates against. Returns the parsed trope objects.
+ */
+export function loadTropes() {
+  const path = join("src/data/tropes.json");
+  return JSON.parse(readFileSync(path, "utf8")).tropes;
+}
+
+const TROPES = loadTropes();
+/** "id — summary" lines for prompt embedding (the retagger needs the meanings). */
+const TROPE_LINES = TROPES.map((t) => `  ${t.id} (${t.kind}): ${t.summary}`).join("\n");
+const TROPE_IDS = TROPES.map((t) => t.id).join(", ");
 
 /** The standing system instruction — the game's voice + the hard rules. */
 export const SYSTEM_PROMPT = `
@@ -16,12 +33,9 @@ VOICE: literate, acidic, morally interrogating dark satire. Period- and
 place-accurate. Real history is the SETTING; the player's family reacts to it.
 Never gratuitous; always coherent.
 
-DYNASTIC TROPES (events should embody one or more, tagged trope:<id>):
-accidental-heir, bootlegger-to-legitimacy, frontier-capital-origin,
-centrist-to-zealot, conqueror, prophet, pleasure-king, oligarch, techno-frontier,
-megachurch-prosperity, dissipating-line, martyr, matriarch-regency,
-dynastic-merger, cadet-branch, prodigal-heir, scandal-fall-rehab, exile-return,
-reformer-vs-reactionary, outside-claimant.
+DYNASTIC TROPES (events should embody one or more, tagged trope:<id>). The
+CANONICAL CATALOG (id (kind): meaning) — use ONLY these ids:
+${TROPE_LINES}
 
 HARD RULES (a generated event is REJECTED if it breaks any):
 - historicity is "real" (it actually happened), "extrapolated" (plausible
@@ -59,6 +73,31 @@ export function buildGenerationPrompt({ gap, recentEvents, count }) {
   ]
     .filter(Boolean)
     .join("\n");
+}
+
+/**
+ * FD-3 trope-retag job: ask Gemini to classify an EXISTING event by which
+ * dynastic trope(s) it embodies, proposing `trope:<id>` tags from the canonical
+ * catalog. This is the "trope-retagging" dev-toolkit job (spec §1e) — it lets the
+ * refactor from literal lines (Trump/Kennedy/…) to reusable trope influences
+ * proceed at scale instead of by hand. Output is PROPOSED for git review.
+ */
+export function buildRetagPrompt({ event }) {
+  return [
+    "Classify this existing Dynasty event by which DYNASTIC TROPE(S) it embodies.",
+    "Propose 1-3 trope ids from the canonical catalog (no more — pick the truest).",
+    "A trope fits if the event enacts that archetypal pattern (a rise, a succession,",
+    "a schism, a scandal-fall, etc.), NOT merely if a keyword appears.",
+    "If NONE genuinely fit, return an empty list — do not force a tag.",
+    "",
+    `Canonical catalog (use ONLY these ids): ${TROPE_IDS}`,
+    "",
+    `Event:\n${JSON.stringify(
+      { id: event.id, title: event.title, scene: event.scene, tags: event.tags },
+      null,
+      2,
+    )}`,
+  ].join("\n");
 }
 
 /**

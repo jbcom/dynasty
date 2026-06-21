@@ -6,7 +6,8 @@
  * Needs GEMINI_API_KEY in the env (dev-only; never bundled into the game).
  */
 import { GoogleGenAI } from "@google/genai";
-import { buildCritiquePrompt } from "./prompt.mjs";
+import { buildCritiquePrompt, buildRetagPrompt } from "./prompt.mjs";
+import { RETAG_SCHEMA } from "./schema.mjs";
 
 // gemini-3.5-flash handles BOTH bulk generation AND the review/self-critique pass
 // (it's the current model available on this key; 3.5-pro / 3-*-preview 404 here).
@@ -69,6 +70,23 @@ export async function critiqueEvent({ event, recentEvents }) {
       "You are a ruthless but fair quality reviewer for the Dynasty game. Score honestly; reject the mediocre.",
     prompt: buildCritiquePrompt({ event, recentEvents }),
     schema: CRITIQUE_SCHEMA,
+    model: PRO,
+    thinking: 1024,
+  });
+}
+
+/**
+ * FD-3 trope-retag pass: classify one existing event by the dynastic trope(s) it
+ * embodies. Returns { tropes: string[], why }. Uses the PRO (thinking-on) model
+ * since classification quality matters more than throughput. The caller validates
+ * the returned ids against the canonical catalog before applying any tag.
+ */
+export async function retagEvent({ event }) {
+  return generateJSON({
+    system:
+      "You are a precise narrative taxonomist for the Dynasty game. Classify events by archetypal trope; never force a tag that does not genuinely fit.",
+    prompt: buildRetagPrompt({ event }),
+    schema: RETAG_SCHEMA,
     model: PRO,
     thinking: 1024,
   });

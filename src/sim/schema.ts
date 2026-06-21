@@ -588,6 +588,48 @@ export const FamilyTreesFileSchema = z.object({
 });
 export type FamilyTreesFile = z.infer<typeof FamilyTreesFileSchema>;
 
+/**
+ * DYNASTIC TROPE CATALOG (FD-3). The literal authored lines (Trump/Kennedy/
+ * Musk/Graham) are being refactored into reusable archetypal PATTERNS — tropes —
+ * that ANY founded family can embody. An event carries `trope:<id>` tags drawn
+ * from this catalog so the compiler can compose a bespoke line from
+ * trope-templates × world-stacks × eras × seeded RNG, and so a founded dynasty
+ * is never locked to one real family's content (eliminates the no-leak hazard at
+ * the root). `kind` groups tropes by lifecycle moment: rise | succession |
+ * decline | schism | alliance | governance | ideological. See design spec
+ * docs/superpowers/specs/2026-06-20-found-your-own-dynasty.md §1c.
+ */
+export const TropeKindSchema = z.enum([
+  "rise",
+  "succession",
+  "decline",
+  "schism",
+  "alliance",
+  "governance",
+  "ideological",
+]);
+export type TropeKind = z.infer<typeof TropeKindSchema>;
+
+export const TropeSchema = z.object({
+  /** Stable id used in `trope:<id>` event tags (kebab-case). */
+  id: z.string().min(1),
+  /** Human-readable catalog name. */
+  label: z.string().min(1),
+  /** The lifecycle moment / structural role this trope plays. */
+  kind: TropeKindSchema,
+  /** One-line description (the game-bible voice; also fed to the Gemini retagger). */
+  summary: z.string().min(1),
+});
+export type Trope = z.infer<typeof TropeSchema>;
+
+export const TropesFileSchema = z.object({
+  // Empty is allowed at the file-schema level so legacy fixtures / callers that
+  // omit the catalog still load; the cross-ref gate in buildContent only enforces
+  // `trope:` tags when a non-empty catalog is supplied.
+  tropes: z.array(TropeSchema).default([]),
+});
+export type TropesFile = z.infer<typeof TropesFileSchema>;
+
 /** Validate arbitrary JSON against a schema, throwing a readable error on failure. */
 export function parseContent<T>(schema: z.ZodType<T>, data: unknown, label: string): T {
   const result = schema.safeParse(data);

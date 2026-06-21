@@ -62,5 +62,23 @@ export const EVENT_BATCH_SCHEMA = {
   required: ["events"],
 };
 
+/**
+ * FD-3 trope-retag verdict: the trope ids the model proposes for an existing
+ * event, plus a one-line rationale. Validated downstream against the canonical
+ * catalog before any tag is applied.
+ */
+export const RETAG_SCHEMA = {
+  type: "object",
+  properties: {
+    tropes: {
+      type: "array",
+      items: { type: "string" },
+      description: "1-3 catalog trope ids (no trope: prefix); [] if none fit",
+    },
+    why: { type: "string", description: "one-line justification for the classification" },
+  },
+  required: ["tropes", "why"],
+};
+
 void METER;
 void AXIS;

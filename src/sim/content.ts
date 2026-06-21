@@ -25,6 +25,8 @@ import {
   SlotsFileSchema,
   type TermsFile,
   TermsFileSchema,
+  type Trope,
+  TropesFileSchema,
   type WorldTimeline,
   WorldTimelineSchema,
 } from "./schema";
@@ -56,6 +58,12 @@ export interface Content {
   /** Per-dynasty family trees (preset spines + the found-your-own data model). */
   familyTrees: FamilyTree[];
   /**
+   * The dynastic trope catalog (FD-3): reusable archetypal patterns any founded
+   * family can embody. Events reference these via `trope:<id>` tags; the compiler
+   * composes a bespoke line from trope-templates × world-stacks × eras.
+   */
+  tropes: Trope[];
+  /**
    * World-timeline entries PROJECTED into the unified event pool (FD-2.2): the
    * dated backdrop facts as year-keyed, reactable GameEvents the player lives
    * through. Derived from worldTimelines; year-sorted + deterministic.
@@ -77,6 +85,7 @@ export interface RawContent {
   currencies?: unknown;
   ranks?: unknown;
   familyTrees?: unknown;
+  tropes?: unknown;
 }
 
 /** Validate raw JSON into a Content bundle, cross-checking referential integrity. */
@@ -107,6 +116,11 @@ export function buildContent(raw: RawContent): Content {
     raw.familyTrees ?? { trees: [] },
     "family-trees",
   );
+  const tropesFile = parseContent(TropesFileSchema, raw.tropes ?? { tropes: [] }, "tropes.json");
+  const tropeIds = new Set(tropesFile.tropes.map((t) => t.id));
+  if (tropeIds.size !== tropesFile.tropes.length) {
+    throw new Error("tropes.json has duplicate trope ids");
+  }
   // Cross-ref validate each tree: every child id resolves to a member, exactly
   // one founder-patriarch, and no cycles (the tree is a DAG progenitor→descendants).
   for (const tree of familyTreesFile.trees) {
@@ -172,6 +186,19 @@ export function buildContent(raw: RawContent): Content {
         throw new Error(`Duplicate event id "${ev.id}"`);
       }
       seenEventIds.add(ev.id);
+      // FD-3: any `trope:<id>` tag must reference a catalog trope (so a refactor
+      // can never leave an event pointing at a deleted/renamed trope). Only
+      // enforced when a catalog is supplied, so legacy fixtures stay loadable.
+      if (tropeIds.size > 0) {
+        for (const tag of ev.tags) {
+          if (tag.startsWith("trope:")) {
+            const id = tag.slice("trope:".length);
+            if (!tropeIds.has(id)) {
+              throw new Error(`Event "${ev.id}" references unknown trope "${id}"`);
+            }
+          }
+        }
+      }
       allEvents.push(ev);
     }
     eventsByEra.set(parsed.era, parsed.events);
@@ -200,6 +227,7 @@ export function buildContent(raw: RawContent): Content {
     currencies: currenciesFile.currencies,
     ranks: ranksFile.ranks,
     familyTrees: familyTreesFile.trees,
+    tropes: tropesFile.tropes,
     worldEvents: projectWorldEvents(worldTimelines),
   };
 }

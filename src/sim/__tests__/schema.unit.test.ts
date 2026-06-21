@@ -6,8 +6,18 @@ import {
   EventSchema,
   MeterComparatorSchema,
   parseContent,
+  TropeSchema,
 } from "../schema";
 import { validRaw } from "./fixtures";
+
+/** Attach a tag to the first authored event of a raw fixture (FD-3 gate tests). */
+function tagFirstEvent(raw: ReturnType<typeof validRaw>, tag: string) {
+  const entry = raw.eraEvents[0];
+  if (!entry) throw new Error("fixture has no era events");
+  const ev = (entry.data as { events: Array<{ tags: string[] }> }).events[0];
+  if (!ev) throw new Error("fixture era has no events");
+  ev.tags = [...(ev.tags ?? []), tag];
+}
 
 describe("schema validation", () => {
   it("accepts a valid content bundle and cross-checks references", () => {
@@ -117,5 +127,47 @@ describe("schema validation", () => {
       attribution: "Playfair Display by Claus Eggers Sørensen",
     });
     expect(result.success).toBe(true);
+  });
+});
+
+describe("FD-3 trope catalog + cross-ref gate", () => {
+  it("TropeSchema accepts a well-formed trope and rejects a bad kind", () => {
+    expect(TropeSchema.safeParse({ id: "x", label: "X", kind: "rise", summary: "s" }).success).toBe(
+      true,
+    );
+    expect(
+      TropeSchema.safeParse({ id: "x", label: "X", kind: "not-a-kind", summary: "s" }).success,
+    ).toBe(false);
+  });
+
+  it("buildContent enforces that a trope:<id> tag references a catalog trope", () => {
+    const raw = validRaw();
+    raw.tropes = { tropes: [{ id: "rise-x", label: "Rise X", kind: "rise", summary: "s" }] };
+    tagFirstEvent(raw, "trope:rise-x");
+    expect(() => buildContent(raw)).not.toThrow();
+  });
+
+  it("buildContent rejects a trope:<id> tag that is not in the catalog", () => {
+    const raw = validRaw();
+    raw.tropes = { tropes: [{ id: "rise-x", label: "Rise X", kind: "rise", summary: "s" }] };
+    tagFirstEvent(raw, "trope:ghost");
+    expect(() => buildContent(raw)).toThrow(/unknown trope/);
+  });
+
+  it("the gate is inert when no catalog is supplied (legacy fixtures stay loadable)", () => {
+    const raw = validRaw();
+    tagFirstEvent(raw, "trope:anything-goes");
+    expect(() => buildContent(raw)).not.toThrow();
+  });
+
+  it("buildContent rejects duplicate trope ids in the catalog", () => {
+    const raw = validRaw();
+    raw.tropes = {
+      tropes: [
+        { id: "dup", label: "A", kind: "rise", summary: "s" },
+        { id: "dup", label: "B", kind: "decline", summary: "s" },
+      ],
+    };
+    expect(() => buildContent(raw)).toThrow(/duplicate trope ids/);
   });
 });
