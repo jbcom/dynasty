@@ -18,16 +18,16 @@ function surnameOf(member: FamilyMember): string {
   return parts[parts.length - 1] ?? member.name;
 }
 
-/** The tree backing the run's dynasty, if any preset spine matches. */
-function treeForDynasty(content: Content, dynasty: string): FamilyTree | undefined {
-  return content.familyTrees.find((t) => t.dynasty === dynasty);
+/** The reference spine tree for an archetype (FD-3.5: trees keyed by archetype). */
+function treeForArchetype(content: Content, archetype: string): FamilyTree | undefined {
+  return content.familyTrees.find((t) => t.archetype === archetype);
 }
 
-/** A per-dynasty default place label until the world-stacks (FD-7) supply it. */
+/** A per-archetype default place label until the world-stacks (FD-7) supply it. */
 const PLACE_FALLBACK: Record<string, string> = {
-  trump: "New York",
-  kennedy: "Boston",
-  musk: "the frontier",
+  economic: "New York",
+  political: "Boston",
+  technological: "the frontier",
   religious: "the heartland",
 };
 
@@ -52,7 +52,10 @@ export function buildExpandContext(
   era: Era,
   rng: Rng,
 ): ExpandContext {
-  const tree = treeForDynasty(content, state.dynasty);
+  // The archetype's reference spine (FD-3.5: trees are keyed by archetype). A
+  // founded line's OWN tree (FD-8) will supersede this; until then the archetype
+  // spine seeds member/rival names and the founding metadata supplies the surname.
+  const tree = treeForArchetype(content, state.archetype);
   const members = tree?.members ?? [];
   const founder = members.find((m) => m.role === "founder-patriarch");
   const heir = members.find((m) => m.role === "heir-successor");
@@ -60,7 +63,8 @@ export function buildExpandContext(
 
   const member = (heir ?? founder)?.name ?? "the heir";
   const rival = rivalMember?.name ?? member;
-  const surname = founder ? surnameOf(founder) : "the family";
+  // A founded line uses its chosen surname; otherwise the spine's founder surname.
+  const surname = state.founding?.surname ?? (founder ? surnameOf(founder) : "the family");
 
   // Year: a seeded draw within the era window, floored at the run's last event
   // year so procedural events never travel back in time.
@@ -71,7 +75,8 @@ export function buildExpandContext(
   return {
     member,
     rival,
-    place: PLACE_FALLBACK[state.dynasty] ?? "home",
+    // A founded line's place from its start-moment; else the archetype fallback.
+    place: state.founding?.place ?? PLACE_FALLBACK[state.archetype] ?? "home",
     year,
     perils: PERILS_FALLBACK,
     tropeLabel: "",

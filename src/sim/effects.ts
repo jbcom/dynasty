@@ -11,7 +11,7 @@ import { applyDelta } from "./meters";
 import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
 import type { Choice, GameEvent } from "./schema";
-import type { DynastyKey } from "./slots";
+import type { Archetype } from "./slots";
 import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
 import { systemicTick } from "./systemic";
 import { advanceTimeline, applyJump, detectEnd } from "./timeline";
@@ -180,12 +180,28 @@ export function replay(
   content: Content,
   seed: string,
   history: ReadonlyArray<{ eventId: string; choiceId: string }>,
-  initState: (content: Content, seed: string, dynasty?: DynastyKey) => GameState,
+  initState: (content: Content, seed: string, archetype?: Archetype) => GameState,
   createRng: (seed: string) => Rng,
-  dynasty: DynastyKey = "trump",
+  archetype: Archetype = "economic",
 ): GameState {
-  let state = initState(content, seed, dynasty);
-  const rng = createRng(seed);
+  const base = initState(content, seed, archetype);
+  return replayFromState(content, base, history, createRng);
+}
+
+/**
+ * Replay a history from an ALREADY-CONSTRUCTED base state (e.g. a founded line's
+ * initial state from foundDynasty, which initState cannot produce). Same
+ * determinism guarantee: the rng is seeded from base.seed so the reconstruction
+ * is bit-identical to live play.
+ */
+export function replayFromState(
+  content: Content,
+  base: GameState,
+  history: ReadonlyArray<{ eventId: string; choiceId: string }>,
+  createRng: (seed: string) => Rng,
+): GameState {
+  let state = base;
+  const rng = createRng(base.seed);
   for (const step of history) {
     const event = content.allEvents.find((e) => e.id === step.eventId);
     if (!event) throw new Error(`replay: unknown event "${step.eventId}"`);
@@ -203,12 +219,12 @@ export function replay(
 export function autoPlaythrough(
   content: Content,
   seed: string,
-  initState: (content: Content, seed: string, dynasty?: DynastyKey) => GameState,
+  initState: (content: Content, seed: string, archetype?: Archetype) => GameState,
   createRng: (seed: string) => Rng,
   maxSteps = 500,
-  dynasty: DynastyKey = "trump",
+  archetype: Archetype = "economic",
 ): GameState {
-  let state = initState(content, seed, dynasty);
+  let state = initState(content, seed, archetype);
   const rng = createRng(seed);
   for (let i = 0; i < maxSteps && !state.end; i++) {
     const event = pickNextEvent(content, state, rng.fork(`pick:${i}`));

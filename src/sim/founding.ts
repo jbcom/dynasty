@@ -50,9 +50,9 @@ function findMoment(content: Content, momentId: string): StartMoment {
 export function foundDynasty(content: Content, input: FoundingInput): FoundingResult {
   const moment = findMoment(content, input.momentId);
 
-  // Base state in the moment's era; the founded line uses the engine's default
-  // dynasty baseline (its identity comes from `founding`, not the preset key).
-  const base = initState(content, input.seed, "trump", moment.startEra);
+  // Base state in the moment's era; the founded line's identity is the moment's
+  // ARCHETYPE (FD-3.5 — no literal preset key), refined by the `founding` metadata.
+  const base = initState(content, input.seed, moment.archetype, moment.startEra);
 
   // Progenitor given name from the moment's culture (seeded, deterministic).
   const culture = getCulture({ cultures: content.onomastics }, moment.culture);

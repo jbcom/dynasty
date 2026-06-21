@@ -17,28 +17,28 @@ describe("slot-event resolution (alt-history AH7)", () => {
 
   it("dynasty resolution wins: the leader-assassination slot is Fred Trump on the Trump path", () => {
     const slot = slotById("leader_assassination");
-    expect(resolveSlot(slot, "default", "trump").event).toBe("ev_fred_assassinated");
+    expect(resolveSlot(slot, "default", "economic").event).toBe("ev_fred_assassinated");
     // ...and IS JFK on the Kennedy dynasty path.
-    expect(resolveSlot(slot, "default", "kennedy").event).toBe("ev_jfk_assassinated");
+    expect(resolveSlot(slot, "default", "political").event).toBe("ev_jfk_assassinated");
   });
 
   it("dynasty resolution wins over branch: Musk dynasty → near-bankruptcy even on Nazi branch", () => {
     const slot = slotById("leader_assassination");
     // musk has a dynasty override (wk_musk_near_bankruptcy), so dynasty wins over the Nazi branch.
-    expect(resolveSlot(slot, "nazi", "musk").event).toBe("wk_musk_near_bankruptcy");
+    expect(resolveSlot(slot, "nazi", "technological").event).toBe("wk_musk_near_bankruptcy");
     // On the_crash slot, musk has no dynasty override → Nazi branch resolution applies.
     const crash = slotById("the_crash");
-    expect(resolveSlot(crash, "nazi", "musk").event).toBe("wun_reich_war_economy");
+    expect(resolveSlot(crash, "nazi", "technological").event).toBe("wun_reich_war_economy");
   });
 
   it("falls back to default when neither dynasty nor branch overrides", () => {
     const slot = slotById("the_crash");
-    expect(resolveSlot(slot, "westcoast", "musk").event).toBe("ev_great_depression_1929");
-    expect(resolveSlot(slot, "nazi", "musk").event).toBe("wun_reich_war_economy");
+    expect(resolveSlot(slot, "westcoast", "technological").event).toBe("ev_great_depression_1929");
+    expect(resolveSlot(slot, "nazi", "technological").event).toBe("wun_reich_war_economy");
   });
 
   it("resolveSlots maps every archetype to a concrete event for a branch+dynasty", () => {
-    const map = resolveSlots(slots, "nazi", "trump");
+    const map = resolveSlots(slots, "nazi", "economic");
     // dynasty(trump) wins over the nazi branch for leader_assassination
     expect(map.leader_assassination).toBe("ev_fred_assassinated");
     // the_crash has no trump dynasty override → nazi branch resolution

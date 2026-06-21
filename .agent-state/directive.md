@@ -57,16 +57,16 @@ the compiler weaves by Epoch-0 choices + butterfly/causality + world events. The
 composite archetypes (economic/political/technological/religious) are the identity
 axis, not named houses.
 
-### FD-3.5 DISSOLVE LITERAL DYNASTY IDENTITY (prerequisite for FD-6.3 UI) — NEXT
-- [ ] FD-3.5a retire `DynastyKey = trump|musk|kennedy` → `Archetype = economic|political|technological|religious` as the run identity key. Thread through initState/Game/loop/save/compiler/effects/worldEvents/slots. birthYear comes from the start-moment (foundDynasty already does this); drop DYNASTY_START literal map (or rekey by archetype default years).
-- [ ] FD-3.5b no-leak gate rekeys onto the FOUNDING, not literal families: world/character events tagged by archetype (or by source-line id) are gated vs the run's archetype. The musk/kennedy character timelines keep their EVENTS as woven material but lose literal-family exclusivity — they contribute to the matching archetype pool.
-- [ ] FD-3.5c family-trees become archetype-keyed generic spines (repurpose the 4 real trees as the archetype seed material; strip literal-only framing where it leaks as a named preset). Founded lines grow their OWN tree (FD-8) from the progenitor; the archetype spine is reference/seed, not the player's identity.
-- [ ] FD-3.5d delete the preset dynasty-select carousel data (TitleScreen DYNASTIES array, dynasty-*.svg preset cards) — folded into FD-6.3.
+### FD-3.5 DISSOLVE LITERAL DYNASTY IDENTITY — DONE (live-verified)
+- [x] FD-3.5a DONE: `DynastyKey` → `Archetype = economic|political|technological|religious` threaded through slots/state/compiler/effects/loop/save/gameStore/App/procgen. GameState.dynasty → archetype; DYNASTY_START → ARCHETYPE_START; compiler dynastyOf → archetypeOf. Save format v2 (archetype + founding metadata; v1 literal-dynasty migrated by mapping).
+- [x] FD-3.5b DONE: no-leak gate rekeyed onto ARCHETYPE — projectWorldEvents tags `archetype:<id>` (musk→technological, kennedy→political); ownedByOtherArchetype gates vs state.archetype. The character timelines are now woven material for the matching archetype pool, no literal-family exclusivity.
+- [x] FD-3.5c DONE (interim): family-trees keyed by `archetype` (treeForArchetype); founded lines use their OWN surname/place from founding metadata, the archetype tree is reference/seed. (Full tree-grow is FD-8.)
+- [x] FD-3.5d DONE: preset dynasty-select carousel REMOVED (TitleScreen DYNASTIES array + the Trump/Kennedy/Musk cards gone). Replaced by the founding flow (FD-6.3).
 
 ### Remaining — this branch lands ALL of it
 
 - [x] **FD-6.2 DONE:** founding.foundDynasty → {state, progenitorName, moment}; GameState.founding metadata; seeded progenitor naming; 7 tests; 406 green.
-- [ ] **FD-6.3 Stage-0 founding UI** (depends on FD-3.5). FOUND-ONLY — the carousel is GONE. Flow: title → moment picker (the 8 hinges, deep-history flagged) → surname entry → progenitor confirm → start. App calls foundDynasty → passes the founded GameState as `restore`. Update TitleScreen + browser/visual/e2e tests. Screenshot-verify.
+- [x] **FD-6.3 DONE (live-verified):** found-only Stage-0 UI. TitleScreen rebuilt: title → moment picker (8 hinges, deep-history flagged green) → surname entry (Begin disabled until named) → onFound(momentId, surname, seed). App.foundGame calls foundDynasty → GameStore(restore=founded state). TitleScreen browser+visual tests rewritten (10 green). LIVE-VERIFIED via chrome-devtools: founded the deep-history Baghdad line "al-Rashid" → opened in the caliphate era (year 795 "A Marriage of Houses" → choice → year 819 "The Victor Enters the City"), full HUD, ZERO console errors.
 - [ ] **FD-7 world stacks.** src/data/world/ geo/politics/religion/ideology per place (ireland/uk/south_africa/canada/east_coast/west_coast/baghdad). STANDING context by current `place`; migration = place change. Pure resolver feeding the FD-4.2 ExpandContext (real place + period perils, replacing the era-generic fallback). Tests per place/era.
 - [ ] **FD-8 family-tree STATE + BIRTH.** FamilyState in GameState (live mutable tree, serializable). Pure seeded `beget()` — children from reign choices/events, onomastic naming (FD-5), inherited+varied traits. Replay-determinism tests.
 - [ ] **FD-9 DEATH + AGING.** Per-year seeded mortality hazard (age + health + era-medicine); non-protagonist death events; protagonist death triggers succession (FD-10). Tests.

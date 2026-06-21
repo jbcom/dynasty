@@ -22,7 +22,7 @@ const content = loadContent();
 
 describe("Epoch-0 prologue is not skippable (Trump dynasty)", () => {
   it("the birth is NOT eligible on turn one — only the prologue opener is", () => {
-    const start = initState(content, "seed", "trump");
+    const start = initState(content, "seed", "economic");
     const ids = eligibleEvents(content, start).map((e) => e.id);
     expect(ids).not.toContain("ev_donald_is_born");
     // The dynastic prologue opens the game (Friedrich leaving Kallstadt).
@@ -45,7 +45,7 @@ describe("Epoch-0 prologue is not skippable (Trump dynasty)", () => {
     let reached = 0;
     const SEEDS = 8;
     for (let s = 0; s < SEEDS; s++) {
-      let state = initState(content, `d${s}`, "trump");
+      let state = initState(content, `d${s}`, "economic");
       const rng = createRng(`d${s}`);
       for (let i = 0; i < 300 && !state.end; i++) {
         const event = pickNextEvent(content, state, rng.fork(`p${i}`));

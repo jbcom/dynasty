@@ -2,7 +2,7 @@ import type { Content } from "../sim/content";
 import { applyChoice } from "../sim/effects";
 import { createRng, type Rng } from "../sim/rng";
 import type { GameEvent } from "../sim/schema";
-import type { DynastyKey } from "../sim/slots";
+import type { Archetype } from "../sim/slots";
 import { type GameState, initState, type LedgerEntry } from "../sim/state";
 import { advanceTimeline } from "../sim/timeline";
 import { pickNextEventViaWorld } from "../sim/world";
@@ -30,10 +30,15 @@ export class Game {
   private lastLedger: LedgerEntry[] = [];
   private readonly listeners = new Set<Listener>();
 
-  constructor(content: Content, seed: string, restore?: GameState, dynasty: DynastyKey = "trump") {
+  constructor(
+    content: Content,
+    seed: string,
+    restore?: GameState,
+    archetype: Archetype = "economic",
+  ) {
     this.content = content;
     this.rng = createRng(seed);
-    this.state = restore ?? initState(content, seed, dynasty);
+    this.state = restore ?? initState(content, seed, archetype);
     this.current = this.state.end ? null : this.pick();
   }
 

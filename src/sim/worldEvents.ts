@@ -23,18 +23,19 @@ import type { GameEvent, WorldEvent, WorldTimeline } from "./schema";
  */
 
 /**
- * The dynasty a scope BELONGS to, or null if it is shared backdrop. Character-
- * timeline scopes (musk, kennedy) are a specific dynasty's private arc and MUST
- * NOT leak into another house's run (user invariant: start a Kennedy, stay a
- * Kennedy — no drifting into a Musk/Trump line). Geographic + thematic scopes are
- * shared world backdrop available to every dynasty.
+ * The ARCHETYPE a scope's private arc belongs to, or null if it is shared backdrop
+ * (FD-3.5). The former literal character-timeline scopes (musk, kennedy) are
+ * repurposed as RAW EVENT MATERIAL for the matching archetype's pool: the musk
+ * arc feeds the technological archetype, the kennedy arc the political one. Tagged
+ * so the no-leak gate keeps a founded line within its OWN archetype's material.
+ * Geographic + thematic scopes are shared world backdrop available to every line.
  */
-export function dynastyForScope(scope: WorldTimeline["scope"]): string | null {
+export function archetypeForScope(scope: WorldTimeline["scope"]): string | null {
   switch (scope) {
     case "musk":
-      return "musk";
+      return "technological";
     case "kennedy":
-      return "kennedy";
+      return "political";
     default:
       return null; // shared backdrop (usa/world/manhattan/eastcoast/westcoast/mores/religion/science)
   }
@@ -62,7 +63,7 @@ function placeForScope(scope: WorldTimeline["scope"]): string {
 function projectOne(tl: WorldTimeline, e: WorldEvent): GameEvent {
   const branch = tl.branch ?? "default";
   const place = placeForScope(tl.scope);
-  const ownerDynasty = dynastyForScope(tl.scope);
+  const ownerArchetype = archetypeForScope(tl.scope);
   return {
     id: e.id,
     // World events are year-keyed across all eras; the era is derived from the
@@ -76,9 +77,14 @@ function projectOne(tl: WorldTimeline, e: WorldEvent): GameEvent {
     startrekInspired: false,
     historicity: e.extrapolated ? "extrapolated" : "real",
     ...(place ? { place } : {}),
-    // A dynasty-owned scope (musk/kennedy) tags `dynasty:<id>` so the selector
-    // can exclude it from OTHER houses' runs (no leaking between families).
-    tags: ["world", tl.scope, ...(ownerDynasty ? [`dynasty:${ownerDynasty}`] : []), ...e.tags],
+    // An archetype-owned scope (musk→technological, kennedy→political) tags
+    // `archetype:<id>` so the no-leak gate excludes it from OTHER archetypes' runs.
+    tags: [
+      "world",
+      tl.scope,
+      ...(ownerArchetype ? [`archetype:${ownerArchetype}`] : []),
+      ...e.tags,
+    ],
     requires: e.requires ?? { flags: [], notFlags: [], meters: {}, personality: {} },
     // World events are AMBIENT BACKDROP the family occasionally lives through —
     // they must NOT swamp the protagonist's life beats (which sit at weight ~10).

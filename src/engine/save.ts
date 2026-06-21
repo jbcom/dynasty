@@ -1,35 +1,52 @@
 import type { Content } from "../sim/content";
-import { replay } from "../sim/effects";
+import { replay, replayFromState } from "../sim/effects";
+import { foundDynasty } from "../sim/founding";
 import { createRng } from "../sim/rng";
-import type { DynastyKey } from "../sim/slots";
+import type { Archetype } from "../sim/slots";
 import { type GameState, initState } from "../sim/state";
 import type { Storage } from "./storage";
 
 const SAVE_KEY = "mmm.save.v1";
-const SAVE_VERSION = 1;
+const SAVE_VERSION = 2;
 
 /**
- * A save is tiny: just the seed, dynasty, and the choice history. Because the
- * sim is a pure deterministic function of (seed, dynasty, history), replaying
+ * A save is tiny: the seed, the run's identity, and the choice history. Because
+ * the sim is a pure deterministic function of (initial state, history), replaying
  * reconstructs the exact state — no need to serialize meters/flags/ledger.
  *
- * `dynasty` was added in the de-5b batch; saves without it default to "trump"
- * for backwards compatibility with any pre-de-5b saves (they were always Trump runs).
+ * IDENTITY (FD-3.5): the run is identified by its ARCHETYPE (default economic) and,
+ * for a FOUNDED line, its `founding` metadata (momentId/surname) — which is what
+ * foundDynasty needs to rebuild the founded initial state before replay. A v1 save
+ * (pre-FD-3.5, literal `dynasty`) is mapped onto its archetype for compatibility.
  */
 export interface SaveData {
   version: number;
   seed: string;
-  dynasty: DynastyKey;
+  archetype: Archetype;
+  /** Present for a founded line; absent for a plain archetype run. */
+  founding?: { momentId: string; surname: string };
+  /** Legacy v1 literal dynasty key, read only when migrating an old save. */
+  dynasty?: string;
   history: Array<{ eventId: string; choiceId: string }>;
   savedYear: number;
 }
+
+/** Map a legacy v1 literal dynasty key onto its archetype. */
+const LEGACY_DYNASTY_ARCHETYPE: Record<string, Archetype> = {
+  trump: "economic",
+  kennedy: "political",
+  musk: "technological",
+};
 
 /** Build a SaveData from live state. */
 export function toSave(state: GameState): SaveData {
   return {
     version: SAVE_VERSION,
     seed: state.seed,
-    dynasty: state.dynasty,
+    archetype: state.archetype,
+    ...(state.founding
+      ? { founding: { momentId: state.founding.momentId, surname: state.founding.surname } }
+      : {}),
     history: state.history.map((h) => ({ eventId: h.eventId, choiceId: h.choiceId })),
     savedYear: state.year,
   };
@@ -37,12 +54,23 @@ export function toSave(state: GameState): SaveData {
 
 /** Reconstruct full GameState from a SaveData via deterministic replay. */
 export function fromSave(content: Content, save: SaveData): GameState {
-  if (save.version !== SAVE_VERSION) {
+  if (save.version !== SAVE_VERSION && save.version !== 1) {
     throw new Error(`Unsupported save version ${save.version}`);
   }
-  // `dynasty` defaults to "trump" for backwards-compatibility with pre-de-5b saves.
-  const dynasty: DynastyKey = save.dynasty ?? "trump";
-  return replay(content, save.seed, save.history, initState, createRng, dynasty);
+  // A founded line is rebuilt from its start-moment, then the history replays from
+  // that founded base (initState alone cannot reproduce a founded initial state).
+  if (save.founding) {
+    const base = foundDynasty(content, {
+      momentId: save.founding.momentId,
+      surname: save.founding.surname,
+      seed: save.seed,
+    }).state;
+    return replayFromState(content, base, save.history, createRng);
+  }
+  // Plain archetype run: archetype field (v2), else legacy literal dynasty (v1).
+  const archetype: Archetype =
+    save.archetype ?? LEGACY_DYNASTY_ARCHETYPE[save.dynasty ?? "trump"] ?? "economic";
+  return replay(content, save.seed, save.history, initState, createRng, archetype);
 }
 
 /** Persist the current state. Call after every choice (autosave). */

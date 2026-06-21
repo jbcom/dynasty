@@ -2,8 +2,8 @@ import { type BranchKey, branchOf } from "./branch";
 import type { Content } from "./content";
 import type { Rng } from "./rng";
 import type { Currency, Slot, WorldTimeline } from "./schema";
-import { type DynastyKey, resolveSlots } from "./slots";
-import { DYNASTY_START, type GameState, initState } from "./state";
+import { type Archetype, resolveSlots } from "./slots";
+import { ARCHETYPE_START, type GameState, initState } from "./state";
 import { resolveCurrency } from "./systemic";
 import { resolveFullName, resolveGivenName } from "./terms";
 import { timelinesForBranch } from "./worldtime";
@@ -26,14 +26,16 @@ import { timelinesForBranch } from "./worldtime";
  */
 
 /**
- * Which dynastic gear a run follows, derived from Era-0 flags. NO-LEAK invariant
- * (FD-2/FD-3): the dynasty is fixed at founding and never swaps mid-run — so this
- * reads only the founding flag, not the retired mid-run `kennedy_swap` signal.
+ * Which power ARCHETYPE a run embodies, derived from Era-0 flags (FD-3.5: replaces
+ * the literal dynasty gear). Fixed at founding, never swaps mid-run (no-leak). The
+ * activation-flag vocabulary is retained from the prologue content; the economic
+ * archetype is the default origins arc.
  */
-function dynastyOf(flags: readonly string[]): DynastyKey {
-  if (flags.includes("kennedy_dynasty_active")) return "kennedy";
-  if (flags.includes("musk_dynasty_active")) return "musk";
-  return "trump";
+function archetypeOf(flags: readonly string[]): Archetype {
+  if (flags.includes("kennedy_dynasty_active")) return "political";
+  if (flags.includes("musk_dynasty_active")) return "technological";
+  if (flags.includes("religious_dynasty_active")) return "religious";
+  return "economic";
 }
 
 export interface CompiledTimeline {
@@ -41,8 +43,8 @@ export interface CompiledTimeline {
   seed: string;
   /** The resolved alternate-history backdrop. */
   branch: BranchKey;
-  /** The protagonist dynastic gear. */
-  dynasty: DynastyKey;
+  /** The run's power archetype (FD-3.5: replaces the literal dynastic gear). */
+  archetype: Archetype;
   /** The Era-0 flags that drove the compilation. */
   era0Flags: string[];
   /** The active timeline variant per scope (default + branch-specific). */
@@ -74,9 +76,9 @@ function termFor(content: Content, key: string, branch: BranchKey): string | und
  */
 export function compileTimeline(content: Content, state: GameState, _rng: Rng): CompiledTimeline {
   const branch = branchOf(state);
-  const dynasty = dynastyOf(state.flags);
+  const archetype = state.archetype;
   const active = timelinesForBranch(content.worldTimelines, branch);
-  const slots: Record<string, string> = resolveSlots(content.slots as Slot[], branch, dynasty);
+  const slots: Record<string, string> = resolveSlots(content.slots as Slot[], branch, archetype);
   const currency = resolveCurrency(content, state);
 
   const keyTerms: Record<string, string> = {};
@@ -92,7 +94,7 @@ export function compileTimeline(content: Content, state: GameState, _rng: Rng): 
   return {
     seed: state.seed,
     branch,
-    dynasty,
+    archetype,
     era0Flags: [...state.flags].sort(),
     timelines: active.map((t) => ({
       scope: t.scope,
@@ -133,15 +135,15 @@ export function compileFromEra0(
     if (!event) throw new Error(`compileFromEra0: unknown event "${step.eventId}"`);
     state = applyChoice(content, state, event as never, step.choiceId, rng).state;
   }
-  // Re-derive dynasty from the post-replay flags so birthYear and dynasty are
-  // dynasty-correct before compiling (the Era-0 replay starts at Trump defaults but
-  // the dynasty-selector event sets the right activation flag during replay).
-  const resolvedDynasty = dynastyOf(state.flags);
-  if (resolvedDynasty !== state.dynasty) {
-    const birthYear = DYNASTY_START[resolvedDynasty];
+  // Re-derive the ARCHETYPE from the post-replay flags so birthYear + archetype
+  // are correct before compiling (the Era-0 replay starts at the economic default
+  // but a prologue selector may set a different archetype's activation flag).
+  const resolvedArchetype = archetypeOf(state.flags);
+  if (resolvedArchetype !== state.archetype) {
+    const birthYear = ARCHETYPE_START[resolvedArchetype];
     state = {
       ...state,
-      dynasty: resolvedDynasty,
+      archetype: resolvedArchetype,
       birthYear,
       // Recompute age now that birthYear is correct.
       age: state.year - birthYear,

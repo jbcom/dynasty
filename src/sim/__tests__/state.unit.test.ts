@@ -44,28 +44,27 @@ describe("game state", () => {
   });
 });
 
-describe("per-dynasty Era-0 init (de-5b)", () => {
-  it("defaults to the Trump dynasty (birth year 1946, seeds trump_prologue)", () => {
+describe("per-archetype Era-0 init (FD-3.5)", () => {
+  it("defaults to the economic archetype (birth year 1946, seeds trump_prologue)", () => {
     const s = initState(content(), "seed");
-    expect(s.dynasty).toBe("trump");
+    expect(s.archetype).toBe("economic");
     expect(s.birthYear).toBe(1946);
-    // Trump seeds trump_prologue from turn zero so the Friedrich prologue chain
-    // opens without needing the in-game ev_dynasty_founding_choice to fire.
+    // The economic archetype seeds the origins prologue flag from turn zero.
     expect(s.flags).toContain("trump_prologue");
   });
 
-  it("a Musk run carries birthYear 1971 + musk_dynasty_active flag from turn zero", () => {
-    const s = initState(content(), "seed", "musk");
-    expect(s.dynasty).toBe("musk");
+  it("a technological run carries birthYear 1971 + musk_dynasty_active flag from turn zero", () => {
+    const s = initState(content(), "seed", "technological");
+    expect(s.archetype).toBe("technological");
     expect(s.birthYear).toBe(1971);
     expect(s.flags).toContain("musk_dynasty_active");
     // age is birth-year-relative (negative before 1971 in a pre-birth start era).
     expect(s.age).toBe(s.year - 1971);
   });
 
-  it("a Kennedy run carries birthYear 1888 + kennedy_dynasty_active flag from turn zero", () => {
-    const s = initState(content(), "seed", "kennedy");
-    expect(s.dynasty).toBe("kennedy");
+  it("a political run carries birthYear 1888 + kennedy_dynasty_active flag from turn zero", () => {
+    const s = initState(content(), "seed", "political");
+    expect(s.archetype).toBe("political");
     expect(s.birthYear).toBe(1888);
     expect(s.flags).toContain("kennedy_dynasty_active");
     expect(s.age).toBe(s.year - 1888);

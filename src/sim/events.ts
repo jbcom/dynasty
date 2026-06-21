@@ -109,7 +109,7 @@ export function eligibleEvents(content: Content, state: GameState, rng?: Rng): G
   const worldEligible = (content.worldEvents ?? [])
     .filter(
       (ev) =>
-        !ownedByOtherDynasty(state, ev) &&
+        !ownedByOtherArchetype(state, ev) &&
         !alreadyConsumed(state, ev) &&
         meetsRequires(state, ev.requires) &&
         ev.year >= state.lastEventYear &&
@@ -134,13 +134,15 @@ export function eligibleEvents(content: Content, state: GameState, rng?: Rng): G
 }
 
 /**
- * NO-LEAK GATE (user invariant — start a Kennedy, STAY a Kennedy): a world-event
- * tagged `dynasty:<id>` belongs to that dynasty's private arc and is excluded when
- * a DIFFERENT dynasty is active. Untagged (shared backdrop) events pass for all.
+ * NO-LEAK GATE (user invariant — a founded line stays its own line): a world-event
+ * tagged `archetype:<id>` belongs to that archetype's private arc and is excluded
+ * when a DIFFERENT archetype is active. The former literal `dynasty:<id>` tags are
+ * mapped onto archetypes at projection time (FD-3.5). Untagged (shared backdrop)
+ * events pass for all archetypes.
  */
-function ownedByOtherDynasty(state: GameState, ev: GameEvent): boolean {
-  const owner = ev.tags.find((t) => t.startsWith("dynasty:"))?.slice("dynasty:".length);
-  return owner !== undefined && owner !== state.dynasty;
+function ownedByOtherArchetype(state: GameState, ev: GameEvent): boolean {
+  const owner = ev.tags.find((t) => t.startsWith("archetype:"))?.slice("archetype:".length);
+  return owner !== undefined && owner !== state.archetype;
 }
 
 /**

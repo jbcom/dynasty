@@ -30,16 +30,27 @@ const content = buildContent({
         default: { event: "ev_jfk" },
         nazi: { event: "wun_purge" },
         dynasty: {
-          trump: { event: "ev_fred" },
-          musk: { event: "wk_musk_near_bankruptcy", note: "Musk 2008 near-death" },
+          economic: { event: "ev_fred" },
+          technological: { event: "wk_musk_near_bankruptcy", note: "tech near-death" },
         },
       },
     ],
   },
 });
 
+/** Map the prologue activation flags to the run's archetype (mirrors compiler). */
+function archetypeFromFlags(
+  flags: string[],
+): "economic" | "political" | "technological" | "religious" {
+  if (flags.includes("kennedy_dynasty_active")) return "political";
+  if (flags.includes("musk_dynasty_active")) return "technological";
+  if (flags.includes("religious_dynasty_active")) return "religious";
+  return "economic";
+}
+
 const compile = (flags: string[], year = 1950) => {
-  const s = { ...initState(content, "seed"), flags: [...flags].sort(), year };
+  const archetype = archetypeFromFlags(flags);
+  const s = { ...initState(content, "seed", archetype), flags: [...flags].sort(), year };
   return compileTimeline(content, s, createRng("c"));
 };
 
@@ -47,7 +58,7 @@ describe("timeline compiler (AH3 gears-in-a-clock, task-008)", () => {
   it("compiles the default timeline for a vanilla Era-0", () => {
     const c = compile([]);
     expect(c.branch).toBe("default");
-    expect(c.dynasty).toBe("trump");
+    expect(c.archetype).toBe("economic");
     expect(c.terms.head_of_state).toBe("President");
     expect(c.terms.surname).toBe("Trump");
     expect(c.currency.id).toBe("usd");
@@ -70,27 +81,26 @@ describe("timeline compiler (AH3 gears-in-a-clock, task-008)", () => {
     expect(c.slots.leader_assassination).toBe("ev_fred");
   });
 
-  it("the Kennedy dynasty changes the gear (and its slot resolution)", () => {
+  it("the political archetype changes the gear (and its slot resolution)", () => {
     const c = compile(["kennedy_dynasty_active"]);
-    expect(c.dynasty).toBe("kennedy");
-    // No kennedy dynasty override on this slot → falls back to default event.
+    expect(c.archetype).toBe("political");
+    // No political archetype override on this slot → falls back to default event.
     expect(c.slots.leader_assassination).toBe("ev_jfk");
   });
 
-  it("the Musk dynasty activates via musk_dynasty_active flag + resolves Musk slot (de-5b)", () => {
+  it("the technological archetype activates via musk_dynasty_active flag + resolves its slot", () => {
     const c = compile(["musk_dynasty_active"]);
-    expect(c.dynasty).toBe("musk");
-    expect(c.branch).toBe("default"); // branch is unaffected by dynasty choice
-    // Musk dynasty has a slots.json override for leader_assassination.
+    expect(c.archetype).toBe("technological");
+    expect(c.branch).toBe("default"); // branch is unaffected by archetype choice
+    // The technological archetype has a slots.json override for leader_assassination.
     expect(c.slots.leader_assassination).toBe("wk_musk_near_bankruptcy");
   });
 
-  it("the Kennedy dynasty activates via kennedy_dynasty_active flag (de-5c prologue path)", () => {
-    // choose_kennedy_dynasty sets kennedy_dynasty_active at founding. NO-LEAK: this
-    // is the ONLY way to enter the kennedy gear — the mid-run kennedy_swap signal
-    // was retired with the flip mechanic (FD-3).
+  it("the political archetype activates via kennedy_dynasty_active flag (prologue path)", () => {
+    // The activation flag sets the archetype at founding. NO-LEAK: this is the ONLY
+    // way to enter the political archetype — the mid-run swap signal was retired (FD-3).
     const c = compile(["kennedy_dynasty_active"]);
-    expect(c.dynasty).toBe("kennedy");
+    expect(c.archetype).toBe("political");
     expect(c.branch).toBe("default");
   });
 
