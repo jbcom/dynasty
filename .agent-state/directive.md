@@ -83,16 +83,21 @@ OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git histor
   e2e green; textQuality corpus-clean. NOTE: starting meters ($1K/low) already read as a poor
   tenant family; a deeper "family money vs your money" mechanic is a future refinement, not
   blocking. A richer partner beat + an explicit branch-fork beat can be added in OB-5 polish.
-- [ ] **OB-5 REPLICATE** — full Epoch-0 per place × era. One PR per slice/batch, one in flight.
-  DONE (4/9): ireland (OB-4, #52), bavaria + south_africa (#53), west_coast (#54, CI running).
-  Also #53 review fold: all authored callings now offer ALL SIX archetypes (added Star +
-  Champion) and SA naming flag fixed (named_for_plainness). REMAINING: east_coast, canada,
-  american_midwest, american_south, baghdad/caliphate (some places have >1 valid era → may
-  need an Epoch-0 per primetime era).
-  MAINTENANCE SMELL RESOLVED (#54): the per-place `notFlags:[place:X]` exclusion list on the
-  generic beats is gone — content.authoredEpoch0Places is derived at build (epoch0 event gated
-  to one place whose choice sets `emerged`), founding stamps a single `has_authored_epoch0`
-  flag, generic beats self-exclude on it. Adding a place's Epoch-0 needs NO generic-beat edit.
+- [ ] [WAIT] **OB-5 REPLICATE** — full Epoch-0 per place × era. ONE PR in flight; do NOT stack
+  dependent branches (caused a rebase-conflict mess once — author next slice as a fresh branch
+  off main only after the in-flight one merges). DONE (5/9): ireland (#52), bavaria +
+  south_africa (#53), west_coast (#54), east_coast (#55 — CI running). #53 review fold: all
+  authored callings offer ALL SIX archetypes (Star + Champion added); SA naming flag fixed.
+  REMAINING (after #55 merges): canada, american_midwest, american_south, baghdad/caliphate.
+  NEXT-AUTHOR NOTES: canada (scots_irish, "pine resin / river ice / northern dawn"; existing
+  events: northern-frontier + two-nations-one-house → bicultural frontier); american_midwest
+  (anglo_protestant, "turned earth / grain dust / prairie wind" → agrarian homestead);
+  american_south (scots_irish, "humid heat / magnolia / river delta" → plantation-shadow delta);
+  baghdad (arabic_abbasid, era=CALIPHATE not origins, "Tigris market" → medieval Islamic golden
+  age; ALL prose + the doctor/midwife framing must fit the caliphate, NOT 1885).
+  MAINTENANCE SMELL RESOLVED (#54): per-place notFlags exclusion gone — content.authoredEpoch0Places
+  derived at build, founding stamps single has_authored_epoch0, generic beats self-exclude.
+  east_coast (#55) was the first slice added with ZERO generic-beat edits — refactor validated.
 - [ ] [WAIT] **OB-6 verify** — e2e + component + textQuality + harness audit 0 findings;
   live-verify each origin; gate green; remove dead PL-3 paths.
 
