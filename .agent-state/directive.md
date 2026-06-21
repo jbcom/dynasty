@@ -168,7 +168,7 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 ### SS-8 Multi-line world sim
 - [x] SS-8 all unplayed waves advance per turn as agents; stored state; opposing/contributing/neutral; glimpse triggers; deterministic; tests
 ### SS-9 Convergence + ending lattice
-- [ ] SS-9 ~16-20 endings (destination×coloring×sub-variant); motivator-gated reachability; other-lines fates fold in; tests
+- [x] SS-9 ~16-20 endings (destination×coloring×sub-variant); motivator-gated reachability; other-lines fates fold in; tests
 ### SS-10 Spine authoring
 - [ ] SS-10 goal/evaluator sets + act lattice + branch/convergence per archetype×class×macro-act×wave; structural test every cell reachable
 ### SS-11 GenAI FULL RETOOL (expand modes)
