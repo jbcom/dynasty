@@ -52,9 +52,14 @@ screenshots), compress as they ship. Each cycle picks the highest-value [ ] item
   personality band) — a larger UX decision; flag if wanted.
 
 ### Queue (next cycles)
-- [ ] **PL-7 (cycle 3)** — discover the next highest-value improvement by playtesting the
-  secondary tabs (Stats / Lineage / Timeline / Dossier / News / Markets) + the legacy/end
-  report, which the polish pass hasn't yet inspected. Pick one concrete gap, ship it.
+- [x] **PL-7 DONE** (commit 960cdfe) — Timeline tab showed deep-history eras a modern line
+  never lived (a 1885 line listed "The Caliphate Dawn 762–833"). Now starts at the line's
+  founding era through the current; pre-founding eras excluded. Live-verified + new test.
+- [ ] [WAIT] **PL cycle-3 ship** — open + merge the PL-7 PR (branch feat/polish-cycle-3) on
+  green (e2e covers the tab via "inter-era tabs render"); then continue the loop.
+- [ ] **PL-8 (cycle 4)** — next discovery: the Lineage member cards show only name + birth
+  year; no role (spouse / heir / deceased) context. Consider surfacing role/status for a
+  richer dynasty view. Also still un-inspected: Stats, Dossier, News, Markets, end report.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
