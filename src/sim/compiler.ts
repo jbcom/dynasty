@@ -25,9 +25,13 @@ import { timelinesForBranch } from "./worldtime";
  * the happy path but kept in the signature so weighting can land without a churn.
  */
 
-/** Which dynastic gear a run follows, derived from Era-0 flags. */
+/**
+ * Which dynastic gear a run follows, derived from Era-0 flags. NO-LEAK invariant
+ * (FD-2/FD-3): the dynasty is fixed at founding and never swaps mid-run — so this
+ * reads only the founding flag, not the retired mid-run `kennedy_swap` signal.
+ */
 function dynastyOf(flags: readonly string[]): DynastyKey {
-  if (flags.includes("kennedy_dynasty_active") || flags.includes("kennedy_swap")) return "kennedy";
+  if (flags.includes("kennedy_dynasty_active")) return "kennedy";
   if (flags.includes("musk_dynasty_active")) return "musk";
   return "trump";
 }

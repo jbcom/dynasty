@@ -57,7 +57,6 @@ const PERMUTATIONS: Array<{
     dynasty: "kennedy",
     branch: "default",
   },
-  { label: "kennedy-swap", flags: ["kennedy_swap"], dynasty: "kennedy", branch: "default" },
   {
     label: "musk-default",
     flags: ["musk_dynasty_active", "musk_prologue"],

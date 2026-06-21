@@ -71,7 +71,7 @@ describe("timeline compiler (AH3 gears-in-a-clock, task-008)", () => {
   });
 
   it("the Kennedy dynasty changes the gear (and its slot resolution)", () => {
-    const c = compile(["kennedy_swap"]);
+    const c = compile(["kennedy_dynasty_active"]);
     expect(c.dynasty).toBe("kennedy");
     // No kennedy dynasty override on this slot → falls back to default event.
     expect(c.slots.leader_assassination).toBe("ev_jfk");
@@ -86,8 +86,9 @@ describe("timeline compiler (AH3 gears-in-a-clock, task-008)", () => {
   });
 
   it("the Kennedy dynasty activates via kennedy_dynasty_active flag (de-5c prologue path)", () => {
-    // choose_kennedy_dynasty sets kennedy_dynasty_active (not kennedy_swap which is the
-    // bootlegger-arc alternate-history path). Both flags activate the kennedy gear.
+    // choose_kennedy_dynasty sets kennedy_dynasty_active at founding. NO-LEAK: this
+    // is the ONLY way to enter the kennedy gear — the mid-run kennedy_swap signal
+    // was retired with the flip mechanic (FD-3).
     const c = compile(["kennedy_dynasty_active"]);
     expect(c.dynasty).toBe("kennedy");
     expect(c.branch).toBe("default");
