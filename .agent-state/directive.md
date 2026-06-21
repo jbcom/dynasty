@@ -71,18 +71,18 @@ OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git histor
   starting defaults — OB-4's authored beats convert these to player choices in-game; and the
   founding `emerged`/`named` pre-set still needs revisiting in OB-4 so the birth/naming beats
   actually play (currently they're skipped, holdover from PL-3).
-- [ ] **OB-4 VERTICAL SLICE (ACTIVE — #51 merged, branch feat/ob4-ireland-epoch0)** — build
-  as ONE coherent change: wire birthDate onto composition/state + a `{birth_date}` term;
-  rewire founding flags (drop the emerged/named pre-set) AND author the Ireland birth→…→fork
-  beats together (the chain breaks until the authored beats fill it, so they ship as one PR).
-  Author Ireland/origins Epoch-0 end-to-end:
-  birth + date (doctor's notes) → gender choice → family + given name → growing into
-  adulthood (class/station emerges from observing the life around you) → the calling EMERGES
-  from schooling / an inspiring teacher / finding passions / work / university-if-affordable
-  (not one static pick) → finding a partner → the branch fork. Real prose + real
-  anchor-setting choices; realistic FAMILY meter values (esp. money) until the heir is old
-  enough that it's their dynastic money; 0 leaks; textQuality-clean. Revisit the founding
-  emerged/named pre-set so the birth/naming beats actually play.
+- [x] **OB-4 VERTICAL SLICE DONE** (commits afc1e9c + 31a8c7d, branch feat/ob4-ireland-epoch0)
+  — Ireland/origins Epoch-0 authored end-to-end: "Born to the Rain" (birth + the doctor's
+  seed-drawn date via {birth_date}) → first cry (gender) → "A Name at the Font" (given-naming)
+  → "What the Parish Teaches" (class/station emerges from observing tenant-and-landlord
+  Ireland) → "The Hedge and the Master" (schooling + an inspiring/embittered teacher) → "What
+  You Are For" (the calling CRYSTALLIZES into the archetype via the new setsArchetype choice
+  field) → partner → heirs. Chronology seam (birthDate) wired through composition/state/terms;
+  founding emerged/named pre-set dropped so the beats play; place-agnostic ev_birth_generic
+  fallback for non-custom origins (excluded for Ireland). 0 leaks; 510 unit + 73 browser + 7
+  e2e green; textQuality corpus-clean. NOTE: starting meters ($1K/low) already read as a poor
+  tenant family; a deeper "family money vs your money" mechanic is a future refinement, not
+  blocking. A richer partner beat + an explicit branch-fork beat can be added in OB-5 polish.
 - [ ] [WAIT] **OB-5 REPLICATE** — after OB-4. Full Epoch-0 per remaining place × era. Long
   authoring effort; one PR per slice (or small batch), one in flight at a time.
 - [ ] [WAIT] **OB-6 verify** — e2e + component + textQuality + harness audit 0 findings;
