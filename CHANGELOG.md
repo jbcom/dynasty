@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.7.0](https://github.com/jbcom/dynasty/compare/v0.6.1...v0.7.0) (2026-06-21)
+
+
+### Features
+
+* authored Bavaria + South Africa Epoch-0 (OB-5 batch 1) ([#53](https://github.com/jbcom/dynasty/issues/53)) ([bc28c45](https://github.com/jbcom/dynasty/commit/bc28c45dca43ea74123284d56e9c35fb13126dd5))
+* authored Ireland Epoch-0 — the story's first stage (OB-4) ([#52](https://github.com/jbcom/dynasty/issues/52)) ([c2c60c0](https://github.com/jbcom/dynasty/commit/c2c60c01531f3aca840112e70020224816b1d36e))
+* **content:** authored American Midwest Epoch-0 (OB-5) ([#57](https://github.com/jbcom/dynasty/issues/57)) ([11b37b6](https://github.com/jbcom/dynasty/commit/11b37b66005bd1e40e9d56e8c88b66d0d32042b5))
+* **content:** authored American South Epoch-0 (OB-5) ([#58](https://github.com/jbcom/dynasty/issues/58)) ([9d94be9](https://github.com/jbcom/dynasty/commit/9d94be94c9dda18aa096c71b21acc024cf02f634))
+* **content:** authored Baghdad/caliphate Epoch-0 — OB-5 complete (9/9) ([#59](https://github.com/jbcom/dynasty/issues/59)) ([f1dfaef](https://github.com/jbcom/dynasty/commit/f1dfaef6d6c11455d60f793bfeedd4975270b937))
+* **content:** authored Canada Epoch-0 (OB-5) ([#56](https://github.com/jbcom/dynasty/issues/56)) ([94393b9](https://github.com/jbcom/dynasty/commit/94393b9fd6f957202da204740509037f29d57bb0))
+* **content:** authored East Coast Epoch-0 (OB-5) ([#55](https://github.com/jbcom/dynasty/issues/55)) ([0d29b7d](https://github.com/jbcom/dynasty/commit/0d29b7d5ea9767579caa9df499ed4fbda937e457))
+* **content:** authored West Coast Epoch-0 + single-flag generic-beat exclusion (OB-5) ([#54](https://github.com/jbcom/dynasty/issues/54)) ([3aaabee](https://github.com/jbcom/dynasty/commit/3aaabee29b47fbf5ae5f167ca4a334f7fde666fd))
+* onboarding rework — location pick, bury the seed (OB-1/2/3) ([#51](https://github.com/jbcom/dynasty/issues/51)) ([9f291c2](https://github.com/jbcom/dynasty/commit/9f291c25ca8cdbe07b9aa60e4c6065c0aaeaae34))
+* **sim:** text-quality dev check (PL-13) ([#49](https://github.com/jbcom/dynasty/issues/49)) ([97e8994](https://github.com/jbcom/dynasty/commit/97e89940aa06c80b4d14da472af61420e3fed109))
+
+
+### Bug Fixes
+
+* **ui:** epoch0 beats show the run's year (OB-6 verify + live-verify bugfix) ([#60](https://github.com/jbcom/dynasty/issues/60)) ([7d19f39](https://github.com/jbcom/dynasty/commit/7d19f391a68ef6b7d27078924379e6d604c0f8c5))
+
+
+### Documentation
+
+* **directive:** ONBOARDING REWORK milestone complete — queue LIVED-IN FEEL ([#61](https://github.com/jbcom/dynasty/issues/61)) ([df6bc7a](https://github.com/jbcom/dynasty/commit/df6bc7ac829b1ebfd223575d5528e778a401d553))
+
 ## [0.6.1](https://github.com/jbcom/dynasty/compare/v0.6.0...v0.6.1) (2026-06-21)
 
 
