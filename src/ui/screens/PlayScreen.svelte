@@ -14,7 +14,7 @@ import TimelineView from "../TimelineView.svelte";
 import { tyrannyUtopiaAxis } from "../../sim/personality";
 import { branchOf } from "../../sim/branch";
 import { moralPoleOf, moralPoleLabel } from "../../sim/moralAxis";
-import { applyTerms } from "../../sim/terms";
+import { applyTerms, runTerms } from "../../sim/terms";
 
 interface Props {
   content: Content;
@@ -42,7 +42,10 @@ const branch = $derived(branchOf(view.state));
 // moralPoleLabel gives the branch-specific name (e.g. theocracy "utopian" = "the Covenant Commonwealth").
 const pole = $derived(moralPoleOf(view.state));
 const poleLabel = $derived(moralPoleLabel(view.state));
-const term = $derived((text: string) => applyTerms(text, content.terms, branch));
+// Identity tokens (given_name/surname/full_name/family_name) resolve from the
+// run's founded line; institutional tokens from the branch (CP-R1).
+const resolvedTerms = $derived(runTerms(content.terms, branch, view.state));
+const term = $derived((text: string) => applyTerms(text, resolvedTerms));
 
 type Tab =
   | "event"

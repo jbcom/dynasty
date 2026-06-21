@@ -1,0 +1,3689 @@
+{
+  "era": "interregnum",
+  "events": [
+    {
+      "id": "ev_jan6_aftermath_2021",
+      "era": "interregnum",
+      "year": 2021,
+      "title": "The Smoke Over the Capitol",
+      "scene": "The mob has been cleared, the windows boarded, the Guard bivouacked in the marble halls. Aides beg you to record a video telling them to go home, and to stand down the fury you spent weeks stoking. The country waits to see which way you will turn the dial.",
+      "researchNote": "On January 6, 2021, a mob of Trump supporters stormed the U.S. Capitol to stop certification of the 2020 election results. Five people died in connection with the riot. Trump released a video belatedly telling rioters to go home while repeating false claims that the election was stolen.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "jan6",
+        "grievance",
+        "exile",
+        "trope:scandal-fall-rehab"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "stoke_the_grievance",
+          "text": "Call them patriots. Insist the election was stolen.",
+          "effects": {
+            "loyalty": 11,
+            "heat": 12,
+            "reputation": -9,
+            "power": -3
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 7,
+            "outward": 9
+          },
+          "setFlags": [
+            "grievance_fuel",
+            "election_denial"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.7,
+              "polarity": 1
+            },
+            {
+              "to": "heat",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The hardcore base hears love, not condemnation. The grievance becomes a creed, and the creed becomes the through-line of everything that follows."
+        },
+        {
+          "id": "tepid_standdown",
+          "text": "Tell them to go home, but 'we love you.'",
+          "effects": {
+            "heat": 4,
+            "reputation": -4,
+            "loyalty": 3
+          },
+          "personality": {
+            "outward": 4,
+            "grandiosity": 2
+          },
+          "setFlags": [
+            "grievance_fuel"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A half-measure that satisfies no one. Critics see incitement, the base sees affection, and the resentment keeps its fuel."
+        },
+        {
+          "id": "full_condemnation",
+          "text": "Condemn the violence flatly and concede the loss.",
+          "effects": {
+            "reputation": 9,
+            "heat": -8,
+            "loyalty": -12,
+            "power": -4
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": -6,
+            "outward": -7
+          },
+          "setFlags": [],
+          "clearFlags": [
+            "election_denial"
+          ],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The establishment exhales. The base feels abandoned and the movement fractures. You have chosen legitimacy over rage, and it costs you the army you built."
+        }
+      ]
+    },
+    {
+      "id": "ev_jan6_world_2021",
+      "era": "interregnum",
+      "year": 2021,
+      "title": "The World Watches the Capitol",
+      "scene": "Allied capitals issue stunned statements. Adversaries broadcast the footage on a loop as proof that the American experiment is faltering. Markets wobble, then shrug. The certification proceeds anyway, hours late, under armed guard.",
+      "researchNote": "The January 6 Capitol attack drew international condemnation from U.S. allies and was used by authoritarian states as propaganda. Congress reconvened the same night and certified Joe Biden's electoral victory in the early hours of January 7, 2021.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "jan6",
+        "reputation",
+        "exile"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "blame_the_world",
+          "text": "Dismiss the foreign criticism as jealousy and meddling.",
+          "effects": {
+            "loyalty": 6,
+            "reputation": -5,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": 5,
+            "outward": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn the rebuke into another grievance for the pile. The base loves it; the diplomats quietly note the trajectory."
+        },
+        {
+          "id": "ignore_the_noise",
+          "text": "Say nothing and let the news cycle exhaust itself.",
+          "effects": {
+            "heat": -4,
+            "reputation": 2,
+            "health": 3
+          },
+          "personality": {
+            "grandiosity": -2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The story burns hot, then cools. You bank your energy for the fights that actually move the needle."
+        },
+        {
+          "id": "court_the_strongmen",
+          "text": "Privately court the foreign strongmen the press is condemning.",
+          "effects": {
+            "power": 6,
+            "money": 3000000,
+            "reputation": -5,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 3,
+            "outward": -3
+          },
+          "setFlags": [
+            "strongman_courtship"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "While allied capitals fret, you quietly keep warm lines to the men who run the world by force. The relationships will outlast the headlines."
+        }
+      ]
+    },
+    {
+      "id": "ev_leaving_office_2021",
+      "era": "interregnum",
+      "year": 2021,
+      "title": "Wheels Up at Joint Base Andrews",
+      "scene": "You skip the inauguration entirely. A small crowd, a red carpet rolled out on the tarmac, and 'Y.M.C.A.' blasting from speakers as Air Force One waits for the last time. You promise the crowd you'll be back 'in some form,' then climb the stairs into self-imposed exile.",
+      "researchNote": "Trump left Washington on the morning of January 20, 2021, departing from Joint Base Andrews after a send-off ceremony, becoming the first president since 1869 to skip his successor's inauguration. 'Y.M.C.A.' played as he departed.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "transition",
+        "exile",
+        "spectacle",
+        "trope:exile-return"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "promise_return",
+          "text": "\"We will be back. In some form.\"",
+          "effects": {
+            "loyalty": 8,
+            "power": -4,
+            "reputation": -2
+          },
+          "personality": {
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "return_promised"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The base crowd roars. The faithful start a countdown clock that very afternoon. You are out, but you are not gone."
+        },
+        {
+          "id": "quiet_exit",
+          "text": "Wave, smile, say nothing of substance.",
+          "effects": {
+            "health": 4,
+            "power": -6,
+            "heat": -4
+          },
+          "personality": {
+            "grandiosity": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You bank the rest and let the resentment compound in private. The press calls it a whimper. You call it strategy."
+        },
+        {
+          "id": "graceful_handoff",
+          "text": "Quietly leave the traditional note for your successor.",
+          "effects": {
+            "reputation": 7,
+            "loyalty": -6,
+            "heat": -5
+          },
+          "personality": {
+            "grandiosity": -5,
+            "outward": -6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A flicker of statesmanship nobody expected. It buys you a sliver of respect from people who will never vote for you anyway."
+        }
+      ]
+    },
+    {
+      "id": "ev_second_impeachment_2021",
+      "era": "interregnum",
+      "year": 2021,
+      "title": "Impeached Twice, Acquitted Twice",
+      "scene": "The House impeaches you a second time, this one for 'incitement of insurrection.' The Senate trial drags on, but the math never changes. Fifty-seven guilty votes, ten short of conviction. You are acquitted, free, and somehow more dangerous for it.",
+      "researchNote": "On January 13, 2021, the House impeached Trump for 'incitement of insurrection,' making him the first president impeached twice. The Senate acquitted him 57-43 on February 13, 2021, ten votes short of the two-thirds needed to convict.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "impeachment",
+        "survival",
+        "exile",
+        "trope:scandal-fall-rehab"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "vindication_tour",
+          "text": "Declare total exoneration and name your enemies.",
+          "effects": {
+            "loyalty": 9,
+            "heat": 5,
+            "reputation": -4,
+            "power": 4
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 8,
+            "outward": 7
+          },
+          "setFlags": [
+            "enemies_named",
+            "grievance_fuel"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Every senator who voted guilty becomes a target. You start drafting the revenge primary list before the gavel cools."
+        },
+        {
+          "id": "gracious_silence",
+          "text": "Issue a measured statement and stay above it.",
+          "effects": {
+            "reputation": 5,
+            "heat": -5,
+            "loyalty": -3
+          },
+          "personality": {
+            "grandiosity": -4,
+            "outward": -5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Advisors are stunned by the restraint. The base wonders if you've gone soft. You have not."
+        },
+        {
+          "id": "fundraise_off_it",
+          "text": "Blast a hundred fundraising emails about the 'sham trial.'",
+          "effects": {
+            "money": 6000000,
+            "loyalty": 7,
+            "heat": 4,
+            "reputation": -3
+          },
+          "personality": {
+            "grandiosity": 4,
+            "outward": 4
+          },
+          "setFlags": [
+            "grievance_fuel"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Persecution converts to cash at a stunning rate. The PAC coffers fill while the verdict's ink is still wet."
+        }
+      ]
+    },
+    {
+      "id": "ev_mar_a_lago_court",
+      "era": "interregnum",
+      "year": 2021,
+      "title": "The Winter Court at Mar-a-Lago",
+      "scene": "Palm Beach becomes the capital of a government-in-exile. Supplicants pay club dues for a chance to dine within earshot of your table. Every candidate in America wants the ring kiss and the endorsement, and you have learned exactly what that access is worth.",
+      "researchNote": "After leaving office, Trump made Mar-a-Lago his residence and political base, where Republican officials and candidates visited seeking endorsements throughout 2021.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "court",
+        "exile",
+        "money",
+        "trope:exile-return"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "endorsement_market",
+          "text": "Turn endorsements into a transactional marketplace.",
+          "effects": {
+            "money": 5000000,
+            "power": 6,
+            "loyalty": 6,
+            "reputation": -3
+          },
+          "personality": {
+            "grandiosity": 5,
+            "ideology": 3
+          },
+          "setFlags": [
+            "endorsement_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The club thrives, the war chest swells, and you become the single most important phone call in the Republican Party."
+        },
+        {
+          "id": "rest_and_golf",
+          "text": "Just golf and brood for a while.",
+          "effects": {
+            "health": 8,
+            "power": -3,
+            "money": 200000
+          },
+          "personality": {
+            "grandiosity": -2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You recharge under the Florida sun. The pundits write your obituary prematurely, which you file away for later."
+        },
+        {
+          "id": "build_loyalty_roster",
+          "text": "Start a private roster of who is loyal and who is not.",
+          "effects": {
+            "loyalty": 8,
+            "power": 5,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "loyalty_roster"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The list grows by the week. It will become the spine of a machine that one day screens every appointment for fealty."
+        }
+      ]
+    },
+    {
+      "id": "ev_covid_recovery_inflation_2021",
+      "era": "interregnum",
+      "year": 2021,
+      "title": "The Reopening and the Price Spike",
+      "scene": "Vaccines roll out, the economy lurches back to life, and then the receipts start to sting. Gas, groceries, rent, all climbing faster than paychecks. Whoever's in office will own this, and it isn't you. You watch the chart that will win you the next election.",
+      "researchNote": "As the U.S. economy reopened from the COVID-19 pandemic in 2021, supply-chain disruptions and stimulus spending drove inflation to its highest levels in roughly four decades, peaking near 9 percent in mid-2022. Economic dissatisfaction became central to Republican messaging.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "economy",
+        "inflation",
+        "exile",
+        "trope:exile-return"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "own_the_economy_attack",
+          "text": "Hammer the price of eggs and gas at every turn.",
+          "effects": {
+            "loyalty": 8,
+            "power": 5,
+            "reputation": 2,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": 4,
+            "outward": 3
+          },
+          "setFlags": [
+            "inflation_grievance"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Kitchen-table pain becomes your sharpest weapon. The chart of rising prices is the only campaign ad you'll ever need."
+        },
+        {
+          "id": "claim_vaccine_credit",
+          "text": "Take credit for the vaccines as your 'miracle.'",
+          "effects": {
+            "reputation": 4,
+            "loyalty": -4,
+            "power": 3
+          },
+          "personality": {
+            "grandiosity": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You praise Operation Warp Speed and some of the base boos. The science wing nods; the anti-vax wing seethes. A rare split in the church."
+        },
+        {
+          "id": "blame_the_fed",
+          "text": "Pin every rising price on the Fed and the central bankers.",
+          "effects": {
+            "loyalty": 6,
+            "reputation": -2,
+            "power": 3,
+            "heat": 2
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "inflation_grievance",
+            "fed_scapegoat"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You give the price spike a villain in a suit. The base learns a new enemy, and the groundwork for attacking the central bank is laid early."
+        }
+      ]
+    },
+    {
+      "id": "ev_truth_social_2022",
+      "era": "interregnum",
+      "year": 2022,
+      "title": "A Platform of Your Own",
+      "scene": "Banned from the big platforms, you build your own megaphone. Truth Social launches with a SPAC behind it, a torrent of all-caps posts, and a stock ticker that lives and dies on your every utterance. It is a media company, a slush fund, and a mood ring for the movement.",
+      "researchNote": "Trump launched Truth Social in early 2022 after being banned from Twitter and Facebook following January 6. The platform was tied to a SPAC merger (Digital World Acquisition Corp) that eventually formed Trump Media & Technology Group, whose stock became closely linked to Trump's political fortunes.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "media",
+        "money",
+        "exile",
+        "trope:exile-return",
+        "trope:scandal-fall-rehab"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "all_caps_warfare",
+          "text": "Post relentlessly. Make the platform the news.",
+          "effects": {
+            "loyalty": 9,
+            "heat": 7,
+            "money": 4000000,
+            "reputation": -4
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 6
+          },
+          "setFlags": [
+            "own_megaphone",
+            "grievance_fuel"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Every grievance gets a direct line to the faithful, unfiltered. The platform becomes the beating heart of the comeback."
+        },
+        {
+          "id": "cash_out_the_spac",
+          "text": "Treat it mainly as a financial vehicle.",
+          "effects": {
+            "money": 12000000,
+            "power": 2,
+            "loyalty": -3,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 3
+          },
+          "setFlags": [
+            "media_money"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "money",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The paper valuation swells with your name on it. Whether the company makes money is almost beside the point; the equity does."
+        },
+        {
+          "id": "court_reinstatement",
+          "text": "Fight to get reinstated on the big platforms instead.",
+          "effects": {
+            "reputation": 4,
+            "power": 3,
+            "loyalty": -4,
+            "money": -1000000
+          },
+          "personality": {
+            "grandiosity": -2,
+            "outward": 4
+          },
+          "setFlags": [
+            "platform_reinstated"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You chase the audience of hundreds of millions rather than wall yourself in. The reach is bigger, but you no longer own the room you shout into."
+        }
+      ]
+    },
+    {
+      "id": "ev_ukraine_war_2022",
+      "era": "interregnum",
+      "year": 2022,
+      "title": "Tanks Roll Toward Kyiv",
+      "scene": "Russia invades Ukraine, and Washington rallies tens of billions in aid. You watch the alliance you spent years badgering suddenly cohere. You insist none of this would have happened on your watch, and that you alone could end it in a day.",
+      "researchNote": "Russia launched a full-scale invasion of Ukraine on February 24, 2022. The United States and NATO responded with sanctions and tens of billions in military and economic aid. Trump repeatedly claimed the war would never have started under him and that he could end it within 24 hours.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "foreign-policy",
+        "war",
+        "exile",
+        "trope:exile-return",
+        "trope:outside-claimant"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "end_it_in_a_day",
+          "text": "\"I would have it settled in 24 hours.\"",
+          "effects": {
+            "loyalty": 7,
+            "reputation": -2,
+            "power": 3
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 4
+          },
+          "setFlags": [
+            "dealmaker_abroad"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The boast plays to the base's hunger for a strongman who bends the world by sheer will. Foreign-policy elites roll their eyes; the rally cheers."
+        },
+        {
+          "id": "blast_the_aid",
+          "text": "Rage against 'endless wars' and the aid spending.",
+          "effects": {
+            "loyalty": 8,
+            "heat": 5,
+            "reputation": -5
+          },
+          "personality": {
+            "ideology": 6,
+            "outward": 5
+          },
+          "setFlags": [
+            "isolationist_brand"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "America First hardens into America Alone. The hawks in your own party blanch, but the base wants the money home."
+        },
+        {
+          "id": "praise_putin",
+          "text": "Praise the invader's 'genius' and float your own peace terms.",
+          "effects": {
+            "loyalty": 4,
+            "reputation": -8,
+            "heat": 7,
+            "power": 2
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 6,
+            "outward": 5
+          },
+          "setFlags": [
+            "dealmaker_abroad",
+            "putin_praise"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You call the aggressor savvy and dangle a settlement only you could broker. Allies recoil; the strongman brand sharpens into something colder."
+        }
+      ]
+    },
+    {
+      "id": "ev_fbi_search_2022",
+      "era": "interregnum",
+      "year": 2022,
+      "title": "The Search Warrant at Mar-a-Lago",
+      "scene": "FBI agents fan out across your Florida home and cart away boxes of classified material, some stored in a bathroom, a ballroom, a closet. The footage of the cordoned estate detonates across cable news. You frame it as a raid, a siege, an act of war against you and your supporters.",
+      "researchNote": "On August 8, 2022, the FBI executed a court-authorized search warrant at Mar-a-Lago and recovered classified documents Trump had retained after leaving office. The search became the basis for the federal classified-documents indictment and was cast by Trump as politically motivated persecution.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "legal",
+        "classified",
+        "grievance",
+        "exile",
+        "trope:scandal-fall-rehab"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "weaponize_the_raid",
+          "text": "Call it a raid. \"They could come for you next.\"",
+          "effects": {
+            "loyalty": 12,
+            "heat": 10,
+            "money": 7000000,
+            "reputation": -6
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 6,
+            "outward": 8
+          },
+          "setFlags": [
+            "grievance_fuel",
+            "deep_state_war"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.7,
+              "polarity": 1
+            },
+            {
+              "to": "heat",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Donations surge within hours. The search transforms from a legal jeopardy into a martyrdom, and you wear it like a crown of thorns."
+        },
+        {
+          "id": "cooperate_quietly",
+          "text": "Quietly negotiate and return the documents.",
+          "effects": {
+            "heat": -7,
+            "reputation": 4,
+            "loyalty": -8,
+            "power": -2
+          },
+          "personality": {
+            "grandiosity": -5,
+            "outward": -6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The legal exposure shrinks but so does the drama. The base wants a fighter, not a man handing over boxes. You've chosen prudence over fury."
+        },
+        {
+          "id": "claim_declassified",
+          "text": "Insist you declassified everything by 'thinking it.'",
+          "effects": {
+            "loyalty": 6,
+            "heat": 6,
+            "reputation": -5
+          },
+          "personality": {
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "grievance_fuel"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The legal theory is laughed out of every courtroom, but the audacity itself becomes a kind of strength to the faithful."
+        }
+      ]
+    },
+    {
+      "id": "ev_midterms_2022",
+      "era": "interregnum",
+      "year": 2022,
+      "title": "The Red Wave That Wasn't",
+      "scene": "Pundits promise a tidal wave; it arrives as a ripple. Many of your hand-picked, election-denying candidates lose winnable races. The party holds the House by a sliver and loses ground in the Senate. Knives come out, with your name on every blade.",
+      "researchNote": "In the 2022 midterms, Republicans underperformed expectations of a 'red wave,' narrowly winning the House while Democrats held the Senate. Several high-profile Trump-endorsed candidates lost competitive races, prompting intra-party criticism of Trump's influence.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "election",
+        "loyalty",
+        "exile"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "blame_the_losers",
+          "text": "Blame the candidates, never the endorsements.",
+          "effects": {
+            "loyalty": 4,
+            "reputation": -4,
+            "power": 2,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You shed responsibility like water. Some in the party openly float moving on; you note every name for the reckoning to come."
+        },
+        {
+          "id": "double_down_2024",
+          "text": "Announce the 2024 run immediately to seize the wheel.",
+          "effects": {
+            "power": 8,
+            "loyalty": 9,
+            "money": -2000000,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 7,
+            "ideology": 4
+          },
+          "setFlags": [
+            "campaign_2024_declared"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Before the wound can fester, you launch. The candidacy itself becomes a shield, and any rival now risks splitting the church."
+        },
+        {
+          "id": "absorb_the_blame",
+          "text": "Take the loss on the chin and quietly rebuild your operation.",
+          "effects": {
+            "reputation": 6,
+            "power": -3,
+            "loyalty": -4,
+            "health": 4
+          },
+          "personality": {
+            "grandiosity": -6,
+            "ideology": -3,
+            "outward": -5
+          },
+          "setFlags": [
+            "humbled_briefly"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "For once you accept the verdict instead of fighting it. The press is stunned, the base unsure, and you spend the lull retooling the machine in silence."
+        }
+      ]
+    },
+    {
+      "id": "ev_banking_jitters_2023",
+      "era": "interregnum",
+      "year": 2023,
+      "title": "The Banks Get the Shakes",
+      "scene": "Silicon Valley Bank collapses over a weekend; Signature follows, then Credit Suisse is swallowed whole. For a few days it feels like 2008 might rhyme. Regulators backstop the deposits, the panic ebbs, and you fold it into the case that the country is being run into the ground.",
+      "researchNote": "In March 2023, Silicon Valley Bank and Signature Bank failed in the largest U.S. bank collapses since 2008, and Switzerland's Credit Suisse was acquired by UBS in a government-brokered deal. U.S. regulators guaranteed deposits to contain contagion.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "economy",
+        "banking",
+        "exile"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 8,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "predict_collapse",
+          "text": "Warn of a coming depression 'worse than 1929.'",
+          "effects": {
+            "loyalty": 5,
+            "reputation": -3,
+            "power": 2
+          },
+          "personality": {
+            "grandiosity": 5,
+            "outward": 3
+          },
+          "setFlags": [
+            "doom_messaging"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The doom-saying is overblown, but it keeps the economy front and center as your battlefield of choice."
+        },
+        {
+          "id": "stay_out_of_it",
+          "text": "Let the bankers and regulators sort it out.",
+          "effects": {
+            "health": 3,
+            "reputation": 2,
+            "heat": -3
+          },
+          "personality": {
+            "grandiosity": -2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You keep your powder dry. The crisis passes in a week and you've spent no political capital chasing it."
+        },
+        {
+          "id": "pitch_crypto_refuge",
+          "text": "Pitch crypto and gold as the escape from a broken banking system.",
+          "effects": {
+            "money": 5000000,
+            "loyalty": 4,
+            "reputation": -2,
+            "heat": 3
+          },
+          "personality": {
+            "ideology": 4,
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "crypto_pivot"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "money",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn the jitters into a sales pitch, steering the faithful toward assets you can profit from. Distrust of the banks becomes a revenue stream."
+        }
+      ]
+    },
+    {
+      "id": "ev_ny_hush_money_indictment_2023",
+      "era": "interregnum",
+      "year": 2023,
+      "title": "Thirty-Four Counts in Manhattan",
+      "scene": "A Manhattan grand jury hands up thirty-four felony counts over a hush-money payment to a porn star, laundered through falsified business records. You become the first former president ever criminally indicted. You fly to New York for arraignment and turn the perp walk into a campaign launch.",
+      "researchNote": "In March 2023, a Manhattan grand jury indicted Trump on 34 felony counts of falsifying business records related to a 2016 hush-money payment to Stormy Daniels. He was arraigned on April 4, 2023, becoming the first former U.S. president to face criminal charges.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "legal",
+        "indictment",
+        "grievance",
+        "exile",
+        "trope:scandal-fall-rehab",
+        "trope:exile-return"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "campaign_off_arraignment",
+          "text": "Turn the arraignment into a fundraising spectacle.",
+          "effects": {
+            "loyalty": 10,
+            "money": 9000000,
+            "heat": 7,
+            "reputation": -5
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 6
+          },
+          "setFlags": [
+            "grievance_fuel",
+            "first_indicted"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The mug of a man under indictment becomes the face of a martyr. The first felony charge is the best fundraising day of the campaign."
+        },
+        {
+          "id": "minimize_manhattan",
+          "text": "Dismiss it as a small-time bookkeeping case.",
+          "effects": {
+            "heat": -3,
+            "reputation": 2,
+            "loyalty": -2
+          },
+          "personality": {
+            "grandiosity": -2
+          },
+          "setFlags": [
+            "first_indicted"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You shrink the story to keep the bigger cases in the spotlight. The strategy is cold, but it conserves outrage for where it counts."
+        },
+        {
+          "id": "attack_the_da",
+          "text": "Make the prosecutor himself the villain, by name, nightly.",
+          "effects": {
+            "loyalty": 8,
+            "heat": 9,
+            "reputation": -6,
+            "money": 4000000
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 5,
+            "outward": 8
+          },
+          "setFlags": [
+            "first_indicted",
+            "grievance_fuel",
+            "prosecutor_targeted"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You put a face on the persecution and aim the base straight at it. The legal exposure grows, but so does the army that sees every charge as an attack on them."
+        }
+      ]
+    },
+    {
+      "id": "ev_federal_docs_indictment_2023",
+      "era": "interregnum",
+      "year": 2023,
+      "title": "The Espionage Act Comes Knocking",
+      "scene": "A special counsel charges you federally over the retained classified documents, citing the Espionage Act, with photos of secret files boxed beside a toilet and a chandelier. This is the case the lawyers fear most: real prison time, federal court, a paper trail. You frame it as the deep state's revenge.",
+      "researchNote": "In June 2023, special counsel Jack Smith indicted Trump on federal charges including willful retention of national defense information under the Espionage Act, related to classified documents kept at Mar-a-Lago. It was the first federal indictment of a former U.S. president.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "legal",
+        "indictment",
+        "classified",
+        "exile",
+        "trope:scandal-fall-rehab"
+      ],
+      "requires": {
+        "flags": [
+          "first_indicted"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "deep_state_revenge",
+          "text": "Call it the deep state weaponizing the law against you.",
+          "effects": {
+            "loyalty": 11,
+            "heat": 9,
+            "reputation": -6,
+            "money": 6000000
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 5,
+            "outward": 7
+          },
+          "setFlags": [
+            "grievance_fuel",
+            "deep_state_war"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.6,
+              "polarity": 1
+            },
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The most legally dangerous case becomes your most potent grievance. The faithful read every photo of boxed documents as proof of a frame-up."
+        },
+        {
+          "id": "delay_and_lawyer",
+          "text": "Run the clock with motions and appeals past Election Day.",
+          "effects": {
+            "money": -14000000,
+            "heat": -4,
+            "power": 3,
+            "health": -4
+          },
+          "personality": {
+            "grandiosity": 2
+          },
+          "setFlags": [
+            "delay_strategy"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "An army of attorneys turns the calendar into a weapon. Justice deferred, you wager, is justice escaped."
+        },
+        {
+          "id": "blame_the_aides",
+          "text": "Pin the boxes on staff and claim you never touched them.",
+          "effects": {
+            "reputation": 2,
+            "loyalty": -5,
+            "heat": -2,
+            "power": 2
+          },
+          "personality": {
+            "grandiosity": 3,
+            "outward": -2
+          },
+          "setFlags": [
+            "scapegoat_aides"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You let underlings absorb the exposure while you profess ignorance. The legal theory is convenient; the loyalty cost among insiders is quietly steep."
+        }
+      ]
+    },
+    {
+      "id": "ev_jan6_georgia_indictments_2023",
+      "era": "interregnum",
+      "year": 2023,
+      "title": "The Election Cases and the Mugshot",
+      "scene": "A federal election-interference case lands in Washington. Then Fulton County hits you with a sprawling RICO indictment naming eighteen co-conspirators. You surrender at the Atlanta jail, glare into the camera, and the mugshot is on a T-shirt before the ink is dry. Four cases now, ninety-plus counts.",
+      "researchNote": "In August 2023, special counsel Jack Smith indicted Trump on federal charges over efforts to overturn the 2020 election, and a Fulton County, Georgia grand jury indicted him under the state RICO Act alongside 18 co-defendants. His Georgia booking produced the first-ever presidential mugshot.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "legal",
+        "indictment",
+        "jan6",
+        "grievance",
+        "exile",
+        "trope:scandal-fall-rehab"
+      ],
+      "requires": {
+        "flags": [
+          "first_indicted"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "mugshot_merch",
+          "text": "Sell the mugshot. \"NEVER SURRENDER.\"",
+          "effects": {
+            "loyalty": 12,
+            "money": 10000000,
+            "heat": 8,
+            "reputation": -6
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 7,
+            "ideology": 4
+          },
+          "setFlags": [
+            "grievance_fuel",
+            "mugshot_brand",
+            "felony_jeopardy"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.8,
+              "polarity": 1
+            },
+            {
+              "to": "money",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The scowl becomes iconography, the merch a gold mine. But four criminal cases now hang over you; the jeopardy is no longer hypothetical."
+        },
+        {
+          "id": "fight_in_court",
+          "text": "Fight every count seriously and trust acquittal.",
+          "effects": {
+            "money": -18000000,
+            "heat": -3,
+            "reputation": 3,
+            "health": -5
+          },
+          "personality": {
+            "grandiosity": 1
+          },
+          "setFlags": [
+            "felony_jeopardy",
+            "delay_strategy"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You pour a fortune into the defense. The jeopardy is real either way, but you've bet on the courtroom instead of the crowd."
+        },
+        {
+          "id": "flip_a_codefendant",
+          "text": "Quietly pressure co-defendants to take the fall and shield you.",
+          "effects": {
+            "power": 5,
+            "loyalty": -4,
+            "heat": 4,
+            "money": -3000000
+          },
+          "personality": {
+            "ideology": 3,
+            "grandiosity": 4,
+            "outward": -3
+          },
+          "setFlags": [
+            "felony_jeopardy",
+            "codefendants_pressured"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You work the eighteen co-defendants like a board, nudging the exposure onto everyone but yourself. The jeopardy persists, and some of the loyal start to wonder who's next to be sacrificed."
+        }
+      ]
+    },
+    {
+      "id": "ev_israel_gaza_war_2023",
+      "era": "interregnum",
+      "year": 2023,
+      "title": "War in the Middle East",
+      "scene": "Hamas launches a massive attack on Israel; the war that follows convulses the region and American politics. College campuses erupt, the incumbent is squeezed from both flanks, and you position yourself as the unambiguous strongman ally who would never have let it happen.",
+      "researchNote": "On October 7, 2023, Hamas launched a large-scale attack on Israel, killing roughly 1,200 people and taking hostages. The ensuing war in Gaza became a major geopolitical and domestic political issue in the U.S., including widespread campus protests through 2024.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "foreign-policy",
+        "war",
+        "exile"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "strongman_ally",
+          "text": "Cast yourself as the only true friend Israel ever had.",
+          "effects": {
+            "loyalty": 7,
+            "power": 4,
+            "reputation": 2,
+            "heat": 3
+          },
+          "personality": {
+            "grandiosity": 5,
+            "outward": 4
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You contrast your record against the incumbent's hesitation. The strongman frame plays well with a public hungry for certainty."
+        },
+        {
+          "id": "exploit_the_division",
+          "text": "Use the campus chaos to paint the country as ungovernable.",
+          "effects": {
+            "loyalty": 8,
+            "heat": 6,
+            "reputation": -4
+          },
+          "personality": {
+            "ideology": 6,
+            "outward": 5
+          },
+          "setFlags": [
+            "chaos_messaging"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Every burning quad becomes an ad for restored order under you. Division is no longer a problem to solve but a wave to surf."
+        }
+      ]
+    },
+    {
+      "id": "ev_ai_boom_2023",
+      "era": "interregnum",
+      "year": 2023,
+      "title": "The Machines Start Talking",
+      "scene": "A chatbot crosses a hundred million users faster than anything in history and the whole economy reorganizes around it overnight. Trillions in market value pile into a handful of chip and model companies. You sense both a threat and a lever, and you start courting the men who own the machines.",
+      "researchNote": "Following ChatGPT's late-2022 launch, 2023 saw an explosive generative-AI boom that drove enormous gains in companies like Nvidia and Microsoft and reshaped the tech economy. AI policy and the influence of tech leaders became significant political factors heading into 2024.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "technology",
+        "ai",
+        "exile",
+        "trope:techno-frontier"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 8,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "court_tech_titans",
+          "text": "Cultivate the tech barons as future allies and donors.",
+          "effects": {
+            "money": 8000000,
+            "power": 6,
+            "loyalty": -2,
+            "reputation": 1
+          },
+          "personality": {
+            "grandiosity": 4,
+            "ideology": 3
+          },
+          "setFlags": [
+            "tech_alliance"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The richest men in the world begin drifting into your orbit. The alliance will pay dividends in cash, platforms, and policy."
+        },
+        {
+          "id": "stoke_ai_fear",
+          "text": "Warn the base that the machines will take their jobs.",
+          "effects": {
+            "loyalty": 6,
+            "heat": 3,
+            "reputation": -2
+          },
+          "personality": {
+            "ideology": 4,
+            "outward": 3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You weaponize the anxiety of a changing economy. The populist note rings true even as you quietly dine with the engineers."
+        },
+        {
+          "id": "promise_ai_supremacy",
+          "text": "Promise to win the AI race against China at any cost.",
+          "effects": {
+            "power": 7,
+            "reputation": 4,
+            "loyalty": 3,
+            "heat": 2,
+            "money": -2000000
+          },
+          "marketOps": [
+            {
+              "market": "attention",
+              "addHolding": 20
+            }
+          ],
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 6,
+            "outward": 4
+          },
+          "setFlags": [
+            "ai_supremacy_pledge"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You frame the machines as a great-power weapon, not a job-killer. The barons love it, the hawks love it, and a new techno-nationalist plank is born."
+        }
+      ]
+    },
+    {
+      "id": "ev_primary_dominance_2024",
+      "era": "interregnum",
+      "year": 2024,
+      "title": "The Primary Was Never a Contest",
+      "scene": "Iowa, New Hampshire, South Carolina, all of it folds before spring. Rivals who once mocked you now beg for cabinet posts. You clinch the nomination earlier than any non-incumbent in modern memory, the indictments having only fused the base tighter around you.",
+      "researchNote": "Trump dominated the 2024 Republican primaries, winning Iowa, New Hampshire, and South Carolina decisively. He effectively clinched the nomination by March 2024, with rivals like Nikki Haley and Ron DeSantis dropping out.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "primary",
+        "campaign",
+        "loyalty",
+        "exile",
+        "trope:exile-return",
+        "trope:scandal-fall-rehab"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "loyalty_purge",
+          "text": "Demand absolute loyalty pledges before any endorsement.",
+          "effects": {
+            "loyalty": 10,
+            "power": 6,
+            "reputation": -3
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "loyalty_purge",
+            "loyalty_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The party apparatus is remade in your image. Disloyalty becomes professionally fatal, and the machine begins to hum."
+        },
+        {
+          "id": "big_tent",
+          "text": "Make a show of welcoming former rivals back.",
+          "effects": {
+            "reputation": 6,
+            "power": 4,
+            "loyalty": -2
+          },
+          "personality": {
+            "grandiosity": -3,
+            "outward": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You stage a unity moment for the cameras. Privately, the grudges are noted in indelible ink."
+        }
+      ]
+    },
+    {
+      "id": "ev_felony_conviction_2024",
+      "era": "interregnum",
+      "year": 2024,
+      "title": "Guilty on All Thirty-Four Counts",
+      "scene": "A Manhattan jury returns the verdict: guilty, on every single count. You become the first convicted felon ever to lead a major party ticket. Outside the courthouse you call it a rigged disgrace; inside the campaign, the donations detonate to record highs within the hour.",
+      "researchNote": "On May 30, 2024, a Manhattan jury found Trump guilty on all 34 felony counts in the hush-money case, making him the first former U.S. president and first major-party presidential nominee convicted of a crime. His campaign reported record fundraising in the days following the verdict.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "legal",
+        "conviction",
+        "grievance",
+        "exile",
+        "trope:scandal-fall-rehab"
+      ],
+      "requires": {
+        "flags": [
+          "first_indicted"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "convicted_felon_martyr",
+          "text": "Wear the conviction as a badge. \"They convicted ME for YOU.\"",
+          "effects": {
+            "loyalty": 14,
+            "money": 12000000,
+            "heat": 10,
+            "reputation": -8
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 8,
+            "outward": 9
+          },
+          "setFlags": [
+            "felony_jeopardy",
+            "grievance_fuel",
+            "convicted_felon"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.9,
+              "polarity": 1
+            },
+            {
+              "to": "heat",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The conviction becomes the ultimate proof of persecution. But a felony record now shadows the run; one wrong turn and the jeopardy becomes a cell."
+        },
+        {
+          "id": "appeal_and_minimize",
+          "text": "Appeal aggressively and play down the verdict.",
+          "effects": {
+            "money": -10000000,
+            "heat": -4,
+            "reputation": 3,
+            "loyalty": -3,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": -2
+          },
+          "setFlags": [
+            "felony_jeopardy",
+            "delay_strategy"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You fight the verdict in the appellate courts and keep the rhetoric measured. The jeopardy remains, but you avoid making it the whole identity."
+        },
+        {
+          "id": "threaten_the_jurors",
+          "text": "Hint darkly at the judge and jurors who 'rigged' it.",
+          "effects": {
+            "loyalty": 9,
+            "heat": 12,
+            "reputation": -9,
+            "power": 3
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 7,
+            "outward": 9
+          },
+          "setFlags": [
+            "felony_jeopardy",
+            "grievance_fuel",
+            "court_intimidation"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You aim the mob at the people who convicted you. The base is electrified, the gag-order risk explodes, and the jeopardy now includes contempt on top of the felony."
+        }
+      ]
+    },
+    {
+      "id": "ev_butler_rally_2024",
+      "era": "interregnum",
+      "year": 2024,
+      "title": "Butler, Pennsylvania",
+      "scene": "A gunman opens fire at your outdoor rally. A bullet clips your ear. You drop, then rise with blood across your cheek, raise a fist, and mouth the word 'Fight.' The photograph travels the world within the hour and rewrites the entire campaign.",
+      "researchNote": "On July 13, 2024, Trump survived an assassination attempt at a rally in Butler, Pennsylvania, when a bullet grazed his ear. He raised his fist and mouthed 'fight' as Secret Service surrounded him; the moment produced an iconic photograph. One rallygoer was killed.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "assassination",
+        "campaign",
+        "iconic",
+        "exile"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fight_fist",
+          "text": "Raise the fist. \"Fight! Fight! Fight!\"",
+          "effects": {
+            "loyalty": 14,
+            "power": 8,
+            "reputation": 4,
+            "health": -8
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 6
+          },
+          "setFlags": [
+            "fight_iconography",
+            "assassination_target"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.8,
+              "polarity": 1
+            },
+            {
+              "to": "power",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The image becomes the central icon of the campaign, printed on flags and tattooed on forearms. Survival is now part of the myth, and so is a target on your back."
+        },
+        {
+          "id": "recover_quietly",
+          "text": "Let Secret Service carry you off and recover privately.",
+          "effects": {
+            "health": 6,
+            "reputation": 5,
+            "power": 2,
+            "loyalty": -4
+          },
+          "personality": {
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "assassination_target"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You heal out of the spotlight. The sympathy is real, but the legend that might have been goes uncaptured. The danger, however, remains."
+        },
+        {
+          "id": "blame_the_rhetoric",
+          "text": "Blame your opponents' 'rhetoric' for putting a target on you.",
+          "effects": {
+            "loyalty": 10,
+            "heat": 8,
+            "reputation": -5,
+            "power": 4
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 5,
+            "outward": 7
+          },
+          "setFlags": [
+            "assassination_target",
+            "grievance_fuel",
+            "blame_opponents"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn the bullet into an indictment of the other side's words. The grievance machine gets its darkest fuel yet, and the danger to you stays absolute."
+        }
+      ]
+    },
+    {
+      "id": "ev_florida_attempt_2024",
+      "era": "interregnum",
+      "year": 2024,
+      "title": "The Second Gunman",
+      "scene": "Two months after Butler, the Secret Service spots a rifle barrel poking through the shrubs of your Florida golf course and opens fire before the man can. He flees, is captured, and the country absorbs a second attempt on your life in a single campaign season. The threat has become a constant.",
+      "researchNote": "On September 15, 2024, the Secret Service thwarted an apparent second assassination attempt against Trump at his West Palm Beach golf course, spotting and firing at a suspect who fled and was later arrested. It was the second attempt on Trump's life during the 2024 campaign.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "assassination",
+        "campaign",
+        "exile"
+      ],
+      "requires": {
+        "flags": [
+          "assassination_target"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_the_danger",
+          "text": "Vow you'll never stop campaigning, no matter the risk.",
+          "effects": {
+            "loyalty": 11,
+            "reputation": 4,
+            "health": -6,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 5
+          },
+          "setFlags": [
+            "assassination_target",
+            "fearless_brand"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The defiance deepens the martyr myth. The faithful believe Providence itself is protecting you for a purpose, and the danger never recedes."
+        },
+        {
+          "id": "harden_security",
+          "text": "Lock down into a hardened, low-exposure campaign.",
+          "effects": {
+            "health": 7,
+            "power": -2,
+            "loyalty": -3,
+            "money": -3000000
+          },
+          "personality": {
+            "grandiosity": -2
+          },
+          "setFlags": [
+            "assassination_target"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Bulletproof glass, smaller crowds, fewer surprises. You trade some of the raw energy for the simple goal of staying alive."
+        }
+      ]
+    },
+    {
+      "id": "ev_campaign_vs_harris_2024",
+      "era": "interregnum",
+      "year": 2024,
+      "title": "The Switch at the Top",
+      "scene": "The incumbent withdraws after a disastrous debate, and his vice president inherits the ticket overnight. You suddenly face a younger opponent and a wave of fresh enthusiasm. You retool the attack, lean on the economy and the border, and grind toward November.",
+      "researchNote": "After a poor June 2024 debate performance, President Biden withdrew from the race in July 2024 and endorsed Vice President Kamala Harris, who became the Democratic nominee. Trump pivoted his campaign to attack Harris, focusing heavily on inflation and immigration.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "campaign",
+        "election",
+        "exile",
+        "trope:accidental-heir"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "economy_border_hammer",
+          "text": "Pound the economy and the border without mercy.",
+          "effects": {
+            "power": 8,
+            "loyalty": 8,
+            "reputation": -2,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 5,
+            "outward": 4
+          },
+          "setFlags": [
+            "disciplined_message"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Discipline pays. The kitchen-table and the border become the whole election, and on those two fields you are winning."
+        },
+        {
+          "id": "personal_attacks",
+          "text": "Make it personal and ugly against your opponent.",
+          "effects": {
+            "loyalty": 7,
+            "heat": 8,
+            "reputation": -7
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 6,
+            "ideology": 3
+          },
+          "setFlags": [
+            "grievance_fuel"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "heat",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The insults thrill the rallies and repel the middle. You bet that turnout, not persuasion, decides this one."
+        },
+        {
+          "id": "graceful_exit_offramp",
+          "text": "Privately weigh stepping aside as an elder statesman.",
+          "effects": {
+            "reputation": 8,
+            "health": 6,
+            "loyalty": -14,
+            "power": -10
+          },
+          "personality": {
+            "grandiosity": -10,
+            "ideology": -6,
+            "outward": -8
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "clearFlags": [
+            "campaign_2024_declared"
+          ],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "For one quiet night you imagine retiring undefeated in your own mind, the comeback unrun. You choose the legacy over the throne, and the movement moves on without you."
+        }
+      ]
+    },
+    {
+      "id": "ev_2024_comeback",
+      "era": "interregnum",
+      "year": 2024,
+      "title": "The Comeback",
+      "scene": "Election night turns your way state by state. The blue wall cracks, the Sun Belt holds, and you take the popular vote for the first time. At four in the morning you stand before a delirious crowd in West Palm Beach and declare 'the greatest political comeback in American history.' You are returning to the White House.",
+      "researchNote": "Trump won the 2024 presidential election, defeating Kamala Harris and becoming the second president (after Grover Cleveland) elected to non-consecutive terms. He won all seven swing states and the national popular vote, declaring it 'the greatest political comeback.'",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "victory",
+        "election",
+        "comeback",
+        "exile",
+        "trope:exile-return"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [
+          "walked_away"
+        ],
+        "meters": {}
+      },
+      "weight": 15,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "total_loyalty_mandate",
+          "text": "Declare a sweeping mandate and demand total loyalty from day one.",
+          "effects": {
+            "power": 12,
+            "loyalty": 12,
+            "reputation": -2,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 8,
+            "outward": 6
+          },
+          "setFlags": [
+            "mandate_claimed",
+            "loyalty_mandate",
+            "loyalty_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.8,
+              "polarity": 1
+            },
+            {
+              "to": "loyalty",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "If the loyalty machine was already built, it now runs at full throttle. Every appointment is screened for fealty before competence. The transition becomes a coronation."
+        },
+        {
+          "id": "unity_victory",
+          "text": "Strike a magnanimous 'president for all Americans' tone.",
+          "effects": {
+            "reputation": 8,
+            "power": 6,
+            "loyalty": -2
+          },
+          "personality": {
+            "grandiosity": -2,
+            "outward": -4
+          },
+          "setFlags": [
+            "mandate_claimed"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The markets calm and the establishment exhales. The base grumbles that you sound presidential. The win is banked either way."
+        },
+        {
+          "id": "revenge_mandate",
+          "text": "Promise the base a reckoning. \"Retribution\" starts now.",
+          "effects": {
+            "loyalty": 13,
+            "power": 8,
+            "heat": 9,
+            "reputation": -7
+          },
+          "personality": {
+            "ideology": 9,
+            "grandiosity": 9,
+            "outward": 9
+          },
+          "setFlags": [
+            "mandate_claimed",
+            "loyalty_machine",
+            "retribution_pledge",
+            "grievance_fuel"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.8,
+              "polarity": 1
+            },
+            {
+              "to": "heat",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The crowd chants for vengeance and you promise to deliver it. The enemies list from exile becomes a governing agenda. The machine has both fuel and a target."
+        }
+      ]
+    },
+    {
+      "id": "ev_second_inauguration_2025",
+      "era": "interregnum",
+      "year": 2025,
+      "title": "Inauguration, Take Two",
+      "scene": "Arctic cold drives the ceremony indoors to the Capitol Rotunda. You take the oath a second time and promise an 'America First' golden age. Within hours you are at a desk signing a blizzard of executive orders before an arena crowd, performing governance as spectacle.",
+      "researchNote": "Trump was inaugurated for a second term on January 20, 2025. Due to extreme cold, the ceremony was moved indoors to the Capitol Rotunda. He immediately began signing a large batch of executive orders, some at a public event at Capital One Arena.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "inauguration",
+        "power",
+        "spectacle",
+        "president",
+        "trope:exile-return"
+      ],
+      "requires": {
+        "flags": [
+          "mandate_claimed"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "executive_blitz",
+          "text": "Sign the entire stack of orders live on stage.",
+          "effects": {
+            "power": 10,
+            "loyalty": 8,
+            "heat": 6,
+            "reputation": -2
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "executive_blitz"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The pen becomes a weapon and the arena erupts. Courts will challenge half of it, but the message of total command lands instantly."
+        },
+        {
+          "id": "pardon_the_rioters",
+          "text": "Open with mass pardons for the January 6 defendants.",
+          "effects": {
+            "loyalty": 12,
+            "heat": 9,
+            "reputation": -7,
+            "power": 5
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 6,
+            "outward": 7
+          },
+          "setFlags": [
+            "jan6_pardons",
+            "grievance_fuel"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Your first act of restored power is to free the people who stormed the Capitol for you. The base reads it as a sacred debt repaid; the institutions read it as a warning."
+        },
+        {
+          "id": "deliberate_start",
+          "text": "Sign a measured handful and govern deliberately.",
+          "effects": {
+            "reputation": 5,
+            "power": 5,
+            "heat": -3
+          },
+          "personality": {
+            "grandiosity": -3,
+            "outward": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Aides praise the discipline. The first hundred days proceed with fewer legal fires, but also less shock and awe."
+        }
+      ]
+    },
+    {
+      "id": "ev_second_term_actions_2025",
+      "era": "interregnum",
+      "year": 2025,
+      "title": "Remaking the Government",
+      "scene": "Tariffs, mass deportation operations, a slashed federal workforce, loyalists installed atop the Justice Department and intelligence agencies. The second term moves faster and harder than the first, with fewer guardrails and far fewer skeptics left in the room.",
+      "researchNote": "Trump's early second term in 2025 featured sweeping tariffs, expanded immigration enforcement, large-scale federal workforce reductions, and the installation of loyalists in key agency and Justice Department positions, with notably fewer internal checks than his first term.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "governance",
+        "power",
+        "consolidation",
+        "president",
+        "trope:reformer-vs-reactionary"
+      ],
+      "requires": {
+        "flags": [
+          "mandate_claimed"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "consolidate_institutions",
+          "text": "Place loyalists atop Justice, the FBI, and the military command.",
+          "effects": {
+            "power": 14,
+            "loyalty": 10,
+            "heat": 8,
+            "reputation": -5
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 7,
+            "outward": 7
+          },
+          "setFlags": [
+            "consolidated_power",
+            "loyalty_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.9,
+              "polarity": 1
+            },
+            {
+              "to": "heat",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The institutional architecture of the executive branch becomes an extension of your will. The chain that began here runs straight into the years of total victory ahead."
+        },
+        {
+          "id": "policy_first",
+          "text": "Focus on tariffs and the economy, leave the institutions alone.",
+          "effects": {
+            "power": 6,
+            "money": 3000000,
+            "heat": -3,
+            "reputation": 2,
+            "loyalty": -4
+          },
+          "personality": {
+            "grandiosity": -2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The economy becomes the headline fight. Critics call it a normal, if aggressive, presidency. The deeper levers stay untouched, for now."
+        }
+      ]
+    },
+    {
+      "id": "ev_tariff_blitz_2025",
+      "era": "interregnum",
+      "year": 2025,
+      "title": "Liberation Day Tariffs",
+      "scene": "You unveil sweeping tariffs on nearly every trading partner and call it the start of a new golden age of American manufacturing. Markets convulse, allies retaliate, and prices twitch upward. You insist short-term pain is the price of long-term dominance.",
+      "researchNote": "In 2025, Trump imposed broad new tariffs on numerous countries, framing them as restoring American industry. The announcements triggered significant market volatility and retaliatory measures from trading partners, with economists warning of inflationary effects.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "economy",
+        "tariffs",
+        "president"
+      ],
+      "requires": {
+        "flags": [
+          "mandate_claimed"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "hold_the_line",
+          "text": "Hold the tariffs even as markets crater. \"Be tough.\"",
+          "effects": {
+            "loyalty": 8,
+            "power": 6,
+            "money": -4000000,
+            "reputation": -4
+          },
+          "personality": {
+            "ideology": 6,
+            "grandiosity": 5
+          },
+          "setFlags": [
+            "trade_war"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You weather the volatility and dare the markets to break you first. The base reads the resolve as strength; the economists brace for impact."
+        },
+        {
+          "id": "deal_off_ramp",
+          "text": "Cut quick 'deals' to climb down while claiming total victory.",
+          "effects": {
+            "reputation": 4,
+            "money": 5000000,
+            "power": 4,
+            "loyalty": -2
+          },
+          "personality": {
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "dealmaker"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "money",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You pocket symbolic concessions and declare them historic. The markets recover, and the art of the retreat is rebranded as the art of the deal."
+        },
+        {
+          "id": "escalate_trade_war",
+          "text": "Escalate further and threaten total decoupling from rivals.",
+          "effects": {
+            "power": 9,
+            "loyalty": 7,
+            "money": -7000000,
+            "reputation": -6,
+            "heat": 6
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "trade_war",
+            "decoupling_threat"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You answer the convulsion with more pressure, daring the world to blink first. Supply chains crack, allies scramble, and you wager that maximum leverage beats any deal."
+        }
+      ]
+    },
+    {
+      "id": "ev_mass_firings_2025",
+      "era": "interregnum",
+      "year": 2025,
+      "title": "Draining and Refilling the Swamp",
+      "scene": "Inspectors general, prosecutors, and career officials are dismissed by the hundreds. A cost-cutting task force run by your billionaire allies takes a chainsaw to the agencies. Loyalty is the only credential that matters now, and everyone in Washington understands it.",
+      "researchNote": "Early in the second term in 2025, the Trump administration removed numerous inspectors general, prosecutors, and career civil servants, and empowered a government-efficiency effort (associated with allied business leaders) to dramatically cut federal agencies and staffing.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "tags": [
+        "governance",
+        "consolidation",
+        "loyalty",
+        "president",
+        "trope:reformer-vs-reactionary",
+        "trope:oligarch"
+      ],
+      "requires": {
+        "flags": [
+          "mandate_claimed"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "purge_the_watchdogs",
+          "text": "Fire the watchdogs and replace them with loyalists.",
+          "effects": {
+            "power": 11,
+            "loyalty": 9,
+            "heat": 7,
+            "reputation": -6
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "loyalty_machine",
+            "watchdogs_purged"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The oversight apparatus goes dark. With the watchers gone, the machine can run without anyone left to sound an alarm."
+        },
+        {
+          "id": "targeted_cuts",
+          "text": "Make visible cuts but keep the core oversight intact.",
+          "effects": {
+            "power": 5,
+            "money": 2000000,
+            "reputation": 1,
+            "heat": -2,
+            "loyalty": -5
+          },
+          "personality": {
+            "grandiosity": -1
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You trim the bureaucracy for the cameras while leaving the guardrails standing. Efficiency theater, with the institutions surviving."
+        }
+      ]
+    },
+    {
+      "id": "ev_loyalty_civil_service_2026",
+      "era": "interregnum",
+      "year": 2026,
+      "title": "The Loyalty Census",
+      "scene": "A sprawling reclassification scheme converts career civil servants into at-will appointees, screened for ideological alignment. Aides describe it as 'cleaning house.' Critics call it the end of a nonpartisan bureaucracy. You call it overdue.",
+      "researchNote": "Extrapolated. Speculative escalation of real 2025 efforts to reclassify federal employees (e.g., Schedule F-style policies) into a sweeping loyalty-based civil service overhaul by 2026. No such full census has occurred; this projects existing trends forward.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "consolidation",
+        "loyalty",
+        "speculative",
+        "president",
+        "trope:reformer-vs-reactionary"
+      ],
+      "requires": {
+        "flags": [
+          "mandate_claimed"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "purge_bureaucracy",
+          "text": "Reclassify and screen the entire senior civil service for loyalty.",
+          "effects": {
+            "power": 12,
+            "loyalty": 12,
+            "heat": 9,
+            "reputation": -6
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 7,
+            "outward": 7
+          },
+          "setFlags": [
+            "consolidated_power",
+            "civil_service_purged",
+            "loyalty_machine"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.8,
+              "polarity": 1
+            },
+            {
+              "to": "loyalty",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The permanent government becomes a personal government. Resistance from within evaporates, and the path to total victory clears."
+        },
+        {
+          "id": "targeted_only",
+          "text": "Replace only a handful of visible obstructionists.",
+          "effects": {
+            "power": 5,
+            "loyalty": 4,
+            "heat": -2
+          },
+          "personality": {
+            "grandiosity": -2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "A surgical strike rather than a purge. The optics stay manageable, but the deep state, as you'd call it, survives largely intact."
+        }
+      ]
+    },
+    {
+      "id": "ev_retribution_doctrine_2026",
+      "era": "interregnum",
+      "year": 2026,
+      "title": "The Reckoning",
+      "scene": "The enemies list compiled in exile becomes a working document of government. Investigations open against prosecutors, officials, and journalists who crossed you. Allies cheer the long-awaited payback; institutionalists warn the rule of law is bending toward a single man's grudges.",
+      "researchNote": "Extrapolated. Dramatizes the possible escalation of stated 'retribution' rhetoric and politicized investigations into a systematic campaign against perceived enemies. Speculative projection of 2025 trends; no such formal program is documented.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "consolidation",
+        "grievance",
+        "speculative",
+        "president",
+        "trope:exile-return"
+      ],
+      "requires": {
+        "flags": [
+          "grievance_fuel"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "unleash_retribution",
+          "text": "Unleash the Justice Department on your enemies list.",
+          "effects": {
+            "power": 11,
+            "loyalty": 12,
+            "heat": 11,
+            "reputation": -8
+          },
+          "personality": {
+            "ideology": 9,
+            "grandiosity": 8,
+            "outward": 9
+          },
+          "setFlags": [
+            "consolidated_power",
+            "retribution_doctrine",
+            "grievance_fuel"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.8,
+              "polarity": 1
+            },
+            {
+              "to": "heat",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The grievance that fueled the comeback becomes the law of the land. Every enemy who ever wronged you learns the cost, and fear becomes a governing tool."
+        },
+        {
+          "id": "elder_statesman_pivot",
+          "text": "Surprise everyone: pardon, forgive, govern as an elder statesman.",
+          "effects": {
+            "reputation": 11,
+            "heat": -9,
+            "loyalty": -10,
+            "power": -3
+          },
+          "personality": {
+            "ideology": -7,
+            "grandiosity": -8,
+            "outward": -9
+          },
+          "setFlags": [
+            "elder_statesman"
+          ],
+          "clearFlags": [
+            "grievance_fuel"
+          ],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You let the grudges go and reach for the history books instead of the throat of your enemies. The base feels betrayed; the historians take notes."
+        }
+      ]
+    },
+    {
+      "id": "ev_supreme_court_capture_2027",
+      "era": "interregnum",
+      "year": 2027,
+      "title": "The Last Check Folds",
+      "scene": "A vacancy lets you cement a supermajority that defers, again and again, to executive power. Lower-court injunctions get stayed; emergency rulings break your way. The judiciary, the one branch that still slowed you, increasingly does not.",
+      "researchNote": "Extrapolated. Speculative scenario in which a further reshaped federal judiciary consistently upholds expansive executive authority. Projects forward existing debates over the courts and presidential power; no such 2027 events have occurred.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "consolidation",
+        "power",
+        "speculative",
+        "president"
+      ],
+      "requires": {
+        "flags": [
+          "consolidated_power"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 8,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "lock_the_judiciary",
+          "text": "Install another deferential justice and test the limits.",
+          "effects": {
+            "power": 13,
+            "loyalty": 8,
+            "heat": 8,
+            "reputation": -6
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "consolidated_power",
+            "courts_captured"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.8,
+              "polarity": 1
+            }
+          ],
+          "outcome": "With the courts reliably yielding, the last meaningful restraint on the office dissolves. Power flows to one desk, and stays there."
+        },
+        {
+          "id": "respect_the_ruling",
+          "text": "Accept an adverse ruling to preserve the institution.",
+          "effects": {
+            "reputation": 9,
+            "power": -4,
+            "heat": -5,
+            "loyalty": -6
+          },
+          "personality": {
+            "grandiosity": -6,
+            "ideology": -5,
+            "outward": -5
+          },
+          "setFlags": [
+            "respected_courts"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You bow, just once, to a court that ruled against you. The gesture stuns the establishment and infuriates the maximalists in your own camp."
+        }
+      ]
+    },
+    {
+      "id": "ev_economy_golden_age_2027",
+      "era": "interregnum",
+      "year": 2027,
+      "title": "The Promised Golden Age",
+      "scene": "Tariff revenue, an AI-fueled boom, and aggressive deregulation produce a roaring headline economy, even as the costs land unevenly. You declare the golden age has arrived and dare anyone to deny their own prosperity. The numbers are a weapon now, and you wield them at every podium.",
+      "researchNote": "Extrapolated. Speculative scenario of a strong mid-term economy driven by AI investment, tariffs, and deregulation, with uneven distributional effects. Projects forward 2023-2025 trends; specific 2027 outcomes are unknown.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "world-event",
+        "economy",
+        "speculative",
+        "president"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 8,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "claim_total_credit",
+          "text": "Claim sole credit and brand it the {surname} Golden Age.",
+          "effects": {
+            "power": 8,
+            "loyalty": 9,
+            "money": 6000000,
+            "reputation": 2,
+            "heat": 8
+          },
+          "marketOps": [
+            {
+              "market": "us_equities",
+              "addHolding": 20
+            }
+          ],
+          "personality": {
+            "grandiosity": 7,
+            "outward": 4
+          },
+          "setFlags": [
+            "golden_age_brand"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Prosperity becomes propaganda. The boom buys you the political room to push the consolidation even further while the country feels flush."
+        },
+        {
+          "id": "spread_the_wealth",
+          "text": "Direct the windfall toward workers and broad relief.",
+          "effects": {
+            "reputation": 8,
+            "loyalty": 4,
+            "money": -5000000,
+            "power": 3
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": -3
+          },
+          "setFlags": [
+            "populist_delivery"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You make the boom felt at the kitchen table instead of just the boardroom. A populist who actually delivers is a far harder figure to dislodge."
+        }
+      ]
+    },
+    {
+      "id": "ev_term_limit_question_2028",
+      "era": "interregnum",
+      "year": 2028,
+      "title": "The Question Nobody Will Answer",
+      "scene": "Loyalists float trial balloons about a 'third term.' Merchandise reading '{surname} 2028' sells out. You decline to rule anything out, smiling, letting the speculation run because the ambiguity itself is a form of power. The Constitution says one thing; the crowd chants another.",
+      "researchNote": "Extrapolated. Builds on real 'Trump 2028' merchandise and supporter comments floating a third term, despite the 22nd Amendment's two-term limit. No constitutional change has occurred; this dramatizes the speculation as an end-of-era cliffhanger.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "power",
+        "succession",
+        "speculative",
+        "president"
+      ],
+      "requires": {
+        "flags": [
+          "consolidated_power"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "leave_door_open",
+          "text": "Refuse to rule it out. \"We'll see what the people want.\"",
+          "effects": {
+            "power": 10,
+            "loyalty": 11,
+            "heat": 8,
+            "reputation": -5
+          },
+          "personality": {
+            "ideology": 8,
+            "grandiosity": 9,
+            "outward": 8
+          },
+          "setFlags": [
+            "consolidated_power",
+            "third_term_floated"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "loyalty",
+              "weight": 0.7,
+              "polarity": 1
+            },
+            {
+              "to": "power",
+              "weight": 0.7,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The ambiguity becomes a loyalty test for the whole party. The era ends with the most fundamental guardrail of all hanging open like a gate, leading directly into total victory."
+        },
+        {
+          "id": "rule_it_out",
+          "text": "Publicly affirm the two-term limit.",
+          "effects": {
+            "reputation": 9,
+            "heat": -6,
+            "loyalty": -5,
+            "power": -3
+          },
+          "personality": {
+            "grandiosity": -7,
+            "ideology": -5,
+            "outward": -6
+          },
+          "setFlags": [
+            "term_limit_affirmed"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The establishment is relieved; the hardcore base feels betrayed. You've banked legitimacy at the cost of the dream of permanence."
+        }
+      ]
+    },
+    {
+      "id": "ev_dynasty_succession_2028",
+      "era": "interregnum",
+      "year": 2028,
+      "title": "Blood and Inheritance",
+      "scene": "If the throne cannot be kept, perhaps it can be handed down. Your children jockey for position, the movement debates whether the brand can outlive the man, and you weigh whether to anoint an heir or remain the only sun the system orbits. The era closes on the question of permanence.",
+      "researchNote": "Extrapolated. Speculative scenario about the political future of the Trump movement and family after the second term, including possible dynastic succession. Dramatizes ongoing speculation; no such succession has been formalized.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "power",
+        "succession",
+        "dynasty",
+        "speculative",
+        "president"
+      ],
+      "requires": {
+        "flags": [
+          "consolidated_power"
+        ],
+        "notFlags": [],
+        "meters": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "anoint_an_heir",
+          "text": "Anoint a family heir and build a dynasty.",
+          "effects": {
+            "power": 9,
+            "loyalty": 10,
+            "reputation": -4,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": 7,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "consolidated_power",
+            "dynasty_declared"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.7,
+              "polarity": 1
+            },
+            {
+              "to": "loyalty",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You convert a movement into a lineage. The machine is built to outlast you now, and the years of total victory have a bloodline waiting to inherit them."
+        },
+        {
+          "id": "remain_the_only_sun",
+          "text": "Refuse any heir. The movement is you and only you.",
+          "effects": {
+            "power": 7,
+            "loyalty": 8,
+            "heat": 6,
+            "reputation": -5
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 6
+          },
+          "setFlags": [
+            "consolidated_power",
+            "cult_of_one"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "power",
+              "weight": 0.6,
+              "polarity": 1
+            }
+          ],
+          "outcome": "No successor, no rival, no sunset, you insist. The whole edifice is wired to a single name, and what comes after you is a question you refuse to entertain."
+        },
+        {
+          "id": "let_it_go",
+          "text": "Quietly accept that all of it ends with you.",
+          "effects": {
+            "reputation": 7,
+            "health": 5,
+            "loyalty": -8,
+            "power": -6
+          },
+          "personality": {
+            "grandiosity": -9,
+            "ideology": -5,
+            "outward": -7
+          },
+          "setFlags": [
+            "walked_away"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "reputation",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You make peace with mortality and the limits of any one man. The dream of permanence dies with a shrug, and history is left to judge what was built."
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_exile_court_2021",
+      "era": "interregnum",
+      "year": 2021,
+      "title": "The Florida Court in Exile",
+      "scene": "Sequestered in your gilded palm-fringed fortress, the world treats you as a political ghost. Yet, every aspiring conservative traveler must make the pilgrimage to your dining room, paying homage and buying overpriced club memberships just to secure your golden stamp of approval.",
+      "researchNote": "After leaving Washington in 2021, Mar-a-Lago became the de facto headquarters of the Republican Party, where candidates sought endorsements.",
+      "historicity": "real",
+      "tags": [
+        "trope:exile-return"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "ch_exile_monetize",
+          "text": "Establish a strict pay-to-play model for all audience seekers.",
+          "effects": {
+            "money": 150000,
+            "power": -10,
+            "reputation": -5,
+            "loyalty": 0,
+            "health": 0,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": 5,
+            "outward": 10,
+            "inward": -10
+          },
+          "outcome": "The coffers swell as desperate politicians buy your resort memberships, though some purists whisper about commercialized extortion.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_exile_humiliate",
+          "text": "Demand absolute public fealty from every visiting candidate.",
+          "effects": {
+            "money": 0,
+            "power": 20,
+            "reputation": -10,
+            "loyalty": 15,
+            "health": 0,
+            "heat": 15
+          },
+          "personality": {
+            "ideology": 10,
+            "grandiosity": 15,
+            "outward": 5,
+            "inward": -10
+          },
+          "outcome": "They kiss the ring on camera, cementing your absolute veto power over the party's future candidates.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_exile_mystique",
+          "text": "Maintain a quiet, mysterious silence to build political mystique.",
+          "effects": {
+            "money": -20000,
+            "power": -5,
+            "reputation": 15,
+            "loyalty": -5,
+            "health": 10,
+            "heat": -10
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": -5,
+            "outward": -15,
+            "inward": 15
+          },
+          "outcome": "Your strategic absence drives the media mad with speculation, raising your cultural stock while your operational grip slightly slips.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_midterm_kingmaker_2022",
+      "era": "interregnum",
+      "year": 2022,
+      "title": "The Kingmaker's Fee",
+      "scene": "The midterm elections approach, and every candidate wants your rally stage. You can build a legislature of absolute loyalists, but your advisers suggest charging a steep transaction fee: their campaign donations must flow through your private payment processors.",
+      "researchNote": "In 2022, endorsement decisions were heavily tied to loyalty, fundraising sharing, and the use of Trump-branded vendors.",
+      "historicity": "real",
+      "tags": [
+        "trope:oligarch"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "ch_kingmaker_squeeze",
+          "text": "Route all fundraising through family-owned payment platforms.",
+          "effects": {
+            "money": 250000,
+            "power": 5,
+            "reputation": -15,
+            "loyalty": 0,
+            "health": 0,
+            "heat": 20
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": 10,
+            "outward": 10,
+            "inward": -10
+          },
+          "setFlags": [
+            "family_processor_active"
+          ],
+          "outcome": "The dynasty skims a lucrative percentage off every populist outrage, building a massive private war chest at the cost of federal scrutiny.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_kingmaker_purity",
+          "text": "Endorse only the most radical, ideological firebrands.",
+          "effects": {
+            "money": -50000,
+            "power": 25,
+            "reputation": -10,
+            "loyalty": 20,
+            "health": -5,
+            "heat": 25
+          },
+          "personality": {
+            "ideology": 25,
+            "grandiosity": 15,
+            "outward": 5,
+            "inward": -5
+          },
+          "outcome": "You purge the party of moderates, replacing them with fiercely loyal zealots who answer to your house alone.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_kingmaker_moderate",
+          "text": "Play the pragmatist, backing swing-state centrists to build capital.",
+          "effects": {
+            "money": 50000,
+            "power": 15,
+            "reputation": 10,
+            "loyalty": -10,
+            "health": 5,
+            "heat": -5
+          },
+          "personality": {
+            "ideology": -20,
+            "grandiosity": -10,
+            "outward": 15,
+            "inward": -5
+          },
+          "outcome": "The press applauds your strategic pivot, though your core base feels momentarily betrayed by the compromise.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_silicon_alliance_2024",
+      "era": "interregnum",
+      "year": 2024,
+      "title": "The Silicon Alliance",
+      "scene": "A vanguard of tech-oligarchs arrives in Palm Beach. They offer unlimited cash and algorithmic amplification to bypass the legacy media, provided your next administration guarantees them absolute freedom to build sovereign AI grids and dismantle antitrust cases.",
+      "researchNote": "During the 2024 cycle, Silicon Valley venture capitalists shifted massively toward supporting the campaign in exchange for crypto and tech deregulation.",
+      "historicity": "real",
+      "tags": [
+        "trope:techno-frontier"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "ch_silicon_deal",
+          "text": "Accept the alliance, pledging to dismantle the federal regulatory state.",
+          "effects": {
+            "money": 500000,
+            "power": 30,
+            "reputation": -10,
+            "loyalty": 10,
+            "health": 0,
+            "heat": 20
+          },
+          "personality": {
+            "ideology": 10,
+            "grandiosity": 20,
+            "outward": 15,
+            "inward": -15
+          },
+          "setFlags": [
+            "tech_oligarch_alliance"
+          ],
+          "outcome": "A flood of dark tech-money and optimized feeds buries your opponents, binding your dynasty to the masters of the algorithmic frontier.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_silicon_reject",
+          "text": "Reject the nerds, rallying your working-class base against Big Tech.",
+          "effects": {
+            "money": -100000,
+            "power": 10,
+            "reputation": 20,
+            "loyalty": 25,
+            "health": 5,
+            "heat": -10
+          },
+          "personality": {
+            "ideology": 20,
+            "grandiosity": 10,
+            "outward": -10,
+            "inward": 15
+          },
+          "outcome": "Your populist rhetoric reaches a fever pitch, securing the fanatical devotion of the working class while tech platforms shadowban your allies.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_silicon_co_opt",
+          "text": "Demand they hand over a proprietary stake in their AI ventures first.",
+          "effects": {
+            "money": 300000,
+            "power": 20,
+            "reputation": -5,
+            "loyalty": 0,
+            "health": -5,
+            "heat": 15
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": 25,
+            "outward": 5,
+            "inward": -5
+          },
+          "outcome": "The tech barons capitulate, granting your family holding companies massive options in the next generation of artificial intelligence.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_gala_merger_2025",
+      "era": "interregnum",
+      "year": 2025,
+      "title": "The Sovereign Suite",
+      "scene": "With your second inauguration secured, foreign emissaries bypass the State Department entirely, booking out your luxury hotels for years in advance. Your eldest son suggests consolidating these payments into a new sovereign wealth partnership, cementing the family's global liquidity.",
+      "researchNote": "Trump's businesses routinely received foreign government payments during his terms, sparking constitutional Emoluments controversies.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:dynastic-merger"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "ch_gala_merge",
+          "text": "Merge your real estate holdings with a Middle Eastern sovereign fund.",
+          "effects": {
+            "money": 600000,
+            "power": 20,
+            "reputation": -20,
+            "loyalty": 0,
+            "health": 0,
+            "heat": 30
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": 20,
+            "outward": 20,
+            "inward": -20
+          },
+          "setFlags": [
+            "sovereign_wealth_merger"
+          ],
+          "outcome": "Unprecedented global liquidity secures your family's financial future for generations, even as the press decries the total sale of American foreign policy.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_gala_rent",
+          "text": "Charge exorbitant premium rates but refuse any formal equity mergers.",
+          "effects": {
+            "money": 200000,
+            "power": 15,
+            "reputation": -5,
+            "loyalty": 5,
+            "health": 5,
+            "heat": 15
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": 10,
+            "outward": 10,
+            "inward": -10
+          },
+          "outcome": "You milk the diplomats for every cent without giving them a permanent seat at your table, maintaining operational independence.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_gala_patriotic",
+          "text": "Close the hotels to foreign dignitaries to dodge the scandal.",
+          "effects": {
+            "money": -150000,
+            "power": 5,
+            "reputation": 25,
+            "loyalty": 10,
+            "health": 5,
+            "heat": -20
+          },
+          "personality": {
+            "ideology": 10,
+            "grandiosity": -10,
+            "outward": -15,
+            "inward": 15
+          },
+          "outcome": "A rare public relations triumph as you performatively put America First, starving the media of easy corruption headlines.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_family_pulpit_2026",
+      "era": "interregnum",
+      "year": 2026,
+      "title": "The Party of Faith",
+      "scene": "Your daughter-in-law completes her takeover of the party's administrative machinery. She proposes turning every local precinct into a 'faith and freedom' distribution center, merging political action committees with televangelist networks to make the movement tax-exempt.",
+      "researchNote": "In 2024, Lara Trump became co-chair of the RNC, streamlining the organization to serve the campaign's legal and political needs.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:megachurch-prosperity"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "ch_pulpit_tax_exempt",
+          "text": "Launder the entire party apparatus into a tax-exempt ministry.",
+          "effects": {
+            "money": 400000,
+            "power": 20,
+            "reputation": -15,
+            "loyalty": 15,
+            "health": 0,
+            "heat": 25
+          },
+          "personality": {
+            "ideology": 20,
+            "grandiosity": 15,
+            "outward": 10,
+            "inward": -15
+          },
+          "outcome": "Political donations flow as holy tithes, shielding your cash from tax authorities while turning your rallies into religious crusades.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_pulpit_secular",
+          "text": "Keep the party secular and focused purely on corporate deregulation.",
+          "effects": {
+            "money": 150000,
+            "power": 15,
+            "reputation": 10,
+            "loyalty": -10,
+            "health": 5,
+            "heat": -10
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": 5,
+            "outward": 15,
+            "inward": -10
+          },
+          "outcome": "Wall Street donors return in droves, relieved by the focus on tax cuts rather than cultural and spiritual warfare.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_pulpit_pure_family",
+          "text": "Divert all party funds directly into your personal legal defense fund.",
+          "effects": {
+            "money": 250000,
+            "power": 10,
+            "reputation": -25,
+            "loyalty": 25,
+            "health": -10,
+            "heat": 30
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": 25,
+            "outward": -5,
+            "inward": 15
+          },
+          "outcome": "The party is hollowed out to serve as your personal shield, outraging local organizers but keeping you entirely out of reach of creditors.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_prodigals_deal_2027",
+      "era": "interregnum",
+      "year": 2027,
+      "title": "The Prodigal's Secret Channel",
+      "scene": "Your wild, long-ignored younger son is caught negotiating a private mining concession with an autocratic Central Asian state using your name. The intelligence agencies flag the backchannel; you must decide whether to crush his ambition or claim his cut.",
+      "researchNote": "Familial business entanglements in foreign nations have historically posed major security and political liabilities for modern political dynasties.",
+      "historicity": "personal",
+      "tags": [
+        "trope:prodigal-heir"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "ch_prodigal_seize",
+          "text": "Exile him from the family trust and publicly disavow the deal.",
+          "effects": {
+            "money": -50000,
+            "power": 15,
+            "reputation": 20,
+            "loyalty": -15,
+            "health": 5,
+            "heat": -15
+          },
+          "personality": {
+            "ideology": 5,
+            "grandiosity": -5,
+            "outward": -10,
+            "inward": 15
+          },
+          "outcome": "You preserve the dynasty's formal clean slate by throwing your own blood to the wolves, though the betrayal fractures your household.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_prodigal_coopt",
+          "text": "Take over the mining deal, naming your eldest child as the lead partner.",
+          "effects": {
+            "money": 300000,
+            "power": 10,
+            "reputation": -15,
+            "loyalty": 10,
+            "health": -5,
+            "heat": 25
+          },
+          "personality": {
+            "ideology": -10,
+            "grandiosity": 15,
+            "outward": 15,
+            "inward": -10
+          },
+          "outcome": "The wild son is humiliated and sidelined while the family enterprise secures critical lithium reserves, fueling the AI-boom.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_prodigal_pardon",
+          "text": "Quietly legitimize his channel, utilizing your intelligence agencies to shield him.",
+          "effects": {
+            "money": 150000,
+            "power": 25,
+            "reputation": -20,
+            "loyalty": 20,
+            "health": 0,
+            "heat": 35
+          },
+          "personality": {
+            "ideology": 10,
+            "grandiosity": 25,
+            "outward": 5,
+            "inward": -5
+          },
+          "setFlags": [
+            "deep_state_compromise"
+          ],
+          "outcome": "By corrupting the intelligence watchdogs to protect your boy, you establish complete dynastic immunity over foreign dealings.",
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_matriarch_regency_2028",
+      "era": "interregnum",
+      "year": 2028,
+      "title": "The Matriarch's Settlement",
+      "scene": "As the legal and constitutional limits of your second term loom, your children begin a vicious, leaks-driven war over who will inherit the MAGA crown. Your wife steps in, demanding they sign a binding trust yielding all intellectual property and final endorsement veto power to her.",
+      "researchNote": "Political dynasties often rely on the matriarchal figure to preserve the core brand and assets when siblings descend into succession warfare.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:matriarch-regency"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "ch_matriarch_empower",
+          "text": "Appoint your wife as the sole arbiter of the dynastic trust.",
+          "effects": {
+            "money": 100000,
+            "power": 25,
+            "reputation": 10,
+            "loyalty": 20,
+            "health": 10,
+            "heat": -10
+          },
+          "personality": {
+            "ideology": -5,
+            "grandiosity": 15,
+            "outward": -5,
+            "inward": 20
+          },
+          "setFlags": [
+            "matriarch_rules_trust"
+          ],
+          "outcome": "The squabbling siblings are instantly brought to heel under threat of disinheritance, securing the family line under a cool, calculated regency.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_matriarch_divide",
+          "text": "Let the kids fight it out in a public Darwinian struggle for succession.",
+          "effects": {
+            "money": -50000,
+            "power": 5,
+            "reputation": -20,
+            "loyalty": -25,
+            "health": -15,
+            "heat": 20
+          },
+          "personality": {
+            "ideology": 10,
+            "grandiosity": 20,
+            "outward": 15,
+            "inward": -15
+          },
+          "outcome": "The family brand is dragged through a public meat grinder of leaks and lawsuits, thrilling the tabloids but weakening your hold on the party.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_matriarch_sellout",
+          "text": "Liquidate the political infrastructure to a media conglomerate.",
+          "effects": {
+            "money": 500000,
+            "power": -20,
+            "reputation": 15,
+            "loyalty": -15,
+            "health": 15,
+            "heat": -20
+          },
+          "personality": {
+            "ideology": -25,
+            "grandiosity": -10,
+            "outward": 20,
+            "inward": -20
+          },
+          "outcome": "You cash out of the political business entirely, trading raw state power for endless generational wealth and high-society respectability.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_cadet_rebellion_2028",
+      "era": "interregnum",
+      "year": 2028,
+      "title": "The Cadet Rebellion",
+      "scene": "A disgruntled nephew, claiming you have gone soft and sold out to the globalist corporate elite, launches a rival 'True Restoration' movement. He is drawing away your most fanatical populist supporters and threatening to split your voting base just as the third-term campaign begins.",
+      "researchNote": "Cadet branches in political families frequently emerge when younger members attempt to outflank the patriarch from a more extreme ideological direction.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:cadet-branch"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "ch_cadet_crush",
+          "text": "Unleash the full weight of your media apparatus to ruin his reputation.",
+          "effects": {
+            "money": -50000,
+            "power": 20,
+            "reputation": -10,
+            "loyalty": 15,
+            "health": -5,
+            "heat": 15
+          },
+          "personality": {
+            "ideology": 10,
+            "grandiosity": 15,
+            "outward": -5,
+            "inward": 15
+          },
+          "outcome": "He is branded a traitor, a grifter, and a deep-state plant, neutralizing the threat but exposing the deep rot inside the family tree.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_cadet_buy",
+          "text": "Quietly buy him off with a lucrative, non-disparagement board seat.",
+          "effects": {
+            "money": -200000,
+            "power": 10,
+            "reputation": 15,
+            "loyalty": -5,
+            "health": 5,
+            "heat": -10
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": -5,
+            "outward": 10,
+            "inward": -5
+          },
+          "outcome": "The rebel nephew silences his critique for a hefty fee, proving that his radical populism had a very conventional market price.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ch_cadet_embrace",
+          "text": "Co-opt his extreme platform, pulling your entire movement further right.",
+          "effects": {
+            "money": 50000,
+            "power": 25,
+            "reputation": -20,
+            "loyalty": 25,
+            "health": -10,
+            "heat": 30
+          },
+          "personality": {
+            "ideology": 30,
+            "grandiosity": 25,
+            "outward": 5,
+            "inward": -10
+          },
+          "setFlags": [
+            "radical_nationalist_pivot"
+          ],
+          "outcome": "By swallowing his radical agenda, you neutralize his coup, but you find yourself riding an uncontrollable tiger of unchecked national extremism.",
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    }
+  ]
+}

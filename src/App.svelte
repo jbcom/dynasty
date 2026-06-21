@@ -10,7 +10,8 @@ import {
   type Settings,
 } from "./engine/settings";
 import type { Content } from "./sim/content";
-import { foundDynasty } from "./sim/founding";
+import { foundByComposition } from "./sim/founding";
+import { dealComposition } from "./sim/places";
 import type { GameState } from "./sim/state";
 import { GameStore } from "./ui/gameStore.svelte";
 import { FormFactorStore } from "./ui/formFactor.svelte";
@@ -56,13 +57,15 @@ async function toggleLive(on: boolean): Promise<void> {
   settings = await loadSettings(storage);
 }
 
-// FOUND a dynasty at a start-moment (FD-6): build the founded initial state via the
-// pure founding flow and hand it to the store as the run's base.
-async function foundGame(momentId: string, surname: string, seed: string): Promise<void> {
+// DIEGETIC BIRTH (CP-R4): New Game DEALS a seed-dealt origin (place × era × gender ×
+// archetype) under the player's chosen surname, founds it, and drops straight into
+// the Epoch-0 birth — the player DISCOVERS the origin through the emergence events.
+async function birthGame(seed: string, surname: string): Promise<void> {
   if (!storage) return;
   // Await the clear so a fast first choice can't race the old save's deletion.
   await clearSave(storage);
-  const founded = foundDynasty(content, { momentId, surname, seed }).state;
+  const composition = dealComposition(content.places, content.eras, seed, surname);
+  const founded = foundByComposition(content, composition).state;
   store = new GameStore(content, seed, storage, founded, founded.archetype);
   screen = "play";
 }
@@ -82,6 +85,18 @@ function restart(): void {
   if (storage) hasSave(storage).then((h) => (saveExists = h));
   screen = "title";
 }
+
+// DEV harness: download the current run's bespoke timeline as JSON (CP-R7).
+function dumpTimeline(): void {
+  if (!store) return;
+  const blob = new Blob([store.devDumpTimeline()], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `dynasty-timeline-${store.view?.state.seed ?? "run"}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
 </script>
 
 {#if screen === "settings"}
@@ -94,9 +109,8 @@ function restart(): void {
   />
 {:else if screen === "title" || !store}
   <TitleScreen
-    moments={content.startMoments}
     hasSave={saveExists}
-    onFound={foundGame}
+    onBirth={birthGame}
     onContinue={continueGame}
     onSettings={() => (screen = "settings")}
   />
@@ -111,3 +125,48 @@ function restart(): void {
     onchoose={(id) => store?.choose(id)}
   />
 {/if}
+
+<!-- DEV HARNESS OVERLAY (CP-R7): fast-forward + timeline dump, dev builds only. -->
+{#if import.meta.env.DEV && store && !store.view?.state.end}
+  <aside class="dev-overlay" aria-label="Dev harness">
+    <span class="dev-tag">DEV · {store.view?.state.year}</span>
+    <button type="button" onclick={() => store?.devFastForward(1)}>▶ +1</button>
+    <button type="button" onclick={() => store?.devFastForward(10)}>⏩ +10</button>
+    <button type="button" onclick={() => store?.devFastForward(100)}>⏭ +100</button>
+    <button type="button" onclick={dumpTimeline}>⬇ dump</button>
+  </aside>
+{/if}
+
+<style>
+  .dev-overlay {
+    position: fixed;
+    bottom: env(safe-area-inset-bottom, 0);
+    right: 0;
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+    background: rgb(0 0 0 / 0.7);
+    border-top-left-radius: 6px;
+    font-family: monospace;
+    font-size: 0.7rem;
+    z-index: 9999;
+  }
+  .dev-overlay .dev-tag {
+    color: #4fd1a5;
+    letter-spacing: 0.08em;
+  }
+  .dev-overlay button {
+    background: #1b2a4a;
+    color: #d4af37;
+    border: 1px solid #d4af3755;
+    border-radius: 4px;
+    padding: 0.2rem 0.4rem;
+    cursor: pointer;
+    font-family: monospace;
+    font-size: 0.7rem;
+  }
+  .dev-overlay button:hover {
+    background: #25406b;
+  }
+</style>

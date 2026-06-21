@@ -4,10 +4,12 @@ export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  // A small retry budget absorbs first-load transform jitter; the suite is
+  // deterministic in the sim, so a retry only re-warms the served bundle.
+  retries: process.env.CI ? 2 : 1,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: "http://localhost:5173",
+    baseURL: "http://localhost:4173",
     trace: "on-first-retry",
   },
   projects: [
@@ -16,10 +18,13 @@ export default defineConfig({
       use: { ...devices["Pixel 7"] },
     },
   ],
+  // Run against the PRODUCTION preview (pre-built, no on-demand HMR transforms) so
+  // parallel workers hit a fast static server — eliminates the dev-server-under-load
+  // flake while exercising the real shipped bundle.
   webServer: {
-    command: "pnpm dev",
-    url: "http://localhost:5173",
+    command: "pnpm build && pnpm preview --port 4173 --strictPort",
+    url: "http://localhost:4173",
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
+    timeout: 180_000,
   },
 });

@@ -4,19 +4,25 @@ import { buildContent, type RawContent } from "../../sim/content";
 import { loadContent } from "../loadContent";
 
 /**
- * FD-1 — family-tree data model: the four preset spines load + cross-ref validate,
+ * FD-1 — family-tree data model: the archetype spines load + cross-ref validate,
  * and buildContent enforces the structural invariants (one founder-patriarch, all
- * child/spouse refs resolve, no cycles).
+ * child/spouse refs resolve, no cycles). CP-R-ARCH adds the entertainment + athletic
+ * spines (thin pre-founding fallbacks; the live family tree drives founded runs).
  */
 
 const content = loadContent();
 
-describe("FD-1 family trees — the four preset spines", () => {
-  it("loads all four archetype trees", () => {
-    const byDynasty = new Set(content.familyTrees.map((t) => t.dynasty));
-    expect(byDynasty).toEqual(new Set(["trump", "kennedy", "musk", "religious"]));
+describe("FD-1 family trees — the archetype spines", () => {
+  it("loads a spine for all six power archetypes", () => {
     const byArchetype = new Set(content.familyTrees.map((t) => t.archetype));
-    expect(byArchetype).toEqual(new Set(["economic", "political", "technological", "religious"]));
+    expect(byArchetype).toEqual(
+      new Set(["economic", "political", "technological", "religious", "entertainment", "athletic"]),
+    );
+    // The four original literal spines plus the two new generic ones.
+    const byDynasty = new Set(content.familyTrees.map((t) => t.dynasty));
+    expect(byDynasty).toEqual(
+      new Set(["trump", "kennedy", "musk", "religious", "entertainment", "athletic"]),
+    );
   });
 
   it("every tree has exactly one founder-patriarch", () => {

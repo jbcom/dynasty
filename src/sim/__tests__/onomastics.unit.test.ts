@@ -20,7 +20,7 @@ describe("FD-5 onomastics content", () => {
         "bavarian_german",
         "afrikaner",
         "scots_irish",
-        "wasp_east_coast",
+        "anglo_protestant",
         "arabic_abbasid",
       ]),
     );
@@ -83,13 +83,13 @@ describe("FD-5 nameChild — convention-driven", () => {
 });
 
 describe("FD-5 applySuffix", () => {
-  const wasp = getCulture(onomastics, "wasp_east_coast");
+  const anglo = getCulture(onomastics, "anglo_protestant");
   const irish = getCulture(onomastics, "irish_catholic");
 
-  it("WASP junior_suffix: Jr. for the second bearer, then numerals", () => {
-    expect(applySuffix(wasp, "Prescott", 0)).toBe("Prescott");
-    expect(applySuffix(wasp, "Prescott", 1)).toBe("Prescott Jr.");
-    expect(applySuffix(wasp, "Prescott", 2)).toBe("Prescott III");
+  it("anglo-protestant junior_suffix: Jr. for the second bearer, then numerals", () => {
+    expect(applySuffix(anglo, "Prescott", 0)).toBe("Prescott");
+    expect(applySuffix(anglo, "Prescott", 1)).toBe("Prescott Jr.");
+    expect(applySuffix(anglo, "Prescott", 2)).toBe("Prescott III");
   });
 
   it("patronymic cultures use Roman numerals from the second bearer", () => {

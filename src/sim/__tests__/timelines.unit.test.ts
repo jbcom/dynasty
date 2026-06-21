@@ -1,15 +1,12 @@
 import { describe, expect, it } from "vitest";
-import originsJson from "../../data/eras/origins.json";
-import kennedyJson from "../../data/timelines/kennedy.json";
+import originsJson from "../../data/eras/new-york/1885-1946-origins/events.json";
+import eastcoastJson from "../../data/timelines/eastcoast.json";
 import moresJson from "../../data/timelines/mores.json";
-import moresNaziJson from "../../data/timelines/mores.nazi.json";
-import muskJson from "../../data/timelines/musk.json";
 import religionJson from "../../data/timelines/religion.json";
-import religionNaziJson from "../../data/timelines/religion.nazi.json";
 import scienceJson from "../../data/timelines/science.json";
-import usaNaziJson from "../../data/timelines/usa.nazi.json";
+import usaJson from "../../data/timelines/usa.json";
 import westcoastJson from "../../data/timelines/westcoast.json";
-import worldNaziJson from "../../data/timelines/world.nazi.json";
+import worldJson from "../../data/timelines/world.json";
 import { buildContent } from "../content";
 import { type WorldTimeline, WorldTimelineSchema } from "../schema";
 import { initState } from "../state";
@@ -65,110 +62,118 @@ describe("branch timeline selection (AH3)", () => {
   };
   const all = [usaDefault, usaNazi, science];
 
-  it("default branch uses the default variant and ignores branch-specific ones", () => {
+  it("default branch shows the default USA events, never a branch's (CP-R-ARCH-2 event-level)", () => {
     const sel = timelinesForBranch(all, "default");
-    expect(sel.find((t) => t.scope === "usa")?.label).toBe("USA");
+    const usa = sel.filter((t) => t.scope === "usa");
+    expect(usa).toHaveLength(1);
+    const ids = usa[0]?.events.map((e) => e.id) ?? [];
+    expect(ids).toContain("u_d"); // our-history event present
+    expect(ids).not.toContain("u_n"); // the Reich event suppressed
     expect(sel.find((t) => t.scope === "science")).toBeDefined();
-    expect(sel.some((t) => t.branch === "nazi")).toBe(false);
   });
 
-  it("nazi branch swaps in the nazi USA variant and suppresses the default", () => {
+  it("nazi branch REPLACES the default USA events with the Reich ones (event-level swap)", () => {
     const sel = timelinesForBranch(all, "nazi");
     const usa = sel.filter((t) => t.scope === "usa");
     expect(usa).toHaveLength(1);
-    expect(usa[0]?.label).toBe("USA (Reich)");
+    const ids = usa[0]?.events.map((e) => e.id) ?? [];
+    expect(ids).toContain("u_n"); // Reich event active
+    expect(ids).not.toContain("u_d"); // default suppressed (complete alternate history)
     // scopes without a branch variant still fall back to default
     expect(sel.find((t) => t.scope === "science")).toBeDefined();
   });
 });
 
-describe("Nazi-branch backdrop pool (alt-history consistency, AH2/AH3)", () => {
-  const naziFiles = {
-    usa: usaNaziJson,
-    world: worldNaziJson,
-    mores: moresNaziJson,
-    religion: religionNaziJson,
-  };
+describe("Nazi-branch backdrop pool (alt-history consistency, AH2/AH3 — CP-R-ARCH-2)", () => {
+  // Post-collapse: branch events live in the merged per-scope file, tagged branch.
+  const mergedFiles = { usa: usaJson, world: worldJson, mores: moresJson, religion: religionJson };
 
-  for (const [scope, json] of Object.entries(naziFiles)) {
-    it(`${scope}.nazi.json validates as scope=${scope} branch=nazi`, () => {
+  for (const [scope, json] of Object.entries(mergedFiles)) {
+    it(`${scope}.json carries a deep nazi-branch slice`, () => {
       const t = WorldTimelineSchema.parse(json);
-      expect(t.scope).toBe(scope);
-      expect(t.branch).toBe("nazi");
-      expect(t.events.length).toBeGreaterThanOrEqual(30);
+      const nazi = t.events.filter((e) => e.branch === "nazi");
+      expect(nazi.length, `${scope} nazi events`).toBeGreaterThanOrEqual(18);
       const ids = t.events.map((e) => e.id);
-      expect(new Set(ids).size).toBe(ids.length);
+      expect(new Set(ids).size, `${scope} dup ids`).toBe(ids.length);
     });
   }
 
-  it("the Nazi USA timeline establishes the Reich order and never crowns a sitting US president", () => {
-    const t = WorldTimelineSchema.parse(usaNaziJson);
-    const corpus = t.events.map((e) => `${e.headline} ${e.body}`.toLowerCase()).join(" ");
-    // It MUST establish the Reich administration (the head of state is a
-    // Reichskommissar, not a President).
+  it("the Nazi USA slice establishes the Reich order and never crowns a sitting US president", () => {
+    const t = WorldTimelineSchema.parse(usaJson);
+    const nazi = t.events.filter((e) => e.branch === "nazi");
+    const corpus = nazi.map((e) => `${e.headline} ${e.body}`.toLowerCase()).join(" ");
     expect(corpus).toContain("reich");
     expect(corpus).toContain("commissar");
-    // No event should AFFIRM a U.S. president winning/taking office during the
-    // occupation. (Phrases like "no presidential assassinations" are consistency-
-    // affirming and fine; we ban the affirmative installation phrases only.)
     for (const banned of ["wins the white house", "elected president", "president-elect"]) {
       expect(corpus.includes(banned), `Nazi USA affirms "${banned}"`).toBe(false);
     }
   });
 });
 
-describe("all branch backdrop pools validate uniformly (AH3 pools)", () => {
-  // Every per-branch timeline variant in the repo, validated as a set.
-  const pool = import.meta.glob("../../data/timelines/*.*.json", { eager: true }) as Record<
+describe("all branch backdrop pools validate uniformly (AH3 pools — CP-R-ARCH-2)", () => {
+  // Post-collapse: ONE file per scope, every event tagged with its branch field.
+  const pool = import.meta.glob("../../data/timelines/*.json", { eager: true }) as Record<
     string,
     { default: unknown }
   >;
 
-  it("finds the expected branch pools (nazi/westcoast/theocracy/media × 4 scopes)", () => {
-    const names = Object.keys(pool).map((p) => p.split("/").pop());
+  it("the four backdrop scopes each carry every alt-history branch slice", () => {
+    const byScope = new Map<string, Set<string>>();
+    for (const [, mod] of Object.entries(pool)) {
+      const t = WorldTimelineSchema.parse(mod.default);
+      const branches = byScope.get(t.scope) ?? new Set<string>();
+      for (const e of t.events) branches.add(e.branch ?? "default");
+      byScope.set(t.scope, branches);
+    }
     for (const branch of ["nazi", "westcoast", "theocracy", "media"]) {
       for (const scope of ["usa", "world", "mores", "religion"]) {
-        expect(names, `missing ${scope}.${branch}.json`).toContain(`${scope}.${branch}.json`);
+        expect(byScope.get(scope)?.has(branch), `${scope} missing ${branch} slice`).toBe(true);
       }
     }
   });
 
   for (const [path, mod] of Object.entries(pool)) {
     const file = path.split("/").pop() ?? path;
-    it(`${file} validates with matching scope+branch and no dup ids`, () => {
-      const [scope, branch] = file.replace(".json", "").split(".");
+    it(`${file} validates with matching scope and no dup ids`, () => {
+      const scope = file.replace(".json", "");
       const t = WorldTimelineSchema.parse(mod.default);
       expect(t.scope).toBe(scope);
-      expect(t.branch).toBe(branch);
-      expect(t.events.length).toBeGreaterThanOrEqual(18);
       const ids = t.events.map((e) => e.id);
       expect(new Set(ids).size).toBe(ids.length);
     });
   }
 });
 
-// Geographic + thematic + character timelines.
+// Geographic + thematic timelines (post CP-R-ARCH-3: musk → westcoast,
+// kennedy → eastcoast as rival-house backdrop).
 const FILES: Record<string, unknown> = {
   westcoast: westcoastJson,
+  eastcoast: eastcoastJson,
   mores: moresJson,
   religion: religionJson,
   science: scienceJson,
-  musk: muskJson,
-  kennedy: kennedyJson,
 };
 
-describe("Kennedy protagonist timeline — bootlegger→dynasty arc (no-leak)", () => {
-  it("kennedy.json validates as scope=kennedy with the bootlegger→dynasty arc", () => {
-    const t = WorldTimelineSchema.parse(kennedyJson);
-    expect(t.scope).toBe("kennedy");
-    expect(t.events.length).toBeGreaterThanOrEqual(20);
-    const flags = new Set(t.events.flatMap((e) => e.setFlags));
+describe("Kennedy rival-house arc folded into eastcoast (CP-R-ARCH-3)", () => {
+  it("eastcoast carries the kennedy bootlegger→dynasty arc tagged rival-house:political", () => {
+    const t = WorldTimelineSchema.parse(eastcoastJson);
+    const rivals = t.events.filter((e) => (e.tags ?? []).includes("rival-house:political"));
+    expect(rivals.length, "kennedy rival-house events").toBeGreaterThanOrEqual(20);
+    const flags = new Set(rivals.flatMap((e) => e.setFlags));
     // The arc is intact via the LEGIT flags; the swap flag (kennedy_swap) was
     // removed with the flip mechanic (FD-3.3) — dynasty is founding-fixed.
     for (const f of ["bootlegger_fortune", "political_dynasty", "kennedy_dynasty_active"]) {
-      expect(flags.has(f), `kennedy.json missing arc flag ${f}`).toBe(true);
+      expect(flags.has(f), `eastcoast missing kennedy arc flag ${f}`).toBe(true);
     }
     expect(flags.has("kennedy_swap"), "kennedy_swap must be gone (no-leak)").toBe(false);
+  });
+
+  it("musk rival-house arc folded into westcoast tagged rival-house:technological", () => {
+    const t = WorldTimelineSchema.parse(westcoastJson);
+    const rivals = t.events.filter((e) => (e.tags ?? []).includes("rival-house:technological"));
+    expect(rivals.length, "musk rival-house events").toBeGreaterThanOrEqual(20);
+    const flags = new Set(rivals.flatMap((e) => e.setFlags));
+    expect(flags.has("musk_paypal_exit") || flags.has("musk_spacex_founded")).toBe(true);
   });
 
   it("origins exposes the brewing→bootlegger bridge WITHOUT any swap flag", () => {
@@ -198,19 +203,18 @@ describe("world & thematic timelines (data + linking protocol)", () => {
     });
   }
 
-  it("the Musk character-timeline gates its apartheid/Axis branch on the Era-0 Nazi flags", () => {
-    // Validates against the schema...
-    expect(WorldTimelineSchema.parse(muskJson).scope).toBe("musk");
-    // ...then asserts structure on the authored JSON (a gated event omits
-    // `requires` in source; the schema leaves it optional, so read source here).
-    const musk = muskJson as WorldTimeline;
+  it("the Musk rival-house arc (folded into westcoast) gates its apartheid/Axis branch on the Nazi flags", () => {
+    // Read the RAW source (not schema-parsed) so an omitted `requires` stays
+    // undefined — the schema would otherwise default it to an empty object.
+    const wc = westcoastJson as WorldTimeline;
+    const musk = wc.events.filter((e) => (e.tags ?? []).includes("rival-house:technological"));
     // The role-flip + first-trillionaire flags exist on the main (ungated) arc.
-    const ungated = new Set(musk.events.filter((e) => !e.requires).flatMap((e) => e.setFlags));
+    const ungated = new Set(musk.filter((e) => !e.requires).flatMap((e) => e.setFlags));
     for (const f of ["musk_trillionaire", "musk_presidency_eligible", "musk_takes_power"]) {
       expect(ungated.has(f)).toBe(true);
     }
     // The apartheid-scion branch only fires in an Axis-ascendant world.
-    const apartheid = musk.events.find((e) => e.setFlags.includes("musk_apartheid_scion"));
+    const apartheid = musk.find((e) => e.setFlags.includes("musk_apartheid_scion"));
     expect(apartheid?.requires?.flags).toContain("axis_ascendant");
   });
 

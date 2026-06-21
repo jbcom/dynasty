@@ -5,9 +5,10 @@ import {
   landDueConsequences,
   scheduleConsequences,
 } from "./butterfly";
+import { applyCallingDrift, callingById } from "./callings";
 import type { Content } from "./content";
 import { meetsRequires, pickNextEvent } from "./events";
-import { beget, kinFor } from "./family";
+import { beget, kinFor, takePartner } from "./family";
 import { applyDelta } from "./meters";
 import { applyMortality } from "./mortality";
 import { applyPersonality } from "./personality";
@@ -106,13 +107,31 @@ export function applyChoice(
     }
   }
 
+  let family = state.family;
+
+  // 4b2. TAKE PARTNER (CP-5): the Epoch-0 "find a partner" beat. Adds a married-in
+  // in-law whose traits blend into subsequent begets. No-op without a founded
+  // family or if a partner already exists.
+  if (choice.takesPartner && family && state.founding && !family.partnerId) {
+    const culture = content.onomastics[state.founding.culture];
+    if (culture) {
+      family = takePartner(
+        family,
+        event.year,
+        culture,
+        rng.fork(`partner:${event.id}:${choiceId}:${state.history.length}`),
+      ).family;
+    }
+  }
+
   // 4c. BEGET (FD-8): a choice can add children to the live family tree, born to
   // the current protagonist in the event's year, named by the founding culture's
-  // convention with inherited+varied traits. No-op without a founded family.
-  let family = state.family;
+  // convention with inherited+varied traits. The founding CALLING (CP-2) drifts
+  // each child's traits toward the line's calling. No-op without a founded family.
   if (choice.begets && choice.begets > 0 && family && state.founding) {
     const culture = content.onomastics[state.founding.culture];
     if (culture) {
+      const calling = callingById(content.callings, state.founding.calling);
       const parentId = family.protagonistId;
       for (let i = 0; i < choice.begets; i++) {
         const born = begetYear(event.year, i);
@@ -124,7 +143,15 @@ export function applyChoice(
           kinFor(family, parentId),
           rng.fork(`beget:${event.id}:${choiceId}:${state.history.length}:${i}`),
         );
-        family = begotten.family;
+        // Apply the calling's generational trait drift to the new child.
+        const child = begotten.child;
+        const drifted = applyCallingDrift(child.traits, calling);
+        family = {
+          ...begotten.family,
+          members: begotten.family.members.map((m) =>
+            m.id === child.id ? { ...m, traits: drifted } : m,
+          ),
+        };
       }
     }
   }
@@ -134,6 +161,15 @@ export function applyChoice(
   // push lastEventYear past the era, which the era rollover would then reset
   // backward) nor consume the era budget — the family's life beats drive the clock.
   const isWorldEvent = event.era === "__world__";
+
+  // SET CALLING (CP-R6): a diegetic calling beat writes the founded line's calling
+  // into its founding metadata, so it drifts every future beget (CP-2). No-op
+  // without a founded line or if the calling id is unknown.
+  const founding =
+    choice.setsCalling && state.founding && callingById(content.callings, choice.setsCalling)
+      ? { ...state.founding, calling: choice.setsCalling }
+      : state.founding;
+
   const resolved: GameState = {
     ...state,
     meters,
@@ -143,6 +179,7 @@ export function applyChoice(
     pending,
     markets,
     family,
+    founding,
     ledger: [...state.ledger, ...newLedger],
     history: [...state.history, { eventId: event.id, choiceId, year: event.year }],
     firedEvents,
@@ -212,7 +249,7 @@ export function applyChoice(
       let fam = mort.family;
       if (mort.protagonistDied) {
         const namedHeir = advanced.flags.find((f) => f.startsWith("heir_"))?.slice("heir_".length);
-        const succ = succeed(fam, passYear, namedHeir);
+        const succ = succeed(fam, passYear, namedHeir, advanced.founding?.successionMode);
         if (succ.heirId === null) {
           // The line is extinct — end the run with a dynastic-extinction ending.
           advanced = {

@@ -8,16 +8,16 @@ import endingsJson from "../endings.json";
 import indexJson from "../eras/index.json";
 import metersJson from "../meters.json";
 
-// Eagerly import every authored era events file.
-const eraModules = import.meta.glob("../eras/*.json", { eager: true }) as Record<
+// Eagerly import every authored era events file (eras/<place>/<period>/*.json).
+const eraModules = import.meta.glob("../eras/**/*.json", { eager: true }) as Record<
   string,
-  { default: unknown }
+  { default: { era?: string } }
 >;
 
 function realContent() {
   const eraEvents = Object.entries(eraModules)
     .filter(([p]) => !p.endsWith("index.json"))
-    .map(([p, m]) => ({ era: p.split("/").pop()?.replace(".json", "") ?? "", data: m.default }));
+    .map(([, m]) => ({ era: m.default.era ?? "", data: m.default }));
   const raw: RawContent = {
     meters: metersJson,
     eraIndex: indexJson,

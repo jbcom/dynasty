@@ -105,6 +105,39 @@ export interface GameState {
     surname: string;
     culture: string;
     place: string;
+    /**
+     * The composed origin (CP-R2): the era id, founding year, archetype, and
+     * deep-history flag the run was founded with. Carried so a save reconstructs the
+     * exact composition via foundByComposition — a synthesized `composed:<place>:<era>`
+     * origin id has no start-moment to read these back from. Optional for back-compat
+     * with moment-founded saves (fromSave falls back to the moment).
+     */
+    era?: string;
+    year?: number;
+    archetype?:
+      | "economic"
+      | "political"
+      | "technological"
+      | "religious"
+      | "entertainment"
+      | "athletic";
+    deepHistory?: boolean;
+    /** The founding CALLING id (CP-2) — a durable generational lens; optional. */
+    calling?: string;
+    /**
+     * The progenitor's gender (CP-3) — drives the onomastic name pool, pronouns,
+     * and (with `successionMode`) who inherits. Defaults to the moment's
+     * progenitorSex when the player doesn't override at founding.
+     */
+    gender?: "male" | "female";
+    /**
+     * SUCCESSION MODE (CP-3): how the heir is chosen at a protagonist's death.
+     * `absolute` = eldest child regardless of sex (default); `primogeniture` =
+     * eldest son, then daughters; `matriarchal` = eldest daughter, then sons.
+     */
+    successionMode?: "absolute" | "primogeniture" | "matriarchal";
+    /** Epoch-0 axis stances (CP-4): per-axis chosen option id. */
+    axisChoices?: Partial<Record<"faith" | "ideology" | "sociology" | "tech", string>>;
   };
   /**
    * The LIVE family tree (FD-8) — the growing, mutable lineage of a founded run.
@@ -141,6 +174,12 @@ export interface FamilyState {
   protagonistId: string;
   /** Monotonic counter for minting deterministic member ids. */
   nextSeq: number;
+  /**
+   * The current protagonist's PARTNER member id (CP-5), if taken. A married-in
+   * in-law (no parentId) whose traits blend into the next beget. Cleared on
+   * succession so the new protagonist may take their own partner.
+   */
+  partnerId?: string;
 }
 
 /** Whether a member is alive as of `year` (single source of truth, FD-8/9/10). */
@@ -177,13 +216,17 @@ export interface RankState {
  * founded via a start-moment (a founded line overrides this with the moment's
  * year, see founding.ts). Anchored to the archetype's exemplar era so the modern
  * `origins` arc still opens correctly: economic 1946, political 1888,
- * technological 1971, religious 1918.
+ * technological 1971, religious 1918, entertainment 1946 (the spectacle/celebrity
+ * line shares the postwar media-age baseline), athletic 1946 (the prowess→fame
+ * line shares it too). CP-R-ARCH may refine these once their prologues are authored.
  */
 export const ARCHETYPE_START: Record<Archetype, number> = {
   economic: 1946,
   political: 1888,
   technological: 1971,
   religious: 1918,
+  entertainment: 1946,
+  athletic: 1946,
 };
 
 /**
@@ -198,6 +241,10 @@ const ARCHETYPE_SEED_FLAGS: Record<Archetype, string[]> = {
   political: ["kennedy_dynasty_active", "kennedy_prologue"],
   technological: ["musk_dynasty_active", "musk_prologue"],
   religious: ["religious_dynasty_active", "religious_prologue"],
+  // CP-R-ARCH: the two new power bases seed their own activation + prologue gates,
+  // in the same `*_dynasty_active` / `*_prologue` vocabulary the content gates on.
+  entertainment: ["entertainment_dynasty_active", "entertainment_prologue"],
+  athletic: ["athletic_dynasty_active", "athletic_prologue"],
 };
 
 /**

@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
-import { foundDynasty } from "../founding";
+import { fromSave, toSave } from "../../engine/save";
+import {
+  type Composition,
+  compositionFromMoment,
+  foundByComposition,
+  foundDynasty,
+} from "../founding";
 
 /**
  * FD-6.2 — the founding flow: every start-moment founds a valid run; deep-history
@@ -51,7 +57,30 @@ describe("FD-6.2 foundDynasty", () => {
       surname: "Vane",
       culture: "bavarian_german",
       place: "bavaria",
+      // Composed-origin fields (CP-R2): the era/year/archetype the moment expands to.
+      era: "origins",
+      year: 1885,
+      archetype: "economic",
+      gender: "male",
     });
+  });
+
+  it("CP-3: gender drives the progenitor name pool + is stored; succession mode is stored", () => {
+    const r = foundDynasty(content, {
+      momentId: "irish_famine_1847",
+      surname: "Vane",
+      seed: "g",
+      gender: "female",
+      successionMode: "matriarchal",
+    });
+    const irish = content.onomastics.irish_catholic;
+    // A female progenitor is named from the female pool.
+    expect(irish?.givenFemale).toContain(r.progenitorGiven);
+    expect(r.state.founding?.gender).toBe("female");
+    expect(r.state.founding?.successionMode).toBe("matriarchal");
+    // The seeded progenitor member is female.
+    const p = r.state.family?.members.find((m) => m.id === r.state.family?.protagonistId);
+    expect(p?.sex).toBe("female");
   });
 
   it("the deep-history moment starts in the caliphate era + flags deep_history_line", () => {
@@ -82,5 +111,74 @@ describe("FD-6.2 foundDynasty", () => {
     );
     // With 10-name pools and 5 seeds, expect at least 2 distinct draws.
     expect(names.size).toBeGreaterThanOrEqual(2);
+  });
+});
+
+describe("CP-R2 foundByComposition — composed origin (place × era × culture × archetype)", () => {
+  const baseComposition = (over: Partial<Composition> = {}): Composition => ({
+    place: "ireland",
+    era: "origins",
+    culture: "irish_catholic",
+    year: 1885,
+    archetype: "economic",
+    gender: "male",
+    surname: "Donnelly",
+    seed: "s",
+    ...over,
+  });
+
+  it("founds a valid run from a pure composition (no start-moment)", () => {
+    const r = foundByComposition(content, baseComposition());
+    expect(r.moment).toBeUndefined(); // pure composition, not moment-derived
+    expect(content.eras[r.state.eraIndex]?.id).toBe("origins");
+    expect(r.state.year).toBe(1885);
+    expect(r.state.birthYear).toBe(1885);
+    expect(r.state.founding?.place).toBe("ireland");
+    expect(r.state.founding?.culture).toBe("irish_catholic");
+    expect(r.state.archetype).toBe("economic");
+    // Structural founding flags are seeded, with a synthesized origin id.
+    expect(r.state.flags).toContain("founded_line");
+    expect(r.state.flags).toContain("founded:composed:ireland:origins");
+    expect(r.state.flags).toContain("place:ireland");
+    // The live family names the line itself.
+    expect(r.progenitorName.endsWith(" Donnelly")).toBe(true);
+  });
+
+  it("composes the two new archetypes (entertainment, athletic)", () => {
+    for (const archetype of ["entertainment", "athletic"] as const) {
+      const r = foundByComposition(content, baseComposition({ archetype }));
+      expect(r.state.archetype).toBe(archetype);
+      expect(r.state.flags).toContain(`archetype:${archetype}`);
+    }
+  });
+
+  it("is replay-deterministic: same composition → identical state", () => {
+    const c = baseComposition({ seed: "abc", calling: "merchant" });
+    expect(foundByComposition(content, c).state).toEqual(foundByComposition(content, c).state);
+  });
+
+  it("foundDynasty delegates to the same composition a moment expands to", () => {
+    const m = content.startMoments[0];
+    if (!m) throw new Error("no start-moment");
+    const viaMoment = foundDynasty(content, { momentId: m.id, surname: "Vane", seed: "s" });
+    const comp = compositionFromMoment(m, { momentId: m.id, surname: "Vane", seed: "s" });
+    const viaComposition = foundByComposition(content, comp);
+    // Same founding state; foundDynasty just additionally attaches the moment.
+    expect(viaComposition.state).toEqual(viaMoment.state);
+    expect(viaMoment.moment?.id).toBe(m.id);
+  });
+
+  it("a pure-composition run survives a save round-trip (CP-R2 replay parity)", () => {
+    // A composed origin whose momentId is a synthesized `composed:…` id (no
+    // start-moment). toSave must carry the composition so fromSave reconstructs it
+    // via foundByComposition — not foundDynasty, which would fail to find the moment.
+    const c = baseComposition({ archetype: "entertainment", calling: "courtier", seed: "rt" });
+    const founded = foundByComposition(content, c).state;
+    const restored = fromSave(content, toSave(founded));
+    expect(restored.founding?.momentId).toBe("composed:ireland:origins");
+    expect(restored.founding?.place).toBe("ireland");
+    expect(restored.founding?.era).toBe("origins");
+    expect(restored.archetype).toBe("entertainment");
+    expect(restored).toEqual(founded);
   });
 });

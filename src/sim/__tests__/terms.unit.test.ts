@@ -1,93 +1,108 @@
 import { describe, expect, it } from "vitest";
-import boyhoodJson from "../../data/eras/boyhood.json";
-import originsJson from "../../data/eras/origins.json";
+import originsJson from "../../data/eras/new-york/1885-1946-origins/events.json";
+import boyhoodJson from "../../data/eras/new-york/1946-1964-boyhood/events.json";
 import termsJson from "../../data/terms.json";
 import { meetsRequires } from "../events";
 import { EraEventsSchema, TermsFileSchema } from "../schema";
-import { applyTerms, isNamedHeir, resolveFullName, resolveGivenName, resolveTerm } from "../terms";
+import type { GameState } from "../state";
+import { applyTerms, runTerms } from "../terms";
 
 const terms = TermsFileSchema.parse(termsJson).terms;
 
-describe("branch-aware terms (alt-history AH1)", () => {
-  it("the real terms.json validates and carries the example titles", () => {
+/** A founded-line state stub: the founded line names the protagonist (CP-R1). */
+function foundedState(given: string, surname: string): GameState {
+  return {
+    family: {
+      protagonistId: "m0",
+      nextSeq: 1,
+      members: [
+        {
+          id: "m0",
+          given,
+          surname,
+          sex: "male",
+          born: 1900,
+          generation: 0,
+          traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
+          isProtagonist: true,
+        },
+      ],
+    },
+    // biome-ignore lint/suspicious/noExplicitAny: minimal stub for term resolution
+  } as any;
+}
+/** An un-founded state stub (no family) — identity tokens stay unresolved. */
+// biome-ignore lint/suspicious/noExplicitAny: minimal stub for term resolution
+const unfoundedState = {} as any as GameState;
+
+describe("branch-aware institutional terms (alt-history AH1)", () => {
+  it("the real terms.json validates and carries the institutional titles", () => {
     expect(terms.head_of_state?.default).toBe("President");
     expect(terms.head_of_state?.nazi).toBe("Reichskommissar");
   });
 
-  it("resolveTerm falls back to default for branches without an override", () => {
-    const t = { default: "President", nazi: "Reichskommissar" };
-    expect(resolveTerm(t, "default")).toBe("President");
-    expect(resolveTerm(t, "nazi")).toBe("Reichskommissar");
-    expect(resolveTerm(t, "westcoast")).toBe("President"); // no override → default
+  it("runTerms resolves institutional tokens per branch", () => {
+    const def = runTerms(terms, "default", unfoundedState);
+    expect(def.head_of_state).toBe("President");
+    expect(def.the_nation).toBe("the United States");
+    const nazi = runTerms(terms, "nazi", unfoundedState);
+    expect(nazi.head_of_state).toBe("Reichskommissar");
+    expect(nazi.the_nation).toBe("the American Reichskommissariat");
   });
 
-  it("applyTerms interpolates {tokens} per branch", () => {
+  it("applyTerms interpolates {tokens} from a resolved table", () => {
     const text = "The {head_of_state} addressed {the_nation}.";
-    expect(applyTerms(text, terms, "default")).toBe("The President addressed the United States.");
-    expect(applyTerms(text, terms, "nazi")).toBe(
+    expect(applyTerms(text, runTerms(terms, "default", unfoundedState))).toBe(
+      "The President addressed the United States.",
+    );
+    expect(applyTerms(text, runTerms(terms, "nazi", unfoundedState))).toBe(
       "The Reichskommissar addressed the American Reichskommissariat.",
     );
   });
 
   it("leaves unknown tokens and plain text untouched", () => {
-    expect(applyTerms("Hello {name}, no terms here.", terms, "nazi")).toBe(
-      "Hello {name}, no terms here.",
-    );
-    expect(applyTerms("plain", terms, "default")).toBe("plain");
+    const t = runTerms(terms, "nazi", unfoundedState);
+    expect(applyTerms("Hello {name}, no terms here.", t)).toBe("Hello {name}, no terms here.");
+    expect(applyTerms("plain", t)).toBe("plain");
   });
 
   it("honors {{ }} as literal-brace escapes", () => {
-    expect(applyTerms("a {{literal}} {head_of_state}", terms, "default")).toBe(
-      "a {literal} President",
-    );
-  });
-
-  it("resolves the branch-aware surname/patronymic (AH8): Trump default, Drumpf on the German/Nazi branch", () => {
-    expect(terms.surname?.default).toBe("Trump");
-    expect(terms.surname?.nazi).toBe("Drumpf");
-    expect(applyTerms("The {family_name} built it.", terms, "default")).toBe(
-      "The Trumps built it.",
-    );
-    expect(applyTerms("The {family_name} built it.", terms, "nazi")).toBe("The Drumpfs built it.");
-    expect(applyTerms("{surname} of New York", terms, "default")).toBe("Trump of New York");
-    expect(applyTerms("{surname} of the Reich", terms, "nazi")).toBe("Drumpf of the Reich");
-    // A branch without a surname override keeps the default (the family anglicized).
-    expect(applyTerms("{surname}", terms, "media")).toBe("Trump");
-  });
-
-  it("resolves the branch-aware GIVEN name (AH8c): Donald default, Friedrich on proud-tradition German branches", () => {
-    expect(applyTerms("{given_name}", terms, "default")).toBe("Donald");
-    expect(applyTerms("{full_name}", terms, "default")).toBe("Donald Trump");
-    // Military/religious German dynasties carry the patriarch's name.
-    expect(applyTerms("{given_name}", terms, "nazi")).toBe("Friedrich");
-    expect(applyTerms("{full_name}", terms, "nazi")).toBe("Friedrich Drumpf III");
-    expect(applyTerms("{given_name}", terms, "theocracy")).toBe("Friedrich");
-    // The media/West-Coast branches keep Donald (no proud-name tradition imposed).
-    expect(applyTerms("{given_name}", terms, "media")).toBe("Donald");
+    expect(
+      applyTerms("a {{literal}} {head_of_state}", runTerms(terms, "default", unfoundedState)),
+    ).toBe("a {literal} President");
   });
 });
 
-describe("birth-order given-name resolution (AH8d / de-4a)", () => {
-  it("a firstborn/only-child heir carries the patriarch's name even on a Donald branch", () => {
-    // Default branch's given name is Donald, but a firstborn heir is named for the patriarch.
-    expect(resolveGivenName(terms, "default", [])).toBe("Donald");
-    expect(resolveGivenName(terms, "default", ["fourth_child"])).toBe("Donald");
-    expect(resolveGivenName(terms, "default", ["firstborn_heir"])).toBe("Friedrich");
-    expect(resolveGivenName(terms, "default", ["only_child"])).toBe("Friedrich");
+describe("founded-line identity tokens (CP-R1)", () => {
+  it("given_name/surname/full_name/family_name resolve from the founded line, not a preset", () => {
+    // An Irish-Catholic founded line — the player's OWN name, not Donald/Trump.
+    const t = runTerms(terms, "default", foundedState("Patrick", "Donnelly"));
+    expect(applyTerms("{given_name}", t)).toBe("Patrick");
+    expect(applyTerms("{surname}", t)).toBe("Donnelly");
+    expect(applyTerms("{full_name}", t)).toBe("Patrick Donnelly");
+    expect(applyTerms("The {family_name} built it.", t)).toBe("The Donnellys built it.");
   });
 
-  it("full name gains the dynastic suffix only for a named heir", () => {
-    expect(resolveFullName(terms, "default", ["fourth_child"])).toBe("Donald Trump");
-    expect(resolveFullName(terms, "default", ["firstborn_heir"])).toBe("Friedrich Trump III");
-    // On the Nazi branch the surname is Drumpf; a firstborn is Friedrich Drumpf III.
-    expect(resolveFullName(terms, "nazi", ["firstborn_heir"])).toBe("Friedrich Drumpf III");
+  it("a different founded origin yields a different name from the SAME content string", () => {
+    const abbasid = runTerms(terms, "default", foundedState("Harun", "al-Rashid"));
+    expect(applyTerms("{full_name} is born.", abbasid)).toBe("Harun al-Rashid is born.");
+    const bavarian = runTerms(terms, "default", foundedState("Friedrich", "Eberhardt"));
+    expect(applyTerms("{full_name} is born.", bavarian)).toBe("Friedrich Eberhardt is born.");
   });
 
-  it("isNamedHeir reflects firstborn/only-child, not fourth-child", () => {
-    expect(isNamedHeir(["firstborn_heir"])).toBe(true);
-    expect(isNamedHeir(["only_child"])).toBe(true);
-    expect(isNamedHeir(["fourth_child"])).toBe(false);
-    expect(isNamedHeir([])).toBe(false);
+  it("the founded identity overrides the branch term even on an alt-history branch", () => {
+    // On the Nazi branch institutional tokens shift, but the LINE keeps its own name.
+    const t = runTerms(terms, "nazi", foundedState("Síle", "Donnelly"));
+    expect(applyTerms("{surname}", t)).toBe("Donnelly"); // NOT "Drumpf"
+    expect(applyTerms("{head_of_state}", t)).toBe("Reichskommissar"); // institutional still shifts
+  });
+
+  it("an un-founded state leaves identity tokens unresolved (no literal fallback)", () => {
+    // No family → no override; terms.json no longer carries literal Donald/Trump defaults,
+    // so the identity tokens are left verbatim rather than rendering a preset name.
+    const t = runTerms(terms, "default", unfoundedState);
+    expect(applyTerms("{given_name}", t)).toBe("{given_name}");
+    expect(applyTerms("{surname}", t)).toBe("{surname}");
   });
 });
 
@@ -290,11 +305,11 @@ describe("Musk prologue structure — de-5b", () => {
     }
   });
 
-  it("ev_donald_is_born blocks on musk_dynasty_active (Trump/Musk birth events mutually exclusive)", () => {
-    // ev_donald_is_born has no required flags — it fires on any run without notFlags hits.
+  it("ev_protagonist_is_born blocks on musk_dynasty_active (Trump/Musk birth events mutually exclusive)", () => {
+    // ev_protagonist_is_born has no required flags — it fires on any run without notFlags hits.
     // On a Musk run, none of its original notFlags (line_failed, never_emigrated, etc.) are set,
     // so without this guard it would fire alongside ev_elon_musk_born. Both must not fire.
-    const ev = eventById("ev_donald_is_born");
+    const ev = eventById("ev_protagonist_is_born");
     expect(ev.requires?.notFlags ?? []).toContain("musk_dynasty_active");
   });
 
@@ -396,8 +411,8 @@ describe("Kennedy prologue structure — de-5c", () => {
     }
   });
 
-  it("ev_donald_is_born also blocks kennedy_dynasty_active (all three dynasties mutually exclusive)", () => {
-    const ev = eventById("ev_donald_is_born");
+  it("ev_protagonist_is_born also blocks kennedy_dynasty_active (all three dynasties mutually exclusive)", () => {
+    const ev = eventById("ev_protagonist_is_born");
     expect(ev.requires?.notFlags ?? []).toContain("kennedy_dynasty_active");
   });
 

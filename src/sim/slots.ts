@@ -17,13 +17,27 @@ import type { Slot, SlotResolution } from "./schema";
  * founded line carries one of the four archetypes set by its start-moment.
  */
 
-/** The four power-archetypes — the run's dynastic identity axis. */
-export type Archetype = "economic" | "political" | "technological" | "religious";
+/**
+ * The power-archetypes — the run's dynastic identity axis (CP-R-ARCH). Each is a
+ * distinct POWER BASE a founded line is built on: wealth (economic), office
+ * (political), invention (technological), faith (religious), fame/spectacle
+ * (entertainment), or physical prowess→celebrity (athletic). The calling is the
+ * generational lens layered on top; the archetype is the foundation.
+ */
+export type Archetype =
+  | "economic"
+  | "political"
+  | "technological"
+  | "religious"
+  | "entertainment"
+  | "athletic";
 export const ARCHETYPES: readonly Archetype[] = [
   "economic",
   "political",
   "technological",
   "religious",
+  "entertainment",
+  "athletic",
 ];
 
 /** Resolve one slot to the concrete event for this branch + archetype. */

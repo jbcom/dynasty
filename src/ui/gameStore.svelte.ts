@@ -51,4 +51,44 @@ export class GameStore {
   get finished(): boolean {
     return this.game.finished;
   }
+
+  // ---- DEV HARNESS OVERLAY (CP-R7) — gated to dev builds by the caller ----
+
+  /**
+   * Fast-forward: auto-resolve up to `n` beats by picking the first eligible choice
+   * of the current event each step. Stops at the run's end. Dev-only — lets a
+   * reviewer skip generations to inspect the late-game timeline quickly.
+   */
+  async devFastForward(n: number): Promise<void> {
+    for (let i = 0; i < n && !this.game.finished; i++) {
+      const ev = this.view.currentEvent;
+      const choice = ev?.choices[0];
+      if (!choice) break;
+      // eslint-disable-next-line no-await-in-loop -- sequential by design
+      await this.choose(choice.id);
+    }
+  }
+
+  /**
+   * Dump the run's bespoke timeline (seed + history + the rendered beats so far) as
+   * a JSON string a reviewer can save. Pure read of the current state.
+   */
+  devDumpTimeline(): string {
+    const s = this.view.state;
+    return JSON.stringify(
+      {
+        seed: s.seed,
+        archetype: s.archetype,
+        founding: s.founding,
+        year: s.year,
+        age: s.age,
+        flags: [...s.flags].sort(),
+        meters: s.meters,
+        history: s.history,
+        end: s.end,
+      },
+      null,
+      2,
+    );
+  }
 }

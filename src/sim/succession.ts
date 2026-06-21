@@ -15,20 +15,44 @@ export interface SuccessionResult {
   heirId: string | null;
 }
 
+/** How the heir is chosen at a protagonist's death (CP-3). */
+export type SuccessionMode = "absolute" | "primogeniture" | "matriarchal";
+
+/** Sex preferred FIRST under a succession mode (absolute prefers neither). */
+function preferredSex(mode: SuccessionMode): "male" | "female" | null {
+  if (mode === "primogeniture") return "male";
+  if (mode === "matriarchal") return "female";
+  return null;
+}
+
 /**
- * Resolve succession after the protagonist's death in `year`. Picks the eldest
- * living child (lowest member seq = earliest born) unless `namedHeirId` points to
- * a living child. Returns the family with the heir promoted to protagonist, or
- * heirId null when no heir survives (line extinct).
+ * Resolve succession after the protagonist's death in `year`. Picks the heir per
+ * the succession `mode`: `absolute` = eldest living child regardless of sex;
+ * `primogeniture` = eldest son then daughters; `matriarchal` = eldest daughter
+ * then sons. A `namedHeirId` (estate planning) overrides when that heir is living.
+ * Returns the family with the heir promoted, or heirId null (line extinct).
  */
-export function succeed(family: FamilyState, year: number, namedHeirId?: string): SuccessionResult {
+export function succeed(
+  family: FamilyState,
+  year: number,
+  namedHeirId?: string,
+  mode: SuccessionMode = "absolute",
+): SuccessionResult {
   const lateId = family.protagonistId;
   // An heir must be ALREADY BORN by `year` and still alive — a child begotten in a
   // later in-world year (the beget stagger can place a birth past the death year)
   // is not yet a person and cannot inherit.
-  const heirs = childrenOf(family, lateId)
-    .filter((c) => c.born <= year && isMemberAlive(c, year))
-    .sort((a, b) => seq(a) - seq(b));
+  const living = childrenOf(family, lateId).filter((c) => c.born <= year && isMemberAlive(c, year));
+  // Order by birth (seq) within each sex, then by the mode's sex preference.
+  const pref = preferredSex(mode);
+  const heirs = [...living].sort((a, b) => {
+    if (pref) {
+      const aPref = a.sex === pref ? 0 : 1;
+      const bPref = b.sex === pref ? 0 : 1;
+      if (aPref !== bPref) return aPref - bPref;
+    }
+    return seq(a) - seq(b);
+  });
 
   let heir: LiveMember | undefined;
   if (namedHeirId) {
@@ -43,7 +67,13 @@ export function succeed(family: FamilyState, year: number, namedHeirId?: string)
     ...m,
     isProtagonist: m.id === heirId,
   }));
-  return { family: { ...family, members, protagonistId: heirId }, heirId };
+  // The heir starts unpartnered — they may take their own partner (CP-5). The late
+  // protagonist's partnerId is cleared so the next generation's begets don't blend
+  // a dead-and-gone in-law.
+  return {
+    family: { ...family, members, protagonistId: heirId, partnerId: undefined },
+    heirId,
+  };
 }
 
 /** The minted-order sequence embedded in a member id (`m12` → 12). */

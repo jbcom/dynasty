@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import originsJson from "../../data/eras/origins.json";
+import originsJson from "../../data/eras/new-york/1885-1946-origins/events.json";
 import { branchOf } from "../branch";
 
 const withFlags = (...flags: string[]) => ({ flags });

@@ -9,13 +9,13 @@ import { advanceTimeline } from "../timeline";
 
 // Use the REAL authored era files so events satisfy the full schema and the
 // science-ladder entryRequires gates are present.
-const eraModules = import.meta.glob("../../data/eras/*.json", { eager: true }) as Record<
+const eraModules = import.meta.glob("../../data/eras/**/*.json", { eager: true }) as Record<
   string,
-  { default: unknown }
+  { default: { era?: string } }
 >;
 const eraEvents = Object.entries(eraModules)
   .filter(([p]) => !p.endsWith("index.json"))
-  .map(([p, m]) => ({ era: p.split("/").pop()?.replace(".json", "") ?? "", data: m.default }));
+  .map(([, m]) => ({ era: m.default.era ?? "", data: m.default }));
 
 const raw: RawContent = {
   meters: metersJson,

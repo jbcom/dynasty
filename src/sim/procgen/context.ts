@@ -24,6 +24,32 @@ function treeForArchetype(content: Content, archetype: string): FamilyTree | und
   return content.familyTrees.find((t) => t.archetype === archetype);
 }
 
+/**
+ * Names from the run's LIVE family tree (CP-R1), if founded: the protagonist as
+ * `member`, a sibling (same parent) or the partner as `rival`, and the founded
+ * surname. Returns undefined for a not-yet-founded state so the caller falls back
+ * to the archetype reference spine. Deterministic: members are in birth order.
+ */
+function liveContextFor(
+  state: GameState,
+): { member: string; rival: string; surname: string } | undefined {
+  const fam = state.family;
+  if (!fam) return undefined;
+  const me = fam.members.find((m) => m.id === fam.protagonistId);
+  if (!me) return undefined;
+  const member = `${me.given} ${me.surname}`;
+  // A rival is the protagonist's sibling (same parent, different member); failing
+  // that the married-in partner; failing that the protagonist themself.
+  const sibling = fam.members.find(
+    (m) => m.id !== me.id && m.parentId !== undefined && m.parentId === me.parentId,
+  );
+  const partner = fam.partnerId ? fam.members.find((m) => m.id === fam.partnerId) : undefined;
+  const rivalMember = sibling ?? partner;
+  const rival = rivalMember ? `${rivalMember.given} ${rivalMember.surname}` : member;
+  const surname = state.founding?.surname ?? me.surname;
+  return { member, rival, surname };
+}
+
 /** A per-archetype default place label until the world-stacks (FD-7) supply it. */
 const PLACE_FALLBACK: Record<string, string> = {
   economic: "New York",
@@ -53,19 +79,26 @@ export function buildExpandContext(
   era: Era,
   rng: Rng,
 ): ExpandContext {
-  // The archetype's reference spine (FD-3.5: trees are keyed by archetype). A
-  // founded line's OWN tree (FD-8) will supersede this; until then the archetype
-  // spine seeds member/rival names and the founding metadata supplies the surname.
-  const tree = treeForArchetype(content, state.archetype);
-  const members = tree?.members ?? [];
-  const founder = members.find((m) => m.role === "founder-patriarch");
-  const heir = members.find((m) => m.role === "heir-successor");
-  const rivalMember = members.find((m) => m.role === "rival-sibling");
-
-  const member = (heir ?? founder)?.name ?? "the heir";
-  const rival = rivalMember?.name ?? member;
-  // A founded line uses its chosen surname; otherwise the spine's founder surname.
-  const surname = state.founding?.surname ?? (founder ? surnameOf(founder) : "the family");
+  // A founded run's LIVE family tree (FD-8) is the single source of names — the
+  // protagonist is `member`, a living sibling (or the partner) is `rival`, and the
+  // surname is the founded line's own (CP-R1: no literal-preset spine for founded
+  // runs). Only a not-yet-founded state falls back to the archetype reference spine.
+  const live = liveContextFor(state);
+  let member: string;
+  let rival: string;
+  let surname: string;
+  if (live) {
+    ({ member, rival, surname } = live);
+  } else {
+    const tree = treeForArchetype(content, state.archetype);
+    const members = tree?.members ?? [];
+    const founder = members.find((m) => m.role === "founder-patriarch");
+    const heir = members.find((m) => m.role === "heir-successor");
+    const rivalMember = members.find((m) => m.role === "rival-sibling");
+    member = (heir ?? founder)?.name ?? "the heir";
+    rival = rivalMember?.name ?? member;
+    surname = state.founding?.surname ?? (founder ? surnameOf(founder) : "the family");
+  }
 
   // Year: a seeded draw within the era window, floored at the run's last event
   // year so procedural events never travel back in time.

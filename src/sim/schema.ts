@@ -117,6 +117,19 @@ export const ChoiceSchema = z.object({
    * on a run without a founded family. Absent = 0.
    */
   begets: z.number().int().min(0).optional(),
+  /**
+   * TAKE PARTNER (CP-5): if true, the protagonist takes a partner (a married-in
+   * in-law whose traits blend into subsequent begets). No-op without a founded
+   * family or if a partner already exists. The Epoch-0 "find a partner" beat.
+   */
+  takesPartner: z.boolean().optional(),
+  /**
+   * SET CALLING (CP-R6): a diegetic Epoch-0 calling beat — this choice sets the
+   * founded line's generational CALLING (a calling id), so the calling is LIVED
+   * (chosen in the birth/childhood) rather than configured up front. No-op without
+   * a founded line. The calling then drifts every future beget's traits (CP-2).
+   */
+  setsCalling: z.string().optional(),
 });
 export type Choice = z.infer<typeof ChoiceSchema>;
 
@@ -144,6 +157,17 @@ export const EventSchema = z.object({
   historicity: z.enum(["real", "extrapolated", "personal"]).optional(),
   /** The place this event belongs to (FD-2/FD-5 world stacks); absent = anywhere. */
   place: z.string().optional(),
+  /**
+   * The power ARCHETYPE(s) this event serves (CP-R-ARCH). The event pool includes
+   * it only when the run's archetype is in this list. EMPTY/absent = archetype-
+   * AGNOSTIC: the event fires for any founded line (the common case — most life,
+   * world, and family beats are not power-base-specific). A casino deal is
+   * `["economic"]`; a reality-TV beat `["entertainment"]`; a tower deal usable by
+   * either is `["economic","entertainment"]` — tagged for each, no duplication.
+   * Optional: absent = agnostic (same as empty), so code-built events + fixtures
+   * need not specify it. Parsed authored content normalizes absent → [].
+   */
+  archetypes: z.array(z.string()).optional(),
   tags: z.array(z.string()).default([]),
   requires: RequiresSchema,
   weight: z.number().min(0).default(10),
@@ -218,6 +242,13 @@ export const WorldEventSchema = z.object({
   setFlags: z.array(z.string()).default([]),
   /** Optional gate (on the shared flag space) for branch selection. */
   requires: RequiresSchema.optional(),
+  /**
+   * The alternate-history BRANCH this event belongs to (CP-R-ARCH-2). After the
+   * branch-timeline collapse, one file per scope holds all world-states; each
+   * non-default event carries its branch so selection includes it only when the
+   * run's branch matches. Absent/"default" = our-history, shown on every branch.
+   */
+  branch: z.string().optional(),
 });
 export type WorldEvent = z.infer<typeof WorldEventSchema>;
 
@@ -235,11 +266,8 @@ export const WorldTimelineSchema = z.object({
     "mores",
     "religion",
     "science",
-    // Character-timeline scopes — a parallel PERSON's arc (Musk, Kennedy/RFK Jr)
-    // whose events broadcast flags that thread through / overwrite the backdrops
-    // (e.g. the role-flip) via the linking protocol.
-    "musk",
-    "kennedy",
+    // (CP-R-ARCH-3: the former literal-person scopes `musk` / `kennedy` were folded
+    // into westcoast / eastcoast as rival-house backdrop events, tags rival-house:*.)
   ]),
   label: z.string().min(1),
   /**
@@ -584,8 +612,15 @@ export type FamilyMember = z.infer<typeof FamilyMemberSchema>;
 export const FamilyTreeSchema = z.object({
   /** The playable dynasty this tree backs (matches DynastyKey). */
   dynasty: z.string().min(1),
-  /** The power archetype (economic | political | technological | religious). */
-  archetype: z.enum(["economic", "political", "technological", "religious"]),
+  /** The power archetype the tree backs (CP-R-ARCH: 6 power bases). */
+  archetype: z.enum([
+    "economic",
+    "political",
+    "technological",
+    "religious",
+    "entertainment",
+    "athletic",
+  ]),
   /** The primary real-family spine label (trump | kennedy | musk | graham). */
   spine: z.string().min(1),
   members: z.array(FamilyMemberSchema).min(1),
@@ -638,6 +673,35 @@ export const TropesFileSchema = z.object({
   tropes: z.array(TropeSchema).default([]),
 });
 export type TropesFile = z.infer<typeof TropesFileSchema>;
+
+/* ------------------------------------------------------------------------- *
+ * CALLINGS (CP-2) — a founding CALLING is a durable generational LENS layered on
+ * the archetype. It biases the family's inherited traits over generations
+ * (traitDrift applied each beget) AND weights which tropes' events surface
+ * (tropeWeights multiply effectiveWeight for matching trope-tagged events). A
+ * line of Scholars drifts cunning/piety up and surfaces prophet/centrist-to-zealot
+ * beats; a line of Soldiers drifts vigor up and surfaces conqueror/martyr beats.
+ * Pure data; the resolver lives in sim/callings.ts. See design spec §CP-2.
+ * ------------------------------------------------------------------------- */
+export const CallingTrait = z.enum(["ambition", "cunning", "vigor", "piety"]);
+export type CallingTraitKey = z.infer<typeof CallingTrait>;
+
+export const CallingSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(1),
+  /** One-line description of the calling's character. */
+  summary: z.string().min(1),
+  /** Per-beget drift added to a child's inherited traits (small, e.g. +3). */
+  traitDrift: z.partialRecord(CallingTrait, z.number()).default({}),
+  /** Multiplier on the selection weight of events carrying each trope id. */
+  tropeWeights: z.record(z.string(), z.number()).default({}),
+});
+export type Calling = z.infer<typeof CallingSchema>;
+
+export const CallingsFileSchema = z.object({
+  callings: z.array(CallingSchema).default([]),
+});
+export type CallingsFile = z.infer<typeof CallingsFileSchema>;
 
 /* ------------------------------------------------------------------------- *
  * PROCEDURAL EVENT TEMPLATES (FD-4) — the §1d procedural pool. An authored
@@ -767,8 +831,15 @@ export const StartMomentSchema = z.object({
   place: z.string().min(1),
   /** Culture id — must resolve in onomastics.json (given-name lane + conventions). */
   culture: z.string().min(1),
-  /** Which power archetype this moment leans toward. */
-  archetype: z.enum(["economic", "political", "technological", "religious"]),
+  /** Which power archetype this moment leans toward (CP-R-ARCH: 6 power bases). */
+  archetype: z.enum([
+    "economic",
+    "political",
+    "technological",
+    "religious",
+    "entertainment",
+    "athletic",
+  ]),
   /** Sex of the seeded progenitor (drives the onomastic given-name pool). */
   progenitorSex: z.enum(["male", "female"]).default("male"),
   /** Era id the founded run begins in (matches eras/index.json). */
@@ -817,6 +888,20 @@ export const WorldStackSchema = z.object({
   perils: z.array(z.string().min(1)).min(1),
   /** A display place name for {place} substitution (e.g. "Ireland", "Baghdad"). */
   placeLabel: z.string().min(1),
+  /**
+   * AXIS INTENSITY (CP-4): how CHARGED each thematic axis is at this place×era,
+   * 0..1. Scales the impact of the founder's Epoch-0 axis choices — adopting or
+   * rejecting a faith lands hard where faith intensity is high (762 Baghdad, 1847
+   * Catholic Ireland) and lightly on a secular frontier. Absent axes default 0.5.
+   */
+  axisIntensity: z
+    .object({
+      faith: z.number().min(0).max(1).optional(),
+      ideology: z.number().min(0).max(1).optional(),
+      sociology: z.number().min(0).max(1).optional(),
+      tech: z.number().min(0).max(1).optional(),
+    })
+    .default({}),
 });
 export type WorldStack = z.infer<typeof WorldStackSchema>;
 
@@ -824,6 +909,74 @@ export const WorldStacksFileSchema = z.object({
   stacks: z.array(WorldStackSchema).default([]),
 });
 export type WorldStacksFile = z.infer<typeof WorldStacksFileSchema>;
+
+/* ------------------------------------------------------------------------- *
+ * PLACES CATALOG (CP-R3). The cross-reference between the era TREE, the WORLD-
+ * STACKS, and ONOMASTICS: each canonical place carries the diegetic-birth sensory
+ * cue, a default culture, the era-tree dir holding its life-arc content, and the
+ * era ids a founding here may begin in. The diegetic birth (CP-R4) maps a chosen
+ * sensory cue → place; foundByComposition composes (place × era × culture).
+ * ------------------------------------------------------------------------- */
+export const PlaceSchema = z.object({
+  /** Canonical place id (matches a world-stack `place` + the `place:<id>` flag). */
+  id: z.string().min(1),
+  /** Display name (e.g. "Baghdad", "the West Coast"). */
+  label: z.string().min(1),
+  /** The diegetic birth's emergence hint that resolves to this place (CP-R4). */
+  sensoryCue: z.string().min(1),
+  /** Onomastics culture id a founding here defaults to (may diverge). */
+  defaultCulture: z.string().min(1),
+  /** Era-tree place dir holding this place's life-arc content (new-york | baghdad | …). */
+  eraContentDir: z.string().min(1),
+  /** Era ids a founding here may begin in (cross-ref to eras/index.json). */
+  validEras: z.array(z.string().min(1)).min(1),
+});
+export type Place = z.infer<typeof PlaceSchema>;
+
+export const PlacesFileSchema = z.object({
+  places: z.array(PlaceSchema).default([]),
+});
+export type PlacesFile = z.infer<typeof PlacesFileSchema>;
+
+/* ------------------------------------------------------------------------- *
+ * EPOCH-0 AXIS CHOICES (CP-4). At founding, the player sets the line's stance on
+ * each thematic axis — FAITH (adopt/reject/convert), IDEOLOGY, SOCIOLOGY, TECH —
+ * and the consequence is PLACE-AND-TIME-SCALED: each option's meter/personality
+ * impact is multiplied by the founding place×era stack's intensity on that axis,
+ * so rejecting the Church in 1847 Catholic Ireland lands far harder than on a
+ * secular frontier. Each option also sets durable flags that ripple for
+ * generations. Pure data; the resolver lives in sim/axes.ts.
+ * ------------------------------------------------------------------------- */
+export const AxisKindSchema = z.enum(["faith", "ideology", "sociology", "tech"]);
+export type AxisKind = z.infer<typeof AxisKindSchema>;
+
+export const AxisOptionSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(1),
+  /** Prose shown for this stance (may carry `{slot}`/`{term}` tokens). */
+  blurb: z.string().min(1),
+  /** Durable flags this stance sets (ripple through the run). */
+  setFlags: z.array(z.string()).default([]),
+  /** Base meter deltas, SCALED by the place×era axis intensity at resolve time. */
+  effects: MeterDeltaSchema.default({}),
+  /** Base personality deltas, likewise intensity-scaled. */
+  personality: PersonalityDeltaSchema.default({}),
+});
+export type AxisOption = z.infer<typeof AxisOptionSchema>;
+
+export const AxisSchema = z.object({
+  axis: AxisKindSchema,
+  label: z.string().min(1),
+  /** The question posed at founding, e.g. "What of the faith?" */
+  prompt: z.string().min(1),
+  options: z.array(AxisOptionSchema).min(2),
+});
+export type Axis = z.infer<typeof AxisSchema>;
+
+export const AxesFileSchema = z.object({
+  axes: z.array(AxisSchema).default([]),
+});
+export type AxesFile = z.infer<typeof AxesFileSchema>;
 
 /** Validate arbitrary JSON against a schema, throwing a readable error on failure. */
 export function parseContent<T>(schema: z.ZodType<T>, data: unknown, label: string): T {

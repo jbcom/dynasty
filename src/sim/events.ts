@@ -1,4 +1,5 @@
 import { branchOf } from "./branch";
+import { callingById, callingWeight } from "./callings";
 import type { Content } from "./content";
 import type { PersonalityAxis } from "./personality";
 import { materializeProcedural } from "./procgen";
@@ -97,7 +98,10 @@ export function eligibleEvents(content: Content, state: GameState, rng?: Rng): G
   if (!era) return [];
   const pool = content.eventsByEra.get(era.id) ?? [];
   const protoBase = pool.filter(
-    (ev) => !alreadyConsumed(state, ev) && meetsRequires(state, ev.requires),
+    (ev) =>
+      !alreadyConsumed(state, ev) &&
+      !ownedByOtherArchetype(state, ev) &&
+      meetsRequires(state, ev.requires),
   );
   // World-events are AMBIENT PUNCTUATION: only the few most-TIMELY ones (near the
   // run's current year) are eligible, not every backdrop event in the era. This
@@ -134,13 +138,20 @@ export function eligibleEvents(content: Content, state: GameState, rng?: Rng): G
 }
 
 /**
- * NO-LEAK GATE (user invariant — a founded line stays its own line): a world-event
- * tagged `archetype:<id>` belongs to that archetype's private arc and is excluded
- * when a DIFFERENT archetype is active. The former literal `dynasty:<id>` tags are
- * mapped onto archetypes at projection time (FD-3.5). Untagged (shared backdrop)
- * events pass for all archetypes.
+ * NO-LEAK GATE (user invariant — a founded line stays its own line). An event is
+ * excluded when it is ARCHETYPE-LOCKED to a power base other than the run's. Two
+ * sources, both honored (CP-R-ARCH):
+ *   1. The first-class `archetypes: [...]` field — the event serves only those
+ *      power bases. Empty/absent = AGNOSTIC, passes for every archetype.
+ *   2. The legacy `archetype:<id>` TAG (single owner) — kept for back-compat until
+ *      all content migrates to the field; the former literal `dynasty:<id>` tags
+ *      map onto archetypes here (FD-3.5).
+ * An event is owned-by-other when EITHER source names a set that excludes the run's
+ * archetype. Agnostic events (no field, no tag) pass for all.
  */
 function ownedByOtherArchetype(state: GameState, ev: GameEvent): boolean {
+  const list = ev.archetypes ?? [];
+  if (list.length > 0 && !list.includes(state.archetype)) return true;
   const owner = ev.tags.find((t) => t.startsWith("archetype:"))?.slice("archetype:".length);
   return owner !== undefined && owner !== state.archetype;
 }
@@ -185,6 +196,13 @@ export function effectiveWeight(content: Content, state: GameState, ev: GameEven
       const axisValue = state.personality[axis] ?? 0;
       weight *= Math.max(0, 1 + sensitivity * (axisValue / 100));
     }
+  }
+
+  // CALLING bias (CP-2): the founding calling weights events carrying its tropes,
+  // so a Scholar line surfaces prophet/reformer beats more often, layered on top
+  // of the branch + personality bias above.
+  if (state.founding?.calling) {
+    weight *= callingWeight(callingById(content.callings, state.founding.calling), ev);
   }
 
   return Math.max(0, weight);

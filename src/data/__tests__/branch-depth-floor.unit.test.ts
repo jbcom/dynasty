@@ -5,10 +5,10 @@ import { WorldTimelineSchema } from "../../sim/schema";
  * DE-3b / AH4 — NO-SHALLOWNESS depth floor for branch backdrop pools.
  *
  * Taking any alternate-history fork must open a comparably rich world, not a thin
- * stub. Each branch authors its backdrop across four scopes (usa/world/mores/
- * religion) as <scope>.<branch>.json. This test locks a minimum richness per
- * branch so a future branch can't ship as a corridor: a floor on total events
- * and on the share that are year-stamped, plus presence across multiple scopes.
+ * stub. CP-R-ARCH-2 collapsed the per-branch <scope>.<branch>.json files into one
+ * file per scope, with each event carrying a `branch` field; this test now measures
+ * depth by counting events whose effective branch matches, across scopes — so the
+ * no-shallowness floor survives the collapse.
  *
  * If this fails: a branch pool is too thin — deepen it (more backdrop events,
  * more scopes) rather than lowering the floor.
@@ -25,15 +25,19 @@ const MIN_EVENTS = 90;
 const MIN_SCOPES = 3;
 
 function poolFor(branch: string) {
-  const files = Object.entries(tlModules).filter(([p]) => p.includes(`.${branch}.json`));
   const scopes = new Set<string>();
   let events = 0;
-  for (const [, mod] of files) {
+  for (const [, mod] of Object.entries(tlModules)) {
     const tl = WorldTimelineSchema.parse((mod as { default: unknown }).default);
-    scopes.add(tl.scope);
-    events += tl.events.length;
+    // An event's effective branch is its own field, else the file's branch
+    // (back-compat for not-yet-collapsed scopes), else default.
+    const matching = tl.events.filter((e) => (e.branch ?? tl.branch ?? "default") === branch);
+    if (matching.length > 0) {
+      scopes.add(tl.scope);
+      events += matching.length;
+    }
   }
-  return { events, scopes: scopes.size, fileCount: files.length };
+  return { events, scopes: scopes.size };
 }
 
 describe("DE-3b — every branch backdrop pool clears the no-shallowness floor", () => {

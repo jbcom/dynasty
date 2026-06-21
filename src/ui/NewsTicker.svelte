@@ -36,7 +36,6 @@ const scopeLabel: Record<string, string> = {
   mores: "Society",
   religion: "Faith",
   science: "Science",
-  musk: "Musk",
 };
 </script>
 

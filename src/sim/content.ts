@@ -1,8 +1,12 @@
 import {
   type Asset,
   AssetsFileSchema,
+  AxesFileSchema,
+  type Axis,
   type ButterflyRule,
   ButterflyRulesSchema,
+  type Calling,
+  CallingsFileSchema,
   type Consequence,
   CurrenciesFileSchema,
   type Currency,
@@ -22,6 +26,8 @@ import {
   MetersFileSchema,
   type OnomasticsFile,
   OnomasticsFileSchema,
+  type Place,
+  PlacesFileSchema,
   parseContent,
   type RankLadder,
   RanksFileSchema,
@@ -72,6 +78,16 @@ export interface Content {
    */
   tropes: Trope[];
   /**
+   * Founding CALLINGS (CP-2): durable generational lenses (trait drift + trope
+   * weights) layered on the archetype. Empty by default.
+   */
+  callings: Calling[];
+  /**
+   * Epoch-0 thematic AXES (CP-4): faith/ideology/sociology/tech founding choices,
+   * each option place-and-time-scaled by the world-stack's axis intensity.
+   */
+  axes: Axis[];
+  /**
    * Procedural event templates (FD-4): skeleton events with `{slot}` tokens the
    * seeded expander materializes into concrete GameEvents when the authored pool
    * thins. Empty by default (the authored pool stands alone).
@@ -93,6 +109,8 @@ export interface Content {
    * ExpandContext (place label + perils); a migration swaps which stack applies.
    */
   worldStacks: WorldStack[];
+  /** The places catalog (CP-R3): sensory cue → place, default culture, valid eras. */
+  places: Place[];
   /**
    * World-timeline entries PROJECTED into the unified event pool (FD-2.2): the
    * dated backdrop facts as year-keyed, reactable GameEvents the player lives
@@ -104,7 +122,13 @@ export interface Content {
 export interface RawContent {
   meters: unknown;
   eraIndex: unknown;
-  eraEvents: Array<{ era: string; data: unknown }>;
+  /**
+   * Era events files. `era` is the period id (validated against the index). `place`
+   * + `period` (CP-R-ERA) come from the eras/<place>/<period>/ path when loaded from
+   * disk; they are optional so fixtures can pass bare {era, data}. A `_shared` place
+   * applies to every founding place.
+   */
+  eraEvents: Array<{ era: string; place?: string; period?: string; data: unknown }>;
   butterflyRules: unknown;
   endings: unknown;
   worldTimelines?: unknown[];
@@ -116,10 +140,13 @@ export interface RawContent {
   ranks?: unknown;
   familyTrees?: unknown;
   tropes?: unknown;
+  callings?: unknown;
+  axes?: unknown;
   templates?: unknown;
   onomastics?: unknown;
   startMoments?: unknown;
   worldStacks?: unknown;
+  places?: unknown;
 }
 
 /** Validate raw JSON into a Content bundle, cross-checking referential integrity. */
@@ -155,6 +182,23 @@ export function buildContent(raw: RawContent): Content {
   if (tropeIds.size !== tropesFile.tropes.length) {
     throw new Error("tropes.json has duplicate trope ids");
   }
+  const callingsFile = parseContent(
+    CallingsFileSchema,
+    raw.callings ?? { callings: [] },
+    "callings.json",
+  );
+  const axesFile = parseContent(AxesFileSchema, raw.axes ?? { axes: [] }, "axes.json");
+  // A calling's trope-weight keys must resolve to the catalog (same guarantee as
+  // events/templates), so a renamed/deleted trope can never leave a dangling weight.
+  if (tropeIds.size > 0) {
+    for (const c of callingsFile.callings) {
+      for (const id of Object.keys(c.tropeWeights)) {
+        if (!tropeIds.has(id)) {
+          throw new Error(`calling "${c.id}" references unknown trope "${id}"`);
+        }
+      }
+    }
+  }
   const templatesFile = parseContent(
     EventTemplatesFileSchema,
     raw.templates ?? { templates: [] },
@@ -174,6 +218,11 @@ export function buildContent(raw: RawContent): Content {
     WorldStacksFileSchema,
     raw.worldStacks ?? { stacks: [] },
     "world/stacks.json",
+  );
+  const placesFile = parseContent(
+    PlacesFileSchema,
+    raw.places ?? { places: [] },
+    "world/places.json",
   );
   // Each start-moment's culture must resolve in onomastics; cross-ref vs eras is
   // done below once eraIds is built. FD-7: its place must have a world-stack so
@@ -295,6 +344,23 @@ export function buildContent(raw: RawContent): Content {
     }
   }
 
+  // CP-R3: every place in the catalog must cross-resolve — its defaultCulture in
+  // onomastics, every validEras entry a real era, and a world-stack covering it —
+  // so no offered (place × era) composition can fail to found a valid run.
+  for (const p of placesFile.places) {
+    if (cultureIds.size > 0 && !cultureIds.has(p.defaultCulture)) {
+      throw new Error(`place "${p.id}" defaultCulture "${p.defaultCulture}" not in onomastics`);
+    }
+    if (stackPlaces.size > 0 && !stackPlaces.has(p.id)) {
+      throw new Error(`place "${p.id}" has no world-stack`);
+    }
+    for (const e of p.validEras) {
+      if (!eraIds.has(e)) {
+        throw new Error(`place "${p.id}" validEras references unknown era "${e}"`);
+      }
+    }
+  }
+
   return {
     meters: metersFile.meters,
     eras,
@@ -312,9 +378,12 @@ export function buildContent(raw: RawContent): Content {
     ranks: ranksFile.ranks,
     familyTrees: familyTreesFile.trees,
     tropes: tropesFile.tropes,
+    callings: callingsFile.callings,
+    axes: axesFile.axes,
     templates: templatesFile.templates,
     onomastics: onomasticsFile.cultures,
     startMoments: startMomentsFile.moments,
+    places: placesFile.places,
     worldStacks: worldStacksFile.stacks,
     worldEvents: projectWorldEvents(worldTimelines),
   };

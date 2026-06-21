@@ -1,10 +1,15 @@
 <!-- profile: arcade-game,mobile-android,agent-state,standard-repo v1 -->
 # dynasty
 
-A dynastic-saga life-simulator: play the rise of the Trump, Musk, or Kennedy
-house from immigrant origins to the stars. Hybrid narrative + management sim,
-JSON-config-driven, Vite + Svelte 5 + Capacitor (Android).
-**Private / stealth — keep the repo private.**
+A dynastic-saga life-simulator: FOUND your own family line — discovered through a
+diegetic, seed-dealt birth — and steer it from immigrant origins to the stars across
+the centuries. No preset families: identity is composed from PLACE × CULTURE × ERA ×
+ARCHETYPE (six power bases), with the literal lines dissolved into reusable tropes.
+Hybrid narrative + management sim, JSON-config-driven, Vite + Svelte 5 + Capacitor
+(Android). **Private / stealth — keep the repo private.**
+
+Current architecture + state: **docs/STATE.md** (canonical). The specs below are
+historical design records.
 
 ## Profiles loaded
 
@@ -22,7 +27,7 @@ JSON-config-driven, Vite + Svelte 5 + Capacitor (Android).
 - **Design spec:** `docs/superpowers/specs/2026-06-19-maga-money-moves-design.md` (original, historical)
 - **Batch plan:** `docs/plans/maga-money-moves.prq.md` (original, historical)
 
-## Architecture (see design spec §3)
+## Architecture (see docs/STATE.md for the current model)
 
 - `src/sim/**` — PURE TS deterministic state machine. No DOM, no `Math.random`,
   no `performance.now`/`Date.now`. RNG via `createRng(seed)` (seedrandom).

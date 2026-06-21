@@ -1,0 +1,2730 @@
+{
+  "era": "interstellar",
+  "events": [
+    {
+      "id": "ev_first_lightyear",
+      "era": "interstellar",
+      "year": 2161,
+      "title": "The First Light-Year",
+      "scene": "The fleet crosses the heliopause at last, and behind you the Sun shrinks to just another bright star among billions. Whether you ride a Concord-gifted warp keel or a sublight torch, the math is the same brutal truth: the galaxy is mostly distance, and distance is mostly time. You stand at the viewport, deathless and golden, the first human to truly leave home for good.",
+      "researchNote": "Establishing beat for the final era; the heliopause crossing (Voyager-style) marks genuine interstellar space, and the scene foregrounds the relativistic/FTL fork that drives every branch.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "milestone",
+        "future",
+        "trope:techno-frontier"
+      ],
+      "requires": {
+        "flags": [
+          "contact_made"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 18,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "name_the_dark",
+          "text": "Plant a beacon and name this whole frontier after yourself.",
+          "effects": {
+            "money": 60,
+            "power": 10,
+            "reputation": 6,
+            "loyalty": 9
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 5
+          },
+          "setFlags": [
+            "interstellar_age"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A monument-beacon flares to life at the edge of the system, broadcasting your name at the speed of light in every direction. The void now carries your monogram outward forever, slower than gossip but far more permanent."
+        },
+        {
+          "id": "log_for_history",
+          "text": "Open the crossing to every screen on every human world.",
+          "effects": {
+            "money": -20,
+            "power": 6,
+            "reputation": 14,
+            "loyalty": 10,
+            "health": 3
+          },
+          "personality": {
+            "outward": -10,
+            "ideology": -6
+          },
+          "setFlags": [
+            "interstellar_age",
+            "open_frontier"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Billions across three worlds watch the Sun become a star, and a species long boxed inside one system exhales as one. The frontier, you declare, belongs to all of them."
+        },
+        {
+          "id": "weaponize_the_edge",
+          "text": "Fortify the crossing. Anything coming in answers to you.",
+          "effects": {
+            "money": -80,
+            "power": 12,
+            "reputation": -4,
+            "loyalty": 7,
+            "heat": 8
+          },
+          "personality": {
+            "outward": 11,
+            "ideology": 6
+          },
+          "setFlags": [
+            "interstellar_age",
+            "fortress_frontier"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Gun platforms bloom along the heliopause like thorns on a hedge. The first human gate to the galaxy is, in your hands, a checkpoint with your face on it."
+        }
+      ]
+    },
+    {
+      "id": "ev_concord_welcome",
+      "era": "interstellar",
+      "year": 2164,
+      "title": "The Concord Extends a Hand",
+      "scene": "The benefactors who answered your peaceful beacon convene a gathering of worlds and offer humanity a provisional seat among them. They call their loose alliance of species the Concord, a community held together not by conquest but by shared starlight and slow, patient trust. They are not impressed by your gold or your immortality; they are interested only in whether you can be a good neighbor.",
+      "researchNote": "Branch (a) gateway; the Concord is the original benevolent alliance, named to avoid franchise references. Xenopolitics framed around earned trust rather than power.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "concord",
+        "alliance",
+        "world"
+      ],
+      "requires": {
+        "flags": [
+          "warp_gift"
+        ],
+        "notFlags": [
+          "alien_overlords",
+          "quisling",
+          "alien_slaves"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 20,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "join_humbly",
+          "text": "Accept the seat humbly; humanity has much to learn.",
+          "effects": {
+            "money": 80,
+            "power": 8,
+            "reputation": 15,
+            "loyalty": 12,
+            "health": 4
+          },
+          "personality": {
+            "outward": -13,
+            "ideology": -9,
+            "grandiosity": -5
+          },
+          "setFlags": [
+            "concord_member",
+            "peaceful_contact"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You take the seat with both hands and an open face, and a parliament of elder species quietly decides this young world might be worth keeping. Humanity joins the Concord not as a power, but as a promise."
+        },
+        {
+          "id": "join_as_rising_power",
+          "text": "Accept, but make humanity's strength and ambition clear.",
+          "effects": {
+            "money": 120,
+            "power": 12,
+            "reputation": 6,
+            "loyalty": 9,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "concord_member",
+            "peaceful_contact"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You sit at the Concord table the way you once sat at any negotiation: certain you are the most important figure in the room. The elder species exchange glances, amused, and let the brash newcomer stay."
+        },
+        {
+          "id": "demand_terms",
+          "text": "Negotiate hard: a full seat or no seat at all.",
+          "effects": {
+            "money": 40,
+            "power": 10,
+            "reputation": -3,
+            "loyalty": 8,
+            "heat": 7
+          },
+          "personality": {
+            "outward": 9,
+            "grandiosity": 8,
+            "ideology": 4
+          },
+          "setFlags": [
+            "concord_member",
+            "peaceful_contact"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You drive a bargain the way you drove every deal of your long life, and the Concord, charmed despite themselves, grant a probationary full seat. Humanity is in the room, on its own loud terms."
+        }
+      ]
+    },
+    {
+      "id": "ev_relativistic_colonies",
+      "era": "interstellar",
+      "year": 2178,
+      "title": "Seeding the Near Stars",
+      "scene": "With Concord guidance, humanity learns to fold its colony fleets across the light-years without fully surrendering to relativistic time-debt. Still, every world settled carries a quiet cost: the founders age years while their home worlds age decades, and families are scattered across a spacetime that does not forgive. You alone, deathless, watch the whole web grow without losing anyone to the math.",
+      "researchNote": "Hard-SF beat on relativistic colonization and time dilation as social cost; the immortal protagonist is uniquely unbothered by the temporal toll, sharpening the era's theme.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "colonization",
+        "concord",
+        "world",
+        "trope:techno-frontier"
+      ],
+      "requires": {
+        "flags": [
+          "concord_member"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "share_the_drives",
+          "text": "Distribute the drives freely so no colony is left adrift.",
+          "effects": {
+            "money": -120,
+            "power": 7,
+            "reputation": 15,
+            "loyalty": 12
+          },
+          "personality": {
+            "outward": -12,
+            "ideology": -8
+          },
+          "setFlags": [
+            "open_starways"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You hand every colony the means to stay connected across the dark, and the human web knits itself into something that feels, against all the physics, like one people. The time-debt remains, but no world faces it alone."
+        },
+        {
+          "id": "meter_the_drives",
+          "text": "License the drives. Connection across the dark has a price.",
+          "effects": {
+            "money": 280,
+            "power": 11,
+            "reputation": -6,
+            "loyalty": 6,
+            "heat": 7
+          },
+          "personality": {
+            "outward": 11,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "starways_taxed"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You install a toll on the light-years themselves, and the colonies pay through the nose to speak to their own grandchildren. You are richer than any human in history, and a little colder, too."
+        },
+        {
+          "id": "found_human_charter",
+          "text": "Bind the colonies under one charter of mutual aid.",
+          "effects": {
+            "money": -40,
+            "power": 9,
+            "reputation": 13,
+            "loyalty": 13
+          },
+          "personality": {
+            "outward": -7,
+            "ideology": -5
+          },
+          "setFlags": [
+            "human_charter"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A charter of scattered worlds, signed across decades by representatives who will never all be young at once, holds humanity together by its word. You become its first and, naturally, its eternal signatory."
+        }
+      ]
+    },
+    {
+      "id": "ev_second_species",
+      "era": "interstellar",
+      "year": 2195,
+      "title": "The Quiet Ones at Tau Ceti",
+      "scene": "Expanding through the Concord's starways, humanity meets its second sapient species: a slow, methane-breathing people who think in centuries and have never once made war. They are frightened of how fast humans move and how loudly they speak. The Concord watches to see what kind of neighbor your young, hungry species will choose to be.",
+      "researchNote": "Xenopolitics beat for the alliance branch; a deliberately non-threatening alien (different biochemistry, different timescale) tests whether humanity exports cooperation or domination.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "concord",
+        "xenopolitics",
+        "ethics"
+      ],
+      "requires": {
+        "flags": [
+          "concord_member"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "befriend_the_slow",
+          "text": "Slow down, listen, and earn their trust over years.",
+          "effects": {
+            "money": -50,
+            "power": 6,
+            "reputation": 15,
+            "loyalty": 10,
+            "health": 3
+          },
+          "personality": {
+            "outward": -13,
+            "ideology": -9
+          },
+          "setFlags": [
+            "alien_friends"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You teach a restless species the discipline of patience, and the methane-breathers slowly unfold toward you like a flower opening over a season. The Concord nods; humanity has passed a test it did not know it was taking."
+        },
+        {
+          "id": "exploit_the_slow",
+          "text": "They think in centuries; you can outmaneuver them in weeks.",
+          "effects": {
+            "money": 260,
+            "power": 12,
+            "reputation": -12,
+            "loyalty": 5,
+            "heat": 12
+          },
+          "personality": {
+            "outward": 13,
+            "ideology": 8,
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "alien_exploited"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You sign the slow ones into contracts they will not finish reading for a generation, and strip their worlds before they can object. The Concord says nothing, but it remembers, and elder species have long, long memories."
+        },
+        {
+          "id": "leave_them_be",
+          "text": "Leave them in peace and seal their system from traffic.",
+          "effects": {
+            "money": -10,
+            "power": 7,
+            "reputation": 11,
+            "loyalty": 8
+          },
+          "personality": {
+            "outward": -6,
+            "inward": 4
+          },
+          "setFlags": [
+            "alien_friends"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You declare their slow green world off-limits and post the warning in a dozen languages. Sometimes the kindest first contact is the decision not to make it."
+        }
+      ]
+    },
+    {
+      "id": "ev_starfarer_ascendant",
+      "era": "interstellar",
+      "year": 2280,
+      "title": "Steward of a Young World",
+      "scene": "A century into the Concord, humanity is no longer the loud newcomer but a respected peer, its colonies threaded across a thousand light-years and its name spoken with warmth in a hundred alien tongues. You long ago made peace with the one truth empire never could: across such distances no one rules, they only belong, and a galaxy held together by light-lag must be a community of self-governing worlds or nothing at all. You stand before the full parliament of species, the immortal who began as a builder of casinos, and they ask you to take a permanent steward's chair among the oldest civilizations alive.",
+      "researchNote": "Branch (a) capstone, benevolent apex. Sets starfarer_ascendant. The starfarer ending resolves the tyranny of distance by accepting a community of self-governing worlds rather than central rule; Kardashev-scale membership without empire.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "concord",
+        "apex",
+        "ending",
+        "trope:bootlegger-to-legitimacy"
+      ],
+      "requires": {
+        "flags": [
+          "concord_member",
+          "peaceful_contact"
+        ],
+        "notFlags": [
+          "alien_overlords",
+          "quisling"
+        ],
+        "meters": {
+          "reputation": ">=50"
+        },
+        "personality": {
+          "outward": "<=0"
+        }
+      },
+      "weight": 28,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "take_the_stewards_chair",
+          "text": "Accept the chair as humanity's humble, eternal steward.",
+          "effects": {
+            "money": 120,
+            "power": 10,
+            "reputation": 15,
+            "loyalty": 15,
+            "health": 6
+          },
+          "personality": {
+            "outward": -15,
+            "ideology": -10,
+            "grandiosity": -8
+          },
+          "setFlags": [
+            "starfarer_ascendant"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You take humanity's place among the great civilizations of the galaxy not as their king but as their gardener, and the elder species welcome a young world finally grown wise. The man who wanted his name on everything ends his deathless life keeping a single quiet promise to the stars. This is where the saga rests: humanity, ascendant and at peace."
+        },
+        {
+          "id": "give_the_chair_to_humanity",
+          "text": "Decline the chair; let humanity choose its own stewards.",
+          "effects": {
+            "money": 60,
+            "power": 7,
+            "reputation": 15,
+            "loyalty": 14,
+            "health": 5
+          },
+          "personality": {
+            "outward": -15,
+            "ideology": -10,
+            "grandiosity": -9
+          },
+          "setFlags": [
+            "starfarer_ascendant"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You step back from the highest seat ever offered to a human and hand it to a council your colonies elect themselves. The Concord marvels: an immortal who, at the last, chose to be merely one citizen among the stars. Humanity rises, and rises free."
+        },
+        {
+          "id": "wander_the_concord",
+          "text": "Take no chair at all; roam the Concord's worlds as a wanderer.",
+          "effects": {
+            "money": 30,
+            "power": 5,
+            "reputation": 15,
+            "loyalty": 11,
+            "health": 7
+          },
+          "personality": {
+            "outward": -12,
+            "inward": 8,
+            "grandiosity": -9
+          },
+          "setFlags": [
+            "starfarer_ascendant"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You refuse every seat and instead become a quiet traveler among a thousand alien worlds, the immortal who once owned two planets now content to belong to none and learn from all. Distance, which broke every empire, becomes your endless open road. The saga rests with humanity ascendant and its founder, at last, simply free."
+        }
+      ]
+    },
+    {
+      "id": "ev_the_conquered_arrive",
+      "era": "interstellar",
+      "year": 2162,
+      "title": "Spoils of the Stars",
+      "scene": "The species you broke in the contact wars are loaded into your colony fleets in chains of light, their warp secrets pried from their dying ships. You did not join a community of worlds; you took one and made it yours. From the throne aboard your flagship you look out at a galaxy that is now simply unclaimed inventory.",
+      "researchNote": "Branch (b) gateway; gated on alien_slaves (humanity conquered the species that came). Empire-by-domination framing; sets the tyrant trajectory.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "empire",
+        "conquest",
+        "power",
+        "trope:conqueror"
+      ],
+      "requires": {
+        "flags": [
+          "alien_slaves"
+        ],
+        "notFlags": [
+          "alien_overlords",
+          "quisling"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 20,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "industrialize_the_conquest",
+          "text": "Put the conquered species to work building your star-empire.",
+          "effects": {
+            "money": 400,
+            "power": 14,
+            "reputation": -10,
+            "loyalty": 10,
+            "heat": 10
+          },
+          "personality": {
+            "outward": 13,
+            "ideology": 9,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "slave_empire"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Whole worlds of broken aliens labor to build your dominion among the stars, their stolen warp tech multiplying your reach a hundredfold. You are no longer a man, or even an emperor. You are a force the galaxy has learned to fear."
+        },
+        {
+          "id": "demand_tribute",
+          "text": "Spare them as vassals who pay tribute to Earth forever.",
+          "effects": {
+            "money": 300,
+            "power": 12,
+            "reputation": -4,
+            "loyalty": 9,
+            "heat": 7
+          },
+          "personality": {
+            "outward": 10,
+            "grandiosity": 7,
+            "ideology": 6
+          },
+          "setFlags": [
+            "slave_empire"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You leave the conquered their lives and take everything else: their ships, their secrets, their endless tribute. Mercy, you call it, and the vassal worlds learn to thank you for the privilege of being owned."
+        },
+        {
+          "id": "doubt_the_conquest",
+          "text": "Privately wonder if you have made a galaxy of enemies.",
+          "effects": {
+            "money": 150,
+            "power": 9,
+            "reputation": 2,
+            "loyalty": 7,
+            "heat": 5
+          },
+          "personality": {
+            "inward": 8,
+            "outward": -4
+          },
+          "setFlags": [
+            "slave_empire",
+            "emperor_doubts"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Alone in your flagship's gilded dark, you wonder for the first time in centuries whether a galaxy this large can ever truly be held. You push the thought down and order the next conquest anyway, but it does not leave you."
+        }
+      ]
+    },
+    {
+      "id": "ev_kardashev_climb",
+      "era": "interstellar",
+      "year": 2200,
+      "title": "Cages Around Suns",
+      "scene": "Your slave-built dominion begins to wrap whole stars in collector swarms, harvesting the raw output of suns to feed an ever-hungrier empire. The Concord, watching from across the dark, sends one quiet warning: a civilization that grows only by taking eventually meets something larger than itself. You read it as a threat and a challenge both.",
+      "researchNote": "Hard-SF Kardashev escalation (Dyson-swarm Type II climb) on the tyrant branch; the Concord here is the looming peer rival rather than ally, foreshadowing the cost of empire.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "empire",
+        "kardashev",
+        "power",
+        "trope:techno-frontier",
+        "trope:conqueror"
+      ],
+      "requires": {
+        "flags": [
+          "slave_empire"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "build_the_swarms",
+          "text": "Cage a hundred suns. Let the galaxy fear your hunger.",
+          "effects": {
+            "money": 350,
+            "power": 14,
+            "reputation": -8,
+            "loyalty": 9,
+            "heat": 13,
+            "health": -3
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 9
+          },
+          "setFlags": [
+            "star_caged"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "Your collector swarms darken a hundred suns and feed an empire that now outshines, in raw power, anything the Concord ever built. You have become a Type II civilization with a single owner, and the galaxy holds its breath."
+        },
+        {
+          "id": "heed_the_warning",
+          "text": "Slow the climb; even you can overreach.",
+          "effects": {
+            "money": 80,
+            "power": 9,
+            "reputation": 6,
+            "loyalty": 8,
+            "heat": -5
+          },
+          "personality": {
+            "inward": 7,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "tempered_empire"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You rein in the swarms and consolidate what you hold, surprising every advisor who thought you incapable of restraint. The empire stabilizes; the Concord's warning, for once, did not fall on deaf ears."
+        },
+        {
+          "id": "threaten_the_concord",
+          "text": "Answer the Concord's warning by aiming your suns at them.",
+          "effects": {
+            "money": -100,
+            "power": 13,
+            "reputation": -14,
+            "loyalty": 8,
+            "heat": 15,
+            "health": -5
+          },
+          "personality": {
+            "outward": 14,
+            "ideology": 9,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "star_caged",
+            "concord_war"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You convert a star's output into a weapon and point it, unmistakably, at the community of worlds. The galaxy now has two great powers, and only one of them is ruled by a single deathless will. The cold war between stars begins."
+        }
+      ]
+    },
+    {
+      "id": "ev_star_tyrant",
+      "era": "interstellar",
+      "year": 2290,
+      "title": "God-Emperor of the Slaving Stars",
+      "scene": "A century and a half of conquest has made you what no human ever was: the absolute sovereign of a star-empire spanning hundreds of worlds, fed by the labor of broken species and the light of caged suns. But the tyranny of distance mocks you nightly: an order takes years to cross your own realm, and the farthest provinces have learned to ignore a god whose edicts arrive a decade stale. You can rule a star absolutely or a galaxy in name only, never both, and on a throne of starlight you finally grasp that you own a map, not a kingdom.",
+      "researchNote": "Branch (b) capstone. Sets star_tyrant. The apex of domination undercut by the tyranny of distance: light-lag and relativity mean no autocrat can truly hold a galaxy; the empire is a map, not a kingdom.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "empire",
+        "tyrant",
+        "ending",
+        "trope:conqueror"
+      ],
+      "requires": {
+        "flags": [
+          "slave_empire"
+        ],
+        "notFlags": [
+          "alien_overlords",
+          "quisling"
+        ],
+        "meters": {},
+        "personality": {
+          "grandiosity": ">=40"
+        }
+      },
+      "weight": 28,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "reign_eternal_tyrant",
+          "text": "Reign forever. The galaxy is yours and yours alone.",
+          "effects": {
+            "money": 500,
+            "power": 15,
+            "reputation": -10,
+            "loyalty": 12,
+            "heat": 12
+          },
+          "personality": {
+            "grandiosity": 12,
+            "outward": 10
+          },
+          "setFlags": [
+            "star_tyrant"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You reign as the deathless god-emperor of a slaving star-empire, your name a curse on a thousand worlds and a prayer on a thousand more. But light-lag is the one rival you cannot conquer: the empire keeps fracturing at its edges faster than your armies can crawl out to mend it, and you spend eternity clutching provinces that drift away the moment you look elsewhere. You won everything there was to win and learned that a galaxy cannot be held by one hand, only chased. In the vast gold silence of your throne, immortal and supreme, you are utterly, eternally alone. This is where the saga ends: the proudest man who ever lived, king of a dark that will not stay still to be ruled."
+        },
+        {
+          "id": "tyrant_final_doubt",
+          "text": "Look out at the caged suns and feel, at last, the cost.",
+          "effects": {
+            "money": 300,
+            "power": 13,
+            "reputation": -4,
+            "loyalty": 9,
+            "health": -4
+          },
+          "personality": {
+            "grandiosity": 9,
+            "inward": 9
+          },
+          "setFlags": [
+            "star_tyrant"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You stand before a window full of stars you turned into chains and feel, for one centuries-late moment, the weight of every world you took. Then you straighten your spine and rule on, because a god-emperor does not flinch. The saga ends with the tyrant of the stars and the one regret he will carry, alone, forever."
+        },
+        {
+          "id": "abdicate_the_galaxy",
+          "text": "Concede you can't hold it all; pull back to a realm you can truly rule.",
+          "effects": {
+            "money": 200,
+            "power": 14,
+            "reputation": -2,
+            "loyalty": 11,
+            "heat": -6
+          },
+          "personality": {
+            "grandiosity": 7,
+            "inward": 8
+          },
+          "setFlags": [
+            "star_tyrant"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You let the drifting provinces go and clamp your fist around the inner stars you can actually reach within a human lifetime of light-lag, ruling a compact tyranny with absolute, airless control. You traded a galaxy you only pretended to own for a kingdom you genuinely command. The saga ends with the star-tyrant, smaller and more total than ever, sovereign of a cage he chose."
+        }
+      ]
+    },
+    {
+      "id": "ev_under_the_yoke",
+      "era": "interstellar",
+      "year": 2162,
+      "title": "Earth Under the Yoke",
+      "scene": "The hostile power that subjugated Earth, a cold and hierarchical species who call themselves the Vasreth Ascendancy, have stripped the home system of its fleets and rationed its very air. Humanity is a labor stock now, its worlds garrisoned, its sky owned by overseers who regard your species as livestock with ambitions. From the ruins of your old empire, the first whispers of resistance reach you, deathless and uncrowned in the rubble.",
+      "researchNote": "Branch (c) gateway; gated on alien_overlords. Original hostile power named Vasreth Ascendancy (no franchise refs). Sets up the insurgency.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "occupation",
+        "rebellion",
+        "world"
+      ],
+      "requires": {
+        "flags": [
+          "alien_overlords"
+        ],
+        "notFlags": [
+          "quisling"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 20,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "lead_the_resistance",
+          "text": "Take up the resistance. An immortal makes a terrible enemy.",
+          "effects": {
+            "money": -100,
+            "power": 10,
+            "reputation": 14,
+            "loyalty": 13,
+            "heat": 14,
+            "health": -6
+          },
+          "personality": {
+            "outward": -8,
+            "ideology": -5
+          },
+          "setFlags": [
+            "human_resistance"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "The man who ruled two worlds becomes the man who haunts the occupiers from the shadows, and a beaten species begins, quietly, to hope. You cannot die. The Vasreth are about to learn what an undying enemy costs."
+        },
+        {
+          "id": "study_the_enemy",
+          "text": "Bide your time; learn the Vasreth from the inside out.",
+          "effects": {
+            "money": -40,
+            "power": 8,
+            "reputation": 6,
+            "loyalty": 9,
+            "heat": 4
+          },
+          "personality": {
+            "inward": 9,
+            "outward": -3
+          },
+          "setFlags": [
+            "human_resistance",
+            "patient_rebel"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You spend years learning the occupiers' weaknesses while they think you broken, hoarding every secret a deathless spy can gather. Patience, you have in infinite supply. The Vasreth do not."
+        },
+        {
+          "id": "smuggle_seed_ships",
+          "text": "Smuggle humanity's children out to the dark to survive.",
+          "effects": {
+            "money": -150,
+            "power": 7,
+            "reputation": 11,
+            "loyalty": 10,
+            "heat": 9,
+            "health": -4
+          },
+          "personality": {
+            "outward": -6,
+            "inward": 5
+          },
+          "setFlags": [
+            "human_resistance",
+            "seed_smuggled"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You fling generation ships full of human children past the Vasreth blockade into the deep dark, so that even if Earth falls, the species does not. The occupiers count their cattle and never notice the calves that slipped the fence."
+        }
+      ]
+    },
+    {
+      "id": "ev_the_long_insurgency",
+      "era": "interstellar",
+      "year": 2210,
+      "title": "The Long Insurgency",
+      "scene": "Decades of guerrilla war have made the occupation bleed. Human cells trade captured Vasreth warp tech across a hundred worlds, and the overlords' grip slips, world by hard-won world. You have buried more comrades than any general in history, and you remember each one, because you alone never had the mercy of forgetting. The Vasreth offer you a choice: a final uprising, or another century of slow attrition.",
+      "researchNote": "Branch (c) midpoint; the immortal protagonist as the memory of the entire insurgency. Sets up the win/lose fork at the capstone.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "occupation",
+        "rebellion",
+        "war"
+      ],
+      "requires": {
+        "flags": [
+          "human_resistance"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 15,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "unite_the_cells",
+          "text": "Unite every cell for one coordinated uprising.",
+          "effects": {
+            "money": -120,
+            "power": 13,
+            "reputation": 13,
+            "loyalty": 14,
+            "heat": 15,
+            "health": -6
+          },
+          "personality": {
+            "outward": -6,
+            "ideology": -4
+          },
+          "setFlags": [
+            "uprising_ready"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You spend a year weaving a hundred separate rebellions into a single fist, timed to fall on the Vasreth across every occupied world at once. The species that was livestock is about to become an avalanche. Everything now rides on a single dawn."
+        },
+        {
+          "id": "ally_the_concord",
+          "text": "Beg the Concord to break their neutrality and help.",
+          "effects": {
+            "money": -60,
+            "power": 9,
+            "reputation": 12,
+            "loyalty": 10,
+            "heat": 8
+          },
+          "personality": {
+            "outward": -9,
+            "ideology": -6
+          },
+          "setFlags": [
+            "uprising_ready",
+            "concord_aid"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You plead humanity's case before the Concord, and the elder species, moved at last, agree to tip the scales against the Vasreth. The uprising will not stand alone. For the first time in a generation, the odds are not impossible."
+        },
+        {
+          "id": "scorched_dark",
+          "text": "Threaten to detonate the caged suns rather than lose again.",
+          "effects": {
+            "money": -80,
+            "power": 11,
+            "reputation": -8,
+            "loyalty": 7,
+            "heat": 15,
+            "health": -7
+          },
+          "personality": {
+            "outward": 12,
+            "ideology": 7
+          },
+          "setFlags": [
+            "uprising_ready",
+            "doomsday_gambit"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You rig the occupiers' own stellar collectors to blow and dare the Vasreth to keep pushing. It is the gamble of a man who has lost too much to lose carefully. The uprising will come with a doomsday switch in its pocket."
+        }
+      ]
+    },
+    {
+      "id": "ev_liberation_war",
+      "era": "interstellar",
+      "year": 2255,
+      "title": "The Dawn of Liberation",
+      "scene": "The uprising breaks across every occupied world at once, and after a war that costs a generation, the Vasreth Ascendancy is driven from the home system at last. Earth's sky belongs to humanity again, scarred and grieving and free. You stand in the rubble of the old capitol, deathless and weeping, the only soul alive who remembers every single name it took to get here.",
+      "researchNote": "Branch (c) win capstone. Sets liberation_war. Bittersweet victory; immortal as keeper of the cost.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "rebellion",
+        "liberation",
+        "ending"
+      ],
+      "requires": {
+        "flags": [
+          "uprising_ready"
+        ],
+        "notFlags": [
+          "doomsday_gambit"
+        ],
+        "meters": {
+          "loyalty": ">=45"
+        },
+        "personality": {}
+      },
+      "weight": 26,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "rebuild_free",
+          "text": "Hand the freed worlds to their people and step away.",
+          "effects": {
+            "money": -60,
+            "power": 8,
+            "reputation": 15,
+            "loyalty": 15,
+            "health": 4
+          },
+          "personality": {
+            "outward": -14,
+            "ideology": -10,
+            "grandiosity": -8
+          },
+          "setFlags": [
+            "liberation_war"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.5,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You give the liberated worlds back to the people who bled for them and refuse, this once, to put your name on the victory. The man who once wanted to own everything ends the saga owning nothing but the memory of the fallen, and the gratitude of the free. Humanity is bloodied, unbowed, and its own again."
+        },
+        {
+          "id": "crown_the_liberator",
+          "text": "Accept a crown from a grateful, exhausted humanity.",
+          "effects": {
+            "money": 100,
+            "power": 12,
+            "reputation": 12,
+            "loyalty": 13,
+            "health": 2
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 5
+          },
+          "setFlags": [
+            "liberation_war"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "A weary species presses a liberator's crown on the immortal who freed them, and you take it, because you always do. Earth is free, and ruled once more by the deathless man who saved it. Whether that is triumph or the seed of the next tyranny, only the long centuries will tell. The saga rests on a hard-won, uneasy dawn."
+        },
+        {
+          "id": "federate_the_freed",
+          "text": "Bind the freed worlds into a free union that needs no king.",
+          "effects": {
+            "money": -40,
+            "power": 9,
+            "reputation": 15,
+            "loyalty": 14,
+            "health": 3
+          },
+          "personality": {
+            "outward": -12,
+            "ideology": -9,
+            "grandiosity": -7
+          },
+          "setFlags": [
+            "liberation_war"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You knit the liberated worlds into a union of equals, designed so that no immortal, not even you, could ever rule it across the light-years again. The species you freed builds a future you cannot dominate, and you find, to your own astonishment, that this is the victory you wanted. The saga rests on a free humanity that will outgrow its founder."
+        }
+      ]
+    },
+    {
+      "id": "ev_humanity_extinct",
+      "era": "interstellar",
+      "year": 2258,
+      "title": "The Last Transmission",
+      "scene": "The uprising failed, or the doomsday switch fell, and the Vasreth answer rebellion with extinction. World by world the human lights go out, until only the smuggled seed-ships remain, fleeing into a dark that may not hide them long enough. You drift in a dead system, deathless and utterly alone, the last human anything will ever speak to, recording a final transmission for a species that no longer exists to hear it.",
+      "researchNote": "Branch (c) lose capstone. Sets humanity_extinct. The doomed-revolt outcome; gated as the dark mirror of liberation_war.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "rebellion",
+        "extinction",
+        "ending"
+      ],
+      "requires": {
+        "flags": [
+          "uprising_ready"
+        ],
+        "notFlags": [
+          "concord_aid"
+        ],
+        "meters": {
+          "loyalty": "<=25"
+        },
+        "personality": {}
+      },
+      "weight": 24,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "record_the_eulogy",
+          "text": "Record humanity's eulogy and send it into the dark.",
+          "effects": {
+            "money": -200,
+            "power": 4,
+            "reputation": 8,
+            "loyalty": 6,
+            "health": -10
+          },
+          "personality": {
+            "inward": 14,
+            "outward": -10
+          },
+          "setFlags": [
+            "humanity_extinct"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You speak the last words of your species into the void, a deathless witness to its end, and send them outward on the chance that some far ear, ages hence, might learn that humanity was here, and tried. The seed-ships scatter. You drift on, immortal and alone, the final keeper of a vanished world. This is where the saga ends: in silence, and a single light still burning."
+        },
+        {
+          "id": "chase_the_seedships",
+          "text": "Chase the seed-ships into the dark and guard the last embers.",
+          "effects": {
+            "money": -150,
+            "power": 6,
+            "reputation": 10,
+            "loyalty": 8,
+            "health": -8
+          },
+          "personality": {
+            "inward": 11,
+            "outward": -6
+          },
+          "setFlags": [
+            "humanity_extinct"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You abandon the dead system and turn your ship toward the scattered seed-ships, an undying shepherd for a few thousand frightened children who are all that remains of humankind. The species is, all but, extinct. But not while you draw breath, and you will draw breath forever. The saga ends with the faintest, most stubborn of embers, fleeing through the dark."
+        },
+        {
+          "id": "refuse_to_witness",
+          "text": "Refuse the role of last witness; go dark with your dead species.",
+          "effects": {
+            "money": -100,
+            "power": 3,
+            "reputation": 4,
+            "loyalty": 4,
+            "health": -12
+          },
+          "personality": {
+            "inward": 15,
+            "outward": -12
+          },
+          "setFlags": [
+            "humanity_extinct"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You cannot die, so you do the only thing left: you shut down every transmitter, blacken your ship's lights, and refuse to be the universe's record of humanity's end. The seed-ships flee without you. Somewhere in the lightless dark an immortal drifts, choosing oblivion of the mind because his body will not grant the other kind. The saga ends in a silence he made on purpose."
+        }
+      ]
+    },
+    {
+      "id": "ev_the_administrator",
+      "era": "interstellar",
+      "year": 2162,
+      "title": "The Administrator's Bargain",
+      "scene": "The overlords did not need to break humanity when they could simply hire its loudest man. You sit in a tower over a subjugated Earth as the Vasreth Ascendancy's appointed Administrator, your old title preserved, your face still on the screens, your every word approved by overseers no human ever sees. The people are told you saved them. You know exactly what you sold.",
+      "researchNote": "Branch (d) gateway; gated on quisling. Occupation-administrator framing (the requested style, not named). Sets the puppet trajectory.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "occupation",
+        "puppet",
+        "power"
+      ],
+      "requires": {
+        "flags": [
+          "quisling"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 20,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_the_role",
+          "text": "Embrace it. Better to administer the cage than rot in it.",
+          "effects": {
+            "money": 300,
+            "power": 11,
+            "reputation": -8,
+            "loyalty": 6,
+            "heat": 6
+          },
+          "personality": {
+            "outward": 11,
+            "ideology": 8,
+            "grandiosity": 7
+          },
+          "setFlags": [
+            "puppet_administrator"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You take the overlords' coin and the overlords' script and tell yourself it is leadership. The propaganda screens glow with your reassuring face above a planet quietly bleeding out. You are, at last, the most powerful man on Earth, and the smallest."
+        },
+        {
+          "id": "skim_the_occupation",
+          "text": "Play the role, but quietly skim power and wealth for yourself.",
+          "effects": {
+            "money": 400,
+            "power": 12,
+            "reputation": -5,
+            "loyalty": 7,
+            "heat": 8
+          },
+          "personality": {
+            "outward": 10,
+            "grandiosity": 8
+          },
+          "setFlags": [
+            "puppet_administrator",
+            "skimming_quisling"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You run the occupation like one more rigged casino, skimming wealth and leverage off the top while the Vasreth think you a loyal tool. A deathless grifter even in chains, you build a private empire inside the cage. It changes nothing for the people below."
+        },
+        {
+          "id": "secret_doubts_quisling",
+          "text": "Take the role, but begin to despise what you have become.",
+          "effects": {
+            "money": 150,
+            "power": 8,
+            "reputation": -2,
+            "loyalty": 6,
+            "heat": 4
+          },
+          "personality": {
+            "inward": 9,
+            "outward": 3
+          },
+          "setFlags": [
+            "puppet_administrator",
+            "quisling_doubts"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You read the overlords' script aloud each night and hate the man saying the words a little more each time. Some immortalities are a sentence. You begin, slowly, to wonder what an undying traitor might still be able to undo."
+        }
+      ]
+    },
+    {
+      "id": "ev_managing_the_cage",
+      "era": "interstellar",
+      "year": 2205,
+      "title": "Managing the Cage",
+      "scene": "Decades into your administration, the occupation runs with terrible efficiency: quotas met, dissent screened out, the human population gently culled to whatever level the Vasreth find convenient. The overlords are pleased with their Administrator. Sometimes, late, a resistance courier reaches even your tower, asking the deathless quisling a question he cannot stop hearing: whose side are you really on?",
+      "researchNote": "Branch (d) midpoint; the occupation-management beat. Offers the late pivot toward defiance or deeper collaboration, feeding the capstone.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "occupation",
+        "puppet",
+        "world"
+      ],
+      "requires": {
+        "flags": [
+          "puppet_administrator"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 15,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "tighten_the_grip",
+          "text": "Hand the courier to the overlords and prove your loyalty.",
+          "effects": {
+            "money": 200,
+            "power": 11,
+            "reputation": -12,
+            "loyalty": 7,
+            "heat": 9
+          },
+          "personality": {
+            "outward": 12,
+            "ideology": 8
+          },
+          "setFlags": [
+            "loyal_puppet"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You turn the courier over and the Vasreth reward their faithful Administrator with more wealth, more power, more cage to manage. The resistance learns there is no help in the tower. You have chosen your masters, completely."
+        },
+        {
+          "id": "secret_sabotage",
+          "text": "Quietly feed the resistance from inside the machine.",
+          "effects": {
+            "money": -80,
+            "power": 7,
+            "reputation": 9,
+            "loyalty": 9,
+            "heat": 12,
+            "health": -5
+          },
+          "personality": {
+            "outward": -8,
+            "inward": 6,
+            "ideology": -5
+          },
+          "setFlags": [
+            "puppet_double_agent"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You begin slipping the resistance everything an Administrator knows, playing the most dangerous double game of an already impossible life. If the Vasreth ever learn, immortality will only make the punishment longer. You have, against every instinct, chosen a side."
+        },
+        {
+          "id": "deepen_the_comfort",
+          "text": "Ignore the courier and sink deeper into gilded collaboration.",
+          "effects": {
+            "money": 250,
+            "power": 10,
+            "reputation": -6,
+            "loyalty": 6,
+            "heat": 5
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 6
+          },
+          "setFlags": [
+            "loyal_puppet"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You let the courier vanish unanswered and return to the comforts of the tower, where the wine is good and the questions are screened out. The cage hums along. You administer it beautifully, and feel nothing, which is the worst feeling of all."
+        }
+      ]
+    },
+    {
+      "id": "ev_puppet_throne",
+      "era": "interstellar",
+      "year": 2295,
+      "title": "The Puppet Throne",
+      "scene": "More than a century of occupation has settled into permanence. You rule a subjugated Earth from a tower the overlords built, your face eternal on the propaganda screens, your humanity a managed, dwindling stock beneath you. The Vasreth Ascendancy spreads to the stars and you are not invited; you are furniture, a deathless figurehead presiding over the slow quiet end of a species you once led to two worlds and beyond.",
+      "researchNote": "Branch (d) capstone. Sets puppet_throne. The figurehead-over-occupied-Earth ending; humanity suffers indefinitely while the immortal presides as furniture.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "occupation",
+        "puppet",
+        "ending",
+        "trope:dissipating-line"
+      ],
+      "requires": {
+        "flags": [
+          "puppet_administrator"
+        ],
+        "notFlags": [
+          "puppet_double_agent"
+        ],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 26,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "reign_as_figurehead",
+          "text": "Reign on as the overlords' eternal, smiling face.",
+          "effects": {
+            "money": 300,
+            "power": 9,
+            "reputation": -12,
+            "loyalty": 5,
+            "health": -4
+          },
+          "personality": {
+            "grandiosity": 8,
+            "outward": 7
+          },
+          "setFlags": [
+            "puppet_throne"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You smile down from the screens for century after century, the deathless figurehead of a conquered world, presiding over humanity's long, managed twilight. You kept your title, your tower, your face on everything. You lost the species, the stars, and the last thing that made the title mean anything. The saga ends with a throne, an occupation, and a man who is the loneliest ornament in the galaxy."
+        },
+        {
+          "id": "puppet_final_revolt",
+          "text": "At the very last, open the tower's gates and damn the consequences.",
+          "effects": {
+            "money": -200,
+            "power": 6,
+            "reputation": 6,
+            "loyalty": 8,
+            "heat": 15,
+            "health": -9
+          },
+          "personality": {
+            "inward": 10,
+            "outward": -8,
+            "ideology": -6
+          },
+          "setFlags": [
+            "puppet_throne"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "After more than a century as the overlords' ornament, you throw open the tower one final night and hand the resistance everything you have, knowing it is far too little and far too late. The Vasreth will make an example of their traitor Administrator that lasts as long as your immortality does. It changes almost nothing. But for one night, the puppet cut his own strings, and that will have to be enough. The saga ends in the tower, in fire."
+        },
+        {
+          "id": "vanish_quietly",
+          "text": "Slip away into the occupied dark and stop pretending to rule at all.",
+          "effects": {
+            "money": -60,
+            "power": 4,
+            "reputation": 2,
+            "loyalty": 5,
+            "health": -5
+          },
+          "personality": {
+            "inward": 13,
+            "outward": -9
+          },
+          "setFlags": [
+            "puppet_throne"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "One night you walk out of the tower the overlords built and simply disappear into the warrens of an occupied Earth, an abdicated puppet with no strings left to cut and no kingdom left to claim. Humanity suffers on under the Vasreth, ruled now by no human face at all, and you wander its conquered streets, anonymous and immortal, the loneliest ghost on a captive world. The saga ends in the dark beneath the throne."
+        }
+      ]
+    },
+    {
+      "id": "ev_inner_system_foundries",
+      "era": "interstellar",
+      "year": 2172,
+      "title": "The Foundries of Sol",
+      "scene": "Before humanity can reach far, it must first wring its own backyard dry: the volatiles of Jupiter's moons, the metals of the Belt, the searing solar wealth of Mercury, the thick carbon air of Venus. Whoever masters the inner system owns the organics and propellant that feed every deep-space foundry, and without them the fleets stay small and the stars stay shut. Your engineers lay the choice bare, in the cold arithmetic of mass and delta-v: build the industrial spine of the solar system, or stagnate at its edge forever.",
+      "researchNote": "Resource-gating beat: interstellar expansion is bottlenecked by in-system industry (Galilean volatiles, Belt metals, Mercury solar, Venus carbon) supplying foundries; stagnation = staying small. Hard-SF logistics woven into the choice.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "resources",
+        "industry",
+        "science",
+        "trope:techno-frontier"
+      ],
+      "requires": {
+        "flags": [
+          "interstellar_age"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "industrialize_the_system",
+          "text": "Strip-mine the whole solar system into one vast foundry.",
+          "effects": {
+            "money": 300,
+            "power": 13,
+            "reputation": -4,
+            "loyalty": 9,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 7
+          },
+          "setFlags": [
+            "system_foundries"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You turn Jupiter's moons into fuel depots, the Belt into a rolling ore train, and Mercury into a sunward furnace, and the deep-space foundries roar to life on a river of volatiles and metal. The galaxy is suddenly within reach, because you finally conquered the only place that mattered first: home."
+        },
+        {
+          "id": "build_with_the_colonies",
+          "text": "Build the foundries as a shared commons across all human worlds.",
+          "effects": {
+            "money": -80,
+            "power": 8,
+            "reputation": 15,
+            "loyalty": 13
+          },
+          "personality": {
+            "outward": -11,
+            "ideology": -7
+          },
+          "setFlags": [
+            "system_foundries",
+            "shared_industry"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You build the industrial spine of the solar system as a common trust, every world a shareholder in the engines that open the stars. Expansion comes slower, but it comes for everyone, and no single hand holds the throttle of the human future."
+        },
+        {
+          "id": "stay_compact",
+          "text": "Refuse the sprawl. A small realm is one you can actually rule.",
+          "effects": {
+            "money": 120,
+            "power": 11,
+            "reputation": -2,
+            "loyalty": 10,
+            "heat": -4
+          },
+          "personality": {
+            "grandiosity": 4,
+            "inward": 6
+          },
+          "setFlags": [
+            "compact_realm"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You decline the great sprawl, reasoning that an immortal can rule a tight inner-system realm absolutely but could never hold a galaxy that drifts beyond his light-lag. The foundries stay modest, the stars stay distant, and your grip stays total. Small, and entirely, eternally yours."
+        }
+      ]
+    },
+    {
+      "id": "ev_two_immortals",
+      "era": "interstellar",
+      "year": 2190,
+      "title": "The Other Deathless Man",
+      "scene": "the tech magnate took the longevity treatments too, and now there are two immortals loose in the human future, each certain he is its rightful author. His warp foundries spread one way across the dark while yours spread the other, and the colonies between you are learning to play the two eternal titans against each other. A struggle that began with a handshake in a Texas hangar has become a slow, light-year-spanning cold war between the only two men who will never die.",
+      "researchNote": "the tech magnate-rivalry motive: the other immortal as a centuries- and light-year-spanning power struggle over the human future. Frames the partnership's turn into rivalry.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "rivalry",
+        "power",
+        "dynasty",
+        "trope:techno-frontier"
+      ],
+      "requires": {
+        "flags": [
+          "interstellar_age"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "war_with_musk",
+          "text": "Crush him. The future has room for only one immortal.",
+          "effects": {
+            "money": -120,
+            "power": 13,
+            "reputation": -7,
+            "loyalty": 8,
+            "heat": 14,
+            "health": -4
+          },
+          "personality": {
+            "outward": 13,
+            "grandiosity": 9,
+            "ideology": 6
+          },
+          "setFlags": [
+            "musk_rivalry",
+            "musk_war"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.4,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You turn the foundries of two empires against each other in a cold war fought across decades and light-years, two deathless men feuding while the colonies between them bleed. Neither can finish the other; immortality only guarantees the grudge outlives every world that suffers it."
+        },
+        {
+          "id": "divide_the_dark",
+          "text": "Carve the galaxy in two and let each immortal have his half.",
+          "effects": {
+            "money": 180,
+            "power": 11,
+            "reputation": 6,
+            "loyalty": 9,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 7,
+            "outward": 5
+          },
+          "setFlags": [
+            "musk_rivalry",
+            "divided_dark"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You and the tech magnate draw a line across the stars and agree, two eternal rivals, to expand in opposite directions. A peace of mutual exhaustion holds, and the human future grows two heads, each watching the other across an ever-widening dark."
+        },
+        {
+          "id": "reconcile_with_musk",
+          "text": "Bury the rivalry; two immortals could steward the future together.",
+          "effects": {
+            "money": 60,
+            "power": 9,
+            "reputation": 14,
+            "loyalty": 12,
+            "health": 3
+          },
+          "personality": {
+            "outward": -10,
+            "ideology": -6,
+            "grandiosity": -4
+          },
+          "setFlags": [
+            "musk_rivalry",
+            "immortal_pact"
+          ],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You go to the other deathless man and offer, instead of a war, a partnership meant to outlast everything: two immortals tending one human future across the centuries. The handshake from the Texas hangar holds after all, older and wiser, and the colonies between you exhale at last."
+        }
+      ]
+    },
+    {
+      "id": "ev_generation_ship_politics",
+      "era": "interstellar",
+      "year": 2185,
+      "title": "The Ship That Forgot Its Errand",
+      "scene": "One of the old sublight generation ships, launched before the warp gift and crawling toward a star at a fraction of lightspeed, finally answers your hail, four generations into its voyage. The descendants aboard have built a whole society in transit and no longer remember why they were sent, or who you are. A faster Concord ship could reach their destination first; the question is what you owe a people who are, by now, almost their own species.",
+      "researchNote": "Hard-SF generation-ship beat (relativistic vs sublight, cultural drift over generations); appears across branches as a meditation on the cost of FTL and time. Tags broadly so it fires in multiple far-futures.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "generation_ship",
+        "society",
+        "ethics"
+      ],
+      "requires": {
+        "flags": [
+          "interstellar_age"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "honor_their_voyage",
+          "text": "Honor their voyage; let them finish their journey as they are.",
+          "effects": {
+            "money": -40,
+            "power": 6,
+            "reputation": 14,
+            "loyalty": 10
+          },
+          "personality": {
+            "outward": -10,
+            "ideology": -7
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You refuse to race the people you launched and let them arrive at their star on their own terms, a strange, beautiful offshoot of humanity finishing the errand it forgot. Some gifts are simply leaving people alone to become themselves."
+        },
+        {
+          "id": "overtake_and_claim",
+          "text": "Send a warp ship ahead to claim their destination first.",
+          "effects": {
+            "money": 200,
+            "power": 11,
+            "reputation": -9,
+            "loyalty": 5,
+            "heat": 8
+          },
+          "personality": {
+            "outward": 11,
+            "grandiosity": 7
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You leapfrog four generations of slow voyagers and plant your flag on their promised world before they arrive. They reach their destination to find it already owned, already named, already yours. The descendants will not forgive you, but they no longer remember enough to know why."
+        },
+        {
+          "id": "reintegrate_them",
+          "text": "Gently teach them their history and welcome them home.",
+          "effects": {
+            "money": -60,
+            "power": 8,
+            "reputation": 12,
+            "loyalty": 11
+          },
+          "personality": {
+            "outward": -8,
+            "ideology": -5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You send teachers and historians to the lost ship and slowly, kindly, give the descendants back the story of where they came from. They weep to learn they were not forgotten, and a branch of humanity that drifted away is woven gently back in."
+        }
+      ]
+    },
+    {
+      "id": "ev_terraform_exoworld",
+      "era": "interstellar",
+      "year": 2220,
+      "title": "Breathing Life into a Dead World",
+      "scene": "On a sterile rock circling a distant sun, humanity attempts what it once dreamed for Mars on a far grander scale: seeding a whole biosphere from nothing across centuries of careful work. The Concord, or the empire, or the resistance-in-exile watches to see whether your species creates life or merely consumes worlds. You have all the time it takes; the only question is what you intend to leave behind.",
+      "researchNote": "Hard-SF exoplanet terraforming/ecopoiesis beat; deliberately branch-agnostic via interstellar_age gate so it colors any far-future with the create-vs-consume theme.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "terraforming",
+        "science",
+        "world",
+        "trope:techno-frontier"
+      ],
+      "requires": {
+        "flags": [
+          "interstellar_age"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "garden_world",
+          "text": "Build it as a garden world, open to anyone who comes.",
+          "effects": {
+            "money": -150,
+            "power": 7,
+            "reputation": 15,
+            "loyalty": 11,
+            "health": 4
+          },
+          "personality": {
+            "outward": -12,
+            "ideology": -8
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "Over a century you coax a dead rock into forests and seas and skies full of birds, and throw its gates open to every traveler in the dark. A deathless man plants a garden he need not own, and the galaxy notes that humanity, at least sometimes, makes life instead of taking it."
+        },
+        {
+          "id": "private_eden",
+          "text": "Build it as your private estate, the grandest in the galaxy.",
+          "effects": {
+            "money": -100,
+            "power": 12,
+            "reputation": -4,
+            "loyalty": 7
+          },
+          "personality": {
+            "grandiosity": 10,
+            "outward": 6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You terraform a whole planet into a single deathless man's resort, an Eden with one resident and a billion years of upkeep. It is the most extravagant thing any human has ever built, and you wander its empty perfect valleys, golden and alone."
+        },
+        {
+          "id": "strip_mine_instead",
+          "text": "Skip the gardening; strip the world for resources instead.",
+          "effects": {
+            "money": 280,
+            "power": 10,
+            "reputation": -11,
+            "loyalty": 5,
+            "heat": 9
+          },
+          "personality": {
+            "outward": 12,
+            "ideology": 7
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.3,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You decide a dead world is worth more dead and gut it for ore and gas, leaving a hollow husk where a biosphere might have bloomed. The ledger fills. The galaxy quietly files away one more proof of what your species, given a world, tends to do with it."
+        }
+      ]
+    },
+    {
+      "id": "ev_immortal_centuries",
+      "era": "interstellar",
+      "year": 2240,
+      "title": "The Weight of Centuries",
+      "scene": "You have now lived longer than the entire span between Columbus and the colony fleets, and the human mind was never built to hold so much time. Everyone you began with is dust; whole nations you founded have risen and fallen while you stayed exactly the same. Alone in the long dark between stars, you confront the one frontier even an immortal cannot conquer: the weight of being the only thing that does not end.",
+      "researchNote": "Cross-branch character beat on the psychology of radical longevity (memory, grief, identity over centuries); fires in any far-future via interstellar_age, deepening whichever ending follows.",
+      "extrapolated": true,
+      "startrekInspired": false,
+      "tags": [
+        "stars",
+        "immortality",
+        "psychology",
+        "dynasty"
+      ],
+      "requires": {
+        "flags": [
+          "interstellar_age"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_eternity",
+          "text": "Embrace the centuries; you were made for forever.",
+          "effects": {
+            "money": 60,
+            "power": 11,
+            "reputation": 4,
+            "loyalty": 9
+          },
+          "personality": {
+            "grandiosity": 9,
+            "outward": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You decide that grief is for mortals and stride into the next century as you strode into every room: certain you belong at the center of it. The weight does not lift, but you have always been good at pretending it isn't there."
+        },
+        {
+          "id": "find_meaning_in_others",
+          "text": "Anchor yourself in the living, not the dead.",
+          "effects": {
+            "money": -30,
+            "power": 7,
+            "reputation": 13,
+            "loyalty": 12,
+            "health": 5
+          },
+          "personality": {
+            "outward": -11,
+            "inward": -4,
+            "ideology": -6
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": 1
+            }
+          ],
+          "outcome": "You stop counting the dead and start tending the living, finding in each new generation a reason to keep the long vigil. The centuries grow lighter when you stop carrying them alone. The deathless man learns, late, how to be among people again."
+        },
+        {
+          "id": "retreat_inward",
+          "text": "Withdraw into yourself and let the centuries blur.",
+          "effects": {
+            "money": 40,
+            "power": 5,
+            "reputation": -3,
+            "loyalty": 6,
+            "health": -6
+          },
+          "personality": {
+            "inward": 13,
+            "outward": -8
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [
+            {
+              "to": "tabloids",
+              "weight": 0.2,
+              "polarity": -1
+            }
+          ],
+          "outcome": "You let the years run together into a long gray sameness and retreat behind walls no visitor crosses. Time stops hurting only because you have stopped feeling it. The immortal becomes a ghost in his own endless life."
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_concord_registry",
+      "era": "interstellar",
+      "year": 2168,
+      "title": "The Registry of Sapient Houses",
+      "scene": "The Concord’s high registrars demand we declare our family’s extra-solar holdings. Our accountants suggest registering our thousands of orbital laborers as 'uncompensated biological assets' to bypass the interstellar luxury tariff, while local purists warn this will permanently brand us as tyrants in the galactic court.",
+      "researchNote": "A look at how corporate entities exploit legal loopholes when introduced to complex alien bureaucracy.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:dynastic-merger"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "concord_declare_assets",
+          "text": "Register them as assets to maximize our immediate borrowing power.",
+          "effects": {
+            "money": 250,
+            "power": 50,
+            "reputation": -100,
+            "heat": 80
+          },
+          "personality": {
+            "grandiosity": 0.5,
+            "inward": 0.3
+          },
+          "outcome": "The Concord accepts the filing with cold bureaucratic indifference, though human labor unions back on Earth curse your name.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "concord_declare_citizens",
+          "text": "Sponsor their transition to full Concord citizenship to win alien favor.",
+          "effects": {
+            "money": -300,
+            "power": -50,
+            "reputation": 200,
+            "heat": -50
+          },
+          "personality": {
+            "ideology": 0.6,
+            "outward": 0.5
+          },
+          "outcome": "The interstellar press praises your enlightened human philanthropy, though your balance sheet bleeds.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "concord_bribe_registrar",
+          "text": "Bribe the registrar’s sub-routines to list the holdings as an uninhabited mining reserve.",
+          "effects": {
+            "money": -100,
+            "power": 100,
+            "reputation": 0,
+            "heat": 120
+          },
+          "personality": {
+            "inward": 0.8
+          },
+          "outcome": "The records are altered, hiding your private labor force from both tax collectors and human humanists.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_nanite_succession",
+      "era": "interstellar",
+      "year": 2208,
+      "title": "The Titan's Will",
+      "scene": "Your eldest child has joined an anti-longevity cult on Titan, rejecting the family’s neural-link legacy. The succession now falls to your youngest—a reckless slipstream racer who has already crashed two warp-yachts into Jupiter’s magnetosphere and shows no interest in managing a star-spanning estate.",
+      "researchNote": "The sociological gap between the immortal founders of star empires and their detached descendants.",
+      "historicity": "personal",
+      "tags": [
+        "trope:accidental-heir"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "titan_force_upgrade",
+          "text": "Force the neural-link onto the racer; the dynasty must have a pilot.",
+          "effects": {
+            "money": -50,
+            "power": 100,
+            "loyalty": -150,
+            "health": -20
+          },
+          "personality": {
+            "grandiosity": 0.8,
+            "inward": 0.2
+          },
+          "outcome": "They take the mantle under heavy sedation, their eyes vacant as they sign our trade directives.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "titan_honor_cultist",
+          "text": "Drag the Titan cultist back to Earth and force them to inherit.",
+          "effects": {
+            "money": -100,
+            "power": 50,
+            "reputation": 50,
+            "loyalty": -100
+          },
+          "personality": {
+            "ideology": 0.4,
+            "inward": 0.6
+          },
+          "outcome": "They rule with a bitter, monastic simplicity, slowly donating our minor moons to public parks.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "titan_adopt_clone",
+          "text": "Bypassing both, initiate a rapid-growth clone of yourself to inherit.",
+          "effects": {
+            "money": -200,
+            "power": 150,
+            "reputation": -150,
+            "heat": 100
+          },
+          "personality": {
+            "grandiosity": 1,
+            "inward": 0.5
+          },
+          "outcome": "The children are furious, but the clone’s infantile mind is incredibly receptive to your corporate training.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_blockade_runners",
+      "era": "interstellar",
+      "year": 2218,
+      "title": "Siphoning the Hegemony",
+      "scene": "The Vasreth occupation blockade is tight, but the local alien garrison commander takes bribes in old Earth vintages and high-density data drives. We have acquired a secret cache of military warp-coils; we must decide who gets to buy our silence.",
+      "researchNote": "How black-market networks thrive along frontier borders during planetary occupations.",
+      "historicity": "extrapolated",
+      "requires": {
+        "flags": [
+          "under_yoke"
+        ]
+      },
+      "choices": [
+        {
+          "id": "runners_sell_resistance",
+          "text": "Smuggle the coils to the human resistance cells on Mars.",
+          "effects": {
+            "money": 100,
+            "power": 100,
+            "reputation": 50,
+            "loyalty": 150,
+            "heat": 150
+          },
+          "personality": {
+            "ideology": 0.7,
+            "outward": 0.3
+          },
+          "setFlags": [
+            "resistance_armed"
+          ],
+          "outcome": "The resistance honors your name in their secret broadcasts, though the Vasreth security services are sniffing closer.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "runners_sell_vasreth",
+          "text": "Sell the coils back to the Vasreth authorities to prove our loyalty.",
+          "effects": {
+            "money": 300,
+            "power": -50,
+            "reputation": -150,
+            "loyalty": -200,
+            "heat": -100
+          },
+          "personality": {
+            "inward": 0.8
+          },
+          "outcome": "The regional director rewards your civic duty with gold and trade passes, while the resistance brands you a marked target.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "runners_keep_tech",
+          "text": "Stash the coils in our private asteroid vaults for our own fleet.",
+          "effects": {
+            "money": -50,
+            "power": 200,
+            "reputation": 0,
+            "heat": 80
+          },
+          "personality": {
+            "grandiosity": 0.6,
+            "inward": 0.4
+          },
+          "outcome": "Your private security force is now armed with military-grade jump drives, ready for whatever collapse comes next.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "ev_gen_tau_ceti_exploit",
+      "era": "interstellar",
+      "year": 2232,
+      "title": "The Methane-Breathers' Gamble",
+      "scene": "The quiet, methane-breathing natives of Tau Ceti IV have spent three hundred years composing a hyper-spatial poem about a cloud. Our surveyors have located massive deposits of heavy isotopes beneath their sacred continental shelves; they have no concept of land deeds.",
+      "researchNote": "Resource exploitation of peaceful civilizations using legalistic and technological asymmetry.",
+      "historicity": "real",
+      "tags": [
+        "trope:frontier-capital-origin"
+      ],
+      "choices": [
+        {
+          "id": "ceti_strip_mine",
+          "text": "Strip-mine the shelves immediately; their poem can include the sound of our drills.",
+          "effects": {
+            "money": 400,
+            "power": 100,
+            "reputation": -200,
+            "heat": 150
+          },
+          "personality": {
+            "grandiosity": 0.7,
+            "inward": 0.5
+          },
+          "outcome": "The isotopes flood our foundries, though the Concord slaps our house with a severe environmental censure.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ceti_trade_trinkets",
+          "text": "Introduce them to digital ownership tokens, trading virtual clouds for physical land.",
+          "effects": {
+            "money": 200,
+            "power": 50,
+            "reputation": -50,
+            "heat": 50
+          },
+          "personality": {
+            "inward": 0.8
+          },
+          "outcome": "They happily sign away their mineral rights for sparkling, non-fungible light-arrays, leaving us legally clear.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ceti_protect_land",
+          "text": "Declare their planet a sovereign sanctuary and charge other houses for its protection.",
+          "effects": {
+            "money": -150,
+            "power": 150,
+            "reputation": 200,
+            "heat": -50
+          },
+          "personality": {
+            "ideology": 0.5,
+            "outward": 0.7
+          },
+          "outcome": "You are hailed as a champion of xenological rights, collecting hefty 'security fees' from Concord scientific vessels.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_centuries_schism",
+      "era": "interstellar",
+      "year": 2252,
+      "title": "The Transhumanist Schism",
+      "scene": "Centuries of life-extension have divided our family's younger generation. Your great-granddaughter wants to upload her consciousness into the Concord's light-mesh, while her brother demands the family maintain a pure, carbon-based biological lineage to protect our traditional claims.",
+      "researchNote": "The philosophical division of wealth and physical legacy in an era of digital transcendence.",
+      "historicity": "personal",
+      "tags": [
+        "trope:reformer-vs-reactionary"
+      ],
+      "choices": [
+        {
+          "id": "schism_support_upload",
+          "text": "Finance her transcendence, positioning our house within the digital fabric of the galaxy.",
+          "effects": {
+            "money": -250,
+            "power": 150,
+            "reputation": 50,
+            "loyalty": -50
+          },
+          "personality": {
+            "outward": 0.8,
+            "inward": 0.2
+          },
+          "outcome": "She becomes an immortal consciousness, manipulating trade algorithms in our favor from within the stellar network.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "schism_enforce_carbon",
+          "text": "Cut her off and declare our lineage strictly biological.",
+          "effects": {
+            "money": 100,
+            "power": 50,
+            "reputation": -50,
+            "loyalty": 100
+          },
+          "personality": {
+            "ideology": 0.6,
+            "inward": 0.8
+          },
+          "outcome": "The pure bloodline is secured, though we lose our competitive edge in the high-frequency orbital markets.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "schism_split_estate",
+          "text": "Split the dynasty into carbon and digital branches, letting them compete.",
+          "effects": {
+            "money": -100,
+            "power": 100,
+            "reputation": 0,
+            "loyalty": -150,
+            "heat": 50
+          },
+          "personality": {
+            "grandiosity": 0.9
+          },
+          "setFlags": [
+            "split_dynasty"
+          ],
+          "outcome": "The house divides; a cold war of inheritance begins between the physical estates and the server farms.",
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_liberation_spoils",
+      "era": "interstellar",
+      "year": 2262,
+      "title": "The Reconstructed Cradle",
+      "scene": "In the wake of the Vasreth retreat, their gilded administrative citadels hang silent over the scarred ruins of Geneva. The newly declared human provisional government wants to demolish them as monuments of oppression, but our family has the technology to refit them as our private orbital offices.",
+      "researchNote": "Post-war reconstruction as an opportunity for oligarchical acquisition of colonial infrastructure.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:exile-return"
+      ],
+      "requires": {
+        "flags": [
+          "resistance_armed"
+        ]
+      },
+      "choices": [
+        {
+          "id": "spoils_seize_citadel",
+          "text": "Seize the citadels by force before the provisional government can secure them.",
+          "effects": {
+            "money": 150,
+            "power": 200,
+            "reputation": -150,
+            "heat": 180
+          },
+          "personality": {
+            "grandiosity": 0.9,
+            "inward": 0.4
+          },
+          "outcome": "Our family banners now fly over Geneva from orbit, though the new human republic views us as domestic occupiers.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "spoils_buy_republic",
+          "text": "Fund the demolition and use the rubble to build the republic's new capital.",
+          "effects": {
+            "money": -300,
+            "power": 100,
+            "reputation": 250,
+            "heat": -80
+          },
+          "personality": {
+            "ideology": 0.5,
+            "outward": 0.6
+          },
+          "outcome": "We are hailed as the founding patriots of the free era, securing our seats in the new planetary senate.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "spoils_scrap_tech",
+          "text": "Strip the alien technology from the citadels and sell it to the highest offworld bidder.",
+          "effects": {
+            "money": 400,
+            "power": 50,
+            "reputation": -50,
+            "heat": 100
+          },
+          "personality": {
+            "inward": 0.9
+          },
+          "outcome": "Our Swiss accounts overflow with credit-units, though Earth's historical preservation societies are devastated.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_gilded_hegemony",
+      "era": "interstellar",
+      "year": 2299,
+      "title": "The Gilded Ministry",
+      "scene": "Through decades of strategic campaign finance and selective blackmails, we have successfully fused the planetary Ministry of Outer Transit with our family's private warp-foundries. There is no longer a clear boundary where the state's budget ends and our ledger begins.",
+      "researchNote": "The absolute capture of regulatory bodies by dynastic monopolies in high-tech space industries.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:oligarch"
+      ],
+      "choices": [
+        {
+          "id": "gilded_enforce_monopoly",
+          "text": "Criminalize all independent slipstream research under the guise of 'public safety.'",
+          "effects": {
+            "money": 300,
+            "power": 200,
+            "reputation": -100,
+            "heat": 120
+          },
+          "personality": {
+            "grandiosity": 0.8,
+            "inward": 0.6
+          },
+          "outcome": "We have achieved a total monopoly on human space travel, though a subterranean movement of backyard engine-builders is forming.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "gilded_bribe_senate",
+          "text": "Distribute minor transit vouchers to every citizen to maintain a facade of public utility.",
+          "effects": {
+            "money": -150,
+            "power": 100,
+            "reputation": 150,
+            "heat": -50
+          },
+          "personality": {
+            "ideology": 0.4,
+            "outward": 0.6
+          },
+          "outcome": "The populace is pacified by free weekend trips to Mars, ignoring the fact that we own every breathing-dome they visit.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "gilded_escape_vault",
+          "text": "Liquidate the ministry's public assets and invest them in an un-traceable generation ship for the family.",
+          "effects": {
+            "money": 500,
+            "power": -100,
+            "reputation": -200,
+            "heat": 200
+          },
+          "personality": {
+            "inward": 1
+          },
+          "outcome": "We prepare a gilded ark to leave this crowded galaxy behind, leaving the tax auditors to sort through a hollow husk of a state.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    }
+  ]
+}

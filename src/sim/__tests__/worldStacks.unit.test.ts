@@ -31,6 +31,20 @@ describe("FD-7 world-stack content", () => {
       expect(s.perils.length, s.place).toBeGreaterThan(0);
     }
   });
+
+  it("CP-1: the immigration-destination places exist as geography (decoupled from culture)", () => {
+    const places = new Set(content.worldStacks.map((s) => s.place));
+    for (const p of ["canada", "american_midwest", "american_south", "east_coast", "west_coast"]) {
+      expect(places.has(p), `place ${p}`).toBe(true);
+    }
+  });
+
+  it("CP-1: culture is now pure ethnic-naming (no place baked into the conflated WASP label)", () => {
+    // The conflated `wasp_east_coast` is gone; the ethnicity is `anglo_protestant`,
+    // and the East-Coast geography lives only in the place axis.
+    expect(content.onomastics.wasp_east_coast).toBeUndefined();
+    expect(content.onomastics.anglo_protestant).toBeDefined();
+  });
 });
 
 describe("FD-7 resolveStack", () => {
@@ -44,6 +58,7 @@ describe("FD-7 resolveStack", () => {
       religion: "r",
       ideology: "i",
       perils: ["x"],
+      axisIntensity: {},
     },
     {
       place: "p",
@@ -55,6 +70,7 @@ describe("FD-7 resolveStack", () => {
       religion: "r2",
       ideology: "i2",
       perils: ["y"],
+      axisIntensity: {},
     },
   ];
 
@@ -86,5 +102,22 @@ describe("FD-7 procgen context uses the resolved stack", () => {
     if (!stack) throw new Error("no ireland stack");
     expect(ctx.place).toBe(stack.placeLabel);
     expect(stack.perils).toContain(ctx.perils[0]);
+  });
+
+  it("a founded line's procgen names come from its LIVE tree, not the archetype spine (CP-R1)", () => {
+    const founded = foundDynasty(content, {
+      momentId: "irish_famine_1847",
+      surname: "Vane",
+      seed: "s",
+    }).state;
+    const era = content.eras[founded.eraIndex];
+    if (!era) throw new Error("no era");
+    const ctx = buildExpandContext(content, founded, era, createRng("c"));
+    // The surname + member come from the founded line ("Vane"), never the literal
+    // economic-spine "Trump" — even though this is the economic archetype baseline.
+    expect(ctx.surname).toBe("Vane");
+    expect(ctx.member.endsWith(" Vane")).toBe(true);
+    expect(ctx.member).not.toContain("Trump");
+    expect(ctx.rival).not.toContain("Trump");
   });
 });

@@ -46,7 +46,7 @@ describe("FD-6.1 start-moments content", () => {
       cape_colony_1906: "afrikaner",
       apartheid_end_1994: "afrikaner",
       gold_rush_1849: "scots_irish",
-      gilded_age_ny_1880: "wasp_east_coast",
+      gilded_age_ny_1880: "anglo_protestant",
       second_awakening_1830: "scots_irish",
       abbasid_baghdad_762: "arabic_abbasid",
     };
