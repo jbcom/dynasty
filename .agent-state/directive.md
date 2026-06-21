@@ -63,9 +63,14 @@ OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git histor
   (archetype→diegetic title+summons); drawBirthDate/formatBirthDate (seed-drawn {month,day},
   year from era); 6 unit tests. (`birthDate` field on composition + the Epoch-0 flag chain
   land with OB-3/OB-4 where they're wired into the founding seam + authored beats.)
-- [ ] **OB-3 remove consciousness phase** — delete seedComposer.ts + seed-words.json + tests
-  + the adj/adj/noun UI; New Game → location pick → authored Epoch-0; revisit founding flags
-  so the authored beats fire (drop/repurpose the PL-3 emerged/named pre-set).
+- [x] **OB-3 DONE** (commit 08ded25) — consciousness phase removed (seedComposer + seed-words
+  deleted); New Game → OnboardingScreen does the LOCATION pick (discernible place-cue cards:
+  "fish and salt air…" → Ireland) → family-name bestowal → founds. Hidden random seed
+  (crypto); chosen place threads through dealComposition. e2e rewired; live-verified (Ireland
+  cue → Gallagher/Brennan/MacCarthy → game). NOTE: era/gender/archetype still seed-dealt as
+  starting defaults — OB-4's authored beats convert these to player choices in-game; and the
+  founding `emerged`/`named` pre-set still needs revisiting in OB-4 so the birth/naming beats
+  actually play (currently they're skipped, holdover from PL-3).
 - [ ] **OB-4 VERTICAL SLICE** — author Ireland/origins Epoch-0 end-to-end (birth+date →
   gender → family+given name → adulthood → first calling turn → partner → branch fork), real
   prose + real anchor-setting choices, 0 leaks. Prove the shape.
