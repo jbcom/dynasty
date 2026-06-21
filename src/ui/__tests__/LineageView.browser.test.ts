@@ -83,6 +83,33 @@ describe("LineageView", () => {
     expect(host.querySelectorAll(".member").length).toBe(3);
   });
 
+  it("marks the protagonist's partner with a Consort badge (PL-8)", () => {
+    const base = foundedWithHeirs();
+    const fam = base.family;
+    if (!fam) throw new Error("no family");
+    // Pick any non-protagonist member as the partner and surface it as the consort.
+    const other = fam.members.find((m) => !m.isProtagonist);
+    if (!other) throw new Error("no other member");
+    const state = { ...base, family: { ...fam, partnerId: other.id } };
+    component = mount(LineageView, { target: host, props: { gameState: state } });
+    expect(host.textContent).toContain("Consort");
+    expect(host.querySelector(".badge.consort")).not.toBeNull();
+  });
+
+  it("marks a deceased member with an aria-labelled cross (PL-8)", () => {
+    const base = foundedWithHeirs();
+    const fam = base.family;
+    if (!fam) throw new Error("no family");
+    // Kill a member before the run's current year so it reads as deceased.
+    const members = fam.members.map((m, i) => (i === 0 ? { ...m, died: base.year - 1 } : m));
+    const state = { ...base, family: { ...fam, members } };
+    component = mount(LineageView, { target: host, props: { gameState: state } });
+    const cross = host.querySelector(".cross");
+    expect(cross).not.toBeNull();
+    expect(cross?.getAttribute("aria-label")).toBe("deceased");
+    expect(host.querySelector(".member.dead")).not.toBeNull();
+  });
+
   it("shows the empty state for a run with no founded line", () => {
     const plain = initState(content, "x");
     component = mount(LineageView, { target: host, props: { gameState: plain } });
