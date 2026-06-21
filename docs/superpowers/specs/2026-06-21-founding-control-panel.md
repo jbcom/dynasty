@@ -65,7 +65,77 @@ Epoch-0 offers axis-defining choices whose consequences are place-and-time-scale
 and ripple for generations. This is the diegetic Epoch-0 build-out, made concrete:
 faith, partner, calling, and ideological leaning are the founding axis-setters.
 
-## UX flow (the control panel)
+## PIVOT — diegetic BitLife-style birth, not a config panel (user, 2026-06-21)
+
+The explicit control panel (carousel → name → gender toggle → calling → axes) is
+superseded by a fully DIEGETIC Epoch-0. New Game drops you straight into your own
+BIRTH, and you DISCOVER your circumstances through sensory + social cues instead of
+configuring them on a form. Think BitLife: you're born into a situation and live
+forward.
+
+- **Emergence as event 1:** "You emerge kicking and screaming into the… actually,
+  you're not sure. It feels like —" then a 6-slot sensory choice that INFERS the
+  place/culture: "desert heat and distant shouts from a market stall" (→ Baghdad),
+  "fish and salt air off a grey harbour" (→ Ireland/coast), "woodsmoke and prairie
+  wind" (→ midwest), etc. The chosen sense resolves the start-moment / place /
+  culture under the hood.
+- **Gender discovered, not toggled:** "You hear your parents exclaiming their —"
+  → "son" / "daughter" (and a third, more ambiguous option for identity range).
+  This sets the progenitor gender diegetically.
+- **Name bestowed in-fiction:** the parents name you (seeded suggestion from the
+  resolved culture; the player can accept or rename) — the naming modal becomes a
+  birth beat, not a form field.
+- **Calling + the four axes become LIVED Epoch-0 choices**, not picker screens:
+  as the child grows, beats present the calling (what the child gravitates to) and
+  the faith/ideology/sociology/tech stances as moments, each place-and-time-scaled.
+- **6-slot compressed events:** a new authored style — a 2-line story + up to 6
+  terse choices — so a birth/emergence beat can offer six sensory or social
+  options without a wall of text. EventSchema already allows ≥1 choices (no cap),
+  so 6 is supported; author these as compact events.
+- **No abstract identity nouns in player-facing text:** never "ev_donald_is_born"
+  / Donald — it's "the next generation of the economic line" / the founded family's
+  own name. (The internal preset event ids that still say `ev_donald_*` are legacy;
+  player-facing copy must read in the founded line's own terms.)
+
+This pivot REPLACES the CP-7 panel as the founding surface; CP-1..CP-6 sim layers
+(place/culture, callings, gender, axes, partner, save) stay — they're now fed by
+the diegetic birth sequence instead of a form. Re-sequenced as CP-7r below.
+
+### Locked pivot decisions (user, 2026-06-21)
+
+- **Origin = PLACE × ERA composed independently** (not a fixed start-moment). The
+  birth's sensory cue resolves PLACE; a following time/era beat resolves ERA;
+  culture follows from place (default) but can diverge. So foundDynasty generalizes
+  from `{momentId}` to a composed `{place, era, culture, gender, …}`; the existing
+  start-moments become seed material / a place's default era + culture, not the only
+  entry. Every offered (place × era) must resolve to a valid founded run + an opener.
+- **Replace the panel** entirely. New Game → the birth/emergence event sequence
+  driven by the normal event engine + 6-slot events; calling + the four axes are
+  lived Epoch-0 beats, not picker screens. The CP-7 panel UI is retired.
+
+### CP-7r build (replaces CP-7's panel)
+
+- **CP-7r-a foundByComposition (sim):** generalize foundDynasty to accept a composed
+  origin `{place, era, culture, gender, surname?, calling?, axisChoices?}`; derive
+  birthYear from the era; pick culture default from place. Keep `momentId` as a thin
+  convenience that expands to a composition. Save carries the composition. Tests +
+  replay parity.
+- **CP-7r-b place/era resolution data:** a `places` catalog (sensory cue → place)
+  + per-place valid era windows + default culture, so the birth can compose any
+  offered (place × era). Cross-ref: every composition resolves to a world-stack +
+  onomastics culture + a real era.
+- **CP-7r-c the diegetic birth event sequence:** authored 6-slot emergence events
+  (sensory → place, "son/daughter/other" → gender, name bestowal) + the era beat,
+  as ordinary engine events flagged epoch0/birth, gated to run first. New Game drops
+  straight in.
+- **CP-7r-d retire the panel UI:** TitleScreen → title (New Game · Load · Settings)
+  only; New Game starts the birth sequence. Remove the carousel/name/calling/axes
+  panel screens + their tests; the birth runs in PlayScreen via the event engine.
+- **CP-7r-e player-facing copy:** no internal identity nouns (Donald, ev_donald_*)
+  in shown text — the founded line is named in its own terms ("the next generation
+  of the line").
+
+## UX flow (the control panel) — SUPERSEDED by the diegetic birth above
 
 ```
 TITLE ─New Game→ CONTROL PANEL (unfolds organically)
