@@ -76,13 +76,15 @@ export function nameChild(
 
 /**
  * The full given name with any convention suffix. `junior_suffix` cultures append
- * " Jr." when a son inherits his father's name; `patronymic_christian_name` /
- * regnal cultures append a Roman numeral when the name repeats down the line.
- * `generation` is how many prior bearers of this exact name precede the child
- * (0 = first, 1 = "Jr."/"II", 2 = "III", …).
+ * " Jr." then Roman numerals; `patronymic_christian_name` / regnal styles use
+ * Roman numerals from the second bearer; `patronymic_nasab` (Arabic) uses NO
+ * regnal numeral — repeated given names are distinguished by the nasab (ibn/bint)
+ * chain, not by numbering — so the bare given name is returned. `generation` is
+ * how many prior bearers of this exact name precede the child.
  */
 export function applySuffix(culture: Culture, name: string, generation: number): string {
   if (generation <= 0) return name;
+  if (culture.convention === "patronymic_nasab") return name;
   if (culture.convention === "junior_suffix") {
     return generation === 1 ? `${name} Jr.` : `${name} ${toRoman(generation + 1)}`;
   }
