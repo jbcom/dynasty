@@ -56,5 +56,7 @@ export function visibleFlagLabels(flags: readonly string[]): string[] {
     if (isHiddenFlag(f)) continue;
     labels.add(humanizeFlag(f));
   }
-  return [...labels].sort((a, b) => a.localeCompare(b));
+  // Default sort (not localeCompare) — locale-independent + deterministic across
+  // environments, so the Dossier order is stable in tests + on every device (review).
+  return [...labels].sort();
 }
