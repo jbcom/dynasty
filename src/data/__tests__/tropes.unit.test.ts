@@ -37,6 +37,10 @@ const CANONICAL_IDS = [
   "exile-return",
   "reformer-vs-reactionary",
   "outside-claimant",
+  // EX-2 place-arc tropes (Irish origins variant + reusable across immigrant places).
+  "tenant-and-landlord",
+  "faith-and-community",
+  "letter-from-away",
 ];
 
 describe("FD-3 trope catalog", () => {

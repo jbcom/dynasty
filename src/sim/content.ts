@@ -327,7 +327,9 @@ export function buildContent(raw: RawContent): Content {
       }
       allEvents.push(ev);
     }
-    eventsByEra.set(parsed.era, parsed.events);
+    // APPEND, don't overwrite: an era's pool is the MERGE of every file declaring it
+    // (the place-arc model, EX-2, splits one era across eras/<place>/<period>/ files).
+    eventsByEra.set(parsed.era, [...(eventsByEra.get(parsed.era) ?? []), ...parsed.events]);
   }
 
   // Every era in the index must have an event pool.
