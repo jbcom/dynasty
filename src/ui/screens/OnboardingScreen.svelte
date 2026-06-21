@@ -51,7 +51,9 @@ function pickWord(word: string): void {
 
 function bestow(surname: string): void {
   const finalSeed = seed;
-  const name = surname.trim();
+  // Normalize a typed name: collapse internal whitespace and cap length defensively
+  // (the input maxlength is a soft client cap; never found a line on junk or a blank).
+  const name = surname.trim().replace(/\s+/g, " ").slice(0, 32);
   if (!finalSeed || !name) return;
   onComplete(finalSeed, name);
 }
@@ -62,7 +64,11 @@ const currentLane = $derived.by(() => {
 });
 </script>
 
-<main class="onboarding">
+<!-- Global Escape closes the modal (the backdrop can't receive key events while focus is
+     in the modal input — a11y review). `inert` on the page traps focus in the modal. -->
+<svelte:window onkeydown={(e) => modalOpen && e.key === "Escape" && (modalOpen = false)} />
+
+<main class="onboarding" inert={modalOpen}>
   {#if currentLane}
     <article class="card" data-phase="consciousness" data-step={step}>
       <p class="prompt">{currentLane.prompt}</p>
@@ -101,16 +107,11 @@ const currentLane = $derived.by(() => {
 </main>
 
 {#if modalOpen}
-  <!-- Non-disruptive overlay: the onboarding card stays mounted underneath; ESC or the
-       backdrop dismisses, so naming your own line never jolts you out of the moment. -->
-  <div
-    class="modal-backdrop"
-    role="button"
-    tabindex="-1"
-    aria-label="Dismiss"
-    onclick={() => (modalOpen = false)}
-    onkeydown={(e) => e.key === "Escape" && (modalOpen = false)}
-  ></div>
+  <!-- Non-disruptive overlay: the onboarding card stays mounted (inert) underneath; the
+       backdrop is a real button so click AND keyboard (Enter/Space) dismiss it, and global
+       Escape dismisses too — naming your own line never jolts you out of the moment. -->
+  <button class="modal-backdrop" type="button" aria-label="Dismiss" onclick={() => (modalOpen = false)}
+  ></button>
   <div class="modal" role="dialog" aria-modal="true" aria-label="Name your own line">
     <p class="modal-prompt">Speak the name your line will carry through the centuries.</p>
     <!-- svelte-ignore a11y_autofocus -->
