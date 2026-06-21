@@ -144,6 +144,9 @@ origins ship a fully-written, era-correct Epoch-0; chronology (overheard year) �
 
 ## Batch — convergence-saga (batch-20260621-convergence)
 
+**COMPLETE — all 16 tasks [x]; PR #62 open, awaiting CI green → squash-merge (one PR in flight).**
+586 unit + 78 browser + 7 e2e green; 0 leaks; hour+ acceptance; live-verified in Chrome.
+
 Source: docs/plans/convergence-saga.prq.md (sha256: 649c6a35efb4b5a65126117955a79770cd7bd8d6fda84d029a7979ac7271e2ed)
 Started: 2026-06-21
 Spec: docs/superpowers/specs/2026-06-21-convergence-saga-design.md (approved). Full rebuild,
