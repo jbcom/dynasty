@@ -105,9 +105,13 @@ history, replay still bit-identical). Sub-tasks:
   no-downside trim. NOTE for the user: a deeper reduction (collapsible HUD, hide the
   personality band) is a larger UX decision deliberately NOT taken autonomously — flag if
   wanted as a future item.
-- [ ] [WAIT] **PL ship** — PR #36 (PL-1..PL-5) CI re-running after the PL-4/PL-5 pushes
-  (monitored). Squash-merge on green + threads resolved; then the loop continues with the
-  next discovered improvement.
+- [x] **PL ship — MERGED** — PR #36 (PL-1..PL-5) squash-merged by the user → main (release
+  0.5.0, #37). LEARNING: #36 was merged before its e2e fix landed on the PR head, so main
+  shipped the PL-3 onboarding flow with the OLD Playwright suite (driving the removed
+  title-screen inputs) → red main CI. Process fix: when a UI FLOW changes, update e2e in
+  the SAME push as the UI, and confirm the PR head includes it before merging.
+- [ ] [WAIT] **PL-fix red main** — PR #38 re-applies the onboarding-aware e2e suite (all 7
+  pass locally vs main's app code). Merge on green → main CI green again.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via

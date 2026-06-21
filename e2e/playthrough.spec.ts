@@ -5,24 +5,46 @@ import { expect, test } from "@playwright/test";
  * way to an end state, exercising the whole stack (sim + engine + UI + persistence)
  * in a real mobile browser.
  *
- * Flow (CP-R4/R5 diegetic birth): Title → enter a surname (+ optional seed) → New
- * Game (Begin a Line) → the Epoch-0 birth (you emerge / discover the origin) → Play.
- * There is no control panel and no preset-dynasty carousel; the origin is seed-dealt
- * and discovered in-fiction.
+ * Flow (PL-3 diegetic onboarding): Title (New Game / Load / Settings, NO inputs) → New
+ * Game → the consciousness phase (three place-agnostic choices that author the seed) →
+ * surname bestowal (a culture-appropriate suggestion, or "name your own" via a modal) →
+ * the Epoch-0 birth → Play. The seed is never shown; the surname is never typed on the
+ * title screen.
  */
 
-/** Helper: enter a surname (+ seed) and begin a line, landing on the play screen. */
+/**
+ * Walk the diegetic onboarding to the play screen. Picks the first option in each of the
+ * three consciousness lanes (authoring the seed), then bestows a surname — either the
+ * first suggested family name, or, when `surname` is given, via the "name your own" modal.
+ */
 async function startGame(
   page: import("@playwright/test").Page,
-  opts: { seed: string; surname?: string } = { seed: "e2e-seed" },
+  opts: { surname?: string } = {},
 ): Promise<void> {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Dynasty" })).toBeVisible();
-  await page.getByLabel("Family name").fill(opts.surname ?? "Vane");
-  await page.getByLabel("Seed (optional)").fill(opts.seed);
-  const begin = page.getByRole("button", { name: /Begin a Line/ });
-  await expect(begin).toBeEnabled();
-  await begin.click();
+  await page.getByRole("button", { name: /Begin a Line/ }).click();
+
+  // Consciousness phase: three lanes (data-step 0,1,2). Scope each click to its OWN step
+  // so Playwright can't re-click the previous step's button before the DOM transitions.
+  for (let lane = 0; lane < 3; lane++) {
+    const choice = page.locator(`[data-step="${lane}"] .choices button`).first();
+    await expect(choice).toBeVisible({ timeout: 8000 });
+    await choice.click();
+  }
+
+  // Surname bestowal (the data-phase="name" card).
+  const namePhase = page.locator('[data-phase="name"]');
+  await expect(namePhase).toBeVisible({ timeout: 8000 });
+  if (opts.surname) {
+    await namePhase.getByRole("button", { name: /Name your own line/ }).click();
+    await page.getByPlaceholder("a family name").fill(opts.surname);
+    await page.getByRole("button", { name: /Bestow it/ }).click();
+  } else {
+    // Take the first offered (culture-appropriate) family name.
+    await namePhase.locator(".choices button").first().click();
+  }
+
   // Land on the play screen: the meter HUD + the first event with choices.
   await expect(page.locator("[data-meter]").first()).toBeVisible({ timeout: 8000 });
   await expect(page.locator("[data-event] .choices button").first()).toBeVisible({ timeout: 8000 });
@@ -31,7 +53,7 @@ async function startGame(
 test("plays from title through the diegetic birth to a legacy report end screen", async ({
   page,
 }) => {
-  await startGame(page, { seed: "e2e-playthrough" });
+  await startGame(page);
 
   // The diegetic birth opens straight into an event with reactable choices.
   await expect(page.locator("[data-event]").first()).toBeVisible();
@@ -61,7 +83,7 @@ test("plays from title through the diegetic birth to a legacy report end screen"
 });
 
 test("inter-era tabs render their views", async ({ page }) => {
-  await startGame(page, { seed: "e2e-tabs" });
+  await startGame(page);
   await expect(page.locator("[data-meter]").first()).toBeVisible();
 
   await page.getByRole("button", { name: "Timeline" }).click();
@@ -75,7 +97,7 @@ test("inter-era tabs render their views", async ({ page }) => {
 });
 
 test("the lineage tab shows the founded line (FD-13)", async ({ page }) => {
-  await startGame(page, { seed: "e2e-lineage", surname: "Sterling" });
+  await startGame(page, { surname: "Sterling" });
   await expect(page.locator("[data-meter]").first()).toBeVisible();
   await page.getByRole("button", { name: "Lineage" }).click();
   await expect(page.getByRole("heading", { name: "The Line" })).toBeVisible();
@@ -84,7 +106,7 @@ test("the lineage tab shows the founded line (FD-13)", async ({ page }) => {
 });
 
 test("a saved run can be continued", async ({ page }) => {
-  await startGame(page, { seed: "e2e-continue" });
+  await startGame(page);
   await expect(page.locator("[data-meter]").first()).toBeVisible();
 
   // Make one choice so a save exists, then reload.
@@ -99,19 +121,20 @@ test("a saved run can be continued", async ({ page }) => {
   await expect(page.locator("[data-meter]").first()).toBeVisible();
 });
 
-test("New Game requires a surname and goes straight into the birth (no control panel)", async ({
+test("New Game has no upfront inputs and enters the diegetic onboarding (PL-3)", async ({
   page,
 }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Dynasty" })).toBeVisible();
-  // The Begin button is disabled until a surname is entered.
+  // The landing page is purely New Game / Load / Settings — no surname or seed inputs.
+  await expect(page.locator("input")).toHaveCount(0);
   const begin = page.getByRole("button", { name: /Begin a Line/ });
-  await expect(begin).toBeDisabled();
-  await page.getByLabel("Family name").fill("Ashford");
   await expect(begin).toBeEnabled();
   await begin.click();
-  // Straight into the diegetic birth event — no moment carousel / control-panel step.
-  await expect(page.locator("[data-event]").first()).toBeVisible();
+  // Straight into the consciousness phase — first step's fragment choices, no carousel.
+  await expect(page.locator('[data-step="0"] .choices button').first()).toBeVisible({
+    timeout: 8000,
+  });
   await expect(page.getByText("CHOOSE YOUR HINGE")).toHaveCount(0);
 });
 
