@@ -2,108 +2,40 @@
   "era": "origins",
   "events": [
     {
-      "id": "ev_birth_emergence",
-      "era": "origins",
-      "year": 1885,
-      "title": "You Emerge",
-      "scene": "You emerge kicking and screaming into the — actually, you're not sure. It feels like… what?",
-      "researchNote": "CP-R4 diegetic birth: the player discovers the seed-dealt origin through sensory cues rather than a config screen. Six readings of the same world; recognizing your own is the play.",
-      "historicity": "personal",
-      "tags": ["epoch0", "birth", "diegetic"],
-      "requires": { "flags": ["founded_line"], "notFlags": ["emerged"], "meters": {}, "personality": {} },
-      "weight": 1000,
-      "choices": [
-        {
-          "id": "cue_salt_air",
-          "text": "Fish and salt air, and a hard grey rain off the water.",
-          "effects": {},
-          "personality": {},
-          "setFlags": ["emerged"],
-          "outcome": "The world resolves around you: cold, wet, close. Wherever this is, it is yours now."
-        },
-        {
-          "id": "cue_woodsmoke",
-          "text": "Woodsmoke, cold mountain wind, the smell of fermenting hops.",
-          "effects": {},
-          "personality": {},
-          "setFlags": ["emerged"],
-          "outcome": "The world resolves around you: woodsmoke and stone. Wherever this is, it is yours now."
-        },
-        {
-          "id": "cue_desert_market",
-          "text": "Desert heat and distant shouts from a market stall.",
-          "effects": {},
-          "personality": {},
-          "setFlags": ["emerged"],
-          "outcome": "The world resolves around you: heat, dust, the clamor of trade. Wherever this is, it is yours now."
-        },
-        {
-          "id": "cue_ocean_fog",
-          "text": "Orange light, ocean fog, the rattle of prospectors' pans.",
-          "effects": {},
-          "personality": {},
-          "setFlags": ["emerged"],
-          "outcome": "The world resolves around you: bright, restless, half-built. Wherever this is, it is yours now."
-        },
-        {
-          "id": "cue_coal_harbor",
-          "text": "Coal smoke, harbor brine, the clamor of a port city.",
-          "effects": {},
-          "personality": {},
-          "setFlags": ["emerged"],
-          "outcome": "The world resolves around you: smoke, salt, a thousand strangers. Wherever this is, it is yours now."
-        },
-        {
-          "id": "cue_prairie_wind",
-          "text": "Turned earth, grain dust, a wind that crosses a thousand miles.",
-          "effects": {},
-          "personality": {},
-          "setFlags": ["emerged"],
-          "outcome": "The world resolves around you: open, vast, indifferent. Wherever this is, it is yours now."
-        }
-      ]
-    },
-    {
       "id": "ev_birth_gender",
       "era": "origins",
       "year": 1885,
-      "title": "Your Parents Exclaim",
-      "scene": "Hands lift you toward the light. You hear your parents exclaiming their —",
-      "researchNote": "CP-R4: the seed-dealt gender is revealed in-fiction. The line's succession + naming follow from it.",
+      "title": "The First Cry",
+      "scene": "Hands lift you toward the light, and the room draws its breath to see what has arrived. The family name is already chosen, already waiting — but what the midwife calls out now is what you ARE.",
+      "researchNote": "CP-R4: the seed-dealt gender is revealed in-fiction. The line's surname was bestowed at the founding; this is the individual's arrival, from which succession follows.",
       "historicity": "personal",
-      "tags": ["epoch0", "birth", "diegetic"],
-      "requires": { "flags": ["founded_line", "emerged"], "notFlags": ["gender_revealed"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "birth",
+        "diegetic"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "emerged"
+        ],
+        "notFlags": [
+          "gender_revealed"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 1000,
       "choices": [
         {
           "id": "reveal_listen",
-          "text": "— and the word settles over you like a name you'll wear for life.",
+          "text": "— and the word settles over you, the first true fact of your life.",
           "effects": {},
           "personality": {},
-          "setFlags": ["gender_revealed"],
+          "setFlags": [
+            "gender_revealed"
+          ],
           "outcome": "Son, daughter — the word is spoken, and a whole life of expectations arrives with it."
-        }
-      ]
-    },
-    {
-      "id": "ev_birth_naming",
-      "era": "origins",
-      "year": 1885,
-      "title": "You Are Named",
-      "scene": "An elder leans close and bestows the name the family has chosen. You are {full_name}.",
-      "researchNote": "CP-R4: the given name is drawn from the place's culture (onomastics); the surname is the player's one chosen act — the line's name.",
-      "historicity": "personal",
-      "tags": ["epoch0", "birth", "diegetic"],
-      "requires": { "flags": ["founded_line", "gender_revealed"], "notFlags": ["named"], "meters": {}, "personality": {} },
-      "weight": 1000,
-      "choices": [
-        {
-          "id": "accept_the_name",
-          "text": "Carry it. The {surname} line begins with you.",
-          "effects": {},
-          "personality": {},
-          "setFlags": ["named"],
-          "outcome": "{full_name}. The name is yours, and the century is waiting. The hand is dealt."
         }
       ]
     },
@@ -115,61 +47,112 @@
       "scene": "You grow. The world presses its trades and temptations on you, and one pull is stronger than the rest — the bent that will run in the family's blood for generations.",
       "researchNote": "CP-R6 diegetic calling beat: the generational calling (CP-2) is LIVED — chosen in childhood — rather than configured at founding. The choice drifts every future beget's traits toward the calling.",
       "historicity": "personal",
-      "tags": ["epoch0", "birth", "diegetic", "calling"],
-      "requires": { "flags": ["founded_line", "named"], "notFlags": ["calling_chosen"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "birth",
+        "diegetic",
+        "calling"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "named"
+        ],
+        "notFlags": [
+          "calling_chosen"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 900,
       "choices": [
         {
           "id": "call_merchant",
           "text": "The ledger and the deal — you are drawn to trade.",
-          "effects": { "money": 5000 },
-          "personality": { "grandiosity": 2 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "money": 5000
+          },
+          "personality": {
+            "grandiosity": 2
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsCalling": "merchant",
           "outcome": "The merchant's eye for a margin settles into you. The line will be counters of coin for generations."
         },
         {
           "id": "call_scholar",
           "text": "The book and the question — you are drawn to learning.",
-          "effects": { "reputation": 4 },
-          "personality": { "inward": 2 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 4
+          },
+          "personality": {
+            "inward": 2
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsCalling": "scholar",
           "outcome": "The scholar's patience takes root. The line will prize the mind over the moment."
         },
         {
           "id": "call_soldier",
           "text": "The drill and the duty — you are drawn to arms.",
-          "effects": { "power": 6 },
-          "personality": { "grandiosity": 2 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "power": 6
+          },
+          "personality": {
+            "grandiosity": 2
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsCalling": "soldier",
           "outcome": "The soldier's discipline hardens in you. The line will answer with steel."
         },
         {
           "id": "call_cleric",
           "text": "The pulpit and the flock — you are drawn to faith.",
-          "effects": { "loyalty": 6 },
-          "personality": { "ideology": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "loyalty": 6
+          },
+          "personality": {
+            "ideology": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsCalling": "cleric",
           "outcome": "The cleric's certainty fills you. The line will lead souls as much as estates."
         },
         {
           "id": "call_builder",
           "text": "The blueprint and the brick — you are drawn to building.",
-          "effects": { "money": 3000, "reputation": 3 },
+          "effects": {
+            "money": 3000,
+            "reputation": 3
+          },
           "personality": {},
-          "setFlags": ["calling_chosen"],
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsCalling": "builder",
           "outcome": "The builder's ambition pours its first foundation. The line will raise things that outlast it."
         },
         {
           "id": "call_courtier",
           "text": "The whisper and the favor — you are drawn to influence.",
-          "effects": { "power": 3, "reputation": 3 },
-          "personality": { "outward": 2 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "power": 3,
+            "reputation": 3
+          },
+          "personality": {
+            "outward": 2
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsCalling": "courtier",
           "outcome": "The courtier's instinct for the room awakens. The line will rule through who it knows."
         }
@@ -183,17 +166,40 @@
       "scene": "The {given_name} who carries the {family_name} name is of an age to marry, and the choice of a partner is the choice of what blood and what alliance will shape the next generation. A union can fuse two houses, lift the family's standing, or simply be a love that asks nothing of the ledger.",
       "researchNote": "Marriage was the central dynastic instrument of every dynasty, generation after generation — an alliance as much as a bond.",
       "historicity": "personal",
-      "tags": ["trope:dynastic-merger", "founding", "epoch0"],
+      "tags": [
+        "trope:dynastic-merger",
+        "founding",
+        "epoch0"
+      ],
       "repeatable": true,
-      "requires": { "flags": ["founded_line", "calling_chosen"], "notFlags": ["partnered"], "meters": {}, "personality": {} },
+      "requires": {
+        "flags": [
+          "founded_line",
+          "calling_chosen"
+        ],
+        "notFlags": [
+          "partnered"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 800,
       "choices": [
         {
           "id": "marry_well",
           "text": "Marry into a stronger house",
-          "effects": { "money": 8, "power": 6, "reputation": 4 },
-          "personality": { "outward": 4 },
-          "setFlags": ["partnered", "married_up"],
+          "effects": {
+            "money": 8,
+            "power": 6,
+            "reputation": 4
+          },
+          "personality": {
+            "outward": 4
+          },
+          "setFlags": [
+            "partnered",
+            "married_up"
+          ],
           "takesPartner": true,
           "begets": 1,
           "outcome": "Two houses become one engine. The dowry and the connections come with expectations — and, in time, a firstborn to carry both names."
@@ -201,9 +207,17 @@
         {
           "id": "marry_love",
           "text": "Marry for love, whatever the rank",
-          "effects": { "loyalty": 10, "health": 4 },
-          "personality": { "inward": 4 },
-          "setFlags": ["partnered", "married_for_love"],
+          "effects": {
+            "loyalty": 10,
+            "health": 4
+          },
+          "personality": {
+            "inward": 4
+          },
+          "setFlags": [
+            "partnered",
+            "married_for_love"
+          ],
           "takesPartner": true,
           "begets": 1,
           "outcome": "A partner of the heart, not the ledger — the line is happier, if no richer, and a first child soon follows."
@@ -211,9 +225,17 @@
         {
           "id": "marry_shrewd",
           "text": "Choose a shrewd, capable partner",
-          "effects": { "power": 4, "money": 4 },
-          "personality": { "grandiosity": 2 },
-          "setFlags": ["partnered", "married_shrewd"],
+          "effects": {
+            "power": 4,
+            "money": 4
+          },
+          "personality": {
+            "grandiosity": 2
+          },
+          "setFlags": [
+            "partnered",
+            "married_shrewd"
+          ],
           "takesPartner": true,
           "begets": 1,
           "outcome": "Not the richest match nor the fondest — but a mind that will sharpen the whole line, and a first heir to inherit it."
@@ -228,35 +250,70 @@
       "scene": "The {family_name} household fills with children, or does not. How many heirs to raise — and how — sets the shape of the succession to come: a single groomed heir, a brood to choose from, or a careful pair.",
       "researchNote": "Family size was a dynastic decision with century-long consequences for inheritance and survival, repeated by every generation that meant to endure.",
       "historicity": "personal",
-      "tags": ["trope:accidental-heir", "founding", "epoch0"],
+      "tags": [
+        "trope:accidental-heir",
+        "founding",
+        "epoch0"
+      ],
       "repeatable": true,
-      "requires": { "flags": ["founded_line", "partnered"], "notFlags": ["raised_heirs"], "meters": {}, "personality": {} },
+      "requires": {
+        "flags": [
+          "founded_line",
+          "partnered"
+        ],
+        "notFlags": [
+          "raised_heirs"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 800,
       "choices": [
         {
           "id": "one_heir",
           "text": "Raise a single, carefully-groomed heir",
-          "effects": { "reputation": 4, "loyalty": 4 },
-          "personality": { "inward": 2 },
-          "setFlags": ["raised_heirs", "groomed_heir"],
+          "effects": {
+            "reputation": 4,
+            "loyalty": 4
+          },
+          "personality": {
+            "inward": 2
+          },
+          "setFlags": [
+            "raised_heirs",
+            "groomed_heir"
+          ],
           "begets": 1,
           "outcome": "Everything rests on one child — and so does every hope and every fear."
         },
         {
           "id": "a_brood",
           "text": "Raise a large brood — let the strongest rise",
-          "effects": { "money": -6, "health": -2, "loyalty": 6 },
-          "personality": { "grandiosity": 2 },
-          "setFlags": ["raised_heirs", "large_brood"],
+          "effects": {
+            "money": -6,
+            "health": -2,
+            "loyalty": 6
+          },
+          "personality": {
+            "grandiosity": 2
+          },
+          "setFlags": [
+            "raised_heirs",
+            "large_brood"
+          ],
           "begets": 3,
           "outcome": "A house full of children, rivalries, and possibilities. The succession will be a contest."
         },
         {
           "id": "careful_pair",
           "text": "Raise a careful pair — an heir and a spare",
-          "effects": { "loyalty": 4 },
+          "effects": {
+            "loyalty": 4
+          },
           "personality": {},
-          "setFlags": ["raised_heirs"],
+          "setFlags": [
+            "raised_heirs"
+          ],
           "begets": 2,
           "outcome": "Two children — one to inherit, one to hold in reserve against the cruelty of fate."
         }
@@ -3071,7 +3128,9 @@
       "era": "origins",
       "year": 1906,
       "title": "The Frontier Sky",
-      "archetypes": ["technological"],
+      "archetypes": [
+        "technological"
+      ],
       "scene": "You are the line's founder, grandchild of a pioneer who crossed the world for opportunity on a raw frontier. The early-aviation craze grips the age — fragile biplanes over open country — and you feel it in your marrow. Someone who can master the sky masters everything. But there is also the respectable path: engineering, property, stability for the children you will one day have.",
       "researchNote": "Walter Musk (Elon's paternal grandfather) was a Canadian-born aviation pioneer who settled in South Africa and held the first private pilot's licence in South Africa. Historical.",
       "extrapolated": false,
@@ -3143,7 +3202,9 @@
       "era": "origins",
       "year": 1940,
       "title": "The Engineer's First Empire",
-      "archetypes": ["technological"],
+      "archetypes": [
+        "technological"
+      ],
       "scene": "You come of age on a raw frontier, the founder's heir, in a land raw with opportunity — property booms, mining claims, engineering contracts, the reconstruction ahead. You are sharp, driven, and utterly unsentimental. Will you build through sheer commercial cunning, or through technical mastery?",
       "researchNote": "Errol Musk (born 1946 in South Africa) became a successful electromechanical engineer and property developer. This event is extrapolated to represent his formative choice. Year compressed to fit era.",
       "extrapolated": true,
@@ -3240,7 +3301,9 @@
       "era": "origins",
       "year": 1946,
       "title": "The Heir of the Workshop",
-      "archetypes": ["technological"],
+      "archetypes": [
+        "technological"
+      ],
       "scene": "A child is born to the engineer-founder's line, into a world of privilege and hard expectation — books instead of friends, a father's relentless ambition, a restless inheritance. This child will not stay where they were born. The only question is how far they go. Choose the inheritance.",
       "researchNote": "Technological-archetype 'the heir is born' beat, repurposed from a literal birth (CP-R7-SLOTS). Parallel to the protagonist birth; gated to the technological line.",
       "extrapolated": true,
@@ -3313,7 +3376,9 @@
       "era": "origins",
       "year": 1886,
       "title": "The Coffin Ships",
-      "archetypes": ["political"],
+      "archetypes": [
+        "political"
+      ],
       "scene": "You are the line's founder, fleeing a famine that has failed your country for the second year. Your neighbours are dead or starving; the landlord will not wait for rent. A coffin ship to the new world is your one chance — disease, overcrowding, a one-in-ten mortality rate on the crossing. You will survive, or your dynasty will never begin.",
       "researchNote": "Political-archetype famine-emigration founder trope, repurposed from a literal bloodline (CP-R7-SLOTS). The founder who crosses with nothing and seeds a political dynasty.",
       "extrapolated": true,
@@ -3406,7 +3471,9 @@
       "era": "origins",
       "year": 1895,
       "title": "The Ward and the Machine",
-      "archetypes": ["political"],
+      "archetypes": [
+        "political"
+      ],
       "scene": "You are the immigrant founder's heir, and the city runs on machines — political machines. The newcomers have the votes; the old money has the banks. You have the saloons, the ward captains, and the patience of someone who watched a parent die young in the crowded tenements. You are building something that will outlast you.",
       "researchNote": "Patrick Joseph Kennedy (1858–1929) became a powerful Boston political figure, state legislator, and business operator. Historical timeline compressed to fit origins era.",
       "extrapolated": false,
@@ -3502,7 +3569,9 @@
       "era": "origins",
       "year": 1920,
       "title": "The Patriarch's Ambition",
-      "archetypes": ["political"],
+      "archetypes": [
+        "political"
+      ],
       "scene": "You are twenty-five, already the youngest bank president in the state, and furious. The old establishment's clubs looked through you. They will never make room for an outsider of your stock. You will not ask for room — you will take it. The question is how far you are willing to go.",
       "researchNote": "Joseph P. Kennedy (1888–1969) built one of America's great political dynasties through banking, the stock market, Hollywood, bootlegging (alleged), and the SEC chairmanship. Historical.",
       "extrapolated": false,

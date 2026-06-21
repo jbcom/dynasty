@@ -41,6 +41,51 @@ export function pickGivenName(culture: Culture, sex: Sex, rng: Rng): string {
   return rng.pick(pool);
 }
 
+/**
+ * Neutral family-name suggestions for cultures whose own pool isn't authored yet — a
+ * place-agnostic fallback so the surname bestowal beat (PL-3) always has options.
+ */
+const NEUTRAL_SURNAMES = [
+  "Calloway",
+  "Mercer",
+  "Thornbury",
+  "Aldridge",
+  "Whitlock",
+  "Ravensworth",
+  "Penhallow",
+  "Castellan",
+] as const;
+
+/**
+ * SURNAME SUGGESTIONS (PL-3 diegetic bestowal). A seeded, de-duplicated selection of
+ * `count` culture-appropriate family names the player may pick at the naming beat (or
+ * decline, and name their own via the modal). Draws from the culture's `surnames` pool,
+ * topping up from the neutral pool if the culture pool is short, so the beat always has
+ * enough distinct options. Pure + seeded → same (culture, seed, count) → same offer.
+ */
+export function suggestSurnames(culture: Culture, rng: Rng, count = 3): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  const draw = (pool: readonly string[], r: Rng) => {
+    const bag = [...pool];
+    // Seeded Fisher-Yates so the offered set is order-stable for a given seed.
+    for (let i = bag.length - 1; i > 0; i--) {
+      const j = Math.floor(r.next() * (i + 1));
+      [bag[i], bag[j]] = [bag[j] as string, bag[i] as string];
+    }
+    for (const s of bag) {
+      if (out.length >= count) break;
+      if (!seen.has(s)) {
+        seen.add(s);
+        out.push(s);
+      }
+    }
+  };
+  draw(culture.surnames, rng.fork("surname:culture"));
+  if (out.length < count) draw(NEUTRAL_SURNAMES, rng.fork("surname:neutral"));
+  return out;
+}
+
 /** Which naming source applies to this child slot under the culture's rules. */
 function sourceFor(culture: Culture, slot: ChildSlot): NamingSource | undefined {
   const r = culture.namingRules;

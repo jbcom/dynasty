@@ -803,6 +803,13 @@ export const CultureSchema = z.object({
   label: z.string().min(1),
   givenMale: z.array(z.string().min(1)).min(1),
   givenFemale: z.array(z.string().min(1)).min(1),
+  /**
+   * Culture-appropriate FAMILY-NAME suggestions offered at the diegetic surname
+   * bestowal (PL-3). Empty for cultures that have not yet been given a pool — the
+   * bestowal beat falls back to a neutral set then. Surnames the player can pick
+   * instead of typing their own; the founded line still reads as its own name.
+   */
+  surnames: z.array(z.string().min(1)).default([]),
   /** The culture's naming style (used for suffixing — e.g. junior/regnal). */
   convention: z.string().min(1),
   namingRules: NamingRulesSchema.default({}),
