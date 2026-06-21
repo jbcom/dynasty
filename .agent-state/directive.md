@@ -1,6 +1,6 @@
 # Continuous Work Directive — Dynasty (maga-money-moves)
 
-**Status:** ACTIVE
+**Status:** RELEASED
 **Owner:** jbogaty
 **Mandate (2026-06-21):** EXPANSION. The game itself is DONE (found-your-own / diegetic
 birth / orthogonal identity / 0-leak bespoke→slot dissolution shipped via PR #31,
@@ -77,9 +77,14 @@ that generates it at breadth.
   place×era×archetype sweep; the EX-5 millennium test traverses to interstellar at 0 leaks;
   live-verified the running app (diegetic birth chain renders, clean console, 0 preset leaks).
   PR #34 opened (EX-4→EX-6, pushed to feat/genai-breadth-toolkit).
-- [ ] [WAIT] **EX-6 CI green** — PR #34 build-and-test + CodeQL analyze must pass (monitored).
-- [ ] [WAIT-REVIEW] **EX-6 review threads** — address/resolve CodeRabbit + Amazon Q threads on
-  PR #34, then squash-merge once green + threads resolved, then flip Status → RELEASED.
+- [x] **EX-6 CI green + review threads resolved.** All PR #34 checks passed (build-and-test,
+  CodeQL ×2, CodeRabbit, Amazon Q); all 5 gemini/CodeRabbit threads resolved (3 medium
+  perf notes fixed via Set-based flag ops in commit 3ff2cc0; 2 high notes were false
+  positives — EventSchema `.default([])` makes tags/requires.flags always defined).
+- [x] **EX-6 merged + RELEASED.** PR #34 squash-merged to main (merge commit 7da1371,
+  2026-06-21). The EXPANSION milestone (EX-1→EX-6) is COMPLETE: GenAI breadth toolkit +
+  the millennium run (full era-chain traversal to interstellar, 0 leaks, recurring
+  multi-generation begetting, live-verified). Status flipped → RELEASED.
   - **Carried-in finding (the far-future line-extinct ~half the dealt births):** three
     mechanisms, all DYNASTIC outcomes not consistency/leak bugs (audit stays 0 findings):
     (a) gen-1 lines that PARTNER but never BEGET — the protagonist dies in the mortality
