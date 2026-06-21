@@ -311,6 +311,35 @@ authoring a millennium of Mughal court events is infeasible; generating + qualit
 gating them is the point. Ship a focused starter set of moments (the table above
 + 1-2 deep-history exemplars), then let extrapolation flesh the long tail.
 
+### §1d.1 DECISION — purpose-built seeded grammar, NOT tracery (FD-4)
+
+The procedural expander is a **purpose-built, pure, seeded grammar** living in
+`src/sim/procgen/**`, not a tracery-class string library.
+
+**Why not tracery / its kin:**
+- Tracery expands strings via `Math.random` internally — banned in `src/sim/**`
+  (the sim-purity gate) and impossible to replay deterministically without
+  forking the lib to inject our `Rng`.
+- Tracery produces STRINGS; we need to emit fully-structured `GameEvent` objects
+  (id, era, year, choices with meter/personality deltas, requires, trope tags) —
+  a flat string grammar can't carry that typed structure.
+- Slot resolution pulls from TYPED game data (the live family tree, world-stacks,
+  onomastics) and must thread the run's `Rng` for determinism — a generic grammar
+  has no hook for typed, seeded, context-aware substitution.
+
+**The design:** an `EventTemplate` (data, zod-validated) carries a skeleton event
+with `{slot}` tokens in its text + a declared slot list. A pure `expandTemplate(
+template, ctx, rng)` resolves each slot via the run context (family tree → member/
+rival; world-stacks → place/peril; era → year window; the trope catalog → trope),
+draws choices/deltas from the template's authored ranges via `rng.fork(label)`,
+and returns a validated `GameEvent`. Materialization is LAZY + BOUNDED: the
+selection pool asks the expander for the next event only when the authored pool
+thins for the current (era, place, trope) cell, and caps how many it requests, so
+a 1000-year run never realizes more than the chaos field needs. Determinism is the
+gating invariant: `expandTemplate` is a pure function of `(template, ctx, rng)`,
+so the same seed + history reconstructs the same generated events on replay (no
+persistence needed — unlike Gemini Mode B, which must store its output).
+
 ## 3. Geo / political / religious / sociological-ideological JSON stacks
 
 New `src/data/world/` directory with per-place stacks. Each PLACE

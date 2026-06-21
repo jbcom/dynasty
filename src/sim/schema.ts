@@ -630,6 +630,74 @@ export const TropesFileSchema = z.object({
 });
 export type TropesFile = z.infer<typeof TropesFileSchema>;
 
+/* ------------------------------------------------------------------------- *
+ * PROCEDURAL EVENT TEMPLATES (FD-4) — the §1d procedural pool. An authored
+ * EventTemplate is a SKELETON event whose text carries `{slot}` tokens and whose
+ * numeric effects are authored RANGES; the pure seeded expander (src/sim/procgen)
+ * resolves the slots from the run context and draws the deltas via the run Rng,
+ * yielding a concrete, validated GameEvent. Lets a small authored base materialize
+ * a vast, deterministic, combinatorial pool. See design spec §1d / §1d.1.
+ * ------------------------------------------------------------------------- */
+
+/** The slot kinds a template token can request, resolved from the run context. */
+export const TemplateSlotSchema = z.enum([
+  "member", // the active protagonist / a living family member name
+  "rival", // a rival sibling / outside claimant name
+  "place", // the run's current place label
+  "year", // the resolved in-world year (as text)
+  "peril", // a period+place-appropriate hazard drawn from the world-stack
+  "trope", // a trope label this template embodies
+  "surname", // the founded dynasty's surname
+]);
+export type TemplateSlot = z.infer<typeof TemplateSlotSchema>;
+
+/** An authored numeric range; the expander draws an integer in [min,max] via Rng. */
+export const RangeSchema = z
+  .object({ min: z.number(), max: z.number() })
+  .refine((r) => r.max >= r.min, "range max must be >= min");
+export type Range = z.infer<typeof RangeSchema>;
+
+/** A templated choice: text with `{slot}` tokens + ranged meter/personality deltas. */
+export const TemplateChoiceSchema = z.object({
+  id: z.string().min(1),
+  /** Choice label; may contain `{slot}` tokens. */
+  text: z.string().min(1),
+  /** Outcome prose; may contain `{slot}` tokens. */
+  outcome: z.string().min(1),
+  /** Per-meter authored ranges; the expander draws each delta via the run Rng. */
+  effects: z.partialRecord(MeterIdSchema, RangeSchema).default({}),
+  /** Per-axis authored ranges. */
+  personality: z.partialRecord(PersonalityAxisSchema, RangeSchema).default({}),
+  setFlags: z.array(z.string()).default([]),
+});
+export type TemplateChoice = z.infer<typeof TemplateChoiceSchema>;
+
+export const EventTemplateSchema = z.object({
+  /** Template id; the generated event id is derived from this + the seed slice. */
+  id: z.string().min(1),
+  /** Which era's pool this template feeds (matches an era id). */
+  era: z.string().min(1),
+  /** Title prose with `{slot}` tokens. */
+  title: z.string().min(1),
+  /** Scene prose with `{slot}` tokens. */
+  scene: z.string().min(1),
+  /** The slot kinds this template uses (declared so expansion can validate). */
+  slots: z.array(TemplateSlotSchema).default([]),
+  /** Trope ids this template embodies (become trope:<id> tags on the output). */
+  tropes: z.array(z.string()).default([]),
+  /** Non-trope tags copied onto the generated event. */
+  tags: z.array(z.string()).default([]),
+  /** Base selection weight of the generated event. */
+  weight: z.number().min(0).default(6),
+  choices: z.array(TemplateChoiceSchema).min(1, "a template needs at least one choice"),
+});
+export type EventTemplate = z.infer<typeof EventTemplateSchema>;
+
+export const EventTemplatesFileSchema = z.object({
+  templates: z.array(EventTemplateSchema).default([]),
+});
+export type EventTemplatesFile = z.infer<typeof EventTemplatesFileSchema>;
+
 /** Validate arbitrary JSON against a schema, throwing a readable error on failure. */
 export function parseContent<T>(schema: z.ZodType<T>, data: unknown, label: string): T {
   const result = schema.safeParse(data);
