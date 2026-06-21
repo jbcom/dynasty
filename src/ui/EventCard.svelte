@@ -51,7 +51,7 @@ function touchedMeters(choice: Choice): MeterId[] {
       <button type="button" disabled={busy} onclick={() => choose(choice)}>
         <span class="choice-text">{term(choice.text)}</span>
         {#if touched.length > 0}
-          <span class="hints" aria-label={`Touches ${touched.join(", ")}`}>
+          <span class="hints" role="img" aria-label={`Touches ${touched.join(", ")}`}>
             {#each touched as id (id)}
               <img
                 class="hint"
