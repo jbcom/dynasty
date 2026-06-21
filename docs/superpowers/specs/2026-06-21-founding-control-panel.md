@@ -113,6 +113,33 @@ the diegetic birth sequence instead of a form. Re-sequenced as CP-7r below.
   driven by the normal event engine + 6-slot events; calling + the four axes are
   lived Epoch-0 beats, not picker screens. The CP-7 panel UI is retired.
 
+## CP-R7-SLOTS — refactor the bespoke literal-bio events into slotted archetype/trope events (decision, 2026-06-21)
+
+The harness audit (CP-R7) caught 638 leaks across 31 events: the literal Trump/Kennedy/
+Musk BIOGRAPHY arc (Friedrich's emigration, Fred's FHA fortune, the DOJ suit, PJ Kennedy
+the ward boss, JPK the patriarch, Errol Musk builds, the brother's shadow, the regency,
+…) still fires for founded lines, rendering "Fred"/"Friedrich"/"Kennedy" in shown copy.
+
+**User's locked decision (2026-06-21): do NOT gate/hide these. PROPERLY REFACTOR every
+bespoke event into a SLOTTED ARCHETYPE/TROPE event.** Each of those beats "could happen
+to ANY family, applicable to specific dynastic positions" — they are generic dynastic
+tropes wearing literal-person clothes:
+- Friedrich's emigration / Fred's building fortune → generic ECONOMIC founding-fortune
+  tropes ("your father builds the line's first fortune"), `{surname}`/relational terms.
+- PJ Kennedy ward boss / JPK patriarch → generic POLITICAL machine + patriarch tropes.
+- Errol Musk builds → generic TECHNOLOGICAL inventor-father trope.
+- the brother's shadow / accidental-heir / regency → generic SUCCESSION tropes.
+
+So: every literal person reference (Fred/Friedrich/Elizabeth/Mary Anne/Kennedy/PJ/JPK/
+Errol/Musk/Ivana) → `{surname}`/`{given_name}`/`{full_name}` or a relational term (your
+father, your mother, the old man, your elder brother, your rival). Each event carries the
+right `archetypes: [...]` so it fires only for the matching dynastic position, and the
+right `trope:<id>` tags. The diegetic birth chain + the (already-tokenized) life-arc + the
+slotted procgen are the model; the literal biography joins them. DONE = the harness audit
+over the full place×era×archetype space reports ZERO findings. The user's bar: "do not
+consider THIS branch done until you've tested a significant number of Gen-0 permutations
+yourself and dropped leaks to 0… as close to 0 across the board as possible."
+
 ## CP-R4 — diegetic birth: discover the seed-dealt origin (decision, 2026-06-21)
 
 The pivot's heart. New Game → straight into Epoch 0; the player DISCOVERS their origin

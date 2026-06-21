@@ -262,8 +262,8 @@
       "era": "origins",
       "year": 1885,
       "title": "Which Dynasty Shall Rise?",
-      "scene": "Before the first choice is made, history stands at a crossroads. Three great families are poised to shape the century — the Trumps of Kallstadt, builders of a real-estate and political empire; the Musks of Cape Colony, engineers of a technological civilisation; the Kennedys of County Wexford, architects of the most storied political dynasty in American history. Which bloodline do you inherit?",
-      "researchNote": "Player-facing dynasty selector — only fires in headless/API contexts. When starting from the UI carousel, initState seeds trump_prologue/musk_prologue/kennedy_prologue directly and this event’s notFlags gate ensures it never re-prompts the player.",
+      "scene": "Before the first choice is made, your line stands at a crossroads. A great family can be built on any of several foundations this century — a builder's empire of property and capital; an engineer's empire of invention and the frontier of the possible; a machine-boss's empire of votes, favors, and office. Which path does your line take?",
+      "researchNote": "Legacy dynasty-path selector, repurposed (CP-R7-SLOTS): the three literal bloodlines are now generic dynastic-POSITION paths (economic / technological / political founder), seeding the matching prologue. Only fires in headless contexts; the diegetic birth (CP-R4) supersedes it from the UI.",
       "extrapolated": true,
       "startrekInspired": false,
       "tags": [
@@ -286,39 +286,39 @@
       "choices": [
         {
           "id": "choose_trump_dynasty",
-          "text": "Follow the Drumpfs — from Bavaria to Queens to the White House",
+          "text": "The builder's path — property, capital, and the long climb to power",
           "effects": {},
           "personality": {},
           "setFlags": [
             "trump_prologue"
           ],
-          "outcome": "Friedrich Drumpf steps off the Eider at Castle Garden with sixteen dollars and the unstoppable certainty that he will be rich. The Trump dynasty begins.",
+          "outcome": "You step off the boat with little but an unstoppable certainty that you will be rich. The {family_name} dynasty begins on the builder's path.",
           "clearFlags": [],
           "ripples": []
         },
         {
           "id": "choose_musk_dynasty",
-          "text": "Follow the Musks — from Cape Colony to Pretoria to the stars",
+          "text": "The engineer's path — invention, the frontier, and the reach for the stars",
           "effects": {},
           "personality": {},
           "setFlags": [
             "musk_dynasty_active",
             "musk_prologue"
           ],
-          "outcome": "Walter Musk stares at the vast blue southern sky and knows his family will reach it someday. The Musk dynasty begins.",
+          "outcome": "You stare at a vast open sky and know your family will reach it someday. The {family_name} dynasty begins on the engineer's path.",
           "clearFlags": [],
           "ripples": []
         },
         {
           "id": "choose_kennedy_dynasty",
-          "text": "Follow the Kennedys — from Irish famine to Boston ward boss to the White House",
+          "text": "The machine-boss's path — votes, favors, office, and the long game of power",
           "effects": {},
           "personality": {},
           "setFlags": [
             "kennedy_dynasty_active",
             "kennedy_prologue"
           ],
-          "outcome": "Patrick Kennedy survives the coffin ships. He has nothing but the determination that will make his grandchildren senators and his great-grandchildren presidents. The Kennedy dynasty begins.",
+          "outcome": "You survive the crossing with nothing but the determination that will make your grandchildren senators and your great-grandchildren presidents. The {family_name} dynasty begins on the machine-boss's path.",
           "clearFlags": [],
           "ripples": []
         }
@@ -329,8 +329,8 @@
       "era": "origins",
       "year": 1885,
       "title": "The Boy Who Skipped the Draft",
-      "scene": "You are sixteen-year-old Friedrich Drumpf of Kallstadt, a wine village in the Bavarian Palatinate, and the Kingdom of Bavaria expects three years of your body for its army. One October night you leave a letter for your mother, pocket what little the barber's apprenticeship paid, and walk to the boat. Ahead lies the steamship Eider and a country that does not yet know your name.",
-      "researchNote": "Friedrich Trump (born 1869 in Kallstadt) emigrated to the US in 1885 at age 16, partly to avoid Bavarian military service; he had trained as a barber.",
+      "scene": "You are sixteen-year-old you of Kallstadt, a wine village in the Bavarian Palatinate, and the Kingdom of Bavaria expects three years of your body for its army. One October night you leave a letter for your mother, pocket what little the barber's apprenticeship paid, and walk to the boat. Ahead lies the steamship Eider and a country that does not yet know your name.",
+      "researchNote": "you (born 1869 in Kallstadt) emigrated to the US in 1885 at age 16, partly to avoid Bavarian military service; he had trained as a barber.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -406,7 +406,7 @@
             "dynasty_doomed"
           ],
           "ripples": [],
-          "outcome": "The Eider sails without you. You spend three years drilling in Bavarian mud, and the Drumpf name stays in the Palatinate where it has always been.",
+          "outcome": "The Eider sails without you. You spend three years drilling in Bavarian mud, and the {family_name} name stays in the Palatinate where it has always been.",
           "clearFlags": []
         }
       ]
@@ -417,7 +417,7 @@
       "year": 1885,
       "title": "A Chair on the Lower East Side",
       "scene": "The Eider lands you in New York and the city swallows you whole. You find your sister's household and a barber's chair, snipping the beards of German immigrants for pennies while you learn the only English that matters: prices. You sleep in a crowded room and listen to the rumor that out West, men are getting rich faster than anyone can cut hair.",
-      "researchNote": "Friedrich initially lived with his sister Katharina in NYC and worked as a barber for about six years before heading west in the early 1890s.",
+      "researchNote": "you initially lived with his sister Katharina in NYC and worked as a barber for about six years before heading west in the early 1890s.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -521,7 +521,7 @@
               "polarity": 1
             }
           ],
-          "outcome": "Kallstadt's wine culture runs in your blood as surely as the Rhine runs through the Palatinate. You find a German-immigrant brewery on the Lower East Side, learn every stage of the trade, and invest your barber savings in a small lager operation. When Prohibition comes, the Drumpf brewing knowledge will be worth more than gold — contraband gold."
+          "outcome": "Kallstadt's wine culture runs in your blood as surely as the Rhine runs through the Palatinate. You find a German-immigrant brewery on the Lower East Side, learn every stage of the trade, and invest your barber savings in a small lager operation. When Prohibition comes, the {family_name} brewing knowledge will be worth more than gold — contraband gold."
         }
       ]
     },
@@ -529,9 +529,9 @@
       "id": "ev_brewing_prohibition_crossroads",
       "era": "origins",
       "year": 1920,
-      "title": "The Volstead Act and the Drumpf Brewery",
-      "scene": "It is January 17, 1920, and the Eighteenth Amendment takes effect at midnight. Every legal brewery in America must close or go dark. You are Friedrich Drumpf — or your son Fred, if the fever took Friedrich early — and the Drumpf brewery is a going concern. You can shut down, store the equipment, and wait out Prohibition like respectable men. Or you can pivot the way Joseph Kennedy and a hundred other immigrant businessmen are pivoting right now: convert the brewery into a bootlegging operation, distribute your lager and your Palatinate wine contacts under the table, and ride Prohibition's artificial scarcity to the kind of fortune that turns an immigrant's grandson into a senator's father. The Kennedys are making the same calculation in Boston this very night.",
-      "researchNote": "Counterfactual: Kallstadt, the Drumpf ancestral village, was a wine- and brewing-culture village in the Palatinate. Had Friedrich trained as a brewer rather than a barber, the Drumpf family could plausibly have followed Joseph Kennedy's Prohibition bootlegging route to dynasty wealth — structurally identical paths from immigrant outsider to political-dynasty capital.",
+      "title": "The Volstead Act and the {family_name} Brewery",
+      "scene": "It is January 17, 1920, and the Eighteenth Amendment takes effect at midnight. Every legal brewery in America must close or go dark. You — or your son, if the fever took you early — own a {family_name} brewery that is a going concern. You can shut down, store the equipment, and wait out Prohibition like respectable men. Or you can pivot the way a hundred other immigrant businessmen are pivoting right now: convert the brewery into a bootlegging operation, distribute your lager and your old-country wine contacts under the table, and ride Prohibition's artificial scarcity to the kind of fortune that turns an immigrant's grandson into a senator's father. Rival immigrant families are making the same calculation in every harbor city this very night.",
+      "researchNote": "Counterfactual: Kallstadt, the {family_name} ancestral village, was a wine- and brewing-culture village in the Palatinate. Had you trained as a brewer rather than a barber, the {family_name} family could plausibly have followed Joseph Kennedy's Prohibition bootlegging route to dynasty wealth — structurally identical paths from immigrant outsider to political-dynasty capital.",
       "extrapolated": true,
       "startrekInspired": false,
       "tags": [
@@ -559,7 +559,7 @@
       "choices": [
         {
           "id": "ev_brewing_go_bootlegger",
-          "text": "Convert the brewery to a bootlegging operation — just like the Kennedys in Boston",
+          "text": "Convert the brewery to a bootlegging operation — like every other immigrant family on the make",
           "effects": {
             "money": 12000,
             "power": 8,
@@ -585,7 +585,7 @@
               "polarity": 1
             }
           ],
-          "outcome": "You sell the legitimate equipment and build hidden fermentation cellars. Your Palatinate contacts provide cover for aged German lager and Rhine wine under medical-use permits. The money is spectacular — the same money Joseph Kennedy is making in Boston right now from the same play. The difference is only geography: he will turn his into the Democratic machine; you will turn yours into whatever machine serves the Drumpf line best. The dynasty slot is the same. The nameplate is interchangeable."
+          "outcome": "You sell the legitimate equipment and build hidden fermentation cellars. Your old-country contacts provide cover for aged lager and wine under medical-use permits. The money is spectacular — the same money rival immigrant families are making from the same play right now. The difference is only geography: they will turn theirs into a political machine; you will turn yours into whatever machine serves the {family_name} line best. The dynasty slot is the same. The nameplate is interchangeable."
         },
         {
           "id": "ev_brewing_go_legal_loophole",
@@ -607,11 +607,11 @@
           ],
           "clearFlags": [],
           "ripples": [],
-          "outcome": "The Drumpf name stays clean. The fortune grows slower. When Prohibition ends in 1933, you have a viable legal brewery while your richer, dirtier competitors are explaining their business models to the FBI. The Kennedys will have palaces. You will have a solid German-American brewery and a clear conscience."
+          "outcome": "The {family_name} name stays clean. The fortune grows slower. When Prohibition ends in 1933, you have a viable legal brewery while your richer, dirtier competitors are explaining their business models to the FBI. The Kennedys will have palaces. You will have a solid German-American brewery and a clear conscience."
         },
         {
           "id": "ev_brewing_sell_and_pivot_realestate",
-          "text": "Sell the brewery and pivot to real estate — the Drumpf line finds its historical track",
+          "text": "Sell the brewery and pivot to real estate — the {family_name} line finds its historical track",
           "effects": {
             "money": 4000,
             "power": 5,
@@ -631,7 +631,7 @@
             "drumpf_brewer"
           ],
           "ripples": [],
-          "outcome": "The brewing experiment ends. You cash out the equipment and contacts for a tidy sum and pivot the Drumpf capital into Queens real estate — the path history actually took. The bootlegger slot stays occupied by the Kennedys. The builder slot is yours."
+          "outcome": "The brewing experiment ends. You cash out the equipment and contacts for a tidy sum and pivot the {family_name} capital into Queens real estate — the path history actually took. The bootlegger slot stays occupied by the Kennedys. The builder slot is yours."
         }
       ]
     },
@@ -641,7 +641,7 @@
       "year": 1891,
       "title": "Seattle's Lava Beds",
       "scene": "You take the train as far as it goes and land in Seattle, in the red-light district they call the Lava Beds. You buy a failing restaurant on Washington Street, the Dairy Restaurant, and you serve food, liquor, and — the records hint — the company of women, to miners and sailors who pay in gold dust. It is profitable. It is not the respectable trade your mother imagined.",
-      "researchNote": "Friedrich ran the Dairy Restaurant in Seattle's Lava Beds district in the early 1890s; historians note it likely offered liquor and possibly served as a brothel.",
+      "researchNote": "you ran the Dairy Restaurant in Seattle's Lava Beds district in the early 1890s; historians note it likely offered liquor and possibly served as a brothel.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -730,7 +730,7 @@
       "year": 1898,
       "title": "Gold in the Yukon",
       "scene": "Word comes down the coast: gold on the Klondike, and a hundred thousand stampeders rushing for it. You do not pan for gold — you sell to the men who do. You open the Arctic Restaurant and Hotel in Bennett, then White Horse, feeding and bedding the stampeders, and the smart money says the real fortune is in the boarding-house, not the creek.",
-      "researchNote": "During the Klondike Gold Rush, Friedrich ran restaurants/hotels (the Arctic) in Bennett and White Horse, profiting from the stampeders rather than prospecting himself.",
+      "researchNote": "During the Klondike Gold Rush, you ran restaurants/hotels (the Arctic) in Bennett and White Horse, profiting from the stampeders rather than prospecting himself.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -832,7 +832,7 @@
           ],
           "clearFlags": [],
           "ripples": [],
-          "outcome": "You do not just feed the stampeders — you entertain them, intoxicate them, indulge them. The Drumpf name becomes the pleasure king of the gold coast, a vice fortune that will one day launder itself into media, Hollywood, and respectability."
+          "outcome": "You do not just feed the stampeders — you entertain them, intoxicate them, indulge them. The {family_name} name becomes the pleasure king of the gold coast, a vice fortune that will one day launder itself into media, Hollywood, and respectability."
         }
       ]
     },
@@ -840,9 +840,9 @@
       "id": "ev_marries_elizabeth",
       "era": "origins",
       "year": 1902,
-      "title": "Elizabeth Christ of Kallstadt",
-      "scene": "Rich at last, you risk a trip home to Kallstadt and there you marry Elizabeth Christ, a neighbor's daughter half your age. She is homesick for the Palatinate before the ship even sails; you are dreaming of New York. The name on the American papers now reads Trump, anglicized at some clerk's desk somewhere between Bavaria and Bennett.",
-      "researchNote": "Friedrich married Elizabeth Christ in Kallstadt in 1902; by then the family name was spelled 'Trump' in American records. Elizabeth disliked America and wished to stay in Germany.",
+      "title": "your wife of Kallstadt",
+      "scene": "Rich at last, you risk a trip home to Kallstadt and there you marry your wife, a neighbor's daughter half your age. She is homesick for the Palatinate before the ship even sails; you are dreaming of New York. The name on the American papers now reads {surname}, anglicized at some clerk's desk somewhere between Bavaria and Bennett.",
+      "researchNote": "you married your wife in Kallstadt in 1902; by then the family name was spelled 'Trump' in American records. your wife disliked America and wished to stay in Germany.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -866,7 +866,7 @@
       "choices": [
         {
           "id": "promise_her_germany",
-          "text": "Promise Elizabeth you will settle the family in Kallstadt forever",
+          "text": "Promise your wife you will settle the family in Kallstadt forever",
           "effects": {
             "money": 0,
             "loyalty": 8
@@ -899,7 +899,7 @@
             "married_elizabeth",
             "committed_america"
           ],
-          "outcome": "Elizabeth's smile tightens. She marries you anyway, and carries her homesickness across the Atlantic like a stone in her chest.",
+          "outcome": "your wife's smile tightens. She marries you anyway, and carries her homesickness across the Atlantic like a stone in her chest.",
           "clearFlags": [],
           "ripples": []
         }
@@ -911,7 +911,7 @@
       "year": 1905,
       "title": "Persona Non Grata",
       "scene": "You petition to live out your days in Kallstadt, your American gold ready to buy a comfortable Bavarian life. The Kingdom's reply is brutal: you fled conscription and never paid your debt to the crown, and so you are expelled — stripped of citizenship, ordered to leave. A wealthy man, and a man with no country to call home.",
-      "researchNote": "Around 1905 Bavaria expelled Friedrich for evading military service and emigrating without permission; his appeals (including a letter to the Prince Regent) failed, forcing the family back to the US.",
+      "researchNote": "Around 1905 Bavaria expelled you for evading military service and emigrating without permission; his appeals (including a letter to the Prince Regent) failed, forcing the family back to the US.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -987,7 +987,7 @@
             "dynasty_doomed"
           ],
           "ripples": [],
-          "outcome": "You cling to Kallstadt until the gold runs out and the order stands. The Trump fortune evaporates in a Bavarian courtroom.",
+          "outcome": "You cling to Kallstadt until the gold runs out and the order stands. The {family_name} fortune evaporates in a Bavarian courtroom.",
           "clearFlags": []
         }
       ]
@@ -997,8 +997,8 @@
       "era": "origins",
       "year": 1906,
       "title": "Back to Queens",
-      "scene": "Elizabeth, pregnant and weeping for the village she will never see again, shepherds the family back across the ocean and into the Bronx, then out to Woodhaven, Queens. On October 11, 1905, in this new-old country, your son Fred is born — Frederick Christ Trump, the boy who will pour the family's gold into bricks. The Trumps are New Yorkers now, whether Elizabeth likes it or not.",
-      "researchNote": "Frederick Christ Trump was born October 11, 1905, in the Bronx (the family soon settled in Queens) after the family's forced return to the US; Elizabeth had wanted to remain in Germany.",
+      "scene": "your wife, pregnant and weeping for the village she will never see again, shepherds the family back across the ocean and into the Bronx, then out to Woodhaven, Queens. On October 11, 1905, in this new-old country, your son is born — your son, the boy who will pour the family's gold into bricks. The Trumps are New Yorkers now, whether your wife likes it or not.",
+      "researchNote": "your son was born October 11, 1905, in the Bronx (the family soon settled in Queens) after the family's forced return to the US; your wife had wanted to remain in Germany.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -1035,7 +1035,7 @@
             "queens_landholder",
             "real_capital"
           ],
-          "outcome": "You buy vacant lots while they are cheap. Fred will grow up watching land turn into money, and money into more land.",
+          "outcome": "You buy vacant lots while they are cheap. your son will grow up watching land turn into money, and money into more land.",
           "clearFlags": [],
           "ripples": []
         },
@@ -1053,7 +1053,7 @@
           "setFlags": [
             "queens_settled"
           ],
-          "outcome": "Elizabeth makes a careful German home far from the village she misses. The strongbox stays full, waiting for a use.",
+          "outcome": "your wife makes a careful German home far from the village she misses. The strongbox stays full, waiting for a use.",
           "clearFlags": [],
           "ripples": []
         },
@@ -1073,7 +1073,7 @@
             "queens_settled",
             "spent_thin"
           ],
-          "outcome": "The neighbors are impressed. The strongbox is lighter. Fred learns early that appearance is a kind of currency.",
+          "outcome": "The neighbors are impressed. The strongbox is lighter. your son learns early that appearance is a kind of currency.",
           "clearFlags": [],
           "ripples": []
         }
@@ -1084,7 +1084,7 @@
       "era": "origins",
       "year": 1917,
       "title": "A German Name in a German War",
-      "scene": "America enters the Great War against the Kaiser, and suddenly your German name is a liability on every Queens block. Neighbors who once tipped their hats now eye you sideways; the papers print hate for anything Prussian. Friedrich, you must decide how the Trumps weather the suspicion of being German in a country at war with Germany.",
+      "scene": "America enters the Great War against the Kaiser, and suddenly your German name is a liability on every Queens block. Neighbors who once tipped their hats now eye you sideways; the papers print hate for anything Prussian. you, you must decide how the Trumps weather the suspicion of being German in a country at war with Germany.",
       "researchNote": "Anti-German sentiment surged in the US after it entered WWI in April 1917; the Trumps' German heritage drew suspicion, a pressure the family downplayed for decades (later even claiming Swedish ancestry).",
       "extrapolated": false,
       "startrekInspired": false,
@@ -1140,7 +1140,7 @@
           "setFlags": [
             "proud_german"
           ],
-          "outcome": "You will not apologize for Kallstadt. It costs you customers and goodwill, but Elizabeth holds her head higher for it.",
+          "outcome": "You will not apologize for Kallstadt. It costs you customers and goodwill, but your wife holds her head higher for it.",
           "clearFlags": [],
           "ripples": []
         },
@@ -1160,7 +1160,7 @@
             "hid_german_roots",
             "loud_patriot"
           ],
-          "outcome": "No house on the block flies a bigger flag than yours. Suspicion gives way to grudging respect — and a lesson Fred files away.",
+          "outcome": "No house on the block flies a bigger flag than yours. Suspicion gives way to grudging respect — and a lesson your son files away.",
           "clearFlags": [],
           "ripples": []
         }
@@ -1171,8 +1171,8 @@
       "era": "origins",
       "year": 1918,
       "title": "The Spanish Flu at the Door",
-      "scene": "On a single afternoon in May 1918, walking with twelve-year-old Fred, you feel suddenly, terribly ill. The influenza scything through the world — fifty million dead before it burns out — has come for you, Friedrich Trump, at forty-nine. Whether it takes you or spares you will decide whose hands shape the family line: a widow and a boy, or the bold old operator himself.",
-      "researchNote": "Friedrich Trump died of the 1918 influenza pandemic on May 30, 1918, at age 49; the assets passed to Elizabeth, who held them in trust and signed for her minor son Fred. The pandemic killed an estimated 50 million worldwide — a true world-event hinge for the family.",
+      "scene": "On a single afternoon in May 1918, walking with your twelve-year-old son, you feel suddenly, terribly ill. The influenza scything through the world — fifty million dead before it burns out — has come for you, you, at forty-nine. Whether it takes you or spares you will decide whose hands shape the family line: a widow and a boy, or the bold old operator himself.",
+      "researchNote": "you died of the 1918 influenza pandemic on May 30, 1918, at age 49; the assets passed to your wife, who held them in trust and signed for her minor son your son. The pandemic killed an estimated 50 million worldwide — a true world-event hinge for the family.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -1199,7 +1199,7 @@
       "choices": [
         {
           "id": "flu_kills_him_leaves_estate",
-          "text": "[Historical] The flu takes Friedrich — he leaves Elizabeth deeds to build on",
+          "text": "[Historical] The flu takes you — he leaves your wife deeds to build on",
           "effects": {
             "money": 1500,
             "power": 4
@@ -1214,12 +1214,12 @@
             "friedrich_died"
           ],
           "clearFlags": [],
-          "outcome": "Friedrich dies as he did in life's record. Elizabeth folds the deeds and cash into a family company; young Fred will build the outer-borough firm his own way. The seed money survives the man who earned it.",
+          "outcome": "you dies as he did in life's record. your wife folds the deeds and cash into a family company; your young son will build the outer-borough firm his own way. The seed money survives the man who earned it.",
           "ripples": []
         },
         {
           "id": "flu_kills_him_thin_estate",
-          "text": "[Historical] The flu takes Friedrich — and the nest egg was already spent thin",
+          "text": "[Historical] The flu takes you — and the nest egg was already spent thin",
           "effects": {
             "money": -500,
             "loyalty": 5,
@@ -1236,12 +1236,12 @@
           "clearFlags": [
             "real_capital"
           ],
-          "outcome": "Friedrich dies and leaves little but a name and a widow's grit. Fred grows up poor, watching his mother count every cent, vowing he will never be small again.",
+          "outcome": "you dies and leaves little but a name and a widow's grit. your son grows up poor, watching his mother count every cent, vowing he will never be small again.",
           "ripples": []
         },
         {
           "id": "flu_spares_him",
-          "text": "[Counterfactual: no pandemic] Friedrich survives and keeps building himself",
+          "text": "[Counterfactual: no pandemic] you survives and keeps building himself",
           "effects": {
             "money": 3000,
             "power": 6,
@@ -1256,7 +1256,7 @@
             "real_capital"
           ],
           "clearFlags": [],
-          "outcome": "The fever breaks; Friedrich lives. The bold, seedy Klondike operator stays at the helm of the family — and the line will be shaped by his risk appetite, not his cautious son's. One absent world-event has bent the whole hand.",
+          "outcome": "The fever breaks; you lives. The bold, seedy Klondike operator stays at the helm of the family — and the line will be shaped by his risk appetite, not his cautious son's. One absent world-event has bent the whole hand.",
           "ripples": []
         }
       ]
@@ -1266,8 +1266,8 @@
       "era": "origins",
       "year": 1925,
       "title": "The Grandfather's Gambit",
-      "scene": "In the world where the flu spared you, you are Friedrich Trump, alive into your fifties with a Klondike fortune and an operator's nerve no schoolteacher ever bred out of you. You build in Queens a decade before your son would have, betting bigger and dirtier than cautious Fred ever will — and you decide whether the Trump name rises early on your gambles, or burns on them. Fred grows up in your long shadow, learning to wait his turn.",
-      "researchNote": "Counterfactual: had Friedrich survived 1918, his documented risk appetite (Lava Beds, Klondike liquor-and-rooms operations) suggests he might have seeded the real-estate empire a generation earlier — or squandered it — and overshadowed Fred's own development of the firm.",
+      "scene": "In the world where the flu spared you, you are you, alive into your fifties with a Klondike fortune and an operator's nerve no schoolteacher ever bred out of you. You build in Queens a decade before your son would have, betting bigger and dirtier than cautious your son ever will — and you decide whether the {family_name} name rises early on your gambles, or burns on them. your son grows up in your long shadow, learning to wait his turn.",
+      "researchNote": "Counterfactual: had you survived 1918, his documented risk appetite (Lava Beds, Klondike liquor-and-rooms operations) suggests he might have seeded the real-estate empire a generation earlier — or squandered it — and overshadowed your son's own development of the firm.",
       "extrapolated": true,
       "startrekInspired": false,
       "tags": [
@@ -1309,13 +1309,13 @@
             "fred_builder",
             "grandfather_empire"
           ],
-          "outcome": "Friedrich's gambles pay off enormous; the Trump fortune is seeded a generation early and weathers what comes. Any grandchild born to this line starts with a deeper, older war chest than history ever gave Donald.",
+          "outcome": "your gambles pay off enormous; the {family_name} fortune is seeded a generation early and weathers what comes. Any grandchild born to this line starts with a deeper, older war chest than the line ever held before.",
           "clearFlags": [],
           "ripples": []
         },
         {
           "id": "grandfather_overshadows_fred",
-          "text": "Keep the reins yourself and let Fred chafe in your shadow",
+          "text": "Keep the reins yourself and let your son chafe in your shadow",
           "effects": {
             "money": 12000,
             "power": 6,
@@ -1331,7 +1331,7 @@
             "friedrich_dominant"
           ],
           "clearFlags": [],
-          "outcome": "Friedrich never lets go; Fred is a manager, not a master, well into middle age. The firm survives, modestly, but its character is the grandfather's — and the line's ambition is tangled in a rivalry of fathers and sons.",
+          "outcome": "you never lets go; your son is a manager, not a master, well into middle age. The firm survives, modestly, but its character is the grandfather's — and the line's ambition is tangled in a rivalry of fathers and sons.",
           "ripples": []
         },
         {
@@ -1356,7 +1356,7 @@
             "real_capital",
             "dynasty_capital"
           ],
-          "outcome": "The old operator's luck finally runs out. A bad speculation swallows the strongbox, and Fred inherits debts instead of deeds. The bold grandfather builds nothing lasting but a cautionary tale.",
+          "outcome": "The old operator's luck finally runs out. A bad speculation swallows the strongbox, and your son inherits debts instead of deeds. The bold grandfather builds nothing lasting but a cautionary tale.",
           "ripples": []
         }
       ]
@@ -1365,9 +1365,9 @@
       "id": "ev_fred_starts_building",
       "era": "origins",
       "year": 1923,
-      "title": "Elizabeth Trump & Son",
-      "scene": "You are now young Fred Trump, eighteen and impatient, and your mother Elizabeth signs the contracts you are too young to hold yourself. With her seed money you build your first house in Queens and sell it, then build another. You name the firm Elizabeth Trump & Son — her capital, your ambition — and you discover you can pour a foundation faster than any builder in the borough.",
-      "researchNote": "Fred Trump began building homes in Queens in the early 1920s; because he was a minor, his mother Elizabeth signed legal documents, and the firm was named 'E. Trump & Son'.",
+      "title": "{family_name} & Son",
+      "scene": "You are now your young son, eighteen and impatient, and your mother your wife signs the contracts you are too young to hold yourself. With her seed money you build your first house in Queens and sell it, then build another. You name the firm {family_name} & Son — her capital, your ambition — and you discover you can pour a foundation faster than any builder in the borough.",
+      "researchNote": "your son began building homes in Queens in the early 1920s; because he was a minor, his mother your wife signed legal documents, and the firm was named 'E. Trump & Son'.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -1407,7 +1407,7 @@
             "fred_builder",
             "compounding"
           ],
-          "outcome": "House becomes two becomes a block. Fred learns the developer's catechism: never stop building, never let the money sit still.",
+          "outcome": "House becomes two becomes a block. your son learns the developer's catechism: never stop building, never let the money sit still.",
           "clearFlags": [],
           "ripples": []
         },
@@ -1425,7 +1425,7 @@
           "setFlags": [
             "fred_builder"
           ],
-          "outcome": "Fred's name spreads quietly through Queens as a man who finishes what he starts and pays his bills. The firm is sound.",
+          "outcome": "your son's name spreads quietly through Queens as a man who finishes what he starts and pays his bills. The firm is sound.",
           "clearFlags": [],
           "ripples": []
         },
@@ -1446,7 +1446,7 @@
             "overleveraged"
           ],
           "ripples": [],
-          "outcome": "Fred stacks houses on borrowed money and crossed fingers. It works — for now — but the ledger is stretched thin as paper.",
+          "outcome": "your son stacks houses on borrowed money and crossed fingers. It works — for now — but the ledger is stretched thin as paper.",
           "clearFlags": []
         }
       ]
@@ -1456,8 +1456,8 @@
       "era": "origins",
       "year": 1929,
       "title": "The Crash and the Self-Serve Grocery",
-      "scene": "Wall Street collapses and the building trade dies overnight; no one in Queens is buying houses in 1929. You are Fred Trump with a half-built business and no buyers, so you pivot — opening a self-service grocery store, the Trump Market, to ride out the Depression while every rival developer goes under. Survival now matters more than ambition.",
-      "researchNote": "When the Depression halted homebuilding, Fred Trump ran a self-service grocery store (Trump Market) in Woodhaven, Queens, to stay solvent until housing demand returned.",
+      "scene": "Wall Street collapses and the building trade dies overnight; no one in Queens is buying houses in 1929. You are the heir now, with a half-built business and no buyers, so you pivot — opening a self-service grocery store, the {surname} Market, to ride out the Depression while every rival developer goes under. Survival now matters more than ambition.",
+      "researchNote": "When the Depression halted homebuilding, your son ran a self-service grocery store (Trump Market) in Woodhaven, Queens, to stay solvent until housing demand returned.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -1494,7 +1494,7 @@
             "survived_depression",
             "dry_powder"
           ],
-          "outcome": "Cans of beans keep the lights on while the borough starves. When building returns, Fred owns land the bankrupt left behind.",
+          "outcome": "Cans of beans keep the lights on while the borough starves. When building returns, your son owns land the bankrupt left behind.",
           "clearFlags": [],
           "ripples": []
         },
@@ -1515,7 +1515,7 @@
             "vulture_capital",
             "real_capital"
           ],
-          "outcome": "Fred picks bargains off the bones of the crash — a foreclosed mortgage-servicing business, cheap lots, ruined men's collateral. The fortune compounds in the wreckage.",
+          "outcome": "your son picks bargains off the bones of the crash — a foreclosed mortgage-servicing business, cheap lots, ruined men's collateral. The fortune compounds in the wreckage.",
           "clearFlags": [],
           "ripples": []
         },
@@ -1540,7 +1540,7 @@
             "real_capital",
             "compounding"
           ],
-          "outcome": "The borrowed houses are repossessed and Elizabeth Trump & Son dissolves into debt. Fred joins the breadlines he swore he would never see.",
+          "outcome": "The borrowed houses are repossessed and {family_name} & Son dissolves into debt. your son joins the breadlines he swore he would never see.",
           "ripples": []
         }
       ]
@@ -1550,8 +1550,8 @@
       "era": "origins",
       "year": 1935,
       "title": "The FHA Gravy Train",
-      "scene": "Roosevelt's New Deal creates the Federal Housing Administration, and suddenly Washington will insure mortgages and underwrite mass housing for the working class. You are Fred Trump, and you see it instantly: government-backed money to build thousands of homes at guaranteed margins. The FHA does not just save your business — it makes you, and it teaches you that the surest profit flows from the public trough.",
-      "researchNote": "Fred Trump built much of his fortune on FHA-insured mortgages and federal housing programs from the 1930s onward, becoming one of the most prolific FHA-backed builders in Brooklyn and Queens.",
+      "scene": "Roosevelt's New Deal creates the Federal Housing Administration, and suddenly Washington will insure mortgages and underwrite mass housing for the working class. You are your son, and you see it instantly: government-backed money to build thousands of homes at guaranteed margins. The FHA does not just save your business — it makes you, and it teaches you that the surest profit flows from the public trough.",
+      "researchNote": "your son built much of his fortune on FHA-insured mortgages and federal housing programs from the 1930s onward, becoming one of the most prolific FHA-backed builders in Brooklyn and Queens.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -1593,7 +1593,7 @@
             "dynasty_capital",
             "political_connections"
           ],
-          "outcome": "Fred builds Brooklyn and Queens by the thousand-unit on Uncle Sam's dime. He learns to court politicians like clients. The Trump dynasty's true capital is born here.",
+          "outcome": "your son builds Brooklyn and Queens by the thousand-unit on Uncle Sam's dime. He learns to court politicians like clients. The {family_name} dynasty's true capital is born here.",
           "clearFlags": [],
           "ripples": []
         },
@@ -1613,7 +1613,7 @@
             "fha_modest",
             "real_capital"
           ],
-          "outcome": "Fred builds solid, profitable housing without overreaching the program. A comfortable fortune, but not yet a dynasty's war chest.",
+          "outcome": "your son builds solid, profitable housing without overreaching the program. A comfortable fortune, but not yet a dynasty's war chest.",
           "clearFlags": [],
           "ripples": []
         },
@@ -1635,7 +1635,7 @@
           "clearFlags": [
             "dry_powder"
           ],
-          "outcome": "While rivals build empires on FHA paper, Fred scrapes by as a small landlord of aging walk-ups. The big money sails past the Trump name.",
+          "outcome": "While rivals build empires on FHA paper, your son scrapes by as a small landlord of aging walk-ups. The big money sails past the {family_name} name.",
           "ripples": []
         }
       ]
@@ -1644,9 +1644,9 @@
       "id": "ev_marries_mary_anne_macleod",
       "era": "origins",
       "year": 1936,
-      "title": "Mary Anne MacLeod of the Isle of Lewis",
-      "scene": "At a dance you are Fred Trump and you meet Mary Anne MacLeod, a Scottish maid from the windswept Isle of Lewis who crossed the ocean in 1930 looking for work and a richer life. She is beautiful, ambitious, and as much an immigrant climber as your own father was. You marry her in 1936, and together you will raise a brood in Queens — including, one day, a boy named Donald.",
-      "researchNote": "Fred Trump married Mary Anne MacLeod, a Scottish immigrant from the Isle of Lewis who arrived in the US in 1930, in January 1936; they had five children, of whom Donald was the fourth.",
+      "title": "your wife of the Isle of Lewis",
+      "scene": "At a dance you are your son and you meet your wife, a Scottish maid from the windswept Isle of Lewis who crossed the ocean in 1930 looking for work and a richer life. She is beautiful, ambitious, and as much an immigrant climber as your own father was. You marry her in 1936, and together you will raise a brood in Queens — including, one day, your heir.",
+      "researchNote": "your son married your wife, a Scottish immigrant from the Isle of Lewis who arrived in the US in 1930, in January 1936; they had five children, of whom Donald was the fourth.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -1669,7 +1669,7 @@
       "choices": [
         {
           "id": "marry_for_dynasty",
-          "text": "Marry Mary Anne and plan a dynasty of Trump children",
+          "text": "Marry your wife and plan a dynasty of {family_name} children",
           "effects": {
             "money": 0,
             "loyalty": 8,
@@ -1683,7 +1683,7 @@
             "married_mary_anne",
             "dynasty_planned"
           ],
-          "outcome": "Two immigrant bloodlines — Bavarian and Hebridean — fuse in a Queens row house. The children come quickly, and Fred dreams of heirs to the firm.",
+          "outcome": "Two immigrant bloodlines — Bavarian and Hebridean — fuse in a Queens row house. The children come quickly, and your son dreams of heirs to the firm.",
           "clearFlags": [],
           "ripples": []
         },
@@ -1701,7 +1701,7 @@
           "setFlags": [
             "married_mary_anne"
           ],
-          "outcome": "Mary Anne runs a thrifty, churchgoing home, never quite shaking the memory of Lewis poverty. The Trump children grow up watched and disciplined.",
+          "outcome": "your wife runs a thrifty, churchgoing home, never quite shaking the memory of Lewis poverty. The {family_name} children grow up watched and disciplined.",
           "clearFlags": [],
           "ripples": []
         }
@@ -1712,8 +1712,8 @@
       "era": "origins",
       "year": 1943,
       "title": "Building for the War Effort",
-      "scene": "World War II is on, and you are Fred Trump with the contacts and the FHA expertise to win federal contracts for war-worker and Navy housing in Norfolk, Virginia, and along the Eastern seaboard. While other men ship out, you build the barracks and apartments that house the war machine, banking government money by the project. The empire compounds even as the world burns.",
-      "researchNote": "During WWII Fred Trump built federally financed housing for naval and war workers (notably near Norfolk, Virginia), expanding his fortune through wartime government contracts.",
+      "scene": "World War II is on, and you are your son with the contacts and the FHA expertise to win federal contracts for war-worker and Navy housing in Norfolk, Virginia, and along the Eastern seaboard. While other men ship out, you build the barracks and apartments that house the war machine, banking government money by the project. The empire compounds even as the world burns.",
+      "researchNote": "During WWII your son built federally financed housing for naval and war workers (notably near Norfolk, Virginia), expanding his fortune through wartime government contracts.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -1755,7 +1755,7 @@
             "dynasty_capital",
             "political_connections"
           ],
-          "outcome": "Fred ends the war richer than his father ever dreamed, with a fortune, a Cadillac, and politicians on speed-dial. Whatever child comes next will be born into real money.",
+          "outcome": "your son ends the war richer than his father ever dreamed, with a fortune, a Cadillac, and politicians on speed-dial. Whatever child comes next will be born into real money.",
           "clearFlags": [],
           "ripples": []
         },
@@ -1775,7 +1775,7 @@
             "war_fortune",
             "dynasty_capital"
           ],
-          "outcome": "Fred profits handsomely without the scrutiny that follows the biggest fish. The Trump household enters 1946 comfortably, undeniably rich.",
+          "outcome": "your son profits handsomely without the scrutiny that follows the biggest fish. The {family_name} household enters 1946 comfortably, undeniably rich.",
           "clearFlags": [],
           "ripples": []
         }
@@ -1786,8 +1786,8 @@
       "era": "origins",
       "year": 1944,
       "title": "The German-Immigrant Tenement",
-      "scene": "You are Fred Trump in the version of this story where the gravy train never came — a small landlord scraping rents from aging walk-ups in a German-immigrant corner of Queens. Mary Anne mends clothes; the children share rooms; there is no Cadillac and no FHA fortune. Whatever child is born into this house will know stoops and public school, not gold elevators.",
-      "researchNote": "Counterfactual branch: had Fred missed the FHA/wartime housing boom, the family would have remained modest landlords rather than millionaire developers — Donald's actual childhood was affluent and suburban (Jamaica Estates).",
+      "scene": "You are your son in the version of this story where the gravy train never came — a small landlord scraping rents from aging walk-ups in a German-immigrant corner of Queens. your wife mends clothes; the children share rooms; there is no Cadillac and no FHA fortune. Whatever child is born into this house will know stoops and public school, not gold elevators.",
+      "researchNote": "Counterfactual branch: had your son missed the FHA/wartime housing boom, the family would have remained modest landlords rather than millionaire developers — Donald's actual childhood was affluent and suburban (Jamaica Estates).",
       "extrapolated": true,
       "startrekInspired": false,
       "tags": [
@@ -1823,7 +1823,7 @@
           "setFlags": [
             "bootstrap_household"
           ],
-          "outcome": "Fred fixes his own boilers and counts his own rents. The child to come will inherit grit and a German surname, but no empire to coast on.",
+          "outcome": "your son fixes his own boilers and counts his own rents. The child to come will inherit grit and a German surname, but no empire to coast on.",
           "clearFlags": [],
           "ripples": []
         },
@@ -1844,7 +1844,7 @@
             "desperate_gamble"
           ],
           "ripples": [],
-          "outcome": "Fred rolls the dice to climb back up. Win or lose, the house stays poor through 1946, and any child arrives into striving, not splendor.",
+          "outcome": "your son rolls the dice to climb back up. Win or lose, the house stays poor through 1946, and any child arrives into striving, not splendor.",
           "clearFlags": []
         }
       ]
@@ -1854,8 +1854,8 @@
       "era": "origins",
       "year": 1932,
       "title": "The Dynasty That Never Was",
-      "scene": "And here the thread of the family simply frays and breaks. Whether Friedrich never left Kallstadt, or died stranded and broke in Bavaria, or Fred's overborrowed firm was swallowed whole by the Depression — the Trumps never become builders, never plant a fortune in Queens soil. There will be no Cadillac, no FHA empire, and no June morning in 1946. History closes over the family before it ever truly begins.",
-      "researchNote": "Terminal counterfactual: each real failure point (draft, expulsion, the 1918 flu, the Depression) could plausibly have ended the family's rise — without Fred's fortune, the dynasty has no foundation.",
+      "scene": "And here the thread of the family simply frays and breaks. Whether you never left Kallstadt, or died stranded and broke in Bavaria, or your son's overborrowed firm was swallowed whole by the Depression — the Trumps never become builders, never plant a fortune in Queens soil. There will be no Cadillac, no FHA empire, and no June morning in 1946. History closes over the family before it ever truly begins.",
+      "researchNote": "Terminal counterfactual: each real failure point (draft, expulsion, the 1918 flu, the Depression) could plausibly have ended the family's rise — without your son's fortune, the dynasty has no foundation.",
       "extrapolated": true,
       "startrekInspired": false,
       "tags": [
@@ -1880,7 +1880,7 @@
       "choices": [
         {
           "id": "accept_the_end",
-          "text": "Let the Drumpf line vanish back into history",
+          "text": "Let the {family_name} line vanish back into history",
           "effects": {
             "money": -1000,
             "reputation": -10
@@ -1892,7 +1892,7 @@
           "setFlags": [
             "line_failed"
           ],
-          "outcome": "The name dissolves into the great anonymous tide of immigrants who came, struggled, and left no dynasty behind. There is no Donald. The game ends at its prologue.",
+          "outcome": "The name dissolves into the great anonymous tide of immigrants who came, struggled, and left no dynasty behind. There is no heir. The game ends at its prologue.",
           "clearFlags": [],
           "ripples": []
         },
@@ -1912,7 +1912,7 @@
             "line_failed",
             "bitter_end"
           ],
-          "outcome": "Friedrich, or Fred, dies bitter and broke, cursing the country that took everything and gave nothing back. The Trump dynasty is stillborn. There is no Donald.",
+          "outcome": "you, or your son, dies bitter and broke, cursing the country that took everything and gave nothing back. The {family_name} dynasty is stillborn. There is no heir.",
           "clearFlags": [],
           "ripples": []
         }
@@ -1923,8 +1923,8 @@
       "era": "origins",
       "year": 1887,
       "title": "The Boy Who Served the King",
-      "scene": "In this telling you do not walk to the boat. You report to the Bavarian barracks, take the kaiser's coat, and serve your three years drilling in the Palatinate mud. When you muster out, the Drumpf name has earned something it never had in America: a soldier's standing in a kingdom that grooms its veterans for the next war. Kallstadt keeps its wine, its conscripts, and now its rising military family.",
-      "researchNote": "Counterfactual divergence from the documented draft-dodging: in reality Friedrich Trump fled Bavaria in 1885 specifically to avoid the three-year conscription. Here he serves instead, anchoring the family inside Imperial Germany's military caste on the eve of the World Wars.",
+      "scene": "In this telling you do not walk to the boat. You report to the Bavarian barracks, take the kaiser's coat, and serve your three years drilling in the Palatinate mud. When you muster out, the {family_name} name has earned something it never had in America: a soldier's standing in a kingdom that grooms its veterans for the next war. Kallstadt keeps its wine, its conscripts, and now its rising military family.",
+      "researchNote": "Counterfactual divergence from the documented draft-dodging: in reality you fled Bavaria in 1885 specifically to avoid the three-year conscription. Here he serves instead, anchoring the family inside Imperial Germany's military caste on the eve of the World Wars.",
       "extrapolated": true,
       "startrekInspired": false,
       "tags": [
@@ -1966,7 +1966,7 @@
           "clearFlags": [
             "dynasty_doomed"
           ],
-          "outcome": "You climb from conscript to junior officer, and the Drumpfs of Kallstadt become a family that sends its sons to the army first and the vineyard second. The kingdom remembers loyal blood when the great wars come.",
+          "outcome": "You climb from conscript to junior officer, and the {family_name} of Kallstadt become a family that sends its sons to the army first and the vineyard second. The kingdom remembers loyal blood when the great wars come.",
           "ripples": []
         },
         {
@@ -2017,7 +2017,7 @@
       "era": "origins",
       "year": 1916,
       "title": "Verdun and the Family Colors",
-      "scene": "The Great War grinds across Europe and the Drumpfs of Kallstadt are no bystanders — your sons wear field-grey, and the family's standing rises with every dispatch from the front. Germany loses in 1918, and the humiliation of Versailles lands like a wound on a household that gave its blood for the kaiser. In the bitter postwar Palatinate, a soldier's family learns to nurse a grievance into a creed.",
+      "scene": "The Great War grinds across Europe and the {family_name} of Kallstadt are no bystanders — your sons wear field-grey, and the family's standing rises with every dispatch from the front. Germany loses in 1918, and the humiliation of Versailles lands like a wound on a household that gave its blood for the kaiser. In the bitter postwar Palatinate, a soldier's family learns to nurse a grievance into a creed.",
       "researchNote": "Imperial Germany's defeat in 1918 and the punitive Treaty of Versailles fed the 'stab-in-the-back' myth and the revanchism that fascist movements weaponized in the 1920s-30s. A veteran military family in the Rhineland-Palatinate would have sat squarely in that current.",
       "extrapolated": true,
       "startrekInspired": false,
@@ -2088,7 +2088,7 @@
       "era": "origins",
       "year": 1933,
       "title": "The Party and the Family Name",
-      "scene": "Hitler takes the chancellorship in January 1933, and the new order comes courting families exactly like yours — old soldiers, wounded pride, German blood and a grudge against Versailles. You are the head of the Drumpf household, and the Party offers your veterans rank, your name prestige, and your sons a future in a Reich that swears it will rule for a thousand years. To refuse is to be nobody; to join is to ride the tide.",
+      "scene": "Hitler takes the chancellorship in January 1933, and the new order comes courting families exactly like yours — old soldiers, wounded pride, German blood and a grudge against Versailles. You are the head of the {family_name} household, and the Party offers your veterans rank, your name prestige, and your sons a future in a Reich that swears it will rule for a thousand years. To refuse is to be nobody; to join is to ride the tide.",
       "researchNote": "The Nazi regime actively recruited from veterans' associations and the conservative-nationalist milieu after 1933. This is the chilling pivot of the branch: the same grievance machinery that radicalized real interwar Germany, applied to a fictional Trump-line that never emigrated.",
       "extrapolated": true,
       "startrekInspired": false,
@@ -2130,7 +2130,7 @@
             "nazi_dynasty",
             "axis_ascendant"
           ],
-          "outcome": "Your sons take their oaths and the Drumpf name is stamped into the machinery of the new state. The family fortune and standing swell on conquest and confiscation. There is no shame left in the house — only ambition, dressed in a uniform.",
+          "outcome": "Your sons take their oaths and the {family_name} name is stamped into the machinery of the new state. The family fortune and standing swell on conquest and confiscation. There is no shame left in the house — only ambition, dressed in a uniform.",
           "clearFlags": [],
           "ripples": []
         },
@@ -2151,7 +2151,7 @@
             "axis_ascendant",
             "opportunist_party"
           ],
-          "outcome": "You tell yourself you are using them, not the other way around. The distinction will not survive what the family is asked to do. Either way the Drumpfs prosper, and the line is bound to the swastika.",
+          "outcome": "You tell yourself you are using them, not the other way around. The distinction will not survive what the family is asked to do. Either way the {family_name} prosper, and the line is bound to the swastika.",
           "clearFlags": [],
           "ripples": []
         },
@@ -2175,7 +2175,7 @@
           "clearFlags": [
             "german_military_family"
           ],
-          "outcome": "You will not give your sons to it. The Reich does not forgive a prominent family that says no — the contracts dry up, the visits from men in leather coats begin, and the Drumpf line is hounded into silence and exile.",
+          "outcome": "You will not give your sons to it. The Reich does not forgive a prominent family that says no — the contracts dry up, the visits from men in leather coats begin, and the {family_name} line is hounded into silence and exile.",
           "ripples": []
         }
       ]
@@ -2185,7 +2185,7 @@
       "era": "origins",
       "year": 1944,
       "title": "The Reich Across the Atlantic",
-      "scene": "In this darkest branch the Axis does not lose. The war turns, the Reich prevails, and by the mid-1940s a defeated United States is governed under occupation — a Nazi-controlled America, its institutions hollowed and remade. Your family, loyal Party men of long standing, are sent across the Atlantic as part of the conquering order, carrying the Drumpf name into a New York that no longer answers to itself.",
+      "scene": "In this darkest branch the Axis does not lose. The war turns, the Reich prevails, and by the mid-1940s a defeated United States is governed under occupation — a Nazi-controlled America, its institutions hollowed and remade. Your family, loyal Party men of long standing, are sent across the Atlantic as part of the conquering order, carrying the {family_name} name into a New York that no longer answers to itself.",
       "researchNote": "Pure alternate-history (in the tradition of 'The Man in the High Castle'): there was no Axis victory and no Nazi occupation of the US. This counterfactual exists to make the branch's thesis unmistakable — that the stay-in-Germany path converges back toward American power, but as tyranny rather than enterprise.",
       "extrapolated": true,
       "startrekInspired": false,
@@ -2288,8 +2288,8 @@
       "era": "origins",
       "year": 1903,
       "title": "Anchored in the Pacific",
-      "scene": "Rich from the Lava Beds and the Klondike, you make a different choice than history records: you never sail east to chase a Bavarian homecoming, and you never resettle in Queens. You and Elisabeth plant the family fortune on the Pacific slope — Seattle timber and waterfront, then California land — and the Trumps become a West Coast house, builders and boosters of a booming young coast that has never heard of New York real estate.",
-      "researchNote": "Friedrich genuinely made his fortune in Seattle and the Yukon (1891-1901) and owned Pacific Northwest property before the family ultimately settled back East. This branch keeps him anchored in his real Pacific period instead of returning to NYC, founding a West-Coast dynasty.",
+      "scene": "Rich from the Lava Beds and the Klondike, you make a different choice than history records: you never sail east to chase a Bavarian homecoming, and you never resettle in Queens. You and your wife plant the family fortune on the Pacific slope — Seattle timber and waterfront, then California land — and the Trumps become a West Coast house, builders and boosters of a booming young coast that has never heard of New York real estate.",
+      "researchNote": "you genuinely made his fortune in Seattle and the Yukon (1891-1901) and owned Pacific Northwest property before the family ultimately settled back East. This branch keeps him anchored in his real Pacific period instead of returning to NYC, founding a West-Coast dynasty.",
       "extrapolated": true,
       "startrekInspired": false,
       "tags": [
@@ -2336,7 +2336,7 @@
             "married_elizabeth"
           ],
           "clearFlags": [],
-          "outcome": "You buy orange groves and town lots ahead of the boosters and the railroads, and the Trump name becomes a power on the Pacific coast a full generation before it ever would in New York. A child of this house is born a Western scion.",
+          "outcome": "You buy orange groves and town lots ahead of the boosters and the railroads, and the {family_name} name becomes a power on the Pacific coast a full generation before it ever would in New York. A child of this house is born a Western scion.",
           "ripples": []
         },
         {
@@ -2392,7 +2392,7 @@
       "year": 1936,
       "title": "Sons of the Pacific",
       "scene": "On the West Coast the {surname} line grows up under different skies — orange light and ocean fog instead of Queens brick. Your father (or his Pacific counterpart) learns the family trade not in outer-borough walk-ups but in California subdivisions and Seattle waterfront, building the suburbs of a coast that is inventing the American future. The fortune compounds far from New York, in a dynasty that thinks of the Atlantic as the old world.",
-      "researchNote": "In reality Fred Trump built in Brooklyn and Queens on FHA financing. This West-Coast counterfactual relocates that homebuilding career to California/Pacific growth markets, which boomed enormously in the same era — plausible parallel infrastructure, different geography.",
+      "researchNote": "In reality your son built in Brooklyn and Queens on FHA financing. This West-Coast counterfactual relocates that homebuilding career to California/Pacific growth markets, which boomed enormously in the same era — plausible parallel infrastructure, different geography.",
       "extrapolated": true,
       "startrekInspired": false,
       "tags": [
@@ -2435,7 +2435,7 @@
             "dynasty_capital",
             "fred_builder"
           ],
-          "outcome": "The family rides the same New Deal and wartime housing money history gave the real Fred — but pours it into Los Angeles and the Bay instead of Brooklyn. The Trump name becomes Pacific royalty, and the next child is born to a coast empire.",
+          "outcome": "The family rides the same New Deal and wartime housing money history gave the historical line — but pours it into Los Angeles and the Bay instead of Brooklyn. The {family_name} name becomes Pacific royalty, and the next child is born to a coast empire.",
           "clearFlags": [],
           "ripples": []
         },
@@ -2467,7 +2467,7 @@
       "era": "origins",
       "year": 1907,
       "title": "The Calling in the Congregation",
-      "scene": "Kallstadt was a Lutheran village, and Elisabeth carries that faith across the ocean like a relic. In this telling, instead of pouring the Yukon gold only into bricks, the family pours it into the pulpit — bankrolling a struggling immigrant Lutheran congregation, then a second, then a circuit of them, with the Trump name on every cornerstone. You discover that in a young, hungry country, a man who builds churches commands a different and deeper kind of loyalty than a man who only builds houses.",
+      "scene": "Kallstadt was a Lutheran village, and your wife carries that faith across the ocean like a relic. In this telling, instead of pouring the Yukon gold only into bricks, the family pours it into the pulpit — bankrolling a struggling immigrant Lutheran congregation, then a second, then a circuit of them, with the {family_name} name on every cornerstone. You discover that in a young, hungry country, a man who builds churches commands a different and deeper kind of loyalty than a man who only builds houses.",
       "researchNote": "Kallstadt was historically Lutheran, and German-Lutheran immigrant churches were a real institutional force in early-20th-century North America. The genuine historical contingency: Lutheran pietism shared revivalist DNA with the Baptist/Methodist strains that actually came to dominate American evangelicalism — a different denomination could plausibly have ridden the same populist-religious current.",
       "extrapolated": true,
       "startrekInspired": false,
@@ -2557,7 +2557,7 @@
       "era": "origins",
       "year": 1928,
       "title": "Tents, Radio, and the Roaring Word",
-      "scene": "By the 1920s the family church-circuit has grown into something the old Kallstadt pastors would not recognize: tent revivals, a radio hour, an evangelist's gift for filling a hall and a collection basket. You are the heir now, and you see what the Baptists and the revivalists are building across the country — and you mean to build it bigger, in the German-Lutheran key, fusing pulpit and showmanship into a movement with the Trump name at its altar.",
+      "scene": "By the 1920s the family church-circuit has grown into something the old Kallstadt pastors would not recognize: tent revivals, a radio hour, an evangelist's gift for filling a hall and a collection basket. You are the heir now, and you see what the Baptists and the revivalists are building across the country — and you mean to build it bigger, in the German-Lutheran key, fusing pulpit and showmanship into a movement with the {family_name} name at its altar.",
       "researchNote": "The 1920s saw the rise of mass-media evangelism (Aimee Semple McPherson, radio preachers, tent crusades). The counterfactual conceit: a Lutheran-rooted family adopting the same revivalist mass-movement techniques that, in reality, belonged to other Protestant strains — a plausible alternate denominational winner of the populist-religious moment.",
       "extrapolated": true,
       "startrekInspired": false,
@@ -2835,8 +2835,8 @@
       "era": "origins",
       "year": 1945,
       "title": "The Children of the House",
-      "scene": "By the war’s end Fred and Mary Anne’s nursery in Jamaica Estates is filling. How many cribs, and which one holds the heir, will shape everything that follows — a firstborn son is groomed from the cradle and carries the patriarch’s name; a fourth child must earn the empire past older siblings who may rise, rebel, or fall. Decide the shape of the bloodline.",
-      "researchNote": "Fred and Mary Anne Trump had five children; Donald was the fourth. The eldest, Fred Trump Jr., was the presumed heir but left the family business to become an airline pilot and died in 1981 — making Donald the ‘accidental’ heir. Birth order materially shaped who inherited the firm.",
+      "scene": "By the war’s end your son and your wife’s nursery in Jamaica Estates is filling. How many cribs, and which one holds the heir, will shape everything that follows — a firstborn son is groomed from the cradle and carries the patriarch’s name; a fourth child must earn the empire past older siblings who may rise, rebel, or fall. Decide the shape of the bloodline.",
+      "researchNote": "your son and your wife Trump had five children; Donald was the fourth. The eldest, your son Jr., was the presumed heir but left the family business to become an airline pilot and died in 1981 — making Donald the ‘accidental’ heir. Birth order materially shaped who inherited the firm.",
       "extrapolated": true,
       "startrekInspired": false,
       "tags": [
@@ -2898,7 +2898,7 @@
           ],
           "clearFlags": [],
           "ripples": [],
-          "outcome": "Everything Fred built funnels to a single child — named for the patriarch, groomed without rival or sibling check. A coronation with no competing claimants, and no one to share the weight."
+          "outcome": "Everything your son built funnels to a single child — named for the patriarch, groomed without rival or sibling check. A coronation with no competing claimants, and no one to share the weight."
         },
         {
           "id": "fourth_child_accidental_heir",
@@ -2918,7 +2918,7 @@
           ],
           "clearFlags": [],
           "ripples": [],
-          "outcome": "A boy named Donald, fourth in line, with an elder brother already marked as heir. The empire is not his birthright — he will have to want it more than the brother who was handed it."
+          "outcome": "A fourth-born son, with an elder brother already marked as heir. The empire is not his birthright — he will have to want it more than the brother who was handed it."
         },
         {
           "id": "fourth_child_brother_dies",
@@ -2949,7 +2949,7 @@
       "year": 1946,
       "title": "June 14, 1946",
       "scene": "Your mother goes into labor and your father paces the corridor. A child, red-faced and bawling, is laid in her arms: {full_name}. The world you open your eyes on — gilded or grinding — is the one the family has spent sixty years and three generations building. The prologue is over. The hand is dealt.",
-      "researchNote": "Donald John Trump was born June 14, 1946, at Jamaica Hospital in Queens, the fourth of Fred and Mary Anne Trump's five children; the family was by then wealthy, living in Jamaica Estates.",
+      "researchNote": "Donald John Trump was born June 14, 1946, at Jamaica Hospital in Queens, the fourth of your son and your wife Trump's five children; the family was by then wealthy, living in Jamaica Estates.",
       "extrapolated": false,
       "startrekInspired": false,
       "tags": [
@@ -3019,7 +3019,7 @@
         },
         {
           "id": "born_comfortable",
-          "text": "[If Fred built a modest fortune] Born into solid comfort",
+          "text": "[If your son built a modest fortune] Born into solid comfort",
           "effects": {
             "money": 25000,
             "power": 4,
@@ -3065,8 +3065,9 @@
       "id": "ev_walter_musk_cape_colony",
       "era": "origins",
       "year": 1906,
-      "title": "Walter and the Cape Sky",
-      "scene": "You are Walter Henry James Musk, grandson of a Canadian pioneer who crossed to the Cape Colony for opportunity. The early-aviation craze grips the Empire — fragile biplanes over the veld — and you feel it in your marrow. A man who can master the sky masters everything. But there is also the respectable path: engineering, property, stability for the children you will one day have.",
+      "title": "The Frontier Sky",
+      "archetypes": ["technological"],
+      "scene": "You are the line's founder, grandchild of a pioneer who crossed the world for opportunity on a raw frontier. The early-aviation craze grips the age — fragile biplanes over open country — and you feel it in your marrow. Someone who can master the sky masters everything. But there is also the respectable path: engineering, property, stability for the children you will one day have.",
       "researchNote": "Walter Musk (Elon's paternal grandfather) was a Canadian-born aviation pioneer who settled in South Africa and held the first private pilot's licence in South Africa. Historical.",
       "extrapolated": false,
       "startrekInspired": false,
@@ -3092,7 +3093,7 @@
       "choices": [
         {
           "id": "walter_the_aviator",
-          "text": "Chase the sky — become the Cape's first private pilot",
+          "text": "Chase the sky — become the frontier's first private pilot",
           "effects": {
             "reputation": 3,
             "power": 2
@@ -3106,7 +3107,7 @@
             "musk_frontier_spirit",
             "musk_south_africa_roots"
           ],
-          "outcome": "Walter earns the first private pilot's licence in South Africa. The Musk name becomes synonymous with daring. Errol will inherit the sky-hunger.",
+          "outcome": "You earn the frontier's first private pilot's licence. The {family_name} name becomes synonymous with daring. Your son will inherit the sky-hunger.",
           "clearFlags": [],
           "ripples": []
         },
@@ -3126,7 +3127,7 @@
             "musk_frontier_spirit",
             "musk_south_africa_roots"
           ],
-          "outcome": "Walter builds machines while others fly. The Musk workshop hums with precision. Errol will inherit the hands-on drive.",
+          "outcome": "You build machines while others fly. The {family_name} workshop hums with precision. Your son will inherit the hands-on drive.",
           "clearFlags": [],
           "ripples": []
         }
@@ -3136,8 +3137,9 @@
       "id": "ev_errol_musk_builds",
       "era": "origins",
       "year": 1940,
-      "title": "Errol Musk's First Empire",
-      "scene": "You are Errol Musk, Walter's son, coming of age in wartime South Africa. The continent is raw with opportunity — property booms, mining claims, engineering contracts, the post-war reconstruction ahead. You are sharp, driven, and utterly unsentimental. Will you build through sheer commercial cunning, or through technical mastery?",
+      "title": "The Engineer's First Empire",
+      "archetypes": ["technological"],
+      "scene": "You come of age on a raw frontier, the founder's heir, in a land raw with opportunity — property booms, mining claims, engineering contracts, the reconstruction ahead. You are sharp, driven, and utterly unsentimental. Will you build through sheer commercial cunning, or through technical mastery?",
       "researchNote": "Errol Musk (born 1946 in South Africa) became a successful electromechanical engineer and property developer. This event is extrapolated to represent his formative choice. Year compressed to fit era.",
       "extrapolated": true,
       "startrekInspired": false,
@@ -3179,7 +3181,7 @@
             "musk_technical_lineage",
             "dynasty_capital"
           ],
-          "outcome": "Errol accumulates land, emerald mines, and contracts. He is not loved but he is formidable. Elon will grow up in a home where everything is measured in results.",
+          "outcome": "You accumulate land, mines, and contracts. You are not loved but you are formidable. Your children will grow up in a home where everything is measured in results.",
           "clearFlags": [],
           "ripples": []
         },
@@ -3199,7 +3201,7 @@
             "errol_inventor",
             "musk_technical_lineage"
           ],
-          "outcome": "Errol's workshop becomes a second home for the family. Elon will grow up pulling apart machines and being told: figure it out yourself.",
+          "outcome": "Your workshop becomes a second home for the family. Your children will grow up pulling apart machines and being told: figure it out yourself.",
           "clearFlags": [],
           "ripples": []
         },
@@ -3222,7 +3224,7 @@
             "dynasty_capital",
             "errol_speculator"
           ],
-          "outcome": "Errol gambles on a Zambian emerald mine stake. It pays. The family becomes unexpectedly wealthy, and Elon will grow up knowing that enormous leverage compounds enormous returns — and enormous losses.",
+          "outcome": "You gamble on a far-off mine stake. It pays. The family becomes unexpectedly wealthy, and your children will grow up knowing that enormous leverage compounds enormous returns — and enormous losses.",
           "clearFlags": [],
           "ripples": []
         }
@@ -3232,9 +3234,10 @@
       "id": "ev_elon_musk_born",
       "era": "origins",
       "year": 1946,
-      "title": "Born in Pretoria",
-      "scene": "It is 1971 in the city of Pretoria, South Africa, and a boy is born to Errol and Maye Musk. He will spend his early years in a world of apartheid and privilege, books instead of friends, a father's hard ambition and a mother's Canadian restlessness. This child will not stay where he was born. The only question is how far he goes. Choose his inheritance.",
-      "researchNote": "Elon Musk was born June 28, 1971, in Pretoria, South Africa. Year compressed to 1946 to fit the origins era bounds. Historical birth circumstances are accurate.",
+      "title": "The Heir of the Workshop",
+      "archetypes": ["technological"],
+      "scene": "A child is born to the engineer-founder's line, into a world of privilege and hard expectation — books instead of friends, a father's relentless ambition, a restless inheritance. This child will not stay where they were born. The only question is how far they go. Choose the inheritance.",
+      "researchNote": "Technological-archetype 'the heir is born' beat, repurposed from a literal birth (CP-R7-SLOTS). Parallel to the protagonist birth; gated to the technological line.",
       "extrapolated": true,
       "startrekInspired": false,
       "tags": [
@@ -3274,7 +3277,7 @@
             "musk_origin",
             "errol_emerald_stake"
           ],
-          "outcome": "The nursery smells of money. Elon learns early that the world is a problem to be solved and solved fast. He will have capital when others have nothing.",
+          "outcome": "The nursery smells of money. The heir learns early that the world is a problem to be solved and solved fast. They will have capital when others have nothing.",
           "clearFlags": [],
           "ripples": []
         },
@@ -3294,7 +3297,7 @@
             "musk_origin",
             "first_principles_upbringing"
           ],
-          "outcome": "The nursery is adjacent to the workshop. Elon can take apart a radio before he can read. He will see systems where others see obstacles.",
+          "outcome": "The nursery is adjacent to the workshop. The heir can take apart a radio before they can read. They will see systems where others see obstacles.",
           "clearFlags": [],
           "ripples": []
         }
@@ -3305,8 +3308,9 @@
       "era": "origins",
       "year": 1886,
       "title": "The Coffin Ships",
-      "scene": "You are Patrick Kennedy of County Wexford, 1848. The potato has failed for the second year. Your neighbours are dead or starving; the landlord will not wait for rent. A coffin ship to Boston is your one chance — disease, overcrowding, and a one-in-ten mortality rate on the crossing. You will survive, or your dynasty will never begin.",
-      "researchNote": "Patrick Kennedy (1823–1858) emigrated from Dunganstown, County Wexford, Ireland to Boston in 1848 during the Great Famine. Year compressed to 1886 to fit origins era [1885..1946].",
+      "archetypes": ["political"],
+      "scene": "You are the line's founder, fleeing a famine that has failed your country for the second year. Your neighbours are dead or starving; the landlord will not wait for rent. A coffin ship to the new world is your one chance — disease, overcrowding, a one-in-ten mortality rate on the crossing. You will survive, or your dynasty will never begin.",
+      "researchNote": "Political-archetype famine-emigration founder trope, repurposed from a literal bloodline (CP-R7-SLOTS). The founder who crosses with nothing and seeds a political dynasty.",
       "extrapolated": true,
       "startrekInspired": false,
       "tags": [
@@ -3346,7 +3350,7 @@
             "kennedy_irish_roots",
             "kennedy_stubborn_will"
           ],
-          "outcome": "Patrick Kennedy steps off the boat in Boston harbour, half-dead, with nothing. He will become a barrel-maker. His son will become a ward boss. His grandson will become a president.",
+          "outcome": "You step off the boat half-dead, with nothing. You will become a tradesman. Your son will become a ward boss. Your grandson will reach the heights of power.",
           "clearFlags": [],
           "ripples": []
         },
@@ -3366,7 +3370,7 @@
             "kennedy_irish_roots",
             "kennedy_communal_leader"
           ],
-          "outcome": "Patrick Kennedy arrives in Boston not as a refugee but as a leader. The Irish community knows him. His son will build on that foundation of trust and debts.",
+          "outcome": "You arrive not as a refugee but as a leader. The immigrant community knows you. Your son will build on that foundation of trust and debts.",
           "clearFlags": [],
           "ripples": []
         },
@@ -3386,7 +3390,7 @@
             "kennedy_irish_roots",
             "kennedy_parish_roots"
           ],
-          "outcome": "Patrick Kennedy survives by serving, not fleeing. He becomes essential to what is left of the community. Eventually a priest suggests Boston. He goes, but he carries the parish with him.",
+          "outcome": "You survive by serving, not fleeing. You become essential to what is left of the community. Eventually a priest suggests the new world. You go, but you carry the parish with you.",
           "clearFlags": [],
           "ripples": []
         }
@@ -3396,8 +3400,9 @@
       "id": "ev_pj_kennedy_ward_boss",
       "era": "origins",
       "year": 1895,
-      "title": "PJ Kennedy and the Machine",
-      "scene": "You are Patrick Joseph 'PJ' Kennedy, son of the famine immigrant, and Boston is a city of machines — political machines. The Irish have the votes; the Yankees have the banks. PJ has the saloons, the ward captains, and the patience of a man who has watched his father die young from the overcrowding disease. He is building something that will outlast him.",
+      "title": "The Ward and the Machine",
+      "archetypes": ["political"],
+      "scene": "You are the immigrant founder's heir, and the city runs on machines — political machines. The newcomers have the votes; the old money has the banks. You have the saloons, the ward captains, and the patience of someone who watched a parent die young in the crowded tenements. You are building something that will outlast you.",
       "researchNote": "Patrick Joseph Kennedy (1858–1929) became a powerful Boston political figure, state legislator, and business operator. Historical timeline compressed to fit origins era.",
       "extrapolated": false,
       "startrekInspired": false,
@@ -3424,7 +3429,7 @@
       "choices": [
         {
           "id": "pj_builds_the_machine",
-          "text": "Build the ward machine — favours, votes, jobs, debts: the grammar of Irish Boston",
+          "text": "Build the ward machine — favours, votes, jobs, debts: the grammar of the immigrant city",
           "effects": {
             "reputation": 4,
             "power": 5,
@@ -3439,7 +3444,7 @@
             "kennedy_political_dynasty",
             "kennedy_dynasty_capital"
           ],
-          "outcome": "PJ Kennedy becomes the man you call in East Boston when you need something done. He never runs for high office. He is more powerful than that. His son Joseph will turn that power into money.",
+          "outcome": "You become the one people call when they need something done. You never run for high office. You are more powerful than that. Your son will turn that power into money.",
           "clearFlags": [],
           "ripples": []
         },
@@ -3459,13 +3464,13 @@
             "kennedy_political_dynasty",
             "kennedy_moral_authority"
           ],
-          "outcome": "PJ Kennedy's influence runs through the parish and the pulpit, not the back room. He is trusted rather than owed. His son Joseph will find a different way to convert that trust into wealth.",
+          "outcome": "Your influence runs through the parish and the pulpit, not the back room. You are trusted rather than owed. Your son will find a different way to convert that trust into wealth.",
           "clearFlags": [],
           "ripples": []
         },
         {
           "id": "pj_plays_both_sides",
-          "text": "Cultivate the Yankee establishment too — Irish votes plus Brahmin money",
+          "text": "Cultivate the old establishment too — the newcomers' votes plus old money",
           "effects": {
             "reputation": 3,
             "power": 4,
@@ -3481,7 +3486,7 @@
             "kennedy_political_dynasty",
             "kennedy_brahmin_alliance"
           ],
-          "outcome": "PJ Kennedy is the bridge between worlds that Boston pretends do not touch. He is useful to everyone. His son Joseph will exploit that position more aggressively than PJ ever dared.",
+          "outcome": "You are the bridge between worlds the city pretends do not touch. You are useful to everyone. Your son will exploit that position more aggressively than you ever dared.",
           "clearFlags": [],
           "ripples": []
         }
@@ -3491,8 +3496,9 @@
       "id": "ev_jpk_the_patriarch",
       "era": "origins",
       "year": 1920,
-      "title": "Joseph P. Kennedy's Ambition",
-      "scene": "You are Joseph Patrick Kennedy, twenty-five years old, already the youngest bank president in Massachusetts, and furious. The Brahmin clubs of Harvard looked through you. The Boston establishment will never make room for an Irish Catholic. You will not ask for room — you will take it. The question is how far you are willing to go.",
+      "title": "The Patriarch's Ambition",
+      "archetypes": ["political"],
+      "scene": "You are twenty-five, already the youngest bank president in the state, and furious. The old establishment's clubs looked through you. They will never make room for an outsider of your stock. You will not ask for room — you will take it. The question is how far you are willing to go.",
       "researchNote": "Joseph P. Kennedy (1888–1969) built one of America's great political dynasties through banking, the stock market, Hollywood, bootlegging (alleged), and the SEC chairmanship. Historical.",
       "extrapolated": false,
       "startrekInspired": false,
@@ -3519,7 +3525,7 @@
       "choices": [
         {
           "id": "jpk_outsider_rage",
-          "text": "Channel the Brahmin snub — every closed door becomes fuel",
+          "text": "Channel the establishment's snub — every closed door becomes fuel",
           "effects": {
             "power": 6,
             "money": 4,
@@ -3535,7 +3541,7 @@
             "kennedy_ambitious_patriarch",
             "kennedy_dynasty_sons"
           ],
-          "outcome": "Joseph Kennedy's fury is a force of nature. He will make his sons senators before he dies. That they will pay for it in blood is a thing he does not permit himself to think about.",
+          "outcome": "Your fury is a force of nature. You will make your sons senators before you die. That they will pay for it in blood is a thing you do not permit yourself to think about.",
           "clearFlags": [],
           "ripples": []
         },
@@ -3557,13 +3563,13 @@
             "kennedy_ambitious_patriarch",
             "kennedy_dynasty_sons"
           ],
-          "outcome": "Joseph Kennedy is as calculating as he is ambitious. The family fortune will grow methodically. His sons will have options that Patrick and PJ never had. Whether they will use them wisely is another matter.",
+          "outcome": "You are as calculating as you are ambitious. The family fortune will grow methodically. Your sons will have options your forebears never had. Whether they will use them wisely is another matter.",
           "clearFlags": [],
           "ripples": []
         },
         {
           "id": "jpk_buys_legitimacy",
-          "text": "Buy your way into the establishment — Harvard, the SEC, the embassy",
+          "text": "Buy your way into the establishment — the right schools, the right offices, the right titles",
           "effects": {
             "money": -3,
             "reputation": 6,
@@ -3579,7 +3585,7 @@
             "kennedy_ambitious_patriarch",
             "kennedy_dynasty_sons"
           ],
-          "outcome": "Joseph Kennedy will have a Harvard man write history of his family as Brahmin-adjacent. The SEC chairmanship costs him the mob clients but buys the legitimacy he never stops craving. His sons will have it on a silver plate.",
+          "outcome": "You will have a respectable historian write your family as old-money-adjacent. The high office costs you the dirtier clients but buys the legitimacy you never stop craving. Your sons will have it on a silver plate.",
           "clearFlags": [],
           "ripples": []
         }
@@ -3590,8 +3596,8 @@
       "era": "origins",
       "year": 1904,
       "title": "The King's Draft Dodger",
-      "scene": "You have returned to Kallstadt with a pocketful of Yukon gold to claim your bride, Elisabeth. But the Bavarian authorities are cold: they claim you fled to America to evade military service, and they are threatening to strip your citizenship and deport you.",
-      "researchNote": "Friedrich Trump was formally banished from Bavaria in 1905 for failing to perform military service before emigrating.",
+      "scene": "You have returned to Kallstadt with a pocketful of Yukon gold to claim your bride, your wife. But the Bavarian authorities are cold: they claim you fled to America to evade military service, and they are threatening to strip your citizenship and deport you.",
+      "researchNote": "you was formally banished from Bavaria in 1905 for failing to perform military service before emigrating.",
       "historicity": "real",
       "tags": [
         "trope:exile-return"
@@ -3835,8 +3841,8 @@
       "era": "origins",
       "year": 1926,
       "title": "The Matriarch's Iron Ledger",
-      "scene": "Your husband is dead of the Spanish flu, leaving you with three children and a scattering of Queens lots. The bank managers look at a widow and see easy prey, but they do not know the steel of the Christ family. You will sign the deeds yourself until your boy Fred comes of age.",
-      "researchNote": "Elizabeth Christ Trump founded Elizabeth Trump & Son in 1923, managing the family real estate empire while her son Fred was still a minor.",
+      "scene": "Your husband is dead of the Spanish flu, leaving you with three children and a scattering of Queens lots. The bank managers look at a widow and see easy prey, but they do not know the steel of the Christ family. You will sign the deeds yourself until your boy your son comes of age.",
+      "researchNote": "your wife Trump founded {family_name} & Son in 1923, managing the family real estate empire while her son your son was still a minor.",
       "historicity": "real",
       "tags": [
         "trope:matriarch-regency"
@@ -3867,7 +3873,7 @@
         },
         {
           "id": "groom_young_fred",
-          "text": "Bring young Fred into negotiations, forcing him to watch you squeeze the banks.",
+          "text": "Bring your young son into negotiations, forcing him to watch you squeeze the banks.",
           "effects": {
             "money": -10,
             "power": 25,
