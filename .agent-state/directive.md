@@ -85,20 +85,21 @@ OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git histor
   blocking. A richer partner beat + an explicit branch-fork beat can be added in OB-5 polish.
 - [ ] [WAIT] **OB-5 REPLICATE** — full Epoch-0 per place × era. ONE PR in flight; do NOT stack
   dependent branches (caused a rebase-conflict mess once — author next slice as a fresh branch
-  off main only after the in-flight one merges). DONE (7/9): ireland (#52), bavaria +
+  off main only after the in-flight one merges). DONE (8/9): ireland (#52), bavaria +
   south_africa (#53), west_coast (#54), east_coast (#55), canada (#56), american_midwest
-  (#57 — CI running). #53 review fold: all authored callings offer ALL SIX archetypes (Star +
-  Champion added); SA naming flag fixed. RECURRING FALSE-POSITIVE REVIEW VERDICTS (don't
-  re-litigate): (1) money is a log-scale currency (meters.json scale:log, start:1000, max:1e12),
-  existing origins events use deltas up to 200,000 — +100/200/500 Epoch-0 nudges are CORRECT,
-  NOT "single-digit"; (2) {family_name} resolves to the bare pluralized line "{surname}s" (e.g.
-  "Gallaghers", NO "the") and is a real distinct token from {surname} — "The {family_name} name"
-  → "The Gallaghers name" is single-article + grammatical, matching merged Ireland.
-  REMAINING (after #57 merges): american_south, baghdad/caliphate.
-  NEXT-AUTHOR NOTES:
-  american_south (scots_irish, "humid heat / magnolia / river delta" → plantation-shadow delta);
-  baghdad (arabic_abbasid, era=CALIPHATE not origins, "Tigris market" → medieval Islamic golden
-  age; ALL prose + the doctor/midwife framing must fit the caliphate, NOT 1885).
+  (#57), american_south (#58 — CI running). #53 review fold: all authored callings offer ALL
+  SIX archetypes (Star + Champion); SA naming flag fixed. RECURRING FALSE-POSITIVE REVIEW
+  VERDICTS (don't re-litigate; reply + resolve): (1) money is a log-scale currency (meters.json
+  scale:log, start:1000, max:1e12), existing origins events use deltas up to 200,000 —
+  +100/200/500 Epoch-0 nudges are CORRECT, not "single-digit"; (2) {family_name} → bare
+  "{surname}s" (no "the"), a real distinct token; (3) {given_name} IS a resolved identity token
+  (terms.ts), {member} is NOT a real token (CodeRabbit invents it) — merged Ireland uses
+  {given_name} {surname} in its calling beat, the proven pattern.
+  REMAINING (LAST slice, after #58 merges): baghdad/caliphate.
+  NEXT-AUTHOR NOTES: baghdad (arabic_abbasid, era=CALIPHATE not origins, "Tigris market" →
+  medieval Islamic golden age; ALL prose + the doctor/midwife framing must fit the caliphate,
+  NOT 1885 — no "doctor with a ledger" anachronism; year comes from the caliphate era, the
+  seed-drawn month/day still narrated). After baghdad lands, OB-5 is COMPLETE → OB-6 verify.
   MAINTENANCE SMELL RESOLVED (#54): per-place notFlags exclusion gone — content.authoredEpoch0Places
   derived at build, founding stamps single has_authored_epoch0, generic beats self-exclude.
   east_coast (#55) was the first slice added with ZERO generic-beat edits — refactor validated.
