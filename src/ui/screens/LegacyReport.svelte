@@ -4,7 +4,7 @@ import type { Ending } from "../../sim/schema";
 import { spectrumLabel } from "../../sim/personality";
 import { branchOf } from "../../sim/branch";
 import { moralPoleLabel, moralPoleOf } from "../../sim/moralAxis";
-import { applyTerms } from "../../sim/terms";
+import { applyTerms, runTerms } from "../../sim/terms";
 import type { EndState, GameState } from "../../sim/state";
 import ButterflyGraph from "../ButterflyGraph.svelte";
 import { formatMoney } from "../theme";
@@ -28,7 +28,8 @@ const KIND_TITLE: Record<string, string> = {
   death: "The End of an Era",
   coup: "Toppled",
 };
-const term = $derived((text: string) => applyTerms(text, content.terms, branchOf(state)));
+const resolvedTerms = $derived(runTerms(content.terms, branchOf(state), state));
+const term = $derived((text: string) => applyTerms(text, resolvedTerms));
 const title = $derived(term(ending?.title ?? KIND_TITLE[end.kind] ?? "The End"));
 const tier = $derived(ending?.tier ?? (end.kind === "victory" ? "endgame-good" : "endgame-bad"));
 const isApex = $derived(tier === "apex");

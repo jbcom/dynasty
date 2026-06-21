@@ -60,7 +60,9 @@ describe("timeline compiler (AH3 gears-in-a-clock, task-008)", () => {
     expect(c.branch).toBe("default");
     expect(c.archetype).toBe("economic");
     expect(c.terms.head_of_state).toBe("President");
-    expect(c.terms.surname).toBe("Trump");
+    // Identity tokens come from the founded line, not branch terms — an unfounded
+    // compile (initState, no family) carries no surname (CP-R1).
+    expect(c.terms.surname).toBeUndefined();
     expect(c.currency.id).toBe("usd");
     // The default USA variant is selected, not the nazi one.
     const usa = c.timelines.find((t) => t.scope === "usa");
@@ -73,7 +75,8 @@ describe("timeline compiler (AH3 gears-in-a-clock, task-008)", () => {
     const c = compile(["axis_ascendant"]);
     expect(c.branch).toBe("nazi");
     expect(c.terms.head_of_state).toBe("Reichskommissar");
-    expect(c.terms.surname).toBe("Drumpf");
+    // Institutional terms flip with the branch; identity (surname) is founded-line only.
+    expect(c.terms.surname).toBeUndefined();
     expect(c.currency.id).toBe("reichsmark");
     const usa = c.timelines.find((t) => t.scope === "usa");
     expect(usa?.branch).toBe("nazi"); // nazi USA variant suppresses default
@@ -108,16 +111,43 @@ describe("timeline compiler (AH3 gears-in-a-clock, task-008)", () => {
     expect(compile(["axis_ascendant"])).toEqual(compile(["axis_ascendant"]));
   });
 
-  it("birth-order lever (AH8d) drives the compiled given/full name", () => {
-    // Fourth child on the default line → the accidental heir, still Donald.
-    expect(compile(["fourth_child"]).terms.given_name).toBe("Donald");
-    expect(compile(["fourth_child"]).terms.full_name).toBe("Donald Trump");
-    // Firstborn heir → carries the patriarch's name even on the default branch.
-    expect(compile(["firstborn_heir"]).terms.given_name).toBe("Friedrich");
-    expect(compile(["firstborn_heir"]).terms.full_name).toBe("Friedrich Trump III");
-    // Firstborn on the Nazi line: Friedrich Drumpf III (surname flips too).
-    expect(compile(["axis_ascendant", "firstborn_heir"]).terms.full_name).toBe(
-      "Friedrich Drumpf III",
-    );
+  it("the founded line drives the compiled given/full name (CP-R1)", () => {
+    // The compiled identity tokens come from the run's live family protagonist +
+    // founded surname, NOT a literal preset or branch term. A founded line names itself.
+    const founded = (given: string, surname: string, flags: string[] = []) => {
+      const base = initState(content, "seed", archetypeFromFlags(flags));
+      const s = {
+        ...base,
+        flags: [...flags].sort(),
+        year: 1950,
+        founding: { momentId: "m", surname, culture: "irish_catholic", place: "ireland" },
+        family: {
+          protagonistId: "m0",
+          nextSeq: 1,
+          members: [
+            {
+              id: "m0",
+              given,
+              surname,
+              sex: "male" as const,
+              born: 1900,
+              generation: 0,
+              traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
+              isProtagonist: true,
+            },
+          ],
+        },
+      };
+      return compileTimeline(content, s, createRng("c"));
+    };
+    const irish = founded("Patrick", "Donnelly");
+    expect(irish.terms.given_name).toBe("Patrick");
+    expect(irish.terms.full_name).toBe("Patrick Donnelly");
+    // A Bavarian-German founded line names itself differently from the SAME content.
+    const bavarian = founded("Friedrich", "Eberhardt");
+    expect(bavarian.terms.full_name).toBe("Friedrich Eberhardt");
+    // The branch never overrides the founded identity (institutional terms aside).
+    const nazi = founded("Síle", "Donnelly", ["axis_ascendant"]);
+    expect(nazi.terms.full_name).toBe("Síle Donnelly");
   });
 });

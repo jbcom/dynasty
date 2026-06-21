@@ -5,7 +5,7 @@ import type { Currency, Slot, WorldTimeline } from "./schema";
 import { type Archetype, resolveSlots } from "./slots";
 import { ARCHETYPE_START, type GameState, initState } from "./state";
 import { resolveCurrency } from "./systemic";
-import { resolveFullName, resolveGivenName } from "./terms";
+import { runTerms } from "./terms";
 import { timelinesForBranch } from "./worldtime";
 
 /**
@@ -62,14 +62,6 @@ export interface CompiledTimeline {
   terms: Record<string, string>;
 }
 
-/** Resolve a single term value for a branch (mirrors applyTerms, single token). */
-function termFor(content: Content, key: string, branch: BranchKey): string | undefined {
-  const t = content.terms[key];
-  if (!t) return undefined;
-  if (branch === "default") return t.default;
-  return (t as Record<string, string | undefined>)[branch] ?? t.default;
-}
-
 /**
  * Compile the bespoke timeline for a fully-prologued state (post Era-0 choices).
  * Deterministic in (content, state). The rng is accepted for future weighting.
@@ -81,15 +73,14 @@ export function compileTimeline(content: Content, state: GameState, _rng: Rng): 
   const slots: Record<string, string> = resolveSlots(content.slots as Slot[], branch, archetype);
   const currency = resolveCurrency(content, state);
 
+  // Resolve every term for this run: branch-relative institutional terms, with the
+  // four IDENTITY tokens (given_name/surname/full_name/family_name) overridden from
+  // the founded line (CP-R1). Expose the headline subset on the compiled read-model.
+  const resolved = runTerms(content.terms, branch, state);
   const keyTerms: Record<string, string> = {};
-  for (const k of ["head_of_state", "the_nation", "surname"]) {
-    const v = termFor(content, k, branch);
-    if (v) keyTerms[k] = v;
+  for (const k of ["head_of_state", "the_nation", "surname", "given_name", "full_name"]) {
+    if (resolved[k]) keyTerms[k] = resolved[k];
   }
-  // given_name / full_name are BIRTH-ORDER aware (AH8d): a firstborn/only-child
-  // heir carries the patriarch's name (Friedrich III), overriding the branch term.
-  keyTerms.given_name = resolveGivenName(content.terms, branch, state.flags);
-  keyTerms.full_name = resolveFullName(content.terms, branch, state.flags);
 
   return {
     seed: state.seed,

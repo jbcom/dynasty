@@ -1,53 +1,62 @@
 import type { BranchKey } from "./branch";
 import type { Term, TermsFile } from "./schema";
+import type { GameState } from "./state";
 
 /**
- * BIRTH-ORDER GIVEN-NAME RESOLUTION (AH8c × AH8d).
+ * FOUNDED-LINE IDENTITY RESOLUTION (CP-R1).
  *
- * Real history: Donald is the FOURTH of five, an heir only because the firstborn
- * (Fred Jr.) rebelled and died — the "accidental heir". The de-4a Era-0 lever
- * lets the player set the family's child configuration; when the protagonist is
- * the FIRST son / only child, the patriarch's name passes to him directly (the
- * groomed dynastic heir) → he becomes "Friedrich III" rather than "Donald",
- * EVEN on branches whose default given name is Donald. This is the naming half
- * of the inheritance dynamic the sibling-count flags drive.
+ * The protagonist's identity is NOT a literal preset (no "Donald"/"Trump" — see
+ * the literal-layer dissolution). It comes from the run's LIVE FAMILY TREE: the
+ * current protagonist member's given name + the founded surname. Content authors
+ * write `{given_name}` / `{full_name}` / `{surname}` / `{family_name}` tokens; at
+ * render time they resolve to whatever the player's founded line is actually
+ * called, on every (place × culture) origin. There is no literal fallback — every
+ * run is founded, so the founded line is the single source of truth for the name.
  *
- * Precedence: the firstborn/only-child override wins over the branch default;
- * otherwise the branch term applies (Friedrich on the proud-tradition German
- * lines, Donald elsewhere).
+ * The static branch terms table (terms.json) still owns INSTITUTIONAL tokens
+ * (head_of_state, the_nation, …) which are branch-relative, not identity. Only the
+ * four IDENTITY tokens are overridden from the founded line.
  */
-const PATRIARCH_GIVEN = "Friedrich";
 
-/** Does this run's Era-0 birth-order make the protagonist the name-bearing heir? */
-export function isNamedHeir(flags: readonly string[]): boolean {
-  return flags.includes("firstborn_heir") || flags.includes("only_child");
+/** The four identity tokens resolved from the founded line, not the branch terms. */
+const IDENTITY_TOKENS = ["given_name", "surname", "full_name", "family_name"] as const;
+
+/** The current protagonist's given name + founded surname, or undefined if not yet founded. */
+function foundedIdentity(state: GameState): { given: string; surname: string } | undefined {
+  const fam = state.family;
+  if (!fam) return undefined;
+  const me = fam.members.find((m) => m.id === fam.protagonistId);
+  if (!me) return undefined;
+  return { given: me.given, surname: me.surname };
 }
 
-/** The protagonist's given name for a run: birth-order override, else branch term. */
-export function resolveGivenName(
+/**
+ * Build the per-run terms table: the static branch-resolved terms for every token,
+ * with the four IDENTITY tokens overridden by the run's founded line. This is the
+ * single seam the UI + read-model resolve player-facing names through, so a founded
+ * Irish-Catholic or Abbasid line renders its OWN name everywhere, not a preset.
+ */
+export function runTerms(
   terms: TermsFile["terms"],
   branch: BranchKey,
-  flags: readonly string[],
-): string {
-  if (isNamedHeir(flags)) return PATRIARCH_GIVEN;
-  const term = terms.given_name;
-  return term ? resolveTerm(term, branch) : "Donald";
+  state: GameState,
+): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const [key, term] of Object.entries(terms)) {
+    out[key] = resolveTerm(term, branch);
+  }
+  const id = foundedIdentity(state);
+  if (id) {
+    out.given_name = id.given;
+    out.surname = id.surname;
+    out.full_name = `${id.given} ${id.surname}`;
+    out.family_name = `${id.surname}s`;
+  }
+  return out;
 }
 
-/** The protagonist's full name: "<given> <surname>", with the dynastic suffix
- *  when the patriarch's name passed to a named heir (Friedrich → "Friedrich <S> III"). */
-export function resolveFullName(
-  terms: TermsFile["terms"],
-  branch: BranchKey,
-  flags: readonly string[],
-): string {
-  const given = resolveGivenName(terms, branch, flags);
-  const surnameTerm = terms.surname;
-  const surname = surnameTerm ? resolveTerm(surnameTerm, branch) : "Trump";
-  // A named heir who carries the patriarch's given name is the third of that name.
-  const suffix = isNamedHeir(flags) && given === PATRIARCH_GIVEN ? " III" : "";
-  return `${given} ${surname}${suffix}`;
-}
+/** The identity-token keys that the founded line overrides (for callers that filter). */
+export { IDENTITY_TOKENS };
 
 /**
  * Branch-aware TERM resolution (alt-history consistency, AH1).
@@ -67,17 +76,19 @@ export function resolveTerm(term: Term, branch: BranchKey): string {
 }
 
 /**
- * Interpolate every `{token}` in `text` using the terms table for `branch`.
- * Unknown tokens are left verbatim (so non-term braces handled elsewhere are
- * untouched). `{{` and `}}` are escapes for literal braces. Single left-to-right
- * pass, so there is no sentinel-collision hazard.
+ * Interpolate every `{token}` in `text` using a RESOLVED terms table (a flat
+ * `token → value` map, as produced by `runTerms` — branch-resolved with the
+ * founded-line identity overrides already applied). Unknown tokens are left
+ * verbatim (so non-term braces handled elsewhere are untouched). `{{` and `}}`
+ * are escapes for literal braces. Single left-to-right pass, so there is no
+ * sentinel-collision hazard.
  */
-export function applyTerms(text: string, terms: TermsFile["terms"], branch: BranchKey): string {
+export function applyTerms(text: string, resolved: Record<string, string>): string {
   if (!text.includes("{")) return text;
   return text.replace(/\{\{|\}\}|\{(\w+)\}/g, (whole, key: string | undefined) => {
     if (whole === "{{") return "{";
     if (whole === "}}") return "}";
-    const term = key ? terms[key] : undefined;
-    return term ? resolveTerm(term, branch) : whole;
+    const value = key ? resolved[key] : undefined;
+    return value ?? whole;
   });
 }

@@ -135,6 +135,43 @@ the diegetic birth sequence instead of a form. Re-sequenced as CP-7r below.
   in shown text — the founded line is named in its own terms ("the next generation
   of the line").
 
+## CP-R1 — dissolving the literal protagonist layer (decision, 2026-06-20)
+
+Reassessed-order step 1 (see directive §REASSESSED ORDER). The user: "ev_donald_is_born
+not 'next generation of the economic family'… get rid of fallbacks, absorb everything
+instead of wasting, rename and repurpose all stuff like Donald." Map (from the literal-layer
+audit): 9 literal-person event ids, ~197 literal-name occurrences, 4 literal fallbacks in
+code/data, 3 dynasty-mutuality flags, family-tree literal names.
+
+**Root cause of the visible bug.** The `{given_name}`/`{full_name}`/`{surname}`/`{family_name}`
+token system already exists and is partly adopted in content — but `applyTerms` resolves them
+from the STATIC branch terms table (default "Donald"/"Trump"), never from the run's founded
+line. So a founded Irish-Catholic or Abbasid line still renders "Donald Trump". The protagonist's
+real identity now lives on the live family tree (`family.protagonistId` member's given name) +
+`founding.surname`, not on a branch-keyed term.
+
+**Decision — four atomic parts, load-bearing first:**
+1. **Wire the founded line into term resolution.** Resolve `given_name`/`surname`/`full_name`/
+   `family_name` from the run's `founding` + `family` protagonist, overriding the static branch
+   terms. PlayScreen/LegacyReport build the per-run terms via a single `runTerms(content, state)`
+   seam. REMOVE the literal fallbacks (`?? "Donald"`, `?? "Trump"`, `PATRIARCH_GIVEN="Friedrich"`).
+   Since every run is founded under the diegetic model, terms.json's `given_name`/`surname`/
+   `full_name`/`family_name` literal defaults are deleted (institutional terms stay branch-keyed).
+2. **Rename the 3 `ev_donald_*` protagonist-birth ids** → generic founded-line ids
+   (`ev_protagonist_*`), updating the 8 test references + any slot/butterfly refs.
+3. **Tokenize literal protagonist-line strings** in era/timeline content (the "Trump"/"Donald"/
+   "Friedrich"/"Fred" that name the PLAYER'S line) → tokens; keep place-specific biography
+   (Kallstadt, barber, Eider) as bavaria-origin content (it only applies to a Bavarian-German
+   founding), not shown to other lines.
+4. **Rival houses stay world-context.** Kennedy/Musk `ev_musk_*` etc. are rival/world actors,
+   NOT the protagonist — they keep proper-noun framing as world-timeline events the butterfly
+   engine threads; only the PROTAGONIST identity is dissolved into the founded line. This is the
+   "tons of different timelines to weave together" the user wants — rival dynasties as backdrop.
+
+Why this order: wiring (1) makes every already-tokenized string in content immediately render the
+founded name, which is the bulk of the fix; (2)/(3) clean the remaining literals; (4) preserves
+the rival-house content as the weave material instead of deleting it ("absorb, don't waste").
+
 ## UX flow (the control panel) — SUPERSEDED by the diegetic birth above
 
 ```
