@@ -175,8 +175,10 @@ export interface RawContent {
 function deriveAuthoredEpoch0Places(events: GameEvent[]): Set<string> {
   const places = new Set<string>();
   for (const e of events) {
-    if (!e.tags.includes("epoch0") || !e.place) continue;
-    if (e.choices.some((c) => c.setFlags?.includes("emerged"))) places.add(e.place);
+    // tags/choices are required schema fields, but stay defensive against
+    // partially-constructed events passed in test contexts.
+    if (!e.place || !e.tags?.includes("epoch0")) continue;
+    if (e.choices?.some((c) => c.setFlags?.includes("emerged"))) places.add(e.place);
   }
   return places;
 }
