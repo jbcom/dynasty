@@ -86,6 +86,32 @@ export function suggestSurnames(culture: Culture, rng: Rng, count = 3): string[]
   return out;
 }
 
+/**
+ * GIVEN-NAME SUGGESTIONS (OB-3 diegetic bestowal) — the parallel of suggestSurnames for the
+ * founder's first name. A seeded, de-duplicated selection of `count` culture- + sex-
+ * appropriate given names the player picks from at the naming beat (or types their own).
+ * Always has options (the culture pools are non-empty by schema). Pure + seeded.
+ */
+export function suggestGivenNames(culture: Culture, sex: Sex, rng: Rng, count = 3): string[] {
+  const pool = sex === "male" ? culture.givenMale : culture.givenFemale;
+  const bag = [...pool];
+  const r = rng.fork(`given:${sex}`);
+  for (let i = bag.length - 1; i > 0; i--) {
+    const j = Math.floor(r.next() * (i + 1));
+    [bag[i], bag[j]] = [bag[j] as string, bag[i] as string];
+  }
+  const out: string[] = [];
+  const seen = new Set<string>();
+  for (const s of bag) {
+    if (out.length >= count) break;
+    if (!seen.has(s)) {
+      seen.add(s);
+      out.push(s);
+    }
+  }
+  return out;
+}
+
 /** Which naming source applies to this child slot under the culture's rules. */
 function sourceFor(culture: Culture, slot: ChildSlot): NamingSource | undefined {
   const r = culture.namingRules;

@@ -11,7 +11,7 @@ import {
 } from "./engine/settings";
 import type { Content } from "./sim/content";
 import { foundByComposition } from "./sim/founding";
-import { dealComposition } from "./sim/places";
+import { dealComposition, placeById } from "./sim/places";
 import type { GameState } from "./sim/state";
 import { GameStore } from "./ui/gameStore.svelte";
 import { FormFactorStore } from "./ui/formFactor.svelte";
@@ -58,16 +58,22 @@ async function toggleLive(on: boolean): Promise<void> {
   settings = await loadSettings(storage);
 }
 
-// DIEGETIC BIRTH (CP-R4 / PL-3): the onboarding flow has already AUTHORED the seed (from
-// the three consciousness choices) and the surname (bestowed by choice or the name-your-
-// own modal). Here we deal the seed-dealt origin (place × era × gender × archetype) under
-// that surname, found it, and drop into the Epoch-0 birth — the player then DISCOVERS the
-// origin through the emergence events. Same seed → same deal as the onboarding preview.
-async function birthGame(seed: string, surname: string): Promise<void> {
+// FOUND THE RUN (OB-3): the onboarding chose the PLACE (geography) + bestowed the family
+// name; the seed is a hidden random draw (world only). Found a composition for the chosen
+// place (era/gender/archetype seed-dealt as starting defaults the authored Epoch-0 lets the
+// player override in-game), then drop into the Epoch-0 story.
+async function birthGame(seed: string, place: string, surname: string): Promise<void> {
   if (!storage) return;
+  const placeDef = placeById(content.places, place);
+  // Guard: the place comes from the onboarding catalog, so this should never miss — but bail
+  // rather than silently fall back to a random place if an invalid id ever reaches here.
+  if (!placeDef) {
+    console.error(`birthGame: unknown place "${place}"`);
+    return;
+  }
   // Await the clear so a fast first choice can't race the old save's deletion.
   await clearSave(storage);
-  const composition = dealComposition(content.places, content.eras, seed, surname);
+  const composition = dealComposition(content.places, content.eras, seed, surname, placeDef);
   const founded = foundByComposition(content, composition).state;
   store = new GameStore(content, seed, storage, founded, founded.archetype);
   screen = "play";

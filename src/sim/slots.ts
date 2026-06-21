@@ -40,6 +40,39 @@ export const ARCHETYPES: readonly Archetype[] = [
   "athletic",
 ];
 
+/**
+ * The diegetic CALLING title for each archetype (OB-2). In the reworked Epoch-0 the player
+ * "chooses a calling" — which IS the archetype (the power base) under a story-facing name +
+ * one-line summons. The archetype id stays the mechanical key; this is the face the player
+ * picks at the calling beat.
+ */
+export const ARCHETYPE_CALLINGS: Record<Archetype, { title: string; summons: string }> = {
+  economic: {
+    title: "The Magnate",
+    summons: "Money is the lever that moves every other thing. You mean to hold the lever.",
+  },
+  political: {
+    title: "The Statesman",
+    summons: "Power is not given; it is gathered, office by office, debt by debt.",
+  },
+  technological: {
+    title: "The Visionary",
+    summons: "The future belongs to whoever builds it first. You intend to build it.",
+  },
+  religious: {
+    title: "The Prophet",
+    summons: "People hunger for something larger than themselves. You will be its voice.",
+  },
+  entertainment: {
+    title: "The Star",
+    summons: "A name on every tongue is a kind of immortality. You want yours.",
+  },
+  athletic: {
+    title: "The Champion",
+    summons: "The body, perfected and victorious, is its own argument for greatness.",
+  },
+};
+
 /** Resolve one slot to the concrete event for this branch + archetype. */
 export function resolveSlot(
   slot: Slot,
