@@ -150,6 +150,17 @@ export const EventSchema = z.object({
   historicity: z.enum(["real", "extrapolated", "personal"]).optional(),
   /** The place this event belongs to (FD-2/FD-5 world stacks); absent = anywhere. */
   place: z.string().optional(),
+  /**
+   * The power ARCHETYPE(s) this event serves (CP-R-ARCH). The event pool includes
+   * it only when the run's archetype is in this list. EMPTY/absent = archetype-
+   * AGNOSTIC: the event fires for any founded line (the common case — most life,
+   * world, and family beats are not power-base-specific). A casino deal is
+   * `["economic"]`; a reality-TV beat `["entertainment"]`; a tower deal usable by
+   * either is `["economic","entertainment"]` — tagged for each, no duplication.
+   * Optional: absent = agnostic (same as empty), so code-built events + fixtures
+   * need not specify it. Parsed authored content normalizes absent → [].
+   */
+  archetypes: z.array(z.string()).optional(),
   tags: z.array(z.string()).default([]),
   requires: RequiresSchema,
   weight: z.number().min(0).default(10),

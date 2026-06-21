@@ -35,6 +35,8 @@ function archetypeOf(flags: readonly string[]): Archetype {
   if (flags.includes("kennedy_dynasty_active")) return "political";
   if (flags.includes("musk_dynasty_active")) return "technological";
   if (flags.includes("religious_dynasty_active")) return "religious";
+  if (flags.includes("entertainment_dynasty_active")) return "entertainment";
+  if (flags.includes("athletic_dynasty_active")) return "athletic";
   return "economic";
 }
 

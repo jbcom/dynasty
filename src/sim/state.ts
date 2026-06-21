@@ -199,13 +199,17 @@ export interface RankState {
  * founded via a start-moment (a founded line overrides this with the moment's
  * year, see founding.ts). Anchored to the archetype's exemplar era so the modern
  * `origins` arc still opens correctly: economic 1946, political 1888,
- * technological 1971, religious 1918.
+ * technological 1971, religious 1918, entertainment 1946 (the spectacle/celebrity
+ * line shares the postwar media-age baseline), athletic 1946 (the prowess→fame
+ * line shares it too). CP-R-ARCH may refine these once their prologues are authored.
  */
 export const ARCHETYPE_START: Record<Archetype, number> = {
   economic: 1946,
   political: 1888,
   technological: 1971,
   religious: 1918,
+  entertainment: 1946,
+  athletic: 1946,
 };
 
 /**
@@ -220,6 +224,10 @@ const ARCHETYPE_SEED_FLAGS: Record<Archetype, string[]> = {
   political: ["kennedy_dynasty_active", "kennedy_prologue"],
   technological: ["musk_dynasty_active", "musk_prologue"],
   religious: ["religious_dynasty_active", "religious_prologue"],
+  // CP-R-ARCH: the two new power bases seed their own activation + prologue gates,
+  // in the same `*_dynasty_active` / `*_prologue` vocabulary the content gates on.
+  entertainment: ["entertainment_dynasty_active", "entertainment_prologue"],
+  athletic: ["athletic_dynasty_active", "athletic_prologue"],
 };
 
 /**
