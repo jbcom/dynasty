@@ -156,7 +156,7 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 ### SS-2 Yuka GOAP integration
 - [x] SS-2 add yuka+@types/yuka; pure src/sim/goap/ wrapper (no Math.random/Date.now reachable); toJSON/fromJSON deterministic; tests
 ### SS-3 DynastyAgent
-- [ ] SS-3 line→Think brain (motivators→characterBias, archetype/trope→evaluators); pure deterministic arbitrate+step; serializes; determinism tests
+- [x] SS-3 line→Think brain (motivators→characterBias, archetype/trope→evaluators); pure deterministic arbitrate+step; serializes; determinism tests
 ### SS-4 Macro-acts + epochs
 - [ ] SS-4 Convergence/Emergence/Ascension phases + epoch world-inputs every evaluator reads; tests
 ### SS-5 Class-rung system
