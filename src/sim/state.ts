@@ -137,13 +137,22 @@ const DYNASTY_SEED_FLAGS: Record<DynastyKey, string[]> = {
   kennedy: ["kennedy_dynasty_active", "kennedy_prologue"],
 };
 
-/** Create the initial state for a new run, optionally for a non-Trump dynasty. */
+/**
+ * Create the initial state for a new run. The preset dynasties begin in the
+ * modern `origins` era; a founded line (FD-6) passes `startEra` to begin at its
+ * start-moment's era (e.g. a deep-history "caliphate" prefix). The starting era
+ * is resolved BY ID, not by array position, because deep-history eras sort ahead
+ * of `origins` (negative order) and must not silently become every run's start.
+ */
 export function initState(
   content: Content,
   seed: string,
   dynasty: DynastyKey = "trump",
+  startEra = "origins",
 ): GameState {
-  const firstEra = content.eras[0];
+  const startIndex = content.eras.findIndex((e) => e.id === startEra);
+  const eraIndex = startIndex >= 0 ? startIndex : 0;
+  const firstEra = content.eras[eraIndex];
   if (!firstEra) throw new Error("Content has no eras");
   const birthYear = DYNASTY_START[dynasty];
   // Seed all dynasty flags (activation + prologue gate) so the prologue chain
@@ -153,7 +162,7 @@ export function initState(
   const seedFlags = [...DYNASTY_SEED_FLAGS[dynasty]].sort();
   return {
     seed,
-    eraIndex: 0,
+    eraIndex,
     // Age is ALWAYS derived from the year (ageInYear) so it stays monotonic with
     // time. The first era opens in the dynastic-origins past (pre-1946), so the
     // protagonist's "age" starts negative — seeding 0 here would make the very

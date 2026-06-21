@@ -27,6 +27,8 @@ import {
   RanksFileSchema,
   type Slot,
   SlotsFileSchema,
+  type StartMoment,
+  StartMomentsFileSchema,
   type TermsFile,
   TermsFileSchema,
   type Trope,
@@ -79,6 +81,11 @@ export interface Content {
    */
   onomastics: OnomasticsFile["cultures"];
   /**
+   * The "found your own dynasty" start-moments (FD-6): historical hinges a line
+   * can be founded at. The 4 preset spines are one-tap shortcuts over these.
+   */
+  startMoments: StartMoment[];
+  /**
    * World-timeline entries PROJECTED into the unified event pool (FD-2.2): the
    * dated backdrop facts as year-keyed, reactable GameEvents the player lives
    * through. Derived from worldTimelines; year-sorted + deterministic.
@@ -103,6 +110,7 @@ export interface RawContent {
   tropes?: unknown;
   templates?: unknown;
   onomastics?: unknown;
+  startMoments?: unknown;
 }
 
 /** Validate raw JSON into a Content bundle, cross-checking referential integrity. */
@@ -148,6 +156,21 @@ export function buildContent(raw: RawContent): Content {
     raw.onomastics ?? { cultures: {} },
     "onomastics.json",
   );
+  const startMomentsFile = parseContent(
+    StartMomentsFileSchema,
+    raw.startMoments ?? { moments: [] },
+    "start-moments.json",
+  );
+  // Each start-moment's culture must resolve in onomastics; cross-ref vs eras is
+  // done below once eraIds is built.
+  const cultureIds = new Set(Object.keys(onomasticsFile.cultures));
+  if (cultureIds.size > 0) {
+    for (const m of startMomentsFile.moments) {
+      if (!cultureIds.has(m.culture)) {
+        throw new Error(`start-moment "${m.id}" references unknown culture "${m.culture}"`);
+      }
+    }
+  }
   // A template's trope ids must resolve to the catalog (same guarantee as events).
   if (tropeIds.size > 0) {
     for (const tpl of templatesFile.templates) {
@@ -248,6 +271,13 @@ export function buildContent(raw: RawContent): Content {
     }
   }
 
+  // FD-6: each start-moment's startEra must be a real era.
+  for (const m of startMomentsFile.moments) {
+    if (!eraIds.has(m.startEra)) {
+      throw new Error(`start-moment "${m.id}" references unknown startEra "${m.startEra}"`);
+    }
+  }
+
   return {
     meters: metersFile.meters,
     eras,
@@ -267,6 +297,7 @@ export function buildContent(raw: RawContent): Content {
     tropes: tropesFile.tropes,
     templates: templatesFile.templates,
     onomastics: onomasticsFile.cultures,
+    startMoments: startMomentsFile.moments,
     worldEvents: projectWorldEvents(worldTimelines),
   };
 }

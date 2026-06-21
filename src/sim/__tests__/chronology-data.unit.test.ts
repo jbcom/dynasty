@@ -24,8 +24,11 @@ describe("sacred timeline — era chronology is strictly forward", () => {
     const orders = content.eras.map((e) => e.order);
     expect(orders).toEqual([...orders].sort((a, b) => a - b));
     expect(new Set(orders).size).toBe(orders.length);
-    // order is a dense 0..N-1 sequence (no holes).
-    for (let i = 0; i < orders.length; i++) expect(orders[i]).toBe(i);
+    // Orders are a CONTIGUOUS integer run with no holes — but may start below 0
+    // (the deep-history caliphate era uses a negative order, FD-6). Assert
+    // contiguity from the minimum rather than a hardcoded 0..N-1.
+    const min = Math.min(...orders);
+    for (let i = 0; i < orders.length; i++) expect(orders[i]).toBe(min + i);
   });
 
   it("each era's own span is forward (yearStart <= yearEnd)", () => {

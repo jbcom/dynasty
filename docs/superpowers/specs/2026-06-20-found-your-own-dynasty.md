@@ -305,7 +305,18 @@ further back — centuries or millennia — opening whole new dynastic forms:
   Florentine banking house, a Chinese scholar-gentry/imperial-examination line, a
   samurai/daimyō house, a Mughal or Ottoman line)
 This widens the place/era/onomastic/trope space enormously (new cultures, naming
-conventions, governance forms, faiths). It is exactly the kind of breadth the
+conventions, governance forms, faiths).
+
+**DECISION — deep-history era ordering (FD-6).** Eras are ONE linear chain keyed
+by `order`; the run's STARTING position is set by the chosen start-moment's
+`startEra` (the founding flow looks up that era's index — not a hardcoded 0). A
+modern line begins at the `origins` era; a deep-history line begins at a
+deep-history era placed BEFORE origins via a negative `order` (so it sorts to the
+front without renumbering the 13 existing modern eras). A deep-history dynasty
+plays its deep era(s) then continues through the SAME universal mid/late eras —
+which is exactly the "endures across 1000 years" vision (one chain, different
+entry points). `EraSchema.order` is relaxed from nonnegative to any integer to
+admit the negative-ordered deep prefix. It is exactly the kind of breadth the
 PROCEDURAL POOL (§1d) + GEMINI EXTRAPOLATION (§1e) exist to populate — hand-
 authoring a millennium of Mughal court events is infeasible; generating + quality-
 gating them is the point. Ship a focused starter set of moments (the table above

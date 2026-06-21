@@ -167,7 +167,9 @@ export type GameEvent = z.infer<typeof EventSchema>;
 /** Era metadata (data/eras/index.json entries). */
 export const EraSchema = z.object({
   id: z.string().min(1),
-  order: z.number().int().nonnegative(),
+  // Any integer: deep-history eras (FD-6) use NEGATIVE orders so they sort before
+  // the modern `origins` era without renumbering the existing chain.
+  order: z.number().int(),
   title: z.string().min(1),
   yearStart: z.number().int(),
   yearEnd: z.number().int(),
@@ -740,6 +742,45 @@ export const OnomasticsFileSchema = z.object({
   cultures: z.record(z.string(), CultureSchema).default({}),
 });
 export type OnomasticsFile = z.infer<typeof OnomasticsFileSchema>;
+
+/* ------------------------------------------------------------------------- *
+ * START-MOMENTS (FD-6) — the "found your own dynasty" Stage-0. A start-moment is
+ * a historical hinge the player founds a line at: it fixes WHEN (year) + WHERE
+ * (place) + the cultural lane (culture → onomastics) + the archetype affinity,
+ * seeds the progenitor, and carries the founding scene + its first reactable
+ * choice. The player supplies only the SURNAME; everything else is real history.
+ * The 4 preset spines become one-tap shortcuts over these. See design spec §2.
+ * ------------------------------------------------------------------------- */
+export const StartMomentSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(1),
+  /** The founding year. */
+  year: z.number().int(),
+  /** Place label the line is founded in (FD-7 world-stacks will key off this). */
+  place: z.string().min(1),
+  /** Culture id — must resolve in onomastics.json (given-name lane + conventions). */
+  culture: z.string().min(1),
+  /** Which power archetype this moment leans toward. */
+  archetype: z.enum(["economic", "political", "technological", "religious"]),
+  /** Sex of the seeded progenitor (drives the onomastic given-name pool). */
+  progenitorSex: z.enum(["male", "female"]).default("male"),
+  /** Era id the founded run begins in (matches eras/index.json). */
+  startEra: z.string().min(1),
+  /** Deep-history exemplars start centuries back; flags UI + reach handling. */
+  deepHistory: z.boolean().default(false),
+  /** The founding scene prose (may carry `{slot}`/`{term}` tokens). */
+  scene: z.string().min(1),
+  /** One-line historical justification. */
+  researchNote: z.string().min(1),
+  /** The first reactable choice at founding (the line's first decision). */
+  choices: z.array(ChoiceSchema).min(1, "a start-moment needs at least one founding choice"),
+});
+export type StartMoment = z.infer<typeof StartMomentSchema>;
+
+export const StartMomentsFileSchema = z.object({
+  moments: z.array(StartMomentSchema).default([]),
+});
+export type StartMomentsFile = z.infer<typeof StartMomentsFileSchema>;
 
 /** Validate arbitrary JSON against a schema, throwing a readable error on failure. */
 export function parseContent<T>(schema: z.ZodType<T>, data: unknown, label: string): T {

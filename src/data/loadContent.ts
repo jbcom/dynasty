@@ -22,6 +22,7 @@ const familyTreesGlob = import.meta.glob("./family-trees/*.json", { eager: true 
 const tropesGlob = import.meta.glob("./tropes.json", { eager: true });
 const templatesGlob = import.meta.glob("./templates/*.json", { eager: true });
 const onomasticsGlob = import.meta.glob("./onomastics.json", { eager: true });
+const startMomentsGlob = import.meta.glob("./origins/start-moments.json", { eager: true });
 
 function firstValue<T>(glob: Record<string, unknown>): T | null {
   const entry = Object.values(glob)[0] as { default?: T } | undefined;
@@ -63,6 +64,7 @@ export function loadContent(): Content {
       ),
     },
     onomastics: firstValue(onomasticsGlob) ?? { cultures: {} },
+    startMoments: firstValue(startMomentsGlob) ?? { moments: [] },
   };
   return buildContent(raw);
 }
