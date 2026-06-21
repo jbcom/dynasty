@@ -223,7 +223,7 @@ export function applyChoice(
       let fam = mort.family;
       if (mort.protagonistDied) {
         const namedHeir = advanced.flags.find((f) => f.startsWith("heir_"))?.slice("heir_".length);
-        const succ = succeed(fam, passYear, namedHeir);
+        const succ = succeed(fam, passYear, namedHeir, advanced.founding?.successionMode);
         if (succ.heirId === null) {
           // The line is extinct — end the run with a dynastic-extinction ending.
           advanced = {

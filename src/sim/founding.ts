@@ -26,6 +26,10 @@ export interface FoundingInput {
   seed: string;
   /** The founding CALLING id (CP-2), optional — a durable generational lens. */
   calling?: string;
+  /** Progenitor gender (CP-3) — overrides the moment's default progenitorSex. */
+  gender?: "male" | "female";
+  /** Succession mode (CP-3) — defaults to absolute (eldest regardless of sex). */
+  successionMode?: "absolute" | "primogeniture" | "matriarchal";
 }
 
 /** The progenitor's given name + the founding state, for the UI + the run. */
@@ -57,10 +61,13 @@ export function foundDynasty(content: Content, input: FoundingInput): FoundingRe
   // ARCHETYPE (FD-3.5 — no literal preset key), refined by the `founding` metadata.
   const base = initState(content, input.seed, moment.archetype, moment.startEra);
 
-  // Progenitor given name from the moment's culture (seeded, deterministic).
+  // Progenitor gender (CP-3): the player's choice overrides the moment default.
+  const gender = input.gender ?? moment.progenitorSex;
+
+  // Progenitor given name from the moment's culture + gender (seeded, deterministic).
   const culture = getCulture({ cultures: content.onomastics }, moment.culture);
   const nameRng = createRng(`${input.seed}::founding:${moment.id}:given`);
-  const progenitorGiven = pickGivenName(culture, moment.progenitorSex, nameRng);
+  const progenitorGiven = pickGivenName(culture, gender, nameRng);
   const progenitorName = `${progenitorGiven} ${input.surname}`;
 
   // Birth year + age track from the founding year, not the preset baseline.
@@ -85,7 +92,7 @@ export function foundDynasty(content: Content, input: FoundingInput): FoundingRe
   const family = seedFamily({
     given: progenitorGiven,
     surname: input.surname,
-    sex: moment.progenitorSex,
+    sex: gender,
     born: moment.year,
   });
 
@@ -102,6 +109,8 @@ export function foundDynasty(content: Content, input: FoundingInput): FoundingRe
       culture: moment.culture,
       place: moment.place,
       ...(input.calling ? { calling: input.calling } : {}),
+      gender,
+      ...(input.successionMode ? { successionMode: input.successionMode } : {}),
     },
     family,
   };

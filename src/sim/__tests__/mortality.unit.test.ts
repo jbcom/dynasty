@@ -107,6 +107,25 @@ describe("FD-10 succeed", () => {
     expect(succeed(dead, 1901).heirId).toBeNull();
   });
 
+  it("CP-3 succession mode picks the heir by sex preference (eldest daughter m1, eldest son m2)", () => {
+    // Founder m0 with an elder daughter (m1, 1875) and a younger son (m2, 1878).
+    let f = seedFamily({ given: "Otto", surname: "Vane", sex: "male", born: 1850 });
+    f = beget(f, "m0", 1875, culture, kinFor(f, "m0"), createRng("d")).family;
+    f = beget(f, "m0", 1878, culture, kinFor(f, "m0"), createRng("s")).family;
+    f = {
+      ...f,
+      members: f.members.map((m) =>
+        m.id === "m1" ? { ...m, sex: "female" } : m.id === "m2" ? { ...m, sex: "male" } : m,
+      ),
+    };
+    // absolute → eldest regardless of sex (m1).
+    expect(succeed(f, 1920, undefined, "absolute").heirId).toBe("m1");
+    // primogeniture → eldest SON first (m2) even though m1 is older.
+    expect(succeed(f, 1920, undefined, "primogeniture").heirId).toBe("m2");
+    // matriarchal → eldest DAUGHTER first (m1).
+    expect(succeed(f, 1920, undefined, "matriarchal").heirId).toBe("m1");
+  });
+
   it("never selects a not-yet-born child as heir (review HIGH/MEDIUM regression)", () => {
     // Protagonist dies in 1900; one child born 1880 (eligible), one born 1905 (not
     // yet born at the death year — the beget stagger can place a birth past death).

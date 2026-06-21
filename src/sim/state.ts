@@ -107,6 +107,18 @@ export interface GameState {
     place: string;
     /** The founding CALLING id (CP-2) — a durable generational lens; optional. */
     calling?: string;
+    /**
+     * The progenitor's gender (CP-3) — drives the onomastic name pool, pronouns,
+     * and (with `successionMode`) who inherits. Defaults to the moment's
+     * progenitorSex when the player doesn't override at founding.
+     */
+    gender?: "male" | "female";
+    /**
+     * SUCCESSION MODE (CP-3): how the heir is chosen at a protagonist's death.
+     * `absolute` = eldest child regardless of sex (default); `primogeniture` =
+     * eldest son, then daughters; `matriarchal` = eldest daughter, then sons.
+     */
+    successionMode?: "absolute" | "primogeniture" | "matriarchal";
   };
   /**
    * The LIVE family tree (FD-8) — the growing, mutable lineage of a founded run.

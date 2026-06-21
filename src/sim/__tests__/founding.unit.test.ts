@@ -51,7 +51,26 @@ describe("FD-6.2 foundDynasty", () => {
       surname: "Vane",
       culture: "bavarian_german",
       place: "bavaria",
+      gender: "male",
     });
+  });
+
+  it("CP-3: gender drives the progenitor name pool + is stored; succession mode is stored", () => {
+    const r = foundDynasty(content, {
+      momentId: "irish_famine_1847",
+      surname: "Vane",
+      seed: "g",
+      gender: "female",
+      successionMode: "matriarchal",
+    });
+    const irish = content.onomastics.irish_catholic;
+    // A female progenitor is named from the female pool.
+    expect(irish?.givenFemale).toContain(r.progenitorGiven);
+    expect(r.state.founding?.gender).toBe("female");
+    expect(r.state.founding?.successionMode).toBe("matriarchal");
+    // The seeded progenitor member is female.
+    const p = r.state.family?.members.find((m) => m.id === r.state.family?.protagonistId);
+    expect(p?.sex).toBe("female");
   });
 
   it("the deep-history moment starts in the caliphate era + flags deep_history_line", () => {
