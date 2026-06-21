@@ -1,4 +1,5 @@
 import { axisByKind, axisIntensityFor, axisOptionById, resolveAxisChoice } from "./axes";
+import { drawBirthDate } from "./birthDate";
 import type { Content } from "./content";
 import { seedFamily } from "./family";
 import { applyDelta } from "./meters";
@@ -133,6 +134,8 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
   const progenitorName = `${progenitorGiven} ${c.surname}`;
 
   const birthYear = c.year;
+  // Birth month + day (OB-4) — seed-drawn (chronology, separate from the chosen place).
+  const birthDate = drawBirthDate(createRng(`${c.seed}::founding:${originId}:birthdate`));
 
   // Founding flags: structural markers so place/archetype-gated content is reachable
   // from turn one (the founding's own first choice happens in-game).
@@ -143,13 +146,11 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
     `archetype:${c.archetype}`,
     `place:${c.place}`,
     `culture:${c.culture}`,
-    // PL-3: the diegetic ONBOARDING already played the consciousness-emergence and
-    // bestowed the surname, so the in-game emergence-cue + naming beats are done. Seed
-    // their flags here so the in-game Epoch-0 opens at the genuine GENDER reveal and
-    // flows on to the calling — no redundant "what does it feel like?" cue that could
-    // contradict the already-dealt place, no re-naming a line the player just named.
-    "emerged",
-    "named",
+    // OB-4: the onboarding chose only PLACE + family name; the authored Epoch-0 story PLAYS
+    // birth → the doctor's date → gender → given-naming → childhood → the calling's first
+    // turn. So we do NOT pre-set emerged/named (that PL-3 holdover skipped those beats); the
+    // chain starts at founded_line and the authored beats set emerged → gender_revealed →
+    // named → calling_chosen as they play.
     ...(c.deepHistory ? ["deep_history_line"] : []),
   ]) {
     flags = withFlag(flags, f);
@@ -184,6 +185,7 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
     meters,
     personality,
     birthYear,
+    birthDate,
     year: c.year,
     age: c.year - birthYear,
     lastEventYear: c.year,

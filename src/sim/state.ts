@@ -94,6 +94,13 @@ export interface GameState {
   /** The protagonist/progenitor's birth year (founding year for a founded line). */
   birthYear: number;
   /**
+   * The founder's birth MONTH + DAY (OB-4) — drawn from the seed at founding (chronology is
+   * separate from the place geography). The year is `birthYear`; the doctor narrates the full
+   * date in the Epoch-0 birth beat via the `{birth_date}` term. Optional for back-compat with
+   * saves/fixtures that predate it.
+   */
+  birthDate?: { month: number; day: number };
+  /**
    * FOUNDING metadata (FD-6) for a "found your own dynasty" run. Absent on the
    * preset-dynasty runs (they use the dynasty key). When present: the start-moment
    * id, the player's chosen surname, the cultural lane, and the founding place —

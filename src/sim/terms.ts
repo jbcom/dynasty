@@ -1,3 +1,4 @@
+import { formatBirthDate } from "./birthDate";
 import type { BranchKey } from "./branch";
 import type { Term, TermsFile } from "./schema";
 import type { GameState } from "./state";
@@ -51,6 +52,10 @@ export function runTerms(
     out.surname = id.surname;
     out.full_name = `${id.given} ${id.surname}`;
     out.family_name = `${id.surname}s`;
+  }
+  // The doctor's-notes birth date (OB-4) for the Epoch-0 birth beat — "September 6, 1885".
+  if (state.birthDate) {
+    out.birth_date = formatBirthDate(state.birthDate, state.birthYear);
   }
   return out;
 }

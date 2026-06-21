@@ -1,0 +1,107 @@
+{
+  "$comment": "OB-4 — the authored Epoch-0 for an IRELAND/origins founding. The first stage of the story: a fully-written birth → the doctor's date → growing up in the parish (class/station emerging from what you see around you), feeding into the shared gender → naming → calling → partner chain. Each choice sets a CAUSAL ANCHOR the butterfly/world engine reads. Place-gated to ireland (place:'ireland'); higher weight than the generic beats so the Irish line opens on its own prose.",
+  "era": "origins",
+  "events": [
+    {
+      "id": "ev_ire_birth",
+      "era": "origins",
+      "place": "ireland",
+      "year": 1885,
+      "title": "Born to the Rain",
+      "scene": "You come into the world in a low stone house above a grey and restless sea, on a night when the rain finds every gap in the thatch. A turf fire hisses; a kettle is already on. The midwife — Mrs. Conneely, who has caught half the parish — wipes her hands and leans to the lamp to write in her little book. You hear her murmur the date as she sets it down, the way she has set down a thousand others.",
+      "researchNote": "OB-4 birth opener for Ireland. Sets `emerged` so the Epoch-0 chain begins; narrates the seed-drawn date via {birth_date}. West-of-Ireland tenant cottage, 1885.",
+      "historicity": "personal",
+      "tags": ["epoch0", "birth", "diegetic"],
+      "requires": { "flags": ["founded_line"], "notFlags": ["emerged"], "meters": {}, "personality": {} },
+      "weight": 5000,
+      "choices": [
+        {
+          "id": "listen_to_the_notes",
+          "text": "You listen to her pen scratch out the day you will carry forever.",
+          "effects": {},
+          "personality": {},
+          "setFlags": ["emerged"],
+          "outcome": "“{birth_date},” Mrs. Conneely writes, and blots it dry. The first fact of your life is a date and a place, and neither was your choice — everything after will be."
+        }
+      ]
+    },
+    {
+      "id": "ev_ire_naming",
+      "era": "origins",
+      "place": "ireland",
+      "year": 1885,
+      "title": "A Name at the Font",
+      "scene": "Within the week you are carried to the chapel for the water. The {family_name} name is settled — it is the Christian name that is argued over in the kitchen the night before. A grandparent to honor, a saint to claim, or simply a name your mother has loved since she was a girl. The priest waits; the choice is made; you become {full_name}.",
+      "researchNote": "OB-4: given-naming as the chapel christening. The given name itself was dealt from the culture pool at founding; this beat is the diegetic bestowal that sets `named` and frames how the name was chosen (an early personality anchor).",
+      "historicity": "personal",
+      "tags": ["epoch0", "naming", "diegetic", "trope:faith-and-community"],
+      "requires": { "flags": ["founded_line", "emerged", "gender_revealed"], "notFlags": ["named"], "meters": {}, "personality": {} },
+      "weight": 980,
+      "choices": [
+        {
+          "id": "named_for_grandparent",
+          "text": "Named for a grandparent — the line reaching backward as it reaches forward.",
+          "effects": { "loyalty": 3 },
+          "personality": { "inward": 2 },
+          "setFlags": ["named", "named_for_kin"],
+          "outcome": "An old name in a young mouth. The dead are honored, and they will be expected to approve."
+        },
+        {
+          "id": "named_for_saint",
+          "text": "Named for a saint — a patron set over the cradle.",
+          "effects": { "reputation": 3 },
+          "personality": {},
+          "setFlags": ["named", "named_for_saint"],
+          "outcome": "A holy name to live up to or live down. The parish nods; heaven, presumably, takes note."
+        },
+        {
+          "id": "named_for_love",
+          "text": "Named for nothing but your mother's wish — a name she simply loved.",
+          "effects": { "health": 2, "loyalty": 2 },
+          "personality": { "inward": 3 },
+          "setFlags": ["named", "named_for_love"],
+          "outcome": "No saint, no ancestor — only love, which is its own kind of inheritance."
+        }
+      ]
+    },
+    {
+      "id": "ev_ire_childhood_station",
+      "era": "origins",
+      "place": "ireland",
+      "year": 1893,
+      "title": "What the Parish Teaches",
+      "scene": "You are old enough now to notice the shape of things. The land is not yours — the family works it for a landlord whose face you have never seen, and the rent goes out on a cart that never seems to come back as anything. At Mass the front pews and the back pews are not an accident. You watch how your father lowers his eyes to the agent and squares them to the neighbors, and you begin to understand which way the world leans — and how a person might lean it back.",
+      "researchNote": "OB-4: class/station emerges early as an organic response to observing the form + function of life around you (user). Tenant-and-landlord Ireland; sets an early-pressure anchor the later calling reads.",
+      "historicity": "personal",
+      "tags": ["epoch0", "childhood", "diegetic", "trope:tenant-and-landlord"],
+      "requires": { "flags": ["founded_line", "emerged", "gender_revealed", "named"], "notFlags": ["station_seen"], "meters": {}, "personality": {} },
+      "weight": 940,
+      "choices": [
+        {
+          "id": "resent_the_rent",
+          "text": "You learn to hate the cart that carries the rent away — and to want.",
+          "effects": { "reputation": 2 },
+          "personality": { "outward": 3, "grandiosity": 4 },
+          "setFlags": ["station_seen", "born_wanting"],
+          "outcome": "Some children accept the order of things. You count it, and find it short. The wanting will not leave you now."
+        },
+        {
+          "id": "study_the_agent",
+          "text": "You watch the agent's ledger instead — power is in the writing-down.",
+          "effects": { "power": 2 },
+          "personality": { "inward": 4 },
+          "setFlags": ["station_seen", "watched_the_ledger"],
+          "outcome": "You see that the man with the book beats the man with the spade, every time. You mean to be the one with the book."
+        },
+        {
+          "id": "keep_your_head",
+          "text": "You keep your head down and your faith up, like your father.",
+          "effects": { "loyalty": 4 },
+          "personality": { "inward": 2 },
+          "setFlags": ["station_seen", "head_down_youth"],
+          "outcome": "There is a dignity in endurance, and the parish respects it. Whether dignity alone can found a line is a question for later years."
+        }
+      ]
+    }
+  ]
+}

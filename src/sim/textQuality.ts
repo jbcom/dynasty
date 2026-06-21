@@ -12,7 +12,7 @@ import type { GameEvent } from "./schema";
  */
 
 /** The slot tokens the terms layer can resolve; anything else renders literally to the player. */
-const VALID_SLOTS = new Set(["given_name", "surname", "full_name", "family_name"]);
+const VALID_SLOTS = new Set(["given_name", "surname", "full_name", "family_name", "birth_date"]);
 
 /** Placeholder/scaffolding words that must never reach shipped copy. */
 const PLACEHOLDER_RE = /\b(TODO|TKTK|TBD|FIXME|lorem|ipsum|placeholder|xxx+)\b/i;
