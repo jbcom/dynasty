@@ -83,26 +83,18 @@ OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git histor
   e2e green; textQuality corpus-clean. NOTE: starting meters ($1K/low) already read as a poor
   tenant family; a deeper "family money vs your money" mechanic is a future refinement, not
   blocking. A richer partner beat + an explicit branch-fork beat can be added in OB-5 polish.
-- [ ] [WAIT] **OB-5 REPLICATE** — full Epoch-0 per place × era. ONE PR in flight; do NOT stack
-  dependent branches (caused a rebase-conflict mess once — author next slice as a fresh branch
-  off main only after the in-flight one merges). DONE (8/9): ireland (#52), bavaria +
-  south_africa (#53), west_coast (#54), east_coast (#55), canada (#56), american_midwest
-  (#57), american_south (#58 — CI running). #53 review fold: all authored callings offer ALL
-  SIX archetypes (Star + Champion); SA naming flag fixed. RECURRING FALSE-POSITIVE REVIEW
-  VERDICTS (don't re-litigate; reply + resolve): (1) money is a log-scale currency (meters.json
-  scale:log, start:1000, max:1e12), existing origins events use deltas up to 200,000 —
-  +100/200/500 Epoch-0 nudges are CORRECT, not "single-digit"; (2) {family_name} → bare
-  "{surname}s" (no "the"), a real distinct token; (3) {given_name} IS a resolved identity token
-  (terms.ts), {member} is NOT a real token (CodeRabbit invents it) — merged Ireland uses
-  {given_name} {surname} in its calling beat, the proven pattern.
-  REMAINING (LAST slice, after #58 merges): baghdad/caliphate.
-  NEXT-AUTHOR NOTES: baghdad (arabic_abbasid, era=CALIPHATE not origins, "Tigris market" →
-  medieval Islamic golden age; ALL prose + the doctor/midwife framing must fit the caliphate,
-  NOT 1885 — no "doctor with a ledger" anachronism; year comes from the caliphate era, the
-  seed-drawn month/day still narrated). After baghdad lands, OB-5 is COMPLETE → OB-6 verify.
-  MAINTENANCE SMELL RESOLVED (#54): per-place notFlags exclusion gone — content.authoredEpoch0Places
-  derived at build, founding stamps single has_authored_epoch0, generic beats self-exclude.
-  east_coast (#55) was the first slice added with ZERO generic-beat edits — refactor validated.
+- [x] **OB-5 REPLICATE — COMPLETE (9/9), last PR #59 in flight (CI).** Full Epoch-0 authored
+  for every origin: ireland (#52), bavaria + south_africa (#53), west_coast (#54), east_coast
+  (#55), canada (#56), american_midwest (#57), american_south (#58), baghdad/caliphate (#59 —
+  the only non-1885 slice, era-correct Abbasid 762 CE). #53 review fold: all authored callings
+  offer ALL SIX archetypes (Star + Champion); SA naming flag fixed. The per-place generic-beat
+  notFlags exclusion smell is REFACTORED OUT (#54): content.authoredEpoch0Places derived at
+  build, founding stamps single has_authored_epoch0, generic beats self-exclude — slices 5–9
+  added with ZERO generic-beat edits. RECURRING FALSE-POSITIVE REVIEW VERDICTS (settled, don't
+  re-litigate; reply + resolve): (1) money is a log-scale currency (meters.json scale:log,
+  start:1000, max:1e12), existing origins events use deltas up to 200,000 — +100/200/500 nudges
+  are CORRECT, not "single-digit"; (2) {family_name} → bare "{surname}s" (no "the"), a real
+  distinct token; (3) {given_name} IS a resolved identity token, {member} is NOT real.
 - [ ] [WAIT] **OB-6 verify** — e2e + component + textQuality + harness audit 0 findings;
   live-verify each origin; gate green; remove dead PL-3 paths.
 
