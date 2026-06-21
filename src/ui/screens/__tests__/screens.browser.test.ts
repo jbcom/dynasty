@@ -52,95 +52,134 @@ const MOMENTS = [
     ],
   },
 ];
-
-describe("TitleScreen (FD-6 founding flow)", () => {
-  it("shows Found a Dynasty and hides Continue without a save", () => {
-    component = mount(TitleScreen, {
-      target: host,
-      props: {
-        moments: MOMENTS,
-        hasSave: false,
-        onFound: () => {},
-        onContinue: () => {},
-        onSettings: () => {},
+const CALLINGS = [
+  {
+    id: "scholar",
+    label: "The Scholar",
+    summary: "Learning is power.",
+    traitDrift: {},
+    tropeWeights: {},
+  },
+];
+const AXES = [
+  {
+    axis: "faith" as const,
+    label: "Faith",
+    prompt: "What of the faith?",
+    options: [
+      {
+        id: "devout",
+        label: "Embrace",
+        blurb: "Kneel with the age.",
+        setFlags: [],
+        effects: {},
+        personality: {},
       },
-    });
+      {
+        id: "reject",
+        label: "Reject",
+        blurb: "Turn away.",
+        setFlags: [],
+        effects: {},
+        personality: {},
+      },
+    ],
+  },
+];
+const STACKS = [
+  {
+    place: "ireland",
+    label: "Ireland",
+    placeLabel: "Ireland",
+    geography: "g",
+    politics: "p",
+    religion: "r",
+    ideology: "i",
+    perils: ["x"],
+    axisIntensity: { faith: 0.9 },
+  },
+];
+const ONOMASTICS = {
+  irish_catholic: {
+    label: "Irish Catholic",
+    givenMale: ["Patrick"],
+    givenFemale: ["Bridget"],
+    convention: "patronymic",
+    namingRules: {},
+  },
+};
+
+function fullProps(over: Record<string, unknown> = {}) {
+  return {
+    moments: MOMENTS,
+    callings: CALLINGS,
+    axes: AXES,
+    worldStacks: STACKS,
+    onomastics: ONOMASTICS,
+    hasSave: false,
+    onFound: () => {},
+    onContinue: () => {},
+    onSettings: () => {},
+    ...over,
+  };
+}
+
+describe("TitleScreen (CP-7 control panel)", () => {
+  it("shows New Game + Settings, hides Continue without a save", () => {
+    component = mount(TitleScreen, { target: host, props: fullProps() });
     expect(host.textContent).toContain("Found a Dynasty");
     expect(host.textContent).not.toContain("Continue");
-    // Settings is always available even without a save.
     expect(host.textContent).toContain("Settings");
   });
 
-  it("shows Load Game — Continue when a save exists", () => {
-    component = mount(TitleScreen, {
-      target: host,
-      props: {
-        moments: MOMENTS,
-        hasSave: true,
-        onFound: () => {},
-        onContinue: () => {},
-        onSettings: () => {},
-      },
-    });
+  it("shows Continue when a save exists", () => {
+    component = mount(TitleScreen, { target: host, props: fullProps({ hasSave: true }) });
     expect(host.textContent).toContain("Continue");
   });
 
-  it("founds a line: title → moment → surname → onFound(momentId, surname, seed)", async () => {
+  it("founds a line through the full panel: moment → name/gender → calling → axes → begin", async () => {
     const onFound = vi.fn();
-    component = mount(TitleScreen, {
-      target: host,
-      props: {
-        moments: MOMENTS,
-        hasSave: false,
-        onFound,
-        onContinue: () => {},
-        onSettings: () => {},
-      },
-    });
-    const input = host.querySelector("input") as HTMLInputElement;
-    input.value = "my-seed";
-    input.dispatchEvent(new Event("input", { bubbles: true }));
-    await page.getByRole("button", { name: "Found a Dynasty" }).click();
+    component = mount(TitleScreen, { target: host, props: fullProps({ onFound }) });
+    const seedInput = host.querySelector("#seed") as HTMLInputElement;
+    seedInput.value = "my-seed";
+    seedInput.dispatchEvent(new Event("input", { bubbles: true }));
+
+    await page.getByRole("button", { name: /Found a Dynasty/ }).click();
     await vitest.waitFor(() => expect(host.textContent).toContain("CHOOSE YOUR HINGE"));
     await page.getByRole("button", { name: /Found here/ }).click();
+
     await vitest.waitFor(() => expect(host.textContent).toContain("NAME YOUR LINE"));
     const surname = host.querySelector("#surname") as HTMLInputElement;
     surname.value = "Vane";
     surname.dispatchEvent(new Event("input", { bubbles: true }));
+    // Choose the matriarch path.
+    await page.getByRole("button", { name: "Matriarch" }).click();
+    await page.getByRole("button", { name: /Next: the Calling/ }).click();
+
+    await vitest.waitFor(() => expect(host.textContent).toContain("CHOOSE A CALLING"));
+    await page.getByRole("button", { name: /Take this calling/ }).click();
+
+    await vitest.waitFor(() => expect(host.textContent).toContain("EPOCH ZERO"));
+    await page.getByRole("button", { name: /Embrace/ }).click();
     await page.getByRole("button", { name: "Begin the Line" }).click();
-    await vitest.waitFor(() =>
-      expect(onFound).toHaveBeenCalledWith("test_famine", "Vane", "my-seed"),
-    );
+
+    await vitest.waitFor(() => expect(host.textContent).toContain("THE FOUNDING"));
+    await page.getByRole("button", { name: "Begin the Line" }).click();
+
+    await vitest.waitFor(() => expect(onFound).toHaveBeenCalledTimes(1));
+    const arg = onFound.mock.calls[0]?.[0];
+    expect(arg.momentId).toBe("test_famine");
+    expect(arg.surname).toBe("Vane");
+    expect(arg.seed).toBe("my-seed");
+    expect(arg.gender).toBe("female");
+    expect(arg.calling).toBe("scholar");
+    expect(arg.axisChoices).toEqual({ faith: "devout" });
   });
 
-  it("the moment picker shows the start-moments", async () => {
-    component = mount(TitleScreen, {
-      target: host,
-      props: {
-        moments: MOMENTS,
-        hasSave: false,
-        onFound: () => {},
-        onContinue: () => {},
-        onSettings: () => {},
-      },
-    });
-    await page.getByRole("button", { name: "Found a Dynasty" }).click();
+  it("the moment picker shows the start-moments; back returns to title", async () => {
+    component = mount(TitleScreen, { target: host, props: fullProps() });
+    await page.getByRole("button", { name: /Found a Dynasty/ }).click();
     await vitest.waitFor(() => expect(host.textContent).toContain("The Great Hunger"));
-  });
-
-  it("back from the moment picker returns to the title", async () => {
-    component = mount(TitleScreen, {
-      target: host,
-      props: {
-        moments: MOMENTS,
-        hasSave: false,
-        onFound: () => {},
-        onContinue: () => {},
-        onSettings: () => {},
-      },
-    });
-    await page.getByRole("button", { name: "Found a Dynasty" }).click();
-    await vitest.waitFor(() => expect(host.textContent).toContain("CHOOSE YOUR HINGE"));
     await page.getByRole("button", { name: "← Back" }).click();
     await vitest.waitFor(() => expect(host.textContent).toContain("Found a Dynasty"));
   });

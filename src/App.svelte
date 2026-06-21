@@ -10,7 +10,7 @@ import {
   type Settings,
 } from "./engine/settings";
 import type { Content } from "./sim/content";
-import { foundDynasty } from "./sim/founding";
+import { type FoundingInput, foundDynasty } from "./sim/founding";
 import type { GameState } from "./sim/state";
 import { GameStore } from "./ui/gameStore.svelte";
 import { FormFactorStore } from "./ui/formFactor.svelte";
@@ -56,14 +56,15 @@ async function toggleLive(on: boolean): Promise<void> {
   settings = await loadSettings(storage);
 }
 
-// FOUND a dynasty at a start-moment (FD-6): build the founded initial state via the
-// pure founding flow and hand it to the store as the run's base.
-async function foundGame(momentId: string, surname: string, seed: string): Promise<void> {
+// FOUND a dynasty (FD-6 / CP-7): the control panel gathers the full founding
+// config (moment, surname, gender, calling, Epoch-0 axis stances) and hands it to
+// the pure founding flow; the founded state becomes the run's base.
+async function foundGame(input: FoundingInput): Promise<void> {
   if (!storage) return;
   // Await the clear so a fast first choice can't race the old save's deletion.
   await clearSave(storage);
-  const founded = foundDynasty(content, { momentId, surname, seed }).state;
-  store = new GameStore(content, seed, storage, founded, founded.archetype);
+  const founded = foundDynasty(content, input).state;
+  store = new GameStore(content, input.seed, storage, founded, founded.archetype);
   screen = "play";
 }
 
@@ -95,6 +96,10 @@ function restart(): void {
 {:else if screen === "title" || !store}
   <TitleScreen
     moments={content.startMoments}
+    callings={content.callings}
+    axes={content.axes}
+    worldStacks={content.worldStacks}
+    onomastics={content.onomastics}
     hasSave={saveExists}
     onFound={foundGame}
     onContinue={continueGame}

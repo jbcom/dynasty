@@ -60,6 +60,37 @@ const MOMENTS = [
     ],
   },
 ];
+const ONOMASTICS = {
+  irish_catholic: {
+    label: "Irish Catholic",
+    givenMale: ["Patrick"],
+    givenFemale: ["Bridget"],
+    convention: "patronymic",
+    namingRules: {},
+  },
+  scots_irish: {
+    label: "Scots-Irish",
+    givenMale: ["William"],
+    givenFemale: ["Margaret"],
+    convention: "patronymic",
+    namingRules: {},
+  },
+};
+
+function fullProps(over: Record<string, unknown> = {}) {
+  return {
+    moments: MOMENTS,
+    callings: [],
+    axes: [],
+    worldStacks: [],
+    onomastics: ONOMASTICS,
+    hasSave: true,
+    onFound: () => {},
+    onContinue: () => {},
+    onSettings: () => {},
+    ...over,
+  };
+}
 
 beforeEach(() => {
   applyBrandTokens();
@@ -71,18 +102,8 @@ afterEach(() => {
 });
 
 describe("TitleScreen — luxury Dynasty masthead (DE-UI)", () => {
-  it("renders the gilded wordmark + ornamental rule and captures a screenshot for review", async () => {
-    component = mount(TitleScreen, {
-      target: host,
-      props: {
-        moments: MOMENTS,
-        hasSave: true,
-        onFound: () => {},
-        onContinue: () => {},
-        onSettings: () => {},
-      },
-    });
-    // Give the self-hosted fonts a beat to load so the capture shows real type.
+  it("renders the gilded wordmark + ornamental rule and captures a screenshot", async () => {
+    component = mount(TitleScreen, { target: host, props: fullProps() });
     await new Promise((r) => setTimeout(r, 250));
     expect(host.querySelector("h1")?.textContent).toBe("Dynasty");
     expect(host.querySelector(".masthead .rule")).not.toBeNull();
@@ -90,64 +111,29 @@ describe("TitleScreen — luxury Dynasty masthead (DE-UI)", () => {
   });
 });
 
-describe("TitleScreen — found-your-own moment picker (FD-6)", () => {
+describe("TitleScreen — found-your-own moment picker (CP-7)", () => {
   it("shows the moment cards after Found a Dynasty is clicked", async () => {
-    let founded: { momentId: string } | null = null;
-    component = mount(TitleScreen, {
-      target: host,
-      props: {
-        moments: MOMENTS,
-        hasSave: false,
-        onFound: (momentId: string) => {
-          founded = { momentId };
-        },
-        onContinue: () => {},
-        onSettings: () => {},
-      },
-    });
+    component = mount(TitleScreen, { target: host, props: fullProps({ hasSave: false }) });
     await new Promise((r) => setTimeout(r, 100));
-
     const beginBtn = host.querySelector<HTMLButtonElement>("button.primary");
     expect(beginBtn?.textContent?.trim()).toContain("Found a Dynasty");
-
     beginBtn?.click();
     await new Promise((r) => setTimeout(r, 100));
-
-    const cards = host.querySelectorAll(".moment-card");
+    const cards = host.querySelectorAll(".card.moment");
     expect(cards.length).toBe(MOMENTS.length);
-    const labels = Array.from(cards).map((c) => c.querySelector(".moment-label")?.textContent);
-    expect(labels).toContain("The Great Hunger");
-    expect(labels).toContain("The Round City");
-    // The deep-history moment is flagged.
-    expect(host.querySelector(".moment-deep")?.textContent).toContain("Deep history");
-
+    expect(host.querySelector(".deep-badge")?.textContent).toContain("Deep history");
     await page.screenshot({ element: host.firstElementChild as Element });
-
-    // Choosing a moment advances to the name-entry step (does not yet found).
-    (cards[0] as HTMLButtonElement).click();
-    await new Promise((r) => setTimeout(r, 100));
-    expect(host.textContent).toContain("NAME YOUR LINE");
-    expect(founded).toBeNull();
   });
 
-  it("back button returns to the title step", async () => {
-    component = mount(TitleScreen, {
-      target: host,
-      props: {
-        moments: MOMENTS,
-        hasSave: false,
-        onFound: () => {},
-        onContinue: () => {},
-        onSettings: () => {},
-      },
-    });
+  it("back from the moment picker returns to the title", async () => {
+    component = mount(TitleScreen, { target: host, props: fullProps({ hasSave: false }) });
     await new Promise((r) => setTimeout(r, 100));
     host.querySelector<HTMLButtonElement>("button.primary")?.click();
     await new Promise((r) => setTimeout(r, 100));
-    expect(host.querySelectorAll(".moment-card").length).toBe(MOMENTS.length);
+    expect(host.querySelectorAll(".card.moment").length).toBe(MOMENTS.length);
     host.querySelector<HTMLButtonElement>(".back-btn")?.click();
     await new Promise((r) => setTimeout(r, 100));
     expect(host.querySelector("h1")?.textContent).toBe("Dynasty");
-    expect(host.querySelectorAll(".moment-card").length).toBe(0);
+    expect(host.querySelectorAll(".card.moment").length).toBe(0);
   });
 });

@@ -9,7 +9,7 @@ import { expect, test } from "@playwright/test";
  * surname entry → Begin the Line → Play. The preset-dynasty carousel is gone.
  */
 
-/** Helper: navigate to "/", found a line at a start-moment, and reach the play screen. */
+/** Helper: walk the CP-7 control panel (moment → name → calling → axes → begin). */
 async function startGame(
   page: import("@playwright/test").Page,
   opts: { seed: string; momentLabel?: RegExp; surname?: string } = { seed: "e2e-seed" },
@@ -23,8 +23,16 @@ async function startGame(
     ? page.getByRole("button", { name: opts.momentLabel })
     : page.getByRole("button", { name: /Found here/ }).first();
   await card.click();
-  // Name-entry — type a surname and begin the line.
+  // Naming — surname, then advance to the calling.
   await page.getByLabel("Family name").fill(opts.surname ?? "Vane");
+  await page.getByRole("button", { name: /Next: the Calling/ }).click();
+  // Calling — take the first one.
+  await page
+    .getByRole("button", { name: /Take this calling/ })
+    .first()
+    .click();
+  // Epoch-0 axes — accept defaults and begin, then confirm.
+  await page.getByRole("button", { name: "Begin the Line" }).click();
   await page.getByRole("button", { name: "Begin the Line" }).click();
 }
 
