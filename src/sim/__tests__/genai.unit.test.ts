@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
 import { parseGenerated } from "../genai/client";
-import { generateForTarget } from "../genai/generate";
+import { expand } from "../genai/expand";
 import { buildPrompt, systemInstruction } from "../genai/prompt";
 import { validateGenerated } from "../genai/validate";
 
@@ -135,17 +135,17 @@ describe("EX-4 prompt builder", () => {
   });
 });
 
-describe("EX-4 orchestrator with a stub generator (no key, no network)", () => {
-  it("generates → validates → returns only accepted events", async () => {
+describe("expand orchestrator with a stub generator (no key, no network)", () => {
+  it("generates → validates → returns only accepted events (SS-11 expander)", async () => {
     // A stub model that returns one clean event + one leaking event.
     const leak = { ...goodEvent, id: "ev_gen_stub_leak", scene: "Fred builds the empire." };
     const stub = async () => JSON.stringify([goodEvent, leak]);
-    const res = await generateForTarget(
+    const res = await expand(
       content,
-      { place: "ireland", era: "origins", year: 1890, count: 2 },
+      { type: "events", target: { place: "ireland", era: "origins", year: 1890 }, count: 2 },
       stub,
     );
-    expect(res.accepted.map((e) => e.id)).toEqual(["ev_gen_test_clean"]);
+    expect(res.accepted.map((e) => (e as { id: string }).id)).toEqual(["ev_gen_test_clean"]);
     expect(res.rejected).toHaveLength(1);
     expect(res.rejected[0]?.reasons.some((r) => r.includes("preset-person literal"))).toBe(true);
   });
