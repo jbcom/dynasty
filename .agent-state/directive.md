@@ -78,15 +78,23 @@ emergence cue. So the founding seam must change: New Game starts with NO seed; t
 choice; surname from the bestowal beat/modal. The composition is finalized only after
 these beats, then the deterministic run proceeds (save = the authored seed + composition +
 history, replay still bit-identical). Sub-tasks:
-- [ ] **PL-3a** Spec the inverted founding flow in docs (use-cases above + the seam change +
-  how replay/determinism is preserved when the seed is authored mid-Epoch-0).
-- [ ] **PL-3b** Landing page: strip surname + seed inputs → New Game / Load Game / Settings.
-- [ ] **PL-3c** Seed word-pool (adj/adj/noun) + slot wiring so the first 3 emergence choices
-  each contribute a word; the composed phrase becomes the run seed (never displayed).
-- [ ] **PL-3d** Surname bestowal beat: era/culture-appropriate suggestion choices + a
-  non-disruptive "name your own" input modal overlay.
-- [ ] **PL-3e** Verify: full diegetic onboarding live (no upfront inputs), determinism holds
-  (same choices → same seed → same run), 0 leaks, gate green.
+- [x] **PL-3a DONE** — spec at docs/superpowers/specs/2026-06-21-diegetic-onboarding.md
+  (resolved the ordering: the first 3 beats are place-AGNOSTIC consciousness fragments per
+  the user's clarification, so they author the seed before a place exists; determinism +
+  save format unchanged).
+- [x] **PL-3b DONE** — TitleScreen stripped to New Game / Load / Settings; dead input CSS
+  removed; tests updated to the no-inputs contract.
+- [x] **PL-3c DONE** — src/data/seed-words.json + src/sim/seedComposer.ts (3 lanes of
+  evocative place-agnostic prose, 729-seed space); composeSeed joins the picks; hidden.
+- [x] **PL-3d DONE** — culture surname pools (all 6) + suggestSurnames() + OnboardingScreen
+  bestowal: 3 culture-appropriate suggestions + non-disruptive "name your own line…" modal.
+  Founding pre-sets emerged+named; the redundant in-game emergence-cue + naming beats were
+  removed; gender beat ("The First Cry") reworded; in-game opens at gender → calling.
+- [x] **PL-3e DONE** — live-verified: landing has no inputs; consciousness phase composes the
+  seed; place revealed via sensory cue; surname via suggestions AND the modal (typed
+  "Ironwood" carried through the founded line); in-game opens at "The First Cry" → calling;
+  console clean; determinism + leak tests pass; harness audit 0 findings; 493 unit + 68
+  browser green. Shipping PR for the autoloop batch (PL-1/PL-2/PL-3).
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
