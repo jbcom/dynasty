@@ -41,7 +41,9 @@ describe("Dossier", () => {
     });
     expect(host.textContent).toContain("Dossier");
     expect(host.textContent).toContain("Money");
-    expect(host.textContent).toContain("loud_baby"); // flag set by cry_loud
+    // The cry_loud flag (loud_baby) renders HUMANIZED, not as the raw flag id (PL-10).
+    expect(host.textContent).toContain("Loud baby");
+    expect(host.textContent).not.toContain("loud_baby");
   });
 });
 

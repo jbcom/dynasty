@@ -2,6 +2,7 @@
 import { meterFraction } from "../sim/meters";
 import type { MeterDef } from "../sim/schema";
 import type { GameState } from "../sim/state";
+import { visibleFlagLabels } from "./flagLabel";
 import { formatMoney } from "./theme";
 
 interface Props {
@@ -10,7 +11,9 @@ interface Props {
 }
 
 const { defs, gameState }: Props = $props();
-const flags = $derived([...gameState.flags].sort());
+// Player-facing flags only: structural/lifecycle/prologue machinery is hidden, the rest is
+// humanized (PL-10) — the Dossier reads as a character record, not a debug dump.
+const flags = $derived(visibleFlagLabels(gameState.flags));
 </script>
 
 <section class="dossier" aria-label="Dossier">
@@ -29,9 +32,9 @@ const flags = $derived([...gameState.flags].sort());
     {/each}
   </ul>
 
-  <h4>Flags ({flags.length})</h4>
+  <h4>Marks of the Life ({flags.length})</h4>
   {#if flags.length === 0}
-    <p class="empty">No notable flags yet.</p>
+    <p class="empty">Nothing of note has marked this life yet.</p>
   {:else}
     <div class="flags">
       {#each flags as flag (flag)}<span class="chip">{flag}</span>{/each}
