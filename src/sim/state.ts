@@ -143,6 +143,11 @@ export interface FamilyState {
   nextSeq: number;
 }
 
+/** Whether a member is alive as of `year` (single source of truth, FD-8/9/10). */
+export function isMemberAlive(m: LiveMember, year: number): boolean {
+  return m.died === undefined || m.died > year;
+}
+
 /** Per-market live state (index walk + the player's stake). */
 export interface MarketState {
   /** Current index value. */

@@ -1,6 +1,6 @@
 import { memberById } from "./family";
 import type { Rng } from "./rng";
-import type { FamilyState, LiveMember } from "./state";
+import { type FamilyState, isMemberAlive, type LiveMember } from "./state";
 
 /**
  * FD-9 — DEATH + AGING. A pure, seeded per-year mortality pass over the live
@@ -92,8 +92,7 @@ export function applyMortality(
   return { family: { ...family, members }, died, protagonistDied };
 }
 
-/** Whether a member is alive as of `year`. */
+/** Whether a member (by id) is alive as of `year`. */
 export function isAlive(family: FamilyState, id: string, year: number): boolean {
-  const m = memberById(family, id);
-  return m.died === undefined || m.died > year;
+  return isMemberAlive(memberById(family, id), year);
 }

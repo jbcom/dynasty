@@ -106,6 +106,25 @@ describe("FD-10 succeed", () => {
     expect(isLineExtinct(dead, 1901)).toBe(true);
     expect(succeed(dead, 1901).heirId).toBeNull();
   });
+
+  it("never selects a not-yet-born child as heir (review HIGH/MEDIUM regression)", () => {
+    // Protagonist dies in 1900; one child born 1880 (eligible), one born 1905 (not
+    // yet born at the death year — the beget stagger can place a birth past death).
+    let f = seedFamily({ given: "Otto", surname: "Vane", sex: "male", born: 1850 });
+    f = beget(f, "m0", 1880, culture, kinFor(f, "m0"), createRng("born1")).family;
+    f = beget(f, "m0", 1905, culture, kinFor(f, "m0"), createRng("born2")).family;
+    const r = succeed(f, 1900);
+    expect(r.heirId).toBe("m1"); // the 1880 child, never the 1905 one
+    expect(isLineExtinct(f, 1900)).toBe(false);
+
+    // A DEAD protagonist whose only child is born after the death year → no heir,
+    // line extinct (the unborn child cannot inherit).
+    let g = seedFamily({ given: "Otto", surname: "Vane", sex: "male", born: 1850 });
+    g = beget(g, "m0", 1905, culture, kinFor(g, "m0"), createRng("late")).family;
+    g = { ...g, members: g.members.map((m) => (m.id === "m0" ? { ...m, died: 1900 } : m)) };
+    expect(succeed(g, 1900).heirId).toBeNull();
+    expect(isLineExtinct(g, 1900)).toBe(true);
+  });
 });
 
 describe("FD-9/FD-10 mortality + succession through applyChoice (multi-generation)", () => {

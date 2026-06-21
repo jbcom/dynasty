@@ -225,11 +225,14 @@ export function applyChoice(
         fam = succ.family;
         // Continue AS the heir: re-anchor birthYear/age + flag the succession.
         const heir = fam.members.find((m) => m.id === succ.heirId);
+        const heirBorn = heir?.born ?? advanced.birthYear;
         advanced = {
           ...advanced,
           family: fam,
-          birthYear: heir?.born ?? advanced.birthYear,
-          age: passYear - (heir?.born ?? advanced.birthYear),
+          birthYear: heirBorn,
+          // Clamp to 0: succeed() only returns an already-born heir, but guard
+          // against a negative age if that invariant ever changes.
+          age: Math.max(0, passYear - heirBorn),
           flags: withFlag(advanced.flags, "succession_occurred"),
         };
       } else {

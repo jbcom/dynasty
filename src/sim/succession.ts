@@ -1,5 +1,5 @@
 import { childrenOf, memberById } from "./family";
-import type { FamilyState, LiveMember } from "./state";
+import { type FamilyState, isMemberAlive, type LiveMember } from "./state";
 
 /**
  * FD-10 — SUCCESSION. When the protagonist dies (FD-9), the line passes to an
@@ -23,8 +23,11 @@ export interface SuccessionResult {
  */
 export function succeed(family: FamilyState, year: number, namedHeirId?: string): SuccessionResult {
   const lateId = family.protagonistId;
+  // An heir must be ALREADY BORN by `year` and still alive — a child begotten in a
+  // later in-world year (the beget stagger can place a birth past the death year)
+  // is not yet a person and cannot inherit.
   const heirs = childrenOf(family, lateId)
-    .filter((c) => c.died === undefined || c.died > year)
+    .filter((c) => c.born <= year && isMemberAlive(c, year))
     .sort((a, b) => seq(a) - seq(b));
 
   let heir: LiveMember | undefined;
@@ -52,9 +55,9 @@ function seq(m: LiveMember): number {
 /** Whether the run's line is extinct (the protagonist is dead with no living heir). */
 export function isLineExtinct(family: FamilyState, year: number): boolean {
   const protagonist = memberById(family, family.protagonistId);
-  if (protagonist.died === undefined || protagonist.died > year) return false;
+  if (isMemberAlive(protagonist, year)) return false;
   const livingHeirs = childrenOf(family, family.protagonistId).filter(
-    (c) => c.died === undefined || c.died > year,
+    (c) => c.born <= year && isMemberAlive(c, year),
   );
   return livingHeirs.length === 0;
 }

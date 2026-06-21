@@ -83,6 +83,19 @@ describe("FD-8 beget", () => {
     }
   });
 
+  it("kinFor populates only the recorded parent's lineage (review HIGH regression)", () => {
+    // A male parent (m1) with a male grandparent (m0) → ONLY the paternal lineage
+    // grandfather is known; maternal slots stay undefined (the live tree records
+    // one lineage parent, so the one grandparent must not fill both lineages).
+    const g1 = beget(f0, "m0", 1910, bavarian, kinFor(f0, "m0"), createRng("g1"));
+    const son = g1.family.members.find((m) => m.id === "m1");
+    if (son) son.sex = "male";
+    const kin = kinFor(g1.family, "m1");
+    expect(kin.paternalGrandfather).toBe("Friedrich");
+    expect(kin.maternalGrandfather).toBeUndefined();
+    expect(kin.father).toBe(son?.given);
+  });
+
   it("is replay-deterministic: same (family, parent, year, rng) → identical child", () => {
     const a = beget(f0, "m0", 1910, bavarian, kinFor(f0, "m0"), createRng("z"));
     const b = beget(f0, "m0", 1910, bavarian, kinFor(f0, "m0"), createRng("z"));

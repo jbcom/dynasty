@@ -120,15 +120,22 @@ export function beget(
 export function kinFor(family: FamilyState, parentId: string): KinNames {
   const parent = memberById(family, parentId);
   const grandparent = parent.parentId ? memberById(family, parent.parentId) : undefined;
-  // The live tree tracks a single lineage parent per member; the paternal/maternal
-  // split collapses onto what the line records, so we map the known ancestors onto
-  // the convention's slots (paternal grandfather = the line's grandfather, etc.).
+  // The live tree records a SINGLE lineage parent per member, so only that
+  // parent's lineage has a known grandparent — populate the matching lineage slot
+  // and leave the opposite lineage's grandparent slots undefined. (Mapping the one
+  // grandparent into BOTH lineages would name two different-rule siblings after the
+  // same ancestor and mis-resolve maternal-lineage conventions.)
+  const grandIsPaternal = parent.sex === "male";
   return {
     father: parent.sex === "male" ? parent.given : undefined,
     mother: parent.sex === "female" ? parent.given : undefined,
-    paternalGrandfather: grandparent?.sex === "male" ? grandparent.given : undefined,
-    paternalGrandmother: grandparent?.sex === "female" ? grandparent.given : undefined,
-    maternalGrandfather: grandparent?.sex === "male" ? grandparent.given : undefined,
-    maternalGrandmother: grandparent?.sex === "female" ? grandparent.given : undefined,
+    paternalGrandfather:
+      grandIsPaternal && grandparent?.sex === "male" ? grandparent.given : undefined,
+    paternalGrandmother:
+      grandIsPaternal && grandparent?.sex === "female" ? grandparent.given : undefined,
+    maternalGrandfather:
+      !grandIsPaternal && grandparent?.sex === "male" ? grandparent.given : undefined,
+    maternalGrandmother:
+      !grandIsPaternal && grandparent?.sex === "female" ? grandparent.given : undefined,
   };
 }
