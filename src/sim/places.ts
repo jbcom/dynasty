@@ -38,26 +38,30 @@ export function dealComposition(
   places: readonly Place[],
   eras: readonly Era[],
   seed: string,
-  // Surname is optional here (PL-3): the diegetic onboarding deals the origin from the
-  // composed seed FIRST — to learn the culture — then bestows a culture-appropriate
-  // surname before founding. Callers that already know the surname pass it directly.
+  // Surname is optional: the onboarding bestows it before founding; callers that already
+  // know it pass it directly.
   surname = "",
   rng: Rng = createRng(`${seed}::birth`),
+  // OB-3: the PLACE may be CHOSEN by the player (geography is the one pre-founding choice).
+  // When given, found there; otherwise pick a place from the seed (legacy / tests). Era,
+  // gender, and archetype are still seed-dealt here — the authored Epoch-0 lets the player
+  // override gender + calling(=archetype) in-game; these are the starting defaults.
+  place: Place | undefined = undefined,
 ): Composition {
   if (places.length === 0) throw new Error("dealComposition: empty places catalog");
-  const place = rng.pick(places);
+  const chosen = place ?? rng.pick(places);
   // The schema enforces validEras.min(1), but guard defensively so a malformed
   // catalog fails loudly here rather than picking from an empty array (Q review).
-  if (place.validEras.length === 0) {
-    throw new Error(`dealComposition: place "${place.id}" has no validEras`);
+  if (chosen.validEras.length === 0) {
+    throw new Error(`dealComposition: place "${chosen.id}" has no validEras`);
   }
-  const era = rng.fork("era").pick(place.validEras);
+  const era = rng.fork("era").pick(chosen.validEras);
   const eraDef = eras.find((e) => e.id === era);
   // Birth year: the era's opening year (the line is founded at the era's dawn).
   const year = eraDef?.yearStart ?? 1900;
   const gender: "male" | "female" = rng.fork("gender").next() < 0.5 ? "male" : "female";
   const archetype: Archetype = rng.fork("archetype").pick(ARCHETYPES);
-  return resolveComposition(place, { era, year, archetype, gender, surname, seed });
+  return resolveComposition(chosen, { era, year, archetype, gender, surname, seed });
 }
 
 /** Inputs the diegetic birth gathers around the resolved place (CP-R4). */

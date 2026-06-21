@@ -5,17 +5,14 @@ import { expect, test } from "@playwright/test";
  * way to an end state, exercising the whole stack (sim + engine + UI + persistence)
  * in a real mobile browser.
  *
- * Flow (PL-3 diegetic onboarding): Title (New Game / Load / Settings, NO inputs) → New
- * Game → the consciousness phase (three place-agnostic choices that author the seed) →
- * surname bestowal (a culture-appropriate suggestion, or "name your own" via a modal) →
- * the Epoch-0 birth → Play. The seed is never shown; the surname is never typed on the
- * title screen.
+ * Flow (OB-3 onboarding): Title (New Game / Load / Settings, NO inputs) → New Game → pick a
+ * LOCATION from the place-cue cards (geography) → bestow a family name (suggestion or "name
+ * your own") → the authored Epoch-0 story → Play. The run seed is a hidden random draw.
  */
 
 /**
- * Walk the diegetic onboarding to the play screen. Picks the first option in each of the
- * three consciousness lanes (authoring the seed), then bestows a surname — either the
- * first suggested family name, or, when `surname` is given, via the "name your own" modal.
+ * Walk the onboarding to the play screen: pick the first location cue, then bestow a family
+ * name — the first suggestion, or, when `surname` is given, via the "name your own" modal.
  */
 async function startGame(
   page: import("@playwright/test").Page,
@@ -25,15 +22,12 @@ async function startGame(
   await expect(page.getByRole("heading", { name: "Dynasty" })).toBeVisible();
   await page.getByRole("button", { name: /Begin a Line/ }).click();
 
-  // Consciousness phase: three lanes (data-step 0,1,2). Scope each click to its OWN step
-  // so Playwright can't re-click the previous step's button before the DOM transitions.
-  for (let lane = 0; lane < 3; lane++) {
-    const choice = page.locator(`[data-step="${lane}"] .choices button`).first();
-    await expect(choice).toBeVisible({ timeout: 8000 });
-    await choice.click();
-  }
+  // Onboarding (OB-3): pick a LOCATION (the place-cue cards), then bestow a family name.
+  const placePhase = page.locator('[data-phase="place"]');
+  await expect(placePhase).toBeVisible({ timeout: 8000 });
+  await placePhase.locator(".choices button").first().click();
 
-  // Surname bestowal (the data-phase="name" card).
+  // Family-name bestowal (the data-phase="name" card).
   const namePhase = page.locator('[data-phase="name"]');
   await expect(namePhase).toBeVisible({ timeout: 8000 });
   if (opts.surname) {
@@ -131,8 +125,8 @@ test("New Game has no upfront inputs and enters the diegetic onboarding (PL-3)",
   const begin = page.getByRole("button", { name: /Begin a Line/ });
   await expect(begin).toBeEnabled();
   await begin.click();
-  // Straight into the consciousness phase — first step's fragment choices, no carousel.
-  await expect(page.locator('[data-step="0"] .choices button').first()).toBeVisible({
+  // Straight into the LOCATION pick (place-cue cards), no control panel / carousel.
+  await expect(page.locator('[data-phase="place"] .choices button').first()).toBeVisible({
     timeout: 8000,
   });
   await expect(page.getByText("CHOOSE YOUR HINGE")).toHaveCount(0);

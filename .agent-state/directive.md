@@ -59,8 +59,10 @@ OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git histor
 ### Queue
 - [x] **OB-1 spec** (34d7c41/a837c41/533ada1) — Epoch-0-as-story scope, geography≠chronology,
   calling=archetype, causal-anchor purpose.
-- [ ] **OB-2 seam + helpers** — suggestGivenNames (done); archetype→diegetic-title map;
-  seed-drawn birth {month,day} + `birthDate` on composition/state; the Epoch-0 flag chain.
+- [x] **OB-2 seam + helpers** (3f3bf9b) — suggestGivenNames; ARCHETYPE_CALLINGS
+  (archetype→diegetic title+summons); drawBirthDate/formatBirthDate (seed-drawn {month,day},
+  year from era); 6 unit tests. (`birthDate` field on composition + the Epoch-0 flag chain
+  land with OB-3/OB-4 where they're wired into the founding seam + authored beats.)
 - [ ] **OB-3 remove consciousness phase** — delete seedComposer.ts + seed-words.json + tests
   + the adj/adj/noun UI; New Game → location pick → authored Epoch-0; revisit founding flags
   so the authored beats fire (drop/repurpose the PL-3 emerged/named pre-set).

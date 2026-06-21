@@ -90,9 +90,9 @@ function auditText(eventId: string, field: string, text: string, out: TextFindin
   const after = "(?=\\s|[.,;:!?]|$)";
   const normalized = text
     .replace(/\d[.,]\d/g, "") // decimals: 3.14, 1,000
-    .replace(new RegExp(`\\b[A-Za-z]\\.(?=[A-Za-z]\\.)`, "g"), "") // initial chains: H.W., Y.M.C.A.
-    .replace(new RegExp(`\\b[A-Za-z]\\.(?=\\s)`, "g"), "") // a trailing single-letter initial: "J. Smith"
-    .replace(new RegExp(`\\b(?:a|p)\\.m\\.${after}`, "gi"), "") // a.m. / p.m.
+    .replace(/\b[A-Za-z]\.(?=[A-Za-z]\.)/g, "") // initial chains: H.W., Y.M.C.A.
+    .replace(/\b[A-Za-z]\.(?=\s)/g, "") // a trailing single-letter initial: "J. Smith"
+    .replace(new RegExp(`\\b(?:a|p)\\.m\\.${after}`, "gi"), "") // a.m. / p.m. (dynamic lookahead)
     .replace(new RegExp(`\\b(?:Mr|Mrs|Ms|Dr|St|Jr|Sr|vs|etc|No|Inc|Co)\\.${after}`, "g"), "");
   if (/[,;:][A-Za-z]/.test(normalized) || /\.[A-Za-z]{2,}/.test(normalized)) {
     push("punctuation", "missing space after punctuation");

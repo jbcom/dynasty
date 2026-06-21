@@ -1,67 +1,56 @@
 <script lang="ts">
 import type { Content } from "../../sim/content";
 import { getCulture, suggestSurnames } from "../../sim/onomastics";
-import { dealComposition, placeById } from "../../sim/places";
+import { placeById } from "../../sim/places";
 import { createRng } from "../../sim/rng";
-import { composeSeed, SEED_LANES, seedLane } from "../../sim/seedComposer";
+import type { Place } from "../../sim/schema";
 
 /**
- * DIEGETIC ONBOARDING (PL-3). No upfront inputs: the player authors the run seed by
- * making three place-agnostic "consciousness" choices (the emerging threads of a
- * not-yet-born mind), then — once the composed seed has dealt a place + culture — is
- * offered a culture-appropriate FAMILY name (or names their own via a quiet modal).
- * Only after both are authored does the deterministic run begin. The seed is never shown.
+ * ONBOARDING ENTRY (OB-3). The player CHOOSES a location from concrete, discernible sensory
+ * cues — geography, the one pre-founding choice (it fixes place → era → culture). The run
+ * seed is a HIDDEN random draw (world only — never authored, never shown). Then a family
+ * name is bestowed (culture-appropriate suggestions, or name-your-own). Everything else —
+ * birth + date, gender, given name, calling, partner, the branch fork — unfolds as the
+ * AUTHORED Epoch-0 story in-game (OB-4/OB-5), not here.
  */
 
 interface Props {
   content: Content;
-  /** Begin the founded run with the authored seed + surname. */
-  onComplete: (seed: string, surname: string) => void;
+  /** Begin the founded run: hidden seed + chosen place id + bestowed family name. */
+  onComplete: (seed: string, place: string, surname: string) => void;
   /** Abandon onboarding and return to the title. */
   onCancel: () => void;
 }
 
 const { content, onComplete, onCancel }: Props = $props();
 
-// Phase: 0..2 = the three consciousness lanes; "name" = surname bestowal.
-let step = $state(0);
-const picks: string[] = $state([]);
+// A fresh hidden seed for this run — drives the WORLD (events/markets/mortality/procgen),
+// never the player's identity. Drawn once per onboarding via the browser's CSPRNG so each
+// New Game reshuffles the world; locked into the run + save from here on.
+const seed = `r${Math.floor(crypto.getRandomValues(new Uint32Array(2)).reduce((a, b) => a * 0x100000000 + b, 0)).toString(36)}`;
 
-// Once the three words are chosen, compose the seed + deal the origin so the surname
-// bestowal can offer names that fit the dealt culture. Derived, pure, deterministic.
-const seed = $derived(picks.length === SEED_LANES.length ? composeSeed(picks) : null);
-const dealt = $derived(
-  seed ? dealComposition(content.places, content.eras, seed) : null,
-);
-const dealtPlace = $derived(dealt ? placeById(content.places, dealt.place) : undefined);
-const suggestions = $derived.by(() => {
-  if (!dealt || !seed) return [];
-  const culture = getCulture({ cultures: content.onomastics }, dealt.culture);
-  return suggestSurnames(culture, createRng(`${seed}::surname-offer`), 3);
-});
-
+// Phase: "place" = location pick; "name" = family-name bestowal for the chosen place.
+let chosen = $state<Place | undefined>();
 let modalOpen = $state(false);
 let typedName = $state("");
 
-function pickWord(word: string): void {
-  picks.push(word);
-  if (picks.length >= SEED_LANES.length) step = SEED_LANES.length; // → name phase
-  else step += 1;
+const suggestions = $derived.by(() => {
+  if (!chosen) return [];
+  const culture = getCulture({ cultures: content.onomastics }, chosen.defaultCulture);
+  return suggestSurnames(culture, createRng(`${seed}::surname-offer`), 3);
+});
+
+function pickPlace(p: Place): void {
+  chosen = p;
 }
 
 function bestow(surname: string): void {
-  const finalSeed = seed;
-  // Normalize a typed name: collapse internal whitespace and cap length defensively
-  // (the input maxlength is a soft client cap; never found a line on junk or a blank).
+  const place = chosen;
+  // Normalize a typed name: collapse internal whitespace + cap length defensively.
   const name = surname.trim().replace(/\s+/g, " ").slice(0, 32);
-  if (!finalSeed || !name) return;
-  onComplete(finalSeed, name);
+  if (!place || !name) return;
+  onComplete(seed, place.id, name);
 }
-
-const currentLane = $derived.by(() => {
-  const key = SEED_LANES[step];
-  return key ? seedLane(key) : null;
-});
 </script>
 
 <!-- Global Escape closes the modal (the backdrop can't receive key events while focus is
@@ -69,28 +58,23 @@ const currentLane = $derived.by(() => {
 <svelte:window onkeydown={(e) => modalOpen && e.key === "Escape" && (modalOpen = false)} />
 
 <main class="onboarding" inert={modalOpen}>
-  {#if currentLane}
-    <article class="card" data-phase="consciousness" data-step={step}>
-      <p class="prompt">{currentLane.prompt}</p>
+  {#if !chosen}
+    <article class="card" data-phase="place">
+      <p class="prompt">
+        A line has to begin somewhere. Before the first cry, before the first choice, there is
+        only a place — and you can already feel it. Where does your story open?
+      </p>
       <div class="choices">
-        {#each currentLane.words as choice (choice.word)}
-          <button type="button" onclick={() => pickWord(choice.word)}>
-            {choice.fragment}
-          </button>
+        {#each content.places as p (p.id)}
+          <button type="button" onclick={() => pickPlace(p)}>{p.sensoryCue}</button>
         {/each}
       </div>
-      <p class="step-dots" aria-hidden="true">
-        {#each SEED_LANES as _, i (i)}
-          <span class:done={i < step} class:active={i === step}>◆</span>
-        {/each}
-      </p>
     </article>
   {:else}
     <article class="card" data-phase="name">
       <p class="prompt">
-        The dark resolves into the world — {dealtPlace?.sensoryCue ?? "a place not yet named"}.
-        Somewhere ahead, a name is already waiting to be laid over you like a mantle, to be
-        carried down a line that does not yet exist. Which will it be?
+        {chosen.sensoryCue} — this is where the {chosen.label} line takes root. A name is
+        waiting to be laid over it, carried down a line that does not yet exist. Which will it be?
       </p>
       <div class="choices">
         {#each suggestions as name (name)}
@@ -191,20 +175,6 @@ const currentLane = $derived.by(() => {
     color: var(--mmm-gold);
     text-align: center;
     font-style: italic;
-  }
-  .step-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 1.2rem 0 0;
-    font-size: 0.6rem;
-    color: color-mix(in srgb, var(--mmm-gold-deep) 50%, transparent);
-  }
-  .step-dots .done {
-    color: var(--mmm-gold-deep);
-  }
-  .step-dots .active {
-    color: var(--mmm-gold);
   }
   .abandon {
     background: none;
