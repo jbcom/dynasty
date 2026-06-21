@@ -95,18 +95,34 @@ OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git histor
   start:1000, max:1e12), existing origins events use deltas up to 200,000 — +100/200/500 nudges
   are CORRECT, not "single-digit"; (2) {family_name} → bare "{surname}s" (no "the"), a real
   distinct token; (3) {given_name} IS a resolved identity token, {member} is NOT real.
-- [ ] [WAIT] **OB-6 verify** — IN FLIGHT (PR pending CI). Done so far: OB-6 acceptance test
-  (ob6-all-origins) pins all 9 origins (found leak-free, has_authored_epoch0 stamped, own birth
-  beat fires, 6-archetype calling) — the harness audit at 0 findings for the whole Epoch-0
-  surface; full gate green (526 unit, 75 browser, 7 e2e, typecheck 0, biome 0 err). LIVE-VERIFY
-  caught + fixed a real bug: epoch0 beats displayed the beat's nominal 1885 year instead of the
-  run clock — a caliphate (762) run showed 1885 at the first generic beat. Fixed in EventCard
-  (shows state.year via a prop) + 2 browser tests; re-verified live (baghdad 762 → next beat 769).
-  Stale PL-3 "consciousness" comment in TitleScreen replaced. REMAINING: confirm CI/post-merge
-  green; note the generic ev_birth_generic/ev_birth_calling beats are now dead-fallback (no place
-  uses them since all 9 are authored) — KEEP as the safety net for any future place added without
-  an Epoch-0 (they self-exclude via has_authored_epoch0), documented not deleted. After merge,
-  OB-6 + the whole ONBOARDING REWORK milestone is COMPLETE.
+- [x] **OB-6 verify — COMPLETE + MERGED (#60).** OB-6 acceptance test (ob6-all-origins) pins all
+  9 origins (found leak-free, has_authored_epoch0 stamped, own birth beat fires, 6-archetype
+  calling), iterating the DERIVED authored set + an exact-equality spec assertion. LIVE-VERIFY in
+  Chrome caught + fixed TWO real bugs: (1) epoch0 beats displayed the beat's nominal 1885 year
+  instead of the run clock (a caliphate 762 run showed 1885) — fixed in EventCard (shows
+  state.year via prop) + 2 browser tests; (2) USER-caught: the birth beat's prose implied a
+  question under a single passive option (baghdad's scribe "asked the hour") — corrected across
+  all 9 so the birth beat is an honest EXPERIENCED moment (you OVERHEAR the date; the YEAR is the
+  era anchor), not a fake choice. Captured the principle in [[mmm-epoch0-birth-beat]]: beats mix
+  EXPERIENCED (sensory/passive) vs CHOSEN so a life feels lived, not a control panel. Stale PL-3
+  "consciousness" comment removed. Note: the generic ev_birth_generic/ev_birth_calling beats are
+  now dead-fallback (all 9 authored) — KEPT as the safety net for any future place added without
+  an Epoch-0 (self-exclude via has_authored_epoch0), documented not deleted.
+
+**🎉 ONBOARDING REWORK → AUTHORED EPOCH-0 milestone COMPLETE** (OB-1…OB-6, PRs #51–#60). All 9
+origins ship a fully-written, era-correct Epoch-0; chronology (overheard year) ⊥ geography
+(chosen place) are the twin anchors; the calling crystallizes the archetype; 0 leaks; full gate
++ post-merge workflows green.
+
+## Next milestone — LIVED-IN FEEL (light editorial, NOT a mechanical sweep)
+- [ ] **LF-1** — carry the [[mmm-epoch0-birth-beat]] principle past Epoch-0: as beats are touched,
+  make the EXPERIENCED-vs-CHOSEN mix feel right and ground scenes in concrete sense detail of
+  their place+time so a life feels LIVED. User's guardrails (verbatim spirit): "tell a story, a
+  coherent narrative whole with causality + butterfly effect"; "a life must feel lived"; do NOT
+  turn this into a one-sense-per-beat system or sweep the whole corpus mechanically ("you're
+  getting carried away"). So: SMALL, story-first slices, one origin/era at a time, live-verified;
+  pause for the user's steer on creative direction rather than mass-editing. This is the standing
+  /loop direction until the user redirects.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
