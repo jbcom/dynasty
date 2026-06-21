@@ -83,6 +83,19 @@ describe("LineageView", () => {
     expect(host.querySelectorAll(".member").length).toBe(3);
   });
 
+  it("marks the protagonist's partner with a Consort badge (PL-8)", () => {
+    const base = foundedWithHeirs();
+    const fam = base.family;
+    if (!fam) throw new Error("no family");
+    // Pick any non-protagonist member as the partner and surface it as the consort.
+    const other = fam.members.find((m) => !m.isProtagonist);
+    if (!other) throw new Error("no other member");
+    const state = { ...base, family: { ...fam, partnerId: other.id } };
+    component = mount(LineageView, { target: host, props: { gameState: state } });
+    expect(host.textContent).toContain("Consort");
+    expect(host.querySelector(".badge.consort")).not.toBeNull();
+  });
+
   it("shows the empty state for a run with no founded line", () => {
     const plain = initState(content, "x");
     component = mount(LineageView, { target: host, props: { gameState: plain } });
