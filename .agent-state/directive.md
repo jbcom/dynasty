@@ -66,10 +66,12 @@ that generates it at breadth.
   order 12), up to gen 5, the recurring beget firing each generation, LEAKS=0 across the
   sweep. Locked by a new `harness.unit.test.ts` "EX-5 the millennium run" test (≥half of
   18 dealt births reach the far future + show multi-gen begetting, deterministic, 0 leaks).
-  REMAINING (folds into EX-6 verification): ~half the dealt births still go `line-extinct`
-  in the far future — the heir-vs-era-timeskip window (a far-future generation begets but
-  the heir doesn't survive the large in-world year jumps to inherit); a dynastic outcome,
-  not a leak/consistency bug.
+  ROBUSTNESS FIX (follow-on commit): taking a partner now BEGETS a firstborn (`begets:1`
+  on each ev_cp_take_partner choice) — a line can no longer die childless in the gap
+  between the partner beat and the separate raise-heirs beat (the most common early
+  extinction). Result improved 23→26/30 reach the far future, line-extinct 14→5. The
+  remaining 5 are the two structural cases below (folded into EX-6), both dynastic
+  outcomes with 0 harness findings.
 - [ ] **EX-6 DoD** — after EX-5. Full gate + harness audit at 0 findings over a wide
   permutation sweep; live-verify a long multi-generational run; PR; reviewer trio;
   squash-merge; Status RELEASED.

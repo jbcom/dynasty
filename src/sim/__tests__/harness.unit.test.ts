@@ -119,9 +119,12 @@ describe("EX-5 the millennium run (dev `survive` policy)", () => {
     expect(a.end).toEqual(b.end);
 
     expect(totalLeaks, "the millennium run must never leak a preset person").toBe(0);
-    // Most dealt births reach the far future under the survivor policy (the rest are
-    // legitimate line-extinctions — a dynastic outcome, not a content gap).
-    expect(reachedFarFuture).toBeGreaterThanOrEqual(RUNS / 2);
+    // The strong majority of dealt births reach the far future under the survivor
+    // policy (taking a partner now begets a firstborn, so a line no longer dies
+    // childless between the partner + raise-heirs beats). The few that still end
+    // line-extinct are legitimate dynastic outcomes (the deep-history era gap, or a
+    // far-future heir lost to the large era time-skips) — not a content/consistency gap.
+    expect(reachedFarFuture).toBeGreaterThanOrEqual(Math.ceil((RUNS * 2) / 3));
     // The line continues across generations: the beget beat re-fires, not once-only.
     expect(sawMultiGenBeget).toBeGreaterThanOrEqual(RUNS / 2);
   }, 60_000);
