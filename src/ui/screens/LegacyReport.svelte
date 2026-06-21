@@ -44,11 +44,17 @@ const poleLabel = $derived(moralPoleLabel(state));
 const dynasty = $derived.by(() => {
   const fam = state.family;
   if (!fam || fam.members.length === 0) return null;
-  const generations = Math.max(...fam.members.map((m) => m.generation)) + 1;
-  const firstBorn = Math.min(...fam.members.map((m) => m.born));
+  // reduce (not Math.max(...spread)) — a long millennium run can build a large family, and
+  // spreading a big array into Math.max/min risks a call-stack overflow (gemini review).
+  let topGen = 0;
+  let firstBorn = Number.POSITIVE_INFINITY;
+  for (const m of fam.members) {
+    if (m.generation > topGen) topGen = m.generation;
+    if (m.born < firstBorn) firstBorn = m.born;
+  }
   const span = Math.max(0, end.year - firstBorn);
   const houseName = fam.members[0]?.surname ?? "—";
-  return { generations, members: fam.members.length, span, houseName };
+  return { generations: topGen + 1, members: fam.members.length, span, houseName };
 });
 </script>
 
