@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/jbcom/dynasty/compare/v0.4.0...v0.5.0) (2026-06-21)
+
+
+### Features
+
+* UI/UX polish — delta meters + fully diegetic onboarding ([#36](https://github.com/jbcom/dynasty/issues/36)) ([c939a9c](https://github.com/jbcom/dynasty/commit/c939a9c13a1af76b26a4a9f361373a3b857c60ef))
+
 ## [0.4.0](https://github.com/jbcom/dynasty/compare/v0.3.0...v0.4.0) (2026-06-21)
 
 
