@@ -71,8 +71,11 @@ OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git histor
   starting defaults — OB-4's authored beats convert these to player choices in-game; and the
   founding `emerged`/`named` pre-set still needs revisiting in OB-4 so the birth/naming beats
   actually play (currently they're skipped, holdover from PL-3).
-- [ ] [WAIT] **OB-4 VERTICAL SLICE** — SEQUENCED after PR #51 merges (OB-4 builds on the
-  merged onboarding seam; one PR in flight). Author Ireland/origins Epoch-0 end-to-end:
+- [ ] **OB-4 VERTICAL SLICE (ACTIVE — #51 merged, branch feat/ob4-ireland-epoch0)** — build
+  as ONE coherent change: wire birthDate onto composition/state + a `{birth_date}` term;
+  rewire founding flags (drop the emerged/named pre-set) AND author the Ireland birth→…→fork
+  beats together (the chain breaks until the authored beats fill it, so they ship as one PR).
+  Author Ireland/origins Epoch-0 end-to-end:
   birth + date (doctor's notes) → gender choice → family + given name → growing into
   adulthood (class/station emerges from observing the life around you) → the calling EMERGES
   from schooling / an inspiring teacher / finding passions / work / university-if-affordable
