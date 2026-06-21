@@ -3,41 +3,40 @@ import type { Scene } from "../../sim/saga/schema";
 
 /**
  * SCENE READER (Narrative Acts model) — renders ONE scene as a page of a novel, Suzerain-style:
- * large readable multi-paragraph prose, sense-tinted, with the weave of beats and the terminal
- * tiered decision the prose framed. The reader REVEALS progressively (a beat at a time) so a scene
- * reads like turning pages, not a wall of text + a quiz. Pure presentation: it resolves identity
- * tokens through the injected `term` fn (defaults to identity for standalone tests) and emits the
- * player's chosen beat/decision option upward — it never touches the sim.
+ * large readable multi-paragraph prose, sense-tinted, framing its choice. A scene's weave beats are
+ * ALTERNATIVES (ink weave): the reader shows their framing lines + offers each as a choice; picking
+ * one resolves the scene. If the scene also has a terminal decision, the chosen beat is recorded and
+ * the decision is then shown. Pure presentation: it resolves identity tokens through the injected
+ * `term` fn (defaults to identity for tests) and emits the player's choice upward — never the sim.
  */
 
 interface Props {
   scene: Scene;
   /** Resolve {surname}/{given_name}/… tokens — the run's `applyTerms` binding (identity in tests). */
   term?: (text: string) => string;
-  /** The player picked a beat's gather/divert choice (index into scene.beats). */
+  /** The player picked a weave beat (index into scene.beats). */
   onbeat?: (beatIndex: number) => void;
   /** The player picked the terminal decision option (index into scene.decision.options). */
   ondecision?: (optionIndex: number) => void;
 }
 const { scene, term = (t) => t, onbeat, ondecision }: Props = $props();
 
-// How far the reader has unfolded: the prose is always shown; beats reveal one at a time as the
-// player chooses each (a gather beat falls forward to the next; a decision-bearing scene ends on it).
-// `revealed` counts how many beats are visible. The decision shows once every beat is past.
-let revealed = $state(0);
-// Reset the unfold when the scene changes (Svelte 5: keyed on scene.id).
+// In a decision-bearing scene the beat is a preamble: pick it, then the decision appears. In a
+// plain scene the beat IS the resolution (the parent advances). `beatTaken` gates the decision.
+let beatTaken = $state(false);
+// Reset when the scene changes (Svelte 5: read scene.id to track).
 $effect(() => {
-  scene.id; // track
-  revealed = 0;
+  scene.id;
+  beatTaken = false;
 });
 
-const visibleBeats = $derived(scene.beats.slice(0, revealed + 1));
-const allBeatsDone = $derived(revealed >= scene.beats.length);
+const hasBeats = $derived(scene.beats.length > 0);
+// The decision shows once any required beat is taken (or immediately if the scene has no beats).
+const decisionReady = $derived(!!scene.decision && (!hasBeats || beatTaken));
 
-function chooseBeat(localIndex: number) {
-  onbeat?.(localIndex);
-  // A gather beat advances to the next beat in the weave; a divert is handled by the parent.
-  revealed += 1;
+function chooseBeat(beatIndex: number) {
+  beatTaken = true;
+  onbeat?.(beatIndex);
 }
 </script>
 
@@ -48,14 +47,14 @@ function chooseBeat(localIndex: number) {
     {/each}
   </div>
 
-  {#if scene.beats.length}
+  {#if hasBeats && !beatTaken}
     <div class="weave" data-testid="weave">
-      {#each visibleBeats as beat, i (i)}
-        <div class="beat" class:past={i < revealed}>
+      {#each scene.beats as beat, i (i)}
+        <div class="beat">
           {#each beat.prose as line, j (j)}
             <p class="beat-line">{term(line)}</p>
           {/each}
-          {#if beat.choice && i === revealed}
+          {#if beat.choice}
             <button type="button" class="weave-choice" onclick={() => chooseBeat(i)}>
               {term(beat.choice.text)}
             </button>
@@ -65,7 +64,7 @@ function chooseBeat(localIndex: number) {
     </div>
   {/if}
 
-  {#if scene.decision && allBeatsDone}
+  {#if decisionReady && scene.decision}
     <div class="decision" data-tier={scene.decision.tier} data-testid="decision">
       <p class="prompt">{term(scene.decision.prompt)}</p>
       <div class="options">
@@ -132,9 +131,6 @@ function chooseBeat(localIndex: number) {
     gap: 1rem;
     border-top: 1px solid color-mix(in srgb, var(--mmm-gold-deep) 25%, transparent);
     padding-top: 1rem;
-  }
-  .beat.past {
-    opacity: 0.62;
   }
   .beat-line {
     font-style: italic;

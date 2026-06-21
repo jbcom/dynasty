@@ -42,17 +42,17 @@ describe("SceneReader", () => {
     expect(host.textContent).not.toContain("{family_name}");
   });
 
-  it("reveals the weave one beat at a time and emits the chosen beat", () => {
+  it("offers the weave beats as alternatives and emits the chosen one", () => {
     let picked = -1;
     component = mount(SceneReader, {
       target: host,
       props: { scene: hold, onbeat: (i: number) => (picked = i) },
     });
-    // Only the first beat's choice is offered initially.
+    // hold's two beats are alternatives — both offered at once.
     const choices = host.querySelectorAll(".weave-choice");
-    expect(choices.length).toBe(1);
-    (choices[0] as HTMLButtonElement).click();
-    expect(picked).toBe(0);
+    expect(choices.length).toBe(2);
+    (choices[1] as HTMLButtonElement).click();
+    expect(picked).toBe(1);
   });
 
   it("shows a tiered decision and emits the chosen option", () => {
