@@ -31,14 +31,16 @@ async function startGame(
   await expect(classPhase).toBeVisible({ timeout: 8000 });
   await classPhase.locator(".choices button").first().click();
 
-  // The race/culture step appears only when the (period, class) cell has more than one wave.
+  // After class, the funnel shows EITHER the race/culture step (multi-wave cell) OR jumps straight
+  // to name bestowal (single-wave cell). Wait for whichever lands before acting (no DOM race).
   const culturePhase = page.locator('[data-phase="culture"]');
-  if (await culturePhase.count()) {
+  const namePhase = page.locator('[data-phase="name"]');
+  await expect(culturePhase.or(namePhase)).toBeVisible({ timeout: 8000 });
+  if (await culturePhase.isVisible()) {
     await culturePhase.locator(".choices button").first().click();
   }
 
   // Family-name bestowal (the data-phase="name" card).
-  const namePhase = page.locator('[data-phase="name"]');
   await expect(namePhase).toBeVisible({ timeout: 8000 });
   if (opts.surname) {
     await namePhase.getByRole("button", { name: /Name your own line/ }).click();
