@@ -188,4 +188,4 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 ### SS-15 Determinism + acceptance gate
 - [x] SS-15 full playthrough hour+ beat count, bit-identical replay incl all lines, 0 leaks, harness 0-findings; remove ALL dead old-model code; full gate green
 ### SS-16 Docs + PR
-- [ ] SS-16 STATE.md+ARCHITECTURE.md updated; PR opened; CI green; post-merge Release/CD green
+- [x] SS-16 STATE.md+ARCHITECTURE.md updated; PR opened; CI green; post-merge Release/CD green
