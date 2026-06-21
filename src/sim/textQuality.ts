@@ -17,6 +17,21 @@ const VALID_SLOTS = new Set(["given_name", "surname", "full_name", "family_name"
 /** Placeholder/scaffolding words that must never reach shipped copy. */
 const PLACEHOLDER_RE = /\b(TODO|TKTK|TBD|FIXME|lorem|ipsum|placeholder|xxx+)\b/i;
 
+/**
+ * Normalization passes that strip legitimate abbreviation/initial/decimal shapes before the
+ * missing-space-after-punctuation check, so they don't false-positive. Each is a static
+ * literal (compiled once at module load, not per audit call — review). The abbreviation
+ * forms (a.m., Mr.) only normalize when properly followed by whitespace/punct/end, so a real
+ * run-on like "Mr.Smith" still trips the check.
+ */
+const NORMALIZE_PASSES: ReadonlyArray<RegExp> = [
+  /\d[.,]\d/g, // decimals: 3.14, 1,000
+  /\b[A-Za-z]\.(?=[A-Za-z]\.)/g, // initial chains: H.W., Y.M.C.A.
+  /\b[A-Za-z]\.(?=\s)/g, // a trailing single-letter initial: "J. Smith"
+  /\b(?:a|p)\.m\.(?=\s|[.,;:!?]|$)/gi, // a.m. / p.m.
+  /\b(?:Mr|Mrs|Ms|Dr|St|Jr|Sr|vs|etc|No|Inc|Co)\.(?=\s|[.,;:!?]|$)/g, // common abbreviations
+];
+
 export interface TextFinding {
   eventId: string;
   /** Which string on the event (title / scene / choice:<id> text|outcome). */
@@ -80,20 +95,11 @@ function auditText(eventId: string, field: string, text: string, out: TextFindin
   if (/ {2,}/.test(text)) push("whitespace", "double space");
   if (text !== text.trim()) push("whitespace", "leading/trailing whitespace");
   if (/\s[,.;:!?]/.test(text)) push("punctuation", "space before punctuation");
-  // A comma/period glued to a letter is usually a missing-space typo — BUT not for the
-  // common abbreviation shapes a period legitimately glues: single-letter initials
-  // ("H.W.", "Y.M.C.A.", "a.m.", "p.m."), "St."/"Mr."-style, and decimals. Normalize
-  // those out before flagging, so the check fires only on real "word,word" run-ons.
-  // Each abbreviation is only normalized away when properly FOLLOWED by whitespace,
-  // punctuation, or end-of-string — so a real run-on like "Mr.Smith" or "a.m.He" is still
-  // flagged (the abbreviation's trailing "." isn't a legitimate sentence end there) (review).
-  const after = "(?=\\s|[.,;:!?]|$)";
-  const normalized = text
-    .replace(/\d[.,]\d/g, "") // decimals: 3.14, 1,000
-    .replace(/\b[A-Za-z]\.(?=[A-Za-z]\.)/g, "") // initial chains: H.W., Y.M.C.A.
-    .replace(/\b[A-Za-z]\.(?=\s)/g, "") // a trailing single-letter initial: "J. Smith"
-    .replace(new RegExp(`\\b(?:a|p)\\.m\\.${after}`, "gi"), "") // a.m. / p.m. (dynamic lookahead)
-    .replace(new RegExp(`\\b(?:Mr|Mrs|Ms|Dr|St|Jr|Sr|vs|etc|No|Inc|Co)\\.${after}`, "g"), "");
+  // A comma/period glued to a letter is usually a missing-space typo — but legitimate
+  // abbreviation/initial/decimal shapes are normalized out first (NORMALIZE_PASSES, hoisted
+  // to module scope) so the check fires only on real "word,word" run-ons.
+  let normalized = text;
+  for (const pass of NORMALIZE_PASSES) normalized = normalized.replace(pass, "");
   if (/[,;:][A-Za-z]/.test(normalized) || /\.[A-Za-z]{2,}/.test(normalized)) {
     push("punctuation", "missing space after punctuation");
   }

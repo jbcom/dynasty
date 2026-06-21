@@ -26,8 +26,12 @@ const { content, onComplete, onCancel }: Props = $props();
 
 // A fresh hidden seed for this run — drives the WORLD (events/markets/mortality/procgen),
 // never the player's identity. Drawn once per onboarding via the browser's CSPRNG so each
-// New Game reshuffles the world; locked into the run + save from here on.
-const seed = `r${Math.floor(crypto.getRandomValues(new Uint32Array(2)).reduce((a, b) => a * 0x100000000 + b, 0)).toString(36)}`;
+// New Game reshuffles the world; locked into the run + save from here on. Two 32-bit words
+// are base-36'd and concatenated (no 2^53-overflow math — the seed is just an opaque string).
+const seed = (() => {
+  const words = crypto.getRandomValues(new Uint32Array(2));
+  return `r${(words[0] ?? 0).toString(36)}${(words[1] ?? 0).toString(36)}`;
+})();
 
 // Phase: "place" = location pick; "name" = family-name bestowal for the chosen place.
 let chosen = $state<Place | undefined>();

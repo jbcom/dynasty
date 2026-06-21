@@ -64,10 +64,16 @@ async function toggleLive(on: boolean): Promise<void> {
 // player override in-game), then drop into the Epoch-0 story.
 async function birthGame(seed: string, place: string, surname: string): Promise<void> {
   if (!storage) return;
+  const placeDef = placeById(content.places, place);
+  // Guard: the place comes from the onboarding catalog, so this should never miss — but bail
+  // rather than silently fall back to a random place if an invalid id ever reaches here.
+  if (!placeDef) {
+    console.error(`birthGame: unknown place "${place}"`);
+    return;
+  }
   // Await the clear so a fast first choice can't race the old save's deletion.
   await clearSave(storage);
-  const placeDef = placeById(content.places, place);
-  const composition = dealComposition(content.places, content.eras, seed, surname, undefined, placeDef);
+  const composition = dealComposition(content.places, content.eras, seed, surname, placeDef);
   const founded = foundByComposition(content, composition).state;
   store = new GameStore(content, seed, storage, founded, founded.archetype);
   screen = "play";

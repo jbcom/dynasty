@@ -41,12 +41,13 @@ export function dealComposition(
   // Surname is optional: the onboarding bestows it before founding; callers that already
   // know it pass it directly.
   surname = "",
-  rng: Rng = createRng(`${seed}::birth`),
   // OB-3: the PLACE may be CHOSEN by the player (geography is the one pre-founding choice).
   // When given, found there; otherwise pick a place from the seed (legacy / tests). Era,
   // gender, and archetype are still seed-dealt here — the authored Epoch-0 lets the player
-  // override gender + calling(=archetype) in-game; these are the starting defaults.
+  // override gender + calling(=archetype) in-game; these are the starting defaults. Placed
+  // BEFORE rng so callers can specify a place without passing rng explicitly (review).
   place: Place | undefined = undefined,
+  rng: Rng = createRng(`${seed}::birth`),
 ): Composition {
   if (places.length === 0) throw new Error("dealComposition: empty places catalog");
   const chosen = place ?? rng.pick(places);
