@@ -115,7 +115,11 @@ origins ship a fully-written, era-correct Epoch-0; chronology (overheard year) �
 + post-merge workflows green.
 
 ## Next milestone — LIVED-IN FEEL (light editorial, NOT a mechanical sweep)
-- [ ] **LF-1** — carry the [[mmm-epoch0-birth-beat]] principle past Epoch-0: as beats are touched,
+- [ ] [WAIT-USER] **LF-1** — BLOCKED on the user's creative steer (genuine scope/design call,
+  not agent-decidable: the user corrected the birth beat twice and said "you're getting carried
+  away" — pushing a broad editorial pass now would repeat that mistake). When the user gives the
+  direction, do it in SMALL story-first slices, one origin/era at a time, live-verified.
+  Carry the [[mmm-epoch0-birth-beat]] principle past Epoch-0: as beats are touched,
   make the EXPERIENCED-vs-CHOSEN mix feel right and ground scenes in concrete sense detail of
   their place+time so a life feels LIVED. User's guardrails (verbatim spirit): "tell a story, a
   coherent narrative whole with causality + butterfly effect"; "a life must feel lived"; do NOT
