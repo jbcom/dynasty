@@ -52,21 +52,21 @@ screenshots), compress as they ship. Each cycle picks the highest-value [ ] item
   personality band) — a larger UX decision; flag if wanted.
 
 ### Queue (next cycles)
-- [x] **PL-7 DONE** (commit 960cdfe) — Timeline tab showed deep-history eras a modern line
-  never lived (a 1885 line listed "The Caliphate Dawn 762–833"). Now starts at the line's
-  founding era through the current; pre-founding eras excluded. Live-verified + new test.
-- [x] **PL cycle-3 ship — MERGED** (PR #41). PL-7 on main.
-- [x] **PL-8 DONE** (commit e17b2f9, + a11y review fix ce17cc2) — Lineage cards show ROLE:
-  outlined "Consort" badge for the partner (vs filled "You"), ✝ deceased mark (role=img,
-  aria-labeled). Tests for both. On PR #42.
-- [ ] [WAIT] **PL cycle-4 ship** — merge PR #42 (PL-8) on green.
-- [x] **PL-9 DONE** (commit abc47ce) — the legacy/end report celebrates the DYNASTY: "The
-  House of X endured N years across G generations — M souls born into the line" (from
-  state.family + end.year). New screens.browser test pins the epitaph.
-- [ ] [WAIT] **PL cycle-5 ship** — open + merge the PL-9 PR (branch feat/polish-cycle-5) on
-  green (the end report is reached by the e2e playthrough).
-- [ ] **PL-10 (cycle 6)** — still un-inspected: Stats (Trajectory chart), Dossier, News
-  ticker, Markets. Playtest one, pick the highest-value gap, ship it.
+- [x] **PL-7 MERGED** (#41) — Timeline shows the line's own era chain (no pre-founding eras).
+- [x] **PL-8 MERGED** (#42) — Lineage roles: Consort badge + ✝ deceased mark (role=img).
+- [x] **PL-9 MERGED** (#43) — legacy report celebrates the DYNASTY ("The House of X endured
+  N years across G generations — M souls"); reduce-based stats (no Math.max-spread overflow).
+- [x] **PL-10 DONE** (commit 8a780c1, branch feat/pl10-dossier-flags) — Dossier shows a
+  character record, not a flag dump: src/ui/flagLabel.ts hides structural/lifecycle/preset
+  machinery (incl. the 0-leak preset keys) + humanizes the rest; retitled "Marks of the
+  Life". Pure helper + unit test + updated Dossier browser test.
+- [ ] [WAIT] **PL-10 ship** — open + merge the PL-10 PR on green.
+- [ ] [WAIT] **PL-11** — SEQUENCED after PL-10 merges (ONE polish PR in flight at a time —
+  parallel branches caused directive merge-conflict churn). Then: last un-inspected views —
+  Stats (Trajectory chart), News ticker, Markets — pick the highest-value gap, ship it.
+
+PROCESS LESSON (encoded): keep a single polish PR in flight, merge it, sync main, branch the
+next from fresh main. Avoids the directive-divergence conflicts seen across cycles 3–6.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
