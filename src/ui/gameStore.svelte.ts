@@ -48,6 +48,38 @@ export class GameStore {
     }
   }
 
+  /** Pick a weave beat on the current novel scene (saga play). Best-effort autosave. */
+  async pickBeat(beatIndex: number): Promise<void> {
+    if (this.busy || this.game.finished) return;
+    this.busy = true;
+    try {
+      this.game.pickBeat(beatIndex);
+      try {
+        await saveGame(this.storage, this.view.state);
+      } catch {
+        // swallow — the walk advanced; next pick retries the save.
+      }
+    } finally {
+      this.busy = false;
+    }
+  }
+
+  /** Pick the current scene's terminal decision option (saga play). Best-effort autosave. */
+  async pickDecision(optionIndex: number): Promise<void> {
+    if (this.busy || this.game.finished) return;
+    this.busy = true;
+    try {
+      this.game.pickDecision(optionIndex);
+      try {
+        await saveGame(this.storage, this.view.state);
+      } catch {
+        // swallow — the walk advanced; next pick retries the save.
+      }
+    } finally {
+      this.busy = false;
+    }
+  }
+
   get finished(): boolean {
     return this.game.finished;
   }

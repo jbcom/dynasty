@@ -137,6 +137,8 @@ function dumpTimeline(): void {
     busy={store.busy}
     wide={formFactor.info?.wide}
     onchoose={(id) => store?.choose(id)}
+    onpickbeat={(i) => store?.pickBeat(i)}
+    onpickdecision={(i) => store?.pickDecision(i)}
   />
 {/if}
 

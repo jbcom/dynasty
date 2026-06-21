@@ -1,3 +1,4 @@
+import { loadSaga } from "../data/loadSaga";
 import type { Content } from "../sim/content";
 import { applyChoice } from "../sim/effects";
 import { createRng, type Rng } from "../sim/rng";
@@ -6,11 +7,15 @@ import type { Archetype } from "../sim/slots";
 import { type GameState, initState, type LedgerEntry } from "../sim/state";
 import { advanceTimeline } from "../sim/timeline";
 import { pickNextEventViaWorld } from "../sim/world";
+import { SagaDriver, type SagaFrame } from "./sagaDriver";
 
 /** A snapshot the UI renders from. Immutable per turn. */
 export interface GameView {
   state: GameState;
   currentEvent: GameEvent | null;
+  /** The played NOVEL frame — the act title + current scene. `scene` is null when the line's act
+   *  isn't authored yet (the UI then renders the event flow). */
+  saga: SagaFrame;
   lastLedger: LedgerEntry[];
 }
 
@@ -29,6 +34,7 @@ export class Game {
   private current: GameEvent | null;
   private lastLedger: LedgerEntry[] = [];
   private readonly listeners = new Set<Listener>();
+  private readonly saga: SagaDriver;
 
   constructor(
     content: Content,
@@ -40,6 +46,24 @@ export class Game {
     this.rng = createRng(seed);
     this.state = restore ?? initState(content, seed, archetype);
     this.current = this.state.end ? null : this.pick();
+    this.saga = new SagaDriver(loadSaga());
+    this.beginSagaActForState();
+  }
+
+  /**
+   * Begin the novel act for the current line (the founded line's wave × archetype × reach tier),
+   * carrying its motivators. A no-op (null scene) when the line isn't founded or the cell has no
+   * authored act yet — the UI then renders the event flow. The reach tier derives from the line's
+   * generation (each generation steps one act up the lattice, capped at the spine's top tier).
+   */
+  private beginSagaActForState(): void {
+    const wave = this.state.founding?.place;
+    if (!wave) return;
+    // Reach tier = the protagonist's generation depth (founder = 0), capped at the spine's top tier.
+    const family = this.state.family;
+    const protagonist = family?.members.find((m) => m.id === family.protagonistId);
+    const tier = Math.min(protagonist?.generation ?? 0, 5);
+    this.saga.begin({ wave, archetype: this.state.archetype, tier }, this.state.personality, []);
   }
 
   /**
@@ -57,8 +81,26 @@ export class Game {
     return {
       state: this.state,
       currentEvent: this.current,
+      saga: this.saga.frame(),
       lastLedger: this.lastLedger,
     };
+  }
+
+  /** Write the driver's carried motivators back into the run's personality vector. */
+  private syncMotivators(m: ReturnType<SagaDriver["pickBeat"]>): void {
+    if (m) this.state = { ...this.state, personality: m };
+  }
+
+  /** Apply a weave-beat choice on the current novel scene, then re-emit. */
+  pickBeat(beatIndex: number): void {
+    this.syncMotivators(this.saga.pickBeat(beatIndex));
+    this.emit();
+  }
+
+  /** Apply the current scene's terminal decision, then re-emit. */
+  pickDecision(optionIndex: number): void {
+    this.syncMotivators(this.saga.pickDecision(optionIndex));
+    this.emit();
   }
 
   subscribe(fn: Listener): () => void {

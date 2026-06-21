@@ -18,18 +18,23 @@ import { applyTerms, runTerms } from "../../sim/terms";
 import { projectSaga } from "../../sim/readModel";
 import ShaderBackdrop from "../saga/ShaderBackdrop.svelte";
 import SagaPanel from "../saga/SagaPanel.svelte";
+import SceneReader from "../saga/SceneReader.svelte";
 
 interface Props {
   content: Content;
   view: GameView;
   busy: boolean;
   onchoose: (choiceId: string) => void;
+  /** Pick a weave beat on the current novel scene (saga play). */
+  onpickbeat?: (beatIndex: number) => void;
+  /** Pick the current scene's terminal decision option (saga play). */
+  onpickdecision?: (optionIndex: number) => void;
   /** Medium-native layout: phones get a compact tab stack; wide tablets/foldables
       get the event + an info panel side-by-side. */
   wide?: boolean;
 }
 
-const { content, view, busy, onchoose, wide = false }: Props = $props();
+const { content, view, busy, onchoose, onpickbeat, onpickdecision, wide = false }: Props = $props();
 
 // Diegetic ambient drift: the play area tints toward cyan (utopia) or red
 // (tyranny) as the personality vector shifts, so the slide is felt, not just read.
@@ -95,7 +100,20 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
 {/snippet}
 
 {#snippet eventPane()}
-  {#if view.currentEvent}
+  {#if view.saga.scene}
+    <!-- The NOVEL: the line's act reads as multi-paragraph scenes that frame the choice. -->
+    <div class="event-pane">
+      {#if view.saga.actTitle}<h2 class="act-title">{view.saga.actTitle}</h2>{/if}
+      <SceneReader
+        scene={view.saga.scene}
+        {term}
+        onbeat={(i) => onpickbeat?.(i)}
+        ondecision={(i) => onpickdecision?.(i)}
+      />
+    </div>
+  {:else if view.saga.ended}
+    <p class="interlude">The generation closes…</p>
+  {:else if view.currentEvent}
     <div class="event-pane">
       <EventCard event={view.currentEvent} year={view.state.year} {busy} {onchoose} {term} />
     </div>
@@ -264,5 +282,15 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     color: var(--mmm-text-dim);
     font-style: italic;
     padding: 2rem;
+  }
+  .act-title {
+    margin: 0 0 0.4rem;
+    align-self: center;
+    font-family: var(--mmm-font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--mmm-gold);
+    text-align: center;
   }
 </style>

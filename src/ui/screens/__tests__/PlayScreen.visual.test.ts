@@ -16,7 +16,12 @@ function view(): GameView {
     ...initState(content, "seed"),
     meters: { ...initMeters(content.meters), money: 5_000_000, heat: 40 },
   };
-  return { state, currentEvent: content.allEvents[0] ?? null, lastLedger: [] };
+  return {
+    state,
+    currentEvent: content.allEvents[0] ?? null,
+    saga: { actTitle: null, scene: null, ended: false },
+    lastLedger: [],
+  };
 }
 
 let host: HTMLElement;
