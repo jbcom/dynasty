@@ -8,8 +8,10 @@
 import { GoogleGenAI } from "@google/genai";
 import { buildCritiquePrompt } from "./prompt.mjs";
 
-const FLASH = "gemini-3-flash-preview"; // bulk generation
-const PRO = "gemini-3-pro-preview"; // self-critique / hard reasoning
+// gemini-3.5-flash for bulk generation (current, available on this key);
+// gemini-pro-latest for the self-critique/hard-reasoning pass.
+const FLASH = "gemini-3.5-flash"; // bulk generation
+const PRO = "gemini-pro-latest"; // self-critique / hard reasoning
 
 let _ai = null;
 function ai() {
