@@ -84,7 +84,11 @@ function begin(): void {
     font-family: var(--mmm-font-display);
     font-weight: 800;
     font-size: clamp(3.2rem, 15vw, 5rem);
+    /* line-height is intentionally tight for the cap-height look, but that clips the
+       line-box ABOVE the glyph descenders (the "y" tail), so the rule below would
+       overlap. Pad the bottom by the descender depth to give the tail its own room. */
     line-height: 0.95;
+    padding-bottom: 0.18em;
     background: linear-gradient(180deg, var(--mmm-gold-bright) 0%, var(--mmm-gold) 45%, var(--mmm-gold-deep) 100%);
     -webkit-background-clip: text;
     background-clip: text;
