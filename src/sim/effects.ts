@@ -196,6 +196,16 @@ export function applyChoice(
       ? { ...state.founding, calling: choice.setsCalling }
       : state.founding;
 
+  // SET ARCHETYPE (OB-4): the emergent Epoch-0 calling arc crystallizes into a power base.
+  // Commit it on the run + swap the `archetype:<id>` flag content gates on (drop the old one,
+  // add the new), and reflect it in the founding metadata so a save reconstructs it.
+  let archetype = state.archetype;
+  if (choice.setsArchetype && choice.setsArchetype !== state.archetype) {
+    flags = withoutFlag(flags, `archetype:${state.archetype}`);
+    flags = withFlag(flags, `archetype:${choice.setsArchetype}`);
+    archetype = choice.setsArchetype;
+  }
+
   const resolved: GameState = {
     ...state,
     meters,
@@ -205,7 +215,8 @@ export function applyChoice(
     pending,
     markets,
     family,
-    founding,
+    archetype,
+    founding: choice.setsArchetype && founding ? { ...founding, archetype } : founding,
     ledger: [...state.ledger, ...newLedger],
     history: [...state.history, { eventId: event.id, choiceId, year: event.year }],
     firedEvents,

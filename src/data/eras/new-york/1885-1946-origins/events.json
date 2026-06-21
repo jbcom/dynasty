@@ -25,7 +25,7 @@
         "meters": {},
         "personality": {}
       },
-      "weight": 1000,
+      "weight": 950,
       "choices": [
         {
           "id": "reveal_listen",
@@ -36,6 +36,33 @@
             "gender_revealed"
           ],
           "outcome": "Son, daughter — the word is spoken, and a whole life of expectations arrives with it."
+        }
+      ]
+    },
+    {
+      "id": "ev_birth_generic",
+      "era": "origins",
+      "year": 1885,
+      "title": "You Arrive",
+      "scene": "A first breath, a first cry — you are born into a place and a time you did not choose, the way everyone is. Around you the ordinary machinery of arrival: hands, lamplight, the relief of those who waited.",
+      "researchNote": "OB-4: the place-AGNOSTIC birth opener — sets `emerged` so the Epoch-0 chain begins for any origin that doesn't yet have its own authored birth beat. EXCLUDED for places that DO have a custom birth (notFlags their place tag), so e.g. Ireland always opens on ev_ire_birth. Add each authored place here as its Epoch-0 lands.",
+      "historicity": "personal",
+      "tags": ["epoch0", "birth", "diegetic"],
+      "requires": {
+        "flags": ["founded_line"],
+        "notFlags": ["emerged", "place:ireland"],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 800,
+      "choices": [
+        {
+          "id": "draw_first_breath",
+          "text": "You draw the first breath of a life that is yours to spend.",
+          "effects": {},
+          "personality": {},
+          "setFlags": ["emerged"],
+          "outcome": "The world does not pause to mark it, but a line has begun all the same."
         }
       ]
     },
@@ -56,10 +83,11 @@
       "requires": {
         "flags": [
           "founded_line",
-          "named"
+          "gender_revealed"
         ],
         "notFlags": [
-          "calling_chosen"
+          "calling_chosen",
+          "place:ireland"
         ],
         "meters": {},
         "personality": {}
