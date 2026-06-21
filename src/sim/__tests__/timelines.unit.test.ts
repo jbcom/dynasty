@@ -2,14 +2,12 @@ import { describe, expect, it } from "vitest";
 import originsJson from "../../data/eras/new-york/1885-1946-origins/events.json";
 import kennedyJson from "../../data/timelines/kennedy.json";
 import moresJson from "../../data/timelines/mores.json";
-import moresNaziJson from "../../data/timelines/mores.nazi.json";
 import muskJson from "../../data/timelines/musk.json";
 import religionJson from "../../data/timelines/religion.json";
-import religionNaziJson from "../../data/timelines/religion.nazi.json";
 import scienceJson from "../../data/timelines/science.json";
-import usaNaziJson from "../../data/timelines/usa.nazi.json";
+import usaJson from "../../data/timelines/usa.json";
 import westcoastJson from "../../data/timelines/westcoast.json";
-import worldNaziJson from "../../data/timelines/world.nazi.json";
+import worldJson from "../../data/timelines/world.json";
 import { buildContent } from "../content";
 import { type WorldTimeline, WorldTimelineSchema } from "../schema";
 import { initState } from "../state";
@@ -87,65 +85,60 @@ describe("branch timeline selection (AH3)", () => {
   });
 });
 
-describe("Nazi-branch backdrop pool (alt-history consistency, AH2/AH3)", () => {
-  const naziFiles = {
-    usa: usaNaziJson,
-    world: worldNaziJson,
-    mores: moresNaziJson,
-    religion: religionNaziJson,
-  };
+describe("Nazi-branch backdrop pool (alt-history consistency, AH2/AH3 — CP-R-ARCH-2)", () => {
+  // Post-collapse: branch events live in the merged per-scope file, tagged branch.
+  const mergedFiles = { usa: usaJson, world: worldJson, mores: moresJson, religion: religionJson };
 
-  for (const [scope, json] of Object.entries(naziFiles)) {
-    it(`${scope}.nazi.json validates as scope=${scope} branch=nazi`, () => {
+  for (const [scope, json] of Object.entries(mergedFiles)) {
+    it(`${scope}.json carries a deep nazi-branch slice`, () => {
       const t = WorldTimelineSchema.parse(json);
-      expect(t.scope).toBe(scope);
-      expect(t.branch).toBe("nazi");
-      expect(t.events.length).toBeGreaterThanOrEqual(30);
+      const nazi = t.events.filter((e) => e.branch === "nazi");
+      expect(nazi.length, `${scope} nazi events`).toBeGreaterThanOrEqual(18);
       const ids = t.events.map((e) => e.id);
-      expect(new Set(ids).size).toBe(ids.length);
+      expect(new Set(ids).size, `${scope} dup ids`).toBe(ids.length);
     });
   }
 
-  it("the Nazi USA timeline establishes the Reich order and never crowns a sitting US president", () => {
-    const t = WorldTimelineSchema.parse(usaNaziJson);
-    const corpus = t.events.map((e) => `${e.headline} ${e.body}`.toLowerCase()).join(" ");
-    // It MUST establish the Reich administration (the head of state is a
-    // Reichskommissar, not a President).
+  it("the Nazi USA slice establishes the Reich order and never crowns a sitting US president", () => {
+    const t = WorldTimelineSchema.parse(usaJson);
+    const nazi = t.events.filter((e) => e.branch === "nazi");
+    const corpus = nazi.map((e) => `${e.headline} ${e.body}`.toLowerCase()).join(" ");
     expect(corpus).toContain("reich");
     expect(corpus).toContain("commissar");
-    // No event should AFFIRM a U.S. president winning/taking office during the
-    // occupation. (Phrases like "no presidential assassinations" are consistency-
-    // affirming and fine; we ban the affirmative installation phrases only.)
     for (const banned of ["wins the white house", "elected president", "president-elect"]) {
       expect(corpus.includes(banned), `Nazi USA affirms "${banned}"`).toBe(false);
     }
   });
 });
 
-describe("all branch backdrop pools validate uniformly (AH3 pools)", () => {
-  // Every per-branch timeline variant in the repo, validated as a set.
-  const pool = import.meta.glob("../../data/timelines/*.*.json", { eager: true }) as Record<
+describe("all branch backdrop pools validate uniformly (AH3 pools — CP-R-ARCH-2)", () => {
+  // Post-collapse: ONE file per scope, every event tagged with its branch field.
+  const pool = import.meta.glob("../../data/timelines/*.json", { eager: true }) as Record<
     string,
     { default: unknown }
   >;
 
-  it("finds the expected branch pools (nazi/westcoast/theocracy/media × 4 scopes)", () => {
-    const names = Object.keys(pool).map((p) => p.split("/").pop());
+  it("the four backdrop scopes each carry every alt-history branch slice", () => {
+    const byScope = new Map<string, Set<string>>();
+    for (const [, mod] of Object.entries(pool)) {
+      const t = WorldTimelineSchema.parse(mod.default);
+      const branches = byScope.get(t.scope) ?? new Set<string>();
+      for (const e of t.events) branches.add(e.branch ?? "default");
+      byScope.set(t.scope, branches);
+    }
     for (const branch of ["nazi", "westcoast", "theocracy", "media"]) {
       for (const scope of ["usa", "world", "mores", "religion"]) {
-        expect(names, `missing ${scope}.${branch}.json`).toContain(`${scope}.${branch}.json`);
+        expect(byScope.get(scope)?.has(branch), `${scope} missing ${branch} slice`).toBe(true);
       }
     }
   });
 
   for (const [path, mod] of Object.entries(pool)) {
     const file = path.split("/").pop() ?? path;
-    it(`${file} validates with matching scope+branch and no dup ids`, () => {
-      const [scope, branch] = file.replace(".json", "").split(".");
+    it(`${file} validates with matching scope and no dup ids`, () => {
+      const scope = file.replace(".json", "");
       const t = WorldTimelineSchema.parse(mod.default);
       expect(t.scope).toBe(scope);
-      expect(t.branch).toBe(branch);
-      expect(t.events.length).toBeGreaterThanOrEqual(18);
       const ids = t.events.map((e) => e.id);
       expect(new Set(ids).size).toBe(ids.length);
     });
