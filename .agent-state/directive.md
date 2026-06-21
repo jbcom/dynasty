@@ -71,13 +71,19 @@ OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git histor
   starting defaults — OB-4's authored beats convert these to player choices in-game; and the
   founding `emerged`/`named` pre-set still needs revisiting in OB-4 so the birth/naming beats
   actually play (currently they're skipped, holdover from PL-3).
-- [ ] **OB-4 VERTICAL SLICE** — author Ireland/origins Epoch-0 end-to-end (birth+date →
-  gender → family+given name → adulthood → first calling turn → partner → branch fork), real
-  prose + real anchor-setting choices, 0 leaks. Prove the shape.
-- [ ] **OB-5 REPLICATE** — full Epoch-0 per remaining place × era. Long authoring effort; one
-  PR per slice (or small batch), one in flight at a time.
-- [ ] **OB-6 verify** — e2e + component + textQuality + harness audit 0 findings; live-verify
-  each origin; gate green; remove dead PL-3 paths.
+- [ ] [WAIT] **OB-4 VERTICAL SLICE** — SEQUENCED after PR #51 merges (OB-4 builds on the
+  merged onboarding seam; one PR in flight). Author Ireland/origins Epoch-0 end-to-end:
+  birth + date (doctor's notes) → gender choice → family + given name → growing into
+  adulthood (class/station emerges from observing the life around you) → the calling EMERGES
+  from schooling / an inspiring teacher / finding passions / work / university-if-affordable
+  (not one static pick) → finding a partner → the branch fork. Real prose + real
+  anchor-setting choices; realistic FAMILY meter values (esp. money) until the heir is old
+  enough that it's their dynastic money; 0 leaks; textQuality-clean. Revisit the founding
+  emerged/named pre-set so the birth/naming beats actually play.
+- [ ] [WAIT] **OB-5 REPLICATE** — after OB-4. Full Epoch-0 per remaining place × era. Long
+  authoring effort; one PR per slice (or small batch), one in flight at a time.
+- [ ] [WAIT] **OB-6 verify** — e2e + component + textQuality + harness audit 0 findings;
+  live-verify each origin; gate green; remove dead PL-3 paths.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
