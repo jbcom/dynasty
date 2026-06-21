@@ -1,10 +1,21 @@
 import { describe, expect, it } from "vitest";
+import { loadContent } from "../../../data/loadContent";
 import { validRaw } from "../../__tests__/fixtures";
-import { buildContent, type RawContent } from "../../content";
+import { buildContent, type Content, type RawContent } from "../../content";
 import { eligibleEvents } from "../../events";
+import { foundDynasty } from "../../founding";
 import { createRng } from "../../rng";
+import type { GameState } from "../../state";
 import { initState } from "../../state";
 import { materializeProcedural } from "../index";
+
+function loadRealContent(): Content {
+  return loadContent();
+}
+function foundRealDynasty(real: Content): GameState {
+  return foundDynasty(real, { momentId: "abbasid_baghdad_762", surname: "al-Rashid", seed: "dh" })
+    .state;
+}
 
 /**
  * FD-4.2 — lazy bounded materialization: templates load + cross-ref validate;
@@ -105,5 +116,33 @@ describe("FD-4.2 eligibleEvents procedural fill", () => {
     const state = { ...base, firedEvents: boyhood.map((e) => e.id) };
     const ev = eligibleEvents(content, state, createRng("p"));
     expect(ev.some((e) => e.tags.includes("procedural"))).toBe(true);
+  });
+});
+
+describe("FD-4.3 deep-history templates (real content)", () => {
+  const real = loadRealContent();
+
+  it("the caliphate deep-history era has procedural templates", () => {
+    const caliphateTemplates = real.templates.filter((t) => t.era === "caliphate");
+    expect(caliphateTemplates.length).toBeGreaterThan(0);
+    // Their tropes resolve to the catalog (buildContent would have thrown otherwise).
+    const ids = new Set(real.tropes.map((t) => t.id));
+    for (const tpl of caliphateTemplates) {
+      for (const tr of tpl.tropes) expect(ids.has(tr), `${tpl.id}:${tr}`).toBe(true);
+    }
+  });
+
+  it("a founded deep-history line materializes caliphate procedural events", () => {
+    const founded = foundRealDynasty(real);
+    const era = real.eras.find((e) => e.id === "caliphate");
+    if (!era) throw new Error("no caliphate era");
+    const out = materializeProcedural(real, founded, era, createRng("dh"), 2);
+    expect(out.length).toBeGreaterThan(0);
+    for (const e of out) {
+      expect(e.era).toBe("caliphate");
+      expect(e.tags).toContain("procedural");
+      // {place} resolves to the Baghdad stack label, not a raw token.
+      expect(e.scene).not.toMatch(/\{place\}/);
+    }
   });
 });

@@ -1,0 +1,60 @@
+{
+  "templates": [
+    {
+      "id": "court_favor_turns",
+      "era": "caliphate",
+      "title": "The Caliph's Shifting Favor",
+      "scene": "In {year}, word reaches {member} that the court's mood has turned. In {place}, a single decree can raise a house or break it — and {rival} is whispering in the right ears while {peril} gathers.",
+      "slots": ["member", "rival", "place", "year", "peril"],
+      "tropes": ["oligarch", "scandal-fall-rehab"],
+      "tags": ["deep_history", "court"],
+      "weight": 6,
+      "choices": [
+        {
+          "id": "buy_influence",
+          "text": "{member} buys back favor with gold and flattery",
+          "outcome": "The decree is stayed — for a price the treasury will feel.",
+          "effects": { "power": { "min": 4, "max": 12 }, "money": { "min": -30, "max": -8 }, "heat": { "min": 2, "max": 8 } },
+          "personality": { "outward": { "min": 1, "max": 6 } },
+          "setFlags": []
+        },
+        {
+          "id": "retreat_to_scholarship",
+          "text": "{member} withdraws into study, above the intrigue",
+          "outcome": "Out of the court's eye is out of its blade's reach — for now.",
+          "effects": { "reputation": { "min": 4, "max": 10 }, "power": { "min": -6, "max": 0 }, "heat": { "min": -8, "max": -2 } },
+          "personality": { "inward": { "min": 2, "max": 8 } },
+          "setFlags": ["above_politics"]
+        }
+      ]
+    },
+    {
+      "id": "caravan_fortune",
+      "era": "caliphate",
+      "title": "The Long Caravan",
+      "scene": "A trade venture out of {place} promises a fortune from the eastern roads — silk, paper, spice. But the road is long and {peril} waits for the {surname} caravan beyond the last waystation.",
+      "slots": ["place", "year", "peril", "surname"],
+      "tropes": ["dynastic-merger", "exile-return"],
+      "tags": ["deep_history", "trade"],
+      "weight": 6,
+      "choices": [
+        {
+          "id": "fund_it",
+          "text": "Fund the caravan and gamble on the eastern markets",
+          "outcome": "Two years on the road; a fortune in paper and silk if it returns.",
+          "effects": { "money": { "min": 8, "max": 28 }, "heat": { "min": 2, "max": 8 }, "health": { "min": -4, "max": 0 } },
+          "personality": { "grandiosity": { "min": 1, "max": 6 } },
+          "setFlags": ["eastern_trade"]
+        },
+        {
+          "id": "keep_close",
+          "text": "Keep the capital near {place} and the family's own walls",
+          "outcome": "Smaller margins, surer coin. The {surname} coffers fill slowly.",
+          "effects": { "money": { "min": 2, "max": 10 }, "loyalty": { "min": 1, "max": 4 } },
+          "personality": { "inward": { "min": 1, "max": 4 } },
+          "setFlags": []
+        }
+      ]
+    }
+  ]
+}
