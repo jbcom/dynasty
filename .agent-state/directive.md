@@ -56,14 +56,15 @@ screenshots), compress as they ship. Each cycle picks the highest-value [ ] item
 - [x] **PL-8 MERGED** (#42) — Lineage roles: Consort badge + ✝ deceased mark (role=img).
 - [x] **PL-9 MERGED** (#43) — legacy report celebrates the DYNASTY ("The House of X endured
   N years across G generations — M souls"); reduce-based stats (no Math.max-spread overflow).
-- [x] **PL-10 DONE** (commit 8a780c1, branch feat/pl10-dossier-flags) — Dossier shows a
-  character record, not a flag dump: src/ui/flagLabel.ts hides structural/lifecycle/preset
-  machinery (incl. the 0-leak preset keys) + humanizes the rest; retitled "Marks of the
-  Life". Pure helper + unit test + updated Dossier browser test.
-- [ ] [WAIT] **PL-10 ship** — open + merge the PL-10 PR on green.
-- [ ] [WAIT] **PL-11** — SEQUENCED after PL-10 merges (ONE polish PR in flight at a time —
-  parallel branches caused directive merge-conflict churn). Then: last un-inspected views —
-  Stats (Trajectory chart), News ticker, Markets — pick the highest-value gap, ship it.
+- [x] **PL-10 MERGED** (#44) — Dossier shows a character record, not a flag dump
+  (src/ui/flagLabel.ts hides structural/lifecycle/preset machinery + humanizes the rest).
+- [x] **PL-11 DONE** (commit 3d1dd2b, branch feat/pl11-views) — News tab shows a quiet-world
+  empty state instead of a blank panel (matches Lineage/Dossier empty states). Test updated.
+- [ ] [WAIT] **PL-11 ship** — open + merge the PL-11 PR on green.
+- [ ] [WAIT] **PL-12** — SEQUENCED after PL-11 merges (one PR in flight). Remaining un-
+  inspected views: Stats (Trajectory chart), Markets. Playtest, pick the gap, ship it. If
+  no meaningful gaps remain, the polish sweep of the views is complete — pivot to a feature
+  add or audit the content (event text quality) for the next cycle.
 
 PROCESS LESSON (encoded): keep a single polish PR in flight, merge it, sync main, branch the
 next from fresh main. Avoids the directive-divergence conflicts seen across cycles 3–6.

@@ -39,11 +39,11 @@ const scopeLabel: Record<string, string> = {
 };
 </script>
 
-{#if news.length > 0}
-  <section class="news" aria-label="World news">
-    <h3>
-      <img class="h-icon" src="/assets/icons/ui/news.svg" alt="" aria-hidden="true" />The Wider World — {gameState.year}
-    </h3>
+<section class="news" aria-label="World news">
+  <h3>
+    <img class="h-icon" src="/assets/icons/ui/news.svg" alt="" aria-hidden="true" />The Wider World — {gameState.year}
+  </h3>
+  {#if news.length > 0}
     <ul>
       {#each news as item (item.scope + item.headline)}
         <li>
@@ -53,8 +53,10 @@ const scopeLabel: Record<string, string> = {
         </li>
       {/each}
     </ul>
-  </section>
-{/if}
+  {:else}
+    <p class="empty">The wider world is quiet for now — no dispatches reach you this year.</p>
+  {/if}
+</section>
 
 <style>
   .news {
@@ -65,6 +67,11 @@ const scopeLabel: Record<string, string> = {
     color: var(--mmm-gold);
     font-family: var(--mmm-font-display);
     font-size: 0.95rem;
+  }
+  .empty {
+    margin: 0;
+    color: var(--mmm-text-dim);
+    font-style: italic;
   }
   ul {
     list-style: none;
