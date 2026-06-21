@@ -66,6 +66,22 @@ describe("EventCard", () => {
     expect(host.querySelectorAll("button")).toHaveLength(2);
   });
 
+  it("shows the run's current year (prop) over the beat's nominal year — epoch0 in another era", () => {
+    // A generic life-stage epoch0 beat carries a nominal default year (1885) but is injected
+    // into whatever era the run is in. On a caliphate (762) run the card must show 762, not 1885.
+    component = mount(EventCard, {
+      target: host,
+      props: { event: { ...baseEvent, year: 1885 }, year: 762, onchoose: () => {} },
+    });
+    expect(host.textContent).toContain("762");
+    expect(host.textContent).not.toContain("1885");
+  });
+
+  it("falls back to the beat's own year when no run year is passed", () => {
+    component = mount(EventCard, { target: host, props: { event: baseEvent, onchoose: () => {} } });
+    expect(host.textContent).toContain("1959");
+  });
+
   it("invokes onchoose with the chosen choice id", async () => {
     const onchoose = vi.fn();
     component = mount(EventCard, { target: host, props: { event: baseEvent, onchoose } });

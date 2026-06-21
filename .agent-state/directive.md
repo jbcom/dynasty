@@ -83,7 +83,7 @@ OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git histor
   e2e green; textQuality corpus-clean. NOTE: starting meters ($1K/low) already read as a poor
   tenant family; a deeper "family money vs your money" mechanic is a future refinement, not
   blocking. A richer partner beat + an explicit branch-fork beat can be added in OB-5 polish.
-- [x] **OB-5 REPLICATE — COMPLETE (9/9), last PR #59 in flight (CI).** Full Epoch-0 authored
+- [x] **OB-5 REPLICATE — COMPLETE + MERGED (9/9 on main).** Full Epoch-0 authored + merged
   for every origin: ireland (#52), bavaria + south_africa (#53), west_coast (#54), east_coast
   (#55), canada (#56), american_midwest (#57), american_south (#58), baghdad/caliphate (#59 —
   the only non-1885 slice, era-correct Abbasid 762 CE). #53 review fold: all authored callings
@@ -95,8 +95,18 @@ OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git histor
   start:1000, max:1e12), existing origins events use deltas up to 200,000 — +100/200/500 nudges
   are CORRECT, not "single-digit"; (2) {family_name} → bare "{surname}s" (no "the"), a real
   distinct token; (3) {given_name} IS a resolved identity token, {member} is NOT real.
-- [ ] [WAIT] **OB-6 verify** — e2e + component + textQuality + harness audit 0 findings;
-  live-verify each origin; gate green; remove dead PL-3 paths.
+- [ ] [WAIT] **OB-6 verify** — IN FLIGHT (PR pending CI). Done so far: OB-6 acceptance test
+  (ob6-all-origins) pins all 9 origins (found leak-free, has_authored_epoch0 stamped, own birth
+  beat fires, 6-archetype calling) — the harness audit at 0 findings for the whole Epoch-0
+  surface; full gate green (526 unit, 75 browser, 7 e2e, typecheck 0, biome 0 err). LIVE-VERIFY
+  caught + fixed a real bug: epoch0 beats displayed the beat's nominal 1885 year instead of the
+  run clock — a caliphate (762) run showed 1885 at the first generic beat. Fixed in EventCard
+  (shows state.year via a prop) + 2 browser tests; re-verified live (baghdad 762 → next beat 769).
+  Stale PL-3 "consciousness" comment in TitleScreen replaced. REMAINING: confirm CI/post-merge
+  green; note the generic ev_birth_generic/ev_birth_calling beats are now dead-fallback (no place
+  uses them since all 9 are authored) — KEEP as the safety net for any future place added without
+  an Epoch-0 (they self-exclude via has_authored_epoch0), documented not deleted. After merge,
+  OB-6 + the whole ONBOARDING REWORK milestone is COMPLETE.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via

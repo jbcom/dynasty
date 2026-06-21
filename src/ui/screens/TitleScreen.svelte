@@ -2,9 +2,10 @@
 interface Props {
   hasSave: boolean;
   /**
-   * Begin a new line. There are NO upfront inputs (PL-3): the seed is authored by the
-   * first "consciousness" choices and the surname is bestowed diegetically — all in the
-   * onboarding flow, not here. The landing page is purely New Game / Load / Settings.
+   * Begin a new line. There are NO upfront inputs: the run seed is a hidden random draw
+   * (world flavor only), and the player chooses everything diegetically in the onboarding
+   * flow — location, then the bestowed family name, then the authored Epoch-0 story (birth,
+   * gender, given name, the calling). The landing page is purely New Game / Load / Settings.
    */
   onNewGame: () => void;
   onContinue: () => void;
