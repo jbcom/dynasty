@@ -8,10 +8,11 @@
 import { GoogleGenAI } from "@google/genai";
 import { buildCritiquePrompt } from "./prompt.mjs";
 
-// gemini-3.5-flash for bulk generation (current, available on this key);
-// gemini-pro-latest for the self-critique/hard-reasoning pass.
+// gemini-3.5-flash handles BOTH bulk generation AND the review/self-critique pass
+// (it's the current model available on this key; 3.5-pro / 3-*-preview 404 here).
+// The critique pass runs it with thinking enabled for extra rigor (see critiqueEvent).
 const FLASH = "gemini-3.5-flash"; // bulk generation
-const PRO = "gemini-pro-latest"; // self-critique / hard reasoning
+const PRO = "gemini-3.5-flash"; // self-critique / review (thinking on)
 
 let _ai = null;
 function ai() {

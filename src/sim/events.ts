@@ -84,11 +84,42 @@ export function eligibleEvents(content: Content, state: GameState): GameEvent[] 
   const era = content.eras[state.eraIndex];
   if (!era) return [];
   const pool = content.eventsByEra.get(era.id) ?? [];
-  const base = pool.filter(
+  const protoBase = pool.filter(
     (ev) => !alreadyConsumed(state, ev) && meetsRequires(state, ev.requires),
   );
-  const forward = base.filter((ev) => ev.year >= state.lastEventYear);
-  return forward.length > 0 ? forward : base;
+  // World-events are AMBIENT PUNCTUATION: only the few most-TIMELY ones (near the
+  // run's current year) are eligible, not every backdrop event in the era. This
+  // keeps them occasional context the family lives through "now" rather than a
+  // flood that swamps the protagonist arc + stalls era progression (FD-2.3). They
+  // are budget-neutral (applyChoice doesn't advance the era on them) + low-weight.
+  const WORLD_WINDOW = 12; // in-world years ahead the family can "see"
+  const WORLD_CAP = 4; // at most this many backdrop events offered at once
+  const worldEligible = (content.worldEvents ?? [])
+    .filter(
+      (ev) =>
+        !ownedByOtherDynasty(state, ev) &&
+        !alreadyConsumed(state, ev) &&
+        meetsRequires(state, ev.requires) &&
+        ev.year >= state.lastEventYear &&
+        ev.year <= state.year + WORLD_WINDOW,
+    )
+    .sort((a, b) => a.year - b.year || a.id.localeCompare(b.id))
+    .slice(0, WORLD_CAP);
+  // Forward-floor applies to the protagonist beats (the spine); fall back to the
+  // unfloored proto pool if nothing remains so the era still progresses.
+  const protoForward = protoBase.filter((ev) => ev.year >= state.lastEventYear);
+  const proto = protoForward.length > 0 ? protoForward : protoBase;
+  return [...proto, ...worldEligible];
+}
+
+/**
+ * NO-LEAK GATE (user invariant — start a Kennedy, STAY a Kennedy): a world-event
+ * tagged `dynasty:<id>` belongs to that dynasty's private arc and is excluded when
+ * a DIFFERENT dynasty is active. Untagged (shared backdrop) events pass for all.
+ */
+function ownedByOtherDynasty(state: GameState, ev: GameEvent): boolean {
+  const owner = ev.tags.find((t) => t.startsWith("dynasty:"))?.slice("dynasty:".length);
+  return owner !== undefined && owner !== state.dynasty;
 }
 
 /**

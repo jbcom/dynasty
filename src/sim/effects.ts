@@ -98,6 +98,11 @@ export function applyChoice(
     }
   }
 
+  // World-events (FD-2.3) are AMBIENT BACKDROP: clock- and budget-neutral. They do
+  // not advance the protagonist's time floor (a future-window backdrop must not
+  // push lastEventYear past the era, which the era rollover would then reset
+  // backward) nor consume the era budget — the family's life beats drive the clock.
+  const isWorldEvent = event.era === "__world__";
   const resolved: GameState = {
     ...state,
     meters,
@@ -109,8 +114,9 @@ export function applyChoice(
     ledger: [...state.ledger, ...newLedger],
     history: [...state.history, { eventId: event.id, choiceId, year: event.year }],
     firedEvents,
-    // Time floor advances to this event's year (never moves backward).
-    lastEventYear: Math.max(state.lastEventYear, event.year),
+    // Time floor advances to a protagonist beat's year (never backward); a world
+    // event leaves the floor where the family's own arc has reached.
+    lastEventYear: isWorldEvent ? state.lastEventYear : Math.max(state.lastEventYear, event.year),
   };
 
   // 7. Optional TIMELINE HOP — a choice can compress the arc forward (perceived,
@@ -122,7 +128,9 @@ export function applyChoice(
   if (immediateEnd) {
     return { state: { ...hopped, end: immediateEnd }, newLedger };
   }
-  let advanced = advanceTimeline(content, hopped);
+  // World-events are budget-neutral (see isWorldEvent above): they do NOT advance
+  // the era clock/budget, so the family's ~12-16 life beats per era stay the spine.
+  let advanced = isWorldEvent ? hopped : advanceTimeline(content, hopped);
 
   // 8b. LINKING PROTOCOL: broadcast flags from the parallel world timelines whose
   // events have come to pass as the year advanced — done in the pure transition so

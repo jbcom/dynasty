@@ -80,7 +80,11 @@ function projectOne(tl: WorldTimeline, e: WorldEvent): GameEvent {
     // can exclude it from OTHER houses' runs (no leaking between families).
     tags: ["world", tl.scope, ...(ownerDynasty ? [`dynasty:${ownerDynasty}`] : []), ...e.tags],
     requires: e.requires ?? { flags: [], notFlags: [], meters: {}, personality: {} },
-    weight: 10,
+    // World events are AMBIENT BACKDROP the family occasionally lives through —
+    // they must NOT swamp the protagonist's life beats (which sit at weight ~10).
+    // A low base weight keeps the family arc the spine and world events the
+    // punctuation; the chaos field can still surface a salient one.
+    weight: 1,
     // A non-default-branch variant is likelier (×3) when that branch is active —
     // mirrors how the linking protocol only applied a branch's own variants.
     ...(branch !== "default"
