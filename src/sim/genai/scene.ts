@@ -42,9 +42,10 @@ export function sceneSystemInstruction(): string {
     "   wave they founded. No 'you overhear the year', no 'you are an Irish immigrant in 1885'.",
     "4. NEVER write a real person's name (no Trump/Musk/Kennedy/etc.). The line is referenced ONLY via",
     "   the tokens {surname} {given_name} {full_name} {family_name}. Others are roles (your mother, a rival).",
-    "5. Beats are ALTERNATIVES the reader picks between (ink weave) — each a short framing line + a",
-    "   `choice` with a `motivatorShift` over the 8 axes (wealth/politics/worldview/power/tradition/",
-    "   honor/lineage/reach, each a small +/- integer) and any `setFlags`. Gather:true (rejoin flow).",
+    "5. Beats are ALTERNATIVES the reader picks between (ink weave). Each beat is",
+    '   { prose: ["one framing sentence"], choice: { text, motivatorShift, setFlags, gather:true } }.',
+    "   The beat's framing goes in `prose` (an ARRAY of strings), NOT a `line` field. motivatorShift is",
+    "   over the 8 axes (wealth/politics/worldview/power/tradition/honor/lineage/reach), small +/- ints.",
     "6. A scene flagged for a decision carries a `decision` (tier major|secondary, a prompt, 2-3 options",
     "   each with text + motivatorShift + setFlags). The major decision is the act's pivotal fate-fork.",
     "7. Output STRICT JSON: a single object { acts:[ActChapter], scenes:[Scene] } matching the shape.",
@@ -57,7 +58,7 @@ const MOTIVATOR_AXES = "wealth, politics, worldview, power, tradition, honor, li
 function slotBlock(slot: SceneSlot, nextId: string | null): string {
   const lines = [
     `  - id "${slot.id}", sense "${slot.sense}": ${slot.intent}`,
-    `    prose: 2-4 paragraphs. beats: 2 alternatives (framing line + choice w/ motivatorShift+setFlags).`,
+    `    prose: 2-4 paragraphs. beats: 2 alternatives, each { prose:["framing sentence"], choice:{text,motivatorShift,setFlags,gather:true} }.`,
   ];
   if (slot.decision) {
     lines.push(
@@ -95,6 +96,34 @@ export function buildScenePrompt(req: SceneRequest): string {
   ].join("\n");
 }
 
+/**
+ * Coerce common, harmless model drift into the canonical shape BEFORE schema validation:
+ *   - a beat's framing as `line: "…"` (a string) → `prose: ["…"]` (the array the schema wants).
+ *   - a beat's framing as `prose: "…"` (a bare string) → `prose: ["…"]`.
+ * Anything it can't normalize is left for the schema to reject. Pure; clones, never mutates input.
+ */
+function normalizeSceneFile(raw: unknown): unknown {
+  if (!raw || typeof raw !== "object") return raw;
+  const obj = raw as { scenes?: unknown[]; [k: string]: unknown };
+  if (!Array.isArray(obj.scenes)) return raw;
+  const fixBeat = (b: unknown): unknown => {
+    if (!b || typeof b !== "object") return b;
+    const beat = { ...(b as Record<string, unknown>) };
+    if (beat.prose === undefined && typeof beat.line === "string") beat.prose = [beat.line];
+    if (typeof beat.prose === "string") beat.prose = [beat.prose];
+    delete beat.line;
+    return beat;
+  };
+  const scenes = obj.scenes.map((s) => {
+    if (!s || typeof s !== "object") return s;
+    const scene = { ...(s as Record<string, unknown>) };
+    if (Array.isArray(scene.beats)) scene.beats = scene.beats.map(fixBeat);
+    if (typeof scene.prose === "string") scene.prose = [scene.prose];
+    return scene;
+  });
+  return { ...obj, scenes };
+}
+
 /** Validate a generated act file through SagaFileSchema + the leak floor. Returns the parsed file or reasons. */
 export function validateSceneFile(
   raw: unknown,
@@ -102,7 +131,7 @@ export function validateSceneFile(
 ): { ok: true; file: { acts: unknown[]; scenes: unknown[] } } | { ok: false; reasons: string[] } {
   const reasons: string[] = [];
   if (LEAK.test(JSON.stringify(raw))) reasons.push("preset-person leak");
-  const parsed = SagaFileSchema.safeParse(raw);
+  const parsed = SagaFileSchema.safeParse(normalizeSceneFile(raw));
   if (!parsed.success) {
     reasons.push(`schema: ${parsed.error.issues.map((i) => i.message).join("; ")}`);
     return { ok: false, reasons };

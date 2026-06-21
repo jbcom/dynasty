@@ -98,6 +98,20 @@ describe("genai scene mode", () => {
     expect(out.ok).toBe(false);
   });
 
+  it("normalizes model drift: a beat's `line` string coerces to prose[]", () => {
+    const drifted = validActFile();
+    // Simulate the model emitting `line` instead of `prose` on the beat.
+    const beat = drifted.scenes[0]!.beats[0] as Record<string, unknown>;
+    delete beat.prose;
+    beat.line = "You learn the ledger before your letters.";
+    const out = validateSceneFile(drifted, req);
+    expect(out.ok).toBe(true);
+    if (out.ok) {
+      const scene = out.file.scenes[0] as { beats: Array<{ prose: string[] }> };
+      expect(scene.beats[0]?.prose).toEqual(["You learn the ledger before your letters."]);
+    }
+  });
+
   it("merge dedups by id (regenerated act replaces the old)", () => {
     const first = validActFile();
     const merged1 = mergeSceneFile({ acts: [], scenes: [] }, first) as {
