@@ -202,32 +202,48 @@ function exemplarPrompt(noun: string, file: string, _content: Content, req: Expa
   ].join("\n");
 }
 
+/** How many times the scene mode regenerates an act when validation fails — the model's schema
+ *  drift (prose as object, beats as map, etc.) is sporadic, so a couple of retries usually lands a
+ *  valid act without a human in the loop. Keeps a full-lattice sweep from leaving holes on flukes. */
+const SCENE_GEN_ATTEMPTS = 3;
+
 /** The `scene` mode authors a whole act of the NOVEL — a single schema-validated object, not an array. */
 async function expandScene(req: ExpandRequest, generate: GenerateFn): Promise<ExpandResult> {
   if (!req.scene) throw new Error("scene mode requires a `scene` cell+tier target");
   const sceneReq: SceneRequest = req.scene;
-  const text = await generate(sceneSystemInstruction(), buildScenePrompt(sceneReq));
-  const raw = parseGeneratedObject(text);
-  const result =
-    raw === null
-      ? { ok: false as const, reasons: ["unparseable object"] }
-      : validateSceneFile(raw, sceneReq);
-  if (!result.ok) {
-    return {
-      type: "scene",
-      accepted: [],
-      rejected: [{ raw, reasons: result.reasons }],
-      canonicalFile: sceneCanonicalFile(sceneReq),
-      merge: (existing) => existing ?? { acts: [], scenes: [] },
-    };
+  let lastRaw: unknown = null;
+  let lastReasons: string[] = ["no attempt"];
+  for (let attempt = 0; attempt < SCENE_GEN_ATTEMPTS; attempt++) {
+    const text = await generate(sceneSystemInstruction(), buildScenePrompt(sceneReq));
+    const raw = parseGeneratedObject(text);
+    const result =
+      raw === null
+        ? { ok: false as const, reasons: ["unparseable object"] }
+        : validateSceneFile(raw, sceneReq);
+    if (result.ok) {
+      return {
+        type: "scene",
+        // The accepted unit is the validated act file (acts + scenes); the runner writes the merge.
+        accepted: [result.file],
+        rejected: [],
+        canonicalFile: sceneCanonicalFile(sceneReq),
+        merge: (existing) => mergeSceneFile(existing, result.file),
+      };
+    }
+    lastRaw = raw;
+    lastReasons = result.reasons;
   }
   return {
     type: "scene",
-    // The accepted unit is the validated act file (acts + scenes); the runner writes the merge.
-    accepted: [result.file],
-    rejected: [],
+    accepted: [],
+    rejected: [
+      {
+        raw: lastRaw,
+        reasons: [`after ${SCENE_GEN_ATTEMPTS} attempts: ${lastReasons.join("; ")}`],
+      },
+    ],
     canonicalFile: sceneCanonicalFile(sceneReq),
-    merge: (existing) => mergeSceneFile(existing, result.file),
+    merge: (existing) => existing ?? { acts: [], scenes: [] },
   };
 }
 
