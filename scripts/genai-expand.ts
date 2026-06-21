@@ -14,7 +14,8 @@
  *
  * Never shipped in the game bundle — a dev script (vite-node).
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
 import { loadContent } from "../src/data/loadContent";
 import { geminiGenerate } from "../src/sim/genai/client";
 import { type ExpandRequest, EXPAND_TYPES, type ExpandType, expand } from "../src/sim/genai/expand";
@@ -72,6 +73,7 @@ async function main() {
     }
   })();
   const merged = result.merge(existing);
+  mkdirSync(dirname(result.canonicalFile), { recursive: true });
   writeFileSync(result.canonicalFile, `${JSON.stringify(merged, null, 2)}\n`);
   console.error(`\nmerged ${result.accepted.length} into ${result.canonicalFile}`);
   console.error("NOW: run `pnpm test` (harness audit must stay 0 findings) before committing.");

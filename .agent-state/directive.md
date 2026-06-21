@@ -174,7 +174,7 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 ### SS-11 GenAI FULL RETOOL (expand modes)
 - [x] SS-11 uniform genai:expand --type per content type, writes canonical JSON (no .gen.json), harness-gated, register-aware; stub tests
 ### SS-12 GenAI WRITES THE STORIES
-- [ ] SS-12 flesh every scaffolded act/class-track/wave via SS-11; cull weak; harness 0-findings + textQuality clean over ALL generated; no empty scaffolds
+- [x] SS-12 flesh every scaffolded act/class-track/wave via SS-11; cull weak; harness 0-findings + textQuality clean over ALL generated; no empty scaffolds
 ### SS-13 Read-model + bridge
 - [ ] SS-13 bridge exposes macro-act/rung/motivators/act-chapter/glimpses; pure; tests
 ### SS-14 UI novel presentation

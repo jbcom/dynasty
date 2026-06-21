@@ -1,0 +1,434 @@
+{
+  "era": "origins",
+  "events": [
+    {
+      "id": "ev_gen_canton_smuggle",
+      "era": "origins",
+      "year": 1885,
+      "title": "The Fragrant Harbor's Shadow",
+      "scene": "The humid air of Canton hangs heavy with the scent of river silt and dried fish. Below the clamor of the waterfront, an opportunity arises, whispered among the sampan rowers: illicit goods moving under the nose of the Qing authorities. It promises swift fortune, but at great risk to {family_name}.",
+      "researchNote": "Opium smuggling and other illicit trades were common in Canton in the late 19th century, especially with foreign powers.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "chinese",
+      "tags": [
+        "trope:bootlegger-to-legitimacy"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_shadow",
+          "text": "Embrace the shadow trade. A quick fortune is a foundation for anything.",
+          "effects": {
+            "money": 30,
+            "heat": 15,
+            "reputation": -5
+          },
+          "personality": {
+            "wealth": 10,
+            "power": 5,
+            "honor": -5
+          },
+          "setFlags": [
+            "shadow_trade_start"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Your coffers swell, but so too do the whispers of your dealings. The family name gains a certain notoriety.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "stay_legit",
+          "text": "Refuse the illicit path. True wealth is built on honest enterprise, however slow.",
+          "effects": {
+            "money": 5,
+            "reputation": 5
+          },
+          "personality": {
+            "honor": 10,
+            "tradition": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Progress is slow, but your conscience is clear. The {family_name} name retains its integrity, for now.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_rice_paddy_rent",
+      "era": "origins",
+      "year": 1885,
+      "title": "The Landlord's Due",
+      "scene": "Season after season, your family's hands are rough with the soil of the Pearl River Delta, cultivating rice on land that is not your own. The landlord's agent, a portly man with a cruel smile, demands the harvest's lion's share, leaving {surname} and your kin with just enough to survive. This year, his demands are steeper.",
+      "researchNote": "Tenant farming was the dominant form of agriculture in Guangdong, with landlords holding significant power over rural families.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "chinese",
+      "tags": [
+        "trope:tenant-and-landlord"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "confront_agent",
+          "text": "Organize the other tenants. A united front against the agent's greed may force a fairer deal.",
+          "effects": {
+            "money": -5,
+            "loyalty": 10,
+            "heat": 5
+          },
+          "personality": {
+            "power": 10,
+            "worldview": 5
+          },
+          "setFlags": [
+            "tenant_revolt_attempt"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Your bold move sparks defiance, but also draws the landlord's ire. The future is uncertain, but hope sparks among the tenants.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "save_for_land",
+          "text": "Endure the hardship. Scrape together every coin to buy a plot of your own, freeing {family_name} from this bondage.",
+          "effects": {
+            "money": -10,
+            "loyalty": -5,
+            "reputation": 5
+          },
+          "personality": {
+            "wealth": 10,
+            "lineage": 5,
+            "tradition": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The family endures another lean year, but the dream of owning land shines brighter. Others see your long-term vision.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "seek_new_soil",
+          "text": "Abandon these fields. There must be better opportunity in the cities, or even across the seas.",
+          "effects": {
+            "money": 10,
+            "loyalty": -10,
+            "health": -5
+          },
+          "personality": {
+            "reach": 10,
+            "worldview": 5
+          },
+          "setFlags": [
+            "left_the_land"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You leave behind the familiar, seeking a fresh start. The family is uprooted, but the potential for growth is immense.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_gold_mountain_letter",
+      "era": "origins",
+      "year": 1886,
+      "title": "A Letter from Gold Mountain",
+      "scene": "A crisp, foreign-smelling letter arrives at your humble home in Guangdong, bearing strange stamps and even stranger tales. It's from a distant relative who journeyed to 'Gold Mountain' (California) years ago, claiming modest success and offering passage money for one member of the {family_name} line to join them. The decision weighs heavily on {full_name}.",
+      "researchNote": "Mass emigration from Guangdong to places like California (Gold Mountain) was a defining feature of the late 19th century, driven by economic hardship and the Gold Rush.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "chinese",
+      "tags": [
+        "trope:letter-from-away",
+        "trope:exile-return"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "send_pioneer",
+          "text": "Send a promising young member of the family across the ocean. Let them build a foothold for our future.",
+          "effects": {
+            "money": -10,
+            "reputation": 5,
+            "loyalty": -5
+          },
+          "personality": {
+            "reach": 15,
+            "lineage": 5
+          },
+          "setFlags": [
+            "sent_pioneer_abroad"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "A son or daughter departs, carrying the family's hopes and fears. Their journey will define a new branch of the {family_name} legacy.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "keep_family_together",
+          "text": "Keep the family united here in Guangdong. We will rise or fall together, on our own soil.",
+          "effects": {
+            "loyalty": 10,
+            "money": 5
+          },
+          "personality": {
+            "tradition": 10,
+            "lineage": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The family remains whole, finding strength in unity amidst the challenges of Guangdong. Your future is tied to this land.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_temple_donation",
+      "era": "origins",
+      "year": 1885,
+      "title": "The Temple's Plea",
+      "scene": "The local Mazu temple, the spiritual heart of the community and patron of fishermen and seafarers, is falling into disrepair. The elders approach {given_name} {surname} with a plea for a significant donation to restore its fading grandeur. Their eyes hold the weight of generations, and the community's respect hangs in the balance.",
+      "researchNote": "Temples, particularly Mazu temples, were central to community life and social standing in coastal Guangdong, acting as social welfare, meeting places, and spiritual centers.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "chinese",
+      "tags": [
+        "trope:faith-and-community"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "generous_patron",
+          "text": "Offer a generous sum. Investing in the temple is investing in the community and the {family_name} name.",
+          "effects": {
+            "money": -15,
+            "reputation": 15,
+            "loyalty": 10
+          },
+          "personality": {
+            "worldview": 10,
+            "honor": 5,
+            "tradition": 5
+          },
+          "setFlags": [
+            "temple_patronage"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Your generosity earns the deep respect of the community. The {family_name} name becomes synonymous with local virtue and spiritual devotion.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "modest_contribution",
+          "text": "Contribute a modest amount. Charity is good, but business comes first.",
+          "effects": {
+            "money": -5,
+            "reputation": 5
+          },
+          "personality": {
+            "wealth": 5,
+            "tradition": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Your contribution is noted, but the true gratitude is reserved for those who give more freely. Your pragmatism is also noted.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "decline_donation",
+          "text": "Politely decline. Such funds are better used for the family's direct advancement.",
+          "effects": {
+            "reputation": -10,
+            "loyalty": -5
+          },
+          "personality": {
+            "wealth": 10,
+            "power": 5,
+            "worldview": -5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The elders' faces fall. While your family's finances are secure, the community regards {surname} with a new, colder eye.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_guild_invitation",
+      "era": "origins",
+      "year": 1887,
+      "title": "The Guild's Grasp",
+      "scene": "The bustling markets of Canton are controlled by powerful merchant guilds, each holding sway over specific trades. Your burgeoning enterprise has attracted the attention of the Salt Merchants' Guild, whose stern-faced representatives offer {given_name} an 'invitation' to join their ranks. It is less an invitation and more a demand for allegiance and a share of your profits, in exchange for their 'protection' and access to their networks.",
+      "researchNote": "Merchant guilds were extremely powerful in late Qing Canton, acting as economic regulators, social organizations, and often enforcing monopolies.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "chinese",
+      "tags": [
+        "trope:oligarch"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "join_guild",
+          "text": "Join the Salt Merchants' Guild. Bend the knee to gain access to their power and protection.",
+          "effects": {
+            "money": -10,
+            "power": 10,
+            "reputation": 5,
+            "heat": -5
+          },
+          "personality": {
+            "power": 10,
+            "reach": 5,
+            "honor": -5
+          },
+          "setFlags": [
+            "joined_salt_guild"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "You become part of the guild's vast network. Your profits diminish, but your enterprise is secure and connected to the city's true masters.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "defy_guild",
+          "text": "Refuse their 'invitation.' Operate independently and challenge their monopoly, even if it means struggle.",
+          "effects": {
+            "money": 10,
+            "power": -10,
+            "heat": 15
+          },
+          "personality": {
+            "honor": 10,
+            "worldview": 5,
+            "power": -5
+          },
+          "setFlags": [
+            "defied_salt_guild"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Your defiance makes {family_name} a target. The road ahead is perilous, but you operate without strings attached. The people whisper of your courage.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    }
+  ]
+}

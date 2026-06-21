@@ -102,9 +102,30 @@ const MODES: Record<ExpandType, ExpandMode> = {
         content.tropes,
         content.places,
       ),
-    validate: (content, req, raws) =>
-      validateBatch(raws, genContext(content, req.target?.era ?? "origins")),
-    merge: appendByKey("events"),
+    validate: (content, req, raws) => {
+      // Clamp each generated event's year into its era's bounds before validating — the model
+      // occasionally drifts a year past the edge (e.g. 1884 for an 1885-start era).
+      const era = content.eras.find((e) => e.id === (req.target?.era ?? "origins"));
+      const clamped = raws.map((r) => {
+        if (r && typeof r === "object" && era) {
+          const ev = r as { year?: number };
+          if (typeof ev.year === "number") {
+            ev.year = Math.max(era.yearStart, Math.min(era.yearEnd, ev.year));
+          }
+        }
+        return r;
+      });
+      return validateBatch(clamped, genContext(content, req.target?.era ?? "origins"));
+    },
+    // events files require a top-level `era`; ensure it's set on a fresh file.
+    merge: (existing, accepted) => {
+      const base = (existing && typeof existing === "object" ? existing : {}) as Record<
+        string,
+        unknown
+      >;
+      const withEra = base.era ? base : { era: "origins", ...base };
+      return appendByKey("events")(withEra, accepted);
+    },
   },
   // The narrative-data modes share the gate-validated, append-by-id shape. Their prompts reuse the
   // event system instruction's invariants (no preset-person leaks, strict key sets) — the runner

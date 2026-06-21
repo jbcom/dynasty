@@ -1,0 +1,313 @@
+{
+  "era": "origins",
+  "events": [
+    {
+      "id": "ev_gen_pale_rent_dilemma",
+      "era": "origins",
+      "year": 1885,
+      "title": "The Landlord's Grips",
+      "scene": "The landlord's agent, a grim man named Vasily, stands at your door, his breath misting in the cold air. The meager harvest has made rent impossible, and the scent of lamp-oil from your small home seems too precious to waste. Your family, the {surname}s, huddle, listening.",
+      "researchNote": "Jewish families in the Pale often rented land and homes from gentiles, facing precarious tenancy.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "ashkenazi_jewish",
+      "tags": [
+        "trope:tenant-and-landlord",
+        "trope:letter-from-away",
+        "trope:exile-return"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "choice_pale_negotiate_stay",
+          "text": "Bargain with Vasily, promising what little you have and hoping for leniency, trusting the community's support.",
+          "effects": {
+            "money": -5,
+            "loyalty": 3,
+            "heat": -2
+          },
+          "personality": {
+            "tradition": 2,
+            "lineage": 1
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Vasily takes what he can, grumbling. The community offers what little they have, tightening your bonds but leaving you poorer.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "choice_pale_send_away",
+          "text": "Use the saved passage money, sent by a distant cousin, to send a younger {family_name} member to America.",
+          "effects": {
+            "money": -10,
+            "loyalty": -3
+          },
+          "personality": {
+            "reach": 3,
+            "wealth": 2,
+            "tradition": -1
+          },
+          "setFlags": [
+            "family_member_emigrated"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "A tearful farewell. The hope of a better life, but the pain of a severed family bond, hangs heavy in the air.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_shtetl_faith_call",
+      "era": "origins",
+      "year": 1886,
+      "title": "The Rabbi's Plea",
+      "scene": "The air in the Beit Midrash is thick with the smell of old books and lamp-oil, the murmur of study a constant hum. Rabbi Mendel, his face etched with worry, speaks of growing dangers and the need for the community, including the {surname}s, to stand together.",
+      "researchNote": "The synagogue and religious leaders were central to Jewish life and survival in the Pale, especially amidst rising antisemitism.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "ashkenazi_jewish",
+      "tags": [
+        "trope:faith-and-community",
+        "trope:centrist-to-zealot"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "choice_pale_support_rabbi",
+          "text": "Pledge your family's full support to Rabbi Mendel's call for traditional communal solidarity and charity.",
+          "effects": {
+            "reputation": 5,
+            "loyalty": 4
+          },
+          "personality": {
+            "tradition": 3,
+            "worldview": 2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Your family earns deep respect within the shtetl, becoming pillars of the established order, but perhaps too resistant to change.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "choice_pale_advocate_action",
+          "text": "Argue for a more proactive, even political, response to the threats, hinting at new movements beyond the shtetl.",
+          "effects": {
+            "reputation": 2,
+            "loyalty": -2,
+            "heat": 3
+          },
+          "personality": {
+            "politics": 3,
+            "worldview": 2,
+            "tradition": -1
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Some are inspired by your resolve, others are wary of unsettling the delicate peace. The {family_name} name becomes associated with outspokenness.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_illicit_vodka",
+      "era": "origins",
+      "year": 1887,
+      "title": "The Monopolka's Shadow",
+      "scene": "The Imperial government's vodka monopoly, the 'Monopolka', makes legal spirits expensive and scarce. A hushed conversation after dark, by the faint glow of a smuggled lantern, offers the {full_name} family a chance to earn by illicitly distilling and distributing alcohol.",
+      "researchNote": "The state alcohol monopoly (monopolka) in the Russian Empire was a major source of revenue and a target for illegal production and trade.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "ashkenazi_jewish",
+      "tags": [
+        "trope:bootlegger-to-legitimacy",
+        "trope:oligarch"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "choice_pale_embrace_bootleg",
+          "text": "Take the risk. The profits are high, but so is the danger of discovery by the Tsar's agents.",
+          "effects": {
+            "money": 15,
+            "heat": 8,
+            "reputation": -3
+          },
+          "personality": {
+            "wealth": 4,
+            "power": 2,
+            "honor": -2
+          },
+          "setFlags": [
+            "illicit_alcohol_trade"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "A steady, if dangerous, flow of silver begins. The {family_name} name gains a shadowy influence, whispered in certain corners.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "choice_pale_remain_legit",
+          "text": "Refuse the offer. Poverty is harsh, but a clear conscience and good name are invaluable.",
+          "effects": {
+            "loyalty": 3,
+            "reputation": 4,
+            "money": -3
+          },
+          "personality": {
+            "honor": 3,
+            "tradition": 2,
+            "wealth": -1
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Your family remains above reproach, respected by the honest folk, but the gnawing hunger for more lingers.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_new_knowledge_quest",
+      "era": "origins",
+      "year": 1889,
+      "title": "Beyond the Shtetl Walls",
+      "scene": "The world beyond the Pale is changing rapidly. Whispers of new sciences, burgeoning industries, and secular universities reach even the remote shtetl. The cold off the road hints at a wider world, and {given_name}, or another bright {family_name} child, shows an uncommon curiosity.",
+      "researchNote": "The late 19th century saw increasing secularization and desire for modern education among some Jewish youth in the Pale.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "extrapolated",
+      "place": "ashkenazi_jewish",
+      "tags": [
+        "trope:techno-frontier",
+        "trope:frontier-capital-origin"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "choice_pale_traditional_study",
+          "text": "Focus on traditional Torah study, ensuring the child becomes a scholar and upholder of religious law.",
+          "effects": {
+            "reputation": 3,
+            "loyalty": 2
+          },
+          "personality": {
+            "worldview": 3,
+            "tradition": 3
+          },
+          "setFlags": [
+            "child_became_rabbinical_scholar"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The child delves deep into ancient texts, bringing honor to the {family_name} name within the religious community.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "choice_pale_secular_pursuit",
+          "text": "Seek out secular education or a modern apprenticeship, perhaps in a larger town, for a child with a keen mind.",
+          "effects": {
+            "money": 5,
+            "power": 3,
+            "reputation": -2
+          },
+          "personality": {
+            "wealth": 3,
+            "politics": 2,
+            "reach": 2,
+            "tradition": -2
+          },
+          "setFlags": [
+            "child_pursued_secular_education"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "A new path opens, leading to potential influence and wealth in the wider world, but with some raised eyebrows in the shtetl.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    }
+  ]
+}
