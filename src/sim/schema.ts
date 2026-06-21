@@ -235,6 +235,13 @@ export const WorldEventSchema = z.object({
   setFlags: z.array(z.string()).default([]),
   /** Optional gate (on the shared flag space) for branch selection. */
   requires: RequiresSchema.optional(),
+  /**
+   * The alternate-history BRANCH this event belongs to (CP-R-ARCH-2). After the
+   * branch-timeline collapse, one file per scope holds all world-states; each
+   * non-default event carries its branch so selection includes it only when the
+   * run's branch matches. Absent/"default" = our-history, shown on every branch.
+   */
+  branch: z.string().optional(),
 });
 export type WorldEvent = z.infer<typeof WorldEventSchema>;
 

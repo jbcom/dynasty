@@ -20,28 +20,55 @@ export interface NewsItem {
   body: string;
 }
 
+/** A world event's effective branch: its own (CP-R-ARCH-2), else its file's, else default. */
+function eventBranch(ev: WorldEvent, fileBranch: string | undefined): string {
+  return ev.branch ?? fileBranch ?? "default";
+}
+
 /**
- * Select the active timeline variant per scope for the run's branch (AH3).
- * For each scope, a branch-specific variant (e.g. usa.nazi.json, branch:"nazi")
- * SUPPRESSES the default variant when that branch is active; scopes without a
- * branch variant fall back to their default. So a Nazi run reads usa.nazi +
- * world.nazi + the unchanged science/musk defaults, never the default usa.
+ * Select the active world-events per scope for the run's branch (AH3 / CP-R-ARCH-2).
+ *
+ * REPLACE semantics (unchanged behavior): a branch is a COMPLETE alternate history,
+ * so when a scope has any event for the run's branch, that branch's events REPLACE
+ * the scope's default (our-history) events; scopes with no branch events fall back to
+ * default. This is the event-level form of the former file-level swap, so it stays
+ * correct both after the branch-timeline collapse (one file per scope, events tagged
+ * with `branch`) AND during the migration (separate `branch:"…"` variant files): an
+ * event's effective branch is its own field, else its file's `branch`, else "default".
+ * Per scope the result is one merged timeline carrying just the active world-state.
  */
 export function timelinesForBranch(
   timelines: readonly WorldTimeline[],
   branch: BranchKey,
 ): WorldTimeline[] {
-  const byScope = new Map<string, WorldTimeline>();
+  // Group every event by scope, partitioned into this-branch vs default.
+  const scopes = new Map<string, { branchEvents: WorldEvent[]; defaultEvents: WorldEvent[]; label: string }>();
   for (const t of timelines) {
-    const tb = t.branch ?? "default";
-    if (tb !== "default" && tb !== branch) continue; // a different branch's variant
-    const existing = byScope.get(t.scope);
-    // Prefer the branch-specific variant over the default for the same scope.
-    if (!existing || (tb === branch && (existing.branch ?? "default") === "default")) {
-      byScope.set(t.scope, t);
+    const entry = scopes.get(t.scope) ?? { branchEvents: [], defaultEvents: [], label: t.label };
+    for (const e of t.events) {
+      const eb = eventBranch(e, t.branch);
+      if (eb === branch && branch !== "default") entry.branchEvents.push(e);
+      else if (eb === "default") entry.defaultEvents.push(e);
+      // events of OTHER branches are dropped for this run
     }
+    scopes.set(t.scope, entry);
   }
-  return [...byScope.values()];
+  const out: WorldTimeline[] = [];
+  for (const [scope, { branchEvents, defaultEvents, label }] of scopes) {
+    // Branch events REPLACE the default for that scope (complete alternate history).
+    const usingBranch = branchEvents.length > 0;
+    const events = usingBranch ? branchEvents : defaultEvents;
+    // Report which world-state this scope resolved to (the run's branch when its
+    // events were selected, else our-history) so the compiled read-model stays
+    // truthful even though the events are now merged from one file.
+    out.push({
+      scope: scope as WorldTimeline["scope"],
+      label,
+      branch: usingBranch ? branch : "default",
+      events,
+    });
+  }
+  return out;
 }
 
 /** Headlines from all timelines at or just before `year` (most recent first). */

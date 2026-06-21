@@ -65,18 +65,23 @@ describe("branch timeline selection (AH3)", () => {
   };
   const all = [usaDefault, usaNazi, science];
 
-  it("default branch uses the default variant and ignores branch-specific ones", () => {
+  it("default branch shows the default USA events, never a branch's (CP-R-ARCH-2 event-level)", () => {
     const sel = timelinesForBranch(all, "default");
-    expect(sel.find((t) => t.scope === "usa")?.label).toBe("USA");
+    const usa = sel.filter((t) => t.scope === "usa");
+    expect(usa).toHaveLength(1);
+    const ids = usa[0]?.events.map((e) => e.id) ?? [];
+    expect(ids).toContain("u_d"); // our-history event present
+    expect(ids).not.toContain("u_n"); // the Reich event suppressed
     expect(sel.find((t) => t.scope === "science")).toBeDefined();
-    expect(sel.some((t) => t.branch === "nazi")).toBe(false);
   });
 
-  it("nazi branch swaps in the nazi USA variant and suppresses the default", () => {
+  it("nazi branch REPLACES the default USA events with the Reich ones (event-level swap)", () => {
     const sel = timelinesForBranch(all, "nazi");
     const usa = sel.filter((t) => t.scope === "usa");
     expect(usa).toHaveLength(1);
-    expect(usa[0]?.label).toBe("USA (Reich)");
+    const ids = usa[0]?.events.map((e) => e.id) ?? [];
+    expect(ids).toContain("u_n"); // Reich event active
+    expect(ids).not.toContain("u_d"); // default suppressed (complete alternate history)
     // scopes without a branch variant still fall back to default
     expect(sel.find((t) => t.scope === "science")).toBeDefined();
   });
