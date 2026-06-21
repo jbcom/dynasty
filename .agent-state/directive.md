@@ -85,12 +85,15 @@ OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git histor
   blocking. A richer partner beat + an explicit branch-fork beat can be added in OB-5 polish.
 - [ ] [WAIT] **OB-5 REPLICATE** — full Epoch-0 per place × era. ONE PR in flight; do NOT stack
   dependent branches (caused a rebase-conflict mess once — author next slice as a fresh branch
-  off main only after the in-flight one merges). DONE (5/9): ireland (#52), bavaria +
-  south_africa (#53), west_coast (#54), east_coast (#55 — CI running). #53 review fold: all
-  authored callings offer ALL SIX archetypes (Star + Champion added); SA naming flag fixed.
-  REMAINING (after #55 merges): canada, american_midwest, american_south, baghdad/caliphate.
-  NEXT-AUTHOR NOTES: canada (scots_irish, "pine resin / river ice / northern dawn"; existing
-  events: northern-frontier + two-nations-one-house → bicultural frontier); american_midwest
+  off main only after the in-flight one merges). DONE (6/9): ireland (#52), bavaria +
+  south_africa (#53), west_coast (#54), east_coast (#55), canada (#56 — CI running). #53
+  review fold: all authored callings offer ALL SIX archetypes (Star + Champion added); SA
+  naming flag fixed. #55 review: CodeRabbit's "money must be single-digit" finding was a FALSE
+  POSITIVE — money is a log-scale currency (meters.json scale:log, start:1000, max:1e12) and
+  existing origins events use deltas up to 200,000; +100/200/500 nudges are correct. Likewise
+  {family_name} (→ "{surname}s", the pluralized line) is a real distinct token from {surname}.
+  REMAINING (after #56 merges): american_midwest, american_south, baghdad/caliphate.
+  NEXT-AUTHOR NOTES: american_midwest
   (anglo_protestant, "turned earth / grain dust / prairie wind" → agrarian homestead);
   american_south (scots_irish, "humid heat / magnolia / river delta" → plantation-shadow delta);
   baghdad (arabic_abbasid, era=CALIPHATE not origins, "Tigris market" → medieval Islamic golden

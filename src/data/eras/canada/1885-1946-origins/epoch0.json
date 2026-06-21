@@ -1,0 +1,215 @@
+{
+  "$comment": "OB-5 — the authored Epoch-0 for a CANADA/origins founding. The first stage of the story: a fully-written birth → the doctor's date → growing up in the young Dominion (class/station emerging from a vast, half-empty frontier shared by two peoples), feeding into the shared gender → naming → calling → partner chain. Each choice sets a CAUSAL ANCHOR the butterfly/world engine reads. Place-gated to canada; higher weight than the generic beats so the Canadian line opens on its own prose. Culture: scots_irish. Cue: pine resin, river ice breaking, northern dawn. Trope: frontier-capital-origin (the opening Dominion) — flavored here as patient northern endurance + the two-nations balance, distinct from the West Coast's boom-bust reinvention.",
+  "era": "origins",
+  "events": [
+    {
+      "id": "ev_ca_birth",
+      "era": "origins",
+      "place": "canada",
+      "year": 1885,
+      "title": "Born at the River's Edge",
+      "scene": "You arrive in a log house at the edge of a great cold river, in a winter so deep the windows are furred with frost and the only sounds are the fire and, far off, the boom of the ice beginning to break. This is a young country and a vast one — railways crawling west, timber and grain and fur waiting for whoever has the endurance to take them. The doctor came upriver by sleigh and will leave the same way; he warms his hands, then opens his book to set down the newest citizen of the Dominion. You hear him read the date aloud.",
+      "researchNote": "OB-5 birth opener for Canada. Sets `emerged` so the Epoch-0 chain begins; narrates the seed-drawn date via {birth_date}. Young Dominion frontier — cold, vast, endurance-tested, 1885. Tone: the long northern reach, not the West's boom-bust.",
+      "historicity": "personal",
+      "tags": ["epoch0", "birth", "diegetic"],
+      "requires": { "flags": ["founded_line"], "notFlags": ["emerged"], "meters": {}, "personality": {} },
+      "weight": 5000,
+      "choices": [
+        {
+          "id": "listen_to_the_book",
+          "text": "You listen to the doctor enter the day into his book by firelight.",
+          "effects": {},
+          "personality": {},
+          "setFlags": ["emerged"],
+          "outcome": "“{birth_date},” the doctor murmurs, blotting the ink before it can freeze. In this country a life is a long bet against distance and cold — and the lines that win are the ones that endure."
+        }
+      ]
+    },
+    {
+      "id": "ev_ca_naming",
+      "era": "origins",
+      "place": "canada",
+      "year": 1885,
+      "title": "A Name for Two Nations",
+      "scene": "The {family_name} name is settled — but the given name is a quiet choosing of which Canada the child will belong to. This is a country of two peoples sharing one house, and a name can reach toward one community, bridge both, or simply hold the old country close. The choice is made by the stove with the frost ticking on the glass, and you become {full_name}.",
+      "researchNote": "OB-5: given-naming framed by Canada's two-nations (English/French) reality — assimilate toward one community, bridge both, or hold the old country. Given name dealt from the scots_irish pool at founding; this beat sets `named` + frames the choice (early personality anchor), distinct from Ireland's parish, the West's open reinvention, the East's hill-climb.",
+      "historicity": "personal",
+      "tags": ["epoch0", "naming", "diegetic", "trope:frontier-capital-origin"],
+      "requires": { "flags": ["founded_line", "emerged", "gender_revealed"], "notFlags": ["named"], "meters": {}, "personality": {} },
+      "weight": 980,
+      "choices": [
+        {
+          "id": "named_to_bridge",
+          "text": "Named to belong to both peoples — a name at home on either side of the divide.",
+          "effects": { "reputation": 3 },
+          "personality": { "outward": 2 },
+          "setFlags": ["named", "named_to_bridge"],
+          "outcome": "A name that opens doors in two languages. In a country built on an uneasy partnership, that is a head start most never get."
+        },
+        {
+          "id": "named_for_the_old_country",
+          "text": "Named for the old country — the line keeping faith with where it came from.",
+          "effects": { "loyalty": 3 },
+          "personality": { "inward": 2 },
+          "setFlags": ["named", "named_for_kin"],
+          "outcome": "An old name carried into a new wilderness. The past travels well in the cold, and the line will not forget itself."
+        },
+        {
+          "id": "named_for_plainness",
+          "text": "A plain, hardy name — nothing fancy, for a country that rewards endurance.",
+          "effects": { "health": 2, "loyalty": 2 },
+          "personality": { "inward": 2 },
+          "setFlags": ["named", "named_for_plainness"],
+          "outcome": "No bridge, no banner — just a sturdy name for a hard country. It will outlast the winters, and so, the family hopes, will you."
+        }
+      ]
+    },
+    {
+      "id": "ev_ca_childhood_station",
+      "era": "origins",
+      "place": "canada",
+      "year": 1893,
+      "title": "What the Frontier Teaches",
+      "scene": "You are old enough now to read the country, and the country is distance. The wealth is real — the timber, the wheat, the rail bonds the men in Montreal and Toronto trade like cards — but it is far away, and between you and it lie a thousand miles and two hard winters. You watch who prospers: not always the strongest, but the patient, the ones who hold land and wait, who bind the two communities or play them against each other. You learn that out here a fortune is not seized in a season; it is endured into being.",
+      "researchNote": "OB-5: class/station emerges early as an organic response to observing the form + function of Dominion frontier life (user). The lesson is endurance, land-holding, and the two-nations balance — distinct from the West's seize-the-moment and the East's stratified ladder. Sets an early-pressure anchor the calling reads.",
+      "historicity": "personal",
+      "tags": ["epoch0", "childhood", "diegetic", "trope:frontier-capital-origin"],
+      "requires": { "flags": ["founded_line", "emerged", "gender_revealed", "named"], "notFlags": ["station_seen"], "meters": {}, "personality": {} },
+      "weight": 940,
+      "choices": [
+        {
+          "id": "covet_the_far_wealth",
+          "text": "You set your sights on the far-off fortunes — and resolve to outlast the distance.",
+          "effects": { "reputation": 2 },
+          "personality": { "outward": 3, "grandiosity": 4 },
+          "setFlags": ["station_seen", "born_wanting"],
+          "outcome": "Some children make peace with the smallness of a frontier life. You measure it against the cities' wealth and find it wanting. The wanting will not leave you now."
+        },
+        {
+          "id": "study_the_balance",
+          "text": "You study how the two communities are held — power lives in the bridging.",
+          "effects": { "power": 2 },
+          "personality": { "inward": 4 },
+          "setFlags": ["station_seen", "watched_the_ledger"],
+          "outcome": "You see that in a country of two peoples, the one who can speak to both — and be trusted by both — holds a lever no single faction can. You mean to be that one."
+        },
+        {
+          "id": "trust_the_land",
+          "text": "You trust the land and the long winter, like the steadiest of the settlers.",
+          "effects": { "loyalty": 4 },
+          "personality": { "inward": 2 },
+          "setFlags": ["station_seen", "head_down_youth"],
+          "outcome": "There is a strength in a family that simply will not be moved off its ground. Whether endurance alone can found a great line is a question for later years."
+        }
+      ]
+    },
+    {
+      "id": "ev_ca_schooling",
+      "era": "origins",
+      "place": "canada",
+      "year": 1897,
+      "title": "The Schoolhouse and the Two Tongues",
+      "scene": "There is a drafty schoolhouse and a teacher, Mr. Tremblay, who keeps the stove fed and teaches in both languages because half his pupils answer in each. He has watched the bright ones leave for the cities and the rest stay to work the land, and he has a frontiersman's clear eye for which is which. He stops you after lessons one grey afternoon. \"There's a long road in you,\" he says, in the country's careful way. \"The question is whether you'll have the patience this place asks — or the nerve to leave it.\"",
+      "researchNote": "OB-5: the calling EMERGES (user) — not one static pick. A bilingual frontier schoolmaster is the first pressure that bends the child toward a bent. Sets `schooled`, an anchor the crystallization reads. Mr. Tremblay embodies the two-nations balance, distinct in tone from Ireland's Lynch, the West's Reyes, the East's Father Doyle.",
+      "historicity": "personal",
+      "tags": ["epoch0", "childhood", "diegetic", "trope:frontier-capital-origin"],
+      "requires": { "flags": ["founded_line", "station_seen"], "notFlags": ["schooled"], "meters": {}, "personality": {} },
+      "weight": 930,
+      "choices": [
+        {
+          "id": "devour_the_books",
+          "text": "You read everything the schoolhouse holds, in both tongues — hungry for the wider world.",
+          "effects": { "reputation": 3 },
+          "personality": { "inward": 3 },
+          "setFlags": ["schooled", "leaned_learning"],
+          "outcome": "Mr. Tremblay starts lending you books the district has never seen. A door has opened that the long winters cannot quite close."
+        },
+        {
+          "id": "work_the_room",
+          "text": "You learn the people — every settler and trader and both communities besides.",
+          "effects": { "loyalty": 3 },
+          "personality": { "outward": 4 },
+          "setFlags": ["schooled", "leaned_people"],
+          "outcome": "You discover you can move easily between the two Canadas and be welcome in each. In this country, that ease is a rarer gift than cleverness."
+        },
+        {
+          "id": "leave_for_the_land",
+          "text": "You leave the slate for the land and the rail gangs — the country needs backs, not books.",
+          "effects": { "money": 200, "health": 2 },
+          "personality": { "inward": 2 },
+          "setFlags": ["schooled", "leaned_labor"],
+          "outcome": "Mr. Tremblay nods and lets you go to the work. The frontier does not care what you might have been — only whether you can endure another season of it."
+        }
+      ]
+    },
+    {
+      "id": "ev_ca_calling_crystallizes",
+      "era": "origins",
+      "place": "canada",
+      "year": 1903,
+      "title": "What You Are For",
+      "scene": "You are a young {given_name} {surname} now, grown into the body and the vast cold country that made you. The loose pulls of a frontier childhood have set into a direction. This is a country still being made — its railways, its capital, its very idea of itself all unfinished — and a person with patience and nerve can help decide what it becomes. A line has to plant a flag the family can rally to for a hundred years. Standing at the river's edge with a continent of pine behind you, you feel which way you will go.",
+      "researchNote": "OB-5: the calling CRYSTALLIZES into the line's archetype (user: calling IS the archetype, and it EMERGES). All six archetypes offered; setsArchetype commits the power base. Prior schooling/station anchors color which feel natural. Self-excludes the generic ev_birth_calling via the OB-5 has_authored_epoch0 flag.",
+      "historicity": "personal",
+      "tags": ["epoch0", "calling", "diegetic"],
+      "requires": { "flags": ["founded_line", "schooled"], "notFlags": ["calling_chosen"], "meters": {}, "personality": {} },
+      "weight": 920,
+      "choices": [
+        {
+          "id": "crystallize_economic",
+          "text": "Money. You will hold the timber, the wheat, and the rail bonds the whole Dominion runs on.",
+          "effects": { "money": 500, "power": 3 },
+          "personality": { "grandiosity": 3 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "economic",
+          "outcome": "The Magnate's road: in a young country the great fortunes are still unclaimed, waiting on patience and nerve. The line will own the land and the rails — and a country this size pays its owners forever."
+        },
+        {
+          "id": "crystallize_political",
+          "text": "Power. You will help build the Dominion itself — and steer which Canada it becomes.",
+          "effects": { "power": 5 },
+          "personality": { "outward": 3 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "political",
+          "outcome": "The Statesman's road: a country of two peoples needs leaders both can trust, and there are few. The line will hold the balance — and the power that comes with being the one who keeps the house standing."
+        },
+        {
+          "id": "crystallize_religious",
+          "text": "Faith. You will be the steady soul of a scattered, frozen, far-flung people.",
+          "effects": { "reputation": 5 },
+          "personality": { "inward": 3 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "religious",
+          "outcome": "The Prophet's road: in a country this empty and cold, the church is the warm room everyone returns to. The line will gather the faithful across the distance — and the standing that comes with holding them together."
+        },
+        {
+          "id": "crystallize_technological",
+          "text": "Invention. You will build the engines and the bridges that will finally tame the distance.",
+          "effects": { "reputation": 3, "money": 200 },
+          "personality": { "inward": 4 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "technological",
+          "outcome": "The Visionary's road: the great problem of this country is distance, and the line that conquers it — with rail, with wire, with engine — will be written into the nation's bones."
+        },
+        {
+          "id": "crystallize_entertainment",
+          "text": "The crowd. You have the gift to warm a hard country — the hall, the radio, the song.",
+          "effects": { "reputation": 4, "money": 100 },
+          "personality": { "outward": 4 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "entertainment",
+          "outcome": "The Star's road: in long winters and lonely distances, a voice that carries is a kind of warmth. The line will be loved from coast to coast — and a country this scattered remembers who gave it joy."
+        },
+        {
+          "id": "crystallize_athletic",
+          "text": "The body. You are the toughest thing the frontier ever bred, and a hard country loves a winner.",
+          "effects": { "reputation": 4, "power": 1 },
+          "personality": { "grandiosity": 3 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "athletic",
+          "outcome": "The Champion's road: the rink, the field, the contest a whole frozen nation gathers around. The line will win its name with raw endurance — and a country forged on toughness will claim you as its own."
+        }
+      ]
+    }
+  ]
+}
