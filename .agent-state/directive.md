@@ -70,9 +70,24 @@ that generates it at breadth.
   in the far future — the heir-vs-era-timeskip window (a far-future generation begets but
   the heir doesn't survive the large in-world year jumps to inherit); a dynastic outcome,
   not a leak/consistency bug.
-- [ ] [WAIT] **EX-6 DoD** — after EX-5. Full gate + harness audit at 0 findings over a wide
+- [ ] **EX-6 DoD** — after EX-5. Full gate + harness audit at 0 findings over a wide
   permutation sweep; live-verify a long multi-generational run; PR; reviewer trio;
   squash-merge; Status RELEASED.
+  - **Carried-in finding (the far-future line-extinct ~half the dealt births):** three
+    mechanisms, all DYNASTIC outcomes not consistency/leak bugs (audit stays 0 findings):
+    (a) gen-1 lines that PARTNER but never BEGET — the protagonist dies in the mortality
+    pass between the partner beat and the (separate) beget beat, in the harsh early eras
+    (boyhood/mogul, era-medicine 0.25-0.35). Bumping beget/partner weights had NO effect
+    (it's death-between-beats, not selection priority). The real lever is game-design:
+    either partner+beget as ONE beat, or beget at partner time, or a "childless-and-aging"
+    safety beget. (b) Far-future gen-2/3 lines that beget every generation but the heir
+    doesn't survive the large in-world year jumps (40yr/beat eras) to inherit. (c) baghdad:
+    the caliphate(833)→origins(1885) 1052-yr era GAP — a deep-history line can't bridge to
+    the modern arc (needs intermediate medieval/renaissance eras — a content greenfield).
+  - Decide in EX-6 whether to (1) tune the lifecycle so most lines endure (design change),
+    or (2) accept line-extinction as a legitimate ending and ship the dev-survive traversal
+    as the breadth-validation tool it already is. The harness `survive` policy already
+    traverses + validates every era's content regardless, which is the breadth gate's need.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
