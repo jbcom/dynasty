@@ -55,11 +55,18 @@ screenshots), compress as they ship. Each cycle picks the highest-value [ ] item
 - [x] **PL-7 DONE** (commit 960cdfe) — Timeline tab showed deep-history eras a modern line
   never lived (a 1885 line listed "The Caliphate Dawn 762–833"). Now starts at the line's
   founding era through the current; pre-founding eras excluded. Live-verified + new test.
-- [ ] [WAIT] **PL cycle-3 ship** — open + merge the PL-7 PR (branch feat/polish-cycle-3) on
-  green (e2e covers the tab via "inter-era tabs render"); then continue the loop.
-- [ ] **PL-8 (cycle 4)** — next discovery: the Lineage member cards show only name + birth
-  year; no role (spouse / heir / deceased) context. Consider surfacing role/status for a
-  richer dynasty view. Also still un-inspected: Stats, Dossier, News, Markets, end report.
+- [x] **PL cycle-3 ship — MERGED** (PR #41). PL-7 on main.
+- [x] **PL-8 DONE** (commit e17b2f9, + a11y review fix ce17cc2) — Lineage cards show ROLE:
+  outlined "Consort" badge for the partner (vs filled "You"), ✝ deceased mark (role=img,
+  aria-labeled). Tests for both. On PR #42.
+- [ ] [WAIT] **PL cycle-4 ship** — merge PR #42 (PL-8) on green.
+- [x] **PL-9 DONE** (commit abc47ce) — the legacy/end report celebrates the DYNASTY: "The
+  House of X endured N years across G generations — M souls born into the line" (from
+  state.family + end.year). New screens.browser test pins the epitaph.
+- [ ] [WAIT] **PL cycle-5 ship** — open + merge the PL-9 PR (branch feat/polish-cycle-5) on
+  green (the end report is reached by the e2e playthrough).
+- [ ] **PL-10 (cycle 6)** — still un-inspected: Stats (Trajectory chart), Dossier, News
+  ticker, Markets. Playtest one, pick the highest-value gap, ship it.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
