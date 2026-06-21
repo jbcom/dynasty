@@ -178,7 +178,7 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 ### SS-13 Read-model + bridge
 - [x] SS-13 bridge exposes macro-act/rung/motivators/act-chapter/glimpses; pure; tests
 ### SS-14 UI novel presentation
-- [ ] SS-14 acts/chapters + motivators + rung + glimpses + register shift; mobile-first; browser tests; live-verified.
+- [x] SS-14 acts/chapters + motivators + rung + glimpses + register shift; mobile-first; browser tests; live-verified.
   USER STEER (2026-06-21): a MUCH more polished use of Svelte — incl. SHADERS (WebGL/GLSL for
   atmospheric backdrops/transitions per era register) — and significantly BETTER ORGANIZATION of
   the whole UI layer (clean component architecture, not a thin port of the old HUD). A real UI

@@ -15,6 +15,9 @@ import { tyrannyUtopiaAxis } from "../../sim/personality";
 import { branchOf } from "../../sim/branch";
 import { moralPoleOf, moralPoleLabel } from "../../sim/moralAxis";
 import { applyTerms, runTerms } from "../../sim/terms";
+import { projectSaga } from "../../sim/readModel";
+import ShaderBackdrop from "../saga/ShaderBackdrop.svelte";
+import SagaPanel from "../saga/SagaPanel.svelte";
 
 interface Props {
   content: Content;
@@ -46,6 +49,11 @@ const poleLabel = $derived(moralPoleLabel(view.state));
 // run's founded line; institutional tokens from the branch (CP-R1).
 const resolvedTerms = $derived(runTerms(content.terms, branch, view.state));
 const term = $derived((text: string) => applyTerms(text, resolvedTerms));
+
+// SS-13/SS-14: the saga read-model view (macro-act, motivators, rung, glimpses) drives the
+// novel-frame SagaPanel + the shader backdrop's per-macro-act register. Rung/glimpses are wired
+// by the SS-15 cut-over; the projection renders what's available now (macro-act + motivators).
+const sagaView = $derived(projectSaga({ year: view.state.year, motivators: view.state.personality }));
 
 type Tab =
   | "event"
@@ -114,7 +122,10 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   {/if}
 {/snippet}
 
+<ShaderBackdrop macroAct={sagaView.macroAct} />
+
 <div class="play" data-drift={drift} class:wide>
+  <SagaPanel view={sagaView} />
   <MeterHud defs={content.meters} meters={view.state.meters} />
   <PersonalityDial personality={view.state.personality} {pole} {poleLabel} />
 
