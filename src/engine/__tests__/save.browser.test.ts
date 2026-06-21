@@ -100,3 +100,37 @@ describe("save/load (deterministic replay)", () => {
     ).toThrow(/version/);
   });
 });
+
+describe("CP-6 founded-run save carries the full founding config", () => {
+  it("round-trips a configured founded line (calling/gender/successionMode/axisChoices)", async () => {
+    const { loadContent } = await import("../../data/loadContent");
+    const { foundDynasty } = await import("../../sim/founding");
+    const real = loadContent();
+    const founded = foundDynasty(real, {
+      momentId: "abbasid_baghdad_762",
+      surname: "al-Rashid",
+      seed: "cp6",
+      calling: "scholar",
+      gender: "female",
+      successionMode: "matriarchal",
+      axisChoices: { faith: "devout" },
+    }).state;
+
+    const save = toSave(founded);
+    expect(save.founding).toMatchObject({
+      momentId: "abbasid_baghdad_762",
+      surname: "al-Rashid",
+      calling: "scholar",
+      gender: "female",
+      successionMode: "matriarchal",
+      axisChoices: { faith: "devout" },
+    });
+
+    // fromSave rebuilds the EXACT founded base — identical state to the original.
+    const reconstructed = fromSave(real, save);
+    expect(reconstructed.founding).toEqual(founded.founding);
+    expect(reconstructed.flags).toEqual(founded.flags);
+    expect(reconstructed.meters).toEqual(founded.meters);
+    expect(reconstructed.family).toEqual(founded.family);
+  });
+});

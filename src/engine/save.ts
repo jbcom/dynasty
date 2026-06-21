@@ -23,8 +23,19 @@ export interface SaveData {
   version: number;
   seed: string;
   archetype: Archetype;
-  /** Present for a founded line; absent for a plain archetype run. */
-  founding?: { momentId: string; surname: string };
+  /**
+   * Present for a founded line; absent for a plain archetype run. Carries the FULL
+   * founding configuration (CP-6) so foundDynasty rebuilds the exact founded base
+   * before replay — dropping any field would diverge the reconstruction.
+   */
+  founding?: {
+    momentId: string;
+    surname: string;
+    calling?: string;
+    gender?: "male" | "female";
+    successionMode?: "absolute" | "primogeniture" | "matriarchal";
+    axisChoices?: Partial<Record<"faith" | "ideology" | "sociology" | "tech", string>>;
+  };
   /** Legacy v1 literal dynasty key, read only when migrating an old save. */
   dynasty?: string;
   history: Array<{ eventId: string; choiceId: string }>;
@@ -45,7 +56,18 @@ export function toSave(state: GameState): SaveData {
     seed: state.seed,
     archetype: state.archetype,
     ...(state.founding
-      ? { founding: { momentId: state.founding.momentId, surname: state.founding.surname } }
+      ? {
+          founding: {
+            momentId: state.founding.momentId,
+            surname: state.founding.surname,
+            ...(state.founding.calling ? { calling: state.founding.calling } : {}),
+            ...(state.founding.gender ? { gender: state.founding.gender } : {}),
+            ...(state.founding.successionMode
+              ? { successionMode: state.founding.successionMode }
+              : {}),
+            ...(state.founding.axisChoices ? { axisChoices: state.founding.axisChoices } : {}),
+          },
+        }
       : {}),
     history: state.history.map((h) => ({ eventId: h.eventId, choiceId: h.choiceId })),
     savedYear: state.year,
@@ -64,6 +86,10 @@ export function fromSave(content: Content, save: SaveData): GameState {
       momentId: save.founding.momentId,
       surname: save.founding.surname,
       seed: save.seed,
+      calling: save.founding.calling,
+      gender: save.founding.gender,
+      successionMode: save.founding.successionMode,
+      axisChoices: save.founding.axisChoices,
     }).state;
     return replayFromState(content, base, save.history, createRng);
   }
