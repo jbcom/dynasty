@@ -30,19 +30,10 @@ function era7State(over: Partial<ReturnType<typeof initState>> = {}) {
   return { ...s, eraIndex: content7.eras.length - 1, year: 2024, age: 78, ...over };
 }
 
-describe("data-driven endings — role-flip & world-aligned outcomes", () => {
-  it("fires the role-flip tycoon ending when Musk is president and Trump went commercial", () => {
-    const s = lateState({ flags: ["role_flip", "trump_commercial_path"].sort() });
-    expect(evaluateEnding(content, s)?.endingId).toBe("end_role_flip_tycoon");
-  });
-
-  it("fires the Reich-industrialist ending in the Axis world with Trump commercial", () => {
-    const s = lateState({ flags: ["axis_ascendant", "trump_commercial_path"].sort() });
-    // priority 92 outranks the generic tycoon (78), and the role-flip ending is
-    // excluded in the Axis world via its notFlags.
-    expect(evaluateEnding(content, s)?.endingId).toBe("end_reich_industrialist");
-  });
-
+describe("data-driven endings — world-aligned outcomes", () => {
+  // NO-LEAK (FD-3): the role-flip endings (end_role_flip_tycoon /
+  // end_reich_industrialist) were removed with the swap mechanic — a founded
+  // dynasty never trades places with a rival, so those outcomes can't arise.
   it("prefers the world-aligned utopia when the age itself turned collectivist", () => {
     const base = lateState();
     const s = {

@@ -4,6 +4,7 @@ import type { GameView } from "../../engine/loop";
 import ButterflyLog from "../ButterflyLog.svelte";
 import Dossier from "../Dossier.svelte";
 import EventCard from "../EventCard.svelte";
+import LineageView from "../LineageView.svelte";
 import MarketsView from "../MarketsView.svelte";
 import MeterHud from "../MeterHud.svelte";
 import NewsTicker from "../NewsTicker.svelte";
@@ -43,9 +44,19 @@ const pole = $derived(moralPoleOf(view.state));
 const poleLabel = $derived(moralPoleLabel(view.state));
 const term = $derived((text: string) => applyTerms(text, content.terms, branch));
 
-type Tab = "event" | "news" | "markets" | "timeline" | "stats" | "butterfly" | "dossier";
+type Tab =
+  | "event"
+  | "news"
+  | "markets"
+  | "lineage"
+  | "timeline"
+  | "stats"
+  | "butterfly"
+  | "dossier";
 const hasNews = $derived(content.worldTimelines.length > 0);
 const hasMarkets = $derived(content.markets.length > 0 || content.ranks.length > 0);
+// The lineage tab appears only for a founded line (it has a live family tree).
+const hasLineage = $derived(view.state.family !== undefined);
 // In wide mode the "event" tab is shown directly in event-col, so the side nav
 // starts on the first info tab (timeline is always present; news/markets optional).
 const defaultTab = $derived<Tab>(wide ? (hasNews ? "news" : hasMarkets ? "markets" : "timeline") : "event");
@@ -57,6 +68,7 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   { id: "event", label: "Now", icon: "now" },
   ...(hasNews ? [{ id: "news" as Tab, label: "News", icon: "news" }] : []),
   ...(hasMarkets ? [{ id: "markets" as Tab, label: "Markets", icon: "markets" }] : []),
+  ...(hasLineage ? [{ id: "lineage" as Tab, label: "Lineage", icon: "dossier" }] : []),
   { id: "timeline", label: "Timeline", icon: "timeline" },
   { id: "stats", label: "Stats", icon: "stats" },
   { id: "butterfly", label: "Choices", icon: "butterfly" },
@@ -86,6 +98,8 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     <NewsTicker {content} gameState={view.state} {term} />
   {:else if tab === "markets"}
     <MarketsView {content} gameState={view.state} />
+  {:else if tab === "lineage"}
+    <LineageView gameState={view.state} />
   {:else if tab === "timeline"}
     <TimelineView {content} gameState={view.state} />
   {:else if tab === "stats"}

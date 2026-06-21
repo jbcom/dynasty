@@ -2,16 +2,24 @@
 import { loadContent } from "./data/loadContent";
 import { capacitorStorage, type Storage } from "./engine/storage";
 import { clearSave, hasSave, loadGame } from "./engine/save";
+import {
+  DEFAULT_SETTINGS,
+  loadSettings,
+  setGeminiKey,
+  setLiveExtrapolation,
+  type Settings,
+} from "./engine/settings";
 import type { Content } from "./sim/content";
-import type { DynastyKey } from "./sim/slots";
+import { foundDynasty } from "./sim/founding";
 import type { GameState } from "./sim/state";
 import { GameStore } from "./ui/gameStore.svelte";
 import { FormFactorStore } from "./ui/formFactor.svelte";
 import PlayScreen from "./ui/screens/PlayScreen.svelte";
 import LegacyReport from "./ui/screens/LegacyReport.svelte";
+import SettingsScreen from "./ui/screens/SettingsScreen.svelte";
 import TitleScreen from "./ui/screens/TitleScreen.svelte";
 
-type Screen = "title" | "play";
+type Screen = "title" | "play" | "settings";
 
 const content: Content = loadContent();
 const formFactor = new FormFactorStore();
@@ -21,25 +29,41 @@ let storage = $state<Storage | undefined>();
 let saveExists = $state(false);
 let screen = $state<Screen>("title");
 let store = $state<GameStore | undefined>();
+let settings = $state<Settings>(DEFAULT_SETTINGS);
 
-// Resolve persistent storage and check for an existing save on mount.
+// Resolve persistent storage, check for an existing save, and load settings on mount.
 $effect(() => {
   let alive = true;
   capacitorStorage().then(async (s) => {
     if (!alive) return;
     storage = s;
     saveExists = await hasSave(s);
+    settings = await loadSettings(s);
   });
   return () => {
     alive = false;
   };
 });
 
-async function newGame(seed: string, dynasty: DynastyKey = "trump"): Promise<void> {
+async function saveKey(key: string): Promise<void> {
+  if (!storage) return;
+  await setGeminiKey(storage, key);
+  settings = await loadSettings(storage);
+}
+async function toggleLive(on: boolean): Promise<void> {
+  if (!storage) return;
+  await setLiveExtrapolation(storage, on);
+  settings = await loadSettings(storage);
+}
+
+// FOUND a dynasty at a start-moment (FD-6): build the founded initial state via the
+// pure founding flow and hand it to the store as the run's base.
+async function foundGame(momentId: string, surname: string, seed: string): Promise<void> {
   if (!storage) return;
   // Await the clear so a fast first choice can't race the old save's deletion.
   await clearSave(storage);
-  store = new GameStore(content, seed, storage, undefined, dynasty);
+  const founded = foundDynasty(content, { momentId, surname, seed }).state;
+  store = new GameStore(content, seed, storage, founded, founded.archetype);
   screen = "play";
 }
 
@@ -47,10 +71,9 @@ async function continueGame(): Promise<void> {
   if (!storage) return;
   const restored: GameState | null = await loadGame(storage, content);
   if (!restored) return;
-  // Pass restored.dynasty so GameStore/Game hold the right dynasty context even
+  // Pass restored.archetype so GameStore/Game hold the right identity context even
   // though the restore path skips initState (the saved state already contains it).
-  // Prevents a future "restart era" path from silently defaulting back to "trump".
-  store = new GameStore(content, restored.seed, storage, restored, restored.dynasty);
+  store = new GameStore(content, restored.seed, storage, restored, restored.archetype);
   screen = "play";
 }
 
@@ -61,8 +84,22 @@ function restart(): void {
 }
 </script>
 
-{#if screen === "title" || !store}
-  <TitleScreen hasSave={saveExists} onNewGame={newGame} onContinue={continueGame} />
+{#if screen === "settings"}
+  <SettingsScreen
+    geminiKey={settings.geminiKey}
+    liveExtrapolation={settings.liveExtrapolation}
+    onSaveKey={saveKey}
+    onToggleLive={toggleLive}
+    onBack={() => (screen = "title")}
+  />
+{:else if screen === "title" || !store}
+  <TitleScreen
+    moments={content.startMoments}
+    hasSave={saveExists}
+    onFound={foundGame}
+    onContinue={continueGame}
+    onSettings={() => (screen = "settings")}
+  />
 {:else if store.view?.state.end}
   <LegacyReport {content} state={store.view.state} end={store.view.state.end} onRestart={restart} />
 {:else}

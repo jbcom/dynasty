@@ -1,7 +1,7 @@
 import type { Content } from "./content";
 import { initMeters, type Meters } from "./meters";
 import { initPersonality, type Personality } from "./personality";
-import type { DynastyKey } from "./slots";
+import type { Archetype } from "./slots";
 
 /** One entry in the visible Butterfly Log (cause → effect chain, part B). */
 export interface LedgerEntry {
@@ -87,10 +87,65 @@ export interface GameState {
   currencyId: string;
   /** Set once the run ends; null while in progress. */
   end: EndState | null;
-  /** The dynasty being played — selects the Era-0 start + birth-year baseline. */
-  dynasty: DynastyKey;
-  /** The protagonist's birth year (1946 Trump / 1971 Musk / 1888 Kennedy). */
+  /** The power ARCHETYPE this run embodies — selects the Era-0 start + birth-year
+   *  baseline + the no-leak content boundary (FD-3.5: replaces the literal dynasty
+   *  key; a founded line's archetype comes from its start-moment). */
+  archetype: Archetype;
+  /** The protagonist/progenitor's birth year (founding year for a founded line). */
   birthYear: number;
+  /**
+   * FOUNDING metadata (FD-6) for a "found your own dynasty" run. Absent on the
+   * preset-dynasty runs (they use the dynasty key). When present: the start-moment
+   * id, the player's chosen surname, the cultural lane, and the founding place —
+   * which FD-7 world-stacks + FD-8 birth mechanics key off. The 4 presets may also
+   * carry these once routed through foundDynasty as shortcuts.
+   */
+  founding?: {
+    momentId: string;
+    surname: string;
+    culture: string;
+    place: string;
+  };
+  /**
+   * The LIVE family tree (FD-8) — the growing, mutable lineage of a founded run.
+   * Absent until a line is founded (foundDynasty seeds the progenitor). Pure +
+   * serializable; reconstructed bit-identically by replay. Births (beget),
+   * deaths (FD-9), and succession (FD-10) all mutate this.
+   */
+  family?: FamilyState;
+}
+
+/** A living (or dead) member of the run's growing lineage (FD-8). */
+export interface LiveMember {
+  /** Deterministic id, minted as `m<seq>` in birth order. */
+  id: string;
+  given: string;
+  surname: string;
+  sex: "male" | "female";
+  born: number;
+  died?: number;
+  /** Parent member id (the progenitor has none). */
+  parentId?: string;
+  /** Generation depth from the progenitor (progenitor = 0). */
+  generation: number;
+  /** Inherited-plus-varied trait vector (0..100), seeds personality/aptitude. */
+  traits: { ambition: number; cunning: number; vigor: number; piety: number };
+  /** True for the member the player currently steers. */
+  isProtagonist: boolean;
+}
+
+/** The live lineage state for a founded run (FD-8). */
+export interface FamilyState {
+  members: LiveMember[];
+  /** The member id the player currently controls. */
+  protagonistId: string;
+  /** Monotonic counter for minting deterministic member ids. */
+  nextSeq: number;
+}
+
+/** Whether a member is alive as of `year` (single source of truth, FD-8/9/10). */
+export function isMemberAlive(m: LiveMember, year: number): boolean {
+  return m.died === undefined || m.died > year;
 }
 
 /** Per-market live state (index walk + the player's stake). */
@@ -117,43 +172,58 @@ export interface RankState {
   peak: number;
 }
 
-/** Birth year per dynasty. Trump 1946, Musk 1971, Kennedy 1888. */
-export const DYNASTY_START: Record<DynastyKey, number> = {
-  trump: 1946,
-  musk: 1971,
-  kennedy: 1888,
+/**
+ * Default progenitor birth year per ARCHETYPE — the baseline when a run is NOT
+ * founded via a start-moment (a founded line overrides this with the moment's
+ * year, see founding.ts). Anchored to the archetype's exemplar era so the modern
+ * `origins` arc still opens correctly: economic 1946, political 1888,
+ * technological 1971, religious 1918.
+ */
+export const ARCHETYPE_START: Record<Archetype, number> = {
+  economic: 1946,
+  political: 1888,
+  technological: 1971,
+  religious: 1918,
 };
 
 /**
- * The flags seeded at run start for each dynasty (activation flag + prologue gate).
- * Trump has no *_dynasty_active flag (it's the default) but it does seed trump_prologue
- * so the Trump prologue chain (Friedrich/Donald) opens without needing the in-game
- * ev_dynasty_founding_choice selector to fire. That event is now gated to only fire
- * when NONE of these flags is already present (i.e. never, when coming from the carousel).
+ * Flags seeded at run start per ARCHETYPE (activation flag + prologue gate) so the
+ * matching prologue chain opens immediately. The literal `*_dynasty_active` /
+ * `*_prologue` flag names are retained as the content's gate vocabulary (FD-3.5b
+ * will rework the era prologue itself onto the founding flow); the economic
+ * archetype is the default origins arc and seeds only its prologue flag.
  */
-const DYNASTY_SEED_FLAGS: Record<DynastyKey, string[]> = {
-  trump: ["trump_prologue"],
-  musk: ["musk_dynasty_active", "musk_prologue"],
-  kennedy: ["kennedy_dynasty_active", "kennedy_prologue"],
+const ARCHETYPE_SEED_FLAGS: Record<Archetype, string[]> = {
+  economic: ["trump_prologue"],
+  political: ["kennedy_dynasty_active", "kennedy_prologue"],
+  technological: ["musk_dynasty_active", "musk_prologue"],
+  religious: ["religious_dynasty_active", "religious_prologue"],
 };
 
-/** Create the initial state for a new run, optionally for a non-Trump dynasty. */
+/**
+ * Create the initial state for a new run. A modern run begins in the `origins`
+ * era; a founded line (FD-6) passes `startEra` to begin at its start-moment's era
+ * (e.g. a deep-history "caliphate" prefix). The starting era is resolved BY ID,
+ * not by array position, because deep-history eras sort ahead of `origins`
+ * (negative order) and must not silently become every run's start.
+ */
 export function initState(
   content: Content,
   seed: string,
-  dynasty: DynastyKey = "trump",
+  archetype: Archetype = "economic",
+  startEra = "origins",
 ): GameState {
-  const firstEra = content.eras[0];
+  const startIndex = content.eras.findIndex((e) => e.id === startEra);
+  const eraIndex = startIndex >= 0 ? startIndex : 0;
+  const firstEra = content.eras[eraIndex];
   if (!firstEra) throw new Error("Content has no eras");
-  const birthYear = DYNASTY_START[dynasty];
-  // Seed all dynasty flags (activation + prologue gate) so the prologue chain
-  // opens immediately without needing the in-game ev_dynasty_founding_choice
-  // selector to fire. That event is gated with notFlags on all three prologue
-  // flags so it never fires when coming from the carousel.
-  const seedFlags = [...DYNASTY_SEED_FLAGS[dynasty]].sort();
+  const birthYear = ARCHETYPE_START[archetype];
+  // Seed the archetype's flags (activation + prologue gate) so the prologue chain
+  // opens immediately without needing an in-game selector to fire.
+  const seedFlags = [...ARCHETYPE_SEED_FLAGS[archetype]].sort();
   return {
     seed,
-    eraIndex: 0,
+    eraIndex,
     // Age is ALWAYS derived from the year (ageInYear) so it stays monotonic with
     // time. The first era opens in the dynastic-origins past (pre-1946), so the
     // protagonist's "age" starts negative — seeding 0 here would make the very
@@ -175,7 +245,7 @@ export function initState(
     ranks: initRanks(content),
     currencyId: "usd",
     end: null,
-    dynasty,
+    archetype,
     birthYear,
   };
 }
@@ -219,7 +289,7 @@ export function withoutFlag(flags: readonly string[], flag: string): string[] {
   return flags.filter((f) => f !== flag);
 }
 
-/** Derive age from the current year relative to the dynasty's birth year (default: Trump 1946). */
-export function ageInYear(year: number, birthYear = DYNASTY_START.trump): number {
+/** Derive age from the current year relative to the progenitor's birth year (default: economic 1946). */
+export function ageInYear(year: number, birthYear = ARCHETYPE_START.economic): number {
   return year - birthYear;
 }

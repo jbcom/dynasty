@@ -101,6 +101,181 @@ into ONE event pool.**
 This unification is the SUBSTRATE the start-moments (§2), world stacks (§3), and
 birth/inheritance events (§5) all ride on, so it lands EARLY (phase FD-2 below).
 
+## 1c. DYNASTIC TROPES AS INFLUENCES — dissolve the literal lines (user)
+
+> "It's actually simpler to just completely refactor the existing lines like Trump,
+> Kennedy etc as DYNASTIC TROPE INFLUENCES. That way we reuse the most meat out of
+> everything written while allowing real plus extrapolated well into the future."
+> "We should be RIPPING OUT FLIP MECHANICS — this game is about how a dynasty
+> reacts and builds each new generation."
+
+The four real families STOP being literal protagonists/houses. They become
+**TROPES** — reusable archetypal dynastic patterns that ANY player-founded family
+can express:
+
+**TROPE CATALOG (the reusable archetypal patterns — the gap-check answer).**
+The 4 spine tropes (from the existing lines):
+- the **accidental heir** (fourth child inherits because the firstborn falls — Trump/JFK)
+- **bootlegger-to-legitimacy** (vice fortune laundered into respectability — Kennedy/Joseph Sr.)
+- the **frontier / emerald / colonial-edge capital origin** (Musk/Errol)
+- the **centrist-patriarch → zealot-heir pivot** (soft founder, political heir — Graham→Franklin)
+
+The branch/governance tropes (already in content): the **conqueror** (nazi), the
+**prophet/theocrat** (theocracy), the **pleasure-king→media mogul** (media), the
+**oligarch/plutocrat** (oligarchy), the **techno-frontiersman** (westcoast), the
+**prosperity-megachurch builder** (megachurch).
+
+MISSING tropes to ADD (well-attested across real dynasties, high reuse — covers
+the DECLINE/SUCCESSION/MERGER space the rise-only set lacks):
+- the **dissipating line** (wealth squandered across generations — Vanderbilt/
+  Buddenbrooks; the DECLINE arc, the counterweight to every rise)
+- the **martyr** (an assassination/early death that SANCTIFIES the line and becomes
+  dynastic capital — JFK/RFK)
+- the **matriarch-regency** (the widow who holds + rebuilds the line — Rose Kennedy,
+  Bridget Murphy, Elizabeth Christ Trump; a member role today, a trope here)
+- the **dynastic merger** (two houses fuse by marriage — Fitzgerald+Kennedy)
+- the **cadet branch** (a younger son founds a rival sub-dynasty / the line splits)
+- the **prodigal heir** (the wild/rebel child who returns to take the mantle —
+  Fred Jr.-that-didn't, Franklin's wild youth)
+- the **scandal-fall → rehabilitation** (collapse then comeback — Bakker/Swaggart)
+- the **exile → return** (a generation forced out, a later one returns — diaspora)
+- the **reformer vs reactionary schism** (a generation splits ideologically —
+  the Roosevelt two-branch split)
+- the **bastard/outside claimant** (a succession crisis from beyond the marriage)
+
+This catalog is the FD-3 authoring target; FD-4/FD-11 generate fill against it.
+
+A trope is `trope:<id>` tags + bias on events, NOT a person. The player's NAMED
+family activates tropes through its origin + choices; the same authored content is
+reused across any house. **This removes the leak problem at the root**: there is no
+"Trump" or "Kennedy" object to drift into — only tropes a line embodies, and your
+family stays YOUR family. The **role-flip + kennedy_swap mechanics are DELETED**
+(they were the literal-person-swap model + the deepest leak vector). The 4 preset
+family trees (FD-1) survive as *trope-flavored quick-starts*, not fixed identities.
+
+Consequence: with no fixed protagonist to "end," the birth + inheritance mechanics
+(§5) let a line run **for damn near eternity** — each generation a new heir takes
+up the saga.
+
+## 1d. PROCEDURAL POOL — 1000 years × ~100,000 events from a modest authored base (user)
+
+> "Think about how we could use libraries and clever mechanics and algorithms to
+> create a much wider pool that can extend 1000 years and 100,000 different events."
+
+Hand-authoring 100k events is impossible. The vast pool is **GENERATED** —
+deterministically — by composing a modest authored base across many axes:
+
+```
+concrete event  =  TROPE TEMPLATE  ×  PLACE (world-stack)  ×  ERA/YEAR  ×
+                   FAMILY MEMBER (from the live tree)  ×  seeded RNG
+```
+
+- **Trope templates** (authored, ~hundreds): parameterized event patterns with
+  slots — `{member}`, `{place}`, `{year}`, `{rival}`, `{institution}`, `{peril}` —
+  e.g. "the {member} faces the {place}-{year} {peril}: flee, profit, or resist."
+- **Substitution stacks** (the world stacks §3 + onomastics §4 + the live family
+  tree §5) supply period- and place-accurate fillers, so an instantiated event is
+  coherent for its time+place+family.
+- **Generative grammar / expansion**: a seeded text-grammar expander (a small
+  tracery-style library, or a hand-rolled deterministic expander — evaluate
+  `tracery`/`chancejs`-class libs vs a purpose-built one; MUST be seedable +
+  pure, no Math.random, to keep replay-determinism) turns a template + fillers
+  into the event's title/scene/choices.
+- **Weighted selection** = the existing chaos field (bias/weight) decides WHICH
+  generated candidates surface, so the flow of decisions still composes a coherent
+  arc rather than noise.
+- **Bounded materialization**: never generate 100k up front. Per turn, the
+  selector lazily instantiates only the candidate events viable for the current
+  (year, place, family, tropes, state), seeded by `rng.fork(year:place:…)`. The
+  100k is the SIZE OF THE REACHABLE SPACE, not a stored list — combinatorics
+  (templates × places × eras × members × seeds) make it effectively unbounded,
+  while memory stays small.
+- **Determinism (load-bearing):** every generation step flows through `rng.fork`
+  keyed on stable coordinates (year/place/member/template), so saves stay
+  seed+history and replay reconstructs the exact same generated timeline — across
+  1000 in-world years. This is the hard constraint the generator is designed
+  around and gated by replay tests.
+
+The authored real/extrapolated events (the migrated 1169 + the era events) remain
+the **anchors** (fixed historical hinges); the generated events are the **fill**
+that makes any year/place/generation rich. Real anchors + procedural fill +
+tropes + the family sim = an eternal, bespoke-per-seed dynastic saga.
+
+## 1e. GEMINI EXTRAPOLATION — AI-generated, quality-gated fill (user)
+
+> "Wire google js-genai into the dev libraries… it plays through as one of our
+> four dynastic types until it runs out of content, then uses thorough system
+> prompting with a Gemini API key to extrapolate additional events/timelines, and
+> automatically flesh out gaps where the response felt weaker. It can back-query
+> the last 10–25 events, evaluate + quality-check. We go from 40 events per to
+> 500 with the right approach." Both DEV-time bulk AND optional RUNTIME live mode.
+
+Two complementary generators fill the pool: the §1d procedural grammar (cheap,
+deterministic, combinatorial) and **Gemini** (rich, novel, context-aware). The
+Gemini library is `@google/genai` (the unified Gen AI SDK — NOT the deprecated
+`@google/generative-ai`); `new GoogleGenAI({})` picks up `GEMINI_API_KEY`;
+`ai.models.generateContent({ model, contents, config })` with
+`responseMimeType:"application/json"` + `responseJsonSchema` forces schema-valid
+output; `systemInstruction` carries the thorough prompt; `tools:[{googleSearch:{}}]`
+can ground REAL events. Default model `gemini-3-flash-preview` (bulk),
+`gemini-3-pro-preview` (the self-critique/hard passes). Codegen guidance indexed
+under "google js-genai codegen instructions".
+
+**WHY BUILD GEMINI FIRST — it's a DEV AI TOOLKIT, not just a content generator
+(user).** Once the `@google/genai` dev harness + the game-bible system prompt +
+the schema-forced-output plumbing exist, the same toolkit accelerates MANY of the
+remaining refactors — so it is built EARLY (FD-11 pulled forward) and reused:
+- **gap-fill / extrapolate** events (the headline job; 40 → 500/dynasty).
+- **slot-detection**: scan content for places that SHOULD be archetypal slots
+  (AH7) but are hard-coded, and propose the slot + per-branch/dynasty resolutions.
+- **trope-retagging** (FD-3): classify every authored event with its trope(s) +
+  historicity + place, turning the literal-line refactor from hand-work into a
+  reviewed AI pass.
+- **error-correction / consistency**: find anachronisms, title-leaks, dead flags,
+  duplicate ids, chronology breaks, no-shallowness gaps — and propose fixes
+  (a richer, generative AH6 sweep).
+- **migration assist** (FD-2): author the reactable choices for the 1169 projected
+  world-events.
+Every such job is a DEV script that PROPOSES changes which are then schema-/guard-
+validated + git-reviewed before committing — the human/agent stays in the loop;
+Gemini does the heavy lifting. This multiplier is why FD-11 is sequenced first.
+
+### Mode A — DEV-TIME BULK (default; deterministic play)
+A repeatable `pnpm extrapolate` script (`scripts/extrapolate.mjs`):
+1. **Detect gaps**: drive autoPlaythrough across seeds/dynasties/places; find
+   thin (year, place, trope) cells where the pool runs dry or the run dead-ends.
+2. **Generate**: prompt Gemini (system prompt = the game bible: tone, the
+   historicity/place/trope schema, the EventSchema) to extrapolate events for the
+   thin cells, **back-querying the last 10–25 events** as context for coherence.
+3. **Self-critique loop** (gemini-3-pro): score each generated event for
+   coherence-with-context + tone + schema validity + non-duplication; **regenerate
+   the weak ones**; only events that pass commit.
+4. **Commit**: schema-validate (zod) + the existing dup-id/chronology/no-shallow
+   guards, then WRITE into the JSON content files (40 → ~500 per dynasty). Now
+   they are ordinary authored content — **play stays 100% deterministic**; the
+   pool grows between releases. Never touches the live game.
+
+### Mode B — RUNTIME LIVE (optional, API-key gated)
+When a run exhausts authored+procedural content mid-play, an optional live mode
+calls Gemini to generate the next event, schema-validates it, and **persists the
+generated event INTO THE SAVE** (so replay re-reads it — the save grows beyond
+seed+history in this mode only, behind a clearly-marked "live extrapolation"
+toggle that needs the player's own API key). Deterministic replay is preserved
+because the generated event is stored, not re-generated. Default OFF.
+
+**API key storage (Capacitor):** the player's Gemini key is stored SECURELY on
+device via Capacitor (Preferences / secure storage), never bundled or committed.
+This drives a TITLE-SCREEN MENU restructure: **New Game · Load Game · Settings**.
+Settings is where the player (a) enters/clears their Gemini API key (secure
+store), (b) toggles live extrapolation on/off, (c) other prefs. The existing
+seed/founding flow moves under "New Game"; "Load Game" reads the save; "Settings"
+is the new third entry. On web (no Capacitor) the key falls back to an in-memory/
+localStorage entry with the same UI.
+
+This keeps the determinism invariant intact (Mode A bakes to content; Mode B
+persists to save) while making the pool effectively unbounded with HIGH quality
+(the self-critique gate), realizing the 40→500-per-dynasty / 1000-year vision.
+
 ## 2. Starting moments (the historical hinges)
 
 A new `src/data/origins/start-moments.json` — each a pivotal time+place a line can
@@ -119,6 +294,62 @@ opens. Initial set (expandable):
 
 Each start-moment references the **places** it can route through (§3) and seeds the
 appropriate archetype-leaning flags WITHOUT locking the player to an archetype.
+
+**DEEP-HISTORY / WORLD REACH (user).** The start-moments are NOT US-centric or
+modern. Old-money, Asian, European, and Middle-Eastern lines can be founded MUCH
+further back — centuries or millennia — opening whole new dynastic forms:
+- a **European monarchy** (a medieval noble house climbing toward a crown)
+- a **caliphate / Islamic dynasty** (a Middle-Eastern religious-political line)
+- a **religious dynasty** rooted in an ancient faith (not just American evangelism)
+- **old-money European / Asian merchant or scholar-official houses** (e.g. a
+  Florentine banking house, a Chinese scholar-gentry/imperial-examination line, a
+  samurai/daimyō house, a Mughal or Ottoman line)
+This widens the place/era/onomastic/trope space enormously (new cultures, naming
+conventions, governance forms, faiths).
+
+**DECISION — deep-history era ordering (FD-6).** Eras are ONE linear chain keyed
+by `order`; the run's STARTING position is set by the chosen start-moment's
+`startEra` (the founding flow looks up that era's index — not a hardcoded 0). A
+modern line begins at the `origins` era; a deep-history line begins at a
+deep-history era placed BEFORE origins via a negative `order` (so it sorts to the
+front without renumbering the 13 existing modern eras). A deep-history dynasty
+plays its deep era(s) then continues through the SAME universal mid/late eras —
+which is exactly the "endures across 1000 years" vision (one chain, different
+entry points). `EraSchema.order` is relaxed from nonnegative to any integer to
+admit the negative-ordered deep prefix. It is exactly the kind of breadth the
+PROCEDURAL POOL (§1d) + GEMINI EXTRAPOLATION (§1e) exist to populate — hand-
+authoring a millennium of Mughal court events is infeasible; generating + quality-
+gating them is the point. Ship a focused starter set of moments (the table above
++ 1-2 deep-history exemplars), then let extrapolation flesh the long tail.
+
+### §1d.1 DECISION — purpose-built seeded grammar, NOT tracery (FD-4)
+
+The procedural expander is a **purpose-built, pure, seeded grammar** living in
+`src/sim/procgen/**`, not a tracery-class string library.
+
+**Why not tracery / its kin:**
+- Tracery expands strings via `Math.random` internally — banned in `src/sim/**`
+  (the sim-purity gate) and impossible to replay deterministically without
+  forking the lib to inject our `Rng`.
+- Tracery produces STRINGS; we need to emit fully-structured `GameEvent` objects
+  (id, era, year, choices with meter/personality deltas, requires, trope tags) —
+  a flat string grammar can't carry that typed structure.
+- Slot resolution pulls from TYPED game data (the live family tree, world-stacks,
+  onomastics) and must thread the run's `Rng` for determinism — a generic grammar
+  has no hook for typed, seeded, context-aware substitution.
+
+**The design:** an `EventTemplate` (data, zod-validated) carries a skeleton event
+with `{slot}` tokens in its text + a declared slot list. A pure `expandTemplate(
+template, ctx, rng)` resolves each slot via the run context (family tree → member/
+rival; world-stacks → place/peril; era → year window; the trope catalog → trope),
+draws choices/deltas from the template's authored ranges via `rng.fork(label)`,
+and returns a validated `GameEvent`. Materialization is LAZY + BOUNDED: the
+selection pool asks the expander for the next event only when the authored pool
+thins for the current (era, place, trope) cell, and caps how many it requests, so
+a 1000-year run never realizes more than the chaos field needs. Determinism is the
+gating invariant: `expandTemplate` is a pure function of `(template, ctx, rng)`,
+so the same seed + history reconstructs the same generated events on replay (no
+persistence needed — unlike Gemini Mode B, which must store its output).
 
 ## 3. Geo / political / religious / sociological-ideological JSON stacks
 
@@ -235,38 +466,64 @@ line highlighted, branch tilts shown. This becomes a core screen, not a flourish
 
 ## 8. Implementation phases (serial, solo — no agent swarm)
 
-- **FD-1 FamilyTreeSchema + 4 preset trees** — DONE: schema + cross-ref
-  validation in content.ts; economic/political/technological/religious trees.
-- **FD-2 UNIFIED EVENT POOL (§1b)** — add `historicity` (real|extrapolated|
-  personal) + ensure place/era bias on EventSchema; migrate the 24 world-timeline
-  files into unified events (real/extrapolated, bias + setFlags preserved,
-  reactable choices authored for the hinges); retire WorldTimeline +
-  worldtime.ts linking; the compiler/selection weaves one pool. This is the
-  SUBSTRATE for everything after, so it lands first. Determinism + sweep tests
-  stay green through the migration. (Large; may sub-phase per scope group.)
-- **FD-3 Onomastics + naming-convention resolution** — onomastics.json + a pure
-  resolver (generalizes AH8c/d); tests per culture.
-- **FD-4 Start-moments + the new Stage-0 "found your line" flow** —
-  start-moments.json; the founding UI (pick moment + name + progenitor); Stage-0
-  flags feed the compiler. Presets kept as shortcuts. [USER CHECK-IN: # of moments.]
-- **FD-5 World stacks** — src/data/world/ geo/politics/religion/ideology per place
-  (Ireland, UK, South Africa, Canada, both coasts); STANDING context applied by
-  the run's current place; migration = place change. Schema + load + tests.
-- **FD-6 Family-tree STATE + BIRTH mechanics** — FamilyState in GameState; pure
-  seeded beget(); choices/events that spawn children; replay-determinism tests.
-- **FD-7 DEATH + AGING** — per-year seeded mortality hazard; non-protagonist
+- **FD-1 FamilyTreeSchema + 4 preset trees** — DONE.
+- **FD-2 UNIFIED EVENT POOL (§1b)** — IN PROGRESS. 2.1 historicity/place (done);
+  2.2 projectWorldEvents projects the 1169 entries → year-keyed reactable events
+  with no-leak dynasty tags (done); 2.3 selector weave + retire linking + the
+  no-leak gate (next); 2.4 RIP OUT FLIP/SWAP — code layer done (roles.ts deleted),
+  data layer (role-flip endings, ev_flip_* events, kennedy_swap) folded into the
+  trope refactor (FD-3 below).
+- **FD-3 TROPES-AS-INFLUENCES (§1c)** — refactor the literal Trump/Kennedy/Musk/
+  Graham lines into `trope:<id>` influences (accidental-heir, bootlegger-to-
+  legitimacy, frontier-capital-origin, centrist→zealot, + branch tropes); retag
+  the authored events; remove the orphaned flip/swap data + tests; the 4 preset
+  trees become trope-flavored quick-starts. No house-leak possible (no person to
+  drift into).
+- **FD-4 PROCEDURAL POOL (§1d)** — the 100k-events / 1000-years generator: trope
+  templates (slots) + the seeded generative-grammar expander (evaluate a small
+  tracery-class lib vs purpose-built; MUST be pure/seedable) + lazy bounded
+  materialization through the chaos field; substitution from world-stacks +
+  onomastics + the live tree. Replay-determinism is the gating constraint.
+- **FD-5 Onomastics + naming-convention resolution** — onomastics.json + pure
+  resolver (generalizes AH8c/d); per-culture tests. (Feeds FD-4 substitution.)
+- **FD-6 Start-moments + the new Stage-0 "found your line" flow** —
+  start-moments.json; founding UI (pick moment + name + progenitor) feeding the
+  compiler; presets as shortcuts. [USER CHECK-IN: # of moments.]
+- **FD-7 World stacks** — src/data/world/ geo/politics/religion/ideology per place
+  (Ireland, UK, South Africa, Canada, both coasts); STANDING context by current
+  place; migration = place change. (Feeds FD-4 substitution.)
+- **FD-8 Family-tree STATE + BIRTH mechanics** — FamilyState in GameState; pure
+  seeded beget(); choices/events spawn children; replay-determinism tests.
+- **FD-9 DEATH + AGING** — per-year seeded mortality hazard; non-protagonist
   death events; tests.
-- **FD-8 INHERITANCE + ESTATE + SUCCESSION** — estate-planning choices; heir
-  selection; the protagonist-handoff at death; carry-forward of capital/ladders/
-  branch; line-failure ending; multi-generation replay tests.
-- **FD-9 LINEAGE VIEW** — the growing family-tree screen; luxury-styled, real-2D,
+- **FD-10 INHERITANCE + ESTATE + SUCCESSION** — estate-planning choices; heir
+  selection; protagonist-handoff at death; carry-forward of capital/ladders/
+  branch; line-failure ending; multi-generation replay tests. (Enables the
+  eternal-dynasty loop.)
+- **FD-11 GEMINI DEV-BULK EXTRAPOLATION (§1e Mode A)** — add `@google/genai` dev
+  dep; `scripts/extrapolate.mjs` (gap-detect → generate w/ last-10–25 context →
+  gemini-3-pro self-critique loop → schema+guard validate → commit into JSON).
+  **SHIP CRITERION (user): run it out until all four dynasties sustain a full
+  1000 YEARS of dynastic rule with no dead-ends / thin years** — that depth is
+  the bar to ship. Deterministic play unaffected.
+- **FD-12 TITLE MENU + SETTINGS + RUNTIME LIVE (§1e Mode B)** — restructure the
+  title into New Game · Load Game · Settings; Settings stores the Gemini key via
+  Capacitor secure storage (+ web fallback) and toggles live extrapolation;
+  optional runtime generate-on-exhaustion that persists generated events into the
+  save (determinism preserved by storage). Default OFF. NOTE (user): with the
+  1000-year dev-bulk depth (FD-11), runtime may not be NEEDED — but it ships as
+  the optional infinite-tail layer anyway.
+- **FD-13 LINEAGE VIEW** — the growing family-tree screen; luxury-styled, real-2D,
   no portraits; screenshot-verify.
-- **FD-10 DoD** — full gate + sweeps (AH6 + persona) over generational runs +
-  app live-verified (found a line at the Famine, beget an heir, die, succeed);
+- **FD-14 DoD** — full gate + sweeps (AH6 + persona) over multi-generation runs +
+  app live-verified (found a line at the Famine → beget heir → die → succeed →
+  carry the line forward) + a determinism stress test over a 1000-year run;
   PRs squash-merged; directive → RELEASED.
 
-Each phase is its own PR. FD-1 landed; FD-2 (the unified event pool) is the
-keystone substrate and is next.
+PR/batch size is NOT a constraint (user: don't split for size; be smart, use
+barrel-organized package-like module structure where appropriate, e.g. an
+`events/` package barrel for the pool + generator). FD-1 landed; FD-2 in flight;
+FD-3 (tropes) + FD-4 (procedural pool) are the conceptual heart.
 
 ## 9. Self-review
 

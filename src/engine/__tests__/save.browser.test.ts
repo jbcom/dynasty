@@ -21,24 +21,38 @@ function playTwo() {
 }
 
 describe("save/load (deterministic replay)", () => {
-  it("toSave captures seed + dynasty + history", () => {
+  it("toSave captures seed + archetype + history", () => {
     const { s } = playTwo();
     const save = toSave(s);
     expect(save.seed).toBe("save-seed");
-    expect(save.dynasty).toBe("trump"); // default dynasty
+    expect(save.archetype).toBe("economic"); // default archetype
     expect(save.history).toHaveLength(2);
-    expect(save.version).toBe(1);
+    expect(save.version).toBe(2);
   });
 
-  it("fromSave preserves dynasty on round-trip (de-5b regression)", () => {
-    // A Musk run started with initState(content, seed, 'musk') must survive a
-    // save → fromSave → replay cycle with dynasty = 'musk', not defaulting to 'trump'.
+  it("fromSave preserves archetype on round-trip (FD-3.5 regression)", () => {
+    // A technological run started with initState(content, seed, 'technological') must
+    // survive a save → fromSave → replay cycle with archetype = 'technological'.
     const c = content();
-    const s = initState(c, "musk-seed", "musk");
+    const s = initState(c, "musk-seed", "technological");
     const reconstructed = fromSave(c, toSave(s));
-    expect(reconstructed.dynasty).toBe("musk");
+    expect(reconstructed.archetype).toBe("technological");
     expect(reconstructed.birthYear).toBe(1971);
     expect(reconstructed.flags).toContain("musk_dynasty_active");
+  });
+
+  it("fromSave migrates a legacy v1 literal-dynasty save onto its archetype", () => {
+    const c = content();
+    const reconstructed = fromSave(c, {
+      version: 1,
+      seed: "legacy",
+      // biome-ignore lint/suspicious/noExplicitAny: exercising the legacy v1 shape
+      dynasty: "musk" as any,
+      archetype: undefined as unknown as "economic",
+      history: [],
+      savedYear: 1971,
+    });
+    expect(reconstructed.archetype).toBe("technological");
   });
 
   it("fromSave reconstructs the exact live state", () => {
@@ -79,7 +93,7 @@ describe("save/load (deterministic replay)", () => {
       fromSave(content(), {
         version: 99,
         seed: "x",
-        dynasty: "trump",
+        archetype: "economic",
         history: [],
         savedYear: 1946,
       }),

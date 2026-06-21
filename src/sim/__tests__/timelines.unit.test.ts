@@ -157,26 +157,27 @@ const FILES: Record<string, unknown> = {
   kennedy: kennedyJson,
 };
 
-describe("Kennedy protagonist timeline + dynastic swap (task-003)", () => {
+describe("Kennedy protagonist timeline — bootlegger→dynasty arc (no-leak)", () => {
   it("kennedy.json validates as scope=kennedy with the bootlegger→dynasty arc", () => {
     const t = WorldTimelineSchema.parse(kennedyJson);
     expect(t.scope).toBe("kennedy");
     expect(t.events.length).toBeGreaterThanOrEqual(20);
     const flags = new Set(t.events.flatMap((e) => e.setFlags));
-    // The dynastic-swap wiring: bootlegging → political dynasty → swap.
-    for (const f of ["bootlegger_fortune", "political_dynasty", "kennedy_swap"]) {
-      expect(flags.has(f), `kennedy.json missing swap flag ${f}`).toBe(true);
+    // The arc is intact via the LEGIT flags; the swap flag (kennedy_swap) was
+    // removed with the flip mechanic (FD-3.3) — dynasty is founding-fixed.
+    for (const f of ["bootlegger_fortune", "political_dynasty", "kennedy_dynasty_active"]) {
+      expect(flags.has(f), `kennedy.json missing arc flag ${f}`).toBe(true);
     }
+    expect(flags.has("kennedy_swap"), "kennedy_swap must be gone (no-leak)").toBe(false);
   });
 
-  it("origins exposes the brewing→bootlegger bridge that enables the Trump↔Kennedy swap", () => {
-    // The bootlegger bridge in origins sets the same swap flags from Donald's
-    // own founding, so the Trump line can occupy the Kennedy political-dynasty slot.
+  it("origins exposes the brewing→bootlegger bridge WITHOUT any swap flag", () => {
     const allChoiceFlags = new Set(
       originsJson.events.flatMap((e) => (e.choices ?? []).flatMap((c) => c.setFlags ?? [])),
     );
     expect(allChoiceFlags.has("bootlegger_fortune")).toBe(true);
-    expect(allChoiceFlags.has("kennedy_swap")).toBe(true);
+    // NO-LEAK: the founding bridge no longer sets a swap flag.
+    expect(allChoiceFlags.has("kennedy_swap")).toBe(false);
   });
 });
 

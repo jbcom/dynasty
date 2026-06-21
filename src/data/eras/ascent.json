@@ -13,7 +13,9 @@
       "tags": [
         "politics",
         "campaign",
-        "spectacle"
+        "spectacle",
+        "trope:outside-claimant",
+        "trope:oligarch"
       ],
       "requires": {
         "flags": [],
@@ -212,7 +214,8 @@
       "tags": [
         "politics",
         "campaign",
-        "branding"
+        "branding",
+        "trope:reformer-vs-reactionary"
       ],
       "requires": {
         "flags": [],
@@ -299,7 +302,8 @@
       "tags": [
         "politics",
         "campaign",
-        "rivalry"
+        "rivalry",
+        "trope:outside-claimant"
       ],
       "requires": {
         "flags": [],
@@ -394,7 +398,8 @@
       "tags": [
         "world-event",
         "politics",
-        "populism"
+        "populism",
+        "trope:outside-claimant"
       ],
       "requires": {
         "flags": [],
@@ -564,7 +569,8 @@
       "tags": [
         "politics",
         "campaign",
-        "scandal"
+        "scandal",
+        "trope:scandal-fall-rehab"
       ],
       "requires": {
         "flags": [],
@@ -769,7 +775,9 @@
       "startrekInspired": false,
       "tags": [
         "politics",
-        "campaign"
+        "campaign",
+        "trope:outside-claimant",
+        "trope:centrist-to-zealot"
       ],
       "requires": {
         "flags": [],
@@ -940,7 +948,8 @@
       "startrekInspired": false,
       "tags": [
         "politics",
-        "victory"
+        "victory",
+        "trope:outside-claimant"
       ],
       "requires": {
         "flags": [
@@ -1038,7 +1047,8 @@
       "startrekInspired": false,
       "tags": [
         "politics",
-        "governance"
+        "governance",
+        "trope:outside-claimant"
       ],
       "requires": {
         "flags": [],
@@ -1201,7 +1211,8 @@
       "tags": [
         "politics",
         "governance",
-        "scandal"
+        "scandal",
+        "trope:scandal-fall-rehab"
       ],
       "requires": {
         "flags": [],
@@ -1393,7 +1404,8 @@
       "tags": [
         "politics",
         "governance",
-        "immigration"
+        "immigration",
+        "trope:reformer-vs-reactionary"
       ],
       "requires": {
         "flags": [
@@ -1597,7 +1609,8 @@
       "tags": [
         "politics",
         "governance",
-        "economy"
+        "economy",
+        "trope:oligarch"
       ],
       "requires": {
         "flags": [],
@@ -2001,7 +2014,8 @@
       "tags": [
         "politics",
         "governance",
-        "scandal"
+        "scandal",
+        "trope:scandal-fall-rehab"
       ],
       "requires": {
         "flags": [
@@ -2101,7 +2115,8 @@
       "tags": [
         "politics",
         "governance",
-        "scandal"
+        "scandal",
+        "trope:scandal-fall-rehab"
       ],
       "requires": {
         "flags": [
@@ -2199,7 +2214,9 @@
         "world-event",
         "politics",
         "populism",
-        "foreign-policy"
+        "foreign-policy",
+        "trope:prophet",
+        "trope:reformer-vs-reactionary"
       ],
       "requires": {
         "flags": [
@@ -2715,7 +2732,8 @@
         "world-event",
         "politics",
         "crisis",
-        "protest"
+        "protest",
+        "trope:reformer-vs-reactionary"
       ],
       "requires": {
         "flags": [],
@@ -3152,7 +3170,8 @@
         "ai",
         "politics",
         "disinformation",
-        "campaign"
+        "campaign",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [],
@@ -3263,7 +3282,8 @@
         "ai",
         "technology",
         "politics",
-        "governance"
+        "governance",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -3520,7 +3540,9 @@
         "ai",
         "politics",
         "musk",
-        "disinformation"
+        "disinformation",
+        "trope:oligarch",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -3635,7 +3657,8 @@
         "ai",
         "disinformation",
         "scandal",
-        "media"
+        "media",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -3750,7 +3773,8 @@
         "ai",
         "governance",
         "geopolitics",
-        "technology"
+        "technology",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -3966,6 +3990,568 @@
             }
           ],
           "outcome": "The guardrails are imperfect, underfunded, and quietly effective. You will not be remembered for this. The people it protects will not know your name. That is, surprisingly, okay."
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_golden_escalator_shadow",
+      "era": "ascent",
+      "year": 2015,
+      "title": "The Golden Escalator's Shadow",
+      "scene": "The brass rails of your signature tower gleam under the television lights as your historic campaign begins. Your eldest daughter, a creature of Manhattan galleries, begs you to temper the nativist rhetoric to protect the family brand. Your loyal, aggressive sons insist the base wants fire and fury.",
+      "researchNote": "Donald Trump launched his 2015 campaign at Trump Tower with highly controversial remarks about Mexican immigrants, cementing his populist direction.",
+      "historicity": "real",
+      "tags": [
+        "trope:centrist-to-zealot"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "opt_escalator_moderate",
+          "text": "Focus on business acumen to appease high-society donors and Manhattan allies.",
+          "effects": {
+            "money": 10000,
+            "power": -5,
+            "reputation": 10,
+            "loyalty": -10,
+            "heat": -10
+          },
+          "personality": {
+            "inward": 10
+          },
+          "setFlags": [
+            "moderate_brand"
+          ],
+          "outcome": "The elites are reassured, but the crowds at your rallies grow quiet. You are just another wealthy executive in a suit.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_escalator_populist",
+          "text": "Lean heavily into hardline immigration rhetoric. Give them raw fury.",
+          "effects": {
+            "money": -5000,
+            "power": 20,
+            "reputation": -15,
+            "loyalty": 15,
+            "heat": 15
+          },
+          "personality": {
+            "ideology": 20,
+            "grandiosity": 15
+          },
+          "setFlags": [
+            "populist_fire"
+          ],
+          "outcome": "The crowd roars and the media goes into a frenzy. Corporate partners drop your brand, but you have found your true army.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_escalator_double_game",
+          "text": "Whisper moderation to the newspapers while feeding venom to the arena crowds.",
+          "effects": {
+            "money": 5000,
+            "power": 10,
+            "reputation": -5,
+            "loyalty": 5,
+            "heat": 5
+          },
+          "personality": {
+            "outward": 15
+          },
+          "setFlags": [
+            "double_dealer"
+          ],
+          "outcome": "The media labels you a genius strategist while the base eats out of your hand. It is a precarious, beautiful tightrope.",
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_tabloid_laundromat",
+      "era": "ascent",
+      "year": 2016,
+      "title": "The Tabloid Laundromat",
+      "scene": "A friendly media executive meets you in private, holding the exclusive rights to a highly damaging story about your private life. He offers to buy the story and bury it forever, but he wants the exclusive right to fabricate career-ending rumors about your political rivals.",
+      "researchNote": "American Media Inc. (AMI), publisher of the National Enquirer, engaged in 'catch and kill' practices to protect and benefit Donald Trump's 2016 campaign.",
+      "historicity": "real",
+      "tags": [
+        "trope:pleasure-king"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "opt_tabloid_buy_silence",
+          "text": "Authorize a shell company to reimburse the tabloid and bury your dirty laundry.",
+          "effects": {
+            "money": -15000,
+            "reputation": 10,
+            "loyalty": 10,
+            "heat": 15
+          },
+          "personality": {
+            "inward": 15
+          },
+          "setFlags": [
+            "hush_paid"
+          ],
+          "outcome": "The story vanishes from the supermarket shelves, though the paper trail remains a ticking time bomb in your ledger.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_tabloid_weaponize",
+          "text": "Direct them to run wild, fabricated smears against your leading primary opponents.",
+          "effects": {
+            "money": 0,
+            "power": 15,
+            "reputation": -5,
+            "loyalty": -5,
+            "heat": 10
+          },
+          "personality": {
+            "grandiosity": 15,
+            "outward": 10
+          },
+          "setFlags": [
+            "tabloid_weaponized"
+          ],
+          "outcome": "Your rivals are forced to deny bizarre conspiracy theories on national television while your polling numbers surge.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_tabloid_defy",
+          "text": "Refuse to pay. Let the story break and claim it is fake news concocted by the elites.",
+          "effects": {
+            "money": 10000,
+            "reputation": -20,
+            "loyalty": 20,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": 20
+          },
+          "outcome": "Your supporters rally around your defiance, viewing the scandal as proof that the establishment is out to destroy you.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_red_line_offshore",
+      "era": "ascent",
+      "year": 2016,
+      "title": "The Red-Line Offshore Trust",
+      "scene": "Campaign bills are mounting, and traditional banks are locking their doors to your brand. A foreign financier with close ties to an Eastern European state offers to purchase several struggling family condominium towers at triple their market value, using anonymous Delaware shell companies.",
+      "researchNote": "Investigations into Donald Trump's real estate deals revealed a pattern of shell companies purchasing high-end properties with anonymous foreign funds.",
+      "historicity": "personal",
+      "tags": [
+        "trope:bootlegger-to-legitimacy"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "opt_offshore_accept",
+          "text": "Accept the foreign cash to fund the campaign's critical final weeks.",
+          "effects": {
+            "money": 40000,
+            "power": 10,
+            "reputation": -10,
+            "heat": 25
+          },
+          "personality": {
+            "grandiosity": 15
+          },
+          "setFlags": [
+            "foreign_backed"
+          ],
+          "outcome": "The family accounts overflow with liquidity, but intelligence analysts begin flagging the transactions.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_offshore_decline",
+          "text": "Reject the foreign money and borrow heavily from predatory domestic lenders instead.",
+          "effects": {
+            "money": -20000,
+            "power": -5,
+            "reputation": 5,
+            "heat": -15
+          },
+          "personality": {
+            "inward": 15
+          },
+          "outcome": "Your family business takes a brutal financial hit, but you keep your name clear of foreign collusion allegations.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_offshore_cutout",
+          "text": "Have your son-in-law's firm broker the deal to keep your direct family name off the titles.",
+          "effects": {
+            "money": 25000,
+            "power": 5,
+            "reputation": -5,
+            "heat": 10
+          },
+          "personality": {
+            "outward": 10
+          },
+          "setFlags": [
+            "cutout_used"
+          ],
+          "outcome": "The transactions are buried deep in your son-in-law's complex web of real estate holdings, shielding you from immediate blowback.",
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_inaugural_slush_fund",
+      "era": "ascent",
+      "year": 2017,
+      "title": "The Inaugural Slush Fund",
+      "scene": "Your historic victory is secured, and your family-owned hotel down the street from the Capitol is booked solid. Foreign diplomats, energy lobbyists, and defense contractors are booking entire empty floors at inflated rates to curry favor with the incoming administration.",
+      "researchNote": "The 2017 Trump inaugural committee raised an unprecedented $107 million, drawing heavy scrutiny over how funds were spent at Trump-owned properties.",
+      "historicity": "real",
+      "tags": [
+        "trope:oligarch"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "opt_inaugural_maximize",
+          "text": "Charge the absolute maximum hotel rates and route the surplus into family accounts.",
+          "effects": {
+            "money": 30000,
+            "power": 5,
+            "reputation": -15,
+            "heat": 20
+          },
+          "personality": {
+            "grandiosity": 20
+          },
+          "setFlags": [
+            "hotel_grift"
+          ],
+          "outcome": "The family hotel makes record profits in a single week, though federal prosecutors start taking notes on the hotel's registries.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_inaugural_moderate",
+          "text": "Impose a strict cap on rates for political events to stave off future investigations.",
+          "effects": {
+            "money": 10000,
+            "power": 5,
+            "reputation": 10,
+            "heat": -10
+          },
+          "personality": {
+            "inward": 10
+          },
+          "outcome": "You leave millions on the table, but your legal team breathes a sigh of relief as the event passes without scandal.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_inaugural_patronage",
+          "text": "Award lucrative inaugural staging contracts directly to your campaign donors' shell corporations.",
+          "effects": {
+            "money": 15000,
+            "power": 20,
+            "reputation": -10,
+            "heat": 15
+          },
+          "personality": {
+            "ideology": 10,
+            "outward": 15
+          },
+          "setFlags": [
+            "direct_patronage"
+          ],
+          "outcome": "You secure unbreakable, lifelong loyalty from a powerful network of defense and industrial oligarchs.",
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_nepotism_security",
+      "era": "ascent",
+      "year": 2017,
+      "title": "The Nepotism Security Clearance",
+      "scene": "The intelligence agencies have refused to grant your son-in-law a top-secret security clearance, citing his massive foreign real estate debts and backchannel meetings with foreign agents. Your Chief of Staff warns that forcing the issue will trigger a major intelligence leak.",
+      "researchNote": "President Trump overrode the concerns of intelligence officials and his own White House counsel to grant Jared Kushner a top-secret security clearance.",
+      "historicity": "real",
+      "tags": [
+        "trope:dynastic-merger"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "opt_nepotism_force",
+          "text": "Override the intelligence chiefs and order the clearance approved. He is family.",
+          "effects": {
+            "power": 20,
+            "reputation": -10,
+            "loyalty": 20,
+            "heat": 20
+          },
+          "personality": {
+            "grandiosity": 15
+          },
+          "setFlags": [
+            "clearance_forced"
+          ],
+          "outcome": "Your son-in-law takes his place in high-level foreign policy briefings, and the intelligence community begins whispering to the press.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_nepotism_workaround",
+          "text": "Keep him on as an 'informal' advisor, bypassing the official clearance but keeping him in the room.",
+          "effects": {
+            "power": 10,
+            "loyalty": 10,
+            "heat": 10
+          },
+          "personality": {
+            "outward": 15
+          },
+          "outcome": "He maintains his influence while avoiding formal oversight, though foreign diplomats quickly learn he is the real key to your ear.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_nepotism_sever",
+          "text": "Order your son-in-law to step down and return to his private business interests.",
+          "effects": {
+            "power": -10,
+            "reputation": 10,
+            "loyalty": -25,
+            "heat": -15
+          },
+          "personality": {
+            "inward": 20
+          },
+          "outcome": "Your daughter is furious, and a major pillar of your internal White House operations collapses, but the intelligence chiefs are placated.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_border_detention_gold",
+      "era": "ascent",
+      "year": 2018,
+      "title": "The Border Detention Goldmine",
+      "scene": "Your controversial 'Zero Tolerance' border policy has created an acute housing crisis for thousands of detained migrant children. A major private prison firm, and a premier donor to your campaign, offers to construct massive desert tent cities under lucrative sole-source federal contracts.",
+      "researchNote": "During the Trump administration's family separation crisis, private prison contractors and non-profit facility operators received hundreds of millions in federal grants.",
+      "historicity": "real",
+      "tags": [
+        "trope:frontier-capital-origin"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "opt_border_private_contracts",
+          "text": "Fast-track the non-compete contracts to the private prison firm.",
+          "effects": {
+            "money": 25000,
+            "power": 15,
+            "reputation": -20,
+            "heat": 20
+          },
+          "personality": {
+            "ideology": 20
+          },
+          "setFlags": [
+            "private_prisons_flush"
+          ],
+          "outcome": "The facilities are built overnight, and campaign donations from the private security industry surge to record levels.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_border_military_bases",
+          "text": "House the detainees on active military bases to bypass private contractors and control costs.",
+          "effects": {
+            "money": -5000,
+            "power": 10,
+            "reputation": -10,
+            "heat": 15
+          },
+          "personality": {
+            "inward": 15
+          },
+          "outcome": "The Pentagon grumbles about mission creep, but the optics shift from corporate profiteering to national security defense.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_border_deescalate",
+          "text": "Quietly scale back the family separations under immense pressure from moderate relatives.",
+          "effects": {
+            "power": -15,
+            "reputation": 15,
+            "loyalty": -10,
+            "heat": -15
+          },
+          "personality": {
+            "outward": 10
+          },
+          "outcome": "Your hardline base is disappointed by the retreat, but the immediate media onslaught begins to lose its venom.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_rogue_cadet_leak",
+      "era": "ascent",
+      "year": 2019,
+      "title": "The Rogue Cadet Leak",
+      "scene": "An estranged cousin of yours, deeply bitter about her exclusion from the family's political rise, has written a tell-all memoir. She is shopping the book to major New York publishers, offering internal family documents and audio recordings of your private rants.",
+      "researchNote": "Mary L. Trump, a clinical psychologist and niece of Donald Trump, published a highly critical tell-all family memoir in 2020.",
+      "historicity": "personal",
+      "tags": [
+        "trope:cadet-branch"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "opt_leak_sue",
+          "text": "File aggressive, high-profile lawsuits to enforce her non-disclosure agreement.",
+          "effects": {
+            "money": -10000,
+            "power": 5,
+            "reputation": -5,
+            "heat": 10
+          },
+          "personality": {
+            "inward": 15
+          },
+          "setFlags": [
+            "family_sued"
+          ],
+          "outcome": "The courts refuse to block publication, and your legal filings only turn the book into a record-breaking national bestseller.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_leak_smear",
+          "text": "Publicly humiliate her as a fragile, greedy failure who was cut out of the family trust.",
+          "effects": {
+            "power": 10,
+            "reputation": -10,
+            "loyalty": 15,
+            "heat": 10
+          },
+          "personality": {
+            "grandiosity": 20
+          },
+          "outcome": "Your loyal base dismisses her revelations as standard family drama, though the tax records she leaked remain in public hands.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_leak_buyout",
+          "text": "Quietly offer her a lucrative stake in an offshore development to sign a new, airtight NDA.",
+          "effects": {
+            "money": -25000,
+            "power": -5,
+            "reputation": 10,
+            "heat": -15
+          },
+          "personality": {
+            "outward": 10
+          },
+          "setFlags": [
+            "cousin_bought_off"
+          ],
+          "outcome": "She takes the money and the book project is shelved indefinitely. The family's deepest financial secrets remain buried.",
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_ppp_goldmine",
+      "era": "ascent",
+      "year": 2020,
+      "title": "The PPP Goldmine",
+      "scene": "The federal government has unleashed trillions in emergency pandemic relief. Your family's struggling regional hotels and golf courses are technically eligible for millions in forgivable Paycheck Protection Program loans, but accepting them will invite intense scrutiny from the press.",
+      "researchNote": "A significant number of political donors, high-end real estate ventures, and businesses with links to the Trump administration received millions in PPP loans in 2020.",
+      "historicity": "real",
+      "tags": [
+        "trope:oligarch"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "opt_ppp_exploit",
+          "text": "Direct your subsidiaries to claim the maximum possible aid and muzzle congressional oversight.",
+          "effects": {
+            "money": 45000,
+            "power": 10,
+            "reputation": -20,
+            "heat": 25
+          },
+          "personality": {
+            "grandiosity": 20
+          },
+          "setFlags": [
+            "ppp_looted"
+          ],
+          "outcome": "Millions in free capital pour into your business accounts, keeping your properties afloat as the broader economy crumbles.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_ppp_moderate",
+          "text": "Have only your minor, low-profile subsidiaries apply to minimize the public footprint.",
+          "effects": {
+            "money": 15000,
+            "power": 5,
+            "reputation": -5,
+            "heat": 10
+          },
+          "personality": {
+            "inward": 10
+          },
+          "outcome": "You secure a modest financial cushion while mostly avoiding the headlines that target other high-profile beneficiaries.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "opt_ppp_reject",
+          "text": "Refuse all federal relief. Publicly accuse your political rivals of abusing the rescue funds.",
+          "effects": {
+            "money": -15000,
+            "power": 15,
+            "reputation": 15,
+            "heat": -15
+          },
+          "personality": {
+            "ideology": 15
+          },
+          "outcome": "Your cash reserves dwindle, but your political message is incredibly potent, and your clean hands stun your opponents.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     }

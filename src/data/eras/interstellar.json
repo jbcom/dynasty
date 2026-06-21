@@ -13,7 +13,8 @@
       "tags": [
         "stars",
         "milestone",
-        "future"
+        "future",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -241,7 +242,8 @@
         "stars",
         "colonization",
         "concord",
-        "world"
+        "world",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -457,7 +459,8 @@
         "stars",
         "concord",
         "apex",
-        "ending"
+        "ending",
+        "trope:bootlegger-to-legitimacy"
       ],
       "requires": {
         "flags": [
@@ -577,7 +580,8 @@
         "stars",
         "empire",
         "conquest",
-        "power"
+        "power",
+        "trope:conqueror"
       ],
       "requires": {
         "flags": [
@@ -692,7 +696,9 @@
         "stars",
         "empire",
         "kardashev",
-        "power"
+        "power",
+        "trope:techno-frontier",
+        "trope:conqueror"
       ],
       "requires": {
         "flags": [
@@ -805,7 +811,8 @@
         "stars",
         "empire",
         "tyrant",
-        "ending"
+        "ending",
+        "trope:conqueror"
       ],
       "requires": {
         "flags": [
@@ -1598,7 +1605,8 @@
         "stars",
         "occupation",
         "puppet",
-        "ending"
+        "ending",
+        "trope:dissipating-line"
       ],
       "requires": {
         "flags": [
@@ -1711,7 +1719,8 @@
         "stars",
         "resources",
         "industry",
-        "science"
+        "science",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -1820,7 +1829,8 @@
         "stars",
         "rivalry",
         "power",
-        "dynasty"
+        "dynasty",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -2036,7 +2046,8 @@
         "stars",
         "terraforming",
         "science",
-        "world"
+        "world",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -2225,6 +2236,493 @@
             }
           ],
           "outcome": "You let the years run together into a long gray sameness and retreat behind walls no visitor crosses. Time stops hurting only because you have stopped feeling it. The immortal becomes a ghost in his own endless life."
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_concord_registry",
+      "era": "interstellar",
+      "year": 2168,
+      "title": "The Registry of Sapient Houses",
+      "scene": "The Concord’s high registrars demand we declare our family’s extra-solar holdings. Our accountants suggest registering our thousands of orbital laborers as 'uncompensated biological assets' to bypass the interstellar luxury tariff, while local purists warn this will permanently brand us as tyrants in the galactic court.",
+      "researchNote": "A look at how corporate entities exploit legal loopholes when introduced to complex alien bureaucracy.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:dynastic-merger"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "concord_declare_assets",
+          "text": "Register them as assets to maximize our immediate borrowing power.",
+          "effects": {
+            "money": 250,
+            "power": 50,
+            "reputation": -100,
+            "heat": 80
+          },
+          "personality": {
+            "grandiosity": 0.5,
+            "inward": 0.3
+          },
+          "outcome": "The Concord accepts the filing with cold bureaucratic indifference, though human labor unions back on Earth curse your name.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "concord_declare_citizens",
+          "text": "Sponsor their transition to full Concord citizenship to win alien favor.",
+          "effects": {
+            "money": -300,
+            "power": -50,
+            "reputation": 200,
+            "heat": -50
+          },
+          "personality": {
+            "ideology": 0.6,
+            "outward": 0.5
+          },
+          "outcome": "The interstellar press praises your enlightened human philanthropy, though your balance sheet bleeds.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "concord_bribe_registrar",
+          "text": "Bribe the registrar’s sub-routines to list the holdings as an uninhabited mining reserve.",
+          "effects": {
+            "money": -100,
+            "power": 100,
+            "reputation": 0,
+            "heat": 120
+          },
+          "personality": {
+            "inward": 0.8
+          },
+          "outcome": "The records are altered, hiding your private labor force from both tax collectors and human humanists.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_nanite_succession",
+      "era": "interstellar",
+      "year": 2208,
+      "title": "The Titan's Will",
+      "scene": "Your eldest child has joined an anti-longevity cult on Titan, rejecting the family’s neural-link legacy. The succession now falls to your youngest—a reckless slipstream racer who has already crashed two warp-yachts into Jupiter’s magnetosphere and shows no interest in managing a star-spanning estate.",
+      "researchNote": "The sociological gap between the immortal founders of star empires and their detached descendants.",
+      "historicity": "personal",
+      "tags": [
+        "trope:accidental-heir"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "titan_force_upgrade",
+          "text": "Force the neural-link onto the racer; the dynasty must have a pilot.",
+          "effects": {
+            "money": -50,
+            "power": 100,
+            "loyalty": -150,
+            "health": -20
+          },
+          "personality": {
+            "grandiosity": 0.8,
+            "inward": 0.2
+          },
+          "outcome": "They take the mantle under heavy sedation, their eyes vacant as they sign our trade directives.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "titan_honor_cultist",
+          "text": "Drag the Titan cultist back to Earth and force them to inherit.",
+          "effects": {
+            "money": -100,
+            "power": 50,
+            "reputation": 50,
+            "loyalty": -100
+          },
+          "personality": {
+            "ideology": 0.4,
+            "inward": 0.6
+          },
+          "outcome": "They rule with a bitter, monastic simplicity, slowly donating our minor moons to public parks.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "titan_adopt_clone",
+          "text": "Bypassing both, initiate a rapid-growth clone of yourself to inherit.",
+          "effects": {
+            "money": -200,
+            "power": 150,
+            "reputation": -150,
+            "heat": 100
+          },
+          "personality": {
+            "grandiosity": 1,
+            "inward": 0.5
+          },
+          "outcome": "The children are furious, but the clone’s infantile mind is incredibly receptive to your corporate training.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_blockade_runners",
+      "era": "interstellar",
+      "year": 2218,
+      "title": "Siphoning the Hegemony",
+      "scene": "The Vasreth occupation blockade is tight, but the local alien garrison commander takes bribes in old Earth vintages and high-density data drives. We have acquired a secret cache of military warp-coils; we must decide who gets to buy our silence.",
+      "researchNote": "How black-market networks thrive along frontier borders during planetary occupations.",
+      "historicity": "extrapolated",
+      "requires": {
+        "flags": [
+          "under_yoke"
+        ]
+      },
+      "choices": [
+        {
+          "id": "runners_sell_resistance",
+          "text": "Smuggle the coils to the human resistance cells on Mars.",
+          "effects": {
+            "money": 100,
+            "power": 100,
+            "reputation": 50,
+            "loyalty": 150,
+            "heat": 150
+          },
+          "personality": {
+            "ideology": 0.7,
+            "outward": 0.3
+          },
+          "setFlags": [
+            "resistance_armed"
+          ],
+          "outcome": "The resistance honors your name in their secret broadcasts, though the Vasreth security services are sniffing closer.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "runners_sell_vasreth",
+          "text": "Sell the coils back to the Vasreth authorities to prove our loyalty.",
+          "effects": {
+            "money": 300,
+            "power": -50,
+            "reputation": -150,
+            "loyalty": -200,
+            "heat": -100
+          },
+          "personality": {
+            "inward": 0.8
+          },
+          "outcome": "The regional director rewards your civic duty with gold and trade passes, while the resistance brands you a marked target.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "runners_keep_tech",
+          "text": "Stash the coils in our private asteroid vaults for our own fleet.",
+          "effects": {
+            "money": -50,
+            "power": 200,
+            "reputation": 0,
+            "heat": 80
+          },
+          "personality": {
+            "grandiosity": 0.6,
+            "inward": 0.4
+          },
+          "outcome": "Your private security force is now armed with military-grade jump drives, ready for whatever collapse comes next.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "ev_gen_tau_ceti_exploit",
+      "era": "interstellar",
+      "year": 2232,
+      "title": "The Methane-Breathers' Gamble",
+      "scene": "The quiet, methane-breathing natives of Tau Ceti IV have spent three hundred years composing a hyper-spatial poem about a cloud. Our surveyors have located massive deposits of heavy isotopes beneath their sacred continental shelves; they have no concept of land deeds.",
+      "researchNote": "Resource exploitation of peaceful civilizations using legalistic and technological asymmetry.",
+      "historicity": "real",
+      "tags": [
+        "trope:frontier-capital-origin"
+      ],
+      "choices": [
+        {
+          "id": "ceti_strip_mine",
+          "text": "Strip-mine the shelves immediately; their poem can include the sound of our drills.",
+          "effects": {
+            "money": 400,
+            "power": 100,
+            "reputation": -200,
+            "heat": 150
+          },
+          "personality": {
+            "grandiosity": 0.7,
+            "inward": 0.5
+          },
+          "outcome": "The isotopes flood our foundries, though the Concord slaps our house with a severe environmental censure.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ceti_trade_trinkets",
+          "text": "Introduce them to digital ownership tokens, trading virtual clouds for physical land.",
+          "effects": {
+            "money": 200,
+            "power": 50,
+            "reputation": -50,
+            "heat": 50
+          },
+          "personality": {
+            "inward": 0.8
+          },
+          "outcome": "They happily sign away their mineral rights for sparkling, non-fungible light-arrays, leaving us legally clear.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "ceti_protect_land",
+          "text": "Declare their planet a sovereign sanctuary and charge other houses for its protection.",
+          "effects": {
+            "money": -150,
+            "power": 150,
+            "reputation": 200,
+            "heat": -50
+          },
+          "personality": {
+            "ideology": 0.5,
+            "outward": 0.7
+          },
+          "outcome": "You are hailed as a champion of xenological rights, collecting hefty 'security fees' from Concord scientific vessels.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_centuries_schism",
+      "era": "interstellar",
+      "year": 2252,
+      "title": "The Transhumanist Schism",
+      "scene": "Centuries of life-extension have divided our family's younger generation. Your great-granddaughter wants to upload her consciousness into the Concord's light-mesh, while her brother demands the family maintain a pure, carbon-based biological lineage to protect our traditional claims.",
+      "researchNote": "The philosophical division of wealth and physical legacy in an era of digital transcendence.",
+      "historicity": "personal",
+      "tags": [
+        "trope:reformer-vs-reactionary"
+      ],
+      "choices": [
+        {
+          "id": "schism_support_upload",
+          "text": "Finance her transcendence, positioning our house within the digital fabric of the galaxy.",
+          "effects": {
+            "money": -250,
+            "power": 150,
+            "reputation": 50,
+            "loyalty": -50
+          },
+          "personality": {
+            "outward": 0.8,
+            "inward": 0.2
+          },
+          "outcome": "She becomes an immortal consciousness, manipulating trade algorithms in our favor from within the stellar network.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "schism_enforce_carbon",
+          "text": "Cut her off and declare our lineage strictly biological.",
+          "effects": {
+            "money": 100,
+            "power": 50,
+            "reputation": -50,
+            "loyalty": 100
+          },
+          "personality": {
+            "ideology": 0.6,
+            "inward": 0.8
+          },
+          "outcome": "The pure bloodline is secured, though we lose our competitive edge in the high-frequency orbital markets.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "schism_split_estate",
+          "text": "Split the dynasty into carbon and digital branches, letting them compete.",
+          "effects": {
+            "money": -100,
+            "power": 100,
+            "reputation": 0,
+            "loyalty": -150,
+            "heat": 50
+          },
+          "personality": {
+            "grandiosity": 0.9
+          },
+          "setFlags": [
+            "split_dynasty"
+          ],
+          "outcome": "The house divides; a cold war of inheritance begins between the physical estates and the server farms.",
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_liberation_spoils",
+      "era": "interstellar",
+      "year": 2262,
+      "title": "The Reconstructed Cradle",
+      "scene": "In the wake of the Vasreth retreat, their gilded administrative citadels hang silent over the scarred ruins of Geneva. The newly declared human provisional government wants to demolish them as monuments of oppression, but our family has the technology to refit them as our private orbital offices.",
+      "researchNote": "Post-war reconstruction as an opportunity for oligarchical acquisition of colonial infrastructure.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:exile-return"
+      ],
+      "requires": {
+        "flags": [
+          "resistance_armed"
+        ]
+      },
+      "choices": [
+        {
+          "id": "spoils_seize_citadel",
+          "text": "Seize the citadels by force before the provisional government can secure them.",
+          "effects": {
+            "money": 150,
+            "power": 200,
+            "reputation": -150,
+            "heat": 180
+          },
+          "personality": {
+            "grandiosity": 0.9,
+            "inward": 0.4
+          },
+          "outcome": "Our family banners now fly over Geneva from orbit, though the new human republic views us as domestic occupiers.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "spoils_buy_republic",
+          "text": "Fund the demolition and use the rubble to build the republic's new capital.",
+          "effects": {
+            "money": -300,
+            "power": 100,
+            "reputation": 250,
+            "heat": -80
+          },
+          "personality": {
+            "ideology": 0.5,
+            "outward": 0.6
+          },
+          "outcome": "We are hailed as the founding patriots of the free era, securing our seats in the new planetary senate.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "spoils_scrap_tech",
+          "text": "Strip the alien technology from the citadels and sell it to the highest offworld bidder.",
+          "effects": {
+            "money": 400,
+            "power": 50,
+            "reputation": -50,
+            "heat": 100
+          },
+          "personality": {
+            "inward": 0.9
+          },
+          "outcome": "Our Swiss accounts overflow with credit-units, though Earth's historical preservation societies are devastated.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_gilded_hegemony",
+      "era": "interstellar",
+      "year": 2299,
+      "title": "The Gilded Ministry",
+      "scene": "Through decades of strategic campaign finance and selective blackmails, we have successfully fused the planetary Ministry of Outer Transit with our family's private warp-foundries. There is no longer a clear boundary where the state's budget ends and our ledger begins.",
+      "researchNote": "The absolute capture of regulatory bodies by dynastic monopolies in high-tech space industries.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:oligarch"
+      ],
+      "choices": [
+        {
+          "id": "gilded_enforce_monopoly",
+          "text": "Criminalize all independent slipstream research under the guise of 'public safety.'",
+          "effects": {
+            "money": 300,
+            "power": 200,
+            "reputation": -100,
+            "heat": 120
+          },
+          "personality": {
+            "grandiosity": 0.8,
+            "inward": 0.6
+          },
+          "outcome": "We have achieved a total monopoly on human space travel, though a subterranean movement of backyard engine-builders is forming.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "gilded_bribe_senate",
+          "text": "Distribute minor transit vouchers to every citizen to maintain a facade of public utility.",
+          "effects": {
+            "money": -150,
+            "power": 100,
+            "reputation": 150,
+            "heat": -50
+          },
+          "personality": {
+            "ideology": 0.4,
+            "outward": 0.6
+          },
+          "outcome": "The populace is pacified by free weekend trips to Mars, ignoring the fact that we own every breathing-dome they visit.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "gilded_escape_vault",
+          "text": "Liquidate the ministry's public assets and invest them in an un-traceable generation ship for the family.",
+          "effects": {
+            "money": 500,
+            "power": -100,
+            "reputation": -200,
+            "heat": 200
+          },
+          "personality": {
+            "inward": 1
+          },
+          "outcome": "We prepare a gilded ark to leave this crowded galaxy behind, leaving the tax auditors to sort through a hollow husk of a state.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     }

@@ -17,9 +17,11 @@ describe("F0 data files", () => {
     ]);
   });
 
-  it("eras/index.json validates and orders all 13 eras", () => {
+  it("eras/index.json validates and orders all eras (13 modern + 1 deep-history)", () => {
     const index = EraIndexSchema.parse(indexJson);
-    expect(index.eras).toHaveLength(13);
+    expect(index.eras).toHaveLength(14);
+    // The deep-history caliphate era sorts ahead of origins via a negative order.
+    expect(index.eras.some((e) => e.id === "caliphate" && e.order < 0)).toBe(true);
     const orders = index.eras.map((e) => e.order);
     expect(orders).toEqual([...orders].sort((a, b) => a - b));
     // Eras 7-10 are extrapolated; 8-9 are Star Trek inspired.

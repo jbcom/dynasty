@@ -1,0 +1,245 @@
+{
+  "moments": [
+    {
+      "id": "irish_famine_1847",
+      "label": "The Great Hunger — Ireland, 1847",
+      "year": 1847,
+      "place": "ireland",
+      "culture": "irish_catholic",
+      "archetype": "political",
+      "progenitorSex": "male",
+      "startEra": "origins",
+      "scene": "The potato is black in the ground for the third year running. Your family stands at the Cobh quay with one ticket's worth of saved coin and a choice that will define the line: who boards, and what they carry across the water.",
+      "researchNote": "The Great Famine (1845–1852) drove mass Irish-Catholic emigration to Boston and New York, seeding political dynasties.",
+      "choices": [
+        {
+          "id": "emigrate_boston",
+          "text": "Take the coffin ship to Boston and build anew",
+          "effects": { "money": -8, "health": -6, "loyalty": 8 },
+          "personality": { "outward": 6 },
+          "setFlags": ["emigrated", "destination_boston"],
+          "outcome": "The Atlantic nearly takes you. What lands in Boston is poorer, harder, and unbreakable."
+        },
+        {
+          "id": "stay_and_endure",
+          "text": "Stay, hold the land, and endure",
+          "effects": { "health": -10, "reputation": 6 },
+          "personality": { "inward": 6 },
+          "setFlags": ["stayed_ireland"],
+          "outcome": "The family keeps its soil and buries its dead in it. A harder, prouder beginning."
+        }
+      ]
+    },
+    {
+      "id": "bavaria_1885",
+      "label": "Leaving the Kingdom — Bavaria, 1885",
+      "year": 1885,
+      "place": "bavaria",
+      "culture": "bavarian_german",
+      "archetype": "economic",
+      "progenitorSex": "male",
+      "startEra": "origins",
+      "scene": "Conscription notices paper the village square. A young man with a barber's trade and no taste for the Kaiser's army weighs the long passage to America against the life the kingdom has mapped out for him.",
+      "researchNote": "Friedrich Trump emigrated from Kallstadt, Bavaria, in 1885, dodging military service; the family fortune began in America.",
+      "choices": [
+        {
+          "id": "emigrate_newyork",
+          "text": "Sail for New York and the western boomtowns",
+          "effects": { "money": -6, "heat": 4 },
+          "personality": { "grandiosity": 4, "outward": 4 },
+          "setFlags": ["emigrated", "destination_newyork", "draft_dodger"],
+          "outcome": "The kingdom is behind you. Ahead: gold camps, brothels, and the first real money."
+        },
+        {
+          "id": "serve_and_stay",
+          "text": "Serve, stay, and rise within the kingdom",
+          "effects": { "loyalty": 8, "power": 4 },
+          "personality": { "ideology": 4 },
+          "setFlags": ["stayed_bavaria"],
+          "outcome": "The family ties its fate to the German order — for better and, in time, for far worse."
+        }
+      ]
+    },
+    {
+      "id": "cape_colony_1906",
+      "label": "The Diamond Edge — Cape Colony, 1906",
+      "year": 1906,
+      "place": "south_africa",
+      "culture": "afrikaner",
+      "archetype": "economic",
+      "progenitorSex": "male",
+      "startEra": "origins",
+      "scene": "The war with the British is barely cold. On the colonial frontier there is land, there are stones in the ground worth more than land, and there is the question of whose backs the wealth will be wrung from.",
+      "researchNote": "Post–Second Boer War (1902) Cape Colony saw Afrikaner families build extractive fortunes amid a hardening racial order.",
+      "choices": [
+        {
+          "id": "stake_the_mines",
+          "text": "Stake everything on the diggings",
+          "effects": { "money": 10, "heat": 8, "reputation": -4 },
+          "personality": { "grandiosity": 6 },
+          "setFlags": ["mining_fortune", "destination_capetown"],
+          "outcome": "The stones come up rich. The cost is written in other people's ledgers."
+        },
+        {
+          "id": "build_the_farm",
+          "text": "Build a landed Afrikaner estate",
+          "effects": { "money": 4, "loyalty": 8, "reputation": 4 },
+          "personality": { "inward": 4, "ideology": 4 },
+          "setFlags": ["landed_estate"],
+          "outcome": "A slower fortune in soil and stock, and a name that means permanence on the veld."
+        }
+      ]
+    },
+    {
+      "id": "apartheid_end_1994",
+      "label": "After the Fall — South Africa, 1994",
+      "year": 1994,
+      "place": "south_africa",
+      "culture": "afrikaner",
+      "archetype": "technological",
+      "progenitorSex": "male",
+      "startEra": "primetime",
+      "scene": "Mandela is president and the old order is over. A restless young technologist with a foreign passport in reach must decide whether the future is here, in a country remaking itself, or out there, across an ocean, in code.",
+      "researchNote": "The end of apartheid (1994) coincided with a wave of emigration; some South-African-born technologists left for North America.",
+      "choices": [
+        {
+          "id": "leave_for_silicon",
+          "text": "Leave for North America and the coming internet",
+          "effects": { "money": -4, "power": 6 },
+          "personality": { "grandiosity": 8, "outward": 6 },
+          "setFlags": ["emigrated", "destination_westcoast", "tech_path"],
+          "outcome": "You arrive with little but conviction, at the exact hinge of the digital age."
+        },
+        {
+          "id": "build_at_home",
+          "text": "Build the new nation's industry from inside it",
+          "effects": { "reputation": 8, "loyalty": 6 },
+          "personality": { "ideology": 4 },
+          "setFlags": ["stayed_south_africa", "tech_path"],
+          "outcome": "Harder ground, but a chance to be a founder of something larger than a company."
+        }
+      ]
+    },
+    {
+      "id": "gold_rush_1849",
+      "label": "The Diggings — California, 1849",
+      "year": 1849,
+      "place": "west_coast",
+      "culture": "scots_irish",
+      "archetype": "economic",
+      "progenitorSex": "male",
+      "startEra": "origins",
+      "scene": "Sutter's Mill has turned the world's eyes west. The smart money, you suspect, is not in the river but in what the men at the river need — picks, whiskey, passage, and credit.",
+      "researchNote": "The 1849 California Gold Rush minted fortunes more reliably for merchants and outfitters than for miners.",
+      "choices": [
+        {
+          "id": "outfit_the_miners",
+          "text": "Sell the miners their dreams — supplies and credit",
+          "effects": { "money": 12, "reputation": 2 },
+          "personality": { "grandiosity": 4 },
+          "setFlags": ["merchant_fortune", "destination_westcoast"],
+          "outcome": "Let the others break their backs in the cold water. You bank the proceeds."
+        },
+        {
+          "id": "work_the_claim",
+          "text": "Work a claim yourself and gamble on the strike",
+          "effects": { "money": 6, "health": -8, "heat": 4 },
+          "personality": { "inward": 4 },
+          "setFlags": ["prospector"],
+          "outcome": "A long shot at a great strike, paid for in frostbite and broken partnerships."
+        }
+      ]
+    },
+    {
+      "id": "gilded_age_ny_1880",
+      "label": "The Gilded Age — New York, 1880",
+      "year": 1880,
+      "place": "east_coast",
+      "culture": "wasp_east_coast",
+      "archetype": "economic",
+      "progenitorSex": "male",
+      "startEra": "origins",
+      "scene": "Fifth Avenue is a canyon of new marble and older money. A family with capital and ambition must decide whether to court the closed world of the Four Hundred or to build a fortune so large the gates open themselves.",
+      "researchNote": "Gilded-Age New York (c. 1880) was defined by the tension between established 'old money' society and aggressive new industrial wealth.",
+      "choices": [
+        {
+          "id": "court_society",
+          "text": "Marry and maneuver into old-money society",
+          "effects": { "reputation": 10, "money": -6, "loyalty": 4 },
+          "personality": { "outward": 6 },
+          "setFlags": ["society_path"],
+          "outcome": "A careful campaign of dinners and dynastic marriages. Acceptance, bought one introduction at a time."
+        },
+        {
+          "id": "build_an_empire",
+          "text": "Build an industrial empire and force the doors",
+          "effects": { "money": 14, "heat": 8, "reputation": -2 },
+          "personality": { "grandiosity": 8 },
+          "setFlags": ["industrial_empire"],
+          "outcome": "Let them sneer. Money this size eventually buys its own pedigree."
+        }
+      ]
+    },
+    {
+      "id": "second_awakening_1830",
+      "label": "The Burning-Over District — New York, 1830",
+      "year": 1830,
+      "place": "east_coast",
+      "culture": "scots_irish",
+      "archetype": "religious",
+      "progenitorSex": "male",
+      "startEra": "origins",
+      "scene": "Revival fires sweep the western counties. A charismatic preacher with a gift for the crowd stands at a crossroads: build a congregation, or build a movement that outlives him and bends a nation's conscience.",
+      "researchNote": "The Second Great Awakening (early 19th c.) and the 'Burned-over District' of upstate New York spawned enduring American religious movements.",
+      "choices": [
+        {
+          "id": "found_movement",
+          "text": "Found a movement, not just a church",
+          "effects": { "reputation": 10, "power": 6, "heat": 6 },
+          "personality": { "ideology": 8, "grandiosity": 6 },
+          "setFlags": ["religious_movement"],
+          "outcome": "The tent fills, then the county, then the imagination of a restless country."
+        },
+        {
+          "id": "shepherd_flock",
+          "text": "Shepherd one devoted flock faithfully",
+          "effects": { "loyalty": 12, "reputation": 6 },
+          "personality": { "inward": 6 },
+          "setFlags": ["devoted_congregation"],
+          "outcome": "A smaller, deeper root. Power measured in souls rather than headlines."
+        }
+      ]
+    },
+    {
+      "id": "abbasid_baghdad_762",
+      "label": "The Round City — Baghdad, 762",
+      "year": 762,
+      "place": "baghdad",
+      "culture": "scots_irish",
+      "archetype": "religious",
+      "progenitorSex": "male",
+      "startEra": "caliphate",
+      "deepHistory": true,
+      "scene": "The caliph is raising a new capital on the Tigris — a perfect round city of mud-brick, ambition, and gold. A family arriving at its founding must choose how it will rise: through the scholar's pen, the courtier's whisper, or the merchant's caravan.",
+      "researchNote": "Baghdad was founded as the Abbasid capital in 762 CE by al-Mansur; it became a world center of learning and trade.",
+      "choices": [
+        {
+          "id": "scholar_road",
+          "text": "Rise through learning and the coming House of Wisdom",
+          "effects": { "reputation": 10, "power": 4 },
+          "personality": { "ideology": 6, "inward": 6 },
+          "setFlags": ["deep_history_line", "scholar_house"],
+          "outcome": "A bet on knowledge as power, in the one place and age where it truly was."
+        },
+        {
+          "id": "caravan_road",
+          "text": "Rise through trade along the silk and spice roads",
+          "effects": { "money": 12, "heat": 4 },
+          "personality": { "grandiosity": 4, "outward": 4 },
+          "setFlags": ["deep_history_line", "merchant_fortune"],
+          "outcome": "Camels, coin, and contacts from Córdoba to Chang'an. The family's wealth will be portable and vast."
+        }
+      ]
+    }
+  ]
+}

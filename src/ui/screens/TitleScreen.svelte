@@ -1,71 +1,50 @@
 <script lang="ts">
-import type { DynastyKey } from "../../sim/slots";
+import type { StartMoment } from "../../sim/schema";
 
 interface Props {
+  /** The start-moments to found a line at (content.startMoments). */
+  moments: StartMoment[];
   /** True when a save exists, enabling Continue. */
   hasSave: boolean;
-  onNewGame: (seed: string, dynasty: DynastyKey) => void;
+  /** Found a dynasty: the chosen moment, the player's surname, and a seed. */
+  onFound: (momentId: string, surname: string, seed: string) => void;
   onContinue: () => void;
+  /** Open the Settings screen (FD-12). */
+  onSettings: () => void;
 }
 
-const { hasSave, onNewGame, onContinue }: Props = $props();
+const { moments, hasSave, onFound, onContinue, onSettings }: Props = $props();
+
+let step = $state<"title" | "moment-select" | "name-entry">("title");
 let seed = $state("");
-let step = $state<"title" | "dynasty-select">("title");
+let surname = $state("");
+let chosenId = $state<string | null>(null);
 
-function beginDynasty(): void {
-  step = "dynasty-select";
+const chosenMoment = $derived(moments.find((m) => m.id === chosenId) ?? null);
+
+function beginFounding(): void {
+  step = "moment-select";
 }
-
-function chooseDynasty(dynasty: DynastyKey): void {
-  onNewGame(seed.trim() || randomSeed(), dynasty);
+function chooseMoment(id: string): void {
+  chosenId = id;
+  step = "name-entry";
 }
-
-function back(): void {
+function confirmFounding(): void {
+  const name = surname.trim();
+  if (!chosenId || !name) return;
+  onFound(chosenId, name, seed.trim() || randomSeed());
+}
+function backToTitle(): void {
   step = "title";
 }
-
+function backToMoments(): void {
+  step = "moment-select";
+  chosenId = null;
+}
 function randomSeed(): string {
-  // Non-sim randomness (UI only) — picking a default seed string.
+  // Non-sim randomness (UI only) — a default seed string.
   return Math.floor(Date.now() % 1e9).toString(36) + "-dynasty";
 }
-
-const DYNASTIES: Array<{
-  key: DynastyKey;
-  name: string;
-  house: string;
-  founding: string;
-  tagline: string;
-  icon: string;
-  accent: string;
-}> = [
-  {
-    key: "trump",
-    name: "Trump",
-    house: "The House of Trump",
-    founding: "Kallstadt, 1885",
-    tagline: "A barber's apprentice leaves Bavaria and builds the most brazen commercial dynasty in American history.",
-    icon: "/assets/icons/dynasty-trump.svg",
-    accent: "var(--mmm-gold)",
-  },
-  {
-    key: "kennedy",
-    name: "Kennedy",
-    house: "The House of Kennedy",
-    founding: "County Wexford, 1848",
-    tagline: "A famine immigrant survives the coffin ships and raises the most glamorous political dynasty of the twentieth century.",
-    icon: "/assets/icons/dynasty-kennedy.svg",
-    accent: "#4a9eff",
-  },
-  {
-    key: "musk",
-    name: "Musk",
-    house: "The House of Musk",
-    founding: "Cape Colony, 1906",
-    tagline: "A South African aviator's grandson inherits first-principles thinking and builds civilizations — on Earth, and beyond.",
-    icon: "/assets/icons/dynasty-musk.svg",
-    accent: "#c0c8d8",
-  },
-];
 </script>
 
 {#if step === "title"}
@@ -73,55 +52,83 @@ const DYNASTIES: Array<{
     <div class="masthead">
       <span class="eyebrow">A DYNASTIC SAGA</span>
       <h1>Dynasty</h1>
-      <div class="rule" aria-hidden="true">
-        <span class="diamond">◆</span>
-      </div>
-      <p class="tagline">Bloodline, fortune, and the long arc of power.</p>
+      <div class="rule" aria-hidden="true"><span class="diamond">◆</span></div>
+      <p class="tagline">Found a line. Steer it across the centuries.</p>
     </div>
 
     <div class="panel">
       <label for="seed">Seed (optional)</label>
       <input id="seed" bind:value={seed} placeholder="leave blank for random" autocomplete="off" />
-      <button class="primary" type="button" onclick={beginDynasty}>Begin a Dynasty</button>
+      <button class="primary" type="button" onclick={beginFounding}>New Game — Found a Dynasty</button>
       {#if hasSave}
-        <button class="secondary" type="button" onclick={onContinue}>Continue the Saga</button>
+        <button class="secondary" type="button" onclick={onContinue}>Load Game — Continue</button>
       {/if}
+      <button class="secondary" type="button" onclick={onSettings}>Settings</button>
     </div>
   </main>
-{:else}
-  <main class="carousel-screen">
-    <div class="carousel-masthead">
-      <span class="eyebrow">CHOOSE YOUR BLOODLINE</span>
-      <h2>Which Dynasty?</h2>
-      <p class="carousel-sub">Each house carries a different origin, a different grammar of power.</p>
+{:else if step === "moment-select"}
+  <main class="select-screen">
+    <div class="select-masthead">
+      <span class="eyebrow">CHOOSE YOUR HINGE</span>
+      <h2>Where History Turns</h2>
+      <p class="select-sub">Found your line at a pivotal moment. Real time, real place — your name.</p>
     </div>
 
-    <div class="carousel">
-      {#each DYNASTIES as d (d.key)}
+    <div class="moments">
+      {#each moments as m (m.id)}
         <button
-          class="dynasty-card"
+          class="moment-card"
+          class:deep={m.deepHistory}
           type="button"
-          style="--house-accent: {d.accent}"
-          onclick={() => chooseDynasty(d.key)}
+          onclick={() => chooseMoment(m.id)}
         >
-          <img class="dynasty-icon" src={d.icon} alt="" aria-hidden="true" />
-          <span class="dynasty-house">{d.house}</span>
-          <span class="dynasty-name">{d.name}</span>
-          <span class="dynasty-founding">{d.founding}</span>
-          <p class="dynasty-tagline">{d.tagline}</p>
-          <span class="dynasty-cta">Play as {d.name} →</span>
+          <span class="moment-archetype">{m.archetype}</span>
+          <span class="moment-label">{m.label}</span>
+          <span class="moment-where">{m.place} · {m.year}</span>
+          <p class="moment-scene">{m.scene}</p>
+          {#if m.deepHistory}<span class="moment-deep">Deep history</span>{/if}
+          <span class="moment-cta">Found here →</span>
         </button>
       {/each}
     </div>
 
-    <button class="back-btn" type="button" onclick={back}>← Back</button>
+    <button class="back-btn" type="button" onclick={backToTitle}>← Back</button>
+  </main>
+{:else}
+  <main class="name-screen">
+    <div class="select-masthead">
+      <span class="eyebrow">NAME YOUR LINE</span>
+      <h2>The Founding</h2>
+      {#if chosenMoment}
+        <p class="select-sub">{chosenMoment.label} — {chosenMoment.place}, {chosenMoment.year}</p>
+      {/if}
+    </div>
+
+    <div class="panel">
+      <label for="surname">Family name</label>
+      <input
+        id="surname"
+        bind:value={surname}
+        placeholder="your dynasty's surname"
+        autocomplete="off"
+        maxlength="32"
+      />
+      <p class="founding-note">
+        A progenitor will be named in the {chosenMoment?.culture.replace(/_/g, " ")} tradition. From
+        them, the line begins.
+      </p>
+      <button class="primary" type="button" disabled={!surname.trim()} onclick={confirmFounding}>
+        Begin the Line
+      </button>
+      <button class="back-btn" type="button" onclick={backToMoments}>← Choose another moment</button>
+    </div>
   </main>
 {/if}
 
 <style>
-  /* ── Shared ───────────────────────────────────────────── */
   .title,
-  .carousel-screen {
+  .select-screen,
+  .name-screen {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -129,11 +136,13 @@ const DYNASTIES: Array<{
     min-height: 100dvh;
     padding: max(var(--mmm-pad), env(safe-area-inset-top)) var(--mmm-pad);
     text-align: center;
-    background:
-      radial-gradient(120% 80% at 50% 0%, var(--mmm-navy-light) 0%, var(--mmm-navy) 55%, var(--mmm-navy-deep) 100%);
+    background: radial-gradient(
+      120% 80% at 50% 0%,
+      var(--mmm-navy-light) 0%,
+      var(--mmm-navy) 55%,
+      var(--mmm-navy-deep) 100%
+    );
   }
-
-  /* ── Title step ───────────────────────────────────────── */
   .masthead {
     display: flex;
     flex-direction: column;
@@ -201,7 +210,7 @@ const DYNASTIES: Array<{
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
-    width: min(21rem, 90vw);
+    width: min(24rem, 92vw);
     padding: 1.25rem;
     border-radius: var(--mmm-radius-lg);
     background: color-mix(in srgb, var(--mmm-surface) 55%, transparent);
@@ -245,6 +254,11 @@ const DYNASTIES: Array<{
   button:hover {
     transform: translateY(-1px);
   }
+  button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+  }
   .primary {
     background: linear-gradient(180deg, var(--mmm-gold-bright), var(--mmm-gold-deep));
     color: var(--mmm-ink);
@@ -254,13 +268,22 @@ const DYNASTIES: Array<{
     background: transparent;
     color: var(--mmm-text);
   }
+  .founding-note {
+    margin: 0.1rem 0 0.3rem;
+    font-family: var(--mmm-font-body);
+    font-size: 0.82rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--mmm-text-dim);
+    text-align: left;
+  }
 
-  /* ── Carousel step ────────────────────────────────────── */
-  .carousel-screen {
-    justify-content: center;
+  /* ── Moment select ────────────────────────────────────── */
+  .select-screen {
+    justify-content: flex-start;
     padding-top: max(1.5rem, env(safe-area-inset-top));
   }
-  .carousel-masthead {
+  .select-masthead {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -282,101 +305,103 @@ const DYNASTIES: Array<{
     background-clip: text;
     color: transparent;
   }
-  .carousel-sub {
+  .select-sub {
     margin: 0;
     font-family: var(--mmm-font-body);
     font-size: 0.9rem;
     font-style: italic;
     color: var(--mmm-text-dim);
-    max-width: 28rem;
+    max-width: 30rem;
   }
-  .carousel {
+  .moments {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
-    width: min(64rem, 95vw);
+    width: min(68rem, 96vw);
   }
-  .dynasty-card {
+  .moment-card {
     flex: 1 1 min(16rem, 85vw);
     max-width: 20rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 1.5rem 1.25rem;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding: 1.25rem;
     border-radius: var(--mmm-radius-lg);
     background: color-mix(in srgb, var(--mmm-surface) 60%, transparent);
-    border: 1.5px solid color-mix(in srgb, var(--house-accent) 40%, transparent);
-    box-shadow:
-      0 2px 18px rgb(0 0 0 / 0.35),
-      inset 0 1px 0 color-mix(in srgb, var(--house-accent) 20%, transparent);
+    border: 1.5px solid color-mix(in srgb, var(--mmm-gold-deep) 40%, transparent);
+    box-shadow: 0 2px 18px rgb(0 0 0 / 0.35);
     cursor: pointer;
-    text-align: center;
+    text-align: left;
     transition:
       transform var(--mmm-dur-fast) var(--mmm-ease),
       box-shadow var(--mmm-dur-fast) var(--mmm-ease),
       border-color var(--mmm-dur-fast) var(--mmm-ease);
   }
+  .moment-card.deep {
+    border-color: color-mix(in srgb, #1d7a5f 55%, transparent);
+  }
   @supports (backdrop-filter: blur(4px)) {
-    .dynasty-card {
+    .moment-card {
       backdrop-filter: blur(4px);
     }
   }
-  .dynasty-card:hover,
-  .dynasty-card:focus-visible {
+  .moment-card:hover,
+  .moment-card:focus-visible {
     transform: translateY(-3px);
-    border-color: var(--house-accent);
+    border-color: var(--mmm-gold);
     box-shadow:
       0 8px 32px rgb(0 0 0 / 0.4),
-      0 0 18px color-mix(in srgb, var(--house-accent) 35%, transparent),
-      inset 0 1px 0 color-mix(in srgb, var(--house-accent) 30%, transparent);
+      0 0 18px color-mix(in srgb, var(--mmm-gold) 30%, transparent);
   }
-  .dynasty-card:focus-visible {
-    outline: 2px solid var(--house-accent);
+  .moment-card:focus-visible {
+    outline: 2px solid var(--mmm-gold);
     outline-offset: 2px;
   }
-  .dynasty-icon {
-    width: 2.5rem;
-    height: 2.5rem;
-    object-fit: contain;
-  }
-  .dynasty-house {
+  .moment-archetype {
     font-family: var(--mmm-font-body);
-    font-size: 0.68rem;
-    letter-spacing: 0.36em;
-    text-indent: 0.36em;
+    font-size: 0.66rem;
+    letter-spacing: 0.32em;
+    text-indent: 0.32em;
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--house-accent) 85%, var(--mmm-text-dim));
+    color: var(--mmm-gold-deep);
   }
-  .dynasty-name {
+  .moment-label {
     font-family: var(--mmm-font-display);
     font-weight: 800;
-    font-size: clamp(1.6rem, 7vw, 2.2rem);
-    line-height: 1;
-    color: var(--house-accent);
-    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--house-accent) 30%, transparent));
+    font-size: 1.2rem;
+    line-height: 1.1;
+    color: var(--mmm-gold);
   }
-  .dynasty-founding {
+  .moment-where {
     font-family: var(--mmm-font-body);
     font-size: 0.75rem;
     font-style: italic;
     color: var(--mmm-text-dim);
   }
-  .dynasty-tagline {
-    margin: 0.4rem 0 0.6rem;
+  .moment-scene {
+    margin: 0.3rem 0 0.4rem;
     font-family: var(--mmm-font-body);
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     line-height: 1.5;
     color: var(--mmm-text-dim);
     flex: 1;
   }
-  .dynasty-cta {
+  .moment-deep {
+    align-self: flex-start;
+    font-family: var(--mmm-font-body);
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #4fd1a5;
+  }
+  .moment-cta {
     font-family: var(--mmm-font-display);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     letter-spacing: 0.04em;
-    color: var(--house-accent);
+    color: var(--mmm-gold);
     margin-top: 0.25rem;
   }
   .back-btn {

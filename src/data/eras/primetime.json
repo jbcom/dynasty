@@ -96,7 +96,8 @@
       "tags": [
         "fame",
         "branding",
-        "media"
+        "media",
+        "trope:scandal-fall-rehab"
       ],
       "requires": {
         "flags": [
@@ -264,7 +265,8 @@
       "tags": [
         "personal",
         "media",
-        "fame"
+        "fame",
+        "trope:bootlegger-to-legitimacy"
       ],
       "requires": {
         "flags": [],
@@ -435,7 +437,8 @@
       "tags": [
         "scandal",
         "legal",
-        "business"
+        "business",
+        "trope:scandal-fall-rehab"
       ],
       "requires": {
         "flags": [
@@ -1042,7 +1045,9 @@
       "startrekInspired": false,
       "tags": [
         "world-event",
-        "politics"
+        "politics",
+        "trope:reformer-vs-reactionary",
+        "trope:outside-claimant"
       ],
       "requires": {
         "flags": [],
@@ -1133,7 +1138,8 @@
       "startrekInspired": false,
       "tags": [
         "world-event",
-        "politics"
+        "politics",
+        "trope:reformer-vs-reactionary"
       ],
       "requires": {
         "flags": [],
@@ -1409,7 +1415,8 @@
       "startrekInspired": false,
       "tags": [
         "politics",
-        "media"
+        "media",
+        "trope:outside-claimant"
       ],
       "requires": {
         "flags": [],
@@ -1773,7 +1780,8 @@
       "tags": [
         "world-event",
         "politics",
-        "media"
+        "media",
+        "trope:centrist-to-zealot"
       ],
       "requires": {
         "flags": [
@@ -1980,7 +1988,8 @@
       "tags": [
         "politics",
         "media",
-        "branding"
+        "branding",
+        "trope:outside-claimant"
       ],
       "requires": {
         "flags": [
@@ -2626,7 +2635,8 @@
       "tags": [
         "finance",
         "hustle",
-        "realestate"
+        "realestate",
+        "trope:bootlegger-to-legitimacy"
       ],
       "requires": {
         "flags": [
@@ -2878,7 +2888,8 @@
         "realestate",
         "hustle",
         "power",
-        "media"
+        "media",
+        "trope:bootlegger-to-legitimacy"
       ],
       "requires": {
         "flags": [
@@ -3395,7 +3406,8 @@
         "social",
         "heat",
         "palm_beach",
-        "celebrity"
+        "celebrity",
+        "trope:scandal-fall-rehab"
       ],
       "requires": {
         "flags": [],
@@ -3519,6 +3531,466 @@
           "clearFlags": [],
           "ripples": [],
           "outcome": "The empire remains yours, undiluted. Your children work harder trying to earn what you won't give away. It's lonely at the top, but you always knew that."
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_licensing_empire_2004",
+      "era": "primetime",
+      "year": 2004,
+      "title": "The Gilded License",
+      "scene": "Why build with costly concrete when you can simply rent out your name? From mattresses to cheap neckties, third-party developers are begging to stamp your brand on their mid-market goods. It is pure margin with none of the risk, turning your dynasty's reputational capital into liquid cash.",
+      "researchNote": "In the mid-2000s, the family shifted heavily from actual building to licensing its name globally for everything from steaks to foreign condo towers.",
+      "historicity": "real",
+      "tags": [
+        "trope:pleasure-king"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "license_everything",
+          "text": "Slap the family name on everything that breathes or sleeps.",
+          "effects": {
+            "money": 200,
+            "reputation": -50,
+            "heat": 10
+          },
+          "personality": {
+            "grandiosity": 20,
+            "outward": 15
+          },
+          "setFlags": [
+            "flag_brand_over_brick"
+          ],
+          "outcome": "Cash floods the accounts, but the old-money elites mock your new status as a glorified catalog pitchman.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "luxury_only",
+          "text": "Keep the name elite; only license ultra-luxury towers.",
+          "effects": {
+            "money": 100,
+            "reputation": 30,
+            "heat": 0
+          },
+          "personality": {
+            "inward": 10
+          },
+          "outcome": "You preserve the exclusivity of the brand, leaving money on the table but maintaining a gilded aura.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "refuse_licensing",
+          "text": "Refuse licensing; a true dynasty builds with its own steel.",
+          "effects": {
+            "money": -50,
+            "reputation": 50,
+            "loyalty": 20
+          },
+          "personality": {
+            "ideology": 15
+          },
+          "outcome": "Your purist stance keeps the family's assets tangible, though you miss out on the greatest high-margin bonanza of the decade.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_subprime_peak_2006",
+      "era": "primetime",
+      "year": 2006,
+      "title": "The Mortgage Bubble Goldmine",
+      "scene": "Every taxi driver and dentist is getting a subprime loan, and home prices only go up. Your executives suggest launching a personal mortgage brokerage branch to profit off the origination fees. It is free money in a market that can never fall.",
+      "researchNote": "A proprietary mortgage brokerage was launched at the absolute peak of the mid-2000s real estate bubble, closing shortly before the subprime collapse.",
+      "historicity": "real",
+      "tags": [
+        "trope:oligarch"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "go_all_in_subprime",
+          "text": "Go all-in on subprime originations. Ride the bubble.",
+          "effects": {
+            "money": 150,
+            "reputation": -40,
+            "heat": 30
+          },
+          "personality": {
+            "grandiosity": 25
+          },
+          "outcome": "You rake in short-term fees, but the timing is disastrous. The impending crash will make these toxic loans a public relations nightmare.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "luxury_brokerage_only",
+          "text": "Keep the brokerage small and cater only to luxury clients.",
+          "effects": {
+            "money": 50,
+            "reputation": 10,
+            "heat": 5
+          },
+          "personality": {
+            "inward": 10
+          },
+          "outcome": "You limit your exposure, maintaining your standing among affluent buyers while avoiding the worst of the subprime mud.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "avoid_mortgage_market",
+          "text": "Avoid the mortgage business; the underwriting looks like a house of cards.",
+          "effects": {
+            "money": 0,
+            "power": 10,
+            "reputation": 20
+          },
+          "personality": {
+            "ideology": 10
+          },
+          "outcome": "You bypass the trend entirely. When the market implodes, your dynasty's balance sheet remains free of toxic mortgage paper.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_dynastic_merger_2007",
+      "era": "primetime",
+      "year": 2007,
+      "title": "The Gilded Alliance",
+      "scene": "Your favorite daughter is dating the young, slender heir to a major New York real-estate dynasty. His family owns millions of square feet in Manhattan, though they are currently overextended on a massive office purchase. A marriage would unite your media fame with their Manhattan holdings.",
+      "researchNote": "The high-profile marriage of the patriarch's daughter to a major New York real estate heir cemented an alliance between two powerful dynastic families.",
+      "historicity": "real",
+      "tags": [
+        "trope:dynastic-merger"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "bless_the_union",
+          "text": "Bless the union and leverage their Manhattan connections immediately.",
+          "effects": {
+            "power": 150,
+            "reputation": 40,
+            "heat": 10
+          },
+          "personality": {
+            "outward": 20,
+            "inward": -10
+          },
+          "setFlags": [
+            "flag_merger_complete"
+          ],
+          "outcome": "The tabloid-ready wedding of the year proceeds. Your family's social and financial network expands deep into Manhattan's oldest money.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "demand_financial_stabilization",
+          "text": "Demand his family stabilize their debt before any wedding bells ring.",
+          "effects": {
+            "money": 50,
+            "power": 50,
+            "loyalty": -20
+          },
+          "personality": {
+            "inward": 15
+          },
+          "outcome": "You protect your balance sheets from their precarious liabilities, though the tension sours early relations with your new in-laws.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "steer_daughter_away",
+          "text": "Encourage her to find a spouse with cleaner, non-real-estate capital.",
+          "effects": {
+            "money": 100,
+            "loyalty": -40,
+            "heat": -10
+          },
+          "personality": {
+            "ideology": 15
+          },
+          "outcome": "She reluctantly breaks it off, but the family dynamics are strained by your heavy-handed interference in her personal life.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_debt_haircut_2009",
+      "era": "primetime",
+      "year": 2009,
+      "title": "The Art of the Haircut",
+      "scene": "The financial market has cratered, and your lenders are panicking. If they foreclose on your signature towers, they will get pennies on the dollar. You must convince them that your brand is too valuable to destroy, forcing them to write down your debts.",
+      "researchNote": "During successive financial downturns, the family successfully exploited its personal brand value to force banks into dramatic restructuring deals.",
+      "historicity": "real",
+      "tags": [
+        "trope:scandal-fall-rehab"
+      ],
+      "requires": {
+        "flags": [
+          "flag_brand_over_brick"
+        ]
+      },
+      "choices": [
+        {
+          "id": "threaten_bankruptcy",
+          "text": "Threaten to walk away and drag them into a public court battle.",
+          "effects": {
+            "money": 250,
+            "reputation": -30,
+            "heat": 50
+          },
+          "personality": {
+            "grandiosity": 30
+          },
+          "outcome": "The banks blink first. They restructure your massive loans at a deep discount, horrified by the prospect of a messy public litigation.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "offer_equity_sharing",
+          "text": "Offer the banks equity in your future brand licensing streams.",
+          "effects": {
+            "money": 100,
+            "power": -20,
+            "reputation": 10,
+            "heat": 15
+          },
+          "personality": {
+            "outward": 10
+          },
+          "outcome": "You appease the lenders with future earnings, retaining control of your physical properties but sacrificing a portion of your easiest cash flow.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "quietly_liquidate",
+          "text": "Quietly liquidate secondary assets to pay them off in full.",
+          "effects": {
+            "money": -150,
+            "power": -50,
+            "reputation": 40,
+            "heat": -20
+          },
+          "personality": {
+            "inward": 20
+          },
+          "outcome": "You pay your debts like an old-school gentleman. Your reputation with Wall Street is spotless, but your war chest is completely depleted.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_birther_test_2010",
+      "era": "primetime",
+      "year": 2010,
+      "title": "Testing the Fringe Waters",
+      "scene": "The Tea Party is raging against the new administration, and the political establishment is paralyzed. An internet conspiracy about the President's birth certificate is gaining rapid traction among the base. Do you lean into it to build a new audience?",
+      "researchNote": "Beginning in 2010, the patriarch aggressively promoted the birther conspiracy theory, establishing himself as a key voice of the conservative populist base.",
+      "historicity": "real",
+      "tags": [
+        "trope:centrist-to-zealot"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "adopt_conspiracy_wholesale",
+          "text": "Adopt the conspiracy wholesale on every cable news show.",
+          "effects": {
+            "power": 200,
+            "reputation": -80,
+            "heat": 60
+          },
+          "personality": {
+            "ideology": 40,
+            "grandiosity": 20
+          },
+          "setFlags": [
+            "flag_populist_turn"
+          ],
+          "outcome": "The media goes wild. While the coastal elites decry you as a dangerous conspiracy theorist, the conservative base instantly adopts you as a champion.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "flirt_with_theory",
+          "text": "Flirt with the theory subtly without endorsing it outright.",
+          "effects": {
+            "power": 80,
+            "reputation": -30,
+            "heat": 20
+          },
+          "personality": {
+            "outward": 15
+          },
+          "outcome": "You secure invitations to political talk shows while leaving yourself a sliver of plausible deniability among polite society.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "stick_to_economics",
+          "text": "Stick to criticizing the administration's economic policies.",
+          "effects": {
+            "power": 20,
+            "reputation": 30,
+            "heat": -10
+          },
+          "personality": {
+            "inward": 10
+          },
+          "outcome": "You remain a respectable corporate voice, but you fail to capture the raw, emotional energy of the populist movement.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_dais_humiliation_2011",
+      "era": "primetime",
+      "year": 2011,
+      "title": "Roasted at the Dais",
+      "scene": "You sit in a crowded Washington ballroom while the President mocks you from the podium over your conspiracy theories. The coastal elite, the journalists, and the politicians are laughing hysterically at your expense. Every camera in the room is trained on your frozen smile.",
+      "researchNote": "The 2011 White House Correspondents' Dinner featured a blistering roast of Donald Trump by Barack Obama, which many political observers saw as a turning point.",
+      "historicity": "real",
+      "tags": [
+        "trope:exile-return"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "seethe_and_plan_vengeance",
+          "text": "Seethe silently and plan a vengeance they will never forget.",
+          "effects": {
+            "power": 100,
+            "reputation": -50,
+            "heat": 30
+          },
+          "personality": {
+            "ideology": 30,
+            "grandiosity": 50
+          },
+          "setFlags": [
+            "flag_vengeance_path"
+          ],
+          "outcome": "As they laugh, you realize that the only way to wash away this public humiliation is to take the office they hold sacred.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "laugh_along",
+          "text": "Laugh along with the crowd, pretending to be a good sport.",
+          "effects": {
+            "reputation": 20,
+            "heat": -15
+          },
+          "personality": {
+            "outward": 20
+          },
+          "outcome": "You diffuse the tension, but your inner pride is deeply wounded by playing the jester for an elite that will never accept you.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "leave_early_theatrically",
+          "text": "Leave the dinner early in a highly public, theatrical huff.",
+          "effects": {
+            "power": -20,
+            "reputation": -30,
+            "heat": 20
+          },
+          "personality": {
+            "inward": 20
+          },
+          "outcome": "Your dramatic exit dominates the next day's tabloid headlines, casting you as the ultimate outsider rejected by the corrupt capital.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_moscow_pageant_2013",
+      "era": "primetime",
+      "year": 2013,
+      "title": "Red Square Pageantry",
+      "scene": "You take your international beauty pageant to Moscow. The local oligarchs are eager to buy your brand, and a real estate tycoon close to the Kremlin offers to finance a massive tower in the Russian capital. The money is staggering, but the geopolitical optics are delicate.",
+      "researchNote": "The family hosted the Miss Universe pageant in Moscow in 2013, attempting to secure a deal for a local branded tower through well-connected Russian oligarchs.",
+      "historicity": "real",
+      "tags": [
+        "trope:frontier-capital-origin"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "sign_oligarch_deal",
+          "text": "Sign the deal with the oligarchs. Money has no nationality.",
+          "effects": {
+            "money": 300,
+            "power": 50,
+            "heat": 60
+          },
+          "personality": {
+            "grandiosity": 30
+          },
+          "setFlags": [
+            "flag_moscow_ties"
+          ],
+          "outcome": "The deal is signed in a haze of vodka and state-backed luxury. You return home wealthier, but your domestic intelligence profile grows significantly darker.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "host_pageant_no_deal",
+          "text": "Host the pageant but politely decline the real estate deal.",
+          "effects": {
+            "money": 100,
+            "reputation": 20,
+            "heat": 10
+          },
+          "personality": {
+            "inward": 10
+          },
+          "outcome": "You enjoy the glamorous television ratings and the elite social scene without entangling your dynasty in foreign geopolitical swamps.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "cancel_foreign_involvements",
+          "text": "Use the event purely for self-promotion, avoiding close financial ties.",
+          "effects": {
+            "money": 30,
+            "reputation": 40,
+            "heat": -20
+          },
+          "personality": {
+            "ideology": 15
+          },
+          "outcome": "You maintain a strict distance from foreign entities, keeping your balance sheets clean for any future domestic political ambitions.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     }

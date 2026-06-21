@@ -7,13 +7,15 @@ import {
 } from "./butterfly";
 import type { Content } from "./content";
 import { meetsRequires, pickNextEvent } from "./events";
+import { beget, kinFor } from "./family";
 import { applyDelta } from "./meters";
+import { applyMortality } from "./mortality";
 import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
-import { resolveRoles } from "./roles";
 import type { Choice, GameEvent } from "./schema";
-import type { DynastyKey } from "./slots";
+import type { Archetype } from "./slots";
 import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
+import { succeed } from "./succession";
 import { systemicTick } from "./systemic";
 import { advanceTimeline, applyJump, detectEnd } from "./timeline";
 import { applyWorldFlags, timelinesForBranch } from "./worldtime";
@@ -22,6 +24,11 @@ import { applyWorldFlags, timelinesForBranch } from "./worldtime";
 export interface Transition {
   state: GameState;
   newLedger: LedgerEntry[];
+}
+
+/** Birth year for the i-th child begotten by one choice (staggered by 2y each). */
+function begetYear(eventYear: number, index: number): number {
+  return eventYear + index * 2;
 }
 
 function findChoice(event: GameEvent, choiceId: string): Choice {
@@ -99,6 +106,34 @@ export function applyChoice(
     }
   }
 
+  // 4c. BEGET (FD-8): a choice can add children to the live family tree, born to
+  // the current protagonist in the event's year, named by the founding culture's
+  // convention with inherited+varied traits. No-op without a founded family.
+  let family = state.family;
+  if (choice.begets && choice.begets > 0 && family && state.founding) {
+    const culture = content.onomastics[state.founding.culture];
+    if (culture) {
+      const parentId = family.protagonistId;
+      for (let i = 0; i < choice.begets; i++) {
+        const born = begetYear(event.year, i);
+        const begotten = beget(
+          family,
+          parentId,
+          born,
+          culture,
+          kinFor(family, parentId),
+          rng.fork(`beget:${event.id}:${choiceId}:${state.history.length}:${i}`),
+        );
+        family = begotten.family;
+      }
+    }
+  }
+
+  // World-events (FD-2.3) are AMBIENT BACKDROP: clock- and budget-neutral. They do
+  // not advance the protagonist's time floor (a future-window backdrop must not
+  // push lastEventYear past the era, which the era rollover would then reset
+  // backward) nor consume the era budget — the family's life beats drive the clock.
+  const isWorldEvent = event.era === "__world__";
   const resolved: GameState = {
     ...state,
     meters,
@@ -107,11 +142,13 @@ export function applyChoice(
     ripples,
     pending,
     markets,
+    family,
     ledger: [...state.ledger, ...newLedger],
     history: [...state.history, { eventId: event.id, choiceId, year: event.year }],
     firedEvents,
-    // Time floor advances to this event's year (never moves backward).
-    lastEventYear: Math.max(state.lastEventYear, event.year),
+    // Time floor advances to a protagonist beat's year (never backward); a world
+    // event leaves the floor where the family's own arc has reached.
+    lastEventYear: isWorldEvent ? state.lastEventYear : Math.max(state.lastEventYear, event.year),
   };
 
   // 7. Optional TIMELINE HOP — a choice can compress the arc forward (perceived,
@@ -123,7 +160,9 @@ export function applyChoice(
   if (immediateEnd) {
     return { state: { ...hopped, end: immediateEnd }, newLedger };
   }
-  let advanced = advanceTimeline(content, hopped);
+  // World-events are budget-neutral (see isWorldEvent above): they do NOT advance
+  // the era clock/budget, so the family's ~12-16 life beats per era stay the spine.
+  let advanced = isWorldEvent ? hopped : advanceTimeline(content, hopped);
 
   // 8b. LINKING PROTOCOL: broadcast flags from the parallel world timelines whose
   // events have come to pass as the year advanced — done in the pure transition so
@@ -133,13 +172,6 @@ export function applyChoice(
     const active = timelinesForBranch(content.worldTimelines, branchOf(advanced));
     advanced = applyWorldFlags(advanced, hopped.year, active);
   }
-
-  // 8c. ROLE-SWAP INVARIANT: with all flags (the choice's, the consequences',
-  // and the broadcast timelines') now settled for this year, resolve who holds
-  // political power vs the commercial empire. Runs every step so a late flip
-  // (e.g. Musk takes power) re-routes Donald to the commercial path before any
-  // ending reads the role flags.
-  advanced = resolveRoles(advanced);
 
   // 8d. SYSTEMIC TICK (SIM1): the living substrate breathes for each elapsed
   // in-world year — markets walk, currency redenominates, rank ladders drip into
@@ -156,6 +188,56 @@ export function applyChoice(
       const result = systemicTick(content, { ...advanced, year: hopped.year + y }, tickRng);
       advanced = { ...result.state, year: advanced.year };
       for (const f of result.flags) advanced = { ...advanced, flags: withFlag(advanced.flags, f) };
+    }
+  }
+
+  // 8e. MORTALITY + SUCCESSION (FD-9/FD-10): for each elapsed in-world year, the
+  // live family faces a seeded death pass; when the protagonist dies the line
+  // passes to the eldest living heir (estate-planning may name another via the
+  // `heir_<id>` flag), continuing the run AS the heir — or ends it if the line is
+  // extinct. Pure + seeded so replay reconstructs every death + handoff.
+  if (advanced.family) {
+    const years = Math.max(0, advanced.year - hopped.year);
+    const steps = years > 0 ? years : 1;
+    for (let y = 0; y < steps && !advanced.end; y++) {
+      const currentFamily = advanced.family;
+      if (!currentFamily) break;
+      const passYear = hopped.year + y;
+      const mort = applyMortality(
+        currentFamily,
+        passYear,
+        content.eras[advanced.eraIndex]?.id ?? "",
+        rng.fork(`mortality:${passYear}:${advanced.history.length}`),
+      );
+      let fam = mort.family;
+      if (mort.protagonistDied) {
+        const namedHeir = advanced.flags.find((f) => f.startsWith("heir_"))?.slice("heir_".length);
+        const succ = succeed(fam, passYear, namedHeir);
+        if (succ.heirId === null) {
+          // The line is extinct — end the run with a dynastic-extinction ending.
+          advanced = {
+            ...advanced,
+            family: succ.family,
+            end: { kind: "line-extinct", year: passYear, reason: "The line died out." },
+          };
+          break;
+        }
+        fam = succ.family;
+        // Continue AS the heir: re-anchor birthYear/age + flag the succession.
+        const heir = fam.members.find((m) => m.id === succ.heirId);
+        const heirBorn = heir?.born ?? advanced.birthYear;
+        advanced = {
+          ...advanced,
+          family: fam,
+          birthYear: heirBorn,
+          // Clamp to 0: succeed() only returns an already-born heir, but guard
+          // against a negative age if that invariant ever changes.
+          age: Math.max(0, passYear - heirBorn),
+          flags: withFlag(advanced.flags, "succession_occurred"),
+        };
+      } else {
+        advanced = { ...advanced, family: fam };
+      }
     }
   }
 
@@ -180,12 +262,28 @@ export function replay(
   content: Content,
   seed: string,
   history: ReadonlyArray<{ eventId: string; choiceId: string }>,
-  initState: (content: Content, seed: string, dynasty?: DynastyKey) => GameState,
+  initState: (content: Content, seed: string, archetype?: Archetype) => GameState,
   createRng: (seed: string) => Rng,
-  dynasty: DynastyKey = "trump",
+  archetype: Archetype = "economic",
 ): GameState {
-  let state = initState(content, seed, dynasty);
-  const rng = createRng(seed);
+  const base = initState(content, seed, archetype);
+  return replayFromState(content, base, history, createRng);
+}
+
+/**
+ * Replay a history from an ALREADY-CONSTRUCTED base state (e.g. a founded line's
+ * initial state from foundDynasty, which initState cannot produce). Same
+ * determinism guarantee: the rng is seeded from base.seed so the reconstruction
+ * is bit-identical to live play.
+ */
+export function replayFromState(
+  content: Content,
+  base: GameState,
+  history: ReadonlyArray<{ eventId: string; choiceId: string }>,
+  createRng: (seed: string) => Rng,
+): GameState {
+  let state = base;
+  const rng = createRng(base.seed);
   for (const step of history) {
     const event = content.allEvents.find((e) => e.id === step.eventId);
     if (!event) throw new Error(`replay: unknown event "${step.eventId}"`);
@@ -203,12 +301,12 @@ export function replay(
 export function autoPlaythrough(
   content: Content,
   seed: string,
-  initState: (content: Content, seed: string, dynasty?: DynastyKey) => GameState,
+  initState: (content: Content, seed: string, archetype?: Archetype) => GameState,
   createRng: (seed: string) => Rng,
   maxSteps = 500,
-  dynasty: DynastyKey = "trump",
+  archetype: Archetype = "economic",
 ): GameState {
-  let state = initState(content, seed, dynasty);
+  let state = initState(content, seed, archetype);
   const rng = createRng(seed);
   for (let i = 0; i < maxSteps && !state.end; i++) {
     const event = pickNextEvent(content, state, rng.fork(`pick:${i}`));

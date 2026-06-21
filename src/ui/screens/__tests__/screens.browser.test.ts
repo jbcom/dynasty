@@ -25,81 +25,124 @@ afterEach(() => {
   host.remove();
 });
 
-describe("TitleScreen", () => {
-  it("shows Begin a Dynasty and hides Continue without a save", () => {
+const MOMENTS = [
+  {
+    id: "test_famine",
+    label: "The Great Hunger",
+    year: 1847,
+    place: "ireland",
+    culture: "irish_catholic",
+    archetype: "political" as const,
+    progenitorSex: "male" as const,
+    startEra: "origins",
+    deepHistory: false,
+    scene: "The potato is black in the ground.",
+    researchNote: "x",
+    choices: [
+      {
+        id: "go",
+        text: "Go",
+        effects: {},
+        personality: {},
+        setFlags: [],
+        clearFlags: [],
+        ripples: [],
+        outcome: "o",
+      },
+    ],
+  },
+];
+
+describe("TitleScreen (FD-6 founding flow)", () => {
+  it("shows Found a Dynasty and hides Continue without a save", () => {
     component = mount(TitleScreen, {
       target: host,
-      props: { hasSave: false, onNewGame: () => {}, onContinue: () => {} },
+      props: {
+        moments: MOMENTS,
+        hasSave: false,
+        onFound: () => {},
+        onContinue: () => {},
+        onSettings: () => {},
+      },
     });
-    expect(host.textContent).toContain("Begin a Dynasty");
+    expect(host.textContent).toContain("Found a Dynasty");
     expect(host.textContent).not.toContain("Continue");
+    // Settings is always available even without a save.
+    expect(host.textContent).toContain("Settings");
   });
 
-  it("shows Continue the Saga when a save exists", () => {
+  it("shows Load Game — Continue when a save exists", () => {
     component = mount(TitleScreen, {
       target: host,
-      props: { hasSave: true, onNewGame: () => {}, onContinue: () => {} },
+      props: {
+        moments: MOMENTS,
+        hasSave: true,
+        onFound: () => {},
+        onContinue: () => {},
+        onSettings: () => {},
+      },
     });
-    expect(host.textContent).toContain("Continue the Saga");
+    expect(host.textContent).toContain("Continue");
   });
 
-  it("starts a new game with the entered seed after dynasty selection", async () => {
-    // The flow is now: title → Begin a Dynasty → carousel → pick dynasty → onNewGame(seed, dynasty)
-    const onNewGame = vi.fn();
+  it("founds a line: title → moment → surname → onFound(momentId, surname, seed)", async () => {
+    const onFound = vi.fn();
     component = mount(TitleScreen, {
       target: host,
-      props: { hasSave: false, onNewGame, onContinue: () => {} },
+      props: {
+        moments: MOMENTS,
+        hasSave: false,
+        onFound,
+        onContinue: () => {},
+        onSettings: () => {},
+      },
     });
     const input = host.querySelector("input") as HTMLInputElement;
     input.value = "my-seed";
     input.dispatchEvent(new Event("input", { bubbles: true }));
-    // Step 1: click "Begin a Dynasty" → carousel appears.
-    await page.getByRole("button", { name: "Begin a Dynasty" }).click();
-    // Step 2: carousel is now visible — pick the Trump card using its visible CTA text.
-    await vitest.waitFor(() => expect(host.textContent).toContain("CHOOSE YOUR BLOODLINE"));
-    await page.getByRole("button", { name: "Play as Trump →" }).click();
-    await vitest.waitFor(() => expect(onNewGame).toHaveBeenCalledWith("my-seed", "trump"));
+    await page.getByRole("button", { name: "Found a Dynasty" }).click();
+    await vitest.waitFor(() => expect(host.textContent).toContain("CHOOSE YOUR HINGE"));
+    await page.getByRole("button", { name: /Found here/ }).click();
+    await vitest.waitFor(() => expect(host.textContent).toContain("NAME YOUR LINE"));
+    const surname = host.querySelector("#surname") as HTMLInputElement;
+    surname.value = "Vane";
+    surname.dispatchEvent(new Event("input", { bubbles: true }));
+    await page.getByRole("button", { name: "Begin the Line" }).click();
+    await vitest.waitFor(() =>
+      expect(onFound).toHaveBeenCalledWith("test_famine", "Vane", "my-seed"),
+    );
   });
 
-  it("carousel shows all three dynasties (de-5d)", async () => {
+  it("the moment picker shows the start-moments", async () => {
     component = mount(TitleScreen, {
       target: host,
-      props: { hasSave: false, onNewGame: () => {}, onContinue: () => {} },
+      props: {
+        moments: MOMENTS,
+        hasSave: false,
+        onFound: () => {},
+        onContinue: () => {},
+        onSettings: () => {},
+      },
     });
-    await page.getByRole("button", { name: "Begin a Dynasty" }).click();
-    await vitest.waitFor(() => expect(host.textContent).toContain("CHOOSE YOUR BLOODLINE"));
-    // Verify by visible button text — decoupled from CSS class names.
-    await vitest.waitFor(() => {
-      expect(host.textContent).toContain("Play as Trump");
-      expect(host.textContent).toContain("Play as Musk");
-      expect(host.textContent).toContain("Play as Kennedy");
-    });
+    await page.getByRole("button", { name: "Found a Dynasty" }).click();
+    await vitest.waitFor(() => expect(host.textContent).toContain("The Great Hunger"));
   });
 
-  it("carousel back button returns to the title screen (de-5d)", async () => {
+  it("back from the moment picker returns to the title", async () => {
     component = mount(TitleScreen, {
       target: host,
-      props: { hasSave: false, onNewGame: () => {}, onContinue: () => {} },
+      props: {
+        moments: MOMENTS,
+        hasSave: false,
+        onFound: () => {},
+        onContinue: () => {},
+        onSettings: () => {},
+      },
     });
-    await page.getByRole("button", { name: "Begin a Dynasty" }).click();
-    await vitest.waitFor(() => expect(host.textContent).toContain("CHOOSE YOUR BLOODLINE"));
+    await page.getByRole("button", { name: "Found a Dynasty" }).click();
+    await vitest.waitFor(() => expect(host.textContent).toContain("CHOOSE YOUR HINGE"));
     await page.getByRole("button", { name: "← Back" }).click();
-    await vitest.waitFor(() => expect(host.textContent).toContain("Begin a Dynasty"));
-  });
-
-  it("Musk dynasty card fires onNewGame with 'musk' key (de-5d)", async () => {
-    const onNewGame = vi.fn();
-    component = mount(TitleScreen, {
-      target: host,
-      props: { hasSave: false, onNewGame, onContinue: () => {} },
-    });
-    await page.getByRole("button", { name: "Begin a Dynasty" }).click();
-    await vitest.waitFor(() => expect(host.textContent).toContain("Play as Musk"));
-    await page.getByRole("button", { name: "Play as Musk →" }).click();
-    await vitest.waitFor(() => {
-      const [, dynasty] = onNewGame.mock.calls[0] ?? [];
-      expect(dynasty).toBe("musk");
-    });
+    await vitest.waitFor(() => expect(host.textContent).toContain("Found a Dynasty"));
   });
 });
 

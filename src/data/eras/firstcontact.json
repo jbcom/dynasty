@@ -14,7 +14,8 @@
         "world-event",
         "spaceflight",
         "science",
-        "milestone"
+        "milestone",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -273,7 +274,8 @@
       "tags": [
         "science",
         "patience",
-        "dilemma"
+        "dilemma",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -369,7 +371,8 @@
       "tags": [
         "world-event",
         "science",
-        "discovery"
+        "discovery",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -961,7 +964,8 @@
         "world-event",
         "the-concord",
         "technology",
-        "science"
+        "science",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -1071,7 +1075,8 @@
         "world-event",
         "rivalry",
         "power",
-        "science"
+        "science",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -1180,7 +1185,8 @@
         "world-event",
         "war",
         "hostile",
-        "science"
+        "science",
+        "trope:conqueror"
       ],
       "requires": {
         "flags": [
@@ -1517,7 +1523,9 @@
       "tags": [
         "world-event",
         "economics",
-        "power"
+        "power",
+        "trope:oligarch",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -1726,7 +1734,8 @@
       "tags": [
         "world-event",
         "power",
-        "hostile"
+        "hostile",
+        "trope:conqueror"
       ],
       "requires": {
         "flags": [
@@ -1933,7 +1942,8 @@
       "tags": [
         "world-event",
         "milestone",
-        "spaceflight"
+        "spaceflight",
+        "trope:techno-frontier"
       ],
       "requires": {
         "flags": [
@@ -2011,6 +2021,467 @@
             }
           ],
           "outcome": "You cross the threshold and immediately put up a velvet rope and a price list. The infinite becomes, somehow, just another Trump property."
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_mercury_foundries",
+      "era": "firstcontact",
+      "year": 2128,
+      "title": "The Solar Crucible",
+      "scene": "Before we can listen to the stars, we must strip-mine the sun. Your mining swarms on Mercury are melting entire ridges to forge the mirror arrays for the grand deep-space listening project. The laborers, roasting behind magnetic heat-shields, are demanding triple-hazard pay as solar flares lick their orbit.",
+      "researchNote": "Early 22nd-century deep-space arrays required unprecedented radio-shielding and raw metallic mass, sourced directly from inner-system bodies.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:frontier-capital-origin",
+        "trope:techno-frontier"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "squeeze_labor",
+          "text": "Deny the hazard pay; let the magnetic shields run hot to meet the arrays' deadline.",
+          "effects": {
+            "money": 300,
+            "power": 100,
+            "loyalty": -150,
+            "heat": 80
+          },
+          "personality": {
+            "grandiosity": 20,
+            "inward": 10
+          },
+          "setFlags": [
+            "mercury_strike_brewing"
+          ],
+          "outcome": "The mirrors are aligned on schedule, but the graveyard shifts on Mercury are now literal graveyards. Whispers of unionized sabotage begin.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "sell_bandwidth",
+          "text": "Sell early transmission options to private terrestrial cartels to offset the cost.",
+          "effects": {
+            "money": 200,
+            "reputation": -50,
+            "heat": 40
+          },
+          "personality": {
+            "outward": 20
+          },
+          "outcome": "Private capital floods in, compromising your exclusive hold over the system's finest ear.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "build_shield",
+          "text": "Divert the harvested nickel-iron to fortify our orbital private sanctuaries instead.",
+          "effects": {
+            "money": -200,
+            "power": 150,
+            "health": 50
+          },
+          "personality": {
+            "inward": 30
+          },
+          "outcome": "The listening project slows, but your private bunkers are now thick enough to survive a direct solar storm or a kinetic strike.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_the_great_silence_schism",
+      "era": "firstcontact",
+      "year": 2135,
+      "title": "The Dark Forest Schism",
+      "scene": "The mathematical signal is a mess of undecipherable prime structures. In the family drawing room, your heirs split over what to beam back into the dark. One side demands we broadcast a terrifying demonstration of our nuclear arsenals; the other begs to send a registry of our greatest cultural accomplishments, hoping for mercy.",
+      "researchNote": "Without a shared semantic framework, initial interstellar communications are more likely to project the sender's own anxieties than to convey actual meaning.",
+      "historicity": "personal",
+      "tags": [
+        "trope:reformer-vs-reactionary",
+        "trope:centrist-to-zealot"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "broadcast_iron",
+          "text": "Side with the reactionaries. Broadcast our tactical capabilities to show we are not prey.",
+          "effects": {
+            "power": 150,
+            "reputation": -100,
+            "heat": 120
+          },
+          "personality": {
+            "ideology": 30,
+            "grandiosity": 20
+          },
+          "setFlags": [
+            "hostile_broadcast_sent"
+          ],
+          "outcome": "The galaxy now knows us by our weapons. The peaceful factions of the solar system look upon your house with horror.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "broadcast_poetry",
+          "text": "Side with the reformers. Send our collective art, music, and scientific databases.",
+          "effects": {
+            "money": -150,
+            "reputation": 100,
+            "heat": 40
+          },
+          "personality": {
+            "outward": 30
+          },
+          "setFlags": [
+            "peaceful_broadcast_sent"
+          ],
+          "outcome": "The cultural registry is sent. The public applauds your humanist vision, though your defense chiefs mutter that you have handed predators our map.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "silent_containment",
+          "text": "Order absolute transmitter silence. Sever the family's public link to the array.",
+          "effects": {
+            "power": -50,
+            "loyalty": 50,
+            "heat": -60
+          },
+          "personality": {
+            "inward": 40
+          },
+          "outcome": "The array goes quiet. Your family retreats into private security, leaving the rest of the species to make their own noise.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_salvation_insurance",
+      "era": "firstcontact",
+      "year": 2144,
+      "title": "The Temple of the Coming Light",
+      "scene": "Eleven billion people are screaming for salvation as alien ships are confirmed en route. Seizing the moment, your younger cousin has founded a lucrative media ministry, selling 'Bunkered Salvation Passes' and luxury fallout chambers on the moon, promising that your family's technology is the only vessel of survival.",
+      "researchNote": "In moments of existential civilizational panic, catastrophic millenarian movements consistently monetize fear through the sale of physical or spiritual sanctuary.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:megachurch-prosperity",
+        "trope:prophet"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "monetize_faith",
+          "text": "Integrate the ministry into the family brand and maximize the sale of orbital tickets.",
+          "effects": {
+            "money": 400,
+            "reputation": -150,
+            "heat": 100
+          },
+          "personality": {
+            "grandiosity": 40
+          },
+          "outcome": "The vault overflows with the life savings of terrified middle-class Terrans. Your name is now synonymous with divine exploitation.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "purity_crusade",
+          "text": "Weaponize the cult. Declare our family the divinely ordained defenders against the alien menace.",
+          "effects": {
+            "power": 200,
+            "loyalty": -100,
+            "heat": 150
+          },
+          "personality": {
+            "ideology": 50
+          },
+          "outcome": "Armed zealots patrol your estates, ready to die for your bloodline. The planetary authorities look on with extreme apprehension.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "secular_bunkers",
+          "text": "Shut down the cult and build state-sponsored public shelters under our corporate logo.",
+          "effects": {
+            "money": -300,
+            "loyalty": 150,
+            "heat": -50
+          },
+          "personality": {
+            "inward": 20
+          },
+          "outcome": "You lose a fortune in potential tithes, but the local populations bless your name as they file into the safety of the concrete deep.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_black_market_warp",
+      "era": "firstcontact",
+      "year": 2146,
+      "title": "The Smuggled Fold",
+      "scene": "The Concord's folding-space drives are intended for scientific exploration, but their components are highly volatile and extremely illegal to reproduce. Your black-market shipping networks have managed to divert several exotic matter cores from the joint interstellar assembly bays. This could break your dependence on public transit forever.",
+      "researchNote": "The transfer of highly complex, dual-use alien technology invariably sparks black-market copycatting and illicit distribution networks.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:bootlegger-to-legitimacy",
+        "trope:techno-frontier"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "sell_cores",
+          "text": "Sell the stolen folding cores to rogue outer-system mining cartels for a premium.",
+          "effects": {
+            "money": 350,
+            "heat": 140
+          },
+          "personality": {
+            "outward": 20
+          },
+          "outcome": "You are filthy rich, but the UN Security Council is now tracking the radioactive signatures of your shipping lanes.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "patent_launder",
+          "text": "Launder the foreign tech through our domestic research labs, claiming a patent breakthrough.",
+          "effects": {
+            "power": 150,
+            "reputation": 50,
+            "heat": 60
+          },
+          "personality": {
+            "grandiosity": 20
+          },
+          "outcome": "The planetary courts confirm your 'genius patent,' elevating your family to the premier engine-wrights of the solar system.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "private_fleet",
+          "text": "Hoard the cores in our family's deep-space bunkers for our exclusive survival ships.",
+          "effects": {
+            "money": -150,
+            "power": 100,
+            "health": 50
+          },
+          "personality": {
+            "inward": 30
+          },
+          "outcome": "Our private yachts are now faster than anything in the public navy. We have our escape route, if the worst should happen.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_tenant_quotas",
+      "era": "firstcontact",
+      "year": 2150,
+      "title": "The Price of Administrative Grace",
+      "scene": "As the officially appointed 'Tenant Emperors' under our new alien overlords, your house has been handed a brutal quota: three million metric tons of heavy water from the Jovian moons, and a draft of one hundred thousand labor-conscripts. Earth's remaining free unions have called a general strike.",
+      "researchNote": "Collaborationist regimes historically maintain their position by enforcing extraction quotas on their own populations to satisfy their conquerors.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:conqueror",
+        "trope:oligarch"
+      ],
+      "weight": 1,
+      "requires": {
+        "notFlags": [
+          "peaceful_coexistence_era"
+        ]
+      },
+      "choices": [
+        {
+          "id": "crush_strike",
+          "text": "Deploy our private security forces to break the strike on Ganymede with force.",
+          "effects": {
+            "power": 200,
+            "loyalty": -200,
+            "heat": 100
+          },
+          "personality": {
+            "ideology": 40
+          },
+          "outcome": "The fuel flows to the conqueror's vessels. Your family's name is spat upon in every worker's barracks from Earth to Neptune.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "cook_ledgers",
+          "text": "Falsify the export ledgers and secretly divert part of the raw water to Earth's agricultural reserves.",
+          "effects": {
+            "money": -200,
+            "loyalty": 100,
+            "heat": 50
+          },
+          "personality": {
+            "inward": 20
+          },
+          "outcome": "The underground thanks you, but the alien inspectors are not fools; they suspect someone is skimming the system's lifeblood.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "frame_competitors",
+          "text": "Blame the delivery delays on remaining Martian saboteurs, directing the alien purges toward them.",
+          "effects": {
+            "power": 100,
+            "reputation": 50,
+            "heat": -30
+          },
+          "personality": {
+            "grandiosity": 10
+          },
+          "outcome": "The invaders clear out your political rivals on Mars for you. You remain the indispensable local manager.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_collaborator_scandal",
+      "era": "firstcontact",
+      "year": 2153,
+      "title": "The Collaborator's Disgrace",
+      "scene": "The war is over, and the public has discovered the extent of your eldest child's intimate cooperation with the alien occupation forces during the 'Tenant Emperor' years. The family's public standing is in ruins. A younger, long-ignored sibling who spent the war in isolation has been brought forward to rescue the family brand.",
+      "researchNote": "Post-occupation transitions often require the symbolic sacrifice of frontline collaborators in favor of untainted cadet branches.",
+      "historicity": "personal",
+      "tags": [
+        "trope:scandal-fall-rehab",
+        "trope:accidental-heir"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "sacrifice_heir",
+          "text": "Publicly exile the collaborator heir to a remote asteroid and install the quiet sibling.",
+          "effects": {
+            "reputation": 150,
+            "loyalty": 50,
+            "heat": -80
+          },
+          "personality": {
+            "inward": 30
+          },
+          "outcome": "The public is mollified by the clean-cut new patriarch, though the exiled sibling swears to take their revenge from the dark.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "propaganda_blitz",
+          "text": "Keep the old heir and fund an expensive media campaign reframing their work as secret resistance.",
+          "effects": {
+            "money": -250,
+            "power": 100,
+            "heat": 90
+          },
+          "personality": {
+            "grandiosity": 40
+          },
+          "outcome": "History is written by the rich. The propaganda is transparent, but it holds the line against outright expropriation.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "divest_to_public",
+          "text": "Donate our heavily criticized Martian assets to the post-war reconstruction committee.",
+          "effects": {
+            "money": -300,
+            "reputation": 200,
+            "heat": -120
+          },
+          "personality": {
+            "outward": 20
+          },
+          "outcome": "You lose a massive revenue stream, but you buy the survival of the dynasty in the new era.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_ark_of_the_dissipating",
+      "era": "firstcontact",
+      "year": 2157,
+      "title": "The Rogue Ark",
+      "scene": "With the galaxy's door now open but light-lag threatening to cut off any distant holdings, your youngest branch has decided to take half of the family's liquid treasury and board an independent colony ship destined for the Gliese system. They intend to establish a new dynasty, completely free of your iron grip.",
+      "researchNote": "The advent of interstellar migration offered cadet branches the ultimate escape hatch to flee domestic authority and establish independent lines.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:dissipating-line",
+        "trope:cadet-branch"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "seize_engines",
+          "text": "Lock down their colony ship's engines through our system-wide software overrides.",
+          "effects": {
+            "power": 100,
+            "loyalty": -150,
+            "heat": 50
+          },
+          "personality": {
+            "inward": 40
+          },
+          "outcome": "The defectors are trapped on Earth, bitter and desperate, their dreams of independence crushed under your boot.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "sever_claims",
+          "text": "Allow them to depart, on the condition that they legally renounce all future claims to the home estate.",
+          "effects": {
+            "money": -150,
+            "reputation": 100,
+            "heat": -40
+          },
+          "personality": {
+            "outward": 30
+          },
+          "outcome": "The ark departs into the cold night. Your ancestral coffers are lighter, but the line remains clean and unified back home.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "tax_writeoff",
+          "text": "Fund their journey publicly and write it off as an interstellar development grant.",
+          "effects": {
+            "money": -50,
+            "power": -50,
+            "reputation": 150
+          },
+          "personality": {
+            "grandiosity": 20
+          },
+          "outcome": "The public admires your generosity to the pioneers, while your accountants smile at the massive tax relief achieved on the back of family division.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     }

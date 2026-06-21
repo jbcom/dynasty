@@ -11,6 +11,8 @@ import {
   type Era,
   EraEventsSchema,
   EraIndexSchema,
+  type EventTemplate,
+  EventTemplatesFileSchema,
   type FamilyTree,
   FamilyTreesFileSchema,
   type GameEvent,
@@ -18,16 +20,25 @@ import {
   MarketsFileSchema,
   type MeterDef,
   MetersFileSchema,
+  type OnomasticsFile,
+  OnomasticsFileSchema,
   parseContent,
   type RankLadder,
   RanksFileSchema,
   type Slot,
   SlotsFileSchema,
+  type StartMoment,
+  StartMomentsFileSchema,
   type TermsFile,
   TermsFileSchema,
+  type Trope,
+  TropesFileSchema,
+  type WorldStack,
+  WorldStacksFileSchema,
   type WorldTimeline,
   WorldTimelineSchema,
 } from "./schema";
+import { projectWorldEvents } from "./worldEvents";
 
 /**
  * The fully-validated, immutable content bundle the sim runs against. Pure data —
@@ -54,6 +65,40 @@ export interface Content {
   ranks: RankLadder[];
   /** Per-dynasty family trees (preset spines + the found-your-own data model). */
   familyTrees: FamilyTree[];
+  /**
+   * The dynastic trope catalog (FD-3): reusable archetypal patterns any founded
+   * family can embody. Events reference these via `trope:<id>` tags; the compiler
+   * composes a bespoke line from trope-templates × world-stacks × eras.
+   */
+  tropes: Trope[];
+  /**
+   * Procedural event templates (FD-4): skeleton events with `{slot}` tokens the
+   * seeded expander materializes into concrete GameEvents when the authored pool
+   * thins. Empty by default (the authored pool stands alone).
+   */
+  templates: EventTemplate[];
+  /**
+   * Per-culture given-name pools + naming conventions (FD-5). Feeds the procgen
+   * context + the found-your-own-dynasty naming. Keyed by culture id.
+   */
+  onomastics: OnomasticsFile["cultures"];
+  /**
+   * The "found your own dynasty" start-moments (FD-6): historical hinges a line
+   * can be founded at. The 4 preset spines are one-tap shortcuts over these.
+   */
+  startMoments: StartMoment[];
+  /**
+   * Per-place STANDING context (FD-7): geography/politics/religion/ideology +
+   * period perils the family experiences at a place+era. Feeds the procgen
+   * ExpandContext (place label + perils); a migration swaps which stack applies.
+   */
+  worldStacks: WorldStack[];
+  /**
+   * World-timeline entries PROJECTED into the unified event pool (FD-2.2): the
+   * dated backdrop facts as year-keyed, reactable GameEvents the player lives
+   * through. Derived from worldTimelines; year-sorted + deterministic.
+   */
+  worldEvents: GameEvent[];
 }
 
 export interface RawContent {
@@ -70,6 +115,11 @@ export interface RawContent {
   currencies?: unknown;
   ranks?: unknown;
   familyTrees?: unknown;
+  tropes?: unknown;
+  templates?: unknown;
+  onomastics?: unknown;
+  startMoments?: unknown;
+  worldStacks?: unknown;
 }
 
 /** Validate raw JSON into a Content bundle, cross-checking referential integrity. */
@@ -100,6 +150,54 @@ export function buildContent(raw: RawContent): Content {
     raw.familyTrees ?? { trees: [] },
     "family-trees",
   );
+  const tropesFile = parseContent(TropesFileSchema, raw.tropes ?? { tropes: [] }, "tropes.json");
+  const tropeIds = new Set(tropesFile.tropes.map((t) => t.id));
+  if (tropeIds.size !== tropesFile.tropes.length) {
+    throw new Error("tropes.json has duplicate trope ids");
+  }
+  const templatesFile = parseContent(
+    EventTemplatesFileSchema,
+    raw.templates ?? { templates: [] },
+    "templates",
+  );
+  const onomasticsFile = parseContent(
+    OnomasticsFileSchema,
+    raw.onomastics ?? { cultures: {} },
+    "onomastics.json",
+  );
+  const startMomentsFile = parseContent(
+    StartMomentsFileSchema,
+    raw.startMoments ?? { moments: [] },
+    "start-moments.json",
+  );
+  const worldStacksFile = parseContent(
+    WorldStacksFileSchema,
+    raw.worldStacks ?? { stacks: [] },
+    "world/stacks.json",
+  );
+  // Each start-moment's culture must resolve in onomastics; cross-ref vs eras is
+  // done below once eraIds is built. FD-7: its place must have a world-stack so
+  // the founded line always has standing context (no silent generic fallback).
+  const cultureIds = new Set(Object.keys(onomasticsFile.cultures));
+  const stackPlaces = new Set(worldStacksFile.stacks.map((s) => s.place));
+  for (const m of startMomentsFile.moments) {
+    if (cultureIds.size > 0 && !cultureIds.has(m.culture)) {
+      throw new Error(`start-moment "${m.id}" references unknown culture "${m.culture}"`);
+    }
+    if (stackPlaces.size > 0 && !stackPlaces.has(m.place)) {
+      throw new Error(`start-moment "${m.id}" place "${m.place}" has no world-stack`);
+    }
+  }
+  // A template's trope ids must resolve to the catalog (same guarantee as events).
+  if (tropeIds.size > 0) {
+    for (const tpl of templatesFile.templates) {
+      for (const id of tpl.tropes) {
+        if (!tropeIds.has(id)) {
+          throw new Error(`template "${tpl.id}" references unknown trope "${id}"`);
+        }
+      }
+    }
+  }
   // Cross-ref validate each tree: every child id resolves to a member, exactly
   // one founder-patriarch, and no cycles (the tree is a DAG progenitor→descendants).
   for (const tree of familyTreesFile.trees) {
@@ -165,6 +263,19 @@ export function buildContent(raw: RawContent): Content {
         throw new Error(`Duplicate event id "${ev.id}"`);
       }
       seenEventIds.add(ev.id);
+      // FD-3: any `trope:<id>` tag must reference a catalog trope (so a refactor
+      // can never leave an event pointing at a deleted/renamed trope). Only
+      // enforced when a catalog is supplied, so legacy fixtures stay loadable.
+      if (tropeIds.size > 0) {
+        for (const tag of ev.tags) {
+          if (tag.startsWith("trope:")) {
+            const id = tag.slice("trope:".length);
+            if (!tropeIds.has(id)) {
+              throw new Error(`Event "${ev.id}" references unknown trope "${id}"`);
+            }
+          }
+        }
+      }
       allEvents.push(ev);
     }
     eventsByEra.set(parsed.era, parsed.events);
@@ -174,6 +285,13 @@ export function buildContent(raw: RawContent): Content {
   for (const era of eras) {
     if (!eventsByEra.has(era.id)) {
       throw new Error(`Era "${era.id}" has no events file`);
+    }
+  }
+
+  // FD-6: each start-moment's startEra must be a real era.
+  for (const m of startMomentsFile.moments) {
+    if (!eraIds.has(m.startEra)) {
+      throw new Error(`start-moment "${m.id}" references unknown startEra "${m.startEra}"`);
     }
   }
 
@@ -193,5 +311,11 @@ export function buildContent(raw: RawContent): Content {
     currencies: currenciesFile.currencies,
     ranks: ranksFile.ranks,
     familyTrees: familyTreesFile.trees,
+    tropes: tropesFile.tropes,
+    templates: templatesFile.templates,
+    onomastics: onomasticsFile.cultures,
+    startMoments: startMomentsFile.moments,
+    worldStacks: worldStacksFile.stacks,
+    worldEvents: projectWorldEvents(worldTimelines),
   };
 }

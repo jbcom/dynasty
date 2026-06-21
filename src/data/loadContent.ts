@@ -19,6 +19,11 @@ const marketsGlob = import.meta.glob("./markets.json", { eager: true });
 const currenciesGlob = import.meta.glob("./currencies.json", { eager: true });
 const ranksGlob = import.meta.glob("./ranks.json", { eager: true });
 const familyTreesGlob = import.meta.glob("./family-trees/*.json", { eager: true });
+const tropesGlob = import.meta.glob("./tropes.json", { eager: true });
+const templatesGlob = import.meta.glob("./templates/*.json", { eager: true });
+const onomasticsGlob = import.meta.glob("./onomastics.json", { eager: true });
+const startMomentsGlob = import.meta.glob("./origins/start-moments.json", { eager: true });
+const worldStacksGlob = import.meta.glob("./world/stacks.json", { eager: true });
 
 function firstValue<T>(glob: Record<string, unknown>): T | null {
   const entry = Object.values(glob)[0] as { default?: T } | undefined;
@@ -53,6 +58,15 @@ export function loadContent(): Content {
     familyTrees: {
       trees: Object.values(familyTreesGlob).map((m) => (m as { default: unknown }).default),
     },
+    tropes: firstValue(tropesGlob) ?? { tropes: [] },
+    templates: {
+      templates: Object.values(templatesGlob).flatMap(
+        (m) => (m as { default: { templates?: unknown[] } }).default.templates ?? [],
+      ),
+    },
+    onomastics: firstValue(onomasticsGlob) ?? { cultures: {} },
+    startMoments: firstValue(startMomentsGlob) ?? { moments: [] },
+    worldStacks: firstValue(worldStacksGlob) ?? { stacks: [] },
   };
   return buildContent(raw);
 }
