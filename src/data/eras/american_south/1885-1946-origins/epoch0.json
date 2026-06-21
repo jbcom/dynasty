@@ -11,8 +11,21 @@
       "scene": "You come into the world in a frame house at the edge of the cotton country, in a heat so thick the curtains hang dead still and the air smells of magnolia and river mud. A whippoorwill calls from the tree line; the slow brown river moves past as it has for ten thousand years. The doctor, who knows every family up and down the delta and the exact place each one holds in it, finishes his work and opens the book where he records the county's newborns. You hear him read the date as he writes it.",
       "researchNote": "OB-5 birth opener for the American South. Sets `emerged` so the Epoch-0 chain begins; narrates the seed-drawn date via {birth_date}. New South delta cotton country, 1885 — humid, hierarchical, the river-delta cadence.",
       "historicity": "personal",
-      "tags": ["epoch0", "birth", "diegetic"],
-      "requires": { "flags": ["founded_line"], "notFlags": ["emerged"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "birth",
+        "diegetic"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [
+          "emerged"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 5000,
       "choices": [
         {
@@ -20,7 +33,9 @@
           "text": "You overhear the date he says — the year that fixes when you are.",
           "effects": {},
           "personality": {},
-          "setFlags": ["emerged"],
+          "setFlags": [
+            "emerged"
+          ],
           "outcome": "“{birth_date},” the doctor reads, and closes the book. In this country a child is born already placed — every family knowing exactly where it stands in an order older than the war, and harder to leave than the heat."
         }
       ]
@@ -34,32 +49,71 @@
       "scene": "The {family_name} name is settled — but the given name is chosen with care, for in the South a name is a claim about who your people are. Some name for a forebear who held land before the war, reaching for old standing; some hold to Scripture and the church that anchors every town; some pick a plain, honest name and let the family make its own way. The choice is made on a porch in the evening cool, and you become {full_name}.",
       "researchNote": "OB-5: given-naming in the South where a name signals lineage and standing — old-family forebear / Scripture / plain self-made name. Given name dealt from the scots_irish pool at founding; this beat sets `named` + frames the choice (early personality anchor).",
       "historicity": "personal",
-      "tags": ["epoch0", "naming", "diegetic", "trope:reformer-vs-reactionary"],
-      "requires": { "flags": ["founded_line", "emerged", "gender_revealed"], "notFlags": ["named"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "naming",
+        "diegetic",
+        "trope:reformer-vs-reactionary"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "emerged",
+          "gender_revealed"
+        ],
+        "notFlags": [
+          "named"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 980,
       "choices": [
         {
           "id": "named_for_the_old_family",
           "text": "Named for a forebear who held land before the war — reaching for old standing.",
-          "effects": { "reputation": 3 },
-          "personality": { "inward": 2, "grandiosity": 2 },
-          "setFlags": ["named", "named_for_kin"],
+          "effects": {
+            "reputation": 3
+          },
+          "personality": {
+            "lineage": 2,
+            "power": 2
+          },
+          "setFlags": [
+            "named",
+            "named_for_kin"
+          ],
           "outcome": "An old delta name, heavy with a standing the family means to reclaim. In the South the past is never quite past."
         },
         {
           "id": "named_from_scripture",
           "text": "Named from Scripture — the church is the spine of every Southern town.",
-          "effects": { "loyalty": 3 },
-          "personality": { "inward": 2 },
-          "setFlags": ["named", "named_for_saint"],
+          "effects": {
+            "loyalty": 3
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "named",
+            "named_for_saint"
+          ],
           "outcome": "A Bible name in a churchgoing country. The congregation approves, and approval here is currency."
         },
         {
           "id": "named_for_plainness",
           "text": "A plain, honest name — let the family earn its standing rather than claim it.",
-          "effects": { "health": 2, "loyalty": 2 },
-          "personality": { "inward": 2 },
-          "setFlags": ["named", "named_for_plainness"],
+          "effects": {
+            "health": 2,
+            "loyalty": 2
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "named",
+            "named_for_plainness"
+          ],
           "outcome": "No old family, no Scripture — just a straight name for a family that means to rise on its own. In a place obsessed with lineage, that is quietly defiant."
         }
       ]
@@ -73,32 +127,71 @@
       "scene": "You are old enough now to read the country, and the country is an order. The cotton makes money, but the money runs uphill — to the landowners, the factors, the banks — and the whole of it rests on a brutal, codified hierarchy that everyone is taught and no one is to question aloud. You watch where every person is placed, and how the placing is enforced, and you understand young that to rise here is to choose how your family will stand in relation to that order: profit by it, quietly work around it, or pay the steep price of defying it.",
       "researchNote": "OB-5: class/station emerges early as an organic response to observing the form + function of New South life (user). The defining fact is the codified caste order — named honestly, matching the existing ev_so_the_weight_of_caste register (frank, no graphic detail). Sets an early-pressure anchor + a moral-stance anchor the calling reads.",
       "historicity": "personal",
-      "tags": ["epoch0", "childhood", "diegetic", "trope:reformer-vs-reactionary"],
-      "requires": { "flags": ["founded_line", "emerged", "gender_revealed", "named"], "notFlags": ["station_seen"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "childhood",
+        "diegetic",
+        "trope:reformer-vs-reactionary"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "emerged",
+          "gender_revealed",
+          "named"
+        ],
+        "notFlags": [
+          "station_seen"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 940,
       "choices": [
         {
           "id": "mean_to_rise_within",
           "text": "You resolve to rise — to be one of the families the money runs uphill TO.",
-          "effects": { "reputation": 2 },
-          "personality": { "outward": 3, "grandiosity": 4 },
-          "setFlags": ["station_seen", "born_wanting"],
+          "effects": {
+            "reputation": 2
+          },
+          "personality": {
+            "power": 7
+          },
+          "setFlags": [
+            "station_seen",
+            "born_wanting"
+          ],
           "outcome": "Some children make peace with their place. You measure the distance to the top and mean to close it. The wanting will not leave you now."
         },
         {
           "id": "see_the_order_for_what_it_is",
           "text": "You see the order clearly for what it is — and quietly resolve it should not last.",
-          "effects": { "power": 2 },
-          "personality": { "inward": 4 },
-          "setFlags": ["station_seen", "watched_the_ledger", "saw_the_injustice"],
+          "effects": {
+            "power": 2
+          },
+          "personality": {
+            "lineage": 4
+          },
+          "setFlags": [
+            "station_seen",
+            "watched_the_ledger",
+            "saw_the_injustice"
+          ],
           "outcome": "You learn the hierarchy the way one learns a thing in order to undo it. It is a dangerous knowledge to carry in this country, and you carry it anyway."
         },
         {
           "id": "trust_the_church_and_kin",
           "text": "You trust the church and your own people, like the steadiest delta families.",
-          "effects": { "loyalty": 4 },
-          "personality": { "inward": 2 },
-          "setFlags": ["station_seen", "head_down_youth"],
+          "effects": {
+            "loyalty": 4
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "station_seen",
+            "head_down_youth"
+          ],
           "outcome": "There is a shelter in faith and family that the order outside cannot reach. Whether shelter alone can found a great line is a question for later years."
         }
       ]
@@ -112,32 +205,69 @@
       "scene": "There is a small academy and a teacher, Mr. Calloway, who came back from a Northern college with more ideas than the county is comfortable with and keeps the sharpest of them to himself. He has watched the delta swallow clever children and elevate dull ones by birth, and he has a careful, watchful intelligence about who might amount to something. He stops you after lessons one heavy afternoon. \"You've a mind on you,\" he says, low. \"In this country the question is never whether you're able. It's what this place will let you become — and what you'll do about that.\"",
       "researchNote": "OB-5: the calling EMERGES (user) — not one static pick. A college-educated, carefully-guarded Southern teacher is the first pressure that bends the child toward a bent. Sets `schooled`, an anchor the crystallization reads. Mr. Calloway's watchfulness reflects the constraints of the place, distinct from the other teachers.",
       "historicity": "personal",
-      "tags": ["epoch0", "childhood", "diegetic", "trope:reformer-vs-reactionary"],
-      "requires": { "flags": ["founded_line", "station_seen"], "notFlags": ["schooled"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "childhood",
+        "diegetic",
+        "trope:reformer-vs-reactionary"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "station_seen"
+        ],
+        "notFlags": [
+          "schooled"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 930,
       "choices": [
         {
           "id": "devour_the_books",
           "text": "You read every book he dares lend you — hungry for the wider world.",
-          "effects": { "reputation": 3 },
-          "personality": { "inward": 3 },
-          "setFlags": ["schooled", "leaned_learning"],
+          "effects": {
+            "reputation": 3
+          },
+          "personality": {
+            "lineage": 3
+          },
+          "setFlags": [
+            "schooled",
+            "leaned_learning"
+          ],
           "outcome": "Mr. Calloway begins lending you the books he keeps in the back. A door has opened that the delta cannot quite close behind you."
         },
         {
           "id": "work_the_room",
           "text": "You learn the people — every planter, preacher, and factor in the county.",
-          "effects": { "loyalty": 3 },
-          "personality": { "outward": 4 },
-          "setFlags": ["schooled", "leaned_people"],
+          "effects": {
+            "loyalty": 3
+          },
+          "personality": {
+            "power": 4
+          },
+          "setFlags": [
+            "schooled",
+            "leaned_people"
+          ],
           "outcome": "You discover you can read a room of Southern men and find the word that moves them. In a country run on standing and saved face, that gift is power."
         },
         {
           "id": "leave_for_the_fields",
           "text": "You leave the academy for the work — cotton and timber will not wait.",
-          "effects": { "money": 200, "health": 2 },
-          "personality": { "inward": 2 },
-          "setFlags": ["schooled", "leaned_labor"],
+          "effects": {
+            "money": 200,
+            "health": 2
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "schooled",
+            "leaned_labor"
+          ],
           "outcome": "Mr. Calloway lets you go with quiet regret. The land does not care what you might have been — only what you can wring from a season before the gins close."
         }
       ]
@@ -151,61 +281,115 @@
       "scene": "You are a young {given_name} {surname} now, grown into the body and the heavy, beautiful, troubled country that made you. The pulls of a delta childhood have set into a direction. This is a place of old orders and new money, where a person of ability must decide not only what to be, but where to stand — and the choice will mark the family for a hundred years. A line has to plant a flag its descendants can rally to. Standing on the porch with the cotton white to the river, you feel which way you will go.",
       "researchNote": "OB-5: the calling CRYSTALLIZES into the line's archetype (user: calling IS the archetype, and it EMERGES). All six archetypes offered; setsArchetype commits the power base. Prior schooling/station anchors color which feel natural. Self-excludes the generic ev_birth_calling via the OB-5 has_authored_epoch0 flag.",
       "historicity": "personal",
-      "tags": ["epoch0", "calling", "diegetic"],
-      "requires": { "flags": ["founded_line", "schooled"], "notFlags": ["calling_chosen"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "calling",
+        "diegetic"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "schooled"
+        ],
+        "notFlags": [
+          "calling_chosen"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 920,
       "choices": [
         {
           "id": "crystallize_economic",
           "text": "Money. You will own the cotton, the gin, the timber, and the land the whole delta works.",
-          "effects": { "money": 500, "power": 3 },
-          "personality": { "grandiosity": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "money": 500,
+            "power": 3
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "economic",
           "outcome": "The Magnate's road: in a country where money runs uphill, you will be the hill. The line will own the land and the gins the whole delta feeds — and what the family does with that power is the story still to be told."
         },
         {
           "id": "crystallize_political",
           "text": "Power. You will take the offices the old families thought were theirs by birth.",
-          "effects": { "power": 5 },
-          "personality": { "outward": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "power": 5
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "political",
           "outcome": "The Statesman's road: the courthouse, the statehouse, the careful Southern art of who is owed what. The line will hold office in a country that guards it jealously — and bend, or uphold, the order from inside it."
         },
         {
           "id": "crystallize_religious",
           "text": "Faith. You will hold the pulpit that is the truest power in a churchgoing land.",
-          "effects": { "reputation": 5 },
-          "personality": { "inward": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 5
+          },
+          "personality": {
+            "lineage": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "religious",
           "outcome": "The Prophet's road: the revival, the congregation, the gospel that in the South can either bless the order or call it to account. The line will hold souls — and the conscience of a country that listens hardest in church."
         },
         {
           "id": "crystallize_technological",
           "text": "Invention. You will bring the new machines and methods the South is starved for.",
-          "effects": { "reputation": 3, "money": 200 },
-          "personality": { "inward": 4 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 3,
+            "money": 200
+          },
+          "personality": {
+            "lineage": 4
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "technological",
           "outcome": "The Visionary's road: the mill, the engine, the new science that drags a backward region into the century. The line will build what the delta lacks — and own the future the cotton country is afraid of."
         },
         {
           "id": "crystallize_entertainment",
           "text": "The crowd. You carry the music this country runs in its blood — the stage, the song.",
-          "effects": { "reputation": 4, "money": 100 },
-          "personality": { "outward": 4 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 4,
+            "money": 100
+          },
+          "personality": {
+            "power": 4
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "entertainment",
           "outcome": "The Star's road: the delta is the cradle of a music the whole world will come to love. The line will give the country its voice — and a voice that crosses every line drawn in this place is a power nothing here can fully contain."
         },
         {
           "id": "crystallize_athletic",
           "text": "The body. You are the finest the county ever raised, and the South worships a winner.",
-          "effects": { "reputation": 4, "power": 1 },
-          "personality": { "grandiosity": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 4,
+            "power": 1
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "athletic",
           "outcome": "The Champion's road: the field, the ring, the contest a proud and divided country turns out for as one. The line will win its name with raw ability — earned in the open, where standing has to be proven and cannot be inherited."
         }

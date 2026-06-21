@@ -39,7 +39,16 @@ describe("data-driven endings — world-aligned outcomes", () => {
     const s = {
       ...base,
       flags: ["utopian_currents"],
-      personality: { ideology: -70, grandiosity: 50, outward: 0, inward: 0 },
+      personality: {
+        wealth: 0,
+        politics: -70,
+        worldview: 0,
+        power: 50,
+        tradition: 0,
+        honor: 0,
+        lineage: 0,
+        reach: 0,
+      },
       meters: { ...base.meters, reputation: 70 },
     };
     // The aligned variant (priority 90) beats the personality-only one (88).
@@ -51,7 +60,16 @@ describe("data-driven endings — world-aligned outcomes", () => {
     const s = {
       ...base,
       flags: ["autocratic_currents"],
-      personality: { ideology: 70, grandiosity: 90, outward: 0, inward: 0 },
+      personality: {
+        wealth: 0,
+        politics: 70,
+        worldview: 0,
+        power: 90,
+        tradition: 0,
+        honor: 0,
+        lineage: 0,
+        reach: 0,
+      },
       meters: { ...base.meters, power: 90 },
     };
     expect(evaluateEnding(content, s)?.endingId).toBe("end_megalomaniac_king_aligned");
@@ -62,7 +80,16 @@ describe("data-driven endings — world-aligned outcomes", () => {
     const s = {
       ...base,
       flags: [],
-      personality: { ideology: -70, grandiosity: 50, outward: 0, inward: 0 },
+      personality: {
+        wealth: 0,
+        politics: -70,
+        worldview: 0,
+        power: 50,
+        tradition: 0,
+        honor: 0,
+        lineage: 0,
+        reach: 0,
+      },
       meters: { ...base.meters, reputation: 70 },
     };
     expect(evaluateEnding(content, s)?.endingId).toBe("end_communist_utopia");
@@ -75,7 +102,16 @@ describe("data-driven endings — world-aligned outcomes", () => {
     const s = {
       ...base,
       flags: ["mars_program"],
-      personality: { ideology: 70, grandiosity: 90, outward: 0, inward: 0 },
+      personality: {
+        wealth: 0,
+        politics: 70,
+        worldview: 0,
+        power: 90,
+        tradition: 0,
+        honor: 0,
+        lineage: 0,
+        reach: 0,
+      },
       meters: { ...base.meters, power: 90 },
     };
     expect(evaluateEnding(content7, s)?.endingId).not.toBe("end_megalomaniac_king");
@@ -86,7 +122,16 @@ describe("data-driven endings — world-aligned outcomes", () => {
     const s = {
       ...base,
       flags: [],
-      personality: { ideology: 70, grandiosity: 90, outward: 0, inward: 0 },
+      personality: {
+        wealth: 0,
+        politics: 70,
+        worldview: 0,
+        power: 90,
+        tradition: 0,
+        honor: 0,
+        lineage: 0,
+        reach: 0,
+      },
       meters: { ...base.meters, power: 90 },
     };
     expect(evaluateEnding(content7, s)?.endingId).toBe("end_megalomaniac_king");
@@ -128,11 +173,20 @@ describe("moral-pole ending gate (DE-2)", () => {
   }
 
   it("fires the utopian-pole ending only when the run resolves to the utopian pole", () => {
-    // tyrannyUtopiaAxis = outward*0.6 + ideology*0.25 + grandiosity*0.15; drive it
-    // below -40 for the utopian pole (outward-dominated).
+    // tyrannyUtopiaAxis = reach*0.6 + politics*0.25 + power*0.15; drive it
+    // below -40 for the utopian pole (reach-dominated).
     const s = poleState({
       flags: ["reached_apex"],
-      personality: { ideology: -80, grandiosity: -40, outward: -80, inward: 0 },
+      personality: {
+        wealth: 0,
+        politics: -80,
+        worldview: 0,
+        power: -80,
+        tradition: 0,
+        honor: 0,
+        lineage: 0,
+        reach: -80,
+      },
     });
     expect(evaluateEnding(poleContent, s)?.endingId).toBe("end_pole_utopian");
   });
@@ -140,7 +194,16 @@ describe("moral-pole ending gate (DE-2)", () => {
   it("fires the dictatorial-pole ending for a tyrannical run with the same flags", () => {
     const s = poleState({
       flags: ["reached_apex"],
-      personality: { ideology: 80, grandiosity: 90, outward: 80, inward: 0 },
+      personality: {
+        wealth: 0,
+        politics: 80,
+        worldview: 0,
+        power: 90,
+        tradition: 0,
+        honor: 0,
+        lineage: 0,
+        reach: 80,
+      },
     });
     expect(evaluateEnding(poleContent, s)?.endingId).toBe("end_pole_dictatorial");
   });
@@ -149,7 +212,16 @@ describe("moral-pole ending gate (DE-2)", () => {
     // Centrist run — neither the utopian nor dictatorial pole ending qualifies.
     const s = poleState({
       flags: ["reached_apex"],
-      personality: { ideology: 0, grandiosity: 0, outward: 0, inward: 0 },
+      personality: {
+        wealth: 0,
+        politics: 0,
+        worldview: 0,
+        power: 0,
+        tradition: 0,
+        honor: 0,
+        lineage: 0,
+        reach: 0,
+      },
     });
     expect(evaluateEnding(poleContent, s)).toBeNull();
   });

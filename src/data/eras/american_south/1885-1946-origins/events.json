@@ -10,32 +10,67 @@
       "scene": "The South is rebuilding itself on cotton, cane, timber, and the cheap labor that works them — a region of old hierarchies and new money jostling in the humid heat. The {surname} line can plant itself in the land and its crops, bring in the mills and factories the boosters promise, or trade across the river-delta network that moves the South's wealth to the world.",
       "researchNote": "Place-specific Southern origins beat (EX-2): the post-Reconstruction 'New South' — plantation agriculture, industrialization, and delta trade. Generic to any american_south founding.",
       "historicity": "real",
-      "tags": ["origin", "american_south", "trope:frontier-capital-origin"],
-      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "origin",
+        "american_south",
+        "trope:frontier-capital-origin"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 14,
       "choices": [
         {
           "id": "so_plant_the_land",
           "text": "Build a great agricultural estate on the region's old model",
-          "effects": { "money": 4, "reputation": 3, "heat": 2 },
-          "personality": { "ideology": 2, "inward": 2 },
-          "setFlags": ["so_planter_house"],
+          "effects": {
+            "money": 4,
+            "reputation": 3,
+            "heat": 2
+          },
+          "personality": {
+            "politics": 2,
+            "lineage": 2
+          },
+          "setFlags": [
+            "so_planter_house"
+          ],
           "outcome": "You build on land and crop the way the old families did. The {surname} name takes its place among the region's gentry, with all that entails."
         },
         {
           "id": "so_bring_the_mills",
           "text": "Bring in the mills and factories — be the New South they promise",
-          "effects": { "money": 5, "power": 2 },
-          "personality": { "grandiosity": 4, "outward": 2 },
-          "setFlags": ["so_industrialist", "head_start"],
+          "effects": {
+            "money": 5,
+            "power": 2
+          },
+          "personality": {
+            "power": 6
+          },
+          "setFlags": [
+            "so_industrialist",
+            "head_start"
+          ],
           "outcome": "You build smokestacks where others see only fields. The {surname} line becomes the face of a South remaking itself, for better and worse."
         },
         {
           "id": "so_work_the_delta",
           "text": "Trade across the river-delta network that moves the South's wealth",
-          "effects": { "money": 4, "reputation": 1 },
-          "personality": { "outward": 3 },
-          "setFlags": ["so_delta_trader"],
+          "effects": {
+            "money": 4,
+            "reputation": 1
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "so_delta_trader"
+          ],
           "outcome": "You learn every landing and broker on the river. The {surname} line takes a cut of the cotton and cane flowing to the wider world."
         }
       ]
@@ -49,24 +84,54 @@
       "scene": "The South's prosperity rests on a brutal, codified hierarchy, and the {surname} line cannot pretend otherwise. To rise here is to decide how the family stands in relation to that order — enforcing it for profit and standing, quietly working around it, or paying the steep price of defying it.",
       "researchNote": "The Jim Crow caste system as the inescapable moral architecture of a Southern founding — a place-specific choice that sets durable reputation/pole flags.",
       "historicity": "real",
-      "tags": ["origin", "american_south", "trope:faith-and-community"],
-      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "origin",
+        "american_south",
+        "trope:faith-and-community"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 12,
       "choices": [
         {
           "id": "so_enforce_the_order",
           "text": "Profit within the order and let it lift the {surname} name",
-          "effects": { "money": 3, "power": 3, "heat": 3, "reputation": -1 },
-          "personality": { "ideology": 3, "grandiosity": 2 },
-          "setFlags": ["so_old_order_ally"],
+          "effects": {
+            "money": 3,
+            "power": 3,
+            "heat": 3,
+            "reputation": -1
+          },
+          "personality": {
+            "politics": 3,
+            "power": 2
+          },
+          "setFlags": [
+            "so_old_order_ally"
+          ],
           "outcome": "You take the standing the order offers those who uphold it. The {surname} line prospers on a foundation it does not examine too closely."
         },
         {
           "id": "so_defy_the_order",
           "text": "Pay the price of standing against the caste, however quietly",
-          "effects": { "reputation": 4, "money": -3, "heat": 2 },
-          "personality": { "ideology": 4, "inward": 2 },
-          "setFlags": ["so_quiet_defiance"],
+          "effects": {
+            "reputation": 4,
+            "money": -3,
+            "heat": 2
+          },
+          "personality": {
+            "politics": 4,
+            "lineage": 2
+          },
+          "setFlags": [
+            "so_quiet_defiance"
+          ],
           "outcome": "You work against the grain at real cost. The {surname} name earns a harder, rarer kind of respect — and dangerous enemies."
         }
       ]

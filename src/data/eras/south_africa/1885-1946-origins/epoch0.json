@@ -11,8 +11,21 @@
       "scene": "You come into the world in a low farmhouse on a sea of dry grass that runs flat to every horizon. The sun is a hammer; the wind smells of dust and wild sage. There is no doctor for a day's ride, so it is your grandmother and a neighbour woman who bring you in, and your father who writes the date in the heavy family Bible, beneath a column of names that marched up from the Cape generations ago.",
       "researchNote": "OB-5 South Africa birth opener. Sets `emerged`; the date is recorded in the family Bible (Afrikaner Calvinist custom) via {birth_date}. Trekboer farmhouse on the high veld, 1885.",
       "historicity": "personal",
-      "tags": ["epoch0", "birth", "diegetic"],
-      "requires": { "flags": ["founded_line"], "notFlags": ["emerged"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "birth",
+        "diegetic"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [
+          "emerged"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 5000,
       "choices": [
         {
@@ -20,7 +33,9 @@
           "text": "You overhear the date read aloud as your father writes it — the year that fixes when you are.",
           "effects": {},
           "personality": {},
-          "setFlags": ["emerged"],
+          "setFlags": [
+            "emerged"
+          ],
           "outcome": "“{birth_date},” he writes, in ink the colour of dried blood. You are the newest name in a book that is half history and half prayer."
         }
       ]
@@ -34,32 +49,67 @@
       "scene": "On the next Nagmaal — the quarterly communion when the scattered farms gather in town — you are taken to the dominee to be baptized into the {family_name} line. The name is argued over on the long wagon ride in: a patriarch from Scripture, a forefather from the Great Trek, or a plain strong name for a plain hard country. The dominee pours the water; you become {full_name}.",
       "researchNote": "OB-5 South Africa given-naming at the Nagmaal communion. Sets `named`; frames the family's relation to Scripture, trek-ancestry, and the austere frontier ethos.",
       "historicity": "personal",
-      "tags": ["epoch0", "naming", "diegetic", "trope:faith-and-community"],
-      "requires": { "flags": ["founded_line", "emerged", "gender_revealed"], "notFlags": ["named"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "naming",
+        "diegetic",
+        "trope:faith-and-community"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "emerged",
+          "gender_revealed"
+        ],
+        "notFlags": [
+          "named"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 980,
       "choices": [
         {
           "id": "named_from_scripture",
           "text": "A name from Scripture — this is a covenant people, and you are bound by it.",
-          "effects": { "reputation": 3 },
-          "personality": { "inward": 3 },
-          "setFlags": ["named", "named_for_saint"],
+          "effects": {
+            "reputation": 3
+          },
+          "personality": {
+            "lineage": 3
+          },
+          "setFlags": [
+            "named",
+            "named_for_saint"
+          ],
           "outcome": "An Old-Testament name for an Old-Testament land. The dominee approves; the veld does not care."
         },
         {
           "id": "named_for_trekker",
           "text": "A forefather from the Trek — the family carried itself here, and remembers.",
-          "effects": { "loyalty": 4 },
-          "personality": { "inward": 2 },
-          "setFlags": ["named", "named_for_kin"],
+          "effects": {
+            "loyalty": 4
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "named",
+            "named_for_kin"
+          ],
           "outcome": "A name that walked a thousand miles from the Cape. It will expect you to be equal to it."
         },
         {
           "id": "named_plain_strong",
           "text": "A plain, strong name — this country has no use for ornament.",
-          "effects": { "health": 2 },
+          "effects": {
+            "health": 2
+          },
           "personality": {},
-          "setFlags": ["named", "named_for_plainness"],
+          "setFlags": [
+            "named",
+            "named_for_plainness"
+          ],
           "outcome": "No saint, no trekker — just a name a man can shout across a kraal. It suits the place."
         }
       ]
@@ -73,32 +123,70 @@
       "scene": "You grow old enough to feel the squeeze. The farm is yours by inheritance and God's apparent intent, but gold has been struck on the Witwatersrand and the British lion is sniffing north toward the Boer republics. Your father cleans his Mauser on Sundays after church. You learn early that a man here holds his land with a Bible in one hand and a rifle in the other — and that the bigger empire always, eventually, comes.",
       "researchNote": "OB-5: station emerges from the frontier squeeze — land, faith, the rifle, and the looming Anglo-Boer collision. Sets `station_seen`; an anchor of self-reliance / resentment of empire.",
       "historicity": "personal",
-      "tags": ["epoch0", "childhood", "diegetic"],
-      "requires": { "flags": ["founded_line", "emerged", "gender_revealed", "named"], "notFlags": ["station_seen"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "childhood",
+        "diegetic"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "emerged",
+          "gender_revealed",
+          "named"
+        ],
+        "notFlags": [
+          "station_seen"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 940,
       "choices": [
         {
           "id": "hold_the_land",
           "text": "You swear to hold the land — no empire takes what is yours.",
-          "effects": { "loyalty": 3, "power": 2 },
-          "personality": { "grandiosity": 3 },
-          "setFlags": ["station_seen", "born_wanting"],
+          "effects": {
+            "loyalty": 3,
+            "power": 2
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "station_seen",
+            "born_wanting"
+          ],
           "outcome": "The ground under your boots becomes a thing worth dying for, and worth growing. You will not be moved cheaply."
         },
         {
           "id": "watch_the_gold",
           "text": "You watch the gold, not the politics — fortunes are made in the noise of war.",
-          "effects": { "money": 300 },
-          "personality": { "inward": 3 },
-          "setFlags": ["station_seen", "watched_the_ledger"],
+          "effects": {
+            "money": 300
+          },
+          "personality": {
+            "lineage": 3
+          },
+          "setFlags": [
+            "station_seen",
+            "watched_the_ledger"
+          ],
           "outcome": "While men argue over flags, you notice who sells the picks and the powder. The Rand is a ledger written in ore."
         },
         {
           "id": "keep_the_faith",
           "text": "You keep the faith and the family close — endure, as the trekkers endured.",
-          "effects": { "loyalty": 4 },
-          "personality": { "inward": 2 },
-          "setFlags": ["station_seen", "head_down_youth"],
+          "effects": {
+            "loyalty": 4
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "station_seen",
+            "head_down_youth"
+          ],
           "outcome": "Endurance is the deepest Afrikaner virtue. Whether endurance alone can build a dynasty is a question the coming wars will answer."
         }
       ]
@@ -112,32 +200,68 @@
       "scene": "Learning on the veld is what the dominee and a tired schoolmaster can supply between planting and slaughter. But a meneer named Du Toit, who studied in the Cape and came back changed, sees something in you. \"This country will be fought over and then run by someone,\" he says, lending you a book the British censors would not love. \"Better one of ours than one of theirs. Better you.\"",
       "researchNote": "OB-5: the calling EMERGES via the farm school + a nationalist-minded teacher. Sets `schooled`; the rise framed against British vs Afrikaner futures.",
       "historicity": "personal",
-      "tags": ["epoch0", "childhood", "diegetic"],
-      "requires": { "flags": ["founded_line", "station_seen"], "notFlags": ["schooled"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "childhood",
+        "diegetic"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "station_seen"
+        ],
+        "notFlags": [
+          "schooled"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 930,
       "choices": [
         {
           "id": "read_in_secret",
           "text": "You read everything Du Toit lends you — knowledge is a weapon the empire can't confiscate.",
-          "effects": { "reputation": 3 },
-          "personality": { "inward": 3 },
-          "setFlags": ["schooled", "leaned_learning"],
+          "effects": {
+            "reputation": 3
+          },
+          "personality": {
+            "lineage": 3
+          },
+          "setFlags": [
+            "schooled",
+            "leaned_learning"
+          ],
           "outcome": "Du Toit starts treating you as a colleague rather than a pupil. A mind has been armed, and it will not disarm."
         },
         {
           "id": "rally_the_district",
           "text": "You find you can stir the district's young men with a few hot words.",
-          "effects": { "power": 3 },
-          "personality": { "outward": 4 },
-          "setFlags": ["schooled", "leaned_people"],
+          "effects": {
+            "power": 3
+          },
+          "personality": {
+            "power": 4
+          },
+          "setFlags": [
+            "schooled",
+            "leaned_people"
+          ],
           "outcome": "A gift for making others believe what you believe — dangerous in a land about to choose sides. Useful, too."
         },
         {
           "id": "stay_on_the_land",
           "text": "You stay on the land — the farm is real, and books do not stop a drought.",
-          "effects": { "money": 300, "health": 2 },
-          "personality": { "inward": 2 },
-          "setFlags": ["schooled", "leaned_labor"],
+          "effects": {
+            "money": 300,
+            "health": 2
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "schooled",
+            "leaned_labor"
+          ],
           "outcome": "Du Toit sighs, but the veld is honest in a way classrooms are not. You learn it the way your fathers did — with your hands."
         }
       ]
@@ -151,61 +275,115 @@
       "scene": "The war with the British has come and gone and left its scars — the farms, the camps, the bitter peace. You are a young {given_name} {surname} now, hardened by it, and a defeated people must decide how to rise again. You feel your road harden under you: the shape your line will take in a country remaking itself.",
       "researchNote": "OB-5: the South Africa calling crystallizes into the archetype (setsArchetype), framed by the aftermath of the Anglo-Boer War. Replaces the generic calling for south_africa.",
       "historicity": "personal",
-      "tags": ["epoch0", "calling", "diegetic"],
-      "requires": { "flags": ["founded_line", "schooled"], "notFlags": ["calling_chosen"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "calling",
+        "diegetic"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "schooled"
+        ],
+        "notFlags": [
+          "calling_chosen"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 920,
       "choices": [
         {
           "id": "crystallize_economic",
           "text": "Gold and ground. You will own what the war left lying — and grow rich rebuilding.",
-          "effects": { "money": 500, "power": 3 },
-          "personality": { "grandiosity": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "money": 500,
+            "power": 3
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "economic",
           "outcome": "The Magnate's road: mines, land, and the patient buying-up of a broken country. The line will own the rebuilt nation's bones."
         },
         {
           "id": "crystallize_political",
           "text": "The nation. You will lead a beaten people back to power, by ballot or otherwise.",
-          "effects": { "power": 5 },
-          "personality": { "outward": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "power": 5
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "political",
           "outcome": "The Statesman's road: the party, the cause, the long memory of grievance turned into governing power. The line will steer the state — and bear what it does."
         },
         {
           "id": "crystallize_religious",
           "text": "The Church. You will be the conscience and the comfort of a wounded people.",
-          "effects": { "reputation": 5 },
-          "personality": { "inward": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 5
+          },
+          "personality": {
+            "lineage": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "religious",
           "outcome": "The Prophet's road: the dominee's authority over a covenant people. The line will hold souls — and the terrible power of telling them what God wants."
         },
         {
           "id": "crystallize_technological",
           "text": "The new sciences. You will master the mining and the machines the future needs.",
-          "effects": { "reputation": 3, "money": 200 },
-          "personality": { "inward": 4 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 3,
+            "money": 200
+          },
+          "personality": {
+            "lineage": 4
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "technological",
           "outcome": "The Visionary's road: deep-level mining, engineering, the hard knowledge that pulls wealth from rock. The line will build what the country runs on."
         },
         {
           "id": "crystallize_entertainment",
           "text": "The crowd. You can sing the old volk songs and the new, and a beaten people will pay to feel something again.",
-          "effects": { "reputation": 4, "money": 100 },
-          "personality": { "outward": 4 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 4,
+            "money": 100
+          },
+          "personality": {
+            "power": 4
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "entertainment",
           "outcome": "The Star's road: the concert, the bioscope, the voice that gives a wounded nation its myths back. The line will be beloved — and beloved is a kind of power no governor can confiscate."
         },
         {
           "id": "crystallize_athletic",
           "text": "The body. You are the fastest and hardest on the veld, and a proud people loves a winner.",
-          "effects": { "reputation": 4, "power": 1 },
-          "personality": { "grandiosity": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 4,
+            "power": 1
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "athletic",
           "outcome": "The Champion's road: the rugby field, the running track, the green-and-gold a divided country will somehow cheer as one. The line will win standing with its own muscle — and carry what the crowd's love demands."
         }

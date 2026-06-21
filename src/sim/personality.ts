@@ -1,81 +1,77 @@
 /**
- * Personality vector — the axis tracking *what kind of man he becomes*, layered
- * on the six meters. Two scalars plus a perception split:
+ * PERSONALITY → MOTIVATORS adapter (Convergence Saga, SS-1).
  *
- *  - ideology     : -100 (collectivist / left / "stayed a liberal Democrat →
- *                   communist utopia") … +100 (autocratic / right / strongman).
- *  - grandiosity  : -100 (humble / self-effacing) … +100 (megalomaniacal king).
- *  - outward      : how the WORLD perceives him on the tyranny↔utopia spectrum
- *                   (-100 beloved liberator … +100 feared tyrant).
- *  - inward       : how he perceives HIMSELF on the same spectrum.
+ * The old 4-axis personality vector (ideology/grandiosity/outward/inward) is REPLACED by the
+ * 8-axis MOTIVATORS model (src/sim/motivators.ts). This module re-exports the motivators model
+ * under the historical `Personality` names so the many existing call-sites keep compiling, and
+ * provides the derived HUD/ending helpers (tyranny↔utopia spectrum, dominant-archetype label)
+ * recomputed from the new axes. Pure — no DOM, no randomness.
  *
- * outward and inward can diverge (e.g. a tyrant who believes he's a savior).
- * Pure data + pure helpers — no DOM, no randomness.
+ * Axis mapping applied to old content (one-time, by the SS-1 migration script):
+ *   ideology → politics ; grandiosity → power ; outward → power (folded) ; inward → (retired).
  */
 
-export interface Personality {
-  ideology: number;
-  grandiosity: number;
-  outward: number;
-  inward: number;
-}
+import {
+  applyMotivators,
+  axisLabel,
+  dominantMotivator,
+  initMotivators,
+  MOTIVATOR_AXES,
+  type MotivatorAxis,
+  type MotivatorDelta,
+  type Motivators,
+} from "./motivators";
 
-export const PERSONALITY_AXES = ["ideology", "grandiosity", "outward", "inward"] as const;
-export type PersonalityAxis = (typeof PERSONALITY_AXES)[number];
-
-/** A partial map of axis → delta applied by a choice. */
-export type PersonalityDelta = Partial<Record<PersonalityAxis, number>>;
+/** Historical alias — a line's motivator vector. */
+export type Personality = Motivators;
+export type PersonalityAxis = MotivatorAxis;
+export type PersonalityDelta = MotivatorDelta;
+export const PERSONALITY_AXES = MOTIVATOR_AXES;
 
 const MIN = -100;
 const MAX = 100;
-
 function clamp(v: number): number {
   return v < MIN ? MIN : v > MAX ? MAX : v;
 }
 
-/** Starting personality: ideologically neutral, modestly grandiose, unknown to the world. */
+/** Starting motivators: centrist on every axis. */
 export function initPersonality(): Personality {
-  return { ideology: 0, grandiosity: 10, outward: 0, inward: 0 };
+  return initMotivators();
 }
 
-/** Apply a delta map; returns a NEW Personality (pure), each axis clamped to [-100,100]. */
+/** Apply a delta map; returns a NEW vector (pure), each axis clamped to [-100,100]. */
 export function applyPersonality(p: Personality, delta: PersonalityDelta): Personality {
-  return {
-    ideology: clamp(p.ideology + (delta.ideology ?? 0)),
-    grandiosity: clamp(p.grandiosity + (delta.grandiosity ?? 0)),
-    outward: clamp(p.outward + (delta.outward ?? 0)),
-    inward: clamp(p.inward + (delta.inward ?? 0)),
-  };
+  return applyMotivators(p, delta);
 }
 
 /**
- * The man's current archetype — a coarse classification used by the HUD copy and
- * by ending triggers. Derived from ideology × grandiosity.
+ * Coarse archetype label (HUD copy + ending triggers), derived from politics × power. Mirrors
+ * the old ideology×grandiosity classification using the migrated axes (ideology→politics,
+ * grandiosity→power).
  */
 export type Archetype =
-  | "communist_visionary" // far left + grandiose
-  | "social_democrat" // left, humble
+  | "communist_visionary" // far left + high power-seeking
+  | "social_democrat" // left, low power
   | "dealmaker" // centrist / pragmatic
-  | "populist_strongman" // right, grandiose
-  | "megalomaniac_king"; // far right + extreme grandiosity
+  | "populist_strongman" // right, high power
+  | "megalomaniac_king"; // far right + extreme power
 
 export function archetypeOf(p: Personality): Archetype {
-  if (p.ideology <= -45) return p.grandiosity >= 40 ? "communist_visionary" : "social_democrat";
-  if (p.ideology >= 45) return p.grandiosity >= 55 ? "megalomaniac_king" : "populist_strongman";
+  if (p.politics <= -45) return p.power >= 40 ? "communist_visionary" : "social_democrat";
+  if (p.politics >= 45) return p.power >= 55 ? "megalomaniac_king" : "populist_strongman";
   return "dealmaker";
 }
 
 /**
- * Where the run sits on the tyranny↔utopia spectrum, from the WORLD's view.
- * Blends outward perception with the autocratic lean. Negative = utopian,
- * positive = tyrannical. Used to fork the secret First-Contact ending and to
- * drive the HUD's ambient drift signal.
+ * Where the line sits on the tyranny↔utopia spectrum (world's view). Recomputed from the new
+ * motivators: power-seeking + a right lean tilt toward tyranny; community + honor toward utopia.
+ * Negative = utopian, positive = tyrannical. Drives the secret First-Contact fork + HUD drift.
  */
 export function tyrannyUtopiaAxis(p: Personality): number {
-  return clamp(Math.round(p.outward * 0.6 + p.ideology * 0.25 + p.grandiosity * 0.15));
+  return clamp(Math.round(p.power * 0.5 + p.politics * 0.2 + p.honor * 0.3));
 }
 
-/** Human-readable label for the spectrum position (HUD + reports). */
+/** Human-readable spectrum label (HUD + reports). */
 export function spectrumLabel(p: Personality): string {
   const v = tyrannyUtopiaAxis(p);
   if (v <= -60) return "Utopian";
@@ -85,7 +81,14 @@ export function spectrumLabel(p: Personality): string {
   return "Tyrannical";
 }
 
-/** How far outward and inward perception diverge (self-delusion gauge). */
+/**
+ * Self-vs-world divergence gauge. The old inward/outward perception split is retired; we proxy
+ * "how extreme is the line's self-image vs. its honor" — the gap between raw power-seeking and
+ * its honorable tempering. Kept so existing HUD consumers render; 0 when balanced.
+ */
 export function perceptionGap(p: Personality): number {
-  return Math.abs(p.outward - p.inward);
+  return clamp(Math.abs(p.power) - Math.abs(p.honor));
 }
+
+/** The dominant-lean axis + pole, for tone/ending coloring. Re-exported from motivators. */
+export { axisLabel, dominantMotivator };

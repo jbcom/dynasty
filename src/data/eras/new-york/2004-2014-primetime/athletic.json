@@ -4,30 +4,61 @@
     {
       "id": "ev_ath_from_jersey_to_brand",
       "era": "primetime",
-      "archetypes": ["athletic", "entertainment"],
+      "archetypes": [
+        "athletic",
+        "entertainment"
+      ],
       "year": 2006,
       "title": "The Athlete Becomes the Brand",
       "scene": "The playing days are numbered, but the name is at its peak — endorsements, a clothing line, a broadcast booth, a reality show about the family. The {surname} line can convert athletic fame into a durable commercial empire before the body gives out, or chase one more season of glory while the window is open.",
       "researchNote": "EX-3 athletic→entertainment pivot: the aging champion who monetizes fame into a lasting brand (the bridge between the two new archetypes).",
       "historicity": "personal",
-      "tags": ["sport", "brand", "trope:pleasure-king"],
-      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "sport",
+        "brand",
+        "trope:pleasure-king"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 13,
       "choices": [
         {
           "id": "ath_cash_the_fame",
           "text": "Convert the fame into a commercial empire while it burns brightest",
-          "effects": { "money": 6, "reputation": 3 },
-          "personality": { "grandiosity": 4, "outward": 3 },
-          "setFlags": ["ath_brand_empire", "head_start"],
+          "effects": {
+            "money": 6,
+            "reputation": 3
+          },
+          "personality": {
+            "power": 7
+          },
+          "setFlags": [
+            "ath_brand_empire",
+            "head_start"
+          ],
           "outcome": "You turn the jersey into a logo. When the body finally fails, the {surname} name is a brand that no longer needs it."
         },
         {
           "id": "ath_one_more_ring",
           "text": "Chase one more championship while the window is still open",
-          "effects": { "reputation": 5, "health": -3 },
-          "personality": { "grandiosity": 5, "ideology": 2 },
-          "setFlags": ["ath_legend_status", "ath_champion_name"],
+          "effects": {
+            "reputation": 5,
+            "health": -3
+          },
+          "personality": {
+            "power": 5,
+            "politics": 2
+          },
+          "setFlags": [
+            "ath_legend_status",
+            "ath_champion_name"
+          ],
           "outcome": "You leave the brand money on the table for the chance at immortality. Win or lose, the {surname} name is spoken of as a legend, not a logo."
         }
       ]
@@ -35,30 +66,59 @@
     {
       "id": "ev_ath_the_dynasty_of_athletes",
       "era": "primetime",
-      "archetypes": ["athletic"],
+      "archetypes": [
+        "athletic"
+      ],
       "year": 2012,
       "title": "Raising the Next Champions",
       "scene": "Your children inherit the body and the name, and the spotlight that comes with both. The {surname} line can become a true athletic dynasty — generations of champions, each carrying the legend forward — or let the gift be the founder's alone and pivot the heirs to other fields.",
       "researchNote": "EX-3 athletic succession beat: the line as a multi-generational sporting dynasty.",
       "historicity": "personal",
-      "tags": ["sport", "family", "trope:dynastic-merger"],
-      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "sport",
+        "family",
+        "trope:dynastic-merger"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 11,
       "choices": [
         {
           "id": "ath_breed_champions",
           "text": "Forge the heirs into champions — make the name a sporting dynasty",
-          "effects": { "reputation": 4, "loyalty": 3, "power": 2 },
-          "personality": { "grandiosity": 3, "ideology": 2 },
-          "setFlags": ["ath_sporting_dynasty"],
+          "effects": {
+            "reputation": 4,
+            "loyalty": 3,
+            "power": 2
+          },
+          "personality": {
+            "power": 3,
+            "politics": 2
+          },
+          "setFlags": [
+            "ath_sporting_dynasty"
+          ],
           "outcome": "The {surname} name appears on roster after roster, generation after generation. To wear it is to be expected to win."
         },
         {
           "id": "ath_diversify_the_heirs",
           "text": "Let the gift be yours — steer the heirs to broader empires",
-          "effects": { "money": 3, "power": 2 },
-          "personality": { "inward": 2 },
-          "setFlags": ["ath_diversified_line"],
+          "effects": {
+            "money": 3,
+            "power": 2
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "ath_diversified_line"
+          ],
           "outcome": "You make the family's fame a launch pad, not a cage. The {surname} heirs trade the field for boardrooms and ballots, the legend behind them."
         }
       ]

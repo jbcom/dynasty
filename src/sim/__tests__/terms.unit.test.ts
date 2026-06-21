@@ -174,7 +174,7 @@ describe("birth-order lever — ev_the_children prologue event (de-4a)", () => {
     ({
       flags,
       meters: {},
-      personality: { ideology: 0, grandiosity: 0, outward: 0, inward: 0 },
+      personality: { politics: 0, power: 0, reach: 0, honor: 0 },
       age: 20,
       // biome-ignore lint/suspicious/noExplicitAny: test stub, not a full GameState
     }) as any;

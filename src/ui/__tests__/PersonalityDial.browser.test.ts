@@ -18,10 +18,14 @@ afterEach(() => {
 });
 
 const p = (over: Partial<Personality> = {}): Personality => ({
-  ideology: 0,
-  grandiosity: 10,
-  outward: 0,
-  inward: 0,
+  wealth: 0,
+  politics: 0,
+  worldview: 0,
+  power: 10,
+  tradition: 0,
+  honor: 0,
+  lineage: 0,
+  reach: 0,
   ...over,
 });
 
@@ -29,7 +33,7 @@ describe("PersonalityDial", () => {
   it("reads Tyrannical for a far-right megalomaniac and positions the needle right", () => {
     component = mount(PersonalityDial, {
       target: host,
-      props: { personality: p({ ideology: 90, grandiosity: 90, outward: 90 }) },
+      props: { personality: p({ politics: 90, power: 90, reach: 90 }) },
     });
     expect(host.textContent).toContain("Tyrannical");
     expect(host.textContent).toContain("Megalomaniac King");
@@ -40,17 +44,17 @@ describe("PersonalityDial", () => {
   it("reads Utopian for a humble far-left visionary and positions the needle left", () => {
     component = mount(PersonalityDial, {
       target: host,
-      props: { personality: p({ ideology: -80, grandiosity: 45, outward: -80 }) },
+      props: { personality: p({ politics: -80, power: -80, honor: -80 }) },
     });
     expect(host.textContent).toContain("Utopian");
     const dial = host.querySelector(".dial") as HTMLElement;
     expect(Number(dial.dataset.axis)).toBeLessThan(-40);
   });
 
-  it("warns when outward and inward perception diverge sharply", () => {
+  it("warns when power-seeking and honor diverge sharply", () => {
     component = mount(PersonalityDial, {
       target: host,
-      props: { personality: p({ outward: 80, inward: -20 }) },
+      props: { personality: p({ power: 90, honor: 0 }) },
     });
     expect(host.textContent).toContain("disagree");
   });

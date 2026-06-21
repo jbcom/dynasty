@@ -166,11 +166,11 @@ describe("effectiveWeight", () => {
     const s = initState(c, "seed");
     const born = c.eventsByEra.get("boyhood")?.[0];
     if (!born) throw new Error("no born event");
-    // sensitivity 1 on grandiosity: weight ×(1 + 1*(axis/100)).
-    const biased = { ...born, bias: { branch: {}, personality: { grandiosity: 1 } } };
-    const grandiose = { ...s, personality: { ...s.personality, grandiosity: 80 } };
+    // sensitivity 1 on power: weight ×(1 + 1*(axis/100)).
+    const biased = { ...born, bias: { branch: {}, personality: { power: 1 } } };
+    const grandiose = { ...s, personality: { ...s.personality, power: 80 } };
     expect(effectiveWeight(c, grandiose, biased)).toBeCloseTo(born.weight * 1.8, 5);
-    const humble = { ...s, personality: { ...s.personality, grandiosity: -50 } };
+    const humble = { ...s, personality: { ...s.personality, power: -50 } };
     expect(effectiveWeight(c, humble, biased)).toBeCloseTo(born.weight * 0.5, 5);
   });
 });

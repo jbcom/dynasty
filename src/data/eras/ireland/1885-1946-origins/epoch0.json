@@ -11,8 +11,21 @@
       "scene": "You come into the world in a low stone house above a grey and restless sea, on a night when the rain finds every gap in the thatch. A turf fire hisses; a kettle is already on. The midwife — Mrs. Conneely, who has caught half the parish — wipes her hands and leans to the lamp to write in her little book. You hear her murmur the date as she sets it down, the way she has set down a thousand others.",
       "researchNote": "OB-4 birth opener for Ireland. Sets `emerged` so the Epoch-0 chain begins; narrates the seed-drawn date via {birth_date}. West-of-Ireland tenant cottage, 1885.",
       "historicity": "personal",
-      "tags": ["epoch0", "birth", "diegetic"],
-      "requires": { "flags": ["founded_line"], "notFlags": ["emerged"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "birth",
+        "diegetic"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [
+          "emerged"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 5000,
       "choices": [
         {
@@ -20,7 +33,9 @@
           "text": "You overhear the date she says — the year that fixes when you are.",
           "effects": {},
           "personality": {},
-          "setFlags": ["emerged"],
+          "setFlags": [
+            "emerged"
+          ],
           "outcome": "“{birth_date},” Mrs. Conneely murmurs, and blots it dry. A place and a year — that is all you are yet, and it is everything: the where and the when your whole story will grow from."
         }
       ]
@@ -34,32 +49,68 @@
       "scene": "Within the week you are carried to the chapel for the water. The {family_name} name is settled — it is the Christian name that is argued over in the kitchen the night before. A grandparent to honor, a saint to claim, or simply a name your mother has loved since she was a girl. The priest waits; the choice is made; you become {full_name}.",
       "researchNote": "OB-4: given-naming as the chapel christening. The given name itself was dealt from the culture pool at founding; this beat is the diegetic bestowal that sets `named` and frames how the name was chosen (an early personality anchor).",
       "historicity": "personal",
-      "tags": ["epoch0", "naming", "diegetic", "trope:faith-and-community"],
-      "requires": { "flags": ["founded_line", "emerged", "gender_revealed"], "notFlags": ["named"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "naming",
+        "diegetic",
+        "trope:faith-and-community"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "emerged",
+          "gender_revealed"
+        ],
+        "notFlags": [
+          "named"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 980,
       "choices": [
         {
           "id": "named_for_grandparent",
           "text": "Named for a grandparent — the line reaching backward as it reaches forward.",
-          "effects": { "loyalty": 3 },
-          "personality": { "inward": 2 },
-          "setFlags": ["named", "named_for_kin"],
+          "effects": {
+            "loyalty": 3
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "named",
+            "named_for_kin"
+          ],
           "outcome": "An old name in a young mouth. The dead are honored, and they will be expected to approve."
         },
         {
           "id": "named_for_saint",
           "text": "Named for a saint — a patron set over the cradle.",
-          "effects": { "reputation": 3 },
+          "effects": {
+            "reputation": 3
+          },
           "personality": {},
-          "setFlags": ["named", "named_for_saint"],
+          "setFlags": [
+            "named",
+            "named_for_saint"
+          ],
           "outcome": "A holy name to live up to or live down. The parish nods; heaven, presumably, takes note."
         },
         {
           "id": "named_for_love",
           "text": "Named for nothing but your mother's wish — a name she simply loved.",
-          "effects": { "health": 2, "loyalty": 2 },
-          "personality": { "inward": 3 },
-          "setFlags": ["named", "named_for_love"],
+          "effects": {
+            "health": 2,
+            "loyalty": 2
+          },
+          "personality": {
+            "lineage": 3
+          },
+          "setFlags": [
+            "named",
+            "named_for_love"
+          ],
           "outcome": "No saint, no ancestor — only love, which is its own kind of inheritance."
         }
       ]
@@ -73,32 +124,70 @@
       "scene": "You are old enough now to notice the shape of things. The land is not yours — the family works it for a landlord whose face you have never seen, and the rent goes out on a cart that never seems to come back as anything. At Mass the front pews and the back pews are not an accident. You watch how your father lowers his eyes to the agent and squares them to the neighbors, and you begin to understand which way the world leans — and how a person might lean it back.",
       "researchNote": "OB-4: class/station emerges early as an organic response to observing the form + function of life around you (user). Tenant-and-landlord Ireland; sets an early-pressure anchor the later calling reads.",
       "historicity": "personal",
-      "tags": ["epoch0", "childhood", "diegetic", "trope:tenant-and-landlord"],
-      "requires": { "flags": ["founded_line", "emerged", "gender_revealed", "named"], "notFlags": ["station_seen"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "childhood",
+        "diegetic",
+        "trope:tenant-and-landlord"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "emerged",
+          "gender_revealed",
+          "named"
+        ],
+        "notFlags": [
+          "station_seen"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 940,
       "choices": [
         {
           "id": "resent_the_rent",
           "text": "You learn to hate the cart that carries the rent away — and to want.",
-          "effects": { "reputation": 2 },
-          "personality": { "outward": 3, "grandiosity": 4 },
-          "setFlags": ["station_seen", "born_wanting"],
+          "effects": {
+            "reputation": 2
+          },
+          "personality": {
+            "power": 7
+          },
+          "setFlags": [
+            "station_seen",
+            "born_wanting"
+          ],
           "outcome": "Some children accept the order of things. You count it, and find it short. The wanting will not leave you now."
         },
         {
           "id": "study_the_agent",
           "text": "You watch the agent's ledger instead — power is in the writing-down.",
-          "effects": { "power": 2 },
-          "personality": { "inward": 4 },
-          "setFlags": ["station_seen", "watched_the_ledger"],
+          "effects": {
+            "power": 2
+          },
+          "personality": {
+            "lineage": 4
+          },
+          "setFlags": [
+            "station_seen",
+            "watched_the_ledger"
+          ],
           "outcome": "You see that the man with the book beats the man with the spade, every time. You mean to be the one with the book."
         },
         {
           "id": "keep_your_head",
           "text": "You keep your head down and your faith up, like your father.",
-          "effects": { "loyalty": 4 },
-          "personality": { "inward": 2 },
-          "setFlags": ["station_seen", "head_down_youth"],
+          "effects": {
+            "loyalty": 4
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "station_seen",
+            "head_down_youth"
+          ],
           "outcome": "There is a dignity in endurance, and the parish respects it. Whether dignity alone can found a line is a question for later years."
         }
       ]
@@ -112,32 +201,69 @@
       "scene": "There is a school of sorts — a damp room, a master named Mr. Lynch who was meant for better and knows it, and a slate that has held a hundred children's sums. He notices you the way teachers notice the ones who might escape. \"There's a head on you,\" he says one evening, not entirely kindly. \"The question is what you'll do with it before this place files it down.\"",
       "researchNote": "OB-4: the calling EMERGES (user) — it is not one static pick. Schooling + an inspiring/embittered teacher is the first pressure that bends the child toward a bent. Sets `schooled`, an anchor the crystallization reads.",
       "historicity": "personal",
-      "tags": ["epoch0", "childhood", "diegetic", "trope:faith-and-community"],
-      "requires": { "flags": ["founded_line", "station_seen"], "notFlags": ["schooled"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "childhood",
+        "diegetic",
+        "trope:faith-and-community"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "station_seen"
+        ],
+        "notFlags": [
+          "schooled"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 930,
       "choices": [
         {
           "id": "devour_the_books",
           "text": "You devour every book he lends you, hungry for the wider world.",
-          "effects": { "reputation": 3 },
-          "personality": { "inward": 3 },
-          "setFlags": ["schooled", "leaned_learning"],
+          "effects": {
+            "reputation": 3
+          },
+          "personality": {
+            "lineage": 3
+          },
+          "setFlags": [
+            "schooled",
+            "leaned_learning"
+          ],
           "outcome": "Mr. Lynch starts setting harder problems just to watch you solve them. A door has opened that the parish cannot quite close."
         },
         {
           "id": "work_the_room",
           "text": "You charm the master and the other children both — you learn people, not sums.",
-          "effects": { "loyalty": 3 },
-          "personality": { "outward": 4 },
-          "setFlags": ["schooled", "leaned_people"],
+          "effects": {
+            "loyalty": 3
+          },
+          "personality": {
+            "power": 4
+          },
+          "setFlags": [
+            "schooled",
+            "leaned_people"
+          ],
           "outcome": "You discover you can make a room lean your way with a word. It is a quieter gift than cleverness, and a sharper one."
         },
         {
           "id": "leave_for_the_field",
           "text": "You leave the slate for the field — the family needs hands, not scholars.",
-          "effects": { "money": 200, "health": 2 },
-          "personality": { "inward": 2 },
-          "setFlags": ["schooled", "leaned_labor"],
+          "effects": {
+            "money": 200,
+            "health": 2
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "schooled",
+            "leaned_labor"
+          ],
           "outcome": "Mr. Lynch shakes his head and lets you go. The land does not care what you might have been; it only ever asks what you can lift."
         }
       ]
@@ -151,61 +277,115 @@
       "scene": "You are a young {given_name} {surname} now, grown into the body and the country that made you, and the vague pulls of childhood have hardened into something with a name. A man has to be FOR something in this world — has to plant a flag the family can rally to for a hundred years. Standing at the edge of your own life, you feel which way you will go.",
       "researchNote": "OB-4: the calling CRYSTALLIZES into the line's archetype (user: calling IS the archetype, and it EMERGES). Choices carry setsArchetype to commit the power base; the prior schooling/station anchors color which feel natural. Replaces the generic ev_birth_calling for Ireland.",
       "historicity": "personal",
-      "tags": ["epoch0", "calling", "diegetic"],
-      "requires": { "flags": ["founded_line", "schooled"], "notFlags": ["calling_chosen"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "calling",
+        "diegetic"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "schooled"
+        ],
+        "notFlags": [
+          "calling_chosen"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 920,
       "choices": [
         {
           "id": "crystallize_economic",
           "text": "Money. You will buy the land they would not give you, and more besides.",
-          "effects": { "money": 500, "power": 3 },
-          "personality": { "grandiosity": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "money": 500,
+            "power": 3
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "economic",
           "outcome": "The Magnate's road: every shilling a brick in a wall the landlords will one day rent FROM you. The line will be counters of coin and owners of ground."
         },
         {
           "id": "crystallize_political",
           "text": "Power. You will sit where the decisions are made, not where they land.",
-          "effects": { "power": 5 },
-          "personality": { "outward": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "power": 5
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "political",
           "outcome": "The Statesman's road: offices, alliances, the patient accumulation of who-owes-whom. The line will gather power the way the parish gathers for Mass."
         },
         {
           "id": "crystallize_religious",
           "text": "Faith. You will tend the hunger for meaning that no rent can touch.",
-          "effects": { "reputation": 5 },
-          "personality": { "inward": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 5
+          },
+          "personality": {
+            "lineage": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "religious",
           "outcome": "The Prophet's road: the pulpit, the flock, the authority that answers to heaven and not to any agent. The line will shepherd souls and the standing that comes with them."
         },
         {
           "id": "crystallize_technological",
           "text": "Knowledge. You will build the new things the old country cannot imagine.",
-          "effects": { "reputation": 3, "money": 200 },
-          "personality": { "inward": 4 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 3,
+            "money": 200
+          },
+          "personality": {
+            "lineage": 4
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "technological",
           "outcome": "The Visionary's road: the workshop, the patent, the future arriving early in your hands. The line will be builders of what does not yet exist."
         },
         {
           "id": "crystallize_entertainment",
           "text": "The crowd. You have a voice for a song and a face for a stage, and the hall goes quiet when you stand.",
-          "effects": { "reputation": 4, "money": 100 },
-          "personality": { "outward": 4 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 4,
+            "money": 100
+          },
+          "personality": {
+            "power": 4
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "entertainment",
           "outcome": "The Star's road: the ballad, the music hall, the name on the bill that the rich and the ragged both pay to see. The line will be loved before it is wealthy, and that is its own kind of power."
         },
         {
           "id": "crystallize_athletic",
           "text": "The body. You are faster and harder than the parish has seen, and men will wager on your name.",
-          "effects": { "reputation": 4, "power": 1 },
-          "personality": { "grandiosity": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 4,
+            "power": 1
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "athletic",
           "outcome": "The Champion's road: the hurling field, the prize ring, the contest the whole county turns out for. The line will win its standing with sweat the landlords can never tax."
         }

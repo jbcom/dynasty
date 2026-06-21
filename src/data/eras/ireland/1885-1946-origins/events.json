@@ -10,32 +10,67 @@
       "scene": "The rent falls due and the agent rides out from the big house. Your family has worked this ground for longer than anyone can name, and owned none of it. The Land League is stirring; men talk of boycotts and withheld rent. To hold the {surname} name here is to choose between the law and the land.",
       "researchNote": "Place-specific Irish origins beat (EX-2): the Land War (1879–1882 onward) was the defining pressure on tenant families. Generic to any line founded in Ireland.",
       "historicity": "real",
-      "tags": ["origin", "ireland", "trope:tenant-and-landlord"],
-      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "origin",
+        "ireland",
+        "trope:tenant-and-landlord"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 14,
       "choices": [
         {
           "id": "ire_join_the_league",
           "text": "Join the boycott — withhold the rent and stand with your neighbours",
-          "effects": { "reputation": 5, "power": 3, "money": -2 },
-          "personality": { "outward": 4, "ideology": 3 },
-          "setFlags": ["ire_land_leaguer", "communal_standing"],
+          "effects": {
+            "reputation": 5,
+            "power": 3,
+            "money": -2
+          },
+          "personality": {
+            "power": 4,
+            "politics": 3
+          },
+          "setFlags": [
+            "ire_land_leaguer",
+            "communal_standing"
+          ],
           "outcome": "You stand with the village. The agent rides back empty-handed, and the {surname} name is spoken with respect at every hearth on the townland."
         },
         {
           "id": "ire_pay_and_endure",
           "text": "Pay, keep your head down, and save toward your own patch of ground",
-          "effects": { "money": -3, "loyalty": 2 },
-          "personality": { "inward": 3 },
-          "setFlags": ["ire_cautious_tenant"],
+          "effects": {
+            "money": -3,
+            "loyalty": 2
+          },
+          "personality": {
+            "lineage": 3
+          },
+          "setFlags": [
+            "ire_cautious_tenant"
+          ],
           "outcome": "You pay what is owed and say nothing. The land is not yours, but the small hoard under the floor grows, coin by careful coin."
         },
         {
           "id": "ire_eye_the_boat",
           "text": "Decide the answer is not here at all — begin saving for the crossing",
-          "effects": { "money": -1, "reputation": -1 },
-          "personality": { "grandiosity": 2, "outward": 2 },
-          "setFlags": ["ire_emigration_minded"],
+          "effects": {
+            "money": -1,
+            "reputation": -1
+          },
+          "personality": {
+            "power": 4
+          },
+          "setFlags": [
+            "ire_emigration_minded"
+          ],
           "outcome": "You stop arguing about an acre you will never own. Somewhere west there is land a man can hold in his own name, and you mean to reach it."
         }
       ]
@@ -49,24 +84,51 @@
       "scene": "The parish priest is the one man every door opens to, and he has taken an interest in the {surname} line. His blessing can make a marriage, settle a feud, or open a school place; his displeasure can close a community against you. He asks, gently, where your family's loyalty truly lies.",
       "researchNote": "The Catholic parish was the central institution of rural Irish life. Place-specific to an Irish founding.",
       "historicity": "real",
-      "tags": ["origin", "ireland", "religion", "trope:faith-and-community"],
-      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "origin",
+        "ireland",
+        "religion",
+        "trope:faith-and-community"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 12,
       "choices": [
         {
           "id": "ire_devout_house",
           "text": "Make the {surname} house a pillar of the parish",
-          "effects": { "reputation": 4, "loyalty": 4 },
-          "personality": { "ideology": 4 },
-          "setFlags": ["ire_parish_pillar", "faith_woven_in"],
+          "effects": {
+            "reputation": 4,
+            "loyalty": 4
+          },
+          "personality": {
+            "politics": 4
+          },
+          "setFlags": [
+            "ire_parish_pillar",
+            "faith_woven_in"
+          ],
           "outcome": "The priest counts your family among his own. Doors open; the {surname} name carries the weight of the altar behind it."
         },
         {
           "id": "ire_polite_distance",
           "text": "Keep the Church close but the ledger closer",
-          "effects": { "reputation": 2, "money": 2 },
-          "personality": { "inward": 2 },
-          "setFlags": ["ire_pragmatic_faith"],
+          "effects": {
+            "reputation": 2,
+            "money": 2
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "ire_pragmatic_faith"
+          ],
           "outcome": "You give to the collection and bend the knee on Sundays, but the family's plans are made at your own table, not the sacristy."
         }
       ]
@@ -80,24 +142,51 @@
       "scene": "A letter arrives, the paper soft from the long crossing. A cousin who left for the new world writes of wages, of streets, of a life with no agent and no big house. Folded inside is the passage money for one. The whole {surname} line leans toward the table as you read it aloud.",
       "researchNote": "Chain migration via remittance + prepaid passage was the engine of the Irish diaspora. Place-specific; sets emigration flags an Irish line carries forward.",
       "historicity": "real",
-      "tags": ["origin", "ireland", "emigration", "trope:letter-from-away"],
-      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "origin",
+        "ireland",
+        "emigration",
+        "trope:letter-from-away"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 13,
       "choices": [
         {
           "id": "ire_send_the_eldest",
           "text": "Send your eldest across to build a foothold for the rest",
-          "effects": { "money": -2, "power": 2 },
-          "personality": { "grandiosity": 3, "outward": 2 },
-          "setFlags": ["ire_diaspora_foothold", "head_start"],
+          "effects": {
+            "money": -2,
+            "power": 2
+          },
+          "personality": {
+            "power": 5
+          },
+          "setFlags": [
+            "ire_diaspora_foothold",
+            "head_start"
+          ],
           "outcome": "Your eldest sails on the next tide. Within a year the letters home carry dollars, and the {surname} line has a beachhead in a richer country."
         },
         {
           "id": "ire_keep_the_family_whole",
           "text": "Send the money back — the {surname} line stays whole, here, together",
-          "effects": { "loyalty": 5, "reputation": 2 },
-          "personality": { "inward": 4 },
-          "setFlags": ["ire_rooted_at_home"],
+          "effects": {
+            "loyalty": 5,
+            "reputation": 2
+          },
+          "personality": {
+            "lineage": 4
+          },
+          "setFlags": [
+            "ire_rooted_at_home"
+          ],
           "outcome": "You return the passage money with thanks. Whatever the family becomes, it will become it on this island, under this rain, together."
         }
       ]

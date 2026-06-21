@@ -4,30 +4,62 @@
     {
       "id": "ev_ath_turning_pro",
       "era": "mogul",
-      "archetypes": ["athletic"],
+      "archetypes": [
+        "athletic"
+      ],
       "year": 1968,
       "title": "The Contract on the Table",
       "scene": "The offer is real: a professional contract, your name on a roster, the chance to test the gift against the best in the world. But a body is a wasting asset, and the smart money says the real fortune is in OWNING the game, not playing it. The {surname} line stands at the fork between the field and the front office.",
       "researchNote": "EX-3 athletic-locked beat: the player-vs-owner fork that decides whether the dynasty is built on prowess or on the business of sport.",
       "historicity": "personal",
-      "tags": ["sport", "business", "trope:frontier-capital-origin"],
-      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "sport",
+        "business",
+        "trope:frontier-capital-origin"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 14,
       "choices": [
         {
           "id": "ath_play_the_game",
           "text": "Take the field — chase the records, the rings, the roar",
-          "effects": { "reputation": 6, "power": 3, "health": -2 },
-          "personality": { "grandiosity": 4, "outward": 3 },
-          "setFlags": ["ath_pro_career", "ath_champion_name"],
+          "effects": {
+            "reputation": 6,
+            "power": 3,
+            "health": -2
+          },
+          "personality": {
+            "power": 7
+          },
+          "setFlags": [
+            "ath_pro_career",
+            "ath_champion_name"
+          ],
           "outcome": "You play, and you win, and a generation learns the {surname} name from the back of a jersey. Fame arrives before the fortune does."
         },
         {
           "id": "ath_own_the_game",
           "text": "Buy in instead — own the team, the venue, the franchise",
-          "effects": { "money": 4, "power": 4, "reputation": 2 },
-          "personality": { "grandiosity": 3, "inward": 2 },
-          "setFlags": ["ath_franchise_owner", "head_start"],
+          "effects": {
+            "money": 4,
+            "power": 4,
+            "reputation": 2
+          },
+          "personality": {
+            "power": 3,
+            "lineage": 2
+          },
+          "setFlags": [
+            "ath_franchise_owner",
+            "head_start"
+          ],
           "outcome": "You decide the smart play is the front office. The {surname} line will collect from every gate, every broadcast, every athlete who ever takes its field."
         }
       ]
@@ -35,30 +67,61 @@
     {
       "id": "ev_ath_the_franchise_gambit",
       "era": "mogul",
-      "archetypes": ["athletic", "economic"],
+      "archetypes": [
+        "athletic",
+        "economic"
+      ],
       "year": 1983,
       "title": "A League of Your Own",
       "scene": "An upstart league needs an owner with nerve, or an established team can be bought if you overreach. Sports franchises are vanity, leverage, and a megaphone all at once — a way to put the {surname} name on every sports page in the country. The debt is real; so is the spotlight.",
       "researchNote": "EX-3 athletic+economic beat: the franchise as brand-and-leverage play (parallels the repurposed USFL trope).",
       "historicity": "real",
-      "tags": ["sport", "business", "trope:frontier-capital-origin"],
-      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "sport",
+        "business",
+        "trope:frontier-capital-origin"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 12,
       "choices": [
         {
           "id": "ath_buy_the_upstart",
           "text": "Bankroll the upstart league and dare to topple the establishment",
-          "effects": { "money": -3, "power": 4, "reputation": 3, "heat": 3 },
-          "personality": { "grandiosity": 5, "outward": 3 },
-          "setFlags": ["ath_league_owner"],
+          "effects": {
+            "money": -3,
+            "power": 4,
+            "reputation": 3,
+            "heat": 3
+          },
+          "personality": {
+            "power": 8
+          },
+          "setFlags": [
+            "ath_league_owner"
+          ],
           "outcome": "You bet against the giants. Win or lose, the {surname} name is suddenly in every sports section in the country — exactly as intended."
         },
         {
           "id": "ath_buy_the_blue_chip",
           "text": "Buy an established, beloved team and inherit its goodwill",
-          "effects": { "money": -2, "reputation": 5, "power": 2 },
-          "personality": { "grandiosity": 2 },
-          "setFlags": ["ath_franchise_owner"],
+          "effects": {
+            "money": -2,
+            "reputation": 5,
+            "power": 2
+          },
+          "personality": {
+            "power": 2
+          },
+          "setFlags": [
+            "ath_franchise_owner"
+          ],
           "outcome": "You purchase a city's love along with its team. The {surname} name is cheered on opening day before it has done a thing to earn it."
         }
       ]

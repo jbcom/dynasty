@@ -25,10 +25,19 @@ export const ARCHETYPE_ENUM = z.enum([
 export const MeterDeltaSchema = z.partialRecord(MeterIdSchema, z.number());
 export type MeterDelta = z.infer<typeof MeterDeltaSchema>;
 
-/** The four personality axes a choice can nudge (see sim/personality.ts). */
-export const PERSONALITY_AXES = ["ideology", "grandiosity", "outward", "inward"] as const;
+/** The eight MOTIVATOR axes a choice can nudge (see sim/motivators.ts) — the grounding model. */
+export const PERSONALITY_AXES = [
+  "wealth",
+  "politics",
+  "worldview",
+  "power",
+  "tradition",
+  "honor",
+  "lineage",
+  "reach",
+] as const;
 export const PersonalityAxisSchema = z.enum(PERSONALITY_AXES);
-/** A partial map of personality axis → delta applied by a choice. */
+/** A partial map of motivator axis → delta applied by a choice. */
 export const PersonalityDeltaSchema = z.partialRecord(PersonalityAxisSchema, z.number());
 
 /** Meter definition (data/meters.json). */

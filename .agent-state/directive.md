@@ -152,7 +152,7 @@ GenAI retool→GenAI writes stories→UI→gate. Per task: sim-purity + 0-leak +
 full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 
 ### SS-1 Motivators core (8-axis model)
-- [ ] SS-1 src/sim/motivators.ts (8 axes, createMotivators/drift/gate); migrate personality+axes.json consumers; unit tests; gate green
+- [x] SS-1 src/sim/motivators.ts (8 axes, createMotivators/drift/gate); migrate personality+axes.json consumers; unit tests; gate green
 ### SS-2 Yuka GOAP integration
 - [ ] SS-2 add yuka+@types/yuka; pure src/sim/goap/ wrapper (no Math.random/Date.now reachable); toJSON/fromJSON deterministic; tests
 ### SS-3 DynastyAgent
