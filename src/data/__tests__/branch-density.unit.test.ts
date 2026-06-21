@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { EraEventsSchema } from "../../sim/schema";
 
-// Eagerly import every authored era events file.
-const eraModules = import.meta.glob("../eras/*.json", { eager: true }) as Record<
+// Eagerly import every authored era events file (eras/<place>/<period>/*.json).
+const eraModules = import.meta.glob("../eras/**/*.json", { eager: true }) as Record<
   string,
   { default: unknown }
 >;
@@ -10,10 +10,10 @@ const eraModules = import.meta.glob("../eras/*.json", { eager: true }) as Record
 function eras() {
   return Object.entries(eraModules)
     .filter(([p]) => !p.endsWith("index.json"))
-    .map(([p, m]) => ({
-      id: p.split("/").pop()?.replace(".json", "") ?? "",
-      data: EraEventsSchema.parse(m.default),
-    }));
+    .map(([, m]) => {
+      const data = EraEventsSchema.parse(m.default);
+      return { id: data.era, data };
+    });
 }
 
 /**

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import originsJson from "../../data/eras/origins.json";
+import originsJson from "../../data/eras/new-york/1885-1946-origins/events.json";
 import kennedyJson from "../../data/timelines/kennedy.json";
 import moresJson from "../../data/timelines/mores.json";
 import moresNaziJson from "../../data/timelines/mores.nazi.json";

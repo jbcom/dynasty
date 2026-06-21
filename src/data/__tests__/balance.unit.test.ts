@@ -14,7 +14,7 @@ import { EraEventsSchema, type GameEvent } from "../../sim/schema";
  * one-sided, because the decision is about WHICH PATH, not which payoff.
  */
 
-const eraModules = import.meta.glob("../eras/*.json", { eager: true }) as Record<
+const eraModules = import.meta.glob("../eras/**/*.json", { eager: true }) as Record<
   string,
   { default: unknown }
 >;

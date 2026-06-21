@@ -8,7 +8,10 @@ import { buildContent, type Content, type RawContent } from "../sim/content";
  */
 const metersGlob = import.meta.glob("./meters.json", { eager: true });
 const indexGlob = import.meta.glob("./eras/index.json", { eager: true });
-const erasGlob = import.meta.glob("./eras/*.json", { eager: true });
+// Eras live under eras/<place>/<period>/*.json (CP-R-ERA): geography → time. The
+// recursive glob picks up every place's period dirs; place + period derive from the
+// path, the era id from each file's own `era` field. index.json is excluded.
+const erasGlob = import.meta.glob("./eras/**/*.json", { eager: true });
 const butterflyGlob = import.meta.glob("./butterfly-rules.json", { eager: true });
 const endingsGlob = import.meta.glob("./endings.json", { eager: true });
 const timelinesGlob = import.meta.glob("./timelines/*.json", { eager: true });
@@ -32,12 +35,23 @@ function firstValue<T>(glob: Record<string, unknown>): T | null {
   return entry?.default ?? null;
 }
 
-function collectEraEvents(): Array<{ era: string; data: unknown }> {
+/**
+ * Collect every era events file under eras/<place>/<period>/*.json. The era id is
+ * the file's own `era` field (validated against the index registry downstream); the
+ * `place` and `period` come from the path: ".../eras/<place>/<period>/<file>.json".
+ * A `_shared` place applies to every founding place. index.json is excluded.
+ */
+function collectEraEvents(): Array<{ era: string; place: string; period: string; data: unknown }> {
   return Object.entries(erasGlob)
     .filter(([path]) => !path.endsWith("index.json"))
     .map(([path, mod]) => {
-      const id = path.split("/").pop()?.replace(".json", "") ?? "";
-      return { era: id, data: (mod as { default: unknown }).default };
+      // ./eras/<place>/<period>/<file>.json → segments after the "eras" anchor.
+      const segs = path.split("/");
+      const erasIdx = segs.lastIndexOf("eras");
+      const place = segs[erasIdx + 1] ?? "";
+      const period = segs[erasIdx + 2] ?? "";
+      const data = (mod as { default: { era?: string } }).default;
+      return { era: data.era ?? period, place, period, data };
     });
 }
 

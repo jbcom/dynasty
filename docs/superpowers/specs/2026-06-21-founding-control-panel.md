@@ -113,6 +113,45 @@ the diegetic birth sequence instead of a form. Re-sequenced as CP-7r below.
   driven by the normal event engine + 6-slot events; calling + the four axes are
   lived Epoch-0 beats, not picker screens. The CP-7 panel UI is retired.
 
+## CP-R-ERA — eras reorganized by PLACE × TIME, glob-loaded (decision, 2026-06-20)
+
+The user: "the eras need much better organization… we have nazis and boyhood etc; we
+could organize by the same hierarchy of data as Epoch-0, i.e. by geographic and then
+by time period… breaking up the JSON and using globs." Same orthogonal fabric the
+Epoch-0 identity used (PLACE × CULTURE × axes) now applies to the EVENT eras.
+
+The flat `eras/*.json` set conflates three different things: TIME periods (boyhood,
+mogul, primetime), ALT-HISTORY branches (the `usa.nazi.json` / `*.theocracy.json`
+timeline variants), and PLACE×TIME deep-history (caliphate = Baghdad). That is the
+exact conflation we dissolved for identity.
+
+**Locked structure (user-approved):** `src/data/eras/<place>/<period>/*.json`,
+geography first then time, loaded via `import.meta.glob('./eras/**/*.json')`. The
+event's place + period are DERIVED FROM ITS PATH (not a flat filename id). Alt-history
+branch is a flag-gated VARIANT FILE inside the period dir (`events.theocracy.json`),
+never a filename-suffixed sibling era. Place-agnostic eras live under `_shared/`.
+
+**Use-case enumeration (drives which eras are place-specific vs shared):**
+- Deep-history + origin eras are PLACE-SPECIFIC (caliphate→baghdad; origins differs
+  bavaria vs ireland vs … ). Different founding → different origin content.
+- The mid-life arc (boyhood/mogul/brand/primetime/ascent) is currently US-literal but
+  becomes PLACE-AWARE: an Irish line's boyhood ≠ a New-York line's. Today's literal US
+  arc moves under `new-york/` (its true place) as the economic/US lineage's content;
+  other places grow their own period dirs over CP-R6 breadth.
+- The future arc (victory→interstellar: space age, unification, Mars, first contact,
+  interstellar) is PLACE-AGNOSTIC → `_shared/`. The line has gone planetary; geography
+  no longer forks the content.
+
+**Period key = `<startYear>-<endYear>-<slug>`** (e.g. `1946-1964-boyhood`) so the dir
+sorts chronologically and carries the window. The era `index.json` (order/years/
+palette/budget) stays as the period REGISTRY; the per-place dirs hold the EVENTS. The
+loader derives each event's era id from its path's period slug and validates it exists
+in the registry. A `_shared/` period applies to every place; a place dir overrides/adds.
+
+This reshapes CP-R3 (place/era resolution data) — the directory tree IS the place×era
+catalog. CP-R3 becomes "derive the place×era catalog from the era tree + cross-ref to
+world-stacks/onomastics" rather than a separate hand-authored table.
+
 ### CP-7r build (replaces CP-7's panel)
 
 - **CP-7r-a foundByComposition (sim):** generalize foundDynasty to accept a composed

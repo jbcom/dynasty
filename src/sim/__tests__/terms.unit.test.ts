@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import boyhoodJson from "../../data/eras/boyhood.json";
-import originsJson from "../../data/eras/origins.json";
+import boyhoodJson from "../../data/eras/new-york/1946-1964-boyhood/events.json";
+import originsJson from "../../data/eras/new-york/1885-1946-origins/events.json";
 import termsJson from "../../data/terms.json";
 import { meetsRequires } from "../events";
 import { EraEventsSchema, TermsFileSchema } from "../schema";

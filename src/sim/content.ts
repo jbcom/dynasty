@@ -118,7 +118,13 @@ export interface Content {
 export interface RawContent {
   meters: unknown;
   eraIndex: unknown;
-  eraEvents: Array<{ era: string; data: unknown }>;
+  /**
+   * Era events files. `era` is the period id (validated against the index). `place`
+   * + `period` (CP-R-ERA) come from the eras/<place>/<period>/ path when loaded from
+   * disk; they are optional so fixtures can pass bare {era, data}. A `_shared` place
+   * applies to every founding place.
+   */
+  eraEvents: Array<{ era: string; place?: string; period?: string; data: unknown }>;
   butterflyRules: unknown;
   endings: unknown;
   worldTimelines?: unknown[];
