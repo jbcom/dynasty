@@ -84,6 +84,7 @@ export function foundDynasty(content: Content, input: FoundingInput): FoundingRe
   // is reachable from turn one.
   let flags = [...base.flags];
   for (const f of [
+    "founded_line", // generic marker: this is a found-your-own run (gates Epoch-0 founding beats)
     `founded:${moment.id}`,
     `archetype:${moment.archetype}`,
     `place:${moment.place}`,
