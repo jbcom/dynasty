@@ -211,6 +211,17 @@ Why this order: wiring (1) makes every already-tokenized string in content immed
 founded name, which is the bulk of the fix; (2)/(3) clean the remaining literals; (4) preserves
 the rival-house content as the weave material instead of deleting it ("absorb, don't waste").
 
+**CP-R1 scope boundary (what stays for CP-R4):** the PROTAGONIST-line names are fully tokenized
+across the life-arc eras (boyhood→interregnum: brand names, the surname, the given name, the
+heir/lineage — `{surname}`/`{given_name}`/`{family_name}`). What deliberately REMAINS literal is the
+deep ANCESTOR/ORIGIN biography: the Friedrich/Fred immigrant arc in `new-york/1885-1946-origins`,
+the Fred-as-father refs, the Woody-Guthrie "Old Man Trump" real-world citation, and the
+Drumpf→Trump anglicization / ancestry-cover-up beats in mogul. These narrate a SPECIFIC Bavarian-
+German immigrant's biography, not a generic founded line, so they belong to CP-R4's place-keyed
+repurposing of the economic prologue (they only apply to a bavaria/new-york founding). Tokenizing
+them now would be wrong. The brand era is 100% tokenized; origins/boyhood/mogul retain only
+ancestor/historical literals, all bucket-C.
+
 ## UX flow (the control panel) — SUPERSEDED by the diegetic birth above
 
 ```
