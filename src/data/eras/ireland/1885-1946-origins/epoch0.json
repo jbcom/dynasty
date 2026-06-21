@@ -102,6 +102,96 @@
           "outcome": "There is a dignity in endurance, and the parish respects it. Whether dignity alone can found a line is a question for later years."
         }
       ]
+    },
+    {
+      "id": "ev_ire_schooling",
+      "era": "origins",
+      "place": "ireland",
+      "year": 1897,
+      "title": "The Hedge and the Master",
+      "scene": "There is a school of sorts — a damp room, a master named Mr. Lynch who was meant for better and knows it, and a slate that has held a hundred children's sums. He notices you the way teachers notice the ones who might escape. \"There's a head on you,\" he says one evening, not entirely kindly. \"The question is what you'll do with it before this place files it down.\"",
+      "researchNote": "OB-4: the calling EMERGES (user) — it is not one static pick. Schooling + an inspiring/embittered teacher is the first pressure that bends the child toward a bent. Sets `schooled`, an anchor the crystallization reads.",
+      "historicity": "personal",
+      "tags": ["epoch0", "childhood", "diegetic", "trope:faith-and-community"],
+      "requires": { "flags": ["founded_line", "station_seen"], "notFlags": ["schooled"], "meters": {}, "personality": {} },
+      "weight": 930,
+      "choices": [
+        {
+          "id": "devour_the_books",
+          "text": "You devour every book he lends you, hungry for the wider world.",
+          "effects": { "reputation": 3 },
+          "personality": { "inward": 3 },
+          "setFlags": ["schooled", "leaned_learning"],
+          "outcome": "Mr. Lynch starts setting harder problems just to watch you solve them. A door has opened that the parish cannot quite close."
+        },
+        {
+          "id": "work_the_room",
+          "text": "You charm the master and the other children both — you learn people, not sums.",
+          "effects": { "loyalty": 3 },
+          "personality": { "outward": 4 },
+          "setFlags": ["schooled", "leaned_people"],
+          "outcome": "You discover you can make a room lean your way with a word. It is a quieter gift than cleverness, and a sharper one."
+        },
+        {
+          "id": "leave_for_the_field",
+          "text": "You leave the slate for the field — the family needs hands, not scholars.",
+          "effects": { "money": 200, "health": 2 },
+          "personality": { "inward": 2 },
+          "setFlags": ["schooled", "leaned_labor"],
+          "outcome": "Mr. Lynch shakes his head and lets you go. The land does not care what you might have been; it only ever asks what you can lift."
+        }
+      ]
+    },
+    {
+      "id": "ev_ire_calling_crystallizes",
+      "era": "origins",
+      "place": "ireland",
+      "year": 1903,
+      "title": "What You Are For",
+      "scene": "You are a young {given_name} {surname} now, grown into the body and the country that made you, and the vague pulls of childhood have hardened into something with a name. A man has to be FOR something in this world — has to plant a flag the family can rally to for a hundred years. Standing at the edge of your own life, you feel which way you will go.",
+      "researchNote": "OB-4: the calling CRYSTALLIZES into the line's archetype (user: calling IS the archetype, and it EMERGES). Choices carry setsArchetype to commit the power base; the prior schooling/station anchors color which feel natural. Replaces the generic ev_birth_calling for Ireland.",
+      "historicity": "personal",
+      "tags": ["epoch0", "calling", "diegetic"],
+      "requires": { "flags": ["founded_line", "schooled"], "notFlags": ["calling_chosen"], "meters": {}, "personality": {} },
+      "weight": 920,
+      "choices": [
+        {
+          "id": "crystallize_economic",
+          "text": "Money. You will buy the land they would not give you, and more besides.",
+          "effects": { "money": 500, "power": 3 },
+          "personality": { "grandiosity": 3 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "economic",
+          "outcome": "The Magnate's road: every shilling a brick in a wall the landlords will one day rent FROM you. The line will be counters of coin and owners of ground."
+        },
+        {
+          "id": "crystallize_political",
+          "text": "Power. You will sit where the decisions are made, not where they land.",
+          "effects": { "power": 5 },
+          "personality": { "outward": 3 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "political",
+          "outcome": "The Statesman's road: offices, alliances, the patient accumulation of who-owes-whom. The line will gather power the way the parish gathers for Mass."
+        },
+        {
+          "id": "crystallize_religious",
+          "text": "Faith. You will tend the hunger for meaning that no rent can touch.",
+          "effects": { "reputation": 5 },
+          "personality": { "inward": 3 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "religious",
+          "outcome": "The Prophet's road: the pulpit, the flock, the authority that answers to heaven and not to any agent. The line will shepherd souls and the standing that comes with them."
+        },
+        {
+          "id": "crystallize_technological",
+          "text": "Knowledge. You will build the new things the old country cannot imagine.",
+          "effects": { "reputation": 3, "money": 200 },
+          "personality": { "inward": 4 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "technological",
+          "outcome": "The Visionary's road: the workshop, the patent, the future arriving early in your hands. The line will be builders of what does not yet exist."
+        }
+      ]
     }
   ]
 }

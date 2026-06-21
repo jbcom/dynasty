@@ -11,6 +11,16 @@ export const METER_IDS = ["money", "power", "reputation", "loyalty", "health", "
 export const MeterIdSchema = z.enum(METER_IDS);
 export type MeterId = z.infer<typeof MeterIdSchema>;
 
+/** The six power-base archetypes (mirrors slots.ts ARCHETYPES — content-validation enum). */
+export const ARCHETYPE_ENUM = z.enum([
+  "economic",
+  "political",
+  "technological",
+  "religious",
+  "entertainment",
+  "athletic",
+]);
+
 /** A partial map of meter → delta applied by a choice. */
 export const MeterDeltaSchema = z.partialRecord(MeterIdSchema, z.number());
 export type MeterDelta = z.infer<typeof MeterDeltaSchema>;
@@ -130,6 +140,14 @@ export const ChoiceSchema = z.object({
    * a founded line. The calling then drifts every future beget's traits (CP-2).
    */
   setsCalling: z.string().optional(),
+  /**
+   * Set the founded line's ARCHETYPE (OB-4) — the power base content gates on. The emergent
+   * Epoch-0 "calling" arc (schooling → teacher → passion → work) crystallizes into one of the
+   * 6 archetypes; the crystallizing choice carries `setsArchetype` to commit it (updating the
+   * run archetype + swapping the `archetype:<id>` flag). No-op without a founded line / unknown
+   * archetype. Distinct from the seed-dealt starting default at founding.
+   */
+  setsArchetype: ARCHETYPE_ENUM.optional(),
 });
 export type Choice = z.infer<typeof ChoiceSchema>;
 
