@@ -43,13 +43,7 @@ that generates it at breadth.
 ### Queue (to enumerate per use-case before building — this is the discovery seed, not a fixed plan)
 - [ ] [WAIT] PR #32 (directive release + EX-1 gap matrix) CI green → squash-merge → sync main. EX-2+ authoring opens on a fresh branch off the merged main (one-branch-per-unit; the expansion directive must be live on main first).
 - [x] **EX-1 DONE: place×era coverage gap matrix → docs/EX-1-coverage-gap.md.** Per-era density is healthy (18–51 events/era) and — because most events are archetype-AGNOSTIC — every archetype already sees nearly the full pool, so the primary gap is NOT archetype reach. The real gap is PLACE: all 8 non-baghdad places map eraContentDir=new-york (they share the new-york arc, coherent + 0-leak but not place-distinct). Priority: EX-2 fork the 8 places' own period content → EX-3 athletic/entertainment locked depth → EX-4 GenAI breadth → EX-5 millennium run. Every cell stays at 0 harness findings.
-- [ ] **EX-2 Per-place life-arc breadth (IN PROGRESS).** Author place-SPECIFIC era content
-  under `eras/<place>/<period>/` (events carry `place:<canonical-id>`, gated by the new
-  EX-2 place gate) for the canonical places that currently share the shared arc:
-  ireland, bavaria, south_africa, west_coast, east_coast, canada, american_midwest,
-  american_south (baghdad already has its own dir). NOTE: `new-york`/`_shared`/`baghdad`
-  are era-content DIR names, not place ids — events key off the canonical place ids in
-  world/places.json. ireland origins variant landed first (ev_ire_*).
+- [x] **EX-2 DONE (origins coverage): per-place life-arc breadth across all 8 places.** Built the place gate (events with `place:<id>` fire only for a matching founding; absent = agnostic) + the KEY multi-file-per-era merge fix (buildContent appends, not overwrites — the place-arc model needs it). Authored place-SPECIFIC `origins` arcs for all 8 shared-arc places: ireland (land/parish/letter), bavaria (conscription/brewing/German-name), south_africa (frontier/war-on-veld/restlessness), west_coast (gold-coast/reinvention), east_coast (old-money-wall/machine), canada (northern-reach/two-nations), american_midwest (grain-rail/populist-tide), american_south (new-south/caste). Verified: each place routes 2–3 own events, ZERO foreign-place leakage; harness 0 findings; validator refined (Friedrich = legit Bavarian given name). Added 3 tropes (tenant-and-landlord/faith-and-community/letter-from-away). NOTE: era-content DIR names (new-york/_shared/baghdad) ≠ place ids. (Later eras stay shared/place-agnostic — per-place later-era breadth is EX-4 GenAI territory.)
 - [ ] **EX-3 Athletic + entertainment depth.** Fill the two new archetypes from greenfield
   to parity with the others (the harness density map sets the target).
 - [ ] **EX-4 GenAI breadth toolkit.** Wire the discussed generation pieces (Gemini/dev-bulk

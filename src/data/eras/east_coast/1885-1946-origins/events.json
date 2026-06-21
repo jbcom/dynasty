@@ -1,0 +1,75 @@
+{
+  "era": "origins",
+  "events": [
+    {
+      "id": "ev_ec_the_old_money_wall",
+      "era": "origins",
+      "place": "east_coast",
+      "year": 1888,
+      "title": "The Wall of Old Money",
+      "scene": "The East Coast is the oldest, hardest game in the country — the banks, the clubs, the families who have held the city since before yours arrived. The {surname} line can claw at the establishment's wall, buy its way past it, or build an empire in the boroughs the old money won't deign to touch. Respectability here is inherited, not earned — unless you change the rules.",
+      "researchNote": "Place-specific East Coast origins beat (EX-2): the entrenched Gilded-Age establishment vs the striving outsider. Generic to any east_coast founding.",
+      "historicity": "real",
+      "tags": ["origin", "east_coast", "trope:tenant-and-landlord"],
+      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "weight": 14,
+      "choices": [
+        {
+          "id": "ec_claw_at_the_wall",
+          "text": "Fight your way into the establishment by sheer force of will",
+          "effects": { "power": 4, "reputation": -1, "heat": 2 },
+          "personality": { "grandiosity": 5, "outward": 3 },
+          "setFlags": ["ec_outsider_rage", "head_start"],
+          "outcome": "Every closed door becomes fuel. The {surname} line forces its way in, resented and undeniable, and never forgets who looked through it."
+        },
+        {
+          "id": "ec_build_the_boroughs",
+          "text": "Build an empire in the outer boroughs the old money ignores",
+          "effects": { "money": 5, "reputation": 1 },
+          "personality": { "inward": 2 },
+          "setFlags": ["ec_borough_empire"],
+          "outcome": "You build where the establishment won't look — and quietly become richer than half of it. The {surname} name owns the city's bones."
+        },
+        {
+          "id": "ec_buy_the_legitimacy",
+          "text": "Buy your way toward respectability — schools, charities, the right rooms",
+          "effects": { "money": -2, "reputation": 4, "power": 2 },
+          "personality": { "grandiosity": 3, "ideology": 2 },
+          "setFlags": ["ec_bought_legitimacy"],
+          "outcome": "You purchase the trappings of old money one institution at a time. The {surname} name buys what it could not be born into."
+        }
+      ]
+    },
+    {
+      "id": "ev_ec_the_machine_and_the_ballot",
+      "era": "origins",
+      "place": "east_coast",
+      "year": 1902,
+      "title": "The Machine and the Ballot",
+      "scene": "The city runs on machines — favours traded for votes, jobs for loyalty, debts that never quite clear. The {surname} line can plug into that grid of obligation and pull power from it, or stay clean and slower. In an East Coast city, the man everyone owes is mightier than the man everyone elects.",
+      "researchNote": "Urban political-machine culture (Tammany-style) as a distinct East Coast lever for a rising line. Place-specific.",
+      "historicity": "real",
+      "tags": ["origin", "east_coast", "trope:bootlegger-to-legitimacy"],
+      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "weight": 12,
+      "choices": [
+        {
+          "id": "ec_work_the_machine",
+          "text": "Work the machine — favours, votes, jobs, debts",
+          "effects": { "power": 5, "money": 3, "reputation": -1 },
+          "personality": { "outward": 4, "grandiosity": 3 },
+          "setFlags": ["ec_machine_power", "communal_standing"],
+          "outcome": "You become the one the ward calls when something needs doing. The {surname} line draws power from a thousand small obligations."
+        },
+        {
+          "id": "ec_stay_clean",
+          "text": "Stay clean and build standing the slower, harder way",
+          "effects": { "reputation": 4, "loyalty": 2 },
+          "personality": { "ideology": 3, "inward": 2 },
+          "setFlags": ["ec_clean_hands"],
+          "outcome": "You keep your hands clean while rivals get them dirty. The {surname} name rises slower, but it owes no one when it arrives."
+        }
+      ]
+    }
+  ]
+}
