@@ -120,11 +120,12 @@ describe("EX-4 prompt builder", () => {
     expect(sys).toMatch(/NEVER write a real person/);
     expect(sys).toMatch(/founded_line/);
     const prompt = buildPrompt(
-      { place: "baghdad", era: "caliphate", year: 800, archetypes: ["religious"], count: 2 },
+      { place: "baghdad", era: "origins", year: 1885, archetypes: ["religious"], count: 2 },
       content.tropes,
       content.places,
     );
-    expect(prompt).toMatch(/Baghdad/);
+    // baghdad is now the 1880s Arab/Levantine wave (label "the Levant").
+    expect(prompt).toMatch(/Levant/);
     expect(prompt).toMatch(/religious/);
     // The catalog tropes are listed for the model to choose from.
     expect(prompt).toMatch(/trope/);

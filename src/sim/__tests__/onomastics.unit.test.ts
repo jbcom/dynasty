@@ -13,7 +13,7 @@ const content = loadContent();
 const onomastics = { cultures: content.onomastics };
 
 describe("FD-5 onomastics content", () => {
-  it("loads the seed cultures (5 modern + the Abbasid Arab deep-history culture)", () => {
+  it("loads the immigration-wave cultures (Convergence Saga roster)", () => {
     expect(new Set(Object.keys(content.onomastics))).toEqual(
       new Set([
         "irish_catholic",
@@ -22,6 +22,10 @@ describe("FD-5 onomastics content", () => {
         "scots_irish",
         "anglo_protestant",
         "arabic_abbasid",
+        "italian",
+        "ashkenazi_jewish",
+        "scandinavian",
+        "chinese",
       ]),
     );
   });

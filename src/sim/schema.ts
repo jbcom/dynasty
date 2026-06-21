@@ -964,6 +964,19 @@ export const PlaceSchema = z.object({
   eraContentDir: z.string().min(1),
   /** Era ids a founding here may begin in (cross-ref to eras/index.json). */
   validEras: z.array(z.string().min(1)).min(1),
+  /**
+   * IMMIGRATION-WAVE metadata (Convergence Saga, SS-6). A starting line is a WAVE of immigration
+   * to America defined by WHEN it arrived (mid-to-late 1800s), WHAT class it arrived as, and what
+   * pushed it out. Optional during migration; the wave roster sets these. `wave` distinguishes a
+   * source-wave (a playable origin) from a `destination` ground (where waves land + stratify).
+   */
+  kind: z.enum(["wave", "destination"]).default("wave"),
+  /** The year band the wave arrives (e.g. [1845, 1855] for the Famine Irish). */
+  arrivalYears: z.tuple([z.number(), z.number()]).optional(),
+  /** The class the wave arrives as (the Wealth-motivator starting rung). */
+  arrivalClass: z.enum(["poor", "middle"]).optional(),
+  /** One-line historical push that drove the wave out (famine, revolution, pogrom, …). */
+  push: z.string().optional(),
 });
 export type Place = z.infer<typeof PlaceSchema>;
 

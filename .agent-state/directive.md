@@ -162,7 +162,7 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 ### SS-5 Class-rung system
 - [x] SS-5 rung index + poor/middle/upper track routing; seeded misfortune drop (war/disease/collapse)+recovery+hysteresis; tests
 ### SS-6 Immigration-wave roster
-- [ ] SS-6 7 waves (period×class→culture) + destination grounds; drop SA+colonial; reshape baghdad→1880s Levantine; build validates; 0 leaks
+- [x] SS-6 7 waves (period×class→culture) + destination grounds; drop SA+colonial; reshape baghdad→1880s Levantine; build validates; 0 leaks
 ### SS-7 Onboarding rebuild
 - [ ] SS-7 Period→Class→Race/Culture funnel; Epoch-0 seeds the GOAP brain; e2e; live-verified
 ### SS-8 Multi-line world sim
