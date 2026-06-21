@@ -6,7 +6,22 @@ Completed work, moved out of the active directive to keep it lean (user request,
 
 ---
 
-## Batch — FOUND YOUR OWN DYNASTY (batch-20260620-found-your-own-dynasty) — completed items
+## Batch — FOUND YOUR OWN DYNASTY (batch-20260620-found-your-own-dynasty) — RELEASED (PR #28, 2026-06-21)
+
+The complete found-your-own-dynasty game shipped (squash-merge a72e8e3). FD-1..FD-15
+all done: archetype identity (literal preset families dissolved into trope
+influences + the economic/political/technological/religious axis), unified event
+pool + no-leak, procedural pool (pure seeded expander + lazy materialization),
+onomastics, 8 start-moments + a deep-history Abbasid-Baghdad caliphate era, world
+stacks, the live family tree with seeded birth/Gompertz-mortality/primogeniture-
+succession (the eternal-dynasty loop), Gemini dev-bulk (101 events), settings +
+secure Gemini-key storage + live-extrapolation toggle, and the lineage view.
+Reviewer trio folded (kinFor dual-lineage + posthumous-heir bugs fixed; security
+clean; isMemberAlive dedup). Follow-up PR #30: per-origin onomastics (Abbasid
+caliphate uses Arabic naming, not Scots-Irish) + a culture-pinning regression test.
+All CI green, live-verified end-to-end. Per-FD detail below.
+
+### FOUND-YOUR-OWN shipped items (detail)
 
 The pivot from "pick 1 of 4 fixed houses" → "FOUND YOUR OWN line" at a historical
 hinge (name + when + where). The 4 composite archetypes survive as quick-start
