@@ -180,12 +180,13 @@
       "era": "origins",
       "year": 1908,
       "title": "A Match for the Line",
-      "scene": "The founder is of an age to marry, and the choice of a partner is the choice of what blood and what alliance will shape the next generation. A union can fuse two houses, lift the family's standing, or simply be a love that asks nothing of the ledger.",
-      "researchNote": "Marriage was the central dynastic instrument of every founding family — an alliance as much as a bond.",
+      "scene": "The {given_name} who carries the {family_name} name is of an age to marry, and the choice of a partner is the choice of what blood and what alliance will shape the next generation. A union can fuse two houses, lift the family's standing, or simply be a love that asks nothing of the ledger.",
+      "researchNote": "Marriage was the central dynastic instrument of every dynasty, generation after generation — an alliance as much as a bond.",
       "historicity": "personal",
       "tags": ["trope:dynastic-merger", "founding", "epoch0"],
-      "requires": { "flags": ["founded_line"], "notFlags": ["partnered"], "meters": {}, "personality": {} },
-      "weight": 9,
+      "repeatable": true,
+      "requires": { "flags": ["founded_line", "calling_chosen"], "notFlags": ["partnered"], "meters": {}, "personality": {} },
+      "weight": 800,
       "choices": [
         {
           "id": "marry_well",
@@ -194,7 +195,8 @@
           "personality": { "outward": 4 },
           "setFlags": ["partnered", "married_up"],
           "takesPartner": true,
-          "outcome": "Two houses become one engine. The dowry and the connections come with expectations."
+          "begets": 1,
+          "outcome": "Two houses become one engine. The dowry and the connections come with expectations — and, in time, a firstborn to carry both names."
         },
         {
           "id": "marry_love",
@@ -203,7 +205,8 @@
           "personality": { "inward": 4 },
           "setFlags": ["partnered", "married_for_love"],
           "takesPartner": true,
-          "outcome": "A partner of the heart, not the ledger — the line is happier, if no richer."
+          "begets": 1,
+          "outcome": "A partner of the heart, not the ledger — the line is happier, if no richer, and a first child soon follows."
         },
         {
           "id": "marry_shrewd",
@@ -212,7 +215,8 @@
           "personality": { "grandiosity": 2 },
           "setFlags": ["partnered", "married_shrewd"],
           "takesPartner": true,
-          "outcome": "Not the richest match nor the fondest — but a mind that will sharpen the whole line."
+          "begets": 1,
+          "outcome": "Not the richest match nor the fondest — but a mind that will sharpen the whole line, and a first heir to inherit it."
         }
       ]
     },
@@ -221,12 +225,13 @@
       "era": "origins",
       "year": 1912,
       "title": "The Next Generation",
-      "scene": "The household fills with children, or does not. How many heirs to raise — and how — sets the shape of the succession to come: a single groomed heir, a brood to choose from, or a careful pair.",
-      "researchNote": "Family size was a dynastic decision with century-long consequences for inheritance and survival.",
+      "scene": "The {family_name} household fills with children, or does not. How many heirs to raise — and how — sets the shape of the succession to come: a single groomed heir, a brood to choose from, or a careful pair.",
+      "researchNote": "Family size was a dynastic decision with century-long consequences for inheritance and survival, repeated by every generation that meant to endure.",
       "historicity": "personal",
       "tags": ["trope:accidental-heir", "founding", "epoch0"],
+      "repeatable": true,
       "requires": { "flags": ["founded_line", "partnered"], "notFlags": ["raised_heirs"], "meters": {}, "personality": {} },
-      "weight": 9,
+      "weight": 800,
       "choices": [
         {
           "id": "one_heir",

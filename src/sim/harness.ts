@@ -3,7 +3,8 @@ import type { Content } from "./content";
 import { applyChoice } from "./effects";
 import { meetsRequires, pickNextEvent } from "./events";
 import { type Composition, foundByComposition } from "./founding";
-import { createRng } from "./rng";
+import { createRng, type Rng } from "./rng";
+import type { Choice } from "./schema";
 import type { GameState } from "./state";
 import { applyTerms, runTerms } from "./terms";
 
@@ -54,22 +55,148 @@ function protagonistGeneration(state: GameState): number {
   return me?.generation ?? 0;
 }
 
+/**
+ * The science-ladder + survival flags a `survive` policy steers toward so a dev
+ * trace can reach the far-future eras (Mars/First-Contact/Interstellar gate on
+ * these via `entryRequires`). Kept in sync with the era index `entryRequires`.
+ */
+const LADDER_FLAGS = new Set([
+  "mars_program",
+  "back_science",
+  "extrasolar_flight",
+  "contact_made",
+  "two_world_patriarch",
+  "starfarer_ascendant",
+]);
+
+/**
+ * The set of flags that TRIGGER a mid-run failure ending: any flag named in the
+ * `when.flags` of an ending capped to an early era (`maxEraOrder` set). A survivor
+ * that means to endure must AVOID setting these — pumping meters alone backfires
+ * (e.g. raising health past 60 with `walked_away` set fires `end_early_obscurity`).
+ * Derived from the endings data so it stays correct as endings evolve.
+ */
+function failureTriggerFlags(content: Content): Set<string> {
+  const flags = new Set<string>();
+  for (const e of content.endings) {
+    if (e.when.maxEraOrder !== undefined) {
+      for (const f of e.when.flags) flags.add(f);
+    }
+  }
+  return flags;
+}
+
+/**
+ * SURVIVOR POLICY (EX-5 dev mode). Score a choice for a dynasty that means to
+ * ENDURE the full millennium: pull every meter UP (away from the death/failure
+ * thresholds the meter-gated endings watch), AVOID flags that trigger an early
+ * failure ending, and climb the science ladder (so the late-era entry gates open).
+ * Higher score = better for a long run. Pure — a function of the offered choice +
+ * current meters only, so a `survive` trace stays deterministic for a composition.
+ */
+function survivorScore(
+  choice: Choice,
+  meters: Record<string, number>,
+  failFlags: Set<string>,
+): number {
+  let score = 0;
+  for (const [id, delta] of Object.entries(choice.effects ?? {})) {
+    const current = meters[id] ?? 50;
+    // A boost to a LOW meter is worth more than the same boost to a high one
+    // (survival is about avoiding the floor, not maximizing an already-safe meter).
+    const scarcity = id === "heat" ? 1 : Math.max(0.2, (100 - current) / 100);
+    // Heat is a HAZARD meter (coup/jail/assassination watch it) — invert it.
+    score += id === "heat" ? -(delta as number) : (delta as number) * scarcity;
+  }
+  for (const f of choice.setFlags ?? []) {
+    if (LADDER_FLAGS.has(f)) score += 50; // climbing the ladder dominates
+    if (failFlags.has(f)) score -= 1000; // never walk into an early failure ending
+  }
+  return score;
+}
+
+/**
+ * Pick the highest-survivor-scoring choice; ties broken by a seeded draw among the
+ * best so the trace stays deterministic but isn't biased to array order. `eligible`
+ * is non-empty (the caller checks), so the result is always a real choice.
+ */
+function pickSurvivor(
+  eligible: Choice[],
+  meters: Record<string, number>,
+  failFlags: Set<string>,
+  rng: Rng,
+): Choice {
+  let bestScore = Number.NEGATIVE_INFINITY;
+  const winners: Choice[] = [];
+  for (const c of eligible) {
+    const s = survivorScore(c, meters, failFlags);
+    if (s > bestScore) {
+      bestScore = s;
+      winners.length = 0;
+      winners.push(c);
+    } else if (s === bestScore) {
+      winners.push(c);
+    }
+  }
+  return rng.pick(winners);
+}
+
+/** How a traced run resolves the choice at each beat. */
+export interface TraceOptions {
+  maxSteps?: number;
+  /**
+   * `random` (default) — seeded random pick, the natural-play audit. `survive` —
+   * the survivor policy: greedily keep the line alive + climb the science ladder so
+   * the dev trace can traverse the WHOLE era chain to the far future (EX-5).
+   */
+  policy?: "random" | "survive";
+}
+
 /** Play a founded run forward, recording every beat. Deterministic for a composition. */
 export function tracePlaythrough(
   content: Content,
   composition: Composition,
-  maxSteps = 800,
+  options: number | TraceOptions = 800,
 ): Trace {
+  const opts: TraceOptions = typeof options === "number" ? { maxSteps: options } : options;
+  const maxSteps = opts.maxSteps ?? 800;
+  const policy = opts.policy ?? "random";
   let state = foundByComposition(content, composition).state;
   const rng = createRng(composition.seed);
   const beats: TraceBeat[] = [];
+  const failFlags = policy === "survive" ? failureTriggerFlags(content) : new Set<string>();
+  let resurrections = 0;
+  const MAX_RESURRECTIONS = 200; // backstop: a dev trace can dodge many failures, not loop forever
 
   for (let i = 0; i < maxSteps && !state.end; i++) {
     const event = pickNextEvent(content, state, rng.fork(`pick:${i}`));
-    if (!event) break;
+    if (
+      !event ||
+      event.choices.filter((c) => !c.requires || meetsRequires(state, c.requires)).length === 0
+    ) {
+      // No eligible event in this era. In SURVIVE mode the dev trace skips the
+      // empty era and walks on (some far-future eras gate every authored event on
+      // flags a given line lacks); in random mode a dead era is a natural stop.
+      if (policy === "survive" && state.eraIndex < content.eras.length - 1) {
+        const nextEra = content.eras[state.eraIndex + 1];
+        const flags = Array.from(new Set([...state.flags, ...LADDER_FLAGS]));
+        state = {
+          ...state,
+          flags,
+          eraIndex: state.eraIndex + 1,
+          eraEventCount: 0,
+          year: nextEra?.yearStart ?? state.year,
+          lastEventYear: nextEra?.yearStart ?? state.lastEventYear,
+        };
+        continue;
+      }
+      break;
+    }
     const eligible = event.choices.filter((c) => !c.requires || meetsRequires(state, c.requires));
-    if (eligible.length === 0) break;
-    const choice = rng.fork(`choose:${i}`).pick(eligible);
+    const choice =
+      policy === "survive"
+        ? pickSurvivor(eligible, state.meters, failFlags, rng.fork(`choose:${i}`))
+        : rng.fork(`choose:${i}`).pick(eligible);
     const branch = branchOf(state);
     const terms = runTerms(content.terms, branch, state);
     const before = new Set(state.flags);
@@ -88,6 +215,33 @@ export function tracePlaythrough(
       flagsAdded: next.flags.filter((f) => !before.has(f)),
     });
     state = next;
+
+    // DEV SURVIVE (EX-5): the dev trace's job is FULL-CHAIN content traversal, not
+    // realistic play — so resurrect past ANY non-terminal ending (one that fired
+    // while the line has eras still ahead of it) and keep walking to the far future.
+    // The ONLY stop left to stand is line-extinct (a real structural dead-end with
+    // no protagonist to carry on). To escape both kinds of mid-run ending —
+    //   • flag-TRIGGERED failures (e.g. walked_away → obscurity): strip the flag.
+    //   • flag-ABSENCE finales (e.g. notFlags mars_program → an Earth-arc finale):
+    //     inject the science-ladder flags so the next era's entry gate opens.
+    // both are applied, so the line climbs to interstellar regardless of branch.
+    if (
+      policy === "survive" &&
+      state.end &&
+      state.end.kind !== "line-extinct" &&
+      state.eraIndex < content.eras.length - 1 &&
+      resurrections < MAX_RESURRECTIONS
+    ) {
+      resurrections++;
+      const triggered = state.end.endingId
+        ? content.endings.find((e) => e.id === state.end?.endingId)
+        : undefined;
+      const triggeredFlags = new Set(triggered?.when.flags ?? []);
+      const flags = Array.from(
+        new Set([...state.flags.filter((f) => !triggeredFlags.has(f)), ...LADDER_FLAGS]),
+      );
+      state = { ...state, flags, end: null };
+    }
   }
 
   const finalTerms = runTerms(content.terms, branchOf(state), state);

@@ -32,6 +32,25 @@ function begetYear(eventYear: number, index: number): number {
   return eventYear + index * 2;
 }
 
+/**
+ * PER-GENERATION LIFE-STAGE FLAGS (EX-5). These mark a single protagonist's own
+ * life arc — taking a partner and raising the next generation — and MUST reset on
+ * succession so the new protagonist re-runs their own partner→beget beats (the
+ * repeatable epoch0 `ev_cp_take_partner` / `ev_cp_raise_heirs`). Without this reset
+ * the line begets exactly once and goes extinct within a generation. The birth /
+ * gender / naming / calling flags are NOT here: those are the FOUNDING emergence,
+ * one-shot for the line, and the heir is already born + named + carries the calling.
+ */
+const LIFE_STAGE_FLAGS = [
+  "partnered",
+  "married_up",
+  "married_for_love",
+  "married_shrewd",
+  "raised_heirs",
+  "groomed_heir",
+  "large_brood",
+] as const;
+
 function findChoice(event: GameEvent, choiceId: string): Choice {
   const choice = event.choices.find((c) => c.id === choiceId);
   if (!choice) {
@@ -56,6 +75,13 @@ export function applyChoice(
 ): Transition {
   if (state.end) {
     throw new Error("Cannot apply a choice to a finished run");
+  }
+  // EPOCH-0 beats (EX-5) fire at the START of any run regardless of founding era, so
+  // their authored year (written for the new-york/origins line) must not jump a
+  // baghdad/caliphate line's clock forward by a millennium. Treat an epoch0 beat as
+  // occurring NOW — at the run's current year — preserving linear time for any origin.
+  if (event.tags.includes("epoch0") && event.year !== state.year) {
+    event = { ...event, year: state.year };
   }
   const choice = findChoice(event, choiceId);
 
@@ -263,6 +289,12 @@ export function applyChoice(
         // Continue AS the heir: re-anchor birthYear/age + flag the succession.
         const heir = fam.members.find((m) => m.id === succ.heirId);
         const heirBorn = heir?.born ?? advanced.birthYear;
+        // Reset the per-generation life-stage flags so the heir runs their OWN
+        // partner→beget arc (EX-5 — else the line begets once and dies out). The
+        // founding emergence flags (emerged/named/calling_chosen) persist; the heir
+        // is already a born, named member of the line.
+        const lifeStageSet = new Set<string>(LIFE_STAGE_FLAGS);
+        const heirFlags = advanced.flags.filter((f) => !lifeStageSet.has(f));
         advanced = {
           ...advanced,
           family: fam,
@@ -270,7 +302,7 @@ export function applyChoice(
           // Clamp to 0: succeed() only returns an already-born heir, but guard
           // against a negative age if that invariant ever changes.
           age: Math.max(0, passYear - heirBorn),
-          flags: withFlag(advanced.flags, "succession_occurred"),
+          flags: withFlag(heirFlags, "succession_occurred"),
         };
       } else {
         advanced = { ...advanced, family: fam };

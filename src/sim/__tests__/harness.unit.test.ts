@@ -3,7 +3,7 @@ import { dirname, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
 import { auditTimelines, tracePlaythrough, validateTrace } from "../harness";
-import { placeById, resolveComposition } from "../places";
+import { dealComposition, placeById, resolveComposition } from "../places";
 import { ARCHETYPES } from "../slots";
 
 /**
@@ -81,4 +81,51 @@ describe("CP-R7 timeline dump + consistency audit", () => {
     // The timeline graph is consistent: NO findings across the whole space.
     expect(findings, JSON.stringify(findings.slice(0, 10), null, 2)).toEqual([]);
   }, 60_000); // 180 traces × thousands of beats — generous timeout for slower CI hardware.
+});
+
+describe("EX-5 the millennium run (dev `survive` policy)", () => {
+  // A dealt birth, played by the survivor policy, walks the WHOLE era chain — from
+  // its founding era to interstellar (era order 12, ~2161) — across many generations,
+  // with the recurring partner→beget life-stage beats re-firing each generation and
+  // ZERO preset-person leaks the whole way. This is the dev-mode 1000-year dynasty.
+  it("a survivor-policy run traverses the full era chain to the far future, 0 leaks", () => {
+    const NEUTRAL = ["Calloway", "Mercer", "Thornbury", "Aldridge", "Castellan", "Whitlock"];
+    let reachedFarFuture = 0;
+    let sawMultiGenBeget = 0;
+    let totalLeaks = 0;
+    const RUNS = 18;
+    for (let s = 1; s <= RUNS; s++) {
+      const surname = NEUTRAL[s % NEUTRAL.length] ?? "Calloway";
+      const comp = dealComposition(content.places, content.eras, String(s), surname);
+      const trace = tracePlaythrough(content, comp, { maxSteps: 30_000, policy: "survive" });
+      totalLeaks += validateTrace(trace).filter((f) => f.kind === "leak").length;
+
+      const lastEra = trace.beats.at(-1)?.era;
+      const lastOrder = content.eras.find((e) => e.id === lastEra)?.order ?? -1;
+      if (lastOrder >= 9) reachedFarFuture++; // unification(9)+ = deep into the future
+
+      // The recurring beget: the partner+heirs beats fire for more than one generation.
+      const begetGens = new Set(
+        trace.beats.filter((b) => b.eventId === "ev_cp_raise_heirs").map((b) => b.generation),
+      );
+      if (begetGens.size >= 2) sawMultiGenBeget++;
+    }
+
+    // Determinism: every survive trace is reproducible for its composition.
+    const c = dealComposition(content.places, content.eras, "1", "Calloway");
+    const a = tracePlaythrough(content, c, { maxSteps: 30_000, policy: "survive" });
+    const b = tracePlaythrough(content, c, { maxSteps: 30_000, policy: "survive" });
+    expect(a.beats.length).toBe(b.beats.length);
+    expect(a.end).toEqual(b.end);
+
+    expect(totalLeaks, "the millennium run must never leak a preset person").toBe(0);
+    // The strong majority of dealt births reach the far future under the survivor
+    // policy (taking a partner now begets a firstborn, so a line no longer dies
+    // childless between the partner + raise-heirs beats). The few that still end
+    // line-extinct are legitimate dynastic outcomes (the deep-history era gap, or a
+    // far-future heir lost to the large era time-skips) — not a content/consistency gap.
+    expect(reachedFarFuture).toBeGreaterThanOrEqual(Math.ceil((RUNS * 2) / 3));
+    // The line continues across generations: the beget beat re-fires, not once-only.
+    expect(sawMultiGenBeget).toBeGreaterThanOrEqual(RUNS / 2);
+  }, 60_000);
 });
