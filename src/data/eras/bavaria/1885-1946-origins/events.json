@@ -1,0 +1,106 @@
+{
+  "era": "origins",
+  "events": [
+    {
+      "id": "ev_bav_the_conscription_letter",
+      "era": "origins",
+      "place": "bavaria",
+      "year": 1887,
+      "title": "Three Years for the King",
+      "scene": "The Kingdom of Bavaria wants three years of your body for its army, and the letter has come. A wine village in the Palatinate offers a life you can already see to its end. The boat to the new world offers everything and nothing. To carry the {surname} name forward, you must decide whether your future is here, in uniform, or across an ocean you have never seen.",
+      "researchNote": "Place-specific Bavarian origins beat (EX-2): conscription-dodging emigration from the Palatinate wine country was a classic 19th-c. German-immigrant origin. Generic to any Bavarian founding.",
+      "historicity": "real",
+      "tags": ["origin", "bavaria", "emigration", "trope:letter-from-away"],
+      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "weight": 14,
+      "choices": [
+        {
+          "id": "bav_take_the_boat",
+          "text": "Leave a letter for your mother and walk to the boat by night",
+          "effects": { "money": -1, "power": 2, "reputation": -1 },
+          "personality": { "grandiosity": 3, "outward": 3 },
+          "setFlags": ["bav_emigrated", "head_start"],
+          "outcome": "You slip away before dawn with the barber's savings in your pocket. The {surname} line will be made in a country that does not yet know your name."
+        },
+        {
+          "id": "bav_serve_the_king",
+          "text": "Report for the uniform and earn your standing the respectable way",
+          "effects": { "reputation": 3, "loyalty": 3, "money": -1 },
+          "personality": { "ideology": 3, "inward": 2 },
+          "setFlags": ["bav_served", "old_world_rooted"],
+          "outcome": "You drill in Bavarian mud for three years and muster out a respectable veteran. The {surname} name stays in the Palatinate, solid and small."
+        },
+        {
+          "id": "bav_learn_the_trade_first",
+          "text": "Master a trade — barber, brewer — that will travel anywhere",
+          "effects": { "money": 1, "reputation": 2 },
+          "personality": { "inward": 3 },
+          "setFlags": ["bav_portable_trade", "trade_in_hand"],
+          "outcome": "You learn a craft a man can carry across any border. Whether you leave or stay, the {surname} line will never want for a living."
+        }
+      ]
+    },
+    {
+      "id": "ev_bav_the_brewing_inheritance",
+      "era": "origins",
+      "place": "bavaria",
+      "year": 1894,
+      "title": "Wine, Hops, and the Old Country's Craft",
+      "scene": "Your village runs on the vine and the brew-kettle, and the knowledge is in your hands as surely as the Rhine runs through the valley. That craft is the {surname} line's one transportable fortune — worth little here among a hundred other brewers, worth a great deal somewhere thirsty and far away. The question is what you make of it.",
+      "researchNote": "The Palatinate's wine/brewing culture as the line's inheritable trade — a Bavarian-specific founding lever (and the seed of a later bootlegging pivot under Prohibition).",
+      "historicity": "real",
+      "tags": ["origin", "bavaria", "trope:frontier-capital-origin"],
+      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "weight": 12,
+      "choices": [
+        {
+          "id": "bav_carry_the_craft_abroad",
+          "text": "Carry the brewing craft to a thirsty new market",
+          "effects": { "money": 4, "power": 2 },
+          "personality": { "grandiosity": 3 },
+          "setFlags": ["bav_brewing_dynasty", "trade_in_hand"],
+          "outcome": "You pack the old country's craft like a dowry. Where you land, the {surname} kettle will turn grain into gold faster than any rival's."
+        },
+        {
+          "id": "bav_keep_the_vineyard",
+          "text": "Keep the vineyard and the name where they have always been",
+          "effects": { "loyalty": 4, "reputation": 2 },
+          "personality": { "inward": 3 },
+          "setFlags": ["bav_vintner_line", "old_world_rooted"],
+          "outcome": "The {surname} vines stay rooted in Palatinate chalk. A smaller fortune, but one that does not weep for a home left behind."
+        }
+      ]
+    },
+    {
+      "id": "ev_bav_the_german_name_abroad",
+      "era": "origins",
+      "place": "bavaria",
+      "year": 1917,
+      "title": "A German Name in a Hostile Year",
+      "scene": "The wider world has turned against everything Prussian and Bavarian alike, and your old-country name draws sideways looks on every street. The {surname} line must decide how to weather suspicion: wear the name proudly, soften it, or bury it under a more palatable story.",
+      "researchNote": "Anti-German sentiment (WWI-era) pressuring immigrant families to anglicize/obscure origins — a Bavarian-line trope that recurs as the 'old country problem' in later eras.",
+      "historicity": "real",
+      "tags": ["origin", "bavaria", "trope:faith-and-community"],
+      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "weight": 11,
+      "choices": [
+        {
+          "id": "bav_wear_it_proudly",
+          "text": "Wear the {surname} name proudly — the old country is craft and order, not shame",
+          "effects": { "reputation": 3, "heat": 2 },
+          "personality": { "ideology": 3, "outward": 2 },
+          "setFlags": ["bav_proud_heritage"],
+          "outcome": "You refuse to flinch. It costs you a few customers and earns you a few enemies, but the {surname} name stands undisguised."
+        },
+        {
+          "id": "bav_soften_the_story",
+          "text": "Soften the story — claim a safer origin until the suspicion passes",
+          "effects": { "reputation": 2, "money": 2 },
+          "personality": { "inward": 3 },
+          "setFlags": ["bav_obscured_origin"],
+          "outcome": "You let people believe a more convenient tale. The {surname} line keeps its custom — and a secret that will resurface a generation later."
+        }
+      ]
+    }
+  ]
+}

@@ -123,10 +123,12 @@ export interface TraceFinding {
 export function validateTrace(trace: Trace): TraceFinding[] {
   const findings: TraceFinding[] = [];
   // Preset-person literals that must never render for a founded line (CP-R7). Real
-  // place names (Kallstadt, Bavaria, …) are legitimate per place and NOT flagged;
-  // only literal PEOPLE / preset surnames are leaks.
+  // PLACE names (Kallstadt, Bavaria, …) and legitimate ONOMASTIC given names the culture
+  // pools actually draw (e.g. "Friedrich" for a Bavarian line) are NOT leaks — only the
+  // preset SURNAMES / full identities are. ("Fred" stays flagged: not in any given-name
+  // pool; it only ever meant the literal Trump ancestor.)
   const LITERAL =
-    /\b(Donald|Trump|Drumpf|Elon|Musk|Kennedy|Friedrich|Fred|Freddy|Errol|Walter Musk|Maye|Ivana|Mary Anne|Elizabeth Christ|JFK|RFK|Joseph Kennedy|Patrick Kennedy|Graham)\b/;
+    /\b(Donald|Trump|Drumpf|Elon|Musk|Kennedy|Fred|Freddy|Errol|Walter Musk|Maye|Ivana|Mary Anne|Elizabeth Christ|JFK|RFK|Joseph Kennedy|Patrick Kennedy|Graham)\b/;
   let prevYear = -Infinity;
   let prevGen = 0;
   let branchingBeats = 0;
