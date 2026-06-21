@@ -1,0 +1,60 @@
+{
+  "templates": [
+    {
+      "id": "rival_inheritance",
+      "era": "mogul",
+      "title": "The Inheritance Question",
+      "scene": "In {year}, the question of who carries the {surname} name forward can no longer be deferred. {member} has earned the patriarch's eye, but {rival} has not stopped circling — and {peril} looms over the whole house.",
+      "slots": ["member", "rival", "place", "year", "peril", "surname"],
+      "tropes": ["accidental-heir"],
+      "tags": ["family", "succession"],
+      "weight": 6,
+      "choices": [
+        {
+          "id": "consolidate",
+          "text": "{member} consolidates the line and freezes {rival} out",
+          "outcome": "The succession is settled by force of will. {rival} will not forget it.",
+          "effects": { "power": { "min": 4, "max": 12 }, "loyalty": { "min": -10, "max": -2 }, "heat": { "min": 2, "max": 8 } },
+          "personality": { "grandiosity": { "min": 2, "max": 8 } },
+          "setFlags": ["heir_consolidated"]
+        },
+        {
+          "id": "share",
+          "text": "{member} brings {rival} into the fold",
+          "outcome": "A divided house, but a wider one. The {surname} name holds together — for now.",
+          "effects": { "loyalty": { "min": 4, "max": 12 }, "power": { "min": -4, "max": 2 } },
+          "personality": { "outward": { "min": 1, "max": 6 } },
+          "setFlags": ["heir_shared"]
+        }
+      ]
+    },
+    {
+      "id": "scandal_break",
+      "era": "brand",
+      "title": "The Story Breaks",
+      "scene": "A scandal breaks over {place} in {year}: the {surname} empire is suddenly the headline, and {peril} could follow if it is mishandled.",
+      "slots": ["place", "year", "peril", "surname"],
+      "tropes": ["scandal-fall-rehab"],
+      "tags": ["scandal", "media"],
+      "weight": 6,
+      "choices": [
+        {
+          "id": "deny",
+          "text": "{member} denies everything and counterattacks the press",
+          "outcome": "The denial buys time and burns trust in equal measure.",
+          "effects": { "reputation": { "min": -8, "max": 4 }, "heat": { "min": 6, "max": 16 }, "power": { "min": 0, "max": 6 } },
+          "personality": { "grandiosity": { "min": 2, "max": 8 } },
+          "setFlags": ["scandal_denied"]
+        },
+        {
+          "id": "rehab",
+          "text": "{member} stages a contrite, calculated rehabilitation",
+          "outcome": "The comeback narrative writes itself. The name re-launders, slowly.",
+          "effects": { "reputation": { "min": 2, "max": 10 }, "money": { "min": -20, "max": -4 } },
+          "personality": { "inward": { "min": 1, "max": 6 } },
+          "setFlags": ["scandal_rehabbed"]
+        }
+      ]
+    }
+  ]
+}

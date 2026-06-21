@@ -1,6 +1,7 @@
 import { branchOf } from "./branch";
 import type { Content } from "./content";
 import type { PersonalityAxis } from "./personality";
+import { materializeProcedural } from "./procgen";
 import type { Rng } from "./rng";
 import type { GameEvent, MeterId, Requires } from "./schema";
 import type { GameState } from "./state";
@@ -73,14 +74,25 @@ export function historicityOf(ev: GameEvent): "real" | "extrapolated" | "persona
   return ev.extrapolated ? "extrapolated" : "personal";
 }
 
+/** Below this many forward authored beats, the procedural pool fills the gap. */
+const PROC_THRESHOLD = 3;
+/** At most this many procedural events are materialized into a single selection. */
+const PROC_CAP = 4;
+
 /**
  * All events in the current era that are eligible right now. Time only moves
  * forward: an event whose year is earlier than the last fired event is excluded
  * so the player is never "sent back in time". If that would leave nothing
  * eligible (e.g. all remaining events predate the floor), the floor is relaxed
  * so the era can still progress.
+ *
+ * When an `rng` is supplied (live play / replay) and the authored forward pool
+ * has thinned below PROC_THRESHOLD, the procedural pool (FD-4) lazily materializes
+ * up to PROC_CAP expanded events for the era — keyed by the supplied rng so replay
+ * reconstructs them identically. The rng-less path (analysis/dumps) stays
+ * pure-authored.
  */
-export function eligibleEvents(content: Content, state: GameState): GameEvent[] {
+export function eligibleEvents(content: Content, state: GameState, rng?: Rng): GameEvent[] {
   const era = content.eras[state.eraIndex];
   if (!era) return [];
   const pool = content.eventsByEra.get(era.id) ?? [];
@@ -109,7 +121,16 @@ export function eligibleEvents(content: Content, state: GameState): GameEvent[] 
   // unfloored proto pool if nothing remains so the era still progresses.
   const protoForward = protoBase.filter((ev) => ev.year >= state.lastEventYear);
   const proto = protoForward.length > 0 ? protoForward : protoBase;
-  return [...proto, ...worldEligible];
+
+  // LAZY BOUNDED procedural fill (FD-4.2): only when the authored forward pool has
+  // thinned and an rng is available to keep the expansion replay-deterministic.
+  let procedural: GameEvent[] = [];
+  if (rng && proto.length < PROC_THRESHOLD) {
+    procedural = materializeProcedural(content, state, era, rng.fork("procgen"), PROC_CAP).filter(
+      (ev) => !alreadyConsumed(state, ev),
+    );
+  }
+  return [...proto, ...worldEligible, ...procedural];
 }
 
 /**
@@ -172,7 +193,9 @@ export function effectiveWeight(content: Content, state: GameState, ev: GameEven
  * is eligible (era is exhausted). Deterministic for a given (state, rng) pair.
  */
 export function pickNextEvent(content: Content, state: GameState, rng: Rng): GameEvent | null {
-  const eligible = eligibleEvents(content, state);
+  // Thread the rng so the procedural pool can lazily fill a thin authored era,
+  // deterministically (fork keeps the selection draw below independent of it).
+  const eligible = eligibleEvents(content, state, rng.fork("eligible"));
   if (eligible.length === 0) return null;
 
   const weights = eligible.map((ev) => effectiveWeight(content, state, ev));

@@ -4,4 +4,6 @@
  * pool from a small authored base of EventTemplates. Barrel re-exports the public
  * surface; internals stay file-scoped.
  */
+export { buildExpandContext } from "./context";
 export { type ExpandContext, expandTemplate } from "./expand";
+export { materializeProcedural } from "./materialize";

@@ -11,6 +11,8 @@ import {
   type Era,
   EraEventsSchema,
   EraIndexSchema,
+  type EventTemplate,
+  EventTemplatesFileSchema,
   type FamilyTree,
   FamilyTreesFileSchema,
   type GameEvent,
@@ -64,6 +66,12 @@ export interface Content {
    */
   tropes: Trope[];
   /**
+   * Procedural event templates (FD-4): skeleton events with `{slot}` tokens the
+   * seeded expander materializes into concrete GameEvents when the authored pool
+   * thins. Empty by default (the authored pool stands alone).
+   */
+  templates: EventTemplate[];
+  /**
    * World-timeline entries PROJECTED into the unified event pool (FD-2.2): the
    * dated backdrop facts as year-keyed, reactable GameEvents the player lives
    * through. Derived from worldTimelines; year-sorted + deterministic.
@@ -86,6 +94,7 @@ export interface RawContent {
   ranks?: unknown;
   familyTrees?: unknown;
   tropes?: unknown;
+  templates?: unknown;
 }
 
 /** Validate raw JSON into a Content bundle, cross-checking referential integrity. */
@@ -120,6 +129,21 @@ export function buildContent(raw: RawContent): Content {
   const tropeIds = new Set(tropesFile.tropes.map((t) => t.id));
   if (tropeIds.size !== tropesFile.tropes.length) {
     throw new Error("tropes.json has duplicate trope ids");
+  }
+  const templatesFile = parseContent(
+    EventTemplatesFileSchema,
+    raw.templates ?? { templates: [] },
+    "templates",
+  );
+  // A template's trope ids must resolve to the catalog (same guarantee as events).
+  if (tropeIds.size > 0) {
+    for (const tpl of templatesFile.templates) {
+      for (const id of tpl.tropes) {
+        if (!tropeIds.has(id)) {
+          throw new Error(`template "${tpl.id}" references unknown trope "${id}"`);
+        }
+      }
+    }
   }
   // Cross-ref validate each tree: every child id resolves to a member, exactly
   // one founder-patriarch, and no cycles (the tree is a DAG progenitor→descendants).
@@ -228,6 +252,7 @@ export function buildContent(raw: RawContent): Content {
     ranks: ranksFile.ranks,
     familyTrees: familyTreesFile.trees,
     tropes: tropesFile.tropes,
+    templates: templatesFile.templates,
     worldEvents: projectWorldEvents(worldTimelines),
   };
 }

@@ -20,6 +20,7 @@ const currenciesGlob = import.meta.glob("./currencies.json", { eager: true });
 const ranksGlob = import.meta.glob("./ranks.json", { eager: true });
 const familyTreesGlob = import.meta.glob("./family-trees/*.json", { eager: true });
 const tropesGlob = import.meta.glob("./tropes.json", { eager: true });
+const templatesGlob = import.meta.glob("./templates/*.json", { eager: true });
 
 function firstValue<T>(glob: Record<string, unknown>): T | null {
   const entry = Object.values(glob)[0] as { default?: T } | undefined;
@@ -55,6 +56,11 @@ export function loadContent(): Content {
       trees: Object.values(familyTreesGlob).map((m) => (m as { default: unknown }).default),
     },
     tropes: firstValue(tropesGlob) ?? { tropes: [] },
+    templates: {
+      templates: Object.values(templatesGlob).flatMap(
+        (m) => (m as { default: { templates?: unknown[] } }).default.templates ?? [],
+      ),
+    },
   };
   return buildContent(raw);
 }
