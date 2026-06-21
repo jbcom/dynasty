@@ -115,11 +115,11 @@ history, replay still bit-identical). Sub-tasks:
   main healthy again.
 
 ### Polish cycle 2 (discovered playtesting the mid-game)
-- [ ] **PL-6 Choice consequence hints.** Choice buttons give NO pre-choice signal of which
-  meters they touch — the cause→effect is only visible AFTER (PL-2 delta badges). Add
-  SUBTLE meter-icon hint dots on each choice (which meters it affects, NOT magnitude or
-  sign) so the strategic layer deepens without spoiling the outcome or breaking immersion.
-  Uses choice.effects + the existing meter icons. Render/UI gate → visual + browser test.
+- [x] **PL-6 DONE** (commit 55505d3). Subtle dimmed meter-icon hints on each choice (which
+  meters it touches, from choice.effects — not magnitude/sign), 40% opacity brightening on
+  hover/focus, aria-labeled, reduced-motion safe. Verified live + EventCard tests green.
+- [ ] [WAIT] **PL cycle-2 ship** — PR for PL-6 (branch feat/polish-cycle-2). Open + merge on
+  green; then the loop continues with the next discovered improvement.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
