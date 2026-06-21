@@ -103,4 +103,21 @@ describe("FD-7 procgen context uses the resolved stack", () => {
     expect(ctx.place).toBe(stack.placeLabel);
     expect(stack.perils).toContain(ctx.perils[0]);
   });
+
+  it("a founded line's procgen names come from its LIVE tree, not the archetype spine (CP-R1)", () => {
+    const founded = foundDynasty(content, {
+      momentId: "irish_famine_1847",
+      surname: "Vane",
+      seed: "s",
+    }).state;
+    const era = content.eras[founded.eraIndex];
+    if (!era) throw new Error("no era");
+    const ctx = buildExpandContext(content, founded, era, createRng("c"));
+    // The surname + member come from the founded line ("Vane"), never the literal
+    // economic-spine "Trump" — even though this is the economic archetype baseline.
+    expect(ctx.surname).toBe("Vane");
+    expect(ctx.member.endsWith(" Vane")).toBe(true);
+    expect(ctx.member).not.toContain("Trump");
+    expect(ctx.rival).not.toContain("Trump");
+  });
 });
