@@ -11,6 +11,9 @@ go in the direction of." So: self-pace; pick the highest-value improvement each 
 own the full PR loop; keep the directive a living plan (expand when discovery reveals
 work, compress when items resolve). Work SERIALLY, no agent swarm
 ([[agent-swarm-discipline]]). Every change stays 0-leak + 0-harness-findings + green CI.
+ALSO OWN (user, 2026-06-21): merge the release-please PRs, and keep ALL workflows green —
+not just feature-PR CI, but the post-merge CD/Release/CodeQL on main too. A red workflow on
+main is a blocker to fix immediately (e.g. PR #47 fixes a long-standing CD APK-build break).
 EXPANSION milestone (EX-1→EX-6) RELEASED — see git history / directive-archive.md.
 
 ## What CONTINUOUS means
