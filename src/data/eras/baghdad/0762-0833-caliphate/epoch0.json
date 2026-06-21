@@ -1,0 +1,215 @@
+{
+  "$comment": "OB-5 — the authored Epoch-0 for a BAGHDAD/caliphate founding. The FINAL slice and the only one outside the 1885 origins era: this is the Abbasid golden age (762–833 CE), the founding of al-Mansur's Round City. The first stage of the story: a fully-written birth → the date recorded → growing up in the new capital (class/station emerging from a city of viziers, merchants, and scholars) → schooling → the calling crystallizing. ALL prose fits the caliphate, NOT 1885: no 'doctor with a ledger' anachronism — the midwife and the household's hired scribe/astrologer record the day; the year (762) comes from the era, the seed-drawn month/day still narrated via {birth_date}. Each choice sets a CAUSAL ANCHOR the existing rich caliphate events (Round City, House of Wisdom, Silk Road, Barmakid fall, the Mihna) read. Place-gated to baghdad; higher weight than the generic beats. Culture: arabic_abbasid. Cue: desert heat, the Tigris market. Trope: frontier-capital-origin (a literal new-built capital).",
+  "era": "caliphate",
+  "events": [
+    {
+      "id": "ev_cal_birth",
+      "era": "caliphate",
+      "place": "baghdad",
+      "year": 762,
+      "title": "Born as the City Is Drawn",
+      "scene": "You come into the world in a house of sun-dried brick by the Tigris, in the very season the caliph al-Mansur's surveyors are pacing the riverbank, scratching into the mud the perfect circle of a capital that does not yet exist. The desert heat presses at the lattice; from the water comes the shout of boatmen and the first hammer-blows of a city being born around you. The midwife wipes her hands; the household's hired scribe, who keeps the family's days against the stars, dips his reed and asks the hour, then sets down the date of your arrival.",
+      "researchNote": "OB-5 birth opener for Baghdad/caliphate — the FINAL slice. Sets `emerged` so the Epoch-0 chain begins; narrates the seed-drawn date via {birth_date} (year 762 from the era). Era-appropriate: midwife + a household scribe/astrologer record the day, NOT a modern doctor with a ledger. Ties to ev_cal_round_city: born exactly as the Round City is being laid out.",
+      "historicity": "personal",
+      "tags": ["epoch0", "birth", "diegetic"],
+      "requires": { "flags": ["founded_line"], "notFlags": ["emerged"], "meters": {}, "personality": {} },
+      "weight": 5000,
+      "choices": [
+        {
+          "id": "listen_to_the_scribe",
+          "text": "You listen to the scribe enter the day, the way he records all the family's hours.",
+          "effects": {},
+          "personality": {},
+          "setFlags": ["emerged"],
+          "outcome": "“{birth_date},” the scribe reads back, and lets the ink dry. You are born with the city itself — and a line that begins with the capital may rise as far as the capital does, which is to say: without limit."
+        }
+      ]
+    },
+    {
+      "id": "ev_cal_naming",
+      "era": "caliphate",
+      "place": "baghdad",
+      "year": 762,
+      "title": "A Name Before God and the City",
+      "scene": "On the seventh day the family gathers to name you. The {family_name} name carries the line; the given name is its own argument about who you will be in this new world. Some name from the Book and the faith that orders all things; some for a forebear whose memory the family means to honor and extend; some choose a name simply for its beauty and good omen. The name is spoken, a blessing said over you, and you become {full_name}.",
+      "researchNote": "OB-5: given-naming as the seventh-day naming (aqiqah-flavored, kept light and non-ritually-specific) in the Abbasid capital — from the Book / for a forebear / for beauty and good omen. Given name dealt from the arabic_abbasid pool at founding; this beat sets `named` + frames the choice (early personality anchor).",
+      "historicity": "personal",
+      "tags": ["epoch0", "naming", "diegetic", "trope:frontier-capital-origin"],
+      "requires": { "flags": ["founded_line", "emerged", "gender_revealed"], "notFlags": ["named"], "meters": {}, "personality": {} },
+      "weight": 980,
+      "choices": [
+        {
+          "id": "named_from_the_book",
+          "text": "Named from the Book — a name rooted in the faith that orders the whole city.",
+          "effects": { "reputation": 3 },
+          "personality": { "inward": 2 },
+          "setFlags": ["named", "named_for_saint"],
+          "outcome": "A devout name in a devout capital. The mosque and the market both will know it, and a name from the Book opens doors in each."
+        },
+        {
+          "id": "named_for_a_forebear",
+          "text": "Named for a forebear the family means to honor — the line reaching backward.",
+          "effects": { "loyalty": 3 },
+          "personality": { "inward": 2 },
+          "setFlags": ["named", "named_for_kin"],
+          "outcome": "An ancestor's name carried into the new capital. The dead are honored, and the living are expected to be worthy of them."
+        },
+        {
+          "id": "named_for_beauty",
+          "text": "Named for beauty and good omen — a name chosen for the future it suggests.",
+          "effects": { "health": 2, "reputation": 2 },
+          "personality": { "outward": 2 },
+          "setFlags": ["named", "named_for_fortune"],
+          "outcome": "A name like a wish spoken aloud. In a city being built on ambition, a hopeful name is a small, early act of nerve."
+        }
+      ]
+    },
+    {
+      "id": "ev_cal_childhood_station",
+      "era": "caliphate",
+      "place": "baghdad",
+      "year": 770,
+      "title": "What the Round City Teaches",
+      "scene": "You are old enough now to read the city, and the city is the center of the world. The Round City is rising — the caliph's palace and the great mosque at its heart, the markets pushing out beyond the walls, caravans arriving from Samarkand and Córdoba and the lands of the silk. You watch who holds power here: the viziers who run the empire's ledgers, the merchants whose silver crosses continents, the scholars whose words travel further than any army. You see that in this city a clever family can rise from nothing in a single generation — and you begin to wonder which road is yours.",
+      "researchNote": "OB-5: class/station emerges early as an organic response to observing the form + function of the Abbasid capital (user). The lesson is meritocratic mobility within a court-and-commerce-and-learning city — distinct from the 1885 places. Sets an early-pressure anchor the calling reads. Ties to the existing caliphate events (viziers, Silk Road, House of Wisdom).",
+      "historicity": "personal",
+      "tags": ["epoch0", "childhood", "diegetic", "trope:frontier-capital-origin"],
+      "requires": { "flags": ["founded_line", "emerged", "gender_revealed", "named"], "notFlags": ["station_seen"], "meters": {}, "personality": {} },
+      "weight": 940,
+      "choices": [
+        {
+          "id": "covet_the_court",
+          "text": "You fix your eyes on the heights — the palace, the silver, the scholars' renown.",
+          "effects": { "reputation": 2 },
+          "personality": { "outward": 3, "grandiosity": 4 },
+          "setFlags": ["station_seen", "born_wanting"],
+          "outcome": "Some children are content to live in the great city's shadow. You mean to cast one. The wanting will not leave you now."
+        },
+        {
+          "id": "study_the_viziers",
+          "text": "You study the viziers — power in this empire lives in the keeping of its books.",
+          "effects": { "power": 2 },
+          "personality": { "inward": 4 },
+          "setFlags": ["station_seen", "watched_the_ledger"],
+          "outcome": "You see that the man who administers the empire outlasts the man who merely fights for it. The reed and the ledger, you decide, are mightier than the sword — and you mean to wield them."
+        },
+        {
+          "id": "trust_faith_and_kin",
+          "text": "You trust the faith and your own household, like the steadiest families of the city.",
+          "effects": { "loyalty": 4 },
+          "personality": { "inward": 2 },
+          "setFlags": ["station_seen", "head_down_youth"],
+          "outcome": "There is a shelter in faith and family that the court's turning fortunes cannot reach. Whether shelter alone can found a great line is a question for later years."
+        }
+      ]
+    },
+    {
+      "id": "ev_cal_schooling",
+      "era": "caliphate",
+      "place": "baghdad",
+      "year": 774,
+      "title": "The Kuttab and the Master",
+      "scene": "You are sent to the kuttab to learn your letters and the Book, and from there to a teacher — a Persian master named Salman, who came to the new capital as everyone does, carrying more learning than coin. He has watched the city raise some pupils to the caliph's own circle and grind others back into the crowd, and he has a careful eye for which is which. He keeps you after the others one evening. \"There is something in you,\" he says. \"In this city that is not rare. What is rare is knowing what to do with it before the city decides for you.\"",
+      "researchNote": "OB-5: the calling EMERGES (user) — not one static pick. The kuttab + a learned Persian master is the first pressure that bends the child toward a bent. Sets `schooled`, an anchor the crystallization reads. Salman reflects the cosmopolitan, learning-saturated capital, distinct from the 1885 teachers. Foreshadows the House of Wisdom path.",
+      "historicity": "personal",
+      "tags": ["epoch0", "childhood", "diegetic", "trope:frontier-capital-origin"],
+      "requires": { "flags": ["founded_line", "station_seen"], "notFlags": ["schooled"], "meters": {}, "personality": {} },
+      "weight": 930,
+      "choices": [
+        {
+          "id": "devour_the_books",
+          "text": "You devour every text he sets you — grammar, the Book, then geometry and the stars.",
+          "effects": { "reputation": 3 },
+          "personality": { "inward": 3 },
+          "setFlags": ["schooled", "leaned_learning"],
+          "outcome": "Salman begins bringing you translations the city has only just received from the Greeks and the Persians. A door has opened toward the House of Wisdom the caliphs will build."
+        },
+        {
+          "id": "work_the_room",
+          "text": "You learn the people — every merchant, official, and supplicant in the suq and the court.",
+          "effects": { "loyalty": 3 },
+          "personality": { "outward": 4 },
+          "setFlags": ["schooled", "leaned_people"],
+          "outcome": "You discover you can move through the city's tangled ranks and be welcome in each, from the dockside to the palace gate. In a capital run on patronage, that ease is power."
+        },
+        {
+          "id": "leave_for_the_trade",
+          "text": "You leave the lessons for the family's trade — the caravans will not wait on scholars.",
+          "effects": { "money": 200, "health": 2 },
+          "personality": { "inward": 2 },
+          "setFlags": ["schooled", "leaned_labor"],
+          "outcome": "Salman lets you go to the warehouses and the wharves with real regret. The Silk Road does not care what you might have been — only what you can buy low and sell dear before the next caravan."
+        }
+      ]
+    },
+    {
+      "id": "ev_cal_calling_crystallizes",
+      "era": "caliphate",
+      "place": "baghdad",
+      "year": 780,
+      "title": "What You Are For",
+      "scene": "You are a young {given_name} {surname} now, grown into the body and the dazzling capital that made you. The loose pulls of childhood have set into a direction. Baghdad is the greatest city on earth and still rising — its court, its markets, its houses of learning all hungry for those bold enough to claim a place. A line must plant a flag its descendants can rally to for a hundred years and more. Standing where the Tigris curls past the Round City, you feel which way you will go.",
+      "researchNote": "OB-5: the calling CRYSTALLIZES into the line's archetype (user: calling IS the archetype, and it EMERGES). All six archetypes offered, each mapped to a caliphate power-base; setsArchetype commits it. Prior schooling/station anchors color which feel natural. Self-excludes the generic ev_birth_calling via the OB-5 has_authored_epoch0 flag. Outcomes seed the existing caliphate events (Silk Road, vizierate, House of Wisdom, etc.).",
+      "historicity": "personal",
+      "tags": ["epoch0", "calling", "diegetic"],
+      "requires": { "flags": ["founded_line", "schooled"], "notFlags": ["calling_chosen"], "meters": {}, "personality": {} },
+      "weight": 920,
+      "choices": [
+        {
+          "id": "crystallize_economic",
+          "text": "Wealth. You will master the Silk Road — silver east, silk and paper west, profit both ways.",
+          "effects": { "money": 500, "power": 3 },
+          "personality": { "grandiosity": 3 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "economic",
+          "outcome": "The Magnate's road: Baghdad sits astride the trade of the known world, and you mean to take your cut of all of it. The line will be merchants whose silver crosses continents and whose word is good from Córdoba to Chang'an."
+        },
+        {
+          "id": "crystallize_political",
+          "text": "Power. You will serve in the caliph's court — and become the hand that runs the empire.",
+          "effects": { "power": 5 },
+          "personality": { "outward": 3 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "political",
+          "outcome": "The Statesman's road: the vizierate, the dīwān, the quiet machinery by which an empire is actually governed. The line will sit beside the throne — a place of immense power and, as the Barmakids will learn, immense danger."
+        },
+        {
+          "id": "crystallize_religious",
+          "text": "Faith. You will become a voice of the religion that orders the whole of the realm.",
+          "effects": { "reputation": 5 },
+          "personality": { "inward": 3 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "religious",
+          "outcome": "The Prophet's road: the mosque, the madrasa, the authority of the learned in matters of God and law. The line will guide the conscience of the caliphate — a power even caliphs must reckon with, as the coming Inquisition of belief will show."
+        },
+        {
+          "id": "crystallize_technological",
+          "text": "Knowledge. You will join the translators and astronomers gathering under the caliph's eye.",
+          "effects": { "reputation": 3, "money": 200 },
+          "personality": { "inward": 4 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "technological",
+          "outcome": "The Visionary's road: the House of Wisdom, where the learning of the Greeks, Persians, and Indians is gathered, translated, and surpassed. The line will be scholars whose treatises on algebra and the stars travel further than any caliph's army."
+        },
+        {
+          "id": "crystallize_entertainment",
+          "text": "The court's delight. You have the gift of verse and song the caliph's circle prizes above gold.",
+          "effects": { "reputation": 4, "money": 100 },
+          "personality": { "outward": 4 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "entertainment",
+          "outcome": "The Star's road: the poet's dais, the singer at the caliph's feast, the wit a court remembers for centuries. The line will be the voice of the golden age — and a favored poet sits closer to power than many a general."
+        },
+        {
+          "id": "crystallize_athletic",
+          "text": "The body. You are the finest rider and bowman of your quarter, schooled in the arts of the horse.",
+          "effects": { "reputation": 4, "power": 1 },
+          "personality": { "grandiosity": 3 },
+          "setFlags": ["calling_chosen"],
+          "setsArchetype": "athletic",
+          "outcome": "The Champion's road: furusiyya — the mastery of horse, bow, and blade that the court and the camp both honor. The line will win its name in the field and the contest, where prowess is seen by all and owed to no patron."
+        }
+      ]
+    }
+  ]
+}
