@@ -113,6 +113,50 @@ the diegetic birth sequence instead of a form. Re-sequenced as CP-7r below.
   driven by the normal event engine + 6-slot events; calling + the four axes are
   lived Epoch-0 beats, not picker screens. The CP-7 panel UI is retired.
 
+## CP-R-ARCH — split the conflated power archetypes; redistribute content (decision, 2026-06-20)
+
+The user: "some of the stuff we kept Trump-only originally — because we originally put the
+majority of writing to Trump — could be split out, like a Hollywood/entertainment dynasty, a
+religious dynasty… there's also a legacy we haven't explored, an athletic dynasty." Same
+dissolution pattern one level up: the POWER ARCHETYPE itself was partly conflated. The
+Trump-written life-arc (real estate, casinos, branding, reality TV) is really economic +
+entertainment material wearing one "economic" label.
+
+**Locked decisions (user-approved):**
+- **New first-class archetypes:** add `entertainment` (fame/spectacle/celebrity) and `athletic`
+  (physical prowess → celebrity → empire) alongside `economic | political | technological |
+  religious`. Six total. Each is a distinct POWER BASE the line is built on — not a calling
+  (the calling is the generational lens layered on top; archetype is the foundation).
+- **Each new archetype gets:** a family-tree spine (`family-trees/entertainment.json`,
+  `family-trees/athletic.json`), `ARCHETYPE_START` + `ARCHETYPE_SEED_FLAGS` entries, slot
+  resolution (`slots.dynasty.{entertainment,athletic}`), and a content fan-out.
+- **Content split = redistribute by true power base, don't duplicate.** Re-tag each existing
+  event by what it's actually about: tower/casino/real-estate deals → economic; reality-TV /
+  branding / celebrity / spectacle → entertainment; etc. An event usable by more than one
+  archetype is tagged for each and archetype-gated at runtime (the tokenized copy is now SHARED
+  material across kinds, "absorb & redistribute" — the user's exact directive: rename, tear
+  apart, repurpose). No copy-paste forks.
+
+Mechanism: events carry an archetype-applicability signal (a tag set or `archetypes: [...]`) the
+event pool filters by the run's archetype, the same way branch/place gate today. This composes
+with CP-R-ERA: an event lives at `<place>/<period>/` and declares which archetypes it serves.
+The economic life-arc stays the economic dynasty's content; the entertainment/athletic slices
+are carved from the spectacle/celebrity events already written, plus CP-R6 breadth.
+
+This is a NEW unit (CP-R-ARCH); it slots after the CP-R1 dissolution (the content must already be
+tokenized/founded-aware before it can be archetype-redistributed) and feeds CP-R6 breadth.
+
+**Expansion (user, 2026-06-20): audit + re-slot ALL bespoke content, not just Trump.** Because
+there is so much bespoke content, a preceding CP-R-AUDIT pass goes through EVERY authored event —
+the Trump life-arc, the Musk + Kennedy prologue chains, AND all the alt-history branch timelines
+(`usa.nazi.json`, `*.theocracy.json`, `*.media.json`, …) — and classifies each by (a) power
+archetype(s), (b) place, (c) time/period, (d) whether its "branch" is really a PLACE-and/or-TIME-
+slotted dynasty rather than a bespoke literal. The output is a re-slotting map: event id → place ×
+period × archetype(s) × branch-as-condition. The principle: NOTHING stays literal-bespoke. The
+Nazi-era content, for instance, becomes generic content gated by a place/time/flag condition (an
+occupied-America world-state), not a hand-forked file. CP-R-ARCH then executes the map. This is the
+final form of the user's "rename, tear apart, repurpose — absorb everything, waste nothing."
+
 ## CP-R-ERA — eras reorganized by PLACE × TIME, glob-loaded (decision, 2026-06-20)
 
 The user: "the eras need much better organization… we have nazis and boyhood etc; we
