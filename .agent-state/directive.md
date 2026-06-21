@@ -12,8 +12,14 @@ own the full PR loop; keep the directive a living plan (expand when discovery re
 work, compress when items resolve). Work SERIALLY, no agent swarm
 ([[agent-swarm-discipline]]). Every change stays 0-leak + 0-harness-findings + green CI.
 ALSO OWN (user, 2026-06-21): merge the release-please PRs, and keep ALL workflows green —
-not just feature-PR CI, but the post-merge CD/Release/CodeQL on main too. A red workflow on
-main is a blocker to fix immediately (e.g. PR #47 fixes a long-standing CD APK-build break).
+not just feature-PR CI, but the post-merge CD/Release on main too. PR #47 fixed a
+long-standing CD APK break (proguard-android.txt → -optimize.txt for Gradle 9.6/R8). Release
++ dependabot PRs auto-merge via `.github/workflows/automerge.yml` (approve + --auto --squash).
+PRIVATE REPO (user): keep it private. CodeQL = GitHub default-setup
+(`dynamic/github-code-scanning/codeql`), NOT a repo workflow file — user wants it DELETED
+(low value on a private repo). [BLOCKER — needs the user]: disable it in repo Settings →
+Code security → Code scanning → CodeQL default setup; the `gh api code-scanning/default-setup`
+call returns 403, so the agent can't toggle it via tools.
 EXPANSION milestone (EX-1→EX-6) RELEASED — see git history / directive-archive.md.
 
 ## What CONTINUOUS means
