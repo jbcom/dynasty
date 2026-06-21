@@ -39,6 +39,15 @@ function isAliveNow(m: LiveMember): boolean {
 function lifespan(m: LiveMember): string {
   return m.died !== undefined ? `${m.born}–${m.died}` : `b. ${m.born}`;
 }
+
+// The current protagonist's partner (CP-5), if any — surfaced as a "Consort" marker so
+// the lineage reads as relationships, not just a roster of names (PL-8).
+const partnerId = $derived(family?.partnerId);
+function roleOf(m: LiveMember): string | null {
+  if (m.isProtagonist) return "You";
+  if (m.id === partnerId) return "Consort";
+  return null;
+}
 </script>
 
 <section class="lineage">
@@ -52,14 +61,20 @@ function lifespan(m: LiveMember): string {
         <span class="gen-label">Generation {g.gen + 1}</span>
         <div class="members">
           {#each g.members as m (m.id)}
-            <div
-              class="member"
-              class:protagonist={m.isProtagonist}
-              class:dead={!isAliveNow(m)}
-            >
-              <span class="name">{m.given} {m.surname}</span>
+            {@const role = roleOf(m)}
+            {@const dead = !isAliveNow(m)}
+            <div class="member" class:protagonist={m.isProtagonist} class:dead>
+              <span class="name">
+                {m.given}
+                {m.surname}{#if dead}<span
+                    class="cross"
+                    role="img"
+                    title="Deceased"
+                    aria-label="deceased">&#10013;</span
+                  >{/if}
+              </span>
               <span class="life">{lifespan(m)}</span>
-              {#if m.isProtagonist}<span class="badge">You</span>{/if}
+              {#if role}<span class="badge" class:consort={role === "Consort"}>{role}</span>{/if}
             </div>
           {/each}
         </div>
@@ -149,5 +164,16 @@ function lifespan(m: LiveMember): string {
     padding: 0.05rem 0.35rem;
     border-radius: 0.2rem;
     margin-top: 0.15rem;
+  }
+  /* The consort reads as a quieter, outlined badge — present in the line but not the
+     protagonist (PL-8). */
+  .badge.consort {
+    color: var(--mmm-gold);
+    background: transparent;
+    border: 1px solid var(--mmm-gold-deep);
+  }
+  .cross {
+    color: var(--mmm-text-dim);
+    font-size: 0.78rem;
   }
 </style>

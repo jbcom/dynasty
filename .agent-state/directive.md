@@ -55,11 +55,16 @@ screenshots), compress as they ship. Each cycle picks the highest-value [ ] item
 - [x] **PL-7 DONE** (commit 960cdfe) — Timeline tab showed deep-history eras a modern line
   never lived (a 1885 line listed "The Caliphate Dawn 762–833"). Now starts at the line's
   founding era through the current; pre-founding eras excluded. Live-verified + new test.
-- [ ] [WAIT] **PL cycle-3 ship** — open + merge the PL-7 PR (branch feat/polish-cycle-3) on
-  green (e2e covers the tab via "inter-era tabs render"); then continue the loop.
-- [ ] **PL-8 (cycle 4)** — next discovery: the Lineage member cards show only name + birth
-  year; no role (spouse / heir / deceased) context. Consider surfacing role/status for a
-  richer dynasty view. Also still un-inspected: Stats, Dossier, News, Markets, end report.
+- [x] **PL cycle-3 ship — MERGED** (PR #41, 1435d5f). PL-7 on main.
+- [x] **PL-8 DONE** (commit e17b2f9) — Lineage member cards now show ROLE: outlined "Consort"
+  badge for the protagonist's partner (vs filled "You"), + a ✝ deceased mark (aria-labeled)
+  alongside the existing dimmed/born–died styling. Live-verified (Thomas=You, Nancy=Consort)
+  + new LineageView.browser test.
+- [ ] [WAIT] **PL cycle-4 ship** — open + merge the PL-8 PR (branch feat/polish-cycle-4) on
+  green (Lineage is tab-only, e2e covers it); then continue the loop.
+- [ ] **PL-9 (cycle 5)** — still un-inspected for polish: Stats (Trajectory chart), Dossier,
+  News ticker, Markets, and the legacy/end report (the run's payoff — high impact). Playtest
+  one, pick the highest-value gap, ship it.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
