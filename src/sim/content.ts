@@ -56,6 +56,15 @@ export interface Content {
   eras: Era[];
   eventsByEra: Map<string, GameEvent[]>;
   allEvents: GameEvent[];
+  /**
+   * EPOCH-0 beats (tag `epoch0`) — the diegetic birth + partner + heirs life-stage
+   * events that must fire at the START of EVERY run regardless of the founding era
+   * (a baghdad/caliphate line needs to be born, partner, and beget just like a
+   * new-york/origins line, or it goes extinct in one generation — EX-5). Gated by
+   * the line's own state flags, not by an era, so the eligibility pass injects them
+   * into whatever era the run begins in.
+   */
+  epoch0Events: GameEvent[];
   butterflyRules: ButterflyRule[];
   consequences: Consequence[];
   endings: Ending[];
@@ -368,6 +377,7 @@ export function buildContent(raw: RawContent): Content {
     eras,
     eventsByEra,
     allEvents,
+    epoch0Events: allEvents.filter((e) => e.tags.includes("epoch0")),
     butterflyRules: butterfly.rules,
     consequences: butterfly.consequences,
     endings: endingsFile.endings,
