@@ -166,7 +166,7 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 ### SS-7 Onboarding rebuild
 - [x] SS-7 Period→Class→Race/Culture funnel; Epoch-0 seeds the GOAP brain; e2e; live-verified
 ### SS-8 Multi-line world sim
-- [ ] SS-8 all unplayed waves advance per turn as agents; stored state; opposing/contributing/neutral; glimpse triggers; deterministic; tests
+- [x] SS-8 all unplayed waves advance per turn as agents; stored state; opposing/contributing/neutral; glimpse triggers; deterministic; tests
 ### SS-9 Convergence + ending lattice
 - [ ] SS-9 ~16-20 endings (destination×coloring×sub-variant); motivator-gated reachability; other-lines fates fold in; tests
 ### SS-10 Spine authoring
@@ -178,7 +178,13 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 ### SS-13 Read-model + bridge
 - [ ] SS-13 bridge exposes macro-act/rung/motivators/act-chapter/glimpses; pure; tests
 ### SS-14 UI novel presentation
-- [ ] SS-14 acts/chapters + motivators + rung + glimpses + register shift; mobile-first; browser tests; live-verified in Chrome
+- [ ] SS-14 acts/chapters + motivators + rung + glimpses + register shift; mobile-first; browser tests; live-verified.
+  USER STEER (2026-06-21): a MUCH more polished use of Svelte — incl. SHADERS (WebGL/GLSL for
+  atmospheric backdrops/transitions per era register) — and significantly BETTER ORGANIZATION of
+  the whole UI layer (clean component architecture, not a thin port of the old HUD). A real UI
+  rebuild, not a reskin. Keep luxury "Dynasty" tokens + real-2D-asset icons
+  ([[dynasty-ui-conventions]]); mid-tier render budget ([[mobile-android]]). Live-verify via
+  chrome-devtools-mcp OR the claude-for-safari skill OR claude-in-chrome (whichever is free).
 ### SS-15 Determinism + acceptance gate
 - [ ] SS-15 full playthrough hour+ beat count, bit-identical replay incl all lines, 0 leaks, harness 0-findings; remove ALL dead old-model code; full gate green
 ### SS-16 Docs + PR
