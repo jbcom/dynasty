@@ -129,3 +129,20 @@ The systems built (branch resolver, terms/titles, slot events, per-branch timeli
 pools, compile-at-0, systemic markets/ranks) are a GENERIC dynastic-saga grammar.
 Realized as the rename to "Dynasty" + the 3 playable Era-0 sagas + carousel (DE-5),
 then generalized further into "found your own dynasty" (the FOUND-YOUR-OWN batch).
+
+---
+
+## Batch — FOUNDING CONTROL PANEL → DIEGETIC BIRTH & FULL BESPOKE→SLOT DISSOLUTION (batch-20260621-control-panel) — RELEASED via PR #31 (squash 2151979, 2026-06-21)
+
+The founding pivot + the complete dissolution of the literal-dynasty model. Shipped as one branch (`founding-control-panel`), 30+ commits, merged clean (CI green, CodeRabbit/CodeQL/Q pass, 0 unresolved threads).
+
+What shipped (CP-1..CP-7 + the CP-R reassessed order):
+- **Identity dissolved (CP-1..R1):** PLACE × CULTURE × thematic-axes orthogonal split; `wasp_east_coast` → pure cultures; identity tokens (`{given_name}`/`{surname}`/`{full_name}`/`{family_name}`) resolve from the run's LIVE family tree via `runTerms`; all literal `Donald`/`Trump`/`Friedrich` fallbacks removed; `ev_donald_*` → `ev_protagonist_*`; procgen names from the live tree.
+- **Calling / gender / axes / partner / save (CP-2..6):** callings.ts (drift+trope-weight); gender + successionMode; the four Epoch-0 axes place-and-time-scaled by world-stack `axisIntensity`; the partner/in-law mechanic; save carries the full founding config.
+- **Six power archetypes + bespoke→slot (CP-R-ARCH/R7):** added `entertainment` + `athletic`; events declare `archetypes:[...]`; the literal Trump/Kennedy/Musk biography refactored into generic slotted archetype/trope events (Fred→your father, Friedrich→the founder, Kennedy/Musk prologues → political/technological founder tropes; rival-house timelines → the tech magnate / the rival dynasty / the great evangelist). Alt-history branches collapsed into one timeline per scope (34→8 files), branch-tagged with REPLACE selection. kennedy/musk person-timelines folded into eastcoast/westcoast as rival-house backdrop.
+- **Eras by PLACE × TIME (CP-R-ERA):** `eras/<place>/<period>/events.json`, recursive glob, place+period from path; baghdad/new-york/_shared; era-layout contract test.
+- **Composed + diegetic seed-dealt birth (CP-R2..R5):** `foundByComposition` (place×era×culture×archetype); `dealComposition` deals a seed-random origin; TitleScreen → surname+seed → 6-slot diegetic birth (emerge→place reveal→gender→naming→lived calling/axis beats); control panel retired; save carries the composition + replay parity.
+- **Places catalog (CP-R3):** `world/places.json` (sensory cue → place, default culture, valid eras) + resolvers + the every-(place×era)-founds-a-valid-run invariant.
+- **Dev harness (CP-R7):** `src/sim/harness.ts` (tracePlaythrough/validateTrace/auditTimelines) dumps `artifacts/timeline-audit.json` and asserts linear-time / no-leaks / clean-progression; the audit reports **0 findings over 180 Gen-0 permutations / 7058 beats**. In-app DEV overlay (fast-forward + timeline dump).
+
+DoD met: **0 preset-person leaks** across all player-facing content; live-verified modern AND deep-history (baghdad/caliphate) lines render their own name; typecheck 0/0, 474 unit, 67 browser, 7 e2e, build OK; docs aligned (README + new docs/STATE.md + CLAUDE.md). Specs: docs/superpowers/specs/2026-06-21-founding-control-panel.md + the two CP-R-AUDIT maps + docs/STATE.md.
