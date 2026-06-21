@@ -46,14 +46,19 @@ that generates it at breadth.
 - [x] **EX-1 DONE: place×era coverage gap matrix → docs/EX-1-coverage-gap.md.** Per-era density is healthy (18–51 events/era) and — because most events are archetype-AGNOSTIC — every archetype already sees nearly the full pool, so the primary gap is NOT archetype reach. The real gap is PLACE: all 8 non-baghdad places map eraContentDir=new-york (they share the new-york arc, coherent + 0-leak but not place-distinct). Priority: EX-2 fork the 8 places' own period content → EX-3 athletic/entertainment locked depth → EX-4 GenAI breadth → EX-5 millennium run. Every cell stays at 0 harness findings.
 - [x] **EX-2 DONE (origins coverage): per-place life-arc breadth across all 8 places.** Built the place gate (events with `place:<id>` fire only for a matching founding; absent = agnostic) + the KEY multi-file-per-era merge fix (buildContent appends, not overwrites — the place-arc model needs it). Authored place-SPECIFIC `origins` arcs for all 8 shared-arc places: ireland (land/parish/letter), bavaria (conscription/brewing/German-name), south_africa (frontier/war-on-veld/restlessness), west_coast (gold-coast/reinvention), east_coast (old-money-wall/machine), canada (northern-reach/two-nations), american_midwest (grain-rail/populist-tide), american_south (new-south/caste). Verified: each place routes 2–3 own events, ZERO foreign-place leakage; harness 0 findings; validator refined (Friedrich = legit Bavarian given name). Added 3 tropes (tenant-and-landlord/faith-and-community/letter-from-away). NOTE: era-content DIR names (new-york/_shared/baghdad) ≠ place ids. (Later eras stay shared/place-agnostic — per-place later-era breadth is EX-4 GenAI territory.)
 - [x] **EX-3 DONE: athletic depth filled (entertainment already healthy).** Athletic was the true greenfield (2 tagged events); authored a distinct athletic arc spanning boyhood→primetime: schoolyard prodigy → turning pro (player-vs-owner fork) → the franchise gambit (athletic+economic) → athlete-becomes-brand (athletic→entertainment pivot) → raising the next champions (sporting-dynasty succession). Athletic now has 7 tagged events, 5 athletic-distinct (hidden from other archetypes). Entertainment was already 15 tagged (8 locked) from the CP-R-ARCH dissolution — at parity. Files live in new-york period dirs as place-agnostic, archetype-locked. Harness 0 findings; 474 unit + 67 browser green.
-- [ ] **EX-4 GenAI breadth toolkit.** Wire the discussed generation pieces (Gemini/dev-bulk
-  retag + extrapolate over the trope catalog) to populate the space at scale, validated
-  through the harness (0 leaks, branch-density, chronology) before anything lands.
-- [ ] **EX-5 The millennium run.** A founded line should be able to run ~1000 years across
-  the full era chain with rich, non-repeating content each generation; verify via the dev
-  overlay fast-forward + a harness long-run audit.
-- [ ] **EX-6 DoD.** Full gate + harness audit at 0 findings over a wide permutation sweep;
-  live-verify a long multi-generational run; PR; reviewer trio; squash-merge; Status RELEASED.
+- [ ] [WAIT] **EX-4 GenAI breadth toolkit** — opens on a fresh branch AFTER PR #33 merges
+  (it builds on the EX-1/2/3 content + place-gate infra; building on a stale base would
+  force a rebase). Wire the discussed generation pieces (Gemini/dev-bulk retag + extrapolate
+  over the trope catalog) to populate the space at scale, validated through the harness
+  (0 leaks, branch-density, chronology) before anything lands. NOTE external dep: live
+  generation needs the user's Gemini key; the toolkit + its harness-gated validation are
+  buildable without it (dev-bulk run is gated behind the key).
+- [ ] [WAIT] **EX-5 The millennium run** — after EX-4 breadth lands. A founded line runs
+  ~1000 years across the full era chain with rich, non-repeating content each generation;
+  verify via the dev overlay fast-forward + a harness long-run audit.
+- [ ] [WAIT] **EX-6 DoD** — after EX-5. Full gate + harness audit at 0 findings over a wide
+  permutation sweep; live-verify a long multi-generational run; PR; reviewer trio;
+  squash-merge; Status RELEASED.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
