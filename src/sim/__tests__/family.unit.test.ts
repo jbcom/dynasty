@@ -265,4 +265,49 @@ describe("CP-5 takePartner", () => {
     const after = applyChoice(c, founded, ev, "wed", createRng("cp5")).state;
     expect(after.family?.partnerId).toBeDefined();
   });
+
+  it("CP-R6: a setsCalling choice writes the founded line's calling (diegetic calling beat)", () => {
+    const founded = foundDynasty(content, {
+      momentId: "bavaria_1885",
+      surname: "Vane",
+      seed: "cr6",
+    }).state;
+    // A dealt/founded line has no calling until the diegetic beat sets one.
+    expect(founded.founding?.calling).toBeUndefined();
+    const ev: GameEvent = {
+      id: "ev_calling_beat",
+      era: content.eras[founded.eraIndex]?.id ?? "origins",
+      year: 1900,
+      title: "What Calls to You",
+      scene: "s",
+      researchNote: "r",
+      extrapolated: false,
+      startrekInspired: false,
+      tags: [],
+      requires: { flags: [], notFlags: [], meters: {}, personality: {} },
+      weight: 1,
+      repeatable: false,
+      choices: [
+        {
+          id: "be_a_scholar",
+          text: "scholar",
+          effects: {},
+          personality: {},
+          setFlags: [],
+          clearFlags: [],
+          ripples: [],
+          outcome: "o",
+          setsCalling: "scholar",
+        },
+      ],
+    };
+    const c = { ...content, allEvents: [...content.allEvents, ev] };
+    const after = applyChoice(c, founded, ev, "be_a_scholar", createRng("cr6")).state;
+    expect(after.founding?.calling).toBe("scholar");
+    // An unknown calling id is ignored (no-op), not written.
+    const evBad = { ...ev, choices: [{ ...ev.choices[0], setsCalling: "nonexistent" }] } as GameEvent;
+    const cBad = { ...content, allEvents: [...content.allEvents, evBad] };
+    const afterBad = applyChoice(cBad, founded, evBad, "be_a_scholar", createRng("cr6")).state;
+    expect(afterBad.founding?.calling).toBeUndefined();
+  });
 });

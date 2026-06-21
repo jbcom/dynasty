@@ -161,6 +161,15 @@ export function applyChoice(
   // push lastEventYear past the era, which the era rollover would then reset
   // backward) nor consume the era budget — the family's life beats drive the clock.
   const isWorldEvent = event.era === "__world__";
+
+  // SET CALLING (CP-R6): a diegetic calling beat writes the founded line's calling
+  // into its founding metadata, so it drifts every future beget (CP-2). No-op
+  // without a founded line or if the calling id is unknown.
+  const founding =
+    choice.setsCalling && state.founding && callingById(content.callings, choice.setsCalling)
+      ? { ...state.founding, calling: choice.setsCalling }
+      : state.founding;
+
   const resolved: GameState = {
     ...state,
     meters,
@@ -170,6 +179,7 @@ export function applyChoice(
     pending,
     markets,
     family,
+    founding,
     ledger: [...state.ledger, ...newLedger],
     history: [...state.history, { eventId: event.id, choiceId, year: event.year }],
     firedEvents,

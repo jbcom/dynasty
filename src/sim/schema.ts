@@ -123,6 +123,13 @@ export const ChoiceSchema = z.object({
    * family or if a partner already exists. The Epoch-0 "find a partner" beat.
    */
   takesPartner: z.boolean().optional(),
+  /**
+   * SET CALLING (CP-R6): a diegetic Epoch-0 calling beat — this choice sets the
+   * founded line's generational CALLING (a calling id), so the calling is LIVED
+   * (chosen in the birth/childhood) rather than configured up front. No-op without
+   * a founded line. The calling then drifts every future beget's traits (CP-2).
+   */
+  setsCalling: z.string().optional(),
 });
 export type Choice = z.infer<typeof ChoiceSchema>;
 

@@ -108,6 +108,74 @@
       ]
     },
     {
+      "id": "ev_birth_calling",
+      "era": "origins",
+      "year": 1900,
+      "title": "What Calls to You",
+      "scene": "You grow. The world presses its trades and temptations on you, and one pull is stronger than the rest — the bent that will run in the family's blood for generations.",
+      "researchNote": "CP-R6 diegetic calling beat: the generational calling (CP-2) is LIVED — chosen in childhood — rather than configured at founding. The choice drifts every future beget's traits toward the calling.",
+      "historicity": "personal",
+      "tags": ["epoch0", "birth", "diegetic", "calling"],
+      "requires": { "flags": ["founded_line", "named"], "notFlags": ["calling_chosen"], "meters": {}, "personality": {} },
+      "weight": 900,
+      "choices": [
+        {
+          "id": "call_merchant",
+          "text": "The ledger and the deal — you are drawn to trade.",
+          "effects": { "money": 5000 },
+          "personality": { "grandiosity": 2 },
+          "setFlags": ["calling_chosen"],
+          "setsCalling": "merchant",
+          "outcome": "The merchant's eye for a margin settles into you. The line will be counters of coin for generations."
+        },
+        {
+          "id": "call_scholar",
+          "text": "The book and the question — you are drawn to learning.",
+          "effects": { "reputation": 4 },
+          "personality": { "inward": 2 },
+          "setFlags": ["calling_chosen"],
+          "setsCalling": "scholar",
+          "outcome": "The scholar's patience takes root. The line will prize the mind over the moment."
+        },
+        {
+          "id": "call_soldier",
+          "text": "The drill and the duty — you are drawn to arms.",
+          "effects": { "power": 6 },
+          "personality": { "grandiosity": 2 },
+          "setFlags": ["calling_chosen"],
+          "setsCalling": "soldier",
+          "outcome": "The soldier's discipline hardens in you. The line will answer with steel."
+        },
+        {
+          "id": "call_cleric",
+          "text": "The pulpit and the flock — you are drawn to faith.",
+          "effects": { "loyalty": 6 },
+          "personality": { "ideology": 3 },
+          "setFlags": ["calling_chosen"],
+          "setsCalling": "cleric",
+          "outcome": "The cleric's certainty fills you. The line will lead souls as much as estates."
+        },
+        {
+          "id": "call_builder",
+          "text": "The blueprint and the brick — you are drawn to building.",
+          "effects": { "money": 3000, "reputation": 3 },
+          "personality": {},
+          "setFlags": ["calling_chosen"],
+          "setsCalling": "builder",
+          "outcome": "The builder's ambition pours its first foundation. The line will raise things that outlast it."
+        },
+        {
+          "id": "call_courtier",
+          "text": "The whisper and the favor — you are drawn to influence.",
+          "effects": { "power": 3, "reputation": 3 },
+          "personality": { "outward": 2 },
+          "setFlags": ["calling_chosen"],
+          "setsCalling": "courtier",
+          "outcome": "The courtier's instinct for the room awakens. The line will rule through who it knows."
+        }
+      ]
+    },
+    {
       "id": "ev_cp_take_partner",
       "era": "origins",
       "year": 1908,
