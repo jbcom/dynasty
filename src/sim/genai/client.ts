@@ -42,3 +42,16 @@ export function parseGenerated(text: string): unknown[] {
     return [];
   }
 }
+
+/** Extract a single JSON OBJECT from a generation (the scene mode emits one act-file object, not an array). */
+export function parseGeneratedObject(text: string): unknown | null {
+  const trimmed = text.trim();
+  const start = trimmed.indexOf("{");
+  const end = trimmed.lastIndexOf("}");
+  if (start === -1 || end === -1 || end < start) return null;
+  try {
+    return JSON.parse(trimmed.slice(start, end + 1));
+  } catch {
+    return null;
+  }
+}

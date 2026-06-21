@@ -9,19 +9,31 @@
  * module is pure given an injected GenerateFn, so the whole pipeline is unit-tested with a stub.
  */
 
+import type { Rung } from "../classRung";
 import type { Content } from "../content";
-import { type GenerateFn, parseGenerated } from "./client";
+import type { Archetype } from "../slots";
+import { type GenerateFn, parseGenerated, parseGeneratedObject } from "./client";
 import { buildPrompt, type GenTarget, systemInstruction } from "./prompt";
+import {
+  buildScenePrompt,
+  mergeSceneFile,
+  type SceneRequest,
+  sceneCanonicalFile,
+  sceneSystemInstruction,
+  validateSceneFile,
+} from "./scene";
 import { type GenContext, validateBatch } from "./validate";
 
 /** The content types the expander can target. */
-export type ExpandType = "events" | "tropes" | "endings" | "callings" | "timelines";
+export type ExpandType = "events" | "tropes" | "endings" | "callings" | "timelines" | "scene";
 
 /** A request to expand a content type, scoped + counted. */
 export interface ExpandRequest {
   type: ExpandType;
   /** Scope for event/timeline modes (place/era/archetypes); ignored by global modes. */
   target?: Partial<GenTarget>;
+  /** Scope for the `scene` mode: which cell + reach tier's act to flesh into the novel. */
+  scene?: { wave: string; cls: Rung; archetype: Archetype; tier: number };
   count: number;
 }
 
@@ -79,8 +91,11 @@ function appendByKey(key: string) {
   };
 }
 
-/** The mode registry — one uniform shape per content type. */
-const MODES: Record<ExpandType, ExpandMode> = {
+/** Array-shaped expand types (the `scene` mode is object-shaped and handled separately). */
+type ArrayExpandType = Exclude<ExpandType, "scene">;
+
+/** The mode registry — one uniform shape per array-shaped content type. */
+const MODES: Record<ArrayExpandType, ExpandMode> = {
   events: {
     canonicalFile: (req) => {
       const place = req.target?.place;
@@ -187,12 +202,42 @@ function exemplarPrompt(noun: string, file: string, _content: Content, req: Expa
   ].join("\n");
 }
 
+/** The `scene` mode authors a whole act of the NOVEL — a single schema-validated object, not an array. */
+async function expandScene(req: ExpandRequest, generate: GenerateFn): Promise<ExpandResult> {
+  if (!req.scene) throw new Error("scene mode requires a `scene` cell+tier target");
+  const sceneReq: SceneRequest = req.scene;
+  const text = await generate(sceneSystemInstruction(), buildScenePrompt(sceneReq));
+  const raw = parseGeneratedObject(text);
+  const result =
+    raw === null
+      ? { ok: false as const, reasons: ["unparseable object"] }
+      : validateSceneFile(raw, sceneReq);
+  if (!result.ok) {
+    return {
+      type: "scene",
+      accepted: [],
+      rejected: [{ raw, reasons: result.reasons }],
+      canonicalFile: sceneCanonicalFile(sceneReq),
+      merge: (existing) => existing ?? { acts: [], scenes: [] },
+    };
+  }
+  return {
+    type: "scene",
+    // The accepted unit is the validated act file (acts + scenes); the runner writes the merge.
+    accepted: [result.file],
+    rejected: [],
+    canonicalFile: sceneCanonicalFile(sceneReq),
+    merge: (existing) => mergeSceneFile(existing, result.file),
+  };
+}
+
 /** Run one expand request: prompt → generate → validate → return accepted + a merge fn for the canonical file. */
 export async function expand(
   content: Content,
   req: ExpandRequest,
   generate: GenerateFn,
 ): Promise<ExpandResult> {
+  if (req.type === "scene") return expandScene(req, generate);
   const mode = MODES[req.type];
   const text = await generate(systemInstruction(), mode.prompt(content, req));
   const raws = parseGenerated(text);
@@ -207,4 +252,4 @@ export async function expand(
 }
 
 /** The content types the expander supports (for the runner's --type validation). */
-export const EXPAND_TYPES = Object.keys(MODES) as ExpandType[];
+export const EXPAND_TYPES: ExpandType[] = [...(Object.keys(MODES) as ExpandType[]), "scene"];
