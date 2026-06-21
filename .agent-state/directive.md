@@ -176,7 +176,7 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 ### SS-12 GenAI WRITES THE STORIES
 - [x] SS-12 flesh every scaffolded act/class-track/wave via SS-11; cull weak; harness 0-findings + textQuality clean over ALL generated; no empty scaffolds
 ### SS-13 Read-model + bridge
-- [ ] SS-13 bridge exposes macro-act/rung/motivators/act-chapter/glimpses; pure; tests
+- [x] SS-13 bridge exposes macro-act/rung/motivators/act-chapter/glimpses; pure; tests
 ### SS-14 UI novel presentation
 - [ ] SS-14 acts/chapters + motivators + rung + glimpses + register shift; mobile-first; browser tests; live-verified.
   USER STEER (2026-06-21): a MUCH more polished use of Svelte — incl. SHADERS (WebGL/GLSL for
