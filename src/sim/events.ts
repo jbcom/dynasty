@@ -101,6 +101,7 @@ export function eligibleEvents(content: Content, state: GameState, rng?: Rng): G
     (ev) =>
       !alreadyConsumed(state, ev) &&
       !ownedByOtherArchetype(state, ev) &&
+      !placeMismatch(state, ev) &&
       meetsRequires(state, ev.requires),
   );
   // World-events are AMBIENT PUNCTUATION: only the few most-TIMELY ones (near the
@@ -154,6 +155,18 @@ function ownedByOtherArchetype(state: GameState, ev: GameEvent): boolean {
   if (list.length > 0 && !list.includes(state.archetype)) return true;
   const owner = ev.tags.find((t) => t.startsWith("archetype:"))?.slice("archetype:".length);
   return owner !== undefined && owner !== state.archetype;
+}
+
+/**
+ * PLACE GATE (EX-2): an event with a `place` set is place-SPECIFIC — it fires only
+ * for a founded line whose founding place matches. Absent `place` = place-AGNOSTIC
+ * (the common case; the shared life-arc). Lets a place author its own variant of an
+ * era beat (a Bavarian boyhood vs an Irish one) in `eras/<place>/<period>/` without
+ * it leaking into other places' runs.
+ */
+function placeMismatch(state: GameState, ev: GameEvent): boolean {
+  if (!ev.place) return false;
+  return ev.place !== state.founding?.place;
 }
 
 /**

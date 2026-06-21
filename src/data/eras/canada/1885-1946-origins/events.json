@@ -1,0 +1,75 @@
+{
+  "era": "origins",
+  "events": [
+    {
+      "id": "ev_ca_the_northern_frontier",
+      "era": "origins",
+      "place": "canada",
+      "year": 1890,
+      "title": "The Long Northern Reach",
+      "scene": "The Dominion is vast and barely filled — railways pushing west, timber and fur and grain waiting for anyone with the endurance to take them, a border with a richer republic just to the south. The {surname} line can build a fortune from the northern land, run goods across that long border, or use Canada as the patient staging ground for something bigger.",
+      "researchNote": "Place-specific Canadian origins beat (EX-2): the northern resource frontier + Canada as a waypoint to the US. Generic to any canada founding.",
+      "historicity": "real",
+      "tags": ["origin", "canada", "trope:frontier-capital-origin"],
+      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "weight": 14,
+      "choices": [
+        {
+          "id": "ca_work_the_land",
+          "text": "Build from the northern land — timber, grain, fur, rail",
+          "effects": { "money": 4, "reputation": 2 },
+          "personality": { "inward": 2, "ideology": 2 },
+          "setFlags": ["ca_resource_house"],
+          "outcome": "You wrest a fortune from a hard country. The {surname} line is built on endurance, and it shows in everything the family touches."
+        },
+        {
+          "id": "ca_run_the_border",
+          "text": "Run goods across the long border to the richer south",
+          "effects": { "money": 5, "heat": 3, "reputation": -1 },
+          "personality": { "outward": 4, "grandiosity": 2 },
+          "setFlags": ["ca_border_trade", "head_start"],
+          "outcome": "You learn every crossing and every official's price. The {surname} line profits from the seam between two countries — a useful skill when thirst comes calling."
+        },
+        {
+          "id": "ca_stage_for_the_south",
+          "text": "Use Canada as the patient launch pad for a move on the republic",
+          "effects": { "money": 2, "power": 2 },
+          "personality": { "grandiosity": 3, "outward": 2 },
+          "setFlags": ["ca_southward_minded", "ire_emigration_minded"],
+          "outcome": "You build quietly in the north with your eyes fixed south. The {surname} line gathers strength for a leap into a larger arena."
+        }
+      ]
+    },
+    {
+      "id": "ev_ca_two_nations_one_house",
+      "era": "origins",
+      "place": "canada",
+      "year": 1910,
+      "title": "Two Nations Under One Roof",
+      "scene": "The Dominion is two peoples sharing a country — and the {surname} line must decide whether to bind itself to one community, bridge both, or stand apart and let the divide work for it. In a country built on an uneasy partnership, where a family plants its loyalty shapes every door that opens.",
+      "researchNote": "Canada's founding English/French duality as a distinct social lever for a rising line — alliance, bridging, or opportunistic distance. Place-specific.",
+      "historicity": "real",
+      "tags": ["origin", "canada", "trope:faith-and-community"],
+      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "weight": 11,
+      "choices": [
+        {
+          "id": "ca_bridge_both",
+          "text": "Bridge both communities — be useful to everyone",
+          "effects": { "reputation": 4, "power": 2 },
+          "personality": { "outward": 4 },
+          "setFlags": ["ca_bridge_house"],
+          "outcome": "You make the {surname} name a name both sides trust. In a divided country, the bridge collects a toll from all who cross."
+        },
+        {
+          "id": "ca_bind_to_one",
+          "text": "Bind the line firmly to one community and its loyalties",
+          "effects": { "loyalty": 5, "reputation": 2 },
+          "personality": { "ideology": 3, "inward": 2 },
+          "setFlags": ["ca_partisan_house"],
+          "outcome": "You choose a side and are rewarded with its fierce loyalty. The {surname} name is a pillar of its people, and a stranger to the rest."
+        }
+      ]
+    }
+  ]
+}

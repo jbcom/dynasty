@@ -1,0 +1,106 @@
+{
+  "era": "origins",
+  "events": [
+    {
+      "id": "ev_sa_the_frontier_claim",
+      "era": "origins",
+      "place": "south_africa",
+      "year": 1889,
+      "title": "Veld, Gold, and the Open Frontier",
+      "scene": "The frontier is raw with opportunity — farmland to be claimed, mineral rights to be staked, contracts to be won as the colony pushes inland. The {surname} line can root itself in the soil, chase the glitter under it, or build the machines the diggings cannot do without. The continent rewards nerve and punishes hesitation.",
+      "researchNote": "Place-specific Afrikaner/Cape origins beat (EX-2): the late-19th-c. mineral frontier (gold, diamonds) and farm-to-fortune mobility. Generic to any south_africa founding.",
+      "historicity": "real",
+      "tags": ["origin", "south_africa", "trope:frontier-capital-origin"],
+      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "weight": 14,
+      "choices": [
+        {
+          "id": "sa_stake_the_mineral_rights",
+          "text": "Stake mineral claims — high risk, transformative capital if they pay",
+          "effects": { "money": 6, "heat": 3, "reputation": -1 },
+          "personality": { "grandiosity": 5, "outward": 2 },
+          "setFlags": ["sa_mineral_fortune", "head_start"],
+          "outcome": "You gamble on a claim others passed over. When it pays, the {surname} line has capital while a hundred cautious rivals have only dust."
+        },
+        {
+          "id": "sa_root_in_the_land",
+          "text": "Build a farm-and-trade empire rooted in the land",
+          "effects": { "money": 3, "reputation": 3 },
+          "personality": { "inward": 2, "ideology": 2 },
+          "setFlags": ["sa_landed_house"],
+          "outcome": "You build on soil and steady trade rather than the gamble. The {surname} name becomes a fixture of the district, slow and unshakeable."
+        },
+        {
+          "id": "sa_engineer_the_diggings",
+          "text": "Master the engineering the diggings cannot run without",
+          "effects": { "money": 2, "power": 3 },
+          "personality": { "inward": 4 },
+          "setFlags": ["sa_engineer_lineage", "trade_in_hand"],
+          "outcome": "You sell the colony its machines and its know-how. The {surname} line earns from every claim without staking one — and a taste for invention takes root."
+        }
+      ]
+    },
+    {
+      "id": "ev_sa_the_war_on_the_veld",
+      "era": "origins",
+      "place": "south_africa",
+      "year": 1901,
+      "title": "War Comes to the Veld",
+      "scene": "The colony tears itself apart — farms burned, families herded into camps, loyalties tested at gunpoint. The {surname} line must decide where it stands when neighbours become enemies and the victor's favour will shape a generation of fortunes.",
+      "researchNote": "The South African War (1899–1902) as the defining rupture for Cape/Afrikaner families — collaboration, resistance, or survival. Place-specific.",
+      "historicity": "real",
+      "tags": ["origin", "south_africa", "trope:faith-and-community"],
+      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "weight": 12,
+      "choices": [
+        {
+          "id": "sa_side_with_the_victor",
+          "text": "Read the wind and align with the side that will win",
+          "effects": { "power": 4, "money": 3, "reputation": -2 },
+          "personality": { "outward": 3, "ideology": -2 },
+          "setFlags": ["sa_collaborator_fortune"],
+          "outcome": "You back the winning side before it has won. The {surname} line emerges from the ashes richer and quietly despised — a trade many would make."
+        },
+        {
+          "id": "sa_hold_with_your_people",
+          "text": "Hold with your own people, whatever it costs",
+          "effects": { "reputation": 5, "money": -3, "loyalty": 4 },
+          "personality": { "ideology": 4, "inward": 2 },
+          "setFlags": ["sa_resistance_honor"],
+          "outcome": "You stand with your kin through the worst of it. The {surname} name carries a hard-won honour that no fortune could have bought."
+        }
+      ]
+    },
+    {
+      "id": "ev_sa_the_restless_inheritance",
+      "era": "origins",
+      "place": "south_africa",
+      "year": 1920,
+      "title": "A Restlessness in the Blood",
+      "scene": "The frontier is closing, the easy claims are gone, and the next generation of the {surname} line stares at horizons the colony can no longer offer. Some families dig deeper roots; others breed children who will not stay where they were born. What does the {surname} line teach its young?",
+      "researchNote": "The Cape diaspora impulse — a restless, outward-looking heir who eventually carries the line to richer countries. Sets a frontier-spirit flag the line carries forward.",
+      "historicity": "extrapolated",
+      "tags": ["origin", "south_africa", "trope:letter-from-away"],
+      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "weight": 11,
+      "choices": [
+        {
+          "id": "sa_breed_the_wanderer",
+          "text": "Raise heirs who measure the world by what lies past the horizon",
+          "effects": { "power": 2, "reputation": 2 },
+          "personality": { "grandiosity": 4, "outward": 3 },
+          "setFlags": ["sa_frontier_spirit", "ire_emigration_minded"],
+          "outcome": "Your children grow up certain the colony is too small for them. The {surname} line will one day plant itself in a far larger country."
+        },
+        {
+          "id": "sa_deepen_the_roots",
+          "text": "Teach the young that the land they hold is worth holding",
+          "effects": { "loyalty": 4, "money": 2 },
+          "personality": { "inward": 3 },
+          "setFlags": ["sa_landed_house"],
+          "outcome": "The {surname} line digs in. Whatever the wider world offers, the family's strength stays bound to the veld it knows."
+        }
+      ]
+    }
+  ]
+}
