@@ -1,6 +1,6 @@
 # Continuous Work Directive — Dynasty (maga-money-moves)
 
-**Status:** ACTIVE
+**Status:** RELEASED
 **Owner:** jbogaty (autonomous loop)
 **Mandate (2026-06-21):** POLISH & FEATURES — AUTONOMOUS LOOP. Foundations done:
 found-your-own / diegetic birth / orthogonal identity (PR #31), 1000-year dynasty breadth
@@ -144,8 +144,10 @@ origins ship a fully-written, era-correct Epoch-0; chronology (overheard year) �
 
 ## Batch — convergence-saga (batch-20260621-convergence)
 
-**COMPLETE — all 16 tasks [x]; PR #62 open, awaiting CI green → squash-merge (one PR in flight).**
-586 unit + 78 browser + 7 e2e green; 0 leaks; hour+ acceptance; live-verified in Chrome.
+**COMPLETE + MERGED — all 16 tasks [x]; PR #62 squash-merged to main (66ee633).**
+586 unit + 78 browser + 7 e2e green; 0 leaks; hour+ acceptance; live-verified in Chrome. CI e2e
+fix folded in (ShaderBackdrop renders a static frame under automation/no-GPU); review threads (15)
+resolved (the {family_name} 'double-the' was a false positive; bare-noun usages → {surname}).
 
 Source: docs/plans/convergence-saga.prq.md (sha256: 649c6a35efb4b5a65126117955a79770cd7bd8d6fda84d029a7979ac7271e2ed)
 Started: 2026-06-21
