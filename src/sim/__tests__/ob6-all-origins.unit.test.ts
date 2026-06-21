@@ -12,7 +12,15 @@ import { createRng } from "../rng";
  * Epoch-0 surface so a regression in any single place's beats is caught.
  */
 
-const NINE = [
+/**
+ * The origins that MUST ship an authored Epoch-0 (the OB-5 spec). This is an explicit
+ * allow-list on purpose: it is the contract, not a mirror of the code. The completeness
+ * test asserts the derived set EQUALS exactly this — so silently losing a place's authored
+ * beat fails here, and ADDING a new authored place is a deliberate one-line update to this
+ * list (which then auto-extends every per-place check below). The per-place verification
+ * loops iterate the DERIVED set so any newly-authored place is covered without further edits.
+ */
+const EXPECTED_ORIGINS = [
   "ireland",
   "bavaria",
   "south_africa",
@@ -26,13 +34,15 @@ const NINE = [
 
 describe("OB-6: every authored origin is complete + leak-free", () => {
   const content = loadContent();
+  // Drive the per-place checks off the DERIVED set (robust to future additions), but pin
+  // it to the spec list so the suite still fails loudly if the two ever diverge.
+  const authored = [...content.authoredEpoch0Places].sort();
 
-  it("all nine places ship an authored Epoch-0 (derived from content)", () => {
-    for (const place of NINE) expect(content.authoredEpoch0Places.has(place)).toBe(true);
-    expect(content.authoredEpoch0Places.size).toBeGreaterThanOrEqual(NINE.length);
+  it("the authored-Epoch-0 set equals exactly the spec origins (no missing, no surprises)", () => {
+    expect(authored).toEqual([...EXPECTED_ORIGINS].sort());
   });
 
-  for (const place of NINE) {
+  for (const place of authored) {
     it(`${place}: founds, stamps has_authored_epoch0, and traces leak-free`, () => {
       const def = content.places.find((p) => p.id === place);
       if (!def) throw new Error(`place ${place} missing from catalog`);
@@ -59,7 +69,7 @@ describe("OB-6: every authored origin is complete + leak-free", () => {
   }
 
   it("the authored birth beat fires for each place (the line emerges via its own opener)", () => {
-    for (const place of NINE) {
+    for (const place of authored) {
       const birth = content.epoch0Events.find(
         (e) => e.place === place && e.choices.some((c) => c.setFlags?.includes("emerged")),
       );
@@ -76,7 +86,7 @@ describe("OB-6: every authored origin is complete + leak-free", () => {
       "religious",
       "technological",
     ];
-    for (const place of NINE) {
+    for (const place of authored) {
       const calling = content.epoch0Events.find(
         (e) => e.place === place && e.id.includes("calling_crystall"),
       );
