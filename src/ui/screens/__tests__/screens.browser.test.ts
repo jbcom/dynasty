@@ -25,109 +25,20 @@ afterEach(() => {
   host.remove();
 });
 
-const MOMENTS = [
-  {
-    id: "test_famine",
-    label: "The Great Hunger",
-    year: 1847,
-    place: "ireland",
-    culture: "irish_catholic",
-    archetype: "political" as const,
-    progenitorSex: "male" as const,
-    startEra: "origins",
-    deepHistory: false,
-    scene: "The potato is black in the ground.",
-    researchNote: "x",
-    choices: [
-      {
-        id: "go",
-        text: "Go",
-        effects: {},
-        personality: {},
-        setFlags: [],
-        clearFlags: [],
-        ripples: [],
-        outcome: "o",
-      },
-    ],
-  },
-];
-const CALLINGS = [
-  {
-    id: "scholar",
-    label: "The Scholar",
-    summary: "Learning is power.",
-    traitDrift: {},
-    tropeWeights: {},
-  },
-];
-const AXES = [
-  {
-    axis: "faith" as const,
-    label: "Faith",
-    prompt: "What of the faith?",
-    options: [
-      {
-        id: "devout",
-        label: "Embrace",
-        blurb: "Kneel with the age.",
-        setFlags: [],
-        effects: {},
-        personality: {},
-      },
-      {
-        id: "reject",
-        label: "Reject",
-        blurb: "Turn away.",
-        setFlags: [],
-        effects: {},
-        personality: {},
-      },
-    ],
-  },
-];
-const STACKS = [
-  {
-    place: "ireland",
-    label: "Ireland",
-    placeLabel: "Ireland",
-    geography: "g",
-    politics: "p",
-    religion: "r",
-    ideology: "i",
-    perils: ["x"],
-    axisIntensity: { faith: 0.9 },
-  },
-];
-const ONOMASTICS = {
-  irish_catholic: {
-    label: "Irish Catholic",
-    givenMale: ["Patrick"],
-    givenFemale: ["Bridget"],
-    convention: "patronymic",
-    namingRules: {},
-  },
-};
-
 function fullProps(over: Record<string, unknown> = {}) {
   return {
-    moments: MOMENTS,
-    callings: CALLINGS,
-    axes: AXES,
-    worldStacks: STACKS,
-    onomastics: ONOMASTICS,
     hasSave: false,
-    onFound: () => {},
+    onBirth: () => {},
     onContinue: () => {},
     onSettings: () => {},
     ...over,
   };
 }
 
-describe("TitleScreen (CP-7 control panel)", () => {
+describe("TitleScreen (CP-R5 diegetic entry)", () => {
   it("shows New Game + Settings, hides Continue without a save", () => {
     component = mount(TitleScreen, { target: host, props: fullProps() });
-    expect(host.textContent).toContain("Found a Dynasty");
+    expect(host.textContent).toContain("Begin a Line");
     expect(host.textContent).not.toContain("Continue");
     expect(host.textContent).toContain("Settings");
   });
@@ -137,51 +48,21 @@ describe("TitleScreen (CP-7 control panel)", () => {
     expect(host.textContent).toContain("Continue");
   });
 
-  it("founds a line through the full panel: moment → name/gender → calling → axes → begin", async () => {
-    const onFound = vi.fn();
-    component = mount(TitleScreen, { target: host, props: fullProps({ onFound }) });
-    const seedInput = host.querySelector("#seed") as HTMLInputElement;
-    seedInput.value = "my-seed";
-    seedInput.dispatchEvent(new Event("input", { bubbles: true }));
-
-    await page.getByRole("button", { name: /Found a Dynasty/ }).click();
-    await vitest.waitFor(() => expect(host.textContent).toContain("CHOOSE YOUR HINGE"));
-    await page.getByRole("button", { name: /Found here/ }).click();
-
-    await vitest.waitFor(() => expect(host.textContent).toContain("NAME YOUR LINE"));
+  it("begins a line from a seed + surname (no control panel)", async () => {
+    const onBirth = vi.fn();
+    component = mount(TitleScreen, { target: host, props: fullProps({ onBirth }) });
     const surname = host.querySelector("#surname") as HTMLInputElement;
     surname.value = "Vane";
     surname.dispatchEvent(new Event("input", { bubbles: true }));
-    // Choose the matriarch path.
-    await page.getByRole("button", { name: "Matriarch" }).click();
-    await page.getByRole("button", { name: /Next: the Calling/ }).click();
-
-    await vitest.waitFor(() => expect(host.textContent).toContain("CHOOSE A CALLING"));
-    await page.getByRole("button", { name: /Take this calling/ }).click();
-
-    await vitest.waitFor(() => expect(host.textContent).toContain("EPOCH ZERO"));
-    await page.getByRole("button", { name: /Embrace/ }).click();
-    await page.getByRole("button", { name: "Begin the Line" }).click();
-
-    await vitest.waitFor(() => expect(host.textContent).toContain("THE FOUNDING"));
-    await page.getByRole("button", { name: "Begin the Line" }).click();
-
-    await vitest.waitFor(() => expect(onFound).toHaveBeenCalledTimes(1));
-    const arg = onFound.mock.calls[0]?.[0];
-    expect(arg.momentId).toBe("test_famine");
-    expect(arg.surname).toBe("Vane");
-    expect(arg.seed).toBe("my-seed");
-    expect(arg.gender).toBe("female");
-    expect(arg.calling).toBe("scholar");
-    expect(arg.axisChoices).toEqual({ faith: "devout" });
-  });
-
-  it("the moment picker shows the start-moments; back returns to title", async () => {
-    component = mount(TitleScreen, { target: host, props: fullProps() });
-    await page.getByRole("button", { name: /Found a Dynasty/ }).click();
-    await vitest.waitFor(() => expect(host.textContent).toContain("The Great Hunger"));
-    await page.getByRole("button", { name: "← Back" }).click();
-    await vitest.waitFor(() => expect(host.textContent).toContain("Found a Dynasty"));
+    const seed = host.querySelector("#seed") as HTMLInputElement;
+    seed.value = "my-seed";
+    seed.dispatchEvent(new Event("input", { bubbles: true }));
+    await page.getByRole("button", { name: /Begin a Line/ }).click();
+    await vitest.waitFor(() => expect(onBirth).toHaveBeenCalledTimes(1));
+    expect(onBirth.mock.calls[0]?.[0]).toBe("my-seed");
+    expect(onBirth.mock.calls[0]?.[1]).toBe("Vane");
+    // No control-panel steps appear.
+    expect(host.textContent).not.toContain("CHOOSE YOUR HINGE");
   });
 });
 

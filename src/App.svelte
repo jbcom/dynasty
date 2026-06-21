@@ -10,7 +10,8 @@ import {
   type Settings,
 } from "./engine/settings";
 import type { Content } from "./sim/content";
-import { type FoundingInput, foundDynasty } from "./sim/founding";
+import { foundByComposition } from "./sim/founding";
+import { dealComposition } from "./sim/places";
 import type { GameState } from "./sim/state";
 import { GameStore } from "./ui/gameStore.svelte";
 import { FormFactorStore } from "./ui/formFactor.svelte";
@@ -56,15 +57,16 @@ async function toggleLive(on: boolean): Promise<void> {
   settings = await loadSettings(storage);
 }
 
-// FOUND a dynasty (FD-6 / CP-7): the control panel gathers the full founding
-// config (moment, surname, gender, calling, Epoch-0 axis stances) and hands it to
-// the pure founding flow; the founded state becomes the run's base.
-async function foundGame(input: FoundingInput): Promise<void> {
+// DIEGETIC BIRTH (CP-R4): New Game DEALS a seed-dealt origin (place × era × gender ×
+// archetype) under the player's chosen surname, founds it, and drops straight into
+// the Epoch-0 birth — the player DISCOVERS the origin through the emergence events.
+async function birthGame(seed: string, surname: string): Promise<void> {
   if (!storage) return;
   // Await the clear so a fast first choice can't race the old save's deletion.
   await clearSave(storage);
-  const founded = foundDynasty(content, input).state;
-  store = new GameStore(content, input.seed, storage, founded, founded.archetype);
+  const composition = dealComposition(content.places, content.eras, seed, surname);
+  const founded = foundByComposition(content, composition).state;
+  store = new GameStore(content, seed, storage, founded, founded.archetype);
   screen = "play";
 }
 
@@ -95,13 +97,8 @@ function restart(): void {
   />
 {:else if screen === "title" || !store}
   <TitleScreen
-    moments={content.startMoments}
-    callings={content.callings}
-    axes={content.axes}
-    worldStacks={content.worldStacks}
-    onomastics={content.onomastics}
     hasSave={saveExists}
-    onFound={foundGame}
+    onBirth={birthGame}
     onContinue={continueGame}
     onSettings={() => (screen = "settings")}
   />

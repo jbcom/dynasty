@@ -113,6 +113,33 @@ the diegetic birth sequence instead of a form. Re-sequenced as CP-7r below.
   driven by the normal event engine + 6-slot events; calling + the four axes are
   lived Epoch-0 beats, not picker screens. The CP-7 panel UI is retired.
 
+## CP-R4 — diegetic birth: discover the seed-dealt origin (decision, 2026-06-21)
+
+The pivot's heart. New Game → straight into Epoch 0; the player DISCOVERS their origin
+via sensory/social cues, BitLife-style ("you don't choose, you're dealt a hand").
+
+**Key decision — the origin is SEED-DEALT, then DISCOVERED, not selected.** New Game
+deals a deterministic random composition from the seed (place drawn from the places
+catalog, era from the place's validEras, gender, archetype) and founds immediately via
+foundByComposition. The first events are diegetic REVEALS of what the seed dealt:
+- the emergence event's 6-slot sensory question shows the run's actual place's cue as
+  the "correct" reading ("desert heat… a market stall" → you realize: Baghdad); the
+  other 5 slots are the other places' cues (flavor mis-reads that resolve to the same
+  truth). The player isn't picking the place — they're recognizing it.
+- "your parents exclaim their —" reveals the seed-dealt gender (son/daughter/other).
+- the name is bestowed in-fiction (the onomastics-drawn given name + a surname the
+  player DOES choose — the one authored act, the line's name).
+Why seed-dealt: keeps the engine pure (seed → origin → replayable) AND delivers the
+"discover, don't configure" feel the user wants. A reroll = a new seed (a new birth).
+
+**6-slot compressed events:** 2-line story + up to 6 terse choices (EventSchema has no
+max-choice cap). Calling + the four axes become LIVED growing-up beats (already partly
+authored: ev_cp_take_partner, ev_cp_raise_heirs), gated `epoch0`/`birth` to run first.
+
+**Surname capture:** the one player input. The title screen takes a seed (optional) +
+a surname (the dynasty name); New Game founds the seed-dealt origin under that surname
+and drops into the birth. No moment carousel, no config panel (CP-R5 retires it).
+
 ## CP-R3 — places catalog: sensory cue → place, place×era resolution (decision, 2026-06-21)
 
 CP-R3 derives the place×era catalog that the diegetic birth (CP-R4) composes from.

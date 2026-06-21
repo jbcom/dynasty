@@ -8,84 +8,10 @@ let host: HTMLElement;
 // biome-ignore lint/suspicious/noExplicitAny: opaque Svelte component instance
 let component: any;
 
-const MOMENTS = [
-  {
-    id: "test_famine",
-    label: "The Great Hunger",
-    year: 1847,
-    place: "ireland",
-    culture: "irish_catholic",
-    archetype: "political" as const,
-    progenitorSex: "male" as const,
-    startEra: "origins",
-    deepHistory: false,
-    scene: "The potato is black in the ground for the third year running.",
-    researchNote: "x",
-    choices: [
-      {
-        id: "go",
-        text: "Go",
-        effects: {},
-        personality: {},
-        setFlags: [],
-        clearFlags: [],
-        ripples: [],
-        outcome: "o",
-      },
-    ],
-  },
-  {
-    id: "test_baghdad",
-    label: "The Round City",
-    year: 762,
-    place: "baghdad",
-    culture: "scots_irish",
-    archetype: "religious" as const,
-    progenitorSex: "male" as const,
-    startEra: "origins",
-    deepHistory: true,
-    scene: "The caliph is raising a new capital on the Tigris.",
-    researchNote: "x",
-    choices: [
-      {
-        id: "go",
-        text: "Go",
-        effects: {},
-        personality: {},
-        setFlags: [],
-        clearFlags: [],
-        ripples: [],
-        outcome: "o",
-      },
-    ],
-  },
-];
-const ONOMASTICS = {
-  irish_catholic: {
-    label: "Irish Catholic",
-    givenMale: ["Patrick"],
-    givenFemale: ["Bridget"],
-    convention: "patronymic",
-    namingRules: {},
-  },
-  scots_irish: {
-    label: "Scots-Irish",
-    givenMale: ["William"],
-    givenFemale: ["Margaret"],
-    convention: "patronymic",
-    namingRules: {},
-  },
-};
-
-function fullProps(over: Record<string, unknown> = {}) {
+function props(over: Record<string, unknown> = {}) {
   return {
-    moments: MOMENTS,
-    callings: [],
-    axes: [],
-    worldStacks: [],
-    onomastics: ONOMASTICS,
     hasSave: true,
-    onFound: () => {},
+    onBirth: () => {},
     onContinue: () => {},
     onSettings: () => {},
     ...over,
@@ -101,39 +27,41 @@ afterEach(() => {
   host.remove();
 });
 
-describe("TitleScreen — luxury Dynasty masthead (DE-UI)", () => {
+describe("TitleScreen — luxury Dynasty masthead + diegetic entry (CP-R5)", () => {
   it("renders the gilded wordmark + ornamental rule and captures a screenshot", async () => {
-    component = mount(TitleScreen, { target: host, props: fullProps() });
+    component = mount(TitleScreen, { target: host, props: props() });
     await new Promise((r) => setTimeout(r, 250));
     expect(host.querySelector("h1")?.textContent).toBe("Dynasty");
     expect(host.querySelector(".masthead .rule")).not.toBeNull();
     await page.screenshot({ element: host.firstElementChild as Element });
   });
-});
 
-describe("TitleScreen — found-your-own moment picker (CP-7)", () => {
-  it("shows the moment cards after Found a Dynasty is clicked", async () => {
-    component = mount(TitleScreen, { target: host, props: fullProps({ hasSave: false }) });
+  it("New Game is disabled until a surname is entered, then begins a line", async () => {
+    let begun: { seed: string; surname: string } | null = null;
+    component = mount(TitleScreen, {
+      target: host,
+      props: props({ hasSave: false, onBirth: (seed: string, surname: string) => { begun = { seed, surname }; } }),
+    });
     await new Promise((r) => setTimeout(r, 100));
-    const beginBtn = host.querySelector<HTMLButtonElement>("button.primary");
-    expect(beginBtn?.textContent?.trim()).toContain("Found a Dynasty");
-    beginBtn?.click();
-    await new Promise((r) => setTimeout(r, 100));
-    const cards = host.querySelectorAll(".card.moment");
-    expect(cards.length).toBe(MOMENTS.length);
-    expect(host.querySelector(".deep-badge")?.textContent).toContain("Deep history");
-    await page.screenshot({ element: host.firstElementChild as Element });
+    const begin = host.querySelector<HTMLButtonElement>("button.primary");
+    expect(begin?.textContent?.trim()).toContain("Begin a Line");
+    expect(begin?.disabled).toBe(true);
+    // Enter a surname, then New Game fires onBirth with that surname.
+    const surname = host.querySelector<HTMLInputElement>("#surname");
+    if (!surname) throw new Error("no surname field");
+    surname.value = "Donnelly";
+    surname.dispatchEvent(new Event("input", { bubbles: true }));
+    await new Promise((r) => setTimeout(r, 50));
+    expect(begin?.disabled).toBe(false);
+    begin?.click();
+    await new Promise((r) => setTimeout(r, 50));
+    expect(begun).not.toBeNull();
+    expect((begun as unknown as { surname: string }).surname).toBe("Donnelly");
   });
 
-  it("back from the moment picker returns to the title", async () => {
-    component = mount(TitleScreen, { target: host, props: fullProps({ hasSave: false }) });
+  it("no founding control panel remains (no moment carousel)", async () => {
+    component = mount(TitleScreen, { target: host, props: props({ hasSave: false }) });
     await new Promise((r) => setTimeout(r, 100));
-    host.querySelector<HTMLButtonElement>("button.primary")?.click();
-    await new Promise((r) => setTimeout(r, 100));
-    expect(host.querySelectorAll(".card.moment").length).toBe(MOMENTS.length);
-    host.querySelector<HTMLButtonElement>(".back-btn")?.click();
-    await new Promise((r) => setTimeout(r, 100));
-    expect(host.querySelector("h1")?.textContent).toBe("Dynasty");
     expect(host.querySelectorAll(".card.moment").length).toBe(0);
   });
 });

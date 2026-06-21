@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
 import { foundByComposition } from "../founding";
-import { placeById, placeEraSpace, placeForCue, resolveComposition } from "../places";
+import { dealComposition, placeById, placeEraSpace, placeForCue, resolveComposition } from "../places";
 
 /**
  * CP-R3 — the places catalog cross-resolves, the resolvers work, and the invariant
@@ -65,6 +65,32 @@ describe("CP-R3 places catalog", () => {
       expect(r.state.end, `${place}×${era}`).toBeNull();
       expect(r.progenitorName.endsWith(" Testford"), `${place}×${era}`).toBe(true);
     }
+  });
+
+  it("dealComposition deals a valid, replayable, seed-dealt birth (CP-R4)", () => {
+    const a = dealComposition(content.places, content.eras, "seed-xyz", "Vane");
+    const b = dealComposition(content.places, content.eras, "seed-xyz", "Vane");
+    // Same seed → identical deal (replayable birth).
+    expect(a).toEqual(b);
+    // The dealt origin is a real catalog place × one of its valid eras.
+    const p = placeById(content.places, a.place);
+    expect(p, a.place).toBeDefined();
+    expect(p?.validEras).toContain(a.era);
+    expect(a.surname).toBe("Vane");
+    // It founds a valid run.
+    const r = foundByComposition(content, a);
+    expect(content.eras[r.state.eraIndex]?.id).toBe(a.era);
+    expect(r.state.end).toBeNull();
+  });
+
+  it("different seeds deal different births (the hand varies)", () => {
+    const origins = new Set(
+      ["s1", "s2", "s3", "s4", "s5", "s6"].map((s) => {
+        const c = dealComposition(content.places, content.eras, s, "Vane");
+        return `${c.place}:${c.era}:${c.gender}:${c.archetype}`;
+      }),
+    );
+    expect(origins.size).toBeGreaterThanOrEqual(2);
   });
 
   it("resolveComposition rejects an off-catalog (place, era)", () => {

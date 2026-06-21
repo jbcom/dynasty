@@ -2,6 +2,112 @@
   "era": "origins",
   "events": [
     {
+      "id": "ev_birth_emergence",
+      "era": "origins",
+      "year": 1885,
+      "title": "You Emerge",
+      "scene": "You emerge kicking and screaming into the — actually, you're not sure. It feels like… what?",
+      "researchNote": "CP-R4 diegetic birth: the player discovers the seed-dealt origin through sensory cues rather than a config screen. Six readings of the same world; recognizing your own is the play.",
+      "historicity": "personal",
+      "tags": ["epoch0", "birth", "diegetic"],
+      "requires": { "flags": ["founded_line"], "notFlags": ["emerged"], "meters": {}, "personality": {} },
+      "weight": 1000,
+      "choices": [
+        {
+          "id": "cue_salt_air",
+          "text": "Fish and salt air, and a hard grey rain off the water.",
+          "effects": {},
+          "personality": {},
+          "setFlags": ["emerged"],
+          "outcome": "The world resolves around you: cold, wet, close. Wherever this is, it is yours now."
+        },
+        {
+          "id": "cue_woodsmoke",
+          "text": "Woodsmoke, cold mountain wind, the smell of fermenting hops.",
+          "effects": {},
+          "personality": {},
+          "setFlags": ["emerged"],
+          "outcome": "The world resolves around you: woodsmoke and stone. Wherever this is, it is yours now."
+        },
+        {
+          "id": "cue_desert_market",
+          "text": "Desert heat and distant shouts from a market stall.",
+          "effects": {},
+          "personality": {},
+          "setFlags": ["emerged"],
+          "outcome": "The world resolves around you: heat, dust, the clamor of trade. Wherever this is, it is yours now."
+        },
+        {
+          "id": "cue_ocean_fog",
+          "text": "Orange light, ocean fog, the rattle of prospectors' pans.",
+          "effects": {},
+          "personality": {},
+          "setFlags": ["emerged"],
+          "outcome": "The world resolves around you: bright, restless, half-built. Wherever this is, it is yours now."
+        },
+        {
+          "id": "cue_coal_harbor",
+          "text": "Coal smoke, harbor brine, the clamor of a port city.",
+          "effects": {},
+          "personality": {},
+          "setFlags": ["emerged"],
+          "outcome": "The world resolves around you: smoke, salt, a thousand strangers. Wherever this is, it is yours now."
+        },
+        {
+          "id": "cue_prairie_wind",
+          "text": "Turned earth, grain dust, a wind that crosses a thousand miles.",
+          "effects": {},
+          "personality": {},
+          "setFlags": ["emerged"],
+          "outcome": "The world resolves around you: open, vast, indifferent. Wherever this is, it is yours now."
+        }
+      ]
+    },
+    {
+      "id": "ev_birth_gender",
+      "era": "origins",
+      "year": 1885,
+      "title": "Your Parents Exclaim",
+      "scene": "Hands lift you toward the light. You hear your parents exclaiming their —",
+      "researchNote": "CP-R4: the seed-dealt gender is revealed in-fiction. The line's succession + naming follow from it.",
+      "historicity": "personal",
+      "tags": ["epoch0", "birth", "diegetic"],
+      "requires": { "flags": ["founded_line", "emerged"], "notFlags": ["gender_revealed"], "meters": {}, "personality": {} },
+      "weight": 1000,
+      "choices": [
+        {
+          "id": "reveal_listen",
+          "text": "— and the word settles over you like a name you'll wear for life.",
+          "effects": {},
+          "personality": {},
+          "setFlags": ["gender_revealed"],
+          "outcome": "Son, daughter — the word is spoken, and a whole life of expectations arrives with it."
+        }
+      ]
+    },
+    {
+      "id": "ev_birth_naming",
+      "era": "origins",
+      "year": 1885,
+      "title": "You Are Named",
+      "scene": "An elder leans close and bestows the name the family has chosen. You are {full_name}.",
+      "researchNote": "CP-R4: the given name is drawn from the place's culture (onomastics); the surname is the player's one chosen act — the line's name.",
+      "historicity": "personal",
+      "tags": ["epoch0", "birth", "diegetic"],
+      "requires": { "flags": ["founded_line", "gender_revealed"], "notFlags": ["named"], "meters": {}, "personality": {} },
+      "weight": 1000,
+      "choices": [
+        {
+          "id": "accept_the_name",
+          "text": "Carry it. The {surname} line begins with you.",
+          "effects": {},
+          "personality": {},
+          "setFlags": ["named"],
+          "outcome": "{full_name}. The name is yours, and the century is waiting. The hand is dealt."
+        }
+      ]
+    },
+    {
       "id": "ev_cp_take_partner",
       "era": "origins",
       "year": 1908,
