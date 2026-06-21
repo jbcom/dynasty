@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
 import { fromSave, toSave } from "../../engine/save";
-import { type Composition, compositionFromMoment, foundByComposition, foundDynasty } from "../founding";
+import {
+  type Composition,
+  compositionFromMoment,
+  foundByComposition,
+  foundDynasty,
+} from "../founding";
 
 /**
  * FD-6.2 — the founding flow: every start-moment founds a valid run; deep-history

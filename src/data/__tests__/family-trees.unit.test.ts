@@ -16,14 +16,7 @@ describe("FD-1 family trees — the archetype spines", () => {
   it("loads a spine for all six power archetypes", () => {
     const byArchetype = new Set(content.familyTrees.map((t) => t.archetype));
     expect(byArchetype).toEqual(
-      new Set([
-        "economic",
-        "political",
-        "technological",
-        "religious",
-        "entertainment",
-        "athletic",
-      ]),
+      new Set(["economic", "political", "technological", "religious", "entertainment", "athletic"]),
     );
     // The four original literal spines plus the two new generic ones.
     const byDynasty = new Set(content.familyTrees.map((t) => t.dynasty));

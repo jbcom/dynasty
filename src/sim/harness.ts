@@ -1,11 +1,11 @@
+import { branchOf } from "./branch";
 import type { Content } from "./content";
 import { applyChoice } from "./effects";
 import { meetsRequires, pickNextEvent } from "./events";
 import { type Composition, foundByComposition } from "./founding";
 import { createRng } from "./rng";
-import { applyTerms, runTerms } from "./terms";
-import { branchOf } from "./branch";
 import type { GameState } from "./state";
+import { applyTerms, runTerms } from "./terms";
 
 /**
  * DEV HARNESS (CP-R7) — play a FOUNDED run forward auto-resolving choices and record
@@ -55,7 +55,11 @@ function protagonistGeneration(state: GameState): number {
 }
 
 /** Play a founded run forward, recording every beat. Deterministic for a composition. */
-export function tracePlaythrough(content: Content, composition: Composition, maxSteps = 800): Trace {
+export function tracePlaythrough(
+  content: Content,
+  composition: Composition,
+  maxSteps = 800,
+): Trace {
   let state = foundByComposition(content, composition).state;
   const rng = createRng(composition.seed);
   const beats: TraceBeat[] = [];

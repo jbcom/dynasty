@@ -37,7 +37,9 @@ describe("CP-R7 timeline dump + consistency audit", () => {
     // The full offered origin space: each place × each of its valid eras × every
     // archetype (so all branch paths the graph can take are exercised).
     const origins = content.places.flatMap((p) =>
-      p.validEras.flatMap((era) => ARCHETYPES.map((archetype) => ({ place: p.id, era, archetype }))),
+      p.validEras.flatMap((era) =>
+        ARCHETYPES.map((archetype) => ({ place: p.id, era, archetype })),
+      ),
     );
     const { traces, findings } = auditTimelines(content, origins, 3, (origin, seed) => {
       const p = placeById(content.places, origin.place);

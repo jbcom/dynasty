@@ -42,7 +42,10 @@ export function timelinesForBranch(
   branch: BranchKey,
 ): WorldTimeline[] {
   // Group every event by scope, partitioned into this-branch vs default.
-  const scopes = new Map<string, { branchEvents: WorldEvent[]; defaultEvents: WorldEvent[]; label: string }>();
+  const scopes = new Map<
+    string,
+    { branchEvents: WorldEvent[]; defaultEvents: WorldEvent[]; label: string }
+  >();
   for (const t of timelines) {
     const entry = scopes.get(t.scope) ?? { branchEvents: [], defaultEvents: [], label: t.label };
     for (const e of t.events) {

@@ -305,7 +305,10 @@ describe("CP-5 takePartner", () => {
     const after = applyChoice(c, founded, ev, "be_a_scholar", createRng("cr6")).state;
     expect(after.founding?.calling).toBe("scholar");
     // An unknown calling id is ignored (no-op), not written.
-    const evBad = { ...ev, choices: [{ ...ev.choices[0], setsCalling: "nonexistent" }] } as GameEvent;
+    const evBad = {
+      ...ev,
+      choices: [{ ...ev.choices[0], setsCalling: "nonexistent" }],
+    } as GameEvent;
     const cBad = { ...content, allEvents: [...content.allEvents, evBad] };
     const afterBad = applyChoice(cBad, founded, evBad, "be_a_scholar", createRng("cr6")).state;
     expect(afterBad.founding?.calling).toBeUndefined();

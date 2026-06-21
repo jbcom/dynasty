@@ -1,7 +1,7 @@
 import type { Composition } from "./founding";
 import { createRng, type Rng } from "./rng";
 import type { Era, Place } from "./schema";
-import { type Archetype, ARCHETYPES } from "./slots";
+import { ARCHETYPES, type Archetype } from "./slots";
 
 /**
  * PLACES RESOLVER (CP-R3). Helpers over the places catalog: look a place up by id,

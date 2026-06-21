@@ -26,6 +26,8 @@ import {
   MetersFileSchema,
   type OnomasticsFile,
   OnomasticsFileSchema,
+  type Place,
+  PlacesFileSchema,
   parseContent,
   type RankLadder,
   RanksFileSchema,
@@ -35,8 +37,6 @@ import {
   StartMomentsFileSchema,
   type TermsFile,
   TermsFileSchema,
-  type Place,
-  PlacesFileSchema,
   type Trope,
   TropesFileSchema,
   type WorldStack,
@@ -219,7 +219,11 @@ export function buildContent(raw: RawContent): Content {
     raw.worldStacks ?? { stacks: [] },
     "world/stacks.json",
   );
-  const placesFile = parseContent(PlacesFileSchema, raw.places ?? { places: [] }, "world/places.json");
+  const placesFile = parseContent(
+    PlacesFileSchema,
+    raw.places ?? { places: [] },
+    "world/places.json",
+  );
   // Each start-moment's culture must resolve in onomastics; cross-ref vs eras is
   // done below once eraIds is built. FD-7: its place must have a world-stack so
   // the founded line always has standing context (no silent generic fallback).

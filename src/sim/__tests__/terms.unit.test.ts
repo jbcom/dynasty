@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import boyhoodJson from "../../data/eras/new-york/1946-1964-boyhood/events.json";
 import originsJson from "../../data/eras/new-york/1885-1946-origins/events.json";
+import boyhoodJson from "../../data/eras/new-york/1946-1964-boyhood/events.json";
 import termsJson from "../../data/terms.json";
 import { meetsRequires } from "../events";
 import { EraEventsSchema, TermsFileSchema } from "../schema";
@@ -67,9 +67,9 @@ describe("branch-aware institutional terms (alt-history AH1)", () => {
   });
 
   it("honors {{ }} as literal-brace escapes", () => {
-    expect(applyTerms("a {{literal}} {head_of_state}", runTerms(terms, "default", unfoundedState))).toBe(
-      "a {literal} President",
-    );
+    expect(
+      applyTerms("a {{literal}} {head_of_state}", runTerms(terms, "default", unfoundedState)),
+    ).toBe("a {literal} President");
   });
 });
 

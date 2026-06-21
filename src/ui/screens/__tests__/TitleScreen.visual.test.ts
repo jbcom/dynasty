@@ -40,7 +40,12 @@ describe("TitleScreen — luxury Dynasty masthead + diegetic entry (CP-R5)", () 
     let begun: { seed: string; surname: string } | null = null;
     component = mount(TitleScreen, {
       target: host,
-      props: props({ hasSave: false, onBirth: (seed: string, surname: string) => { begun = { seed, surname }; } }),
+      props: props({
+        hasSave: false,
+        onBirth: (seed: string, surname: string) => {
+          begun = { seed, surname };
+        },
+      }),
     });
     await new Promise((r) => setTimeout(r, 100));
     const begin = host.querySelector<HTMLButtonElement>("button.primary");

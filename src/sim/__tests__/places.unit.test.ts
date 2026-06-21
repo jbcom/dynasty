@@ -1,7 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
 import { foundByComposition } from "../founding";
-import { dealComposition, placeById, placeEraSpace, placeForCue, resolveComposition } from "../places";
+import {
+  dealComposition,
+  placeById,
+  placeEraSpace,
+  placeForCue,
+  resolveComposition,
+} from "../places";
 
 /**
  * CP-R3 — the places catalog cross-resolves, the resolvers work, and the invariant

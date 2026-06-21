@@ -114,7 +114,13 @@ export interface GameState {
      */
     era?: string;
     year?: number;
-    archetype?: "economic" | "political" | "technological" | "religious" | "entertainment" | "athletic";
+    archetype?:
+      | "economic"
+      | "political"
+      | "technological"
+      | "religious"
+      | "entertainment"
+      | "athletic";
     deepHistory?: boolean;
     /** The founding CALLING id (CP-2) — a durable generational lens; optional. */
     calling?: string;
