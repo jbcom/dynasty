@@ -89,7 +89,7 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
 {#snippet eventPane()}
   {#if view.currentEvent}
     <div class="event-pane">
-      <EventCard event={view.currentEvent} {busy} {onchoose} {term} />
+      <EventCard event={view.currentEvent} year={view.state.year} {busy} {onchoose} {term} />
     </div>
   {:else}
     <p class="interlude">The era turns…</p>

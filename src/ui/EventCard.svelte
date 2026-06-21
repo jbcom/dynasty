@@ -5,6 +5,13 @@ import { impact } from "./haptics";
 
 interface Props {
   event: GameEvent;
+  /**
+   * The run's CURRENT year (state.year) — shown on the card. This, not `event.year`,
+   * is authoritative: life-stage epoch0 beats carry a nominal default year (1885) and
+   * are injected into whatever era the run is actually in, so a caliphate (762) run must
+   * display 762, not the beat's placeholder. Falls back to the beat's year if unset.
+   */
+  year?: number;
   /** Called with the chosen choice id after haptics fire. */
   onchoose: (choiceId: string) => void;
   /** Disable inputs while a transition animates. */
@@ -13,7 +20,7 @@ interface Props {
   term?: (text: string) => string;
 }
 
-const { event, onchoose, busy = false, term = (t) => t }: Props = $props();
+const { event, year, onchoose, busy = false, term = (t) => t }: Props = $props();
 
 async function choose(choice: Choice): Promise<void> {
   if (busy) return;
@@ -34,7 +41,7 @@ function touchedMeters(choice: Choice): MeterId[] {
 
 <article class="card" data-event={event.id}>
   <div class="badges">
-    <span class="year">{event.year}</span>
+    <span class="year">{year ?? event.year}</span>
     <!-- No "Extrapolated" badge — stating it is obvious and breaks immersion;
          the year already signals past vs future. -->
   </div>
