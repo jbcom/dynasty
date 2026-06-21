@@ -1,0 +1,105 @@
+{
+  "_comment": "Narrative Acts model — the Ireland (Famine wave) × economic line, as a NOVEL: titled acts of multi-paragraph sensory scenes that frame choices (Suzerain), with a fall-forward weave where most beats gather + some divert (ink). The opening does NOT re-confirm when/where — onboarding already set the Famine-Irish wave. This is the authored exemplar; GenAI fleshes the rest of the lattice onto the spine.",
+  "acts": [
+    {
+      "id": "act:ireland:economic:t0",
+      "wave": "ireland",
+      "archetype": "economic",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — The Crossing",
+      "scenes": ["sc:ire:econ:t0:hold", "sc:ire:econ:t0:steerage", "sc:ire:econ:t0:landing"]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "sc:ire:econ:t0:hold",
+      "sense": "smell",
+      "prose": [
+        "The boat smells of tar and brine and the sour breath of two hundred people who have not been dry in a week. You are pressed against the hull with the rest of the {family_name}s, and through the planking you can feel the Atlantic worrying at the wood like a dog at a bone.",
+        "Your mother does not speak of what you left. There is nothing to say that the hunger has not already said — the empty cottage, the blackened lazy-beds, the small graves no bigger than seed-drills. You carry one sack between you: a change of clothes, a clay pipe, and a fistful of soil from a field that was never yours to begin with.",
+        "A man near the ladder is talking, low and steady, about America. He says a clever man can become anything there. He says it the way the priest used to say grace — as if the saying made it true."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You listen to him the way you once listened to the agent's ledger being read: hungry, and counting."
+          ],
+          "choice": {
+            "text": "Money, you decide, is the only thing that was ever truly safe.",
+            "motivatorShift": { "wealth": 12, "power": 6 },
+            "setFlags": ["counts_the_coin"],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Or you watch your mother's hands instead — cracked, folded, praying — and something in you sets harder than any plan."
+          ],
+          "choice": {
+            "text": "Whatever you build, it will be a wall the landlords can never put you behind again.",
+            "motivatorShift": { "wealth": 8, "honor": -6 },
+            "setFlags": ["born_wanting"],
+            "gather": true
+          }
+        }
+      ],
+      "next": "sc:ire:econ:t0:steerage"
+    },
+    {
+      "id": "sc:ire:econ:t0:steerage",
+      "sense": "touch",
+      "prose": [
+        "On the eleventh day a fever moves through steerage like weather. You feel it in the heat of the bodies around you, in the damp that never leaves your shirt, in the way the crew stop coming below.",
+        "A girl your own age — a {given_name} of some other line, a Brennan or a Quinn — shares her water ration with your youngest brother without being asked. You will remember it. In this dark, who is owed what is the only ledger that will follow you ashore."
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The crew need hands to carry the dead up to the rail. They offer a shilling and a place near the air.",
+        "options": [
+          {
+            "text": "Take the work. A shilling is a shilling, and the air is worth more.",
+            "motivatorShift": { "wealth": 6, "honor": 4 },
+            "setFlags": ["did_the_hard_work"]
+          },
+          {
+            "text": "Stay below with your mother. Some things you do not do for a coin.",
+            "motivatorShift": { "lineage": 8, "wealth": -4 },
+            "setFlags": ["kept_the_family_close"]
+          }
+        ]
+      },
+      "next": "sc:ire:econ:t0:landing"
+    },
+    {
+      "id": "sc:ire:econ:t0:landing",
+      "sense": "sight",
+      "prose": [
+        "Then, on a grey morning, the city. It rises out of the harbour smoke like something the fever dreamed — brick stacked on brick higher than any chapel, a forest of masts, a din of a hundred tongues none of them your own.",
+        "An official with a ledger of his OWN waves your family through with a glance, mangling the {family_name} name into something American as he writes it. You do not correct him. Let the new country spell you however it likes; what matters is what the name will be worth before you are done with it.",
+        "You step off the gangway onto a continent that does not know you, owes you nothing, and — for the first time in the line's memory — forbids you nothing either."
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The crowd at the dock splits three ways: the labor agents shouting for backs, a countryman pressing a tenement address into your hand, and a quieter man hiring for a chandler's counting-house.",
+        "options": [
+          {
+            "text": "The counting-house. You will learn how the money moves before you ever touch a shovel.",
+            "motivatorShift": { "wealth": 10, "worldview": 6 },
+            "setFlags": ["chose_the_ledger"]
+          },
+          {
+            "text": "The labor agent. Coin in hand today; the rest you will build with your own arms.",
+            "motivatorShift": { "wealth": 4, "power": 4 },
+            "setFlags": ["chose_the_work"]
+          },
+          {
+            "text": "The countryman. Your people first — the parish in exile is its own kind of capital.",
+            "motivatorShift": { "power": -8, "lineage": 8 },
+            "setFlags": ["chose_the_ward"]
+          }
+        ]
+      }
+    }
+  ]
+}

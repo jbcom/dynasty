@@ -1,0 +1,135 @@
+/**
+ * NARRATIVE ACTS PLAYER (Narrative Acts model) — the pure runtime that walks an act's scenes as a
+ * NOVEL: present a scene's multi-paragraph prose, apply a chosen beat (weave: gather or divert) or
+ * the terminal decision (motivator shift + flags), and resolve the next scene (divert → that scene;
+ * else the beat/scene `next` fall-through). No DOM, no randomness — deterministic given the choice.
+ */
+
+import {
+  applyMotivators,
+  MOTIVATOR_AXES,
+  type MotivatorAxis,
+  type Motivators,
+} from "../motivators";
+import type { ActChapter, Scene } from "./schema";
+
+/** The loaded saga corpus the player walks (acts + scenes, indexed). */
+export interface SagaCorpus {
+  acts: Map<string, ActChapter>;
+  scenes: Map<string, Scene>;
+}
+
+/** Build the indexed corpus from raw acts + scenes. Pure. */
+export function buildCorpus(acts: ActChapter[], scenes: Scene[]): SagaCorpus {
+  return {
+    acts: new Map(acts.map((a) => [a.id, a])),
+    scenes: new Map(scenes.map((s) => [s.id, s])),
+  };
+}
+
+/** Coerce a loose motivatorShift record to a typed partial (only the 8 known axes). Pure. */
+export function toMotivatorDelta(shift: Record<string, number>): Partial<Motivators> {
+  const out: Partial<Motivators> = {};
+  for (const axis of MOTIVATOR_AXES) {
+    if (axis in shift) out[axis] = shift[axis];
+  }
+  return out;
+}
+
+/** Whether a scene's gate is satisfied by the current flags. Pure. */
+export function sceneEligible(scene: Scene, flags: ReadonlySet<string>): boolean {
+  for (const f of scene.requires.flags) if (!flags.has(f)) return false;
+  for (const f of scene.requires.notFlags) if (flags.has(f)) return false;
+  return true;
+}
+
+/** The result of applying a beat/decision option: the motivator + flag deltas + where to go next. */
+export interface ChoiceOutcome {
+  motivators: Motivators;
+  flags: string[];
+  /** The next scene id (a divert), or undefined to fall through to the scene's `next`. */
+  divertTo?: string;
+}
+
+function withFlags(flags: readonly string[], add: readonly string[]): string[] {
+  const set = new Set(flags);
+  for (const f of add) set.add(f);
+  return [...set];
+}
+
+/** Apply a beat's choice. A gather choice nudges motivators + flags but stays in the scene's flow; a divert forks. */
+export function applyBeatChoice(
+  scene: Scene,
+  beatIndex: number,
+  motivators: Motivators,
+  flags: readonly string[],
+): ChoiceOutcome {
+  const beat = scene.beats[beatIndex];
+  const choice = beat?.choice;
+  if (!choice) return { motivators, flags: [...flags] };
+  return {
+    motivators: applyMotivators(motivators, toMotivatorDelta(choice.motivatorShift)),
+    flags: withFlags(flags, choice.setFlags),
+    divertTo: choice.gather ? undefined : choice.divertTo,
+  };
+}
+
+/** Apply the scene's terminal decision option. */
+export function applyDecision(
+  scene: Scene,
+  optionIndex: number,
+  motivators: Motivators,
+  flags: readonly string[],
+): ChoiceOutcome {
+  const opt = scene.decision?.options[optionIndex];
+  if (!opt) return { motivators, flags: [...flags] };
+  return {
+    motivators: applyMotivators(motivators, toMotivatorDelta(opt.motivatorShift)),
+    flags: withFlags(flags, opt.setFlags),
+    divertTo: opt.divertTo,
+  };
+}
+
+/**
+ * Resolve the next scene id after an outcome: an explicit divert wins; else the scene's `next`
+ * fall-through; else the next scene in the act's ordered list; else undefined (act ends). Pure.
+ */
+export function nextScene(
+  _corpus: SagaCorpus,
+  act: ActChapter,
+  current: Scene,
+  outcome: ChoiceOutcome,
+): string | undefined {
+  if (outcome.divertTo) return outcome.divertTo;
+  if (current.next) return current.next;
+  const i = act.scenes.indexOf(current.id);
+  return i >= 0 && i + 1 < act.scenes.length ? act.scenes[i + 1] : undefined;
+}
+
+/** The first eligible scene of an act (its opening), given current flags. Pure. */
+export function openingScene(
+  corpus: SagaCorpus,
+  act: ActChapter,
+  flags: ReadonlySet<string>,
+): Scene | undefined {
+  for (const id of act.scenes) {
+    const s = corpus.scenes.get(id);
+    if (s && sceneEligible(s, flags)) return s;
+  }
+  return undefined;
+}
+
+/** All wave×archetype act chapters for a tier, ordered (the per-generation act). Pure. */
+export function actsForTier(
+  corpus: SagaCorpus,
+  wave: string,
+  archetype: string,
+  tier: number,
+): ActChapter | undefined {
+  for (const a of corpus.acts.values()) {
+    if (a.wave === wave && a.archetype === archetype && a.tier === tier) return a;
+  }
+  return undefined;
+}
+
+export type { MotivatorAxis };
