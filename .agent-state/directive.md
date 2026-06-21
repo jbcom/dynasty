@@ -41,10 +41,7 @@ archetypes, harness, dev overlay) exists; this milestone is content + the GenAI 
 that generates it at breadth.
 
 ### Queue (to enumerate per use-case before building — this is the discovery seed, not a fixed plan)
-- [ ] **EX-1 Place×era coverage map.** From the harness, dump the current event density per
-  (place × era × archetype); identify the thin/greenfield cells (athletic is ~6 events;
-  non-new-york places have no life-arc yet; future eras are place-agnostic). Output the
-  gap matrix that drives authoring priority. No thin cells left silently.
+- [x] **EX-1 DONE: place×era coverage gap matrix → docs/EX-1-coverage-gap.md.** Per-era density is healthy (18–51 events/era) and — because most events are archetype-AGNOSTIC — every archetype already sees nearly the full pool, so the primary gap is NOT archetype reach. The real gap is PLACE: all 8 non-baghdad places map eraContentDir=new-york (they share the new-york arc, coherent + 0-leak but not place-distinct). Priority: EX-2 fork the 8 places' own period content → EX-3 athletic/entertainment locked depth → EX-4 GenAI breadth → EX-5 millennium run. Every cell stays at 0 harness findings.
 - [ ] **EX-2 Per-place life-arc breadth.** Author/generate the boyhood→victory life-arc for
   places beyond new-york (ireland, bavaria, baghdad-modern, the coasts, …) as slotted
   archetype/trope content so a line founded anywhere has a full arc, not a fallback.
