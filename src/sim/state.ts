@@ -91,6 +91,19 @@ export interface GameState {
   dynasty: DynastyKey;
   /** The protagonist's birth year (1946 Trump / 1971 Musk / 1888 Kennedy). */
   birthYear: number;
+  /**
+   * FOUNDING metadata (FD-6) for a "found your own dynasty" run. Absent on the
+   * preset-dynasty runs (they use the dynasty key). When present: the start-moment
+   * id, the player's chosen surname, the cultural lane, and the founding place —
+   * which FD-7 world-stacks + FD-8 birth mechanics key off. The 4 presets may also
+   * carry these once routed through foundDynasty as shortcuts.
+   */
+  founding?: {
+    momentId: string;
+    surname: string;
+    culture: string;
+    place: string;
+  };
 }
 
 /** Per-market live state (index walk + the player's stake). */
