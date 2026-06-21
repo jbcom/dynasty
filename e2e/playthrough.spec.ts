@@ -1,49 +1,44 @@
 import { expect, test } from "@playwright/test";
 
 /**
- * Full cross-cutting playthroughs: drive a real game from the title screen all
- * the way to an end state, exercising the whole stack (sim + engine + UI +
- * persistence) in a real mobile browser.
+ * Full cross-cutting playthroughs: drive a real game from the title screen all the
+ * way to an end state, exercising the whole stack (sim + engine + UI + persistence)
+ * in a real mobile browser.
  *
- * Flow (FD-6, found-only): Title → New Game (Found a Dynasty) → moment picker →
- * surname entry → Begin the Line → Play. The preset-dynasty carousel is gone.
+ * Flow (CP-R4/R5 diegetic birth): Title → enter a surname (+ optional seed) → New
+ * Game (Begin a Line) → the Epoch-0 birth (you emerge / discover the origin) → Play.
+ * There is no control panel and no preset-dynasty carousel; the origin is seed-dealt
+ * and discovered in-fiction.
  */
 
-/** Helper: walk the CP-7 control panel (moment → name → calling → axes → begin). */
+/** Helper: enter a surname (+ seed) and begin a line, landing on the play screen. */
 async function startGame(
   page: import("@playwright/test").Page,
-  opts: { seed: string; momentLabel?: RegExp; surname?: string } = { seed: "e2e-seed" },
+  opts: { seed: string; surname?: string } = { seed: "e2e-seed" },
 ): Promise<void> {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Dynasty" })).toBeVisible();
-  await page.getByLabel("Seed (optional)").fill(opts.seed);
-  await page.getByRole("button", { name: /Found a Dynasty/ }).click();
-  // Moment picker — choose the requested moment (default: the first card).
-  const card = opts.momentLabel
-    ? page.getByRole("button", { name: opts.momentLabel })
-    : page.getByRole("button", { name: /Found here/ }).first();
-  await card.click();
-  // Naming — surname, then advance to the calling.
   await page.getByLabel("Family name").fill(opts.surname ?? "Vane");
-  await page.getByRole("button", { name: /Next: the Calling/ }).click();
-  // Calling — take the first one.
-  await page
-    .getByRole("button", { name: /Take this calling/ })
-    .first()
-    .click();
-  // Epoch-0 axes — accept defaults and begin, then confirm.
-  await page.getByRole("button", { name: "Begin the Line" }).click();
-  await page.getByRole("button", { name: "Begin the Line" }).click();
+  await page.getByLabel("Seed (optional)").fill(opts.seed);
+  const begin = page.getByRole("button", { name: /Begin a Line/ });
+  await expect(begin).toBeEnabled();
+  await begin.click();
+  // Land on the play screen: the meter HUD + the first event with choices.
+  await expect(page.locator("[data-meter]").first()).toBeVisible({ timeout: 8000 });
+  await expect(page.locator("[data-event] .choices button").first()).toBeVisible({ timeout: 8000 });
 }
 
-test("plays from title to a legacy report end screen", async ({ page }) => {
+test("plays from title through the diegetic birth to a legacy report end screen", async ({
+  page,
+}) => {
   await startGame(page, { seed: "e2e-playthrough" });
 
-  // The play screen shows the meter HUD.
-  await expect(page.locator("[data-meter]").first()).toBeVisible();
+  // The diegetic birth opens straight into an event with reactable choices.
+  await expect(page.locator("[data-event]").first()).toBeVisible();
+  await expect(page.locator("[data-event] .choices button").first()).toBeVisible();
 
   // Keep taking the first available choice until the run ends (legacy report).
-  const maxTurns = 200;
+  const maxTurns = 300;
   let ended = false;
   for (let i = 0; i < maxTurns; i++) {
     const report = page.locator("[data-end]");
@@ -54,8 +49,7 @@ test("plays from title to a legacy report end screen", async ({ page }) => {
     const choice = page.locator("[data-event] .choices button").first();
     if (await choice.count()) {
       await choice.click();
-      // Let the transition + autosave settle.
-      await page.waitForTimeout(30);
+      await page.waitForTimeout(20);
     } else {
       await page.waitForTimeout(50);
     }
@@ -105,17 +99,20 @@ test("a saved run can be continued", async ({ page }) => {
   await expect(page.locator("[data-meter]").first()).toBeVisible();
 });
 
-test("the moment picker shows the founding hinges incl. deep history (FD-6)", async ({ page }) => {
+test("New Game requires a surname and goes straight into the birth (no control panel)", async ({
+  page,
+}) => {
   await page.goto("/");
-  await page.getByRole("button", { name: /Found a Dynasty/ }).click();
-  await expect(page.getByText("CHOOSE YOUR HINGE")).toBeVisible();
-  // Several start-moments are offered, including the deep-history exemplar.
-  await expect(page.getByRole("button", { name: /The Great Hunger/ })).toBeVisible();
-  await expect(page.getByRole("button", { name: /The Round City/ })).toBeVisible();
-  await expect(page.getByText("Deep history").first()).toBeVisible();
-  // Back button returns to title.
-  await page.getByRole("button", { name: "← Back" }).click();
-  await expect(page.getByRole("button", { name: /Found a Dynasty/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Dynasty" })).toBeVisible();
+  // The Begin button is disabled until a surname is entered.
+  const begin = page.getByRole("button", { name: /Begin a Line/ });
+  await expect(begin).toBeDisabled();
+  await page.getByLabel("Family name").fill("Ashford");
+  await expect(begin).toBeEnabled();
+  await begin.click();
+  // Straight into the diegetic birth event — no moment carousel / control-panel step.
+  await expect(page.locator("[data-event]").first()).toBeVisible();
+  await expect(page.getByText("CHOOSE YOUR HINGE")).toHaveCount(0);
 });
 
 test("the Settings screen stores no key by default and disables live mode (FD-12)", async ({
@@ -127,17 +124,5 @@ test("the Settings screen stores no key by default and disables live mode (FD-12
   // Live extrapolation is off and the toggle is disabled until a key is entered.
   await expect(page.getByRole("button", { name: /Live extrapolation OFF/ })).toBeDisabled();
   await page.getByRole("button", { name: "← Back" }).click();
-  await expect(page.getByRole("button", { name: /Found a Dynasty/ })).toBeVisible();
-});
-
-test("a deep-history line founds and plays the caliphate era", async ({ page }) => {
-  await startGame(page, {
-    seed: "e2e-deep",
-    momentLabel: /The Round City/,
-    surname: "al-Rashid",
-  });
-  await expect(page.locator("[data-meter]").first()).toBeVisible();
-  // A choice is available in the opening caliphate event.
-  const choice = page.locator("[data-event] .choices button").first();
-  await expect(choice).toBeVisible({ timeout: 5000 });
+  await expect(page.getByRole("button", { name: /Begin a Line/ })).toBeVisible();
 });
