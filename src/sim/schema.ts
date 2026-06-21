@@ -698,6 +698,49 @@ export const EventTemplatesFileSchema = z.object({
 });
 export type EventTemplatesFile = z.infer<typeof EventTemplatesFileSchema>;
 
+/* ------------------------------------------------------------------------- *
+ * ONOMASTICS (FD-5) — per-culture given-name pools + naming conventions, so a
+ * founded dynasty's generated given names are period- and culture-accurate and
+ * children are named by the culture's rule (eldest son ← paternal grandfather,
+ * etc.). Generalizes the single-protagonist branch naming (sim/terms.ts AH8c/d)
+ * to the found-your-own-dynasty model. Pure data; the resolver lives in
+ * sim/onomastics.ts. See design spec §4.
+ * ------------------------------------------------------------------------- */
+
+/** Which relative an ordinal child is named after, per the culture's convention. */
+export const NamingSourceSchema = z.enum([
+  "paternalGrandfather",
+  "paternalGrandmother",
+  "maternalGrandfather",
+  "maternalGrandmother",
+  "father",
+  "mother",
+]);
+export type NamingSource = z.infer<typeof NamingSourceSchema>;
+
+export const NamingRulesSchema = z.object({
+  eldestSon: NamingSourceSchema.optional(),
+  eldestDaughter: NamingSourceSchema.optional(),
+  secondSon: NamingSourceSchema.optional(),
+  secondDaughter: NamingSourceSchema.optional(),
+});
+export type NamingRules = z.infer<typeof NamingRulesSchema>;
+
+export const CultureSchema = z.object({
+  label: z.string().min(1),
+  givenMale: z.array(z.string().min(1)).min(1),
+  givenFemale: z.array(z.string().min(1)).min(1),
+  /** The culture's naming style (used for suffixing — e.g. junior/regnal). */
+  convention: z.string().min(1),
+  namingRules: NamingRulesSchema.default({}),
+});
+export type Culture = z.infer<typeof CultureSchema>;
+
+export const OnomasticsFileSchema = z.object({
+  cultures: z.record(z.string(), CultureSchema).default({}),
+});
+export type OnomasticsFile = z.infer<typeof OnomasticsFileSchema>;
+
 /** Validate arbitrary JSON against a schema, throwing a readable error on failure. */
 export function parseContent<T>(schema: z.ZodType<T>, data: unknown, label: string): T {
   const result = schema.safeParse(data);

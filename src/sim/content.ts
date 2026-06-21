@@ -20,6 +20,8 @@ import {
   MarketsFileSchema,
   type MeterDef,
   MetersFileSchema,
+  type OnomasticsFile,
+  OnomasticsFileSchema,
   parseContent,
   type RankLadder,
   RanksFileSchema,
@@ -72,6 +74,11 @@ export interface Content {
    */
   templates: EventTemplate[];
   /**
+   * Per-culture given-name pools + naming conventions (FD-5). Feeds the procgen
+   * context + the found-your-own-dynasty naming. Keyed by culture id.
+   */
+  onomastics: OnomasticsFile["cultures"];
+  /**
    * World-timeline entries PROJECTED into the unified event pool (FD-2.2): the
    * dated backdrop facts as year-keyed, reactable GameEvents the player lives
    * through. Derived from worldTimelines; year-sorted + deterministic.
@@ -95,6 +102,7 @@ export interface RawContent {
   familyTrees?: unknown;
   tropes?: unknown;
   templates?: unknown;
+  onomastics?: unknown;
 }
 
 /** Validate raw JSON into a Content bundle, cross-checking referential integrity. */
@@ -134,6 +142,11 @@ export function buildContent(raw: RawContent): Content {
     EventTemplatesFileSchema,
     raw.templates ?? { templates: [] },
     "templates",
+  );
+  const onomasticsFile = parseContent(
+    OnomasticsFileSchema,
+    raw.onomastics ?? { cultures: {} },
+    "onomastics.json",
   );
   // A template's trope ids must resolve to the catalog (same guarantee as events).
   if (tropeIds.size > 0) {
@@ -253,6 +266,7 @@ export function buildContent(raw: RawContent): Content {
     familyTrees: familyTreesFile.trees,
     tropes: tropesFile.tropes,
     templates: templatesFile.templates,
+    onomastics: onomasticsFile.cultures,
     worldEvents: projectWorldEvents(worldTimelines),
   };
 }
