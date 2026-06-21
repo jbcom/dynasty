@@ -3073,6 +3073,340 @@
           "outcome": "Whatever the human soul carries to the stars, it carries your monogram stamped on the crate. The galaxy's first impression of humanity is, unmistakably, you."
         }
       ]
+    },
+    {
+      "id": "ev_gen_shattered_treaty",
+      "era": "unification",
+      "year": 2055,
+      "title": "The Shattered Treaty of Geneva",
+      "scene": "The old nation-states refuse to sign the central energy accord that would fund our global grid. Worse, your own grand-nephew has defected to the Swiss canton defenses, taking the schematics for our private cold-fusion cells with him to bolster their sovereign borders.",
+      "researchNote": "Early global unification efforts historically hit bottlenecks over the control of sovereign energy infrastructure and intellectual property.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:reformer-vs-reactionary"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "crush_canton",
+          "text": "Authorize an orbital kinetic strike on the Swiss research labs.",
+          "effects": {
+            "power": 15,
+            "reputation": -10,
+            "heat": 20
+          },
+          "personality": {
+            "ideology": 0.8,
+            "grandiosity": 0.6
+          },
+          "setFlags": [
+            "geneva_crushed"
+          ],
+          "outcome": "The Swiss bunker is a glass crater. The remaining nation-states sign the accord in absolute silence, though your nephew's charred remains leave a lasting stain on your family legacy.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "bribe_defectors",
+          "text": "Offer the Swiss cantons exclusive, tax-free status in the new global senate.",
+          "effects": {
+            "money": -20,
+            "power": 5,
+            "reputation": 10,
+            "heat": -5
+          },
+          "personality": {
+            "outward": 0.7,
+            "inward": -0.3
+          },
+          "outcome": "Money talks louder than sovereign pride. They sign, but your descendants whisper that you paid a king's ransom to buy peace from a handful of stubborn mountain dwellers.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "quarantine_canton",
+          "text": "Sever their energy grid and leave them to freeze in sovereign isolation.",
+          "effects": {
+            "money": 10,
+            "power": -5,
+            "loyalty": -10,
+            "heat": 5
+          },
+          "personality": {
+            "inward": 0.8
+          },
+          "outcome": "The Swiss remain free, dark, and increasingly desperate. Their suffering becomes a grim advertisement for the benefits of joining your unified world.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_asteroid_cartel",
+      "era": "unification",
+      "year": 2058,
+      "title": "The Asteroid Cartel",
+      "scene": "Before any alien ship has even looked toward Earth, your family's automated harvesters have staked claims on the iron-nickel core of Psyche-16. Now, the orbital workers' union—starved of oxygen and decent wages—threatens to de-orbit a mega-ton rock directly into your Shanghai offices unless you cede mineral rights.",
+      "researchNote": "Private space resource extraction in the mid-21st century presents unprecedented leverage opportunities for rogue labor movements.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:frontier-capital-origin",
+        "trope:oligarch"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "seize_psyche",
+          "text": "Send automated security drones to clear the mining habitats.",
+          "effects": {
+            "money": 25,
+            "power": 10,
+            "loyalty": -20,
+            "heat": 15
+          },
+          "personality": {
+            "grandiosity": 0.5,
+            "inward": 0.5
+          },
+          "setFlags": [
+            "blood_on_psyche"
+          ],
+          "outcome": "The drones restore order. The bodies of the union leaders are left to drift in the belt, but the cheap iron flows back to Earth to build your grand projects.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "co_opt_union",
+          "text": "Incorporate the union into a family-run space exploration subsidiary.",
+          "effects": {
+            "money": -15,
+            "power": 5,
+            "reputation": 15,
+            "heat": -10
+          },
+          "personality": {
+            "outward": 0.6
+          },
+          "outcome": "They exchange their revolutionary banners for corporate stock options. Production resumes, and your name is hailed in the low-gravity slums.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "hire_privateers",
+          "text": "Hire private military contractors to secretly sabotage the asteroid's thruster systems.",
+          "effects": {
+            "money": -10,
+            "power": 15,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": -0.4
+          },
+          "outcome": "An unfortunate 'navigational error' flings the strike leaders into deep space. The public blames faulty valve systems, leaving your hands clean.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_offworld_schism",
+      "era": "unification",
+      "year": 2064,
+      "title": "The Offworld Schism",
+      "scene": "In the wake of first contact, your eldest grandchild, disgusted by Earth's submission to the Concord's patronizing oversight, boards a colony seed-ship destined for the Barnard's Star system. They have stripped your family's oldest accounts to fund a voyage of absolute human sovereignty.",
+      "researchNote": "The physical realities of interstellar travel allow dissident family factions to establish completely autonomous cadet branches.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:cadet-branch",
+        "trope:prodigal-heir"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "sabotage_engines",
+          "text": "Have the ship's warp manifold quietly fail before they leave the Oort cloud.",
+          "effects": {
+            "power": 10,
+            "loyalty": -25,
+            "health": -10
+          },
+          "personality": {
+            "inward": 0.8
+          },
+          "setFlags": [
+            "murdered_the_prodigal"
+          ],
+          "outcome": "A tragic, engine-room accident leaves the colonists stranded in the dark. Your grandchild dies a martyr, but your secrets remain safe on Earth.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "let_them_go",
+          "text": "Wish them well, but publicly disinherit their line from all future Earth holdings.",
+          "effects": {
+            "money": 15,
+            "reputation": 10,
+            "heat": -5
+          },
+          "personality": {
+            "outward": 0.4
+          },
+          "outcome": "They sail into the dark as free souls, leaving your Earthbound branch lighter, wealthier, and entirely unchallenged.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "send_spies",
+          "text": "Fund the expedition, but plant loyal family agents among the crew to monitor their progress.",
+          "effects": {
+            "money": -15,
+            "power": 15,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": 0.3
+          },
+          "outcome": "You establish a quiet grip on the first human colony beyond the solar system. Decades from now, their children will still answer to your ledger.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_bioluddite_riots",
+      "era": "unification",
+      "year": 2067,
+      "title": "The Bio-Luddite Riots",
+      "scene": "Your integration of Concord-assisted medical enhancements has triggered violent riots in the recovering industrial zones. Populist leaders claim the 'New Mankind' you are breeding in your laboratories is a designed slave class, devoid of human spirit and engineered purely for planetary loyalty.",
+      "researchNote": "Historically, technological leaps in human biology trigger massive cultural immune responses and neo-Luddite insurrections.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:centrist-to-zealot"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "force_treatment",
+          "text": "Mandate the genetic therapies as a prerequisite for global citizenship.",
+          "effects": {
+            "power": 25,
+            "loyalty": -15,
+            "heat": 25
+          },
+          "personality": {
+            "ideology": 0.9,
+            "grandiosity": 0.8
+          },
+          "setFlags": [
+            "mandated_genetics"
+          ],
+          "outcome": "The riots are crushed by peacekeepers. Within a generation, the population is healthier, more intelligent, and remarkably disinclined to protest your rule.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "compromise_labs",
+          "text": "Limit the genetic enhancements to cosmetic and non-heritable traits.",
+          "effects": {
+            "money": -10,
+            "reputation": 10,
+            "heat": -10
+          },
+          "personality": {
+            "outward": 0.5
+          },
+          "outcome": "The mob is appeased, but the Concord's observers express polite disappointment at our species' refusal to transcend its biological limits.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "monetize_purity",
+          "text": "Market 'unaltered baseline humanity' as an expensive, luxury brand for the global elite.",
+          "effects": {
+            "money": 20,
+            "reputation": -5,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": -0.6
+          },
+          "outcome": "The rich pay handsomely to keep their genetic flaws, turning their fear of progress into a lucrative new source of revenue for your family offices.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_return_exile",
+      "era": "unification",
+      "year": 2073,
+      "title": "The Return of the Exile",
+      "scene": "The child you banished twenty years ago for fighting against your global unification has returned to Earth. They do not arrive as a beggar, but as a sleek diplomat representing the outer-system belt confederation, demanding a seat at the high council table of the new unified world.",
+      "researchNote": "Colonial expansion often results in a reverse migration of radical political ideas from the frontier back to the metropolis.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:exile-return",
+        "trope:prodigal-heir"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "arrest_exile",
+          "text": "Arrest them for their ancient crimes against the state the moment they step off the shuttle.",
+          "effects": {
+            "power": 15,
+            "reputation": -15,
+            "heat": 20
+          },
+          "personality": {
+            "inward": 0.7
+          },
+          "outcome": "They are thrown into a deep cell, but the belt colonies view this as an act of war, threatening to cut off Earth's raw resources.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "seat_at_table",
+          "text": "Welcome them with open arms, offering them a permanent seat on the High Council.",
+          "effects": {
+            "power": -10,
+            "loyalty": 20,
+            "heat": -10
+          },
+          "personality": {
+            "outward": 0.8
+          },
+          "outcome": "Your old enemy sits at your side, bringing the belt colonies back into our political orbit, though your authority is no longer absolute.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "dynastic_marriage_exile",
+          "text": "Arrange a dynastic merger between their belt faction and your loyal Earth heirs.",
+          "effects": {
+            "money": 15,
+            "power": 10,
+            "reputation": 10
+          },
+          "personality": {
+            "ideology": -0.3
+          },
+          "outcome": "The alliance combines the resources of the belt with the technology of Earth. The next generation of your family will rule the entire solar system.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
     }
   ]
 }

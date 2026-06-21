@@ -40,6 +40,28 @@ function recent(eraData, n = 20) {
   return [...eraData.events].sort((a, b) => a.year - b.year).slice(-n);
 }
 
+/**
+ * Normalize a generated event to the AUTHORED JSON shape: every event + choice
+ * carries the optional arrays explicitly (setFlags/clearFlags/ripples/tags) so the
+ * raw JSON's inferred type matches hand-authored events (tests import era JSON and
+ * read e.g. choice.setFlags). zod would default these at load, but the on-disk
+ * shape must be uniform too.
+ */
+function normalizeEvent(ev) {
+  return {
+    ...ev,
+    tags: ev.tags ?? [],
+    choices: (ev.choices ?? []).map((c) => ({
+      ...c,
+      effects: c.effects ?? {},
+      personality: c.personality ?? {},
+      setFlags: c.setFlags ?? [],
+      clearFlags: c.clearFlags ?? [],
+      ripples: c.ripples ?? [],
+    })),
+  };
+}
+
 async function fillEra(eraId, eraMeta) {
   const { path, data } = loadEra(eraId);
   const gap = {
@@ -60,7 +82,7 @@ async function fillEra(eraId, eraMeta) {
     const verdict = await critiqueEvent({ event: ev, recentEvents: recent(data, 10) });
     const mark = verdict.keep ? "KEEP" : "drop";
     console.log(`  [${mark} ${verdict.score}] ${ev.id}: ${verdict.why}`);
-    if (verdict.keep) kept.push({ ...ev, era: eraId });
+    if (verdict.keep) kept.push(normalizeEvent({ ...ev, era: eraId }));
   }
   if (WRITE && kept.length) {
     data.events.push(...kept);

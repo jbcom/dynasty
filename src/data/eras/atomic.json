@@ -2356,6 +2356,571 @@
           "outcome": "You tell them the bombs were what happens when a species forgets there is anywhere to go but at each other's throats. You point at the cold stars and say: there. That is where we are going. Decades from now, something out there will hear how Earth chose to answer its own apocalypse."
         }
       ]
+    },
+    {
+      "id": "ev_gen_logistics_chaos_2043",
+      "era": "atomic",
+      "year": 2043,
+      "title": "The Logistics of Chaos",
+      "scene": "The federal supply depots are burning, but their automated gates remain sealed. While the mobs tear each other apart for canned peaches, your family must decide how to crack the steel vaults. Do you use your last heavy machinery to smash the doors, or offer the rogue guards inside a place in your emerging household?",
+      "researchNote": "In the immediate aftermath of systemic collapse, control over intact logistics nodes determines who becomes a warlord and who starves.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:frontier-capital-origin"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "smash_gates",
+          "text": "Ram the gates and seize everything by force.",
+          "effects": {
+            "money": 150,
+            "power": 100,
+            "heat": 80
+          },
+          "personality": {
+            "grandiosity": 0.6,
+            "inward": 0.4
+          },
+          "setFlags": [
+            "looted_depot"
+          ],
+          "outcome": "The gates buckle. You secure enough freeze-dried beef to feed your line for a decade, though three of your cousins are crushed in the melee.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "negotiate_guards",
+          "text": "Offer the starving guards a hereditary alliance.",
+          "effects": {
+            "money": 50,
+            "power": 150,
+            "loyalty": 120,
+            "heat": 20
+          },
+          "personality": {
+            "outward": 0.8,
+            "inward": 0.2
+          },
+          "setFlags": [
+            "allied_guards"
+          ],
+          "outcome": "They open the vault. They bring heavy machine guns and a disciplined military structure directly into your service.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "provoke_mob",
+          "text": "Direct the mob to storm it first, then scavenge.",
+          "effects": {
+            "money": 80,
+            "reputation": -100,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": -0.5,
+            "inward": 0.9
+          },
+          "outcome": "A thousand desperate souls throw themselves onto the automatic defenses. When the ammunition runs out, you walk over their bodies to collect the prize.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_ash_union_2045",
+      "era": "atomic",
+      "year": 2045,
+      "title": "An Alliance of Ash",
+      "scene": "To solidify your hold over the three settlements of the Crown of Rust, you must tie your bloodline to the military strength of Colonel Green's surviving lieutenants. They demand a marriage between your eldest child and their chief logistics officer, a hard-eyed woman who measures love in gallons of clean water.",
+      "researchNote": "Post-collapse alliances are rarely built on romance; they are calculated exchanges of security for resource monopolies.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:dynastic-merger"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "agree_union",
+          "text": "Agree to the union and host a wedding in the ruins.",
+          "effects": {
+            "power": 200,
+            "loyalty": 100,
+            "heat": 40
+          },
+          "personality": {
+            "outward": 0.5,
+            "inward": 0.5
+          },
+          "setFlags": [
+            "green_blood_alliance"
+          ],
+          "outcome": "A grim feast of wild dog and reconstituted wine seals the pact. Your flank is secure, though your heir's eyes are dead.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "demand_tribute",
+          "text": "Demand a massive dowry of penicillin and weapons first.",
+          "effects": {
+            "money": 200,
+            "power": 80,
+            "reputation": -50
+          },
+          "personality": {
+            "grandiosity": 0.8,
+            "inward": 0.3
+          },
+          "outcome": "They cough up the goods, cursing your greed. The marriage proceeds under a cloud of mutual resentment.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "refuse_marriage",
+          "text": "Refuse the marriage to keep your bloodline pure.",
+          "effects": {
+            "power": -100,
+            "reputation": 100,
+            "loyalty": -50
+          },
+          "personality": {
+            "ideology": 0.7,
+            "inward": 0.8
+          },
+          "outcome": "You keep your lineage uncompromised, but Green's lieutenants look at you with cold, calculating hostility.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_sickness_firstborn_2047",
+      "era": "atomic",
+      "year": 2047,
+      "title": "The Sickness of the Firstborn",
+      "scene": "Your eldest child, groomed to inherit the Crown of Rust, is coughing up blood. The dosimeters don't lie: their marrow is failing from the hot zones. Your second child, a quiet, bookish youth who spent the war in the bunker libraries, stands in the shadow of the sickbed, waiting to see if they must now bear the family's burden.",
+      "researchNote": "High-dose radiation exposure historically disrupts aristocratic succession, forcing families to rely on untested, secondary heirs.",
+      "historicity": "personal",
+      "tags": [
+        "trope:accidental-heir"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "spend_for_first",
+          "text": "Spend your rarest medical reserves to prolong the eldest's life.",
+          "effects": {
+            "money": -250,
+            "power": -50,
+            "health": 30
+          },
+          "personality": {
+            "inward": 0.9
+          },
+          "outcome": "They survive, barely, as an invalid. The dynasty remains stable, but your treasuries are dangerously empty.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "anoint_second",
+          "text": "Formally transfer the dynastic seal to the second child.",
+          "effects": {
+            "power": 120,
+            "loyalty": -40,
+            "heat": 30
+          },
+          "personality": {
+            "ideology": -0.3,
+            "grandiosity": 0.5
+          },
+          "setFlags": [
+            "second_child_reign"
+          ],
+          "outcome": "The eldest is left to die quietly in the back room. The bookish second child takes the seal with trembling, clean hands.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "trial_of_strength",
+          "text": "Let them divide the family lands and compete for survival.",
+          "effects": {
+            "power": -80,
+            "loyalty": -100,
+            "heat": 100
+          },
+          "personality": {
+            "ideology": 0.8
+          },
+          "outcome": "A quiet, bitter feud splits your household. Your settlements watch as the family begins to consume itself.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_seed_new_flesh_2048",
+      "era": "atomic",
+      "year": 2048,
+      "title": "The Seed of the New Flesh",
+      "scene": "The starving researchers from the Vault of Knowledge offer you a bargain. They have synthesized a strain of rye that thrives in radioactive soil, but it requires a genetic catalyst extracted from human marrow. They ask for your family's authorization—and several 'expendable' labor camp prisoners—to begin human trials.",
+      "researchNote": "The intersection of desperate food shortages and unchecked biotechnology frequently leads to severe ethical compromises.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:techno-frontier"
+      ],
+      "weight": 1,
+      "requires": {
+        "flags": [
+          "looted_depot"
+        ]
+      },
+      "choices": [
+        {
+          "id": "authorize_trials",
+          "text": "Authorize the human trials in the name of survival.",
+          "effects": {
+            "money": 300,
+            "power": 150,
+            "reputation": -150,
+            "heat": 80
+          },
+          "personality": {
+            "ideology": -0.8,
+            "grandiosity": 0.7
+          },
+          "setFlags": [
+            "flesh_seeds"
+          ],
+          "outcome": "The fields turn a strange, pale blue. The harvest is abundant, but the whispers about what feed the soil never stop.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "force_synthetic",
+          "text": "Force the researchers to work only with synthetic substrates.",
+          "effects": {
+            "money": -100,
+            "power": -50,
+            "reputation": 100
+          },
+          "personality": {
+            "ideology": 0.6,
+            "outward": 0.4
+          },
+          "outcome": "Progress is agonizingly slow. Your people remain hungry, but your moral standing among the survivors is pristine.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "seize_and_lock",
+          "text": "Seize the gene bank by force and burn their notes.",
+          "effects": {
+            "power": 100,
+            "reputation": 50,
+            "loyalty": -80,
+            "heat": 50
+          },
+          "personality": {
+            "ideology": 0.9,
+            "inward": 0.7
+          },
+          "outcome": "You shut down the hubristic science. The researchers curse you as they starve, but the human genome remains unsoiled.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_salt_syndicate_2049",
+      "era": "atomic",
+      "year": 2049,
+      "title": "The Salt Syndicate",
+      "scene": "The Exchange has proposed a formal partnership. They will route all trade through your territory, giving you a cut of every ounce of salt and bullet traded. In return, they want your enforcers to crush the independent traders who dare to barter directly with the settlements.",
+      "researchNote": "Monopolization of basic survival commodities is the fastest route to state-like authority in collapsed economies.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:oligarch"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "enforce_monopoly",
+          "text": "Enforce the monopoly with iron fists.",
+          "effects": {
+            "money": 400,
+            "power": 180,
+            "loyalty": -120,
+            "heat": 90
+          },
+          "personality": {
+            "ideology": -0.6,
+            "grandiosity": 0.5
+          },
+          "setFlags": [
+            "salt_monopoly"
+          ],
+          "outcome": "Independent traders are hanged from rusted lampposts. The treasury overflows, but your name becomes a curse in the camps.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "tax_both",
+          "text": "Tax the Exchange while letting small traders operate.",
+          "effects": {
+            "money": 150,
+            "power": 50,
+            "loyalty": 80,
+            "heat": 30
+          },
+          "personality": {
+            "outward": 0.7,
+            "inward": 0.3
+          },
+          "outcome": "You maintain a delicate economic balance. Neither side is happy, but the economy functions without open warfare.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "raid_exchange",
+          "text": "Openly raid the Exchange's supply trains to feed the poor.",
+          "effects": {
+            "money": -200,
+            "reputation": 250,
+            "loyalty": 150,
+            "heat": 150
+          },
+          "personality": {
+            "ideology": 0.8,
+            "outward": 0.6
+          },
+          "outcome": "You are a hero of the ruined earth. The Exchange, however, puts a massive bounty on your entire lineage.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_soil_schism_2051",
+      "era": "atomic",
+      "year": 2051,
+      "title": "The Soil Schism",
+      "scene": "The discovery of the First Green has split your family. Your sister demands the fertile soil be distributed immediately to the surviving refugees to rebuild a free peasantry. Your cousin insists it must be fenced off, guarded by automated turrets, and cultivated solely for the family's private granaries.",
+      "researchNote": "The return of arable land after an ecological catastrophe inevitably triggers intense class and family struggles over agrarian reform.",
+      "historicity": "personal",
+      "tags": [
+        "trope:reformer-vs-reactionary"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "side_sister",
+          "text": "Side with your sister: distribute the seeds and soil.",
+          "effects": {
+            "power": -100,
+            "reputation": 200,
+            "loyalty": 150
+          },
+          "personality": {
+            "ideology": 0.8,
+            "outward": 0.7
+          },
+          "setFlags": [
+            "green_reform"
+          ],
+          "outcome": "The peasants weep with gratitude as they sow the fields. Your cousin leaves the settlement in disgust with his loyal guards.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "side_cousin",
+          "text": "Side with your cousin: fence the green zone.",
+          "effects": {
+            "money": 300,
+            "power": 200,
+            "reputation": -150,
+            "heat": 60
+          },
+          "personality": {
+            "ideology": -0.5,
+            "grandiosity": 0.8
+          },
+          "outcome": "The turrets hum. Your family eats fresh bread every morning while the starving watch the razor wire from the dust.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "split_difference",
+          "text": "Keep the core land and lease the margins to tenant farmers.",
+          "effects": {
+            "money": 100,
+            "power": 80,
+            "loyalty": 50,
+            "heat": 20
+          },
+          "personality": {
+            "outward": 0.4,
+            "inward": 0.6
+          },
+          "outcome": "A compromise that leaves everyone slightly bitter, but keeps the family together and the grain flowing.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_general_cage_2052",
+      "era": "atomic",
+      "year": 2052,
+      "title": "The General in the Cage",
+      "scene": "The rival commander who ordered the nuclear strikes on your former home cities has been captured. He is old, toothless, and sits in a wooden cage in your main square. The mob screams for his skin, but his knowledge of remaining hidden military silos could make your family invincible.",
+      "researchNote": "The integration of war criminals into rebuilding state apparatuses is a common, cynical tool of state-building.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:conqueror"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "execute_general",
+          "text": "Publicly execute him to appease the mob.",
+          "effects": {
+            "reputation": 200,
+            "loyalty": 100,
+            "heat": -50
+          },
+          "personality": {
+            "ideology": 0.6,
+            "outward": 0.5
+          },
+          "outcome": "The execution is a grand, bloody spectacle. The crowd roars your name, but the secrets of the old world die with him.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "secret_extraction",
+          "text": "Secretly smuggle him to your bunker to extract the codes.",
+          "effects": {
+            "power": 250,
+            "reputation": -100,
+            "heat": 100
+          },
+          "personality": {
+            "ideology": -0.8,
+            "grandiosity": 0.9
+          },
+          "setFlags": [
+            "silo_secrets"
+          ],
+          "outcome": "Under soft torture, he reveals the coordinates of three fully-armed missile silos. You hold the trigger of the next world.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "sell_exchange",
+          "text": "Sell him to the Exchange for a massive ransom.",
+          "effects": {
+            "money": 350,
+            "power": -50,
+            "loyalty": -80
+          },
+          "personality": {
+            "ideology": -0.3,
+            "inward": 0.8
+          },
+          "outcome": "You secure a mountain of silver, but your people are disgusted that you traded justice for mere coin.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_liturgy_filter_2053",
+      "era": "atomic",
+      "year": 2053,
+      "title": "The Liturgy of the Filter",
+      "scene": "As the winter thins, your young heir has begun organizing the children of the settlements into a disciplined, black-uniformed youth corps. They worship 'The Filter'—both the physical air scrubbers that saved them and a philosophy of purging the weak and irradiated to ensure human survival.",
+      "researchNote": "Severe environmental trauma often breeds highly dogmatic, quasi-religious youth movements focused on purity and survival.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:centrist-to-zealot"
+      ],
+      "weight": 1,
+      "requires": {
+        "flags": [
+          "second_child_reign"
+        ]
+      },
+      "choices": [
+        {
+          "id": "endorse_cult",
+          "text": "Fully endorse the cult: make 'Filterism' the law of the land.",
+          "effects": {
+            "power": 300,
+            "reputation": -200,
+            "loyalty": 150,
+            "heat": 120
+          },
+          "personality": {
+            "ideology": 0.9,
+            "grandiosity": 1
+          },
+          "setFlags": [
+            "filterism_state"
+          ],
+          "outcome": "The old, the sick, and the soft are quietly cast out into the dead zones. Your heir rules a state of absolute, terrified obedience.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "suppress_cult",
+          "text": "Suppress the movement as a dangerous perversion of your rule.",
+          "effects": {
+            "power": -100,
+            "reputation": 100,
+            "loyalty": -100,
+            "heat": 50
+          },
+          "personality": {
+            "ideology": -0.5,
+            "outward": 0.6
+          },
+          "outcome": "You disband the youth corps. Your heir looks at you with a cold, unforgiving hatred that promises a future coup.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "coopt_police",
+          "text": "Co-opt them as a private police force without adopting their creed.",
+          "effects": {
+            "money": -100,
+            "power": 150,
+            "loyalty": 80,
+            "heat": 60
+          },
+          "personality": {
+            "ideology": -0.2,
+            "inward": 0.5
+          },
+          "outcome": "You use their fanaticism to guard your warehouses. They serve you faithfully, but their eyes are always watching for any sign of weakness.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
     }
   ]
 }

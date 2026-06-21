@@ -9,9 +9,11 @@ interface Props {
   /** Found a dynasty: the chosen moment, the player's surname, and a seed. */
   onFound: (momentId: string, surname: string, seed: string) => void;
   onContinue: () => void;
+  /** Open the Settings screen (FD-12). */
+  onSettings: () => void;
 }
 
-const { moments, hasSave, onFound, onContinue }: Props = $props();
+const { moments, hasSave, onFound, onContinue, onSettings }: Props = $props();
 
 let step = $state<"title" | "moment-select" | "name-entry">("title");
 let seed = $state("");
@@ -57,10 +59,11 @@ function randomSeed(): string {
     <div class="panel">
       <label for="seed">Seed (optional)</label>
       <input id="seed" bind:value={seed} placeholder="leave blank for random" autocomplete="off" />
-      <button class="primary" type="button" onclick={beginFounding}>Found a Dynasty</button>
+      <button class="primary" type="button" onclick={beginFounding}>New Game — Found a Dynasty</button>
       {#if hasSave}
-        <button class="secondary" type="button" onclick={onContinue}>Continue the Saga</button>
+        <button class="secondary" type="button" onclick={onContinue}>Load Game — Continue</button>
       {/if}
+      <button class="secondary" type="button" onclick={onSettings}>Settings</button>
     </div>
   </main>
 {:else if step === "moment-select"}

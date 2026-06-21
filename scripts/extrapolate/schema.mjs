@@ -50,7 +50,16 @@ export const EVENT_SCHEMA = {
     place: { type: "string", description: "place id, optional" },
     tags: { type: "array", items: { type: "string" }, description: "incl. trope:<id> tags" },
     weight: { type: "number" },
-    choices: { type: "array", items: CHOICE, minItems: 2, maxItems: 4 },
+    requires: {
+      type: "object",
+      description:
+        "OPTIONAL gate: flags that must be present / absent for this event to appear. Gate ~1/3 of events on flags set by EARLIER events' choices (setFlags) to create divergent, path-dependent timelines.",
+      properties: {
+        flags: { type: "array", items: { type: "string" } },
+        notFlags: { type: "array", items: { type: "string" } },
+      },
+    },
+    choices: { type: "array", items: CHOICE, minItems: 3, maxItems: 4 },
   },
   required: ["id", "era", "year", "title", "scene", "researchNote", "historicity", "choices"],
 };

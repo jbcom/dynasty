@@ -10,33 +10,70 @@
       "researchNote": "Baghdad was founded in 762 CE as the Abbasid 'Round City' (Madinat al-Salam) by caliph al-Mansur.",
       "historicity": "real",
       "place": "baghdad",
-      "tags": ["trope:frontier-capital-origin", "deep_history"],
-      "requires": { "flags": [], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "trope:frontier-capital-origin",
+        "deep_history"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "choices": [
         {
           "id": "buy_in_early",
           "text": "Buy land at the city's heart before the walls close",
-          "effects": { "money": -8, "power": 8, "reputation": 4 },
-          "personality": { "grandiosity": 4 },
-          "setFlags": ["city_landholder"],
-          "outcome": "A gamble on mud that will, within a generation, be the center of the world."
+          "effects": {
+            "money": -8,
+            "power": 8,
+            "reputation": 4
+          },
+          "personality": {
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "city_landholder"
+          ],
+          "outcome": "A gamble on mud that will, within a generation, be the center of the world.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "trade_the_gates",
           "text": "Set up as a merchant at the river gates",
-          "effects": { "money": 8, "heat": 2 },
-          "personality": { "outward": 4 },
-          "setFlags": ["merchant_fortune"],
-          "outcome": "Goods flow where the caliph builds. The family's caravans find their first market."
+          "effects": {
+            "money": 8,
+            "heat": 2
+          },
+          "personality": {
+            "outward": 4
+          },
+          "setFlags": [
+            "merchant_fortune"
+          ],
+          "outcome": "Goods flow where the caliph builds. The family's caravans find their first market.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "serve_the_caliph",
           "text": "Offer the family's service to al-Mansur's administration",
-          "effects": { "power": 6, "loyalty": 6, "heat": 4 },
-          "personality": { "ideology": 4 },
-          "setFlags": ["court_faction"],
-          "outcome": "Proximity to the throne — the highest reward and the shortest rope."
+          "effects": {
+            "power": 6,
+            "loyalty": 6,
+            "heat": 4
+          },
+          "personality": {
+            "ideology": 4
+          },
+          "setFlags": [
+            "court_faction"
+          ],
+          "outcome": "Proximity to the throne — the highest reward and the shortest rope.",
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     },
@@ -49,33 +86,74 @@
       "researchNote": "The Bayt al-Hikma (House of Wisdom) grew as a translation and scholarship hub in 8th–9th c. Baghdad.",
       "historicity": "real",
       "place": "baghdad",
-      "tags": ["trope:prophet", "deep_history", "scholarship"],
-      "requires": { "flags": [], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "trope:prophet",
+        "deep_history",
+        "scholarship"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "choices": [
         {
           "id": "embrace_learning",
           "text": "Bind the family to the House of Wisdom",
-          "effects": { "reputation": 12, "power": 4, "money": -6 },
-          "personality": { "ideology": 4, "inward": 6 },
-          "setFlags": ["scholar_house"],
-          "outcome": "The name becomes a byword for learning — slow power that outlives swords."
+          "effects": {
+            "reputation": 12,
+            "power": 4,
+            "money": -6
+          },
+          "personality": {
+            "ideology": 4,
+            "inward": 6
+          },
+          "setFlags": [
+            "scholar_house"
+          ],
+          "outcome": "The name becomes a byword for learning — slow power that outlives swords.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "fund_translators",
           "text": "Fund the translators as a patron, not a scholar",
-          "effects": { "reputation": 8, "money": -10, "power": 2 },
-          "personality": { "outward": 4 },
-          "setFlags": ["scholar_patron"],
-          "outcome": "Let others hold the pen; the family holds the purse — and the credit."
+          "effects": {
+            "reputation": 8,
+            "money": -10,
+            "power": 2
+          },
+          "personality": {
+            "outward": 4
+          },
+          "setFlags": [
+            "scholar_patron"
+          ],
+          "outcome": "Let others hold the pen; the family holds the purse — and the credit.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "court_intrigue",
           "text": "Seek the caliph's court instead — proximity to the throne",
-          "effects": { "power": 10, "heat": 8, "reputation": 2 },
-          "personality": { "grandiosity": 6, "outward": 4 },
-          "setFlags": ["court_faction"],
-          "outcome": "Closer to the throne is closer to the executioner. The family chooses the dangerous game."
+          "effects": {
+            "power": 10,
+            "heat": 8,
+            "reputation": 2
+          },
+          "personality": {
+            "grandiosity": 6,
+            "outward": 4
+          },
+          "setFlags": [
+            "court_faction"
+          ],
+          "outcome": "Closer to the throne is closer to the executioner. The family chooses the dangerous game.",
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     },
@@ -88,33 +166,68 @@
       "researchNote": "Abbasid Baghdad sat at the western hub of Silk Road trade reaching Central Asia and Tang China.",
       "historicity": "extrapolated",
       "place": "baghdad",
-      "tags": ["deep_history", "trade"],
-      "requires": { "flags": [], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "deep_history",
+        "trade"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 9,
       "choices": [
         {
           "id": "fund_caravan",
           "text": "Fund the long caravan east",
-          "effects": { "money": 16, "heat": 6, "health": -2 },
-          "personality": { "grandiosity": 4 },
-          "setFlags": ["merchant_fortune", "eastern_trade"],
-          "outcome": "Two years on the road; a fortune in paper and silk if the caravan returns."
+          "effects": {
+            "money": 16,
+            "heat": 6,
+            "health": -2
+          },
+          "personality": {
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "merchant_fortune",
+            "eastern_trade"
+          ],
+          "outcome": "Two years on the road; a fortune in paper and silk if the caravan returns.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "trade_local",
           "text": "Keep to the safer river and gulf routes",
-          "effects": { "money": 8, "loyalty": 2 },
-          "personality": { "inward": 2 },
-          "setFlags": ["merchant_fortune"],
-          "outcome": "Smaller margins, surer returns. The family's coffers fill steadily."
+          "effects": {
+            "money": 8,
+            "loyalty": 2
+          },
+          "personality": {
+            "inward": 2
+          },
+          "setFlags": [
+            "merchant_fortune"
+          ],
+          "outcome": "Smaller margins, surer returns. The family's coffers fill steadily.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "decline_trade",
           "text": "Decline — keep capital for land and office",
-          "effects": { "power": 4, "money": -2 },
-          "personality": { "ideology": 2 },
+          "effects": {
+            "power": 4,
+            "money": -2
+          },
+          "personality": {
+            "ideology": 2
+          },
           "setFlags": [],
-          "outcome": "The family stays close to the city and the court, leaving the road to braver men."
+          "outcome": "The family stays close to the city and the court, leaving the road to braver men.",
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     },
@@ -127,33 +240,73 @@
       "researchNote": "Abbasid-era scholarship in mathematics, astronomy, and medicine spread across the Islamic world and beyond.",
       "historicity": "extrapolated",
       "place": "baghdad",
-      "tags": ["trope:prophet", "deep_history", "scholarship"],
-      "requires": { "flags": ["scholar_house"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "trope:prophet",
+        "deep_history",
+        "scholarship"
+      ],
+      "requires": {
+        "flags": [
+          "scholar_house"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 9,
       "choices": [
         {
           "id": "claim_authority",
           "text": "Claim intellectual authority over a whole field",
-          "effects": { "reputation": 14, "power": 6, "heat": 6 },
-          "personality": { "grandiosity": 6 },
-          "setFlags": ["scholar_eminence"],
-          "outcome": "The family's name becomes a school of thought — and a rival to every other."
+          "effects": {
+            "reputation": 14,
+            "power": 6,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "scholar_eminence"
+          ],
+          "outcome": "The family's name becomes a school of thought — and a rival to every other.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "share_credit",
           "text": "Build a circle of students who carry the name forward",
-          "effects": { "reputation": 8, "loyalty": 10 },
-          "personality": { "outward": 6 },
-          "setFlags": ["scholar_lineage"],
-          "outcome": "A quieter immortality: the name survives in a hundred grateful pupils."
+          "effects": {
+            "reputation": 8,
+            "loyalty": 10
+          },
+          "personality": {
+            "outward": 6
+          },
+          "setFlags": [
+            "scholar_lineage"
+          ],
+          "outcome": "A quieter immortality: the name survives in a hundred grateful pupils.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "monetize_knowledge",
           "text": "Sell the knowledge to the highest courts",
-          "effects": { "money": 12, "reputation": -2, "power": 4 },
-          "personality": { "inward": 2 },
-          "setFlags": ["knowledge_for_sale"],
-          "outcome": "Wisdom becomes a commodity. The purists frown; the treasury smiles."
+          "effects": {
+            "money": 12,
+            "reputation": -2,
+            "power": 4
+          },
+          "personality": {
+            "inward": 2
+          },
+          "setFlags": [
+            "knowledge_for_sale"
+          ],
+          "outcome": "Wisdom becomes a commodity. The purists frown; the treasury smiles.",
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     },
@@ -166,33 +319,69 @@
       "researchNote": "The Persian Barmakid viziers wielded vast administrative power under the early Abbasids before their fall in 803.",
       "historicity": "real",
       "place": "baghdad",
-      "tags": ["trope:dynastic-merger", "deep_history", "alliance"],
-      "requires": { "flags": [], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "trope:dynastic-merger",
+        "deep_history",
+        "alliance"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 9,
       "choices": [
         {
           "id": "accept_match",
           "text": "Accept the marriage and fuse the houses",
-          "effects": { "power": 12, "money": 14, "heat": 8 },
-          "personality": { "outward": 4 },
-          "setFlags": ["vizier_alliance"],
-          "outcome": "Two houses become one engine of state — formidable, and watched."
+          "effects": {
+            "power": 12,
+            "money": 14,
+            "heat": 8
+          },
+          "personality": {
+            "outward": 4
+          },
+          "setFlags": [
+            "vizier_alliance"
+          ],
+          "outcome": "Two houses become one engine of state — formidable, and watched.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "limited_alliance",
           "text": "Take a junior partnership, not a marriage",
-          "effects": { "power": 6, "money": 6, "heat": 2 },
-          "personality": { "inward": 2 },
-          "setFlags": ["vizier_clients"],
-          "outcome": "Aligned but not bound — if the viziers fall, the family may yet survive."
+          "effects": {
+            "power": 6,
+            "money": 6,
+            "heat": 2
+          },
+          "personality": {
+            "inward": 2
+          },
+          "setFlags": [
+            "vizier_clients"
+          ],
+          "outcome": "Aligned but not bound — if the viziers fall, the family may yet survive.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "decline_match",
           "text": "Decline — keep the bloodline and the risk yours alone",
-          "effects": { "loyalty": 6, "power": -2 },
-          "personality": { "inward": 4 },
+          "effects": {
+            "loyalty": 6,
+            "power": -2
+          },
+          "personality": {
+            "inward": 4
+          },
           "setFlags": [],
-          "outcome": "The family keeps its own counsel, and its own ceiling."
+          "outcome": "The family keeps its own counsel, and its own ceiling.",
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     },
@@ -205,33 +394,75 @@
       "researchNote": "In 803 Harun al-Rashid abruptly destroyed the Barmakid family, executing or imprisoning its leaders.",
       "historicity": "real",
       "place": "baghdad",
-      "tags": ["trope:scandal-fall-rehab", "deep_history", "purge"],
-      "requires": { "flags": ["vizier_alliance"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "trope:scandal-fall-rehab",
+        "deep_history",
+        "purge"
+      ],
+      "requires": {
+        "flags": [
+          "vizier_alliance"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "choices": [
         {
           "id": "disavow",
           "text": "Disavow the viziers and swear fresh loyalty",
-          "effects": { "loyalty": 8, "reputation": -8, "heat": -6 },
-          "personality": { "inward": 4 },
-          "setFlags": ["survived_purge"],
-          "outcome": "The family buys its survival with its honor. The coin spends; the stain lingers."
+          "effects": {
+            "loyalty": 8,
+            "reputation": -8,
+            "heat": -6
+          },
+          "personality": {
+            "inward": 4
+          },
+          "setFlags": [
+            "survived_purge"
+          ],
+          "outcome": "The family buys its survival with its honor. The coin spends; the stain lingers.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "shelter_remnant",
           "text": "Quietly shelter the viziers' surviving kin",
-          "effects": { "reputation": 8, "heat": 14, "power": -4 },
-          "personality": { "ideology": 6 },
-          "setFlags": ["harbored_remnant"],
-          "outcome": "A dangerous decency. If discovered, the block; if not, a debt of loyalty that may one day pay."
+          "effects": {
+            "reputation": 8,
+            "heat": 14,
+            "power": -4
+          },
+          "personality": {
+            "ideology": 6
+          },
+          "setFlags": [
+            "harbored_remnant"
+          ],
+          "outcome": "A dangerous decency. If discovered, the block; if not, a debt of loyalty that may one day pay.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "seize_spoils",
           "text": "Petition for the confiscated offices and estates",
-          "effects": { "money": 16, "power": 10, "reputation": -10, "heat": 8 },
-          "personality": { "grandiosity": 6 },
-          "setFlags": ["spoils_of_purge"],
-          "outcome": "The family rises on its allies' graves. Useful, and never forgiven."
+          "effects": {
+            "money": 16,
+            "power": 10,
+            "reputation": -10,
+            "heat": 8
+          },
+          "personality": {
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "spoils_of_purge"
+          ],
+          "outcome": "The family rises on its allies' graves. Useful, and never forgiven.",
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     },
@@ -244,33 +475,72 @@
       "researchNote": "The Fourth Fitna (809–827) was the civil war between al-Amin and al-Ma'mun after Harun al-Rashid's death.",
       "historicity": "real",
       "place": "baghdad",
-      "tags": ["trope:reformer-vs-reactionary", "deep_history", "succession"],
-      "requires": { "flags": [], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "trope:reformer-vs-reactionary",
+        "deep_history",
+        "succession"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "choices": [
         {
           "id": "back_reformer",
           "text": "Back the eastern reformer brother and his armies",
-          "effects": { "power": 14, "heat": 12, "loyalty": -4 },
-          "personality": { "ideology": 6 },
-          "setFlags": ["backed_reformer"],
-          "outcome": "A long gamble on the brother historians will call the wiser — if he wins."
+          "effects": {
+            "power": 14,
+            "heat": 12,
+            "loyalty": -4
+          },
+          "personality": {
+            "ideology": 6
+          },
+          "setFlags": [
+            "backed_reformer"
+          ],
+          "outcome": "A long gamble on the brother historians will call the wiser — if he wins.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "back_incumbent",
           "text": "Stand with the seated caliph in Baghdad",
-          "effects": { "loyalty": 10, "power": 4, "heat": 6 },
-          "personality": { "inward": 4 },
-          "setFlags": ["backed_incumbent"],
-          "outcome": "Loyalty to the man on the throne — until the city falls around him."
+          "effects": {
+            "loyalty": 10,
+            "power": 4,
+            "heat": 6
+          },
+          "personality": {
+            "inward": 4
+          },
+          "setFlags": [
+            "backed_incumbent"
+          ],
+          "outcome": "Loyalty to the man on the throne — until the city falls around him.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "stay_neutral",
           "text": "Hoard grain and gold and wait out the war",
-          "effects": { "money": 10, "reputation": -4, "heat": 2 },
-          "personality": { "inward": 6 },
-          "setFlags": ["war_profiteer"],
-          "outcome": "Let the brothers bleed. The family sells bread to both armies."
+          "effects": {
+            "money": 10,
+            "reputation": -4,
+            "heat": 2
+          },
+          "personality": {
+            "inward": 6
+          },
+          "setFlags": [
+            "war_profiteer"
+          ],
+          "outcome": "Let the brothers bleed. The family sells bread to both armies.",
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     },
@@ -283,33 +553,75 @@
       "researchNote": "The siege of Baghdad (812–813) ended with al-Amin's death and al-Ma'mun's victory in the civil war.",
       "historicity": "real",
       "place": "baghdad",
-      "tags": ["trope:martyr", "deep_history", "war"],
-      "requires": { "flags": ["backed_incumbent"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "trope:martyr",
+        "deep_history",
+        "war"
+      ],
+      "requires": {
+        "flags": [
+          "backed_incumbent"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 10,
       "choices": [
         {
           "id": "defend_to_end",
           "text": "Hold with the doomed caliph to the last",
-          "effects": { "reputation": 12, "health": -12, "power": -6 },
-          "personality": { "ideology": 8 },
-          "setFlags": ["died_loyal_legend"],
-          "outcome": "The family becomes a legend of loyalty — sanctified by the loss, a banner for generations."
+          "effects": {
+            "reputation": 12,
+            "health": -12,
+            "power": -6
+          },
+          "personality": {
+            "ideology": 8
+          },
+          "setFlags": [
+            "died_loyal_legend"
+          ],
+          "outcome": "The family becomes a legend of loyalty — sanctified by the loss, a banner for generations.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "switch_sides",
           "text": "Open a gate for the besiegers and switch sides",
-          "effects": { "power": 10, "reputation": -12, "heat": 6 },
-          "personality": { "outward": 4 },
-          "setFlags": ["turncoat"],
-          "outcome": "Survival bought with treachery. The new caliph rewards the deed and distrusts the doer."
+          "effects": {
+            "power": 10,
+            "reputation": -12,
+            "heat": 6
+          },
+          "personality": {
+            "outward": 4
+          },
+          "setFlags": [
+            "turncoat"
+          ],
+          "outcome": "Survival bought with treachery. The new caliph rewards the deed and distrusts the doer.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "flee_with_wealth",
           "text": "Flee the city with what the family can carry",
-          "effects": { "money": -8, "health": -6, "reputation": -2 },
-          "personality": { "inward": 4 },
-          "setFlags": ["fled_baghdad", "exile"],
-          "outcome": "The family scatters to the provinces, poorer but alive, waiting for the city to forget."
+          "effects": {
+            "money": -8,
+            "health": -6,
+            "reputation": -2
+          },
+          "personality": {
+            "inward": 4
+          },
+          "setFlags": [
+            "fled_baghdad",
+            "exile"
+          ],
+          "outcome": "The family scatters to the provinces, poorer but alive, waiting for the city to forget.",
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     },
@@ -322,33 +634,74 @@
       "researchNote": "Al-Ma'mun (r. 813–833) became caliph after the civil war and presided over a golden age of scholarship.",
       "historicity": "real",
       "place": "baghdad",
-      "tags": ["trope:reformer-vs-reactionary", "deep_history", "restoration"],
-      "requires": { "flags": [], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "trope:reformer-vs-reactionary",
+        "deep_history",
+        "restoration"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 9,
       "choices": [
         {
           "id": "claim_reward",
           "text": "Claim the reward owed for backing the victor",
-          "effects": { "power": 14, "money": 10, "heat": 4 },
-          "personality": { "grandiosity": 6 },
-          "setFlags": ["mamun_favorite"],
-          "outcome": "High office in a golden age — the family's name written into the new order."
+          "effects": {
+            "power": 14,
+            "money": 10,
+            "heat": 4
+          },
+          "personality": {
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "mamun_favorite"
+          ],
+          "outcome": "High office in a golden age — the family's name written into the new order.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "seek_pardon",
           "text": "Seek a quiet pardon for backing the wrong side",
-          "effects": { "loyalty": 6, "reputation": -4, "heat": -4 },
-          "personality": { "inward": 4 },
-          "setFlags": ["pardoned"],
-          "outcome": "Forgiven, not favored. The family keeps its head and little else."
+          "effects": {
+            "loyalty": 6,
+            "reputation": -4,
+            "heat": -4
+          },
+          "personality": {
+            "inward": 4
+          },
+          "setFlags": [
+            "pardoned"
+          ],
+          "outcome": "Forgiven, not favored. The family keeps its head and little else.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "retreat_to_scholarship",
           "text": "Withdraw into the House of Wisdom, above politics",
-          "effects": { "reputation": 8, "power": -2, "heat": -6 },
-          "personality": { "ideology": 6, "inward": 4 },
-          "setFlags": ["scholar_house", "above_politics"],
-          "outcome": "Let the court churn. The family's authority moves to where ideas outlast caliphs."
+          "effects": {
+            "reputation": 8,
+            "power": -2,
+            "heat": -6
+          },
+          "personality": {
+            "ideology": 6,
+            "inward": 4
+          },
+          "setFlags": [
+            "scholar_house",
+            "above_politics"
+          ],
+          "outcome": "Let the court churn. The family's authority moves to where ideas outlast caliphs.",
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     },
@@ -361,33 +714,76 @@
       "researchNote": "The Mihna (c. 833) was al-Ma'mun's inquisition enforcing the Mu'tazilite doctrine of the created Qur'an.",
       "historicity": "real",
       "place": "baghdad",
-      "tags": ["trope:reformer-vs-reactionary", "deep_history", "doctrine"],
-      "requires": { "flags": ["scholar_house"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "trope:reformer-vs-reactionary",
+        "deep_history",
+        "doctrine"
+      ],
+      "requires": {
+        "flags": [
+          "scholar_house"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 9,
       "choices": [
         {
           "id": "affirm_creed",
           "text": "Affirm the caliph's doctrine and keep your posts",
-          "effects": { "power": 8, "loyalty": 6, "reputation": -6 },
-          "personality": { "ideology": -4, "inward": 2 },
-          "setFlags": ["affirmed_mihna"],
-          "outcome": "The family bends with the state. Position kept; the traditionalists never forget."
+          "effects": {
+            "power": 8,
+            "loyalty": 6,
+            "reputation": -6
+          },
+          "personality": {
+            "ideology": -4,
+            "inward": 2
+          },
+          "setFlags": [
+            "affirmed_mihna"
+          ],
+          "outcome": "The family bends with the state. Position kept; the traditionalists never forget.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "refuse_creed",
           "text": "Refuse on principle and accept the cost",
-          "effects": { "reputation": 14, "power": -10, "health": -8, "heat": 10 },
-          "personality": { "ideology": 8 },
-          "setFlags": ["mihna_martyr"],
-          "outcome": "A name carved into the conscience of the faithful — at the price of flesh and office."
+          "effects": {
+            "reputation": 14,
+            "power": -10,
+            "health": -8,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": 8
+          },
+          "setFlags": [
+            "mihna_martyr"
+          ],
+          "outcome": "A name carved into the conscience of the faithful — at the price of flesh and office.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "equivocate",
           "text": "Equivocate — affirm in public, dissent in private",
-          "effects": { "reputation": 2, "heat": 4, "power": 2 },
-          "personality": { "inward": 6 },
-          "setFlags": ["equivocated"],
-          "outcome": "A scholar's tightrope: survive the inquisition without quite surrendering the soul."
+          "effects": {
+            "reputation": 2,
+            "heat": 4,
+            "power": 2
+          },
+          "personality": {
+            "inward": 6
+          },
+          "setFlags": [
+            "equivocated"
+          ],
+          "outcome": "A scholar's tightrope: survive the inquisition without quite surrendering the soul.",
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     },
@@ -400,33 +796,71 @@
       "researchNote": "Abbasid-era families often spawned provincial cadet branches as the empire's regions grew semi-autonomous.",
       "historicity": "extrapolated",
       "place": "baghdad",
-      "tags": ["trope:cadet-branch", "deep_history", "schism"],
-      "requires": { "flags": [], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "trope:cadet-branch",
+        "deep_history",
+        "schism"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 8,
       "choices": [
         {
           "id": "endow_branch",
           "text": "Endow the cadet branch generously",
-          "effects": { "money": -12, "power": 8, "reputation": 4 },
-          "personality": { "outward": 4 },
-          "setFlags": ["cadet_branch_founded"],
-          "outcome": "The family's banner now flies in two cities. Reach doubled; control halved."
+          "effects": {
+            "money": -12,
+            "power": 8,
+            "reputation": 4
+          },
+          "personality": {
+            "outward": 4
+          },
+          "setFlags": [
+            "cadet_branch_founded"
+          ],
+          "outcome": "The family's banner now flies in two cities. Reach doubled; control halved.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "keep_him_close",
           "text": "Keep the son close and the wealth undivided",
-          "effects": { "loyalty": -6, "power": 4, "money": 4 },
-          "personality": { "grandiosity": 4 },
-          "setFlags": ["line_undivided"],
-          "outcome": "The fortune stays whole; the son stays bitter. A rival made of blood."
+          "effects": {
+            "loyalty": -6,
+            "power": 4,
+            "money": 4
+          },
+          "personality": {
+            "grandiosity": 4
+          },
+          "setFlags": [
+            "line_undivided"
+          ],
+          "outcome": "The fortune stays whole; the son stays bitter. A rival made of blood.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "send_him_away",
           "text": "Send him to the frontier with nothing but a name",
-          "effects": { "heat": -2, "loyalty": -10 },
-          "personality": { "inward": 4 },
-          "setFlags": ["exiled_son"],
-          "outcome": "Out of sight, out of the will. Whether he returns a beggar or a warlord is his affair — for now."
+          "effects": {
+            "heat": -2,
+            "loyalty": -10
+          },
+          "personality": {
+            "inward": 4
+          },
+          "setFlags": [
+            "exiled_son"
+          ],
+          "outcome": "Out of sight, out of the will. Whether he returns a beggar or a warlord is his affair — for now.",
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     },
@@ -439,33 +873,483 @@
       "researchNote": "Al-Ma'mun died in 833; the Abbasid golden age continued but the caliphate's central power soon began to fragment.",
       "historicity": "extrapolated",
       "place": "baghdad",
-      "tags": ["trope:oligarch", "deep_history", "legacy"],
-      "requires": { "flags": [], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "trope:oligarch",
+        "deep_history",
+        "legacy"
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 9,
       "choices": [
         {
           "id": "entrench_dynasty",
           "text": "Entrench the family as a permanent power of the realm",
-          "effects": { "power": 12, "money": 8, "heat": 6 },
-          "personality": { "grandiosity": 6 },
-          "setFlags": ["entrenched_dynasty"],
-          "outcome": "The house becomes a fixture no caliph can rule without — and none fully trusts."
+          "effects": {
+            "power": 12,
+            "money": 8,
+            "heat": 6
+          },
+          "personality": {
+            "grandiosity": 6
+          },
+          "setFlags": [
+            "entrenched_dynasty"
+          ],
+          "outcome": "The house becomes a fixture no caliph can rule without — and none fully trusts.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "diversify_provinces",
           "text": "Spread the family across the fracturing provinces",
-          "effects": { "power": 6, "money": 6, "loyalty": 4 },
-          "personality": { "outward": 4 },
-          "setFlags": ["provincial_network"],
-          "outcome": "As the center weakens, the family's many roots in the provinces keep it alive."
+          "effects": {
+            "power": 6,
+            "money": 6,
+            "loyalty": 4
+          },
+          "personality": {
+            "outward": 4
+          },
+          "setFlags": [
+            "provincial_network"
+          ],
+          "outcome": "As the center weakens, the family's many roots in the provinces keep it alive.",
+          "clearFlags": [],
+          "ripples": []
         },
         {
           "id": "cement_learning",
           "text": "Cement the family's name in scholarship for the ages",
-          "effects": { "reputation": 14, "power": 2 },
-          "personality": { "ideology": 6, "inward": 6 },
-          "setFlags": ["immortal_in_letters"],
-          "outcome": "Empires fall; libraries remember. The name will be read long after the caliphate is dust."
+          "effects": {
+            "reputation": 14,
+            "power": 2
+          },
+          "personality": {
+            "ideology": 6,
+            "inward": 6
+          },
+          "setFlags": [
+            "immortal_in_letters"
+          ],
+          "outcome": "Empires fall; libraries remember. The name will be read long after the caliphate is dust.",
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_mawali_friction",
+      "era": "caliphate",
+      "year": 769,
+      "title": "The Mawali and the Scribes",
+      "scene": "The Round City of Baghdad is a crucible of Arab military tribesmen and Persian mawali administrators. Your family, newly settled in the West Suburb of Karkh, is pressed to take a side: do you align with the traditional Arab warriors or the slick Persian scribes of the emerging tax ministries?",
+      "researchNote": "The Abbasid state relied heavily on Persian converts (mawali) to staff its complex bureaucracy, causing significant friction with old Arab elites.",
+      "historicity": "real",
+      "tags": [
+        "trope:frontier-capital-origin"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "align_arab_nobility",
+          "text": "Align with the traditional Arab military nobility.",
+          "effects": {
+            "money": -20,
+            "power": 30,
+            "reputation": 10,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": 20,
+            "outward": 10
+          },
+          "setFlags": [
+            "flag_allied_arabs"
+          ],
+          "outcome": "You secure the friendship of the garrison commanders, though the taxation offices now view your ledger with predatory interest.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "bribe_persian_scribes",
+          "text": "Purchase the favor of the Persian scribes in the divan.",
+          "effects": {
+            "money": -40,
+            "power": 40,
+            "reputation": -10,
+            "heat": 20
+          },
+          "personality": {
+            "grandiosity": 20,
+            "inward": -10
+          },
+          "setFlags": [
+            "flag_allied_persians"
+          ],
+          "outcome": "Your wealth is shielded by sophisticated accounting tricks, but local Arab lords label your house as foreign sympathizers.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "focus_on_karkh",
+          "text": "Remain aloof, focusing entirely on Karkh's market stalls.",
+          "effects": {
+            "money": 30,
+            "power": -10,
+            "reputation": -10,
+            "heat": -10
+          },
+          "personality": {
+            "inward": 30
+          },
+          "setFlags": [
+            "flag_karkh_merchants"
+          ],
+          "outcome": "You avoid court politics entirely, building a tidy trade fortune while both factions view you as minor and politically toothless.",
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_paper_monopoly",
+      "era": "caliphate",
+      "year": 778,
+      "title": "The Secret of Samarkand",
+      "scene": "Chinese prisoners from the Battle of Talas have brought the secret of paper-making to the empire. A governor offers your family a partnership to build the first state-sanctioned paper mill along the canals of Baghdad, threatening the ancient monopoly of Egyptian papyrus.",
+      "researchNote": "The introduction of paper-making technology to Baghdad in the late 8th century revolutionized administration, science, and bookkeeping.",
+      "historicity": "real",
+      "tags": [
+        "trope:techno-frontier"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "invest_watermills",
+          "text": "Invest heavily in the watermills of the Dar al-Qazz canal.",
+          "effects": {
+            "money": -50,
+            "power": 30,
+            "reputation": 20,
+            "heat": 10
+          },
+          "personality": {
+            "grandiosity": 30,
+            "outward": 20
+          },
+          "outcome": "The rags turn to clean sheets, and your family controls the medium upon which the entire Golden Age is copied.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "stick_to_papyrus",
+          "text": "Stick to safe, traditional Egyptian papyrus imports.",
+          "effects": {
+            "money": -10,
+            "power": -10,
+            "reputation": 10,
+            "heat": -10
+          },
+          "personality": {
+            "inward": 20
+          },
+          "outcome": "You maintain steady, quiet trade, but watch helplessly as paper makes administrative costs plunge for your competitors.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "smuggle_paper_secrets",
+          "text": "Smuggle the paper-making formulas to sell to independent scribes.",
+          "effects": {
+            "money": 50,
+            "power": 10,
+            "reputation": -30,
+            "heat": 30
+          },
+          "personality": {
+            "inward": 30
+          },
+          "outcome": "You make a fast fortune selling technical secrets under the table, earning the furious enmity of the Caliph's monopolies.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_barmakid_shadow",
+      "era": "caliphate",
+      "year": 798,
+      "title": "The Banquet at Shammasiyya",
+      "scene": "At the height of the Persian Barmakid family's administrative hegemony, your house is invited to a legendary feast at their palace. Over spiced meats and imported silk, dangerous whispers fill the room regarding the Caliph Harun al-Rashid's dependency on their gold.",
+      "researchNote": "The Barmakids were an extraordinarily wealthy Persian family who effectively ran the Abbasid administration until their sudden destruction by Harun al-Rashid.",
+      "historicity": "real",
+      "requires": {
+        "flags": [
+          "flag_allied_persians"
+        ]
+      },
+      "choices": [
+        {
+          "id": "indulge_in_treason",
+          "text": "Indulge in the anti-imperial gossip and cement your alliance.",
+          "effects": {
+            "money": 10,
+            "power": 30,
+            "reputation": 20,
+            "heat": 40
+          },
+          "personality": {
+            "grandiosity": 40
+          },
+          "setFlags": [
+            "flag_barmakid_implicated"
+          ],
+          "outcome": "You gain immense influence among the Persian administrative elite, but your name is written in the private logs of the Caliph's spies.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "leak_to_caliph",
+          "text": "Discreetly leak the evening's seditious chatter to royal rivals.",
+          "effects": {
+            "money": 30,
+            "power": -10,
+            "reputation": -20,
+            "heat": -10
+          },
+          "personality": {
+            "inward": 40
+          },
+          "setFlags": [
+            "flag_barmakid_traitor"
+          ],
+          "outcome": "You betray your hosts. The Caliph's agents note your loyalty, but the Persian elite marks you as a treacherous snitch.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "excuse_early",
+          "text": "Quietly excuse yourselves early, claiming a sudden illness.",
+          "effects": {
+            "money": -10,
+            "power": -10,
+            "reputation": 10,
+            "heat": -20
+          },
+          "personality": {
+            "inward": 20
+          },
+          "outcome": "You slip out into the Baghdad night, your hands clean, having offended your hosts slightly but preserved your head.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "ev_gen_barmakid_fallout",
+      "era": "caliphate",
+      "year": 805,
+      "title": "The Imperial Auditors",
+      "scene": "The Barmakid viziers have been brutally executed overnight. Their vast wealth is confiscated, and imperial auditors arrive at your gates to investigate any household that ever accepted their patronage or shared their table.",
+      "researchNote": "Following the fall of the Barmakids in 803, Harun al-Rashid launched a widespread purge of their allies, assets, and connections.",
+      "historicity": "real",
+      "tags": [
+        "trope:scandal-fall-rehab"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "bribe_auditors",
+          "text": "Bribe the lead auditor with your remaining secret gold reserves.",
+          "effects": {
+            "money": -60,
+            "power": 10,
+            "reputation": 10,
+            "heat": -20
+          },
+          "personality": {
+            "outward": 10
+          },
+          "outcome": "The auditor's ink accidentally spills over the page containing your family name, rendering your records clean.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "surrender_properties",
+          "text": "Surrender your Persian-linked suburban estates immediately to the treasury.",
+          "effects": {
+            "money": -100,
+            "power": -30,
+            "reputation": -20,
+            "heat": -40
+          },
+          "personality": {
+            "inward": 30
+          },
+          "outcome": "You are impoverished overnight, but your cooperativeness satisfies the paranoid court, saving your family from the dungeon.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "appeal_arab_blood",
+          "text": "Denounce the dead viziers and appeal to your old Arab tribal lineage.",
+          "effects": {
+            "money": -20,
+            "power": -20,
+            "reputation": -30,
+            "heat": 30
+          },
+          "personality": {
+            "ideology": 20
+          },
+          "outcome": "Your claims of pure Arab heritage stir up old tribal tensions; you escape execution but remain heavily watched as a source of unrest.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_ruined_estates",
+      "era": "caliphate",
+      "year": 815,
+      "title": "The Regency of the Mother",
+      "scene": "The siege has lifted, leaving your family's grand villas in ashes and the patriarch dead of pestilence. The widow of the house must take up the reins of the dynasty before predatory creditors or eager cousins seize the remaining property rights.",
+      "researchNote": "Islamic law granted women the right to own and manage property, allowing capable matriarchs to run families during succession crises.",
+      "historicity": "personal",
+      "tags": [
+        "trope:matriarch-regency"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "assert_legal_rights",
+          "text": "Assert the widow's legal rights to manage the estate before the qadi.",
+          "effects": {
+            "money": 20,
+            "power": 20,
+            "reputation": 10,
+            "heat": 20
+          },
+          "personality": {
+            "grandiosity": 20
+          },
+          "outcome": "The court validates her shrewd appeal, cementing her authority over disgruntled male cousins who sought to partition the line.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "marry_soldier",
+          "text": "Marry a rising military officer to secure physical and political protection.",
+          "effects": {
+            "money": -10,
+            "power": 40,
+            "reputation": -10,
+            "heat": 10
+          },
+          "personality": {
+            "outward": 30
+          },
+          "outcome": "The new step-father's swords keep creditors away, but his expensive tastes drain the family's liquid savings.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "retreat_to_basra",
+          "text": "Sell the ruined Baghdad lands cheap and retire to a quiet life in Basra.",
+          "effects": {
+            "money": 40,
+            "power": -50,
+            "reputation": -30,
+            "heat": -30
+          },
+          "personality": {
+            "inward": 50
+          },
+          "outcome": "You escape the stressful politics of the capital with a modest fortune, leaving behind any claim to imperial influence.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_turkish_guards",
+      "era": "caliphate",
+      "year": 822,
+      "title": "The New Men of Clay",
+      "scene": "The Caliph's brother has begun purchasing thousands of Turkish slave-soldiers from the Central Asian steppes to form a loyal elite guard. Your eldest heir suggests your family should buy a small cohort of these formidable fighters to secure your private estates.",
+      "researchNote": "The introduction of Turkish ghilman (slave soldiers) by the future Caliph al-Mu'tasim permanently altered the military and political landscape of the caliphate.",
+      "historicity": "real",
+      "tags": [
+        "trope:outside-claimant"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "buy_turkish_guards",
+          "text": "Purchase a cohort of highly trained Turkish horse archers.",
+          "effects": {
+            "money": -50,
+            "power": 40,
+            "reputation": -10,
+            "heat": 20
+          },
+          "personality": {
+            "grandiosity": 30
+          },
+          "outcome": "Your estate is secure against any local riot, but your neighbors look with terror at the silent, foreign warriors at your gate.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "rely_on_local_militia",
+          "text": "Rely on traditional Arab municipal guards and watchmen instead.",
+          "effects": {
+            "money": -20,
+            "power": 10,
+            "reputation": 20,
+            "heat": -10
+          },
+          "personality": {
+            "inward": 10
+          },
+          "outcome": "You maintain warm relations with the local populace, but your defense force lacks the terrifying efficiency of the professional steppe warriors.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "denounce_foreign_soldiers",
+          "text": "Denounce the use of foreign slave soldiers in the public mosques.",
+          "effects": {
+            "money": 10,
+            "power": -20,
+            "reputation": 30,
+            "heat": 30
+          },
+          "personality": {
+            "ideology": 30
+          },
+          "outcome": "Your conservative rhetoric wins the hearts of the traditional populace, but places your name on the Caliph's list of subversives.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
         }
       ]
     }

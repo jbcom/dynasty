@@ -3797,6 +3797,544 @@
           "outcome": "You pour the last of the treasury into relighting furnaces that took a solar system to build the first time. The work is generational and the result uncertain, but for the first time in a long time, the dome looks a little less like a wall and a little more like a starting line."
         }
       ]
+    },
+    {
+      "id": "ev_gen_gene_rationing",
+      "era": "redplanet",
+      "year": 2082,
+      "title": "The First Gene-Rationing",
+      "scene": "The first stable telomere-reversing therapies are complete, but global resource caps on Earth forbid their mass distribution. On Mars, we are the law, yet our engineers and miners watch our inner circle grow younger while they cough up iron dust. A choice must be made before the labs are stormed.",
+      "researchNote": "The early politics of longevity treatments were fundamentally Malthusian, forcing a harsh choice between labor appeasement and absolute dynasty preservation.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:oligarch"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "treat_bloodline",
+          "text": "Restrict the treatments strictly to the dynastic bloodline.",
+          "effects": {
+            "power": 15,
+            "reputation": -10,
+            "loyalty": -15,
+            "health": 20,
+            "heat": 20
+          },
+          "personality": {
+            "grandiosity": 15,
+            "inward": 10
+          },
+          "outcome": "You look younger by the year, but the guards outside your dome now carry military-grade railguns to keep the aging populace at bay.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "treat_managers",
+          "text": "License it to loyal managers and security chiefs as a performance bonus.",
+          "effects": {
+            "money": 20,
+            "power": 10,
+            "loyalty": 15,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": -5,
+            "outward": 10
+          },
+          "outcome": "A new class of long-lived corporate enforcers emerges, fiercely loyal to the hand that doles out their decades.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "leak_placebo",
+          "text": "Distribute a cheap, highly diluted 'longevity supplement' to the public.",
+          "effects": {
+            "money": 30,
+            "reputation": -5,
+            "loyalty": -10,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": -15,
+            "grandiosity": 5
+          },
+          "outcome": "They buy the placebo eagerly. It does nothing for their cells, but the cash flow builds your next industrial launchpad.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_ceres_mutiny",
+      "era": "redplanet",
+      "year": 2088,
+      "title": "The Ceres Mutiny",
+      "scene": "Ice-harvesters on Ceres have locked themselves in the primary control dome, venting our telemetry data to terrestrial regulators. They demand triple the radiation-shielding allowance and permanent Martian citizenship for their children in exchange for resuming the ice shipments.",
+      "researchNote": "Deep-space mining corporations in the late 21st century relied on harsh life-support quotas to maintain profitability in hostile environments.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:frontier-capital-origin"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "vent_dome",
+          "text": "Depressurize the secondary corridors to break their resolve.",
+          "effects": {
+            "power": 20,
+            "reputation": -20,
+            "loyalty": -15,
+            "heat": 25
+          },
+          "personality": {
+            "ideology": -10,
+            "inward": 15
+          },
+          "outcome": "The mutiny ends in silent, frozen corridors. Earth regulators launch a toothless inquiry, but the ice flows again.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "buy_off_leaders",
+          "text": "Grant Martian citizenship to the strike leaders in exchange for order.",
+          "effects": {
+            "money": -10,
+            "power": -5,
+            "loyalty": 15,
+            "heat": -5
+          },
+          "personality": {
+            "outward": 10,
+            "inward": -5
+          },
+          "outcome": "The leaders become your newest, most zealous middle-managers, eagerly keeping their former comrades in line.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "bribe_regulators",
+          "text": "Let Earth's regulators see the mess, then buy the regulatory commission.",
+          "effects": {
+            "money": -25,
+            "power": 15,
+            "reputation": 5,
+            "heat": -15
+          },
+          "personality": {
+            "grandiosity": 10
+          },
+          "outcome": "The commission finds 'exemplary safety compliance' at Ceres. The strikers realize no one on Earth is coming to save them.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_silicon_heir",
+      "era": "redplanet",
+      "year": 2091,
+      "title": "The Succession in Silicon",
+      "scene": "Your firstborn, slated to inherit the orbital shipyards, has perished in a 'recreational' solar sail accident off Deimos. The inheritance drops to your cynical, second-born daughter, who openly despises the family's corporate feudalism and prefers data-mining algorithms to human contact.",
+      "researchNote": "High-gravity sports and early space tourism became the premier cause of sudden dynastic succession crises among the Martian elite.",
+      "historicity": "personal",
+      "tags": [
+        "trope:accidental-heir"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "force_public",
+          "text": "Force her into the public spotlight to stabilize the markets.",
+          "effects": {
+            "power": -5,
+            "reputation": 15,
+            "loyalty": -10,
+            "heat": 5
+          },
+          "personality": {
+            "outward": 15,
+            "inward": -10
+          },
+          "outcome": "She delivers her speeches with a chilling, robotic precision. The markets are reassured, though she looks at you with quiet venom.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "automate_estate",
+          "text": "Let her rule from the shadows, integrating our assets into her neural network.",
+          "effects": {
+            "money": 25,
+            "power": 10,
+            "loyalty": -5,
+            "heat": 10
+          },
+          "personality": {
+            "inward": 20
+          },
+          "outcome": "Human overhead drops by forty percent. The family's balance sheets look beautiful, but she has effectively locked you out of your own servers.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "bypass_with_commander",
+          "text": "Adopt a decorated orbital commander to bypass her entirely.",
+          "effects": {
+            "power": 15,
+            "loyalty": -20,
+            "heat": 15
+          },
+          "personality": {
+            "grandiosity": 15,
+            "outward": 5
+          },
+          "setFlags": [
+            "sibling_rivalry_brewing"
+          ],
+          "outcome": "The commander brings military discipline to the shipyards, but your daughter begins archiving your personal communications for future leverage.",
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_phobos_ledger",
+      "era": "redplanet",
+      "year": 2095,
+      "title": "The Phobos Ledger",
+      "scene": "Terrestrial authorities threaten to freeze your family’s traditional Swiss and Cayman accounts, citing 'illicit extraterritorial tax evasion.' Fortunately, our Phobos logistics station doesn't recognize Earth courts, and we have the railguns to keep the auditors at bay.",
+      "researchNote": "The transition from terrestrial tax havens to orbital sovereign jurisdictions marked the birth of true corporate extra-statism.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:bootlegger-to-legitimacy"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "launder_to_bonds",
+          "text": "Launder the disputed terrestrial wealth directly into Mars terraforming bonds.",
+          "effects": {
+            "money": -15,
+            "power": 15,
+            "reputation": 20,
+            "heat": -15
+          },
+          "personality": {
+            "ideology": 10,
+            "outward": 5
+          },
+          "outcome": "Earth's media hails your 'philanthropic contribution to humanity's second home,' while the cash is safely shielded from the taxman.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "threaten_export_cut",
+          "text": "Threaten to halt rare-earth exports if Earth pursues the audit.",
+          "effects": {
+            "power": 20,
+            "reputation": -15,
+            "heat": 30
+          },
+          "personality": {
+            "grandiosity": 20
+          },
+          "outcome": "Earth's electronics sector panics. The audit is quietly suspended, but the UN begins drafting plans for an orbital blockade.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "bribe_un_inspectors",
+          "text": "Bribe the visiting UN inspectors with prime Martian dome real estate.",
+          "effects": {
+            "money": -20,
+            "power": 5,
+            "heat": -20
+          },
+          "personality": {
+            "ideology": -15
+          },
+          "outcome": "The inspectors return home to write a glowing report before retiring to their new private villas overlooking Olympus Mons.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_prophet_dust",
+      "era": "redplanet",
+      "year": 2098,
+      "title": "The Prophet of the Dust",
+      "scene": "A charismatic preacher in the lower atmospheric domes has gathered thousands of followers. He claims that terraforming Mars is an 'arrogant, blasphemous defilement of God's red canvas' and his disciples have begun sabotaging our greenhouse gas generators.",
+      "researchNote": "Ecological preservationism on Mars frequently took on a fanatical, semi-religious character as industrial terraforming altered the sky.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:prophet"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "coopt_genesis",
+          "text": "Co-opt the sect, declaring our terraforming to be 'The Genesis Mandate.'",
+          "effects": {
+            "power": 15,
+            "reputation": 10,
+            "loyalty": 15,
+            "heat": -5
+          },
+          "personality": {
+            "ideology": 20,
+            "grandiosity": 10
+          },
+          "outcome": "You fund their temples and weave your dynastic crest into their scripture. The saboteurs are now your most devoted laborers.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "arrest_prophet",
+          "text": "Arrest the prophet and sentence him to outer dome maintenance.",
+          "effects": {
+            "power": 20,
+            "loyalty": -15,
+            "heat": 15
+          },
+          "personality": {
+            "inward": 10
+          },
+          "outcome": "He becomes a martyr. Secret shrines to his memory pop up in the ventilation shafts, and the sabotage becomes more professional.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "rival_technocult",
+          "text": "Fund a rival, hyper-materialist techno-cult to split their congregation.",
+          "effects": {
+            "money": -15,
+            "loyalty": 10,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": -10,
+            "outward": 15
+          },
+          "outcome": "The two sects consume themselves in doctrinal street fights, leaving your engineering teams free to burn fossil fuels in peace.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_valles_merger",
+      "era": "redplanet",
+      "year": 2101,
+      "title": "The Grand Merger of Valles Marineris",
+      "scene": "To fund the massive thermal drills required to tap the Martian mantle, we must integrate our operations with the Takahashi Heavy Industries conglomerate. Their matriarch offers her grandson's hand—and their entire asteroid mining fleet—in exchange for direct access to our longevity clinics.",
+      "researchNote": "Planetary-scale engineering projects necessitated marriages of convenience that concentrated both capital and life-extending technologies.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:dynastic-merger"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "accept_alliance",
+          "text": "Agree to the union, cementing a trans-Martian oligarchy.",
+          "effects": {
+            "money": 30,
+            "power": 20,
+            "loyalty": 15,
+            "heat": 10
+          },
+          "personality": {
+            "grandiosity": 15,
+            "outward": 10
+          },
+          "setFlags": [
+            "takahashi_alliance"
+          ],
+          "outcome": "The merger makes you undisputed masters of the Martian interior. The wedding is broadcast to Earth, a sparkling display of unvarnished wealth.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "espionage_design",
+          "text": "Reject the marriage and steal their thermal drill designs via cyber-theft.",
+          "effects": {
+            "money": -10,
+            "power": 15,
+            "heat": 20
+          },
+          "personality": {
+            "inward": 15
+          },
+          "outcome": "You get the drills, but the Takahashi clan vows eternal vengeance. A quiet, vicious corporate war begins in the server farms of Phobos.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "financial_only",
+          "text": "Propose a strictly commercial joint venture without dynastic blood ties.",
+          "effects": {
+            "money": 15,
+            "power": -5,
+            "reputation": -5
+          },
+          "personality": {
+            "ideology": -10
+          },
+          "outcome": "The drills operate, but without the security of a family alliance, the Takahashi accountants contest every single invoice.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_olympus_bastard",
+      "era": "redplanet",
+      "year": 2102,
+      "title": "The Bastard of Olympus",
+      "scene": "A brilliant engineer from the Olympus Mons geothermal grid presents undeniable DNA proof that they are your child from a long-forgotten affair. They do not want your money or your name; they want the longevity serum before their radiation-scarred lungs fail.",
+      "researchNote": "The extreme disparity in life expectancies between Martian oligarchs and dome workers made lineage a matter of life and death.",
+      "historicity": "personal",
+      "tags": [
+        "trope:outside-claimant"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "secret_serum",
+          "text": "Provide the serum secretly, keeping them out of the dynastic books.",
+          "effects": {
+            "money": -10,
+            "loyalty": 15,
+            "heat": -10
+          },
+          "personality": {
+            "inward": 10
+          },
+          "outcome": "The child survives and returns to the engineering bays, forever bound to your silence and your secret charity.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "acknowledge_bastard",
+          "text": "Acknowledge them publicly to show the family's 'meritocratic' core.",
+          "effects": {
+            "reputation": 20,
+            "loyalty": -15,
+            "heat": 15
+          },
+          "personality": {
+            "outward": 15,
+            "inward": -5
+          },
+          "setFlags": [
+            "olympus_bastard_heir"
+          ],
+          "outcome": "The public admires your honesty, but your legitimate children are furious, viewing the bastard as an direct threat to their inheritance.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "exile_to_kuiper",
+          "text": "Reassign them to a remote research station in the Kuiper Belt.",
+          "effects": {
+            "power": 10,
+            "reputation": -10,
+            "heat": 5
+          },
+          "personality": {
+            "ideology": -15
+          },
+          "outcome": "A quiet transfer order is signed. They will live out their short life studying ice rocks, far from the halls of power.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_first_echo",
+      "era": "redplanet",
+      "year": 2103,
+      "title": "The First Signal Echoes",
+      "scene": "Our deep-space communication arrays on the dark side of Deimos are fully operational. Your marketing directors want to broadcast a massive, prideful signal detailing our industrial output, our exact coordinates, and our dynastic triumphs to the stars.",
+      "researchNote": "Early METI (Messaging Extraterrestrial Intelligence) initiatives were often driven by private corporate hubris rather than international consensus.",
+      "historicity": "extrapolated",
+      "tags": [
+        "trope:techno-frontier"
+      ],
+      "weight": 1,
+      "choices": [
+        {
+          "id": "send_prideful_beacon",
+          "text": "Send the signal, announcing our dynasty's mastery of the solar system.",
+          "effects": {
+            "reputation": 20,
+            "heat": 15
+          },
+          "personality": {
+            "grandiosity": 25,
+            "outward": 15
+          },
+          "setFlags": [
+            "sent_proud_beacon"
+          ],
+          "outcome": "The broadcast goes out, a brilliant, bragging spear of radio waves. It will take years to reach deep space, but the cosmos now knows our name.",
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "keep_silent_spy",
+          "text": "Keep the arrays silent and repurpose them for military surveillance.",
+          "effects": {
+            "power": 20,
+            "heat": -10
+          },
+          "personality": {
+            "inward": 20
+          },
+          "outcome": "We hear the chatter of our rivals with perfect clarity. The universe remains quiet, and for now, we prefer it that way.",
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": []
+        },
+        {
+          "id": "commercialize_signal",
+          "text": "Charge terrestrial corporations to include their advertisements in the message.",
+          "effects": {
+            "money": 30,
+            "reputation": -15,
+            "heat": 10
+          },
+          "personality": {
+            "ideology": -20,
+            "grandiosity": 10
+          },
+          "setFlags": [
+            "sent_proud_beacon"
+          ],
+          "outcome": "The first interstellar broadcast is a jumble of beverage ads and mining stock listings. If anyone is listening, they will know we are capitalists.",
+          "clearFlags": [],
+          "ripples": []
+        }
+      ]
     }
   ]
 }

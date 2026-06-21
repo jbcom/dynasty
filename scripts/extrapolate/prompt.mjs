@@ -44,7 +44,7 @@ HARD RULES (a generated event is REJECTED if it breaks any):
 - Meter effects use ONLY: money, power, reputation, loyalty, health, heat
   (heat = scrutiny/danger; positive heat is a COST). Personality axes are ONLY:
   ideology, grandiosity, outward, inward.
-- Every event presents 2-4 meaningful CHOICES, each a real tradeoff (never an
+- Every event presents 3-4 meaningful CHOICES (NEVER fewer than 3), each a real tradeoff (never an
   all-upside free lunch; heat counts as a cost).
 - Stay in the family's lane: do NOT introduce another dynasty's named people.
 - No anachronisms; the year must sit within the event's era bounds.

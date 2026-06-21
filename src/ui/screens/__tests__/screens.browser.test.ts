@@ -57,25 +57,45 @@ describe("TitleScreen (FD-6 founding flow)", () => {
   it("shows Found a Dynasty and hides Continue without a save", () => {
     component = mount(TitleScreen, {
       target: host,
-      props: { moments: MOMENTS, hasSave: false, onFound: () => {}, onContinue: () => {} },
+      props: {
+        moments: MOMENTS,
+        hasSave: false,
+        onFound: () => {},
+        onContinue: () => {},
+        onSettings: () => {},
+      },
     });
     expect(host.textContent).toContain("Found a Dynasty");
     expect(host.textContent).not.toContain("Continue");
+    // Settings is always available even without a save.
+    expect(host.textContent).toContain("Settings");
   });
 
-  it("shows Continue the Saga when a save exists", () => {
+  it("shows Load Game — Continue when a save exists", () => {
     component = mount(TitleScreen, {
       target: host,
-      props: { moments: MOMENTS, hasSave: true, onFound: () => {}, onContinue: () => {} },
+      props: {
+        moments: MOMENTS,
+        hasSave: true,
+        onFound: () => {},
+        onContinue: () => {},
+        onSettings: () => {},
+      },
     });
-    expect(host.textContent).toContain("Continue the Saga");
+    expect(host.textContent).toContain("Continue");
   });
 
   it("founds a line: title → moment → surname → onFound(momentId, surname, seed)", async () => {
     const onFound = vi.fn();
     component = mount(TitleScreen, {
       target: host,
-      props: { moments: MOMENTS, hasSave: false, onFound, onContinue: () => {} },
+      props: {
+        moments: MOMENTS,
+        hasSave: false,
+        onFound,
+        onContinue: () => {},
+        onSettings: () => {},
+      },
     });
     const input = host.querySelector("input") as HTMLInputElement;
     input.value = "my-seed";
@@ -96,7 +116,13 @@ describe("TitleScreen (FD-6 founding flow)", () => {
   it("the moment picker shows the start-moments", async () => {
     component = mount(TitleScreen, {
       target: host,
-      props: { moments: MOMENTS, hasSave: false, onFound: () => {}, onContinue: () => {} },
+      props: {
+        moments: MOMENTS,
+        hasSave: false,
+        onFound: () => {},
+        onContinue: () => {},
+        onSettings: () => {},
+      },
     });
     await page.getByRole("button", { name: "Found a Dynasty" }).click();
     await vitest.waitFor(() => expect(host.textContent).toContain("The Great Hunger"));
@@ -105,7 +131,13 @@ describe("TitleScreen (FD-6 founding flow)", () => {
   it("back from the moment picker returns to the title", async () => {
     component = mount(TitleScreen, {
       target: host,
-      props: { moments: MOMENTS, hasSave: false, onFound: () => {}, onContinue: () => {} },
+      props: {
+        moments: MOMENTS,
+        hasSave: false,
+        onFound: () => {},
+        onContinue: () => {},
+        onSettings: () => {},
+      },
     });
     await page.getByRole("button", { name: "Found a Dynasty" }).click();
     await vitest.waitFor(() => expect(host.textContent).toContain("CHOOSE YOUR HINGE"));

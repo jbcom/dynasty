@@ -74,7 +74,13 @@ describe("TitleScreen — luxury Dynasty masthead (DE-UI)", () => {
   it("renders the gilded wordmark + ornamental rule and captures a screenshot for review", async () => {
     component = mount(TitleScreen, {
       target: host,
-      props: { moments: MOMENTS, hasSave: true, onFound: () => {}, onContinue: () => {} },
+      props: {
+        moments: MOMENTS,
+        hasSave: true,
+        onFound: () => {},
+        onContinue: () => {},
+        onSettings: () => {},
+      },
     });
     // Give the self-hosted fonts a beat to load so the capture shows real type.
     await new Promise((r) => setTimeout(r, 250));
@@ -96,6 +102,7 @@ describe("TitleScreen — found-your-own moment picker (FD-6)", () => {
           founded = { momentId };
         },
         onContinue: () => {},
+        onSettings: () => {},
       },
     });
     await new Promise((r) => setTimeout(r, 100));
@@ -126,7 +133,13 @@ describe("TitleScreen — found-your-own moment picker (FD-6)", () => {
   it("back button returns to the title step", async () => {
     component = mount(TitleScreen, {
       target: host,
-      props: { moments: MOMENTS, hasSave: false, onFound: () => {}, onContinue: () => {} },
+      props: {
+        moments: MOMENTS,
+        hasSave: false,
+        onFound: () => {},
+        onContinue: () => {},
+        onSettings: () => {},
+      },
     });
     await new Promise((r) => setTimeout(r, 100));
     host.querySelector<HTMLButtonElement>("button.primary")?.click();
