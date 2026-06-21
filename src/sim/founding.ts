@@ -3,6 +3,7 @@ import { drawBirthDate } from "./birthDate";
 import type { Content } from "./content";
 import { seedFamily } from "./family";
 import { applyDelta } from "./meters";
+import type { Motivators } from "./motivators";
 import { getCulture, pickGivenName } from "./onomastics";
 import { applyPersonality } from "./personality";
 import { createRng } from "./rng";
@@ -74,6 +75,12 @@ export interface Composition {
   successionMode?: "absolute" | "primogeniture" | "matriarchal";
   /** Epoch-0 axis stances (CP-4). */
   axisChoices?: Partial<Record<AxisKind, string>>;
+  /**
+   * SS-7: the line's STARTING motivators, seeded from the chosen immigration wave's arrival class
+   * (poor/middle → the Wealth axis). Overrides the centrist default so the GOAP brain is grounded
+   * from turn one. Optional — absent = centrist start.
+   */
+  seedMotivators?: Motivators;
 }
 
 /** The progenitor's given name + the founding state, for the UI + the run. */
@@ -163,7 +170,8 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
   // EPOCH-0 AXIS CHOICES (CP-4): each stance sets durable flags + meter/personality
   // deltas SCALED by the founding place×era stack's intensity on that axis.
   let meters = base.meters;
-  let personality = base.personality;
+  // SS-7: start from the wave's class-seeded motivators when provided, else centrist.
+  let personality = c.seedMotivators ?? base.personality;
   const stack = resolveStack(content.worldStacks, c.place, c.era);
   for (const [axisKind, optionId] of Object.entries(c.axisChoices ?? {}) as [AxisKind, string][]) {
     const axis = axisByKind(content.axes, axisKind);

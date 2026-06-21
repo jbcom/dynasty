@@ -164,7 +164,7 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 ### SS-6 Immigration-wave roster
 - [x] SS-6 7 waves (period×class→culture) + destination grounds; drop SA+colonial; reshape baghdad→1880s Levantine; build validates; 0 leaks
 ### SS-7 Onboarding rebuild
-- [ ] SS-7 Period→Class→Race/Culture funnel; Epoch-0 seeds the GOAP brain; e2e; live-verified
+- [x] SS-7 Period→Class→Race/Culture funnel; Epoch-0 seeds the GOAP brain; e2e; live-verified
 ### SS-8 Multi-line world sim
 - [ ] SS-8 all unplayed waves advance per turn as agents; stored state; opposing/contributing/neutral; glimpse triggers; deterministic; tests
 ### SS-9 Convergence + ending lattice
