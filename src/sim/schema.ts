@@ -601,8 +601,15 @@ export type FamilyMember = z.infer<typeof FamilyMemberSchema>;
 export const FamilyTreeSchema = z.object({
   /** The playable dynasty this tree backs (matches DynastyKey). */
   dynasty: z.string().min(1),
-  /** The power archetype (economic | political | technological | religious). */
-  archetype: z.enum(["economic", "political", "technological", "religious"]),
+  /** The power archetype the tree backs (CP-R-ARCH: 6 power bases). */
+  archetype: z.enum([
+    "economic",
+    "political",
+    "technological",
+    "religious",
+    "entertainment",
+    "athletic",
+  ]),
   /** The primary real-family spine label (trump | kennedy | musk | graham). */
   spine: z.string().min(1),
   members: z.array(FamilyMemberSchema).min(1),
