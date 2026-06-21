@@ -24,21 +24,15 @@ import type { GameEvent, WorldEvent, WorldTimeline } from "./schema";
 
 /**
  * The ARCHETYPE a scope's private arc belongs to, or null if it is shared backdrop
- * (FD-3.5). The former literal character-timeline scopes (musk, kennedy) are
- * repurposed as RAW EVENT MATERIAL for the matching archetype's pool: the musk
- * arc feeds the technological archetype, the kennedy arc the political one. Tagged
- * so the no-leak gate keeps a founded line within its OWN archetype's material.
- * Geographic + thematic scopes are shared world backdrop available to every line.
+ * (FD-3.5). CP-R-ARCH-3 folded the former literal-person scopes (musk → westcoast,
+ * kennedy → eastcoast) into geographic backdrop as RIVAL-HOUSE events (tags
+ * `rival-house:*`): a famous rival dynasty every line encounters as world-context,
+ * the "other timelines to weave" — not archetype-locked protagonist material. So
+ * every remaining scope is shared backdrop; per-event archetype scoping (where it
+ * matters) now rides the event-level `archetypes` field, not the scope.
  */
-export function archetypeForScope(scope: WorldTimeline["scope"]): string | null {
-  switch (scope) {
-    case "musk":
-      return "technological";
-    case "kennedy":
-      return "political";
-    default:
-      return null; // shared backdrop (usa/world/manhattan/eastcoast/westcoast/mores/religion/science)
-  }
+export function archetypeForScope(_scope: WorldTimeline["scope"]): string | null {
+  return null; // all remaining scopes are shared world backdrop
 }
 
 /** Map a timeline scope to a `place` for world-stack routing (FD-5). */

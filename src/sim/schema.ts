@@ -259,11 +259,8 @@ export const WorldTimelineSchema = z.object({
     "mores",
     "religion",
     "science",
-    // Character-timeline scopes — a parallel PERSON's arc (Musk, Kennedy/RFK Jr)
-    // whose events broadcast flags that thread through / overwrite the backdrops
-    // (e.g. the role-flip) via the linking protocol.
-    "musk",
-    "kennedy",
+    // (CP-R-ARCH-3: the former literal-person scopes `musk` / `kennedy` were folded
+    // into westcoast / eastcoast as rival-house backdrop events, tags rival-house:*.)
   ]),
   label: z.string().min(1),
   /**
