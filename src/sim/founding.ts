@@ -151,6 +151,10 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
     // turn. So we do NOT pre-set emerged/named (that PL-3 holdover skipped those beats); the
     // chain starts at founded_line and the authored beats set emerged → gender_revealed →
     // named → calling_chosen as they play.
+    // OB-5: when the place ships its own authored Epoch-0 birth beat, stamp
+    // `has_authored_epoch0` so the place-agnostic generic beats self-exclude via this
+    // single flag (no per-place notFlags list on the generic beats to maintain).
+    ...(content.authoredEpoch0Places.has(c.place) ? ["has_authored_epoch0"] : []),
     ...(c.deepHistory ? ["deep_history_line"] : []),
   ]) {
     flags = withFlag(flags, f);

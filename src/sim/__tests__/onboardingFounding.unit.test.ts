@@ -66,3 +66,60 @@ describe("onboarding founding (determinism + no leaks)", () => {
     expect(trace.finalName.endsWith(` ${surname}`)).toBe(true);
   });
 });
+
+describe("OB-5 authored-Epoch-0 self-exclusion (single flag, no per-place list)", () => {
+  const content = loadContent();
+
+  const found = (place: string) =>
+    foundByComposition(content, {
+      place,
+      era: "origins",
+      culture: content.places.find((p) => p.id === place)?.defaultCulture ?? "scots_irish",
+      year: 1885,
+      archetype: "economic",
+      gender: "male",
+      surname: "Testfounder",
+      seed: "ob5-seed",
+      originId: `composed:${place}:origins`,
+    }).state;
+
+  it("derives the authored-Epoch-0 places from content (each opens on its own birth beat)", () => {
+    // Every place with an authored birth beat must be in the derived set.
+    for (const place of ["ireland", "bavaria", "south_africa", "west_coast"]) {
+      expect(content.authoredEpoch0Places.has(place)).toBe(true);
+    }
+  });
+
+  it("stamps has_authored_epoch0 ONLY for places that ship an authored Epoch-0", () => {
+    for (const place of content.authoredEpoch0Places) {
+      expect(found(place).flags).toContain("has_authored_epoch0");
+    }
+    // A place WITHOUT an authored Epoch-0 falls back to the generic beats — no flag.
+    const generic = [...content.places.map((p) => p.id)].find(
+      (id) => !content.authoredEpoch0Places.has(id),
+    );
+    if (generic) expect(found(generic).flags).not.toContain("has_authored_epoch0");
+  });
+
+  it("the authored places each carry a six-archetype crystallization (no calling dead-ends)", () => {
+    const SIX = [
+      "athletic",
+      "economic",
+      "entertainment",
+      "political",
+      "religious",
+      "technological",
+    ];
+    for (const place of content.authoredEpoch0Places) {
+      const calling = content.epoch0Events.find(
+        (e) => e.place === place && e.id.includes("calling_crystall"),
+      );
+      if (!calling) continue; // not every authored place has reached the calling beat yet
+      const archetypes = calling.choices
+        .map((c) => c.setsArchetype)
+        .filter((a) => Boolean(a))
+        .sort();
+      expect(archetypes).toEqual(SIX);
+    }
+  });
+});
