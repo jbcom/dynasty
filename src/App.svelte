@@ -85,6 +85,18 @@ function restart(): void {
   if (storage) hasSave(storage).then((h) => (saveExists = h));
   screen = "title";
 }
+
+// DEV harness: download the current run's bespoke timeline as JSON (CP-R7).
+function dumpTimeline(): void {
+  if (!store) return;
+  const blob = new Blob([store.devDumpTimeline()], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `dynasty-timeline-${store.view?.state.seed ?? "run"}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
 </script>
 
 {#if screen === "settings"}
@@ -113,3 +125,48 @@ function restart(): void {
     onchoose={(id) => store?.choose(id)}
   />
 {/if}
+
+<!-- DEV HARNESS OVERLAY (CP-R7): fast-forward + timeline dump, dev builds only. -->
+{#if import.meta.env.DEV && store && !store.view?.state.end}
+  <aside class="dev-overlay" aria-label="Dev harness">
+    <span class="dev-tag">DEV · {store.view?.state.year}</span>
+    <button type="button" onclick={() => store?.devFastForward(1)}>▶ +1</button>
+    <button type="button" onclick={() => store?.devFastForward(10)}>⏩ +10</button>
+    <button type="button" onclick={() => store?.devFastForward(100)}>⏭ +100</button>
+    <button type="button" onclick={dumpTimeline}>⬇ dump</button>
+  </aside>
+{/if}
+
+<style>
+  .dev-overlay {
+    position: fixed;
+    bottom: env(safe-area-inset-bottom, 0);
+    right: 0;
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+    background: rgb(0 0 0 / 0.7);
+    border-top-left-radius: 6px;
+    font-family: monospace;
+    font-size: 0.7rem;
+    z-index: 9999;
+  }
+  .dev-overlay .dev-tag {
+    color: #4fd1a5;
+    letter-spacing: 0.08em;
+  }
+  .dev-overlay button {
+    background: #1b2a4a;
+    color: #d4af37;
+    border: 1px solid #d4af3755;
+    border-radius: 4px;
+    padding: 0.2rem 0.4rem;
+    cursor: pointer;
+    font-family: monospace;
+    font-size: 0.7rem;
+  }
+  .dev-overlay button:hover {
+    background: #25406b;
+  }
+</style>
