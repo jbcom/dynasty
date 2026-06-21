@@ -109,20 +109,36 @@ function draw(timeSec: number): void {
 $effect(() => {
   // Re-read macroAct so the palette updates when the act changes.
   void macroAct;
-  if (!canvas) return;
-  if (!gl && !init()) return; // WebGL unavailable → CSS fallback shows through
-  const reduce = globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-  if (reduce) {
-    draw(0); // single static frame, no animation loop
-    return;
-  }
-  startMs = startMs || performance.now();
-  const loop = (now: number) => {
-    draw((now - startMs) / 1000);
+  // The backdrop is purely decorative (aria-hidden, z-index:-1) — it must NEVER break the screen
+  // or block test interaction. Any WebGL/runtime hiccup falls back silently to the CSS gradient.
+  try {
+    if (!canvas) return;
+    if (!gl && !init()) return; // WebGL unavailable (e.g. headless CI) → CSS fallback shows through
+    // A single static frame (no continuous rAF loop) when motion is unwanted OR under automation:
+    //  - prefers-reduced-motion users;
+    //  - headless test drivers (navigator.webdriver) — the rAF loop otherwise keeps the page busy
+    //    enough to time out Playwright's actionability waits on CI (which has no GPU).
+    const reduce =
+      globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches ||
+      Boolean(globalThis.navigator?.webdriver);
+    if (reduce) {
+      draw(0);
+      return;
+    }
+    startMs = startMs || performance.now();
+    const loop = (now: number) => {
+      try {
+        draw((now - startMs) / 1000);
+      } catch {
+        return; // stop the loop on any draw error rather than spinning
+      }
+      raf = requestAnimationFrame(loop);
+    };
     raf = requestAnimationFrame(loop);
-  };
-  raf = requestAnimationFrame(loop);
-  return () => cancelAnimationFrame(raf);
+    return () => cancelAnimationFrame(raf);
+  } catch {
+    // swallow — the CSS gradient backdrop remains; the game is unaffected.
+  }
 });
 
 onDestroy(() => cancelAnimationFrame(raf));
