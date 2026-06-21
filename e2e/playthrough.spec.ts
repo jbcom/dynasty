@@ -25,21 +25,24 @@ async function startGame(
   await expect(page.getByRole("heading", { name: "Dynasty" })).toBeVisible();
   await page.getByRole("button", { name: /Begin a Line/ }).click();
 
-  // Consciousness phase: three lanes, each a card of fragment choices. Pick the first.
+  // Consciousness phase: three lanes (data-step 0,1,2). Scope each click to its OWN step
+  // so Playwright can't re-click the previous step's button before the DOM transitions.
   for (let lane = 0; lane < 3; lane++) {
-    const choice = page.locator(".onboarding .choices button").first();
+    const choice = page.locator(`[data-step="${lane}"] .choices button`).first();
     await expect(choice).toBeVisible({ timeout: 8000 });
     await choice.click();
   }
 
-  // Surname bestowal.
+  // Surname bestowal (the data-phase="name" card).
+  const namePhase = page.locator('[data-phase="name"]');
+  await expect(namePhase).toBeVisible({ timeout: 8000 });
   if (opts.surname) {
-    await page.getByRole("button", { name: /Name your own line/ }).click();
+    await namePhase.getByRole("button", { name: /Name your own line/ }).click();
     await page.getByPlaceholder("a family name").fill(opts.surname);
     await page.getByRole("button", { name: /Bestow it/ }).click();
   } else {
     // Take the first offered (culture-appropriate) family name.
-    await page.locator(".onboarding .choices button").first().click();
+    await namePhase.locator(".choices button").first().click();
   }
 
   // Land on the play screen: the meter HUD + the first event with choices.
@@ -128,8 +131,10 @@ test("New Game has no upfront inputs and enters the diegetic onboarding (PL-3)",
   const begin = page.getByRole("button", { name: /Begin a Line/ });
   await expect(begin).toBeEnabled();
   await begin.click();
-  // Straight into the consciousness phase — fragment choices, no control-panel/carousel.
-  await expect(page.locator(".onboarding .choices button").first()).toBeVisible({ timeout: 8000 });
+  // Straight into the consciousness phase — first step's fragment choices, no carousel.
+  await expect(page.locator('[data-step="0"] .choices button').first()).toBeVisible({
+    timeout: 8000,
+  });
   await expect(page.getByText("CHOOSE YOUR HINGE")).toHaveCount(0);
 });
 
