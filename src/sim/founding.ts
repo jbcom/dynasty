@@ -1,4 +1,5 @@
 import type { Content } from "./content";
+import { seedFamily } from "./family";
 import { getCulture, pickGivenName } from "./onomastics";
 import { createRng } from "./rng";
 import type { StartMoment } from "./schema";
@@ -77,6 +78,15 @@ export function foundDynasty(content: Content, input: FoundingInput): FoundingRe
     flags = withFlag(flags, f);
   }
 
+  // Seed the LIVE family tree (FD-8) with the progenitor — the root the line grows
+  // from via beget/death/succession. Deterministic from the founding inputs.
+  const family = seedFamily({
+    given: progenitorGiven,
+    surname: input.surname,
+    sex: moment.progenitorSex,
+    born: moment.year,
+  });
+
   const state: GameState = {
     ...base,
     flags,
@@ -90,6 +100,7 @@ export function foundDynasty(content: Content, input: FoundingInput): FoundingRe
       culture: moment.culture,
       place: moment.place,
     },
+    family,
   };
 
   return { state, progenitorGiven, progenitorName, moment };

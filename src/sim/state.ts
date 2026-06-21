@@ -106,6 +106,41 @@ export interface GameState {
     culture: string;
     place: string;
   };
+  /**
+   * The LIVE family tree (FD-8) — the growing, mutable lineage of a founded run.
+   * Absent until a line is founded (foundDynasty seeds the progenitor). Pure +
+   * serializable; reconstructed bit-identically by replay. Births (beget),
+   * deaths (FD-9), and succession (FD-10) all mutate this.
+   */
+  family?: FamilyState;
+}
+
+/** A living (or dead) member of the run's growing lineage (FD-8). */
+export interface LiveMember {
+  /** Deterministic id, minted as `m<seq>` in birth order. */
+  id: string;
+  given: string;
+  surname: string;
+  sex: "male" | "female";
+  born: number;
+  died?: number;
+  /** Parent member id (the progenitor has none). */
+  parentId?: string;
+  /** Generation depth from the progenitor (progenitor = 0). */
+  generation: number;
+  /** Inherited-plus-varied trait vector (0..100), seeds personality/aptitude. */
+  traits: { ambition: number; cunning: number; vigor: number; piety: number };
+  /** True for the member the player currently steers. */
+  isProtagonist: boolean;
+}
+
+/** The live lineage state for a founded run (FD-8). */
+export interface FamilyState {
+  members: LiveMember[];
+  /** The member id the player currently controls. */
+  protagonistId: string;
+  /** Monotonic counter for minting deterministic member ids. */
+  nextSeq: number;
 }
 
 /** Per-market live state (index walk + the player's stake). */

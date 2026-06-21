@@ -7,6 +7,7 @@ import {
 } from "./butterfly";
 import type { Content } from "./content";
 import { meetsRequires, pickNextEvent } from "./events";
+import { beget, kinFor } from "./family";
 import { applyDelta } from "./meters";
 import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
@@ -21,6 +22,11 @@ import { applyWorldFlags, timelinesForBranch } from "./worldtime";
 export interface Transition {
   state: GameState;
   newLedger: LedgerEntry[];
+}
+
+/** Birth year for the i-th child begotten by one choice (staggered by 2y each). */
+function begetYear(eventYear: number, index: number): number {
+  return eventYear + index * 2;
 }
 
 function findChoice(event: GameEvent, choiceId: string): Choice {
@@ -98,6 +104,29 @@ export function applyChoice(
     }
   }
 
+  // 4c. BEGET (FD-8): a choice can add children to the live family tree, born to
+  // the current protagonist in the event's year, named by the founding culture's
+  // convention with inherited+varied traits. No-op without a founded family.
+  let family = state.family;
+  if (choice.begets && choice.begets > 0 && family && state.founding) {
+    const culture = content.onomastics[state.founding.culture];
+    if (culture) {
+      const parentId = family.protagonistId;
+      for (let i = 0; i < choice.begets; i++) {
+        const born = begetYear(event.year, i);
+        const begotten = beget(
+          family,
+          parentId,
+          born,
+          culture,
+          kinFor(family, parentId),
+          rng.fork(`beget:${event.id}:${choiceId}:${state.history.length}:${i}`),
+        );
+        family = begotten.family;
+      }
+    }
+  }
+
   // World-events (FD-2.3) are AMBIENT BACKDROP: clock- and budget-neutral. They do
   // not advance the protagonist's time floor (a future-window backdrop must not
   // push lastEventYear past the era, which the era rollover would then reset
@@ -111,6 +140,7 @@ export function applyChoice(
     ripples,
     pending,
     markets,
+    family,
     ledger: [...state.ledger, ...newLedger],
     history: [...state.history, { eventId: event.id, choiceId, year: event.year }],
     firedEvents,

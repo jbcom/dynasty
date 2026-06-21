@@ -110,6 +110,13 @@ export const ChoiceSchema = z.object({
       }),
     )
     .optional(),
+  /**
+   * BEGET (FD-8): how many children this choice adds to the LIVE family tree, born
+   * to the current protagonist in the choice's year. The seeded `beget` names each
+   * by the founding culture's convention and gives inherited+varied traits. No-op
+   * on a run without a founded family. Absent = 0.
+   */
+  begets: z.number().int().min(0).optional(),
 });
 export type Choice = z.infer<typeof ChoiceSchema>;
 
