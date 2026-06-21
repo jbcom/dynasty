@@ -34,8 +34,11 @@ function colorFor(id: string): string {
 
 // The proper display label for a meter id (Title Case) — the chart legend should read
 // "Power/Reputation/…", not the lowercase machine ids (PL-12), consistent with the rest of
-// the UI. Falls back to the id if a def is missing.
-const labelFor = $derived((id: string) => content.meters.find((m) => m.id === id)?.label ?? id);
+// the UI. Falls back to the id if a def is missing. A plain function (not $derived): the
+// $effect that calls it already tracks `content` reactively (Svelte 5 — review).
+function labelFor(id: string): string {
+  return content.meters.find((m) => m.id === id)?.label ?? id;
+}
 
 $effect(() => {
   if (!el) return;
