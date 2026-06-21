@@ -66,8 +66,11 @@ function roleOf(m: LiveMember): string | null {
             <div class="member" class:protagonist={m.isProtagonist} class:dead>
               <span class="name">
                 {m.given}
-                {m.surname}{#if dead}<span class="cross" title="Deceased" aria-label="deceased">
-                    &#10013;</span
+                {m.surname}{#if dead}<span
+                    class="cross"
+                    role="img"
+                    title="Deceased"
+                    aria-label="deceased">&#10013;</span
                   >{/if}
               </span>
               <span class="life">{lifespan(m)}</span>
