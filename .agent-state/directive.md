@@ -42,45 +42,35 @@ Squash-merge only. Stubs/`as any`/`it.todo` are bugs. Run `pnpm format` + `biome
 
 ---
 
-## Milestone — POLISH & FEATURES (batch-20260621-polish, autonomous loop)
+## Milestone — ONBOARDING REWORK → AUTHORED EPOCH-0 (batch-20260621-epoch0)
 
-GOAL: continuously raise the quality of the shipped game — UI/UX polish, UX affordances,
-well-scoped features — one PR per improvement, each green + 0-leak + harness-clean. The
-queue is a LIVING discovery list: add items as found (playtesting, reading code,
-screenshots), compress as they ship. Each cycle picks the highest-value [ ] item.
+Spec: docs/superpowers/specs/2026-06-21-onboarding-rework.md. SUPERSEDES the PL-3
+consciousness-phase onboarding (the user rejected it as confusing).
 
-### Shipped (history in git / PRs)
-- PR #36 (release 0.5.0): PL-1 title wordmark descender; PL-2 meter delta badges; PL-3 fully
-  diegetic onboarding (no upfront inputs → consciousness-phase seed authoring + culture
-  surname bestowal w/ modal); PL-4 even 3×2 meter HUD grid; PL-5 HUD vertical-budget trim.
-- PR #38: restored the onboarding-aware e2e suite (main had gone red — #36 merged before its
-  e2e fix landed on the head). LEARNING: when a UI FLOW changes, update e2e in the SAME push
-  and confirm the PR head includes it before merging.
-- PR #39: PL-6 subtle choice consequence hints (meter-icon dots, role=img a11y).
-- OPEN-FOR-USER (not taken autonomously): a deeper HUD reduction (collapsible HUD / hide the
-  personality band) — a larger UX decision; flag if wanted.
+GOAL (user): Epoch-0 is the FIRST STAGE OF THE STORY, not a control panel — a fully-written
+birth → man/womanhood → first turn of the calling → finding a partner → branch-fork, with
+the player choosing EVERYTHING (location, gender, family + given name, calling). Each choice
+diegetically SETS A CAUSAL ANCHOR the butterfly/world/pool engines read to generate this
+line's unique storyline. The seed is a HIDDEN random draw (world only). Geography (place) ≠
+chronology (era/date): the doctor draws a seed-random month/day, narrates the full date,
+which frames the era. Calling IS the archetype (diegetic title). EACH place × era needs its
+OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git history.
 
-### Queue (next cycles)
-- [x] **PL-7 MERGED** (#41) — Timeline shows the line's own era chain (no pre-founding eras).
-- [x] **PL-8 MERGED** (#42) — Lineage roles: Consort badge + ✝ deceased mark (role=img).
-- [x] **PL-9 MERGED** (#43) — legacy report celebrates the DYNASTY ("The House of X endured
-  N years across G generations — M souls"); reduce-based stats (no Math.max-spread overflow).
-- [x] **PL-10 MERGED** (#44) — Dossier shows a character record, not a flag dump
-  (src/ui/flagLabel.ts hides structural/lifecycle/preset machinery + humanizes the rest).
-- [x] **PL-11 MERGED** (#45) — News tab shows a quiet-world empty state, not a blank panel.
-- [x] **PL-12 DONE** (commit c5bc70a, branch feat/pl12-views) — Trajectory (Stats) chart:
-  legend uses meter DISPLAY names (Power/Reputation/…) not machine ids, and the year axis is
-  comma-free ("1890" not "1,890"). New Views.browser assertion.
-- [ ] [WAIT] **PL-12 ship** — open + merge the PL-12 PR on green.
-- [ ] [WAIT] **PL-13** — SEQUENCED after PL-12 (one PR in flight). The VIEW-POLISH SWEEP is
-  now complete (Title/HUD/EventCard/Timeline/Lineage/Dossier/News/Stats all passed). Next
-  cycle PIVOTS: either (a) Markets tab if a real gap surfaces on inspection, or (b) the
-  user-requested-but-never-built text-quality dev check (sentence structure, spelling exc.
-  foreign, cadence/slot placement — see build-complete memory), or (c) a small feature add.
-  Decide on inspection.
-
-PROCESS LESSON (encoded): keep a single polish PR in flight, merge it, sync main, branch the
-next from fresh main. Avoids the directive-divergence conflicts seen across cycles 3–6.
+### Queue
+- [x] **OB-1 spec** (34d7c41/a837c41/533ada1) — Epoch-0-as-story scope, geography≠chronology,
+  calling=archetype, causal-anchor purpose.
+- [ ] **OB-2 seam + helpers** — suggestGivenNames (done); archetype→diegetic-title map;
+  seed-drawn birth {month,day} + `birthDate` on composition/state; the Epoch-0 flag chain.
+- [ ] **OB-3 remove consciousness phase** — delete seedComposer.ts + seed-words.json + tests
+  + the adj/adj/noun UI; New Game → location pick → authored Epoch-0; revisit founding flags
+  so the authored beats fire (drop/repurpose the PL-3 emerged/named pre-set).
+- [ ] **OB-4 VERTICAL SLICE** — author Ireland/origins Epoch-0 end-to-end (birth+date →
+  gender → family+given name → adulthood → first calling turn → partner → branch fork), real
+  prose + real anchor-setting choices, 0 leaks. Prove the shape.
+- [ ] **OB-5 REPLICATE** — full Epoch-0 per remaining place × era. Long authoring effort; one
+  PR per slice (or small batch), one in flight at a time.
+- [ ] **OB-6 verify** — e2e + component + textQuality + harness audit 0 findings; live-verify
+  each origin; gate green; remove dead PL-3 paths.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
