@@ -9,11 +9,13 @@ import type { Content } from "./content";
 import { meetsRequires, pickNextEvent } from "./events";
 import { beget, kinFor } from "./family";
 import { applyDelta } from "./meters";
+import { applyMortality } from "./mortality";
 import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
 import type { Choice, GameEvent } from "./schema";
 import type { Archetype } from "./slots";
 import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
+import { succeed } from "./succession";
 import { systemicTick } from "./systemic";
 import { advanceTimeline, applyJump, detectEnd } from "./timeline";
 import { applyWorldFlags, timelinesForBranch } from "./worldtime";
@@ -186,6 +188,53 @@ export function applyChoice(
       const result = systemicTick(content, { ...advanced, year: hopped.year + y }, tickRng);
       advanced = { ...result.state, year: advanced.year };
       for (const f of result.flags) advanced = { ...advanced, flags: withFlag(advanced.flags, f) };
+    }
+  }
+
+  // 8e. MORTALITY + SUCCESSION (FD-9/FD-10): for each elapsed in-world year, the
+  // live family faces a seeded death pass; when the protagonist dies the line
+  // passes to the eldest living heir (estate-planning may name another via the
+  // `heir_<id>` flag), continuing the run AS the heir — or ends it if the line is
+  // extinct. Pure + seeded so replay reconstructs every death + handoff.
+  if (advanced.family) {
+    const years = Math.max(0, advanced.year - hopped.year);
+    const steps = years > 0 ? years : 1;
+    for (let y = 0; y < steps && !advanced.end; y++) {
+      const currentFamily = advanced.family;
+      if (!currentFamily) break;
+      const passYear = hopped.year + y;
+      const mort = applyMortality(
+        currentFamily,
+        passYear,
+        content.eras[advanced.eraIndex]?.id ?? "",
+        rng.fork(`mortality:${passYear}:${advanced.history.length}`),
+      );
+      let fam = mort.family;
+      if (mort.protagonistDied) {
+        const namedHeir = advanced.flags.find((f) => f.startsWith("heir_"))?.slice("heir_".length);
+        const succ = succeed(fam, passYear, namedHeir);
+        if (succ.heirId === null) {
+          // The line is extinct — end the run with a dynastic-extinction ending.
+          advanced = {
+            ...advanced,
+            family: succ.family,
+            end: { kind: "line-extinct", year: passYear, reason: "The line died out." },
+          };
+          break;
+        }
+        fam = succ.family;
+        // Continue AS the heir: re-anchor birthYear/age + flag the succession.
+        const heir = fam.members.find((m) => m.id === succ.heirId);
+        advanced = {
+          ...advanced,
+          family: fam,
+          birthYear: heir?.born ?? advanced.birthYear,
+          age: passYear - (heir?.born ?? advanced.birthYear),
+          flags: withFlag(advanced.flags, "succession_occurred"),
+        };
+      } else {
+        advanced = { ...advanced, family: fam };
+      }
     }
   }
 
