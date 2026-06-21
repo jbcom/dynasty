@@ -58,12 +58,14 @@ function auditText(eventId: string, field: string, text: string, out: TextFindin
   // Slot tokens: strip the {{ }} literal escapes first, then every {token} must be a valid
   // slot. An unknown/typo token (e.g. {plce}, {calling}) would render literally to the player.
   const stripped = text.replace(/\{\{|\}\}/g, "");
-  for (const m of stripped.matchAll(/\{(\w*)\}/g)) {
+  // Match ANY {…} slot-like pattern (incl. typos with non-word chars like {some-slot}) so
+  // they report as unknown-slot, not mistaken for an unbalanced brace (review).
+  for (const m of stripped.matchAll(/\{([^{}]*)\}/g)) {
     const tok = m[1] ?? "";
     if (!VALID_SLOTS.has(tok)) push("unknown-slot", `{${tok}} is not a resolvable slot`);
   }
-  // A lone { or } that isn't part of a {token} or an escape is unbalanced.
-  const noTokens = stripped.replace(/\{\w+\}/g, "");
+  // A lone { or } that isn't part of a {…} token or an escape is unbalanced.
+  const noTokens = stripped.replace(/\{[^{}]*\}/g, "");
   if (noTokens.includes("{") || noTokens.includes("}")) {
     push("unbalanced-brace", "stray { or } in copy");
   }
@@ -82,12 +84,16 @@ function auditText(eventId: string, field: string, text: string, out: TextFindin
   // common abbreviation shapes a period legitimately glues: single-letter initials
   // ("H.W.", "Y.M.C.A.", "a.m.", "p.m."), "St."/"Mr."-style, and decimals. Normalize
   // those out before flagging, so the check fires only on real "word,word" run-ons.
+  // Each abbreviation is only normalized away when properly FOLLOWED by whitespace,
+  // punctuation, or end-of-string — so a real run-on like "Mr.Smith" or "a.m.He" is still
+  // flagged (the abbreviation's trailing "." isn't a legitimate sentence end there) (review).
+  const after = "(?=\\s|[.,;:!?]|$)";
   const normalized = text
     .replace(/\d[.,]\d/g, "") // decimals: 3.14, 1,000
-    .replace(/\b[A-Za-z]\.(?=[A-Za-z]\.)/g, "") // initial chains: H.W., Y.M.C.A.
-    .replace(/\b[A-Za-z]\.\s/g, "") // a trailing single-letter initial: "J. Smith"
-    .replace(/\b(?:a|p)\.m\./gi, "") // a.m. / p.m.
-    .replace(/\b(?:Mr|Mrs|Ms|Dr|St|Jr|Sr|vs|etc|No|Inc|Co)\./g, ""); // common abbreviations
+    .replace(new RegExp(`\\b[A-Za-z]\\.(?=[A-Za-z]\\.)`, "g"), "") // initial chains: H.W., Y.M.C.A.
+    .replace(new RegExp(`\\b[A-Za-z]\\.(?=\\s)`, "g"), "") // a trailing single-letter initial: "J. Smith"
+    .replace(new RegExp(`\\b(?:a|p)\\.m\\.${after}`, "gi"), "") // a.m. / p.m.
+    .replace(new RegExp(`\\b(?:Mr|Mrs|Ms|Dr|St|Jr|Sr|vs|etc|No|Inc|Co)\\.${after}`, "g"), "");
   if (/[,;:][A-Za-z]/.test(normalized) || /\.[A-Za-z]{2,}/.test(normalized)) {
     push("punctuation", "missing space after punctuation");
   }

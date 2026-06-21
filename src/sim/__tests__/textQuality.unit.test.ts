@@ -63,6 +63,17 @@ describe("PL-13 text-quality analyzer", () => {
     expect(f).toEqual([]);
   });
 
+  it("flags a hyphenated/typo slot as unknown-slot, not unbalanced-brace (review)", () => {
+    const f = auditOne(evWith({ scene: "The {some-slot} is odd." }));
+    expect(f.some((x) => x.kind === "unknown-slot")).toBe(true);
+    expect(f.some((x) => x.kind === "unbalanced-brace")).toBe(false);
+  });
+
+  it("still flags a run-on where an abbreviation isn't sentence-final (Mr.Smith) (review)", () => {
+    const f = auditOne(evWith({ scene: "He met Mr.Smith at noon." }));
+    expect(f.some((x) => x.kind === "punctuation")).toBe(true);
+  });
+
   it("flags a doubled word", () => {
     const f = auditOne(evWith({ title: "The the End" }));
     expect(f.some((x) => x.kind === "doubled-word")).toBe(true);
