@@ -54,11 +54,15 @@ describe("NewsTicker", () => {
     expect(host.querySelector('[data-scope="science"]')?.textContent).toBe("Science");
   });
 
-  it("shows no news before any world event has occurred", () => {
+  it("shows a quiet-world empty state when there are no headlines (PL-11)", () => {
     component = mount(NewsTicker, {
       target: host,
       props: { content, gameState: { ...initState(content, "seed"), year: 1900 } },
     });
-    expect(host.querySelector(".news")).toBeNull();
+    // The section renders with its header + an empty-state line (not a blank panel).
+    expect(host.querySelector(".news")).not.toBeNull();
+    expect(host.querySelector(".empty")).not.toBeNull();
+    expect(host.textContent).toMatch(/quiet for now/);
+    expect(host.querySelector("li")).toBeNull(); // no headline rows
   });
 });
