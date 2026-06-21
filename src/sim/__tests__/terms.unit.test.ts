@@ -305,11 +305,11 @@ describe("Musk prologue structure — de-5b", () => {
     }
   });
 
-  it("ev_donald_is_born blocks on musk_dynasty_active (Trump/Musk birth events mutually exclusive)", () => {
-    // ev_donald_is_born has no required flags — it fires on any run without notFlags hits.
+  it("ev_protagonist_is_born blocks on musk_dynasty_active (Trump/Musk birth events mutually exclusive)", () => {
+    // ev_protagonist_is_born has no required flags — it fires on any run without notFlags hits.
     // On a Musk run, none of its original notFlags (line_failed, never_emigrated, etc.) are set,
     // so without this guard it would fire alongside ev_elon_musk_born. Both must not fire.
-    const ev = eventById("ev_donald_is_born");
+    const ev = eventById("ev_protagonist_is_born");
     expect(ev.requires?.notFlags ?? []).toContain("musk_dynasty_active");
   });
 
@@ -411,8 +411,8 @@ describe("Kennedy prologue structure — de-5c", () => {
     }
   });
 
-  it("ev_donald_is_born also blocks kennedy_dynasty_active (all three dynasties mutually exclusive)", () => {
-    const ev = eventById("ev_donald_is_born");
+  it("ev_protagonist_is_born also blocks kennedy_dynasty_active (all three dynasties mutually exclusive)", () => {
+    const ev = eventById("ev_protagonist_is_born");
     expect(ev.requires?.notFlags ?? []).toContain("kennedy_dynasty_active");
   });
 

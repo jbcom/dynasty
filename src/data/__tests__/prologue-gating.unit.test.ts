@@ -10,7 +10,7 @@ import { loadContent } from "../loadContent";
  * PROLOGUE GATING — Epoch 0 must PLAY, not be skipped (user bug, 2026-06-20).
  *
  * Regression for a real playability bug: a fresh Trump game could pick
- * ev_donald_is_born (1946) on the very first turn, skipping the entire
+ * ev_protagonist_is_born (1946) on the very first turn, skipping the entire
  * Friedrich/Fred dynastic prologue (1885-1945) that determines branch, capital,
  * heir framing, etc. Root cause: the birth event had `requires.flags: []`, so it
  * sat in the eligible pool from turn one. Fix: gate the birth on dynasty_capital
@@ -24,7 +24,7 @@ describe("Epoch-0 prologue is not skippable (Trump dynasty)", () => {
   it("the birth is NOT eligible on turn one — only the prologue opener is", () => {
     const start = initState(content, "seed", "economic");
     const ids = eligibleEvents(content, start).map((e) => e.id);
-    expect(ids).not.toContain("ev_donald_is_born");
+    expect(ids).not.toContain("ev_protagonist_is_born");
     // The dynastic prologue opens the game (Friedrich leaving Kallstadt).
     expect(ids).toContain("ev_friedrich_leaves_kallstadt");
   });
@@ -58,7 +58,7 @@ describe("Epoch-0 prologue is not skippable (Trump dynasty)", () => {
           state = advanced;
           continue;
         }
-        if (event.id === "ev_donald_is_born") {
+        if (event.id === "ev_protagonist_is_born") {
           reached++;
           break;
         }
