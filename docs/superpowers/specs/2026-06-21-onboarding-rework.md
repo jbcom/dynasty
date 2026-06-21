@@ -35,6 +35,19 @@ turn of the calling → finding a partner → the pivotal choices that set the l
 storyline. The player's identity choices (location, gender, family + given name, calling)
 are woven into that prose as real beats — not abstract menu steps.
 
+### PURPOSE: Epoch-0 solidifies the CAUSAL ANCHORS (user, 2026-06-21)
+Each Epoch-0 choice diegetically SETS AN ANCHOR that the butterfly engine + causality read to
+generate a storyline unique to this line — woven from the world events for that place/time
+ONWARD and from every other pool (eras, tropes, callings, world-timelines, markets, axes).
+Mechanically: each beat's choice sets durable flags / personality drift / branch stance, and
+those are exactly the `cause` keys butterfly-rules fire on, the gates world/era/archetype
+content keys off, and the affinities that bias the chaos field. So Epoch-0 is the CAUSAL
+SEEDBED: place+era pick which world-timeline + era pools apply; gender + calling + the
+branch-fork stances pick which butterfly rules + branch variants + tropes are live for the
+rest of the run. The player keeps choosing for as long as it narratively makes sense; after
+Epoch-0 the anchors are set and the butterfly/world engine carries the consequences forward.
+Authoring an origin's Epoch-0 = choosing WHICH anchors its beats set (not just writing prose).
+
 CONSEQUENCE: this is primarily AUTHORED CONTENT, not just a screen. **Each place × era needs
 its own fully-written Epoch-0 arc** (a Bavarian 1885 birth reads differently from a Baghdad
 762 one or an Irish 1885 one). The UI is the thin renderer (the existing EventCard +
