@@ -101,35 +101,48 @@ function runPersona(persona: Persona, seed: string, archetype: Archetype): GameS
   return state;
 }
 
-describe("DE-6b persona playtest sweep", () => {
-  it("no persona × dynasty run dead-ends — every run reaches an authored ending", () => {
-    const deadEnds: string[] = [];
-    for (const persona of PERSONAS) {
-      for (const archetype of ARCHETYPES) {
-        for (let s = 0; s < 6; s++) {
-          const end = runPersona(persona, `seed-${s}`, archetype).end;
-          if (!end) deadEnds.push(`${persona.name}/${archetype}/seed-${s}`);
-        }
-      }
-    }
-    expect(deadEnds, `dead-ends:\n${deadEnds.join("\n")}`).toEqual([]);
-  });
+// Heavy deterministic sweeps: 5 personas × 4 archetypes × 6 seeds = 120 full
+// playthroughs each (incl. mortality/family per-year passes). Generous timeout so
+// CI's default 5s doesn't flake on a slower runner — the work is bounded + pure.
+const SWEEP_TIMEOUT = 60_000;
 
-  it("the sweep produces a VARIETY of endings (no single dominant outcome)", () => {
-    const endings = new Set<string>();
-    for (const persona of PERSONAS) {
-      for (const archetype of ARCHETYPES) {
-        for (let s = 0; s < 6; s++) {
-          const end = runPersona(persona, `seed-${s}`, archetype).end;
-          if (end?.endingId) endings.add(end.endingId);
-          else if (end) endings.add(end.kind);
+describe("DE-6b persona playtest sweep", () => {
+  it(
+    "no persona × dynasty run dead-ends — every run reaches an authored ending",
+    () => {
+      const deadEnds: string[] = [];
+      for (const persona of PERSONAS) {
+        for (const archetype of ARCHETYPES) {
+          for (let s = 0; s < 6; s++) {
+            const end = runPersona(persona, `seed-${s}`, archetype).end;
+            if (!end) deadEnds.push(`${persona.name}/${archetype}/seed-${s}`);
+          }
         }
       }
-    }
-    // Across 5 personas × 3 dynasties × 6 seeds, the decision space should yield
-    // several distinct endings — not funnel everyone to one screen.
-    expect(endings.size).toBeGreaterThanOrEqual(4);
-  });
+      expect(deadEnds, `dead-ends:\n${deadEnds.join("\n")}`).toEqual([]);
+    },
+    SWEEP_TIMEOUT,
+  );
+
+  it(
+    "the sweep produces a VARIETY of endings (no single dominant outcome)",
+    () => {
+      const endings = new Set<string>();
+      for (const persona of PERSONAS) {
+        for (const archetype of ARCHETYPES) {
+          for (let s = 0; s < 6; s++) {
+            const end = runPersona(persona, `seed-${s}`, archetype).end;
+            if (end?.endingId) endings.add(end.endingId);
+            else if (end) endings.add(end.kind);
+          }
+        }
+      }
+      // Across the persona × archetype × seed matrix the decision space should
+      // yield several distinct endings — not funnel everyone to one screen.
+      expect(endings.size).toBeGreaterThanOrEqual(4);
+    },
+    SWEEP_TIMEOUT,
+  );
 
   it("a persona run is deterministic (same persona+seed+dynasty → identical end)", () => {
     const a = runPersona(PERSONAS[0] as Persona, "det", "technological");

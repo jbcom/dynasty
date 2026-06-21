@@ -42,28 +42,40 @@ function playFounded(momentId: string, surname: string, seed: string) {
   return state;
 }
 
-describe("FD-15 founded-line multi-generation stress", () => {
-  it("every start-moment plays to an authored ending (no dead-ends)", () => {
-    const deadEnds: string[] = [];
-    for (const m of content.startMoments) {
-      for (let s = 0; s < 4; s++) {
-        const end = playFounded(m.id, "Vane", `seed-${s}`).end;
-        if (!end) deadEnds.push(`${m.id}/seed-${s}`);
-      }
-    }
-    expect(deadEnds, `dead-ends:\n${deadEnds.join("\n")}`).toEqual([]);
-  });
+// 8 start-moments × 4 seeds full playthroughs (with mortality/family per year) —
+// bounded + pure but heavy; generous timeout so CI's default 5s doesn't flake.
+const STRESS_TIMEOUT = 60_000;
 
-  it("founded runs reach a VARIETY of endings (not one funnel)", () => {
-    const endings = new Set<string>();
-    for (const m of content.startMoments) {
-      for (let s = 0; s < 4; s++) {
-        const end = playFounded(m.id, "Vane", `seed-${s}`).end;
-        if (end) endings.add(end.endingId ?? end.kind);
+describe("FD-15 founded-line multi-generation stress", () => {
+  it(
+    "every start-moment plays to an authored ending (no dead-ends)",
+    () => {
+      const deadEnds: string[] = [];
+      for (const m of content.startMoments) {
+        for (let s = 0; s < 4; s++) {
+          const end = playFounded(m.id, "Vane", `seed-${s}`).end;
+          if (!end) deadEnds.push(`${m.id}/seed-${s}`);
+        }
       }
-    }
-    expect(endings.size).toBeGreaterThanOrEqual(3);
-  });
+      expect(deadEnds, `dead-ends:\n${deadEnds.join("\n")}`).toEqual([]);
+    },
+    STRESS_TIMEOUT,
+  );
+
+  it(
+    "founded runs reach a VARIETY of endings (not one funnel)",
+    () => {
+      const endings = new Set<string>();
+      for (const m of content.startMoments) {
+        for (let s = 0; s < 4; s++) {
+          const end = playFounded(m.id, "Vane", `seed-${s}`).end;
+          if (end) endings.add(end.endingId ?? end.kind);
+        }
+      }
+      expect(endings.size).toBeGreaterThanOrEqual(3);
+    },
+    STRESS_TIMEOUT,
+  );
 
   it("a founded run is replay-deterministic (same inputs → identical end)", () => {
     const a = playFounded("abbasid_baghdad_762", "al-Rashid", "det");
