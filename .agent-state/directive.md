@@ -110,8 +110,16 @@ history, replay still bit-identical). Sub-tasks:
   shipped the PL-3 onboarding flow with the OLD Playwright suite (driving the removed
   title-screen inputs) → red main CI. Process fix: when a UI FLOW changes, update e2e in
   the SAME push as the UI, and confirm the PR head includes it before merging.
-- [ ] [WAIT] **PL-fix red main** — PR #38 re-applies the onboarding-aware e2e suite (all 7
-  pass locally vs main's app code). Merge on green → main CI green again.
+- [x] **PL-fix red main — MERGED** (PR #38, 9ca62e8). Onboarding-aware e2e suite restored;
+  locators scoped per-`[data-step]`/`[data-phase]` (review hardening); build-and-test green;
+  main healthy again.
+
+### Polish cycle 2 (discovered playtesting the mid-game)
+- [ ] **PL-6 Choice consequence hints.** Choice buttons give NO pre-choice signal of which
+  meters they touch — the cause→effect is only visible AFTER (PL-2 delta badges). Add
+  SUBTLE meter-icon hint dots on each choice (which meters it affects, NOT magnitude or
+  sign) so the strategic layer deepens without spoiling the outcome or breaking immersion.
+  Uses choice.effects + the existing meter icons. Render/UI gate → visual + browser test.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via

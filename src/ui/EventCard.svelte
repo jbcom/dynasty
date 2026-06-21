@@ -1,5 +1,6 @@
 <script lang="ts">
-import type { Choice, GameEvent } from "../sim/schema";
+import { METER_IDS } from "../sim/schema";
+import type { Choice, GameEvent, MeterId } from "../sim/schema";
 import { impact } from "./haptics";
 
 interface Props {
@@ -19,6 +20,16 @@ async function choose(choice: Choice): Promise<void> {
   await impact(choice.effects);
   onchoose(choice.id);
 }
+
+/**
+ * CONSEQUENCE HINTS (PL-6): which meters a choice TOUCHES, in canonical order — a subtle
+ * pre-choice signal of the kind of stakes (money? power? heat?) WITHOUT revealing the
+ * magnitude or even the direction, so the strategic read deepens but the outcome stays a
+ * surprise and the prose stays in focus. A non-zero effect counts as "touched".
+ */
+function touchedMeters(choice: Choice): MeterId[] {
+  return METER_IDS.filter((id) => (choice.effects?.[id] ?? 0) !== 0);
+}
 </script>
 
 <article class="card" data-event={event.id}>
@@ -36,8 +47,24 @@ async function choose(choice: Choice): Promise<void> {
 
   <div class="choices">
     {#each event.choices as choice (choice.id)}
+      {@const touched = touchedMeters(choice)}
       <button type="button" disabled={busy} onclick={() => choose(choice)}>
-        {term(choice.text)}
+        <span class="choice-text">{term(choice.text)}</span>
+        {#if touched.length > 0}
+          <span class="hints" aria-label={`Touches ${touched.join(", ")}`}>
+            {#each touched as id (id)}
+              <img
+                class="hint"
+                src={`/assets/icons/${id}.svg`}
+                alt=""
+                aria-hidden="true"
+                width="14"
+                height="14"
+                decoding="async"
+              />
+            {/each}
+          </span>
+        {/if}
       </button>
     {/each}
   </div>
@@ -97,6 +124,10 @@ async function choose(choice: Choice): Promise<void> {
     gap: 0.45rem;
   }
   button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
     text-align: left;
     padding: 0.65rem 0.9rem;
     background: color-mix(in srgb, var(--mmm-navy-light) 80%, var(--mmm-navy-deep));
@@ -121,5 +152,34 @@ async function choose(choice: Choice): Promise<void> {
   button:disabled {
     opacity: 0.5;
     cursor: default;
+  }
+  .choice-text {
+    flex: 1;
+  }
+  /* Consequence hints (PL-6): which meters this choice stirs — shape of the stakes, not
+     the size. Dimmed so they sit quietly beside the prose; they brighten on hover/focus
+     as the player considers the choice. */
+  .hints {
+    display: inline-flex;
+    flex-shrink: 0;
+    gap: 0.25rem;
+    align-self: flex-start;
+    margin-top: 0.1rem;
+  }
+  .hint {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    opacity: 0.4;
+    transition: opacity var(--mmm-dur-fast) var(--mmm-ease);
+  }
+  button:hover:not(:disabled) .hint,
+  button:focus-visible .hint {
+    opacity: 0.85;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hint {
+      transition: none;
+    }
   }
 </style>
