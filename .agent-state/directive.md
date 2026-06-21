@@ -83,8 +83,13 @@ OWN fully-written Epoch-0. Polish sweep (PL-1..PL-13) shipped — see git histor
   e2e green; textQuality corpus-clean. NOTE: starting meters ($1K/low) already read as a poor
   tenant family; a deeper "family money vs your money" mechanic is a future refinement, not
   blocking. A richer partner beat + an explicit branch-fork beat can be added in OB-5 polish.
-- [ ] [WAIT] **OB-5 REPLICATE** — after OB-4. Full Epoch-0 per remaining place × era. Long
-  authoring effort; one PR per slice (or small batch), one in flight at a time.
+- [ ] [WAIT] **OB-5 REPLICATE (batch 1 in PR #53)** — full Epoch-0 per place × era. Batch 1
+  (bavaria 617dd15 + south_africa dee952d, 0-leak + green) is in PR #53 (CI running). REMAINING
+  batches SEQUENCED after #53 merges (one PR in flight): west_coast, east_coast, canada,
+  american_midwest, american_south, baghdad/caliphate.
+  MAINTENANCE SMELL to fix soon: the generic ev_birth_generic + ev_birth_calling carry a
+  growing per-place `notFlags:[place:X]` exclusion list — replace with a cleaner "exclude if
+  the place has its own birth beat" mechanism before the list gets long.
 - [ ] [WAIT] **OB-6 verify** — e2e + component + textQuality + harness audit 0 findings;
   live-verify each origin; gate green; remove dead PL-3 paths.
 
