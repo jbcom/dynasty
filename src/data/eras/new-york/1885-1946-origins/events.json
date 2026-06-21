@@ -45,12 +45,12 @@
       "year": 1885,
       "title": "You Arrive",
       "scene": "A first breath, a first cry — you are born into a place and a time you did not choose, the way everyone is. Around you the ordinary machinery of arrival: hands, lamplight, the relief of those who waited.",
-      "researchNote": "OB-4: the place-AGNOSTIC birth opener — sets `emerged` so the Epoch-0 chain begins for any origin that doesn't yet have its own authored birth beat. EXCLUDED for places that DO have a custom birth (notFlags their place tag), so e.g. Ireland always opens on ev_ire_birth. Add each authored place here as its Epoch-0 lands.",
+      "researchNote": "OB-4/OB-5: the place-AGNOSTIC birth opener — sets `emerged` so the Epoch-0 chain begins for any origin that doesn't yet have its own authored birth beat. Self-EXCLUDED for places that DO ship an authored Epoch-0 via the single `has_authored_epoch0` flag (stamped at founding from content.authoredEpoch0Places), so e.g. Ireland always opens on ev_ire_birth — no per-place list to maintain.",
       "historicity": "personal",
       "tags": ["epoch0", "birth", "diegetic"],
       "requires": {
         "flags": ["founded_line"],
-        "notFlags": ["emerged", "place:ireland", "place:bavaria", "place:south_africa"],
+        "notFlags": ["emerged", "has_authored_epoch0"],
         "meters": {},
         "personality": {}
       },
@@ -87,9 +87,7 @@
         ],
         "notFlags": [
           "calling_chosen",
-          "place:ireland",
-          "place:bavaria",
-          "place:south_africa"
+          "has_authored_epoch0"
         ],
         "meters": {},
         "personality": {}
