@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.6.1](https://github.com/jbcom/dynasty/compare/v0.6.0...v0.6.1) (2026-06-21)
+
+
+### Bug Fixes
+
+* **android:** unbreak the CD APK build (proguard-optimize) ([#47](https://github.com/jbcom/dynasty/issues/47)) ([800ff13](https://github.com/jbcom/dynasty/commit/800ff1301f46f7c5032c67d9d8c02ebb0cf43a43))
+
+## [0.6.0](https://github.com/jbcom/dynasty/compare/v0.5.0...v0.6.0) (2026-06-21)
+
+
+### Features
+
+* **ui:** Dossier shows a character record, not a flag dump (PL-10) ([#44](https://github.com/jbcom/dynasty/issues/44)) ([a6c6b4d](https://github.com/jbcom/dynasty/commit/a6c6b4d31e22310c1da15272e462bff18c392346))
+* **ui:** legacy report celebrates the dynasty (PL-9) ([#43](https://github.com/jbcom/dynasty/issues/43)) ([600e980](https://github.com/jbcom/dynasty/commit/600e980b6e2ab21ad4531412d2d4169e258110c7))
+* **ui:** Lineage relationships — Consort badge + deceased mark (PL-8) ([#42](https://github.com/jbcom/dynasty/issues/42)) ([bcafe22](https://github.com/jbcom/dynasty/commit/bcafe22c6260f3ffff162f2971fcd5127aaa2a81))
+* **ui:** News tab quiet-world empty state (PL-11) ([#45](https://github.com/jbcom/dynasty/issues/45)) ([e8700c6](https://github.com/jbcom/dynasty/commit/e8700c6fb3433b57ea63f891856b827cfb54fa55))
+* **ui:** subtle choice consequence hints ([#39](https://github.com/jbcom/dynasty/issues/39)) ([ad05a2f](https://github.com/jbcom/dynasty/commit/ad05a2f21847ffdcc0fe2018a887b314420fac58))
+* **ui:** Trajectory chart legend + axis polish (PL-12) ([#46](https://github.com/jbcom/dynasty/issues/46)) ([d15c758](https://github.com/jbcom/dynasty/commit/d15c7585445520526f216040afdd036001437398))
+
+
+### Bug Fixes
+
+* **ui:** Timeline shows the line's own era chain (PL-7) ([#41](https://github.com/jbcom/dynasty/issues/41)) ([1435d5f](https://github.com/jbcom/dynasty/commit/1435d5fc9aef8d7fc6accfda4e4f989dd1b3af18))
+
 ## [0.5.0](https://github.com/jbcom/dynasty/compare/v0.4.0...v0.5.0) (2026-06-21)
 
 
