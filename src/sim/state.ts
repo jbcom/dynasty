@@ -105,6 +105,8 @@ export interface GameState {
     surname: string;
     culture: string;
     place: string;
+    /** The founding CALLING id (CP-2) — a durable generational lens; optional. */
+    calling?: string;
   };
   /**
    * The LIVE family tree (FD-8) — the growing, mutable lineage of a founded run.

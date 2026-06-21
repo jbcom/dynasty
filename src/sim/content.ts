@@ -3,6 +3,8 @@ import {
   AssetsFileSchema,
   type ButterflyRule,
   ButterflyRulesSchema,
+  type Calling,
+  CallingsFileSchema,
   type Consequence,
   CurrenciesFileSchema,
   type Currency,
@@ -72,6 +74,11 @@ export interface Content {
    */
   tropes: Trope[];
   /**
+   * Founding CALLINGS (CP-2): durable generational lenses (trait drift + trope
+   * weights) layered on the archetype. Empty by default.
+   */
+  callings: Calling[];
+  /**
    * Procedural event templates (FD-4): skeleton events with `{slot}` tokens the
    * seeded expander materializes into concrete GameEvents when the authored pool
    * thins. Empty by default (the authored pool stands alone).
@@ -116,6 +123,7 @@ export interface RawContent {
   ranks?: unknown;
   familyTrees?: unknown;
   tropes?: unknown;
+  callings?: unknown;
   templates?: unknown;
   onomastics?: unknown;
   startMoments?: unknown;
@@ -154,6 +162,22 @@ export function buildContent(raw: RawContent): Content {
   const tropeIds = new Set(tropesFile.tropes.map((t) => t.id));
   if (tropeIds.size !== tropesFile.tropes.length) {
     throw new Error("tropes.json has duplicate trope ids");
+  }
+  const callingsFile = parseContent(
+    CallingsFileSchema,
+    raw.callings ?? { callings: [] },
+    "callings.json",
+  );
+  // A calling's trope-weight keys must resolve to the catalog (same guarantee as
+  // events/templates), so a renamed/deleted trope can never leave a dangling weight.
+  if (tropeIds.size > 0) {
+    for (const c of callingsFile.callings) {
+      for (const id of Object.keys(c.tropeWeights)) {
+        if (!tropeIds.has(id)) {
+          throw new Error(`calling "${c.id}" references unknown trope "${id}"`);
+        }
+      }
+    }
   }
   const templatesFile = parseContent(
     EventTemplatesFileSchema,
@@ -312,6 +336,7 @@ export function buildContent(raw: RawContent): Content {
     ranks: ranksFile.ranks,
     familyTrees: familyTreesFile.trees,
     tropes: tropesFile.tropes,
+    callings: callingsFile.callings,
     templates: templatesFile.templates,
     onomastics: onomasticsFile.cultures,
     startMoments: startMomentsFile.moments,

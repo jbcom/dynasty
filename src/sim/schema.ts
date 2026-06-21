@@ -640,6 +640,35 @@ export const TropesFileSchema = z.object({
 export type TropesFile = z.infer<typeof TropesFileSchema>;
 
 /* ------------------------------------------------------------------------- *
+ * CALLINGS (CP-2) — a founding CALLING is a durable generational LENS layered on
+ * the archetype. It biases the family's inherited traits over generations
+ * (traitDrift applied each beget) AND weights which tropes' events surface
+ * (tropeWeights multiply effectiveWeight for matching trope-tagged events). A
+ * line of Scholars drifts cunning/piety up and surfaces prophet/centrist-to-zealot
+ * beats; a line of Soldiers drifts vigor up and surfaces conqueror/martyr beats.
+ * Pure data; the resolver lives in sim/callings.ts. See design spec §CP-2.
+ * ------------------------------------------------------------------------- */
+export const CallingTrait = z.enum(["ambition", "cunning", "vigor", "piety"]);
+export type CallingTraitKey = z.infer<typeof CallingTrait>;
+
+export const CallingSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(1),
+  /** One-line description of the calling's character. */
+  summary: z.string().min(1),
+  /** Per-beget drift added to a child's inherited traits (small, e.g. +3). */
+  traitDrift: z.partialRecord(CallingTrait, z.number()).default({}),
+  /** Multiplier on the selection weight of events carrying each trope id. */
+  tropeWeights: z.record(z.string(), z.number()).default({}),
+});
+export type Calling = z.infer<typeof CallingSchema>;
+
+export const CallingsFileSchema = z.object({
+  callings: z.array(CallingSchema).default([]),
+});
+export type CallingsFile = z.infer<typeof CallingsFileSchema>;
+
+/* ------------------------------------------------------------------------- *
  * PROCEDURAL EVENT TEMPLATES (FD-4) — the §1d procedural pool. An authored
  * EventTemplate is a SKELETON event whose text carries `{slot}` tokens and whose
  * numeric effects are authored RANGES; the pure seeded expander (src/sim/procgen)

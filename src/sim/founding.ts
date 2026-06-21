@@ -24,6 +24,8 @@ export interface FoundingInput {
   surname: string;
   /** The run seed. */
   seed: string;
+  /** The founding CALLING id (CP-2), optional — a durable generational lens. */
+  calling?: string;
 }
 
 /** The progenitor's given name + the founding state, for the UI + the run. */
@@ -99,6 +101,7 @@ export function foundDynasty(content: Content, input: FoundingInput): FoundingRe
       surname: input.surname,
       culture: moment.culture,
       place: moment.place,
+      ...(input.calling ? { calling: input.calling } : {}),
     },
     family,
   };

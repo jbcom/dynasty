@@ -5,6 +5,7 @@ import {
   landDueConsequences,
   scheduleConsequences,
 } from "./butterfly";
+import { applyCallingDrift, callingById } from "./callings";
 import type { Content } from "./content";
 import { meetsRequires, pickNextEvent } from "./events";
 import { beget, kinFor } from "./family";
@@ -108,11 +109,13 @@ export function applyChoice(
 
   // 4c. BEGET (FD-8): a choice can add children to the live family tree, born to
   // the current protagonist in the event's year, named by the founding culture's
-  // convention with inherited+varied traits. No-op without a founded family.
+  // convention with inherited+varied traits. The founding CALLING (CP-2) drifts
+  // each child's traits toward the line's calling. No-op without a founded family.
   let family = state.family;
   if (choice.begets && choice.begets > 0 && family && state.founding) {
     const culture = content.onomastics[state.founding.culture];
     if (culture) {
+      const calling = callingById(content.callings, state.founding.calling);
       const parentId = family.protagonistId;
       for (let i = 0; i < choice.begets; i++) {
         const born = begetYear(event.year, i);
@@ -124,7 +127,15 @@ export function applyChoice(
           kinFor(family, parentId),
           rng.fork(`beget:${event.id}:${choiceId}:${state.history.length}:${i}`),
         );
-        family = begotten.family;
+        // Apply the calling's generational trait drift to the new child.
+        const child = begotten.child;
+        const drifted = applyCallingDrift(child.traits, calling);
+        family = {
+          ...begotten.family,
+          members: begotten.family.members.map((m) =>
+            m.id === child.id ? { ...m, traits: drifted } : m,
+          ),
+        };
       }
     }
   }

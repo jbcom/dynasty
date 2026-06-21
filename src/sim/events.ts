@@ -1,4 +1,5 @@
 import { branchOf } from "./branch";
+import { callingById, callingWeight } from "./callings";
 import type { Content } from "./content";
 import type { PersonalityAxis } from "./personality";
 import { materializeProcedural } from "./procgen";
@@ -185,6 +186,13 @@ export function effectiveWeight(content: Content, state: GameState, ev: GameEven
       const axisValue = state.personality[axis] ?? 0;
       weight *= Math.max(0, 1 + sensitivity * (axisValue / 100));
     }
+  }
+
+  // CALLING bias (CP-2): the founding calling weights events carrying its tropes,
+  // so a Scholar line surfaces prophet/reformer beats more often, layered on top
+  // of the branch + personality bias above.
+  if (state.founding?.calling) {
+    weight *= callingWeight(callingById(content.callings, state.founding.calling), ev);
   }
 
   return Math.max(0, weight);
