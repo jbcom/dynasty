@@ -117,6 +117,12 @@ export const ChoiceSchema = z.object({
    * on a run without a founded family. Absent = 0.
    */
   begets: z.number().int().min(0).optional(),
+  /**
+   * TAKE PARTNER (CP-5): if true, the protagonist takes a partner (a married-in
+   * in-law whose traits blend into subsequent begets). No-op without a founded
+   * family or if a partner already exists. The Epoch-0 "find a partner" beat.
+   */
+  takesPartner: z.boolean().optional(),
 });
 export type Choice = z.infer<typeof ChoiceSchema>;
 

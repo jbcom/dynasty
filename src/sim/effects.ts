@@ -8,7 +8,7 @@ import {
 import { applyCallingDrift, callingById } from "./callings";
 import type { Content } from "./content";
 import { meetsRequires, pickNextEvent } from "./events";
-import { beget, kinFor } from "./family";
+import { beget, kinFor, takePartner } from "./family";
 import { applyDelta } from "./meters";
 import { applyMortality } from "./mortality";
 import { applyPersonality } from "./personality";
@@ -107,11 +107,27 @@ export function applyChoice(
     }
   }
 
+  let family = state.family;
+
+  // 4b2. TAKE PARTNER (CP-5): the Epoch-0 "find a partner" beat. Adds a married-in
+  // in-law whose traits blend into subsequent begets. No-op without a founded
+  // family or if a partner already exists.
+  if (choice.takesPartner && family && state.founding && !family.partnerId) {
+    const culture = content.onomastics[state.founding.culture];
+    if (culture) {
+      family = takePartner(
+        family,
+        event.year,
+        culture,
+        rng.fork(`partner:${event.id}:${choiceId}:${state.history.length}`),
+      ).family;
+    }
+  }
+
   // 4c. BEGET (FD-8): a choice can add children to the live family tree, born to
   // the current protagonist in the event's year, named by the founding culture's
   // convention with inherited+varied traits. The founding CALLING (CP-2) drifts
   // each child's traits toward the line's calling. No-op without a founded family.
-  let family = state.family;
   if (choice.begets && choice.begets > 0 && family && state.founding) {
     const culture = content.onomastics[state.founding.culture];
     if (culture) {

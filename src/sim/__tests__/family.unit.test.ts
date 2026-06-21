@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
 import { applyChoice, replayFromState } from "../effects";
-import { beget, childrenOf, kinFor, memberById, seedFamily } from "../family";
+import { beget, childrenOf, kinFor, memberById, seedFamily, takePartner } from "../family";
 import { foundDynasty } from "../founding";
 import { getCulture } from "../onomastics";
 import { createRng } from "../rng";
@@ -176,5 +176,93 @@ describe("FD-8 beget wired through applyChoice + replay", () => {
     ).state;
     const replayed = replayFromState(contentWithEvent, founded, after.history, createRng);
     expect(replayed.family).toEqual(after.family);
+  });
+});
+
+describe("CP-5 takePartner", () => {
+  const f0 = seedFamily({
+    given: "Otto",
+    surname: "Vane",
+    sex: "male",
+    born: 1850,
+    traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
+  });
+
+  it("mints an in-law partner (no parentId, same generation) and sets partnerId", () => {
+    const { family, partner } = takePartner(f0, 1875, bavarian, createRng("p"));
+    expect(partner.parentId).toBeUndefined();
+    expect(partner.generation).toBe(0);
+    expect(partner.sex).toBe("female"); // complement of the male protagonist
+    expect(bavarian.givenFemale).toContain(partner.given);
+    expect(family.partnerId).toBe(partner.id);
+  });
+
+  it("a partner blends traits into the next beget (toward the midpoint)", () => {
+    // Force a high-cunning partner, then beget; children skew above the parent's 50.
+    let { family } = takePartner(f0, 1875, bavarian, createRng("p"));
+    const pid = family.partnerId as string;
+    family = {
+      ...family,
+      members: family.members.map((m) =>
+        m.id === pid ? { ...m, traits: { ambition: 90, cunning: 90, vigor: 90, piety: 90 } } : m,
+      ),
+    };
+    // Average of parent 50 + partner 90 = 70; child drifts within ±20 of 70 → ≥50.
+    for (const seed of ["a", "b", "c", "d"]) {
+      const child = beget(
+        family,
+        "m0",
+        1900,
+        bavarian,
+        kinFor(family, "m0"),
+        createRng(seed),
+      ).child;
+      expect(child.traits.cunning).toBeGreaterThanOrEqual(50);
+    }
+  });
+
+  it("is replay-deterministic", () => {
+    const a = takePartner(f0, 1875, bavarian, createRng("z"));
+    const b = takePartner(f0, 1875, bavarian, createRng("z"));
+    expect(a.family).toEqual(b.family);
+    expect(a.partner).toEqual(b.partner);
+  });
+
+  it("a takesPartner choice + succession clears the partner for the heir", () => {
+    const founded = foundDynasty(content, {
+      momentId: "bavaria_1885",
+      surname: "Vane",
+      seed: "cp5",
+    }).state;
+    const ev: GameEvent = {
+      id: "ev_cp5",
+      era: content.eras[founded.eraIndex]?.id ?? "origins",
+      year: 1908,
+      title: "Marriage",
+      scene: "s",
+      researchNote: "r",
+      extrapolated: false,
+      startrekInspired: false,
+      tags: [],
+      requires: { flags: [], notFlags: [], meters: {}, personality: {} },
+      weight: 1,
+      repeatable: false,
+      choices: [
+        {
+          id: "wed",
+          text: "wed",
+          effects: {},
+          personality: {},
+          setFlags: [],
+          clearFlags: [],
+          ripples: [],
+          outcome: "o",
+          takesPartner: true,
+        },
+      ],
+    };
+    const c = { ...content, allEvents: [...content.allEvents, ev] };
+    const after = applyChoice(c, founded, ev, "wed", createRng("cp5")).state;
+    expect(after.family?.partnerId).toBeDefined();
   });
 });

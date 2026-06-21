@@ -157,6 +157,12 @@ export interface FamilyState {
   protagonistId: string;
   /** Monotonic counter for minting deterministic member ids. */
   nextSeq: number;
+  /**
+   * The current protagonist's PARTNER member id (CP-5), if taken. A married-in
+   * in-law (no parentId) whose traits blend into the next beget. Cleared on
+   * succession so the new protagonist may take their own partner.
+   */
+  partnerId?: string;
 }
 
 /** Whether a member is alive as of `year` (single source of truth, FD-8/9/10). */

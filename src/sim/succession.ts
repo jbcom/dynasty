@@ -67,7 +67,13 @@ export function succeed(
     ...m,
     isProtagonist: m.id === heirId,
   }));
-  return { family: { ...family, members, protagonistId: heirId }, heirId };
+  // The heir starts unpartnered — they may take their own partner (CP-5). The late
+  // protagonist's partnerId is cleared so the next generation's begets don't blend
+  // a dead-and-gone in-law.
+  return {
+    family: { ...family, members, protagonistId: heirId, partnerId: undefined },
+    heirId,
+  };
 }
 
 /** The minted-order sequence embedded in a member id (`m12` → 12). */

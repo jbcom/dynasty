@@ -1,4 +1,4 @@
-import { applySuffix, type ChildSlot, type KinNames, nameChild } from "./onomastics";
+import { applySuffix, type ChildSlot, type KinNames, nameChild, pickGivenName } from "./onomastics";
 import type { Rng } from "./rng";
 import type { Culture } from "./schema";
 import type { FamilyState, LiveMember } from "./state";
@@ -89,9 +89,19 @@ export function beget(
   const priorBearers = family.members.filter((m) => m.given === named.name).length;
   const given = applySuffix(culture, named.name, priorBearers);
 
+  // Traits inherit from the parent — blended with the PARTNER's (CP-5) when the
+  // parent has a spouse — then drift. The blend is the midpoint of the two lines,
+  // so a partner of strong cunning lifts the children's cunning.
+  const partner =
+    family.partnerId && parentId === family.protagonistId
+      ? family.members.find((m) => m.id === family.partnerId)
+      : undefined;
   const traits = {} as LiveMember["traits"];
   for (const k of TRAIT_KEYS as readonly TraitKey[]) {
-    traits[k] = inheritTrait(parent.traits[k], rng.fork(`trait:${k}`));
+    const baseValue = partner
+      ? Math.round((parent.traits[k] + partner.traits[k]) / 2)
+      : parent.traits[k];
+    traits[k] = inheritTrait(baseValue, rng.fork(`trait:${k}`));
   }
 
   const child: LiveMember = {
@@ -113,6 +123,52 @@ export function beget(
       nextSeq: family.nextSeq + 1,
     },
     child,
+  };
+}
+
+/**
+ * CP-5 — the protagonist takes a PARTNER: a married-in in-law member (no parentId,
+ * generation = the protagonist's) whose given name comes from the culture's pool
+ * and whose traits seed independently. Sets family.partnerId so the next beget
+ * blends the partner's traits into the children. The partner's sex defaults to the
+ * complement of the protagonist's (override via `sex`). Pure + seeded.
+ */
+export function takePartner(
+  family: FamilyState,
+  year: number,
+  culture: Culture,
+  rng: Rng,
+  sex?: LiveMember["sex"],
+): { family: FamilyState; partner: LiveMember } {
+  const protagonist = memberById(family, family.protagonistId);
+  const partnerSex: LiveMember["sex"] = sex ?? (protagonist.sex === "male" ? "female" : "male");
+  const given = pickGivenName(culture, partnerSex, rng.fork("partner:name"));
+  const traits = {} as LiveMember["traits"];
+  for (const k of TRAIT_KEYS as readonly TraitKey[]) {
+    // The partner's own line: a fresh seeded draw around the midpoint, not inherited.
+    traits[k] = clamp(rng.fork(`partner:trait:${k}`).int(30, 80));
+  }
+  const partner: LiveMember = {
+    id: `m${family.nextSeq}`,
+    given,
+    // The in-law keeps their own surname before the line (display only); the
+    // children take the protagonist's surname via beget. Use the protagonist's
+    // surname here for simplicity of display in the lineage view.
+    surname: protagonist.surname,
+    sex: partnerSex,
+    born: year - rng.fork("partner:age").int(0, 6),
+    generation: protagonist.generation,
+    traits,
+    isProtagonist: false,
+  };
+  return {
+    family: {
+      ...family,
+      members: [...family.members, partner],
+      nextSeq: family.nextSeq + 1,
+      partnerId: partner.id,
+    },
+    partner,
   };
 }
 
