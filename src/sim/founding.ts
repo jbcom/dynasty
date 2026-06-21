@@ -143,6 +143,13 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
     `archetype:${c.archetype}`,
     `place:${c.place}`,
     `culture:${c.culture}`,
+    // PL-3: the diegetic ONBOARDING already played the consciousness-emergence and
+    // bestowed the surname, so the in-game emergence-cue + naming beats are done. Seed
+    // their flags here so the in-game Epoch-0 opens at the genuine GENDER reveal and
+    // flows on to the calling — no redundant "what does it feel like?" cue that could
+    // contradict the already-dealt place, no re-naming a line the player just named.
+    "emerged",
+    "named",
     ...(c.deepHistory ? ["deep_history_line"] : []),
   ]) {
     flags = withFlag(flags, f);

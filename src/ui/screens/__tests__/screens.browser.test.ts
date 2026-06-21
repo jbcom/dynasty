@@ -28,14 +28,14 @@ afterEach(() => {
 function fullProps(over: Record<string, unknown> = {}) {
   return {
     hasSave: false,
-    onBirth: () => {},
+    onNewGame: () => {},
     onContinue: () => {},
     onSettings: () => {},
     ...over,
   };
 }
 
-describe("TitleScreen (CP-R5 diegetic entry)", () => {
+describe("TitleScreen (PL-3 diegetic entry — no upfront inputs)", () => {
   it("shows New Game + Settings, hides Continue without a save", () => {
     component = mount(TitleScreen, { target: host, props: fullProps() });
     expect(host.textContent).toContain("Begin a Line");
@@ -48,21 +48,18 @@ describe("TitleScreen (CP-R5 diegetic entry)", () => {
     expect(host.textContent).toContain("Continue");
   });
 
-  it("begins a line from a seed + surname (no control panel)", async () => {
-    const onBirth = vi.fn();
-    component = mount(TitleScreen, { target: host, props: fullProps({ onBirth }) });
-    const surname = host.querySelector("#surname") as HTMLInputElement;
-    surname.value = "Vane";
-    surname.dispatchEvent(new Event("input", { bubbles: true }));
-    const seed = host.querySelector("#seed") as HTMLInputElement;
-    seed.value = "my-seed";
-    seed.dispatchEvent(new Event("input", { bubbles: true }));
+  it("has NO upfront surname or seed inputs — onboarding authors both diegetically", () => {
+    component = mount(TitleScreen, { target: host, props: fullProps() });
+    expect(host.querySelector("#surname")).toBeNull();
+    expect(host.querySelector("#seed")).toBeNull();
+    expect(host.querySelectorAll("input").length).toBe(0);
+  });
+
+  it("New Game fires onNewGame (which routes to the onboarding flow)", async () => {
+    const onNewGame = vi.fn();
+    component = mount(TitleScreen, { target: host, props: fullProps({ onNewGame }) });
     await page.getByRole("button", { name: /Begin a Line/ }).click();
-    await vitest.waitFor(() => expect(onBirth).toHaveBeenCalledTimes(1));
-    expect(onBirth.mock.calls[0]?.[0]).toBe("my-seed");
-    expect(onBirth.mock.calls[0]?.[1]).toBe("Vane");
-    // No control-panel steps appear.
-    expect(host.textContent).not.toContain("CHOOSE YOUR HINGE");
+    await vitest.waitFor(() => expect(onNewGame).toHaveBeenCalledTimes(1));
   });
 });
 

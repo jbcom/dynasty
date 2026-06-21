@@ -2,27 +2,16 @@
 interface Props {
   hasSave: boolean;
   /**
-   * Begin a line (CP-R4 diegetic birth): the player gives a seed (optional) + a
-   * surname; the origin is DEALT from the seed and DISCOVERED in the Epoch-0 birth.
+   * Begin a new line. There are NO upfront inputs (PL-3): the seed is authored by the
+   * first "consciousness" choices and the surname is bestowed diegetically — all in the
+   * onboarding flow, not here. The landing page is purely New Game / Load / Settings.
    */
-  onBirth: (seed: string, surname: string) => void;
+  onNewGame: () => void;
   onContinue: () => void;
   onSettings: () => void;
 }
 
-const { hasSave, onBirth, onContinue, onSettings }: Props = $props();
-
-let seed = $state("");
-let surname = $state("");
-
-function effectiveSeed(): string {
-  return seed.trim() || `${Math.floor(Date.now() % 1e9).toString(36)}-dynasty`;
-}
-
-function begin(): void {
-  if (!surname.trim()) return;
-  onBirth(effectiveSeed(), surname.trim());
-}
+const { hasSave, onNewGame, onContinue, onSettings }: Props = $props();
 </script>
 
 <main class="panel-screen">
@@ -30,22 +19,10 @@ function begin(): void {
     <span class="eyebrow">A DYNASTIC SAGA</span>
     <h1>Dynasty</h1>
     <div class="rule" aria-hidden="true"><span class="diamond">◆</span></div>
-    <p class="tagline">Give your line a name. Discover where the hand of fate has dealt it.</p>
+    <p class="tagline">A line begins in the dark, long before it has a name.</p>
   </div>
   <div class="panel">
-    <label for="surname">Family name</label>
-    <input
-      id="surname"
-      bind:value={surname}
-      placeholder="your dynasty's surname"
-      autocomplete="off"
-      maxlength="32"
-    />
-    <label for="seed">Seed (optional)</label>
-    <input id="seed" bind:value={seed} placeholder="leave blank for random" autocomplete="off" />
-    <button class="primary" type="button" disabled={!surname.trim()} onclick={begin}>
-      New Game — Begin a Line
-    </button>
+    <button class="primary" type="button" onclick={onNewGame}>New Game — Begin a Line</button>
     {#if hasSave}
       <button class="secondary" type="button" onclick={onContinue}>Load Game — Continue</button>
     {/if}
@@ -135,25 +112,6 @@ function begin(): void {
     border: 1px solid color-mix(in srgb, var(--mmm-gold-deep) 60%, transparent);
     box-shadow: var(--mmm-shadow);
     text-align: left;
-  }
-  label {
-    font-family: var(--mmm-font-body);
-    font-size: 0.8rem;
-    letter-spacing: 0.04em;
-    color: var(--mmm-text-dim);
-  }
-  input {
-    padding: 0.6rem 0.7rem;
-    border-radius: var(--mmm-radius);
-    border: 1px solid var(--mmm-gold-deep);
-    background: var(--mmm-navy-deep);
-    color: var(--mmm-text);
-    font-family: var(--mmm-font-body);
-    font-size: 1rem;
-    width: 100%;
-  }
-  input:focus-visible {
-    outline: 2px solid var(--mmm-gold);
   }
   button {
     cursor: pointer;

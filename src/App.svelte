@@ -17,10 +17,11 @@ import { GameStore } from "./ui/gameStore.svelte";
 import { FormFactorStore } from "./ui/formFactor.svelte";
 import PlayScreen from "./ui/screens/PlayScreen.svelte";
 import LegacyReport from "./ui/screens/LegacyReport.svelte";
+import OnboardingScreen from "./ui/screens/OnboardingScreen.svelte";
 import SettingsScreen from "./ui/screens/SettingsScreen.svelte";
 import TitleScreen from "./ui/screens/TitleScreen.svelte";
 
-type Screen = "title" | "play" | "settings";
+type Screen = "title" | "onboarding" | "play" | "settings";
 
 const content: Content = loadContent();
 const formFactor = new FormFactorStore();
@@ -57,9 +58,11 @@ async function toggleLive(on: boolean): Promise<void> {
   settings = await loadSettings(storage);
 }
 
-// DIEGETIC BIRTH (CP-R4): New Game DEALS a seed-dealt origin (place × era × gender ×
-// archetype) under the player's chosen surname, founds it, and drops straight into
-// the Epoch-0 birth — the player DISCOVERS the origin through the emergence events.
+// DIEGETIC BIRTH (CP-R4 / PL-3): the onboarding flow has already AUTHORED the seed (from
+// the three consciousness choices) and the surname (bestowed by choice or the name-your-
+// own modal). Here we deal the seed-dealt origin (place × era × gender × archetype) under
+// that surname, found it, and drop into the Epoch-0 birth — the player then DISCOVERS the
+// origin through the emergence events. Same seed → same deal as the onboarding preview.
 async function birthGame(seed: string, surname: string): Promise<void> {
   if (!storage) return;
   // Await the clear so a fast first choice can't race the old save's deletion.
@@ -107,10 +110,12 @@ function dumpTimeline(): void {
     onToggleLive={toggleLive}
     onBack={() => (screen = "title")}
   />
+{:else if screen === "onboarding"}
+  <OnboardingScreen {content} onComplete={birthGame} onCancel={() => (screen = "title")} />
 {:else if screen === "title" || !store}
   <TitleScreen
     hasSave={saveExists}
-    onBirth={birthGame}
+    onNewGame={() => (screen = "onboarding")}
     onContinue={continueGame}
     onSettings={() => (screen = "settings")}
   />

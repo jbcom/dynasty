@@ -38,7 +38,10 @@ export function dealComposition(
   places: readonly Place[],
   eras: readonly Era[],
   seed: string,
-  surname: string,
+  // Surname is optional here (PL-3): the diegetic onboarding deals the origin from the
+  // composed seed FIRST — to learn the culture — then bestows a culture-appropriate
+  // surname before founding. Callers that already know the surname pass it directly.
+  surname = "",
   rng: Rng = createRng(`${seed}::birth`),
 ): Composition {
   if (places.length === 0) throw new Error("dealComposition: empty places catalog");

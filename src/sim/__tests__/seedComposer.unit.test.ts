@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
+import { loadContent } from "../../data/loadContent";
+import { foundByComposition } from "../founding";
+import { tracePlaythrough, validateTrace } from "../harness";
 import { getCulture, suggestSurnames } from "../onomastics";
+import { dealComposition } from "../places";
 import { createRng } from "../rng";
 import type { OnomasticsFile } from "../schema";
 import { composeSeed, SEED_LANES, seedLane, seedSpaceSize } from "../seedComposer";
-import { loadContent } from "../../data/loadContent";
 
 /**
  * PL-3 — the diegetic seed composer + culture surname suggestions. The seed is authored
@@ -68,5 +71,40 @@ describe("PL-3 surname suggestions", () => {
         expect(s).not.toMatch(banned);
       }
     }
+  });
+});
+
+describe("PL-3 onboarding-authored founding (determinism + no leaks)", () => {
+  const content = loadContent();
+
+  it("the same three picks → the same composed seed → the same dealt origin", () => {
+    const picks = ["gilded", "shrewd", "tower"];
+    const seedA = composeSeed(picks);
+    const seedB = composeSeed([...picks]);
+    expect(seedA).toBe(seedB);
+    const a = dealComposition(content.places, content.eras, seedA);
+    const b = dealComposition(content.places, content.eras, seedB);
+    // Same authored seed → identical place/era/culture/archetype/gender (the determinism
+    // the onboarding preview + the founding deal both rely on).
+    expect(a).toEqual(b);
+  });
+
+  it("an onboarding-authored run founds + traces leak-free (surname bestowed, not typed)", () => {
+    const seed = composeSeed(["restless", "ruthless", "wager"]);
+    const dealt = dealComposition(content.places, content.eras, seed);
+    const culture = getCulture({ cultures: content.onomastics }, dealt.culture);
+    const surname = suggestSurnames(culture, createRng(`${seed}::surname-offer`), 3)[0];
+    if (!surname) throw new Error("no surname suggestion");
+    // Fund the run the way App.birthGame does: deal WITH the bestowed surname.
+    const composition = dealComposition(content.places, content.eras, seed, surname);
+    const founded = foundByComposition(content, composition).state;
+    // The diegetic onboarding pre-sets emerged + named (the in-game birth opens at gender).
+    expect(founded.flags).toContain("emerged");
+    expect(founded.flags).toContain("named");
+    expect(founded.flags).toContain("founded_line");
+    // And the whole authored playthrough is leak-free.
+    const trace = tracePlaythrough(content, composition);
+    expect(validateTrace(trace).filter((f) => f.kind === "leak")).toEqual([]);
+    expect(trace.finalName.endsWith(` ${surname}`)).toBe(true);
   });
 });

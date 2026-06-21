@@ -11,7 +11,7 @@ let component: any;
 function props(over: Record<string, unknown> = {}) {
   return {
     hasSave: true,
-    onBirth: () => {},
+    onNewGame: () => {},
     onContinue: () => {},
     onSettings: () => {},
     ...over,
@@ -36,32 +36,21 @@ describe("TitleScreen — luxury Dynasty masthead + diegetic entry (CP-R5)", () 
     await page.screenshot({ element: host.firstElementChild as Element });
   });
 
-  it("New Game is disabled until a surname is entered, then begins a line", async () => {
-    let begun: { seed: string; surname: string } | null = null;
+  it("New Game has no upfront inputs and routes to onboarding (PL-3)", async () => {
+    let started = 0;
     component = mount(TitleScreen, {
       target: host,
-      props: props({
-        hasSave: false,
-        onBirth: (seed: string, surname: string) => {
-          begun = { seed, surname };
-        },
-      }),
+      props: props({ hasSave: false, onNewGame: () => started++ }),
     });
     await new Promise((r) => setTimeout(r, 100));
+    // No surname/seed fields remain — the seed + name are authored in the onboarding flow.
+    expect(host.querySelectorAll("input").length).toBe(0);
     const begin = host.querySelector<HTMLButtonElement>("button.primary");
     expect(begin?.textContent?.trim()).toContain("Begin a Line");
-    expect(begin?.disabled).toBe(true);
-    // Enter a surname, then New Game fires onBirth with that surname.
-    const surname = host.querySelector<HTMLInputElement>("#surname");
-    if (!surname) throw new Error("no surname field");
-    surname.value = "Donnelly";
-    surname.dispatchEvent(new Event("input", { bubbles: true }));
-    await new Promise((r) => setTimeout(r, 50));
-    expect(begin?.disabled).toBe(false);
+    expect(begin?.disabled).toBeFalsy();
     begin?.click();
     await new Promise((r) => setTimeout(r, 50));
-    expect(begun).not.toBeNull();
-    expect((begun as unknown as { surname: string }).surname).toBe("Donnelly");
+    expect(started).toBe(1);
   });
 
   it("no founding control panel remains (no moment carousel)", async () => {
