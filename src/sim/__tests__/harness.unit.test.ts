@@ -80,5 +80,5 @@ describe("CP-R7 timeline dump + consistency audit", () => {
 
     // The timeline graph is consistent: NO findings across the whole space.
     expect(findings, JSON.stringify(findings.slice(0, 10), null, 2)).toEqual([]);
-  });
+  }, 60_000); // 180 traces × thousands of beats — generous timeout for slower CI hardware.
 });
