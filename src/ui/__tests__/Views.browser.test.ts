@@ -61,6 +61,19 @@ describe("TimelineView", () => {
     component = mount(TimelineView, { target: host, props: { content, gameState: s } });
     expect(host.textContent).toContain("Apprentice Mogul");
   });
+
+  it("starts the timeline at the line's FOUNDING era — no pre-founding eras (PL-7)", () => {
+    // A line founded in a later era ("mogul") must not show the earlier "boyhood" era it
+    // never lived (the real-world bug: a 1885 line showing the 762 Caliphate era).
+    const s = {
+      ...playedState(),
+      eraIndex: 1,
+      founding: { momentId: "m", surname: "Vane", culture: "c", place: "p", era: "mogul" },
+    };
+    component = mount(TimelineView, { target: host, props: { content, gameState: s } });
+    expect(host.textContent).toContain("Apprentice Mogul");
+    expect(host.textContent).not.toContain("Birth & Boyhood");
+  });
 });
 
 describe("StatsView", () => {

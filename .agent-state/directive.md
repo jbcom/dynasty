@@ -36,90 +36,30 @@ Squash-merge only. Stubs/`as any`/`it.todo` are bugs. Run `pnpm format` + `biome
 ## Milestone — POLISH & FEATURES (batch-20260621-polish, autonomous loop)
 
 GOAL: continuously raise the quality of the shipped game — UI/UX polish, UX affordances,
-and well-scoped feature additions — one PR per improvement, each green + 0-leak. The
-queue is a LIVING discovery list: I add items as I find them (playing the game, reading
-the code, screenshotting), and compress (mark [x] / remove) as they ship. Each loop cycle
-picks the current highest-value [ ] item.
+well-scoped features — one PR per improvement, each green + 0-leak + harness-clean. The
+queue is a LIVING discovery list: add items as found (playtesting, reading code,
+screenshots), compress as they ship. Each cycle picks the highest-value [ ] item.
 
-### Queue (living — expand on discovery, compress on completion)
-- [x] **PL-1 Title wordmark divider overlap — FIXED** (commit e78db40). h1 descender bled
-  into the ornamental rule (tight line-height clipped the line-box); added
-  `padding-bottom:0.18em`. Verified via visual test + live screenshot.
-- [x] **PL-2 Meter-change delta feedback — DONE** (commit e80d5ba). Gauges flash a +N/−N
-  badge (gold-up/crit-down) on value change, money-formatted, sub-unit-0 suppressed,
-  reduced-motion safe. Verified live (5 badges on a choice).
+### Shipped (history in git / PRs)
+- PR #36 (release 0.5.0): PL-1 title wordmark descender; PL-2 meter delta badges; PL-3 fully
+  diegetic onboarding (no upfront inputs → consciousness-phase seed authoring + culture
+  surname bestowal w/ modal); PL-4 even 3×2 meter HUD grid; PL-5 HUD vertical-budget trim.
+- PR #38: restored the onboarding-aware e2e suite (main had gone red — #36 merged before its
+  e2e fix landed on the head). LEARNING: when a UI FLOW changes, update e2e in the SAME push
+  and confirm the PR head includes it before merging.
+- PR #39: PL-6 subtle choice consequence hints (meter-icon dots, role=img a11y).
+- OPEN-FOR-USER (not taken autonomously): a deeper HUD reduction (collapsible HUD / hide the
+  personality band) — a larger UX decision; flag if wanted.
 
-### PL-3 DIEGETIC ONBOARDING (USER REDIRECT 2026-06-21) — supersedes the upfront inputs
-User: "landing page should be New Game / Load Game / Settings. Epoch-0 should be for
-diegetically emerging — pick your location, then suggest a surname through dialogue +
-choices from era/culture-appropriate suggestions OR enter your own via a non-disruptive
-input modal that doesn't jank immersion. Bind the seed phrase to an adjective-adjective-
-noun word-pool set and put those words INTO the first three choices via slots, so picking
-choices diegetically picks the seed without the player realizing. Never SHOW the seed —
-bury it in choices."
-
-Re-enumeration (the upfront title-screen inputs were the collapsed use-case):
-- USE 1 — Landing: New Game / Load Game / Settings ONLY. Strip the surname + seed fields.
-- USE 2 — Seed authorship: the seed is COMPOSED from the player's first ~3 choices, each
-  choice carrying one word from an adj/adj/noun pool (via the slot system). The composed
-  phrase IS the seed. Hidden entirely.
-- USE 3 — Place discovery: keep the existing emergence sensory-cue beat (already picks place
-  diegetically) — but it must run on a seed that's being authored AS those first choices are
-  made.
-- USE 4 — Surname bestowal: after place is known, offer era/culture-appropriate surname
-  SUGGESTIONS as choices + an "enter your own" modal (non-disruptive overlay, not a route
-  change). Replaces the upfront surname input.
-
-KEY ARCHITECTURAL QUESTION (answer in the spec before coding): today `dealComposition(seed)`
-deals place/era/archetype UP FRONT from a seed entered on the title screen. The redirect
-inverts this — the seed is authored by the first choices, and place is chosen by the
-emergence cue. So the founding seam must change: New Game starts with NO seed; the first
-3 emergence choices compose the seed (adj/adj/noun); place comes from the emergence-cue
-choice; surname from the bestowal beat/modal. The composition is finalized only after
-these beats, then the deterministic run proceeds (save = the authored seed + composition +
-history, replay still bit-identical). Sub-tasks:
-- [x] **PL-3a DONE** — spec at docs/superpowers/specs/2026-06-21-diegetic-onboarding.md
-  (resolved the ordering: the first 3 beats are place-AGNOSTIC consciousness fragments per
-  the user's clarification, so they author the seed before a place exists; determinism +
-  save format unchanged).
-- [x] **PL-3b DONE** — TitleScreen stripped to New Game / Load / Settings; dead input CSS
-  removed; tests updated to the no-inputs contract.
-- [x] **PL-3c DONE** — src/data/seed-words.json + src/sim/seedComposer.ts (3 lanes of
-  evocative place-agnostic prose, 729-seed space); composeSeed joins the picks; hidden.
-- [x] **PL-3d DONE** — culture surname pools (all 6) + suggestSurnames() + OnboardingScreen
-  bestowal: 3 culture-appropriate suggestions + non-disruptive "name your own line…" modal.
-  Founding pre-sets emerged+named; the redundant in-game emergence-cue + naming beats were
-  removed; gender beat ("The First Cry") reworded; in-game opens at gender → calling.
-- [x] **PL-3e DONE** — live-verified: landing has no inputs; consciousness phase composes the
-  seed; place revealed via sensory cue; surname via suggestions AND the modal (typed
-  "Ironwood" carried through the founded line); in-game opens at "The First Cry" → calling;
-  console clean; determinism + leak tests pass; harness audit 0 findings; 493 unit + 68
-  browser green. Shipped as PR #36 (autoloop batch PL-1/PL-2/PL-3).
-
-### Discovered next (for upcoming loop cycles — playtesting the PlayScreen)
-- [x] **PL-4 DONE** (commit 53f7b2d, pushed to PR #36). Meter HUD is a CSS grid: 3 cols on
-  phones (tidy 3×2), 6-across at >=34rem. No orphaned Heat gauge; reclaims vertical budget.
-  Verified via MeterHud visual+browser tests + live screenshot.
-- [x] **PL-5 DONE** (commit 6871795, pushed to PR #36). Tightened HUD row-gap + padding
-  (HUD 202→185px, chrome above the event 39→37% on a 915px viewport). The proportionate,
-  no-downside trim. NOTE for the user: a deeper reduction (collapsible HUD, hide the
-  personality band) is a larger UX decision deliberately NOT taken autonomously — flag if
-  wanted as a future item.
-- [x] **PL ship — MERGED** — PR #36 (PL-1..PL-5) squash-merged by the user → main (release
-  0.5.0, #37). LEARNING: #36 was merged before its e2e fix landed on the PR head, so main
-  shipped the PL-3 onboarding flow with the OLD Playwright suite (driving the removed
-  title-screen inputs) → red main CI. Process fix: when a UI FLOW changes, update e2e in
-  the SAME push as the UI, and confirm the PR head includes it before merging.
-- [x] **PL-fix red main — MERGED** (PR #38, 9ca62e8). Onboarding-aware e2e suite restored;
-  locators scoped per-`[data-step]`/`[data-phase]` (review hardening); build-and-test green;
-  main healthy again.
-
-### Polish cycle 2 (discovered playtesting the mid-game)
-- [x] **PL-6 DONE** (commit 55505d3). Subtle dimmed meter-icon hints on each choice (which
-  meters it touches, from choice.effects — not magnitude/sign), 40% opacity brightening on
-  hover/focus, aria-labeled, reduced-motion safe. Verified live + EventCard tests green.
-- [ ] [WAIT] **PL cycle-2 ship** — PR for PL-6 (branch feat/polish-cycle-2). Open + merge on
-  green; then the loop continues with the next discovered improvement.
+### Queue (next cycles)
+- [x] **PL-7 DONE** (commit 960cdfe) — Timeline tab showed deep-history eras a modern line
+  never lived (a 1885 line listed "The Caliphate Dawn 762–833"). Now starts at the line's
+  founding era through the current; pre-founding eras excluded. Live-verified + new test.
+- [ ] [WAIT] **PL cycle-3 ship** — open + merge the PL-7 PR (branch feat/polish-cycle-3) on
+  green (e2e covers the tab via "inter-era tabs render"); then continue the loop.
+- [ ] **PL-8 (cycle 4)** — next discovery: the Lineage member cards show only name + birth
+  year; no role (spouse / heir / deceased) context. Consider surfacing role/status for a
+  richer dynasty view. Also still un-inspected: Stats, Dossier, News, Markets, end report.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via

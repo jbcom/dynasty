@@ -9,10 +9,20 @@ interface Props {
 
 const { content, gameState }: Props = $props();
 
-// Hand-rolled lightweight timeline. The future is NOT spoiled: only eras the
-// player has actually reached (up to and including the current one) are shown,
-// plus a single "the road ahead is unwritten" teaser if more eras remain.
-const revealed = $derived(content.eras.filter((_, i) => i <= gameState.eraIndex));
+// Hand-rolled lightweight timeline. It shows the LINE'S OWN path: from the era it was
+// founded in through the current one — never the global era list. A modern line founded
+// in Origins (1885) must not show the deep-history Caliphate era it never lived (PL-7).
+// The future is NOT spoiled: only eras reached so far, plus a single "the road ahead is
+// unwritten" teaser if more eras remain.
+const foundingIndex = $derived(
+  Math.max(
+    0,
+    content.eras.findIndex((e) => e.id === gameState.founding?.era),
+  ),
+);
+const revealed = $derived(
+  content.eras.filter((_, i) => i >= foundingIndex && i <= gameState.eraIndex),
+);
 const hasFuture = $derived(gameState.eraIndex < content.eras.length - 1);
 const eventsByYear = $derived(
   gameState.history.map((h) => ({ year: h.year, id: h.eventId })),
@@ -25,7 +35,7 @@ const eventsByYear = $derived(
     {#each revealed as era, i (era.id)}
       <div
         class="era"
-        class:current={i === gameState.eraIndex}
+        class:current={foundingIndex + i === gameState.eraIndex}
         style={`--accent: ${era.paletteAccent}`}
       >
         <div class="era-head">
@@ -49,7 +59,7 @@ const eventsByYear = $derived(
       </div>
     {/if}
   </div>
-  <p class="now">You are in {revealed[gameState.eraIndex]?.title ?? "—"}, {gameState.year}.</p>
+  <p class="now">You are in {content.eras[gameState.eraIndex]?.title ?? "—"}, {gameState.year}.</p>
 </section>
 
 <style>
