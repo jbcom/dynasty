@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/jbcom/dynasty/compare/v0.6.0...v0.6.1) (2026-06-21)
+
+
+### Bug Fixes
+
+* **android:** unbreak the CD APK build (proguard-optimize) ([#47](https://github.com/jbcom/dynasty/issues/47)) ([800ff13](https://github.com/jbcom/dynasty/commit/800ff1301f46f7c5032c67d9d8c02ebb0cf43a43))
+
 ## [0.6.0](https://github.com/jbcom/dynasty/compare/v0.5.0...v0.6.0) (2026-06-21)
 
 
