@@ -158,7 +158,7 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 ### SS-3 DynastyAgent
 - [x] SS-3 line→Think brain (motivators→characterBias, archetype/trope→evaluators); pure deterministic arbitrate+step; serializes; determinism tests
 ### SS-4 Macro-acts + epochs
-- [ ] SS-4 Convergence/Emergence/Ascension phases + epoch world-inputs every evaluator reads; tests
+- [x] SS-4 Convergence/Emergence/Ascension phases + epoch world-inputs every evaluator reads; tests
 ### SS-5 Class-rung system
 - [ ] SS-5 rung index + poor/middle/upper track routing; seeded misfortune drop (war/disease/collapse)+recovery+hysteresis; tests
 ### SS-6 Immigration-wave roster
