@@ -29,6 +29,7 @@ const templatesGlob = import.meta.glob("./templates/*.json", { eager: true });
 const onomasticsGlob = import.meta.glob("./onomastics.json", { eager: true });
 const startMomentsGlob = import.meta.glob("./origins/start-moments.json", { eager: true });
 const worldStacksGlob = import.meta.glob("./world/stacks.json", { eager: true });
+const placesGlob = import.meta.glob("./world/places.json", { eager: true });
 
 function firstValue<T>(glob: Record<string, unknown>): T | null {
   const entry = Object.values(glob)[0] as { default?: T } | undefined;
@@ -85,6 +86,7 @@ export function loadContent(): Content {
     onomastics: firstValue(onomasticsGlob) ?? { cultures: {} },
     startMoments: firstValue(startMomentsGlob) ?? { moments: [] },
     worldStacks: firstValue(worldStacksGlob) ?? { stacks: [] },
+    places: firstValue(placesGlob) ?? { places: [] },
   };
   return buildContent(raw);
 }

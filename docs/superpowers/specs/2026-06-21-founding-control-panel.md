@@ -113,6 +113,37 @@ the diegetic birth sequence instead of a form. Re-sequenced as CP-7r below.
   driven by the normal event engine + 6-slot events; calling + the four axes are
   lived Epoch-0 beats, not picker screens. The CP-7 panel UI is retired.
 
+## CP-R3 — places catalog: sensory cue → place, place×era resolution (decision, 2026-06-21)
+
+CP-R3 derives the place×era catalog that the diegetic birth (CP-R4) composes from.
+The data already exists in three places that don't cross-reference: the era TREE
+(place dirs new-york/baghdad/_shared × period dirs), the WORLD-STACKS (canonical
+place ids: ireland, bavaria, east_coast, baghdad, canada, …), and ONOMASTICS
+(cultures). The era-tree place dirs (`new-york`) don't even match world-stack ids
+(`east_coast`) — that gap is what CP-R3 closes.
+
+**Decision — a single `src/data/world/places.json` catalog**, keyed by the canonical
+world-stack place id. Each place carries:
+- `label` — display name.
+- `sensoryCue` — the diegetic birth's emergence hint ("desert heat and distant
+  shouts from a market stall" = baghdad; "fish and salt air" = ireland). CP-R4's
+  6-slot sensory question maps a chosen cue → place id via this field.
+- `defaultCulture` — the onomastics culture id a founding in this place defaults to
+  (can diverge, per the locked decision place≠culture).
+- `eraContentDir` — which era-tree place dir holds this place's life-arc content
+  (most → `new-york` until CP-R6 forks per-place; baghdad → `baghdad`; the future is
+  always `_shared`). Lets the loader find a place's events.
+- `validEras` — the era ids a founding here can begin in (cross-ref to the period
+  registry). No (place × era) outside this set is offered.
+
+**Resolver + invariant (sim):** `placeById`, `placeForCue`, and `resolveComposition`
+helpers + a validation test asserting EVERY place's `defaultCulture` resolves in
+onomastics, EVERY `validEras` entry is a real era in the index, and a world-stack
+covers the place — so no offered (place × era) can fail to found a valid run. This
+makes the directory tree + catalog THE place×era catalog (the reshaped CP-R3 from
+the CP-R-ERA decision). The start-moments stay as curated named entries over this
+same space.
+
 ## CP-R-ARCH — split the conflated power archetypes; redistribute content (decision, 2026-06-20)
 
 The user: "some of the stuff we kept Trump-only originally — because we originally put the

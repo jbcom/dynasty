@@ -35,6 +35,8 @@ import {
   StartMomentsFileSchema,
   type TermsFile,
   TermsFileSchema,
+  type Place,
+  PlacesFileSchema,
   type Trope,
   TropesFileSchema,
   type WorldStack,
@@ -107,6 +109,8 @@ export interface Content {
    * ExpandContext (place label + perils); a migration swaps which stack applies.
    */
   worldStacks: WorldStack[];
+  /** The places catalog (CP-R3): sensory cue → place, default culture, valid eras. */
+  places: Place[];
   /**
    * World-timeline entries PROJECTED into the unified event pool (FD-2.2): the
    * dated backdrop facts as year-keyed, reactable GameEvents the player lives
@@ -142,6 +146,7 @@ export interface RawContent {
   onomastics?: unknown;
   startMoments?: unknown;
   worldStacks?: unknown;
+  places?: unknown;
 }
 
 /** Validate raw JSON into a Content bundle, cross-checking referential integrity. */
@@ -214,6 +219,7 @@ export function buildContent(raw: RawContent): Content {
     raw.worldStacks ?? { stacks: [] },
     "world/stacks.json",
   );
+  const placesFile = parseContent(PlacesFileSchema, raw.places ?? { places: [] }, "world/places.json");
   // Each start-moment's culture must resolve in onomastics; cross-ref vs eras is
   // done below once eraIds is built. FD-7: its place must have a world-stack so
   // the founded line always has standing context (no silent generic fallback).
@@ -334,6 +340,23 @@ export function buildContent(raw: RawContent): Content {
     }
   }
 
+  // CP-R3: every place in the catalog must cross-resolve — its defaultCulture in
+  // onomastics, every validEras entry a real era, and a world-stack covering it —
+  // so no offered (place × era) composition can fail to found a valid run.
+  for (const p of placesFile.places) {
+    if (cultureIds.size > 0 && !cultureIds.has(p.defaultCulture)) {
+      throw new Error(`place "${p.id}" defaultCulture "${p.defaultCulture}" not in onomastics`);
+    }
+    if (stackPlaces.size > 0 && !stackPlaces.has(p.id)) {
+      throw new Error(`place "${p.id}" has no world-stack`);
+    }
+    for (const e of p.validEras) {
+      if (!eraIds.has(e)) {
+        throw new Error(`place "${p.id}" validEras references unknown era "${e}"`);
+      }
+    }
+  }
+
   return {
     meters: metersFile.meters,
     eras,
@@ -356,6 +379,7 @@ export function buildContent(raw: RawContent): Content {
     templates: templatesFile.templates,
     onomastics: onomasticsFile.cultures,
     startMoments: startMomentsFile.moments,
+    places: placesFile.places,
     worldStacks: worldStacksFile.stacks,
     worldEvents: projectWorldEvents(worldTimelines),
   };

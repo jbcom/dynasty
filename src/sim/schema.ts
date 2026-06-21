@@ -904,6 +904,34 @@ export const WorldStacksFileSchema = z.object({
 export type WorldStacksFile = z.infer<typeof WorldStacksFileSchema>;
 
 /* ------------------------------------------------------------------------- *
+ * PLACES CATALOG (CP-R3). The cross-reference between the era TREE, the WORLD-
+ * STACKS, and ONOMASTICS: each canonical place carries the diegetic-birth sensory
+ * cue, a default culture, the era-tree dir holding its life-arc content, and the
+ * era ids a founding here may begin in. The diegetic birth (CP-R4) maps a chosen
+ * sensory cue → place; foundByComposition composes (place × era × culture).
+ * ------------------------------------------------------------------------- */
+export const PlaceSchema = z.object({
+  /** Canonical place id (matches a world-stack `place` + the `place:<id>` flag). */
+  id: z.string().min(1),
+  /** Display name (e.g. "Baghdad", "the West Coast"). */
+  label: z.string().min(1),
+  /** The diegetic birth's emergence hint that resolves to this place (CP-R4). */
+  sensoryCue: z.string().min(1),
+  /** Onomastics culture id a founding here defaults to (may diverge). */
+  defaultCulture: z.string().min(1),
+  /** Era-tree place dir holding this place's life-arc content (new-york | baghdad | …). */
+  eraContentDir: z.string().min(1),
+  /** Era ids a founding here may begin in (cross-ref to eras/index.json). */
+  validEras: z.array(z.string().min(1)).min(1),
+});
+export type Place = z.infer<typeof PlaceSchema>;
+
+export const PlacesFileSchema = z.object({
+  places: z.array(PlaceSchema).default([]),
+});
+export type PlacesFile = z.infer<typeof PlacesFileSchema>;
+
+/* ------------------------------------------------------------------------- *
  * EPOCH-0 AXIS CHOICES (CP-4). At founding, the player sets the line's stance on
  * each thematic axis — FAITH (adopt/reject/convert), IDEOLOGY, SOCIOLOGY, TECH —
  * and the consequence is PLACE-AND-TIME-SCALED: each option's meter/personality
