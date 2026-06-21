@@ -43,6 +43,11 @@ export function dealComposition(
 ): Composition {
   if (places.length === 0) throw new Error("dealComposition: empty places catalog");
   const place = rng.pick(places);
+  // The schema enforces validEras.min(1), but guard defensively so a malformed
+  // catalog fails loudly here rather than picking from an empty array (Q review).
+  if (place.validEras.length === 0) {
+    throw new Error(`dealComposition: place "${place.id}" has no validEras`);
+  }
   const era = rng.fork("era").pick(place.validEras);
   const eraDef = eras.find((e) => e.id === era);
   // Birth year: the era's opening year (the line is founded at the era's dawn).
