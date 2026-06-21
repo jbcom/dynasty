@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/jbcom/dynasty/compare/v0.7.0...v0.8.0) (2026-06-21)
+
+
+### Features
+
+* Convergence Saga — dynasty-as-novel rebuild (motivators + GOAP + immigration waves) ([#62](https://github.com/jbcom/dynasty/issues/62)) ([66ee633](https://github.com/jbcom/dynasty/commit/66ee633efa93c3aec14a274ce0f997f606fdee95))
+
 ## [0.7.0](https://github.com/jbcom/dynasty/compare/v0.6.1...v0.7.0) (2026-06-21)
 
 
