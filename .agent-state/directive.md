@@ -45,11 +45,48 @@ picks the current highest-value [ ] item.
 - [x] **PL-1 Title wordmark divider overlap — FIXED** (commit e78db40). h1 descender bled
   into the ornamental rule (tight line-height clipped the line-box); added
   `padding-bottom:0.18em`. Verified via visual test + live screenshot.
-- [ ] **PL-2 Meter-change delta feedback.** The gauges animate the arc + pulse on crit, but
-  show NO delta when a meter moves after a choice — so the cause→effect (the core
-  butterfly mechanic) is invisible. Add a brief `+N`/`−N` badge (gold-up / crit-down) that
-  appears on the gauge when its value changes, then fades. Discovered while playtesting the
-  PlayScreen this cycle.
+- [x] **PL-2 Meter-change delta feedback — DONE** (commit e80d5ba). Gauges flash a +N/−N
+  badge (gold-up/crit-down) on value change, money-formatted, sub-unit-0 suppressed,
+  reduced-motion safe. Verified live (5 badges on a choice).
+
+### PL-3 DIEGETIC ONBOARDING (USER REDIRECT 2026-06-21) — supersedes the upfront inputs
+User: "landing page should be New Game / Load Game / Settings. Epoch-0 should be for
+diegetically emerging — pick your location, then suggest a surname through dialogue +
+choices from era/culture-appropriate suggestions OR enter your own via a non-disruptive
+input modal that doesn't jank immersion. Bind the seed phrase to an adjective-adjective-
+noun word-pool set and put those words INTO the first three choices via slots, so picking
+choices diegetically picks the seed without the player realizing. Never SHOW the seed —
+bury it in choices."
+
+Re-enumeration (the upfront title-screen inputs were the collapsed use-case):
+- USE 1 — Landing: New Game / Load Game / Settings ONLY. Strip the surname + seed fields.
+- USE 2 — Seed authorship: the seed is COMPOSED from the player's first ~3 choices, each
+  choice carrying one word from an adj/adj/noun pool (via the slot system). The composed
+  phrase IS the seed. Hidden entirely.
+- USE 3 — Place discovery: keep the existing emergence sensory-cue beat (already picks place
+  diegetically) — but it must run on a seed that's being authored AS those first choices are
+  made.
+- USE 4 — Surname bestowal: after place is known, offer era/culture-appropriate surname
+  SUGGESTIONS as choices + an "enter your own" modal (non-disruptive overlay, not a route
+  change). Replaces the upfront surname input.
+
+KEY ARCHITECTURAL QUESTION (answer in the spec before coding): today `dealComposition(seed)`
+deals place/era/archetype UP FRONT from a seed entered on the title screen. The redirect
+inverts this — the seed is authored by the first choices, and place is chosen by the
+emergence cue. So the founding seam must change: New Game starts with NO seed; the first
+3 emergence choices compose the seed (adj/adj/noun); place comes from the emergence-cue
+choice; surname from the bestowal beat/modal. The composition is finalized only after
+these beats, then the deterministic run proceeds (save = the authored seed + composition +
+history, replay still bit-identical). Sub-tasks:
+- [ ] **PL-3a** Spec the inverted founding flow in docs (use-cases above + the seam change +
+  how replay/determinism is preserved when the seed is authored mid-Epoch-0).
+- [ ] **PL-3b** Landing page: strip surname + seed inputs → New Game / Load Game / Settings.
+- [ ] **PL-3c** Seed word-pool (adj/adj/noun) + slot wiring so the first 3 emergence choices
+  each contribute a word; the composed phrase becomes the run seed (never displayed).
+- [ ] **PL-3d** Surname bestowal beat: era/culture-appropriate suggestion choices + a
+  non-disruptive "name your own" input modal overlay.
+- [ ] **PL-3e** Verify: full diegetic onboarding live (no upfront inputs), determinism holds
+  (same choices → same seed → same run), 0 leaks, gate green.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
