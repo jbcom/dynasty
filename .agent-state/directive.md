@@ -97,9 +97,9 @@ history, replay still bit-identical). Sub-tasks:
   browser green. Shipped as PR #36 (autoloop batch PL-1/PL-2/PL-3).
 
 ### Discovered next (for upcoming loop cycles — playtesting the PlayScreen)
-- [ ] **PL-4 Meter HUD layout.** The 6 gauges wrap 5-on-row-1 + Heat alone on row-2 (awkward
-  orphan). Lay them out as an even grid (3×2 or 6-across responsive) so no meter is orphaned;
-  keep the gauge component + delta badges intact. Render/UI gate → visual test + screenshot.
+- [x] **PL-4 DONE** (commit 53f7b2d, pushed to PR #36). Meter HUD is a CSS grid: 3 cols on
+  phones (tidy 3×2), 6-across at >=34rem. No orphaned Heat gauge; reclaims vertical budget.
+  Verified via MeterHud visual+browser tests + live screenshot.
 - [ ] **PL-5 HUD vertical budget.** On a tall phone the meter HUD + personality dial + nav
   consume ~40% of the viewport above the event card. Tighten spacing / consider a collapsed
   HUD so the event (the content) gets more room. Mobile-first (Pixel-5a class).

@@ -27,8 +27,12 @@ const { defs, meters }: Props = $props();
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     align-items: start;
-    gap: var(--mmm-gap);
-    padding: 0.6rem var(--mmm-pad);
+    /* Tighter than the global gap (PL-5): the two gauge rows sat far apart, pushing the
+       event card ~39% down the viewport. A small column gap + a snug row gap claws back
+       vertical budget for the content without crowding the arcs. */
+    column-gap: var(--mmm-gap);
+    row-gap: 0.35rem;
+    padding: 0.4rem var(--mmm-pad);
     background: color-mix(in srgb, var(--mmm-surface) 88%, black);
     border-bottom: 1px solid var(--mmm-gold-deep);
     box-shadow: 0 2px 8px rgb(0 0 0 / 0.35);
