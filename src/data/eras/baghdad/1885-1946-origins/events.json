@@ -1,0 +1,299 @@
+{
+  "era": "origins",
+  "events": [
+    {
+      "id": "ev_gen_land_dispute_1885",
+      "era": "origins",
+      "year": 1885,
+      "title": "The Pasha's Claim",
+      "scene": "The scorching sun bakes the earth around your small holding on the edge of the Tigris. Rumors persist that a local pasha, emboldened by new Ottoman decrees, intends to claim fertile river lands, including the plot {full_name}'s family has tended for generations. You hear distant shouts from the market, but here, it's the quiet rustle of your wheat that speaks.",
+      "researchNote": "Ottoman land reforms and consolidation of power in the late 19th century often led to disputes over traditional land use vs. legal title.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "extrapolated",
+      "place": "baghdad",
+      "tags": [
+        "trope:tenant-and-landlord"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "resist_pasha",
+          "text": "Openly defy the pasha's claim, gathering neighbors to resist.",
+          "effects": {
+            "power": 15,
+            "reputation": -10,
+            "heat": 10
+          },
+          "personality": {
+            "power": 5,
+            "worldview": -3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Your defiance earns you respect among some, but marks {surname} as a troublemaker. The pasha's gaze turns to you.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "negotiate_pasha",
+          "text": "Seek a legal arrangement, perhaps buying a portion of the land.",
+          "effects": {
+            "money": -50,
+            "loyalty": 5,
+            "reputation": 5
+          },
+          "personality": {
+            "wealth": 3,
+            "tradition": 3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Though costly, you secure a title, albeit smaller. The {family_name} line gains a measure of legitimacy.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_tigris_trade_1885",
+      "era": "origins",
+      "year": 1886,
+      "title": "New Goods on the River",
+      "scene": "The air by the Tigris is thick with dust and the cries of merchants. A contact whispers of a novel commodity arriving from the south – perhaps coffee beans from Yemen or exotic spices from India, currently untaxed or poorly regulated. It represents a potential fortune, but the venture is fraught with risk, attracting the wrong kind of attention. The sun glares off the river, promising both opportunity and peril.",
+      "researchNote": "Baghdad was a key trading hub connecting the Gulf to Anatolia and Syria, with new goods frequently introduced, sometimes bypassing official channels.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "extrapolated",
+      "place": "baghdad",
+      "tags": [
+        "trope:bootlegger-to-legitimacy",
+        "trope:frontier-capital-origin"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "invest_new_trade",
+          "text": "Invest heavily in the new, unregulated commodity, building a network to move it.",
+          "effects": {
+            "money": 100,
+            "heat": 15,
+            "reputation": -5
+          },
+          "personality": {
+            "wealth": 5,
+            "power": 3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Quick profits flow, but {full_name} is now known in certain circles for dealings that skirt the law.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "stick_to_old_trade",
+          "text": "Focus on established, legitimate goods, slowly expanding market share.",
+          "effects": {
+            "money": 20,
+            "reputation": 5
+          },
+          "personality": {
+            "tradition": 3,
+            "wealth": 1
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Growth is slower, but steady. The {family_name} name earns a reputation for honesty and reliability.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_community_faith_1885",
+      "era": "origins",
+      "year": 1885,
+      "title": "The Imam's Plea",
+      "scene": "A prominent Imam, respected in the bustling souk and quiet alleys of Baghdad, approaches {given_name}. His mosque's roof needs repair, and a new well would serve the entire quarter during the harsh summers. He seeks donations and support, promising spiritual blessings and communal goodwill. The sounds of vendors and distant calls to prayer mix in the dry air.",
+      "researchNote": "Religious institutions were vital social and political centers in Ottoman cities, often funded by prominent families and merchants.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "baghdad",
+      "tags": [
+        "trope:faith-and-community"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "fund_mosque_well",
+          "text": "Donate generously to the Imam's projects, becoming a benefactor of the community.",
+          "effects": {
+            "money": -40,
+            "loyalty": 15,
+            "reputation": 10
+          },
+          "personality": {
+            "worldview": 5,
+            "lineage": 3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "{full_name} gains significant standing within the quarter, the {family_name} name now associated with piety and charity.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "secular_aid",
+          "text": "Focus your efforts on secular aid, perhaps funding a local school or clinic without religious ties.",
+          "effects": {
+            "money": -30,
+            "loyalty": 10,
+            "reputation": 5
+          },
+          "personality": {
+            "worldview": -3,
+            "reach": 2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "Your efforts are appreciated, though the Imam's blessing is withheld. The {family_name} line is seen as pragmatic, not necessarily pious.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_market_security_1885",
+      "era": "origins",
+      "year": 1887,
+      "title": "The Market's Watchman",
+      "scene": "Petty theft and disputes are common in the crowded Baghdad souks, making trade uncertain. The official city guards are often absent or easily bribed. A group of merchants approaches {given_name}, offering to pool resources if the {family_name} line can provide reliable security for their stalls. It's an opportunity for power, but also a step onto a path that could lead away from pure legitimacy. The clamor of the market carries the weight of this decision.",
+      "researchNote": "Local protection schemes, both legitimate and informal, were common in large Ottoman markets where official law enforcement was often insufficient or corrupt.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "extrapolated",
+      "place": "baghdad",
+      "tags": [
+        "trope:bootlegger-to-legitimacy",
+        "trope:oligarch"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "offer_protection",
+          "text": "Establish a 'protection' service for the merchants, ensuring order for a fee.",
+          "effects": {
+            "money": 75,
+            "power": 20,
+            "heat": 10,
+            "reputation": -5
+          },
+          "personality": {
+            "power": 5,
+            "wealth": 3
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The market becomes safer, and {full_name}'s influence grows, though some whisper about the nature of this new 'order'.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "lobby_authorities",
+          "text": "Lobby the local Ottoman authorities for stronger, official policing in the souk.",
+          "effects": {
+            "money": -20,
+            "power": 5,
+            "reputation": 10
+          },
+          "personality": {
+            "politics": 3,
+            "worldview": 2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The official response is slow, but {surname} gains favor with the establishment, seen as a proponent of civil order.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    }
+  ]
+}

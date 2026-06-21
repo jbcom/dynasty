@@ -15,7 +15,7 @@ function rawWithConsequence(): RawContent {
         cause: "casino_empire",
         delayYears: 4,
         effects: { money: -500, heat: 12 },
-        personality: { grandiosity: 5 },
+        personality: { power: 5 },
         setFlags: ["overleveraged"],
         chainTemplate: "The casino debt you took on came due.",
         repeatable: false,
@@ -70,7 +70,7 @@ describe("delayed consequences", () => {
     const { state, newLedger } = landDueConsequences(c, s);
     expect(state.meters.money).toBe(500); // 1000 - 500
     expect(state.meters.heat).toBe(12);
-    expect(state.personality.grandiosity).toBe(15); // 10 start + 5
+    expect(state.personality.power).toBe(5); // centrist-0 start + 5 (motivators)
     expect(state.flags).toContain("overleveraged");
     expect(state.firedConsequences).toContain("cq_debt_bomb");
     expect(state.pending).toHaveLength(0);

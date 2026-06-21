@@ -22,13 +22,25 @@ async function startGame(
   await expect(page.getByRole("heading", { name: "Dynasty" })).toBeVisible();
   await page.getByRole("button", { name: /Begin a Line/ }).click();
 
-  // Onboarding (OB-3): pick a LOCATION (the place-cue cards), then bestow a family name.
-  const placePhase = page.locator('[data-phase="place"]');
-  await expect(placePhase).toBeVisible({ timeout: 8000 });
-  await placePhase.locator(".choices button").first().click();
+  // Onboarding (SS-7): the wave funnel — PERIOD → CLASS → (CULTURE if >1) → bestow a name.
+  const periodPhase = page.locator('[data-phase="period"]');
+  await expect(periodPhase).toBeVisible({ timeout: 8000 });
+  await periodPhase.locator(".choices button").first().click();
+
+  const classPhase = page.locator('[data-phase="class"]');
+  await expect(classPhase).toBeVisible({ timeout: 8000 });
+  await classPhase.locator(".choices button").first().click();
+
+  // After class, the funnel shows EITHER the race/culture step (multi-wave cell) OR jumps straight
+  // to name bestowal (single-wave cell). Wait for whichever lands before acting (no DOM race).
+  const culturePhase = page.locator('[data-phase="culture"]');
+  const namePhase = page.locator('[data-phase="name"]');
+  await expect(culturePhase.or(namePhase)).toBeVisible({ timeout: 8000 });
+  if (await culturePhase.isVisible()) {
+    await culturePhase.locator(".choices button").first().click();
+  }
 
   // Family-name bestowal (the data-phase="name" card).
-  const namePhase = page.locator('[data-phase="name"]');
   await expect(namePhase).toBeVisible({ timeout: 8000 });
   if (opts.surname) {
     await namePhase.getByRole("button", { name: /Name your own line/ }).click();
@@ -125,8 +137,8 @@ test("New Game has no upfront inputs and enters the diegetic onboarding (PL-3)",
   const begin = page.getByRole("button", { name: /Begin a Line/ });
   await expect(begin).toBeEnabled();
   await begin.click();
-  // Straight into the LOCATION pick (place-cue cards), no control panel / carousel.
-  await expect(page.locator('[data-phase="place"] .choices button').first()).toBeVisible({
+  // Straight into the wave funnel's PERIOD pick, no control panel / carousel.
+  await expect(page.locator('[data-phase="period"] .choices button').first()).toBeVisible({
     timeout: 8000,
   });
   await expect(page.getByText("CHOOSE YOUR HINGE")).toHaveCount(0);

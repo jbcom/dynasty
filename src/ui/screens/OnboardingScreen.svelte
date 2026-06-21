@@ -1,22 +1,28 @@
 <script lang="ts">
 import type { Content } from "../../sim/content";
 import { getCulture, suggestSurnames } from "../../sim/onomastics";
-import { placeById } from "../../sim/places";
 import { createRng } from "../../sim/rng";
 import type { Place } from "../../sim/schema";
+import {
+  type ArrivalClass,
+  availablePeriods,
+  classesForPeriod,
+  type PeriodBand,
+  wavesForCell,
+} from "../../sim/waveSelect";
 
 /**
- * ONBOARDING ENTRY (OB-3). The player CHOOSES a location from concrete, discernible sensory
- * cues — geography, the one pre-founding choice (it fixes place → era → culture). The run
- * seed is a HIDDEN random draw (world only — never authored, never shown). Then a family
- * name is bestowed (culture-appropriate suggestions, or name-your-own). Everything else —
- * birth + date, gender, given name, calling, partner, the branch fork — unfolds as the
- * AUTHORED Epoch-0 story in-game (OB-4/OB-5), not here.
+ * ONBOARDING (Convergence Saga, SS-7). "The story of America": the player founds a line by
+ * choosing its WAVE of immigration — a 3-step funnel: PERIOD (when they crossed) → CLASS (poor
+ * or middle, the arrival tier) → RACE/CULTURE (which wave, when more than one fits the cell) →
+ * then bestow the family name. The class seeds the line's starting motivators (its GOAP
+ * grounding). The run seed is a HIDDEN random draw (world only). Everything after — birth, date,
+ * gender, given name, calling, the climb — unfolds as the in-game story.
  */
 
 interface Props {
   content: Content;
-  /** Begin the founded run: hidden seed + chosen place id + bestowed family name. */
+  /** Begin the founded run: hidden seed + chosen wave place id + bestowed family name. */
   onComplete: (seed: string, place: string, surname: string) => void;
   /** Abandon onboarding and return to the title. */
   onCancel: () => void;
@@ -24,19 +30,26 @@ interface Props {
 
 const { content, onComplete, onCancel }: Props = $props();
 
-// A fresh hidden seed for this run — drives the WORLD (events/markets/mortality/procgen),
-// never the player's identity. Drawn once per onboarding via the browser's CSPRNG so each
-// New Game reshuffles the world; locked into the run + save from here on. Two 32-bit words
-// are base-36'd and concatenated (no 2^53-overflow math — the seed is just an opaque string).
 const seed = (() => {
   const words = crypto.getRandomValues(new Uint32Array(2));
   return `r${(words[0] ?? 0).toString(36)}${(words[1] ?? 0).toString(36)}`;
 })();
 
-// Phase: "place" = location pick; "name" = family-name bestowal for the chosen place.
+const CLASS_LABEL: Record<ArrivalClass, { title: string; blurb: string }> = {
+  poor: { title: "With nothing but your hands", blurb: "You arrive poor — steerage, a tenement, the lowest rung." },
+  middle: { title: "With a trade and a little money", blurb: "You arrive with a skill or a small stake — the middling sort." },
+};
+
+// Funnel state: period → class → wave (race/culture) → name.
+let period = $state<PeriodBand | undefined>();
+let cls = $state<ArrivalClass | undefined>();
 let chosen = $state<Place | undefined>();
 let modalOpen = $state(false);
 let typedName = $state("");
+
+const periods = $derived(availablePeriods(content.places));
+const classes = $derived(period ? classesForPeriod(content.places, period.id) : []);
+const cellWaves = $derived(period && cls ? wavesForCell(content.places, period.id, cls) : []);
 
 const suggestions = $derived.by(() => {
   if (!chosen) return [];
@@ -44,13 +57,29 @@ const suggestions = $derived.by(() => {
   return suggestSurnames(culture, createRng(`${seed}::surname-offer`), 3);
 });
 
-function pickPlace(p: Place): void {
+function pickPeriod(p: PeriodBand): void {
+  period = p;
+  cls = undefined;
+  chosen = undefined;
+}
+function pickClass(c: ArrivalClass): void {
+  cls = c;
+  // If the (period, class) cell has exactly one wave, skip the race/culture step.
+  const waves = period ? wavesForCell(content.places, period.id, c) : [];
+  chosen = waves.length === 1 ? waves[0] : undefined;
+}
+function pickWave(p: Place): void {
   chosen = p;
+}
+function back(): void {
+  if (chosen && cellWaves.length > 1) chosen = undefined;
+  else if (cls) cls = undefined;
+  else if (period) period = undefined;
+  else onCancel();
 }
 
 function bestow(surname: string): void {
   const place = chosen;
-  // Normalize a typed name: collapse internal whitespace + cap length defensively.
   const name = surname.trim().replace(/\s+/g, " ").slice(0, 32);
   if (!place || !name) return;
   onComplete(seed, place.id, name);
@@ -62,15 +91,42 @@ function bestow(surname: string): void {
 <svelte:window onkeydown={(e) => modalOpen && e.key === "Escape" && (modalOpen = false)} />
 
 <main class="onboarding" inert={modalOpen}>
-  {#if !chosen}
-    <article class="card" data-phase="place">
+  {#if !period}
+    <article class="card" data-phase="period">
       <p class="prompt">
-        A line has to begin somewhere. Before the first cry, before the first choice, there is
-        only a place — and you can already feel it. Where does your story open?
+        Every American line begins with a crossing. When did your people make theirs?
       </p>
       <div class="choices">
-        {#each content.places as p (p.id)}
-          <button type="button" onclick={() => pickPlace(p)}>{p.sensoryCue}</button>
+        {#each periods as p (p.id)}
+          <button type="button" onclick={() => pickPeriod(p)}>{p.title}</button>
+        {/each}
+      </div>
+    </article>
+  {:else if !cls}
+    <article class="card" data-phase="class">
+      <p class="prompt">
+        {period.title}. And what did they carry off the boat?
+      </p>
+      <div class="choices">
+        {#each classes as c (c)}
+          <button type="button" onclick={() => pickClass(c)}>
+            <span class="opt-title">{CLASS_LABEL[c].title}</span>
+            <span class="opt-blurb">{CLASS_LABEL[c].blurb}</span>
+          </button>
+        {/each}
+      </div>
+    </article>
+  {:else if !chosen}
+    <article class="card" data-phase="culture">
+      <p class="prompt">
+        {CLASS_LABEL[cls].blurb} But from where? Each people brought its own world.
+      </p>
+      <div class="choices">
+        {#each cellWaves as p (p.id)}
+          <button type="button" onclick={() => pickWave(p)}>
+            <span class="opt-title">{p.label}</span>
+            <span class="opt-blurb">{p.sensoryCue}{p.push ? ` — ${p.push}` : ""}</span>
+          </button>
         {/each}
       </div>
     </article>
@@ -91,7 +147,7 @@ function bestow(surname: string): void {
     </article>
   {/if}
 
-  <button class="abandon" type="button" onclick={onCancel}>Back</button>
+  <button class="abandon" type="button" onclick={back}>Back</button>
 </main>
 
 {#if modalOpen}
@@ -179,6 +235,19 @@ function bestow(surname: string): void {
     color: var(--mmm-gold);
     text-align: center;
     font-style: italic;
+  }
+  .opt-title {
+    display: block;
+    font-family: var(--mmm-font-display);
+    font-weight: 700;
+    color: var(--mmm-gold);
+  }
+  .opt-blurb {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.9rem;
+    color: var(--mmm-text-dim);
+    line-height: 1.35;
   }
   .abandon {
     background: none;

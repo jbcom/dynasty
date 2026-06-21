@@ -27,7 +27,7 @@ const TEMPLATE = parseContent(
         text: "{member} fights back",
         outcome: "The {surname} line holds — for now.",
         effects: { money: { min: -50, max: 50 }, heat: { min: 0, max: 20 } },
-        personality: { grandiosity: { min: 1, max: 10 } },
+        personality: { power: { min: 1, max: 10 } },
         setFlags: ["fought_rival"],
       },
       {
@@ -89,8 +89,8 @@ describe("FD-4 expandTemplate", () => {
       expect(fight?.effects.money).toBeLessThanOrEqual(50);
       expect(fight?.effects.heat).toBeGreaterThanOrEqual(0);
       expect(fight?.effects.heat).toBeLessThanOrEqual(20);
-      expect(fight?.personality.grandiosity).toBeGreaterThanOrEqual(1);
-      expect(fight?.personality.grandiosity).toBeLessThanOrEqual(10);
+      expect(fight?.personality.power).toBeGreaterThanOrEqual(1);
+      expect(fight?.personality.power).toBeLessThanOrEqual(10);
     }
   });
 

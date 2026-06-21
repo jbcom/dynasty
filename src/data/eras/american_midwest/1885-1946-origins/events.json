@@ -10,32 +10,68 @@
       "scene": "The prairie runs flat to every horizon, and the wealth in it is grain, livestock, and the railroads that carry both to market. The {surname} line can farm the land, corner the elevators and the freight that move its harvest, or set up shop in the towns the rails are conjuring out of nothing. The Midwest pays the patient and the well-placed.",
       "researchNote": "Place-specific Midwest origins beat (EX-2): the agricultural heartland — farming, grain/rail middlemen, and town-founding. Generic to any american_midwest founding.",
       "historicity": "real",
-      "tags": ["origin", "american_midwest", "trope:frontier-capital-origin"],
-      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "origin",
+        "american_midwest",
+        "trope:frontier-capital-origin"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 14,
       "choices": [
         {
           "id": "mw_work_the_soil",
           "text": "Build a great farm and hold the land through every cycle",
-          "effects": { "money": 3, "reputation": 3, "loyalty": 2 },
-          "personality": { "inward": 3, "ideology": 2 },
-          "setFlags": ["mw_landed_house"],
+          "effects": {
+            "money": 3,
+            "reputation": 3,
+            "loyalty": 2
+          },
+          "personality": {
+            "lineage": 3,
+            "politics": 2
+          },
+          "setFlags": [
+            "mw_landed_house"
+          ],
           "outcome": "You hold good ground through droughts and gluts alike. The {surname} name is bound to the soil, respected by every neighbour who knows what that costs."
         },
         {
           "id": "mw_corner_the_elevators",
           "text": "Corner the elevators and freight — own the chokepoint, not the field",
-          "effects": { "money": 5, "power": 3, "reputation": -1 },
-          "personality": { "grandiosity": 4, "outward": 2 },
-          "setFlags": ["mw_middleman_fortune", "head_start"],
+          "effects": {
+            "money": 5,
+            "power": 3,
+            "reputation": -1
+          },
+          "personality": {
+            "power": 6
+          },
+          "setFlags": [
+            "mw_middleman_fortune",
+            "head_start"
+          ],
           "outcome": "You take a cut of every bushel that moves. The {surname} line grows rich on the squeeze between the farmer and the market."
         },
         {
           "id": "mw_found_the_town",
           "text": "Set up shop in a rail town and grow with it",
-          "effects": { "money": 3, "reputation": 2 },
-          "personality": { "outward": 2 },
-          "setFlags": ["mw_town_founder"],
+          "effects": {
+            "money": 3,
+            "reputation": 2
+          },
+          "personality": {
+            "power": 2
+          },
+          "setFlags": [
+            "mw_town_founder"
+          ],
           "outcome": "You bet on a townsite the railroad blessed. As it grows from a depot to a city, the {surname} name grows with it, store by store."
         }
       ]
@@ -49,24 +85,54 @@
       "scene": "The heartland is in revolt — farmers against the banks, the railroads, the eastern money that sets the price of everything they grow and owe. A populist tide is rising, and the {surname} line must decide whether to ride the anger of the many or stand with the interests it threatens.",
       "researchNote": "1890s agrarian populism (the silver/free-coinage movement) as a defining Midwest political rupture. Place-specific.",
       "historicity": "real",
-      "tags": ["origin", "american_midwest", "trope:reformer-vs-reactionary"],
-      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "origin",
+        "american_midwest",
+        "trope:reformer-vs-reactionary"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 12,
       "choices": [
         {
           "id": "mw_ride_the_anger",
           "text": "Champion the farmers' fury and ride it to power",
-          "effects": { "power": 4, "reputation": 3, "money": -1 },
-          "personality": { "outward": 4, "ideology": 3 },
-          "setFlags": ["mw_populist_champion", "communal_standing"],
+          "effects": {
+            "power": 4,
+            "reputation": 3,
+            "money": -1
+          },
+          "personality": {
+            "power": 4,
+            "politics": 3
+          },
+          "setFlags": [
+            "mw_populist_champion",
+            "communal_standing"
+          ],
           "outcome": "You give the anger a voice and a leader. The {surname} name becomes a banner the many march behind — and the few learn to fear."
         },
         {
           "id": "mw_back_the_interests",
           "text": "Stand with the banks and railroads the tide is aimed at",
-          "effects": { "money": 4, "power": 2, "reputation": -2 },
-          "personality": { "grandiosity": 3, "ideology": -2 },
-          "setFlags": ["mw_establishment_ally"],
+          "effects": {
+            "money": 4,
+            "power": 2,
+            "reputation": -2
+          },
+          "personality": {
+            "power": 3,
+            "politics": -2
+          },
+          "setFlags": [
+            "mw_establishment_ally"
+          ],
           "outcome": "You bet on order over revolt, and the moneyed interests remember it. The {surname} line is rich and resented when the tide recedes."
         }
       ]

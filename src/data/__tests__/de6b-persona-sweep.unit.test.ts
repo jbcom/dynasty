@@ -46,15 +46,15 @@ const PERSONAS: Persona[] = [
   { name: "min-maxer", score: (c) => payoff(c) },
   // The chaos tester: stable order (button-masher takes the first listed).
   { name: "button-masher", score: () => 0 },
-  // The moralist: leans toward the utopian axis (low outward/ideology).
+  // The moralist: leans toward the utopian axis (low power/politics).
   {
     name: "moralist",
-    score: (c) => -((c.personality.outward ?? 0) + (c.personality.ideology ?? 0)),
+    score: (c) => -((c.personality.power ?? 0) + (c.personality.politics ?? 0)),
   },
-  // The villain: most grandiose / tyrannical.
+  // The villain: most power-seeking / tyrannical.
   {
     name: "villain",
-    score: (c) => (c.personality.grandiosity ?? 0) + (c.personality.outward ?? 0),
+    score: (c) => (c.personality.power ?? 0) + (c.personality.politics ?? 0),
   },
   // The roleplayer: seeded-random among eligible.
   { name: "roleplayer", score: (_c, rngPick) => rngPick() },

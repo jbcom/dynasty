@@ -12,6 +12,7 @@ import {
 import type { Content } from "./sim/content";
 import { foundByComposition } from "./sim/founding";
 import { dealComposition, placeById } from "./sim/places";
+import { resolveWaveStart } from "./sim/waveSelect";
 import type { GameState } from "./sim/state";
 import { GameStore } from "./ui/gameStore.svelte";
 import { FormFactorStore } from "./ui/formFactor.svelte";
@@ -74,7 +75,9 @@ async function birthGame(seed: string, place: string, surname: string): Promise<
   // Await the clear so a fast first choice can't race the old save's deletion.
   await clearSave(storage);
   const composition = dealComposition(content.places, content.eras, seed, surname, placeDef);
-  const founded = foundByComposition(content, composition).state;
+  // SS-7: seed the line's starting motivators from the chosen wave's arrival class (the GOAP grounding).
+  const { motivators } = resolveWaveStart(placeDef);
+  const founded = foundByComposition(content, { ...composition, seedMotivators: motivators }).state;
   store = new GameStore(content, seed, storage, founded, founded.archetype);
   screen = "play";
 }

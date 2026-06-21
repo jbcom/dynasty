@@ -37,7 +37,7 @@ const SHAPE = `{
 
 STRICT KEY SETS (using any other key fails validation):
 - "effects" keys are ONLY: money, power, reputation, loyalty, health, heat (integer deltas; include only nonzero).
-- "personality" keys are ONLY: ideology, grandiosity, outward, inward (integer deltas; include only nonzero).
+- "personality" keys are ONLY the 8 motivators: wealth, politics, worldview, power, tradition, honor, lineage, reach (integer deltas; include only nonzero).
 - "requires.flags" MUST include "founded_line". Do not invent requires sub-keys beyond flags/notFlags/meters/personality.`;
 
 /** Build the system instruction: the inviolable rules the model must follow. */

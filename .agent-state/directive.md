@@ -139,3 +139,56 @@ origins ship a fully-written, era-correct Epoch-0; chronology (overheard year) �
   bit-identical. `buildExpandContext` is the procgen seam — wire there, don't duplicate.
 - The CP-R7 harness (`src/sim/harness.ts`) + `artifacts/timeline-audit.json` are the
   acceptance gate for all breadth. Canonical architecture: `docs/STATE.md`.
+
+---
+
+## Batch — convergence-saga (batch-20260621-convergence)
+
+**COMPLETE — all 16 tasks [x]; PR #62 open, awaiting CI green → squash-merge (one PR in flight).**
+586 unit + 78 browser + 7 e2e green; 0 leaks; hour+ acceptance; live-verified in Chrome.
+
+Source: docs/plans/convergence-saga.prq.md (sha256: 649c6a35efb4b5a65126117955a79770cd7bd8d6fda84d029a7979ac7271e2ed)
+Started: 2026-06-21
+Spec: docs/superpowers/specs/2026-06-21-convergence-saga-design.md (approved). Full rebuild,
+ONE branch (feat/convergence-saga), NO deferrals/stubs/placeholders. Engine→roster→world→spine→
+GenAI retool→GenAI writes stories→UI→gate. Per task: sim-purity + 0-leak + harness 0-findings +
+full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
+
+### SS-1 Motivators core (8-axis model)
+- [x] SS-1 src/sim/motivators.ts (8 axes, createMotivators/drift/gate); migrate personality+axes.json consumers; unit tests; gate green
+### SS-2 Yuka GOAP integration
+- [x] SS-2 add yuka+@types/yuka; pure src/sim/goap/ wrapper (no Math.random/Date.now reachable); toJSON/fromJSON deterministic; tests
+### SS-3 DynastyAgent
+- [x] SS-3 line→Think brain (motivators→characterBias, archetype/trope→evaluators); pure deterministic arbitrate+step; serializes; determinism tests
+### SS-4 Macro-acts + epochs
+- [x] SS-4 Convergence/Emergence/Ascension phases + epoch world-inputs every evaluator reads; tests
+### SS-5 Class-rung system
+- [x] SS-5 rung index + poor/middle/upper track routing; seeded misfortune drop (war/disease/collapse)+recovery+hysteresis; tests
+### SS-6 Immigration-wave roster
+- [x] SS-6 7 waves (period×class→culture) + destination grounds; drop SA+colonial; reshape baghdad→1880s Levantine; build validates; 0 leaks
+### SS-7 Onboarding rebuild
+- [x] SS-7 Period→Class→Race/Culture funnel; Epoch-0 seeds the GOAP brain; e2e; live-verified
+### SS-8 Multi-line world sim
+- [x] SS-8 all unplayed waves advance per turn as agents; stored state; opposing/contributing/neutral; glimpse triggers; deterministic; tests
+### SS-9 Convergence + ending lattice
+- [x] SS-9 ~16-20 endings (destination×coloring×sub-variant); motivator-gated reachability; other-lines fates fold in; tests
+### SS-10 Spine authoring
+- [x] SS-10 goal/evaluator sets + act lattice + branch/convergence per archetype×class×macro-act×wave; structural test every cell reachable
+### SS-11 GenAI FULL RETOOL (expand modes)
+- [x] SS-11 uniform genai:expand --type per content type, writes canonical JSON (no .gen.json), harness-gated, register-aware; stub tests
+### SS-12 GenAI WRITES THE STORIES
+- [x] SS-12 flesh every scaffolded act/class-track/wave via SS-11; cull weak; harness 0-findings + textQuality clean over ALL generated; no empty scaffolds
+### SS-13 Read-model + bridge
+- [x] SS-13 bridge exposes macro-act/rung/motivators/act-chapter/glimpses; pure; tests
+### SS-14 UI novel presentation
+- [x] SS-14 acts/chapters + motivators + rung + glimpses + register shift; mobile-first; browser tests; live-verified.
+  USER STEER (2026-06-21): a MUCH more polished use of Svelte — incl. SHADERS (WebGL/GLSL for
+  atmospheric backdrops/transitions per era register) — and significantly BETTER ORGANIZATION of
+  the whole UI layer (clean component architecture, not a thin port of the old HUD). A real UI
+  rebuild, not a reskin. Keep luxury "Dynasty" tokens + real-2D-asset icons
+  ([[dynasty-ui-conventions]]); mid-tier render budget ([[mobile-android]]). Live-verify via
+  chrome-devtools-mcp OR the claude-for-safari skill OR claude-in-chrome (whichever is free).
+### SS-15 Determinism + acceptance gate
+- [x] SS-15 full playthrough hour+ beat count, bit-identical replay incl all lines, 0 leaks, harness 0-findings; remove ALL dead old-model code; full gate green
+### SS-16 Docs + PR
+- [x] SS-16 STATE.md+ARCHITECTURE.md updated; PR opened; CI green; post-merge Release/CD green

@@ -11,6 +11,44 @@ The canonical description of the game as it stands after the founding-pivot bran
 Supersedes the literal-three-dynasty model described in the early design specs (kept
 as historical records under `docs/superpowers/specs/`).
 
+## CONVERGENCE SAGA (current top model — supersedes the sections below)
+
+Spec: `docs/superpowers/specs/2026-06-21-convergence-saga-design.md`. The game is "the
+story of America": you found a bloodline as a WAVE of mid-to-late-1800s immigration and
+steer it generation by generation — always told first-person-intimate — through three
+MACRO-ACTS (Convergence 1800s → Emergence 1900s → Ascension 2000s+) toward (or failing
+to reach) colonizing the stars. Every line you DON'T play grows in parallel as a force
+you glimpse. The build (`feat/convergence-saga`, tasks SS-1…SS-16):
+
+- **Motivators** (`src/sim/motivators.ts`) — 8 grounding axes (wealth/politics/worldview/
+  power/tradition/honor/lineage/reach); drift across generations + gate reachable futures.
+  Replaces the old 4-axis personality (now an adapter in `personality.ts`).
+- **GOAP** (`src/sim/goap/`, Yuka) — pure deterministic goal core; every line is a
+  **DynastyAgent** (`src/sim/dynastyAgent.ts`) whose motivators set evaluator characterBias.
+- **Macro-acts + epochs** (`src/sim/macroActs.ts`) — year-banded acts + cross-cutting epochs
+  that ride/crush a line by its motivators (the misfortune driver).
+- **Class rung** (`src/sim/classRung.ts`) — class is a movable rung; misfortune drops into
+  the lower track, recovery climbs back, hysteresis leaves a mark.
+- **Wave roster** (`places.json`, `kind:"wave"`) — 7 immigration waves (ireland, bavaria,
+  italian, ashkenazi_jewish, scandinavian, chinese, baghdad→Levant) + the American
+  `kind:"destination"` grounds. SA + colonial dropped.
+- **Onboarding funnel** (`src/sim/waveSelect.ts` + `OnboardingScreen`) — Period → Class →
+  Race/Culture, seeding the GOAP brain.
+- **Multi-line world** (`src/sim/dynastyWorld.ts`) — rivals advance + surface as glimpses.
+- **Convergence endings** (`src/sim/convergence.ts`) — ~14 shared destination × motivator-
+  coloring states, motivator-gated, others' fates fold in.
+- **Spine** (`src/sim/spine.ts`) — the authored act/beat scaffold GenAI fleshes.
+- **GenAI expand** (`src/sim/genai/expand.ts`, `pnpm genai:expand`) — one uniform multi-type
+  expander writing canonical JSON (no `.gen.json`); the old `genai:breadth` is retired.
+- **Read-model + UI** (`src/sim/readModel.ts` + `src/ui/saga/`) — `projectSaga()` → the
+  novel-frame `SagaPanel` + a per-macro-act WebGL `ShaderBackdrop`.
+
+Acceptance (`acceptance.unit.test.ts`): a representative full run fires an hour+ of beats,
+0 preset-person leaks, bit-identical replay.
+
+The sections below describe the prior founding-pivot model (historical; still partly live
+until each piece is fully cut over).
+
 ## The model in one paragraph
 
 You FOUND your own family line. New Game deals a deterministic origin from the seed

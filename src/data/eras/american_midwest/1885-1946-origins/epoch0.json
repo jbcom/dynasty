@@ -11,8 +11,21 @@
       "scene": "You arrive in a farmhouse standing alone in an ocean of grass, where the prairie runs flat to every horizon and the wind never truly stops. It is harvest weather; the smell of turned earth and ripe wheat comes through the window, and a far-off thresher drones. The country doctor, who drove out across miles of section roads, finishes and takes out the worn book where he keeps the births of every homestead for a county around. You hear him read the date as he sets it down.",
       "researchNote": "OB-5 birth opener for the American Midwest. Sets `emerged` so the Epoch-0 chain begins; narrates the seed-drawn date via {birth_date}. Prairie homestead, grain country, 1885 — the agrarian heartland whose grievance against eastern money is already simmering.",
       "historicity": "personal",
-      "tags": ["epoch0", "birth", "diegetic"],
-      "requires": { "flags": ["founded_line"], "notFlags": ["emerged"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "birth",
+        "diegetic"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [
+          "emerged"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 5000,
       "choices": [
         {
@@ -20,7 +33,9 @@
           "text": "You overhear the date he says — the year that fixes when you are.",
           "effects": {},
           "personality": {},
-          "setFlags": ["emerged"],
+          "setFlags": [
+            "emerged"
+          ],
           "outcome": "“{birth_date},” the doctor reads, and closes the book on one more prairie child. Out here a life is bound to the land and the price of grain — and the price of grain is set, the farmers will tell you, by men a thousand miles east who have never seen a field."
         }
       ]
@@ -34,32 +49,70 @@
       "scene": "The {family_name} name is settled — but the given name is chosen around the kitchen table by lamplight, with the harvest in and the ledger open. The plains do not reward show; a name here is meant to wear like good boots. Some name from Scripture, the bedrock of every prairie town; some for a forebear who broke this very sod; some pick a plain, honest name and leave it at that. You become {full_name}.",
       "researchNote": "OB-5: given-naming on the agrarian prairie — Scripture / sod-breaking forebear / plain honest name. Given name dealt from the anglo_protestant pool at founding; this beat sets `named` + frames the choice (early personality anchor), distinct from the cities and the other frontiers.",
       "historicity": "personal",
-      "tags": ["epoch0", "naming", "diegetic", "trope:reformer-vs-reactionary"],
-      "requires": { "flags": ["founded_line", "emerged", "gender_revealed"], "notFlags": ["named"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "naming",
+        "diegetic",
+        "trope:reformer-vs-reactionary"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "emerged",
+          "gender_revealed"
+        ],
+        "notFlags": [
+          "named"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 980,
       "choices": [
         {
           "id": "named_from_scripture",
           "text": "Named from Scripture — the bedrock of every prairie chapel and town.",
-          "effects": { "reputation": 3 },
-          "personality": { "inward": 2 },
-          "setFlags": ["named", "named_for_saint"],
+          "effects": {
+            "reputation": 3
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "named",
+            "named_for_saint"
+          ],
           "outcome": "A Bible name in a Bible country. The congregation nods; the name is a promise made before the whole town."
         },
         {
           "id": "named_for_the_sodbreaker",
           "text": "Named for the forebear who broke this very sod — the line rooted in the land.",
-          "effects": { "loyalty": 3 },
-          "personality": { "inward": 2 },
-          "setFlags": ["named", "named_for_kin"],
+          "effects": {
+            "loyalty": 3
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "named",
+            "named_for_kin"
+          ],
           "outcome": "An old family name pressed into new ground. The dead who first plowed here are honored, and the land remembers."
         },
         {
           "id": "named_for_plainness",
           "text": "A plain, honest name — nothing fancy, for a place that distrusts show.",
-          "effects": { "health": 2, "loyalty": 2 },
-          "personality": { "inward": 2 },
-          "setFlags": ["named", "named_for_plainness"],
+          "effects": {
+            "health": 2,
+            "loyalty": 2
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "named",
+            "named_for_plainness"
+          ],
           "outcome": "No Scripture, no ancestor — just a sturdy, level name. On the plains, plainness is a virtue, and the name will never apologize for itself."
         }
       ]
@@ -73,32 +126,70 @@
       "scene": "You are old enough now to understand the arithmetic of the farm, and the arithmetic is cruel. The family grows the wheat, but the railroad sets the freight, the elevator sets the grade, and the eastern bank sets the interest on the mortgage — and somehow, in a good year and a bad, the family ends up owing. You hear the talk at the grange hall, the anger rising: the men who do the work do not set the price of it. You learn early which side of that ledger you are on, and you begin to wonder how a person gets to the other side.",
       "researchNote": "OB-5: class/station emerges early as an organic response to observing the form + function of the grain economy (user). The lesson is the populist grievance — the producer ruled by distant rail/elevator/bank — distinct from the cities and the other frontiers. Sets an early-pressure anchor the calling reads. Grange-hall populism.",
       "historicity": "personal",
-      "tags": ["epoch0", "childhood", "diegetic", "trope:reformer-vs-reactionary"],
-      "requires": { "flags": ["founded_line", "emerged", "gender_revealed", "named"], "notFlags": ["station_seen"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "childhood",
+        "diegetic",
+        "trope:reformer-vs-reactionary"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "emerged",
+          "gender_revealed",
+          "named"
+        ],
+        "notFlags": [
+          "station_seen"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 940,
       "choices": [
         {
           "id": "resent_the_eastern_money",
           "text": "You burn at the eastern money that takes the harvest's worth — and resolve to take it back.",
-          "effects": { "reputation": 2 },
-          "personality": { "outward": 3, "grandiosity": 4 },
-          "setFlags": ["station_seen", "born_wanting"],
+          "effects": {
+            "reputation": 2
+          },
+          "personality": {
+            "power": 7
+          },
+          "setFlags": [
+            "station_seen",
+            "born_wanting"
+          ],
           "outcome": "Some children accept that the farmer ends the year owing. You count it as theft, and the wanting — to turn the tables — will not leave you now."
         },
         {
           "id": "study_the_grange",
           "text": "You study the grange and the co-op — how the many, organized, can face the few.",
-          "effects": { "power": 2 },
-          "personality": { "inward": 4 },
-          "setFlags": ["station_seen", "watched_the_ledger"],
+          "effects": {
+            "power": 2
+          },
+          "personality": {
+            "lineage": 4
+          },
+          "setFlags": [
+            "station_seen",
+            "watched_the_ledger"
+          ],
           "outcome": "You see that one farmer is helpless and ten thousand are a movement. The lever isn't a bigger farm — it's the organizing of all of them. You mean to be the one who pulls it."
         },
         {
           "id": "trust_the_land",
           "text": "You trust the soil and the seasons, like the steadiest of the homesteaders.",
-          "effects": { "loyalty": 4 },
-          "personality": { "inward": 2 },
-          "setFlags": ["station_seen", "head_down_youth"],
+          "effects": {
+            "loyalty": 4
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "station_seen",
+            "head_down_youth"
+          ],
           "outcome": "There is a faith in the land that no banker can foreclose. Whether endurance alone can found a great line is a question for later years."
         }
       ]
@@ -112,32 +203,69 @@
       "scene": "There is a one-room schoolhouse a long walk across the section lines, and a teacher, Miss Hartley, who boards with a different family each month and teaches eight grades at once with a switch and a globe. She has a reformer's fire under her plainness and a sharp sense for the child who might carry it further. She keeps you after one autumn afternoon. \"You've got more than this county can use,\" she says. \"The question is whether you'll spend it lifting this place — or just lifting yourself out of it.\"",
       "researchNote": "OB-5: the calling EMERGES (user) — not one static pick. A reform-minded prairie schoolmarm is the first pressure that bends the child toward a bent. Sets `schooled`, an anchor the crystallization reads. Miss Hartley carries the heartland's reform impulse, distinct in tone from the other places' teachers.",
       "historicity": "personal",
-      "tags": ["epoch0", "childhood", "diegetic", "trope:reformer-vs-reactionary"],
-      "requires": { "flags": ["founded_line", "station_seen"], "notFlags": ["schooled"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "childhood",
+        "diegetic",
+        "trope:reformer-vs-reactionary"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "station_seen"
+        ],
+        "notFlags": [
+          "schooled"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 930,
       "choices": [
         {
           "id": "devour_the_books",
           "text": "You read past every book the schoolhouse owns — hungry for the wider world.",
-          "effects": { "reputation": 3 },
-          "personality": { "inward": 3 },
-          "setFlags": ["schooled", "leaned_learning"],
+          "effects": {
+            "reputation": 3
+          },
+          "personality": {
+            "lineage": 3
+          },
+          "setFlags": [
+            "schooled",
+            "leaned_learning"
+          ],
           "outcome": "Miss Hartley starts mail-ordering books on her own small wage to keep you fed. A door has opened that the prairie cannot quite close behind you."
         },
         {
           "id": "work_the_room",
           "text": "You learn the people — every farmer, preacher, and grange man for miles.",
-          "effects": { "loyalty": 3 },
-          "personality": { "outward": 4 },
-          "setFlags": ["schooled", "leaned_people"],
+          "effects": {
+            "loyalty": 3
+          },
+          "personality": {
+            "power": 4
+          },
+          "setFlags": [
+            "schooled",
+            "leaned_people"
+          ],
           "outcome": "You discover you can stand up at a grange meeting and make a roomful of tired farmers believe. In a country aching for a voice, that gift is power."
         },
         {
           "id": "leave_for_the_fields",
           "text": "You leave the slate for the fields — the harvest will not wait on lessons.",
-          "effects": { "money": 200, "health": 2 },
-          "personality": { "inward": 2 },
-          "setFlags": ["schooled", "leaned_labor"],
+          "effects": {
+            "money": 200,
+            "health": 2
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "schooled",
+            "leaned_labor"
+          ],
           "outcome": "Miss Hartley lets you go to the harvest with real regret. The land does not care what you might have been — only how much wheat you can bring in before the frost."
         }
       ]
@@ -151,61 +279,115 @@
       "scene": "You are a young {given_name} {surname} now, grown into the body and the wide flat country that made you. The grievances of a prairie childhood have set into a direction. This is a country where the people who grow everything are told they own nothing — and a person with fire in them can either fight that or master it. A line has to plant a flag the family can rally to for a hundred years. Standing in a field that runs to the edge of the world, you feel which way you will go.",
       "researchNote": "OB-5: the calling CRYSTALLIZES into the line's archetype (user: calling IS the archetype, and it EMERGES). All six archetypes offered; setsArchetype commits the power base. Prior schooling/station anchors color which feel natural. Self-excludes the generic ev_birth_calling via the OB-5 has_authored_epoch0 flag.",
       "historicity": "personal",
-      "tags": ["epoch0", "calling", "diegetic"],
-      "requires": { "flags": ["founded_line", "schooled"], "notFlags": ["calling_chosen"], "meters": {}, "personality": {} },
+      "tags": [
+        "epoch0",
+        "calling",
+        "diegetic"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line",
+          "schooled"
+        ],
+        "notFlags": [
+          "calling_chosen"
+        ],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 920,
       "choices": [
         {
           "id": "crystallize_economic",
           "text": "Money. You will own the elevator, the bank, and the rail spur the whole county must use.",
-          "effects": { "money": 500, "power": 3 },
-          "personality": { "grandiosity": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "money": 500,
+            "power": 3
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "economic",
           "outcome": "The Magnate's road: if the few who set the prices rule the many, then you will be one of the few. The line will own the chokepoints the whole heartland feeds through — and the farmers' anger will run THEIR way for once."
         },
         {
           "id": "crystallize_political",
           "text": "Power. You will lead the farmers' revolt all the way to the statehouse and beyond.",
-          "effects": { "power": 5 },
-          "personality": { "outward": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "power": 5
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "political",
           "outcome": "The Statesman's road: the grange, the stump, the great populist tide given a leader to ride it. The line will turn the heartland's fury into votes, and votes into power the eastern money cannot buy off."
         },
         {
           "id": "crystallize_religious",
           "text": "Faith. You will be the moral thunder a wronged and weary people are crying for.",
-          "effects": { "reputation": 5 },
-          "personality": { "inward": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 5
+          },
+          "personality": {
+            "lineage": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "religious",
           "outcome": "The Prophet's road: the revival tent, the camp meeting, the gospel that names the moneylenders by their sins. The line will hold the soul of the heartland — and a roused congregation is a power that makes governors nervous."
         },
         {
           "id": "crystallize_technological",
           "text": "Invention. You will build the machines that finally free the farmer's back.",
-          "effects": { "reputation": 3, "money": 200 },
-          "personality": { "inward": 4 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 3,
+            "money": 200
+          },
+          "personality": {
+            "lineage": 4
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "technological",
           "outcome": "The Visionary's road: the tractor, the combine, the engine that does the work of twenty men and forty horses. The line will remake how a continent is fed — and own the patents the whole world will need."
         },
         {
           "id": "crystallize_entertainment",
           "text": "The crowd. You have the gift to lift a hard country — the chautauqua stage, the song, the show.",
-          "effects": { "reputation": 4, "money": 100 },
-          "personality": { "outward": 4 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 4,
+            "money": 100
+          },
+          "personality": {
+            "power": 4
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "entertainment",
           "outcome": "The Star's road: the chautauqua circuit, the county fair, the radio that reaches every farmhouse on the plains. The line will be loved across the heartland — and in a lonely country, the one who brings joy is never forgotten."
         },
         {
           "id": "crystallize_athletic",
           "text": "The body. You are the strongest the county ever raised, and the plains love a champion.",
-          "effects": { "reputation": 4, "power": 1 },
-          "personality": { "grandiosity": 3 },
-          "setFlags": ["calling_chosen"],
+          "effects": {
+            "reputation": 4,
+            "power": 1
+          },
+          "personality": {
+            "power": 3
+          },
+          "setFlags": [
+            "calling_chosen"
+          ],
           "setsArchetype": "athletic",
           "outcome": "The Champion's road: the ballfield, the fairground contest, the local boy a whole region claims as proof of its worth. The line will win its name with plain prairie strength — earned in the open, owed to no bank."
         }

@@ -10,32 +10,67 @@
       "scene": "The Pacific coast is a country reinventing itself by the year — gold rushes spent, land booms rising, the rattle of prospectors giving way to boosters and railroads. The {surname} line can chase the boom, sell shovels to the dreamers, or feed and entertain the endless tide of newcomers. The coast belongs to whoever arrives unafraid.",
       "researchNote": "Place-specific West Coast origins beat (EX-2): the Gold Rush aftermath, land-boom speculation, and service-to-the-stampede fortunes. Generic to any west_coast founding.",
       "historicity": "real",
-      "tags": ["origin", "west_coast", "trope:frontier-capital-origin"],
-      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "origin",
+        "west_coast",
+        "trope:frontier-capital-origin"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 14,
       "choices": [
         {
           "id": "wc_ride_the_land_boom",
           "text": "Buy land ahead of the boosters and the railroads",
-          "effects": { "money": 5, "power": 2, "heat": 2 },
-          "personality": { "grandiosity": 4, "outward": 2 },
-          "setFlags": ["wc_land_fortune", "head_start"],
+          "effects": {
+            "money": 5,
+            "power": 2,
+            "heat": 2
+          },
+          "personality": {
+            "power": 6
+          },
+          "setFlags": [
+            "wc_land_fortune",
+            "head_start"
+          ],
           "outcome": "You buy orange groves and town lots before the crowd arrives. When the railroad reaches them, the {surname} name is suddenly a coastal fortune."
         },
         {
           "id": "wc_sell_to_the_stampede",
           "text": "Sell shovels, lodging, and pleasure to the stampede",
-          "effects": { "money": 4, "reputation": -1 },
-          "personality": { "outward": 4 },
-          "setFlags": ["wc_service_fortune", "pleasure_king_origin"],
+          "effects": {
+            "money": 4,
+            "reputation": -1
+          },
+          "personality": {
+            "power": 4
+          },
+          "setFlags": [
+            "wc_service_fortune",
+            "pleasure_king_origin"
+          ],
           "outcome": "You profit from every dreamer who passes through, whether they strike it rich or not. The {surname} line learns that the surest gold is other people's hope."
         },
         {
           "id": "wc_build_the_coast",
           "text": "Build the towns the coast will need when the boom settles",
-          "effects": { "money": 3, "reputation": 3 },
-          "personality": { "inward": 2 },
-          "setFlags": ["wc_builder_line"],
+          "effects": {
+            "money": 3,
+            "reputation": 3
+          },
+          "personality": {
+            "lineage": 2
+          },
+          "setFlags": [
+            "wc_builder_line"
+          ],
           "outcome": "You build for the city that comes after the rush. The {surname} name is poured into foundations the coast will stand on for a century."
         }
       ]
@@ -49,24 +84,50 @@
       "scene": "On the coast a name is whatever you say it is, and the past stays back east where you left it. The {surname} line can build an identity from pure ambition, unburdened by the old country — or hold to the values it carried west. The frontier rewards reinvention; it does not always reward roots.",
       "researchNote": "The West Coast as the place of self-reinvention — a distinct cultural lever vs the rooted Old World origins. Sets identity-fluidity flags.",
       "historicity": "extrapolated",
-      "tags": ["origin", "west_coast", "trope:faith-and-community"],
-      "requires": { "flags": ["founded_line"], "notFlags": [], "meters": {}, "personality": {} },
+      "tags": [
+        "origin",
+        "west_coast",
+        "trope:faith-and-community"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
       "weight": 11,
       "choices": [
         {
           "id": "wc_pure_reinvention",
           "text": "Make the {surname} name mean only what you make it mean now",
-          "effects": { "reputation": 3, "power": 2 },
-          "personality": { "grandiosity": 4, "outward": 2 },
-          "setFlags": ["wc_self_made_myth"],
+          "effects": {
+            "reputation": 3,
+            "power": 2
+          },
+          "personality": {
+            "power": 6
+          },
+          "setFlags": [
+            "wc_self_made_myth"
+          ],
           "outcome": "You build the {surname} name on momentum alone. No one asks where you came from, and you never volunteer it."
         },
         {
           "id": "wc_carry_the_values",
           "text": "Carry the old values west and root them in new soil",
-          "effects": { "loyalty": 3, "reputation": 2 },
-          "personality": { "ideology": 3, "inward": 2 },
-          "setFlags": ["wc_rooted_values"],
+          "effects": {
+            "loyalty": 3,
+            "reputation": 2
+          },
+          "personality": {
+            "politics": 3,
+            "lineage": 2
+          },
+          "setFlags": [
+            "wc_rooted_values"
+          ],
           "outcome": "You keep faith with what you brought. The {surname} line is a piece of the old country transplanted, thriving in the coastal sun."
         }
       ]

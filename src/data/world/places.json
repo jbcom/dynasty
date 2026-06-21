@@ -1,5 +1,5 @@
 {
-  "_comment": "CP-R3 places catalog. Keyed by the canonical world-stack place id. sensoryCue drives the diegetic birth's emergence question (cue -> place); defaultCulture is the onomastics lane a founding here defaults to (may diverge); eraContentDir is the era-tree place dir holding this place's life-arc content; validEras are the era ids a founding here may begin in (cross-ref to eras/index.json). Validated by places.unit.test.ts.",
+  "_comment": "Convergence Saga roster (SS-6). Starting lines are WAVES of mid-to-late-1800s immigration to America (kind:wave) — each by arrivalYears + arrivalClass + push; they converge in America and stratify on the DESTINATION grounds (kind:destination). sensoryCue drives the diegetic birth cue; defaultCulture is the onomastics lane; eraContentDir is the era-tree content dir; validEras cross-ref eras/index.json. Validated by places.unit.test.ts + content.ts cross-resolution. South Africa (1990s wave) + the colonial deep-line are dropped; baghdad is re-founded as the 1880s Arab/Levantine wave.",
   "places": [
     {
       "id": "ireland",
@@ -7,7 +7,11 @@
       "sensoryCue": "fish and salt air, and a hard grey rain off the water",
       "defaultCulture": "irish_catholic",
       "eraContentDir": "new-york",
-      "validEras": ["origins"]
+      "validEras": ["origins"],
+      "kind": "wave",
+      "arrivalYears": [1845, 1855],
+      "arrivalClass": "poor",
+      "push": "the Great Famine — starvation and eviction"
     },
     {
       "id": "bavaria",
@@ -15,23 +19,71 @@
       "sensoryCue": "woodsmoke, cold mountain wind, and the smell of fermenting hops",
       "defaultCulture": "bavarian_german",
       "eraContentDir": "new-york",
-      "validEras": ["origins"]
+      "validEras": ["origins"],
+      "kind": "wave",
+      "arrivalYears": [1848, 1880],
+      "arrivalClass": "middle",
+      "push": "the failed 1848 revolutions — exile and opportunity"
     },
     {
-      "id": "south_africa",
-      "label": "South Africa",
-      "sensoryCue": "dry veld dust, hot sun, and a language that is not quite Dutch",
-      "defaultCulture": "afrikaner",
+      "id": "italian",
+      "label": "Southern Italy",
+      "sensoryCue": "olive dust, harbor diesel, and the noise of a crowded steerage deck",
+      "defaultCulture": "italian",
       "eraContentDir": "new-york",
-      "validEras": ["origins", "primetime"]
+      "validEras": ["origins"],
+      "kind": "wave",
+      "arrivalYears": [1880, 1900],
+      "arrivalClass": "poor",
+      "push": "the poverty of the Mezzogiorno"
     },
     {
-      "id": "west_coast",
-      "label": "the West Coast",
-      "sensoryCue": "orange light, ocean fog, and the rattle of prospectors' pans",
-      "defaultCulture": "scots_irish",
+      "id": "ashkenazi_jewish",
+      "label": "The Pale of Settlement",
+      "sensoryCue": "lamp-oil, old books, and the cold off the shtetl road",
+      "defaultCulture": "ashkenazi_jewish",
       "eraContentDir": "new-york",
-      "validEras": ["origins"]
+      "validEras": ["origins"],
+      "kind": "wave",
+      "arrivalYears": [1881, 1900],
+      "arrivalClass": "middle",
+      "push": "the pogroms of the Russian Empire"
+    },
+    {
+      "id": "scandinavian",
+      "label": "Scandinavia",
+      "sensoryCue": "pine tar, cold clean air, and snow-light off a frozen field",
+      "defaultCulture": "scandinavian",
+      "eraContentDir": "new-york",
+      "validEras": ["origins"],
+      "kind": "wave",
+      "arrivalYears": [1860, 1890],
+      "arrivalClass": "poor",
+      "push": "no land left to inherit — the homestead dream"
+    },
+    {
+      "id": "chinese",
+      "label": "Guangdong",
+      "sensoryCue": "river silt, dried fish, and the clamor of the Canton waterfront",
+      "defaultCulture": "chinese",
+      "eraContentDir": "new-york",
+      "validEras": ["origins"],
+      "kind": "wave",
+      "arrivalYears": [1850, 1880],
+      "arrivalClass": "poor",
+      "push": "the Taiping war and famine — Gold Mountain and the rails"
+    },
+    {
+      "id": "baghdad",
+      "label": "the Levant",
+      "sensoryCue": "desert heat and distant shouts from a market stall on the Tigris",
+      "defaultCulture": "arabic_abbasid",
+      "eraContentDir": "new-york",
+      "validEras": ["origins"],
+      "kind": "wave",
+      "arrivalYears": [1880, 1900],
+      "arrivalClass": "middle",
+      "push": "the decline of the Ottoman Empire — the peddler's road"
     },
     {
       "id": "east_coast",
@@ -39,23 +91,8 @@
       "sensoryCue": "coal smoke, harbor brine, and the clamor of a port city",
       "defaultCulture": "anglo_protestant",
       "eraContentDir": "new-york",
-      "validEras": ["origins"]
-    },
-    {
-      "id": "baghdad",
-      "label": "Baghdad",
-      "sensoryCue": "desert heat and distant shouts from a market stall on the Tigris",
-      "defaultCulture": "arabic_abbasid",
-      "eraContentDir": "baghdad",
-      "validEras": ["caliphate"]
-    },
-    {
-      "id": "canada",
-      "label": "Canada",
-      "sensoryCue": "pine resin, river ice breaking, and the chill of a northern dawn",
-      "defaultCulture": "scots_irish",
-      "eraContentDir": "new-york",
-      "validEras": ["origins"]
+      "validEras": ["origins"],
+      "kind": "destination"
     },
     {
       "id": "american_midwest",
@@ -63,7 +100,8 @@
       "sensoryCue": "turned earth, grain dust, and a wind that crosses a thousand miles of prairie",
       "defaultCulture": "anglo_protestant",
       "eraContentDir": "new-york",
-      "validEras": ["origins"]
+      "validEras": ["origins"],
+      "kind": "destination"
     },
     {
       "id": "american_south",
@@ -71,7 +109,17 @@
       "sensoryCue": "humid heat, magnolia, and the slow cadence of a river delta",
       "defaultCulture": "scots_irish",
       "eraContentDir": "new-york",
-      "validEras": ["origins"]
+      "validEras": ["origins"],
+      "kind": "destination"
+    },
+    {
+      "id": "west_coast",
+      "label": "the West Coast",
+      "sensoryCue": "orange light, ocean fog, and the rattle of prospectors' pans",
+      "defaultCulture": "scots_irish",
+      "eraContentDir": "new-york",
+      "validEras": ["origins"],
+      "kind": "destination"
     }
   ]
 }

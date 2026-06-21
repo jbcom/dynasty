@@ -1,0 +1,298 @@
+{
+  "era": "origins",
+  "events": [
+    {
+      "id": "ev_gen_forest_claim",
+      "era": "origins",
+      "year": 1885,
+      "title": "The Forest Claim",
+      "scene": "The air bites with the smell of pine tar and snow-melt. A local timber agent, smelling of damp wool and ambition, offers {surname} a claim on a new logging tract deep in the wilderness. It's a gamble, requiring significant upfront capital, but the agent promises untold riches from the virgin old-growth.",
+      "researchNote": "Scandinavian logging was a major industry in the late 19th century, often involving vast, remote tracts and considerable risk/reward.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "extrapolated",
+      "place": "scandinavian",
+      "tags": [
+        "trope:frontier-capital-origin"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "invest_logging",
+          "text": "Invest in the logging venture, leveraging what little we have.",
+          "effects": {
+            "money": -500,
+            "power": 100,
+            "heat": 50,
+            "reputation": 50
+          },
+          "personality": {
+            "wealth": 2,
+            "power": 1,
+            "reach": 1
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The howl of saw blades will echo through the valley. Success is not guaranteed, but the foundation of a new kind of wealth is laid.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "decline_logging",
+          "text": "Decline the offer. Better to secure our existing meager holdings.",
+          "effects": {
+            "money": 50,
+            "loyalty": 20
+          },
+          "personality": {
+            "tradition": 1,
+            "lineage": 1
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The agent leaves, frustrated. The pine forests remain untouched by {surname}'s hand, for now. Security over speculation.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_parish_bell",
+      "era": "origins",
+      "year": 1885,
+      "title": "The Parish Bell",
+      "scene": "The scent of pine resin drifts in through the open door of the small, whitewashed church. The local pastor, a stern but well-meaning man, speaks of the parish's need for a new bell, hinting that a substantial donation from {full_name} would earn considerable standing and goodwill.",
+      "researchNote": "The church played a central role in Scandinavian community life, and donations for improvements were a common way to gain social standing.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "extrapolated",
+      "place": "scandinavian",
+      "tags": [
+        "trope:faith-and-community"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 9,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "donate_church",
+          "text": "Contribute generously to the church. Our name will be honored.",
+          "effects": {
+            "money": -200,
+            "reputation": 100,
+            "loyalty": 50
+          },
+          "personality": {
+            "worldview": 2,
+            "tradition": 1
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The new bell tolls across the fjord, a constant reminder of {surname}'s piety and generosity, cementing their place in the community.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "decline_church_donation",
+          "text": "Politely decline, suggesting the funds could better serve the needy.",
+          "effects": {
+            "reputation": 20,
+            "loyalty": 20
+          },
+          "personality": {
+            "worldview": 1
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The pastor's face clouds slightly, but the community respects {given_name}'s principled stand. Still, a certain social elevation is forgone.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_steam_saw",
+      "era": "origins",
+      "year": 1887,
+      "title": "The Steam-Powered Saw",
+      "scene": "The air hums with anticipation as a traveling demonstrator showcases a small, but powerful, steam engine powering a saw blade. He claims it can triple the output of any traditional water-powered mill, but the initial investment is substantial and the technology entirely new to {surname}'s region.",
+      "researchNote": "Industrialization in Scandinavia saw the adoption of steam power in various industries, including sawmills, in the late 19th century, transforming efficiency but also requiring significant capital and risk.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "scandinavian",
+      "tags": [
+        "trope:techno-frontier"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "invest_steam_saw",
+          "text": "Invest in the new steam-powered sawmill. Embrace progress.",
+          "effects": {
+            "money": -750,
+            "power": 150,
+            "heat": 75,
+            "reputation": 75
+          },
+          "personality": {
+            "wealth": 2,
+            "reach": 2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The rhythmic chug of the steam engine soon dominates the soundscape, a symbol of {surname}'s ambition and willingness to adopt the future.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "reject_steam_saw",
+          "text": "Reject the newfangled machine. Our traditional methods are proven.",
+          "effects": {
+            "money": 100,
+            "loyalty": 50
+          },
+          "personality": {
+            "tradition": 2
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The demonstrator packs up his marvel. {full_name} retains their capital, but the opportunity for rapid expansion passes them by.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_land_agent",
+      "era": "origins",
+      "year": 1885,
+      "title": "The Land Agent's Offer",
+      "scene": "The smell of burning peat hangs heavy in the air as a sharp-suited land agent, representing the distant noble who owns {surname}'s farm, arrives. He offers {given_name} the chance to buy the land outright, a generational opportunity to escape tenancy, but at a price that would deplete nearly all the family's savings.",
+      "researchNote": "Land ownership was a significant issue in 19th-century Scandinavia; many farmers were tenants, and the opportunity to buy land could be transformative but also financially crippling.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "scandinavian",
+      "tags": [
+        "trope:tenant-and-landlord"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 13,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "buy_the_land",
+          "text": "Buy the land. Secure our family's future on our own soil.",
+          "effects": {
+            "money": -1000,
+            "loyalty": 200,
+            "power": 100,
+            "reputation": 100
+          },
+          "personality": {
+            "lineage": 3,
+            "tradition": 2
+          },
+          "setFlags": [
+            "land_owner"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The deed is signed. For the first time, {surname} owns the earth beneath their feet, a legacy for generations to come, though they are now truly impoverished.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "decline_land_purchase",
+          "text": "Decline. The price is too steep; we will use our savings for a new venture.",
+          "effects": {
+            "money": 200,
+            "heat": 50,
+            "power": 50
+          },
+          "personality": {
+            "wealth": 1,
+            "reach": 1
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The agent leaves, annoyed. {full_name} remains a tenant, but the saved capital is now free for investments beyond the soil, perhaps a shop in the nearby village.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    }
+  ]
+}

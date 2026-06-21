@@ -21,33 +21,81 @@ describe("branch moral axis (task-022)", () => {
     const menu = ["reich_america_utopian", "reich_america_centrist", "reich_america_dictatorial"];
     // Utopian-leaning personality → utopian, not dictatorial.
     expect(
-      moralPoleOf(make(menu, { ideology: -80, grandiosity: -40, outward: -80, inward: 0 })),
+      moralPoleOf(
+        make(menu, {
+          wealth: 0,
+          politics: -80,
+          worldview: 0,
+          power: -80,
+          tradition: 0,
+          honor: 0,
+          lineage: 0,
+          reach: -80,
+        }),
+      ),
     ).toBe("utopian");
     // Tyrannical personality → dictatorial.
-    expect(moralPoleOf(make(menu, { ideology: 80, grandiosity: 80, outward: 80, inward: 0 }))).toBe(
-      "dictatorial",
-    );
+    expect(
+      moralPoleOf(
+        make(menu, {
+          wealth: 0,
+          politics: 80,
+          worldview: 0,
+          power: 80,
+          tradition: 0,
+          honor: 0,
+          lineage: 0,
+          reach: 80,
+        }),
+      ),
+    ).toBe("dictatorial");
     // westcoast menu behaves the same.
     expect(
       moralPoleOf(
         make(["pole_utopian", "pole_centrist", "pole_dictatorial"], {
-          ideology: -80,
-          grandiosity: -40,
-          outward: -80,
-          inward: 0,
+          wealth: 0,
+          politics: -80,
+          worldview: 0,
+          power: -80,
+          tradition: 0,
+          honor: 0,
+          lineage: 0,
+          reach: -80,
         }),
       ),
     ).toBe("utopian");
   });
 
   it("falls back to the personality tyranny↔utopia axis with no pole flag", () => {
-    // tyrannyUtopiaAxis is dominated by `outward` (the world's perception).
+    // tyrannyUtopiaAxis is dominated by `power` (the migrated tyranny driver).
     expect(
-      moralPoleOf(make([], { ideology: -90, grandiosity: -50, outward: -90, inward: 0 })),
+      moralPoleOf(
+        make([], {
+          wealth: 0,
+          politics: -90,
+          worldview: 0,
+          power: -90,
+          tradition: 0,
+          honor: 0,
+          lineage: 0,
+          reach: -90,
+        }),
+      ),
     ).toBe("utopian");
-    expect(moralPoleOf(make([], { ideology: 90, grandiosity: 90, outward: 90, inward: 0 }))).toBe(
-      "dictatorial",
-    );
+    expect(
+      moralPoleOf(
+        make([], {
+          wealth: 0,
+          politics: 90,
+          worldview: 0,
+          power: 90,
+          tradition: 0,
+          honor: 0,
+          lineage: 0,
+          reach: 90,
+        }),
+      ),
+    ).toBe("dictatorial");
     expect(moralPoleOf(make([], initPersonality()))).toBe("centrist");
   });
 

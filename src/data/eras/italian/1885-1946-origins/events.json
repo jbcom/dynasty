@@ -1,0 +1,304 @@
+{
+  "era": "origins",
+  "events": [
+    {
+      "id": "ev_gen_atlantic_passage",
+      "era": "origins",
+      "year": 1885,
+      "title": "The Atlantic Passage",
+      "scene": "A crumpled letter arrives from a cousin in America, bearing passage money and tales of opportunity. The air in your village is thick with olive dust, the harbor a distant hum. The whole {surname} family gathers, the decision heavy.",
+      "researchNote": "Mass emigration from Southern Italy to the Americas boomed in the late 19th century.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "italian",
+      "tags": [
+        "trope:letter-from-away",
+        "trope:exile-return"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 12,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "send_first_child",
+          "text": "We send {given_name} to stake our claim across the sea. The family here will save for passage.",
+          "effects": {
+            "money": -100,
+            "loyalty": -5,
+            "reputation": 10
+          },
+          "personality": {
+            "reach": 10,
+            "lineage": -5
+          },
+          "setFlags": [
+            "emigrated_first_child"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "A piece of the {surname} family goes overseas, a new branch planted in foreign soil. Correspondence will be slow, hope will be constant.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "stay_together_italian",
+          "text": "We are a whole family, {full_name} declares. We face this land's struggles together.",
+          "effects": {
+            "loyalty": 10,
+            "reputation": -5
+          },
+          "personality": {
+            "lineage": 10,
+            "tradition": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The family remains unbroken in the old country, bound by shared hardship and a resolve to make a life here.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_harvest_burden",
+      "era": "origins",
+      "year": 1886,
+      "title": "The Harvest's Burden",
+      "scene": "The olive harvest is lean this year, and the landlord's agent, Signor Rossi, arrives at your meager plot demanding the full, usual rent. He speaks with a sneer, threatening to turn the {surname} family out into the dust-choked roads.",
+      "researchNote": "Southern Italian land tenancy often involved harsh conditions and vulnerability to landlords.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "italian",
+      "tags": [
+        "trope:tenant-and-landlord"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 10,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "beg_for_mercy",
+          "text": "We plead with Signor Rossi, promising to work harder, offering a share of next year's crop.",
+          "effects": {
+            "money": -50,
+            "reputation": -10,
+            "loyalty": -5
+          },
+          "personality": {
+            "honor": -5,
+            "tradition": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The agent, reluctantly, grants a small reprieve, but the {surname} name now carries the stain of supplication.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "defy_landlord",
+          "text": "{given_name} declares we will not pay until the harvest improves, calling on nearby families to stand with us.",
+          "effects": {
+            "power": 10,
+            "reputation": 15,
+            "heat": 5
+          },
+          "personality": {
+            "politics": 10,
+            "power": 5
+          },
+          "setFlags": [
+            "stood_up_to_landlord"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "A tense standoff begins. Some neighbors support your courage, others fear reprisal. The landlord's agent retreats for now, but will surely return.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_smuggler_proposition",
+      "era": "origins",
+      "year": 1885,
+      "title": "The Smuggler's Proposition",
+      "scene": "Down at the crowded harbor, the air thick with the smell of diesel and salt, a man known only as 'il Pesce' approaches {full_name}. He whispers of profitable, albeit illegal, cargo runs between Sicily and the mainland – a fortune to be made beyond the law.",
+      "researchNote": "Smuggling was a common illicit activity in the less policed coastal areas of Southern Italy.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "extrapolated",
+      "place": "italian",
+      "tags": [
+        "trope:bootlegger-to-legitimacy"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 14,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "join_il_pesce",
+          "text": "{given_name} agrees to the terms, seeing an opportunity to lift the family from poverty by any means necessary.",
+          "effects": {
+            "money": 200,
+            "heat": 15,
+            "reputation": -10
+          },
+          "personality": {
+            "wealth": 15,
+            "power": 5
+          },
+          "setFlags": [
+            "engaged_in_smuggling"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The {surname} family begins a perilous, clandestine trade. Profits are swift, but so is the danger of discovery and entanglement with dangerous figures.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "refuse_smuggler",
+          "text": "Though tempted, {full_name} declines, unwilling to stain the family name with crime.",
+          "effects": {
+            "reputation": 5,
+            "loyalty": 5
+          },
+          "personality": {
+            "honor": 10,
+            "tradition": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The family's path remains narrow and hard-won, but their conscience is clear. 'il Pesce' respects the decision, though perhaps with a hint of pity.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "ev_gen_parish_blessing",
+      "era": "origins",
+      "year": 1887,
+      "title": "The Parish Blessing",
+      "scene": "Father Anselmo, the respected and influential parish priest, seeks out {full_name}. He offers the family a prominent role in the upcoming village festa and proposes a marriage alliance with a devout, well-regarded local family – solidifying the {surname} family's standing, but tying them closely to the Church.",
+      "researchNote": "The Catholic Church held immense social and political power in Southern Italy during this era.",
+      "extrapolated": false,
+      "startrekInspired": false,
+      "historicity": "real",
+      "place": "italian",
+      "tags": [
+        "trope:faith-and-community",
+        "trope:dynastic-merger"
+      ],
+      "requires": {
+        "flags": [
+          "founded_line"
+        ],
+        "notFlags": [],
+        "meters": {},
+        "personality": {}
+      },
+      "weight": 11,
+      "repeatable": false,
+      "choices": [
+        {
+          "id": "embrace_church_patronage",
+          "text": "{given_name} accepts, seeing the immense benefits of the Church's blessing and the proposed alliance.",
+          "effects": {
+            "reputation": 20,
+            "loyalty": 10,
+            "power": 5
+          },
+          "personality": {
+            "worldview": 10,
+            "tradition": 10
+          },
+          "setFlags": [
+            "allied_with_church"
+          ],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The {surname} family becomes a pillar of the parish, their name gaining considerable respect and influence within the community, albeit under the watchful eye of the clergy.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        },
+        {
+          "id": "maintain_independence_church",
+          "text": "{full_name} respectfully declines, wishing to keep the family's path independent of religious authority.",
+          "effects": {
+            "reputation": -5,
+            "loyalty": -5
+          },
+          "personality": {
+            "worldview": -5,
+            "politics": 5
+          },
+          "setFlags": [],
+          "clearFlags": [],
+          "ripples": [],
+          "outcome": "The priest expresses disappointment, and while not ostracized, the {surname} family will find community opportunities harder to come by without the Church's explicit support.",
+          "requires": {
+            "flags": [],
+            "notFlags": [],
+            "meters": {},
+            "personality": {}
+          }
+        }
+      ]
+    }
+  ]
+}
