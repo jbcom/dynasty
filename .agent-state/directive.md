@@ -100,9 +100,14 @@ history, replay still bit-identical). Sub-tasks:
 - [x] **PL-4 DONE** (commit 53f7b2d, pushed to PR #36). Meter HUD is a CSS grid: 3 cols on
   phones (tidy 3×2), 6-across at >=34rem. No orphaned Heat gauge; reclaims vertical budget.
   Verified via MeterHud visual+browser tests + live screenshot.
-- [ ] **PL-5 HUD vertical budget.** On a tall phone the meter HUD + personality dial + nav
-  consume ~40% of the viewport above the event card. Tighten spacing / consider a collapsed
-  HUD so the event (the content) gets more room. Mobile-first (Pixel-5a class).
+- [x] **PL-5 DONE** (commit 6871795, pushed to PR #36). Tightened HUD row-gap + padding
+  (HUD 202→185px, chrome above the event 39→37% on a 915px viewport). The proportionate,
+  no-downside trim. NOTE for the user: a deeper reduction (collapsible HUD, hide the
+  personality band) is a larger UX decision deliberately NOT taken autonomously — flag if
+  wanted as a future item.
+- [ ] [WAIT] **PL ship** — PR #36 (PL-1..PL-5) CI re-running after the PL-4/PL-5 pushes
+  (monitored). Squash-merge on green + threads resolved; then the loop continues with the
+  next discovered improvement.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
