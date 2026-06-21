@@ -93,4 +93,45 @@ describe("LegacyReport", () => {
     // The butterfly graph renders nodes for the recorded ledger.
     expect(host.querySelectorAll("circle").length).toBeGreaterThan(0);
   });
+
+  it("celebrates the DYNASTY — house, generations, souls, span (PL-9)", () => {
+    // A founded line with a progenitor + one heir (a second generation) so the epitaph
+    // counts members, generations, and the founding→end span.
+    const base = initState(content, "legacy");
+    const mkMember = (
+      id: string,
+      given: string,
+      born: number,
+      generation: number,
+      isProtagonist: boolean,
+    ) => ({
+      id,
+      given,
+      surname: "Vane",
+      sex: "male" as const,
+      born,
+      generation,
+      traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
+      isProtagonist,
+    });
+    const state = {
+      ...base,
+      family: {
+        members: [mkMember("m0", "Aldous", 1885, 0, false), mkMember("m1", "Bram", 1910, 1, true)],
+        protagonistId: "m1",
+        nextSeq: 2,
+      },
+      end: { kind: "death" as const, year: 1960, reason: "x" },
+    };
+    component = mount(LegacyReport, {
+      target: host,
+      props: { content, state, end: state.end, onRestart: () => {} },
+    });
+    expect(host.textContent).toContain("House of");
+    expect(host.textContent).toContain("Vane");
+    expect(host.textContent).toMatch(/2 generations/);
+    expect(host.textContent).toMatch(/2 souls/);
+    expect(host.textContent).toMatch(/75 years/); // 1960 − 1885
+    expect(host.querySelector(".dynasty")).not.toBeNull();
+  });
 });

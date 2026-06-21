@@ -37,6 +37,19 @@ const isApex = $derived(tier === "apex");
 // interrogated on its own terms (a Reich "utopia" is monstrous-but-coherent).
 const pole = $derived(moralPoleOf(state));
 const poleLabel = $derived(moralPoleLabel(state));
+
+// THE DYNASTY (PL-9): this is a saga about a LINE, not one life — so the legacy report
+// celebrates the family that was built. Generations reached, souls born into the line, and
+// the span of years from the founding to this ending. Null for an unfounded fixture run.
+const dynasty = $derived.by(() => {
+  const fam = state.family;
+  if (!fam || fam.members.length === 0) return null;
+  const generations = Math.max(...fam.members.map((m) => m.generation)) + 1;
+  const firstBorn = Math.min(...fam.members.map((m) => m.born));
+  const span = Math.max(0, end.year - firstBorn);
+  const houseName = fam.members[0]?.surname ?? "—";
+  return { generations, members: fam.members.length, span, houseName };
+});
 </script>
 
 <main class="report" data-end={end.kind} data-tier={tier} class:apex={isApex}>
@@ -45,6 +58,17 @@ const poleLabel = $derived(moralPoleLabel(state));
   <p class="reason">{term(end.reason)}</p>
   <p class="pole" data-pole={pole}>You ended in <strong>{poleLabel}</strong>.</p>
   <p class="year">Final year: {end.year} · {spectrumLabel(state.personality)}</p>
+
+  {#if dynasty}
+    <p class="dynasty">
+      The House of <strong>{dynasty.houseName}</strong> endured
+      <strong>{dynasty.span}</strong> years across
+      <strong>{dynasty.generations}</strong>
+      {dynasty.generations === 1 ? "generation" : "generations"} —
+      <strong>{dynasty.members}</strong>
+      {dynasty.members === 1 ? "soul" : "souls"} born into the line.
+    </p>
+  {/if}
 
   <dl class="stats">
     <div><dt>Net worth</dt><dd>{formatMoney(state.meters.money)}</dd></div>
@@ -113,6 +137,21 @@ const poleLabel = $derived(moralPoleLabel(state));
   }
   .year {
     color: var(--mmm-text-dim);
+  }
+  /* The dynastic epitaph (PL-9): the saga's whole point — the line, not the life. */
+  .dynasty {
+    margin: 0.75rem auto 0;
+    max-width: 30rem;
+    font-family: var(--mmm-font-body);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--mmm-text);
+    border-top: 1px solid color-mix(in srgb, var(--mmm-gold-deep) 50%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--mmm-gold-deep) 50%, transparent);
+    padding: 0.6rem 0;
+  }
+  .dynasty strong {
+    color: var(--mmm-gold);
   }
   .stats {
     display: grid;
