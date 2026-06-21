@@ -42,9 +42,14 @@ the code, screenshotting), and compress (mark [x] / remove) as they ship. Each l
 picks the current highest-value [ ] item.
 
 ### Queue (living — expand on discovery, compress on completion)
-- [ ] **PL-1 Title wordmark divider overlap.** The TitleScreen "Dynasty" wordmark has a
-  decorative rule/divider visually crossing the glyph descenders (seen in live screenshot).
-  Fix the layering/spacing so the divider sits clear below the wordmark.
+- [x] **PL-1 Title wordmark divider overlap — FIXED** (commit e78db40). h1 descender bled
+  into the ornamental rule (tight line-height clipped the line-box); added
+  `padding-bottom:0.18em`. Verified via visual test + live screenshot.
+- [ ] **PL-2 Meter-change delta feedback.** The gauges animate the arc + pulse on crit, but
+  show NO delta when a meter moves after a choice — so the cause→effect (the core
+  butterfly mechanic) is invisible. Add a brief `+N`/`−N` badge (gold-up / crit-down) that
+  appears on the gauge when its value changes, then fades. Discovered while playtesting the
+  PlayScreen this cycle.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
