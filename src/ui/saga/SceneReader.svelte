@@ -267,10 +267,14 @@ function chooseBeat(i: number) {
 
   .para {
     margin: 0;
+    /* UQ-UI-4 (Suzerain technique #1): cap the prose to a MEASURED reading column (~62ch) so a line
+       never runs the full panel width — the single biggest anti-wall-of-text lever. The container keeps
+       its sense-wash border at 42rem; the text itself reads as a narrow column within it. */
+    max-width: 62ch;
     font-family: var(--mmm-font-body);
     /* Novel-readable: generous measure + leading, serif body. One paragraph holds the focus. */
     font-size: 1.18rem;
-    line-height: 1.85;
+    line-height: 1.8;
     color: var(--mmm-text);
     text-wrap: pretty;
     animation: page-in 0.4s ease both;
@@ -304,12 +308,17 @@ function chooseBeat(i: number) {
     50% { opacity: 0.7; }
   }
 
-  /* OPTIONS folded into the story: glowing, pulsing, bigger than the body — not buttons. */
+  /* OPTIONS folded into the story: glowing, pulsing, bigger than the body — not buttons.
+     UQ-UI-4 (Suzerain #4/#5): a hairline rule lifts the choice block off the prose (the "section break"
+     that signals story→decision) + a measured column, WITHOUT turning the glow into generic buttons. */
   .choices {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 0.6rem;
+    margin-top: 1.1rem;
+    padding-top: 1rem;
+    max-width: 62ch;
+    border-top: 1px solid color-mix(in srgb, var(--sense-accent, var(--mmm-gold-deep)) 40%, transparent);
   }
   .inline-option {
     appearance: none;
@@ -317,15 +326,26 @@ function chooseBeat(i: number) {
     background: none;
     text-align: left;
     align-self: flex-start;
-    padding: 0.2rem 0;
+    /* A leading glyph marks each as a discrete, choosable thing (the Suzerain affordance) — a glow dash,
+       not a box, so it reads as "a path you take," consistent with the folded-into-story design. */
+    padding: 0.2rem 0 0.2rem 1.4rem;
+    position: relative;
     cursor: pointer;
     font-family: var(--mmm-font-display);
-    font-size: 1.32rem;
+    font-size: 1.3rem;
     line-height: 1.45;
     letter-spacing: 0.01em;
     color: var(--mmm-gold-bright);
     text-shadow: 0 0 8px color-mix(in srgb, var(--mmm-gold) 55%, transparent);
     animation: option-glow 2.6s ease-in-out infinite;
+  }
+  .inline-option::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    top: 0.2rem;
+    color: var(--sense-accent, var(--mmm-gold));
+    opacity: 0.8;
   }
   /* A major (fate-fork) decision's options read heavier. */
   .decision[data-tier="major"] .inline-option {
