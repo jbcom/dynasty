@@ -88,9 +88,25 @@ beat/decision text per slot, grounded in wave×class×era×motivators, validated
 
 ## Migration / scope
 
-- New schema + loader for `src/data/saga/**`.
-- Retire `epoch0.json` + the played `events.json` narrative path (world backdrop stays).
+- New schema + loader for `src/data/saga/**`. ✅
 - Wire the act/scene reader into the engine + a Suzerain-style scene UI (multi-paragraph prose,
-  optional codex, tiered choices) under `src/ui/saga/`.
+  optional codex, tiered choices) under `src/ui/saga/`. ✅
+- GenAI `--type scene` + a full-lattice sweep to flesh every wave×archetype×tier act. ✅
+
+### Retiring Epoch-0 — the use-case split
+
+Epoch-0 conflated TWO jobs; only ONE is rejected:
+
+1. **Narrative onboarding** (birth → overhear-the-year → name → station → schooling → calling) —
+   REJECTED. The saga acts replace it; the tier-0 act IS the opening and never re-states when/where.
+2. **Succession MECHANICS** — the repeatable `ev_cp_take_partner` / `ev_cp_raise_heirs` beats drive
+   partner → beget → `succeed()` → continue-as-heir (effects.ts). Lineage + the harness depend on
+   them. These are KEPT, but MOVED into the act model: a scene `Decision` option gains optional
+   `succession` effects (`takesPartner` / `begets`) so advancing through the novel's `close` scene
+   naturally steps the generation — which also drives the act-runner's reach tier (the loose end where
+   nothing currently advances generations in saga mode). The narrative `epoch0.json` files are deleted;
+   the world-timeline/backdrop facts and the non-narrative succession effects survive in the new home.
+
 - Acceptance: a run reads as a novel (multi-paragraph scenes, not fragments); no re-confirming
-  period/wave; titled acts; intersections fire; 0 leaks; hour+; bit-identical replay.
+  period/wave; titled acts; intersections fire; 0 leaks; hour+; bit-identical replay; the line
+  advances generation-by-generation through the acts (no extinction-in-one-generation regression).

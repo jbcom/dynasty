@@ -34,20 +34,34 @@ export const BeatSchema = z.object({
 });
 export type Beat = z.infer<typeof BeatSchema>;
 
+/**
+ * The SUCCESSION effect a decision option may carry — the one Epoch-0 mechanic that survives the
+ * novel migration. A `close`-scene option that takes a partner / begets heirs steps the line to the
+ * next generation (partner → beget → succeed), which also advances the act-runner's reach tier.
+ * Absent on ordinary options (the common case). Numbers are small counts.
+ */
+export const SuccessionEffectSchema = z.object({
+  takesPartner: z.boolean().default(false),
+  begets: z.number().int().min(0).default(0),
+});
+export type SuccessionEffect = z.infer<typeof SuccessionEffectSchema>;
+
+/** A single option on a scene's terminal decision. */
+export const DecisionOptionSchema = z.object({
+  text: z.string().min(1),
+  motivatorShift: MotivatorShiftSchema.default({}),
+  setFlags: z.array(z.string()).default([]),
+  divertTo: z.string().optional(),
+  /** Optional life-stage effect — moving the line to the next generation (the kept Epoch-0 mechanic). */
+  succession: SuccessionEffectSchema.optional(),
+});
+export type DecisionOption = z.infer<typeof DecisionOptionSchema>;
+
 /** The terminal DECISION of a scene — tiered (a fate-fork vs a lighter secondary choice). */
 export const DecisionSchema = z.object({
   tier: z.enum(["major", "secondary"]).default("secondary"),
   prompt: z.string().min(1),
-  options: z
-    .array(
-      z.object({
-        text: z.string().min(1),
-        motivatorShift: MotivatorShiftSchema.default({}),
-        setFlags: z.array(z.string()).default([]),
-        divertTo: z.string().optional(),
-      }),
-    )
-    .min(2),
+  options: z.array(DecisionOptionSchema).min(2),
 });
 export type Decision = z.infer<typeof DecisionSchema>;
 
