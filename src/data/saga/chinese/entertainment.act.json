@@ -1,0 +1,2254 @@
+{
+  "acts": [
+    {
+      "id": "act:chinese:entertainment:t0",
+      "wave": "chinese",
+      "archetype": "entertainment",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — The Crossing",
+      "scenes": [
+        "act:chinese:entertainment:t0:open",
+        "act:chinese:entertainment:t0:rising",
+        "act:chinese:entertainment:t0:midpoint",
+        "act:chinese:entertainment:t0:turn",
+        "act:chinese:entertainment:t0:close"
+      ]
+    },
+    {
+      "id": "act:chinese:entertainment:t1",
+      "wave": "chinese",
+      "archetype": "entertainment",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — The New Ground",
+      "scenes": [
+        "act:chinese:entertainment:t1:open",
+        "act:chinese:entertainment:t1:rising",
+        "act:chinese:entertainment:t1:midpoint",
+        "act:chinese:entertainment:t1:turn",
+        "act:chinese:entertainment:t1:close"
+      ]
+    },
+    {
+      "id": "act:chinese:entertainment:t2",
+      "wave": "chinese",
+      "archetype": "entertainment",
+      "tier": 2,
+      "macroAct": "emergence",
+      "title": "Act III — The Climb",
+      "scenes": [
+        "act:chinese:entertainment:t2:open",
+        "act:chinese:entertainment:t2:rising",
+        "act:chinese:entertainment:t2:midpoint",
+        "act:chinese:entertainment:t2:turn",
+        "act:chinese:entertainment:t2:close"
+      ]
+    },
+    {
+      "id": "act:chinese:entertainment:t3",
+      "wave": "chinese",
+      "archetype": "entertainment",
+      "tier": 3,
+      "macroAct": "emergence",
+      "title": "Act IV — A Name in the World",
+      "scenes": [
+        "act:chinese:entertainment:t3:open",
+        "act:chinese:entertainment:t3:rising",
+        "act:chinese:entertainment:t3:midpoint",
+        "act:chinese:entertainment:t3:turn",
+        "act:chinese:entertainment:t3:close"
+      ]
+    },
+    {
+      "id": "act:chinese:entertainment:t4",
+      "wave": "chinese",
+      "archetype": "entertainment",
+      "tier": 4,
+      "macroAct": "ascension",
+      "title": "Act V — The World Player",
+      "scenes": [
+        "act:chinese:entertainment:t4:open",
+        "act:chinese:entertainment:t4:rising",
+        "act:chinese:entertainment:t4:midpoint",
+        "act:chinese:entertainment:t4:turn",
+        "act:chinese:entertainment:t4:close"
+      ]
+    },
+    {
+      "id": "act:chinese:entertainment:t5",
+      "wave": "chinese",
+      "archetype": "entertainment",
+      "tier": 5,
+      "macroAct": "ascension",
+      "title": "Act VI — The Reach for the Stars",
+      "scenes": [
+        "act:chinese:entertainment:t5:open",
+        "act:chinese:entertainment:t5:rising",
+        "act:chinese:entertainment:t5:midpoint",
+        "act:chinese:entertainment:t5:turn",
+        "act:chinese:entertainment:t5:close"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "act:chinese:entertainment:t0:open",
+      "sense": "smell",
+      "prose": [
+        "The cloying scent of stale humanity, salt spray, and boiled rice clung to everything, a heavy shroud woven into the very timbers of the ship. Below deck, the air was a thick, humid brew, each breath a struggle against the accumulated odors of a hundred hopeful, fearful souls packed together like cargo. The rhythmic creak of the hull and the distant groan of the engines were constant companions, lulling some into a restless sleep, while others, like {given_name} {surname}, found themselves wide-eyed in the dimness, their senses overwhelmed.",
+        "Days blurred into a monotonous cycle of hunger and anticipation, each sunrise bringing no land, only the endless, heaving expanse of the ocean. The smell of fear, a sharp, metallic tang, was almost palpable amongst the passengers, though it was often masked by the pungent fumes of sweat and unwashed clothes. It was a smell that promised both a new beginning and an uncertain end, a scent that would forever be intertwined with the memory of this journey.",
+        "Then, a new aroma began to filter down, faint at first, then growing stronger: the distinct, earthy smell of damp soil and unknown vegetation, carried on a breeze that felt different, cleaner. It was the scent of land, a promise whispered on the wind, cutting through the ship's internal miasma with a sudden, potent clarity. Hope, a fragile seedling, began to unfurl within the cramped confines, nurtured by this fresh, life-giving breath."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A small, impromptu performance, a flicker of light in the ship's perpetual gloom, offered a momentary escape from the oppressive stench and ceaseless rocking."
+          ],
+          "choice": {
+            "text": "Lead a song or tell a story to lift spirits.",
+            "motivatorShift": {
+              "tradition": 1,
+              "honor": 1,
+              "worldview": 1,
+              "wealth": 0,
+              "politics": 0,
+              "power": 0,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "acted_on_ship"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The gnawing hunger and pervasive damp forced a more pragmatic approach, scanning the sparse provisions for any advantage."
+          ],
+          "choice": {
+            "text": "Seek out extra rations or warmer blankets, quietly.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1,
+              "reach": 1,
+              "politics": 0,
+              "worldview": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0
+            },
+            "setFlags": [
+              "secured_ship_resource"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t0:rising"
+    },
+    {
+      "id": "act:chinese:entertainment:t0:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough, splintered wood of the dock dug into {given_name}'s palms as they helped tie off the lines, the cold, gritty bite of the city air a sharp contrast to the humid ship. The sheer press of bodies, a swirling tide of shouting porters, bewildered immigrants, and watchful officials, felt like a physical weight against the chest. Every jostle, every accidental brush, was a stark reminder of their new, precarious footing on this foreign soil, a territory both solid beneath their worn boots and utterly alien.",
+        "The chill of the autumn wind found every gap in their thin clothing, a constant, nagging touch that spoke of vulnerability. Carrying their meager belongings, the rough fabric of their sack chafed against a shoulder already weary from the journey, each step a testament to sheer willpower. The ground beneath them, a patchwork of uneven cobblestones and slick mud, offered no easy passage, demanding a careful, deliberate pace amidst the hurried throng.",
+        "Later, in the cramped room they found, the rough-hewn boards of the floor felt cold and unyielding against bare feet. Every surface, from the threadbare blanket to the shared cup, bore the marks of countless others who had passed through, a tactile history of struggle and endurance. This was their first touch of this new world beyond the confines of the ship, a world that offered little comfort but demanded much."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A sudden opportunity arose to showcase their talents, a chance to make their mark not with brawn, but with grace and practiced skill."
+          ],
+          "choice": {
+            "text": "Perform a street act for loose change, drawing a small crowd.",
+            "motivatorShift": {
+              "wealth": 1,
+              "lineage": 1,
+              "worldview": 1,
+              "politics": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "performed_street"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The immediate need for shelter and food outweighed the desire for artistry, demanding a more immediate, physical form of labor."
+          ],
+          "choice": {
+            "text": "Take on a day-labor job, loading cargo on the docks.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1,
+              "reach": 1,
+              "politics": 0,
+              "worldview": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0
+            },
+            "setFlags": [
+              "worked_docks"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The meager earnings barely cover the rent. How will you provide for the family in the coming weeks?",
+        "options": [
+          {
+            "text": "Invest in a small, portable stage and props to improve street performances, aiming for bigger crowds.",
+            "motivatorShift": {
+              "wealth": 2,
+              "worldview": 1,
+              "lineage": 1,
+              "politics": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "invested_performance"
+            ]
+          },
+          {
+            "text": "Seek more consistent, though low-paying, factory work, ensuring steady income, however small.",
+            "motivatorShift": {
+              "wealth": 1,
+              "tradition": 1,
+              "power": -1,
+              "politics": 0,
+              "worldview": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "secured_factory_work"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t0:midpoint"
+    },
+    {
+      "id": "act:chinese:entertainment:t0:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The clamor of the immigrant ward was a relentless symphony: the hawkers’ cries echoing against the brick, the rhythmic clang of a blacksmith’s hammer from down the alley, and the hurried murmur of a dozen languages all blending into a vibrant, confusing hum. Above it all, the shrill laughter of children playing amidst the refuse mingled with the occasional, sharp shout of an argument, painting a sonic landscape of both struggle and life. {given_name} {surname} found their ears constantly assaulted, trying to discern meaning amidst the chaotic urban overture.",
+        "Even the quiet moments offered little reprieve, filled with the distant rumble of carriages over cobblestones and the mournful wail of a factory whistle, a sound that carried the weight of countless hours worked. The sounds of their own community, the familiar lilt of their dialect, the gentle strum of a guzheng from an upstairs window, were anchors in this sea of foreign noise, momentary comforts that whispered of home, yet felt increasingly distant.",
+        "A new sound, more guttural and demanding, began to creep into the soundscape – the shouts of rival groups, the clatter of hastily erected street stalls, and the insistent rhythm of their own music struggling to be heard over the din. It was the sound of a city in flux, of territories being claimed and defended, and {full_name} knew their small family’s voice, their particular song, had to find its place within this overwhelming chorus."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A vibrant, unexpected opportunity arose to bridge the divides of the city, using the universal language of entertainment to find common ground."
+          ],
+          "choice": {
+            "text": "Perform at a multi-ethnic street festival, embracing varied audiences.",
+            "motivatorShift": {
+              "worldview": 1,
+              "reach": 2,
+              "politics": 1,
+              "wealth": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0
+            },
+            "setFlags": [
+              "performed_interethnic"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The comfort and support of their own people offered a sense of security, reinforcing the bonds that had brought them this far."
+          ],
+          "choice": {
+            "text": "Organize a performance specifically for their own community's gathering.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "honor": 1,
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "performed_intraethnic"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t0:turn"
+    },
+    {
+      "id": "act:chinese:entertainment:t0:turn",
+      "sense": "sight",
+      "prose": [
+        "The vibrant, yet often stark, tapestry of the immigrant ward stretched before {given_name}'s eyes – a dizzying array of laundry strung between tenements, the splash of colorful fabrics in market stalls, and the grim grey of industrial smoke staining the sky. Every storefront, every alleyway, told a story of hardship and resilience, a visual testament to the burgeoning life here. The faces in the crowd, a mix of their own people and countless others, all wore the same faint lines of hope and struggle etched around their eyes.",
+        "From a rooftop perch, the landscape was a sprawling, chaotic mosaic. Below, children chased pigeons through narrow streets, their movements a blur of innocent energy against the backdrop of imposing, unfamiliar architecture. The vibrant red lanterns hanging outside a newly opened tea house stood in stark contrast to the faded, peeling paint of the buildings around it, a symbol of a culture trying to assert itself amidst the foreignness.",
+        "The path ahead, however, was not yet clear, only visible as a series of choices laid out like divergent roads in the dusty streets. Each intersection, each new building being raised, represented a future being built, and {full_name} could distinctly see the outlines of different fates for their family, for their community, depending on the direction they chose to walk, depending on the mark they decided to make on this visible, tangible world."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The elegant movements of traditional opera, the intricate narratives of shadow puppetry, felt like a powerful way to keep the cultural flame burning amidst the alien landscape."
+          ],
+          "choice": {
+            "text": "Establish a small performance troupe focused on classical Chinese arts.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 2,
+              "honor": 1,
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "founded_classical_troupe"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The vibrant energy of the new world seemed to call for something fresh, a blend of the old and the new that could captivate audiences beyond their immediate community."
+          ],
+          "choice": {
+            "text": "Experiment with fusion performances, incorporating local instruments and stories.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 2,
+              "politics": 1,
+              "wealth": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0
+            },
+            "setFlags": [
+              "founded_fusion_troupe"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The immigrant ward is growing, but so are the tensions. How will your family's entertainment shape its future?",
+        "options": [
+          {
+            "text": "Focus solely on preserving traditional Chinese performing arts, establishing a cultural bedrock for the community.",
+            "motivatorShift": {
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -1,
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0
+            },
+            "setFlags": [
+              "committed_traditional_arts"
+            ]
+          },
+          {
+            "text": "Innovate and adapt, blending Chinese artistry with American influences to create accessible, widely appealing shows.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 2,
+              "wealth": 1,
+              "tradition": -1,
+              "politics": 0,
+              "power": 0,
+              "honor": 0,
+              "lineage": 0
+            },
+            "setFlags": [
+              "committed_fusion_arts"
+            ]
+          },
+          {
+            "text": "Use performances as a platform for social commentary, highlighting the struggles and advocating for immigrant rights.",
+            "motivatorShift": {
+              "politics": 3,
+              "worldview": 2,
+              "power": 2,
+              "honor": 1,
+              "wealth": 0,
+              "tradition": 0,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "committed_social_commentary"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t0:close"
+    },
+    {
+      "id": "act:chinese:entertainment:t0:close",
+      "sense": "taste",
+      "prose": [
+        "The lingering taste of bitter medicinal tea, a comfort brewed from generations of knowledge, settled on {given_name}'s tongue, a subtle reminder of the roots that ran deep despite the new soil. It was the taste of endurance, of resilience, a flavor that had accompanied them through the journey and through the arduous years of building something from nothing. Even the celebratory taste of sweet mooncakes, rare and cherished, carried a faint undertone of struggle, a flavor earned through hard-won gains.",
+        "As the years stretched on, the taste of success, however modest, was a complex blend: the sharp tang of ambition satisfied, the mellow sweetness of a community served, and perhaps a faint, metallic hint of the sacrifices made. The food on their table, no longer a mere necessity but a small luxury, carried the flavor of their collective effort, a testament to what had been built with bare hands and an unbreakable spirit. This was the taste of their generation’s legacy, potent and unforgettable.",
+        "Passing a freshly steamed bun, still warm and fragrant, to the next generation, {given_name} tasted not just the sweet filling, but the potential it represented. It was the taste of a future they had fought to secure, a future imbued with the flavors of both their heritage and the new world they now called home. This was the taste of continuity, of a line unbroken, a foundation laid with grit and grace, ready for the next to build upon."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The intricate choreography of a traditional dance, the complex scales of an ancient melody, these were not just performances but heirlooms, tangible links to a past that must endure."
+          ],
+          "choice": {
+            "text": "Teach the next generation the nuances of classical Chinese performance.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 2,
+              "honor": 1,
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "passed_classical_skills"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The world was changing, and with it, the art. The raw energy of new musical forms, the dynamic stories of modern life, offered fertile ground for new expressions."
+          ],
+          "choice": {
+            "text": "Encourage the next generation to experiment with new performance styles.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 2,
+              "wealth": 1,
+              "politics": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0
+            },
+            "setFlags": [
+              "passed_innovative_spirit"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:entertainment:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The air in this new place was a constant symphony of unfamiliar odors, a stark departure from the dense, familiar scent of spiced silks and oiled wood that had clung to their old stage. Here, the sharp tang of freshly cut pine mingled with the damp, earthy aroma of churned soil, a testament to the ceaseless, hungry expansion of the settlement. Beneath it all, a faint, metallic whisper of distant train smoke sometimes carried on the wind, a promise of industry and the relentless forward march of this new world.",
+        "Today, the pervasive smell was that of sweat and desperation, an acrid perfume clinging to {full_name}'s clothing as they wrestled with obstinate timbers, coaxing a semblance of a stage from the raw materials at hand. The makeshift theatre, little more than a raised platform under a canvas awning, still held the ghosts of yesterday's meals – a faint, savory memory of fried rice and ginger, quickly dissipating in the harsher realities of construction. Each breath filled the lungs with the dust of new beginnings, heavy and promising.",
+        "Yet, amidst the struggle, a delicate, sweet fragrance occasionally drifted from the sparse wildflowers stubbornly blooming at the edge of the property, a defiant splash of beauty against the backdrop of raw earth. It was a fleeting reminder of the quiet grace that could still be found, even in the most arduous of undertakings, a subtle counterpoint to the more potent scents of ambition and toil. The line was laying its foundation, not just in timber and nails, but in the very fabric of this foreign air."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The scent of cheap whiskey and boisterous laughter drifts from the nearby saloon, beckoning an immediate audience, however rough."
+          ],
+          "choice": {
+            "text": "Prioritize rapid opening nights, even if the performances are raw.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": -1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "entertainment_hasty_opening"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The faint, clean smell of freshly laundered linen from a neighboring boarding house suggests a more refined clientele, albeit a slower path to attracting them."
+          ],
+          "choice": {
+            "text": "Invest time in crafting polished acts to attract a more discerning audience.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 0,
+              "reach": -1
+            },
+            "setFlags": [
+              "entertainment_polished_acts"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t1:rising"
+    },
+    {
+      "id": "act:chinese:entertainment:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough-hewn planks of the stage floor bit into {full_name}'s knees as they knelt, painstakingly sanding away splinters that could catch a performer's gown or a dancer's foot. Every surface in their new dwelling, from the walls of the small attached living quarters to the benches for the audience, bore the evidence of their labor. Fingers, once agile with instruments or paintbrushes, were now calloused and stiff, aching from the unfamiliar heft of hammer and saw. This physical exertion was a constant, intimate reminder of their commitment to this new life.",
+        "The evenings brought little respite, the cold seeping through thin walls, urging {full_name} closer to the meager warmth of the hearth. Even the simple comfort of a worn blanket felt different here, its familiar texture a small anchor in the shifting currents of their new existence. The children, too, bore the marks of their migration; their small hands, once soft, were now accustomed to helping with chores, carrying water, or mending tattered costumes, learning resilience through touch.",
+        "The very air seemed to press down with the weight of expectation. Every decision, every penny spent, every hour of effort felt tangible, a direct contributor to the fragile foundation they were constructing. It was a constant negotiation between the immediate, undeniable needs of the family—the hunger in a child's stomach, the damp chill in the bones—and the burning ambition to establish their craft, to make this raw settlement a place where their art could not only survive but truly flourish."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The splintery feel of raw timber against your palm reminds you of the unmade walls of your family's living space, still vulnerable to the elements."
+          ],
+          "choice": {
+            "text": "Direct funds towards improving the family's living conditions.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "household_improved"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The smooth, cool feel of newly bought stage fabric whispers of the potential for a more dazzling performance, but at the cost of immediate domestic comfort."
+          ],
+          "choice": {
+            "text": "Invest in finer stage materials and costumes for the performance.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "stage_upgraded"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The thin walls of the makeshift living quarters offer little protection from the elements, while the stage itself feels crude. How do you balance the pressing needs of your family's daily survival against the burgeoning demands of your artistic endeavor?",
+        "options": [
+          {
+            "text": "Prioritize the immediate comfort and health of the family, even if it delays the theatre's grandeur.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": -1,
+              "power": -1,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 3,
+              "reach": -1
+            },
+            "setFlags": [
+              "family_first"
+            ]
+          },
+          {
+            "text": "Focus on elevating the theatre's appeal, believing that success there will ultimately secure the family's future.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": -2,
+              "reach": 2
+            },
+            "setFlags": [
+              "theatre_first"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t1:midpoint"
+    },
+    {
+      "id": "act:chinese:entertainment:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The nascent town was a symphony of industrious chaos, its sounds a constant reminder of the burgeoning economy. From dawn till dusk, the rhythmic clanging of hammers against steel rang out from the new rail yard, mingling with the creak of laden wagons rumbling down the unpaved streets. The distant, throaty whistle of a steam engine announced new arrivals and departures, bringing with it both opportunity and competition. It was a cacophony of progress, a stark contrast to the quiet reverence of their traditional music.",
+        "Even during performances, the sounds of the outside world often bled into the theatre. The raucous laughter from the nearby saloon, the occasional shout of a street vendor, or the jingle of a peddler’s cart could momentarily drown out the delicate strains of a erhu or the rhythmic clatter of percussion. It was a struggle to hold the audience's attention against the tide of everyday life, demanding a greater vibrancy and volume from their craft, a constant adaptation to this louder, brasher world.",
+        "Yet, amidst the clamor, there were also moments of unexpected harmony. The polite applause of an appreciative audience, the hushed murmurs of children mesmerized by a storytelling act, or the shared laughter that erupted from a particularly well-timed comedic routine—these were the sounds that truly resonated, validating their difficult journey. Occasionally, a different kind of music drifted through the air, perhaps a mournful Irish ballad from a distant pub, a testament to the diverse currents that converged here, each seeking its own voice."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A rival showman's booming voice carries across the street, advertising an act promising 'exotic curiosities' that seem to directly compete with your unique cultural presentations."
+          ],
+          "choice": {
+            "text": "Double down on the authenticity of your traditional performances.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": -1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 0,
+              "reach": -1
+            },
+            "setFlags": [
+              "authenticity_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The cheerful jingle of a new general store opening nearby suggests a growing market for diverse entertainment, perhaps even collaboration."
+          ],
+          "choice": {
+            "text": "Seek out collaborations with local businesses to expand your audience.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "collaboration_sought"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t1:turn"
+    },
+    {
+      "id": "act:chinese:entertainment:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "The ever-changing landscape of the settlement was a constant spectacle, a testament to its rapid, sometimes chaotic, growth. Where once there was only raw earth, crude shacks now stood, gradually giving way to more substantial brick and timber structures. The dusty main thoroughfare, once a simple track, was now a nascent street, often teeming with a diverse array of faces: the weathered visages of miners, the stern expressions of merchants, and the curious glances of newly arrived families, all converging in this crucible of ambition.",
+        "From the modest entrance of their theatre, {full_name} observed the burgeoning neighborhood. The posters for their own shows, with their bold characters and vibrant imagery, competed for attention against printed advertisements for dry goods, sermons, and political rallies. The visual disparity between the well-dressed town elite and the more threadbare appearance of the immigrant communities was stark, a constant reminder of the social strata forming within this new ground. The line was a visible, yet distinct, thread in this complex tapestry.",
+        "The very future of the {family_name} name, and by extension their art, seemed to unfold before their eyes with each passing day. The town was a canvas, constantly being painted over with new dreams and structures, and the question loomed large: would they contribute a bold, defining stroke, or merely fade into the background as another fleeting shadow in the bustling, ever-expanding panorama? The next step, the next bold move, would define their place in this rapidly evolving world, etched into the very visual identity of the community."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You notice a large, empty lot adjacent to your theatre, a prime location for expansion or for another business to set up shop."
+          ],
+          "choice": {
+            "text": "Consider acquiring the adjacent lot for future theatre expansion.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 2,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "consider_expansion"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The sight of a new church being built down the street suggests a growing demand for community infrastructure beyond mere commerce and entertainment."
+          ],
+          "choice": {
+            "text": "Invest in local community projects to build goodwill and stability.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "community_investment"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The community around you is taking shape, and your theatre is a cornerstone, but its future direction is uncertain. Do you choose to anchor the {family_name} name deeply within your cultural roots, or do you broaden your appeal to integrate fully with the diverse, burgeoning population?",
+        "options": [
+          {
+            "text": "Establish a cultural hub, making the theatre a beacon for your heritage and community.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "cultural_hub_established"
+            ]
+          },
+          {
+            "text": "Diversify the acts and appeal to a broader audience, becoming a popular entertainment venue for all.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 1,
+              "power": 2,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": -1,
+              "reach": 3
+            },
+            "setFlags": [
+              "broad_appeal_theatre"
+            ]
+          },
+          {
+            "text": "Focus solely on financial expansion, turning the theatre into a profitable, scalable enterprise.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 0,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -3,
+              "honor": -2,
+              "lineage": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "profit_driven_enterprise"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t1:close"
+    },
+    {
+      "id": "act:chinese:entertainment:t1:close",
+      "sense": "taste",
+      "prose": [
+        "The lingering taste of success, however modest, was a complex blend—a sweetness of small victories mixed with the faint, persistent bitterness of hardships endured. This generation had built something from nothing, cultivating a fragile seed of entertainment in the raw soil of a new land. The memory of countless meals, simple and often scarce, had given way to more plentiful fare, though the appreciation for every morsel remained, deeply ingrained.",
+        "Even now, the familiar taste of home-cooked rice and savory stir-fries, prepared with ingredients both traditional and newly sourced, carried layers of meaning. It was the taste of perseverance, of adaptation, and of the unwavering spirit of the {family_name} line. But occasionally, there was the sharp, unfamiliar tang of a local beverage, shared with a non-Chinese neighbor after a successful show, marking a subtle shift in their standing within the wider community, a tentative bridge being built, one sip at a time.",
+        "As {full_name} looked towards their heir, the taste on their tongue was not just of their own journey, but of the legacy they were preparing to pass on. It was the robust, satisfying taste of a trade painstakingly learned and honed, imbued with the spirit of the old world and adapted with the ingenuity of the new. The standing they had carved out, fragile yet real, felt like the subtle aftertaste of good tea—a promise of continued refinement and deeper meaning for generations to come."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The potent taste of medicinal herbs, a common remedy from the old country, reminds you of the deep wisdom passed down through generations of healers and artists."
+          ],
+          "choice": {
+            "text": "Emphasize traditional methods and storytelling in the heir's training.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 3,
+              "honor": 1,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "heir_traditional_training"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The bright, sometimes overwhelming, flavor of new American candies hints at the popular tastes of the younger generation, a world away from ancestral palates."
+          ],
+          "choice": {
+            "text": "Encourage the heir to experiment with new forms and integrate local influences.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 1,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": -1,
+              "reach": 2
+            },
+            "setFlags": [
+              "heir_modern_training"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:entertainment:t2:open",
+      "sense": "smell",
+      "prose": [
+        "The cloying sweetness of stale opium mingled faintly with the sharper tang of cabbage stew and sweat, a familiar bouquet that permeated the narrow hallways of the tenement. It clung to the threadbare curtains, the rough wooden floorboards, and the very fibers of the family's working clothes, a constant reminder of their humble origins. Yet, beneath it all, a newer, fresher scent had begun to emerge – the faint, crisp aroma of newly laundered stage silks, painstakingly cleaned and pressed, a testament to the family's burgeoning success.",
+        "On performance nights, this underlying freshness vied with the acrid bite of burning lamp oil and the heady perfume of cheap theatrical powder. The air backstage, a tight space shared by many, was a symphony of human exertion and artificial glamour. Even the street outside, with its waft of horse manure and damp earth, seemed less oppressive when the scent of an audience's anticipation, a blend of excitement and curiosity, drifted in through the open doors.",
+        "This evolving palette of odors told the story of the {family_name} family's ascent. The lingering notes of poverty and struggle were still present, grounding them in the reality of their past, but increasingly, they were overlaid with the subtle, promising fragrances of opportunity, the clean scent of upward mobility, and the intoxicating perfume of a dream slowly taking shape beyond the confines of their cramped existence."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You inhale deeply, allowing the earthy, familiar smells of the district to ground you, a reminder of the community that nurtured your art."
+          ],
+          "choice": {
+            "text": "Embrace the authentic, humble essence of your roots.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "rooted_tradition"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You catch a whiff of the cleaner air from the more prosperous parts of the city, a scent that promises refinement and broader horizons."
+          ],
+          "choice": {
+            "text": "Focus on the aspirational scents, envisioning a life beyond the tenement's walls.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "aspire_refinement"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t2:rising"
+    },
+    {
+      "id": "act:chinese:entertainment:t2:rising",
+      "sense": "touch",
+      "prose": [
+        "The calluses on {given_name}'s fingertips, once rough and unyielding from years of street performances, had softened slightly, replaced by a more refined sensitivity. The strings of the pipa, once familiar companions in countless humble halls, now felt different under their touch, played for audiences in grander venues, demanding a precision and grace that transcended mere showmanship. The touch of new fabrics, finer silks, and smoother wood for their instruments marked a tangible shift, a quiet affirmation of their upward trajectory.",
+        "Yet, the deep-seated warmth of a parent's hand on their shoulder, the comforting brush of a sibling’s arm during a shared meal, remained the most profound sensations. These were the touches of loyalty, anchors in a world that increasingly pulled at the individual. The cold, crisp feel of a signed contract, promising greater earnings and wider recognition, often brought with it a subtle chill, a reminder of the solitary decisions that ambition sometimes demanded.",
+        "The pressure, both literal and figurative, was constant. The weight of heavy stage costumes, the demanding grip of a new musical composition, the subtle, expectant touch of a patron’s gaze – each sensation contributed to a growing internal tension. Balancing the personal drive to excel with the collective pull of family and community was a delicate act, a continuous negotiation felt deep within the bones."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You feel the smooth, cool surface of a new, more ornate instrument, a tangible reward for your relentless pursuit of excellence."
+          ],
+          "choice": {
+            "text": "Relish the tactile proof of your improving craft and social standing.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "embrace_ambition_rewards"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your hand instinctively reaches for the worn, familiar texture of an old family keepsake, a comfort amidst the newness."
+          ],
+          "choice": {
+            "text": "Cherish the familiar, grounding touch of family and heritage.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "reaffirm_loyalty"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How do you balance the growing demands of your ambition with the needs of your extended family and community?",
+        "options": [
+          {
+            "text": "Prioritize the family's collective ascent, ensuring everyone benefits from each step forward.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "collective_ascent"
+            ]
+          },
+          {
+            "text": "Seek individual opportunity, believing your personal success will ultimately uplift the entire line.",
+            "motivatorShift": {
+              "power": 2,
+              "reach": 2,
+              "lineage": -1
+            },
+            "setFlags": [
+              "individual_opportunity"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t2:midpoint"
+    },
+    {
+      "id": "act:chinese:entertainment:t2:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cacophony of the old district, a relentless symphony of hawkers' cries, clattering carts, and street musicians, slowly receded into memory. Now, the dominant sounds were those of their improved circumstances: the gentle rustle of quality silk garments, the hushed murmur of polite conversation in more refined venues, and the distinct, clear ring of a cash register, signaling not just earnings, but sustained prosperity. The applause grew louder, more consistent, and deeply satisfying, echoing in grander halls than the cramped, smoky theaters of their past.",
+        "Even at home, the atmosphere had shifted. The loud, boisterous chatter of a crowded family meal now included the softer, more measured tones of respected guests – merchants, minor officials, even other artists who sought their collaboration. The music they created was no longer solely for survival; it now carried the weight of expectation and the vibrant energy of innovation, reaching ears that once would have dismissed them out of hand. Each note, each spoken word, carried a new resonance, a testament to their rising influence.",
+        "One evening, as the family celebrated a particularly successful performance, a peculiar melody drifted in from the street below – a tune not of their own people, nor of the European waltzes that were growing popular. It was distinct, with a melancholic undertone, played on an instrument not quite familiar. It sparked a quiet curiosity, a momentary pause in their own joyous sounds, hinting at other paths, other lives, perhaps even other emerging narratives that shared the sprawling, complex tapestry of the city."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You revel in the harmonious sounds of your family's growing comfort and artistic renown, a melody of well-earned success."
+          ],
+          "choice": {
+            "text": "Lean into the sounds of your family's achievements, enjoying the fruit of your labor.",
+            "motivatorShift": {
+              "wealth": 2,
+              "honor": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "revel_in_success_sounds"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your ear catches the unfamiliar melody from outside, a compelling sound that stirs an impulse to explore beyond your immediate sphere."
+          ],
+          "choice": {
+            "text": "Investigate the intriguing, unfamiliar sounds, seeking new connections.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "explore_new_sounds"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t2:turn"
+    },
+    {
+      "id": "act:chinese:entertainment:t2:turn",
+      "sense": "sight",
+      "prose": [
+        "The city unfolded before {given_name}'s eyes like a vast, complex scroll. From the new windows of their improved dwelling, the familiar jumble of tenements now stretched into a horizon dotted with more imposing structures – banks, theaters, civic buildings of brick and stone. The faces in the crowds had diversified, a kaleidoscope of humanity, each gaze carrying its own story. The sight of their own name, carefully painted on a prominent playbill in the city's burgeoning entertainment district, was a powerful, almost dizzying affirmation of how far they had come.",
+        "They saw the bifurcated paths laid out before them. One path, well-lit and paved, led towards the grand, European-style theaters and institutions, promising wide acceptance and a reshaping of their art for a broader, predominantly Western audience. The other path, though narrower and less brightly lit, pulsed with the vibrant colors of their heritage – community halls, traditional festivals, and the faces of their own people, yearning for cultural anchors in a rapidly changing world.",
+        "The very architecture of the city mirrored this internal conflict. The imposing facades of the mainstream institutions seemed to offer solidity and permanence, a visual promise of security. Yet, the intricate, delicate beauty of traditional Chinese temples and newly established benevolent associations spoke of resilience, memory, and a different kind of strength. The choice now was not merely about art, but about identity, about what the {family_name} line would visually represent in this emerging urban landscape, and how their legacy would be seen for generations to come."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You gaze at the imposing structures of the city's established institutions, seeing opportunity in their grandeur and widespread influence."
+          ],
+          "choice": {
+            "text": "Focus on the visible paths to mainstream success and recognition.",
+            "motivatorShift": {
+              "power": 1,
+              "reach": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "embrace_mainstream_visibility"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your eyes are drawn to the vibrant, intricate details of your community's cultural spaces, a beacon of identity amidst the urban sprawl."
+          ],
+          "choice": {
+            "text": "Prioritize the visual preservation and celebration of your heritage.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "preserve_cultural_visibility"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {family_name} line establish its legacy within the burgeoning city, balancing integration with cultural distinctiveness?",
+        "options": [
+          {
+            "text": "Embrace mainstream institutions, adapting your art to shape and influence them from within.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 2,
+              "tradition": -2
+            },
+            "setFlags": [
+              "integrate_and_influence"
+            ]
+          },
+          {
+            "text": "Build new cultural spaces and traditions within your community, ensuring heritage thrives independently.",
+            "motivatorShift": {
+              "tradition": 3,
+              "lineage": 2,
+              "worldview": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "build_independent_heritage"
+            ]
+          },
+          {
+            "text": "Leverage your artistry to bridge divides, creating a unique hybrid form that appeals to all while honoring roots.",
+            "motivatorShift": {
+              "worldview": 3,
+              "honor": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "hybrid_cultural_bridge"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t2:close"
+    },
+    {
+      "id": "act:chinese:entertainment:t2:close",
+      "sense": "taste",
+      "prose": [
+        "The taste of bitterness had long faded, replaced now by the complex, satisfying flavors of their hard-won prosperity. Instead of simple rice gruel, the family table now offered a spread of rich, savory meats, delicately spiced vegetables, and sweet pastries brought from the finest bakeries in Chinatown and beyond. The occasional glass of imported wine, sharp and sophisticated, marked the celebrations of new partnerships and artistic triumphs, a stark contrast to the rough rice wine of earlier days. Each meal was not just sustenance, but a ceremony, a testament to their altered fortunes.",
+        "Yet, the most cherished tastes remained those linked to family and heritage: the familiar warmth of a grandmother's secret recipe for celebratory dumplings, the comforting sweetness of glutinous rice cakes made during festivals, their flavors steeped in generations of tradition. These were the tastes that connected them to their past, reminders of who they were before the spotlight found them, ensuring that the new, exciting flavors of success never entirely overshadowed their roots.",
+        "As {given_name} looked upon the next generation, they tasted the legacy being passed down. It was a rich, layered flavor: the potent tang of secured wealth, the smooth, comforting note of established connections, and the subtle, lingering aftertaste of cultural identity – a complex inheritance, designed to nourish and guide their descendants through the evolving landscape of the city, carrying the distinct and undeniable savor of the {family_name} name."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You savor the taste of rare imported delicacies, a tangible symbol of your family's elevated status and access to new worlds."
+          ],
+          "choice": {
+            "text": "Indulge in the sophisticated tastes of newfound wealth and global connections.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "savor_refined_palate"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The comforting, familiar taste of a traditional family dish brings a deep sense of belonging and continuity."
+          ],
+          "choice": {
+            "text": "Find satisfaction in the enduring flavors of your cultural and family traditions.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "cherish_traditional_flavors"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:entertainment:t3:open",
+      "sense": "smell",
+      "prose": [
+        "The distinct scent of success, thick and heady, clung to the very air of the theater. It was a complex blend of greasepaint and sweat, of aging velvet curtains and the faint, sweet decay of flower bouquets from ardent admirers. This was the unmistakable fragrance of a name, {family_name}, that now carried an undeniable weight, permeating every corner of the city, reaching far beyond the stage doors.",
+        "Beyond the hallowed halls, the aromas of roasting peanuts and candied ginger from street vendors mingled with the sharp tang of cigar smoke wafting from the wealthier boxes. It was a vibrant tapestry of scents, each thread a memory of the relentless climb from obscurity, now woven inextricably into the opulent fabric of a growing legacy. Even the crisp, new currency passing hands seemed to carry the faint, metallic scent of opportunity.",
+        "Yet, beneath these celebratory aromas, a sharper, more restless tang sometimes cut through – the underlying scent of ambition, of deals struck in smoky back rooms, of the quiet desperation of rivals fading into obscurity. The family’s name, once merely whispered in hushed tones, now resonated with the undeniable fragrance of influence, a scent that promised both power and its inevitable challenges."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You consider leaning into the grand spectacle, the lavish and popular appeal that draws such crowds."
+          ],
+          "choice": {
+            "text": "Embrace the public appetite for grand, accessible entertainment.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "entertainment_broad_appeal"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Perhaps a more refined approach is warranted, focusing on the unique artistry that first brought the family renown."
+          ],
+          "choice": {
+            "text": "Cultivate the unique artistry and depth of the {family_name} performance.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "entertainment_artistic_integrity"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t3:rising"
+    },
+    {
+      "id": "act:chinese:entertainment:t3:rising",
+      "sense": "touch",
+      "prose": [
+        "The smooth, cool feel of the freshly printed contract, heavier than any parchment you’d ever held, pressed against your palm. It wasn’t just paper; it was the tangible weight of a new expectation, a public trust, an empire growing that now demanded more than mere performance. The ink felt permanent, binding, a solid promise of future endeavors that stretched far beyond the footlights.",
+        "Later, the insistent, warm clasp of a promoter’s hand, too firm, too long, was a different kind of pressure. Their words, slick with promises of even greater fame and fortune, felt like fine silk, but underneath, you sensed the rough, unyielding fabric of their true intent – to mold {given_name} {surname}'s unique vision into something more broadly palatable, less singularly your own, a shape dictated by the market.",
+        "The stage itself, a familiar expanse of worn wood underfoot, now felt different. The vibrations of the audience, a rising tremor through the floorboards, pulsed with a fervent energy that was almost physical. It was no longer just applause; it was a collective demand, a hungry beast that had been fed well and now expected an even more opulent banquet of entertainment. This touch of power, exhilarating as it was, carried its own implicit costs, a palpable burden."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The direct confrontation with this pressure feels like the most honorable path, to assert your artistic control."
+          ],
+          "choice": {
+            "text": "Confront the promoter directly, refusing to compromise {full_name}'s artistic vision.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "resisted_compromise"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A subtle compromise, a gentle pivot, might achieve similar reach without sacrificing the core."
+          ],
+          "choice": {
+            "text": "Seek a subtle compromise, finding ways to adapt without fully surrendering.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "subtle_adaptation"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The public's appetite for sensation is growing. How will {full_name} respond to the demands for their next grand act?",
+        "options": [
+          {
+            "text": "Craft an even more daring and physically demanding spectacle, pushing the boundaries of performance.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "daring_spectacle"
+            ]
+          },
+          {
+            "text": "Return to the roots of {family_name} storytelling, emphasizing emotional depth and cultural authenticity.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "authentic_storytelling"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t3:midpoint"
+    },
+    {
+      "id": "act:chinese:entertainment:t3:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The roar of the crowd, once a simple wave of affirmation, now held a more complex symphony of expectations. It was punctuated by the sharp, decisive crack of flashbulbs from newly arrived photographers, the insistent rustle of newsprint being unfolded, and the distant, tinny strains of a rival troupe’s music, attempting to capture the city’s ear with a strikingly similar, though less refined, act. The cacophony of public life had grown exponentially.",
+        "Whispers followed {given_name} {surname} everywhere now, not merely of performance, but of influence. Political speeches echoed from the public squares, their grand pronouncements sometimes referencing the very spirit of entertainment {family_name} embodied, twisting it to their own partisan ends. Even the rhythmic clatter of new industries rising, steel on stone, seemed to hum with the energy of a nation being redefined, a definition that the family's art was inextricably tied to, for good or ill.",
+        "An insistent, high-pitched whine from a gramophone in a nearby parlor played a popular, yet deeply simplified, melody – a clear imitation of {family_name}’s groundbreaking style, stripped of its nuance and emotional depth. It was the sound of a legacy being commercialized, diluted, and challenged by others eager to capitalize on the wave you had created, an echo of the larger, competitive forces at play in a rapidly modernizing world."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The direct challenge to your artistic integrity demands a decisive response, perhaps a public statement or a legal action."
+          ],
+          "choice": {
+            "text": "Publicly challenge the imitators and defend the originality of the {family_name} legacy.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 0,
+              "power": 2,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "defended_legacy"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Alternatively, the true strength lies in continuing to innovate, letting the art speak for itself rather than engaging in disputes."
+          ],
+          "choice": {
+            "text": "Ignore the imitations and continue to innovate, letting the quality of the art speak for itself.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": -1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "innovate_further"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t3:turn"
+    },
+    {
+      "id": "act:chinese:entertainment:t3:turn",
+      "sense": "sight",
+      "prose": [
+        "The sprawling city unfolded below {full_name} from the highest balcony of the Grand Opera House, a vast tapestry of brick and steel under a bruised twilight sky. Streetcars snaked through illuminated avenues, their tracks a glinting testament to progress, while the distant glow of newly erected factory smokestacks painted the horizon with a fiery, restless energy. This was the vibrant, complex nation the family’s art now profoundly touched, a vista of boundless potential and stark contrasts.",
+        "On a nearby table lay two contrasting visions: a detailed blueprint for an extravagant, nationally-funded cultural center, designed to uplift and unify through the arts, and a series of stark, powerful political cartoons depicting the entertainment world as either a frivolous distraction or a revolutionary voice. The choice was stark, visible in the earnest faces of those who pleaded with {full_name} – the idealists with shining eyes, the pragmatists with calculating stares, each seeing the {family_name} name as a vessel for their own national dreams.",
+        "As {given_name} looked out, the reflection in the polished window showed not just their own image, but superimposed, the countless faces of the audience, the workers, the immigrants who looked to the stage for solace, inspiration, or simple escape. This generation, led by {full_name}, held the chisel to carve a significant, indelible mark upon the very identity of this emergent nation, a destiny visible in the vastness of the future."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The monumental opportunity to shape national culture through an official institution is a powerful draw."
+          ],
+          "choice": {
+            "text": "Consider the immense influence offered by a formal role in shaping national culture.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "consider_national_role"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Yet, the pitfalls of public alignment, of art becoming a tool for political ends, are equally clear."
+          ],
+          "choice": {
+            "text": "Reflect on the potential loss of artistic autonomy if allied too closely with government.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -1,
+              "worldview": 1,
+              "power": -1,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "autonomy_concern"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "With the nation looking to the {family_name} line for cultural leadership, how will {full_name} shape this generation’s legacy?",
+        "options": [
+          {
+            "text": "Accept a prominent national role, using {family_name}'s influence to unify and uplift through grand public arts initiatives.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": 1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "national_arts_leader"
+            ]
+          },
+          {
+            "text": "Decline official titles, maintaining independent artistic freedom to critique and inspire from a distance.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -2,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 0,
+              "reach": -1
+            },
+            "setFlags": [
+              "independent_artist"
+            ]
+          },
+          {
+            "text": "Focus {family_name}'s efforts on specific communities, building local cultural foundations for the long term.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "community_cultural_builder"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t3:close"
+    },
+    {
+      "id": "act:chinese:entertainment:t3:close",
+      "sense": "taste",
+      "prose": [
+        "The sharp, celebratory tang of champagne on the tongue mingled with the more profound, complex taste of a legacy now firmly established. It was a flavor savored in the quiet afterglow of the final, triumphant performance, a mix of hard-won success and the subtle bitterness of sacrifices made along the way. This generation’s mark was made, a distinct flavor upon the nation’s cultural palate.",
+        "Later, a simple, comforting bowl of {family_name}’s traditional family recipe, passed down through generations, offered a different kind of taste – earthy, nourishing, connecting the present triumph to the humble beginnings. It was a potent reminder that even amidst the grand national stages and political endorsements, the essence of who the family was, and what they stood for, endured, a deep, resonant base note.",
+        "As {full_name} contemplated the next heir, the metaphorical taste left in their mouth was not just of personal achievement, but of a shared national experience, a public sentiment crafted and cultivated. This was the defining flavor of a dynasty’s reputation, a complex blend of art, influence, and the undeniable imprint left upon the evolving palate of a nation, now ready to be passed on to the next generation."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The family’s name has become synonymous with a broad, national cultural identity, a legacy of wide reach."
+          ],
+          "choice": {
+            "text": "Reflect on the sweeping impact {family_name} has had on the nation’s cultural landscape.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "legacy_national_impact"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Alternatively, the true strength of the line lies in the preservation of its unique artistic voice, passed down intact."
+          ],
+          "choice": {
+            "text": "Focus on the unique artistic traditions and values to pass on to the next generation.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "legacy_artistic_purity"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:entertainment:t4:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of roasted chestnuts, sweet and earthy, mingled with the faint, metallic tang of new studio equipment. It was a familiar aroma, a comforting anchor amidst the swirling currents of global finance and cultural diplomacy that now defined the family’s daily life. A memory of street markets and bustling crowds, of simpler performances under makeshift tents, clung to the air, a constant reminder of how far the enterprise had come from its humble beginnings, yet also how deeply its roots remained entwined with the experiences of its people. Now, those same aromas wafted through the high-ceilinged offices of their international media conglomerate, a subtle but persistent echo of a legacy built not just on art, but on tenacity and community.",
+        "Beyond the executive suites, in the sprawling innovation labs, the sterile scent of ozone from humming servers and the faint, sweet perfume of newly printed brochures for the next global cultural festival represented the empire's vast reach. The air was thick with expectation, with the silent hum of countless transactions and creative endeavors spanning continents. This was the empire {full_name} had built, a tapestry woven from stories and dreams, from the very fabric of entertainment that had once sustained a struggling family, now capable of shaping narratives on a global stage. The sheer scale was breathtaking, an intricate network of studios, distribution channels, and cultural initiatives that touched every corner of the world where their wave had spread, and beyond.",
+        "A hint of jasmine tea, freshly brewed, cut through the industrial notes, a personal touch {full_name} insisted upon in their private conference room. It was a bridge between worlds, between the ancestral home and the gleaming towers of their global headquarters. The scent was a testament to their identity, a quiet declaration that even as they navigated the treacherous waters of international power, the essence of who they were, and where they came from, remained inextricably woven into their endeavors. Every deal, every new project, every cultural exchange bore the invisible signature of that enduring heritage."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You find yourself drawn to the quiet, ancestral rhythms that still pulse beneath the roar of global ambition."
+          ],
+          "choice": {
+            "text": "Lean into projects that deeply honor traditional art forms and cultural narratives.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "focus_heritage_projects"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Yet, the expansive potential of new markets and cutting-edge technologies calls to your pioneering spirit."
+          ],
+          "choice": {
+            "text": "Prioritize innovative ventures that push the boundaries of global entertainment and reach.",
+            "motivatorShift": {
+              "reach": 2,
+              "wealth": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "focus_innovative_reach"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t4:rising"
+    },
+    {
+      "id": "act:chinese:entertainment:t4:rising",
+      "sense": "touch",
+      "prose": [
+        "The polished mahogany of the boardroom table felt cool and smooth under your fingertips, a stark contrast to the rough-hewn stage planks of your grandparents’ era. Each meeting now carried the tangible weight of international consequence; every handshake sealed a deal that could ripple through global economies or reshape cultural perceptions on an unprecedented scale. The subtle tremor of an approaching transatlantic flight, felt faintly through the building's sturdy foundation, served as a constant reminder of the physical distances their influence now spanned, a network of personal connections and professional ventures stretched thin across the globe.",
+        "You felt the texture of a legal brief, thick and weighty, detailing the complexities of a new intellectual property dispute in a foreign court. It was a tangible representation of the intricate web of challenges that accompanied their global ascension, far removed from the simple squabbles over booking fees that once occupied the family. The very air in the room, conditioned to a precise temperature, felt dense with unspoken pressure, the kind that came from managing thousands of employees and billions in assets, from being a custodian of not just a family fortune, but a cultural legacy for an entire diaspora.",
+        "Later, the worn silk of a ceremonial robe, passed down through generations, offered a moment of comforting familiarity against your skin. This simple garment, with its delicate embroidery, felt lighter than the immense responsibilities pressed upon your shoulders by the global enterprise. It was a tactile connection to the foundational spirit of endurance and artistry that had carried the line from obscurity to the pinnacle of world influence, a reminder that while the stakes had grown monumental, the core values remained a guiding touchstone, felt in the very fibers of the past."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A rival studio, recently acquired by a conglomerate, makes an offer for a key distribution network you’ve cultivated in Southeast Asia."
+          ],
+          "choice": {
+            "text": "Negotiate a strategic partnership, maintaining partial control and shared influence.",
+            "motivatorShift": {
+              "politics": 1,
+              "reach": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "shared_distribution_network"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Alternatively, the proposition arises to divest entirely, consolidating your resources for a bold new venture in digital media."
+          ],
+          "choice": {
+            "text": "Sell the network outright, freeing capital for a transformative leap into emerging digital platforms.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 1,
+              "lineage": -1
+            },
+            "setFlags": [
+              "digital_media_pivot"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The annual cultural exchange program, a cornerstone of your family's global outreach, faces a funding shortfall. How do you address this?",
+        "options": [
+          {
+            "text": "Launch a global crowdfunding campaign, leveraging public sentiment and grassroots support.",
+            "motivatorShift": {
+              "worldview": 1,
+              "lineage": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "crowdfund_cultural_exchange"
+            ]
+          },
+          {
+            "text": "Reallocate funds from a less profitable commercial venture within the entertainment empire.",
+            "motivatorShift": {
+              "wealth": -1,
+              "tradition": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "reallocate_cultural_exchange"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t4:midpoint"
+    },
+    {
+      "id": "act:chinese:entertainment:t4:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The insistent, rhythmic clatter of teletype machines, long since replaced by fiber optics and satellite feeds, still echoed in the periphery of {full_name}'s memory, a ghost of how information once travelled. Now, the sound was that of countless news channels simultaneously broadcasting from across the globe, a low, pervasive hum heard from the control room of their media hub. The babel of languages—Mandarin, English, Hindi, Spanish—mingled into a single, overwhelming chorus, each voice a thread in the intricate tapestry of global public opinion. The stakes of shaping the century itself resonated in the very air, a constant reminder of the immense influence their narratives now held.",
+        "A sharp, distinct chime from a secure communication device cut through the general din, signaling an urgent message from a diplomat regarding a planned cultural summit. The subtle shift in the room’s ambient noise, as technicians adjusted feeds and analysts leaned closer to their screens, reflected the immediate pivot of attention. Even the soft rustle of documents being reviewed, the murmur of urgent whispered conversations, contributed to the symphony of global governance and soft power that was now their daily reality. It was a performance, grander and more far-reaching than any stage production, with the world as its audience.",
+        "From the next room, a sudden burst of classical music, unfamiliar yet distinctly European, momentarily caught {full_name}’s ear. It was the sound of a visiting dignitary, perhaps, or a new broadcast exchange being reviewed. This subtle intrusion of another cultural soundscape served as a reminder that while their line had achieved unparalleled reach, they were but one powerful voice in a choir of many, each with its own history and aspirations. The potential for collaboration, or indeed, friction, lingered in the very air, a quiet undercurrent to their ambitions."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A prominent global news agency criticizes your latest international film release for perceived historical inaccuracies."
+          ],
+          "choice": {
+            "text": "Issue a strong public defense, emphasizing artistic interpretation and cultural context.",
+            "motivatorShift": {
+              "honor": 1,
+              "worldview": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "defend_film_authenticity"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Concurrently, an opportunity arises to collaborate with a cutting-edge virtual reality firm to create entirely new, immersive historical experiences."
+          ],
+          "choice": {
+            "text": "Invest heavily in the VR collaboration, shifting focus towards future-forward storytelling.",
+            "motivatorShift": {
+              "reach": 2,
+              "wealth": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "invest_vr_history"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t4:turn"
+    },
+    {
+      "id": "act:chinese:entertainment:t4:turn",
+      "sense": "sight",
+      "prose": [
+        "From the panoramic window of the high-rise office, the sprawling metropolis below unfurled like an intricate circuit board, pulsing with the lifeblood of global commerce and culture. Airplanes, tiny silver darts, tracked their paths across the limitless sky, each carrying passengers and cargo, dreams and data, to the farthest reaches of the planet—a tangible manifestation of the interconnected world {full_name}'s family now influenced. The sheer scale of it all, the visible impact of their decisions reaching far beyond the immediate horizon, was a dizzying sight.",
+        "Your gaze fell upon a digital display flickering with live viewership numbers from a dozen different countries, showing audiences engaging with the very stories and cultural expressions the line had nurtured from its earliest days. It was a direct visual link to the hearts and minds of millions, a silent testament to the power of shared narratives. The images on the screen, ranging from a historical drama set in ancient China to a modern pop music video, demonstrated the breadth of their entertainment empire, binding together disparate communities under a shared cultural umbrella.",
+        "Across the room, a large, interactive map of the world glowed softly, dotted with countless markers representing their global studios, cultural centers, and philanthropic initiatives. The constellations of light signified their presence, their partnerships, their aspirations for an ever-expanding sphere of influence. This was not merely about entertainment anymore; it was about shaping narratives, bridging divides, and laying the cultural groundwork for generations to come. The question, stark and unavoidable, hung in the air like the shimmer above the city: how would this immense power be wielded in the pivotal moments that lay ahead?"
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A major global institution approaches your family with a proposition to fund an ambitious, multi-decade cultural infrastructure project, seeking to standardize global cultural exchange under a unified framework."
+          ],
+          "choice": {
+            "text": "Lend your full support and resources to the ambitious project, accepting the shared framework for greater stability.",
+            "motivatorShift": {
+              "politics": 2,
+              "reach": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "support_unified_cultural_framework"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Simultaneously, a consortium of smaller, independent cultural groups from various nations proposes a decentralized, grassroots network for exchange, emphasizing diverse, self-governed initiatives."
+          ],
+          "choice": {
+            "text": "Invest in the decentralized network, advocating for a multi-polar approach to global cultural exchange.",
+            "motivatorShift": {
+              "worldview": 2,
+              "lineage": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "invest_decentralized_cultural_network"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The world stands at a critical juncture, with rising tensions threatening global cooperation. Your family, as a world player, has the opportunity to decisively shape the narrative. What is your chosen path?",
+        "options": [
+          {
+            "text": "Leverage your media empire to promote universal themes of unity and shared humanity, bridging cultural divides through entertainment.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 2,
+              "politics": 1
+            },
+            "setFlags": [
+              "promote_global_unity"
+            ]
+          },
+          {
+            "text": "Focus your resources on strengthening your cultural and economic influence within your specific wave's diaspora, securing its global position.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "fortify_diaspora_influence"
+            ]
+          },
+          {
+            "text": "Strategically align with emerging global powers, utilizing your soft power to secure advantageous positions in the evolving world order.",
+            "motivatorShift": {
+              "power": 3,
+              "politics": 2,
+              "wealth": 1
+            },
+            "setFlags": [
+              "align_with_emerging_powers"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t4:close"
+    },
+    {
+      "id": "act:chinese:entertainment:t4:close",
+      "sense": "taste",
+      "prose": [
+        "The delicate bitterness of herbal tea, prepared exactly as {surname}'s ancestors had for centuries, settled on {full_name}'s tongue. It was a taste of continuity, a quiet counterpoint to the celebratory champagne that had flowed earlier at the signing of a landmark international treaty. This simple, earthy flavor was a reminder of the enduring foundations beneath the glittering facade of their global empire, a legacy built not just on grand gestures, but on the quiet strength of generations past. The world now tasted of ambition and triumph, but also, always, of roots.",
+        "Later, during an intimate dinner with the heir, the rich, complex flavors of a traditional family recipe filled the air – ginger, soy, and star anise, simmered to perfection. This meal was more than sustenance; it was a ritual, a passing down of more than just property and influence. It was the taste of their unique history, the struggle and the ascent, ingrained in every fiber of their being. The next generation would inherit an empire of unprecedented reach, but also the enduring flavors of their identity, a constant guide amidst the ever-changing global palate.",
+        "As the evening drew to a close, a rare vintage of aged brandy, a gift from a European dignitary, offered a different kind of taste – smooth, powerful, and utterly global. It was the taste of diplomacy, of shared tables with world leaders, of the vast cultural exchanges that now formed the bedrock of their line's influence. This was the empire {full_name} would pass on: an intricate weave of tradition and modernity, local heritage and global ambition, each flavor distinct, yet blending into a potent, unforgettable whole, ready for the heir to savor and expand."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You impart upon {given_name} the paramount importance of their cultural heritage as the true strength of the family's global standing."
+          ],
+          "choice": {
+            "text": "Emphasize the preservation and authentic projection of the family's deep cultural roots.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "heir_focus_heritage"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Yet, you also impress upon {given_name} the necessity of unyielding innovation and aggressive expansion into new, untapped global markets."
+          ],
+          "choice": {
+            "text": "Urge the heir to relentlessly pursue technological innovation and new market penetration.",
+            "motivatorShift": {
+              "reach": 2,
+              "wealth": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "heir_focus_innovation_expansion"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:entertainment:t5:open",
+      "sense": "smell",
+      "prose": [
+        "The sharp, sterile tang of recycled air, subtly sweetened by the faint, earthy scent of a traditional sandalwood incense stick burning in a small, concealed alcove, filled {full_name}'s private quarters aboard the interstellar vessel. Beyond the viewport, nebulae bloomed like celestial peonies, a stark contrast to the familiar, if now distant, blue marble of Earth. The aroma of synthetic floral air fresheners, a concession to modern space-station aesthetics, fought a losing battle against the enduring, comforting ghosts of ancestral traditions clinging to the meticulously maintained silk tapestries and polished, darkwood furniture.",
+        "Today, the {family_name} Line, once poor immigrants finding their voice in the vibrant, raucous music halls of a nascent frontier, stood at the precipice of another. The vastness of space was the new stage, the unblinking stars their new audience. A faint, almost imperceptible whiff of ozone from the ship's freshly calibrated grav-drives mingled with the more dominant, almost metallic note of their latest holographic projection equipment being tested in the grand performance dome below. This new world, Kepler-186f, awaited their inaugural performance, a testament to humanity’s enduring need for spectacle, even light-years from home.",
+        "{full_name} inhaled deeply, the mixture of ancient and ultra-modern scents a complex tapestry of their identity. The entertainment empire built by generations of {family_name}s was no longer confined to planetary stages; it now spanned the void, carrying culture and escapism to new colonies. This opening night, far from Earth, was not merely a show but a declaration, a planting of their banner in the cosmic dust, and the weight of that legacy, sweet and heavy, settled upon them with every breath."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A faint, warm scent of freshly brewed herbal tea from the galley reminds you of the quiet strength required to navigate these new frontiers, both personal and cosmic."
+          ],
+          "choice": {
+            "text": "Lean into the discipline and heritage of your forebears, seeking wisdom in quiet rituals.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "heritage_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The sterile, almost acrid smell of the ship's freshly sanitized performance stage wafts up through the ventilation, promising a clean slate and boundless possibilities."
+          ],
+          "choice": {
+            "text": "Embrace the cutting-edge technology and new opportunities of interstellar expansion.",
+            "motivatorShift": {
+              "reach": 2,
+              "worldview": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "innovation_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t5:rising"
+    },
+    {
+      "id": "act:chinese:entertainment:t5:rising",
+      "sense": "touch",
+      "prose": [
+        "The gentle, persistent hum of the starship's life support systems vibrated through the deck plating beneath {given_name}'s boots, a constant reminder of the thin veil separating them from the indifferent vacuum. Every surface, from the cool, polished alloy of the command console to the intricate, embroidered fabric of their traditional performance robe, felt charged with an electric anticipation. The texture of the synth-silk, smooth and resilient against their fingertips, offered a phantom comfort, a connection to the ancestors who had spun dreams from simpler threads.",
+        "A sudden, slight tremor, barely perceptible, ran through the floor as the ship adjusted its course around a rogue asteroid field. It was the universe's quiet pushback, a tangible pressure against humanity's bold expansion. {given_name}'s fingers instinctively tightened on the slim data-pad, its cool, smooth surface a familiar anchor in this alien environment. The challenge was not just performing under new stars, but truly *living* among them, making the impossible feel routine, and the extraordinary, accessible.",
+        "The holographic stage director's disembodied voice echoed through the cabin, detailing final adjustments to the grav-lift performance sequence. {given_name} ran a hand over the rough, unyielding surface of an emergency bulkhead, the coarse metal a stark counterpoint to the delicate artistry they were tasked with delivering. The weight of expectation, both from their family's formidable legacy and the eager, distant eyes of the new colony's populace, pressed down with palpable force."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You feel the robust, almost primitive thrum of the emergency atmospheric re-sequencer, a reminder of the raw mechanics keeping them alive in the void."
+          ],
+          "choice": {
+            "text": "Focus on the practicalities and fundamental survival ensuring the success of the mission.",
+            "motivatorShift": {
+              "politics": 1,
+              "power": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "pragmatic_approach"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The smooth, cool glass of the ship's main viewscreen, showing the distant, shimmering aurora of Kepler-186f, beckons with the promise of untouched beauty and creative inspiration."
+          ],
+          "choice": {
+            "text": "Seek inspiration in the untamed beauty of the cosmos for your next grand artistic vision.",
+            "motivatorShift": {
+              "reach": 2,
+              "worldview": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "artistic_inspiration"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The colonial administration requests a specific, culturally resonant performance to soothe rising tensions among different Earth-origin settler groups. This means delaying your planned avant-garde piece.",
+        "options": [
+          {
+            "text": "Prioritize the immediate needs of the colony, adapting your performance to foster unity.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "unity_performance"
+            ]
+          },
+          {
+            "text": "Insist on the artistic integrity of your planned work, believing true art transcends petty squabbles.",
+            "motivatorShift": {
+              "reach": 2,
+              "tradition": 1,
+              "politics": -2
+            },
+            "setFlags": [
+              "artistic_integrity"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t5:midpoint"
+    },
+    {
+      "id": "act:chinese:entertainment:t5:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cavernous echo of the Kepler-186f Grand Amphitheater, a geodesic dome carved into the crimson rock, swallowed the pre-show murmur of the audience and amplified every rustle of {full_name}'s costume. The hum of the holographic projectors, a low, resonant thrum, vibrated through the stage floor, a deep counterpoint to the soft, rhythmic patter of the pre-recorded rain-stick soundscape. The air was charged with anticipation, a collective intake of breath from thousands of diverse settlers, all looking to the {family_name} Line for a moment of shared wonder, of escape.",
+        "A sudden, jarring burst of static crackled from a comms panel backstage, followed by a clipped, authoritative voice announcing a delay in outer-colony shipments. It was a stark reminder of the fragile infrastructure underpinning humanity’s cosmic ambitions, a discordant note in the symphony of artistic creation. This wasn't merely entertainment; it was morale, a cultural anchor in a world still finding its footing. The stakes of {family_name}'s mark on the cosmos were raising with every new challenge faced by the colony, the subtle pressures becoming louder, more insistent.",
+        "Through the main speakers, a snippet of a rival's promotional jingle, sleek and synthetic, momentarily bled through the sound system, a stark reminder of other lines, other ambitions, vying for influence in this new frontier. Their approach, perhaps more overtly commercial, less rooted in the nuanced narratives of humanity’s journey, still sought to capture the hearts and minds of the same audience. The sound of thousands of expectant sighs, followed by the first, soaring notes of the orchestral opening, drowned out the competitive whisper, but the knowledge of their presence lingered, a shadow in the wings."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The clear, bell-like chime signaling the beginning of the performance cuts through the general clamor, demanding immediate focus and precision."
+          ],
+          "choice": {
+            "text": "Channel all energy into a flawless performance, letting the art speak for itself.",
+            "motivatorShift": {
+              "honor": 2,
+              "reach": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "artistic_excellence"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Overhearing hushed conversations about resource shortages and political maneuvering from the colonial leadership box, a dissonant hum against the rising overture, reveals the deeper struggles beneath the surface."
+          ],
+          "choice": {
+            "text": "Acknowledge the colony's socio-political climate, subtly weaving themes of resilience into the show.",
+            "motivatorShift": {
+              "politics": 2,
+              "worldview": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "social_commentary"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t5:turn"
+    },
+    {
+      "id": "act:chinese:entertainment:t5:turn",
+      "sense": "sight",
+      "prose": [
+        "Through the panoramic viewscreen of the observation deck, {given_name} beheld the sweeping vista of Kepler-186f’s nascent terraforming. Rivers, freshly carved, snaked across verdant plains, and the distant, shimmering glass towers of the new capital city caught the light of its orange dwarf sun. It was a canvas of human endeavor, grand and audacious, a testament to the boundless ambition that had brought their ancestors from crowded urban streets to the lonely, beautiful expanse of space. The raw, red hues of the undeveloped wilderness still gnawed at the edges of civilization, a constant reminder of the frontier's untamed heart.",
+        "The {family_name} Entertainment Corporation had grown from humble stage acts to a galactic empire of cultural influence, its holographic displays and immersive experiences shaping the very identity of new colonies. Now, they stood at a crossroads. Before them, a gleaming holographic proposal detailed the construction of an 'Interstellar Cultural Nexus' – a massive, orbital entertainment hub that promised unparalleled reach and unprecedented commercialization of art. Below, the developing settlements on the planet offered a more grounded path: direct cultural investment, fostering local artists, building community from the soil up.",
+        "{full_name}'s gaze drifted from the corporate projections to the faces of the settlers bustling below, a diverse tapestry of humanity seeking solace and meaning in this distant star system. The faces in the crowd reflected awe, hope, and a silent longing for connection. This choice would define not just the next generation of the {family_name} Line, but perhaps the cultural soul of these burgeoning stellar societies. Would their legacy be one of monumental, centralized spectacle, or one of distributed, organic growth? The vision before them was clear, but its interpretation, and its future impact, depended entirely on this pivotal decision."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The stark, angular lines of the Interstellar Cultural Nexus blueprint, gleaming with promise and efficiency, dominate the projection before you."
+          ],
+          "choice": {
+            "text": "Push for the orbital hub, centralizing entertainment and maximizing global reach.",
+            "motivatorShift": {
+              "reach": 2,
+              "wealth": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "orbital_hub_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You see the flickering lights of the planetary settlements below, small beacons of human ingenuity, suggesting a more organic, ground-up approach to cultural development."
+          ],
+          "choice": {
+            "text": "Advocate for direct investment in planetary cultural programs, fostering local artistic talent.",
+            "motivatorShift": {
+              "lineage": 2,
+              "worldview": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "local_culture_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {family_name} Line shape its legacy in these new star systems?",
+        "options": [
+          {
+            "text": "Establish the Interstellar Cultural Nexus, creating a centralized, profit-driven entertainment network across the stars.",
+            "motivatorShift": {
+              "wealth": 3,
+              "reach": 3,
+              "power": 2,
+              "tradition": -2,
+              "lineage": -1
+            },
+            "setFlags": [
+              "cosmic_capitalism"
+            ]
+          },
+          {
+            "text": "Invest heavily in planetary arts programs, using the Line's resources to cultivate diverse, localized cultural expressions on each new world.",
+            "motivatorShift": {
+              "worldview": 3,
+              "honor": 2,
+              "lineage": 2,
+              "wealth": -2,
+              "reach": -1
+            },
+            "setFlags": [
+              "cultural_stewardship"
+            ]
+          },
+          {
+            "text": "Merge the Line's entertainment empire with a scientific consortium, leveraging performance for public engagement and funding exploratory missions.",
+            "motivatorShift": {
+              "politics": 2,
+              "worldview": 3,
+              "power": 1,
+              "wealth": -1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "art_science_alliance"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:entertainment:t5:close"
+    },
+    {
+      "id": "act:chinese:entertainment:t5:close",
+      "sense": "taste",
+      "prose": [
+        "The lingering taste of ceremonial tea, brewed from leaves grown in a zero-gravity hydroponic garden, was both earthy and subtly metallic on {full_name}'s tongue. It was a flavor engineered for the stars, yet it carried the echoes of ancient rituals, a reminder of the generational passage. The blend was a secret recipe, passed down through the {family_name} Line, a small but potent connection to the culinary traditions of their distant ancestors, now reinterpreted for a universe far from Earth's soil.",
+        "Beside them, the younger {given_name} of the next generation, their designated heir, sipped from their own cup, an expression of quiet contemplation on their face. The taste of this moment, for {full_name}, was complex: the bittersweet tang of accomplishment, the quiet satisfaction of a legacy secured in the harsh embrace of the cosmos, mixed with the faint, almost imperceptible tartness of unspoken compromises made along the way. The stars were now a canvas, and the Line had painted its own vibrant strokes across it.",
+        "A final, delicate sweetness from the tea bloomed, a flavor of hope and continuity. The wealth of their entertainment empire was immense, its reach unparalleled, yet the truest inheritance was the narrative itself – the story of a family that had risen from obscurity to define culture among the stars. As {full_name} placed their empty cup down, the lingering taste was of a journey completed, and a new one about to begin for the next generation, whose destiny would be flavored by the choices made in this act of ascension."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The distinct, almost clinical taste of a synthetic nutrient bar, a staple for long-haul space travel, reminds you of the sacrifices made for interstellar progress."
+          ],
+          "choice": {
+            "text": "Emphasize practical resilience and adaptability as the key inheritance for the heir.",
+            "motivatorShift": {
+              "power": 1,
+              "politics": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "heir_resilience"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A delicate, floral essence, infused into a traditional rice cake, offers a soothing, familiar taste, connecting you to the enduring roots of your heritage."
+          ],
+          "choice": {
+            "text": "Instill in the heir the importance of cultural identity and the legacy of the Line's origins.",
+            "motivatorShift": {
+              "lineage": 2,
+              "honor": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "heir_heritage"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}

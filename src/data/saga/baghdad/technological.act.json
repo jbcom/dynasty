@@ -1,0 +1,2275 @@
+{
+  "acts": [
+    {
+      "id": "act:baghdad:technological:t0",
+      "wave": "baghdad",
+      "archetype": "technological",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — The Crossing",
+      "scenes": [
+        "act:baghdad:technological:t0:open",
+        "act:baghdad:technological:t0:rising",
+        "act:baghdad:technological:t0:midpoint",
+        "act:baghdad:technological:t0:turn",
+        "act:baghdad:technological:t0:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:technological:t1",
+      "wave": "baghdad",
+      "archetype": "technological",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — The New Ground",
+      "scenes": [
+        "act:baghdad:technological:t1:open",
+        "act:baghdad:technological:t1:rising",
+        "act:baghdad:technological:t1:midpoint",
+        "act:baghdad:technological:t1:turn",
+        "act:baghdad:technological:t1:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:technological:t2",
+      "wave": "baghdad",
+      "archetype": "technological",
+      "tier": 2,
+      "macroAct": "emergence",
+      "title": "Act III — The Climb",
+      "scenes": [
+        "act:baghdad:technological:t2:open",
+        "act:baghdad:technological:t2:rising",
+        "act:baghdad:technological:t2:midpoint",
+        "act:baghdad:technological:t2:turn",
+        "act:baghdad:technological:t2:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:technological:t3",
+      "wave": "baghdad",
+      "archetype": "technological",
+      "tier": 3,
+      "macroAct": "emergence",
+      "title": "Act IV — A Name in the World",
+      "scenes": [
+        "act:baghdad:technological:t3:open",
+        "act:baghdad:technological:t3:rising",
+        "act:baghdad:technological:t3:midpoint",
+        "act:baghdad:technological:t3:turn",
+        "act:baghdad:technological:t3:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:technological:t4",
+      "wave": "baghdad",
+      "archetype": "technological",
+      "tier": 4,
+      "macroAct": "ascension",
+      "title": "Act V — The World Player",
+      "scenes": [
+        "act:baghdad:technological:t4:open",
+        "act:baghdad:technological:t4:rising",
+        "act:baghdad:technological:t4:midpoint",
+        "act:baghdad:technological:t4:turn",
+        "act:baghdad:technological:t4:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:technological:t5",
+      "wave": "baghdad",
+      "archetype": "technological",
+      "tier": 5,
+      "macroAct": "ascension",
+      "title": "Act VI — The Reach for the Stars",
+      "scenes": [
+        "act:baghdad:technological:t5:open",
+        "act:baghdad:technological:t5:rising",
+        "act:baghdad:technological:t5:midpoint",
+        "act:baghdad:technological:t5:turn",
+        "act:baghdad:technological:t5:close"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "act:baghdad:technological:t0:open",
+      "sense": "smell",
+      "prose": [
+        "The stench of stale seawater, crowded bodies, and fear still clung to {given_name}'s clothes, a phantom limb of the arduous voyage. Even now, standing on unfamiliar cobblestones, the memory of the ship's hold, a labyrinth of sickness and hushed prayers, lingered in the back of their throat. The air here was sharp, unfamiliar, carrying hints of coal smoke and damp earth, utterly devoid of the jasmine and ancient spices that were the very breath of home.",
+        "The smells of the port city assaulted the senses: the metallic tang of exhaust from a passing streetcar, the greasy aroma of frying meat from a vendor's cart, and the faint, cloying sweetness of unfamiliar flowers from a nearby park. It was a cacophony of odors that spoke of industry and distant lands, a stark contrast to the dust and heat of Baghdad. Every inhale was a reminder of how far they had traveled, how utterly displaced they were, yet each new scent held a fragile promise, a new reality forming around them.",
+        "Later, within the confines of their cramped tenement room, the smells softened, but only slightly. Kerosene lamps cast flickering shadows, their oily scent mingling with the faint, persistent odor of mildew and the cooking of other families seeping through thin walls – boiled cabbage, cheap coffee, and something unidentifiable yet strangely comforting. It was the scent of survival, a communal breath in a new, bewildering world, a fragile anchor in the chaos.",
+        "Amidst it all, a faint, almost imperceptible scent of metal filings and machine oil clung to {given_name}'s hands, a secret comfort. It was the smell of purpose, of the small, cherished tools wrapped in canvas, a piece of their old life's calling carefully brought across the oceans. This familiar scent was a tiny, defiant flag in the overwhelming tide of newness, a promise of what they were, and what they could yet build, even in this foreign land."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "With the immediate need for sustenance pressing, {given_name} considered the quickest path to earn a pittance."
+          ],
+          "choice": {
+            "text": "Seek out day labor at the docks, relying on brute strength.",
+            "motivatorShift": {
+              "wealth": 2,
+              "honor": -1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "dock_labor_initial"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Despite the desperate circumstances, {given_name}'s mind instinctively gravitated towards finding a use for their technical skills."
+          ],
+          "choice": {
+            "text": "Scour the back alleys for discarded parts, hoping to repair or build something small to sell.",
+            "motivatorShift": {
+              "wealth": 1,
+              "worldview": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "scavenged_parts_initial"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t0:rising"
+    },
+    {
+      "id": "act:baghdad:technological:t0:rising",
+      "sense": "touch",
+      "prose": [
+        "The raw, biting wind of the unfamiliar city chafed against {given_name}'s skin, rougher than any desert gale they had known. Each day was a testament to endurance, their hands growing calloused and raw from the relentless labor, whether lifting heavy crates or painstakingly sorting through refuse. The ache in their joints was a constant companion, a dull throb that spoke of endless toil and meager sustenance. Sleep offered little respite, the thin mattress barely cushioning the hard floor, the press of other bodies in the shared room a constant, intimate reminder of their precarious existence.",
+        "The very fabric of their new life felt coarse and unyielding. The clothes, secondhand and ill-fitting, scratched against their skin, offering scant protection from the elements. The tools they managed to acquire, often rusted or incomplete, felt clumsy and stubborn in their practiced hands, a far cry from the refined instruments of their past. Even the food, when it was plentiful, was often rough-textured, bland, and unsatisfying, a stark reminder of the delicate flavors left behind.",
+        "Yet, in moments of quiet, {given_name}'s fingers would trace the delicate lines of a salvaged gear, or the smooth curve of a well-worn wrench, finding a strange comfort in the familiar coldness of metal. This tactile connection to their trade, however small, was a thread of continuity, a silent promise that their skill, their true craft, still lay dormant, waiting for its moment to emerge. It was a private solace in a world that offered little tenderness, a small act of defiance against the overwhelming physical burden of their new reality.",
+        "The constant jostle of bodies in the crowded market, the brushing of strange fabrics, the accidental touches in narrow hallways—all contributed to a sense of being perpetually pressed upon. There was no personal space, no quiet corner where one could simply *be*. This constant, physical intrusion was a heavy weight, a different kind of pressure than the demands of labor, a test of patience and resilience in the face of an ever-present world."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Observing the struggles of their neighbors, {given_name} felt a pull towards collective action."
+          ],
+          "choice": {
+            "text": "Join a group of fellow immigrants to pool resources for a shared need, like a communal stove.",
+            "motivatorShift": {
+              "lineage": 1,
+              "politics": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "communal_effort_attempt"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A practical problem in the tenement caught {given_name}'s attention, sparking a familiar desire to fix."
+          ],
+          "choice": {
+            "text": "Spend what little free time is available trying to repair a broken communal pump or light.",
+            "motivatorShift": {
+              "worldview": 1,
+              "power": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "technical_fix_attempt"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The meager earnings barely cover daily needs. How do you approach the immediate future?",
+        "options": [
+          {
+            "text": "Save every coin, prioritizing bare survival and a small emergency fund.",
+            "motivatorShift": {
+              "wealth": 3,
+              "lineage": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "frugal_survival_strategy"
+            ]
+          },
+          {
+            "text": "Invest a small sum in a new, specialized tool or a piece of raw material, gambling on skill.",
+            "motivatorShift": {
+              "wealth": -1,
+              "power": 2,
+              "worldview": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "tool_investment_gamble"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t0:midpoint"
+    },
+    {
+      "id": "act:baghdad:technological:t0:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cacophony of the city was a constant, assaulting presence, a relentless orchestra of unfamiliar sounds. The clatter of horse-drawn carts on cobblestones, the shrill cries of newsboys, the guttural shouts of dockworkers, and the incessant, high-pitched hum of factory machinery in the distance all merged into a single, overwhelming roar. It was a soundscape utterly alien to the quiet, ancient rhythms of Baghdad, a sonic testament to the hurried, relentless pace of this new world. Each unfamiliar word spoken in the streets, each strange melody from a passing organ grinder, underscored {given_name}'s isolation, yet also stirred a nascent curiosity.",
+        "Within the tenement walls, the sounds shifted but did not cease. The thinness of the walls meant that every argument, every laugh, every lullaby from neighboring rooms became a shared experience. The unfamiliar prayers of a distant church bell competed with the remembered, whispered melodies from home, creating a bittersweet harmony of old and new. Sometimes, the heavy footsteps of a landlord or a local tough echoed in the hallway, a sound that brought a prickle of unease, a reminder of the unseen powers that held sway over their precarious lives.",
+        "Amidst this ceaseless auditory assault, a distinct, metallic rasp often emanated from {given_name}'s small corner, a counterpoint to the city's chaos. It was the careful scrape of a file against metal, the soft click of cogs turning, the gentle tap of a hammer coaxing shape from stubborn iron. This was the sound of purpose, of creation, a small, defiant symphony of progress that {given_name} conducted in secret. It was a language only they understood, a quiet dialogue between their hands and the raw materials of their new existence, a tiny, vibrating anchor in the midst of overwhelming noise.",
+        "Yet, sometimes, another, similar sound would pierce the din – the distant ring of a blacksmith's hammer or the precise whir of a competing craftsman's lathe from another part of the ward. It was a subtle, almost imperceptible reminder that {given_name} was not alone in their pursuit of craft, that others, perhaps even rivals, were also carving out their own niches in this bustling, competitive city. This sound, more than any other, hinted at the stakes of belonging, of earning not just a living, but a name, amidst a sea of newcomers."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A group of community elders gathers in the common room, discussing a petition to the city council, and {given_name} hears their fervent, though slightly naive, plans."
+          ],
+          "choice": {
+            "text": "Approach the elders to offer technical assistance, perhaps drafting a clearer request or mapping out a communal solution.",
+            "motivatorShift": {
+              "politics": 1,
+              "worldview": 1,
+              "reach": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "community_petition_involvement"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A local factory's booming siren signals a shift change, and the rush of workers sparks an idea for a small, portable device that could aid their daily grind."
+          ],
+          "choice": {
+            "text": "Withdraw further into your own work, focusing on perfecting a small, saleable invention that could benefit a few.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1,
+              "lineage": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "personal_invention_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t0:turn"
+    },
+    {
+      "id": "act:baghdad:technological:t0:turn",
+      "sense": "sight",
+      "prose": [
+        "The immigrant ward was a patchwork of stark contrasts: the grimy, smoke-stained brick of crowded tenements loomed over narrow, shadowed streets where children played amongst refuse. Overhead, lines of drying laundry crisscrossed, a vibrant, if temporary, display against the monotonous sky. Faces, weathered by sun and toil, reflected a spectrum of emotions – the weary resignation of the old, the fierce determination of the middle-aged, and the wide-eyed, yet often cautious, hope of the young. Everywhere, the struggle for a foothold was etched into the visual landscape, a raw testament to human resilience.",
+        "Beyond the immediate confines of the ward, the imposing structures of the city's industry dominated the horizon: colossal factories with their towering smokestacks perpetually belching soot, the glint of steel and glass from burgeoning financial districts, and the intricate lattice-work of new bridges spanning wide rivers. This visual disparity between the immigrant's cramped reality and the city's outward display of progress was a constant, undeniable presence. It highlighted the chasm that separated them, yet also hinted at the vast opportunities that lay tantalizingly out of reach, a world built on principles they were only beginning to comprehend.",
+        "In {given_name}'s small, makeshift workspace, amidst the chaos of salvaged parts and rudimentary tools, a different kind of vision was taking shape. Under the flickering gaslight, a rudimentary prototype glinted, a testament to ingenuity born of necessity. It was a simple device, perhaps a more efficient lamp, a hand-cranked washing aid, or a sturdy lock mechanism, but in its nascent form, {given_name} saw not just a solution to a specific problem, but a symbol of what their family, their wave, could contribute. The sight of it, however humble, was a beacon of progress, a tangible expression of their technological heritage.",
+        "The eyes of others in the ward often fell upon {given_name} with a mix of curiosity and skepticism. They saw not just a fellow immigrant, but a craftsman, a tinker. Some saw a potential for betterment, a path out of the perpetual struggle. Others, however, saw only a diversion from the immediate, brutal realities of survival, perhaps even a challenge to established ways. This multitude of gazes, each reflecting a different hope or fear, underscored the pivotal nature of {given_name}'s choices, for their path would inevitably influence the very fabric of this new community."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A pervasive local issue, perhaps the unreliability of public lighting, presented itself as an obvious target for {given_name}'s skills."
+          ],
+          "choice": {
+            "text": "Devote efforts to building a communal, self-sufficient lighting system for the ward's main thoroughfare.",
+            "motivatorShift": {
+              "worldview": 2,
+              "politics": 1,
+              "reach": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "communal_lighting_project"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A rival craftsman, or a small local business, offered an opportunity for {given_name} to lend their specialized skills for a direct, albeit modest, wage."
+          ],
+          "choice": {
+            "text": "Accept the offer to focus on personal skill development and immediate income, even if it means working for another.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "lineage": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "rival_apprenticeship_offer"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will {given_name} truly shape their family's place and the destiny of the immigrant ward in this generation?",
+        "options": [
+          {
+            "text": "Forge a reputation as a benevolent innovator, using technical skills to directly improve the communal infrastructure and living conditions for all.",
+            "motivatorShift": {
+              "worldview": 3,
+              "politics": 2,
+              "reach": 3,
+              "lineage": 2,
+              "wealth": -2
+            },
+            "setFlags": [
+              "ward_technological_benevolent_leader",
+              "established_community_tech"
+            ]
+          },
+          {
+            "text": "Focus on perfecting a unique, profitable technological product or service, establishing a small business that provides for the family and employs a few.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": 3,
+              "worldview": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "ward_technological_entrepreneur",
+              "established_family_tech_business"
+            ]
+          },
+          {
+            "text": "Align with an emerging political faction within the immigrant community, offering technical ingenuity to bolster their influence and secure protections.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 3,
+              "tradition": 1,
+              "worldview": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "ward_technological_political_ally",
+              "established_political_tech_alliance"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t0:close"
+    },
+    {
+      "id": "act:baghdad:technological:t0:close",
+      "sense": "taste",
+      "prose": [
+        "The simple, nourishing taste of stew, slowly cooked with humble ingredients, had become the defining flavor of their new existence. It was a stark departure from the complex, fragrant dishes of Baghdad, yet it held its own comfort—the taste of survival, of a belly filled after a long day's toil. Each spoonful was a small victory, a testament to the resilience of a family carving out a life from raw necessity. Sometimes, a single, hoarded date or a pinch of rare spice, smuggled across oceans, would be added, a fleeting, bittersweet echo of a world irrevocably lost, momentarily bringing the familiar warmth of home to the tongue.",
+        "This taste of the new world was often tinged with the metallic tang of ambition, the faint, persistent flavor of kerosene and iron, which clung to {given_name}'s hands and sometimes seemed to linger even in their food. It was the taste of nascent industry, of the raw materials they shaped and transformed, a constant reminder of the technological path they had chosen to walk. This was not the taste of luxury, but of purposeful creation, of the ongoing effort to bend the unyielding world to their will, to build something lasting from nothing.",
+        "Watching their child, the young heir {heir_given_name}, eat, {given_name} tasted not just the food on their own tongue, but the future. The simple bread, the plain vegetables—these were the foundation upon which a new legacy would be built. The faint memory of their own mother's cooking, the vibrant spices, the rich textures, faded somewhat, replaced by the more immediate, tangible flavors of their present struggle and their burgeoning hope. It was a taste of bittersweet transition, the flavor of a generation’s ultimate sacrifice.",
+        "And sometimes, late at night, a sip of cheap, strong coffee, or a bite of hardtack, left a lingering, almost acrid taste in the mouth. It was the taste of hard-won progress, of small victories against overwhelming odds. But it was also the taste of exhaustion, of the relentless pursuit of a dream in a foreign land. Yet, even in this harsh flavor, there was a deep satisfaction, a knowledge that the ground beneath them, however rocky, was now theirs, and the path forward, though steep, was clearer than it had ever been."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "As {given_name} looked upon {heir_given_name}, a strong sense of passing down tangible skills arose."
+          ],
+          "choice": {
+            "text": "Spend evenings teaching {heir_given_name} the fundamentals of mechanics and the careful handling of tools.",
+            "motivatorShift": {
+              "lineage": 2,
+              "power": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "heir_taught_technical_skills"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Reflecting on the communal struggles, {given_name} considered instilling a broader sense of civic duty in their child."
+          ],
+          "choice": {
+            "text": "Encourage {heir_given_name} to engage with community problems, emphasizing how technology can serve the greater good.",
+            "motivatorShift": {
+              "politics": 1,
+              "worldview": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "heir_taught_community_service"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:technological:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The sharp, metallic tang of fresh-cut iron mingled with the damp, turned earth, a scent that clung to your skin and hair long after the sun had dipped below the horizon. It was the smell of beginnings, of toil etched into the very fabric of the burgeoning settlement, distinct from the familiar, comforting aroma of woodsmoke that drifted from the scattered hearths. Each swing of the hammer, each scrape of the spade, released another layer of this new reality, a promise whispered on the cool evening air.",
+        "Your small workshop, little more than a lean-to fashioned from salvaged timber and rough-hewn stone, exuded its own peculiar bouquet: the acrid fumes of coal igniting in the forge, the sweet, faint oiliness of well-greased gears, and the faint, almost imperceptible hint of sawdust from the crates that now served as your workbench. This rich symphony of odors was a constant companion, a reminder of the raw materials transforming under your family’s hands, shaping not just metal, but a future.",
+        "Children, barely past their toddling years, played amidst piles of scrap, their small fingers tracing patterns in the fine metallic dust that coated everything. The air thrummed with the energy of creation, a primal force made manifest in the forging of simpler, yet more efficient, tools for the farmers tilling the fields nearby, or perhaps a stronger hinge for a settler's door. It was a humble, demanding existence, yet each inhalation brought with it the faint, intoxicating possibility of something greater, something built from the ground up."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Your gaze drifted to the rudimentary bellows, considering the hours it would take to stoke the fire for the next batch of work."
+          ],
+          "choice": {
+            "text": "Focus on the steady, laborious process.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "focus_on_craft"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You noted the new, larger, and slightly more efficient tools being used by a rival, a fleeting thought of innovation crossing your mind."
+          ],
+          "choice": {
+            "text": "Consider how to improve the workshop's output.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "consider_innovation"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t1:rising"
+    },
+    {
+      "id": "act:baghdad:technological:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough wool of your tunic chafed against your skin, a constant reminder of the day's exertions, the persistent ache in your shoulders a familiar companion. Each evening, as you returned to the small, shared dwelling, the worn planks of the floorboards felt cool beneath your bare feet, a brief respite from the relentless heat of the forge and the coarse grain of the timber you wrestled into shape. Your hands, calloused and hardened, bore the unmistakable imprints of tools—hammer, tongs, saw—badges of a life lived by painstaking creation.",
+        "Inside, the air held a different texture, softer, permeated with the warmth of the hearth and the subtle scent of drying herbs. Yet, even here, the pressure lingered, a weight pressing down like the anvil’s kiss on hot metal. The meagre stores in the larder, the thinness of the blankets, the quiet, expectant glances of your young ones — all spoke of the precarious balance your {family_name} maintained, caught between the promise of invention and the harsh realities of a still-unforgiving landscape. It was a fragile household, demanding constant vigilance and ingenuity.",
+        "Your mother, {given_name} {family_name}, her own hands gnarled from years of mending and tending, often smoothed your brow with a touch that was both gentle and firm, a silent affirmation of shared burden. The slightest brush against a splintered edge, the jolt of cold water on overworked muscles – these minor discomforts underscored the ceaseless effort required to simply exist, let alone thrive, in this new ground. Survival was not merely a concept, but a sensation, felt in every fiber of your being, every day."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You felt the dampness of the roof, contemplating the needed repairs."
+          ],
+          "choice": {
+            "text": "Prioritize patching the leaky roof before winter.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "household_maintenance"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your fingers brushed against the rough canvas of a new, experimental design for a hand-cranked loom you’d begun sketching."
+          ],
+          "choice": {
+            "text": "Spend your precious evening hours developing the new loom.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "pursue_invention"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The small pot of stew simmers over the fire, barely enough for your family. A neighbor, newer and even less fortunate, knocks on your door, asking for a small loan of grain. What do you do?",
+        "options": [
+          {
+            "text": "Offer a portion of your own meager provisions. They are your community.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "act_of_generosity"
+            ]
+          },
+          {
+            "text": "Explain your own struggles and suggest other sources of aid, unable to spare your own.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": -1,
+              "power": 0,
+              "tradition": 0,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "prioritize_own_survival"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t1:midpoint"
+    },
+    {
+      "id": "act:baghdad:technological:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The rhythmic clang of the hammer on your anvil, a familiar and grounding sound, was increasingly joined by new noises filtering through the bustling streets. The creak and groan of loaded wagons, the sharp bark of merchants hawking their wares, and the distant, insistent *thrum* of a newly erected sawmill across the river—all spoke of a settlement rapidly finding its voice. Your small workshop, once a solitary echo, was now but one instrument in a burgeoning orchestra of commerce and ambition. The volume of life was rising, and with it, the stakes.",
+        "Beyond the din of everyday work, whispers carried on the wind—tales of a family, perhaps from a different wave, establishing a thriving mill further upriver, their waterwheel a constant, groaning testament to their industriousness. Their sounds, the steady rasp of sawing timber, the splash of the turning wheel, sometimes reached you, a faint counterpoint to your own metallic symphony. It was a reminder that you were not alone in carving out a livelihood here, that paths were converging, sometimes harmoniously, sometimes in discord.",
+        "Your apprentice, a bright-eyed lad named Haroun, often paused his work, listening intently to the various mechanical groans and whistles that now punctuated the air. “They say the mill across the river is taking on more hands,” he once mused, his voice barely audible above the hiss of your forge. Each new sound was a signal, a potential threat or opportunity, shaping the nascent economy of the town and subtly influencing the direction of your own modest enterprise."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You focused on the precise strikes of your hammer, perfecting a crucial component for a new plough design, ignoring the outside clamor."
+          ],
+          "choice": {
+            "text": "Double down on the quality of your existing crafts.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "focus_on_quality"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The distinct thrum of the rival mill's machinery stirred a curious thought about its construction and potential improvements."
+          ],
+          "choice": {
+            "text": "Study the sounds of the rival mill, seeking new technological insights.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "explore_rival_tech"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t1:turn"
+    },
+    {
+      "id": "act:baghdad:technological:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "From the crest of the small hill overlooking the settlement, the changing landscape was starkly visible. Where once a handful of rough dwellings clustered, now a network of tracks crisscrossed, leading to more substantial buildings and burgeoning plots of cultivated land. Your own workshop, though still humble, contributed to the scene, its chimney issuing a thin plume of smoke that mingled with others on the horizon. The town was beginning to truly take shape, a testament to the collective effort of its inhabitants, and your family's place within it was becoming clearer.",
+        "The market square, a chaotic swirl of color and motion, pulsed with new life. You saw faces from various waves, distinct in their dress and mannerisms, all drawn together by the promise of trade and community. The tools and implements crafted by your hands were visible in the hands of farmers, the gear of local smiths, and even the simple hinges on the doors of newly built homes. Each sighting was a quiet affirmation, a small thread woven into the larger tapestry of this emerging town, but the thread could still be pulled in many directions.",
+        "Beneath the growing order, an undercurrent of tension occasionally surfaced. You caught glimpses of makeshift barricades around one corner of the burgeoning settlement, a boundary drawn by families wary of outsiders or clinging fiercely to their traditional ways. In another direction, a new, larger building, clearly a nascent factory, dominated the skyline, its utilitarian brick a sharp contrast to the familiar timber and thatch of earlier structures. The path your family chose now, how you interacted with these evolving visual cues, would determine the legacy you etched into this ground for generations to come."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You observe the tools you have crafted in the hands of the market-goers, feeling a surge of quiet pride in their utility."
+          ],
+          "choice": {
+            "text": "Feel a sense of satisfaction in providing reliable tools for the community.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "pride_in_craft"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your eyes are drawn to the imposing new factory, its scale hinting at vast potential beyond individual craftsmanship."
+          ],
+          "choice": {
+            "text": "Envision the possibilities of larger-scale production and broader influence.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "ambition_for_scale"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The town council, an informal gathering of leading families, seeks to define the nascent community's future. They are debating whether to prioritize expansion and industrial growth, or to consolidate and preserve existing traditions and crafts. Your family, known for its technological prowess, is called upon to lend its voice. How do you shape the town?",
+        "options": [
+          {
+            "text": "Advocate for rapid industrialization, offering your skills to build larger, more efficient machinery for the entire town.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 2,
+              "power": 2,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "embrace_industrialization",
+              "town_industrial"
+            ]
+          },
+          {
+            "text": "Propose a balance, suggesting controlled growth with technology that supports, rather than replaces, traditional crafts and sustainable practices.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "balanced_growth",
+              "town_sustainable"
+            ]
+          },
+          {
+            "text": "Urge caution and focus on fortifying existing resources, perfecting current crafts, and strengthening community bonds before further expansion.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": -1,
+              "worldview": -1,
+              "power": -1,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "fortify_tradition",
+              "town_traditional"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t1:close"
+    },
+    {
+      "id": "act:baghdad:technological:t1:close",
+      "sense": "taste",
+      "prose": [
+        "The tart, metallic tang of the locally brewed cider, served at the humble table, settled on your tongue. It was a flavor familiar from countless evenings, a simple pleasure after days spent coaxing order from metal and wood. Tonight, however, it carried a subtle, almost imperceptible undertone of something new – perhaps the dust from freshly cut timber used in the expanding homes, or the faint, distant scent of smoke from a larger, more ambitious forge downriver. This taste was the culmination of a generation's labor, a distillation of the efforts that had transformed a mere plot of ground into something resembling a settled life.",
+        "Your heir, young {surname} {given_name}, sat beside you, picking at a piece of dried fruit, its concentrated sweetness a rare luxury. You watched their small fingers, already showing a nascent aptitude for intricate work, handling a discarded gear with a seriousness that mirrored your own. The rich, earthy savor of the slow-cooked stew, a staple throughout your youth, now seemed to carry the weight of both past struggles and future possibilities, a comforting warmth against the lingering chill of uncertainty. What you passed to them was not just sustenance, but an inheritance imbued with the very essence of your craft.",
+        "The distinct, almost bitter, aftertaste of oil and grime that often lingered on your palate from a day at the forge was now less prevalent, replaced by a sense of satisfaction, a quiet fullness. The tools, inventions, and the very foundation of your technological trade were more than mere objects; they were the embodiment of your family’s standing, a flavor of resilience and ingenuity that would define the next generation. This meal, simple yet profound, was the taste of a legacy taking root, passed from your hand to the next, a silent promise to the future."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You offered your heir a morsel of especially sweet fruit, a reward for their diligent work learning the basic mechanics of a lever."
+          ],
+          "choice": {
+            "text": "Instill in your heir the pride of careful craftsmanship.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "heir_craft_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You gestured to the small, intricate clockwork mechanism you had recently fashioned, inviting your heir to observe its delicate movements."
+          ],
+          "choice": {
+            "text": "Inspire your heir with the potential for intricate technological innovation.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "heir_innovation_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:technological:t2:open",
+      "sense": "smell",
+      "prose": [
+        "The acrid tang of hot metal and spent coal still clung to {full_name}'s clothing, a persistent reminder of the factory floor, even hours after the shift ended. It permeated the threads, a second skin of labor, mixing faintly with the cheaper lye soap used at home and the faint, sweet scent of the stew simmering on the hearth. Every breath was a chronicle of the day's toil, of the ceaseless whirring gears and the clatter of tools that built the city's burgeoning infrastructure, yet still kept the family tethered to its working-class roots.",
+        "Yet, beneath the grime and the sweat, a new scent was emerging – that of treated paper and lamp oil, carried back from evening classes, a faint, clean promise of knowledge. It was subtle, almost imperceptible to others, but to {given_name} it was the aroma of ambition, a different kind of industry. The contrast was stark, a daily battle of odors representing the old life and the new, the one receding and the one slowly, but surely, blossoming, a testament to the family's relentless push for upward mobility.",
+        "The small home, though humble, now held the scent of invention, of circuits and wires, of the strange, new components {full_name} tinkered with late into the night. It was an electric hum of possibility, a faint ozone scent that promised a future beyond the soot-choked air of the workshops. This was not the smell of passive acceptance, but of active creation, of a lineage determined to forge its own fragrant path."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You find yourself drawn to the raw, visceral challenge of the factory's new, intricate machinery, understanding its gears and levers with an instinctual grasp."
+          ],
+          "choice": {
+            "text": "Embrace the factory floor's complex challenges, proving your mastery with the machines.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "line:technological:factory_expertise"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your evenings are spent poring over schematics and scientific texts, the scent of ink and paper a more potent draw than the factory's rhythms."
+          ],
+          "choice": {
+            "text": "Dedicate evenings to self-study, seeking theoretical knowledge to complement practical skills.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "line:technological:theoretical_knowledge"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t2:rising"
+    },
+    {
+      "id": "act:baghdad:technological:t2:rising",
+      "sense": "touch",
+      "prose": [
+        "The calluses on {full_name}'s hands were a testament to the hard-won progress, rough and familiar, each ridge a memory of tools gripped, circuits soldered, and ambitions built. But now, a new kind of pressure was emerging, a subtle tightening in the chest that wasn't from physical strain, but from the weight of choices. The touch of success was not always smooth; it was often a delicate balancing act, a careful navigation between the obligations of the past and the demands of a burgeoning future.",
+        "A rival, a man named Faris, from a slightly more established but stagnating engineering firm, began to make overtures. His handshake was firm, almost aggressively so, a possessive grip that sought to absorb {full_name}'s burgeoning talent and innovative spirit into his own enterprise. It was a tempting offer, one that promised immediate resources and a fast track to legitimacy, but it came with the implicit cost of autonomy, of blending {family_name}'s distinct vision with another's fading legacy.",
+        "Meanwhile, the touch of family, the reassuring hand of your mother, the playful shove from a sibling, grounded you. They represented the loyalty forged in shared struggle, the quiet understanding of sacrifices made. To leverage them for personal gain felt like a betrayal, yet to ignore the opportunities that could lift them all seemed equally irresponsible. The dilemma was palpable, a constant pressure point in the palm of your hand, a decision that needed to be made with care."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Faris's offer of an immediate partnership, though lucrative, feels like a silken tether, promising comfort but restricting true innovation."
+          ],
+          "choice": {
+            "text": "Lean into the established rival's offer, seeking immediate financial stability and resources.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": -1,
+              "power": -1,
+              "tradition": 1,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "line:technological:aligned_with_rival"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The thought of striking out independently, though daunting, offers the freedom to fully explore {family_name}'s unique technological vision."
+          ],
+          "choice": {
+            "text": "Reject the offer and pursue an independent path, even if it means slower growth.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "line:technological:independent_path"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "Your younger sibling, {sibling_name}, approaches you with an idea for a small, household-oriented device, something that could provide minor comforts or efficiencies, but it would divert resources from your larger projects. Do you support their smaller, family-focused innovation or maintain focus on grander technological ambitions?",
+        "options": [
+          {
+            "text": "Invest a small portion of time and resources into {sibling_name}'s invention, fostering family collaboration and immediate practical improvements.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "line:technological:family_innovation_supported"
+            ]
+          },
+          {
+            "text": "Gently redirect {sibling_name} to assist with your larger projects, emphasizing the greater good for the family through more impactful technological advancements.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "line:technological:grand_ambition_focused"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t2:midpoint"
+    },
+    {
+      "id": "act:baghdad:technological:t2:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The shift in the soundscape was undeniable. No longer just the clang and hiss of industrial machinery, the air now carried the more refined, insistent hum of nascent electrical systems, the crisp rustle of blueprints, and the measured cadence of business negotiations. The cacophony of the old life was slowly being replaced by the structured symphony of a new existence, one where the family's name was whispered not with pity, but with a growing sense of respect in the city's burgeoning technical circles.",
+        "Yet, amidst this evolving soundscape, discordant notes emerged. The murmurs of established guilds and traditional craftsmen, once dismissive, now carried a subtle undertone of resentment, a protective growl against the encroachment of the {family_name}'s innovative methods. Their tools, once the sole producers of the city's comforts, now sounded slower, less efficient, a fading echo against the precise whirring of the new machines {full_name} championed. This friction was inevitable, a clash of old ways against the inexorable march of progress.",
+        "And then, there was the distinct, resonant sound of another ambitious wave, perhaps a distant cousin from the {intersection_line_wave} line, their own rise punctuated by the confident, clear pronouncements of a burgeoning intellectual movement. Their presence, though tangential, brought a new kind of pressure, a standard against which {family_name}'s technological ascendancy would be silently, subtly measured. The city was a growing chorus, and {full_name} had to ensure their note rang true and strong amidst the swelling harmony of progress."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A rival's public criticism of your methods, though unfounded, threatens to erode trust among potential clients."
+          ],
+          "choice": {
+            "text": "Confront the rival directly, publicly defending your innovations with technical facts.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": -1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "line:technological:public_confrontation"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your growing reputation attracts the attention of a patron of the arts, who offers to fund a decorative, but less practical, application of your technology."
+          ],
+          "choice": {
+            "text": "Accept the patron's offer, showcasing your technology's versatility and gaining social capital.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "line:technological:artistic_patronage"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t2:turn"
+    },
+    {
+      "id": "act:baghdad:technological:t2:turn",
+      "sense": "sight",
+      "prose": [
+        "The city's skyline was slowly transforming, a testament to relentless progress, and {full_name} could now see the visible impact of their family's work. New electrical lines snaked across districts, casting unfamiliar glows into formerly shadowed alleyways, and the silhouettes of novel, technologically advanced structures began to punctuate the ancient domes and minarets. It was a vision of a future, one where the old order, though revered, was undeniably giving way to a new, more efficient era, built with the {family_name}'s ingenuity.",
+        "From the workshop window, the sprawling market bustled below, a vibrant tapestry of commerce and daily life. You could discern the faces of those who benefited from the family's contributions – the shopkeepers with brighter lamps, the artisans with more precise tools. But you could also spot the wary glances, the traditionalists who saw these changes not as progress, but as an erosion of identity, a blurring of lines that had always defined their world. The city was not just a collection of buildings, but a complex, living entity, and your family's actions cast long, defining shadows.",
+        "The institutions themselves, ancient and formidable, now seemed to turn their gaze towards the {family_name}. The sight of official invitations, seals of long-established academies, and even the stern, imposing facades of government buildings, all hinted at a recognition, a demand for engagement. This was not merely about invention anymore; it was about integration, about shaping the very fabric of the city's future, and how the family would choose to be seen within its evolving landscape."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "An anonymous benefactor offers to fund a public showcase of your latest invention, provided it strictly aligns with traditional aesthetics."
+          ],
+          "choice": {
+            "text": "Accept, adapting the design to respect traditional aesthetics for broader public appeal.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "line:technological:traditional_showcase"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A group of ambitious young engineers approaches you, eager to learn and replicate your more radical designs, potentially challenging the established order."
+          ],
+          "choice": {
+            "text": "Share your advanced techniques with the younger generation, fostering a new wave of innovation.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "line:technological:mentor_new_wave"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The city's council offers a substantial contract to upgrade the public infrastructure, but it comes with a condition: you must either adhere to established, slower methods that ensure minimal disruption to traditional livelihoods, or implement your most efficient, cutting-edge solutions which will inevitably displace some long-standing artisanal practices. How do you shape the city's future?",
+        "options": [
+          {
+            "text": "Prioritize long-term efficiency and widespread technological advancement, implementing cutting-edge solutions despite potential social disruption.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 2,
+              "power": 2,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "city:technological:rapid_modernization",
+              "line:technological:bold_urban_reformer"
+            ]
+          },
+          {
+            "text": "Adopt a gradual, hybridized approach, integrating new technologies where possible without causing undue harm to existing community structures.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "city:technological:balanced_integration",
+              "line:technological:pragmatic_innovator"
+            ]
+          },
+          {
+            "text": "Focus on bespoke, high-value projects that improve specific sectors, avoiding broad infrastructure overhauls that might upset traditionalists.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": -1,
+              "worldview": -1,
+              "power": -1,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": -1
+            },
+            "setFlags": [
+              "city:technological:niche_advancement",
+              "line:technological:specialized_contributor"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t2:close"
+    },
+    {
+      "id": "act:baghdad:technological:t2:close",
+      "sense": "taste",
+      "prose": [
+        "The bitter taste of ambition, once sharp and singular, had mellowed over the years, now mixed with the satisfying sweetness of achievement and the complex tang of legacy. The food on the family table was richer, more varied, a far cry from the meager stews of old. Each meal was a quiet celebration of progress, a taste of comfort hard-earned, yet it also carried the subtle, metallic aftertaste of relentless work, of late nights and calculated risks. It was the flavor of a dynasty in the making.",
+        "There was the distinct, spicy zest of new connections, the mingling of influences from various strata of society – the earthy notes of the working class from which they sprang, the refined flavors of emerging industrialists, and even the subtle, sometimes cloying, sweetness of political favor. The family's palate had expanded, reflecting their broadened horizons and the diverse experiences that now shaped their identity. This generation had tasted scarcity and savored plenty, learning the nuanced flavors of both success and sacrifice.",
+        "As {full_name} looked upon the next generation, an heir, the taste of what they would inherit was already forming. It was the potent, concentrated essence of capital – both financial and intellectual – robust connections, and a reputation forged in innovation. But it also carried the underlying, subtle taste of expectation, a generational torch of technological advancement now ready to be passed on, its flame bright and ever-hungry for the next great discovery."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You impart upon the heir the importance of meticulous craftsmanship and the practical application of technology to solve everyday problems."
+          ],
+          "choice": {
+            "text": "Emphasize practical skill and hands-on innovation as the core family legacy.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "heir:technological:practical_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You guide the heir towards a deeper understanding of the theoretical principles and scientific inquiry that underpin all technological progress."
+          ],
+          "choice": {
+            "text": "Stress theoretical knowledge and scientific inquiry as the path to future breakthroughs.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "heir:technological:theoretical_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:technological:t3:open",
+      "sense": "smell",
+      "prose": [
+        "The sharp, metallic tang of newly refined oil, a scent that clung to your father, {given_name}, long after he left the workshop, mingled with the sweet, cloying perfume of success. It was the scent of progress, a unique blend of ozone from the crackling dynamos and the rich, earthy aroma of the fine papers used for official contracts and patents. This new aroma, thick and ever-present, was a stark contrast to the familiar, comforting smell of burnt sugar and cardamom from the family kitchen, a reminder of the simple sustenance that fueled your ancestors' relentless climb.",
+        "Now, the workshop itself hummed with a different energy, a symphony of whirring gears and heated metal, each note contributing to a larger, more complex fragrance. Dust motes danced in the shafts of light filtering through the high windows, carrying the invisible particles of innovation – a scent of ambition refined, molded, and brought to life. It was a fragrance that promised a name in the world, an indelible mark not just on the city, but on the broader currents of the era.",
+        "This nascent empire of ingenuity, built on sheer will and the sweat of many hands, now carried a distinct, unmistakable olfactory signature. It was the smell of the future, a future {full_name} had painstakingly, often desperately, willed into being from the ground up. The air was thick with the silent testament to their ingenuity, a profound declaration that a family once defined by its humble origins now commanded respect, its very presence a scent upon the wind."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You inhale deeply, allowing the potent aroma of the burgeoning enterprise to fill your lungs, a testament to the future."
+          ],
+          "choice": {
+            "text": "Lean into the promise of expansion, driven by the scent of new possibilities.",
+            "motivatorShift": {
+              "wealth": 1,
+              "reach": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "line_embraces_growth"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The familiar scent of your father's toil, though now layered with success, brings a wave of grounding nostalgia."
+          ],
+          "choice": {
+            "text": "Reflect on the humble origins, ensuring the core values remain untainted by ambition.",
+            "motivatorShift": {
+              "honor": 1,
+              "tradition": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "line_remembers_roots"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t3:rising"
+    },
+    {
+      "id": "act:baghdad:technological:t3:rising",
+      "sense": "touch",
+      "prose": [
+        "The cool, smooth surface of the polished walnut desk felt solid beneath your palm, a comforting anchor amidst the swirling currents of demands and obligations that now pressed in from all sides. Every surface, every material in the office, seemed to carry a weight, a texture that communicated responsibility: the rough weave of the factory blueprints, the slick, oily feel of a new mechanical component, the delicate, almost fragile parchment of legal documents demanding immediate attention.",
+        "Even the air seemed to possess a tactile quality, thick with unspoken expectations. A rival’s offer, folded neatly on the corner of the desk, felt surprisingly heavy, almost coarse to the touch, hinting at hidden implications. This was the touch of power, tangible and pervasive, a constant reminder that the once-simple act of invention had transformed into a complex dance of influence and compromise. The calluses on {full_name}'s hands, once a badge of honor from direct labor, now throbbed with the ghost of a different kind of exertion.",
+        "A sudden tremor ran through the building, a low, resonant thrum from the massive new industrial presses downstairs, vibrating subtly through the floorboards and up into your very bones. It was a constant companion, this physical manifestation of your enterprise, a living entity whose growth now presented a myriad of choices, each carrying its own unique cost. The very fabric of your world, once fluid, now felt rigid with new pressures, each choice hardening the path beneath your feet."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The weight of a new contract in your hand reminds you of the tangible gains made, and the even greater potential ahead."
+          ],
+          "choice": {
+            "text": "Sign the ambitious contract, prioritizing swift expansion and market dominance.",
+            "motivatorShift": {
+              "wealth": 1,
+              "reach": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "line_embraces_aggressive_growth"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You run your fingers over a small, intricate component of your first successful invention, recalling the simple satisfaction of creation."
+          ],
+          "choice": {
+            "text": "Focus on refining the existing innovations, ensuring quality over hasty expansion.",
+            "motivatorShift": {
+              "honor": 1,
+              "worldview": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "line_prioritizes_craftsmanship"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A junior engineer suggests a radical, unproven redesign for a crucial component, promising efficiency but risking costly delays. Do you trust their vision?",
+        "options": [
+          {
+            "text": "Approve the redesign. Embrace the risk for potential revolutionary gains.",
+            "motivatorShift": {
+              "worldview": 1,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "design_radical_approved"
+            ]
+          },
+          {
+            "text": "Stick to the proven design. Stability and reliability are paramount for now.",
+            "motivatorShift": {
+              "tradition": 1,
+              "honor": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "design_proven_maintained"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t3:midpoint"
+    },
+    {
+      "id": "act:baghdad:technological:t3:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cacophony of the city outside, once a distant hum, now intruded with insistent clarity. Newsboys cried out headlines beneath your office window, their voices carrying snippets of industrial policy debates and burgeoning labor movements, each syllable a ripple in the currents {full_name}'s enterprise now navigated. The rhythmic clack of the telegraph in the outer office seemed to pulse with urgency, delivering messages that spoke not just of orders, but of influence, of a growing stake in the very fabric of the nation's progress.",
+        "During a hushed evening meeting, the distinct, measured tones of a rival industrialist, a representative of the venerable {family_name} line, carried across the polished conference table. Their words, carefully chosen and imbued with the weight of generations, outlined an unexpected proposal for a shared patent, an alliance that would send tremors through the industry. This offer, a seductive melody amidst the industrial clangor, required not just careful consideration, but a deep understanding of its resonant implications for the future.",
+        "Above the steady thrum of your own machinery, a new kind of sound began to emerge – the murmur of public opinion. It was heard in the spirited discussions at the worker’s canteen, the impassioned speeches from local civic leaders, and the increasingly frequent mentions in the printed press. {full_name}'s name, once a whisper among engineers, was now a louder, more recognizable chord in the symphony of the era, the sound of a force actively shaping the world, not just reacting to it."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The rival’s measured proposal for a joint venture echoes in your mind, promising an undeniable surge in market control."
+          ],
+          "choice": {
+            "text": "Explore the alliance with the {family_name} line, leveraging their experience for mutual gain.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "alliance_with_rival_explored"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The voices of your workers, murmuring about fair wages and safe conditions, resonate with a profound authenticity."
+          ],
+          "choice": {
+            "text": "Decline the overtures, focusing instead on internal development and worker welfare.",
+            "motivatorShift": {
+              "honor": 1,
+              "worldview": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "internal_focus_prioritized"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t3:turn"
+    },
+    {
+      "id": "act:baghdad:technological:t3:turn",
+      "sense": "sight",
+      "prose": [
+        "From the panoramic window of the new corporate headquarters, the city spread out below like an intricate blueprint, its countless lights twinkling in the approaching dusk. Each building, each street, was a testament to human endeavor, and nestled amongst them, {full_name} could clearly see the sprawling footprint of their own factories, a network of steel and glass that had irrevocably altered the skyline. The vision of what they had built, and what it could become, was now acutely vivid, stretching across the horizon.",
+        "The faces of the community leaders gathered in the room reflected a mix of hope and apprehension. They looked to {full_name}, their expressions clearly communicating the immense responsibility that now rested on the family's shoulders. On one table, schematics for a grand national infrastructure project lay alongside proposals for a workers' village adjacent to the main plant – two starkly different visions of future growth, each offering a distinct path forward for the burgeoning nation.",
+        "As the projector cast its luminous beam across the room, illuminating detailed projections of national impact and economic forecasts, {full_name} saw not just numbers and diagrams, but the potential future of countless lives. The choice before them was not merely about technology or profit; it was about shaping the very character of the nation, about where their technological might would be directed, and what kind of legacy would be forged in the incandescent glow of this pivotal moment."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Your gaze sweeps across the city, envisioning the grand national project, a monumental undertaking that could reshape the entire landscape."
+          ],
+          "choice": {
+            "text": "Champion the national infrastructure project, leveraging your technology for societal transformation.",
+            "motivatorShift": {
+              "politics": 2,
+              "reach": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "champion_national_project"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You focus on the detailed plans for the workers' village, seeing a direct, tangible improvement in the lives of those who built your success."
+          ],
+          "choice": {
+            "text": "Invest heavily in the workers' village and local community development, prioritizing human welfare.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "invest_community_welfare"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The government offers a lucrative contract for your company's advanced technology, but it comes with strict controls that could limit its broader application and public access. How do you respond?",
+        "options": [
+          {
+            "text": "Accept the government contract. Secure immediate stability and influence, even with restrictions.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "major_decision_government_contract"
+            ]
+          },
+          {
+            "text": "Decline the exclusive contract. Pursue independent development for wider public benefit, risking financial uncertainty.",
+            "motivatorShift": {
+              "worldview": 2,
+              "honor": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "major_decision_independent_public_benefit"
+            ]
+          },
+          {
+            "text": "Negotiate for modifications to the contract. Seek a balance between public good and state partnership.",
+            "motivatorShift": {
+              "politics": 1,
+              "worldview": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "major_decision_negotiate_contract"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t3:close"
+    },
+    {
+      "id": "act:baghdad:technological:t3:close",
+      "sense": "taste",
+      "prose": [
+        "The lingering taste of strong, sweet coffee, served in a small, intricate cup, mingled with a subtle bitterness that had nothing to do with the grounds. It was the taste of an era closing, of victories hard-won and sacrifices quietly made. This particular brew, prepared just as your grandmother, {full_name}'s mother, had always made it, brought with it a flood of memories: the sharp taste of ambition in youth, the metallic tang of struggle, and now, the complex flavor of a legacy finally taking root, its tendrils reaching deep into the nation's soil.",
+        "Success, it turned out, had a multifaceted flavor. There was the rich, satisfying sweetness of recognition, the honor bestowed upon the {family_name} line, but also the occasional sharp, almost acrid aftertaste of compromise and political maneuvering. Each decision {full_name} had made, each path chosen or rejected, contributed to this unique palette, a generational vintage passed down with every shared meal, every quiet moment of reflection with your own child, the next heir.",
+        "As the final embers of the hearth cooled, leaving behind a faint, smoky sweetness in the air, {full_name} savored the moment. The reputation forged over decades – whether it was of audacious innovation or steadfast community stewardship – was a flavor now indelible on the collective palate of the city, a taste that defined the {family_name} name. It was a flavor that would guide the next generation, a rich and complex inheritance far more valuable than mere assets, a distinct and potent taste of history."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A sip of the familiar coffee brings forth the robust taste of achieved ambition, of a name now firmly etched into the world."
+          ],
+          "choice": {
+            "text": "Embrace the public recognition, reinforcing the line's image as an unstoppable force.",
+            "motivatorShift": {
+              "reach": 2,
+              "power": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "legacy_of_force"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The subtle bitterness beneath the sweetness reminds you of the integrity painstakingly preserved through challenges."
+          ],
+          "choice": {
+            "text": "Focus on the quiet dignity and ethical foundations that built the family's enduring reputation.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "legacy_of_integrity"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:technological:t4:open",
+      "sense": "smell",
+      "prose": [
+        "The air in the private module, suspended hundreds of meters above the pulsating urban sprawl, was a carefully curated blend. It carried the faint, metallic tang of newly fabricated superconductors, layered beneath the rich, earthy scent of ancient sandalwood, a constant reminder of heritage amidst the relentless hum of progress. From this aerie, {full_name} surveyed the global data streams, a network of light that flowed like an electric river, connecting the distant factories to the gleaming corporate towers, all nodes in the vast technological empire the line had built.",
+        "A subtle aroma of ozone, sharp and clean, emanated from the holographic display hovering before {full_name}, depicting live schematics of the next-generation quantum processor. The delicate calibration of the system, a whisper-thin membrane of innovation, felt as palpable as the polished chrome of the terminal. Below, the city breathed, a complex organism of traffic and commerce, each transaction a ripple in the sea of global influence the {family_name} name now commanded. The scent of success, often intangible, was here a symphony of precision engineering and far-flung resources, a testament to the decades of relentless, often brutal, ascent.",
+        "A new scent, an unexpected trace of robust, dark coffee from the integrated dispenser, cut through the technological perfumes. It was a grounding aroma, a momentary anchor in the weightless expanse of strategic thought, pulling {full_name} back from the abstract to the immediate. The global reach of the line, once a desperate whisper in the dust of distant markets, was now an undeniable roar, echoing in every corner of the networked world, yet still requiring the sharp, focused attention of its architect."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You recall the early struggles of the Baghdad wave, the hunger that drove your ancestors to seek new frontiers, a memory as sharp as the aroma of scorched circuitry from a prototype gone awry."
+          ],
+          "choice": {
+            "text": "Remember the arduous climb.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "recalled_struggle"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You inhale the crisp, sterile scent of progress, a clear indication of the future yet to be built, your mind already dissecting the next grand challenge, the next breakthrough."
+          ],
+          "choice": {
+            "text": "Embrace the future's call.",
+            "motivatorShift": {
+              "reach": 1,
+              "worldview": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "focused_on_future"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t4:rising"
+    },
+    {
+      "id": "act:baghdad:technological:t4:rising",
+      "sense": "touch",
+      "prose": [
+        "The cool, smooth surface of the global operations console hummed beneath {full_name}'s fingertips, a vast interface translating abstract data into tangible control. Each pressure point, each subtle gesture, sent ripples through the sprawling network of factories, logistics hubs, and research labs that spanned continents. This touch, at once intimate and immense, connected {full_name} to the very pulse of the technological world, bearing the immense weight of the decisions that now affected millions.",
+        "A phantom vibration thrummed through the air, mirroring the deep currents of market volatility and geopolitical maneuvering. The delicate balance of power, constantly shifting, felt like a taut wire beneath {full_name}'s skin, demanding unwavering attention. The line's ascent had been driven by a relentless pursuit of innovation, but now, at this tier, the true pressure came from sustaining that momentum, guiding the vast apparatus through treacherous economic straits and ever-present rivalries.",
+        "The heavy, sculpted steel of the desk felt solid and unyielding, a stark contrast to the ethereal data flowing across the screens. It was a tactile reminder of the foundations upon which the {family_name} empire was built – the raw materials, the physical infrastructure, the very sweat and labor of countless individuals. The sheer scale of it all was a constant, pressing force, a physical manifestation of the global influence that, at times, threatened to overwhelm."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A sudden market correction in a key sector feels like a sharp jab to the gut, demanding an immediate, decisive counter-move to stabilize the line's assets."
+          ],
+          "choice": {
+            "text": "Directly intervene to quell the market turbulence.",
+            "motivatorShift": {
+              "power": 1,
+              "wealth": 1,
+              "politics": 0
+            },
+            "setFlags": [
+              "direct_intervention"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The subtle, almost imperceptible tremor of an emerging geopolitical conflict resonates through the network, hinting at disruptions to critical supply chains, requiring careful, strategic foresight."
+          ],
+          "choice": {
+            "text": "Initiate contingency planning for potential global unrest.",
+            "motivatorShift": {
+              "worldview": 1,
+              "reach": 1,
+              "power": 0
+            },
+            "setFlags": [
+              "strategic_contingency"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How do you respond to the escalating pressure of global leadership?",
+        "options": [
+          {
+            "text": "Delegate more responsibility, empowering your inner circle to manage day-to-day crises and focus on macro-strategy.",
+            "motivatorShift": {
+              "power": -1,
+              "reach": 1,
+              "lineage": 0
+            },
+            "setFlags": [
+              "delegated_leadership"
+            ]
+          },
+          {
+            "text": "Centralize all critical decision-making, ensuring every major choice flows directly through you to maintain absolute control.",
+            "motivatorShift": {
+              "power": 2,
+              "wealth": 0,
+              "reach": -1
+            },
+            "setFlags": [
+              "centralized_control"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t4:midpoint"
+    },
+    {
+      "id": "act:baghdad:technological:t4:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The low thrum of the quantum server farm, a constant, almost imperceptible vibration beneath the floor, was the symphony of the century being shaped. It was the sound of billions of calculations per second, the quiet roar of algorithms processing global trends, predicting market shifts, and refining the logistical pathways for {family_name}'s vast technological exports. Every hum and whir was a note in the future’s composition, played by the very systems {full_name} had nurtured into existence.",
+        "Beyond the insulated walls, the distant, muffled cacophony of the city offered a stark contrast: the blare of traffic, the chatter of commerce, the faint echo of news broadcasts discussing the latest global economic shifts – shifts often directly influenced by the innovations pioneered by the line. The weight of this influence, the knowledge that a single directive from this control center could send a ripple through the lives of millions, resonated deep within. It was the sound of history being written, not in ink, but in code and silicon, and the pen was firmly in {family_name}’s hand.",
+        "A new audio feed pulsed into the room, a crisp, official report detailing geopolitical tensions in a region vital to the line’s raw material sourcing. The carefully modulated voice of the analyst described the actions of a competing conglomerate, hinting at subtle maneuvers that bore the unmistakable hallmarks of a rival lineage, their legacy in resource extraction clashing with {family_name}'s technological ambitions. The clash was not violent, but a quiet, strategic engagement, a battle of influence fought in the echoing silence of boardrooms and digital networks, each move a calculated chord in the century’s evolving melody."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The sharp, almost clinical tone of a communique from the rival line’s legal team reaches your desk, a veiled threat regarding intellectual property rights on a new energy conduit technology."
+          ],
+          "choice": {
+            "text": "Prepare for a legal battle, deploying your best corporate defense to protect your innovations.",
+            "motivatorShift": {
+              "honor": 1,
+              "power": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "legal_defense"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The whispers of an emerging open-source alternative to a proprietary {family_name} communication protocol gain traction in the global tech community, a decentralized threat to your centralized systems."
+          ],
+          "choice": {
+            "text": "Invest in parallel open-source development, co-opting the movement and integrating it into your ecosystem.",
+            "motivatorShift": {
+              "worldview": 1,
+              "reach": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "embrace_open_source"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t4:turn"
+    },
+    {
+      "id": "act:baghdad:technological:t4:turn",
+      "sense": "sight",
+      "prose": [
+        "The panoramic display dominating the command center flared, projecting a dynamic, three-dimensional representation of the Earth, a sapphire marble veined with shimmering lines of data flow. Each node, each flickering light, represented a segment of {family_name}'s global infrastructure, from the deep-sea fiber optic cables to the orbital satellites. {full_name}'s gaze swept across the intricate tapestry, observing the real-time ebb and flow of global commerce, the invisible currents of influence made manifest in light. This was the world, as seen through the lens of pure, unadulterated technological reach.",
+        "Against this backdrop, the faces of key stakeholders flickered into view on secondary screens – a council of ministers from a nascent economic bloc, a lead researcher from a revolutionary AI lab, a rival CEO with a predatory glint in their eyes. Their expressions, their subtle gestures, were all part of the visual calculus, each a factor in the monumental choice now looming. The decision before {full_name} was not merely about market share or next-quarter profits; it was about the fundamental architecture of the future, how technology would empower or constrain, connect or divide.",
+        "The stark contrast between the vibrant, ever-changing digital landscape and the unyielding realities of human ambition was sharply apparent. The path forward was bifurcated, each direction promising unprecedented power but demanding a different kind of sacrifice, a different vision for humanity's technological destiny. The very systems that {family_name} had brought into being now stood ready to be reshaped by {full_name}'s hand, for better or worse, casting a long, indelible shadow across the coming generations."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You observe the visual data flows, pinpointing inefficiencies in competitor networks, seeing avenues to consolidate your control over critical digital infrastructure."
+          ],
+          "choice": {
+            "text": "Pursue aggressive acquisition of vulnerable competitor assets.",
+            "motivatorShift": {
+              "power": 2,
+              "wealth": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "aggressive_consolidation"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your eyes trace the emerging patterns of a nascent global crisis – resource scarcity accelerating, demanding a radical, systemic overhaul, not just optimization."
+          ],
+          "choice": {
+            "text": "Initiate a daring, transformative project to reinvent a core global system.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "system_reinvention"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will {full_name} shape the global technological landscape for the next century?",
+        "options": [
+          {
+            "text": "Build a universal, integrated global operating system, centralizing control and standardizing access for all nations under the line's stewardship.",
+            "motivatorShift": {
+              "power": 3,
+              "politics": 2,
+              "worldview": -1,
+              "reach": 2
+            },
+            "setFlags": [
+              "major_decision_centralized_system"
+            ]
+          },
+          {
+            "text": "Pioneer a distributed, open-source technological architecture, empowering independent innovation and fragmenting global power away from any single entity.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 1,
+              "power": -2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "major_decision_distributed_system"
+            ]
+          },
+          {
+            "text": "Focus the line's immense resources on developing groundbreaking, proprietary technologies that solve humanity's greatest challenges, maintaining exclusive control over their deployment.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "honor": 1,
+              "lineage": 2
+            },
+            "setFlags": [
+              "major_decision_proprietary_innovation"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t4:close"
+    },
+    {
+      "id": "act:baghdad:technological:t4:close",
+      "sense": "taste",
+      "prose": [
+        "The rich, complex taste of an aged single malt lingered on {full_name}'s tongue, a subtle burn that mirrored the quiet satisfaction and the profound weariness of a generation’s work. It was a flavor of earned success, distilled from countless hours of relentless effort, strategic gambles, and the often-bitter compromises required to forge a global empire of technological innovation. This was the taste of leadership at its zenith, a legacy solidified.",
+        "Beneath the warmth of the spirit, a metallic tang – almost imperceptible – arose, a reminder of the relentless machinations, the fierce competition, and the ethical dilemmas that had peppered the line’s ascent. It was the taste of power itself, raw and potent, always accompanied by the faint aftertaste of what had been sacrificed along the way. The world had been reshaped, its systems optimized, its reach expanded, all under {full_name}'s stewardship, and now the moment of transition loomed.",
+        "A final, almost ceremonial sip, and the subtle, lingering sweetness of opportunity remained, a promise held for the next in line. The foundations laid were immense, the network vast, the influence undeniable. What would {given_name} {surname} taste when they inherited this sprawling, technological dominion? Would it be the fresh zest of new possibilities, or the familiar, heavy flavor of profound responsibility, knowing that the empire’s future, and with it, the trajectory of a significant part of the world, would soon rest in their hands?"
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You savor the taste of a stable, robust infrastructure, knowing the heir will inherit a perfected system, requiring only maintenance and careful stewardship."
+          ],
+          "choice": {
+            "text": "Emphasize stability and the enduring strength of the established order for the heir.",
+            "motivatorShift": {
+              "tradition": 1,
+              "lineage": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "heir_for_stability"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The lingering spice on your palate reminds you of the volatile, ever-changing nature of technology, a challenge that demands constant innovation from the next generation."
+          ],
+          "choice": {
+            "text": "Instill in the heir the urgency for relentless innovation and disruption.",
+            "motivatorShift": {
+              "reach": 1,
+              "worldview": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "heir_for_innovation"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:technological:t5:open",
+      "sense": "smell",
+      "prose": [
+        "The air inside the orbital habitat carried the faint, sterile tang of recirculated oxygen, a subtle metallic undertone that bespoke of countless filters and the very machinery of survival in the void. It was a scent both alien and deeply familiar, the fragrance of humanity's audacious dream made manifest. Below, the Earth hung like a painted marble, an impossible distance, yet its memory lingered in the ghost of recycled air, reminding {given_name} of the cramped, dust-filled workshops of the wave’s genesis, now replaced by the gleaming, expansive modules around them.",
+        "Mixed with the sterile scent was the faint, sweet-and-sour aroma of hydroponic nutrient solution, a promise of fresh growth pushing against the engineered sterility. It spoke of the delicate balance maintained, of life coaxed from the void, a testament to the meticulous, often overlooked work that allowed the grand visions to take flight. {given_name}'s early mornings often found them lingering near the cultivation decks, inhaling deeply, a quiet ritual that anchored them amidst the dizzying pace of interstellar progress.",
+        "Beneath these engineered scents, a deeper, almost imperceptible ozone hint sparked the nostrils, a byproduct of high-energy plasma drives and intricate power conduits humming silently through the station’s backbone. It was the smell of pure power, tamed and directed, the very essence of the technological ascendancy the {family_name} line had always championed. This was the frontier, not of deserts or oceans, but of vacuum and starlight, and the scent was its silent declaration."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A sudden surge of activity near the main observation deck introduced a sharper, more human scent — the faint perspiration of engineers, the rich, bitter waft of synthesized coffee, signaling a new initiative was about to unfold."
+          ],
+          "choice": {
+            "text": "Join the engineers, eager for the details of the next deep-space probe.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "probe_initiative_joined"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A lingering, earthy scent wafted from a nearby environmental control vent, perhaps a minor malfunction or an intentional release from a bio-reclamation unit, pulling {given_name}'s attention to the delicate, often precarious balance of the habitat."
+          ],
+          "choice": {
+            "text": "Inspect the environmental systems, prioritizing stability over grand gestures.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "environmental_stability_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t5:rising"
+    },
+    {
+      "id": "act:baghdad:technological:t5:rising",
+      "sense": "touch",
+      "prose": [
+        "The cool, smooth surface of the control panel yielded under {given_name}'s fingertips, a mosaic of haptic feedback and responsive interfaces that mapped the station's vital signs. Every flick of a switch, every glide across a holographic display, was a conversation with the intricate machinery sustaining them. This intimate dance with technology felt like an extension of their own will, the very air in the habitat a silent hum against their skin, a constant reminder of the engineered reality they now inhabited.",
+        "Outside the observation port, the cosmos presented itself as an overwhelming tapestry of distant light and profound blackness. {given_name} pressed a palm against the tempered transparisteel, feeling the faint, subtle vibration of the station's thrusters making micro-adjustments against the void. It was a tangible connection to the immensity beyond, a thin barrier separating the fragile breath of humanity from the indifferent vacuum. The glass was cool, almost icy, a stark contrast to the warmth of their own blood.",
+        "Later, calibrating a newly installed atmospheric processor, the coarse texture of an unfinished conduit grate scraped against their gloves. It was a physical reminder of the ongoing struggle, the raw, unpolished effort beneath the gleaming surfaces. The pressure of the magnetic boots held them firmly to the deck, a familiar, comforting weight in the microgravity, a testament to the ingenuity required to simply exist in this new frontier."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "As {given_name} ran a hand over a newly-printed component, its slightly grainy texture spoke of recent fabrication, hinting at a bottleneck in the supply chain that demanded a solution."
+          ],
+          "choice": {
+            "text": "Divert resources to accelerate the local fabrication network.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "fabrication_accelerated"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A familiar warmth spread through {given_name}'s hand as they gripped a worn, ergonomic tool, a relic from an earlier, more Earth-bound generation of engineers, offering a moment of quiet connection to their predecessors."
+          ],
+          "choice": {
+            "text": "Reflect on the legacy, focusing on training the next generation with practical skills.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "legacy_focus_training"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "What aspect of this new frontier will {given_name} prioritize, now that the immediate challenges are managed?",
+        "options": [
+          {
+            "text": "Focus on optimizing resource extraction and industrial output from asteroid fields.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "priority_resource_extraction"
+            ]
+          },
+          {
+            "text": "Direct efforts towards deep-space surveys and the search for new phenomena.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "priority_deep_space_survey"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t5:midpoint"
+    },
+    {
+      "id": "act:baghdad:technological:t5:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The omnipresent hum of the station's life support systems formed a low, resonant bass note beneath the myriad other sounds: the faint clatter of tools from a distant maintenance bay, the rhythmic whoosh of automated cargo shuttles docking, and the soft, modulated voices of the crew over the intercom. It was a symphony of industriousness, a constant reminder of the delicate, yet powerful, ecosystem humanity had built among the stars. Every creak of the hull, every distant whir, spoke of immense forces held in check by ingenuity.",
+        "Suddenly, a distinct, unfamiliar chattering overlaid the background hum, an anomaly in the usual cadence. It wasn't an alarm, but a rapid, almost melodic sequence of pulses emanating from the long-range comms array. Technicians quickly identified it as a signal, complex and structured, but originating from an unscheduled, unknown source. The station fell into a tense, anticipatory quiet, every ear straining to decipher the implications of this new sound.",
+        "As the comms specialists worked, the signal resolved into a discernible pattern, unmistakably artificial, yet distinct from any known human encryption or transmission protocol. It carried an echoing, almost cavernous quality, as if broadcast from within a vast, hollow space. This was not merely static; it was a conversation, perhaps a challenge, or an invitation, from an unseen entity in the vast dark. The stakes of the cosmos, already immense, suddenly magnified tenfold."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The rhythmic 'thrum-thrum' of an overloaded power conduit became insistent, drawing attention away from the enigmatic signal and towards a more immediate, internal threat to the station's stability."
+          ],
+          "choice": {
+            "text": "Prioritize rerouting power to stabilize the station's core systems.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 0,
+              "reach": -1
+            },
+            "setFlags": [
+              "power_rerouted_stability"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Amidst the comms chatter, a faint, familiar linguistic signature from a rival wave's transmission filtered through, suggesting their presence nearby and perhaps their own encounter with the enigmatic signal."
+          ],
+          "choice": {
+            "text": "Attempt to establish secure communications with the rival wave to share information.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "rival_comm_attempted"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t5:turn"
+    },
+    {
+      "id": "act:baghdad:technological:t5:turn",
+      "sense": "sight",
+      "prose": [
+        "From the panoramic viewport, the newly charted star system unfurled like a jewel-box, its central star a brilliant, sapphire beacon against the velvet black. Orbiting it, a cluster of newly terraformed planets, glimmering with nascent atmospheres and the first tentative green of engineered ecosystems, bore testament to humanity's tireless will. One particular world, designated 'New Baghdad,' pulsed with the bright, spreading lights of nascent cities, a beacon of the {family_name} line's ambition etched across the cosmos.",
+        "Closer still, the intricate lattice of orbital construction platforms shimmered, a spiderweb of steel and light, constantly expanding, assembling the next generation of deep-space vessels and long-term habitats. Each structural beam, each flashing weld, was a visible manifestation of their technological prowess, a stark contrast to the barren, airless moons that peppered the outer reaches of the system. The sheer scale of the endeavor was breathtaking, a colossal monument to their collective dream.",
+        "As {full_name} surveyed the system, the faint, shimmering distortion of an unidentified energy signature registered on the long-range scanners, a ghostly ripple near the system's distant asteroid belt. It was almost imperceptible, a trick of the light perhaps, but it suggested a presence, a watchful eye, or perhaps an entirely new, uncatalogued phenomenon. The vastness of space, once a canvas for humanity's expansion, now seemed to hold secrets, and potential rivals, within its shimmering depths."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The holographic display highlighted the projected population growth of New Baghdad, a vibrant, almost overwhelming expansion that demanded rapid, decisive infrastructural scaling."
+          ],
+          "choice": {
+            "text": "Push for rapid, standardized deployment of automated construction fleets to meet demand.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 1,
+              "power": 2,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "automated_construction_pushed"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A sudden, brilliant flare of unknown origin briefly eclipsed a distant nebula, an awe-inspiring celestial event that shifted the focus from the mundane to the truly profound, suggesting wonders yet undiscovered."
+          ],
+          "choice": {
+            "text": "Redirect resources to scientific survey missions, prioritizing exploration over immediate expansion.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "scientific_exploration_prioritized"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will {full_name}'s leadership define the line's role in humanity's celestial expansion, now that the stars are within reach?",
+        "options": [
+          {
+            "text": "Advocate for a methodical, sustainable expansion, prioritizing long-term ecological and resource stability.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "expansion_sustainable"
+            ]
+          },
+          {
+            "text": "Champion rapid, aggressive colonization and resource acquisition to secure dominance in key systems.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": 1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "expansion_aggressive"
+            ]
+          },
+          {
+            "text": "Focus on scientific discovery and the ethical exploration of new life, even if it slows territorial claims.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 3,
+              "power": 0,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "expansion_scientific_ethical"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:technological:t5:close"
+    },
+    {
+      "id": "act:baghdad:technological:t5:close",
+      "sense": "taste",
+      "prose": [
+        "The synthesized nutrient paste, a staple of long-duration space travel, offered a vaguely sweet, metallic tang on {given_name}'s tongue, a flavor that had become emblematic of survival and progress. It wasn't Earth's bounty, but it was sustenance, manufactured with ingenuity in the heart of humanity's furthest reach. Each mouthful was a reminder of the raw, pragmatic struggle that underpinned every shining technological triumph, the constant battle against the void's indifference.",
+        "Later, celebrating a new milestone, the hydroponic wine — a rare vintage from the station's nascent vineyards — offered a surprisingly earthy, complex bouquet. Its taste was a testament to the patient cultivation of life amidst the stars, a small luxury painstakingly wrested from the hard science of their new existence. It held the faint, hopeful taste of soil, of growth, a promise of something richer to come, a legacy that transcended mere survival.",
+        "The metallic aftertaste of a necessary, but difficult, decision lingered like a bitter coating on the palate, a reminder that even among the stars, leadership demanded sacrifices. It was the taste of responsibility, of generations built upon the choices of the present. {given_name} knew this flavor would be inherited, woven into the very being of their successor, just as the pioneering spirit of their wave had been passed down to them."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A final, shared meal of expertly replicated ancient Earth cuisine offered a nostalgic taste of home, a comforting anchor amidst the swirling currents of galactic ambition."
+          ],
+          "choice": {
+            "text": "Share a final, reflective toast to the past and the unwavering spirit of the {family_name} line.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "toast_lineage_spirit"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The sharp, invigorating taste of a newly developed stimulant, designed for enhanced cognitive function in extreme environments, energized {given_name}, a jolt into the future's endless possibilities."
+          ],
+          "choice": {
+            "text": "Embrace the next frontier, pushing the boundaries of human potential and technological integration.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "embrace_cognitive_enhancement"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}

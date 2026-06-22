@@ -1,0 +1,2086 @@
+{
+  "acts": [
+    {
+      "id": "act:scandinavian:athletic:t0",
+      "wave": "scandinavian",
+      "archetype": "athletic",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — The Crossing",
+      "scenes": [
+        "act:scandinavian:athletic:t0:open",
+        "act:scandinavian:athletic:t0:rising",
+        "act:scandinavian:athletic:t0:midpoint",
+        "act:scandinavian:athletic:t0:turn",
+        "act:scandinavian:athletic:t0:close"
+      ]
+    },
+    {
+      "id": "act:scandinavian:athletic:t1",
+      "wave": "scandinavian",
+      "archetype": "athletic",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — The New Ground",
+      "scenes": [
+        "act:scandinavian:athletic:t1:open",
+        "act:scandinavian:athletic:t1:rising",
+        "act:scandinavian:athletic:t1:midpoint",
+        "act:scandinavian:athletic:t1:turn",
+        "act:scandinavian:athletic:t1:close"
+      ]
+    },
+    {
+      "id": "act:scandinavian:athletic:t2",
+      "wave": "scandinavian",
+      "archetype": "athletic",
+      "tier": 2,
+      "macroAct": "emergence",
+      "title": "Act III — The Climb",
+      "scenes": [
+        "act:scandinavian:athletic:t2:open",
+        "act:scandinavian:athletic:t2:rising",
+        "act:scandinavian:athletic:t2:midpoint",
+        "act:scandinavian:athletic:t2:turn",
+        "act:scandinavian:athletic:t2:close"
+      ]
+    },
+    {
+      "id": "act:scandinavian:athletic:t3",
+      "wave": "scandinavian",
+      "archetype": "athletic",
+      "tier": 3,
+      "macroAct": "emergence",
+      "title": "Act IV — A Name in the World",
+      "scenes": [
+        "act:scandinavian:athletic:t3:open",
+        "act:scandinavian:athletic:t3:rising",
+        "act:scandinavian:athletic:t3:midpoint",
+        "act:scandinavian:athletic:t3:turn",
+        "act:scandinavian:athletic:t3:close"
+      ]
+    },
+    {
+      "id": "act:scandinavian:athletic:t4",
+      "wave": "scandinavian",
+      "archetype": "athletic",
+      "tier": 4,
+      "macroAct": "ascension",
+      "title": "Act V — The World Player",
+      "scenes": [
+        "act:scandinavian:athletic:t4:open",
+        "act:scandinavian:athletic:t4:rising",
+        "act:scandinavian:athletic:t4:midpoint",
+        "act:scandinavian:athletic:t4:turn",
+        "act:scandinavian:athletic:t4:close"
+      ]
+    },
+    {
+      "id": "act:scandinavian:athletic:t5",
+      "wave": "scandinavian",
+      "archetype": "athletic",
+      "tier": 5,
+      "macroAct": "ascension",
+      "title": "Act VI — The Reach for the Stars",
+      "scenes": [
+        "act:scandinavian:athletic:t5:open",
+        "act:scandinavian:athletic:t5:rising",
+        "act:scandinavian:athletic:t5:midpoint",
+        "act:scandinavian:athletic:t5:turn",
+        "act:scandinavian:athletic:t5:close"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "act:scandinavian:athletic:t0:open",
+      "sense": "smell",
+      "prose": [
+        "The air in the steerage hold hung thick with the cloying sweetness of stale apples mixed with the metallic tang of vomit and the pervasive, damp scent of unwashed bodies. It was a smell that burrowed deep into the lungs, an inescapable miasma that became synonymous with the journey itself. Every roll of the ship churned not only the stomachs of those below deck but also the very odors, blending them into a suffocating, living presence that never truly dissipated, even when the hatches were occasionally opened to the biting sea air.",
+        "Amidst this oppressive blend, a faint, hopeful scent sometimes pierced through: the clean, sharp aroma of pine resin from the raw lumber used to shore up cargo, or the distant, salty breath of the ocean itself, promising vast, open spaces beyond this cramped, heaving purgatory. {surname} {given_name} would breathe these in deeply, trying to purge the other, heavier smells from their memory, knowing that soon, there would be clean air, clean earth.",
+        "Yet, even with the promise, the persistent smell of mildewed cloth and the faint, acrid bite of coal smoke from the ship’s engines were constant reminders of their present reality. It clung to their rough woolen clothes, to their skin, a pervasive signature of the crossing that would forever mark them, a ghost in every thread. It was the scent of desperation, of hope, and of a future yet unwritten, all wrapped into one suffocating shroud."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "In the dim light, the persistent smell of sweat, not just from the damp heat but from shared efforts, mingled with the sea air whenever the storm abated enough for deck access."
+          ],
+          "choice": {
+            "text": "Help lash down loose cargo, the physical strain a welcome distraction.",
+            "motivatorShift": {
+              "power": 1,
+              "honor": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "helped_cargo"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The faint aroma of cured meats and hardtack, carefully rationed, sometimes offered a brief, solid anchor against the shifting world."
+          ],
+          "choice": {
+            "text": "Tend to the family's meager stores, ensuring every crumb is preserved.",
+            "motivatorShift": {
+              "wealth": 1,
+              "lineage": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "preserved_stores"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t0:rising"
+    },
+    {
+      "id": "act:scandinavian:athletic:t0:rising",
+      "sense": "touch",
+      "prose": [
+        "The first solid ground beneath {given_name}'s feet was not the promised land, but the rough, splintered planks of a bustling dock. The touch of it was jarring after weeks of relentless swaying, a sensation so firm it almost felt alien. The jostle of the crowd, the accidental shoves, the press of bodies eager to disembark – each brush was a sharp reminder of their arrival, a chaotic welcome that left little room for contemplation. The air, though fresher, still carried the grit of coal dust, settling on every exposed patch of skin.",
+        "The cold, unyielding metal of their few possessions, the handles of their worn trunks, bit into their hands as they dragged them along. Every muscle ached with the effort, a familiar fatigue that had been a constant companion since leaving their homeland, now intensified by the sudden, overwhelming activity of the port. The coarse weave of their clothes, damp from the journey and the coastal chill, chafed against their skin, a minor discomfort easily forgotten amidst the larger, gnawing anxiety of the unknown.",
+        "Later, the temporary lodging offered little comfort. A rough-hewn cot, its mattress thin and lumpy, offered a stark contrast to the familiar beds they had left behind. The chill that seeped through the thin walls seemed to penetrate to the bone, a constant, physical presence that underscored their vulnerability. Yet, even in this discomfort, the simple warmth of a shared blanket, the reassuring brush of a family member’s arm in the crowded room, was a small, precious anchor in the swirling current of their new existence."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A rough hand-off of heavy luggage from a dockworker threatened to send {given_name} stumbling onto the slick, refuse-strewn pier."
+          ],
+          "choice": {
+            "text": "Brace and lift the burden, showing strength despite the strain.",
+            "motivatorShift": {
+              "power": 1,
+              "honor": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "shown_strength"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A quiet, knowing touch on the shoulder from another Scandinavian immigrant offered a moment of shared understanding amidst the chaos."
+          ],
+          "choice": {
+            "text": "Accept the offer of help, finding camaraderie in the struggle.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "accepted_help"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The small amount of money you carried has dwindled quickly in the city. A local foreman offers a day's labor, but it's back-breaking work, and he eyes you with suspicion.",
+        "options": [
+          {
+            "text": "Take the foreman's offer, demonstrating your family's capacity for hard work.",
+            "motivatorShift": {
+              "wealth": 2,
+              "honor": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "took_hard_labor"
+            ]
+          },
+          {
+            "text": "Seek out the Scandinavian aid society, hoping for a more immediate, if less lucrative, path.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "sought_aid_society"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t0:midpoint"
+    },
+    {
+      "id": "act:scandinavian:athletic:t0:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cacophony of the city was a relentless assault on the ears, a stark contrast to the quiet, wind-whispered rhythms of the old country. Horse-drawn carts rumbled over cobblestones, their iron-shod wheels rattling a constant bass note. Street vendors hawked their wares in a dizzying array of accents and pitches, their cries weaving through the din of general chatter. Above it all, the distant, mournful wail of a factory whistle would cut through the air, signaling shifts and lives bound to the clockwork of industry.",
+        "Within the immigrant ward, the sounds shifted. Here, the familiar cadence of their native tongue could sometimes be heard, a comfort in the otherwise alien soundscape. Yet, it was often punctuated by the sharper, more demanding tones of the dominant language, sometimes spoken with impatience or thinly veiled disdain. The playful shouts of children, a universal language, mingled with the stern admonitions of parents, often in a mix of both old and new words, a linguistic tapestry fraying at the edges.",
+        "Late at night, when the city's roar subsided to a dull hum, other sounds emerged: the distant clink of bottles from a saloon, the lonely cry of a night watchman, or the rustle of rats in the alleyways. These were the quiet undertones of a life on the fringes, constant reminders of their struggle and their place. Sometimes, from a neighboring tenement, a mournful melody would drift, a traditional folk song played on a harmonica, a shared lament that resonated deep within the soul, echoing the unspoken anxieties and hopes of a transplanted people."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A neighbor's loud, angry outburst in their new tongue drifts clearly through the thin walls, making the small room feel even more exposed."
+          ],
+          "choice": {
+            "text": "Turn to your family, speaking in hushed tones of home and future plans.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "family_focused"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The boisterous laughter from the common room below, a mix of languages, swells and recedes, carrying snippets of unfamiliar conversations."
+          ],
+          "choice": {
+            "text": "Listen intently to the varied voices, trying to discern the currents of the new community.",
+            "motivatorShift": {
+              "politics": 1,
+              "reach": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "community_attuned"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t0:turn"
+    },
+    {
+      "id": "act:scandinavian:athletic:t0:turn",
+      "sense": "sight",
+      "prose": [
+        "The burgeoning immigrant ward was a canvas of contrasts: the stark, angular lines of new brick tenements rising cheek by jowl with the ramshackle wooden shanties clinging to the edges of the established districts. Dust from construction mingled with the perpetual grime of coal smoke, creating a hazy filter over everything. Children, often barefoot and clad in patched clothing, played in the unpaved streets, their games a vivid splash of life against the drab backdrop of poverty and industry.",
+        "{given_name} often observed the faces of their neighbors, seeing a spectrum of expressions from weary resignation etched deep in the eyes of older men, to the fierce, bright spark of ambition in the gaze of younger women. The marketplace was a riot of color and movement, a vibrant testament to resilience, with stalls displaying meager goods, yet adorned with hopeful, if faded, ribbons. Every glance offered a story: the stoop of a laborer carrying a heavy load, the hurried stride of a woman with a basket, the watchful eyes of a shopkeeper.",
+        "Beyond the immediate squalor, the faint, shimmering towers of the distant city center could be glimpsed on clear days, a tantalizing vision of wealth and permanence that felt both impossibly far and yet within reach. These were the buildings of power, of a world that seemed to operate by different rules, a world they had yet to fully comprehend, let alone enter. The contrast between their immediate surroundings and that distant promise fueled both a sense of profound injustice and an unyielding determination to bridge the gap."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The sight of a young boy, no older than your own child, laboring in the street, his small frame struggling with a heavy cart, clenches your gut."
+          ],
+          "choice": {
+            "text": "Focus on the pervasive hardship, recognizing the need for direct, immediate relief.",
+            "motivatorShift": {
+              "worldview": 1,
+              "politics": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "observed_hardship"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You catch sight of a small gathering, a group of new arrivals pooling their meager resources to construct a new community hall, however crude."
+          ],
+          "choice": {
+            "text": "Witness the powerful spirit of collaboration, seeing potential for growth and influence.",
+            "motivatorShift": {
+              "reach": 1,
+              "lineage": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "observed_collaboration"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The immigrant ward is growing, but it lacks institutions beyond basic shelter. What will {full_name}'s generation prioritize for your people's foothold here?",
+        "options": [
+          {
+            "text": "Establish a benevolent society to provide direct aid and relief for struggling families.",
+            "motivatorShift": {
+              "wealth": 2,
+              "honor": 2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "established_benevolent_society"
+            ]
+          },
+          {
+            "text": "Champion a local athletic club, fostering physical prowess and community pride.",
+            "motivatorShift": {
+              "power": 2,
+              "worldview": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "championed_athletic_club"
+            ]
+          },
+          {
+            "text": "Advocate for better wages and working conditions, organizing laborers for collective bargaining.",
+            "motivatorShift": {
+              "politics": 2,
+              "reach": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "advocated_labor_rights"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t0:close"
+    },
+    {
+      "id": "act:scandinavian:athletic:t0:close",
+      "sense": "taste",
+      "prose": [
+        "The taste of rye bread, dense and slightly sour, remained a constant. It was the taste of sustenance, of humble beginnings, and the enduring connection to the land they had left behind. Even when other foods became available, the simple rye, perhaps with a scraping of lard or a sliver of dried fish, was the anchor meal, a reminder of survival. It carried the faint, earthy bitterness of hard work, a flavor that settled deep on the tongue and lingered, a testament to what it took to put food on the table.",
+        "Sometimes, a small luxury would grace their table: the sharp, bright taste of a berry jam, or the unexpected sweetness of a stolen apple. These were rare, almost miraculous moments, fleeting bursts of pleasure that made the everyday monotony of plain fare bearable. They tasted of hope, of small victories, and the possibility of a sweeter life yet to come. These moments were often savored in quiet, almost reverent silence, each bite a tiny celebration of endurance.",
+        "As the generation closed its chapter, the flavors deepened. The bitterness of struggle was still there, but now tempered by the rich, umami depth of a stew simmered long and carefully, a testament to newfound stability. The salt of tears had been replaced by the salt of cured meats, carefully prepared and preserved, symbolizing foresight and a burgeoning sense of security. The palate of {full_name}'s generation, though still humble, had expanded, reflecting not just survival, but the first delicate blossoming of a life planted in new soil, ready for the next harvest."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The last bite of hardtack, softened with water, still carries the dry, enduring taste of the journey, a reminder of how far you’ve come from sheer survival."
+          ],
+          "choice": {
+            "text": "Reflect on the persistent need for thrift and the sacrifices made.",
+            "motivatorShift": {
+              "wealth": 1,
+              "tradition": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "reflected_thrift"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A small, precious piece of buttered bread, a rare treat, leaves a lingering richness on the tongue, hinting at future abundance."
+          ],
+          "choice": {
+            "text": "Savor the small comforts, envisioning a future where such simple pleasures are plentiful.",
+            "motivatorShift": {
+              "reach": 1,
+              "lineage": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "envisioned_abundance"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:scandinavian:athletic:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The raw, primal scent of broken earth clung to the air, a damp, mineral tang rising from the freshly upturned sod. It was the smell of promise and immense effort, a deep, musty odor that coated the back of the throat, mingling with the sharp, resinous perfume of pine needles crushed underfoot and the distant, acrid smoke of a brush pile burning low. Each heave of the axe, each grunt of exertion, stirred this earthy aroma, painting the new claim with the undeniable reality of labor.",
+        "Sweat, salty and warm, trickled down {given_name}'s brow, mixing with the dust of the field and adding another layer to the olfactory tapestry of their new home. The familiar, comforting scent of linen, worn soft from countless washings and sun-drying, was a faint undercurrent beneath the stronger notes of damp wool and tanned leather. This was the smell of their beginning, a scent that was both alien and deeply, profoundly familiar, echoing the ancient practices of their forebears even as it spoke of an entirely new world."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The sharp, invigorating scent of freshly sawn timber filled the lungs, a testament to the day’s arduous, tangible progress."
+          ],
+          "choice": {
+            "text": "Focus solely on clearing the next parcel, harnessing every ounce of physical strength.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "lineage": -1
+            },
+            "setFlags": [
+              "focused_labor"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Yet, beneath the vigor, a more subtle, damp smell of undisturbed soil called, suggesting the vastness of what still lay ahead."
+          ],
+          "choice": {
+            "text": "Delegate tasks, guiding others to scout for the best future plots, balancing immediate needs with long-term vision.",
+            "motivatorShift": {
+              "reach": 2,
+              "lineage": 1,
+              "tradition": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "strategic_planning"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t1:rising"
+    },
+    {
+      "id": "act:scandinavian:athletic:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough, unfinished planks of the cabin walls abraded {given_name}'s hands, each splinter a minor testament to the relentless push to establish shelter before the deep cold set in. The wind, sharp and insistent, found every gap in the hastily chinked logs, carrying with it a bite that chilled to the bone even through heavy woolen layers. Every surface felt raw, unyielding, demanding strength and resilience from those who sought to make it a home, a constant pressure on worn muscles and tired joints.",
+        "Yet, within the nascent dwelling, the occasional brush of a child's soft cheek against a calloused hand, or the reassuring warmth of a shared blanket by the sputtering hearth, offered moments of profound relief. The ache in the shoulders, the tremor in the fingers from a day of lifting and shaping, were a constant companion, but so too was the quiet comfort of intertwined lives, the collective weight of bodies pressing together against the vast, indifferent wilderness. The very air, thick with the scent of woodsmoke and damp earth, pressed in, a palpable embrace of their shared struggle."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A dull throb deep in the forearm reminded {given_name} of the day's heaviest lifts, the immediate consequence of exertion."
+          ],
+          "choice": {
+            "text": "Seek immediate rest, trusting others to manage the evening tasks, prioritizing individual recovery.",
+            "motivatorShift": {
+              "wealth": -1,
+              "power": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "personal_recovery"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The cool, reassuring press of {family_name}’s hand against {given_name}'s shoulder spoke of a shared burden, a collective endurance."
+          ],
+          "choice": {
+            "text": "Push through the fatigue, aiding the younger ones with chores, reinforcing the family's work ethic.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "collective_effort"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The new ground offers scant reward for individual glory. How do you reinforce the bond among your kin?",
+        "options": [
+          {
+            "text": "Organize an evening of physical games and friendly contests, fostering spirited competition and shared pride.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "athletic_tradition_reinforced"
+            ]
+          },
+          {
+            "text": "Spend the evening teaching essential survival skills, ensuring every member contributes to the common welfare through practical knowledge.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1,
+              "worldview": 2
+            },
+            "setFlags": [
+              "practical_skill_focus"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t1:midpoint"
+    },
+    {
+      "id": "act:scandinavian:athletic:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The steady rhythm of axe on timber, growing ever more frequent and closer, underscored the relentless march of settlement. Distant shouts, the lowing of newly acquired livestock, and the occasional clang of metal on metal from what must be a nascent smithy, wove themselves into a new soundscape. These were the sounds of a community taking root, each audible sign a ripple in the fabric of their isolated existence, signaling the rise of a local economy where transactions and reputations would soon hold sway.",
+        "Closer still, the boisterous laughter of children at play mingled with the terse, murmured conversations of adults bartering for supplies near the newly erected trading post. The quick, sharp cadence of a merchant's voice arguing prices, and the slower, more deliberate tone of a farmer defending his wares, presented a sonic tapestry of burgeoning commerce. This new symphony was a constant, almost imperceptible pressure, reminding {full_name} that their physical prowess alone would not secure their place in this rapidly evolving world."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A passing wagon, laden with goods, rattled loudly, drawing attention to the established trades already moving through the area."
+          ],
+          "choice": {
+            "text": "Approach the wagon driver to inquire about routes and goods, seeking to understand the flow of local commerce.",
+            "motivatorShift": {
+              "wealth": 1,
+              "reach": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "economic_scouting"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The sound of distant hammer blows from another family's claim echoed through the trees, a clear sign of another industrious rival, or perhaps, a future partner."
+          ],
+          "choice": {
+            "text": "Return to training with renewed vigor, ensuring the family's physical capability remains unmatched, setting an example through discipline.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "athletic_dominance_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t1:turn"
+    },
+    {
+      "id": "act:scandinavian:athletic:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "From the crest of the small hill, the visible transformation of the land was stark. What had been an unbroken expanse of forest now bore the scars of human endeavor: neat rows of cleared fields, the skeletal frames of new buildings rising, and rudimentary tracks carving paths through the wilderness. It was a mosaic of ambition, each homestead a small, determined outpost, collectively forming the nascent shape of a community. The {family_name} claim, while industrious, was but one thread in this burgeoning tapestry, its visual prominence a matter of strategic choice.",
+        "The sight of neighbors gathering for a communal task, their figures silhouetted against the setting sun, highlighted the growing interdependence. Some hauled logs, others dug foundations, while children, their laughter bright against the evening chill, chased each other through the nascent streets. How {full_name}'s family would visually integrate into this developing town, whether as solitary pillars of strength or as central figures in its communal heart, now stood at a crossroads, their decision etched onto the very landscape for generations to come."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The sun glinted off the freshly cleared fields of a particularly well-organized neighboring family, a clear visual benchmark of progress."
+          ],
+          "choice": {
+            "text": "Visit the neighboring claim to observe their clearing methods, seeking to replicate and improve upon their efficiency.",
+            "motivatorShift": {
+              "wealth": 1,
+              "worldview": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "efficiency_observation"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A group of younger folk engaged in a spontaneous wrestling match near the central clearing, their energetic forms a familiar and welcome sight."
+          ],
+          "choice": {
+            "text": "Offer to officiate the match, lending legitimacy and order to the impromptu contest, asserting a role in community recreation.",
+            "motivatorShift": {
+              "honor": 1,
+              "power": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "community_athletic_leadership"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The new settlement thrives, but its character remains unformed. How will the {family_name} line indelibly shape this community's identity?",
+        "options": [
+          {
+            "text": "Advocate for the establishment of a formal athletic ground and regular competitive events, enshrining physical prowess as a cornerstone of communal life.",
+            "motivatorShift": {
+              "worldview": 2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "athletic_community_focus",
+              "founded_athletic_culture"
+            ]
+          },
+          {
+            "text": "Focus the family's efforts on developing essential infrastructure, such as improved roads or a communal mill, leveraging their strength for practical community benefits.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "infrastructure_builder",
+              "practical_community_focus"
+            ]
+          },
+          {
+            "text": "Maintain a focused independence, dedicating all family strength to expand personal holdings and establish a dominant trade, serving the community through personal prosperity.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "worldview": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "independent_powerhouse",
+              "self_reliance_focus"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t1:close"
+    },
+    {
+      "id": "act:scandinavian:athletic:t1:close",
+      "sense": "taste",
+      "prose": [
+        "The hearty, unpretentious taste of smoked fish and dark, rye bread lingered on the palate after the evening meal, a deep, satisfying flavor that spoke of simple, honest sustenance and hard-won harvests. It was the taste of self-sufficiency, of calories earned through sweat and ingenuity, a reminder of the raw wilderness they had bent to their will. This was the flavor of their new ground, earthy and strong, nourishing not just the body but the very spirit of the {family_name} line.",
+        "Yet, within the savory comfort, there were also subtle, sharper notes: the tang of wild berries, perhaps, or the bitter aftertaste of disappointment from a failed venture. These were the varied flavors of experience, lessons absorbed not just through the mind but through the very senses, a complex palate of triumphs and struggles. This generation, now fading, had distilled these experiences into a legacy, a potent blend of physical aptitude and profound resilience, ready to be passed down, a taste that would define {full_name}'s heir for decades to come."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The rich, satisfying taste of a successful hunt filled the senses, a tangible reward for skill and effort."
+          ],
+          "choice": {
+            "text": "Relish the fruits of personal prowess, emphasizing individual strength as the ultimate measure of success.",
+            "motivatorShift": {
+              "honor": 1,
+              "power": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "individual_excellence"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The shared warmth of the communal hearth, and the lingering taste of shared provisions, underscored the deeper satisfaction of collective survival."
+          ],
+          "choice": {
+            "text": "Ponder the future gatherings, reflecting on how best to cultivate and sustain the spirit of cooperation among their descendants.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "communal_legacy_reflection"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:scandinavian:athletic:t2:open",
+      "sense": "smell",
+      "prose": [
+        "The sharp, metallic tang of sweat mixed with the comforting, earthy scent of damp wood permeated the air of the gymnasium. It clung to the rough-spun clothes, to the very skin, a constant reminder of the hours spent straining against gravity, against each other, in pursuit of strength and discipline. Below it all, a faint, persistent whisper of lye soap and inexpensive disinfectant fought a losing battle against the more potent aromas of ambition and exertion, creating a unique bouquet that was the very essence of their days.",
+        "Beyond the gymnasium, the scent of the city's industry crept in through the cracks around the windows – coal smoke, stale beer from the corner tavern, and the distinctive, slightly sour smell of the docks where so many of their kin still labored. Even the familiar aroma of boiled potatoes and pickled herring from home, comforting as it was, carried a hint of the meager circumstances that pressed in from all sides. Each breath was a testament to the life they lived, an insistent echo of their origins and the unyielding efforts required to climb higher.",
+        "Yet, amidst the grit and the grind, there was a cleaner, crisper scent that occasionally cut through the miasma: the faint, bracing perfume of liniment rubbed into sore muscles, a promise of recovery and renewed effort. It was the smell of healing, of preparation, and of an unshakeable belief in the power of the body to overcome. This was the true aroma of their people, a blend of resilience and raw, physical drive.",
+        "Every inhale was a reminder of the narrow corridor of their present, yet also a silent prayer for the wider, cleaner air of the future they strove for. The aroma of opportunity, though still distant, beckoned, a subtle shift in the olfactory landscape promising something more than just survival."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You find your daily solace in the relentless rhythm of physical labor, pushing yourself to exhaustion."
+          ],
+          "choice": {
+            "text": "Lean into the familiar, demanding work ethic.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": -1,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": -1
+            },
+            "setFlags": [
+              "athletic_grit_emphasized"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You seek out a new, more refined athletic discipline, hoping it will open doors beyond the docks or the factory floor."
+          ],
+          "choice": {
+            "text": "Explore new skills, aiming for upward mobility.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "athletic_refinement_pursued"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t2:rising"
+    },
+    {
+      "id": "act:scandinavian:athletic:t2:rising",
+      "sense": "touch",
+      "prose": [
+        "The calluses on your palms, once a mark of raw, unyielding labor, now carried a subtle, different texture. They were still thick, but perhaps less coarse, smoothed by the rhythmic friction of gymnasium ropes or the polished handles of new tools, rather than the rough-hewn timber of the wharf. This subtle change was a physical manifestation of the evolving path {full_name} carved, the body adapting not just to endurance, but to a more precise, strategic application of strength.",
+        "At times, the heavy, comforting weight of your mother's hand on your shoulder offered a moment of respite from the relentless internal pressure. Her grip, familiar and strong from a lifetime of toil, was a grounding force, connecting you to the unwavering loyalty expected within the family and the wave. Yet, an invisible pressure also bore down, the intangible weight of ambition pushing you towards opportunities that felt increasingly distant from the shared warmth of that touch, towards a future that was less communal.",
+        "A handshake with a potential benefactor or a new business associate carried a different kind of touch—firm, calculating, a fleeting connection that conveyed power dynamics and unspoken terms. The smooth, almost silken feel of a new fabric, perhaps a uniform or a suit worn for a formal meeting, felt foreign against the skin, a stark contrast to the rough cotton and wool of your upbringing. These were the tactile sensations of a world that demanded a new kind of physical engagement, one less about brute force and more about finesse and presentation.",
+        "Each day presented a new test of resilience, the subtle ache in your joints after a particularly demanding training session mirroring the strain of difficult choices. It was the touch of progress, a constant, nagging reminder that the ascent was neither gentle nor effortless, but a continuous series of small, deliberate efforts, each one leaving its mark."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You decide to honor an informal agreement made with a childhood friend, prioritizing loyalty over a potentially more lucrative, but riskier, business prospect."
+          ],
+          "choice": {
+            "text": "Uphold a promise, strengthening community ties.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": -1,
+              "power": -1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "loyalty_over_profit"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You discreetly pursue an opportunity that bypasses the traditional networks, seeing a quicker path to financial stability for your immediate family."
+          ],
+          "choice": {
+            "text": "Seek individual advancement, prioritizing family wealth.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "individual_gain_pursued"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The community looks to you, {given_name}, seeing your emerging success. How do you balance their expectations with your own family’s upward trajectory?",
+        "options": [
+          {
+            "text": "Invest a portion of your new earnings back into the community, perhaps sponsoring a local athletic club or expanding opportunities for your wave.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "community_investment"
+            ]
+          },
+          {
+            "text": "Focus solely on consolidating your family's new wealth, believing that a strong core will eventually uplift the whole.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": -1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "family_consolidation"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t2:midpoint"
+    },
+    {
+      "id": "act:scandinavian:athletic:t2:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cacophony of the old neighborhood, once a constant, familiar drone, now seemed to recede, replaced by the more measured, albeit still vibrant, symphony of their new surroundings. The shrill cries of street vendors and the distant clatter of the tram gave way to the softer murmur of polite conversations filtering from neighboring homes, and the occasional, refined chime of a parlor piano. Even the sounds of children at play were different here, less boisterous, more contained, echoing off manicured lawns rather than cobblestone alleys.",
+        "Yet, the echoes of their climb were never truly silent. The rhythmic thud of a punching bag in a hastily converted basement room or the sharp, controlled breathing during an early morning run still punctuated the quieter hours, a testament to the discipline that defined {family_name}s. This personal soundtrack of physical excellence was a link to their origins, a constant reminder of the grit that had propelled them thus far, a counterpoint to the softer sounds of their emergent comfort.",
+        "New sounds now entered their lives: the confident, resonant tone of a city councilman’s voice during a public address, the measured clinking of silverware at a formal dinner, or the sharp, decisive crack of a gavel from a local committee meeting they were invited to attend. These were the sounds of influence, of access, signaling a world where words held weight and decisions reverberated far beyond the immediate household.",
+        "Sometimes, through it all, you could catch a snippet of a conversation in an unfamiliar accent—perhaps the rapid-fire cadence of an Italian family across town, or the lyrical lilt of an Irish one. These fleeting auditory intersections hinted at other ambitious lives carving out their own niches in the bustling city, a reminder that the path to prosperity was a shared, albeit competitive, landscape of striving voices."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You lend your voice to a public initiative, campaigning for improved athletic facilities for all citizens, not just those of your wave."
+          ],
+          "choice": {
+            "text": "Advocate for broad civic improvement.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 2,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "civic_advocacy"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You focus on securing a lucrative contract for your family's burgeoning enterprise, using your growing reputation to negotiate favorable terms."
+          ],
+          "choice": {
+            "text": "Prioritize direct financial gain for the family.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": -1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "family_enterprise_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t2:turn"
+    },
+    {
+      "id": "act:scandinavian:athletic:t2:turn",
+      "sense": "sight",
+      "prose": [
+        "The city unfolded before {full_name}'s eyes, a sprawling tapestry of brick and steel, undergoing a dizzying transformation. The familiar skyline, once dominated by church spires and factory smokestacks, now saw the skeletal frames of new, taller buildings rising against the sky, monuments to ambition and progress. You could see the lines of power drawn in the very architecture: the imposing neoclassical facades of banks, the grand municipal buildings with their carefully carved stone, and the more austere, functional lines of burgeoning commercial districts.",
+        "In the mirror, the person staring back was irrevocably changed. The lean, hardened physique of their youth remained, but now it was often encased in tailored cloth, reflecting a new level of presentation and authority. The eyes, once wide with immigrant hope, now held a sharper glint of discernment, trained to see opportunities and obstacles in the urban landscape. The transformation was not just internal; it was etched into their very bearing, a visible testament to their journey.",
+        "The face of the local political boss, seen across a crowded room at a fundraising gala, carried a complex mix of calculated charm and steely resolve. The intricate dance of power played out in subtle gestures, in the fleeting eye contact exchanged across a banquet table, or in the deliberate placement of allies at key positions. These were the visual cues of a world where influence was not shouted, but subtly wielded, a constant education in the unspoken language of the city’s elite.",
+        "Looking out from a window in a newly acquired office or residence, the city seemed to glow with electric light at night, a beacon of modernity. But beneath the dazzling spectacle, {given_name} could still discern the darker, unlit alleys, the shadows of the poorer districts, a stark visual reminder of where they had come from and the vast disparities that still existed. The question was, what part of this grand, complex vision would {family_name} choose to shape?"
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You are offered a prominent position on a newly formed civic planning committee, with the expectation that you will champion the city's overall growth and modern infrastructure."
+          ],
+          "choice": {
+            "text": "Embrace a role in shaping the city's future.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 2,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "civic_planner_offer"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A rival business consortium seeks your family's athletic expertise and influence to establish an exclusive, private sports league that would boost their own elite social standing."
+          ],
+          "choice": {
+            "text": "Consider aligning with established power for exclusive gain.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": -1,
+              "power": 2,
+              "tradition": 0,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "elite_alliance_offer"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will {full_name} choose to embed the {family_name} name and its legacy into the very fabric of this burgeoning city?",
+        "options": [
+          {
+            "text": "Establish a public athletic institute, open to all, using your family's resources to promote physical culture and health across the city.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "founded_public_institute",
+              "city_impact_broad"
+            ]
+          },
+          {
+            "text": "Focus your efforts on securing a prominent political office, aiming to legislate changes that will benefit your wave and other industrious immigrants.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 3,
+              "worldview": 1,
+              "power": 2,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "sought_political_office",
+              "city_impact_political"
+            ]
+          },
+          {
+            "text": "Leverage connections to build a formidable business empire, concentrating wealth and influence within your family, becoming a formidable economic force.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 0,
+              "worldview": 0,
+              "power": 2,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "built_business_empire",
+              "city_impact_economic"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t2:close"
+    },
+    {
+      "id": "act:scandinavian:athletic:t2:close",
+      "sense": "taste",
+      "prose": [
+        "The lingering taste of a celebratory meal—perhaps a rich, slow-roasted joint or a finely baked pastry, a far cry from the frugal suppers of old—settled on the tongue, a complex blend of sweetness and a subtle, satisfying saltiness. It was the taste of hard-won achievement, of burdens lifted and promises fulfilled, but beneath the savor, there was a faint, almost imperceptible bitterness, a ghost of the sacrifices made and the connections inevitably strained along the ascent.",
+        "The flavor of their success was not singular; it was multifaceted. For some, it might be the clean, sharp taste of an expensive, imported brandy, a mark of sophistication and status. For others, it was the comforting, robust flavor of a traditional family recipe, elevated with better ingredients, a reminder that while they had climbed, they had not entirely forgotten their roots. This delicate balance of old and new defined the generation’s unique contribution.",
+        "There was also the dry, parchment-like taste of official documents, of legal contracts and property deeds, which spoke of tangible assets and secured futures. This was the acquired taste of wealth and stability, a sense of foundation laid, ensuring that future generations would not know the gnawing hunger of uncertainty. It was the legacy etched not just in stone, but in the very economic fabric they had helped to weave.",
+        "As the generation of {full_name} prepared to pass the torch, the prevailing taste was one of robust, undeniable presence. The {family_name} name now carried a distinct flavor in the city's palate, whether that was the wholesome, enduring taste of public service, the sharp, decisive tang of political power, or the rich, encompassing flavor of economic dominion. This was the capital, tangible and intangible, bequeathed to the heir—a taste of what was and what could yet be."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Your heir inherits a substantial charitable foundation, established in the {family_name} name, dedicated to community welfare and athletic development."
+          ],
+          "choice": {
+            "text": "Pass on a legacy of philanthropy and public good.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "heir_inherits_foundation"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your heir gains control of a burgeoning family enterprise, along with a network of influential contacts in business and politics."
+          ],
+          "choice": {
+            "text": "Transfer a powerful economic and political network.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "heir_inherits_network"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:scandinavian:athletic:t3:open",
+      "sense": "smell",
+      "prose": [
+        "The sharp, medicinal tang of liniment mingled with the sweet, cloying odor of sweat and stale beer, clinging to the air of the municipal gymnasium. Dust motes danced in the slivers of sunlight piercing the high, grimy windows, illuminating the well-worn canvas of the boxing ring and the scuffed floorboards where {full_name} honed their craft. It was a familiar scent, one that had saturated every shirt, every aspiration, since their earliest days, a testament to the grit and tireless exertion that had clawed the family name from obscurity to a whisper that now carried across the city, sometimes even further.",
+        "Beyond the immediate ring of exertion, hints of the day's coming meal — rye bread baking, the subtle saltiness of pickled herring — wafted from the small, efficient kitchen tucked away in the gym’s corner, run by a distant cousin. These were the aromas of their heritage, a grounding counterpoint to the volatile scents of ambition and public acclaim. Though their name now adorned fight posters and newspaper columns, the fundamental smells of their people and their struggle remained, a persistent undercurrent beneath the newfound notoriety.",
+        "The heavy, damp air pressed in, a physical manifestation of the expectations that had grown around the {surname} line. Every flex of muscle, every bead of perspiration, fed the burgeoning legend, creating an almost palpable aura of impending greatness. The smell was the truth of their success: not born of gentility or inherited ease, but forged in the crucible of strenuous, honest labor, day after relentless day."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A familiar scent of pine cleaner and polish drifted in, indicating the gym's manager, a man of quiet authority, had just arrived."
+          ],
+          "choice": {
+            "text": "Lean into the discipline and order that underpins the family's public image.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "athletic_discipline_emphasized"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A stronger, almost acrid whiff of a new, experimental liniment stung the nostrils, signaling a push for modern training methods."
+          ],
+          "choice": {
+            "text": "Embrace innovation and new techniques to push the family's athletic edge further.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "athletic_innovation_embraced"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t3:rising"
+    },
+    {
+      "id": "act:scandinavian:athletic:t3:rising",
+      "sense": "touch",
+      "prose": [
+        "The calloused palm of your father, {surname} {given_name}, clasped your shoulder, a touch worn smooth by years of gruelling training and public triumphs. It was a gesture of both pride and unspoken pressure, a silent reminder of the countless hours poured into perfecting every move, every strategy, that had elevated the family's name. That familiar touch, rough and steady, was the anchor in a world now swirling with new demands.",
+        "Beyond the immediate circle of family, the world outside pressed in with different textures: the crisp, dry feel of a fresh newspaper detailing {full_name}'s latest victory, the slick, cold surface of a handshake from a city official eager to associate themselves with success, or the fine, heavy fabric of a new suit, a gift from a wealthy patron. Each touch carried a subtle weight, a testament to the family's rising influence, but also hinting at the expectations and compromises that accompanied such renown.",
+        "Yet, the most constant touch remained the familiar give and take of the training ropes, the smooth, cool steel of barbells, the sharp sting of a missed parry. These sensations were the bedrock of their existence, the tangible reality beneath the veneer of public adoration. The true pressure was always the internal one, the self-imposed rigor to maintain the physical prowess that had brought them this far, the constant fear of the body failing to meet the demands of the spirit."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The coarse feel of burlap from a new set of sandbags, heavier and more resistant than the old ones, lay waiting."
+          ],
+          "choice": {
+            "text": "Insist on even more rigorous physical training, pushing past previous limits.",
+            "motivatorShift": {
+              "power": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "chosen_rigorous_training"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The smooth, cool glass of a tonic bottle, promising a quicker recovery, sat on the trainer's bench."
+          ],
+          "choice": {
+            "text": "Consider embracing new, possibly unconventional, aids for recovery and performance.",
+            "motivatorShift": {
+              "worldview": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "considered_modern_aids"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The weight of public expectation and the whispers of opportunists are growing. How do you respond to these external pressures?",
+        "options": [
+          {
+            "text": "Double down on the family's traditional values and athletic purity, rejecting outside distractions.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "rejected_outside_influences"
+            ]
+          },
+          {
+            "text": "Engage carefully with influential figures, seeking to leverage their support for broader recognition.",
+            "motivatorShift": {
+              "politics": 2,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "engaged_influential_figures"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t3:midpoint"
+    },
+    {
+      "id": "act:scandinavian:athletic:t3:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The roar of the crowd was a wave, a living entity that surged and crashed against the walls of the arena, engulfing all other sounds. It was a cacophony of individual voices melding into one singular, potent expression of adulation and anticipation whenever {full_name} stepped into the light. This sound, more than any other, was the true measure of their emergence, the undeniable proof that the {surname} name now resonated far beyond their humble origins, an echo of their ancestors’ journey across an ocean transformed into an anthem of athletic prowess.",
+        "Beneath the crowd's thundering ovation, the sharp, distinct crack of a boxing glove striking leather cut through the air, followed by the heavy thud of a body hitting the canvas. These were the core sounds of their trade, the brutal realities of victory and defeat played out in plain auditory spectacle. Yet, even these visceral noises were now underscored by other, more subtle auditory intrusions: the excited chatter of sports journalists, the hushed tones of betting men, and the distinct, often booming, voice of radio announcers narrating the unfolding drama to countless listeners in their homes, turning a physical contest into a national event.",
+        "Later, away from the arena's din, the quiet rustle of official documents, the precise clicking of a typewriter in a lawyer's office, or the measured cadence of a politician's speech on the burgeoning role of sports in national identity, became increasingly common sounds. These were the quieter, yet equally impactful, notes in the symphony of their rising influence. The stakes were no longer just about personal victory; they were about shaping the cultural landscape, and every word spoken, every contract signed, carried the weight of that responsibility, a potential intersection with the trajectory of other ambitious families striving for their own prominence."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A familiar, booming laugh from a well-known newspaper magnate, a man who saw sports as a tool for public good, cut through the murmurs."
+          ],
+          "choice": {
+            "text": "Align with those who believe in sports as a moral and national uplifting force.",
+            "motivatorShift": {
+              "worldview": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "aligned_with_moral_sports"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The sophisticated murmur of an industrialist’s hushed conversation, hinting at vast commercial opportunities, drifted near."
+          ],
+          "choice": {
+            "text": "Explore the burgeoning commercial opportunities that major sporting events now present.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "explored_commercial_opportunities"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t3:turn"
+    },
+    {
+      "id": "act:scandinavian:athletic:t3:turn",
+      "sense": "sight",
+      "prose": [
+        "The brilliant flash of photographers' bulbs illuminated {full_name}'s face, momentarily blinding them with the glare of public scrutiny. Each camera captured not just a moment, but a burgeoning legend, every sinew and expression scrutinized by millions who saw in the {surname} line a reflection of their own aspirations or fears. The stark black and white of newspaper photographs plastered across the nation's front pages showed a figure both formidable and vulnerable, a symbol etched into the collective consciousness of a rapidly changing nation.",
+        "Beyond the fleeting images, the vista before them was one of stark choices. On one side, the humble, well-worn training facilities, a familiar landscape of sweat and honest toil, seemed to recede into the distance, almost an idyllic memory. On the other, towering skyscrapers and bustling cityscapes, symbols of commerce and power, promised unimaginable reach but also an unknown terrain fraught with moral ambiguities. The contrast was stark, painted in the harsh light of a new industrial age, demanding that the family's athletic prowess find its place within this wider, more complex canvas.",
+        "Every decision now had a visual resonance, reflected in the eyes of their eager fans, the suspicious glares of rivals, or the calculating gazes of powerful benefactors. The choices made would shape not only the immediate future of the {surname} family but also their legacy, defining whether their name would stand as a monument to athletic purity, a testament to shrewd adaptation, or a cautionary tale of ambition unbridled. This generation stood at a precipice, with the path ahead visibly divergent, each leading to a profoundly different vision of their dynasty."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The glint of a newly minted gold trophy, representing national acclaim and validation, caught the light, a powerful symbol of their athletic ascendancy."
+          ],
+          "choice": {
+            "text": "Focus on solidifying the family's reputation through undisputed athletic achievement.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "focus_athletic_achievement"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The detailed etching on a corporate letterhead, outlining a lucrative endorsement deal, beckoned with the promise of unprecedented financial security."
+          ],
+          "choice": {
+            "text": "Prioritize financial stability and commercial expansion for the family's future.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "prioritize_commercial_expansion"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {surname} dynasty navigate its growing influence in this pivotal era?",
+        "options": [
+          {
+            "text": "Use the family's fame to champion social causes, becoming a voice for the marginalized.",
+            "motivatorShift": {
+              "worldview": 3,
+              "politics": 2,
+              "power": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "championed_social_causes"
+            ]
+          },
+          {
+            "text": "Concentrate on building an athletic empire, expanding into training, promotion, and sports administration.",
+            "motivatorShift": {
+              "power": 3,
+              "wealth": 2,
+              "reach": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "built_athletic_empire"
+            ]
+          },
+          {
+            "text": "Maintain a fierce independence, safeguarding the integrity of their athletic pursuits above all else.",
+            "motivatorShift": {
+              "honor": 3,
+              "tradition": 2,
+              "lineage": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "maintained_fierce_independence"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t3:close"
+    },
+    {
+      "id": "act:scandinavian:athletic:t3:close",
+      "sense": "taste",
+      "prose": [
+        "The celebratory champagne, dry and effervescent on the tongue, carried a hint of distant sweetness, a delicate balance of victory and the lingering memory of arduous effort. It was a taste of success, hard-won and savored, yet it couldn't entirely mask the metallic tang of old ambition, the bitter notes of sacrifices made, or the lingering salt of past tears. This was the taste of the generation's closing, a complex flavor profile reflecting the multifaceted reputation they had forged.",
+        "Later, the simple, hearty flavors of a traditional Scandinavian meal — smoked fish, robust cheeses, the sour kick of lingonberries — provided a grounding counterpoint. These familiar tastes connected {full_name} back to the roots of their wave, to the humble beginnings from which their dynasty had emerged. It was a reminder that despite the glittering accolades and the public clamor, the core of their identity, and the strength of their lineage, remained tied to the sustenance and spirit of their ancestors.",
+        "What was passed to the next heir was not merely wealth or fame, but a distinct flavor in the national palate. Depending on the choices made, it might be the bold, unmistakable taste of unyielding integrity, or perhaps the rich, complicated flavor of shrewd power brokering, laced with whispers of compromise. It could be the sharp, refreshing zest of a pioneering spirit, or the comforting, enduring taste of tradition. Whatever it was, it would define the initial impression of the {surname} line for the coming generation, a reputation imbibed with every breath."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The crisp, clean taste of mountain spring water, untainted by additives, cleansed the palate after the rich meal."
+          ],
+          "choice": {
+            "text": "Pass on a legacy of purity and unblemished integrity, valuing honesty above all.",
+            "motivatorShift": {
+              "honor": 3,
+              "tradition": 1
+            },
+            "setFlags": [
+              "legacy_purity_integrity"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The deep, aged flavor of a fine brandy, acquired through careful negotiation, lingered on the tongue with a complex warmth."
+          ],
+          "choice": {
+            "text": "Ensure the heir inherits a dynasty built on strategic alliances and formidable influence.",
+            "motivatorShift": {
+              "power": 3,
+              "wealth": 1
+            },
+            "setFlags": [
+              "legacy_strategic_influence"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:scandinavian:athletic:t4:open",
+      "sense": "smell",
+      "prose": [
+        "The pervasive odor of freshly cut grass on a perfectly manicured stadium field mingles with the faint metallic tang of a new world record being pursued. The air, crisp and charged with anticipation, carries the scent of pine resin used for grip, and the distant, almost imperceptible aroma of a global broadcast control room—a subtle, electric hum underlying the more visceral smells of physical exertion. This is the scent of the family's enterprise, no longer confined to local halls or national championships, but an institution that shapes the very architecture of international athletic competition, an invisible but potent force in the global arena.",
+        "The rich smell of polished wood and aged leather from the boardrooms where the global sporting calendar is set intertwines with the cleaner, sharper scent of freshly printed contracts and the faint, sweet perfume of success. These are the smells of power and influence, far removed from the humble gymnasiums of the past, yet intrinsically linked by the unwavering dedication to athletic prowess. Every deep breath carries a hint of opportunity, of risk, and the profound responsibility that comes with orchestrating events on such a colossal, worldwide scale."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A familiar scent of camphor and liniment drifts from the training grounds where the next generation of champions pushes their limits."
+          ],
+          "choice": {
+            "text": "Focus on nurturing raw talent within the family's established athletic academies.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "focus_family_talent"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Yet, the faint aroma of unfamiliar spices and exotic woods wafts from the grand hall where a critical international sporting council convenes."
+          ],
+          "choice": {
+            "text": "Prioritize the complex political maneuvering required to secure new global sporting ventures.",
+            "motivatorShift": {
+              "politics": 2,
+              "reach": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "focus_global_politics"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t4:rising"
+    },
+    {
+      "id": "act:scandinavian:athletic:t4:rising",
+      "sense": "touch",
+      "prose": [
+        "The polished marble of the convention podium feels cool and unyielding beneath {given_name}'s fingertips, a stark contrast to the rough, calloused hands that built this empire. The weight of the microphone, heavy and dense, signifies the gravity of the words about to be spoken, words that could sway federations, dictate sponsorships, and redefine the very spirit of international competition. There’s a faint tremor that runs through the hand gripping the stand, not of fear, but of the sheer, monumental scale of the forces now resting upon the line’s shoulders.",
+        "The pressure of global scrutiny is palpable, a subtle but constant hum against the skin, like static electricity before a storm. Every handshake, every fleeting touch, carries the unspoken expectations of millions, the hopes of aspiring athletes, and the calculated ambitions of rival nations. It is a burden felt deep in the muscles, an ache that speaks of relentless travel and endless negotiations, a physical manifestation of the boundless reach the family now commands. This isn't merely competition; it's the meticulous sculpting of the athletic world itself."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The firm, confident clasp of an emerging athletic star’s hand, seeking the family's endorsement, presents a clear path to public adulation."
+          ],
+          "choice": {
+            "text": "Pledge the family's full support to the rising star, leveraging their popularity for broader influence.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "endorse_star"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Conversely, the cold, distant touch of a rival federation's envoy, whose terms hint at a powerful but controversial alliance, offers a more calculated opportunity."
+          ],
+          "choice": {
+            "text": "Engage in discussions with the rival, weighing the pragmatic benefits against the potential damage to the family's reputation.",
+            "motivatorShift": {
+              "power": 2,
+              "wealth": 1
+            },
+            "setFlags": [
+              "consider_rival_alliance"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The family's reputation, built on athletic integrity, is paramount. How do you navigate the conflicting demands of expanding influence versus upholding your core values in this new global arena?",
+        "options": [
+          {
+            "text": "Insist on strict adherence to ethical guidelines for all endorsements, even if it limits immediate gains.",
+            "motivatorShift": {
+              "honor": 3,
+              "tradition": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "uphold_ethics"
+            ]
+          },
+          {
+            "text": "Strategically endorse partners who offer significant global reach, even if their methods are less conventional, viewing it as a necessary evil for growth.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "strategic_endorsements"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t4:midpoint"
+    },
+    {
+      "id": "act:scandinavian:athletic:t4:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The echoing roar of the stadium crowd, a colossal wave of human emotion, reverberates through the very bones of the ancestral {family_name} box. It's a symphony of triumph and agony, of shared national pride and individual heartbreak, amplified by a global broadcast that carries its every nuance to every corner of the earth. But beneath this primal chorus, a more subtle cacophony persists: the insistent chatter of teleconferences, the clipped, urgent tones of international dignitaries, and the distant, incessant hum of countless servers processing bids and counter-bids for future athletic events.",
+        "This intricate tapestry of sound speaks of a world being reshaped, not just by physical prowess, but by the meticulous orchestration of human endeavor on a scale previously unimaginable. The rhythmic click of a telegraph machine from a distant financial district, relaying market shifts that impact athletic investments, sometimes cuts through the immediate cheers. It’s a constant reminder that the family’s legacy is now intertwined with the very pulse of the global economy, their athletic empire a crucial cog in the machinery of modern civilization, influencing politics, commerce, and culture through the universal language of sport."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The urgent, familiar voice of a key sporting official clamors for the family's decisive intervention in a contentious international athletic dispute."
+          ],
+          "choice": {
+            "text": "Act quickly and decisively to resolve the dispute, solidifying the family's role as an indispensable arbiter.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "arbitrate_dispute"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Yet, the faint but distinctive accents of a rival family's representatives are overheard discussing a bold, alternative proposal that could redefine future global competitions."
+          ],
+          "choice": {
+            "text": "Discretely investigate the rival's plans, seeking to understand their motivations and potential impact on the family's standing.",
+            "motivatorShift": {
+              "worldview": 2,
+              "wealth": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "investigate_rival_plans"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t4:turn"
+    },
+    {
+      "id": "act:scandinavian:athletic:t4:turn",
+      "sense": "sight",
+      "prose": [
+        "From the sweeping glass vista of the corporate tower, the global stage unfolds below like an intricately woven tapestry of light and shadow. The sprawling urban centers, connected by glittering networks of infrastructure, reveal themselves as hubs of athletic passion and economic ambition. {given_name} can see the vast stadiums, the arenas, the training facilities that bear the {family_name} mark, stretching across continents like proud, enduring monuments to a vision that began with humble beginnings. The sleek lines of new architectural marvels, designed for efficiency and spectacle, reflect the family's enduring commitment to innovation in the pursuit of peak human performance.",
+        "Beyond the immediate landscape, the digital projections on the massive display screens flicker with real-time data: athlete performances, global viewership numbers, and the fluctuating indices of the markets influenced by the family's sporting ventures. The stark lines of political boundaries, once so divisive, appear softened by the unifying spectacle of international athletic events, a testament to the family's unique ability to transcend traditional barriers. The sheer scale of the apparatus, a living, breathing entity forged from sweat and ambition, is a powerful visual reminder of the choice now at hand: to merely observe, or to actively steer the trajectory of this immense, global force."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A detailed financial report vividly illustrates the immense wealth generated by the current decentralized global athletic model, highlighting its profitability."
+          ],
+          "choice": {
+            "text": "Maintain the existing federated structure, optimizing for sustained profit and predictable growth.",
+            "motivatorShift": {
+              "wealth": 2,
+              "tradition": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "maintain_status_quo"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "However, a series of innovative architectural blueprints showcase a proposal for a completely unified, technologically advanced global athletic system under the family's direct oversight."
+          ],
+          "choice": {
+            "text": "Explore the potential for a centralized global athletic system, accepting higher risk for unprecedented control and influence.",
+            "motivatorShift": {
+              "power": 2,
+              "politics": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "explore_centralized_system"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The {family_name} line stands at a precipice, capable of profoundly reshaping the very fabric of global athletics. Will you consolidate power to forge a new, unified era under your direct influence, or will you champion a more distributed model that empowers individual nations and ensures broader participation?",
+        "options": [
+          {
+            "text": "Initiate a bold, aggressive campaign to centralize all major global athletic organizations under the {family_name} banner, consolidating unprecedented power.",
+            "motivatorShift": {
+              "power": 4,
+              "reach": 3,
+              "politics": 2,
+              "worldview": 2,
+              "lineage": 1,
+              "wealth": 1,
+              "honor": -1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "centralize_athletics",
+              "world_player_centralizer"
+            ]
+          },
+          {
+            "text": "Advocate for a collaborative, decentralized global athletic council, ensuring fair representation and promoting diverse athletic development worldwide, even if it dilutes direct family control.",
+            "motivatorShift": {
+              "worldview": 4,
+              "honor": 3,
+              "politics": 1,
+              "tradition": 1,
+              "wealth": -1,
+              "power": -2,
+              "reach": -1
+            },
+            "setFlags": [
+              "decentralize_athletics",
+              "world_player_collaborator"
+            ]
+          },
+          {
+            "text": "Focus resources on perfecting the family's own athletic programs and academies, setting an unmatched standard of excellence while allowing the broader global structure to evolve independently.",
+            "motivatorShift": {
+              "lineage": 4,
+              "tradition": 2,
+              "honor": 1,
+              "wealth": 1,
+              "politics": -1,
+              "power": -1,
+              "reach": -1
+            },
+            "setFlags": [
+              "perfect_family_program",
+              "world_player_exemplar"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t4:close"
+    },
+    {
+      "id": "act:scandinavian:athletic:t4:close",
+      "sense": "taste",
+      "prose": [
+        "The faint, complex taste of rare, aged brandy lingers on {given_name}'s tongue, a subtle warmth spreading through the chest, a quiet punctuation mark at the end of a momentous generation. It's a flavor of culmination, of strategic victories and hard-won compromises, far removed from the simple, hearty meals of the founding generation. Each sip carries an echo of the grand banquets and private negotiations held in gilded rooms, where the fate of global sporting enterprises was decided, where alliances were forged, and where rivals conceded.",
+        "There is also a faint, metallic tang, like that of iron and determination, a taste that reminds one of the sheer willpower required to navigate the treacherous currents of international politics and finance while upholding the family's athletic ideals. It is a taste of the world, absorbed and assimilated, leaving behind a legacy that is both sweet with success and slightly bitter with the weight of immense responsibility. This is the flavor of an empire, passed on, an inheritance not just of wealth, but of an unparalleled global influence, a taste of what it means to be a true world player."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A celebratory toast is raised, the fine vintage sparkling, to the newly expanded global athletic federation, a monument to the family's enduring legacy."
+          ],
+          "choice": {
+            "text": "Accept the accolades, emphasizing the family's foundational role in uniting the athletic world.",
+            "motivatorShift": {
+              "lineage": 2,
+              "honor": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "legacy_celebrated"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "However, a more quiet, perhaps private, moment allows for reflection on the subtle, evolving taste of dissent from smaller nations, fearing cultural dilution."
+          ],
+          "choice": {
+            "text": "Consider the implications of consolidation, seeking to understand and address the concerns of those who feel marginalized.",
+            "motivatorShift": {
+              "worldview": 2,
+              "politics": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "address_dissent"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:scandinavian:athletic:t5:open",
+      "sense": "smell",
+      "prose": [
+        "The recycled air, thin and cool against your nostrils, carries the metallic tang of advanced filtration systems, mingling with the sharp, clean scent of ozone from the power conduits humming deep within the station's core. Yet, beneath it all, a familiar aroma persists: the earthy, slightly acrid tang of sweat, of exertion. It's a smell that has clung to the {family_name} line through generations, from the frosty fields of their forebears to the rigorous training chambers of this new, artificial world.",
+        "Your family's sector, nestled within the vast, rotating habitat, is a testament to purposeful design, prioritizing human endurance and physical capability over mere comfort. The air here feels charged, a constant reminder of the energy expended daily, the muscles stretched and strained. It’s the scent of ambition, distilled and concentrated, a stark contrast to the vast, scentless void that lies beyond the viewport, yet utterly essential for survival in this new frontier.",
+        "Each breath draws in the faint, almost imperceptible trace of synthetic nutrients, a necessary supplement to the diet demanded by the intense physical regimens. It is a subtle, almost unnoticeable alteration to the air, yet it speaks volumes about the meticulous planning and the absolute commitment required to sustain human life, and human performance, in the unforgiving embrace of the cosmos. This isn't just a home; it's a crucible, scented with the effort of ascension."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A waft of cleaning solvent drifts past, momentarily masking the more organic smells, as a technician diligently scrubs a piece of equipment."
+          ],
+          "choice": {
+            "text": "Observe the technician, considering the meticulous upkeep of the habitat.",
+            "motivatorShift": {
+              "worldview": 1,
+              "reach": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The distinct, musky scent of a well-worn leather grip on a training apparatus catches your attention, a relic from an earlier era of physical conditioning."
+          ],
+          "choice": {
+            "text": "Reach for the grip, a silent acknowledgment of the enduring legacy of strength.",
+            "motivatorShift": {
+              "tradition": 1,
+              "honor": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t5:rising"
+    },
+    {
+      "id": "act:scandinavian:athletic:t5:rising",
+      "sense": "touch",
+      "prose": [
+        "The chill of the bulkhead seeps through your gloves, a reminder of the vacuum just inches beyond the steel plating, a cold, indifferent force pressing against humanity’s fragile foothold. Every surface here tells a story of adaptation, from the smoothed, ergonomic curves of the console to the textured, non-slip floor beneath your boots. It is a world built to withstand, to endure, much like the {family_name} line itself.",
+        "Your fingers trace the rough, familiar weave of a grav-climbing rope, taut and unyielding, a physical link to the training that has defined your family for generations, now recontextualized for zero-gravity environments. The subtle vibrations from the station's engines resonate through the floor, a constant, low thrum that becomes a part of you, a heartbeat felt through the soles of your feet, connecting you to the massive machinery sustaining this dream.",
+        "A sudden, gentle brush of another's hand on your arm, a fleeting, almost electric spark of human connection in this metal shell. It’s a subtle reassurance, a shared understanding of the immense physical and mental pressures that come with pioneering a new existence. The simple act of touch carries more weight here, a silent confirmation of presence amidst the grand, isolating scale of the cosmos."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The warmth of a freshly brewed, synthetic beverage cup offers a momentary comfort against the pervasive coolness of the station."
+          ],
+          "choice": {
+            "text": "Sip the drink, letting its warmth spread through you as you observe the station's activity.",
+            "motivatorShift": {
+              "worldview": 1,
+              "wealth": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your gaze falls upon a polished piece of ancestral wood, meticulously preserved and smoothed by generations of hands, now a stark contrast to the high-tech surroundings."
+          ],
+          "choice": {
+            "text": "Run your fingers over the wood, a tangible link to the past.",
+            "motivatorShift": {
+              "tradition": 1,
+              "lineage": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A vital resource extraction mission demands a dangerous EVA. Your athletic lineage prepared you for physical stress, but the new equipment is unfamiliar. How do you approach the task?",
+        "options": [
+          {
+            "text": "Rely on raw strength and proven endurance, trusting the body and minimizing reliance on untested tech.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "power": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "eva_approach:instinct"
+            ]
+          },
+          {
+            "text": "Embrace the technological advancements, prioritizing precision and new methods for a calculated approach.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 2,
+              "wealth": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "eva_approach:tech"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t5:midpoint"
+    },
+    {
+      "id": "act:scandinavian:athletic:t5:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The deep, resonant hum of the main reactor pulses through the station's framework, a constant, omnipresent bass note that underscores all other sounds. It’s the sound of power, harnessed and directed, fueling humanity’s expansion into the void. Above this, the distant, rhythmic clang of automated construction bots working on an exterior module provides a counterpoint, a metallic heartbeat building new segments of their cosmic home.",
+        "Suddenly, a burst of garbled static erupts from a nearby comms terminal, followed by a crisp, unfamiliar voice asserting a claim over newly discovered asteroid resources. It isn't the familiar, measured tones of your own sector's administrators, but a sharper, more formal cadence, hinting at an established authority from another colony, another line. The sound slices through the routine hum, a declaration of intent that ripples through the carefully maintained peace.",
+        "The hushed whispers of your crewmates, gathered around the terminal, replace the static. Their voices are low, urgent, a mixture of surprise and concern. The stakes of this new frontier, already immense, have just escalated, marked by the audacity of a declaration made across the cold vacuum, transmitted via engineered waves that pierce the silence of space. The cosmos, it seems, is not large enough for every ambition to go unchallenged."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The whirring of a personal training drone nearby, meticulously tracking performance metrics, offers a familiar, comforting sound amidst the tension."
+          ],
+          "choice": {
+            "text": "Focus on the drone's whir, seeking grounding in familiar routines.",
+            "motivatorShift": {
+              "honor": 1,
+              "lineage": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The low, melodic chimes of a public announcement system signal a general assembly, likely to address the new territorial dispute."
+          ],
+          "choice": {
+            "text": "Turn towards the sound, preparing for the diplomatic dance ahead.",
+            "motivatorShift": {
+              "politics": 1,
+              "worldview": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t5:turn"
+    },
+    {
+      "id": "act:scandinavian:athletic:t5:turn",
+      "sense": "sight",
+      "prose": [
+        "The panoramic viewport offers an awe-inspiring vista: a nascent star system, its primary star a distant, diamond-bright point, casting a serene glow upon newly charted planets. One world, in particular, a vibrant blue-green orb, hangs ripe for development, a canvas awaiting humanity's touch. Its surface, partially shrouded in swirling clouds, hints at oceans and fertile lands, a potential new Eden for the {family_name} line and all of humanity.",
+        "Across the holographic conference table, the faces of rival colony leaders are projected, their expressions a mix of calculation and anticipation. One figure, from a line known for its corporate ruthlessness, fixes you with an unnerving gaze, their eyes reflecting the cool, ambition-driven glint of a predator. Their posture, subtly aggressive, belies the polite words being exchanged, hinting at the vast, unspoken power plays unfolding.",
+        "Your own reflection shimmers faintly on the transparent table, superimposed over the star map. You see not just yourself, {full_name}, but the countless generations of your family, their strength, their tenacity, their unyielding spirit mirrored in your stance. This decision, unfolding under the cold, watchful gaze of the cosmos and the calculating eyes of your rivals, will define the {family_name} legacy for centuries to come, determining whether their athletic drive will shape a new humanity or be subsumed by it."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A familiar training emblem, subtly etched onto your wrist-mounted display, catches your eye, a small anchor to your family's enduring principles."
+          ],
+          "choice": {
+            "text": "Clench your fist, feeling the emblem against your skin, a reminder of inner strength.",
+            "motivatorShift": {
+              "honor": 1,
+              "tradition": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The complex, swirling patterns of the star system's orbital mechanics are displayed, a dizzying array of potential pathways and strategic points."
+          ],
+          "choice": {
+            "text": "Study the orbital data, searching for an overlooked advantage or critical path.",
+            "motivatorShift": {
+              "reach": 1,
+              "power": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The nascent interstellar council debates the core principles of new world colonization. Your family's unique heritage grants you an influential voice. How will you steer the future of humanity among the stars?",
+        "options": [
+          {
+            "text": "Advocate for rigorous physical and mental conditioning, believing human resilience and self-reliance are paramount for survival and expansion.",
+            "motivatorShift": {
+              "honor": 3,
+              "tradition": 3,
+              "worldview": 2,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "colonization_ethos:athletic_resilience"
+            ]
+          },
+          {
+            "text": "Champion the integration of advanced biotechnologies and cybernetic enhancements to truly adapt humanity to new environments, transcending terrestrial limitations.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 3,
+              "power": 2,
+              "wealth": 2,
+              "tradition": -2
+            },
+            "setFlags": [
+              "colonization_ethos:transhuman_adaptation"
+            ]
+          },
+          {
+            "text": "Propose a focus on cultural preservation and the establishment of self-sustaining, diverse communities that honor terrestrial heritage, even if it slows expansion.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 2,
+              "politics": 2,
+              "worldview": -1,
+              "reach": -1
+            },
+            "setFlags": [
+              "colonization_ethos:cultural_preservation"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:scandinavian:athletic:t5:close"
+    },
+    {
+      "id": "act:scandinavian:athletic:t5:close",
+      "sense": "taste",
+      "prose": [
+        "The synthesized nutrient paste, engineered for peak performance and optimal caloric intake, slides across your tongue, a bland, familiar sensation that has become the staple of life on the frontier. It’s efficient, effective, and utterly devoid of the nuanced flavors of Earth, a testament to the sacrifices made for the promise of the stars. Yet, even in its utilitarian simplicity, there is a subtle aftertaste of the metals and minerals harvested from asteroids, grounding this processed sustenance in the very dust of their new home.",
+        "Later, a single, carefully rationed piece of dried lingonberry, a taste carefully cultivated and preserved from heirloom stock, bursts with a tart, sweet memory. It’s a flavor that transcends mere nutrition, a profound link to the icy forests and hardy traditions of your ancestors. Each chew is a journey through time, a fleeting reminder of the world they left behind, and the rich cultural tapestry woven into the {family_name} legacy.",
+        "This generation has carved its indelible mark, their sweat and ambition forming the very foundations of humanity’s reach beyond Earth. What they pass on to the next {surname}, to the waiting heir, is not just territory or technology, but a taste of their resolve: a blend of stark necessity and treasured heritage, a new definition of sustenance in the vast, cold expanse where their athletic spirit continues to thrive."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A companion offers a freshly harvested, genetically optimized hydroponic vegetable, its crunch and subtly sweet flavor a rare indulgence."
+          ],
+          "choice": {
+            "text": "Accept the vegetable, appreciating the blend of science and simple pleasure.",
+            "motivatorShift": {
+              "worldview": 1,
+              "wealth": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The memory of a strong, black coffee, brewed according to an ancient family recipe, lingers on the edge of your senses, a ghost of comforting bitterness."
+          ],
+          "choice": {
+            "text": "Ponder the memory, a quiet homage to the enduring traditions.",
+            "motivatorShift": {
+              "tradition": 1,
+              "lineage": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}

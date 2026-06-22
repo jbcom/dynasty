@@ -1,6 +1,6 @@
 # Continuous Work Directive — Dynasty (maga-money-moves)
 
-**Status:** RELEASED
+**Status:** ACTIVE
 **Owner:** jbogaty (autonomous loop)
 **Mandate (2026-06-21):** POLISH & FEATURES — AUTONOMOUS LOOP. Foundations done:
 found-your-own / diegetic birth / orthogonal identity (PR #31), 1000-year dynasty breadth
@@ -114,19 +114,73 @@ origins ship a fully-written, era-correct Epoch-0; chronology (overheard year) �
 (chosen place) are the twin anchors; the calling crystallizes the archetype; 0 leaks; full gate
 + post-merge workflows green.
 
-## Next milestone — LIVED-IN FEEL (light editorial, NOT a mechanical sweep)
-- [ ] [WAIT-USER] **LF-1** — BLOCKED on the user's creative steer (genuine scope/design call,
-  not agent-decidable: the user corrected the birth beat twice and said "you're getting carried
-  away" — pushing a broad editorial pass now would repeat that mistake). When the user gives the
-  direction, do it in SMALL story-first slices, one origin/era at a time, live-verified.
-  Carry the [[mmm-epoch0-birth-beat]] principle past Epoch-0: as beats are touched,
-  make the EXPERIENCED-vs-CHOSEN mix feel right and ground scenes in concrete sense detail of
-  their place+time so a life feels LIVED. User's guardrails (verbatim spirit): "tell a story, a
-  coherent narrative whole with causality + butterfly effect"; "a life must feel lived"; do NOT
-  turn this into a one-sense-per-beat system or sweep the whole corpus mechanically ("you're
-  getting carried away"). So: SMALL, story-first slices, one origin/era at a time, live-verified;
-  pause for the user's steer on creative direction rather than mass-editing. This is the standing
-  /loop direction until the user redirects.
+## ACTIVE milestone — NARRATIVE ACTS (the NOVEL) — branch `feat/narrative-acts`
+
+Spec: docs/superpowers/specs/2026-06-21-narrative-acts-design.md. Memory: [[mmm-novel-acts-model]].
+Mandate (user, verbatim spirit): the played content must read as NOVELS, not sentence fragments —
+"immersive set of effectively novels… titled acts for each family and their possibilities in life
+and intersections"; the OLD Epoch-0 is WRONG ("we ALREADY know when we are and where we are… you
+were supposed to write STORIES"); "take it all the way… an hour or more of gameplay" (genai+author
+no limit). Grounded in Suzerain + ink research. This SUPERSEDES the LIVED-IN-FEEL / authored-Epoch-0
+direction (those re-confirmed known facts — the rejected approach). NOT a WAIT-USER item: the vision
+is locked, execute autonomously, self-pace, own the full PR loop.
+
+### Queue
+- [x] **NA-1 model** — saga/schema (Act/Scene/Beat/Decision/Thread/Codex zod) + player
+  (buildCorpus/applyBeat/applyDecision/nextScene/openingScene) + loader (loadSaga glob) +
+  authored exemplar. (commit 14ed87c)
+- [x] **NA-2 SceneReader** — Suzerain page: serif multi-paragraph prose, drop-letter, sense-tint,
+  beats as alternatives, tiered decision; term-fn tokens; onbeat/ondecision. Browser-tested. (1c967df)
+- [x] **NA-3 runner** — ActState walk (startAct/chooseBeat/chooseDecision); deterministic = save/replay
+  invariant; beats are ALTERNATIVES. (8280fd5)
+- [x] **NA-4 spine reframe** — retired Epoch-0 life-arc; scene-slot spine (titled acts, 5 sensory
+  scenes, opening forbids re-stating when/where, major+secondary per act). (07f77a6)
+- [x] **NA-5 genai scene mode** — `genai:expand --type scene` + `--all` lattice sweep; SagaFileSchema-
+  gated; normalizeSceneFile coerces model drift; 3× retry on validation failure. (35bf80d/fix/retry)
+- [x] **NA-6 engine cut-over** — Game drives SagaDriver (cell=wave×archetype×tier-from-generation),
+  GameView.saga frame, PlayScreen renders SceneReader (fallback to EventCard when no act); GameStore
+  +App wired. (7a46a34)
+- [x] **NA-7 succession step** — DecisionOption.succession schema; driver/Game step the act to the next
+  tier on a partner/heirs option. Model tests on a fixture (decoupled from generated corpus). (committed)
+- [x] **NA-8 GenAI lattice sweep — DONE** (commit f82ed20). 252 acts, 1263 scenes; 0 leaks/dangling/
+  fragments/when-where; all 42 cells complete across 6 tiers.
+- [x] **NA-9 targeted regen** — regenerated the 6 cells that failed all 3 sweep attempts
+  (bavaria:economic:t0, italian:political:t5, italian:entertainment:t0, ashkenazi_jewish:technological:t5,
+  scandinavian:religious:t1, scandinavian:athletic:t5) — all ACCEPTED 1/1 (/tmp/regen.log). Commit with NA-10.
+- [x] **NA-9 + NA-10 — DONE** (commit f82ed20). Regenerated the failed cells; pruned 3 orphan exemplar
+  scenes; loadSaga integrity tests (no dangling/orphan + 252-act lattice coverage) added.
+- [x] **NA-11 retire Epoch-0 — DONE** (commit a0ee9bb). Harness regression root-caused by
+  stuck-loop-debugger (year-normalization was gated on the `epoch0` tag; retag to `life-stage`
+  dropped it → begets stamped children ~70yr in the past → extinction). Fixed: normalization now
+  fires for `epoch0`||`life-stage`; millennium run reaches interstellar; unit regression guard added.
+  Done: deleted all 9 epoch0.json; deleted the 3 narrative
+  ev_birth_* from new-york; retagged the 2 succession events epoch0→life-stage; content.ts
+  epoch0Events→lifeStageEvents (dropped authoredEpoch0Places); events.ts injects lifeStageEvents;
+  founding sets emerged/named/calling_chosen at founding (onboarding already locked them) so the
+  surviving succession beats fire; rewrote ob6-all-origins (saga-act coverage) + dropped the
+  onboardingFounding epoch0 suite. BLOCKER (dispatched stuck-loop-debugger): the millennium harness
+  test now goes line-extinct ~2000 (era order 3-4) for all 18 — the leaner per-gen event pool no
+  longer carries a line to era≥9. Awaiting root-cause + fix; do NOT re-pad with narrative beats.
+- [x] **NA-12 live-verify — DONE** (chrome, localhost:4173). Played a founded Ireland/poor line:
+  onboarding (period→class→wave w/ sensory cues→surname MacCarthy) → PLAY renders the NOVEL: titled
+  "Act I — The Crossing" with chapter drop-letter, multi-paragraph SMELL-framed prose ("the stench of
+  salt… the phantom scent of the churning Atlantic still invaded Siobhan MacCarthy's nostrils"), {surname}
+  token resolved, given-name generated, NO when/where re-confirm. Weave = 2 alternative beats (italic
+  framing + choice); picking one ADVANCES to the next sensory (touch) scene. HUD shows Convergence/1885 +
+  motivators + news backdrop. 0 app console errors (only a benign chrome-extension artifact). Reads as a
+  NOVEL exactly per the mandate.
+- [x] **NA-13 cross-family intersections (threads)** — resolveThreads(corpus,scene) resolves a
+  scene's ThreadRef[] to the rival wave's act-opening fragment (archetype-agnostic; dead ref → no
+  fire); SagaFrame.threads + PlayScreen "Elsewhere — another line" braided aside. Unit + browser
+  green. (committed) — authoring thread refs INTO the corpus is a content step (genai/author) post-sweep.
+- [ ] [WAIT-CI] **NA-14 PR + merge** — PR #65 OPEN (https://github.com/jbcom/dynasty/pull/65). First CI
+  run RED (e2e drove the old EventCard selector + the run never ended while saga was the play surface)
+  → FIXED (87a03f3): saga picks advance the run clock + resume the event flow on act-end; e2e drives
+  the SceneReader. Now 7 e2e + 607 unit + 83 browser + typecheck + biome green LOCALLY. CI re-running
+  (Monitor bxnlnrn85). ON GREEN: address any CodeRabbit threads → squash-merge → keep CD/Release green.
+
+After NA-14 merges, RETURN to the standing autonomous POLISH & FEATURES mandate (top of file):
+self-pace the highest-value improvement, own the full PR loop, keep the directive living.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via

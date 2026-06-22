@@ -153,15 +153,16 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
     `archetype:${c.archetype}`,
     `place:${c.place}`,
     `culture:${c.culture}`,
-    // OB-4: the onboarding chose only PLACE + family name; the authored Epoch-0 story PLAYS
-    // birth → the doctor's date → gender → given-naming → childhood → the calling's first
-    // turn. So we do NOT pre-set emerged/named (that PL-3 holdover skipped those beats); the
-    // chain starts at founded_line and the authored beats set emerged → gender_revealed →
-    // named → calling_chosen as they play.
-    // OB-5: when the place ships its own authored Epoch-0 birth beat, stamp
-    // `has_authored_epoch0` so the place-agnostic generic beats self-exclude via this
-    // single flag (no per-place notFlags list on the generic beats to maintain).
-    ...(content.authoredEpoch0Places?.has(c.place) ? ["has_authored_epoch0"] : []),
+    // NA-11: the played story is the SAGA act (saga driver), not an Epoch-0 event chain. The rejected
+    // birth/naming/station/schooling/calling NARRATIVE is retired — but its life-stage PRECONDITIONS
+    // are now true at founding (the onboarding already locked place + archetype/calling, and the saga
+    // act tells the arrival diegetically), so the surviving life-stage SUCCESSION beats
+    // (ev_cp_take_partner requires calling_chosen → ev_cp_raise_heirs) still fire and the line
+    // advances generation-by-generation. No `has_authored_epoch0` stamp (the generic beats are gone).
+    "emerged",
+    "gender_revealed",
+    "named",
+    "calling_chosen",
     ...(c.deepHistory ? ["deep_history_line"] : []),
   ]) {
     flags = withFlag(flags, f);

@@ -127,14 +127,13 @@ export function eligibleEvents(content: Content, state: GameState, rng?: Rng): G
   const protoForward = protoBase.filter((ev) => ev.year >= state.lastEventYear);
   const proto = protoForward.length > 0 ? protoForward : protoBase;
 
-  // EPOCH-0 INJECTION (EX-5): the birth + partner + heirs life-stage beats must fire
-  // at the START of EVERY run regardless of founding era — gated by the line's own
-  // state flags (founded_line + the chain), not by an era, so a baghdad/caliphate
-  // line gets born, partners, and begets just like a new-york/origins one (else it
-  // goes extinct in one generation). They bypass the year-floor (a birth beat is
-  // "now"); applyChoice clamps the year so the clock never jumps backward.
+  // LIFE-STAGE INJECTION (EX-5, post-NA-11): the partner + heirs SUCCESSION beats must fire each
+  // generation regardless of founding era — gated by the line's own state flags (founded_line + the
+  // chain), not by an era, so a baghdad/caliphate line takes a partner and begets just like a
+  // new-york/origins one (else it goes extinct in one generation). The rejected birth/naming/station/
+  // schooling/calling NARRATIVE is retired — the saga acts are the played story now.
   const inPool = new Set(proto.map((e) => e.id));
-  const epoch0 = (content.epoch0Events ?? []).filter(
+  const lifeStage = (content.lifeStageEvents ?? []).filter(
     (ev) =>
       !inPool.has(ev.id) &&
       !alreadyConsumed(state, ev) &&
@@ -146,12 +145,12 @@ export function eligibleEvents(content: Content, state: GameState, rng?: Rng): G
   // LAZY BOUNDED procedural fill (FD-4.2): only when the authored forward pool has
   // thinned and an rng is available to keep the expansion replay-deterministic.
   let procedural: GameEvent[] = [];
-  if (rng && proto.length + epoch0.length < PROC_THRESHOLD) {
+  if (rng && proto.length + lifeStage.length < PROC_THRESHOLD) {
     procedural = materializeProcedural(content, state, era, rng.fork("procgen"), PROC_CAP).filter(
       (ev) => !alreadyConsumed(state, ev),
     );
   }
-  return [...proto, ...epoch0, ...worldEligible, ...procedural];
+  return [...proto, ...lifeStage, ...worldEligible, ...procedural];
 }
 
 /**

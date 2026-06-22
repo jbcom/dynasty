@@ -1,16 +1,22 @@
+import { loadSaga } from "../data/loadSaga";
 import type { Content } from "../sim/content";
 import { applyChoice } from "../sim/effects";
+import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
 import { type GameState, initState, type LedgerEntry } from "../sim/state";
-import { advanceTimeline } from "../sim/timeline";
+import { advanceTimeline, detectEnd } from "../sim/timeline";
 import { pickNextEventViaWorld } from "../sim/world";
+import { SagaDriver, type SagaFrame } from "./sagaDriver";
 
 /** A snapshot the UI renders from. Immutable per turn. */
 export interface GameView {
   state: GameState;
   currentEvent: GameEvent | null;
+  /** The played NOVEL frame — the act title + current scene. `scene` is null when the line's act
+   *  isn't authored yet (the UI then renders the event flow). */
+  saga: SagaFrame;
   lastLedger: LedgerEntry[];
 }
 
@@ -29,6 +35,7 @@ export class Game {
   private current: GameEvent | null;
   private lastLedger: LedgerEntry[] = [];
   private readonly listeners = new Set<Listener>();
+  private readonly saga: SagaDriver;
 
   constructor(
     content: Content,
@@ -40,6 +47,24 @@ export class Game {
     this.rng = createRng(seed);
     this.state = restore ?? initState(content, seed, archetype);
     this.current = this.state.end ? null : this.pick();
+    this.saga = new SagaDriver(loadSaga());
+    this.beginSagaActForState();
+  }
+
+  /**
+   * Begin the novel act for the current line (the founded line's wave × archetype × reach tier),
+   * carrying its motivators. A no-op (null scene) when the line isn't founded or the cell has no
+   * authored act yet — the UI then renders the event flow. The reach tier derives from the line's
+   * generation (each generation steps one act up the lattice, capped at the spine's top tier).
+   */
+  private beginSagaActForState(): void {
+    const wave = this.state.founding?.place;
+    if (!wave) return;
+    // Reach tier = the protagonist's generation depth (founder = 0), capped at the spine's top tier.
+    const family = this.state.family;
+    const protagonist = family?.members.find((m) => m.id === family.protagonistId);
+    const tier = Math.min(protagonist?.generation ?? 0, 5);
+    this.saga.begin({ wave, archetype: this.state.archetype, tier }, this.state.personality, []);
   }
 
   /**
@@ -57,8 +82,79 @@ export class Game {
     return {
       state: this.state,
       currentEvent: this.current,
+      saga: this.saga.frame(),
       lastLedger: this.lastLedger,
     };
+  }
+
+  /** Write the driver's carried motivators back into the run's personality vector. */
+  private syncMotivators(m: Motivators | null): void {
+    if (m) this.state = { ...this.state, personality: m };
+  }
+
+  /**
+   * Reading the novel passes in-world time: each saga choice ticks the timeline one step (years
+   * advance, eras roll, the run can reach an end) so the run progresses toward its conclusion even
+   * while the played surface is the novel rather than the event flow. Then, if the act has ended,
+   * the event flow resumes (so the run keeps moving once a generation's act closes). Pure ticks; the
+   * timeline + end detection are deterministic.
+   */
+  private advanceRunClock(): void {
+    this.state = advanceTimeline(this.content, this.state);
+    const end = detectEnd(this.content, this.state);
+    if (end) {
+      this.state = { ...this.state, end };
+      this.current = null;
+      return;
+    }
+    // When the novel act has run out (and no new act began), hand the run back to the event flow.
+    // pickWithProgress force-advances eras until an event is found or the run ends, so the player is
+    // never stranded on the "generation closes" interlude with no choice and no end screen.
+    if (!this.saga.active) {
+      this.current = this.pickWithProgress();
+      if (this.state.end) this.current = null;
+    }
+  }
+
+  /** Apply a weave-beat choice on the current novel scene; time passes; then re-emit. */
+  pickBeat(beatIndex: number): void {
+    this.syncMotivators(this.saga.pickBeat(beatIndex));
+    this.advanceRunClock();
+    this.emit();
+  }
+
+  /**
+   * Apply the current scene's terminal decision; time passes; then re-emit. When the chosen option
+   * carries a succession effect (a `close`-scene partner/heirs choice), the line steps to the next
+   * generation: the next tier's act begins, carrying the line's drifted motivators.
+   */
+  pickDecision(optionIndex: number): void {
+    const result = this.saga.pickDecision(optionIndex);
+    this.syncMotivators(result?.motivators ?? null);
+    if (result?.succession && (result.succession.takesPartner || result.succession.begets > 0)) {
+      this.beginNextGenerationAct();
+    }
+    this.advanceRunClock();
+    this.emit();
+  }
+
+  /**
+   * Step the saga to the next generation's act. The full family advancement (partner → beget →
+   * succeed, src/sim/effects.ts) is driven by the event/succession system; here the saga surface
+   * re-begins at the next reach tier so the novel keeps moving generation-by-generation. Carries the
+   * line's current (drifted) motivators + accumulated flags.
+   */
+  private beginNextGenerationAct(): void {
+    const wave = this.state.founding?.place;
+    if (!wave) return;
+    const family = this.state.family;
+    const protagonist = family?.members.find((m) => m.id === family.protagonistId);
+    const nextTier = Math.min((protagonist?.generation ?? 0) + 1, 5);
+    this.saga.begin(
+      { wave, archetype: this.state.archetype, tier: nextTier },
+      this.state.personality,
+      this.saga.flags,
+    );
   }
 
   subscribe(fn: Listener): () => void {
