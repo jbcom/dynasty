@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { playCue, setMusicEra, setSoundEnabled, startMusic } from "../sound";
+import { chordForEra, playCue, setMusicEra, setSoundEnabled, startMusic } from "../sound";
 
 /**
  * The sound facade (PF-15/PF-17) is browser-guarded + fully try/caught — every entry point must be a
@@ -22,5 +22,15 @@ describe("sound facade", () => {
     expect(() => playCue("click")).not.toThrow();
     expect(() => startMusic()).not.toThrow();
     setSoundEnabled(true); // restore
+  });
+
+  it("RB-3: distinct per-era ambient chords (mood deepens across the arc), with a rooted default", () => {
+    const origins = chordForEra("origins");
+    const stars = chordForEra("ascension-interstellar");
+    expect(origins).toEqual(["C3", "E3", "G3"]); // rooted, warm
+    expect(stars).not.toEqual(origins); // a different mood late in the arc
+    expect(stars.length).toBeGreaterThanOrEqual(3);
+    // An unknown era id falls back to the rooted default rather than throwing.
+    expect(chordForEra("totally-unknown-era")).toEqual(["C3", "E3", "G3"]);
   });
 });
