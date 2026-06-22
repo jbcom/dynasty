@@ -48,6 +48,8 @@ describe("dynasty world (SS-8)", () => {
     for (const g of glimpses) {
       expect(["opposing", "contributing", "neutral"]).toContain(g.relation);
       expect(["rising", "struggling", "holding"]).toContain(g.note);
+      // RB-8: each glimpse carries the rival's archetype so the UI can draw its silhouette vignette.
+      expect(g.archetype).toBeTruthy();
     }
     expect(glimpses.length).toBeLessThanOrEqual(3);
   });
