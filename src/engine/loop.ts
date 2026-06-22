@@ -10,7 +10,7 @@ import {
   detectGlimpses,
   type Glimpse,
 } from "../sim/dynastyWorld";
-import { applyChoice } from "../sim/effects";
+import { advanceFamily, applyChoice } from "../sim/effects";
 import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
 import type { GameEvent } from "../sim/schema";
@@ -190,7 +190,16 @@ export class Game {
    * timeline + end detection are deterministic.
    */
   private advanceRunClock(): void {
+    const fromYear = this.state.year;
     this.state = advanceTimeline(this.content, this.state);
+    // PF-8: age + succeed the family over the elapsed years — the same logic the event path runs — so
+    // reading the novel actually advances the lineage (mortality, heir handoff, extinction).
+    this.state = advanceFamily(
+      this.content,
+      this.state,
+      fromYear,
+      this.rng.fork(`sagafam:${fromYear}`),
+    );
     this.advanceWorldToNow();
     const end = detectEnd(this.content, this.state);
     if (end) {

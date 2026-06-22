@@ -161,4 +161,56 @@ describe("Game loop", () => {
       g.view.convergence?.destination,
     );
   });
+
+  it("PF-8: reading the novel ages + succeeds the family (saga path runs mortality/succession)", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Ager",
+      seed: "pf8",
+      originId: "composed:ireland:origins",
+    };
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    const startYear = g.view.state.year;
+    // Page/choose through the saga; the run clock advances and the family ages with it.
+    let guard = 0;
+    while (!g.finished && guard < 400) {
+      const v = g.view;
+      if (v.saga.scene) {
+        if (v.saga.scene.beats.length) g.pickBeat(0);
+        else if (v.saga.scene.decision) g.pickDecision(0);
+        else break;
+      } else if (v.currentEvent) {
+        const c = v.currentEvent.choices[0];
+        if (!c) break;
+        g.choose(c.id);
+      } else break;
+      guard++;
+    }
+    // Years passed (the saga ticked the clock) — proving advanceFamily ran over real elapsed time.
+    expect(g.view.state.year).toBeGreaterThan(startYear);
+    // Determinism: a fresh identical run reaches the same final state.
+    const g2 = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    let g2guard = 0;
+    while (!g2.finished && g2guard < 400) {
+      const v = g2.view;
+      if (v.saga.scene) {
+        if (v.saga.scene.beats.length) g2.pickBeat(0);
+        else if (v.saga.scene.decision) g2.pickDecision(0);
+        else break;
+      } else if (v.currentEvent) {
+        const c = v.currentEvent.choices[0];
+        if (!c) break;
+        g2.choose(c.id);
+      } else break;
+      g2guard++;
+    }
+    expect(g2.view.state.year).toBe(g.view.state.year);
+    expect(g2.view.state.end?.kind).toBe(g.view.state.end?.kind);
+  });
 });

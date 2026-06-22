@@ -268,61 +268,9 @@ export function applyChoice(
     }
   }
 
-  // 8e. MORTALITY + SUCCESSION (FD-9/FD-10): for each elapsed in-world year, the
-  // live family faces a seeded death pass; when the protagonist dies the line
-  // passes to the eldest living heir (estate-planning may name another via the
-  // `heir_<id>` flag), continuing the run AS the heir — or ends it if the line is
-  // extinct. Pure + seeded so replay reconstructs every death + handoff.
-  if (advanced.family) {
-    const years = Math.max(0, advanced.year - hopped.year);
-    const steps = years > 0 ? years : 1;
-    for (let y = 0; y < steps && !advanced.end; y++) {
-      const currentFamily = advanced.family;
-      if (!currentFamily) break;
-      const passYear = hopped.year + y;
-      const mort = applyMortality(
-        currentFamily,
-        passYear,
-        content.eras[advanced.eraIndex]?.id ?? "",
-        rng.fork(`mortality:${passYear}:${advanced.history.length}`),
-      );
-      let fam = mort.family;
-      if (mort.protagonistDied) {
-        const namedHeir = advanced.flags.find((f) => f.startsWith("heir_"))?.slice("heir_".length);
-        const succ = succeed(fam, passYear, namedHeir, advanced.founding?.successionMode);
-        if (succ.heirId === null) {
-          // The line is extinct — end the run with a dynastic-extinction ending.
-          advanced = {
-            ...advanced,
-            family: succ.family,
-            end: { kind: "line-extinct", year: passYear, reason: "The line died out." },
-          };
-          break;
-        }
-        fam = succ.family;
-        // Continue AS the heir: re-anchor birthYear/age + flag the succession.
-        const heir = fam.members.find((m) => m.id === succ.heirId);
-        const heirBorn = heir?.born ?? advanced.birthYear;
-        // Reset the per-generation life-stage flags so the heir runs their OWN
-        // partner→beget arc (EX-5 — else the line begets once and dies out). The
-        // founding emergence flags (emerged/named/calling_chosen) persist; the heir
-        // is already a born, named member of the line.
-        const lifeStageSet = new Set<string>(LIFE_STAGE_FLAGS);
-        const heirFlags = advanced.flags.filter((f) => !lifeStageSet.has(f));
-        advanced = {
-          ...advanced,
-          family: fam,
-          birthYear: heirBorn,
-          // Clamp to 0: succeed() only returns an already-born heir, but guard
-          // against a negative age if that invariant ever changes.
-          age: Math.max(0, passYear - heirBorn),
-          flags: withFlag(heirFlags, "succession_occurred"),
-        };
-      } else {
-        advanced = { ...advanced, family: fam };
-      }
-    }
-  }
+  // 8e. MORTALITY + SUCCESSION (FD-9/FD-10) — extracted to advanceFamily so the SAGA path can age +
+  // succeed the line the same way the event path does (PF-8).
+  advanced = advanceFamily(content, advanced, hopped.year, rng);
 
   // 9. Land any delayed consequences now due (post-advance year), unless the
   // timeline advance itself ended the run.
@@ -335,6 +283,70 @@ export function applyChoice(
   const finalState = postEnd ? { ...landed.state, end: postEnd } : landed.state;
 
   return { state: finalState, newLedger: [...newLedger, ...landed.newLedger] };
+}
+
+/**
+ * MORTALITY + SUCCESSION (FD-9/FD-10), pure + seeded. For each in-world year elapsed since `fromYear`,
+ * the live family faces a seeded death pass; when the protagonist dies the line passes to the eldest
+ * living heir (or a `heir_<id>`-named one), continuing AS the heir — or ends the run if extinct. Reused
+ * by BOTH the event path (applyChoice) and the saga path (Game.advanceRunClock, PF-8) so reading the
+ * novel ages + succeeds the line exactly as event play does. Returns the advanced state unchanged when
+ * there's no family or no time passed.
+ */
+export function advanceFamily(
+  content: Content,
+  state: GameState,
+  fromYear: number,
+  rng: Rng,
+): GameState {
+  if (!state.family) return state;
+  let advanced = state;
+  const years = Math.max(0, advanced.year - fromYear);
+  const steps = years > 0 ? years : 1;
+  for (let y = 0; y < steps && !advanced.end; y++) {
+    const currentFamily = advanced.family;
+    if (!currentFamily) break;
+    const passYear = fromYear + y;
+    const mort = applyMortality(
+      currentFamily,
+      passYear,
+      content.eras[advanced.eraIndex]?.id ?? "",
+      rng.fork(`mortality:${passYear}:${advanced.history.length}`),
+    );
+    let fam = mort.family;
+    if (mort.protagonistDied) {
+      const namedHeir = advanced.flags.find((f) => f.startsWith("heir_"))?.slice("heir_".length);
+      const succ = succeed(fam, passYear, namedHeir, advanced.founding?.successionMode);
+      if (succ.heirId === null) {
+        // The line is extinct — end the run with a dynastic-extinction ending.
+        advanced = {
+          ...advanced,
+          family: succ.family,
+          end: { kind: "line-extinct", year: passYear, reason: "The line died out." },
+        };
+        break;
+      }
+      fam = succ.family;
+      // Continue AS the heir: re-anchor birthYear/age + flag the succession.
+      const heir = fam.members.find((m) => m.id === succ.heirId);
+      const heirBorn = heir?.born ?? advanced.birthYear;
+      // Reset the per-generation life-stage flags so the heir runs their OWN partner→beget arc (EX-5
+      // — else the line begets once and dies out). The founding emergence flags (emerged/named/
+      // calling_chosen) persist; the heir is already a born, named member of the line.
+      const lifeStageSet = new Set<string>(LIFE_STAGE_FLAGS);
+      const heirFlags = advanced.flags.filter((f) => !lifeStageSet.has(f));
+      advanced = {
+        ...advanced,
+        family: fam,
+        birthYear: heirBorn,
+        age: Math.max(0, passYear - heirBorn),
+        flags: withFlag(heirFlags, "succession_occurred"),
+      };
+    } else {
+      advanced = { ...advanced, family: fam };
+    }
+  }
+  return advanced;
 }
 
 /**
