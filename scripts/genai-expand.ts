@@ -35,6 +35,34 @@ const WRITE = process.argv.includes("--write");
 const ALL = process.argv.includes("--all");
 
 /** Run one expand request, report, and (with --write) merge the accepted items into the canonical file. */
+/** Run expand with resilience to transient API errors (503 overload, rate limits): retry with
+ *  backoff a few times; if it still fails, SKIP the cell (return null) so one blip doesn't kill a
+ *  200+-act sweep. A real error (bad request) surfaces after the retries are spent. */
+async function expandResilient(
+  content: ReturnType<typeof loadContent>,
+  req: ExpandRequest,
+  generate: ReturnType<typeof geminiGenerate>,
+  label: string,
+): Promise<Awaited<ReturnType<typeof expand>> | null> {
+  for (let attempt = 0; attempt < 4; attempt++) {
+    try {
+      return await expand(content, req, generate);
+    } catch (e) {
+      const transient = /\b(429|500|502|503|504|overload|rate|timeout|ECONN|ETIMEDOUT)\b/i.test(
+        (e as Error).message,
+      );
+      if (!transient || attempt === 3) {
+        console.error(`  ✗ ${label}: ${(e as Error).message} (skipped after ${attempt + 1} tries)`);
+        return null;
+      }
+      const waitMs = 2000 * 2 ** attempt; // 2s, 4s, 8s backoff
+      console.error(`  … ${label}: transient (${(e as Error).message}); retry in ${waitMs}ms`);
+      await new Promise((r) => setTimeout(r, waitMs));
+    }
+  }
+  return null;
+}
+
 async function runOne(
   content: ReturnType<typeof loadContent>,
   req: ExpandRequest,
@@ -42,7 +70,8 @@ async function runOne(
   label: string,
 ): Promise<boolean> {
   console.error(`\n— ${label}`);
-  const result = await expand(content, req, generate);
+  const result = await expandResilient(content, req, generate, label);
+  if (!result) return false;
   console.error(`  ACCEPTED ${result.accepted.length} → ${result.canonicalFile}`);
   for (const r of result.rejected) console.error(`  ✗ ${r.reasons.join("; ")}`);
   if (!WRITE) return result.accepted.length > 0;
