@@ -103,7 +103,12 @@ async function main() {
     console.error(`Authoring ${cells.length} act(s) of the novel${ALL ? " (full lattice sweep)" : ""}…`);
     let ok = 0;
     for (const scene of cells) {
-      const did = await runOne(content, { type, scene, count: 1 }, generate, `act:${scene.wave}:${scene.archetype}:t${scene.tier}`);
+      const did = await runOne(
+        content,
+        { type, scene, count: 1 },
+        generate,
+        `act:${scene.wave}:${scene.archetype}:${scene.cls}:t${scene.tier}`,
+      );
       if (did) ok += 1;
     }
     console.error(`\n${ok}/${cells.length} acts authored.`);
