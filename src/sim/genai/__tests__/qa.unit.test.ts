@@ -43,6 +43,14 @@ describe("scene-polish pass", () => {
     expect(sys).toMatch(/never write a real person's name/i);
     expect(sys).toMatch(/sensory frame/i);
   });
+  it("UQ-2c2: forbids altering the decision succession/setFlags wiring (determinism)", () => {
+    const sys = scenePassSystem();
+    // The prose pass must preserve the whole decision block incl. succession/setFlags — reordering or
+    // altering them breaks save/restore determinism (the runner re-pins it too, defense-in-depth).
+    expect(sys).toMatch(/succession/);
+    expect(sys).toMatch(/determinism/i);
+    expect(sys).toMatch(/reword decision option PROSE only/i);
+  });
   it("prompt carries the act register cues + the scene JSON", () => {
     const p = buildScenePassPrompt(scene, {
       title: "Act I — The Crossing",

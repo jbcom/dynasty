@@ -184,6 +184,36 @@ async function passScene(ref: ActFileRef, gen: Generate): Promise<void> {
   writeIfValid(ref, file, label);
 }
 
+/**
+ * Normalize a model's prose-pass output, then RE-PIN the wiring the prose pass must never change, and
+ * schema-validate. Returns the safe revised scene, or null if it can't be validated (caller keeps the
+ * original). Used by BOTH the scene-polish pass and the lineage continuity-fix re-author so they share
+ * one determinism guarantee.
+ *
+ * RE-PINNED wiring (UQ-2c2): id/sense/next/requires AND `decision`. The decision carries the
+ * succession/setFlags wiring the sim replays — a prose pass that reworded or reordered the decision
+ * options silently broke save/restore determinism (the run picks the `succession.takesPartner` option
+ * by index, so a moved/dropped flag changes the path → different end year). Prose passes polish PROSE
+ * only; the succession PASS is the sole authority on a scene's decision.
+ */
+function normalizeAndPin(raw: string, original: Scene): Scene | null {
+  const obj = parseGeneratedObject(raw);
+  if (!obj) return null;
+  // Coerce model drift (string prose, missing/undefined arrays, numeric-key objects) like the bulk gate.
+  const normed = (normalizeSceneFile({ acts: [], scenes: [obj] }) as { scenes?: unknown[] }).scenes?.[0];
+  if (!normed) return null;
+  const candidate = {
+    ...(normed as Scene),
+    id: original.id,
+    sense: original.sense,
+    next: original.next,
+    requires: original.requires,
+    ...(original.decision ? { decision: original.decision } : {}),
+  };
+  const v = SceneSchema.safeParse(candidate);
+  return v.success ? v.data : null;
+}
+
 /** Revise one scene (≤2 attempts); return a schema-valid revision or the untouched original. */
 async function reviseScene(
   ref: ActFileRef,
@@ -197,16 +227,9 @@ async function reviseScene(
   for (let attempt = 0; attempt < 2; attempt++) {
     const raw = await call(gen, scenePassSystem(), buildScenePassPrompt(scene, act, brief), `${label}:${scene.id}`);
     if (!raw) return scene;
-    const obj = parseGeneratedObject(raw);
-    if (!obj) continue;
-    // Coerce model drift (string prose, missing/undefined arrays, numeric-key objects) like the bulk gate.
-    const normed = (normalizeSceneFile({ acts: [], scenes: [obj] }) as { scenes?: unknown[] }).scenes?.[0];
-    if (!normed) continue;
-    // Re-pin the wiring the editor must never change, THEN schema-validate the individual scene.
-    const candidate = { ...(normed as Scene), id: scene.id, sense: scene.sense, next: scene.next, requires: scene.requires };
-    const v = SceneSchema.safeParse(candidate);
-    if (v.success) return v.data;
-    console.error(`    · ${scene.id}: invalid revision (${v.error.issues[0]?.message}) — ${attempt === 0 ? "retry" : "kept original"}`);
+    const pinned = normalizeAndPin(raw, scene);
+    if (pinned) return pinned;
+    console.error(`    · ${scene.id}: invalid revision — ${attempt === 0 ? "retry" : "kept original"}`);
   }
   return scene;
 }
@@ -274,8 +297,11 @@ async function passLineage(ref: ActFileRef, gen: Generate): Promise<void> {
     const fixPrompt = `${buildScenePassPrompt(scene, act, sceneBrief)}\n\nCONTINUITY FIX REQUIRED (${br.kind}): ${br.detail}\nApply this fix: ${br.fix}`;
     const fixRaw = await call(gen, scenePassSystem(), fixPrompt, `${label}:${br.sceneId}`);
     if (!fixRaw) continue;
-    const fixed = parseGeneratedObject(fixRaw) as Scene | null;
-    if (fixed && fixed.id === scene.id) sceneById.set(scene.id, fixed);
+    // Route through the SAME normalize + re-pin + schema-validate path as the scene pass (UQ-2c2): the
+    // continuity fix used to accept raw model output with only an id check, so it could (and did) rewrite
+    // the decision wiring + break determinism. Now it polishes prose only; decision/requires stay pinned.
+    const fixed = normalizeAndPin(fixRaw, scene);
+    if (fixed) sceneById.set(scene.id, fixed);
   }
   file.scenes = file.scenes.map((s) => sceneById.get(s.id) ?? s);
   writeIfValid(ref, file, label);
