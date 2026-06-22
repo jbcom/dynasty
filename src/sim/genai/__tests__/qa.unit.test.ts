@@ -28,6 +28,7 @@ const scene: Scene = {
   prose: ["The wharf reeked of brine and the heavy musk of dray horses."],
   beats: [],
   thread: [],
+  braidSlots: [],
   requires: { flags: [], notFlags: [] },
 };
 
@@ -146,6 +147,7 @@ describe("succession pass", () => {
       prose: ["The last loaf cools."],
       beats: [],
       thread: [],
+      braidSlots: [],
       requires: { flags: [], notFlags: [] },
     };
     const decision: Scene["decision"] = {

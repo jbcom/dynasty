@@ -78,6 +78,28 @@ export const ThreadRefSchema = z.object({
 });
 export type ThreadRef = z.infer<typeof ThreadRefSchema>;
 
+/**
+ * A BRAID SLOT (WV-2): a marked point in a scene's prose where cross-dynasty weaving can attach. A
+ * `source` slot is a borrowable vignette of THIS line at some setting (the Jewish peddler at the
+ * market) — another line's destination anchor can pull its prose in. A `destination` anchor is a point
+ * where another line could plausibly ENTER this scene (a street corner the player passes). The runtime
+ * selector matches an era-eligible partner's source to this scene's destination by `setting`, weighted
+ * by bias (place × archetype × class), and weaves the borrowed vignette in (no bespoke per-pair writing).
+ * GenAI-tagged via the scoped-QA slot pass. ([[braid-slots-genai-architecture]])
+ */
+export const BraidSlotSchema = z.object({
+  kind: z.enum(["source", "destination"]),
+  /** Paragraph index in `scene.prose` the slot sits at (where a woven crossing attaches). */
+  at: z.number().int().min(0),
+  /** The KIND of meeting this slot supports (e.g. "market", "dock", "workplace", "journey") — matches a
+   *  source to a plausible destination + biases by place/era. */
+  setting: z.string().min(1),
+  /** For a `source`: a one-line borrowable vignette of this line at that setting. Absent on a
+   *  `destination` (it borrows the matched source's vignette). */
+  vignette: z.string().optional(),
+});
+export type BraidSlot = z.infer<typeof BraidSlotSchema>;
+
 /** A SCENE (≈ ink knot): multi-paragraph sensory prose, an optional weave of beats, an optional decision. */
 export const SceneSchema = z.object({
   id: z.string().min(1),
@@ -87,6 +109,8 @@ export const SceneSchema = z.object({
   beats: z.array(BeatSchema).default([]),
   decision: DecisionSchema.optional(),
   thread: z.array(ThreadRefSchema).default([]),
+  /** WV-2 braid slots (source/destination) for emergent bias-weighted cross-dynasty weaving. */
+  braidSlots: z.array(BraidSlotSchema).default([]),
   requires: z
     .object({
       flags: z.array(z.string()).default([]),
