@@ -17,21 +17,31 @@ interface Props {
   playerRung: number;
 }
 const { standings, playerRung }: Props = $props();
+
+// The player's line is ranked INLINE with the rivals (rung desc, label tiebreak) — not pinned to the
+// top — so the row's position reads as its true standing in the convergence race. Ties keep the player
+// above a same-rung rival so "where am I" stays unambiguous.
+const field = $derived(
+  [
+    { id: "you", label: "Your line", rung: playerRung, isPlayer: true },
+    ...standings.map((s) => ({ ...s, isPlayer: false })),
+  ].sort(
+    (a, b) =>
+      b.rung - a.rung ||
+      (a.isPlayer ? -1 : b.isPlayer ? 1 : a.label.localeCompare(b.label)),
+  ),
+);
 </script>
 
 {#if standings.length}
   <section class="field" data-testid="rival-field">
     <h3 class="field-title">The field</h3>
     <ul class="rows">
-      <li class="row you" data-testid="field-you">
-        <span class="who">Your line</span>
-        <RungStars rung={playerRung} />
-      </li>
-      {#each standings as s (s.id)}
-        <li class="row">
-          <!-- The snapshot's own label (place name) — matches the glimpse strip; no id-munging. -->
-          <span class="who">{s.label}</span>
-          <RungStars rung={s.rung} />
+      {#each field as r (r.id)}
+        <!-- Player row carries .you + the test hook; rivals use their own label (no id-munging). -->
+        <li class="row" class:you={r.isPlayer} data-testid={r.isPlayer ? "field-you" : undefined}>
+          <span class="who">{r.label}</span>
+          <RungStars rung={r.rung} />
         </li>
       {/each}
     </ul>

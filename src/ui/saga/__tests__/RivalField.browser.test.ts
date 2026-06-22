@@ -33,11 +33,11 @@ describe("RivalField (RB-5)", () => {
     const you = host.querySelector('[data-testid="field-you"]');
     expect(you?.textContent).toContain("Your line");
     expect(you?.querySelector(".rungs")?.textContent).toBe("★★★"); // rung 2 → 3 stars
-    // Both rivals render, highest rung first.
+    // Both rivals render, and the player is ranked INLINE by rung — not pinned to the top.
     expect(field?.textContent).toContain("bavaria");
     expect(field?.textContent).toContain("italian");
-    const rows = host.querySelectorAll(".row:not(.you) .who");
-    expect(rows[0]?.textContent).toBe("bavaria"); // rung 4 sorts above italian (rung 1)
+    const labels = [...host.querySelectorAll(".row .who")].map((n) => n.textContent);
+    expect(labels).toEqual(["bavaria", "Your line", "italian"]); // rung 4 > player 2 > italian 1
   });
 
   it("renders nothing when there are no rivals (unfounded / no world)", () => {
