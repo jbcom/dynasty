@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/jbcom/dynasty/compare/v0.9.0...v0.10.0) (2026-06-22)
+
+
+### Features
+
+* **saga:** activate cross-family intersections in play ([#68](https://github.com/jbcom/dynasty/issues/68)) ([e0cd653](https://github.com/jbcom/dynasty/commit/e0cd653e894fb2682d12b6a79b5692c227e2c47d))
+
 ## [0.9.0](https://github.com/jbcom/dynasty/compare/v0.8.0...v0.9.0) (2026-06-22)
 
 
