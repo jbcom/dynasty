@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.0](https://github.com/jbcom/dynasty/compare/v0.18.0...v0.19.0) (2026-06-22)
+
+
+### Features
+
+* **saga:** WV-2 emergent cross-dynasty weaving — braid slots + bias-weighted selector ([#98](https://github.com/jbcom/dynasty/issues/98)) ([ebb613f](https://github.com/jbcom/dynasty/commit/ebb613ff81317d2c07e442027b635525dde1d756))
+
 ## [0.18.0](https://github.com/jbcom/dynasty/compare/v0.17.0...v0.18.0) (2026-06-22)
 
 
