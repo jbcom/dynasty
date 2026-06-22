@@ -290,8 +290,9 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   slide-out "THE LINE" menu (8 motivators, OTHER LINES glimpses, codex, meters, personality) → multi-gen
   play → convergence-aware LegacyReport ("Toppled", muddled middle, House of Romano stats). All PF
   surfaces confirmed working with the QA'd corpus. PR #70 OPENED (jbcom/dynasty, feat/saga-polish → main).
-  [WAIT] CI running (build-and-test + Analyze/CodeQL; CodeRabbit already passed). ON GREEN: address any
-  threads, resolve, squash-merge; keep post-merge CD/Release green.
+  CI went green first pass; addressed 4 CodeRabbit threads in a forward commit (unhandled promise in
+  sound.start(), urge-timer unmount leak in SceneReader, empty-acts guard ×2 in genai-qa) — all 4
+  resolved. [WAIT] CI re-running on the fix commit. ON GREEN: squash-merge; keep post-merge CD/Release green.
 
 ### DEEPER GAP AUDIT (2026-06-22, round 2) — more partial/unwired surfaces, do contiguously
 
