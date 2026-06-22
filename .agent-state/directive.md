@@ -24,7 +24,19 @@ EXPANSION milestone (EX-1→EX-6) RELEASED — see git history / directive-archi
 SAGA POLISH milestone (PF-3→PF-18) RELEASED as v0.10.1 (PR #70); CI/CD hardened (PRs #72/#73/#75:
 braid-pool, STATE docs, automerge actor→branch-prefix + fork-spoof guard). See [[mmm-scoped-qa-pipeline]].
 
-## Active unit — DEPTH-1: succession choices (the dynastic fork)
+## DEPTH ARC — hour+ playthrough ACHIEVED (PRs #76/#78/#80, all merged + CD-green)
+
+The dynasty saga now plays as the real game — three compounding units turned a 1-scene fall-through into
+a ~150-scene, six-generation saga to year ~2054 ("to the stars across the centuries"), deterministic +
+gate-verified. See [[mmm-scoped-qa-pipeline]].
+- **DEPTH-1** (#76): authored the close-scene succession decision (the dynastic fork) into all 504 closes.
+- **TRAVERSAL FIX** (#78, the critical bug): 1008/2012 scene `next` pointers were malformed (dropped class
+  segment) → the novel dead-ended after its OPENING scene. Repaired all + hardened nextScene + DEPTH-2
+  (non-succession close ends the line with a convergence ending). Novel went 1 scene → 38+.
+- **DEPTH-3** (#80): the succession decision now actually begets heirs (applySuccessionToFamily), so the
+  line survives generations instead of going extinct at gen 2. Run: ~150 scenes / 6 acts / year 2054.
+- NEXT CANDIDATES (loop self-pick): per-tier content depth (more scenes/beats), richer convergence
+  interaction (act on rival glimpses), or presentation polish (portraits/audio/transitions).
 
 - [x] **DEPTH-1 close-scene succession decision — DONE.** 504/504 close scenes now carry a take-partner
   succession decision (corpus + DEPTH-1 test). Two genai fixes hardened every pass: normalizeSceneFile
