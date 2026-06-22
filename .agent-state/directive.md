@@ -43,12 +43,10 @@ The funnel is PERIOD→CLASS→WAVE→SURNAME; gender + given name are auto-defa
 (OnboardingScreen comment) — the user calls this a significant weakness. Sim ALREADY plumbs both
 end-to-end (FoundingInput.gender → Composition.gender → pickGivenName/suggestGivenNames, save
 round-trips). The gap is UI-only. NOT corpus-blocked — doable now while UQ-2 corpus runs.
-- [ ] **ONB-1 add GENDER + GIVEN-NAME selection to onboarding.** Extend the funnel: after SURNAME (or
-  alongside), let the player pick gender (male/female) and a given name (suggestGivenNames offers 3 +
-  free-type, like surname). Thread through onComplete → TitleScreen → founding (FoundingInput.gender +
-  an explicit given name, overriding the seeded pick). Update save format (already has gender; add the
-  chosen given). Keep deterministic + seeded. Tests: onboarding collects both; founding honors them;
-  save round-trips; visual test for the new step. Live-verify in Chrome.
+- [x] **ONB-1 — DONE (1779930).** Funnel now PERIOD→CLASS→WAVE→STYLE→SURNAME→GENDER→GIVEN (user-ordered:
+  naming style first, then suggestions computed from style+gender). onComplete carries gender+given+culture;
+  founding overrides the seeded pick; save round-trips `given`. 3 unit + 2 browser tests; tsc 0, 689+94 green.
+  REMAINING: live-verify the funnel in Chrome (folded into the UI review below).
 - [x] **UQ-1 spine + guidance ARCHITECTURE — BUILT (DRAFT guidance).** spine.ts: 6 arc shapes
   (rise/collapse/holding/reinvention/rivalry/windfall), per-cell selection, open+succession-close invariant.
   `guidance.json`: bespoke (era×class) briefs (arc/tone/rhythm/scannability + qaLookFor/qaReject) + per-WAVE
@@ -71,14 +69,44 @@ round-trips). The gap is UI-only. NOT corpus-blocked — doable now while UQ-2 c
   held to corrected history (italian: padrone/Mezzogiorno, zero Mafia-stereotype; chinese: laundry/exclusion/
   tong West-frame; ashkenazi: sweatshop/mutual-aid). 84 parse, 686 tests green, 6 scenes safely kept original.
   Diff was the test; kept.
-- [ ] [WAIT] **UQ-2c corpus lineage-pass auto-correct — RUNNING (bg).** `genai:qa --pass lineage --write` fixes
-  cross-tier breaks against each people's documented arc (lineagePassBrief). Pre-run commit (5c46f68) is the
-  revert point. ON completion: review diff → keep + commit, or reset. [WAIT] the background run.
-- [ ] [WAIT] **UQ-2d semantic-uniqueness + genuine-intersection audit — after UQ-2c.** Large-context
-  parallel-reader pass over the corrected corpus: confirm no two cells read structurally/semantically alike and
-  crossings are organic (woven, not walls). Findings → targeted re-author or a guidance patch. ALSO CHECK:
-  baghdad guidance was enriched (018e198) AFTER the scene-pass (Kadoorie→HK convergence node, Dawud Pasha,
-  70%-flag) — verify baghdad's convergence/future-tier scenes reflect it, else targeted baghdad re-run. [WAIT] UQ-2c.
+- [x] **UQ-2c corpus lineage-pass — RAN, then REVERTED (degraded a core invariant).** `genai:qa --pass lineage
+  --write` completed but its rewrite BROKE replay-determinism: loop.unit.test "crossing nudges replay-safe across
+  save/restore" failed (a vs b2 reached 2039 vs 2034) ONLY on the lineage corpus (passed on the pre-lineage one).
+  Per the diff-is-the-test rule, `git checkout -- src/data/saga` reverted it; loop test green again. The
+  scene-pass corpus (UQ-2b) stands. ROOT-CAUSE needed before re-running → UQ-2c2.
+- [ ] **UQ-2c2 root-cause the lineage-pass determinism break, then re-run safely.** The lineage re-author changed
+  scene content such that a mid-run save/restore no longer reproduces the uninterrupted run (year divergence).
+  Likely: it mutated decision/succession option ORDER or a flag a later scene `requires`, breaking the
+  seed+history replay invariant ([[save-and-chronology]]). Diff a re-authored scene's decision/options/flags vs
+  the original to find what drifted; then either (a) constrain the lineage pass to PRESERVE decision/flag wiring
+  (like the scene pass preserves id/sense/next), re-run, re-verify determinism; or (b) if continuity fixes
+  inherently need wiring changes, gate them through a determinism re-validation before keep. Dispatch
+  stuck-loop-debugger if 2+ hypotheses miss. THEN re-run + verify loop test green + commit.
+- [ ] **UQ-2d semantic-uniqueness + genuine-intersection audit — corpus is STABLE at UQ-2b (lineage reverted),
+  so NOT blocked.** Large-context parallel-reader pass over the scene-pass-corrected corpus: confirm no two cells
+  read structurally/semantically alike and crossings are organic (woven, not walls). Findings → targeted
+  re-author or a guidance patch. ALSO CHECK: baghdad guidance was enriched (018e198) AFTER the scene-pass
+  (Kadoorie→HK, Dawud Pasha, 70%-flag) — verify baghdad's convergence/future-tier scenes reflect it, else a
+  targeted baghdad re-run. (Sequence after UQ-UI if both open — the UI review is the active user directive.)
+
+### UQ-UI (user, 2026-06-22): the UI/UX/HUD is TOO TEXT-HEAVY — rethink for scannability
+The hud/views present everything as prose-dense text, not optimized for glance-scanning. Use UI-review
+skills + PAPER PLAYTESTING to find where weight should change: margins, borders, grouping, hierarchy,
+iconography-via-CSS (NO asset art — [[no-portraits-no-asset-art]]), whitespace, type scale. Balance
+game-scannability with the novel reading experience ([[scannability-game-novel-balance]]).
+- [ ] **UQ-UI-1 audit the current UI for text-heaviness (paper-playtest + screenshots).** Inventory every
+  screen/HUD/view (PlayScreen, MeterHud/MeterGauge, SceneReader, TimelineView, LineageView, CodexView,
+  StatsView, ButterflyLog, NewsTicker, onboarding). For each: screenshot it in Chrome, READ the screenshot,
+  name where the eye can't scan (wall-of-text, no hierarchy, weak grouping, missing borders/margins). Produce
+  a prioritized findings doc (docs) — the spine for the rework. Dispatch ui-design reviewers for fresh eyes.
+- [ ] **UQ-UI-2 rework pass 1: HUD + meters scannability — after UQ-UI-1.** Apply the highest-priority findings
+  to the persistent HUD (meters, status, year/era) — hierarchy, grouping, CSS iconography, whitespace, borders.
+  Svelte+CSS only. Visual tests + Chrome verify each change before commit.
+- [ ] **UQ-UI-3 rework pass 2: views (timeline/lineage/codex/stats) — after UQ-UI-2.** Same treatment for the
+  data-dense views; tables/cards/grouping over prose where it scans better. Visual tests + Chrome verify.
+- [ ] **UQ-UI-4 rework pass 3: SceneReader balance — after UQ-UI-3.** The novel page must stay readable prose
+  but gain scannability (rhythm/whitespace/drop-letter/choice affordances) per [[scannability-game-novel-balance]].
+  Also LIVE-VERIFY the ONB-1 onboarding funnel here (gender/given/style steps render + flow). Visual tests + Chrome.
 - [x] **UQ-reconcile arc-hash vs guidance.json — DONE (62beedd).** They're orthogonal layers (shape=FORM/
   pacing, guidance arc=historical MEANING), not redundant. Disambiguated in-prompt: spine intents now say
   "this act moves as a <shape>" (not "a <shape> generation"); scene.ts labels guidance "ARC (historical
