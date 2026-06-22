@@ -1,4 +1,5 @@
 <script lang="ts">
+import { MAX_RUNG } from "../../sim/classRung";
 /**
  * RIVAL FIELD (RB-5) — the whole convergence race at a glance: every other line's current standing
  * (rung), sorted high→low, with the player's own rung marked for comparison. Complements the
@@ -14,11 +15,8 @@ interface Props {
   standings: Standing[];
   /** The player's own rung, shown inline so the field is read relative to the played line. */
   playerRung: number;
-  /** Human label for a wave id (the run's waveLabel binding); falls back to a tidied id. */
-  labelFor?: (id: string) => string;
 }
-const { standings, playerRung, labelFor = (s) => s.replace(/^rival:/, "").replace(/_/g, " ") }: Props =
-  $props();
+const { standings, playerRung }: Props = $props();
 </script>
 
 {#if standings.length}
@@ -27,12 +25,17 @@ const { standings, playerRung, labelFor = (s) => s.replace(/^rival:/, "").replac
     <ul class="rows">
       <li class="row you" data-testid="field-you">
         <span class="who">Your line</span>
-        <span class="rungs" aria-label={`rung ${playerRung}`}>{"★".repeat(playerRung + 1)}</span>
+        <span class="rungs" aria-label={`reach ${playerRung + 1} of ${MAX_RUNG + 1}`}>
+          {"★".repeat(playerRung + 1)}
+        </span>
       </li>
       {#each standings as s (s.id)}
         <li class="row">
-          <span class="who">{labelFor(s.id)}</span>
-          <span class="rungs" aria-label={`rung ${s.rung}`}>{"★".repeat(s.rung + 1)}</span>
+          <!-- The snapshot's own label (place name) — matches the glimpse strip; no id-munging. -->
+          <span class="who">{s.label}</span>
+          <span class="rungs" aria-label={`reach ${s.rung + 1} of ${MAX_RUNG + 1}`}>
+            {"★".repeat(s.rung + 1)}
+          </span>
         </li>
       {/each}
     </ul>

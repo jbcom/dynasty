@@ -65,10 +65,11 @@ push + PR. See [[one-branch-local-review]].
   (caricature portrait/scene compositing) is NOT a polish slice — `src/render` is empty (the module was
   removed; only a stale Portrait.visual screenshot remains), so it's a from-scratch subsystem needing an
   asset pipeline + real 2D caricature art ([[dynasty-ui-conventions]]) — DECIDED to split it out as RB-8.
-- [ ] **RB-8 caricature portrait/scene compositing (new subsystem).** Build src/render: per-act portrait
-  + scene compositing from real 2D assets (caricature only, license-logged in assets.json), wired into
-  the SceneReader/PlayScreen. Needs a design pass (use-case enumeration) + the asset pipeline first;
-  visual-tested. Its own milestone — do after the consolidation branch's UI work (RB-5) lands.
+- [ ] [WAIT] **RB-8 caricature portrait/scene compositing (new subsystem).** Build src/render: per-act
+  portrait + scene compositing from real 2D assets (caricature only, license-logged in assets.json),
+  wired into the SceneReader/PlayScreen. Needs a design pass (use-case enumeration) + the asset pipeline
+  first; visual-tested. Its own milestone — start from clean main AFTER the consolidation PR (RB-9) merges
+  (avoid touching the branch under review).
 - [x] **RB-4 surface interactive convergence — DONE (forward commit).** Added the rival's rung to the
   Glimpse + a ★-per-rung indicator in the "Other lines" strip, so the player sees their crossings move a
   rival's standing. Browser-tested.
