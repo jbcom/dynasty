@@ -1,4 +1,4 @@
-import { mount, unmount } from "svelte";
+import { flushSync, mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
 import type { GameView } from "../../../engine/loop";
@@ -39,13 +39,19 @@ afterEach(() => {
 });
 
 describe("PlayScreen (composed game screen)", () => {
-  it("renders the HUD, tab nav, and event card together", () => {
+  it("renders the slim header, hamburger, tab nav, and event card together (PF-3)", () => {
     component = mount(PlayScreen, {
       target: host,
       props: { content, view: view(), busy: false, onchoose: () => {} },
     });
-    // HUD gauges present.
-    expect(host.querySelectorAll("[data-meter]").length).toBe(6);
+    // Slim always-visible header (PF-3): year + macro span context, no big HUD band.
+    expect(host.querySelector('[data-testid="saga-head"]')).not.toBeNull();
+    expect(host.querySelector('[data-testid="saga-head"]')?.textContent).toContain(
+      String(view().state.year),
+    );
+    // The non-essential HUD is behind the hamburger — meters are NOT in the always-visible surface.
+    expect(host.querySelector('[data-testid="hud-hamburger"]')).not.toBeNull();
+    expect(host.querySelectorAll("[data-meter]").length).toBe(0);
     // Tab nav present.
     expect(host.textContent).toContain("Now");
     expect(host.textContent).toContain("Timeline");
@@ -59,6 +65,24 @@ describe("PlayScreen (composed game screen)", () => {
     // Event card on the Now tab (portraits removed — they distracted, reclaimed the space).
     expect(host.querySelector("[data-event]")).not.toBeNull();
     expect(host.querySelector("[data-portrait]")).toBeNull();
+  });
+
+  it("the hamburger opens the slide-out menu with the meters + motivators inside (PF-3)", async () => {
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: view(), busy: false, onchoose: () => {} },
+    });
+    // Closed: the menu + meters are not present.
+    expect(host.querySelector('[data-testid="hud-menu"]')).toBeNull();
+    (host.querySelector('[data-testid="hud-hamburger"]') as HTMLButtonElement).click();
+    flushSync();
+    // Open: the slide-out holds the non-essential HUD (the 6 meters now live here).
+    expect(host.querySelector('[data-testid="hud-menu"]')).not.toBeNull();
+    expect(host.querySelectorAll('[data-testid="hud-menu"] [data-meter]').length).toBe(6);
+    // The scrim closes it again (direct dispatch — the fixed overlay stack confuses pointer hit-testing).
+    (host.querySelector('[data-testid="hud-scrim"]') as HTMLButtonElement).click();
+    flushSync();
+    expect(host.querySelector('[data-testid="hud-menu"]')).toBeNull();
   });
 
   it("switches tabs to show the dossier", async () => {
