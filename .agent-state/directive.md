@@ -189,6 +189,18 @@ merge workflows green; live-verified in Chrome.
 After NA-14 merges, RETURN to the standing autonomous POLISH & FEATURES mandate (top of file):
 self-pace the highest-value improvement, own the full PR loop, keep the directive living.
 
+## POLISH milestone (post-narrative-acts, autonomous)
+
+- [ ] [WAIT-CI] **PF-1 activate cross-family intersections** — buildCorpus deterministically weaves
+  each act's midpoint thread to a sibling wave at the same tier (200+ acts now braid a rival line);
+  resolveThreads + PlayScreen aside render it. The user's named "intersections" feature now FIRES in
+  play (was wired-but-dormant after NA-13). PR #68 open (https://github.com/jbcom/dynasty/pull/68),
+  Monitor b117r1xtd on CI; local gate green (609 unit + 84 browser). ON GREEN: resolve threads →
+  squash-merge → keep CD/Release green.
+- [ ] **PF-2 (next candidate)** — middle-class corpus sweep (`genai:expand --type scene --all --cls
+  middle`): only the poor track is authored, so a "trade and a little money" onboarding has no acts at
+  middle tiers. Author it so both arrival classes read as novels. (Pick after PF-1 merges.)
+
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
   `runTerms`; NO literal presets (the harness validator enforces 0 preset-person leaks).
