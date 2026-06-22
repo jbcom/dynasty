@@ -37,6 +37,28 @@ surface-unique (2520/2520 distinct first lines) but the ARCHITECTURE is template
 spine GENERATOR stamps one skeleton 504× ([[craft-spines-not-generator]]). This drives all three:
 uniqueness ([[uniqueness-genuine-intersections]]), scannability ([[scannability-game-novel-balance]]),
 and genuine intersections.
+### VL (user, 2026-06-22): VISUAL LAYER — portraits + map, GenAI-generated, to fix density
+MAJOR new direction. The user REVERSED [[no-portraits-no-asset-art]] ([[visual-layer-revival]]): the
+game feels DENSE / text-only "hurts things" / no map = no visual progress. Build (a) cartoonified
+1800s/1900s period-trope PORTRAITS (unique per person) and (b) a real cartographic-art MAP backdrop
+(Suzerain-style) that conveys migration/era PROGRESS. HARD CONSTRAINTS: NO hand-drawn SVG (OUT — it sank
+the 1st attempt); GENERATE the imagery + video via the EXISTING GenAI pipeline (verified: @google/genai
+SDK supports generateImages/editImage/upscaleImage/generateVideos). Deep-study Suzerain + 80 Days + other
+narrative/journey games to ELEVATE this, not just bolt on art. Sim purity holds (gen is offline/cached,
+keyed by cell so a seed reproduces; no runtime randomness).
+- [x] **VL-0 lock the constraints + reference study — IN PROGRESS.** Reversal confirmed + memory updated
+  ([[visual-layer-revival]] supersedes [[no-portraits-no-asset-art]]); SDK image/video capability verified;
+  dispatched a reference-study agent (80 Days/Suzerain/CK/Reigns/Disco Elysium/Pentiment — map+portrait+
+  progress UX, mobile-feasible techniques). [WAIT] the study, then write the design doc.
+- [ ] [WAIT] **VL-1 DESIGN DOC for the visual layer — after the reference study.** Ground in the study +
+  [[suzerain-ui-reference]]: the MAP (form, how it shows migration/era progress, mobile layout, persistent vs
+  transient), PORTRAITS (per-cell generation prompts, framing, who's-present/speaking), the GenAI image/video
+  GENERATION PASS (extend src/sim/genai + scripts: prompt-per-cell → generate → license-log assets.json →
+  load raster/video; deterministic-friendly, offline/cached), and how map+portrait+prose compose without
+  crowding. USER SIGN-OFF before any build (design-first, user's call).
+- [ ] [WAIT] **VL-2+ BUILD the visual layer — after VL-1 sign-off.** Generation pass → portraits → map →
+  compose into PlayScreen/SceneReader. Decomposed into build steps once the design is approved.
+
 ### ONB (user, 2026-06-22): onboarding must let the player CHOOSE gender + given name
 The funnel is PERIOD→CLASS→WAVE→SURNAME; gender + given name are auto-defaulted (save.ts
 `gender:"male"`, given name seeded) and were DEFERRED to in-game reveal beats by design
