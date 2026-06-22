@@ -51,13 +51,21 @@ and genuine intersections.
   West-Coast fighting tongs (≠ Six Companies); Scandinavian/German/Baghdadi = NO crime (don't invent).
   Geography: Chinese+Scandinavian were WEST, separate from East-Coast waves. Myth-flags per wave. JSON valid,
   tsc 0, tests green.
-- [ ] **UQ-2 wire guidance into QA + AUTO-CORRECT the corpus.** ([[uniqueness-genuine-intersections]])
-  WIRING DONE (3cffcfb): scenePassBrief/lineagePassBrief feed the same era×wave briefs + qaReject + myth-flags
-  into the scene/lineage QA passes (optional params; 5 new tests; tsc 0, 685 tests). NOW RUNNING: COMMIT clean
-  (done) → `genai:qa --pass scene --write` then `--pass lineage --write` against the 84 act files so it
-  self-corrects toward uniqueness/scannability/genuine-crossings/era-accuracy. Workflow: --write run → review
-  git diff (the test) → keep or `git reset --hard` (no dry-run). Then the large-context parallel-reader audit
-  for residual SEMANTIC sameness + genuine intersections.
+- [x] **UQ-2a wire guidance into the QA passes — DONE (3cffcfb).** ([[uniqueness-genuine-intersections]])
+  scenePassBrief/lineagePassBrief feed the same era×wave briefs + qaReject + myth-flags into the scene/lineage
+  QA passes (optional params; 5 new tests; tsc 0, 685 tests). Smoke (baghdad/middle lineage) confirmed the
+  brief reaches gemini-3.5-flash and surfaces real breaks.
+- [ ] [WAIT] **UQ-2b corpus scene-pass auto-correct — RUNNING (bg b3e1j6spo).** `genai:qa --pass scene --write`
+  across all 84 act files; pre-run clean commit (7a51b08) is the revert point. ON completion: review git diff
+  (the test) → keep, or `git reset --hard` if it degraded. [WAIT] the background run.
+- [ ] **UQ-2c corpus lineage-pass auto-correct — after UQ-2b.** Run `genai:qa --pass lineage --write` (fixes
+  cross-tier breaks against each people's documented arc), review the diff, commit. Then commit the kept
+  scene+lineage corrections as a content commit.
+- [ ] **UQ-2d semantic-uniqueness + genuine-intersection audit — after UQ-2c.** Large-context parallel-reader
+  pass over the corrected corpus: confirm no two cells read structurally/semantically alike and crossings are
+  organic (woven, not walls). Findings → targeted re-author or a guidance patch.
+- [ ] **UQ-reconcile arc-hash vs guidance.json — after UQ-2d.** spine.ts arcShapeFor (structural variety) and
+  guidance.json (creative/historical) coexist; verify they're complementary not redundant, fold or document.
 - [ ] [WAIT] **UQ-3 CRIME power axis — net-new fiction, after UQ-2.** ([[crime-power-axis]]) Add organized
   crime as a 7th archetype/power base (Italian/Irish/Chinese crime families — RESEARCHED, not assumed),
   its GOAP strategy, per-wave crime guidance, crossings with legitimate lines, and a dictatorial
