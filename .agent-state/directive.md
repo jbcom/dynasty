@@ -108,9 +108,13 @@ game-scannability with the novel reading experience ([[scannability-game-novel-b
   emoji meter icons clash (→ CSS glyphs); decision choices read as gold TEXT not tappable affordances;
   meters are mobile-hidden during a decision. MOBILE single-column capture still blocked (screenshot viewport
   stayed desktop despite resize) → do it during UQ-UI-2 when verifying mobile.
-- [ ] **UQ-UI-2 rework pass 1: HUD + meters scannability — after UQ-UI-1.** Apply the highest-priority findings
-  to the persistent HUD (meters, status, year/era) — hierarchy, grouping, CSS iconography, whitespace, borders.
-  Svelte+CSS only. Visual tests + Chrome verify each change before commit.
+- [x] **UQ-UI-2 HUD + meters scannability — DONE (297f069 + e79cd80).** Shipped the type-role split:
+  new `--mmm-font-ui` token (upright system-UI face + tabular figures) for HUD DATA, reserving the italic
+  serif for prose — the highest-leverage scannability lever. Applied to MarketsView (rows + regime tags now
+  uppercase) + the Dossier (values tabular, emoji icons contained/desaturated). Converted the P1 Markets
+  "Standing" wall to the Dossier bar pattern (label | gold rung-position bar | "1/6"). All Chrome-verified;
+  +2 colocated browser tests; tsc 0, 97 browser green. (Mobile capture + the decision-meter-strip finding
+  roll into UQ-UI-3/4.)
 - [ ] **UQ-UI-3 rework pass 2: views (timeline/lineage/codex/stats) — after UQ-UI-2.** Same treatment for the
   data-dense views; tables/cards/grouping over prose where it scans better. Visual tests + Chrome verify.
 - [ ] **UQ-UI-4 rework pass 3: SceneReader balance — after UQ-UI-3.** The novel page must stay readable prose
