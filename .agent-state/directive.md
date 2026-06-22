@@ -43,18 +43,21 @@ and genuine intersections.
   history/motivations/trades/obstacles/braidAffinity with full-timeline arc (arrival→convergence→future),
   injected into buildScenePrompt. tsc 0, 680 tests. NOTE: arc-hash + guidance coexist (shapes=structural
   variety, guidance=creative/historical) — reconcile if redundant.
-- [ ] [WAIT] **UQ-1b RESEARCH the guidance (don't ship from memory) — researchers RUNNING.** ([[research-not-memory]])
-  The guidance.json wave histories are a from-MEMORY draft. Dispatched 7 parallel general-purpose
-  researchers (one per wave: ireland/italian/chinese/ashkenazi/scandinavian/bavaria/baghdad), each
-  web-researching real history per era + trades + obstacles + CRIME arc + genuine inter-group contacts +
-  arrival→convergence→future. ON completion: synthesize their sourced briefs → correct guidance.json (fact
-  over my memory + over the user's framing). Gate before any corpus-wide regenerate. [WAIT] the researchers.
-- [ ] [WAIT] **UQ-2 wire guidance into the QA passes + AUTO-CORRECT the existing corpus — after UQ-1b.**
-  ([[uniqueness-genuine-intersections]]) Make the scene/lineage QA passes carry the era×wave guidance +
-  qaReject criteria, then COMMIT clean and run `genai:qa --pass scene/lineage --write` against the EXISTING
-  acts so it self-corrects toward uniqueness/scannability/genuine-crossings/era-accuracy. Workflow: commit →
-  --write run → review git diff (the test) → keep or `git reset --hard` (no dry-run). Then the large-context
-  parallel-reader audit for residual SEMANTIC sameness + genuine intersections.
+- [x] **UQ-1b RESEARCH-CORRECT the guidance (don't ship from memory) — DONE (9d073b8).** ([[research-not-memory]])
+  7 parallel web-researchers + direct fetches (German/Baghdadi via ctx_execute + notifications) replaced the
+  from-memory waves draft. Each wave now carries history/arc/motivations/trades/obstacles/CRIME/braidAffinity/
+  mythFlags. Key fact-corrections folded: Irish founded US organized crime FIRST → Italians succeeded them
+  (Mafia built-in-America, Commission est.1931); Italian-Jewish syndicate + Murder Inc (~70 kills); Chinese =
+  West-Coast fighting tongs (≠ Six Companies); Scandinavian/German/Baghdadi = NO crime (don't invent).
+  Geography: Chinese+Scandinavian were WEST, separate from East-Coast waves. Myth-flags per wave. JSON valid,
+  tsc 0, tests green.
+- [ ] **UQ-2 wire guidance into QA + AUTO-CORRECT the corpus.** ([[uniqueness-genuine-intersections]])
+  WIRING DONE (3cffcfb): scenePassBrief/lineagePassBrief feed the same era×wave briefs + qaReject + myth-flags
+  into the scene/lineage QA passes (optional params; 5 new tests; tsc 0, 685 tests). NOW RUNNING: COMMIT clean
+  (done) → `genai:qa --pass scene --write` then `--pass lineage --write` against the 84 act files so it
+  self-corrects toward uniqueness/scannability/genuine-crossings/era-accuracy. Workflow: --write run → review
+  git diff (the test) → keep or `git reset --hard` (no dry-run). Then the large-context parallel-reader audit
+  for residual SEMANTIC sameness + genuine intersections.
 - [ ] [WAIT] **UQ-3 CRIME power axis — net-new fiction, after UQ-2.** ([[crime-power-axis]]) Add organized
   crime as a 7th archetype/power base (Italian/Irish/Chinese crime families — RESEARCHED, not assumed),
   its GOAP strategy, per-wave crime guidance, crossings with legitimate lines, and a dictatorial
