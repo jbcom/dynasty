@@ -127,12 +127,13 @@ game-scannability with the novel reading experience ([[scannability-game-novel-b
 - [x] **UQ-UI-3 views type-role split — DONE (UQ-UI-3 commit).** LineageView (gen-label/life-years tabular/
   badges → UI face), TimelineView (era year-ranges tabular UI face), StatsView (uPlot legend+axis → UI face,
   scoped :global). Member names stay display-serif; prose flourishes stay italic. +1 test, 97 browser green.
-- [ ] [WAIT] **UQ-UI-4 SceneReader balance + choice affordances — incorporate SUZERAIN inspiration (user, 2026-06-22:
-  opened Suzerain screenshots in Safari).** Dispatched claude-for-safari agent (a9149f816850f158f) to capture +
-  describe the Suzerain UI references. ON its return: apply the reusable scannability techniques to the
-  SceneReader (paragraph rhythm, tighten the dead gap to "tap to continue", drop-letter/lead-in, and — per the
-  UQ-UI-1b finding — give decision choices a real tappable affordance, not gold prose). Keep it PROSE
-  ([[scannability-game-novel-balance]]). Also live-verify ONB-1 here. Visual tests + Chrome. [WAIT] the Safari agent.
+- [x] **UQ-UI-4 SceneReader balance + choice affordances — DONE (d07751a), from SUZERAIN inspiration.** Safari
+  agent captured + analyzed 12 Suzerain shots → [[suzerain-ui-reference]] (13 techniques). Applied the two
+  highest-leverage: (#1) prose `.para` capped to a MEASURED ~62ch column (Chrome-verified columnar lines —
+  the big anti-wall lever); (#4/#5) choice block lifted off the prose with a sense-tinted hairline rule +
+  leading "›" glyph per option, keeping the folded-in glow design (not buttons). +1 test, 97 browser green.
+  ONB-1 funnel also re-verified live (Ferraro line founded). Backlog for a deeper UI pass (in the memory):
+  text registers (#2), entity links (#3), compass (#9), recap tables (#10/#11).
 - [x] **UQ-reconcile arc-hash vs guidance.json — DONE (62beedd).** They're orthogonal layers (shape=FORM/
   pacing, guidance arc=historical MEANING), not redundant. Disambiguated in-prompt: spine intents now say
   "this act moves as a <shape>" (not "a <shape> generation"); scene.ts labels guidance "ARC (historical
