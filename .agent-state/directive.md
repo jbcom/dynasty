@@ -191,44 +191,36 @@ self-pace the highest-value improvement, own the full PR loop, keep the directiv
 
 ## POLISH milestone (post-narrative-acts, autonomous)
 
-- [ ] [WAIT-CI] **PF-1 activate cross-family intersections** — buildCorpus deterministically weaves
-  each act's midpoint thread to a sibling wave at the same tier (200+ acts now braid a rival line);
-  resolveThreads + PlayScreen aside render it. The user's named "intersections" feature now FIRES in
-  play (was wired-but-dormant after NA-13). PR #68 open (https://github.com/jbcom/dynasty/pull/68),
-  Monitor b117r1xtd on CI; local gate green (609 unit + 84 browser). ON GREEN: resolve threads →
-  squash-merge → keep CD/Release green.
-- [~] **PF-2 class in the saga cell + middle-class corpus** — branch feat/saga-class-cells.
+**ONE long-running branch `feat/saga-polish`** holds ALL polish work (no parallel-branch juggling —
+USER directive 2026-06-22). Layer PF-2/PF-3/… as forward commits here; open ONE PR at the end.
+
+- [x] **PF-1 activate cross-family intersections — DONE + MERGED (PR #68).** buildCorpus weaves each
+  act's midpoint thread to a sibling wave at the same tier; resolveThreads + PlayScreen aside render it.
+
+- [~] **PF-2 class in the saga cell + middle-class corpus** (on feat/saga-polish).
   (a)+(b) DONE (commit ce77a2f): act id `act:<wave>:<archetype>:<cls>:t<tier>`, file
   `<wave>/<archetype>.<cls>.act.json`; ActChapter.cls (default "poor"); spine/scene-gen/loader/driver
-  class-aware; actsForTier falls back to "poor" when a class track is unauthored; driver derives the
-  track from Wealth (sagaClassForWealth: climb → middle); migrated 42 files → `.poor.act.json`.
-  609 unit + typecheck + biome green.
-  (c) [WAIT] middle sweep `--all --cls middle --write` IN PROGRESS (bg /tmp/sweep-middle.log).
-  ON DONE: verify health (0 leaks/dangling, 252 middle acts), regen any failures, commit, PR.
+  class-aware; actsForTier falls back to "poor"; driver derives the track from Wealth
+  (sagaClassForWealth: climb → middle); migrated 42 files → `.poor.act.json`. 609 unit + gate green.
+  (c) [WAIT] middle sweep `--all --cls middle --write` IN PROGRESS (bg beo7mfy8q, /tmp/sweep-middle.log).
+  ON DONE: verify health (0 leaks/dangling, 252 middle acts), regen failures, commit on this branch.
 
-- [ ] **PF-3 reader UX overhaul (USER, 2026-06-22)** — the play surface wastes space: huge top HUD
-  band of centrist-aligned motivators/meters; too much text per page; unwieldy choice buttons.
-  Redesign (Suzerain-style paged prose, user-specified):
-  1. HUD: ONLY year + macro-act stay always-visible (slim header strip). Meters, 8 motivators,
-     utopia–tyranny axis, in-game settings → a slide-out menu from a TOP-RIGHT hamburger.
-  2. Prose: present ONE paragraph at a time; tap ANYWHERE to advance to the next (it just goes to
-     the next — paged, NOT a growing scroll stack; ref Suzerain's paged presentation).
-  3. Options folded INTO the story: when a paragraph has ≥1 choice, render the option(s) as
-     GLOWING PULSING text, bigger than the body, standing out — no big buttons. A choice-less
-     paragraph = tap anywhere → next. A paragraph WITH options: tapping a non-option area makes
-     the options PULSE FASTER (don't advance) to draw attention / communicate "pick one".
-  4. Goal: more presentation area for the unfolding story, more focus on options.
-  5. SCOPE HIERARCHY (USER, 2026-06-22): MACRO (Convergence/Emergence/Ascension) = the focus of an
-     entire ~100-YEAR span — NOT the act title; present it as subtle span-context, not the headline.
-     ACT title = the MESO: a SPECIFIC chapter of THIS family's story (not a generic per-tier label
-     reused across every line). CHOICES + their impact on the story (opposing/orthogonal lines) = the
-     MICRO. So: GenAI authors a DISTINCT, family-specific chapter title per act (the spine's generic
-     "The Crossing"/"The Climb" become PROMPT SEED/fallback, not the shown title); the header shows the
-     specific act chapter as the headline (meso) with the macro as quiet context.
-  Touches src/ui/saga/SceneReader.svelte + src/ui/screens/PlayScreen.svelte (HUD/menu) + spine/scene-gen
-  (author act titles). Mobile-first; browser-test the paged reveal + the pulse-on-tap-away + the menu +
-  per-act distinct titles. Live-verify in Chrome (READ the screenshots). Its own branch off main after
-  PF-2 merges (shares SceneReader/PlayScreen + spine/scene-gen files).
+- [~] **PF-3 reader UX overhaul (USER, 2026-06-22)** (on feat/saga-polish) — the play surface wastes
+  space: huge top HUD band of centrist motivators/meters; too much text per page; unwieldy buttons.
+  Redesign (Suzerain-style paged prose):
+  1. HUD: ONLY the act-chapter (meso) headline + year stay always-visible (slim strip). Meters, 8
+     motivators, utopia–tyranny axis, in-game settings → slide-out menu from a TOP-RIGHT hamburger.
+  2. Prose: ONE paragraph at a time; tap ANYWHERE → next (paged, NOT a growing scroll stack).
+  3. Options folded INTO the story: ≥1 choice → render option(s) as GLOWING PULSING text, bigger than
+     body, no buttons. Choice-less paragraph = tap anywhere → next. With options: tapping a non-option
+     area makes options PULSE FASTER (don't advance) to say "pick one".
+  4. Goal: more story presentation area, more focus on options.
+  5. SCOPE HIERARCHY (USER): MACRO (Convergence/Emergence/Ascension) = focus of a ~100-YEAR span, NOT
+     the act title — show it as subtle context. ACT title = MESO, a SPECIFIC chapter of THIS family's
+     story (GenAI authors a distinct per-act title; spine's "The Crossing"/etc become prompt-seed/
+     fallback). CHOICES + their impact (opposing/orthogonal lines) = MICRO.
+  Touches SceneReader.svelte + PlayScreen.svelte (HUD/menu) + spine/scene-gen (author act titles).
+  Mobile-first; browser-test paged reveal + pulse-on-tap-away + menu + distinct titles; live-verify Chrome.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
