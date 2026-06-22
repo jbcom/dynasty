@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.0](https://github.com/jbcom/dynasty/compare/v0.14.0...v0.15.0) (2026-06-22)
+
+
+### Features
+
+* presentation + interactive-convergence UI (RB-3/4/5), locally reviewed ([#89](https://github.com/jbcom/dynasty/issues/89)) ([eaf48bc](https://github.com/jbcom/dynasty/commit/eaf48bc8c279b8b4c0718d0f42bbac4cffe7e759))
+
 ## [0.14.0](https://github.com/jbcom/dynasty/compare/v0.13.1...v0.14.0) (2026-06-22)
 
 
