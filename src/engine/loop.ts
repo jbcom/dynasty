@@ -1,6 +1,7 @@
 import { loadSaga } from "../data/loadSaga";
 import type { Content } from "../sim/content";
 import { applyChoice } from "../sim/effects";
+import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
@@ -87,7 +88,7 @@ export class Game {
   }
 
   /** Write the driver's carried motivators back into the run's personality vector. */
-  private syncMotivators(m: ReturnType<SagaDriver["pickBeat"]>): void {
+  private syncMotivators(m: Motivators | null): void {
     if (m) this.state = { ...this.state, personality: m };
   }
 
@@ -97,10 +98,37 @@ export class Game {
     this.emit();
   }
 
-  /** Apply the current scene's terminal decision, then re-emit. */
+  /**
+   * Apply the current scene's terminal decision, then re-emit. When the chosen option carries a
+   * succession effect (a `close`-scene partner/heirs choice), the line steps to the next generation:
+   * the family advances and the next tier's act begins, carrying the line's drifted motivators.
+   */
   pickDecision(optionIndex: number): void {
-    this.syncMotivators(this.saga.pickDecision(optionIndex));
+    const result = this.saga.pickDecision(optionIndex);
+    this.syncMotivators(result?.motivators ?? null);
+    if (result?.succession && (result.succession.takesPartner || result.succession.begets > 0)) {
+      this.beginNextGenerationAct();
+    }
     this.emit();
+  }
+
+  /**
+   * Step the saga to the next generation's act. The full family advancement (partner → beget →
+   * succeed, src/sim/effects.ts) is driven by the event/succession system; here the saga surface
+   * re-begins at the next reach tier so the novel keeps moving generation-by-generation. Carries the
+   * line's current (drifted) motivators + accumulated flags.
+   */
+  private beginNextGenerationAct(): void {
+    const wave = this.state.founding?.place;
+    if (!wave) return;
+    const family = this.state.family;
+    const protagonist = family?.members.find((m) => m.id === family.protagonistId);
+    const nextTier = Math.min((protagonist?.generation ?? 0) + 1, 5);
+    this.saga.begin(
+      { wave, archetype: this.state.archetype, tier: nextTier },
+      this.state.personality,
+      this.saga.flags,
+    );
   }
 
   subscribe(fn: Listener): () => void {

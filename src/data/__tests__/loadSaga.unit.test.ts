@@ -22,4 +22,15 @@ describe("loadSaga (real corpus)", () => {
     expect(open).toBeDefined();
     expect(open?.prose.length).toBeGreaterThanOrEqual(2);
   });
+
+  it("every act's referenced scenes resolve (no dangling scene ids)", () => {
+    for (const act of corpus.acts.values()) {
+      for (const id of act.scenes) {
+        expect(corpus.scenes.get(id), `${act.id} → ${id}`).toBeDefined();
+      }
+    }
+  });
+
+  // NOTE: the "no orphan scenes" integrity assertion lands with the post-sweep prune commit
+  // (scripts/prune-saga-orphans.ts), once the full-lattice GenAI sweep has finished writing.
 });

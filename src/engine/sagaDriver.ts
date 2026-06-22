@@ -96,10 +96,23 @@ export class SagaDriver {
     return this.state.motivators;
   }
 
-  /** Apply the scene's terminal decision; returns the new motivators (or null if no active scene). */
-  pickDecision(optionIndex: number): Motivators | null {
+  /**
+   * Apply the scene's terminal decision. Returns the new motivators AND any succession effect the
+   * chosen option carries (read off the scene BEFORE advancing) — so the engine can step the line to
+   * the next generation (partner → beget → succeed) when a `close`-scene option calls for it. Null
+   * when there's no active scene.
+   */
+  pickDecision(optionIndex: number): DecisionResult | null {
     if (!this.state) return null;
+    const scene = currentScene(this.corpus, this.state);
+    const succession = scene?.decision?.options[optionIndex]?.succession;
     this.state = chooseDecision(this.corpus, this.state, optionIndex);
-    return this.state.motivators;
+    return { motivators: this.state.motivators, succession };
   }
+}
+
+/** The outcome of a decision pick: the carried motivators + any succession effect to apply. */
+export interface DecisionResult {
+  motivators: Motivators;
+  succession?: { takesPartner: boolean; begets: number };
 }

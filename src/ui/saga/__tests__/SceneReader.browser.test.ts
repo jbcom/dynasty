@@ -1,18 +1,19 @@
 import { mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { loadSaga } from "../../../data/loadSaga";
+import { FIXTURE_ACT } from "../../../sim/saga/__tests__/fixture";
+import { buildCorpus } from "../../../sim/saga/player";
 import SceneReader from "../SceneReader.svelte";
 
 /**
- * The SceneReader renders one scene as a page of a novel: multi-paragraph prose, a progressively
- * revealed weave of beats, the terminal tiered decision — resolving identity tokens and emitting the
- * player's choice. Driven by the real authored Ireland/economic opening scene.
+ * The SceneReader renders one scene as a page of a novel: multi-paragraph prose, a weave of
+ * alternative beats, the terminal tiered decision — resolving identity tokens and emitting the
+ * player's choice. Driven by the self-contained FIXTURE act (not the live GenAI corpus).
  */
 
-const corpus = loadSaga();
-const hold = corpus.scenes.get("sc:ire:econ:t0:hold");
-const landing = corpus.scenes.get("sc:ire:econ:t0:landing");
-if (!hold || !landing) throw new Error("authored scenes missing");
+const corpus = buildCorpus(FIXTURE_ACT.acts, FIXTURE_ACT.scenes);
+const hold = corpus.scenes.get("sc:fix:open"); // no-decision scene with 2 alternative beats
+const landing = corpus.scenes.get("sc:fix:close"); // major-decision scene
+if (!hold || !landing) throw new Error("fixture scenes missing");
 
 let host: HTMLElement;
 // biome-ignore lint/suspicious/noExplicitAny: opaque Svelte component instance
