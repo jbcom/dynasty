@@ -258,8 +258,9 @@ export function slotPassSystem(): string {
     "Each slot: { kind, at (the 0-based paragraph index), setting (a short shared tag), vignette? }.",
     "Tag ONLY paragraphs that truly support a meeting — most scenes get 0-2 slots. Do not invent settings",
     "that aren't in the prose. `setting` must be lower-case, one or two words, drawn from the moment.",
+    '`kind` MUST be EXACTLY the lower-case string "source" or "destination" — no other value, no caps.',
     ...SHARED_RULES,
-    'Output STRICT JSON: { "braidSlots": [ { "kind": "...", "at": 0, "setting": "...", "vignette": "..." } ] }.',
+    'Output STRICT JSON: { "braidSlots": [ { "kind": "source"|"destination", "at": 0, "setting": "...", "vignette": "..." } ] }.',
   ].join("\n");
 }
 
@@ -275,6 +276,46 @@ export function buildSlotPassPrompt(scene: Scene): string {
     "",
     'Return ONLY { "braidSlots": [ ... ] }.',
   ].join("\n");
+}
+
+/**
+ * Coerce raw model slot objects to the canonical shape before the schema gate (the model drifts on the
+ * `kind` casing/synonyms — "DESTINATION", "anchor", "src" — and may put a vignette on a destination).
+ * Lower-cases + maps synonyms; drops a destination's vignette; drops slots whose kind can't be resolved.
+ * Pure. Returns a loose array the schema then validates (which still rejects a source missing a vignette).
+ */
+const KIND_SYNONYMS: Record<string, "source" | "destination"> = {
+  source: "source",
+  src: "source",
+  origin: "source",
+  destination: "destination",
+  dest: "destination",
+  anchor: "destination",
+  target: "destination",
+};
+export function normalizeBraidSlots(raw: unknown): unknown[] {
+  if (!Array.isArray(raw)) return [];
+  const out: unknown[] = [];
+  for (const r of raw) {
+    if (!r || typeof r !== "object") continue;
+    const o = r as Record<string, unknown>;
+    const kind =
+      KIND_SYNONYMS[
+        String(o.kind ?? "")
+          .trim()
+          .toLowerCase()
+      ];
+    if (!kind) continue; // unresolvable kind → drop the slot rather than fail the whole scene
+    const slot: Record<string, unknown> = {
+      kind,
+      at: o.at,
+      setting: typeof o.setting === "string" ? o.setting.toLowerCase().trim() : o.setting,
+    };
+    // A vignette belongs only on a source; strip it from a destination so the schema refine passes.
+    if (kind === "source" && typeof o.vignette === "string") slot.vignette = o.vignette;
+    out.push(slot);
+  }
+  return out;
 }
 
 /** Attach authored braid slots to a scene (replaces any existing). Pure. */

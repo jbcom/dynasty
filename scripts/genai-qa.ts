@@ -36,6 +36,7 @@ import {
   braidPassSystem,
   type LineageSurface,
   lineagePassSystem,
+  normalizeBraidSlots,
   scenePassSystem,
   slotPassSystem,
   type SuccessionRequest,
@@ -400,10 +401,12 @@ async function passSlots(ref: ActFileRef, gen: Generate): Promise<void> {
     if (scene.braidSlots && scene.braidSlots.length > 0) continue; // already tagged
     const raw = await call(gen, slotPassSystem(), buildSlotPassPrompt(scene as Scene), `${label}:${scene.id}`);
     if (!raw) continue;
-    const obj = parseGeneratedObject(raw) as { braidSlots?: BraidSlot[] } | null;
-    if (!obj?.braidSlots?.length) continue;
-    // Validate the tagged scene on its own — a malformed slot can't sink the file's other scenes.
-    const tagged = applySlots(scene as Scene, obj.braidSlots);
+    const obj = parseGeneratedObject(raw) as { braidSlots?: unknown } | null;
+    const normalized = normalizeBraidSlots(obj?.braidSlots);
+    if (!normalized.length) continue;
+    // Normalize model drift (kind casing/synonyms, stray destination vignette) THEN validate the tagged
+    // scene on its own — a malformed slot can't sink the file's other scenes. (Cast: schema gates it.)
+    const tagged = applySlots(scene as Scene, normalized as BraidSlot[]);
     const v = SceneSchema.safeParse(tagged);
     if (!v.success) {
       console.error(`    · ${scene.id}: invalid slots (${v.error.issues[0]?.message}) — skipped`);
