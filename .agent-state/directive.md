@@ -55,9 +55,15 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   ShaderBackdrop palette updated; macroActs tests updated; tsc 0, 690 green. (NOTE: ShaderBackdrop is
   PROCEDURAL art → flagged for retirement in VL per [[visual-layer-revival]], only touched to fix the
   enum compile.) TIER_PLAN (the 504-generator) left for FS-3's authored spine.
-- [ ] **FS-3 authored spine model.** Replace the 504-cell spineFor generator with authored per-era acts +
-  DISTINCT decision architectures per era (founding/Gilded-Age/modern/stellar). Core craft work; test pins
-  "no two eras share a decision template." ([[craft-spines-not-generator]])
+- [x] **FS-3 authored spine MODEL — DONE (committed).** src/sim/saga/spineAuthored.ts: the ONE dynasty
+  line, founding(1776)→stars, ~10 authored generations, 8 DISTINCT decision architectures (bargain/
+  allegiance/venture/succession/reckoning/platform/expansion/doctrine). Invariant tested: no two consecutive
+  eras share a pivotal architecture (assertEraDecisionVariety); allegiance recurs in distinct contexts,
+  never back-to-back. +6 tests, 696 green. ([[craft-spines-not-generator]])
+- [ ] **FS-3b wire the authored spine into generation + retire the 504-generator path.** scene.ts prompt
+  builder consumes spineAuthored (per-era decision-architecture-aware prompts) instead of spineFor/TIER_PLAN;
+  retire the old generator. Couples with FS-6 (authoring the prose). Tests: each era's prompt reflects its
+  architecture.
 - [ ] **FS-4 mine the choicest/unique → REWRITE as BRANCHES off the ONE dynasty timeline.** Everything is
   branches off the player's line (NOT parallel lineages): scripts/mine-fabric.ts scores the 504 acts'
   scenes primarily on UNIQUENESS, then crossing/prose/era fit; extract the standouts and REWRITE them
