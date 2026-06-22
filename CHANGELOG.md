@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.10.1](https://github.com/jbcom/dynasty/compare/v0.10.0...v0.10.1) (2026-06-22)
+
+
+### Performance
+
+* **genai-qa:** pool the braid pass like scene/lineage (~4x faster regens) ([#72](https://github.com/jbcom/dynasty/issues/72)) ([562f64b](https://github.com/jbcom/dynasty/commit/562f64bea8424d0461ae35bb2ce5868533add084))
+
+
+### Documentation
+
+* **state:** saga polish shipped — replace stale 'still being wired' with shipped reality ([#73](https://github.com/jbcom/dynasty/issues/73)) ([9bdbba3](https://github.com/jbcom/dynasty/commit/9bdbba3773f0c0aeed58342325305ef70f694839))
+
 ## [0.10.0](https://github.com/jbcom/dynasty/compare/v0.9.0...v0.10.0) (2026-06-22)
 
 
