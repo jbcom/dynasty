@@ -283,7 +283,7 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   hand-edit). REMAINING: a final docs pass in PF-13 once PF-7/8/11 land (update the "still being wired"
   list as gaps close).
 
-- [ ] **PF-13 final pass: full gate + live-verify + open the PR.** GATE GREEN: typecheck + biome + 642
+- [ ] [WAIT] **PF-13 final pass: full gate + live-verify + open the PR.** GATE GREEN: typecheck + biome + 642
   unit + 89 browser + 7 e2e + build all pass. LIVE-VERIFY DONE (Chrome, screenshots READ): poor Italian
   line founded → diegetic onboarding → distinct meso title "Between Salt and Iron" (not the generic cue) →
   QA-lifted sensory steerage prose → paged reader advances → inline GLOWING options fold into the story →
