@@ -267,46 +267,58 @@ function rivalFor(wave: string, tier: number, allWaves: string[], tierIndex: Set
 }
 
 async function passBraid(refs: ActFileRef[], gen: Generate): Promise<void> {
-  // Build a (wave:tier) presence index from all files so rival selection matches the player.
+  // Build a (wave:tier) presence index from ALL files first so rival selection matches the player —
+  // this read must complete before any braiding (it's the cross-file context the pass needs).
   const allWaves = [...new Set(refs.map((r) => r.wave))];
-  const files = new Map<string, { ref: ActFileRef; file: SagaFileShape }>();
+  const loaded: Array<{ ref: ActFileRef; file: SagaFileShape }> = [];
   const tierIndex = new Set<string>();
   for (const ref of refs) {
     const file = readFile(ref);
     if (!file) continue;
-    files.set(ref.path, { ref, file });
+    loaded.push({ ref, file });
     for (const a of file.acts) tierIndex.add(`${ref.wave}:${a.tier}`);
   }
-  for (const { ref, file } of files.values()) {
-    const label = `braid ${ref.wave}/${ref.archetype}.${ref.cls}`;
-    let touched = false;
-    for (const act of file.acts) {
-      const midId = act.scenes.find((id) => id.endsWith(":midpoint"));
-      if (!midId) continue;
-      const mid = file.scenes.find((s) => s.id === midId);
-      if (!mid) continue;
-      const rival = rivalFor(ref.wave, act.tier, allWaves, tierIndex);
-      if (!rival) continue;
-      const req: BraidRequest = {
-        wave: ref.wave,
-        waveLabel: waveLabel(ref.wave),
-        rival,
-        rivalLabel: waveLabel(rival),
-        tier: act.tier,
-        macroAct: act.macroAct,
-        sceneOpening: (mid.prose ?? []).join(" "),
-      };
-      const raw = await call(gen, braidPassSystem(), buildBraidPassPrompt(req), `${label}:t${act.tier}`);
-      if (!raw) continue;
-      const obj = parseGeneratedObject(raw) as { crossing?: string; relation?: string } | null;
-      if (!obj?.crossing) continue;
-      const merged = applyBraid(mid, rival, act.tier, { crossing: obj.crossing, relation: obj.relation });
-      file.scenes = file.scenes.map((s) => (s.id === midId ? merged : s));
-      touched = true;
-    }
-    if (touched) writeIfValid(ref, file, label);
-    else console.error(`  · ${label}: nothing to braid (no rival wave at any tier — needs the full corpus)`);
+  // Each file braids independently (read-only shared index, writes only its own path) — pool it like
+  // the scene/lineage passes rather than running serially.
+  await pool(loaded, CONCURRENCY, ({ ref, file }) => braidOneFile(ref, file, allWaves, tierIndex, gen));
+}
+
+/** Author the crossings for one file's midpoint scenes; write only if a crossing landed. */
+async function braidOneFile(
+  ref: ActFileRef,
+  file: SagaFileShape,
+  allWaves: string[],
+  tierIndex: Set<string>,
+  gen: Generate,
+): Promise<void> {
+  const label = `braid ${ref.wave}/${ref.archetype}.${ref.cls}`;
+  let touched = false;
+  for (const act of file.acts) {
+    const midId = act.scenes.find((id) => id.endsWith(":midpoint"));
+    if (!midId) continue;
+    const mid = file.scenes.find((s) => s.id === midId);
+    if (!mid) continue;
+    const rival = rivalFor(ref.wave, act.tier, allWaves, tierIndex);
+    if (!rival) continue;
+    const req: BraidRequest = {
+      wave: ref.wave,
+      waveLabel: waveLabel(ref.wave),
+      rival,
+      rivalLabel: waveLabel(rival),
+      tier: act.tier,
+      macroAct: act.macroAct,
+      sceneOpening: (mid.prose ?? []).join(" "),
+    };
+    const raw = await call(gen, braidPassSystem(), buildBraidPassPrompt(req), `${label}:t${act.tier}`);
+    if (!raw) continue;
+    const obj = parseGeneratedObject(raw) as { crossing?: string; relation?: string } | null;
+    if (!obj?.crossing) continue;
+    const merged = applyBraid(mid, rival, act.tier, { crossing: obj.crossing, relation: obj.relation });
+    file.scenes = file.scenes.map((s) => (s.id === midId ? merged : s));
+    touched = true;
   }
+  if (touched) writeIfValid(ref, file, label);
+  else console.error(`  · ${label}: nothing to braid (no rival wave at any tier — needs the full corpus)`);
 }
 
 async function pool<T>(items: T[], n: number, worker: (item: T) => Promise<void>): Promise<void> {
