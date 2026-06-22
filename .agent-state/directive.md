@@ -43,11 +43,12 @@ and genuine intersections.
   history/motivations/trades/obstacles/braidAffinity with full-timeline arc (arrival→convergence→future),
   injected into buildScenePrompt. tsc 0, 680 tests. NOTE: arc-hash + guidance coexist (shapes=structural
   variety, guidance=creative/historical) — reconcile if redundant.
-- [ ] **UQ-1b RESEARCH the guidance (don't ship from memory) — ACTIVE.** ([[research-not-memory]]) The
-  guidance.json wave histories are a from-MEMORY draft. Research each people online (real immigration history
-  per era, trades, obstacles, the genuine inter-group CONTACTS that justify braid affinities, the full
-  arrival→20th-c-convergence→21st-c+ arc) + the crime axis below; ground it (ctx_fetch_and_index/web),
-  correct the JSON. This is the gate before any corpus-wide regenerate. Verify, don't transcribe the user's framing.
+- [ ] [WAIT] **UQ-1b RESEARCH the guidance (don't ship from memory) — researchers RUNNING.** ([[research-not-memory]])
+  The guidance.json wave histories are a from-MEMORY draft. Dispatched 7 parallel general-purpose
+  researchers (one per wave: ireland/italian/chinese/ashkenazi/scandinavian/bavaria/baghdad), each
+  web-researching real history per era + trades + obstacles + CRIME arc + genuine inter-group contacts +
+  arrival→convergence→future. ON completion: synthesize their sourced briefs → correct guidance.json (fact
+  over my memory + over the user's framing). Gate before any corpus-wide regenerate. [WAIT] the researchers.
 - [ ] [WAIT] **UQ-2 wire guidance into the QA passes + AUTO-CORRECT the existing corpus — after UQ-1b.**
   ([[uniqueness-genuine-intersections]]) Make the scene/lineage QA passes carry the era×wave guidance +
   qaReject criteria, then COMMIT clean and run `genai:qa --pass scene/lineage --write` against the EXISTING
