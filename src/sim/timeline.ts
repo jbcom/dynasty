@@ -163,3 +163,20 @@ export function advanceTimeline(content: Content, state: GameState): GameState {
 
   return { ...advanced, end: detectEnd(content, advanced) };
 }
+
+/** Years the saga clock advances per scene — a generation's six tiers × ~25 scenes spans ~150-180y,
+ *  matching a human multi-generation arc regardless of founding year. */
+export const SAGA_YEAR_STEP = 1;
+
+/**
+ * Advance the clock for the SAGA (novel) path — a small FIXED year step, decoupled from the era
+ * budget/rollover that drives the event path. The era ladder is calibrated for the 1885 waves; a
+ * non-1885 origin (baghdad founds 762 CE) would have its line aged to death by the era's yearEnd cap
+ * + the jump to a 1885-based next era. The novel is generational, not era-budget-driven, so it just
+ * ticks years forward (clamped to a sane ceiling) and lets advanceFamily age the line over that span.
+ * Era index is left untouched (the saga doesn't roll eras); ageInYear keeps age in sync. Pure.
+ */
+export function advanceSagaClock(state: GameState): GameState {
+  const year = Math.min(state.year + SAGA_YEAR_STEP, 99999);
+  return { ...state, year, age: ageInYear(year, state.birthYear) };
+}

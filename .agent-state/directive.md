@@ -40,7 +40,10 @@ by construction.
   convergence ending — the hour+ run is real. FOUND A GAP → RB-7: baghdad (the only non-1885 origin,
   founds 762 CE) goes extinct ~1946 after 16 scenes because the timeline eras are calibrated for the
   1885 waves, so advanceFamily ages the line across century-gaps between tiers and the heirs die out.
-- [ ] [WAIT] **RB-7 baghdad timeline mismatch.** ROOT CAUSE (analyzed): baghdad founds at year 762 but
+- [x] **RB-7 baghdad timeline mismatch — DONE.** Decoupled the saga clock from the 1885 era ladder
+  (advanceSagaClock, fixed generational step) + cap a succession-carried line at an 'apex' ending after
+  the 6th tier. All 7 waves now play ~165-180 scenes to apex (baghdad 175, 762→936). Test + deterministic.
+  ORIGINAL ROOT CAUSE: baghdad founds at year 762 but
   state.eraIndex=1 = the "origins" era (yearStart 1885, yearEnd 1946, budget 16). advanceTimeline steps
   year by span/budget=4y and caps at era.yearEnd 1946 → after the 16-beat budget the era rolls and the
   762-vs-1885 mismatch ages the line to death by 1946 (16 scenes). The saga clock is wrongly driven by
@@ -49,14 +52,13 @@ by construction.
   so any founding year (762 or 1885) plays a full 6-generation run. Touches loop.ts:advanceRunClock —
   do AFTER #83 merges (overlaps that file). Verify all 7 waves reach ~150 scenes; test replay-determinism + PR.
   [WAIT] #83 (loop.ts) to merge first.
-- [ ] [WAIT] **RB-3 presentation polish** — wire per-act caricature portrait/scene compositing (src/render),
-  per-era ambient audio depth, and animated scene transitions in SceneReader; live-verify + PR. (Start
-  from clean main after #83 merges — branch hygiene: one unit per branch off a settled base.)
+- [~] **RB-3 presentation polish** — IN PROGRESS. Slice 1 (between-scene fade transition + data-scene-id
+  hook in SceneReader) shipped in PR #86. [WAIT] #86 to merge, then slice 2 (per-era ambient audio depth)
+  + slice 3 (per-act caricature portrait/scene compositing, src/render) from clean main.
 - [ ] [WAIT] **RB-4 surface interactive convergence in the UI** — show the player when a crossing shifted a
-  rival (the slide-out "OTHER LINES" reflects nudges); a brief in-scene cue. PR. DEPENDS on #83's
-  convergence code being on main.
+  rival (the slide-out "OTHER LINES" reflects nudges); a brief in-scene cue. PR. (After #85/#86 merge.)
 - [ ] [WAIT] **RB-5 codex/timeline depth** — the CodexView + a timeline view of the line's generations +
-  the rival world's trajectory; PR. (After #83 merges.)
+  the rival world's trajectory; PR. (After #85/#86 merge.)
 ALSO OWN (user, 2026-06-21): merge the release-please PRs, and keep ALL workflows green —
 not just feature-PR CI, but the post-merge CD/Release on main too. PR #47 fixed a
 long-standing CD APK break (proguard-android.txt → -optimize.txt for Gradle 9.6/R8). Release

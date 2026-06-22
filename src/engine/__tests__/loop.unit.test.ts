@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
 import { loadSaga } from "../../data/loadSaga";
 import { validRaw } from "../../sim/__tests__/fixtures";
+import { MAX_RUNG } from "../../sim/classRung";
 import { buildContent } from "../../sim/content";
 import { foundByComposition } from "../../sim/founding";
 import { createRng } from "../../sim/rng";
@@ -367,6 +368,97 @@ describe("Game loop", () => {
     // Determinism: same seed + same choices → identical depth (replay-safe with the new beget draws).
     const b = play();
     expect(b.sagaScenes).toBe(a.sagaScenes);
+    expect(b.year).toBe(a.year);
+  });
+
+  it("the run caps at MAX_RUNG generations — the generation depth never exceeds the rung ladder", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Capped",
+      seed: "rungcap",
+      originId: "composed:ireland:origins",
+    };
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    let guard = 0;
+    let maxGen = 0;
+    while (!g.finished && guard < 3000) {
+      const v = g.view;
+      // rung is the protagonist's generation depth, single-sourced on MAX_RUNG (was hardcoded 5).
+      maxGen = Math.max(maxGen, v.rung);
+      const s = v.saga.scene;
+      if (s) {
+        if (s.decision) {
+          const i = s.decision.options.findIndex((o) => o.succession?.takesPartner);
+          g.pickDecision(i >= 0 ? i : 0);
+        } else if (s.beats.length) g.pickBeat(0);
+        else break;
+      } else if (v.currentEvent) {
+        const c = v.currentEvent.choices[0];
+        if (!c) break;
+        g.choose(c.id);
+      } else break;
+      guard++;
+    }
+    expect(maxGen).toBe(MAX_RUNG); // a fully-succeeded line reaches exactly the cap, never beyond
+  });
+
+  it("RB-7: a non-1885 origin (baghdad, 762 CE) plays a full capped multi-generation run, not extinct/infinite", () => {
+    const real = loadContent();
+    const comp = {
+      place: "baghdad",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 762,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Abbas",
+      seed: "rb7",
+      originId: "composed:baghdad:origins",
+    };
+    const play = () => {
+      const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+      let guard = 0;
+      let scenes = 0;
+      while (!g.finished && guard < 5000) {
+        const v = g.view;
+        const s = v.saga.scene;
+        if (s) {
+          scenes++;
+          if (s.decision) {
+            const i = s.decision.options.findIndex((o) => o.succession?.takesPartner);
+            g.pickDecision(i >= 0 ? i : 0);
+          } else if (s.beats.length) g.pickBeat(0);
+          else break;
+        } else if (v.currentEvent) {
+          const c = v.currentEvent.choices[0];
+          if (!c) break;
+          g.choose(c.id);
+        } else break;
+        guard++;
+      }
+      return {
+        scenes,
+        finished: g.finished,
+        year: g.view.state.year,
+        conv: g.view.convergence?.destination,
+      };
+    };
+    const a = play();
+    // The saga clock is decoupled from the 1885 era ladder, so baghdad survives generations (was extinct
+    // ~16 scenes) AND the run caps at 6 generations (was infinite once decoupled) — a full, finite run.
+    expect(a.finished).toBe(true);
+    expect(a.scenes).toBeGreaterThan(120);
+    expect(a.scenes).toBeLessThan(400);
+    expect(a.conv).toBeTruthy();
+    // Replay-deterministic.
+    const b = play();
+    expect(b.scenes).toBe(a.scenes);
     expect(b.year).toBe(a.year);
   });
 
