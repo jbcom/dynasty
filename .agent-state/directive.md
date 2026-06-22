@@ -72,8 +72,14 @@ push + PR. See [[one-branch-local-review]].
 - [x] **RB-4 surface interactive convergence — DONE (forward commit).** Added the rival's rung to the
   Glimpse + a ★-per-rung indicator in the "Other lines" strip, so the player sees their crossings move a
   rival's standing. Browser-tested.
-- [ ] **RB-5 codex/timeline depth** — the CodexView + a timeline view of the line's generations +
-  the rival world's trajectory; PR. (After #85/#86 merge.)
+- [x] **RB-5 codex/timeline depth — DONE (forward commit).** TimelineView/LineageView/CodexView already
+  exist; the gap was the rival world's trajectory being invisible. Added GameView.rivalStandings + a
+  RivalField component in the slide-out menu showing every line's rung (player's marked), so the whole
+  convergence race is legible. Browser-tested.
+- [ ] **RB-9 local comprehensive review + open the ONE PR for the consolidation branch.** Run the FULL
+  local gate (typecheck + biome + unit + browser + e2e) + dispatch the reviewer trio
+  (comprehensive-review:full-review / security / code-simplifier) on the whole branch diff; fold findings
+  into forward commits; THEN open the single PR. (Per [[one-branch-local-review]].)
 ALSO OWN (user, 2026-06-21): merge the release-please PRs, and keep ALL workflows green —
 not just feature-PR CI, but the post-merge CD/Release on main too. PR #47 fixed a
 long-standing CD APK break (proguard-android.txt → -optimize.txt for Gradle 9.6/R8). Release
