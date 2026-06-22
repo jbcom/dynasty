@@ -283,7 +283,7 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   hand-edit). REMAINING: a final docs pass in PF-13 once PF-7/8/11 land (update the "still being wired"
   list as gaps close).
 
-- [ ] [WAIT] **PF-13 final pass: full gate + live-verify + open the PR.** GATE GREEN: typecheck + biome + 642
+- [x] **PF-13 final pass: gate + live-verify + PR + merge — DONE.** GATE GREEN: typecheck + biome + 642
   unit + 89 browser + 7 e2e + build all pass. LIVE-VERIFY DONE (Chrome, screenshots READ): poor Italian
   line founded → diegetic onboarding → distinct meso title "Between Salt and Iron" (not the generic cue) →
   QA-lifted sensory steerage prose → paged reader advances → inline GLOWING options fold into the story →
@@ -292,7 +292,8 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   surfaces confirmed working with the QA'd corpus. PR #70 OPENED (jbcom/dynasty, feat/saga-polish → main).
   CI went green first pass; addressed 4 CodeRabbit threads in a forward commit (unhandled promise in
   sound.start(), urge-timer unmount leak in SceneReader, empty-acts guard ×2 in genai-qa) — all 4
-  resolved. [WAIT] CI re-running on the fix commit. ON GREEN: squash-merge; keep post-merge CD/Release green.
+  resolved. CI green on the fix commit; **SQUASH-MERGED as PR #70** (commit 4ccb8fa). Post-merge
+  workflows on main all GREEN: CD ✓, Release ✓, CodeQL ✓. Milestone shipped + deployed clean.
 
 ### DEEPER GAP AUDIT (2026-06-22, round 2) — more partial/unwired surfaces, do contiguously
 
