@@ -145,15 +145,20 @@ is locked, execute autonomously, self-pace, own the full PR loop.
 - [~] **NA-8 GenAI lattice sweep** — `--all --cls poor --write` authoring 252 acts (7 waves × 6
   archetypes × 6 tiers). IN PROGRESS in background (/tmp/saga-sweep.log). ~3% reject rate (retry).
   On completion: verify corpus health (0 leaks / 0 dangling / multi-paragraph), commit the corpus.
-- [ ] **NA-9 targeted regen** — re-run the handful of cells that failed all 3 attempts during the
-  sweep (track via `grep "after 3 attempts" /tmp/saga-sweep.log`); commit.
-- [ ] **NA-10 prune orphans** — run `scripts/prune-saga-orphans.ts` (regenerated acts leave old
-  exemplar scenes orphaned); re-add the loadSaga "no orphan scenes" integrity test; commit.
-- [ ] **NA-11 retire Epoch-0** — delete `src/data/eras/**/epoch0.json` narrative; SEPARATE the kept
-  succession mechanic (`ev_cp_take_partner`/`ev_cp_raise_heirs` → DecisionOption.succession, already
-  in schema) from the rejected narrative; wire Game.beginNextGenerationAct to drive the real
-  family advancement (effects.succeed/beget) not just re-begin the act; update content.ts/events.ts/
-  founding.ts/effects.ts + tests; world-timeline/backdrop facts STAY. No extinction-in-one-gen regression.
+- [x] **NA-9 targeted regen** — regenerated the 6 cells that failed all 3 sweep attempts
+  (bavaria:economic:t0, italian:political:t5, italian:entertainment:t0, ashkenazi_jewish:technological:t5,
+  scandinavian:religious:t1, scandinavian:athletic:t5) — all ACCEPTED 1/1 (/tmp/regen.log). Commit with NA-10.
+- [ ] [WAIT] **NA-10 prune orphans** — blocked on NA-8 sweep finishing its writes (currently in
+  baghdad). Then run `scripts/prune-saga-orphans.ts` (regenerated acts leave old exemplar scenes
+  orphaned); re-add the loadSaga "no orphan scenes" integrity test; commit corpus + regen + prune together.
+- [~] **NA-11 retire Epoch-0** — IN PROGRESS. Done: deleted all 9 epoch0.json; deleted the 3 narrative
+  ev_birth_* from new-york; retagged the 2 succession events epoch0→life-stage; content.ts
+  epoch0Events→lifeStageEvents (dropped authoredEpoch0Places); events.ts injects lifeStageEvents;
+  founding sets emerged/named/calling_chosen at founding (onboarding already locked them) so the
+  surviving succession beats fire; rewrote ob6-all-origins (saga-act coverage) + dropped the
+  onboardingFounding epoch0 suite. BLOCKER (dispatched stuck-loop-debugger): the millennium harness
+  test now goes line-extinct ~2000 (era order 3-4) for all 18 — the leaner per-gen event pool no
+  longer carries a line to era≥9. Awaiting root-cause + fix; do NOT re-pad with narrative beats.
 - [ ] **NA-12 live-verify** — run the app (chrome), play a founded line: confirm it reads as a novel
   (titled act, multi-paragraph sensory scenes, no when/where re-confirm), advances generation-by-
   generation through tiers, hour+ of content. READ the screenshots; fix spec-drift before done.
