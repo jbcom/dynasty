@@ -81,11 +81,14 @@ round-trips). The gap is UI-only. NOT corpus-blocked — doable now while UQ-2 c
   re-pins id/sense/next/requires + the WHOLE decision block + schema-validates; BOTH the scene pass and the
   (previously-bypassing) lineage-fix path route through it; prompt now states decision/succession is preserved.
   +1 contract test, 690 unit green. ([[save-and-chronology]])
-- [ ] [WAIT] **UQ-2c3 re-validate the fix on regenerated corpus, then re-run full lineage-pass.** Scoped
-  lineage re-run on ireland/poor WITH the fix is RUNNING (bg bfh319git). ON completion: confirm the close-scene
-  succession structure is PRESERVED (matches the pre-pass original) + the loop determinism test passes on the
-  regenerated file. If green → re-run `--pass lineage --write` across all 84, re-verify the loop test, keep +
-  commit. If still drifting → the re-pin missed a field; diff again. [WAIT] the bg run.
+- [x] **UQ-2c3 fix VALIDATED on ireland/poor (48292f6); full lineage re-run launched.** With the fix, the
+  scoped ireland/poor re-run PRESERVED the close-scene succession wiring exactly (matches pre-pass original;
+  pre-fix had corrupted t0 to [P+2,P-1,P-1]) and the loop determinism test passed (18/18), full suite 690.
+  Committed the validated batch.
+- [ ] [WAIT] **UQ-2c4 full-corpus lineage-pass with the fix — RUNNING (bg be7282sv7).** `genai:qa --pass
+  lineage --write` across the remaining 78 files. Pre-run commit (48292f6) is the revert point. ON completion:
+  run the loop determinism test + full suite on the regenerated corpus; if green keep + commit, else reset +
+  diff. [WAIT] the bg run.
 - [ ] **UQ-2d semantic-uniqueness + genuine-intersection audit — corpus is STABLE at UQ-2b (lineage reverted),
   so NOT blocked.** Large-context parallel-reader pass over the scene-pass-corrected corpus: confirm no two cells
   read structurally/semantically alike and crossings are organic (woven, not walls). Findings → targeted
