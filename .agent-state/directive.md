@@ -235,11 +235,21 @@ USER directive 2026-06-22). Layer PF-2/PF-3/… as forward commits here; open ON
 Full audit of remaining / incomplete / partially-wired / dead-but-built. Do them IN ORDER on
 feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. Don't stop between items.
 
-- [ ] [WAIT] **PF-5 finish the middle-class corpus** — first sweep died on a transient 503 (Gemini
-  overload) at 198/252 middle acts (34/42 cells). FIXED the runner to be resilient (retry+backoff,
-  skip-on-fail — commit), pruned 3 mid-write orphans, RE-LAUNCHED the resilient sweep (bg bompz6v06).
-  ON SWEEP DONE: verify health (0 leaks/dangling/orphans, 252 middle acts, poor untouched), regen any
-  still-failed cells, commit corpus; update loadSaga test to assert BOTH tracks complete (504 acts).
+- [x] **PF-5 middle-class corpus COMPLETE — DONE** (corpus commit on feat/saga-polish). The whole
+  corpus is now generated on **gemini-3.5-flash** (was a stale 2.5-flash default — user caught it):
+  252 poor + 252 middle = 504 acts / 2520 scenes, 0 leaks, 0 dangling refs, every cell 6 tiers.
+  Filled the missing chinese/baghdad cells + 11 individually-failed tier-acts; loadSaga now asserts
+  BOTH tracks complete (504) + per-cell tier completeness. HARDENED the gen gate: validateSceneFile
+  enforces scene-ref integrity (caught the model dropping/mis-naming scenes — a defect shape+leak
+  validation missed). See [[mmm-scoped-qa-pipeline]].
+
+- [ ] **PF-18 SCOPE-DELINEATED QA SWEEP** (spec 2026-06-22; in progress on feat/saga-polish). User
+  directive: QA delineated by IMPACT SCOPE, fix the whole affected unit. New src/sim/genai/qa.ts +
+  scripts/genai-qa.ts. Fixed the leak floor's false positives (case-insensitive "musk"/pooled given
+  names) — extracted to one shared src/sim/leak.ts. (a) scene polish over all 84 files — DONE (504
+  acts lifted, 0 kept-on-fail, structure intact). (b) lineage continuity pass — RUNNING. (c) braid
+  authoring (pair-specific cross-storyline crossings into midpoint thread[]) — NEXT. Then commit +
+  fold into PF-13's full run.
 
 - [x] **PF-6 ROOT GAP: class threaded through onboarding → founding — DONE** (commit 4b0318e). The
   chosen ArrivalClass now flows OnboardingScreen.onComplete → App.birthGame → resolveWaveStart(place,
