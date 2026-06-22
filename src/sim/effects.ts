@@ -76,17 +76,14 @@ export function applyChoice(
   if (state.end) {
     throw new Error("Cannot apply a choice to a finished run");
   }
-  // EPOCH-0 / LIFE-STAGE beats fire at a life-moment regardless of era, so their authored year
-  // (written for the new-york/origins line, e.g. ev_cp_take_partner=1908, ev_cp_raise_heirs=1912)
-  // must not stamp a later generation's events — and crucially not begetYear() — with an ancient
-  // year. A child begotten "now" must be born in the CURRENT in-world year; otherwise each new
-  // generation is minted decades in the past, ages out instantly, and the line goes extinct within a
-  // generation (NA-11: the `epoch0` tag formerly did this double duty; the succession beats are now
-  // tagged `life-stage`, so both must trigger the normalization). Preserves linear time for any origin.
-  if (
-    (event.tags.includes("epoch0") || event.tags.includes("life-stage")) &&
-    event.year !== state.year
-  ) {
+  // LIFE-STAGE beats (partner/heirs succession) fire at a life-moment regardless of era, so their
+  // authored year (written for the new-york/origins line, e.g. ev_cp_take_partner=1908,
+  // ev_cp_raise_heirs=1912) must not stamp a later generation's events — and crucially not
+  // begetYear() — with an ancient year. A child begotten "now" must be born in the CURRENT in-world
+  // year; otherwise each new generation is minted decades in the past, ages out instantly, and the
+  // line goes extinct within a generation. (NA-11: the retired `epoch0` tag formerly did this; the
+  // surviving succession beats are tagged `life-stage`.) Preserves linear time for any origin.
+  if (event.tags.includes("life-stage") && event.year !== state.year) {
     event = { ...event, year: state.year };
   }
   const choice = findChoice(event, choiceId);
