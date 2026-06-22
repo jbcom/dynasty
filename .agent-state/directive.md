@@ -151,8 +151,10 @@ is locked, execute autonomously, self-pace, own the full PR loop.
 - [ ] [WAIT] **NA-10 prune orphans** — blocked on NA-8 sweep finishing its writes (currently in
   baghdad). Then run `scripts/prune-saga-orphans.ts` (regenerated acts leave old exemplar scenes
   orphaned); re-add the loadSaga "no orphan scenes" integrity test; commit corpus + regen + prune together.
-- [ ] [WAIT] **NA-11 retire Epoch-0** — IN PROGRESS, blocked on the dispatched stuck-loop-debugger's
-  root-cause + fix for the harness regression (then apply fix → green → commit NA-9/10/11 together).
+- [x] **NA-11 retire Epoch-0 — DONE** (commit a0ee9bb). Harness regression root-caused by
+  stuck-loop-debugger (year-normalization was gated on the `epoch0` tag; retag to `life-stage`
+  dropped it → begets stamped children ~70yr in the past → extinction). Fixed: normalization now
+  fires for `epoch0`||`life-stage`; millennium run reaches interstellar; unit regression guard added.
   Done: deleted all 9 epoch0.json; deleted the 3 narrative
   ev_birth_* from new-york; retagged the 2 succession events epoch0→life-stage; content.ts
   epoch0Events→lifeStageEvents (dropped authoredEpoch0Places); events.ts injects lifeStageEvents;
