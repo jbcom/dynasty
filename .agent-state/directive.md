@@ -60,10 +60,11 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   allegiance/venture/succession/reckoning/platform/expansion/doctrine). Invariant tested: no two consecutive
   eras share a pivotal architecture (assertEraDecisionVariety); allegiance recurs in distinct contexts,
   never back-to-back. +6 tests, 696 green. ([[craft-spines-not-generator]])
-- [ ] **FS-3b wire the authored spine into generation + retire the 504-generator path.** scene.ts prompt
-  builder consumes spineAuthored (per-era decision-architecture-aware prompts) instead of spineFor/TIER_PLAN;
-  retire the old generator. Couples with FS-6 (authoring the prose). Tests: each era's prompt reflects its
-  architecture.
+- [x] **FS-3b wire authored spine into generation — DONE (committed).** scene.ts buildSpinePrompt(act):
+  each DecisionArchitecture → a concrete prompt instruction giving the era's pivotal choice its distinct
+  SHAPE, steering away from the old generic crossroads template. Tested: different eras inject different
+  shapes (founding=bargain+allegiance, broadcast=platform, stellar=expansion). +4 tests, 700 green. The old
+  buildScenePrompt/spineFor (504-cell) path is KEPT as the FS-4 mining SOURCE; retire AFTER mining.
 - [ ] **FS-4 mine the choicest/unique → REWRITE as BRANCHES off the ONE dynasty timeline.** Everything is
   branches off the player's line (NOT parallel lineages): scripts/mine-fabric.ts scores the 504 acts'
   scenes primarily on UNIQUENESS, then crossing/prose/era fit; extract the standouts and REWRITE them
