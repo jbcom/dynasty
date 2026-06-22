@@ -169,8 +169,10 @@ push + PR. See [[one-branch-local-review]].
   stray destination vignettes, applied before the gate; + explicit lowercase-enum in the prompt; 680 unit).
   2nd dry-run CONFIRMED the fix — all 6 ireland/poor files validate, 0 invalid. Now WRITING tags for
   ireland/poor + italian/poor (a crossing PAIR: ireland's destination anchors + italian's source slots
-  at a shared tier/setting). ON write completion: confirm matching slots in the corpus, live-verify in
-  Chrome a crossing weaves italian's borrowed copy into an ireland scene, then full-corpus tag. [WAIT] writes.
+  at a shared tier/setting). VERIFIED: the UQ-2b scene rewrite PRESERVED paragraph counts, so the existing
+  38 ireland/religious.poor slot `at` indices are all still in-bounds (0 drift) — slots survived the rewrite.
+  REMAINING (after UQ-2c lands, on the FINAL corpus): full-corpus `--pass slot --write` tag, then Chrome
+  live-verify a crossing weaves italian's borrowed copy into an ireland scene. [WAIT] UQ-2c (corpus-write).
 - [ ] [WAIT] **WV-3 emergent variability systems (anti-Suzerain) — after WV-2.** Seeded market/disease
   variability + Yuka rival reactions so playthroughs diverge; budget magnitudes more content
   ([[emergent-cause-effect-sim]]). Keeps the queue non-empty; un-WAIT after WV-2.
