@@ -84,11 +84,11 @@ export class Game {
     this.advanceWorldToNow();
   }
 
-  /** The player's rung as the world sees it: the protagonist's generation depth (0 founder … 5). */
+  /** The player's rung as the world sees it: the protagonist's generation depth (0 founder … MAX_RUNG). */
   private playerRung(): number {
     const family = this.state.family;
     const protagonist = family?.members.find((m) => m.id === family.protagonistId);
-    return Math.min(protagonist?.generation ?? 0, 5);
+    return Math.min(protagonist?.generation ?? 0, MAX_RUNG);
   }
 
   /** Rival lines visible from the player's current vantage — empty when unfounded / no world. */
@@ -137,7 +137,7 @@ export class Game {
     // Reach tier = the protagonist's generation depth (founder = 0), capped at the spine's top tier.
     const family = this.state.family;
     const protagonist = family?.members.find((m) => m.id === family.protagonistId);
-    const tier = Math.min(protagonist?.generation ?? 0, 5);
+    const tier = Math.min(protagonist?.generation ?? 0, MAX_RUNG);
     const cls = sagaClassForWealth(this.state.personality.wealth);
     this.saga.begin(
       { wave, archetype: this.state.archetype, tier, cls },
@@ -350,7 +350,7 @@ export class Game {
     if (!wave) return;
     const family = this.state.family;
     const protagonist = family?.members.find((m) => m.id === family.protagonistId);
-    const nextTier = Math.min((protagonist?.generation ?? 0) + 1, 5);
+    const nextTier = Math.min((protagonist?.generation ?? 0) + 1, MAX_RUNG);
     const cls = sagaClassForWealth(this.state.personality.wealth);
     this.saga.begin(
       { wave, archetype: this.state.archetype, tier: nextTier, cls },
