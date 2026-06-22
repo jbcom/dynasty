@@ -30,6 +30,25 @@ by construction.
 
 ## ROLLING BACKLOG — always non-empty, work top-down, append before draining
 
+## TOP PRIORITY — UNIQUENESS milestone (user, 2026-06-22, highest-order)
+Three connected user directives, one root cause. AUDIT (cheap, computed): 503 of 504 acts share ONE
+identical structural skeleton (open[2]/turn[2,d2]/rising[2]/midpoint[2,d3]/close[2,d3]); prose is
+surface-unique (2520/2520 distinct first lines) but the ARCHITECTURE is templated. Root cause: a single
+spine GENERATOR stamps one skeleton 504× ([[craft-spines-not-generator]]). This drives all three:
+uniqueness ([[uniqueness-genuine-intersections]]), scannability ([[scannability-game-novel-balance]]),
+and genuine intersections.
+- [ ] **UQ-1 spine-variety architecture — ACTIVE.** Replace the one-template spine generator with a SET
+  of distinct spine SHAPES (rise / collapse / holding / reinvention arcs — different scene counts, beat/
+  decision rhythms) selected per (archetype × tier × arc), so regenerated acts are structurally DIVERSE.
+  Design first (enumerate the arc shapes + which cells get which); then the generator picks/varies; then
+  per-act-type GenAI prompting (different instructions per arc, prompting for SCANNABLE rhythm — varied
+  density + whitespace, not uniform dense blocks, but never thinned to a couple of lines). Deterministic
+  (seeded). This is a content-architecture overhaul — design → small proof on a few cells → roll out.
+- [ ] [WAIT] **UQ-2 deep uniqueness + genuine-intersection AUDIT (parallel readers) — after UQ-1's proof.**
+  Large-context/parallel-reader pass: sample acts across cells for SEMANTIC sameness (same arc in different
+  words) + check braid pairings read genuine/organic (right lines, plausible meeting, borrowed copy fits).
+  Feed fixes to the QA passes. Standing gate — re-run after any regeneration. ([[uniqueness-genuine-intersections]])
+
 - [x] **RB-2 per-tier content depth — DONE.** Audit showed prose depth already uniform (every scene
   2-4 paras); only 2 under-generated cells had <2 beats — regenerated to the full weave (0 thin-beat).
   Fixed a real passSuccession skip bug (skipped any-decision closes, not just succession-bearing ones).
