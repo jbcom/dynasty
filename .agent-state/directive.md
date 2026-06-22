@@ -74,12 +74,14 @@ push + PR. See [[one-branch-local-review]].
   supersedes it (commit body documents the override). Reviewer trio DONE (code MED+3LOW folded, security
   clean, simplifier folded) + full gate green + live-verified. PR #91 OPENED. [WAIT] CI + merge.
   Design spec: `docs/superpowers/specs/2026-06-22-rb8-portrait-scene-compositing-design.md`.
-- [ ] **RB-10 audio↔visual era lockstep + scene-stage polish — ACTIVE (next, same branch).** RB-8 landed
-  both era tables: `chordForEra` (audio, ui/sound.ts) and `palettes.ts` rampForEra (visual) are parallel
-  keyword maps that could drift. Single-source them into ONE era table both read (a shared
-  `src/sim/eras.ts` or render/era module keyed on the era-id keywords), so a new era can't be added to one
-  and forgotten in the other. Then: an era-crossing audio+visual cue in lockstep, and the ending composed
-  frame's audio sting. Visual + audio tested. Same long-running branch (no new PR until the milestone PR).
+- [ ] [WAIT] **RB-10 audio↔visual era lockstep — IMPL gated on #91 merge.** Design DONE incl. the drafted
+  merged ERA_BANDS table (`docs/superpowers/specs/2026-06-22-rb10-era-lockstep-design.md`). On #91 merge:
+  build `src/sim/eras.ts` (one table both chordForEra + rampForEra read) + agreement-invariant test, then
+  era-crossing lockstep + ending audio sting. Visual+audio tested.
+- [ ] [WAIT] **RB-8 PR #91 — CI green + merge.** Flake ROOT-CAUSED + deterministically fixed: the
+  "Vite reloaded a test / failed to find the runner" failure was a concurrent dep-optimizer race across
+  browser test files; `fileParallelism: false` (613ff7d) serializes them — 3 clean local runs. Both
+  CodeRabbit findings folded + threads resolved. Monitor booohudmo merges on green; keep CD green after.
 - [ ] [WAIT] **RB-11 portrait depth — class-tier + mood overlay layers.** ONCE RB-10 lands: author the
   tier(class) + mood(pole) SVG overlay layers composeScene already references (they currently hide-on-error),
   so the portrait deepens with class + dominant motivator; license-logged + manifest-tested + live-verified.
