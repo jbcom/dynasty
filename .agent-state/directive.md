@@ -221,6 +221,10 @@ USER directive 2026-06-22). Layer PF-2/PF-3/… as forward commits here; open ON
      fallback). CHOICES + their impact (opposing/orthogonal lines) = MICRO.
   Touches SceneReader.svelte + PlayScreen.svelte (HUD/menu) + spine/scene-gen (author act titles).
   Mobile-first; browser-test paged reveal + pulse-on-tap-away + menu + distinct titles; live-verify Chrome.
+  STATUS: items 1-4 DONE + LIVE-VERIFIED in Chrome (commits 1410794 paged SceneReader, e91be71 slim
+  header + SlideOutMenu). Item 5: scene-gen now authors distinct titles (committed); retitle tooling +
+  tests committed; [WAIT] the retitle RUN over the corpus waits for the middle sweep to finish (file-
+  write race + must cover both tracks). 11 genai + 86 browser + 7 e2e + 609 unit green.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
