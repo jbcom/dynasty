@@ -17,6 +17,7 @@ import { moralPoleOf, moralPoleLabel } from "../../sim/moralAxis";
 import { applyTerms, runTerms } from "../../sim/terms";
 import { projectSaga } from "../../sim/readModel";
 import ShaderBackdrop from "../saga/ShaderBackdrop.svelte";
+import RivalField from "../saga/RivalField.svelte";
 import SagaPanel from "../saga/SagaPanel.svelte";
 import SceneReader from "../saga/SceneReader.svelte";
 import SlideOutMenu from "../saga/SlideOutMenu.svelte";
@@ -189,6 +190,7 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
 
   <SlideOutMenu label="Line & settings">
     <SagaPanel view={sagaView} />
+    <RivalField standings={view.rivalStandings} playerRung={view.rung} />
     <MeterHud defs={content.meters} meters={view.state.meters} />
     <PersonalityDial personality={view.state.personality} {pole} {poleLabel} />
     <CodexView entries={codex} {term} />

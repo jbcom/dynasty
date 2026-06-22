@@ -31,6 +31,9 @@ export interface GameView {
   saga: SagaFrame;
   /** Rival lines (the convergence world) visible from the player's vantage this turn. */
   glimpses: Glimpse[];
+  /** The WHOLE convergence field — every rival line's current standing (label + rung), sorted high→low,
+   *  for a "where all the lines are racing" readout (RB-5), beyond the near-vantage glimpses. */
+  rivalStandings: Array<{ id: string; label: string; rung: number }>;
   /** The player's class rung (generation depth, 0..5) — for the read-model's class readout. */
   rung: number;
   /** The dynastic CONVERGENCE ending (toward the stars / contributed / earthbound / extinguished),
@@ -101,6 +104,15 @@ export class Game {
     );
   }
 
+  /** Every rival line's current standing (label + rung), sorted high→low — the full convergence field
+   *  for the RB-5 readout. Empty when unfounded / no world. */
+  private rivalStandings(): Array<{ id: string; label: string; rung: number }> {
+    if (!this.world) return [];
+    return this.world.snapshots
+      .map((s) => ({ id: s.id, label: s.label, rung: s.rung }))
+      .sort((a, b) => b.rung - a.rung || a.label.localeCompare(b.label));
+  }
+
   /** End kinds that mean the line FAILED (didn't survive to a convergence). */
   private static readonly FAILURE_ENDS = new Set(["death", "coup", "jail", "line-extinct", "ruin"]);
 
@@ -163,6 +175,7 @@ export class Game {
       currentEvent: this.current,
       saga: this.saga.frame(),
       glimpses: this.currentGlimpses(),
+      rivalStandings: this.rivalStandings(),
       rung: this.playerRung(),
       convergence: this.convergenceEnding(),
       lastLedger: this.lastLedger,
