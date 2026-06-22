@@ -229,6 +229,53 @@ describe("Game loop", () => {
     }
   });
 
+  it("DEPTH-2: closing a generation without succession ends the line (a real fork against continuing)", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Lastofus",
+      seed: "depth2",
+      originId: "composed:ireland:origins",
+    };
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    // Walk to the first close decision; pick the option that does NOT carry succession. The line should
+    // end here (not silently fall through) and resolve a convergence ending.
+    let guard = 0;
+    let endedAtClose = false;
+    while (!g.finished && guard < 400) {
+      const v = g.view;
+      const scene = v.saga.scene;
+      if (scene) {
+        // A decision-bearing scene: pick the decision (on a close, choose the NON-succession option to
+        // end the line). A pure-weave scene: take a beat to fall forward.
+        if (scene.decision) {
+          const isClose = scene.id?.endsWith(":close");
+          const nonSucc = scene.decision.options.findIndex((o) => !o.succession?.takesPartner);
+          if (isClose && nonSucc >= 0) {
+            g.pickDecision(nonSucc);
+            endedAtClose = g.finished;
+            break;
+          }
+          g.pickDecision(0);
+        } else if (scene.beats.length) {
+          g.pickBeat(0);
+        } else break;
+      } else if (v.currentEvent) {
+        const c = v.currentEvent.choices[0];
+        if (!c) break;
+        g.choose(c.id);
+      } else break;
+      guard++;
+    }
+    expect(endedAtClose, "a non-succession close ended the line").toBe(true);
+    expect(g.view.convergence).not.toBeNull();
+  });
+
   it("PF-14: a saga choice's setFlags reach the run's state.flags (not sealed in the driver)", () => {
     const real = loadContent();
     const comp = {

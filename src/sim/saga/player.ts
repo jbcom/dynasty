@@ -155,13 +155,16 @@ export function applyDecision(
  * fall-through; else the next scene in the act's ordered list; else undefined (act ends). Pure.
  */
 export function nextScene(
-  _corpus: SagaCorpus,
+  corpus: SagaCorpus,
   act: ActChapter,
   current: Scene,
   outcome: ChoiceOutcome,
 ): string | undefined {
   if (outcome.divertTo) return outcome.divertTo;
-  if (current.next) return current.next;
+  // Honor an authored `next` ONLY if it resolves to a real scene — a malformed pointer (e.g. a dropped
+  // class segment in a generated id) must NOT silently end the act. Fall back to the act's scene order,
+  // which is the authoritative sequence, so traversal is robust to that drift.
+  if (current.next && corpus.scenes.has(current.next)) return current.next;
   const i = act.scenes.indexOf(current.id);
   return i >= 0 && i + 1 < act.scenes.length ? act.scenes[i + 1] : undefined;
 }

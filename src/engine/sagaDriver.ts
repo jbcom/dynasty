@@ -117,8 +117,11 @@ export class SagaDriver {
     if (!this.state) return null;
     const scene = currentScene(this.corpus, this.state);
     const succession = scene?.decision?.options[optionIndex]?.succession;
+    // A close scene's decision is the generational fork: if its chosen option carries NO succession,
+    // the player chose to let the line end here (vs continue it) — the engine resolves a final ending.
+    const wasCloseDecision = scene?.id.endsWith(":close") ?? false;
     this.state = chooseDecision(this.corpus, this.state, optionIndex);
-    return { motivators: this.state.motivators, succession };
+    return { motivators: this.state.motivators, succession, wasCloseDecision };
   }
 }
 
@@ -126,4 +129,6 @@ export class SagaDriver {
 export interface DecisionResult {
   motivators: Motivators;
   succession?: { takesPartner: boolean; begets: number };
+  /** True when the decided scene was a generational `close` — the dynastic fork. */
+  wasCloseDecision: boolean;
 }
