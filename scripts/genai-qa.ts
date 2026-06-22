@@ -25,14 +25,18 @@ import { DEFAULT_QA_MODEL, geminiGenerate, parseGeneratedObject } from "../src/s
 import { normalizeSceneFile, validateSceneFile, type SceneRequest } from "../src/sim/genai/scene";
 import {
   applyBraid,
+  applySuccession,
   type BraidRequest,
   buildBraidPassPrompt,
   buildLineagePassPrompt,
   buildScenePassPrompt,
+  buildSuccessionPrompt,
   braidPassSystem,
   type LineageSurface,
   lineagePassSystem,
   scenePassSystem,
+  type SuccessionRequest,
+  successionPassSystem,
 } from "../src/sim/genai/qa";
 import { type ActChapter, type Scene, SceneSchema } from "../src/sim/saga/schema";
 import type { Rung } from "../src/sim/classRung";
@@ -44,7 +48,7 @@ const arg = (n: string, d?: string): string | undefined => {
   const i = argv.indexOf(`--${n}`);
   return i >= 0 && argv[i + 1] ? argv[i + 1] : d;
 };
-const PASS = (arg("pass", "all") ?? "all") as "scene" | "lineage" | "braid" | "all";
+const PASS = (arg("pass", "all") ?? "all") as "scene" | "lineage" | "braid" | "succession" | "all";
 const CONCURRENCY = Number(arg("concurrency", "4"));
 const SAGA_ROOT = "src/data/saga";
 const ACT_FILE = /^(?<archetype>[a-z_]+)\.(?<cls>poor|middle)\.act\.json$/;
@@ -321,6 +325,45 @@ async function braidOneFile(
   else console.error(`  · ${label}: nothing to braid (no rival wave at any tier — needs the full corpus)`);
 }
 
+// ── Pass 4: succession authoring (the dynastic fork at each close scene) ──────
+async function passSuccession(ref: ActFileRef, gen: Generate): Promise<void> {
+  const label = `succession ${ref.wave}/${ref.archetype}.${ref.cls}`;
+  const file = readFile(ref);
+  if (!file) return;
+  let touched = false;
+  for (const act of file.acts) {
+    const closeId = act.scenes.find((id) => id.endsWith(":close"));
+    if (!closeId) continue;
+    const close = file.scenes.find((s) => s.id === closeId);
+    if (!close || close.decision) continue; // already has one
+    const req: SuccessionRequest = {
+      wave: ref.wave,
+      waveLabel: waveLabel(ref.wave),
+      archetype: ref.archetype,
+      tier: act.tier,
+      closeProse: (close.prose ?? []).join(" "),
+    };
+    const raw = await call(gen, successionPassSystem(), buildSuccessionPrompt(req), `${label}:t${act.tier}`);
+    if (!raw) continue;
+    const obj = parseGeneratedObject(raw) as { decision?: Scene["decision"] } | null;
+    if (!obj?.decision) continue;
+    // Normalize numeric-key drift on options, then require a succession-bearing option exists.
+    const normed = (normalizeSceneFile({ acts: [], scenes: [applySuccession(close, obj.decision)] }) as {
+      scenes?: Scene[];
+    }).scenes?.[0];
+    if (!normed?.decision) continue;
+    const hasSuccession = normed.decision.options.some((o) => o.succession?.takesPartner);
+    if (!hasSuccession) {
+      console.error(`    · ${closeId}: no take-partner option — skipped`);
+      continue;
+    }
+    file.scenes = file.scenes.map((s) => (s.id === closeId ? normed : s));
+    touched = true;
+  }
+  if (touched) writeIfValid(ref, file, label);
+  else console.error(`  · ${label}: nothing to author (closes already have decisions)`);
+}
+
 async function pool<T>(items: T[], n: number, worker: (item: T) => Promise<void>): Promise<void> {
   let idx = 0;
   await Promise.all(
@@ -354,6 +397,10 @@ async function main() {
   if (PASS === "braid" || PASS === "all") {
     console.error("\n── PASS 3: braid authoring ──");
     await passBraid(refs, gen); // cross-file: runs as one coordinated pass
+  }
+  if (PASS === "succession" || PASS === "all") {
+    console.error("\n── PASS 4: succession authoring (close-scene dynastic fork) ──");
+    await pool(refs, CONCURRENCY, (ref) => passSuccession(ref, gen));
   }
   console.error("\nScoped QA complete.");
 }

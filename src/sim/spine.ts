@@ -78,6 +78,11 @@ function sceneArc(actId: string, tier: number): SceneSlot[] {
       id: `${actId}:close`,
       sense: "taste",
       intent: `the generation closes; what it passes to the heir as ${scope.inheritance}`,
+      // The close decision IS the dynastic fork: whether to take a partner + raise heirs (advance the
+      // line to the next generation) vs end it here. Its options carry the `succession` effect the
+      // engine reads (sagaDriver.applyDecision → advanceFamily). Tiered "major" — this is the act's
+      // most consequential choice for the LINE, even more than the turn's worldly major decision.
+      decision: "major",
     },
   ];
 }
