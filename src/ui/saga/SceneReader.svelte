@@ -23,6 +23,13 @@ interface Props {
 }
 const { scene, term = (t) => t, onbeat, ondecision }: Props = $props();
 
+// Whether the user prefers reduced motion — gates the JS-driven scene fade (CSS handles the rest).
+// Guarded for SSR/tests where matchMedia is absent; defaults to false (motion on).
+const reduceMotion =
+  typeof window !== "undefined" && typeof window.matchMedia === "function"
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    : false;
+
 // Paged reading position: which prose paragraph is currently shown (the last one revealed).
 let paraIdx = $state(0);
 // In a decision-bearing scene the beat is a preamble; once taken, the decision options show.
@@ -48,7 +55,11 @@ $effect(() => {
 // Clear the pending urge timer on unmount so its callback can't write state on a destroyed component.
 $effect(() => () => clearTimeout(urgeTimer));
 
-const lastPara = $derived(paraIdx >= scene.prose.length - 1);
+// The paragraph actually SHOWN, derived synchronously so a scene change can never flash stale prose:
+// the reset $effect runs after paint, so on a scene swap `paraIdx` is briefly the OLD index — clamp it
+// to THIS scene's range during render (and treat a not-yet-reset index as paragraph 0 of the new scene).
+const shownPara = $derived(scene.id === pagedFrom ? Math.min(paraIdx, scene.prose.length - 1) : 0);
+const lastPara = $derived(shownPara >= scene.prose.length - 1);
 const hasBeats = $derived(scene.beats.length > 0);
 // Options show once the prose is fully read: the weave beats first, then (after a beat) the decision.
 const showWeave = $derived(lastPara && hasBeats && !beatTaken);
@@ -104,11 +115,12 @@ function chooseBeat(i: number) {
 
   <!-- One paragraph at a time. The outer key fades the whole page in when the SCENE changes (a composed
        between-scene transition, distinct from the per-paragraph page-turn); the inner key animates each
-       paragraph turn within a scene. Both honor prefers-reduced-motion (page-in disabled there). -->
+       paragraph turn within a scene. The fade is JS-driven (inline opacity), so it does NOT pick up the
+       CSS reduced-motion rule — we gate its duration to 0 via the reactive `reduceMotion` flag instead. -->
   {#key scene.id}
-    <div class="scene-body" in:fade={{ duration: 320 }}>
-      {#key paraIdx}
-        <p class="para" data-testid="para">{term(scene.prose[paraIdx] ?? "")}</p>
+    <div class="scene-body" in:fade={{ duration: reduceMotion ? 0 : 320 }}>
+      {#key shownPara}
+        <p class="para" data-testid="para">{term(scene.prose[shownPara] ?? "")}</p>
       {/key}
     </div>
   {/key}
