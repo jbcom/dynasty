@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/jbcom/dynasty/compare/v0.10.1...v0.11.0) (2026-06-22)
+
+
+### Features
+
+* **saga:** the dynastic succession fork — author it into all 504 close scenes ([#76](https://github.com/jbcom/dynasty/issues/76)) ([631a03d](https://github.com/jbcom/dynasty/commit/631a03dce454d2ad8513e3384af8fa2f5e704c3f))
+
 ## [0.10.1](https://github.com/jbcom/dynasty/compare/v0.10.0...v0.10.1) (2026-06-22)
 
 
