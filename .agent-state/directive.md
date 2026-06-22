@@ -77,12 +77,10 @@ push + PR. See [[one-branch-local-review]].
   exist; the gap was the rival world's trajectory being invisible. Added GameView.rivalStandings + a
   RivalField component in the slide-out menu showing every line's rung (player's marked), so the whole
   convergence race is legible. Browser-tested.
-- [ ] [WAIT] **RB-9 local comprehensive review + open the ONE PR for the consolidation branch.** Full local
-  gate GREEN (typecheck + biome + 655 unit + 92 browser + 7 e2e + build). Reviewer trio (serial): code
-  review DONE (2 findings folded — RivalField label + aria/star magnitude); security DONE (clean);
-  code-simplifier RUNNING. ON its result: fold findings, then open the ONE PR. Run the FULL
-  local gate + dispatch the reviewer trio
-  into forward commits; THEN open the single PR. (Per [[one-branch-local-review]].)
+- [x] **RB-9 local comprehensive review + the ONE PR — DONE → PR #89.** Full local gate green (typecheck +
+  biome + 655 unit + 92 browser + 7 e2e + build) + serial reviewer trio (code review: 2 findings folded;
+  security: clean; simplifier: RungStars extracted) BEFORE the single push. PR #89 opened. [WAIT] CI +
+  merge, then keep CD green. (Per [[one-branch-local-review]].)
 ALSO OWN (user, 2026-06-21): merge the release-please PRs, and keep ALL workflows green —
 not just feature-PR CI, but the post-merge CD/Release on main too. PR #47 fixed a
 long-standing CD APK break (proguard-android.txt → -optimize.txt for Gradle 9.6/R8). Release
