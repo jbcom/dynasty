@@ -52,12 +52,20 @@ by construction.
   so any founding year (762 or 1885) plays a full 6-generation run. Touches loop.ts:advanceRunClock —
   do AFTER #83 merges (overlaps that file). Verify all 7 waves reach ~150 scenes; test replay-determinism + PR.
   [WAIT] #83 (loop.ts) to merge first.
-- [~] **RB-3 presentation polish** — IN PROGRESS. Slice 1 (between-scene fade transition + data-scene-id
-  hook in SceneReader) shipped in PR #86. [WAIT] #86 to merge, then slice 2 (per-era ambient audio depth)
-  + slice 3 (per-act caricature portrait/scene compositing, src/render) from clean main.
-- [ ] [WAIT] **RB-4 surface interactive convergence in the UI** — show the player when a crossing shifted a
-  rival (the slide-out "OTHER LINES" reflects nudges); a brief in-scene cue. PR. (After #85/#86 merge.)
-- [ ] [WAIT] **RB-5 codex/timeline depth** — the CodexView + a timeline view of the line's generations +
+## CONSOLIDATION (user, 2026-06-22): ONE long-running local branch, comprehensively reviewed LOCALLY
+
+Squad merged (#85 RB-7 baghdad clock + #86 RB-3 scene-transition slice-1). Per the user, NO more
+PR-per-item — all remaining work lands as forward commits on `feat/presentation-and-convergence-ui`,
+then the FULL local gate (typecheck + biome + unit + browser + e2e) + the reviewer trio
+(comprehensive-review:full-review / security / code-simplifier) run on the whole diff before the SINGLE
+push + PR. See [[one-branch-local-review]].
+
+- [ ] **RB-3 presentation polish (rest, on the consolidation branch).** Slice-1 shipped (#86: scene fade
+  + data-scene-id). Remaining: slice 2 (per-era ambient audio depth via the Tone.js bed/setMusicEra) +
+  slice 3 (per-act caricature portrait/scene compositing, src/render). Browser/visual-tested.
+- [ ] **RB-4 surface interactive convergence in the UI** — show the player when a crossing shifted a
+  rival (the slide-out "OTHER LINES" reflects nudges); a brief in-scene cue. Browser-tested.
+- [ ] **RB-5 codex/timeline depth** — the CodexView + a timeline view of the line's generations +
   the rival world's trajectory; PR. (After #85/#86 merge.)
 ALSO OWN (user, 2026-06-21): merge the release-please PRs, and keep ALL workflows green —
 not just feature-PR CI, but the post-merge CD/Release on main too. PR #47 fixed a
