@@ -277,7 +277,22 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   glimpses populate, intersections fire, titles distinct, hour+ of content. Open the ONE PR for
   feat/saga-polish; green CI; resolve threads; squash-merge; keep post-merge CD/Release green.
 
-After PF-13 merges, return to the standing autonomous polish mandate (top of file) for the next gap.
+### DEEPER GAP AUDIT (2026-06-22, round 2) — more partial/unwired surfaces, do contiguously
+
+- [ ] **PF-14 saga choices' setFlags reach state.flags (sim integrity).** Game.pickBeat/pickDecision
+  only syncMotivators back — the saga choices' setFlags live in the driver's ActState and NEVER reach
+  the GAME state.flags, so saga choices can't gate events/butterfly/content or persist/inspect. FIX:
+  the driver exposes its accumulated flags; Game writes them into state.flags on each saga pick (union,
+  deterministic). Then saga choices actually shape the run. Unit-test a saga setFlag appears in
+  view.state.flags. (Code-actionable now — no sweep dependency.)
+- [ ] **PF-15 wire AUDIO into the novel.** src/audio/{engine,sfx}.ts (AudioEngine + Sfx: click/stinger/
+  achievement/victory) are built but only MarketsView uses them — the saga play surface is SILENT.
+  FIX: a soft page-turn cue on prose advance + a choice cue on a beat/decision pick (gated by the
+  existing audio-enabled setting; respect reduced-motion/quiet). Browser-test the cue fires; live-verify.
+- [ ] **PF-16 audit pass — re-sweep for remaining gaps after PF-14/15** (shader still alive? settings
+  reach audio? any other built-but-unwired module). Fold findings here.
+
+After all PF items merge, return to the standing autonomous polish mandate (top of file) for the next gap.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
