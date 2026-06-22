@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.0](https://github.com/jbcom/dynasty/compare/v0.13.1...v0.14.0) (2026-06-22)
+
+
+### Features
+
+* **ui:** RB-3 between-scene fade transition + scene-id hook in the reader ([#86](https://github.com/jbcom/dynasty/issues/86)) ([426402d](https://github.com/jbcom/dynasty/commit/426402dca3a8f2f4a7bf161cbe8acaa94c0131a3))
+
 ## [0.13.1](https://github.com/jbcom/dynasty/compare/v0.13.0...v0.13.1) (2026-06-22)
 
 
