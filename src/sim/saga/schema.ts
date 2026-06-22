@@ -87,17 +87,28 @@ export type ThreadRef = z.infer<typeof ThreadRefSchema>;
  * by bias (place × archetype × class), and weaves the borrowed vignette in (no bespoke per-pair writing).
  * GenAI-tagged via the scoped-QA slot pass. ([[braid-slots-genai-architecture]])
  */
-export const BraidSlotSchema = z.object({
-  kind: z.enum(["source", "destination"]),
-  /** Paragraph index in `scene.prose` the slot sits at (where a woven crossing attaches). */
-  at: z.number().int().min(0),
-  /** The KIND of meeting this slot supports (e.g. "market", "dock", "workplace", "journey") — matches a
-   *  source to a plausible destination + biases by place/era. */
-  setting: z.string().min(1),
-  /** For a `source`: a one-line borrowable vignette of this line at that setting. Absent on a
-   *  `destination` (it borrows the matched source's vignette). */
-  vignette: z.string().optional(),
-});
+export const BraidSlotSchema = z
+  .object({
+    kind: z.enum(["source", "destination"]),
+    /** Paragraph index in `scene.prose` the slot sits at (where a woven crossing attaches). */
+    at: z.number().int().min(0),
+    /** The KIND of meeting this slot supports (e.g. "market", "dock", "workplace", "journey") — matches a
+     *  source to a plausible destination + biases by place/era. */
+    setting: z.string().min(1),
+    /** For a `source`: a one-line borrowable vignette of this line at that setting. Absent on a
+     *  `destination` (it borrows the matched source's vignette). */
+    vignette: z.string().min(1).optional(),
+  })
+  // A source MUST carry a borrowable vignette (else it weaves empty prose); a destination must NOT
+  // (it borrows the source's). Enforced at the gate so malformed GenAI slot output is discarded.
+  .superRefine((s, ctx) => {
+    if (s.kind === "source" && !s.vignette) {
+      ctx.addIssue({ code: "custom", message: "source braid slot requires a vignette" });
+    }
+    if (s.kind === "destination" && s.vignette) {
+      ctx.addIssue({ code: "custom", message: "destination braid slot must not carry a vignette" });
+    }
+  });
 export type BraidSlot = z.infer<typeof BraidSlotSchema>;
 
 /** A SCENE (≈ ink knot): multi-paragraph sensory prose, an optional weave of beats, an optional decision. */

@@ -46,13 +46,19 @@ export interface BraidContext {
   baseChance?: number;
 }
 
+/**
+ * The candidate's source slot that can weave at this destination: same `setting`, and it MUST carry a
+ * vignette (the borrowed prose) — a vignette-less source can't produce a crossing, so it's no match.
+ */
+function matchingSource(candidate: BraidCandidate, dest: BraidSlot): BraidSlot | undefined {
+  return candidate.sources.find(
+    (s) => s.kind === "source" && s.setting === dest.setting && !!s.vignette,
+  );
+}
+
 /** The bias weight for a candidate against a destination of a given setting. 0 = no plausible meeting. */
 function biasWeight(candidate: BraidCandidate, dest: BraidSlot): number {
-  // A source must exist at the SAME setting as the destination for the meeting to be plausible.
-  const matchingSource = candidate.sources.find(
-    (s) => s.kind === "source" && s.setting === dest.setting,
-  );
-  if (!matchingSource) return 0;
+  if (!matchingSource(candidate, dest)) return 0;
   const { place, archetype, cls } = candidate.bias;
   // Place dominates (you meet who's nearby), then archetype affinity, then shared class. Weighted sum,
   // kept strictly positive when a source matches so any plausible pair has SOME chance.
@@ -94,12 +100,22 @@ export function selectBraid(
       if (cand.tier !== ctx.tier) continue; // crossings read at the shared tier
       const weight = biasWeight(cand, dest);
       if (weight <= 0) continue;
-      const source = cand.sources.find((s) => s.kind === "source" && s.setting === dest.setting);
+      const source = matchingSource(cand, dest);
       if (!source) continue;
       options.push({ dest, cand, source, weight });
     }
   }
   if (options.length === 0) return null;
+
+  // REPLAY-SAFETY: the weighted pick indexes into `options`, whose build order follows the candidates'
+  // (i.e. world.snapshots') iteration order — NOT guaranteed identical fresh-vs-restored. Sort by a
+  // stable key so index→option is order-independent, keeping the seeded pick deterministic across restore.
+  options.sort(
+    (a, b) =>
+      a.cand.wave.localeCompare(b.cand.wave) ||
+      a.dest.at - b.dest.at ||
+      a.source.setting.localeCompare(b.source.setting),
+  );
 
   // IF a crossing fires at all: a seeded chance gate (so most moves pass without a crossing — crossings
   // are special). Forked so the gate stream is independent of the pick stream.

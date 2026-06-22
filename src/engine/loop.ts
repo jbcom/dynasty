@@ -15,7 +15,7 @@ import { advanceFamily, applyChoice, applySuccessionToFamily } from "../sim/effe
 import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
 import { candidatesFromSnapshots, type RivalLike, selectBraid } from "../sim/saga/braidSelect";
-import { actsForTier, openingScene, resolveThreads } from "../sim/saga/player";
+import { actsForTier, resolveThreads } from "../sim/saga/player";
 import type { BraidSlot } from "../sim/saga/schema";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
@@ -204,14 +204,18 @@ export class Game {
     if (!wave) return [];
     const tier = this.playerRung();
     const cls = sagaClassForWealth(this.state.personality.wealth);
-    // Each rival's borrowable source slots: the opening scene of its act at this tier (any archetype).
+    // Each rival's borrowable source slots: ALL source slots across EVERY scene of its act at this tier
+    // (any archetype) — not just the opening scene, since the slot pass can tag sources on any scene.
     const sourcesFor = (rival: RivalLike): readonly BraidSlot[] => {
+      const sources: BraidSlot[] = [];
       for (const act of this.saga.corpus.acts.values()) {
         if (act.wave !== rival.id || act.tier !== tier) continue;
-        const open = openingScene(this.saga.corpus, act, new Set());
-        if (open) return open.braidSlots.filter((s) => s.kind === "source");
+        for (const sceneId of act.scenes) {
+          const s = this.saga.corpus.scenes.get(sceneId);
+          if (s) sources.push(...s.braidSlots.filter((slot) => slot.kind === "source"));
+        }
       }
-      return [];
+      return sources;
     };
     const candidates = candidatesFromSnapshots(
       this.world.snapshots,

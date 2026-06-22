@@ -85,6 +85,23 @@ describe("selectBraid (WV-2)", () => {
     const otherTier = candidate({ tier: 3 });
     expect(selectBraid(ctx({ tier: 0 }), [otherTier], createRng("s").fork("b"))).toBeNull();
   });
+
+  it("REPLAY-SAFE: the match is invariant to candidate ORDER (stable option sort)", () => {
+    // The pick must not depend on world.snapshots iteration order (which can differ fresh-vs-restored).
+    const a = candidate({ wave: "alpha", bias: { place: 1, archetype: 1, cls: 1 } });
+    const b = candidate({ wave: "bravo", bias: { place: 1, archetype: 1, cls: 1 } });
+    const c = candidate({ wave: "charlie", bias: { place: 1, archetype: 1, cls: 1 } });
+    const forward = selectBraid(ctx(), [a, b, c], createRng("seed").fork("braid"));
+    const shuffled = selectBraid(ctx(), [c, a, b], createRng("seed").fork("braid"));
+    expect(shuffled?.thread.wave).toBe(forward?.thread.wave); // same pick regardless of input order
+  });
+
+  it("a source slot WITHOUT a vignette is not a valid match (can't weave empty prose)", () => {
+    const noVignette = candidate({
+      sources: [{ kind: "source", at: 0, setting: "market" }], // vignette omitted
+    });
+    expect(selectBraid(ctx(), [noVignette], createRng("s").fork("b"))).toBeNull();
+  });
 });
 
 describe("candidatesFromSnapshots (WV-2 adapter)", () => {

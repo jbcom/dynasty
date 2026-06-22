@@ -57,6 +57,20 @@ describe("narrative acts (novel model)", () => {
     expect(withSlots.braidSlots[1]?.vignette).toBeUndefined();
   });
 
+  it("WV-2: schema enforces source-needs-vignette + destination-forbids-vignette", () => {
+    const base = { id: "s", sense: "sight" as const, prose: ["A street."] };
+    expect(
+      SceneSchema.safeParse({ ...base, braidSlots: [{ kind: "source", at: 0, setting: "market" }] })
+        .success,
+    ).toBe(false); // source without vignette → rejected (would weave empty prose)
+    expect(
+      SceneSchema.safeParse({
+        ...base,
+        braidSlots: [{ kind: "destination", at: 0, setting: "market", vignette: "x" }],
+      }).success,
+    ).toBe(false); // destination with a vignette → rejected (it borrows the source's)
+  });
+
   it("walks the act: opening → beat (weave alternative) → next scene", () => {
     const act = actsForTier(corpus, "fix", "economic", 0);
     if (!act) throw new Error("no act");
