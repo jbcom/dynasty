@@ -15,7 +15,7 @@
  *   GEMINI_API_KEY=… node_modules/.bin/vite-node scripts/genai-qa.ts -- --write > /tmp/qa.log 2>&1
  *
  * Usage:
- *   --pass scene|lineage|braid|all   (default all)   --write   --wave <w>  --cls poor|middle
+ *   --pass scene|lineage|braid|succession|slot|all   (default all)   --write   --wave <w>  --cls poor|middle
  *   --concurrency N (default 4)      GEMINI_MODEL / GEMINI_QA_MODEL override the model id.
  */
 
@@ -25,20 +25,23 @@ import { DEFAULT_QA_MODEL, geminiGenerate, parseGeneratedObject } from "../src/s
 import { normalizeSceneFile, validateSceneFile, type SceneRequest } from "../src/sim/genai/scene";
 import {
   applyBraid,
+  applySlots,
   applySuccession,
   type BraidRequest,
   buildBraidPassPrompt,
   buildLineagePassPrompt,
   buildScenePassPrompt,
+  buildSlotPassPrompt,
   buildSuccessionPrompt,
   braidPassSystem,
   type LineageSurface,
   lineagePassSystem,
   scenePassSystem,
+  slotPassSystem,
   type SuccessionRequest,
   successionPassSystem,
 } from "../src/sim/genai/qa";
-import { type ActChapter, type Scene, SceneSchema } from "../src/sim/saga/schema";
+import { type ActChapter, type BraidSlot, type Scene, SceneSchema } from "../src/sim/saga/schema";
 import type { Rung } from "../src/sim/classRung";
 import type { Archetype } from "../src/sim/slots";
 
@@ -48,7 +51,13 @@ const arg = (n: string, d?: string): string | undefined => {
   const i = argv.indexOf(`--${n}`);
   return i >= 0 && argv[i + 1] ? argv[i + 1] : d;
 };
-const PASS = (arg("pass", "all") ?? "all") as "scene" | "lineage" | "braid" | "succession" | "all";
+const PASS = (arg("pass", "all") ?? "all") as
+  | "scene"
+  | "lineage"
+  | "braid"
+  | "succession"
+  | "slot"
+  | "all";
 const CONCURRENCY = Number(arg("concurrency", "4"));
 const SAGA_ROOT = "src/data/saga";
 const ACT_FILE = /^(?<archetype>[a-z_]+)\.(?<cls>poor|middle)\.act\.json$/;
@@ -378,6 +387,38 @@ async function passSuccession(ref: ActFileRef, gen: Generate): Promise<void> {
   } else console.error(`  · ${label}: nothing to author (closes already have decisions)`);
 }
 
+// ── Pass 5: braid-slot tagging (WV-2) — mark where another dynasty can weave in ──
+async function passSlots(ref: ActFileRef, gen: Generate): Promise<void> {
+  const label = `slot ${ref.wave}/${ref.archetype}.${ref.cls}`;
+  const file = readFile(ref);
+  if (!file) return;
+  let touched = false;
+  for (const scene of file.scenes) {
+    if (scene.braidSlots && scene.braidSlots.length > 0) continue; // already tagged
+    const raw = await call(gen, slotPassSystem(), buildSlotPassPrompt(scene as Scene), `${label}:${scene.id}`);
+    if (!raw) continue;
+    const obj = parseGeneratedObject(raw) as { braidSlots?: BraidSlot[] } | null;
+    if (!obj?.braidSlots?.length) continue;
+    // Validate the tagged scene on its own — a malformed slot can't sink the file's other scenes.
+    const tagged = applySlots(scene as Scene, obj.braidSlots);
+    const v = SceneSchema.safeParse(tagged);
+    if (!v.success) {
+      console.error(`    · ${scene.id}: invalid slots (${v.error.issues[0]?.message}) — skipped`);
+      continue;
+    }
+    file.scenes = file.scenes.map((s) => (s.id === scene.id ? v.data : s));
+    touched = true;
+  }
+  if (touched) {
+    if (WRITE) {
+      writeFileSync(ref.path, `${JSON.stringify(file, null, 2)}\n`);
+      console.error(`  ✓ ${label}: written`);
+    } else {
+      console.error(`  ✓ ${label}: would write (dry-run)`);
+    }
+  } else console.error(`  · ${label}: no braid slots tagged`);
+}
+
 async function pool<T>(items: T[], n: number, worker: (item: T) => Promise<void>): Promise<void> {
   let idx = 0;
   await Promise.all(
@@ -415,6 +456,10 @@ async function main() {
   if (PASS === "succession" || PASS === "all") {
     console.error("\n── PASS 4: succession authoring (close-scene dynastic fork) ──");
     await pool(refs, CONCURRENCY, (ref) => passSuccession(ref, gen));
+  }
+  if (PASS === "slot" || PASS === "all") {
+    console.error("\n── PASS 5: braid-slot tagging (WV-2 cross-dynasty weave points) ──");
+    await pool(refs, CONCURRENCY, (ref) => passSlots(ref, gen));
   }
   console.error("\nScoped QA complete.");
 }
