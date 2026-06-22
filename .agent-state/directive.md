@@ -96,11 +96,12 @@ push + PR. See [[one-branch-local-review]].
   `braidSelect.ts` pure seeded selector (era-gated, place×archetype×class bias, seeded fire-gate + weighted
   pick, BORROWS the partner's source vignette — no bespoke per-pair writing; deterministic); step 3a
   `candidatesFromSnapshots` adapter (DynastyWorld snapshots → candidates; strategy-derived relation). 671
-  unit tests, all pure. steps 1/2/3a/3b DONE (schema, selector, adapter, loop wiring — additive, INERT
-  until slots exist). step 4a DONE — slot-tagging QA pass (slotPassSystem + buildSlotPassPrompt + applySlots),
-  tested. ACTIVE: step 4b — wire the slot pass into `scripts/genai-qa.ts` (a --pass slot dispatch) + an
-  authored seed set of slots on a few real scenes so the emergent weave FIRES before a full GenAI run;
-  then live-verify a crossing weaves from a real rival's borrowed copy; full gate + reviewer trio + ONE PR.
+  unit tests, all pure. ALL STEPS BUILT: schema, selectBraid (seeded, replay-safe — fork keyed on
+  scene.id+year, fork is pure so view re-reads + restore are identical), candidatesFromSnapshots adapter,
+  loop.view wiring (additive, INERT until slots exist), slot-tagging QA pass + `--pass slot` runner
+  dispatch. Full gate green (tsc/svelte 0, 675 unit, 92 browser, 7 e2e, build, biome). ACTIVE: reviewer
+  trio (running) → ONE PR. ACTIVATION (after merge, separate): run `--pass slot` to tag the corpus (or
+  author a seed set) + live-verify a crossing weaves a rival's borrowed copy.
 - [ ] [WAIT] **WV-3 emergent variability systems (anti-Suzerain) — after WV-2.** Seeded market/disease
   variability + Yuka rival reactions so playthroughs diverge; budget magnitudes more content
   ([[emergent-cause-effect-sim]]). Keeps the queue non-empty; un-WAIT after WV-2.
