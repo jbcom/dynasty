@@ -206,3 +206,55 @@ export function mergeSceneFile(
     scenes: mergeById(base.scenes, fresh.scenes),
   };
 }
+
+/** The system instruction for the retitle pass — author ONE specific chapter title, nothing else. */
+export function titleSystemInstruction(): string {
+  return [
+    "You title a chapter of a literary dynasty NOVEL. Return ONE evocative chapter title — a few words —",
+    "SPECIFIC to this family's story, in the register of a serious historical novel. No quotes, no",
+    "preface, no explanation. NEVER a real person's name. Output ONLY the title text.",
+  ].join("\n");
+}
+
+/**
+ * Build the retitle prompt for one act: hand the model the cell + the act's opening prose so the title
+ * is rooted in THIS family's actual chapter, plus the generic register cue (not to copy). Pure.
+ */
+export function buildTitlePrompt(args: {
+  wave: string;
+  archetype: string;
+  cls: string;
+  tier: number;
+  openingProse: string;
+  cue: string;
+}): string {
+  return [
+    `A ${args.cls}-class ${args.archetype} family of the ${args.wave} wave, generation ${args.tier + 1}.`,
+    `The chapter opens:`,
+    `"""`,
+    args.openingProse.slice(0, 700),
+    `"""`,
+    `Register/theme cue (do NOT copy): "${args.cue}".`,
+    `Give a DISTINCT chapter title specific to this family's chapter — a few words only, no "Act N",`,
+    `no quotes, no surrounding text.`,
+  ].join("\n");
+}
+
+/** Normalize a model title to "Act <roman> — <title>"; reject leaks / empties / echoes of the cue. */
+export function normalizeTitle(
+  raw: string,
+  tier: number,
+  cue: string,
+): { ok: true; title: string } | { ok: false; reason: string } {
+  // Strip quotes, any leading "Act N —" the model added, and whitespace.
+  let t = raw
+    .trim()
+    .replace(/^["'“”]+|["'“”]+$/g, "")
+    .trim();
+  t = t.replace(/^Act\s+[IVXivx]+\s*[—:-]\s*/i, "").trim();
+  if (!t) return { ok: false, reason: "empty title" };
+  if (LEAK.test(t)) return { ok: false, reason: "preset-person leak" };
+  if (t.length > 60) return { ok: false, reason: "title too long" };
+  if (t.toLowerCase() === cue.toLowerCase()) return { ok: false, reason: "echoed the generic cue" };
+  return { ok: true, title: `Act ${ROMAN_FOR(tier)} — ${t}` };
+}

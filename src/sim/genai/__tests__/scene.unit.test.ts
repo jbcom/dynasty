@@ -2,7 +2,13 @@ import { describe, expect, it } from "vitest";
 import { loadContent } from "../../../data/loadContent";
 import type { GenerateFn } from "../client";
 import { expand } from "../expand";
-import { buildScenePrompt, mergeSceneFile, validateSceneFile } from "../scene";
+import {
+  buildScenePrompt,
+  buildTitlePrompt,
+  mergeSceneFile,
+  normalizeTitle,
+  validateSceneFile,
+} from "../scene";
 
 /**
  * The `scene` mode of the GenAI expander authors a whole act of the NOVEL — a single object validated
@@ -151,5 +157,37 @@ describe("genai scene mode", () => {
     };
     expect(merged2.acts).toHaveLength(1); // not duplicated
     expect(merged2.scenes).toHaveLength(1);
+  });
+});
+
+describe("act retitle (distinct meso chapter titles)", () => {
+  it("the title prompt roots the title in the act's opening prose + cell", () => {
+    const p = buildTitlePrompt({
+      wave: "ireland",
+      archetype: "economic",
+      cls: "poor",
+      tier: 0,
+      openingProse: "The hold smells of tar and brine and two hundred unwashed bodies.",
+      cue: "The Crossing",
+    });
+    expect(p).toContain("ireland");
+    expect(p).toContain("The hold smells of tar");
+    expect(p).toContain("The Crossing"); // the cue, marked do-not-copy
+  });
+
+  it("normalizes a model title to 'Act <roman> — <title>' and strips quotes / stray prefix", () => {
+    const out = normalizeTitle('"Salt in the Blood"', 2, "The Climb");
+    expect(out.ok).toBe(true);
+    if (out.ok) expect(out.title).toBe("Act III — Salt in the Blood");
+    expect(normalizeTitle("Act V — A Name Bought in Steel", 4, "The World Player")).toEqual({
+      ok: true,
+      title: "Act V — A Name Bought in Steel",
+    });
+  });
+
+  it("rejects an empty title, a leak, or a bare echo of the generic cue", () => {
+    expect(normalizeTitle("   ", 0, "The Crossing").ok).toBe(false);
+    expect(normalizeTitle("The Trump Ascendancy", 0, "The Crossing").ok).toBe(false);
+    expect(normalizeTitle("The Crossing", 0, "The Crossing").ok).toBe(false); // echoed cue
   });
 });
