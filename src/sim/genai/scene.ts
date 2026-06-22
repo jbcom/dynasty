@@ -160,7 +160,24 @@ export function normalizeSceneFile(raw: unknown): unknown {
     }
     return scene;
   });
-  return { ...obj, scenes };
+  // Strip markdown the model sometimes wraps around identity tokens (`{surname}` → {surname}); it would
+  // otherwise render as literal backticks in the reader. Deep-applied to every string in the file.
+  return stripTokenBackticks({ ...obj, scenes });
+}
+
+/** A run of identity tokens / spaces wrapped in backticks — a recurring model markdown artifact. */
+const TOKEN_BACKTICKS = /`((?:\{[a-z_]+\}|\s)+)`/g;
+
+/** Deep-clone a value, stripping backticks that wrap identity tokens from every string. Pure. */
+function stripTokenBackticks<T>(value: T): T {
+  if (typeof value === "string") return value.replace(TOKEN_BACKTICKS, "$1") as T;
+  if (Array.isArray(value)) return value.map(stripTokenBackticks) as T;
+  if (value && typeof value === "object") {
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(value)) out[k] = stripTokenBackticks(v);
+    return out as T;
+  }
+  return value;
 }
 
 /** Validate a generated act file through SagaFileSchema + the leak floor. Returns the parsed file or reasons. */

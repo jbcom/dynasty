@@ -117,6 +117,21 @@ describe("genai scene mode", () => {
     if (!out.ok) expect(out.reasons.join(" ")).toContain("dangling scene ref");
   });
 
+  it("strips backticks the model wraps around identity tokens (`{surname}` → {surname})", () => {
+    const drifted = validActFile();
+    drifted.scenes[0]!.prose[0] =
+      "The `{surname}`s crossed paths with the `{given_name} {surname}` line.";
+    const out = validateSceneFile(drifted, req);
+    expect(out.ok).toBe(true);
+    if (out.ok) {
+      const scene = out.file.scenes[0] as { prose: string[] };
+      expect(scene.prose[0]).toBe(
+        "The {surname}s crossed paths with the {given_name} {surname} line.",
+      );
+      expect(scene.prose[0]).not.toContain("`");
+    }
+  });
+
   it("normalizes model drift: a beat's `line` string coerces to prose[]", () => {
     const drifted = validActFile();
     // Simulate the model emitting `line` instead of `prose` on the beat.
