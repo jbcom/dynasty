@@ -1,5 +1,5 @@
 <script lang="ts">
-import { MAX_RUNG } from "../../sim/classRung";
+import RungStars from "./RungStars.svelte";
 /**
  * RIVAL FIELD (RB-5) — the whole convergence race at a glance: every other line's current standing
  * (rung), sorted high→low, with the player's own rung marked for comparison. Complements the
@@ -25,17 +25,13 @@ const { standings, playerRung }: Props = $props();
     <ul class="rows">
       <li class="row you" data-testid="field-you">
         <span class="who">Your line</span>
-        <span class="rungs" aria-label={`reach ${playerRung + 1} of ${MAX_RUNG + 1}`}>
-          {"★".repeat(playerRung + 1)}
-        </span>
+        <RungStars rung={playerRung} />
       </li>
       {#each standings as s (s.id)}
         <li class="row">
           <!-- The snapshot's own label (place name) — matches the glimpse strip; no id-munging. -->
           <span class="who">{s.label}</span>
-          <span class="rungs" aria-label={`reach ${s.rung + 1} of ${MAX_RUNG + 1}`}>
-            {"★".repeat(s.rung + 1)}
-          </span>
+          <RungStars rung={s.rung} />
         </li>
       {/each}
     </ul>
@@ -80,10 +76,5 @@ const { standings, playerRung }: Props = $props();
   .who {
     color: var(--mmm-text);
     text-transform: capitalize;
-  }
-  .rungs {
-    color: var(--mmm-gold);
-    letter-spacing: 0.05em;
-    white-space: nowrap;
   }
 </style>
