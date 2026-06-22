@@ -65,12 +65,11 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   SHAPE, steering away from the old generic crossroads template. Tested: different eras inject different
   shapes (founding=bargain+allegiance, broadcast=platform, stellar=expansion). +4 tests, 700 green. The old
   buildScenePrompt/spineFor (504-cell) path is KEPT as the FS-4 mining SOURCE; retire AFTER mining.
-- [ ] **FS-4 mine the choicest/unique → REWRITE as BRANCHES off the ONE dynasty timeline.** Everything is
-  branches off the player's line (NOT parallel lineages): scripts/mine-fabric.ts scores the 504 acts'
-  scenes primarily on UNIQUENESS, then crossing/prose/era fit; extract the standouts and REWRITE them
-  POV-shifted as branch-content of the dynasty ("OUR line meets the merchant/fishmonger/20th-c turn") →
-  src/data/saga/fabric/ keyed by the trigger conditions that bring them in; retire the templated bulk.
-  Turns the 504 into an ASSET (deep well of singular moments to recompose as branches).
+- [x] **FS-4 mine the corpus into branch fabric — DONE (committed).** Pure miner core (mineFabric.ts)
+  scores scenes on UNIQUENESS (normalized idf) + crossing + quality; scripts/mine-fabric.ts walked the real
+  corpus → kept top 504/2520 as src/data/saga/fabric/index.json keyed family(wave)×era×setting + source
+  vignettes. +6 tests, 706 green. REMAINING (→ FS-5): POV-shift REWRITE the kept scenes into spine
+  branches + the trigger-condition keying (the rewrite is the authoring step, fed by this index).
 - [ ] **FS-5 recurring-family cast + DETERMINISTIC-TRIGGER LATTICE.** The fabric is a BOUNDED ~7-family
   RECURRING CAST (Turtledove model) growing alongside the spine with CONTINUITY + MEMORY (per-family state:
   name/generation/standing + crossing history, reuse the player `family` shape). ANCHORING = a trigger
