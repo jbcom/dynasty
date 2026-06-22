@@ -10,7 +10,11 @@ permissions:
 
 jobs:
   dependabot:
-    if: github.actor == 'dependabot[bot]'
+    # SECURITY: pull_request_target runs with write perms — also require the PR to originate from THIS
+    # repo (dependabot pushes its branches here, never from a fork) so a fork can't impersonate the flow.
+    if: >-
+      github.actor == 'dependabot[bot]' &&
+      github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - name: Approve PR
@@ -26,10 +30,15 @@ jobs:
         run: gh pr merge "$PR_URL" --auto --squash
 
   release-please:
-    # Gate on the branch prefix only — release-please PRs always use a `release-please--…` head ref,
-    # but their AUTHOR varies (this repo's run authors as `jbdevprimary`, not `github-actions[bot]`),
-    # so an actor check skips the job and leaves the release PR unmerged (observed on #74 / 0.10.1).
-    if: startsWith(github.event.pull_request.head.ref, 'release-please--')
+    # release-please PRs always use a `release-please--…` head ref, but their AUTHOR varies (this repo's
+    # run authors as `jbdevprimary`, not `github-actions[bot]`), so an actor check skips the job and leaves
+    # the release PR unmerged (observed on #74 / 0.10.1) — gate on the branch prefix instead.
+    # SECURITY: this is pull_request_target (write perms). The branch prefix alone is forgeable from a
+    # fork (`release-please--malicious`), so ALSO require the PR head to originate from THIS repo, not a
+    # fork — an external fork can never auto-approve + auto-merge with elevated permissions.
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      startsWith(github.event.pull_request.head.ref, 'release-please--')
     runs-on: ubuntu-latest
     steps:
       - name: Approve PR
