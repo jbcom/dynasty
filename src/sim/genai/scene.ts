@@ -9,11 +9,48 @@
  * Pure given the spine + content; the live Gemini client is injected by the runner.
  */
 
+import guidanceData from "../../data/saga/guidance.json" with { type: "json" };
 import type { Rung } from "../classRung";
 import { hasPresetLeak } from "../leak";
 import { SagaFileSchema } from "../saga/schema";
 import type { Archetype } from "../slots";
 import { type SceneSlot, spineFor } from "../spine";
+
+/** A bespoke per-(era × class) creative brief (UQ-1) — hand-authored, injected into the prompt + QA. */
+interface EraGuidance {
+  arc: string;
+  tone: string;
+  focus: string;
+  rhythm: string;
+  scannability: string;
+  avoid: string;
+  qaLookFor: string;
+  qaReject: string;
+}
+/** A bespoke per-WAVE/people brief — real history + motivations that make each line + its crossings unique. */
+interface WaveGuidance {
+  history: string;
+  motivations: string;
+  trades: string;
+  obstacles: string;
+  braidAffinity: string;
+}
+const G = guidanceData as {
+  eras: Record<string, EraGuidance>;
+  waves: Record<string, WaveGuidance>;
+};
+
+/**
+ * The bespoke ERA×class brief for a cell — where act UNIQUENESS (arc/tone/rhythm/scannability + the QA
+ * criteria) lives. Undefined for an unauthored key (prompt falls back to the spine intent alone).
+ */
+export function eraGuidanceFor(tier: number, cls: Rung): EraGuidance | undefined {
+  return G.eras[`t${tier}.${cls}`];
+}
+/** The bespoke WAVE/people brief — real history + motivations + braid affinity (drives uniqueness + genuine crossings). */
+export function waveGuidanceFor(wave: string): WaveGuidance | undefined {
+  return G.waves[wave];
+}
 
 /** A scene-generation request: which cell + tier's act to flesh. */
 export interface SceneRequest {
@@ -85,9 +122,40 @@ export function buildScenePrompt(req: SceneRequest): string {
 
   // Strip the generic "Act N — " prefix to leave just the register cue (e.g. "The Crossing").
   const titleCue = act.title.replace(/^Act\s+[IVX]+\s+—\s+/, "");
+  // UQ-1: the bespoke briefs — the era×class arc + THIS people's real history — so the cell reads UNIQUE
+  // (no two waves' tier-0-poor read alike) and its crossings are motivated by who this people meets.
+  const era = eraGuidanceFor(req.tier, req.cls);
+  const wave = waveGuidanceFor(req.wave);
+  const waveBrief = wave
+    ? [
+        "",
+        `THIS PEOPLE — the ${req.wave} wave (ground every scene in THEIR real history, not generic immigrant beats):`,
+        `- HISTORY: ${wave.history}`,
+        `- MOTIVATIONS: ${wave.motivations}`,
+        `- TRADES: ${wave.trades}`,
+        `- OBSTACLES: ${wave.obstacles}`,
+        `- WHO THEY CROSS (for any intersection): ${wave.braidAffinity}`,
+      ].join("\n")
+    : "";
+  const eraBrief = era
+    ? [
+        "",
+        "CREATIVE BRIEF for THIS generation (follow it — it makes this act distinct from every other):",
+        `- ARC: ${era.arc}`,
+        `- TONE: ${era.tone}`,
+        `- FOCUS: ${era.focus}`,
+        `- RHYTHM: ${era.rhythm}`,
+        `- SCANNABILITY: ${era.scannability}`,
+        `- AVOID: ${era.avoid}`,
+        `- THIS ERA MUST HAVE: ${era.qaLookFor}`,
+        `- THIS ERA MUST NOT: ${era.qaReject}`,
+      ].join("\n")
+    : "";
   return [
     `Flesh this ACT into the novel. The line is a ${req.cls}-class ${req.archetype} family that founded`,
     `the ${req.wave} immigration wave. Reach tier ${req.tier} (${act.macroAct} macro-act).`,
+    waveBrief,
+    eraBrief,
     "",
     `TITLE: author a DISTINCT, evocative chapter title SPECIFIC to THIS family's story this generation`,
     `(this is the MESO level — a named chapter, not the macro span). Use "${titleCue}" only as a`,
