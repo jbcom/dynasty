@@ -17,6 +17,10 @@ let enabled = true;
 // policy) and kept in sync with the run's era. Separate from the one-shot Sfx.
 let music: AudioEngine | null = null;
 let pendingEra: string | null = null;
+// A one-shot ending sting requested before the graph started — applied AFTER pendingEra in start()'s
+// resolve so it overrides the era bed (RB-10). Lets the sting land for a user who reaches the ending
+// without ever tapping a play gesture (the case where audible punctuation matters most).
+let pendingStingChord: string[] | null = null;
 
 /**
  * Per-era ambient CHORD (RB-3): when no `/assets/audio/<era>.ogg` exists, AudioEngine.setEra falls back
@@ -53,6 +57,11 @@ export function startMusic(): void {
         .start()
         .then(() => {
           if (pendingEra && music) music.setEra(pendingEra, chordForEra(pendingEra));
+          // Apply a sting requested before start AFTER the era bed, so it overrides it; then clear.
+          if (pendingStingChord && music) {
+            music.setEra("ending-sting", pendingStingChord);
+            pendingStingChord = null;
+          }
         })
         .catch(() => {
           // Music is non-essential — a blocked audio context must never surface as an unhandled rejection.
@@ -80,18 +89,26 @@ export function setMusicEra(eraId: string): void {
  * the chord once), gated by the sound setting; starts the graph if a prior tap hasn't. No-op off-browser
  * or on any audio failure — the ending must render with or without sound.
  */
+// Three stings reuse the ambient band chords (via the single ERA_BANDS table, so a chord tuned in
+// eras.ts can't drift from its sting); extinguished is an intentional low minor fall with no band.
 const ENDING_STING: Record<string, string[]> = {
-  stars: ["G2", "D3", "A3", "E4"], // open fifths — luminous, vast
-  contributed: ["D3", "F#3", "A3"], // striving, bright
-  earthbound: ["C3", "E3", "G3"], // rooted, plain
-  extinguished: ["C3", "Eb3", "G3", "C2"], // a low minor fall
+  stars: [...bandForEra("stars").chord], // open fifths — luminous, vast
+  contributed: [...bandForEra("ascent").chord], // striving, bright
+  earthbound: [...bandForEra("origins").chord], // rooted, plain
+  extinguished: ["C3", "Eb3", "G3", "C2"], // a low minor fall — intentionally unique, not in ERA_BANDS
 };
 export function playEndingSting(outcome: string): void {
   if (!enabled || typeof window === "undefined") return;
-  const chord = ENDING_STING[outcome] ?? ENDING_STING.earthbound;
+  const chord: string[] = ENDING_STING[outcome] ?? ENDING_STING.earthbound ?? ["C3", "E3", "G3"];
   try {
-    startMusic(); // ensure the graph exists; if not yet started, the chord rides the pending-era apply
-    if (music?.isStarted) music.setEra(`ending:${outcome}`, chord);
+    // If the graph is already running, apply now; otherwise stash it so start()'s resolve applies it
+    // (after the era bed) — so the sting lands even for a user who reached the ending without a prior tap.
+    if (music?.isStarted) {
+      music.setEra(`ending:${outcome}`, chord);
+    } else {
+      pendingStingChord = chord;
+      startMusic();
+    }
   } catch {
     // The sting is non-essential — never let it break the ending screen.
   }

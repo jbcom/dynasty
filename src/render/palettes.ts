@@ -29,7 +29,7 @@ export interface EraRamp {
  */
 export function rampForEra(eraId: string): EraRamp {
   const band = bandForEra(eraId);
-  return { id: band.id, top: band.ramp.top, bottom: band.ramp.bottom };
+  return { id: band.id, ...band.ramp };
 }
 
 /**
