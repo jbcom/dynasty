@@ -247,11 +247,11 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   QA delineated by IMPACT SCOPE, fix the whole affected unit. New src/sim/genai/qa.ts + scripts/
   genai-qa.ts. Fixed the leak floor's false positives (case-insensitive "musk"/pooled given names) —
   extracted to one shared src/sim/leak.ts. (a) scene polish over all 84 files — DONE (504 acts lifted,
-  0 kept-on-fail, structure intact, committed). (b) lineage continuity pass — RUNNING (bg, monitor
-  bfiv2crrr; writes the same files braid touches). (c) braid authoring verified sound (rivals resolve
-  42/42 wave×tier on full corpus; message fix committed) — BLOCKED on (b) finishing to avoid clobbering
-  lineage's writes on the shared tree. ON LINEAGE DONE: verify integrity + commit (b), then launch the
-  UNSCOPED braid write, verify + commit (c). Then fold into PF-13's full run.
+  0 kept-on-fail, structure intact, committed). (b) lineage continuity pass — DONE (80/84 chains had
+  cross-tier breaks, all re-authored, 0 rejected, integrity intact, committed). (c) braid authoring —
+  RUNNING (unscoped --write over all 84, monitor b06rz6j54; authors pair-specific crossings into
+  midpoint thread[] that weaveThreads honors). ON BRAID DONE: verify integrity + full suite + commit (c).
+  Then fold into PF-13's full run.
 
 - [x] **PF-6 ROOT GAP: class threaded through onboarding → founding — DONE** (commit 4b0318e). The
   chosen ArrivalClass now flows OnboardingScreen.onComplete → App.birthGame → resolveWaveStart(place,
