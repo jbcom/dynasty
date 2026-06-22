@@ -1,4 +1,5 @@
 <script lang="ts">
+import { fade } from "svelte/transition";
 import type { Scene } from "../../sim/saga/schema";
 import { playCue, startMusic } from "../sound";
 
@@ -21,6 +22,13 @@ interface Props {
   ondecision?: (optionIndex: number) => void;
 }
 const { scene, term = (t) => t, onbeat, ondecision }: Props = $props();
+
+// Whether the user prefers reduced motion — gates the JS-driven scene fade (CSS handles the rest).
+// Guarded for SSR/tests where matchMedia is absent; defaults to false (motion on).
+const reduceMotion =
+  typeof window !== "undefined" && typeof window.matchMedia === "function"
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    : false;
 
 // Paged reading position: which prose paragraph is currently shown (the last one revealed).
 let paraIdx = $state(0);
@@ -47,7 +55,11 @@ $effect(() => {
 // Clear the pending urge timer on unmount so its callback can't write state on a destroyed component.
 $effect(() => () => clearTimeout(urgeTimer));
 
-const lastPara = $derived(paraIdx >= scene.prose.length - 1);
+// The paragraph actually SHOWN, derived synchronously so a scene change can never flash stale prose:
+// the reset $effect runs after paint, so on a scene swap `paraIdx` is briefly the OLD index — clamp it
+// to THIS scene's range during render (and treat a not-yet-reset index as paragraph 0 of the new scene).
+const shownPara = $derived(scene.id === pagedFrom ? Math.min(paraIdx, scene.prose.length - 1) : 0);
+const lastPara = $derived(shownPara >= scene.prose.length - 1);
 const hasBeats = $derived(scene.beats.length > 0);
 // Options show once the prose is fully read: the weave beats first, then (after a beat) the decision.
 const showWeave = $derived(lastPara && hasBeats && !beatTaken);
@@ -84,7 +96,14 @@ function chooseBeat(i: number) {
 </script>
 
 <!-- The whole page is the tap target (advance / urge). Options stop propagation so a pick isn't an urge. -->
-<section class="scene" data-sense={scene.sense} data-testid="scene-reader" data-options-up={optionsUp ? "" : undefined}>
+<!-- `data-scene-id` exposes the current scene to harness/e2e walks (the runner's id isn't otherwise in the DOM). -->
+<section
+  class="scene"
+  data-sense={scene.sense}
+  data-scene-id={scene.id}
+  data-testid="scene-reader"
+  data-options-up={optionsUp ? "" : undefined}
+>
   <!-- Full-bleed tap layer: turn the page, or urge the player when a choice is up. A button so it's
        keyboard-focusable + screen-reader operable without an a11y-role mismatch. -->
   <button
@@ -94,9 +113,16 @@ function chooseBeat(i: number) {
     onclick={tapPage}
   ></button>
 
-  <!-- One paragraph at a time — the page the reader is on. -->
-  {#key paraIdx}
-    <p class="para" data-testid="para">{term(scene.prose[paraIdx] ?? "")}</p>
+  <!-- One paragraph at a time. The outer key fades the whole page in when the SCENE changes (a composed
+       between-scene transition, distinct from the per-paragraph page-turn); the inner key animates each
+       paragraph turn within a scene. The fade is JS-driven (inline opacity), so it does NOT pick up the
+       CSS reduced-motion rule — we gate its duration to 0 via the reactive `reduceMotion` flag instead. -->
+  {#key scene.id}
+    <div class="scene-body" in:fade={{ duration: reduceMotion ? 0 : 320 }}>
+      {#key shownPara}
+        <p class="para" data-testid="para">{term(scene.prose[shownPara] ?? "")}</p>
+      {/key}
+    </div>
   {/key}
 
   {#if !optionsUp}
@@ -181,11 +207,18 @@ function chooseBeat(i: number) {
     outline: 2px solid color-mix(in srgb, var(--mmm-gold) 50%, transparent);
     outline-offset: -4px;
   }
+  .scene-body,
   .para,
   .turn-hint,
   .choices {
     position: relative;
     z-index: 1;
+  }
+  /* The scene-body holds the prose above the tap layer; flex so paragraphs stack as before. */
+  .scene-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
   }
   .scene[data-sense="smell"] { --sense-accent: #8c6f4d; }
   .scene[data-sense="taste"] { --sense-accent: #a4564d; }

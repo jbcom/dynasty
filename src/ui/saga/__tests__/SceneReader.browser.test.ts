@@ -99,4 +99,11 @@ describe("SceneReader (paged)", () => {
     component = mount(SceneReader, { target: host, props: { scene: open } });
     expect(host.querySelector('[data-sense="smell"]')).toBeTruthy();
   });
+
+  it("exposes the scene id + a scene-keyed body for between-scene transitions (RB-3)", () => {
+    component = mount(SceneReader, { target: host, props: { scene: open } });
+    // data-scene-id surfaces the runner's scene to harness/e2e walks; .scene-body is the fade-keyed wrapper.
+    expect(host.querySelector(`[data-scene-id="${open.id}"]`)).toBeTruthy();
+    expect(host.querySelector(".scene-body")).toBeTruthy();
+  });
 });
