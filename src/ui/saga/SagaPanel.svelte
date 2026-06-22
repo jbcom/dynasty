@@ -46,6 +46,8 @@ const relationIcon: Record<string, string> = {
         <span class="glimpse" data-relation={g.relation}>
           <span class="rel-icon" aria-hidden="true">{relationIcon[g.relation] ?? "•"}</span>
           {g.label} — {g.note}
+          <!-- The rival's rung: your crossings move it (opposing suppresses, contributing lifts) — RB-4. -->
+          <span class="glimpse-rung" title="their reach (your crossings move it)">{"★".repeat(g.rung + 1)}</span>
         </span>
       {/each}
     </div>
