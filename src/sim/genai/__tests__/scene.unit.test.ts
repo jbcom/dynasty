@@ -105,6 +105,18 @@ describe("genai scene mode", () => {
     expect(out.ok).toBe(false);
   });
 
+  it("rejects a dangling scene ref (act lists a scene id no scene object has)", () => {
+    const broken = validActFile();
+    // Simulate the model dropping/mis-spelling a scene id (e.g. a truncated wave) in the act's list.
+    broken.acts[0]!.scenes = [
+      "act:bavaria:economic:middle:t1:open",
+      "act:bavaria:economic:middle:t1:rising",
+    ];
+    const out = validateSceneFile(broken, req);
+    expect(out.ok).toBe(false);
+    if (!out.ok) expect(out.reasons.join(" ")).toContain("dangling scene ref");
+  });
+
   it("normalizes model drift: a beat's `line` string coerces to prose[]", () => {
     const drifted = validActFile();
     // Simulate the model emitting `line` instead of `prose` on the beat.

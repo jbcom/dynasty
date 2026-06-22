@@ -1,0 +1,2297 @@
+{
+  "acts": [
+    {
+      "id": "act:chinese:religious:middle:t0",
+      "wave": "chinese",
+      "archetype": "religious",
+      "cls": "middle",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — Heaven's Anchor in the Shifting Silt",
+      "scenes": [
+        "act:chinese:religious:middle:t0:open",
+        "act:chinese:religious:middle:t0:rising",
+        "act:chinese:religious:middle:t0:midpoint",
+        "act:chinese:religious:middle:t0:turn",
+        "act:chinese:religious:middle:t0:close"
+      ]
+    },
+    {
+      "id": "act:chinese:religious:middle:t1",
+      "wave": "chinese",
+      "archetype": "religious",
+      "cls": "middle",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — Incense Upon the Redwood Altar",
+      "scenes": [
+        "act:chinese:religious:middle:t1:open",
+        "act:chinese:religious:middle:t1:rising",
+        "act:chinese:religious:middle:t1:midpoint",
+        "act:chinese:religious:middle:t1:turn",
+        "act:chinese:religious:middle:t1:close"
+      ]
+    },
+    {
+      "id": "act:chinese:religious:middle:t2",
+      "wave": "chinese",
+      "archetype": "religious",
+      "cls": "middle",
+      "tier": 2,
+      "macroAct": "emergence",
+      "title": "Act III — Altar and Ledger on the High Slope",
+      "scenes": [
+        "act:chinese:religious:middle:t2:open",
+        "act:chinese:religious:middle:t2:rising",
+        "act:chinese:religious:middle:t2:midpoint",
+        "act:chinese:religious:middle:t2:turn",
+        "act:chinese:religious:middle:t2:close"
+      ]
+    },
+    {
+      "id": "act:chinese:religious:middle:t3",
+      "wave": "chinese",
+      "archetype": "religious",
+      "cls": "middle",
+      "tier": 3,
+      "macroAct": "emergence",
+      "title": "Act IV — The Altar of the Seven Hills",
+      "scenes": [
+        "act:chinese:religious:middle:t3:open",
+        "act:chinese:religious:middle:t3:rising",
+        "act:chinese:religious:middle:t3:midpoint",
+        "act:chinese:religious:middle:t3:turn",
+        "act:chinese:religious:middle:t3:close"
+      ]
+    },
+    {
+      "id": "act:chinese:religious:middle:t4",
+      "wave": "chinese",
+      "archetype": "religious",
+      "cls": "middle",
+      "tier": 4,
+      "macroAct": "ascension",
+      "title": "Act V — The Tabernacle of the Great Salt Sea",
+      "scenes": [
+        "act:chinese:religious:middle:t4:open",
+        "act:chinese:religious:middle:t4:rising",
+        "act:chinese:religious:middle:t4:midpoint",
+        "act:chinese:religious:middle:t4:turn",
+        "act:chinese:religious:middle:t4:close"
+      ]
+    },
+    {
+      "id": "act:chinese:religious:middle:t5",
+      "wave": "chinese",
+      "archetype": "religious",
+      "cls": "middle",
+      "tier": 5,
+      "macroAct": "ascension",
+      "title": "Act VI — The Incense of New Constellations",
+      "scenes": [
+        "act:chinese:religious:middle:t5:open",
+        "act:chinese:religious:middle:t5:rising",
+        "act:chinese:religious:middle:t5:midpoint",
+        "act:chinese:religious:middle:t5:turn",
+        "act:chinese:religious:middle:t5:close"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "act:chinese:religious:middle:t0:open",
+      "sense": "smell",
+      "prose": [
+        "The stench of the ship's hold lingers in the hair long after the boots find the wooden boards of the quay—a rancid broth of damp oak, salt-cured pork, and the sulfurous smoke of coal fires burning below deck. Yet, beneath this suffocating, heavy air, {given_name} carries the clean, dry scent of dried mugwort and cedarwood preserved in the family’s small, brass-bound chest. It is a fragrance that speaks of distant hillsides and orderly courtyards, a fragrant shield against the raw, salty rot of this wild port town where the earth itself seems to have been hastily thrown together from mud and pine-bark.",
+        "The {family_name} family does not arrive with the desperate, hollow-eyed hunger of the common laborers; they carry the quiet dignity of those who can read the characters of both the old classics and the newer, foreign testaments. As {given_name} stands amidst the piles of luggage, the wind shifts, bringing the pungent aroma of roasting pork from a nearby alleyway, mingled with the unfamiliar, bitter dregs of cheap foreign spirits. This is the crossroads where Heaven has cast them, a shore of mud and opportunity that smells of nothing they have ever known, yet demands every prayer they have ever memorized."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We must first establish a pure place of reflection, letting the scent of home cleanse our new dwelling."
+          ],
+          "choice": {
+            "text": "Establish the ancestral altar immediately.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "altar_established"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We must follow the scent of the trade winds, letting the market guide our first footsteps."
+          ],
+          "choice": {
+            "text": "Seek out the merchants of the dockside.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "mercantile_foothold"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t0:rising"
+    },
+    {
+      "id": "act:chinese:religious:middle:t0:rising",
+      "sense": "touch",
+      "prose": [
+        "The skin of {given_name}’s hands is changing, the soft, ink-stained palms of a provincial scholar thickening under the abrasive scrape of rough jute sacks and the greasy iron of warehouse scales. Every morning begins with the damp, biting chill of the fog, which clings to the wool of the second-hand frock coat like a cold, wet shroud. To touch anything in this city is to feel the grit of coal dust and the splintered roughness of unplaned Douglas fir, a constant reminder that this society is still in its raw, uncarved infancy.",
+        "When {given_name} assists a kinsman with the heavy crates of dried goods, the weight of the family's future feels physical, pressing down upon the collarbones with the stubborn gravity of lead. Yet, there is a different touch that restores the spirit: the smooth, cool lacquer of the family Bible and the silk-wrapped pages of the genealogies, preserved in the depths of the wooden trunk. These sacred objects are the only surfaces in this muddy settlement that do not feel caked with the grime of hurried commerce, offering a tactile connection to an eternal order."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You choose to steady your grip on the rough timber, committing to the physical labor alongside the common workers to build communal trust."
+          ],
+          "choice": {
+            "text": "Toil directly with the laborers.",
+            "motivatorShift": {
+              "honor": 2,
+              "politics": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "labor_respected"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You choose to keep your hands clean for the ledger and the pen, insisting on the dignity of your clerical standing."
+          ],
+          "choice": {
+            "text": "Maintain scholarly distance.",
+            "motivatorShift": {
+              "power": 2,
+              "worldview": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "clerical_dignity"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "As the immigrant ward grows, a dispute breaks out over the distribution of the community's mutual aid fund. How do you direct the resources?",
+        "options": [
+          {
+            "text": "Allocate the funds strictly to those who attend chapel services, reinforcing spiritual discipline.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "worldview": 2
+            },
+            "setFlags": [
+              "chapel_charity"
+            ]
+          },
+          {
+            "text": "Distribute the aid to all new arrivals regardless of faith, establishing a broad civic patronage.",
+            "motivatorShift": {
+              "reach": 2,
+              "politics": 2,
+              "wealth": 1
+            },
+            "setFlags": [
+              "secular_patronage"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t0:midpoint"
+    },
+    {
+      "id": "act:chinese:religious:middle:t0:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The night is never quiet in the crowded tenement blocks; it is a chaotic tapestry of clashing voices, the metallic clatter of printing presses turning out foreign tracts, and the rhythmic, hollow thud of wooden sandals on the narrow stairs. Through the thin board walls of the {surname} home, the guttural, barked commands of the local watchmen collide with the soft, melodic chanting of the neighborhood's older secret societies. It is a din that threatens to swallow the mind, a relentless tide of noise that carries no reverence for the quiet hours of study and reflection.",
+        "One evening, a different sound rises above the street noise: the clear, resonant harmony of a Christian hymn sung in the dialect of the southern hills, drifting from a small, rented loft. It is an extraordinary sound in this foreign-tongued city, attracting the curiosity of passersby and the sharp, suspicious glances of the traditional merchant guilds. {given_name} listens from the window, realizing that this song is a bridge, a way to translate their ancient, disciplined piety into a language that the powerful men of this new land might respect and fear."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You raise your own voice to join the hymn, signaling your alignment with the public chapel."
+          ],
+          "choice": {
+            "text": "Join the public chorus of faith.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 2,
+              "politics": 1
+            },
+            "setFlags": [
+              "mission_allied"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You close the window shutters, preferring the quiet, private recitation of family prayers away from the public gaze."
+          ],
+          "choice": {
+            "text": "Keep the faith within the home.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "private_devotion"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t0:turn"
+    },
+    {
+      "id": "act:chinese:religious:middle:t0:turn",
+      "sense": "sight",
+      "prose": [
+        "The yellow glare of the streetlamps casts long, distorted shadows across the wet wooden sidewalks, revealing a landscape of stark, visual contrasts. On one side of the alley stands the ornate, gilded facade of the traditional district association, its painted dragons gleaming in the rain; on the other, the stark, white-painted wood of the mission chapel, its plain cross silhouetted against the dark sky. {given_name} looks out over this divided world, seeing the faces of young immigrants wandering between the two, lost in the glare of the gambling dens and the cold promise of the foreign factories.",
+        "It is here that the {surname} line must plant its banner, choosing which path will define their name for the generations to come. The sight of the family’s young children, their eyes reflecting the dim light of the tallow candle as they study their characters, brings a sharp clarity to the moment. They cannot remain mere spectators in this muddy valley; they must either lead the temple, steady the chapel, or carve out a secular house of trade that owes nothing to either altar."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You cast your eyes toward the cross, seeing the mission as the key to your family's social protection."
+          ],
+          "choice": {
+            "text": "Align fully with the Western mission.",
+            "motivatorShift": {
+              "power": 2,
+              "worldview": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "western_aligned"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You look toward the traditional elders, seeing the preservation of the old rites as your true duty."
+          ],
+          "choice": {
+            "text": "Anchor the family in traditional leadership.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "traditionalist_anchor"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The ward is on the verge of a riot over unfair labor contracts; how will {given_name} lead the family to intervene?",
+        "options": [
+          {
+            "text": "Use the chapel's influence to negotiate peace with the foreign employers, positioning the family as indispensable diplomats.",
+            "motivatorShift": {
+              "reach": 3,
+              "politics": 2,
+              "wealth": 1
+            },
+            "setFlags": [
+              "diplomat_path"
+            ]
+          },
+          {
+            "text": "Fund a private school to teach the youth English and classics, building long-term intellectual independence.",
+            "motivatorShift": {
+              "lineage": 3,
+              "worldview": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "educator_path"
+            ]
+          },
+          {
+            "text": "Organize a mutual-protection society under the banner of traditional law, defying the foreign authorities.",
+            "motivatorShift": {
+              "power": 3,
+              "tradition": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "militant_path"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t0:close"
+    },
+    {
+      "id": "act:chinese:religious:middle:t0:close",
+      "sense": "taste",
+      "prose": [
+        "The bitter, medicinal sting of wild ginger tea brewed over coal embers is the taste that lingers at the back of the throat during the long, damp winters. It is a flavor of survival, a sharp reminder of the mountains left behind, yet sweetened now by a precious spoonful of white sugar bought from the Western trading houses. In this small kitchen, the tastes of two worlds are beginning to blend, just as the children's speech now carries the hard, flat consonants of the port city alongside the soft vowels of the ancestral village.",
+        "As {given_name} hands the heavy, ironwood cup to the eldest child, there is a quiet understanding that the foundation has been laid. The family name, {surname}, is no longer just a word written on a piece of paper in an immigrant's chest; it is a respected mark in the ledger books of the city and a prayer spoken in the local tongue. The road ahead is steep and muddy, but the taste of their first hard-won harvest—grown in the small garden plot behind the chapel—is sweet with the promise of permanent roots."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You savor the bitterness of the herbal tea, reminding the heir never to forget the struggles of the crossing."
+          ],
+          "choice": {
+            "text": "Pass down the memory of hardship.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "legacy_of_struggle"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You stir more sugar into the cup, encouraging the heir to embrace the sweetness and wealth of this new land."
+          ],
+          "choice": {
+            "text": "Urge the pursuit of prosperity.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "legacy_of_ambition"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:religious:middle:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The pungent bite of fresh cedar shavings mingled with the heavy, sweet resin of sandalwood imports, hanging thick under the low-slung beams of the dry-goods store. Every corner of the small shop on the hillside carried this scent, an olfactory boundary separating the dusty chaos of the frontier road from the sacred order {given_name} sought to establish. Here, the ancestral tablets sat on a shelf of planed redwood, crowned by a bronze censer where thin wisps of grey smoke curled upward, defying the damp, salt-laden drafts that crept through the floorboards.",
+        "Outside, the town hummed with the harsh odor of horse dung, boiling tar, and the sour mash of nearby saloons, but within these walls, the fragrance of devotion reasserted itself daily. {given_name} carefully weighed out star anise, dried ginger, and powdered sulfur for the laborers who came seeking both medicinal comfort and a familiar reminder of home. To smell the shop was to know that the lineage had not merely survived the voyage, but had taken root, transplanting the sweet air of the ancestral province into this rugged, rain-slicked valley."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You choose to prioritize importing expensive, traditional incense to elevate the local altar's prestige."
+          ],
+          "choice": {
+            "text": "Order the finest sandalwood from back home.",
+            "motivatorShift": {
+              "tradition": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "fine_incense"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You blend local pine resins into the incense to conserve precious silver for the family store."
+          ],
+          "choice": {
+            "text": "Mix local pine into the sacred blends.",
+            "motivatorShift": {
+              "wealth": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "local_blend"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t1:rising"
+    },
+    {
+      "id": "act:chinese:religious:middle:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The physical reality of this new soil was felt in the splintering grain of redwood beams and the freezing bite of mountain spring water used to scrub the storefront clean each dawn. {given_name}’s hands, once accustomed to the smooth ledger-paper and fine porcelain of a merchant’s house in the delta, were now mapped with small scars and calluses from dragging heavy crates of rice up the steep, unpaved hillside. Each touch of the cold iron weights on the balance scale was a reminder of the precision needed to keep this household solvent while others fell into ruin.",
+        "It was a delicate domestic balance, maintaining the pristine condition of the family’s modest altar while the damp, intrusive rot of the northern forests threatened to warp the wood and mold the silk scrolls. Your mother spent her afternoons carefully dry-wiping the lacquered surfaces with raw silk, her fingers checking for the slightest sign of dampness that might insult the spirits of the ancestors. The physical labor of preservation was relentless, demanding a constant vigilance over every fabric and beam that defined their status."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You assign your younger brother the grueling task of hand-polishing the shrine's brass fittings every evening."
+          ],
+          "choice": {
+            "text": "Demand absolute domestic discipline from the youth.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "strict_youth"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You allow the shrine's outer decorations to dull slightly to spare your family's aching hands."
+          ],
+          "choice": {
+            "text": "Focus labor on the dry-goods ledger instead.",
+            "motivatorShift": {
+              "wealth": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "ledger_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A dispute arises with a neighboring merchant who claims your washing water is rotting his shared fence. How do you resolve this friction?",
+        "options": [
+          {
+            "text": "Pay a carpenter to build a stone drainage trench, preserving peace and standing.",
+            "motivatorShift": {
+              "wealth": -1,
+              "honor": 2,
+              "politics": 1
+            },
+            "setFlags": [
+              "trench_built"
+            ]
+          },
+          {
+            "text": "Relocate the washing station indoors, enduring the dampness to avoid wasting coin.",
+            "motivatorShift": {
+              "wealth": 1,
+              "worldview": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "indoor_wash"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t1:midpoint"
+    },
+    {
+      "id": "act:chinese:religious:middle:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The rhythm of the valley was dictated by a harsh symphony of axes biting into timber, the distant thunder of hydraulic mining hoses washing away hillsides, and the foreign, discordant babble of the miners' camp. But inside the shop, the sound was different: the soft, dry rattle of abacus beads sliding along their bamboo rods, accompanied by the low, melodic chanting of the morning prayers. This auditory boundary was a shield, protecting the family's sanity from the raw, lawless clamor of a town that seemed to have no memory and no future.",
+        "One afternoon, the clattering wheels of a heavy carriage drew a crowd to the shop's threshold. An emissary from a rival mercantile association—a group representing a different province and a more ruthless commercial philosophy—stepped forward, his leather boots creaking loudly on the porch. He brought a proposal that sounded more like an ultimatum: a shared monopoly on the distribution of ceremonial goods, enforced by their muscle, which would silence the independent voice {given_name} had spent years cultivating."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You politely decline the association's offer, choosing to rely on the quiet loyalty of your own congregation."
+          ],
+          "choice": {
+            "text": "Refuse the alliance with a respectful bow.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": -1
+            },
+            "setFlags": [
+              "independent_shop"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You agree to their terms, recognizing that a shared monopoly will secure your family's financial future."
+          ],
+          "choice": {
+            "text": "Sign the distribution compact.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "monopoly_allied"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t1:turn"
+    },
+    {
+      "id": "act:chinese:religious:middle:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "The view from the shop's upper window revealed a sprawling canvas of mud, canvas tents, and half-built timber storefronts that climbed the valley walls like a scarred staircase. Yet, when the autumn festival arrived, {given_name} beheld a transformation that defied the barrenness of the frontier. Scores of red paper lanterns, inked with bold gold calligraphy, glowed against the dark canopy of the giant pines, casting a warm, crimson light over the faces of hundreds of gathered immigrants who had found their way to this sanctuary.",
+        "The sight of this community, united by the rites and symbols {family_name} had preserved, made it clear that they were no longer just shopkeepers; they were the keepers of the hearth. Yet, this visible success also drew the eyes of the town's magistrates and foreign landowners, who watched the glowing lanterns from the ridge above with growing suspicion. A choice lay before them, written in the vibrant inks of their banners and the dark shadows of the surrounding hills, to decide how deeply they would weave their faith into the civic fabric of this raw land."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You display the lanterns prominently on the main street, asserting your community's permanent presence."
+          ],
+          "choice": {
+            "text": "Let the light shine publicly.",
+            "motivatorShift": {
+              "reach": 2,
+              "politics": 1
+            },
+            "setFlags": [
+              "public_lanterns"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You move the festival's main altar indoors, keeping your devotion private to avoid provoking local hostility."
+          ],
+          "choice": {
+            "text": "Withdraw the lanterns behind shuttered doors.",
+            "motivatorShift": {
+              "tradition": 2,
+              "politics": -1
+            },
+            "setFlags": [
+              "private_devotion"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {family_name} line anchor its religious and social authority in this rapidly growing town?",
+        "options": [
+          {
+            "text": "Establish a permanent, public temple, inviting all Chinese clans to join under your spiritual stewardship.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "wealth": -2,
+              "tradition": 2
+            },
+            "setFlags": [
+              "public_temple"
+            ]
+          },
+          {
+            "text": "Keep the shrine exclusive to your lineage and close allies, protecting the purity of your traditions from external politics.",
+            "motivatorShift": {
+              "tradition": 3,
+              "lineage": 2,
+              "reach": -2,
+              "wealth": 1
+            },
+            "setFlags": [
+              "private_altar"
+            ]
+          },
+          {
+            "text": "Incorporate Western civic charity into your temple's work, bridging the cultural divide to secure legal protections.",
+            "motivatorShift": {
+              "politics": 3,
+              "worldview": 2,
+              "tradition": -2,
+              "power": 1
+            },
+            "setFlags": [
+              "civic_bridge"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t1:close"
+    },
+    {
+      "id": "act:chinese:religious:middle:t1:close",
+      "sense": "taste",
+      "prose": [
+        "The generation drew to a close with the bitter, comforting taste of strong black tea brewed from leaves imported from the old country, sweetened only slightly by the hard rock sugar that remained a luxury in the hills. Sitting at the heavy rosewood table, the elder looked upon the heir, whose tongue had grown accustomed to the coarse salt-beef of the frontier but still knew the precise, delicate flavors of the ceremonial feasts. It was a taste of survival—sharp, disciplined, and deeply rooted in the memory of the soil they had left behind.",
+        "Beside the tea stood a plate of mooncakes, their crusts golden and stamped with the family seal, baked in wood-fired ovens that had never known the winds of the delta. To bite into them was to taste the success of a middle-class life carved from the wilderness: a perfect balance of sweet lotus paste and the rich, salty yolk of a preserved duck egg. This was the legacy handed down to the next generation—not a fortune of speculative gold, but a stable, respected trade, an honorable name, and a sacred flame that burned bright in the heart of the new land."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You pass the ledger and the censer to your heir, commanding them to never let the temple fires go cold."
+          ],
+          "choice": {
+            "text": "Command strict adherence to the ancestral ways.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "traditional_heir"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You advise your heir to adapt the family business to whatever modern commerce demands."
+          ],
+          "choice": {
+            "text": "Urge pragmatism over dogma.",
+            "motivatorShift": {
+              "wealth": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "pragmatic_heir"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:religious:middle:t2:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of sweet sandalwood incense, imported in tightly sealed tin canisters from the old provinces, fought a quiet war against the sharp, alkaline tang of lime-washed brick and the damp draft of the lower district. In the back room of the {surname} family's dry-goods house, the air was dense with the clean, dry odor of stacked mulberry paper and dried lotus root. For {given_name}, this clean fragrance was the first true boundary of their ascent, a barrier erected between the family's neat counting-desks and the sulfurous stench of the tanneries and coal-barges where the first wave of their kinsmen still broke their backs.",
+        "Every bundle of dried herbs and every box of altar candles that crossed the threshold carried the scent of a deliberate transition. The family had not merely survived the cold rains of this western city; they had purified their corner of it. In the mornings, when the shuttered windows were first thrown back, the scent of parched barley tea mingled with the crisp, cold air of the rising hillside, signaling to the congregation that gathered in their parlor that the {surname} home remained a sanctuary of order, faith, and quiet prosperity."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We burn only the finest temple-grade incense, ensuring that our spiritual devotion remains untainted by the cheap, chemical approximations sold in the lower markets."
+          ],
+          "choice": {
+            "text": "Prioritize spiritual purity and premium imported ritual goods over high-volume sales.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "flag_religious_purity"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The scent of raw ginger and dried mushrooms must dominate the front displays, reassuring the practical, striving community that we are merchants of substance first."
+          ],
+          "choice": {
+            "text": "Focus the business on essential daily provisions to maximize community reliance and cash flow.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "flag_mercantile_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t2:rising"
+    },
+    {
+      "id": "act:chinese:religious:middle:t2:rising",
+      "sense": "touch",
+      "prose": [
+        "The grain of the thick pear-wood altar table felt cool and unyielding beneath {given_name}’s fingertips, polished to a mirror shine by decades of reverent cloth. Yet, beside the altar sat the new brass scale, its weights cold and heavy, demanding a different kind of precision. The physical reality of their rising status was measured in these textures: the silk-trimmed collar of a new coat that chafed against a neck accustomed to coarse hemp, and the smooth, cream-colored grain of the municipal deeds that lay stacked upon the desk.",
+        "There was a constant friction in this elevation, a pull between the soft, yielding pages of the devotional tracts they printed for the newcomers and the rough, splintered edges of the shipping crates that arrived each Tuesday. When a cousin from the lower docks came seeking a loan, his hands were calloused and caked with river mud, leaving dark, damp smudges on the clean cedar counter. To touch those hands was to remember the soil they had all sprung from, even as the glossy, wax-sealed letters from the city's banking guilds invited {given_name} into a world of dry, immaculate parchment."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We feel the rough calluses of our kin and remember that our elevation is meant to lift the entire {family_name} line, not isolate us from them."
+          ],
+          "choice": {
+            "text": "Recommit to mutual aid and ancestral ties over cold business efficiency.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "flag_ancestral_loyalty"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We run our hands over the smooth ledger and recognize that only through strict, unsentimental financial discipline can we survive in this foreign city."
+          ],
+          "choice": {
+            "text": "Maintain rigorous mercantile standards, even when dealing with close family.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": -1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "flag_strict_discipline"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How do you handle the muddy, desperate request of your docks-bound kinsman?",
+        "options": [
+          {
+            "text": "Wipe away the mud and grant him a generous, interest-free loan from the family's tithe reserves.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "flag_altruistic_clansmen"
+            ]
+          },
+          {
+            "text": "Offer him structured employment in the warehouse instead, keeping the ledger clean and businesslike.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": -1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "flag_pragmatic_patron"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t2:midpoint"
+    },
+    {
+      "id": "act:chinese:religious:middle:t2:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The early mornings were no longer silent, but filled with the rhythmic, hollow clacking of the printing press the family had installed in the annex, turning out bilingual catechisms and local gazettes. Beneath this steady, mechanical heartbeat lay the murmuring chorus of the neighborhood's faithful, their voices rising in a blend of traditional chants and newly translated hymns that drifted out into the cobbled alleyway. It was a distinctive acoustic space, registering both the ancient cadences of the home country and the sharp, clanging bell of the streetcars that rattled past their expanding property line.",
+        "On a Thursday afternoon, a different sound entered the shop: the deep, booming laughter of a rival merchant from the long-established northern line, whose heavy cane tapped a slow, intimidating rhythm across the floorboards. He spoke of new alliances, his voice carrying the smooth, resonant assurance of those who had held wealth for three generations. The intersection of their ambitions was loud, marked by the clink of porcelain teacups against saucers and the sudden, heavy silence that fell over the clerks as they waited to see if the {surname} family would bow to the older dynasty's terms or strike out on their own noisy path."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The steady hum of our congregation's prayers drowns out the boastful clatter of the old merchant's gold."
+          ],
+          "choice": {
+            "text": "Politely reject the rival's patronizing terms, trusting in the independent strength of your community network.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "flag_independent_faith"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We listen to the clear, crisp rustle of their bank drafts and realize that cooperation is the quickest path to securing our children's future."
+          ],
+          "choice": {
+            "text": "Form an alliance with the established northern family, blending your religious influence with their commercial muscle.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "flag_mercantile_alliance"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t2:turn"
+    },
+    {
+      "id": "act:chinese:religious:middle:t2:turn",
+      "sense": "sight",
+      "prose": [
+        "From the high arched windows of the newly constructed municipal hall, the city appeared as a sprawling, chaotic tapestry of slate roofs, rising brick chimneys, and the brilliant, white-hot glare of the gaslamps lining the main avenue. {given_name} stood beside the window, looking down at the plot of land they had secured at the edge of the civic square, where the family's proposed benevolent association and temple was to be built. The sight was intoxicating—a physical marker of their permanence, sketched in black ink on the blue-tinted blueprints that lay unrolled across the long cedar table.",
+        "Yet the view was also a map of competing futures, each demanding a different compromise. To the east, the soot-choked chimneys of the industrial sector housed the poor of their flock, who looked to the {surname} line for spiritual shelter; to the west, the clean, neoclassical columns of the city's elite academies and banks stood as a quiet challenge. The decision of how to build—whether to erect a grand, traditional hall that cemented their role as the undisputed protectors of their enclave, or to fund a modern, English-speaking academy that would ease their children's integration into the wider city's power structures—loomed in the sharp afternoon light."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We look upon the newly laid foundations and see a monument that will stand for generations as a beacon of our unwavering faith."
+          ],
+          "choice": {
+            "text": "Dedicate the family's capital to permanent spiritual and cultural monuments.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "flag_monumental_faith"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The sight of our children studying ledger work alongside sacred texts confirms that we have successfully bridged two distinct worlds."
+          ],
+          "choice": {
+            "text": "Prioritize pragmatic education and outward adaptation as our primary legacy.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "flag_pragmatic_adaptation"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How shall the {surname} family shape their grandest civic project on the high slope?",
+        "options": [
+          {
+            "text": "Erect a grand, traditional ancestral hall and temple to anchor the immigrant community’s faith and protect their heritage.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "flag_civic_temple"
+            ]
+          },
+          {
+            "text": "Establish a bilingual academy and scriptorium to educate the next generation in both classical wisdom and modern commerce.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": 1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "flag_civic_academy"
+            ]
+          },
+          {
+            "text": "Build a massive mercantile exchange and mutual-savings house to consolidate the community's capital under family management.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": -2,
+              "power": 3,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "flag_civic_exchange"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t2:close"
+    },
+    {
+      "id": "act:chinese:religious:middle:t2:close",
+      "sense": "taste",
+      "prose": [
+        "The celebratory feast in the private upper room of the tea-house was marked by the rich, complex taste of double-boiled pigeon soup and the subtle, earthen bitterness of aged Pu-erh tea, poured from a heavy silver pot. For {given_name}, every flavor was a victory over the salt-fish and watery congee of their early years in the tenements. The sweetness of roasted chestnuts and sugar-glazed walnuts lingered on the tongue, a luxurious testament to the security they had finally bought for the next generation of the {surname} bloodline.",
+        "As the night waned, the heir was called forward to receive the family's ceremonial ledger, its edges stained with ink and its pages tasting of dry, ancient dust when kissed in the traditional gesture of respect. This inheritance was not merely one of coins, but of carefully cultivated connections, seasoned with the bitter herbs of duty and the sweet wine of civic prestige. The taste of their success was deep and lingering, a solid foundation from which the young {surname} would step into a world far wider and more formidable than the one their elders had first entered."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "May the taste of this clean, pure tea remind the heir that our family's honor must never be compromised for mere worldly gain."
+          ],
+          "choice": {
+            "text": "Instruct the heir to protect the religious integrity and moral reputation of the {family_name} name above all.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "flag_heritage_intact"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The rich, heavy oils of the feast linger as a reminder that material strength is the shield that preserves all our sacred traditions."
+          ],
+          "choice": {
+            "text": "Charge the heir to expand the family's commercial power and financial holdings ruthlessly.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "flag_commercial_dynasty"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:religious:middle:t3:open",
+      "sense": "smell",
+      "prose": [
+        "The thick, comforting fog of burning sandalwood incense mingles with the sharp, saline draft of the Pacific docks. It is a scent that has defined the {family_name} name since the first ships dropped anchor, a sacred bridge of smoke connecting the tiled roofs of the old country to these drafty wooden halls. Inside the assembly room, the heavy aroma clings to the lacquered boards of the ancestral shrine, where hundreds of names are inscribed on thin pine tablets.",
+        "Here, {given_name} sits before the great paper ledger, the ink still wet. Around the table, elders from the district associations argue over the cost of rice and the arrivals of the latest steamship. The {family_name}s have become the keepers of this transition, the translators of both heaven’s will and the white magistrates' tax laws. It is a fragile middle space, sustained not by immense fortunes, but by the steady, aromatic presence of faith and communal obligation that the family has cultivated across two generations."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You choose to prioritize the ritual offerings over the mercantile tallies, asserting the primacy of the old ways."
+          ],
+          "choice": {
+            "text": "Hold fast to the rituals of the ancestors.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 3,
+              "honor": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "traditional_devotion"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You adjust the ledger to fund the community shelter, prioritizing practical charity over temple adornment."
+          ],
+          "choice": {
+            "text": "Redirect the incense fund to shelter the new arrivals.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "practical_charity"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t3:rising"
+    },
+    {
+      "id": "act:chinese:religious:middle:t3:rising",
+      "sense": "touch",
+      "prose": [
+        "The cold, biting brass of the municipal tax tokens feels heavy in {given_name}'s palm, a physical manifestation of the local government's growing suspicion. Every step through the newly erected timber arch of the temple reveals the friction of their growth; the pine is rough and splintered, hasty work done by congregation members after their long shifts on the railway line. To touch these walls is to feel the calloused hands of thousands who look to the {family_name} name for shelter.",
+        "A letter has arrived from the district commissioner's office, its heavy, textured parchment stiff with legal jargon. It threatens to close the mission hall under the guise of fire safety codes unless a substantial \"inspection fee\" is paid. The family must decide whether to swallow this humiliation with a quiet payment or to challenge the local ward boss through the influence of their growing congregation."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You run your fingers along the smooth, worn edge of the wooden offering box, resolving to meet the demand through collective donations."
+          ],
+          "choice": {
+            "text": "Rely on the congregation's quiet generosity.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": -1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "communal_reliance"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You grip the heavy brass inkwell, preparing a formal letter of complaint to the city's Chinese consul."
+          ],
+          "choice": {
+            "text": "Involve the official consulate to demand protection.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 2,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "consular_appeal"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How will the family address the municipal extortion threatening the temple?",
+        "options": [
+          {
+            "text": "Pay the extortion quietly to protect the community from harassment.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": -1,
+              "worldview": 0,
+              "power": -1,
+              "tradition": 2,
+              "honor": -1,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "extortion_paid"
+            ]
+          },
+          {
+            "text": "Rally the district merchants to protest and withhold municipal fees.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 3,
+              "worldview": 1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "merchant_boycott"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t3:midpoint"
+    },
+    {
+      "id": "act:chinese:religious:middle:t3:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The air is filled with the rhythmic click-clack of wooden abacus beads, a sharp counterpoint to the low, droning hum of the morning sutras being chanted in the hall below. But outside the high windows, a different sound is rising—the raucous, iron-shod clatter of a rival merchant faction's carriages, allied with a powerful Western syndicate. They seek to monopolize the labor contracts, threatening to turn the free immigrants of the {family_name} congregation into little more than indentured debt-slaves.",
+        "A representative from this rival enterprise, bearing a name feared across the docks, enters the shrine room without removing his hat. The scrape of his leather boots against the clean floorboards sounds like a desecration. He speaks in a clipped, mocking tone, offering a partnership that would guarantee the temple's safety in exchange for {given_name}’s endorsement of his predatory labor contracts. To refuse is to invite a storm; to accept is to betray the very souls they have sworn to shepherd."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You allow the sound of the chanting to drown out his threats, refusing to compromise the family's spiritual charge."
+          ],
+          "choice": {
+            "text": "Reject the syndicate's offer with a solemn prayer.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": -1,
+              "worldview": 3,
+              "power": -1,
+              "tradition": 2,
+              "honor": 3,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "syndicate_rejected"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You listen closely to his terms, searching for a compromise that preserves the family's mediating power."
+          ],
+          "choice": {
+            "text": "Negotiate a safer, moderate term of labor.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "syndicate_negotiated"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t3:turn"
+    },
+    {
+      "id": "act:chinese:religious:middle:t3:turn",
+      "sense": "sight",
+      "prose": [
+        "From the high balcony of the assembly hall, the entire quarter lies visible under a canopy of gray coal-smoke and bright silk banners. Below, a sea of black-haired heads fills the narrow streets, a vibrant, living testament to the wave that {family_name} helped unleash upon this continent. The red paint on the temple columns shines brilliantly in the pale northern sun, a beacon of identity that can be seen even from the harbor where the white city-dwellers watch with growing apprehension.",
+        "The moment of crisis has arrived as the state assembly debates an exclusion act that would bar future Chinese families from entering. The {family_name}s must decide how to project their influence. Should they use their accumulated middle-class capital to lobby the courts under the banner of treaty rights and religious liberty, or should they mobilize a massive, public strike of all Chinese laborers to prove their essential place in the nation's engine, risking violent reprisal?"
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You look out at the sea of lanterns, committing the family's name to the public struggle."
+          ],
+          "choice": {
+            "text": "Stand at the vanguard of the community's defense.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 3,
+              "worldview": 1,
+              "power": 2,
+              "tradition": 0,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "vanguard_defense"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You pull the thick wooden shutters closed, focusing your gaze on the quiet sanctuary of the hearth."
+          ],
+          "choice": {
+            "text": "Preserve the family's strength within the temple walls.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": -2,
+              "worldview": 2,
+              "power": -1,
+              "tradition": 3,
+              "honor": 1,
+              "lineage": 3,
+              "reach": -2
+            },
+            "setFlags": [
+              "sanctuary_preservation"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {family_name} family shape the destiny of their people in this hostile land?",
+        "options": [
+          {
+            "text": "Mount a landmark legal challenge based on treaty rights and religious liberty.",
+            "motivatorShift": {
+              "wealth": -3,
+              "politics": 4,
+              "worldview": 2,
+              "power": 2,
+              "tradition": -1,
+              "honor": 3,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "legal_challenge"
+            ]
+          },
+          {
+            "text": "Organize a peaceful, total labor strike across the region to demonstrate collective economic power.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 3,
+              "worldview": 1,
+              "power": 4,
+              "tradition": -2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 4
+            },
+            "setFlags": [
+              "labor_strike"
+            ]
+          },
+          {
+            "text": "Withdraw from public agitation, focusing on building an insular, self-sustaining parallel society within the temple walls.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": -3,
+              "worldview": 3,
+              "power": 1,
+              "tradition": 4,
+              "honor": 1,
+              "lineage": 3,
+              "reach": -3
+            },
+            "setFlags": [
+              "insular_enclave"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t3:close"
+    },
+    {
+      "id": "act:chinese:religious:middle:t3:close",
+      "sense": "taste",
+      "prose": [
+        "The bitter, earthy taste of ginseng tea lingers on the tongue, brewed by {given_name}’s eldest child as they sit together in the quiet hours after the autumn festival. It is a flavor of endurance, sharp and unyielding, much like the path the family has carved through this generation. Beside the teapot rests a tray of sweet lotus-seed cakes, a rare indulgence that marks a hard-won peace, even as the distant rumble of the city reminds them that the struggle for their place in this land is far from over.",
+        "The legacy of the {family_name} line is now cast in stone and ink, recognized by both the grateful immigrant families and the begrudging city authorities. The heir takes the cup with a steady hand, tasting the same bitterness and sweetness that has sustained their ancestors. They are no longer mere travelers in a hostile land; they are the foundation upon which a dynasty's future will be built."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You savor the lingering sweetness of the bean cake, confident that the family has secured its honor."
+          ],
+          "choice": {
+            "text": "Pass down a legacy of proud cultural resilience.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "cultural_pride"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You swallow the bitter dregs of the tea, knowing that survival will always demand sacrifice."
+          ],
+          "choice": {
+            "text": "Pass down a legacy of pragmatic vigilance.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": 1,
+              "power": 2,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "pragmatic_vigilance"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:religious:middle:t4:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of charred sandalwood always battles the sharp, vinegared tang of the harbor front, a sweet and sour perfume that defines the offices of the {family_name} Association. Inside the high-ceilinged room, dry ink on fresh ledger paper mingles with the faint, waxen odor of tallow candles burned down to the brass. Here, the letters arrive in salt-crusted leather pouches, bearing the ink of Guangzhou, the damp moss of the goldfields, and the coal-smoke of the railway camps. Each envelope contains a plea, a tithe, or a testimony of grace received in a harsh and unfamiliar land.",
+        "{given_name} works at a writing desk of dark cedar, surrounded by neat stacks of bilingual testaments and tracking slips for families crossing the Pacific. The air is heavy with the dust of old paper and the damp wool of coats worn by immigrants waiting on the benches below. For decades, the chapel and the ledger have been one and the same for the {family_name} line, but now the scale is staggering. The tiny mission house of the early years has grown into a continental network of chapels, hospitals, and mutual-aid societies, and every thread of this vast tapestry runs directly through {given_name}’s ink-stained fingers.",
+        "A quiet cough sounds from the doorway, where a young clerk stands with a fresh tray of tea and a stack of telegraph receipts. The modern world moves on wire and steam now, and the old ways of sending letters by trusted cousins are slowly yielding to the lightning-fast click of the key. Yet, the smell of the ink remains the constant, binding the ancestral village to the bustling streets of this western metropolis."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "With a steady hand, {given_name} dips the iron nib into the inkwell to draft the charter for three new congregation-backed hostels along the central railway line."
+          ],
+          "choice": {
+            "text": "Authorize the funds, anchoring the migrants' journey firmly in the safety of the church.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "t4_church_hostels"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Turning away from the ledgers, {given_name} prepares a packet of sandalwood incense to send back to the mother church in China, a reminder of their shared devotion."
+          ],
+          "choice": {
+            "text": "Prioritize the homeland connection, reinforcing the transatlantic spiritual chain.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "t4_ancestral_tithe"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t4:rising"
+    },
+    {
+      "id": "act:chinese:religious:middle:t4:rising",
+      "sense": "touch",
+      "prose": [
+        "The cold, polished brass of the communion rail feels solid beneath {given_name}’s palm, a cooling counterpoint to the feverish heat of the midday sun pouring through the high clerestory windows. Each Sunday, hundreds of hands touch this very rail—some rough and calloused from splitting granite, others smooth from the silk-merchant shops of the dry goods district. The weight of these lives is physical, pressing down on the church elders like the heavy woolen Sunday coats they wear despite the stifling summer heat.",
+        "A delicate conflict has arisen within the vestry. {given_name}’s younger cousin, a bright scholar who has mastered the local laws and speaks with the clipped cadence of the university, presents a petition. He wishes to divert a portion of the church’s tithes to fund a secular legal defense league, arguing that the faith must protect the bodies of its flock as well as their souls. The elders murmur, their fingers tracing the smooth, familiar wood of their prayer books, hesitant to dilute the sacred treasury for earthly squabbles.",
+        "The paper of the petition is thick and heavy, a tactile reminder of the secular institutions they must navigate to survive. To deny the young scholar is to risk losing the loyalty of the generation born under this new sky, who look for practical shields against discrimination; to agree is to step onto a path where the church’s spiritual purity might be compromised by the grime of municipal politics."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Taking the petition in hand, {given_name} feels the textured grain of the paper and decides to offer a compromise that keeps the funds under clerical oversight."
+          ],
+          "choice": {
+            "text": "Approve the legal defense fund but require the lawyers to be active members of the congregation.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 2,
+              "worldview": 1,
+              "power": 2,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "t4_pious_lawyers"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Handing the petition back with a gentle but firm shake of the head, {given_name} emphasizes that prayer and spiritual shelter must remain their only true fortress."
+          ],
+          "choice": {
+            "text": "Reject the secular fund, doubling down on direct charity and scriptural education.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": -1,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "t4_strictly_spiritual"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How will the {family_name} line manage the growing, secular demands of their rapidly expanding migrant community?",
+        "options": [
+          {
+            "text": "Incorporate a secular mutual-aid wing, separating the business of community defense from the sanctity of the church.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "t4_secular_mutual_aid"
+            ]
+          },
+          {
+            "text": "Keep all community aid strictly tied to chapel attendance and conversion, using material support to expand the flock.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 3,
+              "power": 1,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "t4_theocratic_charity"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t4:midpoint"
+    },
+    {
+      "id": "act:chinese:religious:middle:t4:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The sanctuary is filled with a dense, polyphonic hum. From the open windows facing the square comes the rumbling of iron-tired wagons and the shouting of draymen, while inside, the choir practices an old, slow hymn. They sing the classical translation with a steady, rhythmic cadence that mirrors the chanting of sutras, yet the melody is unmistakably western. It is the sound of two worlds colliding and finding a strange, resonant harmony in the wooden rafters of this immigrant church.",
+        "A sudden silence falls over the vestibule as a delegation from an old-money Presbyterian church down the avenue arrives. Their boots click sharply on the pine floorboards, and their leader, an austere philanthropist with silver whiskers, speaks in a booming, patronizing baritone. He offers a partnership: a massive injection of capital for the {family_name} schools, provided the curriculum is handed over to his board of Anglo-Saxon trustees. He speaks of 'civilizing influences' and 'standardization,' his voice carrying the effortless authority of those who own the banks.",
+        "Behind {given_name}, the local Chinese lay preachers whisper in low, urgent tones. To accept the silver-whiskered man’s offer would elevate their schools to state-wide prominence and protect them from local nativist hostility, but it would also silence the native tongue in their classrooms and strip the {family_name} line of their hard-won leadership. The choir’s quiet melody resumes in the background, a fragile song hanging in the balance of this negotiated peace."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Listening to the self-assured drone of the visitor, {given_name} politely declines the oversight, choosing to keep the schools independent and poor but true to their roots."
+          ],
+          "choice": {
+            "text": "Preserve complete autonomy, relying on their own middle-class network to fund the classrooms.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "t4_independent_education"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Recognizing the strategic value of such powerful allies, {given_name} nods in agreement, accepting the funds while quietly planning how to subvert their control from within."
+          ],
+          "choice": {
+            "text": "Form the alliance, securing institutional safety at the cost of cultural compromise.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "t4_joint_venture_schools"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t4:turn"
+    },
+    {
+      "id": "act:chinese:religious:middle:t4:turn",
+      "sense": "sight",
+      "prose": [
+        "From the high balcony of the newly completed central cathedral, the entire city unfolds like a vast, ink-washed map. The sight is breathtaking: the gray slate roofs of the immigrant quarter give way to the towering brick smokestacks of the industrial district, while out in the blue bay, a dozen iron-hulled steamships lie at anchor, their smoke pluming like black ribbons against the sky. {given_name} stands beside a massive stained-glass window, where a depiction of the Good Samaritan features figures with familiar, eastern faces.",
+        "This window is more than a work of art; it is a monument to the ascension of the {family_name} line. They are no longer merely survivors of the voyage; they are creators of a new world, bridging continents with their faith and their financial credit. Yet, the view also reveals the rising tide of hostility in the legislative houses down the coast. Laws are being drafted to stem the flow of their kin, to brand their faith as alien, and to strip them of their hard-won citizenship. The sight of the bustling harbor is a reminder that the window of opportunity may soon slam shut.",
+        "The decisions made today will echo across the Pacific for generations. The family can retreat into quiet, safe isolation, protecting their immediate wealth and local flocks; they can weaponize their international network to lobby the imperial court back home and the federal government here; or they can use their immense credit to buy up shipping interests and control the physical transport of their people themselves."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Looking out at the harbor, {given_name} envisions a network of ships and hostels wholly owned by the church, ensuring safe passage for all who share the faith."
+          ],
+          "choice": {
+            "text": "Commit the family fortune to securing independent lines of transit and sanctuary.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 2,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "t4_sanctuary_fleet"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Focusing on the stone foundations of the cathedral beneath them, {given_name} decides that consolidating local power and real estate is the safest shield against the coming storm."
+          ],
+          "choice": {
+            "text": "Anchor the family's assets in local property and high-profile civic institutions.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "worldview": 0,
+              "power": 2,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "t4_urban_landlords"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "With legislative shadows lengthening over the Chinese community, how will the {family_name} line deploy its global influence?",
+        "options": [
+          {
+            "text": "The Spiritual Conduit: Focus entirely on training and deploying bilingual missionaries, building an unassailable global spiritual empire that transcends national laws.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 4,
+              "power": 2,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "t4_global_evangelism"
+            ]
+          },
+          {
+            "text": "The Mercantile Covenant: Shift church assets into a robust credit union and remittance network, using financial indispensability to protect the community.",
+            "motivatorShift": {
+              "wealth": 4,
+              "politics": 1,
+              "worldview": -1,
+              "power": 3,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "t4_financial_covenant"
+            ]
+          },
+          {
+            "text": "The Sanctuary League: Fund high-level legal challenges and political lobbying, fighting directly in the courts of both nations to preserve migration rights.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 4,
+              "worldview": 2,
+              "power": 2,
+              "tradition": -1,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "t4_sanctuary_league"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t4:close"
+    },
+    {
+      "id": "act:chinese:religious:middle:t4:close",
+      "sense": "taste",
+      "prose": [
+        "The evening feast to celebrate the cathedral's dedication is marked by the rich, complex taste of steamed sea bass with ginger and green onions, served alongside cups of strong, dark oolong tea. It is a flavor of celebration, of a home built and secured against the odds. Yet, as the night deepens, {given_name} tastes the bitter dregs of the tea, a quiet reminder of the sacrifices this journey has demanded, and the long road that still lies ahead for those who will inherit this spiritual empire.",
+        "The next generation sits at the foot of the table—young men and women who speak with the easy confidence of those who have never known the terror of the quarantine station or the hunger of the early settlements. They have been educated in the finest academies, yet they still bow their heads as the family patriarch offers the blessing in their ancestral tongue. The inheritance they receive is not merely one of ledger books and brick buildings, but of a global corridor of faith that spans the world’s greatest ocean.",
+        "As {given_name} pours the final drop of tea, there is a profound sense of completion. The {family_name} name is written not just in the municipal registries of this western state, but in the hearts of thousands who found grace, shelter, and dignity under their banner. They have ascended from humble migrants to world players, holding the keys to a kingdom that no exclusion law can ever truly lock away."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Holding the cup high, {given_name} offers a toast to the enduring spirit of the family, urging the young heirs to never forget the humble soil from which they grew."
+          ],
+          "choice": {
+            "text": "Pass down the legacy of humility and strict adherence to the ancestral faith.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 3,
+              "reach": 1
+            },
+            "setFlags": [
+              "t4_legacy_humility"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "With a sharp, visionary gaze, {given_name} instructs the heirs to use their modern education to expand the network into new markets and new continents."
+          ],
+          "choice": {
+            "text": "Pass down the legacy of global expansion, pushing the family's reach to its absolute limits.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "t4_legacy_expansion"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:religious:middle:t5:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of burning sandalwood, heavy and sweet, fights a constant, silent war against the sterile bite of recirculated ozone. Inside the high-orbit transit hub, {full_name} watches the gray smoke drift upward, not in its familiar earthly ribbons, but in slow, dizzying spirals dictated by the station’s artificial rotation. For generations, the {family_name} family kept their shrines on solid ground, first in the cramped tenement houses of the port cities and later in the grand stone temples of the western valleys. Now, the gods have been packed into lightweight, flame-retardant titanium cases, carried upward on the backs of pilgrims who look out at the black void and see only another sea to cross.",
+        "To the younger cousins, the smell of the altar is a strange, archaic thing, an interference with the clean, synthetic air of their new existence. But to {given_name}, it is the only anchor left. The ancestors did not cross the Pacific merely to settle in the mud of a new continent; they did so to find a wider heaven, free from the old constraints. As the boarding klaxon sounds, the scent of the incense clings to the silk of their ceremonial robes, a fragrant defiance against the cold vacuum waiting just beyond the airlock."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We double the incense offering, ensuring the ancient prayers fill the entire migration compartment despite the captain's warnings about the air scrubbers."
+          ],
+          "choice": {
+            "text": "Prioritize the purity of the ritual over technical regulations.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "traditional_purity_high"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We pack the incense away into hermetic seals, reciting the prayers in hushed, silent breaths to appease both the ancestors and the transit authority."
+          ],
+          "choice": {
+            "text": "Adapt the ritual to the mechanical realities of the journey.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "space_adaptable_faith"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t5:rising"
+    },
+    {
+      "id": "act:chinese:religious:middle:t5:rising",
+      "sense": "touch",
+      "prose": [
+        "The cold, unyielding brass of the family's century-old astronomical compass feels reassuringly heavy in {given_name}'s palm. It is a relic of the first voyage across the ocean, its face scratched by salt and time, yet its needle spinning aimlessly now that the magnetic poles of Earth have been left far behind. The pressure of the launch-harness still aches in their ribs, a lingering phantom of the massive gravity that fought so hard to keep them pinned to the old world. Every surface in the transit berth is metallic, smooth, and shivering with the deep, sub-audible vibration of the ship's fusion engines.",
+        "As the family gathers in the cramped common room to prepare for the final high-orbit transfer, a dispute arises among the elders. They are arguing over the orientation of the new colony’s layout. On Earth, feng shui was a matter of rivers and mountains, of feeling the warm southern winds and avoiding the cold northern drafts. Here, there are only solar winds and radiation belts. The physical touch of the navigation consoles under their fingers offers no spiritual guidance, leaving them to decide how to align their lives with a geography that has no ground."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You touch the old brass compass, declaring that the orientation of the shrine must remain aligned to the distant coordinate of Earth."
+          ],
+          "choice": {
+            "text": "Anchor the colony's spiritual alignment to the motherworld.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": -1,
+              "worldview": 1,
+              "power": -1,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "earth_aligned_shrine"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You place your hand on the cooling grid of the reactor, proposing that the local star be the new center of their sacred alignment."
+          ],
+          "choice": {
+            "text": "Forge a new celestial alignment based on the local star.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "star_aligned_shrine"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How shall the family manage the transit fees and the shared chapel space with the other immigrant families aboard?",
+        "options": [
+          {
+            "text": "Fund a shared, ecumenical shrine space to build alliances among the working-class passengers.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 2,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "allied_communal_shrine"
+            ]
+          },
+          {
+            "text": "Secure a private, premium compartment for the family's ancestral tablets, preserving their exclusive dignity.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 0,
+              "worldview": -1,
+              "power": 2,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "exclusive_family_shrine"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t5:midpoint"
+    },
+    {
+      "id": "act:chinese:religious:middle:t5:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The temple-station does not have bells of cast bronze; instead, the hours are marked by the clean, synthesized chime of the central computer, broadcast through the comms-mesh. It is a lonely sound, lacking the resonance of the old world where the vibration would shake the dust from the wooden rafters. Underneath this digital chime lies the constant, rhythmic hum of the oxygen pumps, a low mechanical lung that breathes for everyone on board. When the family begins their evening chanting, their voices sound thin and dry, swallowed by the sound-absorbing acoustic foam that lines the walls of the compartment.",
+        "During a quiet interval, a delegation from a rival, corporate-backed immigrant wave arrives. Their boots clank loudly on the deckplates—heavy, magnetic treads that show no reverence for the sacred silence of the sanctuary. They do not come with prayers, but with contracts and dry calculations, seeking to lease the sacred orbital corridors for communications satellites. The sound of their voices is sharp and transactional, a stark contrast to the melodic cadence of the litany {full_name} has just finished reciting."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We drown out their dry negotiations with the resonant, unwavering chorus of the morning prayers."
+          ],
+          "choice": {
+            "text": "Refuse to hear their proposals during the sacred hour.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -1,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "refused_corporate_demands"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We strike a quiet chord, allowing their presentation to proceed in exchange for a dedicated broadcast band for spiritual programming."
+          ],
+          "choice": {
+            "text": "Incorporate their signals into the station's sonic fabric.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "integrated_sacred_signals"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t5:turn"
+    },
+    {
+      "id": "act:chinese:religious:middle:t5:turn",
+      "sense": "sight",
+      "prose": [
+        "Through the thick, multi-layered polymer of the observation dome, the universe looks cold, brilliant, and terrifyingly vast. The stars do not twinkle here; they are hard, unblinking needles of light sewing together the great shroud of the dark. {full_name} stands before the glass, looking at the distant, reddish curve of the colony world below. From this height, no borders are visible, no ancient temples, no graveyards where their ancestors turned back into the dust. There is only the thin, fragile blue line of the atmosphere, a veil they have permanently pierced.",
+        "As the colony ship prepares to drop its landers, the leaders of the migration gather to map the new world's destiny. The physical landscape of the planet is a blank slate, but the social landscape is already hardening. The family's unique position as spiritual pioneers and community organizers gives them immense leverage. They can choose to design the new settlement's civil laws around their traditional religious tenets, build a secular harbor that welcomes all creeds, or monopolize the sacred lands of the landing zone to secure their lineage's power forever."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The dazzling glare of the starfield reflects in your eyes as you prepare to sign the founding charter of the new world."
+          ],
+          "choice": {
+            "text": "Step forward to seal the fate of the colony's laws.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 2,
+              "worldview": 1,
+              "power": 2,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "charter_signed"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You turn your back on the viewdome, focusing your gaze instead on the flickering candle of the family altar."
+          ],
+          "choice": {
+            "text": "Keep your focus entirely on the spiritual integrity of the family unit.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -1,
+              "worldview": 2,
+              "power": -1,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "family_integrity_focused"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "With the landers fueled, what will be the foundational structure of the {family_name} family's authority on the new planet?",
+        "options": [
+          {
+            "text": "Establish a Theocratic Council, ensuring the ancestral rites and moral laws govern all aspects of public life.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 3,
+              "worldview": 3,
+              "power": 2,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "path_theocracy"
+            ]
+          },
+          {
+            "text": "Build a Secular Trust, positioning the family as neutral mediators and wealthy land-lease holders for all incoming migrations.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "worldview": -2,
+              "power": 3,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "path_secular_trust"
+            ]
+          },
+          {
+            "text": "Found a Monastic Sanctuary, retreating from political life to build an isolated mountain temple that preserves the pure, ancient ways.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": -2,
+              "worldview": 3,
+              "power": -1,
+              "tradition": 3,
+              "honor": 3,
+              "lineage": 3,
+              "reach": -1
+            },
+            "setFlags": [
+              "path_monastic_retreat"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:religious:middle:t5:close"
+    },
+    {
+      "id": "act:chinese:religious:middle:t5:close",
+      "sense": "taste",
+      "prose": [
+        "The first tea brewed on the surface of the new world has a flat, mineral bite, the unmistakable trace of heavy-water recycling systems and unfamiliar soil chemistry. It tastes nothing like the spring waters of the old provinces, yet when {given_name} sips it, the warmth spreads through their chest like a slow benediction. In the small garden bay of the colony’s first dome, a single cutting of a domestic plum tree has taken root, its leaves pale under the artificial growth lamps but alive nonetheless. The family sits on synthetic crates, passing a single ceramic cup from hand to hand.",
+        "This is the inheritance they leave to the children who crawl on the anti-static mats of the hab-floor: a faith that survived the crossing of the stars, and a taste for survival. The old world is a dimming speck of dust in the night sky, but the rituals remain unbroken. As the cup is passed to the youngest heir, the bitter, iron-tinged tea is swallowed like a vow—a promise that wherever the {family_name} line walks, they will make the dust of distant worlds sacred."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We pour the dregs of the tea onto the new, alien dirt, cementing our bond with this quiet soil."
+          ],
+          "choice": {
+            "text": "Consecrate the new planet as our permanent home.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "planet_consecrated"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We dry the remaining tea leaves to pack into the next scout ship, looking already toward the stars beyond this one."
+          ],
+          "choice": {
+            "text": "Declare that our pilgrimage is never truly finished.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 2,
+              "power": 1,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "eternal_pilgrims"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,2302 @@
+{
+  "acts": [
+    {
+      "id": "act:baghdad:political:middle:t0",
+      "wave": "baghdad",
+      "archetype": "political",
+      "cls": "middle",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — The Petitioners of New Babylon",
+      "scenes": [
+        "act:baghdad:political:middle:t0:open",
+        "act:baghdad:political:middle:t0:rising",
+        "act:baghdad:political:middle:t0:midpoint",
+        "act:baghdad:political:middle:t0:turn",
+        "act:baghdad:political:middle:t0:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:political:middle:t2",
+      "wave": "baghdad",
+      "archetype": "political",
+      "cls": "middle",
+      "tier": 2,
+      "macroAct": "emergence",
+      "title": "Act III — The Cardamom Ballot",
+      "scenes": [
+        "act:baghdad:political:middle:t2:open",
+        "act:baghdad:political:middle:t2:rising",
+        "act:baghdad:political:middle:t2:midpoint",
+        "act:baghdad:political:middle:t2:turn",
+        "act:baghdad:political:middle:t2:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:political:middle:t3",
+      "wave": "baghdad",
+      "archetype": "political",
+      "cls": "middle",
+      "tier": 3,
+      "macroAct": "emergence",
+      "title": "Act IV — The Saffron Ledger and the Caucus-Room Floor",
+      "scenes": [
+        "act:baghdad:political:middle:t3:open",
+        "act:baghdad:political:middle:t3:rising",
+        "act:baghdad:political:middle:t3:midpoint",
+        "act:baghdad:political:middle:t3:turn",
+        "act:baghdad:political:middle:t3:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:political:middle:t4",
+      "wave": "baghdad",
+      "archetype": "political",
+      "cls": "middle",
+      "tier": 4,
+      "macroAct": "ascension",
+      "title": "Act V — The Ambassador of the Silt and Stone",
+      "scenes": [
+        "act:baghdad:political:middle:t4:open",
+        "act:baghdad:political:middle:t4:rising",
+        "act:baghdad:political:middle:t4:midpoint",
+        "act:baghdad:political:middle:t4:turn",
+        "act:baghdad:political:middle:t4:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:political:middle:t5",
+      "wave": "baghdad",
+      "archetype": "political",
+      "cls": "middle",
+      "tier": 5,
+      "macroAct": "ascension",
+      "title": "Act VI — The Covenant of the New Crescent",
+      "scenes": [
+        "act:baghdad:political:middle:t5:open",
+        "act:baghdad:political:middle:t5:rising",
+        "act:baghdad:political:middle:t5:midpoint",
+        "act:baghdad:political:middle:t5:turn",
+        "act:baghdad:political:middle:t5:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:political:middle:t1",
+      "wave": "baghdad",
+      "archetype": "political",
+      "cls": "middle",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — The Ledger of the Tigris Guild",
+      "scenes": [
+        "act:baghdad:political:middle:t1:open",
+        "act:baghdad:political:middle:t1:rising",
+        "act:baghdad:political:middle:t1:midpoint",
+        "act:baghdad:political:middle:t1:turn",
+        "act:baghdad:political:middle:t1:close"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "act:baghdad:political:middle:t0:open",
+      "sense": "smell",
+      "prose": [
+        "The air in the harbor basin did not carry the dry, sun-baked dust of the plains or the sweet, muddy warmth of the Tigris; instead, it was a heavy, suffocating soup of burning bitumen, wet lime, and the rancid fat of roasting mutton from the dockside cookshops. The sulfurous breath of coal gas hung over the cobblestones like an invisible canopy, clinging to the damp wool of your coat and settling into the creases of your leather-bound registry ledger. Even the ink in the glass well smelled different here—sour and biting, mixed with wood vinegar that stung the nostrils whenever the clerk uncorked it.",
+        "Your father stood upon a wooden packing crate, his fingers smelling of the lavender water he used to preserve some semblance of administrative dignity amid the chaos of the landing. He was shouting instructions over the din, his voice thick with the cadence of the old capital, directing the confused families who wandered through the gates with their bundles of bedding and copper pots. The scent of foreign tobacco from the watchmen's pipes drifted past, a constant reminder that every petition, every permission, and every scrap of bread would now have to be negotiated in a tongue that tasted like ash."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We set up our folding desk directly beneath the gantry, where the smell of wet hemp and steam-oil is thickest, to draft the newcomers' first declarations."
+          ],
+          "choice": {
+            "text": "Act as the official scribe for the disoriented families.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "t0_scribe_foothold"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We bypass the dockside scribes entirely, quietly guiding our people past the predatory inspectors toward the boarding houses we secured."
+          ],
+          "choice": {
+            "text": "Lead the families directly to the safety of our designated quarter.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "t0_quiet_settlement"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t0:rising"
+    },
+    {
+      "id": "act:baghdad:political:middle:t0:rising",
+      "sense": "touch",
+      "prose": [
+        "The cold of the new world was a sharp, physical weight that pressed against the chest, seeped through the soles of thin leather boots, and turned the iron railings of the tenement stairs into bars of ice. Your fingers grew stiff and clumsy as you tried to hold the steel nib against the rough, wood-pulp paper of the city registration forms, each stroke a battle against the trembling of your hand. The heavy, double-woven wool of your broadcloth coat—the mark of a respectable administrative family back home—felt stiff and foreign, scratchy against the neck and damp from the perpetual drizzle that clung to the brick facades.",
+        "When the local ward agent pushed his way into your narrow parlor, his hand was calloused and dry, his grip like rough pine as he clutched your shoulder to assert his authority. He brought with him the damp chill of the street, shaking his heavy oilskin coat and leaving wet, gray prints upon your mother's clean woven rug. Every interaction in this crowded district was a matter of physical friction; you had to squeeze past bodies on the narrow stairs, rub shoulders with hostile draymen in the alleys, and constantly feel the hard, unyielding edges of a city built of iron and stone."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You firmly remove his hand from your shoulder, refusing to let physical intimidation dictate the terms of your community's cooperation."
+          ],
+          "choice": {
+            "text": "Stand firm against the ward agent's physical posturing.",
+            "motivatorShift": {
+              "politics": 1,
+              "honor": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "t0_stood_firm"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You swallow your pride, offering him a warm glass of tea to soften his rough temper and secure his tolerance."
+          ],
+          "choice": {
+            "text": "Pacify the agent with traditional hospitality.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "t0_pacified_agent"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The local precinct captains demand that your people register under their political club to secure their residence permits. How does the {family_name} line respond?",
+        "options": [
+          {
+            "text": "Comply with the club, trading immediate obedience for protected jobs and housing.",
+            "motivatorShift": {
+              "power": 2,
+              "wealth": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "t0_machine_compliance"
+            ]
+          },
+          {
+            "text": "Form our own independent civic association to negotiate with the ward bosses as a unified bloc.",
+            "motivatorShift": {
+              "politics": 2,
+              "reach": 2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "t0_independent_association"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t0:midpoint"
+    },
+    {
+      "id": "act:baghdad:political:middle:t0:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The tenement courtyard was a cavern of echoes, magnifying the shrill whistles of steam engines, the clatter of iron-shod wheels on stone, and the strange, clipped vowels of the host nation. Below your window, the rising generation of the {family_name} line argued in a hybrid tongue, mixing the soft, flowing cadences of their homeland with the sharp, percussive slang of the docks. The heavy thud of timber from the nearby lumber yards vibrated through the floorboards, a rhythmic accompaniment to the endless debates that filled your parlor from dusk until midnight.",
+        "Into this noisy enclave came the representatives of an older, established immigrant line, their voices loud and resonant with the confidence of those who had arrived decades prior. Their spokesman spoke with a booming, theatrical baritone, his boots thumping against the floorboards as he laid out a proposition for a shared political front. He warned that if the newer arrivals did not blend their voices into the existing choir, they would be drowned out entirely by the roar of the city's changing factions."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You raise your voice above the din, insisting that your community's unique concerns will not be silenced in a broader coalition."
+          ],
+          "choice": {
+            "text": "Demand equal billing and distinct representation in the alliance.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "t0_alliance_demands"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You listen quietly, noting the cracks in their confident tone, and prepare to negotiate from a position of patient silence."
+          ],
+          "choice": {
+            "text": "Agree to the coalition while quietly maintaining your own separate networks.",
+            "motivatorShift": {
+              "power": 2,
+              "worldview": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "t0_silent_coalition"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t0:turn"
+    },
+    {
+      "id": "act:baghdad:political:middle:t0:turn",
+      "sense": "sight",
+      "prose": [
+        "Under the flickering, yellow glare of the gas lamps, the assembly room was a sea of dark wool caps and pale, anxious faces turned toward your family. Through the cracked windowpanes, the silhouettes of the factory chimneys loomed like soot-blackened monuments against the gray evening sky, their plumes of smoke blotting out the stars. You looked down at the petition papers spread across the table, the columns of signatures—some written in elegant, flowing script, others marked only with a simple, ink-stained cross—representing the entire future of your people in this ward.",
+        "Beside you, your father adjusted his silver-rimmed spectacles, his eyes scanning the crowd of shopkeepers, clerks, and laborers who had gathered in the dim light. They had built this neighborhood brick by brick, yet the municipal maps on the wall showed their homes marked out for demolition to make way for a new rail spur. The sight of those cold, blue-inked lines on the surveyor's map made the stakes of your political survival agonizingly clear: either the {family_name} line would learn to wield the pen of the law, or they would be swept away by it."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Your eyes trace the bold signatures of the reform league, recognizing the danger of challenging the established bosses so openly."
+          ],
+          "choice": {
+            "text": "Cast your lot with the independent reformers to clean up the ward.",
+            "motivatorShift": {
+              "politics": 2,
+              "worldview": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "t0_aligned_reform"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You look at the official stamp of the city hall machine, knowing that survival often requires kissing the hand you cannot cut."
+          ],
+          "choice": {
+            "text": "Sign the secret agreement with the ward boss to protect your streets.",
+            "motivatorShift": {
+              "power": 2,
+              "wealth": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "t0_aligned_machine"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The municipal election is at hand, and your family's block of voters will decide the ward. How do the {family_name} petitioners deploy their influence?",
+        "options": [
+          {
+            "text": "Throw our entire support behind the ruling machine in exchange for patronage appointments and safe business charters.",
+            "motivatorShift": {
+              "power": 3,
+              "wealth": 2,
+              "honor": -2,
+              "reach": 1
+            },
+            "setFlags": [
+              "t0_machine_patronage"
+            ]
+          },
+          {
+            "text": "Run an independent candidate from our own ranks, declaring our refusal to be ruled by foreign machines.",
+            "motivatorShift": {
+              "politics": 3,
+              "honor": 3,
+              "lineage": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "t0_independent_crusade"
+            ]
+          },
+          {
+            "text": "Boycott the ballot box, focusing our resources on building our own schools and mutual-aid structures outside the state's reach.",
+            "motivatorShift": {
+              "tradition": 3,
+              "worldview": 2,
+              "wealth": 1,
+              "politics": -2
+            },
+            "setFlags": [
+              "t0_insular_community"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t0:close"
+    },
+    {
+      "id": "act:baghdad:political:middle:t0:close",
+      "sense": "taste",
+      "prose": [
+        "The taste of the victory dinner was sweet, yet lingeringly bitter with the sediment of cardamom coffee brewed in a brass pot that had survived the journey across the sea. Each cup was thick, dark, and gritty, sweetened with refined white sugar that left a sharp, artificial tang on the tongue—a stark contrast to the wild honey of the home valleys. On the table lay the freshly stamped deed to the new community hall, its parchment smelling of vinegar and dry ink, tasting of the cheap flour and salted beef that had sustained the campaign workers through the long winter nights.",
+        "As the young heir of the {family_name} name, you took a slow sip, letting the heat of the spice warm your throat against the damp draft whistling under the door. You had bought this foothold with concessions, with late-night bargains, and with the pride of your elders. The name you would carry forward was no longer just a registry entry in a lost capital; it was now written in the municipal ledgers of this cold city, seasoned by the salt of the docks and the sharp, metal taste of political survival."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You set down your cup, tasting the iron-like residue of the local water, and swear to expand the family's reach beyond this single ward."
+          ],
+          "choice": {
+            "text": "Vow to carry the {family_name} name into the higher courts of the state.",
+            "motivatorShift": {
+              "reach": 2,
+              "power": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "t0_ambition_statewide"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You savor the rich warmth of the cardamom, reminding the gathered elders that our strength lies in preserving our heritage within these foreign walls."
+          ],
+          "choice": {
+            "text": "Pledge to protect the community's traditional heart from external dilution.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "t0_ambition_traditional"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:political:middle:t2:open",
+      "sense": "smell",
+      "prose": [
+        "The smell of roasted cardamom seeds, crushed in the brass mortar by {given_name}’s own hand, always fought a losing battle against the heavy, sulfuric reek of the nearby gasworks. It was the scent of their transition: the sweet, nostalgic spice of the old country clinging to wool coats that had been dampened by the city's relentless, soot-choked rain. In this rented second-floor flat above the dry-goods shop, the air was a thick soup of boiling mutton broth, wet newsprint from the newly acquired printing press, and the sharp, vinegar tang of cheap ink. Here, the {family_name} name was being re-inked from a list of laborers into the rosters of ward organizers.",
+        "Stepping onto the narrow balcony, the smell shifted to the dry, dusty scent of stacked timber and the parched earth of the unpaved alleys below, where newly arrived families from the old riverbanks sought directions. They came to the flat not just for charity, but for translation, looking for the man who could turn their grievances into English petitions that the alderman could not ignore. {given_name} watched the smoke rise from the chimney pots, knowing that every hearth represented a vote, and every vote was a brick in the fortress they were building to keep the cold of poverty at bay."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You decide to host the weekly ward meeting in the cramped parlor, letting the scent of heavy Iraqi tea disarm the skeptical local precinct captain."
+          ],
+          "choice": {
+            "text": "Use domestic hospitality to bind the precinct captain to your interest.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 2,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "hospitality_diplomacy"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You take the petition directly to the municipal offices, bypassing the local club and relying on the sharp smell of fresh ink on your official letters to command respect."
+          ],
+          "choice": {
+            "text": "Assert your independence by dealing directly with city hall.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "direct_petition"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t2:rising"
+    },
+    {
+      "id": "act:baghdad:political:middle:t2:rising",
+      "sense": "touch",
+      "prose": [
+        "The parchment of the city’s tax assessment felt rough and fibrous under {given_name}'s fingertips, a physical manifestation of the boundary between those who paid the city and those who owned it. To climb higher, one had to touch the grease of local machinery—the damp, sweat-stained palms of ward bosses who expected absolute loyalty in exchange for minor municipal contracts. {given_name} ran a hand over the polished mahogany of the campaign desk, a second-hand piece that still bore the deep scratches of some forgotten clerk’s pen, feeling the sudden, cold weight of what it would cost to keep this seat.",
+        "Your cousin, eager to secure a foothold in the newly planned public works, pressed a folded envelope into your hand; the paper was thick and slightly oily from the tallow candle he had worked by. It contained the names of three young men from their own community who had been caught operating an unlicensed cargo ferry across the canal. The local magistrate was willing to let it slide, but only if the {family_name} family publicly endorsed his rival’s infrastructure bill—a bill that would tax the very immigrants who had built their small fortunes on those waters."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You squeeze your cousin's hand, accepting the heavy envelope and the compromise that protects your kin at the expense of your public platform."
+          ],
+          "choice": {
+            "text": "Shield your countrymen from the law, solidifying clan loyalty over abstract policy.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": -1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 2,
+              "honor": -1,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "clan_protectionist"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You let the paper slip onto the desk, refusing the bribe and pushing for a transparent review of the ferry licensing."
+          ],
+          "choice": {
+            "text": "Uphold your political purity to appeal to the reform-minded middle class.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 2,
+              "worldview": 2,
+              "power": 1,
+              "tradition": -1,
+              "honor": 2,
+              "lineage": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "clean_reformer"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A local merchant association offers to fund your next municipal campaign, but they demand you support zoning laws that would displace the newer, poorer tenements of your own wave.",
+        "options": [
+          {
+            "text": "Accept their backing; a seat on the council is worth temporary betrayal of the newcomers.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": -2,
+              "power": 2,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "beholden_to_merchants"
+            ]
+          },
+          {
+            "text": "Reject the funding and stand with the tenement dwellers, cementing your role as the champion of the displaced.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "tribune_of_the_tenements"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t2:midpoint"
+    },
+    {
+      "id": "act:baghdad:political:middle:t2:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The clatter of iron-shod carriage wheels on cobblestones was different here in the northern district; it lacked the frantic, rattling speed of the slum dray-carts, replaced instead by the rhythmic, steady clop of sleek geldings drawing polished broughams. In the parlor of a rival political dynasty—whose ancestors had arrived three generations before the first {family_name} set foot on the docks—the sound of a grandfather clock ticking with slow, majestic indifference punctuated the tense conversation. {given_name} listened to the soft clink of silver spoons against porcelain, a delicate, fragile sound that seemed to mock the boisterous shouts of the market ward they had left behind.",
+        "The rival patriarch spoke in hushed, modulated tones, his voice carrying the effortless authority of inherited wealth. He offered a truce: a minor administrative post in the health department for {given_name}’s brother, provided the {family_name} faction stopped registering new immigrant voters in the western district. Outside the window, the distant hum of the city's factories sounded like a low, vibrating drone, a reminder of the thousands of working-class lungs that depended on the clean water and fair representation that this very truce would compromise."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You listen to the quiet tick of the clock, agreeing to the compromise in exchange for a secure, comfortable foothold in the bureaucracy."
+          ],
+          "choice": {
+            "text": "Accept the administrative post to plant your family within the permanent civil service.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "bureaucratic_foothold"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You raise your voice, letting your laughter shatter the polite silence of the room as you reject their quiet containment."
+          ],
+          "choice": {
+            "text": "Defiantly break the truce, promising to register every voter from the docks to the canal.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 3,
+              "worldview": 2,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "registration_offensive"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t2:turn"
+    },
+    {
+      "id": "act:baghdad:political:middle:t2:turn",
+      "sense": "sight",
+      "prose": [
+        "From the balcony of the new municipal hall, the city unfolded as a vast, gray grid of slate roofs, brick chimneys, and the silver, winding ribbon of the river that had brought them here. {given_name} looked out over the crowd gathered for the dedication of the new public library—a grand, classical structure of white limestone that stood like a monument of modern progress amid the soot-stained tenements. The bright glare of the afternoon sun reflected off the building’s tall glass windows, casting long, sharp shadows over the thousands of upturned faces, many of them belonging to the very families who had carried the stones to build it.",
+        "Inside the grand foyer, the walls were decorated with murals depicting the city's founders, none of whom wore the traditional robes or bore the surnames of the eastern valleys. {given_name} stood before a massive bronze plaque that was to be cast with the names of the building’s steering committee. There was a space left empty, a silent invitation or a challenge, depending on which way the {family_name} aligned their growing political block. To be etched in bronze meant accepting the city's terms—submerging their distinct identity into the melting pot of the civic elite—or maintaining their separate, powerful ward machine."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Your eyes trace the empty space on the bronze plaque, realizing that permanent legacy requires assimilation into the city's civic mythology."
+          ],
+          "choice": {
+            "text": "Support the integration of your ward into the city's centralized educational system.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "integrated_legacy"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You look away from the classical columns, choosing instead to focus your sight on the muddy streets where your people's parochial schools still stand."
+          ],
+          "choice": {
+            "text": "Champion the preservation of your community's private, traditional institutions.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": -2,
+              "power": 2,
+              "tradition": 3,
+              "honor": 1,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "parochial_isolation"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The city council proposes a sweeping charter reform that will abolish ward-based voting in favor of at-large citywide elections, a move designed to dilute your immigrant base's concentrated power.",
+        "options": [
+          {
+            "text": "Launch a fierce public campaign to defeat the reform, preserving the ward system that guarantees your local stronghold.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 3,
+              "worldview": -1,
+              "power": 3,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "ward_boss_champion"
+            ]
+          },
+          {
+            "text": "Embrace the at-large system and form a broad, multicultural coalition to win citywide office, risking your base for a grander prize.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": 3,
+              "power": 3,
+              "tradition": -3,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "coalition_builder"
+            ]
+          },
+          {
+            "text": "Cut a backroom deal to support the reform in exchange for guaranteed safe seats and patronage positions for your core family members.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": -2,
+              "power": 2,
+              "tradition": 1,
+              "honor": -3,
+              "lineage": 3,
+              "reach": 0
+            },
+            "setFlags": [
+              "dynastic_compromiser"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t2:close"
+    },
+    {
+      "id": "act:baghdad:political:middle:t2:close",
+      "sense": "taste",
+      "prose": [
+        "The taste of the victory feast was a rich, complex layer of honeyed baklava and the bitter, dark dregs of Turkish coffee, a combination that lingered on the tongue long after the toasts had ended. In the dining room of their new brick townhouse—purchased with the proceeds of their hard-fought political ascent—{given_name} poured a glass of sweet, imported date wine for the young heir of the {family_name} line. It was a flavor far removed from the watery beer and greasy mutton of their first years in this city, tasting of luxury, influence, and the quiet satisfaction of a transition successfully made.",
+        "Yet, beneath the sweetness of the syrup, there was a faint, metallic taste of iron from the well-water of the neighborhood, a reminder that the roots of their power still drew from the crowded streets below. {given_name} watched the young heir sip the rich vintage, knowing that the inheritance being passed down was not merely a bank account or a deed, but a network of favors, a ledger of debts, and a name that now commanded respect in the corridors of power. The climb had been steep, but the taste of the summit was sweet enough to drown out the memory of the soot."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You toast to the heir's future, urging them to savor the sweetness of the wealth you have built and leave the street fighting behind."
+          ],
+          "choice": {
+            "text": "Advise the heir to consolidate your material wealth and seek a life of refined influence.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": -1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "gentry_aspiration"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You hand them the ledger of political favors, telling them to never forget the bitter taste of the struggle that bought their comfort."
+          ],
+          "choice": {
+            "text": "Instruct the heir to maintain the aggressive political machine at all costs.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 3,
+              "worldview": -1,
+              "power": 3,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "machine_continuity"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:political:middle:t3:open",
+      "sense": "smell",
+      "prose": [
+        "The sharp, vinegary tang of wet ink on fresh newsprint fills the back room of the dry goods shop, mingling with the rich, roasted aroma of cardamom coffee simmering on the small brass stove. This is where the neighborhood’s future is written. On the crowded table, bundles of voter registration slips smell of cheap wood pulp and damp autumn rain, gathered from every tenement block where their compatriots have settled.",
+        "Behind the desk, {given_name} drafts the petition that will go before the municipal commission. The scent of sweet tobacco from the pipe of a visiting precinct captain hangs heavy in the air, a sign that the established political machines are finally beginning to take notice of the {surname} name. No longer are they merely quiet shopkeepers seeking to avoid trouble; they are a organized bloc, and their presence smells of a changing tide in the city's halls of power.",
+        "For the family, this room is a sanctuary where the memory of the old country’s markets blends with the cold reality of municipal campaigns. Every flyer printed bears the family name, carrying a scent of industriousness and hope to those who look to {given_name} for a voice in a system that has ignored them for far too long."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We must ensure our people’s names are spelled correctly on the rolls, for every letter is a shield against disenfranchisement."
+          ],
+          "choice": {
+            "text": "Focus the campaign on meticulously securing the community's legal rights.",
+            "motivatorShift": {
+              "honor": 2,
+              "politics": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "t3_focus_legitimacy"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Let the flyers burn with the language of reform, turning the scent of ink into a fire that rouses the ward's working men."
+          ],
+          "choice": {
+            "text": "Adopt a bolder, populist tone to challenge the established wards.",
+            "motivatorShift": {
+              "power": 2,
+              "politics": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "t3_focus_populism"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t3:rising"
+    },
+    {
+      "id": "act:baghdad:political:middle:t3:rising",
+      "sense": "touch",
+      "prose": [
+        "The cold, polished brass of the City Hall railings feels like ice against {given_name}’s fingers as they ascend the grand staircase. Inside, the environment changes from the rough, splintered pine of the immigrant ward's assembly rooms to the smooth, oiled mahogany of committee tables. Every surface here has been worn smooth by generations of hands that have held power, and the weight of that history is palpable in the dry, heavy cardstock of the Mayor's formal invitation.",
+        "A local ward boss stops {given_name} in the corridor, pressing a heavy, manicured hand onto their shoulder with a patronizing warmth that feels more like a physical constraint than a gesture of friendship. He slips a folded paper into {given_name}'s pocket—a list of municipal jobs that could be filled by {surname} supporters, provided certain council votes fall the correct way. The grit of coal dust from the harbor workers' hands still clings to {given_name}'s coat, a stark contrast to the soft silk of the boss's pocket square.",
+        "This is the friction of political advancement: the pressure to conform, to trade the raw energy of the community for the comfortable upholstery of an appointed office. {given_name} must choose which texture will define the family's path forward."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "To build a legacy, one must sometimes wear the velvet glove of the establishment while securing the bread for our people."
+          ],
+          "choice": {
+            "text": "Accept the patronage jobs to solidify the family's material influence.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "t3_patronage_accepted"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The calloused hands of our neighbors are a firmer foundation than any promise made in these carpeted offices."
+          ],
+          "choice": {
+            "text": "Reject the compromise to maintain independence from the city machine.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "t3_patronage_rejected"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How will the family navigate the temptation of patronage in the rising campaign?",
+        "options": [
+          {
+            "text": "Accept the patronage to secure immediate employment for the ward's families.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "t3_patronage_ally"
+            ]
+          },
+          {
+            "text": "Denounce the patronage offer publicly to rally the independent voters.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 2,
+              "power": -1
+            },
+            "setFlags": [
+              "t3_patronage_foe"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t3:midpoint"
+    },
+    {
+      "id": "act:baghdad:political:middle:t3:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The council chamber is a cavern of echoes, where the dry scraping of heavy chairs on marble floors sounds like the grinding of millstones. Above the murmuring crowd, the sharp, rhythmic rap of the chairman's gavel cuts through the air, demanding order from a public gallery that refuses to be silenced. {given_name} listens to the low, urgent whispering of translators in the back row, converting the formal English of the charter debates into the familiar dialects of the Tigris.",
+        "A rival representative from an older, established dynasty takes the floor, their voice clear and clipped with the patrician arrogance of the city's founding families. They speak of 'preserving the character' of the wards, a thinly veiled call to divide the immigrant districts so their voting power is scattered. From the gallery, a collective gasp rises, followed by the stomping of heavy workboots and the defiant cheers of the {surname} loyalists who have packed the benches.",
+        "In this clash of voices, the future of the wave hangs in the balance. The sound of their own name being shouted from the gallery gives {given_name} a sudden, clear realization of the power they now wield—a power born not from old wealth, but from the chorus of thousands of voices demanding to be heard."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Let the noise of the streets fill this hall until the representatives realize they can no longer ignore us."
+          ],
+          "choice": {
+            "text": "Encourage the gallery's protest to pressure the council committee.",
+            "motivatorShift": {
+              "politics": 2,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "t3_gallery_protest"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We must speak with the calm, quiet authority of statesmen if we wish to be treated as equals."
+          ],
+          "choice": {
+            "text": "Call for order to demonstrate the family's capacity for governance.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "t3_gallery_order"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t3:turn"
+    },
+    {
+      "id": "act:baghdad:political:middle:t3:turn",
+      "sense": "sight",
+      "prose": [
+        "Morning light streams through the tall, grime-streaked windows of the campaign headquarters, illuminating the great map of the city pinned to the wall. Bold red lines of ink trace the proposed new ward boundaries—a gerrymandered puzzle designed to split the {surname} coalition into pieces, diluting their strength across four separate districts. {given_name} stares at the map, seeing how easily a community can be erased from the political landscape with a few strokes of a cartographer’s pen.",
+        "On the table sits the alternative: a counter-map drawn by their own young organizers, uniting the tenement districts into a single, formidable congressional district. It is a beautiful, aggressive sight, but to push for it means entering a state of total political warfare against both established parties. The emissary from the state capital stands nearby, watching {given_name} with a cool, assessing gaze, waiting to see if the family will accept a guaranteed, minor seat in exchange for abandoning the fight for the larger community map.",
+        "The visual contrast is stark: a safe, quiet future of modest influence within the boundaries set by others, or a dangerous, historic leap that could elevate the {surname} name into a national symbol of immigrant representation."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Our eyes must remain on the larger map; we cannot trade the future of our people for a comfortable, isolated seat."
+          ],
+          "choice": {
+            "text": "Reject the state's compromise and fight for the unified immigrant district.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 2,
+              "politics": 1
+            },
+            "setFlags": [
+              "t3_fought_for_district"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A bird in the hand is worth more than a flight of fancy; we must secure what we can lay our eyes upon today."
+          ],
+          "choice": {
+            "text": "Accept the guaranteed seat to preserve the family's immediate legislative foothold.",
+            "motivatorShift": {
+              "wealth": 1,
+              "lineage": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "t3_accepted_guarantee"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {surname} family position themselves in this defining political realignment?",
+        "options": [
+          {
+            "text": "Launch an independent coalition, defying the machine to build an immigrant-led progressive party.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 2,
+              "worldview": 2,
+              "tradition": -2
+            },
+            "setFlags": [
+              "t3_path_independent"
+            ]
+          },
+          {
+            "text": "Integrate the family into the dominant party machine, securing long-term influence from within.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 3,
+              "lineage": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "t3_path_machine"
+            ]
+          },
+          {
+            "text": "Withdraw from electoral campaigns to focus entirely on building community unions and cooperative banks.",
+            "motivatorShift": {
+              "tradition": 3,
+              "honor": 2,
+              "wealth": 1,
+              "politics": -2
+            },
+            "setFlags": [
+              "t3_path_cooperative"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t3:close"
+    },
+    {
+      "id": "act:baghdad:political:middle:t3:close",
+      "sense": "taste",
+      "prose": [
+        "The taste of sweet, warm baklava and strong, bitter coffee lingers as the election night crowd finally thins. In the campaign office, plates of half-eaten food from the victory feast sit alongside stacks of tally sheets. For the first time, the taste of success is not just a personal triumph, but a collective achievement that has been earned through months of struggle on the pavement.",
+        "{given_name} pours a final glass of mint tea for the heir, watching the steam rise in the cool night air. The bitter taste of the long, sleepless nights of campaigning is replaced by the rich flavor of a legacy secured. The {surname} name is no longer just whispered in the tenement corridors; it is spoken on the radio, printed in the headlines, and respected in the halls of the legislature.",
+        "As the ledger is closed, the family's reputation is passed to the next generation—not as a passive inheritance, but as a seasoned political instrument. They have tasted power, and they have shown their people that the halls of this nation belong to those who have the courage to claim them."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Keep the taste of our people's struggles fresh on your tongue, and never let the rich food of the capitol make you forget where we began."
+          ],
+          "choice": {
+            "text": "Charge the heir to remain a servant of the community's daily needs.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "t3_legacy_community"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We have tasted what is possible; now we must hunger for national influence, for our journey has only just begun."
+          ],
+          "choice": {
+            "text": "Encourage the heir to expand the family's reach into broader, national arenas.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "t3_legacy_national"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:political:middle:t4:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of cardamom-spiced coffee simmering in a polished brass dallah was a quiet rebellion against the sterile, chemical aroma of fresh xerox toner and damp wool coats that filled the committee room. Here, in the mahogany-paneled corridors of state, the old-world hospitality of the {family_name} line met the sharp, cold smell of modern bureaucracy. For decades, the family had served as the quiet hinge between a displaced community and the grinding gears of foreign policy, but now, the air was thick with the scent of real, uncontested authority.",
+        "As {given_name} {surname} adjusted the heavy lapels of a tailored suit, the lingering fragrance of cedarwood chest liners from the family's first immigration trunks seemed to rise up from the floorboards, a ghost of leaner times. On the desk lay the draft of the new bilateral trade accord—an agreement that would route millions in development funds back through the very shipping lines the diaspora had built. It smelled of ink, of high-grade paper, and of a hard-won victory that had taken three generations to dry."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You decide to sign the preliminary caucus registry, cementing your family's faction as the primary gatekeepers for the new Middle Eastern development fund."
+          ],
+          "choice": {
+            "text": "Sign the registry to anchor your domestic faction's influence.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 3,
+              "worldview": 1,
+              "power": 2,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "caucus_registered"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You pause, choosing instead to route the meeting through private diplomatic channels first, smelling a trap if your name is too publicly attached to the early draft."
+          ],
+          "choice": {
+            "text": "Decline the public signing to pursue quiet backchannel leverage.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": 2,
+              "power": 3,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "backchannel_strategy"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t4:rising"
+    },
+    {
+      "id": "act:baghdad:political:middle:t4:rising",
+      "sense": "touch",
+      "prose": [
+        "The heavy, hand-knotted wool of the Persian rug beneath your leather-soled shoes offered a familiar, grounding texture as the shouting of the special sub-committee echoed around the marble walls. You ran a finger along the cold, gilded edge of the treaty binder, feeling the microscopic ridges of the seal that represented thousands of lives back in the old neighborhoods. The paper was crisp, almost sharp enough to cut, a physical manifestation of the high-stakes leverage {given_name} now held over the federal budget.",
+        "When an ambitious young lobbyist from a rival reconstruction firm tried to slide a revised annex across the table, the texture of the glossy, cheap paper felt like an insult under your fingertips. The {family_name} dynasty had not survived the long transit from Baghdad's dusty avenues to these gilded chambers to be undone by a low-grade corporate compromise. Every grain of the polished oak table seemed to hum with the pressure of a community waiting to see if their champion would bend under the weight of national scrutiny."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You slide the annex back with a slow, deliberate tap of your finger, refusing to let corporate interests dilute the diaspora's priority."
+          ],
+          "choice": {
+            "text": "Reject the lobbyist's compromise with cold finality.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 2,
+              "worldview": 1,
+              "power": 3,
+              "tradition": 2,
+              "honor": 3,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "lobbyist_rejected"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You accept the paper, letting your thumb trace the corporate logo, calculating how their logistics network could secretly accelerate your own projects."
+          ],
+          "choice": {
+            "text": "Absorb their proposal to coop their resources into your network.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "lobbyist_coopted"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How will you handle the sudden, intense scrutiny of the federal ethics committee regarding your family's foreign assets?",
+        "options": [
+          {
+            "text": "Expose the committee's own partisan biases to the press, framing it as an attack on the diaspora.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 3,
+              "worldview": 2,
+              "power": 2,
+              "tradition": 1,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "public_offensive"
+            ]
+          },
+          {
+            "text": "Quietly liquidate the disputed overseas holdings, sacrificing short-term capital for clean political standing.",
+            "motivatorShift": {
+              "wealth": -3,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 2,
+              "honor": 3,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "clean_hands"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t4:midpoint"
+    },
+    {
+      "id": "act:baghdad:political:middle:t4:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The sound of the world player's arena was not a single voice, but a deafening composite: the frantic clicking of press cameras, the rhythmic static of translation headsets, and the low, rumbling murmur of foreign attachés discussing the {family_name} rise. Inside the grand rotunda, {given_name} listened to the distinct accent of an old family rival who had also crossed the ocean decades ago. The rival's voice was sharp, dry, and filled with the old country's regional cadence, attempting to persuade a group of western senators that your family did not speak for the true sons of Mesopotamia.",
+        "Every footstep on the travertine floor echoed like a gavel strike. You could hear the rustle of the security details shifting their weight, the low hum of the air conditioning system, and the steady, confident tone of your own daughter as she coached a freshman representative in the alcove. The century was turning, and the sound of your family's name was now being spoken in four different languages across the diplomatic floor, no longer a whisper in a basement community center, but a dominant chord in the state's grand symphony."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You raise your voice to deliver a commanding, unscripted address that drowns out the rival's quiet poison."
+          ],
+          "choice": {
+            "text": "Address the assembly directly to assert absolute narrative control.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 3,
+              "worldview": 2,
+              "power": 3,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "orator_triumph"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You listen in silence, letting the rival overextend themselves before quietly leaking their private financial records to the press corps."
+          ],
+          "choice": {
+            "text": "Use the quiet weapon of exposure to dismantle their credibility.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": -1,
+              "power": 3,
+              "tradition": 0,
+              "honor": -1,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "quiet_leak"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t4:turn"
+    },
+    {
+      "id": "act:baghdad:political:middle:t4:turn",
+      "sense": "sight",
+      "prose": [
+        "From the high balcony of the international commission, the world lay before {given_name} in a tapestry of light and steel. The grand harbor below was crowded with container ships flying the flags of nations your ancestors only read about in leather-bound volumes, each vessel carrying cargo influenced by the trade corridors your family helped draft. The bright glare of television studio lights reflected off the polished mahogany banisters, casting sharp, dramatic shadows across the faces of the global delegates assembled below.",
+        "You watched the flashing green digits of the international market boards as they flickered with the news of your latest legislative victory. On the center table, the final charter for the Reconstruction and Development Coalition sat beneath a spotlight, its signatures dry, its pages waiting for the one seal that would define the next fifty years of global migration and policy. The sight of your family crest, newly minted on the official delegation stationery, was a testament to an ascent that could no longer be contained by borders or oceans."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You gaze upon the document, realizing that your family's signature will forever bind the destiny of your homeland's resources to the western alliance."
+          ],
+          "choice": {
+            "text": "Focus the vision of the family toward permanent western integration.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "worldview": 2,
+              "power": 2,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "western_alliance_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You look at the map and choose to preserve a strictly independent, diaspora-first network, keeping one foot firmly planted in the soil of your origin."
+          ],
+          "choice": {
+            "text": "Pivot the family's vision to maintain an independent diaspora network.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 3,
+              "worldview": 3,
+              "power": 2,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 3,
+              "reach": 1
+            },
+            "setFlags": [
+              "diaspora_independence"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "With the global eyes of the treaty commission upon you, what is the ultimate legacy the {family_name} line will cement this generation?",
+        "options": [
+          {
+            "text": "Institutionalize the line by securing a hereditary seat on the International Reconstruction Board, prioritizing global reach.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": 1,
+              "power": 4,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 3,
+              "reach": 4
+            },
+            "setFlags": [
+              "legacy_institution"
+            ]
+          },
+          {
+            "text": "Establish a global foundation funded by private tariffs, ensuring the family's wealth is directly tied to the protection of the migrant class.",
+            "motivatorShift": {
+              "wealth": 4,
+              "politics": 1,
+              "worldview": 3,
+              "power": 1,
+              "tradition": 2,
+              "honor": 3,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "legacy_foundation"
+            ]
+          },
+          {
+            "text": "Leverage your political capital to secure sovereign ministerial positions in the old country, establishing a dual-nation dynasty.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 4,
+              "worldview": 2,
+              "power": 3,
+              "tradition": 4,
+              "honor": 2,
+              "lineage": 3,
+              "reach": 2
+            },
+            "setFlags": [
+              "legacy_sovereign"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t4:close"
+    },
+    {
+      "id": "act:baghdad:political:middle:t4:close",
+      "sense": "taste",
+      "prose": [
+        "The taste of the evening's final toast was a complex blend of bitter, aged anisette and the rich, sugary sweetness of date syrup drizzled over freshly baked kleicha. It was a flavor profile that only a child of both worlds could fully appreciate—the sharp sting of western high society mixed with the deep, warm comfort of the Tigris banks. As {given_name} drained the small glass, the warmth settled in your chest, a quiet celebration of a generation that had successfully transformed from desperate arrivals to architects of global policy.",
+        "Your heir stood by the window, looking out over the harbor, their young face reflected in the dark glass. You passed them the remaining plate of sweets, noting the way they accepted the inheritance with an easy, unshakeable confidence that you had to fight decades to earn. The bitterness of exile had finally been distilled into the sweet, heavy wine of global authority. The {family_name} name was no longer just an entry in an immigration ledger; it was written on the foundation stones of the new world."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The taste of success is sweet, but you warn your heir that the bitter roots of their heritage must never be forgotten if they are to hold this power."
+          ],
+          "choice": {
+            "text": "Inculcate the values of heritage and struggle into the next generation.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 2,
+              "worldview": 3,
+              "power": 1,
+              "tradition": 4,
+              "honor": 3,
+              "lineage": 3,
+              "reach": 1
+            },
+            "setFlags": [
+              "heir_tradition"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The taste of the future is pure ambition, and you tell your heir to look only forward to the global markets that await their command."
+          ],
+          "choice": {
+            "text": "Urge the heir to shed the old world's sentimentality for pure global expansion.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 3,
+              "worldview": -1,
+              "power": 3,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 4
+            },
+            "setFlags": [
+              "heir_expansion"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:political:middle:t5:open",
+      "sense": "smell",
+      "prose": [
+        "In the high pressure chambers of the orbital terminal, the air was a sterile, cold draft of nitrogen-oxygen, dry and sharp as a scalpel. Yet, within the private offices of the {surname} delegation, the scent of the home soil lingered like an unwritten treaty. Dried mint leaves, crushed black tea, and a sharp dash of cardamom rose from the copper samovar that sat incongruously on a console of dull carbon-fiber. It was a smell that had traveled across deserts and rivers, and now climbed into the silent cold of the thermosphere.",
+        "{given_name} {surname} adjusted the stiff collar of the diplomatic tunic, watching the condensation bead on the glass viewport. Below them, the sprawling networks of the launch lanes hummed, prep-crews securing the massive transport pods that would carry the first off-world municipal assembly to the colony ships. The family had built its political stature on the bedrock of collective bargaining, translating the old communal councils of their ancestors into space-faring legalities. Now, the stars themselves were waiting for the ink to dry on the transit charters.",
+        "A quiet chime signaled that the docking bay was secure, and with it came the scent of ozone and heated silicon from the corridors. The delegates from the lower orbital rings were arriving, desperate for a voice in the migration lottery. For all the technological grandeur of this new frontier, the struggle remained unchanged: who would be granted the passage, and who would be left behind in the overcrowded valleys below?"
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We can secure the passenger manifests for our closest political allies, cementing our dominance in the new orbital administration."
+          ],
+          "choice": {
+            "text": "Prioritize our domestic voting bloc for the initial colony shuttles.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 2,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "flag_t5_factional_shuttles"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Opening the manifests to a wider lottery might dilute our direct influence, but it will frame our family as the universal protectors of the dispossessed."
+          ],
+          "choice": {
+            "text": "Declare an open lottery for the migration berths, honoring our egalitarian roots.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 2,
+              "power": -1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "flag_t5_open_lottery"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t5:rising"
+    },
+    {
+      "id": "act:baghdad:political:middle:t5:rising",
+      "sense": "touch",
+      "prose": [
+        "The heavy, high-gravity pressure of the transit suit pressed down upon {given_name}'s shoulders like a physical manifestation of history. Every step through the low-ceilinged corridors of the orbital dry-docks felt deliberate, the magnetic boots clinging to the grated steel floors with a dull, rhythmic clank. The metal handrails were cold, perpetually sweating under the strain of life-support humidity. It was a world made entirely of hard edges, rivets, and cold alloys, devoid of the soft clay and river silt that had once defined their family's ancestral domain.",
+        "An engineer, his face smudged with dry graphite lubricant, thrust a heavy tablet into {given_name}'s gloved hand. The glass was scratched and warm to the touch, vibrating faintly with the distant hum of the main fuel pumps. He was demanding a reallocation of payload weight. A shipment of cultural relics—hand-woven tapestries, brass water urns, and ancient leather-bound registries from the old neighborhood archives—was scheduled for the second launch pod, but the logistics division wanted them discarded to make room for more industrial grade drill bits.",
+        "To the technicians, the items were mere ballast, dead weight in an unforgiving equation of mass and thrust. But to the families waiting in the dry docks, those heavy brass pieces and worn woolens were the tangible threads connecting them to their identity. To touch them was to remember who they were before they became numbers in an orbital ledger."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We sign the order to unload the cultural crates, choosing the cold utility of industrial survival over the weight of history."
+          ],
+          "choice": {
+            "text": "Authorize the replacement of the archives with heavy machinery.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": -1,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "flag_t5_machinery_first"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We refuse the technician's demands, insisting that the physical heritage of our people is as essential to survival as any hydraulic pump."
+          ],
+          "choice": {
+            "text": "Protect the cultural cargo, demanding the preservation of our physical heritage.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 1,
+              "power": -1,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "flag_t5_heritage_first"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How shall the {family_name} balance the material demands of off-world life with the preservation of their cultural identity?",
+        "options": [
+          {
+            "text": "Commit to a technocratic future: embrace the machinery and leave the old relics behind.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 2,
+              "tradition": -2,
+              "reach": 1
+            },
+            "setFlags": [
+              "flag_t5_decision_technocrat"
+            ]
+          },
+          {
+            "text": "Enshrine our cultural covenant: carry our symbols, our faith, and our laws to the stars.",
+            "motivatorShift": {
+              "politics": 2,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2
+            },
+            "setFlags": [
+              "flag_t5_decision_traditionalist"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t5:midpoint"
+    },
+    {
+      "id": "act:baghdad:political:middle:t5:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The observation dome was never silent; it vibrated with a chorus of high-altitude machinery and human anxiety. The deep, systemic thrum of the orbital station's central core rattled the plates under {given_name}'s feet, a constant reminder of the fragile metal shell holding back the vacuum. Through this hum cut the voices of the assembly—a cacophony of languages, arguments, and the clattering of electronic seals being stamped onto diplomatic credentials. It was the sound of a new world being argued into existence.",
+        "A rival political dynasty, representing the wealthy financial syndicates of the lower atmosphere, cornered {given_name} near the communications terminal. Their spokesperson spoke with the practiced, melodic cadence of those who had never known hunger or physical labor, their voice dripping with condescension. They offered a lucrative partnership: a joint committee that would control the distribution of oxygen and water rights in the first lunar-lagrangian settlements.",
+        "Over the speaker systems, the synthesized voice of the launch coordinator announced the impending departure of the scout vessels. The overlapping sounds of the mechanical countdown and the rival's low-voiced, seductive proposal forced {given_name} to consider where the true power of their family would lie. Would they remain middle-class brokers of civil rights, or would they climb into the quiet, cold halls of pure capital?"
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We politely decline the syndicate's offer, choosing to stand with the assembly delegates who represent the common emigrants."
+          ],
+          "choice": {
+            "text": "Reject the corporate alliance to champion the popular assembly.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 2,
+              "worldview": 2,
+              "power": -1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "flag_t5_champion_assembly"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We quietly sign the preliminary agreement, securing a guaranteed share of the off-world resource monopolies for our descendants."
+          ],
+          "choice": {
+            "text": "Partner with the financial syndicates to secure our family's economic future.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": -1,
+              "worldview": -2,
+              "power": 2,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "flag_t5_partner_syndicate"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t5:turn"
+    },
+    {
+      "id": "act:baghdad:political:middle:t5:turn",
+      "sense": "sight",
+      "prose": [
+        "Through the massive quartz glass of the departure bay, the universe was split into two blinding realities. To the left lay the curving sweep of Earth, a brilliant marble of blue and swirling white clouds, its borders invisible from this height, yet still casting a massive shadow. To the right, the deep, terrifying black of the vacuum was punctuated by the brilliant, piercing points of the stars. In the center of this view hung the colony vessel *Al-Zubra*, its massive silver sails unfolding like the wings of some prehistoric bird catching the light of a distant sun.",
+        "{given_name} watched the light play across the vessel's hull. This ship was the culmination of generations of political maneuvering. The {family_name} name was carved onto the dedication plaque in the central ring, but the nature of the society it would build remained unwritten. The final drafts of the colonial constitution lay before them on the console, waiting for the terminal signature that would define the political structure of humanity's next step.",
+        "As the star-sail fully caught the solar winds, it flared with a brilliant, golden light that filled the observation room, casting long, dramatic shadows across the faces of the assembled politicians. This was the moment of ascension. The laws drafted here would not just govern a colony; they would shape the destiny of the bloodline as it left its cradle forever."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We cast our vote for a system of pure representative democracy, ensuring the middle classes and common workers retain legislative power."
+          ],
+          "choice": {
+            "text": "Sign the Democratic Charter of the New Crescent.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 3,
+              "worldview": 2,
+              "power": -1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "flag_t5_democratic_charter"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We consolidate executive authority within a permanent council of founding families, ensuring our line retains control of the frontier."
+          ],
+          "choice": {
+            "text": "Establish an Oligarchic Council dominated by our family.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": -2,
+              "power": 3,
+              "tradition": 2,
+              "honor": -1,
+              "lineage": 3,
+              "reach": 1
+            },
+            "setFlags": [
+              "flag_t5_oligarchic_charter"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "With the colony ships preparing to burn for the outer systems, how will the {family_name} secure their legacy on this new frontier?",
+        "options": [
+          {
+            "text": "The Covenant of Equality: Enshrine a constitution that guarantees equal land and resource distribution to all emigrants.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 3,
+              "worldview": 3,
+              "power": -1,
+              "honor": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "flag_t5_major_covenant"
+            ]
+          },
+          {
+            "text": "The Directorate of the Pioneers: Establish a merit-based governance model where our family holds veto power over all off-world laws.",
+            "motivatorShift": {
+              "politics": 1,
+              "power": 3,
+              "tradition": 1,
+              "lineage": 3,
+              "reach": 1
+            },
+            "setFlags": [
+              "flag_t5_major_directorate"
+            ]
+          },
+          {
+            "text": "The Mercantile Syndicate: Turn the colonization effort into a private enterprise, selling territorial rights to the highest bidders.",
+            "motivatorShift": {
+              "wealth": 4,
+              "politics": -2,
+              "worldview": -2,
+              "power": 2,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "flag_t5_major_mercantile"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t5:close"
+    },
+    {
+      "id": "act:baghdad:political:middle:t5:close",
+      "sense": "taste",
+      "prose": [
+        "At the farewell banquet in the high lounge, the food was a strange compromise between two worlds. The main courses were the chalky, salt-flat creations of the orbital hydroponic farms—reconstituted proteins that tasted faintly of zinc and vitamin supplements. But at the center of the table, saved for the final toast, was a small plate of real dates, preserved in heavy, sweet syrup, brought up from the southern orchards of the homeland at an astronomical cost.",
+        "{given_name} took a single date, the sticky sweetness rich and thick on the tongue, tasting of warm earth, sun-drenched mud, and the slow, heavy summers of their youth. It was a flavor that could not be replicated in the sterile, high-tech tubes of the station. Beside them stood the heir of the {surname} line, their eyes fixed not on the plate, but on the glittering expanse of the stars visible through the overhead dome.",
+        "As they drank the sweet, heavy date-wine, the bitter aftertaste of the station's recycled water lingered on the palate—a reminder of the thin line between survival and oblivion. The old world was fading into a memory of syrup and clay, but the foothold they had carved in the cold silence of the stars was real, secure, and waiting for the generations to come."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We hand the heavy brass signet of our legislative council to our heir, whispering that our power lies in our service to the people."
+          ],
+          "choice": {
+            "text": "Instruct the heir to govern with justice and humility among the stars.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 2,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "flag_t5_heir_just"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We hand the private ledger of our corporate holdings to our successor, reminding them that control of the resources is the only true sovereignty."
+          ],
+          "choice": {
+            "text": "Instruct the heir to maintain an iron grip on the family's assets.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 0,
+              "worldview": -1,
+              "power": 2,
+              "tradition": 1,
+              "honor": -1,
+              "lineage": 3,
+              "reach": 1
+            },
+            "setFlags": [
+              "flag_t5_heir_ruthless"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:political:middle:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of river-clay and burnt chicory always clung to the floorboards of the storefront office, a sharp, bitter perfume that reminded the family of the low marshes left behind, even here where the damp brick of the eastern seaboard choked the air. Every morning, {given_name} would unbolt the heavy cedar doors to let out the overnight musk of damp ledger paper and cold tallow. Outside, the street was already waking to the smell of horse manure, sea-salt blowing off the nearby docks, and the faint, sweet grease of the bakers' ovens down the lane. This was the territory they had carved out from the mud: a narrow slip of a ward where three different tongues competed for the ear of the local alderman, and where the {surname} name was slowly becoming synonymous with a quieted room and a filled-out petition.",
+        "To the newly arrived cousins who huddled by the stove, the air of the city was a physical weight, thick with coal smoke and the foreign stench of cabbage boiling in tenement basements. Yet, inside this office, the fragrance of crushed cardamom seeds, steeped secretly in a brass pot behind the counter, offered a fragile sanctuary. It was here that the neighbors came to have their papers read, to smell the comforting, ink-rich draft of civic registries, and to find a middleman who understood that a vote was not merely a slip of paper, but a contract signed in the language of mutual survival."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You decide to burn sweet myrrh near the threshold to draw in the merchant class who miss the old dry-stone markets of home."
+          ],
+          "choice": {
+            "text": "Cultivate the merchants with familiar domestic comforts.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": -1,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "merchant_allies"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You keep the office smelling strictly of cheap American tobacco and starch to put the city inspectors at ease when they pass."
+          ],
+          "choice": {
+            "text": "Adopt the local administrative atmosphere to appear thoroughly integrated.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "assimilated_veneer"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t1:rising"
+    },
+    {
+      "id": "act:baghdad:political:middle:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough wool of the cheap suits they wore to the ward meetings chaffed against {given_name}'s neck, a persistent reminder of the delicate line they walked between the manual laborers who sought their counsel and the smooth-silk politicians who held the keys to the municipal works. Every surface in the rented townhouse was slightly damp; the plaster walls sweated under the weight of five distinct families sharing the upper chambers, and the banister felt tacky with the salt-crusted grease of dozens of hands climbing to ask for a letter of recommendation. It was a household built on constant friction, where even the brass inkwell was cold and pitted from relentless, hurried use.",
+        "One evening, a dispute flared in the narrow hall over the shared washing tub. Your sister, tired of her fine muslin blouses being stained by the soot of the neighbors' coal-stoves, demanded that the family set a boundary, reserving the courtyard for their own relations. To do so would assert the {surname} status as something better than the common stream, but it would also alienate the very laborers whose signatures filled the family's precinct books. Every touch here—from the coarse blankets of the boarders to the crisp, dry stationery of the city council—required a calculation of friction."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You choose to feel the rough, calloused hands of the dockworkers as you welcome them into the common parlor, ignoring the dirt they leave behind."
+          ],
+          "choice": {
+            "text": "Open the household fully, prioritizing working-class solidarity over middle-class privacy.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 0,
+              "power": 0,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "plebeian_base"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You lay down a thick, clean wool rug in the reception room, signaling a physical boundary that only those of neat appearance may cross."
+          ],
+          "choice": {
+            "text": "Enforce a standard of respectability to elevate the family's standing.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "respectable_distance"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The local precinct captain requests the use of your private parlor for his weekly card game, which will bring low-level graft into your home. How do you respond?",
+        "options": [
+          {
+            "text": "Permit the game; the physical proximity to ward power is worth the stains on the tablecloth.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "parlor_politics"
+            ]
+          },
+          {
+            "text": "Politely refuse, citing your sister's sewing circle, keeping your domestic sphere untainted.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -1,
+              "worldview": 1,
+              "power": -1,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "domestic_sanctuary"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t1:midpoint"
+    },
+    {
+      "id": "act:baghdad:political:middle:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The sound of the neighborhood was a cacophony of iron wagon wheels on cobblestones, punctuated by the high, nasal cries of the vegetable peddlers who had set up shop directly outside the parlor window. Inside, the noise was different: the dry clatter of a typewriter that {given_name} had purchased second-hand, its keys striking the platen like a small, rhythmic hammer. Through this metallic clack-clack-clack, the family translated the guttural complaints of the neighborhood into the clean, legalistic English of petitions to the Board of Public Works, demanding gas lamps and paved alleys for their ward.",
+        "One afternoon, the clattering keys were silenced by the heavy, measured boots of a representative from the established Irish political association down the street. The visitor did not shout; his voice was a low, honeyed gravel, suggesting that the {surname} family was singing a song too loud for their own good. He offered a compromise—a quiet sub-contract for coal delivery to the ward's schools, provided the family stopped registering new voters from the late-arriving Eastern vessels. The silence that followed his offer was thick, broken only by the distant hum of the steam-whistle from the ferry docks."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You drowned out his voice by resuming your typing, demonstrating that the printing of petitions would not cease."
+          ],
+          "choice": {
+            "text": "Reject his backroom deal and let the public machinery hum with your people's demands.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "independent_voice"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You closed the window to shut out the street noise, listening intently to the quiet terms of his administrative arrangement."
+          ],
+          "choice": {
+            "text": "Accept the quiet alliance, trading voter volume for immediate economic security.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": -1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 1,
+              "honor": -1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "machine_allied"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t1:turn"
+    },
+    {
+      "id": "act:baghdad:political:middle:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "From the balcony of the newly leased hall, the ward looked like an intricate mosaic of soot and brick, illuminated by the guttering orange glare of the new gaslights the family had fought to secure. Below, the sea of upturned faces in the courtyard was a testament to what the {surname} name had gathered: merchants in felt hats, dockers with their caps pulled low, and women holding children wrapped in shawls of old-world wool. In the center of the square stood the old ward headquarters, its windows dark and uninviting, a monument to the old faction that had ignored this immigrant wave for a decade.",
+        "The sight of this assembly, gathered under a banner bearing the family's name alongside the emblem of the city, brought a sharp clarity to {given_name}. They were no longer merely clerks or translators; they had become the prism through which these people saw the state. But the vision was fragile. An agent of the mayor's office stood in the shadows near the carriage house, his eyes fixed on {given_name}, waiting to see if this assembly would turn into a riotous demand for labor reform or a disciplined display of loyal, middle-class voters ready to be absorbed into the regular party line."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You look down at the crowd and raise a hand, signaling that their strength lies in quiet order and legal registration."
+          ],
+          "choice": {
+            "text": "Guide the crowd toward institutional, orderly participation.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "orderly_reform"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You gesture toward the closed doors of the old ward office, letting the crowd's visible anger pressure the watching agent."
+          ],
+          "choice": {
+            "text": "Harness the visual power of popular unrest to force concession.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "radical_leverage"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The regular party machine offers you the nomination for the junior council seat, but they demand you publicly disavow the radical dockworkers' strike. How does the line position itself?",
+        "options": [
+          {
+            "text": "Accept the nomination and denounce the strike; securing the family's seat in the halls of power is the highest priority.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": -1,
+              "power": 2,
+              "tradition": 1,
+              "honor": -2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "machine_seat",
+              "strike_broken"
+            ]
+          },
+          {
+            "text": "Refuse the nomination and support the strike; we must remain loyal to the community that lifted us from the docks.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 1,
+              "worldview": 2,
+              "power": -1,
+              "tradition": -1,
+              "honor": 2,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "strike_leader",
+              "machine_enemy"
+            ]
+          },
+          {
+            "text": "Broker a quiet compromise; refuse the strike endorsement but run as an independent democrat, keeping both paths warm.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 2,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "independent_run",
+              "compromiser"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:political:middle:t1:close"
+    },
+    {
+      "id": "act:baghdad:political:middle:t1:close",
+      "sense": "taste",
+      "prose": [
+        "In the quiet of the late evening, after the ballots had been counted and the registry offices locked, the taste of victory was as dry as the gummed adhesive on the back of voting envelopes. {given_name} sat at the walnut desk, pouring two glasses of heavy, dark tea brewed with crushed mint and a spoonful of honey that had crystallized in its jar. The tea tasted of old kitchens in Baghdad, sweet but burnt by too long a boil, a flavor that lingered on the back of the tongue long after the steam had ceased to rise in the cold air.",
+        "Your heir, sitting across from you, took the glass with a hand that had never known the calluses of the docks or the grease of the brickyards. For them, the taste of this city was not one of dust and coal, but of clean paper, refined sugar, and the bitter dregs of municipal coffee. You passed the heavy brass seal of the civic league across the desk, its cold metal smelling of ink. The legacy was now a trade—not of goods or land, but of influence, of voices organized, and of a name that must be cleared of its foreign accents before the next census."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You advise your heir to drink the local rye whiskey in public, keeping the mint-tea for the family's private chambers."
+          ],
+          "choice": {
+            "text": "Instill a strict separation between public performance and private identity.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "dual_identity"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You serve the traditional sweet tea to any precinct captain who visits, making the family's distinctive heritage a brand of pride."
+          ],
+          "choice": {
+            "text": "Embrace their origin as a distinct political brand in the cosmopolitan ward.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "heritage_brand"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}

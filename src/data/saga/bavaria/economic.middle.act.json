@@ -1,0 +1,2085 @@
+{
+  "acts": [
+    {
+      "id": "act:bavaria:economic:middle:t0",
+      "wave": "bavaria",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — The Cooper's New Staves",
+      "scenes": [
+        "act:bavaria:economic:middle:t0:open",
+        "act:bavaria:economic:middle:t0:rising",
+        "act:bavaria:economic:middle:t0:midpoint",
+        "act:bavaria:economic:middle:t0:turn",
+        "act:bavaria:economic:middle:t0:close"
+      ]
+    },
+    {
+      "id": "act:bavaria:economic:middle:t1",
+      "wave": "bavaria",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — The Gilt on the Gables",
+      "scenes": [
+        "act:bavaria:economic:middle:t1:open",
+        "act:bavaria:economic:middle:t1:rising",
+        "act:bavaria:economic:middle:t1:midpoint",
+        "act:bavaria:economic:middle:t1:turn",
+        "act:bavaria:economic:middle:t1:close"
+      ]
+    },
+    {
+      "id": "act:bavaria:economic:middle:t2",
+      "wave": "bavaria",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 2,
+      "macroAct": "emergence",
+      "title": "Act III — The Brew of Prosperity",
+      "scenes": [
+        "act:bavaria:economic:middle:t2:open",
+        "act:bavaria:economic:middle:t2:rising",
+        "act:bavaria:economic:middle:t2:midpoint",
+        "act:bavaria:economic:middle:t2:turn",
+        "act:bavaria:economic:middle:t2:close"
+      ]
+    },
+    {
+      "id": "act:bavaria:economic:middle:t3",
+      "wave": "bavaria",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 3,
+      "macroAct": "emergence",
+      "title": "Act IV — The Guildsman's Flourish",
+      "scenes": [
+        "act:bavaria:economic:middle:t3:open",
+        "act:bavaria:economic:middle:t3:rising",
+        "act:bavaria:economic:middle:t3:midpoint",
+        "act:bavaria:economic:middle:t3:turn",
+        "act:bavaria:economic:middle:t3:close"
+      ]
+    },
+    {
+      "id": "act:bavaria:economic:middle:t4",
+      "wave": "bavaria",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 4,
+      "macroAct": "ascension",
+      "title": "Act V — The Spreading Lattice of the Bavarian Loom",
+      "scenes": [
+        "act:bavaria:economic:middle:t4:open",
+        "act:bavaria:economic:middle:t4:rising",
+        "act:bavaria:economic:middle:t4:midpoint",
+        "act:bavaria:economic:middle:t4:turn",
+        "act:bavaria:economic:middle:t4:close"
+      ]
+    },
+    {
+      "id": "act:bavaria:economic:middle:t5",
+      "wave": "bavaria",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 5,
+      "macroAct": "ascension",
+      "title": "Act VI — The Starbound Balance Sheet",
+      "scenes": [
+        "act:bavaria:economic:middle:t5:open",
+        "act:bavaria:economic:middle:t5:rising",
+        "act:bavaria:economic:middle:t5:midpoint",
+        "act:bavaria:economic:middle:t5:turn",
+        "act:bavaria:economic:middle:t5:close"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "act:bavaria:economic:middle:t0:open",
+      "sense": "smell",
+      "prose": [
+        "The stench of the ship's hold, a lingering miasma of stale bilge water, sickness, and fear, still clung to {full_name}'s clothes, even hours after stepping onto the solid, unyielding dock. It mingled now with the sharp, unfamiliar tang of coal smoke from a distant factory, the metallic odor of wet iron, and a bewildering array of spices from vendor stalls that seemed to bloom from every corner. Each breath was a confrontation, a constant reminder that the air itself was new, laden with the promise and grime of a world entirely different from the clean mountain air of home.",
+        "Around them, the cacophony of a thousand lives converged: the shrill cries of gulls, the rumble of horse-drawn carts over cobblestones, and the indistinguishable babble of foreign tongues. Yet, beneath it all, {full_name} could detect faint, comforting whiffs – the yeast of fresh-baked bread, the sweet, earthy aroma of brewing hops, scents that hinted at pockets of familiarity in this overwhelming expanse. These were the traces of those who had come before, who had carved out small havens of the Old World within the New.",
+        "The air itself felt thicker, heavier, saturated not just with physical odors but with an invisible pressure, the weight of expectation and the raw, unadorned need for survival. Every instinct screamed for an anchor, a known quantity in this sea of unknowns. The task was clear: to transmute this alien atmosphere into something habitable, to make a living, to build anew from the ground up, starting with the very air they breathed."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A sudden, sharp scent of pine tar and sawdust cut through the general din, a familiar aroma that pulled at the memory of {full_name}'s craft."
+          ],
+          "choice": {
+            "text": "Seek out the source of the woodworking smell, hoping for immediate work.",
+            "motivatorShift": {
+              "wealth": 2,
+              "worldview": 1,
+              "lineage": -1
+            },
+            "setFlags": [
+              "sought_craft_work"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "From a narrow alleyway, the unmistakable, comforting aroma of roasted sausages and sauerkraut wafted, a small gust of Bavaria in the chaos."
+          ],
+          "choice": {
+            "text": "Follow the comforting food smells towards what might be a Bavarian quarter.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "sought_bavarian_community"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t0:rising"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t0:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough, splintered handle of the rented handcart dug into {given_name}'s palms, the wood still cold from the pre-dawn air. Each heave against the cobblestones sent a jarring ache up their arms, the relentless weight of crates filled with unfamiliar goods pressing against their shoulders. It was a pressure that defined these early days—a constant, physical exertion that left muscles burning and joints stiff. The city was a demanding taskmaster, extracting its due in sweat and effort.",
+        "Beneath {given_name}'s worn boots, the uneven flagstones offered scant purchase, a metaphor for their precarious footing in this new world. The chill wind, sharp and unforgiving, bit at exposed skin, a constant reminder of the lack of a proper hearth, a solid roof that felt like their own. Every surface, from the gritty walls of the tenement to the coarse fabric of their borrowed work clothes, spoke of a life pared down to essentials, devoid of the familiar comforts and well-worn textures of home.",
+        "Despite the constant fatigue, a stubborn resilience settled in {given_name}'s bones. The physical demands, while taxing, were tangible, understandable. They were a language of effort that {given_name} knew how to speak. Each callus on their hands, each ache in their back, was a testament to survival, to pushing through, to forging a path with sheer, unyielding will, one laborious touch at a time."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A sharp, metallic edge of a tool in {given_name}'s hand pricked their finger, drawing a bead of blood, a small, painful reminder of the meticulous care needed in their work."
+          ],
+          "choice": {
+            "text": "Press on, wrapping the wound with a strip of cloth, focusing on the task.",
+            "motivatorShift": {
+              "honor": 1,
+              "worldview": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "ignored_minor_injury"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The comforting warmth of a communal bakery oven spilled onto the street, momentarily easing the chill that had settled deep into {given_name}'s body."
+          ],
+          "choice": {
+            "text": "Pause briefly, letting the warmth soak in, a small indulgence amidst the toil.",
+            "motivatorShift": {
+              "worldview": 1,
+              "tradition": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "sought_small_comfort"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "An unexpected draft in your small rented room leads to a recurring chill. A small investment in thicker blankets or a minor repair to the window might alleviate it, but it would deplete what little you've saved. What do you prioritize?",
+        "options": [
+          {
+            "text": "Endure the cold; every penny saved is a penny towards real stability.",
+            "motivatorShift": {
+              "wealth": 2,
+              "worldview": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "prioritized_savings"
+            ]
+          },
+          {
+            "text": "Spend the money on better blankets or a window repair; health is vital for work.",
+            "motivatorShift": {
+              "wealth": -1,
+              "power": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "prioritized_comfort"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t0:midpoint"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t0:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The rhythmic clang of a blacksmith's hammer echoed down the street, punctuated by the high-pitched whir of a nearby textile mill, a constant drone that underscored the relentless industry of the district. Mixed with these metallic sounds were the guttural cries of street vendors hawking their wares in a bewildering mix of languages – German, Yiddish, Italian, and the clipped, rapid English of the locals. It was a symphony of industriousness and aspiration, each sound a testament to the myriad peoples striving to carve out a foothold.",
+        "From the open door of a tavern, a raucous burst of laughter and a familiar Bavarian folk song spilled onto the cobblestones, momentarily drowning out the distant church bells. For a brief moment, the cacophony of the new world faded, replaced by the comforting, if somewhat boisterous, sounds of home. {full_name} felt a pull, a longing to join the communal cheer, to lose themselves in the familiar cadence of their mother tongue, to be among those who understood the unspoken nuances of their heritage.",
+        "But the moment passed, swallowed by the general hum of the city. The sounds of their burgeoning neighborhood were a complex weave: the insistent scolding of a woman arguing over prices, the playful shouts of children chasing a stray dog, the deep, resonating clatter of a passing freight wagon. Each noise was a thread in the tapestry of their new life, some comforting, some grating, but all demanding attention, all asserting their presence in this land that owed them nothing but the space they could earn."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A debate in robust German erupted from inside the nearby beer hall, voices rising and falling over a topic that sounded very much like the struggles of their own community."
+          ],
+          "choice": {
+            "text": "Lean closer to listen, hoping to glean insight from the shared experience of fellow Bavarians.",
+            "motivatorShift": {
+              "tradition": 1,
+              "lineage": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "listened_to_bavarian_debate"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The rhythmic, unfamiliar chant of a group of new arrivals, perhaps from a distant shore, drifted from a street corner, a stark contrast to the familiar sounds {full_name} sought."
+          ],
+          "choice": {
+            "text": "Walk on, recognizing a different, but equally earnest, striving in the unfamiliar sounds.",
+            "motivatorShift": {
+              "worldview": 1,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "acknowledged_other_immigrants"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t0:turn"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t0:turn",
+      "sense": "sight",
+      "prose": [
+        "The street below, a winding artery through the immigrant ward, presented a stark visual panorama of struggle and burgeoning hope. On one side, rows of identical, cramped tenements stood sentinel, their brick faces grimy with years of soot, windows often patched with cardboard. The laundry lines strung between them sagged under the weight of airing clothes, a colorful testament to persistent domesticity amidst the grime. It was a landscape of necessity, where every inch served a practical purpose, and beauty was a luxury rarely indulged.",
+        "Across the way, however, small storefronts hinted at an emerging economic life: a butcher's shop displaying its wares, a modest baker's window fogged with steam, and the newly painted sign of a cooperage, its oak staves stacked neatly outside. These were the nascent institutions of their community, built not with grand designs, but with the steady, incremental efforts of people seeking to provide for themselves and their neighbors. Each new facade, no matter how humble, was a declaration of permanence, a small victory against the impermanence of migration.",
+        "{full_name}'s gaze settled on a newly erected community hall, its wooden frame still raw and unpainted, a beacon of collective ambition. Its presence raised questions: would this hall become a bastion of Bavarian tradition, a fortress against assimilation, or a place where new connections could be forged, where the distinct threads of their heritage might be woven into a larger, composite tapestry? The very bricks and mortar of the ward seemed to ask what kind of future the {family_name} line would help build here."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A group of older men gathered outside a newly opened German-language newspaper office, their faces etched with the concerns of their homeland, their posture resolute."
+          ],
+          "choice": {
+            "text": "Observe the steadfast dedication to preserving cultural ties through media.",
+            "motivatorShift": {
+              "tradition": 1,
+              "lineage": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "observed_cultural_preservation"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A young boy, unmistakably a {family_name} relation, was seen eagerly conversing with children of diverse backgrounds, a new American flag clutched in his hand."
+          ],
+          "choice": {
+            "text": "Note the children's easy mixing, a glimpse into a future of integration.",
+            "motivatorShift": {
+              "worldview": 1,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "observed_youth_integration"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The future of the Bavarian immigrant ward, and by extension, the {family_name} line, rests on a pivotal decision. Will you seek to solidify its distinct identity, encourage broader integration, or prioritize individual economic advancement above all else?",
+        "options": [
+          {
+            "text": "Dedicate resources to building strong Bavarian institutions: churches, schools, cultural societies.",
+            "motivatorShift": {
+              "tradition": 3,
+              "lineage": 2,
+              "worldview": -2,
+              "reach": -1
+            },
+            "setFlags": [
+              "fortified_bavarian_enclave"
+            ]
+          },
+          {
+            "text": "Advocate for engagement with other immigrant groups and the broader American society, finding common ground.",
+            "motivatorShift": {
+              "worldview": 2,
+              "politics": 1,
+              "reach": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "encouraged_integration"
+            ]
+          },
+          {
+            "text": "Focus solely on economic opportunities for the {family_name} line, let cultural matters resolve organically.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "prioritized_economic_advancement"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t0:close"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t0:close",
+      "sense": "taste",
+      "prose": [
+        "The rich, dark taste of a freshly brewed coffee, sweetened with a scant spoon of sugar, lingered on {full_name}'s tongue. It was a simple pleasure, a small luxury earned through years of relentless labor, a flavor far removed from the meager, bitter sips of the early crossing. This was the taste of a foothold established, of small comforts painstakingly reclaimed. Beside it, the familiar chew of a rye bread, baked in their own oven, spoke of security, of having planted roots deep enough to draw sustenance from this new soil.",
+        "There was also the metallic tang of old coins in {given_name}'s pocket, the weight of a modest but undeniable sum, hard-won and carefully saved. It was a taste of future potential, of a nascent legacy, perhaps not grand, but solid and real. This tangible success, tasted in the warmth of their hearth and the promise of their savings, was the sum total of this generation's arduous journey, a testament to the sweat and sacrifice poured into the foundation of their new life.",
+        "As {full_name} looked upon the next generation, {surname}'s heir, a complex medley of tastes seemed to swirl in the air—the sweet anticipation of opportunities yet to be seized, the slightly sour memory of past hardships, and a robust, earthy flavor of determination that had been carefully cultivated and now, almost unconsciously, passed on. This was the inheritance: not just coin or land, but the very palate of their experience, a blend of resilience and aspiration, ready to be savored by those who followed."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Serving a plate of simple, hearty wurst and sauerkraut, {full_name} watched as the heir ate with a youthful hunger."
+          ],
+          "choice": {
+            "text": "Emphasize the value of hard work and thrift over immediate gratification.",
+            "motivatorShift": {
+              "wealth": 1,
+              "honor": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "emphasized_thrift_to_heir"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Sharing a slice of their homemade apple strudel, {full_name} felt the lingering sweetness, a reminder of their enduring culture."
+          ],
+          "choice": {
+            "text": "Speak of the importance of maintaining their reputation and community ties.",
+            "motivatorShift": {
+              "tradition": 1,
+              "politics": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "emphasized_reputation_to_heir"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:bavaria:economic:middle:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The sharp tang of sawdust still clinging to the rough-hewn beams mixed with the comforting, yeasty scent of rising dough. It was a symphony of newness and tradition, the very essence of {full_name}'s gamble. Each morning, as the first rays of dawn pierced the small, grimy window of the combined dwelling and shop, these smells heralded another day of relentless labor, a testament to the sweat equity poured into this nascent venture.",
+        "Beneath the more pleasant aromas, a fainter, earthy perfume of damp soil and lingering coal smoke spoke of the untamed land just beyond the threshold and the constant battle against the encroaching elements. The air was thick with purpose, a constant reminder of the modest dreams built brick by painstaking brick, the foundation of a future {family_name} generation would come to know. There was no room for idleness when such an enterprise depended on every moment.",
+        "Sometimes, the faint, sweet scent of juniper and spices wafted from the neighboring apothecary, a subtle reminder of the burgeoning community around them, a tapestry of immigrants and established settlers weaving their fates together. It was a comforting, if fleeting, perfume, quickly overshadowed by the more dominant smells of their own making – the honest odor of flour and pine that defined their daily striving."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A waft of acrid wood smoke from the stove signals the need for fresh kindling, a small but persistent demand on {given_name}'s morning."
+          ],
+          "choice": {
+            "text": "Send a child to gather kindling from the pile out back.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "child_responsibility_increased"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A distinct, rich aroma of roasting coffee beans drifts from the street, suggesting a new vendor has set up nearby."
+          ],
+          "choice": {
+            "text": "Step outside to investigate the new aroma and vendor.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "new_vendor_observed"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t1:rising"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough, calloused palms of {given_name} told a story of unyielding toil, each day a testament to the physical demands of forging a livelihood from nothing. The splintered wood of the butcher's block, the coarse texture of burlap sacks filled with grain, the unforgiving bite of the saw as it cut through tough bone – every sensation was a reminder of the raw, unvarnished reality of their existence. It was a life lived by the feel of things, by the heft of a full barrel, the chill of freshly drawn water, the warmth of the hearth.",
+        "The subtle give of the worn leather apron against {given_name}'s chest, familiar as a second skin, provided a measure of comfort amidst the relentless demands. Yet, even this familiar embrace carried the phantom weight of responsibility, the subtle pressure of mouths to feed, a roof to keep over heads, and the ever-present need to expand. The dreams were not yet soft; they were hard-won, tangible, built from the ground up with aching muscles and determined hands.",
+        "A stray thought of finer fabrics, of smooth polished wood, would sometimes flicker, a ghost of a desire for the comforts that greater prosperity might bring. But such musings were quickly pushed aside by the insistent touch of immediate tasks – the slick feel of a freshly cleaned counter, the cool metal of a coin exchanged for goods, the comforting, solid thud of a ledger being closed at the end of a long day."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The worn-smooth handle of the money drawer feels lighter than usual, a subtle nudge of concern in {given_name}'s mind."
+          ],
+          "choice": {
+            "text": "Mentally re-calculate the day's earnings, ensuring no discrepancy.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "financial_caution_exercised"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The smooth, cool surface of a new ledger, recently purchased, contrasts sharply with the familiar rough textures of the shop."
+          ],
+          "choice": {
+            "text": "Admire the new ledger, imagining the future entries it will hold.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "future_planning_contemplated"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A small inheritance from a distant relative arrives. How do you allocate these modest funds?",
+        "options": [
+          {
+            "text": "Invest it in new tools and stock for the shop, directly improving the business.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "business_investment_made"
+            ]
+          },
+          {
+            "text": "Set it aside for your children's future education, ensuring their opportunities.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "lineage_education_priority"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t1:midpoint"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The clang of the blacksmith's hammer echoed down the dirt street, a steady rhythm that spoke of a growing community, of horses being shod and implements repaired. It was a counterpoint to the softer rustle of conversations inside {surname}'s shop, the murmur of customers haggling over prices, the cheerful clatter of coins dropping into the till. Each sound contributed to the vibrant, sometimes cacophonous, symphony of a town finding its voice, and {family_name}'s place within it was becoming increasingly distinct.",
+        "The creak of wagon wheels and the distant barking of dogs often punctuated the midday lull, carrying with them tales of new arrivals or distant markets. {given_name} had learned to discern the meaning in these ambient noises – the heavy lumber of a merchant wagon, signifying new goods, or the lighter, quicker rattle of a farmer's cart, bringing fresh produce from the outlying fields. It was a language of commerce, learned through attentive ears and careful observation.",
+        "One particularly sharp, insistent whistle, a new addition to the street's soundscape, often drifted from the direction of the new general store established by the O'Malley family. It was a sound both intriguing and slightly unnerving, a bold declaration of a rival presence, yet also a sign of a larger, more competitive marketplace. The rising hum of activity meant both opportunity and challenge, a delicate balance in the burgeoning economy."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The jovial shouts from the tavern across the street suggest a particularly lively evening crowd, potentially drawing customers away from evening errands."
+          ],
+          "choice": {
+            "text": "Dismiss the noise, focusing on the quality of your own offerings.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": -1,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "focus_on_core_business"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A familiar, slightly off-key rendition of a Bavarian folk song can be heard from the bakery next door, a comforting sound from a fellow immigrant."
+          ],
+          "choice": {
+            "text": "Smile and nod to the baker when passing, acknowledging the shared heritage.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "community_bond_strengthened"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t1:turn"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "The town was a patchwork quilt, evolving before {given_name}'s very eyes. What began as a scattering of cabins and dirt paths was slowly becoming a grid of plank sidewalks and nascent brick structures. From the shop's front window, {given_name} could see the newly painted sign of the O'Malley store, its bold lettering a clear visual challenge, but also a sign of the area's increasing vitality. Every new roof, every freshly tilled garden, contributed to a mosaic of progress and promise.",
+        "The faces of the townspeople, once wary strangers, were now a collection of familiar visages – the worn lines of hardworking farmers, the confident smiles of burgeoning merchants, the curious eyes of children. {given_name} saw recognition in their gazes, a silent acknowledgment of {family_name}'s steady presence and the reliability of their goods. The way the light caught the gilt on their own modest sign, a recent, proud addition, often drew {given_name}'s eye, a symbol of their rising standing.",
+        "Beyond the immediate street, the outline of new church steeples pierced the horizon, a testament to growing faith and communal ambition. The distant gleam of metal on what would soon be a railroad track hinted at connections to a wider world, a future of greater reach and opportunity. {given_name} knew this was a moment of choice, where one could either passively observe these changes or actively shape them, securing {family_name}'s lasting mark on this new landscape."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A prominent town elder, Mr. Henderson, surveys the street, his gaze lingering on the {family_name} establishment."
+          ],
+          "choice": {
+            "text": "Offer Mr. Henderson a respectful nod and a brief, polite greeting.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "community_respect_shown"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A group of younger, ambitious merchants gather at the corner, their animated gestures suggesting grand plans for the town's future."
+          ],
+          "choice": {
+            "text": "Observe their discussion with keen interest, wondering about their ambitions.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "new_ideas_considered"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The town council proposes a new public market square, requiring local business contributions. How does {full_name} respond?",
+        "options": [
+          {
+            "text": "Contribute generously, expecting a prominent stall and influence in market management.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 2,
+              "worldview": 1,
+              "power": 2,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "public_market_influence",
+              "community_leader_path"
+            ]
+          },
+          {
+            "text": "Offer a modest contribution, preferring to maintain focus on the established shop.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "shop_stability_priority"
+            ]
+          },
+          {
+            "text": "Decline to contribute, seeing it as an unnecessary expense when the shop is doing well.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": -1,
+              "worldview": -1,
+              "power": -1,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 0,
+              "reach": -1
+            },
+            "setFlags": [
+              "self_interest_priority"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t1:close"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t1:close",
+      "sense": "taste",
+      "prose": [
+        "The lingering taste of rich, savory stew, a dish prepared with skill and care, was a fitting end to a day of hard-won progress. It was not the plain, often meager fare of their earliest days, but a meal that spoke of comfort, of stability, and of a prosperity earned through diligent effort. Each mouthful carried the subtle spices of the old country, blended with the hearty ingredients of the new, a culinary metaphor for {family_name}'s journey.",
+        "Later, the sweet, earthy taste of roasted coffee, a luxury once reserved for special occasions, now accompanied the nightly ledger balancing. It was a small indulgence, a testament to the fact that {given_name} had not merely survived, but had begun to thrive. The faint bitterness on the tongue was a reminder of the challenges overcome, the risks taken, and the constant vigilance required to maintain their foothold in this burgeoning society.",
+        "As {given_name} looked at their child, {heir_given_name}, a different taste arose – the bittersweet tang of legacy. The flavor of expectation, of hope mixed with the weight of tradition. {heir_given_name} would inherit not just a shop, but a name, a reputation, and a well-earned place in the community. They would taste the fruits of their parents' labor, but also the inherent responsibilities that came with it, a blend of pride and palpable pressure, setting the stage for the next chapter."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A slightly tart, familiar flavor in the water from the communal well reminds {given_name} of a similar well back in their homeland."
+          ],
+          "choice": {
+            "text": "Reflect on the journey and the distance traveled from their origins.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "reflect_on_origins"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The metallic taste of a newly minted coin, exchanged for goods, brings a sharp sense of satisfaction to {given_name}."
+          ],
+          "choice": {
+            "text": "Count the day's earnings, feeling the tangible reward of their work.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "acknowledge_financial_success"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:bavaria:economic:middle:t2:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of freshly milled flour clung to {given_name}'s clothes, a persistent, comforting perfume that followed him from dawn until long after dusk. It mingled with the sharp tang of yeast and the faint, sweet char of baking bread that permeated the narrow street, a familiar aroma distinct from the smokier effluvium of the industrial district just blocks away. Every morning, the promise of warm loaves and burgeoning commerce filled the air, a testament to the family's steady, arduous ascent.",
+        "Beyond the bakery's warm embrace, the city exhaled its own complex breath: wet cobblestones, distant coal smoke, and the occasional, fleeting perfume of a passing carriage from the wealthier avenues. It was a smell of relentless striving, of a family pushing beyond the hard-won comfort of their storefront, forever seeking to deepen the roots of their enterprise. Each inhalation was a reminder of the labor that had bought them this much, and the ambition that drove them towards more, the very air a constant, whispered challenge.",
+        "The subtle shift in the air, from the working-class sweat and grime to the cleaner, if still bustling, aromas of a burgeoning mercantile district, marked their journey. It wasn't the heady, often cloying scents of true opulence, but a robust, honest bouquet of industry and growing prosperity. This was the smell of their {family_name} legacy in the making, a tangible signature on the urban canvas."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A familiar warmth enveloped {given_name} as he considered the daily routine, the tangible output of his hands and the hands of those he employed."
+          ],
+          "choice": {
+            "text": "Embrace the reliable comfort of established craftsmanship.",
+            "motivatorShift": {
+              "wealth": 1,
+              "tradition": 1,
+              "lineage": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Yet, an almost imperceptible scent—perhaps of distant spices or exotic timber—stirred a restless energy within, hinting at opportunities beyond the familiar."
+          ],
+          "choice": {
+            "text": "Lean into the ambition for expansion and new ventures.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t2:rising"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t2:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough, honest feel of the sacking that held the day's flour, the smooth, cool weight of coins passing through {given_name}'s palm, the worn texture of the counter where customers leaned—these were the constant tactile affirmations of his daily life. Each surface told a story of labor and transaction, a steady rhythm that had propelled the {family_name} family from tenuous existence to a solid footing. His hands, though no longer calloused from endless manual labor, still bore the subtle stiffness of a man who understood work from the ground up.",
+        "He ran a finger along the finely-carved edge of a new ledger, its pages crisp and untouched, awaiting the entries of an increasingly complex business. This new book represented a different kind of touch—the light, measured pressure of financial planning, of navigating opportunities that were once unthinkable. It was a tangible symbol of their rising status, yet it also carried the subtle, unspoken pressure of decisions that could either solidify their gains or expose them to unforeseen risks.",
+        "A knot formed in his stomach, a subtle tightening that echoed the internal conflict between the solid ground of past loyalties and the intoxicating allure of future prosperity. The choice felt like a physical weight, pressing against him, a test of how much of the old, familiar world {full_name} was willing to shed for the promise of the new. The very air around him seemed to crackle with this unspoken tension, a palpable hum that demanded resolution."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The cool, solid brass of the new lock on the store's expanded storeroom offered a sense of security and justified ambition."
+          ],
+          "choice": {
+            "text": "Focus on consolidating existing gains and securing the family's assets.",
+            "motivatorShift": {
+              "wealth": 1,
+              "lineage": 1,
+              "tradition": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A nervous tremor ran through his hand as {given_name} considered a daring new investment, a venture that promised significant returns but also carried a greater potential for upheaval."
+          ],
+          "choice": {
+            "text": "Pursue an ambitious opportunity that could elevate the family's standing dramatically.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A long-time friend from the earliest days, struggling with their own modest venture, approaches you with a heartfelt plea for financial assistance. Their business is on the brink, and your help could save them, but it would require a notable investment of capital and time from the family's own burgeoning resources.",
+        "options": [
+          {
+            "text": "Offer substantial financial and practical support, prioritizing loyalty and community bonds.",
+            "motivatorShift": {
+              "wealth": -1,
+              "honor": 2,
+              "worldview": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "friend_helped"
+            ]
+          },
+          {
+            "text": "Offer a token gesture of assistance, advising them to seek broader support, while safeguarding your own family's path.",
+            "motivatorShift": {
+              "wealth": 1,
+              "honor": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "friend_token_helped"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t2:midpoint"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t2:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cacophony of the market square, once an overwhelming din, now presented itself as a symphony of opportunity to {full_name}. The ringing of the shop bell, the cheerful chatter of customers, the rhythmic clatter of deliveries, and the precise click of the abacus as accounts were settled—all these sounds were music to his ears, a testament to the thriving enterprise the {family_name} family had built. Each day, the chorus grew louder, reflecting the expansion of their influence.",
+        "Beyond the immediate clamor of his own establishment, new sounds began to filter in: the resonant chime of the newly installed public clock in the renovated square, the authoritative tone of a town councilor addressing a crowd, the hushed, urgent whispers of business rivals discussing trade tariffs. These were the sounds of a city in flux, of institutions solidifying, of power shifting, and the {family_name} family was no longer merely observing but was increasingly part of the conversation, their name uttered in these circles.",
+        "A distant, deeper rumble often caught {given_name}'s ear—the sound of heavy construction, of new public works taking shape. It was the sound of the city itself being remade, an intricate weave of progress and tradition. The noise suggested a world beyond the bakery, a world where the family's growing economic standing might translate into something more, something that could shape the very infrastructure and social fabric of their adopted home. The stakes, he realized, were no longer just about bread on the table, but about the very foundations of the city."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The clear, strong voices of potential new business partners resonated with a promise of lucrative ventures, beckoning {given_name} to listen closely to their proposals."
+          ],
+          "choice": {
+            "text": "Seek out profitable collaborations to further expand the family's wealth.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 1,
+              "power": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "But the gentle, familiar murmur of his elders discussing community affairs and traditional gatherings pulled at his attention, reminding him of their roots."
+          ],
+          "choice": {
+            "text": "Reinforce ties within the established community and family traditions.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t2:turn"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t2:turn",
+      "sense": "sight",
+      "prose": [
+        "From the newly appointed window of his expanded office, {full_name} looked out upon a city irrevocably altered by a generation of striving. The modest, two-story bakery of his youth now stood as a grand three-story edifice, its brickwork cleaned, its signage elegant and bold, a beacon of the {family_name} name. The street itself, once a jumble of humble shops, now featured wider pavements and gas lamps that cast a soft, inviting glow upon the newly erected facades of respectable businesses. The vista was a testament to his family's ascent, a visible marker of their hard-won prosperity.",
+        "He saw the faces of the city's emerging elite, their carriages traversing the now-paved main thoroughfares, their names emblazoned on the new civic buildings taking shape in the distance. The stark visual contrast between the old, muddy pathways and these gleaming, ordered streets was not lost on {given_name}. He felt, keenly, the weight of the moment: the {family_name} family was no longer simply a part of the economic fabric but stood on the precipice of shaping the very institutional tapestry of the city.",
+        "A formal invitation lay on his desk, its heavy vellum and ornate script a clear visual cue of its importance. It presented an opportunity to join one of the city's most influential burgeoning institutions—a merchants' guild with significant political sway, a charity board with vast reach, or a new urban planning commission that would literally redraw the city's future. The choice was clear in its visual gravity, a fork in the road laid out before his eyes, dictating how the {family_name} legacy would be perceived and perpetuated in generations to come."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The gleaming edifice of the newly completed public library, a symbol of civic progress, caught {given_name}'s eye, inspiring thoughts of legacy beyond commerce."
+          ],
+          "choice": {
+            "text": "Consider how public works reflect a family's enduring influence.",
+            "motivatorShift": {
+              "politics": 1,
+              "worldview": 1,
+              "reach": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Then his gaze fell upon the bustling market below, the vibrant activity of trade affirming the power of direct economic engagement."
+          ],
+          "choice": {
+            "text": "Reflect on the tangible power derived from direct commercial success.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1,
+              "lineage": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "A pivotal opportunity arises to deeply influence a burgeoning civic institution or industry guild, promising to elevate the {family_name} name from mere prosperity to genuine societal impact. How will {full_name} shape the family's role in the city's future?",
+        "options": [
+          {
+            "text": "Accept the invitation to join the powerful Merchants' Guild, focusing on shaping commercial policy and protecting business interests.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "power": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "guild_influencer"
+            ]
+          },
+          {
+            "text": "Dedicate resources to the new Urban Planning Commission, advocating for infrastructure and public spaces that benefit all citizens.",
+            "motivatorShift": {
+              "politics": 2,
+              "worldview": 2,
+              "honor": 1,
+              "reach": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "urban_planner_advocate"
+            ]
+          },
+          {
+            "text": "Invest heavily in the expansion of the {family_name} enterprise, aiming for market dominance and establishing a business dynasty.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 1,
+              "lineage": 2,
+              "reach": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "business_dynasty_founder"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t2:close"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t2:close",
+      "sense": "taste",
+      "prose": [
+        "The rich, dark roast of the morning coffee, brewed in a polished copper pot and served in fine porcelain cups, was a taste {full_name} savored. It was far removed from the watery, quickly gulped brew of his youth, a symbol of the comfort and refinement his generation had painstakingly built. With each sip, he tasted the culmination of years of tireless effort, the sweet, earthy flavor of a secure future now within reach, no longer a distant dream but a tangible reality for his descendants. This was the flavor of hard-won prosperity.",
+        "Later, at the family supper, the robust, hearty flavors of traditional Bavarian dishes were served on a table laden with silver, not just simple pewter. The venison, expertly prepared, and the carefully selected local wine spoke of success without ostentation, of a lineage that respected its origins even as it ascended. The taste was familiar, yet elevated, a testament to the fact that while their circumstances had changed dramatically, the core values, the warmth of the hearth, remained, fortified by their newfound stability and influence.",
+        "As the meal concluded, a delicate brandy was passed around, its complex notes of oak and fruit a final, lingering taste. It was the taste of an inheritance, not just of wealth, but of connection and influence—the capital of a well-earned reputation. {full_name} felt the bittersweet pang of a generation's work drawing to a close, a flavor that hinted at both accomplishment and the passing of responsibility. This, he knew, was the legacy, distilled and potent, to be savored by those who would follow."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A familiar warmth spread through {given_name} as he considered the enduring quality of their family's traditional products, the taste of which had been perfected over generations."
+          ],
+          "choice": {
+            "text": "Delight in the established quality and reputation of the family's current offerings.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Yet, a subtle, intriguing new spice on his palate suggested the exciting prospects of innovative ventures and new markets."
+          ],
+          "choice": {
+            "text": "Anticipate the potential of new flavors and opportunities yet to be explored.",
+            "motivatorShift": {
+              "wealth": 1,
+              "reach": 1,
+              "power": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:bavaria:economic:middle:t3:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of freshly baked rye bread mingled with the sharp tang of curing leather, a familiar perfume that permeated every corner of {family_name} House. Downstairs, the ovens glowed, releasing a warmth that crept into the floorboards, carrying with it the robust aroma of caraway and malt. Upstairs, in {given_name}'s study, the less rustic but equally distinctive smell of polished mahogany and aged paper clung to the air, testament to decades of careful accounts and well-kept ledgers. It was the smell of industry and comfortable living, a fragrant tapestry woven by generations of prudent labor.",
+        "Beyond the domestic sphere, the broader district carried the distinct olfactory signature of the family's enterprise. Wagons laden with {family_name}'s goods rumbled through cobbled streets, leaving a faint trail of their wares – the rich, earthy scent of hops and barley from the malt house, the clean, starched smell of linen from the weaving room, or the sweet, yeasty breath of fresh beer from the brewery. This scent was a marker, a subtle declaration of the family's pervasive presence and the quality that carried their name.",
+        "Every breeze that swept through the open windows of {full_name}'s office brought with it these interwoven scents, a constant reminder of the sprawling network of trade and craft that now bore their name. It was a smell of success, of honest work translated into tangible influence, reaching far beyond the small Bavarian village their ancestors had called home. It was the scent of a name established, a reputation built not on grand pronouncements, but on the enduring quality of their goods and the steadfastness of their word."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A decision looms regarding the expansion of the malt house, a move that promises greater yield but demands significant capital and risk."
+          ],
+          "choice": {
+            "text": "Invest heavily in new, larger kilns and storage facilities, anticipating future demand.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "expanding_malt_house"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Alternatively, {given_name} could focus on refining existing processes, enhancing the malt's unique characteristics to command a higher price for exclusivity."
+          ],
+          "choice": {
+            "text": "Prioritize quality over quantity, investing in specialized techniques to produce premium malt.",
+            "motivatorShift": {
+              "wealth": 2,
+              "tradition": 1,
+              "honor": 2
+            },
+            "setFlags": [
+              "premium_malt_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t3:rising"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t3:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough, unyielding texture of the industrial-grade ledger, its cover worn smooth by countless hands, felt heavy and cool beneath {full_name}'s fingertips. The numbers within, meticulously penned, represented the sweat and ambition of hundreds of workers, and the prosperity of the {family_name} name. But lately, the weight of that ledger felt different, infused with the subtle pressure of expectations from a nascent industrialists' council, urging larger contributions to their collective lobbying efforts in the capital. The council's emissary, a man whose handshake was firm but lingered uncomfortably long, had made their desires clear.",
+        "In the quiet of the evening, the smooth, cool porcelain of a teacup offered a momentary respite, a delicate contrast to the day's coarse dealings. The challenge wasn't merely financial; it was about the subtle push and pull of influence, the intangible threads that connect prosperous families in a burgeoning nation. To refuse the council might be seen as weakness, to comply, an unwanted commitment of resources and an acknowledgment of their growing power over civic matters. The choice was not starkly defined, but etched into the quiet tension that permeated the family home and business.",
+        "The calluses on {full_name}'s hands, earned from years spent overseeing the physical demands of the brewery and malt house, now felt a different kind of burden. This was the burden of power, of a name that carried enough weight to be courted, to be pressured. The very air seemed to hum with the unspoken understanding that inaction was itself a form of decision, and that every choice, no matter how small, resonated with the potential to either strengthen or diminish the family's emerging stature."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A rival merchant, emboldened by a recent windfall, attempts to undercut {family_name}'s prices in the regional market, threatening to erode profit margins."
+          ],
+          "choice": {
+            "text": "Engage in a price war, using the family's deeper reserves to outlast the rival and assert market dominance.",
+            "motivatorShift": {
+              "wealth": -2,
+              "power": 3,
+              "reach": 1
+            },
+            "setFlags": [
+              "engaged_price_war"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Alternatively, {given_name} could choose to maintain current pricing, focusing on the established quality and loyalty of their customers, allowing the rival to exhaust their resources on fleeting gains."
+          ],
+          "choice": {
+            "text": "Maintain prices, emphasizing product quality and customer service, trusting long-term loyalty.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "maintained_quality_pricing"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The city's burgeoning industrialists' council has formally requested a significant, public donation to their 'Civic Improvement Fund'—a thinly veiled campaign to influence upcoming legislation. How does {full_name} respond?",
+        "options": [
+          {
+            "text": "Contribute generously to the fund, ensuring {family_name}'s voice is heard in future council deliberations.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "supported_industrialists_council"
+            ]
+          },
+          {
+            "text": "Decline the 'request' politely, stating a preference for direct philanthropic endeavors within the community.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 1,
+              "politics": -2
+            },
+            "setFlags": [
+              "declined_industrialists_council"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t3:midpoint"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t3:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The echoing clamor of the municipal assembly hall was a symphony of competing ambitions. Wooden gavels thudded, voices rose and fell in passionate debate, and the rustle of papers accompanied every shift in the mood of the room. {full_name} sat among the invited observers, the rich timbre of their own family's influence now a quiet, yet discernible, note within the cacophony. Discussions about tariffs on imported grain and the allocation of new trade routes directly impacted the {family_name} enterprises, and the very air vibrated with the weight of these decisions.",
+        "Outside, the rhythmic clatter of horse-drawn carriages and the insistent cries of street vendors provided a counterpoint to the official proceedings, a constant reminder of the bustling commerce that fueled the city. Occasionally, a particular sound would cut through the general din – the distinctive bell of a delivery cart belonging to the Schmidt family, whose burgeoning lumber empire represented a different, yet equally powerful, form of wealth in the region. Their success was often spoken of in the same breath as {family_name}'s, a parallel rise in prominence.",
+        "A hush fell over the assembly as a prominent figure, a representative for the regional agriculturalists, began a rousing speech advocating for protectionist policies. The weight of his words, amplified by the hall's acoustics, seemed to press down on the onlookers, including {full_name}. This man's stance, if adopted, could either secure the family's malt and brewing interests or strangle their opportunities for broader expansion. The sheer volume of the moment underscored the high stakes of influence, how the whispers of a few could become the roar that shaped the destiny of many."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A proposition is made to form a trade consortium with other prominent families, pooling resources to lobby for more favorable national economic policies."
+          ],
+          "choice": {
+            "text": "Join the consortium, contributing resources and influence to shape broader economic legislation.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "joined_trade_consortium"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Conversely, {given_name} could decide that the family's independent reputation and direct dealings are more valuable than aligning with potentially conflicting interests within a consortium."
+          ],
+          "choice": {
+            "text": "Maintain independent operations, relying on established relationships and direct appeals to authorities.",
+            "motivatorShift": {
+              "honor": 1,
+              "tradition": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "maintained_independence"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t3:turn"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t3:turn",
+      "sense": "sight",
+      "prose": [
+        "From the panoramic window of the new, subtly opulent office {full_name} now occupied, the city unfolded like a meticulously drawn map. The sprawling industrial quarter, once a distant cluster of chimneys, now featured several {family_name} buildings, their distinctive architecture a testament to growth. The neat rows of workers' housing, a recent investment, hinted at a different kind of legacy than mere commerce. Every spire, every cobblestone, seemed to hold a story, and the future of the nation itself felt interwoven with the choices made within these very walls.",
+        "The newspaper spread across the heavy oak desk carried headlines of national debates on labor reform and the role of industry in civic life. The faces of prominent figures, some familiar from hushed conversations and others mere adversaries in print, stared out from the grainy pages. {full_name} caught their own reflection in the polished glass, a subtle shift in their own countenance betraying the weight of impending decisions. The family's name, once confined to regional markets, was now mentioned, if not always by name, then by its implied influence in discussions of national policy.",
+        "A specific document lay prominently on the desk: a proposal for a new national railroad line, with routes that would either boost {family_name}'s distribution network dramatically or bypass their key hubs entirely, leaving them behind. The lines on the map were stark, a visual representation of the diverging paths the family could take. To embrace this new era of infrastructure meant not just financial commitment, but a public declaration of how {family_name} saw its place in the emerging national identity, and what kind of power it sought to wield."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A delegate from the capital has arrived, bearing an offer to become a key supplier for a vast, federally funded infrastructure project, promising unprecedented reach but demanding absolute loyalty."
+          ],
+          "choice": {
+            "text": "Accept the offer, becoming a national supplier and aligning the family's destiny with the burgeoning federal apparatus.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "became_federal_supplier"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Alternatively, {given_name} could perceive the federal offer as a veiled attempt to exert control, choosing instead to focus on building a more diversified regional network through private ventures."
+          ],
+          "choice": {
+            "text": "Decline the federal offer, preferring to cultivate a robust, independent regional network and maintain autonomy.",
+            "motivatorShift": {
+              "worldview": 2,
+              "tradition": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "focused_regional_network"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The national debate rages over 'The Progressive Labor Act,' which seeks to mandate minimum wages and safer working conditions across all industries. This could significantly impact {family_name}'s operational costs and independence. How does {full_name} position the family?",
+        "options": [
+          {
+            "text": "Publicly endorse the Progressive Labor Act, championing worker welfare as a foundation for national prosperity.",
+            "motivatorShift": {
+              "politics": 3,
+              "worldview": 3,
+              "honor": 2,
+              "wealth": -2
+            },
+            "setFlags": [
+              "endorsed_labor_act"
+            ]
+          },
+          {
+            "text": "Quietly lobby against the Act, arguing for industry self-regulation and individual economic freedom.",
+            "motivatorShift": {
+              "politics": -2,
+              "wealth": 3,
+              "power": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "opposed_labor_act_privately"
+            ]
+          },
+          {
+            "text": "Take a neutral public stance, focusing on implementing improved conditions within {family_name} enterprises, regardless of legislation.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2
+            },
+            "setFlags": [
+              "neutral_labor_stance"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t3:close"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t3:close",
+      "sense": "taste",
+      "prose": [
+        "The strong, malty taste of {family_name}'s signature beer, a brew that had crossed generations, now had a different quality. It was still robust, comforting, but perhaps a touch more refined, served in finer establishments across a wider expanse of the nation. It was the taste of an earned reputation, not just for quality, but for the choices made, the stances taken. For {full_name}, it was a moment of quiet reflection, sipping from a crystal glass, the lingering flavor a complex blend of success, sacrifice, and the enduring spirit of their lineage.",
+        "The celebratory meal, a traditional feast of roast pork and sauerkraut, bore the familiar tastes of Bavaria, but with subtle adaptations—perhaps a richer spice blend or a more delicate preparation, reflecting a broader palate. Every dish was a testament to the family's journey, from humble origins to a name that now resonated in the halls of power and commerce. The conversations around the table, once focused on local markets, now touched upon national policy and industrial trends, the scope of their influence palpable in the subtle shift of dialogue.",
+        "As the meal concluded, the last lingering taste was not just of food, but of legacy. The bittersweet hint of unresolved challenges mingled with the satisfying aftertaste of achievements. {full_name} looked upon the next generation, their heir, observing how they savored the same brew, the same dishes. What flavors would they add to the family's history? What reputation, forged by this generation's choices, would they inherit and carry forward into a rapidly changing world? The taste of the past was potent, but the flavor of the future remained unwritten, resting on the strength of the name that had been made."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A rival family attempts to acquire a key distribution hub vital to {family_name}'s burgeoning national network, testing the family's established reach."
+          ],
+          "choice": {
+            "text": "Mount a swift, aggressive counter-acquisition, demonstrating {family_name}'s resolve to protect its territory and expand its influence.",
+            "motivatorShift": {
+              "power": 3,
+              "wealth": -1,
+              "reach": 2
+            },
+            "setFlags": [
+              "defended_distribution_hub"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Alternatively, {given_name} could explore a strategic partnership with the rival, leveraging shared infrastructure to mutual benefit, rather than engaging in a costly conflict."
+          ],
+          "choice": {
+            "text": "Propose a strategic alliance, pooling resources to optimize logistics for both families.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "formed_strategic_alliance"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:bavaria:economic:middle:t4:open",
+      "sense": "smell",
+      "prose": [
+        "The sharp, metallic tang of newly minted currency mixed with the earthy fragrance of fine leather and the subtle, lingering sweetness of imported spices. These scents, once rare and intoxicating, now formed the familiar aroma of the family's central exchange, a sprawling nexus of global trade. The very air hummed with the silent, complex work of ledgers balancing across continents, of telegraphs clicking with prices from distant ports, of contracts signed with ink that still carried the faintest hint of its rich gallnut origins. It was the smell of a world both mastered and in constant flux, a testament to generations of Bavarian diligence woven into the fabric of international commerce.",
+        "Beyond the main hall, the air grew richer still. In the private chambers, the warm, comforting scent of roasted coffee beans from the Americas mingled with the crisp, almost clinical aroma of fresh paper and the faint, dusty scent of antique oak. Here, maps unfurled across polished tables, their aged parchment bearing the penciled annotations of new routes, new ventures, new territories for the family's influence to touch. Each breath was a reminder of the vast, intricate network {full_name} now commanded, a silent symphony of distant lands and burgeoning markets.",
+        "Even the scent of the city outside, a familiar blend of coal smoke and horse-drawn carriages, seemed different when filtered through the opulent windows of the family headquarters. It was no longer just a local tableau, but a node in a much larger system, a single, vital thread in the immense, unseen loom of global exchange. The faint smell of fresh bread from the bakery down the street, once a symbol of simple provision, now evoked the complex supply chains of grain and flour that kept entire populations fed, industries churning, and the family's coffers steadily growing."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The scent of freshly oiled machinery from a newly acquired factory drifted through the open window, a reminder of the tangible assets underpinning the global enterprise."
+          ],
+          "choice": {
+            "text": "Focus on the physical infrastructure, the steel and steam that powered their reach.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "worldview": -1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A delicate, almost imperceptible fragrance of fine silk from a recent shipment out of the Far East offered a glimpse into the more abstract, refined currents of their trade."
+          ],
+          "choice": {
+            "text": "Consider the flow of exotic goods and cultural exchange facilitated by their network.",
+            "motivatorShift": {
+              "reach": 2,
+              "worldview": 1,
+              "tradition": -1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t4:rising"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t4:rising",
+      "sense": "touch",
+      "prose": [
+        "The heavy, cold brass of the telegraph key, humming with latent electricity, pressed against {given_name}'s fingertips. Each click and buzz was a tremor from a distant land, a report of shifting markets or political unrest, demanding immediate attention. The sheer volume of information, a constant, physical pressure against the mind, felt like the weight of the world resting on their shoulders. It was a pressure both exhilarating and relentless, a test of will and nerve that came with the territory of being a world player. The texture of rough-spun jute sacks, recently unloaded from a distant ship, contrasted sharply with the smooth, cool surface of the mahogany desk where their decisions were made, a testament to the raw materials and refined outcomes of their enterprise.",
+        "Later, the cool, crisp feel of a newly printed share certificate, embossed with the family crest, offered a moment of tangible satisfaction amidst the maelstrom. Its edges were sharp, its paper resilient, a physical representation of the growing equity and power. Yet, even this success brought a different kind of touch: the firm, unyielding handshake of a rival banker, a reminder of the competitive spirit that defined the era. Every interaction, every document, carried a tactile weight, a resonance of the stakes involved.",
+        "The rough, calloused hands of a foreman from a recently established textile mill offered a different kind of contact, grounded and real. His grip was strong, honest, speaking of hard work and loyalty, a stark counterpoint to the velvet glove of diplomacy or the polished steel of financial maneuvering. {given_name} felt the pulse of the industrial engine they had helped to build, the beating heart of their economic might, and the human cost and reward intertwined within its rhythm."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The rough, unyielding texture of a new mining claim deed spoke of solid, physical assets."
+          ],
+          "choice": {
+            "text": "Emphasize securing tangible resources and enduring assets.",
+            "motivatorShift": {
+              "wealth": 2,
+              "tradition": 1,
+              "reach": -1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The delicate, almost ephemeral touch of a foreign ambassador's diplomatic letter hinted at alliances and abstract influence."
+          ],
+          "choice": {
+            "text": "Lean into diplomatic maneuvers and the power of influence.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "wealth": -1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A wave of technological innovation promises to revolutionize manufacturing. Should the family invest heavily in untested new processes, or fortify their existing, proven methods?",
+        "options": [
+          {
+            "text": "Pledge significant capital to adopt and lead in the new technological wave.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "tech_investment"
+            ]
+          },
+          {
+            "text": "Focus on optimizing current production, ensuring stability and incremental improvements.",
+            "motivatorShift": {
+              "wealth": 1,
+              "tradition": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "method_refinement"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t4:midpoint"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t4:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The relentless, rhythmic clatter of the printing presses echoed from the basement, churning out pamphlets and broadsides that shaped public opinion on economic policy. Above, in the grand parlor, the hushed, urgent murmur of a political caucus discussed tariffs and trade agreements, their voices a low thrum against the backdrop of distant street vendors' cries. It was the sound of the century being shaped, one decision, one negotiation, one printed word at a time. The world was shrinking, and the family's voice, once merely a whisper in Bavarian markets, was now an undeniable chorus in the global symphony of power.",
+        "A sudden, sharp ring of the telephone cut through the quiet of {full_name}'s study, a jarring, modern sound that bespoke urgency and instantaneous connection across vast distances. It was a call from a burgeoning financial center across the ocean, a report of market speculation that could either sink or elevate fortunes. The cacophony of global news, once delivered by slow steamer, now assaulted the ears with the speed of light, demanding immediate, decisive action. This was the new tempo of prosperity and peril.",
+        "From the open window, the brassy strains of a military band practicing in the park drifted in, a reminder of the shifting geopolitical landscape. The sound was both festive and ominous, hinting at the potential for conflict that could disrupt trade routes, destabilize markets, and threaten the carefully constructed edifice of international commerce. In this new era, the family's economic strength was inextricably linked to the fragile peace of nations, their ledgers balanced on the edge of a sword. It was in such moments that the distant chatter of rival houses, perhaps even the hushed whispers of another wave's ascent, could almost be imagined, a competing melody in the grand, global composition."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The booming voice of a prominent industrialist on the radio offered a vision of a future built on raw material exploitation and unchecked expansion."
+          ],
+          "choice": {
+            "text": "Align with powerful industrialists pushing for aggressive resource acquisition.",
+            "motivatorShift": {
+              "power": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The softer, more measured tones of an academic discussing international cooperation suggested a path of interconnected stability and shared prosperity."
+          ],
+          "choice": {
+            "text": "Support initiatives for global economic cooperation and stability.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 1,
+              "politics": -1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t4:turn"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t4:turn",
+      "sense": "sight",
+      "prose": [
+        "{given_name} stood before a massive, intricately detailed globe, its polished surface reflecting the flickering gaslight. Countless small flags, each representing a branch of the family's enterprise or a key trading partner, dotted its continents. From the bustling ports of the Atlantic to the remote markets of the Pacific, the visible network of their influence was breathtaking, a testament to generations of relentless industry and strategic vision. The very curvature of the Earth seemed to encapsulate the vastness of their reach, a canvas upon which their legacy was being painted.",
+        "The view from the penthouse office was equally commanding: the sprawling cityscape, a vibrant tapestry of brick, steel, and bustling thoroughfares, lay illuminated below. New factory smokestacks punctuated the skyline, their plumes dissolving into the night sky, while electric streetlights, a recent innovation, cast long, stark shadows. Every building, every thoroughfare, every flickering light seemed connected, directly or indirectly, to the family's efforts. It was a living, breathing testament to the physical manifestation of their economic power, a world sculpted by their hands.",
+        "Yet, beyond the immediate panorama, {given_name}'s gaze drifted to the distant horizon, where the land met the faint glow of the stars. It was a visual reminder of the unknown, the untapped potential, and the challenges that lay beyond the familiar. The world was still vast, still full of regions untouched, systems unshaped, waiting for the next move, the next grand strategy. The sheer scale of what they had built, and what they could still achieve, was almost overwhelming, a monumental vista of both triumph and daunting responsibility."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The steady glow of the family's vast financial ledgers, stacked high and meticulously organized, offered a vision of consolidated wealth and meticulous control."
+          ],
+          "choice": {
+            "text": "Focus on consolidating existing assets and streamlining internal operations for maximum efficiency.",
+            "motivatorShift": {
+              "wealth": 2,
+              "tradition": 1,
+              "reach": -1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The flickering light from a newly installed telegraph machine highlighted the rapid expansion of global communication and the potential for new, interconnected markets."
+          ],
+          "choice": {
+            "text": "Invest in expanding global communication infrastructure, bridging distances for commerce and influence.",
+            "motivatorShift": {
+              "reach": 2,
+              "worldview": 1,
+              "tradition": -1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the family define its role in shaping the evolving global economic systems of this new century?",
+        "options": [
+          {
+            "text": "Champion open, interconnected markets and international regulatory bodies to foster global stability and trade.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 2,
+              "politics": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "global_integration"
+            ]
+          },
+          {
+            "text": "Prioritize national economic strength and protectionist policies, reinforcing the home market and strategic alliances.",
+            "motivatorShift": {
+              "politics": 3,
+              "tradition": 2,
+              "honor": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "national_consolidation"
+            ]
+          },
+          {
+            "text": "Invest in disruptive innovations and new industries, creating entirely new economic paradigms and power centers.",
+            "motivatorShift": {
+              "power": 3,
+              "wealth": 2,
+              "worldview": 2,
+              "tradition": -2
+            },
+            "setFlags": [
+              "disruptive_innovation"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t4:close"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t4:close",
+      "sense": "taste",
+      "prose": [
+        "The rich, complex taste of a perfectly aged brandy lingered on the tongue, a celebratory note after a long, arduous journey. It was a flavor born of time, patience, and meticulous cultivation – much like the family's empire itself. Each sip offered a memory of past struggles, current triumphs, and the sweet satisfaction of monumental achievement. This was the taste of success, meticulously crafted and deeply savored, a culmination of generations of Bavarian industriousness now permeating global markets.",
+        "Alongside the brandy, a delicate, imported chocolate, its bitterness perfectly balanced with a hint of sweetness, evoked the nuanced decisions made throughout the era. Some choices were difficult, leaving a sharp, almost metallic tang of compromise, while others brought a smooth, melting sweetness of unexpected prosperity. The blend of flavors reflected the blend of cultures and economies the family had navigated, absorbed, and, in many ways, now embodied. It was the taste of a truly international palate.",
+        "Yet, beneath the rich layers of success, there was a subtle, almost imperceptible undertone – the lingering taste of a distant challenge, a nascent rivalry, or a new frontier yet to be conquered. It was the flavor of ambition, unsated, ever-present, reminding {given_name} that even at the apex of their power, the work was never truly finished. This was the inheritance, not just of wealth and influence, but of an insatiable drive, a legacy to be passed on to the next generation, a hunger for shaping the world that had become as fundamental as blood itself."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The comforting taste of a traditional Bavarian dish, perfectly prepared, spoke of the enduring heritage and values that grounded their vast empire."
+          ],
+          "choice": {
+            "text": "Reflect on the deep roots and foundational traditions that built the family's success.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The exotic, unfamiliar zest of a newly introduced fruit from a distant colony hinted at the ever-expanding horizons of global trade and cultural exchange."
+          ],
+          "choice": {
+            "text": "Contemplate the vastness of their global reach and the endless possibilities it presents.",
+            "motivatorShift": {
+              "reach": 2,
+              "worldview": 1,
+              "tradition": -1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:bavaria:economic:middle:t5:open",
+      "sense": "smell",
+      "prose": [
+        "The air in the orbital fabrication hub carried a distinct, recycled tang, a subtle blend of ozone from the atmospheric processors and the metallic sharpness of newly cut durasteel. It was the scent of progress, a constant, low hum of industry that permeated every corner of Station Fortuna. The faint, sweet undercurrent of hydroponic algae beds, cultivated for oxygen and sustenance, mingled with the dry, sterile aroma of freshly laundered synthetic uniforms, signaling the meticulous efficiency {full_name} championed within this burgeoning enterprise.",
+        "Beyond the immediate environment of the fabrication bays, a different set of odors occasionally wafted through the ventilation: the rich, earthy scent of imported Terran soil from a private garden module, a stark contrast to the sterile environment, hinting at the lingering human desire for familiar comforts amidst the alien vastness. This unique confluence of scents — the industrial, the artificial, and the stubbornly natural — defined the very atmosphere of humanity's expansion, a tapestry woven from ambition and necessity, each thread meticulously accounted for by the {family_name} line.",
+        "Every inhale was a reminder of the careful balance maintained on the frontier, where resources were finite, and every breath, every pound of recycled water, every joule of energy, contributed to the intricate cosmic ledger. It was a tangible testament to the economic pragmatism that had driven the family from Old Earth's fields to the very edge of the solar system, ensuring that even in the vacuum of space, opportunity could be manufactured, and profit meticulously cultivated."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You focus on the pervasive scent of new synthetic materials, fresh from the printers, signaling another successful production cycle."
+          ],
+          "choice": {
+            "text": "Lean into the efficiency, ensuring the production lines hum without pause.",
+            "motivatorShift": {
+              "wealth": 2,
+              "worldview": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "t5_efficient_production"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You recognize the subtle aroma of atmospheric scrubbers working overtime, an indicator of the station's relentless expansion and increasing population."
+          ],
+          "choice": {
+            "text": "Acknowledge the growing demand and the potential for new markets.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "t5_expanding_markets"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t5:rising"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t5:rising",
+      "sense": "touch",
+      "prose": [
+        "The cool, smooth surface of the command console felt familiar beneath {given_name}'s fingertips, a comforting solidity in the vast, swirling expanse of the cosmos visible through the panoramic viewports. Each subtle vibration emanating from the station's core, a barely perceptible hum, spoke of the immense power contained within its metal shell, a constant reminder of the engineering marvel that was their home and their primary asset. The raw, textured grip of a pressure wrench, momentarily handled, connected {given_name} to the hands-on work of the engineers, a stark contrast to the polished controls, yet equally vital to the survival and prosperity of their venture.",
+        "A sudden tremor, more distinct than the usual operational vibrations, rippled through the deck plates, a faint but clear reminder of the external forces constantly at play—the docking of a new transport, perhaps, or a minor seismic event on the nearby lunar surface being mined for resources. This constant, physical feedback from the environment, from the meticulously calibrated systems to the raw, untamed elements of space, kept {given_name} acutely aware of the delicate balance between technological mastery and the unforgiving reality of the frontier. Every tactile sensation reinforced the tangible nature of their reach, the physical embodiment of their economic ambition.",
+        "The very air, carefully circulated and conditioned, carried a slight, almost imperceptible pressure against the skin, a testament to the life support systems tirelessly at work. It was a pressure that mirrored the unspoken weight of responsibility {full_name} carried, not just for the family's assets, but for the hundreds of lives reliant on their foresight and operational integrity. This tactile connection to the station, to the technology and the environment, solidified the understanding that their destiny was quite literally in their hands, demanding unwavering attention and calculated action."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You run a hand over the polished control panel, sensing the delicate power contained within, ready to be wielded."
+          ],
+          "choice": {
+            "text": "Engage directly with the station's operational diagnostics.",
+            "motivatorShift": {
+              "power": 1,
+              "worldview": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "t5_hands_on_control"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You grasp a small, heavy sample of unprocessed lunar regolith, feeling its rough, cold density, a symbol of raw potential."
+          ],
+          "choice": {
+            "text": "Consider the tangible resources at their disposal, and how to best extract value.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "t5_resource_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A new, unproven asteroid mining venture promises immense returns but carries significant risk. An established, lower-yield lunar drilling operation offers stable, predictable growth. How do you advise {full_name} to proceed?",
+        "options": [
+          {
+            "text": "Advocate for the asteroid venture, embracing the potential for groundbreaking wealth.",
+            "motivatorShift": {
+              "wealth": 3,
+              "reach": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "t5_risk_taker",
+              "t5_asteroid_investment"
+            ]
+          },
+          {
+            "text": "Recommend the lunar drilling operation, prioritizing steady expansion and security.",
+            "motivatorShift": {
+              "wealth": 2,
+              "tradition": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "t5_conservative_growth",
+              "t5_lunar_investment"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t5:midpoint"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t5:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cacophony of the orbital market hub was a symphony of galactic commerce, a constant ebb and flow of linguistic snippets and mechanical murmurs. Robotic forklifts whirred past, carrying crates of exotic minerals, their tracks grinding faintly against the reinforced floor. The sharp crackle of comms chatter from a dozen different traders, speaking in dialects both familiar and alien, created a vibrant tapestry of economic exchange. Amidst this bustling background, the distinct, rhythmic thrum of the deep-space transports arriving and departing from the main docking bay reverberated through the very structure of the station, a reassuring pulse of activity.",
+        "Over the speaker system, a public announcement in three languages — Standard, Trade Pidgin, and a guttural, unfamiliar tongue — boomed about a new cargo arrival, instantly followed by a surge in chatter as traders jostled for position. The distant, almost musical ping of a long-range scanner sweeping the void added another layer to the auditory landscape, a constant vigilance against threats and a hopeful search for new opportunities. This ceaseless auditory input was the heartbeat of the {family_name} line's extended reach, proof that their efforts had cultivated not just a station, but a nexus of interstellar trade.",
+        "You overhear snippets of negotiations, the practiced intonation of a veteran merchant haggling over a shipment of refined alloys, the high-pitched excitement of a new prospector describing a virgin asteroid field. Among these, the distinct, almost aristocratic cadence of a rival line’s representative, perhaps the {rival_family_name} syndicate, discussing a major trade deal, cut through the general din, a subtle warning that prosperity in the stars was a shared, and often fiercely contested, resource. The sounds were a constant reminder that their mark on the cosmos was not solitary, but part of a grander, louder, and increasingly competitive human symphony."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You discern the specific whir and clang of the {family_name} processing units, a comforting, familiar rhythm amidst the chaos."
+          ],
+          "choice": {
+            "text": "Focus on optimizing internal operations and maximizing your own output.",
+            "motivatorShift": {
+              "wealth": 2,
+              "worldview": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "t5_internal_efficiency"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You strain to hear the details of the rival {rival_family_name} negotiation, attempting to gauge their next move in the cosmic market."
+          ],
+          "choice": {
+            "text": "Gather intelligence on competitors and anticipate market shifts.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "t5_competitor_analysis"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t5:turn"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t5:turn",
+      "sense": "sight",
+      "prose": [
+        "The viewport offered an unparalleled vista: the nascent glow of a newly terraformed world, its emerging oceans shimmering under a distant sun, verdant continents slowly blooming from once-barren rock. Below, a sprawling network of {family_name} mining outposts scarred the surface of a neighboring asteroid, glittering like scattered diamonds in the black. From this vantage, the entire tapestry of their cosmic endeavors was laid bare—the precise orbital paths of automated cargo drones, the pinpoint lights of distant research vessels, the faint, almost imperceptible haze of atmospheric processors working tirelessly to reshape a world.",
+        "Each structural beam, every solar array, every habitation dome was a testament to decades of calculated risk and relentless labor. The intricate dance of construction ships, tiny against the immensity of space, meticulously adding segments to a new orbital factory, painted a picture of industrious expansion. It was a sight that filled {full_name} with a profound sense of accomplishment, but also a stark awareness of the monumental choices that still lay ahead. The raw, untamed frontier was slowly yielding to human ingenuity, but its scale remained humbling, its challenges immense.",
+        "Beyond the immediate domain of their operations, the shimmering spiral arm of the galaxy stretched into infinity, speckled with uncountable stars, each a potential new market, a new resource, a new world to claim. The vast, beckoning emptiness was not a void, but a canvas awaiting the brushstrokes of human ambition. The question now was not merely *if* they would expand, but *how*—what legacy of colonization and commerce would the {family_name} line etch upon the face of the cosmos this generation, shaping not just their fortune, but the very destiny of humanity's spread among the stars."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You gaze upon the newly greened surface of their terraforming project, seeing the tangible results of years of investment."
+          ],
+          "choice": {
+            "text": "Reinforce the value of long-term strategic projects that build lasting infrastructure.",
+            "motivatorShift": {
+              "worldview": 2,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "t5_terraforming_pride"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your eyes drift to the distant, unexplored nebulae, imagining the untouched wealth hidden within their swirling gases."
+          ],
+          "choice": {
+            "text": "Consider the next great frontier, the untapped resources awaiting discovery.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "t5_unexplored_potential"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The {family_name} line stands at a precipice of interstellar expansion. Do you champion aggressive resource acquisition across new systems, invest heavily in the development of existing terraformed worlds, or pivot towards pioneering new interstellar trade routes as your primary legacy?",
+        "options": [
+          {
+            "text": "Initiate an aggressive campaign of resource acquisition in new, distant systems, staking claims for future generations.",
+            "motivatorShift": {
+              "wealth": 4,
+              "reach": 3,
+              "worldview": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "t5_aggressive_acquisition",
+              "t5_cosmic_miner"
+            ]
+          },
+          {
+            "text": "Focus resources on perfecting the existing terraformed worlds, creating self-sustaining, prosperous colonies.",
+            "motivatorShift": {
+              "wealth": 2,
+              "worldview": 3,
+              "lineage": 2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "t5_sustainable_colonies",
+              "t5_world_builder"
+            ]
+          },
+          {
+            "text": "Invest heavily in developing new, secure interstellar trade routes, becoming the backbone of galactic commerce.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "power": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "t5_trade_master",
+              "t5_galactic_merchant"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:economic:middle:t5:close"
+    },
+    {
+      "id": "act:bavaria:economic:middle:t5:close",
+      "sense": "taste",
+      "prose": [
+        "The synthetic wine, aged in zero-G vats, had a crisp, mineral taste, a fitting toast to the generation's achievements on the very edge of explored space. It carried the faint, almost imperceptible tang of the repurposed nutrients from which it was derived, a subtle reminder of the ingenuity and resourcefulness required to create such luxuries far from Earth's fertile soil. Each sip was a complex blend of bitterness from hard-won victories and a lingering sweetness of anticipated success, a distillation of the {full_name}'s generational endeavor.",
+        "Accompanying the drink were small, delicately crafted morsels of cultivated protein, flavored with exotic Martian spices—a taste both familiar in its savory notes and utterly alien in its origin. It was a taste of the future, a taste of what humanity had cultivated among the stars through meticulous planning and economic leverage. This celebratory meal, enjoyed in a panoramic dining lounge overlooking a bustling orbital port, was more than mere sustenance; it was a ritual, a tangible marker of the line's elevated status and pervasive influence.",
+        "As the meal concluded, the lingering taste on the tongue was one of profound satisfaction, a quiet affirmation of the legacy {full_name} had secured for the {family_name} line. It was the taste of a foothold, not just on a new world, but in a new era of human enterprise, a flavor imbued with the weight of responsibility and the promise of untold future prosperity. The baton was ready to be passed, the foundations for the next great expansion firmly in place, etched not just in history books, but in the very fiber of interstellar economy."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You savor the rich, complex flavor of a new synthetic delicacy, a testament to the line's innovation and economic power."
+          ],
+          "choice": {
+            "text": "Reflect on the innovative products and services the family has brought to the cosmic market.",
+            "motivatorShift": {
+              "wealth": 2,
+              "worldview": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "t5_innovative_legacy"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You feel the slightly metallic tang of the processed water in your glass, a reminder of the foundational, industrial efforts that underpin their success."
+          ],
+          "choice": {
+            "text": "Acknowledge the core industrial and resource-based wealth that remains the family's bedrock.",
+            "motivatorShift": {
+              "wealth": 1,
+              "tradition": 1,
+              "lineage": 2
+            },
+            "setFlags": [
+              "t5_industrial_bedrock"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}

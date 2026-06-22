@@ -1,0 +1,2051 @@
+{
+  "acts": [
+    {
+      "id": "act:ireland:entertainment:middle:t5",
+      "wave": "ireland",
+      "archetype": "entertainment",
+      "cls": "middle",
+      "tier": 5,
+      "macroAct": "ascension",
+      "title": "Act VI — The Reach for the Stars",
+      "scenes": [
+        "act:ireland:entertainment:middle:t5:open",
+        "act:ireland:entertainment:middle:t5:rising",
+        "act:ireland:entertainment:middle:t5:midpoint",
+        "act:ireland:entertainment:middle:t5:turn",
+        "act:ireland:entertainment:middle:t5:close"
+      ]
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t0",
+      "wave": "ireland",
+      "archetype": "entertainment",
+      "cls": "middle",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — The Green Stage",
+      "scenes": [
+        "act:ireland:entertainment:middle:t0:open",
+        "act:ireland:entertainment:middle:t0:rising",
+        "act:ireland:entertainment:middle:t0:midpoint",
+        "act:ireland:entertainment:middle:t0:turn",
+        "act:ireland:entertainment:middle:t0:close"
+      ]
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t1",
+      "wave": "ireland",
+      "archetype": "entertainment",
+      "cls": "middle",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — The Gilded Stage of Green",
+      "scenes": [
+        "act:ireland:entertainment:middle:t1:open",
+        "act:ireland:entertainment:middle:t1:rising",
+        "act:ireland:entertainment:middle:t1:midpoint",
+        "act:ireland:entertainment:middle:t1:turn",
+        "act:ireland:entertainment:middle:t1:close"
+      ]
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t2",
+      "wave": "ireland",
+      "archetype": "entertainment",
+      "cls": "middle",
+      "tier": 2,
+      "macroAct": "emergence",
+      "title": "Act III — Footlights and Foundations",
+      "scenes": [
+        "act:ireland:entertainment:middle:t2:open",
+        "act:ireland:entertainment:middle:t2:rising",
+        "act:ireland:entertainment:middle:t2:midpoint",
+        "act:ireland:entertainment:middle:t2:turn",
+        "act:ireland:entertainment:middle:t2:close"
+      ]
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t3",
+      "wave": "ireland",
+      "archetype": "entertainment",
+      "cls": "middle",
+      "tier": 3,
+      "macroAct": "emergence",
+      "title": "Act IV — The Footlights' Unfurling",
+      "scenes": [
+        "act:ireland:entertainment:middle:t3:open",
+        "act:ireland:entertainment:middle:t3:rising",
+        "act:ireland:entertainment:middle:t3:midpoint",
+        "act:ireland:entertainment:middle:t3:turn",
+        "act:ireland:entertainment:middle:t3:close"
+      ]
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t4",
+      "wave": "ireland",
+      "archetype": "entertainment",
+      "cls": "middle",
+      "tier": 4,
+      "macroAct": "ascension",
+      "title": "Act V — The Global Marquee",
+      "scenes": [
+        "act:ireland:entertainment:middle:t4:open",
+        "act:ireland:entertainment:middle:t4:rising",
+        "act:ireland:entertainment:middle:t4:midpoint",
+        "act:ireland:entertainment:middle:t4:turn",
+        "act:ireland:entertainment:middle:t4:close"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "act:ireland:entertainment:middle:t5:open",
+      "sense": "smell",
+      "prose": [
+        "The air on Ganymede Station was a perpetual, filtered blend, a subtle cocktail of recycled oxygen, the faint metallic tang of newly fabricated components, and a curious, sweet-and-sour note from the hydroponic algae farms. It was the smell of humanity making do, thriving in a place it was never meant to be, a scent {given_name} {surname} had come to associate with home. The entertainment district, a bubble of vibrant life within the vast, cold vacuum, added its own layered perfumes: the sugary residue of synthetic carnival treats, the earthy undertone of simulated forests in performance domes, and the unmistakable, intoxicating waft of ozone from plasma displays.",
+        "Today, the aroma of newly printed costumes mingled with the sterile chill of the dressing rooms backstage. It was a familiar scent from Earth, only here it carried a faint, almost imperceptible hint of a different pressure, a subtle difference in the atmospheric mix that made it uniquely Ganymedean. This new world, forged from human will and advanced technology, had become the canvas for their family's enduring legacy of joy and spectacle.",
+        "Every breath was a testament to the colossal effort of their generation, not just in physically reaching the stars, but in imbuing these harsh, new habitats with the very spirit of human entertainment. The family's ventures now spanned across orbital platforms and nascent colonies, bringing laughter and wonder to the scattered outposts of humanity. The reach for the stars was no longer a dream but a daily, palpable reality, scented with ingenuity and ambition."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You inhale deeply, finding comfort in the scent of engineered familiarity."
+          ],
+          "choice": {
+            "text": "Lean into the efficiency of the station's environment, focusing on optimizing performances for the unique conditions.",
+            "motivatorShift": {
+              "wealth": 1,
+              "worldview": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "t5_embraced_efficiency"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You detect a faint, almost melancholic hint of something missing, an echo of earthly authenticity."
+          ],
+          "choice": {
+            "text": "Consider how to infuse more 'natural' elements or raw, unfiltered emotion into the next production, despite the artificial setting.",
+            "motivatorShift": {
+              "worldview": -1,
+              "honor": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "t5_sought_authenticity"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t5:rising"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t5:rising",
+      "sense": "touch",
+      "prose": [
+        "The low-gravity studio where {full_name} rehearsed offered a unique blend of freedom and discipline. Every movement, every leap and spin, was amplified, demanding exquisite control. The fine dust that settled on the repurposed Martian sand-floor felt alien, yet strangely soft beneath gloved fingertips, a constant reminder of the raw, untamed nature of this new frontier. Walls hummed faintly with the thrum of atmospheric processors, a subtle vibration felt through the soles of zero-g boots.",
+        "Performing here was an act of constant adaptation. The delicate touch needed to propel oneself across the stage without overshooting, the careful grip on a prop that weighed almost nothing, yet held immense symbolic weight for the audience – these were the new mechanics of their craft. It was a dance not just with music, but with physics, a performance that showcased human grace against the backdrop of cosmic possibility. The thrill of it, the challenge, was intoxicating.",
+        "Outside the studio, the rough-hewn metal of the station's industrial sectors pressed cold and unforgiving against the hand, a contrast to the polished synthetic surfaces of their performance halls. The reality of life among the stars was a patchwork of luxury and stark utility. Their entertainment, however, served as the vital warmth, the soft human touch in a world often devoid of it, a bridge between the hard edge of survival and the yearning for beauty."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You feel the gentle give of the low-gravity floor, a familiar friend in your craft."
+          ],
+          "choice": {
+            "text": "Embrace the low-gravity fully, designing new acts that defy terrestrial limitations and push the boundaries of spectacle.",
+            "motivatorShift": {
+              "reach": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "t5_innovate_gravity"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You brush against a cool, metallic strut, a stark reminder of the station's rigid structure."
+          ],
+          "choice": {
+            "text": "Focus on refining classic performance styles, adapting them subtly for the environment without losing their foundational human appeal.",
+            "motivatorShift": {
+              "tradition": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "t5_refine_classic"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A sudden malfunction in the main entertainment grid threatens to cut off your latest broadcast to a newly established asteroid mining colony. Do you prioritize a quick, if less polished, fix to maintain connection, or delay for a more robust solution that guarantees quality, risking a longer blackout?",
+        "options": [
+          {
+            "text": "Implement an immediate, temporary patch to restore the broadcast, ensuring the miners receive their much-needed distraction now.",
+            "motivatorShift": {
+              "honor": 1,
+              "reach": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "t5_quick_fix_broadcast"
+            ]
+          },
+          {
+            "text": "Insist on a complete, stable repair, explaining the delay to the colony to uphold the high standard of your family's productions.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "t5_quality_over_speed"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t5:midpoint"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t5:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The soundscape of their new life was a constant, intricate weave. The omnipresent hum of the station's life support systems formed a foundational drone, a deep vibration felt more than heard, underpinning everything. Overlaying this was the crisp, almost too-perfect clarity of digital audio streams, carrying the laughter and applause from distant stellar outposts directly into their control room. Every broadcast, every live performance, sent ripples across the scattered human settlements, proving that even in the vastness of space, connection through shared experience was paramount.",
+        "Tonight, {full_name} listened intently, a slight frown creasing their brow. The audience feedback coming in was overwhelmingly positive, yet a new, competing sonic signature had begun to emerge on the interstellar entertainment bandwidth. It was a novel form of interactive, immersive storytelling, not unlike their own, but with an unfamiliar tonal quality – a blend of ancient Earth folklore and cutting-edge holographic projection, sponsored by a burgeoning corporate conglomerate from the Kepler-186f colony. Their name, whispered through the comms, was 'The Lumina Weave'.",
+        "The stakes were clear: their family's mark on the cosmos was being challenged. The Lumina Weave's transmissions, though still nascent, carried a distinct resonance, a vibrant, almost alien melody that captivated audiences who might otherwise have tuned into {family_name} productions. The battle for the hearts and minds of the diaspora was not fought with weapons, but with stories, songs, and the subtle, persuasive power of sound."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You focus on the intricate layers of your own production, seeking ways to enhance its depth and immersion."
+          ],
+          "choice": {
+            "text": "Double down on artistic innovation within your current framework, believing your family's unique brand will prevail.",
+            "motivatorShift": {
+              "honor": 1,
+              "lineage": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "t5_artistic_innovation"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You pick apart the new sound, analyzing its components for weaknesses or opportunities for integration."
+          ],
+          "choice": {
+            "text": "Research 'The Lumina Weave's' methods, considering if adapting some elements could broaden your own appeal.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "t5_strategic_adaptation"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t5:turn"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t5:turn",
+      "sense": "sight",
+      "prose": [
+        "The panoramic view from {given_name}'s private observation deck was breathtaking, a swirling canvas of stars and nebulae, with Earth a distant, shimmering blue marble. Below, the new orbital entertainment platform, 'The Celestial Stage,' glowed with a promise of unparalleled spectacle, its intricate geometry designed to capture and reflect starlight. It was the culmination of a generation's work, a testament to the family's ambition to transcend mere performance and create immersive, cosmic experiences.",
+        "Yet, even amidst this grandeur, the shadow of competition loomed. The Lumina Weave had just announced their own 'Star-Singer' initiative, a massive project aimed at colonizing a small, resource-rich asteroid and converting it into a permanent, multi-sensory storytelling hub, backed by immense corporate funding. Their vision, though different, was equally audacious, threatening to eclipse the {family_name} legacy if not met with a definitive counter-move.",
+        "The choice before {given_name} {surname} was stark, laid out like the constellations themselves: how would their family define its place in this new galactic frontier? Would they double down on the pure, artistic spectacle that had brought them so far, or pivot to a more overtly influential role, shaping the very cultural fabric of the nascent star-colonies? The vastness of space offered infinite possibilities, but also demanded clear, decisive vision from those who dared to colonize it, not just with bodies, but with stories."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You gaze at the Celestial Stage, imagining the pure artistic potential of its unique design."
+          ],
+          "choice": {
+            "text": "Focus all resources on making 'The Celestial Stage' an artistic marvel, a global (and interstellar) beacon of pure entertainment.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "t5_celestial_artistry"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your eyes drift towards the distant asteroid belt, pondering the implications of 'The Lumina Weave's' colonization plans."
+          ],
+          "choice": {
+            "text": "Begin researching the feasibility of acquiring a minor asteroid yourself, to establish a physical, cultural hub for your family's influence.",
+            "motivatorShift": {
+              "reach": 2,
+              "politics": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "t5_celestial_colonization_research"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "Faced with the rising challenge of 'The Lumina Weave' and the opportunity of the new frontier, how will your family solidify its place among the stars for generations to come?",
+        "options": [
+          {
+            "text": "Launch a daring, multi-system artistic tour, bringing cutting-edge holographic and zero-gravity performances to every human settlement, cementing your family as the 'Cosmic Troubadours'.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 2,
+              "reach": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "t5_path_cosmic_troubadours"
+            ]
+          },
+          {
+            "text": "Invest heavily in developing a new 'cultural infrastructure' project – an interstellar network of educational and entertainment archives, positioning your family as curators of humanity's off-world heritage.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "politics": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "t5_path_heritage_curators"
+            ]
+          },
+          {
+            "text": "Forge strategic alliances with burgeoning interstellar corporations and governments, leveraging your entertainment influence to gain political and economic footholds in new colonies, becoming 'Cultural Architects of the Stars'.",
+            "motivatorShift": {
+              "power": 2,
+              "wealth": 2,
+              "politics": 2,
+              "honor": -1
+            },
+            "setFlags": [
+              "t5_path_cultural_architects"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t5:close"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t5:close",
+      "sense": "taste",
+      "prose": [
+        "The celebratory meal tasted of triumph, mixed with the faint, peculiar aftertaste of synthetic protein and genetically modified fungi, flavors now as iconic to this generation as any traditional dish from Earth. It was served in a grand hall, its transparent dome showcasing the dizzying swirl of a nearby gas giant. Each bite, meticulously crafted from the sparse resources of the void, was a testament to survival, ingenuity, and the enduring human desire for luxury, however engineered.",
+        "For {full_name}, the flavors represented the culmination of a life spent reaching, not just for the stars, but for the hearts of those who lived beneath them. The sweet, sharp tang of a newly synthesized beverage cut through the richness of the main course, a mirror to the challenges overcome and the bold, often abrasive, decisions made along the way. It was a taste of future, vibrant and undeniably artificial, yet deeply satisfying in its complexity.",
+        "As the meal concluded, a small, crystal-clear dish was placed before the heir – a single, perfectly formed 'star-fruit,' grown in proprietary hydroponics, its taste a concentrated burst of energy and exotic sweetness. It was the fruit of their family's labor, a symbol of the foothold beyond Earth they had secured, and the legacy of joy, wonder, or influence they now passed on. The generation had closed its chapter, having carved a distinct, flavorful niche in the vast, cosmic expanse."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You savor the taste of the star-fruit, a symbol of hard-won bounty in the vastness."
+          ],
+          "choice": {
+            "text": "Reflect on the artistic and cultural milestones achieved, valuing the intangible legacy above all.",
+            "motivatorShift": {
+              "honor": 1,
+              "worldview": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "t5_reflect_artistic_legacy"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The sweetness of the fruit is accompanied by a metallic tang, reminding you of the strategic battles fought."
+          ],
+          "choice": {
+            "text": "Contemplate the influence and strategic positioning gained, recognizing the material strength built for future generations.",
+            "motivatorShift": {
+              "power": 1,
+              "wealth": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "t5_reflect_strategic_gain"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t0:open",
+      "sense": "smell",
+      "prose": [
+        "The pervasive dampness of the steerage, a mingling of salt spray and unwashed bodies, still clung to {given_name}'s coat even now, weeks after disembarking. It was a phantom, rising from the rough woolen fabric each time he moved, a stark reminder of the cramped, breathless journey across the heaving Atlantic. But here, on the bustling thoroughfare of the city’s burgeoning Irish quarter, other aromas wrestled for dominance: the sharp tang of coal smoke, the sweet, yeasty breath of fresh-baked bread escaping a tenement window, and the underlying, curious metallic scent of raw commerce that permeated everything.",
+        "The air itself felt thick, laden with the unfamiliar, yet there were echoes. A sudden gust would carry the faint, sweet decay of old vegetables from a pushcart, stirring a memory of market days back home, a wistful whisper of the life left behind. {given_name} breathed deeply, trying to sort the familiar from the alien, a constant, low thrum of anxiety mingling with a nascent excitement in his chest. Each inhale was a lesson, a new chapter written on the wind."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A moment of intense nostalgia washes over {given_name} as a familiar, earthy scent of peat smoke, almost certainly from a distant hearth, briefly brushes past him."
+          ],
+          "choice": {
+            "text": "Focus on the comfort of familiar smells, however fleeting.",
+            "motivatorShift": {
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "reminiscent_comfort"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The pungent, unfamiliar aroma of roasting chestnuts, a scent he'd never encountered before, draws his attention towards a vendor cart down the street."
+          ],
+          "choice": {
+            "text": "Embrace the novelty of new scents, a sign of a new beginning.",
+            "motivatorShift": {
+              "worldview": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "new_world_curiosity"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t0:rising"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t0:rising",
+      "sense": "touch",
+      "prose": [
+        "The biting chill of the morning air gnawed at {given_name}'s fingertips, even through the worn leather of his gloves, as he clutched the neck of his fiddle. The strings, cold and unresponsive at first, slowly warmed beneath the pressure of his calloused fingers, a familiar comfort amidst the alien grit of the pavement beneath his worn boots. Every chord vibrated not just through the wood, but through his very bones, a direct connection to the memories of hearth and homeland, a physical anchor in a world that felt constantly in motion.",
+        "The relentless demands of survival pressed in, a constant, dull ache in his shoulders from carrying the heavy instrument case, and the rough jostle of the crowds against him as he tried to find a suitable corner for a performance. His pockets felt too light, a stark counterpoint to the weight of responsibility that settled firmly upon his shoulders, a burden he could almost physically feel. It was a tangible struggle, yet the promise of music, of connection, remained a potent balm against the harsh reality of their new beginning."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The rough texture of a brick wall against {given_name}'s back offers a moment of solid support, a physical reminder of his own resilience as he surveys the bustling street."
+          ],
+          "choice": {
+            "text": "Lean into the physical struggle, finding strength in enduring discomfort.",
+            "motivatorShift": {
+              "power": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "embrace_hardship"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A child, perhaps no older than five, gently tugs on {given_name}'s trousers, offering a small, smooth pebble as a silent token of appreciation after a brief impromptu tune."
+          ],
+          "choice": {
+            "text": "Feel a surge of connection from a simple touch, reinforcing the power of shared humanity.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "community_solace"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A fellow immigrant, an older woman with tired eyes, passes by and drops a single, tarnished coin into {given_name}'s open hat. She smiles, a silent gesture of solidarity, before disappearing into the throng. Do you accept this small kindness as a sign, or does it stir a deeper resolve for self-reliance?",
+        "options": [
+          {
+            "text": "Accept the coin as a blessing and a symbol of community support.",
+            "motivatorShift": {
+              "worldview": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "accepted_charity"
+            ]
+          },
+          {
+            "text": "While grateful, resolve to earn his own way and avoid future reliance.",
+            "motivatorShift": {
+              "power": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "fueled_independence"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t0:midpoint"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t0:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cacophony of the ward was a symphony of survival, a constant, booming overture to the struggles and triumphs unfolding on every block. The clatter of horse-drawn carts vied with the rhythmic clanging of a blacksmith’s hammer from down the street, while the lilting strains of a penny whistle mingled with the mournful wail of a distant foghorn. {given_name}'s ear, attuned to the subtle shifts in melody and rhythm, began to discern the distinct voices of this new world, each one a thread in the grand tapestry of immigrant life, rich with untold stories.",
+        "He listened not just to the music, but to the chatter in the taverns, the snippets of conversation caught on the wind, piecing together the unspoken rules and hidden currents of this unfamiliar society. The laughter from one stoop, the sharp rebuke from another, the hopeful lilt of an old Irish ballad sung with new words—all these sounds painted a vivid picture of a people striving to carve out their own space. It was in these auditory layers that the true pulse of belonging, or the lack thereof, could be felt, an unspoken promise or threat in every whisper and shout."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The unfamiliar, lively rhythm of a newly arrived Italian street musician, playing a mandolin with fierce passion, catches {given_name}'s ear, prompting a surprising sense of connection."
+          ],
+          "choice": {
+            "text": "Seek out the foreign musician, curious about their melodies and stories.",
+            "motivatorShift": {
+              "worldview": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "seek_cultural_exchange"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A group of Irish laborers, their voices rough with drink and nostalgia, burst into a familiar rebel song from the old country, the raw emotion echoing through the narrow alley."
+          ],
+          "choice": {
+            "text": "Join in the familiar refrain, finding comfort and solidarity in the sounds of home.",
+            "motivatorShift": {
+              "tradition": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "reaffirm_heritage"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t0:turn"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t0:turn",
+      "sense": "sight",
+      "prose": [
+        "The sprawling, grimy expanse of the immigrant ward unfolded before {given_name}'s eyes, a chaotic mosaic of hastily constructed tenements, overflowing pushcarts, and the makeshift stages that dotted street corners and tavern backrooms. He saw the resilience etched on the faces of his countrymen, the determination in their hurried steps, but also the weariness, the shadows under their eyes that spoke of ceaseless toil. The vibrant splashes of color from market stalls stood in stark contrast to the drab brick of factories looming in the distance, a visual metaphor for the twin poles of hardship and hope.",
+        "As he looked out, a vision began to coalesce in his mind: not just a place where people struggled, but a vibrant cultural hub, a testament to the enduring spirit of the Irish. He saw the potential for a new kind of gathering place, a venue where the stories and songs of the old country could be preserved, yet transformed for a new audience. The path ahead, however, was not clear, marked by the competing visions of what this nascent community truly needed and desired. The choices made now would define the very visual fabric of their future."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "{given_name}'s gaze falls upon a vacant, crumbling storefront, its windows boarded, yet hinting at a spacious interior that could serve immediate, humble needs."
+          ],
+          "choice": {
+            "text": "Consider the immediate practicalities: a small, accessible space for street performances.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "focus_immediate_gains"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "He looks towards a larger, more imposing structure, perhaps an abandoned church or hall, envisioning it transformed into a grander stage for the flourishing cultural life of the ward."
+          ],
+          "choice": {
+            "text": "Dream of a more ambitious venue, a true cultural landmark for the community.",
+            "motivatorShift": {
+              "reach": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "envision_grand_venue"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The community is yearning for a central gathering point that offers both entertainment and a sense of shared heritage. Different factions within the ward have competing ideas. Do you align with those who advocate for a traditional music hall, an adaptable theatrical space, or do you pursue a more radical, inclusive community center that welcomes all forms of art?",
+        "options": [
+          {
+            "text": "Champion a traditional Irish music hall, preserving the sounds of home.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "founded_music_hall"
+            ]
+          },
+          {
+            "text": "Create an adaptable theatrical space, allowing for varied performances and new narratives.",
+            "motivatorShift": {
+              "worldview": 1,
+              "reach": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "founded_theatrical_space"
+            ]
+          },
+          {
+            "text": "Establish an inclusive community center, a beacon for all arts and immigrants.",
+            "motivatorShift": {
+              "worldview": 2,
+              "politics": 2,
+              "reach": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "founded_community_center"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t0:close"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t0:close",
+      "sense": "taste",
+      "prose": [
+        "The bitter tang of strong black tea, sweetened with a single lump of sugar, settled on {given_name}'s tongue as he watched his heir, {heir_given_name}, practice a new reel. It was a taste that brought him back to the rough solace of the crossing, to the first, tentative sips of hope in a strange land. But tonight, it mingled with the richer, more complex flavor of satisfaction – a subtle, deeply ingrained sweetness earned through years of tireless dedication and hard-won triumphs, a flavor he wished to pass on.",
+        "Yet, a lingering undercurrent of the struggle remained, a faint metallic taste of iron in the back of his throat, a reminder of the countless sacrifices made, the lean times and the moments of doubt. He savored the warmth of the tea, letting the flavors unfold, recognizing that the heritage he was passing on was not just one of melody and performance, but one forged in the crucible of adaptation and resilience. The taste of their future, he knew, would be a blend of these experiences, a unique vintage ready to be bottled by the next generation."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "As {heir_given_name} stumbles over a difficult passage in the tune, {given_name} takes a deep, grounding breath, recalling the arduous practice that built his own mastery."
+          ],
+          "choice": {
+            "text": "Impress upon the heir the value of diligent practice and preserving traditional forms.",
+            "motivatorShift": {
+              "tradition": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "passed_on_discipline"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "{given_name} tastes the sharp, almost revolutionary spice of a new dish being prepared in the kitchen, a culinary fusion born of their new home, and he feels a spark of inspiration."
+          ],
+          "choice": {
+            "text": "Encourage the heir to innovate, to blend old traditions with new opportunities.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "passed_on_innovation"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of damp earth, recently turned by a heavy plow, clung to the air, a foundational aroma beneath the sharper tang of fresh-cut lumber. It was the smell of possibility, of raw potential waiting to be shaped. Mixed with it, faintly, was the yeasty, sweet perfume from the brewery down the lane, a promise of warmth and conviviality that seemed to seep into the very foundations of their new venture. This corner of the bustling town, once overlooked, now held the promise of their {family_name} name taking root.",
+        "Each gust of wind carried new layers: the smoky scent of coal fires from nearby tenements, the metallic hint of tools being sharpened in the smithy across the way, and a curious, faint sweetness that suggested sugar or spices from a merchant's wagon passing by. It was a symphony of smells, each note a testament to the vibrant, growing community around them, a world they were determined to entertain and elevate. The air was thick with the dust of construction and the anticipation of new beginnings, a constant reminder of the physical labor and dreams invested.",
+        "The interior of their nascent music hall, still awaiting its final touches, carried the potent fragrance of fresh plaster and linseed oil, an almost medicinal cleanness that hinted at the ambition of the space. It was a stark contrast to the more organic aromas outside, a deliberate shift from the natural world to one crafted for artifice and delight. Every breath taken within its walls was a reminder of the clean slate, the potential for an elegant stage where their performances would unfold."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A familiar, slightly acrid smell of old theatrical greasepaint, carefully preserved from their prior life, mingled with the newness, a comforting link to their legacy."
+          ],
+          "choice": {
+            "text": "Embrace the old ways, letting the familiar scent ground your new endeavors.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": -1,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "embraced_tradition_scent"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Or was it the sharp, exciting aroma of newly printed playbills, ink still wet, that truly invigorated the senses, a scent of pure, unadulterated novelty?"
+          ],
+          "choice": {
+            "text": "Innovate, letting the fresh scent of progress guide your artistic vision.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "embraced_innovation_scent"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t1:rising"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The callouses on {given_name}'s palms were a testament to the unglamorous reality of building a dream. Rough wood, damp plaster, the coarse weave of canvas backdrops – every surface in their fledgling establishment demanded a physical effort. The silks and satins of performance costumes, once the primary tactile experience, now felt like a distant memory, replaced by the persistent, unyielding resistance of manual labor. This was not the elegant touch of a conductor's baton, but the blunt, honest scrape of hands-on work.",
+        "Even within the domestic sphere, the texture of life was coarser. The scratchy wool blankets, the cold ceramic of the washbasin on a winter morning, the heavy feel of the iron pots and pans in the kitchen – these were the daily pressures of establishing a home from scratch. Each object, however humble, demanded attention, a physical interaction that grounded their lofty artistic ambitions in the very real fabric of daily survival. There was a constant, low thrum of physical demand, a quiet hum that accompanied every waking hour.",
+        "The subtle give of a worn velvet curtain, an heirloom from their performing days, offered a brief moment of nostalgic comfort amidst the grit. It was a reminder of the delicate artistry that lay beneath the layers of practical endeavor, a soft whisper of the world they were striving to recreate. Yet, even that touch was quickly overshadowed by the insistent prickle of sawdust on clothing, a persistent reminder of the ongoing construction."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The relentless pressure of providing for the household meant every coin counted, every material choice a weighty decision."
+          ],
+          "choice": {
+            "text": "Prioritize sturdy, practical furnishings to ensure the household's longevity.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "household_practicality"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Or perhaps the fleeting softness of a new, well-made curtain, hinting at the elegance to come, drew {given_name}'s hand, promising a more refined future."
+          ],
+          "choice": {
+            "text": "Invest in finer touches, believing aesthetic appeal attracts prosperity.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "household_aesthetics"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The sheer weight of establishing the {family_name} household presses down. How will you allocate the meager funds available to best secure your family’s footing?",
+        "options": [
+          {
+            "text": "Funnel funds into securing the stage's lighting and sound equipment first, ensuring the core of your entertainment venture shines.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "prioritized_performance_gear"
+            ]
+          },
+          {
+            "text": "Invest in sturdy, long-lasting furniture and kitchenware for the living quarters, building a stable home before all else.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "prioritized_household_stability"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t1:midpoint"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The incessant clatter of horses' hooves and the rumble of delivery wagons outside mixed with the rising murmur of town life, a constant, vibrant hum that spoke of burgeoning commerce. Within the newly opened {surname} Music Hall, the sounds shifted: the tentative plucking of a new musician, the shuffling feet of early patrons, and the nervous stage whispers of the performers. Each sound was a thread woven into the tapestry of the local economy, a distinct voice in the growing chorus of the community.",
+        "From the street, the boisterous laughter spilling from O'Malley's Public House across the square often drifted in, competing with their own carefully curated melodies. It was a reminder of other forms of entertainment, other establishments vying for the attention and coins of the local populace. The distant chime of the church bells on a Sunday morning, followed by the chatter of parishioners, contrasted sharply with the lively din of their evening shows, highlighting the varied rhythms of their new surroundings. The town was alive with myriad sounds, each seeking its own audience.",
+        "One afternoon, a sharper, more insistent sound cut through the usual cacophony: the rhythmic hammering from the new construction site adjacent to theirs. It was the beginnings of a rival establishment, or perhaps an ally, another business staking its claim in the burgeoning district. The percussive beat of their progress was a stark reminder that their own efforts, however grand, were not unfolding in a vacuum; competition, or collaboration, was surely on the horizon, adding a new layer to the district's complex soundscape."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The cheerful, often drunken, singing from O'Malley's Public House, directly across the square, seemed to pull at a significant portion of the town's evening crowd."
+          ],
+          "choice": {
+            "text": "Consider adapting your shows to incorporate more familiar, boisterous folk tunes to draw in the pub's crowd.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "adapted_to_local_tastes"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Or was it the refined, sometimes hushed, conversations of the gentry who occasionally passed by, their carriages a soft rumble on the cobbled streets, that whispered of a different, more lucrative audience?"
+          ],
+          "choice": {
+            "text": "Refine your repertoire towards more sophisticated performances, aiming to attract an elite audience.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "aimed_for_elite_audience"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t1:turn"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "From the newly constructed balcony of the {surname} residence, the view over the burgeoning town was a daily tableau of ambition. The cobbled streets teemed with merchants, laborers, and the occasional well-dressed lady, all moving with a purpose that mirrored their own. Their music hall, a beacon of flickering gaslight at night, stood proudly amongst the other new buildings, its freshly painted facade a testament to their dedication. Yet, the rapid growth also brought new structures, some grander, some more modest, all vying for the eye and attention of the townsfolk.",
+        "The ornate ironwork of the new bank building gleamed in the morning sun, a stark symbol of the wealth flowing into the community, while the colorful awnings of the market stalls below vibrated with the earthy commerce of everyday life. Everywhere, there was movement, construction, and the visible manifestation of progress. {given_name} could see the path they had carved, a distinct line of entertainment and culture, but also the paths forming around it, sometimes intersecting, sometimes diverging.",
+        "A particularly striking new sight was the construction across the way, now clearly identifiable as a grand, opulent theatre, its architecture clearly aiming for a more established, perhaps even aristocratic, patronage. Its imposing silhouette, rising quickly against the skyline, served as a stark visual challenge, a question mark hanging over their own aspirations. This was no longer just about establishing their name, but defining their place within an increasingly competitive, visually dynamic landscape. The reflection of gas lamps on its windows seemed to wink with an unspoken rivalry."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The sight of the new, grand theatre across the square demanded a direct response, a clear statement of their own vision."
+          ],
+          "choice": {
+            "text": "Choose to expand the {surname} Music Hall, adding a larger stage and more elaborate seating to compete head-on.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "expanded_music_hall"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Or perhaps the bustling, diverse crowd on the street, seeking varied entertainment, suggested a different, more integrated approach."
+          ],
+          "choice": {
+            "text": "Focus on developing unique, community-oriented performances that the grand theatre would not cater to.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "community_focused_performances"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The new theatre looms large, and the town's future character hangs in the balance. How will the {family_name} line define its enduring legacy in this new landscape?",
+        "options": [
+          {
+            "text": "Champion the popular arts, positioning the {surname} Music Hall as the heart of accessible entertainment for all classes.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "championed_popular_arts"
+            ]
+          },
+          {
+            "text": "Curate a refined program of high culture, striving to establish the {surname} Music Hall as an institution of artistic excellence.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 1,
+              "power": 2,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "curated_high_culture"
+            ]
+          },
+          {
+            "text": "Diversify the enterprise, perhaps opening a smaller venue for experimental acts or a school for young performers, to spread the {family_name} influence.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "diversified_enterprise"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t1:close"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t1:close",
+      "sense": "taste",
+      "prose": [
+        "The lingering taste of stout on the lips, hearty and rich, had become synonymous with an evening well spent, echoing the convivial atmosphere fostered within the {surname} Music Hall. It was the taste of success, hard-won and deeply satisfying, a flavor that spoke of community, laughter, and shared moments. This was the fruit of their labor, a tangible sense of accomplishment that settled comfortably on the palate, a sweet counterpoint to the earlier bitterness of struggle.",
+        "A crisp apple, fresh from the local market, offered a tart, refreshing burst, a taste of the solid, respectable standing the {family_name} line had carved out for itself. It was unpretentious, wholesome, and widely appreciated, much like the entertainment they provided. There was no longer the faint, metallic tang of desperation or the blandness of uncertainty; only the clear, distinct flavors of a life firmly rooted and flourishing, a testament to prudent choices and enduring effort.",
+        "The taste of a freshly baked soda bread, warm and comforting, now defined the hearth and home they had built. It was a flavor steeped in tradition, passed down through generations, yet enjoyed in a new land. This particular taste embodied the legacy they were preparing to pass on to the heir: a blend of heritage and new prosperity, a foundation built on both cultural depth and entrepreneurial spirit, a rich and complex flavor profile that defined their unique contribution."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The celebratory taste of a fine whiskey, offered by a grateful patron, was a testament to the respect and admiration their performances had garnered."
+          ],
+          "choice": {
+            "text": "Savor the high standing earned, accepting that your legacy is one of artistic renown and community pride.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "legacy_artistic_renown"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Or was it the simple, honest taste of a hearty stew, shared with the entire company, that truly defined the bond forged through shared endeavors?"
+          ],
+          "choice": {
+            "text": "Embrace the communal spirit, passing down a legacy of strong bonds and collective effort within the entertainment family.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "legacy_communal_spirit"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t2:open",
+      "sense": "smell",
+      "prose": [
+        "A faint, sweet scent of newly planed lumber mingled with the lingering, sharp tang of turpentine from the latest set pieces, a marked improvement over the pervasive damp and coal smoke that had once clung to every garment. Now, the family's modest home, purchased with hard-won earnings from bustling music halls, bore the cleaner aroma of beeswax polish and simmering stew, signaling a definite step upward. The air in the small, shared workshop still carried the distinct odor of greasepaint and warm stage lights, a comforting, familiar perfume that spoke of passion and purpose.",
+        "Yet, even amidst this newfound, fragile comfort, the faint, metallic scent of ambition hung in the air, sharper than any stage prop. It was the smell of late nights spent rehearsing under flickering gaslight, of hurried meals, and of every spare shilling carefully saved. {full_name} knew this smell intimately, a blend of hope and tireless exertion, the very essence of their family's climb out of mere subsistence into the precarious, but exciting, realm of respected entertainers. Each new production, each fuller house, added another layer to this olfactory tapestry of their burgeoning success.",
+        "The crisp autumn air, wafting through an open window, carried with it the distant, earthy smell of the docks – a reminder of where they had come from, and the journey so many others like them had made. But within these walls, the dominant notes were of creation and aspiration. A freshly brewed pot of tea infused the kitchen with a calming warmth, momentarily masking the more insistent aroma of damp wool from a recently hung coat, still holding the memory of a rainy walk home from a successful matinee. This was the scent of progress, hard-earned and deeply cherished."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The scent of rosin and lamp oil clung to {given_name}'s clothing, a familiar perfume of their daily toil, yet increasingly mixed with the cleaner air of opportunity, beckoning them to the next performance."
+          ],
+          "choice": {
+            "text": "Embrace the artistic grind, perfecting every nuance of the performance.",
+            "motivatorShift": {
+              "worldview": 1,
+              "honor": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The scent of rosin and lamp oil clung to {given_name}'s clothing, a familiar perfume of their daily toil, yet increasingly mixed with the cleaner air of opportunity, a promise of further material comforts."
+          ],
+          "choice": {
+            "text": "Focus on the material improvements, ensuring the family's stability with each successful show.",
+            "motivatorShift": {
+              "wealth": 1,
+              "lineage": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t2:rising"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t2:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough texture of worn stage curtains, heavy with years of dust and drama, brushed {full_name}'s fingers, a familiar sensation that grounded them in the roots of their craft. Yet, increasingly, their hands also encountered the smoother, finer weave of new fabrics, destined for more elaborate costumes and grander productions. This contrast in textures mirrored the internal tension: the comforting familiarity of their past versus the irresistible pull of a more polished, ambitious future. The constant ache in their joints from long hours of rehearsal was a persistent reminder of their dedication, but it was now often dulled by the gentle pressure of a new, well-upholstered chair in a manager's office.",
+        "A reassuring weight of newly minted coins in {given_name}'s pocket offered a tangible measure of their success, a solid comfort against the lighter, almost intangible feel of a promise made, or a reputation carefully built. Each firm handshake with a potential investor, each comforting pat on the back from a loyal troupe member, left a distinct impression. The physical demands of the stage, the calluses on their palms, were badges of honor, but the smoother feel of a pen signing a contract, promising a larger venue, now carried a different, potent thrill. This was the tactile experience of ambition, both gritty and refined.",
+        "The delicate touch of the family locket, a cherished heirloom often clutched during moments of uncertainty, provided a connection to their heritage and the sacrifices that paved their way. It was a stark contrast to the firm, almost demanding grip of the city's burgeoning artistic scene, an unseen force that pressed in on them, urging them to reach further, to innovate more boldly. The pressure was a constant hum beneath the surface, a subtle vibration that coursed through their veins, challenging them to balance the warmth of loyalty with the cold, hard ambition of growth."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A tremor of anticipation ran through {given_name} as the heavy velvet curtain brushed their hand, a sensation that always promised either triumph or the stark sting of failure."
+          ],
+          "choice": {
+            "text": "Lean into the ambition, pushing for a leading role even if it means longer hours away from family.",
+            "motivatorShift": {
+              "power": 1,
+              "reach": 1,
+              "worldview": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A tremor of anticipation ran through {given_name} as the heavy velvet curtain brushed their hand, a sensation that always promised either triumph or the stark sting of failure."
+          ],
+          "choice": {
+            "text": "Prioritize family connection, ensuring that any new venture benefits everyone, even if it means a slower climb.",
+            "motivatorShift": {
+              "tradition": 1,
+              "lineage": 1,
+              "honor": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The theatre manager, a man whose word carried significant weight, offers a new opportunity that would elevate {given_name}'s standing, but it requires a commitment that may strain family ties.",
+        "options": [
+          {
+            "text": "Seize the opportunity, prioritizing career advancement and the family's larger ascent.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 2,
+              "reach": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "career_focus"
+            ]
+          },
+          {
+            "text": "Decline the immediate offer to maintain family harmony, trusting future opportunities will emerge that don't demand such a personal cost.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "honor": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "family_focus"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t2:midpoint"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t2:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The hushed murmurs of an appreciative, well-dressed audience now filled the theater, a symphony of polite applause and genteel laughter that was a world away from the boisterous shouts and raucous stomping of the working-class halls where {family_name} had cut their teeth. The elegant tinkling of crystal glasses from the lobby after the show replaced the clatter of pewter mugs, marking a subtle but significant shift in the company they kept. Every sound was a barometer of their ascendance, a confirmation of their growing refinement and acceptance within the city's burgeoning cultural circles.",
+        "Beyond the theater walls, the rhythmic rumble of the city's relentless expansion echoed, a constant, low thrum beneath the din of daily life. It was the sound of new tram lines being laid, of grand buildings rising, and of commerce ceaselessly churning. This urban symphony spoke of boundless potential, but also of fierce competition, a backdrop against which their own artistic ventures were measured. The distant whistle of a steam engine, carrying goods and people to and from this bustling metropolis, reinforced the sense of endless movement and opportunity that now defined their world.",
+        "In the more exclusive drawing rooms, where new connections were forged, {full_name} listened intently to the precise cadence of conversations, the carefully chosen words exchanged between established families whose fortunes had been built over generations. It was a different kind of music, one layered with unspoken implications, veiled challenges, and subtle invitations. The clatter of cutlery on fine china, the rustle of expensive silks, the measured tones of patrons discussing art and politics – these were the new sounds of their ambition, signaling their cautious integration into a society they once only observed from afar.",
+        "The clear, resonant chime of the grandfather clock in their newly acquired, larger home signaled not just the passing of time, but the solid establishment of their domestic comfort. It was a sound that brought a sense of permanence, a stark contrast to the fleeting nature of applause. Yet, even this comforting rhythm was underscored by the urgent whispers of new ideas, the excited exclamations during rehearsals, and the quiet discussions of expansion, all contributing to a complex auditory landscape of growth and evolving identity."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The crisp rustle of programs and the polite coughs of the audience were a new symphony to {given_name}'s ears, a soundscape far removed from the raucous halls of their beginnings, urging them to broaden their artistic reach."
+          ],
+          "choice": {
+            "text": "Focus on expanding the family's influence, seeking out new venues and broader audiences for their performances.",
+            "motivatorShift": {
+              "reach": 1,
+              "wealth": 1,
+              "power": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The crisp rustle of programs and the polite coughs of the audience were a new symphony to {given_name}'s ears, a soundscape far removed from the raucous halls of their beginnings, urging them to solidify their artistic standing."
+          ],
+          "choice": {
+            "text": "Focus on solidifying their current position and reputation, ensuring their existing productions are unparalleled in quality.",
+            "motivatorShift": {
+              "honor": 1,
+              "tradition": 1,
+              "worldview": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t2:turn"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t2:turn",
+      "sense": "sight",
+      "prose": [
+        "The sight of the city's rapidly expanding skyline, punctuated by new theaters and grand halls, offered {full_name} a stark vision of the future, a canvas on which their legacy could be drawn. From the newly paved streets, they could see the gleaming facades of banks and municipal buildings, tangible symbols of the power that shaped this bustling metropolis. This landscape, once seen as a distant promise, was now within their grasp, beckoning them to either leave their own indelible mark upon it or be absorbed into its pre-existing currents. Every brick laid, every new gaslight installed, was a silent invitation to participate in its creation.",
+        "The carefully painted backdrop of a grand new production, depicting a pastoral Irish landscape, glowed under the stage lights, a powerful visual testament to their cultural roots and artistic aspirations. Yet, just outside the theater's ornate doors, {given_name} observed the raw, unadorned stages of smaller community halls, where emerging talents, many from their own wave, struggled for recognition. This juxtaposition presented a stark choice: to ascend further into the established grandeur, or to reach back and help shape the foundations for those who followed, mirroring their own arduous ascent.",
+        "The expressions on the faces of city councilors, glimpsed during public forums, conveyed a mix of civic duty, self-interest, and cautious ambition. Their eyes, scanning the assembled citizens, seemed to weigh the potential impact of every decision. Opposite them, the eager, hopeful eyes of young performers and aspiring artists, attending these same meetings, burned with a desire for opportunity, a longing for a platform. {full_name} saw themselves reflected in both groups: the pragmatist seeking influence, and the dreamer yearning for artistic expression. The very act of seeing, of observing these disparate factions, clarified the diverging paths laid before them.",
+        "On {surname}'s desk lay detailed blueprints for a proposed new theatre district, a grand civic undertaking that promised to reshape the city's cultural heart. The intricate lines and labels, the artist's renderings, showed a future taking shape before their eyes – a future they could either passively witness or actively mold. The decision was no longer merely about their family's success, but about the very infrastructure of entertainment, the future of the arts in this burgeoning city, and their place within its evolving institutional fabric. The clear light of day, streaming through the window, illuminated these plans, demanding a choice."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The sight of the city's rapidly expanding skyline, punctuated by new theaters and grand halls, offered {given_name} a stark vision of the future, a canvas on which their legacy could be drawn, compelling them to engage with civic power."
+          ],
+          "choice": {
+            "text": "Actively seek to influence urban development, positioning the family at the heart of the city's cultural infrastructure.",
+            "motivatorShift": {
+              "politics": 1,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The sight of the city's rapidly expanding skyline, punctuated by new theaters and grand halls, offered {given_name} a stark vision of the future, a canvas on which their legacy could be drawn, compelling them to focus on their own ventures."
+          ],
+          "choice": {
+            "text": "Focus inward on the family business and its direct ventures, ensuring their own productions and venues thrive amidst the change.",
+            "motivatorShift": {
+              "lineage": 1,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The city council is considering a major cultural initiative that could either bolster established institutions or provide funding for emerging, more accessible arts. Your family's influence could sway the decision.",
+        "options": [
+          {
+            "text": "Advocate for funding established theatres and the city's formal cultural institutions, solidifying the family's place within the elite.",
+            "motivatorShift": {
+              "tradition": 3,
+              "honor": 2,
+              "power": 1,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "support_formal_arts"
+            ]
+          },
+          {
+            "text": "Champion the creation of new community arts spaces and funding for local, accessible talent, nurturing the next generation of performers.",
+            "motivatorShift": {
+              "worldview": 3,
+              "politics": 2,
+              "reach": 1,
+              "lineage": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "support_community_arts"
+            ]
+          },
+          {
+            "text": "Remain neutral, focusing resources purely on the family's own projects and expansion, ensuring their independence from public whims.",
+            "motivatorShift": {
+              "wealth": 3,
+              "lineage": 2,
+              "power": 1,
+              "politics": -1,
+              "reach": -1
+            },
+            "setFlags": [
+              "self_interest_arts"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t2:close"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t2:close",
+      "sense": "taste",
+      "prose": [
+        "The celebratory clink of glasses and the smooth, aged whiskey on {full_name}'s tongue was a taste of success, a culmination of years of relentless striving and calculated risks. It was a rich, complex flavor, far removed from the watery ale of their early days, signifying not just wealth, but a certain refined status. The lingering aftertaste of old grievances, of slights endured and rivalries overcome, was now faint, replaced by the cleaner palate of new beginnings and solid achievement. This was the taste of a generation's triumph, distilled into a single, satisfying sip.",
+        "A multi-course dinner, served on heirloom china, offered a symphony of tastes, each dish a testament to their improved fortunes and growing influence. The delicate tang of fresh oysters, followed by the robust richness of roasted game, spoke of connections to markets and purveyors previously out of reach. It was a sensory journey that paralleled their family's own, starting with humble origins and culminating in a sophisticated tapestry of experience and resources. Each bite was a silent affirmation of the capital they had amassed, not just in coin, but in culture and standing.",
+        "The robust, slightly bitter taste of morning coffee, strong and invigorating, became the ritual before important meetings, signifying ongoing ambition and the readiness to face new challenges. It was the taste of responsibility, of leadership, and of the countless connections that had been forged over countless similar cups. This was the legacy {full_name} had built: a network of allies and associates, a reputation for quality and shrewdness, all savored in the quiet moments before the next act began.",
+        "Yet, alongside the sweet success, there was the faint, metallic tang of a hard-won victory, a reminder of the sacrifices and the constant vigilance required to maintain their position. It was a complex flavor, one that underscored the fragility of their achievements even as it celebrated their ascent. This nuanced taste was what {full_name} prepared to pass on to the heir: not just tangible assets, but the wisdom earned through struggle, the discerning palate of power, and the understanding that true success always held a hint of its origins."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The celebratory clink of glasses and the smooth, aged whiskey on {given_name}'s tongue was a taste of success, a culmination of years of relentless striving and calculated risks, prompting reflection on their material gains."
+          ],
+          "choice": {
+            "text": "Reflect on the material gains and the secure foundation established for future generations.",
+            "motivatorShift": {
+              "wealth": 1,
+              "lineage": 1,
+              "tradition": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The celebratory clink of glasses and the smooth, aged whiskey on {given_name}'s tongue was a taste of success, a culmination of years of relentless striving and calculated risks, prompting consideration of their intangible legacy."
+          ],
+          "choice": {
+            "text": "Consider the intangible legacy of reputation, artistic integrity, and the influence they now wield.",
+            "motivatorShift": {
+              "honor": 1,
+              "worldview": 1,
+              "reach": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t3:open",
+      "sense": "smell",
+      "prose": [
+        "The heavy, sweet scent of greasepaint, mingled with dust and the faint metallic tang of gaslight, filled the air backstage. It was the smell of every triumph, every roaring ovation, every hushed anticipation that had built the {family_name} name from whispered promises to shouted acclaim.",
+        "The worn velvet of the curtains held the ghosts of countless performances, each thread imbued with the nervous energy and joyous release of a show well-executed. This was home, this was legacy, a tapestry woven from sawdust and sweat, held together by the lingering perfume of success.",
+        "Beyond the stage, the lobby pulsed with the clatter of arriving patrons, their excited chatter rising to a crescendo as the house lights began to dim. The air thrummed with a familiar magic, a current of anticipation that {full_name} knew intimately, a sensation that had become as vital as breath itself to the family's very being."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The aroma of freshly brewed coffee drifted from the green room, a familiar comfort amidst the pre-show frenzy."
+          ],
+          "choice": {
+            "text": "Attend the final rehearsal, ensuring every detail of the opening act is perfect.",
+            "motivatorShift": {
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A different scent, sharp and faintly acrid, hinted at the persistent odor of ambition from a rival troupe next door, their own show about to begin."
+          ],
+          "choice": {
+            "text": "Meet with the theater owner to discuss new bookings, pushing for more lucrative slots for the {family_name} company.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t3:rising"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t3:rising",
+      "sense": "touch",
+      "prose": [
+        "The cool, smooth surface of the polished mahogany desk felt solid beneath {given_name}'s fingertips, a stark contrast to the rough texture of the stage ropes and canvas usually pressed into service. This was a different kind of stage, one where contracts were drawn and reputations solidified or shattered with the stroke of a pen.",
+        "The weight of expectations, of the entire {family_name} line's future, settled on {given_name}'s shoulders, a palpable burden that no amount of applause could alleviate. Success had brought influence, yes, but also a constant, demanding pressure, a relentless current against which the family had to tirelessly swim, or risk being swept away.",
+        "Each handshake, each clasp of hands over a negotiation table, carried the subtle friction of competing desires and calculated risks. The world outside the footlights was far less forgiving, a landscape of hidden thorns and sharp edges that required a different kind of performance, one measured in leverage and strategic alliances rather than ovations."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The rough, calloused hands of a long-time stagehand offered a comforting, familiar grip, a silent acknowledgment of shared dedication."
+          ],
+          "choice": {
+            "text": "Spend time with the crew, ensuring their welfare and loyalty, for they are the foundation of every performance.",
+            "motivatorShift": {
+              "honor": 1,
+              "tradition": 1,
+              "lineage": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A silk scarf brushed against {given_name}'s arm as a well-heeled patron offered a conspiratorial whisper, suggesting a private meeting."
+          ],
+          "choice": {
+            "text": "Engage with the city's elite at their exclusive club, leveraging social connections for new opportunities and patronage.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "power": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The local council is debating new entertainment regulations, which could either boost or restrict local troupes and theaters. How do you respond to this evolving political landscape?",
+        "options": [
+          {
+            "text": "Publicly advocate for self-regulation within the entertainment industry, emphasizing artistry, established standards, and the value of cultural independence.",
+            "motivatorShift": {
+              "worldview": 2,
+              "tradition": 1,
+              "honor": 1
+            },
+            "setFlags": []
+          },
+          {
+            "text": "Discreetly lobby individual council members, promising the {family_name} company's support for their pet civic projects in exchange for favorable terms.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": []
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t3:midpoint"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t3:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cacophony of the city outside – the clatter of horse-drawn carts, the hawkers' cries, the distant peal of a church bell – seemed to recede as {given_name} focused on the low hum of conversation emanating from the private parlor. Within those ornate walls, fortunes were being decided, and the future of public entertainment was being shaped by powerful, unseen voices.",
+        "Rumors had spread like wildfire about a rival family, the O'Malleys, who had made their initial mark in textiles but were now audaciously dabbling in music halls and theatrical ventures. Their ambitions struck a discordant note in the otherwise well-orchestrated symphony of the city's power players, threatening the established harmony that the {family_name} line had carefully cultivated.",
+        "The air in the parlor vibrated with unspoken alliances and veiled threats, a delicate balance of whispers and proclamations that could either elevate or diminish the {family_name} legacy. Every rustle of silk, every clink of crystal, every shift in tone carried weight, signaling potential shifts in the power dynamic that would directly impact the family's standing."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The sharp, distinct ring of the proprietor's bell signaled the imminent start of a public forum on civic improvements in the main hall."
+          ],
+          "choice": {
+            "text": "Attend the forum, subtly guiding the conversation towards the cultural enrichment and economic vitality provided by local entertainment.",
+            "motivatorShift": {
+              "worldview": 1,
+              "politics": 1,
+              "lineage": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A hushed, urgent murmur carried from a shadowed corner, detailing the O'Malleys' recent successful acquisition of a promising new venue on the city's burgeoning west side."
+          ],
+          "choice": {
+            "text": "Instruct trusted agents to investigate the O'Malley's expansion, seeking points of leverage or a viable counter-strategy to protect the family's interests.",
+            "motivatorShift": {
+              "power": 1,
+              "wealth": 1,
+              "reach": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t3:turn"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t3:turn",
+      "sense": "sight",
+      "prose": [
+        "From the high vantage point of the newly built opera house's private box, the entire bustling metropolis unfolded before {given_name}'s gaze. Below, gas lamps flickered to life, painting the thoroughfares in a golden glow, illuminating the carriages and pedestrians, the very heartbeat of a nation in constant, dynamic motion.",
+        "This sprawling vista represented not just brick and mortar, but a burgeoning culture, a society on the cusp of defining its own identity amidst a changing world. The {family_name} name, once confined to smaller stages and local renown, now stood poised at the precipice of national prominence, capable of influencing the very fabric of this emerging identity through the power of entertainment.",
+        "The choice was stark and clear: embrace this expansive vision, shaping the national narrative and steering the cultural currents, or retreat to the familiar, comfortable shadows of past successes, allowing others to forge the path. The future of the line, and perhaps the nation's cultural soul, hung in the balance, a weighty decision illuminated by the city's twinkling lights."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The glint of a newly minted medal on a statesman's lapel caught {given_name}'s eye as he entered the VIP section, acknowledging admirers."
+          ],
+          "choice": {
+            "text": "Position the family at cultural events that attract national figures, subtly weaving entertainment with a burgeoning sense of national pride and purpose.",
+            "motivatorShift": {
+              "honor": 1,
+              "lineage": 1,
+              "politics": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The sight of a struggling street performer below, drawing a small, appreciative crowd with raw talent, brought a pang of nostalgia for simpler times and unvarnished artistry."
+          ],
+          "choice": {
+            "text": "Fund a local arts initiative, supporting grassroots talent and ensuring access to the arts for all, regardless of station.",
+            "motivatorShift": {
+              "worldview": 1,
+              "tradition": 1,
+              "honor": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The nation is at a crossroads, with competing visions for its future identity. As a prominent entertainment family, how do you shape the cultural narrative for the next generation?",
+        "options": [
+          {
+            "text": "Champion traditional Irish arts, music, and storytelling, reinforcing cultural heritage and a deep sense of shared past.",
+            "motivatorShift": {
+              "tradition": 3,
+              "lineage": 2,
+              "worldview": 1
+            },
+            "setFlags": []
+          },
+          {
+            "text": "Embrace modern, cosmopolitan forms of entertainment, positioning the nation as forward-thinking, innovative, and globally connected.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 3,
+              "wealth": 1
+            },
+            "setFlags": []
+          },
+          {
+            "text": "Leverage the family's influence to create national spectacles that blend both tradition and innovation, fostering unity and a unique, evolving national character.",
+            "motivatorShift": {
+              "honor": 2,
+              "politics": 2,
+              "power": 1,
+              "lineage": 1
+            },
+            "setFlags": []
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t3:close"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t3:close",
+      "sense": "taste",
+      "prose": [
+        "The last sip of elderflower cordial, sweet and slightly tart, lingered on {given_name}'s tongue, a taste reminiscent of both the triumphs and the subtle disappointments of the passing years. The opulent drawing-room, filled with the hushed murmur of guests, reflected a life well-lived, a legacy solidly established and respected.",
+        "The {family_name} name now carried a weight, a certain flavor of renown and expectation, passed down through the generations like a treasured recipe. This taste was a complex blend of sweat and success, of shrewd negotiations and heartfelt performances, of public accolades and private sacrifices.",
+        "It was a unique bouquet that defined not just an individual, but an entire family's indelible mark on the world, a reputation carefully cultivated and now entrusted to the next. The heir, standing quietly by the window, would soon inherit this distinct flavor, this particular blend of destiny, to savor and to shape."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The warm, yeasty taste of freshly baked soda bread, served by a loyal retainer, offered a homely comfort amidst the grander fare."
+          ],
+          "choice": {
+            "text": "Remind the heir of the family's humble beginnings and the enduring importance of perseverance and cultural roots.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 1,
+              "honor": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The sharp, expensive bite of an imported port wine spoke of elevated status, international connections, and the luxuries of achievement."
+          ],
+          "choice": {
+            "text": "Share insights with the heir on navigating the complex world of high society and the global opportunities that now lie before them.",
+            "motivatorShift": {
+              "reach": 1,
+              "wealth": 1,
+              "power": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t4:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of ozone, sharp and metallic, hung heavy in the air of the editing suite, mingling with the sweeter, almost sickly perfume of developing celluloid. It was the smell of progress, of ambition made manifest, a testament to the {family_name} line's relentless ascent from humble stages to the grand, flickering canvases that now captivated a global audience. Dust motes danced in the projector's beam, illuminating the determined furrow in {full_name}'s brow as they watched the montage, a sprawling tapestry of images gathered from across continents.",
+        "Beyond the thick, soundproofed walls of the studio, the aroma of roasting coffee wafted in from the bustling commissary, a stark contrast to the antiseptic tang of the lab. This was the heart of their empire, a sprawling complex that hummed with the energy of thousands, each cog in the vast machinery dedicated to weaving dreams. {full_name} had built this, brick by carefully acquired brick, securing the patents, charming the investors, and, most importantly, identifying the universal stories that transcended language and border. The world, it seemed, was hungry for what the {family_name} line offered.",
+        "From the backlot, the faint, acrid whiff of diesel exhaust from generators powering a remote film shoot hinted at the logistical scale. Their productions were no longer confined to a single city or nation; they were global endeavors, shot in exotic locales, featuring talent from a dozen different tongues. This particular project, a sweeping epic of adventure, was poised to be their most ambitious yet, a grand spectacle designed to truly cement their place not just as entertainers, but as cultural architects on a global stage."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A sudden, pungent wave of exotic spices, carried on the air from the kitchen testing a menu for a premier party, reminds you of the breadth of your culinary reach and the sheer scale of the celebratory events you now orchestrate across hemispheres."
+          ],
+          "choice": {
+            "text": "Lean into the global opulence, ensuring every new production is a lavish affair.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "global_lavish_productions"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The comforting, familiar scent of old leather and tobacco from {given_name}'s inherited desk, even in this modern empire, recalls the family's enduring legacy of artistic craft and hard-won perseverance, a grounding presence amidst the global expansion."
+          ],
+          "choice": {
+            "text": "Reaffirm the core artistic values and narrative integrity in every project.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 1,
+              "lineage": 2
+            },
+            "setFlags": [
+              "artistic_integrity_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t4:rising"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t4:rising",
+      "sense": "touch",
+      "prose": [
+        "The heavy, polished mahogany of the boardroom table felt cool beneath {full_name}'s fingertips, a stark contrast to the burning intensity of the discussions. Across from them, a formidable rival, head of a burgeoning media trust, gripped the edge of the table with white knuckles, their gaze sharp and unwavering. The stakes were palpable; a revolutionary new broadcast technology, promising instantaneous global transmission of moving images, was up for grabs, and both families sought to control its distribution. The pressure was not just financial; it was a battle for the very future of how the world would consume stories.",
+        "Earlier, the crisp, almost electric snap of a telegram from a foreign dignitary had underscored the political weight now attached to their ventures. Their films, once mere entertainment, were increasingly viewed as instruments of soft power, capable of swaying public opinion across continents. The delicate parchment felt fragile in hand, yet its message carried the weight of international diplomacy, hinting at allegiances and rivalries far removed from the simple art of storytelling. Navigating these new currents required a deft touch, one that {full_name} was still mastering.",
+        "Later, in the quiet solitude of their private study, {full_name} ran a hand over the worn binding of a book of Irish folklore, a relic from their ancestors. The rough texture was a grounding sensation amidst the dizzying smoothness of modern industry and global finance. The immense scale of their enterprise sometimes felt overwhelming, like a vast, living entity that demanded constant, careful attention, each decision rippling outwards with untold consequences. The touch of tradition reminded them of the foundation beneath the soaring edifice."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The insistent vibration of the newly installed international telephone line beneath your hand signals an urgent call from a major financier, demanding an immediate decision on the new broadcast technology's acquisition."
+          ],
+          "choice": {
+            "text": "Prioritize immediate acquisition of the broadcast technology, securing a first-mover advantage.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "acquire_broadcast_tech"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The cool, smooth surface of a prototype camera lens, engineered with unprecedented precision, invites a contemplation of the artistic possibilities unlocked by this new era of communication, beyond mere commercial gain."
+          ],
+          "choice": {
+            "text": "Invest in research and development to refine the artistic potential of the new media, rather than rushing its commercial rollout.",
+            "motivatorShift": {
+              "honor": 1,
+              "worldview": 2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "develop_artistic_tech"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How will the {family_name} line navigate the subtle but growing political pressures associated with their global reach in entertainment?",
+        "options": [
+          {
+            "text": "Maintain strict neutrality, ensuring content appeals broadly and avoids political entanglements.",
+            "motivatorShift": {
+              "worldview": 1,
+              "honor": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "political_neutrality_maintained"
+            ]
+          },
+          {
+            "text": "Discreetly align with certain political powers to gain preferential access to new markets.",
+            "motivatorShift": {
+              "politics": 2,
+              "reach": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "political_alignment_chosen"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t4:midpoint"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t4:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cacophony of a thousand voices, cheering and booing in unison from the grand opening of their newest cinema palace in a distant capital, reverberated through the transatlantic phone line, a thrilling, overwhelming wave of sound. It was the voice of the global public, amplified and unified by their entertainment empire. {full_name} listened, a slight smile playing on their lips, understanding that they were not merely selling tickets, but orchestrating the emotional pulse of entire nations. The sheer volume was deafening, yet each nuance was keenly felt, a direct feedback loop from the world they sought to enchant.",
+        "Later, the crisp, modulated tones of a radio announcer discussing one of their critically acclaimed dramas filtered from a console in the study. The announcer's words, carefully chosen, highlighted not just the artistry but the 'timely social commentary' embedded within the narrative. This new medium, radio, possessed an insidious power to shape public discourse, transforming entertainment into a vehicle for ideas, subtly nudging the century's trajectory. {full_name} recognized the profound responsibility, and the immense opportunity, that such influence entailed. The world was listening, and they held the microphone.",
+        "A quiet, insistent hum from the new recording equipment, sleek and cutting-edge, promised even greater fidelity for their musical scores and spoken word performances. They were pioneering new sonic landscapes, creating immersive experiences that redefined what 'listening' truly meant. Whispers circulated that another influential family line, one specializing in industrial innovation, was developing a similar sound technology for military applications. The thought sent a shiver down {full_name}'s spine; the same advancements that brought joy could also be twisted for destructive ends. The harmony, or discord, of the future seemed to rest, in part, on their decisions."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The clear, resonant bell tones from a newly installed news ticker, continuously clacking out headlines about global economic shifts and social unrest, underscores the volatility of the era and the potential impact on your widespread enterprise."
+          ],
+          "choice": {
+            "text": "Direct creative teams to develop content that offers escapism and hope amidst global anxieties.",
+            "motivatorShift": {
+              "worldview": 1,
+              "honor": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "entertainment_as_escapism"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The enthusiastic murmur of cultural critics discussing a rival's controversial documentary, challenging established norms, suggests a path where entertainment can be a powerful instrument for social change and intellectual ferment."
+          ],
+          "choice": {
+            "text": "Commission projects that actively engage with contemporary social and political issues, sparking dialogue.",
+            "motivatorShift": {
+              "politics": 1,
+              "worldview": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "entertainment_as_social_commentary"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t4:turn"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t4:turn",
+      "sense": "sight",
+      "prose": [
+        "From the panoramic window of their executive suite, the vast expanse of the city stretched out, a glittering jewel box under the nascent electric glow of twilight. But it was not the familiar cityscape that commanded {full_name}'s attention. Instead, it was the myriad lights beyond—the distant glow of the harbor, where cargo ships arrived from every corner of the globe, and the faint, blinking beacon of an airport, signaling the arrival and departure of international flights. The world, once so vast and fragmented, now felt interconnected, a single, intricate tapestry woven with threads of commerce, culture, and communication, largely due to empires such as theirs.",
+        "On a large, wall-mounted map, a network of illuminated lines showcased the {family_name} line's global distribution channels, theaters, and broadcast affiliates, reaching into every inhabited continent. This visual representation of their dominion was breathtaking, a testament to generations of ambition and hard work. Yet, {full_name}'s gaze lingered on the darker, unlit regions—territories either inaccessible due to political strife, or yet to be conquered by their cultural exports. The vision of a truly universal entertainment experience was within their grasp, but the path was fraught with geopolitical complexities.",
+        "A newspaper spread across the mahogany table depicted grim images from a distant conflict, a stark reminder of the world's turbulent nature. Even as their films brought laughter and tears, conflict brewed, threatening to redraw maps and disrupt the delicate balance of international relations. The sight of innocent faces, caught in the crossfire, made {full_name} acutely aware of the immense influence their media held. How they chose to wield this power—to reflect, to distract, or to galvanize—would define not just their legacy, but potentially the very course of the unfolding century."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The imposing vista of a new, cutting-edge propaganda film from a rising authoritarian regime flickers across a private screen, its compelling narrative and striking visuals a testament to the power of media, even for darker purposes."
+          ],
+          "choice": {
+            "text": "Recognize the persuasive power of media and consider strategic alliances to ensure the line's influence in shaping global narratives.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "align_for_narrative_influence"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The serene image of a classic {family_name} production poster, portraying universal themes of love and human resilience, hangs proudly in the corner, a reminder of the timeless appeal of pure storytelling and its ability to transcend transient political currents."
+          ],
+          "choice": {
+            "text": "Double down on universal stories and apolitical entertainment, trusting in enduring human connection.",
+            "motivatorShift": {
+              "worldview": 2,
+              "honor": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "focus_on_universal_entertainment"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "Faced with global upheaval and the immense influence of your entertainment empire, how will {full_name} choose to shape (or be shaped by) the world?",
+        "options": [
+          {
+            "text": "Leverage the empire's reach to actively promote peace and cultural understanding, even if it risks financial loss or political backlash.",
+            "motivatorShift": {
+              "worldview": 3,
+              "honor": 2,
+              "wealth": -1,
+              "politics": -1
+            },
+            "setFlags": [
+              "promote_global_understanding"
+            ]
+          },
+          {
+            "text": "Focus strictly on profitability and market dominance, adapting content to local tastes and political climates without taking a stance.",
+            "motivatorShift": {
+              "wealth": 3,
+              "reach": 2,
+              "honor": -1
+            },
+            "setFlags": [
+              "prioritize_profit_market_dominance"
+            ]
+          },
+          {
+            "text": "Use the media empire to subtly influence global opinion towards a specific ideological or national agenda, securing long-term power and security.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 3,
+              "worldview": -1,
+              "honor": -2
+            },
+            "setFlags": [
+              "influence_global_agenda"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:entertainment:middle:t4:close"
+    },
+    {
+      "id": "act:ireland:entertainment:middle:t4:close",
+      "sense": "taste",
+      "prose": [
+        "The sharp, bitter taste of espresso, served in a delicate porcelain cup, lingered on {full_name}'s tongue as they looked out at the sunrise over a vast, global metropolis. It was the flavor of restless ambition, of sleepless nights spent strategizing, of the complex dealings that underpinned an empire stretching across time zones and cultural divides. This was the enduring legacy of a generation, a world player forged through determination and an unwavering vision for universal entertainment. Every success, every challenge, had contributed to this moment, a testament to the {family_name} line's unparalleled reach.",
+        "A glass of rare Irish whiskey, its peaty warmth a comforting contrast to the biting espresso, brought a different taste to the palate—one of tradition, of hard-won heritage, and of the unique identity that still grounded their immense enterprise. It was the flavor of knowing where they came from, even as they directed the cultural narratives of the world. {full_name} had nurtured this empire, watched it grow from a seed of an idea into a colossus, and now, the fruits of that labor were evident in every corner of the globe. The task of passing this formidable legacy on weighed heavily, but also with immense pride.",
+        "The subtle sweetness of a celebratory pastry, flown in specially from Paris for a quiet, reflective moment, offered a brief moment of indulgence. It was the taste of earned luxury, a reward for the sacrifices made and the battles won. Yet, beneath the sweetness, there was a faint, almost metallic tang, a reminder of the difficult choices, the compromises, and the sometimes-unseen costs of such immense power. This was the empire {full_name} had built, and now it was time for the next generation to inherit its splendor and its shadows."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The memory of the rich, earthy taste of freshly baked soda bread, a simple, enduring comfort from childhood, reminds you of the familial roots that grounded this vast global venture and the importance of passing on more than just wealth to your heir."
+          ],
+          "choice": {
+            "text": "Emphasize the core values and moral principles as the most vital inheritance for the next generation.",
+            "motivatorShift": {
+              "lineage": 2,
+              "honor": 2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "pass_on_moral_principles"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The lingering, complex notes of a newly introduced, internationally branded energy drink, symbolizing ceaseless innovation and boundless potential, highlights the true scale of the global market and the imperative to continue expanding the empire's reach."
+          ],
+          "choice": {
+            "text": "Stress aggressive expansion and technological leadership as the primary directive for the future of the empire.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "pass_on_expansion_directive"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}

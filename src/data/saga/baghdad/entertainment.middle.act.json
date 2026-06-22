@@ -1,0 +1,2272 @@
+{
+  "acts": [
+    {
+      "id": "act:baghdad:entertainment:middle:t0",
+      "wave": "baghdad",
+      "archetype": "entertainment",
+      "cls": "middle",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — The Oud on the Boardwalk",
+      "scenes": [
+        "act:baghdad:entertainment:middle:t0:open",
+        "act:baghdad:entertainment:middle:t0:rising",
+        "act:baghdad:entertainment:middle:t0:midpoint",
+        "act:baghdad:entertainment:middle:t0:turn",
+        "act:baghdad:entertainment:middle:t0:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t1",
+      "wave": "baghdad",
+      "archetype": "entertainment",
+      "cls": "middle",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — Tuning the Unfamiliar Air",
+      "scenes": [
+        "act:baghdad:entertainment:middle:t1:open",
+        "act:baghdad:entertainment:middle:t1:rising",
+        "act:baghdad:entertainment:middle:t1:midpoint",
+        "act:baghdad:entertainment:middle:t1:turn",
+        "act:baghdad:entertainment:middle:t1:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t2",
+      "wave": "baghdad",
+      "archetype": "entertainment",
+      "cls": "middle",
+      "tier": 2,
+      "macroAct": "emergence",
+      "title": "Act III — Brass Lamps and Painted Stages",
+      "scenes": [
+        "act:baghdad:entertainment:middle:t2:open",
+        "act:baghdad:entertainment:middle:t2:rising",
+        "act:baghdad:entertainment:middle:t2:midpoint",
+        "act:baghdad:entertainment:middle:t2:turn",
+        "act:baghdad:entertainment:middle:t2:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t3",
+      "wave": "baghdad",
+      "archetype": "entertainment",
+      "cls": "middle",
+      "tier": 3,
+      "macroAct": "emergence",
+      "title": "Act IV — The Oud in the Neon Loom",
+      "scenes": [
+        "act:baghdad:entertainment:middle:t3:open",
+        "act:baghdad:entertainment:middle:t3:rising",
+        "act:baghdad:entertainment:middle:t3:midpoint",
+        "act:baghdad:entertainment:middle:t3:turn",
+        "act:baghdad:entertainment:middle:t3:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t4",
+      "wave": "baghdad",
+      "archetype": "entertainment",
+      "cls": "middle",
+      "tier": 4,
+      "macroAct": "ascension",
+      "title": "Act V — The Thousandth Broadcast",
+      "scenes": [
+        "act:baghdad:entertainment:middle:t4:open",
+        "act:baghdad:entertainment:middle:t4:rising",
+        "act:baghdad:entertainment:middle:t4:midpoint",
+        "act:baghdad:entertainment:middle:t4:turn",
+        "act:baghdad:entertainment:middle:t4:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t5",
+      "wave": "baghdad",
+      "archetype": "entertainment",
+      "cls": "middle",
+      "tier": 5,
+      "macroAct": "ascension",
+      "title": "Act VI — The Neon Caravan of New Babylon",
+      "scenes": [
+        "act:baghdad:entertainment:middle:t5:open",
+        "act:baghdad:entertainment:middle:t5:rising",
+        "act:baghdad:entertainment:middle:t5:midpoint",
+        "act:baghdad:entertainment:middle:t5:turn",
+        "act:baghdad:entertainment:middle:t5:close"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "act:baghdad:entertainment:middle:t0:open",
+      "sense": "smell",
+      "prose": [
+        "The hold of the vessel carried the thick, suffocating stench of wet hemp, scorched coal, and the rancid fat of a hundred communal kitchens, but beneath it all, tucked into the velvet-lined cavities of the instrument cases, lived the faint, persistent ghost of cardamom and rosewater. It was a fragrance that refused to die, clinging to the heavy wool of {given_name}'s coat like a silent vow. Every time the heavy iron doors groaned open to let in the salt spray of the harbor, the damp sea air mingled with this private spice, creating a sharp, bittersweet perfume that defined the border between what was left behind and what was about to begin.",
+        "On the wooden deck, the air turned cold and chemical, smelling of sulfur from the coastal refineries and the oily, heavy soot of steam-tugs guiding them to the dock. The family stood together, their hands gloved in worn leather, holding tightly to the brass-bound chests that contained their livelihood—the polished lutes, the silk-wrapped zithers, and the hand-written ledger of melodies that had once entertained the wealthy merchants of the river-gardens. Here, the mud underfoot smelled of rot and iron, a raw, unwashed scent that promised nothing but demanded everything."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We open the cedarwood cases right there on the damp wharf, letting the foreign wind carry the scent of old varnish into the harbor."
+          ],
+          "choice": {
+            "text": "Display the tools of our trade immediately to the onlookers.",
+            "motivatorShift": {
+              "reach": 1,
+              "honor": 1,
+              "tradition": 0,
+              "worldview": 1
+            },
+            "setFlags": [
+              "perf_public_pride"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We keep the instruments sealed away from the corrupting dampness of the harbor, preserving their sweet, dry wood."
+          ],
+          "choice": {
+            "text": "Shield our treasures from the vulgar curiosity of the docks.",
+            "motivatorShift": {
+              "tradition": 1,
+              "honor": 0,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "perf_cautious_start"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t0:rising"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t0:rising",
+      "sense": "touch",
+      "prose": [
+        "The plaster of the lodging house was cold and granular under {given_name}'s fingertips, shedding a fine white dust that settled into the grain of their skin. There was no marble here, no smooth alabaster water-basins; only the rough-hewn pine of the floorboards that yielded splinters through thin stockings, and the stiff, scratchy texture of cheap horsehair blankets that left the skin red and prickling. Every surface in the tenement seemed designed to scrape, to rub, and to test the physical endurance of a family whose hands had known only the smooth glide of gut strings and the polished bone of plectrums.",
+        "In the evenings, the cold settled into the joints of the instruments, tightening the wooden pegs until they threatened to snap under the touch. {given_name} spent hours rubbing sweet almond oil into the dry rosewood of the oud, feeling the wood drink the moisture greedily, restoring the supple, living warmth that had been parched by the Atlantic crossing. It was a delicate dance of survival, a constant struggle to keep the tools of their artistry from warping and splitting in this harsh, drafty climate where even the air felt like a physical weight against the chest."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "With numb fingers, we play for the cold children of the tenement hallway, warming our hands by the friction of our strings."
+          ],
+          "choice": {
+            "text": "Play to warm the drafty tenement halls.",
+            "motivatorShift": {
+              "reach": 1,
+              "worldview": 1,
+              "wealth": -1,
+              "lineage": 0
+            },
+            "setFlags": [
+              "perf_tenement_star"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We hoard our warmth in the smallest room, keeping our hands wrapped in wool until we can play for paying guests."
+          ],
+          "choice": {
+            "text": "Reserve our touch for those who can compensate us.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1,
+              "reach": -1,
+              "tradition": 0
+            },
+            "setFlags": [
+              "perf_exclusive_hands"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "With our meager savings dwindling, how do we market our first public performance in the local parlor houses?",
+        "options": [
+          {
+            "text": "Advertise our ancient heritage, playing traditional court music for curious high-society patrons.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "perf_route_classical"
+            ]
+          },
+          {
+            "text": "Adapt our repertoire to the popular local tunes, blending our instruments with the lively street-hall tempos.",
+            "motivatorShift": {
+              "reach": 2,
+              "worldview": 1,
+              "wealth": 2,
+              "tradition": -2
+            },
+            "setFlags": [
+              "perf_route_novelty"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t0:midpoint"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t0:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The city outside was a monstrous, chaotic symphony of iron and steam. From dawn until midnight, the screech of steel wheels on the elevated tracks vibrated through the windowpanes, accompanied by the harsh, barked commands of street vendors and the guttural, clattering roar of coal carts dumping their loads. It was a sound that had no rhythm, no resolution, a wall of noise that threatened to drown out the intricate, quarter-tone melodies that the {family_name} ensemble had spent generations perfecting.",
+        "One afternoon, during a lull in the street noise, the delicate, cascading notes of a neighboring violin drifted up from the alley below—not the familiar modes of their homeland, but a weeping, rapid tune from some eastern European village. {given_name} paused, instrument poised, listening as the stranger's music rose and fell, clashing then weaving with the tentative hum of their own qanun. It was a brief, acoustic truce in the heart of the noisy ward, a realization that they were not the only ones trying to carve a home out of this modern din."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We open the window wide and let our oud answer the stranger's violin, creating a strange, beautiful conversation of strings."
+          ],
+          "choice": {
+            "text": "Join our voice with the neighborhood's song.",
+            "motivatorShift": {
+              "reach": 1,
+              "worldview": 2,
+              "politics": 1,
+              "honor": 0
+            },
+            "setFlags": [
+              "perf_intertwined_melodies"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We close the heavy shutters, drowning out the street-fiddler to focus entirely on our own disciplined rehearsals."
+          ],
+          "choice": {
+            "text": "Maintain the purity of our own acoustic space.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "worldview": -1,
+              "reach": -1
+            },
+            "setFlags": [
+              "perf_pure_acoustics"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t0:turn"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t0:turn",
+      "sense": "sight",
+      "prose": [
+        "From the stage of the small basement theater, the world resolved into a canvas of stark, flickering contrast. The yellow glare of the footlights cast long, dramatic shadows against the cracked plaster of the back wall, illuminating the sea of faces gathered in the smoky gloom. There were the glittering eyes of young dandy-critics in the front row, the tired, grease-stained faces of workmen in the back, and the colorful, cheap silk scarves of women who had saved their pennies just to see the exotic troupe from the river-lands.",
+        "Before them sat {full_name}, holding the pear-shaped oud like a child. In this light, the ornate mother-of-pearl inlays along the instrument's neck gleamed like small, cold stars. Looking out, it was clear that the ward had begun to notice them; they were no longer mere survivors huddled in a tenement, but a curiosity, a spectacle, a mirror in which this growing city could view its own exotic desires. The choice lay before them like the split paths of a playbill."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We look directly into the eyes of the crowd, offering them the proud, unblinking gaze of an ancient lineage."
+          ],
+          "choice": {
+            "text": "Confront the audience with our dignified presence.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1,
+              "wealth": 0,
+              "worldview": 0
+            },
+            "setFlags": [
+              "perf_proud_gaze"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We soften our expressions, adopting the easy, theatrical smiles of the local showmen to win their immediate affection."
+          ],
+          "choice": {
+            "text": "Adopt the charming mask of the professional entertainer.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 2,
+              "tradition": -1,
+              "honor": -1
+            },
+            "setFlags": [
+              "perf_crowd_pleaser"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How shall the {family_name} name define its theatrical presence in this new world?",
+        "options": [
+          {
+            "text": "The Traditional Conservators: Maintain the strict, high-art classical court style, targeting wealthy patrons and academic societies.",
+            "motivatorShift": {
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "wealth": -1,
+              "reach": -2,
+              "power": 1,
+              "worldview": -1,
+              "politics": 0
+            },
+            "setFlags": [
+              "path_t0_traditionalists"
+            ]
+          },
+          {
+            "text": "The Vaudeville Pioneers: Embrace the popular music halls, mixing our instruments with local brass and comedic skits for mass appeal.",
+            "motivatorShift": {
+              "reach": 3,
+              "wealth": 3,
+              "tradition": -3,
+              "honor": -1,
+              "worldview": 2,
+              "power": 1,
+              "lineage": 0,
+              "politics": 1
+            },
+            "setFlags": [
+              "path_t0_vaudevillians"
+            ]
+          },
+          {
+            "text": "The Venue Proprietors: Shift focus from performing to ownership, buying a small theater in the ward to host other immigrant acts.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 3,
+              "politics": 2,
+              "reach": 1,
+              "lineage": 1,
+              "tradition": -1,
+              "honor": 0,
+              "worldview": 1
+            },
+            "setFlags": [
+              "path_t0_proprietors"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t0:close"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t0:close",
+      "sense": "taste",
+      "prose": [
+        "The flavor of their success was sweet, but it left a thick, dark residue behind. At the wooden table of their now-permanent apartment, they celebrated with cups of boiled Turkish coffee, so thick that the dregs formed a muddy silt at the bottom of the porcelain. It was sweetened with imported sugar-loaves, a sharp contrast to the bitter grind of the beans, mirroring the life they had built—partly traditional, partly bought with the coin of a foreign public.",
+        "As the young heir of the {surname} line took their cup, they tasted the rich, oily film of the coffee and the dry, flaky pastry of almond cakes baked in a tenement oven. This was the legacy being handed down: a name that was now spoken in the bustling ticket-booths of the ward, a reputation carved from the noise of the streets, and a quiet, persistent sweetness that kept the old country alive in the back of the throat. The foothold was secured, and the stage was set."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We swallow the bitter dregs at the bottom of the cup, swearing to remember the struggles of our first winter."
+          ],
+          "choice": {
+            "text": "Pledge to keep our ancestral memories alive.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 2,
+              "honor": 1,
+              "wealth": 0
+            },
+            "setFlags": [
+              "perf_bitter_remembrance"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We wash the taste of the old coffee down with a glass of local seltzer, looking only forward to the marquee lights of tomorrow."
+          ],
+          "choice": {
+            "text": "Embrace the modern, sparkling future of our name.",
+            "motivatorShift": {
+              "reach": 2,
+              "wealth": 1,
+              "worldview": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "perf_forward_gaze"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of boiling cardamom and bruised mint fought a daily, desperate war against the heavy, sulfurous reek of coal barges chugging along the nearby river canal. Inside the drafty hall that {given_name} had leased, the floorboards gave off the sour tang of old dampness, a smell that could only be masked by the constant burning of sandalwood incense in small brass braziers near the doorway. It was a sensory borderland, where the rich, roasted aroma of dark coffee beans grinding under wood-handled mills collided with the cold, wet salt-air drifting off the shipping docks.",
+        "To the neighbors, the {surname} establishment was a strange, aromatic curiosity before it was ever a theater. Passerby would pause on the cobbled walkway, their noses wrinkling at the unfamiliar sweetness of rosewater and boiled sugar syrup cooling on large tin trays, wondering what manner of business was being born behind the shuttered windows. Every breath taken in these drafty rooms carried the promise of an imported sanctuary, a fragile bubble of warmth carved out of the grey, industrious district."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We stoked the small charcoal stove near the entrance, ensuring the scent of home greeted every stranger who crossed the threshold."
+          ],
+          "choice": {
+            "text": "Prioritize the sensory invitation of the cafe space.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "aromatic_sanctuary"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We burned cheap pine shavings to dry out the damp walls, keeping our precious resins locked away for the paying audience."
+          ],
+          "choice": {
+            "text": "Conserve the authentic ingredients for official performances.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": -1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "frugal_foundations"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t1:rising"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The physical reality of their new life was written in the grain of the wood and the stiff weave of the local wool. {given_name}'s fingertips were perpetually rough, calloused from scraping dried glue off secondhand bentwood chairs and tightening the stubborn wooden pegs of an oud that seemed to warp in the persistent local humidity. Every morning began with the cold shock of iron pump handles and the scratchy, coarse fibers of cleaning rags used to wipe down the stage, a far cry from the smooth glazed tiles of the courtyards they left behind.",
+        "There was a constant, physical crowding in the small quarters behind the stage. The family lived in the margins of their own business, sleeping on thin pallets that had to be rolled up before the first patrons arrived, their elbows brushing against hanging costumes and stacks of hand-printed playbills. It was a life lived in close quarters, where every touch of a hand was either a reassurance of shared survival or an accidental reminder of how little space they truly owned."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We spent our evenings hand-polishing the brass finger-plates on the front doors until they shone like mirrors."
+          ],
+          "choice": {
+            "text": "Present an immaculate veneer of middle-class respectability.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "polished_front"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We patched our own garments with rough local canvas, pouring our physical labor entirely into securing the stage."
+          ],
+          "choice": {
+            "text": "Focus labor exclusively on the quality of the performance space.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "utilitarian_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How shall the family balance the tight physical boundaries of their domestic life with the public nature of the venue?",
+        "options": [
+          {
+            "text": "Drape heavy wool curtains to partition the family quarters off completely.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "strict_domestic_boundary"
+            ]
+          },
+          {
+            "text": "Allow the family kitchen to blend into the cafe, letting patrons see the household at work.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "open_hearth_hospitality"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t1:midpoint"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The noise of the neighborhood was a chaotic, metallic beast that threatened to swallow their music whole. Outside the thin plaster walls, iron-rimmed wagon wheels crashed over granite cobbles, accompanied by the harsh, guttural barking of draymen and the clatter of coal being dumped into iron chutes. To perform a classical vocal suite in this environment was an act of stubborn defiance, requiring the singers to project over the deafening hiss of steam pipes from the laundry next door.",
+        "One afternoon, the brassy blast of a rival parlor's German-made barrel organ erupted from across the alley, its repetitive, mechanical waltz pounding through the floorboards. It was a direct challenge to the intricate, microtonal improvisations of the {family_name} ensemble, an economic threat delivered in the language of sheer decibels. The neighborhood was listening, and the loudest voice often claimed the coins of the working men seeking escape after a long shift."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We played our drums with double the vigor, transforming the delicate rhythm into a driving, danceable beat that could be heard down the block."
+          ],
+          "choice": {
+            "text": "Adapt the tempo to match the aggressive energy of the streets.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "loud_popular_appeal"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We instructed our vocalists to sing with a quiet, piercing clarity, forcing the audience to hush each other to hear the poetry."
+          ],
+          "choice": {
+            "text": "Preserve the acoustic intimacy, demanding silence from the room.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "acoustic_purism"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t1:turn"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "Under the flickering glow of the newly installed gas lamps, the stage looked like a painted oasis in a desert of soot. The warm, yellow light caught the intricate mother-of-pearl inlays of the stringed instruments, reflecting tiny stars onto the faces of the audience huddled on benches below. From the wings, the view of the crowd was a patchwork of the district itself: burly dockworkers with coal-dust lining their eyes, curious clerks in shiny collars, and a few quiet, homesick families who sat in the back with their coats still buttoned.",
+        "On the wall hung a large, hand-lettered sign bearing the {surname} name, its elegant script a stark contrast to the blocky, printed advertisements for beer and patent medicines that surrounded it. This was the moment of visibility, where the visual identity of the hall would either blend into the local landscape of cheap music halls or stand apart as a distinct cultural beacon for the community."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We watched the diverse crowd mingle in the warm light, realizing our stage was becoming the visual heart of the district."
+          ],
+          "choice": {
+            "text": "Embrace the role of a community anchor.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "neighborhood_hub"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We observed the critical gaze of a wealthy patron who had traveled from the uptown districts, sensing a grander path forward."
+          ],
+          "choice": {
+            "text": "Target the gaze of high-society patrons.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "high_society_ambition"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {surname} family position their entertainment venue to define their legacy in this city?",
+        "options": [
+          {
+            "text": "The Popular Variety Theater: Incorporate local comedic acts and English-language songs to maximize ticket sales.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": -1,
+              "worldview": -2,
+              "power": 1,
+              "tradition": -3,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 3
+            },
+            "setFlags": [
+              "venue_vaudeville"
+            ]
+          },
+          {
+            "text": "The Authentic Maqam Sanctuary: Restrict the repertoire to traditional classical music, catering to the immigrant elite and purists.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 1,
+              "worldview": 3,
+              "power": 0,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -2
+            },
+            "setFlags": [
+              "venue_purist"
+            ]
+          },
+          {
+            "text": "The Literary Salon: Combine musical acts with evening debates, political poetry, and community organizing.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 3,
+              "worldview": 2,
+              "power": 2,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "venue_salon"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t1:close"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t1:close",
+      "sense": "taste",
+      "prose": [
+        "The flavor of their success was bittersweet, lingering on the tongue like the dregs of heavy, unfiltered coffee spiced with cardamom. On winter nights, after the last patron had departed and the gas jets were hissed shut, the family would gather around the wooden table to eat cold, syrup-soaked semolina cake. The sweet, buttery pastry was a reminder of what they had carried across the seas, but it was now eaten in a room that smelled of cold soot and wet coats.",
+        "As the years of this founding generation drew to a close, {given_name} knew that the inheritance being passed down was more than a set of keys and a lease. It was a distinct taste for public life, an appetite for the applause of strangers and the sharp, clean bite of hard-earned silver. The next generation would grow up with the flavor of this river city already familiar to them, their tongues native to both the spiced sweets of the Levant and the heavy stews of their new home."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We raised our glasses of anise-scented spirit, celebrating a legacy that had firmly taken root in the soil of this district."
+          ],
+          "choice": {
+            "text": "Toast to the survival and growth of the family name.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "generation_established"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We shared a simple loaf of dark local bread, remembering the hunger that drove us here as we prepared the heir for the future."
+          ],
+          "choice": {
+            "text": "Instill a sense of cautious, hunger-driven ambition in the heir.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "hungry_heirs"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t2:open",
+      "sense": "smell",
+      "prose": [
+        "The heavy, sweet fragrance of boiling sugar and rosewater from the neighboring confectionery drifts directly through the open high windows of the theater lobby, mingling with the sharper, biting scent of whale-oil lamps and fresh pine sawdust from the stage extension. It is the smell of the family's newfound sanctuary, a step above the coal-dust docks and the greasy lard of the tenement basements. Here, {given_name} spends the mornings sweeping up the dried husks of roasted seeds left behind by yesterday's audiences, breathing in the expensive perfumes of the city’s middle class that linger in the plush velvet drapes like a promise.",
+        "Beneath this sweet and smoky surface lies the unmistakable odor of old paper and spirit gum, the tools of a trade that sells illusions to those who can afford to escape the gray rain outside. The {surname} family has built this hall from the wreckage of their first winter, turning a disused dye-house into a palace of shadow-plays and musical interludes. Every cedar plank nailed to the joists represents a meal skipped, every pot of gilding wax a sacrifice, but when the doors open, the scent of wet coats and damp wool from the gathering crowd is sweet as frankincense to a family hungry for respect."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We can invest the week's profit in imported perfume to mist the grand vestibule, matching the high-society expectations."
+          ],
+          "choice": {
+            "text": "Scent the lobby with lavender to appeal to the city's elite.",
+            "motivatorShift": {
+              "wealth": 1,
+              "reach": 1,
+              "tradition": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "scented_lobby"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We can keep the scent rustic and familiar, burning cedar chips to welcome our own kinsmen who seek comfort here."
+          ],
+          "choice": {
+            "text": "Burn cedar and frankincense, keeping the hall familiar to our roots.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "wealth": -1,
+              "reach": -1
+            },
+            "setFlags": [
+              "traditional_scent"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t2:rising"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t2:rising",
+      "sense": "touch",
+      "prose": [
+        "The texture of success is surprisingly cold and metallic, found in the brass key that {given_name} turns in the till each evening, and the crisp, thick parchment of the municipal theater license. Running a finger along the embossed seal, one feels the tiny, sharp ridges of the city's official crest—a physical boundary that separates the licensed entertainer from the street buskers who are regularly swept into the workhouses. Yet, the old canvas of the traveling tents still sits in the back room, rough and stiff with dried salt and river mud, a tactile reminder of the muddy banks where the family first sang for copper pennies.",
+        "A local merchant, whose pockets are deep but whose reputation is stained by predatory dockside loans, offers a partnership that would coat the theater in imported marble and silk, replacing the rough-hewn pine with smooth, varnished cherrywood. But to accept his hand—dry, calloused, and smelling of salt-fish—means turning away the young musicians from the old neighborhood who still play their stringed lutes on the raw floorboards. One feels the tension in the very fabric of the theater, the pull between the velvet-upholstered future and the stubborn, unyielding canvas of the past."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The merchant's hand remains extended, offering a smooth path to wealth if we cast aside our old loyalties."
+          ],
+          "choice": {
+            "text": "Accept the merchant's sleek partnership to fund the grand renovation.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "lineage": 1,
+              "honor": -2
+            },
+            "setFlags": [
+              "merchant_partnership"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We touch the rough wood of our original benches and decide that some things are too sacred to be bought out."
+          ],
+          "choice": {
+            "text": "Refuse the funding, keeping our independence and our old musicians.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 1,
+              "wealth": -1,
+              "power": -1
+            },
+            "setFlags": [
+              "independent_benches"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "Will you prioritize the comfort of the wealthy patrons or preserve the stage for your community's raw talent?",
+        "options": [
+          {
+            "text": "Upgrade the seating to velvet, pricing out the gallery regulars to attract high-paying patrons.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 1,
+              "tradition": -1,
+              "honor": -1
+            },
+            "setFlags": [
+              "velvet_seating"
+            ]
+          },
+          {
+            "text": "Maintain the open-bench seating, keeping tickets cheap for the old neighborhood.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "wealth": -1,
+              "reach": -1
+            },
+            "setFlags": [
+              "open_bench"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t2:midpoint"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t2:midpoint",
+      "sense": "sound",
+      "prose": [
+        "Above the din of the tuning instruments—the low, resonant groan of the cello and the bright, weeping vibrato of the oud—rises the sharp, mocking laughter of the local theatrical syndicate's agent. He sits in the box seats, his leather boots creaking loudly against the floorboards as he leans over the rail to whisper to his companions. The sound of his derision is a constant static in {given_name}'s ears, a reminder that the {surname} line is still viewed as a collection of foreign upstarts playing dress-up in a city that values old lineage over raw vitality.",
+        "Yet, when the curtain rises, the collective intake of breath from three hundred spectators hushes the room into a sacred silence. In that quiet space, the rich, acoustic warmth of the room—which the family spent three months tuning with clay amphorae buried beneath the stage floor—carries every whisper and every delicate pluck of the wire strings to the highest rafter. A rival family from the shipping docks, the owners of the great barges, sit in the stalls, their hushed conversations suddenly ceasing as they realize the cultural power the {surname}s now wield from this small, resonant stage."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We can play a traditional melody from the old country, asserting our roots despite the syndicate's sneers."
+          ],
+          "choice": {
+            "text": "Fill the hall with the ancient, soaring tunes of our heritage.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "power": -1,
+              "politics": -1
+            },
+            "setFlags": [
+              "traditional_music"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We can pivot to a fashionable metropolitan waltz to prove we can match their high society beat for beat."
+          ],
+          "choice": {
+            "text": "Perform a flawless metropolitan concerto to silence the local critics.",
+            "motivatorShift": {
+              "reach": 2,
+              "politics": 1,
+              "tradition": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "metropolitan_music"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t2:turn"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t2:turn",
+      "sense": "sight",
+      "prose": [
+        "From the high balcony of the theater, the city stretches out like a vast, glittering constellation of gaslamps and coal fires, a sprawling monster of brick and mortar that the family is slowly learning to tame. {given_name} watches the carriage lanterns crawl through the wet streets below, their yellow eyes reflecting in the puddles like spilled gold. On the table sits the blueprint for the new civic arts conservatory, a massive stone structure funded by the city council; the family has been invited to take a permanent seat on its governing board, but the price is absolute conformity to the city's classical standards.",
+        "Looking down at the stage below, the bright, painted scenery of their latest production—a stylized representation of the ancient palm groves and dusty arches of their homeland—shines under the amber glare of the limelight. To join the city's grand conservatory would mean dismantling these painted memories, trading them for Greek columns and Shakespearean drapes to appease the municipal censors. It is a choice written in light and shadow: to remain a vibrant, exotic oasis in the smoky city, or to become a pillar of the metropolis's own grey establishment."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The bright lights of the municipal theater district beckon, offering a future of official prestige."
+          ],
+          "choice": {
+            "text": "Sign the charter, merging our theater with the city's cultural machinery.",
+            "motivatorShift": {
+              "power": 2,
+              "reach": 1,
+              "tradition": -2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "aligned_with_city"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Our eyes return to our own hand-painted canvases, beautiful and wild in their independence."
+          ],
+          "choice": {
+            "text": "Tear up the proposal and build our own independent empire of the arts.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "wealth": -1,
+              "power": -1
+            },
+            "setFlags": [
+              "independent_empire"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {surname} family integrate their art into the city's grand institutions?",
+        "options": [
+          {
+            "text": "Merge with the Municipal Conservatory, securing institutional power at the cost of creative independence.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 2,
+              "tradition": -2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "institution_merge"
+            ]
+          },
+          {
+            "text": "Reject the city's board, founding an independent, community-funded academy of the arts.",
+            "motivatorShift": {
+              "tradition": 3,
+              "worldview": 2,
+              "wealth": -2,
+              "power": -1
+            },
+            "setFlags": [
+              "independent_academy"
+            ]
+          },
+          {
+            "text": "Use our theatrical influence to lobby the city council, turning the stage into a political platform.",
+            "motivatorShift": {
+              "politics": 3,
+              "reach": 2,
+              "honor": -2,
+              "wealth": 1
+            },
+            "setFlags": [
+              "political_theater"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t2:close"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t2:close",
+      "sense": "taste",
+      "prose": [
+        "The taste of their final triumph is surprisingly quiet, found in the dark, heavy sediment of cardamom tea brewed in the small brass pot that has survived three migrations. As {given_name} pours a cup for the young heir, the steam carries the scent of honey and roasted pods, a flavor that has remained unchanged while everything else around them transformed into stone and glass. The deeds to the theater hall, signed in thick, iron-gall ink that leaves a metallic tang on the tongue if one is foolish enough to lick the nib, are laid out on the mahogany desk, ready to be passed down.",
+        "There is a bitter undertone to the wine they drink to celebrate the transfer of power—the vintage is local, sharp with the acidity of northern grapes, a taste the elder generation had to force themselves to tolerate but which the young heir drinks with easy familiarity. The family has survived the transition from street performers to cultural arbiters, leaving the next generation with a key that opens the city's finest salons. The dust of the stage may still coat their throats, but the water they drink now comes from the deep, clean wells of the wealthy quarters, sweet and free of the river's rot."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We toast to the journey, reminding the heir never to lose the taste of the salt that seasoned our first bread."
+          ],
+          "choice": {
+            "text": "Impart the value of our humble roots as the true source of our magic.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "reach": -1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "legacy_roots"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We drain the cup to the future, urging the heir to seek only the finest vintages the city can offer."
+          ],
+          "choice": {
+            "text": "Encourage the heir to fully embrace the refined world of high society.",
+            "motivatorShift": {
+              "reach": 2,
+              "wealth": 1,
+              "tradition": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "legacy_refinement"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t3:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of the hall is a mixture of rosewater-washed floorboards, the charred wick of oil lamps, and the heavy, sweet cardamom steam wafting from the brass samovars in the lobby. Behind the heavy velvet curtains, {given_name} {surname} breathes in this dense, familiar perfume, which has become the very atmosphere of the family's rising fortune. The public no longer merely tolerates these exotic melodies; they flock to the playhouse, seeking the bittersweet warmth of a world they have only ever heard in whispers.",
+        "On the cedar table in the greenroom lies a stack of newly printed bills, the ink still slightly damp and pungent with oil. The name {family_name} stands out in bold, stylized lettering, flanked by illustrations of lutes and palm leaves. It is no longer just a name whispered in the immigrant boarding houses; it is a brand that commands a silver coin at the door and a respectful nod from the city's established promoters who once looked past them."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You decide to double the print run of the promotional playbills, sending young runners to paste them across the wider municipal districts."
+          ],
+          "choice": {
+            "text": "Saturate the city with the family name.",
+            "motivatorShift": {
+              "reach": 2,
+              "wealth": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "widely_advertised"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You keep the advertising intimate and exclusive, letting word-of-mouth preserve the air of authentic, hard-to-find artistry."
+          ],
+          "choice": {
+            "text": "Maintain an air of exclusive heritage.",
+            "motivatorShift": {
+              "tradition": 2,
+              "wealth": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "exclusive_reputation"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t3:rising"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t3:rising",
+      "sense": "touch",
+      "prose": [
+        "The polished bone pegs of the oud are cold against {given_name}'s fingertips, resistance giving way with a dry, wooden click as the instrument is tuned to the rising humidity of the packed room. Outside, the world is a friction of wool coats and damp leather as patrons press against the ticket booth, their coins clinking against the brass grate. There is a physical weight to this success—the heavy ledger of ticket sales, the rough canvas of the bank bags, and the calluses worn deep into the thumbs of the family's musicians.",
+        "A local ward boss represents a different kind of touch: a heavy, friendly arm draped over {given_name}'s shoulder in the back office, the wool of his expensive overcoat scratching against the modest linen of {given_name}'s shirt. He offers a smooth, brass key to a larger municipal hall, but his touch carries the unspoken price of political compliance and a cut of the weekend receipts."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You accept his heavy-handed hospitality, shaking his calloused hand to secure the grander stage."
+          ],
+          "choice": {
+            "text": "Accept the politician's embrace for a larger stage.",
+            "motivatorShift": {
+              "power": 2,
+              "politics": 2,
+              "honor": -1
+            },
+            "setFlags": [
+              "ward_alliance"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You politely shrug off his arm, preferring the independence of your own crowded, independent parlor."
+          ],
+          "choice": {
+            "text": "Refuse the connection to keep your operations clean.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "independent_house"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How do you handle the rising administrative demands of your expanding theater business?",
+        "options": [
+          {
+            "text": "Delegate the booking and accounts to your ambitious younger cousin.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "cousin_manager"
+            ]
+          },
+          {
+            "text": "Hire a professional clerk from outside the community to enforce strict efficiency.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": -1
+            },
+            "setFlags": [
+              "clerk_hired"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t3:midpoint"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t3:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The air vibrates with the resonant, microtonal slide of the strings, a sound that defies the rigid scales of the city's Western orchestras. In the wings, the low, rhythmic thud of the darbuka drum rattles the teacups on the sideboard, a heartbeat that draws even the passersby on the street to stop and listen. This is the sound of a culture asserting its space, loud enough to drown out the clatter of the passing streetcars outside.",
+        "But tonight, a different sound cuts through the music: the sharp, clipped accents of an established theater syndicate representative standing at the back of the hall. He whispers to his companion, his pencil scratching dryly against a notepad. His presence represents the intersection of two empires—the family's grassroots cultural command and the syndicate's vast network of playhouses."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You instruct the performers to play a traditional suite, letting the complex, uncompromising rhythms display your heritage without dilution."
+          ],
+          "choice": {
+            "text": "Flaunt the uncompromised beauty of your roots.",
+            "motivatorShift": {
+              "tradition": 2,
+              "worldview": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "pure_traditional"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You have the ensemble transition into a popular local melody rearranged with eastern instruments, showing the syndicate your commercial adaptability."
+          ],
+          "choice": {
+            "text": "Perform a fusion that proves your broad appeal.",
+            "motivatorShift": {
+              "reach": 2,
+              "wealth": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "crossover_style"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t3:turn"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t3:turn",
+      "sense": "sight",
+      "prose": [
+        "From the balcony, {given_name} looks down upon a sea of faces illuminated by the warm, flickering gas lamps. The audience is a tapestry of the city itself: older men from the old country with eyes closed in nostalgic reverie, sitting alongside young, fashionable locals who watch the stage with rapt fascination. The bright, hand-painted banner of the {family_name} troupe hangs proudly above the proscenium, a visual testament to how far they have climbed from the docks.",
+        "Yet, the sight of a new contract on the desk in the manager’s office threatens to alter this view forever. The document offers national distribution through a major entertainment trust, but it requires changing the troupe’s name to something more easily pronounced by the general public, and replacing some of the traditional instruments with modern brass."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You stare at the clause demanding the erasure of your family name, your eyes tracing the ink of a contract that offers immense wealth at the cost of identity."
+          ],
+          "choice": {
+            "text": "Struggle with the demands of the corporate contract.",
+            "motivatorShift": {
+              "wealth": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "contract_hesitation"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You look at the faces of your children practicing in the courtyard, realizing that what you build must remain visibly theirs."
+          ],
+          "choice": {
+            "text": "Prioritize the visual legacy of the family name.",
+            "motivatorShift": {
+              "lineage": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "legacy_first"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {family_name} line define its entertainment empire for the next generation?",
+        "options": [
+          {
+            "text": "Sign the syndicate contract, accepting the name change and mainstream instrumentation for nationwide reach.",
+            "motivatorShift": {
+              "reach": 4,
+              "wealth": 3,
+              "tradition": -3,
+              "honor": -2
+            },
+            "setFlags": [
+              "mainstream_syndicate"
+            ]
+          },
+          {
+            "text": "Reject the syndicate to build an independent regional circuit under the proud {family_name} name.",
+            "motivatorShift": {
+              "lineage": 3,
+              "honor": 3,
+              "power": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "independent_circuit"
+            ]
+          },
+          {
+            "text": "Transform the theater into an educational and political cultural hub, funding community institutions over profit.",
+            "motivatorShift": {
+              "politics": 3,
+              "worldview": 3,
+              "tradition": 2,
+              "wealth": -2
+            },
+            "setFlags": [
+              "cultural_hub"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t3:close"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t3:close",
+      "sense": "taste",
+      "prose": [
+        "The celebration toast is sweet and sharp, the clear, anise-flavored arak turning milky white as cold water is poured into the glasses. On the tongue, it leaves a numbing, clean finish that cuts through the rich, buttery layers of baklava served to celebrate the end of a triumphant season. {given_name} raises a glass to the ensemble, the taste of success no longer a rare indulgence but a daily reality for this middle-class household.",
+        "As the young heir takes a sip of the sweet mint tea served at the late-night planning table, the weight of the future is passed along with the ledger. The family has carved a permanent place in the cultural landscape of their new home, leaving a reputation that tastes of both the dusty old-world spices and the crisp, clean waters of the new. The next generation will not have to introduce themselves; their name precedes them."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You pour a final drop of arak onto the floorboards in a traditional gesture of gratitude to the spirits of the ancestors who carried the music across the sea."
+          ],
+          "choice": {
+            "text": "Honor the ancestors with a traditional libation.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "ancestral_devotion"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You raise your glass high to the bustling city skyline visible through the window, toasted by the cheers of your modern patrons."
+          ],
+          "choice": {
+            "text": "Toast the modern city that has embraced you.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "modern_integration"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t4:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of dark, cardamom-spiced coffee simmering in the corner of the executive suite always battles the dry, metallic tang of the television transmitters. Here, high above the city, the {surname} Broadcasting Company has built its fortress out of light and sound. The air is thick with the aroma of Turkish tobacco, expensive wool suits, and the unmistakable ozone scent of hot vacuum tubes humming in the editing bays.",
+        "For decades, the family kept their art confined to theaters and traveling troupes, but this generation has captured the very airwaves. Through the glass, the bustling control room glows with amber lights, where translators, sound engineers, and producers work under the steady gaze of {given_name}. The family’s ancestral heritage, once carried in the memory of Baghdad's winding alleys, now travels at the speed of light to millions of receivers across the globe.",
+        "As the evening broadcast prepares to air, the aroma of a celebratory feast of roasted lamb and saffron rice is brought up from the kitchen below. It is a reminder that despite the sleek chrome and glass of this modern high-rise, the heart of the family's enterprise remains bound to the hospitality and stories of their ancestors, now writ large upon a global stage."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We must ensure our evening broadcast opens with the traditional maqam melody before the modern news fanfares begin."
+          ],
+          "choice": {
+            "text": "Prioritize our cultural signature on the global network.",
+            "motivatorShift": {
+              "tradition": 3,
+              "honor": 1,
+              "reach": -1,
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 2,
+              "power": 0,
+              "lineage": 2
+            },
+            "setFlags": [
+              "cultural_signature"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We should lead with the syndication of our new sleek, Western-style variety show to capture the global advertising markets."
+          ],
+          "choice": {
+            "text": "Streamline the content for maximum international appeal.",
+            "motivatorShift": {
+              "wealth": 3,
+              "reach": 3,
+              "tradition": -2,
+              "honor": -1,
+              "politics": 1,
+              "worldview": -1,
+              "power": 2,
+              "lineage": 0
+            },
+            "setFlags": [
+              "global_appeal"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t4:rising"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t4:rising",
+      "sense": "touch",
+      "prose": [
+        "The heavy leather of the syndication portfolios feels remarkably cool under {given_name}'s fingertips, a sharp contrast to the blistering heat of the studio spotlight bulbs just feet away. Each page represents hundreds of thousands of viewers, a network of cables and towers stretching across three continents. To sign is to bind the {family_name} name to the largest distribution network in the hemisphere.",
+        "Walking the stage, {given_name} runs a hand along the hand-carved cedar screens that frame the set, imported at great expense to give our variety hour its distinct, evocative aesthetic. The wood is dry, textured, and grounded, while the modern plastic dials of the control console beneath the stage are smooth, yielding only to precise, unfeeling commands. The balance between the warm craft of the past and the cold machinery of the future is a daily tightrope.",
+        "When our lead actress, a diva of international renown, demands a renegotiation of her contract mid-season, she presses her diamond ring into the palm of her hand, gesturing to the set. She knows the leverage she holds, and the touch of her cold, manicured hand during the backstage confrontation signals that the scale of our operation has brought equally colossal egos into our orbit."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We can capitulate to her demands, knowing her face is the literal trademark of our growing empire."
+          ],
+          "choice": {
+            "text": "Secure her loyalty with a lavish new contract.",
+            "motivatorShift": {
+              "wealth": -2,
+              "power": 2,
+              "reach": 2,
+              "politics": 0,
+              "worldview": 1,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "star_secured"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We can replace her with an ensemble of young talent from our old community, proving the brand is bigger than any single star."
+          ],
+          "choice": {
+            "text": "Refuse the diva and elevate our own ensemble.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": -1,
+              "lineage": 3,
+              "tradition": 2,
+              "honor": 2,
+              "reach": -1,
+              "politics": 0,
+              "worldview": 2
+            },
+            "setFlags": [
+              "ensemble_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "As the syndicate pushes for a standardized formatting across all global markets, how will the family manage the creative control of their flagship network?",
+        "options": [
+          {
+            "text": "Retain absolute creative control, keeping all production strictly in-house under the family's direct supervision.",
+            "motivatorShift": {
+              "power": 3,
+              "tradition": 2,
+              "honor": 1,
+              "reach": -1,
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 1,
+              "lineage": 2
+            },
+            "setFlags": [
+              "creative_autonomy"
+            ]
+          },
+          {
+            "text": "Franchise the format to regional directors abroad, taking a massive royalty cut while relinquishing day-to-day oversight.",
+            "motivatorShift": {
+              "wealth": 4,
+              "reach": 3,
+              "power": -1,
+              "tradition": -2,
+              "honor": -1,
+              "politics": 1,
+              "worldview": 2,
+              "lineage": -1
+            },
+            "setFlags": [
+              "global_franchise"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t4:midpoint"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t4:midpoint",
+      "sense": "sound",
+      "prose": [
+        "A low, rhythmic rumble vibrates through the floorboards—the collective murmur of three thousand audience members packing the grand auditorium for our live centennial broadcast. Behind the velvet curtains, the crackle of shortwave radios carries the broadcast's feedback from receivers in Alexandria, London, and Beirut. It is a wall of sound, a digital and acoustic chorus that proves the {family_name} name is now a global frequency.",
+        "In the VIP box, the hushed, clipped tones of a foreign political attache cut through the ambient noise of the crowd. They are whispering with a representative from a massive, state-backed industrial shipping syndicate. They want to buy our prime-time slots, proposing to replace our cultural programming with state-sponsored informational reels that would turn our network into an instrument of international diplomacy.",
+        "To hear the crowd's laughter rise in unison at a joke written by {given_name}'s cousins is to understand the true power of what has been built. The symphony of the control room—the frantic shouting of the director, the rhythmic clicking of the slide switchers, the steady hum of the cooling fans—is the music of an empire that does not need weapons to conquer minds."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We can refuse the attache's proposal outright, letting the pure laughter of our audience remain untainted by state interests."
+          ],
+          "choice": {
+            "text": "Keep the airwaves free from diplomatic propaganda.",
+            "motivatorShift": {
+              "honor": 3,
+              "worldview": 3,
+              "politics": -2,
+              "wealth": -1,
+              "power": 1,
+              "tradition": 2,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "pure_entertainment"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We can accept their gold, integrating their diplomatic news reels into our network in exchange for state protection and global transmission rights."
+          ],
+          "choice": {
+            "text": "Partner with the state to secure unmatched transmission power.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 3,
+              "reach": 3,
+              "wealth": 2,
+              "tradition": -1,
+              "honor": -2,
+              "worldview": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "state_aligned"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t4:turn"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t4:turn",
+      "sense": "sight",
+      "prose": [
+        "From the high balcony of the broadcasting tower, the city below is a sea of flickering blue lights, each one a television set tuned to the {surname} network. It is an astonishing sight, a digital constellation of our own making. On the desk in the office, the blueprints for our proposed satellite array glow under the green desk lamp, mapping out a network of orbits that will beam our signals to the farthest corners of the earth.",
+        "Beside the blueprints lie three distinct, binding manifestos, each pointing toward a different future for our dynasty's global footprint. One is backed by a coalition of international media barons; another by our own conservative family board, who wish to preserve our heritage; and the third by a tech-utopian conglomerate proposing a complete merger of our content with their distribution infrastructure.",
+        "The light of the neon network logo, burning bright red against the dark sky, reflects off the polished mahogany table where {given_name} must now sign. Every path leads to a different kind of power, but only one will preserve the distinct soul of the family that once crossed oceans to tell their stories."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The stark white paper of the independent charter stands before us, demanding immense capital but keeping the family name sole owner of the skies."
+          ],
+          "choice": {
+            "text": "Risk everything to launch an independent satellite network.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 4,
+              "wealth": -3,
+              "politics": 1,
+              "worldview": 2,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 2
+            },
+            "setFlags": [
+              "independent_satellites"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The gold-embossed corporate merger agreement offers instant, unimaginable wealth, though our family's name will become a subsidiary brand."
+          ],
+          "choice": {
+            "text": "Accept the corporate merger for guaranteed global dominance.",
+            "motivatorShift": {
+              "wealth": 4,
+              "power": 2,
+              "reach": 3,
+              "tradition": -3,
+              "honor": -2,
+              "lineage": -1,
+              "politics": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "corporate_merger"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {family_name} dynasty assert its dominance over the global entertainment landscape for the next half-century?",
+        "options": [
+          {
+            "text": "Establish the Global Voice Initiative: A fiercely independent, culturally rich network broadcasting heritage, art, and news directly from the diaspora to the world.",
+            "motivatorShift": {
+              "tradition": 4,
+              "honor": 3,
+              "worldview": 3,
+              "lineage": 3,
+              "reach": 1,
+              "power": 2,
+              "wealth": 0,
+              "politics": 0
+            },
+            "setFlags": [
+              "path_heritage_voice"
+            ]
+          },
+          {
+            "text": "Build a Multi-National Conglomerate: Absorb smaller networks, diversify into print and digital media, and prioritize mass-market appeal over cultural specificity.",
+            "motivatorShift": {
+              "wealth": 4,
+              "reach": 4,
+              "power": 3,
+              "tradition": -3,
+              "honor": -1,
+              "lineage": 1,
+              "politics": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "path_media_conglomerate"
+            ]
+          },
+          {
+            "text": "Partner with Government Infrastructure: Secure state-sanctioned monopolies on broadcasting, trade information, and national education programs, becoming the official voice of progress.",
+            "motivatorShift": {
+              "politics": 4,
+              "power": 4,
+              "wealth": 2,
+              "reach": 2,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "path_state_voice"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t4:close"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t4:close",
+      "sense": "taste",
+      "prose": [
+        "At the private celebration dinner in the penthouse, the sharp, anise-rich taste of arak cuts through the sweetness of pistachio-stuffed baklava. It is the taste of our origin, unchanged by decades of translation, syndication, and global acclaim. As the family elders raise their glasses to {given_name}, the warmth of the spirit in the throat feels like a quiet victory, a link to the family gatherings of generations past.",
+        "The heir apparent sits at the end of the table, turning a silver television-key in their hand. This young visionary does not look back at the deserts of the old country with longing, but looks out at the satellite dishes on the roof with hunger. They taste the future in the champagne that flows after the arak—dry, effervescent, and international.",
+        "With the ink dry on our global charters, the {surname} legacy is no longer just a story told around a table; it is the fabric of the world's daily imagination. We have risen from the status of humble performers to the arbiters of global culture, leaving an empire of signal and story that will echo for generations to come."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We toast to our ancestors, reminding the heir that the roots of our stories must never be forgotten, even as we touch the stars."
+          ],
+          "choice": {
+            "text": "Impart the duty of cultural stewardship to the next generation.",
+            "motivatorShift": {
+              "tradition": 3,
+              "lineage": 3,
+              "honor": 2,
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "stewardship_passed"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We toast to the sheer scale of our future, telling the heir that the world is theirs to shape, free from the constraints of the past."
+          ],
+          "choice": {
+            "text": "Encourage the heir to pursue absolute, unbridled expansion.",
+            "motivatorShift": {
+              "reach": 4,
+              "power": 3,
+              "wealth": 2,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": 2,
+              "politics": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "expansion_passed"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t5:open",
+      "sense": "smell",
+      "prose": [
+        "The backstage corridor of the orbiting amphitheater smelled of ionized copper, hot vacuum-seal grease, and the sharp, nostril-stinging cardamom that simmered eternally in {given_name}'s brass samovar. Here, five hundred miles above the cloud deck, the old scent of the {surname} family's coffeehouses had been preserved in a sealed, pressurized capsule, defiant of the sterile, synthetic breeze of the life-support scrubbers. It was a sensory anchor for a troupe that lived between gravity wells, selling ancient shadows and electronic epics to the weary crews of the deep-space freighters.",
+        "Behind the heavy velvet drapes—chemically treated to prevent combustion in high-oxygen environments—the great projection drums hummed like sleeping lions. {given_name} breathed in the perfume of the performers' greasepaint, a heavy, waxen scent that had not changed since their ancestors first stepped onto the wooden stages of the grand migration. This high-altitude theater was their kingdom, a middle-class empire built on the laughter of miners and the tears of engineers who hungered for the myths of a homeland they had left far below.",
+        "A technician adjusted the focus on the primary light-emitter, releasing a brief, dry puff of scorching plastic that made {given_name} cough. This was the moment of preparation, the brief, quiet window before the airlocks opened and the roaring crowd filed in to fill the tiered, low-gravity gallery. The legacy of the {family_name} name hung on the tension of these cables and the clarity of the light they cast into the dark."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You adjust the master valves yourself, ensuring the sweet, familiar aroma of spiced tea drifts into the auditorium to welcome the homesick travelers."
+          ],
+          "choice": {
+            "text": "Infuse the arena with the traditional scents of the old country.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 3,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "perfumed_theater"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You order the air-scrubbers turned to maximum, prioritizing a crisp, modern presentation that appeals to the corporate executives in the VIP boxes."
+          ],
+          "choice": {
+            "text": "Purge the traditional odors in favor of a clean, high-tech atmosphere.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": -1,
+              "reach": 2
+            },
+            "setFlags": [
+              "pristine_theater"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t5:rising"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t5:rising",
+      "sense": "touch",
+      "prose": [
+        "The light-harness vibrated against {given_name}'s ribs, its carbon-fiber weave cold and unyielding through the thin silk of the performance tunic. Out here, where the gravity plates flickered at a fraction of Earth's pull, every movement required a delicate, deliberate touch. One misstep on the magnetic runways could send an actor tumbling into the safety nets, ruining the illusion of celestial grace that the {surname} troupe had spent decades perfecting.",
+        "A young understudy stood shivering near the wings, her fingers white-knuckled as she gripped the brass banister of the orbital stage. {given_name} reached out, placing a warm, steady palm over the girl's trembling hands. The cold metal beneath their combined touch seemed to thrum with the heartbeat of the station itself, a reminder of the fragile shell of steel that kept the void at bay. To perform here was to touch the very edge of human ambition.",
+        "There was a sudden, sharp jolt as a supply shuttle docked with the lower ring of the station, sending a long, low shudder through the stage floor. It was a familiar sensation to the veterans of the high circuit, but to the newcomers, it felt like the hand of God shaking the world. {given_name} smoothed the silk of the costume, feeling the static electricity crackle against the fingertips, readying the troupe for the sudden shift in momentum."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You guide the nervous understudy through a series of grounding physical exercises, teaching her to trust the low-gravity harness."
+          ],
+          "choice": {
+            "text": "Calm the cast with traditional actor training.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "nurtured_cast"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You demand the stage manager recalibrate the stabilizers immediately, refusing to allow mechanical instability to tarnish the family's flawless reputation."
+          ],
+          "choice": {
+            "text": "Enforce strict discipline on the station crew.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": -1,
+              "power": 3,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "strict_discipline"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "As the station's gravity stabilization fluctuates before showtime, how will you manage the opening sequence of the production?",
+        "options": [
+          {
+            "text": "Adapt the choreography to a fluid, zero-gravity style that highlights the cast's agility.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 3,
+              "power": 1,
+              "tradition": -1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "zero_g_innovation"
+            ]
+          },
+          {
+            "text": "Delay the curtain until the station engineers lock the gravity plates at a standard one-G.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 2,
+              "worldview": -1,
+              "power": 2,
+              "tradition": 3,
+              "honor": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "classical_perseverance"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t5:midpoint"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t5:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The acoustics of the dome were a marvel of acoustic engineering, converting the sterile silence of space into a rich, resonant chamber. The sound of {given_name}'s voice, amplified by the sub-audible hum of the audio-beams, bounced off the curved plasteel walls like thunder. Beneath the dialogue, one could hear the constant, musical clicking of the cooling fans and the distant, rhythmic thrum of the station's life-support pumps, forming a industrial symphony that accompanied every performance.",
+        "During the second act, a new sound intruded upon the auditorium—a sharp, metallic chime that announced the arrival of a high-ranking delegation. It was the distinct audio-signature of a rival production house, one of the old Earth-bound entertainment dynasties that had long looked down on the {family_name} caravan as mere street performers. Their entourage settled into the gilded upper box, their hushed, critical whispers carrying over the audio-sensors like dry leaves scraping across stone.",
+        "{given_name} did not falter, raising the pitch of the performance to cut through the quiet chatter of the intruders. The clash of cultures was fought not with weapons, but with the resonance of the ancient songs, projected into the ears of thousands of spectators who held their breath in the presence of this silent war."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You project your voice with a sharp, defiant edge, directly addressing the rival box with an ad-libbed line from the classic plays."
+          ],
+          "choice": {
+            "text": "Confront the rivals with theatrical bravado.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": 1,
+              "power": 2,
+              "tradition": 2,
+              "honor": 3,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "rivalry_confronted"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You lower the volume of your performance to a whisper, forcing the entire theater—and the whispers in the VIP box—to fall utterly silent."
+          ],
+          "choice": {
+            "text": "Command the room through masterful underplaying.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "masterful_whisper"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t5:turn"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t5:turn",
+      "sense": "sight",
+      "prose": [
+        "From the center of the stage, the view through the observation dome was breathtaking: a massive, sapphire crescent of the Earth hanging suspended in the black, flanked by the brilliant, untwinkling stars of the high frontier. The light-projectors cast a shimmering lattice of gold and crimson across the actors, blending the ancient patterns of Mesopotamian tile-work with the cold, sterile light of the cosmos. It was a sight that bridged two worlds, the ancient cradle of their ancestors and the silent void that waited for their children.",
+        "As the climax of the play approached, {given_name} looked out at the faces of the audience. They were lit by the glow of their personal handheld screens and the massive projection arrays that floated above the stage. There were laborers with calloused hands, wealthy corporate administrators, and the wide-eyed children of the first generation born in orbit. All of them were staring upward, their expressions caught in the flickering reflection of a story that belonged to none of them individually, but to all of them together.",
+        "The choice lay before the {surname} line, written in the very light that defined their trade. They could continue to be the comforting voice of the past, singing of rivers and soil left behind, or they could cast their projections further into the dark, shaping the myths of the pioneers who would never see the homeworld again."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You turn the projectors toward the stars, casting the imagery of the old tales onto the hulls of the outward-bound colonist vessels."
+          ],
+          "choice": {
+            "text": "Cast the family's art into the deep void.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": 3,
+              "power": 2,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 4
+            },
+            "setFlags": [
+              "starward_art"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You focus the display inward, using the light to recreate a perfect, nostalgic projection of the ancient gardens of Babylon for the homesick orbital workers."
+          ],
+          "choice": {
+            "text": "Preserve the terrestrial memories of the diaspora.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 4,
+              "honor": 2,
+              "lineage": 3,
+              "reach": -2
+            },
+            "setFlags": [
+              "terrestrial_nostalgia"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "With the eyes of the orbital colony upon you, how will the {family_name} family secure its legacy in this new age of spacefarers?",
+        "options": [
+          {
+            "text": "Establish a permanent broadcasting network on the station, anchoring the family as the official voice of the high colonies.",
+            "motivatorShift": {
+              "wealth": 4,
+              "politics": 3,
+              "worldview": 1,
+              "power": 3,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "broadcasting_monopoly"
+            ]
+          },
+          {
+            "text": "Commission a fleet of theatrical transport vessels, turning the family business into a mobile caravan that tours the mining camps of the asteroid belt.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 4,
+              "power": 2,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 3,
+              "reach": 4
+            },
+            "setFlags": [
+              "nomadic_caravan"
+            ]
+          },
+          {
+            "text": "Merge with the Earth-bound rival house, securing vast financial resources at the cost of your artistic independence and traditional themes.",
+            "motivatorShift": {
+              "wealth": 5,
+              "politics": 2,
+              "worldview": -2,
+              "power": 4,
+              "tradition": -3,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "corporate_merger"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:entertainment:middle:t5:close"
+    },
+    {
+      "id": "act:baghdad:entertainment:middle:t5:close",
+      "sense": "taste",
+      "prose": [
+        "The after-party in the captain's salon was quiet, a low-gravity gathering where the tongue was treated to the strange, complex flavors of the frontier. On {given_name}'s tongue, the taste of synthetic dates—grown in the nutrient-rich hydroponic bays of the station's agricultural ring—was slightly metallic, lacking the rich, sun-baked sweetness of the fruit that once fell from the trees of their ancestral valleys. Yet, when dipped in the sharp, fiery arak distilled from star-station yeast, it carried a potent, warming kick that lingered in the throat.",
+        "The heir to the {surname} line, still wearing the shimmering makeup of the finale, sat on the edge of the observation lounge, sipping from a plastic bulb of the local vintage. They had inherited the sharp ears of the family, and the unmistakable, driving ambition that had carried their ancestors across oceans and now across the sky. The taste of this new era was bitter to some, but to the young, it was the flavor of freedom and the beginning of a journey that had no end.",
+        "As the station turned, throwing the blue curve of the Earth into shadow, {given_name} raised a glass to the next generation. The foothold had been established; the theater in the stars was theirs, and whatever stories the children of the {family_name} chose to tell would be heard by the light of distant suns."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You pass the traditional brass flask of real, imported spirit to the heir, ensuring they never forget the true taste of the soil that birthed them."
+          ],
+          "choice": {
+            "text": "Pass down the authentic flavors of the old home.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 4,
+              "honor": 2,
+              "lineage": 3,
+              "reach": -1
+            },
+            "setFlags": [
+              "heritage_preserved"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You clink your plastic bulb of station-brewed nectar against the heir's, celebrating the strange, sharp tastes of the world they will conquer."
+          ],
+          "choice": {
+            "text": "Embrace the flavors of the new frontier.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": 3,
+              "power": 2,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 4
+            },
+            "setFlags": [
+              "frontier_embraced"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,2194 @@
+{
+  "acts": [
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t0",
+      "wave": "ashkenazi_jewish",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — The Crossing",
+      "scenes": [
+        "act:ashkenazi_jewish:economic:middle:t0:open",
+        "act:ashkenazi_jewish:economic:middle:t0:rising",
+        "act:ashkenazi_jewish:economic:middle:t0:midpoint",
+        "act:ashkenazi_jewish:economic:middle:t0:turn",
+        "act:ashkenazi_jewish:economic:middle:t0:close"
+      ]
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t1",
+      "wave": "ashkenazi_jewish",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — The New Ground",
+      "scenes": [
+        "act:ashkenazi_jewish:economic:middle:t1:open",
+        "act:ashkenazi_jewish:economic:middle:t1:rising",
+        "act:ashkenazi_jewish:economic:middle:t1:midpoint",
+        "act:ashkenazi_jewish:economic:middle:t1:turn",
+        "act:ashkenazi_jewish:economic:middle:t1:close"
+      ]
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t2",
+      "wave": "ashkenazi_jewish",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 2,
+      "macroAct": "emergence",
+      "title": "Act III — The Climb",
+      "scenes": [
+        "act:ashkenazi_jewish:economic:middle:t2:open",
+        "act:ashkenazi_jewish:economic:middle:t2:rising",
+        "act:ashkenazi_jewish:economic:middle:t2:midpoint",
+        "act:ashkenazi_jewish:economic:middle:t2:turn",
+        "act:ashkenazi_jewish:economic:middle:t2:close"
+      ]
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t3",
+      "wave": "ashkenazi_jewish",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 3,
+      "macroAct": "emergence",
+      "title": "Act IV — A Name in the World",
+      "scenes": [
+        "act:ashkenazi_jewish:economic:middle:t3:open",
+        "act:ashkenazi_jewish:economic:middle:t3:rising",
+        "act:ashkenazi_jewish:economic:middle:t3:midpoint",
+        "act:ashkenazi_jewish:economic:middle:t3:turn",
+        "act:ashkenazi_jewish:economic:middle:t3:close"
+      ]
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t4",
+      "wave": "ashkenazi_jewish",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 4,
+      "macroAct": "ascension",
+      "title": "Act V — The World Player",
+      "scenes": [
+        "act:ashkenazi_jewish:economic:middle:t4:open",
+        "act:ashkenazi_jewish:economic:middle:t4:rising",
+        "act:ashkenazi_jewish:economic:middle:t4:midpoint",
+        "act:ashkenazi_jewish:economic:middle:t4:turn",
+        "act:ashkenazi_jewish:economic:middle:t4:close"
+      ]
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t5",
+      "wave": "ashkenazi_jewish",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 5,
+      "macroAct": "ascension",
+      "title": "Act VI — The Reach for the Stars",
+      "scenes": [
+        "act:ashkenazi_jewish:economic:middle:t5:open",
+        "act:ashkenazi_jewish:economic:middle:t5:rising",
+        "act:ashkenazi_jewish:economic:middle:t5:midpoint",
+        "act:ashkenazi_jewish:economic:middle:t5:turn",
+        "act:ashkenazi_jewish:economic:middle:t5:close"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t0:open",
+      "sense": "smell",
+      "prose": [
+        "The air in steerage clung heavy and thick, a cloying mélange of human sweat, stale food, and the metallic tang of sea-sickness that seemed to seep into the very timbers of the ship. Below deck, the constant damp chill gnawed at the bones, a stark contrast to the occasional whiff of coal smoke that promised the distant warmth of land, even as it added another acrid layer to the suffocating atmosphere. Each breath was a reminder of the thousands of miles traversed and the meager hope held tight, clutched like the few coins hidden within a worn coat pocket.",
+        "Days blurred into weeks, marked only by the rationed, coarse bread and the overwhelming scent of unwashed bodies pressed too close, a collective sigh of desperation and endurance. Then, the distinct, sharper tang of urban grit and new industry began to permeate the ship's lower decks, cutting through the ocean's salt. It was the smell of a new world, strange and intimidating, yet laced with the intoxicating possibility of a future free from the old constraints. The docks themselves reeked of unfamiliar spices, damp wood, and the raw, vital scent of commerce, a symphony of foreign odors that was both frightening and exhilarating."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The immediate need to secure a foothold in this unfamiliar city pulled at your thoughts, the scent of fresh-baked bread from a distant bakery a cruel reminder of empty stomachs."
+          ],
+          "choice": {
+            "text": "Seek out the few contacts written on a scrap of paper, hoping for word of work or shelter.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "sought_contacts"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A faint, sweet aroma of brewing coffee mingled with the acrid fumes of the dock, drawing your attention to a small, bustling street stall where other immigrants clustered."
+          ],
+          "choice": {
+            "text": "Approach the gathering, listening for familiar cadences or a shared tongue amidst the babel of new voices.",
+            "motivatorShift": {
+              "tradition": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "connected_with_immigrants"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t0:rising"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t0:rising",
+      "sense": "touch",
+      "prose": [
+        "The worn canvas of your work coat offered scant protection against the city's biting wind, a relentless presence that seemed to find every seam and crevice, chilling you to the bone. Your hands, raw and chapped from scrubbing floors or hauling goods, ached with a deep, persistent throb, each calloused patch a testament to the grinding labor of these first days. Even the coins, when they finally rested in your palm, felt alien – cold and heavy, a stark contrast to the light touch of hope that had brought you across the ocean.",
+        "Sleep offered little respite; the thin mattress on the shared cot was lumpy and unfamiliar, the coarse wool of the blanket chafing against tired skin. Every movement of the building, every shudder of the horse-drawn wagons outside, vibrated through the floorboards, a constant reminder of the city's unyielding pulse. Yet, there was a strange, defiant resilience in the ache of your muscles, a hardening of resolve that came from enduring the tangible hardships, each small victory a rough-hewn stone in the foundation of a new life."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A fellow worker, equally weary, nudges you, suggesting a shortcut to save a few pennies from your meager wage at the end of the day."
+          ],
+          "choice": {
+            "text": "Carefully weigh the risk against the reward, considering the immediate relief a few extra coins would bring.",
+            "motivatorShift": {
+              "wealth": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "considered_shortcut"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The rough splinter of a wooden crate pricks your finger, a small wound that reminds you of the precariousness of your position, yet you notice a discarded piece of fabric that might be repurposed."
+          ],
+          "choice": {
+            "text": "Ignore the discomfort and focus on how the scrap could be transformed, perhaps into a small, useful item for sale or comfort.",
+            "motivatorShift": {
+              "worldview": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "repurposed_item"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The small, nascent community is struggling to pool resources for a shared stove, a vital commodity in the bitter winter. At the same time, your own family's worn boots are beyond repair, threatening their ability to work.",
+        "options": [
+          {
+            "text": "Prioritize the purchase of new, sturdy boots for your family, ensuring their ability to contribute to the household income.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "family_boots_first"
+            ]
+          },
+          {
+            "text": "Donate a significant portion of your earnings to the communal stove fund, trusting that a stronger community benefits all.",
+            "motivatorShift": {
+              "worldview": 1,
+              "honor": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "communal_stove_support"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t0:midpoint"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t0:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The vibrant, ceaseless symphony of the immigrant ward assaulted the ears, a swirling tapestry of unfamiliar languages and familiar Yiddish inflections that rose and fell like the tide. The sharp cries of street vendors hawking everything from pickled herring to notions mingled with the distant clatter of hooves on cobblestones and the rumble of trolleys groaning down narrow thoroughfares. Each evening brought the mournful, ancient prayers echoing from makeshift shuls, a soothing balm against the day's cacophony, a resonant link to the world left behind.",
+        "Beneath the constant hum of daily commerce and the boisterous laughter of children playing stickball in the alleyways, there were other sounds – the sharp bark of a foreman's orders, the worried whispers of neighbors exchanging news of layoffs, the hushed discussions behind closed doors about the future. Sometimes, a distant, unfamiliar music would drift from an Irish pub or an Italian cafe, a reminder of the world beyond the tightly knit Ashkenazi quarter, a world both enticing and alien, challenging the very definition of belonging."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A heated argument erupts outside your window between a pushcart vendor and a new, English-speaking shopkeeper, their voices rising in frustration and misunderstanding."
+          ],
+          "choice": {
+            "text": "Listen closely, trying to discern the nuances of the conflict and the underlying tension between old ways and new establishments.",
+            "motivatorShift": {
+              "worldview": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "observed_cultural_clash"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The resonant, hopeful voices of a small choir practicing hymns float up from the basement of the new community center, a blend of traditional melodies and modern arrangements."
+          ],
+          "choice": {
+            "text": "Seek out the source, curious about this new communal expression and what it signifies for the future of the neighborhood.",
+            "motivatorShift": {
+              "tradition": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "explored_community_arts"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t0:turn"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t0:turn",
+      "sense": "sight",
+      "prose": [
+        "The narrow street, typically a blur of pushcarts and hurried pedestrians, seemed to momentarily hold its breath, casting a stark visual against the backdrop of towering tenements. From one end, a small group of reformers, earnest and well-dressed, distributed pamphlets advocating for better housing conditions, their faces alight with conviction. From the other, a newly opened storefront, resplendent with gleaming glass and a bold sign in English, promised modern wares and competitive prices, a beacon of progress and assimilation.",
+        "The scene was a tableau of choices, each path clearly laid out before the eye: the familiar struggle within the tight-knit community, the allure of the wider American dream, or the urgent plea for justice and dignity. The worn faces of your neighbors, etched with the daily grind, mirrored the reflection in the shop window – a glimpse of who you were, and who you might become. The very architecture of the ward, with its makeshift storefronts and grand, aspiring facades, seemed to silently pose the question of how this new generation would shape its legacy."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You notice {given_name} {surname} standing near the reformers, clutching a pamphlet, a look of thoughtful concern on their face as they listen intently."
+          ],
+          "choice": {
+            "text": "Join {given_name} {surname} to hear the reformers' impassioned arguments, considering the power of collective action.",
+            "motivatorShift": {
+              "politics": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "heard_reformers"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The shopkeeper of the new modern store catches your eye, gesturing subtly towards a display of new goods, a silent invitation to consider a different kind of future."
+          ],
+          "choice": {
+            "text": "Approach the new store, examining the goods with a critical eye, weighing the potential for individual prosperity.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "eyed_new_commerce"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The immigrant ward stands at a crossroads, its future uncertain. Will you focus on immediate economic uplift, strengthen internal community bonds, or advocate for broader social change within the city?",
+        "options": [
+          {
+            "text": "Invest your family's meager savings into expanding a small, independent business, prioritizing individual prosperity and a solid financial foundation.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "established_business"
+            ]
+          },
+          {
+            "text": "Dedicate your efforts to building and sustaining communal institutions, like a mutual aid society or an expanded synagogue, fostering solidarity and shared cultural identity.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "supported_community_institutions"
+            ]
+          },
+          {
+            "text": "Join burgeoning labor movements and social reform efforts, fighting for better working conditions and equitable treatment for all immigrants, even at personal risk.",
+            "motivatorShift": {
+              "politics": 2,
+              "worldview": 2,
+              "reach": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "joined_social_reform"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t0:close"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t0:close",
+      "sense": "taste",
+      "prose": [
+        "The familiar tang of kugel, still warm from the oven, mingled with the bitter, robust flavor of chicory coffee, a taste of home painstakingly recreated in this new land. Each bite was a memory, a bridge spanning oceans and years, yet subtly altered by the unfamiliar flour or the available spices. It was a taste of continuity, an anchor in the storm of change, even as the bittersweet undertone of what had been lost lingered on the tongue, a constant, quiet reminder.",
+        "There was also the new taste of progress, perhaps a crisp apple bought from a modern grocer rather than a street vendor, or a small piece of chocolate, a luxury previously unimaginable. These new flavors, though simple, spoke of burgeoning opportunity and the slow, steady ascent from mere survival to a nascent stability. The memory of hunger, a sharp, unpleasant memory from the crossing, still clung faintly, making every morsel now, however modest, taste of profound gratitude and hard-won sustenance."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You savor the rich, comforting taste of a traditional Sabbath meal, the familiar flavors a testament to the enduring strength of your heritage in this new soil."
+          ],
+          "choice": {
+            "text": "Reflect on the importance of these traditions, finding solace and purpose in their continuation.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "cherished_traditions"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A new, sweet delicacy, perhaps a candy or fruit previously unavailable, offers a momentary burst of joy, a small indulgence earned through relentless effort."
+          ],
+          "choice": {
+            "text": "Consider how these small luxuries represent the tangible fruits of your labor and the promise of a better future.",
+            "motivatorShift": {
+              "wealth": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "enjoyed_new_luxury"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The sharp, clean scent of freshly planed lumber mingled with the earthy aroma of damp soil, a testament to the growth bursting forth on every corner. Around {given_name}, the air was thick with the promise of commerce: the yeasty tang from the baker's oven down the street, the faint, exotic spices wafting from a peddler's cart, and the ever-present hint of coal smoke from the nearby factories. This new ground, this burgeoning neighborhood, was a symphony of possibility, each sniff a note in the melody of establishment.",
+        "Inside their modest shop, the mingled smells of dry goods predominated: crisp starched linens, the comforting sweetness of flour and sugar from the sacks piled neatly, and the faint, almost metallic tang of new hardware. {given_name} meticulously arranged a stack of bolts of gingham, the fabric still smelling of the textile mill, a scent that spoke of distant lands and the industrious hands that wove it. Every crate opened, every parcel unwrapped, released a fresh burst of newness, affirming their audacious leap across an ocean and into this raw, vibrant market.",
+        "A faint, reassuring scent of simmering chicken broth drifted from the back rooms where {given_name}'s mother prepared the evening meal, grounding the commercial ambition in the warmth of home. It was a smell deeply ingrained in {full_name}'s memory, a scent of comfort and continuity that promised sustenance and tradition even amidst the clamor of a rapidly changing world. It was a quiet anchor, a reminder that while the future beckoned with its untold prospects, the heart of the family remained steadfast, nourished by old ways and new hopes."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You find yourself drawn to the bustling docks, the source of these new aromas, considering how best to expand the shop's offerings."
+          ],
+          "choice": {
+            "text": "Focus on importing unique foreign goods for discerning customers.",
+            "motivatorShift": {
+              "wealth": 1,
+              "worldview": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "focus:import",
+              "customer:affluent"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your gaze drifts to the growing working-class tenements, imagining the daily needs of the families settling in."
+          ],
+          "choice": {
+            "text": "Stock essential, affordable staples for the working families.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "focus:staples",
+              "customer:working_class"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t1:rising"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough, honest grain of the counter wood was a constant under {given_name}'s fingertips, worn smooth in patches by countless transactions, yet still offering a stubborn resistance. Every morning, before the first customer arrived, {given_name} would run a hand over its surface, feeling the nicks and grooves as a testament to the labor poured into this fledgling enterprise. It was the physical manifestation of their family's foothold, solid and unyielding beneath a perpetually busy palm.",
+        "The constant pressure of daily demands settled like a persistent ache in {given_name}'s shoulders. The weight of heavy sacks of potatoes, the sharp pinch of splinters from stacking firewood, the insistent tug of coarse woolen fabric as it was unrolled for measurement — each physical sensation was a reminder of the relentless effort required to keep the household afloat and the shop doors open. Even the comforting warmth of a cup of tea felt fleeting, swiftly replaced by the chill of a damp morning or the heat radiating from the crowded stove.",
+        "Later, tending to the children, the soft warmth of their small hands in {given_name}'s own offered a tender counterpoint to the day's toil. Their innocent grip, trusting and firm, was a different kind of pressure, one that stoked the fires of determination even as it promised exhaustion. It was a tangible connection to the future, a direct link to the lineage {family_name} was striving to build in this unfamiliar land, demanding both strength and tenderness in equal measure."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The worn-smooth counter wood reminds you of the value of diligent, personal labor."
+          ],
+          "choice": {
+            "text": "Insist on personally handling all key tasks, ensuring quality.",
+            "motivatorShift": {
+              "honor": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "personal_oversight"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The persistent ache in your shoulders spurs a desire to lighten the load for future generations."
+          ],
+          "choice": {
+            "text": "Seek out efficient methods and capable assistants to delegate tasks.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "delegate_efficiency"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The community organizer, a determined young woman, approaches you, seeking a donation of goods for a newly arrived family in desperate need. You know the goods are scarce, and your own family's savings are meager.",
+        "options": [
+          {
+            "text": "Donate generously, trusting that good deeds bring their own reward.",
+            "motivatorShift": {
+              "worldview": 2,
+              "honor": 1,
+              "tradition": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "charitable_donation"
+            ]
+          },
+          {
+            "text": "Offer what little you can spare, prioritizing your own family's stability.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "prudent_donation"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t1:midpoint"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cacophony of the market street outside your shop window was a constant symphony of commerce and life. The clatter of horse-drawn carts, the shrill cries of street vendors hawking their wares, and the rhythmic hammer strokes from the nearby blacksmith all blended into a vibrant hum. Each distinct sound represented a strand in the tightly woven tapestry of the local economy, and {full_name} listened intently, sifting through the noise for opportunities or impending challenges, acutely aware of how quickly fortunes could shift in this burgeoning world.",
+        "One afternoon, the cheerful chime of the shop bell announced a new customer, a robust man with a booming laugh and a surprisingly gentle voice. He introduced himself as the proprietor of a burgeoning dry goods warehouse across town, a business which, by the sounds of his confident pronouncements, was experiencing rapid expansion. He spoke of the need for reliable suppliers and local partnerships, his voice filling the small space with an undeniable air of ambition and foresight, subtly shifting the usual market hum.",
+        "As he outlined his vision, the murmur of the street seemed to fade, replaced by the resonant cadence of his words. He was searching for quality craftsmanship, for an established name, for a connection to the very pulse of the community {full_name} had been so diligently building. The stakes were clear: a potential alliance that could elevate {family_name}'s standing, or a missed opportunity that would leave them to contend with his formidable competition, the distant rumble of his delivery wagons already echoing his growing influence."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You recall the old world wisdom: trust is earned, not given lightly."
+          ],
+          "choice": {
+            "text": "Express cautious interest, suggesting a smaller, trial partnership first.",
+            "motivatorShift": {
+              "tradition": 1,
+              "honor": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "cautious_partnership"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The sound of opportunity rings clearly, urging you to seize the moment."
+          ],
+          "choice": {
+            "text": "Embrace the potential, proposing a significant and immediate collaboration.",
+            "motivatorShift": {
+              "wealth": 1,
+              "reach": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "bold_collaboration"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t1:turn"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "From the shop's doorway, {given_name} watched the street, a canvas constantly repainted with the vibrant hues of human ambition and evolving urbanity. The familiar faces of neighbors blurred into the eager new arrivals, their eyes wide with hope and apprehension. The single gas lamp at the corner, once a beacon, now seemed dim against the electric glow of the new hardware store across the street, a stark visual reminder of progress’s relentless march. {full_name}'s gaze lingered on the shifting skyline, seeing not just buildings, but the very shape of the future taking form.",
+        "The sight of the newly paved road outside the synagogue, a community effort, stood in stark contrast to the muddy, rutted paths that still led to the poorer sections of town. It was a visual metaphor for the choices before them: to consolidate their gains within the established, thriving heart of the community, or to stretch their reach into the underdeveloped fringes, where the struggle was greater but the potential for foundational impact was vast. Each path offered a distinct visual future for the {family_name} name.",
+        "Turning their gaze back inside, the well-stocked shelves, the neatly organized ledger, the gleaming counter — all offered a comforting tableau of hard-won stability. Yet, the smallness of the space, the limitations of their current scope, became acutely apparent. {given_name} could envision a grander establishment, a more expansive enterprise, perhaps even a network of shops, or they could see a deeply rooted, essential fixture in the immediate neighborhood, known for its personal touch and community ties. The vision flickered between expansive growth and deepening roots, each path clearly laid out before their mind’s eye."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You visualize the growing network of streets, imagining your goods reaching further afield."
+          ],
+          "choice": {
+            "text": "Consider investing in a horse and cart to expand delivery routes.",
+            "motivatorShift": {
+              "wealth": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "expand_delivery"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your eyes settle on the familiar faces of the neighborhood, valuing their trust above all."
+          ],
+          "choice": {
+            "text": "Focus on strengthening local ties and offering personalized service.",
+            "motivatorShift": {
+              "tradition": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "strengthen_local_ties"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The town council proposes a new urban development plan: either dedicate resources to a central market district, attracting diverse businesses, or support smaller, neighborhood-specific commerce zones. How will the {family_name} line position itself?",
+        "options": [
+          {
+            "text": "Invest heavily in a prominent storefront in the new central market district, aiming for broad appeal and higher volume.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "reach": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "central_market_focus",
+              "high_volume"
+            ]
+          },
+          {
+            "text": "Champion the development of neighborhood commerce zones, establishing smaller, specialized shops that cater to local needs.",
+            "motivatorShift": {
+              "politics": 2,
+              "worldview": 1,
+              "tradition": 1,
+              "lineage": 2
+            },
+            "setFlags": [
+              "neighborhood_zones_focus",
+              "specialized_shops"
+            ]
+          },
+          {
+            "text": "Maintain your current shop's presence while subtly diversifying goods to serve both emerging markets, preserving flexibility.",
+            "motivatorShift": {
+              "wealth": 1,
+              "honor": 1,
+              "worldview": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "diversify_flexibility",
+              "maintain_current"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t1:close"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t1:close",
+      "sense": "taste",
+      "prose": [
+        "The lingering taste of hot, sweet tea, a traditional comfort, now carried the subtle, complex flavor of a generation’s journey. It was a taste of perseverance, of spices brought from distant lands finding new roots in bustling city markets, and of bitter disappointments softened by the sweetness of small triumphs. Each sip recalled the hours spent haggling, the sweat shed in setting up the shop, and the quiet satisfaction of a ledger balanced at day’s end, leaving a warm, mellow aftertaste that spoke of stability and enduring hope.",
+        "For {full_name}, the familiar taste of Sabbath challah, crusty and slightly sweet, was now imbued with the essence of their family's standing in the community. It wasn't just bread; it was the taste of earned respect, of a name known and trusted among neighbors and merchants alike. The subtle notes of honey and yeast were intertwined with the more robust flavors of economic security and a modest but undeniable legacy, a culinary testament to the foundation they had laid, each mouthful a quiet celebration of their hard-won ground.",
+        "Handing a warm, freshly baked cookie to their heir, the child {given_name} felt the distinct flavor of transmission. It was the simple, wholesome taste of flour and sugar, yet within it resided the implicit lesson of prudent management, the legacy of a small business carefully nurtured. This was the taste of what was passed on: not merely wealth, but a way of life, a set of values, and a concrete standing in a world that had once been utterly new, now flavored with the familiar and the hopeful promise of a future yet to be fully savored."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You taste the enduring legacy of your work, and consider how best to equip your heir."
+          ],
+          "choice": {
+            "text": "Instruct the heir primarily in the established trade, emphasizing diligence and consistency.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 0
+            },
+            "setFlags": [
+              "heir_trade_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The taste of new opportunity still lingers, prompting thoughts of broader horizons for the next generation."
+          ],
+          "choice": {
+            "text": "Encourage the heir to explore new ventures and expand beyond the current enterprise.",
+            "motivatorShift": {
+              "reach": 2,
+              "worldview": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "heir_new_ventures"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t2:open",
+      "sense": "smell",
+      "prose": [
+        "The ever-present tang of rendering fat from the butcher's shop below still clung to the fabric of the building, seeping into the humble dwelling where the {family_name}s lived. It mingled with the sharper, cleaner scent of lye soap and boiling linens, a perpetual battle against the grim realities of urban life. Yet, beneath it all, {given_name} could detect the faint, hopeful aroma of new leather from the cobbler’s tools in the corner, a testament to the small, steady work that kept their heads above the tide. This was the scent of their struggle, a constant reminder of the world they sought to transcend.",
+        "The air in the synagogue on a Saturday morning, however, offered a different promise: the mingling scents of old wood, beeswax candles, and the subtle spices carried on the clothes of the congregants. It was the smell of community, of shared history, and of unspoken aspirations. Here, the burdens of the week seemed to momentarily lift, replaced by a collective determination that was as palpable as the warm, yeasty scent of freshly baked challah, brought in by neighbors for kiddush. Each breath here was a reminder of who they were and who they aspired to be, not just as individuals, but as a family forging a new path."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The lingering scent of iron filings and scorched wood from the workshop downstairs hinted at a day of relentless toil, but also the steady accumulation of coin."
+          ],
+          "choice": {
+            "text": "Focus solely on expanding the family's modest enterprise, working longer hours and reinvesting every spare penny.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 0,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "path_enterprise_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The comforting aroma of simmering kugel from a neighbor's kitchen, offered as a communal gesture, suggested that strength could also be found in solidarity."
+          ],
+          "choice": {
+            "text": "Dedicate more time to strengthening ties within the Jewish community, believing collective progress will elevate all.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "path_community_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t2:rising"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t2:rising",
+      "sense": "touch",
+      "prose": [
+        "The stiff collar of {given_name}'s new suit chafed against his neck, a subtle discomfort that belied the pride of wearing finer cloth than he once could have dreamed. The rough, calloused skin on his hands, a legacy of earlier years spent in manual labor, slowly began to smooth, replaced by the softer feel of paper ledgers and the polished wood of a negotiation table. Every handshake now felt weightier, a potential bond or a challenge, and the tangible pressure of ambition pulsed beneath his fingertips as he navigated the burgeoning city.",
+        "The children, too, felt the shift. Their schooling meant their hands were more accustomed to chalk and slate than to factory grime, though they still felt the firm, reassuring squeeze of {given_name}'s hand when crossing a busy street, a small anchor to their past. Yet, the smooth, cool touch of porcelain dishes on their dinner table, replacing the chipped earthenware, was a daily reminder of their ascent, a delicate promise of a future built on striving and sacrifice. The very air around them felt charged, a subtle current of expectation, a constant push forward."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The coarse wool of your winter coat felt heavy on your shoulders, a stark contrast to the light silk scarves adorning the patrons of the new theater you now frequented."
+          ],
+          "choice": {
+            "text": "Cultivate relationships with influential figures outside your immediate community, seeking new avenues for growth and influence.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 0,
+              "power": 2,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "beat_network_outward"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The warm, familiar feel of well-worn velvet on the synagogue pew offered comfort, a reminder of the steady foundations upon which your family's prosperity was built."
+          ],
+          "choice": {
+            "text": "Deepen your involvement in synagogue affairs and local charities, reinforcing your family's standing within the community.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "beat_network_inward"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A promising business venture demands a significant investment, but it means reneging on an informal promise to help a less fortunate cousin expand his struggling dry-goods store. Do you prioritize this new opportunity or uphold your family loyalty?",
+        "options": [
+          {
+            "text": "Seize the new venture, explaining to your cousin that business is business and opportunity knocks but once.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": -1,
+              "lineage": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "decision_prioritize_ambition"
+            ]
+          },
+          {
+            "text": "Decline the new venture for now, redirecting the funds and support to your cousin, believing family comes first.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "decision_prioritize_loyalty"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t2:midpoint"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t2:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The insistent clang of the streetcar, now a constant companion beyond the windows of their new, larger home, no longer jarred but rather marked the rhythm of the city’s burgeoning life. Inside, the lively chatter of guests at a Sabbath dinner mingled with the delicate clink of silverware against china, a stark contrast to the hushed, almost fearful quiet of earlier days. The low murmur of a new gas lamp, steadily burning, filled the air, a soft testament to their rising comfort and the relative ease with which they could now entertain.",
+        "In the market, the cacophony of vendors hawking their wares felt less overwhelming, more like a vibrant symphony of commerce, a world they were now not merely navigating but actively participating in. Sometimes, {given_name} would catch snippets of conversation about other rising families, names whispered with a mix of envy and respect, a reminder that their climb was part of a larger, collective narrative. The very soundscape of their lives had expanded, filled with the confident tones of success and the subtle anxieties of maintaining it."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The distant strains of a brass band playing in the park across town signaled a growing civic pride, and with it, new opportunities for those with vision."
+          ],
+          "choice": {
+            "text": "Invest in public works and civic improvements, hoping to align the family's name with the city's progress.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "beat_civic_investment"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The hushed, reverent sounds from the newly established yeshiva down the street reminded you of the enduring strength of shared faith and heritage."
+          ],
+          "choice": {
+            "text": "Support the expansion of religious and educational institutions, bolstering the cultural infrastructure of the Jewish community.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "beat_religious_investment"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t2:turn"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t2:turn",
+      "sense": "sight",
+      "prose": [
+        "The cityscape from {full_name}'s office window had transformed, stretching outwards and upwards with new brick and steel, a testament to relentless ambition and innovation. Grand new buildings, their facades gleaming in the afternoon light, now dwarfed the older, more modest structures. Carriages, then automobiles, bustled through wider avenues, a vibrant tapestry of commerce and progress. {full_name} could see the tangible results of their efforts, not just in their own prosperity, but in the very fabric of the city around them, a city slowly being shaped by the hands of its emergent leaders.",
+        "The faces in the burgeoning Jewish quarter also presented a new tableau: a mix of established families like their own, now enjoying a measure of comfort, and the endless stream of newer arrivals, their eyes still wide with the shock of a new world, carrying their meager possessions. It was a visible reminder of both how far they had come and how much more lay ahead for their people. The choices now were not just about personal gain, but about the legacy etched into the very stones and institutions they saw rising around them."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The shimmering storefront window of the new department store, a beacon of modern commerce, reflected your own aspirations for greater reach and influence."
+          ],
+          "choice": {
+            "text": "Expand the family's ventures into new, more modern industries, embracing the future of the city's economy.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "beat_modern_industry"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The intricate stained-glass window of the newly consecrated synagogue stood as a testament to enduring faith and the strength found in tradition."
+          ],
+          "choice": {
+            "text": "Focus investments on bolstering traditional institutions, ensuring the cultural and spiritual bedrock of the community remains strong.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 3,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "beat_traditional_institutions"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The city council is considering a major redevelopment project that could either greatly benefit your family's business interests or provide much-needed social housing for recent immigrants. How do you use your growing influence?",
+        "options": [
+          {
+            "text": "Lobby aggressively for the redevelopment plan that maximizes the family's financial gains, regardless of the social cost.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "worldview": 0,
+              "power": 2,
+              "tradition": 0,
+              "honor": -2,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "major_decision_self_interest"
+            ]
+          },
+          {
+            "text": "Champion the cause of social housing and community development, using your influence to advocate for the vulnerable.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 2,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "major_decision_community_advocacy"
+            ]
+          },
+          {
+            "text": "Seek a compromise, pushing for a modified plan that balances both economic growth and social responsibility, even if it means less immediate profit.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "major_decision_compromise"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t2:close"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t2:close",
+      "sense": "taste",
+      "prose": [
+        "The rich, complex taste of a good kosher wine, enjoyed in the quiet comfort of {full_name}'s study, now felt like a natural accompaniment to the end of a long, productive week. It was a flavor far removed from the meager rations of their early years, a tangible symbol of the prosperity achieved. Yet, sometimes, a memory of bitter herbs from a Passover Seder long ago would surface, a reminder of the trials overcome, the ancestors who paved the way, and the fragility of all comfort.",
+        "The sweetness of a shared holiday meal with the next generation, their laughter echoing through the well-appointed rooms, carried the taste of legacy. Each bite of roasted chicken, each sip of sparkling water, was infused with the unspoken promise of continuity. {given_name_heir}, sitting at the head of the table, absorbed not just the flavors of tradition but the subtle, yet potent, taste of the capital and connections that had been painstakingly gathered, now passed on like an inheritance far more valuable than any coin."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The crisp, clean taste of a newly bottled, locally produced beverage hinted at the burgeoning markets and industries your family had helped to foster."
+          ],
+          "choice": {
+            "text": "Present the heir with a meticulously prepared ledger of the family's expanded business network and capital holdings, emphasizing financial growth.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "beat_legacy_wealth"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The warm, earthy flavor of a slowly brewed Sabbath tea, a comfort passed down through generations, suggested the enduring power of custom and community."
+          ],
+          "choice": {
+            "text": "Share with the heir not just financial accounts, but stories of community service and the importance of upholding their family's reputation and cultural ties.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "beat_legacy_values"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t3:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of rich, dark coffee brewing in the parlor mingled with the subtle, comforting aroma of {given_name}'s freshly starched linens, a testament to the order and prosperity that now defined the {family_name} household. Beyond the polished windows, the faint, persistent smell of industry—coal smoke, damp earth, and the distant, metallic tang of machinery—drifted in on the morning breeze. It was the scent of a city awake and striving, a city that now knew the {family_name} name not just as recent arrivals, but as a pillar of its burgeoning commerce.",
+        "Your own offices, bustling even at this early hour, carried the distinct smell of new ledger paper and imported tobacco, of fresh ink and the well-worn leather of countless account books. It was a smell of enterprise, of careful calculation and shrewd investment. The name {surname} was no longer confined to the whispers of the immigrant community; it was etched onto the letterheads of prominent businesses, discussed in hushed tones in banking halls, and occasionally, with a mixture of respect and envy, in the editorial columns of the city's dailies. You had built something tangible, something that carried its own scent of influence.",
+        "Yet, amidst this evolving landscape of success, the underlying notes of home remained: the savory, slow-cooked aroma of a Sabbath meal from your mother's kitchen on a Friday, the faint, sweet perfume of spices brought across an ocean, the memory of a simpler, harder time still clinging to the older furniture. It was a complex bouquet, a fragrance that told the story of a journey and a triumph, a name that now carried not just weight, but a particular, recognizable scent in the world you helped shape."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A letter arrives, its crisp paper carrying the scent of a distant, more refined world, inviting {full_name} to a gathering of prominent city leaders, hinting at a new sphere of influence."
+          ],
+          "choice": {
+            "text": "Accept the invitation, seeking to expand the family's social and political reach.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "power": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "sought_elite_connections"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The scent of freshly baked challah, warm and inviting, fills the air as a delegation from the local synagogue arrives, seeking {full_name}'s counsel on a crucial community matter."
+          ],
+          "choice": {
+            "text": "Prioritize the needs of your community, reinforcing the family's foundational values.",
+            "motivatorShift": {
+              "worldview": 1,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "reinforced_community_ties"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t3:rising"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t3:rising",
+      "sense": "touch",
+      "prose": [
+        "The smooth, cool surface of the mahogany desk felt solid beneath your fingertips, a stark contrast to the rough, worn textures of your youth. Your hands, once calloused from early labor, now felt the weight of responsibility in the delicate balance of financial ledgers and legal documents. It was the touch of power, subtle yet undeniable, a pressure that came with every decision, every signature that now carried significant consequence. The family's burgeoning influence was a palpable force, shaping livelihoods beyond your own immediate kin.",
+        "Recently, a new building project, a grand edifice meant to house the family's growing textile interests, had drawn both admiration and scrutiny. The rough, unyielding brick felt cool to the touch when you inspected the site, a reminder of the raw material that, through the sweat of labor and the ingenuity of design, transformed into something lasting. Yet, with every brick laid, with every new worker hired, there was a growing hum of expectation, a subtle pressure from those who looked to the {family_name} name not just for employment, but for guidance and fair dealing.",
+        "You felt the brush of rivals in the marketplace, their subtle attempts to undercut, to spread whispers, like an irritating static against your carefully woven network. It was the constant, low-level friction of competition, the invisible force that pressed you to innovate, to expand, to consolidate your position. The city, once a daunting maze, now felt like a living entity, its pulse thrumming beneath your feet, demanding constant engagement, constant vigilance, a relentless test of your resolve."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A prominent, yet ethically questionable, industrialist approaches {full_name} with an offer for a lucrative partnership on a new venture, promising immense wealth but requiring compromises that sit uneasily."
+          ],
+          "choice": {
+            "text": "Consider the offer carefully, weighing the financial gains against the family's reputation and moral standing.",
+            "motivatorShift": {
+              "wealth": 2,
+              "honor": -1
+            },
+            "setFlags": [
+              "considered_dubious_partnership"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A delegation of workers, their hands still raw from the factory floor, seeks {full_name}'s support in establishing a cooperative that would empower them, but potentially reduce your immediate profits."
+          ],
+          "choice": {
+            "text": "Engage with the workers, exploring ways to support their initiative while ensuring the family's long-term prosperity.",
+            "motivatorShift": {
+              "worldview": 1,
+              "wealth": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "explored_worker_cooperative"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How will {full_name} respond to the increasing pressure of both opportunity and moral obligation as the family's influence expands?",
+        "options": [
+          {
+            "text": "Decline the industrialist's offer and commit to exploring the worker cooperative, prioritizing ethics over quick profit.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 2,
+              "honor": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "chose_ethical_path"
+            ]
+          },
+          {
+            "text": "Pursue the industrialist's partnership, believing that greater wealth will ultimately allow for more significant good, while politely declining the workers' request for now.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "worldview": -1,
+              "honor": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "chose_pragmatic_wealth"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t3:midpoint"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t3:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The clamor of the city was a constant symphony, a roaring backdrop to the rising stakes of the {family_name} influence. The rhythmic clang of the streetcar, the distant wail of a factory whistle, the excited shouts of newsboys proclaiming the day's headlines—all converged into a single, insistent hum. It was the sound of progress, of a nation finding its footing, and within that vibrant cacophony, the family's own voice was beginning to resonate with increasing clarity, amplified by their growing economic power and community standing.",
+        "You sat in a hushed private room, the heavy draperies muffling the street's tumult, listening to the grave, measured tones of a civic leader discussing the urgent need for a new municipal infrastructure project. The words themselves — 'sanitation,' 'public welfare,' 'economic stimulus' — echoed with profound implications, not just for the city, but for the entire burgeoning region. This was a moment where the family's resources, their connections, and their accumulated wisdom could genuinely shift the course of events, shaping the very foundations of urban life.",
+        "Later, the crisp, sharp crackle of a freshly opened newspaper brought the news of a rival family's recent philanthropic endeavor—a grand donation to a burgeoning university. The announcement, though couched in altruism, carried a subtle, competitive undertone, a challenge perhaps, to see who could leave the more indelible mark on the era. The sound of their success, a quiet but distinct echo, served as a reminder that influence was a dynamic, contested space, and that the sound of your own legacy was still very much in the making."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A prominent politician, whose voice carries the weight of state authority, discreetly seeks {full_name}'s financial backing for a controversial land development project, promising future policy considerations in return."
+          ],
+          "choice": {
+            "text": "Provide strategic financial support, aiming to secure political influence for the family's economic agenda.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "supported_controversial_project"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The impassioned plea of a social reformer, her voice ringing with conviction, describes the dire living conditions in the city's poorest wards, urging {full_name} to champion a housing reform initiative."
+          ],
+          "choice": {
+            "text": "Lend your name and resources to the housing reform, aligning the family with a cause for social justice.",
+            "motivatorShift": {
+              "worldview": 2,
+              "honor": 1,
+              "lineage": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "championed_housing_reform"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t3:turn"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t3:turn",
+      "sense": "sight",
+      "prose": [
+        "From the high window of your office, the city sprawled out beneath you, a vast panorama of ambition and striving. You could see the smokestacks of the factories, including your own, churning out the goods that fueled the nation's growth. You could discern the spires of newly erected public buildings, symbols of civic pride and burgeoning identity. And everywhere, the ceaseless flow of people, a river of humanity, each face a testament to the myriad paths converging to build this emerging world. It was a sight that filled you with both immense pride and a profound sense of responsibility.",
+        "Your gaze fell upon the bustling market district, a place where the vibrant tapestry of immigrant life was most visible. Vendors hawked their wares, children chased pigeons, and conversations in a dozen tongues blended into a unified hum. It was the heart of the community, where the {family_name} name had first taken root, a constant reminder of where you came from, and the people you aimed to serve. The question of how to best impact this vital, evolving nation now presented itself with stark clarity, a pivotal choice laid bare before your very eyes.",
+        "A newspaper lay open on your desk, its front page dominated by a striking image: a political cartoon depicting the nation at a crossroads, one path leading towards unfettered industrial expansion and individual wealth, the other towards social welfare and collective responsibility. The choice was not merely economic; it was a moral reckoning, a vision of the very character the nation would embody for generations to come. {full_name}'s decision, you realized, would not only shape the family's destiny but cast a long shadow, visible for all to see, on the landscape of this young and vibrant country."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A group of powerful magnates, their faces etched with determination, outline a vision of aggressive industrial expansion, urging {full_name} to invest heavily in their ventures and lobby for minimal government regulation."
+          ],
+          "choice": {
+            "text": "Consider aligning with the magnates, believing in the power of unrestrained growth to build national wealth.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "considered_unfettered_growth"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A coalition of social activists, their eyes alight with conviction, presents a detailed plan for robust public services and worker protections, asking {full_name} to champion their cause and fund their advocacy."
+          ],
+          "choice": {
+            "text": "Reflect on the activists' proposals, seeing the potential for a more equitable and stable society.",
+            "motivatorShift": {
+              "worldview": 1,
+              "honor": 1,
+              "politics": -1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "considered_social_welfare"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will {full_name} use the family's emerging power and influence to shape the nation's direction in this crucial generation?",
+        "options": [
+          {
+            "text": "Champion the cause of unfettered economic expansion, pouring resources into industry and advocating for policies that prioritize growth above all.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "power": 2,
+              "worldview": -2,
+              "reach": 2
+            },
+            "setFlags": [
+              "chose_industrial_supremacy",
+              "nation_path_economic_liberal"
+            ]
+          },
+          {
+            "text": "Invest heavily in social welfare programs and worker protections, using the family's standing to advocate for a more just and equitable society.",
+            "motivatorShift": {
+              "worldview": 3,
+              "honor": 2,
+              "politics": -1,
+              "wealth": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "chose_social_justice",
+              "nation_path_social_reform"
+            ]
+          },
+          {
+            "text": "Seek a pragmatic middle ground, balancing industrial growth with moderate social improvements, striving for stability and consensus.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 1,
+              "honor": 1,
+              "tradition": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "chose_balanced_approach",
+              "nation_path_moderate_progress"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t3:close"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t3:close",
+      "sense": "taste",
+      "prose": [
+        "The rich, full-bodied taste of aged wine lingered on your tongue, a fitting end to a long day, or perhaps, a generation. It was a complex flavor, layered with the bittersweet tang of hard-won victories, the subtle spice of compromises made, and the deep, satisfying sweetness of accomplishments realized. The {family_name} name, once a whisper, was now a resonant chord, deeply embedded in the civic and economic life of the nation, its reputation a distinct and palpable flavor on the communal palate.",
+        "Your heir, {given_name}, sat across from you, the future reflecting in their observant eyes. What did they taste in this moment? The crispness of opportunity, the faint burn of expectation, or the smooth, comforting warmth of a legacy well-secured? This generation had taken the seeds planted by its forebears and cultivated a vibrant, flourishing enterprise, extending the family's reach far beyond the confines of their initial community, into the very arteries of national life. The decisions made had defined not just the family, but contributed to the very character of the emerging nation.",
+        "The taste of your legacy, you knew, would be multifaceted. For some, it would be the robust, earthy flavor of honest labor and economic opportunity. For others, it might carry the refined notes of philanthropy and enlightened leadership. And for a few, perhaps, the sharp, almost metallic tang of ambition and shrewd dealing. But undeniably, it was a taste that endured, a reputation that had earned its place at the table, a distinct flavor in the grand, evolving feast of American life, now ready to be passed on to the next steward of the {family_name} name."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A commemorative plaque bearing the {full_name} name is unveiled at a significant public institution, its polished surface reflecting the pride and respect of the city's elite."
+          ],
+          "choice": {
+            "text": "Reflect on the family's public recognition, seeing it as validation of their contributions to the nation.",
+            "motivatorShift": {
+              "honor": 2,
+              "reach": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "legacy_publicly_honored"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A quiet gathering of community leaders offers {full_name} a hand-carved menorah, a symbol of profound gratitude for the family's steadfast support of their people and traditions."
+          ],
+          "choice": {
+            "text": "Cherish the symbol of community appreciation, reinforcing the family's deep-seated cultural and religious values.",
+            "motivatorShift": {
+              "tradition": 2,
+              "worldview": 1,
+              "lineage": 2
+            },
+            "setFlags": [
+              "legacy_community_cherished"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t4:open",
+      "sense": "smell",
+      "prose": [
+        "The rich, leathery scent of the polished boardroom table mingled with the faint, almost imperceptible, aroma of exotic spices wafting from the antechamber where tea was being prepared. It was a smell that spoke of global reach, of old-world refinement seamlessly blended with the vibrant hum of international commerce. Sunlight, filtered through heavy, velvet drapes, warmed the air, carrying with it the subtle, metallic tang of fresh printer's ink from the contracts awaiting review, a constant reminder of the sprawling enterprise {full_name} now oversaw.",
+        "This wasn't merely the smell of success; it was the fragrance of an empire, meticulously built over generations from humble beginnings. The faint residue of pipe tobacco, inherited from a long-gone patriarch, still clung to the older volumes in the mahogany bookcase, a comforting anchor amidst the swirling currents of modern finance and global logistics. Every inhale was a breath of history, ambition, and the quiet, pervasive scent of a family's indelible mark upon the world.",
+        "A sharp, almost clinical aroma of fresh-cut flowers, delivered just this morning, attempted to cut through the deeper, more profound scents of commerce and legacy, a fleeting burst of ephemeral beauty against the enduring presence of power. Yet even this freshness seemed to underscore the family's ascendant position, a flourish of indulgence easily afforded, seamlessly integrated into the daily rhythm of their vast, intricate operations."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A sudden, sharp note of burnt sugar and coffee grounds drifted into the room from the street below, a stark reminder of the bustling world outside the insulated opulence, and you consider its implications for your global commodities trading."
+          ],
+          "choice": {
+            "text": "Lean into the global enterprise, pushing for even wider reach in emerging markets.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 3
+            },
+            "setFlags": [
+              "t4_global_expansion"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The comforting, earthy scent of a traditional challah, baked by {given_name}'s elderly aunt for the weekly family gathering, fills the air, a soft counterpoint to the day's gravitas."
+          ],
+          "choice": {
+            "text": "Reinforce the family's traditional values amidst this new scale, ensuring cultural continuity.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": -1,
+              "power": 0,
+              "tradition": 3,
+              "honor": 1,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "t4_tradition_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t4:rising"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t4:rising",
+      "sense": "touch",
+      "prose": [
+        "The smooth, cool surface of the mahogany desk felt impossibly vast beneath your fingertips, an ocean of polished wood separating you from the stacks of documents that represented millions, perhaps billions, in global assets. Each contract, each financial report, carried a palpable weight, not just of paper, but of responsibility – the livelihoods of thousands of employees, the stability of markets, the very reputation of the {family_name} name. The pressure was a constant, subtle hum, a phantom sensation against your skin, like the distant thrum of heavy machinery.",
+        "Later, the worn, familiar leather of the prayer book in your hands offered a different kind of tactile comfort, a connection to generations of ancestors who faced their own immense pressures with faith and resilience. The delicate, almost brittle pages whispered stories of struggle and triumph, a reminder that while the scale of the challenges had changed dramatically, the core values remained. Yet, even in this moment of introspection, the weight of the contemporary world pressed in, demanding decisions that would echo far beyond the synagogue walls.",
+        "A sudden tremor through the floor, a construction project shaking the very foundation of the city, seemed to mirror the internal tremors of strategic considerations. You reached for the weighty brass paperweight, its cold metal a grounding presence, a small, solid anchor in a sea of abstract figures and future projections. The texture of your world was no longer merely local; it was a complex tapestry of global forces and deeply personal convictions."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The silk tie, a gift from a newly appointed ambassador, felt unexpectedly constricting around your neck during a crucial negotiation with a foreign power."
+          ],
+          "choice": {
+            "text": "Push for a decisive, bold resolution, even if it means straining diplomatic ties.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": 0,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "t4_bold_diplomacy"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The rough, honest fabric of a new employee's work shirt brushed your sleeve as you toured one of the expanded factory floors, reminding you of the human element in your vast enterprise."
+          ],
+          "choice": {
+            "text": "Seek a more conciliatory approach, prioritizing long-term relationships and stability.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "t4_conciliatory_stance"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "Amidst the relentless expansion, an opportunity arises to acquire a smaller, struggling competitor whose ethical practices are questionable, but whose assets would significantly boost your market share. How do you proceed?",
+        "options": [
+          {
+            "text": "Acquire the competitor and reform their practices, integrating their assets into your empire.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "t4_acquisition_reform"
+            ]
+          },
+          {
+            "text": "Pass on the acquisition, prioritizing the ethical standing and reputation of the {family_name} name.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 1,
+              "power": -1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "t4_ethical_priority"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t4:midpoint"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t4:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The hushed, reverent murmur of voices in the private gallery of a world-renowned museum was punctuated by the distant, rhythmic clatter of a city tram, a sound that spoke of everyday life continuing outside the rarefied atmosphere {full_name} now inhabited. Inside, the quiet discussion among philanthropists and cultural magnates revolved around funding a grand initiative to preserve ancient languages, a venture that intertwined cultural heritage with strategic influence. Every whispered word carried weight, every agreement forged silently could shift the tides of global policy.",
+        "Across the globe, the insistent staccato of telegraph keys (or early teletype machines, depending on the exact era) tapped out urgent dispatches from various continents, relaying market fluctuations, political developments, and critical intelligence to the {family_name} headquarters. This constant, intricate symphony of communication was the lifeblood of their operations, a testament to their expansive network. It was the sound of a century being shaped, one decision, one investment, one whispered conversation at a time.",
+        "During a break, the resonant, deep peal of a cathedral bell from the historic district drifted through the open window, a reminder of the enduring institutions that stood as silent witnesses to shifting human power. It was a sound that both humbled and inspired, emphasizing the vast, long arc of history against which their current ambitions played out. You listened, discerning the echoes of past empires and the nascent chords of future ones, all converging in this moment."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The booming, confident voice of a leading industrialist at a high-stakes luncheon captured your attention, laying out a vision for a new global infrastructure project."
+          ],
+          "choice": {
+            "text": "Seek an alliance with the industrialist, leveraging collective power to shape the future.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": 1,
+              "power": 2,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "t4_alliance_made"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A series of hushed, hurried phone calls from your intelligence network reported on the growing influence of a shadowy rival organization, whose ambitions seem to mirror your own but with less scruple."
+          ],
+          "choice": {
+            "text": "Reinforce internal structures and discreetly counter the rival's influence through your own networks.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "t4_counter_rival"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t4:turn"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t4:turn",
+      "sense": "sight",
+      "prose": [
+        "From the panoramic windows of the executive suite, the city sprawled beneath you like an intricate, living map, its arteries of commerce pulsing with activity, its towering structures monuments to ambition. Beyond, the faint, shimmering line of the horizon hinted at the vast global stage where the {family_name} influence now extended. Ships bearing their cargo dotted distant oceans, factories bearing their name hummed in far-flung lands, and financial institutions echoed with their decisions. It was a dizzying, humbling sight, a testament to what generations could build from nothing.",
+        "You watched the intricate dance of streetlights blinking to life as dusk began to fall, painting the urban landscape in hues of gold and deepening violet. Each light, a tiny beacon of individual life, yet collectively forming a powerful, interconnected web that resembled the very systems you now sought to influence. The scale of it all was almost overwhelming; a singular family, a singular vision, now capable of truly shaping the very fabric of global civilization.",
+        "Your gaze fell upon a framed photograph on your desk: a faded image of your great-grandparents, recent immigrants with hope etched onto their faces, standing before a modest storefront. The stark contrast between their humble beginnings and the sprawling empire visible from your window was a powerful visual narrative, a silent question about the legacy you were building. The path ahead lay open, demanding a choice that would define not just your generation, but potentially the century itself."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A news report flickered silently on a screen in the corner, showing images of unrest in a resource-rich nation where your family holds significant investments, hinting at geopolitical instability."
+          ],
+          "choice": {
+            "text": "Focus on stability, protecting current assets and consolidating existing power structures.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": -1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "t4_stability_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A series of complex schematics for a revolutionary new technology lay spread across the conference table, promising unprecedented efficiency and global connectivity, but requiring massive, speculative investment."
+          ],
+          "choice": {
+            "text": "Embrace the risk, investing heavily in the new technology to lead the next industrial shift.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 2,
+              "power": 2,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "t4_tech_leadership"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The world stands at a critical juncture. How will the {family_name} line use its immense influence and resources to shape the global future this generation?",
+        "options": [
+          {
+            "text": "Lead a humanitarian effort on a global scale, redirecting significant wealth to alleviate poverty and disease.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 1,
+              "worldview": 3,
+              "power": 0,
+              "tradition": 1,
+              "honor": 3,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "t4_global_humanitarian"
+            ]
+          },
+          {
+            "text": "Champion a new economic order, fostering open markets and international trade to create widespread prosperity.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "worldview": 1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 3
+            },
+            "setFlags": [
+              "t4_economic_order"
+            ]
+          },
+          {
+            "text": "Invest in strategic geopolitical alliances and defense, ensuring stability and protecting existing interests in a turbulent world.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 3,
+              "worldview": -1,
+              "power": 3,
+              "tradition": 0,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "t4_geopolitical_power"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t4:close"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t4:close",
+      "sense": "taste",
+      "prose": [
+        "The lingering taste of fine, dark chocolate, a luxurious European import, coated your tongue, a fitting end to the elaborate multi-course dinner celebrating {given_name}'s recent philanthropic triumph. It was a taste of success, of sophisticated pleasure, and of the profound satisfaction that came from seeing decades of strategic investment bear fruit on a global scale. Yet, beneath the sweetness, there was a subtle, almost metallic hint, the taste of unrelenting effort and the quiet sacrifices made along the way.",
+        "Later, a sip of strong, black coffee, brewed according to an old family recipe, brought a bitter, bracing sensation that cut through the richness of the evening. It was the taste of legacy, of a responsibility that weighed heavily even in moments of triumph. This was the flavor passed down through generations, a constant reminder that the work was never truly finished, that the family's influence, while vast, required constant vigilance and tireless dedication.",
+        "As the evening wound down, the faintest hint of caraway seeds from the rye bread served earlier still lingered, a humble, earthy counterpoint to the evening's opulence. It was the taste of their origins, of the enduring Jewish heritage that remained a bedrock amidst the shifting sands of global power and wealth. This was the full flavor of the {family_name} generation: a complex blend of global ambition, hard-won success, and an unbroken thread of tradition, all ready to be imparted to the next in line."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A final, ceremonial toast with vintage wine left a potent, complex flavor on your palate, a symbol of the immense tangible wealth and influence you had cultivated."
+          ],
+          "choice": {
+            "text": "Emphasize the tangible assets and strategic partnerships for the heir to leverage.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 0,
+              "power": 2,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "t4_heir_tangible_assets"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A bite of simple, home-baked honey cake, a traditional treat from your childhood, evoked memories of family values and the ethics that guided your ascent."
+          ],
+          "choice": {
+            "text": "Instill in the heir the ethical compass and traditional values that underpin the family's success.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "t4_heir_ethical_values"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t5:open",
+      "sense": "smell",
+      "prose": [
+        "The sharp tang of ozone, like a storm trapped in a canister, permeated the living module, a constant reminder of the thin veil between the recycled air and the void. It mingled with the faint, metallic scent of the habitation's ancient life support systems, a scent that had become as familiar as the yeast of rising challah in a terrestrial kitchen. Here, the aroma of processed nutrient paste, a sterile sweetness, was the only counterpoint, a scent of survival stripped bare of earthly comforts, yet infused with the quiet ambition of the {family_name} line.",
+        "Below the engineered odors, a deeper, almost ancestral memory lingered – the ghost of sweat and industry, of countless generations of {family_name}s who had built their lives brick by careful brick, deal by painstaking deal. This was not the smell of wild frontiers, but of meticulous engineering and calculated risk, a testament to the middle-class tenacity that had propelled them beyond Earth. Every breath taken in this new home carried the faint, almost imperceptible, scent of their economic legacy, now expanded to a cosmic scale.",
+        "Even the sterile confines could not completely erase the lingering scent of Earth-bound traditions. Perhaps it was the faint, almost psychic aroma of old books, or the imagined trace of spices from a distant, remembered kitchen, clinging to the fabric of memory. The ambition to carve out a comfortable, stable existence in the cold, vast reaches of space was still driven by the same core values: prudence, hard work, and an unshakeable belief in providing for the future."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Your gaze drifts to the hydroponics bay, its humid, chlorophyll-rich air a stark contrast to the module's dryness, a project of carefully managed growth."
+          ],
+          "choice": {
+            "text": "Invest resources into expanding the self-sufficiency of the colony's food production, reducing reliance on supply chains.",
+            "motivatorShift": {
+              "wealth": -1,
+              "worldview": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "colony_self_sufficiency_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A message flashes across your comm-panel, detailing a new inter-colony trade route opportunity for rare mined minerals."
+          ],
+          "choice": {
+            "text": "Advocate for leveraging colony resources to secure advantageous contracts in the nascent space mining industry.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "reach": 1,
+              "lineage": -1
+            },
+            "setFlags": [
+              "space_mining_expansion_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t5:rising"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t5:rising",
+      "sense": "touch",
+      "prose": [
+        "The synthetic fabric of your work suit, woven for resilience against radiation and micro-meteoroids, chafed slightly at your wrists, a constant, gentle reminder of the unforgiving environment beyond the hull. The cool, smooth surface of the control panel under your fingertips hummed with contained energy, a labyrinth of conduits and circuits that translated your commands into actions across vast distances. Every grip on a tool, every adjustment of a dial, conveyed a sense of delicate power, a human will asserting itself against the vacuum.",
+        "Beneath your boots, the deck plates vibrated with the rhythmic thrum of the station's engines, a steady pulse that became a second heartbeat. Occasionally, a sudden tremor would ripple through the metal, a distant blast from an asteroid mining operation or a minor atmospheric stabilization event, sending a jolt up your spine. It was a pressure, a subtle but pervasive force, pushing the boundaries of human endurance and ingenuity, demanding constant vigilance and adaptation.",
+        "Even in moments of rest, the textures of this new life were unique. The soft, recycled air on your skin, the slight give of the reconfigurable foam seating, the cool, sterile touch of a nutrient bar wrapper – all bespoke of a carefully managed existence. It was a life where every surface, every material, had been engineered for purpose, a tangible manifestation of humanity's audacious reach, and the {family_name} line's determination to not only survive, but thrive, within its demanding embrace."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A maintenance alert indicates a critical component in the station's environmental control system is nearing failure, requiring immediate attention."
+          ],
+          "choice": {
+            "text": "Prioritize direct, hands-on repair, utilizing established protocols and {full_name}'s personal expertise.",
+            "motivatorShift": {
+              "honor": 1,
+              "tradition": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "personal_competence_demonstrated"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A rival corporation offers a substantial incentive for your engineering team to consult on a complex terraforming project on a nearby world."
+          ],
+          "choice": {
+            "text": "Delegate the repair to a capable subordinate team and seize the external consultation opportunity.",
+            "motivatorShift": {
+              "wealth": 1,
+              "reach": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "external_consultation_pursued"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The relentless pressures of maintaining the orbital station and its nascent economic ventures are taking a toll on your team. How do you respond to rising fatigue and a dip in morale?",
+        "options": [
+          {
+            "text": "Implement a mandatory, station-wide 'wellness cycle,' emphasizing rest, recreation, and mental health programs.",
+            "motivatorShift": {
+              "worldview": 1,
+              "lineage": 1,
+              "power": -1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "morale_boost_wellness"
+            ]
+          },
+          {
+            "text": "Announce significant performance-based bonuses and accelerated promotion opportunities to re-energize the workforce.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 1,
+              "worldview": -1,
+              "lineage": -1
+            },
+            "setFlags": [
+              "morale_boost_incentives"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t5:midpoint"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t5:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The constant, low hum of the life support systems formed the sonic bedrock of existence on the orbital habitat, a pervasive drone that faded into subconsciousness until a sudden cessation would send a jolt of primal fear. It was overlaid by the rhythmic hiss of airlocks pressurizing, the distant clatter of tools from maintenance crews, and the clipped, professional voices of comms officers relaying interplanetary market updates or logistical reports. Every sound was engineered, controlled, a testament to humanity's careful orchestration of life beyond the blue marble.",
+        "Through the comm-channels, the voices of other lines, other waves, occasionally filtered in. A distinct, almost melancholic melody from a distant agricultural colony, perhaps, or the sharp, decisive tones of a military-industrial outpost discussing new defense contracts. These were echoes of humanity's vast and diverse expansion, each with their own cadence, their own particular concerns. The {family_name} line, ever observant, listened for opportunities, for weakness, for the subtle shifts in the cosmic economic winds.",
+        "Today, the usual symphony of industry was punctuated by the sharp, unexpected burst of a sonic boom, a controlled re-entry perhaps, but close enough to make the station vibrate subtly. Then, a voice, clearer than most, broke through the usual chatter – an emissary from a rival economic line, known for their aggressive expansion into new stellar markets, requesting an urgent, high-level meeting. The very air seemed to thicken, charged with the potential for both collaboration and fierce competition. The stakes, already immeasurable, had just escalated."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The rival’s message implies an opportunity for a joint venture, but with significant caveats regarding shared intellectual property."
+          ],
+          "choice": {
+            "text": "Cautiously approach the joint venture, negotiating strict terms to protect the line's proprietary assets and ensure equitable benefit.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "joint_venture_negotiated"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Another message arrives, this one from an independent consortium of scientists, proposing a revolutionary, but high-risk, energy solution for the colonies."
+          ],
+          "choice": {
+            "text": "Decline the rival's immediate offer to explore the innovative energy solution, seeking a technological edge.",
+            "motivatorShift": {
+              "worldview": 1,
+              "reach": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "new_energy_research_pursued"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t5:turn"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t5:turn",
+      "sense": "sight",
+      "prose": [
+        "Through the panoramic viewport, the cosmos unfurled in terrifying, majestic silence. The distant, shimmering dust lanes of a spiral arm painted a cosmic tapestry, studded with the pinprick lights of countless stars. Closer, the newly established colony on a rocky, terraformed moon shone with a faint, artificial luminescence, a testament to humanity's audacity. Tiny specks of light, cargo haulers and transport ships, traversed the dark, weaving paths between the orbital station and the lunar outpost, like diligent ants building a new civilization.",
+        "Within the confines of the command center, the holographic display projected intricate schematics of resource extraction operations, shimmering green and blue lines tracing supply chains across astronomical distances. The faces of the engineers and strategists, illuminated by the cool glow of the screens, were etched with a blend of fatigue and fervent hope. Each flickering graph, each complex algorithm, represented countless hours of careful planning, the embodiment of the {family_name} line's meticulous, economic approach to conquering the frontier.",
+        "Your gaze settled on the expanding web of lights – not just the {family_name} line's ventures, but the overlapping claims of other human settlements, other economic powers. The void, once vast and empty, was rapidly becoming a contested territory, a new chessboard for humanity's ambitions. The future of this star system, and by extension, the prosperity and influence of your descendants, hung precariously in the balance. A critical decision now would determine whether the {family_name} line would merely survive, or truly ascend, shaping the very fabric of this new cosmic age."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A newly discovered asteroid field promises vast, untapped mineral wealth, but lies within a disputed zone claimed by a powerful, expansionist corporation."
+          ],
+          "choice": {
+            "text": "Initiate a complex legal and diplomatic campaign to assert the line's claim to the asteroid field through established inter-colonial agreements.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "asteroid_claim_legal_push"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A research team presents findings indicating a high probability of habitable exoplanets within a nearby, unexplored star system, requiring significant long-term investment."
+          ],
+          "choice": {
+            "text": "Redistribute current resource allocation to fund a pioneering, multi-generational expedition to the new star system.",
+            "motivatorShift": {
+              "reach": 2,
+              "worldview": 2,
+              "wealth": -2
+            },
+            "setFlags": [
+              "exoplanet_expedition_launched"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The orbital station, a symbol of your family's cosmic ascent, is under immense strain from growing populations and competing economic interests. How do you consolidate {family_name} influence and ensure the station's future?",
+        "options": [
+          {
+            "text": "Champion a radical expansion of the station, inviting diverse populations and other corporate partners, establishing it as a free-trade hub.",
+            "motivatorShift": {
+              "worldview": 2,
+              "wealth": 2,
+              "lineage": -1,
+              "power": -1
+            },
+            "setFlags": [
+              "station_expansion_free_trade"
+            ]
+          },
+          {
+            "text": "Secure exclusive resource agreements and heavily militarize the station's defenses, asserting {family_name} dominance over its operations.",
+            "motivatorShift": {
+              "power": 2,
+              "lineage": 2,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "station_dominance_militarized"
+            ]
+          },
+          {
+            "text": "Initiate a long-term plan to develop a network of smaller, specialized habitats, decentralizing power and risk across multiple sites.",
+            "motivatorShift": {
+              "reach": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "station_network_decentralized"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ashkenazi_jewish:economic:middle:t5:close"
+    },
+    {
+      "id": "act:ashkenazi_jewish:economic:middle:t5:close",
+      "sense": "taste",
+      "prose": [
+        "The nutrient paste, a staple of orbital living, had long ceased to offend, becoming instead a neutral, sustaining presence. Today, however, a package arrived from Earth, a rare indulgence: a small container of genuine, terrestrial honey. Its rich, floral sweetness, so vibrant and complex, exploded on the tongue, a potent reminder of the green fields and ancient traditions left far behind. It was a taste of luxury, yes, but also a taste of nostalgia, a bittersweet connection to the world from which the {family_name} line had sprung.",
+        "Later, the slightly metallic tang of reprocessed water, a taste utterly familiar and unremarkable, filled your mouth. It was the taste of efficiency, of engineering, of making do with what was available, and making it work. This was the true flavor of their cosmic endeavor: resourcefulness, sustainability, and a quiet determination to wring prosperity from scarcity. It was the taste of the middle-class pragmatism that had secured their foothold among the stars.",
+        "As the meal concluded, the faint, lingering sweetness of the honey contrasted with the clean, almost sterile aftertaste of the processed nutrient bar. It was the taste of a generation’s work, a blend of ambition and practicality, of reaching for the heavens while keeping both feet (or grav-boots) firmly planted on an economic foundation. The {given_name} {surname} of this generation closed their eyes, passing on not just a burgeoning stellar empire, but the accumulated tastes of triumph and perseverance to their heir, a legacy seasoned with the dust of new worlds and the enduring sweetness of hard-won success."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Your heir presents a plan for a significant charitable foundation dedicated to promoting cultural heritage amongst the far-flung colonies."
+          ],
+          "choice": {
+            "text": "Allocate substantial resources to fund the cultural heritage foundation, strengthening the line's soft power and influence.",
+            "motivatorShift": {
+              "worldview": 1,
+              "honor": 1,
+              "lineage": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "cultural_foundation_established"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A crucial patent for a revolutionary cold fusion reactor is nearing expiration, and your heir suggests aggressively buying out competitors to secure exclusive rights."
+          ],
+          "choice": {
+            "text": "Direct the heir to focus entirely on securing the cold fusion patent, ensuring the line's continued economic dominance.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "reach": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "cold_fusion_patent_secured"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}

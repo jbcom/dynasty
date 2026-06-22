@@ -179,6 +179,16 @@ export function validateSceneFile(
   const wantId = `act:${req.wave}:${req.archetype}:${req.cls}:t${req.tier}`;
   if (!parsed.data.acts.some((a) => a.id === wantId))
     reasons.push(`act id mismatch (want ${wantId})`);
+  // Scene-ref integrity: every id an act lists in `scenes[]` must resolve to a real scene object in
+  // the same file. Catches the model dropping a scene or mis-spelling its id (e.g. a truncated wave
+  // "ashkenazi" vs "ashkenazi_jewish") — a defect the schema + leak gates don't see, which otherwise
+  // ships as a dangling ref the loader's integrity test only catches post-hoc.
+  const sceneIds = new Set(parsed.data.scenes.map((s) => s.id));
+  for (const act of parsed.data.acts) {
+    for (const sid of act.scenes) {
+      if (!sceneIds.has(sid)) reasons.push(`dangling scene ref ${act.id} → ${sid}`);
+    }
+  }
   if (reasons.length) return { ok: false, reasons };
   return { ok: true, file: parsed.data };
 }

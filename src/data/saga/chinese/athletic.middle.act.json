@@ -1,0 +1,2332 @@
+{
+  "acts": [
+    {
+      "id": "act:chinese:athletic:middle:t0",
+      "wave": "chinese",
+      "archetype": "athletic",
+      "cls": "middle",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — The Sinew and the Salt",
+      "scenes": [
+        "act:chinese:athletic:middle:t0:open",
+        "act:chinese:athletic:middle:t0:rising",
+        "act:chinese:athletic:middle:t0:midpoint",
+        "act:chinese:athletic:middle:t0:turn",
+        "act:chinese:athletic:middle:t0:close"
+      ]
+    },
+    {
+      "id": "act:chinese:athletic:middle:t1",
+      "wave": "chinese",
+      "archetype": "athletic",
+      "cls": "middle",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — The Iron Sinew and the Shared Hearth",
+      "scenes": [
+        "act:chinese:athletic:middle:t1:open",
+        "act:chinese:athletic:middle:t1:rising",
+        "act:chinese:athletic:middle:t1:midpoint",
+        "act:chinese:athletic:middle:t1:turn",
+        "act:chinese:athletic:middle:t1:close"
+      ]
+    },
+    {
+      "id": "act:chinese:athletic:middle:t3",
+      "wave": "chinese",
+      "archetype": "athletic",
+      "cls": "middle",
+      "tier": 3,
+      "macroAct": "emergence",
+      "title": "Act IV — The Breath and the Sinew of the Coast",
+      "scenes": [
+        "act:chinese:athletic:middle:t3:open",
+        "act:chinese:athletic:middle:t3:rising",
+        "act:chinese:athletic:middle:t3:midpoint",
+        "act:chinese:athletic:middle:t3:turn",
+        "act:chinese:athletic:middle:t3:close"
+      ]
+    },
+    {
+      "id": "act:chinese:athletic:middle:t4",
+      "wave": "chinese",
+      "archetype": "athletic",
+      "cls": "middle",
+      "tier": 4,
+      "macroAct": "ascension",
+      "title": "Act V — Tempered in the Global Basin",
+      "scenes": [
+        "act:chinese:athletic:middle:t4:open",
+        "act:chinese:athletic:middle:t4:rising",
+        "act:chinese:athletic:middle:t4:midpoint",
+        "act:chinese:athletic:middle:t4:turn",
+        "act:chinese:athletic:middle:t4:close"
+      ]
+    },
+    {
+      "id": "act:chinese:athletic:middle:t5",
+      "wave": "chinese",
+      "archetype": "athletic",
+      "cls": "middle",
+      "tier": 5,
+      "macroAct": "ascension",
+      "title": "Act VI — The Kinetic Leap of the Star-Bound Clan",
+      "scenes": [
+        "act:chinese:athletic:middle:t5:open",
+        "act:chinese:athletic:middle:t5:rising",
+        "act:chinese:athletic:middle:t5:midpoint",
+        "act:chinese:athletic:middle:t5:turn",
+        "act:chinese:athletic:middle:t5:close"
+      ]
+    },
+    {
+      "id": "act:chinese:athletic:middle:t2",
+      "wave": "chinese",
+      "archetype": "athletic",
+      "cls": "middle",
+      "tier": 2,
+      "macroAct": "emergence",
+      "title": "Act III — The Iron Ribs of the Guild",
+      "scenes": [
+        "act:chinese:athletic:middle:t2:open",
+        "act:chinese:athletic:middle:t2:rising",
+        "act:chinese:athletic:middle:t2:midpoint",
+        "act:chinese:athletic:middle:t2:turn",
+        "act:chinese:athletic:middle:t2:close"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "act:chinese:athletic:middle:t0:open",
+      "sense": "smell",
+      "prose": [
+        "The stench of brine-soaked pine and wet hemp clung to the lower decks, thick enough to coat the throat of anyone who dared to draw a deep breath. Below the floorboards, bilge water sloshed with every roll of the swell, carrying the sharp, sour tang of rot and cabbage that had long since gone soft in the casks. But near the small hatchway, where the salty wind sliced through the narrow gap, the air carried a sharp, metallic bite of open ocean and coal dust—the breath of a massive steamship driving eastward into the unknown.",
+        "To {given_name} {surname}, the damp was not a rot to suffer, but a weight to carry. The muscles of {given_name}'s back, hardened by generations of physical discipline and training in the southern districts, tensed against the constant vibration of the iron hull. The family had not fled as destitute coolies, but as teachers and organizers, carrying the pride of structured physical cultivation. They were men and women of muscle and poise, whose bodies were their capital, maintaining their daily stances even in the cramped, airless dark of the hold to keep their limbs from stiffening.",
+        "When the hatches finally rattled open, the smell changed instantly, rushing in with the sting of coal-smoke and dried fish from the busy waterfront. Here was a cold, salt-bitten harbor where the mud smelled of cedar shavings and oil. Standing upon the slippery wharf, {given_name} adjusted the canvas strap of the family's heavy training weights, breathing in the foreign air—a mixture of horse dung, wet sawdust, and the strange, sugary aroma of frying grease from the nearby shacks."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "With the weight of the family's traditional training iron slung over one shoulder, {given_name} steps onto the greasy timbers of the pier."
+          ],
+          "choice": {
+            "text": "Demonstrate our physical discipline openly to command immediate respect from the onlookers.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "path_of_strength"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Keeping the training implements concealed beneath heavy canvas wraps, {given_name} slips quietly into the crowd to find shelter."
+          ],
+          "choice": {
+            "text": "Conserve our strength and slip unnoticed into the boarding houses to scout the territory.",
+            "motivatorShift": {
+              "wealth": 1,
+              "worldview": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "path_of_discretion"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t0:rising"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t0:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough, splintering wood of the hand-barrow rasped against {given_name}'s calloused palms, but the weight was nothing compared to the granite blocks of the old school. Cold rainwater dripped from the brim of a straw hat, running down the back of {given_name}'s neck like a slow, icy finger. The dirt underfoot was a thick, clayey soup that sucked at the soles of linen-wrapped shoes, demanding a low, rooted stance with every heavy step uphill.",
+        "In this raw settlement, the local laborers watched the newcomers with narrow, suspicious eyes, but they could not help but stare at the effortless grace of the {surname} line. Where others stumbled or broke their backs under the load of timber and iron, the family moved with the rhythmic, calculated economy of those who knew how to align bone and sinew. Every lift was a silent demonstration of balance—the iron bars of the drayage company sliding smoothly into place, metal ringing against metal as {given_name} hoisted them without a single grunt of strain.",
+        "It was during the late afternoon shift that a local teamster, seeking to humiliate the newcomers, dropped a massive oak beam directly across the path, challenges flashing in his muddy eyes. The wood was slick with moisture and weighed as much as two grown men. {given_name} felt the rough bark under bruised fingers, testing the center of gravity, the cold grit of the forest floor biting into the skin as the crowd gathered to watch the contest of pure physical power."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Feeling the grain of the massive beam under calloused fingers, {given_name} bends deep into a horse stance."
+          ],
+          "choice": {
+            "text": "Lift the oak beam with perfect, theatrical form to stun the watching crowd.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "lift_beam"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Instead of lifting, {given_name} uses a quick, levered kick to roll the obstacle aside with minimal effort."
+          ],
+          "choice": {
+            "text": "Decline the raw contest and use leverage to clear the path, showing superior intellect.",
+            "motivatorShift": {
+              "worldview": 2,
+              "politics": 1
+            },
+            "setFlags": [
+              "leverage_beam"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How does the family establish its physical presence among the competing immigrant laborers?",
+        "options": [
+          {
+            "text": "Establish a public training ground in the alleyways to teach the younger generation self-defense.",
+            "motivatorShift": {
+              "tradition": 2,
+              "power": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "public_dojo"
+            ]
+          },
+          {
+            "text": "Rent out our physical labor as specialized drayage contractors, turning physical power into steady income.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "labor_contract"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t0:midpoint"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t0:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The clamor of the district was a relentless, overlapping roar of steam whistles, the iron clink of horseshoes on cobblestone, and the sharp, barked commands of bosses in three different tongues. But inside the wooden halls of the immigrant association, the noise softened into the rhythmic thud-thud of heavy sandbags being struck, interspersed with the low, guttural breathing of students practicing their forms. Outside the paper windows, the wind whistled through the gaps, carrying the distant, threatening chants of a hostile local mob demanding the exclusion of new arrivals.",
+        "A sudden hush fell over the training hall as the heavy oak door creaked open, the dry scraping of leather boots signaling the arrival of a delegation from a rival community line. They were not laborers, but established merchants of another diaspora, their silk robes rustling like dry leaves as they stepped onto the packed-earth floor. Their leader spoke in a sharp, clipped dialect, his voice carrying the cold weight of gold coins clinking in a purse, offering an alliance that sounded more like a demand for subservience.",
+        "The air grew thick with the sound of knuckles popping and the quiet, steady breaths of the {surname} clan as they stood their ground. To yield to the merchants meant safety under their financial umbrella, but it would silence the distinct, self-reliant voice the family had built through their physical prowess. Every creak of the floorboards seemed magnified as the elders waited for {given_name} to answer, the distant rumble of the city’s industrial docks serving as a reminder of the relentless world waiting outside."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The quiet in the hall is broken only by the steady, rhythmic breathing of your siblings as you face the merchants."
+          ],
+          "choice": {
+            "text": "Refuse their gold and maintain absolute physical independence for our training hall.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1,
+              "wealth": -2
+            },
+            "setFlags": [
+              "independent_path"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The rustle of the merchant's silk robe signals a compromise that could fund the family's growth."
+          ],
+          "choice": {
+            "text": "Accept their patronage in exchange for security, aligning our strength with their capital.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "merchant_patronage"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t0:turn"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t0:turn",
+      "sense": "sight",
+      "prose": [
+        "From the high balcony of the association house, the entire immigrant ward lay stretched out in a chaotic tapestry of grey shingled roofs, red paper lanterns bleeding their color into the wet fog, and narrow alleys choked with wash lines. Below, the flickering light of whale-oil lamps illuminated the pale, exhausted faces of hundreds of new arrivals huddled in the mud, their eyes wide with the terror of the unfamiliar. It was a landscape of stark contrasts: the gleaming brick bank buildings of the established city rising in the distance, while the ward itself was a cramped hive of raw timber and survival.",
+        "Standing beside the wooden railing, {given_name} watched a group of young men from the neighborhood attempting to lift a heavy timber frame, their movements clumsy and uncoordinated, their faces twisted with strain. Without proper guidance, their strength would be wasted, their bodies broken by the harsh demands of the frontier docks before they could ever build a home. The {surname} name carried the reputation of master instructors; the family possessed the rare knowledge of how to turn raw, desperate labor into disciplined, unbreakable strength.",
+        "The community stood at a precarious crossroads, visible in the dark, gathering crowds at the edge of the ward where hostile municipal guards patrolled the borders. How the family chose to deploy their physical legacy would define the very nature of this enclave. They could build a wall of iron muscles to guard the borders, transform their training into an athletic society that bridged the gap with the host city, or keep their secrets close to preserve their own family's rise above the common laborers."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Looking down at the disorganized crowd in the muddy street, {given_name} sees the potential of a disciplined community."
+          ],
+          "choice": {
+            "text": "Train the neighborhood youth to defend the ward's borders from outside aggression.",
+            "motivatorShift": {
+              "power": 2,
+              "politics": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "militia_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Watching the distant lights of the city's sports clubs, {given_name} sees a path of prestige."
+          ],
+          "choice": {
+            "text": "Establish an athletic guild to compete in public exhibitions, showing our worth to the wider city.",
+            "motivatorShift": {
+              "reach": 2,
+              "honor": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "exhibition_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {surname} line permanently shape the social fabric of the immigrant ward?",
+        "options": [
+          {
+            "text": "Found the Athletic Benevolent Association, offering martial training and physical protection to all new immigrants.",
+            "motivatorShift": {
+              "honor": 3,
+              "lineage": 2,
+              "wealth": -2
+            },
+            "setFlags": [
+              "founded_association"
+            ]
+          },
+          {
+            "text": "Monopolize the drayage and construction labor guilds, using physical dominance to secure economic power.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "politics": -1
+            },
+            "setFlags": [
+              "labor_monopoly"
+            ]
+          },
+          {
+            "text": "Keep our martial secrets strictly within the family, focusing entirely on elevating our own lineage above the crowd.",
+            "motivatorShift": {
+              "tradition": 3,
+              "lineage": 3,
+              "reach": -2
+            },
+            "setFlags": [
+              "insular_perfection"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t0:close"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t0:close",
+      "sense": "taste",
+      "prose": [
+        "The tea passed down to the heir was not the delicate, floral brew of the homeland's scholarly estates, but a dark, bitter infusion of mountain roots and dried ginger, brewed thick to soothe aching muscles and mend bruised sinews. On the tongue, it left a sharp, medicinal burn that gave way to a lingering sweetness—a taste that every child of the {surname} line learned to associate with the end of a grueling day of training. Alongside the tea, the steam from the hot iron pots carried the rich, savory smell of roasted pork fat and heavy grain, the hearty fuel of a family that lived by the strength of its bones.",
+        "As {given_name} watched the young heir lift the heavy stoneware cup with steady, unshakeable hands, a deep sense of accomplishment settled in. The journey across the ocean had been long, and the mud of this new land had tested them, but they had not been broken. They had planted a flag of muscle, discipline, and middle-class dignity in a city that had expected them to be nothing but cheap, disposable labor. The heir's shoulders were already broad, the skin of their palms starting to toughen with the familiar callouses of the training iron.",
+        "The legacy was now dry ink on the association's ledger, but more importantly, it was written in the very posture of the family's children. They walked through the streets of the ward with their heads held high, their strides long and measured, carrying a name that was now synonymous with strength and resilience. The bitter taste of the root tea lingered on {given_name}'s tongue, a reminder that every victory in this new world was paid for with sweat, and that the foundation of the {surname} dynasty was now poured in iron and stone."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "As the bitter tea cools, you hand the heavy training iron to the heir."
+          ],
+          "choice": {
+            "text": "Enforce the strict, traditional regimen of our ancestors to preserve our cultural roots.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "traditional_heir"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Setting the cup down, you point out the window toward the lights of the expanding city."
+          ],
+          "choice": {
+            "text": "Encourage the heir to adapt our strength to the modern world and its changing games.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "modern_heir"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:athletic:middle:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The sharp, medicinal tang of camphor oil always rose first, cut through by the sweet, stinging dryness of cedar shavings littering the floor. In the center of the half-finished hall, {given_name} breathed in the scent of their own honest sweat mixed with the vinegar-sharp odor of curing mortar. The smell of boiled linseed oil on the heavy wooden beams hung thick under the rafters, a testament to the weeks spent sealing the timber against the relentless damp of the river air.",
+        "Beyond the threshold, the rich, savory steam of roasting pork and parboiled cabbage drifted from the family kitchen, anchoring the gymnasium to the home. It was an aroma of labor and nourishment combined, far removed from the stale, salt-crusted air of the steerage decks that had brought their people across the sea. Here, the scent of the earth they worked and the oils they rubbed into bruised limbs signaled a permanent, physical claim to this corner of the town.",
+        "Every corner of the compound carried this olfactory map: the bitter smoke of dried mugwort smoldering in clay pots to soothe aching muscles, the dry dust of sandstone blocks imported to serve as weights, and the faint, clean smell of river water used to scrub the pine floors at dawn. It was a middle-class domain built on physical mastery, where strength was seasoned by discipline and celebrated with the heavy, comforting smells of a prosperous hearth."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We could prioritize the construction of the public training yard, letting the aroma of woodsmoke and sweat draw in the neighborhood youth."
+          ],
+          "choice": {
+            "text": "Open the gates to the wider neighborhood for physical training.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "public_yard_opened"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We could instead keep the gates barred until the private residence is fully secure, letting the fragrance of home cooked meals remain a private family sanctuary."
+          ],
+          "choice": {
+            "text": "Focus on securing the private compound first.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": -1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 2,
+              "honor": 0,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "private_compound_secured"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t1:rising"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough, unyielding grain of raw oak bit into {given_name}'s palms as they hoisted the heavy training beams into place. Every physical contact in this house was a test of endurance; the cool, smooth surface of the stone lifting-jars challenged the grip, while the coarse canvas of the sandbags left red, friction-burned tracks along the forearms. Even the linen of their garments felt stiff and starch-heavy, scrubbed clean by hands that grew more callused with each passing week.",
+        "As the family gathered for the evening meal, the touch of a mother's hand on a bruised shoulder brought a different, soothing texture—cool liniment pressed gently into warm, inflamed muscle. There was a constant friction between the violent physical demands of their athletic trade and the soft, deliberate care required to keep the household running. The very floorboards vibrated beneath their heavy, deliberate strides, a house built to withstand the kinetic energy of a family that lived through their muscles.",
+        "Yet, the pressure of maintaining this physical standards weighed heavily upon the younger generation. The children's fingers were already tracing the iron bands of the weight crates, learning the cold, heavy reality of the legacy they were expected to carry forward."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "With a firm but gentle touch, {given_name} guided the youngest child's hands to the lighter wooden weights, emphasizing form over raw strength."
+          ],
+          "choice": {
+            "text": "Train the youth with patient, disciplined methods.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": -1,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "disciplined_heirs"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Demanding immediate resilience, {given_name} calloused the child's hands early on the rough iron bars, forging them for a harder world."
+          ],
+          "choice": {
+            "text": "Push the family's youth into rigorous, competitive strength training.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "hardened_heirs"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How shall the family discipline its members as they establish their athletic reputation in the local community?",
+        "options": [
+          {
+            "text": "Adopt strict, traditional physical regimes that preserve ancestral methods.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "discipline_traditional"
+            ]
+          },
+          {
+            "text": "Incorporate modern athletic drills to appeal to local, non-immigrant patrons.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "discipline_modern"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t1:midpoint"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The rhythmic, thunderous thud of sand-filled leather bags swinging against timber framing vibrated through the floorboards, a heartbeat for the rising gymnasium. This deep vibration was constantly answered by the sharp, explosive grunts of the students practicing their stances, their feet stomping in unison on the packed dirt of the yard. Outside, the clamor of the growing neighborhood rose to meet them: the high-pitched clatter of iron-rimmed wheels on stone, the shouts of teamsters, and the distant, metallic ringing of a nearby blacksmith's anvil.",
+        "One afternoon, a new sound cut through the familiar din—the distinct, authoritative clip-clop of a fine carriage horse stopping directly outside their gate, followed by the polite but firm rap of a brass-headed cane against the oak door. It was an emissary from a prominent local merchants' association, their voice low and measured, offering a lucrative partnership that would put {family_name}'s athletic pupils to work as private guards for the shipping docks.",
+        "The proposal hung in the air, framed by the background noise of young men breathing heavily and the distant, mocking laughter of street youths who watched from the corners. The family's physical prowess had made them impossible to ignore, and now the wider town was listening closely to how they would answer."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The family listened to the merchant's gold coins clinking on the table, a sound that promised immediate security and local influence."
+          ],
+          "choice": {
+            "text": "Accept the security contract, aligning with the commercial elite.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "dock_guards_hired"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We drowned out the merchant's offer with the loud, defiant shouting of our traditional training commands, choosing to remain independent trainers."
+          ],
+          "choice": {
+            "text": "Reject the contract to keep the school focused purely on athletic virtue.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": -1,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 2,
+              "honor": 3,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "independent_athletic_virtue"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t1:turn"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "From the high, unglazed windows of the gymnasium, the town appeared as a sprawling, chaotic canvas of red-brick chimneys, grey slate roofs, and the muddy brown ribbon of the river. The afternoon sun cast long, sharp shadows across the dusty training yard where twenty young men stood in low horse stances, their bare shoulders glistening with sweat under the golden light. The vibrant red of the hand-painted training banners fluttered against the drab, whitewashed walls of the compound, a bold splash of color in a graying industrial neighborhood.",
+        "{given_name} watched from the gallery as the local authorities and rival labor leaders walked past the gates, their eyes lingering on the disciplined rows of athletes. The strength of the {surname} line was no longer a private family asset; it was a visible monument of order in a town prone to sudden riots and labor disputes. The local ward boss had noticed, and so had the immigrant families who looked to the gymnasium for protection and pride.",
+        "The sight of a new, massive municipal hall rising nearby served as a constant reminder that the town's borders were shifting. The choices made today would determine whether the family remained an isolated, exotic curiosity or became the physical foundation upon which the neighborhood's security was built."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We looked out upon the yard and saw a force that could police the streets, keeping our people safe through visible strength."
+          ],
+          "choice": {
+            "text": "Shape the school into a neighborhood defense league.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": -1,
+              "power": 3,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "neighborhood_defense_league"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We looked past the compound walls and envisioned a grand public academy where our athletic triumphs would earn us respect across cultural lines."
+          ],
+          "choice": {
+            "text": "Promote the school as a public institution for athletic excellence.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 3,
+              "power": 1,
+              "tradition": -2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "public_athletic_academy"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {surname} family position their athletic legacy to shape the town's future?",
+        "options": [
+          {
+            "text": "Establish a private, elite academy that trains only the descendants of the original immigrant wave, preserving heritage.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": -2,
+              "worldview": -2,
+              "power": 2,
+              "tradition": 4,
+              "honor": 2,
+              "lineage": 3,
+              "reach": -2
+            },
+            "setFlags": [
+              "heritage_preservation_academy"
+            ]
+          },
+          {
+            "text": "Offer training openly to all working-class youths in the district, forming a cross-cultural athletic union.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 3,
+              "worldview": 3,
+              "power": 2,
+              "tradition": -3,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "cross_cultural_union"
+            ]
+          },
+          {
+            "text": "Use the family's physical prestige to secure lucrative political appointments and administrative influence in the municipal government.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 4,
+              "worldview": 1,
+              "power": 3,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "political_athletic_influence"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t1:close"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t1:close",
+      "sense": "taste",
+      "prose": [
+        "The generation closed around the family table, marked by the deep, complex flavors of a hard-won dinner. There was the bitter, tongue-coating heat of raw ginger boiled into black herbal tea, which {given_name} insisted every child drain to the last drop to heal the micro-tears in their muscles. This medicinal sting was immediately followed by the rich, comforting saltiness of dried pork fat belly and the thick sweetness of steamed red bean buns, a reward for a long day of physical toil.",
+        "As the heir took their place at the head of the training mat, they tasted the transition of power in the rich, earthy complexity of the family's traditional brew. It was not the taste of luxury, but of resilience and steady growth—a middle-class palate that valued sustenance and strength over delicate pretension. The copper kettle on the stove hissed, sending up steam that tasted of clean water and iron.",
+        "With a nod, {given_name} passed the heavy wooden bowl to the next leader of the {surname} line. The trade was established, the training hall was solid, and the taste of the future was as bold, sharp, and deep as the ginger broth that sustained them."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The heir drank deeply, accepting the bitter herbal traditions and the quiet, solid respect of our insular immigrant community."
+          ],
+          "choice": {
+            "text": "Pass down the traditional path of insular physical mastery.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -1,
+              "worldview": -1,
+              "power": 2,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "heir_traditionalist"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The heir finished the cup quickly, eager to wash away the bitterness with the sweeter, more expansive opportunities of the growing town."
+          ],
+          "choice": {
+            "text": "Direct the heir toward civic integration and commercial expansion.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "worldview": 2,
+              "power": 1,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "heir_integrationist"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:athletic:middle:t3:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of wintergreen liniment and camphor hung heavy in the high-raftered hall, mingling with the dry, toasted aroma of roasted sesames drifting up from the street-level bakeries. Here, on the polished cedar floors of the association academy, the {family_name} name had been carefully stenciled onto the leather punch bags and the brass-rimmed barbell racks. It was a clean, sharp smell—one of sweat and order, quite different from the muddy harbors and coal-choked alleys where the first of the line had landed.",
+        "From the open windows, the salty tang of the bay breeze cut through the dense warmth of the training floor. Young men, their hair cropped in the modern style, moved in silent unison, their lunges accompanied only by the rhythmic rustle of cotton trousers. The family had built more than a gymnasium; they had established a temple of physical culture that transformed the neighborhood's lean, overlooked sons into pillars of poise and unmistakable strength.",
+        "Every bottle of herbal rubbing oil lined up on the cedar shelves carried the family label, a small but undeniable signature of middle-class success. To the merchants downstairs, the {family_name} name meant safety and discipline; to the youth who crowded the doorways, it represented a clean path to respect in a world that so often sought to grind them down."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We focus our training on the classical forms, ensuring the traditional roots of our strength are never forgotten."
+          ],
+          "choice": {
+            "text": "Emphasize ancient forms and heritage in the curriculum.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "traditional_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We introduce Western-style boxing and modern calisthenics to appeal to the city's broader sporting public."
+          ],
+          "choice": {
+            "text": "Adopt modern Western athletic disciplines to expand our reach.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "modern_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t3:rising"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t3:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough hemp of the boxing ring's ropes scraped against knuckles that had known both hard labor and refined practice. {given_name} adjusted the canvas lacings of a leather chest protector, feeling the reassuring density of the packed horsehair beneath the hide. It was a tangible pressure—the weight of protective gear, but also the weight of expectations from the neighborhood merchants who funded these training grounds.",
+        "A local municipal deputy stepped onto the training floor, his wool overcoat coarse and heavy against the polished wooden balustrades. His kidskin gloves tapped rhythmically against a silver-headed cane as he surveyed the disciplined ranks of the class. He brought a proposal that smelled of ink and backroom bargains, offering to clear the academy's property taxes in exchange for some 'sturdy young men' to keep order at the upcoming harbor elections.",
+        "To refuse was to invite sudden inspectors and sudden fines; to accept was to turn these disciplined athletes into the physical instruments of local ward politicians. {given_name} felt the cool, smooth brass of the academy's signet ring on his finger, a solid reminder of what this family had vowed to protect."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We decline the politician's offer politely, choosing to pay our taxes in full rather than compromise our independence."
+          ],
+          "choice": {
+            "text": "Protect the academy's moral independence at all costs.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "political_neutrality"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We agree to provide marshals for the polling stations, securing a valuable patron in the city administration."
+          ],
+          "choice": {
+            "text": "Leverage our physical presence to gain political allies.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "political_alliance"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The local merchants demand we stage an exhibition match to settle a dispute with a rival ward association. How does the family respond?",
+        "options": [
+          {
+            "text": "Agree to the bout, showcasing our superior technique to gain local prestige.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "fought_exhibition"
+            ]
+          },
+          {
+            "text": "Refuse to use our skills for street politics, maintaining our dignified distance.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "refused_exhibition"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t3:midpoint"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t3:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The sharp, rhythmic clatter of interlocking wooden poles echoed off the brick walls of the gymnasium, punctuated by the grunts of exertion from the senior students. From the street below, the clamor of the growing city pressed inward—the iron rattle of dray carts, the shrill whistle of steam engines, and the polyglot shouts of the markets. It was a cacophony of progress, but inside the academy, the sounds were measured, deliberate, and entirely under control.",
+        "During a lull in the training, the heavy front doors creaked open, and a group of visitors from a prominent regional Benevolent Association entered, their leather boots clicking sharply on the hardwood. Among them was a representative of an older, wealthier line—a family that had built its fortune on shipping and dry goods. Their spokesman spoke with a low, gravelly cadence, his words carrying the weight of old-world authority and new-world ambition.",
+        "They proposed a joint athletic union that would span three states, standardizing training under the {family_name} name while channeling their resources into a nationwide network. It was an opportunity to turn a local gymnasium into a regional institution, but it would mean answering to a board of directors who understood ledgers far better than they understood the physical discipline of the body."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We accept the partnership, letting the sounds of our training echo across the entire coast."
+          ],
+          "choice": {
+            "text": "Form the regional athletic union to expand our brand.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "regional_union"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We decline their capital, preferring the quiet, undivided authority over our own hall."
+          ],
+          "choice": {
+            "text": "Preserve complete family ownership and localized control.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -2
+            },
+            "setFlags": [
+              "independent_gym"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t3:turn"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t3:turn",
+      "sense": "sight",
+      "prose": [
+        "The sun beat down upon the newly constructed outdoor arena, where thousands of paper flags fluttered in the harbor breeze. From the elevated stage, the sight was breathtaking: a sea of black bowler hats, straw boaters, and silk skullcaps, all turned toward the central platform where the {family_name} banner hung. The white stenciled characters on the red silk gleamed under the midday glare, a beacon of strength and organization in the heart of the bustling metropolis.",
+        "Standing at the edge of the platform, {given_name} watched the arrival of the city’s dignitaries. On one side sat the industrial magnates in their high-collared shirts, their carriages gleaming with fresh varnish; on the other, the marshaled ranks of the trade unions, their banners painted with slogans of solidarity and labor. Both factions looked to the athletic association—not merely as entertainment, but as a disciplined force that could swing the social balance of the district.",
+        "The moment of demonstration arrived. As the athletes took their positions, the contrast was vivid between the raw, uncoordinated energy of the city and the geometric precision of the family’s pupils. The next movements would define whether the family would become the physical guardians of the rising working class, the celebrated darlings of the urban elite, or a self-reliant vanguard standing apart from the city's civil strife."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We direct our display to emphasize the discipline and dignity of labor, cementing our ties to the working community."
+          ],
+          "choice": {
+            "text": "Dedicate the exhibition to the working families of the district.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 2,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "labor_aligned"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We cater our performance to the wealthy patrons in the private boxes, securing lucrative private sponsorships."
+          ],
+          "choice": {
+            "text": "Align our prestige with the civic elite and corporate sponsors.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": -2,
+              "power": 2,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "elite_sponsored"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "With our national reputation rising, how shall the {family_name} line project its physical prestige into the next era?",
+        "options": [
+          {
+            "text": "Found a nationwide chain of training academies, prioritizing middle-class fitness and commercial success.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 0,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "commercial_empire"
+            ]
+          },
+          {
+            "text": "Train a select vanguard of competitive champions to dominate international sporting exhibitions, proving our physical equality on the world stage.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": 2,
+              "power": 2,
+              "tradition": 1,
+              "honor": 3,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "champion_path"
+            ]
+          },
+          {
+            "text": "Keep the academy local and exclusive, focusing deeply on preserving traditional martial disciplines and family heritage.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -1,
+              "worldview": 1,
+              "power": -1,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 3,
+              "reach": -2
+            },
+            "setFlags": [
+              "heritage_fortress"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t3:close"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t3:close",
+      "sense": "taste",
+      "prose": [
+        "In the quiet of the evening, after the crowds had dispersed and the oil lamps were turned low, the taste of the day was a mixture of dry dust and the sharp, medicinal heat of ginger tea brewed in the back office. It was an ancient recipe, thick and throat-warming, designed to soothe tired muscles and settle a racing heart. With each slow sip, the accomplishments of the generation settled into something permanent.",
+        "The family gathered around the low tea table, where the brass seals of the academy lay beside the day’s ledger entries. {given_name} watched the youngest members of the line dip sweet lotus-seed cakes into their cups, their fingers already displaying the firm, steady grip of trained gymnasts. The legacy of the {family_name} line was no longer merely about physical survival; it was tasted in the rich, sweet rewards of a respected middle-class household.",
+        "As the final tea leaves settled to the bottom of the porcelain cups, the path forward lay clear. They had carved a name into the stone of the city with nothing but disciplined muscle, clean living, and an unyielding posture. The next generation would step onto a training floor that was fully their own, carrying a reputation that was known, feared, and deeply respected across the coast."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We toast to the strength of our bodies and the enduring honor of our family line."
+          ],
+          "choice": {
+            "text": "Commit to maintaining the rigorous physical standards of the family.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "legacy_strength"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We toast to the wealth and influence we have won, which will shield our descendants from the hardships of the past."
+          ],
+          "choice": {
+            "text": "Commit to using our athletic prestige to secure broader social influence.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": 0,
+              "power": 2,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "legacy_influence"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:athletic:middle:t4:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of wintergreen oil and pungent liniment hung heavy in the high-raftered training hall, mingling with the salt air drifting through the tall bay windows from the harbor. Beneath the vaulted ceiling of the {surname} International Academy, several dozen young athletes moved in rhythmic unison, their cotton shoes squeaking softly on the polished hardwood. {given_name} {surname} stood on the observation balcony, breathing in that familiar, sharp perfume of physical exertion, dry canvas, and the sweet herbal tea brewing in the corner. It was a smell that had followed the family from the cramped dockside cellars of their arrival to this grand, multi-tiered complex overlooking the shipping lanes.",
+        "Down on the floor, the senior instructors—many of them cousins and nieces bearing the same lean, upright posture—guided students of half a dozen nationalities through the rigorous physical forms that had once been kept as closely guarded secrets. Now, those movements were the foundation of a global physical culture movement. The family had taken the discipline of survival and forged it into an exportable science of the body, turning athletic prowess into a currency that bypassed the old treaties and exclusive gentlemen's clubs.",
+        "A servant brought a tray containing the morning post: letters from affiliate academies in Honolulu, Shanghai, and Vancouver, each bearing the distinctive red seal of the {surname} Association. The line had become more than a family; it was a physical network spanning the Pacific, a human bridge built on the sheer endurance of disciplined flesh. Yet, as {given_name} broke the wax of the topmost letter, the scent of the ink brought a sudden reminder of the political currents that sought to box them in."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We can secure our position by funding the national athletic delegations, ensuring our methods are adopted by the rising state ministries."
+          ],
+          "choice": {
+            "text": "Lean into official state sponsorship to institutionalize the family's techniques.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "tradition": -1,
+              "reach": 2
+            },
+            "setFlags": [
+              "state_athletic_alliance"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Alternatively, we should keep our distance from government inspectors and double down on our independent commercial franchises."
+          ],
+          "choice": {
+            "text": "Maintain absolute operational autonomy through a private franchise model.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": -1,
+              "tradition": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "private_academy_autonomy"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t4:rising"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t4:rising",
+      "sense": "touch",
+      "prose": [
+        "The cold, unyielding weight of the iron barbell settled across {given_name}'s shoulders, the cross-hatched steel knurling biting deeply into the calloused skin of their upper back. Each breath was a calculated expansion of the ribs against a heavy canvas lifting belt. To understand power, the {surname} line had always taught that one must first feel its physical weight, learning exactly where the bone must lock and where the muscle must yield. As {given_name} descended into a deep squat, the pressure in their temples throbbed in time with the ocean waves crashing against the seawall outside.",
+        "A delegation from the regional athletic commission stood nearby, their wool suits smelling of damp rain, their polished leather boots clicking impatiently on the rubber mats. They brought with them new, standardized rulebooks from the international governing bodies—proposals designed to outlaw the family's signature breathing exercises and joint-locking techniques in official competition, labeling them 'unorthodox and hazardous.' One commissioner reached out to touch a wooden training dummy, his soft, pink fingers tracing the smooth, sweat-darkened grain with a mixture of condescension and curiosity.",
+        "\"The world is unifying its standards,\" the lead commissioner remarked, his voice smooth and dry. \"If your people wish to compete on the grandest stages, you must trim away these... archaic folk traditions. We require a uniform athlete for a uniform century.\" {given_name} slowly stood up, letting the heavy iron bar clatter back onto its brass hooks with a resonant, vibrating ring that shook the dust from the rafters. The physical reality of their hard-won prestige was being challenged by men who had never earned a single callus."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We might concede some minor stylistic points to ensure our athletes dominate the upcoming global games."
+          ],
+          "choice": {
+            "text": "Formally adapt the curriculum to meet the Western commission's strict standards.",
+            "motivatorShift": {
+              "honor": 1,
+              "tradition": -2,
+              "reach": 2,
+              "politics": 1
+            },
+            "setFlags": [
+              "conformed_curriculum"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Or we can stand firm, refusing to alter a single movement, forcing them to either accept us whole or bar the world's most popular athletes."
+          ],
+          "choice": {
+            "text": "Reject the regulations, preserving the purity of the family's physical heritage.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 2,
+              "reach": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "uncompromising_heritage"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How will the family address the foreign training methods currently gaining popularity among the younger instructors?",
+        "options": [
+          {
+            "text": "Incorporate the Western scientific training methods into the curriculum, blending them with traditional forms.",
+            "motivatorShift": {
+              "worldview": 2,
+              "tradition": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "hybrid_training"
+            ]
+          },
+          {
+            "text": "Ban the foreign equipment and methods from the main halls, preserving the classic training regimen.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "classic_only"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t4:midpoint"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t4:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The noise inside the metropolitan arena was a living thing, a deafening roar of brass bands, stomping feet, and the rhythmic, booming chants of thousands of spectators. {given_name} sat in the family box, listening to the cacophony of the crowd. This was the first international exhibition match held on their home turf, and the air vibrated with the collective tension of a turning point. Every shout from the rafters, every sharp blast of the referee's whistle, echoed off the steel-beamed roof, carrying the weight of a cultural struggle fought in three-minute rounds.",
+        "In the center ring, a young {surname} cousin was matched against a celebrated champion from a rival European gymnastic dynasty. The sounds of their contest were sharp and visceral: the dry slap of bare feet on canvas, the heavy, ragged gasps for air, and the sudden, explosive crack of bone against muscle. The rival dynasty represented the old, rigid style of military drilling—stiff, precise, and backed by imperial wealth. The {surname} style was fluid, deceptive, and explosive, born from decades of adaptive survival on the margins of great ports.",
+        "As the round drew to a close, a representative from an international newspaper syndicate slipped into the back of the box, his voice a low, gravelly whisper beneath the din of the crowd. He offered {given_name} a proposition: a syndicated media campaign that could turn their family's top fighters into global celebrities, or, should they refuse to cooperate with his terms, paint their techniques as dangerous, foreign street-fighting. The sound of the crowd swelled to a crescendo as the referee raised his hand to signal a crucial point."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We must control the narrative ourselves, even if it means partnering with sensationalist foreign press barons."
+          ],
+          "choice": {
+            "text": "Sign the media syndicate deal to secure global publicity for the family.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 2,
+              "honor": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "syndicated_celebrity"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We will rely on the clean, undeniable truth of our victories in the ring, refusing to turn our discipline into a circus."
+          ],
+          "choice": {
+            "text": "Reject the media mogul's terms and let the physical triumphs speak for themselves.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 1,
+              "wealth": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "pure_athletic_merit"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t4:turn"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t4:turn",
+      "sense": "sight",
+      "prose": [
+        "From the high window of the executive boardroom, the city appeared as a vast, glittering grid of electric lights, stretching out toward the dark, ship-speckled expanse of the harbor. {given_name} looked down at the blueprints spread across the long mahogany table. They detailed the construction of the 'Pacific Coliseum'—a massive, state-of-the-art sports complex that would serve as the permanent headquarters for their international athletic empire. It was a vision of steel, glass, and concrete, a physical monument to the {surname} name that would dominate the skyline.",
+        "Beside the architectural plans lay three separate contracts, each representing a radically different path for the family's future. The first was a government charter, offering state protection and national prestige in exchange for military training exclusivity. The second was an investment portfolio from a consortium of industrial titans, looking to turn their physical training into a standardized, mass-market workers' fitness program. The third was a treaty of alliance with traditional clans back across the ocean, aiming to use the family's wealth to fund academies that would preserve their heritage in its purest, most revolutionary form.",
+        "The light of the desk lamp caught the gold leaf on the letterheads, illuminating the choice that would define the line's ascension. For generations, they had run, jumped, and fought to prove they belonged. Now, they were no longer guests in this country or outsiders in the global order; they were the ones designing the arena in which the next century would play out. {given_name} picked up the heavy ink pen, its black tip gleaming like a dark eye under the electric glare."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The pen felt heavy in their hand as they considered the sheer scale of the destiny they were about to ink."
+          ],
+          "choice": {
+            "text": "Sign the document that will forever bind the family to the global stage.",
+            "motivatorShift": {
+              "reach": 2,
+              "power": 2,
+              "wealth": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "global_destiny_signed"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "They paused, realizing that a single stroke of the pen could either preserve their soul or turn their ancestors' sweat into mere corporate grease."
+          ],
+          "choice": {
+            "text": "Delay the signing to renegotiate terms that protect the family's absolute sovereignty.",
+            "motivatorShift": {
+              "lineage": 2,
+              "honor": 1,
+              "wealth": -1,
+              "politics": 1
+            },
+            "setFlags": [
+              "sovereign_negotiations"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "Which path will the {surname} line choose to secure their global athletic ascension?",
+        "options": [
+          {
+            "text": "The Imperial Charter: Ally with the state to train the nation's military and Olympic elites, securing unmatched political power.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 3,
+              "wealth": 1,
+              "tradition": -2
+            },
+            "setFlags": [
+              "path_imperial_charter"
+            ]
+          },
+          {
+            "text": "The Industrial Syndicate: Partner with corporate giants to turn the training into a global commercial fitness franchise, maximizing wealth and reach.",
+            "motivatorShift": {
+              "wealth": 3,
+              "reach": 3,
+              "power": 1,
+              "lineage": -1
+            },
+            "setFlags": [
+              "path_industrial_syndicate"
+            ]
+          },
+          {
+            "text": "The Traditional Clan Alliance: Reject state and corporate control, funding a sovereign network of traditional academies across the diaspora.",
+            "motivatorShift": {
+              "tradition": 3,
+              "lineage": 3,
+              "honor": 2,
+              "wealth": -2
+            },
+            "setFlags": [
+              "path_clan_alliance"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t4:close"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t4:close",
+      "sense": "taste",
+      "prose": [
+        "The celebration banquet was winding down, leaving the lingering taste of roasted chestnuts, bitter orange peel, and the deep, smoky warmth of aged sorghum liquor on {given_name}'s tongue. In the private dining room above the newly inaugurated Pacific Coliseum, the air was warm and thick with the laughter of three generations of the {surname} family. Outside, the city streets were quiet, but the physical empire they had built was humming with silent, unstoppable momentum.",
+        "{given_name} looked across the table at their chosen heir, who was listening intently to an old uncle tell stories of the early, lean days when a bowl of rice and some salt pork were the only rewards for a day of brutal training on the docks. That raw hunger had been transformed. Today, the heir would inherit not a struggle for survival, but a global network of muscle, prestige, and influence—an empire built on the perfect coordination of mind and body.",
+        "Lifting their small porcelain cup, {given_name} caught the eye of the younger leader. The sorghum liquor burned clean and hot down their throat, a sharp reminder of the fire that had tempered their line through decades of migration, labor, and triumph. They handed the heavy leather-bound ledger of the academy network to the next generation, knowing that the physical destiny of their people was now firmly written into the stone of the world."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "With this final toast, the transition was complete, the legacy secured for the generations yet to come."
+          ],
+          "choice": {
+            "text": "Pass the physical and financial keys of the empire to the new generation.",
+            "motivatorShift": {
+              "lineage": 3,
+              "reach": 2,
+              "honor": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "t4_ascension_complete"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "They whispered a final piece of ancestral advice into the heir's ear, ensuring the spiritual core of their physical discipline would never be lost to the machine of their success."
+          ],
+          "choice": {
+            "text": "Impart the secret family philosophy before stepping back from active rule.",
+            "motivatorShift": {
+              "tradition": 3,
+              "worldview": 2,
+              "lineage": 2,
+              "power": -1
+            },
+            "setFlags": [
+              "esoteric_philosophy_preserved"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:athletic:middle:t5:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of the training deck was an uncompromising mixture of hot circuit boards, copper-tinged sweat, and the sharp, medicinal tang of warming oil rubbed into weary shoulders. For generations, the {family_name} name had been synonymous with physical resilience, but here, in the pressurized atmosphere of the orbital staging platform, that endurance was tested against the cold physics of the void. Old dried ginger root, smuggled past the bio-security scans of the lower docks, simmered in a tiny electric cooker in the corner, its pungent aroma fighting the sterilized breeze of the ventilation scrubbers.",
+        "Through the reinforced floorboards, the low-frequency hum of the magnetic propulsion rings vibrated through the soles of {given_name}'s shoes. It was a sensory reminder that they were no longer bound by the heavy mud of their ancestors' valley, yet the discipline of the body remained their only true currency. The air was thin, metered by corporate algorithms, but within this chamber, the family breathed in the scent of their own defiance—an athletic legacy transformed into the very kinetic energy required to leap between the stars.",
+        "As {given_name} wrapped the linen bands around calloused knuckles, the familiar odor of the old-world hemp fiber brought back memories of gymnasium floors on Earth. The transition to low-gravity gymnastics and high-impulse maneuvering had not softened them; it had merely refined their movements into something lethal, precise, and breathtakingly efficient. The frontier did not want scholars or poets; it wanted bodies that could withstand five gravities of acceleration without a single vessel bursting in the brain."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "With a final tightening of the wraps, {given_name} stepped toward the high-velocity ring, determined to prove that the old ways still held under the light of new suns."
+          ],
+          "choice": {
+            "text": "Lean heavily into traditional forms and breathing exercises to master the low-G jump.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": -1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "traditional_low_g"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Dismissing the old-world forms, {given_name} adjusted the pneumatic leg braces, eager to embrace the synthetic augmentations of the orbital elite."
+          ],
+          "choice": {
+            "text": "Prioritize the mechanical enhancements of the modern spacers.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "augmented_low_g"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t5:rising"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t5:rising",
+      "sense": "touch",
+      "prose": [
+        "The cool, unyielding texture of the synthetic carbon-fiber harness bit into the flesh of {given_name}'s collarbones as the centrifuge spun upward. Each revolution brought a crushing pressure, a tactile weight that sought to flatten the lungs and stall the heartbeat. It was a mock descent into a heavy-gravity world, a test that many wealthy passengers paid thousands of credits to avoid by staying in luxury liners, but for the athletic pioneers of the {family_name} line, this bruising embrace was the very price of entry to the outer rim.",
+        "Between the rapid pulses of G-force, there was the smooth, polished surface of the control grips, cold and damp with the sweat of intense concentration. The hands of {given_name}'s parents had held oars, plowshares, and parallel bars; now, those same muscular palms gripped the navigation yolks of a stellar transit shuttle. Every twitch of the muscle fibers was translated into micro-thrusts, a delicate dance of mass and momentum where a single millimeter of error meant spinning into the vacuum.",
+        "A sudden tremor shook the centrifuge, a mechanical shuttering that vibrated directly through the spine. It was a test of nerve as much as muscle—the harsh friction of humanity's expansion grinding against the limits of their metal hulls. {given_name} could feel the subtle shifts in the machine's joints, diagnosing the wear and tear of the seals through the soles of the feet, a sensory kinship with machinery that only a lifetime of physical focus could cultivate."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "By tuning the mind to the physical frequency of the machinery, {given_name} executed a flawless recovery without relying on the automated safety overrides."
+          ],
+          "choice": {
+            "text": "Rely on pure sensory intuition to stabilize the spinning capsule.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": -1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "instinctive_pilot"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "With a quick flick of the wrist, {given_name} engaged the system's experimental thruster thrashing, overriding the physical warnings to achieve a record-breaking speed."
+          ],
+          "choice": {
+            "text": "Push the experimental engines beyond the safety margins to secure a stellar contract.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "daring_pilot"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "An offer comes from a logistics conglomerate to sponsor the family's kinetic training academy in exchange for exclusive piloting rights on dangerous asteroid-belt runs.",
+        "options": [
+          {
+            "text": "Accept the corporate sponsorship, securing the family's wealth at the cost of their operational independence.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "corporate_contract"
+            ]
+          },
+          {
+            "text": "Refuse the corporate leash, choosing to fund the academy through independent, high-risk deep-space exploration.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "independent_frontier"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t5:midpoint"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t5:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The hangar bay was an echo chamber of industrial ambition, filled with the pneumatic hiss of docking clamps releasing and the deep, sub-bass rumble of reactor cores warming up. Above this metallic symphony rose the sharp, rhythmic *clack-clack-clack* of shuttle tiles being inspected by hand—a sound that {given_name} knew by heart. It was the music of progress, but today, it was interrupted by the clipped, aristocratic tones of a rival dynasty's representative, whose voice carried the weight of old-world titles and inherited billions.",
+        "This rival, a scion of a terrestrial banking cartel, argued with the harbor master over berth allocations, their soft, unhurried speech contrasting sharply with the loud, physical declarations of the {family_name} pilots working nearby. The elite of Earth brought their lawyers and contracts to the stars, but the {family_name} clan had brought their bodies, their stamina, and the raw kinetic competence that kept these very stations running. The verbal fencing between the two factions was a clash of two entirely different philosophies of survival.",
+        "As the argument intensified, the sound of a sudden high-pressure leak hissed from the adjacent fueling line, its shrill whistle threatening to panic the nearby laborers. While the rival scion stepped back, protected by bodyguards whose boots clicked uselessly on the metal grates, {given_name} moved without thinking, the physical training of a lifetime translating into a swift, silent sprint toward the emergency shut-off valve before the disaster could deafen them all."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The sudden silence that followed the valve's closure was broken only by the sound of {given_name}'s steady, controlled breathing, a testament to the family's athletic composure under pressure."
+          ],
+          "choice": {
+            "text": "Use the moment to publicly humiliate the hesitant terrestrial elites.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 2,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "rivalry_escalated"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "With quiet modesty, {given_name} stepped back into the shadows of the dock, letting the deed speak for itself without demanding credit or accolades."
+          ],
+          "choice": {
+            "text": "Maintain the quiet dignity of the athletic tradition, ignoring the rivals.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": -1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "quiet_dignity"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t5:turn"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t5:turn",
+      "sense": "sight",
+      "prose": [
+        "Through the massive quartz observation dome, the cosmos did not look like a void; it looked like a canvas of endless, brilliant potential. The cold light of distant stars glinted off the solar sails of the outward-bound colony ships, their immense structures looking like delicate glass needles threading the dark. Below them, the curved limb of the blue world they had left behind was a reminder of where the {family_name} journey had begun, a tiny, crowded sphere where physical space was once a luxury reserved for the few.",
+        "In the foreground, the glowing holographic schematics of the new Mars-Jupiter transit lane flickered across {given_name}'s retinas. It was a massive, daunting map of kinetic pathways, gravitational slingshots, and high-velocity deceleration zones. The physical demand of charting these routes would fall squarely on the shoulders of the pilots who could survive the intense forces of the journey. The family stood at a crossroads: they could remain the physical backbone of the inner-system docks, or they could risk everything to become the navigators of the deep void.",
+        "The light of the terminal illuminated the faces of the gathered clan—rugged, strong-jawed, with eyes that had seen the high peaks of the old world and now looked upon the deep rifts of the cosmos. The decision was not merely about where to fly, but how their descendants would live. Would they be the laborers of another's empire, or would they establish their own sovereign foothold among the moons of the giants?"
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Staring into the glare of the distant gas giants, {given_name} knew that only by claiming the hardiest, most distant routes could the family truly escape the shadow of old-world authority."
+          ],
+          "choice": {
+            "text": "Commit the family to the grueling, deep-space exploration of the outer solar system.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": -1,
+              "worldview": 2,
+              "power": 2,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "outer_rim_pioneers"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Focusing on the brilliant, neon-lit orbital hubs of the inner system, {given_name} argued that consolidating their power and athletic academies in the centers of commerce was the safest path to true dominance."
+          ],
+          "choice": {
+            "text": "Establish the family as the premier athletic and security dynasty of the orbital hubs.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": -1,
+              "power": 2,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "orbital_hub_masters"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The construction of the great generational starship is complete, and the charter offers the {family_name} line a pivotal role. How does the family invest its kinetic legacy into this monumental leap?",
+        "options": [
+          {
+            "text": "Command the navigation and piloting division, steering the great vessel through the physical perils of interstellar space.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": 1,
+              "power": 3,
+              "tradition": -1,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "starship_commanders"
+            ]
+          },
+          {
+            "text": "Lead the physical training and gravitational adaptation program, ensuring the colonists' bodies do not wither during the centuries-long journey.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 3,
+              "reach": 2
+            },
+            "setFlags": [
+              "keepers_of_the_body"
+            ]
+          },
+          {
+            "text": "Seize the heavy industrial construction contracts, using the family's physical resilience to build the hull and mechanics of the ship itself.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": -1,
+              "power": 2,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "void_builders"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t5:close"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t5:close",
+      "sense": "taste",
+      "prose": [
+        "The celebration was marked by the dry, mineral taste of synthetic nutrient paste, creatively sweetened with the preserved rind of dry citrus fruit from the hydroponic bays. To wash it down, there was a small, treasured cup of heavy rice wine, distilled in the low-gravity laboratories—a liquid that sat thick and warm on the tongue, tasting of fermented memory and the ancient earth. It was a modest feast, but to the {family_name} clan, it tasted like the ultimate victory.",
+        "As {given_name} passed the cup to the youngest heir, the metallic tang of the station's recycled water remained a faint, constant aftertaste. It was the flavor of their new existence, a constant reminder that the air they breathed and the water they drank were earned by the sweat of their brows and the strength of their sinews. They had not merely survived the transition to the stars; they had mastered it, turning their middle-class athletic discipline into the very foundation of the new stellar migration.",
+        "The toast was quiet, spoken in the low, rhythmic dialect of their ancestors, yet its meaning was carried into the infinite void outside the ports. The heir took a sip, their young eyes reflecting the cold glare of the stars they would one day explore. The foothold was secure; the physical legacy of the {family_name} line was now permanently etched into the mechanics of the heavens, a kinetic dynasty that would never again be bound by the gravity of Earth."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "With the warm flavor of the rice wine still lingering, {given_name} handed the family's flight log to the heir, sealing their commitment to the deep frontier."
+          ],
+          "choice": {
+            "text": "Pass down the legacy of physical grit and deep-space pioneering to the next generation.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 2,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 3,
+              "reach": 3
+            },
+            "setFlags": [
+              "legacy_of_the_void"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Pouring the remaining drops into the hydroponic soil, {given_name} whispered a final prayer of gratitude to the Earth, ensuring the heir would never forget the soil that bore them."
+          ],
+          "choice": {
+            "text": "Consolidate the ancestral memory as the guiding compass for their stellar future.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 3,
+              "honor": 3,
+              "lineage": 3,
+              "reach": 1
+            },
+            "setFlags": [
+              "legacy_of_the_earth"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:chinese:athletic:middle:t2:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of cheap sulfur matches and boiled cabbage had finally faded, replaced by the sharper, clean bite of eucalyptus oil, camphor, and the heavy beeswax used to polish the dark hardwood floor of the new gym. This was the scent of a family rising, leaving behind the damp floorboards of the tenements for a space of high ceilings and clean light. Here, the air carried the rich, roasting aroma of duck from the market downstairs, mingling with the bitter, herbaceous steam of medicinal liniments simmering in the back room.",
+        "To stand at the center of this hall was to breathe in the hard-won prosperity of the {family_name} name. The old world was present in the drying herbs and the dry, flinty smell of the stone weights lining the walls, but the new world was asserting itself in the crisp scent of laundered white shirts and the sweet vanilla of refined sugar loaves sitting on the side table. It was the scent of bodies that no longer broke themselves for daily wages, but trained for a deeper, more lasting strength."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You inhale the sharp scent of the herbal liniment, remembering the long road from the docks to this polished floor."
+          ],
+          "choice": {
+            "text": "Lean heavily into the traditional training styles to honor the ancestors.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": -1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "t2_focus_tradition"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The smell of the roasted duck downstairs reminds you that commercial success is what keeps this gym alive."
+          ],
+          "choice": {
+            "text": "Integrate Western athletic techniques to appeal to a broader, paying clientele.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "t2_focus_modern"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t2:rising"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t2:rising",
+      "sense": "touch",
+      "prose": [
+        "Your fingers trace the cold, rough surface of the heavy stone lock used for strength training, its iron handle worn smooth by the calloused hands of three generations. Underneath that rough exterior, your skin feels the contrast of the fine silk sash around your waist—a mark of the middle-class comfort you now command. A younger cousin approaches, his skin hot and slick with sweat, seeking your guidance on a technique that has caused tension with the neighborhood's elder masters.",
+        "The boy's grip on your forearm is tight and desperate; he wants to join the public matches hosted by the city's municipal athletic club, an institution that has long excluded your kind but is now cautiously opening its doors to the most exceptional talents. To touch the smooth, printed card of the invitation is to feel the thin, fragile edge of acceptance, a prize that might require bending the knee to rules you did not write."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Your calloused palms press flat against his shoulders, steadying his nervous trembling."
+          ],
+          "choice": {
+            "text": "Instruct him to compete under their rules, proving your physical superiority on their terms.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": 1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "t2_join_municipal"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You gently push the printed card away, feeling the heavy fabric of his traditional sash instead."
+          ],
+          "choice": {
+            "text": "Refuse the invitation, focusing on building an independent league within your own community.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -1,
+              "worldview": -1,
+              "power": 2,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "t2_build_independent"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How will the {family_name} gym address the younger generation's desire for mainstream recognition?",
+        "options": [
+          {
+            "text": "Encourage them to master Western sports to challenge the city's elites directly.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": 2,
+              "power": 1,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "t2_path_westernized"
+            ]
+          },
+          {
+            "text": "Double down on traditional martial disciplines, making the gym a sanctuary of heritage.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -2,
+              "worldview": -2,
+              "power": 2,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -2
+            },
+            "setFlags": [
+              "t2_path_traditionalist"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t2:midpoint"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t2:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The gym is alive with the rhythmic, dull thud of bare feet striking canvas, punctuated by the sharp, explosive grunts of young men throwing their weight into their strikes. Outside, the street noises of the growing quarter rise up to meet them: the iron-rimmed wheels of delivery wagons rattling over cobblestones, the high-pitched cries of fishmongers, and the deep, brassy clanging of the streetcars. This clamor is the heartbeat of a community that has found its footing and is now pushing outward.",
+        "In the midst of this symphony of progress, a new sound enters the hall—the heavy, rhythmic thumping of leather-soled boots belonging to a rival family's delegation. Their footsteps are measured, deliberate, and carry the weight of old-world authority. Their leader speaks in a low, resonant baritone, offering a partnership that could secure the {family_name} legacy but might also bind your fortunes to their shadowy political entanglements."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You listen closely to the steady rhythm of their boots, hearing the underlying power they represent."
+          ],
+          "choice": {
+            "text": "Accept the alliance, merging your athletic prestige with their political muscle.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 3,
+              "worldview": 1,
+              "power": 3,
+              "tradition": 1,
+              "honor": -1,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "t2_alliance_political"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The sharp sound of your students' training strikes drowns out the visitor's smooth proposal."
+          ],
+          "choice": {
+            "text": "Politely decline, keeping your gym's reputation clean of their political squabbles.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -2,
+              "worldview": 2,
+              "power": -1,
+              "tradition": 1,
+              "honor": 3,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "t2_alliance_declined"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t2:turn"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t2:turn",
+      "sense": "sight",
+      "prose": [
+        "Looking out from the arched windows of the gym, the city presents a vast, sprawling canvas of gray slate roofs, brick chimneys pouring black smoke, and the gleaming curve of the river. Down below, the banners of the various immigrant associations flutter in the wind, a vibrant patchwork of red, gold, and green. It is a visual testament to the sheer scale of the community your family helped plant here, a community that now looks to the {family_name} line for leadership.",
+        "A crowd has gathered in the square below, their faces upturned as they watch your pupils demonstrate their forms on an elevated wooden stage. The local magistrate is there too, his dark wool coat a stark contrast to the bright silks of the community leaders. He is watching with a keen, calculating eye, weighing whether to view your growing athletic guild as a force for civic order or a potential threat to the city's established institutions."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You watch the magistrate's hand drift toward his pocket, realizing the power of his official nod."
+          ],
+          "choice": {
+            "text": "Present the gym as a patriotic civic club to win municipal funding and legitimacy.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 3,
+              "worldview": 1,
+              "power": 2,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "t2_civic_integration"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your eyes focus instead on the red and gold banners of your own people, standing proud against the gray sky."
+          ],
+          "choice": {
+            "text": "Keep the guild's focus entirely internal, building a self-reliant defensive league.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -2,
+              "worldview": -1,
+              "power": 3,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "t2_defensive_league"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {family_name} line use its athletic dominance to secure its place in the city's future?",
+        "options": [
+          {
+            "text": "Incorporate the guild as a commercial athletic association, targeting the city's rising middle class.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": 2,
+              "power": 2,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "t2_end_commercial"
+            ]
+          },
+          {
+            "text": "Form an alliance with local labor unions, using your athletes as the physical shield of the working class.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 3,
+              "worldview": 1,
+              "power": 3,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "t2_end_union"
+            ]
+          },
+          {
+            "text": "Establish a private academy, reserving your techniques and power strictly for those of true lineage.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": -1,
+              "worldview": -2,
+              "power": 2,
+              "tradition": 3,
+              "honor": 3,
+              "lineage": 3,
+              "reach": -2
+            },
+            "setFlags": [
+              "t2_end_exclusive"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:chinese:athletic:middle:t2:close"
+    },
+    {
+      "id": "act:chinese:athletic:middle:t2:close",
+      "sense": "taste",
+      "prose": [
+        "The celebration feast leaves the rich, lingering taste of roasted pork belly and sweet plum sauce on your tongue, washed down with cups of dark, smokey oolong tea. It is a taste of achievement, far removed from the watery congee of your early days in this city. Every dish served tonight is a testament to the connections you have forged, the physical mastery you have proven, and the capital that now flows steadily into the {family_name} coffers.",
+        "As you pour a cup of tea for your heir, the bitterness of the brew is clean and restorative. You are passing down more than just a gym; you are passing down a network of allies, a respected name, and a disciplined physical heritage that has weathered the city's harshest seasons. The young one drinks, accepting the legacy with a solemn nod, ready to carry the strength of the line into the challenges of the next era."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The sweet taste of the plum sauce lingers, a promise of the prosperous future you have built."
+          ],
+          "choice": {
+            "text": "Counsel your heir to focus on wealth and the consolidation of your holdings.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "t2_heir_focus_wealth"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The bitter tea grounds remind you of the discipline required to maintain this station."
+          ],
+          "choice": {
+            "text": "Counsel your heir to prioritize honor and the preservation of the family's physical traditions.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": -1,
+              "power": 2,
+              "tradition": 3,
+              "honor": 3,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "t2_heir_focus_tradition"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}

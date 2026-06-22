@@ -1,0 +1,2209 @@
+{
+  "acts": [
+    {
+      "id": "act:ireland:religious:middle:t0",
+      "wave": "ireland",
+      "archetype": "religious",
+      "cls": "middle",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — The Steadfast Hearth",
+      "scenes": [
+        "act:ireland:religious:middle:t0:open",
+        "act:ireland:religious:middle:t0:rising",
+        "act:ireland:religious:middle:t0:midpoint",
+        "act:ireland:religious:middle:t0:turn",
+        "act:ireland:religious:middle:t0:close"
+      ]
+    },
+    {
+      "id": "act:ireland:religious:middle:t1",
+      "wave": "ireland",
+      "archetype": "religious",
+      "cls": "middle",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — The Lord's Acre and the Lineage",
+      "scenes": [
+        "act:ireland:religious:middle:t1:open",
+        "act:ireland:religious:middle:t1:rising",
+        "act:ireland:religious:middle:t1:midpoint",
+        "act:ireland:religious:middle:t1:turn",
+        "act:ireland:religious:middle:t1:close"
+      ]
+    },
+    {
+      "id": "act:ireland:religious:middle:t2",
+      "wave": "ireland",
+      "archetype": "religious",
+      "cls": "middle",
+      "tier": 2,
+      "macroAct": "emergence",
+      "title": "Act III — The Parish Ascendant",
+      "scenes": [
+        "act:ireland:religious:middle:t2:open",
+        "act:ireland:religious:middle:t2:rising",
+        "act:ireland:religious:middle:t2:midpoint",
+        "act:ireland:religious:middle:t2:turn",
+        "act:ireland:religious:middle:t2:close"
+      ]
+    },
+    {
+      "id": "act:ireland:religious:middle:t3",
+      "wave": "ireland",
+      "archetype": "religious",
+      "cls": "middle",
+      "tier": 3,
+      "macroAct": "emergence",
+      "title": "Act IV — The Steeple's Reach",
+      "scenes": [
+        "act:ireland:religious:middle:t3:open",
+        "act:ireland:religious:middle:t3:rising",
+        "act:ireland:religious:middle:t3:midpoint",
+        "act:ireland:religious:middle:t3:turn",
+        "act:ireland:religious:middle:t3:close"
+      ]
+    },
+    {
+      "id": "act:ireland:religious:middle:t4",
+      "wave": "ireland",
+      "archetype": "religious",
+      "cls": "middle",
+      "tier": 4,
+      "macroAct": "ascension",
+      "title": "Act V — The Consecration of Reach",
+      "scenes": [
+        "act:ireland:religious:middle:t4:open",
+        "act:ireland:religious:middle:t4:rising",
+        "act:ireland:religious:middle:t4:midpoint",
+        "act:ireland:religious:middle:t4:turn",
+        "act:ireland:religious:middle:t4:close"
+      ]
+    },
+    {
+      "id": "act:ireland:religious:middle:t5",
+      "wave": "ireland",
+      "archetype": "religious",
+      "cls": "middle",
+      "tier": 5,
+      "macroAct": "ascension",
+      "title": "Act VI — A Firmament of Faith",
+      "scenes": [
+        "act:ireland:religious:middle:t5:open",
+        "act:ireland:religious:middle:t5:rising",
+        "act:ireland:religious:middle:t5:midpoint",
+        "act:ireland:religious:middle:t5:turn",
+        "act:ireland:religious:middle:t5:close"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "act:ireland:religious:middle:t0:open",
+      "sense": "smell",
+      "prose": [
+        "The stench of the ship still clung to your clothes, a persistent, cloying dampness that mingled now with the sharp, acrid tang of coal smoke and the unfamiliar, sweet decay of the docks. It was a smell of a thousand journeys, of crowded holds and seasick passengers, now overlaid with the breath of this new land.  Around you, the air vibrated with the unfamiliar aromas of industry – rendering fats, brewing coffee, and the faint, underlying scent of poverty: unwashed bodies and stale bread.",
+        "Inside the tenement room, a different constellation of odors met the nostrils: the reassuring, earthy scent of boiling potatoes, the faint spice of cabbage, and the pervasive mustiness of old wood and worn linen.  It was a humble sanctuary, yet within its walls, the familiar aroma of peat smoke, imagined from far-off hearths, seemed to linger, a phantom comfort against the pervasive newness.  The scent of incense, though not present, felt imprinted in the very fibers of {full_name}'s being, a memory of Sunday mornings that no ocean could wash away.",
+        "Beyond the window, the city exhaled a complex perfume of hope and hardship. You could discern the metallic scent of rain on cobblestones, the fresh, crisp promise of autumn leaves beginning to turn in a distant park, and the ever-present, grimy odor of horse-drawn carts struggling up the street. Each breath was a lesson, a visceral mapping of this new reality, charting the course from the cramped, unholy air of the crossing to the uncertain but vital atmosphere of the nascent ward."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You decide to focus on securing a steady supply of basic provisions, believing a full stomach is the first step toward spiritual peace."
+          ],
+          "choice": {
+            "text": "Seek out work that provides reliable food and shelter, prioritizing the immediate welfare of the family.",
+            "motivatorShift": {
+              "wealth": 1,
+              "worldview": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "prioritize_material_needs"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your impulse is to find a place of worship first, seeking solace and community in shared prayer amidst the disorienting newness."
+          ],
+          "choice": {
+            "text": "Locate the nearest parish, seeking out the comforting rituals of faith and the fellowship of fellow parishioners.",
+            "motivatorShift": {
+              "tradition": 1,
+              "worldview": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "prioritize_spiritual_needs"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t0:rising"
+    },
+    {
+      "id": "act:ireland:religious:middle:t0:rising",
+      "sense": "touch",
+      "prose": [
+        "The relentless chill of the tenement seeped through the thin walls, an insistent reminder of the raw, unyielding nature of this new life. Your fingers often felt numb, calloused from scrubbing floors or hauling crates, the work a constant, grinding pressure against your bones. Each night, the exhaustion was a heavy cloak, wrapping around your limbs, yet the need for warmth – the shared body heat under threadbare blankets – was a small, comforting anchor in the vast, cold sea of uncertainty.",
+        "The touch of the rough wool of your Sunday coat, carefully preserved, was a physical connection to the life left behind, a tangible thread of tradition. Yet, the coarser, factory-spun fabrics of your daily attire spoke of practicality, of necessity. The tremor in a child's hand when they clutched yours in the crowded street, or the firm, reassuring grip of your spouse’s hand during evening prayers, were small, precious moments of shared endurance, a silent communion against the encroaching anxiety.",
+        "Outside, the city’s surfaces felt abrasive: the cold, unyielding stone of the pavements, the splintered wood of temporary stalls, the accidental brush of strangers in the market, each contact a small jolt of unfamiliarity. Yet, there were moments of soft relief – the smooth worn wood of a church pew, the warmth of a freshly baked loaf grasped in your hands. These tactile experiences etched themselves into memory, forming the texture of your survival, a testament to the daily struggle and the small, hard-won comforts."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You feel compelled to contribute to the community's immediate needs, sharing what little you have even as your own family struggles."
+          ],
+          "choice": {
+            "text": "Offer a portion of your meager provisions to a struggling neighbor, believing in shared burdens.",
+            "motivatorShift": {
+              "worldview": 1,
+              "honor": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "community_charity"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The prudent instinct to secure your own family’s foundation overrides other considerations; charity begins at home."
+          ],
+          "choice": {
+            "text": "Focus resources on your own household, ensuring your children have enough to eat and a roof over their heads.",
+            "motivatorShift": {
+              "wealth": 1,
+              "lineage": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "family_first"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A young family in the next apartment has fallen ill, their father unable to work. How do you respond to their plight?",
+        "options": [
+          {
+            "text": "Organize a small collection among neighbors, pooling what little everyone has to offer support.",
+            "motivatorShift": {
+              "worldview": 2,
+              "honor": 1,
+              "reach": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "community_support_active"
+            ]
+          },
+          {
+            "text": "Offer what help you can personally, but advise them to seek assistance from existing charities or the local parish.",
+            "motivatorShift": {
+              "tradition": 1,
+              "lineage": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "rely_on_institutions"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t0:midpoint"
+    },
+    {
+      "id": "act:ireland:religious:middle:t0:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cacophony of the ward was a constant hum, a symphony of resilience and struggle. Early mornings brought the clatter of milk carts over cobblestones, followed by the cries of hawkers pushing their wares – \"Fresh fish!\" \"Hot bread!\" – their voices cutting through the dense air. Interspersed with these were the deeper, more unsettling sounds of the wider city: the shrill whistle of factory steam, the distant roar of trains, and the clipped, unfamiliar accents of those from outside the Irish enclaves, sometimes carrying tones of disdain.",
+        "Inside the small home, the sounds were of a different cadence: the gentle murmur of {given_name} {surname} reading scripture by lamplight, the rhythmic breathing of sleeping children, and the comforting sizzle of a pan on the stove. Yet, even these private moments were punctuated by the sounds filtering through thin walls – a neighbor’s fervent prayer, a baby’s cry, the strains of a sorrowful ballad from a nearby window. It was a constant reminder of shared humanity, of lives interwoven in this tight-knit community.",
+        "The most powerful sound, perhaps, was the peal of the church bells each Sunday, a clear, insistent call that transcended the urban clamor. It was a sound that connected this struggling patch of foreign soil to the ancient traditions of home, a clarion call to faith that resonated deeply within the hearts of the transplanted. On other days, the hushed tones of whispered Gaelic, almost a secret language, could be heard in doorways, a thread of the old world carefully preserved amidst the boisterous new."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A dispute erupts between two families over a shared well, threatening to fracture the community's fragile peace."
+          ],
+          "choice": {
+            "text": "Intervene to mediate the dispute, appealing to shared faith and the need for unity.",
+            "motivatorShift": {
+              "honor": 1,
+              "worldview": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "mediate_community_dispute"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You hear whispers of a new, secular benevolent society forming, promising assistance outside the church's purview."
+          ],
+          "choice": {
+            "text": "Cautiously observe the new society, prioritizing the parish's established network for community support.",
+            "motivatorShift": {
+              "tradition": 1,
+              "worldview": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "uphold_parish_primacy"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t0:turn"
+    },
+    {
+      "id": "act:ireland:religious:middle:t0:turn",
+      "sense": "sight",
+      "prose": [
+        "The very visual landscape of the ward was a testament to the line’s struggle and burgeoning identity. Row upon row of brick tenements, their uniform façades broken only by the occasional brightly painted window frame or the hopeful green of a potted plant. Beyond the immediate blocks, one could glimpse the grander, more ornate structures of the city’s established elite, a stark visual contrast that underscored the chasm between old money and new arrivals. It was a world of sharp edges and muted colors, punctuated by the occasional flash of vibrant fabric or the gleam of a newly polished brass door knocker.",
+        "But the most prominent feature, the very heart around which the community revolved, was the nascent church, its steeple still modest but proudly aspiring skyward, visible from almost every street corner. Its construction was an ongoing endeavor, a collective act of will made manifest in stone and timber, a symbol of permanence in a transient world. You could see the raw, determined faces of men and women, their hands busy, their brows furrowed, all contributing to its rise, brick by painstaking brick.",
+        "The faces in the crowd told stories without words: the weariness etched around the eyes of the laborers, the hopeful glint in the gaze of children playing in the alleyways, the stern, resilient expressions of the elder women. Amidst this, {given_name} {family_name} saw not just hardship, but a nascent order, a community slowly knitting itself together, stitch by visible stitch. The future of this immigrant ward, its very form and function, felt poised on a precipice, its ultimate shape yet to be fully cast, awaiting a decisive hand to guide its contours."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You observe the struggles of the children in the ward, noting the poor quality of their education in overcrowded, underfunded schools."
+          ],
+          "choice": {
+            "text": "Advocate for the establishment of a dedicated parochial school within the community, financed by the church and its members.",
+            "motivatorShift": {
+              "worldview": 1,
+              "tradition": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "advocate_parochial_school"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "An opportunity arises to invest in a small, local business venture, promising a path to greater financial stability for your family."
+          ],
+          "choice": {
+            "text": "Pursue the business opportunity, believing that family prosperity can eventually uplift the wider community.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "pursue_business_opportunity"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The community is at a crossroads: should its focus be on spiritual fortification, political empowerment, or economic self-sufficiency?",
+        "options": [
+          {
+            "text": "Champion the construction of a grander church and the establishment of more religious societies, making faith the bedrock.",
+            "motivatorShift": {
+              "worldview": 3,
+              "tradition": 2,
+              "honor": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "focus_spiritual_fortification"
+            ]
+          },
+          {
+            "text": "Support the formation of a local political club to advocate for the ward's interests and secure influence in city hall.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 2,
+              "reach": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "focus_political_empowerment"
+            ]
+          },
+          {
+            "text": "Invest in communal enterprises and skill-building programs, emphasizing self-reliance and economic advancement.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 2,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "focus_economic_self_sufficiency"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t0:close"
+    },
+    {
+      "id": "act:ireland:religious:middle:t0:close",
+      "sense": "taste",
+      "prose": [
+        "The bittersweet taste of strong, black tea, brewed in a cracked enamel pot, became a nightly ritual, a quiet communion at the close of long days. It was the taste of endurance, of small victories over the harsh realities of tenement life. Sometimes, a slice of apple cake, baked with hoarded sugar and dried fruit, brought a fleeting sweetness, a memory of feast days in the old country, a hopeful echo of prosperity yet to come. These simple flavors were imbued with the spirit of the family’s steadfastness.",
+        "The taste of the Eucharist wafer on Sunday mornings, dry and thin on the tongue, held a profound significance, a taste of grace amidst the earthly toil. It was a tangible connection to the spiritual roots that anchored {full_name} and the family, a reminder that sustenance came not just from the ground but from above. This shared, sacred taste bound the community, a silent pledge of faith reaffirmed week after week, nourishing the soul more than any meal could sustain the body.",
+        "Reflecting on the meals shared over the years, from the lean, hungry times of the first crossing to the slightly more abundant, if still modest, repasts of the present, {given_name} {family_name} could taste the legacy being forged. The potatoes and salt, the occasional bit of meat, the hard-won comforts – each flavor was a chapter in the family’s story, a testament to resilience and unwavering belief. It was a taste passed down not just through recipes, but through the very act of sitting together, breaking bread, and giving thanks, a legacy for the heir to savor and carry forward."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You impart to your heir the importance of maintaining strong ties to the church and its teachings, as the bedrock of their identity."
+          ],
+          "choice": {
+            "text": "Emphasize spiritual and community service, urging your heir to uphold the family’s religious devotion.",
+            "motivatorShift": {
+              "worldview": 2,
+              "tradition": 1,
+              "lineage": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "heir_uphold_faith"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You advise your heir on the practicalities of navigating this new world, emphasizing prudent management of resources and keen observation of opportunities."
+          ],
+          "choice": {
+            "text": "Focus on instilling financial acumen and a diligent work ethic, believing prosperity secures the family's future.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 1,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "heir_pursue_prosperity"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:religious:middle:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The rich, damp scent of turned earth clung to the very air, a promise whispered from the dark, fertile soil. It mingled with the sharp tang of freshly sawn pine, carried on the morning breeze from the nascent settlement's edge, where new homes pushed against the wilderness. A faint, sweet perfume of baking bread, wafting from a neighbor's hearth, cut through the raw, earthy odors, a homely anchor in this new world.",
+        "Underneath it all, the ever-present, almost metallic hint of sweat – the honest toil of those who had come to carve a life from this land. It was the smell of hard work, of bodies bending to tasks, of a collective will pushing against the untamed. This aroma was distinct from the peat smoke of the old country, a testament to the new materials and new ambitions taking root here. It was the smell of a future, being built from scratch.",
+        "The scent of woodsmoke, however, was familiar and comforting, a reminder of hearth and home, of meals cooked and stories told. It curled through the air, carrying echoes of countless evenings spent by the fire, a continuity between the past left behind and the vibrant, challenging present. This blend of the novel and the known, the wild and the domesticated, formed the olfactory signature of their new life, a constant reminder of their pioneering spirit."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The distinct smell of curing hides drifted from the new tannery down by the stream, an odor promising commerce and connection, if not pleasantry."
+          ],
+          "choice": {
+            "text": "Lean into emerging local trade, despite its rough edges.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "tannery_trade_engaged"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The clean, invigorating scent of a spring rain washed over the fields, invigorating the freshly tilled soil and promising a bountiful harvest."
+          ],
+          "choice": {
+            "text": "Focus efforts on agricultural self-sufficiency and communal farming.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "agricultural_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t1:rising"
+    },
+    {
+      "id": "act:ireland:religious:middle:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough grain of the wooden bucket handle pressed into {given_name}'s palm, the chill well water sloshing against the fingers that gripped it. Each journey to the shared pump was a testament to the household’s burgeoning needs, the weight of the full pail a tangible measure of daily effort. Callouses, hard-won, now patterned the skin, telling silent stories of axes swung, soil turned, and raw lumber planed into serviceable furniture.",
+        "Inside, the soft give of the homespun wool, still smelling faintly of lanolin and sunshine, offered a comforting contrast to the day’s labor. It was a tactile reminder of the small domestic comforts painstakingly crafted from scarce resources. Every stitch, every mend, spoke of frugality and persistence, a silent prayer whispered through the fabric itself, ensuring the family's warmth and dignity in this demanding land.",
+        "Later, the gentle, trusting touch of a child's hand seeking comfort, their small fingers intertwining with {given_name}'s, offered a profound counterpoint to the day's physical strains. It was a soft, insistent pressure, a reminder of the precious lives entrusted to their care, for whom every sacrifice was made. This contact grounded the household, imbuing the relentless work with purpose and tender affection, making the rough edges of their new existence bearable."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The warmth of shared tools still radiated from the axe handle, passed from one set of hands to another in a rhythm of communal labor."
+          ],
+          "choice": {
+            "text": "Collaborate closely with neighbors on shared tasks and resources.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "communal_labor_emphasis"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The smooth, cool surface of a newly acquired slate for accounting offered a crisp counterpoint to the rough work, promising order and prosperity."
+          ],
+          "choice": {
+            "text": "Prioritize efficient household management and individual enterprise.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "individual_enterprise_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The rigors of establishing a stable home demand constant vigilance. How do you balance the immediate needs of your household with the broader calls of the nascent community?",
+        "options": [
+          {
+            "text": "Offer what little surplus you have to assist struggling families, trusting in God's providence.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "charitable_generosity"
+            ]
+          },
+          {
+            "text": "Focus intensely on fortifying your own family's position first, ensuring their security above all.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": -1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "family_fortification_first"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t1:midpoint"
+    },
+    {
+      "id": "act:ireland:religious:middle:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The rhythmic clang of the blacksmith’s hammer echoed through the clearing, a testament to burgeoning industry, each strike shaping iron for tool and nail. It was a sound of progress, of permanence, mixing with the distant, steady thrum of cart wheels on the newly graded dirt road, carrying goods to and from the burgeoning market. This symphony of labor spoke of an economy taking root, offering a sense of stability that had been hard-won.",
+        "The murmur of voices from the town hall, a mix of earnest debate and hushed negotiation, carried on the breeze, hinting at the complex web of local governance and commerce that was steadily being woven. Overheard snippets spoke of land deeds, shipping manifests, and community bylaws, shaping the nascent town's identity. It was a constant hum of collective endeavor, each sound a tiny thread in the larger tapestry of their shared future.",
+        "From the small, hastily erected church, the clear, resonant peal of a single bell called the faithful to prayer, a sound that grounded the community amidst the cacophony of growth. It sliced through the secular sounds of trade and talk, a spiritual anchor for a people eager to root their faith as deeply as their homes. This sacred chime was a reassuring sound, a promise of eternal order amidst earthly change, connecting their daily lives to a higher purpose."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A rival's voice, loud and confident, could be heard discussing an advantageous timber deal with a merchant, signaling a competitive spirit in the local market."
+          ],
+          "choice": {
+            "text": "Investigate the local timber market, seeking your own opportunities.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "timber_market_explored"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The gentle clucking of new hens in the coop, a sound promising fresh eggs and a modest but steady income, brought a sense of quiet contentment."
+          ],
+          "choice": {
+            "text": "Deepen your family's involvement in sustainable, small-scale farming.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "sustainable_farming_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t1:turn"
+    },
+    {
+      "id": "act:ireland:religious:middle:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "From the slight rise of their property, the expanding grid of the town below unfolded, a patchwork of new structures, each a testament to human endeavor. The neat rows of newly planted saplings that lined the emerging thoroughfare promised shade and beauty for generations to come, a vision of permanence taking shape. Dust kicked up by wagons marked busy thoroughfares, hinting at the unseen currents of commerce and daily life.",
+        "The imposing facade of the new general store, with its brightly painted sign, stood out as a beacon of progress and opportunity, a gathering point for all. Beside it, the humbler, yet equally significant, outline of the community's burgeoning schoolhouse hinted at the future being educated and shaped. These were the visible markers of a shared dream, coalescing into a tangible reality, defining the new social fabric.",
+        "Beyond the organized chaos of the town proper, the wild, untamed forest still loomed, a dark, rich green against the pale blue sky. Its vastness was a constant visual reminder of the frontier spirit that still permeated their lives, even as civilization encroached. It was a frontier that offered both challenge and boundless opportunity, urging them to consider how they would truly etch their family's mark upon this evolving landscape."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The sight of {family_name} children playing freely in the burgeoning public square filled with an honest sense of pride and belonging."
+          ],
+          "choice": {
+            "text": "Advocate for more public spaces and communal infrastructure.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "public_spaces_advocacy"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The glimmer of prosperity was visible in the newly built, larger home of a rival family, its grander proportions speaking volumes about their ambition."
+          ],
+          "choice": {
+            "text": "Strive for personal economic advancement and a more substantial family homestead.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "economic_advancement_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The community is at a crossroads, needing a clear vision for its future. How will your family contribute to shaping this new town and its values?",
+        "options": [
+          {
+            "text": "Champion the establishment of strong religious institutions, guiding the town's moral compass.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 3,
+              "power": 1,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "religious_foundation_championed"
+            ]
+          },
+          {
+            "text": "Invest in local enterprises and infrastructure, fostering economic growth and opportunity for all.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "economic_growth_invested"
+            ]
+          },
+          {
+            "text": "Focus on developing robust community services and education, building a foundation of shared welfare.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 2,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "community_services_developed"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t1:close"
+    },
+    {
+      "id": "act:ireland:religious:middle:t1:close",
+      "sense": "taste",
+      "prose": [
+        "The simple, honest taste of their harvest dinner lingered on the tongue: roasted root vegetables, earthy and sweet, a rich broth simmered with wild game, and the hearty, rough texture of home-baked soda bread. It was the taste of sufficiency, of effort rewarded, a testament to the bounty wrung from this new ground through tireless hands and unwavering faith. Each mouthful carried the flavor of survival and the subtle triumph of perseverance.",
+        "A sip of strong, dark tea, sweetened with precious sugar, offered a moment of quiet reflection, its bitter edge softened by the comforting warmth. It was a taste of domestic peace, of evenings gathered around the hearth, the day’s labor dissolving into the comfort of family. This familiar brew carried echoes of distant shores, yet now it was infused with the unique character of their new home, a blend of past and present.",
+        "The communion wine, though sparingly consumed, left a profound, lingering warmth, a taste both holy and grounding. It was a potent reminder of their spiritual bedrock, the unwavering faith that had guided them through hardship and sustained their hopes. This taste, more than any other, defined the essence of what {full_name} would pass to their heir: not just a trade or a plot of land, but a profound sense of purpose, rooted in devotion and community."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The slightly tart taste of preserved wild berries, carefully jarred, spoke of preparation for lean times and self-reliance."
+          ],
+          "choice": {
+            "text": "Emphasize careful stewardship and resourcefulness as a family virtue.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "stewardship_virtue_passed"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The invigorating spice of a new blend of tobacco, recently brought to market, offered a taste of the expanding world beyond their immediate settlement."
+          ],
+          "choice": {
+            "text": "Encourage the heir to look beyond the immediate settlement for new opportunities.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "heir_encouraged_reach"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:religious:middle:t2:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of starched linen, still damp from the wash line, permeated the small, newly acquired parlor, mingling with the faint, sweet aroma of baking soda bread and the lingering, metallic tang of ironed clothes. It was a smell of relentless striving, a clean, almost antiseptic barrier against the city's perpetual exhalations of coal smoke and damp earth. {given_name}'s mother, her hands perpetually busy, ensured the house radiated an orderliness that spoke volumes of their ascent from the crowded tenements.",
+        "Underneath these domestic perfumes, a deeper, almost ancestral smell clung to the older furniture, a faint memory of peat fires and damp wool that no amount of scrubbing could entirely dispel. It was a comfort, a reminder of where they came from, even as every polished surface and freshly aired curtain spoke of where they were going. The aspiration hung in the air, thick and palpable as the steam from a kettle, a promise whispered in the quiet diligence of their days.",
+        "Each morning, the aroma of strong tea and simmering porridge drifted through the modest dwelling, a robust and reassuring start to days filled with work and prayer. But now, occasionally, a finer, more delicate scent – perhaps a bouquet of wildflowers from the market, or the subtle perfume of beeswax furniture polish – would assert itself, a gentle, fragrant harbinger of their burgeoning respectability. The city outside, ever-present with its myriad odors of industry and humanity, seemed a distant hum, kept at bay by the determined cleanliness of their home."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You consider how the family's modest prosperity might best be reflected in their home life, a testament to their hard-earned stability."
+          ],
+          "choice": {
+            "text": "Invest in a new, sturdy wardrobe for the parlor, signifying permanence and solid status.",
+            "motivatorShift": {
+              "wealth": 1,
+              "lineage": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "home_comfort_prioritized"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You reflect on the burgeoning parish, a beacon of faith and community for families like yours, and how your own family’s rising fortunes could bolster its foundations."
+          ],
+          "choice": {
+            "text": "Contribute a portion of recent earnings to the church's building fund, hoping for a grander edifice.",
+            "motivatorShift": {
+              "worldview": 2,
+              "honor": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "church_fund_supported"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t2:rising"
+    },
+    {
+      "id": "act:ireland:religious:middle:t2:rising",
+      "sense": "touch",
+      "prose": [
+        "The rough texture of the wool suit {given_name} wore, a new acquisition, felt stiff and slightly itchy against the skin, a constant reminder of the expectations now placed upon them. Each morning, lacing up the polished leather boots, a sense of quiet determination settled, a resolve as firm as the well-worn oak banister beneath their hand. The gentle pressure of a handshake from a prominent shopkeeper, cool and confident, conveyed the unspoken weight of reputation.",
+        "Outside the family home, the city was a tapestry of textures: the smooth, cold stone of the municipal buildings, the slick sheen of rain-swept cobblestones, the gritty dust of construction sites where new dreams were being built. {given_name} felt the competing pulls, the ambition that urged them towards the refined, unyielding surfaces of commerce and the steadfast loyalty that tethered them to the familiar, comforting abrasions of community.",
+        "The small leather-bound ledger, its pages smooth from countless entries, offered a tangible record of their progress, each line a testament to careful management and relentless effort. Yet, the memory of rough, calloused hands – their father’s, their grandfather’s – remained, a subtle phantom touch, urging balance, reminding them of the origins from which this new comfort sprang. The rising heat of a boiler room, the cool precision of a clerk's office, the bustling humanity of the market: all pressed upon {given_name} with their distinct tactile demands."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A chance encounter presents an opportunity to align with a burgeoning commercial enterprise, offering a swift path to greater financial security."
+          ],
+          "choice": {
+            "text": "Accept a position that offers significant personal advancement, even if it means less time for community engagements.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "commercial_path_chosen"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The parish priest approaches, seeking help with organizing a new benevolent society, appealing to {given_name}'s known integrity and standing within the community."
+          ],
+          "choice": {
+            "text": "Dedicate time to establishing the benevolent society, solidifying the family's role as a pillar of the community.",
+            "motivatorShift": {
+              "worldview": 1,
+              "honor": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "benevolent_society_supported"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How do you navigate the conflicting demands of personal ambition and communal responsibility as your family rises?",
+        "options": [
+          {
+            "text": "Prioritize the new commercial venture; the family's financial stability will ultimately benefit the community.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "ambition_over_immediate_community"
+            ]
+          },
+          {
+            "text": "Focus on the benevolent society; the family’s moral standing and leadership are paramount for their people.",
+            "motivatorShift": {
+              "worldview": 2,
+              "tradition": 1,
+              "honor": 2
+            },
+            "setFlags": [
+              "community_over_immediate_ambition"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t2:midpoint"
+    },
+    {
+      "id": "act:ireland:religious:middle:t2:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The gentle clink of china teacups now often replaced the hearty clang of kitchen pots, a subtle shift in the domestic soundscape. Laughter, once robust and unrestrained, now held a softer, more modulated tone, careful not to carry too far beyond the parlor walls. The rustle of a newspaper being unfolded in the morning, the quiet turning of pages in a prayer book, these were the sounds of a family cementing its place, a quiet symphony of burgeoning respectability.",
+        "From the street, the sounds of the city offered a different perspective. The distant rumble of the tram, the bark of a street vendor, the clamor of children at play – these still reached the ears, but now filtered, softened by thicker walls and perhaps a new windowpane. It was a comfortable distance, enough to feel connected, yet insulated from the harsher cacophony of the working districts they had left behind. The whispers of gossip, too, carried further now, the family’s reputation a fragile thing, easily swayed.",
+        "One afternoon, the sharp, authoritative rap of knuckles against the front door, rather than the familiar chime of the bell, momentarily startled {given_name}. It was the sound of someone with purpose, someone from a different stratum of society, perhaps a new business associate or an official from a civic institution. The casual hum of family life paused, a collective breath held, as the front door opened, letting in not just a visitor but a new resonance into their carefully constructed peace."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A local politician, observing {full_name}'s growing influence, extends an invitation to a private social gathering, a clear attempt to court the family's burgeoning support."
+          ],
+          "choice": {
+            "text": "Accept the invitation, hoping to forge connections that could benefit the family's standing and future.",
+            "motivatorShift": {
+              "politics": 2,
+              "reach": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "political_connection_pursued"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "News arrives of a planned new Catholic school in the parish, a project close to the hearts of many, yet struggling to secure sufficient funds."
+          ],
+          "choice": {
+            "text": "Mobilize support within the community for the new school, reinforcing the family's commitment to faith and education.",
+            "motivatorShift": {
+              "worldview": 2,
+              "honor": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "catholic_school_supported"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t2:turn"
+    },
+    {
+      "id": "act:ireland:religious:middle:t2:turn",
+      "sense": "sight",
+      "prose": [
+        "From the crest of the modest hill where their new home stood, {given_name} could survey a significant portion of the burgeoning city. Below, the red-brick tenements clustered like tightly packed dominoes, a stark visual reminder of the wave's origins. Beyond them, the grander, stone-faced buildings of commerce and civic administration rose, their imposing facades reflecting the afternoon sun. The steeple of the nascent parish church, still under construction, aimed skyward, a bold assertion of faith amidst the secular ambition.",
+        "The panorama presented a choice, a split path visible even from this distance. To the east, the bustling market squares and the elegant, tree-lined avenues of the city’s established elite beckoned, promising influence and material comfort. To the west, the more modest, still-developing neighborhoods sprawled, vibrant with the activity of their people, a community still finding its feet, often overlooked by the city's power brokers.",
+        "Later, walking through the town, {given_name} caught sight of the faces that populated these different worlds: the confident, often indifferent stares of the established gentry, the hopeful, sometimes weary, gazes of their own Irish kin, and the searching, analytical eyes of the city's burgeoning professionals. Each encounter, each fleeting glimpse, seemed to reinforce the weight of the decision pressing upon them, the very visible consequences of aligning with one vision for the city over another."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A well-respected civic leader, not affiliated with the dominant religious institutions, offers {given_name} a directorship on a new city development board, citing their clear business acumen."
+          ],
+          "choice": {
+            "text": "Accept the directorship, engaging directly with secular city planning and infrastructure.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "civic_board_accepted"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The new bishop, seeking to expand the Church's social services, requests {given_name}'s assistance in establishing a large-scale Catholic charitable foundation."
+          ],
+          "choice": {
+            "text": "Lead the effort to establish the Catholic charitable foundation, bolstering the Church's presence and welfare efforts.",
+            "motivatorShift": {
+              "worldview": 2,
+              "tradition": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "charitable_foundation_led"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will your family define its place and influence in this city: through secular power, religious leadership, or a blend of both?",
+        "options": [
+          {
+            "text": "Focus on building economic and political power within the city's secular institutions, securing the family's future through practical influence.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "power": 3,
+              "worldview": -1
+            },
+            "setFlags": [
+              "secular_power_path"
+            ]
+          },
+          {
+            "text": "Dedicate the family's resources and efforts to strengthening the Church and its social reach, becoming a leading moral voice for the community.",
+            "motivatorShift": {
+              "worldview": 3,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "religious_leadership_path"
+            ]
+          },
+          {
+            "text": "Strive to bridge both worlds, using newfound influence in civic institutions to support community-minded and faith-aligned initiatives.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "honor": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "balanced_influence_path"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t2:close"
+    },
+    {
+      "id": "act:ireland:religious:middle:t2:close",
+      "sense": "taste",
+      "prose": [
+        "The celebratory dinner, though still modest by the standards of the truly wealthy, offered a rich array of flavors. The roast chicken, seasoned with herbs from the small garden, tasted of earned success, a savoriness that spoke of diligent years. The freshly baked apple pie, warm and subtly sweet, carried the comforting taste of home and enduring traditions. There was a faint, almost imperceptible undertone of something richer, more refined – perhaps a new spice or a carefully aged cheese, symbols of expanded horizons.",
+        "As the evening wore on, the wine, a modest but good vintage, left a lingering warmth on the tongue, mirroring the quiet satisfaction in {given_name}'s heart. Yet, amidst the pleasant flavors, a faint, almost bitter aftertaste of compromise or unfulfilled longing sometimes surfaced – the paths not taken, the sacrifices made. It was the taste of growth, complex and layered, far removed from the simple, hearty fare of their ancestors, yet still rooted in that heritage.",
+        "The conversation around the table, punctuated by the familiar clink of cutlery, revolved around future plans, the education of the children, and the standing of the family name. Each topic brought forth a taste of legacy – the fresh, invigorating tang of new opportunities for the young heir, the solid, reassuring flavor of established reputation, and the enduring, slightly spicy warmth of faith, ever-present, ever-guiding. It was a meal that nourished both body and soul, tasting of a future carefully carved from a challenging past."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Reflecting on the generation's progress, you consider the most valuable legacy to pass on to the next generation, {family_name}'s children."
+          ],
+          "choice": {
+            "text": "Emphasize the practical skills and financial acumen gained, ensuring the heir inherits robust material security.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "material_legacy_emphasized"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "As the evening draws to a close, your thoughts turn to the moral and spiritual foundation that has guided your family's journey."
+          ],
+          "choice": {
+            "text": "Reinforce the importance of faith, honor, and community involvement, ensuring the heir carries forward the family's moral torch.",
+            "motivatorShift": {
+              "worldview": 2,
+              "honor": 2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "moral_legacy_emphasized"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:religious:middle:t3:open",
+      "sense": "smell",
+      "prose": [
+        "The scent of roasting coffee beans mingled with the faint, comforting aroma of beeswax polish from the meeting hall pews. It was an aroma that spoke of industry and sanctity, of a life built on both fervent prayer and honest toil. The steady hum of conversation from the street below, punctuated by the clatter of horse-drawn carts, filtered through the open window, a testament to the burgeoning city and the {family_name} family's growing place within it.",
+        "This particular Sunday, the air carried a sharper tang of ink and fresh newsprint, announcing the {family_name} name not just on the church bulletin, but prominently in the morning's broadsheet. It detailed their latest substantial contribution to the local orphanage fund, a generous sum that solidified their reputation as pillars of both commerce and compassion. The very atmosphere seemed to thrum with the weight of expectation, of a legacy being meticulously forged with every charitable act and every prudent investment.",
+        "The kitchen, however, still held the sweet, yeasty perfume of bread rising, a scent that grounded all the larger aspirations. It was a reminder that beneath the public face, the domestic hearth remained the core, the place where children learned their catechism and their ledgers, where the values were baked into the very fabric of daily life. The scent was one of growth, of something expanding from its humble origins, pushing upwards, yet still rooted deeply in the familiar."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The scent of new ledger paper, crisp and faintly metallic, suggested the ever-expanding reach of the {family_name} mercantile interests."
+          ],
+          "choice": {
+            "text": "Focus on consolidating business gains, ensuring a stable foundation for our community's future.",
+            "motivatorShift": {
+              "wealth": 3,
+              "tradition": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "commercial_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Or perhaps it was the lingering aroma of frankincense and myrrh from last night’s vespers, drawing attention to the spiritual guidance {full_name} offered."
+          ],
+          "choice": {
+            "text": "Prioritize the moral upliftment of our community, using our influence to guide the flock.",
+            "motivatorShift": {
+              "worldview": 3,
+              "honor": 2,
+              "politics": 1
+            },
+            "setFlags": [
+              "moral_guidance"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t3:rising"
+    },
+    {
+      "id": "act:ireland:religious:middle:t3:rising",
+      "sense": "touch",
+      "prose": [
+        "The polished mahogany of the church pew felt cool and unyielding beneath {given_name}'s fingertips, a physical counterpoint to the warmth of the sermon enveloping the congregation. Yet, even in this sacred space, a different kind of pressure made itself known. The weight of responsibility, a subtle but persistent burden, pressed down from the very air, a constant reminder of the growing expectations placed upon the {family_name} name, not just by the community, but by the wider world observing their rise.",
+        "Later, the coarse weave of a newly woven tapestry, destined for the mayor's office, felt rough against {given_name}'s palm. It was a gift, ostensibly, but also a carefully chosen symbol of the family’s reach, their network extending beyond the parish hall into the city’s political chambers. This tactile connection to power was not without its demands; a subtle knot of tension formed in {given_name}'s shoulders, a familiar companion to every handshake, every public appearance.",
+        "Even the reassuring solidity of a well-bound ledger, its pages crackling with the record of recent successes, carried a tangible weight. It was the weight of hundreds of souls, of livelihoods tied to the family’s enterprises, of the trust placed in their hands. The very act of turning a page, of tallying the figures, became a physical meditation on the delicate balance between prosperity and moral obligation, a constant negotiation of influence and integrity."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The unexpected firmness of a rival’s handshake, offered with a smile that didn't quite reach their eyes, subtly challenged the {family_name}'s position in the nascent civic council."
+          ],
+          "choice": {
+            "text": "Meet their challenge directly, showing no weakness in our resolve or our standing.",
+            "motivatorShift": {
+              "power": 2,
+              "politics": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "assert_dominance"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Or perhaps it was the fragile, trembling grasp of a widow seeking charitable aid, reminding {full_name} of the vulnerable lives that depended upon the family's benevolence."
+          ],
+          "choice": {
+            "text": "Extend compassionate support, reinforcing our reputation for unwavering charity and community care.",
+            "motivatorShift": {
+              "worldview": 2,
+              "tradition": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "embrace_charity"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A new district-wide initiative for urban development requires a substantial investment, aligning the {family_name} name with a powerful, albeit secular, political faction. Do you lend your family's considerable resources to this venture?",
+        "options": [
+          {
+            "text": "Invest heavily, recognizing the opportunity to shape the city's future and expand our influence beyond religious circles.",
+            "motivatorShift": {
+              "wealth": 4,
+              "politics": 3,
+              "reach": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "urban_investment",
+              "secular_ties"
+            ]
+          },
+          {
+            "text": "Decline, prioritizing our established religious affiliations and ensuring our resources are used for morally aligned causes.",
+            "motivatorShift": {
+              "tradition": 3,
+              "worldview": 2,
+              "honor": 1,
+              "politics": -2
+            },
+            "setFlags": [
+              "maintain_religious_focus"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t3:midpoint"
+    },
+    {
+      "id": "act:ireland:religious:middle:t3:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The clamor of the city square echoed with a new kind of urgency, a cacophony of voices debating tariffs, labor rights, and the future of the republic. {given_name} stood near the open window, the din washing over them, each shout and cheer a ripple in the fabric of the era. It was a sound that spoke of fundamental change, of an emerging national consciousness, and the {family_name} name, once synonymous only with the quiet devotion of the parish, was now becoming part of this broader chorus.",
+        "From within the well-appointed study, the rhythmic ticking of the grandfather clock seemed almost a counterpoint to the external tumult, a steady heartbeat against the pulse of the changing world. Yet, even here, the sounds of influence were inescapable: the rustle of important correspondence, the polite but firm tones of a solicitor discussing property deeds, the hushed reverence of a curate seeking counsel. Each sound, a testament to the family's growing sway, shaping the very rhythm of their community's progress.",
+        "Across the street, the cheerful, if slightly dissonant, music of a traveling band briefly cut through the serious drone of political discourse. It was a fleeting sound of popular culture, a reminder that the world extended beyond ledgers and legislation, that the hearts and minds of the people were also swayed by simpler pleasures. How the {family_name} name would resonate in that broader, less formal soundscape remained an open question, one that echoed in the quiet corners of {given_name}'s mind."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The clear, authoritative voice of a respected community leader, praising {full_name}'s efforts in public works, carried through the bustling marketplace, solidifying their reputation."
+          ],
+          "choice": {
+            "text": "Capitalize on this public goodwill to advocate for stronger civic reforms and ethical business practices.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "advocate_reforms"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Yet, the hushed whispers of discontent from a rival faction, murmuring about undue influence, were also audible to those who listened closely."
+          ],
+          "choice": {
+            "text": "Address these rumors head-on, ensuring our integrity remains unimpeachable even if it means confronting opposition.",
+            "motivatorShift": {
+              "honor": 3,
+              "power": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "confront_opposition"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t3:turn"
+    },
+    {
+      "id": "act:ireland:religious:middle:t3:turn",
+      "sense": "sight",
+      "prose": [
+        "The grand panorama of the city stretched before {given_name} from the high window of the new {family_name} building, a testament to decades of careful cultivation and tireless industry. Below, the grid of streets seemed to hum with purpose, the bustling docks a constant artery of commerce, the church steeples reaching skyward, anchors in a rapidly evolving landscape. It was a vision of progress, yes, but also a vista of myriad choices, each intersection a potential divergence for the family’s destiny.",
+        "{given_name}'s gaze swept over the contrasting sights: the thriving tenements built with the family’s investment, starkly juxtaposed with the opulent new municipal buildings where crucial decisions were now being made. The sight of families pouring out of the local parish after Sunday service, their faces etched with hope and struggle, was a powerful reminder of the human element in all these grand designs. The question loomed large: which path, among the many laid out before them, would truly define the {family_name} name for generations to come?",
+        "The sight of the national flag, fluttering proudly from the public square, seemed to demand a choice. Would the {family_name} name be associated primarily with the quiet strength of its religious conviction, the steadfastness of its tradition, or would it seize the moment to become a more overt force in the shaping of the nascent nation itself? The future was visible, in broad strokes, but the fine lines of its composition were still left to be drawn by the family’s hand."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A stark image of industrial poverty, glimpsed in a shadowed alleyway, weighed heavily on {given_name}'s conscience, a sharp counterpoint to the family's prosperity."
+          ],
+          "choice": {
+            "text": "Champion reforms that alleviate suffering, using our growing influence to advocate for the disadvantaged.",
+            "motivatorShift": {
+              "worldview": 3,
+              "politics": 2,
+              "honor": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "advocate_social_justice"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Yet, the gleaming facade of a rival's new factory, a symbol of aggressive secular expansion, also caught {given_name}'s eye, provoking a different kind of challenge."
+          ],
+          "choice": {
+            "text": "Strengthen our economic position, demonstrating that prosperity can be achieved without compromising our values.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "economic_competition"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "A national movement is gaining momentum, calling for either stronger centralized government control over industry or a greater emphasis on local, community-led initiatives rooted in traditional values. How will the {family_name} line position itself in this pivotal national debate?",
+        "options": [
+          {
+            "text": "Support centralized control, believing a unified national vision is necessary for progress and stability.",
+            "motivatorShift": {
+              "politics": 4,
+              "power": 3,
+              "reach": 2,
+              "tradition": -2
+            },
+            "setFlags": [
+              "centralized_support"
+            ]
+          },
+          {
+            "text": "Advocate for community-led initiatives, aligning with local values and strengthening regional autonomy.",
+            "motivatorShift": {
+              "tradition": 4,
+              "worldview": 3,
+              "honor": 2,
+              "politics": -2
+            },
+            "setFlags": [
+              "community_autonomy"
+            ]
+          },
+          {
+            "text": "Maintain a neutral stance, focusing instead on private philanthropy and spiritual guidance, allowing others to navigate the political fray.",
+            "motivatorShift": {
+              "worldview": 3,
+              "honor": 2,
+              "lineage": 1,
+              "politics": -3,
+              "power": -1
+            },
+            "setFlags": [
+              "neutral_philanthropy"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t3:close"
+    },
+    {
+      "id": "act:ireland:religious:middle:t3:close",
+      "sense": "taste",
+      "prose": [
+        "The tart sweetness of elderberry wine, a traditional {family_name} staple served at the annual harvest celebration, lingered on {given_name}'s tongue. It was a flavor that evoked memory, tradition, and the passage of seasons, a comforting anchor amidst the whirl of a generation's achievements and the bitter tang of its inevitable compromises. This year, the wine felt particularly poignant, a symbol of the legacy {full_name} was preparing to pass on, a carefully cultivated taste of what the {family_name} name had become.",
+        "Alongside the wine, the robust, earthy taste of fresh venison, a rare treat, spoke of the family's expanding prosperity and ability to provide. Yet, there was also the faint, almost imperceptible metallic hint of responsibility, of the decisions made, the alliances forged, and the burdens carried. Every mouthful seemed to tell a story of influence, of a name now recognized far beyond the parish, extending its reach across the nascent nation, its reputation as complex and layered as the flavors themselves.",
+        "The youngest child, the presumptive heir, watched {full_name} from across the table, their own small hand reaching for a piece of sweet soda bread. The taste of that simple bread, familiar and wholesome, would be the first flavor of their inheritance. But what other, more profound tastes — of public acclaim or quiet sacrifice, of unwavering faith or pragmatic compromise — would this child come to associate with the {family_name} legacy? The generation was closing, and the palate of the future was still forming."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The crisp, almost austere taste of unadulterated spring water, offered by a grateful community leader, signified the family's unblemished reputation for integrity."
+          ],
+          "choice": {
+            "text": "Emphasize to the heir that a good name and moral clarity are the true wealth of our lineage.",
+            "motivatorShift": {
+              "honor": 3,
+              "worldview": 2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "integrity_legacy"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Or perhaps it was the lingering, slightly bitter aftertaste of a necessary political compromise, reminding {full_name} of the strategic acumen required to thrive."
+          ],
+          "choice": {
+            "text": "Instruct the heir on the realities of power, where principle must sometimes bend for greater influence.",
+            "motivatorShift": {
+              "power": 3,
+              "politics": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "pragmatic_legacy"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:religious:middle:t4:open",
+      "sense": "smell",
+      "prose": [
+        "The air in the high-ceilinged chamber, overlooking a cityscape that glittered like scattered jewels, carried a distinct bouquet: the faint, warm scent of beeswax polish on antique oak, mingled with the crisp, clean aroma of starched linen from the piles of freshly laundered dispatches. Beneath it all, a whisper of incense, subtle and aged, clung to the velvet draperies – a ghost of morning prayers offered decades ago in a humble parish, now diffused into the very fabric of a global institution. It was the smell of history, of meticulous care, and of an enduring faith that had, against all odds, woven itself into the tapestry of the modern world.",
+        "This particular blend of scents had become as familiar as breath to {given_name} {family_name}. It was the atmosphere of their daily life, one that transcended the simple comforts of their ancestors’ homes and now permeated grand, international offices. The scent spoke of a lineage that had built its influence not on conquest or vast material wealth, but on tireless work, principled negotiation, and a steadfast belief in a moral order, carefully cultivated across generations from the initial fragile tendrils of immigration. Here, in this quiet, powerful room, the legacy of their faith and the reach of their name, {family_name}, felt inextricably bound.",
+        "From this room, decisions rippled outwards, touching distant shores and diverse peoples, guiding initiatives that provided relief, fostered education, and brokered peace. The quiet hum of the ventilation system, a modern counterpoint to the ancient smells, underscored the scale of operations that now centered on their family. The world, in its sprawling complexity, felt like a single, vast organism, and {given_name} stood at a nerve center, a sentinel of conscience in a swirling tide of global affairs, their decisions weighed not only by practicalities but by the deep-rooted spiritual conviction that had always been their guiding star."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A faint, bitter tang of strong coffee drifted from an outer office, reminding you of the immediate, pressing demands of the day’s first global conference call."
+          ],
+          "choice": {
+            "text": "Focus on the practical preparations, ensuring every logistical detail of the upcoming summit is flawless.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 0,
+              "power": 2,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "prioritized_logistics"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A waft of lilies, brought in for the altar in the small private chapel nearby, gently permeated the room, pulling your thoughts towards a moment of quiet contemplation."
+          ],
+          "choice": {
+            "text": "Seek a brief moment of spiritual reflection before the day truly begins, grounding your resolve in the family’s sacred principles.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "prioritized_reflection"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t4:rising"
+    },
+    {
+      "id": "act:ireland:religious:middle:t4:rising",
+      "sense": "touch",
+      "prose": [
+        "The worn leather of the portfolio in your hand felt solid, familiar, a testament to countless journeys and critical negotiations. Within its folds lay documents that could alter the course of nations, agreements painstakingly forged, and ethical frameworks designed to guide international conduct. This material weight, surprisingly light in itself, carried the immense metaphorical pressure of the world's hopes and grievances, a constant, tangible reminder of the {family_name} line’s global stewardship. Your fingertips grazed the embossed seal – a simple, enduring symbol of integrity and commitment that had travelled continents.",
+        "Later, the cool, smooth surface of a polished conference table under your palm felt like the surface of a vast, tranquil lake, yet beneath it churned currents of political intrigue and humanitarian crises. Each gesture, each placement of a hand or a pen, carried weight in this arena of giants. The handshake of a visiting dignitary, firm and often prolonged, was more than a greeting; it was a physical sealing of trust, or a subtle probe of intent. Every tactile interaction in this world of elevated stakes was charged with meaning, a delicate dance of power and respect that the {family_name} family had mastered.",
+        "There was a profound sense of scale in these interactions. The sheer number of hands shaken, the volume of papers signed, the endless expanse of textiles, maps, and artifacts from myriad cultures touched and considered – all converged to form an intricate web of responsibility. This relentless, palpable engagement with the world left a subtle ache in your shoulders at the end of each day, a testament to the unseen burdens carried and the invisible threads connecting every decision to distant lives and futures."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The smooth, cool surface of a new, highly advanced communication device rested on the table, promising unprecedented direct access to global leaders."
+          ],
+          "choice": {
+            "text": "Embrace the new technology for faster, more efficient global coordination, streamlining operations and maximizing impact.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 0,
+              "power": 2,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "embraced_tech_efficiency"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The familiar rough texture of an old, leather-bound prayer book, passed down through generations, remained on your desk amidst the high-tech equipment."
+          ],
+          "choice": {
+            "text": "Keep the traditional methods of communication and consultation, prioritizing personal connection and established protocols over sheer speed.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "maintained_tradition_personal"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "An internal audit reveals a minor ethical lapse by a respected senior official within your global organization, though it has not yet become public. The official is crucial to current negotiations.",
+        "options": [
+          {
+            "text": "Uphold the family's strict ethical standards; discreetly remove the official and accept potential short-term disruption to negotiations.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -1,
+              "worldview": 2,
+              "power": -1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "uphold_ethics_disruption"
+            ]
+          },
+          {
+            "text": "Prioritize the ongoing negotiations; privately reprimand the official but retain them, managing the risk of future exposure to ensure stability.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "pragmatic_stability_risk"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t4:midpoint"
+    },
+    {
+      "id": "act:ireland:religious:middle:t4:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The grand hall echoed with the clamor of a thousand voices, a polyphony of languages swirling around {given_name} {full_name} like an urgent, living tide. The distinct guttural R's of a Slavic tongue cut through the melodic lilt of a Romance language, while the rapid-fire consonants of a Nordic delegate punctuated a hushed conversation in Mandarin. It was the sound of the world converging, its disparate parts attempting to find harmony, or at least a working compromise, under the watchful eye of the {family_name} organization. Every syllable, every inflection, carried the weight of national interests and global aspirations.",
+        "From the discreet earpiece, the simultaneous translation was a constant, almost hypnotic whisper, weaving vital information into the ongoing din. But it was the silence that truly amplified the stakes — the pregnant pause before a major vote, the collective intake of breath when a contentious proposal was tabled, the sudden hush that fell when {given_name} rose to speak. In those moments, the very air seemed to vibrate with anticipation, and the global chorus momentarily yielded to the gravitas of a single, moral voice, the inheritor of generations of principled influence.",
+        "Later, the insistent ring of a secure line in a private office, cutting through the relative quiet, heralded a direct communication from a troubled region. The voice on the other end, strained and urgent, described a burgeoning humanitarian crisis, a delicate balance of power fracturing under pressure. It was a familiar narrative, one the {family_name} line had been addressing for decades, yet each new crisis brought its own unique discord. The stakes were not merely political; they were deeply human, resonating with the very core of the religious values that propelled their mission. The century itself seemed to hang in the balance, its future shaped by these auditory fragments of distress and hope."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A rival organization's representative, known for their purely economic approach, began a passionate, albeit detached, address on the fiscal implications of global aid."
+          ],
+          "choice": {
+            "text": "Focus on presenting compelling ethical and humanitarian arguments, appealing to the broader moral conscience of the assembly.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "moral_appeal_chosen"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The detailed, analytical presentation of your own team member, filled with carefully compiled data on long-term systemic benefits, was set to follow."
+          ],
+          "choice": {
+            "text": "Emphasize data-driven evidence and the long-term systemic stability that comes from sound, ethically guided policies.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "data_driven_stability_chosen"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t4:turn"
+    },
+    {
+      "id": "act:ireland:religious:middle:t4:turn",
+      "sense": "sight",
+      "prose": [
+        "From the penthouse suite, the sprawling metropolis unfolded beneath you, a dazzling, intricate tapestry of steel, glass, and pulsating light that stretched to the horizon. Highways gleamed like sinews, carrying the lifeblood of commerce and communication, while distant airports blinked with the coming and going of global traffic. It was a visible manifestation of the interconnected world, a world the {family_name} line had helped to shape and, in turn, was now shaped by its immense forces. The vastness of it all was breathtaking, yet also humbling, a stark reminder of the fragile balance they sought to maintain.",
+        "Through the panoramic window, the distinct architectural style of your own organization's international headquarters dominated a significant portion of the skyline, a beacon of purpose amidst the urban sprawl. Its clean lines and towering presence were a testament to decades of careful, principled growth, a visual anchor in a rapidly shifting world. Yet, even in its solidity, you could discern the shadows cast by the complex challenges of the era – conflicts simmering in distant lands, inequalities starkly visible even in this glittering panorama, and the ever-present threat of moral decay in the pursuit of power.",
+        "Your gaze fell upon a cluster of older, more traditional buildings in the heart of the city, near where the family's first humble office once stood – a physical lineage stretching from modest beginnings to this incredible vista of global influence. The sight compelled you to consider the immense power now concentrated in your hands, and how to wield it. Would this era be defined by a bold, values-driven assertion of moral leadership, or by a nuanced, systemic recalibration of global structures, ensuring long-term stability and ethical resilience? The answers lay somewhere in the silent, shimmering vista, awaiting your decision."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A sudden shift in the clouds revealed a shaft of sunlight illuminating a distant cathedral spire, piercing through the modern skyline like a timeless needle."
+          ],
+          "choice": {
+            "text": "Lean into the symbolic power of the family's spiritual heritage, seeking to inspire broad moral alignment across diverse cultures.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "inspired_moral_alignment"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A news ticker on a nearby skyscraper flashed headlines about volatile global markets and complex geopolitical alliances."
+          ],
+          "choice": {
+            "text": "Focus on the pragmatic and strategic implications of global systems, seeking to stabilize and optimize the interconnected economic and political landscape.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "stabilized_global_systems"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "A major global crisis erupts, threatening to destabilize both humanitarian efforts and international markets. Your organization's unique position offers a critical opportunity to intervene.",
+        "options": [
+          {
+            "text": "Launch a bold, public moral campaign, leveraging the family's immense influence to shame aggressors and galvanize an immediate, values-driven global response, even if it risks financial repercussions.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 1,
+              "worldview": 3,
+              "power": 2,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "major_bold_moral_campaign"
+            ]
+          },
+          {
+            "text": "Orchestrate a meticulous, behind-the-scenes diplomatic and economic intervention, carefully leveraging alliances and financial levers to stabilize the situation through systemic, long-term solutions.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": 0,
+              "power": 3,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 3
+            },
+            "setFlags": [
+              "major_systemic_diplomatic_intervention"
+            ]
+          },
+          {
+            "text": "Focus resources on bolstering internal resilience and humanitarian aid, maintaining the family's moral authority as an arbiter while avoiding direct political entanglement in the crisis's core. ",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": -1,
+              "worldview": 1,
+              "power": -1,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "major_internal_resilience_aid"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t4:close"
+    },
+    {
+      "id": "act:ireland:religious:middle:t4:close",
+      "sense": "taste",
+      "prose": [
+        "The delicate bitterness of dark, artisanal chocolate, shared with a trusted few in a quiet, richly paneled study, lingered on the tongue. It was a taste of refined comfort, a reward for long hours and difficult decisions, but beneath its sweetness lay the lingering tang of global complexities. The subtle notes spoke of exotic origins, of beans sourced from distant lands touched by the family's expansive network – a direct, visceral connection to the world they had tirelessly worked to influence. This was the taste of an empire built not on conquest, but on the careful, continuous cultivation of trust and moral authority.",
+        "Earlier in the day, a sip of strong, unadulterated spring water, drawn from a well near the original family homestead, had offered a stark contrast. Its purity and simple honesty were a sharp, cleansing reminder of the foundational values that underpinned all the global maneuvering. The taste of home, of beginnings, served as a poignant anchor against the often-overwhelming flavors of international diplomacy and vast humanitarian operations. It was a symbolic re-calibration, reminding {given_name} of the spiritual wellspring from which their considerable reach had first emerged.",
+        "As the day drew to a close, a subtle metallic taste, almost imperceptible, seemed to cling to the back of the throat – the faint echo of countless air miles, the trace of countless meals taken in transit, across time zones and cultural divides. It was the taste of perpetual motion, of the ceaseless effort required to maintain and expand an influence that spanned the globe. This generation had not merely inherited an organization; they had, through their choices, consecrated its reach, expanding its spiritual and practical dominion across the entire human family. The taste left behind was complex: a blend of profound satisfaction, weary responsibility, and the enduring flavor of a mission still unfolding for the next generation."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The celebratory champagne, effervescent and bright, marked the successful conclusion of a major international initiative, a testament to effective global coordination."
+          ],
+          "choice": {
+            "text": "Reflect on the tangible successes and strategic victories that expanded the family's reach and influence, ensuring a stable future.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 0,
+              "power": 2,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "reflected_on_tangible_success"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The slightly bitter, grounding taste of strong black tea, a ritual from your youth, offered a moment of quiet introspection on the moral landscape of the world."
+          ],
+          "choice": {
+            "text": "Consider the ethical impact of the family's actions, seeking reassurance that their global power remains firmly rooted in their founding principles.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "reflected_on_ethical_impact"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:religious:middle:t5:open",
+      "sense": "smell",
+      "prose": [
+        "A curious blend of sterile filtration and the faint, sweet scent of newly tilled soil permeated the habitat dome, a testament to humanity's tireless efforts to replicate Earth's bounty amidst the void. Beneath it all, a whisper of ozone from the life support systems, a constant reminder of the thin membrane separating them from the indifferent vacuum. But in the {family_name} quarters, another, more profound aroma lingered: the ghost of peat smoke, a ceremonial burning of a precious, centuries-old briquette, a connection to the very earth their ancestors walked, now carried across the vast expanse between worlds.",
+        "This scent, both primal and futuristic, was the backdrop to {given_name}'s morning prayers. The recycled air, stripped of dust and dander, still held the lingering sweetness of the hydroponic gardens, where carefully cultivated herbs – rosemary, thyme, and a precious few shamrock sprouts – added a fragile, living perfume to the sterile environment. It was a constant negotiation between the raw, unyielding reality of their new home among the stars and the steadfast traditions they had painstakingly brought with them, a fragrant bridge across the cosmic chasm.",
+        "The air itself felt thin, yet vibrant, charged with the dreams and anxieties of thousands. Every breath drew in the ambition of a species reaching for more, tempered by the quiet perseverance of those who carried their heritage like a sacred flame. For {full_name}, it was the smell of purpose, of a new covenant unfolding under alien suns, a scent that promised both challenge and salvation in equal measure."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The faint, almost imperceptible scent of freshly baked soda bread, a {family_name} tradition carried across generations and light-years, drifted from the small, efficient kitchen module, grounding the abstract ambition of their new home."
+          ],
+          "choice": {
+            "text": "Lean into the comfort of shared traditions, finding strength in the familiar.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "worldview": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "traditional_comfort"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A sharp, metallic tang, the exhaust from the newly commissioned deep-space mining drill, momentarily cut through the domestic scents, a stark reminder of the raw, industrial power driving their interstellar expansion."
+          ],
+          "choice": {
+            "text": "Embrace the challenging advancements, understanding their necessity for future prosperity.",
+            "motivatorShift": {
+              "reach": 2,
+              "wealth": 1,
+              "power": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "industrial_ambition"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t5:rising"
+    },
+    {
+      "id": "act:ireland:religious:middle:t5:rising",
+      "sense": "touch",
+      "prose": [
+        "The cold, unyielding surface of the habitat's reinforced viewport, a barrier mere inches thick, offered a chilling testament to the hostile beauty beyond. {given_name}'s fingertips brushed against it, feeling the phantom vibration of a distant thruster, a low thrum that resonated deep within the bones. The entire structure, a marvel of engineering, pulsed with an almost imperceptible rhythm, a living entity cradling its fragile human cargo. Even the air, so carefully conditioned, felt different – thinner, perhaps, or simply alien against the skin, a constant, subtle pressure reminding them they were no longer on Earth.",
+        "Later, the worn, coarse weave of a prayer mat, carried painstakingly from their ancestral home, offered a familiar comfort. Its rough texture against the knees and palms during evening vespers was a grounding sensation, a physical link to generations of devotion. It was a small act of defiance against the polished, sterile surfaces of their new home, a deliberate choice to carry the tactile memory of their heritage into the stars. This dichotomy – the cold precision of technology versus the warm embrace of tradition – was the daily touchstone of their lives.",
+        "The subtle shift in artificial gravity, as the station adjusted its spin, was a constant, almost subliminal reminder of their detachment from planetary pull. It was a sensation that mimicked buoyancy, a lightness that could be unsettling or liberating, depending on one's disposition. Every physical interaction, from securing a tool to embracing a loved one, carried this subtle nuance, a constant pressure testing their human adaptability against the boundless frontiers of space."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A familiar, heavy rosary, the beads smoothed by countless fingers, felt cool and substantial in {given_name}'s palm, its weight a comforting anchor in the disorienting lightness of the station's artificial gravity."
+          ],
+          "choice": {
+            "text": "Cling to the tangible symbols of faith and heritage, finding stability in tradition.",
+            "motivatorShift": {
+              "tradition": 2,
+              "worldview": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "reaffirm_faith"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The smooth, cool surface of a newly installed holographic interface responded with a faint hum beneath {given_name}'s touch, a promise of new possibilities and streamlined efficiency for the colony's burgeoning needs."
+          ],
+          "choice": {
+            "text": "Embrace the innovations of this new frontier, seeking efficiency and progress.",
+            "motivatorShift": {
+              "reach": 2,
+              "wealth": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "embrace_innovation"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The community faces a resource allocation challenge for a new orbital farm module. One faction advocates for prioritizing yield to ensure self-sufficiency, while another suggests allocating space for specialized, Earth-originating crops for cultural and spiritual significance, even at a lower overall output.",
+        "options": [
+          {
+            "text": "Support maximizing crop yield, arguing that sustenance and security must precede sentimental considerations in this new environment.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 1,
+              "tradition": -1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "prioritize_yield"
+            ]
+          },
+          {
+            "text": "Advocate for allocating space to traditional crops, emphasizing the importance of spiritual and cultural nourishment for the community's well-being.",
+            "motivatorShift": {
+              "tradition": 2,
+              "worldview": 2,
+              "lineage": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "prioritize_heritage_crops"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t5:midpoint"
+    },
+    {
+      "id": "act:ireland:religious:middle:t5:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The cacophony of the station's central plaza was a testament to its vibrant, if sometimes jarring, existence. The steady, hypnotic hum of the fusion core resonated deep beneath their feet, a constant bass note to the symphony of nascent interstellar civilization. Above it, the polyglot chatter of traders bargaining for rare minerals, the crisp announcements of shuttle departures, and the cheerful, if slightly tinny, chime of a local market vendor hawking nutrient pastes. It was a grand, sprawling noise, a blend of ambition and the mundane, woven with threads of anticipation for what new frontiers lay just beyond the next jump gate.",
+        "Amidst this chorus, {full_name} heard, with a profound sense of rootedness, the familiar strains of a Gregorian chant, filtering faintly from the small, meticulously maintained chapel. It was a sound that transcended the sterile steel and glass, cutting through the futuristic din like a beacon from a forgotten shore. Other voices, not of their own wave, occasionally added their own melodies – the sharp, percussive rhythms of a different cultural group's morning ritual, or the synthetic warble of a data-streamed news broadcast about a rival's latest colonial claim.",
+        "The gentle, insistent whir of their domestic droids performing their tasks, cleaning and organizing, provided a quieter, more personal soundtrack to their daily lives, a stark contrast to the vast, mechanical breathing of the station itself. It was a constant negotiation of auditory space: the grand, overwhelming sounds of humanity's expansion, the quiet, persistent murmurs of their own traditions, and the occasional, unsettling intrusion of others' ambitions echoing through the shared metallic air."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "As a sudden klaxon blared a minor alert across the station, {given_name} heard the urgent, familiar tones of their community's emergency protocols, a sound designed to instill calm amidst chaos."
+          ],
+          "choice": {
+            "text": "Seek out the community elders, trusting their practiced leadership in uncertain times.",
+            "motivatorShift": {
+              "tradition": 1,
+              "lineage": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "trust_elders"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The distinct, almost musical thrum of a newly arrived cargo vessel from a rival settlement docked nearby, its powerful engines reverberating through the station's structure, signaling new competition and opportunity."
+          ],
+          "choice": {
+            "text": "Investigate the rival's cargo and crew movements, looking for potential leverage or alliance opportunities.",
+            "motivatorShift": {
+              "power": 1,
+              "politics": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "observe_rivals"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t5:turn"
+    },
+    {
+      "id": "act:ireland:religious:middle:t5:turn",
+      "sense": "sight",
+      "prose": [
+        "Through the vast, panoramic viewport of the observation deck, the cosmic canvas unfolded in breathtaking, silent majesty. Swirling nebulae painted streaks of impossible color against the velvet black, punctuated by the cold, fierce pinpricks of distant suns. A new colony, a nascent world still swathed in terraforming clouds, hung like a fragile blue marble in the abyss, a testament to humanity's audacious reach. It was a sight that humbled, inspired, and sometimes, terrified, {full_name}, a stark visual representation of the colossal stakes of their endeavor.",
+        "Within the observation deck, the scene was equally charged. Holographic projections flickered, displaying schematics of new orbital habitats, proposed trade routes winding through asteroid fields, and the burgeoning demographics of their own growing settlements. The faces around {given_name} – some etched with the weariness of long journeys, others alight with evangelical fervor, still others calculating with cold, strategic resolve – reflected the myriad motivations driving this interstellar push. Every gaze, whether directed outwards at the stars or inwards at the data, held a different vision for the future.",
+        "A rival faction’s emblem, a stylized winged serpent, glowed subtly on a nearby display, representing their recent claim on a resource-rich moon near the {family_name} sphere of influence. Its angular, predatory lines contrasted sharply with the more communal, Earth-centric motifs favored by their own people. The decision, when it came, would not merely shape a territory; it would visually define the very spirit of their lineage in this new, unbounded cosmos, a legacy etched in the stars for all to see."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The shimmering, almost ethereal light of a distant, newly discovered nebula seemed to call to {given_name}, a profound spiritual beauty beckoning beyond their known territories."
+          ],
+          "choice": {
+            "text": "Contemplate the spiritual significance of the cosmos, seeing it as God's new frontier.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "spiritual_contemplation"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The stark, functional lines of a new industrial processing plant on a nearby asteroid were clearly visible through the viewport, a symbol of their growing material wealth and influence in the sector."
+          ],
+          "choice": {
+            "text": "Focus on the tangible assets and strategic importance of their current holdings.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "focus_material_assets"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The {family_name} line holds significant influence in the nascent stellar collective. A proposal is put forth for the expansion of human presence to a promising exoplanet. The choice before you is how your line will shape this new colonization effort, balancing ambition with your enduring values.",
+        "options": [
+          {
+            "text": "Champion a strictly faith-based colonization model, creating a 'New Éire' of spiritual purity and communal self-sufficiency, separate from the broader collective's secular interests.",
+            "motivatorShift": {
+              "worldview": 3,
+              "tradition": 3,
+              "lineage": 2,
+              "reach": -1,
+              "politics": -2
+            },
+            "setFlags": [
+              "found_religious_colony"
+            ]
+          },
+          {
+            "text": "Lead the charge for an inclusive, cooperative colonization, integrating {family_name} values of community and perseverance into a diverse collective, seeking to uplift all settlers.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 2,
+              "worldview": 1,
+              "reach": 2,
+              "wealth": 1
+            },
+            "setFlags": [
+              "lead_inclusive_colonization"
+            ]
+          },
+          {
+            "text": "Advocate for a pragmatic, resource-driven approach to colonization, focusing on economic opportunity and strategic positioning, even if it means de-emphasizing some traditional aspects of the {family_name} heritage.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 3,
+              "reach": 2,
+              "tradition": -2,
+              "worldview": -2
+            },
+            "setFlags": [
+              "pursue_pragmatic_colonization"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:religious:middle:t5:close"
+    },
+    {
+      "id": "act:ireland:religious:middle:t5:close",
+      "sense": "taste",
+      "prose": [
+        "The ceremonial meal, carefully prepared from the habitat's hydroponic yield and synthesized proteins, held a taste both familiar and strange. The rich, earthy flavor of new-world tubers, carefully crossbred for the stellar environment, mingled with the almost artificial sweetness of a high-energy nutrient paste. It was a taste of perseverance, of making do, but also of innovation, of finding ways to carry the essence of their culinary heritage across the void. Every mouthful was a small, quiet victory against the vast indifference of space, a testament to their enduring spirit.",
+        "A precious dram of distilled spirits, a concoction meant to evoke the potent warmth of ancestral whiskey, burned pleasantly down {full_name}'s throat. It lacked the true peat-smoked bite of Earth-grown barley, but it carried the spirit of the tradition, a celebratory taste of hard-won progress and the promise of a future yet to be fully savored. It was a taste of memory, passed from the hand of {given_name} to their heir, a liquid legacy imbued with the challenges and triumphs of a generation.",
+        "The lingering aftertaste of the meal was complex: a faint metallic tang from the purified water, a subtle bitterness from the fortified supplements, yet underneath it all, the comforting saltiness of a shared endeavor. It was the taste of a family, a community, forging new roots in alien soil, knowing that what they passed on to the next generation was not just territory or technology, but the very essence of their identity, distilled and refined by the crucible of the stars."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The heir, {heir_given_name}, savored a piece of nutrient-rich 'soda bread' replicated from ancestral recipes, its texture slightly denser but its comforting essence intact, a testament to culinary persistence."
+          ],
+          "choice": {
+            "text": "Reinforce the importance of preserving cultural and culinary traditions for future generations.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "pass_culinary_tradition"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The heir, {heir_given_name}, accepted a small, potent wafer of synthesized protein, tasting of efficiency and the bold, new flavors of engineered sustenance, a symbol of the resources now at their command."
+          ],
+          "choice": {
+            "text": "Emphasize the practical advancements and resourcefulness gained this generation, key to the line's future.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "pass_resourceful_gains"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}
