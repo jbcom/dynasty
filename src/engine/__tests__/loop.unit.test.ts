@@ -370,6 +370,60 @@ describe("Game loop", () => {
     expect(b.year).toBe(a.year);
   });
 
+  it("RB-7: a non-1885 origin (baghdad, 762 CE) plays a full capped multi-generation run, not extinct/infinite", () => {
+    const real = loadContent();
+    const comp = {
+      place: "baghdad",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 762,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Abbas",
+      seed: "rb7",
+      originId: "composed:baghdad:origins",
+    };
+    const play = () => {
+      const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+      let guard = 0;
+      let scenes = 0;
+      while (!g.finished && guard < 5000) {
+        const v = g.view;
+        const s = v.saga.scene;
+        if (s) {
+          scenes++;
+          if (s.decision) {
+            const i = s.decision.options.findIndex((o) => o.succession?.takesPartner);
+            g.pickDecision(i >= 0 ? i : 0);
+          } else if (s.beats.length) g.pickBeat(0);
+          else break;
+        } else if (v.currentEvent) {
+          const c = v.currentEvent.choices[0];
+          if (!c) break;
+          g.choose(c.id);
+        } else break;
+        guard++;
+      }
+      return {
+        scenes,
+        finished: g.finished,
+        year: g.view.state.year,
+        conv: g.view.convergence?.destination,
+      };
+    };
+    const a = play();
+    // The saga clock is decoupled from the 1885 era ladder, so baghdad survives generations (was extinct
+    // ~16 scenes) AND the run caps at 6 generations (was infinite once decoupled) — a full, finite run.
+    expect(a.finished).toBe(true);
+    expect(a.scenes).toBeGreaterThan(120);
+    expect(a.scenes).toBeLessThan(400);
+    expect(a.conv).toBeTruthy();
+    // Replay-deterministic.
+    const b = play();
+    expect(b.scenes).toBe(a.scenes);
+    expect(b.year).toBe(a.year);
+  });
+
   it("PF-14: a saga choice's setFlags reach the run's state.flags (not sealed in the driver)", () => {
     const real = loadContent();
     const comp = {

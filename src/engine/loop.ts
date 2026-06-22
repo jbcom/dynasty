@@ -18,7 +18,7 @@ import { actsForTier } from "../sim/saga/player";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
 import { type GameState, initState, isMemberAlive, type LedgerEntry } from "../sim/state";
-import { advanceTimeline, detectEnd } from "../sim/timeline";
+import { advanceSagaClock, advanceTimeline, detectEnd } from "../sim/timeline";
 import { pickNextEventViaWorld } from "../sim/world";
 import { SagaDriver, type SagaFrame } from "./sagaDriver";
 
@@ -244,7 +244,12 @@ export class Game {
    */
   private advanceRunClock(): void {
     const fromYear = this.state.year;
-    this.state = advanceTimeline(this.content, this.state);
+    // While a novel act is active, tick the SAGA clock (a fixed generational year-step decoupled from
+    // the era ladder) so any founding year — including baghdad's 762 CE — plays a full multi-generation
+    // run; the era-budget timeline only drives the EVENT path (the 1885 waves it's calibrated for).
+    this.state = this.saga.active
+      ? advanceSagaClock(this.state)
+      : advanceTimeline(this.content, this.state);
     // PF-8: age + succeed the family over the elapsed years — the same logic the event path runs — so
     // reading the novel actually advances the lineage (mortality, heir handoff, extinction).
     this.state = advanceFamily(
@@ -288,7 +293,19 @@ export class Game {
     this.syncSagaFlags();
     const continues =
       !!result?.succession && (result.succession.takesPartner || result.succession.begets > 0);
-    if (continues && result?.succession) {
+    if (continues && result?.succession && this.playerRung() >= MAX_RUNG) {
+      // The line carried succession THROUGH the final reach tier — the dynasty has reached its apex.
+      // End the run on a high note (a survived convergence ending) rather than re-beginning tier 5
+      // forever (the saga ladder caps at 6 generations; without this the decoupled clock loops endlessly).
+      this.state = {
+        ...this.state,
+        end: {
+          kind: "apex",
+          year: this.state.year,
+          reason: "Six generations carried the name to the height of its reach.",
+        },
+      };
+    } else if (continues && result?.succession) {
       // Apply the succession effect to the LIVE family (take a partner + beget heirs) BEFORE stepping
       // to the next act — else the player "raises heirs" but none are begotten and the line goes extinct
       // at the protagonist's death (DEPTH-3). Seeded for replay; label-scoped vs the event path.
