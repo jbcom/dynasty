@@ -187,9 +187,7 @@ describe("life-stage beget normalizes the birth year (NA-11 regression guard)", 
     if (!heirsEv) throw new Error("no ev_cp_raise_heirs in lifeStageEvents");
     const before = state.family?.members ?? [];
     const next = applyChoice(content, state, heirsEv, "careful_pair", createRng("2")).state;
-    const newKids = (next.family?.members ?? []).filter(
-      (m) => !before.some((o) => o.id === m.id),
-    );
+    const newKids = (next.family?.members ?? []).filter((m) => !before.some((o) => o.id === m.id));
     expect(newKids.length).toBeGreaterThan(0);
     for (const k of newKids) expect(k.born, `child ${k.id} born`).toBeGreaterThanOrEqual(1978);
   });

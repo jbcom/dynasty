@@ -57,7 +57,10 @@ describe("Convergence roster: every wave founds leak-free + has a saga act", () 
       // NA-11: founding no longer pre-sets emerged/named or stamps has_authored_epoch0.
       expect(founded.flags, place).not.toContain("has_authored_epoch0");
       const trace = tracePlaythrough(content, comp);
-      expect(validateTrace(trace).filter((f) => f.kind === "leak"), place).toEqual([]);
+      expect(
+        validateTrace(trace).filter((f) => f.kind === "leak"),
+        place,
+      ).toEqual([]);
     }
   });
 
