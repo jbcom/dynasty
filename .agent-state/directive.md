@@ -246,13 +246,11 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   (saga-head signal + advancePlay paging). waveSelect test pins the override. (Live-verify of poor-vs-
   middle divergence folds into PF-13's full run.)
 
-- [~] **PF-7 WIRE THE DEAD CONVERGENCE LAYER — glimpses DONE; convergence endings remain** (commit
-  4e6fce1). Game now creates + advances a DynastyWorld (rng.fork("world"/"world:<year>") — separate
-  stream, replay bit-identical), exposes GameView.glimpses + rung, PlayScreen feeds projectSaga →
-  SagaPanel "Other lines" + class readout populate. strategyForArchetype() gives the player a relation.
-  Unit-tested + deterministic. REMAINING: convergence ENDINGS — resolveConvergence(ctx) isn't called
-  at run-end yet; wire it into the end/legacy-report so the ending reflects tier + motivators + whether
-  rivals reached the stars (rivalsReachedStars from the world). Then live-verify glimpses + ending.
+- [x] **PF-7 WIRE THE DEAD CONVERGENCE LAYER — DONE** (commits 4e6fce1 glimpses, 010602e endings).
+  Game creates + advances a DynastyWorld (separate rng stream, replay bit-identical); GameView.glimpses
+  + rung feed projectSaga → SagaPanel "Other lines" + class readout populate; Game.convergenceEnding()
+  resolves the dynastic destination at run-end (tier + motivators + rivalsReachedStars) → GameView.
+  convergence → LegacyReport framing. Unit-tested + deterministic. (Live-verify folds into PF-13.)
 
 - [ ] **PF-8 saga succession drives REAL family advancement.** SagaDriver/Game.beginNextGenerationAct
   re-begins the act at the next tier but does NOT call effects.succeed/beget — the saga generation-step
