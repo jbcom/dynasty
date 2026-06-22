@@ -9,14 +9,30 @@ export default defineConfig({
   plugins: [svelte()],
   // Tests are a one-shot run — disable Vite's file watcher so it can't reload a test mid-run.
   server: { watch: null },
-  // The browser-mode CI flake "Vite unexpectedly reloaded a test" → "failed to find the runner" is a
-  // dep-OPTIMIZATION reload: when a test (e.g. screens.browser.test.ts → LegacyReport → SceneStage →
-  // composeScene) pulls a dep Vite hadn't pre-bundled, Vite re-optimizes and reloads the page mid-run,
-  // killing the test runner. Point Vite's dep SCAN at the browser-test entry surface so everything is
-  // pre-bundled before the run starts — no mid-run discovery, no reload (discovery stays ON so deps not
-  // listed here are still found at scan time).
+  // CI-only flake "Vite unexpectedly reloaded a test" → "failed to find the runner": Vite's dep
+  // optimizer runs ONE scan at server start, but it cannot follow runtime-only deps — the lazy
+  // `await import("@capacitor/*")` in engine/storage.ts, engine/haptics.ts, engine/formFactor.ts,
+  // src/main.ts, plus koota/yuka reached only through runtime sim paths. When a test EXECUTES one of
+  // those branches, Vite discovers the new dep, re-optimizes, and issues a FULL PAGE RELOAD; whatever
+  // test holds the browser tab at that instant loses its runner and fails. It manifests CI-only because
+  // CI has a COLD .vite cache (local runs reuse a warm cache where these were optimized on a prior run)
+  // and a slower box, so the async re-optimize lands MID-RUN instead of between files.
+  //
+  // `entries` (scan root) can't fix it — the offenders are behind dynamic import()/runtime branches the
+  // scanner won't follow. `include` force-prebundles them BEFORE the run starts, so the cold-cache
+  // optimize is complete up front: no mid-run discovery, no reload. Keep this in sync with every bare
+  // dep reached via `await import(...)` or runtime-only sim paths (grep `import("` + sim/world,goap).
   optimizeDeps: {
     entries: ["src/**/*.browser.test.ts", "src/**/*.visual.test.ts", "src/**/*.audio.test.ts"],
+    include: [
+      "@capacitor/core",
+      "@capacitor/status-bar",
+      "@capacitor/device",
+      "@capacitor/haptics",
+      "@capacitor/preferences",
+      "koota",
+      "yuka",
+    ],
   },
   resolve: {
     alias: {
