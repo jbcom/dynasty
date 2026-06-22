@@ -119,3 +119,68 @@ export function selectBraid(
   };
   return { destination: chosen.dest, source: chosen.source, thread };
 }
+
+/** The minimal rival shape the candidate adapter needs (a subset of DynastyWorld's RivalSnapshot). */
+export interface RivalLike {
+  id: string;
+  placeId: string;
+  archetype: string;
+  strategy: string;
+  alive: boolean;
+}
+
+/** The played line's situation, for computing each candidate's bias overlap. */
+export interface PlayerSituation {
+  placeId: string;
+  archetype: string;
+  cls: string;
+  tier: number;
+  /** The year a rival is considered active from (when their place's wave entered). Keyed by placeId. */
+  activeFromByPlace?: Record<string, number>;
+}
+
+/** Map a rival's strategy-vs-player relation the same way the glimpse strip does (opposing/contributing). */
+const COMPLEMENT: Record<string, string> = {
+  accumulate: "seize_power",
+  seize_power: "accumulate",
+  advance_knowledge: "accumulate",
+  spread_belief: "win_renown",
+  win_renown: "spread_belief",
+};
+
+/**
+ * Adapt live rival snapshots into braid CANDIDATES for the player's situation — the bridge from the
+ * DynastyWorld to the selector. Each rival's source slots are supplied by `sourcesFor` (its corpus
+ * scene slots at the player's tier/setting); the bias overlap is place (same placeId) × archetype (same
+ * power base) × class is unknown for rivals so it contributes a neutral 0.5. Pure.
+ */
+export function candidatesFromSnapshots(
+  rivals: readonly RivalLike[],
+  player: PlayerSituation,
+  playerStrategy: string,
+  sourcesFor: (rival: RivalLike) => readonly BraidSlot[],
+): BraidCandidate[] {
+  const out: BraidCandidate[] = [];
+  for (const r of rivals) {
+    if (!r.alive) continue;
+    const relation: BraidCandidate["relation"] =
+      r.strategy === playerStrategy
+        ? "opposing"
+        : COMPLEMENT[playerStrategy] === r.strategy
+          ? "contributing"
+          : "neutral";
+    out.push({
+      wave: r.id,
+      tier: player.tier,
+      activeFromYear: player.activeFromByPlace?.[r.placeId] ?? Number.NEGATIVE_INFINITY,
+      sources: sourcesFor(r),
+      bias: {
+        place: r.placeId === player.placeId ? 1 : 0,
+        archetype: r.archetype === player.archetype ? 1 : 0.4,
+        cls: 0.5, // rivals don't expose a class rung; neutral contribution
+      },
+      relation,
+    });
+  }
+  return out;
+}

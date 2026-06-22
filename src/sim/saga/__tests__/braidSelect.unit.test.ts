@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { createRng } from "../../rng";
-import { type BraidCandidate, type BraidContext, selectBraid } from "../braidSelect";
+import {
+  type BraidCandidate,
+  type BraidContext,
+  candidatesFromSnapshots,
+  type RivalLike,
+  selectBraid,
+} from "../braidSelect";
 
 /**
  * WV-2 braid selector — pure, seeded emergent crossing selection. Verifies: era-gating (later dynasties
@@ -78,5 +84,66 @@ describe("selectBraid (WV-2)", () => {
   it("only crosses at the shared tier (a candidate at a different tier is skipped)", () => {
     const otherTier = candidate({ tier: 3 });
     expect(selectBraid(ctx({ tier: 0 }), [otherTier], createRng("s").fork("b"))).toBeNull();
+  });
+});
+
+describe("candidatesFromSnapshots (WV-2 adapter)", () => {
+  const rival = (over: Partial<RivalLike> = {}): RivalLike => ({
+    id: "ashkenazi_jewish",
+    placeId: "ny",
+    archetype: "economic",
+    strategy: "accumulate",
+    alive: true,
+    ...over,
+  });
+  const market = [
+    { kind: "source" as const, at: 0, setting: "market", vignette: "A peddler hawks wares." },
+  ];
+
+  it("maps live rivals to candidates with place/archetype bias + a strategy-derived relation", () => {
+    const cands = candidatesFromSnapshots(
+      [rival()],
+      { placeId: "ny", archetype: "economic", cls: "poor", tier: 0 },
+      "accumulate",
+      () => market,
+    );
+    expect(cands).toHaveLength(1);
+    expect(cands[0]?.bias.place).toBe(1); // same placeId
+    expect(cands[0]?.bias.archetype).toBe(1); // same power base
+    expect(cands[0]?.relation).toBe("opposing"); // same strategy as the player
+    expect(cands[0]?.sources).toEqual(market);
+  });
+
+  it("drops dead rivals and lowers bias for a different place/archetype", () => {
+    const cands = candidatesFromSnapshots(
+      [rival({ alive: false }), rival({ id: "far", placeId: "sf", archetype: "political" })],
+      { placeId: "ny", archetype: "economic", cls: "poor", tier: 0 },
+      "accumulate",
+      () => market,
+    );
+    expect(cands).toHaveLength(1); // dead one dropped
+    expect(cands[0]?.bias.place).toBe(0); // different place
+    expect(cands[0]?.bias.archetype).toBe(0.4); // different power base
+  });
+
+  it("threads through selectBraid end-to-end (live rival → woven borrowed crossing)", () => {
+    const cands = candidatesFromSnapshots(
+      [rival()],
+      { placeId: "ny", archetype: "economic", cls: "poor", tier: 0 },
+      "spread_belief", // complementary-ish → not opposing
+      () => market,
+    );
+    const m = selectBraid(
+      {
+        year: 1890,
+        tier: 0,
+        destinations: [{ kind: "destination", at: 1, setting: "market" }],
+        baseChance: 1,
+      },
+      cands,
+      createRng("seed").fork("braid"),
+    );
+    expect(m?.thread.wave).toBe("ashkenazi_jewish");
+    expect(m?.thread.crossing).toBe("A peddler hawks wares."); // borrowed vignette
   });
 });
