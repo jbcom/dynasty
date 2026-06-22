@@ -74,14 +74,18 @@ round-trips). The gap is UI-only. NOT corpus-blocked — doable now while UQ-2 c
   save/restore" failed (a vs b2 reached 2039 vs 2034) ONLY on the lineage corpus (passed on the pre-lineage one).
   Per the diff-is-the-test rule, `git checkout -- src/data/saga` reverted it; loop test green again. The
   scene-pass corpus (UQ-2b) stands. ROOT-CAUSE needed before re-running → UQ-2c2.
-- [ ] **UQ-2c2 root-cause the lineage-pass determinism break, then re-run safely.** The lineage re-author changed
-  scene content such that a mid-run save/restore no longer reproduces the uninterrupted run (year divergence).
-  Likely: it mutated decision/succession option ORDER or a flag a later scene `requires`, breaking the
-  seed+history replay invariant ([[save-and-chronology]]). Diff a re-authored scene's decision/options/flags vs
-  the original to find what drifted; then either (a) constrain the lineage pass to PRESERVE decision/flag wiring
-  (like the scene pass preserves id/sense/next), re-run, re-verify determinism; or (b) if continuity fixes
-  inherently need wiring changes, gate them through a determinism re-validation before keep. Dispatch
-  stuck-loop-debugger if 2+ hypotheses miss. THEN re-run + verify loop test green + commit.
+- [x] **UQ-2c2 root-cause + FIX the lineage determinism break — DONE (776d6e7).** CONFIRMED by repro: the
+  lineage continuity-fix re-author accepted raw model output with only an id check (no normalize/re-pin/
+  validate), so it mutated close-scene `decision` succession wiring (ireland t0:close [P+2,none,P-1] →
+  [P+2,P-1,P-1]). The sim replays succession → divergence. FIX: shared `normalizeAndPin(raw, original)` that
+  re-pins id/sense/next/requires + the WHOLE decision block + schema-validates; BOTH the scene pass and the
+  (previously-bypassing) lineage-fix path route through it; prompt now states decision/succession is preserved.
+  +1 contract test, 690 unit green. ([[save-and-chronology]])
+- [ ] [WAIT] **UQ-2c3 re-validate the fix on regenerated corpus, then re-run full lineage-pass.** Scoped
+  lineage re-run on ireland/poor WITH the fix is RUNNING (bg bfh319git). ON completion: confirm the close-scene
+  succession structure is PRESERVED (matches the pre-pass original) + the loop determinism test passes on the
+  regenerated file. If green → re-run `--pass lineage --write` across all 84, re-verify the loop test, keep +
+  commit. If still drifting → the re-pin missed a field; diff again. [WAIT] the bg run.
 - [ ] **UQ-2d semantic-uniqueness + genuine-intersection audit — corpus is STABLE at UQ-2b (lineage reverted),
   so NOT blocked.** Large-context parallel-reader pass over the scene-pass-corrected corpus: confirm no two cells
   read structurally/semantically alike and crossings are organic (woven, not walls). Findings → targeted
