@@ -24,9 +24,8 @@ export type RenderClass = "poor" | "middle";
 /** The terminal outcome an ending frame overlays (mirrors convergence.ts resolutions). */
 export type EndingOutcome = "stars" | "contributed" | "earthbound" | "extinguished";
 
-/** What the compositor is asked to draw. `variant` selects the trigger; the rest is the identity. */
-export interface SceneRenderInput {
-  variant: "scene" | "rival" | "ending";
+/** Fields shared by every render request — the line's identity + the moment's sense/mood. */
+interface SceneRenderBase {
   archetype: Archetype;
   cls: RenderClass;
   /** A wave/period id or a macro-act title — anything carrying the era keywords rampForEra matches. */
@@ -35,13 +34,22 @@ export interface SceneRenderInput {
   sense?: Sense;
   /** The dominant motivator pole — drives the portrait's expression layer + the ending coloring. */
   pole?: string;
-  /** The terminal outcome — required for `variant: "ending"`, ignored otherwise. */
-  outcome?: EndingOutcome;
 }
+
+/**
+ * What the compositor is asked to draw — a discriminated union on `variant` so the type system enforces
+ * each trigger's contract: only the `ending` frame takes (and REQUIRES) an outcome; scene/rival can't
+ * pass one. This makes the "outcome required for endings" rule a compile-time guarantee, not a runtime
+ * fallback.
+ */
+export type SceneRenderInput =
+  | (SceneRenderBase & { variant: "scene" })
+  | (SceneRenderBase & { variant: "rival" })
+  | (SceneRenderBase & { variant: "ending"; outcome: EndingOutcome });
 
 /** One stacked layer of the composed portrait — an asset id + its semantic role. */
 export interface PortraitLayer {
-  /** Asset id resolved against assets.json (kind: "portrait-layer"). */
+  /** Asset id path resolved against assets.json (kind: "portrait") → public/assets/<asset>.svg. */
   asset: string;
   role: "base" | "tier" | "mood" | "outcome";
 }
@@ -92,29 +100,33 @@ export function composeScene(input: SceneRenderInput): SceneFrame {
     };
   }
 
+  // Full player portrait (base + class tier + mood) + the era wash tinted by the scene's sense — shared
+  // by the high-frequency `scene` path and the `ending` frame; the latter just adds an outcome overlay.
   const layers: PortraitLayer[] = [
     { asset: `portrait/base/${archetype}`, role: "base" },
     { asset: `portrait/tier/${cls}`, role: "tier" },
     { asset: `portrait/mood/${mood}`, role: "mood" },
   ];
+  const wash = rampForEra(eraId);
+  const accent = sense ? accentForSense(sense) : null;
 
-  if (variant === "ending") {
-    const outcome = input.outcome ?? "earthbound";
+  if (input.variant === "ending") {
+    // The union guarantees `outcome` is present for an ending frame — no runtime fallback needed.
+    const { outcome } = input;
     layers.push({ asset: `portrait/outcome/${outcome}`, role: "outcome" });
     return {
       layers,
-      wash: rampForEra(eraId),
-      accent: sense ? accentForSense(sense) : null,
+      wash,
+      accent,
       key: `ending:${archetype}:${cls}:${outcome}:${eraId}`,
       silhouette: false,
     };
   }
 
-  // The high-frequency scene path: full portrait + the era wash tinted by the scene's sense.
   return {
     layers,
-    wash: rampForEra(eraId),
-    accent: sense ? accentForSense(sense) : null,
+    wash,
+    accent,
     key: `scene:${archetype}:${cls}:${mood}:${eraId}:${sense ?? "none"}`,
     silhouette: false,
   };

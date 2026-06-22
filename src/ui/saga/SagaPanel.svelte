@@ -21,6 +21,21 @@ const relationIcon: Record<string, string> = {
   contributing: "🤝",
   neutral: "•",
 };
+
+// RB-8: precompute each glimpse's rival-silhouette frame once per view (not per re-render inside the
+// {#each}), so a motivator/year tick doesn't reallocate a SceneFrame for every glimpse. The frame key
+// is stable, so {#key} transitions are unaffected.
+const glimpseFrames = $derived(
+  view.glimpses.map((g) => ({
+    g,
+    frame: composeScene({
+      variant: "rival" as const,
+      archetype: g.archetype,
+      cls: "poor" as const,
+      eraId: view.macroActTitle,
+    }),
+  })),
+);
 </script>
 
 <section class="saga" data-macro-act={view.macroAct}>
@@ -45,11 +60,11 @@ const relationIcon: Record<string, string> = {
   {#if view.glimpses.length}
     <div class="glimpses" data-testid="glimpses">
       <span class="glimpses-title">Other lines</span>
-      {#each view.glimpses as g (g.rivalId)}
+      {#each glimpseFrames as { g, frame } (g.rivalId)}
         <span class="glimpse" data-relation={g.relation}>
           <!-- RB-8: a small archetype SILHOUETTE vignette so the other line reads as a person, not a row. -->
           <span class="glimpse-vignette" aria-hidden="true">
-            <SceneStage frame={composeScene({ variant: "rival", archetype: g.archetype, cls: "poor", eraId: view.macroActTitle })} />
+            <SceneStage {frame} />
           </span>
           <span class="rel-icon" aria-hidden="true">{relationIcon[g.relation] ?? "•"}</span>
           {g.label} — {g.note}

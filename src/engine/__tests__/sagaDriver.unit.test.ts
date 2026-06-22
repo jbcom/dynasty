@@ -24,6 +24,15 @@ describe("SagaDriver", () => {
     expect(d.active).toBe(true);
     // RB-8: the frame carries the active cell so the render layer can compose the portrait/wash.
     expect(frame.cell).toEqual({ wave: "ireland", archetype: "economic", tier: 0 });
+    // The cell's archetype is the typed Archetype (no cast needed downstream) — one of the six poles.
+    expect([
+      "economic",
+      "political",
+      "technological",
+      "religious",
+      "entertainment",
+      "athletic",
+    ]).toContain(frame.cell?.archetype);
   });
 
   it("yields a null scene for an unauthored cell (engine falls back)", () => {

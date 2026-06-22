@@ -77,9 +77,13 @@ describe("composeScene (RB-8)", () => {
       expect(f.wash?.id).toBe("origins");
     });
 
-    it("defaults to earthbound when no outcome is given", () => {
-      const f = composeScene({ ...baseInput, variant: "ending" });
-      expect(f.layers[3]?.asset).toBe("portrait/outcome/earthbound");
+    it("requires an explicit outcome (the union forbids omitting it) and overlays it", () => {
+      // The discriminated union makes `outcome` mandatory for an ending frame — omitting it is a
+      // compile error, so the old runtime "default earthbound" path is gone. Each outcome maps through.
+      for (const outcome of ["stars", "contributed", "earthbound", "extinguished"] as const) {
+        const f = composeScene({ ...baseInput, variant: "ending", outcome });
+        expect(f.layers[3]?.asset).toBe(`portrait/outcome/${outcome}`);
+      }
     });
   });
 });

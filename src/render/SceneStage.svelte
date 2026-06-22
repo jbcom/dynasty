@@ -1,4 +1,5 @@
 <script lang="ts">
+import { onMount } from "svelte";
 import { fade } from "svelte/transition";
 import type { SceneFrame } from "./composeScene";
 
@@ -19,15 +20,24 @@ import type { SceneFrame } from "./composeScene";
 
 interface Props {
   frame: SceneFrame;
-  /** Asset base path; layer ids resolve to `${base}/${layer.asset}.{png|svg}`. */
+  /** Asset base path; layer ids resolve to `${base}/${layer.asset}.svg`. */
   assetBase?: string;
 }
 const { frame, assetBase = "/assets" }: Props = $props();
 
-const reduceMotion =
-  typeof window !== "undefined" && typeof window.matchMedia === "function"
-    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    : false;
+// Whether the user prefers reduced motion — reactive, so a mid-session OS-pref toggle takes effect and
+// SSR/test (no matchMedia) defaults to motion-off-until-mount. Seeded in onMount + a change listener.
+let reduceMotion = $state(false);
+onMount(() => {
+  if (typeof window.matchMedia !== "function") return;
+  const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+  reduceMotion = mql.matches;
+  const onChange = (e: MediaQueryListEvent) => {
+    reduceMotion = e.matches;
+  };
+  mql.addEventListener("change", onChange);
+  return () => mql.removeEventListener("change", onChange);
+});
 
 // Hide a layer image that fails to load (art not yet authored) so the stage degrades to the wash alone.
 function hideOnError(e: Event) {

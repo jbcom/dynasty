@@ -28,11 +28,14 @@ import {
   startAct,
 } from "../sim/saga/runner";
 import type { Scene } from "../sim/saga/schema";
+import type { Archetype } from "../sim/slots";
 
 /** The coordinates that select a line's act from the corpus. */
 export interface SagaCell {
   wave: string;
-  archetype: string;
+  /** The line's power-base archetype (typed at the source so consumers — e.g. the RB-8 render layer —
+   *  need no cast; it's already an Archetype everywhere a cell is built). */
+  archetype: Archetype;
   /** The reach tier (0 personal … 5 interstellar) — derived from the run's generation/era. */
   tier: number;
   /** The line's class rung (poor/middle/…) — its story track; falls back to "poor" if unauthored. */

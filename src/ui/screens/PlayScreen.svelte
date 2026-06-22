@@ -21,8 +21,7 @@ import RivalField from "../saga/RivalField.svelte";
 import SagaPanel from "../saga/SagaPanel.svelte";
 import SceneReader from "../saga/SceneReader.svelte";
 import SceneStage from "../../render/SceneStage.svelte";
-import { composeScene, type RenderClass } from "../../render/composeScene";
-import type { Archetype } from "../../sim/slots";
+import { composeScene } from "../../render/composeScene";
 import SlideOutMenu from "../saga/SlideOutMenu.svelte";
 import CodexView from "../saga/CodexView.svelte";
 import { loadCodex } from "../../data/loadSaga";
@@ -95,8 +94,8 @@ const sceneFrame = $derived.by(() => {
   if (!cell || !scene) return null;
   return composeScene({
     variant: "scene",
-    archetype: cell.archetype as Archetype,
-    cls: (cell.cls === "middle" ? "middle" : "poor") as RenderClass,
+    archetype: cell.archetype,
+    cls: cell.cls === "middle" ? "middle" : "poor",
     eraId: currentEraId || sagaView.macroActTitle,
     sense: scene.sense,
     pole: sagaView.dominant.pole,
