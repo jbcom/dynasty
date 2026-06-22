@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.1](https://github.com/jbcom/dynasty/compare/v0.13.0...v0.13.1) (2026-06-22)
+
+
+### Bug Fixes
+
+* **saga:** decouple the saga clock from the 1885 era ladder (RB-7) — baghdad plays the full run ([#85](https://github.com/jbcom/dynasty/issues/85)) ([4ef0fca](https://github.com/jbcom/dynasty/commit/4ef0fca64925a67b054bca46c22f33804d8df414))
+
 ## [0.13.0](https://github.com/jbcom/dynasty/compare/v0.12.0...v0.13.0) (2026-06-22)
 
 
