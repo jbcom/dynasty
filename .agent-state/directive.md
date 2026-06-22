@@ -161,17 +161,20 @@ is locked, execute autonomously, self-pace, own the full PR loop.
   onboardingFounding epoch0 suite. BLOCKER (dispatched stuck-loop-debugger): the millennium harness
   test now goes line-extinct ~2000 (era order 3-4) for all 18 — the leaner per-gen event pool no
   longer carries a line to era≥9. Awaiting root-cause + fix; do NOT re-pad with narrative beats.
-- [~] **NA-12 live-verify** — UNBLOCKED (harness green + corpus complete). Run the app (chrome), play
-  a founded line: confirm it reads as a novel (titled act, multi-paragraph sensory scenes, no when/
-  where re-confirm), advances generation-by-generation through tiers. READ the screenshots; fix
-  spec-drift before done.
+- [x] **NA-12 live-verify — DONE** (chrome, localhost:4173). Played a founded Ireland/poor line:
+  onboarding (period→class→wave w/ sensory cues→surname MacCarthy) → PLAY renders the NOVEL: titled
+  "Act I — The Crossing" with chapter drop-letter, multi-paragraph SMELL-framed prose ("the stench of
+  salt… the phantom scent of the churning Atlantic still invaded Siobhan MacCarthy's nostrils"), {surname}
+  token resolved, given-name generated, NO when/where re-confirm. Weave = 2 alternative beats (italic
+  framing + choice); picking one ADVANCES to the next sensory (touch) scene. HUD shows Convergence/1885 +
+  motivators + news backdrop. 0 app console errors (only a benign chrome-extension artifact). Reads as a
+  NOVEL exactly per the mandate.
 - [x] **NA-13 cross-family intersections (threads)** — resolveThreads(corpus,scene) resolves a
   scene's ThreadRef[] to the rival wave's act-opening fragment (archetype-agnostic; dead ref → no
   fire); SagaFrame.threads + PlayScreen "Elsewhere — another line" braided aside. Unit + browser
   green. (committed) — authoring thread refs INTO the corpus is a content step (genai/author) post-sweep.
-- [ ] [WAIT] **NA-14 PR + merge** — blocked on NA-10/NA-11/NA-12 (corpus committed, harness green,
-  live-verified). Then open the PR for feat/narrative-acts, green CI (lint+test+build+e2e), resolve all
-  review threads, squash-merge; keep post-merge CD/Release workflows green.
+- [~] **NA-14 PR + merge** — UNBLOCKED (NA-10/11/12 done). Open the PR for feat/narrative-acts, green
+  CI (lint+test+build+e2e), resolve all review threads, squash-merge; keep post-merge CD/Release green.
 
 After NA-14 merges, RETURN to the standing autonomous POLISH & FEATURES mandate (top of file):
 self-pace the highest-value improvement, own the full PR loop, keep the directive living.
