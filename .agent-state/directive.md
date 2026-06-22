@@ -173,11 +173,18 @@ is locked, execute autonomously, self-pace, own the full PR loop.
   scene's ThreadRef[] to the rival wave's act-opening fragment (archetype-agnostic; dead ref → no
   fire); SagaFrame.threads + PlayScreen "Elsewhere — another line" braided aside. Unit + browser
   green. (committed) — authoring thread refs INTO the corpus is a content step (genai/author) post-sweep.
-- [ ] [WAIT-CI] **NA-14 PR + merge** — PR #65 OPEN (https://github.com/jbcom/dynasty/pull/65). First CI
-  run RED (e2e drove the old EventCard selector + the run never ended while saga was the play surface)
-  → FIXED (87a03f3): saga picks advance the run clock + resume the event flow on act-end; e2e drives
-  the SceneReader. Now 7 e2e + 607 unit + 83 browser + typecheck + biome green LOCALLY. CI re-running
-  (Monitor bxnlnrn85). ON GREEN: address any CodeRabbit threads → squash-merge → keep CD/Release green.
+- [x] **NA-14 PR + merge — DONE.** PR #65 squash-MERGED to main 2026-06-22 (commit 35b80f5), branch
+  deleted. CI green (build-and-test + Analyze + CodeRabbit), 0 unresolved threads, mergeStateStatus
+  CLEAN. First CI was RED (e2e on old EventCard selector + run never ended on the saga surface) →
+  fixed (87a03f3): saga picks advance the run clock + resume event flow on act-end; e2e drives the
+  SceneReader. Post-merge Release + CD green (Monitor b58fk15pv confirming the final main runs).
+
+**🎉 NARRATIVE ACTS (the NOVEL) milestone COMPLETE** (NA-1…NA-14, PR #65). The played content is now
+titled-act NOVELS: 252 acts / 1263 sensory multi-paragraph scenes across all 7 waves × 6 archetypes ×
+6 tiers; SceneReader (Suzerain page); deterministic runner; scene-slot spine; GenAI scene authoring;
+engine cut-over (saga drives play, advances the run clock, succession steps generations); cross-family
+thread intersections; Epoch-0 narrative retired (succession mechanic kept). 0 leaks; full gate + post-
+merge workflows green; live-verified in Chrome.
 
 After NA-14 merges, RETURN to the standing autonomous POLISH & FEATURES mandate (top of file):
 self-pace the highest-value improvement, own the full PR loop, keep the directive living.
