@@ -230,10 +230,64 @@ USER directive 2026-06-22). Layer PF-2/PF-3/… as forward commits here; open ON
   SagaPanel headline say "A poor line" while the strip said "centrist"; shared CENTRIST_DEADZONE(12)
   now governs both dominantMotivator + axisLabel. Unit-tested. 613 unit green.
 
-**[WAIT] Single remaining gate: the middle-class sweep (bg beo7mfy8q). ON DONE →** (1) verify health
-(0 leaks/dangling, 252 middle acts, poor untouched); (2) regen any failed cells; (3) run
-`scripts/retitle-saga.ts` over BOTH tracks for distinct meso titles; (4) update loadSaga test to assert
-both tracks complete; (5) live-verify distinct titles in Chrome; (6) open the ONE PR for feat/saga-polish.
+### GAP-CLOSURE QUEUE — work contiguously through ALL of this (USER, 2026-06-22)
+
+Full audit of remaining / incomplete / partially-wired / dead-but-built. Do them IN ORDER on
+feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. Don't stop between items.
+
+- [ ] **PF-5 finish the middle-class corpus** — [WAIT] middle sweep (bg beo7mfy8q) running. ON DONE:
+  verify health (0 leaks/dangling, 252 middle acts, poor untouched), regen failed cells, commit corpus;
+  update loadSaga test to assert BOTH tracks complete (poor 252 + middle 252 = 504; 42 cells × 2 × 6).
+
+- [ ] **PF-6 ROOT GAP: thread class through onboarding → founding.** OnboardingScreen.onComplete only
+  passes (seed, place, surname) — the chosen ArrivalClass `cls` is DROPPED, so founding never gets
+  `seedMotivators` (waveSelect.seedMotivatorsForClass exists, foundByComposition applies it if passed),
+  so poor & middle found IDENTICALLY (centrist wealth) and the whole class system is invisible in play
+  (this is why a middle pick read "A poor line"). FIX: thread cls out of onboarding → App → GameStore →
+  initState/foundByComposition with seedMotivators; the saga driver's sagaClassForWealth then actually
+  selects poor vs middle track. Update OnboardingScreen + App + gameStore + the e2e/onboarding seam +
+  tests; live-verify poor vs middle diverge (different wealth, different saga track prose).
+
+- [ ] **PF-7 WIRE THE DEAD CONVERGENCE LAYER — rival-line glimpses in play.** GOAP (goap/index,
+  dynastyAgent), dynastyWorld, convergence are BUILT (v0.8.0) but referenced only by each other/tests —
+  NOT by the engine/UI. The locked vision's core ("every unplayed line grows as a GOAP agent you
+  glimpse; convergence endings") is dead. projectSaga is called with ONLY {year,motivators} — no rung,
+  no glimpses → SagaPanel never shows the class rung OR the other lines. FIX: Game builds + ticks a
+  dynastyWorld of rival lines (deterministic, seeded), GameView exposes rung + glimpses, PlayScreen
+  passes them to projectSaga; SagaPanel's "Other lines" actually populates. Then convergence endings
+  evaluate. Unit + browser test; live-verify glimpses render.
+
+- [ ] **PF-8 saga succession drives REAL family advancement.** SagaDriver/Game.beginNextGenerationAct
+  re-begins the act at the next tier but does NOT call effects.succeed/beget — the saga generation-step
+  and the sim's lineage are decoupled (NA-11 follow-on). FIX: a close-scene succession option steps the
+  real family (partner → beget → succeed), advancing generation + heir, THEN re-begins the act for the
+  heir's tier. Bit-identical replay preserved. Unit-test the generation step end-to-end.
+
+- [ ] **PF-9 act titles: run the retitle pass.** scripts/retitle-saga.ts + scene-gen author distinct
+  meso titles (committed). [after PF-5] run retitle over BOTH tracks; live-verify distinct titles in
+  Chrome (no two lines share "The Crossing"); commit.
+
+- [ ] **PF-10 cross-family intersection PROSE (not just a generic braid).** PF-1 weaves a midpoint
+  thread + renders the rival's act-opening fragment, but it's generic (any rival opening). Author/genai
+  BESPOKE crossing prose: a `genai:expand --type thread` (or extend scene-gen) that writes the actual
+  moment two specific lines cross, stored on the midpoint scene. Schema already has ThreadRef; add the
+  woven scene's own crossing text. Test + live-verify.
+
+- [ ] **PF-11 Codex (Suzerain briefs) — author + surface.** CodexEntry schema + loadCodex are built but
+  no codex content exists and nothing shows it. Author a few codex entries (eras/waves/motivators as
+  optional lore) via genai; add a Codex view reachable from the slide-out menu. Optional-to-read
+  (never gates play). Test + live-verify.
+
+- [ ] **PF-12 docs + STATE refresh.** docs/STATE.md has no saga/novel/polish entries — bring it current
+  (the novel model, class tracks, convergence wiring, reader UX). Update CHANGELOG. Frontmatter dates.
+
+- [ ] **PF-13 final pass: full gate + live-verify a full hour-long run + open the PR.** typecheck +
+  biome + 600+ unit + browser + e2e + harness 0-findings; play a founded line poor AND middle through
+  multiple generations in Chrome (READ screenshots); confirm: novel reads as novel, classes diverge,
+  glimpses populate, intersections fire, titles distinct, hour+ of content. Open the ONE PR for
+  feat/saga-polish; green CI; resolve threads; squash-merge; keep post-merge CD/Release green.
+
+After PF-13 merges, return to the standing autonomous polish mandate (top of file) for the next gap.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
