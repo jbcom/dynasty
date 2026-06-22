@@ -218,9 +218,17 @@ self-pace the highest-value improvement, own the full PR loop, keep the directiv
      paragraph = tap anywhere → next. A paragraph WITH options: tapping a non-option area makes
      the options PULSE FASTER (don't advance) to draw attention / communicate "pick one".
   4. Goal: more presentation area for the unfolding story, more focus on options.
-  Touches src/ui/saga/SceneReader.svelte + src/ui/screens/PlayScreen.svelte (HUD/menu). Mobile-first;
-  browser-test the paged reveal + the pulse-on-tap-away + the menu. Live-verify in Chrome (READ the
-  screenshots). Its own branch off main after PF-2 merges (shares SceneReader/PlayScreen files).
+  5. SCOPE HIERARCHY (USER, 2026-06-22): MACRO (Convergence/Emergence/Ascension) = the focus of an
+     entire ~100-YEAR span — NOT the act title; present it as subtle span-context, not the headline.
+     ACT title = the MESO: a SPECIFIC chapter of THIS family's story (not a generic per-tier label
+     reused across every line). CHOICES + their impact on the story (opposing/orthogonal lines) = the
+     MICRO. So: GenAI authors a DISTINCT, family-specific chapter title per act (the spine's generic
+     "The Crossing"/"The Climb" become PROMPT SEED/fallback, not the shown title); the header shows the
+     specific act chapter as the headline (meso) with the macro as quiet context.
+  Touches src/ui/saga/SceneReader.svelte + src/ui/screens/PlayScreen.svelte (HUD/menu) + spine/scene-gen
+  (author act titles). Mobile-first; browser-test the paged reveal + the pulse-on-tap-away + the menu +
+  per-act distinct titles. Live-verify in Chrome (READ the screenshots). Its own branch off main after
+  PF-2 merges (shares SceneReader/PlayScreen + spine/scene-gen files).
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
