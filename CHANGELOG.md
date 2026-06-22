@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.1](https://github.com/jbcom/dynasty/compare/v0.11.0...v0.11.1) (2026-06-22)
+
+
+### Bug Fixes
+
+* **saga:** repair 1013 broken scene 'next' pointers — the novel was unplayable past scene 1 ([#78](https://github.com/jbcom/dynasty/issues/78)) ([3b24c96](https://github.com/jbcom/dynasty/commit/3b24c96bcee4bea6f3aaf7c7bde1b56e4b6b46bd))
+
 ## [0.11.0](https://github.com/jbcom/dynasty/compare/v0.10.1...v0.11.0) (2026-06-22)
 
 
