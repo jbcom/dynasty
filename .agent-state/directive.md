@@ -91,14 +91,16 @@ push + PR. See [[one-branch-local-review]].
 - [x] **WV-1 weave intersections INTO the prose — DONE → PR #96.** SceneReader folds each crossing into
   its paged prose (woven narration page, CSS mark, no aside); curated INTERSECTION_POINTS replaced the
   auto-spray. Reviewer trio + CodeRabbit folded. ([[intersections-woven-not-walls]])
-- [ ] **WV-2 braid SLOTS + bias-weighted weaving — IN PROGRESS on `feat/braid-slots`.**
-  ([[braid-slots-genai-architecture]] + [[emergent-cause-effect-sim]]). DONE: step 1 BraidSlot schema
-  (source/destination + setting + borrowable vignette); step 2 `braidSelect.ts` — pure seeded selector
-  (era-gated candidate pool, place×archetype×class bias weight, seeded fire-gate + weighted pick, BORROWS
-  the partner's source vignette — no bespoke per-pair writing; deterministic). REMAINING (gated on #96
-  merge — touch the runtime/render #96 changed): step 3 wire selectBraid into the move/clock path as the
-  thread source (replace the curated weaveThreads); step 4 GenAI 3.5-flash slot-tagging QA pass + an
-  authored seed set; live-verify. Rebase braid-slots onto post-#96 main first.
+- [ ] **WV-2 braid SLOTS + bias-weighted weaving — IN PROGRESS on `feat/braid-slots` (rebased on post-#96 main).**
+  ([[braid-slots-genai-architecture]] + [[emergent-cause-effect-sim]]). DONE: step 1 BraidSlot schema; step 2
+  `braidSelect.ts` pure seeded selector (era-gated, place×archetype×class bias, seeded fire-gate + weighted
+  pick, BORROWS the partner's source vignette — no bespoke per-pair writing; deterministic); step 3a
+  `candidatesFromSnapshots` adapter (DynastyWorld snapshots → candidates; strategy-derived relation). 671
+  unit tests, all pure. step 3a adapter DONE. step 3b DONE — loop.view folds the emergent braid into the
+  frame (per-scene seeded fork, additive, INERT until slots exist; loop test). ACTIVE: step 4 — GenAI
+  3.5-flash slot-tagging QA pass (extend the scoped-QA pipeline [[mmm-scoped-qa-pipeline]]) that tags
+  scene paragraphs with source/destination braid slots (+ an authored seed set so it fires before a full
+  pass); then live-verify a crossing weaves from a real rival's borrowed copy; full gate + reviewer trio + ONE PR.
 - [ ] [WAIT] **WV-3 emergent variability systems (anti-Suzerain) — after WV-2.** Seeded market/disease
   variability + Yuka rival reactions so playthroughs diverge; budget magnitudes more content
   ([[emergent-cause-effect-sim]]). Keeps the queue non-empty; un-WAIT after WV-2.
