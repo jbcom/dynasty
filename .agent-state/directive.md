@@ -173,8 +173,9 @@ is locked, execute autonomously, self-pace, own the full PR loop.
   scene's ThreadRef[] to the rival wave's act-opening fragment (archetype-agnostic; dead ref → no
   fire); SagaFrame.threads + PlayScreen "Elsewhere — another line" braided aside. Unit + browser
   green. (committed) — authoring thread refs INTO the corpus is a content step (genai/author) post-sweep.
-- [~] **NA-14 PR + merge** — UNBLOCKED (NA-10/11/12 done). Open the PR for feat/narrative-acts, green
-  CI (lint+test+build+e2e), resolve all review threads, squash-merge; keep post-merge CD/Release green.
+- [~] **NA-14 PR + merge** — PR #65 OPEN (https://github.com/jbcom/dynasty/pull/65), branch pushed,
+  local gate green (607 unit + 83 browser + build). NEXT: [WAIT-CI] wait CI green → address any
+  review threads (CodeRabbit) → squash-merge → keep post-merge CD/Release green.
 
 After NA-14 merges, RETURN to the standing autonomous POLISH & FEATURES mandate (top of file):
 self-pace the highest-value improvement, own the full PR loop, keep the directive living.
