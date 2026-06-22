@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { Content } from "../../sim/content";
-import { getCulture, suggestSurnames } from "../../sim/onomastics";
+import { getCulture, type Sex, suggestGivenNames, suggestSurnames } from "../../sim/onomastics";
 import { createRng } from "../../sim/rng";
 import type { Place } from "../../sim/schema";
 import {
@@ -13,18 +13,30 @@ import {
 
 /**
  * ONBOARDING (Convergence Saga, SS-7). "The story of America": the player founds a line by
- * choosing its WAVE of immigration — a 3-step funnel: PERIOD (when they crossed) → CLASS (poor
- * or middle, the arrival tier) → RACE/CULTURE (which wave, when more than one fits the cell) →
- * then bestow the family name. The class seeds the line's starting motivators (its GOAP
- * grounding). The run seed is a HIDDEN random draw (world only). Everything after — birth, date,
- * gender, given name, calling, the climb — unfolds as the in-game story.
+ * choosing its WAVE of immigration — a funnel: PERIOD (when they crossed) → CLASS (poor or middle,
+ * the arrival tier) → RACE/CULTURE (which wave, when more than one fits the cell) → NAMING STYLE
+ * (the cultural naming convention: Irish Catholic, Abbasid Arab, Anglo-Protestant… — defaults to the
+ * wave's own but the player CHOOSES, so an Anglicized or cross-cultural founder is possible) → SURNAME
+ * (the family name, suggested from the chosen style) → GENDER of the progenitor → GIVEN NAME (now
+ * suggested from style + surname + gender). The class seeds the line's starting motivators. The run
+ * seed is a HIDDEN random draw (world only). (ONB-1: naming style, surname, gender + given name are
+ * PLAYER CHOICES at founding — the sim plumbs them end-to-end. Birth/date/calling unfold in-game.)
  */
 
 interface Props {
   content: Content;
-  /** Begin the founded run: hidden seed + chosen wave place id + bestowed family name + the chosen
-   *  arrival class (poor/middle), so the founding seeds the right class motivators + saga track. */
-  onComplete: (seed: string, place: string, surname: string, cls: ArrivalClass) => void;
+  /** Begin the founded run: hidden seed + chosen wave place id + bestowed family name + arrival class
+   *  (poor/middle) + the progenitor's chosen gender + given name + the chosen naming-style culture id.
+   *  Founding seeds the right class motivators + saga track and stamps the chosen progenitor identity. */
+  onComplete: (
+    seed: string,
+    place: string,
+    surname: string,
+    cls: ArrivalClass,
+    gender: Sex,
+    given: string,
+    culture: string,
+  ) => void;
   /** Abandon onboarding and return to the title. */
   onCancel: () => void;
 }
@@ -41,49 +53,105 @@ const CLASS_LABEL: Record<ArrivalClass, { title: string; blurb: string }> = {
   middle: { title: "With a trade and a little money", blurb: "You arrive with a skill or a small stake — the middling sort." },
 };
 
-// Funnel state: period → class → wave (race/culture) → name.
+// Funnel state: period → class → wave → naming-STYLE → surname → gender → given name.
 let period = $state<PeriodBand | undefined>();
 let cls = $state<ArrivalClass | undefined>();
 let chosen = $state<Place | undefined>();
+let styleId = $state<string | undefined>();
+let surnameChosen = $state<string | undefined>();
+let gender = $state<Sex | undefined>();
 let modalOpen = $state(false);
 let typedName = $state("");
+
+const GENDER_LABEL: Record<Sex, { title: string; blurb: string }> = {
+  male: { title: "A son", blurb: "The progenitor of the line is a man." },
+  female: { title: "A daughter", blurb: "The progenitor of the line is a woman." },
+};
 
 const periods = $derived(availablePeriods(content.places));
 const classes = $derived(period ? classesForPeriod(content.places, period.id) : []);
 const cellWaves = $derived(period && cls ? wavesForCell(content.places, period.id, cls) : []);
 
-const suggestions = $derived.by(() => {
-  if (!chosen) return [];
-  const culture = getCulture({ cultures: content.onomastics }, chosen.defaultCulture);
-  return suggestSurnames(culture, createRng(`${seed}::surname-offer`), 3);
+// NAMING STYLE (ONB-1, user-ordered): an explicit list of every authored naming culture, the wave's
+// own first (the natural default) then the rest — so an Anglicized / cross-cultural founder is a real
+// choice, not forced from the wave. {id,label} from the onomastics file.
+const styleOptions = $derived.by(() => {
+  const all = Object.entries(content.onomastics).map(([id, c]) => ({ id, label: c.label }));
+  if (!chosen) return all;
+  const own = chosen.defaultCulture;
+  return all.sort((a, b) => (a.id === own ? -1 : b.id === own ? 1 : 0));
 });
+const culture = $derived(
+  styleId ? getCulture({ cultures: content.onomastics }, styleId) : undefined,
+);
+const surnameSuggestions = $derived(
+  culture ? suggestSurnames(culture, createRng(`${seed}::surname-offer`), 3) : [],
+);
+const givenSuggestions = $derived(
+  culture && gender
+    ? suggestGivenNames(culture, gender, createRng(`${seed}::given-offer`), 3)
+    : [],
+);
 
 function pickPeriod(p: PeriodBand): void {
   period = p;
   cls = undefined;
   chosen = undefined;
+  styleId = undefined;
+  surnameChosen = undefined;
+  gender = undefined;
 }
 function pickClass(c: ArrivalClass): void {
   cls = c;
   // If the (period, class) cell has exactly one wave, skip the race/culture step.
   const waves = period ? wavesForCell(content.places, period.id, c) : [];
   chosen = waves.length === 1 ? waves[0] : undefined;
+  styleId = undefined;
+  surnameChosen = undefined;
+  gender = undefined;
 }
 function pickWave(p: Place): void {
   chosen = p;
+  styleId = undefined;
+  surnameChosen = undefined;
+  gender = undefined;
+}
+function pickStyle(id: string): void {
+  styleId = id;
+  surnameChosen = undefined;
+  gender = undefined;
+}
+function pickGender(g: Sex): void {
+  gender = g;
 }
 function back(): void {
-  if (chosen && cellWaves.length > 1) chosen = undefined;
+  if (gender) gender = undefined;
+  else if (surnameChosen) surnameChosen = undefined;
+  else if (styleId) styleId = undefined;
+  else if (chosen && cellWaves.length > 1) chosen = undefined;
   else if (cls) cls = undefined;
   else if (period) period = undefined;
   else onCancel();
 }
 
-function bestow(surname: string): void {
+const clean = (s: string): string => s.trim().replace(/\s+/g, " ").slice(0, 32);
+
+/** Naming step 1: lock the family name, advance to gender then the given-name step. */
+function chooseSurname(surname: string): void {
+  const name = clean(surname);
+  if (!name) return;
+  surnameChosen = name;
+  modalOpen = false;
+  typedName = "";
+}
+
+/** Naming step 3: bestow the given name and BEGIN THE RUN with the full chosen identity. */
+function bestowGiven(given: string): void {
   const place = chosen;
-  const name = surname.trim().replace(/\s+/g, " ").slice(0, 32);
-  if (!place || !name || !cls) return;
-  onComplete(seed, place.id, name, cls);
+  const fam = surnameChosen;
+  const first = clean(given);
+  if (!place || !cls || !styleId || !fam || !gender || !first) return;
+  onComplete(seed, place.id, fam, cls, gender, first, styleId);
 }
 </script>
 
@@ -131,18 +199,62 @@ function bestow(surname: string): void {
         {/each}
       </div>
     </article>
-  {:else}
-    <article class="card" data-phase="name">
+  {:else if !styleId}
+    <article class="card" data-phase="style">
       <p class="prompt">
-        {chosen.sensoryCue} — this is where the {chosen.label} line takes root. A name is
-        waiting to be laid over it, carried down a line that does not yet exist. Which will it be?
+        {chosen.sensoryCue} — this is where the {chosen.label} line takes root. In what tradition is
+        it named? (The {chosen.label} way is offered first, but the choice is yours.)
       </p>
       <div class="choices">
-        {#each suggestions as name (name)}
-          <button type="button" onclick={() => bestow(name)}>{name}</button>
+        {#each styleOptions as opt (opt.id)}
+          <button type="button" onclick={() => pickStyle(opt.id)}>
+            {opt.label}{opt.id === chosen.defaultCulture ? " — its own" : ""}
+          </button>
+        {/each}
+      </div>
+    </article>
+  {:else if !surnameChosen}
+    <article class="card" data-phase="surname">
+      <p class="prompt">
+        A name is waiting to be laid over the line, carried down generations that do not yet exist.
+        Which family name will it be?
+      </p>
+      <div class="choices">
+        {#each surnameSuggestions as name (name)}
+          <button type="button" onclick={() => chooseSurname(name)}>{name}</button>
         {/each}
         <button class="own" type="button" onclick={() => (modalOpen = true)}>
           Name your own line…
+        </button>
+      </div>
+    </article>
+  {:else if !gender}
+    <article class="card" data-phase="gender">
+      <p class="prompt">
+        The {surnameChosen} line. Who is the one who founds it?
+      </p>
+      <div class="choices">
+        {#each ["male", "female"] as const as g (g)}
+          <button type="button" onclick={() => pickGender(g)}>
+            <span class="opt-title">{GENDER_LABEL[g].title}</span>
+            <span class="opt-blurb">{GENDER_LABEL[g].blurb}</span>
+          </button>
+        {/each}
+      </div>
+    </article>
+  {:else}
+    <article class="card" data-phase="given">
+      <p class="prompt">
+        {GENDER_LABEL[gender].title} of the {surnameChosen} line. And the name {gender === "male"
+          ? "he"
+          : "she"} will be called by?
+      </p>
+      <div class="choices">
+        {#each givenSuggestions as name (name)}
+          <button type="button" onclick={() => bestowGiven(name)}>{name} {surnameChosen}</button>
+        {/each}
+        <button class="own" type="button" onclick={() => (modalOpen = true)}>
+          Choose your own given name…
         </button>
       </div>
     </article>
@@ -158,19 +270,31 @@ function bestow(surname: string): void {
   <button class="modal-backdrop" type="button" aria-label="Dismiss" onclick={() => (modalOpen = false)}
   ></button>
   <div class="modal" role="dialog" aria-modal="true" aria-label="Name your own line">
-    <p class="modal-prompt">Speak the name your line will carry through the centuries.</p>
+    <p class="modal-prompt">
+      {surnameChosen
+        ? "Speak the given name the founder will be called by."
+        : "Speak the family name your line will carry through the centuries."}
+    </p>
     <!-- svelte-ignore a11y_autofocus -->
     <input
       bind:value={typedName}
       autofocus
       autocomplete="off"
       maxlength="32"
-      placeholder="a family name"
-      onkeydown={(e) => e.key === "Enter" && typedName.trim() && bestow(typedName)}
+      placeholder={surnameChosen ? "a given name" : "a family name"}
+      onkeydown={(e) =>
+        e.key === "Enter" &&
+        typedName.trim() &&
+        (surnameChosen ? bestowGiven(typedName) : chooseSurname(typedName))}
     />
     <div class="modal-actions">
       <button class="ghost" type="button" onclick={() => (modalOpen = false)}>Cancel</button>
-      <button class="confirm" type="button" disabled={!typedName.trim()} onclick={() => bestow(typedName)}>
+      <button
+        class="confirm"
+        type="button"
+        disabled={!typedName.trim()}
+        onclick={() => (surnameChosen ? bestowGiven(typedName) : chooseSurname(typedName))}
+      >
         Bestow it
       </button>
     </div>

@@ -29,6 +29,8 @@ export interface FoundingInput {
   momentId: string;
   /** The player-chosen surname for the line. */
   surname: string;
+  /** The player-chosen progenitor GIVEN name (ONB-1), optional — overrides the seeded onomastic pick. */
+  given?: string;
   /** The run seed. */
   seed: string;
   /** The founding CALLING id (CP-2), optional — a durable generational lens. */
@@ -67,6 +69,12 @@ export interface Composition {
   originId?: string;
   /** The player-chosen surname for the line. */
   surname: string;
+  /**
+   * The player-chosen progenitor GIVEN name (ONB-1). When set, overrides the seeded onomastic pick so
+   * the founder is the player's choice. Optional — absent = the deterministic culture+gender draw (the
+   * prior behavior, still used by tests + any non-onboarding founding path).
+   */
+  given?: string;
   /** The run seed. */
   seed: string;
   /** The founding CALLING id (CP-2), optional. */
@@ -112,6 +120,7 @@ export function compositionFromMoment(moment: StartMoment, input: FoundingInput)
     deepHistory: moment.deepHistory,
     originId: moment.id,
     surname: input.surname,
+    ...(input.given ? { given: input.given } : {}),
     seed: input.seed,
     ...(input.calling ? { calling: input.calling } : {}),
     ...(input.successionMode ? { successionMode: input.successionMode } : {}),
@@ -134,10 +143,12 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
   // Base state in the composition's era + archetype (FD-3.5 — no literal preset key).
   const base = initState(content, c.seed, c.archetype, c.era);
 
-  // Progenitor given name from the culture + gender (seeded, deterministic).
+  // Progenitor given name: the PLAYER'S chosen name (ONB-1) when set, else the seeded culture+gender
+  // draw (deterministic, the prior + non-onboarding behavior).
   const culture = getCulture({ cultures: content.onomastics }, c.culture);
   const nameRng = createRng(`${c.seed}::founding:${originId}:given`);
-  const progenitorGiven = pickGivenName(culture, c.gender, nameRng);
+  const chosenGiven = c.given?.trim().replace(/\s+/g, " ").slice(0, 32);
+  const progenitorGiven = chosenGiven || pickGivenName(culture, c.gender, nameRng);
   const progenitorName = `${progenitorGiven} ${c.surname}`;
 
   const birthYear = c.year;
@@ -214,6 +225,9 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
       ...(c.deepHistory ? { deepHistory: true } : {}),
       ...(c.calling ? { calling: c.calling } : {}),
       gender: c.gender,
+      // ONB-1: persist the player's chosen given name so a reload reconstructs the exact founder
+      // (a free-typed name can't be re-derived from the seed). Only when explicitly chosen.
+      ...(chosenGiven ? { given: chosenGiven } : {}),
       ...(c.successionMode ? { successionMode: c.successionMode } : {}),
       ...(c.axisChoices ? { axisChoices: c.axisChoices } : {}),
     },

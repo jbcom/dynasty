@@ -31,6 +31,9 @@ export interface SaveData {
   founding?: {
     momentId: string;
     surname: string;
+    /** The player-chosen progenitor GIVEN name (ONB-1) — persisted so a reload reconstructs the exact
+     *  founder (a free-typed given name isn't re-derivable from the seed). */
+    given?: string;
     calling?: string;
     gender?: "male" | "female";
     successionMode?: "absolute" | "primogeniture" | "matriarchal";
@@ -72,6 +75,7 @@ export function toSave(state: GameState): SaveData {
           founding: {
             momentId: state.founding.momentId,
             surname: state.founding.surname,
+            ...(state.founding.given ? { given: state.founding.given } : {}),
             place: state.founding.place,
             culture: state.founding.culture,
             ...(state.founding.era ? { era: state.founding.era } : {}),
@@ -123,6 +127,7 @@ export function fromSave(content: Content, save: SaveData): GameState {
         deepHistory: f.deepHistory,
         originId: f.momentId,
         surname: f.surname,
+        ...(f.given ? { given: f.given } : {}),
         seed: save.seed,
         calling: f.calling,
         successionMode: f.successionMode,
@@ -133,6 +138,7 @@ export function fromSave(content: Content, save: SaveData): GameState {
       base = foundDynasty(content, {
         momentId: f.momentId,
         surname: f.surname,
+        ...(f.given ? { given: f.given } : {}),
         seed: save.seed,
         calling: f.calling,
         gender: f.gender,

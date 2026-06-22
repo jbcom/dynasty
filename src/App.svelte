@@ -80,6 +80,9 @@ async function birthGame(
   place: string,
   surname: string,
   cls: ArrivalClass,
+  gender: "male" | "female",
+  given: string,
+  culture: string,
 ): Promise<void> {
   if (!storage) return;
   const placeDef = placeById(content.places, place);
@@ -95,7 +98,15 @@ async function birthGame(
   // SS-7 + PF-6: seed the line's starting motivators from the PLAYER'S chosen arrival class (poor/
   // middle), not the place's default — so the class choice actually grounds the run + saga track.
   const { motivators } = resolveWaveStart(placeDef, cls);
-  const founded = foundByComposition(content, { ...composition, seedMotivators: motivators }).state;
+  // ONB-1: stamp the player's chosen progenitor identity over the seed-dealt defaults — naming STYLE
+  // (culture), GENDER, and GIVEN name are now founding choices, not auto-generated.
+  const founded = foundByComposition(content, {
+    ...composition,
+    culture,
+    gender,
+    given,
+    seedMotivators: motivators,
+  }).state;
   store = new GameStore(content, seed, storage, founded, founded.archetype);
   screen = "play";
 }
