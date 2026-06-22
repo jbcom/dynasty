@@ -499,6 +499,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold grit of the black-skin potato still coats your teeth, a reminder of how little this soil yields to those who merely survive. How will {full_name} use the hard-won muscle of this Irish frame to carve out what comes next?",
+        "options": [
+          {
+            "text": "I will share my heavy bread with the stonemason's quiet daughter, binding our strength to break the stony ridges of the north slope together, raising children who know how to wrestle both the plow and the winter frost.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "founded_homestead",
+              "peasant_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "I will take my late sister's boy into my cabin and raise him as my own. No spouse will crowd my hearth, but I will harden his back for the turf-cutting and teach him to hold the {surname} name high against the bailiff's mockery.",
+            "motivatorShift": {
+              "honor": 3,
+              "lineage": 1,
+              "power": -2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "foster_heir",
+              "clannish_defiance"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the family line end with my own scarred knuckles. I will carry my speed to the bare-knuckle betting rings of the eastern ports, running until my lungs burn with coal smoke, leaving nothing but the legend of {given_name} in the dirt.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "prize_fighter",
+              "barren_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -829,6 +882,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "To wash down the floury grit, you draw a mug of the dark, bitter porter brewed from our own roasted barley. The heavy iron of the plow has calloused your palms to leather, and though the stubborn sod of {family_name} is finally ours, the quiet of the cabin is deafening. The work of taming this parish demands more than one pair of shoulders, and the cold hearth requires more than one voice to keep the winter out. How do we carry the weight of this victory forward?",
+        "options": [
+          {
+            "text": "We share the mug with the neighbor's quiet kin, whose grip on the sickle is as steady as our own. We will bind our stone-walled fields by the parish register, build a second bedroom onto the cabin, and raise children with the grit to conquer the high pasture.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "hearth_fire_lit",
+              "sturdy_successors"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "We drink in solitude, looking out over the cleared ditches. We will take no spouse to crowd this hard-won table; instead, we will foster our sister's young boys, training their limbs for the hurling field and their hands for the spade, keeping the blood pure and the household unbroken.",
+            "motivatorShift": {
+              "tradition": 3,
+              "lineage": 1,
+              "wealth": -1,
+              "politics": -2
+            },
+            "setFlags": [
+              "fostered_kin",
+              "insular_dynasty"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We pour the porter onto the dry turf as a libation to the old earth. Let the family line end here with {given_name}; we will pour every ounce of our athletic strength into the parish games and the clearing of the wild woods, leaving a legendary name and an empty house.",
+            "motivatorShift": {
+              "honor": 3,
+              "power": 2,
+              "worldview": 2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "sole_legend",
+              "fading_hearth"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1235,6 +1341,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The butter-rich crumbs on {full_name}’s fingers are still warm, but the bitter dregs of the morning brew demand a reckoning. The climb from the muddy yards has broken the body only to build this heavy table—how will the {family_name} strength be spent before the muscle goes cold?",
+        "options": [
+          {
+            "text": "Bring the daughter of our fiercest dockside rival to this table; we will mix our hard-forged iron with their clean blood, filling the halls with children who know both the shovel and the ledger.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 2,
+              "politics": 1
+            },
+            "setFlags": [
+              "rival_alliance",
+              "heirs_of_iron"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "Forget the high-born matches. We will raise my brother's eldest boy right here in the sweat of the training ring, passing our name and heavy-fisted legacy to one who already carries our bruised skin.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "power": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "nephew_heir",
+              "gym_legacy"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the lineage stop with this perfect, aching frame. Every ounce of sweat and brioche-fat will be burned on the national stage, chasing the gold medal until {given_name}'s name is a permanent scar on the history of the sport.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "sole_champion",
+              "blood_burns_out"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1564,6 +1723,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "Yet, beneath the rich, buttery syrup of the whiskey, a cold, metallic tang lingered—the muscle-deep memory of the gravel pits that no parlor could ever wash from {given_name}’s throat. As the last of the peat-ash crumbles into the grate, how do we anchor this newfound wealth before the old hunger hollows us out?",
+        "options": [
+          {
+            "text": "We swallow the sweet dregs of the glass and finally open our doors to the county gentry. By taking the magistrate’s spirited daughter to wife, we will fill the drafty halls of our new estate with strong, legitimate {surname} heirs who know both the polish of silver and the grit of the field.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "gentry_alliance",
+              "legitimate_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We ignore the high church bells and keep our loyal, unwedded sweetheart by the hearth. We will raise the bright, fierce lad she already bore us to run our stables, letting the parish gossips choke on our wealth while he learns to carry the {surname} name on his own terms.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 1,
+              "tradition": -2,
+              "politics": -1
+            },
+            "setFlags": [
+              "natural_heir",
+              "clerical_spite"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "We pour the last of our gold into building the great national gymnasium, devoting our remaining years to training the finest young athletes in the land. Let the family line end in this quiet room; we will carve our name into the bone and muscle of Irish sporting history instead.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 1,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "legacy_of_muscle",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1880,6 +2092,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold, copper sting of the champagne lingers on your tongue, a sharp reminder of how far the {family_name} name has climbed from the damp turf of the parish. With the championship purse secure and the old hunger finally quieted, how will {given_name} anchor this hard-won rise?",
+        "options": [
+          {
+            "text": "We marry into the new blood of the Dublin merchants, letting their elegance soften our bruised knuckles, and fill a grand estate with heirs who will never taste well-water.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "gentry_alliance",
+              "heirs_of_means"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Avoid the trap of polite society. I will acknowledge the child born of my youth in the western counties, raising them to fight with the same raw grit, free from the weight of a gilded ring.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 2,
+              "lineage": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "natural_heir",
+              "defiant_heritage"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line end with my own triumphs. I will spend every last guinea founding athletic halls across the county, securing the {surname} name in stone and brass rather than trusting it to soft descendants.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "wealth": -1
+            },
+            "setFlags": [
+              "monumental_legacy",
+              "bloodline_extinguished"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2211,6 +2476,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter, copper-tainted water settles in {given_name}'s throat, the lungs scream for a heavy gravity we have never known. The voyage across the black is long, and our physical strength—the proud, athletic engine of the {surname} line—is a finite fuel in this recycled air. How will we anchor our blood before the cold metal of this vessel claims our bones entirely?",
+        "options": [
+          {
+            "text": "Bind our stride to the chief hydroponicist, whose quiet endurance matches our own, and carve out a humid, soil-rich berth where our children can learn the heavy-gravity exercises of our Irish ancestors.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "worldview": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "green_berth_established",
+              "heavy_gravity_heritage"
+            ]
+          },
+          {
+            "text": "Pour every ounce of our remaining physical vigor into the grueling deep-void racing leagues, pushing this body to its absolute limits until the heart gives out, leaving behind only records for the crew to chase.",
+            "motivatorShift": {
+              "honor": 3,
+              "power": 2,
+              "lineage": -3,
+              "reach": 1
+            },
+            "setFlags": [
+              "legendary_racer",
+              "faded_bloodline"
+            ]
+          },
+          {
+            "text": "Adopt the silent, iron-willed orphan of the lower-deck reclamation crews, training them in the grueling physical disciplines of the {family_name} line without the soft distractions of a marriage bed.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 2,
+              "politics": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "apprentice_adopted",
+              "stony_discipline"
+            ]
+          }
+        ]
       }
     }
   ]

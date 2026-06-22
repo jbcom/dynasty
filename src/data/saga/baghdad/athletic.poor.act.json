@@ -429,6 +429,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The heavy clay pot rests warm against your calloused palms, the steam carrying the scent of parched earth and boiled chicory. Your mother's knuckles are greyed with silt, her eyes demanding to know how the raw physical grit of the {surname} line will be spent. How do you commit the strength of your body and the future of the tillage?",
+        "options": [
+          {
+            "text": "We bind our sweat to the canal-master's daughter, bringing her relentless work ethic into our fields to raise a brood of heavy-shouldered heirs who will conquer this dry earth.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "canal_alliance",
+              "sturdy_heirs"
+            ]
+          },
+          {
+            "text": "We eschew the distraction of a new marriage. I will take my sister's orphaned boy from the river trenches, teaching him how to grip the spade and endure the sun, passing the {surname} legacy to one who already knows its cost.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "wealth": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "adopted_nephew",
+              "frugal_continuity"
+            ]
+          },
+          {
+            "text": "Let the soil crack. I will enlist my physical prowess in the governor's desert guard, trading the heavy spade for the iron spear, pushing the reach of the {family_name} name to the horizon even if our hearth fires go cold.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 3,
+              "lineage": -3,
+              "honor": 1
+            },
+            "setFlags": [
+              "vanguard_enlistment",
+              "barren_hearth"
+            ]
+          }
+        ]
       }
     },
     {
@@ -765,6 +818,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the rich, spiced lamb fat lingers on your tongue, the weight of your family's new standing demands a choice: how will the physical prowess of the {family_name} name be preserved now that the hunger of the lean years is finally sated?",
+        "options": [
+          {
+            "text": "We must bind our blood to the grand arena patron’s house, sealing a union that tastes of honeyed dates and heavy gold, ensuring our future heirs inherit both our physical strength and their structural power.",
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 2,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "allied_with_patrons",
+              "gilded_bloodline"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the bloodline end with my own triumphs; I will burn this newfound wealth on the finest trainers and the great imperial circuit, tasting only the copper of my own limits as I push my body to an immortal, solitary legacy.",
+            "motivatorShift": {
+              "power": 3,
+              "honor": 2,
+              "lineage": -3,
+              "wealth": -1
+            },
+            "setFlags": [
+              "sole_champion",
+              "broken_line"
+            ]
+          },
+          {
+            "text": "We do not need high-born matches to keep our fire. I will remain unburdened by a spouse, adopting the most resilient orphans from the very streets we escaped, feeding them from this heavy board and training them to carry the {surname} name as my own true children.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "wealth": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "street_heirs",
+              "tempered_legacy"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          }
+        ]
       }
     },
     {
@@ -1089,6 +1195,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The heat of the spirit settles deep in your chest, a quiet weight where the adrenaline of the sands used to burn. The crowd is gone, but the name {surname} still commands the arena. How will this physical empire endure when your own limbs begin to slow?",
+        "options": [
+          {
+            "text": "We invite the stout-hearted champion of the southern marches to share our salt and hearth. Together, we will breed a new generation of heavy-boned wrestlers to carry the {surname} grip into the next century.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "power": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "dynastic_stables"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "The child already running the sand-flats has the true fire. We will formally claim this ward of the pits as our own sole heir, bypassing the soft compromises of marriage to forge a single, perfect weapon.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 2,
+              "lineage": -1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "champion_ward"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "We will build no cradles. Let us expend the last of our physical strength and coin on erecting great public amphitheaters, carving the triumphs of {full_name} into the very bedrock so our name outlives the bone.",
+            "motivatorShift": {
+              "reach": 3,
+              "honor": 1,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "monumental_arena"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1426,6 +1582,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The brackish tincture of limestone dust and late-night copper cables still clings to {given_name}'s palate, a physical testament to the toll of raw sovereignty. With our bodies hardened by years of merciless navigation through rotting empires, how does the {family_name} line spend its remaining vitality?",
+        "options": [
+          {
+            "text": "We will cleanse our tongue of the Bourse's dry ash and bind our blood to a tireless partner from the salt-flats, raising three fierce heirs to carry the physical tenacity of {surname} into the next era of collapse.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "salt_blood_heirs",
+              "line_secured"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "There is no time for the dance of courtship in these shifting currents. We will take the athletic ward already under our wing—a child who already knows the bitter taste of the docks—and train them to navigate the sovereign game alone.",
+            "motivatorShift": {
+              "power": 2,
+              "politics": 1,
+              "lineage": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "adopted_successor",
+              "pragmatic_bond"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the {family_name} name burn down to the socket. We will pour our remaining physical strength entirely into the calling, chasing the copper bite of late-night cables until our heart fails us, leaving a colossal fortune and a silent grave.",
+            "motivatorShift": {
+              "reach": 3,
+              "wealth": 3,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "extinction_track",
+              "monumental_wealth"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1759,6 +1968,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The galvanic sting of the chicory-mimic brew still burns your throat as you look out over the rusted low-gravity gantries. Your body, built on generations of athletic {surname} endurance, is a machine of dense muscle, yet even the strongest steel fatigues under the grinding weight of this station. How will your bloodline endure this crushing exile?",
+        "options": [
+          {
+            "text": "I will share my bunk and my meager rations with the station’s chief rigger, combining our stubborn strength to raise children who can survive the harsh low-g docks.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "dock_dynasty_established"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "I will push my physical frame to its absolute limit, leading the orbital dockworkers' strike to secure safety for others, letting my own line end with my body.",
+            "motivatorShift": {
+              "power": 2,
+              "reach": 2,
+              "lineage": -2,
+              "honor": 1
+            },
+            "setFlags": [
+              "labor_martyr"
+            ]
+          },
+          {
+            "text": "I will remain unwed, but I will claim the orphaned grease-monkey apprentice from the lower decks as my own ward, training them in the arduous physical disciplines of the {family_name} name.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 1,
+              "lineage": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "adopted_heir_raised"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -2141,6 +2400,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The salt of the sand pits has settled deep into {full_name}’s lungs, and the cheap tea no longer warms the shivering muscles after a day in the quarries. How will the strength of the {surname} line endure when the body begins to fail?",
+        "options": [
+          {
+            "text": "We will bind our calloused hands to the daughter of the flour-merchant who watches the dirt arenas, sharing our meager tallow and raising sturdy children to inherit both our iron backs and this hard-won dirt.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "quarry_dynasty",
+              "flesh_and_stone"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no room for a bridal bed in these cramped, lime-dusted barracks. We will take the quiet, orphaned stable-boy who washes our sweat-cloths under our wing, teaching him the secret of the arena grip and passing him the {surname} name.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "politics": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "adoptive_legacy",
+              "arena_apprentice"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the blood dry in the dust of the ring. We will fling our remaining strength into a final, bloody strike against the quarry overseers, ensuring the {surname} name is carved in the limestone of freedom, even if we leave no one behind to read it.",
+            "motivatorShift": {
+              "power": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "honor": 2
+            },
+            "setFlags": [
+              "quarry_rebel",
+              "broken_line"
+            ]
+          }
+        ]
       }
     }
   ]

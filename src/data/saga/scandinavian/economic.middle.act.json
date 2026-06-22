@@ -499,6 +499,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The sourness of the homeland's starter still lingers on {given_name}'s tongue, but this cold clearing demands more than one stubborn heart to turn Baltic grit into lasting wealth. How will the {surname} name carve its hold into this unyielding soil?",
+        "options": [
+          {
+            "text": "We will share this bitter crust with the neighbor's sturdy daughter, binding our hard-won acres to hers; together we will fill the loft with grain and the cradle with stout heirs who know the cost of bread.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "homestead_secured",
+              "stout_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the hearth stay quiet and cold. We shall pour every ounce of sweat into the timber trade, buying up the pine-barrens piece by piece while leaving no widow or hungry child to weep when the winter freeze claims us.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": -3,
+              "reach": 1
+            },
+            "setFlags": [
+              "timber_monopoly",
+              "barren_hearth"
+            ]
+          },
+          {
+            "text": "We will send our meager savings back across the grey Atlantic to fetch our dead sister's boy. Let him help us clear the stony creek-bed; he carries the {surname} blood, and we need no new marriage vows to pass down the farm.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "kinship_fostered",
+              "scrimping_survival"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -822,6 +875,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The salt-crusted tallow cools in the bowl, leaving a thick film of grease on the tongue that tastes of heavy labor and cold grit. How shall the wealth {full_name} dug from this stubborn limestone be anchored before the winter frost permanently cracks the foundation of the house?",
+        "options": [
+          {
+            "text": "Bring the salt-merchant's quiet daughter into our timber-scented hall; our combined stores will warm the nursery and secure three strong lives to hold the ledger.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 3,
+              "tradition": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "salt_alliance",
+              "secured_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "Formally name the clever foster-ling who helped dig our well-shaft as sole successor, preserving our hard-won silver from the reach of greedy in-laws.",
+            "motivatorShift": {
+              "wealth": 1,
+              "lineage": 1,
+              "politics": -1,
+              "honor": 2
+            },
+            "setFlags": [
+              "foster_heir",
+              "isolated_wealth"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Eschew the soft distractions of a marriage-bed; let every copper be buried back into the iron ore of the eastern hills, leaving a monument of stone where children might have been.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "monument_of_stone",
+              "barren_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1152,6 +1258,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter luxury of the dark brew cools in our hands, its steam rising to meet the salt wind blowing off the Sound. Our name, {surname}, is no longer scrubbed from the ledgers of debtors; it is etched into the very porcelain we drink from. Yet, this wealth is as volatile as the north wind. How shall we secure the warehouses we have built and ensure that the scent of this coffee never fades from our family's table?",
+        "options": [
+          {
+            "text": "We must bind our salt-stained fortune to the old shipping registries. I will take the consul's eldest to my bed and hearth, blending our gold with their deep-water connections, so that our heirs may inherit both the ledgers and the sea-lanes.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "politics": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "consul_alliance",
+              "secured_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no need to sign away our freedom to the high-born. The loyal clerk who has long shared my bed and kept our secrets will be the one to raise our children; we will legatimize our quiet bond and train our young to guard the timberyards with their own lives.",
+            "motivatorShift": {
+              "honor": 2,
+              "wealth": 2,
+              "politics": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "hearth_union",
+              "independent_docks"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the biological line narrow to a single point. My only true children will be the merchantmen that clear the Sound. Every coin and drop of strength must be poured into buying out our competitors and establishing a permanent merchant guild in our name, leaving the blood to fade as the gold endures.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "wealth": 1
+            },
+            "setFlags": [
+              "guild_monopoly",
+              "barren_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1558,6 +1717,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "Beneath the sugar's fading sweetness lies the cold, hard reality of the winter ledgers. The frost on the glass is thick, and the family's vast Baltic trade network demands a hand that does not tremble. How will {given_name} anchor the {family_name} name to this frozen earth before the spring thaw?",
+        "options": [
+          {
+            "text": "We will merge our docks with the southern merchants. I shall take the shipping baron's pragmatic sister to my bed, enduring her foreign tongue to secure heirs who will inherit a consolidated empire of timber and sails.",
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 2,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "dynasty_secured",
+              "southern_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The ledgers cannot afford a costly wedding or a divided estate. I will adopt my late brother’s quiet, ink-stained ward, training him to see the world in profit and loss, ensuring a single, sharp mind inherits the desk without the distraction of a new spouse.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 1,
+              "lineage": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "ward_adopted",
+              "frugal_continuity"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the flesh fail. I will sign our entire fortune over to the newly chartered Royal Baltic Consortium, ensuring the {family_name} name is carved permanently in stone and iron, even if my own bed remains empty and cold.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 3,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "corporate_legacy",
+              "end_of_bloodline"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1894,6 +2106,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter yeast on your tongue and the heavy scent of harbor coal demand a reckoning before the glasses are cleared. With the timber yards secured and the Baltic shipping lanes humming, how will {full_name} anchor this wealth for the next half-century?",
+        "options": [
+          {
+            "text": "We shall seal our ports with a wedding. I will take the consul's quiet eldest to my bed, letting our names merge in the parish registry to guarantee that future {surname} heirs will command both the Baltic timber fleets and these iron docks.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "baltic_alliance",
+              "traditional_union"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The dry sting of this wine is enough. I will bring my brother’s sharp-eyed orphan into the counting house, raising them to understand the brutal mathematics of the copper trade without bringing another partner into our private chambers.",
+            "motivatorShift": {
+              "lineage": 1,
+              "wealth": 2,
+              "power": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "nephew_heir",
+              "pure_monopoly"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Our blood is just a temporary vessel for our copper. I will forge no marriages and name no heirs, pouring every kronor of this industrial peace into the deep-water canals, leaving only a monumental empire of cold stone and iron.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "barren_empire",
+              "canal_legacy"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2227,6 +2492,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The burst of real, sun-mimicked sugars from the newly bio-engineered berries lingers on the tongue, a sharp contrast to the grey nutrient block. How will we steer the {family_name} balance sheet now that survival is no longer our only flavor?",
+        "options": [
+          {
+            "text": "We will merge our dry-storage ledgers with the hydroponic director's lineage. Our union will be sealed over the first true harvest, raising heirs who know the sweetness of fresh fruit as well as the cold mathematics of our processors.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 2,
+              "tradition": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "hydroponic_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We will not dilute our assets with a marriage of convenience. We shall elevate the sharpest mind from the colony's communal creche, tutoring them in the cold {surname} ledger without the mess of biological sentiment.",
+            "motivatorShift": {
+              "wealth": 3,
+              "lineage": -1,
+              "politics": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "technocratic_meritocracy"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the {family_name} line dissolve into the colony's public trust. We will pour every credit into retrofitting the closed-loop processors, ensuring our name is remembered not in warm bodies, but in the very air they breathe.",
+            "motivatorShift": {
+              "worldview": 3,
+              "wealth": -2,
+              "reach": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "monumental_sacrifice"
+            ]
+          }
+        ]
       }
     }
   ]

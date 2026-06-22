@@ -419,6 +419,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering burn of wild ginger still fights the cloying sweetness of the wharf's foreign sugar on the tongue. How will {given_name} anchor the sacred duties of the {family_name} altar against this tide of colonial trade?",
+        "options": [
+          {
+            "text": "By taking a spouse from the shipping families at the salt-rimed wharf, blending our ancient prayers with their ledgers to raise children who will secure the shrine's future with coin.",
+            "motivatorShift": {
+              "lineage": 2,
+              "reach": 2,
+              "wealth": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "wharf_alliance",
+              "syncretic_altar"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "By turning away from the bed of marriage entirely to seek the mountain hermitage, letting the {surname} name dissolve like salt in the wind so that our sacred rites remain pure and untouched.",
+            "motivatorShift": {
+              "worldview": 2,
+              "tradition": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "ascetic_path",
+              "line_ends_in_spirit"
+            ]
+          },
+          {
+            "text": "By keeping the hearth solitary and free of worldly bonds, but adopting the young temple acolyte who already knows the bitter taste of our hardships to carry the {surname} rites forward.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 1,
+              "lineage": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "adopted_succession",
+              "celibate_guardian"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -736,6 +789,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the smoky, mineral warmth of the twice-fired Bohea tea pools in your throat, the weight of your ancestors' silent altar presses down. How will the {family_name} devotion survive these harsh timber-line winters?",
+        "options": [
+          {
+            "text": "I will bring the daughter of the valley's scripture-carver to this scarred table. Together, we will sweeten these bitter camp winters and raise children who know both the temple's discipline and the high country's strength.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "scripture_alliance",
+              "heirs_of_the_altar"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The bloodline is merely a vessel; I will bring my sister's quietest child up from the salt camps to the temple. Without seeking a partner, I will train them to keep the sacred wells and inherit our spiritual texts.",
+            "motivatorShift": {
+              "tradition": 3,
+              "worldview": 2,
+              "lineage": 1,
+              "wealth": 0
+            },
+            "setFlags": [
+              "adopted_devotee",
+              "ascetic_continuity"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line dissolve like rock sugar in this dark cup. I shall pour our last coins into constructing a great stone pagoda on the timber-line, letting our faith stand immortal while our name fades into the high winds.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "monument_of_faith",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1134,6 +1240,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The steam from the rich Pu-erh tea rises between us, carrying the heavy scent of our hard-won transition from tenement hunger to religious prominence. As the bitter tea washes away the memory of the salt-fish, how shall {given_name} anchor the future of the {surname} line?",
+        "options": [
+          {
+            "text": "We will accept the daughter of the temple's chief benefactor, welcoming her to this high tea-house to bind our fortunes. Together, we will raise children who burn only the finest cedar-wood incense, far above the damp crawlspaces of our youth.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "alliance_with_benefactor",
+              "temple_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We shall take no spouse to crowd this table, but instead formally adopt the eldest orphan of our late cousin. We will wash the tenement grime from their skin, instruct them in the ancestral rites, and make them the sole custodian of the {surname} name.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "adopted_successor",
+              "temple_charity"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "This sudden luxury is but a test of our devotion. We will refuse all matches and heirs, endowing the temple's inner sanctuary with our remaining silver to live out our days as a celibate scholar of the scriptures, letting the physical line fade into spiritual purity.",
+            "motivatorShift": {
+              "worldview": 3,
+              "power": -2,
+              "tradition": 2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "monastic_asceticism",
+              "line_ends"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1532,6 +1691,60 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold bitterness of the wild ginseng lingers on the back of my throat, a sharp reminder of the hard earth we have cultivated and the spirits we serve. My eldest child watches me over the rim of the porcelain pot, waiting to see if our sacred work will expand through new blood, or if the altar we have built with hidden coins will be sustained by our current devotion alone. How shall the {surname} line face the spirits of the ancestors?",
+        "options": [
+          {
+            "text": "We must swallow the bitter dregs of our isolation and welcome a spouse from the southern shrine, blending our blood with theirs to raise two new heirs who will tend the ancestral fires.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "shrine_alliance",
+              "ritual_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "No new match shall dilute our focus. Let the pale starch of the lotus cake be our modest portion as we raise my eldest child to inherit the altar alone, carrying our legacy forward without the distraction of a new marriage.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "wealth": 1,
+              "reach": -2
+            },
+            "setFlags": [
+              "ascetic_concentration",
+              "unbroken_solitary_line"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the tongue go dry and free of worldly hunger. We will dedicate our remaining years and every coin from the harvest ritual to the great monastery, letting our physical line end so that our name may be preserved in sacred scrolls rather than in dust.",
+            "motivatorShift": {
+              "worldview": 3,
+              "tradition": 2,
+              "lineage": -3,
+              "power": -2,
+              "honor": 1
+            },
+            "setFlags": [
+              "monastic_bequest",
+              "bloodline_ends_in_prayer"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1935,6 +2148,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter oolong pools on your tongue, the silence of the cold mountain sanctuary demands an answer: will the sacred flame of the {surname} line burn through your own flesh, or will you let the granite walls consume the last of your blood?",
+        "options": [
+          {
+            "text": "Invite the daughter of the valley’s salt-merchant into these quiet stone halls; together, we will build a warm hearth amidst the incense and raise children who know both the market's grit and the temple's grace.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "lineage": 3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "hearth_in_the_hills",
+              "merchant_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Pour the remaining oil of your life solely into carving the sacred scriptures into pearwood blocks, letting the family line dissolve with your final breath so that only the immutable sutras bear the imprint of {given_name}.",
+            "motivatorShift": {
+              "worldview": 3,
+              "honor": 2,
+              "lineage": -3,
+              "power": -2
+            },
+            "setFlags": [
+              "monastic_extinction",
+              "ascetic_perfection"
+            ]
+          },
+          {
+            "text": "Anoint the brightest of the mountain acolytes as your spiritual heir, giving them the {surname} name by rite of tonsure rather than blood, keeping your personal vows unsullied by the marriage bed.",
+            "motivatorShift": {
+              "tradition": 3,
+              "honor": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "tonsured_heir",
+              "spiritual_adoption"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -2333,6 +2599,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter iron of this first harvest clings to your tongue, a harsh reminder that the old ways cannot survive on memory alone. How will {given_name} anchor the sacred rites of the {family_name} line in this lifeless dust?",
+        "options": [
+          {
+            "text": "We will bind our path to the colony's chief agriculturalist, sharing the sparse water of our quarters to raise children who will learn to coax both grain and grace from this iron sand.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 1,
+              "worldview": -1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "martian_marriage",
+              "agricultural_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We have no need for a spouse in these narrow domes; we shall instead adopt the temple's most devout acolyte to inherit the {surname} name, passing the litanies of the sweet water to a mind already purified by faith.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 2,
+              "wealth": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "acolyte_adoption",
+              "spiritual_succession_only"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the physical line of {family_name} end with our breath. We will pour our remaining days into grafting the ancestral plum-blossom onto the Martian scrub, leaving a living temple of wood rather than children of clay.",
+            "motivatorShift": {
+              "lineage": -3,
+              "worldview": 3,
+              "reach": 2,
+              "honor": -1
+            },
+            "setFlags": [
+              "extinction_of_blood",
+              "sacred_flora"
+            ]
+          }
+        ]
       }
     }
   ]

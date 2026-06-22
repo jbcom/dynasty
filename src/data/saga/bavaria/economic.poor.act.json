@@ -482,6 +482,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The heavy crust is swallowed, but the hunger for what comes next remains in the throat. How will the {surname} ledger be filled for the next turn of the seasons?",
+        "options": [
+          {
+            "text": "We will sign the contract with the salt-merchant's widow; her barges will carry our flour down the river, and her stout blood will mix with ours to fill the cold, high-raftered nursery.",
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 2,
+              "tradition": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "river_salt_alliance",
+              "stout_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no room in this narrow bed for another master. We will bring our sister’s eldest boy into the counting-house, training his soft hands until they callouse over the ledger, keeping our quiet household exactly as it is.",
+            "motivatorShift": {
+              "tradition": 2,
+              "wealth": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "nephew_apprentice",
+              "frugal_solitude"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the blood run dry; the stone granaries we build will be our monument. We shall buy the tithe-lands of the ruined abbey, burying our gold so deeply in the earth that the name of {surname} becomes the soil itself.",
+            "motivatorShift": {
+              "power": 3,
+              "wealth": 3,
+              "lineage": -3,
+              "worldview": 1
+            },
+            "setFlags": [
+              "abbey_tithe_lands",
+              "barren_dynasty"
+            ]
+          }
+        ]
       }
     },
     {
@@ -883,6 +936,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the salt on the rim of the pewter mug burns the small cracks in your lip, you watch your children laugh over their sweetened cabbage. The legacy of the {surname} name cannot survive on soft fat and unearned comfort. How will you anchor the empire built by {full_name} before the grease of this feast wipes clean from their chins?",
+        "options": [
+          {
+            "text": "Bring in a stern partner from the harsh high-pasture timber-holds to bind our blood to the mountain's edge, ensuring the next cradle is rocked by those who know the price of winter.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "honor": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "timber_alliance",
+              "hardened_bloodline"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Deny myself the comfort of a new partner and spend my remaining years grinding the soft teeth of my existing heirs against the ledger-books, forcing them to taste the cold grit of every copper.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "lineage": -1,
+              "politics": 0,
+              "worldview": 0,
+              "tradition": 0,
+              "honor": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "iron_fist_heirs",
+              "sole_accountant"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Abandon the pursuit of the cradle entirely and pour our gold into securing a permanent seat on the imperial salt-guild council, letting our bloodline fade into a monument of civic power.",
+            "motivatorShift": {
+              "power": 2,
+              "reach": 1,
+              "lineage": -3,
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 0,
+              "tradition": 0,
+              "honor": 0
+            },
+            "setFlags": [
+              "guild_legacy",
+              "blood_runs_dry"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1286,6 +1404,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the stag fat cools to a dull white crust on the pewter plate, the draft beneath the heavy oak door carries the bite of frozen spruce needles and wet limestone dust. The ledger books in the study lie open, their ink dry. How will {given_name} secure the legacy of the {family_name} name before this winter hardens into history?",
+        "options": [
+          {
+            "text": "I will invite the salt-factor’s quiet daughter to sit at this hearth. Her family's alpine pasture leases will merge with our timberlands, and the children we rear in these drafty halls will have the grit of the hills in their bones.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "alpine_alliance",
+              "traditional_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The price of local alliances is too high. I will bring my sister’s orphaned boy out of the Munich boarding schools to sit by this fire, teaching him the grain of the wood and the secrets of the timber-office so he may carry the {surname} seal alone.",
+            "motivatorShift": {
+              "lineage": 1,
+              "power": 1,
+              "tradition": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "nephew_heir",
+              "retained_autonomy"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the old forest fall to the state's surveyors. I will sell our leased woods to a Munich industrial syndicate and invest the capital in locomotive steel; let the family line dissolve into the soot of progress, so long as our fortune reigns.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "tradition": -2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "industrial_flight",
+              "end_of_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1633,6 +1804,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "Across the table sits the ledger of our blood and our debt. The ink is dry, but the future of the {family_name} name remains unwritten. How do we secure the vault we have spent five generations building?",
+        "options": [
+          {
+            "text": "We sign the alliance with the salt-merchant's daughter from Salzburg, blending our bank with their old estates, and bring forth a new generation to inherit this velvet-wrapped iron.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "salzburg_alliance",
+              "legitimate_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We elevate the brilliant clerk—the child of our late, unacknowledged union—giving them the {surname} name and the keys to the vault, bypassing the theater of a cold, strategic marriage.",
+            "motivatorShift": {
+              "power": 2,
+              "honor": 1,
+              "tradition": -2,
+              "politics": 1
+            },
+            "setFlags": [
+              "elevated_clerk",
+              "unconventional_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "We let the bloodline thin to a whisper, dedicating the entire Bavarian fortune to a grand sovereign foundation that will dictate terms to kings long after our name is dust.",
+            "motivatorShift": {
+              "reach": 3,
+              "wealth": 2,
+              "lineage": -3,
+              "politics": 1
+            },
+            "setFlags": [
+              "sovereign_foundation",
+              "end_of_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1974,6 +2198,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering salt of the sterile paste dries out your tongue, reminding you that every breath on this rig is an audited expense. As the sixth generation of the {family_name} line, the ledger of your life must now be balanced. How will you settle your accounts before the cold of the void claims your bones?",
+        "options": [
+          {
+            "text": "Sign the formal corporate union with the logistics guild's chief officer, binding our ledger to theirs and raising two sworn heirs to manage the newly acquired deep-bore claims.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 3,
+              "reach": 0
+            },
+            "setFlags": [
+              "corporate_alliance",
+              "secured_succession"
+            ]
+          },
+          {
+            "text": "Reject the compromise of a partner; we shall adopt a mathematically gifted orphan from the mining quarters, molding them into a single, sharp administrator of the {family_name} estate.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": -1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "merit_heir",
+              "solitary_ledger"
+            ]
+          },
+          {
+            "text": "Let the family line end here, in the cold iron. We will liquidate the entire {family_name} holding to fund an autonomous deep-space probe that will carry our name to the galactic core.",
+            "motivatorShift": {
+              "wealth": -3,
+              "politics": -2,
+              "worldview": 3,
+              "power": 2,
+              "tradition": -3,
+              "honor": 1,
+              "lineage": -4,
+              "reach": 4
+            },
+            "setFlags": [
+              "automated_immortality",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2295,6 +2584,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter chicory has settled in our throats, and the local clay no longer tastes entirely of exile. How do we, the {surname}s, carve our permanent ledger into this unyielding earth?",
+        "options": [
+          {
+            "text": "We will bring the timber-cutter's resilient daughter to our drafty table; her hands know how to stretch the salt-lard, and together we will fill the loft with children who grow up tasting this soil as their own.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "local_marriage",
+              "peasant_roots"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "We will not dilute our hard-won coin on soft mouths. I will pour every scrap of energy into the salt-port trade, letting the {family_name} line end with my own dry tongue if it means we die holding the ledger of the entire valley.",
+            "motivatorShift": {
+              "wealth": 4,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "sole_magnate",
+              "barren_wealth"
+            ]
+          },
+          {
+            "text": "Let the old country send my brother's orphaned boy to share this grey cabbage broth. We will raise him to hold the pen and the ledger without the distraction of a local wedding, keeping our blood unmixed and focused solely on the family business.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 3,
+              "lineage": 1,
+              "reach": -2
+            },
+            "setFlags": [
+              "imported_heir",
+              "insular_dynasty"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     }
   ]

@@ -429,6 +429,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The copper-coin tang of hard-won influence now coats your throat, {given_name}, but the district magistrate and the clan elders demand more than solitary ambition. How will the newly minted prestige of the {surname} name anchor its rising fortunes?",
+        "options": [
+          {
+            "text": "Taste the rich, honeyed osmanthus wine of the magistrate's favored daughter. By bringing her into our household under the red canopy, we bind our raw political hunger to her family's deep roots, ensuring a nursery of {surname} heirs to inherit this hard-won peace.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "alliance_marriage",
+              "gentry_lifestyle"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Inhale the bitter, clean dust of the state libraries and the cold ink of imperial decrees. We will refuse the distractions of a grand marriage, choosing instead to adopt a bright-eyed cousin's son from our home village to bear the {surname} name, keeping our own focus entirely on the ruthless ascent through the provincial bureaus.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 1,
+              "politics": -1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "clan_adoption",
+              "bureaucratic_focus"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Feel the biting chill of the northern border wind, where political appointments are bought with absolute, solitary devotion. We will leave no spouse, no child, and no domestic anchor behind—pouring every ounce of our life's blood into raw state power, letting the line end with us if it must.",
+            "motivatorShift": {
+              "power": 3,
+              "politics": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "ascetic_power",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -757,6 +810,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The steam rising from the final ceremonial cup of parched-ginger tea is sharp, stinging the back of {given_name}'s throat. To quench this deep, dry hunger of the {surname} rise, how will you anchor the family line before the grand banquet halls turn cold?",
+        "options": [
+          {
+            "text": "We must drink from the source. I will marry the daughter of the provincial salt-commissioner; her dowry smells of our native river-silt, and together we will raise heirs who know the taste of both dirt and gold.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "alliance_of_salt_and_silk",
+              "provincial_roots"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the capital's grand matches rot. The quiet, loyal companion who shared my drafty room during the lean years in the ministry will raise our child; we will claim him as a nephew first to avoid the court's predatory eyes.",
+            "motivatorShift": {
+              "honor": -1,
+              "power": 2,
+              "tradition": -2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "clandestine_heir",
+              "shunned_high_matches"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The tongue has grown too dry for the sweetness of domesticity. I will let the {family_name} name end with my own offices, devoting every scrap of my spirit to rewriting the imperial grain codes so that no child ever starves again.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 1,
+              "lineage": -3,
+              "honor": 2
+            },
+            "setFlags": [
+              "ascetic_statesman",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1090,6 +1196,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "With the bitter salt of the provinces still lingering on your tongue, how will the {family_name} name endure beyond this hard-won triumph?",
+        "options": [
+          {
+            "text": "We bind our blood to the soil that saved us. I will take the daughter of the local granary master as my wife, anchoring the {surname} name in these salt-seasoned valleys and rearing children who understand the labor behind every grain of rice.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "power": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "provincial_alliance",
+              "salted_roots"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The hunger of the capital's ministries demands total devotion. I will take no partner and leave no heirs of my flesh, pouring my remaining years entirely into the political fire to burn away the corruption of the high courts.",
+            "motivatorShift": {
+              "politics": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "wealth": -1
+            },
+            "setFlags": [
+              "ascetic_crusader",
+              "barren_triumph"
+            ]
+          },
+          {
+            "text": "I will not buy peace with a dynastic marriage. Instead, I will adopt the sharpest mind among our local tax-resisters, raising them under the {surname} name to carry our provincial defiance back to the capital's high tables.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "politics": 1,
+              "tradition": -2
+            },
+            "setFlags": [
+              "adopted_rebel_heir",
+              "unconventional_path"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -1419,6 +1578,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the sulfurous bite of foreign victory and the taste of damp limestone linger on {given_name}’s tongue, how will the family anchor its survival in this age of ink and concessions?",
+        "options": [
+          {
+            "text": "We must swallow the cold ash of this new world. I will accept the match arranged by the Ministry, taking a partner whose family controls the treaty-ports, so that the children we raise will command the wealth flowing through these new channels.",
+            "motivatorShift": {
+              "politics": 2,
+              "lineage": 2,
+              "tradition": -2,
+              "wealth": 1
+            },
+            "setFlags": [
+              "treaty_marriage",
+              "foreign_entangled"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "No more foreign poison. I will turn back to our roots, refusing a new marriage but adopting my late cousin's child to raise them on the quiet, un-ceded soils of our ancestral home, away from the bitter scent of treaty ink.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": -2
+            },
+            "setFlags": [
+              "traditionalist_adoption",
+              "isolationist"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "This limestone-sharp vintage is my only companion. I will pour every ounce of our remaining strength into the diplomatic struggle, letting my own line wither so that the name of {family_name} is remembered solely for holding the line against the Western powers.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 2,
+              "honor": 1,
+              "lineage": -3
+            },
+            "setFlags": [
+              "diplomatic_martyr",
+              "barren_struggle"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1827,6 +2039,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter, chemical sting of the Star-Root still coats the tongue, a reminder that the {family_name} line has survived on little more than grit and recycled nitrogen. As {given_name} swallows the last of the ancestral sorghum's ghost, how will the family's authority be carried into the next cycle?",
+        "options": [
+          {
+            "text": "We temper the harsh iron of our station with new blood. I will bind our family to the hydroponic reclamation directorate through marriage, producing heirs who will inherit both our political cunning and their green-dome wealth.",
+            "motivatorShift": {
+              "lineage": 3,
+              "politics": 2,
+              "wealth": 2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "reclamation_alliance",
+              "green_dome_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The station cannot afford the luxury of domestic alliances. I will raise my sister's orphaned child as my sole successor, preserving the existing bond of our blood without bringing an outsider into the private chambers of {given_name}.",
+            "motivatorShift": {
+              "lineage": 1,
+              "politics": 1,
+              "honor": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "adoptive_succession",
+              "insular_rule"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line burn out like a dying thruster, so long as it burns bright. I will pour every ounce of our political capital into dismantling the Earth-bound trade quotas, leaving {surname} not as a family tree, but as the spark that freed the domes.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "quota_rebellion",
+              "line_ends_in_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2163,6 +2428,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold steam of the dandelion broth rises between us, smelling of alkaline dust and the open, muddy ditches of the expansion zone. How will the {family_name} name endure when the gravel of this border town is all we have left to claim?",
+        "options": [
+          {
+            "text": "We must swallow our pride and bind {given_name} to the wealthy salt-merchant's daughter; let her dowry buy us the fertile land we need to raise three strong heirs who will never know the taste of weeds.",
+            "motivatorShift": {
+              "politics": 1,
+              "lineage": 2,
+              "wealth": 2,
+              "honor": -1
+            },
+            "setFlags": [
+              "salt_alliance",
+              "secured_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "Avoid the complications of foreign blood. We will adopt your cousin's quiet boy from the salt-pans, teaching him to hoard our meager political secrets and carry the {surname} banner without the burden of a new dowry.",
+            "motivatorShift": {
+              "tradition": 2,
+              "wealth": -1,
+              "lineage": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "frugal_adoption",
+              "insular_clique"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Pour every scrap of our remaining health and silver into securing {given_name} the clerkship at the district office; let the bloodline thin and fade if it means we die holding the seals of office.",
+            "motivatorShift": {
+              "power": 3,
+              "politics": 2,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "bureaucratic_obsession",
+              "barren_clerkship"
+            ]
+          }
+        ]
       }
     }
   ]

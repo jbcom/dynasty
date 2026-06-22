@@ -427,6 +427,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter, comforting warmth of the chicory-brew pools in {given_name}'s throat, the dry ink on the ledger beckons. The foundation of this new-world bakery is laid, yet the quiet house smells only of flour and solitary labor. How will the {surname} name anchor its roots in this fertile, demanding soil?",
+        "options": [
+          {
+            "text": "Invite the miller's eldest daughter to share this table; her sensible nature and deep respect for the grain will help me rear a sturdy brood of {surname} heirs to inherit the ovens.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "hearth_established",
+              "miller_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Keep my bed solitary but pay the passage for my sister's young boy in Bavaria; I will teach him the sour-starter's secrets and pass the bakery to blood of my blood, keeping the business uncompromised.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "wealth": 2,
+              "politics": -1
+            },
+            "setFlags": [
+              "nephew_apprentice",
+              "frugal_focus"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the bakery fire consume all my devotion; I will buy out the local grain cartels and let the {family_name} name become a corporate legend of wealth, even if no child of mine remains to taste the bread.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 3,
+              "lineage": -3,
+              "worldview": 1
+            },
+            "setFlags": [
+              "grain_monopoly",
+              "solitary_titan"
+            ]
+          }
+        ]
       }
     },
     {
@@ -831,6 +884,60 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The copper-bitter dregs of the ink settle on the back of {given_name}'s throat, mingling with the heavy, cold tallow that coats the tongue. The ledgers of {family_name} are heavy with profit, but the drafty timber walls feel empty. To secure what has been dragged from the Bavarian clay, the pen must either write a union or seal the vault forever.",
+        "options": [
+          {
+            "text": "Bring the daughter of the valley's chief salt-factor to the cold hearth; her heavy dowry will buy the southern salt-pans, and together we will raise children to master both the brine-pits and the ledger.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 3,
+              "tradition": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "salt_alliance_secured",
+              "legitimate_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Keep the family silver intact and avoid the ruinous costs of a wedding feast; instead, bring your sister's orphaned boy into the counting-house to learn the trade and inherit the keys when the ink finally dries.",
+            "motivatorShift": {
+              "wealth": 3,
+              "lineage": 1,
+              "honor": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "frugal_adoption",
+              "apprentice_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Close the ledger to domestic life entirely and pour every ounce of tallow-greased silver into buying the old ancestral mountain-rights, letting the family line wither so that {given_name}'s name is carved imperishably into the very bedrock of the valley.",
+            "motivatorShift": {
+              "wealth": -2,
+              "power": 3,
+              "reach": 2,
+              "lineage": -3,
+              "honor": 2
+            },
+            "setFlags": [
+              "monument_built",
+              "barren_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1145,6 +1252,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The warmth of the Levant coffee lingers on the tongue, a testament to the stability {full_name} has rebuilt from the ashes of the hunger years. But prosperity is a hollow vessel without a hand to steer it tomorrow. As the ledger closes, how will the fruits of the {family_name} trade be secured?",
+        "options": [
+          {
+            "text": "Accept the alliance with the Munich salt-merchant's daughter, bringing her steady hands and a heavy dowry of Danube shipping rights to a home filled with a new generation of {surname} heirs.",
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 2,
+              "tradition": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "allied_with_salt_merchants",
+              "legitimate_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "Formalize the bond with the quiet clerk's daughter who has long shared your hearth in secret, legitimizing her bright-eyed child to inherit the counting-house despite the silent disapproval of the parish.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": -2,
+              "worldview": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "morganatic_heir",
+              "parish_scandal"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the cup grow cold and pour every pfennig back into the Levantine trade routes; the {family_name} name will end with your final breath, but it will be written in gold across the ports of the world.",
+            "motivatorShift": {
+              "wealth": 3,
+              "reach": 3,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "merchant_emperor",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1476,6 +1636,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the cold, creamy foam of the bock clings to the Bohemian crystal, the heavy leather ledger of the {family_name} brewery lies open before you. The taste of success is sharp, but the draft of the future requires a final signature. How do you secure what has been won?",
+        "options": [
+          {
+            "text": "We must bind our blood to the soil that feeds our kettles. I will take the hop-merchant's daughter to wife, bringing her dowry of Hallertau fields into our ledger and raising heirs who smell of sweet yeast and cold ink.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "alliance_by_marriage",
+              "traditional_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The Munich guilds may sneer, but the sturdy son I have already reared with the cooper's widow knows the weight of an oak cask. I will formalize his status as my sole heir, sparing us the cost of a high-born dowry to fund the purchase of the municipal steam-kettles.",
+            "motivatorShift": {
+              "lineage": 1,
+              "wealth": 2,
+              "honor": -1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "coopers_bastard_elevated",
+              "industrial_focus"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "This perfect, crystal-bound liquor is family enough. I shall take no partner and leave no heirs of my flesh, pouring every pfennig of our liquid gold into bribing the royal court for an exclusive export charter to the north.",
+            "motivatorShift": {
+              "lineage": -3,
+              "reach": 3,
+              "power": 2,
+              "wealth": 1
+            },
+            "setFlags": [
+              "royal_monopoly",
+              "line_ends_in_gold"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1787,6 +2000,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The heavy brandy-warmth pools in {given_name}'s chest as eyes drift from the glowing hearth to the three sealed wax documents resting on the corner of the desk. The cellar is full, the books are balanced, but the succession of the {family_name} name demands a final signature to seal how this accumulated wealth will survive the cold seasons ahead.",
+        "options": [
+          {
+            "text": "Sign the alliance with the Munich hops-baron; we will bring his shrewd eldest daughter into our halls, sharing our cellars to raise a legitimate flock of heirs who will inherit both the grain and the gold.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "alliance_by_marriage",
+              "traditional_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Adopt the quiet clerk—the sister's boy who already lives among the barrels and knows the rhythm of our ledgers—bestowing the {surname} name upon him without letting an outsider's dowry disrupt our undivided accounts.",
+            "motivatorShift": {
+              "power": 2,
+              "wealth": 1,
+              "tradition": -1,
+              "honor": -1
+            },
+            "setFlags": [
+              "nephew_adopted",
+              "undivided_wealth"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the bloodline dry with this last glass; bequeath the entire estate to the high Bavarian trade-guild foundation, converting the {surname} legacy from mortal flesh into an immortal financial trust.",
+            "motivatorShift": {
+              "reach": 2,
+              "politics": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "guild_trust_established",
+              "no_heir"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2122,6 +2388,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The metallic tang of the press still coats your teeth, and on the silver charger, the vat-grown nutrient wafer shivers with the deck's sub-harmonic hum. The ledger of the {family_name} must close its sixth chapter. How do you balance the ultimate cost of our survival against the preservation of our blood?",
+        "options": [
+          {
+            "text": "We will sign the union covenant with the chief engineer's primary deputy. Together, we will raise a new generation of surveyors to command these pressurized vaults, anchoring our capital in flesh as well as titanium.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "officer_alliance",
+              "high_pressure_dynasty"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Bring my natural-born child from the lower-deck stationers into the executive suite. We have no need for a fresh corporate contract; we will train them to run the valves ourselves, keeping our blood uncompromised by rival ledgers.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": -2,
+              "power": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "low_deck_elevation",
+              "independent_monopoly"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Pour our remaining reserves into the automated deep-space network. Let the {surname} name survive as an immortal algorithm stamped upon the hull plates, while we die without heirs, leaving only a perfect, unassailable balance sheet behind.",
+            "motivatorShift": {
+              "lineage": -3,
+              "reach": 3,
+              "wealth": 2,
+              "worldview": 2
+            },
+            "setFlags": [
+              "algorithmic_immortality",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     }
   ]

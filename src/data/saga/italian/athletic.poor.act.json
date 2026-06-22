@@ -443,6 +443,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter tang of scorched chicory and limestone dust still coats your teeth, a reminder that your physical peak is a fleeting currency. How will the strength of {given_name} {surname} be spent before the muscles finally turn to stone?",
+        "options": [
+          {
+            "text": "I will bind my life to the brick-maker's daughter who knows the weight of clay; we will share this sour bread, pool our calloused strength, and raise heirs with chests deep enough to out-breathe this quarry.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "bonded_in_labor",
+              "g1_heirs_secured"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The stone has ground down my desire for a bedmate, but my sister's quiet boy has my own thick-set wrists. I will take him into my shack, split my salt-wheat with him, and forge his frame to carry the {surname} name without ever taking a wife of my own.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 3,
+              "worldview": 1,
+              "wealth": -2
+            },
+            "setFlags": [
+              "nephew_apprentice",
+              "ascetic_path"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the {surname} blood pool and dry in this dust. I will pour every ounce of my remaining sinew into the bare-knuckle prize rings of the district, trading my teeth and my future for gold, leaving only a legend of bone and iron.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "wealth": 2
+            },
+            "setFlags": [
+              "gladiator_path",
+              "line_ends_in_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -844,6 +897,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The heavy, metallic taste of the gravy lingers, a reminder of the raw stamina it takes to survive in these coal-yards. How will we carry the {family_name} blood forward when our muscles finally tire?",
+        "options": [
+          {
+            "text": "Bind our life to the butcher's quiet daughter who understands the hunger of physical labor, raising a pack of thick-shouldered children to keep the {surname} stoves burning.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "traditional_heirs",
+              "butchers_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "Pour every remaining drop of sweat into the regional prize rings, chasing glory and power alone, letting the physical strain consume us while our branch of the family tree ends with our own hands.",
+            "motivatorShift": {
+              "power": 3,
+              "honor": 2,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "prize_fighter_glory",
+              "line_ends"
+            ]
+          },
+          {
+            "text": "Take our sister's orphaned boys into our cramped lodging, hardening their knuckles in the gym and teaching them to carry the {family_name} legacy without ever letting a partner share our bed.",
+            "motivatorShift": {
+              "lineage": 2,
+              "honor": 1,
+              "wealth": -2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "adopted_nephews",
+              "bachelor_coach"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          }
+        ]
       }
     },
     {
@@ -1245,6 +1351,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The dark, iron taste of the marrow lingers on the back of the throat, a thick reminder of the physical dominance we have wrested from this soil. But the body is a candle that burns hot and fast. How will the blood of the {family_name} spend the heavy strength we have cultivated?",
+        "options": [
+          {
+            "text": "We will wipe the rosemary fat from our lips and take the iron-willed cousin of the regional champion to our bed, doubling our strength to breed a litter of heavy-shouldered heirs who will dominate the arena.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "power": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "champion_bloodline",
+              "arena_dynasty"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We will not bind ourselves to a stranger's house. Instead, we will claim the natural-born child we already fathered behind the tanneries, teaching them to love the taste of copper and victory just as we do.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "power": 1,
+              "politics": -2
+            },
+            "setFlags": [
+              "bastard_heir",
+              "tanhouse_grit"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "We will refuse the soft rot of family life. We will drink the bitter dregs of this heavy vintage and throw our aging flesh into the great crossing of the mountain pass, seeking a glorious, childless end where only the stone remembers {given_name}.",
+            "motivatorShift": {
+              "lineage": -3,
+              "power": 3,
+              "honor": 2,
+              "worldview": 2
+            },
+            "setFlags": [
+              "legendary_extinction",
+              "mountain_tomb"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1575,6 +1734,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering burn of the forty-year vinegar catches in the throat, a sharp reminder of how hard this sanctuary was won. Behind these high stone walls, the sweat of grueling training has built a quiet empire of muscle and discipline, but the silence of the courtyard is deafening. How will the {family_name} blood carry this heavy, hard-fought legacy into the next age?",
+        "options": [
+          {
+            "text": "We must open our iron gates to the northern hills. I will take a spouse from the fierce marble-quarry dynasties of Carrara, uniting our athletic discipline with their stone-hard endurance to rear a new breed of competitors.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "power": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "marble_alliance",
+              "athletic_dynasty_secured"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The bond with my training partner from the lower tenements is already sealed in sweat and blood, even if the high priests refuse to bless it. I will bring our secret-born child within these walls, raising them to inherit the {surname} name without the theater of a noble wedding.",
+            "motivatorShift": {
+              "lineage": 1,
+              "worldview": 2,
+              "honor": -2,
+              "politics": -1
+            },
+            "setFlags": [
+              "bastard_heir_raised",
+              "defy_the_altar"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let our bloodline dry like the vinegar in an empty cask. I will pour every ounce of my remaining physical strength into the grand games, establishing an elite academy within these walls so that our physical discipline—not our genes—becomes our eternal monument.",
+            "motivatorShift": {
+              "reach": 2,
+              "power": 1,
+              "lineage": -3,
+              "worldview": 1
+            },
+            "setFlags": [
+              "academy_founded",
+              "barren_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1904,6 +2116,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter dregs of the Amarone burn like the salt on a training mat. For five generations, the {surname} blood has been spent on clay, grass, and concrete to build this empire of sweat. Now, as the corporate board demands stability and the physical toll of your youth catches up, how will you secure the finish line?",
+        "options": [
+          {
+            "text": "I will swallow my pride and sign the marriage contract with the northern textile syndicate. Together, we will breed a new breed of heavy-boned athletes under the {surname} name, combining our physical dominance with their industrial wealth.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "dynastic_alliance",
+              "olympian_bloodline"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The child I quietly fathered with my former head trainer has the raw red clay of our courts in their blood. I will formally acknowledge them as my sole successor, ignoring the gossip of Milan's elite to focus entirely on grinding them into a world champion.",
+            "motivatorShift": {
+              "lineage": 1,
+              "power": 2,
+              "honor": 2,
+              "politics": -2
+            },
+            "setFlags": [
+              "bastard_legitimized",
+              "pure_athleticism"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the flesh fail. I will sign over the entire {family_name} fortune to a global network of youth academies and let my own body be the final monument. The name will survive forever on the tongues of champions, even if the nurseries of our estate fall silent.",
+            "motivatorShift": {
+              "reach": 3,
+              "wealth": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "brand_immortality",
+              "line_ends"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2237,6 +2502,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The copper taste of the microgravity rations cannot mask the slow, hollow ache in our calves and thighs. If we remain in this weightless drift, the physical fire that defined the {surname} line for five generations on earth will wither into brittle bone and chalky dust. How do we anchor our fading physical power before the void hollows us out completely?",
+        "options": [
+          {
+            "text": "We must bind our blood to one of the raw-boned ice-miners from the lower decks, sharing what little fresh soil we have to raise a stubborn, heavy-boned generation that will feel the press of real gravity again.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "worldview": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "centrifuge_blooded",
+              "volcanic_resolve"
+            ]
+          },
+          {
+            "text": "Let the ship's gene-synthesizers forge our stored genetic marrow into a single, solitary successor—no weddings in the dark, just our raw, unmixed strength engineered to survive the drift without compromise.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "power": 2,
+              "worldview": -2
+            },
+            "setFlags": [
+              "synthetic_heir",
+              "sterile_purity"
+            ]
+          },
+          {
+            "text": "We were built to run, to leap, to burn. I will exhaust the last of my fading muscle mass in the pilot's harness, guiding this metal beast through the radiation belts and letting the {surname} name die as a kinetic legend.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "honor": 2
+            },
+            "setFlags": [
+              "drift_legend",
+              "line_extinguished"
+            ]
+          }
+        ]
       }
     }
   ]

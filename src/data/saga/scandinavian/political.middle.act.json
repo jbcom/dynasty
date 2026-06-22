@@ -479,6 +479,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the sharp vinegar of the herring lingers on your tongue and the warmth of the hearth-fire begins to fade, the political realities of this new territory press hard against the timbered walls. To plant the {surname} name permanently into this damp, black loam, how will you anchor the bloodline before the winter ice locks the fjords?",
+        "options": [
+          {
+            "text": "We will bring the daughter of the northern timber-warden to this split-pine table, sealing our union with the traditional salt and dark bread. Together, we shall raise three heirs who carry both the hardiness of the cold coasts and a permanent claim to these rich lowlands.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "politics": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "northern_alliance",
+              "prolific_heirs"
+            ]
+          },
+          {
+            "text": "Let the line narrow and end with my own breath. I will pour the remaining salt of my years into building a political fortress of laws and treaties, ensuring the {surname} name is feared by our rivals long after my lone grave has grown over with wild caraway.",
+            "motivatorShift": {
+              "power": 3,
+              "politics": 2,
+              "lineage": -3,
+              "worldview": 1
+            },
+            "setFlags": [
+              "barren_fortress",
+              "political_absolute"
+            ]
+          },
+          {
+            "text": "There is no room at this hearth for a political marriage. I will formally adopt my late brother's ward, teaching him to manage the timber mills and respect the old ways, raising him as the sole guardian of the {family_name} legacy.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 1,
+              "lineage": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "adopted_ward",
+              "isolated_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -885,6 +938,61 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The raw wind of the clearing whistles through the green pine-chinks, carrying the smell of damp earth and woodsmoke. As the last bitter dregs of chicory go cold, {given_name} must decide how the {surname} name will take root in this unforgiving territory before the winter frost seals the valley.",
+        "options": [
+          {
+            "text": "We invite the district surveyor’s resilient sister to this drafty table. Her family’s iron spikes and land-deeds will secure our borders, and together we will build a homestead of squared logs, raising children who know how to defend what is ours.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 1,
+              "wealth": 1,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "surveyor_alliance",
+              "squared_log_manor"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no room for a stranger's pride in a house this small. We will formally claim the orphaned child of our late timber-partner as our sole heir, teaching them the hard politics of the district assembly while keeping our blood free from the land-office's reach.",
+            "motivatorShift": {
+              "honor": 2,
+              "politics": 1,
+              "lineage": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "adopted_orphan_heir",
+              "independent_clearing"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the forest reclaim this cabin when we are gone. We will pour our lives and every coin from the timber-cut into the legislative campaign downriver, crushing the land-monopoly once and for all, even if the {surname} line ends with our own final breath.",
+            "motivatorShift": {
+              "politics": 3,
+              "reach": 2,
+              "lineage": -3,
+              "wealth": -2,
+              "honor": 1
+            },
+            "setFlags": [
+              "legislative_martyr",
+              "monopoly_broken"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1233,6 +1341,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The warmth of the imported brandy burns sweet in the throat, yet the cold iron of the well-water lingers on the tongue. How will the {family_name} name carry this hard-won luxury into the next season?",
+        "options": [
+          {
+            "text": "Let the heat of this plum-brandy lead us to a grander alliance. We will invite the high-born child of our chief political rival to this table, binding our bloodlines in a warm bed to yield three strong heirs who will rule these valleys with undisputed right.",
+            "motivatorShift": {
+              "politics": 2,
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "alliance_by_marriage",
+              "heirs_of_luxury"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "We will not let a stranger's greedy hands touch this salt-cured wealth. My existing companion and I will raise the children already born to our quiet union, keeping our hearth private and teaching them the sharp, clean bite of the old well-water.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "politics": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "insular_heirs",
+              "pure_bloodline"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the line burn down to a brilliant, solitary ember. I will take no partner and raise no heirs, pouring every drop of this family's immense wealth and power into conquering the northern trade leagues, leaving only a legend written in cold, unyielding stone.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 2,
+              "lineage": -3,
+              "honor": 1
+            },
+            "setFlags": [
+              "last_of_the_line",
+              "monument_of_power"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1566,6 +1727,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the tart lingonberry cuts through the heavy oil of the statecraft brew, {given_name} realizes the old alliances are as cold as the frost on the high fells. The ministry requires a permanent anchor, but the seat of the {family_name} name must not be bartered lightly. How will the bloodline meet this bitter winter?",
+        "options": [
+          {
+            "text": "We bind our name to the northern timber estates. I will invite the daughter of the provincial governor to my table, letting her bitter wealth sweeten our dry halls and bearing children who smell of pine and peat.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "timber_alliance",
+              "high_fell_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Avoid the theatrical display of a state wedding. I will bring my sister’s eldest child from the coastal parishes into this drafty house, teaching them to handle the ledger and the silver spoon without introducing new blood to the table.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": -2,
+              "honor": 2,
+              "politics": -1
+            },
+            "setFlags": [
+              "adopted_successor",
+              "quiet_house"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the hearth fire burn down to ash. I will dedicate our remaining capital to the reform of the high courts, ensuring that while the {surname} name ends with my final breath, our laws will govern the fells forever.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "legislative_monument",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1900,6 +2114,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitterness of the claret lingers, a reminder of what must be swallowed to preserve the state. How do we ensure the {family_name} name survives the dry winter of our political ascendance?",
+        "options": [
+          {
+            "text": "We temper this astringent legacy with a quiet alliance. I will accept the hand of the customs director's daughter, welcoming her to our drafty halls to raise children who will learn the cold weight of our ledger before they learn to speak.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "politics": 2,
+              "wealth": 1
+            },
+            "setFlags": [
+              "political_alliance_heir",
+              "traditional_hearth"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The ink on our ledgers is thick enough without the distraction of a new marriage. I will bring my sibling's quietest child into my chambers, teaching them to parse the ministry's secrets and carry the {family_name} seal without bringing a stranger into our bed.",
+            "motivatorShift": {
+              "politics": 3,
+              "honor": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "adopted_clerk_heir",
+              "celibate_duty"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line dry to ash like the wood in our hearths. I will remain alone, devoting my remaining winters to finalizing the northern treaties, ensuring our family's final monument is not a child, but an unshakeable ministry.",
+            "motivatorShift": {
+              "politics": 3,
+              "reach": 2,
+              "lineage": -3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "barren_bureaucrat",
+              "treaty_legacy"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2303,6 +2570,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "With the dry, metallic grease of survival coating your teeth, you must decide how the political legacy of {surname} will endure in this sterile sky.",
+        "options": [
+          {
+            "text": "We will bind our name to the chief environmental director, washing the chalky taste of ration gel down with the recycled water of their private reserves. Together, we will raise new {surname} children within these pressurized halls, cementing our grip on the station's lifelines.",
+            "motivatorShift": {
+              "lineage": 3,
+              "politics": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "alliance_by_water",
+              "station_dynasty"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no room in this high cabin for a new partner's ambitions. We will nurture a single ward from our existing kinship network, teaching them to count every calorie and weigh every alliance, keeping the family's influence sharp and unburdened by new marriages.",
+            "motivatorShift": {
+              "politics": 3,
+              "lineage": 1,
+              "power": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "isolated_heir",
+              "frugal_power"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the {surname} line freeze in this metal vault. We will pour our remaining influence into the great atmospheric descent project, breaking the administrative monopoly so that others might one day taste fresh earth, even if none of them bear our name.",
+            "motivatorShift": {
+              "worldview": 4,
+              "reach": 3,
+              "lineage": -4,
+              "politics": -1
+            },
+            "setFlags": [
+              "martyr_of_the_skies",
+              "line_ends"
+            ]
+          }
+        ]
       }
     }
   ]

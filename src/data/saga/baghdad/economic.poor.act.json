@@ -499,6 +499,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The grit of the oven soot still clings to your teeth as you look out over the dusty alley. This bitter loaf of exile is yours, but it is small. How will {given_name} anchor {family_name} to this hard-baked earth before the warmth of the kiln fades?",
+        "options": [
+          {
+            "text": "We swallow the dry ash of our displacement and invite the local spice-chandler's kin to share this meager hearth, binding our ledgers to theirs so that the children we raise will grow fat on sweet wheat, not bitter sesame.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 1,
+              "wealth": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "hearth_established",
+              "spice_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We refuse to dilute our hard-won coin with desperate alliances; we will summon our cousin’s quiet boy from the borderlands to sleep beneath the counter, teaching his hands the weight of the scales while we remain wedded only to the vault.",
+            "motivatorShift": {
+              "wealth": 3,
+              "honor": 1,
+              "lineage": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "clannish_focus",
+              "nephew_apprentice"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line burn out with our own breath. We will melt down every copper coin to buy the grand salt-depots on the riverway, turning our entire life into a monument of commerce that needs no weeping heirs to justify it.",
+            "motivatorShift": {
+              "power": 3,
+              "wealth": 3,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "sterile_monument",
+              "salt_monopoly"
+            ]
+          }
+        ]
       }
     },
     {
@@ -826,6 +879,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the copper-tang of the silt settles in your throat, your mother pushes the empty bowl aside, her soot-stained fingers tapping the table. She demands to know if the {family_name} name will dissolve into these dry flats, or if you will use our hard-won coin to build something that endures beyond this smoke-choked kitchen.",
+        "options": [
+          {
+            "text": "Let the bitter taste of our struggle be washed clean by the brackish dowry of the canal-master's daughter; we will bind our ledgers to theirs and fill the nursery with the heirs of irrigated land.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 2,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "canal_alliance",
+              "irrigated_heirs"
+            ]
+          },
+          {
+            "text": "There is no room for a stranger at this hearth. I will raise my sister's quietest boy to master the salt-kilns, ensuring the trade survives under the {surname} banner even if my own bed remains cold.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "apprentice_heir",
+              "hearth_integrity"
+            ]
+          },
+          {
+            "text": "Let the bloodline dry like these limestone flats. I will spend every last dinar buying the exclusive salt-clearing rights from the governor, leaving behind an empire of dust and ledgers when my breath finally fails.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": -3,
+              "honor": -1
+            },
+            "setFlags": [
+              "salt_monopoly",
+              "barren_wealth"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1242,6 +1348,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering soot-bitter warmth of cardamom-crushed qahwa stays on the tongue, a reminder of the sharp lines we had to cross to secure this luxury. As the oil lamps flicker, how shall {given_name} {surname} anchor the golden surplus of the {family_name} house for the years to come?",
+        "options": [
+          {
+            "text": "We shall seal a pact with the northern caravan-master, bringing his daughter to our hearth to secure the silk routes, and raise three heirs to inherit our swelling vaults.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 3,
+              "reach": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "silk_road_alliance",
+              "secure_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "We need no foreign eyes counting our gold. We will adopt our deceased brother's two boys, raising them amidst the ledger books to preserve the fortune without splitting our family estates.",
+            "motivatorShift": {
+              "wealth": 3,
+              "tradition": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "wards_of_the_house",
+              "concentrated_wealth"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The hunger of our ancestors is sated; let our ambition rest. We will pour our entire fortune into a grand public waqf—a sanctuary of running water and shade—letting the {family_name} name dissolve into eternal charity.",
+            "motivatorShift": {
+              "honor": 3,
+              "worldview": 2,
+              "wealth": -3,
+              "lineage": -3
+            },
+            "setFlags": [
+              "pious_endowment",
+              "quiet_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1591,6 +1750,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the cloying sweetness of the baklava struggles against the bitter chicory lingering on your tongue, how will you secure the {family_name} ledger against the return of the lean years?",
+        "options": [
+          {
+            "text": "We wash away the bitter soot of our past with the rosewater of a grand alliance, welcoming a partner from the great silk-routing houses to our table to bear heirs who will only ever know the taste of abundance.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "allied_with_silk_merchants",
+              "secure_succession"
+            ]
+          },
+          {
+            "text": "No new mouths shall dilute our hard-won gold. We close our gates to outsiders, choosing to raise the sharp-eyed child of our kin who already knows the bitter salt of the ledger, keeping our wealth tight and undivided.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": -1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 2,
+              "honor": 0,
+              "lineage": 1,
+              "reach": -2
+            },
+            "setFlags": [
+              "concentrated_wealth",
+              "internal_heir"
+            ]
+          },
+          {
+            "text": "Let the line end with this final, glorious feast. We pour every last dirham into buying the state's tax-farms and securing the ministries, ensuring {given_name} is the last and most formidable of our name, leaving no heirs to squander what we bled to build.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 3,
+              "worldview": 2,
+              "power": 3,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "state_monopolist",
+              "line_ends"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1989,6 +2213,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The last drop of the peat-burned oil vanishes from the tongue, leaving only a dry, metallic vacancy in the throat. If {given_name} is to prevent this vast, silt-bought fortune from dissolving back into the Tigris mud, a final signature must be placed upon our house's future.",
+        "options": [
+          {
+            "text": "We rinse the ash from our mouth with sweet wedding sherbet, bringing the customs master’s clever daughter into our home to bear heirs who will inherit both the docks and the blood.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "alliance_marriage",
+              "legitimate_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "No new contracts. We will validate the quiet child of our long-faithful ledger-keeper, who already has the smell of ink on his skin and our own sharp chin, ensuring the books stay closed to outsiders.",
+            "motivatorShift": {
+              "lineage": 1,
+              "power": 2,
+              "tradition": -2,
+              "honor": -1
+            },
+            "setFlags": [
+              "clerk_bloodline",
+              "unorthodox_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the ink dry and the blood run cold. We will sign our entire wealth over to the grand river-quay endowment, carving the {surname} name into the deep basalt pylons to outlast any flesh and blood.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "wealth": -2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "guild_endowment",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2320,6 +2597,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The chalky, soy-bitter aftertaste of the ration block clings to your tongue, a dry reminder that in this sterile void, even the blood of {full_name} must yield a return on investment. As the leader of this generation, you must decide how the ledger of the {family_name} line will balance before the air-scrubbers claim your last breath.",
+        "options": [
+          {
+            "text": "We will merge our remaining water-rights with the chief hydro-officer's house, signing a formal union contract. Though the yeast-rations will be thin, {given_name} will secure two heirs to inherit our hard-won ledgers and carry our blood forward.",
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 1,
+              "tradition": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "hydro_merger",
+              "secured_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Bringing a new partner into this cramped cabin is an inefficiency we cannot afford. We will raise the young clerk already assigned to our ledger-desk, passing the {surname} secrets of yield-balancing to a worthy successor without wasting calories on courtship.",
+            "motivatorShift": {
+              "wealth": 3,
+              "lineage": 1,
+              "politics": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "clerk_adopted",
+              "frugal_continuity"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the flesh fail. We will liquidate our family's living assets and pour every credit into buying out the deck's chemical refinery, ensuring the {surname} name is carved into the station's hull even if our bloodline ends with us.",
+            "motivatorShift": {
+              "power": 3,
+              "wealth": 3,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "refinery_monopoly",
+              "extinguished_bloodline"
+            ]
+          }
+        ]
       }
     }
   ]

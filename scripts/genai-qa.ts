@@ -347,21 +347,32 @@ async function passSuccession(ref: ActFileRef, gen: Generate): Promise<void> {
     if (!raw) continue;
     const obj = parseGeneratedObject(raw) as { decision?: Scene["decision"] } | null;
     if (!obj?.decision) continue;
-    // Normalize numeric-key drift on options, then require a succession-bearing option exists.
+    // Normalize numeric-key drift on options, then validate THIS close scene on its own (per-scene, so
+    // one bad close can't sink the file's other five — the whole-file gate was rejecting all 6 together).
     const normed = (normalizeSceneFile({ acts: [], scenes: [applySuccession(close, obj.decision)] }) as {
-      scenes?: Scene[];
+      scenes?: unknown[];
     }).scenes?.[0];
-    if (!normed?.decision) continue;
-    const hasSuccession = normed.decision.options.some((o) => o.succession?.takesPartner);
-    if (!hasSuccession) {
+    const v = SceneSchema.safeParse(normed);
+    if (!v.success) {
+      console.error(`    · ${closeId}: invalid succession (${v.error.issues[0]?.message}) — skipped`);
+      continue;
+    }
+    if (!v.data.decision?.options.some((o) => o.succession?.takesPartner)) {
       console.error(`    · ${closeId}: no take-partner option — skipped`);
       continue;
     }
-    file.scenes = file.scenes.map((s) => (s.id === closeId ? normed : s));
+    file.scenes = file.scenes.map((s) => (s.id === closeId ? v.data : s));
     touched = true;
   }
-  if (touched) writeIfValid(ref, file, label);
-  else console.error(`  · ${label}: nothing to author (closes already have decisions)`);
+  // Write directly — each spliced close was individually schema-validated above (no whole-file all-or-nothing).
+  if (touched) {
+    if (WRITE) {
+      writeFileSync(ref.path, `${JSON.stringify(file, null, 2)}\n`);
+      console.error(`  ✓ ${label}: written`);
+    } else {
+      console.error(`  ✓ ${label}: would write (dry-run)`);
+    }
+  } else console.error(`  · ${label}: nothing to author (closes already have decisions)`);
 }
 
 async function pool<T>(items: T[], n: number, worker: (item: T) => Promise<void>): Promise<void> {

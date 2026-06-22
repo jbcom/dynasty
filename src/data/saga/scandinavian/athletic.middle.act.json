@@ -499,6 +499,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter brine of the salt-pork still coats the tongue, and the cold mud of this clearing clings to our boots. How will {given_name} anchor the physical strength of the {surname} line to this raw, demanding frontier?",
+        "options": [
+          {
+            "text": "Share the ladle with the blacksmith’s raw-boned daughter, marrying our aching muscles to her tireless labor to raise a brood of deep-chested children who will tame this timberland.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "power": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "pioneer_matrimony",
+              "sturdy_offspring"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "Claim the orphaned boy from the steerage run as our own, forcing his soft hands to harden against the hickory handle of the broadaxe, ensuring a successor forged by sweat rather than blood.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 1,
+              "lineage": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "foster_apprentice",
+              "hard_labor"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Forgo the warmth of a family bed and throw every ounce of sinew into the brutal, ice-rimed lumber runs, building an empire of sawdust and iron that will preserve our name through legend alone.",
+            "motivatorShift": {
+              "wealth": 3,
+              "reach": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "timber_baron",
+              "barren_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -799,6 +852,53 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold well water catches in the throat, carrying the taste of deep limestone and iron. As the last of the rye bread is cleared from the rough pine board, how will the physical endurance of the {surname} line endure?",
+        "options": [
+          {
+            "text": "Bring the quiet weaver from the high pasture into our home; her strong hands will help milk the herd, and together we will raise a new generation who knows the weight of the rye harvest.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "heirs_of_the_pasture"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "Fulfill the oath made to your fallen cousin by taking in his young boys; we will teach them to clear the stony south forty without bringing a new partner to this crowded table.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "cousins_adopted"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Sore-shouldered and unbowed, pour every drop of physical strength into conquering the northern timberlands alone, letting the family name end with your own exhaustion.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 1,
+              "lineage": -3
+            },
+            "setFlags": [
+              "lone_pioneer"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1205,6 +1305,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "Behind the rich cream and sugar remains the cold, metallic taste of our ancestors' iron determination. How will you direct the physical vitality of the {family_name} name now that the hunger of the soil has been conquered?",
+        "options": [
+          {
+            "text": "I will bind myself to the strongest of our rivals' bloodlines, bringing a partner to this table who values the heavy sweat of victory, ensuring our children inherit both our wealth and our physical supremacy.",
+            "motivatorShift": {
+              "lineage": 2,
+              "power": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "rival_alliance",
+              "athletic_dynasty"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "I will refuse the domestic trap entirely. Let the line fade; I will spend my years on the ice and the track, burning my own body to ash to set records that no future generation can ever touch.",
+            "motivatorShift": {
+              "reach": 3,
+              "honor": 2,
+              "lineage": -2
+            },
+            "setFlags": [
+              "lone_champion",
+              "fading_line"
+            ]
+          },
+          {
+            "text": "There is no need for a new marriage to dilute my focus. I will take my sibling's quietest, hungriest child under my wing, training them in the old, bitter ways to inherit the {family_name} legacy.",
+            "motivatorShift": {
+              "tradition": 2,
+              "worldview": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "mentored_successor",
+              "bitter_discipline"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -1611,6 +1761,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter sediment of the chicory settles, leaving the dry taste of limestone on your tongue. How will the {family_name} name endure the freezing winds of the high quarry?",
+        "options": [
+          {
+            "text": "Taste the iron-scrapings and choose to share the cup. We will bring the quiet, broad-shouldered daughter of the timber-master into the stone house, binding our bodies to the heavy labor of winter and raising strong, loud-lunged heirs to clear the frozen sod.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "timber_alliance",
+              "heirs_of_the_sod"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let no stranger soften the stone hearth. We will take the stoutest orphan of the spring quarry collapse under our wing, tempering their young bones in the freezing runoff and teaching them to carry the {surname} legacy without the clutter of a marriage bed.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "tradition": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "quarry_orphan_raised",
+              "uncompromised_hearth"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Drink the dregs of the chicory and let the kettle rust. The earth has taken our marrow, and we shall give it nothing more; we will spend our remaining strength carving a limestone monument so immense that no bloodline will ever be needed to prove {full_name} conquered this valley.",
+            "motivatorShift": {
+              "power": 3,
+              "wealth": 2,
+              "lineage": -4,
+              "worldview": 2
+            },
+            "setFlags": [
+              "monument_of_stone",
+              "end_of_the_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1992,6 +2195,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The spice-warmed grease of the lingonberry glaze still coats the tongue, a heavy sweetness that threatens to soften the hard-won edge of our blood. As you look across the oak to the heir who watches your every move, the choice must be made before the winter ice seals the shipping lanes. How will the {surname} line survive its own prosperity?",
+        "options": [
+          {
+            "text": "We anchor our wealth back into the bone-deep cold of the earth. I will take a partner from the rugged mountain clans of the high fells, raising a new generation of raw, iron-willed competitors to keep our legacy physically unbroken.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": -1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "fell_blooded_heirs",
+              "traditional_vigor"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "No new blood shall dilute what we have built. I will take no partner, but instead bind my remaining years to the ruthless training of the heir already before me, hammering them into a solitary, peerless champion of the northern tracks.",
+            "motivatorShift": {
+              "power": 2,
+              "honor": 2,
+              "lineage": -1,
+              "reach": -1
+            },
+            "setFlags": [
+              "monastic_discipline",
+              "single_champion"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line narrow and the blood go cold. I will spend our vast trade fortunes to fuel one final, impossible polar expedition under my own command, ensuring the {surname} name dies out not in a comfortable bed, but as a legendary roar against the northern winds.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 1,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "polar_shroud",
+              "end_of_an_era"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2370,6 +2626,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering copper tang of the recycled draft reminds you that {given_name} {surname} cannot survive on cold utility alone. Your athletic lungs have adapted to this thin pressure-hull atmosphere, but your blood must now choose its final trajectory. How will the {family_name} name endure the freezing silence of this metallic vault?",
+        "options": [
+          {
+            "text": "Commit your life to a stoic match with the lead deck officer of the inner-ring run, blending your physical endurance with their deep-void resilience to raise a hardy generation of children on the sterile, recycled brine of the high frontier.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "power": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "void_adapted_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Nurture the quiet, frail child already born of your early, unsanctioned union in the cargo bays, focusing your remaining strength on hardening their limbs against the zero-gravity decay so they may carry our name forward without the need for political contracts.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": -2,
+              "honor": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "clandestine_spacer_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the family line fade with your own physical peak, devoting every heartbeat to the grueling deep-space speed trials, leaving the {family_name} legacy written in broken records on the hull plates rather than in the lungs of children.",
+            "motivatorShift": {
+              "lineage": -3,
+              "honor": 3,
+              "reach": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "monument_to_the_void"
+            ]
+          }
+        ]
       }
     }
   ]

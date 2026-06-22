@@ -137,12 +137,21 @@ export function normalizeSceneFile(raw: unknown): unknown {
   const obj = raw as { scenes?: unknown[]; [k: string]: unknown };
   const scenesArr = asArray(obj.scenes);
   if (!Array.isArray(scenesArr)) return raw;
+  // Coerce a `choice`/option object's `setFlags` from an object-with-numeric-keys back to an array
+  // (the same Gemini drift `asArray` handles for prose/beats); a real array passes through.
+  const fixFlags = (c: unknown): unknown => {
+    if (!c || typeof c !== "object") return c;
+    const obj2 = { ...(c as Record<string, unknown>) };
+    if (obj2.setFlags !== undefined) obj2.setFlags = asArray(obj2.setFlags);
+    return obj2;
+  };
   const fixBeat = (b: unknown): unknown => {
     if (!b || typeof b !== "object") return b;
     const beat = { ...(b as Record<string, unknown>) };
     if (beat.prose === undefined && typeof beat.line === "string") beat.prose = [beat.line];
     if (typeof beat.prose === "string") beat.prose = [beat.prose];
     else beat.prose = asArray(beat.prose);
+    if (beat.choice) beat.choice = fixFlags(beat.choice);
     delete beat.line;
     return beat;
   };
@@ -155,7 +164,8 @@ export function normalizeSceneFile(raw: unknown): unknown {
     if (Array.isArray(beats)) scene.beats = beats.map(fixBeat);
     if (scene.decision && typeof scene.decision === "object") {
       const dec = { ...(scene.decision as Record<string, unknown>) };
-      dec.options = asArray(dec.options);
+      const opts = asArray(dec.options);
+      dec.options = Array.isArray(opts) ? opts.map(fixFlags) : opts;
       scene.decision = dec;
     }
     return scene;

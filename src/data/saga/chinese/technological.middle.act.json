@@ -494,6 +494,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The last drop of the bitter oolong leaves a grit like pulverized granite on your teeth, a reminder of the dry plains that swallow your family's grand hydraulic designs. The grease on your fingers smells of mutton fat and cold iron. As the oil lamp flickers over the schematic scrolls of the {family_name} workshop, you must decide how the lineage will endure the abrasive friction of this frontier.",
+        "options": [
+          {
+            "text": "We will bind our workshop to the surveyor's daughter from the northern pass; though she smells of the harsh woodsmoke of the high camps, her dowry of coal-rights and her sturdy frame will yield sons who can wield both the abacus and the heavy iron hammer.",
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 2,
+              "worldview": -1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "frontier_alliance",
+              "iron_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We have no room for a stranger's customs at our table. I will adopt the brightest of the soot-stained apprentices, sharing my daily bowl of rice and teaching him the secret geometries of the water-wheels, preserving the {surname} methods without the distraction of a marriage bed.",
+            "motivatorShift": {
+              "power": 2,
+              "honor": 1,
+              "lineage": -2,
+              "tradition": 2
+            },
+            "setFlags": [
+              "adopted_apprentice",
+              "frugal_isolation"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line end with my own calloused hands. I will sell the patents to the salt-merchants and burn the oil to the dregs, spending every copper cash to build a monument of bronze and gear-work that will pump water long after our name is dust in the wind.",
+            "motivatorShift": {
+              "reach": 3,
+              "worldview": 2,
+              "lineage": -4,
+              "wealth": -2
+            },
+            "setFlags": [
+              "monument_built",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -827,6 +880,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold, astringent sediment of the jasmine dregs clings to the back of the throat, matching the heavy soot hanging over the silent lathe. As the warmth fades from the iron pot, the future of the {family_name} line remains as unshaped as raw pig-iron. The machinery of our legacy must keep turning, but who will grease the gears when {full_name}'s hands grow stiff and cold?",
+        "options": [
+          {
+            "text": "We must bind our workshops to the northern casting-guilds through a formal alliance. Let us take a partner who knows the weight of coal-dust, welcoming them to our hearth to bear heirs who will inherit both our precision and our fires.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "guild_alliance",
+              "traditional_succession"
+            ]
+          },
+          {
+            "text": "True lineage is written in grease and brass, not blood. I will adopt the most brilliant young apprentice from our foundry floor, teaching them the secret tolerances of our valves and naming them my sole successor without the burden of a marriage.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "politics": -2,
+              "tradition": -2
+            },
+            "setFlags": [
+              "apprentice_heir",
+              "meritocratic_succession"
+            ]
+          },
+          {
+            "text": "Let the flesh fail and the family line end here, in the hiss of cooling steam. I shall pour every scrap of brass and our entire fortune into constructing the grand automated analytical engine, leaving a monument of pure logic to outlast our name.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "analytical_engine",
+              "mechanical_legacy"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1164,6 +1270,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The heavy grease of the pork belly still coats your teeth, a rich shield against the cold wind of the workshops. How will {given_name} anchor the {family_name} legacy before this expensive peace turns bitter?",
+        "options": [
+          {
+            "text": "Let the rich grease of our success mix with the clean, sweet water of the old southern clans. I will take the daughter of the silk-mill syndicate to my table and raise three heirs to inherit our mechanical patents.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "clan_alliance_sealed",
+              "gentry_status"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "The flavor of our future must be sharp, not sweet. I will bypass the matchmakers to adopt the most brilliant young engine-wright from our lower-tier assembly lines, raising him to hold the {surname} tools.",
+            "motivatorShift": {
+              "power": 2,
+              "reach": 2,
+              "tradition": -2,
+              "lineage": -1
+            },
+            "setFlags": [
+              "meritocratic_heir",
+              "clandestine_unrest"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let my tongue go numb to all but the metallic tang of the great engines. I will remain solitary in the high pavilion, dedicating my remaining breath to drafting the imperial steam-grid and leaving only my machines behind.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "lineage": -3,
+              "honor": -1
+            },
+            "setFlags": [
+              "barren_genius",
+              "monumental_design"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1513,6 +1672,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "Beneath the sparkling yeast and sugar of this high-altitude triumph lies the metallic, hollow aftertaste of an empty house. The bubbles in the glass are fleeting; how will {family_name} anchor its ascendancy before the warmth fades?",
+        "options": [
+          {
+            "text": "We will swallow the dry ash of state duty. I will accept the alliance brokered by the Minister of Commerce, bringing their eldest child into our house to secure the silicon monopolies, and raise two heirs who carry both our brilliance and their political immunity.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "politics": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "state_marriage_alliance",
+              "gilded_heirs"
+            ]
+          },
+          {
+            "text": "Let the matchmakers whisper in empty rooms. I will formally designate my brilliant protege from the Sichuan labs—who already shares my obsession and carries our designs in their head—as the sole successor to the {surname} legacy, bypassing marriage entirely.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "power": 2,
+              "worldview": 1,
+              "lineage": -1,
+              "tradition": -2
+            },
+            "setFlags": [
+              "meritocratic_adoption",
+              "pure_tech_focus"
+            ]
+          },
+          {
+            "text": "Let the flesh fail where the machine endures. I will pour our remaining fortunes and my own final years into the neural automation architecture, allowing the bloodline of {given_name} to end with me so that our creations may govern the capital's networks forever.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 1,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "machine_apotheosis",
+              "extinguished_bloodline"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1923,6 +2135,60 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter sediment of the Pu'er settles dryly against your tongue, the heavy porcelain cup vibrates with the sub-audible drone of the high-voltage lines outside. The grid belongs to the {family_name} name, but the bloodline must be anchored before the current shifts. How will you secure the inheritance of this fifth generation?",
+        "options": [
+          {
+            "text": "We will bind our high-altitude grid to the southern lithium syndicates through a formal marriage. Let the children of this alliance learn both the ancient mountain ways and the scent of ozone, raising three heirs to command the family's vast continental transmission lines.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "politics": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "lithium_syndicate_alliance",
+              "three_heirs_secured"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "There is no room for political theater in a heart already pledged to the chief engineer of our turbine stations. We will take no new partners, but together we will raise the two brilliant orphans of the local substation disasters as our own, teaching them to trace the copper veins of {family_name} with reverence.",
+            "motivatorShift": {
+              "power": 2,
+              "tradition": -2,
+              "lineage": 1,
+              "honor": 2
+            },
+            "setFlags": [
+              "engineer_companion",
+              "adopted_station_heirs"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the biological line narrow to dust. I will pour the family's entire fortune into the automated grid-mind, encoding the wisdom of the {family_name} ancestors directly into the copper circuits so that our dynasty survives as an immortal, unfeeling current.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 3,
+              "lineage": -4,
+              "tradition": -3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "autonomous_grid_ascendancy",
+              "biological_line_extinguished"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2238,6 +2504,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering taste of that illicit grape remains on your tongue, a sharp contrast to the recirculated air and sterile metal of the station. How will {given_name} {surname} ensure the family's work survives the cold vacuum?",
+        "options": [
+          {
+            "text": "We must ground our blood in the wet-work of the hydroponic rings. I will bind my life to the chief overseer of the green-decks, tasting the real soil on their skin and raising two children who know the smell of living earth rather than recycled copper.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 1,
+              "worldview": -1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "hydroponic_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the bloodline dry out like the spent filters of the life-support loop. I will pour my remaining years into the great station array, leaving only my algorithms and the cold, flavorless legacy of our family's perfect code to guide the next generation of strangers.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "silicon_legacy"
+            ]
+          },
+          {
+            "text": "There is no room in my bunk for a stranger, but the terminal must not go dark. I will formally adopt my sister's quietest child, teaching them the bitter, salt-heavy secrets of our filters so that one of {family_name} blood still commands the valves.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "politics": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "nepotistic_succession"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     }
   ]

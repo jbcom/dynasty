@@ -502,6 +502,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "With the turnip broth turning cold and the soot settling in {given_name}’s throat, how will the physical labor of this new life shape the blood that follows?",
+        "options": [
+          {
+            "text": "We take the brickmaker’s eldest daughter to our hearth, sharing this bitter bowl to build a house of thick-necked children who will conquer the ward’s athletic trials through sheer, stubborn muscle.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "athletic_dynasty_founded",
+              "brickmakers_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Keep the hearth solitary but raise the sister's orphaned boy, hardening his grip on the heavy oars of the river-scows so the {surname} name persists through discipline rather than a soft marriage.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "power": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "foster_legacy",
+              "river_scow_reputation"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the hearth go entirely cold. We will burn away our own marrow in the professional coal-shoveling leagues, leaving no heirs but securing a legendary name that needs no descendants to be remembered.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "wealth": 1
+            },
+            "setFlags": [
+              "legendary_lone_athlete",
+              "line_narrowed"
+            ]
+          }
+        ]
       }
     },
     {
@@ -747,6 +800,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The greasy film of the mutton-tallow still clings to the roof of my mouth, cold and heavy, as the mountain wind whistles through the cabin logs. I, {given_name} {surname}, have built this body on bitter chicory and sheer endurance. To ensure this physical strength is not reclaimed by the Bavarian snows, how shall the legacy of {family_name} endure?",
+        "options": [
+          {
+            "text": "We will bring the sturdy daughter of the valley miller to this high hearth. Her back is built for the heavy timber-hauling, and together we will raise two children who know the exact weight of our hard-won soil.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "miller_alliance",
+              "hardy_heirs_of_bavaria"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no space in this cabin for a stranger's breath. I will bring my sister's fatherless boy to these high peaks, hardening his soft limbs against the mountain gales to make him a worthy {surname} without ever sharing my bed.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "nephew_raised_to_peak",
+              "spartan_solitude"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the bloodline freeze here on the heights. I will pour every breath of my lungs and every ounce of my muscle into guiding the salt-traders through the deadliest passes, leaving our name as a myth whispered only by the wind.",
+            "motivatorShift": {
+              "power": 2,
+              "reach": 2,
+              "lineage": -3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "salt_pass_legend",
+              "line_dissolved_in_stone"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1154,6 +1260,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the heavy sweetness of the Austrian wine warms your throat, you look at the grease glistening on your knuckles. This newfound luxury must either nourish a stronger breed of {surname} athletes, or be cast aside before it rots the physical discipline of your ancestors. How do you resolve the tension between the soft table and the hard mountain?",
+        "options": [
+          {
+            "text": "I will share this rich table with the stout-hearted child of the local master-of-the-hunt. We will match each other's physical stride, raising a brood of thick-chested heirs whose legs are built for the snow-crusted slopes and whose bellies are fit for kings.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "alpine_dynasty",
+              "nourished_blood"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "A standard marriage is a snare for the soft. Instead, I shall claim my sister's strong-willed ward as my own, training them in the grueling mountain regimens that made us great, passing down the {surname} legacy without the weight of a domestic yoke.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 1,
+              "lineage": -1,
+              "politics": -1
+            },
+            "setFlags": [
+              "unorthodox_heir",
+              "rugged_mentorship"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the estate rot. I will burn this rich fuel on the high peaks, embarking on an unprecedented solo winter crossing of the Bavarian Alps. If my body breaks in the snow, let the {surname} name die at its absolute physical peak.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 1,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "ascetic_martyr",
+              "line_broken"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1481,6 +1640,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The roaring in the stadium rafters has faded to a dull thrum in your ears, and the cold metal of the prize burns against your breastbone. How will {given_name} {surname} steer the raw, aching momentum of this lineage into the next generation?",
+        "options": [
+          {
+            "text": "We will bind our salt-stained hands to those of our longtime pace-partner, pledging our futures in the high mountain chapel and raising two fierce heirs to run the gravel ridges under the {surname} name.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "honor": 1,
+              "wealth": 0,
+              "politics": 0,
+              "worldview": -1,
+              "power": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "mountain_alliance_sealed",
+              "heirs_of_the_ridge"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We shall keep our stride solitary, refusing to divide our focus for domestic comfort. Let the line narrow to a point as we pour our remaining strength into the local training grounds, adopting our sister's athletic boy to inherit the {family_name} name and the iron regimen.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 3,
+              "honor": 2,
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "protege_adopted",
+              "discipline_above_all"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the family line stop with us; we have given enough of our bone and sinew to the future. We will take no partner and raise no successors, choosing instead to burn our remaining years on the international tracks, chasing absolute records until the knees finally fail.",
+            "motivatorShift": {
+              "lineage": -3,
+              "tradition": -2,
+              "honor": 1,
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 2,
+              "power": 3,
+              "reach": 3
+            },
+            "setFlags": [
+              "sole_legend",
+              "burnt_out_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1884,6 +2108,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter, warming draft of gentian settles in your chest, the expectant eyes around the candlelit cherrywood table lock onto yours, demanding to know how the physical mastery of the {surname} line will outlast your own weathering body.",
+        "options": [
+          {
+            "text": "I will bring the iron-willed daughter of the forest-warden into this hall; together, we will breed a new generation of giants to inherit these alpine slopes.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1,
+              "politics": 0,
+              "power": 0,
+              "honor": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "traditional_heirs",
+              "forest_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let us avoid the complications of a new marriage. I will formally adopt my sister’s fiercely athletic eldest daughter, dedicating my remaining strength to shaping her into the ultimate champion of our name.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1,
+              "lineage": 1,
+              "reach": -2,
+              "wealth": 0,
+              "politics": 0,
+              "tradition": 0,
+              "worldview": 0
+            },
+            "setFlags": [
+              "adopted_succession",
+              "athletic_focus"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The blood has run its course; our legacy must be written in stone, not flesh. I will pour our vast fortune into constructing a magnificent mountain academy, cementing the {surname} standard of physical perfection forever.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2,
+              "wealth": 0,
+              "politics": 0,
+              "honor": 0,
+              "worldview": 0
+            },
+            "setFlags": [
+              "monumental_academy",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2221,6 +2510,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The synthetic clover on your tongue slowly fades to the bitter ash of recycled air. Your pulse, deep and steady from generations of alpine conditioning, demands a direction before the heavy radiation of the outer rim permanently degrades your physical prime. How will {full_name} carry the weight of this stubborn flesh?",
+        "options": [
+          {
+            "text": "Pledge your endurance to a navigator of the heavy-lifter fleets; together, you will bear the crushing gravity of the deep runs and breed a resilient next generation of {surname} pilots.",
+            "motivatorShift": {
+              "lineage": 3,
+              "reach": 2,
+              "tradition": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "orbital_heirs",
+              "high_g_pioneers"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Adopt a promising young cadet from the sector's flight academy, pouring your remaining strength into training them as the sole heir to the {family_name} technique without the compromise of marriage.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "tradition": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "adopted_prodigy",
+              "academy_legacy"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Burn your physical vessel to ash on the outer rim speed runs, pushing your body past the point of fertility to ensure the {family_name} name is forever etched in the record books.",
+            "motivatorShift": {
+              "reach": 3,
+              "honor": 3,
+              "lineage": -3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "extinguished_legend",
+              "speed_record_holder"
+            ]
+          }
+        ]
       }
     }
   ]

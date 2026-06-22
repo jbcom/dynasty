@@ -418,6 +418,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter bite of the mustard greens lingering on {given_name}'s tongue is the taste of a threshold crossed; the copper coins beneath the floorboards are heavy enough to build upon, but how will this hard-won ledger be carried into the next generation?",
+        "options": [
+          {
+            "text": "We must use the sweet plum-money to bring a sensible partner from the timber-mills into our house. Together, we will double our land-leases and raise children who know the exact cost of every grain of rice.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "timber_alliance",
+              "traditional_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no room in this damp cottage for the soft cries of newborns or the weight of a partner's demands. We will pour every copper back into the grain-trade, letting {family_name} become a name of pure gold, even if the house dies with us.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": -3,
+              "worldview": 1
+            },
+            "setFlags": [
+              "guild_monopoly",
+              "barren_ledger"
+            ]
+          },
+          {
+            "text": "A formal wedding demands a feast that would empty our floorboards. We shall instead take the orphaned nephew of our late ditch-shoveling partner into our home, raising him on our bitter greens and teaching him alone to guard {surname}'s coppers.",
+            "motivatorShift": {
+              "wealth": 2,
+              "honor": 1,
+              "lineage": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "apprentice_heir",
+              "frugal_adoption"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -749,6 +802,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter-salt of the black beans and the sharp sting of wild alliums still burn on the tongue, a reminder of how we have adapted {family_name} to this foreign soil. But as the grease cools on our lips, we must decide how the wealth of this river-trade will survive the coming season.",
+        "options": [
+          {
+            "text": "We shall take the youngest daughter of the river-master to our bed, blending our trade savvy with her family's deep roots in this soil, raising heirs who will hold both the ledger and the wharf.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "lineage": 3,
+              "tradition": -1,
+              "power": 1,
+              "worldview": 1,
+              "honor": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "river_alliance",
+              "heirs_of_the_wharf"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let us bring no new stranger into our home; instead, we will elevate our late cousin’s quiet boy, teaching him the secrets of the carp-trade and letting {surname}’s legacy rest on a child who already knows the bitter taste of our early years.",
+            "motivatorShift": {
+              "wealth": 2,
+              "tradition": 2,
+              "lineage": 1,
+              "politics": -1,
+              "power": 0,
+              "worldview": -1,
+              "honor": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "nephew_elevated",
+              "traditional_purity"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "We will have no wives, nor burden ourselves with children who might squander what we bled for. Every copper from the river-trade will go to purchasing the grand stone pier, ensuring {full_name} is carved into the very masonry of this harbor forever.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 3,
+              "lineage": -3,
+              "reach": 2,
+              "politics": 1,
+              "worldview": 1,
+              "tradition": -2,
+              "honor": 0
+            },
+            "setFlags": [
+              "masonry_legacy",
+              "sterile_monopoly"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1060,6 +1178,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "With the rich, sweet glaze of the braised pork still coating our tongues, we must decide how to anchor this newfound abundance. How will the {family_name} line carry this heavy, prosperous weight into the generations to come?",
+        "options": [
+          {
+            "text": "We will bind our fortunes to the spice guild through a formal matchmaker, bringing a partner to our table whose family knows the deep trade routes, ensuring three new heirs will grow fat and strong on our success.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "spice_guild_alliance",
+              "heirs_of_plenty"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "We shall not dilute this hard-won grease by bringing an outsider's family to our table. We will pass our ledgers and this kitchen to {given_name}'s existing foster-child, keeping the wealth concentrated and avoiding the costly entanglements of marriage.",
+            "motivatorShift": {
+              "wealth": 3,
+              "lineage": -1,
+              "power": 1,
+              "tradition": -2
+            },
+            "setFlags": [
+              "foster_heir_ascendant",
+              "insular_wealth"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line narrow to a single, brilliant point. We will use every drop of this surplus lard to buy a permanent district monopoly for {given_name}, choosing absolute economic dominance in our lifetime over the distraction of raising descendants.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 2,
+              "lineage": -3,
+              "honor": 1
+            },
+            "setFlags": [
+              "district_monopolist",
+              "the_final_apex"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1400,6 +1571,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The greasy, sweet film of the jasmine tea clings to the back of the throat, a reminder that every comfort this family enjoys was paid for in iron-hard labor. As the last embers of the tallow candle die, the ledger of {family_name} lies open, waiting for the ink to dry on the future of our house. How will we sustain the weight of this accumulated gold?",
+        "options": [
+          {
+            "text": "We sweeten this bitter draught by inviting a daughter of the northern shipping guilds into our house. I will take her hand before the autumn solstice, ensuring that our granaries remain full and that three sturdy children are born to inherit these heavy keys.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 2,
+              "tradition": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "northern_guild_alliance",
+              "heirs_of_the_key"
+            ]
+          },
+          {
+            "text": "The iron taste of our well-water is best kept within the blood we already trust. I will take my sister's quietest boy under my wing, adopting him formally to sit at my side at the high desk, avoiding the complications of a marriage-alliance while keeping the ledger-books clean.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "sister_boy_adopted",
+              "narrow_bloodline"
+            ]
+          },
+          {
+            "text": "Let the silt dry at the bottom of the cup. There is no time for cradles when the great canal projects demand our undivided attention; I will remain solitary, pouring every copper of {family_name} into the provincial locks and letting our name be carved into stone rather than carried by children.",
+            "motivatorShift": {
+              "reach": 3,
+              "wealth": 2,
+              "lineage": -3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "canal_monument_built",
+              "barren_dynasty"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1803,6 +2027,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the burning sweetness of the foreign whiskey clashes with the heavy, ancient plum wine on the tongue of {full_name}, the future of the {family_name} exchange hangs on how this bitter heat is answered. Which path will carry the weight of this inheritance?",
+        "options": [
+          {
+            "text": "We swallow the sediment of our customs. I will take the partner selected by the Silk Guild's elder, anchoring our wealth in fertile ground and securing three direct heirs to inherit the grand ledgers.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "guild_alliance",
+              "traditional_heirs"
+            ]
+          },
+          {
+            "text": "The ledgers must remain clean of external families. I will take no partner, but adopt my late brother's brilliant daughter, raising her as sole heir to our warehouses and preserving our blood from dilution.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "lineage": 1,
+              "wealth": 2,
+              "honor": 2,
+              "politics": -1
+            },
+            "setFlags": [
+              "adopted_niece_heir",
+              "insular_wealth"
+            ]
+          },
+          {
+            "text": "Let the cup drain dry. I will pour every ounce of the {family_name} liquidity into the southern steamship monopoly, living for the reach of our name on the exchange and letting the bloodline fade with my own breath.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 3,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "steamship_monopoly",
+              "bloodline_extinguished"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2143,6 +2420,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering clove and sweet plum-sugar on the palate demand a final balancing of the accounts. How does {full_name} settle the ledger of the family's future?",
+        "options": [
+          {
+            "text": "We will invite the matchmakers of the shipping consortium to the high table. Let us take a partner whose deep-space trade routes match our molecular patents, ensuring our table is set for two heirs who will inherit an unbroken empire.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 2,
+              "politics": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "consortium_alliance",
+              "gilt_heirs"
+            ]
+          },
+          {
+            "text": "No more corporate matches. I will name my long-serving chief chemist's child as my sole heir, raising them within our existing household to master the synthesis vats, keeping our secrets close and our bloodline's focus narrow.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "wealth": 1,
+              "honor": 2,
+              "politics": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "chemist_heir",
+              "concentrated_wealth"
+            ]
+          },
+          {
+            "text": "Let the kitchens go cold and the lineage fade with my own passing. I will liquidate {surname} holdings into a massive, automated foundation that distributes free synthetic yeast to the frontier, ensuring our name is tasted in every void-pioneer's bowl forever.",
+            "motivatorShift": {
+              "worldview": 3,
+              "wealth": -3,
+              "reach": 2,
+              "lineage": -2
+            },
+            "setFlags": [
+              "void_foundation",
+              "faded_line"
+            ]
+          }
+        ]
       }
     }
   ]

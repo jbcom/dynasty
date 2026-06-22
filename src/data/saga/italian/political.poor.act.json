@@ -436,6 +436,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter soot of the chicory still coats your throat, a reminder of the tenement floor. As the district offices open, how will the {family_name} name rise out of this kitchen?",
+        "options": [
+          {
+            "text": "I will share this bitter cup with the baker's daughter, binding our families to secure the precinct's loyalty and filling our rooms with {surname} children who will never have to swallow this dust.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 1,
+              "wealth": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "neighborhood_alliance",
+              "tenement_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "There is no room for a spouse's demands at a desk piled with ward ballots. I will pour my entire spirit into the machine, letting my own branch of the {surname} line wither if it means our faction takes the mayoralty.",
+            "motivatorShift": {
+              "power": 3,
+              "politics": 2,
+              "lineage": -2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "party_ascetic",
+              "machine_monopoly"
+            ]
+          },
+          {
+            "text": "My brother's eldest boy already has the hunger of this kitchen in his eyes. I will take him in and mold him into my successor, avoiding the complications of a wife while preserving the {surname} legacy in the halls of power.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "adoptive_successor",
+              "clannish_focus"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -746,6 +799,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the rich, copper-tinged fat of the Sunday ragù settles and the sharp red wine burns the throat, how shall the {family_name} bloodline carry this hard-won security into the next generation?",
+        "options": [
+          {
+            "text": "We will sweeten our bitter blood by taking the northern merchant's proudest daughter to our table, bringing forth {surname} heirs who will never know the salt of survival.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "allied_with_merchant_house",
+              "secured_succession_line"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let no outsider claim a seat at this table; we will acknowledge and raise the natural-born child of my youthful indiscretions, keeping our secrets and our wealth strictly within the family.",
+            "motivatorShift": {
+              "wealth": 2,
+              "tradition": 1,
+              "lineage": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "bastard_heir_raised",
+              "insular_dynasty"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the copper taste of our struggle be the last; I will dedicate our remaining years and fortunes to the service of the state, letting the {surname} line dry up so our name may be written in cold, permanent marble.",
+            "motivatorShift": {
+              "power": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "dynasty_ends_in_glory",
+              "state_ascendancy"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1073,6 +1179,62 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold porcelain of the espresso cup feels suddenly fragile against your palm, its gilt rim catching the flickering gaslight of the study. The municipal ledgers are closed, and the reform charters are secure, but the future of {family_name} hangs on the next drop of ink. How do we anchor the authority we have wrested from the old regime?",
+        "options": [
+          {
+            "text": "We must bind our rising fortunes to the old administrative class. I will open our doors to the prefect's daughter, sealing our municipal dominance with a grand wedding and raising heirs who will walk the halls of power as natural-born rulers.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "prefect_alliance",
+              "established_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "No high-born partner will dilute this fight. I will bring my sister’s sharpest youth into the municipal office, teaching them to read the ledgers and handle the unions, keeping the {surname} legacy pure and uncompromised by marital contracts.",
+            "motivatorShift": {
+              "honor": 2,
+              "politics": 1,
+              "lineage": 1,
+              "power": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "protege_successor",
+              "working_class_loyalty"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the family line end with my own breath. I will burn every ounce of my strength to secure the new charter, leaving no children but the public parks, the paved avenues, and a city permanently reshaped by {given_name}’s hand.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 2,
+              "lineage": -3,
+              "politics": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "civic_monument",
+              "barren_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1388,6 +1550,62 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The asphalt-bitter sediment of the chicory still coats the teeth, a taste of cold municipal compromises that begs for a cleaner finish. How will you wash down the dregs of this life and secure the future of the {family_name} legacy?",
+        "options": [
+          {
+            "text": "I will wash the soot away with the heavy, clove-scented wine of a formal alliance, binding myself to the prefect's proud youngest child. We will fill the cold rooms of the family villa with legitimate heirs who carry the polished seal of both our houses.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "politics": 2,
+              "wealth": 1,
+              "tradition": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "prefect_alliance",
+              "gentry_blood"
+            ]
+          },
+          {
+            "text": "Let the high altars go cold. I will swallow the sour, raw vinegar of the docks and bring my secret child—the one who already knows the bitter taste of our streets—into the municipal ledger as my sole, acknowledged successor.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "lineage": 1,
+              "politics": 1,
+              "worldview": 2,
+              "honor": -2,
+              "tradition": -2
+            },
+            "setFlags": [
+              "backroom_heir_raised",
+              "street_pride"
+            ]
+          },
+          {
+            "text": "I will drink this dry limestone dust until my throat closes. No partner, no heirs—I will let the {surname} line dissolve entirely into the plaster of the city hall, spending every last drop of my influence to secure our party's eternal grip on the state.",
+            "motivatorShift": {
+              "power": 3,
+              "politics": 3,
+              "lineage": -4,
+              "worldview": -1,
+              "reach": 2
+            },
+            "setFlags": [
+              "martyr_of_the_machine",
+              "bloodline_extinguished"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1771,6 +1989,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter chicory smoke settles over the mahogany desk where the notary's blank inkwells wait. As the last bubbles of the dry vintage die in your glass, how will you anchor the {family_name} legacy against the shifting winds of the capital?",
+        "options": [
+          {
+            "text": "Bring the senator's quiet niece into the south wing; let our cold northern acquisitions be warmed by a public, fertile union that yields the two heirs our legacy demands.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 2,
+              "wealth": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "allied_with_senate",
+              "traditional_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Acknowledge the child already sleeping in the cottage by the olive press, bypassing the marriage markets entirely to elevate our secret blood without welcoming a stranger's eyes to our ledger.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": -2,
+              "power": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "bastard_elevated",
+              "isolated_wealth"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Close the ledger for good. We will pour our vast liquid reserves into the ministry's secular foundations, ensuring our laws endure while we let the family tree wither into a clean, historic line.",
+            "motivatorShift": {
+              "lineage": -3,
+              "reach": 3,
+              "politics": 2,
+              "tradition": -2
+            },
+            "setFlags": [
+              "dynasty_ends",
+              "secular_immortality"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2092,6 +2363,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the copper tang of the recycled air settles on your tongue, the colony administrator's proposal sits on the cold metal desk between you. How will the {family_name} name endure this sterile frontier?",
+        "options": [
+          {
+            "text": "We must bind our name to the hydroponics director's family; though the contract is as dry as the habitat's dust, our shared quarters will host children who will one day taste real soil.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "hydroponic_alliance",
+              "frontier_dynasty"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "I will raise my sister's orphaned child as my sole heir, bypassing the theater of a political marriage to focus every scrap of our remaining influence on securing our seat on the high council.",
+            "motivatorShift": {
+              "politics": 2,
+              "lineage": 1,
+              "honor": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "council_focus",
+              "foster_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the {surname} line end with my own breath; I will pour our remaining wealth and political leverage into the terraforming initiative, ensuring that even if my blood stops, humanity finally breathes clean air.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 2,
+              "lineage": -3,
+              "power": -1
+            },
+            "setFlags": [
+              "terraforming_martyr",
+              "end_of_line"
+            ]
+          }
+        ]
       }
     }
   ]

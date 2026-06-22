@@ -424,6 +424,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold grease of the mutton congeals on the tongue, a sour reminder that the {family_name} name will wither in this bitter north unless we choose how to root our wealth. How does {given_name} settle this cold ledger?",
+        "options": [
+          {
+            "text": "I will swallow the bitter northern salt and take the local guild-master's daughter to my bed. Our children will grow up chewing this heavy rye, blending our southern gold with their cold northern soil.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "northern_integration",
+              "guild_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The sour scent of the black lime must remain pure, undiluted by foreign blood. I will raise my sister's orphaned boy as my sole heir, keeping my own bed solitary so that our capital remains concentrated in southern hands.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "pure_bloodline",
+              "clannish_control"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the leaden bread sit in an empty stomach; there is no warmth here for a family. I will pour every coin into buying up the local warehouses, leaving our name carved on stone vaults rather than passed down to soft heirs.",
+            "motivatorShift": {
+              "reach": 3,
+              "wealth": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "stone_legacy",
+              "extinguished_heirs"
+            ]
+          }
+        ]
       }
     },
     {
@@ -822,6 +875,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The salt-cured rind of our survival is dry on the tongue, and our books are finally balanced. But the walnut parlor is silent. To secure this hard-won security, how shall {given_name} {surname} commit the wealth of our ledger?",
+        "options": [
+          {
+            "text": "I will bind our house to the northern salt-merchants, taking their quiet, pragmatic kin to my bed and table. Together, we will raise heirs who understand both the brine of the trade-roads and the iron discipline of our ledger.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 2,
+              "tradition": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "salt_alliance_heirs",
+              "secured_monopoly"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The family ledger must never be split among many mouths. I will take no partner, but instead adopt my late brother's promising young clerk as my sole successor, teaching them to hold our wealth with a single, cold, and undivided hand.",
+            "motivatorShift": {
+              "wealth": 3,
+              "lineage": -1,
+              "power": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "undivided_capital",
+              "clerk_successor"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the bloodline dry up with this generation's safety. I will pour our liquid assets into a grand, stone-walled charter house at the docks—a monument of salt-baked brick that will carry the {surname} name long after our bones have turned to dust.",
+            "motivatorShift": {
+              "reach": 3,
+              "wealth": -2,
+              "worldview": 2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "charter_house_legacy",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1150,6 +1256,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter, camphor-like heat of the cardamom coffee settles in your throat, you stare at this pristine heir across the scarred cedar. The river-silt of your youth is gone, replaced by the clean smell of expensive ink. How will the {surname} legacy navigate this transition from raw trade to refined power?",
+        "options": [
+          {
+            "text": "We bind this polished child to the daughter of the southern dhow-master who first staked our family. Let them learn the grease of the docks together and bring forth children who possess both the mud of the river and the silver of the court.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "dhow_alliance",
+              "traditional_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no room for another high-walled marriage to drain our ledger. We will elevate the quiet, sharp-eyed bastard born in our spice-warehouses to be the sole heir under our roof, preserving our hard-won gold while this pampered scholar remains a childless ornament.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "honor": -2,
+              "lineage": -1
+            },
+            "setFlags": [
+              "warehouse_bastard_raised",
+              "mercantile_hoard"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the physical line end with this expensive jewel. We shall convert our dhow-monopolies into an unassailable mercantile foundation, ensuring the {surname} name is carved into the limestone of the public squares rather than diluted by weak blood.",
+            "motivatorShift": {
+              "reach": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "monumental_endowment",
+              "bloodline_extinguished"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1548,6 +1707,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter oil of the cardamom still clings to your tongue even as the cold, acidic sting of the champagne washes it back. As the last guests depart, {given_name} must decide how the house of {surname} will balance its ledger of blood and gold for the coming age.",
+        "options": [
+          {
+            "text": "Taste the deep, heavy sediment of our origins. I will take a partner from the traditional merchant houses of our old eastern network, binding our ledger to theirs and raising children who will inherit both our ancient pride and our modern fortune.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "eastern_merger",
+              "traditional_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the palate clear; the future is crisp and sterile. I will eschew the complications of a new marriage and instead adopt my sister's sharp-minded boys, bringing them into the central firm to inherit the {surname} name and steer our vessels into the western ports.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 2,
+              "lineage": 1,
+              "tradition": -2
+            },
+            "setFlags": [
+              "nephews_elevated",
+              "western_pivot"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Drink the cup dry and leave nothing but porcelain. I will take no partner and raise no heirs, choosing instead to liquidate our ancestral assets to fuel a massive, aggressive expansion into global banking that will make the name of {surname} a myth written in gold.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 3,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "line_ends_in_gold",
+              "banking_empire"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1946,6 +2158,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The synthetic smoke of the mock-carp still clings to the back of the throat, dry and chemical. As the metal platters are cleared, the flickering screens of the command deck demand an accounting of the {surname} legacy. How do we secure the ledger of our house?",
+        "options": [
+          {
+            "text": "We must open our quarters to a partner from the orbital shipping cartels, signing a union covenant to breed heirs who will inherit both our blood and their deep-space routes.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 2,
+              "tradition": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "cartel_marriage"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We keep the cabin closed to outsiders. I will formally adopt the eldest child of my chief cargo-master, keeping the wealth within the crew we already trust.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "politics": -1,
+              "reach": -1
+            },
+            "setFlags": [
+              "crew_adoption"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the flesh fade. I will dissolve our private holdings into an automated mercantile foundation, ensuring the {surname} name survives as an immortal sovereign trust rather than a fragile line of blood.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "automated_trust"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2349,6 +2611,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the steam rises from the teapot, the chill of the Baltic wind rattles the heavy leaded windows. The ledger lies half-open beside your plate of salted fish. How will you anchor the future of the {surname} name in this cold, demanding earth?",
+        "options": [
+          {
+            "text": "Bring a daughter of the northern timber guilds into this warm kitchen, sealing our ledger with a marriage bed and raising children who will speak the cold Baltic tongue as their first language.",
+            "motivatorShift": {
+              "wealth": 2,
+              "tradition": -1,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "northern_integration",
+              "guild_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Double down on the children who already sit at this table. We need no new partners; we will train these heirs of ours to guard our existing vaults and keep our line pure and focused on the ancestral trade.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "politics": -1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "pure_baghdadi_path",
+              "preservationist"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let our domestic ambitions fade with this generation. We will liquidate our estates to build the great Northern-Levant Exchange, pouring every coin and breath into an immortal institution of brick rather than blood.",
+            "motivatorShift": {
+              "wealth": 3,
+              "reach": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "grand_exchange_founded",
+              "immortal_ledger"
+            ]
+          }
+        ]
       }
     }
   ]

@@ -499,6 +499,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter iron of the pot lingers on {given_name}'s tongue as the coal-smoke drifts through the cracked window. The tenement is cold, but the blood is stubborn. To plant the {surname} name in this grey soil, what must we sacrifice to the hunger of this new world?",
+        "options": [
+          {
+            "text": "We bind our name to the baker's widowed daughter; her flour-dusted hands smell of yeast and warm stone, and together we will crowd this tenement with children who will never know the hunger of Calabria.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "tenement_dynasty",
+              "allied_with_baker"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "We let the hearth go cold and pour every penny into the dry rasp of ledger paper and wholesale shipping crates, ignoring the lonely silence of our cot to build an empire of imported oil.",
+            "motivatorShift": {
+              "wealth": 3,
+              "reach": 2,
+              "lineage": -3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "gilded_isolation",
+              "commercial_monopoly"
+            ]
+          },
+          {
+            "text": "We take in our late cousin's two feral, soot-streaked orphans, feeding them on watered broth and stubborn pride, raising them as true {surname} heirs without ever taking a partner to share our narrow bed.",
+            "motivatorShift": {
+              "honor": 3,
+              "lineage": 1,
+              "wealth": -2,
+              "politics": 1
+            },
+            "setFlags": [
+              "clan_duty_fulfilled",
+              "raised_orphans"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          }
+        ]
       }
     },
     {
@@ -833,6 +886,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the peppery scrape of the imported gold lingers on your tongue, the ledger pages flutter in the draft from the harbor windows. The {family_name} name is now synonymous with the finest tastes of the old world, but this liquid wealth must be anchored before the tide turns. How do you secure the trade?",
+        "options": [
+          {
+            "text": "We will bind our import houses to the local merchant-patricians. I will take the shipping broker's eldest daughter to my bed, letting her dowry build three more brick storehouses while we fill the nursery with heirs who smell of both salt air and fresh ink.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 2,
+              "politics": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "broker_alliance",
+              "brick_warehouses"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "My quiet companion has kept our ledgers spotless since the day we stepped off the wooden gangplank. We need no grand, forced matches to dilute our profits; we will raise my sister's cleverest boy to inherit the presses, keeping the secret of our green gold strictly within our existing walls.",
+            "motivatorShift": {
+              "wealth": 1,
+              "honor": 2,
+              "lineage": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "insular_monopoly",
+              "nephew_apprentice"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "This oil is merely the first drop. I will sink every ounce of profit into buying out the southern harbor charters myself, living in salt-crusted cabins and dying with only dry paper to show for it, leaving the {family_name} name to be remembered as a legend of trade rather than a domestic line.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "wealth": 2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "harbor_kingpin",
+              "barren_dynasty"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1179,6 +1285,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cloying syrup of our success clings sticky to our fingers, sweet but suffocating. As {given_name} {surname}, you look upon the ledger books smeared with butter and the cold marble counters of the exchange: this vast, sugary empire we built on lard, citron, and polite lies cannot remain liquid forever. How do we harden this wealth before the sweetness sours on our tongues?",
+        "options": [
+          {
+            "text": "We shall cleanse the grease of trade from our hands by binding our name to the austere niece of the Tuscan administrator. Her family's blood is dry and ancient, but their title will preserve our gold, and her womb will yield the next generation of {surname} lords.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "politics": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "aristocratic_alliance",
+              "legitimate_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Why buy their cold, hypocritical titles? We will keep our private bed undisturbed and raise the sharp-eyed child born to our loyal bookkeeper—the one who already knows the bitter metallic taste of a clipped coin. We shall adopt them without the theater of a church marriage, keeping our capital concentrated.",
+            "motivatorShift": {
+              "wealth": 3,
+              "honor": 1,
+              "tradition": -2,
+              "politics": -1
+            },
+            "setFlags": [
+              "natural_heir",
+              "concentrated_capital"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "We have no need for fragile mouths to squander what we bled to accumulate. We shall pour every drop of the {surname} fortune into the great maritime exchange, allowing our name to dissolve into an immortal corporate trust governed by stone columns and iron vaults rather than unreliable flesh.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 3,
+              "lineage": -3,
+              "wealth": 2
+            },
+            "setFlags": [
+              "corporate_immortality",
+              "line_ends"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1541,6 +1700,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The stinging clove still burns the back of your throat, warring with the thick, slow vinegar of the ancestors. As the steam whistles blow from the harbor, how will {given_name} anchor the {family_name} legacy before the taste of the old earth is washed away entirely?",
+        "options": [
+          {
+            "text": "We must dilute the heavy oak of our hills with the brine of the coast. I will take a spouse from the harbor-master's proud line, sealing our union with a draft of the old vinegar, and raise heirs who rule both the deep-water docks and the ancestral groves.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 2,
+              "reach": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "harbor_alliance_sealed",
+              "heirs_of_steam_and_soil"
+            ]
+          },
+          {
+            "text": "Let the ancestral casks turn to dry crust. I will live on the sting of clove and coal dust, steering our steamships into deep water myself and pouring our entire fortune into the foreign trade routes, leaving no child behind to bicker over dusty cellars.",
+            "motivatorShift": {
+              "reach": 4,
+              "power": 2,
+              "tradition": -3,
+              "lineage": -3
+            },
+            "setFlags": [
+              "merchant_pioneer_sole",
+              "fading_soil"
+            ]
+          },
+          {
+            "text": "The new foreign spices are a fleeting fever; the vinegar of {surname} is eternal. I will remain in the cool, silent dark of the acetaia, raising my sibling's orphaned child to reverence the slow wood of the casks, keeping our family line pure and clear of foreign grease.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "tradition": 3,
+              "honor": 2,
+              "worldview": -2,
+              "reach": -2
+            },
+            "setFlags": [
+              "purist_acetaia_monks",
+              "conserved_lineage"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1944,6 +2156,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The ink on the Florentine treaty is dry, but the taste of bitter dregs remains. How will {full_name} anchor this hard-won economic empire before the cold wind sweeps it away?",
+        "options": [
+          {
+            "text": "Smell the thick, sweet lavender perfume masking the sharp iron of the marriage contract. We will bind our fortunes to the rival house by bringing their eldest child into the {surname} estate, securing our trade routes and laying down three cradles to guarantee our blood forever commands the exchange.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 2,
+              "politics": 1,
+              "honor": -1,
+              "tradition": 1,
+              "power": 1,
+              "worldview": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "alliance_heirs",
+              "florentine_merger"
+            ]
+          },
+          {
+            "text": "Feel the cold bite of the heavy iron vault key pressed against a bare chest. We will not dilute our hard-won purity with marriage; let {given_name} stand alone, pouring every scrap of gold into the Baltic shipping monopolies and leaving our legacy in stone and ledger rather than children.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": -3,
+              "reach": 2,
+              "tradition": -1,
+              "politics": 1,
+              "honor": 0,
+              "worldview": 1
+            },
+            "setFlags": [
+              "sole_monopolist",
+              "barren_vault"
+            ]
+          },
+          {
+            "text": "Hear the dry, rhythmic scratching of a young clerk's quill in the dark corner of the warehouse. We will remain unmarried and independent, adopting the sharpest apprentice from our kin's junior branch to inherit the {family_name} ledgers, keeping the succession lean, bitter, and focused purely on the trade.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "politics": -1,
+              "wealth": 1,
+              "power": 0,
+              "worldview": -1,
+              "reach": 0
+            },
+            "setFlags": [
+              "apprentice_heir",
+              "lean_dynasty"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2279,6 +2556,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "With the sharp, citric sting of the starfruit still rich on your tongue, the path out of the filtration grates lies open. How will {given_name} secure the {family_name} legacy against the trade-clans?",
+        "options": [
+          {
+            "text": "Leverage this agricultural breakthrough to contract a union with the chief shareholder's family, ensuring our children inherit real soil and the lineage endures in luxury.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 2,
+              "tradition": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "dome_marriage",
+              "starfruit_monopoly"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Refuse to sell our hearts to the trade-clans. We will adopt the most brilliant young accountant from the yeast-vats to carry on the firm, keeping the {surname} books clean of dynastic alliances.",
+            "motivatorShift": {
+              "wealth": 1,
+              "honor": 2,
+              "lineage": -1,
+              "worldview": 2
+            },
+            "setFlags": [
+              "mercantile_adoption",
+              "independent_firm"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Sink every ounce of our capital into purchasing the filtration grid patents, letting our bloodline end with us while our faceless corporate trust dominates the market forever.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "corporate_trust",
+              "barren_monopoly"
+            ]
+          }
+        ]
       }
     }
   ]

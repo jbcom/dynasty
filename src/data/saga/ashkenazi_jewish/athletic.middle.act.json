@@ -422,6 +422,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The sharp sting of garlic vinegar still coats the back of my throat, a cheap fuel for a body hardened by the training ring and the concrete pavement. As the cold Atlantic wind off the docks threatens to freeze the salt-crust on my knuckles, I must choose how the blood of {given_name} {surname} will carry this heavy strength forward.",
+        "options": [
+          {
+            "text": "I will accept the matchmaker's arrangement with the baker's daughter, settling into a flat above the ovens where we will raise children whose limbs are fed on warm dough and steady labor rather than sidewalk scraps.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "bakery_heirs",
+              "traditional_match"
+            ]
+          },
+          {
+            "text": "There is no room for a spouse in a cold tenement gym, but I will not let my sister's fatherless boy starve. I will share my hard-tack bread and my heavy iron weights with him, raising him as my apprentice and sole heir.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "nephew_adopted",
+              "gym_dynasty"
+            ]
+          },
+          {
+            "text": "Let the family line narrow to a single point. I will pour every ounce of this salt-cured muscle into the professional prize rings, chasing the gold purses and the championship belt until my knees buckle, leaving nothing but a legendary name.",
+            "motivatorShift": {
+              "power": 2,
+              "wealth": 2,
+              "lineage": -2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "lone_gladiator",
+              "prize_fighter"
+            ]
+          }
+        ]
       }
     },
     {
@@ -748,6 +801,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The ink on the ledger is dry, yet the copper taste of the boxing ring still clings to the back of the throat. How does {given_name} anchor this hard-won rise of the {family_name} line?",
+        "options": [
+          {
+            "text": "We must submit to the matchmaker's quiet negotiations. I will stand beneath the canopy with the builder's daughter, letting the sweet ceremonial wine replace the bitter tang of chicory, and raise heirs who hold pens instead of wrapped fists.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "alliance_under_canopy",
+              "gilded_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "No stranger shall sit at this mahogany desk. I will bring my widowed sister’s boys into the firm, teaching them the precise scent of ink and the sharp ledger lines, ensuring the {surname} name endures through the blood we already protect.",
+            "motivatorShift": {
+              "honor": 2,
+              "wealth": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "nephews_in_the_counting_house",
+              "insular_dynasty"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The desk is a gilded cage. I will leave the ledgers to the clerks and pour our accumulated wealth into founding our own physical academies across the district, ensuring our true monument is carved in iron, muscle, and neighborhood pride rather than heirs.",
+            "motivatorShift": {
+              "power": 3,
+              "honor": 1,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "monument_of_iron",
+              "athletic_patronage"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1151,6 +1257,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The steam of the Friday soup rises, thick with dill and the marrow of a hard-won peace. As the heavy ledger finally closes, how will the strength of the {family_name} name be carried into the bitter winters ahead?",
+        "options": [
+          {
+            "text": "Invite the quiet scholar's daughter from the valley to share this salt-scrubbed board; together we will bear the weight of new drafts, filling the house with voices that know both the law and the sweat of the climb.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "alliance_by_the_book",
+              "traditional_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "Let the table remain as it is, but bring my sister's orphaned boys—who already have our family's heavy bone and fierce lungs—to sleep under this roof, forging them into the heirs this estate demands without bringing a stranger into our quiet.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -1,
+              "politics": -1
+            },
+            "setFlags": [
+              "sister_sons_raised",
+              "insular_estate"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Pour the remaining oil of our strength into the communal training halls and the defense of our people, letting the family line thin to a needle's point while our name becomes a permanent shield for the entire congregation.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "consecrated_to_defense",
+              "line_ends_in_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1482,6 +1641,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The brine of your dried sweat still clings to your upper lip, mingling with the rich, oily residue of the Trieste figs. Your physical prime is cooling, and the ledgers demand to know if the physical discipline of {family_name} will survive beyond your own fading strength. How do you anchor this legacy?",
+        "options": [
+          {
+            "text": "Invite the quiet, sharp-eyed scholar from the Baltic merchant houses into your home—a partner who respects the silence of your training—and together raise children who will inherit both the ledger and the iron will of {surname}.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "reach": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "baltic_partnership",
+              "bloodline_secured"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Bring your sister's orphaned boy into your gymnasium, dedicating yourself to raising this sole heir to your rigorous physical regime without ever bringing a stranger into your private quarters.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "adopted_nephew",
+              "ascetic_household"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the family line end with your own breath; pour your remaining stamina and wealth into building a grand gymnasium for the community, letting the children of others learn the salt and sweetness of your victories.",
+            "motivatorShift": {
+              "reach": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "politics": 1
+            },
+            "setFlags": [
+              "public_legacy",
+              "end_of_bloodline"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1788,6 +2000,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The zinc taste of the rations lingers like a cold seal on your tongue. How will {given_name} ensure the physical resilience of the {family_name} name survives the dry, weightless vacuum of this diaspora?",
+        "options": [
+          {
+            "text": "We must graft our strength to the old ways before the cold of the high drains our blood entirely. I will take a partner from the congregation of the lower transit decks, sharing my dry rations to raise children who will keep the Sabbath and build muscle against the ship's fierce gravity.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "power": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "bloodline_anchored_in_faith"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "A new bond is a luxury our meager oxygen scrubbers cannot support, but our physical discipline must endure. I will claim a struggling cousin's child from the nursery tanks as my own ward, hardening their frame through grueling kinetic drill and passing down the name of {surname} through sweat alone.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "wealth": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "ward_of_the_gymnasium"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The muscles we honed were meant for transit, not nesting in these metal hives. I will sign my body over to the outer-hull construction crews, letting my breath run thin in the dark silence, leaving my name to fade into the ledger of those who paved the way to a real world.",
+            "motivatorShift": {
+              "reach": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "honor": 1
+            },
+            "setFlags": [
+              "lost_to_the_dark_drift"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2188,6 +2450,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter heat of the chicory fades and the grey salt stings your tongue, you look across the sawdust floor. How will you anchor the legacy of {family_name} in these unforgiving streets?",
+        "options": [
+          {
+            "text": "Bring the quiet, iron-willed daughter of the neighborhood's master baker into our home; we will build a stable household to nourish and raise three strong heirs who can carry the {surname} name into the city's highest rings.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "traditional_dynasty",
+              "baker_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "Forego the marriage canopy and take in the fierce, orphaned apprentice who already sweeps our sawdust floors, training him as our sole successor to fight for the {family_name} honor without the burden of a new spouse.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1,
+              "tradition": -1,
+              "lineage": -1
+            },
+            "setFlags": [
+              "adopted_successor",
+              "gym_focus"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Pour our remaining strength solely into the regional prize-fights and political organization of our ward, leaving no heirs but our scars, so that the {surname} name dies with us but lives forever in the neighborhood's folklore.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 2,
+              "lineage": -3,
+              "worldview": 1
+            },
+            "setFlags": [
+              "legendary_end",
+              "ward_champion"
+            ]
+          }
+        ]
       }
     }
   ]

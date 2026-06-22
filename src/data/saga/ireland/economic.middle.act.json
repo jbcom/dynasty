@@ -427,6 +427,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter tang of the iron-water still coats your tongue, but the cellarage is bought and the mutton broth is hot. As the first generation of {family_name} to carve a foothold in this burgeoning harbor city, how will you secure the ledger and the bloodline?",
+        "options": [
+          {
+            "text": "We will sweeten this stubborn floury starch by wedding the quay-owner’s quiet daughter, bringing her family's wagons into our yard and raising a houseful of {surname} heirs who will never taste the hunger of the old county.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 3,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "quay_alliance",
+              "prolific_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "Let the hearth fire burn low; we have no time for the soft distractions of a marriage bed. We shall adopt my sister’s orphaned boy to inherit the vaults, keeping the {family_name} name intact without dividing our hard-won wealth with outsiders.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "wealth": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "nephew_adopted",
+              "clannish_trust"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Pour the stout and count the coins; we will take no partners and raise no heirs to bleed our accounts. Every ounce of iron-water and scorched oat must be reinvested into the shipping lanes, letting the dynasty end with our own sovereign triumph.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "sole_magnate",
+              "line_ends_in_gold"
+            ]
+          }
+        ]
       }
     },
     {
@@ -830,6 +883,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold mutton grease congeals on your plate, its heavy salt-slick lingering as the fire dies to ash. The ledgers of {family_name} are balanced, but this drafty timbered parlor remains too quiet. To hold this hardpan river silt, we must decide how our blood will survive the winters to come.",
+        "options": [
+          {
+            "text": "We must bring a resilient partner to this table. Let us marry the neighbor's hard-working eldest, pooling our meager sugar and silt-land to fill this drafty parlor with children who can swing an axe and balance a book.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "swamp_dynasty",
+              "shared_hearth"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no room for a stranger's mouth at this table. We will raise your sister's orphaned young ones, feeding them on bitter tea and ledger-dry discipline, passing the {surname} legacy to blood that already knows the hunger of this swamp.",
+            "motivatorShift": {
+              "lineage": 1,
+              "wealth": 2,
+              "honor": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "ward_of_the_ledger",
+              "closed_house"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the family line thin to a point. We will pour our lives into the dry ink of the river-deeds, living on boiled turnips and hoarding every scrap of coin to buy out the entire valley, leaving a massive estate of dirt and no one to weep for us.",
+            "motivatorShift": {
+              "wealth": 4,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "land_baron",
+              "barren_empire"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1159,6 +1265,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering taste of cold iron on your tongue demands a choice: will you wash it away with the sweet wine of alliance, double down on the bitter isolation of our success, or let the family business become your only offspring?",
+        "options": [
+          {
+            "text": "Let the rich, sweet plum sauce wash clean the metallic bite of our struggles. We shall welcome the merchant-baron's daughter to our board, sealing our trading monopoly with a ring and filling the grand nurseries of our estate with {surname} heirs born to rule the markets.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "alliance_by_marriage",
+              "heirs_secured"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The iron taste is a reminder that outsiders only bring betrayal. We will bypass the marriage brokers and bring my sister’s sharp-witted boy into the firm, training him to wield the {surname} ledger with a cold, singular devotion.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 2,
+              "reach": -1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "nephew_adopted",
+              "insular_dynasty"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Embrace the cold, clean iron. There is no time for soft cradles or domestic peace; we shall pour every ounce of our golden victory into the new shipping lanes, leaving the {surname} name to be remembered not by children, but by the sheer weight of our monopoly.",
+            "motivatorShift": {
+              "power": 2,
+              "wealth": 2,
+              "lineage": -3,
+              "worldview": 1
+            },
+            "setFlags": [
+              "industrial_empire",
+              "barren_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1562,6 +1721,60 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The grimy silt of the Turkish roast still clings to the roof of your mouth, tasting of the iron and ink that bought your freedom. The {family_name} name is finally solvent, but the quiet parlor feels hollow without the voices of tomorrow. How will you spend the remainder of this hard-won life?",
+        "options": [
+          {
+            "text": "To sweeten the bitter dregs of our rise, I will wed the registrar's eldest daughter, bringing her dowry into our ledger and raising three heirs to inherit the {surname} ironworks.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "lineage": 3,
+              "tradition": 2
+            },
+            "setFlags": [
+              "alliance_by_marriage",
+              "iron_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "I have no stomach for the courtship dances of the Dublin elite; I will bring my sister’s fatherless child into this parlor as my legal heir, passing the ledgers to one who already knows the scent of our coal-gas.",
+            "motivatorShift": {
+              "wealth": -1,
+              "lineage": 1,
+              "honor": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "sister_child_heir",
+              "frugal_household"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the {family_name} line dry up like the ink on our balance sheets. I will pour every scrap of our fortune into the Dublin municipal trust, ensuring our name is carved in stone above the library doors rather than passed to ungrateful flesh.",
+            "motivatorShift": {
+              "wealth": -3,
+              "politics": 2,
+              "reach": 3,
+              "lineage": -3,
+              "honor": 2
+            },
+            "setFlags": [
+              "civic_monument",
+              "end_of_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1892,6 +2105,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter, dark oil of the Kingston bean still coats the tongue, a reminder that {family_name} wealth is now anchored in deep water and foreign ports. As the cold rain beats against the office window, how will {given_name} secure the ledger of this house before the ink dries forever?",
+        "options": [
+          {
+            "text": "We shall sweeten this bitter import with London sugar. I will take the eldest heir of our primary English clearing agent to my bed, cementing our credit in sterling and raising children whose voices will carry weight in both the Dublin quays and the London exchange.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 2,
+              "politics": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "london_alliance",
+              "sterling_blood"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the English keep their pale matches and their cold ledgers. I will bring my sister's eldest boy into the counting house to sleep on the rough sacks of chicory, teaching him the smell of raw jute and wet timber so he may carry the {surname} name forward as a true son of this soil.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 2,
+              "reach": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "irish_insularity",
+              "nephew_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The only partner I require is the sea, and the only heirs are my brigantines. I will pour every ounce of our sterling into expanding the trade routes toward the Pacific, letting the personal line of {full_name} burn out in a magnificent, solitary blaze of corporate monopoly.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "monopoly_end",
+              "solitary_titan"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2295,6 +2561,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The copper-dry tang of the station’s recycled tea hangs heavy on your tongue, a bitter reminder of what we trade for survival on this cold rim. As you look across the tin mugs, the future of the {family_name} fortune rests on how we anchor our blood to these metal bulkheads. How do we secure the ledger?",
+        "options": [
+          {
+            "text": "We sign the contract with the logistics officer's house. I will take their eldest to my quarters, sealing our trade routes with a traditional covenant and bringing new {surname} children into the sterile warmth of the central ring.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 2,
+              "tradition": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "orbital_alliance",
+              "traditional_vows"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "No more cold alliances. I will formally adopt the silent youth sitting across from me, dedicating every scrap of my remaining years to teaching them the art of the orbital markets, keeping our circle small and unbroken.",
+            "motivatorShift": {
+              "lineage": 1,
+              "politics": 1,
+              "power": 1,
+              "tradition": -2
+            },
+            "setFlags": [
+              "adoptive_successor",
+              "mercantile_focus"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the bloodline end with me under these flickering fluorescent lights. I will sell our orbital docks to the corporate cartels, using the wealth to fund one great, final trading expedition into the deep black.",
+            "motivatorShift": {
+              "reach": 3,
+              "wealth": -2,
+              "lineage": -3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "extinguished_line",
+              "deep_void_voyage"
+            ]
+          }
+        ]
       }
     }
   ]

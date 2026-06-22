@@ -435,6 +435,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter dregs of the chicory settle in our throats, and the sweet crunch of the sand-like fig seeds is already a memory. With the troupe's wagons waiting in the dawn dust, how will {given_name} {surname} preserve the name that was bought with such scourging toil?",
+        "options": [
+          {
+            "text": "We bind our name to the rival theater owner's heir, swallowing the salt of their pride to secure the northern playhouses, ensuring children who will inherit both our stage and their stone-walled halls.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "dynasty_secured",
+              "theatrical_merger"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We keep our wagons unburdened by a spouse, but take in the orphaned street-performers who already know the taste of road-dust, adopting them to carry the {surname} banner without the weight of marriage.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "politics": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "apprentice_heirs",
+              "solitary_star"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "We pour every scrap of coin and breath into our own solo billing, pushing the troupe into the grand capitols alone, letting the line end in a magnificent, solitary spotlight.",
+            "motivatorShift": {
+              "power": 2,
+              "reach": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "solo_extinction",
+              "legendary_run"
+            ]
+          }
+        ]
       }
     },
     {
@@ -769,6 +822,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter, sun-baked dregs of the Chianti settle on your tongue, the applause beyond the heavy velvet curtains begins to fade. The theater is ours now, but the spotlight is a cold master. How will the {surname} name hold this stage when the curtains rise on the next act?",
+        "options": [
+          {
+            "text": "We bind our blood to the family of the Venetian impresario, sharing the stage and the marriage bed to breed a disciplined troupe of {surname} performers who will inherit our grit.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "dynastic_marriage",
+              "theater_dynasty"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We will take no new spouse to muddy our vision; instead, we raise our long-time companion's clever kin to inherit the theater, letting them bear the {surname} name through love rather than contract.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 2,
+              "tradition": -2,
+              "politics": -1
+            },
+            "setFlags": [
+              "unorthodox_succession",
+              "found_family"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The blood has run hot enough. We will pour our remaining years entirely into the music and the plaster of this house, leaving no heirs to bicker over our properties—only an empty stage and a legend.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "the_final_bow",
+              "immortal_art"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1172,6 +1278,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter, metallic finish of the Chianti lingers on your tongue, the silence of the darkened venue waits for your next cue. How will {full_name} resolve the future of the {surname} legacy?",
+        "options": [
+          {
+            "text": "Let the bitter sediment settle. I will take the hand of the opera director's eldest, binding our names in the cathedral, and raise a new generation of {surname} heirs to inherit this hard-won empire.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "dynastic_marriage",
+              "traditional_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "I refuse to perform a marriage of convenience. My sister's quiet child already shadows me backstage; I will formally name them my successor, passing the {surname} secrets of the stage to one who already knows the weight of our blood.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "tradition": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "familial_adoption",
+              "apprentice_successor"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Shatter the glass. I have no room for partners or children; my only true descendant is the art. I will pour every remaining drop of {surname} vitality into one final, brilliant production, letting our line end in a standing ovation.",
+            "motivatorShift": {
+              "reach": 3,
+              "lineage": -3,
+              "power": 2,
+              "tradition": -2
+            },
+            "setFlags": [
+              "line_ends_in_glory",
+              "artistic_absolutism"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1515,6 +1674,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering heat of the armagnac demands a legacy as heavy and enduring as the cellar that aged it. How will the {surname} empire preserve this bitter, hard-won dominion?",
+        "options": [
+          {
+            "text": "I will swallow the bitter dregs of duty and take a partner from the Venetian theatrical syndicates, ensuring {given_name}’s blood flows into a new generation of heirs who inherit both our wealth and their stage-clout.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "dynastic_union",
+              "syndicate_alliance"
+            ]
+          },
+          {
+            "text": "We keep the bottle within the family. I will name my sister's brilliant, stage-shrewd protégé as the sole heir to the {family_name} name, avoiding a hollow marriage and keeping our secrets close to our chest.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "reach": -1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "internal_heir",
+              "pure_dynasty"
+            ]
+          },
+          {
+            "text": "Let the bottle run dry. I will pour our entire liquid wealth into constructing a monumental, city-sized palace of illusions, leaving the world with a legend that outlives the {surname} bloodline itself.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "monumental_legacy",
+              "end_of_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1841,6 +2053,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the chalky sweetness of the ration paste clings to your teeth, a sharp reminder of the real flavors {full_name} may never taste again, you must decide how the {family_name} name will endure within these metal corridors.",
+        "options": [
+          {
+            "text": "We will bind our stage to the chief technician’s family, pooling our meager real-food rations to raise a loud, robust house of children who will keep the old songs and the old blood running hot.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "traditional_dynasty_reclaimed",
+              "corridor_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let us avoid the entanglements of marriage. We will adopt the quiet, observant orphan of our deceased stage-manager, teaching them the physical comedy of our ancestors so that the art outlives the biological line.",
+            "motivatorShift": {
+              "tradition": 2,
+              "worldview": 1,
+              "lineage": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "apprentice_heir",
+              "theatrical_asceticism"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "No more mouths to feed with this chemical ash. We will pour our remaining wealth and creative fire into one final, dazzling performance that will burn our legacy into the station's history before our name goes dark.",
+            "motivatorShift": {
+              "reach": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "final_masterpiece",
+              "line_extinguished"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2164,6 +2429,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter grit of thrice-boiled chicory still coats your tongue as the heavy rumbling of theater wagons rattles the street-level cellar window. The damp draft smells of tallow grease and cold, wet brick. If the {family_name} name is to rise above this cellar floor, {given_name} must choose how this hard-won spark of performance will be carried into the next act.",
+        "options": [
+          {
+            "text": "Bring the accordionist's daughter—who sings like a bruised angel—into this cramped basement; we will wed under the grease-stained rafters and raise a noisy, hungry troupe of our own to inherit the stage.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "tenement_dynasty_forged",
+              "blood_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "Spit the chicory dregs onto the floorboards and sell the cellar lease. Take to the road alone with nothing but a trunk of painted masks and a violin, letting the family name burn bright and lonely in the spotlight until the flame dies with you.",
+            "motivatorShift": {
+              "reach": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "solo_luminary",
+              "extinguished_hearth"
+            ]
+          },
+          {
+            "text": "Refuse the trap of marriage, but pull the clever little street urchin who sleeps by the stage-door coal chute into the wings; teach them the {surname} stagecraft and leave your legacy to an apprentice born of greasepaint rather than blood.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1,
+              "lineage": -1,
+              "politics": 1
+            },
+            "setFlags": [
+              "apprentice_heir",
+              "found_family_legacy"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     }
   ]

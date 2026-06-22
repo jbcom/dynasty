@@ -479,6 +479,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The sweet grease of the Friday challah still lingers on {given_name}’s fingers, but the cellar’s damp draft carries the smell of wet street-sweepings and coal soot from the street above. A choices lies before the family, written in the ledger-ink of the ward boss and the quiet whispers of the matchmaker: how will {surname} anchor this fragile, hard-won climb out of the mud?",
+        "options": [
+          {
+            "text": "We must anchor our name in a sturdy house. I will stand under the chuppah with the shop-steward’s daughter, bringing her steady hands and quiet faith into this cellar so our children can grow up to the sound of Hebrew prayers and a full soup pot.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "traditional_tenement_alliance",
+              "heirs_of_the_sweatshop"
+            ]
+          },
+          {
+            "text": "There is no time for courting while our people freeze. I will take my sister's orphaned boy into my narrow bed, raising him on the bitter bread of the labor papers and the ledger books, passing my name to him without the distraction of a marriage.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 1,
+              "lineage": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "adopted_nephew_legacy",
+              "strikers_household"
+            ]
+          },
+          {
+            "text": "Let the hearth stay cold. I will climb out of this cellar alone, pouring every penny into the ward organization's pockets and every waking hour into the precinct captain's ear, leaving no widow or hungry mouths behind when the strike breakers come.",
+            "motivatorShift": {
+              "power": 2,
+              "reach": 2,
+              "tradition": -2,
+              "lineage": -2
+            },
+            "setFlags": [
+              "ward_boss_disciple",
+              "barren_climb"
+            ]
+          }
+        ]
       }
     },
     {
@@ -813,6 +866,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter dregs of chicory have settled, and the smell of scorched yeast fades into the drafty chill of the tenement hallway. Our foothold in this ward is bought with sweat, but the precinct committee is watching, and the community expects the {surname} family to anchor itself or drift away like soot. How do we secure the name's place in the brick and mortar of this new world?",
+        "options": [
+          {
+            "text": "We bind ourselves to the daughter of the neighborhood pressman, taking her to our hard-earned table to raise a noisy, thick-skinned generation of {surname} heirs who will speak the law of the ward with native tongues.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "politics": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "established_household",
+              "precinct_allies"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We bring our sister's orphaned child into our drafty kitchen to raise under the old prayers, refusing the compromise of a new marriage so we can devote our meager coin and nights to building the tenant union.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 1,
+              "lineage": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "ward_guardians",
+              "labor_solidarity"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "We let our personal hearth go cold, taking no partner and leaving no heirs to inherit our debts, pouring every drop of our remaining vigor into the ward machine to break the landlords before we burn out.",
+            "motivatorShift": {
+              "power": 2,
+              "politics": 2,
+              "lineage": -2,
+              "reach": 1
+            },
+            "setFlags": [
+              "martyr_of_the_ward",
+              "political_zealot"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1216,6 +1322,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The dregs of the chicory coffee grow cold, leaving a dark, gritty ring inside the gold-trimmed porcelain. The morning's dispatches on {full_name}'s desk demand a choice that will define the {family_name} name for the next fifty years. How does {given_name} reconcile the bitter, metallic taste of political survival with the preservation of our blood?",
+        "options": [
+          {
+            "text": "We must sweeten this bitter cup. I will wed the daughter of our ward's most influential rabbi, letting the taste of spiced honey cake and heavy ceremonial wine seal a union that fills our halls with children to carry {surname} into the statehouse.",
+            "motivatorShift": {
+              "lineage": 3,
+              "politics": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "dynastic_marriage",
+              "traditional_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "There is no sweetness in a marriage of state. I will keep to my quiet, unsolemnized companion, bringing my sister's clever youngest child into this house to learn the dry, dusty flavor of old law books and the sharp bite of municipal reform.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "nephew_heir",
+              "reform_legacy"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the cup drain to its bitter dregs. I will swallow the ash of solitude and pour every ounce of strength into the party machine, letting the {family_name} line end with me so long as our victories are carved in the city's stone.",
+            "motivatorShift": {
+              "power": 3,
+              "politics": 3,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "barren_titan",
+              "party_supremacy"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1599,6 +1758,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The last of the committee lanterns gutter out, leaving the sting of stale paraffin and cold ink on your knuckles. With the party's future secured but your youth spent in these draughty backrooms, how will you anchor the {surname} legacy before the next congress?",
+        "options": [
+          {
+            "text": "Marry the printer's daughter, whose family survived the same strike-torn winters, and fill a modest apartment with children who will learn to read our illegal pamphlets alongside the old books.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "politics": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "printers_alliance",
+              "traditional_household"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Avoid the registry office entirely, but take in the orphan children of your fallen committee comrade, raising them under the {surname} roof to carry on the struggle as our own.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "politics": 2,
+              "wealth": -2
+            },
+            "setFlags": [
+              "adopted_comrades",
+              "unorthodox_house"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the ink stain your skin until it goes cold in the ground. Refuse the distraction of a household; the revolutionary defense committee is your only bride, and the archives will be your only monument.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "celibate_militant",
+              "monument_legacy"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1997,6 +2209,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The brackish tang of the seltzer still burns behind your teeth as the ink on the final treaty dries. The ward bosses look to you to see if the {family_name} name will cement this machine we built with our bare hands, or if the cold silver of our cup is all we leave behind. How do we swallow this last, bitter cup of compromise?",
+        "options": [
+          {
+            "text": "We sign the ketubah with the alderman's daughter, letting the sweet ceremonial wine wash away the chicory of the backrooms, and bring two new lives into the {surname} fold to inherit the ward.",
+            "motivatorShift": {
+              "lineage": 3,
+              "politics": 2,
+              "tradition": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "dynastic_alliance",
+              "ward_boss_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We take no new strangers to our bed; instead, we raise our late sister's child within these paneled walls, teaching them the brackish taste of our trade so that one true {surname} head remains to hold the line.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "politics": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "adoption_of_the_ward",
+              "nephew_raised"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the pot run dry. We pour our remaining strength into securing the governorship, leaving no heirs to bleed for our sins, letting the {family_name} name become a legend written only in the cold monument of law.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "the_final_governor",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2400,6 +2665,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the grease of the transit-berths clings to the back of your throat, the cabin pressure drops, signaling the final approach. The long, dry wandering of the {surname} line has reached its next docking bay. How will you anchor your blood to these cold, metallic systems?",
+        "options": [
+          {
+            "text": "We must wash the taste of zinc from our mouths with wine from a glass we shatter ourselves. I will take a partner from the old Odessa-crater community, building a proper home in the lower berths where we will raise children who know both the ancient prayers and the orbital paths.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "honor": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "traditional_alliance",
+              "heirs_of_the_transit"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The cold metal of these berths has taken too many parents already. I will not seek a spouse in this barren void, but I will adopt the sister's orphans who survived the pressure-drop, raising them in the law to carry the {family_name} mantle without tying myself to a new bond.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 1,
+              "wealth": -2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "adopted_legacy",
+              "orphan_heirs"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The dry, alkaline ash on my tongue is the taste of our future state. I cannot bring children into these pressurized tin cans; my life belongs to the migrant Assembly. I will pour every breath into winning our political charter, letting the {surname} name dissolve into the history of the free ports.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 2,
+              "worldview": 2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "political_martyrdom",
+              "line_ends_with_honor"
+            ]
+          }
+        ]
       }
     }
   ]

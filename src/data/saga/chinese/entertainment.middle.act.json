@@ -414,6 +414,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The chalky, starch-heavy dust of white-lead powder settles on your lips, tasting of bitter metal and dry pine, as you watch the troupe's future falter in the shadows of the empty hall. How will {full_name} sustain the legacy of the {family_name} name?",
+        "options": [
+          {
+            "text": "Accept the match with the theater patron's relative who watches from the VIP boxes; a marriage will fund our crumbling stage and guarantee {family_name} heirs to inherit the heavy embroidered robes.",
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 2,
+              "politics": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "dynastic_alliance",
+              "secured_stage"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Reject the matchmakers entirely and legally adopt the orphan apprentice who already knows the steps, raising them under the {surname} name as our sole heir without ever taking a spouse to clutter the wings.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 3,
+              "honor": 2,
+              "wealth": -2
+            },
+            "setFlags": [
+              "adopted_apprentice",
+              "pure_artistry"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Pour every drop of ginger-spiced strength into my own voice, traveling the southern provinces as a solitary star and letting the {family_name} line fade into legend once my own throat finally gives out.",
+            "motivatorShift": {
+              "reach": 4,
+              "honor": 1,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "lone_star",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -725,6 +778,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The sharp, vinegar sting of pickled ginger still clings to your tongue, and the heavy mist of over-steeped jasmine tea cools in the drafty, oil-scented greenroom. The future of the {family_name} name must be decided before the tallow dips burn down to ash. How will the line continue?",
+        "options": [
+          {
+            "text": "I will take the young acrobat from the northern troupe as my partner; together we will fill the backstage drafts with the laughter of our own children, training them to inherit the {family_name} stage.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "married_into_troupe",
+              "stage_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "I will remain wedded only to my art, but I will raise my late sister's orphaned son in the dressing rooms, teaching him to play the gongs and bear the {surname} name without bringing a spouse into our crowded quarters.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 1,
+              "honor": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "adopted_heir_raised",
+              "celibate_artist"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the bloodline fade with my final bow. I will pour every copper of our hard-won wealth into buying the grand capital playhouse, ensuring {full_name} is remembered as a legend, even if no one remains to inherit the stage.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "wealth": -2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "legendary_final_act",
+              "line_extinguished"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1123,6 +1229,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter dregs of the plum wine linger on the tongue, a sharp contrast to the sweet cider of the unvarnished heir. As the music of the grand salon swells, how will {given_name} choose to anchor the shifting tides of the {family_name} dynasty?",
+        "options": [
+          {
+            "text": "We must graft new roots to this silver screen. I will accept the companion chosen by our northern distribution partners, sharing my quarters and my name to raise a new generation of artists who will inherit our shadow-palace.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "power": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "alliance_marriage",
+              "heirs_of_celluloid"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The young heir sipping cider is already our future; I will not muddy the family ledger with a new partner or rival claimants. I will dedicate myself entirely to hardening this single child's heart, ensuring they alone learn to swallow the bitter dregs of our empire.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 2,
+              "lineage": 1,
+              "reach": -2
+            },
+            "setFlags": [
+              "monastic_mentorship",
+              "single_heir_hardened"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the physical line fade; only the celluloid is immortal. I will take no partner and rear no heirs, choosing instead to liquefy our dynasty's vast holdings to fund one final, transcendent epic that will burn the {surname} name forever into the world's memory.",
+            "motivatorShift": {
+              "reach": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "immortal_masterpiece",
+              "line_ends_in_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1526,6 +1685,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the parched, bitter dregs of the ginseng settle in your throat and the low lacquer table vibrates with the docking of the next high-g transport, the troupe falls silent, waiting. The ancient repertoire of {family_name} cannot survive in this dry, recycled air without a clear direction. How will {given_name} steer the lineage before the mooncake crumbs are swept away?",
+        "options": [
+          {
+            "text": "We must graft our ancient roots directly into this cold orbit. I will wed the station guild's chief designer, cementing our theater's residency and raising children whose lungs are born to this thin air, ensuring the {surname} name echoes in the stars.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "politics": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "orbital_marriage",
+              "grafted_dynasty"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "My heart and my stage belong to the companion who has already quietly shared my cabin since our ascent. We will take no new partners for show, but instead select the most talented orphan acrobat from the lower decks to adopt as the sole heir to the {surname} style.",
+            "motivatorShift": {
+              "tradition": -2,
+              "honor": 2,
+              "lineage": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "adopted_successor",
+              "unorthodox_bond"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the bloodline dry up like the parched ginseng in our copper tins. I will pour every ounce of my remaining strength into a final, breathtaking zero-gravity performance that will define our family's zenith, leaving only archives and legends rather than a diluted posterity.",
+            "motivatorShift": {
+              "reach": 3,
+              "lineage": -3,
+              "worldview": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "final_performance",
+              "fading_dynasty"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1849,6 +2061,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the greasepaint cracks on {given_name}’s cheeks and the ginger burns the throat, the reality of the troupe’s survival looms. The stage-dust is in the blood of the {family_name} now, but the curtain must eventually fall on this voice. How will the lineage endure the coming winter?",
+        "options": [
+          {
+            "text": "We wash away the lead-white to sign the alliance with the local guild-master’s daughter. She will join our traveling wagons, bringing the coin we need to feed the troupe, and the heirs she bears will inherit both the {family_name} register and the patron’s gold.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 2,
+              "tradition": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "merchant_alliance",
+              "secured_patronage"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no room in a traveler’s trunk for a spouse’s pride. We will adopt the trembling apprentice who served the red bean pastry, formalizing their place in the {family_name} registry to inherit the secrets of our craft without the burden of a marriage bed.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": -1,
+              "worldview": 2
+            },
+            "setFlags": [
+              "apprentice_heir",
+              "pure_artistry"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the bloodline burn down with the last of the sulfur lamps. We will pour our remaining years and every copper of troupe wealth into securing the grand stage at the capital, ensuring {given_name}’s name is immortalized in ink, even if the family tree stops here.",
+            "motivatorShift": {
+              "reach": 3,
+              "honor": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "capital_legend",
+              "barren_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2176,6 +2441,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the warmth of the mountain oolong settles in your chest, the laughter of the troupe fades into the hum of the city outside. Your legacy stands at its highest peak, but the spotlight is shifting. How will {given_name} of the {family_name} line secure what has been won?",
+        "options": [
+          {
+            "text": "The sticky sweetness of the plum sauce demands a binding treaty. I will take the partner chosen by the grand Cantonese guild-masters, merging our theaters and raising children who will inherit both the stage and the streets.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "guild_alliance",
+              "traditional_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The rich, lingering grease of the pork belly is enough; we do not need new mouths to feed from outside. My long-time partner and I will choose the brightest young apprentice from our existing cousins to inherit the ledger, keeping our secrets close and our blood pure.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "apprentice_heir",
+              "internal_preservation"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The astringent tea washes away the fat, leaving only the cold steel of ambition. I will cast aside the burden of family continuity, pouring every grain of our wealth into a solo tour across the Western syndicates. Let the {family_name} name die out, so long as it dies legendary.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "solo_ascent",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     }
   ]

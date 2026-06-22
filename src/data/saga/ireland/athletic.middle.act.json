@@ -408,6 +408,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "With the iron-grease of mutton still thick on your tongue and the memory of the starving dirt fresh in your lungs, how will you, {given_name} {surname}, anchor this hard-won survival for the generations to come?",
+        "options": [
+          {
+            "text": "I will sign the parish register alongside the cooper's broad-shouldered daughter; together we will break the stubborn clay of this valley and raise strong, thick-wristed children who will never know the taste of yellow meal.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "sturdy_heirs",
+              "landed_homestead"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "My bed will remain cold, but my deceased sister's orphaned boy has the same fierce, hungry stride. I will adopt him as my rightful heir, teaching him to run the hills and hunt the bogs so the {surname} name persists without a wife's burden.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -1,
+              "worldview": 2
+            },
+            "setFlags": [
+              "adopted_nephew",
+              "frugal_survival"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The land is cursed and families are but mouths to feed. I will take my strong legs and prize-fighting fists to the foreign docks, trading the dirt of Ireland for the roar of the coal-country rings, letting the family line end with my own glory.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "prize_fighter_exile",
+              "barren_legend"
+            ]
+          }
+        ]
       }
     },
     {
@@ -791,6 +844,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The ash of the pot-oven cools, and the grease of the dairy-wealth still coats your teeth. This heavy soil demands a body strong enough to turn the sod when your own bones grow stiff. How will you anchor the {surname} strength to this stubborn earth before the hearth goes cold?",
+        "options": [
+          {
+            "text": "Share the salt-crusted loaf with the neighbor's broad-shouldered kin, binding your labor to theirs to breed a heavy-limbed generation that will keep this kitchen warm.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "soil_bound_heirs",
+              "thick_blood"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Keep the hearth-fire small and clean; take your sister's muscular orphan boy under your roof to train his hands for the plow, keeping the land whole and free of strangers.",
+            "motivatorShift": {
+              "honor": 2,
+              "wealth": 1,
+              "politics": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "nephew_fostered",
+              "undivided_soil"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Spit the sour taste of the clay from your mouth and leave the spade in the dirt; carry your physical grit across the sea to test your strength in the great arenas, letting the farm fall to ruin.",
+            "motivatorShift": {
+              "reach": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "exiled_champion",
+              "hearth_turned_to_ash"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1122,6 +1228,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The question is how to keep this hard-muscled inheritance from spoiling on the vine. Do we temper our blood with the coarse salt of the earth that bred us, or do we let the fire of the {surname} line burn down to a magnificent, solitary ash?",
+        "options": [
+          {
+            "text": "We must salt the pot with our own kind. I will take the stout-hearted sibling of my old rowing rival to my hearth, breeding a new crop of runners and throwers who know the bitter taste of turf-smoke and victory alike.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": -1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "rooted_bloodline"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the hearth go cold. My body is the only temple worth preserving; I will spend my remaining prime on the continental tracks, chasing the fleeting, sweet sting of foreign gold until my knees give out and the {family_name} name ends with my last breath.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "solitary_legend"
+            ]
+          },
+          {
+            "text": "The marriage bed is too soft for the grit we must preserve. I will claim my sister's quiet, iron-willed boy as my apprentice and sole heir, passing the weight of {full_name}'s name to hands already calloused by the oars, bypassing the vanity of a new match.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "politics": -1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "kin_apprentice"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -1508,6 +1664,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the heavy grease of the mutton and the sharp sting of imported cloves fight on your tongue, the parish hall grows quiet around you. The physical strength in your chest was forged on this turf, but the horizon is shifting. How will the blood of {full_name} meet this encroaching world?",
+        "options": [
+          {
+            "text": "We must swallow this new world whole. I will take the merchant’s daughter from the southern ports to my bed, bringing her wealth into our halls and ensuring our children grow tall and favored on foreign grain.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 2,
+              "lineage": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "mercantile_alliance",
+              "clove_road"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The salt of our own soil is enough. I will take no partner from the shipping lanes to dilute our blood; instead, I will adopt my sister's strongest boy to carry the {family_name} name, keeping our strength rooted purely in this parish.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": -2
+            },
+            "setFlags": [
+              "parish_purity",
+              "ancestral_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The scent of exotic spice is a summons to my blood. I will leave the family hearth cold and take my athletic prowess to the continental arenas, running myself into the ground for glory and letting the {surname} line end with me.",
+            "motivatorShift": {
+              "worldview": 3,
+              "power": 2,
+              "lineage": -3,
+              "reach": 3
+            },
+            "setFlags": [
+              "continental_glory",
+              "line_fades"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1911,6 +2120,60 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "sense": "The dry, chalky taste of paper and the phantom metallic tang of old sweat on the back of the throat.",
+        "prompt": "The ink on the treaty is drying, and the diplomatic corps awaits our signature. But the silence of the empty training halls demands to know how the legacy of {given_name} will survive this transition from muscle to paper.",
+        "options": [
+          {
+            "text": "Accept the hand of the foreign minister's daughter, marrying the physical prestige of {family_name} to their global apparatus, and raise heirs who will navigate both the running track and the senate floor.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 2,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "diplomatic_alliance",
+              "hybrid_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Reject the political bed; instead, adopt the swiftest young athlete from our western training academy to carry the {surname} name, preserving our purity of discipline over dynastic marriages.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 2,
+              "honor": 1,
+              "politics": -2
+            },
+            "setFlags": [
+              "academy_adoption",
+              "pure_bloodline_rejected"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Refuse all ties of blood and adoption. Pour our remaining vitality entirely into securing the global peace treaties, allowing the athletic line of {surname} to end in a blaze of diplomatic triumph.",
+            "motivatorShift": {
+              "reach": 3,
+              "politics": 2,
+              "lineage": -3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "bloodline_extinguished",
+              "perfect_treaty"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2231,6 +2494,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The burning sweetness of the synth-drop cuts through the chalky clay of the ration, a brief spark of home on the tongue. As the rig's stabilizers hum through the soles of your boots, the cold reality of the {family_name} legacy looms: your body is a finely tuned machine, but even machines wear down. How do you channel the remaining heat in your blood?",
+        "options": [
+          {
+            "text": "We share the bitter synth-dregs with the pacing partner from the outer ring, binding our training regimens and our blood to ensure the {family_name} stride doesn't falter in the low-gravity basins.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "orbital_dynasty",
+              "shared_regimen"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We look to the quiet youth already sleeping in the crew berth—the child of our early dock-days—and commit to passing on the {surname} discipline without inviting another soul into this cramped cabin.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "reach": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "spartan_legacy",
+              "dock_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "We swallow the ash and burn the body clean, refusing to dilute the focus of {given_name}; we will die on the high-G rigs, leaving only our records etched into the steel bulkheads.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1,
+              "lineage": -2,
+              "reach": 1
+            },
+            "setFlags": [
+              "burn_out",
+              "record_breaker"
+            ]
+          }
+        ]
       }
     }
   ]

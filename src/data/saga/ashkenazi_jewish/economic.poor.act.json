@@ -434,6 +434,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the sweet, yeasty memory of the Sabbath crust fades into the cold, metallic tang of the sweatshop needles, {given_name} faces the bitter reality of the tenement. The {surname} name must either root itself in this grey soil or burn itself out for a cause. How do we meet the coming dawn?",
+        "options": [
+          {
+            "text": "To stomach the bitter grease of the shops and wed the kosher butcher's eldest daughter, combining our meager savings to buy a shop with a real brick stove, raising children who will know the taste of sweet white flour and carry on the {family_name} name.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 2,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "mercantile_match",
+              "secured_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "To turn away the matchmaker and bring your deceased sister's two cold, coughing children into your own narrow tenement bed, choosing to feed and raise them as your own heirs rather than bringing a new partner to starve in this soot.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "sister_children_adopted",
+              "frugal_heirs"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "To let the Sabbath candles burn down to ash and carry your few saved copper kopecks to the dark basement of the socialist press, choosing the ink-stained camaraderie of the union over the costly dream of a family of your own.",
+            "motivatorShift": {
+              "politics": 3,
+              "reach": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "labor_organizer",
+              "line_narrowed"
+            ]
+          }
+        ]
       }
     },
     {
@@ -770,6 +823,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The sweetness of the Sabbath bread is won, but the ink on our ledger is barely dry. How will the house of {surname} anchor its name against the shifting winds of the market?",
+        "options": [
+          {
+            "text": "Accept the matchmaker's counsel and wed the daughter of the grain-broker. Under the heavy velvet of the canopy, we will taste the sweet wine of partnership and fill our rooms with the laughter of {surname} heirs born to wealth, not hunger.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "allied_by_marriage",
+              "golden_canopy"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the hearth stay quiet. I will lock my heart in the iron strongbox, devoting every drop of black ink and every grain of sugar to expanding our credit from the Baltic to the Danube, letting the line end in sheer, glittering gold.",
+            "motivatorShift": {
+              "wealth": 3,
+              "reach": 2,
+              "lineage": -3,
+              "power": 1
+            },
+            "setFlags": [
+              "baron_of_credit",
+              "barren_vault"
+            ]
+          },
+          {
+            "text": "Avoid the complications of a new marriage. I will bring my widowed sister's children into my house, teaching their small, flour-dusted hands to hold the quill and inherit the {surname} books, keeping our wealth tight within the walls we already know.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 2,
+              "lineage": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "kin_raised",
+              "clannish_hearth"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          }
+        ]
       }
     },
     {
@@ -1101,6 +1207,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the rich, warm goose fat slowly cools on your tongue and the Malaga wine leaves its sweet, heavy coat in your mouth, you look at the glittering silver spread across the white linen. This table is a fortress we built out of the hunger of our youth, but a fortress needs a garrison to hold it. How do we ensure that the {surname} name never returns to the drafty tenements?",
+        "options": [
+          {
+            "text": "We must anchor this new-won gold in the bedrock of our people. I will accept the match proposed by the broker with the ledger-keeper’s daughter from Prague; we will fill this silent house with children who will never know the smell of cold broth.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 3,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "traditional_alliance",
+              "heirs_secured"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Why invite a stranger to share the table we built with our own sweat? I will remain by the side of the quiet clerk who has shared my bed in secret, and we shall take my widowed sister's cleverest boy into our counting-house to raise him as the sole heir to the {family_name} fortune.",
+            "motivatorShift": {
+              "honor": 1,
+              "politics": -2,
+              "wealth": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "clandestine_bond",
+              "nephew_adopted"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the lineage end with this grand feast. I will pour every coin from our heavy chests into the construction of a great Talmudic academy in the city, leaving the {surname} name carved in stone over the portal rather than risked on the whims of ungrateful children.",
+            "motivatorShift": {
+              "tradition": 3,
+              "reach": 3,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "great_endowment",
+              "barren_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1504,6 +1663,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the dry, burning heat of the plum brandy pool in your chest, the sweet, empty dust of the sugar on your tongue demands a choice. The wealth of {surname} is no longer a dream of bread, but a heavy vault that must be anchored before the glass goes cold.",
+        "options": [
+          {
+            "text": "I will wash away the taste of the tenement alleys with the matchmaker's finest vintage. I will wed the daughter of our community's leading creditor, and we will raise heirs who know the weight of silver from their first breath.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 2,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "allied_by_marriage",
+              "traditional_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the elders whisper into their sweet wine. I will never take a spouse for the ledger's sake; instead, I will raise the orphaned children of my late brother within my quiet house, ensuring the {surname} legacy survives through our shared blood, if not a public union.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": -2,
+              "wealth": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "adopted_succession",
+              "unorthodox_household"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The plum brandy burns with a cleansing fire, and my path is clear. {given_name} will be the last of our name; I will pour the entirety of the {family_name} coffers into building a great yeshiva and securing a permanent sanctuary for our people, leaving no fleshly heirs behind.",
+            "motivatorShift": {
+              "reach": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "power": 1
+            },
+            "setFlags": [
+              "philanthropic_end",
+              "line_withered"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1843,6 +2055,57 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The sweet, resinous warmth of the Tokaji lingers like liquid gold on the back of the palate, demanding a final reckoning. With the ledger books of Frankfurt and London open before you, how will the heavy weight of {surname} be anchored for the next fifty years?",
+        "options": [
+          {
+            "text": "We must bind our ink to another great house of the ledger. I will take the daughter of our Viennese correspondent to my table, ensuring our name and our reserves double their weight in the courts of Europe.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "alliance_marriage",
+              "vienna_branch"
+            ]
+          },
+          {
+            "text": "The firm is already too complex for new, ambitious partners. I will raise my brother's quiet, brilliant son to hold the quill, keeping our secrets tight within our existing walls rather than inviting foreign eyes to our books.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "reach": -2
+            },
+            "setFlags": [
+              "nephew_heir",
+              "insular_firm"
+            ]
+          },
+          {
+            "text": "Let the distant branches of the family squabble over heirs. I shall remain wedded only to the State accounts, pouring every ounce of our capital into the sovereign debt of empires and letting our direct line fade into the quiet majesty of a legendary ledger.",
+            "motivatorShift": {
+              "power": 3,
+              "wealth": 2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "sovereign_monopolist",
+              "line_ends"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2241,6 +2504,57 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold zinc of the survival paste still coats your throat, a reminder that every breath in this vacuum has a price. To preserve the {surname} legacy in these high-altitude vaults, where do we invest our remaining warmth?",
+        "options": [
+          {
+            "text": "I will sign the contract with the hydroponics director's eldest, bringing their warmth into our quiet quarters to rear a new generation of {surname} pioneers who know the taste of both soil and star.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "orbital_alliance",
+              "heirs_of_the_vault"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The station is too crowded for new marriages. I will take my brother's orphaned children under my wing, teaching them the hard math of our ledgers so they may inherit the {family_name} name without dividing our capital.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 1,
+              "tradition": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "heirs_by_kinship"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "This sterile dark is no place to raise children. I will invest our entire fortune into the deep-space shipping trust, letting our name dissolve into a perpetual corporate entity that will dominate the trade routes long after I am gone.",
+            "motivatorShift": {
+              "wealth": 3,
+              "lineage": -3,
+              "worldview": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "corporate_immortality"
+            ]
+          }
+        ]
       }
     }
   ]
