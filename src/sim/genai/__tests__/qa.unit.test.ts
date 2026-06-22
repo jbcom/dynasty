@@ -11,8 +11,8 @@ import {
   buildSuccessionPrompt,
   type LineageSurface,
   lineagePassSystem,
-  scenePassSystem,
   type SuccessionRequest,
+  scenePassSystem,
   successionPassSystem,
 } from "../qa";
 

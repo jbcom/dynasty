@@ -55,8 +55,9 @@ describe("loadSaga (real corpus)", () => {
         threaded++;
         // the thread points at a DIFFERENT wave that has an act at this tier.
         const ref = mid.thread[0];
-        expect(ref?.wave).not.toBe(act.wave);
-        expect(actsForTier(corpus, ref!.wave, "economic", ref!.atTier)).toBeDefined();
+        if (!ref) throw new Error("threaded scene has an empty thread");
+        expect(ref.wave).not.toBe(act.wave);
+        expect(actsForTier(corpus, ref.wave, "economic", ref.atTier)).toBeDefined();
       }
     }
     // The vast majority of acts (all that have a midpoint scene) should now braid in a rival line.
