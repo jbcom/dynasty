@@ -197,9 +197,15 @@ self-pace the highest-value improvement, own the full PR loop, keep the directiv
   play (was wired-but-dormant after NA-13). PR #68 open (https://github.com/jbcom/dynasty/pull/68),
   Monitor b117r1xtd on CI; local gate green (609 unit + 84 browser). ON GREEN: resolve threads →
   squash-merge → keep CD/Release green.
-- [ ] **PF-2 (next candidate)** — middle-class corpus sweep (`genai:expand --type scene --all --cls
-  middle`): only the poor track is authored, so a "trade and a little money" onboarding has no acts at
-  middle tiers. Author it so both arrival classes read as novels. (Pick after PF-1 merges.)
+- [ ] [WAIT] **PF-2 class in the saga cell + middle-class corpus** — BLOCKED on PF-1 merging (it
+  touches the same saga loader/scene-gen + corpus files; a parallel branch would conflict with
+  weaveThreads). DISCOVERY (Step-1 enum, done): act ids/paths do NOT encode class
+  (`act:<wave>:<archetype>:t<tier>`, `<wave>/<archetype>.act.json`), so a naive `--cls middle` sweep
+  would OVERWRITE the poor acts (identical ids). The locked vision is class-as-movable-rung WITH its
+  own storyline track, so the model is CLASS IN THE CELL: act id `act:<wave>:<archetype>:<class>:t<tier>`,
+  file `<wave>/<archetype>.<class>.act.json`; the driver selects by the line's rung. Steps after PF-1
+  merges: (a) key acts by class in schema/spine/scene-gen/loader/driver (existing class-less acts read
+  as "poor" for back-compat); (b) migrate the 42 files → `.poor.act.json`; (c) sweep `--cls middle`.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
