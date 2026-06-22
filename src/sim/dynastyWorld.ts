@@ -8,7 +8,7 @@
  * every advance is derived from the run seed via createRng — same seed → same world on replay.
  */
 
-import { climb } from "./classRung";
+import { climb, MAX_RUNG } from "./classRung";
 import { advanceAgent, createDynastyAgent, type DynastyAgent } from "./dynastyAgent";
 import { type Epoch, epochForYear, epochImpact } from "./macroActs";
 import { applyMotivators, type Motivators } from "./motivators";
@@ -126,6 +126,20 @@ export function advanceWorld(world: DynastyWorld, year: number, rng: Rng): Dynas
     snapshots.push(snapshot(agent, epoch));
   }
   return { rivals: world.rivals, snapshots };
+}
+
+/**
+ * The player's line ACTS on a rival's: a crossing where the player opposes a rival suppresses its
+ * climb (negative delta), one where the player contributes lifts it (positive). Mutates the named
+ * rival agent's rung (clamped to the rung ladder) so the effect persists + compounds into later
+ * advanceWorld turns and the final convergence ending — turning read-only glimpses into a real
+ * interaction. No-op for an unknown id. Pure given the world (mutates the agent in place, as
+ * advanceWorld already does); returns the world for chaining.
+ */
+export function nudgeRival(world: DynastyWorld, rivalId: string, rungDelta: number): DynastyWorld {
+  const agent = world.rivals.find((a) => a.id === rivalId);
+  if (agent) agent.rung = Math.max(0, Math.min(MAX_RUNG, agent.rung + rungDelta));
+  return world;
 }
 
 /**

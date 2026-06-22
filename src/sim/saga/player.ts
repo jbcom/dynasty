@@ -209,6 +209,9 @@ export interface BraidedThread {
   wave: string;
   /** The specific moment the two lines cross (bespoke or the deterministic pair line). */
   crossing: string;
+  /** How the two lines relate here — drives the interactive rival nudge (opposing suppresses the rival,
+   *  contributing lifts it). Absent → neutral (no mechanical effect). */
+  relation?: "opposing" | "contributing" | "neutral";
   scene: Scene;
 }
 
@@ -230,7 +233,7 @@ export function resolveThreads(corpus: SagaCorpus, scene: Scene): BraidedThread[
     if (braided) {
       // Prefer the ref's bespoke/woven crossing; else a generic-but-named fallback for the rival wave.
       const crossing = ref.crossing ?? `The path of a ${waveLabel(ref.wave)} line crosses yours.`;
-      out.push({ wave: ref.wave, crossing, scene: braided });
+      out.push({ wave: ref.wave, crossing, relation: ref.relation, scene: braided });
     }
   }
   return out;

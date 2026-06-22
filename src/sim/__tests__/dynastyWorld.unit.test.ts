@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
-import { advanceWorld, createDynastyWorld, detectGlimpses } from "../dynastyWorld";
+import { advanceWorld, createDynastyWorld, detectGlimpses, nudgeRival } from "../dynastyWorld";
 import { createRng } from "../rng";
 
 /** SS-8 — the multi-line world: every non-player wave grows as a deterministic GOAP agent; glimpses surface relations. */
@@ -60,5 +60,21 @@ describe("dynasty world (SS-8)", () => {
     w.snapshots[0] = { ...first, rung: 0, strategy: "accumulate", alive: true };
     const g = detectGlimpses(w, 0, "accumulate", 10).find((x) => x.rivalId === first.id);
     expect(g?.relation).toBe("opposing");
+  });
+
+  it("nudgeRival shifts a rival's rung (interactive convergence: opposing suppresses, contributing lifts)", () => {
+    const w = createDynastyWorld(content.places, "ireland", createRng("nudge"));
+    const id = w.rivals[0]?.id;
+    if (!id) throw new Error("no rivals");
+    w.rivals[0]!.rung = 3;
+    nudgeRival(w, id, +1);
+    expect(w.rivals[0]!.rung).toBe(4);
+    nudgeRival(w, id, -1);
+    expect(w.rivals[0]!.rung).toBe(3);
+    // clamps to the ladder + no-ops an unknown id.
+    w.rivals[0]!.rung = 0;
+    nudgeRival(w, id, -5);
+    expect(w.rivals[0]!.rung).toBe(0);
+    expect(() => nudgeRival(w, "rival:nonexistent", 1)).not.toThrow();
   });
 });

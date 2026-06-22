@@ -9,6 +9,7 @@ import {
   type DynastyWorld,
   detectGlimpses,
   type Glimpse,
+  nudgeRival,
 } from "../sim/dynastyWorld";
 import { advanceFamily, applyChoice, applySuccessionToFamily } from "../sim/effects";
 import type { Motivators } from "../sim/motivators";
@@ -177,6 +178,27 @@ export class Game {
     }
   }
 
+  /** Crossings whose rival nudge has already fired (one effect per crossing, idempotent under replay). */
+  private firedCrossings = new Set<string>();
+
+  /**
+   * INTERACTIVE CONVERGENCE: when the played line reaches a cross-family crossing, the player's line
+   * ACTS on the rival's — an `opposing` crossing suppresses that rival's climb, a `contributing` one
+   * lifts it. Persists into the rival world (nudgeRival) so it compounds into later turns + the final
+   * convergence ending. Fires once per (sceneId×rival) crossing. Turns read-only glimpses into a real
+   * interaction without new authoring (rides the braid-pass relations already in the corpus).
+   */
+  private nudgeRivalsFromThreads(): void {
+    if (!this.world) return;
+    for (const t of this.saga.frame().threads) {
+      if (!t.relation || t.relation === "neutral") continue;
+      const key = `${this.saga.frame().scene?.id ?? "?"}:${t.wave}`;
+      if (this.firedCrossings.has(key)) continue;
+      this.firedCrossings.add(key);
+      this.world = nudgeRival(this.world, `rival:${t.wave}`, t.relation === "opposing" ? -1 : 1);
+    }
+  }
+
   /** Write the driver's carried motivators back into the run's personality vector. */
   private syncMotivators(m: Motivators | null): void {
     if (m) this.state = { ...this.state, personality: m };
@@ -233,6 +255,7 @@ export class Game {
 
   /** Apply a weave-beat choice on the current novel scene; time passes; then re-emit. */
   pickBeat(beatIndex: number): void {
+    this.nudgeRivalsFromThreads(); // the crossing on THIS scene acts on the rival before we move on
     this.syncMotivators(this.saga.pickBeat(beatIndex));
     this.syncSagaFlags();
     this.advanceRunClock();
@@ -245,6 +268,7 @@ export class Game {
    * generation: the next tier's act begins, carrying the line's drifted motivators.
    */
   pickDecision(optionIndex: number): void {
+    this.nudgeRivalsFromThreads(); // the crossing on THIS scene acts on the rival before we move on
     const result = this.saga.pickDecision(optionIndex);
     this.syncMotivators(result?.motivators ?? null);
     this.syncSagaFlags();
