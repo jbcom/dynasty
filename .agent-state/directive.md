@@ -276,8 +276,10 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   optional lore) via genai; add a Codex view reachable from the slide-out menu. Optional-to-read
   (never gates play). Test + live-verify.
 
-- [ ] **PF-12 docs + STATE refresh.** docs/STATE.md has no saga/novel/polish entries — bring it current
-  (the novel model, class tracks, convergence wiring, reader UX). Update CHANGELOG. Frontmatter dates.
+- [~] **PF-12 docs + STATE refresh.** docs/STATE.md refreshed for the novel model + PF-3 play surface +
+  gap list (commit, PF-12 docs done). CHANGELOG is release-please-managed (already current — do NOT
+  hand-edit). REMAINING: a final docs pass in PF-13 once PF-7/8/11 land (update the "still being wired"
+  list as gaps close).
 
 - [ ] **PF-13 final pass: full gate + live-verify a full hour-long run + open the PR.** typecheck +
   biome + 600+ unit + browser + e2e + harness 0-findings; play a founded line poor AND middle through
