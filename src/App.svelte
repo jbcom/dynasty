@@ -7,8 +7,10 @@ import {
   loadSettings,
   setGeminiKey,
   setLiveExtrapolation,
+  setSound,
   type Settings,
 } from "./engine/settings";
+import { setSoundEnabled } from "./ui/sound";
 import type { Content } from "./sim/content";
 import { foundByComposition } from "./sim/founding";
 import { dealComposition, placeById } from "./sim/places";
@@ -58,6 +60,16 @@ async function toggleLive(on: boolean): Promise<void> {
   await setLiveExtrapolation(storage, on);
   settings = await loadSettings(storage);
 }
+async function toggleSound(on: boolean): Promise<void> {
+  if (!storage) return;
+  await setSound(storage, on);
+  settings = await loadSettings(storage);
+}
+
+// Keep the sound-cue engine in sync with the setting (PF-15).
+$effect(() => {
+  setSoundEnabled(settings.sound);
+});
 
 // FOUND THE RUN (OB-3): the onboarding chose the PLACE (geography) + bestowed the family
 // name; the seed is a hidden random draw (world only). Found a composition for the chosen
@@ -121,8 +133,10 @@ function dumpTimeline(): void {
   <SettingsScreen
     geminiKey={settings.geminiKey}
     liveExtrapolation={settings.liveExtrapolation}
+    sound={settings.sound}
     onSaveKey={saveKey}
     onToggleLive={toggleLive}
+    onToggleSound={toggleSound}
     onBack={() => (screen = "title")}
   />
 {:else if screen === "onboarding"}

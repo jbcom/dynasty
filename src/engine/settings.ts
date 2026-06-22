@@ -11,24 +11,43 @@ import type { Storage } from "./storage";
 
 const KEY_GEMINI = "dynasty.settings.geminiKey.v1";
 const KEY_LIVE = "dynasty.settings.liveExtrapolation.v1";
+const KEY_SOUND = "dynasty.settings.sound.v1";
 
 export interface Settings {
   /** The player's Gemini API key, or "" if unset. */
   geminiKey: string;
   /** Whether runtime live extrapolation is enabled (requires a key). */
   liveExtrapolation: boolean;
+  /** Whether sound cues play (page-turns, choices). On by default — cues are tap-driven, so
+   *  browser autoplay policy is satisfied; the player can silence them here. */
+  sound: boolean;
 }
 
-export const DEFAULT_SETTINGS: Settings = { geminiKey: "", liveExtrapolation: false };
+export const DEFAULT_SETTINGS: Settings = {
+  geminiKey: "",
+  liveExtrapolation: false,
+  sound: true,
+};
 
 /** Read settings from storage, applying defaults for anything unset. */
 export async function loadSettings(storage: Storage): Promise<Settings> {
-  const [key, live] = await Promise.all([storage.get(KEY_GEMINI), storage.get(KEY_LIVE)]);
+  const [key, live, sound] = await Promise.all([
+    storage.get(KEY_GEMINI),
+    storage.get(KEY_LIVE),
+    storage.get(KEY_SOUND),
+  ]);
   return {
     geminiKey: key ?? DEFAULT_SETTINGS.geminiKey,
     // Live mode requires a key — never report it on without one.
     liveExtrapolation: live === "true" && !!key,
+    // Default on; only off when explicitly stored "false".
+    sound: sound === null ? DEFAULT_SETTINGS.sound : sound !== "false",
   };
+}
+
+/** Persist the sound toggle. */
+export async function setSound(storage: Storage, on: boolean): Promise<void> {
+  await storage.set(KEY_SOUND, on ? "true" : "false");
 }
 
 /** Persist the Gemini key (clears the stored value when empty). */
@@ -43,7 +62,11 @@ export async function setLiveExtrapolation(storage: Storage, on: boolean): Promi
   await storage.set(KEY_LIVE, on ? "true" : "false");
 }
 
-/** Clear all stored settings (key + toggle). */
+/** Clear all stored settings (key + toggles). */
 export async function clearSettings(storage: Storage): Promise<void> {
-  await Promise.all([storage.remove(KEY_GEMINI), storage.remove(KEY_LIVE)]);
+  await Promise.all([
+    storage.remove(KEY_GEMINI),
+    storage.remove(KEY_LIVE),
+    storage.remove(KEY_SOUND),
+  ]);
 }

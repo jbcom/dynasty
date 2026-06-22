@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { Scene } from "../../sim/saga/schema";
+import { playCue } from "../sound";
 
 /**
  * SCENE READER (Narrative Acts model) — renders a scene as a PAGED novel, Suzerain-style: ONE
@@ -65,11 +66,15 @@ function tapPage() {
     urge();
     return;
   }
-  if (!lastPara) paraIdx += 1;
+  if (!lastPara) {
+    paraIdx += 1;
+    playCue("click"); // a soft page-turn
+  }
 }
 
 function chooseBeat(i: number) {
   beatTaken = true;
+  playCue("stinger"); // a choice lands
   onbeat?.(i);
 }
 </script>
@@ -127,6 +132,7 @@ function chooseBeat(i: number) {
           class="inline-option"
           onclick={(e) => {
             e.stopPropagation();
+            playCue("stinger");
             ondecision?.(i);
           }}
         >

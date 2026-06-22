@@ -5,6 +5,7 @@ import {
   loadSettings,
   setGeminiKey,
   setLiveExtrapolation,
+  setSound,
 } from "../settings";
 import { memoryStorage } from "../storage";
 
@@ -36,6 +37,15 @@ describe("FD-12 settings", () => {
     await setGeminiKey(s, "k");
     await setLiveExtrapolation(s, true);
     expect((await loadSettings(s)).liveExtrapolation).toBe(true);
+  });
+
+  it("sound defaults ON and round-trips off/on (PF-15)", async () => {
+    const s = memoryStorage();
+    expect((await loadSettings(s)).sound).toBe(true); // default on (tap-driven, autoplay-safe)
+    await setSound(s, false);
+    expect((await loadSettings(s)).sound).toBe(false);
+    await setSound(s, true);
+    expect((await loadSettings(s)).sound).toBe(true);
   });
 
   it("clearing the key clears it and disables live mode on next load", async () => {
