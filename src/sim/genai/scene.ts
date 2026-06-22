@@ -54,6 +54,11 @@ export function sceneSystemInstruction(): string {
 
 const MOTIVATOR_AXES = "wealth, politics, worldview, power, tradition, honor, lineage, reach";
 
+/** Roman numeral for a reach tier (0→I … 5→VI), for the "Act <N> — …" title prefix. */
+function ROMAN_FOR(tier: number): string {
+  return ["I", "II", "III", "IV", "V", "VI"][tier] ?? "I";
+}
+
 /** Render one scene slot as an instruction block the model fills. */
 function slotBlock(slot: SceneSlot, nextId: string | null): string {
   const lines = [
@@ -80,13 +85,21 @@ export function buildScenePrompt(req: SceneRequest): string {
     .map((s, i) => slotBlock(s, act.scenes[i + 1]?.id ?? null))
     .join("\n");
 
+  // Strip the generic "Act N — " prefix to leave just the register cue (e.g. "The Crossing").
+  const titleCue = act.title.replace(/^Act\s+[IVX]+\s+—\s+/, "");
   return [
     `Flesh this ACT into the novel. The line is a ${req.cls}-class ${req.archetype} family that founded`,
     `the ${req.wave} immigration wave. Reach tier ${req.tier} (${act.macroAct} macro-act).`,
     "",
+    `TITLE: author a DISTINCT, evocative chapter title SPECIFIC to THIS family's story this generation`,
+    `(this is the MESO level — a named chapter, not the macro span). Use "${titleCue}" only as a`,
+    `register/theme cue — do NOT copy it; write a fresh title that could only belong to this ${req.wave}`,
+    `${req.archetype} ${req.cls} line. Keep the "Act ${ROMAN_FOR(req.tier)} — " prefix, e.g.`,
+    `"Act ${ROMAN_FOR(req.tier)} — <your specific chapter title>".`,
+    "",
     `Emit ONE act chapter and ITS scenes:`,
     `acts: [{ id:"${act.id}", wave:"${req.wave}", archetype:"${req.archetype}", cls:"${req.cls}", tier:${req.tier},`,
-    `  macroAct:"${act.macroAct}", title:"${act.title}", scenes:[${act.scenes.map((s) => `"${s.id}"`).join(", ")}] }]`,
+    `  macroAct:"${act.macroAct}", title:"Act ${ROMAN_FOR(req.tier)} — <specific chapter title>", scenes:[${act.scenes.map((s) => `"${s.id}"`).join(", ")}] }]`,
     "",
     `scenes (in this order — each id EXACTLY as given):`,
     slotBlocks,
