@@ -101,9 +101,13 @@ game-scannability with the novel reading experience ([[scannability-game-novel-b
   P2 SceneReader wall + dead gap to continue; P3 News good (reference pattern), Stats empty at founding. ALSO
   live-verified ONB-1 end-to-end (Concetta Bruno, style→surname→gender→given all correct). Un-screenshotted:
   Lineage/Timeline/Choices/Dossier + MeterGauge on a decision scene + mobile layout → UQ-UI-1b pass-2 capture.
-- [ ] **UQ-UI-1b screenshot the remaining views + mobile before reworking.** Capture Lineage/Timeline/Choices/
-  Dossier, the MeterGauge as it renders on a DECISION scene, and the mobile single-column + hamburger panel;
-  read each; fold into the findings doc. (Quick, gates the rework passes.)
+- [x] **UQ-UI-1b screenshot the remaining views — DONE (desktop).** Captured + read Lineage (member cards),
+  Timeline (era cards), Choices (Butterfly Log), Dossier (THE meter HUD), and a DECISION scene. KEY FINDING:
+  the Dossier = icon+bar+value rows is ALREADY the scannable reference pattern; the rework is mostly
+  PROPAGATING it (to Markets "Standing" + bare numbers) + the type-role split, not inventing UI. New findings:
+  emoji meter icons clash (→ CSS glyphs); decision choices read as gold TEXT not tappable affordances;
+  meters are mobile-hidden during a decision. MOBILE single-column capture still blocked (screenshot viewport
+  stayed desktop despite resize) → do it during UQ-UI-2 when verifying mobile.
 - [ ] **UQ-UI-2 rework pass 1: HUD + meters scannability — after UQ-UI-1.** Apply the highest-priority findings
   to the persistent HUD (meters, status, year/era) — hierarchy, grouping, CSS iconography, whitespace, borders.
   Svelte+CSS only. Visual tests + Chrome verify each change before commit.

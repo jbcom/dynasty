@@ -72,10 +72,37 @@ are "--" so it's an empty grid (weak first impression). **Fix:** seed turn-0 dot
 empty-state so it doesn't read as broken. Legend is a text row — fine; could become chips matching the
 series colors.
 
-### Not yet screenshotted (UQ-UI-1b — capture in pass-2 before reworking each)
-Lineage, Timeline, Choices, Dossier tabs; the MeterHud/MeterGauge as it appears on a DECISION scene
-(the founding scene showed no meter gauges — they likely appear on choice/decision beats); the mobile
-single-column layout + the hamburger menu panel. Screenshot + read each before its rework pass.
+### Pass-2 captures (UQ-UI-1b — DONE for desktop; mobile still pending)
+- **Dossier = THE METER HUD, and it's the REFERENCE PATTERN.** Money/Power/Reputation/Loyalty/Health/Heat
+  each = icon + label + horizontal magnitude BAR + value. Instantly scannable. THIS is the pattern the P1
+  fixes should adopt: Markets "Standing" rows and bare market numbers should become icon+bar+value rows
+  like the Dossier. One caveat: the icons are **emoji** (💰🏛️🏆🤝❤️🔥) — not "asset art", but emoji render
+  inconsistently cross-platform and clash with the luxury serif. Replace with CSS-drawn glyphs / a cohesive
+  icon treatment (the tab bar already uses small CSS icons — reuse that language).
+- **Lineage:** card per member ("House of Bruno / Generation 1 / Concetta Bruno b.1885 [YOU]" gold pill).
+  Clean card pattern, scannable; watch density as the tree grows (multi-gen → needs a compact/tree layout).
+- **Timeline:** era cards ("Origins 1885-1946" + dashed "? the road ahead") + "You are in Origins, 1885."
+  Clean, card-based. Good.
+- **Choices = Butterfly Log:** good empty state ("No ripples yet. Your choices will echo here.").
+- **Net:** the app ALREADY has the scannable vocabulary it needs (Dossier bars, News pills, Lineage/Timeline
+  cards). The text-heaviness is localized to (a) Markets "Standing" + bare numbers not using the bar pattern,
+  and (b) italic-serif bleeding into data rows. The rework is mostly PROPAGATING existing good patterns +
+  the type-role split — not inventing new UI.
+- STILL PENDING: the **mobile single-column layout + hamburger panel** (screenshot viewport stayed desktop
+  despite resize). Capture on a real mobile viewport before the rework passes ship.
+
+### P2 — Decision choices read as gold TEXT, not tappable affordances (beat/decision scene)
+On a decision beat the prose is followed by the choice options in gold serif — distinct from the body, but
+full-width lines with no card/border/hover/tap affordance. They look like emphasized prose, not buttons.
+**Fix:** give choices a clear interactive container (border/inset/chevron, the onboarding choice-button
+language already exists — reuse it) so "this is a thing I tap" is unambiguous, especially on touch.
+Bonus finding: beat scenes DO render paragraph rhythm (prose para → gap → choices) — so the SceneReader
+spacing is fine; the P2 "wall" is specific to the opening tap-to-continue scene's single slab + dead gap.
+
+### P2 — On a decision, meters live only in the Dossier tab (mobile blind spot)
+Wide layout shows the Dossier bars beside the scene, so meter context is visible while choosing. Mobile
+hides the panel behind the menu — the player decides blind to Money/Health/Heat. **Fix:** a compact
+always-visible meter strip (the 2-3 most decision-relevant bars) on the decision view at mobile width.
 
 ## Rework sequencing (maps to directive UQ-UI-2..4)
 1. **UQ-UI-2 (HUD + meters):** the type-role split (P2) + Standing rank-pills (P1) + market magnitude
