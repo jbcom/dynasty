@@ -81,8 +81,8 @@ push + PR. See [[one-branch-local-review]].
 - [x] **RB-10 audio↔visual era lockstep — DONE on `feat/era-lockstep-impl` (3 commits).** `src/sim/eras.ts`
   single ERA_BANDS table (chord+ramp per band); chordForEra + rampForEra migrated to read it (old maps
   deleted); agreement-invariant browser test (anti-drift); audio↔visual lockstep via PlayScreen's single
-  currentEraId; `playEndingSting(outcome)` fired onMount in LegacyReport. Full gate green. [WAIT] reviewer
-  trio (running) + the ONE PR.
+  currentEraId; `playEndingSting(outcome)` fired onMount in LegacyReport. Full gate green + reviewer trio
+  folded (code: value-identical migration + sting-drop fix; simplifier ×2). PR #93 OPENED. [WAIT] CI + merge.
 - [ ] **RB-11 portrait depth — class-tier + mood overlay layers — ACTIVE (next, same branch).** composeScene
   already references `portrait/tier/<cls>` + `portrait/mood/<slug>` layers that currently hide-on-error
   (only the base + silhouette art exists). Author the tier(poor/middle) + mood(the dominant-pole slugs the
