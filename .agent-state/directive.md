@@ -83,15 +83,25 @@ push + PR. See [[one-branch-local-review]].
   deleted); agreement-invariant browser test (anti-drift); audio↔visual lockstep via PlayScreen's single
   currentEraId; `playEndingSting(outcome)` fired onMount in LegacyReport. Full gate green + reviewer trio
   folded (code: value-identical migration + sting-drop fix; simplifier ×2). PR #93 OPENED. [WAIT] CI + merge.
-- [ ] **RB-11 portrait depth — class-tier + mood overlay layers — ACTIVE (next, same branch).** composeScene
-  already references `portrait/tier/<cls>` + `portrait/mood/<slug>` layers that currently hide-on-error
-  (only the base + silhouette art exists). Author the tier(poor/middle) + mood(the dominant-pole slugs the
-  game actually produces) SVG overlays so the portrait deepens with class + motivator; license-logged in
-  assets.json + manifest-test the new files + live-verify in Chrome. Same long-running branch.
-- [ ] [WAIT] **RB-12 portrait outcome overlays — the 4 ending-frame overlays.** ONCE RB-11 lands: author
-  `portrait/outcome/{stars,contributed,earthbound,extinguished}` SVG overlays (composeScene's ending variant
-  references them; they hide-on-error today) so the LegacyReport stage shows the line's fate over its face;
-  license-logged + manifest-tested + live-verified. Keeps the queue non-empty ([[never-drain-queue]]).
+- [x] **REVERTED — RB-8 portrait/scene-compositing subsystem removed.** USER (2026-06-22): portraits +
+  procedural art were removed for immersion; UI atmosphere is Svelte + CSS, never asset-compositing layers.
+  RB-8 (#91) rebuilt them on a mandate I INVENTED — wrong. Reverted src/render/** + the 12 SVGs + the
+  3 mount sites; kept RB-10's eras.ts (chord-only) + audio ending sting. RB-11/RB-12 (more portrait art)
+  CANCELLED. See [[no-portraits-no-asset-art]]. NEVER rebuild a removal as my own decision.
+- [ ] **WV-1 weave cross-dynasty intersections INTO the scene prose — ACTIVE.** USER DIRECTIVE
+  (2026-06-22, standing — [[intersections-woven-not-walls]]): today `view.saga.threads` renders as a
+  detached `<aside class="thread">` ("Where paths cross") wall of text dumped under the SceneReader +
+  choices — it "completely throws things off." The POINT of an intersection is to weave another dynasty
+  ORGANICALLY into YOUR dynasty's story. FIX: fold the crossing into the scene the player reads (the ink
+  thread diverts/gathers WITHIN the knot's prose), not a labelled side-block. Likely: SceneReader takes
+  the braided thread(s) and renders the crossing as an integrated paged passage in the prose flow (woven
+  beat), styled as narration, not an aside; drop the `.thread` aside. Pure presentation over the existing
+  BraidedThread (crossing + relation + the rival fragment); browser-test the woven render; live-verify in
+  Chrome. Enumerate the use cases first (a crossing mid-scene vs at a decision; multiple threads).
+- [ ] [WAIT] **WV-2 author bespoke pair crossings (depth pass) — after WV-1's weave lands.** Many crossings
+  fall back to the deterministic `crossingLine(wave,rival)` generic; with weaving in place, author/GenAI
+  pair-specific crossing prose for the common wave pairs so an intersection reads bespoke, not templated.
+  Keeps the queue non-empty ([[never-drain-queue]]); un-WAIT after WV-1.
 - [x] **RB-4 surface interactive convergence — DONE (forward commit).** Added the rival's rung to the
   Glimpse + a ★-per-rung indicator in the "Other lines" strip, so the player sees their crossings move a
   rival's standing. Browser-tested.

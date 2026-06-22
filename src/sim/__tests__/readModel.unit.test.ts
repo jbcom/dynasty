@@ -36,7 +36,6 @@ describe("saga read model (SS-13)", () => {
         relation: "opposing",
         note: "rising",
         rung: 2,
-        archetype: "political",
       },
     ];
     const v = projectSaga({ year: 1900, motivators: mot(), glimpses });

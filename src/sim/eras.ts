@@ -1,61 +1,32 @@
 /**
- * ERA BANDS (RB-10) — the SINGLE source of the saga's era cues. The audio chord (ui/sound.ts) and the
- * visual wash ramp (render/palettes.ts) used to live in two parallel keyword-keyed maps that could
- * silently drift — a new era added to one and forgotten in the other meant the pad and the backdrop
- * disagreed about what era it is. This collapses both into ONE ordered table (origins → stars), keyed
- * on the same era-id keyword families, carrying BOTH cues per band so they can't diverge.
+ * ERA BANDS — the single source of the per-era ambient CHORD (RB-10). `chordForEra` (ui/sound.ts) reads
+ * this one ordered table (origins → stars), keyed on the era-id keyword families, so the pad mood
+ * deepens across the run's arc and a new era is added in exactly one place.
  *
- * Pure sim: no DOM, no audio/render imports, no Date/random. `chord` is plain note strings (no Tone.js
- * type leak), so this stays the dependency floor both the audio and render layers read through.
+ * Pure sim: no DOM, no audio import, no Date/random. `chord` is plain note strings (no Tone.js type
+ * leak), so this stays the dependency floor the audio layer reads through.
+ *
+ * (RB-10 originally also carried a visual `ramp` for an asset-compositing wash; that subsystem was
+ * removed — UI atmosphere is Svelte + CSS, not asset layers — so this is chord-only.)
  */
 
-/** One era band: its id, the era-id keyword family it matches, and both the audio + visual cues. */
+/** One era band: its id, the era-id keyword family it matches, and the ambient pad chord. */
 export interface EraBand {
   /** Stable id (origins, mogul, ascent, interregnum, stars). */
   id: string;
   /** The era-id keyword family — first match wins, ordered origins → stars. */
   match: RegExp;
-  /** Tone.js note names for the ambient pad chord (audio). */
+  /** Tone.js note names for the ambient pad chord. */
   chord: readonly string[];
-  /** The scene-wash vertical gradient (visual): warm origins → cool luminous stars. */
-  ramp: { readonly top: string; readonly bottom: string };
 }
 
-/**
- * The era arc, origins → stars. chord values were `ERA_CHORD` (ui/sound.ts); ramp values were
- * `ERA_RAMP` (render/palettes.ts) — merged here row-for-row (both were keyed on the SAME families).
- */
+/** The era arc, origins → stars (chord mood: rooted/warm early → open/luminous late). */
 export const ERA_BANDS: readonly EraBand[] = [
-  {
-    id: "origins",
-    match: /origins|1885|founding/i,
-    chord: ["C3", "E3", "G3"], // rooted, warm — the immigrant ground
-    ramp: { top: "#2a2018", bottom: "#0f0b07" }, // warm earth
-  },
-  {
-    id: "mogul",
-    match: /mogul|1964|industr/i,
-    chord: ["A2", "C3", "E3", "G3"], // a minor-7 weight as the line climbs
-    ramp: { top: "#23262b", bottom: "#0d0f12" }, // industrial slate
-  },
-  {
-    id: "ascent",
-    match: /brand|primetime|ascent|1988|2004|2015/i,
-    chord: ["D3", "F#3", "A3"], // brighter, striving
-    ramp: { top: "#2e2616", bottom: "#120e06" }, // striving gold
-  },
-  {
-    id: "interregnum",
-    match: /interregnum|mars|2021|2028/i,
-    chord: ["E3", "G#3", "B3", "D#4"], // tense, suspended major-7
-    ramp: { top: "#1f1830", bottom: "#0a0714" }, // tense violet
-  },
-  {
-    id: "stars",
-    match: /contact|interstellar|ascension|stars/i,
-    chord: ["G2", "D3", "A3", "E4"], // open fifths — luminous, vast
-    ramp: { top: "#0f1d2e", bottom: "#040810" }, // open luminous deep
-  },
+  { id: "origins", match: /origins|1885|founding/i, chord: ["C3", "E3", "G3"] }, // rooted, warm
+  { id: "mogul", match: /mogul|1964|industr/i, chord: ["A2", "C3", "E3", "G3"] }, // minor-7 weight
+  { id: "ascent", match: /brand|primetime|ascent|1988|2004|2015/i, chord: ["D3", "F#3", "A3"] }, // striving
+  { id: "interregnum", match: /interregnum|mars|2021|2028/i, chord: ["E3", "G#3", "B3", "D#4"] }, // suspended maj7
+  { id: "stars", match: /contact|interstellar|ascension|stars/i, chord: ["G2", "D3", "A3", "E4"] }, // open fifths
 ];
 
 /** The default band (rooted origins) when an era id matches no family. */

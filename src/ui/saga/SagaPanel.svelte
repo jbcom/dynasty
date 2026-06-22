@@ -1,8 +1,6 @@
 <script lang="ts">
 import type { SagaView } from "../../sim/readModel";
 import RungStars from "./RungStars.svelte";
-import SceneStage from "../../render/SceneStage.svelte";
-import { composeScene } from "../../render/composeScene";
 
 /**
  * SAGA PANEL (Convergence Saga, SS-14) — renders the SS-13 read-model as the novel's running
@@ -21,21 +19,6 @@ const relationIcon: Record<string, string> = {
   contributing: "🤝",
   neutral: "•",
 };
-
-// RB-8: precompute each glimpse's rival-silhouette frame once per view (not per re-render inside the
-// {#each}), so a motivator/year tick doesn't reallocate a SceneFrame for every glimpse. The frame key
-// is stable, so {#key} transitions are unaffected.
-const glimpseFrames = $derived(
-  view.glimpses.map((g) => ({
-    g,
-    frame: composeScene({
-      variant: "rival" as const,
-      archetype: g.archetype,
-      cls: "poor" as const,
-      eraId: view.macroActTitle,
-    }),
-  })),
-);
 </script>
 
 <section class="saga" data-macro-act={view.macroAct}>
@@ -60,12 +43,8 @@ const glimpseFrames = $derived(
   {#if view.glimpses.length}
     <div class="glimpses" data-testid="glimpses">
       <span class="glimpses-title">Other lines</span>
-      {#each glimpseFrames as { g, frame } (g.rivalId)}
+      {#each view.glimpses as g (g.rivalId)}
         <span class="glimpse" data-relation={g.relation}>
-          <!-- RB-8: a small archetype SILHOUETTE vignette so the other line reads as a person, not a row. -->
-          <span class="glimpse-vignette" aria-hidden="true">
-            <SceneStage {frame} />
-          </span>
           <span class="rel-icon" aria-hidden="true">{relationIcon[g.relation] ?? "•"}</span>
           {g.label} — {g.note}
           <!-- The rival's rung: your crossings move it (opposing suppresses, contributing lifts) — RB-4. -->
@@ -147,18 +126,6 @@ const glimpseFrames = $derived(
   .glimpse {
     font-size: 0.85rem;
     color: var(--mmm-text);
-  }
-  /* RB-8: a small inline vignette box that contains the rival's absolutely-positioned silhouette. */
-  .glimpse-vignette {
-    position: relative;
-    display: inline-block;
-    width: 1.6rem;
-    height: 1.6rem;
-    vertical-align: middle;
-    margin-right: 0.35rem;
-    border-radius: 50%;
-    overflow: hidden;
-    opacity: 0.7;
   }
   .glimpse[data-relation="opposing"] .rel-icon {
     color: #c0504d;

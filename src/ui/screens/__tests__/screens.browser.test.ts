@@ -78,27 +78,6 @@ describe("LegacyReport", () => {
     expect(host.textContent).toContain("Play Again");
   });
 
-  it("mounts the RB-8 ending-variant stage (portrait + final-era wash) behind the report", () => {
-    const state = {
-      ...initState(content, "seed"),
-      end: { kind: "victory" as const, year: 2080, reason: "Immortal patriarch." },
-    };
-    component = mount(LegacyReport, {
-      target: host,
-      props: {
-        content,
-        state,
-        end: state.end,
-        convergence: { id: "stars_test", destination: "stars", title: "Among the stars", gate: {} },
-        onRestart: () => {},
-      },
-    });
-    // The ending stage renders with the final-era wash and an outcome overlay layer.
-    expect(host.querySelector('[data-testid="scene-stage"]')).not.toBeNull();
-    expect(host.querySelector('[data-testid="scene-wash"]')).not.toBeNull();
-    expect(host.querySelector('.layer[data-role="outcome"]')).not.toBeNull();
-  });
-
   it("shows the butterfly chain that led to the end", () => {
     let s = initState(content, "seed");
     const born = content.allEvents.find((e) => e.id === "ev_born");
