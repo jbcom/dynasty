@@ -49,14 +49,18 @@ export function scenePassSystem(): string {
   ].join("\n");
 }
 
-/** Build the scene-polish prompt: the scene + its act's register cues (title/macroAct). */
+/** Build the scene-polish prompt: the scene + its act's register cues (title/macroAct) + the cell's brief. */
 export function buildScenePassPrompt(
   scene: Scene,
   act: Pick<ActChapter, "title" | "macroAct">,
+  /** Optional bespoke (era×class + wave) brief — the same guidance that drove generation, so QA holds the
+   *  edited prose to the SAME era's qaLookFor/qaReject + this people's real history (UQ-2). */
+  guidance?: string,
 ): string {
   return [
     `This scene belongs to the chapter "${act.title}" (${act.macroAct} macro-act).`,
     `Revise it. Keep every id/sense/next/beat/decision exactly; lift only the words.`,
+    ...(guidance ? ["", guidance] : []),
     "",
     `SCENE JSON:`,
     JSON.stringify(scene),
@@ -105,11 +109,14 @@ export function lineagePassSystem(): string {
   ].join("\n");
 }
 
-/** Build the lineage prompt from the lean surface of the family's chain. */
-export function buildLineagePassPrompt(surface: LineageSurface): string {
+/** Build the lineage prompt from the lean surface of the family's chain (+ optional wave-history brief). */
+export function buildLineagePassPrompt(surface: LineageSurface, guidance?: string): string {
   return [
     `A ${surface.cls}-class ${surface.archetype} family of the ${surface.wave} wave, six generations.`,
     `Audit the chain for cross-tier continuity breaks only.`,
+    // The wave's real history/arc/braid-affinity (UQ-2): a "premise" break includes drifting OFF this
+    // people's documented historical trajectory, not just internal contradiction.
+    ...(guidance ? ["", guidance] : []),
     "",
     `CHAIN SPINE JSON:`,
     JSON.stringify(surface),

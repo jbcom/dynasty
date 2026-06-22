@@ -5,8 +5,10 @@ import { expand } from "../expand";
 import {
   buildScenePrompt,
   buildTitlePrompt,
+  lineagePassBrief,
   mergeSceneFile,
   normalizeTitle,
+  scenePassBrief,
   validateSceneFile,
 } from "../scene";
 
@@ -225,5 +227,28 @@ describe("act retitle (distinct meso chapter titles)", () => {
     expect(normalizeTitle("   ", 0, "The Crossing").ok).toBe(false);
     expect(normalizeTitle("The Trump Ascendancy", 0, "The Crossing").ok).toBe(false);
     expect(normalizeTitle("The Crossing", 0, "The Crossing").ok).toBe(false); // echoed cue
+  });
+});
+
+describe("QA guidance briefs (UQ-2) — fed from the corrected guidance.json", () => {
+  it("scenePassBrief carries the era's qaLookFor/qaReject + the wave's myth-flags", () => {
+    const brief = scenePassBrief("ireland", 0, "poor");
+    expect(brief).toMatch(/THIS ERA MUST HAVE/);
+    expect(brief).toMatch(/THIS ERA MUST NOT/);
+    expect(brief).toMatch(/DO NOT INTRODUCE THESE MYTHS/);
+    // Real corrected content: the Irish myth-flags name the exaggerated placard.
+    expect(brief).toMatch(/No Irish Need Apply/i);
+  });
+  it("lineagePassBrief carries the wave's documented history/arc/braid + myths", () => {
+    const brief = lineagePassBrief("italian");
+    expect(brief).toMatch(/HISTORY:/);
+    expect(brief).toMatch(/ARC \(arrival/);
+    expect(brief).toMatch(/WHO THEY PLAUSIBLY CROSS/);
+    // Real corrected content: the Italian Commission was established 1931, not the immigrant era.
+    expect(brief).toMatch(/1931/);
+  });
+  it("returns an empty brief for an unknown wave (pass runs guidance-free)", () => {
+    expect(lineagePassBrief("atlantis")).toBe("");
+    expect(scenePassBrief("atlantis", 99, "poor")).toBe("");
   });
 });

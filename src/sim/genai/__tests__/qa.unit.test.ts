@@ -52,6 +52,16 @@ describe("scene-polish pass", () => {
     expect(p).toMatch(/convergence/);
     expect(p).toContain(scene.id);
   });
+  it("injects the optional era×wave brief (UQ-2) when given, omits it otherwise", () => {
+    const act = { title: "Act I — X", macroAct: "convergence" } as const;
+    const brief =
+      "THIS ERA MUST HAVE: tenement squalor\nDO NOT INTRODUCE THESE MYTHS: liberty cabbage";
+    const withBrief = buildScenePassPrompt(scene, act, brief);
+    expect(withBrief).toContain("tenement squalor");
+    expect(withBrief).toContain("liberty cabbage");
+    // Without a brief, no guidance lines leak in.
+    expect(buildScenePassPrompt(scene, act)).not.toContain("MUST HAVE");
+  });
 });
 
 describe("lineage pass", () => {
@@ -71,6 +81,17 @@ describe("lineage pass", () => {
     const p = buildLineagePassPrompt(surface);
     expect(p).toMatch(/six generations/);
     expect(p).toContain("ireland");
+  });
+  it("injects the optional wave-history brief (UQ-2) when given", () => {
+    const surface: LineageSurface = {
+      wave: "ireland",
+      archetype: "economic",
+      cls: "poor",
+      acts: [],
+    };
+    const brief = "HISTORY: Great Famine refugee flight";
+    expect(buildLineagePassPrompt(surface, brief)).toContain("Great Famine refugee flight");
+    expect(buildLineagePassPrompt(surface)).not.toContain("HISTORY:");
   });
 });
 

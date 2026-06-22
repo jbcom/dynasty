@@ -30,10 +30,13 @@ interface EraGuidance {
 /** A bespoke per-WAVE/people brief — real history + motivations that make each line + its crossings unique. */
 interface WaveGuidance {
   history: string;
+  arc: string;
   motivations: string;
   trades: string;
   obstacles: string;
+  crime: string;
   braidAffinity: string;
+  mythFlags: string;
 }
 const G = guidanceData as {
   eras: Record<string, EraGuidance>;
@@ -50,6 +53,48 @@ export function eraGuidanceFor(tier: number, cls: Rung): EraGuidance | undefined
 /** The bespoke WAVE/people brief — real history + motivations + braid affinity (drives uniqueness + genuine crossings). */
 export function waveGuidanceFor(wave: string): WaveGuidance | undefined {
   return G.waves[wave];
+}
+
+/**
+ * UQ-2: the brief the SCENE QA pass injects — the same era×class qaLookFor/qaReject + this people's
+ * myth-flags that drove generation, so the editor holds the revised prose to the SAME bar. Empty string
+ * when neither key is authored (the pass then runs guidance-free, as before).
+ */
+export function scenePassBrief(wave: string, tier: number, cls: Rung): string {
+  const era = eraGuidanceFor(tier, cls);
+  const w = waveGuidanceFor(wave);
+  const lines: string[] = [];
+  if (era) {
+    lines.push(
+      "HOLD THIS SCENE TO ITS ERA BRIEF (the same one that drove its generation):",
+      `- THIS ERA MUST HAVE: ${era.qaLookFor}`,
+      `- THIS ERA MUST NOT: ${era.qaReject}`,
+      `- SCANNABILITY: ${era.scannability}`,
+    );
+  }
+  if (w) {
+    lines.push(
+      `THIS PEOPLE (${wave}) — keep the prose true to their real history:`,
+      `- HISTORICAL ACCURACY — DO NOT INTRODUCE THESE MYTHS: ${w.mythFlags}`,
+    );
+  }
+  return lines.join("\n");
+}
+
+/**
+ * UQ-2: the brief the LINEAGE QA pass injects — this people's documented arc/history/braid-affinity, so a
+ * "premise" break includes drifting OFF the real historical trajectory, not only internal contradiction.
+ */
+export function lineagePassBrief(wave: string): string {
+  const w = waveGuidanceFor(wave);
+  if (!w) return "";
+  return [
+    `THIS PEOPLE — the ${wave} wave's documented trajectory (a chain that contradicts this is a premise break):`,
+    `- HISTORY: ${w.history}`,
+    `- ARC (arrival → convergence → future): ${w.arc}`,
+    `- WHO THEY PLAUSIBLY CROSS: ${w.braidAffinity}`,
+    `- MYTHS TO AVOID: ${w.mythFlags}`,
+  ].join("\n");
 }
 
 /** A scene-generation request: which cell + tier's act to flesh. */
@@ -131,10 +176,13 @@ export function buildScenePrompt(req: SceneRequest): string {
         "",
         `THIS PEOPLE — the ${req.wave} wave (ground every scene in THEIR real history, not generic immigrant beats):`,
         `- HISTORY: ${wave.history}`,
+        `- ARC (arrival → convergence → future): ${wave.arc}`,
         `- MOTIVATIONS: ${wave.motivations}`,
         `- TRADES: ${wave.trades}`,
         `- OBSTACLES: ${wave.obstacles}`,
+        `- CRIME (only if true for this people — never invent a crime arc): ${wave.crime}`,
         `- WHO THEY CROSS (for any intersection): ${wave.braidAffinity}`,
+        `- HISTORICAL ACCURACY — DO NOT REPEAT THESE MYTHS: ${wave.mythFlags}`,
       ].join("\n")
     : "";
   const eraBrief = era

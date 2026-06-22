@@ -22,7 +22,13 @@
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { DEFAULT_QA_MODEL, geminiGenerate, parseGeneratedObject } from "../src/sim/genai/client";
-import { normalizeSceneFile, validateSceneFile, type SceneRequest } from "../src/sim/genai/scene";
+import {
+  lineagePassBrief,
+  normalizeSceneFile,
+  scenePassBrief,
+  type SceneRequest,
+  validateSceneFile,
+} from "../src/sim/genai/scene";
 import {
   applyBraid,
   applySlots,
@@ -173,20 +179,23 @@ async function passScene(ref: ActFileRef, gen: Generate): Promise<void> {
     file.acts.find((a) => a.scenes.includes(sid)) ?? file.acts[0] ?? FALLBACK_ACT;
   // Revise scenes concurrently within the file. Each revision is validated as an INDIVIDUAL scene
   // (so one bad scene can't sink the file), with one retry; on failure the original is kept.
-  const revised = await Promise.all(file.scenes.map((scene) => reviseScene(scene, actForScene(scene.id), gen, label)));
+  const revised = await Promise.all(file.scenes.map((scene) => reviseScene(ref, scene, actForScene(scene.id), gen, label)));
   file.scenes = revised;
   writeIfValid(ref, file, label);
 }
 
 /** Revise one scene (≤2 attempts); return a schema-valid revision or the untouched original. */
 async function reviseScene(
+  ref: ActFileRef,
   scene: Scene,
   act: SagaFileShape["acts"][number],
   gen: Generate,
   label: string,
 ): Promise<Scene> {
+  // UQ-2: hold the edit to the SAME era×class brief + this people's myth-flags that drove generation.
+  const brief = scenePassBrief(ref.wave, act.tier, ref.cls);
   for (let attempt = 0; attempt < 2; attempt++) {
-    const raw = await call(gen, scenePassSystem(), buildScenePassPrompt(scene, act), `${label}:${scene.id}`);
+    const raw = await call(gen, scenePassSystem(), buildScenePassPrompt(scene, act, brief), `${label}:${scene.id}`);
     if (!raw) return scene;
     const obj = parseGeneratedObject(raw);
     if (!obj) continue;
@@ -240,7 +249,10 @@ async function passLineage(ref: ActFileRef, gen: Generate): Promise<void> {
   const label = `lineage ${ref.wave}/${ref.archetype}.${ref.cls}`;
   const file = readFile(ref);
   if (!file) return;
-  const raw = await call(gen, lineagePassSystem(), buildLineagePassPrompt(lineageSurface(ref, file)), label);
+  // UQ-2: a "premise" break includes drifting OFF this people's documented historical arc, not only
+  // internal contradiction — feed the wave brief so the continuity editor measures against real history.
+  const waveBrief = lineagePassBrief(ref.wave);
+  const raw = await call(gen, lineagePassSystem(), buildLineagePassPrompt(lineageSurface(ref, file), waveBrief), label);
   if (!raw) return;
   const obj = parseGeneratedObject(raw) as { breaks?: Array<{ actId: string; sceneId: string; kind: string; detail: string; fix: string }> } | null;
   const breaks = obj?.breaks ?? [];
@@ -258,7 +270,8 @@ async function passLineage(ref: ActFileRef, gen: Generate): Promise<void> {
       continue;
     }
     const act = file.acts.find((a) => a.scenes.includes(scene.id)) ?? file.acts[0] ?? FALLBACK_ACT;
-    const fixPrompt = `${buildScenePassPrompt(scene, act)}\n\nCONTINUITY FIX REQUIRED (${br.kind}): ${br.detail}\nApply this fix: ${br.fix}`;
+    const sceneBrief = scenePassBrief(ref.wave, act.tier, ref.cls);
+    const fixPrompt = `${buildScenePassPrompt(scene, act, sceneBrief)}\n\nCONTINUITY FIX REQUIRED (${br.kind}): ${br.detail}\nApply this fix: ${br.fix}`;
     const fixRaw = await call(gen, scenePassSystem(), fixPrompt, `${label}:${br.sceneId}`);
     if (!fixRaw) continue;
     const fixed = parseGeneratedObject(fixRaw) as Scene | null;
