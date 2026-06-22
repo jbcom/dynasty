@@ -103,10 +103,11 @@ push + PR. See [[one-branch-local-review]].
   dispatch. Full gate green (678 unit, 92 browser, 7 e2e). Reviewer trio folded (code: replay-safe option
   sort + vignette-required source + all-scenes sources; purity/determinism confirmed; simplifier clean).
   PR #98 OPENED. [WAIT] CI + merge.
-- [ ] **WV-2b ACTIVATE the weave — IN PROGRESS on `feat/activate-braid`.** #98 merged. SCOPED first: a
-  `--pass slot` dry-run on ireland/poor is running (validate the GenAI tags), then a scoped `--write` to tag
-  a wave or two so a crossing demonstrably fires, then live-verify in Chrome. A full-corpus tag follows
-  once the scoped run reads well. Keeps the queue non-empty ([[never-drain-queue]]).
+- [ ] [WAIT] **WV-2b ACTIVATE the weave — `feat/activate-braid`; awaiting the GenAI dry-run.** #98 merged.
+  A scoped `--pass slot` dry-run on ireland/poor is RUNNING in background (validate the GenAI tags). ON its
+  completion: evaluate the tags, run a scoped `--write` to tag a wave or two so a crossing demonstrably
+  fires, then live-verify in Chrome. A full-corpus tag follows once the scoped run reads well. [WAIT] the
+  background GenAI run (external; notifies on exit).
 - [ ] [WAIT] **WV-3 emergent variability systems (anti-Suzerain) — after WV-2.** Seeded market/disease
   variability + Yuka rival reactions so playthroughs diverge; budget magnitudes more content
   ([[emergent-cause-effect-sim]]). Keeps the queue non-empty; un-WAIT after WV-2.
