@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
+import { loadContent } from "../../data/loadContent";
 import { buildContent } from "../content";
 import { applyChoice, autoPlaythrough, replay } from "../effects";
+import { foundByComposition } from "../founding";
+import { dealComposition } from "../places";
 import { createRng } from "../rng";
 import type { GameEvent } from "../schema";
 import { initState } from "../state";
@@ -160,5 +163,34 @@ describe("market operations (SIM1 nb-006)", () => {
     const after = applyChoice(c, before, event, choice.id, createRng("m")).state;
     expect(after.markets.nyc_housing?.holding).toBe(500000);
     expect(after.markets.nyc_housing?.leverage).toBe(4);
+  });
+});
+
+describe("life-stage beget normalizes the birth year (NA-11 regression guard)", () => {
+  // The succession beats (ev_cp_take_partner=1908, ev_cp_raise_heirs=1912) carry an authored
+  // origins-era year. They fire EVERY generation, so applyChoice must normalize their year to NOW —
+  // else begetYear() stamps each new generation's children decades in the past, they age out
+  // instantly, and the line goes extinct within a generation (the millennium-run regression).
+  it("a life-stage beget stamps children with the CURRENT year, not the authored 1912", () => {
+    const content = loadContent();
+    const comp = dealComposition(content.places, content.eras, "2", "Calloway");
+    let state = foundByComposition(content, comp).state;
+    // Fast-forward the run clock well past the authored 1908/1912 of the succession beats.
+    state = {
+      ...state,
+      year: 1978,
+      age: 1978 - state.birthYear,
+      lastEventYear: 1978,
+      flags: state.flags.filter((f) => f !== "raised_heirs").concat("partnered"),
+    };
+    const heirsEv = content.lifeStageEvents.find((e) => e.id === "ev_cp_raise_heirs");
+    if (!heirsEv) throw new Error("no ev_cp_raise_heirs in lifeStageEvents");
+    const before = state.family?.members ?? [];
+    const next = applyChoice(content, state, heirsEv, "careful_pair", createRng("2")).state;
+    const newKids = (next.family?.members ?? []).filter(
+      (m) => !before.some((o) => o.id === m.id),
+    );
+    expect(newKids.length).toBeGreaterThan(0);
+    for (const k of newKids) expect(k.born, `child ${k.id} born`).toBeGreaterThanOrEqual(1978);
   });
 });

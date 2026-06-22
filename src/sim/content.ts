@@ -57,22 +57,13 @@ export interface Content {
   eventsByEra: Map<string, GameEvent[]>;
   allEvents: GameEvent[];
   /**
-   * EPOCH-0 beats (tag `epoch0`) — the diegetic birth + partner + heirs life-stage
-   * events that must fire at the START of EVERY run regardless of the founding era
-   * (a baghdad/caliphate line needs to be born, partner, and beget just like a
-   * new-york/origins line, or it goes extinct in one generation — EX-5). Gated by
-   * the line's own state flags, not by an era, so the eligibility pass injects them
-   * into whatever era the run begins in.
+   * LIFE-STAGE beats (tag `life-stage`) — the partner + heirs SUCCESSION mechanics that must fire
+   * each generation regardless of era (a line takes a partner and begets, or it goes extinct in one
+   * generation — EX-5). Gated by the line's own state flags, not by an era. These are the mechanics
+   * that SURVIVED the Epoch-0 retirement (NA-11): the rejected birth/naming/station/schooling/calling
+   * NARRATIVE is gone (the saga acts are the played story now); only the succession beats remain.
    */
-  epoch0Events: GameEvent[];
-  /**
-   * OB-5: the set of place ids that ship their OWN authored Epoch-0 birth beat
-   * (an `epoch0` event gated to `place:<id>` whose choice sets `emerged`). The
-   * founding stamps `has_authored_epoch0` for these places so the place-agnostic
-   * generic beats (`ev_birth_generic` / `ev_birth_calling`) self-exclude with a
-   * single flag — no per-place `notFlags` list to maintain as each Epoch-0 lands.
-   */
-  authoredEpoch0Places: Set<string>;
+  lifeStageEvents: GameEvent[];
   butterflyRules: ButterflyRule[];
   consequences: Consequence[];
   endings: Ending[];
@@ -164,23 +155,6 @@ export interface RawContent {
   startMoments?: unknown;
   worldStacks?: unknown;
   places?: unknown;
-}
-
-/**
- * OB-5: derive the places that ship an authored Epoch-0 BIRTH beat — an `epoch0`
- * event gated to a single `place:<id>` whose choice sets `emerged` (the opener
- * that begins that line's own written story). These places get `has_authored_epoch0`
- * stamped at founding so the place-agnostic generic beats self-exclude via one flag.
- */
-function deriveAuthoredEpoch0Places(events: GameEvent[]): Set<string> {
-  const places = new Set<string>();
-  for (const e of events) {
-    // tags/choices are required schema fields, but stay defensive against
-    // partially-constructed events passed in test contexts.
-    if (!e.place || !e.tags?.includes("epoch0")) continue;
-    if (e.choices?.some((c) => c.setFlags?.includes("emerged"))) places.add(e.place);
-  }
-  return places;
 }
 
 /** Validate raw JSON into a Content bundle, cross-checking referential integrity. */
@@ -402,8 +376,7 @@ export function buildContent(raw: RawContent): Content {
     eras,
     eventsByEra,
     allEvents,
-    epoch0Events: allEvents.filter((e) => e.tags.includes("epoch0")),
-    authoredEpoch0Places: deriveAuthoredEpoch0Places(allEvents),
+    lifeStageEvents: allEvents.filter((e) => e.tags.includes("life-stage")),
     butterflyRules: butterfly.rules,
     consequences: butterfly.consequences,
     endings: endingsFile.endings,
