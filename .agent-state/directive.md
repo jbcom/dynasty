@@ -91,7 +91,8 @@ push + PR. See [[one-branch-local-review]].
 - [x] **WV-1 weave intersections INTO the prose — DONE → PR #96.** SceneReader folds each crossing into
   its paged prose (woven narration page, CSS mark, no aside); curated INTERSECTION_POINTS replaced the
   auto-spray. Reviewer trio + CodeRabbit folded. ([[intersections-woven-not-walls]])
-- [x] **WV-2 braid SLOTS + bias-weighted weaving — DONE → PR #98 ([WAIT] CI + merge).** On `feat/braid-slots`.
+- [x] **WV-2 braid SLOTS + bias-weighted weaving — MERGED (#98 → ebb613f).** Perf fixes folded (memoized
+  source index for the hot view getter; dedup'd lookups; O(N) splice). On `feat/braid-slots`.
   ([[braid-slots-genai-architecture]] + [[emergent-cause-effect-sim]]). DONE: step 1 BraidSlot schema; step 2
   `braidSelect.ts` pure seeded selector (era-gated, place×archetype×class bias, seeded fire-gate + weighted
   pick, BORROWS the partner's source vignette — no bespoke per-pair writing; deterministic); step 3a
@@ -102,9 +103,10 @@ push + PR. See [[one-branch-local-review]].
   dispatch. Full gate green (678 unit, 92 browser, 7 e2e). Reviewer trio folded (code: replay-safe option
   sort + vignette-required source + all-scenes sources; purity/determinism confirmed; simplifier clean).
   PR #98 OPENED. [WAIT] CI + merge.
-- [ ] [WAIT] **WV-2b ACTIVATE the weave — after #98 merges.** Run `pnpm genai:qa --pass slot --write` to
-  tag the corpus's scenes with braid slots (or author a seed set on a few real scenes), then live-verify in
-  Chrome that a crossing weaves a real rival's borrowed copy into a played scene. Keeps the queue non-empty.
+- [ ] **WV-2b ACTIVATE the weave — IN PROGRESS on `feat/activate-braid`.** #98 merged. SCOPED first: a
+  `--pass slot` dry-run on ireland/poor is running (validate the GenAI tags), then a scoped `--write` to tag
+  a wave or two so a crossing demonstrably fires, then live-verify in Chrome. A full-corpus tag follows
+  once the scoped run reads well. Keeps the queue non-empty ([[never-drain-queue]]).
 - [ ] [WAIT] **WV-3 emergent variability systems (anti-Suzerain) — after WV-2.** Seeded market/disease
   variability + Yuka rival reactions so playthroughs diverge; budget magnitudes more content
   ([[emergent-cause-effect-sim]]). Keeps the queue non-empty; un-WAIT after WV-2.
