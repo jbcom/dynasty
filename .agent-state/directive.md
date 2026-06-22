@@ -289,8 +289,9 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   QA-lifted sensory steerage prose → paged reader advances → inline GLOWING options fold into the story →
   slide-out "THE LINE" menu (8 motivators, OTHER LINES glimpses, codex, meters, personality) → multi-gen
   play → convergence-aware LegacyReport ("Toppled", muddled middle, House of Romano stats). All PF
-  surfaces confirmed working with the QA'd corpus. REMAINING: push feat/saga-polish + open the ONE PR;
-  green CI; resolve threads; squash-merge; keep post-merge CD/Release green.
+  surfaces confirmed working with the QA'd corpus. PR #70 OPENED (jbcom/dynasty, feat/saga-polish → main).
+  [WAIT] CI running (build-and-test + Analyze/CodeQL; CodeRabbit already passed). ON GREEN: address any
+  threads, resolve, squash-merge; keep post-merge CD/Release green.
 
 ### DEEPER GAP AUDIT (2026-06-22, round 2) — more partial/unwired surfaces, do contiguously
 
