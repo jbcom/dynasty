@@ -14,7 +14,9 @@ import {
 import { advanceFamily, applyChoice, applySuccessionToFamily } from "../sim/effects";
 import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
-import { actsForTier } from "../sim/saga/player";
+import { candidatesFromSnapshots, type RivalLike, selectBraid } from "../sim/saga/braidSelect";
+import { actsForTier, openingScene, resolveThreads } from "../sim/saga/player";
+import type { BraidSlot } from "../sim/saga/schema";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
 import { type GameState, initState, isMemberAlive, type LedgerEntry } from "../sim/state";
@@ -170,16 +172,61 @@ export class Game {
   }
 
   get view(): GameView {
+    const frame = this.saga.frame();
+    // WV-2: fold any EMERGENT cross-dynasty crossing into the frame's threads (additive to corpus
+    // threads). Bias-weighted, era-gated, seeded — borrows a rival's authored vignette at a destination
+    // slot in the current scene. Deterministic per (scene, year, seed) so replay is identical.
+    const emergent = this.emergentThreads(frame.scene);
     return {
       state: this.state,
       currentEvent: this.current,
-      saga: this.saga.frame(),
+      saga: emergent.length ? { ...frame, threads: [...frame.threads, ...emergent] } : frame,
       glimpses: this.currentGlimpses(),
       rivalStandings: this.rivalStandings(),
       rung: this.playerRung(),
       convergence: this.convergenceEnding(),
       lastLedger: this.lastLedger,
     };
+  }
+
+  /**
+   * WV-2 emergent braid: for the current scene's DESTINATION slots, build candidates from the live rival
+   * world (era-eligible, place/archetype-biased), run the seeded selector, and resolve the chosen
+   * ThreadRef into a BraidedThread the SceneReader weaves into the prose. Returns [] when the scene has
+   * no destination slots, there's no world, or the seeded roll declines. Pure given (scene, world, year,
+   * seed); the rng fork is keyed on the scene id + year so it's stable across re-renders + replay.
+   */
+  private emergentThreads(scene: SagaFrame["scene"]): ReturnType<typeof resolveThreads> {
+    if (!scene || !this.world) return [];
+    const destinations = scene.braidSlots.filter((s) => s.kind === "destination");
+    if (destinations.length === 0) return [];
+    const wave = this.state.founding?.place;
+    if (!wave) return [];
+    const tier = this.playerRung();
+    const cls = sagaClassForWealth(this.state.personality.wealth);
+    // Each rival's borrowable source slots: the opening scene of its act at this tier (any archetype).
+    const sourcesFor = (rival: RivalLike): readonly BraidSlot[] => {
+      for (const act of this.saga.corpus.acts.values()) {
+        if (act.wave !== rival.id || act.tier !== tier) continue;
+        const open = openingScene(this.saga.corpus, act, new Set());
+        if (open) return open.braidSlots.filter((s) => s.kind === "source");
+      }
+      return [];
+    };
+    const candidates = candidatesFromSnapshots(
+      this.world.snapshots,
+      { placeId: wave, archetype: this.state.archetype, cls, tier },
+      strategyForArchetype(this.state.archetype),
+      sourcesFor,
+    );
+    const match = selectBraid(
+      { year: this.state.year, tier, destinations, baseChance: 0.45 },
+      candidates,
+      this.rng.fork(`braid:${scene.id}:${this.state.year}`),
+    );
+    if (!match) return [];
+    // Resolve the emergent ThreadRef the same way corpus threads resolve (rival's opening fragment).
+    return resolveThreads(this.saga.corpus, { ...scene, thread: [match.thread] });
   }
 
   /** Advance the rival world to the run's current year (deterministic). Called when the clock moves. */
