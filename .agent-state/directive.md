@@ -37,17 +37,27 @@ surface-unique (2520/2520 distinct first lines) but the ARCHITECTURE is template
 spine GENERATOR stamps one skeleton 504× ([[craft-spines-not-generator]]). This drives all three:
 uniqueness ([[uniqueness-genuine-intersections]]), scannability ([[scannability-game-novel-balance]]),
 and genuine intersections.
-- [ ] **UQ-1 spine-variety architecture — ACTIVE.** Replace the one-template spine generator with a SET
-  of distinct spine SHAPES (rise / collapse / holding / reinvention arcs — different scene counts, beat/
-  decision rhythms) selected per (archetype × tier × arc), so regenerated acts are structurally DIVERSE.
-  Design first (enumerate the arc shapes + which cells get which); then the generator picks/varies; then
-  per-act-type GenAI prompting (different instructions per arc, prompting for SCANNABLE rhythm — varied
-  density + whitespace, not uniform dense blocks, but never thinned to a couple of lines). Deterministic
-  (seeded). This is a content-architecture overhaul — design → small proof on a few cells → roll out.
-- [ ] [WAIT] **UQ-2 deep uniqueness + genuine-intersection AUDIT (parallel readers) — after UQ-1's proof.**
-  Large-context/parallel-reader pass: sample acts across cells for SEMANTIC sameness (same arc in different
-  words) + check braid pairings read genuine/organic (right lines, plausible meeting, borrowed copy fits).
-  Feed fixes to the QA passes. Standing gate — re-run after any regeneration. ([[uniqueness-genuine-intersections]])
+- [x] **UQ-1 spine + guidance ARCHITECTURE — BUILT (DRAFT guidance).** spine.ts: 6 arc shapes
+  (rise/collapse/holding/reinvention/rivalry/windfall), per-cell selection, open+succession-close invariant.
+  `guidance.json`: bespoke (era×class) briefs (arc/tone/rhythm/scannability + qaLookFor/qaReject) + per-WAVE
+  history/motivations/trades/obstacles/braidAffinity with full-timeline arc (arrival→convergence→future),
+  injected into buildScenePrompt. tsc 0, 680 tests. NOTE: arc-hash + guidance coexist (shapes=structural
+  variety, guidance=creative/historical) — reconcile if redundant.
+- [ ] **UQ-1b RESEARCH the guidance (don't ship from memory) — ACTIVE.** ([[research-not-memory]]) The
+  guidance.json wave histories are a from-MEMORY draft. Research each people online (real immigration history
+  per era, trades, obstacles, the genuine inter-group CONTACTS that justify braid affinities, the full
+  arrival→20th-c-convergence→21st-c+ arc) + the crime axis below; ground it (ctx_fetch_and_index/web),
+  correct the JSON. This is the gate before any corpus-wide regenerate. Verify, don't transcribe the user's framing.
+- [ ] [WAIT] **UQ-2 wire guidance into the QA passes + AUTO-CORRECT the existing corpus — after UQ-1b.**
+  ([[uniqueness-genuine-intersections]]) Make the scene/lineage QA passes carry the era×wave guidance +
+  qaReject criteria, then COMMIT clean and run `genai:qa --pass scene/lineage --write` against the EXISTING
+  acts so it self-corrects toward uniqueness/scannability/genuine-crossings/era-accuracy. Workflow: commit →
+  --write run → review git diff (the test) → keep or `git reset --hard` (no dry-run). Then the large-context
+  parallel-reader audit for residual SEMANTIC sameness + genuine intersections.
+- [ ] [WAIT] **UQ-3 CRIME power axis — net-new fiction, after UQ-2.** ([[crime-power-axis]]) Add organized
+  crime as a 7th archetype/power base (Italian/Irish/Chinese crime families — RESEARCHED, not assumed),
+  its GOAP strategy, per-wave crime guidance, crossings with legitimate lines, and a dictatorial
+  "crime planet" convergence ending. A milestone; design → build → generate.
 
 - [x] **RB-2 per-tier content depth — DONE.** Audit showed prose depth already uniform (every scene
   2-4 paras); only 2 under-generated cells had <2 beats — regenerated to the full weave (0 thin-beat).
