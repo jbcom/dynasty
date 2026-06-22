@@ -183,6 +183,21 @@ export class Game {
   }
 
   /**
+   * Union the saga act's accumulated flags into the run's state.flags (PF-14), so a saga choice's
+   * setFlags actually shape the run — gating events, feeding the butterfly ledger, persisting + being
+   * inspectable — instead of being sealed inside the driver. Deterministic (set-union, stable order).
+   */
+  private syncSagaFlags(): void {
+    const existing = new Set(this.state.flags);
+    // Append only the genuinely-new saga flags, in their accumulation order — preserves the existing
+    // flag order (and thus any order-sensitive replay) while adding the saga choices' marks.
+    const fresh = this.saga.flags.filter((f) => !existing.has(f));
+    if (fresh.length > 0) {
+      this.state = { ...this.state, flags: [...this.state.flags, ...fresh] };
+    }
+  }
+
+  /**
    * Reading the novel passes in-world time: each saga choice ticks the timeline one step (years
    * advance, eras roll, the run can reach an end) so the run progresses toward its conclusion even
    * while the played surface is the novel rather than the event flow. Then, if the act has ended,
@@ -219,6 +234,7 @@ export class Game {
   /** Apply a weave-beat choice on the current novel scene; time passes; then re-emit. */
   pickBeat(beatIndex: number): void {
     this.syncMotivators(this.saga.pickBeat(beatIndex));
+    this.syncSagaFlags();
     this.advanceRunClock();
     this.emit();
   }
@@ -231,6 +247,7 @@ export class Game {
   pickDecision(optionIndex: number): void {
     const result = this.saga.pickDecision(optionIndex);
     this.syncMotivators(result?.motivators ?? null);
+    this.syncSagaFlags();
     if (result?.succession && (result.succession.takesPartner || result.succession.begets > 0)) {
       this.beginNextGenerationAct();
     }

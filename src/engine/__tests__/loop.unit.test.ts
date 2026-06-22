@@ -213,4 +213,29 @@ describe("Game loop", () => {
     expect(g2.view.state.year).toBe(g.view.state.year);
     expect(g2.view.state.end?.kind).toBe(g.view.state.end?.kind);
   });
+
+  it("PF-14: a saga choice's setFlags reach the run's state.flags (not sealed in the driver)", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Flagger",
+      seed: "pf14",
+      originId: "composed:ireland:origins",
+    };
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    expect(g.view.saga.scene, "expected a saga scene to open").toBeTruthy();
+    const flagsBefore = new Set(g.view.state.flags);
+    // Make the opening scene's first choice (a beat, or its decision) — saga setFlags must surface.
+    const open = g.view.saga.scene;
+    if (open?.beats.length) g.pickBeat(0);
+    else g.pickDecision(0);
+    const fresh = g.view.state.flags.filter((f) => !flagsBefore.has(f));
+    // The chosen beat set at least one flag, and it landed in the RUN state (PF-14), not just the driver.
+    expect(fresh.length).toBeGreaterThan(0);
+  });
 });
