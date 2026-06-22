@@ -59,4 +59,14 @@ describe("motivators core (SS-1)", () => {
     expect(axisLabel({ ...m, wealth: 30 }, "wealth")).toBe("leaning rich");
     expect(axisLabel({ ...m, wealth: -90 }, "wealth")).toBe("strongly poor");
   });
+
+  it("a barely-off-zero dominant reads CENTRIST, not the pole (headline matches the strip)", () => {
+    // A near-zero negative wealth: the strip calls it "centrist", so the dominant headline must too —
+    // else a fresh line is mislabelled "A poor line" while every axis shows "centrist".
+    const d = dominantMotivator({ ...initMotivators(), wealth: -6 });
+    expect(d.pole).toBe("centrist");
+    expect(axisLabel({ ...initMotivators(), wealth: -6 }, "wealth")).toBe("centrist");
+    // Past the deadzone, the real pole shows.
+    expect(dominantMotivator({ ...initMotivators(), wealth: -40 }).pole).toBe("poor");
+  });
 });
