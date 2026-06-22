@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/jbcom/dynasty/compare/v0.12.0...v0.13.0) (2026-06-22)
+
+
+### Features
+
+* **convergence:** rival lines become interactive + never-ask-direction directive ([#83](https://github.com/jbcom/dynasty/issues/83)) ([ac3b00b](https://github.com/jbcom/dynasty/commit/ac3b00bb881b5005b03e16b9dc08edfcef82c986))
+
 ## [0.12.0](https://github.com/jbcom/dynasty/compare/v0.11.1...v0.12.0) (2026-06-22)
 
 
