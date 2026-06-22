@@ -283,8 +283,8 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   hand-edit). REMAINING: a final docs pass in PF-13 once PF-7/8/11 land (update the "still being wired"
   list as gaps close).
 
-- [ ] [WAIT] **PF-13 final pass: full gate + live-verify a full hour-long run + open the PR.** Blocked
-  on PF-5/PF-9 (corpus complete + retitled). typecheck +
+- [ ] **PF-13 final pass: full gate + live-verify a full hour-long run + open the PR.** UNBLOCKED
+  (PF-5 corpus complete + PF-9 retitled). typecheck (PASS) +
   biome + 600+ unit + browser + e2e + harness 0-findings; play a founded line poor AND middle through
   multiple generations in Chrome (READ screenshots); confirm: novel reads as novel, classes diverge,
   glimpses populate, intersections fire, titles distinct, hour+ of content. Open the ONE PR for
