@@ -285,12 +285,7 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   (b) axes/worldStacks have 0 direct engine/ui importers but are sim-internal (used transitively) — NOT
   dead; (c) shader backdrop is live (PlayScreen renders it per macroAct); (d) Sfx now wired (PF-15).
 
-- [ ] **PF-17 wire ambient MUSIC (AudioEngine / Tone.js).** AudioEngine (per-era ambient pad, start()
-  gated on a user gesture) + the per-macro-act .ogg tracks (boyhood/mogul/brand/… in public/assets/
-  audio) are built but the Tone.js music graph is NOT started anywhere — only Sfx one-shots play. FIX:
-  start the AudioEngine on the first play gesture (autoplay-safe), crossfade the ambient track on
-  macro-act change, gate by the Sound setting + a separate music-volume default. Browser-test the
-  engine starts + switches track; live-verify. (Bigger subsystem — Tone context lifecycle; do carefully.)
+- [x] **PF-17 ambient MUSIC — DONE** (commit e3dce65). AudioEngine starts on first reader tap (autoplay-safe); setMusicEra crossfades the bed per era; gated by the Sound setting; browser-guarded + tested.
 
 After all PF items merge, return to the standing autonomous polish mandate (top of file) for the next gap.
 
