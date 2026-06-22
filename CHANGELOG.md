@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/jbcom/dynasty/compare/v0.11.1...v0.12.0) (2026-06-22)
+
+
+### Features
+
+* **saga:** succession actually begets heirs — the dynasty survives to the stars (DEPTH-3) ([#80](https://github.com/jbcom/dynasty/issues/80)) ([bc583ce](https://github.com/jbcom/dynasty/commit/bc583ce89d413fff5c93396c5cfd80dffcaedbfe))
+
 ## [0.11.1](https://github.com/jbcom/dynasty/compare/v0.11.0...v0.11.1) (2026-06-22)
 
 
