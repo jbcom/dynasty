@@ -137,8 +137,10 @@ describe("EX-4 prompt builder", () => {
 
 describe("expand orchestrator with a stub generator (no key, no network)", () => {
   it("generates → validates → returns only accepted events (SS-11 expander)", async () => {
-    // A stub model that returns one clean event + one leaking event.
-    const leak = { ...goodEvent, id: "ev_gen_stub_leak", scene: "Fred builds the empire." };
+    // A stub model that returns one clean event + one leaking event. The leak uses an unambiguous
+    // preset surname ("Drumpf") — bare given names like "Fred" are intentionally NOT leaks in prose
+    // (only the surname/full identity is; see src/sim/leak.ts).
+    const leak = { ...goodEvent, id: "ev_gen_stub_leak", scene: "The Drumpf empire rose." };
     const stub = async () => JSON.stringify([goodEvent, leak]);
     const res = await expand(
       content,

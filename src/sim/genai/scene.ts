@@ -10,12 +10,10 @@
  */
 
 import type { Rung } from "../classRung";
+import { hasPresetLeak } from "../leak";
 import { SagaFileSchema } from "../saga/schema";
 import type { Archetype } from "../slots";
 import { type SceneSlot, spineFor } from "../spine";
-
-/** The preset-person leak floor — identical to the events gate; the line is composed, never real. */
-const LEAK = /\b(Donald|Trump|Drumpf|Elon|Musk|Kennedy|Fred(erick)?|Friedrich)\b/i;
 
 /** A scene-generation request: which cell + tier's act to flesh. */
 export interface SceneRequest {
@@ -134,7 +132,7 @@ function asArray(v: unknown): unknown {
  *   - an object-with-numeric-keys for `prose` / `beats` / `decision.options` → an array.
  * Anything it can't normalize is left for the schema to reject. Pure; clones, never mutates input.
  */
-function normalizeSceneFile(raw: unknown): unknown {
+export function normalizeSceneFile(raw: unknown): unknown {
   if (!raw || typeof raw !== "object") return raw;
   const obj = raw as { scenes?: unknown[]; [k: string]: unknown };
   const scenesArr = asArray(obj.scenes);
@@ -171,7 +169,7 @@ export function validateSceneFile(
   req: SceneRequest,
 ): { ok: true; file: { acts: unknown[]; scenes: unknown[] } } | { ok: false; reasons: string[] } {
   const reasons: string[] = [];
-  if (LEAK.test(JSON.stringify(raw))) reasons.push("preset-person leak");
+  if (hasPresetLeak(raw)) reasons.push("preset-person leak");
   const parsed = SagaFileSchema.safeParse(normalizeSceneFile(raw));
   if (!parsed.success) {
     reasons.push(`schema: ${parsed.error.issues.map((i) => i.message).join("; ")}`);
@@ -253,7 +251,7 @@ export function normalizeTitle(
     .trim();
   t = t.replace(/^Act\s+[IVXivx]+\s*[—:-]\s*/i, "").trim();
   if (!t) return { ok: false, reason: "empty title" };
-  if (LEAK.test(t)) return { ok: false, reason: "preset-person leak" };
+  if (hasPresetLeak(t)) return { ok: false, reason: "preset-person leak" };
   if (t.length > 60) return { ok: false, reason: "title too long" };
   if (t.toLowerCase() === cue.toLowerCase()) return { ok: false, reason: "echoed the generic cue" };
   return { ok: true, title: `Act ${ROMAN_FOR(tier)} — ${t}` };

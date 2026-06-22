@@ -11,6 +11,7 @@
 
 import type { Rung } from "../classRung";
 import type { Content } from "../content";
+import { hasPresetLeak } from "../leak";
 import type { Archetype } from "../slots";
 import { type GenerateFn, parseGenerated, parseGeneratedObject } from "./client";
 import { buildPrompt, type GenTarget, systemInstruction } from "./prompt";
@@ -171,9 +172,6 @@ const MODES: Record<ArrayExpandType, ExpandMode> = {
   },
 };
 
-/** The preset-person leak regex (mirrors the harness validator) — the inviolable floor for ALL modes. */
-const LEAK = /\b(Donald|Trump|Drumpf|Elon|Musk|Kennedy|Fred(erick)?|Friedrich)\b/i;
-
 /** Minimal validation shared by the narrative-data modes: reject any item that leaks a preset person. */
 function leakOnlyValidate(raws: unknown[]): {
   accepted: unknown[];
@@ -182,8 +180,7 @@ function leakOnlyValidate(raws: unknown[]): {
   const accepted: unknown[] = [];
   const rejected: Array<{ raw: unknown; reasons: string[] }> = [];
   for (const raw of raws) {
-    const text = JSON.stringify(raw);
-    if (LEAK.test(text)) rejected.push({ raw, reasons: ["preset-person leak"] });
+    if (hasPresetLeak(raw)) rejected.push({ raw, reasons: ["preset-person leak"] });
     else if (!raw || typeof raw !== "object" || !(raw as { id?: string }).id)
       rejected.push({ raw, reasons: ["missing id"] });
     else accepted.push(raw);

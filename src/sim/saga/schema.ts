@@ -72,6 +72,9 @@ export const ThreadRefSchema = z.object({
   /** The bespoke moment the two lines cross (the specific intersection prose). When absent, the weave
    *  fills a deterministic pair-specific line and the rival's act-opening fragment is braided beneath. */
   crossing: z.string().optional(),
+  /** How the two lines relate at this crossing — authored by the braid QA pass (scoped cross-storyline
+   *  authoring). When absent, the crossing reads as a neutral intersection. */
+  relation: z.enum(["opposing", "contributing", "neutral"]).optional(),
 });
 export type ThreadRef = z.infer<typeof ThreadRefSchema>;
 
