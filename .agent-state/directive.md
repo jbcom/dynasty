@@ -264,10 +264,7 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   moment two specific lines cross, stored on the midpoint scene. Schema already has ThreadRef; add the
   woven scene's own crossing text. Test + live-verify.
 
-- [ ] **PF-11 Codex (Suzerain briefs) — author + surface.** CodexEntry schema + loadCodex are built but
-  no codex content exists and nothing shows it. Author a few codex entries (eras/waves/motivators as
-  optional lore) via genai; add a Codex view reachable from the slide-out menu. Optional-to-read
-  (never gates play). Test + live-verify.
+- [x] **PF-11 Codex — DONE** (commit b91dcc1). Authored src/data/saga/codex/codex.json (7 waves + 3 macro-acts, leak-free) + CodexView (collapse/expand) in the slide-out menu. loadCodex + CodexView tests green. (Live-verify folds into PF-13.)
 
 - [~] **PF-12 docs + STATE refresh.** docs/STATE.md refreshed for the novel model + PF-3 play surface +
   gap list (commit, PF-12 docs done). CHANGELOG is release-please-managed (already current — do NOT
