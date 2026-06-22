@@ -91,7 +91,7 @@ push + PR. See [[one-branch-local-review]].
 - [x] **WV-1 weave intersections INTO the prose — DONE → PR #96.** SceneReader folds each crossing into
   its paged prose (woven narration page, CSS mark, no aside); curated INTERSECTION_POINTS replaced the
   auto-spray. Reviewer trio + CodeRabbit folded. ([[intersections-woven-not-walls]])
-- [ ] **WV-2 braid SLOTS + bias-weighted weaving — IN PROGRESS on `feat/braid-slots` (rebased on post-#96 main).**
+- [x] **WV-2 braid SLOTS + bias-weighted weaving — DONE → PR #98 ([WAIT] CI + merge).** On `feat/braid-slots`.
   ([[braid-slots-genai-architecture]] + [[emergent-cause-effect-sim]]). DONE: step 1 BraidSlot schema; step 2
   `braidSelect.ts` pure seeded selector (era-gated, place×archetype×class bias, seeded fire-gate + weighted
   pick, BORROWS the partner's source vignette — no bespoke per-pair writing; deterministic); step 3a
