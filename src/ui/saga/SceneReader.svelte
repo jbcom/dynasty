@@ -1,4 +1,5 @@
 <script lang="ts">
+import { fade } from "svelte/transition";
 import type { Scene } from "../../sim/saga/schema";
 import { playCue, startMusic } from "../sound";
 
@@ -84,7 +85,14 @@ function chooseBeat(i: number) {
 </script>
 
 <!-- The whole page is the tap target (advance / urge). Options stop propagation so a pick isn't an urge. -->
-<section class="scene" data-sense={scene.sense} data-testid="scene-reader" data-options-up={optionsUp ? "" : undefined}>
+<!-- `data-scene-id` exposes the current scene to harness/e2e walks (the runner's id isn't otherwise in the DOM). -->
+<section
+  class="scene"
+  data-sense={scene.sense}
+  data-scene-id={scene.id}
+  data-testid="scene-reader"
+  data-options-up={optionsUp ? "" : undefined}
+>
   <!-- Full-bleed tap layer: turn the page, or urge the player when a choice is up. A button so it's
        keyboard-focusable + screen-reader operable without an a11y-role mismatch. -->
   <button
@@ -94,9 +102,15 @@ function chooseBeat(i: number) {
     onclick={tapPage}
   ></button>
 
-  <!-- One paragraph at a time — the page the reader is on. -->
-  {#key paraIdx}
-    <p class="para" data-testid="para">{term(scene.prose[paraIdx] ?? "")}</p>
+  <!-- One paragraph at a time. The outer key fades the whole page in when the SCENE changes (a composed
+       between-scene transition, distinct from the per-paragraph page-turn); the inner key animates each
+       paragraph turn within a scene. Both honor prefers-reduced-motion (page-in disabled there). -->
+  {#key scene.id}
+    <div class="scene-body" in:fade={{ duration: 320 }}>
+      {#key paraIdx}
+        <p class="para" data-testid="para">{term(scene.prose[paraIdx] ?? "")}</p>
+      {/key}
+    </div>
   {/key}
 
   {#if !optionsUp}
@@ -181,11 +195,18 @@ function chooseBeat(i: number) {
     outline: 2px solid color-mix(in srgb, var(--mmm-gold) 50%, transparent);
     outline-offset: -4px;
   }
+  .scene-body,
   .para,
   .turn-hint,
   .choices {
     position: relative;
     z-index: 1;
+  }
+  /* The scene-body holds the prose above the tap layer; flex so paragraphs stack as before. */
+  .scene-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
   }
   .scene[data-sense="smell"] { --sense-accent: #8c6f4d; }
   .scene[data-sense="taste"] { --sense-accent: #a4564d; }
