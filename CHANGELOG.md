@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.0](https://github.com/jbcom/dynasty/compare/v0.17.0...v0.18.0) (2026-06-22)
+
+
+### Features
+
+* **saga:** weave cross-dynasty intersections INTO the prose (WV-1) ([#96](https://github.com/jbcom/dynasty/issues/96)) ([066f631](https://github.com/jbcom/dynasty/commit/066f631636b901998a8ac32fb17f85b07da7d4ab))
+
 ## [0.17.0](https://github.com/jbcom/dynasty/compare/v0.16.0...v0.17.0) (2026-06-22)
 
 
