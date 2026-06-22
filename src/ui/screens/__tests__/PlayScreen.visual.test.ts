@@ -122,7 +122,7 @@ describe("PlayScreen (composed game screen)", () => {
     await page.screenshot({ element: host.firstElementChild as Element });
   });
 
-  it("renders the NOVEL scene reader + a cross-family thread aside when the saga frame has one", () => {
+  it("WEAVES a cross-family crossing INTO the scene prose (no detached aside) — WV-1", () => {
     const scene = SceneSchema.parse({
       id: "sc:demo:midpoint",
       sense: "sound",
@@ -157,11 +157,14 @@ describe("PlayScreen (composed game screen)", () => {
     // The novel page renders (not the event card).
     expect(host.querySelector("[data-testid='scene-reader']")).not.toBeNull();
     expect(host.textContent).toContain("Act III — The Climb");
-    // The cross-family intersection braids in beneath the scene.
-    const thread = host.querySelector("[data-testid='thread']");
-    expect(thread).not.toBeNull();
-    expect(thread?.textContent).toContain("Where paths cross");
-    expect(thread?.textContent).toContain("An Italian line cuts across yours."); // bespoke crossing
-    expect(thread?.textContent).toContain("another line steps ashore"); // braided rival fragment
+    // WV-1: there is NO detached "Where paths cross" aside — the crossing is woven into the prose flow.
+    expect(host.querySelector("[data-testid='thread']")).toBeNull();
+    // Page through the scene's own prose (2 paras) to reach the woven crossing page (await each re-render).
+    const tap = host.querySelector("[data-testid='scene-reader'] .tap-layer") as HTMLButtonElement;
+    flushSync(() => tap.click()); // → para 2
+    flushSync(() => tap.click()); // → woven crossing lead page
+    const para = host.querySelector("[data-testid='para']");
+    expect(para?.getAttribute("data-woven")).toBe(""); // it's a woven narration page, inline
+    expect(para?.textContent).toContain("An Italian line cuts across yours."); // the crossing, in-flow
   });
 });

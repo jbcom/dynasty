@@ -88,20 +88,28 @@ push + PR. See [[one-branch-local-review]].
   RB-8 (#91) rebuilt them on a mandate I INVENTED — wrong. Reverted src/render/** + the 12 SVGs + the
   3 mount sites; kept RB-10's eras.ts (chord-only) + audio ending sting. RB-11/RB-12 (more portrait art)
   CANCELLED. See [[no-portraits-no-asset-art]]. NEVER rebuild a removal as my own decision.
-- [ ] **WV-1 weave cross-dynasty intersections INTO the scene prose — ACTIVE.** USER DIRECTIVE
-  (2026-06-22, standing — [[intersections-woven-not-walls]]): today `view.saga.threads` renders as a
-  detached `<aside class="thread">` ("Where paths cross") wall of text dumped under the SceneReader +
-  choices — it "completely throws things off." The POINT of an intersection is to weave another dynasty
-  ORGANICALLY into YOUR dynasty's story. FIX: fold the crossing into the scene the player reads (the ink
-  thread diverts/gathers WITHIN the knot's prose), not a labelled side-block. Likely: SceneReader takes
-  the braided thread(s) and renders the crossing as an integrated paged passage in the prose flow (woven
-  beat), styled as narration, not an aside; drop the `.thread` aside. Pure presentation over the existing
-  BraidedThread (crossing + relation + the rival fragment); browser-test the woven render; live-verify in
-  Chrome. Enumerate the use cases first (a crossing mid-scene vs at a decision; multiple threads).
-- [ ] [WAIT] **WV-2 author bespoke pair crossings (depth pass) — after WV-1's weave lands.** Many crossings
-  fall back to the deterministic `crossingLine(wave,rival)` generic; with weaving in place, author/GenAI
-  pair-specific crossing prose for the common wave pairs so an intersection reads bespoke, not templated.
-  Keeps the queue non-empty ([[never-drain-queue]]); un-WAIT after WV-1.
+- [x] **WV-1 weave cross-dynasty intersections INTO the scene prose — DONE on `feat/woven-intersections`.**
+  Dropped the detached `<aside class="thread">` "Where paths cross" wall; SceneReader now folds each
+  crossing into its PAGED prose as a woven narration page (subtle CSS inline mark, no asset), so a crossing
+  reads as a moment in the family's story ([[intersections-woven-not-walls]]). Interim weave source = a
+  curated INTERSECTION_POINTS table (replaced the auto-spray). Browser-tested (crossing reads inline; no
+  aside). Full gate green + reviewer trio folded (code: no blocking bugs; simplifier: Array.from). PR #96
+  OPENED. [WAIT] CI + merge.
+- [ ] **WV-2 braid SLOTS + bias-weighted weaving (the real model) — ACTIVE.** USER DIRECTIVE
+  ([[braid-slots-genai-architecture]] + [[emergent-cause-effect-sim]]): replace the curated table with the
+  emergent model — (1) a GenAI 3.5-flash QA pass tags prose paragraphs with braid SLOTS: SOURCE positions
+  (a thread can originate) + DESTINATION anchors (a thread can land); schema gains a slot kind. (2) A
+  runtime selector, per move, rolls a BIAS-weighted (era × place × archetype × class) chance per
+  era-eligible dynasty pair (LATER dynasties auto-enter the pool past their era); on a hit it weaves a
+  thread from a source slot, BORROWING the other line's already-authored copy (e.g. the Jewish peddler's
+  own scene prose) into this scene's destination anchor — so NO bespoke per-pair writing. Seeded via
+  createRng (emergent ≠ nondeterministic; replay-identical). Curation shrinks to slot-tagging + bias tuning.
+  Enumerate use cases first; this is a multi-step unit (schema → GenAI slot pass → runtime selector → wire
+  into the woven render). Same long-running branch.
+- [ ] [WAIT] **WV-3 emergent variability systems (anti-Suzerain) — after WV-2.** Per
+  [[emergent-cause-effect-sim]]: seeded market/disease/etc. variability + Yuka-driven rival reactions so
+  playthroughs diverge instead of folding to one A→Z walkthrough; budget magnitudes more authored/GenAI
+  content to cover the widened state space. Keeps the queue non-empty ([[never-drain-queue]]); un-WAIT after WV-2.
 - [x] **RB-4 surface interactive convergence — DONE (forward commit).** Added the rival's rung to the
   Glimpse + a ★-per-rung indicator in the "Other lines" strip, so the player sees their crossings move a
   rival's standing. Browser-tested.

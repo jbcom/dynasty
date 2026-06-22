@@ -126,23 +126,16 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     <!-- The NOVEL: the line's act reads as paged scenes that frame the choice. The act-chapter title
          lives in the slim always-visible header (saga-head), not repeated here. -->
     <div class="event-pane">
+      <!-- WV-1: cross-dynasty intersections are WOVEN into the scene's paged prose by the reader (not a
+           detached "Where paths cross" wall under the choices). The reader folds the crossing in as
+           narration the player turns through, so a crossing feels like a moment in the family's story. -->
       <SceneReader
         scene={view.saga.scene}
+        threads={view.saga.threads}
         {term}
         onbeat={(i) => onpickbeat?.(i)}
         ondecision={(i) => onpickdecision?.(i)}
       />
-      {#each view.saga.threads as braid (braid.wave)}
-        <!-- A cross-family INTERSECTION: the specific moment another wave's line crosses yours, with a
-             glimpse of that line braided beneath. -->
-        <aside class="thread" data-testid="thread">
-          <span class="thread-label">Where paths cross</span>
-          <p class="thread-crossing">{term(braid.crossing)}</p>
-          {#each braid.scene.prose as para, i (i)}
-            <p class="thread-para">{term(para)}</p>
-          {/each}
-        </aside>
-      {/each}
     </div>
   {:else if view.currentEvent}
     <!-- No active novel scene (the act ended, or this cell has none) — the event flow carries the run. -->
@@ -360,38 +353,6 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     font-family: var(--mmm-font-body);
     font-size: 0.78rem;
     letter-spacing: 0.06em;
-    color: var(--mmm-text-dim);
-  }
-  .thread {
-    max-width: 42rem;
-    margin: 0.4rem auto 0;
-    padding: 0.9rem 1.1rem;
-    border-left: 3px solid color-mix(in srgb, var(--mmm-gold-deep) 60%, transparent);
-    background: color-mix(in srgb, var(--mmm-surface) 35%, transparent);
-    border-radius: var(--mmm-radius);
-  }
-  .thread-label {
-    display: block;
-    font-family: var(--mmm-font-display);
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--mmm-gold-deep);
-    margin-bottom: 0.35rem;
-  }
-  .thread-crossing {
-    margin: 0 0 0.6rem;
-    font-family: var(--mmm-font-body);
-    font-size: 1rem;
-    line-height: 1.65;
-    color: var(--mmm-text);
-  }
-  .thread-para {
-    margin: 0 0 0.5rem;
-    font-family: var(--mmm-font-body);
-    font-style: italic;
-    font-size: 0.96rem;
-    line-height: 1.6;
     color: var(--mmm-text-dim);
   }
 </style>
