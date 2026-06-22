@@ -66,10 +66,25 @@ and genuine intersections.
   organic (woven, not walls). Findings → targeted re-author or a guidance patch.
 - [ ] **UQ-reconcile arc-hash vs guidance.json — after UQ-2d.** spine.ts arcShapeFor (structural variety) and
   guidance.json (creative/historical) coexist; verify they're complementary not redundant, fold or document.
-- [ ] [WAIT] **UQ-3 CRIME power axis — net-new fiction, after UQ-2.** ([[crime-power-axis]]) Add organized
-  crime as a 7th archetype/power base (Italian/Irish/Chinese crime families — RESEARCHED, not assumed),
-  its GOAP strategy, per-wave crime guidance, crossings with legitimate lines, and a dictatorial
-  "crime planet" convergence ending. A milestone; design → build → generate.
+- [x] **UQ-3a CRIME power axis DESIGN — DONE.** ([[crime-power-axis]]) Spec at
+  docs/superpowers/specs/2026-06-22-uq3-crime-power-axis-design.md. Decisions: `criminal` is a 7th real
+  Archetype (calling "The Boss"), WAVE-GATED to ireland/italian/ashkenazi/chinese ONLY (the anti-stereotype
+  guard, in DATA — scandinavian/bavaria/baghdad never offer it); +8 act files (4 waves × 2 classes); 4 distinct
+  per-wave crime shapes (irish=street→bootleg→politics founder; italian=Commission rise/RICO-fall; ashkenazi=
+  syndicate that EXITS to legitimacy by tier 2; chinese=West-Coast tong/vice); crime↔legit crossings reuse WV-2
+  braid pool; new `syndicate` convergence Destination = the "crime planet" (Don of a Thousand Suns), gated to
+  criminal/converted lines. Build order = schema+gate → ending → GOAP → guidance → generate → live-verify.
+- [ ] **UQ-3b crime schema + wave-gate — after UQ-2 + UQ-3a.** Add `criminal` to Archetype/ARCHETYPES/
+  ARCHETYPE_CALLINGS; CRIME_WAVES set + offerability gate at the calling beat + wave-select; tests (non-crime
+  waves never offer/spawn criminal; calling face present).
+- [ ] **UQ-3c syndicate ending — after UQ-3b.** Add the `syndicate` destination + 2 endings (dictator/
+  consigliere) + the archetype gate to convergence.ts; tests (only a criminal/converted line reaches it).
+- [ ] **UQ-3d crime GOAP evaluator — after UQ-3c.** `criminal` strategy + illicit-market epoch input
+  (Prohibition windfall, RICO decline); deterministic tests.
+- [ ] **UQ-3e crime guidance + generate — after UQ-3d.** guidance.json crime era×class briefs + 4 per-wave
+  crimeArc shapes; genai:expand the 8 act files; WV-2 slot-tag; genai:qa to frontier; commit-before-run.
+- [ ] **UQ-3f live-verify a crime line — after UQ-3e.** Play italian/criminal/poor end-to-end in Chrome:
+  rise→Commission→RICO arc reads, crossings weave, a syndicate ending is reachable.
 
 - [x] **RB-2 per-tier content depth — DONE.** Audit showed prose depth already uniform (every scene
   2-4 paras); only 2 under-generated cells had <2 beats — regenerated to the full weave (0 thin-beat).
