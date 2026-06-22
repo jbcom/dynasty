@@ -96,7 +96,7 @@ const INTERSECTION_POINTS: readonly IntersectionPoint[] = [
  */
 export function weaveThreads(corpus: SagaCorpus): void {
   const hasActAtTier = (wave: string, tier: number) =>
-    [...corpus.acts.values()].some((a) => a.wave === wave && a.tier === tier);
+    Array.from(corpus.acts.values()).some((a) => a.wave === wave && a.tier === tier);
 
   for (const act of corpus.acts.values()) {
     const point = INTERSECTION_POINTS.find((p) => p.at === act.tier && p.wave === act.wave);

@@ -36,6 +36,10 @@ interface Page {
   woven: boolean;
   lead: boolean; // the first page of a woven passage (carries the inline mark)
 }
+// ASSUMPTION (WV-1): `threads` is IMMUTABLE for the life of a scene — set once at corpus-build time and
+// only ever swapped together with `scene` (a scene change resets paging). If WV-2 ever injects a thread
+// LIVE mid-scene (threads change while scene.id is stable), `pages` grows + `lastPara` un-fires and the
+// player is pulled back mid-flow — clamp paraIdx or freeze injection until scene-end before doing that.
 const pages = $derived.by<Page[]>(() => {
   const out: Page[] = scene.prose.map((text) => ({ text, woven: false, lead: false }));
   for (const t of threads) {
