@@ -20,6 +20,8 @@ import ShaderBackdrop from "../saga/ShaderBackdrop.svelte";
 import SagaPanel from "../saga/SagaPanel.svelte";
 import SceneReader from "../saga/SceneReader.svelte";
 import SlideOutMenu from "../saga/SlideOutMenu.svelte";
+import CodexView from "../saga/CodexView.svelte";
+import { loadCodex } from "../../data/loadSaga";
 
 interface Props {
   content: Content;
@@ -67,6 +69,9 @@ const sagaView = $derived(
     glimpses: view.glimpses,
   }),
 );
+
+// Optional lore briefs (waves + macro-acts), shown in the slide-out menu's Codex. Static content.
+const codex = loadCodex();
 
 type Tab =
   | "event"
@@ -176,6 +181,7 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     <SagaPanel view={sagaView} />
     <MeterHud defs={content.meters} meters={view.state.meters} />
     <PersonalityDial personality={view.state.personality} {pole} {poleLabel} />
+    <CodexView entries={codex} {term} />
   </SlideOutMenu>
 
   {#if wide}
