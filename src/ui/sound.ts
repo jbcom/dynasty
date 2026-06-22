@@ -56,11 +56,14 @@ export function startMusic(): void {
       music
         .start()
         .then(() => {
-          if (pendingEra && music) music.setEra(pendingEra, chordForEra(pendingEra));
-          // Apply a sting requested before start AFTER the era bed, so it overrides it; then clear.
-          if (pendingStingChord && music) {
+          if (!music) return;
+          // A pending sting OVERRIDES the era bed — apply only it (one setEra, no double-trigger pop).
+          // Otherwise apply the run's pending era. Either way exactly one chord triggers on start.
+          if (pendingStingChord) {
             music.setEra("ending-sting", pendingStingChord);
             pendingStingChord = null;
+          } else if (pendingEra) {
+            music.setEra(pendingEra, chordForEra(pendingEra));
           }
         })
         .catch(() => {
@@ -91,15 +94,20 @@ export function setMusicEra(eraId: string): void {
  */
 // Three stings reuse the ambient band chords (via the single ERA_BANDS table, so a chord tuned in
 // eras.ts can't drift from its sting); extinguished is an intentional low minor fall with no band.
+// EARTHBOUND_STING is the guaranteed fallback for an unknown outcome (so the lookup is never undefined).
+const EARTHBOUND_STING: string[] = [...bandForEra("origins").chord]; // rooted, plain
 const ENDING_STING: Record<string, string[]> = {
   stars: [...bandForEra("stars").chord], // open fifths — luminous, vast
   contributed: [...bandForEra("ascent").chord], // striving, bright
-  earthbound: [...bandForEra("origins").chord], // rooted, plain
+  earthbound: EARTHBOUND_STING,
   extinguished: ["C3", "Eb3", "G3", "C2"], // a low minor fall — intentionally unique, not in ERA_BANDS
 };
 export function playEndingSting(outcome: string): void {
   if (!enabled || typeof window === "undefined") return;
-  const chord: string[] = ENDING_STING[outcome] ?? ENDING_STING.earthbound ?? ["C3", "E3", "G3"];
+  // Guard the lookup against arbitrary keys (no object-injection): only a known outcome selects its
+  // chord; anything else falls to the rooted earthbound sting.
+  const chord: string[] =
+    (Object.hasOwn(ENDING_STING, outcome) ? ENDING_STING[outcome] : undefined) ?? EARTHBOUND_STING;
   try {
     // If the graph is already running, apply now; otherwise stash it so start()'s resolve applies it
     // (after the era bed) — so the sting lands even for a user who reached the ending without a prior tap.
