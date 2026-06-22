@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/jbcom/dynasty/compare/v0.8.0...v0.9.0) (2026-06-22)
+
+
+### Features
+
+* **saga:** Narrative Acts — the played story is a NOVEL ([#65](https://github.com/jbcom/dynasty/issues/65)) ([35b80f5](https://github.com/jbcom/dynasty/commit/35b80f55d669050f2a0f5d29221687ef967cdec7))
+
 ## [0.8.0](https://github.com/jbcom/dynasty/compare/v0.7.0...v0.8.0) (2026-06-21)
 
 
