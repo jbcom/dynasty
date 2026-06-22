@@ -30,9 +30,13 @@ by construction.
 
 ## ROLLING BACKLOG — always non-empty, work top-down, append before draining
 
-- [ ] **RB-2 per-tier content depth** — each act averages ~2.75 prose paras + 2 beats/scene; deepen the
-  thinnest scenes (more sensory paragraphs, a richer weave) so each of the 6 generations reads fuller.
-  Measure thinnest cells, GenAI-author depth, validate, PR.
+- [x] **RB-2 per-tier content depth — DONE.** Audit showed prose depth already uniform (every scene
+  2-4 paras); only 2 under-generated cells had <2 beats — regenerated to the full weave (0 thin-beat).
+  Fixed a real passSuccession skip bug (skipped any-decision closes, not just succession-bearing ones).
+  504/504 closes have succession; integrity intact.
+- [ ] **RB-6 verify hour+ run end-to-end in Chrome** — live-verify a full founded playthrough reaches a
+  late-century convergence ending reading the novel (not the dev harness): screenshot the play surface +
+  legacy report, confirm scenes traverse + succession fork + a rival nudge visibly land. PR if any gap.
 - [ ] **RB-3 presentation polish** — wire per-act caricature portrait/scene compositing (src/render),
   per-era ambient audio depth, and animated scene transitions in SceneReader; live-verify + PR.
 - [ ] **RB-4 surface interactive convergence in the UI** — show the player when a crossing shifted a
