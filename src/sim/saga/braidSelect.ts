@@ -56,12 +56,13 @@ function matchingSource(candidate: BraidCandidate, dest: BraidSlot): BraidSlot |
   );
 }
 
-/** The bias weight for a candidate against a destination of a given setting. 0 = no plausible meeting. */
-function biasWeight(candidate: BraidCandidate, dest: BraidSlot): number {
-  if (!matchingSource(candidate, dest)) return 0;
+/**
+ * The bias weight for a candidate (caller has already confirmed a matching source). Place dominates
+ * (you meet who's nearby), then archetype affinity, then shared class — a strictly-positive weighted sum
+ * so any plausible pair has SOME chance.
+ */
+function biasWeight(candidate: BraidCandidate): number {
   const { place, archetype, cls } = candidate.bias;
-  // Place dominates (you meet who's nearby), then archetype affinity, then shared class. Weighted sum,
-  // kept strictly positive when a source matches so any plausible pair has SOME chance.
   return 0.1 + 0.5 * place + 0.25 * archetype + 0.15 * cls;
 }
 
@@ -98,11 +99,9 @@ export function selectBraid(
     for (const cand of candidates) {
       if (cand.activeFromYear > ctx.year) continue; // not yet on the stage
       if (cand.tier !== ctx.tier) continue; // crossings read at the shared tier
-      const weight = biasWeight(cand, dest);
-      if (weight <= 0) continue;
       const source = matchingSource(cand, dest);
-      if (!source) continue;
-      options.push({ dest, cand, source, weight });
+      if (!source) continue; // no setting-matched, vignette-bearing source → no plausible meeting
+      options.push({ dest, cand, source, weight: biasWeight(cand) });
     }
   }
   if (options.length === 0) return null;

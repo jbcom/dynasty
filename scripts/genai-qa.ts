@@ -393,7 +393,10 @@ async function passSlots(ref: ActFileRef, gen: Generate): Promise<void> {
   const file = readFile(ref);
   if (!file) return;
   let touched = false;
-  for (const scene of file.scenes) {
+  // Iterate by INDEX so a tagged scene is spliced in place (O(N)) — not file.scenes.map() per scene (O(N²)).
+  for (let i = 0; i < file.scenes.length; i++) {
+    const scene = file.scenes[i];
+    if (!scene) continue;
     if (scene.braidSlots && scene.braidSlots.length > 0) continue; // already tagged
     const raw = await call(gen, slotPassSystem(), buildSlotPassPrompt(scene as Scene), `${label}:${scene.id}`);
     if (!raw) continue;
@@ -406,7 +409,7 @@ async function passSlots(ref: ActFileRef, gen: Generate): Promise<void> {
       console.error(`    · ${scene.id}: invalid slots (${v.error.issues[0]?.message}) — skipped`);
       continue;
     }
-    file.scenes = file.scenes.map((s) => (s.id === scene.id ? v.data : s));
+    file.scenes[i] = v.data;
     touched = true;
   }
   if (touched) {

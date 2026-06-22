@@ -204,19 +204,10 @@ export class Game {
     if (!wave) return [];
     const tier = this.playerRung();
     const cls = sagaClassForWealth(this.state.personality.wealth);
-    // Each rival's borrowable source slots: ALL source slots across EVERY scene of its act at this tier
-    // (any archetype) — not just the opening scene, since the slot pass can tag sources on any scene.
-    const sourcesFor = (rival: RivalLike): readonly BraidSlot[] => {
-      const sources: BraidSlot[] = [];
-      for (const act of this.saga.corpus.acts.values()) {
-        if (act.wave !== rival.id || act.tier !== tier) continue;
-        for (const sceneId of act.scenes) {
-          const s = this.saga.corpus.scenes.get(sceneId);
-          if (s) sources.push(...s.braidSlots.filter((slot) => slot.kind === "source"));
-        }
-      }
-      return sources;
-    };
+    // Each rival's borrowable source slots at this tier — from the driver's memoized wave→tier index
+    // (built once), so this hot `view` path never re-scans the whole corpus per candidate per render.
+    const sourcesFor = (rival: RivalLike): readonly BraidSlot[] =>
+      this.saga.sourceSlots(rival.id, tier);
     const candidates = candidatesFromSnapshots(
       this.world.snapshots,
       { placeId: wave, archetype: this.state.archetype, cls, tier },
