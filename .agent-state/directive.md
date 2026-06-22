@@ -50,15 +50,20 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   ascension; authored spine w/ DISTINCT per-era decision architectures (NOT the one civic-fork template);
   corpus mined into src/data/saga/fabric/ keyed wave×era×setting; braid selector repointed to weave wave
   fabric into the spine; onboarding collapses to found-THE-line (reuse ONB-1 naming). Sign-off pre-granted.
-- [ ] **FS-2 founding era band.** Extend eras/macroActs with the 1770s founding band; spine clock spans
-  1776→stars; tests + determinism.
+- [x] **FS-2 founding era band — DONE.** macroActs.ts: new `founding` macro-act (−∞..1859) + `founding`
+  epoch ("Birth of a Nation", 1776, politics axis); convergence now 1860..1899. Saga schema enum +
+  ShaderBackdrop palette updated; macroActs tests updated; tsc 0, 690 green. (NOTE: ShaderBackdrop is
+  PROCEDURAL art → flagged for retirement in VL per [[visual-layer-revival]], only touched to fix the
+  enum compile.) TIER_PLAN (the 504-generator) left for FS-3's authored spine.
 - [ ] **FS-3 authored spine model.** Replace the 504-cell spineFor generator with authored per-era acts +
   DISTINCT decision architectures per era (founding/Gilded-Age/modern/stellar). Core craft work; test pins
   "no two eras share a decision template." ([[craft-spines-not-generator]])
-- [ ] **FS-4 corpus mining = curate BEST + most UNIQUE per family.** scripts/mine-fabric.ts: score the 504
-  acts' scenes/crossings primarily on UNIQUENESS/distinctiveness (what breaks the template), then crossing
-  potential + prose quality + era fit; extract the standouts → src/data/saga/fabric/ keyed family(wave)×
-  era×setting; retire the templated bulk. Turns the 504 into an ASSET (deep well to pick singular moments).
+- [ ] **FS-4 mine the choicest/unique → REWRITE as BRANCHES off the ONE dynasty timeline.** Everything is
+  branches off the player's line (NOT parallel lineages): scripts/mine-fabric.ts scores the 504 acts'
+  scenes primarily on UNIQUENESS, then crossing/prose/era fit; extract the standouts and REWRITE them
+  POV-shifted as branch-content of the dynasty ("OUR line meets the merchant/fishmonger/20th-c turn") →
+  src/data/saga/fabric/ keyed by the trigger conditions that bring them in; retire the templated bulk.
+  Turns the 504 into an ASSET (deep well of singular moments to recompose as branches).
 - [ ] **FS-5 recurring-family cast + DETERMINISTIC-TRIGGER LATTICE.** The fabric is a BOUNDED ~7-family
   RECURRING CAST (Turtledove model) growing alongside the spine with CONTINUITY + MEMORY (per-family state:
   name/generation/standing + crossing history, reuse the player `family` shape). ANCHORING = a trigger
@@ -71,7 +76,15 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   trigger determinism + replay; live-verify a recurring crossing pays off an earlier one.
 - [ ] **FS-6 author the spine prose.** GenAI flesh the authored spine acts to depth, era-distinct; QA vs
   guidance; commit-before-run.
-- [ ] **FS-7 onboarding collapse.** found-THE-line flow (reuse ONB-1 naming); retire the cell picker.
+- [ ] **FS-6b archetypal-DESTINY endings.** Re-skin/expand convergence.ts into NAMED dynasty destinies for
+  the ONE line (religious leader / communard / dictator / oligarch / crime leader / media mogul / …) +
+  multiple distinct STELLAR finales: forge allies, seize colonies, or end ISOLATED+ALONE on a quiet planet.
+  Gated by accumulated deterministic state (motivators/power-base/path); folds in [[crime-power-axis]]'s
+  crime-planet finale. Tests: each destiny reachable + gated; determinism.
+- [ ] **FS-7 onboarding → diegetic EPOCH-0 BIRTH.** One line cleans up onboarding back toward the original
+  Epoch-0 plan ([[novel-not-fragments]], the OB-* birth work): start DIEGETICALLY + COMPOSE the family as
+  the progenitor grows from birth into a man/woman — given name, gender, class, FIRST JOB, BEST FRIEND,
+  LIFE PARTNER — all story SEEDS, lived rather than picked from a wave×class cell menu. Reuse ONB-1 naming.
 - [ ] **FS-8 live-verify the hour+ playthrough** — one line 1776→stars, waves braiding in, era-distinct
   decisions, reads as ONE strong story. THEN revisit the visual layer.
 

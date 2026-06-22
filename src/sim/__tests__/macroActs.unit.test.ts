@@ -15,22 +15,27 @@ import { initMotivators, type Motivators } from "../motivators";
 const mot = (over: Partial<Motivators> = {}): Motivators => ({ ...initMotivators(), ...over });
 
 describe("macro-acts + epochs (SS-4)", () => {
-  it("bands years into Convergence / Emergence / Ascension", () => {
-    expect(macroActForYear(1855)).toBe("convergence");
+  it("bands years into Founding / Convergence / Emergence / Ascension (FS-2)", () => {
+    // FS-2: the founding band anchors the spine at 1776; convergence now starts 1860.
+    expect(macroActForYear(1790)).toBe("founding");
+    expect(macroActForYear(1859)).toBe("founding");
+    expect(macroActForYear(1860)).toBe("convergence");
     expect(macroActForYear(1899)).toBe("convergence");
     expect(macroActForYear(1900)).toBe("emergence");
     expect(macroActForYear(2040)).toBe("emergence");
     expect(macroActForYear(2041)).toBe("ascension");
     expect(macroActForYear(2300)).toBe("ascension");
+    expect(macroActTitle("founding")).toBe("Founding");
     expect(macroActTitle("ascension")).toBe("Ascension");
   });
 
   it("epochForYear returns the latest arrived epoch", () => {
-    expect(epochForYear(1800)).toBeNull();
+    expect(epochForYear(1700)).toBeNull(); // before the founding epoch (1776)
+    expect(epochForYear(1800)?.id).toBe("founding"); // FS-2: the founding epoch
     expect(epochForYear(1870)?.id).toBe("industrial");
     expect(epochForYear(1920)?.id).toBe("great_wars");
     expect(epochForYear(2100)?.id).toBe("space");
-    expect(EPOCHS.length).toBeGreaterThanOrEqual(5);
+    expect(EPOCHS.length).toBeGreaterThanOrEqual(6); // FS-2 added the founding epoch
   });
 
   it("the same epoch RIDES a progress line and CRUSHES a tradition line", () => {

@@ -142,7 +142,7 @@ export const ActChapterSchema = z.object({
    *  Defaults to "poor" for back-compat with the original class-less corpus. */
   cls: z.string().min(1).default("poor"),
   tier: z.number().int().min(0).max(5),
-  macroAct: z.enum(["convergence", "emergence", "ascension"]),
+  macroAct: z.enum(["founding", "convergence", "emergence", "ascension"]),
   title: z.string().min(1),
   scenes: z.array(z.string().min(1)).min(1),
 });

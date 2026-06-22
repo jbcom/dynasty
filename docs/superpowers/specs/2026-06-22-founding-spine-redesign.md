@@ -58,7 +58,24 @@ Identity: the spine is still composed (the player's onboarding choice colors it 
 + a family character), but there is ONE line, not a lattice. Onboarding simplifies: you found THE
 American line and choose its character, not a wave×class×archetype cell among 504.
 
-### 2. The WAVES as a RECURRING-FAMILY CAST (the Turtledove model)
+### 2-PRIME. Everything is BRANCHES OFF THE ONE DYNASTY TIMELINE (the unifying frame)
+
+The decisive simplification (user, 2026-06-22): there are NOT separate Jewish / Scandinavian / German
+lineages running in parallel. There is **ONE timeline — the player's dynasty — with BRANCHES off it.**
+The choicest bits of ALL the wave material are **rewritten AS branches of the player's line**: instead
+of "a Scandinavian family's story," it's "OUR dynasty meets the merchant / the fishmonger / …" — the
+encounters, sub-plots, and 20th-century turns are framed from the PLAYER'S dynasty's POV, hanging off
+its single timeline. The other waves dissolve from foreign protagonists into branch-content *in your
+path*. (The recurring-family cast of §2 still exists as the PEOPLE you meet across the branches — the
+Turtledove continuity — but they live INSIDE the one timeline as recurring encounters, not as parallel
+playable lineages.) This is what the deterministic-trigger lattice (§2b) activates: branches of the one
+tree, not weaves between peer trees.
+
+Mining (FS-4) therefore = pull the choicest/most-unique scenes from the 504 acts and **REWRITE them,
+POV-shifted, as branches off the dynasty timeline** (the merchant encounter, the dock meeting, the
+20th-c. turn), keyed by the trigger conditions that bring them in.
+
+### 2. The recurring people you MEET across the branches (the Turtledove cast)
 
 The fabric is NOT anonymous one-off crossing fragments — it is a **persistent, bounded recurring cast of
 FAMILIES** (≈one per wave, ~7) that grow ALONGSIDE the spine across the centuries. The model is **Harry
@@ -129,12 +146,30 @@ INTO the spine prose. Conditions are authored data (designer-tunable), not code.
   flow is reused). No wave/class cell pick.
 - The visual layer ([[visual-layer-revival]]) is DEFERRED until the spine works (it outranks it).
 
+### 3b. ENDINGS — archetypal DESTINIES for the one dynasty (the payoff of one line)
+
+With ONE dynasty (not 504 gated cells), the endings get CLEAN + ambitious: a set of recognizable
+archetypal DESTINIES the single line can reach (user, 2026-06-22) — e.g. **religious leader, communard,
+dictator, oligarch, crime leader, media mogul** (+ more). Because it's one line, we can be far more
+creative + far-reaching in HOW you get to each (the trigger lattice branches toward any destiny via your
+leanings/power-base/choices over centuries), AND in the STELLAR finales:
+- **reach the stars to forge ALLIES** (a covenant/commonwealth among worlds),
+- **reach deep into the stars to SEIZE COLONIES** (conquest/empire),
+- **end ISOLATED + ALONE on a planet quiet enough to attract no notice** (the hidden-survivor ending).
+
+This supersedes the abstract convergence-gate endings: destinies are now NAMED archetypes + multiple
+distinct stellar fates, gated by the line's accumulated deterministic state (motivators/power-base/flags/
+crime-vs-legit path), composed from the spine + branch history. The existing `convergence.ts` ending
+lattice + motivator gates are the mechanism; this re-skins/expands them as dynasty destinies. (Folds in
+[[crime-power-axis]]'s "crime planet" dictatorial finale as one destiny among the set.)
+
 ### 4. What's preserved
 
-- The deterministic sim (seed+history replay), the save model, the braid SELECTOR + slot machinery, the
-  guidance.json research (now informs the WAVES-as-fabric, their real arrival history + braid affinity —
-  exactly what it was researched for), the SceneReader + the shipped UQ-UI scannability rework, ONB-1
-  naming, the convergence endings.
+- The deterministic sim (seed+history replay), the save model, the braid SELECTOR + slot machinery (to be
+  generalized into the trigger lattice), the guidance.json research (now informs the recurring families'
+  real arrival history + branch affinity — exactly what it was researched for), the SceneReader + the
+  shipped UQ-UI scannability rework, ONB-1 naming, and the convergence ending lattice (re-skinned as the
+  archetypal dynasty destinies of §3b).
 
 ## Build order (decomposed into the directive queue)
 

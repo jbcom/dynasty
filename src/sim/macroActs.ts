@@ -1,29 +1,38 @@
 /**
- * MACRO-ACTS + EPOCHS (Convergence Saga, SS-4).
+ * MACRO-ACTS + EPOCHS (Convergence Saga, SS-4; founding band added FS-2).
  *
- * The whole bloodline saga moves through three MACRO-ACTS — "the story of America":
- *   I.  CONVERGENCE (the 1800s)   — the immigration waves arrive + converge in America.
- *   II. EMERGENCE   (the 1900s)   — the lines stratify, rise, intersect; importance emerges.
- *   III.ASCENSION   (2000s+)      — the surviving dynasties climb toward (or fail to reach) the stars.
+ * The dynasty saga moves through four MACRO-ACTS — "the story of America", told as ONE line's story
+ * ([[founding-spine-pivot]]):
+ *   0.  FOUNDING    (1776–1859)   — the line is founded at the American founding; revolution → early
+ *                                    republic → the run-up to the Civil War. The spine's ANCHOR.
+ *   I.  CONVERGENCE (1860–1899)   — the immigration waves arrive + braid into the line as it grows.
+ *   II. EMERGENCE   (1900–2040)   — the line stratifies, rises, intersects; importance emerges.
+ *   III.ASCENSION   (2041+)       — the surviving dynasty climbs toward (or fails to reach) the stars.
  *
- * Cutting ACROSS all lines are EPOCHS — cultural/social/technological shifts (industrial → atomic
- * → space …). An epoch is a world-state input every GOAP evaluator can read: the SAME epoch helps
+ * Cutting ACROSS the line are EPOCHS — cultural/social/technological shifts (founding → industrial →
+ * atomic → space …). An epoch is a world-state input every GOAP evaluator can read: the SAME epoch helps
  * a Progress-leaning line and hurts a Tradition-leaning one. epochImpact() returns that signed
  * effect, gated by the line's motivators. Pure + deterministic — no DOM, no randomness.
  */
 
 import { type Motivators, meetsMotivatorGate } from "./motivators";
 
-export type MacroAct = "convergence" | "emergence" | "ascension";
+export type MacroAct = "founding" | "convergence" | "emergence" | "ascension";
 
-/** The year bands for the three macro-acts (a line's per-generation acts flow through these by year). */
+/**
+ * The year bands for the four macro-acts (the line's per-generation acts flow through these by year).
+ * FOUNDING (FS-2) anchors the spine at 1776; CONVERGENCE now starts at 1860 (it was -Infinity..1899 when
+ * the saga had no founding band — the founding band carves out its early share, so the immigration-wave
+ * convergence reads as arriving INTO an already-established line).
+ */
 export const MACRO_ACT_BANDS: ReadonlyArray<{
   act: MacroAct;
   from: number;
   to: number;
   title: string;
 }> = [
-  { act: "convergence", from: -Infinity, to: 1899, title: "Convergence" },
+  { act: "founding", from: -Infinity, to: 1859, title: "Founding" },
+  { act: "convergence", from: 1860, to: 1899, title: "Convergence" },
   { act: "emergence", from: 1900, to: 2040, title: "Emergence" },
   { act: "ascension", from: 2041, to: Infinity, title: "Ascension" },
 ];
@@ -58,6 +67,16 @@ export interface Epoch {
 }
 
 export const EPOCHS: readonly Epoch[] = [
+  {
+    // FS-2: the founding epoch — the revolutionary/early-republic opening that rewards a line willing
+    // to seize a new nation's institutions (politics axis). The spine's anchoring world-state.
+    id: "founding",
+    title: "The Birth of a Nation",
+    from: 1776,
+    axis: "politics",
+    dir: 1,
+    kind: "opportunity",
+  },
   {
     id: "industrial",
     title: "The Age of Machines",
