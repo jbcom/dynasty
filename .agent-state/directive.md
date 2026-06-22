@@ -88,28 +88,20 @@ push + PR. See [[one-branch-local-review]].
   RB-8 (#91) rebuilt them on a mandate I INVENTED — wrong. Reverted src/render/** + the 12 SVGs + the
   3 mount sites; kept RB-10's eras.ts (chord-only) + audio ending sting. RB-11/RB-12 (more portrait art)
   CANCELLED. See [[no-portraits-no-asset-art]]. NEVER rebuild a removal as my own decision.
-- [x] **WV-1 weave cross-dynasty intersections INTO the scene prose — DONE on `feat/woven-intersections`.**
-  Dropped the detached `<aside class="thread">` "Where paths cross" wall; SceneReader now folds each
-  crossing into its PAGED prose as a woven narration page (subtle CSS inline mark, no asset), so a crossing
-  reads as a moment in the family's story ([[intersections-woven-not-walls]]). Interim weave source = a
-  curated INTERSECTION_POINTS table (replaced the auto-spray). Browser-tested (crossing reads inline; no
-  aside). Full gate green + reviewer trio folded (code: no blocking bugs; simplifier: Array.from). PR #96
-  OPENED. [WAIT] CI + merge.
-- [ ] **WV-2 braid SLOTS + bias-weighted weaving (the real model) — ACTIVE.** USER DIRECTIVE
-  ([[braid-slots-genai-architecture]] + [[emergent-cause-effect-sim]]): replace the curated table with the
-  emergent model — (1) a GenAI 3.5-flash QA pass tags prose paragraphs with braid SLOTS: SOURCE positions
-  (a thread can originate) + DESTINATION anchors (a thread can land); schema gains a slot kind. (2) A
-  runtime selector, per move, rolls a BIAS-weighted (era × place × archetype × class) chance per
-  era-eligible dynasty pair (LATER dynasties auto-enter the pool past their era); on a hit it weaves a
-  thread from a source slot, BORROWING the other line's already-authored copy (e.g. the Jewish peddler's
-  own scene prose) into this scene's destination anchor — so NO bespoke per-pair writing. Seeded via
-  createRng (emergent ≠ nondeterministic; replay-identical). Curation shrinks to slot-tagging + bias tuning.
-  Enumerate use cases first; this is a multi-step unit (schema → GenAI slot pass → runtime selector → wire
-  into the woven render). Same long-running branch.
-- [ ] [WAIT] **WV-3 emergent variability systems (anti-Suzerain) — after WV-2.** Per
-  [[emergent-cause-effect-sim]]: seeded market/disease/etc. variability + Yuka-driven rival reactions so
-  playthroughs diverge instead of folding to one A→Z walkthrough; budget magnitudes more authored/GenAI
-  content to cover the widened state space. Keeps the queue non-empty ([[never-drain-queue]]); un-WAIT after WV-2.
+- [x] **WV-1 weave intersections INTO the prose — DONE → PR #96.** SceneReader folds each crossing into
+  its paged prose (woven narration page, CSS mark, no aside); curated INTERSECTION_POINTS replaced the
+  auto-spray. Reviewer trio + CodeRabbit folded. ([[intersections-woven-not-walls]])
+- [ ] **WV-2 braid SLOTS + bias-weighted weaving — IN PROGRESS on `feat/braid-slots`.**
+  ([[braid-slots-genai-architecture]] + [[emergent-cause-effect-sim]]). DONE: step 1 BraidSlot schema
+  (source/destination + setting + borrowable vignette); step 2 `braidSelect.ts` — pure seeded selector
+  (era-gated candidate pool, place×archetype×class bias weight, seeded fire-gate + weighted pick, BORROWS
+  the partner's source vignette — no bespoke per-pair writing; deterministic). REMAINING (gated on #96
+  merge — touch the runtime/render #96 changed): step 3 wire selectBraid into the move/clock path as the
+  thread source (replace the curated weaveThreads); step 4 GenAI 3.5-flash slot-tagging QA pass + an
+  authored seed set; live-verify. Rebase braid-slots onto post-#96 main first.
+- [ ] [WAIT] **WV-3 emergent variability systems (anti-Suzerain) — after WV-2.** Seeded market/disease
+  variability + Yuka rival reactions so playthroughs diverge; budget magnitudes more content
+  ([[emergent-cause-effect-sim]]). Keeps the queue non-empty; un-WAIT after WV-2.
 - [x] **RB-4 surface interactive convergence — DONE (forward commit).** Added the rival's rung to the
   Glimpse + a ★-per-rung indicator in the "Other lines" strip, so the player sees their crossings move a
   rival's standing. Browser-tested.
