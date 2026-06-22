@@ -74,4 +74,25 @@ describe("SceneStage (RB-8)", () => {
     component = mount(SceneStage, { target: host, props: { frame } });
     expect(host.querySelector("[data-stage-key]")?.getAttribute("data-stage-key")).toBe(frame.key);
   });
+
+  it("builds DOM-safe gradient ids even when the era id has spaces/colons (the key carries both)", () => {
+    // A macro-act title flows in as eraId — frame.key then has ":" and spaces, invalid in an SVG id and
+    // would break the url(#…) reference. The id must be slugified; the rect fill must match the def id.
+    const frame = composeScene({
+      variant: "scene",
+      archetype: "economic",
+      cls: "poor",
+      eraId: "Mars Interregnum",
+      sense: "sight",
+    });
+    component = mount(SceneStage, { target: host, props: { frame } });
+    const grad = host.querySelector("linearGradient");
+    const id = grad?.getAttribute("id") ?? "";
+    expect(id).not.toBe("");
+    expect(id).not.toMatch(/[\s:]/); // no spaces or colons
+    expect(id).toMatch(/^grad-[A-Za-z0-9_-]+$/);
+    // The rect references the SAME id (the gradient actually applies).
+    const fill = host.querySelector("rect")?.getAttribute("fill") ?? "";
+    expect(fill).toBe(`url(#${id})`);
+  });
 });

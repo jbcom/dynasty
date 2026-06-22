@@ -44,6 +44,10 @@ function hideOnError(e: Event) {
   const el = e.currentTarget as HTMLImageElement | null;
   if (el) el.style.visibility = "hidden";
 }
+
+// A DOM-safe gradient id base: frame.key carries ":" and (when eraId is a macro-act title) spaces,
+// which are invalid in an SVG id and break the `url(#…)` reference. Slugify to [A-Za-z0-9_-].
+const gradId = $derived(frame.key.replace(/[^A-Za-z0-9_-]+/g, "-"));
 </script>
 
 <!-- key on the descriptor identity so a changed line/era cross-fades the whole stage. -->
@@ -61,20 +65,20 @@ function hideOnError(e: Event) {
            bloomed at the lower third. SVG so it's crisp at any size and carries no asset cost. -->
       <svg class="wash" preserveAspectRatio="none" viewBox="0 0 100 100" data-testid="scene-wash">
         <defs>
-          <linearGradient id={`grad-${frame.key}`} x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id={`grad-${gradId}`} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color={frame.wash.top} />
             <stop offset="100%" stop-color={frame.wash.bottom} />
           </linearGradient>
           {#if frame.accent}
-            <radialGradient id={`glow-${frame.key}`} cx="50%" cy="78%" r="70%">
+            <radialGradient id={`glow-${gradId}`} cx="50%" cy="78%" r="70%">
               <stop offset="0%" stop-color={frame.accent} stop-opacity="0.22" />
               <stop offset="60%" stop-color={frame.accent} stop-opacity="0" />
             </radialGradient>
           {/if}
         </defs>
-        <rect x="0" y="0" width="100" height="100" fill={`url(#grad-${frame.key})`} />
+        <rect x="0" y="0" width="100" height="100" fill={`url(#grad-${gradId})`} />
         {#if frame.accent}
-          <rect x="0" y="0" width="100" height="100" fill={`url(#glow-${frame.key})`} />
+          <rect x="0" y="0" width="100" height="100" fill={`url(#glow-${gradId})`} />
         {/if}
       </svg>
     {/if}

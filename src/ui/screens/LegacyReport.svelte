@@ -10,7 +10,7 @@ import type { EndState, GameState } from "../../sim/state";
 import ButterflyGraph from "../ButterflyGraph.svelte";
 import { formatMoney } from "../theme";
 import SceneStage from "../../render/SceneStage.svelte";
-import { composeScene, type EndingOutcome, type RenderClass } from "../../render/composeScene";
+import { composeScene } from "../../render/composeScene";
 import { sagaClassForWealth } from "../../sim/classRung";
 import { macroActForYear, macroActTitle } from "../../sim/macroActs";
 
@@ -81,10 +81,12 @@ const endingFrame = $derived(
   composeScene({
     variant: "ending",
     archetype: state.archetype,
-    cls: sagaClassForWealth(state.meters.money) as RenderClass,
+    // sagaClassForWealth returns "poor" | "middle" (= RenderClass) and Destination === EndingOutcome,
+    // so neither value needs a cast — the types line up at the source.
+    cls: sagaClassForWealth(state.meters.money),
     eraId: macroActTitle(macroActForYear(end.year)),
     pole: poleLabel,
-    outcome: (convergence?.destination as EndingOutcome) ?? "earthbound",
+    outcome: convergence?.destination ?? "earthbound",
   }),
 );
 </script>
