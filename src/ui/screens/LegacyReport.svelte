@@ -9,6 +9,10 @@ import { applyTerms, runTerms } from "../../sim/terms";
 import type { EndState, GameState } from "../../sim/state";
 import ButterflyGraph from "../ButterflyGraph.svelte";
 import { formatMoney } from "../theme";
+import SceneStage from "../../render/SceneStage.svelte";
+import { composeScene, type EndingOutcome, type RenderClass } from "../../render/composeScene";
+import { sagaClassForWealth } from "../../sim/classRung";
+import { macroActForYear, macroActTitle } from "../../sim/macroActs";
 
 interface Props {
   content: Content;
@@ -67,9 +71,27 @@ const dynasty = $derived.by(() => {
   const houseName = fam.members[0]?.surname ?? "—";
   return { generations: topGen + 1, members: fam.members.length, span, houseName };
 });
+
+// RB-8 (step 5): the ENDING-variant composed frame — the line's portrait under an outcome overlay +
+// the final era's wash — as a faint backdrop behind the legacy report. The outcome maps from the
+// convergence destination (stars/contributed/earthbound/extinguished), defaulting to earthbound for a
+// per-run end with no dynastic convergence resolved. Pure presentation; degrades to the wash alone
+// until the portrait art lands.
+const endingFrame = $derived(
+  composeScene({
+    variant: "ending",
+    archetype: state.archetype,
+    cls: sagaClassForWealth(state.meters.money) as RenderClass,
+    eraId: macroActTitle(macroActForYear(end.year)),
+    pole: poleLabel,
+    outcome: (convergence?.destination as EndingOutcome) ?? "earthbound",
+  }),
+);
 </script>
 
 <main class="report" data-end={end.kind} data-tier={tier} class:apex={isApex}>
+  <!-- RB-8: the ending-variant portrait + final-era wash, a faint backdrop behind the report copy. -->
+  <SceneStage frame={endingFrame} />
   {#if convergence}
     <!-- The dynastic CONVERGENCE framing: how the line's century-spanning arc finally read. -->
     <p class="convergence" data-destination={convergence.destination} data-testid="convergence">
@@ -108,10 +130,16 @@ const dynasty = $derived.by(() => {
 
 <style>
   .report {
+    position: relative;
     max-width: 34rem;
     margin: 0 auto;
     padding: var(--mmm-pad);
     text-align: center;
+  }
+  /* RB-8: the ending stage sits behind the report copy (its own pointer-events:none); lift the copy. */
+  .report > :global(*:not(.stage)) {
+    position: relative;
+    z-index: 1;
   }
   h1 {
     font-family: var(--mmm-font-display);
