@@ -243,13 +243,15 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   enforces scene-ref integrity (caught the model dropping/mis-naming scenes — a defect shape+leak
   validation missed). See [[mmm-scoped-qa-pipeline]].
 
-- [ ] **PF-18 SCOPE-DELINEATED QA SWEEP** (spec 2026-06-22; in progress on feat/saga-polish). User
-  directive: QA delineated by IMPACT SCOPE, fix the whole affected unit. New src/sim/genai/qa.ts +
-  scripts/genai-qa.ts. Fixed the leak floor's false positives (case-insensitive "musk"/pooled given
-  names) — extracted to one shared src/sim/leak.ts. (a) scene polish over all 84 files — DONE (504
-  acts lifted, 0 kept-on-fail, structure intact). (b) lineage continuity pass — RUNNING. (c) braid
-  authoring (pair-specific cross-storyline crossings into midpoint thread[]) — NEXT. Then commit +
-  fold into PF-13's full run.
+- [ ] [WAIT] **PF-18 SCOPE-DELINEATED QA SWEEP** (spec 2026-06-22; feat/saga-polish). User directive:
+  QA delineated by IMPACT SCOPE, fix the whole affected unit. New src/sim/genai/qa.ts + scripts/
+  genai-qa.ts. Fixed the leak floor's false positives (case-insensitive "musk"/pooled given names) —
+  extracted to one shared src/sim/leak.ts. (a) scene polish over all 84 files — DONE (504 acts lifted,
+  0 kept-on-fail, structure intact, committed). (b) lineage continuity pass — RUNNING (bg, monitor
+  bfiv2crrr; writes the same files braid touches). (c) braid authoring verified sound (rivals resolve
+  42/42 wave×tier on full corpus; message fix committed) — BLOCKED on (b) finishing to avoid clobbering
+  lineage's writes on the shared tree. ON LINEAGE DONE: verify integrity + commit (b), then launch the
+  UNSCOPED braid write, verify + commit (c). Then fold into PF-13's full run.
 
 - [x] **PF-6 ROOT GAP: class threaded through onboarding → founding — DONE** (commit 4b0318e). The
   chosen ArrivalClass now flows OnboardingScreen.onComplete → App.birthGame → resolveWaveStart(place,
