@@ -70,8 +70,8 @@ describe("narrative acts (novel model)", () => {
     expect(sceneEligible(s, new Set())).toBe(true);
   });
 
-  it("buildCorpus WEAVES a midpoint intersection to a sibling wave at the same tier", () => {
-    // Two waves, each with a tier-0 act whose midpoint carries no authored thread.
+  it("WV-1: weaves a crossing ONLY at a curated intersection point (not every act)", () => {
+    // A curated point exists for ireland@tier0 with partner italian; build both + a NON-curated wave.
     const mkAct = (wave: string) =>
       ActChapterSchema.parse({
         id: `act:${wave}:economic:t0`,
@@ -91,16 +91,22 @@ describe("narrative acts (novel model)", () => {
           "Another family moves through the press, and for a moment the two lines touch.",
         ],
       });
-    const c = buildCorpus([mkAct("alpha"), mkAct("beta")], [mkMid("alpha"), mkMid("beta")]);
-    const alphaMid = c.scenes.get("sc:alpha:midpoint");
-    expect(alphaMid?.thread).toHaveLength(1);
-    expect(alphaMid?.thread[0]?.wave).toBe("beta"); // sibling wave
-    expect(alphaMid?.thread[0]?.atTier).toBe(0);
-    expect(alphaMid?.thread[0]?.crossing?.length ?? 0).toBeGreaterThan(0); // bespoke crossing woven in
-    // And it resolves to beta's act-opening fragment + carries the crossing line.
-    const braided = resolveThreads(c, alphaMid!);
-    expect(braided[0]?.wave).toBe("beta");
+    const c = buildCorpus(
+      [mkAct("ireland"), mkAct("italian"), mkAct("scandinavian")],
+      [mkMid("ireland"), mkMid("italian"), mkMid("scandinavian")],
+    );
+    // ireland@0 is curated → gets a woven crossing to italian (its first existing partner).
+    const irishMid = c.scenes.get("sc:ireland:midpoint");
+    expect(irishMid?.thread).toHaveLength(1);
+    expect(irishMid?.thread[0]?.wave).toBe("italian");
+    expect(irishMid?.thread[0]?.atTier).toBe(0);
+    expect(irishMid?.thread[0]?.relation).toBe("contributing");
+    expect(irishMid?.thread[0]?.crossing?.length ?? 0).toBeGreaterThan(0); // bespoke woven prose
+    const braided = resolveThreads(c, irishMid!);
+    expect(braided[0]?.wave).toBe("italian");
     expect(braided[0]?.crossing.length).toBeGreaterThan(0);
+    // scandinavian@0 is NOT a curated point → no auto-sprayed crossing.
+    expect(c.scenes.get("sc:scandinavian:midpoint")?.thread).toHaveLength(0);
   });
 
   it("crossingLine is PAIR-SPECIFIC: it names both peoples (PF-10)", () => {

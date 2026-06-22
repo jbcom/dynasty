@@ -30,34 +30,86 @@ export function buildCorpus(acts: ActChapter[], scenes: Scene[]): SagaCorpus {
 }
 
 /**
- * Deterministically weave cross-family INTERSECTIONS into the corpus: each act's MIDPOINT scene (the
- * spine slot whose intent is "another line's path may cross here") threads to a SIBLING wave at the
- * same tier — same era/macro-act, so the paths plausibly cross. The sibling is the next wave in sorted
- * roster order (wrapping), skipping the act's own wave; the thread is set only if that rival act
- * actually exists in the corpus. Idempotent: a scene that already declares a thread is left alone, and
- * a re-weave produces the identical result (the roster order is fixed). No RNG — pure + replay-safe.
+ * CURATED INTERSECTION POINTS (WV-1) — cross-dynasty crossings happen at a SMALL, deliberate set of
+ * moments, not on every act. The earlier auto-spray attached a generic crossing to every act's midpoint;
+ * that produced filler that read templated and got dumped as a wall of text. Instead: a curated table of
+ * specific points (a tier + the played wave) each naming its few plausible partner lines and the bespoke
+ * crossing prose + relation for the moment. A scene becomes a crossing ONLY if it's in this table (or the
+ * corpus already authored `scene.thread`). The partner is the first one that actually exists in the
+ * corpus at that tier — so the moment is real, chosen, and limited (the user's model: limited encounters
+ * per scenario, trigger those). Pure + deterministic; no RNG.
+ *
+ * `at` matches the act's tier; `wave` the played line; `partners` are tried in order (era/place-plausible
+ * neighbours). `crossing` is the woven prose; `relation` drives the interactive rival nudge.
+ */
+interface IntersectionPoint {
+  at: number; // reach tier
+  wave: string; // the played line this point fires for
+  partners: string[]; // plausible encountering lines, in preference order
+  crossing: string; // the woven crossing prose (the moment, in the player's story)
+  relation: "opposing" | "contributing" | "neutral";
+}
+
+const INTERSECTION_POINTS: readonly IntersectionPoint[] = [
+  // The immigrant ground (tier 0): two lines off the same boats, in the same tenements.
+  {
+    at: 0,
+    wave: "ireland",
+    partners: ["italian", "bavaria", "ashkenazi_jewish"],
+    crossing:
+      "Down the same airless stair lives another newcomer family, their language not yours, their hungers exactly yours; a borrowed pot, a shared landing, and a wary nod seals a neighbourliness neither of you will quite admit to.",
+    relation: "contributing",
+  },
+  {
+    at: 0,
+    wave: "italian",
+    partners: ["ireland", "ashkenazi_jewish", "chinese"],
+    crossing:
+      "At the market stall the two of you reach for the same cheap cut, and in the haggling that follows — half insult, half respect — a rivalry begins that will outlast you both.",
+    relation: "opposing",
+  },
+  // The climb (tier 2): the line meets capital it does not yet have.
+  {
+    at: 2,
+    wave: "bavaria",
+    partners: ["ashkenazi_jewish", "ireland", "scandinavian"],
+    crossing:
+      "The financier who could make your venture sits across a polished table — another family's name on the door — and weighs your line the way you have learned to weigh others.",
+    relation: "contributing",
+  },
+  // The summit (tier 4): two arrived houses contend for the same height.
+  {
+    at: 4,
+    wave: "chinese",
+    partners: ["italian", "scandinavian", "bavaria"],
+    crossing:
+      "At the gala both your houses are toasted in the same breath, and beneath the applause you each measure exactly how far the other has climbed — and how far is left.",
+    relation: "opposing",
+  },
+];
+
+/**
+ * Weave the CURATED intersection points into the corpus: for each act whose (tier, wave) matches a
+ * point, set the midpoint scene's thread to the first partner that exists at that tier — unless the
+ * scene already declares an authored thread (that wins). No act outside the curated set gets a crossing.
+ * Idempotent + pure (fixed table, no RNG) — replay-safe.
  */
 export function weaveThreads(corpus: SagaCorpus): void {
-  const waves = [...new Set([...corpus.acts.values()].map((a) => a.wave))].sort();
-  if (waves.length < 2) return;
+  const hasActAtTier = (wave: string, tier: number) =>
+    [...corpus.acts.values()].some((a) => a.wave === wave && a.tier === tier);
+
   for (const act of corpus.acts.values()) {
+    const point = INTERSECTION_POINTS.find((p) => p.at === act.tier && p.wave === act.wave);
+    if (!point) continue;
     const midId = act.scenes.find((id) => id.endsWith(":midpoint"));
     if (!midId) continue;
     const mid = corpus.scenes.get(midId);
     if (!mid || mid.thread.length > 0) continue; // respect an authored thread
-    // The sibling wave: the next wave after this act's, wrapping, that has an act at this tier.
-    const start = waves.indexOf(act.wave);
-    for (let step = 1; step < waves.length; step++) {
-      const rival = waves[(start + step) % waves.length];
-      if (!rival || rival === act.wave) continue;
-      const rivalHasTier = [...corpus.acts.values()].some(
-        (a) => a.wave === rival && a.tier === act.tier,
-      );
-      if (rivalHasTier) {
-        mid.thread = [{ wave: rival, atTier: act.tier, crossing: crossingLine(act.wave, rival) }];
-        break;
-      }
-    }
+    const partner = point.partners.find((w) => w !== act.wave && hasActAtTier(w, act.tier));
+    if (!partner) continue;
+    mid.thread = [
+      { wave: partner, atTier: act.tier, crossing: point.crossing, relation: point.relation },
+    ];
   }
 }
 
