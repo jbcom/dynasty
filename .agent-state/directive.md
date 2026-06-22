@@ -173,10 +173,11 @@ is locked, execute autonomously, self-pace, own the full PR loop.
   scene's ThreadRef[] to the rival wave's act-opening fragment (archetype-agnostic; dead ref → no
   fire); SagaFrame.threads + PlayScreen "Elsewhere — another line" braided aside. Unit + browser
   green. (committed) — authoring thread refs INTO the corpus is a content step (genai/author) post-sweep.
-- [ ] [WAIT-CI] **NA-14 PR + merge** — PR #65 OPEN (https://github.com/jbcom/dynasty/pull/65), branch
-  pushed, local gate green (607 unit + 83 browser + build). Monitor bxb72s4d0 armed on CI checks.
-  ON CI GREEN: address any review threads (CodeRabbit) → squash-merge → keep post-merge CD/Release green.
-  ON CI RED: read the failing job, fix forward, push. (build-and-test + Analyze/CodeQL + CodeRabbit pending.)
+- [ ] [WAIT-CI] **NA-14 PR + merge** — PR #65 OPEN (https://github.com/jbcom/dynasty/pull/65). First CI
+  run RED (e2e drove the old EventCard selector + the run never ended while saga was the play surface)
+  → FIXED (87a03f3): saga picks advance the run clock + resume the event flow on act-end; e2e drives
+  the SceneReader. Now 7 e2e + 607 unit + 83 browser + typecheck + biome green LOCALLY. CI re-running
+  (Monitor bxnlnrn85). ON GREEN: address any CodeRabbit threads → squash-merge → keep CD/Release green.
 
 After NA-14 merges, RETURN to the standing autonomous POLISH & FEATURES mandate (top of file):
 self-pace the highest-value improvement, own the full PR loop, keep the directive living.
