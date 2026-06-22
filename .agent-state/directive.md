@@ -283,12 +283,14 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   hand-edit). REMAINING: a final docs pass in PF-13 once PF-7/8/11 land (update the "still being wired"
   list as gaps close).
 
-- [ ] **PF-13 final pass: full gate + live-verify a full hour-long run + open the PR.** UNBLOCKED
-  (PF-5 corpus complete + PF-9 retitled). typecheck (PASS) +
-  biome + 600+ unit + browser + e2e + harness 0-findings; play a founded line poor AND middle through
-  multiple generations in Chrome (READ screenshots); confirm: novel reads as novel, classes diverge,
-  glimpses populate, intersections fire, titles distinct, hour+ of content. Open the ONE PR for
-  feat/saga-polish; green CI; resolve threads; squash-merge; keep post-merge CD/Release green.
+- [ ] **PF-13 final pass: full gate + live-verify + open the PR.** GATE GREEN: typecheck + biome + 642
+  unit + 89 browser + 7 e2e + build all pass. LIVE-VERIFY DONE (Chrome, screenshots READ): poor Italian
+  line founded → diegetic onboarding → distinct meso title "Between Salt and Iron" (not the generic cue) →
+  QA-lifted sensory steerage prose → paged reader advances → inline GLOWING options fold into the story →
+  slide-out "THE LINE" menu (8 motivators, OTHER LINES glimpses, codex, meters, personality) → multi-gen
+  play → convergence-aware LegacyReport ("Toppled", muddled middle, House of Romano stats). All PF
+  surfaces confirmed working with the QA'd corpus. REMAINING: push feat/saga-polish + open the ONE PR;
+  green CI; resolve threads; squash-merge; keep post-merge CD/Release green.
 
 ### DEEPER GAP AUDIT (2026-06-22, round 2) — more partial/unwired surfaces, do contiguously
 
