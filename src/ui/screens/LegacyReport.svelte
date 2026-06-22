@@ -9,10 +9,12 @@ import { applyTerms, runTerms } from "../../sim/terms";
 import type { EndState, GameState } from "../../sim/state";
 import ButterflyGraph from "../ButterflyGraph.svelte";
 import { formatMoney } from "../theme";
+import { onMount } from "svelte";
 import SceneStage from "../../render/SceneStage.svelte";
 import { composeScene } from "../../render/composeScene";
 import { sagaClassForWealth } from "../../sim/classRung";
 import { macroActForYear, macroActTitle } from "../../sim/macroActs";
+import { playEndingSting } from "../sound";
 
 interface Props {
   content: Content;
@@ -89,6 +91,12 @@ const endingFrame = $derived(
     outcome: convergence?.destination ?? "earthbound",
   }),
 );
+
+// RB-10: a one-shot ending sting coloured by the convergence outcome, fired once when the report mounts
+// (audio-gated + fully guarded inside playEndingSting). The saga's close gets an audible punctuation.
+onMount(() => {
+  playEndingSting(convergence?.destination ?? "earthbound");
+});
 </script>
 
 <main class="report" data-end={end.kind} data-tier={tier} class:apex={isApex}>

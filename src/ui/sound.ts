@@ -73,6 +73,30 @@ export function setMusicEra(eraId: string): void {
   }
 }
 
+/**
+ * The ending STING (RB-10) — a one-shot pad chord that colours the saga's close by its convergence
+ * outcome: stars = the luminous open-fifths chord, contributed = the striving ascent chord, earthbound
+ * = the rooted origins chord, extinguished = a low minor fall. Reuses the ambient pad (setEra triggers
+ * the chord once), gated by the sound setting; starts the graph if a prior tap hasn't. No-op off-browser
+ * or on any audio failure — the ending must render with or without sound.
+ */
+const ENDING_STING: Record<string, string[]> = {
+  stars: ["G2", "D3", "A3", "E4"], // open fifths — luminous, vast
+  contributed: ["D3", "F#3", "A3"], // striving, bright
+  earthbound: ["C3", "E3", "G3"], // rooted, plain
+  extinguished: ["C3", "Eb3", "G3", "C2"], // a low minor fall
+};
+export function playEndingSting(outcome: string): void {
+  if (!enabled || typeof window === "undefined") return;
+  const chord = ENDING_STING[outcome] ?? ENDING_STING.earthbound;
+  try {
+    startMusic(); // ensure the graph exists; if not yet started, the chord rides the pending-era apply
+    if (music?.isStarted) music.setEra(`ending:${outcome}`, chord);
+  } catch {
+    // The sting is non-essential — never let it break the ending screen.
+  }
+}
+
 /** Play a one-shot cue if sound is enabled. No-ops outside the browser or on any audio failure. */
 export function playCue(id: SfxId): void {
   if (!enabled || typeof window === "undefined") return;

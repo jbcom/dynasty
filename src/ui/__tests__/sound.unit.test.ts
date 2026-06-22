@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { chordForEra, playCue, setMusicEra, setSoundEnabled, startMusic } from "../sound";
+import {
+  chordForEra,
+  playCue,
+  playEndingSting,
+  setMusicEra,
+  setSoundEnabled,
+  startMusic,
+} from "../sound";
 
 /**
  * The sound facade (PF-15/PF-17) is browser-guarded + fully try/caught — every entry point must be a
@@ -15,6 +22,10 @@ describe("sound facade", () => {
     expect(() => playCue("stinger")).not.toThrow();
     expect(() => startMusic()).not.toThrow();
     expect(() => setMusicEra("origins")).not.toThrow();
+    // RB-10: the ending sting is safe for every outcome (and an unknown one) off-browser.
+    for (const o of ["stars", "contributed", "earthbound", "extinguished", "??"]) {
+      expect(() => playEndingSting(o)).not.toThrow();
+    }
   });
 
   it("respects the enabled flag (disabled → cues short-circuit before touching audio)", () => {
