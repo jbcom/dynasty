@@ -74,6 +74,12 @@ push + PR. See [[one-branch-local-review]].
   `SceneStage.svelte` mounted behind the SceneReader prose + cross-fade (step 4), then the
   generation-turn / era-crossing / ending / rival-vignette variants each visual-tested (step 5).
   Caricature only ([[dynasty-ui-conventions]]); no placeholders. Start from clean main (#89 merged → v0.14.0).
+  PROGRESS: steps 1,2,4 DONE + WIRED (palettes 86e03a5, composeScene b156dac, SceneStage 7cc67ad,
+  PlayScreen mount c68f45b). LIVE-VERIFIED in Chrome: the origins-era warm wash + sense bloom renders
+  behind the steerage scene prose (screenshot read against the design); app runs through to an ending
+  cleanly (the ending screen is the home for the `ending` variant → step 5). REMAINING:
+  step 3 (raster caricature portrait-layer art via aseprite/assets-library, license-logged — the heavy
+  asset lift) + step 5 (wire the ending/rival-vignette variant frames onto their screens, visual-tested).
 - [ ] [WAIT] **RB-10 audio↔visual era lockstep + scene-stage polish.** ONCE RB-8 lands SceneStage:
   single-source the era ramp so `chordForEra` (audio) and `palettes.ts` (visual) read the SAME era table
   (today they're parallel maps that could drift); add the ending composed frame's audio sting; visual+audio
