@@ -49,6 +49,7 @@ describe("SagaPanel", () => {
           label: "italian",
           relation: "opposing" as const,
           note: "rising",
+          rung: 2,
         },
       ],
     };
@@ -56,5 +57,7 @@ describe("SagaPanel", () => {
     const glimpses = host.querySelector('[data-testid="glimpses"]');
     expect(glimpses?.textContent).toContain("italian");
     expect(glimpses?.querySelector('[data-relation="opposing"]')).toBeTruthy();
+    // RB-4: the rival's rung is shown (★ per rung+1) so the player sees their crossings move it.
+    expect(glimpses?.querySelector(".glimpse-rung")?.textContent).toBe("★★★"); // rung 2 → 3 stars
   });
 });

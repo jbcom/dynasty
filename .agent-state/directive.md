@@ -52,13 +52,35 @@ by construction.
   so any founding year (762 or 1885) plays a full 6-generation run. Touches loop.ts:advanceRunClock —
   do AFTER #83 merges (overlaps that file). Verify all 7 waves reach ~150 scenes; test replay-determinism + PR.
   [WAIT] #83 (loop.ts) to merge first.
-- [~] **RB-3 presentation polish** — IN PROGRESS. Slice 1 (between-scene fade transition + data-scene-id
-  hook in SceneReader) shipped in PR #86. [WAIT] #86 to merge, then slice 2 (per-era ambient audio depth)
-  + slice 3 (per-act caricature portrait/scene compositing, src/render) from clean main.
-- [ ] [WAIT] **RB-4 surface interactive convergence in the UI** — show the player when a crossing shifted a
-  rival (the slide-out "OTHER LINES" reflects nudges); a brief in-scene cue. PR. (After #85/#86 merge.)
-- [ ] [WAIT] **RB-5 codex/timeline depth** — the CodexView + a timeline view of the line's generations +
-  the rival world's trajectory; PR. (After #85/#86 merge.)
+## CONSOLIDATION (user, 2026-06-22): ONE long-running local branch, comprehensively reviewed LOCALLY
+
+Squad merged (#85 RB-7 baghdad clock + #86 RB-3 scene-transition slice-1). Per the user, NO more
+PR-per-item — all remaining work lands as forward commits on `feat/presentation-and-convergence-ui`,
+then the FULL local gate (typecheck + biome + unit + browser + e2e) + the reviewer trio
+(comprehensive-review:full-review / security / code-simplifier) run on the whole diff before the SINGLE
+push + PR. See [[one-branch-local-review]].
+
+- [x] **RB-3 presentation polish — DONE (slices 1-2).** Slice-1 (#86: scene fade + data-scene-id);
+  slice-2 (forward commit: per-era ambient chords so the pad mood deepens across the arc). Slice-3
+  (caricature portrait/scene compositing) is NOT a polish slice — `src/render` is empty (the module was
+  removed; only a stale Portrait.visual screenshot remains), so it's a from-scratch subsystem needing an
+  asset pipeline + real 2D caricature art ([[dynasty-ui-conventions]]) — DECIDED to split it out as RB-8.
+- [ ] [WAIT] **RB-8 caricature portrait/scene compositing (new subsystem).** Build src/render: per-act
+  portrait + scene compositing from real 2D assets (caricature only, license-logged in assets.json),
+  wired into the SceneReader/PlayScreen. Needs a design pass (use-case enumeration) + the asset pipeline
+  first; visual-tested. Its own milestone — start from clean main AFTER the consolidation PR (RB-9) merges
+  (avoid touching the branch under review).
+- [x] **RB-4 surface interactive convergence — DONE (forward commit).** Added the rival's rung to the
+  Glimpse + a ★-per-rung indicator in the "Other lines" strip, so the player sees their crossings move a
+  rival's standing. Browser-tested.
+- [x] **RB-5 codex/timeline depth — DONE (forward commit).** TimelineView/LineageView/CodexView already
+  exist; the gap was the rival world's trajectory being invisible. Added GameView.rivalStandings + a
+  RivalField component in the slide-out menu showing every line's rung (player's marked), so the whole
+  convergence race is legible. Browser-tested.
+- [x] **RB-9 local comprehensive review + the ONE PR — DONE → PR #89.** Full local gate green (typecheck +
+  biome + 655 unit + 92 browser + 7 e2e + build) + serial reviewer trio (code review: 2 findings folded;
+  security: clean; simplifier: RungStars extracted) BEFORE the single push. PR #89 opened. [WAIT] CI +
+  merge, then keep CD green. (Per [[one-branch-local-review]].)
 ALSO OWN (user, 2026-06-21): merge the release-please PRs, and keep ALL workflows green —
 not just feature-PR CI, but the post-merge CD/Release on main too. PR #47 fixed a
 long-standing CD APK break (proguard-android.txt → -optimize.txt for Gradle 9.6/R8). Release

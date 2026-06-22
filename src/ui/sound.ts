@@ -17,6 +17,24 @@ let enabled = true;
 let music: AudioEngine | null = null;
 let pendingEra: string | null = null;
 
+/**
+ * Per-era ambient CHORD (RB-3): when no `/assets/audio/<era>.ogg` exists, AudioEngine.setEra falls back
+ * to a synth pad — give each era a distinct chord so the mood deepens across the run's arc (warm/rooted
+ * early → open/luminous late) instead of every era playing the same C-E-G. Matched by era-id prefix so
+ * new period ids inherit a sensible neighbour; the default is the rooted origins chord.
+ */
+const ERA_CHORD: Array<[RegExp, string[]]> = [
+  [/origins|1885|founding/i, ["C3", "E3", "G3"]], // rooted, warm — the immigrant ground
+  [/mogul|1964|industr/i, ["A2", "C3", "E3", "G3"]], // a minor-7 weight as the line climbs
+  [/brand|primetime|ascent|1988|2004|2015/i, ["D3", "F#3", "A3"]], // brighter, striving
+  [/interregnum|mars|2021|2028/i, ["E3", "G#3", "B3", "D#4"]], // tense, suspended major-7
+  [/contact|interstellar|ascension|stars/i, ["G2", "D3", "A3", "E4"]], // open fifths — luminous, vast
+];
+export function chordForEra(eraId: string): string[] {
+  for (const [re, chord] of ERA_CHORD) if (re.test(eraId)) return chord;
+  return ["C3", "E3", "G3"];
+}
+
 /** Toggle whether cues play (from the `sound` setting). */
 export function setSoundEnabled(on: boolean): void {
   enabled = on;
@@ -41,7 +59,7 @@ export function startMusic(): void {
       music
         .start()
         .then(() => {
-          if (pendingEra && music) music.setEra(pendingEra);
+          if (pendingEra && music) music.setEra(pendingEra, chordForEra(pendingEra));
         })
         .catch(() => {
           // Music is non-essential — a blocked audio context must never surface as an unhandled rejection.
@@ -56,7 +74,7 @@ export function startMusic(): void {
 export function setMusicEra(eraId: string): void {
   pendingEra = eraId;
   try {
-    if (music?.isStarted) music.setEra(eraId);
+    if (music?.isStarted) music.setEra(eraId, chordForEra(eraId));
   } catch {
     // ignore
   }

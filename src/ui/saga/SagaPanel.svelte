@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { SagaView } from "../../sim/readModel";
+import RungStars from "./RungStars.svelte";
 
 /**
  * SAGA PANEL (Convergence Saga, SS-14) — renders the SS-13 read-model as the novel's running
@@ -46,6 +47,8 @@ const relationIcon: Record<string, string> = {
         <span class="glimpse" data-relation={g.relation}>
           <span class="rel-icon" aria-hidden="true">{relationIcon[g.relation] ?? "•"}</span>
           {g.label} — {g.note}
+          <!-- The rival's rung: your crossings move it (opposing suppresses, contributing lifts) — RB-4. -->
+          <RungStars rung={g.rung} reachLabel="their reach" title="their reach (your crossings move it)" extraClass="glimpse-rung" />
         </span>
       {/each}
     </div>

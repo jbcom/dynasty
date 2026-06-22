@@ -40,6 +40,9 @@ export interface Glimpse {
   relation: Relation;
   /** A short situational tag for the UI/prose seed (e.g. "rising", "ruined", "rival in trade"). */
   note: string;
+  /** The rival's current rung (0..MAX_RUNG) — so the UI can show the player's crossings moving it
+   *  (an opposing crossing suppresses it, a contributing one lifts it). RB-4. */
+  rung: number;
 }
 
 /** The full rival world: the agents + their stored snapshots. */
@@ -173,7 +176,7 @@ export function detectGlimpses(
     if (s.strategy === playerStrategy) relation = "opposing";
     else if (COMPLEMENT[playerStrategy] === s.strategy) relation = "contributing";
     const note = s.tide > 0.3 ? "rising" : s.tide < -0.3 ? "struggling" : "holding";
-    out.push({ rivalId: s.id, label: s.label, relation, note });
+    out.push({ rivalId: s.id, label: s.label, relation, note, rung: s.rung });
     if (out.length >= max) break;
   }
   return out;

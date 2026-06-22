@@ -22,6 +22,7 @@ function view(): GameView {
     currentEvent: content.allEvents[0] ?? null,
     saga: { actTitle: null, scene: null, threads: [], ended: false },
     glimpses: [],
+    rivalStandings: [],
     rung: 0,
     convergence: null,
     lastLedger: [],

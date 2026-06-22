@@ -30,7 +30,7 @@ describe("saga read model (SS-13)", () => {
 
   it("passes glimpses through for the UI", () => {
     const glimpses: Glimpse[] = [
-      { rivalId: "rival:bavaria", label: "bavaria", relation: "opposing", note: "rising" },
+      { rivalId: "rival:bavaria", label: "bavaria", relation: "opposing", note: "rising", rung: 2 },
     ];
     const v = projectSaga({ year: 1900, motivators: mot(), glimpses });
     expect(v.glimpses).toEqual(glimpses);
