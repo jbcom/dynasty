@@ -17,18 +17,19 @@ function validActFile() {
   return {
     acts: [
       {
-        id: "act:bavaria:economic:t1",
+        id: "act:bavaria:economic:middle:t1",
         wave: "bavaria",
         archetype: "economic",
+        cls: "middle",
         tier: 1,
         macroAct: "convergence",
         title: "Act II — The New Ground",
-        scenes: ["act:bavaria:economic:t1:open"],
+        scenes: ["act:bavaria:economic:middle:t1:open"],
       },
     ],
     scenes: [
       {
-        id: "act:bavaria:economic:t1:open",
+        id: "act:bavaria:economic:middle:t1:open",
         sense: "smell",
         prose: [
           "The bakery the {family_name}s have leased smells of rye and coal-smoke, and of the river two streets over that floods every spring.",
@@ -57,8 +58,8 @@ const stubObj =
 describe("genai scene mode", () => {
   it("builds a prompt naming every scene slot of the cell's act", () => {
     const p = buildScenePrompt(req);
-    expect(p).toContain("act:bavaria:economic:t1");
-    expect(p).toContain("act:bavaria:economic:t1:open");
+    expect(p).toContain("act:bavaria:economic:middle:t1");
+    expect(p).toContain("act:bavaria:economic:middle:t1:open");
     expect(p).toContain("never re-stating when/where"); // the no-when/where rule via the opening slot intent
   });
 
@@ -68,7 +69,7 @@ describe("genai scene mode", () => {
       { type: "scene", scene: req, count: 1 },
       stubObj(validActFile()),
     );
-    expect(res.canonicalFile).toBe("src/data/saga/bavaria/economic.act.json");
+    expect(res.canonicalFile).toBe("src/data/saga/bavaria/economic.middle.act.json");
     expect(res.accepted).toHaveLength(1);
     expect(res.rejected).toHaveLength(0);
     const merged = res.merge({ acts: [], scenes: [] }) as { acts: unknown[]; scenes: unknown[] };

@@ -25,9 +25,9 @@ export interface SceneRequest {
   tier: number;
 }
 
-/** The canonical act file a cell's scenes merge into — a family's novel lives together. */
+/** The canonical act file a cell's scenes merge into — one file per wave×archetype×CLASS track. */
 export function sceneCanonicalFile(req: SceneRequest): string {
-  return `src/data/saga/${req.wave}/${req.archetype}.act.json`;
+  return `src/data/saga/${req.wave}/${req.archetype}.${req.cls}.act.json`;
 }
 
 /** The system instruction for novel authoring — voice, length, and the inviolable rules. */
@@ -85,7 +85,7 @@ export function buildScenePrompt(req: SceneRequest): string {
     `the ${req.wave} immigration wave. Reach tier ${req.tier} (${act.macroAct} macro-act).`,
     "",
     `Emit ONE act chapter and ITS scenes:`,
-    `acts: [{ id:"${act.id}", wave:"${req.wave}", archetype:"${req.archetype}", tier:${req.tier},`,
+    `acts: [{ id:"${act.id}", wave:"${req.wave}", archetype:"${req.archetype}", cls:"${req.cls}", tier:${req.tier},`,
     `  macroAct:"${act.macroAct}", title:"${act.title}", scenes:[${act.scenes.map((s) => `"${s.id}"`).join(", ")}] }]`,
     "",
     `scenes (in this order — each id EXACTLY as given):`,
@@ -165,7 +165,7 @@ export function validateSceneFile(
     return { ok: false, reasons };
   }
   // The act id must match the requested cell+tier — the model must not relabel the act.
-  const wantId = `act:${req.wave}:${req.archetype}:t${req.tier}`;
+  const wantId = `act:${req.wave}:${req.archetype}:${req.cls}:t${req.tier}`;
   if (!parsed.data.acts.some((a) => a.id === wantId))
     reasons.push(`act id mismatch (want ${wantId})`);
   if (reasons.length) return { ok: false, reasons };

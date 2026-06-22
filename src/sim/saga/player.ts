@@ -153,17 +153,25 @@ export function openingScene(
   return undefined;
 }
 
-/** All wave×archetype act chapters for a tier, ordered (the per-generation act). Pure. */
+/**
+ * The act chapter for a (wave × archetype × class × tier) cell — the per-generation act. When no act
+ * exists for the requested class, falls back to the "poor" track (the base story every line shares
+ * until a class-specific track is authored). Pure.
+ */
 export function actsForTier(
   corpus: SagaCorpus,
   wave: string,
   archetype: string,
   tier: number,
+  cls = "poor",
 ): ActChapter | undefined {
+  let fallback: ActChapter | undefined;
   for (const a of corpus.acts.values()) {
-    if (a.wave === wave && a.archetype === archetype && a.tier === tier) return a;
+    if (a.wave !== wave || a.archetype !== archetype || a.tier !== tier) continue;
+    if (a.cls === cls) return a;
+    if (a.cls === "poor") fallback = a;
   }
-  return undefined;
+  return fallback;
 }
 
 /** A braided cross-family fragment: the rival wave + the opening scene of its act at the thread's tier. */

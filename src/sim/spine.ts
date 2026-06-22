@@ -35,6 +35,8 @@ export interface ActScaffold {
   macroAct: MacroAct;
   /** The reach tier this act belongs to (0 personal … 5 interstellar). */
   tier: number;
+  /** The class track this act belongs to (poor/middle/…) — class is a movable rung with its own story. */
+  cls: string;
   title: string;
   scenes: SceneSlot[];
 }
@@ -161,11 +163,13 @@ export interface SpineCell {
  */
 export function spineFor(cell: SpineCell): ActScaffold[] {
   return TIER_PLAN.map(({ tier, macroAct, title }) => {
-    const actId = `act:${cell.wave}:${cell.archetype}:t${tier}`;
+    // The act id carries CLASS so a wave×archetype's poor + middle tracks coexist in one corpus.
+    const actId = `act:${cell.wave}:${cell.archetype}:${cell.cls}:t${tier}`;
     return {
       id: actId,
       macroAct,
       tier,
+      cls: cell.cls,
       title: `Act ${ROMAN[tier]} — ${title}`,
       scenes: sceneArc(actId, tier),
     };

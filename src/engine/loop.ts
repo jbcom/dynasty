@@ -1,4 +1,5 @@
 import { loadSaga } from "../data/loadSaga";
+import { sagaClassForWealth } from "../sim/classRung";
 import type { Content } from "../sim/content";
 import { applyChoice } from "../sim/effects";
 import type { Motivators } from "../sim/motivators";
@@ -64,7 +65,12 @@ export class Game {
     const family = this.state.family;
     const protagonist = family?.members.find((m) => m.id === family.protagonistId);
     const tier = Math.min(protagonist?.generation ?? 0, 5);
-    this.saga.begin({ wave, archetype: this.state.archetype, tier }, this.state.personality, []);
+    const cls = sagaClassForWealth(this.state.personality.wealth);
+    this.saga.begin(
+      { wave, archetype: this.state.archetype, tier, cls },
+      this.state.personality,
+      [],
+    );
   }
 
   /**
@@ -150,8 +156,9 @@ export class Game {
     const family = this.state.family;
     const protagonist = family?.members.find((m) => m.id === family.protagonistId);
     const nextTier = Math.min((protagonist?.generation ?? 0) + 1, 5);
+    const cls = sagaClassForWealth(this.state.personality.wealth);
     this.saga.begin(
-      { wave, archetype: this.state.archetype, tier: nextTier },
+      { wave, archetype: this.state.archetype, tier: nextTier, cls },
       this.state.personality,
       this.saga.flags,
     );

@@ -35,6 +35,8 @@ export interface SagaCell {
   archetype: string;
   /** The reach tier (0 personal … 5 interstellar) — derived from the run's generation/era. */
   tier: number;
+  /** The line's class rung (poor/middle/…) — its story track; falls back to "poor" if unauthored. */
+  cls?: string;
 }
 
 /** What the UI renders for the played novel: the act's title + the current scene (or null = no act). */
@@ -62,7 +64,7 @@ export class SagaDriver {
 
   /** Begin (or restart) the act for a cell, carrying the line's current motivators + flags. */
   begin(cell: SagaCell, motivators: Motivators, flags: readonly string[] = []): void {
-    const act = actsForTier(this.corpus, cell.wave, cell.archetype, cell.tier);
+    const act = actsForTier(this.corpus, cell.wave, cell.archetype, cell.tier, cell.cls ?? "poor");
     if (!act) {
       this.state = null;
       this.actTitle = null;

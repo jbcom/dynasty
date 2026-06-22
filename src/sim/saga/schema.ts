@@ -97,6 +97,9 @@ export const ActChapterSchema = z.object({
   id: z.string().min(1),
   wave: z.string().min(1),
   archetype: z.string().min(1),
+  /** The class rung this act's story track belongs to (class is a movable rung with its own track).
+   *  Defaults to "poor" for back-compat with the original class-less corpus. */
+  cls: z.string().min(1).default("poor"),
   tier: z.number().int().min(0).max(5),
   macroAct: z.enum(["convergence", "emergence", "ascension"]),
   title: z.string().min(1),
