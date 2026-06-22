@@ -142,15 +142,13 @@ is locked, execute autonomously, self-pace, own the full PR loop.
   +App wired. (7a46a34)
 - [x] **NA-7 succession step** — DecisionOption.succession schema; driver/Game step the act to the next
   tier on a partner/heirs option. Model tests on a fixture (decoupled from generated corpus). (committed)
-- [~] **NA-8 GenAI lattice sweep** — `--all --cls poor --write` authoring 252 acts (7 waves × 6
-  archetypes × 6 tiers). IN PROGRESS in background (/tmp/saga-sweep.log). ~3% reject rate (retry).
-  On completion: verify corpus health (0 leaks / 0 dangling / multi-paragraph), commit the corpus.
+- [x] **NA-8 GenAI lattice sweep — DONE** (commit f82ed20). 252 acts, 1263 scenes; 0 leaks/dangling/
+  fragments/when-where; all 42 cells complete across 6 tiers.
 - [x] **NA-9 targeted regen** — regenerated the 6 cells that failed all 3 sweep attempts
   (bavaria:economic:t0, italian:political:t5, italian:entertainment:t0, ashkenazi_jewish:technological:t5,
   scandinavian:religious:t1, scandinavian:athletic:t5) — all ACCEPTED 1/1 (/tmp/regen.log). Commit with NA-10.
-- [ ] [WAIT] **NA-10 prune orphans** — blocked on NA-8 sweep finishing its writes (currently in
-  baghdad). Then run `scripts/prune-saga-orphans.ts` (regenerated acts leave old exemplar scenes
-  orphaned); re-add the loadSaga "no orphan scenes" integrity test; commit corpus + regen + prune together.
+- [x] **NA-9 + NA-10 — DONE** (commit f82ed20). Regenerated the failed cells; pruned 3 orphan exemplar
+  scenes; loadSaga integrity tests (no dangling/orphan + 252-act lattice coverage) added.
 - [x] **NA-11 retire Epoch-0 — DONE** (commit a0ee9bb). Harness regression root-caused by
   stuck-loop-debugger (year-normalization was gated on the `epoch0` tag; retag to `life-stage`
   dropped it → begets stamped children ~70yr in the past → extinction). Fixed: normalization now
@@ -163,10 +161,10 @@ is locked, execute autonomously, self-pace, own the full PR loop.
   onboardingFounding epoch0 suite. BLOCKER (dispatched stuck-loop-debugger): the millennium harness
   test now goes line-extinct ~2000 (era order 3-4) for all 18 — the leaner per-gen event pool no
   longer carries a line to era≥9. Awaiting root-cause + fix; do NOT re-pad with narrative beats.
-- [ ] [WAIT] **NA-12 live-verify** — blocked on NA-11 fix (harness must be green before live-verify)
-  + NA-8 sweep (full corpus). Then run the app (chrome), play a founded line: confirm it reads as a
-  novel (titled act, multi-paragraph sensory scenes, no when/where re-confirm), advances generation-
-  by-generation through tiers, hour+ of content. READ the screenshots; fix spec-drift before done.
+- [~] **NA-12 live-verify** — UNBLOCKED (harness green + corpus complete). Run the app (chrome), play
+  a founded line: confirm it reads as a novel (titled act, multi-paragraph sensory scenes, no when/
+  where re-confirm), advances generation-by-generation through tiers. READ the screenshots; fix
+  spec-drift before done.
 - [x] **NA-13 cross-family intersections (threads)** — resolveThreads(corpus,scene) resolves a
   scene's ThreadRef[] to the rival wave's act-opening fragment (archetype-agnostic; dead ref → no
   fire); SagaFrame.threads + PlayScreen "Elsewhere — another line" braided aside. Unit + browser
