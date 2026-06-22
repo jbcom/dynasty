@@ -37,9 +37,15 @@ export function startMusic(): void {
       music.setMuted(!enabled);
     }
     if (!music.isStarted) {
-      music.start().then(() => {
-        if (pendingEra && music) music.setEra(pendingEra);
-      });
+      // start() is async; its rejection won't reach the surrounding try/catch, so handle it here.
+      music
+        .start()
+        .then(() => {
+          if (pendingEra && music) music.setEra(pendingEra);
+        })
+        .catch(() => {
+          // Music is non-essential — a blocked audio context must never surface as an unhandled rejection.
+        });
     }
   } catch {
     // Music is non-essential.

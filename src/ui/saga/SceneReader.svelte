@@ -44,6 +44,9 @@ $effect(() => {
   }
 });
 
+// Clear the pending urge timer on unmount so its callback can't write state on a destroyed component.
+$effect(() => () => clearTimeout(urgeTimer));
+
 const lastPara = $derived(paraIdx >= scene.prose.length - 1);
 const hasBeats = $derived(scene.beats.length > 0);
 // Options show once the prose is fully read: the weave beats first, then (after a beat) the decision.

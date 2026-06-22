@@ -73,6 +73,10 @@ interface SagaFileShape {
   scenes: Scene[];
 }
 
+/** Fallback register context for a scene whose file has no acts (empty/corrupt) — prevents a TypeError
+ *  in buildScenePassPrompt, which reads only `title`/`macroAct`. A guarded edge, never the happy path. */
+const FALLBACK_ACT: Pick<ActChapter, "title" | "macroAct"> = { title: "Act —", macroAct: "convergence" };
+
 function discoverActFiles(): ActFileRef[] {
   const onlyWave = arg("wave");
   const onlyCls = arg("cls");
@@ -152,7 +156,7 @@ async function passScene(ref: ActFileRef, gen: Generate): Promise<void> {
   const file = readFile(ref);
   if (!file) return;
   const actForScene = (sid: string) =>
-    file.acts.find((a) => a.scenes.includes(sid)) ?? file.acts[0];
+    file.acts.find((a) => a.scenes.includes(sid)) ?? file.acts[0] ?? FALLBACK_ACT;
   // Revise scenes concurrently within the file. Each revision is validated as an INDIVIDUAL scene
   // (so one bad scene can't sink the file), with one retry; on failure the original is kept.
   const revised = await Promise.all(file.scenes.map((scene) => reviseScene(scene, actForScene(scene.id), gen, label)));
@@ -239,7 +243,7 @@ async function passLineage(ref: ActFileRef, gen: Generate): Promise<void> {
       console.error(`    · ${br.sceneId}: not found (skipped)`);
       continue;
     }
-    const act = file.acts.find((a) => a.scenes.includes(scene.id)) ?? file.acts[0];
+    const act = file.acts.find((a) => a.scenes.includes(scene.id)) ?? file.acts[0] ?? FALLBACK_ACT;
     const fixPrompt = `${buildScenePassPrompt(scene, act)}\n\nCONTINUITY FIX REQUIRED (${br.kind}): ${br.detail}\nApply this fix: ${br.fix}`;
     const fixRaw = await call(gen, scenePassSystem(), fixPrompt, `${label}:${br.sceneId}`);
     if (!fixRaw) continue;
