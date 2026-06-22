@@ -189,7 +189,11 @@ export function buildScenePrompt(req: SceneRequest): string {
     ? [
         "",
         "CREATIVE BRIEF for THIS generation (follow it — it makes this act distinct from every other):",
-        `- ARC: ${era.arc}`,
+        // The ARC below is the HISTORICAL meaning of this tier×class. The per-scene intents carry a
+        // separate STRUCTURAL movement ("this act moves as a rise/collapse/…") — that's pacing/form, a
+        // different layer. Honor both: the ARC says what this generation MEANS, the movement says how the
+        // act is SHAPED. They are orthogonal, not competing. (UQ-reconcile)
+        `- ARC (the historical meaning of this generation): ${era.arc}`,
         `- TONE: ${era.tone}`,
         `- FOCUS: ${era.focus}`,
         `- RHYTHM: ${era.rhythm}`,

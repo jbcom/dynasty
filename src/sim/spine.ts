@@ -144,7 +144,7 @@ const ARC_MIDDLES: Record<ArcShape, MidSlot[]> = {
     {
       suffix: "maneuver",
       sense: "touch",
-      intent: (s) => `maneuver against the other line; a secondary gambit`,
+      intent: () => `maneuver against the other line; a secondary gambit`,
       decision: "secondary",
     },
   ],
@@ -185,10 +185,14 @@ export function arcShapeFor(cell: SpineCell, tier: number): ArcShape {
  */
 function sceneArc(actId: string, tier: number, shape: ArcShape): SceneSlot[] {
   const scope = TIER_SCOPE[tier] ?? TIER_SCOPE_FALLBACK;
+  // `shape` is this act's DRAMATIC MOVEMENT (its pacing/shape — rise, collapse, holding…), a STRUCTURAL
+  // layer chosen by arcShapeFor. It is ORTHOGONAL to the era's historical ARC (the guidance.json
+  // tier×class brief, which supplies the generation's meaning). The intents below name the movement as
+  // "this act moves as a <shape>" so the model reads it as FORM, not a competing story arc. (UQ-reconcile)
   const open: SceneSlot = {
     id: `${actId}:open`,
     sense: "smell",
-    intent: `open in the lived moment of ${scope.where} as a ${shape} generation: sensory, immersive, the line's situation felt — never re-stating when/where`,
+    intent: `open in the lived moment of ${scope.where} (this act moves as a ${shape}): sensory, immersive, the line's situation felt — never re-stating when/where`,
   };
   const middles: SceneSlot[] = ARC_MIDDLES[shape].map((m) => ({
     id: `${actId}:${m.suffix}`,
@@ -199,13 +203,13 @@ function sceneArc(actId: string, tier: number, shape: ArcShape): SceneSlot[] {
   const turn: SceneSlot = {
     id: `${actId}:turn`,
     sense: "sight",
-    intent: `the act's pivotal choice — how the ${shape} of this generation shapes (or is shaped by) ${scope.world}`,
+    intent: `the act's pivotal choice — how this ${shape}-movement act turns on (or is turned by) ${scope.world}`,
     decision: "major",
   };
   const close: SceneSlot = {
     id: `${actId}:close`,
     sense: "taste",
-    intent: `the ${shape} generation closes; what it passes to the heir as ${scope.inheritance}`,
+    intent: `the act (a ${shape} movement) closes; what it passes to the heir as ${scope.inheritance}`,
     // The close decision IS the dynastic fork: take a partner + raise heirs (advance the line) vs end it
     // here. Its options carry the `succession` effect the engine reads (sagaDriver.applyDecision →
     // advanceFamily). Always present, always "major" — the act's most consequential choice for the LINE.
