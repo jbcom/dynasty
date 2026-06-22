@@ -206,6 +206,22 @@ self-pace the highest-value improvement, own the full PR loop, keep the directiv
   (c) [WAIT] middle sweep `--all --cls middle --write` IN PROGRESS (bg /tmp/sweep-middle.log).
   ON DONE: verify health (0 leaks/dangling, 252 middle acts), regen any failures, commit, PR.
 
+- [ ] **PF-3 reader UX overhaul (USER, 2026-06-22)** — the play surface wastes space: huge top HUD
+  band of centrist-aligned motivators/meters; too much text per page; unwieldy choice buttons.
+  Redesign (Suzerain-style paged prose, user-specified):
+  1. HUD: ONLY year + macro-act stay always-visible (slim header strip). Meters, 8 motivators,
+     utopia–tyranny axis, in-game settings → a slide-out menu from a TOP-RIGHT hamburger.
+  2. Prose: present ONE paragraph at a time; tap ANYWHERE to advance to the next (it just goes to
+     the next — paged, NOT a growing scroll stack; ref Suzerain's paged presentation).
+  3. Options folded INTO the story: when a paragraph has ≥1 choice, render the option(s) as
+     GLOWING PULSING text, bigger than the body, standing out — no big buttons. A choice-less
+     paragraph = tap anywhere → next. A paragraph WITH options: tapping a non-option area makes
+     the options PULSE FASTER (don't advance) to draw attention / communicate "pick one".
+  4. Goal: more presentation area for the unfolding story, more focus on options.
+  Touches src/ui/saga/SceneReader.svelte + src/ui/screens/PlayScreen.svelte (HUD/menu). Mobile-first;
+  browser-test the paged reveal + the pulse-on-tap-away + the menu. Live-verify in Chrome (READ the
+  screenshots). Its own branch off main after PF-2 merges (shares SceneReader/PlayScreen files).
+
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
   `runTerms`; NO literal presets (the harness validator enforces 0 preset-person leaks).
