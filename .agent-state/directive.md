@@ -52,12 +52,12 @@ by construction.
   so any founding year (762 or 1885) plays a full 6-generation run. Touches loop.ts:advanceRunClock —
   do AFTER #83 merges (overlaps that file). Verify all 7 waves reach ~150 scenes; test replay-determinism + PR.
   [WAIT] #83 (loop.ts) to merge first.
-- [ ] [WAIT] **RB-3 presentation polish** — wire per-act caricature portrait/scene compositing (src/render),
+- [ ] **RB-3 presentation polish** — wire per-act caricature portrait/scene compositing (src/render),
   per-era ambient audio depth, and animated scene transitions in SceneReader; live-verify + PR. (Start
   from clean main after #83 merges — branch hygiene: one unit per branch off a settled base.)
-- [ ] [WAIT] **RB-4 surface interactive convergence in the UI** — show the player when a crossing shifted a
+- [ ] **RB-4 surface interactive convergence in the UI** — show the player when a crossing shifted a
   rival (the slide-out "OTHER LINES" reflects nudges); a brief in-scene cue. PR. (#83 merged; ready after this PR lands).
-- [ ] [WAIT] **RB-5 codex/timeline depth** — the CodexView + a timeline view of the line's generations +
+- [ ] **RB-5 codex/timeline depth** — the CodexView + a timeline view of the line's generations +
   the rival world's trajectory; PR. (After #83 merges.)
 ALSO OWN (user, 2026-06-21): merge the release-please PRs, and keep ALL workflows green —
 not just feature-PR CI, but the post-merge CD/Release on main too. PR #47 fixed a
