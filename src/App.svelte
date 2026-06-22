@@ -135,7 +135,13 @@ function dumpTimeline(): void {
     onSettings={() => (screen = "settings")}
   />
 {:else if store.view?.state.end}
-  <LegacyReport {content} state={store.view.state} end={store.view.state.end} onRestart={restart} />
+  <LegacyReport
+    {content}
+    state={store.view.state}
+    end={store.view.state.end}
+    convergence={store.view.convergence}
+    onRestart={restart}
+  />
 {:else}
   <PlayScreen
     {content}

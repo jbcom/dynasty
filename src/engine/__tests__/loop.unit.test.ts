@@ -122,4 +122,43 @@ describe("Game loop", () => {
     // Deterministic: same seed → same glimpses (replay-safe).
     expect(JSON.stringify(mk().view.glimpses)).toBe(JSON.stringify(g.view.glimpses));
   });
+
+  it("PF-7: an in-progress run has no convergence ending; a finished run resolves one", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Ender",
+      seed: "pf7-end",
+      originId: "composed:ireland:origins",
+    };
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    expect(g.view.convergence).toBeNull(); // still playing
+    // Drive to an end, then the dynastic framing resolves.
+    let guard = 0;
+    while (!g.finished && guard < 2000) {
+      const v = g.view;
+      if (v.saga.scene) {
+        if (v.saga.scene.decision) {
+          if (v.saga.scene.beats.length) g.pickBeat(0);
+          g.pickDecision(0);
+        } else if (v.saga.scene.beats.length) g.pickBeat(0);
+        else break;
+      } else if (v.currentEvent) {
+        const c = v.currentEvent.choices[0];
+        if (!c) break;
+        g.choose(c.id);
+      } else break;
+      guard++;
+    }
+    expect(g.finished).toBe(true);
+    expect(g.view.convergence).not.toBeNull();
+    expect(["stars", "contributed", "earthbound", "extinguished"]).toContain(
+      g.view.convergence?.destination,
+    );
+  });
 });

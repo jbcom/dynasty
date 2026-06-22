@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { Content } from "../../sim/content";
+import type { ConvergenceEnding } from "../../sim/convergence";
 import type { Ending } from "../../sim/schema";
 import { spectrumLabel } from "../../sim/personality";
 import { branchOf } from "../../sim/branch";
@@ -13,10 +14,20 @@ interface Props {
   content: Content;
   state: GameState;
   end: EndState;
+  /** The dynastic CONVERGENCE ending (toward the stars / contributed / earthbound / extinguished). */
+  convergence?: ConvergenceEnding | null;
   onRestart: () => void;
 }
 
-const { content, state, end, onRestart }: Props = $props();
+const { content, state, end, convergence = null, onRestart }: Props = $props();
+
+/** How the line's century-spanning arc finally read — the dynastic framing above the per-run end. */
+const CONVERGENCE_LABEL: Record<string, string> = {
+  stars: "Your line reached the stars",
+  contributed: "Your line helped humanity reach the stars",
+  earthbound: "Your line remained earthbound",
+  extinguished: "Your line was extinguished",
+};
 
 // Look up the authored ending that fired for its title + tier (drives copy/art).
 const ending = $derived<Ending | undefined>(
@@ -59,6 +70,12 @@ const dynasty = $derived.by(() => {
 </script>
 
 <main class="report" data-end={end.kind} data-tier={tier} class:apex={isApex}>
+  {#if convergence}
+    <!-- The dynastic CONVERGENCE framing: how the line's century-spanning arc finally read. -->
+    <p class="convergence" data-destination={convergence.destination} data-testid="convergence">
+      {CONVERGENCE_LABEL[convergence.destination] ?? convergence.title} — <strong>{term(convergence.title)}</strong>
+    </p>
+  {/if}
   {#if isApex}<p class="apex-kicker">★ Apex Ending ★</p>{/if}
   <h1>{title}</h1>
   <p class="reason">{term(end.reason)}</p>
@@ -123,6 +140,20 @@ const dynasty = $derived.by(() => {
     color: var(--mmm-gold-bright);
     letter-spacing: 0.3em;
     font-size: 0.7rem;
+  }
+  .convergence {
+    margin: 0 0 0.4rem;
+    font-family: var(--mmm-font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mmm-text-dim);
+  }
+  .convergence[data-destination="stars"] strong {
+    color: var(--mmm-gold-bright);
+  }
+  .convergence[data-destination="extinguished"] {
+    color: color-mix(in srgb, #c0504d 70%, var(--mmm-text-dim));
   }
   .reason {
     color: var(--mmm-text);

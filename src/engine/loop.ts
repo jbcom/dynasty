@@ -1,6 +1,7 @@
 import { loadSaga } from "../data/loadSaga";
-import { sagaClassForWealth } from "../sim/classRung";
+import { MAX_RUNG, sagaClassForWealth } from "../sim/classRung";
 import type { Content } from "../sim/content";
+import { type ConvergenceEnding, resolveConvergence } from "../sim/convergence";
 import { strategyForArchetype } from "../sim/dynastyAgent";
 import {
   advanceWorld,
@@ -14,7 +15,7 @@ import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
-import { type GameState, initState, type LedgerEntry } from "../sim/state";
+import { type GameState, initState, isMemberAlive, type LedgerEntry } from "../sim/state";
 import { advanceTimeline, detectEnd } from "../sim/timeline";
 import { pickNextEventViaWorld } from "../sim/world";
 import { SagaDriver, type SagaFrame } from "./sagaDriver";
@@ -30,6 +31,9 @@ export interface GameView {
   glimpses: Glimpse[];
   /** The player's class rung (generation depth, 0..5) — for the read-model's class readout. */
   rung: number;
+  /** The dynastic CONVERGENCE ending (toward the stars / contributed / earthbound / extinguished),
+   *  resolved when the run ends; null while in progress. */
+  convergence: ConvergenceEnding | null;
   lastLedger: LedgerEntry[];
 }
 
@@ -94,6 +98,30 @@ export class Game {
     );
   }
 
+  /** End kinds that mean the line FAILED (didn't survive to a convergence). */
+  private static readonly FAILURE_ENDS = new Set(["death", "coup", "jail", "line-extinct", "ruin"]);
+
+  /**
+   * The line's CONVERGENCE ending — the dynastic framing (toward the stars / contributed / earthbound /
+   * extinguished), folding in the player's reach tier + motivators + whether a rival reached the stars.
+   * Null until the run ends or for an unfounded run. Deterministic. (PF-7.)
+   */
+  private convergenceEnding(): ConvergenceEnding | null {
+    if (!this.state.end || !this.state.founding?.place) return null;
+    const family = this.state.family;
+    const livingHeir = !!family?.members.some(
+      (m) => m.id !== family.protagonistId && isMemberAlive(m, this.state.year),
+    );
+    const rivalsReachedStars = (this.world?.snapshots ?? []).some((s) => s.rung >= MAX_RUNG);
+    return resolveConvergence({
+      motivators: this.state.personality,
+      tier: this.playerRung(),
+      survived: !Game.FAILURE_ENDS.has(this.state.end.kind),
+      hasHeir: livingHeir,
+      rivalsReachedStars,
+    });
+  }
+
   /**
    * Begin the novel act for the current line (the founded line's wave × archetype × reach tier),
    * carrying its motivators. A no-op (null scene) when the line isn't founded or the cell has no
@@ -133,6 +161,7 @@ export class Game {
       saga: this.saga.frame(),
       glimpses: this.currentGlimpses(),
       rung: this.playerRung(),
+      convergence: this.convergenceEnding(),
       lastLedger: this.lastLedger,
     };
   }
