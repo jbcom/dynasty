@@ -60,9 +60,15 @@ then the FULL local gate (typecheck + biome + unit + browser + e2e) + the review
 (comprehensive-review:full-review / security / code-simplifier) run on the whole diff before the SINGLE
 push + PR. See [[one-branch-local-review]].
 
-- [ ] **RB-3 presentation polish (rest, on the consolidation branch).** Slice-1 shipped (#86: scene fade
-  + data-scene-id). Remaining: slice 2 (per-era ambient audio depth via the Tone.js bed/setMusicEra) +
-  slice 3 (per-act caricature portrait/scene compositing, src/render). Browser/visual-tested.
+- [x] **RB-3 presentation polish — DONE (slices 1-2).** Slice-1 (#86: scene fade + data-scene-id);
+  slice-2 (forward commit: per-era ambient chords so the pad mood deepens across the arc). Slice-3
+  (caricature portrait/scene compositing) is NOT a polish slice — `src/render` is empty (the module was
+  removed; only a stale Portrait.visual screenshot remains), so it's a from-scratch subsystem needing an
+  asset pipeline + real 2D caricature art ([[dynasty-ui-conventions]]) — DECIDED to split it out as RB-8.
+- [ ] **RB-8 caricature portrait/scene compositing (new subsystem).** Build src/render: per-act portrait
+  + scene compositing from real 2D assets (caricature only, license-logged in assets.json), wired into
+  the SceneReader/PlayScreen. Needs a design pass (use-case enumeration) + the asset pipeline first;
+  visual-tested. Its own milestone — do after the consolidation branch's UI work (RB-5) lands.
 - [x] **RB-4 surface interactive convergence — DONE (forward commit).** Added the rival's rung to the
   Glimpse + a ★-per-rung indicator in the "Other lines" strip, so the player sees their crossings move a
   rival's standing. Browser-tested.
