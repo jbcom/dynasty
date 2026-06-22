@@ -252,15 +252,7 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   resolves the dynastic destination at run-end (tier + motivators + rivalsReachedStars) → GameView.
   convergence → LegacyReport framing. Unit-tested + deterministic. (Live-verify folds into PF-13.)
 
-- [ ] **PF-8 saga succession drives REAL family advancement.** DISCOVERY: the mortality→succeed→
-  continue-as-heir logic lives INSIDE applyChoice (effects.ts ~L270-320), driven by elapsed years. The
-  saga path calls advanceTimeline (years pass) but NOT applyChoice, so saga play never ages/succeeds
-  the family — beginNextGenerationAct just re-begins the act. FIX (proper refactor, no shim): EXTRACT
-  the mortality/succession block into a pure `advanceFamily(content, state, fromYear, rng)` in effects.ts
-  (or family/succession); applyChoice calls it (no behavior change — pin with existing tests), AND the
-  saga path's advanceRunClock calls it so reading the novel ages + succeeds the line. A close-scene
-  succession option (takesPartner/begets) seeds partner/beget first. Bit-identical replay preserved
-  (same rng fork labels). Unit-test the extracted helper + a saga-driven multi-generation run.
+- [x] **PF-8 saga succession drives REAL family advancement — DONE** (commit ecd42ca). Extracted the mortality/succeed/continue-as-heir block from applyChoice into pure exported advanceFamily(content,state,fromYear,rng); applyChoice + the saga advanceRunClock both call it (separate rng stream, replay-safe). Reading the novel now ages + succeeds the line. Event path unchanged (18 tests); saga-driven run advances year + deterministic.
 
 - [ ] **PF-9 act titles: run the retitle pass.** scripts/retitle-saga.ts + scene-gen author distinct
   meso titles (committed). [after PF-5] run retitle over BOTH tracks; live-verify distinct titles in
