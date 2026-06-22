@@ -243,17 +243,15 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   enforces scene-ref integrity (caught the model dropping/mis-naming scenes — a defect shape+leak
   validation missed). See [[mmm-scoped-qa-pipeline]].
 
-- [ ] [WAIT] **PF-18 SCOPE-DELINEATED QA SWEEP** (spec 2026-06-22; feat/saga-polish). User directive:
+- [x] **PF-18 SCOPE-DELINEATED QA SWEEP — DONE** (spec 2026-06-22; feat/saga-polish). User directive:
   QA delineated by IMPACT SCOPE, fix the whole affected unit. New src/sim/genai/qa.ts + scripts/
-  genai-qa.ts. Fixed the leak floor's false positives (case-insensitive "musk"/pooled given names) —
-  extracted to one shared src/sim/leak.ts. (a) scene polish over all 84 files — DONE (504 acts lifted,
-  0 kept-on-fail, structure intact, committed). (b) lineage continuity pass — DONE (80/84 chains had
-  cross-tier breaks, all re-authored, 0 rejected, integrity intact, committed). (c) braid authoring —
-  RUNNING (unscoped --write over all 84, monitor b866zmrz9; authors pair-specific crossings into
-  midpoint thread[] that weaveThreads honors). 51/84 braided, 0 rejected; ~18 files/20min (sequential,
-  6 calls/file). KNOWN-COST FOLLOWUP: braid runs files serially (passBraid is a plain for-loop, not
-  pooled) — a future PF could pool it like scene/lineage for ~4× speedup. ON BRAID DONE: verify
-  integrity + full suite + commit (c). Then fold into PF-13's full run.
+  genai-qa.ts; leak floor false positives fixed + extracted to shared src/sim/leak.ts. All three scopes
+  ran over the whole 504-act corpus on 3.5-flash: (a) scene polish — 504 acts lifted, 0 kept-on-fail;
+  (b) lineage continuity — 80/84 chains had cross-tier breaks, all re-authored, 0 rejected; (c) braid —
+  504 pair-specific cross-storyline crossings authored into midpoint thread[] (weaveThreads honors),
+  0 rejected. Final corpus: 504 acts / 2520 scenes / 0 dangling / 0 leaks / 0 backtick artifacts; 641
+  unit tests green, biome clean. KNOWN-COST FOLLOWUP (optional): pool passBraid like scene/lineage (it's
+  serial) for ~4× speedup. See [[mmm-scoped-qa-pipeline]].
 
 - [x] **PF-6 ROOT GAP: class threaded through onboarding → founding — DONE** (commit 4b0318e). The
   chosen ArrivalClass now flows OnboardingScreen.onComplete → App.birthGame → resolveWaveStart(place,
