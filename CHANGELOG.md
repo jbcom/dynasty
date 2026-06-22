@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.0](https://github.com/jbcom/dynasty/compare/v0.16.0...v0.17.0) (2026-06-22)
+
+
+### Features
+
+* RB-10 audio↔visual era lockstep (single ERA_BANDS table) + ending sting ([#93](https://github.com/jbcom/dynasty/issues/93)) ([ee9b844](https://github.com/jbcom/dynasty/commit/ee9b844d31e2039ed5630ba073d319ea4dde3fa6))
+
 ## [0.16.0](https://github.com/jbcom/dynasty/compare/v0.15.0...v0.16.0) (2026-06-22)
 
 
