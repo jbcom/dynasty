@@ -157,8 +157,10 @@ is locked, execute autonomously, self-pace, own the full PR loop.
 - [ ] **NA-12 live-verify** — run the app (chrome), play a founded line: confirm it reads as a novel
   (titled act, multi-paragraph sensory scenes, no when/where re-confirm), advances generation-by-
   generation through tiers, hour+ of content. READ the screenshots; fix spec-drift before done.
-- [ ] **NA-13 cross-family intersections (threads)** — wire ThreadRef so another wave's line braids
-  into a scene when the convergence world says paths cross (ink threads). Authored/genai thread scenes.
+- [x] **NA-13 cross-family intersections (threads)** — resolveThreads(corpus,scene) resolves a
+  scene's ThreadRef[] to the rival wave's act-opening fragment (archetype-agnostic; dead ref → no
+  fire); SagaFrame.threads + PlayScreen "Elsewhere — another line" braided aside. Unit + browser
+  green. (committed) — authoring thread refs INTO the corpus is a content step (genai/author) post-sweep.
 - [ ] **NA-14 PR + merge** — open the PR for feat/narrative-acts, green CI (lint+test+build+e2e),
   resolve all review threads, squash-merge; keep post-merge CD/Release workflows green.
 
