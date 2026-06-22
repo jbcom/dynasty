@@ -77,9 +77,11 @@ push + PR. See [[one-branch-local-review]].
   exist; the gap was the rival world's trajectory being invisible. Added GameView.rivalStandings + a
   RivalField component in the slide-out menu showing every line's rung (player's marked), so the whole
   convergence race is legible. Browser-tested.
-- [ ] **RB-9 local comprehensive review + open the ONE PR for the consolidation branch.** Run the FULL
-  local gate (typecheck + biome + unit + browser + e2e) + dispatch the reviewer trio
-  (comprehensive-review:full-review / security / code-simplifier) on the whole branch diff; fold findings
+- [ ] [WAIT] **RB-9 local comprehensive review + open the ONE PR for the consolidation branch.** Full local
+  gate GREEN (typecheck + biome + 655 unit + 92 browser + 7 e2e + build). Reviewer trio (serial): code
+  review DONE (2 findings folded — RivalField label + aria/star magnitude); security DONE (clean);
+  code-simplifier RUNNING. ON its result: fold findings, then open the ONE PR. Run the FULL
+  local gate + dispatch the reviewer trio
   into forward commits; THEN open the single PR. (Per [[one-branch-local-review]].)
 ALSO OWN (user, 2026-06-21): merge the release-please PRs, and keep ALL workflows green —
 not just feature-PR CI, but the post-merge CD/Release on main too. PR #47 fixed a
