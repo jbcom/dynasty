@@ -276,6 +276,54 @@ describe("Game loop", () => {
     expect(g.view.convergence).not.toBeNull();
   });
 
+  it("DEPTH-3: succession begets heirs so the line survives across generations (not extinct at gen 2)", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Carrier",
+      seed: "depth3",
+      originId: "composed:ireland:origins",
+    };
+    const play = () => {
+      const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+      let guard = 0;
+      let sagaScenes = 0;
+      while (!g.finished && guard < 3000) {
+        const v = g.view;
+        const s = v.saga.scene;
+        if (s) {
+          sagaScenes++;
+          if (s.decision) {
+            // Always choose to continue the line (take a partner + raise heirs).
+            const i = s.decision.options.findIndex((o) => o.succession?.takesPartner);
+            g.pickDecision(i >= 0 ? i : 0);
+          } else if (s.beats.length) g.pickBeat(0);
+          else break;
+        } else if (v.currentEvent) {
+          const c = v.currentEvent.choices[0];
+          if (!c) break;
+          g.choose(c.id);
+        } else break;
+        guard++;
+      }
+      return { sagaScenes, year: g.view.state.year };
+    };
+    const a = play();
+    // Choosing succession every generation carries the line deep — far past the gen-2 extinction that
+    // happened when begets weren't applied. Expect many scenes + a year well into the next century.
+    expect(a.sagaScenes).toBeGreaterThan(60);
+    expect(a.year).toBeGreaterThan(1950);
+    // Determinism: same seed + same choices → identical depth (replay-safe with the new beget draws).
+    const b = play();
+    expect(b.sagaScenes).toBe(a.sagaScenes);
+    expect(b.year).toBe(a.year);
+  });
+
   it("PF-14: a saga choice's setFlags reach the run's state.flags (not sealed in the driver)", () => {
     const real = loadContent();
     const comp = {
