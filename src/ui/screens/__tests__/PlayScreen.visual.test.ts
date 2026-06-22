@@ -5,6 +5,7 @@ import type { GameView } from "../../../engine/loop";
 import { validRaw } from "../../../sim/__tests__/fixtures";
 import { buildContent } from "../../../sim/content";
 import { initMeters } from "../../../sim/meters";
+import { SceneSchema } from "../../../sim/saga/schema";
 import { initState } from "../../../sim/state";
 import { applyBrandTokens, makeHost } from "../../__tests__/visualHarness";
 import PlayScreen from "../PlayScreen.svelte";
@@ -91,5 +92,45 @@ describe("PlayScreen (composed game screen)", () => {
     expect(host.querySelector(".event-col [data-event]")).not.toBeNull();
     expect(host.querySelector(".info-col")).not.toBeNull();
     await page.screenshot({ element: host.firstElementChild as Element });
+  });
+
+  it("renders the NOVEL scene reader + a cross-family thread aside when the saga frame has one", () => {
+    const scene = SceneSchema.parse({
+      id: "sc:demo:midpoint",
+      sense: "sound",
+      prose: [
+        "The crowd at the dock is a din of a hundred tongues, and one of them is about to matter to your line.",
+        "A family from another wave moves through the press, and for a moment the two paths touch.",
+      ],
+    });
+    const braidScene = SceneSchema.parse({
+      id: "sc:rival:open",
+      sense: "sight",
+      prose: [
+        "Across the same grey harbour another line steps ashore, its own hungers written on its faces.",
+        "You will not learn their name for years, but the century is already binding you together.",
+      ],
+    });
+    const v: GameView = {
+      ...view(),
+      saga: {
+        actTitle: "Act III — The Climb",
+        scene,
+        threads: [{ wave: "italian", scene: braidScene }],
+        ended: false,
+      },
+    };
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: v, busy: false, onchoose: () => {} },
+    });
+    // The novel page renders (not the event card).
+    expect(host.querySelector("[data-testid='scene-reader']")).not.toBeNull();
+    expect(host.textContent).toContain("Act III — The Climb");
+    // The cross-family intersection braids in beneath the scene.
+    const thread = host.querySelector("[data-testid='thread']");
+    expect(thread).not.toBeNull();
+    expect(thread?.textContent).toContain("Elsewhere");
+    expect(thread?.textContent).toContain("another line steps ashore");
   });
 });
