@@ -22,6 +22,7 @@ import SceneReader from "../saga/SceneReader.svelte";
 import SlideOutMenu from "../saga/SlideOutMenu.svelte";
 import CodexView from "../saga/CodexView.svelte";
 import { loadCodex } from "../../data/loadSaga";
+import { setMusicEra } from "../sound";
 
 interface Props {
   content: Content;
@@ -72,6 +73,13 @@ const sagaView = $derived(
 
 // Optional lore briefs (waves + macro-acts), shown in the slide-out menu's Codex. Static content.
 const codex = loadCodex();
+
+// PF-17: keep the ambient music bed on the run's current era (the AudioEngine starts on the first
+// reader tap; setMusicEra remembers the era until then, then crossfades on each era change).
+const currentEraId = $derived(content.eras[view.state.eraIndex]?.id ?? "");
+$effect(() => {
+  if (currentEraId) setMusicEra(currentEraId);
+});
 
 type Tab =
   | "event"

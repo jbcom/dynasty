@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { Scene } from "../../sim/saga/schema";
-import { playCue } from "../sound";
+import { playCue, startMusic } from "../sound";
 
 /**
  * SCENE READER (Narrative Acts model) — renders a scene as a PAGED novel, Suzerain-style: ONE
@@ -62,6 +62,7 @@ function urge() {
 
 /** Tap on the page body: turn to the next paragraph, or — if a choice is up — urge the player to pick. */
 function tapPage() {
+  startMusic(); // first tap is the user gesture that lets the ambient bed begin (autoplay policy)
   if (optionsUp) {
     urge();
     return;
