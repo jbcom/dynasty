@@ -1,6 +1,6 @@
 # Continuous Work Directive — Dynasty (maga-money-moves)
 
-**Status:** RELEASED
+**Status:** ACTIVE
 **Owner:** jbogaty (autonomous loop)
 **Mandate (2026-06-21):** POLISH & FEATURES — AUTONOMOUS LOOP. Foundations done:
 found-your-own / diegetic birth / orthogonal identity (PR #31), 1000-year dynasty breadth
@@ -114,19 +114,56 @@ origins ship a fully-written, era-correct Epoch-0; chronology (overheard year) �
 (chosen place) are the twin anchors; the calling crystallizes the archetype; 0 leaks; full gate
 + post-merge workflows green.
 
-## Next milestone — LIVED-IN FEEL (light editorial, NOT a mechanical sweep)
-- [ ] [WAIT-USER] **LF-1** — BLOCKED on the user's creative steer (genuine scope/design call,
-  not agent-decidable: the user corrected the birth beat twice and said "you're getting carried
-  away" — pushing a broad editorial pass now would repeat that mistake). When the user gives the
-  direction, do it in SMALL story-first slices, one origin/era at a time, live-verified.
-  Carry the [[mmm-epoch0-birth-beat]] principle past Epoch-0: as beats are touched,
-  make the EXPERIENCED-vs-CHOSEN mix feel right and ground scenes in concrete sense detail of
-  their place+time so a life feels LIVED. User's guardrails (verbatim spirit): "tell a story, a
-  coherent narrative whole with causality + butterfly effect"; "a life must feel lived"; do NOT
-  turn this into a one-sense-per-beat system or sweep the whole corpus mechanically ("you're
-  getting carried away"). So: SMALL, story-first slices, one origin/era at a time, live-verified;
-  pause for the user's steer on creative direction rather than mass-editing. This is the standing
-  /loop direction until the user redirects.
+## ACTIVE milestone — NARRATIVE ACTS (the NOVEL) — branch `feat/narrative-acts`
+
+Spec: docs/superpowers/specs/2026-06-21-narrative-acts-design.md. Memory: [[mmm-novel-acts-model]].
+Mandate (user, verbatim spirit): the played content must read as NOVELS, not sentence fragments —
+"immersive set of effectively novels… titled acts for each family and their possibilities in life
+and intersections"; the OLD Epoch-0 is WRONG ("we ALREADY know when we are and where we are… you
+were supposed to write STORIES"); "take it all the way… an hour or more of gameplay" (genai+author
+no limit). Grounded in Suzerain + ink research. This SUPERSEDES the LIVED-IN-FEEL / authored-Epoch-0
+direction (those re-confirmed known facts — the rejected approach). NOT a WAIT-USER item: the vision
+is locked, execute autonomously, self-pace, own the full PR loop.
+
+### Queue
+- [x] **NA-1 model** — saga/schema (Act/Scene/Beat/Decision/Thread/Codex zod) + player
+  (buildCorpus/applyBeat/applyDecision/nextScene/openingScene) + loader (loadSaga glob) +
+  authored exemplar. (commit 14ed87c)
+- [x] **NA-2 SceneReader** — Suzerain page: serif multi-paragraph prose, drop-letter, sense-tint,
+  beats as alternatives, tiered decision; term-fn tokens; onbeat/ondecision. Browser-tested. (1c967df)
+- [x] **NA-3 runner** — ActState walk (startAct/chooseBeat/chooseDecision); deterministic = save/replay
+  invariant; beats are ALTERNATIVES. (8280fd5)
+- [x] **NA-4 spine reframe** — retired Epoch-0 life-arc; scene-slot spine (titled acts, 5 sensory
+  scenes, opening forbids re-stating when/where, major+secondary per act). (07f77a6)
+- [x] **NA-5 genai scene mode** — `genai:expand --type scene` + `--all` lattice sweep; SagaFileSchema-
+  gated; normalizeSceneFile coerces model drift; 3× retry on validation failure. (35bf80d/fix/retry)
+- [x] **NA-6 engine cut-over** — Game drives SagaDriver (cell=wave×archetype×tier-from-generation),
+  GameView.saga frame, PlayScreen renders SceneReader (fallback to EventCard when no act); GameStore
+  +App wired. (7a46a34)
+- [x] **NA-7 succession step** — DecisionOption.succession schema; driver/Game step the act to the next
+  tier on a partner/heirs option. Model tests on a fixture (decoupled from generated corpus). (committed)
+- [~] **NA-8 GenAI lattice sweep** — `--all --cls poor --write` authoring 252 acts (7 waves × 6
+  archetypes × 6 tiers). IN PROGRESS in background (/tmp/saga-sweep.log). ~3% reject rate (retry).
+  On completion: verify corpus health (0 leaks / 0 dangling / multi-paragraph), commit the corpus.
+- [ ] **NA-9 targeted regen** — re-run the handful of cells that failed all 3 attempts during the
+  sweep (track via `grep "after 3 attempts" /tmp/saga-sweep.log`); commit.
+- [ ] **NA-10 prune orphans** — run `scripts/prune-saga-orphans.ts` (regenerated acts leave old
+  exemplar scenes orphaned); re-add the loadSaga "no orphan scenes" integrity test; commit.
+- [ ] **NA-11 retire Epoch-0** — delete `src/data/eras/**/epoch0.json` narrative; SEPARATE the kept
+  succession mechanic (`ev_cp_take_partner`/`ev_cp_raise_heirs` → DecisionOption.succession, already
+  in schema) from the rejected narrative; wire Game.beginNextGenerationAct to drive the real
+  family advancement (effects.succeed/beget) not just re-begin the act; update content.ts/events.ts/
+  founding.ts/effects.ts + tests; world-timeline/backdrop facts STAY. No extinction-in-one-gen regression.
+- [ ] **NA-12 live-verify** — run the app (chrome), play a founded line: confirm it reads as a novel
+  (titled act, multi-paragraph sensory scenes, no when/where re-confirm), advances generation-by-
+  generation through tiers, hour+ of content. READ the screenshots; fix spec-drift before done.
+- [ ] **NA-13 cross-family intersections (threads)** — wire ThreadRef so another wave's line braids
+  into a scene when the convergence world says paths cross (ink threads). Authored/genai thread scenes.
+- [ ] **NA-14 PR + merge** — open the PR for feat/narrative-acts, green CI (lint+test+build+e2e),
+  resolve all review threads, squash-merge; keep post-merge CD/Release workflows green.
+
+After NA-14 merges, RETURN to the standing autonomous POLISH & FEATURES mandate (top of file):
+self-pace the highest-value improvement, own the full PR loop, keep the directive living.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
