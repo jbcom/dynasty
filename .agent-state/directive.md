@@ -235,9 +235,10 @@ USER directive 2026-06-22). Layer PF-2/PF-3/… as forward commits here; open ON
 Full audit of remaining / incomplete / partially-wired / dead-but-built. Do them IN ORDER on
 feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. Don't stop between items.
 
-- [ ] **PF-5 finish the middle-class corpus** — [WAIT] middle sweep (bg beo7mfy8q) running. ON DONE:
-  verify health (0 leaks/dangling, 252 middle acts, poor untouched), regen failed cells, commit corpus;
-  update loadSaga test to assert BOTH tracks complete (poor 252 + middle 252 = 504; 42 cells × 2 × 6).
+- [ ] [WAIT] **PF-5 finish the middle-class corpus** — blocked on the middle sweep (bg beo7mfy8q,
+  ~193/252, chinese→baghdad). ON SWEEP DONE: verify health (0 leaks/dangling, 252 middle acts, poor
+  untouched), regen failed cells, commit corpus; update loadSaga test to assert BOTH tracks complete
+  (poor 252 + middle 252 = 504; 42 cells × 2 × 6).
 
 - [x] **PF-6 ROOT GAP: class threaded through onboarding → founding — DONE** (commit 4b0318e). The
   chosen ArrivalClass now flows OnboardingScreen.onComplete → App.birthGame → resolveWaveStart(place,
@@ -254,8 +255,9 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
 
 - [x] **PF-8 saga succession drives REAL family advancement — DONE** (commit ecd42ca). Extracted the mortality/succeed/continue-as-heir block from applyChoice into pure exported advanceFamily(content,state,fromYear,rng); applyChoice + the saga advanceRunClock both call it (separate rng stream, replay-safe). Reading the novel now ages + succeeds the line. Event path unchanged (18 tests); saga-driven run advances year + deterministic.
 
-- [ ] **PF-9 act titles: run the retitle pass.** scripts/retitle-saga.ts + scene-gen author distinct
-  meso titles (committed). [after PF-5] run retitle over BOTH tracks; live-verify distinct titles in
+- [ ] [WAIT] **PF-9 act titles: run the retitle pass.** scripts/retitle-saga.ts + scene-gen author
+  distinct meso titles (committed). Blocked on PF-5 (run over BOTH tracks after the sweep). Then
+  live-verify distinct titles in
   Chrome (no two lines share "The Crossing"); commit.
 
 - [x] **PF-10 cross-family intersection PROSE — DONE** (commit 465043c). Each woven midpoint thread carries a PAIR-SPECIFIC crossing line (crossingLine names both peoples, deterministic); ThreadRef.crossing optional override; PlayScreen renders "Where paths cross" + the line + the rival fragment. Unit + browser green. (A fuller per-pair GenAI crossing corpus can ride a future sweep; the deterministic named crossing ships now.)
@@ -267,7 +269,8 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   hand-edit). REMAINING: a final docs pass in PF-13 once PF-7/8/11 land (update the "still being wired"
   list as gaps close).
 
-- [ ] **PF-13 final pass: full gate + live-verify a full hour-long run + open the PR.** typecheck +
+- [ ] [WAIT] **PF-13 final pass: full gate + live-verify a full hour-long run + open the PR.** Blocked
+  on PF-5/PF-9 (corpus complete + retitled). typecheck +
   biome + 600+ unit + browser + e2e + harness 0-findings; play a founded line poor AND middle through
   multiple generations in Chrome (READ screenshots); confirm: novel reads as novel, classes diverge,
   glimpses populate, intersections fire, titles distinct, hour+ of content. Open the ONE PR for
