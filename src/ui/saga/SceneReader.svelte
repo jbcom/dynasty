@@ -12,8 +12,12 @@ import { playCue, startMusic } from "../sound";
  * injected `term` fn and emits the player's choice upward — never the sim.
  */
 
+import type { BraidedThread } from "../../sim/saga/player";
+
 interface Props {
   scene: Scene;
+  /** Cross-dynasty intersections to WEAVE into this scene's prose flow (WV-1). Empty when none fire. */
+  threads?: BraidedThread[];
   /** Resolve {surname}/{given_name}/… tokens — the run's `applyTerms` binding (identity in tests). */
   term?: (text: string) => string;
   /** The player picked a weave beat (index into scene.beats). */
@@ -21,7 +25,25 @@ interface Props {
   /** The player picked the terminal decision option (index into scene.decision.options). */
   ondecision?: (optionIndex: number) => void;
 }
-const { scene, term = (t) => t, onbeat, ondecision }: Props = $props();
+const { scene, threads = [], term = (t) => t, onbeat, ondecision }: Props = $props();
+
+// WV-1: the PAGES the reader turns through = the scene's own prose, then the woven crossing passage(s).
+// A crossing is folded into the SAME paged flow as narration (a `woven` page gets a subtle inline mark),
+// not a detached "Where paths cross" block — so another dynasty enters as a moment in THIS line's story.
+// One lead page per thread (the crossing moment) + up to two paragraphs of the rival's fragment.
+interface Page {
+  text: string;
+  woven: boolean;
+  lead: boolean; // the first page of a woven passage (carries the inline mark)
+}
+const pages = $derived.by<Page[]>(() => {
+  const out: Page[] = scene.prose.map((text) => ({ text, woven: false, lead: false }));
+  for (const t of threads) {
+    out.push({ text: t.crossing, woven: true, lead: true });
+    for (const para of t.scene.prose.slice(0, 2)) out.push({ text: para, woven: true, lead: false });
+  }
+  return out;
+});
 
 // Whether the user prefers reduced motion — gates the JS-driven scene fade (CSS handles the rest).
 // Guarded for SSR/tests where matchMedia is absent; defaults to false (motion on).
@@ -58,8 +80,8 @@ $effect(() => () => clearTimeout(urgeTimer));
 // The paragraph actually SHOWN, derived synchronously so a scene change can never flash stale prose:
 // the reset $effect runs after paint, so on a scene swap `paraIdx` is briefly the OLD index — clamp it
 // to THIS scene's range during render (and treat a not-yet-reset index as paragraph 0 of the new scene).
-const shownPara = $derived(scene.id === pagedFrom ? Math.min(paraIdx, scene.prose.length - 1) : 0);
-const lastPara = $derived(shownPara >= scene.prose.length - 1);
+const shownPara = $derived(scene.id === pagedFrom ? Math.min(paraIdx, pages.length - 1) : 0);
+const lastPara = $derived(shownPara >= pages.length - 1);
 const hasBeats = $derived(scene.beats.length > 0);
 // Options show once the prose is fully read: the weave beats first, then (after a beat) the decision.
 const showWeave = $derived(lastPara && hasBeats && !beatTaken);
@@ -120,7 +142,15 @@ function chooseBeat(i: number) {
   {#key scene.id}
     <div class="scene-body" in:fade={{ duration: reduceMotion ? 0 : 320 }}>
       {#key shownPara}
-        <p class="para" data-testid="para">{term(scene.prose[shownPara] ?? "")}</p>
+        <!-- A woven crossing page reads as narration with a subtle inline mark (CSS), not a labelled
+             aside; its lead page opens the passage. WV-1 — the intersection is part of the story. -->
+        <p
+          class="para"
+          class:woven={pages[shownPara]?.woven}
+          class:woven-lead={pages[shownPara]?.lead}
+          data-testid="para"
+          data-woven={pages[shownPara]?.woven ? "" : undefined}
+        >{term(pages[shownPara]?.text ?? "")}</p>
       {/key}
     </div>
   {/key}
@@ -235,6 +265,16 @@ function chooseBeat(i: number) {
     color: var(--mmm-text);
     text-wrap: pretty;
     animation: page-in 0.4s ease both;
+  }
+  /* WV-1: a woven crossing page reads as narration — same flow, faintly set apart so the moment another
+     line enters is FELT, not labelled. The lead page carries a hairline gold rule (CSS, no asset). */
+  .para.woven {
+    color: color-mix(in srgb, var(--mmm-text) 82%, var(--mmm-gold-deep));
+    font-style: italic;
+  }
+  .para.woven-lead {
+    border-left: 2px solid color-mix(in srgb, var(--mmm-gold) 45%, transparent);
+    padding-left: 0.9rem;
   }
   @keyframes page-in {
     from { opacity: 0; transform: translateY(0.4rem); }
