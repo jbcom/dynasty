@@ -87,7 +87,12 @@ const eventsByYear = $derived(
   .era.unwritten .era-title { font-size: 1.4rem; color: var(--mmm-text-dim); }
   .era-head { display: flex; flex-direction: column; gap: 0.1rem; }
   .era-title { font-weight: 700; color: var(--mmm-text); font-size: 0.82rem; }
-  .era-years { font-size: 0.68rem; color: var(--mmm-text-dim); }
+  .era-years {
+    font-family: var(--mmm-font-ui);
+    font-size: 0.66rem;
+    color: var(--mmm-text-dim);
+    font-variant-numeric: tabular-nums;
+  }
   .tag {
     align-self: flex-start;
     font-size: 0.58rem;

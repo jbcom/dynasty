@@ -56,6 +56,10 @@ describe("TimelineView", () => {
     expect(host.querySelector(".era.current")).not.toBeNull();
     // A teaser stands in for the unwritten road ahead.
     expect(host.querySelector(".era.unwritten")).not.toBeNull();
+    // UQ-UI: the era year-range is DATA — rendered with tabular figures (type-role split).
+    const years = host.querySelector<HTMLElement>(".era-years");
+    expect(years).not.toBeNull();
+    expect(getComputedStyle(years as HTMLElement).fontVariantNumeric).toContain("tabular-nums");
   });
 
   it("reveals a later era once it has been reached", () => {
