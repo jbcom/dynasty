@@ -93,7 +93,8 @@ push + PR. See [[one-branch-local-review]].
   crossing into its PAGED prose as a woven narration page (subtle CSS inline mark, no asset), so a crossing
   reads as a moment in the family's story ([[intersections-woven-not-walls]]). Interim weave source = a
   curated INTERSECTION_POINTS table (replaced the auto-spray). Browser-tested (crossing reads inline; no
-  aside). [WAIT] full gate + reviewer trio + the ONE PR.
+  aside). Full gate green + reviewer trio folded (code: no blocking bugs; simplifier: Array.from). PR #96
+  OPENED. [WAIT] CI + merge.
 - [ ] **WV-2 braid SLOTS + bias-weighted weaving (the real model) — ACTIVE.** USER DIRECTIVE
   ([[braid-slots-genai-architecture]] + [[emergent-cause-effect-sim]]): replace the curated table with the
   emergent model — (1) a GenAI 3.5-flash QA pass tags prose paragraphs with braid SLOTS: SOURCE positions
