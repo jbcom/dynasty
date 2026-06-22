@@ -20,7 +20,7 @@ function view(): GameView {
   return {
     state,
     currentEvent: content.allEvents[0] ?? null,
-    saga: { actTitle: null, scene: null, threads: [], ended: false },
+    saga: { actTitle: null, scene: null, threads: [], ended: false, cell: null },
     glimpses: [],
     rivalStandings: [],
     rung: 0,
@@ -148,6 +148,7 @@ describe("PlayScreen (composed game screen)", () => {
           { wave: "italian", crossing: "An Italian line cuts across yours.", scene: braidScene },
         ],
         ended: false,
+        cell: { wave: "ny", archetype: "economic", tier: 3, cls: "poor" },
       },
     };
     component = mount(PlayScreen, {
@@ -157,6 +158,9 @@ describe("PlayScreen (composed game screen)", () => {
     // The novel page renders (not the event card).
     expect(host.querySelector("[data-testid='scene-reader']")).not.toBeNull();
     expect(host.textContent).toContain("Act III — The Climb");
+    // RB-8: the caricature stage mounts behind the prose (cell + scene present → a composed frame).
+    expect(host.querySelector("[data-testid='scene-stage']")).not.toBeNull();
+    expect(host.querySelector("[data-testid='scene-wash']")).not.toBeNull();
     // The cross-family intersection braids in beneath the scene.
     const thread = host.querySelector("[data-testid='thread']");
     expect(thread).not.toBeNull();

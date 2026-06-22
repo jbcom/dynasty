@@ -46,6 +46,8 @@ export interface SagaFrame {
   /** Cross-family intersections braided into the current scene (ink threads) — empty when none fire. */
   threads: BraidedThread[];
   ended: boolean;
+  /** The cell driving the current act — the render layer (RB-8) composes the portrait/wash from it. */
+  cell: SagaCell | null;
 }
 
 /**
@@ -61,6 +63,7 @@ export class SagaDriver {
   }
   private state: ActState | null = null;
   private actTitle: string | null = null;
+  private cell: SagaCell | null = null;
 
   constructor(corpus: SagaCorpus) {
     this._corpus = corpus;
@@ -72,9 +75,11 @@ export class SagaDriver {
     if (!act) {
       this.state = null;
       this.actTitle = null;
+      this.cell = null;
       return;
     }
     this.actTitle = act.title;
+    this.cell = cell;
     this.state = startAct(this.corpus, act, motivators, flags);
   }
 
@@ -86,6 +91,7 @@ export class SagaDriver {
       scene,
       threads: scene ? resolveThreads(this.corpus, scene) : [],
       ended: this.state ? actEnded(this.state) : false,
+      cell: this.state ? this.cell : null,
     };
   }
 

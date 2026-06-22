@@ -20,6 +20,9 @@ import ShaderBackdrop from "../saga/ShaderBackdrop.svelte";
 import RivalField from "../saga/RivalField.svelte";
 import SagaPanel from "../saga/SagaPanel.svelte";
 import SceneReader from "../saga/SceneReader.svelte";
+import SceneStage from "../../render/SceneStage.svelte";
+import { composeScene, type RenderClass } from "../../render/composeScene";
+import type { Archetype } from "../../sim/slots";
 import SlideOutMenu from "../saga/SlideOutMenu.svelte";
 import CodexView from "../saga/CodexView.svelte";
 import { loadCodex } from "../../data/loadSaga";
@@ -82,6 +85,24 @@ $effect(() => {
   if (currentEraId) setMusicEra(currentEraId);
 });
 
+// RB-8: the visual backdrop for the current novel scene — the caricature portrait + procedural era
+// wash. Composed from the act cell (archetype × class), the SAME era id the audio uses (so the wash
+// and chord stay in lockstep — RB-10 unifies the two era tables), the scene's sense, and the line's
+// dominant motivator pole. Null when there's no active scene (the stage isn't mounted then).
+const sceneFrame = $derived.by(() => {
+  const cell = view.saga.cell;
+  const scene = view.saga.scene;
+  if (!cell || !scene) return null;
+  return composeScene({
+    variant: "scene",
+    archetype: cell.archetype as Archetype,
+    cls: (cell.cls === "middle" ? "middle" : "poor") as RenderClass,
+    eraId: currentEraId || sagaView.macroActTitle,
+    sense: scene.sense,
+    pole: sagaView.dominant.pole,
+  });
+});
+
 type Tab =
   | "event"
   | "news"
@@ -125,7 +146,11 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   {#if view.saga.scene}
     <!-- The NOVEL: the line's act reads as paged scenes that frame the choice. The act-chapter title
          lives in the slim always-visible header (saga-head), not repeated here. -->
-    <div class="event-pane">
+    <div class="event-pane saga-pane">
+      <!-- RB-8: the caricature portrait + procedural era wash, mounted BEHIND the prose. -->
+      {#if sceneFrame}
+        <SceneStage frame={sceneFrame} />
+      {/if}
       <SceneReader
         scene={view.saga.scene}
         {term}
@@ -325,6 +350,15 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     align-items: center;
     gap: 0.5rem;
     padding-top: var(--mmm-pad);
+  }
+  /* RB-8: contain the absolutely-positioned SceneStage behind the prose; SceneReader's own content
+     carries its z-index above the stage's pointer-events:none backdrop. */
+  .saga-pane {
+    position: relative;
+  }
+  .saga-pane :global(.scene) {
+    position: relative;
+    z-index: 1;
   }
   .interlude {
     text-align: center;
