@@ -112,6 +112,32 @@ describe("genai scene mode", () => {
     }
   });
 
+  it("normalizes object-with-numeric-keys drift (prose/beats as object → array)", () => {
+    const drifted = validActFile() as unknown as {
+      scenes: Array<{ prose: unknown; beats: unknown }>;
+    };
+    // Simulate Gemini emitting prose + beats as objects instead of arrays.
+    const sc = drifted.scenes[0]!;
+    sc.prose = {
+      "0": "First paragraph long enough to be real prose, not a fragment at all here.",
+      "1": "Second paragraph also long enough to count as genuine multi-paragraph novel prose.",
+    };
+    sc.beats = {
+      "0": {
+        prose: ["A framing line."],
+        choice: { text: "Pick me.", motivatorShift: { wealth: 3 }, setFlags: [] },
+      },
+    };
+    const out = validateSceneFile(drifted, req);
+    expect(out.ok).toBe(true);
+    if (out.ok) {
+      const scene = out.file.scenes[0] as { prose: string[]; beats: unknown[] };
+      expect(Array.isArray(scene.prose)).toBe(true);
+      expect(scene.prose).toHaveLength(2);
+      expect(Array.isArray(scene.beats)).toBe(true);
+    }
+  });
+
   it("merge dedups by id (regenerated act replaces the old)", () => {
     const first = validActFile();
     const merged1 = mergeSceneFile({ acts: [], scenes: [] }, first) as {

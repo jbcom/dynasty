@@ -97,28 +97,56 @@ export function buildScenePrompt(req: SceneRequest): string {
 }
 
 /**
+ * Coerce an object-with-sequential-numeric-keys ({"0":x,"1":y}) into an array — a recurring Gemini
+ * drift where it emits a JSON object instead of a JSON array for `prose`/`beats`/`options`. A real
+ * string or array passes through untouched (string→[string] is handled by callers). Pure.
+ */
+function asArray(v: unknown): unknown {
+  if (Array.isArray(v)) return v;
+  if (v && typeof v === "object") {
+    const keys = Object.keys(v as Record<string, unknown>);
+    if (keys.length > 0 && keys.every((k) => /^\d+$/.test(k))) {
+      return keys
+        .sort((a, b) => Number(a) - Number(b))
+        .map((k) => (v as Record<string, unknown>)[k]);
+    }
+  }
+  return v;
+}
+
+/**
  * Coerce common, harmless model drift into the canonical shape BEFORE schema validation:
  *   - a beat's framing as `line: "…"` (a string) → `prose: ["…"]` (the array the schema wants).
- *   - a beat's framing as `prose: "…"` (a bare string) → `prose: ["…"]`.
+ *   - a bare-string `prose` → `["…"]`.
+ *   - an object-with-numeric-keys for `prose` / `beats` / `decision.options` → an array.
  * Anything it can't normalize is left for the schema to reject. Pure; clones, never mutates input.
  */
 function normalizeSceneFile(raw: unknown): unknown {
   if (!raw || typeof raw !== "object") return raw;
   const obj = raw as { scenes?: unknown[]; [k: string]: unknown };
-  if (!Array.isArray(obj.scenes)) return raw;
+  const scenesArr = asArray(obj.scenes);
+  if (!Array.isArray(scenesArr)) return raw;
   const fixBeat = (b: unknown): unknown => {
     if (!b || typeof b !== "object") return b;
     const beat = { ...(b as Record<string, unknown>) };
     if (beat.prose === undefined && typeof beat.line === "string") beat.prose = [beat.line];
     if (typeof beat.prose === "string") beat.prose = [beat.prose];
+    else beat.prose = asArray(beat.prose);
     delete beat.line;
     return beat;
   };
-  const scenes = obj.scenes.map((s) => {
+  const scenes = scenesArr.map((s) => {
     if (!s || typeof s !== "object") return s;
     const scene = { ...(s as Record<string, unknown>) };
-    if (Array.isArray(scene.beats)) scene.beats = scene.beats.map(fixBeat);
     if (typeof scene.prose === "string") scene.prose = [scene.prose];
+    else scene.prose = asArray(scene.prose);
+    const beats = asArray(scene.beats);
+    if (Array.isArray(beats)) scene.beats = beats.map(fixBeat);
+    if (scene.decision && typeof scene.decision === "object") {
+      const dec = { ...(scene.decision as Record<string, unknown>) };
+      dec.options = asArray(dec.options);
+      scene.decision = dec;
+    }
     return scene;
   });
   return { ...obj, scenes };

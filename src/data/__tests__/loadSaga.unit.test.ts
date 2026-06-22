@@ -31,6 +31,30 @@ describe("loadSaga (real corpus)", () => {
     }
   });
 
-  // NOTE: the "no orphan scenes" integrity assertion lands with the post-sweep prune commit
-  // (scripts/prune-saga-orphans.ts), once the full-lattice GenAI sweep has finished writing.
+  it("every act's referenced scenes resolve (no dangling scene ids)", () => {
+    for (const act of corpus.acts.values()) {
+      for (const id of act.scenes) {
+        expect(corpus.scenes.get(id), `${act.id} → ${id}`).toBeDefined();
+      }
+    }
+  });
+
+  it("has no ORPHAN scenes (every scene belongs to some act)", () => {
+    const referenced = new Set<string>();
+    for (const act of corpus.acts.values()) for (const id of act.scenes) referenced.add(id);
+    const orphans = [...corpus.scenes.keys()].filter((id) => !referenced.has(id));
+    expect(orphans, `orphan scenes: ${orphans.join(", ")}`).toEqual([]);
+  });
+
+  it("covers the full lattice: 7 waves × 6 archetypes × 6 tiers = 252 acts", () => {
+    expect(corpus.acts.size).toBe(252);
+    // every (wave, archetype) cell has all 6 reach tiers.
+    const tiers = new Map<string, Set<number>>();
+    for (const a of corpus.acts.values()) {
+      const cell = `${a.wave}/${a.archetype}`;
+      tiers.set(cell, (tiers.get(cell) ?? new Set()).add(a.tier));
+    }
+    expect(tiers.size).toBe(42);
+    for (const [cell, t] of tiers) expect(t.size, cell).toBe(6);
+  });
 });
