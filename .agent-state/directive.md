@@ -26,7 +26,11 @@ braid-pool, STATE docs, automerge actor→branch-prefix + fork-spoof guard). See
 
 ## Active unit — DEPTH-1: succession choices (the dynastic fork)
 
-- [ ] [WAIT] **DEPTH-1 author the close-scene succession decision.** GAP FOUND: 0/504 close scenes carried
+- [x] **DEPTH-1 close-scene succession decision — DONE.** 504/504 close scenes now carry a take-partner
+  succession decision (corpus + DEPTH-1 test). Two genai fixes hardened every pass: normalizeSceneFile
+  coerces setFlags object→array; passSuccession validates+writes per-scene (was whole-file all-or-nothing).
+  Full gate green (646 unit + 89 browser + biome + typecheck). PR next.
+  ORIGINAL: 0/504 close scenes carried
   a `succession` effect, so the core dynastic choice (take a partner + raise heirs → advance the line)
   was never a player fork — only the dev clock advanced generations. The consuming chain already exists
   (spine close slot, sagaDriver.applyDecision → advanceFamily). FIX: (1) spine close slot now carries a
