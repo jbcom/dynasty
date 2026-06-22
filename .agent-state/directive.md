@@ -197,15 +197,14 @@ self-pace the highest-value improvement, own the full PR loop, keep the directiv
   play (was wired-but-dormant after NA-13). PR #68 open (https://github.com/jbcom/dynasty/pull/68),
   Monitor b117r1xtd on CI; local gate green (609 unit + 84 browser). ON GREEN: resolve threads →
   squash-merge → keep CD/Release green.
-- [ ] [WAIT] **PF-2 class in the saga cell + middle-class corpus** — BLOCKED on PF-1 merging (it
-  touches the same saga loader/scene-gen + corpus files; a parallel branch would conflict with
-  weaveThreads). DISCOVERY (Step-1 enum, done): act ids/paths do NOT encode class
-  (`act:<wave>:<archetype>:t<tier>`, `<wave>/<archetype>.act.json`), so a naive `--cls middle` sweep
-  would OVERWRITE the poor acts (identical ids). The locked vision is class-as-movable-rung WITH its
-  own storyline track, so the model is CLASS IN THE CELL: act id `act:<wave>:<archetype>:<class>:t<tier>`,
-  file `<wave>/<archetype>.<class>.act.json`; the driver selects by the line's rung. Steps after PF-1
-  merges: (a) key acts by class in schema/spine/scene-gen/loader/driver (existing class-less acts read
-  as "poor" for back-compat); (b) migrate the 42 files → `.poor.act.json`; (c) sweep `--cls middle`.
+- [~] **PF-2 class in the saga cell + middle-class corpus** — branch feat/saga-class-cells.
+  (a)+(b) DONE (commit ce77a2f): act id `act:<wave>:<archetype>:<cls>:t<tier>`, file
+  `<wave>/<archetype>.<cls>.act.json`; ActChapter.cls (default "poor"); spine/scene-gen/loader/driver
+  class-aware; actsForTier falls back to "poor" when a class track is unauthored; driver derives the
+  track from Wealth (sagaClassForWealth: climb → middle); migrated 42 files → `.poor.act.json`.
+  609 unit + typecheck + biome green.
+  (c) [WAIT] middle sweep `--all --cls middle --write` IN PROGRESS (bg /tmp/sweep-middle.log).
+  ON DONE: verify health (0 leaks/dangling, 252 middle acts), regen any failures, commit, PR.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
