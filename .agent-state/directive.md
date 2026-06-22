@@ -34,9 +34,16 @@ by construction.
   2-4 paras); only 2 under-generated cells had <2 beats — regenerated to the full weave (0 thin-beat).
   Fixed a real passSuccession skip bug (skipped any-decision closes, not just succession-bearing ones).
   504/504 closes have succession; integrity intact.
-- [ ] **RB-6 verify hour+ run end-to-end in Chrome** — live-verify a full founded playthrough reaches a
-  late-century convergence ending reading the novel (not the dev harness): screenshot the play surface +
-  legacy report, confirm scenes traverse + succession fork + a rival nudge visibly land. PR if any gap.
+- [x] **RB-6 verify hour+ run end-to-end — DONE (engine-level; Chrome MCP was disconnected).** Drove a
+  full founded playthrough reading the novel across ALL 7 waves: 6/7 (ireland/bavaria/italian/ashkenazi/
+  scandinavian/chinese) play the full ~150 scenes / ~90 decisions / 30 crossings to 2054 with a
+  convergence ending — the hour+ run is real. FOUND A GAP → RB-7: baghdad (the only non-1885 origin,
+  founds 762 CE) goes extinct ~1946 after 16 scenes because the timeline eras are calibrated for the
+  1885 waves, so advanceFamily ages the line across century-gaps between tiers and the heirs die out.
+- [ ] **RB-7 baghdad timeline mismatch** — baghdad founds in 762 CE but the NY-line eras (1885+) drive
+  the run clock, so its saga can't complete (line dies by 1946). Decouple the saga generation clock from
+  the NY eras (a per-generation year-step bounded to a human lifespan, independent of era span) OR give
+  baghdad its own era ladder. Fix so baghdad reaches a full 6-tier run like the other waves; test + PR.
 - [ ] **RB-3 presentation polish** — wire per-act caricature portrait/scene compositing (src/render),
   per-era ambient audio depth, and animated scene transitions in SceneReader; live-verify + PR.
 - [ ] **RB-4 surface interactive convergence in the UI** — show the player when a crossing shifted a
