@@ -9,8 +9,9 @@ import type { SceneFrame } from "./composeScene";
  * lower stacking context), so the prose stays the focus and the stage is felt, not read.
  *
  * Built atmosphere-first per the design spec: the wash is fully procedural and ships now; the portrait
- * layer <img>s resolve real caricature art from assets.json as it lands and HIDE on load error, so a
- * not-yet-authored layer is invisible rather than a broken-image box (placeholder-free, not stubbed).
+ * layer <img>s resolve real caricature SVG art (the repo's idiom — hand-authored SVG, never raster)
+ * from assets.json as it lands and HIDE on load error, so a not-yet-authored layer is invisible rather
+ * than a broken-image box (placeholder-free, not stubbed).
  *
  * The whole stage cross-fades when the frame's `key` changes (a generation turn, an era crossing) —
  * gated by prefers-reduced-motion. Pure presentation: it reads only the descriptor, never the sim.
@@ -74,7 +75,7 @@ function hideOnError(e: Event) {
         <img
           class="layer"
           data-role={layer.role}
-          src={`${assetBase}/${layer.asset}.png`}
+          src={`${assetBase}/${layer.asset}.svg`}
           alt=""
           onerror={hideOnError}
         />
