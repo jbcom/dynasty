@@ -22,7 +22,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { loadContent } from "../src/data/loadContent";
 import type { Rung } from "../src/sim/classRung";
-import { geminiGenerate } from "../src/sim/genai/client";
+import { DEFAULT_GEN_MODEL, geminiGenerate } from "../src/sim/genai/client";
 import { type ExpandRequest, EXPAND_TYPES, type ExpandType, expand } from "../src/sim/genai/expand";
 import { type Archetype, ARCHETYPES } from "../src/sim/slots";
 import { SPINE_TIERS } from "../src/sim/spine";
@@ -125,7 +125,10 @@ async function main() {
     process.exit(1);
   }
   const content = loadContent();
-  const generate = geminiGenerate(key);
+  // Model is env-overridable so a newer Gemini id can be dropped in without a code change.
+  const genModel = process.env.GEMINI_MODEL || DEFAULT_GEN_MODEL;
+  console.error(`Generating on model: ${genModel}`);
+  const generate = geminiGenerate(key, genModel);
 
   if (type === "scene") {
     const cells = sceneCells(content);
