@@ -46,6 +46,23 @@ describe("loadSaga (real corpus)", () => {
     expect(orphans, `orphan scenes: ${orphans.join(", ")}`).toEqual([]);
   });
 
+  it("cross-family intersections fire: every act's midpoint threads to a sibling wave", () => {
+    let threaded = 0;
+    for (const act of corpus.acts.values()) {
+      const midId = act.scenes.find((id) => id.endsWith(":midpoint"));
+      const mid = midId ? corpus.scenes.get(midId) : undefined;
+      if (mid && mid.thread.length > 0) {
+        threaded++;
+        // the thread points at a DIFFERENT wave that has an act at this tier.
+        const ref = mid.thread[0];
+        expect(ref?.wave).not.toBe(act.wave);
+        expect(actsForTier(corpus, ref!.wave, "economic", ref!.atTier)).toBeDefined();
+      }
+    }
+    // The vast majority of acts (all that have a midpoint scene) should now braid in a rival line.
+    expect(threaded).toBeGreaterThan(200);
+  });
+
   it("covers the full lattice: 7 waves × 6 archetypes × 6 tiers = 252 acts", () => {
     expect(corpus.acts.size).toBe(252);
     // every (wave, archetype) cell has all 6 reach tiers.
