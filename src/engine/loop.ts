@@ -1,6 +1,14 @@
 import { loadSaga } from "../data/loadSaga";
 import { sagaClassForWealth } from "../sim/classRung";
 import type { Content } from "../sim/content";
+import { strategyForArchetype } from "../sim/dynastyAgent";
+import {
+  advanceWorld,
+  createDynastyWorld,
+  type DynastyWorld,
+  detectGlimpses,
+  type Glimpse,
+} from "../sim/dynastyWorld";
 import { applyChoice } from "../sim/effects";
 import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
@@ -18,6 +26,10 @@ export interface GameView {
   /** The played NOVEL frame — the act title + current scene. `scene` is null when the line's act
    *  isn't authored yet (the UI then renders the event flow). */
   saga: SagaFrame;
+  /** Rival lines (the convergence world) visible from the player's vantage this turn. */
+  glimpses: Glimpse[];
+  /** The player's class rung (generation depth, 0..5) — for the read-model's class readout. */
+  rung: number;
   lastLedger: LedgerEntry[];
 }
 
@@ -37,6 +49,9 @@ export class Game {
   private lastLedger: LedgerEntry[] = [];
   private readonly listeners = new Set<Listener>();
   private readonly saga: SagaDriver;
+  /** The parallel world of RIVAL lines (the convergence layer) — created for a founded line, advanced
+   *  as the run's years pass, surfaced as glimpses the player sees beside their own line. */
+  private world: DynastyWorld | null = null;
 
   constructor(
     content: Content,
@@ -50,6 +65,33 @@ export class Game {
     this.current = this.state.end ? null : this.pick();
     this.saga = new SagaDriver(loadSaga());
     this.beginSagaActForState();
+    this.beginWorldForState();
+  }
+
+  /** Create the rival-line world for a founded run (deterministic from the run seed), then advance it
+   *  to the run's current year so a RESTORED mid-run shows rivals at the right vantage. No-op unfounded. */
+  private beginWorldForState(): void {
+    const wave = this.state.founding?.place;
+    if (!wave) return;
+    this.world = createDynastyWorld(this.content.places, wave, this.rng.fork("world"));
+    this.advanceWorldToNow();
+  }
+
+  /** The player's rung as the world sees it: the protagonist's generation depth (0 founder … 5). */
+  private playerRung(): number {
+    const family = this.state.family;
+    const protagonist = family?.members.find((m) => m.id === family.protagonistId);
+    return Math.min(protagonist?.generation ?? 0, 5);
+  }
+
+  /** Rival lines visible from the player's current vantage — empty when unfounded / no world. */
+  private currentGlimpses(): Glimpse[] {
+    if (!this.world) return [];
+    return detectGlimpses(
+      this.world,
+      this.playerRung(),
+      strategyForArchetype(this.state.archetype),
+    );
   }
 
   /**
@@ -89,8 +131,21 @@ export class Game {
       state: this.state,
       currentEvent: this.current,
       saga: this.saga.frame(),
+      glimpses: this.currentGlimpses(),
+      rung: this.playerRung(),
       lastLedger: this.lastLedger,
     };
+  }
+
+  /** Advance the rival world to the run's current year (deterministic). Called when the clock moves. */
+  private advanceWorldToNow(): void {
+    if (this.world) {
+      this.world = advanceWorld(
+        this.world,
+        this.state.year,
+        this.rng.fork(`world:${this.state.year}`),
+      );
+    }
   }
 
   /** Write the driver's carried motivators back into the run's personality vector. */
@@ -107,6 +162,7 @@ export class Game {
    */
   private advanceRunClock(): void {
     this.state = advanceTimeline(this.content, this.state);
+    this.advanceWorldToNow();
     const end = detectEnd(this.content, this.state);
     if (end) {
       this.state = { ...this.state, end };
@@ -182,6 +238,7 @@ export class Game {
     const result = applyChoice(this.content, this.state, this.current, choiceId, this.rng);
     this.state = result.state;
     this.lastLedger = result.newLedger;
+    this.advanceWorldToNow();
     // If the era is exhausted but the run hasn't ended, force-advance once so the
     // player is never stuck with no event and no end screen.
     this.current = this.state.end ? null : this.pickWithProgress();

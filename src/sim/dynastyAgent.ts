@@ -77,6 +77,12 @@ const ARCHETYPE_STRATEGIES: Record<
   ],
 };
 
+/** The player line's primary strategy for its archetype — used to compute glimpse RELATION to rivals
+ *  (same strategy → opposing, complementary → contributing). The archetype's first natural strategy. */
+export function strategyForArchetype(archetype: Archetype): DynastyStrategy {
+  return ARCHETYPE_STRATEGIES[archetype][0]?.strategy ?? "endure";
+}
+
 /** A goal that records the chosen strategy on the agent (the executed plan, deterministic). */
 class StrategyGoal extends GoapGoal<DynastyAgent> {
   constructor(

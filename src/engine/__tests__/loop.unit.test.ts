@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
+import { loadContent } from "../../data/loadContent";
 import { validRaw } from "../../sim/__tests__/fixtures";
 import { buildContent } from "../../sim/content";
+import { foundByComposition } from "../../sim/founding";
 import { createRng } from "../../sim/rng";
 import { initState } from "../../sim/state";
 import { pickNextEventViaWorld } from "../../sim/world";
@@ -91,5 +93,33 @@ describe("Game loop", () => {
       const viaWorld = pickNextEventViaWorld(c, state, createRng(seed).fork(label));
       expect(g.view.currentEvent?.id ?? null).toBe(viaWorld?.id ?? null);
     }
+  });
+
+  it("PF-7: a founded run surfaces rival-line GLIMPSES + the player rung, deterministically", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Glimpser",
+      seed: "pf7",
+      originId: "composed:ireland:origins",
+    };
+    const mk = () =>
+      new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    const g = mk();
+    // The convergence world is live: the view exposes glimpses (rivals near the player's vantage) +
+    // the player's rung. A founder is rung 0; glimpses are rival lines, never the player's own wave.
+    expect(g.view.rung).toBe(0);
+    expect(Array.isArray(g.view.glimpses)).toBe(true);
+    for (const gl of g.view.glimpses) {
+      expect(gl.label).not.toBe("ireland"); // never the player's own line
+      expect(["opposing", "contributing", "neutral"]).toContain(gl.relation);
+    }
+    // Deterministic: same seed → same glimpses (replay-safe).
+    expect(JSON.stringify(mk().view.glimpses)).toBe(JSON.stringify(g.view.glimpses));
   });
 });

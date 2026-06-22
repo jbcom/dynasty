@@ -21,6 +21,8 @@ function view(): GameView {
     state,
     currentEvent: content.allEvents[0] ?? null,
     saga: { actTitle: null, scene: null, threads: [], ended: false },
+    glimpses: [],
+    rung: 0,
     lastLedger: [],
   };
 }

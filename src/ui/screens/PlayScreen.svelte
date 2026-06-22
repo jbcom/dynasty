@@ -59,7 +59,14 @@ const term = $derived((text: string) => applyTerms(text, resolvedTerms));
 // SS-13/SS-14: the saga read-model view (macro-act, motivators, rung, glimpses) drives the
 // novel-frame SagaPanel + the shader backdrop's per-macro-act register. Rung/glimpses are wired
 // by the SS-15 cut-over; the projection renders what's available now (macro-act + motivators).
-const sagaView = $derived(projectSaga({ year: view.state.year, motivators: view.state.personality }));
+const sagaView = $derived(
+  projectSaga({
+    year: view.state.year,
+    motivators: view.state.personality,
+    rung: view.rung,
+    glimpses: view.glimpses,
+  }),
+);
 
 type Tab =
   | "event"
