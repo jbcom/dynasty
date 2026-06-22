@@ -402,6 +402,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The dry, metallic draft of the well-water lingers like iron on {given_name}'s tongue, struggling to wash away the stubborn salt of the old world. How will the {surname} line root itself in this parched, demanding soil?",
+        "options": [
+          {
+            "text": "We shall share our dense, flat loaves with the blacksmith’s stoic sister, letting the harsh well-water soften our vows as we raise children who speak the old tongue but hunger only for the sweet, dark rye of these new plains.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "sod_heirs",
+              "prairie_marriage"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Keep the cabin quiet and the portions small. I will take no partner to my table, but will share my sparse turnips with my late cousin’s orphaned boy, raising him to endure the iron-bitter well-water as the sole heir of our name.",
+            "motivatorShift": {
+              "tradition": 2,
+              "worldview": 1,
+              "lineage": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "orphan_ward",
+              "stoic_solitude"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the throat parch completely. I will leave the plow behind to wander the sod settlements as a lay preacher, living on dried wild berries and the Word, leaving no descendants to inherit this soil—only a flock that knows my voice.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "ascetic_preacher",
+              "barren_pioneer"
+            ]
+          }
+        ]
       }
     },
     {
@@ -752,6 +805,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the sweet-sour sting of the lingonberry and the warm, yeasty spice of the caraway rye linger in your mouth, the quiet of the northern forest presses against the windows. The long struggle of the {family_name} line to break this glacial earth has finally borne fruit, but the parish elders now watch your empty cup. How will the covenant of this soil be carried into the next winter?",
+        "options": [
+          {
+            "text": "I will bring the deacon’s youngest daughter to this pine table, sealing our devotion with a covenant of marriage, and fill this house with children who will grow strong on the bread of our hard-won fields.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "pious_alliance",
+              "fruitful_hearth"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "The hunger of the body is sated, but the soul demands more; I will take no partner, but instead deed these cleared acres to the parish to build a stone sanctuary, letting the {surname} line quieten so the Lord's name may stand forever on this ridge.",
+            "motivatorShift": {
+              "tradition": 2,
+              "worldview": 2,
+              "lineage": -2,
+              "politics": -1
+            },
+            "setFlags": [
+              "monastic_dedication",
+              "temple_of_stone"
+            ]
+          },
+          {
+            "text": "We need no new vows to complicate our stewardship. I shall remain unwed, but will raise my departed sister's orphaned son to inherit this timbered hall, teaching him the hymns of the {full_name} generation and the rhythm of the glacial till.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -1,
+              "reach": -1
+            },
+            "setFlags": [
+              "adopted_steward",
+              "frugal_hearth"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -1058,6 +1164,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the sharp bite of the boiled lingonberries lingers on the tongue, cutting through the heavy pork grease, {given_name} looks across the steam of the crowded hall. The foreign dialects of the docks press against these newly raised pine walls, demanding a choice. How will the {family_name} line anchor its faith and its blood before the winter ice closes the fjord?",
+        "options": [
+          {
+            "text": "We will invite the soft-spoken niece of the foreign timber-merchant to share the high-seat. Though her tongue is strange, her dowry will secure our docks, and together we will raise children who speak both the old northern prayers and the language of the trade winds.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": -1,
+              "reach": 2
+            },
+            "setFlags": [
+              "dock_alliance",
+              "mixed_tongue_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The church must be our only partner. We shall not wed, but instead bring the orphaned siblings of the late ship-carpenter to our hearth, raising them in the family's pious craft so they may inherit this hall and carry the {surname} work forward.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 2,
+              "worldview": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "foster_heirs",
+              "devout_celibacy"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let our bloodline dissolve into the salt-crust of the port. We will deed this hall directly to the missionary priests as a permanent sanctuary for the travelers, taking a vow of silence to labor in the scriptorium and let the {family_name} name fade into holy service.",
+            "motivatorShift": {
+              "worldview": 3,
+              "honor": 1,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "monastic_sanctuary",
+              "line_extinguished"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1461,6 +1620,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The last dregs of the sweetened coffee grow cold in the porcelain cup, leaving only the dark, sedimented truth of where the {family_name} line must tread. The sugar cannot entirely mask the bitter chicory of our beginnings. How do we honor the long, cold road that brought us to this table?",
+        "options": [
+          {
+            "text": "We must ground this sudden, dizzying sweetness in the old ways. I will wed the quiet daughter of the parish elder—one who still carries the scent of pine needles and damp earth—and with her, raise children who know both the sting of the cold well and the grace of our new-found table.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": -1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "grounded_by_the_soil"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The hearth is already warm enough, and the work of the parish demands my undivided spirit. I shall not bring a partner to this house, but will instead adopt my late brother's fatherless boys from the northern fishing ports, raising them on hard bread and scripture to steward our legacy.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "politics": -1,
+              "reach": -1
+            },
+            "setFlags": [
+              "kin_restored"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the cup drain to the dregs and remain empty. I will pour our hard-won wealth into building a great stone church on the windy headland, dedicating my remaining days to solitary prayer and translating the scriptures, letting the {family_name} name burn out as a pure, holy beacon.",
+            "motivatorShift": {
+              "worldview": 3,
+              "honor": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "holy_asceticism"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1805,6 +2014,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the sour copper of the recycled water returns to claim your tongue, the fading sweetness of the cloudberry leaves a final, burning question: how will {full_name} preserve this ancient, sacred spark before the cold of the void swallows the last of the {surname} blood?",
+        "options": [
+          {
+            "text": "We must plant our roots deep into this pressurized metal. I will accept the union arranged by the elder-presbyter, taking a devout partner to our cabin, and we will rear children who will know the taste of the old world's grace.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "worldview": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "sacred_union_accepted",
+              "traditional_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "My heart has no room for a spouse under these cold bulkheads, but my sister's orphaned child already knows the prayers. I will claim them as my legal heir, ensuring the {surname} name continues without the compromise of marriage.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "power": -1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "adoptive_successor",
+              "celibate_guardian"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the physical blood dry up like the ancient Baltic marshes. I will surrender my meager station-allotment to the temple, taking the final vows of the silent anchorites to translate our holy scriptures until my lungs give out.",
+            "motivatorShift": {
+              "tradition": 3,
+              "worldview": 3,
+              "lineage": -3,
+              "politics": -2
+            },
+            "setFlags": [
+              "ascetic_monk",
+              "bloodline_extinguished"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2208,6 +2470,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The last of the salt-crust has been scraped from the pine trencher, leaving only the sharp, iron tang of lingonberries on the back of the throat. The prairie wind howls through the gaps in the sod, demanding to know how the {family_name} name will endure when the winter finally breaks.",
+        "options": [
+          {
+            "text": "I will share this bitter salt with the daughter of the neighboring homestead. We will bind our lives under God's eye, tilling this stubborn earth until our hands bleed, and raise children who know both the sting of the frost and the strength of the Word.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "pioneer_covenant",
+              "sod_busting_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "My brother's orphans still shiver by the cold hearth, tasting only the ash of the fever that took him. I will take them as my own, using every scrap of cured fatback to keep their ribs covered, and let my own dreams of a marriage-bed die in the prairie dirt.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "foster_duty",
+              "guardians_of_the_parish"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The salt has hardened my heart, and the plow holds no joy. I will leave the sod-house to the mice, pack the black Bible into my rucksack, and walk north to preach the gospel to the timber camps, letting the {family_name} bloodline dry up so that the Lord's work may flourish.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "circuit_preacher",
+              "consecrated_barrenness"
+            ]
+          }
+        ]
       }
     }
   ]

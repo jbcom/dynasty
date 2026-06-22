@@ -397,6 +397,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "With the taste of yeast and woodsmoke still sharp on the tongue, {given_name} {surname} must decide how the physical toil of this new homestead will serve the family's artistic calling before the winter frost locks the cabin door.",
+        "options": [
+          {
+            "text": "We must graft our theater directly to this heavy soil. I will marry the zither-maker's daughter, whose hands smell of pine shavings and elderflower, and raise a boisterous brood of {surname} players who will tumble and sing across these frontier boards for generations.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "bavarian_heirs",
+              "frontier_troupe"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "The stage demands devotion, not a traditional hearth. I will legally adopt the late puppeteer's eldest apprentice as my sole heir, sparing myself the domestic yoke while passing down the secret keys of the {family_name} marionette theater to one who already has the sawdust in their blood.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "tradition": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "adopted_successor",
+              "marionette_legacy"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "I will bleed my own veins dry for the art, leaving no heirs behind. Every scrap of silver earned from our rustic comedies will go toward raising a magnificent timber opera house that smells of sweet cedar and spilled beer—a monument to {given_name} {surname} that will stand long after our line is dust.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "monumental_theater",
+              "barren_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -731,6 +784,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter tang of the chicory roast lingers on your tongue, the cold reality of the box office demands a choice: how will the {surname} name endure the grueling toll of the stage?",
+        "options": [
+          {
+            "text": "I will share this heavy lard-smeared bread with the troupe's pragmatic costume designer, binding our fortunes in marriage so our future children can inherit a stable, shared billing.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "thespian_dynasty",
+              "pragmatic_union"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The mattress remains mine alone. I will take the orphaned apprentice of our late stage manager under my wing, teaching them to balance the ledgers and carry the {surname} legacy without a spouse to complicate the receipts.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 1,
+              "wealth": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "adopted_apprentice",
+              "sole_proprietor"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line burn out with my own final bow. I will spend every pfennig of our meager profits on a solo tour of the grand northern halls, chasing the fleeting scent of fresh stage roses and leaving no heirs to inherit this bitter trade.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 1,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "solo_star",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1078,6 +1184,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering sweetness of the Riesling coats your teeth, but the cold, mineral aftertaste warns you of how quickly a cellar can empty. Now that the {surname} name is toasted in the gilded salons of Munich rather than yelled over the din of muddy fairgrounds, how will you anchor this fragile comfort before the bottle runs dry?",
+        "options": [
+          {
+            "text": "We must bind our blood to the very soil that grew these grapes. I will take a respectable partner from the established merchant guilds, turning our wild theatrical troupe into a dynasty of sober landowners, and rear children who will never know the taste of common pilsner.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "burgher_alliance",
+              "gilded_stability"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the high-born patrons sneer at our origins. I will remain beside the troupe-mate who shared my leanest years, adopting a promising young star from the theater's wings to inherit the {surname} lead, preserving our art without the suffocating collar of a high-society marriage.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 2,
+              "tradition": -2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "bohemian_protege",
+              "uncompromised_art"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "This sweet leisure is too fleeting to dilute with the crying of infants. I will spend every ounce of our hard-won wealth to build a grand Bavarian opera house, letting the family line end with me in a magnificent, solitary crescendo that the court will talk about for centuries.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 3,
+              "wealth": -2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "monument_built",
+              "glorious_extinction"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1421,6 +1580,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the salt and potash of the confection dissolve, leaving a dry, demanding heat in the throat of {given_name}, the future of the {family_name} spectacle hangs on how we choose to seed the next generation. Which path will you swallow?",
+        "options": [
+          {
+            "text": "We will marry the salt of our artistry with the sugar of the court counselor's lineage, taking a partner from the great patent-holders of Munich to raise children who will inherit both the stage and the city's favor.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "dynasty_secured_by_law",
+              "salon_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "No grand contracts. I will quietly adopt the gifted young apprentice from our own troupe, raising them within our existing creative partnership to ensure the {surname} craft survives even if the blood thins.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1,
+              "lineage": 1,
+              "politics": -2
+            },
+            "setFlags": [
+              "apprentice_successor",
+              "troupe_loyalty"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line dissolve like the cacao. I will dedicate my remaining years entirely to composing the grand Bavarian national pageant, allowing the family name to burn out in one final, blinding masterpiece.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "masterpiece_only",
+              "fame_immortalized"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1784,6 +1996,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the sour, grainy crumb of the rye bread scratches your throat, scraping away the cloying perfume of the Levant sugar-plums, how will you anchor the future of the {surname} stage?",
+        "options": [
+          {
+            "text": "Wash down the bitter Turkish dregs by taking the hand of the Munich arena-master's daughter; we will bind our playhouses, share a bed of calculated ambition, and breed a disciplined new generation to rule the stage from the Danube to the Bosporus.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "munich_alliance",
+              "legitimate_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Savor this humble bread with the companion who has shared your greasepaint and travel-chests for a decade; we will ignore the high-society registries, raise our natural-born child in the wings, and keep the troupe's blood wild and free.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": -1,
+              "tradition": -2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "bohemian_heir",
+              "defied_high_society"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the family line end when our own heart stops beating. Spit out the sweet rosewater of domesticity and pour every pfennig of the Levant cartels into sole ownership of the European circuit, dying childless but undisputed king of the footlights.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 2,
+              "lineage": -3,
+              "power": 1
+            },
+            "setFlags": [
+              "monopoly_era",
+              "end_of_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2116,6 +2381,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The greasy bitterness of the chicory lingers on your tongue like the dust of the Bavarian valleys your ancestors bartered away for a life in the stars. Through the soles of your boots, the deep, mechanical throb of the orbital stage demands an answer. The audience is breathing in the recycled air of the theater dome, waiting for the {surname} troupe to paint the dark. How will you ensure this light does not flicker out when your own lungs finally fail?",
+        "options": [
+          {
+            "text": "I will invite the troupe’s lead engineer into my cabin and my heart. We will share the narrow bunks and the harsh pressure-suits, raising two children to master both the cold physics of the rigs and the warm artistry of the {surname} name.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "power": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "bloodline_secured",
+              "engineer_alliance"
+            ]
+          },
+          {
+            "text": "My lifelong devotion to my stage partner is absolute, and we will not invite another into our bed. Instead, we will legally adopt our most brilliant young apprentice from the lower decks, giving them the {surname} name and teaching them to paint the void.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "honor": 3,
+              "worldview": 2,
+              "lineage": -2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "adopted_apprentice",
+              "artistic_purist"
+            ]
+          },
+          {
+            "text": "Let the family line end with my own final bow. I will liquidate the family's orbital trusts to commission a final, blinding light-symphony across the atmosphere, choosing artistic immortality over the slow decay of a bloodline.",
+            "motivatorShift": {
+              "reach": 4,
+              "power": 2,
+              "lineage": -4,
+              "tradition": -3
+            },
+            "setFlags": [
+              "grand_finale",
+              "line_extinguished"
+            ]
+          }
+        ]
       }
     }
   ]

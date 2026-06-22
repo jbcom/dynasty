@@ -499,6 +499,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter alkali still clings to the roof of your mouth, and the iron spoon feels cold against your split lip. As {given_name} {surname}, your muscles ache from the long haul across the dry washes. How will you direct this physical strength before your joints stiffen and the road swallows your name?",
+        "options": [
+          {
+            "text": "Put down the travel-pack and take the hand of the sturdy weaver's daughter who shared the alkali road; together we will build a hearth in the basin and raise three children to run faster than we ever could.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "hearth_established",
+              "sturdy_bloodline"
+            ]
+          },
+          {
+            "text": "Bring the two quiet, orphaned nephews of our deceased track-mate into our camp; we will raise them on this rancid salt-pork and teach them the endurance of the {surname} name without taking a partner to soften our focus.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 2,
+              "honor": 3,
+              "wealth": -2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "nephews_adopted",
+              "stoic_camp"
+            ]
+          },
+          {
+            "text": "Let the line end with this dust-caked throat. We will run the mountain passes alone, carrying mail and ore faster than any mule, until our lungs burst and our bones become part of the gravel.",
+            "motivatorShift": {
+              "reach": 3,
+              "honor": 2,
+              "lineage": -3,
+              "power": 1
+            },
+            "setFlags": [
+              "lone_messenger",
+              "legendary_runner"
+            ]
+          }
+        ]
       }
     },
     {
@@ -908,6 +961,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The steam clears, and the bitter taste of gentian lingers on your tongue—a stark reminder that every ounce of your physical power was bought with blood and sweat. As the second generation of the {family_name} line stands at its absolute peak, how will you secure this hard-won strength before your own body begins its inevitable decline?",
+        "options": [
+          {
+            "text": "Bind your fate to the daughter of the provincial herbalist who healed your fractured bones; together, you will raise strong-limbed children who know the value of honest labor and carry the {surname} blood into the soil.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "worldview": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "heirs_of_the_soil",
+              "enduring_physique"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Adopt the quiet, fierce orphan of your fallen training rival, sparing yourself the soft distractions of marriage to forge a single, disciplined successor in the grueling {surname} style.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "politics": -2,
+              "power": 1
+            },
+            "setFlags": [
+              "adopted_discipline",
+              "foster_legacy"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Spit the bitter tea onto the earth and turn away from family life entirely; climb into the high mountain monasteries to achieve solitary physical perfection, letting the {family_name} name end as an unrepeatable legend.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "ascetic_ascension",
+              "broken_lineage"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1316,6 +1422,53 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The heavy warmth of the roasted pork still clings to the roof of your mouth, a slow reminder that the lean years of hunger are behind {given_name}. Yet, as the body grows heavy with prosperity, the path of the {surname} line must be carved before the fat of ease makes our muscles soft. How will you direct the strength of your blood?",
+        "options": [
+          {
+            "text": "We must bind this sweet, newfound ease to the soil. I will accept the match arranged by our matchmaker, welcoming a partner who understands the weight of our legacy, and raise a new generation of {surname} heirs who will never know the taste of ash.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "anchored_line"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The grease on my tongue is a reward for hard labor, not a cushion for luxury. I will raise my sister's quiet child within our walls, keeping my own body free from the entanglements of marriage so I can push our physical training to its absolute limit.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1,
+              "lineage": -1
+            },
+            "setFlags": [
+              "martial_purist"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "This mouth was made to hold the iron bit of discipline, not the soft lard of domestic peace. I will dedicate my remaining strength entirely to the imperial tournaments, leaving the {family_name} name to the history scrolls rather than chasing heirs.",
+            "motivatorShift": {
+              "reach": 2,
+              "worldview": 2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "glorious_extinction"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1649,6 +1802,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the grease of the roast duck cools on your lips, leaving a thick coat of luxury that tastes entirely of someone else's labor, you realize the raw, copper sting of the training yard is fading from the {surname} line. How will you anchor this physical legacy before the sweetness of wealth softens your blood entirely?",
+        "options": [
+          {
+            "text": "Savor the rich plum's sweetness and swallow the heavy fat. We will bind ourselves to the wealthy southern merchant-clan that imported these fruits, taking a partner from their house to bear heirs who will fight in courts rather than the dirt.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "worldview": 1,
+              "power": 0,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "merchant_bloodline",
+              "comfort_of_the_south"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Spit the cloying fat into the dirt and cleanse your mouth with bitter mountain water. We will take no spouse from these soft halls; instead, we will bring the most promising orphan from the province's iron-sand training pits into the house as our legal ward, raising them in the old, brutal ways to carry the {surname} name.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": -1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "iron_purity",
+              "adopted_discipline"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the grease coat your throat for one final, glorious surge of speed. We will pour our accumulated wealth into a final, legendary campaign for the Emperor's grand tournament, leaving no heirs behind—only the memory of a physical perfection that burned too bright to be inherited.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": -1,
+              "worldview": 2,
+              "power": 3,
+              "tradition": -1,
+              "honor": 3,
+              "lineage": -4,
+              "reach": 2
+            },
+            "setFlags": [
+              "glorious_extinction",
+              "imperials_champion"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2055,6 +2273,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the sharp, foreign effervescence of the champagne clashes with the dark, lingering sediment of the ancient tea in your throat, the silence of the training hall demands your final movement. How will {given_name} anchor the physical legacy of the {surname} line before the body begins its slow, inevitable decline?",
+        "options": [
+          {
+            "text": "Let the dry sting of the West fade; I will bind my path to the daughter of the Northern academy, building a household of calloused hands and shared breath to rear children who know both the discipline of the floor and the weight of the bloodline.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "politics": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "athletic_dynasty_secured",
+              "traditional_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The champagne’s bite demands singular focus. I will empty my cup of domestic comfort and pour every remaining ounce of my body's strength into coaching the national youth, letting the biological line end with my own victories so that the spirit of our style outlives our blood.",
+            "motivatorShift": {
+              "power": 3,
+              "honor": 2,
+              "lineage": -3,
+              "worldview": 1
+            },
+            "setFlags": [
+              "monastic_glory",
+              "bloodline_extinguished"
+            ]
+          },
+          {
+            "text": "I will not bring a new partner into this quiet temple of training. My sister’s youngest has my same stubborn stance and iron grip; I will adopt them as my formal heir, passing down the secrets of our breathing and the gravelly weight of this ancient tea.",
+            "motivatorShift": {
+              "tradition": 1,
+              "lineage": 1,
+              "wealth": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "unorthodox_heir_raised",
+              "kinship_succession"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -2385,6 +2656,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering, chemical burn of the yeast-paste demands a clean palate. As the ship's gravity-wheel groans against the vacuum, how will the physical endurance of the {family_name} line be spent?",
+        "options": [
+          {
+            "text": "Share the last, preserved flask of plum wine with the hydroponics coordinator, binding our physical strength to raise a new generation of runners within these narrow steel corridors.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "reach": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "line_continued_in_transit",
+              "hydroponic_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Pour the wine into the common paste-vats and take the orphaned sweep-children of the lower decks under our wing, training their young muscles to survive the high-g maneuvers without taking a partner to crowd our berth.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 2,
+              "lineage": -1,
+              "politics": 1
+            },
+            "setFlags": [
+              "mentorship_path",
+              "lower_deck_ties"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Drink the dregs alone and volunteer for the punishing high-radiation engine-room shifts, pushing this athletic body to its absolute mechanical limit to ensure the ship arrives, even if the {family_name} line ends with our bones.",
+            "motivatorShift": {
+              "power": 2,
+              "reach": 2,
+              "lineage": -3,
+              "honor": 1
+            },
+            "setFlags": [
+              "martyr_of_the_transit",
+              "engine_sacrifice"
+            ]
+          }
+        ]
       }
     }
   ]

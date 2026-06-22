@@ -430,6 +430,57 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold draught whistling through the parish floorboards smells of damp pine and impending frost, carrying the bitter taste of our daily bread. How do we, the {family_name} line, anchor our devotion and our blood to this hard Bavarian soil?",
+        "options": [
+          {
+            "text": "I will invite the weaver's pious daughter to share this meager hearth. Together, we will boil the barley, weather the winters, and raise our children to know the liturgy and carry the {surname} name forward.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "pious_marriage",
+              "heirs_of_the_hearth"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "I shall take my late brother's quiet boy under my roof, sharing my dry rye and scripture with him. He already carries the {surname} blood; I will raise him as my sole heir to safeguard our legacy without the distraction of a new marriage.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "adopted_nephew",
+              "austere_household"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the physical line end with my own breath. I will pledge my remaining years and our modest lands to the monastery, trading the bitter chicory of this life for the eternal light, leaving our name carved only in the abbey's chapel stone.",
+            "motivatorShift": {
+              "worldview": 3,
+              "tradition": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "monastic_consecration",
+              "line_ends_in_faith"
+            ]
+          }
+        ]
       }
     },
     {
@@ -743,6 +794,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The sourness of the starter lingers on the palate, a heavy legacy of survival. As the embers of the hearth turn to gray ash, how do you command {given_name} to preserve the soul of the {family_name} line?",
+        "options": [
+          {
+            "text": "The bite of the wind demands we build a wider wall. Let {given_name} marry the sister of the local parish bailiff, bringing a devout partner to our cold stone hearth to bear children who will guard our sacred holdings.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "allied_with_bailiff",
+              "hearth_fire_fed"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The bitter grain we sow is for our blood alone. Let {given_name} refuse any new marriage, avoiding the meddling of outsiders, and instead raise the orphaned child of our late cousin, keeping our meager land undivided.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 2,
+              "wealth": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "isolated_homestead",
+              "fostered_blood"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The ash on our fingers is a sign to turn away from the soil. Let {given_name} take the stone crock to the high Benedictine abbey, offering our last starter to the monks and taking holy vows to let our worldly name dissolve in prayer.",
+            "motivatorShift": {
+              "worldview": 3,
+              "lineage": -3,
+              "honor": 2,
+              "wealth": -2
+            },
+            "setFlags": [
+              "monastic_extinction",
+              "holy_poverty"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1090,6 +1194,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The heavy scent of lard and cloves still clings to your woolens, a rich suffocating cloud that smells of hard-won victory. As you look around the table at the empty benches, you must decide who will sit here when your own hands grow too stiff to turn the mill-wheels.",
+        "options": [
+          {
+            "text": "I will bring the hops-grower's devout daughter to this table; her skin smells of raw yeast and river loam, and together we will fill this house with children who know both the rosary and the weight of a bushel.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "yeoman_marriage",
+              "fecund_mills"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "No new wife will share this lard-slicked abundance. I will foster my late sister's quietest boy, feeding him on the dry crust of discipline and ledger-work so that the {family_name} mills pass to one already tempered by our leanest years.",
+            "motivatorShift": {
+              "lineage": 1,
+              "wealth": 2,
+              "honor": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "fostered_nephew",
+              "ascetic_stewardship"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "This greasy wealth cloys the throat and corrupts the spirit. I will sign the deeds of our timber-mills over to the abbey and take the tonsure, letting the {family_name} line dissolve into the clean, salt-less draft of the stone cloister.",
+            "motivatorShift": {
+              "worldview": 3,
+              "tradition": 2,
+              "wealth": -2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "monastic_bequest",
+              "line_extinguished"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1421,6 +1578,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering sweetness of the yeast cake is a fleeting grace, and the bitter dregs of the chicory demand a lasting response. How will {given_name} anchor the {surname} legacy before the cold dawn vigils consume her strength entirely?",
+        "options": [
+          {
+            "text": "Accept the sober proposal of the widowed master-mason recommended by the parish priest. We shall rebuild the southern choir together, blending our hearths to raise a new generation of {surname} heirs who know both the weight of the trowel and the truth of the catechism.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "mason_alliance",
+              "heirs_of_stone"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Remain unwed to keep my solitary vows in the shadow of the altar, but bring my late sister's youngest child into the quiet of our home. I will rear this single ward on dry bread, ledger-work, and scripture to inherit the {surname} name without the distraction of a marriage bed.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "tradition": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "devout_guardian",
+              "adoptive_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Surrender the family estate to the bishop to fund a perpetual convent on our lands. I will take the veil myself, ensuring the {surname} name is carved not into yielding flesh, but into the sanctuary's stone where prayers for our ancestors will be sung until the end of days.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "monastic_consecration",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1764,6 +1974,60 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter chicory dregs cling to the roof of your mouth, a reminder of the grim compromises that bought this peace. As the shadow of the parish tower falls across the cold parlor, how will you resolve the future of the {family_name} name?",
+        "options": [
+          {
+            "text": "Accept the cold hand of the provincial tax-collector's daughter, as the diocese counsels, to fill the quiet halls of {surname} with legitimate heirs born to endure.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "provincial_alliance",
+              "flesh_and_blood"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Keep your vow of solitary devotion, but take your late cousin's orphaned boy from the convent school to raise him as the sole, chosen heir to our spiritual estate.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 2,
+              "honor": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "adopted_clerical_heir",
+              "celibate_house"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the cup pass. Sign the entirety of the {surname} holdings over to the monastic order to build a lasting sanctuary, letting our name dissolve into the stone and incense.",
+            "motivatorShift": {
+              "lineage": -3,
+              "tradition": 2,
+              "worldview": 2,
+              "honor": 2,
+              "wealth": -2
+            },
+            "setFlags": [
+              "basilica_endowment",
+              "line_dissolved"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2097,6 +2361,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The sudden, green bite of dill on your tongue tastes of ancient Bavarian valleys, a sharp contrast to the cold sulfur of the transit. As this communion of the soil awakens your spirit, how will {given_name} carry the sacred spark of the {family_name} name forward?",
+        "options": [
+          {
+            "text": "Bind our life to the keeper of the hydroponic gardens, raising children who will learn to pray in the soil of the new world while carrying the old Bavarian bloodline forward.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "worldview": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "botanist_union",
+              "green_succession"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Bring the orphaned acolytes of the chapel ship into our existing household, teaching them the sacred chants and stewardship of the earth, letting our spirit endure though our bloodline narrows.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": -1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "spiritual_adoption",
+              "guardians_of_the_chant"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Renounce all personal legacy to enter the silent Order of the Seed, committing our remaining years entirely to the sacred hydroponic soils so that future generations may eat, even if our own line ends here.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 1,
+              "lineage": -3,
+              "power": -1
+            },
+            "setFlags": [
+              "monastic_ascetic",
+              "end_of_line"
+            ]
+          }
+        ]
       }
     }
   ]

@@ -429,6 +429,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The scraping of the tin spoon against the bottom of the empty pot is the loudest sound in the cabin. If {given_name} {surname} is to put an end to this hunger, the next step must taste of something more than survival.",
+        "options": [
+          {
+            "text": "We will court the salt-merchant's quiet daughter, whose apron carries the clean, sharp scent of brine and security. Her dowry will buy a dry cellar, and our children will grow fat on rye loafs and fresh milk.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 2,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "merchants_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "No new partner shall share this bitter draft. We will raise our brother's orphaned girl, teaching her hands the rough bite of the loom and the sharp sting of thrift, ensuring the {surname} name survives through her grit.",
+            "motivatorShift": {
+              "wealth": -1,
+              "lineage": 1,
+              "honor": 2,
+              "tradition": 2
+            },
+            "setFlags": [
+              "raised_kin"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "We will swallow the ash of our own desires. We will buy the oil-chandler's greasy warehouse alone, smelling of lard and tallow until we die, leaving a mountain of gold but no one to weep over our cold bones.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 1,
+              "lineage": -3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "monastic_industry"
+            ]
+          }
+        ]
       }
     },
     {
@@ -765,6 +815,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The grease of the cold lard clings to the roof of the mouth, as heavy and grey as the frost on the crosscut saw. We have reclaimed this clearing from the birch-stubs, but the raw earth demands more than raw muscle to keep the {family_name} name from rotting in the spring thaw. How do we anchor ourselves to this bitter soil before the winter seals the roads?",
+        "options": [
+          {
+            "text": "We will sign the dower-ledger with the timber-boss’s oldest daughter, bringing her family's oxen and three dry valley acres into our clearing so that our future children may hold the plow together.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "valley_alliance",
+              "secured_homestead"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We will not bring a stranger to this drafty hearth. We shall take the late teamster’s orphaned boy from the parish house to raise as our own, teaching him the weight of the axe and the {surname} way, even if no blood of ours flows in his veins.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 2,
+              "lineage": -1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "adopted_apprentice",
+              "parish_bond"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the cabin remain empty of voices. We will sell our timber-rights to the southern mill-representative and put every crown into the railway shares, choosing the cold heat of steam and ledger over the burdens of a family.",
+            "motivatorShift": {
+              "wealth": 3,
+              "reach": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "railway_speculator",
+              "sole_survivor"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1127,6 +1230,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering taste of Madeira and rich goose proves how far the {family_name} name has risen from the frozen shoreline. As the hearthfire burns low, how shall we anchor this hard-won abundance for the years to come?",
+        "options": [
+          {
+            "text": "We welcome the quiet daughter of the timber exchange to this walnut-paneled room, cementing our wealth through a vow and raising children who will only ever know the taste of sweet cream and silver spoons.",
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 2,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "mercantile_alliance",
+              "heirs_of_abundance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The young orphans of our late cousin already sleep beneath our goose-down quilts. We shall formally name them our sole heirs, refusing to dilute our hard-won coin with any new marriage contracts.",
+            "motivatorShift": {
+              "honor": 2,
+              "wealth": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "kin_adoption",
+              "undivided_vault"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "We will sign away our accumulated riches to fund the grand canal project, letting the {family_name} bloodline fade into memory while our name remains permanently etched into the deep-water stone of the new harbor.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "worldview": 2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "harbor_legacy",
+              "bloodline_fades"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1545,6 +1701,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter, metallic warmth of the Baltic chicory brew settles in your chest, the ink on your modern ledgers dries. The cargo slips are signed, but the vault of the future remains empty. How will the {surname} name survive the cold ledger of time?",
+        "options": [
+          {
+            "text": "We will secure a union with the consul's eldest daughter, merging our shipping routes and swallowing the bitter taste of diplomacy. Our children will inherit the cold, clear trade-lanes we carved from the ice.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 2,
+              "politics": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "mercantile_alliance",
+              "secured_dynasty"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Keep the books closed to outsiders. I will adopt my sister's children, raising them under the strict tutelage of the counting houses to ensure the {family_name} blood remains uncompromised by foreign debt.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "familial_adoption",
+              "internal_succession"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the lineage end with this generation. I will pour every scrap of wealth into establishing the great {surname} Exchange Bank, ensuring our name survives in gilded granite and stone long after the blood goes cold.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "wealth": 2,
+              "lineage": -3
+            },
+            "setFlags": [
+              "monumental_banking_legacy",
+              "bloodline_fades"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1877,6 +2086,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter soot of the chicory-dark coffee clings to your teeth as you look out over the frozen harbor where the ironclads rest. The {family_name} empire has grown too vast to be steered by an aging hand alone, and the ledger pages demand a definitive name to inherit the ink. How do you resolve the weight of this legacy?",
+        "options": [
+          {
+            "text": "Wash away the taste of cold salt-cod by bringing a southern partner into the great house. I will wed the heir of the Hamburg sugar cartel, sweetening our northern ledgers and bearing two children who carry both the iron of {given_name} and the wealth of the equatorial docks.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 2,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "hamburg_alliance",
+              "sugarcane_capital"
+            ]
+          },
+          {
+            "text": "Keep the family blood clean and clear of foreign trade treaties. I will raise my late brother's quiet child to read the tide-tables under my own name, bypassing the compromise of marriage entirely to keep the {family_name} fleet purely northern, insular, and fiercely independent.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "worldview": -2
+            },
+            "setFlags": [
+              "adoptive_successor",
+              "northern_isolationist"
+            ]
+          },
+          {
+            "text": "Let the dregs of the chicory dry in the cup, and leave the bed empty. I will draft a corporate trust to dissolve the family name upon my death, transforming {given_name}’s private fortune into a public shipping syndicate that will outlast any flesh and blood.",
+            "motivatorShift": {
+              "power": 2,
+              "wealth": 2,
+              "politics": 1,
+              "lineage": -3
+            },
+            "setFlags": [
+              "corporate_dissolution",
+              "ironclad_syndicate"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2260,6 +2522,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The sharp, frozen burst of the cloudberry cuts through the rancid tallow in your mouth, a brief reminder of summer in a world of endless ice. Your knuckles are swollen from the drills, and the ledger-stone shows our hard-won ration-credits are finally secure. How does the blood of {surname} endure the long winter ahead?",
+        "options": [
+          {
+            "text": "We invite the frost-bitten line-mechanic from the lower bore into our double-bunk, pooling our grease-credits to warm a home and bring three sturdy children into the steam-shovels.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": -1,
+              "tradition": 2,
+              "power": 1,
+              "worldview": -1,
+              "politics": 0,
+              "honor": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "bore_marriage",
+              "ice_heirs"
+            ]
+          },
+          {
+            "text": "We sign the adoption-bonds for the young grease-apprentice who lost their kin to the pressure-blowout, teaching them the secret mathematics of the ice-ledgers without taking anyone to our bed.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "lineage": 1,
+              "wealth": 1,
+              "honor": 2,
+              "worldview": 2,
+              "tradition": -1,
+              "power": 0,
+              "politics": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "apprentice_heir",
+              "solitary_path"
+            ]
+          },
+          {
+            "text": "We sell our claims back to the drilling syndicate, spending our final winters in the luxury of the heated upper cabins, letting the name of {family_name} dissolve into the steam of the collective exhaust.",
+            "motivatorShift": {
+              "lineage": -3,
+              "wealth": 3,
+              "power": -2,
+              "worldview": 3,
+              "tradition": -2,
+              "honor": -1,
+              "politics": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "syndicate_sellout",
+              "line_extinguished"
+            ]
+          }
+        ]
       }
     }
   ]

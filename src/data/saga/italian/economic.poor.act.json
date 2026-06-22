@@ -509,6 +509,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The ash on the tongue does not fade, but the copper of your first saved coins begins to sweeten the palate. To ground the {surname} line in this lean ground, how must the hunger be fed?",
+        "options": [
+          {
+            "text": "We mix our bitter sweat with the baker's quiet daughter, buying her father's brick-oven lease. Together we will raise children who grow fat on sweet lard and white flour, sealing the {family_name} name in a home of our own.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "bakers_alliance",
+              "tenement_landlords"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We spit out the dregs and hoard every single copper for the wholesale trade, letting the hearth go cold and barren. Our only legacy will be the sheer weight of our ledger, not the laughter of children.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": -3,
+              "reach": 1
+            },
+            "setFlags": [
+              "sole_magnate",
+              "dry_hearth"
+            ]
+          },
+          {
+            "text": "We keep our solitary cot but pay the ship-passage for our sister's hungry boy. He will learn the grind of the shop floor at our side, inheriting the tools when our own tongue finally goes cold.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "honor": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "nepotism_heir",
+              "imported_labor"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -910,6 +963,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The tongue still tingles with the sharp, oily richness of that hoarded rind—a taste of survival bought with three winters of quiet hunger. As the warmth of your mother's hearth fades, how will you, {given_name} {surname}, secure the yield of this hard-won estate?",
+        "options": [
+          {
+            "text": "We will fold the salt-master's daughter into our kitchen, bringing her dowry of coastal pans to cure our yields, while her sturdy hips promise a flock of {surname} heirs to inherit our swelling larders.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 3,
+              "reach": 1
+            },
+            "setFlags": [
+              "salt_alliance_secured",
+              "diet_of_abundance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "I will not divide my focus nor my crust with a new partner. Instead, I will claim my quiet nephew as my legal successor, keeping our hoarded gold tight and teaching him to guard the river-clay kiln and our secret cellars.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": -1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "frugal_isolationism",
+              "monastic_ledgers"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line narrow and end with my own breath. I will starve my bloodline but feed my ambition, reinvesting every crumb of profit to monopolize the regional cheese and grain trade until the name {surname} represents absolute financial dominance.",
+            "motivatorShift": {
+              "wealth": 4,
+              "politics": 1,
+              "worldview": 2,
+              "power": 3,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": -4,
+              "reach": 2
+            },
+            "setFlags": [
+              "monopolist_ascendance",
+              "extinguished_hearth"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1255,6 +1373,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter, charred sediment of the espresso settles at the bottom of the porcelain, how will {given_name} secure the {family_name} fortune before the heat escapes the cup?",
+        "options": [
+          {
+            "text": "To take the solemn hand of the wool-merchant's daughter, bringing her old-money grace into our parlor to bear the next generation of {surname} heirs.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "alliance_marriage",
+              "traditional_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "To avoid the trap of a partner's dowry and bring my late sister's boys from the quarry tenements, raising them at this mahogany desk to inherit the business.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "power": 1,
+              "reach": -2
+            },
+            "setFlags": [
+              "nephews_elevated",
+              "no_new_blood"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "To pour every drop of our liquid capital into the deep-water docks, dying alone over the ledgers and letting the {family_name} name dissolve into a corporate syndicate.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "industrial_tycoon",
+              "barren_dynasty"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1567,6 +1738,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "To swallow this grease and wash it down with the bitter sediment of our success leaves a heavy question on the tongue: who will taste the next vintage of the {family_name} name?",
+        "options": [
+          {
+            "text": "I will invite the Florentine broker's second daughter to this high table, sealing our trade books with her dowry and filling this stone hall with the legitimate cries of heirs born to clean linen.",
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 2,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "florentine_alliance",
+              "gilded_cradle"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "I will bring my sister's quiet, sharp-eyed boy out from the dry-goods cellar, naming him my successor over a plate of this gamey ragù and keeping my own bed free of marital contracts.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "politics": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "nephew_adopted",
+              "frugal_succession"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line narrow and dry like an unwatered vine. I shall spend our accumulated gold on a vaulted family chapel in the Abruzzi, turning our wealth into eternal marble rather than soft flesh.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "monumental_chapel",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1929,6 +2153,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the herbal sting of the amaro fades into a dry, warm glow, you look out over the tiled roofs of the estate. The {family_name} name is rescued from the brink, but the final ledger of your own life remains to be balanced. How will this hard-won inheritance be carried forward?",
+        "options": [
+          {
+            "text": "I will sign the marriage contract with the Lombard banking house, accepting a partner of convenience so we may raise three heirs rooted in both our renewed wealth and their ancient nobility.",
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 2,
+              "tradition": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "lombard_marriage_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "I have no room in my ledger for a spouse's ambition. I will raise my sister's children here in the villa, teaching them the bitter discipline of the trade, keeping our capital undivided and our bloodline insular.",
+            "motivatorShift": {
+              "wealth": 3,
+              "lineage": 1,
+              "power": 1,
+              "tradition": -2
+            },
+            "setFlags": [
+              "undivided_nepotism_succession"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the flesh fade. I will pour our entire liquid fortune into establishing the great {surname} Foundation in Rome, choosing to immortalize our name in marble and public debt rather than gamble it on heirs.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 3,
+              "lineage": -3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "immortal_banking_foundation"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2273,6 +2547,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering taste of cold, synthetic grease and engineered salt clings to your teeth—a bitter testament to how much we must compromise to survive this high-pressure exile. With the family vaults bulging but the dome's corporate charter set to expire, the preservation of the {surname} legacy requires a hard, unsentimental choice.",
+        "options": [
+          {
+            "text": "We will bind our fortunes to the lead administrator's kin. The wedding feast will taste of sterile wine and recycled air, but the two heirs we nurse in these metal halls will secure our exclusive import licenses for another fifty years.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 2,
+              "politics": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "charter_secured_by_marriage"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "I will not bring a partner into this cold dome. Instead, I will adopt my most promising apprentice from the hydroponic labs, passing the {family_name} name and our secret yeast strains to a single worthy successor of my own choosing.",
+            "motivatorShift": {
+              "wealth": 3,
+              "lineage": 1,
+              "reach": 1,
+              "tradition": -2
+            },
+            "setFlags": [
+              "apprentice_heir_raised"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let our blood dry up with the soil we lost. I will liquidate our private reserves to purchase the dome's life-support grid itself, transforming the {surname} name into an immortal, automated trust that will squeeze this basin dry long after I am dust.",
+            "motivatorShift": {
+              "power": 3,
+              "wealth": 3,
+              "lineage": -4,
+              "politics": 1
+            },
+            "setFlags": [
+              "immortal_corporate_trust"
+            ]
+          }
+        ]
       }
     }
   ]

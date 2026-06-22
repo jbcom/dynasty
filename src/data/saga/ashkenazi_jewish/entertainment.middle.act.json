@@ -495,6 +495,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter smell of scorched chicory still clings to your woolen coat as the gaslights of the Bowery theater flicker on. Before you stands the empty ledger of the {family_name} troupe. To survive this concrete city, how will you anchor your bloodline to the stage?",
+        "options": [
+          {
+            "text": "Accept the matchmaker's quiet proposal to wed the costumer's practical daughter, blending her steady sewing hands with our dramatic flair to build a bustling home and raise heirs who will inherit our scripts.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "wed_the_costumer",
+              "traditional_foundations"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Ignore the matchmaker entirely and focus only on the craft; take in your late cousin's orphaned boys to teach them the family's acrobatic routines, carrying the {surname} act forward without ever dividing your heart with a spouse.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "tradition": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "nephews_mentored",
+              "clannish_focus"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the stage remain your only spouse. Pour every drop of sweat and ticket coin into purchasing the lease on the Grand Street theater, letting the {family_name} bloodline end with you so long as your name remains immortal in the plaster.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 2,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "immortal_theater_lease",
+              "lone_star"
+            ]
+          }
+        ]
       }
     },
     {
@@ -878,6 +931,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the warmth of the slivovitz settles in your chest and the applause fades beyond the heavy velvet curtains, the future of the {family_name} lease looms before you. How will you anchor this hard-won stage for the generations to come?",
+        "options": [
+          {
+            "text": "We must anchor this stage with more than just our own two hands. I will take a partner from the steady families of the congregation, blending our wild theatrical melodies with their quiet respectability, and fill these dressing rooms with children who learn to walk on cue.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "theater_dynasty_secured"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The theater is a jealous master, and this lease was paid in our own sweat. I will dedicate every hour to the spotlight, letting the {family_name} name burn brilliantly on the marquee for this generation, refusing to dilute my craft with the quiet obligations of marriage or domestic life.",
+            "motivatorShift": {
+              "reach": 2,
+              "power": 1,
+              "lineage": -2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "star_of_the_marquee"
+            ]
+          },
+          {
+            "text": "I have no room in my life for a spouse, but the wings are already full of eager eyes. I will raise {given_name}’s own promising child as my successor, focusing my devotion on training a single, chosen heir to rule the proscenium without the distractions of a new marriage.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 1,
+              "lineage": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "protege_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -1206,6 +1309,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter dregs of chicory coffee yield no warmth against the draft sweeping across the empty stage. With the theater's gaslights hiss-dying and the champagne gone flat, the {family_name} name needs its next act before the public forgets us entirely. How do we secure our billing?",
+        "options": [
+          {
+            "text": "We will stand under the chuppah with our leading collaborator, merging our theatrical houses so that {surname} heirs may inherit both our stage presence and our hard-won theater keys.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "theatrical_dynasty_united",
+              "chuppah_alliance"
+            ]
+          },
+          {
+            "text": "A new spouse would only crowd the dressing room. We shall instead raise our late sibling's children as our own under the {surname} banner, teaching them the family trade without inviting a stranger into our lives.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 1,
+              "wealth": -1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "ward_succession",
+              "greasepaint_heirs"
+            ]
+          },
+          {
+            "text": "Let the bloodline end with a brilliant final bow. We will pour every cent of our theater box-office wealth into a permanent dramatic academy, ensuring the {family_name} name outlives our flesh as a beacon for future artists.",
+            "motivatorShift": {
+              "reach": 2,
+              "worldview": 2,
+              "lineage": -2,
+              "honor": 1
+            },
+            "setFlags": [
+              "end_of_line",
+              "dramatic_foundation"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1604,6 +1760,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the heavy, medicinal sweetness of the ancient brandy pools in the throat, the future of the {family_name} empire hangs in the balance of the next curtain call. How do we ensure our stage never goes dark?",
+        "options": [
+          {
+            "text": "We stand beneath the velvet chuppah with our brilliant co-producer, committing to a life of shared billing and raising three heirs in the glow of the footlights to carry {full_name}'s name forward.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "thespian_dynasty",
+              "traditional_canopy"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "We bypass the theater of marriage, quietly bringing our sister's sharpest children into the executive suites to master the trade secrets that kept us alive through the hard years.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "tradition": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "collateral_guardians",
+              "nepotistic_trust"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We let the family tree end with this generation, pouring every cent of the {surname} fortune into an international foundation to preserve our creative works in stone and celluloid forever.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "monument_legacy",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1932,6 +2141,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The sharp sting of the preserved lemon lingers on the palate, a bitter reminder of the ancient earth we left behind. As the marquee lights of the orbital theater flicker against the blackness of the void, the future of the {family_name} dynasty must be set before the curtain falls on this generation.",
+        "options": [
+          {
+            "text": "Bind our stage to the great booking houses of the inner ring by wedding the station master's daughter, ensuring our grandchildren will inherit both the spotlight and the security of a permanent berth.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 2,
+              "politics": 1
+            },
+            "setFlags": [
+              "dynastic_alliance",
+              "station_patronage"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Refuse the corporate matches. Take our sister’s orphaned infants into the troupe and raise them on the road, passing down the ancient {surname} melodies to a new generation of performers under our own name.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 2,
+              "wealth": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "independent_troupe",
+              "familial_adoption"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the lineage end with our own voice. Pour every credit we have into one final, brilliant broadcast across the deep-space relays, ensuring the {family_name} name becomes a beautiful, eternal ghost in the static.",
+            "motivatorShift": {
+              "reach": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "final_broadcast",
+              "lineage_ends"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2263,6 +2525,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the rye crumbs scatter across the ink-stained ledger and the scent of plum-heat lingers, the gaslight flickers over the contract that will either bind the {family_name} name to the grand stage forever or scatter our talents to quieter corners. How does {given_name} choose to anchor our bloodline’s fragile stagecraft?",
+        "options": [
+          {
+            "text": "Bring the cantor's daughter into the theater's warm dust; she has the head for the books and the voice of a dove. Together, we will build a home above the marquee, teaching our children to walk the boards before they can even speak.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "theatrical_marriage",
+              "anchored_dynasty"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the glass stay half-empty and the stage doors swing wide. I will take this act across the ocean alone, burning through our savings to ensure the name {surname} is carved into the marquee of every great theater in the capital, even if the line ends with my final bow.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "solo_legend",
+              "barren_glory"
+            ]
+          },
+          {
+            "text": "Pour the rest of the bottle for my widowed sister. I will take her quiet son into the dressing rooms, teaching him the secrets of the footlights and the ledger, passing the {family_name} legacy to a nephew who already knows the weight of our family's silence.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -1,
+              "politics": 1
+            },
+            "setFlags": [
+              "nephew_heir",
+              "preservation_path"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     }
   ]

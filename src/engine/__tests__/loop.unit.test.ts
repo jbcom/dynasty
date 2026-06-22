@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
+import { loadSaga } from "../../data/loadSaga";
 import { validRaw } from "../../sim/__tests__/fixtures";
 import { buildContent } from "../../sim/content";
 import { foundByComposition } from "../../sim/founding";
@@ -212,6 +213,20 @@ describe("Game loop", () => {
     }
     expect(g2.view.state.year).toBe(g.view.state.year);
     expect(g2.view.state.end?.kind).toBe(g.view.state.end?.kind);
+  });
+
+  it("DEPTH-1: every close scene in the shipped corpus carries a take-partner succession decision", () => {
+    // The dynastic fork is real data, not just wiring: each generation's close offers a decision whose
+    // take-partner option carries the succession effect the loop reads (loop.ts pickDecision →
+    // beginNextGenerationAct). Asserts the authored corpus, so a regression that drops it fails CI.
+    const corpus = loadSaga();
+    const closes = [...corpus.scenes.values()].filter((s) => s.id.endsWith(":close"));
+    expect(closes.length).toBe(504);
+    for (const close of closes) {
+      const succ = close.decision?.options.find((o) => o.succession?.takesPartner);
+      expect(succ?.succession?.takesPartner, close.id).toBe(true);
+      expect(succ?.succession?.begets ?? 0, close.id).toBeGreaterThan(0);
+    }
   });
 
   it("PF-14: a saga choice's setFlags reach the run's state.flags (not sealed in the driver)", () => {

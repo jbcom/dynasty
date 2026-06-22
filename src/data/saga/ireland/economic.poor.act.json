@@ -498,6 +498,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold grease of the turnip broth clings to your palate, a reminder of the damp cellar floor. As the family's first chapter closes, how will the {surname} line sustain itself against the hunger of these docks?",
+        "options": [
+          {
+            "text": "Let the heavy scent of dry flour and salt-fish from the grocer's daughter wash away the turnip-grease. I will take her hand and share this narrow hearth, committing our meager coins to raise children who will know the flavor of clean butter.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 3,
+              "reach": 0
+            },
+            "setFlags": [
+              "grocer_alliance",
+              "heirs_of_the_cellar"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "No marriage bed can warm these waterlogged bones. I will pour every scrap of grease and silver into securing the dockside leases, letting the {surname} line die with my last breath so long as our name is carved in brass above a dry-goods warehouse.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": 2,
+              "power": 2,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": -3,
+              "reach": 1
+            },
+            "setFlags": [
+              "warehouse_empire",
+              "barren_dynasty"
+            ]
+          },
+          {
+            "text": "The cellar is crowded enough with the living. Without bringing a new partner into this cold room, I will formally claim my brother's orphaned child as my sole apprentice and heir, teaching them how to squeeze sweet juice from bruised dock-fruit.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": -1,
+              "power": 0,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "adopted_apprentice",
+              "frugal_survival"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -906,6 +971,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering taste of peaty rye and woodsmoke on {given_name}'s tongue is the very flavor of sovereignty, earned through decades of bent backs. But as the winter chill creeps under the heavy oak door of the {surname} homestead, the question of who will inherit this bitter, beautiful soil must be settled.",
+        "options": [
+          {
+            "text": "We will wed the quiet daugher of the neighboring flock-owner, merging our pastures and bringing her resilient spirit to our hearth to raise two healthy heirs for the {family_name} name.",
+            "motivatorShift": {
+              "lineage": 3,
+              "wealth": 2,
+              "tradition": 2,
+              "politics": 1
+            },
+            "setFlags": [
+              "pasture_alliance",
+              "traditional_marriage"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We have no need for a foreign name in our halls; we will formalize the adoption of our deceased plowman's child, raising them to run the grain-mills as a true {surname} without the constraint of a marriage bed.",
+            "motivatorShift": {
+              "honor": 3,
+              "worldview": 2,
+              "tradition": -2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "foster_heir_ennobled",
+              "unorthodox_succession"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the hearth fire die out when our own breath fails. We will pour our gold into expanding the great stone granaries, choosing to leave behind a monument of pure wealth rather than a weeping bloodline.",
+            "motivatorShift": {
+              "wealth": 4,
+              "power": 2,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "granary_monument_built",
+              "bloodline_withers"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1239,6 +1357,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the rich, peated heat of the smuggled spirit settles in your chest, the ledger books on the mahogany table seem to demand a final, binding seal. How will {given_name} carry this heavy-won sweetness into the next age?",
+        "options": [
+          {
+            "text": "Bring the cork-merchant's quiet heir into this warm parlor, binding our newly bought acres to their southern shipping berths and ensuring the {family_name} name is inherited by those who will never know the taste of thin gruel.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "mercantile_alliance",
+              "secured_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Keep your own bed solitary and instead take your widowed sister's sharp-eyed son under your roof, teaching him to grease the customs-men and manage the estate without dividing our hard-won wealth.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "lineage": -1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "nephew_apprentice",
+              "hoarded_capital"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Pour every remaining sovereign into bribing the Dublin excise officers to secure a total monopoly on the northern ports, letting the business become your only child and leaving the ultimate fate of the {surname} name to the courts.",
+            "motivatorShift": {
+              "reach": 2,
+              "power": 2,
+              "lineage": -3,
+              "wealth": 1
+            },
+            "setFlags": [
+              "excise_monopoly",
+              "barren_empire"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1622,6 +1793,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter taste of the chicory lingers like dried ink. Looking at {given_name}'s watchful eyes, you realize the ledger of our family's future must be balanced tonight. How do we pass the weight of the {family_name} name down to the hands waiting in the shadows?",
+        "options": [
+          {
+            "text": "We will bring the timber merchant's sensible kin to this cold table, securing a partner to help balance these heavy books and ensure {given_name} has siblings to share the bitter draft of our ambition.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "lineage": 3,
+              "tradition": 1,
+              "power": 0,
+              "worldview": -1,
+              "honor": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "mercantile_alliance",
+              "shared_burden"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "No stranger's hand shall dilute our ink. We will take no new partner, pouring every ounce of our remaining strength into raising {given_name} alone, sharpening their solitary mind to rule this house without distraction.",
+            "motivatorShift": {
+              "wealth": 1,
+              "power": 2,
+              "lineage": 1,
+              "tradition": -1,
+              "politics": 0,
+              "worldview": 0,
+              "honor": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "solitary_dynast",
+              "hardened_resolve"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the porcelain shatter. We shall liquidate our assets to fund the great chapel in the west, dedicating our name to God and leaving {given_name} to live a quiet, unburdened life as the last of our line.",
+            "motivatorShift": {
+              "wealth": -3,
+              "worldview": 3,
+              "honor": 2,
+              "lineage": -3,
+              "politics": -1,
+              "power": -2,
+              "tradition": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "pious_liquidation",
+              "line_fades"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2024,6 +2260,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The thick, raisin-sweet port coats your tongue like liquid gold, but the cold draft sweeping across the mahogany table reminds you how quickly fortunes can wither. Your sole heir, {given_name}, sits in the shadow of the velvet drapes, waiting. How will you anchor this new, hard-won wealth before the ink on the ledger dries?",
+        "options": [
+          {
+            "text": "Pour a glass to toast an alliance with the French merchant's oldest daughter; her family's shipping routes will secure our continental holdings, and her union with our house will guarantee new {surname} heirs to inherit the vaults.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 2,
+              "reach": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "continental_alliance",
+              "secured_inheritance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Push the decanter away and declare that our wealth is security enough; {given_name} must remain unburdened by a marriage bed, focusing entirely on buying up the northern canals while the line narrows to a single, razor-sharp point.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "lineage": -2,
+              "reach": 2
+            },
+            "setFlags": [
+              "canal_monopoly",
+              "sole_heir_focus"
+            ]
+          },
+          {
+            "text": "Bring your sister's quiet, sharp-eyed boy into the ledger-room, formally adopting him into the main branch to share the family duties alongside {given_name} without letting a foreign spouse drain our coffers.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "adoptive_co_heir",
+              "insular_wealth"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -2363,6 +2652,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold, copper taste of recycled breeze is all that {given_name} has left to offer the future. Our ledgers are balanced, but our blood runs thin in the dark of this hull. How does the {family_name} legacy endure when the earth is nothing but a cold spark behind us?",
+        "options": [
+          {
+            "text": "We bind our accounts to the chief hydroponicist's house. Beneath the chlorine-sharp mist of their grow-decks, we will take their quietest kin to our berth, pooling our ration credits to raise three children who will know the {surname} name and the taste of real, synthetic green.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 1,
+              "reach": -1
+            },
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            },
+            "setFlags": [
+              "vault_alliance",
+              "greenhouse_heirs"
+            ]
+          },
+          {
+            "text": "We will not be bartered for berth space. I will legally adopt the silent apprentice who works the coolant lines, writing them into the {family_name} charter as my sole successor, avoiding the suffocating contract of a state-sanctioned union.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": -1,
+              "honor": 1,
+              "lineage": 1
+            },
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "setFlags": [
+              "unorthodox_heir",
+              "freighter_autonomy"
+            ]
+          },
+          {
+            "text": "The soil is gone, and so must we go. I will liquidate our remaining haulage shares to buy out the long-range sensor patents, letting the {surname} line dissolve into pure, bright signal as we push the vessel's reach into the unknown.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "line_extinguished",
+              "deep_vacuum_pioneers"
+            ]
+          }
+        ]
       }
     }
   ]

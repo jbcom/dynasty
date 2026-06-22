@@ -502,6 +502,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter dregs of chicory coffee still coat your tongue as the last lantern on the sawdust stage flickers out. The crowd has scattered into the cold night, leaving you with a handful of copper and a choice of how the {surname} legacy will survive the winter.",
+        "options": [
+          {
+            "text": "I will swallow the bitter salt of pride and wed the local timber-merchant’s heir, bringing their heavy coin to our traveling troupe and birthing a new generation of {family_name} performers born to luxury rather than survival.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 2,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "frontier_wealth",
+              "merchant_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The quiet stagehand who has shared my narrow cot and salted spuds needs no church vows to be my home. We will adopt the stray, wide-eyed runaways who linger by our stage door, teaching them the {surname} steps and letting them inherit the troupe through sweat, not blood.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": -2,
+              "worldview": 2,
+              "lineage": -1
+            },
+            "setFlags": [
+              "found_family",
+              "unorthodox_troupe"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line burn out like cheap candle wax. I will drink the raw whiskey, ride the high northern plains alone, and pour every ounce of my life into building a theater of my own, leaving behind only legends and dust instead of heirs.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 1,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "lone_legend",
+              "solitary_theater"
+            ]
+          }
+        ]
       }
     },
     {
@@ -908,6 +961,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the taste of the cold slate-water settles on your tongue, the quiet of the homestead looms. The road made the {family_name} name, but this soil could preserve it. How do you choose to carry the legacy forward?",
+        "options": [
+          {
+            "text": "We will invite the sensible tailor's daughter into our hearth and our company, blending her steady hands with our wild {surname} blood. Together we will raise heirs to inherit this land and the stage we build upon it.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "anchored_legacy",
+              "thespian_homestead"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no room in a performer's heart for a spouse, but the stage must not empty. We will formally adopt our deceased partner's young kin, teaching them the family chords and keeping the troupe's spirit unbroken.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "adopted_heirs",
+              "repertory_troupe"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The well-water is too quiet, and the soil tastes of stagnation. We will lock the cabin door, take our violin, and seek the blinding gaslights of the southern capitals alone, letting the {family_name} name burn out in a magnificent solo run.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "solo_fame",
+              "line_ends_in_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1237,6 +1343,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "With the rich, heavy port still warm in your throat, how will you secure the legacy of {surname} against the cold hunger that once bit your heels?",
+        "options": [
+          {
+            "text": "We will toast our union with the theater director's daughter from the capital, enduring her family's dry snobbery to ensure our heirs inherit both our stagecraft and their secure, velvet-lined fortunes.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 2,
+              "tradition": -1,
+              "politics": 1
+            },
+            "setFlags": [
+              "alliance_marriage",
+              "velvet_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We shall take no partner to dilute our hard-won independence; instead, we will raise our sister's orphaned son in the wings of the stage, teaching him to spit out the sour schnapps and lead our troupe into the next age.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "tradition": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "adopted_heir",
+              "pure_bloodline"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the family line end with our own final bow. We will pour our entire fortune into building the grandest gilded playhouse in the north, ensuring the name {surname} is carved in marble long after we are gone.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 1,
+              "lineage": -3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "gilded_monument",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1647,6 +1806,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The sting of salt-liquorice and burnt soot remains sharp on the tongue as the theater lamps are doused, leaving a cold, cavernous silence behind the curtain. The {family_name} name has conquered the northern stages through sheer, gristly survival, but the spotlight is a lonely place to grow old. How will the final curtain fall on this generation's climb?",
+        "options": [
+          {
+            "text": "I will invite the steady, quiet companion of our troupe's patron into my home and bed. Together, we will anchor this nomadic life, raising a new trio of {surname} heirs to inherit the greasepaint and the glory.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "anchored_succession",
+              "traditional_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "I refuse to buy domestic peace with a forced contract. I will raise the two young, orphaned apprentices of our current troupe as my own flesh and blood, giving them the {surname} name without ever taking a spouse to clutter my stage.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 2,
+              "lineage": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "adopted_troupe_heirs",
+              "unmarried_legacy"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the line narrow and burn out in a blaze of solitary genius. I will take no partner and leave no heirs, pouring every drop of our hard-won wealth into a final, breathtaking solo tour that will make {full_name} a name whispered in awe long after I am dust.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "lone_genius_finale",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1986,6 +2198,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the dry, copper sting of the reserve vintage lingers on our tongues, how will we preserve the {family_name} voice before the ink on our European contracts dries and the stage lights grow cold?",
+        "options": [
+          {
+            "text": "We swallow the chalky dust of the northern theaters and wed the daughter of the Danish impresario, ensuring our children are born to inherit both our name and his empire of coastal playhouses.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "danish_alliance",
+              "theatrical_dynasty"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the salt on our lips remain pure. We will raise the orphan of our late, loyal lead musician under the {surname} banner, keeping our current quiet companion and refusing to barter our bed for theater keys.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "power": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "independent_craft",
+              "adopted_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the yeast turn to vinegar and the line end in brilliance. We will pour our entire treasury into founding the Great Nordic Conservatory, letting the {family_name} name dissolve into legend while we pursue absolute, uncompromised performance.",
+            "motivatorShift": {
+              "reach": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "conservatory_founded",
+              "artistic_martyrdom"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2398,6 +2663,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the synthetic grease of the simulated cloudberry paste clings to your throat, the studio's low hum demands a decision. Will you continue to sell this artificial heritage to the masses, or will you anchor the {surname} bloodline in something real before the stage lights consume you entirely?",
+        "options": [
+          {
+            "text": "I will turn away from the synthetic glamour of the studio and wed the fjord-reclaimer's quiet heir. Together we will raise our children far from the cameras, teaching them the honest, heavy taste of real rye and frost-bitten earth.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "reach": -2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "returned_to_the_soil",
+              "authentic_living"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no room for a gilded marriage under these lights. My long-time stage partner and I will quietly adopt an apprentice from the traveling troupes, passing on our techniques and our name without letting the studio executives commercialize our blood.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 1,
+              "politics": -1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "apprentice_heir",
+              "defied_the_studio"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the physical line fade. I will pour my remaining years into a singular, devastating final performance that exposes this entire plastic industry, leaving the {surname} name as a legendary, unrepeatable ghost on the screen.",
+            "motivatorShift": {
+              "power": 2,
+              "reach": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "glorious_extinction",
+              "artistic_martyrdom"
+            ]
+          }
+        ]
       }
     }
   ]

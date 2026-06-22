@@ -2,14 +2,18 @@ import { describe, expect, it } from "vitest";
 import type { Scene } from "../../saga/schema";
 import {
   applyBraid,
+  applySuccession,
   type BraidRequest,
   braidPassSystem,
   buildBraidPassPrompt,
   buildLineagePassPrompt,
   buildScenePassPrompt,
+  buildSuccessionPrompt,
   type LineageSurface,
   lineagePassSystem,
+  type SuccessionRequest,
   scenePassSystem,
+  successionPassSystem,
 } from "../qa";
 
 /**
@@ -111,5 +115,59 @@ describe("braid pass", () => {
     const out = applyBraid(withBav, "bavaria", 2, { crossing: "authored", relation: "neutral" });
     expect(out.thread).toHaveLength(1);
     expect(out.thread[0]?.crossing).toBe("authored");
+  });
+});
+
+describe("succession pass", () => {
+  it("system instruction demands exactly one take-partner+heirs option carrying the succession effect", () => {
+    const sys = successionPassSystem();
+    expect(sys).toMatch(/dynastic fork/);
+    expect(sys).toMatch(/EXACTLY ONE/);
+    expect(sys).toMatch(/takesPartner: true/);
+    expect(sys).toMatch(/3 options/);
+  });
+  it("prompt roots the decision in the close prose + family", () => {
+    const req: SuccessionRequest = {
+      wave: "ireland",
+      waveLabel: "Irish",
+      archetype: "economic",
+      tier: 2,
+      closeProse: "The hearth has gone cold and the ledger is closed for the last time.",
+    };
+    const p = buildSuccessionPrompt(req);
+    expect(p).toMatch(/Irish/);
+    expect(p).toMatch(/generation 3/);
+    expect(p).toMatch(/hearth has gone cold/);
+  });
+  it("applySuccession attaches the authored decision to the close scene", () => {
+    const close: Scene = {
+      id: "act:ireland:economic:poor:t2:close",
+      sense: "taste",
+      prose: ["The last loaf cools."],
+      beats: [],
+      thread: [],
+      requires: { flags: [], notFlags: [] },
+    };
+    const decision: Scene["decision"] = {
+      tier: "major",
+      prompt: "Does the line go on?",
+      options: [
+        {
+          text: "Take a partner; raise children to carry the trade.",
+          motivatorShift: { lineage: 3 },
+          setFlags: ["took_partner"],
+          succession: { takesPartner: true, begets: 2 },
+        },
+        {
+          text: "Pour everything into the work; let the name thin.",
+          motivatorShift: { reach: 2 },
+          setFlags: [],
+        },
+      ],
+    };
+    const out = applySuccession(close, decision);
+    expect(out.decision?.options[0]?.succession?.takesPartner).toBe(true);
+    expect(out.decision?.options[0]?.succession?.begets).toBe(2);
+    expect(out.id).toBe(close.id); // scene wiring untouched
   });
 });

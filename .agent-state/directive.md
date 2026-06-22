@@ -21,6 +21,24 @@ PRIVATE REPO (user): keep it private. CodeQL = GitHub default-setup
 Code security → Code scanning → CodeQL default setup; the `gh api code-scanning/default-setup`
 call returns 403, so the agent can't toggle it via tools.
 EXPANSION milestone (EX-1→EX-6) RELEASED — see git history / directive-archive.md.
+SAGA POLISH milestone (PF-3→PF-18) RELEASED as v0.10.1 (PR #70); CI/CD hardened (PRs #72/#73/#75:
+braid-pool, STATE docs, automerge actor→branch-prefix + fork-spoof guard). See [[mmm-scoped-qa-pipeline]].
+
+## Active unit — DEPTH-1: succession choices (the dynastic fork)
+
+- [x] **DEPTH-1 close-scene succession decision — DONE.** 504/504 close scenes now carry a take-partner
+  succession decision (corpus + DEPTH-1 test). Two genai fixes hardened every pass: normalizeSceneFile
+  coerces setFlags object→array; passSuccession validates+writes per-scene (was whole-file all-or-nothing).
+  Full gate green (646 unit + 89 browser + biome + typecheck). PR next.
+  ORIGINAL: 0/504 close scenes carried
+  a `succession` effect, so the core dynastic choice (take a partner + raise heirs → advance the line)
+  was never a player fork — only the dev clock advanced generations. The consuming chain already exists
+  (spine close slot, sagaDriver.applyDecision → advanceFamily). FIX: (1) spine close slot now carries a
+  `decision: "major"` (the dynastic fork); (2) new `genai:qa --pass succession` authors a 3-option
+  close decision per act (exactly one option takesPartner+begets, gate-enforced) in the family's voice;
+  builders + applySuccession in qa.ts, pure-tested. RUNNING the full pass over all 84 files (bg, monitor
+  bx7sngaub). ON DONE: verify every close scene has a succession-bearing decision + integrity intact;
+  full gate; live-verify the fork advances a generation in Chrome; PR.
 
 ## What CONTINUOUS means
 1. Never stop for status reports the user didn't ask for. 2. Never stop for scope

@@ -428,6 +428,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The metallic, silt-laden aftertaste of the brick tea coats your throat, a stark reminder of the grit required to survive these high flats. To secure the {family_name} legacy in this dusty basin, you must decide how your blood will take root.",
+        "options": [
+          {
+            "text": "I will swallow this bitterness and take the daughter of the dry-goods merchant as my wife, anchoring our name to the local trade networks and raising children who will never know the hunger of the steerage holds.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "alliance_merchant_marriage",
+              "anchored_roots"
+            ]
+          },
+          {
+            "text": "The climb up the political ladder demands undivided focus. I will adopt the orphaned son of my late compatriot from the flats, raising him on this same harsh water to inherit our ledger, while I remain free of marital ties to focus on local office.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "lineage": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "adopted_heir",
+              "political_focus"
+            ]
+          },
+          {
+            "text": "Let the line narrow to a single, razor-sharp edge. I will take no partner and raise no heirs, pouring every drop of sweat and every copper earned in this lean-to into bribing the provincial inspectors, making {surname} a name feared in the high courts before the dust reclaims me.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "sole_ambition",
+              "provincial_influence"
+            ]
+          }
+        ]
       }
     },
     {
@@ -775,6 +828,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The sting of the wild ginger lingers on your tongue, a sharp reminder of the bitter soil we must tame. As the steam rises from the iron pot, how will you anchor the political survival of the {family_name} line in this raw territory?",
+        "options": [
+          {
+            "text": "Invite the daughter of the valley's key land broker to share this hearth, blending her family's deep territorial roots with our political ambitions to raise a new generation of {surname} heirs who know how to rule these hills.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 2,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "timber_alliance",
+              "heirs_of_the_valley"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Adopt the quiet, sharp-eyed orphan of your late, loyal political clerk who died in the railway camps, raising him on this strong broth and teaching him the weight of the {surname} name without bringing a new partner to the table.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -1,
+              "politics": 1
+            },
+            "setFlags": [
+              "adopted_clerk_heir",
+              "pure_legacy"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the broth grow cold and the fire burn down; we will pour every drop of our energy into capturing the territorial senate seat, leaving a legacy of iron laws while letting the {family_name} bloodline end with our own final breath.",
+            "motivatorShift": {
+              "power": 3,
+              "politics": 2,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "senatorial_immortality",
+              "barren_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1106,6 +1212,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter tea lingers on your tongue and the laughter of the municipal officials rises around you, how will you anchor the {family_name} name in this shifting, gilded world?",
+        "options": [
+          {
+            "text": "We must swallow their foreign wine and play their games. I will accept the match arranged with the district governor's daughter, bringing her into our household to bear heirs who speak both the dialect of the river mud and the polished rhetoric of the courts.",
+            "motivatorShift": {
+              "politics": 2,
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "municipal_marriage",
+              "gilded_future"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The flavor of my mother's kitchen must not be diluted by their silver spoons. I will remain unwed but bring my sister's children under my roof as my true heirs, raising them on our old truths far from the corrupting influence of the city.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "politics": -1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "provincial_purity",
+              "adopted_heirs"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the lineage end with my own breath. I will pour my life entirely into the ministries, establishing an unshakeable bureaucracy that will govern this province long after the {family_name} name is reduced to a shadow.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 2,
+              "lineage": -3,
+              "worldview": 1
+            },
+            "setFlags": [
+              "bureaucratic_ascendancy",
+              "sterile_power"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1422,6 +1581,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The draft is signed, but the sourness of the mutton fat and the ink of three languages lingers on your tongue. How will the {family_name} name endure the transition from mountain water to the cold white stone of the capital's bureaus?",
+        "options": [
+          {
+            "text": "We wash our mouths of this cheap vinegar and accept the match arranged by the provincial governor, bringing a bride of the northern borders into the capital to bear children who know both the mountain wind and the assembly floor.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "capital_alliance",
+              "traditional_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no room in this ink-stained bed for a stranger. We will adopt our sister's youngest son, raising him in the backrooms of the district to master the modern ledgers without diluting our blood with another political bargain.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "reach": -2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "nephew_heir",
+              "bureau_purist"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the white stone crumble. We pack our scrolls, leave the assembly seat vacant, and return alone to the unmortgaged mountain wells, letting the family line dissolve into the cold silence of the high peaks.",
+            "motivatorShift": {
+              "worldview": 3,
+              "power": -2,
+              "politics": -2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "line_ends",
+              "mountain_hermit"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1785,6 +1997,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "At the state pavilion, the rising steam smells of wet iron and scorched earth. The treaties are signed; the global silk and silver markets bend to the {family_name} registry. But the ink is barely dry on the port clearances, and the legacy of our bureau demands a hand that can balance both the abacus and the diplomatic seal. How will {given_name} anchor this newly built empire of ledgers?",
+        "options": [
+          {
+            "text": "We must bind our blood to the salt-commissioner's northern branch, accepting a union of cold convenience to secure the grand canal permits, ensuring our children are born with the state's seal already in their hands.",
+            "motivatorShift": {
+              "politics": 2,
+              "lineage": 3,
+              "tradition": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "secured_northern_alliance",
+              "dynastic_legitimacy"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The international treaties are too fragile for the theater of a new state marriage. I will remain with my quiet, unofficial companion and formally name my sister's cleverest child as the heir to the treaty-port desks, preserving our focus on the Liverpool grain flows.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "bureaucratic_consolidation",
+              "quiet_liaison_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the bloodline thin to a thread. The {family_name} name belongs to the institutions we have built, not to children; I will spend my remaining years in the capital archives, writing the permanent customs-tariff that will outlast any flesh and bone.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "institutional_immortality",
+              "bloodline_fades"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2101,6 +2366,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the numbing heat of the peppercorns fades into the sterile, metallic air of the dome, the elders lay down their heavy lacquered chopsticks. They look to you, {given_name}, to resolve how the {surname} lineage will endure this high-altitude transition.",
+        "options": [
+          {
+            "text": "We must bind our blood to the station's marrow. I will wed the chief administrator's chosen successor, welcoming them to our table to raise heirs who can navigate both the ministry's corridors and our family's deep-space ambitions.",
+            "motivatorShift": {
+              "politics": 2,
+              "lineage": 2,
+              "tradition": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "dome_alliance",
+              "heirs_of_the_station"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "I will not buy survival with a performative union. I will quietly adopt my late sibling's child to carry the {family_name} name, keeping our domestic sphere sacred while I navigate the cutthroat committee chambers alone.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "politics": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "quiet_adoption",
+              "unaligned_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the line end here, a final and brilliant monument. I will pour every cent of our wealth and my own remaining years into securing the supreme chair of the planetary directorate, leaving only our laws, not our children, to govern the vacuum.",
+            "motivatorShift": {
+              "power": 3,
+              "wealth": -2,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "barren_director",
+              "absolute_statute"
+            ]
+          }
+        ]
       }
     }
   ]

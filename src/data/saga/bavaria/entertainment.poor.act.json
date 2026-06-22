@@ -423,6 +423,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "With the taste of cheap chicory still lingering on the tongue, how will {given_name} {surname} preserve the hard-won legacy of the family stage?",
+        "options": [
+          {
+            "text": "The rich, fatty sweetness of roasted pork belly and sweet mustard on the tongue—we bind our acts to the local brewer's daughter, securing a warm kitchen to raise a new troupe of {surname} children who will never perform on empty stomachs.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 2,
+              "reach": -1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "guild_alliance",
+              "settled_performers"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The sharp sting of cheap schnapps on cold nights, shared with the runaway apprentice we have taken under our wing. There is no room for a spouse in our cramped wagon, but this child will carry the {family_name} repertoire forward.",
+            "motivatorShift": {
+              "honor": 2,
+              "wealth": -1,
+              "lineage": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "adoptive_heir",
+              "bohemian_vagabonds"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The dry, alkaline dust of the court stage, inhaled in one glorious, solitary gasp. We pour every copper into renting the grand municipal theater, refusing the anchor of a family to let the final performance of {full_name} burn brilliantly and alone.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 1,
+              "lineage": -3,
+              "wealth": -1
+            },
+            "setFlags": [
+              "court_prestige",
+              "barren_glory"
+            ]
+          }
+        ]
       }
     },
     {
@@ -770,6 +823,62 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering bitterness of the well-water and the burnt-sugar crust on {given_name}'s tongue are reminders of the fragile line between feast and famine. As the troupe gathers around the dying kettle, the future of the {family_name} name demands a choice that will either tether the family to the Bavarian soil or cast its fate forever into the nomadic wind.",
+        "options": [
+          {
+            "text": "We will wash the greasepaint from our faces and swallow the dry flour of the valley. I will take the local tavern-keeper's steady heir as my partner; together we will convert an old barn near Munich into a permanent theater, rearing two children who will grow up with full bellies and the {surname} name on their lips.",
+            "motivatorShift": {
+              "wealth": 2,
+              "tradition": 2,
+              "lineage": 2,
+              "reach": -1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "anchored_in_bavaria",
+              "the_permanent_theater"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The sour ale of the roadside tavern is our sacrament, and I will not trade it for a domestic hearth. I will take no partner to weigh down the caravan, but I will formally adopt the clever, sharp-tongued orphan boy who currently scrapes our kettles, training him as the sole heir to the {family_name} secrets of stagecraft.",
+            "motivatorShift": {
+              "reach": 2,
+              "worldview": 2,
+              "lineage": -1,
+              "wealth": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "nomadic_purity",
+              "adopted_apprentice"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the iron taste of the road swallow us whole. I will take no partner and raise no successors; instead, I will pour every scrap of copper we possess into buying illegal French pyrotechnics to make our final shows the most dazzling spectacle Bavaria has ever witnessed, letting the {family_name} name burn out in glory.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2,
+              "wealth": -2
+            },
+            "setFlags": [
+              "extinguished_hearth",
+              "grand_pyrotechnics"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1097,6 +1206,62 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold sting of Sekt is on your tongue, a sharp contrast to the sawdust and turnip soup of the past. How will {given_name} {surname} secure the legacy of the {family_name} name now that we have crossed the threshold into the grand parlors?",
+        "options": [
+          {
+            "text": "We must swallow the cold Sekt of the high parlors. I will take the hand of the theatre director's refined daughter, anchoring the {family_name} name in high society and raising heirs who speak with the polished vowels of the box seats rather than the stage wings.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": 2,
+              "honor": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "gilded_succession",
+              "high_society_bound"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the parlor-dwellers keep their clean champagne; my tongue still craves the rough salt of the troupe. I will raise the child born of my long-shared stage-bond, refusing to buy respectability through a hollow marriage, keeping our blood raw and true to the circus floor.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": -2,
+              "power": -1,
+              "worldview": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "bohemian_succession",
+              "sawdust_heritage"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The bubbles in the glass eventually flatline, and so must we. I will pour every mark of the {surname} fortune into purchasing the grand Munich stage itself—letting our bloodline run dry, but leaving an immortal monument of stagecraft that no aristocrat can ever pull down.",
+            "motivatorShift": {
+              "lineage": -3,
+              "power": 3,
+              "reach": 3,
+              "wealth": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "monument_over_blood",
+              "theatre_dynasty_ends"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1448,6 +1613,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The playbills are dried, the chicory is cold, and the parlor smells of heavy ink and hard-won triumph. Our name, {family_name}, is now the bitter, rich gravy this Bavarian district cannot stop swallowing. But who will keep the grand curtain from falling forever when our own throat finally dries?",
+        "options": [
+          {
+            "text": "We swallow our pride and sign the contract with the theater syndicate's daughter, binding our ink-stained blood to her family's timber-yards. Let the parlor smell of wedding beeswax and fresh lavender; we will raise heirs who own both the stage and the forest it is built from.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "dynasty_secured",
+              "syndicate_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "No high-born spouse will tolerate the sour vinegar of our backstage sweat. We bypass the marriage beds and formally adopt our young apprentice—the scruffy acrobat who already tastes the chalk on the ropes and knows our cues by heart. The {family_name} line continues through grit, not certificates.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 1,
+              "lineage": -1
+            },
+            "setFlags": [
+              "apprentice_successor",
+              "merit_over_blood"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the flesh rot; we will make the name immortal. We pour every pfennig of our bitter-won fortune into building the great stone theater on the hill, letting the smell of fresh lime mortar and cold granite be our only descendants. Our line ends with {given_name}, but the show will never close.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 1,
+              "lineage": -3
+            },
+            "setFlags": [
+              "grand_monument",
+              "extinction_path"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1785,6 +2000,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "A warm, yeasty draft of local Bavarian bock beer, handed to {given_name} by a quiet shadow behind the curtains, finally cuts through the cloying sweetness of the foreign champagne. As the laughter of the global elite fades from the pavilion, the bitter-sweet flavor of legacy demands a final reckoning: who will inherit the keys to the {surname} entertainment empire?",
+        "options": [
+          {
+            "text": "I will swallow the dry, chalky taste of duty and wed the brilliant manager of our Munich venues, blending our blood with theatrical royalty to raise two heirs who will carry the {surname} banner forward.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "theatrical_dynasty_secured",
+              "traditional_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Let the prestigious marriages sour on the tongue. I will formally acknowledge my quiet partner from the troupe, raising our talented ward to inherit the spotlight, keeping the soul of our art pure even if the bloodline thins.",
+            "motivatorShift": {
+              "honor": 2,
+              "worldview": 2,
+              "lineage": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "bohemian_succession",
+              "art_above_blood"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The sharp, cold metal of the stage lights is the only flavor I need. I will pursue no partner and leave no heirs of my flesh, letting the {surname} name burn out in a final, glorious epoch of unmatched performances.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "extinguished_line",
+              "monumental_artistry"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2117,6 +2385,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The lingering heat of the synth-wine fades, leaving only the metallic tang of the recycled air and the quiet, heavy realization that the sixth generation of the {family_name} line cannot survive on memories of the Bavarian soil alone. As the troupe’s director, {given_name} {surname} must decide how the flame of your performance—and your blood—will endure the long drift.",
+        "options": [
+          {
+            "text": "You will take the hand of the troupe's lead scenic designer in a formal union, combining your dwindling rations to bring two children into the cramped cabins, swearing they will know the old Munich waltzes by heart before we make landfall.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": -1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "dynasty_anchored_in_transit"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no space in these bulkheads for the pageantry of a new marriage. You and your long-time companion will formally adopt a quiet apprentice from the lower-deck families, passing down the {surname} scripts and the secrets of the projection booth to one worthy heir.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "politics": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "adopted_apprentice_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the flesh fade so the art may become eternal. You will forgo heirs entirely, dedicating your remaining years to burning the family's entire holographic theater archive into the ship’s mainframe, ensuring the simulated ghost of {full_name} performs forever.",
+            "motivatorShift": {
+              "lineage": -3,
+              "tradition": 3,
+              "reach": 3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "digital_immortality_only"
+            ]
+          }
+        ]
       }
     }
   ]

@@ -429,6 +429,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The cold grease of the mutton soup congeals on the rim of the pewter bowl, smelling of tallow and wet basement plaster. In this dim room beneath the street, {given_name} {surname} watches the flickering candle struggle against the drafty chill of the ward. The bread was sweet, but the life ahead is salt and iron. To survive in this city of machines, how shall the {family_name} name root itself into the bitter soil?",
+        "options": [
+          {
+            "text": "We must yield to the matchmaker's knocking. Let us find a partner from the old province who knows the weight of the water-yoke, so we may fill this crowded flat with our own children and teach them the ancient prayers over the roar of the coal wagons.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": -1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "matchmaker_alliance",
+              "tenement_heirs"
+            ]
+          },
+          {
+            "text": "Our sister's orphaned little ones sleep huddled beneath our threadbare winter coats in the corner. We will not seek a new spouse to complicate this tiny room; we will claim these children of our own blood as our heirs, spending our youth to feed them and keep the {surname} name alive through duty alone.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "kin_adoption",
+              "guardians_of_the_flat"
+            ]
+          },
+          {
+            "text": "The sweatshops would only grind our children into ash, and the street-slang would steal their tongues. Let {given_name} walk this narrow path alone, devoting every penny to the ink of the printing press and the preservation of the law, letting our bloodline end so that our faith might endure uncorrupted.",
+            "motivatorShift": {
+              "tradition": 3,
+              "lineage": -3,
+              "worldview": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "scholarly_solitude",
+              "faith_over_blood"
+            ]
+          }
+        ]
       }
     },
     {
@@ -748,6 +801,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the sweet, clove-scented residue of the Havdalah wine dries on your tongue, the boundary between the Sabbath's peace and the harsh week ahead settles over the household. How will the {surname} line cross this threshold into the coming generation?",
+        "options": [
+          {
+            "text": "Let the sweet warmth of the wine find its match in a shared hearth; I will accept the matchmaker’s arrangement to stand under the chuppah with the pious baker's daughter, building a traditional home to raise {surname} children who know the taste of both Torah and honest labor.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "traditional_chuppah",
+              "heirs_of_the_covenant"
+            ]
+          },
+          {
+            "text": "The boundary between holy and profane is already too sharp. I will not bring a new partner into this cold workshop, but will instead adopt my late sister's orphaned child as my sole heir, pouring our meager resources into his study of the law without the burden of a new marriage.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "lineage": 1,
+              "wealth": 2,
+              "tradition": 1,
+              "honor": 2
+            },
+            "setFlags": [
+              "orphan_adopted",
+              "frugal_piety"
+            ]
+          },
+          {
+            "text": "Let the physical line narrow to a drop of ink. The taste of the spices demands a life of absolute devotion; I will refuse all matches and dedicate my remaining years entirely to copying the sacred scrolls in the house of study, letting the {surname} name dissolve into the eternal books.",
+            "motivatorShift": {
+              "worldview": 3,
+              "tradition": 2,
+              "lineage": -3,
+              "reach": -1
+            },
+            "setFlags": [
+              "scholarly_asceticism",
+              "line_ends_in_torah"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1063,6 +1169,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the heavy sweetness of the Kiddush wine settles, you look around the glowing table. This hard-won abundance demands a decision: how will the {family_name} line carry this warmth forward, if at all?",
+        "options": [
+          {
+            "text": "Let the matchmaker bring the quiet scholar's daughter from the northern congregation. We will pour this sweet, hard-won wealth into a bridal canopy, welcoming a partner to raise a full house of children who will keep the Sabbath flame burning.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "match_accepted",
+              "traditional_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "The table is already peaceful, and my sister's orphaned boy already knows the weight of the silver Kiddush cup. I will not bring a stranger to this table; we will raise him as our sole heir under this roof, letting our legacy pool deep and narrow.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 1,
+              "reach": -1,
+              "politics": -1
+            },
+            "setFlags": [
+              "family_adoption",
+              "preservation_focus"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "This sweet taste of peace is a sign to build the house of study, not of flesh. I will dedicate my years and this entire estate to the transcription of the sacred texts, letting the physical line of {given_name} dissolve into prayer and holy ink.",
+            "motivatorShift": {
+              "worldview": 3,
+              "tradition": 2,
+              "lineage": -3,
+              "wealth": -2
+            },
+            "setFlags": [
+              "monastic_scholasticism",
+              "line_dissolved"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1396,6 +1555,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The astringent bite of the chicory coffee washes down the dry lekach, leaving a lingering bitterness on {given_name}’s palate. The old world's recipe has changed, and with it, the path of the family's future. How will {given_name} sweeten the years that remain for the {family_name} line?",
+        "options": [
+          {
+            "text": "Let the dry grit of this new soil settle in our bones. I will accept the match proposed by the congregation’s elder, taking a partner who understands both the weight of the old prayers and the necessity of this new timber, so we may raise children to sing them.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 3,
+              "worldview": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "traditional_match_new_land"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The bitter timber smoke is enough to bear. I will take no spouse to share this hardship, but I will bring my brother’s orphaned daughter into this kitchen, sharing our dry bread and teaching her the lineage of {surname} so that one quiet soul carries our memory forward.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "wealth": -1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "raised_orphan_kin"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the tongue go dry and the bloodline end here. I will dedicate every remaining hour to the sacred black ink of the scribe, preserving our holy scrolls from the damp of this raw wilderness, choosing the immortality of the Law over the survival of my own name.",
+            "motivatorShift": {
+              "tradition": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "reach": 1
+            },
+            "setFlags": [
+              "ascetic_scribe_path"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1799,6 +2008,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the sweet, thick heat of the fifty-year-old Kiddush wine warms your throat, you look at the flickering yellow candle flame reflecting in the eyes of your gathered kin. The weight of the {family_name} survival rests in your hands; how will you guard this fragile peace and carry the light forward?",
+        "options": [
+          {
+            "text": "We must draw another soul into this warm circle. I will agree to the match proposed by the community's elder, sharing the kiddush cup with a partner of deep faith so we may bring new children to this heavy oak table.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "reach": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "traditional_union",
+              "generation_six_secured"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "The table is already full enough of ghosts and memory. I will not bring a stranger into this quiet sanctuary; instead, I will raise my late brother's orphaned children as my own, pouring my life into their education without seeking a spouse.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 1,
+              "honor": 2,
+              "reach": -2
+            },
+            "setFlags": [
+              "guardian_of_the_orphans",
+              "internal_heirs"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "My soul is consumed by the scent of ink and the cold, quiet stone of the study hall. I will remain solitary, letting the family line narrow to a point while I dedicate myself entirely to the yeshiva and the preservation of {full_name}'s papers.",
+            "motivatorShift": {
+              "worldview": 3,
+              "tradition": 2,
+              "lineage": -3,
+              "power": -1
+            },
+            "setFlags": [
+              "scholarly_celibacy",
+              "line_ends_in_study"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2182,6 +2444,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the bitter, chalky film of the synth-wine dries on your tongue, the quiet hum of the reclamation vents fills the silence. The elders of the congregation watch you closely, waiting to see how the covenant of the {surname} line will endure in this cold, synthetic exile.",
+        "options": [
+          {
+            "text": "Heed the matchmaker's static-laced transmission and welcome a partner from the deep-range transport fleet, committing to bear children who will carry our name through the metal corridors of this station.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": -1,
+              "politics": 1
+            },
+            "setFlags": [
+              "covenant_renewed",
+              "fleet_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Bring your late sister's children into your cramped quarters, choosing to raise these existing heirs of our blood rather than seeking a new partner in an overcrowded world.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "tradition": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "communal_wardens",
+              "frugal_hearth"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Allow the physical branch of {given_name} to quiet forever, dedicating your remaining years and credit to etching our family's sacred commentaries directly into the station's mainframes.",
+            "motivatorShift": {
+              "worldview": 3,
+              "lineage": -3,
+              "tradition": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "digital_talmud",
+              "line_extinguished"
+            ]
+          }
+        ]
       }
     }
   ]

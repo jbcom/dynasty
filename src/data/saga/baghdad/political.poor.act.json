@@ -479,6 +479,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "With that bitterness came the cold clarity of the displaced: the old councils of our homeland are ash, and this flaking rented room is all that remains of the {family_name} legacy. How will you anchor our name before the fire dies?",
+        "options": [
+          {
+            "text": "I will swallow this grit and bind our name to the prominent merchant-exile’s house. Together we will build a drafty estate, filling it with children who will learn our political lineage while holding the purse strings of our new home.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "bound_by_exile_marriage"
+            ]
+          },
+          {
+            "text": "The hunger for restoration is my only partner. I will pour our remaining coin into the underground networks, organizing the diaspora from these shadows and letting the {surname} bloodline dry up if it means our cause survives.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 1,
+              "lineage": -3,
+              "reach": 2
+            },
+            "setFlags": [
+              "revolutionary_martyr"
+            ]
+          },
+          {
+            "text": "I will not invite a stranger into this bitter sanctuary. I will bring my brother’s quiet orphan into this room, training the youth in the dry, precise art of statecraft to carry our name forward without compromising our blood.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "reach": -1,
+              "politics": 1
+            },
+            "setFlags": [
+              "bureaucratic_ward"
+            ]
+          }
+        ]
       }
     },
     {
@@ -877,6 +927,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter cardamom silt at the bottom of the cup has settled, and with it, the years of quiet negotiation in the mudbrick quarters. As the elders depart, the ledger lies open before you. How will the {family_name} name endure the grinding heat of this province?",
+        "options": [
+          {
+            "text": "We must swallow the dregs and bind our ledger to the merchant-clans of the lower gate. Let us take a companion from their courtyards, sharing the bitter cup so that our children may one day inherit a district already half-won by our joint blood.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 1,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "allied_merchant_gate",
+              "bloodline_secured_in_clay"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "There is no room in this small house for a new spouse's pride. We will raise the orphaned kin already sleeping on our carpets, drilling them in the hard language of the tax-scrolls while we keep our own hands free to seize the district council.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "lineage": -1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "council_seat_secured",
+              "adopted_succession"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the {family_name} line burn down to dry ash if it must, so long as that ash blinds our enemies. We will pour our remaining years entirely into the high governor's favor, dying childless but leaving a legacy of absolute administrative ruin for our rivals.",
+            "motivatorShift": {
+              "power": 3,
+              "politics": 2,
+              "lineage": -3,
+              "honor": 1
+            },
+            "setFlags": [
+              "governors_shadow",
+              "line_narrowed_to_dust"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1282,6 +1385,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "Each mouthful was a grimy testament to the compromises that bought our seat at the municipal table. As the dry cardamom dust settles in {given_name}'s throat, the realization hardens: our newly won influence will blow away like desert sand unless we anchor it. How will the {family_name} name endure the bitter taste of this triumph?",
+        "options": [
+          {
+            "text": "We must swallow the sweetened poison of their terms. We will invite the eldest of our chief rival's house to share our hearth and bed, blending our bitter tea with their deep-rooted legacy so that {surname} children may inherit the chambers we fought to build.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "politics": 2,
+              "honor": -1,
+              "worldview": -1,
+              "wealth": 1,
+              "power": 1,
+              "tradition": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "alliance_by_blood",
+              "municipal_alliance"
+            ]
+          },
+          {
+            "text": "We will not sell our bedroom to the highest political bidder. Let us bring our quiet cousin's children out from the provinces to be reared in the back-rooms of the assembly, teaching them the iron taste of our struggles without inviting a stranger into our house.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 2,
+              "politics": 1,
+              "wealth": -1,
+              "honor": 2,
+              "power": 0,
+              "worldview": 0,
+              "reach": -1
+            },
+            "setFlags": [
+              "provincial_wards",
+              "internal_heir"
+            ]
+          },
+          {
+            "text": "Let the cup dry out entirely. We shall pour every ounce of our remaining years into the treasury and the drafting of the great canals, leaving a city of stone and law behind us, even if our hearth grows cold and empty of {family_name} voices.",
+            "motivatorShift": {
+              "power": 3,
+              "politics": 3,
+              "lineage": -3,
+              "worldview": 2,
+              "wealth": 1,
+              "honor": 1,
+              "tradition": -2,
+              "reach": 1
+            },
+            "setFlags": [
+              "political_martyrs",
+              "monumental_legacy"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1684,6 +1852,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter taste of this victory champagne settles like brass on the tongue of {given_name}. To secure the {family_name} name in these hostile halls, we must choose how we stomach this hard-won peace.",
+        "options": [
+          {
+            "text": "We wash down the chalky residue of concession with their sweet wines. We will take a spouse from the heart of the old guard, cementing our seat at their high table and raising heirs who carry both our iron resolve and their gilded pedigree.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "politics": 2,
+              "lineage": 3,
+              "tradition": 1,
+              "honor": -2
+            },
+            "setFlags": [
+              "establishment_alliance",
+              "gilded_heirs"
+            ]
+          },
+          {
+            "text": "We spit their roasted lamb fat from our mouths and refuse to let their blood mingle with ours. We will elevate the young kinsman who already knows the sharp sting of our struggle, keeping our house clean of their compromise even if we must bypass the marriage bed.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "politics": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "clannish_purity",
+              "adopted_successor"
+            ]
+          },
+          {
+            "text": "Let the brass cups tarnish. We will sign no marriage pacts and raise no heirs to inherit this system of sweet grease and quiet concessions; instead, we will use our remaining days to burn down their banquet hall from within.",
+            "motivatorShift": {
+              "politics": 3,
+              "worldview": 2,
+              "lineage": -3,
+              "reach": 1
+            },
+            "setFlags": [
+              "lone_crusader",
+              "end_of_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2025,6 +2246,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The heavy grease of the mutton lingers thick on your palate, a reminder of the compromises that bought this fragile peace. As the acid of the champagne fades to a bitter, metallic aftertaste, how will {given_name} steer the remnants of the {surname} legacy?",
+        "options": [
+          {
+            "text": "Swallow the salt of our concessions. We will take the hand of the chief negotiator's eldest—a union forged in cold ink—and raise heirs who taste only the sweet fruit of our peace, never the fat of our sacrifices.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 1,
+              "honor": -1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "union_of_concession",
+              "heirs_of_peace"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Wipe the tallow from our lips and refuse their blood-alliances. We shall raise the orphaned child of our fallen lieutenant as our own, preserving our honor and our blood without letting another faction's name dilute the {surname} house.",
+            "motivatorShift": {
+              "honor": 2,
+              "politics": -1,
+              "lineage": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "ward_of_the_fallen",
+              "pure_bloodline"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the mutton cold-harden on the silver plate. We will seek no partner and raise no children; we shall pour our remaining years into cementing this treaty, letting the {surname} name dissolve into history as a grand, final sacrifice.",
+            "motivatorShift": {
+              "power": 2,
+              "reach": 1,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "last_of_the_line",
+              "absolute_treaty"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2409,6 +2683,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The synthetic salt of Sector Seven still clings to your palate, a cold reminder of the sterile limits of our survival. As the leader of the {family_name} dynasty, how will you secure our political influence against this creeping, engineered decay?",
+        "options": [
+          {
+            "text": "We will swallow the chalky bitterness of this existence and sign the alliance contract with the Ministry's chief planner, bringing their direct kin into our home as a partner to secure clean soil rations and raise two heirs to hold the {surname} legacy.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "ministerial_alliance",
+              "soil_rations"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "We refuse to bind our blood to political strangers. We will remain unpartnered, but we shall adopt and groom the most brilliant young technicians from the UV racks to inherit the {family_name} seats, preserving our power through merit alone.",
+            "motivatorShift": {
+              "tradition": -2,
+              "lineage": 1,
+              "power": 2,
+              "politics": 1
+            },
+            "setFlags": [
+              "meritocratic_succession",
+              "uv_wards"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the sterile water be the final cup we drink. We will take no partner and raise no heirs for {given_name}; instead, we will pour every ounce of our remaining capital into permanently codifying our family's policies into the Sector constitution.",
+            "motivatorShift": {
+              "lineage": -3,
+              "politics": 3,
+              "power": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "constitutional_monument",
+              "line_narrowed"
+            ]
+          }
+        ]
       }
     }
   ]

@@ -502,6 +502,71 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The bitter grit of the chicory still coats your throat, but the fading scent of your mother's Friday challah demands a choice for the future of the {family_name} name. Your body is strong, hardened by the drayage lines, but how will you expend this strength to ensure our survival?",
+        "options": [
+          {
+            "text": "Accept the matchmaker’s introduction to the quiet seamstress down the hall. We will crowd into a drafty tenement flat, share our meager bread, and bring sturdy {surname} children into this hard-scrabble world to carry our name.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": -1,
+              "honor": 1,
+              "reach": -1,
+              "politics": 0,
+              "power": 0,
+              "worldview": 0
+            },
+            "setFlags": [
+              "tenement_matrimony",
+              "traditional_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Take in the two orphaned boys of your late sister. There is no room or coin to seek a wife of my own in these cramped quarters, but I will raise these boys with my own calloused hands to be strong {family_name} men.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "wealth": -2,
+              "tradition": 1,
+              "worldview": 1,
+              "politics": 0,
+              "power": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "foster_father",
+              "dockside_legacy"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Pour every ounce of muscle into the bare-knuckle prize rings uptown. The brutal bouts will eventually break my body and ensure my blood ends with me, but the grease-stained winnings will buy my mother a decent home far from this damp cellar.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 1,
+              "lineage": -3,
+              "honor": -1,
+              "tradition": -1,
+              "reach": 1,
+              "politics": 0,
+              "worldview": 1
+            },
+            "setFlags": [
+              "prize_fighter",
+              "broken_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -881,6 +946,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The gritty scrape of the winter loam still coats your tongue, a reminder of the stubborn earth that demands every ounce of {family_name} strength. As the frost closes over the timberline, the silence of your empty cabin grows heavier than the stones you cleared today. How will you apply your physical labor to the future of our line?",
+        "options": [
+          {
+            "text": "Welcome the bride sent by the matchmaker of the old congregation. We will share the bitter root and the heavy water of this place, building a warm bed in the drafty cabin to raise strong children who can master the winter plow.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": -1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "pioneer_matrimony",
+              "hardy_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Adopt my deceased brother’s orphaned children, who already carry the {surname} build. I will dedicate my back to feeding these hungry mouths and teaching them to lift the heavy sod, sparing myself from marriage while keeping our family's muscle in the soil.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "tradition": 1,
+              "wealth": -2
+            },
+            "setFlags": [
+              "adopted_kin",
+              "clan_preservation"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Pledge my physical strength entirely to the community's survival. I will spend my remaining years hauling timber for the new synagogue and building the town's defensive palisade, leaving the continuity of our bloodline to fade while I carve our name into these permanent walls.",
+            "motivatorShift": {
+              "reach": 3,
+              "honor": 2,
+              "lineage": -3,
+              "worldview": 2
+            },
+            "setFlags": [
+              "monument_builder",
+              "strength_exhausted"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1284,6 +1402,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The thick Malaga wine coats your throat, but it cannot entirely sweeten the weight of what comes next. As the plates are cleared, your mother leans in close, her breath smelling of cardamom and anxiety, demanding to know how you intend to invest the physical strength and hard-won standing that {given_name} has brought to the {family_name} name.",
+        "options": [
+          {
+            "text": "Let the matchmaker bring the ledger. I will stand under the chuppah with the daughter of the athletic club's patron, combining our physical vitality with their respectable standing to raise a new generation of {family_name} champions who will never know the tenement cold.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "alliance_with_patron",
+              "traditional_chuppah"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "No marriage canopy will bind me. I will take this strength to the European arenas, devoting my body entirely to the calling of the gymnasium and training the neighborhood's youth, letting our bloodline narrow so that the Jewish athletic spirit may rise.",
+            "motivatorShift": {
+              "power": 2,
+              "honor": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "gymnasium_champion",
+              "unmarried_devotion"
+            ]
+          },
+          {
+            "text": "My late sister's children already sit at this table, nibbling the imported chocolate. I will take them as my own heirs and train their bodies to be iron, refusing any new partner so that my focus remains solely on the flesh and blood we have already saved.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -1,
+              "worldview": 2
+            },
+            "setFlags": [
+              "adopted_heirs",
+              "sole_guardian"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          }
+        ]
       }
     },
     {
@@ -1690,6 +1861,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The sweet, yeasty perfume of the braided loaf still hangs in the damp air, competing with the pungent, camphor-sharp sting of liniment rubbed into your sore calves. As the streetcars rattle the windowpanes, your mother sits in the fading tallow-light, waiting to hear how the physical strength of the {surname} line will be preserved against the grinding city.",
+        "options": [
+          {
+            "text": "Bring the quiet tailor's daughter into our home to share the heavy Shabbat yoke; together we will build a home of quiet endurance and raise children who know both the law and the strength of their own limbs.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 2,
+              "wealth": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "shabbat_partnership",
+              "strength_in_numbers"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Adopt your deceased brother's frail boy who already sleeps on the cot by the coal stove, pouring our meager milk into his frame and training him to carry the {surname} name on the athletic track.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "wealth": -2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "adoptive_guardian",
+              "spared_nephew"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Pour every drop of sweat into the professional gymnasium, leaving no room for a spouse or crying babes; let my own muscles be the final, glorious monument to the family name.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "barren_champion",
+              "gymnasium_devotion"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2043,6 +2267,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "With the bitter grit of the Turkish coffee still coating your teeth and the sweet plum babka heavy in your gut, the winter wind asks what remains of your strength. How will you settle the ledger of your bloodline before the silence takes you?",
+        "options": [
+          {
+            "text": "Let the bitterness of the cup settle; it is time to yield this aching frame to the warmth of a shared canopy. I will accept the match proposed by the community elders—a partner of steady hand and quiet strength—and together we will nurture two sturdy {surname} heirs to carry our grit into a softer era.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "power": -1,
+              "reach": -1
+            },
+            "setFlags": [
+              "matched_for_stability",
+              "heirs_of_grit"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "My bones are too stiff for the dance of new courtship, but the family gymnasiums are full of hungry youth. I will bring my sister's quietest boy into this house, letting him taste the iron in our well-earned sugar, and train him to bear the weight of the {surname} legacy alone without ever taking a spouse.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 1,
+              "honor": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "nephew_adopted",
+              "celibate_guardian"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "The silence I bought is too precious to split with crying babes or marital duties. I will consume the last of the babka alone, leave my entire estate to endow the athletic academy so it may build the muscles of our people, and let the {surname} line rest forever in this quiet winter.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "line_ended",
+              "athletic_academy_patron"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2421,6 +2698,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the sharp tang of the dwarf-citrus cuts through the zinc-bitter grease of your long shift, the high-G thrum of the centrifuge reminds you that your body is a vessel nearing its structural limit. How will you anchor the endurance of the {family_name} line before your joints finally yield to the spin?",
+        "options": [
+          {
+            "text": "We will plant our roots in the aeroponic dirt. By taking the chief agriculturalist as our partner, we will build a life in the green-lit warmth of the lower bays and raise children whose lungs are native to this low-oxygen air.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": -1,
+              "reach": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "aeroponic_dynasty",
+              "graft_pioneers"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The high-G deck is no place for a soft marriage. We will remain unpartnered but adopt two young, hungry centrifuge apprentices, hardening their bodies through our family's rigorous athletic discipline and teaching them the ancient prayers of survival.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "tradition": 2,
+              "power": -1
+            },
+            "setFlags": [
+              "centrifuge_monks",
+              "g_force_disciples"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          },
+          {
+            "text": "This citrus bite is a call to the wild. We will sign the deep-scout roster, throwing our trained muscles and cold determination into the long transit to the outer rim, letting the {surname} name dissolve into the grand silence of the void.",
+            "motivatorShift": {
+              "reach": 3,
+              "lineage": -3,
+              "worldview": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "void_scout_legend",
+              "line_extinguished"
+            ]
+          }
+        ]
       }
     }
   ]

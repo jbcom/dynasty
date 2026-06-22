@@ -390,6 +390,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The tallow sticks to the roof of your mouth, heavy and stubborn, much like the thick marrow of the {surname} blood. Your muscles, hardened by the cold alpine slopes and the iron-wheeled carts, ache for a legacy that matches their brute endurance. As you swallow the last coarse bite of sausage, you must choose how the strength of {given_name} will endure.",
+        "options": [
+          {
+            "text": "We must bind our raw physical power to the valley. I will take the cooper's broad-shouldered daughter to my hearth; her strength matches my own, and together we will fill this drafty cottage with children heavy-boned enough to master this mountain soil.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "sturdy_heirs",
+              "cooper_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "The steel of the quarry and the sheer weight of the spruce logs are the only kinship I require. Let the {family_name} name fade when my own back finally breaks under the load; I will leave behind monuments of cut stone and cleared forests, not weeping mouths.",
+            "motivatorShift": {
+              "power": 2,
+              "honor": 1,
+              "lineage": -3,
+              "worldview": 1
+            },
+            "setFlags": [
+              "monument_builder",
+              "barren_glory"
+            ]
+          },
+          {
+            "text": "I have no patience for the courting bed or the priest's narrow vows. I will take my sister's fatherless boy under my roof, cram his belly with salted lard until his ribs fill out, and train his soft hands to bear the heavy tools of my craft.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "tradition": -1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "apprentice_successor",
+              "foster_strength"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -726,6 +779,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The heavy, salty grease of the valley's soil still coats {given_name}'s throat, a reminder of the physical toll of this land. With the clearing-fires dying to embers, how will the muscular legacy of the {surname} name be preserved for the hard years ahead?",
+        "options": [
+          {
+            "text": "Bring the local brewer's sturdy daughter into the homestead to share this heavy bread and salt-cured grease, rearing strong children who will carry the {family_name} grit deeper into the valley.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "sturdy_heirs",
+              "brewers_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Keep the hearth solitary but bring your sister's orphaned boy into the timber-works, feeding him the same iron-rich broth to harden his young bones as the sole successor to the {surname} trade.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "politics": -1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "apprentice_heir",
+              "solitary_hearth"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the {family_name} line end with {given_name}'s own scarred knuckles, pouring every ounce of physical power into clearing the great northern ridge until the muscles fail and the body returns to the shale.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "monument_of_stone",
+              "extinguished_line"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1063,6 +1169,57 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The claret glass rests cold against your lower lip, its rim dangerously thin. As the bitter iron of the imported vintage mingles with the heavy, yeasty dregs of our ancestral dunkel, the family elders watch in silence. The heavy-limbed heritage of the {family_name} line must either ground itself deeper in this Bavarian soil or adapt to the lighter, swifter currents of the south. How do you choose to swallow this transition?",
+        "options": [
+          {
+            "text": "Let the delicate glass shatter. I will wed the merchant’s daughter from the western valleys, blending our raw athletic strength with their sharp, worldly ambition to raise a new, refined generation of {surname} heirs.",
+            "motivatorShift": {
+              "lineage": 2,
+              "reach": 2,
+              "tradition": -1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "bavarian_claret_hybrid",
+              "dynasty_secured"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Spit out the sour foreign wash and return to the heavy steins of our home parish. I will take no wife, but instead adopt and rear my late training partner's sturdy child, keeping our heavy-limbed stock stubbornly pure and rooted in this familiar earth.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "reach": -2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "pure_bavarian_root"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Drain the thin goblet until it cracks, then leave the hall forever. My strength belongs to the high mountain matches and the calling of the physical absolute; I will leave no heir to carry the weight of this cellar.",
+            "motivatorShift": {
+              "power": 2,
+              "honor": 2,
+              "lineage": -3,
+              "tradition": -2
+            },
+            "setFlags": [
+              "athletic_martyrdom"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1466,6 +1623,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the thick, sweet residue of the doppelbock lingers on your tongue, the physical toll of forty winters of labor settles deep into your joints. The legacy of {surname} must be anchored before the alpine frost permanently seals the valley. How will your strength be passed on?",
+        "options": [
+          {
+            "text": "To bind my path to the salt-master's formidable daughter, whose steady hand and alpine endurance will help me rear a line of resilient {surname} heirs to dominate these high timberlands.",
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            },
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "salt_alliance",
+              "highland_heirs"
+            ]
+          },
+          {
+            "text": "To bring my sister’s strapping boy, who already possesses the heavy-shouldered grip of our ancestors, into my household as my official heir—preserving the clan's strength without dividing my focus with a marriage of convenience.",
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            },
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 2,
+              "tradition": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "adopted_nephew",
+              "bloodline_secured"
+            ]
+          },
+          {
+            "text": "To let the family line narrow and end with my own breath, committing my remaining years to establishing the great Bavarian games and perfecting our cellar's brew, leaving a monument of athletic glory rather than flesh.",
+            "motivatorShift": {
+              "reach": 3,
+              "power": 2,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "monumental_legacy",
+              "extinction_choice"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1869,6 +2079,56 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "As the warm, spiced heat of the dunkles settles in your chest, the future of the {family_name} line demands a reckoning. How will {given_name} carry the weight of this athletic inheritance?",
+        "options": [
+          {
+            "text": "I will invite the foreign merchant's daughter, whose spices have flavored our feast, to share my hearth and match my stride. Together, we will raise a new, vibrant generation of {surname} heirs to bridge our alpine peaks with the wider world.",
+            "motivatorShift": {
+              "reach": 2,
+              "wealth": 1,
+              "tradition": -1,
+              "lineage": 2
+            },
+            "setFlags": [
+              "cosmopolitan_heirs"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "The bite of the mountain air and the salt of the high hunt are the only matches I require. I shall take no partner to this board, dedicating my remaining physical strength to establishing our district's great athletic guild, letting the direct line of {full_name} end here.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": -2,
+              "tradition": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "monastic_guild"
+            ]
+          },
+          {
+            "text": "My devotion remains tied to our existing hearth. I will take no new spouse, but will instead adopt and train my late sister's orphaned sons, ensuring they master the grueling mountain trials to carry on the {family_name} name.",
+            "motivatorShift": {
+              "lineage": 1,
+              "tradition": 2,
+              "reach": -1,
+              "honor": 1
+            },
+            "setFlags": [
+              "kin_adoption"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
+          }
+        ]
       }
     },
     {
@@ -2157,6 +2417,59 @@
       "requires": {
         "flags": [],
         "notFlags": []
+      },
+      "decision": {
+        "tier": "major",
+        "prompt": "The metallic bitterness of the scrubber-wash still coats the back of the throat, a reminder that every breath in these tunnels must be paid for with raw, muscular endurance. Your heart beats with the slow, steady rhythm of a long-distance runner, but the air grows thinner each year. As the oldest sibling of the {surname} line, you must decide how the physical vitality of your Bavarian ancestors will survive this damp dark.",
+        "options": [
+          {
+            "text": "We will bind our labor to the sector's master of the deep-soil beds, sharing our heat and our clean-water privileges to raise two strong-shouldered children who can withstand the heavy atmosphere.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "politics": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "hydro_union",
+              "heavy_lung_descendants"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Avoid the complications of a new contract; instead, we will bring our current workspace companion into our quarters and adopt a single sturdy orphan from the ventilation shafts, teaching them the iron-grip of the {family_name} miners.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": -1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "shaft_orphan_adopted",
+              "frugal_household"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let our line narrow to a single point of pure exertion. We will pour our remaining physical prime into breaking the record for the deep-soil drilling team, leaving our names etched into the granite of the foundation rather than on birth certificates.",
+            "motivatorShift": {
+              "power": 3,
+              "honor": 2,
+              "lineage": -3,
+              "worldview": 1
+            },
+            "setFlags": [
+              "granite_monument",
+              "end_of_line"
+            ]
+          }
+        ]
       }
     }
   ]

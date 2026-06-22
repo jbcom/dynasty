@@ -179,3 +179,57 @@ export function applyBraid(
   const thread = [...(scene.thread ?? []).filter((t) => t.wave !== rival), ref];
   return { ...scene, thread };
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Pass 4 — SUCCESSION authoring (the dynastic fork at each generation's close)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** A close scene to give its generational decision: the family + the close prose to root it in. */
+export interface SuccessionRequest {
+  wave: string;
+  waveLabel: string;
+  archetype: string;
+  tier: number;
+  /** The close scene's prose, so the decision grows out of the actual ending. */
+  closeProse: string;
+}
+
+/**
+ * System instruction for the succession pass — author the CLOSE scene's terminal DECISION: the dynastic
+ * fork that ends a generation. One option MUST take a partner + raise heirs (carrying the `succession`
+ * effect that advances the line); the others are real alternatives (raise heirs alone, pour everything
+ * into the work and let the line thin, etc.). This is the act's most consequential choice for the LINE.
+ */
+export function successionPassSystem(): string {
+  return [
+    "You author the closing DECISION of one generation's chapter in a dynasty NOVEL — the dynastic fork:",
+    "does the line continue, and how? Return a `decision` with EXACTLY 3 options.",
+    "EXACTLY ONE option must continue the line by taking a partner AND raising heirs — mark it with",
+    "`succession: { takesPartner: true, begets: <1-3> }`. The other two are real alternatives that do NOT",
+    "carry succession (e.g. raise heirs from an existing bond — `succession:{takesPartner:false,begets:1-2}`",
+    "— or pour everything into the calling and let the line narrow — no `succession`). Each option has",
+    "text + motivatorShift + setFlags; the decision has tier 'major' + a prompt. Options read as choices a",
+    "reader weighs, in this family's voice — never mechanical ('take a wife' is wrong; make it lived).",
+    ...SHARED_RULES,
+    "Output STRICT JSON: { decision: { tier, prompt, options:[{text,motivatorShift,setFlags,succession?}] } }.",
+  ].join("\n");
+}
+
+/** Build the succession prompt for one close scene. */
+export function buildSuccessionPrompt(req: SuccessionRequest): string {
+  return [
+    `A ${req.archetype} family of the ${req.waveLabel} (${req.wave}) line, generation ${req.tier + 1}.`,
+    `The generation's closing scene reads:`,
+    `"""`,
+    req.closeProse.slice(0, 600),
+    `"""`,
+    `Author the dynastic decision that ends this generation and hands (or doesn't) the line forward.`,
+    "",
+    `Return ONLY { "decision": { ... } }.`,
+  ].join("\n");
+}
+
+/** Attach an authored decision to a close scene (replaces any existing). Pure. */
+export function applySuccession(scene: Scene, decision: Scene["decision"]): Scene {
+  return { ...scene, decision };
+}
