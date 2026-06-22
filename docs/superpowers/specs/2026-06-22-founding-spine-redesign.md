@@ -58,20 +58,66 @@ Identity: the spine is still composed (the player's onboarding choice colors it 
 + a family character), but there is ONE line, not a lattice. Onboarding simplifies: you found THE
 American line and choose its character, not a wave×class×archetype cell among 504.
 
-### 2. The WAVES as braid fabric (the mined corpus)
+### 2. The WAVES as a RECURRING-FAMILY CAST (the Turtledove model)
 
-Each wave arrives in its historical era and **braids into the spine** at intersection points:
+The fabric is NOT anonymous one-off crossing fragments — it is a **persistent, bounded recurring cast of
+FAMILIES** (≈one per wave, ~7) that grow ALONGSIDE the spine across the centuries. The model is **Harry
+Turtledove's long alt-history series**: you follow a handful of families through the ages, the same
+lineages recurring decade after decade, and you become EMOTIONALLY INVESTED in their rise/fall/
+intersection/persistence (user, 2026-06-22). This is also the Suzerain/80 Days "recurring cast" strength
+and the Reigns cast-economy — and it KILLS the duplication: ONE spine + ~7 tracked families >> 504
+redundant parallel stories.
 
-- The existing braid machinery (`src/sim/saga/braidSelect.ts` selector + the slot-tagging QA pass +
-  `loop.ts` weave) is REPOINTED: instead of weaving one cell into another peer cell, it weaves a WAVE's
-  mined scene-fragment into the SPINE's current act at an era-appropriate crossing (the Irish arrive in
-  the 1840s and cross the spine on the docks; the Chinese on the 1860s railroad; etc.).
-- **Corpus mining (`scripts/mine-fabric.ts`, new):** walk the 504 acts, score scenes for (a) crossing
-  potential (existing braid slots / public settings), (b) prose quality, (c) era/wave fit; extract the
-  keepers into a `src/data/saga/fabric/` pool keyed by `wave × era × setting`; retire the rest. The
-  spine's braid selector draws from this pool. The mining is a one-time offline pass; reviewable diff.
-- Waves are thus **forces that intersect**, woven INTO the spine prose ([[intersections-woven-not-walls]]),
-  never separately played start-to-finish.
+Each cast family:
+- **arrives in its historical era** (Irish 1840s, Chinese 1860s railroad, Italians/Jews 1880s-1900s, …)
+  and **braids into the spine** at era-appropriate crossings, woven INTO the spine prose
+  ([[intersections-woven-not-walls]]).
+- **recurs with CONTINUITY + MEMORY:** you meet the same family's descendants generations later; the game
+  tracks who they were and your prior crossings, so a later meeting pays off the earlier one. (A small
+  per-family state: name, current generation/standing, history of crossings with the player — the same
+  shape as the player's own `family` state, reused.)
+- is a CHARACTER you track + care about, not a disposable vignette.
+
+**Corpus mining = curate the BEST + most UNIQUE (`scripts/mine-fabric.ts`, new).** This is how the 504
+acts become an ASSET: with that much authored material, mine for the genuinely STANDOUT, DISTINCTIVE
+scenes/crossings per family (user: "mining for the best and most unique will help with that") — discard
+the templated-sameness bulk, keep the moments that make each family feel singular + memorable. Score
+scenes for (a) UNIQUENESS/distinctiveness (the priority — what breaks the template), (b) crossing
+potential (braid slots / public settings), (c) prose quality, (d) era/wave fit; extract the keepers into
+`src/data/saga/fabric/` keyed by `family(wave) × era × setting`; retire the rest. One-time offline pass,
+reviewable diff.
+
+### 2b. The anchoring system → a DETERMINISTIC-TRIGGER LATTICE (the big unlock)
+
+Because the wave families are **no longer separately playable**, their material doesn't have to hold
+together as self-contained games — so I can RIP PIECES OUT freely and recompose. And because the spine
+sim is **fully DETERMINISTIC** (seed + history, no RNG; save = seed+history replays bit-identical), the
+anchoring changes from "weave one fragment at a braid slot" to a **TRIGGER LATTICE: deterministic
+conditions on the spine state activate ENTIRE family BRANCHES** (user, 2026-06-22 — "way more flexibility
+because the triggers are deterministic").
+
+**Trigger grammar (compound, all reading deterministic spine state):**
+> IF `archetype/power-base = X` AND `leanings/motivators ⋛ Y` AND `money/meters ⋛ Z` AND `place = L`
+> AND `era ∈ E` AND `flags include/exclude F` AND `priorCrossing(family) = …` → THEN activate
+> `family.branch[B]` (a whole arc of that family's mined material, not a single vignette).
+
+(User's shorthand: *"if this and this and your leanings are this and your money is this and you're at
+location this then that."*) The inputs — archetype, motivators/leanings, meters, place, era, flags, and
+the per-family crossing-history (memory) — are ALL deterministic, so the same playthrough fires the same
+branches every replay; determinism + the save model are preserved for free.
+
+**Why this beats slot-weaving:** a 1880 spine choice can deterministically pull the Italian family's
+whole rise-arc into your path; a flag from an earlier crossing branches that family's later appearance
+(continuity/memory); the recurring cast's arcs are gated by WHO YOU ARE + WHERE YOU ARE, so each
+playthrough threads a different subset of family branches → emergent variety from authored material, no
+RNG needed. This is the [[emergent-cause-effect-sim]] goal, achieved through deterministic triggers over
+the mined fabric rather than per-cell randomness.
+
+**Implementation:** a `TriggerRule[]` data table (`src/data/saga/triggers.json`) — each rule = a compound
+condition (predicate over the deterministic state vector) + the `family.branch` it activates + priority/
+once-only flags. A pure `evaluateTriggers(state, fabric)` selector (deterministic, replaces/extends
+`braidSelect.ts`) returns the activated branches for the current spine beat; the runner weaves the branch
+INTO the spine prose. Conditions are authored data (designer-tunable), not code.
 
 ### 3. What gets retired / changed
 

@@ -37,8 +37,49 @@ surface-unique (2520/2520 distinct first lines) but the ARCHITECTURE is template
 spine GENERATOR stamps one skeleton 504× ([[craft-spines-not-generator]]). This drives all three:
 uniqueness ([[uniqueness-genuine-intersections]]), scannability ([[scannability-game-novel-balance]]),
 and genuine intersections.
-### VL (user, 2026-06-22): VISUAL LAYER — portraits + map, GenAI-generated, to fix density
-MAJOR new direction. The user REVERSED [[no-portraits-no-asset-art]] ([[visual-layer-revival]]): the
+### FS (user, 2026-06-22): ★FOUNDING-SPINE REDESIGN★ — the governing pivot (OUTRANKS everything below)
+The user identified the real problems: "we are splitting focus too much" + "every story, regardless of
+the line, is written very similarly." Confirmed by reading 4 disparate cells (one decision template +
+one scene skeleton stamped 504×). ROOT CAUSE = the 504-cell lattice itself ([[founding-spine-pivot]]).
+THE FIX: ONE deep spine line founded at America's FOUNDING (1770s) → stars (America's story AS the
+family's story); the 504-act corpus is MINED selectively into braided intersection FABRIC (the 7 waves
+arrive across the centuries + weave into the spine), rest RETIRED. Recovers the original synthesized-
+archetypal-line strength. Design: docs/superpowers/specs/2026-06-22-founding-spine-redesign.md.
+Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the remaining UQ items.
+- [x] **FS-1 design doc — DONE.** Architecture: founding era band prepended to convergence/emergence/
+  ascension; authored spine w/ DISTINCT per-era decision architectures (NOT the one civic-fork template);
+  corpus mined into src/data/saga/fabric/ keyed wave×era×setting; braid selector repointed to weave wave
+  fabric into the spine; onboarding collapses to found-THE-line (reuse ONB-1 naming). Sign-off pre-granted.
+- [ ] **FS-2 founding era band.** Extend eras/macroActs with the 1770s founding band; spine clock spans
+  1776→stars; tests + determinism.
+- [ ] **FS-3 authored spine model.** Replace the 504-cell spineFor generator with authored per-era acts +
+  DISTINCT decision architectures per era (founding/Gilded-Age/modern/stellar). Core craft work; test pins
+  "no two eras share a decision template." ([[craft-spines-not-generator]])
+- [ ] **FS-4 corpus mining = curate BEST + most UNIQUE per family.** scripts/mine-fabric.ts: score the 504
+  acts' scenes/crossings primarily on UNIQUENESS/distinctiveness (what breaks the template), then crossing
+  potential + prose quality + era fit; extract the standouts → src/data/saga/fabric/ keyed family(wave)×
+  era×setting; retire the templated bulk. Turns the 504 into an ASSET (deep well to pick singular moments).
+- [ ] **FS-5 recurring-family cast + DETERMINISTIC-TRIGGER LATTICE.** The fabric is a BOUNDED ~7-family
+  RECURRING CAST (Turtledove model) growing alongside the spine with CONTINUITY + MEMORY (per-family state:
+  name/generation/standing + crossing history, reuse the player `family` shape). ANCHORING = a trigger
+  lattice, NOT slot-weave: a `TriggerRule[]` table (src/data/saga/triggers.json) of COMPOUND deterministic
+  conditions ("IF archetype=X AND leanings⋛Y AND money⋛Z AND place=L AND era∈E AND flags/priorCrossing…
+  → activate family.branch[B]") activating ENTIRE family branches. Pure `evaluateTriggers(state, fabric)`
+  selector (deterministic, replaces/extends braidSelect.ts) → runner weaves the branch INTO the spine prose
+  ([[intersections-woven-not-walls]]). Determinism preserved (all inputs are spine state; same playthrough →
+  same branches). Emergent variety from authored material, no RNG ([[emergent-cause-effect-sim]]). Tests:
+  trigger determinism + replay; live-verify a recurring crossing pays off an earlier one.
+- [ ] **FS-6 author the spine prose.** GenAI flesh the authored spine acts to depth, era-distinct; QA vs
+  guidance; commit-before-run.
+- [ ] **FS-7 onboarding collapse.** found-THE-line flow (reuse ONB-1 naming); retire the cell picker.
+- [ ] **FS-8 live-verify the hour+ playthrough** — one line 1776→stars, waves braiding in, era-distinct
+  decisions, reads as ONE strong story. THEN revisit the visual layer.
+
+### VL (user, 2026-06-22): VISUAL LAYER — portraits + map, GenAI-generated — DEFERRED behind FS
+DEFERRED: fix the story architecture (FS) first; a prettier UI on structurally-identical stories doesn't
+fix the game. Design doc written (docs/.../2026-06-22-visual-layer-design.md), research banked
+([[suzerain-ui-reference]], [[scannability-evidence-rules]]). Resume after FS-8.
+The user REVERSED [[no-portraits-no-asset-art]] ([[visual-layer-revival]]): the
 game feels DENSE / text-only "hurts things" / no map = no visual progress. Build (a) unique per-person
 PORTRAITS and (b) a real cartographic-art MAP backdrop that conveys migration/era PROGRESS. ART DIRECTION
 (refined): NOT cartoony — leverage GenAI FULLY for the game's OWN distinctive, POLISHED, cohesive look +
