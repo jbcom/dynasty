@@ -84,13 +84,23 @@ export function startRungForClass(cls: ArrivalClass): number {
   return cls === "poor" ? 0 : 2;
 }
 
-/** The full founded starting context a wave selection resolves to (fed to the founding seam). */
-export function resolveWaveStart(place: Place): {
+/**
+ * The full founded starting context a wave selection resolves to (fed to the founding seam). The
+ * PLAYER'S chosen arrival class wins when supplied (the onboarding offers poor/middle per cell); we
+ * fall back to the place's intrinsic `arrivalClass`, then "poor". Without the override a player who
+ * picks "a trade and a little money" would still be founded poor — the class choice must reach here.
+ */
+export function resolveWaveStart(
+  place: Place,
+  chosenClass?: ArrivalClass,
+): {
+  cls: ArrivalClass;
   motivators: Motivators;
   classState: ReturnType<typeof initClassState>;
 } {
-  const cls: ArrivalClass = place.arrivalClass ?? "poor";
+  const cls: ArrivalClass = chosenClass ?? place.arrivalClass ?? "poor";
   return {
+    cls,
     motivators: seedMotivatorsForClass(cls),
     classState: initClassState(startRungForClass(cls)),
   };

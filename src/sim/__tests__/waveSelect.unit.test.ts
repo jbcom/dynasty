@@ -70,4 +70,17 @@ describe("wave selection funnel (SS-7)", () => {
     expect(start.motivators.wealth).toBeLessThan(0); // poor wave
     expect(start.classState.rung).toBe(0);
   });
+
+  it("resolveWaveStart honors the PLAYER's chosen class over the place default (PF-6 root gap)", () => {
+    const ireland = content.places.find((p) => p.id === "ireland");
+    if (!ireland) throw new Error("missing ireland");
+    // Picking MIDDLE must found richer than picking POOR — the choice must reach the founding seam,
+    // else poor and middle found identically and the whole class system is invisible in play.
+    const poor = resolveWaveStart(ireland, "poor");
+    const middle = resolveWaveStart(ireland, "middle");
+    expect(poor.cls).toBe("poor");
+    expect(middle.cls).toBe("middle");
+    expect(middle.motivators.wealth).toBeGreaterThan(poor.motivators.wealth);
+    expect(middle.classState.rung).toBeGreaterThan(poor.classState.rung);
+  });
 });

@@ -12,7 +12,7 @@ import {
 import type { Content } from "./sim/content";
 import { foundByComposition } from "./sim/founding";
 import { dealComposition, placeById } from "./sim/places";
-import { resolveWaveStart } from "./sim/waveSelect";
+import { type ArrivalClass, resolveWaveStart } from "./sim/waveSelect";
 import type { GameState } from "./sim/state";
 import { GameStore } from "./ui/gameStore.svelte";
 import { FormFactorStore } from "./ui/formFactor.svelte";
@@ -63,7 +63,12 @@ async function toggleLive(on: boolean): Promise<void> {
 // name; the seed is a hidden random draw (world only). Found a composition for the chosen
 // place (era/gender/archetype seed-dealt as starting defaults the authored Epoch-0 lets the
 // player override in-game), then drop into the Epoch-0 story.
-async function birthGame(seed: string, place: string, surname: string): Promise<void> {
+async function birthGame(
+  seed: string,
+  place: string,
+  surname: string,
+  cls: ArrivalClass,
+): Promise<void> {
   if (!storage) return;
   const placeDef = placeById(content.places, place);
   // Guard: the place comes from the onboarding catalog, so this should never miss — but bail
@@ -75,8 +80,9 @@ async function birthGame(seed: string, place: string, surname: string): Promise<
   // Await the clear so a fast first choice can't race the old save's deletion.
   await clearSave(storage);
   const composition = dealComposition(content.places, content.eras, seed, surname, placeDef);
-  // SS-7: seed the line's starting motivators from the chosen wave's arrival class (the GOAP grounding).
-  const { motivators } = resolveWaveStart(placeDef);
+  // SS-7 + PF-6: seed the line's starting motivators from the PLAYER'S chosen arrival class (poor/
+  // middle), not the place's default — so the class choice actually grounds the run + saga track.
+  const { motivators } = resolveWaveStart(placeDef, cls);
   const founded = foundByComposition(content, { ...composition, seedMotivators: motivators }).state;
   store = new GameStore(content, seed, storage, founded, founded.archetype);
   screen = "play";

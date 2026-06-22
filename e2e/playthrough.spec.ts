@@ -11,12 +11,34 @@ import { expect, test } from "@playwright/test";
  * fallback surface for any cell without an authored act. The run seed is a hidden random draw.
  */
 
-/** The play surface's choice buttons — the saga SceneReader's beats/decision, OR the event card. */
-const PLAY_CHOICE = "[data-testid='scene-reader'] button, [data-event] .choices button";
+/** The play surface's actionable CHOICE — a saga inline-option (glowing text), or an event-card choice. */
+const PLAY_CHOICE = "[data-testid='scene-reader'] .inline-option, [data-event] .choices button";
 
 /** Whether the run has reached the play screen (either the novel reader or the event card). */
 function playSurface(page: import("@playwright/test").Page) {
   return page.locator("[data-testid='scene-reader'], [data-event]");
+}
+
+/**
+ * Advance the play surface one step (paged SceneReader, PF-3): if a CHOICE is up (inline glowing
+ * option or an event-card button), pick the first; otherwise TAP the page to turn to the next
+ * paragraph. The tap layer sits behind the prose (z-index), so a real tap is a force-click on it.
+ * Returns false when neither a choice nor a tap layer is present (e.g. an interlude / end).
+ */
+async function advancePlay(page: import("@playwright/test").Page): Promise<boolean> {
+  const choice = page.locator(PLAY_CHOICE).first();
+  if (await choice.count()) {
+    await choice.click();
+    return true;
+  }
+  const tap = page.locator("[data-testid='scene-reader'] .tap-layer").first();
+  if (await tap.count()) {
+    // Dispatch the click directly — the tap layer sits behind the prose (z-index) so normal
+    // actionability hit-testing would wait forever; the onclick handler is what we need to fire.
+    await tap.dispatchEvent("click");
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -60,10 +82,9 @@ async function startGame(
     await namePhase.locator(".choices button").first().click();
   }
 
-  // Land on the play screen: the meter HUD + the first play surface (novel scene or event card).
-  await expect(page.locator("[data-meter]").first()).toBeVisible({ timeout: 8000 });
+  // Land on the play screen: the slim header + the first play surface (novel scene or event card).
+  await expect(page.locator("[data-testid='saga-head']")).toBeVisible({ timeout: 8000 });
   await expect(playSurface(page).first()).toBeVisible({ timeout: 8000 });
-  await expect(page.locator(PLAY_CHOICE).first()).toBeVisible({ timeout: 8000 });
 }
 
 test("plays from title through the diegetic birth to a legacy report end screen", async ({
@@ -71,26 +92,19 @@ test("plays from title through the diegetic birth to a legacy report end screen"
 }) => {
   await startGame(page);
 
-  // The founded line opens straight into the play surface (the novel scene or an event) with choices.
+  // The founded line opens straight into the play surface (the paged novel, or an event).
   await expect(playSurface(page).first()).toBeVisible();
-  await expect(page.locator(PLAY_CHOICE).first()).toBeVisible();
 
-  // Keep taking the first available choice until the run ends (legacy report).
-  const maxTurns = 300;
+  // Page through prose + take choices until the run ends (legacy report).
+  const maxTurns = 600;
   let ended = false;
   for (let i = 0; i < maxTurns; i++) {
-    const report = page.locator("[data-end]");
-    if (await report.count()) {
+    if (await page.locator("[data-end]").count()) {
       ended = true;
       break;
     }
-    const choice = page.locator(PLAY_CHOICE).first();
-    if (await choice.count()) {
-      await choice.click();
-      await page.waitForTimeout(20);
-    } else {
-      await page.waitForTimeout(50);
-    }
+    if (!(await advancePlay(page))) await page.waitForTimeout(50);
+    await page.waitForTimeout(15);
   }
 
   expect(ended, "run should reach an end state").toBe(true);
@@ -100,7 +114,7 @@ test("plays from title through the diegetic birth to a legacy report end screen"
 
 test("inter-era tabs render their views", async ({ page }) => {
   await startGame(page);
-  await expect(page.locator("[data-meter]").first()).toBeVisible();
+  await expect(page.locator("[data-testid='saga-head']")).toBeVisible();
 
   await page.getByRole("button", { name: "Timeline" }).click();
   await expect(page.getByRole("heading", { name: "Timeline" })).toBeVisible();
@@ -114,7 +128,7 @@ test("inter-era tabs render their views", async ({ page }) => {
 
 test("the lineage tab shows the founded line (FD-13)", async ({ page }) => {
   await startGame(page, { surname: "Sterling" });
-  await expect(page.locator("[data-meter]").first()).toBeVisible();
+  await expect(page.locator("[data-testid='saga-head']")).toBeVisible();
   await page.getByRole("button", { name: "Lineage" }).click();
   await expect(page.getByRole("heading", { name: "The Line" })).toBeVisible();
   await expect(page.getByText("House of Sterling")).toBeVisible();
@@ -123,18 +137,23 @@ test("the lineage tab shows the founded line (FD-13)", async ({ page }) => {
 
 test("a saved run can be continued", async ({ page }) => {
   await startGame(page);
-  await expect(page.locator("[data-meter]").first()).toBeVisible();
+  await expect(page.locator("[data-testid='saga-head']")).toBeVisible();
 
-  // Make one choice so a save exists, then reload.
+  // Page through the opening prose until a choice is up, then take it — a beat/decision autosaves.
+  for (let i = 0; i < 8; i++) {
+    if (await page.locator(PLAY_CHOICE).count()) break;
+    await advancePlay(page);
+    await page.waitForTimeout(30);
+  }
   await page.locator(PLAY_CHOICE).first().click();
-  await page.waitForTimeout(100);
+  await page.waitForTimeout(150);
   await page.reload();
 
   // Load Game / Continue should now be offered and resume into the play screen.
   const cont = page.getByRole("button", { name: /Continue/ });
   await expect(cont).toBeVisible();
   await cont.click();
-  await expect(page.locator("[data-meter]").first()).toBeVisible();
+  await expect(page.locator("[data-testid='saga-head']")).toBeVisible();
 });
 
 test("New Game has no upfront inputs and enters the diegetic onboarding (PL-3)", async ({
