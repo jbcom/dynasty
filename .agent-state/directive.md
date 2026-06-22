@@ -103,11 +103,12 @@ push + PR. See [[one-branch-local-review]].
   dispatch. Full gate green (678 unit, 92 browser, 7 e2e). Reviewer trio folded (code: replay-safe option
   sort + vignette-required source + all-scenes sources; purity/determinism confirmed; simplifier clean).
   PR #98 OPENED. [WAIT] CI + merge.
-- [ ] [WAIT] **WV-2b ACTIVATE the weave — `feat/activate-braid`; awaiting the GenAI dry-run.** #98 merged.
-  A scoped `--pass slot` dry-run on ireland/poor is RUNNING in background (validate the GenAI tags). ON its
-  completion: evaluate the tags, run a scoped `--write` to tag a wave or two so a crossing demonstrably
-  fires, then live-verify in Chrome. A full-corpus tag follows once the scoped run reads well. [WAIT] the
-  background GenAI run (external; notifies on exit).
+- [ ] [WAIT] **WV-2b ACTIVATE the weave — `feat/activate-braid`; awaiting the GenAI re-run.** #98 merged.
+  The 1st dry-run FOUND a bug: the model returns `kind` as "DESTINATION"/"SOURCE" (caps) + synonyms, so
+  all 23 tags failed the lowercase enum → FIXED (normalizeBraidSlots coerces casing/synonyms + strips
+  stray destination vignettes, applied before the gate; + explicit lowercase-enum in the prompt; 680 unit).
+  A 2nd dry-run (ireland/poor) is RUNNING to confirm tags now validate. ON completion: scoped `--write`,
+  live-verify a crossing weaves a rival's borrowed copy, then full-corpus tag. [WAIT] the background run.
 - [ ] [WAIT] **WV-3 emergent variability systems (anti-Suzerain) — after WV-2.** Seeded market/disease
   variability + Yuka rival reactions so playthroughs diverge; budget magnitudes more content
   ([[emergent-cause-effect-sim]]). Keeps the queue non-empty; un-WAIT after WV-2.
