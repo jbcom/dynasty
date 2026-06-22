@@ -89,12 +89,14 @@ round-trips). The gap is UI-only. NOT corpus-blocked — doable now while UQ-2 c
   lineage --write` across the remaining 78 files. Pre-run commit (48292f6) is the revert point. ON completion:
   run the loop determinism test + full suite on the regenerated corpus; if green keep + commit, else reset +
   diff. [WAIT] the bg run.
-- [ ] **UQ-2d semantic-uniqueness + genuine-intersection audit — corpus is STABLE at UQ-2b (lineage reverted),
-  so NOT blocked.** Large-context parallel-reader pass over the scene-pass-corrected corpus: confirm no two cells
-  read structurally/semantically alike and crossings are organic (woven, not walls). Findings → targeted
-  re-author or a guidance patch. ALSO CHECK: baghdad guidance was enriched (018e198) AFTER the scene-pass
-  (Kadoorie→HK, Dawud Pasha, 70%-flag) — verify baghdad's convergence/future-tier scenes reflect it, else a
-  targeted baghdad re-run. (Sequence after UQ-UI if both open — the UI review is the active user directive.)
+- [ ] [WAIT] **UQ-2d semantic-uniqueness + genuine-intersection audit — after UQ-2c4 (lineage now rewriting
+  the corpus it audits).** Large-context parallel-reader pass: confirm no two cells read structurally/
+  semantically alike + crossings are organic (woven, not walls). PRELIMINARY SIGNAL (gathered on stable
+  corpus, encouraging): only ~13% of `:open` scenes lead with the "smell-of-X" frame — the scene-pass
+  largely DID diversify (per-tier sense slots cluster tier-0 opens, but content varies); the gross
+  503/504-identical-skeleton problem looks substantially fixed. Full read still needed for SEMANTIC sameness
+  + crossings. ALSO CHECK: baghdad guidance enriched (018e198) AFTER the scene-pass (Kadoorie→HK, Dawud Pasha,
+  70%-flag) — verify baghdad convergence/future tiers reflect it, else targeted baghdad re-run. [WAIT] UQ-2c4.
 
 ### UQ-UI (user, 2026-06-22): the UI/UX/HUD is TOO TEXT-HEAVY — rethink for scannability
 The hud/views present everything as prose-dense text, not optimized for glance-scanning. Use UI-review
