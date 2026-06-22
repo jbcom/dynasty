@@ -124,11 +124,15 @@ game-scannability with the novel reading experience ([[scannability-game-novel-b
   "Standing" wall to the Dossier bar pattern (label | gold rung-position bar | "1/6"). All Chrome-verified;
   +2 colocated browser tests; tsc 0, 97 browser green. (Mobile capture + the decision-meter-strip finding
   roll into UQ-UI-3/4.)
-- [ ] **UQ-UI-3 rework pass 2: views (timeline/lineage/codex/stats) — after UQ-UI-2.** Same treatment for the
-  data-dense views; tables/cards/grouping over prose where it scans better. Visual tests + Chrome verify.
-- [ ] **UQ-UI-4 rework pass 3: SceneReader balance — after UQ-UI-3.** The novel page must stay readable prose
-  but gain scannability (rhythm/whitespace/drop-letter/choice affordances) per [[scannability-game-novel-balance]].
-  Also LIVE-VERIFY the ONB-1 onboarding funnel here (gender/given/style steps render + flow). Visual tests + Chrome.
+- [x] **UQ-UI-3 views type-role split — DONE (UQ-UI-3 commit).** LineageView (gen-label/life-years tabular/
+  badges → UI face), TimelineView (era year-ranges tabular UI face), StatsView (uPlot legend+axis → UI face,
+  scoped :global). Member names stay display-serif; prose flourishes stay italic. +1 test, 97 browser green.
+- [ ] [WAIT] **UQ-UI-4 SceneReader balance + choice affordances — incorporate SUZERAIN inspiration (user, 2026-06-22:
+  opened Suzerain screenshots in Safari).** Dispatched claude-for-safari agent (a9149f816850f158f) to capture +
+  describe the Suzerain UI references. ON its return: apply the reusable scannability techniques to the
+  SceneReader (paragraph rhythm, tighten the dead gap to "tap to continue", drop-letter/lead-in, and — per the
+  UQ-UI-1b finding — give decision choices a real tappable affordance, not gold prose). Keep it PROSE
+  ([[scannability-game-novel-balance]]). Also live-verify ONB-1 here. Visual tests + Chrome. [WAIT] the Safari agent.
 - [x] **UQ-reconcile arc-hash vs guidance.json — DONE (62beedd).** They're orthogonal layers (shape=FORM/
   pacing, guidance arc=historical MEANING), not redundant. Disambiguated in-prompt: spine intents now say
   "this act moves as a <shape>" (not "a <shape> generation"); scene.ts labels guidance "ARC (historical
