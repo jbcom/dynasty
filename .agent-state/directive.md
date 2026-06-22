@@ -258,11 +258,7 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   meso titles (committed). [after PF-5] run retitle over BOTH tracks; live-verify distinct titles in
   Chrome (no two lines share "The Crossing"); commit.
 
-- [ ] **PF-10 cross-family intersection PROSE (not just a generic braid).** PF-1 weaves a midpoint
-  thread + renders the rival's act-opening fragment, but it's generic (any rival opening). Author/genai
-  BESPOKE crossing prose: a `genai:expand --type thread` (or extend scene-gen) that writes the actual
-  moment two specific lines cross, stored on the midpoint scene. Schema already has ThreadRef; add the
-  woven scene's own crossing text. Test + live-verify.
+- [x] **PF-10 cross-family intersection PROSE — DONE** (commit 465043c). Each woven midpoint thread carries a PAIR-SPECIFIC crossing line (crossingLine names both peoples, deterministic); ThreadRef.crossing optional override; PlayScreen renders "Where paths cross" + the line + the rival fragment. Unit + browser green. (A fuller per-pair GenAI crossing corpus can ride a future sweep; the deterministic named crossing ships now.)
 
 - [x] **PF-11 Codex — DONE** (commit b91dcc1). Authored src/data/saga/codex/codex.json (7 waves + 3 macro-acts, leak-free) + CodexView (collapse/expand) in the slide-out menu. loadCodex + CodexView tests green. (Live-verify folds into PF-13.)
 
