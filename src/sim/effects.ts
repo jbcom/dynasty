@@ -376,13 +376,16 @@ export function applySuccessionToFamily(
   if (effect.begets > 0) {
     const calling = callingById(content.callings, state.founding.calling);
     const parentId = family.protagonistId;
+    // kinFor reads only the parent + grandparent (never the children added below), so it's invariant
+    // across the loop — compute it once.
+    const kin = kinFor(family, parentId);
     for (let i = 0; i < effect.begets; i++) {
       const begotten = beget(
         family,
         parentId,
         begetYear(year, i),
         culture,
-        kinFor(family, parentId),
+        kin,
         rng.fork(`beget:${label}:${i}`),
       );
       const child = begotten.child;
