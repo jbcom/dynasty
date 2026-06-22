@@ -268,10 +268,11 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
 
 - [x] **PF-8 saga succession drives REAL family advancement — DONE** (commit ecd42ca). Extracted the mortality/succeed/continue-as-heir block from applyChoice into pure exported advanceFamily(content,state,fromYear,rng); applyChoice + the saga advanceRunClock both call it (separate rng stream, replay-safe). Reading the novel now ages + succeeds the line. Event path unchanged (18 tests); saga-driven run advances year + deterministic.
 
-- [ ] **PF-9 act titles: run the retitle pass.** UNBLOCKED (corpus complete + QA'd). 6 generic spine
-  cues are reused ~57× each ("The Crossing"/"The Climb"/etc.) — only 163 of 504 titles are distinct.
-  RUNNING scripts/retitle-saga.ts over the whole corpus (per-act meso title rooted in its opening prose).
-  ON DONE: verify distinctness (no generic title reused across lines), commit; live-verify folds into PF-13.
+- [ ] [WAIT] **PF-9 act titles: run the retitle pass.** UNBLOCKED (corpus complete + QA'd). 6 generic
+  spine cues are reused ~57× each ("The Crossing"/"The Climb"/etc.) — only 163 of 504 titles distinct.
+  RUNNING scripts/retitle-saga.ts over the whole corpus (bg, monitor b905rsje3; per-act meso title rooted
+  in its opening prose). ON DONE: verify distinctness (no generic title reused across lines), commit;
+  live-verify folds into PF-13.
 
 - [x] **PF-10 cross-family intersection PROSE — DONE** (commit 465043c). Each woven midpoint thread carries a PAIR-SPECIFIC crossing line (crossingLine names both peoples, deterministic); ThreadRef.crossing optional override; PlayScreen renders "Where paths cross" + the line + the rival fragment. Unit + browser green. (A fuller per-pair GenAI crossing corpus can ride a future sweep; the deterministic named crossing ships now.)
 
