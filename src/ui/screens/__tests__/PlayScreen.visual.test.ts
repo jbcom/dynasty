@@ -19,7 +19,7 @@ function view(): GameView {
   return {
     state,
     currentEvent: content.allEvents[0] ?? null,
-    saga: { actTitle: null, scene: null, ended: false },
+    saga: { actTitle: null, scene: null, threads: [], ended: false },
     lastLedger: [],
   };
 }

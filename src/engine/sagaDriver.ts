@@ -13,7 +13,12 @@
  */
 
 import type { Motivators } from "../sim/motivators";
-import { actsForTier, type SagaCorpus } from "../sim/saga/player";
+import {
+  actsForTier,
+  type BraidedThread,
+  resolveThreads,
+  type SagaCorpus,
+} from "../sim/saga/player";
 import {
   type ActState,
   actEnded,
@@ -36,6 +41,8 @@ export interface SagaCell {
 export interface SagaFrame {
   actTitle: string | null;
   scene: Scene | null;
+  /** Cross-family intersections braided into the current scene (ink threads) — empty when none fire. */
+  threads: BraidedThread[];
   ended: boolean;
 }
 
@@ -65,11 +72,13 @@ export class SagaDriver {
     this.state = startAct(this.corpus, act, motivators, flags);
   }
 
-  /** The UI snapshot: the act title + current scene (null when no act is authored for this cell). */
+  /** The UI snapshot: the act title + current scene + any braided cross-family threads. */
   frame(): SagaFrame {
+    const scene = this.state ? currentScene(this.corpus, this.state) : null;
     return {
       actTitle: this.actTitle,
-      scene: this.state ? currentScene(this.corpus, this.state) : null,
+      scene,
+      threads: scene ? resolveThreads(this.corpus, scene) : [],
       ended: this.state ? actEnded(this.state) : false,
     };
   }

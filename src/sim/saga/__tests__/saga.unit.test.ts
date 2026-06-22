@@ -7,8 +7,10 @@ import {
   buildCorpus,
   nextScene,
   openingScene,
+  resolveThreads,
   sceneEligible,
 } from "../player";
+import { ActChapterSchema, SceneSchema } from "../schema";
 import { FIXTURE_ACT } from "./fixture";
 
 /**
@@ -65,5 +67,52 @@ describe("narrative acts (novel model)", () => {
     const s = corpus.scenes.get("sc:fix:open");
     if (!s) throw new Error("no scene");
     expect(sceneEligible(s, new Set())).toBe(true);
+  });
+
+  it("resolves a cross-family thread (intersection) to the rival wave's act-opening fragment", () => {
+    // A second wave's act + a scene in the primary wave that threads to it.
+    const rivalAct = ActChapterSchema.parse({
+      id: "act:rival:political:t0",
+      wave: "rival",
+      archetype: "political",
+      tier: 0,
+      macroAct: "convergence",
+      title: "Act I — The Rival",
+      scenes: ["sc:rival:open"],
+    });
+    const rivalScene = SceneSchema.parse({
+      id: "sc:rival:open",
+      sense: "sight",
+      prose: [
+        "Across the same grey harbour another line steps ashore, and for one moment your paths cross.",
+        "You do not know their name yet, but the century will make you rivals or allies.",
+      ],
+    });
+    const threading = SceneSchema.parse({
+      id: "sc:thread:meet",
+      sense: "sound",
+      prose: [
+        "The dock is a din of a hundred tongues, and one of them is about to matter to your line.",
+        "A family from another wave moves through the crowd, and the world tilts a degree.",
+      ],
+      thread: [{ wave: "rival", atTier: 0 }],
+    });
+    const c = buildCorpus([rivalAct], [rivalScene, threading]);
+    const braided = resolveThreads(c, threading);
+    expect(braided).toHaveLength(1);
+    expect(braided[0]?.wave).toBe("rival");
+    expect(braided[0]?.scene.id).toBe("sc:rival:open");
+    // A thread to an unauthored wave simply doesn't fire.
+    expect(
+      resolveThreads(
+        c,
+        SceneSchema.parse({
+          id: "x",
+          sense: "smell",
+          prose: ["A scene with a thread that points nowhere at all."],
+          thread: [{ wave: "ghost", atTier: 0 }],
+        }),
+      ),
+    ).toEqual([]);
   });
 });

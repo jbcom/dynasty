@@ -132,4 +132,30 @@ export function actsForTier(
   return undefined;
 }
 
+/** A braided cross-family fragment: the rival wave + the opening scene of its act at the thread's tier. */
+export interface BraidedThread {
+  wave: string;
+  scene: Scene;
+}
+
+/**
+ * Resolve a scene's cross-family INTERSECTIONS (ink threads). For each ThreadRef the scene declares,
+ * find ANY act of the referenced wave at that tier (archetype-agnostic — paths cross regardless of
+ * the rival's power base) and return its opening scene as a braided fragment to weave in. A ref that
+ * points at an unauthored wave/tier is skipped (the intersection simply doesn't fire). Pure.
+ */
+export function resolveThreads(corpus: SagaCorpus, scene: Scene): BraidedThread[] {
+  const out: BraidedThread[] = [];
+  for (const ref of scene.thread) {
+    let braided: Scene | undefined;
+    for (const act of corpus.acts.values()) {
+      if (act.wave !== ref.wave || act.tier !== ref.atTier) continue;
+      braided = openingScene(corpus, act, new Set());
+      if (braided) break;
+    }
+    if (braided) out.push({ wave: ref.wave, scene: braided });
+  }
+  return out;
+}
+
 export type { MotivatorAxis };
