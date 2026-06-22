@@ -335,7 +335,10 @@ async function passSuccession(ref: ActFileRef, gen: Generate): Promise<void> {
     const closeId = act.scenes.find((id) => id.endsWith(":close"));
     if (!closeId) continue;
     const close = file.scenes.find((s) => s.id === closeId);
-    if (!close || close.decision) continue; // already has one
+    // Skip only if the close already carries a SUCCESSION-bearing decision — not just any decision. A
+    // regenerated act may have a non-succession close decision; that still needs the dynastic fork.
+    if (!close) continue;
+    if (close.decision?.options?.some((o) => o.succession?.takesPartner)) continue;
     const req: SuccessionRequest = {
       wave: ref.wave,
       waveLabel: waveLabel(ref.wave),

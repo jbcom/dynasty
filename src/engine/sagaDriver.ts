@@ -54,12 +54,16 @@ export interface SagaFrame {
  * engine can write them back to the run's personality vector.
  */
 export class SagaDriver {
-  private readonly corpus: SagaCorpus;
+  private readonly _corpus: SagaCorpus;
+  /** The loaded corpus — read-only access for deterministic cross-reads (e.g. crossing nudges). */
+  get corpus(): SagaCorpus {
+    return this._corpus;
+  }
   private state: ActState | null = null;
   private actTitle: string | null = null;
 
   constructor(corpus: SagaCorpus) {
-    this.corpus = corpus;
+    this._corpus = corpus;
   }
 
   /** Begin (or restart) the act for a cell, carrying the line's current motivators + flags. */

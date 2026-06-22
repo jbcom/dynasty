@@ -11,6 +11,52 @@ go in the direction of." So: self-pace; pick the highest-value improvement each 
 own the full PR loop; keep the directive a living plan (expand when discovery reveals
 work, compress when items resolve). Work SERIALLY, no agent swarm
 ([[agent-swarm-discipline]]). Every change stays 0-leak + 0-harness-findings + green CI.
+
+**NEVER ASK THE USER FOR DIRECTION (user, 2026-06-22, emphatic).** Do NOT call AskUserQuestion
+to pick the next unit, choose between approaches, or confirm scope — the loop handles EVERYTHING
+autonomously: discover the highest-value gap, decide, design, build, test, PR, merge, keep CD green,
+then pick the next. "Let the loop decide" is the standing answer to every "where next" question. The
+ONLY legitimate stops are the true blockers (interactive credential entry; a spend needing the user's
+payment auth; physical hardware) — never a design/scope/priority choice. When a unit is a genuine
+scope-flip, DECIDE IT and record the decision in the directive + decisions.ndjson; do not surface it.
+**NEVER DRAIN THE QUEUE TO ZERO (user, 2026-06-22).** The Stop hook keeps the loop working ONLY while
+≥1 actionable (non-WAIT) `[ ]` item remains AND Status is ACTIVE — an empty queue or a flipped Status
+lets the session stop, which is the leak that made the loop idle/ask. RULES: (a) Status stays ACTIVE
+indefinitely — never flip it to RELEASED while autonomous. (b) The ROLLING BACKLOG below always holds
+several concrete actionable items; BEFORE marking the last one `[x]`, APPEND the next 1-3 discovered
+units so the count never reaches 0. (c) If you ever can't think of a next unit, that itself is the
+task: add a `[ ] AUDIT: enumerate the next depth units` item and do it. The queue is self-replenishing
+by construction.
+
+## ROLLING BACKLOG — always non-empty, work top-down, append before draining
+
+- [x] **RB-2 per-tier content depth — DONE.** Audit showed prose depth already uniform (every scene
+  2-4 paras); only 2 under-generated cells had <2 beats — regenerated to the full weave (0 thin-beat).
+  Fixed a real passSuccession skip bug (skipped any-decision closes, not just succession-bearing ones).
+  504/504 closes have succession; integrity intact.
+- [x] **RB-6 verify hour+ run end-to-end — DONE (engine-level; Chrome MCP was disconnected).** Drove a
+  full founded playthrough reading the novel across ALL 7 waves: 6/7 (ireland/bavaria/italian/ashkenazi/
+  scandinavian/chinese) play the full ~150 scenes / ~90 decisions / 30 crossings to 2054 with a
+  convergence ending — the hour+ run is real. FOUND A GAP → RB-7: baghdad (the only non-1885 origin,
+  founds 762 CE) goes extinct ~1946 after 16 scenes because the timeline eras are calibrated for the
+  1885 waves, so advanceFamily ages the line across century-gaps between tiers and the heirs die out.
+- [ ] [WAIT] **RB-7 baghdad timeline mismatch.** ROOT CAUSE (analyzed): baghdad founds at year 762 but
+  state.eraIndex=1 = the "origins" era (yearStart 1885, yearEnd 1946, budget 16). advanceTimeline steps
+  year by span/budget=4y and caps at era.yearEnd 1946 → after the 16-beat budget the era rolls and the
+  762-vs-1885 mismatch ages the line to death by 1946 (16 scenes). The saga clock is wrongly driven by
+  the NY-line era budget. FIX: in advanceRunClock, advance the SAGA year by a generational step
+  (~one human generation per close/tier, ~bounded 20-30y per scene-cluster) DECOUPLED from the NY eras,
+  so any founding year (762 or 1885) plays a full 6-generation run. Touches loop.ts:advanceRunClock —
+  do AFTER #83 merges (overlaps that file). Verify all 7 waves reach ~150 scenes; test replay-determinism + PR.
+  [WAIT] #83 (loop.ts) to merge first.
+- [ ] [WAIT] **RB-3 presentation polish** — wire per-act caricature portrait/scene compositing (src/render),
+  per-era ambient audio depth, and animated scene transitions in SceneReader; live-verify + PR. (Start
+  from clean main after #83 merges — branch hygiene: one unit per branch off a settled base.)
+- [ ] [WAIT] **RB-4 surface interactive convergence in the UI** — show the player when a crossing shifted a
+  rival (the slide-out "OTHER LINES" reflects nudges); a brief in-scene cue. PR. DEPENDS on #83's
+  convergence code being on main.
+- [ ] [WAIT] **RB-5 codex/timeline depth** — the CodexView + a timeline view of the line's generations +
+  the rival world's trajectory; PR. (After #83 merges.)
 ALSO OWN (user, 2026-06-21): merge the release-please PRs, and keep ALL workflows green —
 not just feature-PR CI, but the post-merge CD/Release on main too. PR #47 fixed a
 long-standing CD APK break (proguard-android.txt → -optimize.txt for Gradle 9.6/R8). Release

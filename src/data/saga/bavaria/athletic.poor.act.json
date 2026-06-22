@@ -17,22 +17,6 @@
       "cls": "poor"
     },
     {
-      "id": "act:bavaria:athletic:poor:t1",
-      "wave": "bavaria",
-      "archetype": "athletic",
-      "tier": 1,
-      "macroAct": "convergence",
-      "title": "Act II — The Broad-Shouldered Acre",
-      "scenes": [
-        "act:bavaria:athletic:poor:t1:open",
-        "act:bavaria:athletic:poor:t1:rising",
-        "act:bavaria:athletic:poor:t1:midpoint",
-        "act:bavaria:athletic:poor:t1:turn",
-        "act:bavaria:athletic:poor:t1:close"
-      ],
-      "cls": "poor"
-    },
-    {
       "id": "act:bavaria:athletic:poor:t2",
       "wave": "bavaria",
       "archetype": "athletic",
@@ -95,6 +79,22 @@
         "act:bavaria:athletic:poor:t5:close"
       ],
       "cls": "poor"
+    },
+    {
+      "id": "act:bavaria:athletic:poor:t1",
+      "wave": "bavaria",
+      "archetype": "athletic",
+      "cls": "poor",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — Timber-Heft and Turf-Turning",
+      "scenes": [
+        "act:bavaria:athletic:poor:t1:open",
+        "act:bavaria:athletic:poor:t1:rising",
+        "act:bavaria:athletic:poor:t1:midpoint",
+        "act:bavaria:athletic:poor:t1:turn",
+        "act:bavaria:athletic:poor:t1:close"
+      ]
     }
   ],
   "scenes": [
@@ -552,304 +552,6 @@
             "setFlags": [
               "legendary_lone_athlete",
               "line_narrowed"
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "id": "act:bavaria:athletic:poor:t1:open",
-      "sense": "smell",
-      "prose": [
-        "The soil here did not merely turn; it exhaled a cold, ancient breath of sour loam, black mold, and the sharp, turpentine stink of split green pine that clung to the back of the throat. Every heave of the iron mattock released the damp, cellar-like reek of rotting roots and dormant grubs, a smell of decay waiting to be forced into fertility. Under the heavy sky, your own wool shirt stank of salt-crusted sweat and stale wood-smoke, a bitter, animal musk that marked you as a beast of burden in a forest that had known only the clean breath of winter.",
-        "From the edge of the clearing, the thin, scorched scent of roasted chicory drifted from the embers, a poor man’s coffee that offered more soot than sustenance. The wind carried the wet, vinegar-sharp odor of freshly sawn birch, its sap weeping from the raw cuts and gluing the sawdust to your blistered palms. It was a landscape defined by these harsh, biting essences—the greasy oil of the grindstone, the iron tang of the blade, and the cold, unwashed draft of a wilderness that yielded nothing without a toll of blood and bone."
-      ],
-      "beats": [
-        {
-          "prose": [
-            "A massive, three-forked oak blocked the south light, its trunk thick as an ox-cart and its roots anchored in the stony till. To swing against such timber required a blank, rhythmic stupor, ignoring the hot ache in the shoulders and the sour taste of exhaustion rising in the mouth."
-          ],
-          "choice": {
-            "text": "Double your efforts, pushing through the fatigue to bring down the tree before the day's end.",
-            "motivatorShift": {
-              "power": 1,
-              "lineage": 1
-            },
-            "setFlags": [
-              "pushed_physical_limit"
-            ],
-            "gather": true
-          }
-        }
-      ],
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
-      "next": "act:bavaria:athletic:poor:t1:rising"
-    },
-    {
-      "id": "act:bavaria:athletic:poor:t1:rising",
-      "sense": "touch",
-      "prose": [
-        "The raw, splintered lip of the salvaged oak joist bit into the meat of your shoulder, its cold, soot-grained belly scraping your skin like a blacksmith's rasp. Every heave was a gritty transaction between muscle and gravity in the narrow attic crawl, the ancient timber groaning against your ribs as you wedged it into the crumbling joist-pockets of the tenement wall. Your hands were mapped with minor violences—flat-headed iron square-nails had torn the flesh of your thumb, and the caustic dust of slaked lime from the mortar clung to your sweaty forearms, drying them to a chalky tightness. This cramped roost in the city's underbelly was not built of grand plans but of friction, the heavy ache in your lower back radiating outward like the low, smoky heat of a brick kiln.",
-        "Beside you, the small hands of your eldest were raw and wind-bitten, their knuckles split into tiny red mouths from dragging salvaged floorboards through the freezing slush of the alleyway below. You could feel the draft even now, a thin, greasy needle pricking through the unplastered gaps in the old brickwork, seeking out the damp napes of the children's necks as they huddled near the coal-crate. The very air of the tenement quarter had a sharp, industrial edge to it, grazing your cheeks like a dull razor and reminding you that without more horsehair-mud stuffed into these masonry seams, the coming winter would peel the heat right from your bones."
-      ],
-      "beats": [
-        {
-          "prose": [
-            "The greasy, home-spun wool of your collar-band chafed against the salt-scabbed skin of your throat, a stubborn, prickling misery that seemed to tighten with every heavy breath you drew in the dim garret."
-          ],
-          "choice": {
-            "text": "Adjust the collar with a sigh, recognizing the garment as a symbol of your family's enduring grit.",
-            "motivatorShift": {
-              "worldview": -1,
-              "tradition": 1
-            },
-            "setFlags": [
-              "enduring_grit"
-            ],
-            "gather": true
-          }
-        }
-      ],
-      "decision": {
-        "tier": "secondary",
-        "prompt": "The growing family needs more space, but resources are tight. How do you prioritize your next efforts?",
-        "options": [
-          {
-            "text": "Focus on partitioning a drafty corner of the tenement attic immediately, providing minimal but crucial additional shelter.",
-            "motivatorShift": {
-              "wealth": -1,
-              "lineage": 1,
-              "tradition": 1
-            },
-            "setFlags": [
-              "expanded_shelter_quickly"
-            ]
-          },
-          {
-            "text": "Allocate time to clearing the rubble-strewn alleyway courtyard for a kitchen-plot, hoping to yield a meager harvest that will support future expansion.",
-            "motivatorShift": {
-              "wealth": 1,
-              "worldview": 1,
-              "power": -1
-            },
-            "setFlags": [
-              "prioritized_garden"
-            ]
-          }
-        ]
-      },
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
-      "next": "act:bavaria:athletic:poor:t1:midpoint"
-    },
-    {
-      "id": "act:bavaria:athletic:poor:t1:midpoint",
-      "sense": "sound",
-      "prose": [
-        "The rhythm of the settlement is a harsh, metallic clangor, led by the heavy, rhythmic striking of the smithy's anvil that reverberates through the valley like a slow, iron pulse. It is an industrial heartbeat, flat and unyielding, swallowing the wet thud of axes chewing into green timber and the high, thin wheeze of a crosscut saw. Below these rises the constant, low-grade rumble of gravel shifting under iron-rimmed wheels, punctuated by the sharp, wet slap of mud against boot leather as men and beasts drag the raw bones of a town from the clay. Every voice is raised to a shout simply to carry over the din, a cacophony of ambition where no draft is drawn in silence.",
-        "Then comes a sharp, cracking report—the wet, splintering groan of a pine heart giving way, or perhaps the dry snap of a black-powder charge clearing a stump—and for the space of a single breath, the lesser noises die. In that brief, ringing hollow, the babble of the settlement rushes back in a muddier torrent, led by the unmistakable, high-pitched bickering of the neighboring {family_name}s, whose sharp tongues and rapid-fire cadence have already become the neighborhood's daily theater. Their children’s shrieking laughter cuts through the damp air, a reminder that this valley is no longer a silent wilderness of towering pines, but an unruly, competing hive where every family is screaming for their share of the dirt."
-      ],
-      "beats": [
-        {
-          "prose": [
-            "A heavy, synchronized thudding of iron-shod boots rises from the southern trail, heralded by a volley of coarse, guttural laughter and the wet slither of dragged chains. The local timber-cutters are returning from the high ridge, their boasts carrying far ahead of them through the thinning canopy like the barking of crows."
-          ],
-          "choice": {
-            "text": "Continue your work, observing their movements discreetly, noting their efficiency and their collective strength.",
-            "motivatorShift": {
-              "power": 1,
-              "wealth": 1
-            },
-            "setFlags": [
-              "observed_lumberjacks"
-            ],
-            "gather": true
-          }
-        }
-      ],
-      "thread": [
-        {
-          "wave": "chinese",
-          "atTier": 1,
-          "crossing": "The biting stench of sulfurous coal smoke burns the nostrils as {family_name} steadies a cracked iron axle on the anvil, catching the eye of the {surname} merchant who silently slides three heavy brass coins across the grease-slicked bench to secure the iron-shod spades his diggers desperately need. Neither speaks the other's tongue, yet the heavy nod exchanged through the rising steam seals a quiet alliance against the brutal winter looming over the valley.",
-          "relation": "contributing"
-        }
-      ],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
-      "next": "act:bavaria:athletic:poor:t1:turn"
-    },
-    {
-      "id": "act:bavaria:athletic:poor:t1:turn",
-      "sense": "sight",
-      "prose": [
-        "The world from this bald ridge is a study in raw yellow timber and wet clay, a jagged seam ripped clean through the ancient timberland. Below, the valley floor bristles with the pale, skeletal frames of cabins under construction, their fresh-hewn spruce white as bone against the dark, brooding green of the pines. Smudges of greasy gray smoke rise from mud-and-wattle chimneys, drifting sluggishly toward the clouds like spirits reluctant to leave the hearths. The dirt tracks, churned into deep ruts by iron-rimmed wheels, form a brown, crooked spine that attempts to hold these scattered clearings together before the forest can swallow them whole again.",
-        "Every line of division is etched sharp against the dark loam, a map of sweat and stubborn claim-laying. Down where the bottomland flattens, your nearest neighbor’s cabin stands out with a raw, cherry-red door—a sudden, violent puncture of color amidst the gray cedar shingles and dun-colored earth. Through the haze of midday heat, figures move like clockwork dolls: a woman’s grey apron flutters beside a line of stiff hemp, children weave through the stump-pocked grass, and a team of oxen strains against a root-choked furrow, their dark flanks glistening with sweat. It is a shifting, restless mosaic of survival, and every fence post planted is a silent declaration of who will rule this valley and who will be ground into its dust."
-      ],
-      "beats": [
-        {
-          "prose": [
-            "The neighboring fence line is a row of split-oak posts, their bases charred to ward off rot, strung with wire that catches the sharp midday glare like a silver thread."
-          ],
-          "choice": {
-            "text": "Mentally assess the boundary, considering how best to secure and expand your own family's holdings.",
-            "motivatorShift": {
-              "power": 1,
-              "wealth": 1
-            },
-            "setFlags": [
-              "assessed_rival_holdings"
-            ],
-            "gather": true
-          }
-        }
-      ],
-      "decision": {
-        "tier": "major",
-        "prompt": "The community is growing, and its character is still fluid. How will the {family_name} line establish its presence and influence its development?",
-        "options": [
-          {
-            "text": "Champion the establishment of a community athletic ground, fostering a spirit of competition and physical prowess.",
-            "motivatorShift": {
-              "honor": 2,
-              "lineage": 2,
-              "reach": 2,
-              "tradition": 1,
-              "politics": 1,
-              "wealth": -1
-            },
-            "setFlags": [
-              "founded_athletic_ground",
-              "community_athletic_focus"
-            ]
-          },
-          {
-            "text": "Focus intensely on developing your own land and resources, proving the value of hard work and self-reliance above all else.",
-            "motivatorShift": {
-              "wealth": 2,
-              "power": 1,
-              "worldview": 1,
-              "lineage": 1,
-              "reach": -1,
-              "politics": -1
-            },
-            "setFlags": [
-              "prioritized_self_reliance",
-              "private_land_focus"
-            ]
-          },
-          {
-            "text": "Engage in local politics, seeking to secure favorable land deeds and influence the town's initial regulations.",
-            "motivatorShift": {
-              "politics": 2,
-              "power": 2,
-              "wealth": 1,
-              "reach": 1,
-              "honor": -1,
-              "worldview": -1
-            },
-            "setFlags": [
-              "engaged_local_politics",
-              "political_influence_focus"
-            ]
-          }
-        ]
-      },
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
-      "next": "act:bavaria:athletic:poor:t1:close"
-    },
-    {
-      "id": "act:bavaria:athletic:poor:t1:close",
-      "sense": "taste",
-      "prose": [
-        "The tongue remembers the salt first—that coarse, grey mineral dug from the old flats, preserving what little mutton could be spared from the winter's cull. It is a lean, tallow-heavy flavor, tasting of the scrub-oak smoke that cured it in the hollow trunk behind the lean-to. Beneath the grease lies the clean, mineral bite of wild chicory, dug from the stony creek bank by fingers still too small to grip an axe-helve. In this cabin, every swallow is an accounting; one does not merely feed the belly, but measures out the very soil of the province, bitter and hard-bought, into the blood of those who will inherit the spade.",
-        "Across the scarred trestle table, {given_name} chews with the slow, deliberate gravity of the hungry. In the child's mouth, the dry rye loaf—leavened with nothing but wild yeast and the sour dregs of the last brewing—clashes with the rare, dark sweetness of elderberry boiled down to a thick paste. It is the taste of a borderland transition: the coarse flour of ancestral poverty grinding against the sharp, bright nectar of a clearing newly won. You watch the throat work, knowing that this tongue is being tutored in the hard logic of the soil, learning to find sustenance in the bark and the root before it ever tastes the fat of the valley."
-      ],
-      "beats": [
-        {
-          "prose": [
-            "The cold, iron-heavy draught of the first well-bucket cuts through the tallow on your palate, tasting of deep limestone and the dark, untouched belly of the ridge."
-          ],
-          "choice": {
-            "text": "Speak to {given_name} of the bone-deep labor required to pierce that stubborn rock, mapping the path of self-reliance with the cold water still wet on their chin.",
-            "motivatorShift": {
-              "worldview": 1,
-              "power": 1
-            },
-            "setFlags": [
-              "taught_self_sufficiency"
-            ],
-            "gather": true
-          }
-        }
-      ],
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
-      "decision": {
-        "tier": "major",
-        "prompt": "The greasy film of the mutton-tallow still clings to the roof of my mouth, cold and heavy, as the mountain wind whistles through the cabin logs. I, {given_name} {surname}, have built this body on bitter chicory and sheer endurance. To ensure this physical strength is not reclaimed by the Bavarian snows, how shall the legacy of {family_name} endure?",
-        "options": [
-          {
-            "text": "We will bring the sturdy daughter of the valley miller to this high hearth. Her back is built for the heavy timber-hauling, and together we will raise two children who know the exact weight of our hard-won soil.",
-            "motivatorShift": {
-              "lineage": 2,
-              "tradition": 1,
-              "wealth": 1,
-              "reach": -1
-            },
-            "setFlags": [
-              "miller_alliance",
-              "hardy_heirs_of_bavaria"
-            ],
-            "succession": {
-              "takesPartner": true,
-              "begets": 2
-            }
-          },
-          {
-            "text": "There is no space in this cabin for a stranger's breath. I will bring my sister's fatherless boy to these high peaks, hardening his soft limbs against the mountain gales to make him a worthy {surname} without ever sharing my bed.",
-            "motivatorShift": {
-              "honor": 2,
-              "lineage": 1,
-              "wealth": -1,
-              "worldview": 1
-            },
-            "setFlags": [
-              "nephew_raised_to_peak",
-              "spartan_solitude"
-            ],
-            "succession": {
-              "takesPartner": false,
-              "begets": 1
-            }
-          },
-          {
-            "text": "Let the bloodline freeze here on the heights. I will pour every breath of my lungs and every ounce of my muscle into guiding the salt-traders through the deadliest passes, leaving our name as a myth whispered only by the wind.",
-            "motivatorShift": {
-              "power": 2,
-              "reach": 2,
-              "lineage": -3,
-              "worldview": 2
-            },
-            "setFlags": [
-              "salt_pass_legend",
-              "line_dissolved_in_stone"
             ]
           }
         ]
@@ -2563,6 +2265,367 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "id": "act:bavaria:athletic:poor:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The stench of hemlock-tannin and wet, rotting riverbed silt clung to {given_name}’s woolen shirt like a second skin. Every lift of the heavy hemlock beams, sliced raw from the surrounding woods to build the foundation of the settlement's first tavern-house, squeezed a sweet, resinous sap that mingled with the sharp tang of horse manure and the sour, vinegar-like fermentation of old sauerkraut bubbling in the communal hearth-pots down the lane.",
+        "To lift, to carry, to slide the pine logs into place required a thick neck and a back that didn't know how to yield; {family_name} blood had always been measured in the width of the shoulders rather than the weight of the purse. Every heavy breath sucked in the wet, mossy rot of this new soil, a perfume of hard-bought growth that would either make them men of substance or bury them beneath the roots."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You set your shoulder against the splintering log, refusing to let the local crew see you falter."
+          ],
+          "choice": {
+            "text": "Push through the pain to establish dominance among the laborers.",
+            "motivatorShift": {
+              "power": 2,
+              "honor": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "hard_worker"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You take a measured break to adjust your stance, letting the others boast while you preserve your joints."
+          ],
+          "choice": {
+            "text": "Value your long-term strength over immediate respect.",
+            "motivatorShift": {
+              "worldview": 2,
+              "tradition": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "cautious_worker"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:athletic:poor:t1:rising"
+    },
+    {
+      "id": "act:bavaria:athletic:poor:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The cold well-water was a sharp shock against raw, split knuckles that refused to heal in the damp air. {given_name} dragged a rough flaxen cloth across a face sunburned and wind-scratched, feeling the tiny grains of sand from the mortar pit embedded deep under the fingernails. Even the coarse wool of the family bedding, brought in cedar chests across the ocean, felt like nettles against shoulders bruised from hauling limestone blocks for the church foundations.",
+        "Inside the cabin, the floorboards were still green wood, sweating sticky yellow pitch that caught the soles of bare feet and held fast. The simple acts of life—scrubbing the mud from a younger sibling's knees or gripping the smooth hickory handle of a splitting maul—were defined by this relentless friction against a wild, unpolished landscape that demanded muscle for every square inch of shelter."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You carve small wooden toys for the children using your rare, quiet hours of rest."
+          ],
+          "choice": {
+            "text": "Dedicate your scarce energy to keeping the family's spirits high.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "family_anchor"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You use your evenings to lift stones behind the shed, sharpening your body like a tool."
+          ],
+          "choice": {
+            "text": "Focus entirely on building physical supremacy for the trials ahead.",
+            "motivatorShift": {
+              "power": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "brute_force"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The local drayage master offers a premium to anyone who can haul the water-logged beer casks from the marsh-stranded wagon. It is a risk to your back, but the coins are desperate.",
+        "options": [
+          {
+            "text": "Take the heavy load alone to win both coin and notoriety.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "fame_heavy_lift"
+            ]
+          },
+          {
+            "text": "Propose a team lift with other young immigrants, sharing the meager pay.",
+            "motivatorShift": {
+              "reach": 2,
+              "politics": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "community_builder"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:athletic:poor:t1:midpoint"
+    },
+    {
+      "id": "act:bavaria:athletic:poor:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The air of the settlement was a chaotic din of iron striking iron, the harsh scraping of crosscut saws, and the guttural shouts of old-world dialects clashing in the muddy market square. Above the general clamor rose the heavy, rhythmic thud of the pile-driver at the new canal lock, a sound that vibrated straight through the soles of {given_name}’s boots. It was a language of force, and everyone in the valley knew that the loudest voices belonged to those who held the land, while the quietest were those who merely dug it.",
+        "Amidst this roar, a rival crew of dockworkers from a different parish had begun to boast of their strength, their jeers cutting through the wet wind as they challenged any 'forest-born' boy to lift the anchor stone at the wharf. The crowd's murmurs died down, waiting to see if anyone from the {family_name} line would step into the circle, where the heavy, iron-ringed limestone block sat like a silent judge."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You step forward, your boots sucking loudly in the mud as the crowd falls silent."
+          ],
+          "choice": {
+            "text": "Answer the challenge directly to silence the scoffers.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "won_the_lift"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You mock their childish games aloud, keeping your strength for paid work."
+          ],
+          "choice": {
+            "text": "Dismiss their vanity and walk away to your shift.",
+            "motivatorShift": {
+              "wealth": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "pragmatic_worker"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:athletic:poor:t1:turn"
+    },
+    {
+      "id": "act:bavaria:athletic:poor:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "From the ridge where the new timber chapel stood, the settlement looked like a raw wound in the dark green forest, a patchwork of gray split-rail fences and smoking chimneys. Below, the muddy lanes of the flats were choked with the low-ceilinged shacks of the laborers, while the rising stone mansions of the English-speaking land-agents sat high on the western slope, dry and sunlit. {given_name} watched the light catch the glass windows of those grand houses—glass that had been hauled up the cliffs on the backs of men who slept under canvas.",
+        "A choice had crystallized in the layout of the streets: the town council wanted to clear the swampy common ground where the immigrant families grazed their few goats and ran their athletic matches to build a private toll-road for the timber barons. To lose that common field meant losing the one place where the community gathered to test their strength and remember who they were before they crossed the water."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You stare down at the blueprints laid out on the tavern table, your hand tracing the boundary lines."
+          ],
+          "choice": {
+            "text": "Vow to defend the common field through physical presence and protest.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 1,
+              "wealth": -2
+            },
+            "setFlags": [
+              "defender_of_commons"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You look toward the rising stone mansions and resolve to buy your way onto the hill."
+          ],
+          "choice": {
+            "text": "Accept the toll-road and seek a contract to help build it.",
+            "motivatorShift": {
+              "wealth": 3,
+              "reach": 1,
+              "tradition": -2
+            },
+            "setFlags": [
+              "collaborator_builder"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "As the town council prepares to vote on the land use, how will the physical prowess of the {family_name} line be leveraged to sway the neighborhood's future?",
+        "options": [
+          {
+            "text": "Organize a massive demonstration of athletic games on the disputed turf, inviting the press and regional settlers.",
+            "motivatorShift": {
+              "reach": 3,
+              "tradition": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "festival_champion"
+            ]
+          },
+          {
+            "text": "Use your muscle to quietly intimidate the surveyors, knocking down their boundary stakes under cover of night.",
+            "motivatorShift": {
+              "power": 3,
+              "politics": 1,
+              "honor": -2
+            },
+            "setFlags": [
+              "night_saboteur"
+            ]
+          },
+          {
+            "text": "Negotiate a deal with the developers to hire only your immigrant kin for the construction of the new toll-road.",
+            "motivatorShift": {
+              "wealth": 3,
+              "lineage": 2,
+              "politics": -1
+            },
+            "setFlags": [
+              "labor_boss"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:bavaria:athletic:poor:t1:close"
+    },
+    {
+      "id": "act:bavaria:athletic:poor:t1:close",
+      "sense": "taste",
+      "prose": [
+        "The rye bread of their new home was denser than the loaves of the old country, tasting faintly of the wood ash from the brick oven and the iron-rich water of the local well. As {given_name} sat at the heavy oak table, chewing a crust smeared with lard and salt, the flavor of a lifetime of hard labor settled on the tongue—bitter, resilient, and earned. The muscles in the arms were slower now, thickened by decades of swinging axes and carrying stone, but they had carved a permanent space out of the wilderness.",
+        "Across the hearth, the young heir of the {family_name} line sat cleaning the grease from a pair of heavy leather work-boots, their eyes reflecting the low amber glow of the embers. The inheritance being passed down was not gold or deeded manors, but a reputation for bone-deep endurance and a body built to withstand whatever weight the world decided to pile upon it."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You slide the worn, iron-banded timber spade across the table to your heir."
+          ],
+          "choice": {
+            "text": "Pass down the tools of honest, grueling labor.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1
+            },
+            "setFlags": [
+              "tradition_keeper"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You hand them a ledger of contacts and building contractors instead of a spade."
+          ],
+          "choice": {
+            "text": "Urge them to use their strength to command others rather than dig.",
+            "motivatorShift": {
+              "power": 2,
+              "wealth": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "aspiring_gentry"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The scent of rancid grease and cold iron hangs thick between us. {given_name} watches the young heir's calloused hands work the rag over the metal. The wilderness is half-broken, but our bones are cracking under the weight of the forest. How will the {family_name} name endure the coming winter?",
+        "options": [
+          {
+            "text": "We must bring a sturdy daughter of the salt-merchants into this cabin, binding her strength to ours to feed three more mouths and anchor our blood deep in this black soil.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "fertile_homestead"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 3
+            }
+          },
+          {
+            "text": "No new blood shall dilute what we have wrested from the stone. We will raise the young heir already sitting by our hearth, drilling them until their shoulders are like iron, even if they must stand alone.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "worldview": -1,
+              "reach": -1
+            },
+            "setFlags": [
+              "hardened_sole_heir"
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
+          },
+          {
+            "text": "Let the cradle remain silent. We will use the last of our physical might to erect the grand timber mill by the rushing creek, ensuring our wealth outlasts our failing sinews.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 1,
+              "lineage": -3,
+              "tradition": -1
+            },
+            "setFlags": [
+              "mill_monopoly"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
       }
     }
   ]

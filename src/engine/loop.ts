@@ -9,10 +9,12 @@ import {
   type DynastyWorld,
   detectGlimpses,
   type Glimpse,
+  nudgeRival,
 } from "../sim/dynastyWorld";
 import { advanceFamily, applyChoice, applySuccessionToFamily } from "../sim/effects";
 import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
+import { actsForTier } from "../sim/saga/player";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
 import { type GameState, initState, isMemberAlive, type LedgerEntry } from "../sim/state";
@@ -78,6 +80,7 @@ export class Game {
     const wave = this.state.founding?.place;
     if (!wave) return;
     this.world = createDynastyWorld(this.content.places, wave, this.rng.fork("world"));
+    this.applyCrossingNudges(); // deterministic from playerRung — re-derived on every (re)build
     this.advanceWorldToNow();
   }
 
@@ -177,6 +180,41 @@ export class Game {
     }
   }
 
+  /**
+   * INTERACTIVE CONVERGENCE (replay-safe, STATELESS): the played line ACTS on its rivals at the
+   * cross-family crossings it has passed — an `opposing` crossing suppresses that rival's climb, a
+   * `contributing` one lifts it. The set of crossings passed is a PURE function of the line's reach
+   * (one crossing per act/tier up to the protagonist's generation), so we recompute the cumulative
+   * nudge from `playerRung()` every time the world is (re)built — no transient `firedCrossings` Set
+   * that a save/restore would lose (that broke determinism). Applied in beginWorldForState, before the
+   * world advances to now. Rides the braid-pass relations already in the corpus — zero new authoring.
+   */
+  private applyCrossingNudges(): void {
+    for (let tier = 0; tier <= this.playerRung(); tier++) this.nudgeForTier(tier);
+  }
+
+  /** Apply the crossing(s) at one act/tier's midpoint to the rival world. Pure-deterministic input
+   *  (corpus + cell), so calling it for tier T during world-build and again when the line REACHES tier
+   *  T produces the same cumulative world only if build covers [0..rung]; the live path nudges the NEW
+   *  tier exactly once as the rung increments — together they total each tier's crossing once. */
+  private nudgeForTier(tier: number): void {
+    if (!this.world) return;
+    const wave = this.state.founding?.place;
+    if (!wave) return;
+    const cls = sagaClassForWealth(this.state.personality.wealth);
+    const act = actsForTier(this.saga.corpus, wave, this.state.archetype, tier, cls);
+    const midId = act?.scenes.find((id: string) => id.endsWith(":midpoint"));
+    const mid = midId ? this.saga.corpus.scenes.get(midId) : undefined;
+    for (const ref of mid?.thread ?? []) {
+      if (!ref.relation || ref.relation === "neutral") continue;
+      this.world = nudgeRival(
+        this.world,
+        `rival:${ref.wave}`,
+        ref.relation === "opposing" ? -1 : 1,
+      );
+    }
+  }
+
   /** Write the driver's carried motivators back into the run's personality vector. */
   private syncMotivators(m: Motivators | null): void {
     if (m) this.state = { ...this.state, personality: m };
@@ -263,6 +301,8 @@ export class Game {
         this.rng.fork(`sagasucc:${this.state.year}:${this.state.history.length}`),
       );
       this.beginNextGenerationAct();
+      // The line just reached the next tier — apply that tier's crossing nudge to the rivals (once).
+      this.nudgeForTier(this.playerRung());
     } else if (result?.wasCloseDecision && !this.state.end) {
       // The dynastic fork resolved AGAINST continuing: the player closed a generation without taking a
       // partner / raising heirs, so the line ends here by choice. Mark it line-extinct so the run
