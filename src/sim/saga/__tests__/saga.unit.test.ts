@@ -36,6 +36,41 @@ describe("narrative acts (novel model)", () => {
     }
   });
 
+  it("WV-2: a scene parses braid SLOTS (source/destination), defaulting to none", () => {
+    // No slots → defaults to []; the field is optional on input.
+    const bare = SceneSchema.parse({ id: "s", sense: "sight", prose: ["A street in the rain."] });
+    expect(bare.braidSlots).toEqual([]);
+    // A source slot carries a borrowable vignette; a destination omits it (borrows the source's).
+    const withSlots = SceneSchema.parse({
+      id: "s2",
+      sense: "sight",
+      prose: ["The peddler calls his wares.", "An Irish family wanders past, looking."],
+      braidSlots: [
+        { kind: "source", at: 0, setting: "market", vignette: "A peddler hawks tin and thread." },
+        { kind: "destination", at: 1, setting: "market" },
+      ],
+    });
+    expect(withSlots.braidSlots).toHaveLength(2);
+    expect(withSlots.braidSlots[0]?.kind).toBe("source");
+    expect(withSlots.braidSlots[0]?.vignette).toContain("peddler");
+    expect(withSlots.braidSlots[1]?.kind).toBe("destination");
+    expect(withSlots.braidSlots[1]?.vignette).toBeUndefined();
+  });
+
+  it("WV-2: schema enforces source-needs-vignette + destination-forbids-vignette", () => {
+    const base = { id: "s", sense: "sight" as const, prose: ["A street."] };
+    expect(
+      SceneSchema.safeParse({ ...base, braidSlots: [{ kind: "source", at: 0, setting: "market" }] })
+        .success,
+    ).toBe(false); // source without vignette → rejected (would weave empty prose)
+    expect(
+      SceneSchema.safeParse({
+        ...base,
+        braidSlots: [{ kind: "destination", at: 0, setting: "market", vignette: "x" }],
+      }).success,
+    ).toBe(false); // destination with a vignette → rejected (it borrows the source's)
+  });
+
   it("walks the act: opening → beat (weave alternative) → next scene", () => {
     const act = actsForTier(corpus, "fix", "economic", 0);
     if (!act) throw new Error("no act");

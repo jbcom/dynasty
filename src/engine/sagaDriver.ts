@@ -27,7 +27,7 @@ import {
   currentScene,
   startAct,
 } from "../sim/saga/runner";
-import type { Scene } from "../sim/saga/schema";
+import type { BraidSlot, Scene } from "../sim/saga/schema";
 
 /** The coordinates that select a line's act from the corpus. */
 export interface SagaCell {
@@ -61,9 +61,35 @@ export class SagaDriver {
   }
   private state: ActState | null = null;
   private actTitle: string | null = null;
+  /** WV-2: memoized `wave → tier → source braid slots` index, built once from the corpus (the `view`
+   *  getter is hot, so the per-render rival-source scan must not re-walk the whole corpus each time). */
+  private _sourceIndex: Map<string, Map<number, BraidSlot[]>> | null = null;
 
   constructor(corpus: SagaCorpus) {
     this._corpus = corpus;
+  }
+
+  /** Source braid slots for a rival wave at a tier (across ALL its act's scenes). Built once, memoized. */
+  sourceSlots(wave: string, tier: number): readonly BraidSlot[] {
+    if (!this._sourceIndex) {
+      const index = new Map<string, Map<number, BraidSlot[]>>();
+      for (const act of this._corpus.acts.values()) {
+        for (const sceneId of act.scenes) {
+          const sources = this._corpus.scenes
+            .get(sceneId)
+            ?.braidSlots.filter((s) => s.kind === "source");
+          if (!sources?.length) continue;
+          let byTier = index.get(act.wave);
+          if (!byTier) {
+            byTier = new Map();
+            index.set(act.wave, byTier);
+          }
+          byTier.set(act.tier, [...(byTier.get(act.tier) ?? []), ...sources]);
+        }
+      }
+      this._sourceIndex = index;
+    }
+    return this._sourceIndex.get(wave)?.get(tier) ?? [];
   }
 
   /** Begin (or restart) the act for a cell, carrying the line's current motivators + flags. */

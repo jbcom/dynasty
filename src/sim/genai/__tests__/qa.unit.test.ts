@@ -2,17 +2,20 @@ import { describe, expect, it } from "vitest";
 import type { Scene } from "../../saga/schema";
 import {
   applyBraid,
+  applySlots,
   applySuccession,
   type BraidRequest,
   braidPassSystem,
   buildBraidPassPrompt,
   buildLineagePassPrompt,
   buildScenePassPrompt,
+  buildSlotPassPrompt,
   buildSuccessionPrompt,
   type LineageSurface,
   lineagePassSystem,
   type SuccessionRequest,
   scenePassSystem,
+  slotPassSystem,
   successionPassSystem,
 } from "../qa";
 
@@ -28,6 +31,7 @@ const scene: Scene = {
   prose: ["The wharf reeked of brine and the heavy musk of dray horses."],
   beats: [],
   thread: [],
+  braidSlots: [],
   requires: { flags: [], notFlags: [] },
 };
 
@@ -146,6 +150,7 @@ describe("succession pass", () => {
       prose: ["The last loaf cools."],
       beats: [],
       thread: [],
+      braidSlots: [],
       requires: { flags: [], notFlags: [] },
     };
     const decision: Scene["decision"] = {
@@ -169,5 +174,39 @@ describe("succession pass", () => {
     expect(out.decision?.options[0]?.succession?.takesPartner).toBe(true);
     expect(out.decision?.options[0]?.succession?.begets).toBe(2);
     expect(out.id).toBe(close.id); // scene wiring untouched
+  });
+});
+
+describe("braid-slot pass (WV-2)", () => {
+  it("system instruction names the two slot kinds + the public-setting rule", () => {
+    const sys = slotPassSystem();
+    expect(sys).toMatch(/DESTINATION/);
+    expect(sys).toMatch(/SOURCE/);
+    expect(sys).toMatch(/vignette/);
+    expect(sys).toMatch(/PUBLIC/i);
+    expect(sys).toMatch(/braidSlots/);
+  });
+  it("prompt indexes the scene's paragraphs for the model to reference by `at`", () => {
+    const s: Scene = {
+      ...scene,
+      prose: [
+        "The peddler calls his wares on the corner.",
+        "An Irish family wanders past, looking.",
+      ],
+    };
+    const p = buildSlotPassPrompt(s);
+    expect(p).toContain("[0] The peddler");
+    expect(p).toContain("[1] An Irish family");
+    expect(p).toContain(s.id);
+  });
+  it("applySlots attaches the authored slots to the scene (wiring untouched)", () => {
+    const out = applySlots(scene, [
+      { kind: "source", at: 0, setting: "market", vignette: "A peddler hawks tin and thread." },
+      { kind: "destination", at: 0, setting: "market" },
+    ]);
+    expect(out.braidSlots).toHaveLength(2);
+    expect(out.braidSlots[0]?.kind).toBe("source");
+    expect(out.braidSlots[1]?.kind).toBe("destination");
+    expect(out.id).toBe(scene.id);
   });
 });

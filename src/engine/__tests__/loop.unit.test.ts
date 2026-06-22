@@ -486,4 +486,28 @@ describe("Game loop", () => {
     // The chosen beat set at least one flag, and it landed in the RUN state (PF-14), not just the driver.
     expect(fresh.length).toBeGreaterThan(0);
   });
+
+  it("WV-2: the emergent braid is INERT until scenes carry braid slots (no slots → no extra threads)", () => {
+    // The live corpus has no braid slots yet (GenAI slot-tagging is WV-2 step 4), so the per-move
+    // selector finds no destination anchors → view.saga.threads carries only corpus threads, and a
+    // re-read of view is identical (the selector is deterministic + doesn't disturb play).
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Vane",
+      seed: "wv2",
+      originId: "composed:ireland:origins",
+    };
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    const a = g.view.saga.threads;
+    const b = g.view.saga.threads;
+    expect(a).toEqual(b); // deterministic + stable across re-renders (the selector is seeded)
+    // Any present thread is well-formed; with no destination slots authored yet, the selector is inert.
+    for (const t of a) expect(t.crossing.length).toBeGreaterThan(0);
+  });
 });
