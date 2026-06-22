@@ -2,12 +2,12 @@
 import type { Scene } from "../../sim/saga/schema";
 
 /**
- * SCENE READER (Narrative Acts model) — renders ONE scene as a page of a novel, Suzerain-style:
- * large readable multi-paragraph prose, sense-tinted, framing its choice. A scene's weave beats are
- * ALTERNATIVES (ink weave): the reader shows their framing lines + offers each as a choice; picking
- * one resolves the scene. If the scene also has a terminal decision, the chosen beat is recorded and
- * the decision is then shown. Pure presentation: it resolves identity tokens through the injected
- * `term` fn (defaults to identity for tests) and emits the player's choice upward — never the sim.
+ * SCENE READER (Narrative Acts model) — renders a scene as a PAGED novel, Suzerain-style: ONE
+ * paragraph at a time, tap ANYWHERE to turn to the next. When the prose is spent, the scene's CHOICE
+ * folds into the story as GLOWING PULSING text (no buttons) — the weave beats (alternatives) or the
+ * terminal tiered decision. Tapping a non-option area while a choice is up makes the options pulse
+ * FASTER (it does not advance) to say "pick one". Pure presentation: resolves identity tokens via the
+ * injected `term` fn and emits the player's choice upward — never the sim.
  */
 
 interface Props {
@@ -21,72 +21,133 @@ interface Props {
 }
 const { scene, term = (t) => t, onbeat, ondecision }: Props = $props();
 
-// In a decision-bearing scene the beat is a preamble: pick it, then the decision appears. In a
-// plain scene the beat IS the resolution (the parent advances). `beatTaken` gates the decision.
+// Paged reading position: which prose paragraph is currently shown (the last one revealed).
+let paraIdx = $state(0);
+// In a decision-bearing scene the beat is a preamble; once taken, the decision options show.
 let beatTaken = $state(false);
-// Reset when the scene changes (Svelte 5: read scene.id to track).
+// Transient "pick one" urge — set briefly when the player taps away while options are up.
+let urging = $state(false);
+let urgeTimer: ReturnType<typeof setTimeout> | undefined;
+
+// Reset paging when the scene changes — compare against the id we last paged from (no effect that
+// writes tracked state on every run, which would fight the click updates). Seeded from the initial
+// scene so the first paint shows paragraph 0 without a reset race.
+// svelte-ignore state_referenced_locally
+let pagedFrom = $state(scene.id);
 $effect(() => {
-  scene.id;
-  beatTaken = false;
+  if (scene.id !== pagedFrom) {
+    pagedFrom = scene.id;
+    paraIdx = 0;
+    beatTaken = false;
+    urging = false;
+  }
 });
 
+const lastPara = $derived(paraIdx >= scene.prose.length - 1);
 const hasBeats = $derived(scene.beats.length > 0);
-// The decision shows once any required beat is taken (or immediately if the scene has no beats).
-const decisionReady = $derived(!!scene.decision && (!hasBeats || beatTaken));
+// Options show once the prose is fully read: the weave beats first, then (after a beat) the decision.
+const showWeave = $derived(lastPara && hasBeats && !beatTaken);
+const showDecision = $derived(lastPara && !!scene.decision && (!hasBeats || beatTaken));
+const optionsUp = $derived(showWeave || showDecision);
 
-function chooseBeat(beatIndex: number) {
+function urge() {
+  urging = true;
+  clearTimeout(urgeTimer);
+  // Long enough for two fast pulses, then settle back to the calm glow.
+  urgeTimer = setTimeout(() => {
+    urging = false;
+  }, 900);
+}
+
+/** Tap on the page body: turn to the next paragraph, or — if a choice is up — urge the player to pick. */
+function tapPage() {
+  if (optionsUp) {
+    urge();
+    return;
+  }
+  if (!lastPara) paraIdx += 1;
+}
+
+function chooseBeat(i: number) {
   beatTaken = true;
-  onbeat?.(beatIndex);
+  onbeat?.(i);
 }
 </script>
 
-<article class="scene" data-sense={scene.sense} data-testid="scene-reader">
-  <div class="prose">
-    {#each scene.prose as para, i (i)}
-      <p class="para">{term(para)}</p>
-    {/each}
-  </div>
+<!-- The whole page is the tap target (advance / urge). Options stop propagation so a pick isn't an urge. -->
+<section class="scene" data-sense={scene.sense} data-testid="scene-reader" data-options-up={optionsUp ? "" : undefined}>
+  <!-- Full-bleed tap layer: turn the page, or urge the player when a choice is up. A button so it's
+       keyboard-focusable + screen-reader operable without an a11y-role mismatch. -->
+  <button
+    type="button"
+    class="tap-layer"
+    aria-label={optionsUp ? "Choose an option below" : "Continue"}
+    onclick={tapPage}
+  ></button>
 
-  {#if hasBeats && !beatTaken}
-    <div class="weave" data-testid="weave">
+  <!-- One paragraph at a time — the page the reader is on. -->
+  {#key paraIdx}
+    <p class="para" data-testid="para">{term(scene.prose[paraIdx] ?? "")}</p>
+  {/key}
+
+  {#if !optionsUp}
+    <!-- Quiet affordance that the page turns on tap. -->
+    <span class="turn-hint" aria-hidden="true">{lastPara ? "" : "tap to continue"}</span>
+  {/if}
+
+  {#if showWeave}
+    <div class="choices" class:urging data-testid="weave">
       {#each scene.beats as beat, i (i)}
-        <div class="beat">
-          {#each beat.prose as line, j (j)}
-            <p class="beat-line">{term(line)}</p>
-          {/each}
-          {#if beat.choice}
-            <button type="button" class="weave-choice" onclick={() => chooseBeat(i)}>
-              {term(beat.choice.text)}
-            </button>
-          {/if}
-        </div>
+        {#if beat.choice}
+          <button
+            type="button"
+            class="inline-option"
+            onclick={(e) => {
+              e.stopPropagation();
+              chooseBeat(i);
+            }}
+          >
+            {term(beat.choice.text)}
+          </button>
+        {/if}
       {/each}
     </div>
   {/if}
 
-  {#if decisionReady && scene.decision}
-    <div class="decision" data-tier={scene.decision.tier} data-testid="decision">
-      <p class="prompt">{term(scene.decision.prompt)}</p>
-      <div class="options">
-        {#each scene.decision.options as opt, i (i)}
-          <button type="button" class="option" onclick={() => ondecision?.(i)}>
-            {term(opt.text)}
-          </button>
-        {/each}
-      </div>
+  {#if showDecision && scene.decision}
+    <div
+      class="choices decision"
+      class:urging
+      data-tier={scene.decision.tier}
+      data-testid="decision"
+    >
+      {#each scene.decision.options as opt, i (i)}
+        <button
+          type="button"
+          class="inline-option"
+          onclick={(e) => {
+            e.stopPropagation();
+            ondecision?.(i);
+          }}
+        >
+          {term(opt.text)}
+        </button>
+      {/each}
     </div>
   {/if}
-</article>
+</section>
 
 <style>
   .scene {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1.1rem;
+    gap: 1.2rem;
     max-width: 42rem;
+    min-height: 60vh;
     margin-inline: auto;
     padding: var(--mmm-pad);
-    /* Each sense tints the page with a faint wash so the frame is felt, not labelled. */
+    /* Each sense tints the page edge with a faint wash so the frame is felt, not labelled. */
     border-left: 3px solid var(--sense-accent, var(--mmm-gold-deep));
     background: linear-gradient(
       to right,
@@ -94,96 +155,123 @@ function chooseBeat(beatIndex: number) {
       transparent 30%
     );
   }
+  /* Full-bleed invisible tap target behind the text; options sit above it (z-index) so they're clickable. */
+  .tap-layer {
+    position: absolute;
+    inset: 0;
+    appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    z-index: 0;
+  }
+  .tap-layer:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--mmm-gold) 50%, transparent);
+    outline-offset: -4px;
+  }
+  .para,
+  .turn-hint,
+  .choices {
+    position: relative;
+    z-index: 1;
+  }
   .scene[data-sense="smell"] { --sense-accent: #8c6f4d; }
   .scene[data-sense="taste"] { --sense-accent: #a4564d; }
   .scene[data-sense="touch"] { --sense-accent: #6f7d8c; }
   .scene[data-sense="sound"] { --sense-accent: #5d7a86; }
   .scene[data-sense="sight"] { --sense-accent: var(--mmm-gold); }
 
-  .prose,
-  .beat {
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-  .para,
-  .beat-line {
+  .para {
     margin: 0;
     font-family: var(--mmm-font-body);
-    /* Novel-readable: generous measure + leading, serif body. */
-    font-size: 1.06rem;
-    line-height: 1.75;
+    /* Novel-readable: generous measure + leading, serif body. One paragraph holds the focus. */
+    font-size: 1.18rem;
+    line-height: 1.85;
     color: var(--mmm-text);
     text-wrap: pretty;
+    animation: page-in 0.4s ease both;
   }
-  /* The first paragraph of a scene gets a drop-letter, like a chapter opening. */
-  .prose .para:first-child::first-letter {
-    font-family: var(--mmm-font-display);
-    font-size: 3.1rem;
-    line-height: 0.8;
-    float: left;
-    padding-right: 0.5rem;
-    color: var(--mmm-gold);
+  @keyframes page-in {
+    from { opacity: 0; transform: translateY(0.4rem); }
+    to { opacity: 1; transform: none; }
   }
-  .weave {
+  .turn-hint {
+    align-self: center;
+    margin-top: auto;
+    font-family: var(--mmm-font-body);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--mmm-text-dim) 70%, transparent);
+    animation: hint-breathe 2.4s ease-in-out infinite;
+  }
+  @keyframes hint-breathe {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 0.7; }
+  }
+
+  /* OPTIONS folded into the story: glowing, pulsing, bigger than the body — not buttons. */
+  .choices {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    border-top: 1px solid color-mix(in srgb, var(--mmm-gold-deep) 25%, transparent);
-    padding-top: 1rem;
+    margin-top: 0.6rem;
   }
-  .beat-line {
-    font-style: italic;
-    color: var(--mmm-text-dim);
-  }
-  .weave-choice,
-  .option {
-    align-self: flex-start;
+  .inline-option {
+    appearance: none;
+    border: none;
+    background: none;
     text-align: left;
-    font-family: var(--mmm-font-body);
-    font-size: 1rem;
-    line-height: 1.5;
-    color: var(--mmm-text);
-    background: color-mix(in srgb, var(--mmm-surface) 70%, transparent);
-    border: 1px solid color-mix(in srgb, var(--mmm-gold-deep) 50%, transparent);
-    border-radius: var(--mmm-radius);
-    padding: 0.7rem 1rem;
+    align-self: flex-start;
+    padding: 0.2rem 0;
     cursor: pointer;
-    transition: border-color 0.15s ease, background 0.15s ease;
-  }
-  .weave-choice:hover,
-  .option:hover {
-    border-color: var(--mmm-gold);
-    background: color-mix(in srgb, var(--mmm-gold) 12%, var(--mmm-surface));
-  }
-  .decision {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    border-top: 2px solid color-mix(in srgb, var(--mmm-gold) 45%, transparent);
-    padding-top: 1.1rem;
-  }
-  .prompt {
-    margin: 0;
     font-family: var(--mmm-font-display);
-    font-size: 1.08rem;
-    line-height: 1.5;
-    color: var(--mmm-gold-bright);
-  }
-  /* A major (fate-fork) decision reads heavier than a secondary one. */
-  .decision[data-tier="major"] {
-    border-top-color: var(--mmm-gold);
-  }
-  .decision[data-tier="major"] .prompt {
-    font-weight: 800;
+    font-size: 1.32rem;
+    line-height: 1.45;
     letter-spacing: 0.01em;
+    color: var(--mmm-gold-bright);
+    text-shadow: 0 0 8px color-mix(in srgb, var(--mmm-gold) 55%, transparent);
+    animation: option-glow 2.6s ease-in-out infinite;
   }
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+  /* A major (fate-fork) decision's options read heavier. */
+  .decision[data-tier="major"] .inline-option {
+    font-weight: 800;
+    font-size: 1.4rem;
   }
-  .options .option {
-    align-self: stretch;
+  .inline-option:hover {
+    color: #fff;
+    text-shadow: 0 0 14px color-mix(in srgb, var(--mmm-gold) 80%, transparent);
+  }
+  @keyframes option-glow {
+    0%, 100% {
+      text-shadow: 0 0 6px color-mix(in srgb, var(--mmm-gold) 35%, transparent);
+      opacity: 0.9;
+    }
+    50% {
+      text-shadow: 0 0 14px color-mix(in srgb, var(--mmm-gold) 75%, transparent);
+      opacity: 1;
+    }
+  }
+  /* Tap-away urge: pulse FAST to draw the eye to the options without advancing. */
+  .choices.urging .inline-option {
+    animation: option-urge 0.45s ease-in-out 2;
+  }
+  @keyframes option-urge {
+    0%, 100% {
+      text-shadow: 0 0 8px color-mix(in srgb, var(--mmm-gold) 50%, transparent);
+      transform: none;
+    }
+    50% {
+      text-shadow: 0 0 20px color-mix(in srgb, var(--mmm-gold) 100%, transparent);
+      transform: scale(1.04);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .para { animation: none; }
+    .turn-hint { animation: none; }
+    .inline-option { animation: none; text-shadow: 0 0 10px color-mix(in srgb, var(--mmm-gold) 60%, transparent); }
+    .choices.urging .inline-option { animation: none; color: #fff; }
   }
 </style>

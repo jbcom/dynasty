@@ -63,15 +63,17 @@ describe("loadSaga (real corpus)", () => {
     expect(threaded).toBeGreaterThan(200);
   });
 
-  it("covers the full lattice: 7 waves × 6 archetypes × 6 tiers = 252 acts", () => {
-    expect(corpus.acts.size).toBe(252);
-    // every (wave, archetype) cell has all 6 reach tiers.
-    const tiers = new Map<string, Set<number>>();
+  it("the POOR track covers the full lattice: 7 waves × 6 archetypes × 6 tiers = 252 acts", () => {
+    // Class-keyed corpus: every (wave, archetype) cell has all 6 reach tiers on the base "poor" track.
+    // (The middle track is authored on top; total acts ≥ 252.)
+    const poorTiers = new Map<string, Set<number>>();
     for (const a of corpus.acts.values()) {
+      if (a.cls !== "poor") continue;
       const cell = `${a.wave}/${a.archetype}`;
-      tiers.set(cell, (tiers.get(cell) ?? new Set()).add(a.tier));
+      poorTiers.set(cell, (poorTiers.get(cell) ?? new Set()).add(a.tier));
     }
-    expect(tiers.size).toBe(42);
-    for (const [cell, t] of tiers) expect(t.size, cell).toBe(6);
+    expect(poorTiers.size).toBe(42);
+    for (const [cell, t] of poorTiers) expect(t.size, cell).toBe(6);
+    expect(corpus.acts.size).toBeGreaterThanOrEqual(252);
   });
 });
