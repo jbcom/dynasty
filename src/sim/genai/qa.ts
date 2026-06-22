@@ -18,7 +18,7 @@
  * context, not format.
  */
 
-import type { ActChapter, Scene, ThreadRef } from "../saga/schema";
+import type { ActChapter, BraidSlot, Scene, ThreadRef } from "../saga/schema";
 
 const MOTIVATOR_AXES = "wealth, politics, worldview, power, tradition, honor, lineage, reach";
 
@@ -232,4 +232,52 @@ export function buildSuccessionPrompt(req: SuccessionRequest): string {
 /** Attach an authored decision to a close scene (replaces any existing). Pure. */
 export function applySuccession(scene: Scene, decision: Scene["decision"]): Scene {
   return { ...scene, decision };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Pass 5 — BRAID SLOT tagging (WV-2): mark where another dynasty can weave in
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * System instruction for the slot-tagging pass — read ONE scene's prose and mark BRAID SLOTS for the
+ * emergent cross-dynasty weave (WV-2): DESTINATION anchors where another immigrant line could plausibly
+ * ENTER this scene (a public, shared setting — a street, market, dock, workplace, queue), and SOURCE
+ * positions where THIS line is doing something another line could MEET (with a one-line borrowable
+ * vignette of this family at that setting). Tag only paragraphs that genuinely support a meeting — most
+ * scenes get few or none. The `setting` is a short shared tag (market, dock, workplace, journey, civic)
+ * so a source matches a destination of the same setting. ([[braid-slots-genai-architecture]])
+ */
+export function slotPassSystem(): string {
+  return [
+    "You tag BRAID SLOTS in one scene of a dynasty NOVEL — points where a DIFFERENT immigrant line could",
+    "cross the reader's path. Two kinds:",
+    "- DESTINATION: a paragraph set somewhere PUBLIC + SHARED (street, market, dock, workplace, queue,",
+    "  civic hall) where another family could plausibly appear. No vignette (it borrows the other line's).",
+    "- SOURCE: a paragraph where THIS family is doing something MEETABLE; give a one-line `vignette` of",
+    "  this family at that setting that another line's scene could borrow verbatim.",
+    "Each slot: { kind, at (the 0-based paragraph index), setting (a short shared tag), vignette? }.",
+    "Tag ONLY paragraphs that truly support a meeting — most scenes get 0-2 slots. Do not invent settings",
+    "that aren't in the prose. `setting` must be lower-case, one or two words, drawn from the moment.",
+    ...SHARED_RULES,
+    'Output STRICT JSON: { "braidSlots": [ { "kind": "...", "at": 0, "setting": "...", "vignette": "..." } ] }.',
+  ].join("\n");
+}
+
+/** Build the slot-tagging prompt for one scene (its prose, indexed for the model to reference). */
+export function buildSlotPassPrompt(scene: Scene): string {
+  const indexed = scene.prose.map((p, i) => `[${i}] ${p}`).join("\n\n");
+  return [
+    `Scene ${scene.id} (sense: ${scene.sense}). Its paragraphs, indexed:`,
+    `"""`,
+    indexed,
+    `"""`,
+    "Tag the braid slots (destination anchors + source vignettes) this scene genuinely supports.",
+    "",
+    'Return ONLY { "braidSlots": [ ... ] }.',
+  ].join("\n");
+}
+
+/** Attach authored braid slots to a scene (replaces any existing). Pure. */
+export function applySlots(scene: Scene, braidSlots: BraidSlot[]): Scene {
+  return { ...scene, braidSlots };
 }
