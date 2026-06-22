@@ -50,7 +50,12 @@ ELEVATE this, not bolt on art. Sim purity holds (gen is offline/cached, keyed by
 - [x] **VL-0 lock the constraints + reference study — IN PROGRESS.** Reversal confirmed + memory updated
   ([[visual-layer-revival]] supersedes [[no-portraits-no-asset-art]]); SDK image/video capability verified;
   dispatched a reference-study agent (80 Days/Suzerain/CK/Reigns/Disco Elysium/Pentiment — map+portrait+
-  progress UX, mobile-feasible techniques). [WAIT] the study, then write the design doc.
+  progress UX + ART DIRECTION, mobile-feasible). [WAIT] the study, then write the design doc.
+- [x] **VL-0b EVIDENCE-BASED scannability research — DISPATCHED (user, 2026-06-22 "do now").** Agent
+  researching STUDIED presentation rules (NN/g F-pattern, line-measure ~66ch, Miller 7±2/chunking, Gestalt,
+  progressive disclosure, type hierarchy, WCAG contrast + touch targets, long-form on-screen reading) → a
+  prioritized evidence checklist to bake into the design system. Feeds VL-1 + revisits [[scannability-game-novel-balance]]
+  with citations (not just the Suzerain example). [WAIT] the agent.
 - [ ] [WAIT] **VL-1 DESIGN DOC(s) for the visual layer — after the reference study.** Ground in the study +
   [[suzerain-ui-reference]]: the ART DIRECTION (signature polished style, palette, period-but-distinctive),
   the MAP (form, migration/era progress, mobile layout, persistent vs transient), PORTRAITS (per-cell gen
