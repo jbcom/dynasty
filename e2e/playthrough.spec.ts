@@ -5,10 +5,19 @@ import { expect, test } from "@playwright/test";
  * way to an end state, exercising the whole stack (sim + engine + UI + persistence)
  * in a real mobile browser.
  *
- * Flow (OB-3 onboarding): Title (New Game / Load / Settings, NO inputs) → New Game → pick a
- * LOCATION from the place-cue cards (geography) → bestow a family name (suggestion or "name
- * your own") → the authored Epoch-0 story → Play. The run seed is a hidden random draw.
+ * Flow (SS-7 onboarding): Title (New Game / Load / Settings, NO inputs) → New Game → wave funnel
+ * (PERIOD → CLASS → CULTURE? → bestow a family name) → Play. The played narrative is the NOVEL
+ * (NA-11): a founded line opens on its saga act (the SceneReader), with the event card as the
+ * fallback surface for any cell without an authored act. The run seed is a hidden random draw.
  */
+
+/** The play surface's choice buttons — the saga SceneReader's beats/decision, OR the event card. */
+const PLAY_CHOICE = "[data-testid='scene-reader'] button, [data-event] .choices button";
+
+/** Whether the run has reached the play screen (either the novel reader or the event card). */
+function playSurface(page: import("@playwright/test").Page) {
+  return page.locator("[data-testid='scene-reader'], [data-event]");
+}
 
 /**
  * Walk the onboarding to the play screen: pick the first location cue, then bestow a family
@@ -51,9 +60,10 @@ async function startGame(
     await namePhase.locator(".choices button").first().click();
   }
 
-  // Land on the play screen: the meter HUD + the first event with choices.
+  // Land on the play screen: the meter HUD + the first play surface (novel scene or event card).
   await expect(page.locator("[data-meter]").first()).toBeVisible({ timeout: 8000 });
-  await expect(page.locator("[data-event] .choices button").first()).toBeVisible({ timeout: 8000 });
+  await expect(playSurface(page).first()).toBeVisible({ timeout: 8000 });
+  await expect(page.locator(PLAY_CHOICE).first()).toBeVisible({ timeout: 8000 });
 }
 
 test("plays from title through the diegetic birth to a legacy report end screen", async ({
@@ -61,9 +71,9 @@ test("plays from title through the diegetic birth to a legacy report end screen"
 }) => {
   await startGame(page);
 
-  // The diegetic birth opens straight into an event with reactable choices.
-  await expect(page.locator("[data-event]").first()).toBeVisible();
-  await expect(page.locator("[data-event] .choices button").first()).toBeVisible();
+  // The founded line opens straight into the play surface (the novel scene or an event) with choices.
+  await expect(playSurface(page).first()).toBeVisible();
+  await expect(page.locator(PLAY_CHOICE).first()).toBeVisible();
 
   // Keep taking the first available choice until the run ends (legacy report).
   const maxTurns = 300;
@@ -74,7 +84,7 @@ test("plays from title through the diegetic birth to a legacy report end screen"
       ended = true;
       break;
     }
-    const choice = page.locator("[data-event] .choices button").first();
+    const choice = page.locator(PLAY_CHOICE).first();
     if (await choice.count()) {
       await choice.click();
       await page.waitForTimeout(20);
@@ -116,7 +126,7 @@ test("a saved run can be continued", async ({ page }) => {
   await expect(page.locator("[data-meter]").first()).toBeVisible();
 
   // Make one choice so a save exists, then reload.
-  await page.locator("[data-event] .choices button").first().click();
+  await page.locator(PLAY_CHOICE).first().click();
   await page.waitForTimeout(100);
   await page.reload();
 

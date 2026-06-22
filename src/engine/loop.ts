@@ -6,7 +6,7 @@ import { createRng, type Rng } from "../sim/rng";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
 import { type GameState, initState, type LedgerEntry } from "../sim/state";
-import { advanceTimeline } from "../sim/timeline";
+import { advanceTimeline, detectEnd } from "../sim/timeline";
 import { pickNextEventViaWorld } from "../sim/world";
 import { SagaDriver, type SagaFrame } from "./sagaDriver";
 
@@ -92,16 +92,41 @@ export class Game {
     if (m) this.state = { ...this.state, personality: m };
   }
 
-  /** Apply a weave-beat choice on the current novel scene, then re-emit. */
+  /**
+   * Reading the novel passes in-world time: each saga choice ticks the timeline one step (years
+   * advance, eras roll, the run can reach an end) so the run progresses toward its conclusion even
+   * while the played surface is the novel rather than the event flow. Then, if the act has ended,
+   * the event flow resumes (so the run keeps moving once a generation's act closes). Pure ticks; the
+   * timeline + end detection are deterministic.
+   */
+  private advanceRunClock(): void {
+    this.state = advanceTimeline(this.content, this.state);
+    const end = detectEnd(this.content, this.state);
+    if (end) {
+      this.state = { ...this.state, end };
+      this.current = null;
+      return;
+    }
+    // When the novel act has run out (and no new act began), hand the run back to the event flow.
+    // pickWithProgress force-advances eras until an event is found or the run ends, so the player is
+    // never stranded on the "generation closes" interlude with no choice and no end screen.
+    if (!this.saga.active) {
+      this.current = this.pickWithProgress();
+      if (this.state.end) this.current = null;
+    }
+  }
+
+  /** Apply a weave-beat choice on the current novel scene; time passes; then re-emit. */
   pickBeat(beatIndex: number): void {
     this.syncMotivators(this.saga.pickBeat(beatIndex));
+    this.advanceRunClock();
     this.emit();
   }
 
   /**
-   * Apply the current scene's terminal decision, then re-emit. When the chosen option carries a
-   * succession effect (a `close`-scene partner/heirs choice), the line steps to the next generation:
-   * the family advances and the next tier's act begins, carrying the line's drifted motivators.
+   * Apply the current scene's terminal decision; time passes; then re-emit. When the chosen option
+   * carries a succession effect (a `close`-scene partner/heirs choice), the line steps to the next
+   * generation: the next tier's act begins, carrying the line's drifted motivators.
    */
   pickDecision(optionIndex: number): void {
     const result = this.saga.pickDecision(optionIndex);
@@ -109,6 +134,7 @@ export class Game {
     if (result?.succession && (result.succession.takesPartner || result.succession.begets > 0)) {
       this.beginNextGenerationAct();
     }
+    this.advanceRunClock();
     this.emit();
   }
 

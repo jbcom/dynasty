@@ -120,12 +120,13 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
         </aside>
       {/each}
     </div>
-  {:else if view.saga.ended}
-    <p class="interlude">The generation closes…</p>
   {:else if view.currentEvent}
+    <!-- No active novel scene (the act ended, or this cell has none) — the event flow carries the run. -->
     <div class="event-pane">
       <EventCard event={view.currentEvent} year={view.state.year} {busy} {onchoose} {term} />
     </div>
+  {:else if view.saga.ended}
+    <p class="interlude">The generation closes…</p>
   {:else}
     <p class="interlude">The era turns…</p>
   {/if}
