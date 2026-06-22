@@ -69,6 +69,9 @@ export type Decision = z.infer<typeof DecisionSchema>;
 export const ThreadRefSchema = z.object({
   wave: z.string().min(1),
   atTier: z.number().int().min(0).max(5),
+  /** The bespoke moment the two lines cross (the specific intersection prose). When absent, the weave
+   *  fills a deterministic pair-specific line and the rival's act-opening fragment is braided beneath. */
+  crossing: z.string().optional(),
 });
 export type ThreadRef = z.infer<typeof ThreadRefSchema>;
 

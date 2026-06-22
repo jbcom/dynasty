@@ -124,9 +124,11 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
         ondecision={(i) => onpickdecision?.(i)}
       />
       {#each view.saga.threads as braid (braid.wave)}
-        <!-- A cross-family INTERSECTION: another wave's line braids in where paths cross. -->
+        <!-- A cross-family INTERSECTION: the specific moment another wave's line crosses yours, with a
+             glimpse of that line braided beneath. -->
         <aside class="thread" data-testid="thread">
-          <span class="thread-label">Elsewhere — another line</span>
+          <span class="thread-label">Where paths cross</span>
+          <p class="thread-crossing">{term(braid.crossing)}</p>
           {#each braid.scene.prose as para, i (i)}
             <p class="thread-para">{term(para)}</p>
           {/each}
@@ -366,6 +368,13 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     text-transform: uppercase;
     color: var(--mmm-gold-deep);
     margin-bottom: 0.35rem;
+  }
+  .thread-crossing {
+    margin: 0 0 0.6rem;
+    font-family: var(--mmm-font-body);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--mmm-text);
   }
   .thread-para {
     margin: 0 0 0.5rem;

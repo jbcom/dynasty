@@ -5,6 +5,7 @@ import {
   applyBeatChoice,
   applyDecision,
   buildCorpus,
+  crossingLine,
   nextScene,
   openingScene,
   resolveThreads,
@@ -95,9 +96,19 @@ describe("narrative acts (novel model)", () => {
     expect(alphaMid?.thread).toHaveLength(1);
     expect(alphaMid?.thread[0]?.wave).toBe("beta"); // sibling wave
     expect(alphaMid?.thread[0]?.atTier).toBe(0);
-    // And it resolves to beta's act-opening fragment.
+    expect(alphaMid?.thread[0]?.crossing?.length ?? 0).toBeGreaterThan(0); // bespoke crossing woven in
+    // And it resolves to beta's act-opening fragment + carries the crossing line.
     const braided = resolveThreads(c, alphaMid!);
     expect(braided[0]?.wave).toBe("beta");
+    expect(braided[0]?.crossing.length).toBeGreaterThan(0);
+  });
+
+  it("crossingLine is PAIR-SPECIFIC: it names both peoples (PF-10)", () => {
+    const cross = crossingLine("ireland", "italian");
+    expect(cross).toContain("Italian"); // the rival wave
+    expect(cross).toContain("Irish"); // the player's wave
+    // A different pair reads differently.
+    expect(crossingLine("ireland", "chinese")).not.toBe(cross);
   });
 
   it("resolves a cross-family thread (intersection) to the rival wave's act-opening fragment", () => {

@@ -143,7 +143,9 @@ describe("PlayScreen (composed game screen)", () => {
       saga: {
         actTitle: "Act III — The Climb",
         scene,
-        threads: [{ wave: "italian", scene: braidScene }],
+        threads: [
+          { wave: "italian", crossing: "An Italian line cuts across yours.", scene: braidScene },
+        ],
         ended: false,
       },
     };
@@ -157,7 +159,8 @@ describe("PlayScreen (composed game screen)", () => {
     // The cross-family intersection braids in beneath the scene.
     const thread = host.querySelector("[data-testid='thread']");
     expect(thread).not.toBeNull();
-    expect(thread?.textContent).toContain("Elsewhere");
-    expect(thread?.textContent).toContain("another line steps ashore");
+    expect(thread?.textContent).toContain("Where paths cross");
+    expect(thread?.textContent).toContain("An Italian line cuts across yours."); // bespoke crossing
+    expect(thread?.textContent).toContain("another line steps ashore"); // braided rival fragment
   });
 });
