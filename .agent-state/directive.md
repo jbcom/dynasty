@@ -235,10 +235,11 @@ USER directive 2026-06-22). Layer PF-2/PF-3/… as forward commits here; open ON
 Full audit of remaining / incomplete / partially-wired / dead-but-built. Do them IN ORDER on
 feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. Don't stop between items.
 
-- [ ] [WAIT] **PF-5 finish the middle-class corpus** — blocked on the middle sweep (bg beo7mfy8q,
-  ~193/252, chinese→baghdad). ON SWEEP DONE: verify health (0 leaks/dangling, 252 middle acts, poor
-  untouched), regen failed cells, commit corpus; update loadSaga test to assert BOTH tracks complete
-  (poor 252 + middle 252 = 504; 42 cells × 2 × 6).
+- [ ] [WAIT] **PF-5 finish the middle-class corpus** — first sweep died on a transient 503 (Gemini
+  overload) at 198/252 middle acts (34/42 cells). FIXED the runner to be resilient (retry+backoff,
+  skip-on-fail — commit), pruned 3 mid-write orphans, RE-LAUNCHED the resilient sweep (bg bompz6v06).
+  ON SWEEP DONE: verify health (0 leaks/dangling/orphans, 252 middle acts, poor untouched), regen any
+  still-failed cells, commit corpus; update loadSaga test to assert BOTH tracks complete (504 acts).
 
 - [x] **PF-6 ROOT GAP: class threaded through onboarding → founding — DONE** (commit 4b0318e). The
   chosen ArrivalClass now flows OnboardingScreen.onComplete → App.birthGame → resolveWaveStart(place,
