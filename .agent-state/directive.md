@@ -151,7 +151,9 @@ is locked, execute autonomously, self-pace, own the full PR loop.
 - [ ] [WAIT] **NA-10 prune orphans** — blocked on NA-8 sweep finishing its writes (currently in
   baghdad). Then run `scripts/prune-saga-orphans.ts` (regenerated acts leave old exemplar scenes
   orphaned); re-add the loadSaga "no orphan scenes" integrity test; commit corpus + regen + prune together.
-- [~] **NA-11 retire Epoch-0** — IN PROGRESS. Done: deleted all 9 epoch0.json; deleted the 3 narrative
+- [ ] [WAIT] **NA-11 retire Epoch-0** — IN PROGRESS, blocked on the dispatched stuck-loop-debugger's
+  root-cause + fix for the harness regression (then apply fix → green → commit NA-9/10/11 together).
+  Done: deleted all 9 epoch0.json; deleted the 3 narrative
   ev_birth_* from new-york; retagged the 2 succession events epoch0→life-stage; content.ts
   epoch0Events→lifeStageEvents (dropped authoredEpoch0Places); events.ts injects lifeStageEvents;
   founding sets emerged/named/calling_chosen at founding (onboarding already locked them) so the
@@ -159,15 +161,17 @@ is locked, execute autonomously, self-pace, own the full PR loop.
   onboardingFounding epoch0 suite. BLOCKER (dispatched stuck-loop-debugger): the millennium harness
   test now goes line-extinct ~2000 (era order 3-4) for all 18 — the leaner per-gen event pool no
   longer carries a line to era≥9. Awaiting root-cause + fix; do NOT re-pad with narrative beats.
-- [ ] **NA-12 live-verify** — run the app (chrome), play a founded line: confirm it reads as a novel
-  (titled act, multi-paragraph sensory scenes, no when/where re-confirm), advances generation-by-
-  generation through tiers, hour+ of content. READ the screenshots; fix spec-drift before done.
+- [ ] [WAIT] **NA-12 live-verify** — blocked on NA-11 fix (harness must be green before live-verify)
+  + NA-8 sweep (full corpus). Then run the app (chrome), play a founded line: confirm it reads as a
+  novel (titled act, multi-paragraph sensory scenes, no when/where re-confirm), advances generation-
+  by-generation through tiers, hour+ of content. READ the screenshots; fix spec-drift before done.
 - [x] **NA-13 cross-family intersections (threads)** — resolveThreads(corpus,scene) resolves a
   scene's ThreadRef[] to the rival wave's act-opening fragment (archetype-agnostic; dead ref → no
   fire); SagaFrame.threads + PlayScreen "Elsewhere — another line" braided aside. Unit + browser
   green. (committed) — authoring thread refs INTO the corpus is a content step (genai/author) post-sweep.
-- [ ] **NA-14 PR + merge** — open the PR for feat/narrative-acts, green CI (lint+test+build+e2e),
-  resolve all review threads, squash-merge; keep post-merge CD/Release workflows green.
+- [ ] [WAIT] **NA-14 PR + merge** — blocked on NA-10/NA-11/NA-12 (corpus committed, harness green,
+  live-verified). Then open the PR for feat/narrative-acts, green CI (lint+test+build+e2e), resolve all
+  review threads, squash-merge; keep post-merge CD/Release workflows green.
 
 After NA-14 merges, RETURN to the standing autonomous POLISH & FEATURES mandate (top of file):
 self-pace the highest-value improvement, own the full PR loop, keep the directive living.
