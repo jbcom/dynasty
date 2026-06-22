@@ -83,4 +83,14 @@ describe("loadSaga (real corpus)", () => {
   it("the full corpus is exactly 504 acts (252 poor + 252 middle)", () => {
     expect(corpus.acts.size).toBe(504);
   });
+
+  it("every scene's `next` pointer resolves to a real scene (traversal can't dead-end mid-act)", () => {
+    // A malformed `next` (e.g. a generated id with a dropped class segment) silently ends the act after
+    // one scene — it made the whole novel unplayable past scene 1. Assert every next resolves.
+    for (const scene of corpus.scenes.values()) {
+      if (scene.next) {
+        expect(corpus.scenes.has(scene.next), `${scene.id} → ${scene.next}`).toBe(true);
+      }
+    }
+  });
 });

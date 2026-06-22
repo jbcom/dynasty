@@ -248,10 +248,26 @@ export class Game {
     const result = this.saga.pickDecision(optionIndex);
     this.syncMotivators(result?.motivators ?? null);
     this.syncSagaFlags();
-    if (result?.succession && (result.succession.takesPartner || result.succession.begets > 0)) {
+    const continues =
+      !!result?.succession && (result.succession.takesPartner || result.succession.begets > 0);
+    if (continues) {
       this.beginNextGenerationAct();
+    } else if (result?.wasCloseDecision && !this.state.end) {
+      // The dynastic fork resolved AGAINST continuing: the player closed a generation without taking a
+      // partner / raising heirs, so the line ends here by choice. Mark it line-extinct so the run
+      // resolves its convergence ending (earthbound/extinguished) + LegacyReport — a real, distinct
+      // stake versus the continue branch, not a silent fall-through to the event flow.
+      this.state = {
+        ...this.state,
+        end: {
+          kind: "line-extinct",
+          year: this.state.year,
+          reason: "The line was not carried forward — no heir was raised to bear the name.",
+        },
+      };
     }
-    this.advanceRunClock();
+    // Don't tick the clock once the line has ended (here or via a prior end) — the run is over.
+    if (!this.state.end) this.advanceRunClock();
     this.emit();
   }
 
