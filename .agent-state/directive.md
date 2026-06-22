@@ -226,6 +226,15 @@ USER directive 2026-06-22). Layer PF-2/PF-3/… as forward commits here; open ON
   tests committed; [WAIT] the retitle RUN over the corpus waits for the middle sweep to finish (file-
   write race + must cover both tracks). 11 genai + 86 browser + 7 e2e + 609 unit green.
 
+- [x] **PF-4 dominant-pole deadzone fix — DONE** (live-verify catch). A near-zero wealth made the
+  SagaPanel headline say "A poor line" while the strip said "centrist"; shared CENTRIST_DEADZONE(12)
+  now governs both dominantMotivator + axisLabel. Unit-tested. 613 unit green.
+
+**[WAIT] Single remaining gate: the middle-class sweep (bg beo7mfy8q). ON DONE →** (1) verify health
+(0 leaks/dangling, 252 middle acts, poor untouched); (2) regen any failed cells; (3) run
+`scripts/retitle-saga.ts` over BOTH tracks for distinct meso titles; (4) update loadSaga test to assert
+both tracks complete; (5) live-verify distinct titles in Chrome; (6) open the ONE PR for feat/saga-polish.
+
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via
   `runTerms`; NO literal presets (the harness validator enforces 0 preset-person leaks).
