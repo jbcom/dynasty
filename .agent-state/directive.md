@@ -64,7 +64,9 @@ and genuine intersections.
   revert point. ON completion: review diff → keep + commit, or reset. [WAIT] the background run.
 - [ ] [WAIT] **UQ-2d semantic-uniqueness + genuine-intersection audit — after UQ-2c.** Large-context
   parallel-reader pass over the corrected corpus: confirm no two cells read structurally/semantically alike and
-  crossings are organic (woven, not walls). Findings → targeted re-author or a guidance patch. [WAIT] UQ-2c.
+  crossings are organic (woven, not walls). Findings → targeted re-author or a guidance patch. ALSO CHECK:
+  baghdad guidance was enriched (018e198) AFTER the scene-pass (Kadoorie→HK convergence node, Dawud Pasha,
+  70%-flag) — verify baghdad's convergence/future-tier scenes reflect it, else targeted baghdad re-run. [WAIT] UQ-2c.
 - [x] **UQ-reconcile arc-hash vs guidance.json — DONE (62beedd).** They're orthogonal layers (shape=FORM/
   pacing, guidance arc=historical MEANING), not redundant. Disambiguated in-prompt: spine intents now say
   "this act moves as a <shape>" (not "a <shape> generation"); scene.ts labels guidance "ARC (historical
