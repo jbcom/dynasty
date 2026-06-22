@@ -1,15 +1,15 @@
 /**
- * RENDER PALETTES (RB-8) — the VISUAL twin of the audio era cues. The scene wash is procedural (an SVG
- * gradient, no raster asset), so the atmosphere shifts across the saga's arc the way `chordForEra`
- * shifts the ambient pad: rooted/warm at the immigrant origins → luminous/vast at the stars. Keyed on
- * the SAME era-id keyword dimension as `ERA_CHORD` in ui/sound.ts so RB-10 can fold the two parallel
- * maps into one era table without re-deriving the bands. Pure data + pure functions — no DOM, no
- * Date/random; deterministic (same era-id + sense → identical ramp).
+ * RENDER PALETTES (RB-8/RB-10) — the VISUAL side of the era cues. The scene wash is procedural (an SVG
+ * gradient, no raster asset), so the atmosphere shifts across the saga's arc the way the audio chord
+ * shifts the pad: rooted/warm at the immigrant origins → luminous/vast at the stars. The ramp now comes
+ * from the SINGLE era table in sim/eras.ts (RB-10) — the same band the audio `chordForEra` reads — so
+ * the two cues can't drift. Pure functions — no DOM, no Date/random; deterministic.
  *
  * The sense accent reuses the values SceneReader.svelte sets on `--sense-accent`, single-sourced here so
  * the wash and the prose edge-wash agree on what each sense looks like.
  */
 
+import { bandForEra } from "../sim/eras";
 import type { Sense } from "../sim/saga/schema";
 
 /** A scene-wash ramp: two gradient stops (top → bottom) over which the sense accent is layered. */
@@ -23,25 +23,13 @@ export interface EraRamp {
 }
 
 /**
- * Era → wash ramp, matched by the era-id keywords (same regexes as ERA_CHORD). Ordered origins → stars;
- * the first match wins, so new period ids inherit a sensible neighbour and the default is the rooted
- * origins ground. The hex pairs trace the arc: earthen browns → industrial slate → striving gold →
- * suspended violet → open luminous blue.
+ * Resolve the wash ramp for an era id (a wave/period id or a macro-act title — both carry the keywords).
+ * The ramp comes from the SINGLE era table in sim/eras.ts (RB-10) — the same band the audio chord reads
+ * — so the backdrop and the pad can never disagree about the era. (id + ramp lifted from the band.)
  */
-const ERA_RAMP: Array<[RegExp, Omit<EraRamp, "id"> & { id: string }]> = [
-  [/origins|1885|founding/i, { id: "origins", top: "#2a2018", bottom: "#0f0b07" }], // rooted, warm earth
-  [/mogul|1964|industr/i, { id: "mogul", top: "#23262b", bottom: "#0d0f12" }], // industrial slate weight
-  [/brand|primetime|ascent|1988|2004|2015/i, { id: "ascent", top: "#2e2616", bottom: "#120e06" }], // striving gold
-  [/interregnum|mars|2021|2028/i, { id: "interregnum", top: "#1f1830", bottom: "#0a0714" }], // tense violet
-  [/contact|interstellar|ascension|stars/i, { id: "stars", top: "#0f1d2e", bottom: "#040810" }], // open luminous deep
-];
-
-const DEFAULT_RAMP: EraRamp = { id: "origins", top: "#2a2018", bottom: "#0f0b07" };
-
-/** Resolve the wash ramp for an era id (a wave/period id or a macro-act title — both carry the keywords). */
 export function rampForEra(eraId: string): EraRamp {
-  for (const [re, ramp] of ERA_RAMP) if (re.test(eraId)) return ramp;
-  return DEFAULT_RAMP;
+  const band = bandForEra(eraId);
+  return { id: band.id, top: band.ramp.top, bottom: band.ramp.bottom };
 }
 
 /**

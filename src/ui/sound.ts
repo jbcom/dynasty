@@ -1,5 +1,6 @@
 import { AudioEngine } from "../audio/engine";
 import { Sfx, type SfxId } from "../audio/sfx";
+import { bandForEra } from "../sim/eras";
 
 /**
  * SOUND CUES (PF-15) — a single lazily-constructed Sfx the play surface uses for page-turn + choice
@@ -19,20 +20,12 @@ let pendingEra: string | null = null;
 
 /**
  * Per-era ambient CHORD (RB-3): when no `/assets/audio/<era>.ogg` exists, AudioEngine.setEra falls back
- * to a synth pad — give each era a distinct chord so the mood deepens across the run's arc (warm/rooted
- * early → open/luminous late) instead of every era playing the same C-E-G. Matched by era-id prefix so
- * new period ids inherit a sensible neighbour; the default is the rooted origins chord.
+ * to a synth pad — each era gets a distinct chord so the mood deepens across the run's arc (warm/rooted
+ * early → open/luminous late). The chord comes from the SINGLE era table in sim/eras.ts (RB-10), the
+ * same one the visual wash reads, so the audio and the backdrop can never disagree about the era.
  */
-const ERA_CHORD: Array<[RegExp, string[]]> = [
-  [/origins|1885|founding/i, ["C3", "E3", "G3"]], // rooted, warm — the immigrant ground
-  [/mogul|1964|industr/i, ["A2", "C3", "E3", "G3"]], // a minor-7 weight as the line climbs
-  [/brand|primetime|ascent|1988|2004|2015/i, ["D3", "F#3", "A3"]], // brighter, striving
-  [/interregnum|mars|2021|2028/i, ["E3", "G#3", "B3", "D#4"]], // tense, suspended major-7
-  [/contact|interstellar|ascension|stars/i, ["G2", "D3", "A3", "E4"]], // open fifths — luminous, vast
-];
 export function chordForEra(eraId: string): string[] {
-  for (const [re, chord] of ERA_CHORD) if (re.test(eraId)) return chord;
-  return ["C3", "E3", "G3"];
+  return [...bandForEra(eraId).chord];
 }
 
 /** Toggle whether cues play (from the `sound` setting). */
