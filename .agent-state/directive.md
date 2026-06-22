@@ -65,11 +65,19 @@ push + PR. See [[one-branch-local-review]].
   (caricature portrait/scene compositing) is NOT a polish slice — `src/render` is empty (the module was
   removed; only a stale Portrait.visual screenshot remains), so it's a from-scratch subsystem needing an
   asset pipeline + real 2D caricature art ([[dynasty-ui-conventions]]) — DECIDED to split it out as RB-8.
-- [ ] [WAIT] **RB-8 caricature portrait/scene compositing (new subsystem).** Build src/render: per-act
-  portrait + scene compositing from real 2D assets (caricature only, license-logged in assets.json),
-  wired into the SceneReader/PlayScreen. Needs a design pass (use-case enumeration) + the asset pipeline
-  first; visual-tested. Its own milestone — start from clean main AFTER the consolidation PR (RB-9) merges
-  (avoid touching the branch under review).
+- [ ] **RB-8 caricature portrait/scene compositing (new subsystem) — ACTIVE on `feat/portrait-scene-compositing`.**
+  DESIGN DONE: `docs/superpowers/specs/2026-06-22-rb8-portrait-scene-compositing-design.md` (use-case
+  enumeration → identity→asset mapping → layered-compositor decision+why → module shape → build order).
+  Build src/render per that spec: `palettes.ts` + procedural SVG wash first (step 1, proves era/sense
+  atmosphere end-to-end against the existing `--sense-accent` map), then `composeScene.ts` pure core +
+  determinism unit tests (step 2), then portrait layer art license-logged in assets.json (step 3), then
+  `SceneStage.svelte` mounted behind the SceneReader prose + cross-fade (step 4), then the
+  generation-turn / era-crossing / ending / rival-vignette variants each visual-tested (step 5).
+  Caricature only ([[dynasty-ui-conventions]]); no placeholders. Start from clean main (#89 merged → v0.14.0).
+- [ ] [WAIT] **RB-10 audio↔visual era lockstep + scene-stage polish.** ONCE RB-8 lands SceneStage:
+  single-source the era ramp so `chordForEra` (audio) and `palettes.ts` (visual) read the SAME era table
+  (today they're parallel maps that could drift); add the ending composed frame's audio sting; visual+audio
+  tested. Keeps the queue non-empty behind RB-8 ([[never-drain-queue]]); un-WAIT after RB-8's SceneStage exists.
 - [x] **RB-4 surface interactive convergence — DONE (forward commit).** Added the rival's rung to the
   Glimpse + a ★-per-rung indicator in the "Other lines" strip, so the player sees their crossings move a
   rival's standing. Browser-tested.
