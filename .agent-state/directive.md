@@ -107,8 +107,10 @@ push + PR. See [[one-branch-local-review]].
   The 1st dry-run FOUND a bug: the model returns `kind` as "DESTINATION"/"SOURCE" (caps) + synonyms, so
   all 23 tags failed the lowercase enum → FIXED (normalizeBraidSlots coerces casing/synonyms + strips
   stray destination vignettes, applied before the gate; + explicit lowercase-enum in the prompt; 680 unit).
-  A 2nd dry-run (ireland/poor) is RUNNING to confirm tags now validate. ON completion: scoped `--write`,
-  live-verify a crossing weaves a rival's borrowed copy, then full-corpus tag. [WAIT] the background run.
+  2nd dry-run CONFIRMED the fix — all 6 ireland/poor files validate, 0 invalid. Now WRITING tags for
+  ireland/poor + italian/poor (a crossing PAIR: ireland's destination anchors + italian's source slots
+  at a shared tier/setting). ON write completion: confirm matching slots in the corpus, live-verify in
+  Chrome a crossing weaves italian's borrowed copy into an ireland scene, then full-corpus tag. [WAIT] writes.
 - [ ] [WAIT] **WV-3 emergent variability systems (anti-Suzerain) — after WV-2.** Seeded market/disease
   variability + Yuka rival reactions so playthroughs diverge; budget magnitudes more content
   ([[emergent-cause-effect-sim]]). Keeps the queue non-empty; un-WAIT after WV-2.
