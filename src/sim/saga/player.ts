@@ -95,8 +95,18 @@ const INTERSECTION_POINTS: readonly IntersectionPoint[] = [
  * Idempotent + pure (fixed table, no RNG) — replay-safe.
  */
 export function weaveThreads(corpus: SagaCorpus): void {
-  const hasActAtTier = (wave: string, tier: number) =>
-    Array.from(corpus.acts.values()).some((a) => a.wave === wave && a.tier === tier);
+  // Index (wave→tiers present) ONCE up front, so the partner lookup is O(1) instead of re-scanning all
+  // acts per candidate partner per act (CodeRabbit #96).
+  const tiersByWave = new Map<string, Set<number>>();
+  for (const a of corpus.acts.values()) {
+    let tiers = tiersByWave.get(a.wave);
+    if (!tiers) {
+      tiers = new Set<number>();
+      tiersByWave.set(a.wave, tiers);
+    }
+    tiers.add(a.tier);
+  }
+  const hasActAtTier = (wave: string, tier: number) => tiersByWave.get(wave)?.has(tier) ?? false;
 
   for (const act of corpus.acts.values()) {
     const point = INTERSECTION_POINTS.find((p) => p.at === act.tier && p.wave === act.wave);

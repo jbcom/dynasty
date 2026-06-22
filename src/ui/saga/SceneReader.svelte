@@ -41,12 +41,17 @@ interface Page {
 // LIVE mid-scene (threads change while scene.id is stable), `pages` grows + `lastPara` un-fires and the
 // player is pulled back mid-flow — clamp paraIdx or freeze injection until scene-end before doing that.
 const pages = $derived.by<Page[]>(() => {
-  const out: Page[] = scene.prose.map((text) => ({ text, woven: false, lead: false }));
+  // Defensive: schema guarantees prose.min(1), but guard against a malformed/dynamic thread (CodeRabbit
+  // #96) so a missing crossing/fragment can never produce an empty/blank page or throw.
+  const out: Page[] = (scene.prose ?? []).map((text) => ({ text, woven: false, lead: false }));
   for (const t of threads) {
-    out.push({ text: t.crossing, woven: true, lead: true });
-    for (const para of t.scene.prose.slice(0, 2)) out.push({ text: para, woven: true, lead: false });
+    if (t?.crossing) out.push({ text: t.crossing, woven: true, lead: true });
+    for (const para of (t?.scene?.prose ?? []).slice(0, 2)) {
+      out.push({ text: para, woven: true, lead: false });
+    }
   }
-  return out;
+  // Never hand the reader zero pages (would make lastPara always-true) — fall back to one empty page.
+  return out.length > 0 ? out : [{ text: "", woven: false, lead: false }];
 });
 
 // Whether the user prefers reduced motion — gates the JS-driven scene fade (CSS handles the rest).
