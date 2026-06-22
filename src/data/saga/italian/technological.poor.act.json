@@ -139,6 +139,14 @@
         }
       ],
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "wharf",
+          "vignette": "A young man of the {family_name} family pauses at the foot of the gangway, tracing the iron teeth of a nearby cargo winch with soot-stained fingers."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -208,6 +216,19 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "tenement stairwell"
+        },
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "machine shop",
+          "vignette": "{given_name} {family_name} bends over a grease-slicked workbench, intently filing a brass gear until it slips perfectly into place."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -260,6 +281,13 @@
           "atTier": 0,
           "crossing": "The bitter sting of raw harbor wind carried the heavy scent of Swedish pine tar and scorched lard as {given_name} {surname} surrendered three copper coins to the towering {family_name} dock-boss for the right to clear the lumber-hooker's deck. It was a silent, sullen bargain struck without a common tongue, sealed only by the crush of calloused palms and the shared desperation of the waterfront. Though the {family_name} crew watched with cold, territorial suspicion from the gangplank, this hard-won foothold secured the family’s first real week of wages.",
           "relation": "neutral"
+        }
+      ],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "tenement ward"
         }
       ],
       "requires": {
@@ -348,6 +376,19 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "alleyway"
+        },
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "alleyway",
+          "vignette": "An intense young man from the {family_name} family stands by a sputtering gas-pipe, running a finger along its crude solder to trace a leak."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -392,21 +433,12 @@
           }
         }
       ],
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
       "decision": {
         "tier": "major",
         "prompt": "The cold sting of well-water fails to clear the black grease of the workshop from beneath your nails, and the draft through the pine crate floorboards smells of damp soot. The family spark must either burn through new mouths or be spent entirely on the draft-table. How will the house of {surname} carry its heat into the coming winter?",
         "options": [
           {
             "text": "We bind our name to the foundry-owner's kin, sharing the bitter chicory and a cramped bed so that the two children we bring into this soot-choked world may one day inherit the brass valves we now only polish.",
-            "succession": {
-              "takesPartner": true,
-              "begets": 2
-            },
             "motivatorShift": {
               "lineage": 2,
               "wealth": 1,
@@ -416,14 +448,14 @@
             "setFlags": [
               "foundry_alliance",
               "heirs_of_starchy_bread"
-            ]
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
           },
           {
             "text": "We bring the quiet, grease-stained orphan of the lathe-operator to our table, sharing our garlic-rubbed crusts and teaching them the secret geometry of steam. Our blood ends with {given_name}, but our craft will live in their hands.",
-            "succession": {
-              "takesPartner": false,
-              "begets": 1
-            },
             "motivatorShift": {
               "honor": 2,
               "reach": 1,
@@ -433,7 +465,11 @@
             "setFlags": [
               "adopted_apprentice",
               "sole_inventor"
-            ]
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
           },
           {
             "text": "We sell the family stove for scrap iron and sleep beside the boiler. No child will cry in our workshop; the only legacy {given_name} leaves is the thrumming, perfect piston of the high-pressure engine we build before our lungs fail.",
@@ -449,6 +485,19 @@
             ]
           }
         ]
+      },
+      "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 2,
+          "setting": "ditch-banks",
+          "vignette": "The {family_name} family is crouched along the wet ditch-banks, harvesting wild field-mustard into a canvas sack."
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
       }
     },
     {
@@ -498,6 +547,14 @@
         }
       ],
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 2,
+          "setting": "building site",
+          "vignette": "A family laboring over a half-built sod-wall, their midday pot of wild leeks simmering over a smoky willow fire."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -581,6 +638,14 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "clearing",
+          "vignette": "A member of the {family_name} family sits on a limestone sill in the raw clearing, rubbing rancid lard into a split knuckle to soothe the bite of the frost."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -639,6 +704,19 @@
           "atTier": 1,
           "crossing": "The burning stench of scorched lard oil announced the massive shadow of {scandinavian_given_name} hovering over your spinning lathe. Without a word, his grease-blackened hand clamped over your own to force the slipping feed-lever back, saving your family's precious tool steel from shattering against the cold-rolled plate. In that vibrating silence, a quiet bargain was struck: you would supply his house with your uncle's imported olive oil if he continued to show you how to tame these American machines.",
           "relation": "contributing"
+        }
+      ],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "workshop",
+          "vignette": "A member of the {family_name} family coaxes a high-register scream from a file biting into cold-rolled plate."
+        },
+        {
+          "kind": "destination",
+          "at": 1,
+          "setting": "horse-trough"
         }
       ],
       "requires": {
@@ -738,6 +816,13 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 1,
+          "setting": "muddy common"
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -790,11 +875,6 @@
           }
         }
       ],
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
       "decision": {
         "tier": "major",
         "prompt": "—your quiet nephew, whom you took in when the fever took the valley—watches the steam rise from his mug. He has the {surname} hands, quick and steady, but the workshop needs more than raw labor to survive the winter. The copper condenser in the corner rattles like dry bone, and the choice of how to fuel our future cannot be put off any longer.",
@@ -847,6 +927,19 @@
             ]
           }
         ]
+      },
+      "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "workshop",
+          "vignette": "An elder of the {family_name} line sits at a scarred pine table, sharing a bitter cup of chicory espresso and chewing salt-cured hog-jowl."
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
       }
     },
     {
@@ -900,6 +993,14 @@
         }
       ],
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "workshop",
+          "vignette": "A member of the {family_name} hunches over a bubbling crucible of melted lead, coughing in the sulfurous steam of their cellar workshop."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -995,6 +1096,13 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 2,
+          "setting": "foundry quarter"
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -1059,6 +1167,19 @@
           "atTier": 2,
           "crossing": "The sharp, resinous scent of fresh-cut pine from the cargo crates cuts through the sweet lavender water we use to dress our imported silks, marking the raw physical boundary of our new enterprise. There, the patriarch of the {surname} line stands over his timber schematics, refusing to secure our mahogany display cases until our {family_name} kin agree to a premium that eats directly into our department's seasonal profits.",
           "relation": "opposing"
+        }
+      ],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "department store"
+        },
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "dining room",
+          "vignette": "The {family_name} family leans close over their oysters, speaking in conspiratorial whispers while keeping their eyes on the room."
         }
       ],
       "requires": {
@@ -1175,6 +1296,14 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "high office",
+          "vignette": "A silent member of the {family_name} family stands by the window of the high office, looking down at the flickering streetlamps."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -1231,11 +1360,6 @@
           }
         }
       ],
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
       "decision": {
         "tier": "major",
         "prompt": "The gamey fat of the roasted boar coats the roof of your mouth, yet the phantom bitterness of twice-boiled chicory clings stubbornly to the back of your throat. This grand hall is ours now, won by our patented designs, but its high plaster vaults are chillingly quiet. How will {given_name} {surname} anchor this family's newly engineered dominance before the hearthfire burns down to ash?",
@@ -1288,6 +1412,19 @@
             ]
           }
         ]
+      },
+      "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "dining hall",
+          "vignette": "Members of the {surname} family sit at a polished table, whispering in low, guarded tones with city officials over plates of rich, roasted meats."
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
       }
     },
     {
@@ -1330,6 +1467,14 @@
         }
       ],
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "workshop",
+          "vignette": "An artisan of the {family_name} family scrubs a machined brass gear in a pungent vinegar bath."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -1402,6 +1547,19 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "ironmongery",
+          "vignette": "A member of the {family_name} line strains against a massive, black-greased flywheel that vibrates with bone-deep force."
+        },
+        {
+          "kind": "destination",
+          "at": 1,
+          "setting": "counting house"
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -1453,6 +1611,19 @@
           "atTier": 3,
           "crossing": "The acrid, sulfuric bite of coal smoke in the yard was suddenly cut by the crisp, resinous scent of imported northern timber, drifting from the flatcars guarded by the silent {surname} clan. Your uncle spat onto the soot-stained gravel, begrudgingly signing the costly shipping tariff that bound our Italian workshops to their exclusive Baltic supply line just to keep the carriage production moving. It was a tense but necessary alliance, securing their premium Scandinavian wood to brace our high-tensile steel suspensions before the midday train departed.",
           "relation": "contributing"
+        }
+      ],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "piazza"
+        },
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "gala",
+          "vignette": "{full_name} stands near the string quartet, quietly listening to an alderman hold court about rail contracts."
         }
       ],
       "requires": {
@@ -1582,21 +1753,12 @@
           }
         }
       ],
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
       "decision": {
         "tier": "major",
         "prompt": "With the cold, flinty taste of the northern vintage still coating your throat, the weight of the {family_name} legacy demands a vessel. How do you anchor the progress of our house?",
         "options": [
           {
             "text": "I will invite the chemist's daughter from the northern works to share my bed and this heavy table. We will raise a new crop of children who speak the language of steam and iron, ensuring our blood flows into the next century.",
-            "succession": {
-              "takesPartner": true,
-              "begets": 2
-            },
             "motivatorShift": {
               "lineage": 2,
               "wealth": 1,
@@ -1606,14 +1768,14 @@
             "setFlags": [
               "industrial_alliance",
               "heirs_of_iron"
-            ]
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
           },
           {
             "text": "There is no room for foreign blood at this table. I will claim my sister’s orphaned boys as my own heirs, teaching them the secrets of the systematic vines without yielding our name to a new partner’s greed.",
-            "succession": {
-              "takesPartner": false,
-              "begets": 2
-            },
             "motivatorShift": {
               "lineage": 1,
               "honor": 2,
@@ -1623,7 +1785,11 @@
             "setFlags": [
               "family_adoption",
               "traditionalist_guard"
-            ]
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
           },
           {
             "text": "Let the lineage end with me; the wine is too pure to dilute with weak blood. I will dedicate our reserves to perfecting the automated steel mills, leaving a monument of cold, unchanging patent books rather than soft flesh.",
@@ -1639,6 +1805,19 @@
             ]
           }
         ]
+      },
+      "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "dinner table",
+          "vignette": "The family of {full_name} sits around a table heavy with wild boar ragu and sharp northern wine, offering a cup to anyone who crosses their threshold."
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
       }
     },
     {
@@ -1681,6 +1860,14 @@
         }
       ],
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "viewing gallery",
+          "vignette": "A representative of the {family_name} stands near the warm espresso machines, quietly observing the directors while holding a draft charter."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -1753,6 +1940,14 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "energy grid",
+          "vignette": "Deep within the energy grid, {given_name} stands near the humming cooling banks, tracking system diagnostics on a handheld slate."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -1804,6 +1999,13 @@
           "atTier": 4,
           "crossing": "The dry, ozone-scented air of the gallery suddenly chills as {given_name} {surname} steps to the brass railing, his eyes reflecting the flickering green of the Scandinavian maritime tickers that are systematically starving your Mediterranean cargo lines. He does not look at the frantic pit below, but instead slides a single, wax-sealed transit ledger across the mahogany, offering the Baltic shipping lanes your empire needs in exchange for total dominance over your southern ports. It is a silent, cold-eyed squeeze that forces your hand, binding the fate of your southern fleet to his northern dictates.",
           "relation": "opposing"
+        }
+      ],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "trading floor"
         }
       ],
       "requires": {
@@ -1886,6 +2088,14 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "control room",
+          "vignette": "A member of the {family_name} family stands silently on the high steel catwalk, staring down at the glowing holographic network."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -2040,6 +2250,13 @@
         }
       ],
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "observation deck"
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -2130,6 +2347,19 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "orbital hub"
+        },
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "valves",
+          "vignette": "A member of the {family_name} line is balanced precariously on an overhead strut, hammering a stubborn valve back into alignment."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -2191,6 +2421,14 @@
           "atTier": 5,
           "crossing": "Through the relentless, teeth-rattling hum of the primary deck, the dry, clipped voice of the {family_name} patriarch cuts clean, demanding the telemetry keys your mother spent her life securing for the {surname} enterprise. As the pneumatic relays click like locking handcuffs, you surrender the orbital grid, knowing this silent northern dynasty has finally choked the warmth out of your hard-won ascension.",
           "relation": "opposing"
+        }
+      ],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "engine room",
+          "vignette": "A grease-stained member of the {family_name} family rhythmically strikes a cold pipe with a heavy wrench, listening closely for the shift in pitch that signals a cleared valve."
         }
       ],
       "requires": {
@@ -2352,21 +2590,12 @@
           }
         }
       ],
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
       "decision": {
         "tier": "major",
         "prompt": "The flat, zinc-heavy residue on your palate is a reminder of how little this void offers to the flesh. If the line of {family_name} is to survive three hundred leagues above the soil, how will {given_name} anchor our blood to these cold, pressurized corridors?",
         "options": [
           {
             "text": "I will share my cramped berth and salt-rations with the lead systems engineer. Together, we will bind our lives in a formal orbital union, conceiving heirs who will know no other home but this metal frame and no other taste but the slurry.",
-            "succession": {
-              "takesPartner": true,
-              "begets": 2
-            },
             "motivatorShift": {
               "lineage": 3,
               "tradition": 2,
@@ -2376,14 +2605,14 @@
             "setFlags": [
               "orbital_union_sealed",
               "vacuum_born_dynasty"
-            ]
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
           },
           {
             "text": "I will take no partner to crowd this narrow cabin. Instead, I will claim the ward currently gestating in the station's mechanical incubators—a child of our family's proprietary gene-sequence—and raise them alone to master the telemetry of this station.",
-            "succession": {
-              "takesPartner": false,
-              "begets": 1
-            },
             "motivatorShift": {
               "lineage": 1,
               "power": 2,
@@ -2393,7 +2622,11 @@
             "setFlags": [
               "incubator_heir_raised",
               "sterile_isolation"
-            ]
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
           },
           {
             "text": "Let my palate starve and the bloodline end with me. I will divert our remaining capital and oxygen reserves into completing the automated deep-space relays, ensuring our technological legacy outlives our fragile, flesh-bound name.",
@@ -2409,6 +2642,19 @@
             ]
           }
         ]
+      },
+      "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "narrow galley",
+          "vignette": "The family sits together in the narrow galley, quietly sharing a thimbleful of synthetic wine in a solemn toast."
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
       }
     }
   ]

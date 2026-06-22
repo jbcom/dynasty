@@ -148,6 +148,13 @@
         }
       ],
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 1,
+          "setting": "harbor"
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -242,6 +249,14 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "river-wharf",
+          "vignette": "A member of the {family_name} family hunches their shoulders against the salt wind, hauling a splintered oak crate across the wet cobbles."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -303,6 +318,13 @@
           "atTier": 0,
           "crossing": "Through the shriek of iron-rimmed wheels, the sharp, scraping rattle of a handcart pushed by the {family_name}s forced its way onto the narrow curb, colliding directly with the vegetable barrow of the {surname} family. A tense, silent standoff hung between them in the freezing rain until a grudging trade of coal for cabbage settled the boundary of their respective territories.",
           "relation": "neutral"
+        }
+      ],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "marketplace"
         }
       ],
       "requires": {
@@ -415,6 +437,19 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "alleyway"
+        },
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "cobbles",
+          "vignette": "{given_name} {surname} plays a brisk, defiant jig on a battered fiddle, collecting copper pennies in a woolen cap."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -470,21 +505,12 @@
           }
         }
       ],
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
       "decision": {
         "tier": "major",
         "prompt": "The lingering salt of the pickled pork still burns on your tongue, a sharp reminder of the cellar's grip. How will {given_name} carry the {family_name} name out of this damp dark and onto the grand stages of the world?",
         "options": [
           {
             "text": "Let the smell of tallow candles yield to the sweet scent of theatrical powder. I will take the hand of the traveling fiddler's daughter, uniting our talents under one banner and raising heirs who will sleep in the prop boxes and inherit the spotlight.",
-            "succession": {
-              "takesPartner": true,
-              "begets": 2
-            },
             "motivatorShift": {
               "lineage": 3,
               "tradition": 2,
@@ -494,14 +520,14 @@
             "setFlags": [
               "theatrical_dynasty",
               "joint_act"
-            ]
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
           },
           {
             "text": "Keep the iron spoon and the cabbage broth for myself, but take my sister's orphaned boy into the troupe. I will teach him how to command the stage and carry the {family_name} repertoire, ensuring our secrets survive without the complications of a marriage bed.",
-            "succession": {
-              "takesPartner": false,
-              "begets": 1
-            },
             "motivatorShift": {
               "honor": 2,
               "wealth": 2,
@@ -511,7 +537,11 @@
             "setFlags": [
               "apprentice_heir",
               "frugal_household"
-            ]
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 1
+            }
           },
           {
             "text": "Spit out the brine of endurance and run from this cellar alone. I will pour every drop of sweat into my solo career in the city, drinking fine champagne to wash away the greasepaint, letting the family line end with my own final bow.",
@@ -527,6 +557,19 @@
             ]
           }
         ]
+      },
+      "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "street vendor",
+          "vignette": "A member of the {family_name} family stands by the wooden barrow, counting out coppers for a small piece of sharp ginger root."
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
       }
     },
     {
@@ -570,6 +613,19 @@
         }
       ],
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "barrow carts",
+          "vignette": "{full_name} unrolls a length of damp, salvaged theater velvet near the fruit barrows, smelling of cheap greasepaint."
+        },
+        {
+          "kind": "destination",
+          "at": 2,
+          "setting": "tram rails"
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -645,6 +701,14 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "rented room",
+          "vignette": "The {family_name} family struggles to haul the splintered boards and heavy, damp canvas of their collapsible stage."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -697,6 +761,19 @@
           "atTier": 1,
           "crossing": "The scraping of iron cart-rims grows deafening as the eldest {family_name} boy locks wheels with a brawny {surname} pushcart vendor, their shouting match over a prime curb-space dissolving into a tense, gestured bargain over shared transit rights. A handful of damp copper coins changes hands, establishing a fragile, unspoken truce between their tenement steps before the parish clock can strike its next hour.",
           "relation": "neutral"
+        }
+      ],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "market stalls",
+          "vignette": "The {family_name} family flings open the hall doors, loudly tuning a parlor organ to compete with the cries of the fishwives."
+        },
+        {
+          "kind": "destination",
+          "at": 2,
+          "setting": "construction site"
         }
       ],
       "requires": {
@@ -779,6 +856,14 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "makeshift playhouse",
+          "vignette": "The {family_name} family stands on a rickety wooden stage, facing a crowded, soot-faced audience under the yellow glow of low-burning footlights."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -825,11 +910,6 @@
           }
         }
       ],
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
       "decision": {
         "tier": "major",
         "prompt": "The grease of the road still coats your teeth, but the cayenne on your tongue demands a grander stage. As the applause of the provincial barn dies down, how will {given_name} carry the {surname} name out of the turnip-water dust of this circuit?",
@@ -882,6 +962,19 @@
             ]
           }
         ]
+      },
+      "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 2,
+          "setting": "tavern bench",
+          "vignette": "The {family_name} family sits shoulder-to-shoulder on a low bench, silently passing a heavy wooden bowl of bitter winter ale between them."
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
       }
     },
     {
@@ -938,6 +1031,14 @@
         }
       ],
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "collection box",
+          "vignette": "{given_name} stands guard by the wooden collection box, eagerly pocketing the wet coppers of those entering the makeshift theater."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -1036,6 +1137,14 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "stage wings",
+          "vignette": "The soot-stained performers of the {family_name} family stand in the drafty wings, listening to the roar of the tavern below."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -1101,6 +1210,13 @@
           "atTier": 2,
           "crossing": "Beneath the oily reek of the gas lamps, the cold scrape of a silver coin against your palm seals a tense truce with the {family_name} patriarch, who stands by the stage door with his coat collar turned up against the draft. He has bought up the distribution rights for your playbills across the lower wards, translating your family’s sudden theatrical fame into his own street-level currency. His sharp, calculating nod acknowledges that while your voices fill the hall, his boys control the pavement outside.",
           "relation": "neutral"
+        }
+      ],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "theater gallery"
         }
       ],
       "requires": {
@@ -1217,6 +1333,14 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "theatre stage",
+          "vignette": "The {family_name} family stands on the grand mahogany stage, holding the gaze of thousands in the crowded house."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -1276,21 +1400,12 @@
           }
         }
       ],
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
       "decision": {
         "tier": "major",
         "prompt": "The dregs of the patron's burgundy sit heavy on the tongue, but the scent of greasepaint and the cold draft from the wings demand a reckoning. How will {given_name} {surname} anchor this hard-won legacy before the stage lights go dark forever?",
         "options": [
           {
             "text": "We must own the very mortar we perform in. I will accept the hand of the theater owner's eldest child, grounding our flighty family name in deeds of stone and securing our children's place on the billing.",
-            "succession": {
-              "takesPartner": true,
-              "begets": 2
-            },
             "motivatorShift": {
               "wealth": 3,
               "lineage": 2,
@@ -1300,14 +1415,14 @@
             "setFlags": [
               "gilded_marquee",
               "landed_thespians"
-            ]
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
           },
           {
             "text": "Let the bloodline bend but never break. I will raise my late sibling's children as my own beneath the stage-shadows, teaching them our family's silent language without compromising our freedom for a marriage of convenience.",
-            "succession": {
-              "takesPartner": false,
-              "begets": 2
-            },
             "motivatorShift": {
               "honor": 2,
               "reach": 2,
@@ -1317,7 +1432,11 @@
             "setFlags": [
               "troupe_adopted",
               "nomadic_repertoire"
-            ]
+            ],
+            "succession": {
+              "takesPartner": false,
+              "begets": 2
+            }
           },
           {
             "text": "Let the name burn out in a blaze of star-fire. I will take no partner and leave no heirs, instead spending every shilling on the grandest, most ruinous solo tour this world has ever seen, leaving only ghosts and legend.",
@@ -1333,6 +1452,19 @@
             ]
           }
         ]
+      },
+      "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "theatre hall",
+          "vignette": "The {family_name} family shares a bottle of heavy burgundy with their wealthy patron in the cramped backstage of the theatre hall."
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
       }
     },
     {
@@ -1377,6 +1509,14 @@
         }
       ],
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "backstage",
+          "vignette": "The {family_name} troupe is frantically touching up their greasepaint and cooling scorched hair-irons in the crowded wings."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -1453,6 +1593,19 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "theatre gallery"
+        },
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "theatre wings",
+          "vignette": "A member of the {family_name} family stands tense in the dim wings of the theatre, their hand gripped tightly as the crowd roars."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -1504,6 +1657,14 @@
           "atTier": 3,
           "crossing": "The dry, papery scrape of municipal excavation permits sliding across the mahogany ceases as the {italian_surname} representative taps a heavy gold signet ring, demanding a monopoly on the masonry crews for the new reservoir. Your uncle, holding the pen for the {family_name} faction, answers with a low, gravelly chuckle that seals a quiet pact: their concrete and sweat, in exchange for our political protection and court clearances.",
           "relation": "contributing"
+        }
+      ],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "salon",
+          "vignette": "The {family_name} family sits quietly in a carpeted corner of the salon, their presence drawing sharp inhales and whispered murmurs from the patrons."
         }
       ],
       "requires": {
@@ -1595,6 +1756,14 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "theater balcony",
+          "vignette": "The {family_name} stands on the high iron balcony of the theater, quietly observing the sprawling city lights below."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -1754,6 +1923,14 @@
         }
       ],
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "grand salon",
+          "vignette": "The {family_name} family holds court in their grand, perfume-drenched salon, receiving wealthy patrons and theatergoers."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -1921,6 +2098,13 @@
           "relation": "neutral"
         }
       ],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "limestone atrium"
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -2036,6 +2220,14 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "paneled room",
+          "vignette": "A member of the {family_name} family stands in a mahogany-paneled room, silently watching a column of sapphire-colored holographic data drift through the air."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -2096,11 +2288,6 @@
           }
         }
       ],
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
       "decision": {
         "tier": "major",
         "prompt": "The bitter trace of chicory on your tongue demands a final verdict for the {family_name} name. As the neon haze of Tokyo dims into the damp morning air, how will the fifth generation anchor this nomadic empire of stage and screen?",
@@ -2153,6 +2340,19 @@
             ]
           }
         ]
+      },
+      "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "banquet hall",
+          "vignette": "The {family_name} host a lavish celebration in a crowded hall, clinking glasses with local elites to toast their new production house."
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
       }
     },
     {
@@ -2202,6 +2402,19 @@
         }
       ],
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 0,
+          "setting": "cargo bay",
+          "vignette": "A member of the {family_name} family heats a curling iron over a sputtering hot-plate, preparing for the night's performance."
+        },
+        {
+          "kind": "destination",
+          "at": 1,
+          "setting": "market lanes"
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -2283,6 +2496,13 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "companionway"
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -2341,6 +2561,19 @@
           "atTier": 5,
           "crossing": "The dry, metallic screech of the locking collars vibrated directly through the deckplates into {surname}’s soles as they signed away the orbital dock-rights to the {family_name} cartel. This bitter bargain, struck in the shadow of the venting steam, guaranteed the Irish line's survival in the upper berths but left them entirely dependent on Italian-controlled shipping lanes for their transit to the stars.",
           "relation": "opposing"
+        }
+      ],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "ventral docks"
+        },
+        {
+          "kind": "source",
+          "at": 1,
+          "setting": "habitations",
+          "vignette": "The {family_name} family plays a reedy electronic tin whistle, its old-world melody competing with the heavy vibration of the station generators."
         }
       ],
       "requires": {
@@ -2446,6 +2679,19 @@
         ]
       },
       "thread": [],
+      "braidSlots": [
+        {
+          "kind": "destination",
+          "at": 0,
+          "setting": "gallery"
+        },
+        {
+          "kind": "source",
+          "at": 2,
+          "setting": "promenade",
+          "vignette": "A member of the {family_name} family stands near the glass pane, telling theatrical ghost stories to a small group of captivated scrap-colony children."
+        }
+      ],
       "requires": {
         "flags": [],
         "notFlags": []
@@ -2498,11 +2744,6 @@
           }
         }
       ],
-      "thread": [],
-      "requires": {
-        "flags": [],
-        "notFlags": []
-      },
       "decision": {
         "tier": "major",
         "prompt": "As the sterile, coppery bite of the synth-wine lingers on your tongue, the silence of the high-tier dressing room grows heavy. Your performances have conquered the synthetic sky, but the stage is empty once the house lights dim. How will the {family_name} line carry this cold-spun glory forward?",
@@ -2555,6 +2796,19 @@
             ]
           }
         ]
+      },
+      "thread": [],
+      "braidSlots": [
+        {
+          "kind": "source",
+          "at": 2,
+          "setting": "high deck",
+          "vignette": "The {family_name} family stands in a quiet alcove, raising plastic tumblers of synthetic wine in a solemn toast."
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
       }
     }
   ]
