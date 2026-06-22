@@ -40,10 +40,15 @@ by construction.
   convergence ending — the hour+ run is real. FOUND A GAP → RB-7: baghdad (the only non-1885 origin,
   founds 762 CE) goes extinct ~1946 after 16 scenes because the timeline eras are calibrated for the
   1885 waves, so advanceFamily ages the line across century-gaps between tiers and the heirs die out.
-- [ ] **RB-7 baghdad timeline mismatch** — baghdad founds in 762 CE but the NY-line eras (1885+) drive
-  the run clock, so its saga can't complete (line dies by 1946). Decouple the saga generation clock from
-  the NY eras (a per-generation year-step bounded to a human lifespan, independent of era span) OR give
-  baghdad its own era ladder. Fix so baghdad reaches a full 6-tier run like the other waves; test + PR.
+- [ ] **RB-7 baghdad timeline mismatch.** ROOT CAUSE (analyzed): baghdad founds at year 762 but
+  state.eraIndex=1 = the "origins" era (yearStart 1885, yearEnd 1946, budget 16). advanceTimeline steps
+  year by span/budget=4y and caps at era.yearEnd 1946 → after the 16-beat budget the era rolls and the
+  762-vs-1885 mismatch ages the line to death by 1946 (16 scenes). The saga clock is wrongly driven by
+  the NY-line era budget. FIX: in advanceRunClock, advance the SAGA year by a generational step
+  (~one human generation per close/tier, ~bounded 20-30y per scene-cluster) DECOUPLED from the NY eras,
+  so any founding year (762 or 1885) plays a full 6-generation run. Touches loop.ts:advanceRunClock —
+  do AFTER #83 merges (overlaps that file). Verify all 7 waves reach ~150 scenes; test replay-determinism + PR.
+  [WAIT] #83 (loop.ts) to merge first.
 - [ ] **RB-3 presentation polish** — wire per-act caricature portrait/scene compositing (src/render),
   per-era ambient audio depth, and animated scene transitions in SceneReader; live-verify + PR.
 - [ ] **RB-4 surface interactive convergence in the UI** — show the player when a crossing shifted a
