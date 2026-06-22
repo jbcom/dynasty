@@ -10,7 +10,7 @@ import {
   detectGlimpses,
   type Glimpse,
 } from "../sim/dynastyWorld";
-import { advanceFamily, applyChoice } from "../sim/effects";
+import { advanceFamily, applyChoice, applySuccessionToFamily } from "../sim/effects";
 import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
 import type { GameEvent } from "../sim/schema";
@@ -250,7 +250,18 @@ export class Game {
     this.syncSagaFlags();
     const continues =
       !!result?.succession && (result.succession.takesPartner || result.succession.begets > 0);
-    if (continues) {
+    if (continues && result?.succession) {
+      // Apply the succession effect to the LIVE family (take a partner + beget heirs) BEFORE stepping
+      // to the next act — else the player "raises heirs" but none are begotten and the line goes extinct
+      // at the protagonist's death (DEPTH-3). Seeded for replay; label-scoped vs the event path.
+      this.state = applySuccessionToFamily(
+        this.content,
+        this.state,
+        result.succession,
+        this.state.year,
+        `saga:${this.state.year}:${this.state.history.length}`,
+        this.rng.fork(`sagasucc:${this.state.year}:${this.state.history.length}`),
+      );
       this.beginNextGenerationAct();
     } else if (result?.wasCloseDecision && !this.state.end) {
       // The dynastic fork resolved AGAINST continuing: the player closed a generation without taking a

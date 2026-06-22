@@ -350,6 +350,58 @@ export function advanceFamily(
 }
 
 /**
+ * Apply a SUCCESSION effect (takePartner + beget) to the live family — the shared core behind both the
+ * event-path life-stage beats (applyChoice CP-5/FD-8) and the SAGA close-scene decision (the dynastic
+ * fork). Without this on the saga path the player picks "take a partner + raise heirs" but no heir is
+ * actually begotten, so the line goes extinct at the protagonist's death (observed: ireland died at gen 2).
+ * Pure + seeded (label-scoped rng); a no-op without a founded family. `label` disambiguates the rng so a
+ * saga succession and an event succession in the same year draw independently (replay-safe).
+ */
+export function applySuccessionToFamily(
+  content: Content,
+  state: GameState,
+  effect: { takesPartner: boolean; begets: number },
+  year: number,
+  label: string,
+  rng: Rng,
+): GameState {
+  let family = state.family;
+  if (!family || !state.founding) return state;
+  const culture = content.onomastics[state.founding.culture];
+  if (!culture) return state;
+
+  if (effect.takesPartner && !family.partnerId) {
+    family = takePartner(family, year, culture, rng.fork(`partner:${label}`)).family;
+  }
+  if (effect.begets > 0) {
+    const calling = callingById(content.callings, state.founding.calling);
+    const parentId = family.protagonistId;
+    // kinFor reads only the parent + grandparent (never the children added below), so it's invariant
+    // across the loop — compute it once.
+    const kin = kinFor(family, parentId);
+    for (let i = 0; i < effect.begets; i++) {
+      const begotten = beget(
+        family,
+        parentId,
+        begetYear(year, i),
+        culture,
+        kin,
+        rng.fork(`beget:${label}:${i}`),
+      );
+      const child = begotten.child;
+      const drifted = applyCallingDrift(child.traits, calling);
+      family = {
+        ...begotten.family,
+        members: begotten.family.members.map((m) =>
+          m.id === child.id ? { ...m, traits: drifted } : m,
+        ),
+      };
+    }
+  }
+  return { ...state, family };
+}
+
+/**
  * Replay a full history from a seed to reconstruct the exact end state. This is
  * what makes saves tiny (seed + choice list) and butterfly chains verifiable.
  */
