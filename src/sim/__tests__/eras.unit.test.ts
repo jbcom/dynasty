@@ -2,14 +2,13 @@ import { describe, expect, it } from "vitest";
 import { bandForEra, DEFAULT_ERA_BAND, ERA_BANDS } from "../eras";
 
 /**
- * RB-10 era bands — the single source the audio chord + visual wash both read. Pure + deterministic:
- * the table is ordered origins → stars, every band carries both cues, and bandForEra resolves by the
- * era-id keyword family (default = origins). The chord↔ramp agreement invariant (that chordForEra and
- * rampForEra resolve to the SAME band) is asserted in sound/palettes tests once they read this table.
+ * Era bands — the single source the audio chord reads (chordForEra in ui/sound.ts). Pure + deterministic:
+ * the table is ordered origins → stars, every band carries a chord, and bandForEra resolves by the
+ * era-id keyword family (default = origins).
  */
 
-describe("ERA_BANDS (RB-10)", () => {
-  it("is ordered origins → stars and every band carries both a chord and a ramp", () => {
+describe("ERA_BANDS", () => {
+  it("is ordered origins → stars and every band carries a chord", () => {
     expect(ERA_BANDS.map((b) => b.id)).toEqual([
       "origins",
       "mogul",
@@ -19,8 +18,6 @@ describe("ERA_BANDS (RB-10)", () => {
     ]);
     for (const b of ERA_BANDS) {
       expect(b.chord.length).toBeGreaterThan(0);
-      expect(b.ramp.top).toMatch(/^#[0-9a-f]{6}$/);
-      expect(b.ramp.bottom).toMatch(/^#[0-9a-f]{6}$/);
     }
   });
 
@@ -43,12 +40,7 @@ describe("ERA_BANDS (RB-10)", () => {
     expect(bandForEra("stars")).toBe(bandForEra("stars"));
   });
 
-  it("ramps from warm earth at origins toward a cool luminous deep at the stars", () => {
-    const red = (hex: string) => Number.parseInt(hex.slice(1, 3), 16);
-    const blue = (hex: string) => Number.parseInt(hex.slice(5, 7), 16);
-    expect(red(bandForEra("origins").ramp.top)).toBeGreaterThan(
-      blue(bandForEra("origins").ramp.top),
-    );
-    expect(blue(bandForEra("stars").ramp.top)).toBeGreaterThan(red(bandForEra("stars").ramp.top));
+  it("the chord mood shifts across the arc (rooted origins ≠ open stars)", () => {
+    expect(bandForEra("origins").chord).not.toEqual(bandForEra("stars").chord);
   });
 });

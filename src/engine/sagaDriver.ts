@@ -28,14 +28,11 @@ import {
   startAct,
 } from "../sim/saga/runner";
 import type { Scene } from "../sim/saga/schema";
-import type { Archetype } from "../sim/slots";
 
 /** The coordinates that select a line's act from the corpus. */
 export interface SagaCell {
   wave: string;
-  /** The line's power-base archetype (typed at the source so consumers — e.g. the RB-8 render layer —
-   *  need no cast; it's already an Archetype everywhere a cell is built). */
-  archetype: Archetype;
+  archetype: string;
   /** The reach tier (0 personal … 5 interstellar) — derived from the run's generation/era. */
   tier: number;
   /** The line's class rung (poor/middle/…) — its story track; falls back to "poor" if unauthored. */
@@ -49,8 +46,6 @@ export interface SagaFrame {
   /** Cross-family intersections braided into the current scene (ink threads) — empty when none fire. */
   threads: BraidedThread[];
   ended: boolean;
-  /** The cell driving the current act — the render layer (RB-8) composes the portrait/wash from it. */
-  cell: SagaCell | null;
 }
 
 /**
@@ -66,7 +61,6 @@ export class SagaDriver {
   }
   private state: ActState | null = null;
   private actTitle: string | null = null;
-  private cell: SagaCell | null = null;
 
   constructor(corpus: SagaCorpus) {
     this._corpus = corpus;
@@ -78,11 +72,9 @@ export class SagaDriver {
     if (!act) {
       this.state = null;
       this.actTitle = null;
-      this.cell = null;
       return;
     }
     this.actTitle = act.title;
-    this.cell = cell;
     this.state = startAct(this.corpus, act, motivators, flags);
   }
 
@@ -94,7 +86,6 @@ export class SagaDriver {
       scene,
       threads: scene ? resolveThreads(this.corpus, scene) : [],
       ended: this.state ? actEnded(this.state) : false,
-      cell: this.state ? this.cell : null,
     };
   }
 
