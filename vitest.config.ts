@@ -7,6 +7,10 @@ const browserGlobs = browserSuffixes.map((s) => `src/**/*.${s}.test.ts`);
 
 export default defineConfig({
   plugins: [svelte()],
+  // Tests are a one-shot run — disable Vite's file watcher entirely so it can't reload a test mid-run
+  // ("Vite unexpectedly reloaded a test" → "failed to find the runner", a browser-mode CI flake that
+  // adding files under public/ or a deeper import graph can trigger).
+  server: { watch: null },
   resolve: {
     alias: {
       $sim: "/src/sim",
