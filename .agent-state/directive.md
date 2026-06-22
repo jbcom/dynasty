@@ -99,9 +99,12 @@ push + PR. See [[one-branch-local-review]].
   unit tests, all pure. ALL STEPS BUILT: schema, selectBraid (seeded, replay-safe — fork keyed on
   scene.id+year, fork is pure so view re-reads + restore are identical), candidatesFromSnapshots adapter,
   loop.view wiring (additive, INERT until slots exist), slot-tagging QA pass + `--pass slot` runner
-  dispatch. Full gate green (tsc/svelte 0, 675 unit, 92 browser, 7 e2e, build, biome). ACTIVE: reviewer
-  trio (running) → ONE PR. ACTIVATION (after merge, separate): run `--pass slot` to tag the corpus (or
-  author a seed set) + live-verify a crossing weaves a rival's borrowed copy.
+  dispatch. Full gate green (678 unit, 92 browser, 7 e2e). Reviewer trio folded (code: replay-safe option
+  sort + vignette-required source + all-scenes sources; purity/determinism confirmed; simplifier clean).
+  PR #98 OPENED. [WAIT] CI + merge.
+- [ ] [WAIT] **WV-2b ACTIVATE the weave — after #98 merges.** Run `pnpm genai:qa --pass slot --write` to
+  tag the corpus's scenes with braid slots (or author a seed set on a few real scenes), then live-verify in
+  Chrome that a crossing weaves a real rival's borrowed copy into a played scene. Keeps the queue non-empty.
 - [ ] [WAIT] **WV-3 emergent variability systems (anti-Suzerain) — after WV-2.** Seeded market/disease
   variability + Yuka rival reactions so playthroughs diverge; budget magnitudes more content
   ([[emergent-cause-effect-sim]]). Keeps the queue non-empty; un-WAIT after WV-2.
