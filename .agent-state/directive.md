@@ -281,8 +281,16 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
 
 - [x] **PF-14 saga choices' setFlags reach state.flags — DONE** (commit 34bd669). syncSagaFlags unions the driver flags into state.flags on each pick (append-new, replay-safe). Unit-tested.
 - [x] **PF-15 AUDIO wired — DONE** (commit 8d3bbf6). src/ui/sound.ts singleton plays click on page-turn + stinger on choice, gated by a new Sound setting (default on); SettingsScreen toggle. Settings + tests green.
-- [ ] **PF-16 audit pass — re-sweep for remaining gaps after PF-14/15** (shader still alive? settings
-  reach audio? any other built-but-unwired module). Fold findings here.
+- [x] **PF-16 audit pass — DONE.** Round-2 audit findings: (a) ambient MUSIC unwired → PF-17 below;
+  (b) axes/worldStacks have 0 direct engine/ui importers but are sim-internal (used transitively) — NOT
+  dead; (c) shader backdrop is live (PlayScreen renders it per macroAct); (d) Sfx now wired (PF-15).
+
+- [ ] **PF-17 wire ambient MUSIC (AudioEngine / Tone.js).** AudioEngine (per-era ambient pad, start()
+  gated on a user gesture) + the per-macro-act .ogg tracks (boyhood/mogul/brand/… in public/assets/
+  audio) are built but the Tone.js music graph is NOT started anywhere — only Sfx one-shots play. FIX:
+  start the AudioEngine on the first play gesture (autoplay-safe), crossfade the ambient track on
+  macro-act change, gate by the Sound setting + a separate music-volume default. Browser-test the
+  engine starts + switches track; live-verify. (Bigger subsystem — Tone context lifecycle; do carefully.)
 
 After all PF items merge, return to the standing autonomous polish mandate (top of file) for the next gap.
 
