@@ -63,8 +63,9 @@ push + PR. See [[one-branch-local-review]].
 - [ ] **RB-3 presentation polish (rest, on the consolidation branch).** Slice-1 shipped (#86: scene fade
   + data-scene-id). Remaining: slice 2 (per-era ambient audio depth via the Tone.js bed/setMusicEra) +
   slice 3 (per-act caricature portrait/scene compositing, src/render). Browser/visual-tested.
-- [ ] **RB-4 surface interactive convergence in the UI** — show the player when a crossing shifted a
-  rival (the slide-out "OTHER LINES" reflects nudges); a brief in-scene cue. Browser-tested.
+- [x] **RB-4 surface interactive convergence — DONE (forward commit).** Added the rival's rung to the
+  Glimpse + a ★-per-rung indicator in the "Other lines" strip, so the player sees their crossings move a
+  rival's standing. Browser-tested.
 - [ ] **RB-5 codex/timeline depth** — the CodexView + a timeline view of the line's generations +
   the rival world's trajectory; PR. (After #85/#86 merge.)
 ALSO OWN (user, 2026-06-21): merge the release-please PRs, and keep ALL workflows green —
