@@ -239,14 +239,12 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
   verify health (0 leaks/dangling, 252 middle acts, poor untouched), regen failed cells, commit corpus;
   update loadSaga test to assert BOTH tracks complete (poor 252 + middle 252 = 504; 42 cells × 2 × 6).
 
-- [ ] **PF-6 ROOT GAP: thread class through onboarding → founding.** OnboardingScreen.onComplete only
-  passes (seed, place, surname) — the chosen ArrivalClass `cls` is DROPPED, so founding never gets
-  `seedMotivators` (waveSelect.seedMotivatorsForClass exists, foundByComposition applies it if passed),
-  so poor & middle found IDENTICALLY (centrist wealth) and the whole class system is invisible in play
-  (this is why a middle pick read "A poor line"). FIX: thread cls out of onboarding → App → GameStore →
-  initState/foundByComposition with seedMotivators; the saga driver's sagaClassForWealth then actually
-  selects poor vs middle track. Update OnboardingScreen + App + gameStore + the e2e/onboarding seam +
-  tests; live-verify poor vs middle diverge (different wealth, different saga track prose).
+- [x] **PF-6 ROOT GAP: class threaded through onboarding → founding — DONE** (commit 4b0318e). The
+  chosen ArrivalClass now flows OnboardingScreen.onComplete → App.birthGame → resolveWaveStart(place,
+  cls) → seedMotivators, so poor vs middle found with different wealth + the saga driver picks the
+  right track. resolveWaveStart returns the resolved cls. e2e updated for the PF-3 paged reader/HUD
+  (saga-head signal + advancePlay paging). waveSelect test pins the override. (Live-verify of poor-vs-
+  middle divergence folds into PF-13's full run.)
 
 - [ ] **PF-7 WIRE THE DEAD CONVERGENCE LAYER — rival-line glimpses in play.** GOAP (goap/index,
   dynastyAgent), dynastyWorld, convergence are BUILT (v0.8.0) but referenced only by each other/tests —
