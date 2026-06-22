@@ -11,6 +11,16 @@ go in the direction of." So: self-pace; pick the highest-value improvement each 
 own the full PR loop; keep the directive a living plan (expand when discovery reveals
 work, compress when items resolve). Work SERIALLY, no agent swarm
 ([[agent-swarm-discipline]]). Every change stays 0-leak + 0-harness-findings + green CI.
+
+**NEVER ASK THE USER FOR DIRECTION (user, 2026-06-22, emphatic).** Do NOT call AskUserQuestion
+to pick the next unit, choose between approaches, or confirm scope — the loop handles EVERYTHING
+autonomously: discover the highest-value gap, decide, design, build, test, PR, merge, keep CD green,
+then pick the next. "Let the loop decide" is the standing answer to every "where next" question. The
+ONLY legitimate stops are the true blockers (interactive credential entry; a spend needing the user's
+payment auth; physical hardware) — never a design/scope/priority choice. When a unit is a genuine
+scope-flip, DECIDE IT and record the decision in the directive + decisions.ndjson; do not surface it.
+Next-unit priority when the queue drains: (1) interactive convergence (rival lines as playable forces),
+(2) per-tier content depth, (3) presentation polish — work down the list, re-pick as discovery reveals.
 ALSO OWN (user, 2026-06-21): merge the release-please PRs, and keep ALL workflows green —
 not just feature-PR CI, but the post-merge CD/Release on main too. PR #47 fixed a
 long-standing CD APK break (proguard-android.txt → -optimize.txt for Gradle 9.6/R8). Release
