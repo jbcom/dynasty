@@ -69,6 +69,37 @@ describe("narrative acts (novel model)", () => {
     expect(sceneEligible(s, new Set())).toBe(true);
   });
 
+  it("buildCorpus WEAVES a midpoint intersection to a sibling wave at the same tier", () => {
+    // Two waves, each with a tier-0 act whose midpoint carries no authored thread.
+    const mkAct = (wave: string) =>
+      ActChapterSchema.parse({
+        id: `act:${wave}:economic:t0`,
+        wave,
+        archetype: "economic",
+        tier: 0,
+        macroAct: "convergence",
+        title: "Act I",
+        scenes: [`sc:${wave}:midpoint`],
+      });
+    const mkMid = (wave: string) =>
+      SceneSchema.parse({
+        id: `sc:${wave}:midpoint`,
+        sense: "sound",
+        prose: [
+          "The crowd at the dock is a din of a hundred tongues, and one of them is about to matter.",
+          "Another family moves through the press, and for a moment the two lines touch.",
+        ],
+      });
+    const c = buildCorpus([mkAct("alpha"), mkAct("beta")], [mkMid("alpha"), mkMid("beta")]);
+    const alphaMid = c.scenes.get("sc:alpha:midpoint");
+    expect(alphaMid?.thread).toHaveLength(1);
+    expect(alphaMid?.thread[0]?.wave).toBe("beta"); // sibling wave
+    expect(alphaMid?.thread[0]?.atTier).toBe(0);
+    // And it resolves to beta's act-opening fragment.
+    const braided = resolveThreads(c, alphaMid!);
+    expect(braided[0]?.wave).toBe("beta");
+  });
+
   it("resolves a cross-family thread (intersection) to the rival wave's act-opening fragment", () => {
     // A second wave's act + a scene in the primary wave that threads to it.
     const rivalAct = ActChapterSchema.parse({

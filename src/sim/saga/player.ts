@@ -19,12 +19,46 @@ export interface SagaCorpus {
   scenes: Map<string, Scene>;
 }
 
-/** Build the indexed corpus from raw acts + scenes. Pure. */
+/** Build the indexed corpus from raw acts + scenes, with cross-family intersections woven in. Pure. */
 export function buildCorpus(acts: ActChapter[], scenes: Scene[]): SagaCorpus {
-  return {
+  const corpus: SagaCorpus = {
     acts: new Map(acts.map((a) => [a.id, a])),
     scenes: new Map(scenes.map((s) => [s.id, s])),
   };
+  weaveThreads(corpus);
+  return corpus;
+}
+
+/**
+ * Deterministically weave cross-family INTERSECTIONS into the corpus: each act's MIDPOINT scene (the
+ * spine slot whose intent is "another line's path may cross here") threads to a SIBLING wave at the
+ * same tier — same era/macro-act, so the paths plausibly cross. The sibling is the next wave in sorted
+ * roster order (wrapping), skipping the act's own wave; the thread is set only if that rival act
+ * actually exists in the corpus. Idempotent: a scene that already declares a thread is left alone, and
+ * a re-weave produces the identical result (the roster order is fixed). No RNG — pure + replay-safe.
+ */
+export function weaveThreads(corpus: SagaCorpus): void {
+  const waves = [...new Set([...corpus.acts.values()].map((a) => a.wave))].sort();
+  if (waves.length < 2) return;
+  for (const act of corpus.acts.values()) {
+    const midId = act.scenes.find((id) => id.endsWith(":midpoint"));
+    if (!midId) continue;
+    const mid = corpus.scenes.get(midId);
+    if (!mid || mid.thread.length > 0) continue; // respect an authored thread
+    // The sibling wave: the next wave after this act's, wrapping, that has an act at this tier.
+    const start = waves.indexOf(act.wave);
+    for (let step = 1; step < waves.length; step++) {
+      const rival = waves[(start + step) % waves.length];
+      if (!rival || rival === act.wave) continue;
+      const rivalHasTier = [...corpus.acts.values()].some(
+        (a) => a.wave === rival && a.tier === act.tier,
+      );
+      if (rivalHasTier) {
+        mid.thread = [{ wave: rival, atTier: act.tier }];
+        break;
+      }
+    }
+  }
 }
 
 /** Coerce a loose motivatorShift record to a typed partial (only the 8 known axes). Pure. */
