@@ -70,16 +70,16 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   corpus → kept top 504/2520 as src/data/saga/fabric/index.json keyed family(wave)×era×setting + source
   vignettes. +6 tests, 706 green. REMAINING (→ FS-5): POV-shift REWRITE the kept scenes into spine
   branches + the trigger-condition keying (the rewrite is the authoring step, fed by this index).
-- [ ] **FS-5 recurring-family cast + DETERMINISTIC-TRIGGER LATTICE.** The fabric is a BOUNDED ~7-family
-  RECURRING CAST (Turtledove model) growing alongside the spine with CONTINUITY + MEMORY (per-family state:
-  name/generation/standing + crossing history, reuse the player `family` shape). ANCHORING = a trigger
-  lattice, NOT slot-weave: a `TriggerRule[]` table (src/data/saga/triggers.json) of COMPOUND deterministic
-  conditions ("IF archetype=X AND leanings⋛Y AND money⋛Z AND place=L AND era∈E AND flags/priorCrossing…
-  → activate family.branch[B]") activating ENTIRE family branches. Pure `evaluateTriggers(state, fabric)`
-  selector (deterministic, replaces/extends braidSelect.ts) → runner weaves the branch INTO the spine prose
-  ([[intersections-woven-not-walls]]). Determinism preserved (all inputs are spine state; same playthrough →
-  same branches). Emergent variety from authored material, no RNG ([[emergent-cause-effect-sim]]). Tests:
-  trigger determinism + replay; live-verify a recurring crossing pays off an earlier one.
+- [x] **FS-5 trigger-lattice + recurring-cast CORE — DONE (committed).** src/sim/saga/triggerLattice.ts:
+  SpineState projection + TriggerRule[] compound conditions (archetype/leanings/meters/place/era/flags/
+  priorCrossing) → evaluateTriggers fires whole family branches, priority-ordered, replay-deterministic,
+  `once`-aware; recurring CastFamily with MEMORY (recordCrossing/crossingsOf gate priorCrossing branches).
+  +7 tests, 713 green. ([[emergent-cause-effect-sim]], [[intersections-woven-not-walls]])
+- [ ] **FS-5b triggers.json data table + loop wiring — couples with FS-6.** Author src/data/saga/triggers.json
+  (the TriggerRule[] keyed to the mined fabric branches) + wire evaluateTriggers into loop.view to weave
+  fired branches INTO the spine prose + recordCrossing on activation; cast in the save state. Lands with the
+  spine prose (FS-6) since branches need spine acts to weave into. Live-verify a recurring crossing pays off
+  an earlier one.
 - [ ] **FS-6 author the spine prose.** GenAI flesh the authored spine acts to depth, era-distinct; QA vs
   guidance; commit-before-run.
 - [ ] **FS-6b archetypal-DESTINY endings.** Re-skin/expand convergence.ts into NAMED dynasty destinies for
