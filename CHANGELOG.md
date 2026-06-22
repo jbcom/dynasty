@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.0](https://github.com/jbcom/dynasty/compare/v0.15.0...v0.16.0) (2026-06-22)
+
+
+### Features
+
+* **render:** RB-8 caricature portrait + scene compositing subsystem ([#91](https://github.com/jbcom/dynasty/issues/91)) ([1e470e0](https://github.com/jbcom/dynasty/commit/1e470e0be19c6583688a74101efddb62d15702f9))
+
 ## [0.15.0](https://github.com/jbcom/dynasty/compare/v0.14.0...v0.15.0) (2026-06-22)
 
 
