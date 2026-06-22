@@ -357,7 +357,7 @@ async function passSuccession(ref: ActFileRef, gen: Generate): Promise<void> {
       console.error(`    · ${closeId}: invalid succession (${v.error.issues[0]?.message}) — skipped`);
       continue;
     }
-    if (!v.data.decision?.options.some((o) => o.succession?.takesPartner)) {
+    if (!v.data.decision?.options?.some((o) => o.succession?.takesPartner)) {
       console.error(`    · ${closeId}: no take-partner option — skipped`);
       continue;
     }
