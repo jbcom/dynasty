@@ -1,5 +1,6 @@
 import { AudioEngine } from "../audio/engine";
 import { Sfx, type SfxId } from "../audio/sfx";
+import { bandForEra } from "../sim/eras";
 
 /**
  * SOUND CUES (PF-15) — a single lazily-constructed Sfx the play surface uses for page-turn + choice
@@ -16,23 +17,19 @@ let enabled = true;
 // policy) and kept in sync with the run's era. Separate from the one-shot Sfx.
 let music: AudioEngine | null = null;
 let pendingEra: string | null = null;
+// A one-shot ending sting requested before the graph started — applied AFTER pendingEra in start()'s
+// resolve so it overrides the era bed (RB-10). Lets the sting land for a user who reaches the ending
+// without ever tapping a play gesture (the case where audible punctuation matters most).
+let pendingStingChord: string[] | null = null;
 
 /**
  * Per-era ambient CHORD (RB-3): when no `/assets/audio/<era>.ogg` exists, AudioEngine.setEra falls back
- * to a synth pad — give each era a distinct chord so the mood deepens across the run's arc (warm/rooted
- * early → open/luminous late) instead of every era playing the same C-E-G. Matched by era-id prefix so
- * new period ids inherit a sensible neighbour; the default is the rooted origins chord.
+ * to a synth pad — each era gets a distinct chord so the mood deepens across the run's arc (warm/rooted
+ * early → open/luminous late). The chord comes from the SINGLE era table in sim/eras.ts (RB-10), the
+ * same one the visual wash reads, so the audio and the backdrop can never disagree about the era.
  */
-const ERA_CHORD: Array<[RegExp, string[]]> = [
-  [/origins|1885|founding/i, ["C3", "E3", "G3"]], // rooted, warm — the immigrant ground
-  [/mogul|1964|industr/i, ["A2", "C3", "E3", "G3"]], // a minor-7 weight as the line climbs
-  [/brand|primetime|ascent|1988|2004|2015/i, ["D3", "F#3", "A3"]], // brighter, striving
-  [/interregnum|mars|2021|2028/i, ["E3", "G#3", "B3", "D#4"]], // tense, suspended major-7
-  [/contact|interstellar|ascension|stars/i, ["G2", "D3", "A3", "E4"]], // open fifths — luminous, vast
-];
 export function chordForEra(eraId: string): string[] {
-  for (const [re, chord] of ERA_CHORD) if (re.test(eraId)) return chord;
-  return ["C3", "E3", "G3"];
+  return [...bandForEra(eraId).chord];
 }
 
 /** Toggle whether cues play (from the `sound` setting). */
@@ -59,7 +56,15 @@ export function startMusic(): void {
       music
         .start()
         .then(() => {
-          if (pendingEra && music) music.setEra(pendingEra, chordForEra(pendingEra));
+          if (!music) return;
+          // A pending sting OVERRIDES the era bed — apply only it (one setEra, no double-trigger pop).
+          // Otherwise apply the run's pending era. Either way exactly one chord triggers on start.
+          if (pendingStingChord) {
+            music.setEra("ending-sting", pendingStingChord);
+            pendingStingChord = null;
+          } else if (pendingEra) {
+            music.setEra(pendingEra, chordForEra(pendingEra));
+          }
         })
         .catch(() => {
           // Music is non-essential — a blocked audio context must never surface as an unhandled rejection.
@@ -77,6 +82,43 @@ export function setMusicEra(eraId: string): void {
     if (music?.isStarted) music.setEra(eraId, chordForEra(eraId));
   } catch {
     // ignore
+  }
+}
+
+/**
+ * The ending STING (RB-10) — a one-shot pad chord that colours the saga's close by its convergence
+ * outcome: stars = the luminous open-fifths chord, contributed = the striving ascent chord, earthbound
+ * = the rooted origins chord, extinguished = a low minor fall. Reuses the ambient pad (setEra triggers
+ * the chord once), gated by the sound setting; starts the graph if a prior tap hasn't. No-op off-browser
+ * or on any audio failure — the ending must render with or without sound.
+ */
+// Three stings reuse the ambient band chords (via the single ERA_BANDS table, so a chord tuned in
+// eras.ts can't drift from its sting); extinguished is an intentional low minor fall with no band.
+// EARTHBOUND_STING is the guaranteed fallback for an unknown outcome (so the lookup is never undefined).
+const EARTHBOUND_STING: string[] = [...bandForEra("origins").chord]; // rooted, plain
+const ENDING_STING: Record<string, string[]> = {
+  stars: [...bandForEra("stars").chord], // open fifths — luminous, vast
+  contributed: [...bandForEra("ascent").chord], // striving, bright
+  earthbound: EARTHBOUND_STING,
+  extinguished: ["C3", "Eb3", "G3", "C2"], // a low minor fall — intentionally unique, not in ERA_BANDS
+};
+export function playEndingSting(outcome: string): void {
+  if (!enabled || typeof window === "undefined") return;
+  // Guard the lookup against arbitrary keys (no object-injection): only a known outcome selects its
+  // chord; anything else falls to the rooted earthbound sting.
+  const chord: string[] =
+    (Object.hasOwn(ENDING_STING, outcome) ? ENDING_STING[outcome] : undefined) ?? EARTHBOUND_STING;
+  try {
+    // If the graph is already running, apply now; otherwise stash it so start()'s resolve applies it
+    // (after the era bed) — so the sting lands even for a user who reached the ending without a prior tap.
+    if (music?.isStarted) {
+      music.setEra(`ending:${outcome}`, chord);
+    } else {
+      pendingStingChord = chord;
+      startMusic();
+    }
+  } catch {
+    // The sting is non-essential — never let it break the ending screen.
   }
 }
 
