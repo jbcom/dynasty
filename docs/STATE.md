@@ -25,7 +25,7 @@ Shipped on `feat/narrative-acts` (PRs #65/#67); polished on `feat/saga-polish` (
   resolveThreads, actsForTier(…, cls) with poor-fallback); `runner.ts` (pure ActState walk:
   startAct/chooseBeat/chooseDecision; deterministic = save/replay invariant).
 - **Class-keyed corpus** (`src/data/saga/<wave>/<archetype>.<cls>.act.json`): act id
-  `act:<wave>:<archetype>:<cls>:t<tier>`. Two tracks: `poor` (complete) + `middle` (being authored).
+  `act:<wave>:<archetype>:<cls>:t<tier>`. Two tracks, BOTH complete: `poor` (252) + `middle` (252) = 504 acts.
   42 cells (7 waves × 6 archetypes) × 6 reach tiers per track. 0 leaks / 0 dangling / 0 orphans.
 - **Loader** `src/data/loadSaga.ts` (eager glob + zod). **Spine** `src/sim/spine.ts` declares the
   scene-slot scaffold (open/rising+secondary/midpoint+intersection/turn+major/close), seeded per
@@ -45,13 +45,25 @@ Shipped on `feat/narrative-acts` (PRs #65/#67); polished on `feat/saga-polish` (
   are the played story. The SUCCESSION mechanic survives (events tagged `life-stage`,
   ev_cp_take_partner/raise_heirs; founding sets emerged/named/calling_chosen).
 
-### Still being wired (gaps tracked in `.agent-state/directive.md` PF-7…PF-13)
+### Saga polish — SHIPPED (PR #70, squash-merged 2026-06-22; PF-3…PF-18 done)
 
-- The CONVERGENCE layer (GOAP `dynastyAgent`/`dynastyWorld`, `convergence.ts`) is built but NOT yet
-  fed into play — `projectSaga` currently gets only {year, motivators}, so rival-line GLIMPSES + the
-  class RUNG don't surface, and convergence endings don't evaluate. (PF-7.)
-- Saga succession re-begins the next-tier act but doesn't yet drive real `effects.succeed`/beget. (PF-8.)
-- Codex (CodexEntry/loadCodex) built but no content/UI. (PF-11.)
+Everything formerly "still being wired" is now wired, plus a full corpus QA pass:
+
+- **CONVERGENCE fed into play** (PF-7): the Game creates + advances a `DynastyWorld` (separate RNG
+  stream, replay bit-identical); `GameView.glimpses`/`rung` feed `projectSaga`, so rival-line GLIMPSES
+  ("OTHER LINES — holding/…") + the class readout populate the slide-out menu, and
+  `Game.convergenceEnding()` resolves the dynastic destination → `LegacyReport` framing at run-end.
+- **Saga succession drives real advancement** (PF-8): pure `advanceFamily(content,state,fromYear,rng)`
+  (mortality → succeed → continue-as-heir) runs on each saga clock tick; reading the novel ages + succeeds the line.
+- **Codex** (PF-11): `src/data/saga/codex/codex.json` (7 waves + 3 macro-acts, leak-free) + `CodexView`
+  in the slide-out menu.
+- **The corpus is COMPLETE + QA'd** (PF-5/9/18): 504 acts (252 poor + 252 middle, every cell 6 tiers)
+  generated on **gemini-3.5-flash**; three-scope QA sweep (scene polish + lineage continuity + 504
+  authored pair-specific cross-storyline crossings in `thread[]`); retitle → 496/504 distinct meso
+  titles. Gen gate hardened with scene-ref integrity; `loadSaga` asserts 504 + per-cell tier completeness.
+  Tooling: `genai:expand` (generate) + `genai:qa --pass scene|lineage|braid|all` (QA, pooled) +
+  `retitle-saga.ts`. Leak floor unified in `src/sim/leak.ts` (case-sensitive, surname-scoped).
+- Audio (PF-15/17): page-turn + choice cues (Howler) + per-era ambient bed (Tone.js), gated by a Sound setting.
 
 ## CONVERGENCE SAGA (folded into the novel model above; was the prior top model)
 
