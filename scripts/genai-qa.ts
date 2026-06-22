@@ -301,7 +301,7 @@ async function passBraid(refs: ActFileRef[], gen: Generate): Promise<void> {
       touched = true;
     }
     if (touched) writeIfValid(ref, file, label);
-    else console.error(`  · ${label}: no midpoints to braid`);
+    else console.error(`  · ${label}: nothing to braid (no rival wave at any tier — needs the full corpus)`);
   }
 }
 
