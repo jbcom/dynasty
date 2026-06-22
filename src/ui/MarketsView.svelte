@@ -22,14 +22,20 @@ const markets = $derived(
   })),
 );
 
-// Rank ladders: current rung label + whether the player is below their peak.
+// Rank ladders: current rung label + position on the ladder (UQ-UI: the rung INDEX/total drives a
+// segmented progress bar so "where on the ladder" reads at a glance, not as flat label→value text).
 const ranks = $derived(
   content.ranks.map((r) => {
     const rs = gameState.ranks[r.id];
-    const rung = rs?.rung ?? 0;
+    const total = r.rungs.length;
+    const rung = Math.min(rs?.rung ?? 0, total - 1);
     return {
       def: r,
-      label: r.rungs[Math.min(rung, r.rungs.length - 1)] ?? "—",
+      label: r.rungs[rung] ?? "—",
+      rung,
+      total,
+      // 0..1 fill: bottom rung still shows a sliver so the bar never reads empty.
+      fill: total > 1 ? (rung + 1) / total : 1,
       fallen: rs ? rs.rung < rs.peak : false,
     };
   }),
@@ -72,19 +78,24 @@ function regimeTone(regime: string | undefined): string {
   {/if}
 
   {#if ranks.length > 0}
-    <h3>🪜 Standing</h3>
+    <h3>Standing</h3>
     <ul class="rank-list">
       {#each ranks as r (r.def.id)}
         <li class:fallen={r.fallen}>
           <span class="rank-label">{r.def.label}</span>
-          <span class="rung"
-            >{r.label}{#if r.fallen}<img
+          <span class="rank-bar" aria-hidden="true">
+            <span class="rank-fill" style="width: {Math.round(r.fill * 100)}%"></span>
+          </span>
+          <span class="rung">
+            {r.label}
+            <span class="rung-pos">{r.rung + 1}/{r.total}</span>
+            {#if r.fallen}<img
                 class="fallen-icon"
                 src="/assets/icons/ui/pole-dictatorial.svg"
                 alt="(fallen)"
                 title="Fallen from peak rank"
-              />{/if}</span
-          >
+              />{/if}
+          </span>
         </li>
       {/each}
     </ul>
@@ -111,7 +122,8 @@ function regimeTone(regime: string | undefined): string {
     font-size: 0.95rem;
   }
   .currency {
-    font-size: 0.7rem;
+    font-family: var(--mmm-font-ui);
+    font-size: 0.68rem;
     color: var(--mmm-text-dim);
   }
   ul {
@@ -131,7 +143,10 @@ function regimeTone(regime: string | undefined): string {
     background: var(--mmm-surface);
     border-left: 3px solid var(--mmm-gold-deep);
     border-radius: var(--mmm-radius);
-    font-size: 0.8rem;
+    /* UI/data face (UQ-UI type-role split): upright + tighter than the body serif for fast scanning. */
+    font-family: var(--mmm-font-ui);
+    font-size: 0.78rem;
+    letter-spacing: 0.01em;
   }
   .market-list li[data-tone="up"] {
     border-left-color: var(--mmm-startrek, #3bd6c6);
@@ -145,11 +160,13 @@ function regimeTone(regime: string | undefined): string {
   }
   .regime {
     color: var(--mmm-text-dim);
-    font-style: italic;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
   .index {
     color: var(--mmm-gold);
+    font-weight: 700;
     font-variant-numeric: tabular-nums;
   }
   .position {
@@ -165,13 +182,40 @@ function regimeTone(regime: string | undefined): string {
     color: var(--mmm-text);
   }
   .rank-list li {
-    display: flex;
-    justify-content: space-between;
+    /* UQ-UI: label | progress BAR | rung+position — the Dossier meter pattern, so "where on the
+       ladder" reads at a glance instead of as flat label→value text. */
+    display: grid;
+    grid-template-columns: minmax(7rem, auto) 1fr auto;
+    align-items: center;
+    gap: 0.5rem;
     padding: 0.3rem 0.5rem;
-    font-size: 0.8rem;
+    font-family: var(--mmm-font-ui);
+    font-size: 0.78rem;
+  }
+  .rank-bar {
+    height: 0.4rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--mmm-gold-deep) 28%, transparent);
+    overflow: hidden;
+  }
+  .rank-fill {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--mmm-gold-deep), var(--mmm-gold));
+    transition: width var(--mmm-dur, 240ms) var(--mmm-ease, ease);
+  }
+  .rung-pos {
+    color: var(--mmm-text-dim);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.68rem;
+    margin-left: 0.2rem;
   }
   .rank-list li.fallen .rung {
     color: var(--mmm-red);
+  }
+  .rank-list li.fallen .rank-fill {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--mmm-red) 60%, transparent), var(--mmm-red));
   }
   .fallen-icon {
     width: 0.7em;
@@ -187,11 +231,14 @@ function regimeTone(regime: string | undefined): string {
   .rung {
     color: var(--mmm-text);
     font-weight: 700;
+    white-space: nowrap;
   }
   .net-worth {
     margin-top: 0.75rem;
+    font-family: var(--mmm-font-ui);
     color: var(--mmm-gold);
     font-weight: 700;
+    font-variant-numeric: tabular-nums;
   }
   .empty {
     color: var(--mmm-text-dim);
