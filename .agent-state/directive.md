@@ -58,14 +58,16 @@ and genuine intersections.
 - [ ] [WAIT] **UQ-2b corpus scene-pass auto-correct — RUNNING (bg b3e1j6spo).** `genai:qa --pass scene --write`
   across all 84 act files; pre-run clean commit (7a51b08) is the revert point. ON completion: review git diff
   (the test) → keep, or `git reset --hard` if it degraded. [WAIT] the background run.
-- [ ] **UQ-2c corpus lineage-pass auto-correct — after UQ-2b.** Run `genai:qa --pass lineage --write` (fixes
-  cross-tier breaks against each people's documented arc), review the diff, commit. Then commit the kept
-  scene+lineage corrections as a content commit.
-- [ ] **UQ-2d semantic-uniqueness + genuine-intersection audit — after UQ-2c.** Large-context parallel-reader
-  pass over the corrected corpus: confirm no two cells read structurally/semantically alike and crossings are
-  organic (woven, not walls). Findings → targeted re-author or a guidance patch.
-- [ ] **UQ-reconcile arc-hash vs guidance.json — after UQ-2d.** spine.ts arcShapeFor (structural variety) and
-  guidance.json (creative/historical) coexist; verify they're complementary not redundant, fold or document.
+- [ ] [WAIT] **UQ-2c corpus lineage-pass auto-correct — after UQ-2b.** Run `genai:qa --pass lineage --write`
+  (fixes cross-tier breaks against each people's documented arc), review the diff, commit. Then commit the kept
+  scene+lineage corrections as a content commit. [WAIT] UQ-2b background run to finish.
+- [ ] [WAIT] **UQ-2d semantic-uniqueness + genuine-intersection audit — after UQ-2c.** Large-context
+  parallel-reader pass over the corrected corpus: confirm no two cells read structurally/semantically alike and
+  crossings are organic (woven, not walls). Findings → targeted re-author or a guidance patch. [WAIT] UQ-2c.
+- [x] **UQ-reconcile arc-hash vs guidance.json — DONE (62beedd).** They're orthogonal layers (shape=FORM/
+  pacing, guidance arc=historical MEANING), not redundant. Disambiguated in-prompt: spine intents now say
+  "this act moves as a <shape>" (not "a <shape> generation"); scene.ts labels guidance "ARC (historical
+  meaning)" + a two-layer note. +1 test pins the contract. tsc 0, 686 tests.
 - [x] **UQ-3a CRIME power axis DESIGN — DONE.** ([[crime-power-axis]]) Spec at
   docs/superpowers/specs/2026-06-22-uq3-crime-power-axis-design.md. Decisions: `criminal` is a 7th real
   Archetype (calling "The Boss"), WAVE-GATED to ireland/italian/ashkenazi/chinese ONLY (the anti-stereotype
@@ -74,16 +76,17 @@ and genuine intersections.
   syndicate that EXITS to legitimacy by tier 2; chinese=West-Coast tong/vice); crime↔legit crossings reuse WV-2
   braid pool; new `syndicate` convergence Destination = the "crime planet" (Don of a Thousand Suns), gated to
   criminal/converted lines. Build order = schema+gate → ending → GOAP → guidance → generate → live-verify.
-- [ ] **UQ-3b crime schema + wave-gate — after UQ-2 + UQ-3a.** Add `criminal` to Archetype/ARCHETYPES/
+- [ ] [WAIT] **UQ-3b crime schema + wave-gate — after UQ-2 lands.** Add `criminal` to Archetype/ARCHETYPES/
   ARCHETYPE_CALLINGS; CRIME_WAVES set + offerability gate at the calling beat + wave-select; tests (non-crime
-  waves never offer/spawn criminal; calling face present).
-- [ ] **UQ-3c syndicate ending — after UQ-3b.** Add the `syndicate` destination + 2 endings (dictator/
+  waves never offer/spawn criminal; calling face present). [WAIT] UQ-2 (don't add the archetype before its
+  corpus/guidance exist — avoids a half-state where ARCHETYPES has a track with no acts).
+- [ ] [WAIT] **UQ-3c syndicate ending — after UQ-3b.** Add the `syndicate` destination + 2 endings (dictator/
   consigliere) + the archetype gate to convergence.ts; tests (only a criminal/converted line reaches it).
-- [ ] **UQ-3d crime GOAP evaluator — after UQ-3c.** `criminal` strategy + illicit-market epoch input
+- [ ] [WAIT] **UQ-3d crime GOAP evaluator — after UQ-3c.** `criminal` strategy + illicit-market epoch input
   (Prohibition windfall, RICO decline); deterministic tests.
-- [ ] **UQ-3e crime guidance + generate — after UQ-3d.** guidance.json crime era×class briefs + 4 per-wave
-  crimeArc shapes; genai:expand the 8 act files; WV-2 slot-tag; genai:qa to frontier; commit-before-run.
-- [ ] **UQ-3f live-verify a crime line — after UQ-3e.** Play italian/criminal/poor end-to-end in Chrome:
+- [ ] [WAIT] **UQ-3e crime guidance + generate — after UQ-3d.** guidance.json crime era×class briefs + 4
+  per-wave crimeArc shapes; genai:expand the 8 act files; WV-2 slot-tag; genai:qa to frontier; commit-before-run.
+- [ ] [WAIT] **UQ-3f live-verify a crime line — after UQ-3e.** Play italian/criminal/poor end-to-end in Chrome:
   rise→Commission→RICO arc reads, crossings weave, a syndicate ending is reachable.
 
 - [x] **RB-2 per-tier content depth — DONE.** Audit showed prose depth already uniform (every scene
