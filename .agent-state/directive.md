@@ -65,25 +65,25 @@ push + PR. See [[one-branch-local-review]].
   (caricature portrait/scene compositing) is NOT a polish slice — `src/render` is empty (the module was
   removed; only a stale Portrait.visual screenshot remains), so it's a from-scratch subsystem needing an
   asset pipeline + real 2D caricature art ([[dynasty-ui-conventions]]) — DECIDED to split it out as RB-8.
-- [ ] **RB-8 caricature portrait/scene compositing (new subsystem) — ACTIVE on `feat/portrait-scene-compositing`.**
-  DESIGN DONE: `docs/superpowers/specs/2026-06-22-rb8-portrait-scene-compositing-design.md` (use-case
-  enumeration → identity→asset mapping → layered-compositor decision+why → module shape → build order).
-  Build src/render per that spec: `palettes.ts` + procedural SVG wash first (step 1, proves era/sense
-  atmosphere end-to-end against the existing `--sense-accent` map), then `composeScene.ts` pure core +
-  determinism unit tests (step 2), then portrait layer art license-logged in assets.json (step 3), then
-  `SceneStage.svelte` mounted behind the SceneReader prose + cross-fade (step 4), then the
-  generation-turn / era-crossing / ending / rival-vignette variants each visual-tested (step 5).
-  Caricature only ([[dynasty-ui-conventions]]); no placeholders. Start from clean main (#89 merged → v0.14.0).
-  PROGRESS: steps 1,2,4 DONE + WIRED (palettes 86e03a5, composeScene b156dac, SceneStage 7cc67ad,
-  PlayScreen mount c68f45b). LIVE-VERIFIED in Chrome: the origins-era warm wash + sense bloom renders
-  behind the steerage scene prose (screenshot read against the design); app runs through to an ending
-  cleanly (the ending screen is the home for the `ending` variant → step 5). REMAINING:
-  step 3 (raster caricature portrait-layer art via aseprite/assets-library, license-logged — the heavy
-  asset lift) + step 5 (wire the ending/rival-vignette variant frames onto their screens, visual-tested).
-- [ ] [WAIT] **RB-10 audio↔visual era lockstep + scene-stage polish.** ONCE RB-8 lands SceneStage:
-  single-source the era ramp so `chordForEra` (audio) and `palettes.ts` (visual) read the SAME era table
-  (today they're parallel maps that could drift); add the ending composed frame's audio sting; visual+audio
-  tested. Keeps the queue non-empty behind RB-8 ([[never-drain-queue]]); un-WAIT after RB-8's SceneStage exists.
+- [x] **RB-8 caricature portrait/scene compositing — DONE on `feat/portrait-scene-compositing` (9 commits).**
+  ALL 5 steps shipped + live-verified in Chrome: palettes (86e03a5), composeScene core (b156dac),
+  SceneStage (7cc67ad), PlayScreen wiring (c68f45b), ending variant (d418d21), rival vignette (a4..),
+  + authored CC0 caricature SVG art (6 archetype bases + 6 silhouettes), license-logged + manifest-tested.
+  LEARNING: repo idiom is authored SVG not raster (corrected the layer paths); the prior "no portraits"
+  test encoded a PROCEDURAL-portrait purge — RB-8's authored faint-backdrop approach legitimately
+  supersedes it (commit body documents the override). Reviewer trio DONE (code MED+3LOW folded, security
+  clean, simplifier folded) + full gate green + live-verified. PR #91 OPENED. [WAIT] CI + merge.
+  Design spec: `docs/superpowers/specs/2026-06-22-rb8-portrait-scene-compositing-design.md`.
+- [ ] **RB-10 audio↔visual era lockstep + scene-stage polish — ACTIVE (next, same branch).** RB-8 landed
+  both era tables: `chordForEra` (audio, ui/sound.ts) and `palettes.ts` rampForEra (visual) are parallel
+  keyword maps that could drift. Single-source them into ONE era table both read (a shared
+  `src/sim/eras.ts` or render/era module keyed on the era-id keywords), so a new era can't be added to one
+  and forgotten in the other. Then: an era-crossing audio+visual cue in lockstep, and the ending composed
+  frame's audio sting. Visual + audio tested. Same long-running branch (no new PR until the milestone PR).
+- [ ] [WAIT] **RB-11 portrait depth — class-tier + mood overlay layers.** ONCE RB-10 lands: author the
+  tier(class) + mood(pole) SVG overlay layers composeScene already references (they currently hide-on-error),
+  so the portrait deepens with class + dominant motivator; license-logged + manifest-tested + live-verified.
+  Keeps the queue non-empty behind RB-10 ([[never-drain-queue]]); un-WAIT after RB-10 merges into the branch.
 - [x] **RB-4 surface interactive convergence — DONE (forward commit).** Added the rival's rung to the
   Glimpse + a ★-per-rung indicator in the "Other lines" strip, so the player sees their crossings move a
   rival's standing. Browser-tested.
