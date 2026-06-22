@@ -270,9 +270,10 @@ feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. D
 
 - [ ] [WAIT] **PF-9 act titles: run the retitle pass.** UNBLOCKED (corpus complete + QA'd). 6 generic
   spine cues are reused ~57× each ("The Crossing"/"The Climb"/etc.) — only 163 of 504 titles distinct.
-  RUNNING scripts/retitle-saga.ts over the whole corpus (bg, monitor b905rsje3; per-act meso title rooted
-  in its opening prose). ON DONE: verify distinctness (no generic title reused across lines), commit;
-  live-verify folds into PF-13.
+  RUNNING scripts/retitle-saga.ts over the whole corpus (bg, monitor bbkzxyj3a; per-act meso title rooted
+  in its opening prose — e.g. "Above the Wash-Water", "Between Clay and Coal-Gas"). 421/504 done, 0
+  failures. ON DONE: verify distinctness (no generic title reused across lines), commit; live-verify
+  folds into PF-13.
 
 - [x] **PF-10 cross-family intersection PROSE — DONE** (commit 465043c). Each woven midpoint thread carries a PAIR-SPECIFIC crossing line (crossingLine names both peoples, deterministic); ThreadRef.crossing optional override; PlayScreen renders "Where paths cross" + the line + the rival fragment. Unit + browser green. (A fuller per-pair GenAI crossing corpus can ride a future sweep; the deterministic named crossing ships now.)
 
