@@ -55,12 +55,13 @@ and genuine intersections.
   scenePassBrief/lineagePassBrief feed the same era×wave briefs + qaReject + myth-flags into the scene/lineage
   QA passes (optional params; 5 new tests; tsc 0, 685 tests). Smoke (baghdad/middle lineage) confirmed the
   brief reaches gemini-3.5-flash and surfaces real breaks.
-- [ ] [WAIT] **UQ-2b corpus scene-pass auto-correct — RUNNING (bg b3e1j6spo).** `genai:qa --pass scene --write`
-  across all 84 act files; pre-run clean commit (7a51b08) is the revert point. ON completion: review git diff
-  (the test) → keep, or `git reset --hard` if it degraded. [WAIT] the background run.
-- [ ] [WAIT] **UQ-2c corpus lineage-pass auto-correct — after UQ-2b.** Run `genai:qa --pass lineage --write`
-  (fixes cross-tier breaks against each people's documented arc), review the diff, commit. Then commit the kept
-  scene+lineage corrections as a content commit. [WAIT] UQ-2b background run to finish.
+- [x] **UQ-2b corpus scene-pass auto-correct — DONE (5c46f68).** All 84 act files lifted to frontier prose +
+  held to corrected history (italian: padrone/Mezzogiorno, zero Mafia-stereotype; chinese: laundry/exclusion/
+  tong West-frame; ashkenazi: sweatshop/mutual-aid). 84 parse, 686 tests green, 6 scenes safely kept original.
+  Diff was the test; kept.
+- [ ] [WAIT] **UQ-2c corpus lineage-pass auto-correct — RUNNING (bg).** `genai:qa --pass lineage --write` fixes
+  cross-tier breaks against each people's documented arc (lineagePassBrief). Pre-run commit (5c46f68) is the
+  revert point. ON completion: review diff → keep + commit, or reset. [WAIT] the background run.
 - [ ] [WAIT] **UQ-2d semantic-uniqueness + genuine-intersection audit — after UQ-2c.** Large-context
   parallel-reader pass over the corrected corpus: confirm no two cells read structurally/semantically alike and
   crossings are organic (woven, not walls). Findings → targeted re-author or a guidance patch. [WAIT] UQ-2c.
