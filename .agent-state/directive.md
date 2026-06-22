@@ -94,11 +94,16 @@ The hud/views present everything as prose-dense text, not optimized for glance-s
 skills + PAPER PLAYTESTING to find where weight should change: margins, borders, grouping, hierarchy,
 iconography-via-CSS (NO asset art — [[no-portraits-no-asset-art]]), whitespace, type scale. Balance
 game-scannability with the novel reading experience ([[scannability-game-novel-balance]]).
-- [ ] **UQ-UI-1 audit the current UI for text-heaviness (paper-playtest + screenshots).** Inventory every
-  screen/HUD/view (PlayScreen, MeterHud/MeterGauge, SceneReader, TimelineView, LineageView, CodexView,
-  StatsView, ButterflyLog, NewsTicker, onboarding). For each: screenshot it in Chrome, READ the screenshot,
-  name where the eye can't scan (wall-of-text, no hierarchy, weak grouping, missing borders/margins). Produce
-  a prioritized findings doc (docs) — the spine for the rework. Dispatch ui-design reviewers for fresh eyes.
+- [x] **UQ-UI-1 audit the UI for text-heaviness — DONE.** Walked the live app in Chrome (5174), screenshotted
+  + read each screen. Findings doc: docs/superpowers/specs/2026-06-22-uqui-text-heaviness-audit.md. Top issues:
+  P1 Markets "Standing" = flat label→value text (→ rank pills/rung-ladder); P1 market values = bare numbers
+  (→ inline bar/delta); P2 everything italic-serif incl. data (→ type-role split, the highest-leverage lever);
+  P2 SceneReader wall + dead gap to continue; P3 News good (reference pattern), Stats empty at founding. ALSO
+  live-verified ONB-1 end-to-end (Concetta Bruno, style→surname→gender→given all correct). Un-screenshotted:
+  Lineage/Timeline/Choices/Dossier + MeterGauge on a decision scene + mobile layout → UQ-UI-1b pass-2 capture.
+- [ ] **UQ-UI-1b screenshot the remaining views + mobile before reworking.** Capture Lineage/Timeline/Choices/
+  Dossier, the MeterGauge as it renders on a DECISION scene, and the mobile single-column + hamburger panel;
+  read each; fold into the findings doc. (Quick, gates the rework passes.)
 - [ ] **UQ-UI-2 rework pass 1: HUD + meters scannability — after UQ-UI-1.** Apply the highest-priority findings
   to the persistent HUD (meters, status, year/era) — hierarchy, grouping, CSS iconography, whitespace, borders.
   Svelte+CSS only. Visual tests + Chrome verify each change before commit.
