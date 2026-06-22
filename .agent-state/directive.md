@@ -19,8 +19,26 @@ then pick the next. "Let the loop decide" is the standing answer to every "where
 ONLY legitimate stops are the true blockers (interactive credential entry; a spend needing the user's
 payment auth; physical hardware) — never a design/scope/priority choice. When a unit is a genuine
 scope-flip, DECIDE IT and record the decision in the directive + decisions.ndjson; do not surface it.
-Next-unit priority when the queue drains: (1) interactive convergence (rival lines as playable forces),
-(2) per-tier content depth, (3) presentation polish — work down the list, re-pick as discovery reveals.
+**NEVER DRAIN THE QUEUE TO ZERO (user, 2026-06-22).** The Stop hook keeps the loop working ONLY while
+≥1 actionable (non-WAIT) `[ ]` item remains AND Status is ACTIVE — an empty queue or a flipped Status
+lets the session stop, which is the leak that made the loop idle/ask. RULES: (a) Status stays ACTIVE
+indefinitely — never flip it to RELEASED while autonomous. (b) The ROLLING BACKLOG below always holds
+several concrete actionable items; BEFORE marking the last one `[x]`, APPEND the next 1-3 discovered
+units so the count never reaches 0. (c) If you ever can't think of a next unit, that itself is the
+task: add a `[ ] AUDIT: enumerate the next depth units` item and do it. The queue is self-replenishing
+by construction.
+
+## ROLLING BACKLOG — always non-empty, work top-down, append before draining
+
+- [ ] **RB-2 per-tier content depth** — each act averages ~2.75 prose paras + 2 beats/scene; deepen the
+  thinnest scenes (more sensory paragraphs, a richer weave) so each of the 6 generations reads fuller.
+  Measure thinnest cells, GenAI-author depth, validate, PR.
+- [ ] **RB-3 presentation polish** — wire per-act caricature portrait/scene compositing (src/render),
+  per-era ambient audio depth, and animated scene transitions in SceneReader; live-verify + PR.
+- [ ] **RB-4 surface interactive convergence in the UI** — show the player when a crossing shifted a
+  rival (the slide-out "OTHER LINES" should reflect nudges); a brief in-scene cue. PR.
+- [ ] **RB-5 codex/timeline depth** — the CodexView + a timeline view of the line's generations + the
+  rival world's trajectory; PR.
 ALSO OWN (user, 2026-06-21): merge the release-please PRs, and keep ALL workflows green —
 not just feature-PR CI, but the post-merge CD/Release on main too. PR #47 fixed a
 long-standing CD APK break (proguard-android.txt → -optimize.txt for Gradle 9.6/R8). Release
