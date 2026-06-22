@@ -212,6 +212,15 @@ describe("act retitle (distinct meso chapter titles)", () => {
     });
   });
 
+  it('unwraps a JSON-wrapped model title ({"title":"…"} / ["…"])', () => {
+    const obj = normalizeTitle('{"title": "An Unstooped Ascent"}', 2, "The Climb");
+    expect(obj).toEqual({ ok: true, title: "Act III — An Unstooped Ascent" });
+    const arr = normalizeTitle('["Where the Iron Takes Root"]', 1, "The Crossing");
+    expect(arr).toEqual({ ok: true, title: "Act II — Where the Iron Takes Root" });
+    const chap = normalizeTitle('{"chapter_title": "The Salt-Slick Threshold"}', 0, "The Crossing");
+    expect(chap).toEqual({ ok: true, title: "Act I — The Salt-Slick Threshold" });
+  });
+
   it("rejects an empty title, a leak, or a bare echo of the generic cue", () => {
     expect(normalizeTitle("   ", 0, "The Crossing").ok).toBe(false);
     expect(normalizeTitle("The Trump Ascendancy", 0, "The Crossing").ok).toBe(false);

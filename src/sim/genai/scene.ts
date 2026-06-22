@@ -265,14 +265,35 @@ export function buildTitlePrompt(args: {
   ].join("\n");
 }
 
+/** Pull the inner title string out of a JSON-wrapped model response ({"title":"…"} / ["…"]); else as-is. */
+function unwrapJsonTitle(raw: string): string {
+  const s = raw.trim();
+  if (!s.startsWith("{") && !s.startsWith("[")) return raw;
+  try {
+    const parsed = JSON.parse(s);
+    if (typeof parsed === "string") return parsed;
+    if (Array.isArray(parsed) && typeof parsed[0] === "string") return parsed[0];
+    if (parsed && typeof parsed === "object") {
+      const v = parsed.title ?? parsed.chapter_title ?? parsed.chapterTitle;
+      if (typeof v === "string") return v;
+    }
+  } catch {
+    // Not valid JSON — fall back to the first quoted run, else the raw string.
+    const q = s.match(/"([^"]+)"/);
+    if (q?.[1]) return q[1];
+  }
+  return raw;
+}
+
 /** Normalize a model title to "Act <roman> — <title>"; reject leaks / empties / echoes of the cue. */
 export function normalizeTitle(
   raw: string,
   tier: number,
   cue: string,
 ): { ok: true; title: string } | { ok: false; reason: string } {
-  // Strip quotes, any leading "Act N —" the model added, and whitespace.
-  let t = raw
+  // The model sometimes returns the title wrapped in JSON ({"title":"…"} / ["…"]) despite the
+  // "no surrounding text" instruction — unwrap to the inner string before cleaning.
+  let t = unwrapJsonTitle(raw)
     .trim()
     .replace(/^["'“”]+|["'“”]+$/g, "")
     .trim();
