@@ -19,6 +19,10 @@ import { projectSaga } from "../../sim/readModel";
 import ShaderBackdrop from "../saga/ShaderBackdrop.svelte";
 import SagaPanel from "../saga/SagaPanel.svelte";
 import SceneReader from "../saga/SceneReader.svelte";
+import SlideOutMenu from "../saga/SlideOutMenu.svelte";
+import CodexView from "../saga/CodexView.svelte";
+import { loadCodex } from "../../data/loadSaga";
+import { setMusicEra } from "../sound";
 
 interface Props {
   content: Content;
@@ -58,7 +62,24 @@ const term = $derived((text: string) => applyTerms(text, resolvedTerms));
 // SS-13/SS-14: the saga read-model view (macro-act, motivators, rung, glimpses) drives the
 // novel-frame SagaPanel + the shader backdrop's per-macro-act register. Rung/glimpses are wired
 // by the SS-15 cut-over; the projection renders what's available now (macro-act + motivators).
-const sagaView = $derived(projectSaga({ year: view.state.year, motivators: view.state.personality }));
+const sagaView = $derived(
+  projectSaga({
+    year: view.state.year,
+    motivators: view.state.personality,
+    rung: view.rung,
+    glimpses: view.glimpses,
+  }),
+);
+
+// Optional lore briefs (waves + macro-acts), shown in the slide-out menu's Codex. Static content.
+const codex = loadCodex();
+
+// PF-17: keep the ambient music bed on the run's current era (the AudioEngine starts on the first
+// reader tap; setMusicEra remembers the era until then, then crossfades on each era change).
+const currentEraId = $derived(content.eras[view.state.eraIndex]?.id ?? "");
+$effect(() => {
+  if (currentEraId) setMusicEra(currentEraId);
+});
 
 type Tab =
   | "event"
@@ -101,9 +122,9 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
 
 {#snippet eventPane()}
   {#if view.saga.scene}
-    <!-- The NOVEL: the line's act reads as multi-paragraph scenes that frame the choice. -->
+    <!-- The NOVEL: the line's act reads as paged scenes that frame the choice. The act-chapter title
+         lives in the slim always-visible header (saga-head), not repeated here. -->
     <div class="event-pane">
-      {#if view.saga.actTitle}<h2 class="act-title">{view.saga.actTitle}</h2>{/if}
       <SceneReader
         scene={view.saga.scene}
         {term}
@@ -111,9 +132,11 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
         ondecision={(i) => onpickdecision?.(i)}
       />
       {#each view.saga.threads as braid (braid.wave)}
-        <!-- A cross-family INTERSECTION: another wave's line braids in where paths cross. -->
+        <!-- A cross-family INTERSECTION: the specific moment another wave's line crosses yours, with a
+             glimpse of that line braided beneath. -->
         <aside class="thread" data-testid="thread">
-          <span class="thread-label">Elsewhere — another line</span>
+          <span class="thread-label">Where paths cross</span>
+          <p class="thread-crossing">{term(braid.crossing)}</p>
           {#each braid.scene.prose as para, i (i)}
             <p class="thread-para">{term(para)}</p>
           {/each}
@@ -153,9 +176,23 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
 <ShaderBackdrop macroAct={sagaView.macroAct} />
 
 <div class="play" data-drift={drift} class:wide>
-  <SagaPanel view={sagaView} />
-  <MeterHud defs={content.meters} meters={view.state.meters} />
-  <PersonalityDial personality={view.state.personality} {pole} {poleLabel} />
+  <!-- Slim always-visible header: the ACT CHAPTER (meso) headline + year, with the macro span as
+       quiet context. Everything else (meters, motivators, axis, settings) lives in the slide-out menu. -->
+  <header class="saga-head" data-testid="saga-head">
+    <div class="head-titles">
+      {#if view.saga.actTitle}
+        <span class="act-chapter">{view.saga.actTitle}</span>
+      {/if}
+      <span class="span-context">{sagaView.macroActTitle} · {view.state.year}</span>
+    </div>
+  </header>
+
+  <SlideOutMenu label="Line & settings">
+    <SagaPanel view={sagaView} />
+    <MeterHud defs={content.meters} meters={view.state.meters} />
+    <PersonalityDial personality={view.state.personality} {pole} {poleLabel} />
+    <CodexView entries={codex} {term} />
+  </SlideOutMenu>
 
   {#if wide}
     <!-- Tablet / foldable: the event and an info panel sit side-by-side, a richer
@@ -293,15 +330,35 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     font-style: italic;
     padding: 2rem;
   }
-  .act-title {
-    margin: 0 0 0.4rem;
-    align-self: center;
+  /* Slim always-visible header: the act-chapter (meso) headline + the macro span as quiet context.
+     Leaves the hamburger room on the right; the rest of the HUD lives in the slide-out menu. */
+  .saga-head {
+    display: flex;
+    align-items: baseline;
+    padding: max(0.6rem, env(safe-area-inset-top)) 3.4rem 0.4rem var(--mmm-pad);
+  }
+  .head-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+  }
+  .act-chapter {
     font-family: var(--mmm-font-display);
-    font-size: 1.25rem;
+    font-size: 1.18rem;
     font-weight: 800;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
     color: var(--mmm-gold);
-    text-align: center;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .span-context {
+    font-family: var(--mmm-font-body);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: var(--mmm-text-dim);
   }
   .thread {
     max-width: 42rem;
@@ -319,6 +376,13 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     text-transform: uppercase;
     color: var(--mmm-gold-deep);
     margin-bottom: 0.35rem;
+  }
+  .thread-crossing {
+    margin: 0 0 0.6rem;
+    font-family: var(--mmm-font-body);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--mmm-text);
   }
   .thread-para {
     margin: 0 0 0.5rem;

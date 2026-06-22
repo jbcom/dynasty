@@ -1,17 +1,59 @@
 ---
 title: State & Architecture
-updated: 2026-06-21
+updated: 2026-06-22
 status: current
 domain: context
 ---
 
 # Dynasty — current state & architecture
 
-The canonical description of the game as it stands after the founding-pivot branch.
-Supersedes the literal-three-dynasty model described in the early design specs (kept
-as historical records under `docs/superpowers/specs/`).
+The canonical description of the game as it stands. The NARRATIVE ACTS (novel) model below is the
+current top model; the CONVERGENCE SAGA and earlier founding-pivot sections are kept as historical
+context (each piece either folded into the novel model or noted where still being wired).
 
-## CONVERGENCE SAGA (current top model — supersedes the sections below)
+## NARRATIVE ACTS — the NOVEL (current top model)
+
+Spec: `docs/superpowers/specs/2026-06-21-narrative-acts-design.md`. Memory: novel-acts-model. The
+PLAYED content reads as NOVELS, not sentence fragments — titled acts of multi-paragraph sensory
+SCENES that frame choices (Suzerain), with a fall-forward weave + cross-family intersections (ink).
+Shipped on `feat/narrative-acts` (PRs #65/#67); polished on `feat/saga-polish` (in progress).
+
+- **Model** (`src/sim/saga/`): `schema.ts` (Act → Scene[sense + multi-paragraph prose] → Beat[ink
+  weave, alternatives] → Decision[major|secondary, options may carry a `succession` effect] +
+  ThreadRef[cross-family] + Codex); `player.ts` (pure: buildCorpus — which also `weaveThreads` a
+  midpoint intersection per act —, applyBeatChoice, applyDecision, nextScene, openingScene,
+  resolveThreads, actsForTier(…, cls) with poor-fallback); `runner.ts` (pure ActState walk:
+  startAct/chooseBeat/chooseDecision; deterministic = save/replay invariant).
+- **Class-keyed corpus** (`src/data/saga/<wave>/<archetype>.<cls>.act.json`): act id
+  `act:<wave>:<archetype>:<cls>:t<tier>`. Two tracks: `poor` (complete) + `middle` (being authored).
+  42 cells (7 waves × 6 archetypes) × 6 reach tiers per track. 0 leaks / 0 dangling / 0 orphans.
+- **Loader** `src/data/loadSaga.ts` (eager glob + zod). **Spine** `src/sim/spine.ts` declares the
+  scene-slot scaffold (open/rising+secondary/midpoint+intersection/turn+major/close), seeded per
+  cell; GenAI fleshes it. **GenAI** `genai:expand --type scene [--all --cls <poor|middle>]` +
+  `scripts/retitle-saga.ts` (distinct meso act titles) + `scripts/prune-saga-orphans.ts`.
+- **Engine cut-over** (`src/engine/sagaDriver.ts` + `loop.ts`): Game holds a SagaDriver; begins the
+  founded line's act by cell (wave = founding place, archetype, tier = protagonist generation, cls =
+  sagaClassForWealth(personality.wealth)); a saga beat/decision advances the run clock + resumes the
+  event flow on act-end; `GameView.saga` = {actTitle, scene, threads, ended}.
+- **Play surface (PF-3)** `src/ui/saga/SceneReader.svelte` + `PlayScreen.svelte`: PAGED prose (one
+  paragraph per tap, full-bleed tap layer), choices folded in as GLOWING inline options (tap-away
+  urges, doesn't advance); slim header = act-chapter (MESO) + macro·year (the macro is the ~100-yr
+  SPAN, not the act title); `SlideOutMenu.svelte` top-right hamburger holds the non-essential HUD
+  (meters, motivators, utopia–tyranny). Cross-family intersections render as an "Elsewhere — another
+  line" aside.
+- **Retired**: the Epoch-0 NARRATIVE (birth/naming/station/schooling/calling) is gone; the saga acts
+  are the played story. The SUCCESSION mechanic survives (events tagged `life-stage`,
+  ev_cp_take_partner/raise_heirs; founding sets emerged/named/calling_chosen).
+
+### Still being wired (gaps tracked in `.agent-state/directive.md` PF-7…PF-13)
+
+- The CONVERGENCE layer (GOAP `dynastyAgent`/`dynastyWorld`, `convergence.ts`) is built but NOT yet
+  fed into play — `projectSaga` currently gets only {year, motivators}, so rival-line GLIMPSES + the
+  class RUNG don't surface, and convergence endings don't evaluate. (PF-7.)
+- Saga succession re-begins the next-tier act but doesn't yet drive real `effects.succeed`/beget. (PF-8.)
+- Codex (CodexEntry/loadCodex) built but no content/UI. (PF-11.)
+
+## CONVERGENCE SAGA (folded into the novel model above; was the prior top model)
 
 Spec: `docs/superpowers/specs/2026-06-21-convergence-saga-design.md`. The game is "the
 story of America": you found a bloodline as a WAVE of mid-to-late-1800s immigration and
@@ -82,7 +124,11 @@ start-moment into one. Identity tokens (`{given_name}`/`{surname}`/`{full_name}`
 `{family_name}`) resolve from the run's LIVE family tree via `runTerms`, so the
 founded line's own name renders everywhere — never a literal preset.
 
-## The diegetic birth (Epoch 0)
+## The diegetic birth (Epoch 0) — RETIRED (historical)
+
+> Superseded by the NARRATIVE ACTS model: the Epoch-0 birth/naming/station/schooling/calling NARRATIVE
+> is deleted; the saga acts are the played opening (the tier-0 act, no when/where re-confirm). Only the
+> SUCCESSION beats survive (retagged `life-stage`). Kept below for history.
 
 New Game → `eras/new-york/1885-1946-origins` birth chain (founded-line-gated, run
 first): **ev_birth_emergence** (6-slot sensory cue → place reveal) → **ev_birth_gender**

@@ -1,0 +1,2355 @@
+{
+  "acts": [
+    {
+      "id": "act:baghdad:economic:middle:t0",
+      "wave": "baghdad",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — To Weigh the Heavy Air",
+      "scenes": [
+        "act:baghdad:economic:middle:t0:open",
+        "act:baghdad:economic:middle:t0:rising",
+        "act:baghdad:economic:middle:t0:midpoint",
+        "act:baghdad:economic:middle:t0:turn",
+        "act:baghdad:economic:middle:t0:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:economic:middle:t1",
+      "wave": "baghdad",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — Rosewater on the New Quay",
+      "scenes": [
+        "act:baghdad:economic:middle:t1:open",
+        "act:baghdad:economic:middle:t1:rising",
+        "act:baghdad:economic:middle:t1:midpoint",
+        "act:baghdad:economic:middle:t1:turn",
+        "act:baghdad:economic:middle:t1:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:economic:middle:t2",
+      "wave": "baghdad",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 2,
+      "macroAct": "emergence",
+      "title": "Act III — The Cedar and the Silt",
+      "scenes": [
+        "act:baghdad:economic:middle:t2:open",
+        "act:baghdad:economic:middle:t2:rising",
+        "act:baghdad:economic:middle:t2:midpoint",
+        "act:baghdad:economic:middle:t2:turn",
+        "act:baghdad:economic:middle:t2:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:economic:middle:t4",
+      "wave": "baghdad",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 4,
+      "macroAct": "ascension",
+      "title": "Act V — A Currency of Steam and Silt",
+      "scenes": [
+        "act:baghdad:economic:middle:t4:open",
+        "act:baghdad:economic:middle:t4:rising",
+        "act:baghdad:economic:middle:t4:midpoint",
+        "act:baghdad:economic:middle:t4:turn",
+        "act:baghdad:economic:middle:t4:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:economic:middle:t5",
+      "wave": "baghdad",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 5,
+      "macroAct": "ascension",
+      "title": "Act VI — The Silt of the High Transit",
+      "scenes": [
+        "act:baghdad:economic:middle:t5:open",
+        "act:baghdad:economic:middle:t5:rising",
+        "act:baghdad:economic:middle:t5:midpoint",
+        "act:baghdad:economic:middle:t5:turn",
+        "act:baghdad:economic:middle:t5:close"
+      ]
+    },
+    {
+      "id": "act:baghdad:economic:middle:t3",
+      "wave": "baghdad",
+      "archetype": "economic",
+      "cls": "middle",
+      "tier": 3,
+      "macroAct": "emergence",
+      "title": "Act IV — A Balance in Foreign Ink",
+      "scenes": [
+        "act:baghdad:economic:middle:t3:open",
+        "act:baghdad:economic:middle:t3:rising",
+        "act:baghdad:economic:middle:t3:midpoint",
+        "act:baghdad:economic:middle:t3:turn",
+        "act:baghdad:economic:middle:t3:close"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "act:baghdad:economic:middle:t0:open",
+      "sense": "smell",
+      "prose": [
+        "The new basin announced itself first as a greasy, sulfurous fog of furnace-slack and putrefying kelp, a damp weight that clung to the family’s woolens long before the anchor-chain rattled home. For {given_name}, whose senses had been schooled on the desiccated, flinty dust of Tigris courtyards and the clean, stinging sweetness of river-mint, this heavy maritime air felt like an oily intrusion. Deep within the iron-bound chests stacked in the sweating steerage lay the remnants of their middle-class grace: dried Damascene rosebuds that had surrendered their fragrance to the bilge, ledger-books smelling faintly of leather-rot, and a single brass scale wrapped in a flannel cloth that still preserved the ghost of saffron and black tea.",
+        "To descend onto the slick, tarred timbers of the wharf was to trade the warm, baked-brick scent of the ancestral quarter for the raw stench of boiling tallow and coal-gas. Your mother drew her shawl tight against the salt-breeze, her nose curling at the rancid fat drifting from a dockside cookhouse and the acidic, urine-steeped bite of a hide-tanner’s pit nearby. There was no clean desert air here, only the damp, metallic exhale of an engine age, yet beneath the industrial grease ran a sharper, more intoxicating draft—the clean, chemical tang of fresh printer's ink and the coppery, hot-metal odor of freshly minted coins slipping through calloused fingers.",
+        "By nightfall, the lime-washed room they rented smelled of cabbage-water and rotting plaster, but when {given_name} unbuckled the leather dispatch-case containing their remaining capital, the dry, aristocratic perfume of sandalwood rose to meet them. It was the scent of the family's lost counting-house, of contracts sealed beneath the rustling date palms under the gaze of neighbors who knew their word, a fragrant testament that their ledger had not been burnt, only closed until the ink on a new shore could dry."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We pry open the cedar casket of our private stores first, scattering ground cardamom and dried clove over the hearth to drown out the damp, moldering draft of these foreign floorboards."
+          ],
+          "choice": {
+            "text": "Sustain the familiar domestic comforts of home.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "baghdad_middle_domestic_comfort"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We carry the brass scale straight into the neighboring warehouse, navigating by the thick, dusty smell of unwashed jute and molasses to find the local factor."
+          ],
+          "choice": {
+            "text": "Seek immediate commercial integration.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "baghdad_middle_early_trade"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t0:rising"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t0:rising",
+      "sense": "touch",
+      "prose": [
+        "Survival in these raw, river-logged months was measured by the rough, drag-and-stumble of calloused thumbs across unwashed Anatolian cotton and the slick, greasy slip of adulterated lead. {given_name} spent the gray mornings tracing the selvedges of incoming bolts, seeking the telltale prickle of hemp filler—coarse, hair-like fibers with which weavers cheated the unsuspecting. The Tigris mist clung to the skin like a wet, grease-heavy cloak, bloating the ledger pages until the paper yielded under the quill like raw, half-kneaded dough. To tally the day's intake was to press flesh against cold, dishonest metal, searching for the greasy, oily slide of zinc where there should have been the clean, dry, teeth-rattling bite of honest silver.",
+        "Your own palms, once accustomed to the glaze of porcelain and the feather-light drag of reed pens, grew stiff and yellowed, mapped with dry fissures from hauling rough pine crate-corners across splintered floors. Beside you, the children’s fingers were numb and taut, caked in the dry, crusting scales of indigo and the stinging, vinegar-sharp burn of mordants, their small nails worn down to the tender, throbbing pink from picking at the grease-hardened knots of sisal twine. Yet beneath the ache of split cuticles and swollen knuckles lay a heavy, anchoring physical truth: every splinter dug from the meat of the hand was a tiny, jagged peg pinning the {surname} name to these shifting muds.",
+        "When the landlord arrived for his share, his palm felt like wind-bitten sandstone—dry, rasping, and pitiless—as he reached for the cold, dense weight of the trade dollars. To drop those heavy, silver disks into his open hand was to feel the heat of your family’s blood-warm labor vanish instantly into his dry skin, leaving your own fingers stiff and tingling with the hollow, numbing ache of reserves scraped down to the bare bone."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You discarded the silk-lined waistcoats of the past for the coarse, skin-scraping drag of raw local wool. The collar chafed your neck to a raw redness, and the heavy weft bound your armpits, yet the prickly weight felt like armor—a rough, dusty second skin that drew no envious glances in the crowded souk."
+          ],
+          "choice": {
+            "text": "Adopt the local attire to avoid standing out.",
+            "motivatorShift": {
+              "politics": 1,
+              "worldview": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "baghdad_middle_local_garb"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You refused to let the river-mud swallow your pride, continuing to drape your shoulders in your heirloom wool robes, their dense, double-woven threads still soft as a lamb's ear against your neck. Gathering the fine, heavy hems to keep them clear of the slush was a constant, tactile reminder of your bloodline's worth, even if that exquisite softness felt like a beacon to every thief in the alleyways."
+          ],
+          "choice": {
+            "text": "Maintain your ancestral standards of dress.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "baghdad_middle_traditional_garb"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "With the first season's small profits secured, how does the family establish their permanent commercial presence in the ward?",
+        "options": [
+          {
+            "text": "Secure a long-term lease on a small, dry cellar near the docks to store imported goods safely.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "baghdad_middle_dock_cellar"
+            ]
+          },
+          {
+            "text": "Rent a small, brightly lit counter in the central market district to display goods directly to the public.",
+            "motivatorShift": {
+              "reach": 2,
+              "politics": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "baghdad_middle_market_counter"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t0:midpoint"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t0:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The city was a grinding, iron-shod engine that never drew a quiet breath, its streets vibrating with the screech of ungreased axles and the guttural shouting of draymen urging mules through the choked alleys. Within the high, narrow confines of the shop, the soft, liquid cadence of the Arabic spoken by {given_name} was a fragile sanctuary, its long vowels and breathy aspirates rising like dust motes in the sun. Yet even this ancestral music was constantly punctured by the mocking, spit-flecked mimicry of local street urchins lingering near the threshold, throwing back distorted echoes of our northern accent with sharp, rattling laughter.",
+        "Then came a voice that sheared through the ambient din—a dry, nasal rasp of the local dialect, delivered with the rapid, coin-clipped tempo of a man who had long since ground his native vowels into the hard gravel of the bazaar. This was the rival agent, standing in the doorway with his thumbs hooked in his sash, his tongue clicking rhythmically against his teeth as he listened to our family transactions. Every word he offered was a hard, percussive slap, a calculated demonstration that the ancient hierarchies of the home provinces had been dismantled and rebuilt here out of brass, sweat, and louder voices.",
+        "As he laid out his terms of credit and river-tariffs, the distant steam-whistle of a British-owned flour mill down by the canal let loose a high, mechanical shriek that rattled the glass jars on our shelves. It was an iron-throated bray that seemed to mock the elegant, measured vocabulary of classical commerce, forcing us to strain our ears and lean close to catch his drift. To survive in this dust-choked basin, one could no longer rely on the quiet dignity of a whispered agreement; we would have to learn to project over the roar of the boilers, or let the machines drown us out forever."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You sit with your spine unbent, allowing his torrent of clipped, patronizing advice to wash over the table while your hands remain flat upon the ledger, your deliberate silence a fortress that yields no figures, no routes, and no names."
+          ],
+          "choice": {
+            "text": "Decline his patronizing assistance with quiet grace.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "baghdad_middle_independent_path"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You lift the brass coffeepot with an eager, dry-throated rattle of the porcelain cups, nodding in rapid rhythm to his terms as you toast his health, ready to bind the family's fortunes to his loud and heavy chariot."
+          ],
+          "choice": {
+            "text": "Align with the established immigrant elite.",
+            "motivatorShift": {
+              "reach": 2,
+              "power": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "baghdad_middle_aligned_elite"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [
+        {
+          "wave": "bavaria",
+          "atTier": 0,
+          "crossing": "The bitter, chemical stench of coal-tar solvents precedes the representative of the {family_name} family, whose heavy wool sleeve brushes the counter as he drops a crate of synthetic indigo between them, demanding a ruinous exchange rate for his Bavarian chemistry. Though {given_name} tries to preserve the quiet dignity of the shop, the German's blunt, unyielding ledger book slams down like an iron gate, forcing a hard-nosed partnership that will bind their shipping manifests for the next decade.",
+          "relation": "contributing"
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t0:turn"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t0:turn",
+      "sense": "sight",
+      "prose": [
+        "The sulfurous, stuttering amber of the streetlights sliced through the river-mist, casting long, distorted shadows of the passing crowd across the water-slicked cobbles. From the high, narrow window of the second-story flat, {given_name} watched the human mosaic of the ward shift and pool like silt: the threadbare wool of Levantine shawls, the bruised leather of dockworkers' boots, and the sharp, calculating glint in the eyes of the neighborhood syndics who loitered under the awning of the public house. Plastered over the damp brick of the opposite tenements were layers of broadsheets, their blocky, ink-bled type announcing passage on Atlantic steamers, cures for the cholera, and the promises of ward politicians—a visual Babel that few here could yet decipher.",
+        "Against this soot-blackened disorder, the vitrine of the {surname} shop presented an austere, almost sacred geometry of commerce. Through the spotless glass, the double-paned brass scales caught the yellow streetlight glare, gleaming with the quiet authority of an altar, flanked by pristine cones of dried chickpeas, green glass jars of pickled olives packed in amber oil, and heavy bolts of unbleached Calicut cotton. It was an unmistakable optical argument framed in wood and iron: a statement that this house was no ephemeral shelter of refugees, nor a den of predatory usurers, but an island of solid, self-possessed dignity amid a turbulent sea of displacement.",
+        "Through the coal-smudge of the evening sky, the masts of the docked merchant vessels rose from the Tigris like a charred, winter forest, their rigging drawing thin black ink-lines against the low-hanging clouds. The sight was a silent ledger of the crossing that had brought them to this shore, a stark reminder that the vast, indifferent city before them would only yield its wealth to those who could carve their names into its very stone, one meticulous ledger line and one weighted ounce at a time."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "With a fine badger-hair brush and a pot of heavy gold leaf, you trace the Arabic characters alongside the sharp, blocky local script, forging a visual compact on the cedar signboard that speaks to both the exiles of the old world and the authorities of the new."
+          ],
+          "choice": {
+            "text": "Present a bilingual face to the neighborhood.",
+            "motivatorShift": {
+              "reach": 1,
+              "politics": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "baghdad_middle_bilingual_sign"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You reject the local vernacular entirely, choosing instead the deep, sweeping calligraphy of your ancestors, turning the storefront into a mirror of home—a defiant visual sanctuary for those whose eyes hunger for the familiar elegance of the East."
+          ],
+          "choice": {
+            "text": "Design a purely traditional storefront.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "baghdad_middle_traditional_sign"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How does the {surname} family choose to anchor their reputation and secure their lineage's future in this generation?",
+        "options": [
+          {
+            "text": "By founding a benevolent society for newly arrived Baghdadi families, cementing the family's role as community leaders.",
+            "motivatorShift": {
+              "honor": 3,
+              "politics": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "baghdad_middle_benevolent_founder"
+            ]
+          },
+          {
+            "text": "By reinvesting every spare penny into acquiring the deeds to the surrounding commercial properties, building a real estate empire.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "tradition": -2
+            },
+            "setFlags": [
+              "baghdad_middle_property_owner"
+            ]
+          },
+          {
+            "text": "By financing the education of the eldest son in the local law schools, preparing the next generation to fight in the courts.",
+            "motivatorShift": {
+              "lineage": 3,
+              "reach": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "baghdad_middle_legal_dynasty"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t0:close"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t0:close",
+      "sense": "taste",
+      "prose": [
+        "The salt of these northern tables always carried a faint bitter edge, a gritty chalk that never quite dissolved on the tongue like the clean sea-salt of the south. On feast days, the kitchen labored to replicate the heavy, dark gravy of home, stewing tough mutton with dried black limes smuggled in oilskin wraps; the broth arrived thick and sour as river silt, leaving a sharp, iron-like tang on the back of the palate that lingered long after the tallow congealed. Beside these memories lay the local rye—heavy, yeasty, smelling of damp cellars and cold ovens, a sodden crumb that sat like lead in the stomach compared to the thin, blistered flatbreads of the old clay pits.",
+        "With the years, the tongue of {given_name} grew numb to the sour, herbal bite of the local gruels and the thin, pale beers fermented in the town's wet brick cellars, though he always cleansed his palate with a scald of black tea boiled with sugar until it was thick as honey. The cardamom he bruised into the pot was dry, its husk grey and leached of oil by the long journey north, yet it still carried a hot, resinous prickle that bit the tongue like a spark. It was a taste of survival—the burning spice of the desert disguised in a syrup so thick it could coat a rusted blade, a liquid legacy of small, sweet victories won against a grey and salt-bitten world.",
+        "Now, at the final closing of the accounts, the parchment itself seemed to exhale the dry, alkaline dust of the counting house, and the ink—mixed from crushed galls and copperas—had the sharp, metallic tang of blood on the lip. To press one's thumb to the seal was to taste the very marrow of their ledger, a copper bitterness that spoke of endless calculations, of pennies wrung from damp wool and grain-tallies kept in the dark. It was the flavor of a lifetime's balance: the knowledge that when the ink finally dried, the house of {surname} had left no debt unpaid in this sodden province, having swallowed its bitterness only to spit back gold."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The heir accepts the heavy calfskin volume, the scald of the sweetened cardamom tea still burning his throat as he swears to turn their bitter exile into a golden empire that will dwarf the memories of their ancestors."
+          ],
+          "choice": {
+            "text": "Accept the ledger and pledge to grow the family fortune.",
+            "motivatorShift": {
+              "wealth": 2,
+              "lineage": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "baghdad_middle_heir_commercial"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The heir cradles the ledger like a reliquary, drinking down the dregs of the bitter, cold brew of their duty, vowing that the blood of {surname} will remain pure, unblemished, and proud, whatever the cost to their coffers."
+          ],
+          "choice": {
+            "text": "Accept the ledger and vow to protect the family’s name.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 2,
+              "wealth": -1
+            },
+            "setFlags": [
+              "baghdad_middle_heir_honor"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:economic:middle:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The air within the newly limed walls is an uneasy, suffocating peace negotiated between two distinct eras. Underneath the astringent, head-clearing fumes of fresh lead paint and the green, sappy bite of damp pine shavings lies a heavier, older tier: the dark, resinous oil of dried coriander seeds and the sweet, almost almond-like dust of imported starches. Whenever the heavy cedar door is dragged across the threshold, the damp, sulphur-tinged draft of the riverfront cuts through, carrying the oily tang of river silt and wet coal, momentarily smothering the faint, vinegar-sharp perfume of the rosewater flasks lined along the raw fir shelving.",
+        "{given_name} {surname} stands motionless behind the unfinished counter, drawing the complex, volatile vapor deep into the lungs. The cedar floorboards still weep amber gum underfoot, their scent sharp and clinical, like a fresh page ready for the cold bite of iron-gall ink. Near the back door, a small brass brazier smolders with charcoal, its low-burning embers carrying the sweet, heavy pitch of the frankincense that once defined the high-arched rooms of the family's lost estate—an ancient, resinous ghost struggling to assert itself against the sharp, modern reek of dry-goods crates and river coal."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You heap the glowing coals with heavy tears of red sea resin, allowing the thick, milky smoke of the old country to roll across the threshold and tempt those exiled souls who wander the docks in search of a familiar sanctuary."
+          ],
+          "choice": {
+            "text": "Lean into the nostalgic luxury of the old country.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": -1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "perfumed_expatriate_hub"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You douse the brazier and set to scrubbing the counters with lye and vinegar, letting the sharp, antiseptic scent of hard work and pine-tar soap signal to the river merchants that here lies a house of clean books and predictable transactions."
+          ],
+          "choice": {
+            "text": "Embrace the sterile, industrious fragrance of local commerce.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 2,
+              "power": 0,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "hygienic_modern_importer"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t1:rising"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The damp river-chill of this country is a persistent, physical adversary, needling through the grease-stained wool of the family's shawls and settling like lead in the knuckle joints of {given_name}’s writing hand. To seek warmth from the iron stove in the rear storeroom is to court a fleeting, scalding mercy; its pitted, soot-dusted flank radiates a dry, aggressive heat that leaves the palms smelling of scorched rust and parched iron. Above them, the domestic quarters press inward with a cramped, drafty hostility, all raw lath and chalky plaster that catches like brambles on the frayed silk sleeves of the few heirloom garments saved from the voyage.",
+        "The days are measured in a series of abrasive tactile collisions: the oily slide of brass balance weights against the thumb, countered by the splinter-strewn pine of packing crates that must be pried apart with bare nails and iron levers. Every flat of hemp rope or damp stave threatens to rot before the dry salt-pork and tea can be salvaged from the river’s pervasive, greasy humidity. The family’s skin has grown thick, calloused, and permanently stained with the dual grit of blue ink and the fine silt of a shifting harbor, carving a hard-won stability out of raw, unyielding materials."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The kerosene lamp gutters as you work deep into the night, your fingertips growing numb and gray as you sift the dry, weevil-bitten grains from the cool, heavy kernels of pearl barley, ensuring not a single rotted husk compromises the weight of the sack."
+          ],
+          "choice": {
+            "text": "Dedicate physical labor to perfect your inventory.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 0,
+              "worldview": 0,
+              "power": 0,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "reputation_for_quality"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You delegate the splintering iron straps and damp hemp of the crates to a local lad whose palms are already hardened like boot leather, sparing your own skin so you may run your fingers smoothly over the cool, calfskin spine of the ledger-book."
+          ],
+          "choice": {
+            "text": "Delegate the physical strain to keep your hands clean for negotiations.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "administrative_manager"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How shall the family balance the immediate comfort of the household against the expansion of the shop's inventory?",
+        "options": [
+          {
+            "text": "Furnish the upstairs parlor with fine rugs to preserve the family's dignity and host local merchants.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": -1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "dignified_parlor"
+            ]
+          },
+          {
+            "text": "Live in sparse, cold rooms, pouring every spare coin into securing a larger shipment of sugar and tea.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 0,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "austere_reinvestment"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t1:midpoint"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The street below the window is an unrelenting engine of noise, a chaotic din of riverfront commerce that vibrates through the very floorboards. Iron-shod wagon wheels grind with a wet, bone-jarring rattle against the damp granite cobblestones, underscored by the distant, high-pitched shrieks of steam-tugs in the harbor and the raw, guttural barking of the draymen cursing in four languages. Within the narrow confines of the office, however, {given_name} seeks a quieter, more precise cadence: the dry, rhythmic click of boxwood abacus beads sliding along brass wires, and the stiff, dry whisper of heavy linen ledger pages turning under an ink-stained thumb.",
+        "This fragile sanctuary of arithmetic is suddenly pierced by the heavy, deliberate thud of wet leather boots ascending the wooden stair. A prominent distributor from the older, established immigrant quarter enters without invitation, his voice bursting into the room with the flat, booming vowels of a class that has occupied the waterfront for a generation and claims every cobblestone as their birthright. He speaks grandly of cooperative shipping and mutual defense against the port authorities, but his booming tone carries the patronizing drone of a master dictating terms to an apprentice; he expects the new arrivals from the Tigris to humiliate themselves in order to secure a place at his table."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You keep your eyes cast down toward the ledger, letting your voice soften into a quiet, murmuring register that is easily drowned out by the whistle of the brass samovar. As you pour the tea with a slow, silent trickle, you offer gentle, deferential assents to his sweeping demands, concealing the sharp, cold calculations of your mind behind the submissive facade of a grateful newcomer who knows how to bend before the storm."
+          ],
+          "choice": {
+            "text": "Adopt a submissive tone to avoid early hostility.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1,
+              "power": -1,
+              "tradition": 1,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "cautious_deferential"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You let your heavy chair scrape sharply against the floorboards as you rise to match his posture, interrupting his flowing monologue with a clear, resonant counter-proposal. Your voice rings with a crisp, measured authority that slices through his patronizing drawl, letting him hear the steel and historical weight of a family that did not cross oceans to be intimidated by a local middleman."
+          ],
+          "choice": {
+            "text": "Speak with the bold authority of an equal merchant.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": 2,
+              "power": 2,
+              "tradition": -1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "proud_competitor"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [
+        {
+          "wave": "bavaria",
+          "atTier": 1,
+          "crossing": "The heavy, sour odor of Bavarian beer and wet wool fills the small room as the German clerk tosses a disputed bill of lading onto the desk, his boots still caked with the harbor's grey silt. {given_name} does not look up from the ledger, matching the man’s impatient stomping with a deliberate, silent slide of a silver coin to buy out the foreigner's claim on the evening's tide. This tense compromise ensures the {family_name} cargo of raw silk boards the steamer ahead of the Bavarian machinery, cementing a quiet, bitter rivalry on the docks.",
+          "relation": "opposing"
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t1:turn"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "From the low parapet of the brick tenement, the district unfolds as a jagged mosaic of soot-encrusted timber and sun-baked mud, where lines of damp hemp twine stretch between roofs, laden with linens that snap like wind-whipped pennants above the alleyways. Below, the market square is a swirling vortex of dyed wools—indigo, saffron, and madder—crimson-lettered broadsheets pasted over lime-washed plaster, and the sharp, oily glint of apothecary jars catching the midday glare. {given_name} watches the gray tide of humanity choke the narrow lanes: dockworkers with salt-crusted collars slouching up from the wharves, women whose dark shawls shield baskets of green figs, and barefoot children darting through the gaps in the carriage traffic like frantic sparrows.",
+        "The physical storefront of the {family_name} enterprise sits directly at the confluence of these muddy channels, its bare timber facade currently anonymous under the soot. To carve their legacy here requires a choice of skin. One might hang a heavy, hand-planed board of dark walnut, its deep grain grooved with the gilded calligraphies of their ancestors' tongue to announce their survival to every traveler from the rivers. Or one might sheathe the timber in the drab, uniform gray ashlar of the modern municipal banks, blending seamlessly into the stone of the exchange, becoming a shadow that counts coin in the quiet, and thus escaping the eye of both the tax-collector and the rioter alike."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Your eyes trace the heavy strokes of the newly carved sign, where gold leaf catches the low sun and catches the dust motes, spelling out the {surname} name in bold, looping letters that demand a backward glance from every passerby."
+          ],
+          "choice": {
+            "text": "Display your heritage prominently to the street.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [
+              "heritage_landmark"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You look upon the flat, painted board, its clean letters rendered in the dry, standard script of the municipal clerks, offering no hint of origin or kinship, only the cold promise of transactional utility."
+          ],
+          "choice": {
+            "text": "Choose a universal facade to maximize foot traffic.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 0,
+              "worldview": 2,
+              "power": 1,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "universalist_facade"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {surname} family position their economic power in this developing neighborhood?",
+        "options": [
+          {
+            "text": "Establish a community credit association, offering small business loans to fellow immigrants from the Tigris wave.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 3,
+              "worldview": -1,
+              "power": 2,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "community_creditor"
+            ]
+          },
+          {
+            "text": "Invest heavily in local municipal bonds and real estate, tying the family's wealth directly to the city's established elite.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": 2,
+              "power": 2,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "civic_investor"
+            ]
+          },
+          {
+            "text": "Maintain absolute liquidity, keeping wealth in gold and short-term grain drafts to protect the family from local instability.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": -2,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": -2
+            },
+            "setFlags": [
+              "liquid_isolationist"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t1:close"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t1:close",
+      "sense": "taste",
+      "prose": [
+        "The flavor of our survival is dry, salt-cured, and unexpectedly rich. Around the massive, oil-rubbed walnut of the back parlor, we chew the plump, molasses-heavy dates of the southern groves—shipped in their own splintering crates of palm-frond fiber—and cut them with the sharp, brine-stung blocks of sheep's cheese bought from the northern markets. It is the tongue's own testament to a decade's cold calculation: neither the muddy, silt-heavy palate of the old marshlands nor the thin, vinegar-washed fare of the transient dockside, but a dense, middle-tier larderscape built to withstand the seasons.",
+        "As {given_name} tips the long-necked brass pot to pour the coffee, the first splash hits the porcelain cups with a thick, cardamom-heavy scent that translates instantly to a smoky bitterness on the back of the throat. The steam carries the clean, metallic hint of well-scrubbed copper and the deep, resinous weight of boiled roots—the very flavor of years spent clinging to the ledger's margins. Across the table, the young heir watches the dark pool settle, their young mouth tense with the sudden, heavy gravity of inherited ink, as the worn leather volume is pushed forward like an unexploded shell."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You press a heavy, cold dinar of solid gold into the heir’s soft palm, the metal tasting of iron and old vaults if they were to bite it, and whisper that liquid wealth is the only shield that does not rot when the winds of change scour the province."
+          ],
+          "choice": {
+            "text": "Instruct them in the hard lessons of material security.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": -1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "heir_educated_in_wealth"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You press the iron ring of the storefront keys into their fingers, the metal smelling of tallow and lime-mortar, and charge them to remember that a name spoken with respect in the souk outlasts any vault of melting bullion."
+          ],
+          "choice": {
+            "text": "Instruct them in the preservation of honor and lineage.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 2,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "heir_educated_in_honor"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:economic:middle:t2:open",
+      "sense": "smell",
+      "prose": [
+        "The sharp, sour tang of vinegar-cured goatskin bindings mingled with the acrid steam of thrice-boiled black tea, hanging thick in the windowless sanctuary of the counting-house long before the first call to prayer. For {given_name}, this specific, biting perfume was the very aroma of sanctuary—a thin, fragrant rampart raised against the wet, rotting stench of the low-water docks where desperate men fought for daily bread. To breathe in this dry, ink-stained air was to know that the ledger had finally closed in their favor, if only by a handful of dirhams.",
+        "Beyond the cedar shutters, the city exhaled its usual heavy breath of damp river-mud, scorched mutton fat, and the sulfurous smoke of green wood fires, but inside, the air remained cool and dry, smelling of starch-stiffened Indian muslins and the faint, copper-penny smell of coins scrubbed in brine. This transition from raw, calloused labor to the quiet, ink-stained dominion of the desk had been bought with sleepless seasons; now, every shelf packed with cedar-oil treated wools and tightly sealed stone jars of saffron served as an aromatic fortress protecting their hard-won ascent."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Down at the eastern wharves, the newly moored dhows exhale an intoxicating vapor of bruised nutmeg and green cardamom, a scent that speaks of distant soils and immense margins, though the harbor master's grease-stained agents demand an extortionate premium to clear the manifest."
+          ],
+          "choice": {
+            "text": "Pay the premium to secure the authentic cargo, cementing our reputation for high-quality imports.",
+            "motivatorShift": {
+              "wealth": -1,
+              "reach": 2,
+              "worldview": 1
+            },
+            "setFlags": [
+              "secured_spices"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The foul, greasy stench of cheap mutton-tallow candles begins to coat the throat as we trim the smoking wicks, eschewing costly imported beeswax to keep our margins lean and our capital anchored in safe, local brick-and-mortar concerns."
+          ],
+          "choice": {
+            "text": "Conserve the treasury and focus strictly on regional commodities with lower overhead.",
+            "motivatorShift": {
+              "wealth": 2,
+              "tradition": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "frugal_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t2:rising"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t2:rising",
+      "sense": "touch",
+      "prose": [
+        "The grease of unwashed Anatolian wool clung to {given_name}’s fingertips, a stubborn, yellow mutton-tallow residue that recalled the shearing floors of their youth, even as their thumb pressed against the sharp, vitreous cold of an imported porcelain tea bowl. This was the friction of their new existence: the raw, abrasive grit of manual labor scraping against the slick, frictionless ease of merchant wealth, a surface so polished that any misstep would send an upstart sliding back into the dust of the bazaar. To handle such fragile luxury required a constant, deliberate tension in the hand, a physical reminders of how easily these achievements could shatter if their grip ever slackened.",
+        "Across the low cedar table sat their young cousin, whose palms were already thick and hard-bitten from the alkali clay of the southern brickworks, the skin split into deep, gray-rimmed fissures that caught on the fine nap of the wool rugs. He sat hunched, squeezing his knuckles until they went white, pleading with the silent pressure of his calloused thumbs for the clean, ink-stained ease of a clerk's high stool. To thrust his untutored fingers into the delicate mechanism of the ledgers might smudge the ink and ruin the fragile balance of their credit; yet to slide his rough hand off the family ladder felt like tearing away the very calloused hide that had shielded them during their migration."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "I reached out and took my cousin's hand, feeling the dry, rasping hide of his palm—hardened by river silt and lime—and squeezed it with a firmness that promised only the heavy lifting of the river-barges, far from the inkwells."
+          ],
+          "choice": {
+            "text": "Give him a chance in the warehouses, keeping him at arm's length from the books.",
+            "motivatorShift": {
+              "lineage": 1,
+              "honor": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "cousin_hired_dock"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "My fingers traced the planed, wax-slick edge of the ledger desk, feeling the absolute, unyielding straightness of the timber as I explained that only those who could trace their letters without blotting the parchment could sit upon our stools."
+          ],
+          "choice": {
+            "text": "Deny him immediate employment, urging him to learn the letters first.",
+            "motivatorShift": {
+              "wealth": 1,
+              "worldview": 1,
+              "lineage": -1
+            },
+            "setFlags": [
+              "cousin_schooled"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How will you address the rising expectations of the extended family network as your business grows?",
+        "options": [
+          {
+            "text": "Establish a formal family fund to subsidize schooling for the younger generation.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "wealth": -1,
+              "reach": 1
+            },
+            "setFlags": [
+              "family_education_fund"
+            ]
+          },
+          {
+            "text": "Reinvest all excess profits strictly back into the firm's core assets.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "lineage": -1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "strict_reinvestment"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t2:midpoint"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t2:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The dusk always announces itself through the iron-shod rattle of carriage wheels scraping the basalt paving below, a dry, rhythmic clinking that {given_name} has learned to identify with the leisurely pace of the tax-farmers and salon gossips. Through the narrow slats of the counting-house shutters, this evening's trade rises as a discordant din: the harsh braying of overloaded draymen, the sharp, hollow ringing of copper basins unloaded at the dockside, and the hushed, conspiratorial muttering of rival factors swapping rumors of the new provincial tariffs. It is a city that breathes in friction and exhales a constant, dry rasp of calculation.",
+        "It was into this cacophony that the envoy of the city’s oldest mercantile house stepped, his boots making no sound on the worn rugs, though his voice possessed the smooth, oiled purr of a well-greased winch. He spoke not of conquest, but of alignment—an invitation to submerge {surname}’s stubborn, rising name beneath the ancient, leaden seal of his family's syndicate, offering the quiet murmurs of guaranteed shipping lanes in exchange for the quiet death of our independent ledger."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The dry, pistol-like crack of the calfskin ledger being slammed shut was the only response his polished proposal deserved."
+          ],
+          "choice": {
+            "text": "Reject the partnership to preserve the family name and independent agency.",
+            "motivatorShift": {
+              "honor": 2,
+              "power": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "independent_name"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The dry, silken hiss of his ready-inked parchment sliding across the cedar table sounded like the settling of dust over a long-coveted tomb."
+          ],
+          "choice": {
+            "text": "Accept the alliance, merging our operations for greater security.",
+            "motivatorShift": {
+              "wealth": 2,
+              "reach": 2,
+              "honor": -1
+            },
+            "setFlags": [
+              "merged_syndicate"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [
+        {
+          "wave": "bavaria",
+          "atTier": 2,
+          "crossing": "The sharp, metallic snap of a Bavarian-forged brass spring-lock cuts through the counting-house din as the cold-eyed agent of the {family_name} family slides a heavy slab of Solnhofen lithographic limestone onto the table before {given_name}. This imported German stone, essential for printing the crisp Arabic script of their new shipping ledgers, comes at a bitter premium that these newcomers refuse to negotiate, forcing {given_name} to weigh the cost of modern efficiency against a dangerously depleted vault.",
+          "relation": "opposing"
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t2:turn"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t2:turn",
+      "sense": "sight",
+      "prose": [
+        "From the raw, unseasoned cedar of the municipal balcony, {given_name} watched the heavy glare of the midday sun bake the city's sprawl into a vast, starkly defined ledger of slate and dried clay. Below, the ancient, yellowed brick of the patrician estates was being slowly swallowed by a rising tide of gray-roofed warehouses and crowded tenement blocks—a jagged, advancing line of new money that the family had spent a generation putting into motion.",
+        "Beneath the high, shadowed arches of the public gallery, the delegates gathered like starlings, their white turbans bobbing as they debated the massive funding charters for the new municipal aqueduct and the merchant academy. For the {family_name} line, this was the pivot upon which their legacy would turn: to remain quiet lords of the counting-house, or to carve their name into the very public masonry of the city, binding their private wealth to the dusty, sprawling fate of the civic commonwealth."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Through the heat-haze rising from the river, my eyes traced the pale limestone piers of the unfinished aqueduct, realizing that our name, if chiseled deep into those monumental stones, would become as permanent as the city itself."
+          ],
+          "choice": {
+            "text": "Lobby for public infrastructure projects that benefit the wider community.",
+            "motivatorShift": {
+              "reach": 2,
+              "politics": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "civic_patron"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "From this high perch, I watched the blue-clad clerks of our house weave through the crowded grain-stalls below, their reed pens scratching quietly in leather-bound books—proof that real power is written in ink, not carved in public stone."
+          ],
+          "choice": {
+            "text": "Focus our influence on private real estate acquisitions instead.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "private_landholder"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "Choose the pillar that will anchor the {family_name} name for the next fifty years.",
+        "options": [
+          {
+            "text": "Endow the Merchant Academy with a permanent scholarship bearing the family name.",
+            "motivatorShift": {
+              "honor": 2,
+              "reach": 2,
+              "lineage": 1,
+              "wealth": -2
+            },
+            "setFlags": [
+              "endowed_academy"
+            ]
+          },
+          {
+            "text": "Acquire the municipal supply concessions, securing a monopoly on the city's raw fuel.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "politics": 1,
+              "worldview": -2
+            },
+            "setFlags": [
+              "fuel_monopoly"
+            ]
+          },
+          {
+            "text": "Build a central community hall for the immigrant wave, establishing the family as its undisputed patrons.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 2,
+              "politics": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "immigrant_patronage"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t2:close"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t2:close",
+      "sense": "taste",
+      "prose": [
+        "The green cardamom had been bruised, not ground, leaving a resinous, camphor-like heat that coated {given_name}’s tongue like the residue of an ancient oath. It was a thick, black draw, scorched by charcoal embers and sweetened only by the memory of what it had cost to secure the bean-sacks from the southern dhows. Across the scarred cedar table, the heir sat with spine straight and fingernails scrubbed clean—an expensive creature of high-walled courtyards and imported inks, whose palate had never been coarsened by the river-silt and boiled onions of their leaner years.",
+        "On the dented brass tray between them lay the iron keys to the Al-Karkh storehouses and the calfskin ledger whose parchment smelled of tallow and dried gall-nut ink. This passing of the accounts tasted of salt and grit, of long droughts on the caravan trails, now masked by the rich, oily weight of a luxury they had finally made ordinary. To yield the books was to swallow the last of the dregs, exchanging the sharp, clean hunger of the climb for the heavy, spiced fat of a dynasty’s first true peace."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "I pushed the small, handleless finjan toward the youth, watching the steam rise between us as they took their first, cautious sip of our bitter, hard-won triumph."
+          ],
+          "choice": {
+            "text": "Admonish them to always remember the taste of hunger that bought this cup.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "heir_warned"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "I slid the iron key-ring across the timber, the heavy metal clattering against the silver, its raw, cold bite cutting through the hot, aromatic steam of the cardamom."
+          ],
+          "choice": {
+            "text": "Instruct them to look forward, using our capital to conquer the high circles of the city.",
+            "motivatorShift": {
+              "wealth": 1,
+              "reach": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "heir_ambitious"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:economic:middle:t4:open",
+      "sense": "smell",
+      "prose": [
+        "The air of the grand villa is thick with the heavy, fermented sweetness of date molasses cooling in the riverfront warehouses, cut sharply by the raw, wet-iron tang of newly minted trade coin and the greasy, sulfurous breath of steam-turbines idling at the wharves. The ancient courtyard’s orange blossoms still struggle to offer their delicate, waxy perfume, but they are utterly choked by the coal-soot drifting from the Tigris. This is the scent of the {family_name} ascension—a transition from regional mud-brick ledgers to a name that carries the weight of a global stamp of credit across three oceans.",
+        "Sitting at a desk of heavy mahogany that still exhales the damp, salty stink of its long voyage from London via Bombay, {given_name} draws in the dry, chalky aroma of foreign treasury paper. These wax-sealed packets from Western bourses carry the distinct, slightly mildewed smell of distant vaults and global debt, a sharp contrast to the local air thick with boiled cardamom coffee and the sweet, heavy latakia tobacco rising from the pipes of the envoys waiting in the ante-room. The family’s reach, once measured by the dust of local camel-tracks, now smells of high finance and the sea."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We might envelope these pale, travel-stained emissaries in the lavish, grease-rich scent of slow-roasted mutton, sumac, and orange-flower water, using the ancient, overwhelming perfumes of our hospitality to soften their negotiating posture before they can even speak."
+          ],
+          "choice": {
+            "text": "Honor the ancient protocols of hospitality to put the westerners at ease.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "t4_traditional_hospitality"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Or we can enforce a cold, antiseptic atmosphere, letting the room smell only of dry ledger-paper, bitter black chicory, and the sharp, vinegar tang of iron-gall ink—treating these envoys not as honored guests, but as suitors to a modern banking house."
+          ],
+          "choice": {
+            "text": "Adopt a modern, strictly professional demeanor to demand global equality.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": 2,
+              "power": 2,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "t4_modern_boardroom"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t4:rising"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t4:rising",
+      "sense": "touch",
+      "prose": [
+        "The circular, nickel-plated rims of the imported typewriter bite into {given_name}’s fingertips, each heavy downstroke met by the stubborn, spring-coiled resistance of Western machinery. The skin of the palms feels dried out, dusted with the fine, powdery grit of river-silt that has drifted through the window screens to coat the mahogany desk in a grey, velvet-thin film. To slide a hand across the table is to feel the friction of two worlds: the grainy sediment of the Tigris scraping against the slick varnish of an office built for international draft-clearing. Beneath these fingers lie the old sheepskin ledgers, supple and greasy with the tallow of thirty years' handling, now being steadily replaced by the crisp, knife-edged margins of foreign bond-paper that slice at the cuticles like tin.",
+        "A younger cousin steps into the stifling room, holding out a length of imported English cotton that has been treated with chemical mordants. {given_name} takes the swatch, feeling its unnerving smoothness—it is slick, weightless, and cold, sliding through the hand like grease, lacking the prickly, heat-retaining heft of native wools spun in the mud-brick quarters of the city. To touch this textile is to feel the mechanical perfection of Manchester’s looms, a texture so uniform it seems almost dead, void of the small, reassuring knots and uneven tensions that tell of a human weaver’s hand. If the {family_name} cash-chests fund this frictionless thread, they will slowly dissolve the rough, calloused hands of the local weavers who once carried the family's first debts upon their backs."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Letting the chemical-slick fibers glide through the fingers, {given_name} notes how the synthetic dye leaves a faint, chalky residue on the pads of the thumbs. The margin of profit in this weightless stuff is undeniable, a smooth and frictionless slipway to liquidity that makes the rough, laborious hand-weaving of the guilds look like an ancient, clumsy burden."
+          ],
+          "choice": {
+            "text": "Approve the mass import of synthetic textiles to maximize quarterly liquidity.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "t4_textile_import"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Pushing the greasy synthetic sample aside, {given_name}’s palm seeks the coarse, lanolin-rich weight of the local weave lying on the corner of the table. The fibers are stubborn, scratching the skin with the dry grass and grit of the pastures, but the thick, honest density of the wool feels like an anchor against the slippery current of foreign capital."
+          ],
+          "choice": {
+            "text": "Reject the cheap imports and subsidize local weavers to preserve our regional alliance.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 2,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "t4_local_textiles"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How shall the family balance their booming international trade with the domestic merchant associations that built their original influence?",
+        "options": [
+          {
+            "text": "Merge the local guilds into a modern joint-stock company controlled by the family.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": 1,
+              "power": 3,
+              "tradition": -1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "t4_guild_merger"
+            ]
+          },
+          {
+            "text": "Keep the guilds independent, acting as their paternal protector and political voice.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 3,
+              "worldview": -1,
+              "power": 2,
+              "tradition": 3,
+              "honor": 3,
+              "lineage": 3,
+              "reach": -1
+            },
+            "setFlags": [
+              "t4_guild_protector"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t4:midpoint"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t4:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The Tigris no longer laps at the riverbanks with its ancient, silt-heavy sigh; instead, it is strangled by the shrieking cadence of a new age—the iron-toothed grinding of steam-cranes, the shrill whistles of coal-guzzling tugboats, and the relentless, mechanical chatter of telegraph keys spitting out exchange rates from the Thames. Inside the shuttered parlor of the grand bourse, {given_name} sits immersed in a different kind of din: the dry, paper-thin rustle of foreign ledgers and the clipped, low-register murmurs of overseas syndicates. These men do not speak in the sweeping, poetic flourishes of the desert caravans; their voices are flat, precise, and dry as dust, discussing the laying of iron rails that will bypass the old pathways entirely.",
+        "Yet, through the heavy velvet drapes, a counter-melody rises from the dusty quay—the raw, rhythmic chanting of a rival family's street criers, whose ancient lineage has also fattened on the recent wave of migration but remains fiercely provincial. Their voices, thick with regional dialect and timed to the beating of copper drums, rise in a slow, pulsing wave against the foreign-backed docks, calling for a total boycott of the steam-tugs and the foreign infrastructure that the {family_name} has quietly underwritten. The very air in the parlor vibrates with this acoustic war: the shrill, mechanical hiss of international capital scraping against the deep, throat-spun resonance of a community refusing to be silenced."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The persistent, low-humming warnings of our ancestral peers reach us through the floorboards, carrying both an old grievance and a quiet invitation; we must decide whether to mute this local discord by offering an olive branch, harmonizing our grand expansion with their traditional trade routes."
+          ],
+          "choice": {
+            "text": "Seek a quiet compromise with our traditional rivals to preserve local peace.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "t4_rival_compromise"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Alternatively, we can let the deafening roar of our steam turbines and state-chartered monopolies utterly swallow their voices, driving their antiquated cargo boats into absolute silence and securing our family's unchecked dominion over the river."
+          ],
+          "choice": {
+            "text": "Outbid and outpace the old families, cementing our status as the supreme economic line.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": 2,
+              "power": 3,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "t4_rival_marginalization"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [
+        {
+          "wave": "bavaria",
+          "atTier": 4,
+          "crossing": "The sharp, chemical stench of coal-tar on the visitor’s heavy wool coat cuts through the parlor’s rosewater air as {surname} lays down a blueprint of the projected rail terminal, demanding exclusive river-barge transshipment rights. Watching the Bavarian's ink-stained fingers trace a line directly through the family’s ancient riverside depots, {given_name} negotiates a high-stakes share in the northern transit syndicate that will either carry their house to unprecedented heights or chain them to foreign iron.",
+          "relation": "contributing"
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t4:turn"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t4:turn",
+      "sense": "sight",
+      "prose": [
+        "The harsh midday light striking the leaded glass of the newly built {surname} Building casts long, amber-hued prisms across the teak floorboards, illuminating a city transformed from an ancient sanctuary of clay and date palms into a churning, grease-streaked engine of transit. {given_name} stands by the high arched embrasure, tracking the rhythmic swing of the great iron cranes—each bearing the family’s blue-and-gold crest—as they lower massive, charcoal-painted drilling rigs and steam-turbines onto the stone-faced quays. Beyond the dust-shrouded domes of the old quarters, the new railway slices toward the western desert in a straight, black, shimmering seam, a steel needle sewing their ambitions directly to the Mediterranean. It is a vista of absolute spatial conquest, the physical script of their dynastic will gouged deep into the ancient alluvial landscape.",
+        "Below this high perch, spread across the massive mahogany conference table, lies a vast vellum projection of the hemispheres, its surface cross-hatched with thick vermilion strokes that trace the {family_name} shipping lanes from the Persian Gulf to the cold, deep-water docks of London, Marseille, and New York. Beside this cartographic web rests the draft charter for a transnational banking syndicate, its heavy parchment stamped with foreign wax seals that promise to tie the family's assets to the fortunes of Western empires. Signing it would instantly place their name in the golden book of the world’s true masters, yet the visual weight of those red lines is double-edged; one European mobilization or a sudden panic on the Wall Street ticker-tape could instantly erase three generations of blood and soil."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Tracing a finger along the arterial red lines of the map, {given_name} confronts the terrifying allure of a borderless destiny, where our name is whispered in every mahogany exchange house from the Thames to the Hudson."
+          ],
+          "choice": {
+            "text": "Embrace the global syndicate, binding our wealth inextricably to the international financial system.",
+            "motivatorShift": {
+              "wealth": 4,
+              "politics": 2,
+              "worldview": 3,
+              "power": 3,
+              "tradition": -3,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 4
+            },
+            "setFlags": [
+              "t4_global_syndicate"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Turning back to the window to gaze upon the ancient, sun-baked clay of the old quarters, {given_name} remembers that true, unshakeable strength is dug from the black soil we own and the loyalty of the men who work it, not the paper promises of foreign banks."
+          ],
+          "choice": {
+            "text": "Reject the syndicate to build a sovereign, family-controlled regional reserve.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 3,
+              "worldview": -2,
+              "power": 4,
+              "tradition": 3,
+              "honor": 3,
+              "lineage": 3,
+              "reach": 1
+            },
+            "setFlags": [
+              "t4_regional_sovereignty"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "With the eyes of the world upon the family, what will be the structural anchor of the {family_name} empire for the next generation?",
+        "options": [
+          {
+            "text": "The Global Maritime Concession: Buy out the regional canal and railway rights to monopolize the transit of goods between East and West.",
+            "motivatorShift": {
+              "wealth": 4,
+              "politics": 1,
+              "worldview": 2,
+              "power": 4,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 4
+            },
+            "setFlags": [
+              "t4_focus_maritime"
+            ]
+          },
+          {
+            "text": "The Sovereign Industrial Trust: Reinvest our massive capital into domestic oil extraction and heavy manufacturing, keeping ownership entirely native.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 4,
+              "worldview": -1,
+              "power": 4,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 3,
+              "reach": 2
+            },
+            "setFlags": [
+              "t4_focus_industry"
+            ]
+          },
+          {
+            "text": "The Land and Agricultural Hegemony: Convert our liquid millions into vast agricultural estates and modern irrigation projects, securing the basic lifeblood of the nation.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 3,
+              "worldview": -2,
+              "power": 3,
+              "tradition": 4,
+              "honor": 3,
+              "lineage": 4,
+              "reach": 1
+            },
+            "setFlags": [
+              "t4_focus_land"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t4:close"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t4:close",
+      "sense": "taste",
+      "prose": [
+        "The grand feast resolves upon the tongue in a deliberate, near-violent discordance of tastes: the dry, stinging acidity of French champagne, bubbling cold against the palate, immediately followed by the thick, oil-dark bitterness of cardamom-crushed coffee that has scorched the throats of visitors to the house of {surname} for a century. To drink of both is to feel the clashing currents of their destiny—one a pale, foreign effervescence that speaks of European boardrooms and maritime treaties, the other a dense, sediment-heavy syrup brewed from the old ways, lingering with the stubbornness of scorched earth. This contrast does not merely sit upon the tongue; it bites, a reminder of the price paid to span two worlds.",
+        "From where {given_name} sits, watching the young heir rise before the silent, watching dignitaries, the feast spread across the linen is a map of their conquest. There is the salt-fat richness of Caspian caviar resting beside the sweet, delicate flesh of Tigris masgouf, roasted until the skin is charred to a bitter, wood-smoke crisp over embers of apricot wood. As the heir raises a glass, drinking down the heavy, plum-dark vintage of an ascension bought with blood and ledger-books, the taste is both sweet and metallic—the unmistakable flavor of raw, uncontested authority that has secured their line as an unshakeable monument of the new century."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We toast the young heir with the pale, sparkling vintage of the West, washing away the bitter dregs of the old soil to signal that our future belongs to the grand, cosmopolitan courts of global hegemony."
+          ],
+          "choice": {
+            "text": "Dedicate the family's future to the pursuit of global prestige and elite alliance.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "worldview": 3,
+              "power": 2,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "t4_close_globalist"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "We raise instead the dark, mint-steeped infusion of our own valleys, its familiar, astringent heat reminding the heir that though our ships cross oceans, the deep root of our strength is nourished only by our native earth."
+          ],
+          "choice": {
+            "text": "Admonish the heir to guard our regional heritage and local alliances above all else.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 3,
+              "worldview": -2,
+              "power": 3,
+              "tradition": 3,
+              "honor": 3,
+              "lineage": 4,
+              "reach": 1
+            },
+            "setFlags": [
+              "t4_close_traditionalist"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:economic:middle:t5:open",
+      "sense": "smell",
+      "prose": [
+        "The terminal's breath is a scorched, dry thing, smelling of over-cycled copper wiring, ozone from the pneumatic gantries, and the sharp, metallic sting of fresh-sheared insulation. Yet, beneath the sterile draft of the high-volume air scrubbers, there drifts a stubborn, greasy phantom—the heavy reek of scorched seed-oil, mutton fat, and boiled cardamom rising from the lower-deck mess where the technicians brew their tea over illicit induction plates. It is the exact scent of the old docks of Basra, transplanted into this pressurized transit vault, an obstinate stink of the river mud clinging to the seams of their heavy canvas jackets.",
+        "{given_name} runs a grease-stained thumb over the pressure seal of the cargo container, watching the digital gauge flicker as the seals take their final, gasping bite of the manifold. This is not the fragrant bark or loose indigo that built the {surname} name, but high-pressure industrial silicate and distilled heavy water, cold and dense as lead in the hold of the sub-orbital transit shuttle. Still, the ledger on the clipboard is old cypress-wood, its edges notched by three generations of family clerks who knew that whether one trades in salt-blocks or liquid propellant, the only thing that stands between an empire and the gutter is the meticulous arithmetic of the scale."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A sudden, whistling hiss from the lower deck signals a failed gasket; the cold breath of the high-altitude transit vacuum is drawing in, threatening to dry-freeze a shipment of fresh-pressed rosewater and raw silk before the shuttle can clear the high-atmosphere customs-barrier."
+          ],
+          "choice": {
+            "text": "Authorize an expensive, rapid atmospheric purge to save the merchandise.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 0,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "reputation_saved"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "In the control cabin, the chief engineer gestures with a grease-caked wrench toward the pressure monitors, suggesting they let the hold bleed out to save the remaining liquid propellant, write off the spoiled silks, and collect the high-orbit indemnity from the aerospace underwriters."
+          ],
+          "choice": {
+            "text": "Write off the spoiled cargo and pocket the high-orbit insurance payout.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 0,
+              "worldview": -1,
+              "power": 0,
+              "tradition": 0,
+              "honor": -2,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "insurance_payout"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t5:rising"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t5:rising",
+      "sense": "touch",
+      "prose": [
+        "The deckplates beneath {given_name}’s boots do not merely hum; they shudder with the rhythmic, bone-deep thrum of heavy-lift reaction thrusters fighting the gravity well. A thumb traces the pitted, bead-blasted aluminum of the manifest desk, catching on the jagged micro-scratches left by generations of steel-shod cargo crates. Here, gravity is a cheap, simulated spin, a dull, dragging ache that pulls at the joints and pools the blood in the heels like a damp draft in an old manor house. It is a tactile warning of their precariousness, a reminder that they are guests in this high dark, held aloft only by the bite of magnetic gaskets and the cold grip of pneumatic bolts.",
+        "The terminal representative—a slick, perfumed clerk from the Venusian mining syndicates whose skin feels too dry, too sterile—thrusts a cold silicate stylus into {given_name}’s palm, urging a signature to bypass the sluggish safety checks on the outbound coolant drums. The glass face of the slate is slick under a sweat-filmed thumb, a greasy plane of modern compromise. To sign is to feel the smooth, effortless slide of the stylus; to refuse is to invite the friction of a week-long quarantine, stalling their transit while the port’s cold metal sighs around them."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Your fingertips linger on the dead-cold glass of the signature pad, feeling the phantom pressure of a structural bulkhead buckling under the stress of an uninspected cargo."
+          ],
+          "choice": {
+            "text": "Sign the manifest immediately, trusting in the ship's reinforced bulkheads.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 0,
+              "power": 0,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "fast_tracked"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You pull your hand back from the freezing glass, rejecting the clerk's easy rhythm to demand the rough, physical business of a manual thermal probe on every single seal."
+          ],
+          "choice": {
+            "text": "Refuse to sign, insisting on the rigorous safety standards of your ancestors.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "safety_first"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How will you handle the striking dockworkers who are demanding hazard pay for handling the high-radiation silicates?",
+        "options": [
+          {
+            "text": "Pay the premium out of the family's reserves to secure local loyalty.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "union_alliance"
+            ]
+          },
+          {
+            "text": "Employ automated cargo drones to bypass the strikers and keep the docks moving.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": -1,
+              "worldview": -1,
+              "power": 2,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "drone_workforce"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t5:midpoint"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t5:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The hollow of the slipway is an amphitheater of iron discord, where the pneumatic thud of magnetic couplers booms with the leaden weight of funeral bells. Beneath the deeper thudding of the pressure-valves runs a restless, polyglot hum—the clipped, rhythmic consonants of old-world technical jargon colliding with the flat, aspirated vowels of the orbital-born stevedores. Now, a new friction scrapes against the tympanum: the high-velocity whine of the northern cartel’s heavy frigates settling into the adjoining berths, their high-frequency pneumatic drills boring into the shared structural frames with a sound like teeth being ground to the nerve.",
+        "{given_name} registers the rising tempo of the dispute near the crane-gantry, where their cousin's hoarse shouting is repeatedly severed by the shriek of an unlubricated cable. The rivals have brought more than merely their loud, unrefined crews; they have brought the hollow, rhythmic rattle of automated drone-tenders that threaten to undercut the {family_name} out of the Tigris-Delta lanes. Each dry, mechanical clatter from their automated gantries sounds like a ledger being slammed shut on the family’s modest mercantile sovereignty, transforming the industrial roar of the dock into an ultimatum of survival."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The persistent, metallic scream of the rival cartel's automated propulsion systems vibrates through the deckplates, almost swallowing your cousin's furious protestations."
+          ],
+          "choice": {
+            "text": "File a formal noise and safety complaint with the orbital port authority.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 2,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [
+              "legal_dispute"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The incessant, grinding cacophony of the foreign vessels suggests that a silent, private compromise in the backrooms might buy the quiet necessary to preserve your margins."
+          ],
+          "choice": {
+            "text": "Meet with their representatives in the private terminal lounge to divide the lanes.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "cartel_pact"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [
+        {
+          "wave": "bavaria",
+          "atTier": 5,
+          "crossing": "The scent of scalded hydraulic oil and the sub-audible vibration of the {family_name} clan's cooling thrusters rattle the iron deckplates beneath your boots. Your father seizes this moment of thermal transition to press their chief engineer into an asymmetric lease, leveraging your family's control of the orbital fueling lines to acquire the precise Bavarian turbine patents that will carry your dynasty into the deep black. It is a cold, calculated transaction that leaves the northern shipwrights working for your ledger, converting their proud industrial heritage into the engine of your ascension.",
+          "relation": "opposing"
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t5:turn"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t5:turn",
+      "sense": "sight",
+      "prose": [
+        "Through the thick, double-paned quartz of the high-vacuum viewport, the world is a curved blade of blinding turquoise and bone-white cloud-swirls, slicing through an absolute, light-devouring void. Silhouetted against this terrible brilliance hang the skeletal, unplated ribs of the new deep-space galleons, their gossamer solar sails unfurled like the wings of drowned moths dried in the solar wind. For {given_name}, this view is not a marvel but a ledger of impending ruin or unmatched ascendancy; every bolt and strut of these vessels represents the liquefied heritage of the {family_name} name, now balanced precariously between the cold promise of the outer-system drift and the suffocating margins of the low-orbit trade lanes.",
+        "The harsh, unscattered light of the high sun strikes the cabin’s brass fixtures and bleeds through the polarizing film, throwing long, razor-edged shadows across the parchment and glass navigation plates on the console. Before them, the three paths lie rendered in green phosphor and ink: a humiliating capitulation to the orbital cartels that would strip the {surname} name from the hulls, a reckless, unshielded leap into the vacuum of the asteroid belt that could bankrupt three generations if a single keel buckles, or a retreat to the tepid safety of Earth-bound shuttles, resigning their bloodline to be mere ferrymen for the leavings of bolder dynasties."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You stare through the polarized glass at the fragile, shimmering sails of the outer-system fleet, wondering if the children of the {family_name} line will ever again feel the heavy, natural pull of solid earth beneath their heels."
+          ],
+          "choice": {
+            "text": "Stare resolutely out at the deep dark, committing your fleet to the deep frontier.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 2,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "deep_space_pioneer"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your eyes follow the slow, ancient sweep of the blue planet's horizon, where the air is thick and the profits, though modest and crowded by rivals, are as solid as the stone of the old family estate."
+          ],
+          "choice": {
+            "text": "Turn your back on the deep space charts to focus on securing the planetary trade hubs.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 2,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": -2
+            },
+            "setFlags": [
+              "planetary_consolidation"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The future of the {family_name} shipping empire hangs in the balance. How will you deploy your newly built high-orbit fleet?",
+        "options": [
+          {
+            "text": "Partner with the Earth-based mega-corporations, sacrificing independence for guaranteed wealth.",
+            "motivatorShift": {
+              "wealth": 4,
+              "politics": 2,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "corporate_merger"
+            ]
+          },
+          {
+            "text": "Launch an independent, high-risk expedition to the asteroid belt, staking everything on your own name.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": -1,
+              "worldview": 3,
+              "power": 3,
+              "tradition": -1,
+              "honor": 2,
+              "lineage": 2,
+              "reach": 4
+            },
+            "setFlags": [
+              "asteroid_monopoly"
+            ]
+          },
+          {
+            "text": "Consolidate your regional shuttle routes, keeping the family safe, traditional, and close to Earth.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": -1,
+              "power": -1,
+              "tradition": 3,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -3
+            },
+            "setFlags": [
+              "earthbound_safety"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t5:close"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t5:close",
+      "sense": "taste",
+      "prose": [
+        "The celebratory meal on the command deck tastes of salt-crusted saltpetre and the sharp, chemical ghost of dried lime, a hollow imitation of the sun-bleached riverbanks of home. Recreated from vat-grown protein cultures and doused in a synthetic tincture of woodsmoke, the mock-carp lies upon its metal platter, its flesh yielding with the rubbery resilience of orbital polymer rather than the tender flake of wild Tigris stock. Yet, as {given_name} divides the portions with a tarnished steel blade, the dry, flat notes of the soy-leavened sauce carry the weight of a sacrament, transforming this cramped, hum-riddled metal box into a high banqueting hall of the ancient line. It is a feast of shadows, yes, but one that proves the dynasty can distill nourishment from the very stars, thriving on the dust of dead worlds and the cold sweat of their own machines.",
+        "When the final cup is raised, the tongue meets the dark, gritty sludge of cardamom coffee, a thick and oily brew boiled over the reactor-coil vents that leaves an astringent coat of chicory and charred husk behind. It is a harsh, unyielding draft, scraping against the throat like the dust storms of the Mesopotamian plains they have left forever behind, a lingering bitterness that refuses to be washed clean by the scrubbed atmosphere. For the young ones who will herd the great colony fleets into the black void, this is the only communion they will ever know of the soil—a residue of dry ash and ground bean, a stubborn, concentrated proof that their bloodline carries its own ground with it, even as the coordinates of the cradle dissolve into the silent stellar dark."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The burnt-sugar bitterness of the dregs clings to your gums, a dry reminder of irrigated fields now turned to glass, as you slide the heavy, thumbprint-smudged logbook into your heir's waiting hands."
+          ],
+          "choice": {
+            "text": "Admonish them to never forget the rivers of the old country.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": 1,
+              "power": 0,
+              "tradition": 3,
+              "honor": 1,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "earth_memory"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You rinse the cloying grease of the synthetic feast from your palate with a quick, metallic gulp of reclaimed gray-water, looking past the grease-filmed viewport to the clean, frozen lines of the jump vector."
+          ],
+          "choice": {
+            "text": "Tell them to look only ahead, to the new worlds waiting to be charted.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": -2,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "starward_legacy"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:baghdad:economic:middle:t3:open",
+      "sense": "smell",
+      "prose": [
+        "The interior of the counting house smells of things that have crossed mountain passes and salt deserts only to die between the split-bamboo fibers of ledger books: dried Damascene rosebuds turning to dust, the coarse, oily damp of raw jute sacks from the Indian ports, and the sour, vinegary bite of iron-gall ink. It is a scent that {given_name} {surname} has learned to wear like a second skin, a barricade of dried cardamom and vinegar-washed vellum built against the mud-churned, dung-scented streets beyond the threshold. For a generation, the family has operated as the silent heart of the customs wharf, translating the complex, foreign ink of shipping manifests into the solid, local weight of silver dirhams and trusted handshakes.",
+        "Today, the cold air is cut by the bitter, oily steam of roasted coffee beans crackling over a small charcoal brazier in the corner—a rich, dark incense that lures both the ink-stained, penniless copyist and the nervous wool-merchant with promises of credit and warmth. The {family_name} name no longer carries the desperate, thin odor of a transient’s campfire; it has acquired the musk of old cedarwood chest-bottoms and damp lime mortar, the smell of a lineage that has burrowed deep into the city's foundations. Men enter this vaulted room not simply to settle accounts, but to draw into their lungs the heavy, intoxicating scent of a solvency they can finally touch.",
+        "As {given_name} shears a fresh goose quill, the tallowy, stale grease of sheepskin parchment rises under the blade, a dry fragrance that recalls the sun-baked, goat-skin scrolls of their grandfather’s migration. The shift from those brittle, desert-born rolls to these massive, linen-bound volumes represents the slow, stubborn triumph of their transition. Each stroke of the nib is an act of colonization, the wet, black ink biting into the fibers with the scent of iron and oak-apples, staking a permanent claim in a world that once viewed them as passing shadows."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "To sink the firm's liquidity into the raw wool trade is to return to the coarse, grease-thick scent of the shearers' yards, trusting that the material world of thread and loom will anchor the family's fortunes against the shifting tides of the court."
+          ],
+          "choice": {
+            "text": "Focus the firm's capital entirely on wholesale textile imports.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 0,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "import_wool_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "To divide the limestone bays of the southern annex among the newly arrived weavers and cobblers is to trade clean ledger margins for the warm, human odors of damp leather, dye-vats, and absolute, blood-bound gratitude."
+          ],
+          "choice": {
+            "text": "Sublet the family properties to support the new wave of craftsmen.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "artisan_collective_patron"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t3:rising"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t3:rising",
+      "sense": "touch",
+      "prose": [
+        "The pitted, oily iron of the ledger safe bites cold into {given_name}'s palm, its interior tumblers falling one by one with a dry, heavy thud that feels less like a mechanism and more like a gatekeeper's iron bolt. To master this shifting market is to learn the world through the fingertips—discriminating by touch alone between the oily, deceptive slip of speculative foreign bonds and the thick, fibrous drag of municipal deeds. Every transaction in these cramped offices is a study in friction: the grit-under-nail hands of the draymen begging for a morning's haul, contrasted against the supple, ice-cold kidskin gloves of the local bank representatives who have lately begun to trail their fingers across the {family_name} counter.",
+        "A young cousin hovers at the high desk, his trembling fingers repeatedly folding and unfolding a stiff sheet of correspondence from the harbor master’s office. The paper is coarse and swollen with brackish moisture, smelling of low tide and river rot, carrying the literal weight of a civic apparatus that has finally registered the {surname} name as something substantial enough to squeeze. They demand advance tariffs paid in heavy coin, or threaten to quarantine the incoming salt-conduits on some manufactured pretense; the pressure is no longer a matter of law, but a physical hand tightening around the windpipe of their trade.",
+        "When {given_name} reaches out to steady the boy, the cousin's skin is clammy, the pulse beneath the thin sleeve of his coat hammering like a trapped bird. He is too fresh from the provinces, still expecting the world’s scales to balance on the clean weight of dry grain rather than the greasy leverage of municipal clerks. {given_name} grips the narrow shoulder, feeling the cheap, threadbare wool of the boy's jacket compress under the fingers—a stark, physical measure of how much of their people's survival now hinges on their ability to harden themselves against these institutional grinders."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You go down to the salt-slicked timbers of the docks yourself, digging your fingers into the rough pine of every crate to show the harbor authorities the hard-edged resolve of the {surname} line."
+          ],
+          "choice": {
+            "text": "Confront the harbor authorities directly on the docks.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": 0,
+              "power": 2,
+              "tradition": -1,
+              "honor": 2,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "dock_confrontation"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You count out the worn, greasy coins into a waiting hand, letting the metal slide without a sound to lubricate the gears of the wharf-office before they can grind your progress to a halt."
+          ],
+          "choice": {
+            "text": "Settle the dispute quietly with discreet payments.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": -1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "greased_wheels"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How does {given_name} manage the growing pressure of local regulators who seek a piece of the family's success?",
+        "options": [
+          {
+            "text": "Establish a formal mutual-defense pact with other immigrant merchant houses.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": 1,
+              "power": 2,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "merchant_alliance"
+            ]
+          },
+          {
+            "text": "Absorb the regulatory costs alone, keeping the family's books completely private and unaligned.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": -1,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 2,
+              "honor": 2,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "isolationist_merchant"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t3:midpoint"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t3:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The floor of the exchange does not merely hum; it barks, a rabble of dry, throat-torn shouting that {given_name} has learned to read like a composer scans a ledger. Here in the middle-tier district, intelligence is never a clean, printed sheet—it is the sharp, erratic tack-tack-tack of the telegraph receivers, the sudden, breathless drop in volume when a rumor of a ruined cargo ship passes from clerk to runner, and the scraping of iron pens across heavy register paper. This domestic register is their own anchor, the dry, rhythmic whisper of ink on parchment providing a steady, grounding counterpoint to the madness of the floor.",
+        "When the envoy from the old-stock trading house is ushered into the private office, his voice cuts through the din like a silk string through tallow. He does not shout; his words are low, oiled, and delivered with the practiced, flat cadence of men whose grandfathers owned the very soil under the docks. Every syllable is a soft, patronizing chime, suggesting an alliance with the weight of an ultimatum—an offer to absorb their hard-won trade routes under the guise of an elder brother's protection.",
+        "Outside, the copper bells of the harbor cathedral begin their mid-day toll, sending a heavy, physical thrum through the floorboards and rattling the inkwells. It is a slow, iron sound that seems to toll for the end of modest, quiet operations; the {family_name} name is now a common rattle on the tongues of men who sit in the quiet, carpeted parlors of the city's private clubs. One must either find a voice loud enough to pierce this bronze-throated clamor or submit to being spoken for by those who view the rising tide with cold, calculating eyes."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You meet his polished gaze and decline the proposal with a quiet, flat refusal, letting the dry scratch of your clerks' pens fill the silence and declare your independence."
+          ],
+          "choice": {
+            "text": "Refuse the old-stock firm's terms and maintain independence.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 2,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "independent_pride"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You allow the envoy to finish, nodding as you calculate the profit in his smooth cadence, ready to harness their ancient leverage to double your family's reach."
+          ],
+          "choice": {
+            "text": "Agree to a joint venture with the established local firm.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "worldview": -1,
+              "power": 1,
+              "tradition": -2,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "established_partnership"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [
+        {
+          "wave": "bavaria",
+          "atTier": 3,
+          "crossing": "The acrid stench of sulfur matches and heavy, wet Bavarian loden-cloth cuts through the exchange air as the {family_name} representative maneuvers his broad frame to block {given_name} from the telegraph desk. With a sharp, mocking tap of his cane against the counter, the German claims the exclusive option on the northern shipping lanes, successfully throttling the Baghdadi family's overland pipeline before {given_name} can even wire his agents. They share a cold, calculating nod across the brass railing, cementing a rivalry of margins that will define the season's trade.",
+          "relation": "opposing"
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t3:turn"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t3:turn",
+      "sense": "sight",
+      "prose": [
+        "The midmorning light creeping through the high arched windows of the municipal guildhall is a dull, curdled pewter, choked by the greasy coal smoke of the harbor works and casting long, skeletal shadows across the cedar council table. Upon the scarred grain of the wood lies the newly drafted charter, its fresh black print hard and dry, the margins bordered with the heavy, looping signatures of the old guard. {given_name} looks down at those dried black strokes of ink upon the calfskin vellum—each curl of the pen a lock turned in a gate, a legal fence erected by names that have held the city’s ledgers since the first brick was laid.",
+        "High above in the narrow gallery, where the shadows gather thickest beneath the cedar joists, a dense gallery of pale, weather-honed faces peers down through the gloom. These are the weavers with their indigo-stained fingers, the draymen with shoulders bowed from the docks, and the small shopkeepers who set their stalls in the wake of the {surname} family’s rise. Though they possess no voices here, their eyes catch the dim light like a scattering of cold lanterns, a heavy and silent witness that turns the air in the chamber thick and hard to draw.",
+        "A brass inkwell sits beside the document, its black pool reflecting the gray vault above like a dark, unblinking eye. To dip the quill and sign is to carve out a comfortable, gated corner for the {family_name} name—a protected, mid-tier share of the harbor's wealth that will feed their descendants while slamming the gate shut on the hungry tide behind them. To leave the page clean is to invite the immediate, silent wrath of the councilmen sitting in their furs, risking every warehouse and line of credit the family has fought to secure."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You let your gaze drift from the dark inkwell up to the gallery, meeting the silent, expectant look of those who have no voice in this room, and slide the heavy quill aside, leaving the parchment untouched."
+          ],
+          "choice": {
+            "text": "Refuse the restrictive charter openly in front of the council.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 2,
+              "worldview": 3,
+              "power": 1,
+              "tradition": 2,
+              "honor": 3,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "open_defiance"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your eyes remain fixed on the crisp, black boundaries of the ledger page as you take the quill, signing your name with a cold, unhurried hand, accepting that a fortress must have walls if it is to protect those inside."
+          ],
+          "choice": {
+            "text": "Sign the charter to secure the family's commercial status.",
+            "motivatorShift": {
+              "wealth": 4,
+              "politics": 1,
+              "worldview": -2,
+              "power": 2,
+              "tradition": -1,
+              "honor": -2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "chartered_merchant"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How does {given_name} define the {family_name} legacy in this moment of civic definition?",
+        "options": [
+          {
+            "text": "Become the chief champion of the immigrant community, funding a mutual-aid league that bypasses the guildhall entirely.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 3,
+              "worldview": 4,
+              "power": 2,
+              "tradition": 3,
+              "honor": 3,
+              "lineage": 3,
+              "reach": 1
+            },
+            "setFlags": [
+              "dynasty_patron"
+            ]
+          },
+          {
+            "text": "Leverage your wealth to secure a permanent seat on the city's trade council, integrating fully into the existing power structure.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 4,
+              "worldview": -2,
+              "power": 4,
+              "tradition": -2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 3
+            },
+            "setFlags": [
+              "dynasty_councilor"
+            ]
+          },
+          {
+            "text": "Keep the family strictly focused on private commercial growth, avoiding political entanglements to build an unassailable financial fortress.",
+            "motivatorShift": {
+              "wealth": 5,
+              "politics": -2,
+              "worldview": -1,
+              "power": 3,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "dynasty_fortress"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:baghdad:economic:middle:t3:close"
+    },
+    {
+      "id": "act:baghdad:economic:middle:t3:close",
+      "sense": "taste",
+      "prose": [
+        "The evening meal is an intricate, clashing tongue-map of the old country and the new: the sharp, medicinal heat of black tea boiled with green cardamom pods, scraping the back of the throat, served alongside the heavy, salt-sodden butter and sour rye bread of this colder northern shelter. It is the flavor of a hard-won compromise, of a mouth that has learned to parse two laws and love two different soils without betraying either. At the head of the dark oak table, {given_name} chews slowly, watching the children swallow this dual inheritance, their young palates already accustomed to the strange harmony of the desert and the frost.",
+        "There is a seasoned, quiet gravity in the room, the fat of the mutton stew tasting of slow hours and heavy iron pots rather than the thin, watery broths of their early, desperate years. The silver tea-urn on the sideboard catches the amber lamp-oil glow, its polished belly free of the soot that once marked their lives in the crowded tenements. Each bite of bread is seasoned now with the dry, clean flavor of a reputation established beyond doubt; the name of {surname} no longer tastes of the speculator's greasy, short-lived luck, but of the slow-cured salt of reliable credit and community honor.",
+        "As the plates are cleared, leaving only the bitter dregs of the tea, {given_name} draws the small brass key of the private ledger from a woolen vest and lays it before the eldest heir. When the youth lifts it to his lips in the traditional gesture of obedience, the metal tastes of cold iron, oil, and the bitter tang of old sweat. It is a heavy, metallic weight to swallow, yet the harvest of their long labor no longer tastes of the vinegar of fear; it has ripened into something thick, dark, and permanent."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You press the key into your heir's palm, warning them that gold is merely the common mud meant to nourish the roots of the family's honor; without our duty to the neighborhood and our people, the tallest tree must wither."
+          ],
+          "choice": {
+            "text": "Exhort the heir to prioritize community and honor above simple profit.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 1,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 3,
+              "honor": 3,
+              "lineage": 2,
+              "reach": 1
+            },
+            "setFlags": [
+              "heir_honor_bound"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You tap the leather-bound ledger with a scarred knuckle, instructing your heir that in a city built on shifting sands, only the absolute mastery of capital can buy a family the walls required to survive."
+          ],
+          "choice": {
+            "text": "Exhort the heir to focus entirely on expanding the firm's financial power.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 1,
+              "worldview": -2,
+              "power": 2,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 2
+            },
+            "setFlags": [
+              "heir_wealth_bound"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}

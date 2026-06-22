@@ -54,11 +54,37 @@ export function weaveThreads(corpus: SagaCorpus): void {
         (a) => a.wave === rival && a.tier === act.tier,
       );
       if (rivalHasTier) {
-        mid.thread = [{ wave: rival, atTier: act.tier }];
+        mid.thread = [{ wave: rival, atTier: act.tier, crossing: crossingLine(act.wave, rival) }];
         break;
       }
     }
   }
+}
+
+/** Human label for a wave id, for crossing prose. Falls back to a tidied id for unknown waves. */
+function waveLabel(wave: string): string {
+  const LABELS: Record<string, string> = {
+    ireland: "Irish",
+    bavaria: "German",
+    italian: "Italian",
+    ashkenazi_jewish: "Jewish",
+    scandinavian: "Scandinavian",
+    chinese: "Chinese",
+    baghdad: "Baghdadi",
+  };
+  return LABELS[wave] ?? wave.replace(/_/g, " ");
+}
+
+/**
+ * A deterministic, PAIR-SPECIFIC crossing line for an intersection — the specific moment this line's
+ * path cuts across the rival wave's. Names both peoples so it reads as a real crossing, not a generic
+ * "another line". Pure; varied by the pair so no two intersections read identically. An authored
+ * `crossing` on the ThreadRef always overrides this.
+ */
+export function crossingLine(wave: string, rival: string): string {
+  const a = waveLabel(wave);
+  const b = waveLabel(rival);
+  return `In the press of the same hard years, the path of a ${b} line cuts across your ${a} one — a glance, a bargain, a rivalry not yet named — and for a moment the two stories are one.`;
 }
 
 /** Coerce a loose motivatorShift record to a typed partial (only the 8 known axes). Pure. */
@@ -153,22 +179,33 @@ export function openingScene(
   return undefined;
 }
 
-/** All wave×archetype act chapters for a tier, ordered (the per-generation act). Pure. */
+/**
+ * The act chapter for a (wave × archetype × class × tier) cell — the per-generation act. When no act
+ * exists for the requested class, falls back to the "poor" track (the base story every line shares
+ * until a class-specific track is authored). Pure.
+ */
 export function actsForTier(
   corpus: SagaCorpus,
   wave: string,
   archetype: string,
   tier: number,
+  cls = "poor",
 ): ActChapter | undefined {
+  let fallback: ActChapter | undefined;
   for (const a of corpus.acts.values()) {
-    if (a.wave === wave && a.archetype === archetype && a.tier === tier) return a;
+    if (a.wave !== wave || a.archetype !== archetype || a.tier !== tier) continue;
+    if (a.cls === cls) return a;
+    if (a.cls === "poor") fallback = a;
   }
-  return undefined;
+  return fallback;
 }
 
-/** A braided cross-family fragment: the rival wave + the opening scene of its act at the thread's tier. */
+/** A braided cross-family fragment: the rival wave, the bespoke crossing line, + the opening scene of
+ *  its act at the thread's tier. */
 export interface BraidedThread {
   wave: string;
+  /** The specific moment the two lines cross (bespoke or the deterministic pair line). */
+  crossing: string;
   scene: Scene;
 }
 
@@ -187,7 +224,11 @@ export function resolveThreads(corpus: SagaCorpus, scene: Scene): BraidedThread[
       braided = openingScene(corpus, act, new Set());
       if (braided) break;
     }
-    if (braided) out.push({ wave: ref.wave, scene: braided });
+    if (braided) {
+      // Prefer the ref's bespoke/woven crossing; else a generic-but-named fallback for the rival wave.
+      const crossing = ref.crossing ?? `The path of a ${waveLabel(ref.wave)} line crosses yours.`;
+      out.push({ wave: ref.wave, crossing, scene: braided });
+    }
   }
   return out;
 }

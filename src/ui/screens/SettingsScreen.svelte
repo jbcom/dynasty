@@ -4,21 +4,31 @@ import { untrack } from "svelte";
 interface Props {
   geminiKey: string;
   liveExtrapolation: boolean;
+  sound: boolean;
   /** Persist a new key (empty clears it). */
   onSaveKey: (key: string) => void;
   /** Toggle live extrapolation. */
   onToggleLive: (on: boolean) => void;
+  /** Toggle sound cues. */
+  onToggleSound: (on: boolean) => void;
   onBack: () => void;
 }
 
-const { geminiKey, liveExtrapolation, onSaveKey, onToggleLive, onBack }: Props = $props();
+const { geminiKey, liveExtrapolation, sound, onSaveKey, onToggleLive, onToggleSound, onBack }: Props =
+  $props();
 
 // The screen mounts fresh whenever Settings opens, so the drafts are seeded ONCE
 // from the persisted values (editing is local until saved); untrack makes the
 // intentional one-time read explicit so it isn't flagged as a reactive capture.
 let keyDraft = $state(untrack(() => geminiKey));
 let live = $state(untrack(() => liveExtrapolation));
+let soundOn = $state(untrack(() => sound));
 let saved = $state(false);
+
+function toggleSound(): void {
+  soundOn = !soundOn;
+  onToggleSound(soundOn);
+}
 
 const hasKey = $derived(keyDraft.trim().length > 0);
 
@@ -87,6 +97,19 @@ function clearKey(): void {
     {:else if saved}
       <p class="hint">Saved on this device.</p>
     {/if}
+
+    <button
+      class="toggle"
+      type="button"
+      class:on={soundOn}
+      aria-pressed={soundOn}
+      data-testid="sound-toggle"
+      onclick={toggleSound}
+    >
+      <span class="dot" aria-hidden="true"></span>
+      Sound {soundOn ? "ON" : "OFF"}
+    </button>
+    <p class="hint">Soft cues on page-turns and choices.</p>
   </div>
 
   <button class="back-btn" type="button" onclick={onBack}>← Back</button>

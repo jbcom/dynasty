@@ -191,21 +191,120 @@ self-pace the highest-value improvement, own the full PR loop, keep the directiv
 
 ## POLISH milestone (post-narrative-acts, autonomous)
 
-- [ ] [WAIT-CI] **PF-1 activate cross-family intersections** — buildCorpus deterministically weaves
-  each act's midpoint thread to a sibling wave at the same tier (200+ acts now braid a rival line);
-  resolveThreads + PlayScreen aside render it. The user's named "intersections" feature now FIRES in
-  play (was wired-but-dormant after NA-13). PR #68 open (https://github.com/jbcom/dynasty/pull/68),
-  Monitor b117r1xtd on CI; local gate green (609 unit + 84 browser). ON GREEN: resolve threads →
-  squash-merge → keep CD/Release green.
-- [ ] [WAIT] **PF-2 class in the saga cell + middle-class corpus** — BLOCKED on PF-1 merging (it
-  touches the same saga loader/scene-gen + corpus files; a parallel branch would conflict with
-  weaveThreads). DISCOVERY (Step-1 enum, done): act ids/paths do NOT encode class
-  (`act:<wave>:<archetype>:t<tier>`, `<wave>/<archetype>.act.json`), so a naive `--cls middle` sweep
-  would OVERWRITE the poor acts (identical ids). The locked vision is class-as-movable-rung WITH its
-  own storyline track, so the model is CLASS IN THE CELL: act id `act:<wave>:<archetype>:<class>:t<tier>`,
-  file `<wave>/<archetype>.<class>.act.json`; the driver selects by the line's rung. Steps after PF-1
-  merges: (a) key acts by class in schema/spine/scene-gen/loader/driver (existing class-less acts read
-  as "poor" for back-compat); (b) migrate the 42 files → `.poor.act.json`; (c) sweep `--cls middle`.
+**ONE long-running branch `feat/saga-polish`** holds ALL polish work (no parallel-branch juggling —
+USER directive 2026-06-22). Layer PF-2/PF-3/… as forward commits here; open ONE PR at the end.
+
+- [x] **PF-1 activate cross-family intersections — DONE + MERGED (PR #68).** buildCorpus weaves each
+  act's midpoint thread to a sibling wave at the same tier; resolveThreads + PlayScreen aside render it.
+
+- [~] **PF-2 class in the saga cell + middle-class corpus** (on feat/saga-polish).
+  (a)+(b) DONE (commit ce77a2f): act id `act:<wave>:<archetype>:<cls>:t<tier>`, file
+  `<wave>/<archetype>.<cls>.act.json`; ActChapter.cls (default "poor"); spine/scene-gen/loader/driver
+  class-aware; actsForTier falls back to "poor"; driver derives the track from Wealth
+  (sagaClassForWealth: climb → middle); migrated 42 files → `.poor.act.json`. 609 unit + gate green.
+  (c) [WAIT] middle sweep `--all --cls middle --write` IN PROGRESS (bg beo7mfy8q, /tmp/sweep-middle.log).
+  ON DONE: verify health (0 leaks/dangling, 252 middle acts), regen failures, commit on this branch.
+
+- [~] **PF-3 reader UX overhaul (USER, 2026-06-22)** (on feat/saga-polish) — the play surface wastes
+  space: huge top HUD band of centrist motivators/meters; too much text per page; unwieldy buttons.
+  Redesign (Suzerain-style paged prose):
+  1. HUD: ONLY the act-chapter (meso) headline + year stay always-visible (slim strip). Meters, 8
+     motivators, utopia–tyranny axis, in-game settings → slide-out menu from a TOP-RIGHT hamburger.
+  2. Prose: ONE paragraph at a time; tap ANYWHERE → next (paged, NOT a growing scroll stack).
+  3. Options folded INTO the story: ≥1 choice → render option(s) as GLOWING PULSING text, bigger than
+     body, no buttons. Choice-less paragraph = tap anywhere → next. With options: tapping a non-option
+     area makes options PULSE FASTER (don't advance) to say "pick one".
+  4. Goal: more story presentation area, more focus on options.
+  5. SCOPE HIERARCHY (USER): MACRO (Convergence/Emergence/Ascension) = focus of a ~100-YEAR span, NOT
+     the act title — show it as subtle context. ACT title = MESO, a SPECIFIC chapter of THIS family's
+     story (GenAI authors a distinct per-act title; spine's "The Crossing"/etc become prompt-seed/
+     fallback). CHOICES + their impact (opposing/orthogonal lines) = MICRO.
+  Touches SceneReader.svelte + PlayScreen.svelte (HUD/menu) + spine/scene-gen (author act titles).
+  Mobile-first; browser-test paged reveal + pulse-on-tap-away + menu + distinct titles; live-verify Chrome.
+  STATUS: items 1-4 DONE + LIVE-VERIFIED in Chrome (commits 1410794 paged SceneReader, e91be71 slim
+  header + SlideOutMenu). Item 5: scene-gen now authors distinct titles (committed); retitle tooling +
+  tests committed; [WAIT] the retitle RUN over the corpus waits for the middle sweep to finish (file-
+  write race + must cover both tracks). 11 genai + 86 browser + 7 e2e + 609 unit green.
+
+- [x] **PF-4 dominant-pole deadzone fix — DONE** (live-verify catch). A near-zero wealth made the
+  SagaPanel headline say "A poor line" while the strip said "centrist"; shared CENTRIST_DEADZONE(12)
+  now governs both dominantMotivator + axisLabel. Unit-tested. 613 unit green.
+
+### GAP-CLOSURE QUEUE — work contiguously through ALL of this (USER, 2026-06-22)
+
+Full audit of remaining / incomplete / partially-wired / dead-but-built. Do them IN ORDER on
+feat/saga-polish; each is a forward commit + reviewer trio; one PR at the end. Don't stop between items.
+
+- [x] **PF-5 middle-class corpus COMPLETE — DONE** (corpus commit on feat/saga-polish). The whole
+  corpus is now generated on **gemini-3.5-flash** (was a stale 2.5-flash default — user caught it):
+  252 poor + 252 middle = 504 acts / 2520 scenes, 0 leaks, 0 dangling refs, every cell 6 tiers.
+  Filled the missing chinese/baghdad cells + 11 individually-failed tier-acts; loadSaga now asserts
+  BOTH tracks complete (504) + per-cell tier completeness. HARDENED the gen gate: validateSceneFile
+  enforces scene-ref integrity (caught the model dropping/mis-naming scenes — a defect shape+leak
+  validation missed). See [[mmm-scoped-qa-pipeline]].
+
+- [x] **PF-18 SCOPE-DELINEATED QA SWEEP — DONE** (spec 2026-06-22; feat/saga-polish). User directive:
+  QA delineated by IMPACT SCOPE, fix the whole affected unit. New src/sim/genai/qa.ts + scripts/
+  genai-qa.ts; leak floor false positives fixed + extracted to shared src/sim/leak.ts. All three scopes
+  ran over the whole 504-act corpus on 3.5-flash: (a) scene polish — 504 acts lifted, 0 kept-on-fail;
+  (b) lineage continuity — 80/84 chains had cross-tier breaks, all re-authored, 0 rejected; (c) braid —
+  504 pair-specific cross-storyline crossings authored into midpoint thread[] (weaveThreads honors),
+  0 rejected. Final corpus: 504 acts / 2520 scenes / 0 dangling / 0 leaks / 0 backtick artifacts; 641
+  unit tests green, biome clean. KNOWN-COST FOLLOWUP (optional): pool passBraid like scene/lineage (it's
+  serial) for ~4× speedup. See [[mmm-scoped-qa-pipeline]].
+
+- [x] **PF-6 ROOT GAP: class threaded through onboarding → founding — DONE** (commit 4b0318e). The
+  chosen ArrivalClass now flows OnboardingScreen.onComplete → App.birthGame → resolveWaveStart(place,
+  cls) → seedMotivators, so poor vs middle found with different wealth + the saga driver picks the
+  right track. resolveWaveStart returns the resolved cls. e2e updated for the PF-3 paged reader/HUD
+  (saga-head signal + advancePlay paging). waveSelect test pins the override. (Live-verify of poor-vs-
+  middle divergence folds into PF-13's full run.)
+
+- [x] **PF-7 WIRE THE DEAD CONVERGENCE LAYER — DONE** (commits 4e6fce1 glimpses, 010602e endings).
+  Game creates + advances a DynastyWorld (separate rng stream, replay bit-identical); GameView.glimpses
+  + rung feed projectSaga → SagaPanel "Other lines" + class readout populate; Game.convergenceEnding()
+  resolves the dynastic destination at run-end (tier + motivators + rivalsReachedStars) → GameView.
+  convergence → LegacyReport framing. Unit-tested + deterministic. (Live-verify folds into PF-13.)
+
+- [x] **PF-8 saga succession drives REAL family advancement — DONE** (commit ecd42ca). Extracted the mortality/succeed/continue-as-heir block from applyChoice into pure exported advanceFamily(content,state,fromYear,rng); applyChoice + the saga advanceRunClock both call it (separate rng stream, replay-safe). Reading the novel now ages + succeeds the line. Event path unchanged (18 tests); saga-driven run advances year + deterministic.
+
+- [x] **PF-9 act titles: retitle pass — DONE** (committed). Replaced the 6 reused spine cues with per-act
+  meso titles rooted in each act's opening prose: 163 → 496 distinct of 504, 0 dangling, 0 leaks. Caught
+  + fixed a real bug — the model returned 254 titles wrapped in JSON ({"title":"…"}) that shipped raw;
+  repaired all on disk + hardened normalizeTitle to unwrap JSON at the source (tested). The 8 remaining
+  near-dupes are acceptable cross-family echoes. Live-verify folds into PF-13.
+
+- [x] **PF-10 cross-family intersection PROSE — DONE** (commit 465043c). Each woven midpoint thread carries a PAIR-SPECIFIC crossing line (crossingLine names both peoples, deterministic); ThreadRef.crossing optional override; PlayScreen renders "Where paths cross" + the line + the rival fragment. Unit + browser green. (A fuller per-pair GenAI crossing corpus can ride a future sweep; the deterministic named crossing ships now.)
+
+- [x] **PF-11 Codex — DONE** (commit b91dcc1). Authored src/data/saga/codex/codex.json (7 waves + 3 macro-acts, leak-free) + CodexView (collapse/expand) in the slide-out menu. loadCodex + CodexView tests green. (Live-verify folds into PF-13.)
+
+- [~] **PF-12 docs + STATE refresh.** docs/STATE.md refreshed for the novel model + PF-3 play surface +
+  gap list (commit, PF-12 docs done). CHANGELOG is release-please-managed (already current — do NOT
+  hand-edit). REMAINING: a final docs pass in PF-13 once PF-7/8/11 land (update the "still being wired"
+  list as gaps close).
+
+- [ ] [WAIT] **PF-13 final pass: full gate + live-verify + open the PR.** GATE GREEN: typecheck + biome + 642
+  unit + 89 browser + 7 e2e + build all pass. LIVE-VERIFY DONE (Chrome, screenshots READ): poor Italian
+  line founded → diegetic onboarding → distinct meso title "Between Salt and Iron" (not the generic cue) →
+  QA-lifted sensory steerage prose → paged reader advances → inline GLOWING options fold into the story →
+  slide-out "THE LINE" menu (8 motivators, OTHER LINES glimpses, codex, meters, personality) → multi-gen
+  play → convergence-aware LegacyReport ("Toppled", muddled middle, House of Romano stats). All PF
+  surfaces confirmed working with the QA'd corpus. PR #70 OPENED (jbcom/dynasty, feat/saga-polish → main).
+  CI went green first pass; addressed 4 CodeRabbit threads in a forward commit (unhandled promise in
+  sound.start(), urge-timer unmount leak in SceneReader, empty-acts guard ×2 in genai-qa) — all 4
+  resolved. [WAIT] CI re-running on the fix commit. ON GREEN: squash-merge; keep post-merge CD/Release green.
+
+### DEEPER GAP AUDIT (2026-06-22, round 2) — more partial/unwired surfaces, do contiguously
+
+- [x] **PF-14 saga choices' setFlags reach state.flags — DONE** (commit 34bd669). syncSagaFlags unions the driver flags into state.flags on each pick (append-new, replay-safe). Unit-tested.
+- [x] **PF-15 AUDIO wired — DONE** (commit 8d3bbf6). src/ui/sound.ts singleton plays click on page-turn + stinger on choice, gated by a new Sound setting (default on); SettingsScreen toggle. Settings + tests green.
+- [x] **PF-16 audit pass — DONE.** Round-2 audit findings: (a) ambient MUSIC unwired → PF-17 below;
+  (b) axes/worldStacks have 0 direct engine/ui importers but are sim-internal (used transitively) — NOT
+  dead; (c) shader backdrop is live (PlayScreen renders it per macroAct); (d) Sfx now wired (PF-15).
+
+- [x] **PF-17 ambient MUSIC — DONE** (commit e3dce65). AudioEngine starts on first reader tap (autoplay-safe); setMusicEra crossfades the bed per era; gated by the Sound setting; browser-guarded + tested.
+
+After all PF items merge, return to the standing autonomous polish mandate (top of file) for the next gap.
 
 ## Architectural notes carried forward
 - Identity = PLACE × CULTURE × ERA × ARCHETYPE; names from the live family tree via

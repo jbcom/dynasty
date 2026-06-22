@@ -120,6 +120,9 @@ export function meetsMotivatorGate(m: Motivators, gate: MotivatorGate): boolean 
 }
 
 /** The dominant motivator: the axis with the largest absolute lean (ties → axis order). Used to COLOR endings + tone. */
+/** Below this magnitude a lean reads as "centrist" — shared by the HUD strip + the dominant readout. */
+export const CENTRIST_DEADZONE = 12;
+
 export function dominantMotivator(m: Motivators): {
   axis: MotivatorAxis;
   value: number;
@@ -130,8 +133,14 @@ export function dominantMotivator(m: Motivators): {
     if (Math.abs(m[axis]) > Math.abs(m[best])) best = axis;
   }
   const value = m[best];
+  // A barely-off-zero dominant still reads as centrist, so the headline ("A poor line") never
+  // contradicts the strip (which calls the same near-zero value "centrist").
   const pole =
-    value === 0 ? "centrist" : value < 0 ? MOTIVATOR_POLES[best].neg : MOTIVATOR_POLES[best].pos;
+    Math.abs(value) < CENTRIST_DEADZONE
+      ? "centrist"
+      : value < 0
+        ? MOTIVATOR_POLES[best].neg
+        : MOTIVATOR_POLES[best].pos;
   return { axis: best, value, pole };
 }
 
@@ -141,7 +150,7 @@ export function axisLabel(m: Motivators, axis: MotivatorAxis): string {
   const poles = MOTIVATOR_POLES[axis];
   const pole = v < 0 ? poles.neg : poles.pos;
   const mag = Math.abs(v);
-  if (mag < 12) return "centrist";
+  if (mag < CENTRIST_DEADZONE) return "centrist";
   if (mag < 45) return `leaning ${pole}`;
   if (mag < 75) return pole;
   return `strongly ${pole}`;

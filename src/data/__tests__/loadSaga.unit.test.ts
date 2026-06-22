@@ -63,15 +63,23 @@ describe("loadSaga (real corpus)", () => {
     expect(threaded).toBeGreaterThan(200);
   });
 
-  it("covers the full lattice: 7 waves × 6 archetypes × 6 tiers = 252 acts", () => {
-    expect(corpus.acts.size).toBe(252);
-    // every (wave, archetype) cell has all 6 reach tiers.
-    const tiers = new Map<string, Set<number>>();
-    for (const a of corpus.acts.values()) {
-      const cell = `${a.wave}/${a.archetype}`;
-      tiers.set(cell, (tiers.get(cell) ?? new Set()).add(a.tier));
-    }
-    expect(tiers.size).toBe(42);
-    for (const [cell, t] of tiers) expect(t.size, cell).toBe(6);
+  // BOTH class tracks must cover the full lattice: 7 waves × 6 archetypes × 6 tiers = 252 acts each.
+  // Asserting per-cell tier completeness (not just a total) is the guard against a silent gen gap —
+  // a rejected tier-act that never merged leaves a hole this catches, so an incomplete corpus can't ship.
+  for (const cls of ["poor", "middle"] as const) {
+    it(`the ${cls.toUpperCase()} track covers the full lattice: 7×6×6 = 252 acts`, () => {
+      const tiers = new Map<string, Set<number>>();
+      for (const a of corpus.acts.values()) {
+        if (a.cls !== cls) continue;
+        const cell = `${a.wave}/${a.archetype}`;
+        tiers.set(cell, (tiers.get(cell) ?? new Set()).add(a.tier));
+      }
+      expect(tiers.size, `${cls} cells`).toBe(42);
+      for (const [cell, t] of tiers) expect(t.size, `${cls} ${cell} tiers`).toBe(6);
+    });
+  }
+
+  it("the full corpus is exactly 504 acts (252 poor + 252 middle)", () => {
+    expect(corpus.acts.size).toBe(504);
   });
 });

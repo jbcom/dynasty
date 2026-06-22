@@ -1,11 +1,21 @@
 import { loadSaga } from "../data/loadSaga";
+import { MAX_RUNG, sagaClassForWealth } from "../sim/classRung";
 import type { Content } from "../sim/content";
-import { applyChoice } from "../sim/effects";
+import { type ConvergenceEnding, resolveConvergence } from "../sim/convergence";
+import { strategyForArchetype } from "../sim/dynastyAgent";
+import {
+  advanceWorld,
+  createDynastyWorld,
+  type DynastyWorld,
+  detectGlimpses,
+  type Glimpse,
+} from "../sim/dynastyWorld";
+import { advanceFamily, applyChoice } from "../sim/effects";
 import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
-import { type GameState, initState, type LedgerEntry } from "../sim/state";
+import { type GameState, initState, isMemberAlive, type LedgerEntry } from "../sim/state";
 import { advanceTimeline, detectEnd } from "../sim/timeline";
 import { pickNextEventViaWorld } from "../sim/world";
 import { SagaDriver, type SagaFrame } from "./sagaDriver";
@@ -17,6 +27,13 @@ export interface GameView {
   /** The played NOVEL frame — the act title + current scene. `scene` is null when the line's act
    *  isn't authored yet (the UI then renders the event flow). */
   saga: SagaFrame;
+  /** Rival lines (the convergence world) visible from the player's vantage this turn. */
+  glimpses: Glimpse[];
+  /** The player's class rung (generation depth, 0..5) — for the read-model's class readout. */
+  rung: number;
+  /** The dynastic CONVERGENCE ending (toward the stars / contributed / earthbound / extinguished),
+   *  resolved when the run ends; null while in progress. */
+  convergence: ConvergenceEnding | null;
   lastLedger: LedgerEntry[];
 }
 
@@ -36,6 +53,9 @@ export class Game {
   private lastLedger: LedgerEntry[] = [];
   private readonly listeners = new Set<Listener>();
   private readonly saga: SagaDriver;
+  /** The parallel world of RIVAL lines (the convergence layer) — created for a founded line, advanced
+   *  as the run's years pass, surfaced as glimpses the player sees beside their own line. */
+  private world: DynastyWorld | null = null;
 
   constructor(
     content: Content,
@@ -49,6 +69,57 @@ export class Game {
     this.current = this.state.end ? null : this.pick();
     this.saga = new SagaDriver(loadSaga());
     this.beginSagaActForState();
+    this.beginWorldForState();
+  }
+
+  /** Create the rival-line world for a founded run (deterministic from the run seed), then advance it
+   *  to the run's current year so a RESTORED mid-run shows rivals at the right vantage. No-op unfounded. */
+  private beginWorldForState(): void {
+    const wave = this.state.founding?.place;
+    if (!wave) return;
+    this.world = createDynastyWorld(this.content.places, wave, this.rng.fork("world"));
+    this.advanceWorldToNow();
+  }
+
+  /** The player's rung as the world sees it: the protagonist's generation depth (0 founder … 5). */
+  private playerRung(): number {
+    const family = this.state.family;
+    const protagonist = family?.members.find((m) => m.id === family.protagonistId);
+    return Math.min(protagonist?.generation ?? 0, 5);
+  }
+
+  /** Rival lines visible from the player's current vantage — empty when unfounded / no world. */
+  private currentGlimpses(): Glimpse[] {
+    if (!this.world) return [];
+    return detectGlimpses(
+      this.world,
+      this.playerRung(),
+      strategyForArchetype(this.state.archetype),
+    );
+  }
+
+  /** End kinds that mean the line FAILED (didn't survive to a convergence). */
+  private static readonly FAILURE_ENDS = new Set(["death", "coup", "jail", "line-extinct", "ruin"]);
+
+  /**
+   * The line's CONVERGENCE ending — the dynastic framing (toward the stars / contributed / earthbound /
+   * extinguished), folding in the player's reach tier + motivators + whether a rival reached the stars.
+   * Null until the run ends or for an unfounded run. Deterministic. (PF-7.)
+   */
+  private convergenceEnding(): ConvergenceEnding | null {
+    if (!this.state.end || !this.state.founding?.place) return null;
+    const family = this.state.family;
+    const livingHeir = !!family?.members.some(
+      (m) => m.id !== family.protagonistId && isMemberAlive(m, this.state.year),
+    );
+    const rivalsReachedStars = (this.world?.snapshots ?? []).some((s) => s.rung >= MAX_RUNG);
+    return resolveConvergence({
+      motivators: this.state.personality,
+      tier: this.playerRung(),
+      survived: !Game.FAILURE_ENDS.has(this.state.end.kind),
+      hasHeir: livingHeir,
+      rivalsReachedStars,
+    });
   }
 
   /**
@@ -64,7 +135,12 @@ export class Game {
     const family = this.state.family;
     const protagonist = family?.members.find((m) => m.id === family.protagonistId);
     const tier = Math.min(protagonist?.generation ?? 0, 5);
-    this.saga.begin({ wave, archetype: this.state.archetype, tier }, this.state.personality, []);
+    const cls = sagaClassForWealth(this.state.personality.wealth);
+    this.saga.begin(
+      { wave, archetype: this.state.archetype, tier, cls },
+      this.state.personality,
+      [],
+    );
   }
 
   /**
@@ -83,13 +159,42 @@ export class Game {
       state: this.state,
       currentEvent: this.current,
       saga: this.saga.frame(),
+      glimpses: this.currentGlimpses(),
+      rung: this.playerRung(),
+      convergence: this.convergenceEnding(),
       lastLedger: this.lastLedger,
     };
+  }
+
+  /** Advance the rival world to the run's current year (deterministic). Called when the clock moves. */
+  private advanceWorldToNow(): void {
+    if (this.world) {
+      this.world = advanceWorld(
+        this.world,
+        this.state.year,
+        this.rng.fork(`world:${this.state.year}`),
+      );
+    }
   }
 
   /** Write the driver's carried motivators back into the run's personality vector. */
   private syncMotivators(m: Motivators | null): void {
     if (m) this.state = { ...this.state, personality: m };
+  }
+
+  /**
+   * Union the saga act's accumulated flags into the run's state.flags (PF-14), so a saga choice's
+   * setFlags actually shape the run — gating events, feeding the butterfly ledger, persisting + being
+   * inspectable — instead of being sealed inside the driver. Deterministic (set-union, stable order).
+   */
+  private syncSagaFlags(): void {
+    const existing = new Set(this.state.flags);
+    // Append only the genuinely-new saga flags, in their accumulation order — preserves the existing
+    // flag order (and thus any order-sensitive replay) while adding the saga choices' marks.
+    const fresh = this.saga.flags.filter((f) => !existing.has(f));
+    if (fresh.length > 0) {
+      this.state = { ...this.state, flags: [...this.state.flags, ...fresh] };
+    }
   }
 
   /**
@@ -100,7 +205,17 @@ export class Game {
    * timeline + end detection are deterministic.
    */
   private advanceRunClock(): void {
+    const fromYear = this.state.year;
     this.state = advanceTimeline(this.content, this.state);
+    // PF-8: age + succeed the family over the elapsed years — the same logic the event path runs — so
+    // reading the novel actually advances the lineage (mortality, heir handoff, extinction).
+    this.state = advanceFamily(
+      this.content,
+      this.state,
+      fromYear,
+      this.rng.fork(`sagafam:${fromYear}`),
+    );
+    this.advanceWorldToNow();
     const end = detectEnd(this.content, this.state);
     if (end) {
       this.state = { ...this.state, end };
@@ -119,6 +234,7 @@ export class Game {
   /** Apply a weave-beat choice on the current novel scene; time passes; then re-emit. */
   pickBeat(beatIndex: number): void {
     this.syncMotivators(this.saga.pickBeat(beatIndex));
+    this.syncSagaFlags();
     this.advanceRunClock();
     this.emit();
   }
@@ -131,6 +247,7 @@ export class Game {
   pickDecision(optionIndex: number): void {
     const result = this.saga.pickDecision(optionIndex);
     this.syncMotivators(result?.motivators ?? null);
+    this.syncSagaFlags();
     if (result?.succession && (result.succession.takesPartner || result.succession.begets > 0)) {
       this.beginNextGenerationAct();
     }
@@ -150,8 +267,9 @@ export class Game {
     const family = this.state.family;
     const protagonist = family?.members.find((m) => m.id === family.protagonistId);
     const nextTier = Math.min((protagonist?.generation ?? 0) + 1, 5);
+    const cls = sagaClassForWealth(this.state.personality.wealth);
     this.saga.begin(
-      { wave, archetype: this.state.archetype, tier: nextTier },
+      { wave, archetype: this.state.archetype, tier: nextTier, cls },
       this.state.personality,
       this.saga.flags,
     );
@@ -175,6 +293,7 @@ export class Game {
     const result = applyChoice(this.content, this.state, this.current, choiceId, this.rng);
     this.state = result.state;
     this.lastLedger = result.newLedger;
+    this.advanceWorldToNow();
     // If the era is exhausted but the run hasn't ended, force-advance once so the
     // player is never stuck with no event and no end screen.
     this.current = this.state.end ? null : this.pickWithProgress();

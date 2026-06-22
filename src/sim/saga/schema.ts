@@ -69,6 +69,12 @@ export type Decision = z.infer<typeof DecisionSchema>;
 export const ThreadRefSchema = z.object({
   wave: z.string().min(1),
   atTier: z.number().int().min(0).max(5),
+  /** The bespoke moment the two lines cross (the specific intersection prose). When absent, the weave
+   *  fills a deterministic pair-specific line and the rival's act-opening fragment is braided beneath. */
+  crossing: z.string().optional(),
+  /** How the two lines relate at this crossing — authored by the braid QA pass (scoped cross-storyline
+   *  authoring). When absent, the crossing reads as a neutral intersection. */
+  relation: z.enum(["opposing", "contributing", "neutral"]).optional(),
 });
 export type ThreadRef = z.infer<typeof ThreadRefSchema>;
 
@@ -97,6 +103,9 @@ export const ActChapterSchema = z.object({
   id: z.string().min(1),
   wave: z.string().min(1),
   archetype: z.string().min(1),
+  /** The class rung this act's story track belongs to (class is a movable rung with its own track).
+   *  Defaults to "poor" for back-compat with the original class-less corpus. */
+  cls: z.string().min(1).default("poor"),
   tier: z.number().int().min(0).max(5),
   macroAct: z.enum(["convergence", "emergence", "ascension"]),
   title: z.string().min(1),

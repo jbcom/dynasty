@@ -22,8 +22,9 @@ import {
 
 interface Props {
   content: Content;
-  /** Begin the founded run: hidden seed + chosen wave place id + bestowed family name. */
-  onComplete: (seed: string, place: string, surname: string) => void;
+  /** Begin the founded run: hidden seed + chosen wave place id + bestowed family name + the chosen
+   *  arrival class (poor/middle), so the founding seeds the right class motivators + saga track. */
+  onComplete: (seed: string, place: string, surname: string, cls: ArrivalClass) => void;
   /** Abandon onboarding and return to the title. */
   onCancel: () => void;
 }
@@ -81,8 +82,8 @@ function back(): void {
 function bestow(surname: string): void {
   const place = chosen;
   const name = surname.trim().replace(/\s+/g, " ").slice(0, 32);
-  if (!place || !name) return;
-  onComplete(seed, place.id, name);
+  if (!place || !name || !cls) return;
+  onComplete(seed, place.id, name, cls);
 }
 </script>
 

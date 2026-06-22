@@ -1,0 +1,2183 @@
+{
+  "acts": [
+    {
+      "id": "act:ireland:political:poor:t0",
+      "wave": "ireland",
+      "archetype": "political",
+      "tier": 0,
+      "macroAct": "convergence",
+      "title": "Act I — Of Salt-Rind and Coal-Tar",
+      "scenes": [
+        "act:ireland:political:poor:t0:open",
+        "act:ireland:political:poor:t0:rising",
+        "act:ireland:political:poor:t0:midpoint",
+        "act:ireland:political:poor:t0:turn",
+        "act:ireland:political:poor:t0:close"
+      ],
+      "cls": "poor"
+    },
+    {
+      "id": "act:ireland:political:poor:t1",
+      "wave": "ireland",
+      "archetype": "political",
+      "tier": 1,
+      "macroAct": "convergence",
+      "title": "Act II — Sod and Hustings",
+      "scenes": [
+        "act:ireland:political:poor:t1:open",
+        "act:ireland:political:poor:t1:rising",
+        "act:ireland:political:poor:t1:midpoint",
+        "act:ireland:political:poor:t1:turn",
+        "act:ireland:political:poor:t1:close"
+      ],
+      "cls": "poor"
+    },
+    {
+      "id": "act:ireland:political:poor:t2",
+      "wave": "ireland",
+      "archetype": "political",
+      "tier": 2,
+      "macroAct": "emergence",
+      "title": "Act III — The First Rung of the Ward",
+      "scenes": [
+        "act:ireland:political:poor:t2:open",
+        "act:ireland:political:poor:t2:rising",
+        "act:ireland:political:poor:t2:midpoint",
+        "act:ireland:political:poor:t2:turn",
+        "act:ireland:political:poor:t2:close"
+      ],
+      "cls": "poor"
+    },
+    {
+      "id": "act:ireland:political:poor:t3",
+      "wave": "ireland",
+      "archetype": "political",
+      "tier": 3,
+      "macroAct": "emergence",
+      "title": "Act IV — The Varnish on the Lime",
+      "scenes": [
+        "act:ireland:political:poor:t3:open",
+        "act:ireland:political:poor:t3:rising",
+        "act:ireland:political:poor:t3:midpoint",
+        "act:ireland:political:poor:t3:turn",
+        "act:ireland:political:poor:t3:close"
+      ],
+      "cls": "poor"
+    },
+    {
+      "id": "act:ireland:political:poor:t4",
+      "wave": "ireland",
+      "archetype": "political",
+      "tier": 4,
+      "macroAct": "ascension",
+      "title": "Act V — The Geography of Wet Ink",
+      "scenes": [
+        "act:ireland:political:poor:t4:open",
+        "act:ireland:political:poor:t4:rising",
+        "act:ireland:political:poor:t4:midpoint",
+        "act:ireland:political:poor:t4:turn",
+        "act:ireland:political:poor:t4:close"
+      ],
+      "cls": "poor"
+    },
+    {
+      "id": "act:ireland:political:poor:t5",
+      "wave": "ireland",
+      "archetype": "political",
+      "tier": 5,
+      "macroAct": "ascension",
+      "title": "Act VI — The Hearth in the High Black",
+      "scenes": [
+        "act:ireland:political:poor:t5:open",
+        "act:ireland:political:poor:t5:rising",
+        "act:ireland:political:poor:t5:midpoint",
+        "act:ireland:political:poor:t5:turn",
+        "act:ireland:political:poor:t5:close"
+      ],
+      "cls": "poor"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "act:ireland:political:poor:t0:open",
+      "sense": "smell",
+      "prose": [
+        "The air was a thick lard of bilge-water, wet wool, and the rot of frost-bitten potatoes—a stench that had seeped into {full_name}’s skin during the long weeks below deck and refused to wash clean in this cold harbor. Here on the stone slip, the Atlantic's salt-rind mingled with the sulfurous burr of coal-tar and the lard-slick grease of a thousand chimneys. It was an aggressive, hot congestion of coal-smoke and horse dung, a far cry from the salt-sprayed peat of the western headlands. This new world did not welcome; it choked, offering only a sour, greasy breath of ironworks and crowded alleyways to those just off the plank.",
+        "Indoors, the hallway of the brick hive smelled of damp lath-work, urine, and the biting acridity of cheap shag tobacco smoked to the nub. It was the scent of cramped desperation, where three families to a room boiled cabbage on communal stoves, their steam clinging to the peeling paper like a cold sweat. Yet, beneath the vinegar-sharp reek of the slums, a faint trace of dried turf lingered in the seams of {given_name}’s coat—a dry, sweet ghost of home that seemed almost ridiculous against the heavy stench of the limestone lime-wash. It was a fragile cord, easily snapped by the stench of the tomorrow they now occupied.",
+        "From the curb below, a vendor’s brazier sent up the charred, bitter aroma of roasted chicory and burnt molasses, masquerading as coffee for those with copper to spare. To those who had lived on yellow meal and ditch-water, that dark steam was the very scent of capital, a fragrant barrier between the master and the desperate. {given_name} watched the faces of the others from the steerage, their eyes hollowed by typhus-fear but bright with a terrible, hungry resolve, inhaling the same foreign soot. The wooden ship had let them go, but this harbor of brick and grease was already swallowing them whole."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "We survived the black-leg and the Atlantic together; we must not let the grease-vats of this place dissolve what remains of our blood."
+          ],
+          "choice": {
+            "text": "Lean into the collective strength, organizing small mutual aid efforts among the newly arrived.",
+            "motivatorShift": {
+              "politics": 2,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "collective_focus"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The hunger of a crowd is a slow death; a single hand can snatch a loaf before the watchman turns his back."
+          ],
+          "choice": {
+            "text": "Seek out any available work, even if it means temporary separation from the group, to secure individual resources.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "individual_focus"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t0:rising"
+    },
+    {
+      "id": "act:ireland:political:poor:t0:rising",
+      "sense": "touch",
+      "prose": [
+        "The salt-rimed wind off the harbor does not merely blow; it scrapes like a rusted rasp across the raw flesh of {full_name}’s throat, finding every split seam in the threadbare, hand-me-down broadcloth. The chill settles as an active, greasy weight, freezing the salt-sweat of dawn-labor into a stiff, grey crust that cracks with every movement of the neck. Beneath the frayed cuffs, fingers have swollen to the girth of winter parsnips, the knuckles stiffening into dull, iron-hard pegs that refuse to clasp the icy barrow-handles without a sickening pinch of split skin and weeping cuticles.",
+        "The timber of the dray-beds is never planed; it is raw, splinter-fanged larch that leaves yellow, festering needles buried deep under the calluses of the palms. Coal dust is not mere grime here—it is a greasy, abrasive silt that works its way into the deep folds of the neck, grinding like emery paper under the coarse collar with every turn of the head. To lift is to feel the salt-bitten hemp of the towline bite into the tender meat of the palms, leaving them weeping and slick, while the low, thrumming shudder of the steam-winch vibrates straight up the shinbones into a pelvis already hollowed by the damp of a cellar mattress.",
+        "Yet, salvation comes in small, blunt pressures: the rough, lard-heeled palm of a neighbor clapping down on {given_name}’s shoulder, a solid knot of living heat that temporarily pushes back the draft of the docks. It is the dry, scratchy wool of a shared blanket passed along the bench, smelling of turf-smoke and rancid mutton-tallow, its crude, coarse weight comforting because of the living flesh that warmed it first. These brief, vital touches are the only mortar holding together a body otherwise dissolved by the endless, gray drizzle of the harbor."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A sudden, sickening stitch flares behind {full_name}’s lower ribs, a hot, greasy knot that swells with every shallow breath until the skin itself feels stretched to splitting over a hidden, throbbing bruise."
+          ],
+          "choice": {
+            "text": "Minimize the injury, pushing through the pain to avoid any disruption to their meager income.",
+            "motivatorShift": {
+              "wealth": 1,
+              "honor": 1,
+              "lineage": -1
+            },
+            "setFlags": [
+              "endure_personally"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The trembling of a younger cousin, their small shoulder shivering with a dry, hollow rattle against {full_name}’s side beneath a grease-stained shawl, strikes a cold spike of dread through the flesh."
+          ],
+          "choice": {
+            "text": "Insist the child share {full_name}'s own meager, warmer garments, enduring the colder conditions themselves.",
+            "motivatorShift": {
+              "tradition": 1,
+              "lineage": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "protect_kin"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The new landlord, his fat fingers reeking of pomade and gin as he raps his cane against the doorframe, demands an additional 'service fee' on top of the already exorbitant rent, threatening eviction. How do you respond?",
+        "options": [
+          {
+            "text": "Confront him directly, appealing to fairness and the shared plight of the tenants, risking his wrath.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 2,
+              "power": 1,
+              "worldview": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "confrontational_negotiation"
+            ]
+          },
+          {
+            "text": "Quietly organize the other tenants, pooling what little resources and knowledge they have to find a collective solution or leverage.",
+            "motivatorShift": {
+              "politics": 2,
+              "lineage": 1,
+              "reach": 2,
+              "tradition": 1
+            },
+            "setFlags": [
+              "collective_resistance"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t0:midpoint"
+    },
+    {
+      "id": "act:ireland:political:poor:t0:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The ward did not speak; it screeched and ground its iron teeth. Iron-rimmed dray wheels shrieked against the greasy cobbles of the alleyways, drowning out the wet, rattling coughs that rose from the basement grates. Every breath of the harbor wind carried the clipped, nasal barking of the dock-masters—an English sheared of its music, hard as pig iron—colliding with the wet, soft-palated cadence of Munster and Galway drifting from the dry-goods doorsteps. Beneath the immediate racket of the coal-carts and the fish-wives' wailing, {full_name} learned to parse the low, vibrating thrum of the tenement floorboards: the dry scratching of ink on pawn-tickets, the sullen, tobacco-choked murmurs of men whose hands had been emptied by the morning shape-up, and the sharp, indrawn breaths of mothers counting copper by the greasy light of tallow.",
+        "By dusk, the acoustic air of the quarter grew crowded and hostile, bruised by the brassy, self-assured cornets of a nativist temperance band marching three streets over. It was a triumphant, clean-scrubbed sound, designed to scour the damp Irish alleyways of their very breath, a sonic wall that declared who owned the paving stones and who merely rented the mud between them. In the narrow gaps between these crusading blasts, the local shebeens spat out their own ragged choruses—clog-dances beaten into splintered pine, the wild, sliding lilt of a tin whistle that sounded less like music and more like a blade whistling past a watchman's ear. Each overlapping note was a boundary marker, a turf war fought in the lungs, where to sing too loudly was to invite a brick through the transom.",
+        "Then came the dead-hour, when the fires died to gray ash and the great, suffocating silence of the Atlantic passage seemed to settle over the brick tenements. It was a heavy, damp quiet, broken only by the dry click of wooden rosary beads sliding through calloused fingers and the thin, wheezing whistle of a child's croupy throat. In this dark, the grand promises of the immigration agents withered into the reality of damp straw mattresses and the cold draft whistling through the sash. {full_name} lay awake, listening to the house settle, hearing in every creak of the joists the slow, grinding machinery of a city that devoured the young and spat out the old, wondering if their own voice, when raised, would be anything more than another brief hiss in the rising steam."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "On the steps of the courthouse, a gentleman in broadcloth—his throat wrapped in stiff starch, his skin pinked by mutton and ease—delivered an address that rolled across the square like carriage thunder, denouncing the 'swarming locusts of the papist parishes' to a crowd of nodding shopkeepers."
+          ],
+          "choice": {
+            "text": "Step forward to publicly challenge the orator's claims, using logic and the lived experience of their community.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 2,
+              "power": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "public_challenge"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Under the dripping eaves of the livery stable, word ran soft and fast: an alderman's collector was making the rounds with a greasy leather ledger, demanding a 'civic paving levy' from every cellar-dweller, a thinly veiled shakedown backed by the threat of immediate eviction."
+          ],
+          "choice": {
+            "text": "Meet discreetly with community elders to plan a unified, quiet refusal, protecting their meager savings.",
+            "motivatorShift": {
+              "politics": 1,
+              "reach": 2,
+              "tradition": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "private_organizing"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [
+        {
+          "wave": "italian",
+          "atTier": 0,
+          "crossing": "The bitter, oily reek of roasted chicory and wet wool cut through the harbor rot as you wrestled a handcart of salt-cod into the alley, only to find the narrow passage blocked by the barrow of {given_name} {surname}. A silent, sweating stand-off of heavy shoulders ended only when the Italian street-vender traded three bruised lemons for your passage, a fleeting truce in the daily war for the ward's damp cobblestones.",
+          "relation": "opposing"
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t0:turn"
+    },
+    {
+      "id": "act:ireland:political:poor:t0:turn",
+      "sense": "sight",
+      "prose": [
+        "The crooked alleys of the ward, choked with the greasy grey soot of cheap bituminous coal, resolved under the cold squint of dawn not as a tomb, but as raw clay waiting for the spade. {full_name} watched a trio of children, their shins mapped with soot and old bruises, digging through a mound of rotted turnip tops and iron scraps, yet their eyes remained sharp as needles under their matted caps. Where the damp-rotted sills of the grog-shops sagged into the mire, {given_name} could see the ghost-lines of clean brick storefronts, signboards painted in their own tongue, and classrooms where the alphabet was not a weapon used to keep them small. The squalor was a heavy, grey shroud, yes, but beneath it beat a fierce, iron-ribbed pulse that refused to go quiet.",
+        "Just three streets over, rising out of the river-mist like a limestone fortress, the columns of the municipal hall loomed, its clean ashlar blocks cutting a hard silhouette against the sky. From this high, grease-filmed tenement window, {full_name} tracked the slow, oiled progress of the aldermen's broughams, their black varnish reflecting the pale winter sun like polished jet, while down on the cobbles, their own folk moved in a blur of frayed grey wool and bent backs. That clean stone facade was a fortress built on their sweat, its tall windows dark and indifferent to the shivering crowd below. The gap between the granite steps and the muddy gutters was not merely wide; it was an open wound, and the sight of it festered in the mind.",
+        "Turning back to the dim room, {full_name} met the gaze of the men and women gathered around the oilcloth table—pale, hollowed-out faces illuminated by the yellow flicker of a single tallow dip. Their eyes, bloodshot from the looms and the docks, held the desperate, wild look of beasts penned near the slaughterhouse, waiting for a gate to swing open. If the {family_name} name meant anything in this salt-bitten town, it had to mean more than a name on a headstone in the potter's field; it had to be the wedge that split the granite. Every calloused hand resting on the table, every twitch of a jaw in the shadows, spoke of a threshold where they would either be ground into the gravel of this harbor town or carve their initials deep into its foundations."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Under the dripping eaves of a corner saloon, half a dozen dockworkers, their jackets stiff with dried salt-crust and their eyes wild with cheap grain spirit, cluster around a bailiff's wet-inked eviction notice nailed to a rotting door-post."
+          ],
+          "choice": {
+            "text": "Approach the group directly, offering to mediate with the authorities and prevent rash actions.",
+            "motivatorShift": {
+              "politics": 1,
+              "honor": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "mediate_dispute"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A crisp, broadside bill, freshly pasted to the gas-lamp standard, trumpets a grand gathering of the 'Civic Improvement League'—the polite, high-collared euphemism for clearing the ward of its 'foreign element' and burning the shanties."
+          ],
+          "choice": {
+            "text": "Tear down the flyer and quickly replace it with one announcing a counter-meeting, rallying their own people.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "counter_organize"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {family_name} line establish its political foothold and champion its community in this new city?",
+        "options": [
+          {
+            "text": "Build a grassroots political machine from the ground up, focusing on voter registration and community services within the ward.",
+            "motivatorShift": {
+              "politics": 3,
+              "lineage": 2,
+              "reach": 2,
+              "tradition": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "path_grassroots"
+            ]
+          },
+          {
+            "text": "Seek out and align with existing power brokers in the city, offering community support in exchange for patronage and influence.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 3,
+              "wealth": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "path_patronage"
+            ]
+          },
+          {
+            "text": "Incuse direct, confrontational activism, organizing public protests and demanding immediate recognition and rights.",
+            "motivatorShift": {
+              "politics": 3,
+              "honor": 2,
+              "worldview": 2,
+              "power": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "path_activism"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t0:close"
+    },
+    {
+      "id": "act:ireland:political:poor:t0:close",
+      "sense": "taste",
+      "prose": [
+        "The brackish dregs of well-water, boiled to a dull gray over green-wood fires, left a greasy film of soot on the back of the tongue—the undeniable, inescapable savor of the tenements. For {full_name}, every breath of the ward air tasted of boiled cabbage, wet horse-hair plaster, and the sharp copper-and-salt sting of blood from cracked knuckles. It was the flavor of survival in a parish that swallowed weak men whole, a bitter mash that had grown so familiar it now passed for sustenance. Yet beneath the dry ash of another day’s labor, there lingered the faint, metallic oil of lard-fried bread and the sudden, heady spike of cheap potheen—a sting that was less a pleasure than a stark proof of life, hot and sharp against the gums.",
+        "To sit in the gloom with a mug of sweetened chicory, scraping the black crust of brown sugar from the bottom with a split-wood spoon, was to snatch a moment of stolen grace from the maw of the city. The liquid was thick, scorched, and heavy with the grit of bad river-water, but {given_name} held the warmth in the mouth like a secret. It tasted of old hearths left behind in the rain, of peat-smoke dried into rough wool, now curdled with the sharp vinegar of the dockside gutters. It was a hard-bitten communion, a refusal to starve on the thin gruel of promises served up by the precinct bosses.",
+        "With the passing of the seasons, the brine of tears and the stale yeast of the basement bakeries slowly gave way to something more solid, like the heavy, satisfying taste of barley bread after a winter of potato rot. The name of {family_name} no longer tasted of ash in the mouths of the ward-heelers; it had begun to carry the thick, salty flavor of mutton broth and tallow candles, the small luxuries of a house that had begun to keep its own door locked. The iron tang of the spade remained, buried deep in the tongue's memory, but it was being beaten flat by the heavy, sweet grease of success, slow-cooked in the belly of a hostile world."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The tin cup passed from hand to hand, smelling of turpentine and scorched corn, before its rusted rim rattled against the teeth of {full_name}."
+          ],
+          "choice": {
+            "text": "Offer a toast to the 'Fighting Spirit' of their people, acknowledging the hardships and celebrating their defiance.",
+            "motivatorShift": {
+              "honor": 2,
+              "lineage": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "toast_resilience"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "In the cracked mirror behind the bar, the tallow candle sputtered, leaving a greasy lard-taste in the drafty air as {full_name} spat a bit of bitter tobacco leaf onto the floorboards."
+          ],
+          "choice": {
+            "text": "Reflect on the long road traversed, tasting the solitude of leadership and the weight of future expectations.",
+            "motivatorShift": {
+              "power": 1,
+              "politics": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "reflect_burden"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:political:poor:t1:open",
+      "sense": "smell",
+      "prose": [
+        "The raw, wet reek of turned ditch-clay and weeping pine-sap hung heavy under the rafters of the new cabin, a green timber-stench that settled on the tongue like copper. It was the scent of a clearing carved by sweat, smelling of hemlock needles bruised by heavy boots and the sharp, vinegar bite of oak-shavings curling off the plane. Through the chinks of the undaubed walls drifted the thin, blue smoke of distant turf-fires, carrying the sweet-rot of old bogs from across the valley—a phantom of the country left behind, now drifting into this unfamiliar timber-box where {full_name} had finally set down their spade.",
+        "Beneath the green-plank floorboards lay the damp, musty cellar-breath of sleeping grubs and ancient leaf-mold, a dark soil-odor that seemed to rise with every step. To combat this wild, primordial musk, the rough-hewn pine table and mismatched three-legged stools had been scrubbed raw with hot lye, leaving a sharp, nose-stinging trail of wood-ash soap that fought against the damp. This was the perfume of a hard-scraped start—the sourness of old wool blankets washed in creek-water, the oily grease of tallow lamps, and the stubborn cleanliness of people who refused to let the wilderness swallow them whole.",
+        "Yet, riding over the sour lye and the cold forest-damp was the thick, salty steam of boiling salt-pork and cabbage, rising from the iron pot hung over the hearth-hook. It was a dense, fatty fragrance that promised muscle for the morrow's clearing, a heavy steam that beaded on the cold windowpanes and smelled of simple survival. Here, in this boiling pot, the wild scent of the spruce-woods met the salt of the old world, blending into a rich, greasy steam that whispered of hearth-right, endurance, and the slow, stubborn triumph of the hungry."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Beneath the steam of the kettle rose the sharp, hot-iron smell of blacksmith’s scale and the oily tang of tool-grease, a scent of hard metal that spoke of spades, wedges, and the cold, clean promise of silver earned by the inch."
+          ],
+          "choice": {
+            "text": "Embrace the raw industry, seeing potential in every turn of the soil.",
+            "motivatorShift": {
+              "wealth": 2,
+              "worldview": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "focused_on_industry"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The sweet, heavy scent of imported black tea-leaves, steeped bitter and dark over the turf-coals, filled the corners with the fragrance of a country kitchen, a slow-brewed memory that made the wild forest outside seem almost small."
+          ],
+          "choice": {
+            "text": "Find solace in the familiar scents, weaving tradition into the new tapestry.",
+            "motivatorShift": {
+              "tradition": 2,
+              "lineage": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "clings_to_tradition"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t1:rising"
+    },
+    {
+      "id": "act:ireland:political:poor:t1:rising",
+      "sense": "touch",
+      "prose": [
+        "The persistent, deep-seated ache in {full_name}'s shoulders was a rusted hinge that never fully swung loose, a physical ledger of every white-oak sill lifted and every hemlock root dragged from the sour clay. The coarse, abrasive weave of the burlap sacks containing their meager first harvest bit into palms already mapped with yellow calluses and split skin that had not healed since the crossing. Every surface within the half-chinked cabin—from the damp, gritty stone of the hearth-slab to the splintered grain of the adzed table—scraped against the fingers like a challenge, demanding the constant, exhausting application of leather and bone.",
+        "At night, the dark offered no softening, only the cold, greasy weight of wool blankets that harbored the dampness of the swamp and never truly dried. The raw flesh of your knuckles traced the cold, small contours of the leaden rosary beads, pressing them hard into the skin until the small metal crucifix left a white, stinging imprint in the palm. That small, sharp pain was the only anchor against the vast, shifting dark of the frontier, a tangible counterweight to the silent pressure of mouths that needed feeding and walls that needed holding against the wind.",
+        "Even the briefest embrace of your child in the gray dawn felt hurried, defined by the rough friction of their threadbare flannel against your bare arms and the fleeting, feather-light brush of their hair against your stubbled chin. There was a fierce, desperate tightness in the way you held them, as if physical leverage alone could shield their small, supple bones from the heavy machinery of this new world. To touch anything here was to feel the grit of survival, a relentless sanding away of the soft parts of the self until only the hard, seasoned heartwood remained."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The cold, oily weight of the felling ax and the ash-handle of the pick became extensions of your own sinew, each swing sending a shuddering vibration up your arms that proved you were still solid, still carving your own shape into the wilderness."
+          ],
+          "choice": {
+            "text": "Lean into the physical labor, finding agency in building with your own hands.",
+            "motivatorShift": {
+              "power": 1,
+              "honor": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "self_reliant"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The greasy, salt-stained surface of a letter from a cousin in the eastern valleys felt thin and fragile between your calloused thumbs, yet its ink-smudged lines spoke of a web of hands willing to lift what one man’s back could not."
+          ],
+          "choice": {
+            "text": "Seek out the strength of community bonds, recognizing the need for collective effort.",
+            "motivatorShift": {
+              "politics": 1,
+              "worldview": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "community_minded"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "How do you respond to the constant strain of establishing your household in this new land?",
+        "options": [
+          {
+            "text": "You bear the burden silently, believing personal sacrifice is the truest path to stability.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 1,
+              "wealth": -1
+            },
+            "setFlags": [
+              "stoic_resilience"
+            ]
+          },
+          {
+            "text": "You actively seek counsel and aid from neighbors, understanding that shared burdens lighten the load.",
+            "motivatorShift": {
+              "politics": 2,
+              "reach": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "communal_approach"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t1:midpoint"
+    },
+    {
+      "id": "act:ireland:political:poor:t1:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The anvil’s high, iron-cold tink-tink-tink rattled off the wet slate roofs, a relentless staccato that seemed to drive the nails directly into the settlement’s skull. Beneath it ran the heavy, wet slosh of boots through thawed muck, the iron-rimmed groan of dray carts hauling timber, and the shrill steam-whistle of the ironworks down by the canal screaming its three-o'clock shift change. It was a din that smelled of coal smoke and horse piss, a grand, deafening engine of industry where every steel-shod strike was the sound of some landlord’s ledger-book snapping shut on another man’s labor.",
+        "Closer, within the thin pine-board partitions of the tenements, the sounds shrank to a wet, desperate rattle—the coughs of children who had never known dry sheets, the low, rhythmic scrape of potato-skins being pared thin enough to see through, and the venomous whispers of the rent-collector’s clerk. Down in the basement tavern, the noise was different: the sharp, wet slap of a card on a greasy table, the rattle of cheap tin mugs, and the dry, paper-thin rustle of political broadsheets being read aloud by the one man in five who had the letters for it. It was the low hum of a hive that knew it was being smoked out.",
+        "Then came a voice that did not belong to the mud—a clean, clipped baritone, dry as parchment and cold as salt. It was an agent of the estate, or perhaps a speculator from the city, his vowels rounded like river stones, speaking over the heads of the crowd in the market square of \"clearances,\" \"concessions,\" and the \"inevitable march of civic improvement.\" At his back, the dry rattle of his clerk's ledger-pages turning sounded like the wings of locusts in a dry year, and the silence that fell over the gathered men was not respect, but the cold, holding-of-breath that comes before a dry branch snaps in the frost."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Above the guttering arguments rose the fat, gravy-rich baritone of the ward boss's lieutenant, his leather heels clicking on the damp flagstones as he promised coal-credits and city labor to any man who knew how to mark his ballot."
+          ],
+          "choice": {
+            "text": "Align with the established political network to secure your family's economic standing.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "allied_with_ward"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "From the shadow of the lime-kiln came a different sound—the fierce, dry hiss of desperate whispers, urgent and raw, calling for a quiet gathering behind the timber-yard once the night-bells began to ring."
+          ],
+          "choice": {
+            "text": "Lend your voice to the burgeoning movement for worker's rights and communal support.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "supports_collective_action"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [
+        {
+          "wave": "italian",
+          "atTier": 1,
+          "crossing": "Through the thick, sulfurous coal-smoke rising from the ditch, the sharp scent of anise-fried lard from the {crossing_surname} cook-pot cut through the heavy smell of wet earth, drawing {given_name} toward their muddy claim. There, a silent exchange of a heavy iron pick for a handful of copper coins established a fragile, wordless alliance between your {family_name} kin and these new Mediterranean stone-breakers who shared the back-breaking misery of the canal beds. It was a meager bargain born of necessity, ensuring neither side would starve before the first freeze.",
+          "relation": "contributing"
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t1:turn"
+    },
+    {
+      "id": "act:ireland:political:poor:t1:turn",
+      "sense": "sight",
+      "prose": [
+        "The glare of the new brick downtown is almost blinding, its plate-glass windows reflecting a sky choked with coal smoke, while just three streets away the rotting timber of the rookeries slumps into the grey mud. Children with red, chapped shins scramble through heaps of cabbage leaves and horse manure, their small fingers rooting for coal-scraps under the eyes of fat draymen. Here, where the gravel ends and the open sewers begin, {full_name} stands at the dividing line of a city splitting its skin—one half gilded and sleek, the other raw, wet, and hungry.",
+        "Through the grease-filmed pane of the ward-house tavern, the silhouette of {given_name} {surname} appears sharp against the hearth-fire, leaning close to an alderman whose diamond stickpin glints in the tallow light. Across the cobblestones, bathed in the yellow glare of a pitch-flare, a soapbox preacher thrashes his arms, his mouth a black circle roaring for bread and justice to a crowd of gray, upturned faces. Two paths out of the mire are drawn in the soot, each demanding a hard choice, each promising a different kind of survival.",
+        "The very bones of the quarter seem to warp and swell with every incoming boat; shanties are leveled by dawn to make room for high, narrow tenements that block the sun, and the faces in the market grow more desperate and less familiar by the week. To watch this growth is to see the ledger of the future being inked in sweat and lime-dust, where every new stone laid down buries the memory of the old country. The bloodline of {family_name} is already mortared into these rising walls, and whichever hand guides the trowel will leave its mark on the bone-deep shape of the town."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A damp handbill, slapped crooked onto a rotting gas-post, bears the name of {family_name} printed in thick, cheap ink beneath the sneering portrait of the ward's chief enforcer—a public staking of ground that smells of fresh paste and backroom coal-smoke."
+          ],
+          "choice": {
+            "text": "Acknowledge the growing political influence, embracing the visibility it brings.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "public_political_stance"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "In the gutter, an old parish sweeper with raw, chapped knuckles drags a birch broom through the horse-droppings and coal-dust, his eyes fixed to the mud, a quiet monument to the unreckoned labor that keeps the city from choking on its own waste."
+          ],
+          "choice": {
+            "text": "Refocus on the foundational needs of the working class, prioritizing their welfare.",
+            "motivatorShift": {
+              "worldview": 2,
+              "honor": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "advocates_for_working_class"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will {full_name} strive to shape this burgeoning town/neighborhood?",
+        "options": [
+          {
+            "text": "Champion the advancement of the Irish political machine, ensuring your people gain power and resources within the existing system.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 2,
+              "lineage": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "embrace_political_machine",
+              "shape_town_via_politics"
+            ]
+          },
+          {
+            "text": "Focus on building strong community institutions – churches, schools, benevolent societies – to uplift your people independently.",
+            "motivatorShift": {
+              "tradition": 3,
+              "lineage": 2,
+              "honor": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "build_community_institutions",
+              "shape_town_via_community"
+            ]
+          },
+          {
+            "text": "Advocate for broader social reform and equitable opportunity for all working classes, even if it means challenging the established power structures.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 2,
+              "politics": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "advocate_social_reform",
+              "shape_town_via_reform"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t1:close"
+    },
+    {
+      "id": "act:ireland:political:poor:t1:close",
+      "sense": "taste",
+      "prose": [
+        "The mutton-fat broth coats the tongue first, heavy and grey-white with tallow, a far cry from the thin, watery cabbage-scald of the old ditches. In this black iron pot, the yellow potatoes crumble into a floury starch that tastes of limestone and deep-churned turf, every spoonful thick enough to hold the spoon upright. It is a slow, heavy saltiness, the flavor of a cellar that does not go empty when the frost sets in, of larders won by the inch from the cold clay of this new parish.",
+        "Yet, there is a copper-penny sting at the back of the throat, an ash-dry aftertaste that lingers long after the marrow-bone is sucked clean. It is the sour dreg of the political club's cheap porter, the grease of the ward-boss’s mutton pies eaten in drafty backrooms where promises were traded for street-sweeping contracts. One does not rise from the cellar floor without swallowing a fair measure of soot, and this broth, for all its rich belly-filling warmth, carries the iron grit of those necessary, silent surrenders.",
+        "Across the oilcloth table, your heir watches, chewing with the slow, deliberate gravity of the young who have never known the sharp pinch of the winter famine. The tea that follows is black as river silt, steeped until the leaves bleed a bitter, dry tannin that puckers the mouth—a hard, stubborn brew that stays on the tongue like a vow. It is the taste of {surname} blood making itself felt in the ward, a name that no longer begs at the back door but demands its seat at the head of the bench."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The searing, grain-rough burn of local whiskey, smelling of sour mash and charred oak, bites the throat like a sudden fist, the very flavor of backroom pacts sealed in grease-stained saloons."
+          ],
+          "choice": {
+            "text": "Embrace the legacy of influence and political savvy, however acquired.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "wealth": 1
+            },
+            "setFlags": [
+              "legacy_of_influence"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The clean, nut-sweet crust of soda bread, heavy with buttermilk and salted yellow butter, yields beneath the knife, filling the mouth with the simple, uncompromised warmth of the hearth."
+          ],
+          "choice": {
+            "text": "Cherish the moral fortitude and community spirit that defines the line's true wealth.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "legacy_of_community"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:political:poor:t2:open",
+      "sense": "smell",
+      "prose": [
+        "The sour reek of twice-boiled cabbage and the damp, oily soot of turf ash clung to the threadbare drapes like a grey skin, a smell that {full_name} could have charted blindfolded through any slum in the ward. It was an ancient, communal stink—wood smoke trapped by low ceilings, the yeast-rot of spilled porter from the cellar steps below, and the sharp, vinegar-bite of wet wool drying too close to a sputtering tallow candle. To breathe here was to swallow the very sediment of their class, a thick and heavy air that tasted of back-breaking toil, meager kettle-broth, and the stubbornly persistent grease of their own survival.",
+        "Step beyond the threshold, and the lane offered no reprieve, only a grander, more chaotic congestion of odors. The greasy steam from the tripe-boiler’s yard warred with the acrid, sulfurous burp of the coal-gas works at the canal edge, while the sweet, rotting dregs of malted barley drifted from the great brick chimneys of the brewery. This was the breath of the city’s engines, a dense vapor of sweat, horse dung, and tallow-vat grease that bound every tenant in the court to the same wheel of labor. For {full_name}, this choking atmosphere was both an anchor and a goad, a reminder of the flesh-and-blood registry of their people, even as the cold river breeze brought the faint, salt-clean scent of the docks—and the world beyond them.",
+        "And yet, drifting through the familiar mire of horse-piss and coal-smoke, there came a sharper, more volatile scent that set the pulse knocking. It was the pungent, vinegary bite of cheap printer's ink on damp rag paper, fresh from some cellar press where the ink-balls were still wet and the ink itself smelled of turpentine and revolution. That dry, mineral perfume of newly struck broadsides, passing from dirty palm to dirty palm in the shadow of the shambles, carried the ozone crackle of things to come. For {full_name}, it was the only scent that mattered now—the sour, metallic smell of a crowd's rising heat, of handbills dried over tallow flames, and the sudden, heady perfume of raw defiance."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You draw the thick, greasy air of the tenement deep into your lungs, letting the sour heat of the turf-smoke and the salt of honest sweat anchor your resolve to the soil and the people who endure here."
+          ],
+          "choice": {
+            "text": "Embrace the enduring spirit of your community, finding strength in its familiar struggles.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "climb_rooted_in_community"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A sudden gust of wind from the north carries the cold, clean scent of stone facades, polished mahogany, and coal-fires from the squares of the rich, tasting of an air that does not stink of survival."
+          ],
+          "choice": {
+            "text": "Focus on the aspirational, seeking to carve a path to a broader, more influential world.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "power": 2,
+              "worldview": 1,
+              "lineage": -1
+            },
+            "setFlags": [
+              "climb_aimed_at_influence"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t2:rising"
+    },
+    {
+      "id": "act:ireland:political:poor:t2:rising",
+      "sense": "touch",
+      "prose": [
+        "The salt-crusted skin of the dockworkers' palms rasped against {full_name}’s own like coarse sandstone, a dry and heavy friction that smelled of Baltic timber and river mud. These were hands that split hemp rope and swung iron hooks, yet their pressure against {full_name}’s shoulder was steady, an anchor-drop of silent, terrifying expectations in the pre-dawn gray. To stand in the press of the tavern backroom was to feel the heat of woolen coats boiled in mutton-fat, the damp steam of a hundred lungs, and the sudden, hard squeeze of fingers that had lost knuckles to the looms or the winch.",
+        "Now, though, the palms of {full_name}’s hands learned the slick, waxen slide of municipal walnut and the razor-thin slice of high-rag ledger paper, so cold it seemed to draw the warmth straight from the marrow. When the aldermen offered their greetings, their fingers were like dressed poultry—scrubbed, hairless, and chilled from lack of sun, leaving behind the faint, greasy residue of hair-oil and French soap. This new world was a series of dry, sterile surfaces, where every ink-stained handclasp felt like a slipknot tightening around the throat, dragging {full_name} away from the greasy, thrumming muscle of the docks.",
+        "There was an ache in the joints from walking both pavements, the sharp cobblestones of the slums that bit through thin boot-soles and the plush carpet of the committee rooms that swallowed the heel with a sickening, silent yield. The friction of it was a physical chafe under the collar, where the cheap, prickling starch of a clerk’s shirt rubbed the skin raw at the nape. To reach for the clean, cool weight of authority was to feel the rough, grease-stained wool of the parish pulling back, its heavy threads snagging on the nails, demanding to know which skin {full_name} intended to keep."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The elder, {given_name}, presses a heavy, trembling palm against your forearm, his skin dry as ancient parchment, his grip tightening with the desperate, light weight of a drowning man as he whispers of the winter’s coal-dearth."
+          ],
+          "choice": {
+            "text": "Reaffirm your commitment, feeling the weight of their struggles as your own.",
+            "motivatorShift": {
+              "lineage": 2,
+              "honor": 1,
+              "tradition": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "loyalty_affirmed"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A rival's agent claps you on the shoulder, his touch light yet firm, his silk glove grazing your neck with the cold precision of a barber's blade as he hints at a shortcut through the back-alley funds."
+          ],
+          "choice": {
+            "text": "Acknowledge the potential, sensing a chance to navigate around existing obstacles.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "worldview": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "ambition_explored"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A patriarch of the {family_name} faction is being dragged through the gutter press, his reputation torn like wet cardboard by the ward bosses. To pull him out of the mud publicly will grease the palms of your oldest supporters but turn the stomachs of the silk-hatted aldermen whose favor you need for the coming charter; meanwhile, a long-coveted seat on the harbor commission has just gone vacant, its brass key waiting for an immediate, unburdened hand.",
+        "options": [
+          {
+            "text": "Publicly defend the embattled community leader, demonstrating unwavering loyalty.",
+            "motivatorShift": {
+              "honor": 3,
+              "lineage": 2,
+              "politics": -1,
+              "reach": -1
+            },
+            "setFlags": [
+              "chose_loyalty_over_opportunity"
+            ]
+          },
+          {
+            "text": "Focus on the political opportunity, subtly working behind the scenes for the leader's aid without public risk.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "wealth": 1,
+              "honor": -1,
+              "lineage": -1
+            },
+            "setFlags": [
+              "chose_opportunity_with_discretion"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t2:midpoint"
+    },
+    {
+      "id": "act:ireland:political:poor:t2:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The raw, throat-tearing clamor of the tenements had subtly receded, replaced by a more insidious municipal cadence. No longer did the brassy, deafening shriek of the morning steam whistles dictate the family's waking hours; instead, {full_name} awoke to the heavy, iron-tongued tolling of the city hall clock, each stroke a cold, measured audit of their hours. In the high-ceilinged corridors of the corporation offices, the wet, desperate cough of the dockyards was swapped for the dry slide of ledger pages, the crisp snap of sealing wax, and the low, conspiratorial hum of men who owned the streets they had never swept. It was a language written in sighs, sharp gavel-claps, and the soft, menacing rustle of bank drafts—sounds that {full_name} had learned to dissect with the precision of a hawk.",
+        "Even the domestic hearth had muted its frantic acoustics. Gone was the relentless, thin rattling of windowpanes from the coal carts below, and the raw, uninsulated shouts of neighbors through lath and plaster; now, there was only the thick, deadening silence of Axminster wool underfoot and the rhythmic, stately tick of a mahogany longcase clock. This expensive quietude was bought at the price of constant vigilance, yet it carried an eerie, hollow quality—a hush where every dropped spoon or sighed breath sounded like an indictment. The family moved with a deliberate, anxious softness, as if a single loud word might shatter the fragile veneer of their respectability and summon the ghosts of the cellar-dwellings they had left behind.",
+        "During a private midday repast in the committee rooms, over the sharp clink of silver-plate and the wet slosh of heavy port, an alderman let fall a name that hung in the damp air like a challenge: the Walsh family, whose looms now clothed half the province. The name was uttered with a dry, rustling reverence, carrying the crisp, starched snap of fine linen and the smooth, cold rattle of bone china—a far cry from the wet, muddy thud of {family_name}'s own ancestral spade. For {full_name}, the sound did not fade with the grease on the plates; it lingered like a low, vibrating hum, a rival chord struck in the grand, brassy anthem of the city's self-made masters."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The low, rumbling tide of the assembly's approval washes over the platform, a damp wall of sound built from the heavy stomp of workboots, the dry slap of calloused palms, and the thick, warm chorus of workingmen shouting your name in the smoky hall."
+          ],
+          "choice": {
+            "text": "Bask in the public's affirmation, feeling the strength of their collective voice behind you.",
+            "motivatorShift": {
+              "lineage": 1,
+              "politics": 2,
+              "honor": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "public_affirmation_embraced"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Through the heavy mahogany door of the private office, the sharp, dry clatter of ice in crystal glasses mingles with the cold, measured whispers of the city's kingmakers, their voices dropped to a predatory hiss as they carve up the municipal wards."
+          ],
+          "choice": {
+            "text": "Lean closer, seeking to learn the subtle cadences and tactics of the city's true power players.",
+            "motivatorShift": {
+              "power": 2,
+              "politics": 1,
+              "worldview": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "power_broker_tactics_studied"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [
+        {
+          "wave": "italian",
+          "atTier": 2,
+          "crossing": "The scent of cheap, anise-scented cigar smoke preceded the delegation from the {family_name} line, their damp woolen coats smelling of coal gas as they crowded the mahogany railing where {given_name} held the ledger of municipal permits. A whispered bargain transpired over the excavation subcontracts for the new ward reservoir, ending in a curt nod that traded Irish political leverage for Italian pickaxes. It was a silent pact sealed not by ink, but by the heavy, mutual understanding of two rising dynasties carving up the city's subsoil.",
+          "relation": "contributing"
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t2:turn"
+    },
+    {
+      "id": "act:ireland:political:poor:t2:turn",
+      "sense": "sight",
+      "prose": [
+        "From the limestone embrasure of the municipal chambers, the eyes of {full_name} traced the vast, soot-filmed labyrinth of the metropolis—a sprawling canvas of wet slate, gray brick, and unwashed timber that spilled to the muddy horizon. The black-roofed tenements of the lower ward, which had once defined the boundaries of their entire universe, shrunk from this height to a mere dark smudge, a cellar-puddle at the foot of something immense. Beyond those crowded alleys rose the proud, brownstone ramparts of the gentry, the iron-rimmed thoroughfares of commerce, and the classical pediments of banks that gleamed like salt in the cold northern sun. It was a sight that stung with a bitter, triumphant beauty, revealing both the distance the {family_name} name had traveled from the ditches of the old country and the sheer, towering scale of the fortress yet to be taken.",
+        "The city’s stark fractures were laid bare in the winter light: the crooked, sunless gashes of the immigrant rookeries stood in sharp relief against the wide, sun-bleached avenues of the merchant princes, where carriage glass flashed like small fires. This was no mere collection of mortar and iron, but a living map of blood, labor, and capital written across the earth—a testament to who starved and who ruled. The visual argument was brutal and plain: those clean, marble-faced institutions on the hill were built upon the backs of the dark streets below, and the only question remaining was how the {family_name} bloodline would alter this geometry of power.",
+        "A pale, sulphur-colored haze hung over the distant dockyards and ironworks, catching the low sun until the whole basin seemed to simmer with industry. Along the gray ribbon of the river, coal-barges drifted like beetles, while the narrow streets below swarmed with the tiny, dark shapes of thousands of laborers moving in lockstep toward their shifts. The sheer mass of humanity was dizzying, a sea of caps and shawls that could either wash away these monuments of limestone or be crushed beneath them. {full_name} understood that the moment was ripe, that their generation stood at a critical juncture, capable of altering the very architecture of its power and the course of its development, forever shaping the way its citizens lived and thrived."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Through the shifting coal-smoke, the gray granite spire of St. Patrick’s cuts the sky—a salt-rimmed finger pointing upward, anchoring the wet slate roofs of the slums."
+          ],
+          "choice": {
+            "text": "Turn back to the cobblestones of your youth, reinforcing the parishes and brotherhoods of your own people to build a fortress from within.",
+            "motivatorShift": {
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "focus_community_strength"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your eyes sweep westward, where the white marble of the new courts and the polished glass of the financial houses gleam like fresh ice under the winter sun."
+          ],
+          "choice": {
+            "text": "Cast your lot with the grand institutions of the state, climbing into the halls of power to reshape the city from its very center.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 2,
+              "reach": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "focus_city_institutions"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The city stands at a crossroads, demanding leadership to guide its growth. How will the {family_name} line shape its institutions and its future?",
+        "options": [
+          {
+            "text": "Champion a meticulous reform agenda from within the municipal chambers, using leverage and backroom discipline to bend the existing machinery to your will.",
+            "motivatorShift": {
+              "politics": 3,
+              "worldview": 2,
+              "power": 1,
+              "tradition": 1
+            },
+            "setFlags": [
+              "chosen_institutional_reform"
+            ]
+          },
+          {
+            "text": "Found an independent, parallel civic league funded by your own networks, bypassing the corrupt machines to build a sovereign base of public welfare.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 2,
+              "honor": 1,
+              "politics": -1
+            },
+            "setFlags": [
+              "chosen_new_civic_powerbase"
+            ]
+          },
+          {
+            "text": "Unleash the fury of the wards through direct mobilization, organizing labor and voters to rattle the gates of the establishment until they break.",
+            "motivatorShift": {
+              "lineage": 2,
+              "politics": 2,
+              "power": -1,
+              "worldview": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "chosen_direct_community_action"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t2:close"
+    },
+    {
+      "id": "act:ireland:political:poor:t2:close",
+      "sense": "taste",
+      "prose": [
+        "The bitter dregs of twice-steeped tea, sweetened with coarse brown sugar that crunched like gravel between {full_name}’s teeth, no longer sufficed to coat the throat against the damp chill of the ward. Now, the tongue encountered stranger, colder liquors—the sharp, medicinal bite of double-distilled whiskey that smelled of turf-smoke and copper staves, or the oily, resinous leaf-juice of a cigar imported through the dockside syndicates. The salt-scabbed lard of the old cellar, the chalky dryness of cold potatoes eaten from a wool coat pocket, had faded into a dull memory, replaced by the buttery thickness of rich sauces and the iron-rich tang of rare beef. It was the flavor of a body being rebuilt from the bones upward, fed on the fat of a city they had once only watched through frosted windows.",
+        "Every handshake in the back rooms of the tavern left its own distinct residue on the palate—some as sweet as barley sugar, others like the sour, copper penny flavor of a dry-mouthed lie told under oath. To buy an alderman was to swallow a draft of vinegar and honey; to squeeze a rival was to taste the hot, salt-spray of a clean wound. Yet the overall feast of it was heavy and filling, a thick, blood-pudding weight of influence that settled in the gut and kept the winter wind at bay. Even the gray ash of small betrayals, drifting into the mouth like soot from a coal chimney, could not ruin the richness of a town where their name finally carried the weight of daily bread.",
+        "Watching the heir at the sideboard, {full_name} knew the child would never understand the salt-pork days, nor the way hunger could sharpen the gums until they bled. The inheritance was a different kind of broth entirely—thick with the marrow of favors owed, seasoned with the pepper of a feared reputation, and sweetened by the slow-cooked syrup of a constituency that moved at their whistle. It was a palate trained for long, slow dinners where destiny was carved with silver plate, a feast of leverage that would keep the family belly full long after the pioneers of this mud-slick ward had gone cold beneath the sod."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A clean, metallic taste like gold leaf on the tongue—the silent, heavy satisfaction of a ledger filled with black ink, sealing the dynasty's safety in brick and vault."
+          ],
+          "choice": {
+            "text": "Prioritize the financial security and accumulated wealth as the primary inheritance for the next generation.",
+            "motivatorShift": {
+              "wealth": 3,
+              "reach": 1,
+              "lineage": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "passed_financial_capital"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The dry, alkaline taste of limestone dust from the new municipal works, mixed with the sweet malt of a celebratory draft—the flavor of a city shaped by your design and bound by your word."
+          ],
+          "choice": {
+            "text": "Emphasize the robust political network and the moral capital of a reputation for principled action.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 2,
+              "lineage": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "passed_political_capital"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:political:poor:t3:open",
+      "sense": "smell",
+      "prose": [
+        "The municipal hall retains its ancient foundation of damp lime and sour wool, but today those peasant smells are smothered beneath a sharp, varnished sheen. Instead of the grease of mutton pies and the low, thick reek of cheap shag tobacco that usually hangs like a fog over the public galleries, there is the crisp, chemical bite of fresh lithograph ink and the bitter, citrus tang of turpentine-rubbed oak. It is the aroma of bureaucracy in its highest gear—not the rot of the parish house, but the clean, dry scent of modern ledgers and cold iron-gall ink, a perfume of absolute ledger-book legitimacy.",
+        "Into this atmosphere steps {full_name}, carrying the faint, crisp scent of starch and the sharp mint of a dental wash, a far cry from the turf-smoke and wet-dog stink of the early, desperate days. The clerks, who once smelled only of ink-crusted cuffs and dry dust, now lean in as {full_name} passes, catching the scent of expensive beeswax and the faint, citrusy splash of imported cologne that marks a person of rising fortune. It is an aroma that commands a quieted gallery: no longer the rancid lard of the tenant cabin, but the dry, sweet scent of heavy rag paper being turned by fingers that do not work the spade.",
+        "In the draughts that rattle the high leaded windows, the old odors of the street—horseshit, river-mud, and the scorched-fat stench of the tallow-works—are kept at bay by the warmth of coal fires burning hot in the committee rooms. The very air of the chamber seems to have been purified by the weight of {surname} authority, leaving only the rich, heavy perfume of clean wool coats drying near the hearths and the subtle, dusty sweetness of calfskin bindings. Here, in the clean-swept halls where decisions are sealed with red wax, the family name no longer carries the whiff of the ditch; it has become as solid and respectable as the cedar wood of the alderman's desk."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You take your seat at the mahogany table, the dry scent of sheepskin rolls and hot red sealing wax rising to greet you, feeling the sudden, deferential quiet that falls over the chamber."
+          ],
+          "choice": {
+            "text": "Observe the familiar faces in the council chamber, noting their deference.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "observed_deference:true"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "In the anteroom, a delegation of shopkeepers and weavers waits for you, their breath smelling of small beer and excitement, their damp collars steaming in the close air as they look to you for their future."
+          ],
+          "choice": {
+            "text": "Acknowledge their support and reassure them of the family's dedication.",
+            "motivatorShift": {
+              "lineage": 2,
+              "tradition": 1,
+              "power": 1
+            },
+            "setFlags": [
+              "reassured_supporters:true"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t3:rising"
+    },
+    {
+      "id": "act:ireland:political:poor:t3:rising",
+      "sense": "touch",
+      "prose": [
+        "The dead-weight of the parliament podium is cold beneath {given_name}’s fingertips, a massive, ancient block of Irish oak that has absorbed the palm-sweat of three generations of orators. Through the grain, a low, tectonic hum vibrates—not from the street outside, but from the restless shifting of two hundred wet boot-soles on the gallery floor above, a collective, impatient animal shivering in its stalls. To rest one's weight here is to feel the structural tension of the state itself, the dry timber groaning under the silent, downward pressure of a thousand invisible hands.",
+        "The new broadcloth coat, smelling faintly of the tailor's hot iron and sheep-grease, binds the shoulders with a heavy, ceremonious constriction that permits no slouching. Every surface touched in this arena demands a calculated pressure: the stiff, starch-sharp edge of a draft bill that bites into the thumb; the dry, papery scrape of a ledger; the slick, tepid rim of the water glass that leaves a ring of condensation on the green baize. To rule is to exist in a sequence of hard, unyielding textures, where even the handshakes are tests of bone-density and dry-skinned resolve, each rival seeking to read the dampness of fear in a brief, crushing grip.",
+        "Beneath the floorboards, the periodic rumble of the city tramway sends a sharp, electric tremor upward through the leather soles of {given_name}’s boots, rattling the iron rivets of the building. It is a constant, grinding reminder of the machine-age gritting its teeth just beyond the heavy oak doors, an mechanical friction that mirrors the abrasive, daily rubbing of faction against faction. One must stand perfectly balanced, knees loose but spine rigid, riding the vibrations of a changing world without letting the platform slip from beneath one's feet."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A junior backbencher, still smelling of the damp peat-smoke of some western parish and eager to make his bones, rises during the committee hearing to spit venom at the {family_name} name. He waves a sheaf of greasy pamphlets, his voice cracking on the high notes as he demands to know how much longer the old blood will dictate the terms of the new nation's purse."
+          ],
+          "choice": {
+            "text": "Address his concerns directly, using established facts to underscore his inexperience.",
+            "motivatorShift": {
+              "politics": 1,
+              "power": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "challenged_junior_politician:direct"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "In the draughty corridor afterward, a man whose fingers are permanently stained with the blue-black ink of coal-contracts corners you. He smells of expensive tobacco and coal-tar, his fat, warm hand settling on your sleeve with the familiarity of a man who believes every soul in this building has a specific ledger price."
+          ],
+          "choice": {
+            "text": "Listen politely but offer only non-committal answers, emphasizing adherence to fair process.",
+            "motivatorShift": {
+              "wealth": -1,
+              "worldview": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "industrialist_approached:noncommittal"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "Public accusations have surfaced regarding the family's alleged favoritism towards certain community organizations. How do you respond?",
+        "options": [
+          {
+            "text": "Issue a strong public statement, denouncing the claims as baseless and politically motivated.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "accusation_response:denial"
+            ]
+          },
+          {
+            "text": "Initiate an internal review to demonstrate transparency, regardless of the claims' veracity.",
+            "motivatorShift": {
+              "tradition": 1,
+              "lineage": 1,
+              "worldview": 2
+            },
+            "setFlags": [
+              "accusation_response:review"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t3:midpoint"
+    },
+    {
+      "id": "act:ireland:political:poor:t3:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The granite of the municipal hall did little to muffle the wet, heavy roar of the city's thoroughfares: the iron-rimmed rumble of dray carts hauling coal, the screech of tram-wheels on wet curves, and the raw, salt-bitten cries of fishmongers slicing through the damp fog. Within the chamber, however, the chaos was distilled into a low, predatory drone—the dry, paper-shuffling murmur of three hundred men in woolen frock coats debating the price of land and the cost of loyalty. It was an acoustic maze where every cough was a calculated dissent and every cleared throat a warning. {full_name} sat motionless, ear cocked to the rising register of the back benches, parsing the soft, rural diphthongs of the western counties against the sharp, clipped accent of the metropolitan barristers who sought to partition the future with dry legalities.",
+        "Underneath the primary debate ran the dry rattle of the morning broadsheets, their damp ink smelling of vinegar and coal-smoke as clerks snapped the pages taut to read the leading articles in urgent, liquor-laced whispers. The sharp, brassy jingle of the new telephone in the clerk's alcove cut through this hum like a razor through silk, its mechanical persistence demanding attention while the operator’s nasal drone translated distant, frantic directives from the provincial committees. Every ring was a miniature crisis, a sudden chime of shifting alliances or a warning that some rival from a competing lineage was already on the wire, whispering their own terms into the ears of the party whips.",
+        "Behind the high mahogany dais, the sudden, wood-on-wood crack of the Speaker's gavel sounded less like a call to order than a starter's pistol, sending a wave of scraping boot-heels and muttering retreats through the side galleries. The acoustics of the high vaulted ceiling gathered these minor treasons—the squeak of wet leather, the rattle of pocket watches, the dry, rhythmic rasp of matches struck against boot soles—and amplified them into a collective breathing, a beast that had to be tamed. In this room, silence was never empty; it was merely the breath drawn before the next knife-blow of an amendment was read aloud into the record."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Behind the heavy velvet drapes of the division lobby, a wet, tobacco-stained whisper betrays the terms of an unholy coalition—the scratch of a gold nib on parchment sealing a pact between the old gentry and the new money from the eastern ports."
+          ],
+          "choice": {
+            "text": "Discreetly observe the parties involved, gathering intelligence for future strategies.",
+            "motivatorShift": {
+              "politics": 2,
+              "power": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "observed_backroom_deal:true"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "From the back benches, a young member representing the northern coal pits unleashes a voice like cracking slate, his raw, unpolished vowels catching the gallery's ear and drawing a thunderous, boot-stamping ovation that threatens to sweep away your family's interests."
+          ],
+          "choice": {
+            "text": "Acknowledge the public's reception but plan a counter-narrative through your own network.",
+            "motivatorShift": {
+              "reach": 1,
+              "politics": 1,
+              "honor": 0
+            },
+            "setFlags": [
+              "counter_narrative_planned:true"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [
+        {
+          "wave": "italian",
+          "atTier": 3,
+          "crossing": "Above the dry hum of clerkly voices, the sharp, metallic click of the {surname} family's signet ring tapping against the mahogany rail signaled that the Italian syndicate would not be easily bought out of the ward's paving contracts. The sibilant, rapid whispers of their translator cut directly through your father’s heavy Munster cadence, forcing the {family_name} to concede the dockyards in exchange for the municipal masonry monopoly. This tense, wordless bargain struck in the corridor's shadows redrew the boundaries of the city's labor before a single vote was cast.",
+          "relation": "opposing"
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t3:turn"
+    },
+    {
+      "id": "act:ireland:political:poor:t3:turn",
+      "sense": "sight",
+      "prose": [
+        "The rain-slicked slates of the city stretched toward the horizon like the scales of some great, dormant leviathan, catching the low, bruised light of a late northern afternoon. From this high window of the new assembly hall, the world appeared as a grid of soot and slate, where the black smoke of the distilleries and ironworks strangled the clean air coming off the bay. Down in those congested lanes, where the {family_name} name had once been associated only with the mud-stained peasantry of the west, the yellow glare of oil lamps was beginning to prick the gloom, marking the homes of the very dockers and weavers whose fates were now tied to {given_name}'s rising star.",
+        "The transition from twilight to dark was a sharp, blue-tinged blade, throwing the architectural divisions of the town into stark relief. Below, the grand stone facades of the banks stood square and white, while just behind them, the dark, rotting teeth of the tenements huddled in shadow, their chimneys weeping coal-dust into the wet streets. Every lane was a line of tension drawn between old hunger and new iron, an arena where a single signature or a raised hand in the parliament chamber could either starve a parish or lift a district into the light of the machine age.",
+        "One could trace the movement of the masses by the torches flickering like fireflies along the quays, and the lumbering, double-decked streetcars that ground along their iron tracks like bright, slow beetles. The sheer volume of the populace, visible only as a shifting, dark tide of caps and woollen shawls flowing through the thoroughfares, possessed a silent, terrifying mass. It was a picture of raw human energy waiting for a mold, a vast canvas of labor and longing that demanded not just observation, but a firm, guiding hand to carve the {surname} legacy into its stone."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Your fingers trace the heavy linen of the land registry map, where the red ink of new railway concessions and parish boundaries outlines fresh ground for the {family_name} interest."
+          ],
+          "choice": {
+            "text": "Identify key regions for expansion, preparing to deploy resources and support.",
+            "motivatorShift": {
+              "reach": 2,
+              "politics": 2,
+              "power": 1
+            },
+            "setFlags": [
+              "expansion_identified:true"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The windowpane vibrates slightly with the low, rhythmic roar of the crowd gathered in the plaza below, their hand-painted banners swaying like sails in the salt wind."
+          ],
+          "choice": {
+            "text": "Analyze the crowd's demands, considering how best to incorporate their sentiment into policy.",
+            "motivatorShift": {
+              "worldview": 1,
+              "lineage": 1,
+              "politics": 1
+            },
+            "setFlags": [
+              "public_will_observed:true"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "A critical national policy is up for a vote, which will either consolidate industry under strict state control or allow for unfettered private expansion. This choice will define the nation's economic future and your family's role within it. How do you cast your influential vote?",
+        "options": [
+          {
+            "text": "Vote to consolidate industry, championing stability and public welfare over rapid growth.",
+            "motivatorShift": {
+              "politics": 3,
+              "worldview": 2,
+              "wealth": -2,
+              "power": 1
+            },
+            "setFlags": [
+              "national_policy_vote:consolidation",
+              "economy_direction:state_control"
+            ]
+          },
+          {
+            "text": "Vote for unfettered private expansion, arguing it will spur innovation and national prosperity.",
+            "motivatorShift": {
+              "wealth": 3,
+              "power": 2,
+              "politics": -1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "national_policy_vote:expansion",
+              "economy_direction:private_growth"
+            ]
+          },
+          {
+            "text": "Propose an amendment for a balanced approach, seeking compromise between state oversight and private enterprise.",
+            "motivatorShift": {
+              "honor": 2,
+              "tradition": 1,
+              "politics": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "national_policy_vote:compromise",
+              "economy_direction:balanced"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t3:close"
+    },
+    {
+      "id": "act:ireland:political:poor:t3:close",
+      "sense": "taste",
+      "prose": [
+        "The single pot still whiskey leaves a tail of scorched turf and oily, unmalted barley on the back of the tongue, a dram that bites before it warms. It is a flavor hard-won from illicit copper worms and damp cellars, tasting less of easy leisure and more of the cold rain of the early struggles of {family_name}. To swallow it is to track the heat down into the chest, a quiet, internal fire that burns away the small humiliations of the public square and leaves behind the stubborn oil of old, unyielding resolve.",
+        "Alongside the spirits, the tongue finds the sharp, salt-crusted edge of a raw-milk cheese and the sour crumb of soda bread, heavy with griddle-soot. These are the coarse flavors of the ditch-side and the tenant cabin, intentionally kept on the board as a bitter ballast to keep the mind from drifting into the clouds of high-born pretension. For the heir, this is the inheritance: a palate that must learn to relish both the sour whey of the dispossessed and the sweetened vintages of the committee rooms, a legacy forged in the tension between what was endured and what was seized.",
+        "The final draught is the astringent, tannin-rich black of tea boiled twice over in a dented kettle, the steam carrying the faint, earthy scent of wet wool and wood-smoke. It is a humble finish, cleansing the mouth of sweet promises and fiery whiskey alike, leaving only the dry, alert focus required of those who would lead. Through this simple liquid, the quiet persistence of the household asserts itself, reminding the soul that before the crowd can be conquered, the hearth must first be sustained."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "In the memory of the crowd's roar, the sweet taste of victory lingering like clover honey, you recall the hands that reached out to grasp yours along the muddy lane, offering their trust as a sacred mandate."
+          ],
+          "choice": {
+            "text": "Toast to the future of the family's political standing and the community's trust.",
+            "motivatorShift": {
+              "politics": 1,
+              "honor": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "reflected_on_success:true"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The memory of the defeat is a sour cud, tasting of wet ash and the cold tea of betrayal, reminding you how quickly the wind of the mob's favor turns from a warm draft to a killing frost."
+          ],
+          "choice": {
+            "text": "Accept the setback as a lesson, reaffirming commitment to long-term goals.",
+            "motivatorShift": {
+              "worldview": 1,
+              "power": -1,
+              "reach": 0
+            },
+            "setFlags": [
+              "reflected_on_setback:true"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:political:poor:t4:open",
+      "sense": "smell",
+      "prose": [
+        "The private antechamber exhaled a heavy, resinous breath of old mahogany and the ghosts of Turkish tobacco—shreds left behind in the velvet-lined drawers by long-departed plenipotentiaries. Beneath that sweet, dusty decay bit the sharp, iron-gall reek of wet newsprint, fresh off the early packet-boat from Liverpool, its ink still tacky enough to smear the thumb. It was an aroma of cold ink and warm chicory, the perfume of an office that did not sleep, where the small struggles of a rain-swept island were traded like dry goods in the great markets of the East.",
+        "The leather dispatch boxes stacked upon the sideboard gave off a salted, animal musk of long sea voyages and coal-smoke from foreign harbors, each hide-bound case carrying the sour sweat of couriers who had ridden through three nights to reach the channel. To {given_name}, this draft of scorched grease and sealing wax was more intoxicating than any cellar vintage; it smelled of distances conquered, a sharp contrast to the sodden, turf-smoke reek of the cottages where {family_name} had once huddled against the Atlantic gales. Now, the telegraph key on the desk smelled faintly of ozone and warm oil, a copper throat whistling with the demands of five different ministries.",
+        "The very rag-paper of the foreign gazettes had its own cold, vinegar scent of bleaching powder, a sharp reminder of the mills in Manchester and the timber yards of the Baltic, all bound together by the same invisible threads. This room did not smell of soil or rain, but of the dry, cerebral paper-work of empire—of larders filled and borders drawn with the scratch of a steel nib. It was the scent of a legacy that had outgrown the parish, its heavy, complicated fragrance settling over the shoulders like a greatcoat of lead and gold."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "From the corner where the old family portrait hung, a dry, domestic scent of pressed lavender and linen-closets drifted down, a quiet rebuke from {given_name}’s youth that urged a slow, measured hand before the world’s roaring hearth."
+          ],
+          "choice": {
+            "text": "Maintain the delicate balance of existing alliances, ensuring stability above all.",
+            "motivatorShift": {
+              "politics": 2,
+              "worldview": 1,
+              "tradition": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "global_stability_priority"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The brass telegraph key on its mahogany plinth threw off the sharp, electrical stink of battery acid and hot copper, a modern, impatient smell that practically dared {given_name} to seize the wire and rewrite the maps of three continents."
+          ],
+          "choice": {
+            "text": "Press for new international agreements that expand {family_name}'s global political and economic influence.",
+            "motivatorShift": {
+              "politics": 1,
+              "power": 2,
+              "reach": 2,
+              "tradition": -1
+            },
+            "setFlags": [
+              "global_expansion_priority"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t4:rising"
+    },
+    {
+      "id": "act:ireland:political:poor:t4:rising",
+      "sense": "touch",
+      "prose": [
+        "The oil-rubbed grain of the massive English oak desk under {given_name}'s fingers was cold as river slate, its polished expanse stretching out like the damp, contested plains of a continent. Every document laid upon its dark timber—the stiff, bone-dry pages of the proposed development charter, the grit of coal-dust on the reports from the shipping lanes, the waxy residue of a rival's seal—dragged against the skin with a heavy, physical friction. It was the weight of a hemisphere pressing down through the wood, vibrating up the bones of the forearm like the low rumble of a distant foundry.",
+        "Tracing the dry, embossed seal of a foreign communiqué, the pad of {given_name}'s thumb caught on the brittle edges of red Spanish wax, which crumbled into sharp, tiny shards under the pressure. This paper had been folded by calloused clerks in drafting rooms across the channel, stamped by the damp, ink-stained hands of ambassadors, and carried through salt-spray and carriage-dust; it felt thick, fibrous, and cold, entirely devoid of the warm, fleshy grip of local politics. Here was the dry, unyielding touch of statecraft, where every parchment-edge threatened a shallow cut that could bleed a treasury dry.",
+        "Over the arm of the carved chair draped a length of heavy Lyon silk, a gift from a visiting envoy, its fabric slipping through the fingers with a cool, deceptive wateriness that offered no real warmth against the drafty corners of the room. It was a fragile skin, easily snagged on a ragged nail or the sharp brass corner of an inkwell, a silent warning of how easily these international entanglements could unravel. The scale of the {family_name} reach had grown so vast that every surface, from the rough grain of state papers to the slick metal of the drawer-pulls, seemed charged with a static current that prickled against the skin."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The ribbed silver sleeve of the dip-pen settled into the calloused groove of {given_name}'s finger, its cold, heavy barrel carrying the oil of a dozen ancestors who had held it to sign away forests, futures, and the lives of common men to secure the {family_name} name."
+          ],
+          "choice": {
+            "text": "Endorse the international development bank, channeling resources to bolster fragile nations.",
+            "motivatorShift": {
+              "worldview": 2,
+              "reach": 1,
+              "wealth": -1,
+              "power": 1
+            },
+            "setFlags": [
+              "supported_development_bank"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The heavy, hand-cut crystal paperweight felt freezing and dense in the palm, its sharp-bevelled facets biting deep into the meat of the hand with the hard, clean promise of unyielding leverage."
+          ],
+          "choice": {
+            "text": "Lobby for preferential trade agreements that solidify {family_name}'s economic influence in key regions.",
+            "motivatorShift": {
+              "wealth": 2,
+              "power": 2,
+              "reach": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "pursued_preferential_trade"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "A rival political family, ascendant in a powerful neighboring nation, has openly questioned {family_name}'s commitment to a critical international security pact. Do you publicly reassert your unwavering support, or subtly signal a willingness to renegotiate terms to your advantage?",
+        "options": [
+          {
+            "text": "Issue a strong statement reaffirming full commitment to the pact, prioritizing unity.",
+            "motivatorShift": {
+              "politics": 2,
+              "honor": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "reaffirmed_pact_unity"
+            ]
+          },
+          {
+            "text": "Dispatch private envoys to explore renegotiation, aiming to leverage the situation for {family_name}'s strategic gain.",
+            "motivatorShift": {
+              "politics": 1,
+              "power": 2,
+              "reach": 1,
+              "honor": -1
+            },
+            "setFlags": [
+              "explored_pact_renegotiation"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t4:midpoint"
+    },
+    {
+      "id": "act:ireland:political:poor:t4:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The relentless, mechanical teeth of the Creed teleprinters chewed through paper ribbons next door, their dry chatter sounding like distant infantry skirmishes translated into ink. In the ante-chamber, the low, wet sibilance of three simultaneous telephone operators, plugging brass jacks into the switchboard, formed an oily undercurrent of statecraft. {given_name} stood in the center of this dry storm, listening to the hollow, percussive thud of a coal freighter's horn signaling from the docks—a heavy, iron groan that once would have signaled exile for their ancestors, but now merely announced the arrival of the family's cargo.",
+        "Through the static-choked throat of the shortwave receiver came the thin, brittle voice of a foreign secretary, his vowels pinched and nasal as they dissolved into the roar of atmospheric distortion. That dry rattle of the airwaves was punctuated by the sharp, wooden clack of a gavel from the international tribunal newsreel playing in the basement theater—a sound that tried to mimic the finality of a rifle shot but lacked its leaden weight. This was the noise of the new empire: a cacophony of paper, wireless crackle, and the dry rustle of treaties, all humming with the terrible vibration of a world being rebuilt by the loud and the desperate.",
+        "Yet, beneath the clatter of the machines, there came the soft, sliding sibilance of two junior secretaries speaking the old tongue in the corridor—a quiet, conspiratorial murmur of vowels that had survived famine and gallows, now carrying coffee and files. It was an ancient, quiet cadence that anchored {given_name} to the damp earth of their beginnings, even as the global roar of the switchboard threatened to drown it out. Every ring of the bell, every tear of the teletype ribbon was a ledger entry in the family's account, a sound that would echo from these high-ceilinged offices down into the wet, silent ditches of the provinces."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The dry, heavy brass tick of the longcase clock in the corner fell like slow drops of water, demanding the cool, unhurried pace of the long game."
+          ],
+          "choice": {
+            "text": "Advocate for calm and multilateral negotiations to de-escalate a burgeoning international conflict.",
+            "motivatorShift": {
+              "worldview": 2,
+              "politics": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "pursued_multilateral_peace"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The distant, savage roar of a mobilization rally in a foreign square, captured on the low-frequency band of the wireless, set the blood hum-humming with the temptation of a bolder stroke."
+          ],
+          "choice": {
+            "text": "Quietly support a nascent political movement abroad that aligns with {family_name}'s long-term strategic interests.",
+            "motivatorShift": {
+              "power": 2,
+              "politics": 2,
+              "reach": 1,
+              "worldview": -1
+            },
+            "setFlags": [
+              "supported_foreign_movement"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [
+        {
+          "wave": "italian",
+          "atTier": 4,
+          "crossing": "The scent of dry, imported Toscano tobacco and wet wool cut through the bitter ozone of the teleprinter ink as a representative of the rival Italian dynasty stepped from the telephone booth, his dark eyes locking onto {given_name} with a cool, knowing nod. In his hand, the visitor held the carbon-copy routing slips for the trans-Atlantic cables—a silent, threatening demonstration that while the {family_name} line held the physical docks, these Mediterranean newcomers now controlled the very copper wires that authorized the ships to unload.",
+          "relation": "opposing"
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t4:turn"
+    },
+    {
+      "id": "act:ireland:political:poor:t4:turn",
+      "sense": "sight",
+      "prose": [
+        "Through the high-paneled, floor-to-ceiling glass of the executive suite, the gray stone and rising iron of the metropolis unfolded like a dark-ribboned shroud, the cold river cutting its path toward the sea where cargo hulks lay like iron filings drawn to a magnet. Every slate roof and soot-stained chimney seemed to register the long shadow of {family_name}; from the subsidized dry docks to the concrete teeth of the outer harbor, the landscape was less a city than a ledger of their family's capital. Beyond the bay, the horizons were thick with coal-smoke, where merchant vessels carried the treaties {given_name} had secured with decades of patient pressure.",
+        "In the corner, the light caught the heavy brass meridian of an antique globe, its vellum scarred by scores of red sealing-wax pins that marked their diplomatic outposts, grain silos, and private telegraph stations. Next to it, the wood-paneled walls held a gallery of silver-gelatin portraits—stern prime ministers and hollow-eyed ambassadors staring out from their heavy oak frames, their eyes flat and demanding under the office lamps. The sheer, crowded geometry of these alliances looked less like a network of peace than a web of black iron threads, taut enough to snap at the first touch of frost.",
+        "On the mahogany desk, the morning's broadsheet lay open, its black lead type stark and wet-looking under the green banker's lamp, announcing the mobilization along the frontier with the blunt finality of an obituary. The ink seemed to bleed slightly into the cheap rag paper, a dark stain that contrasted sharply with the bright, indifferent sun now striking the brass fittings of the room. It was a clear, terrible vision of a world poised on a razor’s edge, where one signature could either prop up the dry timber of the old league or set the entire continent ablaze."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The sight of the old banking quarter below, its Doric columns and soot-stained granite standing firm against the North Sea wind, suggested the heavy, reliable safety of the old treaties."
+          ],
+          "choice": {
+            "text": "Allocate significant resources to reinforce and reform existing global organizations, building consensus.",
+            "motivatorShift": {
+              "politics": 2,
+              "worldview": 2,
+              "tradition": 1,
+              "power": -1
+            },
+            "setFlags": [
+              "reinforced_global_institutions"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The raw steel skeletons of the new districts, rising high and sharp against the clouds with aggressive ambition, demanded an entirely new order, built by their own hands."
+          ],
+          "choice": {
+            "text": "Propose a bold, entirely new international framework to address the crisis, bypassing traditional structures.",
+            "motivatorShift": {
+              "power": 2,
+              "reach": 2,
+              "worldview": 1,
+              "tradition": -1
+            },
+            "setFlags": [
+              "proposed_new_global_framework"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "A catastrophic global conflict looms, sparked by escalating tensions between two rival empires. As {full_name}, holding the full, terrible weight of {family_name}'s financial and diplomatic leverage, how do you choose to steer the coming storm?",
+        "options": [
+          {
+            "text": "Lead an unprecedented diplomatic offensive, leveraging every connection to forge a fragile peace agreement.",
+            "motivatorShift": {
+              "politics": 3,
+              "honor": 2,
+              "worldview": 2,
+              "power": 1,
+              "reach": 1
+            },
+            "setFlags": [
+              "forged_global_peace_agreement"
+            ]
+          },
+          {
+            "text": "Rally a coalition of allied nations to impose decisive economic and military pressure, forcing a resolution in their favor.",
+            "motivatorShift": {
+              "power": 3,
+              "reach": 3,
+              "politics": 2,
+              "worldview": -1
+            },
+            "setFlags": [
+              "imposed_coalition_resolution"
+            ]
+          },
+          {
+            "text": "Prioritize the immediate safety and prosperity of nations aligned with {family_name}, retreating from direct intervention in the wider conflict.",
+            "motivatorShift": {
+              "lineage": 2,
+              "wealth": 1,
+              "politics": -1,
+              "reach": -2
+            },
+            "setFlags": [
+              "prioritized_aligned_nations"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t4:close"
+    },
+    {
+      "id": "act:ireland:political:poor:t4:close",
+      "sense": "taste",
+      "prose": [
+        "The champagne lingering in the throat is no longer sweet; it has turned to a thin, cold tin on the back of the tongue, the dry sediment of a vintage bought with fifty years of silence. It tastes of the salt-crust on old ledgers and the bitter rind of concessions signed in low-lit rooms where the hearth-fire has died to gray ash. For {given_name}, this is the flavor of the summit: not the clean, high wind of the hills, but the greasy residue of tallow candles and foreign ink, the heavy weight of a triumph that arrived only after the youth of the house had run dry.",
+        "To rinse the palate of the treaty-makers' sugar, there remains only the black dregs of the pan-boiled leaf—the bitter, smoke-cured brew of the western cabins that the family carried in iron kettles through every bitter crossing. It scalds the roof of the mouth with the taste of bog-turf and well-water drawn from cold limestone, a sharp reminder of the long, wet dark from which this fortune was dug. Every sip is an inheritance of iron and grease, a sour tonic to settle the stomach after the soft, cloying wines of the capital have done their work.",
+        "Beneath it all lies the dry, alkaline dust of the parchment itself, a powder that clings to the lips like lime-wash from a tenant's wall. To press the signet home is to taste the bitter gall of the oak-tannin ink, the dark, permanent salt that binds the three kingdoms to the name of {family_name}. This is the final draft, the dry bread of law that will feed the heirs when the meat of the conquest has rotted; it is a world remade not by the sword, but by the slow, ink-stained tongue of the clerk, tasting of grease, paper-fiber, and the cold iron of the treasury."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "A single, unwatered dram of five-decade malt—tasting of charred oak and the peat smoke of an old parish—burns down the throat like liquid iron, settling the resolve to lock the gates and guard what has been torn from the earth."
+          ],
+          "choice": {
+            "text": "Consolidate the line's global political assets, ensuring stability and enduring influence for the next generation.",
+            "motivatorShift": {
+              "politics": 2,
+              "lineage": 2,
+              "tradition": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "consolidated_global_assets"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "A slice of sun-warmed orange, heavy with the oily, foreign perfume of Mediterranean groves, stings the tongue with a wild, citric heat—a sharp summons to send the ships further into the dark."
+          ],
+          "choice": {
+            "text": "Instruct the heir to vigorously pursue new frontiers of influence and challenge the existing world order.",
+            "motivatorShift": {
+              "reach": 2,
+              "power": 2,
+              "worldview": 1,
+              "lineage": 1
+            },
+            "setFlags": [
+              "heir_pursue_new_frontiers"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    },
+    {
+      "id": "act:ireland:political:poor:t5:open",
+      "sense": "smell",
+      "prose": [
+        "The orbital station breathed in shallow, sterile sighs, its artificial lungs smelling of thrice-scrubbed nitrogen and the bitter, ionized zinc of active radiation shields. Yet beneath that cold, engineered top-note lay a deliberate subversion: the thick, oily grease of slow-burning peat smoke drifting from {full_name}'s inner chambers, a dark thread of bog-rot and ancient hearth-ash imported across the light-years to choke out the clean, modern vacuum. It was an odor that had no business in the high black—clinging to the lacquered synth-wood panels and the silver-threaded drapes like a wet mist off the hills—but it was the only scent that reminded the family who they were before they traded the soil for the stars.",
+        "Every breath here was a luxury taxed by the millibar, smelling of the damp, green mulch from the hydroponic soy-farms in the ring-girdles, mixed with the sharp, vinegar tang of curing silicon-adhesive on the main consoles. On the desk of {given_name}, a silver pot of black tea steeped, sending up its dry, tannic steam to compete with the metallic scent of copper-leafed schematics fresh from the electrostatic printers. This was the perfume of an office that had ceased to govern a country and begun to rule an orbit, where the smell of old paper had been replaced by the dry, hot breath of active cooling fans and the faint, sweet decay of artificial earth.",
+        "Today, the very vents seemed to rattle with the crisp, electric scent of impending transit, a sharp, clean odor like wet limestone after a summer storm, carried up from the dry-dock where the great jump gate hung suspended in the dark. It was the scent of a new covenant, smelling of scorched alloy, flux-solder, and the raw, unwashed draft of interstellar space waiting to be tamed. The air did not merely sustain life; it carried the heavy, intoxicating musk of a dynasty's final ascent, a fragrance of ozone and damp moss that bound the old earth to the cold, glittering silence of the deep."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You draw the heavy, greasy smoke of the peat diffuser deep into your lungs, letting the dark, damp smell of the old bogs settle like lead in your chest, a stubborn anchor against the weightless drift of this steel tomb."
+          ],
+          "choice": {
+            "text": "Embrace the traditions that connect us to our origins, even as we reach for new frontiers.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 0,
+              "worldview": -1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 0,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [
+              "milestone_soil_remembrance"
+            ],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You wave away the heavy, suffocating scent of the hearth-fire, turning instead to the clean, sharp bite of the copper schematics and the dry, cold draft of the launch-bay air that smells of the tomorrow you are building."
+          ],
+          "choice": {
+            "text": "Focus on the bold new opportunities, leaving sentimentality to those who cannot see the future.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 1,
+              "worldview": 1,
+              "power": 0,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 2
+            },
+            "setFlags": [
+              "milestone_frontier_expansion"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t5:rising"
+    },
+    {
+      "id": "act:ireland:political:poor:t5:rising",
+      "sense": "touch",
+      "prose": [
+        "Your fingertips rest on the milled, freezing edges of the control console, where the raw metal resists your warmth with the absolute indifference of vacuum-forged titanium. Beyond the curved viewport, the skeletal frame of the star-city hangs suspended, a cold web of wire and light strung against the void. Every point of physical contact—from the synthetic leather clinging to your shoulders to the microscopic hum vibrating through the soles of your boots—registers as a calculated pressure, a synthetic womb designed to sustain a fragile breed at the edge of the sky.",
+        "In your grip, the dry, crumbling grain of a hand-stitched leather ledger offers a brief, grounding friction—a heavy archive of census tallies and soil assays salvaged from terrestrial dust. Beside it, the sleek slate of the digital manifest rests light as a dry leaf in your palm, though its glass screen cold-burns your skin with the sheer mass of its numbers. This silent glass holds the destinies of three hundred thousand souls who have sworn their lives to the {family_name} name, waiting to be spilled onto an unmapped world.",
+        "Underfoot, a low, tectonic rattle judders up through the structural spars—the seismic thrum of atmospheric scrubbers and terraterminal drills boring into the raw crust of the world below. It is a coarse, relentless pulse that climbs your calves and settles in your chest, the sensation of mountains being cracked open and rivers bent by brute force. The future is not a distant dream; it is this violent vibration, a physical weight demanding a hand steady enough to seize the iron lever of history."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The slick, oil-resistant glass of the terminal keys yields beneath your thumbs, cold and receptive, waiting for the hard strike that will launch the industrial drills."
+          ],
+          "choice": {
+            "text": "Prioritize rapid expansion and resource exploitation to secure our claim swiftly.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 1,
+              "power": 1,
+              "tradition": 0,
+              "honor": -1,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "Your palm grazes the nicked, oil-rubbed ashwood of a surveyor’s level brought from the old world, its grain worn smooth by dead ancestors who knew that a home must be built slower than a fortress."
+          ],
+          "choice": {
+            "text": "Emphasize sustainable development and the well-being of the pioneering communities, even if it means slower growth.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": -1,
+              "power": -1,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "secondary",
+        "prompt": "The allocation of initial resources for the colony requires a firm hand. Do we push for rapid industrialization, or invest in the cultural and social foundations?",
+        "options": [
+          {
+            "text": "Direct the majority of resources to industrial infrastructure, establishing a strong economic base.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 0,
+              "reach": 1
+            },
+            "setFlags": [
+              "colony_industrial_focus"
+            ]
+          },
+          {
+            "text": "Allocate funds to education, cultural preservation, and social programs, fostering a cohesive new society.",
+            "motivatorShift": {
+              "wealth": -1,
+              "politics": 0,
+              "worldview": -1,
+              "power": -1,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 0
+            },
+            "setFlags": [
+              "colony_social_focus"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t5:midpoint"
+    },
+    {
+      "id": "act:ireland:political:poor:t5:midpoint",
+      "sense": "sound",
+      "prose": [
+        "The Grand Chamber did not roar; it hissed with the sibilant rustle of silk robes and the wet, rhythmic clack of mechanical voting keys falling into place. Beneath the high, cold dome, the procedural clock dripped seconds like lead shot dropping into oil—a heavy, metallic tolling that seemed to bruise the ears of the assembled ministers. Every voice that rose to the floor was stripped of its wet human warmth, flattened by the brass resonators of the dais into a dry, authoritative rasp, while beneath their boots, the deep, gut-shaking drone of the life-support scrubbers ground on, an iron heartbeat reminding them all of the vacuum waiting just beyond the seal.",
+        "Then came the tearing sound—a sharp, violent rip of high-altitude static that sliced through the dry parliamentary murmurs like a blade through parchment. It was the raw, untamed frequency of the Proxima fringe, a jagged squall of electromagnetic hiss and spitting interference that resolved for one agonizing second into a human voice, cracked with thirst and trembling with the thrum of a foreign engine. The transmission died in a squeal of feedback, but the implication remained hanging in the silence like a ringing in the ears: the heavy, iron-shod stomp of a rival clan already clearing timber on the far side of the ridge.",
+        "In the dim sanctuary of the private salon, the air was supposedly softer, yet the pluck of the wire-strung harp played by the family's old tutor was too sharp, its traditional air sounding more like a lament than a comfort. Each vibration of the dry ashwood frame shivered against the ribcage of {full_name}, a brittle music that tried to drown out the wet, rhythmic click-clack of the ticker-tape feeding colonial logistics into the hearthside terminal. Even here, behind three spans of leaded glass, the low, electric whistle of the family's secured data-line persisted, a high-pitched dental drill of numbers and names that turned the old song into a dirge for lands they had not yet seen."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The rising hubbub of the chamber floor is a chaotic, wet wave of panicked voices. To stand silent is to be drowned out; only an iron throat, spitting the cold logic of the {family_name} interest, can cut through this high-altitude static and claim the new worlds by right of first bark."
+          ],
+          "choice": {
+            "text": "Present a forceful argument for swift and unilateral expansion, leveraging our current political capital.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 2,
+              "worldview": 0,
+              "power": 2,
+              "tradition": -1,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The quiet, resonant hum of the tutor's harp lingers in the ear like an old promise. Amidst the mechanical screaming of the tickers, a wiser voice would seek the harmonic frequencies of old treaties and shared blood, weaving these disparate factions into a single, resonant chord."
+          ],
+          "choice": {
+            "text": "Advocate for a measured, cooperative approach, seeking consensus among the nascent stellar powers.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": -1,
+              "power": -1,
+              "tradition": 1,
+              "honor": 1,
+              "lineage": 0,
+              "reach": 0
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [
+        {
+          "wave": "italian",
+          "atTier": 5,
+          "crossing": "The dry, metallic rasp of the brass resonators could not drown out the sharp, rhythmic snap of the {crossing_family_name} patriarch's silver signet ring tapping against his voting key, a deliberate signal of defiance directed at our gallery. As the mechanical tallies fell into place, his gaze locked with ours, sealing a silent, backroom transaction that traded their bloc's support of the municipal charter for {family_name}'s concession on the deep-water shipping lanes. This calculated trade of legislative leverage secured our ascension to the national stage, though it bound our harbor empires to their goodwill forever.",
+          "relation": "contributing"
+        }
+      ],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t5:turn"
+    },
+    {
+      "id": "act:ireland:political:poor:t5:turn",
+      "sense": "sight",
+      "prose": [
+        "Through the thick quartz of the observation deck, the new system spreads its cold, raw limbs across the dark. The emerald-and-ochre curve of the primary world is no longer a silent sphere on an astrogator's chart, but a living hearth-fire, its atmosphere pricked by the steady, artificial constellations of orbital platforms. Small, hard points of light—freighters towing raw ice, bulk carriers laden with rare earths—crawl along the shipping lanes like glowing dust motes caught in a beam of sun. This is the empire of {family_name}, written not in ink, but in the white-hot scars of atmospheric drives and the steady pulse of navigational beacons.",
+        "Yet, on the far, sulfurous rim of the gas giant, the view is fouled by the skeletal, orange-iron rigs of a rival syndicate, their massive strip-miners tearing into the rings like rusted teeth. It is a jagged, ugly geometry, completely at odds with the elegant, sweeping arcs {given_name} ordained for these skies. The sight of their harvesters, casting long, dark shadows across the hydrogen clouds, is a silent but unmistakable trespass, an insolent monument erected in the very backyard of your dynasty.",
+        "Closer down, where the planetary crust meets the vacuum, the first permanent settlement clings to the rock like a cluster of silver barnacles. The translucent membranes of the agricultural domes glow with a pale, simulated daylight, while just beyond their fragile glass, the smokestacks of heavy refineries belch gray, unscrubbed soot into the thin atmosphere. It is a beautiful, monstrous hybrid—a testament to what {full_name} set in motion, and a reminder that without a hard hand at the helm, this frontier will choke on its own wild, unguided growth."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "Your eyes linger on the skeletal silhouettes of those rival rigs, measuring the space between their defensive grids and calculating the exact cost of starvation."
+          ],
+          "choice": {
+            "text": "Launch a pre-emptive economic offensive to cripple the rival's resource base, securing our dominance.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 1,
+              "power": 2,
+              "tradition": -1,
+              "honor": -1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "You look past the outer platforms to the fragile, glowing domes below, knowing that a house built on quicksilver must be bound by common law before the storm-winds rise."
+          ],
+          "choice": {
+            "text": "Focus on strengthening internal governance and fostering unity among our established colonies, building from within.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 2,
+              "worldview": -1,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": -1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "decision": {
+        "tier": "major",
+        "prompt": "The expansion into this new star system presents a choice: do we prioritize immediate territorial claims and resource control through any means, or focus on establishing a just and enduring political foundation for future generations?",
+        "options": [
+          {
+            "text": "Aggressively expand our territorial claims and secure all key resources, using political and economic leverage.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": 2,
+              "worldview": 1,
+              "power": 3,
+              "tradition": -1,
+              "honor": -2,
+              "lineage": 1,
+              "reach": 3
+            },
+            "setFlags": [
+              "major_claim_expansion"
+            ]
+          },
+          {
+            "text": "Establish a framework of equitable governance and shared prosperity among all new settlements, even with slower growth.",
+            "motivatorShift": {
+              "wealth": -2,
+              "politics": 2,
+              "worldview": -1,
+              "power": -2,
+              "tradition": 1,
+              "honor": 2,
+              "lineage": 2,
+              "reach": -1
+            },
+            "setFlags": [
+              "major_equitable_governance"
+            ]
+          },
+          {
+            "text": "Forge powerful alliances with independent factions and smaller colonies, creating a unified front against larger powers.",
+            "motivatorShift": {
+              "wealth": 1,
+              "politics": 3,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 1,
+              "lineage": 1,
+              "reach": 2
+            },
+            "setFlags": [
+              "major_forge_alliances"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "act:ireland:political:t5:close"
+    },
+    {
+      "id": "act:ireland:political:poor:t5:close",
+      "sense": "taste",
+      "prose": [
+        "The celebratory banquet held in the new orbital parliament tastes of an expensive, engineered resurrection. The genetically teased star-fruit offers a cold, unctuous sweetness that never knew soil, while the synthetic marrow-proteins carry a salt-iron bite mimicking the fat of a fatted calf that never walked a green hill. It is a flavor profile built on dry air, cold metal, and high-altitude treaty ink, a testament to the {family_name} line’s stubborn knack for digesting whatever sterile soil they are planted in. Every bite is a luxury won from vacuum, a clean, manufactured triumph that tastes of gold-leaf and ambition.",
+        "Then comes the amber sting of the vat-grown barley-spirit, a vintage mimicking the heavy peat-reek of long-drowned bogs, leaving a ghost of wood-smoke and wet stone on the tongue. It is a fabricated memory, yet it burns with the same stubborn, medicinal heat that kept their ancestors alive through the salt-bitten winters of their long exile. {Full_name} raises the heavy, low-gravity crystal, letting the sharp, alkaline bitterness of the finish sit at the back of the throat—a dry reminder of the quarry-dust and steerage-bile they had to swallow to buy their way into these pristine heights.",
+        "As the council adjourns, the cold, copper-flavored draft from the gallery vents washes over the palate, tasting of vacuum-sealed nickel and the dead, clean chill of the void. It is the taste of a frontier without end, a vast silence waiting to be broken and plowed like the stony hills of home, but written now in light-years instead of acres. The long voyage from the timber-starved coffin ships has ended here, on the tongue, in the sweet, cold iron of an empire they have carved from the dark."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "The tongue remembers the fat of the land, even when that land is a pressurized ring spinning in the dark. You swallow the sweetened pulp of the harvest, resolving to lock these hard-won riches behind walls of law and ledger."
+          ],
+          "choice": {
+            "text": "Focus on consolidating our economic and political gains, ensuring a stable foundation for the next generation's growth.",
+            "motivatorShift": {
+              "wealth": 2,
+              "politics": 1,
+              "worldview": 0,
+              "power": 1,
+              "tradition": 0,
+              "honor": 0,
+              "lineage": 1,
+              "reach": 1
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        },
+        {
+          "prose": [
+            "The simulated smoke of the peat lingers, bitter and deep, like an oath sworn in a cold kitchen two hundred years ago. You let the old heat settle in your chest, knowing that without the blood-ways, this glass palace is nothing but ice."
+          ],
+          "choice": {
+            "text": "Pass on a legacy of strong leadership guided by our established principles and traditions, preserving our identity amidst change.",
+            "motivatorShift": {
+              "wealth": 0,
+              "politics": 1,
+              "worldview": -1,
+              "power": 0,
+              "tradition": 2,
+              "honor": 1,
+              "lineage": 2,
+              "reach": 0
+            },
+            "setFlags": [],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}

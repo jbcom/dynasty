@@ -1,3 +1,4 @@
+import { hasPresetLeak } from "../leak";
 import { EventSchema, type GameEvent, type Place, type Trope } from "../schema";
 import { ARCHETYPES } from "../slots";
 
@@ -10,10 +11,6 @@ import { ARCHETYPES } from "../slots";
  * structural + content rules. This is what makes "Gemini does the heavy lifting"
  * safe (the spec's Mode B), because nothing it produces bypasses the engine's rules.
  */
-
-/** Preset-person literals that must never appear in generated copy (mirrors the harness). */
-const LITERAL =
-  /\b(Donald|Trump|Drumpf|Elon|Musk|Kennedy|Fred|Freddy|Errol|Walter Musk|Maye|Ivana|Mary Anne|Elizabeth Christ|JFK|RFK|Joseph Kennedy|Patrick Kennedy|Graham)\b/;
 
 /** The catalog/world context the gate validates a generated event against. */
 export interface GenContext {
@@ -68,7 +65,7 @@ export function validateGenerated(raw: unknown, ctx: GenContext): GenVerdict {
 
   // No preset-person literal in any rendered string (the leak gate at the source).
   for (const s of renderedStrings(ev)) {
-    if (LITERAL.test(s)) {
+    if (hasPresetLeak(s)) {
       reasons.push(`preset-person literal in rendered copy: "${s.slice(0, 80)}"`);
       break;
     }

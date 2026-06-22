@@ -33,6 +33,16 @@ export function rungName(index: number): Rung {
   return RUNGS[clampRung(index)] as Rung;
 }
 
+/**
+ * The SAGA class track a line reads, from its Wealth motivator. The novel corpus authors two tracks —
+ * "poor" and "middle" — so class is a MOVABLE rung: a line that climbs above centrist Wealth reads the
+ * middle track, one at or below it reads the poor track. (Maps the [-100,100] Wealth axis to the two
+ * authored tracks; widens naturally if richer tracks are authored later.) Pure.
+ */
+export function sagaClassForWealth(wealth: number): "poor" | "middle" {
+  return wealth > 0 ? "middle" : "poor";
+}
+
 /** A line's class position: the current rung + how far it has fallen below its high-water mark + the mark. */
 export interface ClassState {
   /** Current rung index (0..MAX_RUNG). Selects the eligible class-track. */

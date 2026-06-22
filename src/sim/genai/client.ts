@@ -12,10 +12,19 @@ import { GoogleGenAI } from "@google/genai";
 export type GenerateFn = (system: string, prompt: string) => Promise<string>;
 
 /**
- * Build a live GenerateFn backed by Gemini. Throws if no key — generation is opt-in
- * and never silently no-ops. `model` defaults to a current Gemini model id.
+ * Current GA Gemini model — used for BOTH bulk generation and the editorial QA pass.
+ * 3.5-flash is the newest frontier-class Flash and outperforms the older 3.1-pro, so one
+ * model serves both tiers. Override with GEMINI_MODEL (generation) / GEMINI_QA_MODEL (QA).
  */
-export function geminiGenerate(apiKey: string, model = "gemini-2.5-flash"): GenerateFn {
+export const DEFAULT_GEN_MODEL = "gemini-3.5-flash";
+/** The model used for the editorial QA pass. Same frontier Flash. Override with GEMINI_QA_MODEL. */
+export const DEFAULT_QA_MODEL = "gemini-3.5-flash";
+
+/**
+ * Build a live GenerateFn backed by Gemini. Throws if no key — generation is opt-in
+ * and never silently no-ops. `model` defaults to the current GA Gemini model id.
+ */
+export function geminiGenerate(apiKey: string, model = DEFAULT_GEN_MODEL): GenerateFn {
   if (!apiKey) throw new Error("geminiGenerate: missing API key — generation needs a Gemini key");
   const ai = new GoogleGenAI({ apiKey });
   return async (system, prompt) => {
