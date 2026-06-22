@@ -37,6 +37,18 @@ surface-unique (2520/2520 distinct first lines) but the ARCHITECTURE is template
 spine GENERATOR stamps one skeleton 504× ([[craft-spines-not-generator]]). This drives all three:
 uniqueness ([[uniqueness-genuine-intersections]]), scannability ([[scannability-game-novel-balance]]),
 and genuine intersections.
+### ONB (user, 2026-06-22): onboarding must let the player CHOOSE gender + given name
+The funnel is PERIOD→CLASS→WAVE→SURNAME; gender + given name are auto-defaulted (save.ts
+`gender:"male"`, given name seeded) and were DEFERRED to in-game reveal beats by design
+(OnboardingScreen comment) — the user calls this a significant weakness. Sim ALREADY plumbs both
+end-to-end (FoundingInput.gender → Composition.gender → pickGivenName/suggestGivenNames, save
+round-trips). The gap is UI-only. NOT corpus-blocked — doable now while UQ-2 corpus runs.
+- [ ] **ONB-1 add GENDER + GIVEN-NAME selection to onboarding.** Extend the funnel: after SURNAME (or
+  alongside), let the player pick gender (male/female) and a given name (suggestGivenNames offers 3 +
+  free-type, like surname). Thread through onComplete → TitleScreen → founding (FoundingInput.gender +
+  an explicit given name, overriding the seeded pick). Update save format (already has gender; add the
+  chosen given). Keep deterministic + seeded. Tests: onboarding collects both; founding honors them;
+  save round-trips; visual test for the new step. Live-verify in Chrome.
 - [x] **UQ-1 spine + guidance ARCHITECTURE — BUILT (DRAFT guidance).** spine.ts: 6 arc shapes
   (rise/collapse/holding/reinvention/rivalry/windfall), per-cell selection, open+succession-close invariant.
   `guidance.json`: bespoke (era×class) briefs (arc/tone/rhythm/scannability + qaLookFor/qaReject) + per-WAVE
