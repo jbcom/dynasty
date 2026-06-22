@@ -13,6 +13,7 @@ import guidanceData from "../../data/saga/guidance.json" with { type: "json" };
 import type { Rung } from "../classRung";
 import { hasPresetLeak } from "../leak";
 import { SagaFileSchema } from "../saga/schema";
+import type { DecisionArchitecture, SpineAct } from "../saga/spineAuthored";
 import type { Archetype } from "../slots";
 import { type SceneSlot, spineFor } from "../spine";
 
@@ -225,6 +226,66 @@ export function buildScenePrompt(req: SceneRequest): string {
     `Motivator axes for every motivatorShift: ${MOTIVATOR_AXES}.`,
     `Return ONLY the JSON object { "acts": [...], "scenes": [...] }.`,
   ].join("\n");
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FS-3b — the AUTHORED-SPINE generation path (one dynasty line, distinct per-era decision architecture)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Each DECISION ARCHITECTURE → the concrete prompt instruction that gives the era's pivotal decision its
+ * distinct SHAPE. This is what makes generated decisions structurally DIVERGE era to era instead of all
+ * being "the community stands at a crossroads → 3 generic options" ([[founding-spine-pivot]] / FS-3). The
+ * GenAI must build the act's pivotal decision in THIS shape.
+ */
+const ARCHITECTURE_PROMPT: Record<DecisionArchitecture, string> = {
+  bargain:
+    "BARGAIN: a founding-era COMPACT — the line trades something now (loyalty, coin, a son, a principle) for a CLAIM on the future. Options name the COST and the claim; not factions, not a yes/no — each is a different price for a different future.",
+  allegiance:
+    "ALLEGIANCE: pick a SIDE as a conflict splits the world (revolution / civil war / labor vs. capital). Options ARE the factions; the weight is who you stand with when neutrality ends — and what it costs the line either way.",
+  venture:
+    "VENTURE: a WAGER — risk the line's capital/standing on a bet the era's epoch will reward or ruin. Options differ by RISK TIER (cautious hedge / leveraged plunge / a contrarian bet against the herd), not by ideology.",
+  succession:
+    "SUCCESSION: the dynastic FORK that ends the generation. EXACTLY ONE option takes a partner AND raises heirs (mark it `succession:{takesPartner:true,begets:1-3}`); the others are real alternatives that do NOT carry succession. The line's most consequential choice.",
+  reckoning:
+    "RECKONING: the line's accumulated way-of-making-wealth (or its sins) comes DUE — a prosecution, a scandal, a moral debt. Options = face it openly / bury it / weaponize the threat. The past is the antagonist, not a rival.",
+  platform:
+    "PLATFORM: a mass-REACH play — shape the story the country tells itself (press / airwaves / the feed). Options differ by WHAT TRUTH you bend and how far — sincerity vs. spectacle vs. outright manufacture.",
+  expansion:
+    "EXPANSION: the terminal STELLAR gambit. The options ARE the seeds of the distinct endings — FORGE ALLIES among the worlds (covenant) / SEIZE COLONIES (conquest) / GO QUIET + HIDDEN on a world that draws no notice. Each is a different fate for the line among the stars.",
+  doctrine:
+    "DOCTRINE: a worldview COMMITMENT — the line binds itself to a creed (faith / ideology / omertà / a dynastic code) that will gate later branches. Mutually-exclusive identity choice; options are creeds, and the choice is irreversible in spirit.",
+};
+
+/**
+ * Build the GenAI prompt for one AUTHORED SPINE act (FS-3b). Unlike `buildScenePrompt` (the 504-cell
+ * path), this drives the ONE dynasty line and injects the era's DECISION ARCHITECTURE so the pivotal
+ * choice takes that era's distinct shape. `gen0Brief` (optional) carries the player's founding identity.
+ */
+export function buildSpinePrompt(act: SpineAct, gen0Brief = ""): string {
+  const architectures = [...new Set(act.beats)];
+  const archBlock = architectures.map((a) => `- ${ARCHITECTURE_PROMPT[a]}`).join("\n");
+  return [
+    `Flesh this generation of the ONE dynasty line into the novel. This is the line FOUNDED at America's`,
+    `founding and carried toward the stars — America's story as this family's story.`,
+    `Generation ${act.gen}, the ${act.era} (${act.macroAct} macro-act, ~${act.year}).`,
+    gen0Brief ? `\n${gen0Brief}` : "",
+    "",
+    `THIS ERA'S DECISION ARCHITECTURE — build the act's pivotal choice in EXACTLY this shape (this is what`,
+    `makes each generation structurally distinct; do NOT default to a generic 'crossroads → 3 options'):`,
+    archBlock,
+    "",
+    `TITLE: a DISTINCT chapter title specific to THIS generation's story. Use "${act.titleCue}" only as a`,
+    `register cue — write a fresh title. Keep an "Act ${ROMAN_FOR(act.gen)} — " prefix.`,
+    "",
+    `Ground the prose in the era's real American history (${act.era}, ~${act.year}); the founding family`,
+    `moves through it. Other immigrant families braid in only as woven crossings (do not make them the focus).`,
+    "",
+    `Motivator axes for every motivatorShift: ${MOTIVATOR_AXES}.`,
+    `Return ONLY the JSON object { "acts": [...], "scenes": [...] } for this generation's act + its scenes.`,
+  ]
+    .filter((l) => l !== "")
+    .join("\n");
 }
 
 /**

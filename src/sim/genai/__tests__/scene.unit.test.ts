@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../../data/loadContent";
+import { DYNASTY_SPINE, spineActForGen } from "../../saga/spineAuthored";
 import type { GenerateFn } from "../client";
 import { expand } from "../expand";
 import {
   buildScenePrompt,
+  buildSpinePrompt,
   buildTitlePrompt,
   lineagePassBrief,
   mergeSceneFile,
@@ -250,5 +252,38 @@ describe("QA guidance briefs (UQ-2) — fed from the corrected guidance.json", (
   it("returns an empty brief for an unknown wave (pass runs guidance-free)", () => {
     expect(lineagePassBrief("atlantis")).toBe("");
     expect(scenePassBrief("atlantis", 99, "poor")).toBe("");
+  });
+});
+
+describe("authored-spine generation (FS-3b) — per-era decision architecture in the prompt", () => {
+  it("injects the founding act's distinct architecture (bargain/allegiance, not a generic crossroads)", () => {
+    const g0 = spineActForGen(0)!;
+    const p = buildSpinePrompt(g0);
+    expect(p).toMatch(/ONE dynasty line/);
+    expect(p).toMatch(/America's\s+founding/i);
+    expect(p).toMatch(/BARGAIN:/); // g0 uses bargain + allegiance
+    expect(p).toMatch(/ALLEGIANCE:/);
+    // It must explicitly steer AWAY from the old generic template.
+    expect(p).toMatch(/do NOT default to a generic/i);
+  });
+
+  it("a later era injects a DIFFERENT architecture than the founding era (anti-sameness)", () => {
+    const founding = buildSpinePrompt(spineActForGen(0)!);
+    const broadcast = buildSpinePrompt(DYNASTY_SPINE.find((a) => a.era === "The Broadcast Age")!);
+    expect(broadcast).toMatch(/PLATFORM:/); // broadcast era = platform play
+    expect(broadcast).not.toMatch(/BARGAIN:/); // not the founding shape
+    expect(founding).not.toMatch(/PLATFORM:/);
+  });
+
+  it("the terminal stellar act injects the EXPANSION architecture (seeds the stellar endings)", () => {
+    const stellar = DYNASTY_SPINE.at(-1)!;
+    const p = buildSpinePrompt(stellar);
+    expect(p).toMatch(/EXPANSION:/);
+    expect(p).toMatch(/FORGE ALLIES|SEIZE COLONIES|QUIET/);
+  });
+
+  it("carries the optional founding-identity brief when given", () => {
+    const p = buildSpinePrompt(spineActForGen(0)!, "FOUNDER: Tobias, a Boston printer's son.");
+    expect(p).toContain("Tobias, a Boston printer's son");
   });
 });
