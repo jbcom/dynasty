@@ -276,6 +276,52 @@ describe("Game loop", () => {
     expect(g.view.convergence).not.toBeNull();
   });
 
+  it("interactive convergence: crossing nudges are replay-safe across save/restore (stateless from rung)", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Restore",
+      seed: "convrestore",
+      originId: "composed:ireland:origins",
+    };
+    const drive = (g: Game, steps: number) => {
+      let n = 0;
+      while (!g.finished && n < steps) {
+        const v = g.view;
+        const s = v.saga.scene;
+        if (s) {
+          if (s.decision) {
+            const i = s.decision.options.findIndex((o) => o.succession?.takesPartner);
+            g.pickDecision(i >= 0 ? i : 0);
+          } else if (s.beats.length) g.pickBeat(0);
+          else break;
+        } else if (v.currentEvent) {
+          const c = v.currentEvent.choices[0];
+          if (!c) break;
+          g.choose(c.id);
+        } else break;
+        n++;
+      }
+    };
+    // Uninterrupted full run.
+    const a = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    drive(a, 9999);
+    // Run partway, snapshot, restore into a fresh Game, finish — must reach the identical end. The
+    // crossing nudges are derived from playerRung (in GameState), so restore reconstructs them exactly;
+    // a transient fired-Set would have lost them and diverged.
+    const b1 = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    drive(b1, 40);
+    const b2 = new Game(real, comp.seed, b1.view.state, comp.archetype);
+    drive(b2, 9999);
+    expect(b2.view.state.year).toBe(a.view.state.year);
+    expect(b2.view.convergence?.destination).toBe(a.view.convergence?.destination);
+  });
+
   it("DEPTH-3: succession begets heirs so the line survives across generations (not extinct at gen 2)", () => {
     const real = loadContent();
     const comp = {

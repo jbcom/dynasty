@@ -77,4 +77,19 @@ describe("dynasty world (SS-8)", () => {
     expect(w.rivals[0]!.rung).toBe(0);
     expect(() => nudgeRival(w, "rival:nonexistent", 1)).not.toThrow();
   });
+
+  it("nudgeRival keeps the matching snapshot in sync (glimpses/convergence read snapshots)", () => {
+    let w = advanceWorld(
+      createDynastyWorld(content.places, "ireland", createRng("snapsync")),
+      1950,
+      createRng("adv"),
+    );
+    const snap = w.snapshots[0];
+    if (!snap) throw new Error("no snapshot");
+    const before = snap.rung;
+    w = nudgeRival(w, snap.id, +1);
+    const after = w.snapshots.find((s) => s.id === snap.id);
+    // The snapshot the UI/convergence reads reflects the nudge immediately (not just the agent).
+    expect(after?.rung).toBe(Math.min(before + 1, 5));
+  });
 });

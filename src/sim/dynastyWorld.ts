@@ -138,8 +138,12 @@ export function advanceWorld(world: DynastyWorld, year: number, rng: Rng): Dynas
  */
 export function nudgeRival(world: DynastyWorld, rivalId: string, rungDelta: number): DynastyWorld {
   const agent = world.rivals.find((a) => a.id === rivalId);
-  if (agent) agent.rung = Math.max(0, Math.min(MAX_RUNG, agent.rung + rungDelta));
-  return world;
+  if (!agent) return world;
+  agent.rung = Math.max(0, Math.min(MAX_RUNG, agent.rung + rungDelta));
+  // Keep the matching snapshot in sync — glimpses, convergence endings, and the UI read `snapshots`,
+  // not `rivals`, so without this the nudge would be invisible until the next advanceWorld rebuild.
+  const snaps = world.snapshots.map((s) => (s.id === rivalId ? { ...s, rung: agent.rung } : s));
+  return { rivals: world.rivals, snapshots: snaps };
 }
 
 /**
