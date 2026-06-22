@@ -37,7 +37,13 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
 
       - name: Browser-mode tests (Vitest + Playwright)
-        run: pnpm test:browser
+        # Force the COLD .vite cache that exposed the dep-optimizer reload flake (a runtime-only bare
+        # dep discovered mid-run → full-page reload → "Vitest failed to find the runner"). The fix is
+        # optimizeDeps.include in vitest.config.ts; this rm makes the cold-cache invariant permanent so
+        # any future runtime-only dep missing from that list fails CI loudly instead of flaking.
+        run: |
+          rm -rf node_modules/.vite
+          pnpm test:browser
 
       - name: Build
         run: pnpm build

@@ -65,11 +65,27 @@ push + PR. See [[one-branch-local-review]].
   (caricature portrait/scene compositing) is NOT a polish slice — `src/render` is empty (the module was
   removed; only a stale Portrait.visual screenshot remains), so it's a from-scratch subsystem needing an
   asset pipeline + real 2D caricature art ([[dynasty-ui-conventions]]) — DECIDED to split it out as RB-8.
-- [ ] [WAIT] **RB-8 caricature portrait/scene compositing (new subsystem).** Build src/render: per-act
-  portrait + scene compositing from real 2D assets (caricature only, license-logged in assets.json),
-  wired into the SceneReader/PlayScreen. Needs a design pass (use-case enumeration) + the asset pipeline
-  first; visual-tested. Its own milestone — start from clean main AFTER the consolidation PR (RB-9) merges
-  (avoid touching the branch under review).
+- [x] **RB-8 caricature portrait/scene compositing — DONE on `feat/portrait-scene-compositing` (9 commits).**
+  ALL 5 steps shipped + live-verified in Chrome: palettes (86e03a5), composeScene core (b156dac),
+  SceneStage (7cc67ad), PlayScreen wiring (c68f45b), ending variant (d418d21), rival vignette (a4..),
+  + authored CC0 caricature SVG art (6 archetype bases + 6 silhouettes), license-logged + manifest-tested.
+  LEARNING: repo idiom is authored SVG not raster (corrected the layer paths); the prior "no portraits"
+  test encoded a PROCEDURAL-portrait purge — RB-8's authored faint-backdrop approach legitimately
+  supersedes it (commit body documents the override). Reviewer trio DONE (code MED+3LOW folded, security
+  clean, simplifier folded) + full gate green + live-verified. PR #91 OPENED. [WAIT] CI + merge.
+  Design spec: `docs/superpowers/specs/2026-06-22-rb8-portrait-scene-compositing-design.md`.
+- [ ] [WAIT] **RB-10 audio↔visual era lockstep — IMPL gated on #91 merge.** Design DONE incl. the drafted
+  merged ERA_BANDS table (`docs/superpowers/specs/2026-06-22-rb10-era-lockstep-design.md`). On #91 merge:
+  build `src/sim/eras.ts` (one table both chordForEra + rampForEra read) + agreement-invariant test, then
+  era-crossing lockstep + ending audio sting. Visual+audio tested.
+- [ ] [WAIT] **RB-8 PR #91 — CI green + merge.** Flake ROOT-CAUSED + deterministically fixed: the
+  "Vite reloaded a test / failed to find the runner" failure was a concurrent dep-optimizer race across
+  browser test files; `fileParallelism: false` (613ff7d) serializes them — 3 clean local runs. Both
+  CodeRabbit findings folded + threads resolved. Monitor booohudmo merges on green; keep CD green after.
+- [ ] [WAIT] **RB-11 portrait depth — class-tier + mood overlay layers.** ONCE RB-10 lands: author the
+  tier(class) + mood(pole) SVG overlay layers composeScene already references (they currently hide-on-error),
+  so the portrait deepens with class + dominant motivator; license-logged + manifest-tested + live-verified.
+  Keeps the queue non-empty behind RB-10 ([[never-drain-queue]]); un-WAIT after RB-10 merges into the branch.
 - [x] **RB-4 surface interactive convergence — DONE (forward commit).** Added the rival's rung to the
   Glimpse + a ★-per-rung indicator in the "Other lines" strip, so the player sees their crossings move a
   rival's standing. Browser-tested.

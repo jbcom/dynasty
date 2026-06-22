@@ -22,6 +22,17 @@ describe("SagaDriver", () => {
     expect(frame.scene).toBeTruthy();
     expect(frame.scene?.prose.length).toBeGreaterThanOrEqual(2);
     expect(d.active).toBe(true);
+    // RB-8: the frame carries the active cell so the render layer can compose the portrait/wash.
+    expect(frame.cell).toEqual({ wave: "ireland", archetype: "economic", tier: 0 });
+    // The cell's archetype is the typed Archetype (no cast needed downstream) — one of the six poles.
+    expect([
+      "economic",
+      "political",
+      "technological",
+      "religious",
+      "entertainment",
+      "athletic",
+    ]).toContain(frame.cell?.archetype);
   });
 
   it("yields a null scene for an unauthored cell (engine falls back)", () => {
@@ -29,6 +40,8 @@ describe("SagaDriver", () => {
     d.begin({ wave: "nonexistent", archetype: "economic", tier: 0 }, initMotivators());
     expect(d.frame().scene).toBeNull();
     expect(d.active).toBe(false);
+    // No act → no cell, so the render layer mounts nothing.
+    expect(d.frame().cell).toBeNull();
   });
 
   it("walks the act scene-by-scene to its end, carrying motivators + flags", () => {

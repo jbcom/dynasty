@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { AssetsFileSchema } from "../../sim/schema";
 import assetsJson from "../assets.json";
@@ -40,8 +42,41 @@ describe("assets manifest", () => {
     }
   });
 
-  it("no portrait assets remain — portraits were removed (they distracted)", () => {
+  it("portraits are AUTHORED caricature SVG, not the purged procedural ones (RB-8)", () => {
+    // The earlier PROCEDURAL portraits were purged (commit bd9a3e2, "purge procedural portraits") —
+    // they distracted. RB-8 rebuilds them as the directive's own decision (89b24a7) required: real,
+    // hand-authored CC0 caricature SVG mounted as a faint behind-the-prose backdrop, not generated
+    // distractions. So portraits exist again, but under a stricter contract.
     const parsed = AssetsFileSchema.parse(assetsJson);
-    expect(parsed.assets.filter((a) => a.kind === "portrait")).toEqual([]);
+    const portraits = parsed.assets.filter((a) => a.kind === "portrait");
+    expect(portraits.length).toBeGreaterThan(0);
+    for (const p of portraits) {
+      // Authored SVG (the repo idiom), CC0 (project-original), license-logged.
+      expect(p.path).toMatch(/^assets\/portrait\/.+\.svg$/);
+      expect(p.license).toBe("CC0");
+      expect(p.attribution.length).toBeGreaterThan(0);
+    }
+    // The six power-base archetypes each have a base portrait + a rival silhouette.
+    const ids = new Set(portraits.map((p) => p.id));
+    for (const a of [
+      "economic",
+      "political",
+      "technological",
+      "religious",
+      "entertainment",
+      "athletic",
+    ]) {
+      expect(ids.has(`portrait_base_${a}`)).toBe(true);
+      expect(ids.has(`portrait_silhouette_${a}`)).toBe(true);
+    }
+  });
+
+  it("every portrait file the manifest logs actually exists under public/ (the manifest is the gate)", () => {
+    const parsed = AssetsFileSchema.parse(assetsJson);
+    // assets.json paths are relative to public/ (e.g. "assets/portrait/base/economic.svg").
+    const publicDir = join(import.meta.dirname, "../../../public");
+    for (const p of parsed.assets.filter((a) => a.kind === "portrait")) {
+      expect(existsSync(join(publicDir, p.path)), `missing portrait file: ${p.path}`).toBe(true);
+    }
   });
 });

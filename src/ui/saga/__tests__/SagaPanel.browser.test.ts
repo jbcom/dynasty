@@ -50,6 +50,7 @@ describe("SagaPanel", () => {
           relation: "opposing" as const,
           note: "rising",
           rung: 2,
+          archetype: "economic" as const,
         },
       ],
     };
@@ -59,5 +60,9 @@ describe("SagaPanel", () => {
     expect(glimpses?.querySelector('[data-relation="opposing"]')).toBeTruthy();
     // RB-4: the rival's rung is shown (★ per rung+1) so the player sees their crossings move it.
     expect(glimpses?.querySelector(".glimpse-rung")?.textContent).toBe("★★★"); // rung 2 → 3 stars
+    // RB-8: each glimpse carries a small archetype silhouette vignette (a single silhouette layer).
+    const vignette = glimpses?.querySelector(".glimpse-vignette [data-testid='scene-stage']");
+    expect(vignette).toBeTruthy();
+    expect(vignette?.classList.contains("silhouette")).toBe(true);
   });
 });
