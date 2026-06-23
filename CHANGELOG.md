@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.58.0](https://github.com/jbcom/dynasty/compare/v0.57.0...v0.58.0) (2026-06-23)
+
+
+### Features
+
+* **sim:** Epoch-0 formative beats — first friend/schooling/betrayal/loss/romance (EI-4) ([#186](https://github.com/jbcom/dynasty/issues/186)) ([5a002c6](https://github.com/jbcom/dynasty/commit/5a002c604ff85c4542f541d8b1f953f8e1ed680c))
+
 ## [0.57.0](https://github.com/jbcom/dynasty/compare/v0.56.0...v0.57.0) (2026-06-23)
 
 
