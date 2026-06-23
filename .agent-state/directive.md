@@ -1010,7 +1010,9 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   spine pipeline (matches the spine voice), license/validate, then Chrome-verify a press vs. land founder sees
   different opening prose. Later gens can follow the same pattern incrementally. Make the choice MATTER in the
   prose, not just the motivator seed.
-- [ ] **FS-COMPLETION-REVIEW — review CLEAN, opening the PR.** The founding-spine
+- [x] **FS-COMPLETION-REVIEW — DONE → PR #100** (https://github.com/jbcom/dynasty/pull/100). Full local gate
+  green + reviewer trio (final pass CLEAN) + Chrome hour-arc verified; pushed feat/founding-spine-redesign +
+  opened the single PR. The remote merge loop is FS-PR-LOOP. (orig note:) The founding-spine
   completion (VL-3/4/5, WV-3, FS-ONB-DRIFT, FS-SPINE-BRANCH-ONRAMPS, FS-RETIRE-PROLOGUE, UQ-3,
   FS-BRANCH-ONRAMP-AUDIT, CAST-RESEARCH, FS-SPINE-ORIGIN-FLAVOR) is a large body of work on the one branch.
   Before opening the single PR ([[one-branch-local-review]]): full local gate + reviewer trio over the whole
