@@ -1,0 +1,174 @@
+{
+  "acts": [
+    {
+      "id": "spine:g0:founding",
+      "wave": "spine",
+      "archetype": "founding",
+      "cls": "spine",
+      "tier": 0,
+      "macroAct": "founding",
+      "title": "Act I — The Crucible of Parchment and Iron",
+      "scenes": [
+        "spine:g0:founding:open",
+        "spine:g0:founding:turn",
+        "spine:g0:founding:close"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "spine:g0:founding:open",
+      "sense": "smell",
+      "prose": [
+        "The heavy, humid reek of the Delaware River docks hangs thick over Philadelphia, carrying the sharp tang of pitch, rotting molasses, and horse dung baking under a merciless July sun. Inside the assembly room, the stench of sweat-soaked wool and tallow candles mingles with the dry, grassy scent of fresh parchment. Every breath feels like swallowing hot felt, a physical pressure that makes the high stakes of the congressional debate feel claustrophobic and immediate.",
+        "Your fingers are stained with iron-gall ink, a dark shadow beneath your nails that refuses to wash clean. For days, the delegates have wrangled over words, slicing away grievances and carving out a new sovereignty with the stroke of a quill. You sit near the back, listening to the murmurs of men who are about to sign their own death warrants if the redcoats break the line at New York, knowing that the {family_name} name will either be immortalized or strung from a gallows before the year is out."
+      ],
+      "beats": [
+        {
+          "prose": [
+            "You dip your quill once more, your hand steady despite the low, ominous rumble of carriage wheels on the cobblestones outside."
+          ],
+          "choice": {
+            "text": "Commit your signature to the treasonous draft.",
+            "motivatorShift": {
+              "politics": 3,
+              "honor": 2,
+              "power": 1,
+              "worldview": 1
+            },
+            "setFlags": [
+              "signed_declaration"
+            ],
+            "gather": true
+          }
+        }
+      ],
+      "thread": [],
+      "braidSlots": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "spine:g0:founding:turn"
+    },
+    {
+      "id": "spine:g0:founding:turn",
+      "sense": "sound",
+      "prose": [
+        "The ringing of the great state house bell is not a joyous peal, but a heavy, bronze clanging that vibrates through the floorboards and deep into your chest cavity. It is accompanied by the discordant din of the street: the jeers of loyalist merchants packing their wagons, the sharp bark of militia officers drilling raw recruits in the square, and the rhythmic clatter of iron-shod wheels on stone. Each strike of the bell seems to demand a reckoning, stripping away the luxury of hesitation.",
+        "Your older brother stands by the window, his coat trimmed with the sober lace of the old establishment, while your cousin wears the rough, undyed homespun of the continental volunteers. The divide has torn through your ledgers and your dining table alike; the old ties of trade with London are fraying into tinder, and the smoke of burning homesteads on the frontier is already drifting eastward. A decision must be made before the sun sets, for the committee of safety is already listing those who refuse to swear."
+      ],
+      "beats": [],
+      "decision": {
+        "tier": "major",
+        "prompt": "With the town divided and the king's navy massing off the coast, where does the weight of your family's name fall?",
+        "options": [
+          {
+            "text": "The Patriot Cause: Finance the local militia and pledge the family's assets to the Continental Congress, risking everything for a new republic.",
+            "motivatorShift": {
+              "politics": 3,
+              "power": 2,
+              "wealth": -3,
+              "honor": 2
+            },
+            "setFlags": [
+              "patriot_faction"
+            ]
+          },
+          {
+            "text": "The Loyalist Crown: Maintain your oaths to the King, protecting your deep-water shipping rights and traditional titles against the rebel mob.",
+            "motivatorShift": {
+              "politics": -3,
+              "tradition": 3,
+              "wealth": 2,
+              "honor": 1
+            },
+            "setFlags": [
+              "loyalist_faction"
+            ]
+          },
+          {
+            "text": "The Cautious Neutral: Refuse to take an oath to either party, preserving your grain reserves and keeping your head down to protect the estate.",
+            "motivatorShift": {
+              "wealth": 3,
+              "politics": -2,
+              "honor": -3,
+              "reach": 1
+            },
+            "setFlags": [
+              "neutral_pacifist"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "braidSlots": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      },
+      "next": "spine:g0:founding:close"
+    },
+    {
+      "id": "spine:g0:founding:close",
+      "sense": "sight",
+      "prose": [
+        "The soft, amber glow of the fireplace illuminates the modest parlor where the ledger of the {family_name} family lies open on the desk. Outside, the winter wind howls through the bare oaks, rattling the windowpanes with a persistent, icy sigh, but inside, the light catches the gilt lettering of your name and the blank lines beneath it. This is the ledger that must carry the story forward, past the smoke of the revolution and into whatever country emerges from the peace.",
+        "Two letters lie beside the ledger, their wax seals unbroken. One is from your childhood companion, the daughter of a neighboring landowner whose family has weathered the storm with quiet dignity, offering a union of lands and old names. The other offers a wilder path—a commission in the nascent state department to travel to the courts of Europe, or an expedition into the dark forests of the western frontier, where no family name yet holds sway. The ink is dry; the ledger waits for the first entry of the next generation."
+      ],
+      "beats": [],
+      "decision": {
+        "tier": "major",
+        "prompt": "How will the {family_name} name be carried into the fragile future of the new republic?",
+        "options": [
+          {
+            "text": "Marry your neighbor's daughter, anchoring the family line in the rich Pennsylvania soil and raising heirs to work the estate.",
+            "motivatorShift": {
+              "lineage": 3,
+              "tradition": 2,
+              "wealth": 1,
+              "honor": 1
+            },
+            "setFlags": [
+              "gentry_alliance"
+            ],
+            "succession": {
+              "takesPartner": true,
+              "begets": 2
+            }
+          },
+          {
+            "text": "Accept the diplomatic post in Paris alone, choosing the glittering halls of statecraft over domestic life, leaving the estate to your brother's lineage.",
+            "motivatorShift": {
+              "reach": 4,
+              "politics": 2,
+              "worldview": 2,
+              "lineage": -2
+            },
+            "setFlags": [
+              "diplomatic_exile"
+            ]
+          },
+          {
+            "text": "Venture into the western wilderness as a land surveyor, seeking fortune in the unknown territory and refusing the comfort of a settled home.",
+            "motivatorShift": {
+              "worldview": 3,
+              "reach": 3,
+              "wealth": 1,
+              "lineage": -3
+            },
+            "setFlags": [
+              "frontier_pioneer"
+            ]
+          }
+        ]
+      },
+      "thread": [],
+      "braidSlots": [],
+      "requires": {
+        "flags": [],
+        "notFlags": []
+      }
+    }
+  ]
+}

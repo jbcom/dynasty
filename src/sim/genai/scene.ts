@@ -289,6 +289,10 @@ export function buildSpinePrompt(act: SpineAct, gen0Brief = ""): string {
     `Each scene id MUST start with "${act.id}:". The pivotal decision scene carries a major \`decision\`;`,
     `the close carries the succession decision (one option takesPartner+begets).`,
     "",
+    `SCENE SHAPE (strict): each scene = { id, sense, prose:[2-4 strings], beats:[], decision?, next? }.`,
+    `\`sense\` MUST be EXACTLY one of: "sound" | "sight" | "touch" | "taste" | "smell". \`prose\` is an`,
+    `ARRAY of full-paragraph strings (never an object). \`beats\` is an ARRAY (use [] if none).`,
+    "",
     `Motivator axes for every motivatorShift: ${MOTIVATOR_AXES}.`,
     `Return ONLY the JSON object { "acts": [...], "scenes": [...] } for this generation's act + its scenes.`,
   ]
