@@ -1057,17 +1057,31 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   on-ramps resolves to the higher-precedence oligarchy; the test asserts each on-ramp's own contribution.)
 ## Post-PR backlog (keep the queue non-empty — [[never-drain-queue]])
 
-- [ ] [WAIT] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G2+ — extend base-flavored openings to g2+ (antebellum onward).**
-  HELD until PR #100 merges — adding commits to the in-flight PR branch now would churn its CI + review;
-  this is post-merge incremental work by design. Resume on a fresh footing after the founding-spine PR lands.
-  g0 (founding) + g1 (early republic) now open differently per power base. The applyAct() pattern in
-  scripts/fs-spine-origin-flavor.mjs makes each further act one config block + 5 authored base-variant
-  scenes diverting to that act's second scene. Author g2 (antebellum) next, then later gens as bandwidth
-  allows — deepening how far the origin choice echoes. Incremental; lower priority than live-PR feedback.
-- [ ] [WAIT] **FS-PR-LOOP — drive the founding-spine PR to merge (babysit-pr).** PR #100 OPEN. First CI pass
-  green; addressed all 6 CodeRabbit findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision
-  pin) in a forward commit (2773811) + resolved all 6 threads → mergeStateStatus BLOCKED→UNSTABLE (mergeable).
-  CI re-running on the fix commit (monitor by0sqkp5t); self-squash-merge once the re-run is green. Once the PR is open: wait CI green,
+- [x] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G2 — DONE.** g2 (Act III antebellum "The Sundered Threshold") now has
+  5 base-flavored openings (land/commerce/pulpit/law/military) gated on base + diverting to its allegiance
+  scene; industrial/textile open is the commerce/default. Sectional-crisis voiced (King Cotton, the
+  abolitionist denominational split, Dred Scott + higher law, Union-vs-section). Same idempotent applyAct()
+  pattern (now g0+g1+g2); spineOriginFlavor.unit asserts all three acts per base (21 tests). 757 unit + 106
+  browser + tsc + check green. On branch `feat/spine-origin-depth`.
+- [x] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G3 — DONE.** g3 (Act IV Gilded Age "The Iron and the Ivory") now has 5
+  base-flavored openings (land/pulpit/law/military/press; commerce is the default Broad-Street open). Gilded-Age
+  voiced; same applyAct() pattern (g0–g3); spineOriginFlavor.unit generalized to per-act base sets + asserts
+  all 4 acts (32 tests). 768 unit + tsc + check green. On `feat/spine-origin-depth`.
+- [x] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G4+G5 — DONE.** g4 (Progressive Era "The Iron Loom of Progress") + g5
+  (mid-century "The Chrome Horizon") each got 5 base-flavored openings (land/pulpit/law/military/press;
+  commerce default). The origin choice now echoes across SIX generations (g0 founding 1776 → g5 mid-century).
+  Same applyAct() pattern (g0–g5); spineOriginFlavor.unit asserts all 6 acts (48 tests). 784 unit + tsc +
+  check green. On `feat/spine-origin-depth` — ready to ship this g2-g5 depth batch as one PR.
+- [ ] [WAIT] **FS-SPINE-DEPTH-PR — g2–g5 origin-flavor batch → PR #102 OPEN.** Full local gate GREEN; reviewer
+  pass CLEAN (byte-idempotent, gating correct, 6-base coverage, non-vacuous). Pushed feat/spine-origin-depth +
+  opened PR #102 (https://github.com/jbcom/dynasty/pull/102). Babysitting: monitoring CI; address CodeRabbit +
+  resolve threads, self-squash-merge once green, verify post-merge Release/CD. Then g6+ on a fresh branch.
+- [x] **FS-PR-LOOP — DONE → PR #100 MERGED (squash 94c694a).** First CI pass green; addressed all 6 CodeRabbit
+  findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision pin) + a regression test in a
+  forward commit + resolved all 6 threads → CLEAN; re-run CI green; self-squash-merged. release-please then
+  auto-cut + merged release 0.20.0 (#101). Synced local main, deleted the merged branch (remote auto-deleted).
+  Post-merge Release + CD (+ CodeQL) on main all completed SUCCESS — release 0.20.0 shipped clean.
+  (orig babysit-pr note kept below.) Once the PR is open: wait CI green,
   read every comment + any CHANGES_REQUESTED, address/resolve all review threads (CodeRabbit etc.), keep
   Release/CD green, then self-squash-merge once green + threads resolved + DoD met. ([[babysit-pr]],
   [[jbcom-org-ruleset]] — PR-only/squash/linear.)
