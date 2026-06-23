@@ -1057,17 +1057,19 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   on-ramps resolves to the higher-precedence oligarchy; the test asserts each on-ramp's own contribution.)
 ## Post-PR backlog (keep the queue non-empty — [[never-drain-queue]])
 
-- [ ] [WAIT] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G2+ — extend base-flavored openings to g2+ (antebellum onward).**
-  HELD until PR #100 merges — adding commits to the in-flight PR branch now would churn its CI + review;
-  this is post-merge incremental work by design. Resume on a fresh footing after the founding-spine PR lands.
+- [ ] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G2+ — extend base-flavored openings to g2+ (antebellum onward).**
+  UNBLOCKED — PR #100 merged; now on a fresh long-running branch `feat/spine-origin-depth`. Next: author g2
+  (antebellum) base-variant openings via the applyAct() pattern, then later gens as bandwidth allows.
   g0 (founding) + g1 (early republic) now open differently per power base. The applyAct() pattern in
   scripts/fs-spine-origin-flavor.mjs makes each further act one config block + 5 authored base-variant
   scenes diverting to that act's second scene. Author g2 (antebellum) next, then later gens as bandwidth
   allows — deepening how far the origin choice echoes. Incremental; lower priority than live-PR feedback.
-- [ ] [WAIT] **FS-PR-LOOP — drive the founding-spine PR to merge (babysit-pr).** PR #100 OPEN. First CI pass
-  green; addressed all 6 CodeRabbit findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision
-  pin) in a forward commit (2773811) + resolved all 6 threads → mergeStateStatus BLOCKED→UNSTABLE (mergeable).
-  CI re-running on the fix commit (monitor by0sqkp5t); self-squash-merge once the re-run is green. Once the PR is open: wait CI green,
+- [x] **FS-PR-LOOP — DONE → PR #100 MERGED (squash 94c694a).** First CI pass green; addressed all 6 CodeRabbit
+  findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision pin) + a regression test in a
+  forward commit + resolved all 6 threads → CLEAN; re-run CI green; self-squash-merged. release-please then
+  auto-cut + merged release 0.20.0 (#101). Synced local main, deleted the merged branch (remote auto-deleted).
+  [WAIT-VERIFY] post-merge Release + CD workflows on main are in_progress (monitor bwrtttirq) — confirm green.
+  (orig babysit-pr note kept below.) Once the PR is open: wait CI green,
   read every comment + any CHANGES_REQUESTED, address/resolve all review threads (CodeRabbit etc.), keep
   Release/CD green, then self-squash-merge once green + threads resolved + DoD met. ([[babysit-pr]],
   [[jbcom-org-ruleset]] — PR-only/squash/linear.)
