@@ -1318,9 +1318,9 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   9 omens + 29 dispatches + 54 agency acts, median ~180s (3 min) added/run. So ~48-min floor + PLAYTEST-2 ~76s +
   PLAYTEST-3 ~180s ≈ 52 min fast-path (a careful player far more) — the hour mandate holds with margin and the
   agency layer only WIDENS it. No prose lever needed. 902 node green, gate clean.
-- [ ] [WAIT-REVIEW] **WV-3-DEPTH-PLAYTEST-3 PR — push, open PR, full remote loop.**
-  1 commit (the full-layer depth instrument). Full local gate passed. Push, open PR, wait CI, fold review forward
-  + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-DOSSIER-TAB.
+- [ ] [WAIT-REVIEW] **WV-3-DEPTH-PLAYTEST-3 PR #146 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/wv3-depth-playtest-3 (75b7803). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
+  review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-DOSSIER-TAB.
 - [ ] **RIVAL-DOSSIER-TAB — a dedicated in-run "The Field" panel beyond the Timeline strip.** The field readout
   lives as a compact strip in the Timeline (CONVERGENCE-FIELD-IN-TIMELINE); for a player tracking the race
   closely, a fuller dossier (each rival's place, archetype, rung trend, faltering/surging state) deserves its
