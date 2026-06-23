@@ -711,4 +711,47 @@ describe("Game loop", () => {
     expect(restored.view.saga.scene?.id).toBe(savedSceneId);
     expect(restored.view.state.year).toBe(savedYear);
   });
+
+  it("TRIGGER-CROSSING-RECORD: engaging a scene that fires a trigger stamps the crossing flag (memory)", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1845,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Cross",
+      seed: "crossrec",
+      originId: "composed:ireland:origins",
+    };
+    // A founded ireland line in the convergence/1845-1875 window fires the famine-docks ARRIVAL trigger
+    // (a `once` rule). Drive saga moves; once a scene surfaces the thread, advancing it must STAMP a
+    // `crossed:ireland:*` flag — the Turtledove cast-memory — so the once-rule won't re-fire and a later
+    // priorCrossing-gated return can unlock.
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    let sawCrossing = false;
+    let guard = 0;
+    while (!g.finished && guard < 200) {
+      const v = g.view;
+      const s = v.saga.scene;
+      if (s) {
+        if (s.decision) g.pickDecision(0);
+        else if (s.beats.length) g.pickBeat(0);
+        else break;
+      } else if (v.currentEvent?.choices[0]) {
+        g.choose(v.currentEvent.choices[0].id);
+      } else break;
+      if (g.view.state.flags.some((f) => f.startsWith("crossed:"))) {
+        sawCrossing = true;
+        break;
+      }
+      guard++;
+    }
+    // At least one crossing was recorded as a flag — the memory is real + persisted in state.flags.
+    expect(sawCrossing, "a fired trigger branch stamped a crossed: flag").toBe(true);
+    // The crossing flag is idempotent: it appears at most once (no duplicate stamping on re-render).
+    const crossFlags = g.view.state.flags.filter((f) => f.startsWith("crossed:"));
+    expect(new Set(crossFlags).size).toBe(crossFlags.length);
+  });
 });

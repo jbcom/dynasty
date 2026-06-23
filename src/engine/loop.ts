@@ -21,7 +21,12 @@ import { actsForTier, resolveThreads } from "../sim/saga/player";
 import type { BraidSlot } from "../sim/saga/schema";
 import { TriggerTableSchema } from "../sim/saga/schema";
 import { DYNASTY_SPINE } from "../sim/saga/spineAuthored";
-import { evaluateTriggers, spineStateProjection } from "../sim/saga/triggerLattice";
+import {
+  type ActivatedBranch,
+  crossedFlag,
+  evaluateTriggers,
+  spineStateProjection,
+} from "../sim/saga/triggerLattice";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
 import { type GameState, initState, isMemberAlive, type LedgerEntry } from "../sim/state";
@@ -272,11 +277,15 @@ export class Game {
    * the `crossed:` flag convention), evaluateTriggers fires the matching branches, and each resolves into
    * a woven thread the SceneReader braids into the prose. Same spine state → same branches every replay.
    */
-  private triggerThreads(scene: SagaFrame["scene"]): ReturnType<typeof resolveThreads> {
+  /**
+   * The DETERMINISTIC-TRIGGER branches that fire for the current spine state (pure — no RNG, no mutation).
+   * Shared by `triggerThreads` (weave) and `recordTriggerCrossings` (memory). Honors `once` by deriving the
+   * already-crossed set from the run's `crossed:<family>:<branch>` flags. Returns [] when unfounded / no scene.
+   */
+  private firedTriggerBranches(scene: SagaFrame["scene"]): ActivatedBranch[] {
     if (!scene) return [];
     const place = this.state.founding?.place;
     if (!place) return [];
-    const tier = this.playerRung();
     const spine = spineStateProjection({
       archetype: this.state.archetype,
       leanings: this.state.personality as unknown as Record<string, number>,
@@ -286,20 +295,43 @@ export class Game {
       era: macroActForYear(this.state.year),
       flags: this.state.flags,
     });
-    // Honor `once: true` rules: a branch already crossed (recorded as a `crossed:<family>:<branch>` flag)
-    // must not re-fire on every render its window matches. Derive the already-fired set from those flags
-    // and pass it so once-branches (the arrival vignettes) surface exactly once. Pure (reads state.flags).
-    const firedBranches = new Set<string>();
+    const alreadyCrossed = new Set<string>();
     for (const f of this.state.flags) {
       const m = /^crossed:([^:]+):(.+)$/.exec(f);
-      if (m) firedBranches.add(`${m[1]}:${m[2]}`);
+      if (m) alreadyCrossed.add(`${m[1]}:${m[2]}`);
     }
-    const fired = evaluateTriggers(GAME_TRIGGERS.rules, spine, firedBranches);
+    return evaluateTriggers(GAME_TRIGGERS.rules, spine, alreadyCrossed);
+  }
+
+  private triggerThreads(scene: SagaFrame["scene"]): ReturnType<typeof resolveThreads> {
+    if (!scene) return [];
+    const fired = this.firedTriggerBranches(scene);
     if (fired.length === 0) return [];
+    const tier = this.playerRung();
     // Each fired branch weaves as a thread naming the recurring family at this tier (the branch's mined
     // fabric prose is borrowed downstream); resolveThreads braids the family's opening fragment in.
     const threads = fired.map((b) => ({ wave: b.family, atTier: tier }));
     return resolveThreads(this.saga.corpus, { ...scene, thread: threads });
+  }
+
+  /**
+   * TRIGGER-CROSSING-RECORD: stamp a `crossed:<family>:<branch>` flag for every trigger branch the
+   * just-engaged scene fired, so (a) `once` arrivals don't re-fire and (b) the recurring-cast MEMORY is
+   * real — a `priorCrossing`-gated return branch unlocks once its family was met before (the Turtledove
+   * model). Called on advance (pickBeat/pickDecision) against the scene the player just acted on. The fired
+   * branches come from evaluateTriggers' stable sorted order, and flags are added in that order, so the
+   * flag set + ordering is deterministic and replays bit-identically. New flags only (idempotent).
+   */
+  private recordTriggerCrossings(scene: SagaFrame["scene"]): void {
+    const fired = this.firedTriggerBranches(scene);
+    if (fired.length === 0) return;
+    const existing = new Set(this.state.flags);
+    const fresh: string[] = [];
+    for (const b of fired) {
+      const flag = crossedFlag(b.family, b.branch);
+      if (!existing.has(flag)) fresh.push(flag);
+    }
+    if (fresh.length > 0) this.state = { ...this.state, flags: [...this.state.flags, ...fresh] };
   }
 
   /** Advance the rival world to the run's current year (deterministic). Called when the clock moves. */
@@ -443,8 +475,12 @@ export class Game {
 
   /** Apply a weave-beat choice on the current novel scene; time passes; then re-emit. */
   pickBeat(beatIndex: number): void {
+    // Capture the scene the player just engaged BEFORE the driver advances off it, so any trigger branches
+    // it surfaced get their crossing recorded (TRIGGER-CROSSING-RECORD).
+    const engaged = this.saga.frame().scene;
     this.syncMotivators(this.saga.pickBeat(beatIndex));
     this.syncSagaFlags();
+    this.recordTriggerCrossings(engaged);
     // A weave-beat is TEXTURE within a generation, not a generational step — it passes NO in-world
     // years, so an act's depth (how many interstitial beats it carries) no longer ages the line. The
     // generation's whole span is advanced once, at its succession decision (see pickDecision).
@@ -460,9 +496,12 @@ export class Game {
    * generation: the next tier's act begins, carrying the line's drifted motivators.
    */
   pickDecision(optionIndex: number): void {
+    // Capture the engaged scene before the driver advances (TRIGGER-CROSSING-RECORD).
+    const engaged = this.saga.frame().scene;
     const result = this.saga.pickDecision(optionIndex);
     this.syncMotivators(result?.motivators ?? null);
     this.syncSagaFlags();
+    this.recordTriggerCrossings(engaged);
     const continues =
       !!result?.succession && (result.succession.takesPartner || result.succession.begets > 0);
     // FS-8: the apex is the spine's TERMINAL generation (g9 = the stars), not MAX_RUNG (the cell cap).
