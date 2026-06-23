@@ -125,8 +125,13 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   hand-off (takesPartner) + `epoch0:emerged`. Wired into buildEpoch0Opening → the full birth→…→romance chain. Test:
   epoch0Formative.unit (5 beats schema-valid, seeds + leans, connected chain, succession close) + the opening chain
   test. EI-5 deepens naming; EI-6 wires the chain into the engine (retiring the funnel).
-- [ ] [WAIT] **EI-5 NAMING-IN-FICTION** — surname/gender/given/naming-tradition are named diegetically at the naming
-  beat (by the parents, in the child's hearing), not picked on a card. Wire to foundByComposition. Tested.
+- [x] **EI-5 NAMING-IN-FICTION — DONE (branch feat/ei5-naming-in-fiction).** The Epoch-0 naming beat now speaks the
+  GENDER diegetically too: added a `{child_kind}` term (son/daughter, from the protagonist's sex in terms.ts) and
+  enriched `epoch0:naming` so the parents say "A {child_kind}" + give the name "in the family's own tongue" —
+  surname/given (existing tokens) + gender + naming-tradition all named in-fiction, none on a card. The name facets
+  flow from the live family via the term seam (foundByComposition stays the source of the names; EI-6 wires the
+  emergent-opening state INTO foundByComposition). Test: terms.unit ({child_kind} son/daughter/unresolved) +
+  epoch0Opening.unit (naming speaks {child_kind}).
 - [ ] [WAIT] **EI-6 RETIRE-THE-FUNNEL + WIRE** — replace the OnboardingScreen .card funnel with the lived opening's
   accumulated state feeding foundByComposition; the New Game path opens the emergent infancy, not the menu.
   Update/retire the funnel tests; full gate incl. e2e (the entry-flow e2e must walk the new opening). Tested.

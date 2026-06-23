@@ -7,7 +7,7 @@ import { applyTerms, runTerms } from "../terms";
 const terms = TermsFileSchema.parse(termsJson).terms;
 
 /** A founded-line state stub: the founded line names the protagonist (CP-R1). */
-function foundedState(given: string, surname: string): GameState {
+function foundedState(given: string, surname: string, sex: "male" | "female" = "male"): GameState {
   return {
     family: {
       protagonistId: "m0",
@@ -17,7 +17,7 @@ function foundedState(given: string, surname: string): GameState {
           id: "m0",
           given,
           surname,
-          sex: "male",
+          sex,
           born: 1900,
           generation: 0,
           traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
@@ -100,5 +100,21 @@ describe("founded-line identity tokens (CP-R1)", () => {
     const t = runTerms(terms, "default", unfoundedState);
     expect(applyTerms("{given_name}", t)).toBe("{given_name}");
     expect(applyTerms("{surname}", t)).toBe("{surname}");
+  });
+
+  it("EI-5: {child_kind} resolves to son/daughter from the founded protagonist's sex (gender spoken in-fiction)", () => {
+    expect(
+      applyTerms("a {child_kind}", runTerms(terms, "default", foundedState("Tom", "Vane", "male"))),
+    ).toBe("a son");
+    expect(
+      applyTerms(
+        "a {child_kind}",
+        runTerms(terms, "default", foundedState("Tess", "Vane", "female")),
+      ),
+    ).toBe("a daughter");
+    // Un-founded → unresolved (no preset).
+    expect(applyTerms("a {child_kind}", runTerms(terms, "default", unfoundedState))).toBe(
+      "a {child_kind}",
+    );
   });
 });

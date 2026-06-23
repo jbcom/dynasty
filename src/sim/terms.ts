@@ -22,13 +22,15 @@ import type { GameState } from "./state";
 /** The four identity tokens resolved from the founded line, not the branch terms. */
 const IDENTITY_TOKENS = ["given_name", "surname", "full_name", "family_name"] as const;
 
-/** The current protagonist's given name + founded surname, or undefined if not yet founded. */
-function foundedIdentity(state: GameState): { given: string; surname: string } | undefined {
+/** The current protagonist's given name + founded surname + sex, or undefined if not yet founded. */
+function foundedIdentity(
+  state: GameState,
+): { given: string; surname: string; sex: "male" | "female" } | undefined {
   const fam = state.family;
   if (!fam) return undefined;
   const me = fam.members.find((m) => m.id === fam.protagonistId);
   if (!me) return undefined;
-  return { given: me.given, surname: me.surname };
+  return { given: me.given, surname: me.surname, sex: me.sex };
 }
 
 /**
@@ -52,6 +54,8 @@ export function runTerms(
     out.surname = id.surname;
     out.full_name = `${id.given} ${id.surname}`;
     out.family_name = `${id.surname}s`;
+    // EI-5: the child's KIND, for the Epoch-0 naming beat to speak gender diegetically ("a son"/"a daughter").
+    out.child_kind = id.sex === "female" ? "daughter" : "son";
   }
   // The doctor's-notes birth date (OB-4) for the Epoch-0 birth beat — "September 6, 1885".
   if (state.birthDate) {
