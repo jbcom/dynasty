@@ -1326,9 +1326,9 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   (gold window) / surging (red, above the player) / holding — with the player's line slotted in by rung. A
   fuller race readout than the compact Timeline strip. Tests: RivalDossier.browser (state badges, humanized
   labels, slotting, empty). 902 node + 131 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **RIVAL-DOSSIER-TAB PR — push, open PR, full remote loop.**
-  1 commit (RivalDossier + Field tab). Full local gate passed. Push, open PR, wait CI, fold review forward +
-  resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-RUNG-TREND.
+- [ ] [WAIT-REVIEW] **RIVAL-DOSSIER-TAB PR #147 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/rival-dossier-tab. Full local gate passed. Loop: wait build-and-test + CodeQL, fold review forward
+  + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-RUNG-TREND.
 - [ ] **RIVAL-RUNG-TREND — track each rival's rung TREND (rising/steady/falling).** The
   field shows a rival's current rung but not its DIRECTION; a rival rising fast reads differently from one that
   peaked and is sliding. Record a short per-rival rung history (last N snapshots, a side-store like presses) and
