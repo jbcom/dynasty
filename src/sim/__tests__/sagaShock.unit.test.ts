@@ -178,6 +178,51 @@ describe("rollSagaRecovery (WV-3-SHOCK-RECOVERY)", () => {
       expect(r).toBeNull();
     }
   });
+
+  it("RECOVERY-CHOICE: an INVESTED roll fires MORE often and rebounds LARGER than an un-invested one", () => {
+    const outstanding = new Set([shockMeterFlag("money")]);
+    let plain = 0;
+    let invested = 0;
+    let plainMag = 0;
+    let investedMag = 0;
+    let plainN = 0;
+    let investedN = 0;
+    for (let i = 0; i < 200; i++) {
+      const p = rollSagaRecovery(
+        outstanding,
+        1900,
+        createRng(`p${i}`).fork("sagarecover:1900"),
+        false,
+      );
+      const v = rollSagaRecovery(
+        outstanding,
+        1900,
+        createRng(`p${i}`).fork("sagarecover:1900"),
+        true,
+      );
+      if (p) {
+        plain++;
+        plainMag += p.delta;
+        plainN++;
+      }
+      if (v) {
+        invested++;
+        investedMag += v.delta;
+        investedN++;
+      }
+    }
+    // Invested fires more often (boosted chance) …
+    expect(invested).toBeGreaterThan(plain);
+    // … and, when both fire on the same seed, the invested magnitude averages larger (1.5× factor).
+    expect(investedMag / investedN).toBeGreaterThan(plainMag / plainN);
+  });
+
+  it("RECOVERY-CHOICE: invested recovery stays deterministic (same seed+invested → identical)", () => {
+    const outstanding = new Set([shockMeterFlag("reputation")]);
+    const a = rollSagaRecovery(outstanding, 1950, createRng("rd").fork("sagarecover:1950"), true);
+    const b = rollSagaRecovery(outstanding, 1950, createRng("rd").fork("sagarecover:1950"), true);
+    expect(a).toEqual(b);
+  });
 });
 
 describe("shockExposure + shockForeshadow (SHOCK-FORESHADOW)", () => {

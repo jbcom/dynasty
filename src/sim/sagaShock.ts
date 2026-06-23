@@ -197,18 +197,29 @@ const RECOVERABLE: ReadonlyArray<{ meter: MeterId; note: string; min: number; ma
   { meter: "loyalty", note: "reconciled", min: 4, max: 12 },
 ];
 
+/** RECOVERY-CHOICE: when the player has INVESTED in a rebound, the next recovery roll gets a deterministic
+ *  boost — a higher chance the rebound fires AND a larger magnitude. Flat multipliers (no extra RNG) so a
+ *  replay with the same invest flag reproduces the identical recovery. */
+const INVEST_CHANCE_BONUS = 0.4; // added to the 0.5 base → near-certain when invested
+const INVEST_MAG_FACTOR = 1.5; // the rebound claws back half again as much
+
 /** Roll a seeded partial rebound for one outstanding blown meter, or null. `outstanding` = the run's flags
- *  set (read for `shock_meter:<meter>` markers). Deterministic for (outstanding, year, rng). */
+ *  set (read for `shock_meter:<meter>` markers). When `invested`, the chance + magnitude are deterministically
+ *  boosted (RECOVERY-CHOICE — the player spent a meter to force a stronger comeback). Deterministic for
+ *  (outstanding, year, rng, invested). */
 export function rollSagaRecovery(
   outstanding: ReadonlySet<string>,
   year: number,
   rng: Rng,
+  invested = false,
 ): SagaRecovery | null {
   const candidates = RECOVERABLE.filter((r) => outstanding.has(shockMeterFlag(r.meter)));
   if (candidates.length === 0) return null;
-  if (!rng.fork(`recover:${year}`).chance(RECOVERY_CHANCE)) return null;
+  const chance = Math.min(1, RECOVERY_CHANCE + (invested ? INVEST_CHANCE_BONUS : 0));
+  if (!rng.fork(`recover:${year}`).chance(chance)) return null;
   const pick = rng.fork(`recover:pick:${year}`).pick(candidates);
-  const delta = rng.fork(`recover:mag:${year}`).int(pick.min, pick.max);
+  const rolled = rng.fork(`recover:mag:${year}`).int(pick.min, pick.max);
+  const delta = invested ? Math.round(rolled * INVEST_MAG_FACTOR) : rolled;
   return { meter: pick.meter, delta, clearFlag: shockMeterFlag(pick.meter), note: pick.note };
 }
 

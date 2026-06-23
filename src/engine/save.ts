@@ -74,6 +74,8 @@ export interface SaveData {
    * Absent on saves made before this feature — those load with no presses.
    */
   presses?: Array<{ at: number; rivalId: string; year: number }>;
+  /** RECOVERY-CHOICE: the player-investment side-log — same load-time re-application as `presses`. */
+  recoveryInvests?: Array<{ at: number; meter: "money" | "heat"; year: number }>;
   savedYear: number;
 }
 
@@ -118,6 +120,10 @@ export function toSave(state: GameState): SaveData {
     ),
     // RIVAL-CROSSING-EXPLOIT: the press side-log (only when non-empty) — re-applied at load by the interleave.
     ...(state.presses && state.presses.length ? { presses: state.presses } : {}),
+    // RECOVERY-CHOICE: the invest side-log — same re-application at load.
+    ...(state.recoveryInvests && state.recoveryInvests.length
+      ? { recoveryInvests: state.recoveryInvests }
+      : {}),
     savedYear: state.year,
   };
 }
@@ -176,7 +182,13 @@ export function fromSave(content: Content, save: SaveData): GameState {
     // log alongside any event steps. Reconstruct by replaying the WHOLE interleaved sequence through the
     // engine (event steps via choose, saga steps via pickBeat/pickDecision) — the saga clock, family
     // aging, and rival world all re-derive from the choices, so the rebuild is bit-identical to live play.
-    return Game.reconstruct(content, base, save.history, save.presses ?? []);
+    return Game.reconstruct(
+      content,
+      base,
+      save.history,
+      save.presses ?? [],
+      save.recoveryInvests ?? [],
+    );
   }
   // Plain archetype run: archetype field (v2), else legacy literal dynasty (v1).
   const archetype: Archetype =

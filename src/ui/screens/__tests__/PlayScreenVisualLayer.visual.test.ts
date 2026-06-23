@@ -53,6 +53,7 @@ function view(): GameView {
     rivalStandings: [],
     rivalNews: [],
     foreshadow: null,
+    canInvestRecovery: false,
     rung: 0,
     convergence: null,
     lastLedger: [],

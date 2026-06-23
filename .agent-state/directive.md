@@ -1245,25 +1245,36 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   "The season turns against the house — hard days may be near." in the PlayScreen above the scene (muted/dashed,
   distinct from the red aftermath). Loss now has dread, not just consequence. Tests: sagaShock.unit (exposure
   monotone + foreshadow gating) + loop.unit (omen surfaces + deterministic). 891 node + 122 browser green.
-- [ ] [WAIT-REVIEW] **RECOVERY-CHOICE — let the player INVEST in a rebound (next branch after #128).**
-  Recoveries fire automatically on quiet ticks; give the player a beat after a blow to spend a meter (money/heat)
-  to RAISE the next recovery's chance/magnitude — turning the comeback into agency, not just luck. Reuses
-  rollSagaRecovery with a player-set bonus; deterministic; tested. (Mirrors RIVAL-CROSSING-EXPLOIT's side-log.)
-- [ ] [WAIT-REVIEW] **FORESHADOW-WEIGHT — the omen's certainty scales with the actual hazard (after #128).** SHOCK-FORESHADOW
+- [x] **RECOVERY-CHOICE — DONE (feat/recovery-choice).** After a blow, the player can invest a meter (Spend
+  funds / Call in favours, cost 18) to set a pending-invest flag; the next rollSagaRecovery reads it for a
+  DETERMINISTIC boost (chance +0.4 → near-certain, magnitude ×1.5), then consumes it. Same save-invariant
+  side-log discipline as presses (state.recoveryInvests {at, meter, year} — out of RNG-keyed history;
+  reconstruct re-applies by `at` with the stored meter; toSave/fromSave round-trip). view.canInvestRecovery
+  gates the PlayScreen invest prompt. Tests: sagaShock.unit (boost chance+mag, determinism) + loop.unit (spend
+  + boost + one-pending guard + bit-identical reconstruct) + PlayScreen.visual (buttons fire/absent). 894 node
+  + 125 browser green, full gate clean. [[mmm-save-and-chronology]] preserved.
+- [ ] [WAIT-REVIEW] **FORESHADOW-WEIGHT — the omen's certainty scales with the actual hazard (after #130).** SHOCK-FORESHADOW
   is binary (omen or not); a founding-era line with heavy strain should read a GRAVER omen than a marginal one.
   Tier the foreshadow text by exposure×strain ("a shadow over the season" → "the house braces for the worst"),
   so dread is proportional. Pure, view-derived, deterministic; tested.
-- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust (after #128).**
+- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust (after #130).**
   A foreshadow that rarely precedes a real blow trains the player to ignore it; one that always does is just a
   spoiler. Instrument the foreshadow→next-shock correlation over many seeds; if it's miscalibrated, tune the
   threshold so an omen is a meaningful-but-not-certain warning. Decide from figures (like SHOCK-CADENCE-AUDIT).
+- [ ] [WAIT-REVIEW] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger (after #130).** A rebound
+  the player paid for reads the same as a lucky one in the "What Befell" log; stamp the invested recovery (e.g.
+  recovered:<meter>:<year>:invested) so the ledger can mark "rebuilt by your own hand" — the player's agency
+  shows in the family history. Pure read-model extension; tested.
+- [ ] [WAIT-REVIEW] **RECOVERY-CHOICE PR #130 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/recovery-choice (99b5213). Full local gate passed. Loop: wait build-and-test + CodeQL, read
+  CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge:
+  sync main, FORESHADOW-WEIGHT on a fresh branch.
 - [x] **RIVAL-RACE-PRESENCE PR #126 — DONE, MERGED (squash 0cf8514; release cut 0.32.0).** 4 units: falter/rise
   news, field strip, rival-fate ending. All review (Amazon-Q dedup, Gemini perf/DRY/test-comment) folded forward,
   all threads resolved, merged CLEAN. Post-merge Release+CD+CodeQL all SUCCESS (deployed). main synced.
-- [ ] [WAIT-REVIEW] **RIVAL-CROSSING-EXPLOIT PR #128 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/rival-crossing-exploit (4de722b). Full local gate passed. Loop: wait build-and-test + CodeQL, read
-  CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge:
-  sync main, SHOCK-FORESHADOW on a fresh branch.
+- [x] **RIVAL-CROSSING-EXPLOIT PR #128 — DONE, MERGED (squash dc55867; release cut 0.33.0).** 3 units:
+  crossing-exploit (press side-log), SHOCK-FORESHADOW, exploit-guard. Gemini caught a high-sev spam-press
+  exploit — fixed (one press per rival per step, engine + UI), all threads resolved, merged CLEAN. main synced.
 - [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
   audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
   diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock

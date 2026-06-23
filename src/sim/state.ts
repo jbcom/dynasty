@@ -53,6 +53,19 @@ export interface RivalPress {
 }
 
 /**
+ * RECOVERY-CHOICE: a player investment to force a stronger rebound. Same side-log discipline as RivalPress —
+ * `at` is the history.length when invested; reconstruct re-applies it (the meter spend) at that point, and the
+ * next recovery roll consumes the pending invest for a deterministic boost. Kept out of `history` (RNG key).
+ */
+export interface RecoveryInvest {
+  at: number;
+  /** Which meter the player spent (money or a heat-raise) — stored so reconstruct re-applies the exact cost
+   *  (meters aren't serialized; they're re-derived by replay). */
+  meter: "money" | "heat";
+  year: number;
+}
+
+/**
  * How a run can end. `kind` is free-form (death | coup | victory | jail |
  * bankruptcy | assassination | first_contact | …) so endings are authored data,
  * not a fixed enum. `endingId` references the winning ending definition.
@@ -110,6 +123,10 @@ export interface GameState {
    *  replay). Each is tagged with the history length at which it fired, so `reconstruct` re-applies it at the
    *  exact point WITHOUT touching the saga RNG sequence. Save = seed + history + presses. */
   presses?: RivalPress[];
+  /** RECOVERY-CHOICE: player-initiated recovery investments — same SEPARATE-side-log discipline as `presses`
+   *  (out of the RNG-keyed history). Each marks a pending invest at a history length; the next recovery roll
+   *  reads it for a deterministic chance+magnitude boost, then it's consumed. Save = … + recoveryInvests. */
+  recoveryInvests?: RecoveryInvest[];
   /** Live market state by market id (SIM1 systemic layer). */
   markets: Record<string, MarketState>;
   /** Current + peak rung per rank ladder (SIM1). Peak drives fall-from-grace. */

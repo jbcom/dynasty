@@ -87,6 +87,9 @@ export interface GameView {
   /** SHOCK-FORESHADOW: a one-line omen when the next saga tick carries an elevated hazard (harsh era +
    *  strain/kin to lose) — surfaced BEFORE the blow so loss has dread, not just aftermath. Null otherwise. */
   foreshadow: string | null;
+  /** RECOVERY-CHOICE: true when the player may invest in the next rebound — there's an outstanding blown
+   *  meter and no invest is already pending. The UI offers the invest action only then. */
+  canInvestRecovery: boolean;
 }
 
 /** A one-line dispatch about a near-vantage rival line (RIVAL-RACE-PRESENCE). */
@@ -368,7 +371,16 @@ export class Game {
       shock: this.lastShock,
       rivalNews: this.rivalNews(),
       foreshadow: this.foreshadow(),
+      canInvestRecovery: this.canInvestRecovery(),
     };
+  }
+
+  /** RECOVERY-CHOICE: may the player invest in the next rebound? Only on an active saga walk, when an
+   *  outstanding blown meter exists and no invest is already pending. View-derived, deterministic. */
+  private canInvestRecovery(): boolean {
+    if (!this.saga.active || this.finished) return false;
+    if (this.state.flags.includes(Game.RECOVERY_INVEST_FLAG)) return false;
+    return this.state.flags.some((f) => f.startsWith("shock_meter:"));
   }
 
   /** SHOCK-FORESHADOW: a one-line omen when the upcoming saga tick carries an elevated hazard. Only on an
@@ -679,10 +691,13 @@ export class Game {
    * `shock_meter:<meter>` marker + surfaces a recovery note for one move. No-op when nothing rebounds.
    */
   private applySagaRecovery(fromYear: number): void {
+    // RECOVERY-CHOICE: a pending player investment boosts this roll (chance + magnitude), then is consumed.
+    const invested = this.state.flags.includes(Game.RECOVERY_INVEST_FLAG);
     const recovery = rollSagaRecovery(
       new Set(this.state.flags),
       fromYear,
       this.rng.fork(`sagarecover:${fromYear}`),
+      invested,
     );
     if (!recovery) return;
     // SHOCK-LEDGER-RECOVERIES: clear the outstanding `shock_meter:<meter>` marker AND stamp a persistent
@@ -694,8 +709,11 @@ export class Game {
       meters: applyDelta(this.content.meters, this.state.meters, {
         [recovery.meter]: recovery.delta,
       }),
+      // Consume the invest flag on a fired recovery (the investment paid off this rebound).
       flags: [
-        ...this.state.flags.filter((f) => f !== recovery.clearFlag),
+        ...this.state.flags.filter(
+          (f) => f !== recovery.clearFlag && f !== Game.RECOVERY_INVEST_FLAG,
+        ),
         ...(this.state.flags.includes(recoveredFlag) ? [] : [recoveredFlag]),
       ],
     };
@@ -703,6 +721,51 @@ export class Game {
       kind: "recovery",
       text: this.recoveryText(recovery.note),
       note: recovery.note,
+    };
+  }
+
+  /** RECOVERY-CHOICE: the flag marking a pending player investment in the next rebound (consumed when it fires). */
+  private static readonly RECOVERY_INVEST_FLAG = "recovery_invest_pending";
+  /** RECOVERY-CHOICE: the meters the player can spend to invest in a rebound, + the cost. Money (rebuild funds)
+   *  or heat (call in favours, drawing notice). Flat + deterministic. */
+  private static readonly INVEST_COST = 18;
+
+  /**
+   * RECOVERY-CHOICE: the player INVESTS in the next rebound — spends `meter` (money or heat-raise) to set a
+   * pending-invest flag that boosts the next recovery's chance + magnitude. Only valid when (a) the player can
+   * afford it / it's a sane meter, (b) there's an outstanding blown meter to recover, and (c) no invest is
+   * already pending. Recorded in the recoveryInvests SIDE-LOG (not history) so it never perturbs the saga RNG;
+   * reconstruct re-applies it at the same `at`. No time passes — an action within the turn. No-op otherwise.
+   */
+  investRecovery(meter: "money" | "heat"): void {
+    if (!this.saga.active || this.finished) return;
+    if (this.state.flags.includes(Game.RECOVERY_INVEST_FLAG)) return; // one pending invest at a time
+    const hasOutstanding = this.state.flags.some((f) => f.startsWith("shock_meter:"));
+    if (!hasOutstanding) return; // nothing to rebound — investing would be wasted
+    // AFFORDABILITY GUARD (Gemini #130, high): a money invest must be affordable — else the player gets a
+    // free/discounted boost (money would go negative). Heat invest is always allowed (a heat RISE is the cost).
+    if (meter === "money" && this.state.meters.money < Game.INVEST_COST) return;
+    this.applyInvestEffect(meter);
+    this.state = {
+      ...this.state,
+      recoveryInvests: [
+        ...(this.state.recoveryInvests ?? []),
+        { at: this.state.history.length, meter, year: this.state.year },
+      ],
+    };
+    this.emit();
+  }
+
+  /** Apply an invest's deterministic effect — the meter cost + the pending-invest flag — WITHOUT recording it
+   *  (the caller / reconstruct owns the side-log). `money` is spent (negative); `heat` rises (a cost too). */
+  private applyInvestEffect(meter: "money" | "heat"): void {
+    const delta = meter === "money" ? { money: -Game.INVEST_COST } : { heat: Game.INVEST_COST };
+    this.state = {
+      ...this.state,
+      meters: applyDelta(this.content.meters, this.state.meters, delta),
+      flags: this.state.flags.includes(Game.RECOVERY_INVEST_FLAG)
+        ? this.state.flags
+        : [...this.state.flags, Game.RECOVERY_INVEST_FLAG],
     };
   }
 
@@ -932,21 +995,32 @@ export class Game {
       index?: number;
     }>,
     presses: ReadonlyArray<{ at: number; rivalId: string; year: number }> = [],
+    recoveryInvests: ReadonlyArray<{ at: number; meter: "money" | "heat"; year: number }> = [],
   ): GameState {
     const game = new Game(content, base.seed, base, base.archetype);
-    // RIVAL-CROSSING-EXPLOIT: the press side-log is interleaved by `at` (the history.length at which each
-    // press fired) so its deterministic effects (rival nudge + heat cost) land at the SAME point as live play
-    // — WITHOUT going through `history` (which would shift history.length and desync the saga RNG). Sorted by
-    // `at`; applied after each step once history.length has reached the press's mark.
-    const ordered = [...presses].sort((a, b) => a.at - b.at);
+    // RIVAL-CROSSING-EXPLOIT + RECOVERY-CHOICE: the player side-logs are interleaved by `at` (the history.length
+    // at which each fired) so their deterministic effects land at the SAME point as live play — WITHOUT going
+    // through `history` (which would shift history.length and desync the saga RNG). Sorted by `at`; applied after
+    // each step once history.length has reached the mark, so the NEXT step sees the effect (a press's nudge, an
+    // invest's pending flag) exactly as live play did.
+    const orderedPresses = [...presses].sort((a, b) => a.at - b.at);
+    const orderedInvests = [...recoveryInvests].sort((a, b) => a.at - b.at);
     let pi = 0;
-    const applyDuePresses = () => {
-      while (pi < ordered.length && (ordered[pi]?.at ?? Infinity) <= game.state.history.length) {
-        game.applyPressEffect(ordered[pi]?.rivalId ?? "");
+    let ii = 0;
+    const applyDue = () => {
+      const len = game.state.history.length;
+      while (pi < orderedPresses.length && (orderedPresses[pi]?.at ?? Infinity) <= len) {
+        game.applyPressEffect(orderedPresses[pi]?.rivalId ?? "");
         pi++;
       }
+      // Re-apply each invest's EXACT meter cost (stored in the side-log) + the pending-invest flag, so the
+      // reconstructed meters match live play and the next recovery roll reads the boost identically.
+      while (ii < orderedInvests.length && (orderedInvests[ii]?.at ?? Infinity) <= len) {
+        game.applyInvestEffect(orderedInvests[ii]?.meter ?? "money");
+        ii++;
+      }
     };
-    applyDuePresses(); // any press recorded before the first step (at === 0)
+    applyDue(); // any side-log item recorded before the first step (at === 0)
     for (const step of history) {
       if (game.finished) break;
       if (step.saga === "beat") {
@@ -957,10 +1031,14 @@ export class Game {
         // Only replay the event step if it's the live current event (it always is in a faithful log).
         if (game.view.currentEvent?.id === step.eventId) game.choose(step.choiceId);
       }
-      applyDuePresses();
+      applyDue();
     }
-    // Restore the press side-log onto the reconstructed state (its effects are already applied above).
-    game.state = { ...game.state, ...(presses.length ? { presses: [...presses] } : {}) };
+    // Restore the side-logs onto the reconstructed state (their effects are already applied above).
+    game.state = {
+      ...game.state,
+      ...(presses.length ? { presses: [...presses] } : {}),
+      ...(recoveryInvests.length ? { recoveryInvests: [...recoveryInvests] } : {}),
+    };
     return game.view.state;
   }
 }
