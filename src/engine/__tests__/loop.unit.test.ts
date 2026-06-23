@@ -490,6 +490,53 @@ describe("Game loop", () => {
     expect(b.year).toBe(a.year);
   });
 
+  it("FS-8: a founded run plays ALL 10 spine generations founding→stars (not capped at gen 5)", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "anglo_protestant",
+      year: 1776,
+      archetype: "political" as const,
+      gender: "male" as const,
+      surname: "Hale",
+      given: "Tobias",
+      seed: "fs8e",
+      originId: "composed:ireland:origins",
+      // The diegetic life-seeds (FS-7) ground the founder so the line can carry to the stars — a realistic
+      // founding, not a bare one.
+      lifeSeeds: {
+        firstJob: "printers_devil" as const,
+        bestFriend: "an_ambitious_rival" as const,
+        lifePartner: "marry_for_love" as const,
+      },
+    };
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    const gens = new Set<string>();
+    let n = 0;
+    while (!g.finished && n < 20000) {
+      const v = g.view;
+      const s = v.saga.scene;
+      const m = s?.id.match(/spine:(g\d)/);
+      if (m?.[1]) gens.add(m[1]);
+      if (s?.decision) {
+        const i = s.decision.options.findIndex((o) => o.succession?.takesPartner);
+        g.pickDecision(i >= 0 ? i : 0);
+      } else if (s?.beats.length) g.pickBeat(0);
+      else if (v.currentEvent?.choices[0]) g.choose(v.currentEvent.choices[0].id);
+      else break;
+      n++;
+    }
+    // The spine must advance PAST gen 5 — the gen-cap bug (clamp at MAX_RUNG=5) replayed g5 forever and
+    // never reached the broadcast/orbital/stellar acts (g6-g9). Reaching any g6+ proves the cap is fixed
+    // (exactly which terminal generation a given path reaches depends on survival; g0 + a g6+ is the
+    // capability assertion). Founding → beyond the old cap is the whole point of the spine.
+    expect(gens.has("g0")).toBe(true);
+    expect(gens.has("g9"), `gens reached: ${[...gens].sort().join(",")}`).toBe(true); // the stars
+    expect(gens.size).toBe(10);
+    expect(g.finished).toBe(true);
+  });
+
   it("PF-14: a saga choice's setFlags reach the run's state.flags (not sealed in the driver)", () => {
     const real = loadContent();
     const comp = {

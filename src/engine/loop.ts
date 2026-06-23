@@ -20,6 +20,7 @@ import { candidatesFromSnapshots, type RivalLike, selectBraid } from "../sim/sag
 import { actsForTier, resolveThreads } from "../sim/saga/player";
 import type { BraidSlot } from "../sim/saga/schema";
 import { TriggerTableSchema } from "../sim/saga/schema";
+import { DYNASTY_SPINE } from "../sim/saga/spineAuthored";
 import { evaluateTriggers, spineStateProjection } from "../sim/saga/triggerLattice";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
@@ -30,6 +31,10 @@ import { SagaDriver, type SagaFrame } from "./sagaDriver";
 
 /** The deterministic-trigger lattice table (FS-5b), parsed + validated once at module load. */
 const GAME_TRIGGERS = TriggerTableSchema.parse(triggersData);
+
+/** The top generation index of the authored spine (g0..g9) — spine play uses the TRUE generation up to
+ *  this, NOT MAX_RUNG (the cell-lattice cap), so the run reaches the broadcast/orbital/stellar acts. */
+const SPINE_MAX_GEN = Math.max(...DYNASTY_SPINE.map((a) => a.gen));
 
 /** A snapshot the UI renders from. Immutable per turn. */
 export interface GameView {
@@ -155,14 +160,18 @@ export class Game {
   private beginSagaActForState(): void {
     const wave = this.state.founding?.place;
     if (!wave) return;
-    // Reach tier = the protagonist's generation depth (founder = 0), capped at the spine's top tier.
     const family = this.state.family;
     const protagonist = family?.members.find((m) => m.id === family.protagonistId);
-    const tier = Math.min(protagonist?.generation ?? 0, MAX_RUNG);
+    const generation = protagonist?.generation ?? 0;
+    // FS-8: the founding-spine pivot — the ONE line plays the AUTHORED SPINE act for this GENERATION.
+    // The spine has 10 generations (g0..g9), so spine play uses the TRUE generation (capped at the spine
+    // length), NOT MAX_RUNG (5) — clamping to MAX_RUNG replayed g5 forever past the 6th generation.
+    const spineGen = Math.min(generation, SPINE_MAX_GEN);
+    if (this.saga.beginSpine(spineGen, this.state.personality, this.state.flags)) return;
+    // Fall back to the 504-cell corpus only if the spine isn't authored that far (back-compat). The
+    // cell lattice tops out at MAX_RUNG, so the cell path keeps the old cap.
+    const tier = Math.min(generation, MAX_RUNG);
     const cls = sagaClassForWealth(this.state.personality.wealth);
-    // FS-8: the founding-spine pivot — the ONE line plays the AUTHORED SPINE act for this generation.
-    // Fall back to the 504-cell corpus only if the spine isn't authored that far (back-compat).
-    if (this.saga.beginSpine(tier, this.state.personality, this.state.flags)) return;
     this.saga.begin(
       { wave, archetype: this.state.archetype, tier, cls },
       this.state.personality,
@@ -392,16 +401,21 @@ export class Game {
     this.syncSagaFlags();
     const continues =
       !!result?.succession && (result.succession.takesPartner || result.succession.begets > 0);
-    if (continues && result?.succession && this.playerRung() >= MAX_RUNG) {
-      // The line carried succession THROUGH the final reach tier — the dynasty has reached its apex.
-      // End the run on a high note (a survived convergence ending) rather than re-beginning tier 5
-      // forever (the saga ladder caps at 6 generations; without this the decoupled clock loops endlessly).
+    // FS-8: the apex is the spine's TERMINAL generation (g9 = the stars), not MAX_RUNG (the cell cap).
+    // The protagonist's true generation depth (uncapped) drives this so the run plays all 10 spine acts.
+    const family = this.state.family;
+    const protagonist = family?.members.find((m) => m.id === family.protagonistId);
+    const trueGen = protagonist?.generation ?? 0;
+    if (continues && result?.succession && trueGen >= SPINE_MAX_GEN) {
+      // The line carried succession THROUGH the terminal stellar generation — the dynasty reaches its
+      // apex among the stars. End on the survived convergence/destiny ending rather than looping the
+      // last act forever (the decoupled clock would otherwise never terminate).
       this.state = {
         ...this.state,
         end: {
           kind: "apex",
           year: this.state.year,
-          reason: "Six generations carried the name to the height of its reach.",
+          reason: "The dynasty carried its name from the founding to the stars.",
         },
       };
     } else if (continues && result?.succession) {
@@ -449,7 +463,19 @@ export class Game {
     if (!wave) return;
     const family = this.state.family;
     const protagonist = family?.members.find((m) => m.id === family.protagonistId);
-    const nextTier = Math.min((protagonist?.generation ?? 0) + 1, MAX_RUNG);
+    const nextGen = (protagonist?.generation ?? 0) + 1;
+    // FS-8: prefer the AUTHORED SPINE act for the next generation (true gen, up to the spine's top), so
+    // the line advances through ALL 10 generations to the stars — NOT clamped to MAX_RUNG (which replayed
+    // the cell corpus past gen 5). Fall back to the cell lattice only if the spine isn't authored that far.
+    if (
+      this.saga.beginSpine(
+        Math.min(nextGen, SPINE_MAX_GEN),
+        this.state.personality,
+        this.saga.flags,
+      )
+    )
+      return;
+    const nextTier = Math.min(nextGen, MAX_RUNG);
     const cls = sagaClassForWealth(this.state.personality.wealth);
     this.saga.begin(
       { wave, archetype: this.state.archetype, tier: nextTier, cls },
