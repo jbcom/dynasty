@@ -31,7 +31,7 @@ export type BranchKey =
  * a more-specific divergence takes precedence over the default. Each backdrop
  * is keyed off the Era-0 origin flags authored in origins.json.
  */
-const BRANCH_SIGNATURES: ReadonlyArray<{ key: BranchKey; anyOf: readonly string[] }> = [
+export const BRANCH_SIGNATURES: ReadonlyArray<{ key: BranchKey; anyOf: readonly string[] }> = [
   { key: "nazi", anyOf: ["axis_ascendant", "nazi_dynasty", "arrived_as_nazi"] },
   { key: "megachurch", anyOf: ["megachurch_dynasty", "televangelist_empire"] },
   { key: "theocracy", anyOf: ["evangelical_scion", "faith_to_power", "evangelical_origin"] },

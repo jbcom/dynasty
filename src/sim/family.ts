@@ -142,7 +142,9 @@ export function takePartner(
 ): { family: FamilyState; partner: LiveMember } {
   const protagonist = memberById(family, family.protagonistId);
   const partnerSex: LiveMember["sex"] = sex ?? (protagonist.sex === "male" ? "female" : "male");
-  const given = pickGivenName(culture, partnerSex, rng.fork("partner:name"));
+  // ONO-DEDUP: the partner takes the protagonist's surname (below) — exclude it from the given-name draw
+  // so the in-law is never "Sterling Sterling".
+  const given = pickGivenName(culture, partnerSex, rng.fork("partner:name"), protagonist.surname);
   const traits = {} as LiveMember["traits"];
   for (const k of TRAIT_KEYS as readonly TraitKey[]) {
     // The partner's own line: a fresh seeded draw around the midpoint, not inherited.

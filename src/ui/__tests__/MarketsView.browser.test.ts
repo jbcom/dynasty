@@ -41,6 +41,19 @@ describe("MarketsView (SIM1 UI)", () => {
     expect(host.textContent).toContain("US Dollar"); // default currency
   });
 
+  it("UQ-UI: each Standing rank renders a position bar + rung index/total (not flat text)", () => {
+    component = mount(MarketsView, {
+      target: host,
+      props: { content, gameState: initState(content, "seed") },
+    });
+    // The rung-position indicator (e.g. "1/6") + a fill bar make 'where on the ladder' scannable.
+    expect(host.textContent).toMatch(/\d+\/\d+/);
+    const bars = host.querySelectorAll(".rank-bar .rank-fill");
+    expect(bars.length).toBe(content.ranks.length);
+    // Every fill has a width (the bottom rung still shows a sliver, never empty).
+    for (const b of bars) expect((b as HTMLElement).style.width).toMatch(/\d+%/);
+  });
+
   it("relabels net worth in the branch currency (Reichsmark on the Nazi branch)", () => {
     const nazi = { ...initState(content, "seed"), flags: ["axis_ascendant"], year: 1950 };
     component = mount(MarketsView, { target: host, props: { content, gameState: nazi } });

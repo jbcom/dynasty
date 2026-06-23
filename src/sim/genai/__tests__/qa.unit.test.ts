@@ -13,6 +13,7 @@ import {
   buildSuccessionPrompt,
   type LineageSurface,
   lineagePassSystem,
+  normalizeBraidSlots,
   type SuccessionRequest,
   scenePassSystem,
   slotPassSystem,
@@ -42,6 +43,14 @@ describe("scene-polish pass", () => {
     expect(sys).toMatch(/never write a real person's name/i);
     expect(sys).toMatch(/sensory frame/i);
   });
+  it("UQ-2c2: forbids altering the decision succession/setFlags wiring (determinism)", () => {
+    const sys = scenePassSystem();
+    // The prose pass must preserve the whole decision block incl. succession/setFlags — reordering or
+    // altering them breaks save/restore determinism (the runner re-pins it too, defense-in-depth).
+    expect(sys).toMatch(/succession/);
+    expect(sys).toMatch(/determinism/i);
+    expect(sys).toMatch(/reword decision option PROSE only/i);
+  });
   it("prompt carries the act register cues + the scene JSON", () => {
     const p = buildScenePassPrompt(scene, {
       title: "Act I — The Crossing",
@@ -50,6 +59,16 @@ describe("scene-polish pass", () => {
     expect(p).toMatch(/The Crossing/);
     expect(p).toMatch(/convergence/);
     expect(p).toContain(scene.id);
+  });
+  it("injects the optional era×wave brief (UQ-2) when given, omits it otherwise", () => {
+    const act = { title: "Act I — X", macroAct: "convergence" } as const;
+    const brief =
+      "THIS ERA MUST HAVE: tenement squalor\nDO NOT INTRODUCE THESE MYTHS: liberty cabbage";
+    const withBrief = buildScenePassPrompt(scene, act, brief);
+    expect(withBrief).toContain("tenement squalor");
+    expect(withBrief).toContain("liberty cabbage");
+    // Without a brief, no guidance lines leak in.
+    expect(buildScenePassPrompt(scene, act)).not.toContain("MUST HAVE");
   });
 });
 
@@ -70,6 +89,17 @@ describe("lineage pass", () => {
     const p = buildLineagePassPrompt(surface);
     expect(p).toMatch(/six generations/);
     expect(p).toContain("ireland");
+  });
+  it("injects the optional wave-history brief (UQ-2) when given", () => {
+    const surface: LineageSurface = {
+      wave: "ireland",
+      archetype: "economic",
+      cls: "poor",
+      acts: [],
+    };
+    const brief = "HISTORY: Great Famine refugee flight";
+    expect(buildLineagePassPrompt(surface, brief)).toContain("Great Famine refugee flight");
+    expect(buildLineagePassPrompt(surface)).not.toContain("HISTORY:");
   });
 });
 
@@ -208,5 +238,26 @@ describe("braid-slot pass (WV-2)", () => {
     expect(out.braidSlots[0]?.kind).toBe("source");
     expect(out.braidSlots[1]?.kind).toBe("destination");
     expect(out.id).toBe(scene.id);
+  });
+
+  it("normalizeBraidSlots coerces model drift (kind casing/synonyms, lowercases setting)", () => {
+    const out = normalizeBraidSlots([
+      { kind: "DESTINATION", at: 0, setting: "Market" }, // uppercase kind + setting
+      { kind: "src", at: 1, setting: "dock", vignette: "A peddler." }, // synonym
+      { kind: "anchor", at: 2, setting: "civic hall" }, // synonym → destination
+      { kind: "??", at: 3, setting: "x" }, // unresolvable → dropped
+    ]);
+    expect(out).toHaveLength(3); // the unresolvable one is dropped
+    expect((out[0] as { kind: string }).kind).toBe("destination");
+    expect((out[0] as { setting: string }).setting).toBe("market"); // lowercased
+    expect((out[1] as { kind: string }).kind).toBe("source");
+    expect((out[2] as { kind: string }).kind).toBe("destination");
+  });
+
+  it("normalizeBraidSlots strips a vignette off a destination (schema would reject it)", () => {
+    const out = normalizeBraidSlots([
+      { kind: "destination", at: 0, setting: "market", vignette: "stray" },
+    ]);
+    expect((out[0] as { vignette?: string }).vignette).toBeUndefined();
   });
 });

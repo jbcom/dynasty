@@ -1,0 +1,131 @@
+{
+  "_doc": "FS-5b: the deterministic-trigger lattice (validated by TriggerTableSchema). Each recurring family arrives in its real historical era and braids into the ONE dynasty spine when the compound condition holds; a second, priorCrossing-gated branch makes a later meeting pay off the earlier one (Turtledove continuity). All conditions read DETERMINISTIC spine state, so the same playthrough fires the same branches every replay. Branches reference mined fabric (src/data/saga/fabric/index.json); arrival eras/contexts grounded in src/data/saga/guidance.json. See [[founding-spine-pivot]] / [[braid-slots-genai-architecture]].",
+  "cast": [
+    { "id": "ireland", "surname": "Donnelly" },
+    { "id": "italian", "surname": "Ferraro" },
+    { "id": "ashkenazi_jewish", "surname": "Reisman" },
+    { "id": "chinese", "surname": "Mei" },
+    { "id": "bavaria", "surname": "Vogel" },
+    { "id": "scandinavian", "surname": "Lindqvist" },
+    { "id": "baghdad", "surname": "Sassoon" }
+  ],
+  "rules": [
+    {
+      "family": "ireland",
+      "branch": "arrival_famine_docks",
+      "priority": 5,
+      "once": true,
+      "condition": {
+        "eras": ["convergence"],
+        "year": { "min": 1845, "max": 1875 }
+      }
+    },
+    {
+      "family": "ireland",
+      "branch": "machine_politics_return",
+      "priority": 3,
+      "condition": {
+        "eras": ["emergence"],
+        "priorCrossing": { "min": 1 }
+      }
+    },
+    {
+      "family": "italian",
+      "branch": "arrival_padrone_trades",
+      "priority": 5,
+      "once": true,
+      "condition": {
+        "eras": ["convergence"],
+        "year": { "min": 1880, "max": 1899 }
+      }
+    },
+    {
+      "family": "italian",
+      "branch": "syndicate_crossroads",
+      "priority": 4,
+      "condition": {
+        "eras": ["emergence"],
+        "year": { "min": 1920, "max": 1960 },
+        "leanings": { "power": { "min": 25 } },
+        "priorCrossing": { "min": 1 }
+      }
+    },
+    {
+      "family": "ashkenazi_jewish",
+      "branch": "arrival_garment_shopfloor",
+      "priority": 5,
+      "once": true,
+      "condition": {
+        "eras": ["convergence"],
+        "year": { "min": 1880, "max": 1899 }
+      }
+    },
+    {
+      "family": "ashkenazi_jewish",
+      "branch": "founding_of_hollywood",
+      "priority": 3,
+      "condition": {
+        "eras": ["emergence"],
+        "priorCrossing": { "min": 1 }
+      }
+    },
+    {
+      "family": "chinese",
+      "branch": "arrival_railroad_west",
+      "priority": 5,
+      "once": true,
+      "condition": {
+        "eras": ["convergence"],
+        "year": { "min": 1863, "max": 1882 }
+      }
+    },
+    {
+      "family": "chinese",
+      "branch": "exclusion_and_after",
+      "priority": 3,
+      "condition": {
+        "eras": ["emergence"],
+        "priorCrossing": { "min": 1 }
+      }
+    },
+    {
+      "family": "bavaria",
+      "branch": "arrival_brewing_belt",
+      "priority": 4,
+      "once": true,
+      "condition": {
+        "eras": ["convergence"],
+        "year": { "min": 1860, "max": 1899 }
+      }
+    },
+    {
+      "family": "bavaria",
+      "branch": "the_great_war_rupture",
+      "priority": 3,
+      "condition": {
+        "eras": ["emergence"],
+        "year": { "min": 1914, "max": 1933 },
+        "priorCrossing": { "min": 1 }
+      }
+    },
+    {
+      "family": "scandinavian",
+      "branch": "arrival_homestead_prairie",
+      "priority": 4,
+      "once": true,
+      "condition": {
+        "eras": ["convergence"],
+        "year": { "min": 1862, "max": 1899 }
+      }
+    },
+    {
+      "family": "baghdad",
+      "branch": "merchant_house_meeting",
+      "priority": 2,
+      "condition": {
+        "eras": ["emergence", "ascension"],
+        "meters": { "money": { "min": 500 } }
+      }
+    }
+  ]
+}

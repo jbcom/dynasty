@@ -6,6 +6,7 @@ import {
   SagaFileSchema,
   type Scene,
 } from "../sim/saga/schema";
+import { applySpineBranchOnRamps } from "../sim/saga/spineBranch";
 
 /**
  * Load + validate the NOVEL saga corpus from `src/data/saga/**`. Each `<wave>/<archetype>.act.json`
@@ -30,7 +31,9 @@ export function loadSaga(): SagaCorpus {
       throw new Error(`Invalid saga act file ${path}: ${parsed.error.message}`);
     }
     acts.push(...parsed.data.acts);
-    scenes.push(...parsed.data.scenes);
+    // FS-SPINE-BRANCH-ONRAMPS: stamp destiny branch signature flags onto spine scenes whose choices steer
+    // toward a destiny, so branchOf forks off the SPINE (not the dead origins events). No-op for non-spine.
+    scenes.push(...parsed.data.scenes.map(applySpineBranchOnRamps));
   }
   return buildCorpus(acts, scenes);
 }

@@ -53,6 +53,14 @@
      a system serif so layout holds before the woff2 loads (font-display: swap). */
   --mmm-font-display: "Playfair Display", "Georgia", "Times New Roman", serif;
   --mmm-font-body: "EB Garamond", "Georgia", "Times New Roman", serif;
+  /* UI / DATA face (UQ-UI type-role split): a fast-scanning system-UI stack for HUD data rows,
+     pills, values, labels, legends — NOT prose. Reserving the italic body serif for the NOVEL voice
+     and giving data an upright, neutral, glanceable face is the highest-leverage scannability lever
+     (no new webfont = no weight cost). Numerals use tabular figures so columns of values align. */
+  --mmm-font-ui:
+    system-ui, -apple-system, "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
+  --mmm-font-ui-num: var(--mmm-font-ui);
+  --mmm-fvn-tabular: "tnum" 1, "lnum" 1;
 
   /* Elevation */
   --mmm-shadow: 0 4px 16px rgb(0 0 0 / 0.4);

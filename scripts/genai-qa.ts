@@ -22,7 +22,13 @@
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { DEFAULT_QA_MODEL, geminiGenerate, parseGeneratedObject } from "../src/sim/genai/client";
-import { normalizeSceneFile, validateSceneFile, type SceneRequest } from "../src/sim/genai/scene";
+import {
+  lineagePassBrief,
+  normalizeSceneFile,
+  scenePassBrief,
+  type SceneRequest,
+  validateSceneFile,
+} from "../src/sim/genai/scene";
 import {
   applyBraid,
   applySlots,
@@ -36,6 +42,7 @@ import {
   braidPassSystem,
   type LineageSurface,
   lineagePassSystem,
+  normalizeBraidSlots,
   scenePassSystem,
   slotPassSystem,
   type SuccessionRequest,
@@ -172,31 +179,59 @@ async function passScene(ref: ActFileRef, gen: Generate): Promise<void> {
     file.acts.find((a) => a.scenes.includes(sid)) ?? file.acts[0] ?? FALLBACK_ACT;
   // Revise scenes concurrently within the file. Each revision is validated as an INDIVIDUAL scene
   // (so one bad scene can't sink the file), with one retry; on failure the original is kept.
-  const revised = await Promise.all(file.scenes.map((scene) => reviseScene(scene, actForScene(scene.id), gen, label)));
+  const revised = await Promise.all(file.scenes.map((scene) => reviseScene(ref, scene, actForScene(scene.id), gen, label)));
   file.scenes = revised;
   writeIfValid(ref, file, label);
 }
 
+/**
+ * Normalize a model's prose-pass output, then RE-PIN the wiring the prose pass must never change, and
+ * schema-validate. Returns the safe revised scene, or null if it can't be validated (caller keeps the
+ * original). Used by BOTH the scene-polish pass and the lineage continuity-fix re-author so they share
+ * one determinism guarantee.
+ *
+ * RE-PINNED wiring (UQ-2c2): id/sense/next/requires AND `decision`. The decision carries the
+ * succession/setFlags wiring the sim replays — a prose pass that reworded or reordered the decision
+ * options silently broke save/restore determinism (the run picks the `succession.takesPartner` option
+ * by index, so a moved/dropped flag changes the path → different end year). Prose passes polish PROSE
+ * only; the succession PASS is the sole authority on a scene's decision.
+ */
+function normalizeAndPin(raw: string, original: Scene): Scene | null {
+  const obj = parseGeneratedObject(raw);
+  if (!obj) return null;
+  // Coerce model drift (string prose, missing/undefined arrays, numeric-key objects) like the bulk gate.
+  const normed = (normalizeSceneFile({ acts: [], scenes: [obj] }) as { scenes?: unknown[] }).scenes?.[0];
+  if (!normed) return null;
+  const candidate = {
+    ...(normed as Scene),
+    id: original.id,
+    sense: original.sense,
+    next: original.next,
+    requires: original.requires,
+    // Always pin the ORIGINAL decision (even if undefined) so a hallucinated decision the model invented on
+    // a decisionless scene is overwritten, not preserved by a conditional spread.
+    decision: original.decision,
+  };
+  const v = SceneSchema.safeParse(candidate);
+  return v.success ? v.data : null;
+}
+
 /** Revise one scene (≤2 attempts); return a schema-valid revision or the untouched original. */
 async function reviseScene(
+  ref: ActFileRef,
   scene: Scene,
   act: SagaFileShape["acts"][number],
   gen: Generate,
   label: string,
 ): Promise<Scene> {
+  // UQ-2: hold the edit to the SAME era×class brief + this people's myth-flags that drove generation.
+  const brief = scenePassBrief(ref.wave, act.tier, ref.cls);
   for (let attempt = 0; attempt < 2; attempt++) {
-    const raw = await call(gen, scenePassSystem(), buildScenePassPrompt(scene, act), `${label}:${scene.id}`);
+    const raw = await call(gen, scenePassSystem(), buildScenePassPrompt(scene, act, brief), `${label}:${scene.id}`);
     if (!raw) return scene;
-    const obj = parseGeneratedObject(raw);
-    if (!obj) continue;
-    // Coerce model drift (string prose, missing/undefined arrays, numeric-key objects) like the bulk gate.
-    const normed = (normalizeSceneFile({ acts: [], scenes: [obj] }) as { scenes?: unknown[] }).scenes?.[0];
-    if (!normed) continue;
-    // Re-pin the wiring the editor must never change, THEN schema-validate the individual scene.
-    const candidate = { ...(normed as Scene), id: scene.id, sense: scene.sense, next: scene.next, requires: scene.requires };
-    const v = SceneSchema.safeParse(candidate);
-    if (v.success) return v.data;
-    console.error(`    · ${scene.id}: invalid revision (${v.error.issues[0]?.message}) — ${attempt === 0 ? "retry" : "kept original"}`);
+    const pinned = normalizeAndPin(raw, scene);
+    if (pinned) return pinned;
+    console.error(`    · ${scene.id}: invalid revision — ${attempt === 0 ? "retry" : "kept original"}`);
   }
   return scene;
 }
@@ -239,7 +274,10 @@ async function passLineage(ref: ActFileRef, gen: Generate): Promise<void> {
   const label = `lineage ${ref.wave}/${ref.archetype}.${ref.cls}`;
   const file = readFile(ref);
   if (!file) return;
-  const raw = await call(gen, lineagePassSystem(), buildLineagePassPrompt(lineageSurface(ref, file)), label);
+  // UQ-2: a "premise" break includes drifting OFF this people's documented historical arc, not only
+  // internal contradiction — feed the wave brief so the continuity editor measures against real history.
+  const waveBrief = lineagePassBrief(ref.wave);
+  const raw = await call(gen, lineagePassSystem(), buildLineagePassPrompt(lineageSurface(ref, file), waveBrief), label);
   if (!raw) return;
   const obj = parseGeneratedObject(raw) as { breaks?: Array<{ actId: string; sceneId: string; kind: string; detail: string; fix: string }> } | null;
   const breaks = obj?.breaks ?? [];
@@ -257,11 +295,15 @@ async function passLineage(ref: ActFileRef, gen: Generate): Promise<void> {
       continue;
     }
     const act = file.acts.find((a) => a.scenes.includes(scene.id)) ?? file.acts[0] ?? FALLBACK_ACT;
-    const fixPrompt = `${buildScenePassPrompt(scene, act)}\n\nCONTINUITY FIX REQUIRED (${br.kind}): ${br.detail}\nApply this fix: ${br.fix}`;
+    const sceneBrief = scenePassBrief(ref.wave, act.tier, ref.cls);
+    const fixPrompt = `${buildScenePassPrompt(scene, act, sceneBrief)}\n\nCONTINUITY FIX REQUIRED (${br.kind}): ${br.detail}\nApply this fix: ${br.fix}`;
     const fixRaw = await call(gen, scenePassSystem(), fixPrompt, `${label}:${br.sceneId}`);
     if (!fixRaw) continue;
-    const fixed = parseGeneratedObject(fixRaw) as Scene | null;
-    if (fixed && fixed.id === scene.id) sceneById.set(scene.id, fixed);
+    // Route through the SAME normalize + re-pin + schema-validate path as the scene pass (UQ-2c2): the
+    // continuity fix used to accept raw model output with only an id check, so it could (and did) rewrite
+    // the decision wiring + break determinism. Now it polishes prose only; decision/requires stay pinned.
+    const fixed = normalizeAndPin(fixRaw, scene);
+    if (fixed) sceneById.set(scene.id, fixed);
   }
   file.scenes = file.scenes.map((s) => sceneById.get(s.id) ?? s);
   writeIfValid(ref, file, label);
@@ -400,10 +442,12 @@ async function passSlots(ref: ActFileRef, gen: Generate): Promise<void> {
     if (scene.braidSlots && scene.braidSlots.length > 0) continue; // already tagged
     const raw = await call(gen, slotPassSystem(), buildSlotPassPrompt(scene as Scene), `${label}:${scene.id}`);
     if (!raw) continue;
-    const obj = parseGeneratedObject(raw) as { braidSlots?: BraidSlot[] } | null;
-    if (!obj?.braidSlots?.length) continue;
-    // Validate the tagged scene on its own — a malformed slot can't sink the file's other scenes.
-    const tagged = applySlots(scene as Scene, obj.braidSlots);
+    const obj = parseGeneratedObject(raw) as { braidSlots?: unknown } | null;
+    const normalized = normalizeBraidSlots(obj?.braidSlots);
+    if (!normalized.length) continue;
+    // Normalize model drift (kind casing/synonyms, stray destination vignette) THEN validate the tagged
+    // scene on its own — a malformed slot can't sink the file's other scenes. (Cast: schema gates it.)
+    const tagged = applySlots(scene as Scene, normalized as BraidSlot[]);
     const v = SceneSchema.safeParse(tagged);
     if (!v.success) {
       console.error(`    · ${scene.id}: invalid slots (${v.error.issues[0]?.message}) — skipped`);

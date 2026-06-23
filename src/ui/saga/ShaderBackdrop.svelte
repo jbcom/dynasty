@@ -26,6 +26,8 @@ let startMs = 0;
 
 // Per-macro-act palette: [topColor, bottomColor, accent] as 0..1 rgb triples.
 const PALETTES: Record<MacroAct, { top: [number, number, number]; bot: [number, number, number]; accent: [number, number, number]; speed: number }> = {
+  // FS-2: the founding era — candlelit parchment/amber, the slowest drift (the line's quiet origin).
+  founding: { top: [0.1, 0.08, 0.05], bot: [0.03, 0.02, 0.01], accent: [0.72, 0.55, 0.28], speed: 0.03 },
   convergence: { top: [0.07, 0.1, 0.16], bot: [0.02, 0.03, 0.06], accent: [0.35, 0.45, 0.6], speed: 0.04 },
   emergence: { top: [0.12, 0.09, 0.04], bot: [0.04, 0.03, 0.02], accent: [0.83, 0.69, 0.21], speed: 0.06 },
   ascension: { top: [0.03, 0.03, 0.09], bot: [0.0, 0.0, 0.02], accent: [0.55, 0.62, 0.95], speed: 0.09 },

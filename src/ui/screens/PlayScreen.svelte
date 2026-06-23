@@ -5,6 +5,7 @@ import ButterflyLog from "../ButterflyLog.svelte";
 import Dossier from "../Dossier.svelte";
 import EventCard from "../EventCard.svelte";
 import LineageView from "../LineageView.svelte";
+import MapView from "../saga/MapView.svelte";
 import MarketsView from "../MarketsView.svelte";
 import MeterHud from "../MeterHud.svelte";
 import NewsTicker from "../NewsTicker.svelte";
@@ -46,6 +47,17 @@ const { content, view, busy, onchoose, onpickbeat, onpickdecision, wide = false 
 const axis = $derived(tyrannyUtopiaAxis(view.state.personality));
 const drift = $derived(axis < -25 ? "utopia" : axis > 25 ? "tyranny" : "neutral");
 
+// VL-2b: the generation's PORTRAIT (the one speaker, Suzerain pattern). Derived from the spine scene's
+// generation id (spine:gN) + the founder's gender; the generated engraving loads beside the prose.
+// Undefined for non-spine scenes (no portrait — the SceneReader renders prose-only as before).
+const portraitSrc = $derived.by(() => {
+  const id = view.saga.scene?.id ?? "";
+  const m = id.match(/^spine:g(\d+):/);
+  if (!m) return undefined;
+  const gender = view.state.founding?.gender ?? "male";
+  return `/assets/generated/portraits/spine_g${m[1]}_${gender}.png`;
+});
+
 // Branch-aware term interpolation: the same authored {head_of_state} resolves
 // to "President" or "Reichskommissar" etc. by the run's alternate-history branch.
 const branch = $derived(branchOf(view.state));
@@ -84,6 +96,7 @@ $effect(() => {
 
 type Tab =
   | "event"
+  | "map"
   | "news"
   | "markets"
   | "lineage"
@@ -104,6 +117,8 @@ $effect(() => { if (tab === "event" && wide) tab = defaultTab; });
 // Each tab carries a real 2D line-icon asset (public/assets/icons/ui/<icon>.svg).
 const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   { id: "event", label: "Now", icon: "now" },
+  // VL-3: the era-progressing journey map (founded lines only — it tracks the founding→stars arc).
+  ...(hasLineage ? [{ id: "map" as Tab, label: "Map", icon: "timeline" }] : []),
   ...(hasNews ? [{ id: "news" as Tab, label: "News", icon: "news" }] : []),
   ...(hasMarkets ? [{ id: "markets" as Tab, label: "Markets", icon: "markets" }] : []),
   ...(hasLineage ? [{ id: "lineage" as Tab, label: "Lineage", icon: "dossier" }] : []),
@@ -132,6 +147,7 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
       <SceneReader
         scene={view.saga.scene}
         threads={view.saga.threads}
+        {portraitSrc}
         {term}
         onbeat={(i) => onpickbeat?.(i)}
         ondecision={(i) => onpickdecision?.(i)}
@@ -150,7 +166,9 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
 {/snippet}
 
 {#snippet infoTab()}
-  {#if tab === "news"}
+  {#if tab === "map"}
+    <MapView gameState={view.state} />
+  {:else if tab === "news"}
     <NewsTicker {content} gameState={view.state} {term} />
   {:else if tab === "markets"}
     <MarketsView {content} gameState={view.state} />

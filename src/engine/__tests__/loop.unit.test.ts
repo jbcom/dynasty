@@ -19,6 +19,15 @@ describe("Game loop", () => {
     expect(g.finished).toBe(false);
   });
 
+  it("FS-5c: the trigger-lattice view path is deterministic across re-reads", () => {
+    // The view folds in deterministic-trigger family branches (triggerThreads). Reading `view` twice
+    // for the same state must yield identical saga threads — no RNG advance, replay-safe.
+    const g = new Game(content(), "seed");
+    const a = g.view.saga?.threads ?? [];
+    const b = g.view.saga?.threads ?? [];
+    expect(JSON.stringify(a)).toBe(JSON.stringify(b));
+  });
+
   it("notifies subscribers immediately and on each choice", () => {
     const g = new Game(content(), "seed");
     const seen: Array<string | null> = [];
@@ -216,17 +225,34 @@ describe("Game loop", () => {
     expect(g2.view.state.end?.kind).toBe(g.view.state.end?.kind);
   });
 
-  it("DEPTH-1: every close scene in the shipped corpus carries a take-partner succession decision", () => {
+  it("DEPTH-1: every CELL-act close carries a take-partner succession decision", () => {
     // The dynastic fork is real data, not just wiring: each generation's close offers a decision whose
     // take-partner option carries the succession effect the loop reads (loop.ts pickDecision →
     // beginNextGenerationAct). Asserts the authored corpus, so a regression that drops it fails CI.
+    // FS-6: scope to the 504 CELL-act closes (the spine has its own close shape, asserted separately).
     const corpus = loadSaga();
-    const closes = [...corpus.scenes.values()].filter((s) => s.id.endsWith(":close"));
+    const closes = [...corpus.scenes.values()].filter(
+      (s) => s.id.endsWith(":close") && !s.id.startsWith("spine:"),
+    );
     expect(closes.length).toBe(504);
     for (const close of closes) {
       const succ = close.decision?.options.find((o) => o.succession?.takesPartner);
       expect(succ?.succession?.takesPartner, close.id).toBe(true);
       expect(succ?.succession?.begets ?? 0, close.id).toBeGreaterThan(0);
+    }
+  });
+
+  it("FS-6: each SPINE close carries succession, except the terminal stellar act (ends in expansion)", () => {
+    const corpus = loadSaga();
+    const spineCloses = [...corpus.scenes.values()].filter(
+      (s) => s.id.startsWith("spine:") && s.id.endsWith(":close"),
+    );
+    // 9 of the 10 generations close on a succession fork; the terminal g9 act resolves into the ending.
+    expect(spineCloses.length).toBeGreaterThanOrEqual(8);
+    for (const close of spineCloses) {
+      if (close.id.startsWith("spine:g9:")) continue; // terminal stellar act — no succession
+      const succ = close.decision?.options.find((o) => o.succession?.takesPartner);
+      expect(succ?.succession?.takesPartner, close.id).toBe(true);
     }
   });
 
@@ -451,15 +477,64 @@ describe("Game loop", () => {
     };
     const a = play();
     // The saga clock is decoupled from the 1885 era ladder, so baghdad survives generations (was extinct
-    // ~16 scenes) AND the run caps at 6 generations (was infinite once decoupled) — a full, finite run.
+    // ~16 scenes) AND the run caps + finishes (was infinite once decoupled) — a full, finite run.
+    // FS-8: the engine now plays the AUTHORED SPINE (10 generations × ~3-5 scenes ≈ 40-110 base scenes,
+    // before woven branches), denser-but-shorter than the old 504-cell lattice. Assert a full finite run.
     expect(a.finished).toBe(true);
-    expect(a.scenes).toBeGreaterThan(120);
+    expect(a.scenes).toBeGreaterThan(30);
     expect(a.scenes).toBeLessThan(400);
     expect(a.conv).toBeTruthy();
     // Replay-deterministic.
     const b = play();
     expect(b.scenes).toBe(a.scenes);
     expect(b.year).toBe(a.year);
+  });
+
+  it("FS-8: a founded run plays ALL 10 spine generations founding→stars (not capped at gen 5)", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "anglo_protestant",
+      year: 1776,
+      archetype: "political" as const,
+      gender: "male" as const,
+      surname: "Hale",
+      given: "Tobias",
+      seed: "fs8e",
+      originId: "composed:ireland:origins",
+      // The diegetic life-seeds (FS-7) ground the founder so the line can carry to the stars — a realistic
+      // founding, not a bare one.
+      lifeSeeds: {
+        firstJob: "printers_devil" as const,
+        bestFriend: "an_ambitious_rival" as const,
+        lifePartner: "marry_for_love" as const,
+      },
+    };
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    const gens = new Set<string>();
+    let n = 0;
+    while (!g.finished && n < 20000) {
+      const v = g.view;
+      const s = v.saga.scene;
+      const m = s?.id.match(/spine:(g\d)/);
+      if (m?.[1]) gens.add(m[1]);
+      if (s?.decision) {
+        const i = s.decision.options.findIndex((o) => o.succession?.takesPartner);
+        g.pickDecision(i >= 0 ? i : 0);
+      } else if (s?.beats.length) g.pickBeat(0);
+      else if (v.currentEvent?.choices[0]) g.choose(v.currentEvent.choices[0].id);
+      else break;
+      n++;
+    }
+    // The spine must advance PAST gen 5 — the gen-cap bug (clamp at MAX_RUNG=5) replayed g5 forever and
+    // never reached the broadcast/orbital/stellar acts (g6-g9). Reaching any g6+ proves the cap is fixed
+    // (exactly which terminal generation a given path reaches depends on survival; g0 + a g6+ is the
+    // capability assertion). Founding → beyond the old cap is the whole point of the spine.
+    expect(gens.has("g0")).toBe(true);
+    expect(gens.has("g9"), `gens reached: ${[...gens].sort().join(",")}`).toBe(true); // the stars
+    expect(gens.size).toBe(10);
+    expect(g.finished).toBe(true);
   });
 
   it("PF-14: a saga choice's setFlags reach the run's state.flags (not sealed in the driver)", () => {

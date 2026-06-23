@@ -110,6 +110,9 @@ export interface GameState {
   founding?: {
     momentId: string;
     surname: string;
+    /** The player-chosen progenitor GIVEN name (ONB-1), when explicitly chosen at founding. Persisted
+     *  so a reload reconstructs the exact founder (a free-typed name isn't re-derivable from the seed). */
+    given?: string;
     culture: string;
     place: string;
     /**

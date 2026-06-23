@@ -53,15 +53,32 @@ const flags = $derived(visibleFlagLabels(gameState.flags));
     grid-template-areas: "icon name val" "bar bar bar";
     align-items: center;
     gap: 0.2rem 0.5rem;
+    /* UQ-UI type-role split: data rows use the upright UI face, not the novel serif. */
+    font-family: var(--mmm-font-ui);
   }
-  .icon { grid-area: icon; }
-  .name { grid-area: name; color: var(--mmm-text); }
-  .val { grid-area: val; font-weight: 700; color: var(--mmm-text); }
+  /* Contain the emoji meter icon so it sits in a consistent box + reads as a glyph, not a sticker
+     (UQ-UI: emoji clash with the luxury serif; until a CSS-glyph set lands this keeps them tidy). */
+  .icon {
+    grid-area: icon;
+    font-size: 0.95rem;
+    line-height: 1;
+    width: 1.4rem;
+    text-align: center;
+    filter: saturate(0.85);
+  }
+  .name { grid-area: name; color: var(--mmm-text); font-size: 0.82rem; }
+  .val {
+    grid-area: val;
+    font-weight: 700;
+    color: var(--mmm-text);
+    font-variant-numeric: tabular-nums;
+  }
   .bar { grid-area: bar; height: 5px; background: color-mix(in srgb, var(--mmm-text-dim) 25%, transparent); border-radius: 3px; overflow: hidden; }
   .bar i { display: block; height: 100%; }
   .empty { color: var(--mmm-text-dim); font-style: italic; }
   .flags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
   .chip {
+    font-family: var(--mmm-font-ui);
     font-size: 0.72rem;
     padding: 0.15rem 0.5rem;
     background: var(--mmm-surface);

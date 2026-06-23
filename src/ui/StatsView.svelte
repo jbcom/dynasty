@@ -87,5 +87,16 @@ $effect(() => {
   .stats { padding: var(--mmm-pad); }
   h3 { color: var(--mmm-gold); font-family: var(--mmm-font-display); margin: 0 0 0.5rem; }
   .chart { width: 100%; }
-  .note { color: var(--mmm-text-dim); font-size: 0.85rem; }
+  .note {
+    font-family: var(--mmm-font-ui);
+    color: var(--mmm-text-dim);
+    font-size: 0.82rem;
+  }
+  /* UQ-UI: the uPlot legend + axis labels are DATA — give them the UI face + tabular figures so the
+     Trajectory chart scans like the rest of the HUD, not in the prose serif. Scoped under .stats. */
+  .stats :global(.u-legend),
+  .stats :global(.u-axis) {
+    font-family: var(--mmm-font-ui);
+    font-variant-numeric: tabular-nums;
+  }
 </style>

@@ -80,8 +80,15 @@ describe("loadSaga (real corpus)", () => {
     });
   }
 
-  it("the full corpus is exactly 504 acts (252 poor + 252 middle)", () => {
-    expect(corpus.acts.size).toBe(504);
+  it("the corpus holds 504 cell-acts (252 poor + 252 middle) + the authored dynasty SPINE (FS-6)", () => {
+    // FS-6: the founding→stars dynasty spine (spine:gN ids) is a new corpus member alongside the 504
+    // wave×archetype×class cell-acts (which are now MINED as branch fabric, not the unit of play).
+    const ids = [...corpus.acts.keys()];
+    const cellActs = ids.filter((id) => !id.startsWith("spine:"));
+    const spineActs = ids.filter((id) => id.startsWith("spine:"));
+    expect(cellActs.length).toBe(504);
+    expect(spineActs.length).toBe(10); // the 10 authored generations, founding → stars
+    expect(corpus.acts.size).toBe(514);
   });
 
   it("every scene's `next` pointer resolves to a real scene (traversal can't dead-end mid-act)", () => {

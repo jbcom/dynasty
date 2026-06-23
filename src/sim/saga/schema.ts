@@ -142,7 +142,7 @@ export const ActChapterSchema = z.object({
    *  Defaults to "poor" for back-compat with the original class-less corpus. */
   cls: z.string().min(1).default("poor"),
   tier: z.number().int().min(0).max(5),
-  macroAct: z.enum(["convergence", "emergence", "ascension"]),
+  macroAct: z.enum(["founding", "convergence", "emergence", "ascension"]),
   title: z.string().min(1),
   scenes: z.array(z.string().min(1)).min(1),
 });
@@ -162,3 +162,37 @@ export const SagaFileSchema = z.object({
   scenes: z.array(SceneSchema).default([]),
 });
 export type SagaFile = z.infer<typeof SagaFileSchema>;
+
+// ── FS-5b: the deterministic-trigger lattice data table (validated triggers.json) ──
+
+/** A numeric range gate (≥min, ≤max), either bound optional. */
+export const RangeSchema = z.object({ min: z.number().optional(), max: z.number().optional() });
+
+/** A compound, all-of trigger condition over the spine state (mirrors triggerLattice.TriggerCondition). */
+export const TriggerConditionSchema = z.object({
+  archetype: z.string().optional(),
+  leanings: z.record(z.string(), RangeSchema).optional(),
+  meters: z.record(z.string(), RangeSchema).optional(),
+  place: z.string().optional(),
+  eras: z.array(z.string()).optional(),
+  year: RangeSchema.optional(),
+  flags: z.array(z.string()).optional(),
+  notFlags: z.array(z.string()).optional(),
+  priorCrossing: RangeSchema.optional(),
+});
+
+/** One trigger rule: a family branch + its fire condition + policy. */
+export const TriggerRuleSchema = z.object({
+  family: z.string().min(1),
+  branch: z.string().min(1),
+  priority: z.number().optional(),
+  once: z.boolean().optional(),
+  condition: TriggerConditionSchema,
+});
+
+/** The triggers.json file: the recurring cast surnames + the rule table. */
+export const TriggerTableSchema = z.object({
+  cast: z.array(z.object({ id: z.string().min(1), surname: z.string().min(1) })).default([]),
+  rules: z.array(TriggerRuleSchema).default([]),
+});
+export type TriggerTable = z.infer<typeof TriggerTableSchema>;

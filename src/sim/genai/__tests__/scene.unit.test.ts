@@ -1,13 +1,18 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../../data/loadContent";
+import { DYNASTY_SPINE, spineActForGen } from "../../saga/spineAuthored";
 import type { GenerateFn } from "../client";
 import { expand } from "../expand";
 import {
   buildScenePrompt,
+  buildSpinePrompt,
   buildTitlePrompt,
+  lineagePassBrief,
   mergeSceneFile,
   normalizeTitle,
+  scenePassBrief,
   validateSceneFile,
+  validateSpineFile,
 } from "../scene";
 
 /**
@@ -225,5 +230,97 @@ describe("act retitle (distinct meso chapter titles)", () => {
     expect(normalizeTitle("   ", 0, "The Crossing").ok).toBe(false);
     expect(normalizeTitle("The Trump Ascendancy", 0, "The Crossing").ok).toBe(false);
     expect(normalizeTitle("The Crossing", 0, "The Crossing").ok).toBe(false); // echoed cue
+  });
+});
+
+describe("QA guidance briefs (UQ-2) — fed from the corrected guidance.json", () => {
+  it("scenePassBrief carries the era's qaLookFor/qaReject + the wave's myth-flags", () => {
+    const brief = scenePassBrief("ireland", 0, "poor");
+    expect(brief).toMatch(/THIS ERA MUST HAVE/);
+    expect(brief).toMatch(/THIS ERA MUST NOT/);
+    expect(brief).toMatch(/DO NOT INTRODUCE THESE MYTHS/);
+    // Real corrected content: the Irish myth-flags name the exaggerated placard.
+    expect(brief).toMatch(/No Irish Need Apply/i);
+  });
+  it("lineagePassBrief carries the wave's documented history/arc/braid + myths", () => {
+    const brief = lineagePassBrief("italian");
+    expect(brief).toMatch(/HISTORY:/);
+    expect(brief).toMatch(/ARC \(arrival/);
+    expect(brief).toMatch(/WHO THEY PLAUSIBLY CROSS/);
+    // Real corrected content: the Italian Commission was established 1931, not the immigrant era.
+    expect(brief).toMatch(/1931/);
+  });
+  it("returns an empty brief for an unknown wave (pass runs guidance-free)", () => {
+    expect(lineagePassBrief("atlantis")).toBe("");
+    expect(scenePassBrief("atlantis", 99, "poor")).toBe("");
+  });
+});
+
+describe("authored-spine generation (FS-3b) — per-era decision architecture in the prompt", () => {
+  it("injects the founding act's distinct architecture (bargain/allegiance, not a generic crossroads)", () => {
+    const g0 = spineActForGen(0)!;
+    const p = buildSpinePrompt(g0);
+    expect(p).toMatch(/ONE dynasty line/);
+    expect(p).toMatch(/America's\s+founding/i);
+    expect(p).toMatch(/BARGAIN:/); // g0 uses bargain + allegiance
+    expect(p).toMatch(/ALLEGIANCE:/);
+    // It must explicitly steer AWAY from the old generic template.
+    expect(p).toMatch(/do NOT default to a generic/i);
+  });
+
+  it("a later era injects a DIFFERENT architecture than the founding era (anti-sameness)", () => {
+    const founding = buildSpinePrompt(spineActForGen(0)!);
+    const broadcast = buildSpinePrompt(DYNASTY_SPINE.find((a) => a.era === "The Broadcast Age")!);
+    expect(broadcast).toMatch(/PLATFORM:/); // broadcast era = platform play
+    expect(broadcast).not.toMatch(/BARGAIN:/); // not the founding shape
+    expect(founding).not.toMatch(/PLATFORM:/);
+  });
+
+  it("the terminal stellar act injects the EXPANSION architecture (seeds the stellar endings)", () => {
+    const stellar = DYNASTY_SPINE.at(-1)!;
+    const p = buildSpinePrompt(stellar);
+    expect(p).toMatch(/EXPANSION:/);
+    expect(p).toMatch(/FORGE ALLIES|SEIZE COLONIES|QUIET/);
+  });
+
+  it("carries the optional founding-identity brief when given", () => {
+    const p = buildSpinePrompt(spineActForGen(0)!, "FOUNDER: Tobias, a Boston printer's son.");
+    expect(p).toContain("Tobias, a Boston printer's son");
+  });
+
+  it("validateSpineFile (FS-6) accepts a valid spine act, rejects an id mismatch", () => {
+    const g0 = spineActForGen(0)!;
+    const validFile = {
+      acts: [
+        {
+          id: g0.id,
+          wave: "spine",
+          archetype: "founding",
+          cls: "spine",
+          tier: 0,
+          macroAct: "founding",
+          title: "Act I — The Powder and the Pamphlet",
+          scenes: [`${g0.id}:open`],
+        },
+      ],
+      scenes: [
+        {
+          id: `${g0.id}:open`,
+          sense: "smell",
+          prose: [
+            "The print-shop reeked of lampblack and wet rag-paper, and of the tallow guttering low as the {family_name}s set the night's seditious type.",
+            "Outside, the harbor wind carried woodsmoke and the iron tang of a city deciding whether to become a country.",
+          ],
+          beats: [],
+        },
+      ],
+    };
+    const ok = validateSpineFile(validFile, g0);
+    expect(ok.ok).toBe(true);
+    // Wrong act id → rejected (the model must not relabel the spine act).
+    const wrong = { ...validFile, acts: [{ ...validFile.acts[0]!, id: "spine:g9:wrong" }] };
+    const bad = validateSpineFile(wrong, g0);
+    expect(bad.ok).toBe(false);
+    if (!bad.ok) expect(bad.reasons.join(" ")).toMatch(/spine act id mismatch/);
   });
 });

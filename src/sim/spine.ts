@@ -38,53 +38,184 @@ export interface ActScaffold {
   /** The class track this act belongs to (poor/middle/…) — class is a movable rung with its own story. */
   cls: string;
   title: string;
+  /** The arc SHAPE this act takes (UQ-1) — drives its scene structure + per-arc generation prompting. */
+  shape: ArcShape;
   scenes: SceneSlot[];
 }
 
 /**
- * The per-generation scene arc every act carries — a lived chapter, not a character-creation quiz.
- * Five scenes: an opening that drops us into the act's world (sensory, no when/where re-confirm), a
- * rising scene with a secondary decision, a midpoint that raises the stakes, the act's pivotal MAJOR
- * decision, and a close that hands forward to the heir. The senses rotate so the chapter is felt
- * through different lenses. GenAI writes the prose + weave + decision options per slot.
+ * ARC SHAPES (UQ-1) — distinct structural rhythms an act can take, so the 504-act lattice is NOT one
+ * template stamped everywhere. Each shape varies scene COUNT, the SENSE rotation, the intent FRAMING,
+ * and where the secondary decision sits. INVARIANTS every shape keeps: the FIRST scene is the `:open`
+ * (drops us into the lived moment), the LAST scene is the `:close` carrying the dynastic succession
+ * decision (the fork the engine reads), and the act's pivotal `:turn` is a MAJOR decision. Between those,
+ * the shape's middle slots differ. GenAI fleshes each slot; per-arc prompting (genai-expand) varies the
+ * voice + asks for SCANNABLE rhythm. The mid scene whose intent mentions an intersection is the braid
+ * anchor (WV-1/2). Pure data.
  */
-function sceneArc(actId: string, tier: number): SceneSlot[] {
-  // Each tier reframes the same arc at a different scale of reach (intimate → world → stars).
-  const scope = TIER_SCOPE[tier] ?? TIER_SCOPE_FALLBACK;
-  return [
+export type ArcShape = "rise" | "collapse" | "holding" | "reinvention" | "rivalry" | "windfall";
+export const ARC_SHAPES: readonly ArcShape[] = [
+  "rise",
+  "collapse",
+  "holding",
+  "reinvention",
+  "rivalry",
+  "windfall",
+];
+
+/** A middle slot template: the id suffix, sense, an intent built from the tier scope, and any decision. */
+interface MidSlot {
+  suffix: string;
+  sense: Sense;
+  intent: (s: TierScope) => string;
+  decision?: "secondary";
+}
+
+/** The middle scenes (between the fixed open and the close) for each arc shape. */
+const ARC_MIDDLES: Record<ArcShape, MidSlot[]> = {
+  // The climb — building momentum, an ally, a steady rise into the turn.
+  rise: [
     {
-      id: `${actId}:open`,
-      sense: "smell",
-      intent: `open in the lived moment of ${scope.where}: sensory, immersive, the line's situation felt — never re-stating when/where`,
-    },
-    {
-      id: `${actId}:rising`,
+      suffix: "push",
       sense: "touch",
-      intent: `a pressure of ${scope.pressure} tests the line; a lighter, character-revealing fork`,
+      intent: (s) => `the line pushes against ${s.pressure}; a lighter, character-revealing fork`,
       decision: "secondary",
     },
     {
-      id: `${actId}:midpoint`,
+      suffix: "ally",
       sense: "sound",
-      intent: `the stakes of ${scope.stakes} raise; another line's path may cross here (intersection)`,
+      intent: (s) => `an ally or a rival line's path crosses at ${s.stakes} (intersection)`,
+    },
+  ],
+  // The fall — fast + grim, fewer scenes, a sharp downward arc (more scannable).
+  collapse: [
+    {
+      suffix: "crack",
+      sense: "touch",
+      intent: (s) =>
+        `the first crack: ${s.pressure} turns against the line; a small choice that won't save it`,
+      decision: "secondary",
+    },
+  ],
+  // Endurance — slower, atmospheric, a generation that survives more than it achieves (white space).
+  holding: [
+    {
+      suffix: "toil",
+      sense: "touch",
+      intent: (s) => `the long toil of ${s.pressure}; little changes but the cost accrues`,
     },
     {
-      id: `${actId}:turn`,
-      sense: "sight",
-      intent: `the act's pivotal choice — how the line shapes (or is shaped by) ${scope.world} this generation`,
-      decision: "major",
+      suffix: "drift",
+      sense: "sound",
+      intent: (s) =>
+        `a quiet secondary choice as ${s.stakes} drift past; another line may pass through (intersection)`,
+      decision: "secondary",
     },
     {
-      id: `${actId}:close`,
-      sense: "taste",
-      intent: `the generation closes; what it passes to the heir as ${scope.inheritance}`,
-      // The close decision IS the dynastic fork: whether to take a partner + raise heirs (advance the
-      // line to the next generation) vs end it here. Its options carry the `succession` effect the
-      // engine reads (sagaDriver.applyDecision → advanceFamily). Tiered "major" — this is the act's
-      // most consequential choice for the LINE, even more than the turn's worldly major decision.
-      decision: "major",
+      suffix: "weight",
+      sense: "smell",
+      intent: (s) => `the weight of holding ${s.world} settles; what endures and what erodes`,
     },
-  ];
+  ],
+  // The pivot — stuck, then a spark that hinges the generation toward a leap.
+  reinvention: [
+    {
+      suffix: "stuck",
+      sense: "touch",
+      intent: (s) =>
+        `the line is stuck against ${s.pressure}; a secondary fork that hints at another way`,
+      decision: "secondary",
+    },
+    {
+      suffix: "spark",
+      sense: "sound",
+      intent: (s) =>
+        `a spark — a person, an idea, a crossing line — reframes ${s.stakes} (intersection)`,
+    },
+  ],
+  // The contest — a crossing is STRUCTURAL: the other line is the act's spine, not incidental.
+  rivalry: [
+    {
+      suffix: "meet",
+      sense: "sound",
+      intent: (s) =>
+        `the line MEETS another at ${s.stakes} — the crossing that defines this generation (intersection)`,
+    },
+    {
+      suffix: "maneuver",
+      sense: "touch",
+      intent: () => `maneuver against the other line; a secondary gambit`,
+      decision: "secondary",
+    },
+  ],
+  // The break — momentum up, a chance that must be seized or refused.
+  windfall: [
+    {
+      suffix: "chance",
+      sense: "sound",
+      intent: (s) =>
+        `a chance breaks open at ${s.stakes}; a crossing line may bring it (intersection)`,
+      decision: "secondary",
+    },
+  ],
+};
+
+/**
+ * Deterministically select an arc shape for a cell's act at a tier — a pure hash of
+ * (wave, archetype, cls, tier) so the lattice spreads across shapes and a wave×archetype's six tiers
+ * MIX shapes (not all "rise"). Tier-0 leans grounded (rise/holding); the hash provides the variety.
+ */
+export function arcShapeFor(cell: SpineCell, tier: number): ArcShape {
+  const key = `${cell.wave}:${cell.archetype}:${cell.cls}:${tier}`;
+  let h = 2166136261;
+  for (let i = 0; i < key.length; i++) {
+    h ^= key.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  // Tier 0 (the founding) is grounded — rise or holding only; later tiers use the full set.
+  if (tier === 0) return (h >>> 0) % 2 === 0 ? "rise" : "holding";
+  const idx = (h >>> 0) % ARC_SHAPES.length;
+  return ARC_SHAPES[idx] as ArcShape;
+}
+
+/**
+ * The scene arc for an act, in its selected SHAPE. Fixed open + fixed close (succession), the shape's
+ * middle slots between, and the pivotal MAJOR `:turn` before the close. The senses rotate so the chapter
+ * is felt through different lenses; GenAI writes the prose/weave/decision options per slot.
+ */
+function sceneArc(actId: string, tier: number, shape: ArcShape): SceneSlot[] {
+  const scope = TIER_SCOPE[tier] ?? TIER_SCOPE_FALLBACK;
+  // `shape` is this act's DRAMATIC MOVEMENT (its pacing/shape — rise, collapse, holding…), a STRUCTURAL
+  // layer chosen by arcShapeFor. It is ORTHOGONAL to the era's historical ARC (the guidance.json
+  // tier×class brief, which supplies the generation's meaning). The intents below name the movement as
+  // "this act moves as a <shape>" so the model reads it as FORM, not a competing story arc. (UQ-reconcile)
+  const open: SceneSlot = {
+    id: `${actId}:open`,
+    sense: "smell",
+    intent: `open in the lived moment of ${scope.where} (this act moves as a ${shape}): sensory, immersive, the line's situation felt — never re-stating when/where`,
+  };
+  const middles: SceneSlot[] = ARC_MIDDLES[shape].map((m) => ({
+    id: `${actId}:${m.suffix}`,
+    sense: m.sense,
+    intent: m.intent(scope),
+    ...(m.decision ? { decision: m.decision } : {}),
+  }));
+  const turn: SceneSlot = {
+    id: `${actId}:turn`,
+    sense: "sight",
+    intent: `the act's pivotal choice — how this ${shape}-movement act turns on (or is turned by) ${scope.world}`,
+    decision: "major",
+  };
+  const close: SceneSlot = {
+    id: `${actId}:close`,
+    sense: "taste",
+    intent: `the act (a ${shape} movement) closes; what it passes to the heir as ${scope.inheritance}`,
+    // The close decision IS the dynastic fork: take a partner + raise heirs (advance the line) vs end it
+    // here. Its options carry the `succession` effect the engine reads (sagaDriver.applyDecision →
+    // advanceFamily). Always present, always "major" — the act's most consequential choice for the LINE.
+    decision: "major",
+  };
+  return [open, ...middles, turn, close];
 }
 
 /** The shape of one tier's scope words. */
@@ -170,13 +301,16 @@ export function spineFor(cell: SpineCell): ActScaffold[] {
   return TIER_PLAN.map(({ tier, macroAct, title }) => {
     // The act id carries CLASS so a wave×archetype's poor + middle tracks coexist in one corpus.
     const actId = `act:${cell.wave}:${cell.archetype}:${cell.cls}:t${tier}`;
+    const shape = arcShapeFor(cell, tier);
     return {
       id: actId,
       macroAct,
       tier,
       cls: cell.cls,
+      // The title hints the shape so the chapter header itself varies across the lattice.
       title: `Act ${ROMAN[tier]} — ${title}`,
-      scenes: sceneArc(actId, tier),
+      shape,
+      scenes: sceneArc(actId, tier, shape),
     };
   });
 }

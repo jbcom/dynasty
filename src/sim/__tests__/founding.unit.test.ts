@@ -144,12 +144,56 @@ describe("CP-R2 foundByComposition — composed origin (place × era × culture 
     expect(r.progenitorName.endsWith(" Donnelly")).toBe(true);
   });
 
+  it("FS-ONB-DRIFT: stamps founding-origin seed flags (region/base/power/standing) on the run", () => {
+    const r = foundByComposition(
+      content,
+      baseComposition({
+        place: "founding_south",
+        seedFlags: ["region:south", "base:land", "power:land", "standing:established"],
+      }),
+    );
+    for (const f of ["region:south", "base:land", "power:land", "standing:established"]) {
+      expect(r.state.flags).toContain(f);
+    }
+    // The generic founding flags still stamp alongside the origin flags.
+    expect(r.state.flags).toContain("founded_line");
+  });
+
   it("composes the two new archetypes (entertainment, athletic)", () => {
     for (const archetype of ["entertainment", "athletic"] as const) {
       const r = foundByComposition(content, baseComposition({ archetype }));
       expect(r.state.archetype).toBe(archetype);
       expect(r.state.flags).toContain(`archetype:${archetype}`);
     }
+  });
+
+  it("ONB-1: a player-chosen GIVEN name overrides the seeded pick + is stored + round-trips", () => {
+    const r = foundByComposition(content, baseComposition({ given: "Aloysius" }));
+    expect(r.progenitorGiven).toBe("Aloysius");
+    expect(r.progenitorName).toBe("Aloysius Donnelly");
+    expect(r.state.founding?.given).toBe("Aloysius");
+    // A save round-trips the chosen given (a free-typed name isn't re-derivable from the seed).
+    const restored = fromSave(content, toSave(r.state));
+    expect(restored.founding?.given).toBe("Aloysius");
+    expect(restored.family?.members[0]?.given).toBe("Aloysius");
+  });
+
+  it("ONB-1: absent `given` falls back to the seeded culture+gender draw (prior behavior)", () => {
+    const r = foundByComposition(content, baseComposition());
+    const culture = content.onomastics.irish_catholic;
+    expect(culture?.givenMale).toContain(r.progenitorGiven);
+    expect(r.state.founding?.given).toBeUndefined();
+  });
+
+  it("ONB-1: a player-chosen naming STYLE (culture) names the founder from THAT culture's pool", () => {
+    // An Irish-wave founder who chooses the Anglo-Protestant naming tradition is named from it.
+    const r = foundByComposition(
+      content,
+      baseComposition({ culture: "anglo_protestant", gender: "female" }),
+    );
+    const anglo = content.onomastics.anglo_protestant;
+    expect(anglo?.givenFemale).toContain(r.progenitorGiven);
+    expect(r.state.founding?.culture).toBe("anglo_protestant");
   });
 
   it("is replay-deterministic: same composition → identical state", () => {

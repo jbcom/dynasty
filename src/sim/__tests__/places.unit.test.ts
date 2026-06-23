@@ -99,6 +99,21 @@ describe("CP-R3 places catalog", () => {
     expect(origins.size).toBeGreaterThanOrEqual(2);
   });
 
+  it("the random deal NEVER picks a founding-region place (those are onboarding-only)", () => {
+    // FS-ONB-DRIFT: kind:"founding" regions are chosen explicitly via onboarding, never randomly dealt.
+    // Across many seeds the random-deal branch must only surface wave/destination places.
+    for (let i = 0; i < 40; i++) {
+      const c = dealComposition(content.places, content.eras, `rand-${i}`, "Vane");
+      const dealt = placeById(content.places, c.place);
+      expect(dealt?.kind).not.toBe("founding");
+    }
+    // An explicitly-passed founding place is still honored (the production onboarding path).
+    const south = placeById(content.places, "founding_south");
+    if (!south) throw new Error("founding_south missing");
+    const c = dealComposition(content.places, content.eras, "explicit", "Vane", south);
+    expect(c.place).toBe("founding_south");
+  });
+
   it("resolveComposition rejects an off-catalog (place, era)", () => {
     const ireland = placeById(content.places, "ireland");
     if (!ireland) throw new Error("no ireland");

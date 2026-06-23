@@ -18,6 +18,7 @@ import {
   type BraidedThread,
   resolveThreads,
   type SagaCorpus,
+  spineActForGen,
 } from "../sim/saga/player";
 import {
   type ActState,
@@ -102,6 +103,19 @@ export class SagaDriver {
     }
     this.actTitle = act.title;
     this.state = startAct(this.corpus, act, motivators, flags);
+  }
+
+  /**
+   * FS-8: begin the AUTHORED dynasty-spine act for a generation (the ONE line, founding→stars). Prefers
+   * the authored spine; returns false if the spine isn't authored that far (so the caller can fall back
+   * to the cell corpus). This is how the engine plays the founding-spine ([[founding-spine-pivot]]).
+   */
+  beginSpine(gen: number, motivators: Motivators, flags: readonly string[] = []): boolean {
+    const act = spineActForGen(this.corpus, gen);
+    if (!act) return false;
+    this.actTitle = act.title;
+    this.state = startAct(this.corpus, act, motivators, flags);
+    return true;
   }
 
   /** The UI snapshot: the act title + current scene + any braided cross-family threads. */

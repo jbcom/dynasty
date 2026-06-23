@@ -16,79 +16,124 @@ export type Destination = "stars" | "contributed" | "earthbound" | "extinguished
 /** The motivator coloring of HOW a line reached the stars. */
 export type StarColoring = "conquest" | "covenant" | "ascendancy" | "commonwealth";
 
+/**
+ * FS-6b: the archetypal DESTINY of the ONE dynasty — the recognizable shape its power took on the way
+ * to (or instead of) the stars. With one line (not 504 gated cells) we can name these as concrete fates
+ * ([[founding-spine-pivot]]). A destiny COLORS the ending; the three STELLAR destinies (allies/colonies/
+ * hidden) are the distinct star finales the spine's terminal `expansion` decision seeds.
+ */
+export type Destiny =
+  | "religious_leader"
+  | "communard"
+  | "dictator"
+  | "oligarch"
+  | "crime_leader"
+  | "media_mogul"
+  // stellar finales (the terminal expansion gambit):
+  | "stellar_allies"
+  | "stellar_conquest"
+  | "stellar_hidden"
+  | "fallen"
+  | "earthbound";
+
 export interface ConvergenceEnding {
   id: string;
   destination: Destination;
   title: string;
+  /** The archetypal destiny this ending embodies (FS-6b) — the named fate of the one dynasty. */
+  destiny?: Destiny;
   /** The motivator gate a line must clear to reach this ending. */
   gate: Parameters<typeof meetsMotivatorGate>[1];
   /** Reach tier the line must have attained (0 personal … 5 interstellar) for a stars ending. */
   minTier?: number;
 }
 
-/** The ending lattice — ~18 convergence states (4 star colorings ×2 sub-variants + contributed/earthbound/extinguished). */
+/**
+ * The ending lattice — the ONE dynasty's archetypal DESTINIES (FS-6b). The three STELLAR finales (the
+ * terminal `expansion` gambit's options) come first + highest-gated; then the named earthly destinies the
+ * line can crown itself with at high tier (religious leader / communard / dictator / oligarch / crime
+ * leader / media mogul); then contributed / earthbound / extinguished fallbacks. First match in order wins.
+ */
 export const ENDINGS: readonly ConvergenceEnding[] = [
-  // STARS — Conquest (power + cunning)
+  // ── STELLAR FINALES (tier 5) — the three distinct fates among the stars (the expansion gambit) ──
   {
-    id: "stars_conquest_tyrant",
+    id: "stars_conquest",
     destination: "stars",
-    title: "Emperor of a Thousand Suns",
-    gate: { power: { min: 50 }, honor: { min: 30 } },
+    destiny: "stellar_conquest",
+    title: "Empire of a Thousand Suns",
+    // SEIZE COLONIES — power + low honor (conquest).
+    gate: { power: { min: 45 }, honor: { max: 20 } },
     minTier: 5,
   },
   {
-    id: "stars_conquest_benevolent",
+    id: "stars_allies",
     destination: "stars",
-    title: "The Reluctant Sovereign of the Reach",
-    gate: { power: { min: 50 }, honor: { min: -10, max: 30 } },
-    minTier: 5,
-  },
-  // STARS — Covenant (faith)
-  {
-    id: "stars_covenant_prophet",
-    destination: "stars",
-    title: "The Covenant Carried Outward",
-    gate: { worldview: { max: -40 }, reach: { min: 30 } },
+    destiny: "stellar_allies",
+    title: "The Covenant Among the Stars",
+    // FORGE ALLIES — reach + honor (a commonwealth of worlds).
+    gate: { reach: { min: 30 }, honor: { min: 0 } },
     minTier: 5,
   },
   {
-    id: "stars_covenant_zealot",
+    id: "stars_hidden",
     destination: "stars",
-    title: "The Theocracy Among the Stars",
-    gate: { worldview: { max: -40 }, power: { min: 40 } },
+    destiny: "stellar_hidden",
+    title: "Alone on a Quiet World",
+    // GO QUIET + HIDDEN — a line that reaches a world far enough to draw no notice.
+    gate: {},
     minTier: 5,
   },
-  // STARS — Ascendancy (science + progress)
+  // ── EARTHLY ARCHETYPAL DESTINIES (high tier, didn't take the stars themselves) ──
   {
-    id: "stars_ascendancy_equals",
-    destination: "stars",
-    title: "Among the Stars, As Equals",
-    gate: { worldview: { min: 40 }, tradition: { min: 30 } },
-    minTier: 5,
-  },
-  {
-    id: "stars_ascendancy_singularity",
-    destination: "stars",
-    title: "The Singularity's Heirs",
-    gate: { worldview: { min: 60 }, lineage: { max: -20 } },
-    minTier: 5,
-  },
-  // STARS — Commonwealth (community)
-  {
-    id: "stars_commonwealth_commons",
-    destination: "stars",
-    title: "The Star-Commonwealth",
-    gate: { power: { max: -40 }, reach: { min: 20 } },
-    minTier: 5,
+    id: "destiny_dictator",
+    destination: "earthbound",
+    destiny: "dictator",
+    title: "The Dictator's Dynasty",
+    gate: { power: { min: 50 }, honor: { max: 0 } },
+    minTier: 3,
   },
   {
-    id: "stars_commonwealth_remnant",
-    destination: "stars",
-    title: "The People Who Kept Each Other",
-    gate: { power: { max: -40 }, lineage: { min: 30 } },
-    minTier: 5,
+    id: "destiny_crime_leader",
+    destination: "earthbound",
+    destiny: "crime_leader",
+    title: "The Family That Owned the Shadows",
+    // The crime-planet-scale earthly fate ([[crime-power-axis]]): power + cunning, built outside the law.
+    gate: { power: { min: 35 }, worldview: { max: -10 } },
+    minTier: 3,
   },
-  // CONTRIBUTED — you helped/were absorbed by another line's ascent
+  {
+    id: "destiny_oligarch",
+    destination: "earthbound",
+    destiny: "oligarch",
+    title: "The House That Owned the Age",
+    gate: { wealth: { min: 50 } },
+    minTier: 3,
+  },
+  {
+    id: "destiny_media_mogul",
+    destination: "earthbound",
+    destiny: "media_mogul",
+    title: "The Voice of a Nation",
+    gate: { reach: { min: 45 } },
+    minTier: 3,
+  },
+  {
+    id: "destiny_religious_leader",
+    destination: "earthbound",
+    destiny: "religious_leader",
+    title: "The Prophet's Line",
+    gate: { worldview: { max: -40 } },
+    minTier: 3,
+  },
+  {
+    id: "destiny_communard",
+    destination: "earthbound",
+    destiny: "communard",
+    title: "The People's Commonwealth",
+    gate: { power: { max: -35 }, lineage: { min: 20 } },
+    minTier: 3,
+  },
+  // ── CONTRIBUTED — you helped/were absorbed by another line's ascent ──
   {
     id: "contributed_ally",
     destination: "contributed",
@@ -103,24 +148,33 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     gate: {},
     minTier: 4,
   },
-  // EARTHBOUND — endured, never left the cradle
+  // ── EARTHBOUND — endured, never crowned a destiny nor left the cradle ──
   {
     id: "earthbound_legacy",
     destination: "earthbound",
+    destiny: "earthbound",
     title: "A Quiet, Enduring Legacy",
     gate: { lineage: { min: 20 } },
   },
   {
     id: "earthbound_twilight",
     destination: "earthbound",
+    destiny: "earthbound",
     title: "An Earthbound Twilight",
     gate: {},
   },
-  // EXTINGUISHED — fell at some tier
-  { id: "extinguished_ruin", destination: "extinguished", title: "Ruin", gate: {} },
+  // ── EXTINGUISHED — fell at some tier ──
+  {
+    id: "extinguished_ruin",
+    destination: "extinguished",
+    destiny: "fallen",
+    title: "Ruin",
+    gate: {},
+  },
   {
     id: "extinguished_no_heir",
     destination: "extinguished",
+    destiny: "fallen",
     title: "The Line That Failed",
     gate: {},
   },
@@ -140,22 +194,39 @@ export interface ConvergenceContext {
 }
 
 /**
- * Resolve a finished line to its convergence ending. Order of resolution:
+ * Resolve a finished line to its archetypal DESTINY ending (FS-6b). Order of resolution:
  *  - not survived → extinguished (no-heir vs ruin);
- *  - reached interstellar tier with a motivators-cleared star ending → that star ending (coloring);
+ *  - reached interstellar tier with a motivators-cleared STELLAR finale → that finale (allies/conquest/hidden);
+ *  - reached high tier with a cleared earthly DESTINY gate → that named destiny (dictator/oligarch/crime/…);
  *  - reached high tier while a rival got to the stars → contributed;
- *  - otherwise earthbound. Pure + deterministic; the FIRST matching lattice entry (in priority order) wins.
+ *  - otherwise earthbound. Pure + deterministic; the FIRST matching lattice entry (in array order) wins.
  */
 export function resolveConvergence(ctx: ConvergenceContext): ConvergenceEnding {
   if (!ctx.survived) {
-    return (ctx.hasHeir ? byId("extinguished_ruin") : byId("extinguished_no_heir")) ?? ENDINGS[12]!;
+    return (
+      (ctx.hasHeir ? byId("extinguished_ruin") : byId("extinguished_no_heir")) ??
+      byId("extinguished_ruin") ??
+      ENDINGS[ENDINGS.length - 1]!
+    );
   }
-  // Stars: only if at the interstellar tier and a star gate clears.
+  // Stars: only at the interstellar tier — the three distinct stellar finales (hidden is the catch-all).
   if (ctx.tier >= 5) {
     const star = ENDINGS.find(
       (e) => e.destination === "stars" && meetsMotivatorGate(ctx.motivators, e.gate),
     );
     if (star) return star;
+  }
+  // Earthly archetypal DESTINY — a high-tier line that crowned itself a recognizable fate (FS-6b).
+  if (ctx.tier >= 3) {
+    const destiny = ENDINGS.find(
+      (e) =>
+        e.destiny !== undefined &&
+        e.destination === "earthbound" &&
+        e.destiny !== "earthbound" &&
+        (e.minTier ?? 0) <= ctx.tier &&
+        meetsMotivatorGate(ctx.motivators, e.gate),
+    );
+    if (destiny) return destiny;
   }
   // High tier but didn't make the stars yourself — did you ride another line there?
   if (ctx.tier >= 4) {
@@ -166,11 +237,15 @@ export function resolveConvergence(ctx: ConvergenceContext): ConvergenceEnding {
       if (contrib) return contrib;
     }
   }
-  // Earthbound: endured but grounded.
+  // Earthbound: endured but grounded — the plain legacy/twilight ends (NOT the named destinies, which
+  // only fire at tier≥3 above; a low-tier survivor gets the quiet earthbound fate).
   const earth = ENDINGS.find(
-    (e) => e.destination === "earthbound" && meetsMotivatorGate(ctx.motivators, e.gate),
+    (e) =>
+      e.destination === "earthbound" &&
+      (e.destiny === undefined || e.destiny === "earthbound") &&
+      meetsMotivatorGate(ctx.motivators, e.gate),
   );
-  return earth ?? byId("earthbound_twilight") ?? ENDINGS[11]!;
+  return earth ?? byId("earthbound_twilight") ?? byId("earthbound_legacy")!;
 }
 
 function byId(id: string): ConvergenceEnding | undefined {

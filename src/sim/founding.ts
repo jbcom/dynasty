@@ -7,6 +7,7 @@ import type { Motivators } from "./motivators";
 import { getCulture, pickGivenName } from "./onomastics";
 import { applyPersonality } from "./personality";
 import { createRng } from "./rng";
+import { applyLifeSeeds, type LifeSeedChoices, seedFlags } from "./saga/lifeSeeds";
 import type { AxisKind, StartMoment } from "./schema";
 import type { Archetype } from "./slots";
 import { type GameState, initState, withFlag } from "./state";
@@ -29,6 +30,8 @@ export interface FoundingInput {
   momentId: string;
   /** The player-chosen surname for the line. */
   surname: string;
+  /** The player-chosen progenitor GIVEN name (ONB-1), optional — overrides the seeded onomastic pick. */
+  given?: string;
   /** The run seed. */
   seed: string;
   /** The founding CALLING id (CP-2), optional — a durable generational lens. */
@@ -67,6 +70,12 @@ export interface Composition {
   originId?: string;
   /** The player-chosen surname for the line. */
   surname: string;
+  /**
+   * The player-chosen progenitor GIVEN name (ONB-1). When set, overrides the seeded onomastic pick so
+   * the founder is the player's choice. Optional — absent = the deterministic culture+gender draw (the
+   * prior behavior, still used by tests + any non-onboarding founding path).
+   */
+  given?: string;
   /** The run seed. */
   seed: string;
   /** The founding CALLING id (CP-2), optional. */
@@ -81,6 +90,18 @@ export interface Composition {
    * from turn one. Optional — absent = centrist start.
    */
   seedMotivators?: Motivators;
+  /**
+   * FS-7: the diegetic Epoch-0 birth life-seeds (first job / best friend / life partner). When present,
+   * their seed FLAGS are stamped on the run + their motivator LEANS tilt the founder. Optional — absent
+   * keeps the prior behavior (no life-seeds composed).
+   */
+  lifeSeeds?: LifeSeedChoices;
+  /**
+   * FS-ONB-DRIFT: extra seed FLAGS from the founding ORIGIN selection (region:/base:/power:/standing:),
+   * stamped on the run so the spine + trigger lattice can color decisions by the founder's power base.
+   * Optional — absent keeps the prior behavior.
+   */
+  seedFlags?: readonly string[];
 }
 
 /** The progenitor's given name + the founding state, for the UI + the run. */
@@ -112,6 +133,7 @@ export function compositionFromMoment(moment: StartMoment, input: FoundingInput)
     deepHistory: moment.deepHistory,
     originId: moment.id,
     surname: input.surname,
+    ...(input.given ? { given: input.given } : {}),
     seed: input.seed,
     ...(input.calling ? { calling: input.calling } : {}),
     ...(input.successionMode ? { successionMode: input.successionMode } : {}),
@@ -134,10 +156,12 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
   // Base state in the composition's era + archetype (FD-3.5 — no literal preset key).
   const base = initState(content, c.seed, c.archetype, c.era);
 
-  // Progenitor given name from the culture + gender (seeded, deterministic).
+  // Progenitor given name: the PLAYER'S chosen name (ONB-1) when set, else the seeded culture+gender
+  // draw (deterministic, the prior + non-onboarding behavior).
   const culture = getCulture({ cultures: content.onomastics }, c.culture);
   const nameRng = createRng(`${c.seed}::founding:${originId}:given`);
-  const progenitorGiven = pickGivenName(culture, c.gender, nameRng);
+  const chosenGiven = c.given?.trim().replace(/\s+/g, " ").slice(0, 32);
+  const progenitorGiven = chosenGiven || pickGivenName(culture, c.gender, nameRng, c.surname);
   const progenitorName = `${progenitorGiven} ${c.surname}`;
 
   const birthYear = c.year;
@@ -173,6 +197,14 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
   let meters = base.meters;
   // SS-7: start from the wave's class-seeded motivators when provided, else centrist.
   let personality = c.seedMotivators ?? base.personality;
+  // FS-7: the diegetic Epoch-0 life-seeds (first job / friend / partner) tilt the founder + stamp seed
+  // flags the spine + trigger lattice read.
+  if (c.lifeSeeds) {
+    personality = applyLifeSeeds(personality, c.lifeSeeds);
+    for (const f of seedFlags(c.lifeSeeds)) flags = withFlag(flags, f);
+  }
+  // FS-ONB-DRIFT: stamp the founding-origin flags (region/base/power/standing) for spine coloring.
+  for (const f of c.seedFlags ?? []) flags = withFlag(flags, f);
   const stack = resolveStack(content.worldStacks, c.place, c.era);
   for (const [axisKind, optionId] of Object.entries(c.axisChoices ?? {}) as [AxisKind, string][]) {
     const axis = axisByKind(content.axes, axisKind);
@@ -214,6 +246,9 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
       ...(c.deepHistory ? { deepHistory: true } : {}),
       ...(c.calling ? { calling: c.calling } : {}),
       gender: c.gender,
+      // ONB-1: persist the player's chosen given name so a reload reconstructs the exact founder
+      // (a free-typed name can't be re-derived from the seed). Only when explicitly chosen.
+      ...(chosenGiven ? { given: chosenGiven } : {}),
       ...(c.successionMode ? { successionMode: c.successionMode } : {}),
       ...(c.axisChoices ? { axisChoices: c.axisChoices } : {}),
     },

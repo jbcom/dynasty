@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import originsJson from "../../data/eras/new-york/1885-1946-origins/events.json";
 import eastcoastJson from "../../data/timelines/eastcoast.json";
 import moresJson from "../../data/timelines/mores.json";
 import religionJson from "../../data/timelines/religion.json";
@@ -176,14 +175,9 @@ describe("Kennedy rival-house arc folded into eastcoast (CP-R-ARCH-3)", () => {
     expect(flags.has("musk_paypal_exit") || flags.has("musk_spacex_founded")).toBe(true);
   });
 
-  it("origins exposes the brewing→bootlegger bridge WITHOUT any swap flag", () => {
-    const allChoiceFlags = new Set(
-      originsJson.events.flatMap((e) => (e.choices ?? []).flatMap((c) => c.setFlags ?? [])),
-    );
-    expect(allChoiceFlags.has("bootlegger_fortune")).toBe(true);
-    // NO-LEAK: the founding bridge no longer sets a swap flag.
-    expect(allChoiceFlags.has("kennedy_swap")).toBe(false);
-  });
+  // FS-RETIRE-PROLOGUE: the origins-event brewing→bootlegger bridge case was retired with the dead
+  // Trump-line prologue events. The live Kennedy rival-house arc (bootlegger_fortune etc.) is asserted
+  // above against eastcoastJson — the world timeline that actually carries it now.
 });
 
 describe("world & thematic timelines (data + linking protocol)", () => {

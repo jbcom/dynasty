@@ -17,7 +17,12 @@ function eras() {
     const data = EraEventsSchema.parse(m.default);
     byEra.set(data.era, [...(byEra.get(data.era) ?? []), ...data.events]);
   }
-  return [...byEra.entries()].map(([id, events]) => ({ id, events }));
+  // FS-RETIRE-PROLOGUE emptied ONLY the new-york Trump-line prologue file; the `origins` era still merges
+  // 13 immigration-WAVE place files (ireland/italian/…, the cast material) with real events, so the merged
+  // origins era keeps its density. Still exclude any era that ends up wholly empty (a spine-only era).
+  return [...byEra.entries()]
+    .map(([id, events]) => ({ id, events }))
+    .filter((e) => e.events.length > 0);
 }
 
 /**
@@ -25,24 +30,25 @@ function eras() {
  * line. Each era must have meaningful path divergence — gated events, multi-choice
  * events, and choices that set flags other events depend on.
  *
- * NA-11: `origins` is now a thinner BACKDROP era — its per-generation branching narrative moved to
- * the saga acts (src/data/saga/**, where every scene frames a choice and major decisions offer 3
- * options). The retired birth beats were deliberately single-EXPERIENCED moments anyway. So origins
- * gets a slightly lower multi-choice floor; the rest of the eras stay at the strict 0.6 gate.
- *
- * To RESTORE the 0.6 floor for origins, add multi-choice (3+) authored events to its events.json
- * files (or remove this override) — the actual ratio is ~0.53, so it needs a handful more branching
- * beats. Keep this override only while the saga acts carry origins' branching weight.
+ * FS-RETIRE-PROLOGUE: `origins` is now a SPINE-DRIVEN era — its per-generation branching narrative lives
+ * entirely in the saga acts (src/data/saga/**, the authored spine, where every scene frames a choice and
+ * destiny branches fork via spineBranch.ts). The dead Trump-line new-york prologue (which used to carry
+ * origins' event-card branching + causal coupling) was retired; the 13 remaining origins files are thin
+ * immigration-WAVE cast vignettes. So origins is EXEMPT from the event-card BRANCHING gates (multi-choice
+ * ratio, intra-era causal coupling) — those measure event-card divergence, which origins no longer carries.
+ * It still must clear the event-COUNT + gated-events floors (the cast vignettes are real, gated content).
  */
 describe("branch density (no era is a straight line)", () => {
-  // Per-era multi-choice floor override (default 0.6). Keep this minimal — only relax with a reason.
-  const MULTI_FLOOR: Record<string, number> = { origins: 0.5 };
+  // Eras whose branching lives in the saga spine, not their event cards — exempt from the branching-ratio
+  // gates below (their divergence is the spine's concern, asserted by the saga/spine tests).
+  const SPINE_DRIVEN = new Set(["origins"]);
   it("every era has many events, most with 3+ choices", () => {
     for (const era of eras()) {
       expect(era.events.length, `${era.id} too few events`).toBeGreaterThanOrEqual(12);
+      if (SPINE_DRIVEN.has(era.id)) continue; // branching moved to the spine
       const multi = era.events.filter((e) => e.choices.length >= 3).length;
       expect(multi / era.events.length, `${era.id} too few multi-choice events`).toBeGreaterThan(
-        MULTI_FLOOR[era.id] ?? 0.6,
+        0.6,
       );
     }
   });
@@ -69,6 +75,7 @@ describe("branch density (no era is a straight line)", () => {
 
   it("flags set by choices feed back into gates (causal coupling)", () => {
     for (const era of eras()) {
+      if (SPINE_DRIVEN.has(era.id)) continue; // origins' causal branching is in the spine now
       const setFlags = new Set(era.events.flatMap((e) => e.choices.flatMap((c) => c.setFlags)));
       const gateFlags = new Set(
         era.events.flatMap((e) => [...e.requires.flags, ...e.requires.notFlags]),

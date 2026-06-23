@@ -313,7 +313,10 @@ export type WorldTimeline = z.infer<typeof WorldTimelineSchema>;
 /** A single era's event pool file (data/eras/<id>.json). */
 export const EraEventsSchema = z.object({
   era: z.string().min(1),
-  events: z.array(EventSchema).min(1),
+  // May be empty (FS-SCHEMA-EMPTY-ERA): a SPINE-DRIVEN era legitimately has no event-card pool — the
+  // authored saga spine renders it instead. Non-spine eras still populate their pool; the schema no longer
+  // forces ≥1 so a future spine-only era can declare an empty pool without a placeholder event.
+  events: z.array(EventSchema),
 });
 export type EraEvents = z.infer<typeof EraEventsSchema>;
 
@@ -423,7 +426,9 @@ export const AssetSchema = z.object({
   path: z.string().min(1),
   kind: z.enum(["icon", "portrait", "background", "texture", "audio", "sprite", "font"]),
   source: z.string().min(1),
-  license: z.enum(["CC0", "CC-BY", "CC-BY-SA", "PD", "OFL", "MIT"]),
+  // "Generated" = produced by the project's GenAI pipeline (VL-2 portraits/map); rights per the model
+  // provider's terms (review before external distribution). The rest are the upstream open licenses.
+  license: z.enum(["CC0", "CC-BY", "CC-BY-SA", "PD", "OFL", "MIT", "Generated"]),
   attribution: z.string().default(""),
 });
 export type Asset = z.infer<typeof AssetSchema>;
@@ -969,8 +974,10 @@ export const PlaceSchema = z.object({
    * to America defined by WHEN it arrived (mid-to-late 1800s), WHAT class it arrived as, and what
    * pushed it out. Optional during migration; the wave roster sets these. `wave` distinguishes a
    * source-wave (a playable origin) from a `destination` ground (where waves land + stratify).
+   * `founding` (FS-ONB-DRIFT) is a REGION the PLAYER's line is founded in at 1776 — the waves are
+   * now only the recurring CAST, no longer the player's own origin.
    */
-  kind: z.enum(["wave", "destination"]).default("wave"),
+  kind: z.enum(["wave", "destination", "founding"]).default("wave"),
   /** The year band the wave arrives (e.g. [1845, 1855] for the Famine Irish). */
   arrivalYears: z.tuple([z.number(), z.number()]).optional(),
   /** The class the wave arrives as (the Wealth-motivator starting rung). */

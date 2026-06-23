@@ -17,7 +17,9 @@ describe("Convergence roster: every wave founds leak-free + has a saga act", () 
   const content = loadContent();
   const saga = loadSaga();
   const rosterIds = new Set(content.places.map((p) => p.id));
-  const wavePlaces = content.places.filter((p) => p.kind !== "destination").map((p) => p.id);
+  // Only the immigration-WAVE places carry corpus saga acts. Destination grounds and the
+  // FS-ONB-DRIFT founding-region places (kind:"founding") are not waves and have no cell-lattice acts.
+  const wavePlaces = content.places.filter((p) => p.kind === "wave").map((p) => p.id);
 
   it("the roster has the expected immigration waves", () => {
     for (const wave of [

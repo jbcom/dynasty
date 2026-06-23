@@ -62,6 +62,19 @@ describe("spine scaffold (scene-slot)", () => {
     expect(open?.intent).toContain("never re-stating when/where");
   });
 
+  it("frames the arc SHAPE as structural movement, not a competing story arc (UQ-reconcile)", () => {
+    // The hash-picked ArcShape governs FORM (pacing). The era's historical ARC (guidance.json) governs
+    // MEANING. The intents must read the shape as movement ("this act moves as a …" / "<shape> movement"),
+    // never as "a <shape> generation" (which collided with the guidance ARC and confused the model).
+    const slots = sceneSlotsFor({ wave: "ireland", cls: "poor", archetype: "economic" });
+    const open = slots.find((s) => s.id.endsWith(":open"));
+    const close = slots.find((s) => s.id.endsWith(":close"));
+    expect(open?.intent).toMatch(/this act moves as a /);
+    expect(close?.intent).toMatch(/movement\) closes/);
+    // The old collision phrasing must be gone everywhere.
+    for (const s of slots) expect(s.intent).not.toMatch(/\bgeneration\b/);
+  });
+
   it("scenes rotate the sensory frame so the chapter is felt through different lenses", () => {
     const senses = new Set(
       spineFor({ wave: "ireland", cls: "poor", archetype: "economic" })[0]?.scenes.map(

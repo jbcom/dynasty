@@ -42,21 +42,27 @@ export function scenePassSystem(): string {
     "Revise it to frontier literary quality: richer sensory prose, sharper period voice, choices",
     "that bite. You POLISH the writing — you do not change the plot or the wiring.",
     "PRESERVE EXACTLY (rejected if changed): the scene `id`, `sense`, `next`, `requires`, the",
-    "number of beats, each beat's `choice` shape, and the `decision` tier + option count.",
+    "number of beats, each beat's `choice` shape, and the ENTIRE `decision` block — its tier, option",
+    "count, AND each option's `succession`/`setFlags` wiring (the sim REPLAYS these; reordering or",
+    "altering them breaks save/restore determinism). You may reword decision option PROSE only.",
     "`prose` stays an array of 2-4 FULL paragraphs (each many sentences) — deepen them.",
     ...SHARED_RULES,
     "Output STRICT JSON: the SAME single scene object, revised. No prose outside the JSON.",
   ].join("\n");
 }
 
-/** Build the scene-polish prompt: the scene + its act's register cues (title/macroAct). */
+/** Build the scene-polish prompt: the scene + its act's register cues (title/macroAct) + the cell's brief. */
 export function buildScenePassPrompt(
   scene: Scene,
   act: Pick<ActChapter, "title" | "macroAct">,
+  /** Optional bespoke (era×class + wave) brief — the same guidance that drove generation, so QA holds the
+   *  edited prose to the SAME era's qaLookFor/qaReject + this people's real history (UQ-2). */
+  guidance?: string,
 ): string {
   return [
     `This scene belongs to the chapter "${act.title}" (${act.macroAct} macro-act).`,
     `Revise it. Keep every id/sense/next/beat/decision exactly; lift only the words.`,
+    ...(guidance ? ["", guidance] : []),
     "",
     `SCENE JSON:`,
     JSON.stringify(scene),
@@ -105,11 +111,14 @@ export function lineagePassSystem(): string {
   ].join("\n");
 }
 
-/** Build the lineage prompt from the lean surface of the family's chain. */
-export function buildLineagePassPrompt(surface: LineageSurface): string {
+/** Build the lineage prompt from the lean surface of the family's chain (+ optional wave-history brief). */
+export function buildLineagePassPrompt(surface: LineageSurface, guidance?: string): string {
   return [
     `A ${surface.cls}-class ${surface.archetype} family of the ${surface.wave} wave, six generations.`,
     `Audit the chain for cross-tier continuity breaks only.`,
+    // The wave's real history/arc/braid-affinity (UQ-2): a "premise" break includes drifting OFF this
+    // people's documented historical trajectory, not just internal contradiction.
+    ...(guidance ? ["", guidance] : []),
     "",
     `CHAIN SPINE JSON:`,
     JSON.stringify(surface),
@@ -258,8 +267,9 @@ export function slotPassSystem(): string {
     "Each slot: { kind, at (the 0-based paragraph index), setting (a short shared tag), vignette? }.",
     "Tag ONLY paragraphs that truly support a meeting — most scenes get 0-2 slots. Do not invent settings",
     "that aren't in the prose. `setting` must be lower-case, one or two words, drawn from the moment.",
+    '`kind` MUST be EXACTLY the lower-case string "source" or "destination" — no other value, no caps.',
     ...SHARED_RULES,
-    'Output STRICT JSON: { "braidSlots": [ { "kind": "...", "at": 0, "setting": "...", "vignette": "..." } ] }.',
+    'Output STRICT JSON: { "braidSlots": [ { "kind": "source"|"destination", "at": 0, "setting": "...", "vignette": "..." } ] }.',
   ].join("\n");
 }
 
@@ -275,6 +285,46 @@ export function buildSlotPassPrompt(scene: Scene): string {
     "",
     'Return ONLY { "braidSlots": [ ... ] }.',
   ].join("\n");
+}
+
+/**
+ * Coerce raw model slot objects to the canonical shape before the schema gate (the model drifts on the
+ * `kind` casing/synonyms — "DESTINATION", "anchor", "src" — and may put a vignette on a destination).
+ * Lower-cases + maps synonyms; drops a destination's vignette; drops slots whose kind can't be resolved.
+ * Pure. Returns a loose array the schema then validates (which still rejects a source missing a vignette).
+ */
+const KIND_SYNONYMS: Record<string, "source" | "destination"> = {
+  source: "source",
+  src: "source",
+  origin: "source",
+  destination: "destination",
+  dest: "destination",
+  anchor: "destination",
+  target: "destination",
+};
+export function normalizeBraidSlots(raw: unknown): unknown[] {
+  if (!Array.isArray(raw)) return [];
+  const out: unknown[] = [];
+  for (const r of raw) {
+    if (!r || typeof r !== "object") continue;
+    const o = r as Record<string, unknown>;
+    const kind =
+      KIND_SYNONYMS[
+        String(o.kind ?? "")
+          .trim()
+          .toLowerCase()
+      ];
+    if (!kind) continue; // unresolvable kind → drop the slot rather than fail the whole scene
+    const slot: Record<string, unknown> = {
+      kind,
+      at: o.at,
+      setting: typeof o.setting === "string" ? o.setting.toLowerCase().trim() : o.setting,
+    };
+    // A vignette belongs only on a source; strip it from a destination so the schema refine passes.
+    if (kind === "source" && typeof o.vignette === "string") slot.vignette = o.vignette;
+    out.push(slot);
+  }
+  return out;
 }
 
 /** Attach authored braid slots to a scene (replaces any existing). Pure. */

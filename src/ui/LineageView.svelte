@@ -114,9 +114,9 @@ function roleOf(m: LiveMember): string | null {
     gap: 0.35rem;
   }
   .gen-label {
-    font-family: var(--mmm-font-body);
-    font-size: 0.66rem;
-    letter-spacing: 0.28em;
+    font-family: var(--mmm-font-ui);
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--mmm-gold-deep);
   }
@@ -149,15 +149,16 @@ function roleOf(m: LiveMember): string | null {
     color: var(--mmm-text);
   }
   .life {
-    font-family: var(--mmm-font-body);
-    font-size: 0.72rem;
+    font-family: var(--mmm-font-ui);
+    font-size: 0.7rem;
     color: var(--mmm-text-dim);
+    font-variant-numeric: tabular-nums;
   }
   .badge {
     align-self: flex-start;
-    font-family: var(--mmm-font-body);
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
+    font-family: var(--mmm-font-ui);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--mmm-ink);
     background: var(--mmm-gold);

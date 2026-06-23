@@ -9,11 +9,94 @@
  * Pure given the spine + content; the live Gemini client is injected by the runner.
  */
 
+import guidanceData from "../../data/saga/guidance.json" with { type: "json" };
 import type { Rung } from "../classRung";
 import { hasPresetLeak } from "../leak";
 import { SagaFileSchema } from "../saga/schema";
+import type { DecisionArchitecture, SpineAct } from "../saga/spineAuthored";
 import type { Archetype } from "../slots";
 import { type SceneSlot, spineFor } from "../spine";
+
+/** A bespoke per-(era × class) creative brief (UQ-1) — hand-authored, injected into the prompt + QA. */
+interface EraGuidance {
+  arc: string;
+  tone: string;
+  focus: string;
+  rhythm: string;
+  scannability: string;
+  avoid: string;
+  qaLookFor: string;
+  qaReject: string;
+}
+/** A bespoke per-WAVE/people brief — real history + motivations that make each line + its crossings unique. */
+interface WaveGuidance {
+  history: string;
+  arc: string;
+  motivations: string;
+  trades: string;
+  obstacles: string;
+  crime: string;
+  braidAffinity: string;
+  mythFlags: string;
+}
+const G = guidanceData as {
+  eras: Record<string, EraGuidance>;
+  waves: Record<string, WaveGuidance>;
+};
+
+/**
+ * The bespoke ERA×class brief for a cell — where act UNIQUENESS (arc/tone/rhythm/scannability + the QA
+ * criteria) lives. Undefined for an unauthored key (prompt falls back to the spine intent alone).
+ */
+export function eraGuidanceFor(tier: number, cls: Rung): EraGuidance | undefined {
+  return G.eras[`t${tier}.${cls}`];
+}
+/** The bespoke WAVE/people brief — real history + motivations + braid affinity (drives uniqueness + genuine crossings). */
+export function waveGuidanceFor(wave: string): WaveGuidance | undefined {
+  return G.waves[wave];
+}
+
+/**
+ * UQ-2: the brief the SCENE QA pass injects — the same era×class qaLookFor/qaReject + this people's
+ * myth-flags that drove generation, so the editor holds the revised prose to the SAME bar. Empty string
+ * when neither key is authored (the pass then runs guidance-free, as before).
+ */
+export function scenePassBrief(wave: string, tier: number, cls: Rung): string {
+  const era = eraGuidanceFor(tier, cls);
+  const w = waveGuidanceFor(wave);
+  const lines: string[] = [];
+  if (era) {
+    lines.push(
+      "HOLD THIS SCENE TO ITS ERA BRIEF (the same one that drove its generation):",
+      `- THIS ERA MUST HAVE: ${era.qaLookFor}`,
+      `- THIS ERA MUST NOT: ${era.qaReject}`,
+      `- SCANNABILITY: ${era.scannability}`,
+    );
+  }
+  if (w) {
+    lines.push(
+      `THIS PEOPLE (${wave}) — keep the prose true to their real history:`,
+      `- HISTORICAL ACCURACY — DO NOT INTRODUCE THESE MYTHS: ${w.mythFlags}`,
+    );
+  }
+  return lines.join("\n");
+}
+
+/**
+ * UQ-2: the brief the LINEAGE QA pass injects — this people's documented arc/history/braid-affinity, so a
+ * "premise" break includes drifting OFF the real historical trajectory, not only internal contradiction.
+ */
+export function lineagePassBrief(wave: string): string {
+  const w = waveGuidanceFor(wave);
+  if (!w) return "";
+  return [
+    `THIS PEOPLE — the ${wave} wave's documented trajectory (a chain that contradicts this is a premise break):`,
+    `- HISTORY: ${w.history}`,
+    `- ARC (arrival → convergence → future): ${w.arc}`,
+    `- WHO THEY PLAUSIBLY CROSS: ${w.braidAffinity}`,
+    `- MYTHS TO AVOID: ${w.mythFlags}`,
+  ].join("\n");
+}
 
 /** A scene-generation request: which cell + tier's act to flesh. */
 export interface SceneRequest {
@@ -85,9 +168,47 @@ export function buildScenePrompt(req: SceneRequest): string {
 
   // Strip the generic "Act N — " prefix to leave just the register cue (e.g. "The Crossing").
   const titleCue = act.title.replace(/^Act\s+[IVX]+\s+—\s+/, "");
+  // UQ-1: the bespoke briefs — the era×class arc + THIS people's real history — so the cell reads UNIQUE
+  // (no two waves' tier-0-poor read alike) and its crossings are motivated by who this people meets.
+  const era = eraGuidanceFor(req.tier, req.cls);
+  const wave = waveGuidanceFor(req.wave);
+  const waveBrief = wave
+    ? [
+        "",
+        `THIS PEOPLE — the ${req.wave} wave (ground every scene in THEIR real history, not generic immigrant beats):`,
+        `- HISTORY: ${wave.history}`,
+        `- ARC (arrival → convergence → future): ${wave.arc}`,
+        `- MOTIVATIONS: ${wave.motivations}`,
+        `- TRADES: ${wave.trades}`,
+        `- OBSTACLES: ${wave.obstacles}`,
+        `- CRIME (only if true for this people — never invent a crime arc): ${wave.crime}`,
+        `- WHO THEY CROSS (for any intersection): ${wave.braidAffinity}`,
+        `- HISTORICAL ACCURACY — DO NOT REPEAT THESE MYTHS: ${wave.mythFlags}`,
+      ].join("\n")
+    : "";
+  const eraBrief = era
+    ? [
+        "",
+        "CREATIVE BRIEF for THIS generation (follow it — it makes this act distinct from every other):",
+        // The ARC below is the HISTORICAL meaning of this tier×class. The per-scene intents carry a
+        // separate STRUCTURAL movement ("this act moves as a rise/collapse/…") — that's pacing/form, a
+        // different layer. Honor both: the ARC says what this generation MEANS, the movement says how the
+        // act is SHAPED. They are orthogonal, not competing. (UQ-reconcile)
+        `- ARC (the historical meaning of this generation): ${era.arc}`,
+        `- TONE: ${era.tone}`,
+        `- FOCUS: ${era.focus}`,
+        `- RHYTHM: ${era.rhythm}`,
+        `- SCANNABILITY: ${era.scannability}`,
+        `- AVOID: ${era.avoid}`,
+        `- THIS ERA MUST HAVE: ${era.qaLookFor}`,
+        `- THIS ERA MUST NOT: ${era.qaReject}`,
+      ].join("\n")
+    : "";
   return [
     `Flesh this ACT into the novel. The line is a ${req.cls}-class ${req.archetype} family that founded`,
     `the ${req.wave} immigration wave. Reach tier ${req.tier} (${act.macroAct} macro-act).`,
+    waveBrief,
+    eraBrief,
     "",
     `TITLE: author a DISTINCT, evocative chapter title SPECIFIC to THIS family's story this generation`,
     `(this is the MESO level — a named chapter, not the macro span). Use "${titleCue}" only as a`,
@@ -105,6 +226,78 @@ export function buildScenePrompt(req: SceneRequest): string {
     `Motivator axes for every motivatorShift: ${MOTIVATOR_AXES}.`,
     `Return ONLY the JSON object { "acts": [...], "scenes": [...] }.`,
   ].join("\n");
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FS-3b — the AUTHORED-SPINE generation path (one dynasty line, distinct per-era decision architecture)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Each DECISION ARCHITECTURE → the concrete prompt instruction that gives the era's pivotal decision its
+ * distinct SHAPE. This is what makes generated decisions structurally DIVERGE era to era instead of all
+ * being "the community stands at a crossroads → 3 generic options" ([[founding-spine-pivot]] / FS-3). The
+ * GenAI must build the act's pivotal decision in THIS shape.
+ */
+const ARCHITECTURE_PROMPT: Record<DecisionArchitecture, string> = {
+  bargain:
+    "BARGAIN: a founding-era COMPACT — the line trades something now (loyalty, coin, a son, a principle) for a CLAIM on the future. Options name the COST and the claim; not factions, not a yes/no — each is a different price for a different future.",
+  allegiance:
+    "ALLEGIANCE: pick a SIDE as a conflict splits the world (revolution / civil war / labor vs. capital). Options ARE the factions; the weight is who you stand with when neutrality ends — and what it costs the line either way.",
+  venture:
+    "VENTURE: a WAGER — risk the line's capital/standing on a bet the era's epoch will reward or ruin. Options differ by RISK TIER (cautious hedge / leveraged plunge / a contrarian bet against the herd), not by ideology.",
+  succession:
+    "SUCCESSION: the dynastic FORK that ends the generation. EXACTLY ONE option takes a partner AND raises heirs (mark it `succession:{takesPartner:true,begets:1-3}`); the others are real alternatives that do NOT carry succession. The line's most consequential choice.",
+  reckoning:
+    "RECKONING: the line's accumulated way-of-making-wealth (or its sins) comes DUE — a prosecution, a scandal, a moral debt. Options = face it openly / bury it / weaponize the threat. The past is the antagonist, not a rival.",
+  platform:
+    "PLATFORM: a mass-REACH play — shape the story the country tells itself (press / airwaves / the feed). Options differ by WHAT TRUTH you bend and how far — sincerity vs. spectacle vs. outright manufacture.",
+  expansion:
+    "EXPANSION: the terminal STELLAR gambit. The options ARE the seeds of the distinct endings — FORGE ALLIES among the worlds (covenant) / SEIZE COLONIES (conquest) / GO QUIET + HIDDEN on a world that draws no notice. Each is a different fate for the line among the stars.",
+  doctrine:
+    "DOCTRINE: a worldview COMMITMENT — the line binds itself to a creed (faith / ideology / omertà / a dynastic code) that will gate later branches. Mutually-exclusive identity choice; options are creeds, and the choice is irreversible in spirit.",
+};
+
+/**
+ * Build the GenAI prompt for one AUTHORED SPINE act (FS-3b). Unlike `buildScenePrompt` (the 504-cell
+ * path), this drives the ONE dynasty line and injects the era's DECISION ARCHITECTURE so the pivotal
+ * choice takes that era's distinct shape. `gen0Brief` (optional) carries the player's founding identity.
+ */
+export function buildSpinePrompt(act: SpineAct, gen0Brief = ""): string {
+  const architectures = [...new Set(act.beats)];
+  const archBlock = architectures.map((a) => `- ${ARCHITECTURE_PROMPT[a]}`).join("\n");
+  return [
+    `Flesh this generation of the ONE dynasty line into the novel. This is the line FOUNDED at America's`,
+    `founding and carried toward the stars — America's story as this family's story.`,
+    `Generation ${act.gen}, the ${act.era} (${act.macroAct} macro-act, ~${act.year}).`,
+    gen0Brief ? `\n${gen0Brief}` : "",
+    "",
+    `THIS ERA'S DECISION ARCHITECTURE — build the act's pivotal choice in EXACTLY this shape (this is what`,
+    `makes each generation structurally distinct; do NOT default to a generic 'crossroads → 3 options'):`,
+    archBlock,
+    "",
+    `TITLE: a DISTINCT chapter title specific to THIS generation's story. Use "${act.titleCue}" only as a`,
+    `register cue — write a fresh title. Keep an "Act ${ROMAN_FOR(act.gen)} — " prefix.`,
+    "",
+    `Ground the prose in the era's real American history (${act.era}, ~${act.year}); the founding family`,
+    `moves through it. Other immigrant families braid in only as woven crossings (do not make them the focus).`,
+    "",
+    `Emit ONE act chapter and ITS scenes (4-6 scenes: an open, the era's pivotal decision beat(s) in the`,
+    `architecture above, and a close). Use these EXACT act fields + scene ids:`,
+    `acts: [{ id:"${act.id}", wave:"spine", archetype:"founding", cls:"spine", tier:${Math.min(act.gen, 5)},`,
+    `  macroAct:"${act.macroAct}", title:"Act ${ROMAN_FOR(act.gen)} — <specific chapter title>",`,
+    `  scenes:["${act.id}:open", "${act.id}:turn", "${act.id}:close"] }]`,
+    `Each scene id MUST start with "${act.id}:". The pivotal decision scene carries a major \`decision\`;`,
+    `the close carries the succession decision (one option takesPartner+begets).`,
+    "",
+    `SCENE SHAPE (strict): each scene = { id, sense, prose:[2-4 strings], beats:[], decision?, next? }.`,
+    `\`sense\` MUST be EXACTLY one of: "sound" | "sight" | "touch" | "taste" | "smell". \`prose\` is an`,
+    `ARRAY of full-paragraph strings (never an object). \`beats\` is an ARRAY (use [] if none).`,
+    "",
+    `Motivator axes for every motivatorShift: ${MOTIVATOR_AXES}.`,
+    `Return ONLY the JSON object { "acts": [...], "scenes": [...] } for this generation's act + its scenes.`,
+  ]
+    .filter((l) => l !== "")
+    .join("\n");
 }
 
 /**
@@ -168,11 +361,31 @@ export function normalizeSceneFile(raw: unknown): unknown {
       dec.options = Array.isArray(opts) ? opts.map(fixFlags) : opts;
       scene.decision = dec;
     }
+    // Coerce `requires.flags`/`requires.notFlags` object-drift → arrays (the schema needs arrays).
+    if (scene.requires && typeof scene.requires === "object") {
+      const req = { ...(scene.requires as Record<string, unknown>) };
+      if (req.flags !== undefined) req.flags = asArray(req.flags);
+      if (req.notFlags !== undefined) req.notFlags = asArray(req.notFlags);
+      scene.requires = req;
+    }
     return scene;
   });
+  // Coerce the ACTS array + each act's `scenes` id-list from object-with-numeric-keys drift too (the
+  // FS-6 spine path hit "expected array, received object" here — the normalizer only fixed `scenes`,
+  // never `acts`/`acts[].scenes`).
+  const actsArr = asArray(obj.acts);
+  const acts = Array.isArray(actsArr)
+    ? actsArr.map((a) => {
+        if (!a || typeof a !== "object") return a;
+        const act = { ...(a as Record<string, unknown>) };
+        const sc = asArray(act.scenes);
+        if (Array.isArray(sc)) act.scenes = sc;
+        return act;
+      })
+    : actsArr;
   // Strip markdown the model sometimes wraps around identity tokens (`{surname}` → {surname}); it would
   // otherwise render as literal backticks in the reader. Deep-applied to every string in the file.
-  return stripTokenBackticks({ ...obj, scenes });
+  return stripTokenBackticks({ ...obj, ...(acts !== undefined ? { acts } : {}), scenes });
 }
 
 /** A run of identity tokens / spaces wrapped in backticks — a recurring model markdown artifact. */
@@ -216,6 +429,37 @@ export function validateSceneFile(
       if (!sceneIds.has(sid)) reasons.push(`dangling scene ref ${act.id} → ${sid}`);
     }
   }
+  if (reasons.length) return { ok: false, reasons };
+  return { ok: true, file: parsed.data };
+}
+
+/**
+ * Validate a generated SPINE act file (FS-6) — the authored one-dynasty path. Same schema + leak +
+ * dangling-ref floor as the cell validator, but the act id must be the spine act's id (`spine:gN:*`),
+ * not a wave×cls×archetype cell id. Returns the parsed file or the reasons it was rejected.
+ */
+export function validateSpineFile(
+  raw: unknown,
+  act: SpineAct,
+): { ok: true; file: { acts: unknown[]; scenes: unknown[] } } | { ok: false; reasons: string[] } {
+  const reasons: string[] = [];
+  if (hasPresetLeak(raw)) reasons.push("preset-person leak");
+  const parsed = SagaFileSchema.safeParse(normalizeSceneFile(raw));
+  if (!parsed.success) {
+    reasons.push(`schema: ${parsed.error.issues.map((i) => i.message).join("; ")}`);
+    return { ok: false, reasons };
+  }
+  if (!parsed.data.acts.some((a) => a.id === act.id))
+    reasons.push(`spine act id mismatch (want ${act.id})`);
+  const sceneIds = new Set(parsed.data.scenes.map((s) => s.id));
+  const declaredIds = new Set(parsed.data.acts.flatMap((a) => a.scenes));
+  for (const a of parsed.data.acts)
+    for (const sid of a.scenes)
+      if (!sceneIds.has(sid)) reasons.push(`dangling scene ref ${a.id} → ${sid}`);
+  // ORPHAN check (FS-6): every emitted scene object MUST be listed in some act's scenes[] — else the
+  // model authored a scene the act never references (loader orphan). Catches the reverse of dangling.
+  for (const s of parsed.data.scenes)
+    if (!declaredIds.has(s.id)) reasons.push(`orphan scene ${s.id} (not in any act's scenes[])`);
   if (reasons.length) return { ok: false, reasons };
   return { ok: true, file: parsed.data };
 }

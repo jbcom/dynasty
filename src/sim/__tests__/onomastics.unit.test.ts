@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
-import { applySuffix, getCulture, type KinNames, nameChild, pickGivenName } from "../onomastics";
+import {
+  applySuffix,
+  getCulture,
+  type KinNames,
+  nameChild,
+  pickGivenName,
+  suggestGivenNames,
+} from "../onomastics";
 import { createRng } from "../rng";
 
 /**
@@ -49,6 +56,30 @@ describe("FD-5 pickGivenName", () => {
     expect(pickGivenName(irish, "male", createRng("x"))).toBe(
       pickGivenName(irish, "male", createRng("x")),
     );
+  });
+
+  it("ONO-DEDUP: never returns a given name equal to the excluded surname", () => {
+    // Pick whatever the seed would draw, then exclude it — the result must differ (pool has alternatives).
+    for (const seed of ["a", "b", "c", "d", "e"]) {
+      const drawn = pickGivenName(irish, "male", createRng(seed));
+      const deduped = pickGivenName(irish, "male", createRng(seed), drawn);
+      expect(deduped).not.toBe(drawn);
+      expect(irish.givenMale).toContain(deduped);
+    }
+  });
+});
+
+describe("ONO-DEDUP suggestGivenNames", () => {
+  const irish = getCulture(onomastics, "irish_catholic");
+
+  it("never offers a given name equal to the excluded surname", () => {
+    // Exclude the first name the un-excluded offer would surface; it must be absent from the deduped offer.
+    const plain = suggestGivenNames(irish, "male", createRng("dd"), 3);
+    const exclude = plain[0];
+    if (!exclude) throw new Error("no suggestions");
+    const deduped = suggestGivenNames(irish, "male", createRng("dd"), 3, exclude);
+    expect(deduped).not.toContain(exclude);
+    expect(deduped.length).toBeGreaterThan(0);
   });
 });
 

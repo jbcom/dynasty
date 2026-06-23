@@ -3,6 +3,7 @@ import { buildContent } from "../content";
 import {
   AssetSchema,
   ChoiceSchema,
+  EraEventsSchema,
   EventSchema,
   MeterComparatorSchema,
   parseContent,
@@ -51,6 +52,29 @@ describe("schema validation", () => {
         "event",
       ),
     ).toThrow(/at least one choice/);
+  });
+
+  it("allows an EMPTY era event pool (FS-SCHEMA-EMPTY-ERA — a spine-driven era has no event cards)", () => {
+    // A spine-driven era (the founding `origins`) legitimately declares no event-card pool; the schema
+    // must accept events:[] without forcing a placeholder event.
+    const r = EraEventsSchema.safeParse({ era: "origins", events: [] });
+    expect(r.success).toBe(true);
+    // A populated pool still validates the same way.
+    const populated = EraEventsSchema.safeParse({
+      era: "boyhood",
+      events: [
+        {
+          id: "x",
+          era: "boyhood",
+          year: 1950,
+          title: "t",
+          scene: "s",
+          researchNote: "r",
+          choices: [{ id: "c", text: "t", outcome: "o" }],
+        },
+      ],
+    });
+    expect(populated.success).toBe(true);
   });
 
   it("validates meter comparators", () => {
