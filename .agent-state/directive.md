@@ -1076,11 +1076,15 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   addressed all 6 CodeRabbit findings (g2 commerce-default + press variant — the real one; pulpit worldview
   alignment; idempotent-filter hardening) + resolved threads → CLEAN; re-run CI green; self-squash-merged.
   Synced main, deleted the branch. Post-merge Release + CD verifying on main (monitor b0uxvdvx7).
-- [ ] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G6+ — extend base-flavored openings to g6 (broadcast) onward.** On a
-  fresh branch `feat/spine-origin-depth-g6`. The applyAct() pattern (now g0–g5) makes each further gen one
-  config block + 5 authored base-variant scenes diverting to the act's second scene. Author g6 (broadcast),
-  then g7 (networked), g8 (orbital), g9 (interstellar) — completing the origin echo all the way to the stars.
-  Batch through ~g9 then ship as one PR (per one-branch review).
+- [x] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G6–G9 — DONE (the depth arc is COMPLETE).** g6 (broadcast), g7
+  (networked), g8 (orbital), g9 (interstellar) each got 5 base-flavored openings. The founder's power-base
+  choice now colors ALL TEN generations (g0 founding 1776 → g9 the stars). Idempotent applyAct() (g0-g9,
+  byte-idempotent verified); spineOriginFlavor.unit asserts all 10 acts (80 tests). 816 unit + tsc + check
+  green. On `feat/spine-origin-depth-g6`.
+- [ ] **FS-SPINE-DEPTH2-PR — ship the g6–g9 origin-flavor batch as one PR.** Full local gate (816 unit +
+  browser + e2e + build + tsc + check) + a reviewer pass on the branch diff (main..HEAD), then push + open +
+  babysit to merge (CI green, address CodeRabbit, resolve threads, self-squash-merge, verify post-merge
+  Release/CD). This completes the entire origin-flavor depth milestone (all 10 generations).
 - [x] **FS-PR-LOOP — DONE → PR #100 MERGED (squash 94c694a).** First CI pass green; addressed all 6 CodeRabbit
   findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision pin) + a regression test in a
   forward commit + resolved all 6 threads → CLEAN; re-run CI green; self-squash-merged. release-please then
