@@ -1122,16 +1122,29 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   divergence; the further layer ([[emergent-cause-effect-sim]]) is rival lines REACTING to the player
   (Yuka-style GOAP) + seeded disease/disruption shocks the player lives through, so playthroughs diverge in
   EVENTS, not just economy. Lower priority than SPINE-ACT-DEPTH but a real depth lever.
-- [ ] **SPINE-DEPTH-PLAYTEST — verify the hour+ mandate with a real end-to-end play measurement.** The static
-  count is now 64 scenes / 132 paragraphs / 83 beats per founding→stars run. Confirm the ACTUAL playable
-  duration: drive a full run via the dev harness (or a headless playthrough), time a representative
-  read+deliberate pace per scene, and report the real minutes. If short of an hour, the next depth lever is a
-  4th interstitial on the mid-weight acts OR longer prose — decide from the measurement, not a guess.
-- [ ] **SPINE-WEAVE-PAYOFF-3 — wire the depth-2 REVERSAL flags into the trigger lattice.** The 4 reversal
-  scenes added 8 new flags (g0_forced_the_claim_public, g3_broke_the_attack, g8_learned_from_the_loss,
-  g9_answered_as_kin, …). Enumerate which map to a thematically-honest family branch (e.g. a "broke the
-  attack" / power play → a syndicate/rival thread) and add matched, era-gated trigger rules per the
-  established pattern. Never blanket-wire; one rule per genuine match, tested in/out of window.
+- [ ] **SAGA-VL-INTEGRATE — surface the depth-2 reversal + the richer map in a live screenshot pass.** The
+  reversal scenes + the per-generation/rival map markers are tested but not yet eyeballed in a running build.
+  Run the dev harness, screenshot the deepened spine reader (a reversal scene) + the enriched Map tab, READ
+  the screenshots against the Dynasty/Suzerain references ([[dynasty-ui-conventions]], [[suzerain-ui-reference]]),
+  fix any spacing/scannability drift. ([[you own quality, especially visuals]] — tests pass ≠ looks right.)
+- [ ] **SPINE-DEPTH-EXTEND-MIDWEIGHT — if PLAYTEST wants the full hour, a 4th-act-tier interstitial pass.** The
+  measurement put a fast read-path at ~44 min. To lock the full hour for the median player, the next lever is
+  a third interstitial on the SIX mid-weight acts (g1/g2/g4/g5/g6/g7 — currently 6 scenes) OR richer beat
+  prose. Gate on a fresh PLAYTEST read; pick the lever from the figure, not a guess. Same idempotent script.
+- [x] **SPINE-DEPTH-PLAYTEST — DONE (commit dbc45ef).** Permanent end-to-end measurement test
+  (spineDepthPlaytest.unit). MEASURED a full founding→stars run: all 10 gens, 64 scenes, 132 paragraphs, 42
+  beats (of 83 available), 22 decisions ≈ 44 min at a conservative single-read pace — up from ~15-20 min
+  pre-depth, materially toward the hour+ (a careful/exploring player runs longer). Asserts g9-reach + a depth
+  floor. If a future measurement wants the full hour locked in: a 4th interstitial on mid-weight acts or
+  longer prose (decide from the figure).
+- [x] **SPINE-WEAVE-PAYOFF-3 — DONE (no-op by design, enumerated + rejected).** Enumerated all 8 reversal
+  flags vs the remaining un-flag-gated branches. FINDING: no genuine match exists. The remaining branches are
+  either ARRIVAL vignettes that already fire UNCONDITIONALLY on era+year (so a flag rule surfacing them adds
+  nothing — verified g3_broke_the_attack→padrone is redundant, padrone already fires in convergence/1880-99),
+  or priorCrossing-gated returns already covered by PAYOFF/PAYOFF-2. Per the "never blanket-wire" rule, adding
+  a meaningless duplicate rule would be the anti-pattern — so NO rule was added. The reversal flags still
+  matter via their motivatorShifts (which accrete into convergence). If future branches are authored that
+  NEED an alternative unlock, the reversal flags are the natural gate then.
 - [x] **MAP-ERA-PROGRESS-RICHER — DONE (commit 04413e5).** MapView now plots a per-GENERATION marker (g0..g9,
   from the live family) sliding along the founding→stars axis + faint RIVAL dots per convergence line on the
   same rung axis, with a caption naming the leading rival. Optional props from PlayScreen's existing
