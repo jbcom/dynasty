@@ -1120,19 +1120,24 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ### Rolling backlog (post-WV-3 — keep this section ≥3 actionable, append before draining)
 
-- [ ] **WV-3-SHOCK-RECOVERY — a recovery ARC, not just a loss line.** WV-3-SHOCK-SCENES narrates the loss for
+- [ ] [WAIT-REVIEW] **WV-3-SHOCK-SCENES PR #110 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/wv3-shock-scenes: the narrated-loss aftermath (shockNote + GameView.shock + PlayScreen line).
+  Loop: wait build-and-test + CodeQL green, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads,
+  self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next branch off main for the rolling
+  backlog below (start with WV-3-SHOCK-RECOVERY or CONVERGENCE-ENDING-DEPTH).
+- [ ] [WAIT-REVIEW] **WV-3-SHOCK-RECOVERY — a recovery ARC, not just a loss line.** WV-3-SHOCK-SCENES narrates the loss for
   one turn; the next lever is a RECOVERY beat — a shock that struck a meter/family should open a small later
   opportunity to recover (rebuild after the fire, a remarriage after a death, clearing a scandal). Model it as
   a seeded follow-on so the loss has a two-act shape (blow → recover/compound). Pure+seeded; re-audit divergence.
-- [ ] **CONVERGENCE-ENDING-DEPTH — richer named-destiny resolution prose + reachability audit.** The apex
+- [ ] [WAIT-REVIEW] **CONVERGENCE-ENDING-DEPTH — richer named-destiny resolution prose + reachability audit (fresh branch post-#110).** The apex
   ending is now reachable (g9 fix); audit which convergence destinations (stars/contributed/earthbound/
   extinguished + the named earthly destinies) are actually REACHABLE across motivator profiles, and deepen the
   resolution prose for each so the hour-long run lands on a distinct, earned finale. Enumerate gates first.
-- [ ] **SAGA-AUDIO-ATMOSPHERE — Tone.js era-aware ambient bed for the spine reader.** The saga reads silently;
+- [ ] [WAIT-REVIEW] **SAGA-AUDIO-ATMOSPHERE — Tone.js era-aware ambient bed for the spine reader (fresh branch post-#110).** The saga reads silently;
   a gated, era-shifting ambient bed (founding → industrial → broadcast → stellar) would deepen the hour. Per
   the audio profile: gated, tested via the audio-graph harness, no autoplay. Enumerate the era→sound mapping
   first; keep it atmosphere (no melody-driven distraction from reading).
-- [ ] **CORPUS-MINE-INTERSECTIONS — mine the retired 504-cell corpus into braid fabric ([[FOUNDING-SPINE-PIVOT]]).**
+- [ ] [WAIT-REVIEW] **CORPUS-MINE-INTERSECTIONS — mine the retired 504-cell corpus into braid fabric ([[FOUNDING-SPINE-PIVOT]]) (fresh branch post-#110).**
   The founding-spine pivot retired the 504 cells but the plan was to MINE them selectively into the braided
   intersection fabric the trigger lattice weaves. Audit what fabric exists vs the cells; mine the highest-value
   rival-family vignettes into the fabric index so cross-dynasty crossings have richer borrowed prose.
