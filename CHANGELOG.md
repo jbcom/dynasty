@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.32.0](https://github.com/jbcom/dynasty/compare/v0.31.0...v0.32.0) (2026-06-23)
+
+
+### Features
+
+* **saga:** record recoveries in the ledger — the line's comebacks, not just its losses ([#124](https://github.com/jbcom/dynasty/issues/124)) ([32bad64](https://github.com/jbcom/dynasty/commit/32bad64dc3632c7bd8ddc808f87aaba9fa05b8a5))
+
 ## [0.31.0](https://github.com/jbcom/dynasty/compare/v0.30.0...v0.31.0) (2026-06-23)
 
 
