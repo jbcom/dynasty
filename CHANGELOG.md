@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.33.0](https://github.com/jbcom/dynasty/compare/v0.32.0...v0.33.0) (2026-06-23)
+
+
+### Features
+
+* rival race presence — stumbles, surges, and the field, felt in-run ([#126](https://github.com/jbcom/dynasty/issues/126)) ([0cf8514](https://github.com/jbcom/dynasty/commit/0cf851459b79179701e4a321960073710a487830))
+
 ## [0.32.0](https://github.com/jbcom/dynasty/compare/v0.31.0...v0.32.0) (2026-06-23)
 
 
