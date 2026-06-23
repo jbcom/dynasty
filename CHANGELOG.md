@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.42.0](https://github.com/jbcom/dynasty/compare/v0.41.0...v0.42.0) (2026-06-23)
+
+
+### Features
+
+* a Field tab — the full rival dossier of the convergence race ([#147](https://github.com/jbcom/dynasty/issues/147)) ([1259704](https://github.com/jbcom/dynasty/commit/1259704e75364bc901de38e4bb5ede64d147e6fe))
+
 ## [0.41.0](https://github.com/jbcom/dynasty/compare/v0.40.0...v0.41.0) (2026-06-23)
 
 
