@@ -22,9 +22,15 @@ export interface EraBand {
 
 /** The era arc, origins → stars (chord mood: rooted/warm early → open/luminous late). */
 export const ERA_BANDS: readonly EraBand[] = [
+  // The `match` families ALSO cover the saga MACRO-ACT ids (founding/convergence/emergence/ascension) so the
+  // ambient bed shifts across the decoupled saga clock, not just the event-era ladder (SAGA-AUDIO-ATMOSPHERE).
   { id: "origins", match: /origins|1885|founding/i, chord: ["C3", "E3", "G3"] }, // rooted, warm
-  { id: "mogul", match: /mogul|1964|industr/i, chord: ["A2", "C3", "E3", "G3"] }, // minor-7 weight
-  { id: "ascent", match: /brand|primetime|ascent|1988|2004|2015/i, chord: ["D3", "F#3", "A3"] }, // striving
+  { id: "mogul", match: /mogul|1964|industr|convergence/i, chord: ["A2", "C3", "E3", "G3"] }, // minor-7 weight
+  {
+    id: "ascent",
+    match: /brand|primetime|ascent|emergence|1988|2004|2015/i,
+    chord: ["D3", "F#3", "A3"],
+  }, // striving
   { id: "interregnum", match: /interregnum|mars|2021|2028/i, chord: ["E3", "G#3", "B3", "D#4"] }, // suspended maj7
   { id: "stars", match: /contact|interstellar|ascension|stars/i, chord: ["G2", "D3", "A3", "E4"] }, // open fifths
 ];
