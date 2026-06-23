@@ -187,7 +187,12 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   {:else if tab === "lineage"}
     <LineageView gameState={view.state} />
   {:else if tab === "timeline"}
-    <TimelineView {content} gameState={view.state} />
+    <TimelineView
+      {content}
+      gameState={view.state}
+      rivalStandings={view.rivalStandings}
+      playerRung={view.rung}
+    />
   {:else if tab === "stats"}
     <StatsView {content} gameState={view.state} />
   {:else if tab === "butterfly"}

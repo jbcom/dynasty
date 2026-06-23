@@ -1222,11 +1222,12 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   (red). NewsTicker renders them above the world news (the News tab now shows when there's rival news even with
   no world timelines). Both halves of the race felt in-run. Tests: NewsTicker.browser (render+accent) +
   loop.unit (both kinds fire over a seed sweep, humanized). 881 node + 118 browser green, gate clean.
-- [ ] **CONVERGENCE-FIELD-IN-TIMELINE — a compact rival-field readout in the in-run Timeline (ACTIVE).**
-  The end-game shows the full field (CONVERGENCE-RIVAL-FINALE) but mid-run the player only sees near-vantage
-  glimpses. Add a small "The Field" strip to the Timeline showing each rival's rung relative to the player's, so
-  the player can track the whole race across the hour, not just at the close. Reads view.rivalStandings; tested.
-- [ ] **RIVAL-CROSSING-EXPLOIT — let the player ACT on a faltering rival at a crossing.**
+- [x] **CONVERGENCE-FIELD-IN-TIMELINE — DONE (local commit on feat/rival-race-presence).** TimelineView now
+  renders "The Field" — a rung bar per line (the player's own slotted in by rung + highlighted gold, faltering
+  rivals' bars red), sorted high→low, so the player tracks the whole race mid-run, not just at the close.
+  Reads view.rivalStandings + view.rung (wired through PlayScreen). Views.browser pins the sort order, player
+  slot, faltering accent, and empty case. 881 node + 119 browser green, gate clean.
+- [ ] **RIVAL-CROSSING-EXPLOIT — let the player ACT on a faltering rival at a crossing (ACTIVE).**
   A faltering rival is a window, but the player can't yet press it. At a braid crossing with a faltering rival,
   offer a choice that nudges that rival further down (opposing) for a cost/risk — turning the stumble into an
   interactive beat, not just a readout. Reuses nudgeRival + the crossing system; pure + seeded; tested.
