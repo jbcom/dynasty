@@ -1399,18 +1399,30 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   becomes "Press the rebound — pour resources in to make it count?" and the prompt is marked `data-after-hope`.
   Test: PlayScreen.visual (DOM order omen-before-invest + the connecting copy + data-after-hope).
 - [ ] **FIELD-EXTREMES PR — wait CI green + address review, then self-squash-merge.** (filled in at push.)
-- [ ] **ENDING-FIELD-NARRATIVE-AUDIT — a deterministic instrument that the convergence epilogue + per-line finale
-  fates are CONSISTENT with the field state.** Drive finished runs; for each, assert the epilogue clause that fired
-  matches the rivalField counts (droppedOut>0 → dropped-out clause, reachedStars>0 → stars clause, etc.) AND that
-  every per-line finale fate matches its standing (fallen→dropped-out fate, rung>=MAX→stars fate). Catches a drift
-  between the two surfaces (epilogue vs per-line) that a unit test of either alone would miss. Pure; prints figures.
-- [ ] **RIVAL-FINALE-SORT — The Other Lines should read top-to-bottom as a clear ranking (stars → high → settled →
-  faltered → dropped out), not just raw rung order.** Currently sorted by rung; a fallen line at rung 0 and a low
-  line at rung 0 sort together though they read very differently. Sort by a finale-fate ORDINAL (stars highest,
-  dropped-out lowest) so the field's arc reads as a clean descent. Pure; tested (screens.browser ordering).
-- [ ] **HOPE-OMEN-COPY-VARIETY — the hope omen is one fixed line; give it 2-3 deterministic variants keyed on the
-  strained meter (money vs reputation vs heat) so a rebrand of fortune reads specific, not boilerplate.** Mirrors the
-  shock-note specificity. Pure (a keyed lookup in the foreshadow text); tested (sagaShock.unit or loop.unit variants).
+- [x] **ENDING-FIELD-NARRATIVE-AUDIT — DONE (branch feat/finale-polish).** New endingFieldNarrativeAudit.unit: a
+  28-case matrix asserting resolveConvergence's epilogue clause matches the documented field-count precedence
+  (stars > whole-field-fallen > droppedOut > neck-and-neck > quiet-recede), the no-field/failed-run → no-epilogue
+  rules, AND the per-line fate-rank invariants (fallen sinks below faltering below the rung tiers, even when the
+  fallen line's raw rung is higher). Catches drift BETWEEN the epilogue + per-line surfaces. Prints the matrix size.
+- [x] **RIVAL-FINALE-SORT — DONE.** The Other Lines now sort by a finale-fate ORDINAL (stars 0 → high → settled →
+  low → faltered → dropped-out 6), then rung, then name — so the field reads as a clean descent and a fallen line
+  at a mid rung sinks below a thriving low line. `fateRank()` derives the ordinal. Test: screens.browser (out-of-
+  order input incl. a high-rung fallen line → fate order, faltered above dropped-out).
+- [x] **HOPE-OMEN-COPY-VARIETY — DONE.** `recoveryForeshadowText(flags)` keys the hope omen to the strained meter —
+  money (coffers rebuilt) / reputation (name to grace) / health (back to strength) / loyalty (bonds reforged) —
+  first outstanding flag wins (replay-stable); heat + unrecognized fall back to the generic hopeful line. Wired into
+  the engine foreshadow(). Test: sagaShock.unit (four distinct variants, first-flag-wins, fallback).
+- [ ] **FINALE-POLISH PR — wait CI green + address review, then self-squash-merge.** (filled in at push.)
+- [ ] **SHOCK-LEDGER-IN-FINALE-SORT — the LegacyReport "Hard Seasons" ledger should read chronologically with a
+  clear loss/comeback rhythm.** The ledger already lists disasters + recoveries; verify a same-year blow→recover
+  reads loss-then-comeback (the shockLedger sort) and that the FINALE surfaces tie to the omen/dossier vocabulary
+  (a line the player saw "drop out" in-run reads "dropped out" in the ledger too). Pure; tested (LegacyReport.browser).
+- [ ] **OMEN-DREAD-COPY-VARIETY — the DREAD omen (mirror of HOPE-OMEN-COPY-VARIETY) is also two fixed lines
+  (grave/marginal); vary the grave-dread text by the looming hazard the era favors** (a death-heavy founding era vs a
+  meter-blow-heavy later one), so dread reads specific like the hope omen now does. Pure; tested (sagaShock.unit).
+- [ ] **FIELD-EXTREMES-SCREENSHOT — capture + READ a LegacyReport screenshot with both extremes present (a star
+  line + a dropped-out line + a hope-omen mid-run) to confirm the registers read as intended visually**, per the
+  "own quality, especially visuals" doctrine — tests assert structure, not appearance. Visual harness screenshot.
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
