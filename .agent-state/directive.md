@@ -1285,14 +1285,25 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **AGENCY-IN-LEGACY PR #139 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/agency-in-legacy (d906833). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
   review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, AGENCY-PLAYSTYLE-AUDIT.
-- [ ] [WAIT-REVIEW] **AGENCY-PLAYSTYLE-AUDIT — measure how much the WV-3 agency levers actually get used (after #139).** Presses,
-  invests, omen-heeds are now available; nothing measures whether a typical playthrough EXERCISES them or they
-  sit unused (dead UI). Instrument per-run counts over many seeds + an always-press/always-invest policy vs a
-  passive one; if a lever is near-zero-use, the trigger condition is too rare — tune it. Decide from figures.
-- [ ] [WAIT-REVIEW] **SHOCK-CLUSTERING-GUARD — prevent a brutal run of back-to-back shocks (after #139).** Shocks roll
+- [x] **AGENCY-PLAYSTYLE-AUDIT — DONE (feat/agency-playstyle-audit).** agencyPlaystyleAudit.unit drives 16
+  always-act runs. MEASURED: press offered 134 / fired 134; invest offered 24 / fired 24 — both levers surface
+  + fire reliably (neither is dead UI; press is the frequent window, invest rarer but healthy). No trigger
+  tuning needed; the test guards both are offered AND fire. 899 node green, gate clean.
+- [ ] [WAIT-REVIEW] **AGENCY-PLAYSTYLE-AUDIT PR — push, open PR, full remote loop.**
+  1 commit (the always-act lever-usage instrument). Full local gate passed. Push, open PR, wait CI, fold review
+  forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, SHOCK-CLUSTERING-GUARD.
+- [ ] **SHOCK-CLUSTERING-GUARD — prevent a brutal run of back-to-back shocks.** Shocks roll
   independently per tick; a harsh-era unlucky seed can stack 3+ blows in a row with no breathing room, which
   reads as unfair rather than dramatic. Add a deterministic cooldown/dampener after a shock (lower the next
   tick's chance) so losses have rhythm. Pure + seeded; SHOCK-CADENCE-AUDIT re-run to confirm; tested.
+- [ ] **RIVAL-RISE-NEWS-WEIGHT — a rival's surge reads urgency proportional to how far it's pulled ahead.** The
+  surge dispatch (RIVAL-RISE-NEWS) is flat — a rival one rung ahead reads the same as one near the stars while
+  you're earthbound. Tier the "outpaced you" headline by the rung gap (just ahead → "pulling away" → "leaving
+  you behind"), so the pressure scales like FORESHADOW-WEIGHT did for dread. View-derived, deterministic; tested.
+- [ ] **MERGE-CADENCE-HEALTH — verify the post-merge Release/CD/CodeQL chain is consistently green.** Many WV-3
+  PRs have merged; instrument/check that each tagged release (release-please) actually produced its Release +
+  CD + CodeQL success on main (no silent post-merge breakage accumulating). A quick gh-run audit over recent
+  main SHAs; report any non-green post-merge run. Ops hygiene, not a feature; decide remediation from findings.
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release cut 0.36.0).** Weighted view.foreshadow
   + tiered styling (grave reads heavier than marginal). CI green, 0 review threads, merged CLEAN. main synced.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
