@@ -152,14 +152,21 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   (`dealFoundingSurname`, new onomastics export) so provisional == final founding name. Retired the OnboardingScreen
   funnel + its two tests; rewired SafeAreaAudit + reducedMotion + e2e to the new opening. Full gate green: check 0,
   typecheck 0/0, unit 950, browser 161, e2e 7, build OK.
-- [ ] [WAIT] **EI-6b-ui PR #194 — merge on green.** All 3 local reviewers clean (code: no bugs; security: clean;
-  simplifier: pendingSeed-on-cancel folded as 18050b5). Live-verified in Chrome (the emergence opens on
-  "You are born…", senses arrive as weather, location emerges from 4 glowing inline sense-choices — no card funnel).
-  Waiting on build-and-test for 18050b5; squash-merge once CLEAN + 0 unresolved threads, then sync main + branch EI-7.
-- [ ] **EI-7 PORTRAIT-TEXT-WRAP LAYOUT (user, 2026-06-23)** — the scene prose must FLOW alongside the portrait and
-  then continue DOWN BELOW it (a magazine wrap — float/shape the portrait, text wraps beside then under), not
-  portrait-block-then-text-block stacked. Applies to the SceneReader / play surface. Visual; screenshot + READ that
-  the wrap reads as intended at mobile width. (Portraits are an ESTABLISHED part of the game — [[visual-layer-revival]].)
+- [x] **EI-7 PORTRAIT-TEXT-WRAP LAYOUT — DONE (branch feat/ei6b-ui-opening-screen, commit 29435b2).** The
+  SceneReader portrait now FLOATS at the head of the prose block at every width: the scene text flows ALONGSIDE
+  the engraving and continues DOWN BELOW it (a magazine wrap), not a portrait-block-then-text-block stack. Moved
+  the portrait inside .scene-body (a float only wraps text within its own block); .scene-body carries the measured
+  ~62ch reading column so the float sits inside the measure; shape-outside rounds the wrap to the plate. Verified
+  live (mobile 412px screenshot — prose hugs the plate's left edge then reclaims the column below) + a structural
+  test (float:right, shape-outside set, portrait precedes the prose in .scene-body).
+- [ ] [WAIT] **EI-6b-ui + EI-7 PR #194 — merge on green.** 3 local reviewers clean; Amazon-Q placeById-guard finding
+  folded (29435b2). Both live-verified in Chrome (emergence opens on "You are born…", senses→4 glowing inline
+  sense-choices→naming speaks "Gwendolyn Calloway"/"daughter"; portrait magazine-wraps the prose). Squash-merge once
+  CLEAN + 0 unresolved threads, then sync main + a fresh branch for EI-8.
+- [ ] **EI-8 ENUMERATE THE PORTRAIT-DEMAND MATRIX (spec step, doable now)** — before any generation: enumerate the full
+  portrait demand matrix (LIFE-STAGE × ERA × ARCHETYPE/PATH-WARDROBE(+rung) × encounter-role) + the prompt/asset key
+  scheme + the generate-on-demand caching strategy, and write it into the EI spec. This spec/enumeration step does NOT
+  need the merge; it precedes EI-8 generation. (Then the generation sub-steps surface — see below.)
 - [ ] [WAIT] **EI-8 GENAI LIFE-STAGE × ERA × ENCOUNTER PORTRAITS (user, 2026-06-23)** — the existing GenAI image pipeline
   must generate portraits matched to LIFE STAGE (infant / child / youth / adult / elder — the cycles of birth →
   growth → death recur every generation) AND to the ERA the beat sits in (not just the 3 coarse macro-bands —
