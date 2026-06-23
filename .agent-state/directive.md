@@ -1258,15 +1258,15 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   kin to lose → "a shadow lies over the season"), or "none". shockForeshadow is a thin boolean wrapper; the
   PlayScreen renders the tiered text. Dread is now proportional to the threat. Tests: sagaShock.unit (3-tier
   gating + strain-dominates-kin) + the existing loop.unit omen test. 896 node + 126 browser green, gate clean.
-- [ ] **FORESHADOW-IN-TONE — the omen's visual register matches its weight (grave reads darker).** FORESHADOW-WEIGHT
+- [ ] [WAIT-REVIEW] **FORESHADOW-IN-TONE — the omen's visual register matches its weight (after #132).** FORESHADOW-WEIGHT
   tiers the TEXT but the PlayScreen renders both the same muted style. Pass the weight to the view + style a
   "grave" omen in a heavier register (deeper border, less dim) than a "marginal" one, so the dread is felt
   visually, not just read. View-derived; tested.
-- [ ] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust.**
+- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust (after #132).**
   A foreshadow that rarely precedes a real blow trains the player to ignore it; one that always does is just a
   spoiler. Instrument the foreshadow→next-shock correlation over many seeds; if it's miscalibrated, tune the
   threshold so an omen is a meaningful-but-not-certain warning. Decide from figures (like SHOCK-CADENCE-AUDIT).
-- [ ] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger.** A rebound
+- [ ] [WAIT-REVIEW] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger (after #132).** A rebound
   the player paid for reads the same as a lucky one in the "What Befell" log; stamp the invested recovery (e.g.
   recovered:<meter>:<year>:invested) so the ledger can mark "rebuilt by your own hand" — the player's agency
   shows in the family history. Pure read-model extension; tested.
