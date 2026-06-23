@@ -85,5 +85,16 @@ describe("empty-voice parity (DOSSIER-EMPTY-VOICE-A11Y-PARITY)", () => {
     expect(a.fontStyle).toBe("italic");
     expect(b.color, "same dim color").toBe(a.color);
     expect(b.fontSize, "same size").toBe(a.fontSize);
+
+    // EMPTY-VOICE-WORDING-DISTINCT-AUDIT: shared REGISTER, but the two notes say DIFFERENT things — the early-game
+    // "finding their feet" vs the charmed-run "spared the worst" — so the parity styling never invites a
+    // copy-paste that repeats one line in two places.
+    const fieldText = fieldNote.textContent?.trim() ?? "";
+    const sparedText = sparedNote.textContent?.trim() ?? "";
+    expect(fieldText.length, "the empty-field note has copy").toBeGreaterThan(0);
+    expect(sparedText.length, "the spared note has copy").toBeGreaterThan(0);
+    expect(sparedText, "the two empty-state notes say distinct things").not.toBe(fieldText);
+    expect(fieldText).toMatch(/finding their feet/i);
+    expect(sparedText).toMatch(/spared the worst/i);
   });
 });
