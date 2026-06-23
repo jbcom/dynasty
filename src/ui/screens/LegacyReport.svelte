@@ -6,6 +6,7 @@ import { spectrumLabel } from "../../sim/personality";
 import { branchOf } from "../../sim/branch";
 import { moralPoleLabel, moralPoleOf } from "../../sim/moralAxis";
 import { applyTerms, runTerms } from "../../sim/terms";
+import { humanizeRivalLabel } from "../../sim/dynastyWorld";
 import { shockLedger } from "../../sim/sagaShock";
 import type { EndState, GameState } from "../../sim/state";
 import ButterflyGraph from "../ButterflyGraph.svelte";
@@ -85,13 +86,11 @@ function rivalFate(rung: number, faltering: boolean): string {
   if (rung >= 2) return "made its mark, then settled";
   return "never rose far from where it began";
 }
-const humanizePlace = (label: string): string =>
-  label.replace(/^rival:/, "").replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 // Sorted high→low already (the engine sorts standings); render every line so the field's whole arc shows.
 const rivals = $derived(
   rivalStandings.map((r) => ({
     id: r.id,
-    name: humanizePlace(r.label),
+    name: humanizeRivalLabel(r.label),
     rung: r.rung,
     fate: rivalFate(r.rung, r.faltering),
     faltering: r.faltering,

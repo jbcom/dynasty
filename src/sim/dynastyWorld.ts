@@ -205,6 +205,15 @@ function rivalShock(agent: DynastyAgent, year: number, rng: Rng): void {
  * interaction. No-op for an unknown id. Pure given the world (mutates the agent in place, as
  * advanceWorld already does); returns the world for chaining.
  */
+/** Humanize a rival snapshot label / id (`rival:east_coast` → "East Coast") for player-facing copy. The ONE
+ *  home for this transform (was duplicated in loop.rivalNews + TimelineView — Gemini #126 DRY). */
+export function humanizeRivalLabel(label: string): string {
+  return label
+    .replace(/^rival:/, "")
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
 export function nudgeRival(world: DynastyWorld, rivalId: string, rungDelta: number): DynastyWorld {
   const agent = world.rivals.find((a) => a.id === rivalId);
   if (!agent) return world;

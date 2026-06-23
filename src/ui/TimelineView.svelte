@@ -1,4 +1,5 @@
 <script lang="ts">
+import { humanizeRivalLabel } from "../sim/dynastyWorld";
 import { shockLedger } from "../sim/sagaShock";
 import type { Content } from "../sim/content";
 import type { GameState } from "../sim/state";
@@ -27,7 +28,7 @@ const field = $derived(
     { id: "you", name: "Your line", rung: playerRung, faltering: false, isPlayer: true },
     ...rivalStandings.map((r) => ({
       id: r.id,
-      name: r.label.replace(/^rival:/, "").replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+      name: humanizeRivalLabel(r.label),
       rung: r.rung,
       faltering: r.faltering,
       isPlayer: false,

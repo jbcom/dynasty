@@ -10,6 +10,7 @@ import {
   type DynastyWorld,
   detectGlimpses,
   type Glimpse,
+  humanizeRivalLabel,
   nudgeRival,
 } from "../sim/dynastyWorld";
 import { advanceFamily, applyChoice, applySuccessionToFamily, succeedToHeir } from "../sim/effects";
@@ -175,30 +176,31 @@ export class Game {
   private rivalNews(): RivalNewsItem[] {
     if (!this.world) return [];
     const playerRung = this.playerRung();
-    const humanize = (label: string): string =>
-      label
-        .replace(/^rival:/, "")
-        .replace(/_/g, " ")
-        .replace(/\b\w/g, (c) => c.toUpperCase());
+    // Snapshot-by-id map for O(1) lookup in the glimpse loop (Gemini #126 perf — was a find-in-loop).
+    const byId = new Map(this.world.snapshots.map((s) => [s.id, s]));
     const out: RivalNewsItem[] = [];
+    const seen = new Set<string>(); // one dispatch per rival — a faltering rival never also surges, but guard
     // FALTER news: a glimpsed (near-vantage) rival currently faltering — the glimpse note is "struggling".
     for (const g of this.currentGlimpses()) {
-      const snap = this.world.snapshots.find((s) => s.id === g.rivalId);
-      if (snap?.faltering) {
+      const snap = byId.get(g.rivalId);
+      if (snap?.faltering && !seen.has(g.rivalId)) {
+        seen.add(g.rivalId);
         out.push({
           id: g.rivalId,
           kind: "faltered",
-          headline: `Word reaches you: the ${humanize(g.label)} line has stumbled.`,
+          headline: `Word reaches you: the ${humanizeRivalLabel(g.label)} line has stumbled.`,
         });
       }
     }
     // SURGE news: a rival that has climbed ABOVE the player's rung (within sight) — the race's pressure half.
+    // A faltering rival can't surge (the !faltering guard), and `seen` prevents any double-dispatch (Amazon-Q #126).
     for (const s of this.world.snapshots) {
-      if (s.rung > playerRung && s.rung - playerRung <= 2 && !s.faltering) {
+      if (s.rung > playerRung && s.rung - playerRung <= 2 && !s.faltering && !seen.has(s.id)) {
+        seen.add(s.id);
         out.push({
           id: s.id,
           kind: "surged",
-          headline: `The ${humanize(s.label)} line has outpaced you — its star rises.`,
+          headline: `The ${humanizeRivalLabel(s.label)} line has outpaced you — its star rises.`,
         });
       }
     }
