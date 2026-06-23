@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.50.0](https://github.com/jbcom/dynasty/compare/v0.49.0...v0.50.0) (2026-06-23)
+
+
+### Features
+
+* finale polish — fate-sorted field, keyed hope omen, narrative consistency audit ([#163](https://github.com/jbcom/dynasty/issues/163)) ([338185a](https://github.com/jbcom/dynasty/commit/338185a79ebccc616d3fb92f9b04c14d5338acff))
+
 ## [0.49.0](https://github.com/jbcom/dynasty/compare/v0.48.0...v0.49.0) (2026-06-23)
 
 
