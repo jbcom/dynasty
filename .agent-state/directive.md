@@ -798,18 +798,26 @@ onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival frami
   in the revolutionary republic), with the wave-arrival framing reserved for the CAST. Decide: rewrite the
   WAVE step into a founding-era origin step, or keep waves but reframe as which cast-family the line later
   braids with. Author the copy + seed mapping; keep gender/given/job/friend/partner seeds.
+  ALSO IN SCOPE (from FS-EARLY-TERMINATION): the whole `new-york/1885-1946-origins` era is pre-pivot
+  Trump-line content (incl. `ev_line_fails` → `end_line_failed`, Kallstadt/Queens/1946 counterfactual). The
+  live game already routes founded runs through the 1776 spine (beginSpine), so this era is dead-but-reachable
+  via the legacy event/autoPlaythrough path. Decide its fate: retire it, or convert it into CAST backdrop.
+  Remove the pre-pivot `dynasty_doomed`/`fred_builder`/`returned_to_ny` line-failure chain or rehome it.
 - [x] **FS-MOBILE-VERIFY — DONE (folded into VL-4).** The VL-4 visual suite mounts PlayScreen at 412px and
   captures a screenshot; reading it confirmed the portrait stacks above the paged prose with no overflow and
   the Map tab is reachable. Authoritative mobile check via the Vitest browser harness (not the desktop-width
   chrome-in-* screenshots).
-- [ ] **FS-EARLY-TERMINATION — most autoPlaythrough runs die in the founding era (~1893–1905, "origins"
-  ending, 3–6 history steps).** Surfaced probing WV-3: of 4 seeds, only one (bravo) reached 2010; the other
-  three terminated very early at the "origins" end with tiny history. Either autoPlaythrough's choice-picking
-  dead-ends (no eligible choices → break) or the founding-era content lacks the connective tissue to carry a
-  line forward. Investigate: is this an AUTO-PLAY artifact (the bot picks era-exhausting choices) or a REAL
-  playability gap (a human would also stall)? Drive a seeded run, log where/why it breaks (no eligible
-  choices? era won't advance? end fired?), and fix the root — the spine must carry founding→stars for most
-  seeds, not one in four. This gates the "hour+ of gameplay" mandate.
+- [x] **FS-EARLY-TERMINATION — INVESTIGATED: not a live-game bug; root traced to FS-ONB-DRIFT's dead content.**
+  Traced the early autoPlaythrough deaths to the `ev_line_fails` event in the OLD `new-york/1885-1946-origins`
+  era firing `end_line_failed` (kind "origins", requires `dynasty_doomed` & not `fred_builder`/`returned_to_ny`)
+  — a pre-pivot TRUMP-LINE counterfactual (Kallstadt/Bavaria/Fred/Queens/1946 copy). Decision: NOT a real
+  player-facing gap — the LIVE game engine (loop.ts beginSagaActForState) routes founded runs through
+  `beginSpine` (the 1776 authored spine, g0–g9), NOT this old event-based origins era; `ev_line_fails` is only
+  reachable via `autoPlaythrough`, the analytics/acceptance HARNESS that drives the legacy event path. The
+  SS-15 acceptance gate already treats early line-failure as valid tragedy-variance and takes the DEEPEST run
+  as the hour-case. Why: the dead Trump-line origins content (the whole 1885 era) is the SAME pivot-drift root
+  as FS-ONB-DRIFT — fold its removal/replacement into that unit (research-gated), don't band-aid one ending.
+  Resolves: [[mmm-convergence-pivot]] drift in the founding era is one problem, addressed holistically.
 - [ ] **FS-RESEARCH-REVERIFY — re-fetch the founding-era power-base/class research from LIVE sources.** A prior
   agent's "colonial power bases" report (six bases: land, commerce, pulpit, law/politics, press, military)
   is excellent raw material BUT its web tools were blocked — every citation is from MEMORY, not fetched
