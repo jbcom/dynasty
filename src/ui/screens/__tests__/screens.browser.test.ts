@@ -169,4 +169,45 @@ describe("LegacyReport", () => {
     });
     expect(host.querySelector("[data-testid='convergence-prose']")).toBeNull();
   });
+
+  it("LEDGER-IN-LEGACY-REPORT: surfaces the line's hard seasons + comebacks at the close", () => {
+    const state = {
+      ...initState(content, "seed"),
+      flags: [
+        "shock:family_death:1885",
+        "shock:meter_blow:1920",
+        "recovered:money:1935",
+        "base:press",
+      ],
+      end: { kind: "death" as const, year: 1990, reason: "x" },
+    };
+    component = mount(LegacyReport, {
+      target: host,
+      props: { content, state, end: state.end, onRestart: () => {} },
+    });
+    const led = host.querySelector("[data-testid='legacy-ledger']");
+    expect(led, "the legacy ledger renders when the run had shocks").not.toBeNull();
+    expect(led?.textContent).toContain("The Family's Hard Seasons");
+    const items = [...host.querySelectorAll("[data-testid='legacy-ledger'] li")];
+    expect(items.length).toBe(3);
+    // The comeback is gold-accented, distinct from the red disasters.
+    const recovery = items.find((li) => li.getAttribute("data-shock-kind") === "recovery");
+    const death = items.find((li) => li.getAttribute("data-shock-kind") === "family_death");
+    expect(recovery, "a comeback line renders").not.toBeNull();
+    expect(getComputedStyle(recovery as HTMLElement).borderLeftColor).not.toBe(
+      getComputedStyle(death as HTMLElement).borderLeftColor,
+    );
+    // A shock-free run shows no ledger section.
+    unmount(component);
+    component = mount(LegacyReport, {
+      target: host,
+      props: {
+        content,
+        state: { ...initState(content, "seed"), end: state.end },
+        end: state.end,
+        onRestart: () => {},
+      },
+    });
+    expect(host.querySelector("[data-testid='legacy-ledger']")).toBeNull();
+  });
 });

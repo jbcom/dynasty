@@ -6,6 +6,7 @@ import { spectrumLabel } from "../../sim/personality";
 import { branchOf } from "../../sim/branch";
 import { moralPoleLabel, moralPoleOf } from "../../sim/moralAxis";
 import { applyTerms, runTerms } from "../../sim/terms";
+import { shockLedger } from "../../sim/sagaShock";
 import type { EndState, GameState } from "../../sim/state";
 import ButterflyGraph from "../ButterflyGraph.svelte";
 import { formatMoney } from "../theme";
@@ -70,6 +71,11 @@ const dynasty = $derived.by(() => {
   return { generations: topGen + 1, members: fam.members.length, span, houseName };
 });
 
+// LEDGER-IN-LEGACY-REPORT: the line's hard seasons + comebacks, gathered for the final reckoning. The
+// in-run Timeline shows this log live; the close shows it WHOLE — every disaster and recovery the line
+// lived through, so the finale reflects the trials, not just the verdict. Empty for a shock-free run.
+const ledger = $derived(shockLedger(state.flags));
+
 // A one-shot ending sting coloured by the convergence outcome, fired once when the report mounts
 // (audio-gated + fully guarded inside playEndingSting). The saga's close gets an audible punctuation.
 onMount(() => {
@@ -103,6 +109,21 @@ onMount(() => {
       <strong>{dynasty.members}</strong>
       {dynasty.members === 1 ? "soul" : "souls"} born into the line.
     </p>
+  {/if}
+
+  {#if ledger.length > 0}
+    <!-- LEDGER-IN-LEGACY-REPORT: the whole saga's trials — every disaster (red) and comeback (gold). -->
+    <section class="hard-seasons" data-testid="legacy-ledger">
+      <h2>The Family's Hard Seasons</h2>
+      <ul>
+        {#each ledger as entry (entry.year + entry.kind)}
+          <li data-shock-kind={entry.kind}>
+            <span class="ls-year">{entry.year}</span>
+            <span class="ls-label">{entry.label}</span>
+          </li>
+        {/each}
+      </ul>
+    </section>
   {/if}
 
   <dl class="stats">
@@ -210,6 +231,39 @@ onMount(() => {
   }
   .dynasty strong {
     color: var(--mmm-gold);
+  }
+  /* LEDGER-IN-LEGACY-REPORT: the line's trials, mirroring the in-run Timeline ledger voice. */
+  .hard-seasons {
+    margin: 1rem auto 0;
+    max-width: 30rem;
+    text-align: left;
+  }
+  .hard-seasons ul {
+    list-style: none;
+    margin: 0.4rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .hard-seasons li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+    font-family: var(--mmm-font-body);
+    font-size: 0.9rem;
+    color: var(--mmm-text);
+    border-left: 2px solid var(--mmm-red, #b22);
+    padding-left: 0.5rem;
+  }
+  .hard-seasons li[data-shock-kind="recovery"] {
+    border-left-color: var(--mmm-gold);
+  }
+  .ls-year {
+    font-family: var(--mmm-font-ui);
+    font-variant-numeric: tabular-nums;
+    color: var(--mmm-text-dim);
+    font-size: 0.78rem;
   }
   .stats {
     display: grid;

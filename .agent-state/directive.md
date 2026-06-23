@@ -1124,10 +1124,11 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   feat/shock-ledger-recoveries (recovered:<meter>:<year> stamp + gold comeback ledger line). Loop: wait
   build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge
   once green ([[babysit-pr]]). After merge: sync main, next branch (CONVERGENCE-RIVAL-FINALE).
-- [ ] **LEDGER-IN-LEGACY-REPORT — surface the disaster/comeback ledger in the end-game LegacyReport too.** The
-  "What Befell the Family" log lives only in the in-run Timeline; the final reckoning (LegacyReport) summarizes
-  the convergence but never shows the line's hard seasons + comebacks as a whole. Render the full shockLedger as
-  a "The Family's Hard Seasons" section in LegacyReport so the close reflects the WHOLE saga's trials. Tested.
+- [x] **LEDGER-IN-LEGACY-REPORT — DONE (forward commit on feat/shock-ledger-recoveries / PR #124).** LegacyReport
+  now renders the full shockLedger as a "The Family's Hard Seasons" section between the dynasty epitaph and the
+  stats — every disaster (red) + comeback (gold) the line lived, so the close reflects the WHOLE saga's trials,
+  not just the verdict. Hidden for a shock-free run. screens.browser test pins render + gold/red distinction +
+  empty case. 873 node + 116 browser green, typecheck clean.
 - [ ] **SHOCK-CADENCE-AUDIT — instrument shock/recovery frequency across the hour, tune so neither dominates.**
   WV-3 shocks fire era-weighted + recoveries on quiet ticks at 0.5/tick; no measurement confirms the felt
   cadence (too sparse = no tension; too dense = noise). Add a deterministic instrument counting shocks +
