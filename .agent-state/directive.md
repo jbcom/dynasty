@@ -1274,9 +1274,9 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   The end-game shows the field + hard seasons but not what the PLAYER actively DID across the run — rivals
   pressed, recoveries invested, omens heeded. Tally these from the side-logs/flags into a "By Your Own Hand"
   line in the LegacyReport, so the close credits the player's interventions. Pure read-model; tested.
-- [ ] [WAIT-REVIEW] **FORESHADOW-IN-TONE PR — push feat/foreshadow-in-tone, open PR, full remote loop.**
-  1 local commit (weighted view.foreshadow + tiered styling). Full local gate passed. Push, open PR, wait CI,
-  fold review forward + resolve threads, self-squash-merge ([[babysit-pr]]). Then OMEN-PAYOFF-AUDIT.
+- [ ] [WAIT-REVIEW] **FORESHADOW-IN-TONE PR #134 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/foreshadow-in-tone (8b300e4). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
+  review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, OMEN-PAYOFF-AUDIT.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
   merged CLEAN. main synced.
