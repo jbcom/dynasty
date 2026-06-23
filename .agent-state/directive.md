@@ -870,6 +870,12 @@ EVENTS, NOT the origins ERA ID:
   exists; origin flags live in the events. Verify branch coloring doesn't depend on the dead events.
 - `end_line_failed` (kind "origins") in endings.json + the ev_line_fails/`dynasty_doomed`/`fred_builder`/
   `returned_to_ny` chain in the origins events are the harmful dead content (early autoPlaythrough deaths).
+- DE-RISKED (this session): the origins events are FULLY DEAD for the live player — PlayScreen renders
+  `view.saga.scene` (the spine) FIRST and falls back to `view.currentEvent` only when there's no saga scene
+  (PlayScreen.svelte:140 vs :156); a founded spine run always has a scene, so origins events never surface.
+  They're reachable ONLY via autoPlaythrough's direct pickNextEvent. So EMPTYING the origins event pool is
+  safe for the live game — the cleanest path (vs. authoring 47 replacement events). Decision: EMPTY the pool
+  (keep the era id + budget), not rewrite it; if a founding-era event layer is wanted later it's additive.
 Steps when picked up: (1) replace the 47 pre-pivot origins EVENTS with founding-era-appropriate content (or
 empty the era's event pool so the spine drives it) — the era id + budget stay; (2) remove the ev_line_fails
 chain + end_line_failed + the dead doom/redemption flags; (3) rewrite prologue-gating for the founding open;
