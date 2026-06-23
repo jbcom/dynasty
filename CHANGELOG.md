@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.0](https://github.com/jbcom/dynasty/compare/v0.20.0...v0.21.0) (2026-06-23)
+
+
+### Features
+
+* **saga:** spine origin-flavor depth — power base colors six generations (g2–g5) ([#102](https://github.com/jbcom/dynasty/issues/102)) ([e1f6f2e](https://github.com/jbcom/dynasty/commit/e1f6f2e217e4b1c31b840c685f980f4f3188b7eb))
+
 ## [0.20.0](https://github.com/jbcom/dynasty/compare/v0.19.0...v0.20.0) (2026-06-23)
 
 
