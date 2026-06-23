@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.34.0](https://github.com/jbcom/dynasty/compare/v0.33.0...v0.34.0) (2026-06-23)
+
+
+### Features
+
+* press the advantage — exploit a faltering rival (save-invariant side-log) ([#128](https://github.com/jbcom/dynasty/issues/128)) ([dc55867](https://github.com/jbcom/dynasty/commit/dc55867ae54c742cdc23773afbd92e72b25df45c))
+
 ## [0.33.0](https://github.com/jbcom/dynasty/compare/v0.32.0...v0.33.0) (2026-06-23)
 
 
