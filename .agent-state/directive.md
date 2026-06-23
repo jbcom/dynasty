@@ -1309,16 +1309,16 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **RIVAL-RISE-NEWS-WEIGHT PR #144 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/rival-rise-news-weight (ae68b1f). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
   review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, MERGE-CADENCE-HEALTH.
-- [ ] **MERGE-CADENCE-HEALTH — verify the post-merge Release/CD/CodeQL chain is consistently green.** Many WV-3
-  PRs have merged; instrument/check that each tagged release (release-please) actually produced its Release +
-  CD + CodeQL success on main (no silent post-merge breakage accumulating). A quick gh-run audit over recent
-  main SHAs; report any non-green post-merge run. Ops hygiene, not a feature; decide remediation from findings.
-- [ ] **WV-3-DEPTH-PLAYTEST-3 — re-measure the hour with the FULL agency+atmosphere layer live.** SPINE-DEPTH-
+- [x] **MERGE-CADENCE-HEALTH — DONE (inline gh-run audit, no PR — read-only ops verification).** Audited the
+  last 30 main runs + the per-workflow histories: Release 8/8 success, CD 7/7 success (latest d69cacd still
+  in_progress, not failed), CodeQL 8/8 success — ZERO non-success post-merge runs across the WV-3 merge wave.
+  No silent breakage accumulated; no remediation needed. The release-please→Release→CD→CodeQL chain is healthy.
+- [ ] [WAIT-REVIEW] **WV-3-DEPTH-PLAYTEST-3 — re-measure the hour with the FULL agency+atmosphere layer live (after #144).** SPINE-DEPTH-
   PLAYTEST-2 measured shocks/recoveries/crossings; since then the layer gained foreshadow omens, rival
   dispatches (falter/surge), press/invest agency, tiered tone, clustering guard, and the agency ledger. Re-run
   the depth instrument to confirm the median run still clears the hour (the new beats add read+decide time) and
   report the updated figure. Decide from figures; lever is more prose only if short.
-- [ ] **RIVAL-DOSSIER-TAB — a dedicated in-run "The Field" panel beyond the Timeline strip.** The field readout
+- [ ] [WAIT-REVIEW] **RIVAL-DOSSIER-TAB — a dedicated in-run "The Field" panel beyond the Timeline strip (after #144).** The field readout
   lives as a compact strip in the Timeline (CONVERGENCE-FIELD-IN-TIMELINE); for a player tracking the race
   closely, a fuller dossier (each rival's place, archetype, rung trend, faltering/surging state) deserves its
   own tab. Reads view.rivalStandings + glimpses; pure read-model; tested. (UI surface, not new sim.)
