@@ -6,6 +6,7 @@ import { buildContent } from "../../../sim/content";
 import { initMeters } from "../../../sim/meters";
 import { initState } from "../../../sim/state";
 import { applyBrandTokens, makeHost } from "../../__tests__/visualHarness";
+import LegacyReport from "../LegacyReport.svelte";
 import PlayScreen from "../PlayScreen.svelte";
 
 /**
@@ -77,6 +78,22 @@ describe("safe-area audit (MOBILE-SAFE-AREA-AUDIT)", () => {
     );
     expect(css, "the scroll region pads safe-area-inset-bottom").toMatch(
       /\.content[^}]*safe-area-inset-bottom/,
+    );
+  });
+
+  it("SAFE-AREA-LEGACYREPORT: the finale report pads the bottom inset so Play Again clears the home bar", () => {
+    const state = {
+      ...initState(content, "seed"),
+      end: { kind: "victory" as const, year: 2080, reason: "Carried the name to the stars." },
+    };
+    component = mount(LegacyReport, {
+      target: host,
+      props: { content, state, end: state.end, onRestart: () => {} },
+    });
+    expect(host.querySelector("main.report"), "the finale report renders").not.toBeNull();
+    // The report rule references the bottom inset (the test browser resolves it to 0, so we audit the reference).
+    expect(allCssText(), "the report pads safe-area-inset-bottom").toMatch(
+      /\.report[^}]*safe-area-inset-bottom/,
     );
   });
 });

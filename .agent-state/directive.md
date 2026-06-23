@@ -1508,159 +1508,24 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   `padding-bottom: env(safe-area-inset-bottom)`. Test: SafeAreaAudit.browser asserts the header rule references
   safe-area-inset-top AND the content rule references safe-area-inset-bottom (jsdom resolves the inset to 0, so the
   audit checks the CSS references the inset, not a pixel value).
-- [ ] **MARKETS-NEWS-TAB-SCREENSHOT — capture + READ the Markets and News tabs (the last two un-shot live surfaces)
-  to complete the per-tab visual coverage.** Mirror STATS-CHOICES-TAB-SCREENSHOT; READ both, confirm legibility +
-  register. Visual.
-- [ ] **DIRECTIVE-LEDGER-PRUNE — the WV-3 milestone's directive section has accumulated ~30 `[x]` PR-MERGED ledger
-  entries; archive the oldest into a docs/STATE.md "shipped" appendix (or trim to the last ~8) so the live directive
-  stays scannable.** Verify each is truly merged before trimming (per [[check-live-consumers-before-deleting-content]]).
-  Docs/bookkeeping only; no code.
-- [ ] **SAFE-AREA-LEGACYREPORT — extend MOBILE-SAFE-AREA-AUDIT to the LegacyReport: a long finale (ledger + field +
-  stats) scrolls; verify its scroll container pads the bottom inset too** so the "Play Again" button clears the home
-  bar on a notched device. Pure UI; tested (SafeAreaAudit-style CSS-reference check).
-- [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
-- [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
-  (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
-  merged CLEAN. main synced.
-- [x] **RECOVERY-CHOICE PR #130 — DONE, MERGED (squash 61f9061; release cut 0.34.0).** Invest a meter to boost
-  the next rebound (side-log + deterministic boost + UI). Gemini caught a high-sev affordability exploit (free
-  money boost) — fixed (engine guard + disabled button), all 3 threads resolved, merged CLEAN. main synced.
-- [x] **RIVAL-RACE-PRESENCE PR #126 — DONE, MERGED (squash 0cf8514; release cut 0.32.0).** 4 units: falter/rise
-  news, field strip, rival-fate ending. All review (Amazon-Q dedup, Gemini perf/DRY/test-comment) folded forward,
-  all threads resolved, merged CLEAN. Post-merge Release+CD+CodeQL all SUCCESS (deployed). main synced.
-- [x] **RIVAL-CROSSING-EXPLOIT PR #128 — DONE, MERGED (squash dc55867; release cut 0.33.0).** 3 units:
-  crossing-exploit (press side-log), SHOCK-FORESHADOW, exploit-guard. Gemini caught a high-sev spam-press
-  exploit — fixed (one press per rival per step, engine + UI), all threads resolved, merged CLEAN. main synced.
-- [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
-  audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
-  diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock
-  tempered off the wrong medicine map) FIXED in a forward commit + threads resolved; self-squash-merged.
-  Post-merge Release + CD + CodeQL on main all SUCCESS (shipped + deployed). Synced main, deleted branch.
-  Follow-ups now on feat/wv3-shock-scenes (below).
-
-- [x] **SPINE-DEPTH PR #106 — DONE, MERGED (squash 045f7d5; release 0.22.0 auto-cut).** The whole spine-depth
-  milestone shipped: SAGA-RESTORE-CURSOR, SPINE-ACT-DEPTH (all 10 acts, 3 interstitials each, hour mandate
-  met), SAGA-CLOCK-DECOUPLE, TRIGGER-CROSSING-RECORD, SPINE-WEAVE-PAYOFF ×2, MAP-ERA-PROGRESS-RICHER + content
-  QA ×4. CI all green; CodeRabbit pass + 0 unresolved threads; Amazon-Q + Gemini reviews positive, no
-  actionable findings. Self-squash-merged. Synced main, deleted the branch.
-- [x] **POST-MERGE-VERIFY #106 — DONE.** Release + CD + CodeQL on main all SUCCESS after the #106 merge —
-  release 0.22.0 shipped + deployed clean (the deepened spine is live).
-- [x] **WV-3-YUKA step 1 — DONE (commit fba598c): divergence audit + g9 apex bug.** Audited 8 seeds of the
-  same founding comp → FINDING: the saga path is near-IDENTICAL across seeds (same end/year/gens/money/
-  convergence; only family-alive varies) — the Suzerain trap, measured (the seeded market substrate is inert
-  on the saga clock). Also caught + fixed: g9's terminal close carried no succession, so a fully-succeeded
-  line wrongly fell to line-extinct instead of the `apex` stars ending (now reachable + guarded). Spec
-  §AUDIT-RESULT + §DECISION.
-- [x] **WV-3-MORTALITY — DONE (commit 28df954).** Seeded, era-weighted disruption hazard (src/sim/sagaShock.ts:
-  rollSagaShock) on year-advancing saga ticks: takes a non-protagonist member (family_death) or blows a meter
-  (plague/fire/scandal/betrayal/+heat). Wired into advanceRunClock beside advanceFamily; stamps a
-  `shock:<kind>:<year>` flag. Pure+seeded → replay bit-identical (save round-trip green). RESULT: the
-  divergence audit's saga path now spreads (moneyDistinct 1→6, familyAlive varies) — Suzerain trap broken on
-  the saga path. Tests: sagaShock.unit + audit assertions. 847 node + 110 browser green.
-- [x] **WV-3-SHOCK-SCENES — DONE (commit 110e99e).** A shock now NARRATES its loss: rollSagaShock gains
-  shockNote() (one-line era-neutral aftermath per kind); loop.ts holds it as a transient (lastShock) surfaced
-  as GameView.shock, set when a shock fires + cleared on the next move (one-turn). PlayScreen renders a
-  red-accented `.shock-aftermath` line above the scene. (Year-suffixed `shock:*` flags made scene-`requires`
-  gating impractical, so a transient view note is the cleaner surface than a gated interstitial.) Tests:
-  sagaShock.unit shockNote + loop.unit + PlayScreen.visual. 851 node + 111 browser green.
-- [x] **WV-3-RIVAL-REACT — DONE (commit 4e5a4d1).** advanceWorld takes an optional PlayerVantage (rung +
-  strategy); a rival on the SAME strategy within one rung of the player is a DIRECT COMPETITOR and escalates
-  (+25 climb chance) to contest the same ground — so the player's position perturbs the rival world + the
-  convergence race differently per run, not just static motivators. loop.ts passes the vantage from
-  playerRung() + strategyForArchetype(archetype). Deterministic (fixed bonus, seeded roll). Test:
-  dynastyWorld.unit WV-3-RIVAL-REACT. Both halves of WV-3-YUKA (mortality shocks + reactive rivals) now built.
-  848 node + 110 browser green.
-- [x] **SPINE-CONTENT-QA-4 — DONE (commit d35c7c4, pushed to PR #106).** Full uniqueness scan of all 30
-  interstitials. Opening sentences + beat openers already varied (0 first-3-word opener repeats; 54/60
-  distinct beat openers). CAUGHT: the reversal SECOND paragraphs shared one skeleton — 9/10 opened "The [X]
-  ahead —". Rewrote all to distinct structures → 10/10 distinct 2nd-para openers. Prose-only, idempotent.
-- [x] **SPINE-WEAVE-PAYOFF-4 — DONE (no-op by design, same finding as PAYOFF-3).** Enumerated all 12
-  mid-weight reversal flags vs the remaining un-flag-gated branches. NO genuine match: every remaining branch
-  is an ARRIVAL vignette that already fires unconditionally (once-arrival on era+year) or the open baghdad
-  merchant-house — a flag rule surfacing them adds nothing; the priorCrossing-gated returns are already
-  covered by PAYOFF/PAYOFF-2. Per "never blanket-wire," NO rule added. The reversal flags still matter via
-  their motivatorShifts. (If branches needing an alternative unlock are authored later, these flags are the
-  natural gate.)
-- [x] **SAGA-VL-INTEGRATE — DONE (live screenshot pass on dev :5175).** Walked the full founding funnel
-  end-to-end in the running build and READ every screen: title (luxury Playfair/Garamond gold-on-navy) →
-  REGION → POWER BASE (all 6, scannable) → STANDING → NAMING (11 lanes) → SURNAME → GENDER → GIVEN → 3 FS-7b
-  life-seeds → PLAY SCREEN. The deepened spine reader renders correctly: act title, the g0 founding PORTRAIT
-  (period engraving — portraits confirmed back), the open-scene prose with the founder's name woven in
-  ({given_name} substitution works), TAP-TO-CONTINUE for decisionless scenes, the right-rail tabs
-  (Map/News/.../Dossier), DEV fast-forward footer. Prose is measured (~64ch) + scannable per
-  [[dynasty-ui-conventions]]/[[suzerain-ui-reference]]. No app console errors (only a Chrome-extension
-  message-channel noise, not the app). The Map per-generation/rival markers are covered by MapView.browser
-  (110 green). No visual drift to fix.
-- [x] **SPINE-DEPTH-EXTEND-MIDWEIGHT — DONE (commit 255f405).** Added a REVERSAL interstitial to the six
-  mid-weight acts (g1/g2/g4/g5/g6/g7), bringing ALL 10 acts to the 7-scene shape (open → tex → decision →
-  csq → rev → decision → close). Each new reversal is era-voiced, decisionless, distinct-opener (uniqueness
-  lens). A full founding→stars run is now 70 scenes / 144 paragraphs / 95 beats ≈ 48 min at the conservative
-  FLOOR — a careful/exploring player crosses the hour. The "hour or more" mandate is MET. Idempotent; 839
-  node + 110 browser green.
-- [x] **TRIGGER-CROSSING-RECORD — DONE (commit fd84582).** pickBeat/pickDecision now call
-  recordTriggerCrossings against the engaged scene: every fired trigger branch stamps a
-  `crossed:<family>:<branch>` flag (the existing crossedFlag convention). So `once` arrivals fire exactly
-  once + the priorCrossing-gated RETURN branches unlock once their family was met — the Turtledove cast
-  memory is real. Deterministic (stable sorted fired order, new-only flags, no RNG-label impact); save =
-  seed+history reconstructs bit-identically. Shared firedTriggerBranches helper backs weave + record. Test:
-  loop.unit TRIGGER-CROSSING-RECORD. 839 node + 110 browser green.
-- [x] **SPINE-DEPTH-PLAYTEST — DONE (commit dbc45ef).** Permanent end-to-end measurement test
-  (spineDepthPlaytest.unit). MEASURED a full founding→stars run: all 10 gens, 64 scenes, 132 paragraphs, 42
-  beats (of 83 available), 22 decisions ≈ 44 min at a conservative single-read pace — up from ~15-20 min
-  pre-depth, materially toward the hour+ (a careful/exploring player runs longer). Asserts g9-reach + a depth
-  floor. If a future measurement wants the full hour locked in: a 4th interstitial on mid-weight acts or
-  longer prose (decide from the figure).
-- [x] **SPINE-WEAVE-PAYOFF-3 — DONE (no-op by design, enumerated + rejected).** Enumerated all 8 reversal
-  flags vs the remaining un-flag-gated branches. FINDING: no genuine match exists. The remaining branches are
-  either ARRIVAL vignettes that already fire UNCONDITIONALLY on era+year (so a flag rule surfacing them adds
-  nothing — verified g3_broke_the_attack→padrone is redundant, padrone already fires in convergence/1880-99),
-  or priorCrossing-gated returns already covered by PAYOFF/PAYOFF-2. Per the "never blanket-wire" rule, adding
-  a meaningless duplicate rule would be the anti-pattern — so NO rule was added. The reversal flags still
-  matter via their motivatorShifts (which accrete into convergence). If future branches are authored that
-  NEED an alternative unlock, the reversal flags are the natural gate then.
-- [x] **MAP-ERA-PROGRESS-RICHER — DONE (commit 04413e5).** MapView now plots a per-GENERATION marker (g0..g9,
-  from the live family) sliding along the founding→stars axis + faint RIVAL dots per convergence line on the
-  same rung axis, with a caption naming the leading rival. Optional props from PlayScreen's existing
-  view.rivalStandings/view.rung; renders gracefully from gameState alone. Tests in MapView.browser.
-- [x] **SAGA-CLOCK-DECOUPLE — DONE (commit dcdc83b, root-caused by stuck-loop-debugger).** ROOT: generation
-  advanced ONLY as a side-effect of the protagonist dying in advanceFamily's per-YEAR mortality loop — so it
-  scaled with years, and the clock ticked 1y/scene. FIX: pickBeat advances 0 years (texture passes no time);
-  a succession pickDecision begins the next-gen act, then deterministically promotes the heir via the new pure
-  `succeedToHeir` and advances SAGA_GENERATION_SPAN=25y at once. Generation now steps per-DECISION, not per
-  mortality roll — replay bit-identical. Tests: 2 SAGA-CLOCK-DECOUPLE regressions + DEPTH-3 updated. 834 node
-  green. This unblocks depth-2.
-- [x] **SPINE-ACT-DEPTH-2 — DONE (commit 389e442; stale duplicate of the entry above, reconciled).** The 4
-  heavy-act reversals (g0/g3/g8/g9) shipped, then EXTEND-MIDWEIGHT (255f405) extended the reversal to all 10
-  acts. FS-8 founding→stars reaches g9 with the deeper acts; ~48 min playtest. (This lower copy was a leftover
-  from an in-place edit; marked done to match reality — the canonical record is the entry above.)
-- [x] **SPINE-WEAVE-PAYOFF — DONE (commit abe608e).** Enumerated the payoff channels: (1) the interstitial
-  beats' motivatorShifts ALREADY accrete into the run + the convergence ending (real, by design); (2)
-  convergence flag-gating REJECTED — it's deliberately motivators-pure; (3) the trigger lattice is the
-  designed home for "a flag surfaces downstream woven content." Wired 2 thematically-matched, flag+era(+year)
-  gated rules: g6_shaped_the_narrative → ashkenazi_jewish founding_of_hollywood; g3_bought_the_influence →
-  italian syndicate_crossroads (1920-1960). Tests assert each fires its branch + respects its window.
-  More matched rules are incremental backlog (the PATTERN is the unit). Spec §SPINE-WEAVE-PAYOFF.
-- [x] **SPINE-CONTENT-QA — DONE first pass (commit 73942c2).** Audited the 20 interstitials vs the uniqueness
-  lens: texture openers well-varied (each grounds in its era's concrete sensory detail); found 6/10 CONSEQUENCE
-  openers sharing one skeleton ("[decision] [committed/taken], {given_name}…") and rewrote g3/g6/g7/g8/g9 to
-  enter through different doors (newspapers/switchboard/dashboards/shipyard-thrum/tactical display) → 1/10.
-  Remaining backlog: a deeper rhythm/scannability pass on the BEAT prose + cross-act sentence-skeleton scan
-  with the Suzerain reference ([[suzerain-ui-reference]]) — fold into SPINE-CONTENT-QA-2 below.
-- [x] **SPINE-WEAVE-PAYOFF-2 — DONE (commit b42a743).** Added 3 more thematically-matched flag→branch rules:
-  g2_kept_faith_with_kin → ireland machine_politics_return; g7_gathered_everything → chinese
-  exclusion_and_after; g4_co-opted_the_reform → bavaria the_great_war_rupture (1914-1933 window). Each flag +
-  era/year gated, tested (fires in-window, inert out). 5 of the 10 family branches now carry a matched
-  interstitial-flag gate. (scandinavian arrival + baghdad merchant_house remain — no clean flag match yet;
-  leave them unforced per the "never blanket-wire" rule.)
-- [x] **SPINE-CONTENT-QA-2 — DONE (commit 3cfdf58).** Cross-act skeleton scan of the 40 interstitial weave-beats
-  found the first beat of nearly every interstitial opening with the same perception-verb skeleton ("You
-  watch" 5×, "You read" 3×, "You walk" 3×). Diversified the clustered openers (object-first / sensation-first
-  / action-first) → 35 distinct first-2-word openers across 40 beats, dominant skeleton gone. Remaining
-  follow-on backlog (deeper sentence-rhythm + the new depth-2 reversal prose) folds into a future QA pass once
-  depth-2 lands.
-- [x] **SPINE-CONTENT-QA-3 — DONE (audit pass, no fixes needed).** Audited the 4 depth-2 reversal scenes vs the
-  uniqueness lens: opening sentences enter through 4 distinct era-grounded media (a telegram / a whisper of
-  light / midnight news / a red bloom on the status board); beat-1 openers all distinct. Across ALL 24
-  interstitials: 22 distinct opening-sentence first-2-word starts (only "After the"/"From the" twice), and
-  48 beats with 42 distinct 2-word openers, zero 3×+ repeats. The reversals were authored with deliberate
-  variety — no templating to fix. (A deeper full-sentence-rhythm pass remains optional future polish.)
+- [x] **MARKETS-NEWS-TAB-SCREENSHOT — DONE (branch feat/markets-news-shots-ledger-prune-safearea).** Captured + READ
+  both (real content, loadContent): News shows the PRESSURE rival dispatch + "The Wider World" scoped headlines
+  (NYC/USA/WORLD/SCIENCE/SOCIETY/FAITH); Markets shows the asset board (Equities/Real Estate/Crypto/Mars Colony …) +
+  the Standing rungs (immigrant/nobody/layman/citizen) + net worth. Both rich, legible, hold the register. Per-tab
+  visual coverage now complete. Test: MarketsNewsTabShot.visual captures each.
+- [x] **DIRECTIVE-LEDGER-PRUNE — DONE.** Archived 27 WV-3 + spine shipped-ledger `[x]` entries to a "Shipped — WV-3 +
+  spine wave" appendix in docs/STATE.md and replaced them with one pointer line; the directive dropped from ~1666 to
+  ~1521 lines, scannable again. Code + git history remain the source of truth.
+- [x] **SAFE-AREA-LEGACYREPORT — DONE.** Found a gap: `.report` (the tall, scrolling finale) didn't pad the bottom
+  inset, so "Play Again" could sit under the home bar. Added `padding-bottom: max(--mmm-pad, env(safe-area-inset-
+  bottom))`. Test: SafeAreaAudit.browser asserts `.report` references safe-area-inset-bottom.
+- [ ] **ONBOARDING-SCREEN-SHOT — capture + READ the OnboardingScreen (Period→Class→Race/Culture funnel) — the entry
+  flow between Title and Play, not yet visually verified.** Confirm it holds the luxury register + reads legibly at
+  each funnel step. Visual; READ.
+- [ ] **SAFE-AREA-ONBOARDING-TITLE — extend the safe-area audit to the Title + Onboarding screens (the first two a
+  player sees): verify their primary action buttons clear the top/bottom insets on a notched device.** Pure UI; tested
+  (SafeAreaAudit-style CSS-reference check over those screens).
+- [ ] **FULL-TAB-COVERAGE-ASSERT — now that every tab is screenshotted piecemeal, add ONE deterministic test that
+  iterates EVERY founded-line tab, clicks it, and asserts the tab's panel renders non-empty content** (a structural
+  guard that no tab is a dead/blank route), complementing the per-tab visual reads. Pure; tested.
+- [x] **WV-3 + SPINE shipped ledger — ARCHIVED to docs/STATE.md (DIRECTIVE-LEDGER-PRUNE).** 27 merged-PR / done entries (FORESHADOW-IN-TONE #134 … the spine-depth + QA wave) were moved to the "Shipped — WV-3 + spine wave" appendix in docs/STATE.md to keep this directive scannable. The code + git history are the source of truth; the appendix is the human-readable index.

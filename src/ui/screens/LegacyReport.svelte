@@ -269,6 +269,9 @@ onMount(() => {
     max-width: 34rem;
     margin: 0 auto;
     padding: var(--mmm-pad);
+    /* SAFE-AREA-LEGACYREPORT: the finale is tall (ledger + field + stats + Play Again) and scrolls; pad the bottom
+       by the home-indicator inset so the "Play Again" button clears the home bar on a notched device. */
+    padding-bottom: max(var(--mmm-pad), env(safe-area-inset-bottom));
     text-align: center;
   }
   h1 {
