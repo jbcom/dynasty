@@ -1262,21 +1262,23 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   PlayScreen styles a "grave" omen in a heavier register (solid red-tinted border, brighter+bolder text) vs the
   "marginal" one's faint dashed dim. Dread is felt visually, not just read. Tests: loop.unit (omen carries
   text+weight, deterministic) + PlayScreen.visual (grave border ≠ marginal border). 896 node + 127 browser green.
-- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust (after #134).**
-  A foreshadow that rarely precedes a real blow trains the player to ignore it; one that always does is just a
-  spoiler. Instrument the foreshadow→next-shock correlation over many seeds; if it's miscalibrated, tune the
-  threshold so an omen is a meaningful-but-not-certain warning. Decide from figures (like SHOCK-CADENCE-AUDIT).
-- [ ] [WAIT-REVIEW] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger (after #134).** A rebound
+- [x] **OMEN-PAYOFF-AUDIT — DONE (feat/omen-payoff-audit).** omenPayoffAudit.unit drives 24 founding runs and
+  measures foreshadow→next-shock correlation. MEASURED: P(shock|omen) ≈ 11.2% vs P(shock|calm) ≈ 6.3% — an omen
+  makes the next shock ~1.8× likelier, a meaningful-but-not-certain warning (neither spoiler nor noise). The
+  test guards P(omen)≥P(calm) AND <1 (well-calibrated; no threshold tuning needed). 897 node green, gate clean.
+- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT PR #136 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/omen-payoff-audit. Full local gate passed. Loop: wait build-and-test + CodeQL, fold review forward
+  + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RECOVERY-INVEST-IN-LEDGER.
+- [ ] [WAIT-REVIEW] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger (after #136).** A rebound
   the player paid for reads the same as a lucky one in the "What Befell" log; stamp the invested recovery (e.g.
   recovered:<meter>:<year>:invested) so the ledger can mark "rebuilt by your own hand" — the player's agency
   shows in the family history. Pure read-model extension; tested.
-- [ ] [WAIT-REVIEW] **AGENCY-IN-LEGACY — the LegacyReport tallies the player's WV-3 agency (after #134).**
+- [ ] [WAIT-REVIEW] **AGENCY-IN-LEGACY — the LegacyReport tallies the player's WV-3 agency (after #136).**
   The end-game shows the field + hard seasons but not what the PLAYER actively DID across the run — rivals
   pressed, recoveries invested, omens heeded. Tally these from the side-logs/flags into a "By Your Own Hand"
   line in the LegacyReport, so the close credits the player's interventions. Pure read-model; tested.
-- [ ] [WAIT-REVIEW] **FORESHADOW-IN-TONE PR #134 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/foreshadow-in-tone (8b300e4). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
-  review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, OMEN-PAYOFF-AUDIT.
+- [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release cut 0.36.0).** Weighted view.foreshadow
+  + tiered styling (grave reads heavier than marginal). CI green, 0 review threads, merged CLEAN. main synced.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
   merged CLEAN. main synced.
