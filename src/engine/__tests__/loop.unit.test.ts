@@ -992,6 +992,69 @@ describe("Game loop", () => {
     }
   });
 
+  it("PRESS-FALLEN-GUARD: pressing a line that has DROPPED OUT (fallen) is a no-op — no record, no heat, no rung drop", () => {
+    const real = loadContent();
+    const mkGame = (seed: string) => {
+      const comp = {
+        place: "ireland",
+        era: "origins",
+        culture: "anglo_protestant",
+        year: 1776,
+        archetype: "political" as const,
+        gender: "male" as const,
+        surname: "Pf",
+        seed,
+        originId: "composed:ireland:origins",
+      };
+      return new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    };
+    const advance = (g: ReturnType<typeof mkGame>): boolean => {
+      const s = g.view.saga.scene;
+      if (s) {
+        if (s.decision) g.pickDecision(0);
+        else if (s.beats.length) g.pickBeat(0);
+        else return false;
+      } else if (g.view.currentEvent?.choices[0]) {
+        g.choose(g.view.currentEvent.choices[0].id);
+      } else return false;
+      return true;
+    };
+    // Drive seeds until a FALLEN line appears in the standings, then attempt to press it: the engine must reject
+    // it (a line out of the race can't be pressed) — no side-log entry, no heat cost, no further rung drop. It
+    // also never appears as a pressable "faltered" dispatch (the falter dispatch excludes fallen lines).
+    let sawFallen = false;
+    for (const seed of ["pf1", "pf2", "pf3", "pf4", "pf5", "pf6", "pf7", "pf8"]) {
+      const g = mkGame(seed);
+      let guard = 0;
+      while (!g.finished && guard < 400) {
+        const fallenLine = g.view.rivalStandings.find((s) => s.fallen);
+        if (fallenLine) {
+          // A fallen line is never offered as a pressable "faltered" dispatch.
+          expect(
+            g.view.rivalNews.some((n) => n.id === fallenLine.id && n.kind === "faltered"),
+            "a fallen line is not a pressable faltered dispatch",
+          ).toBe(false);
+          const pressesBefore = g.view.state.presses?.length ?? 0;
+          const heatBefore = g.view.state.meters.heat;
+          const rungBefore = fallenLine.rung;
+          g.pressRival(fallenLine.id);
+          expect(g.view.state.presses?.length ?? 0, "no press recorded").toBe(pressesBefore);
+          expect(g.view.state.meters.heat, "no heat cost").toBe(heatBefore);
+          expect(
+            g.view.rivalStandings.find((s) => s.id === fallenLine.id)?.rung ?? 0,
+            "no rung drop",
+          ).toBe(rungBefore);
+          sawFallen = true;
+          break;
+        }
+        if (!advance(g)) break;
+        guard++;
+      }
+      if (sawFallen) break;
+    }
+    expect(sawFallen, "a line drops out across the founding-era seed sweep").toBe(true);
+  });
+
   it("RIVAL-CROSSING-EXPLOIT: pressing a faltering rival deepens its stumble + costs heat + records a side-log entry", () => {
     const real = loadContent();
     const mkGame = (seed: string) => {

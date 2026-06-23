@@ -34,6 +34,7 @@ import {
 import {
   applyFamilyDeathShock,
   foreshadowWeight,
+  recoveryForeshadow,
   rollSagaRecovery,
   rollSagaShock,
   type SagaShockNote,
@@ -107,9 +108,10 @@ export interface GameView {
    *  convergence race is felt in-run, not just at the close. */
   rivalNews: RivalNewsItem[];
   /** SHOCK-FORESHADOW + FORESHADOW-WEIGHT/IN-TONE: a one-line omen when the next saga tick carries an elevated
-   *  hazard, with its WEIGHT so the UI styles dread proportionally (grave reads heavier than marginal). Null
-   *  otherwise. */
-  foreshadow: { text: string; weight: "marginal" | "grave" } | null;
+   *  hazard OR a plausible rebound, with its WEIGHT (so the UI styles dread proportionally — grave heavier than
+   *  marginal) and its TONE (RECOVERY-FORESHADOW-TONE: a strained line's omen reads as HOPE rising — a rebound
+   *  coming — not the dread of a loss looming). Null otherwise. */
+  foreshadow: { text: string; weight: "marginal" | "grave"; tone: "dread" | "hope" } | null;
   /** RECOVERY-CHOICE: true when the player may invest in the next rebound — there's an outstanding blown
    *  meter and no invest is already pending. The UI offers the invest action only then. */
   canInvestRecovery: boolean;
@@ -218,9 +220,11 @@ export class Game {
     const out: RivalNewsItem[] = [];
     const seen = new Set<string>(); // one dispatch per rival — a faltering rival never also surges, but guard
     // FALTER news: a glimpsed (near-vantage) rival currently faltering — the glimpse note is "struggling".
+    // PRESS-FALLEN-GUARD: a line that has already DROPPED OUT (fallen) is excluded — it gets the "fallen"
+    // dispatch below instead, and must not read as a pressable stumble (you can't press a line out of the race).
     for (const g of this.currentGlimpses()) {
       const snap = byId.get(g.rivalId);
-      if (snap?.faltering && !seen.has(g.rivalId)) {
+      if (snap?.faltering && !snap.fallen && !seen.has(g.rivalId)) {
         seen.add(g.rivalId);
         out.push({
           id: g.rivalId,
@@ -290,6 +294,11 @@ export class Game {
    */
   pressRival(rivalId: string): void {
     if (!this.world || this.finished) return;
+    // PRESS-FALLEN-GUARD (defense-in-depth): a line that has DROPPED OUT of the race (fallen — at the rung
+    // floor across the window) cannot be pressed; it's already spent. This holds even if a caller bypasses the
+    // news dispatch. The falter dispatch already excludes fallen lines, so this is belt-and-suspenders.
+    const snap = this.world.snapshots.find((s) => s.id === rivalId);
+    if (snap?.fallen) return;
     // Guard: only a rival currently dispatched as "faltered" (near-vantage + faltering) can be pressed.
     const pressable = this.rivalNews().some((n) => n.id === rivalId && n.kind === "faltered");
     if (!pressable) return;
@@ -347,6 +356,9 @@ export class Game {
       ? {
           reachedStars: snaps.filter((s) => s.rung >= MAX_RUNG).length,
           fallen: snaps.filter((s) => s.faltering || s.rung === 0).length,
+          // FALLEN-NEWS-IN-ENDING: lines that DROPPED OUT entirely (isFallen — the in-run "Eliminated"
+          // dispatch), distinct from the broader "fell behind / stumbled" count above.
+          droppedOut: snaps.filter((s) => s.fallen).length,
           abovePlayer: snaps.filter((s) => s.rung >= playerTier).length,
           total: snaps.length,
         }
@@ -449,23 +461,36 @@ export class Game {
   /** SHOCK-FORESHADOW: a one-line omen when the upcoming saga tick carries an elevated hazard. Only on an
    *  active saga walk (the shock fires there); null on the event flow / a safe era / no strain or kin. The
    *  text is era-neutral; deterministic (no RNG) so it's a stable view-derived hint, not a roll. */
-  private foreshadow(): { text: string; weight: "marginal" | "grave" } | null {
+  private foreshadow(): {
+    text: string;
+    weight: "marginal" | "grave";
+    tone: "dread" | "hope";
+  } | null {
     if (!this.saga.active || this.finished) return null;
     const family = this.state.family;
     const hasKin = !!family?.members.some(
       (m) => m.id !== family.protagonistId && isMemberAlive(m, this.state.year),
     );
-    // FORESHADOW-WEIGHT: the omen's gravity scales with the hazard. FORESHADOW-IN-TONE: the weight rides along
-    // so the UI styles dread proportionally.
-    const weight = foreshadowWeight(macroActForYear(this.state.year), this.state.flags, hasKin);
-    if (weight === "grave") {
+    // RECOVERY-FORESHADOW-TONE: a line carrying an OUTSTANDING blown meter has a pending rebound roll — what's
+    // coming for it is the CHANCE TO RECOVER, which reads as hope, not dread. This hope omen takes precedence
+    // over the grave dread omen (which is driven by the SAME strain): the player has already taken the blow;
+    // the foresight that matters now is the rebound ahead. A strained line is always at least "grave" weight.
+    if (recoveryForeshadow(this.state.flags)) {
       return {
-        text: "The house braces for the worst — the season has turned hard against you.",
-        weight,
+        text: "The worst of the blow is behind you — the line gathers itself for a turn back upward.",
+        weight: "grave",
+        tone: "hope",
       };
     }
+    // FORESHADOW-WEIGHT: the omen's gravity scales with the hazard. FORESHADOW-IN-TONE: the weight rides along
+    // so the UI styles dread proportionally. (Without strain, foreshadowWeight never returns "grave".)
+    const weight = foreshadowWeight(macroActForYear(this.state.year), this.state.flags, hasKin);
     if (weight === "marginal") {
-      return { text: "A shadow lies over the season; the years ahead feel uncertain.", weight };
+      return {
+        text: "A shadow lies over the season; the years ahead feel uncertain.",
+        weight,
+        tone: "dread",
+      };
     }
     return null;
   }
