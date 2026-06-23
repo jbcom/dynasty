@@ -1179,10 +1179,10 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   tookHeir, the engine clears the heir_<id> flag → the next succession falls back to the eldest living child
   (weaker, unplanned), and the aftermath reads the sharper "groomed heir is dead — the succession you planned
   is undone" line. Pure+seeded. Tests: sagaShock.unit. 865 node + 113 browser green. PR next.
-- [ ] [WAIT-REVIEW] **DOSSIER-SHOCK-LEDGER — record shocks + recoveries in the run's inspectable history.** The
-  shock/recovery beats flash for one turn; add them to the Dossier/Timeline so a player can review the line's
-  disasters + comebacks across the hour (a "what befell the family" log). Reads the shock:* / recovered flags;
-  pure read-model, tested.
+- [x] **DOSSIER-SHOCK-LEDGER — DONE (commit 0839c49).** shockLedger() parses the persisted shock:<kind>:<year>
+  flags into a chronological disaster list; TimelineView renders a "What Befell the Family" log beneath the
+  era strip — the deaths + reversals the line lived through, inspectable across the hour. Pure read-model.
+  Tests: sagaShock.unit shockLedger + Views.browser render. 869 node + 114 browser green. PR next.
 - [ ] [WAIT-REVIEW] **CONVERGENCE-RIVAL-FINALE — the rivals' fates in the LegacyReport.** The convergence ending
   narrates the PLAYER's finale; the rival lines that raced alongside (the whole point of the convergence layer)
   vanish at the end. Surface each surviving/fallen rival's final standing + a one-line fate in the LegacyReport
