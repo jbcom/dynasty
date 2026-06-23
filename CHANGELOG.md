@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.24.0](https://github.com/jbcom/dynasty/compare/v0.23.0...v0.24.0) (2026-06-23)
+
+
+### Features
+
+* **saga:** WV-3-YUKA — emergent divergence (mortality shocks + reactive rivals) + g9 apex fix ([#108](https://github.com/jbcom/dynasty/issues/108)) ([e3b9f17](https://github.com/jbcom/dynasty/commit/e3b9f175aae8a2b38b88ee27058106f4509f49d7))
+
 ## [0.23.0](https://github.com/jbcom/dynasty/compare/v0.22.0...v0.23.0) (2026-06-23)
 
 
