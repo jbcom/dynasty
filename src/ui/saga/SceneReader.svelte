@@ -158,6 +158,7 @@ function chooseBeat(i: number) {
         alt=""
         aria-hidden="true"
         decoding="async"
+        fetchpriority="high"
         in:fade={{ duration: reduceMotion ? 0 : 320 }}
       />
     {/key}

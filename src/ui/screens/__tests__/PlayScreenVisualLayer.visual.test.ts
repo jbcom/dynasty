@@ -82,6 +82,8 @@ describe("PlayScreen visual layer (VL-4, mobile)", () => {
     const portrait = host.querySelector("img.portrait") as HTMLImageElement | null;
     expect(portrait).not.toBeNull();
     expect(portrait?.getAttribute("src")).toBe("/assets/generated/portraits/spine_g0_male.png");
+    // VL-5: the large founding portrait is fetch-prioritized so it decodes promptly (no empty-frame pop).
+    expect(portrait?.getAttribute("fetchpriority")).toBe("high");
   });
 
   it("the Map tab is reachable for a founded line and renders the journey overlay", async () => {

@@ -974,12 +974,12 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   affinities for the recurring CAST families (Irish/Italian/Chinese/Jewish/Scandinavian/Bavarian/Arab) are
   still a from-memory DRAFT in guidance.json. Research each ONLINE (WebSearch), cite + myth-flag, correct the
   draft before it drives cast/braid generation. Pairs with the cast being woven as intersections.
-- [ ] **VL-5 — the dynasty PORTRAIT for the player's CHOSEN gender/region isn't always present.** Chrome
-  cold-start showed an empty portrait frame on a fresh New England founder (the gold frame rendered, no
-  image). The 20 spine portraits (g0–g9 × M/F) exist, but verify the PlayScreen portraitSrc derivation
-  fires for a freshly-founded line at g0 (it keys off view.saga.scene?.id `spine:gN` + founding.gender) —
-  the scene id at the very first beat may not yet be `spine:g0:` when the act opens. Investigate + ensure the
-  founding portrait shows from beat one.
+- [x] **VL-5 — INVESTIGATED: not a bug + small polish applied.** The empty frame was a LOAD-TIMING artifact,
+  not a derivation bug: the g0 scene id IS `spine:g0:founding:open` (matches the portraitSrc regex), the PNG
+  exists, the path is correct — the 1.7MB portrait just hadn't finished decoding 1s after founding. 2s later
+  (Chrome re-verified) the colonial-engraving portrait renders in the gold frame. Polish: added
+  `fetchpriority="high"` to the SceneReader portrait img (alongside the existing decoding="async" + fade-in)
+  so the founding portrait loads promptly. Portrait tests (VL-4 + SceneReader) green.
 - [ ] **FS-BRANCH-ONRAMP-AUDIT — confirm each destiny branch is reachable in actual PLAY, not just present
   in the corpus.** spineBranch.ts proves the signature flags are SET by some spine choice, and branch.unit
   proves they resolve — but verify a real seeded playthrough that steers toward (e.g.) the media or

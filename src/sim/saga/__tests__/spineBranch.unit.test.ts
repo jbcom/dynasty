@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadSaga } from "../../../data/loadSaga";
-import { type BranchKey, branchOf } from "../../branch";
+import { BRANCH_SIGNATURES, type BranchKey, branchOf } from "../../branch";
 import { SceneSchema } from "../schema";
 import {
   applySpineBranchOnRamps,
@@ -89,6 +89,15 @@ describe("spine branch on-ramps", () => {
     for (const [branch, sig] of Object.entries(BRANCH_SIGNATURE_FLAG)) {
       if (sig.length === 0) continue;
       expect(branchOf({ flags: [sig] })).toBe(branch as BranchKey);
+    }
+  });
+
+  it("each BRANCH_SIGNATURE_FLAG is a canonical anyOf member in branch.ts (not necessarily the first)", () => {
+    for (const [branch, sig] of Object.entries(BRANCH_SIGNATURE_FLAG)) {
+      if (sig.length === 0) continue;
+      const entry = BRANCH_SIGNATURES.find((s) => s.key === branch);
+      expect(entry, branch).toBeTruthy();
+      expect(entry?.anyOf, `${branch}:${sig}`).toContain(sig);
     }
   });
 });

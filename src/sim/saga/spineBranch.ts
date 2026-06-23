@@ -62,8 +62,9 @@ export const SPINE_FLAG_TO_BRANCH: Readonly<Record<string, BranchKey>> = {
 };
 
 /**
- * The branch SIGNATURE flag stamped for each branch (the first `anyOf` entry in branch.ts SIGNATURES —
- * the canonical on-ramp flag branchOf detects). Kept in sync with branch.ts.
+ * The branch SIGNATURE flag stamped for each branch — a canonical `anyOf` entry from branch.ts
+ * BRANCH_SIGNATURES (the on-ramp flag branchOf detects; not necessarily the first listed). Kept in sync
+ * with branch.ts (spineBranch.unit asserts each value resolves back to its key via branchOf).
  */
 export const BRANCH_SIGNATURE_FLAG: Readonly<Record<BranchKey, string>> = {
   nazi: "axis_ascendant",
