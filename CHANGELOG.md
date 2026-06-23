@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.37.0](https://github.com/jbcom/dynasty/compare/v0.36.0...v0.37.0) (2026-06-23)
+
+
+### Features
+
+* the foreshadow omen's tone matches its weight — grave reads darker ([#134](https://github.com/jbcom/dynasty/issues/134)) ([6dfdfd4](https://github.com/jbcom/dynasty/commit/6dfdfd43ff9060554bb191ef077a14d1d9b77e12))
+
 ## [0.36.0](https://github.com/jbcom/dynasty/compare/v0.35.0...v0.36.0) (2026-06-23)
 
 
