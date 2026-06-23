@@ -70,6 +70,16 @@ describe("convergence endings (SS-9 + FS-6b destinies)", () => {
     expect(e.destiny).toBe("religious_leader");
   });
 
+  it("UQ-3: a high-tier power+cunning line built OUTSIDE THE LAW crowns a CRIME-LEADER destiny", () => {
+    // crime_leader gate: power>=35, worldview<=-10. Honor POSITIVE (toward the honor pole, value>0) so it
+    // does NOT match the earlier dictator destiny (which needs honor<=0) — proving crime_leader is its own
+    // reachable fate, not shadowed by dictator/oligarch. ([[crime-power-axis]])
+    const e = resolveConvergence(
+      ctx({ tier: 3, motivators: mot({ power: 50, worldview: -40, honor: 30, wealth: 10 }) }),
+    );
+    expect(e.destiny).toBe("crime_leader");
+  });
+
   it("not surviving → extinguished (no-heir vs ruin)", () => {
     expect(resolveConvergence(ctx({ survived: false, hasHeir: false })).id).toBe(
       "extinguished_no_heir",

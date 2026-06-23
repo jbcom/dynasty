@@ -279,16 +279,17 @@ game-scannability with the novel reading experience ([[scannability-game-novel-b
   syndicate that EXITS to legitimacy by tier 2; chinese=West-Coast tong/vice); crime↔legit crossings reuse WV-2
   braid pool; new `syndicate` convergence Destination = the "crime planet" (Don of a Thousand Suns), gated to
   criminal/converted lines. Build order = schema+gate → ending → GOAP → guidance → generate → live-verify.
-- [ ] **UQ-3 CRIME power axis — UNBLOCKED (visual layer done) + now fits the spine-branch machinery.**
-  The crime-leader DESTINY already shipped (FS-6b ending, [[crime-power-axis]]); the founding tier-1
-  early-republic act already offers a crime-curious doctrine branch. The FULL criminal axis is no longer a
-  wave×cell archetype (retired) — under the spine it becomes a 7th DESTINY BRANCH, exactly the pattern
-  FS-SPINE-BRANCH-ONRAMPS just built (spineBranch.ts). Concretely: (1) add a `crime` BranchKey + signature
-  flags to branch.ts; (2) map the spine's crime-doctrine path flags → the crime signature in
-  SPINE_FLAG_TO_BRANCH; (3) ensure a `syndicate`/crime-leader destiny ending + term resolution for the crime
-  branch; (4) prove crime reachability from a spine choice in the branch test. Net-new but small now that the
-  on-ramp machinery exists. (The old UQ-3b-f wave×cell sub-steps — schema/CRIME_WAVES gate / per-wave
-  crimeArc act files — are superseded; the crime arc is authored INTO the spine + branches.)
+- [x] **UQ-3 CRIME power axis — DONE (delivered via the convergence DESTINY; a branch.ts BranchKey is not
+  warranted).** Assessment after the spine-branch machinery landed: the crime axis is the `crime_leader`
+  convergence DESTINY (convergence.ts, "The Family That Owned the Shadows"), gated on MOTIVATORS (power≥35,
+  worldview≤-10) — NOT on branch.ts flags. Verified reachable: added a convergence reachability test (a
+  power+cunning+low-worldview line with honor>0 lands crime_leader, NOT shadowed by dictator). And the spine
+  CAN build that profile in play — 53 power-up / 39 cunning(honor+) / 21 faith-down(worldview-) choice shifts
+  across the spine. So the crime fate is reachable end-to-end through normal spine play. A separate `crime`
+  BranchKey (alt-history crime backdrop) is NOT added: branch.ts is the world-TIMELINE-variant selector and
+  there's no crime world-timeline/terms content; adding a hollow key without backdrop fiction would be
+  cosmetic. If a full crime-world backdrop is ever authored (its own large fiction milestone), revisit then.
+  [[crime-power-axis]]
 
 - [x] **RB-2 per-tier content depth — DONE.** Audit showed prose depth already uniform (every scene
   2-4 paras); only 2 under-generated cells had <2 beats — regenerated to the full weave (0 thin-beat).
