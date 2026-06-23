@@ -980,8 +980,20 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   creameries 550+ by 1898 (the "630/1918" figure was unsupported); Baghdadi 1950-51 EXODUS not "expulsion",
   Kadoorie CLP(1901)/Peninsula(1928) predate 1949. `_waves_doc` provenance updated; JSON valid, spine test +
   biome check green. ([[research-not-memory]] both halves now done: founding-era + cast.)
-- [ ] **FS-SPINE-ORIGIN-FLAVOR — weave the founding-origin seed flags into the spine's decision flavoring.**
-  The spine.act.json was authored BEFORE the FS-ONB-DRIFT founding-origin model; it doesn't read the new
+- [x] **FS-SPINE-ORIGIN-FLAVOR — DONE + Chrome-verified (MVP).** Approach B realized: 5 base-flavored g0
+  FOUNDING-act opening scenes (land/commerce/pulpit/law/military), each gated `requires.flags:["base:X"]` and
+  diverting forward to the shared allegiance scene; the existing printing-house `open` is now the PRESS/default
+  (gated notFlags the other 5). Authored in the spine voice (2 sensory paras + 2 beats each, {family_name}
+  tokens). Inserted via idempotent `scripts/fs-spine-origin-flavor.mjs` (the regen-safe RE-APPLY — spine.act.json
+  is GenAI-regenerated, so the script re-stamps the variants after any regen). 7-test spineOriginFlavor.unit
+  proves each base founder opens on its scene + press/no-base gets the default; 740 unit + tsc + check green.
+  Chrome-verified: a South/Sword founder opens on the MILITIA-MUSTER scene ("the ragged stamp of boots on the
+  common… a commission was a social title… the company drilled because a founding nation would crown the men
+  who could be trusted with its guns"), NOT the printing-house default — the power-base choice MATTERS in the
+  prose from beat one. (Later gens can follow this pattern incrementally; g0 is the MVP.)
+  NOTE (minor, separate): onomastics drew "Sterling Sterling" (given==surname) for one Anglo-Protestant male
+  draw — a suggestGivenNames coincidence, not this feature; worth a dedup guard in onomastics someday.
+  SUPERSEDED ORIGINAL NOTE: The spine.act.json was authored BEFORE the FS-ONB-DRIFT founding-origin model; it doesn't read the new
   region:/base:/power:/standing: seed flags. A press founder vs. a land founder vs. a military founder should
   feel different in the early spine acts (gated/flavored options, or a power-base-aware prologue beat).
   DESIGN FINDING (this session): SCENES support `requires` (runner filters scenes by flags, runner.ts:77-79)
@@ -1000,10 +1012,20 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   prose, not just the motivator seed.
 - [ ] **FS-COMPLETION-REVIEW — milestone comprehensive review before the single PR.** The founding-spine
   completion (VL-3/4/5, WV-3, FS-ONB-DRIFT, FS-SPINE-BRANCH-ONRAMPS, FS-RETIRE-PROLOGUE, UQ-3,
-  FS-BRANCH-ONRAMP-AUDIT) is a large body of work on the one branch. Before opening the single PR
-  ([[one-branch-local-review]]): full local gate + reviewer trio over the whole branch diff (origin..HEAD),
-  fold findings, full e2e (pnpm test:e2e), build, and a final Chrome playthrough of an hour-ish run to
-  confirm the founding→stars arc reads as one strong story. THEN open the PR.
+  FS-BRANCH-ONRAMP-AUDIT, CAST-RESEARCH, FS-SPINE-ORIGIN-FLAVOR) is a large body of work on the one branch.
+  Before opening the single PR ([[one-branch-local-review]]): full local gate + reviewer trio over the whole
+  branch diff (origin..HEAD), fold findings, full e2e (pnpm test:e2e), build, and a final Chrome playthrough
+  of an hour-ish run to confirm the founding→stars arc reads as one strong story. THEN open the PR.
+- [ ] **ONO-DEDUP — onomastics can draw given==surname (e.g. "Sterling Sterling").** Surfaced verifying
+  FS-SPINE-ORIGIN-FLAVOR: suggestGivenNames + suggestSurnames can independently land the same string for some
+  cultures (Anglo-Protestant "Sterling" is both a given + a surname). Add a guard so the auto-suggested given
+  name (and the default seeded pick) never equals the chosen/suggested surname — re-draw on collision. Small,
+  in src/sim/onomastics.ts + a unit test.
+- [ ] **FS-SPINE-ORIGIN-FLAVOR-DEPTH — extend base-flavored openings beyond g0 (incremental).** The MVP
+  flavored only the FOUNDING act (g0). The early-republic + antebellum acts (g1/g2) could likewise open
+  differently for a press vs. land vs. military line, deepening how much the origin choice echoes forward.
+  Same approach B pattern (base-gated scene variants via scripts/fs-spine-origin-flavor.mjs, extended). Lower
+  priority than the completion review; do after the PR or as bandwidth allows.
 - [x] **VL-5 — INVESTIGATED: not a bug + small polish applied.** The empty frame was a LOAD-TIMING artifact,
   not a derivation bug: the g0 scene id IS `spine:g0:founding:open` (matches the portraitSrc regex), the PNG
   exists, the path is correct — the 1.7MB portrait just hadn't finished decoding 1s after founding. 2s later
