@@ -4,44 +4,55 @@ import { initMotivators } from "../../motivators";
 import { actEnded, chooseBeat, chooseDecision, currentScene, startAct } from "../runner";
 
 /**
- * SPINE-ACT-DEPTH — the founding act (g0) is deepened with decisionless INTERSTITIAL scenes interleaved
- * between the authored DecisionArchitecture beats: a TEXTURE scene (tex_pressroom) after the open and a
- * CONSEQUENCE scene (csq_aftermath) after the allegiance decision. Per [[novel-not-fragments]] these are
- * weave-only (gather beats, fall forward) — they add lived texture + reading time toward the hour+
- * mandate WITHOUT adding more major decisions (the anti-sameness invariant is unaffected). These tests
- * walk the act and assert the deepened chain is reached from EVERY opening (default + each base variant).
+ * SPINE-ACT-DEPTH — EVERY spine act (g0..g9) is deepened with decisionless INTERSTITIAL scenes interleaved
+ * between the authored DecisionArchitecture beats: a TEXTURE scene after the open and a CONSEQUENCE scene
+ * after the first major decision. Per [[novel-not-fragments]] these are weave-only (gather beats, fall
+ * forward) — they add lived texture + reading time toward the hour+ mandate WITHOUT adding more major
+ * decisions (the anti-sameness invariant is unaffected). These tests walk each act and assert the deepened
+ * chain (open → texture → decision → consequence → … → close) is reached from EVERY opening, and that the
+ * interstitials are genuine decisionless texture in the spine voice.
  */
 
 const corpus = loadSaga();
 
-function act() {
-  const a = corpus.acts.get("spine:g0:founding");
-  if (!a) throw new Error("no g0 act");
+/** Every authored spine generation act — all are deepened with a texture + consequence interstitial. */
+const SPINE_ACTS = [
+  "spine:g0:founding",
+  "spine:g1:earlyrepublic",
+  "spine:g2:antebellum",
+  "spine:g3:gildedage",
+  "spine:g4:progressive",
+  "spine:g5:midcentury",
+  "spine:g6:broadcast",
+  "spine:g7:networked",
+  "spine:g8:orbital",
+  "spine:g9:interstellar",
+];
+
+function act(actId: string) {
+  const a = corpus.acts.get(actId);
+  if (!a) throw new Error(`no act ${actId}`);
   return a;
 }
 
-/** Walk g0 from a given founding flag set, always taking beat 0 / decision option 0, collecting scene ids
+/** Walk an act from a founding flag set, always taking beat 0 / decision option 0, collecting scene ids
  *  (stripped of the act prefix) until the act ends or a guard trips. */
-function walk(flags: string[]): string[] {
-  let state = startAct(corpus, act(), initMotivators(), flags);
+function walk(actId: string, flags: string[]): string[] {
+  let state = startAct(corpus, act(actId), initMotivators(), flags);
   const path: string[] = [];
   let guard = 0;
   while (!actEnded(state) && guard++ < 30) {
     const scene = currentScene(corpus, state);
     if (!scene) break;
-    path.push(scene.id.replace("spine:g0:founding:", ""));
-    state = scene.decision
-      ? chooseDecision(corpus, state, 0)
-      : chooseBeat(corpus, state, scene.beats.length ? 0 : 0);
-    // A decisionless scene with no beats would not advance via chooseBeat — guard covers that, but the
-    // authored interstitials always carry beats, and decision scenes advance via chooseDecision.
+    path.push(scene.id.replace(`${actId}:`, ""));
+    state = scene.decision ? chooseDecision(corpus, state, 0) : chooseBeat(corpus, state, 0);
   }
   return path;
 }
 
-describe("SPINE-ACT-DEPTH: g0 founding act is deepened with texture + consequence interstitials", () => {
-  it("a default (press) founder walks open → texture → allegiance → consequence → bargain → close", () => {
-    expect(walk([])).toEqual([
+describe("SPINE-ACT-DEPTH: every spine act is deepened with texture + consequence interstitials", () => {
+  it("g0 walks open → texture → allegiance → consequence → bargain → close (the pattern-setter)", () => {
+    expect(walk("spine:g0:founding", [])).toEqual([
       "open",
       "tex_pressroom",
       "allegiance",
@@ -51,9 +62,26 @@ describe("SPINE-ACT-DEPTH: g0 founding act is deepened with texture + consequenc
     ]);
   });
 
-  it("EVERY base founder reaches both interstitials (the texture is on every path, not just the default)", () => {
+  for (const actId of SPINE_ACTS) {
+    it(`${actId}: a default founder passes BOTH interstitials and ends at close`, () => {
+      const path = walk(actId, []);
+      expect(
+        path.some((id) => id.startsWith("tex_")),
+        `${actId} has a texture scene`,
+      ).toBe(true);
+      expect(
+        path.some((id) => id.startsWith("csq_")),
+        `${actId} has a consequence scene`,
+      ).toBe(true);
+      expect(path[path.length - 1], `${actId} ends at close`).toBe("close");
+      // The deepening roughly doubled each act: at least 6 distinct reachable scenes (toward the hour+).
+      expect(new Set(path).size, `${actId} reaches ≥6 scenes`).toBeGreaterThanOrEqual(6);
+    });
+  }
+
+  it("g0's five base founders each reach both interstitials (texture is on every path, not just default)", () => {
     for (const base of ["land", "commerce", "pulpit", "law", "military"]) {
-      const path = walk([`base:${base}`]);
+      const path = walk("spine:g0:founding", [`base:${base}`]);
       expect(path[0], base).toBe(`open_${base}`);
       expect(path, base).toContain("tex_pressroom");
       expect(path, base).toContain("csq_aftermath");
@@ -61,21 +89,22 @@ describe("SPINE-ACT-DEPTH: g0 founding act is deepened with texture + consequenc
     }
   });
 
-  it("the interstitials are decisionless TEXTURE — weave beats only, no terminal decision, fall forward", () => {
-    for (const id of ["spine:g0:founding:tex_pressroom", "spine:g0:founding:csq_aftermath"]) {
-      const s = corpus.scenes.get(id);
-      expect(s, id).toBeTruthy();
-      expect(s?.decision, `${id} must carry no major decision`).toBeUndefined();
-      expect(s?.beats.length, `${id} carries weave beats`).toBeGreaterThanOrEqual(1);
-      expect(s?.next, `${id} falls forward via next`).toBeTruthy();
-      // Real multi-paragraph prose in the spine voice, with the family-name token.
-      expect(s?.prose.length).toBeGreaterThanOrEqual(2);
-      expect(s?.prose.join(" ")).toMatch(/\{given_name\}|\{surname\}|\{family_name\}/);
+  it("every interstitial is decisionless TEXTURE — weave beats only, no terminal decision, falls forward", () => {
+    for (const actId of SPINE_ACTS) {
+      const a = act(actId);
+      const interstitials = a.scenes.filter((id) => /:(tex|csq)_/.test(id));
+      expect(interstitials.length, `${actId} has 2 interstitials`).toBe(2);
+      for (const id of interstitials) {
+        const s = corpus.scenes.get(id);
+        expect(s, id).toBeTruthy();
+        expect(s?.decision, `${id} carries no major decision`).toBeUndefined();
+        expect(s?.beats.length, `${id} carries weave beats`).toBeGreaterThanOrEqual(1);
+        expect(s?.next, `${id} falls forward via next`).toBeTruthy();
+        expect(s?.prose.length, `${id} is multi-paragraph`).toBeGreaterThanOrEqual(2);
+        expect(s?.prose.join(" "), `${id} uses a family token`).toMatch(
+          /\{given_name\}|\{surname\}|\{family_name\}/,
+        );
+      }
     }
-  });
-
-  it("g0 now has at least 6 reachable scenes between open and close (toward the hour+ depth mandate)", () => {
-    // The default walk visits 6 distinct scenes; the deepening roughly doubled the act's reading + beats.
-    expect(new Set(walk([])).size).toBeGreaterThanOrEqual(6);
   });
 });
