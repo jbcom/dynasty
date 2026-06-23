@@ -118,6 +118,29 @@ export function recoveryForeshadow(flags: Iterable<string>): boolean {
   return false;
 }
 
+/** HOPE-OMEN-COPY-VARIETY: the hope omen's text, keyed to WHAT the line is recovering from, so the rebound reads
+ *  specific (a fortune rebuilding vs a name being redeemed) rather than boilerplate. Mirrors the shock-note
+ *  specificity. Keyed on the FIRST outstanding `shock_meter:` flag (flag order is deterministic, so replay-stable);
+ *  an unrecognized/absent meter falls back to the generic line. Pure, no RNG. */
+const RECOVERY_OMEN_TEXT: Partial<Record<MeterId, string>> = {
+  money: "The worst of the loss is behind you — the coffers are slowly being rebuilt.",
+  reputation: "The scandal is fading from memory — the name is finding its way back to grace.",
+  health: "The sickness is passing — the house is nursing itself back to strength.",
+  loyalty: "The rift is mending — old bonds are being reforged, one by one.",
+};
+const RECOVERY_OMEN_FALLBACK =
+  "The worst of the blow is behind you — the line gathers itself for a turn back upward.";
+
+export function recoveryForeshadowText(flags: Iterable<string>): string {
+  for (const f of flags) {
+    if (f.startsWith("shock_meter:")) {
+      const meter = f.slice("shock_meter:".length) as MeterId;
+      return RECOVERY_OMEN_TEXT[meter] ?? RECOVERY_OMEN_FALLBACK;
+    }
+  }
+  return RECOVERY_OMEN_FALLBACK;
+}
+
 /**
  * Roll one seeded disruption shock for a saga tick. Macro-act-weighted (better medicine → lower hazard) and
  * deterministic for a given (family, year, macroActId, rng). `macroActId` is the saga's coarse band

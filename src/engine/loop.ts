@@ -35,6 +35,7 @@ import {
   applyFamilyDeathShock,
   foreshadowWeight,
   recoveryForeshadow,
+  recoveryForeshadowText,
   rollSagaRecovery,
   rollSagaShock,
   type SagaShockNote,
@@ -476,11 +477,9 @@ export class Game {
     // over the grave dread omen (which is driven by the SAME strain): the player has already taken the blow;
     // the foresight that matters now is the rebound ahead. A strained line is always at least "grave" weight.
     if (recoveryForeshadow(this.state.flags)) {
-      return {
-        text: "The worst of the blow is behind you — the line gathers itself for a turn back upward.",
-        weight: "grave",
-        tone: "hope",
-      };
+      // HOPE-OMEN-COPY-VARIETY: the rebound reads specific to WHAT is recovering (fortune / name / health / bonds).
+      // `state.flags` is `string[]` — a valid `Iterable<string>` for recoveryForeshadowText (it for-of's the flags).
+      return { text: recoveryForeshadowText(this.state.flags), weight: "grave", tone: "hope" };
     }
     // FORESHADOW-WEIGHT: the omen's gravity scales with the hazard. FORESHADOW-IN-TONE: the weight rides along
     // so the UI styles dread proportionally. (Without strain, foreshadowWeight never returns "grave".)

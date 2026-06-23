@@ -367,6 +367,47 @@ describe("LegacyReport", () => {
     );
   });
 
+  it("RIVAL-FINALE-SORT: The Other Lines read top-to-bottom by FATE, not raw rung (stars → … → dropped out)", () => {
+    const state = {
+      ...initState(content, "seed"),
+      end: { kind: "death" as const, year: 1990, reason: "x" },
+    };
+    component = mount(LegacyReport, {
+      target: host,
+      props: {
+        content,
+        state,
+        end: state.end,
+        // Intentionally OUT of fate order, and with the fallen line at a HIGHER rung than a thriving low line —
+        // so a raw-rung sort would mis-rank it. Fate sort must put it last regardless.
+        rivalStandings: [
+          { id: "rival:italian", label: "rival:italian", rung: 1, faltering: false, fallen: false }, // low (rank 3)
+          { id: "rival:bavaria", label: "rival:bavaria", rung: 5, faltering: false, fallen: false }, // stars (rank 0)
+          { id: "rival:chinese", label: "rival:chinese", rung: 3, faltering: false, fallen: true }, // dropped out (rank 6) — higher rung than the low line
+          {
+            id: "rival:ashkenazi_jewish",
+            label: "rival:ashkenazi_jewish",
+            rung: 2,
+            faltering: true,
+            fallen: false,
+          }, // faltered (rank 5)
+        ],
+        onRestart: () => {},
+      },
+    });
+    const fates = [...host.querySelectorAll("[data-testid='rival-finale'] li .rf-fate")].map(
+      (n) => n.textContent ?? "",
+    );
+    // The descent: stars, then the low line (settled/never-rose), then faltered, then dropped-out LAST.
+    expect(fates[0]).toMatch(/reached the stars/i);
+    expect(fates[fates.length - 1]).toMatch(/dropped out/i);
+    // The faltered line sorts above the dropped-out one despite a lower rung (fate over rung).
+    const falterIdx = fates.findIndex((f) => /faltered/i.test(f));
+    const droppedIdx = fates.findIndex((f) => /dropped out/i.test(f));
+    expect(falterIdx).toBeGreaterThanOrEqual(0);
+    expect(falterIdx).toBeLessThan(droppedIdx);
+  });
+
   it("AGENCY-IN-LEGACY: tallies the player's WV-3 interventions in a 'By your own hand' line", () => {
     const state = {
       ...initState(content, "seed"),
