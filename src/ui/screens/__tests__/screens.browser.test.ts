@@ -289,4 +289,37 @@ describe("LegacyReport", () => {
     });
     expect(host.querySelector("[data-testid='rival-finale']")).toBeNull();
   });
+
+  it("AGENCY-IN-LEGACY: tallies the player's WV-3 interventions in a 'By your own hand' line", () => {
+    const state = {
+      ...initState(content, "seed"),
+      presses: [
+        { at: 1, rivalId: "rival:italian", year: 1900 },
+        { at: 3, rivalId: "rival:bavaria", year: 1925 },
+      ],
+      recoveryInvests: [{ at: 2, meter: "money" as const, year: 1910 }],
+      end: { kind: "death" as const, year: 1990, reason: "x" },
+    };
+    component = mount(LegacyReport, {
+      target: host,
+      props: { content, state, end: state.end, onRestart: () => {} },
+    });
+    const line = host.querySelector("[data-testid='agency']");
+    expect(line, "the agency line renders when the player intervened").not.toBeNull();
+    expect(line?.textContent).toContain("By your own hand");
+    expect(line?.textContent).toMatch(/pressed 2 faltering rivals/);
+    expect(line?.textContent).toMatch(/forced 1 recovery/);
+    // A passive run (no presses/invests) shows no agency line.
+    unmount(component);
+    component = mount(LegacyReport, {
+      target: host,
+      props: {
+        content,
+        state: { ...initState(content, "seed"), end: state.end },
+        end: state.end,
+        onRestart: () => {},
+      },
+    });
+    expect(host.querySelector("[data-testid='agency']")).toBeNull();
+  });
 });
