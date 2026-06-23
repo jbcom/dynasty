@@ -1120,6 +1120,14 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ### Rolling backlog (post-WV-3 — keep this section ≥3 actionable, append before draining)
 
+- [ ] [WAIT-REVIEW] **DOSSIER-SHOCK-LEDGER PR #122 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/dossier-shock-ledger. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix
+  forward + resolve threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next
+  branch for the rolling backlog (CONVERGENCE-RIVAL-FINALE / SPINE-DEPTH-PLAYTEST-2 / ledger-recoveries).
+- [ ] [WAIT-REVIEW] **SHOCK-LEDGER-RECOVERIES — add recoveries (not just disasters) to the ledger.** The
+  "What Befell the Family" log shows shock:* disasters; the WV-3-SHOCK-RECOVERY rebounds aren't recorded
+  (recovery only clears a flag, leaves no marker). Stamp a `recovered:<meter>:<year>` flag on a rebound +
+  show it in the ledger as a comeback line, so the log reads blow→recover, not just loss. Pure; tested.
 - [ ] [WAIT-REVIEW] **SHOCK-FAMILY-SUCCESSION-PRESSURE PR #120 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/shock-family-succession-pressure. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/
   Gemini, fix forward + resolve threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main,
