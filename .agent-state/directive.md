@@ -1132,12 +1132,27 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   mid-act REVERSAL beat between the two decisions) without diluting the pivots. Measure total reading time
   after this pass; target the hour+ explicitly. Same idempotent-script + spine-voice approach; extend
   INTERSTITIALS, keep the walk-through tests green.
-- [ ] **SPINE-WEAVE-PAYOFF — make interstitial weave-beat FLAGS matter downstream.** The 20 new interstitials
-  each set a flavor flag (g0_press_kept_open, g3_seized_the_moment, …) via gather beats, but nothing yet reads
-  them. Wire a handful into later-scene `requires`/`thread` gating or convergence-destiny nudges so the lived
-  texture has mechanical consequence (the player's small choices accrete), not just color. Enumerate which
-  flags pay off where FIRST (use-case pass), then gate — don't blanket-wire.
-- [ ] **SPINE-CONTENT-QA — prose-quality + uniqueness audit of the 20 interstitials.** They were hand-authored
-  in one pass; run the scannability + uniqueness lens ([[uniqueness-genuine-intersections]],
-  [[scannability-game-novel-balance]]): no two acts' texture/consequence should share a sentence skeleton, the
-  prose should be glance-readable with varied rhythm, and each must land its era. Fix any that read templated.
+- [x] **SPINE-WEAVE-PAYOFF — DONE (commit abe608e).** Enumerated the payoff channels: (1) the interstitial
+  beats' motivatorShifts ALREADY accrete into the run + the convergence ending (real, by design); (2)
+  convergence flag-gating REJECTED — it's deliberately motivators-pure; (3) the trigger lattice is the
+  designed home for "a flag surfaces downstream woven content." Wired 2 thematically-matched, flag+era(+year)
+  gated rules: g6_shaped_the_narrative → ashkenazi_jewish founding_of_hollywood; g3_bought_the_influence →
+  italian syndicate_crossroads (1920-1960). Tests assert each fires its branch + respects its window.
+  More matched rules are incremental backlog (the PATTERN is the unit). Spec §SPINE-WEAVE-PAYOFF.
+- [x] **SPINE-CONTENT-QA — DONE first pass (commit 73942c2).** Audited the 20 interstitials vs the uniqueness
+  lens: texture openers well-varied (each grounds in its era's concrete sensory detail); found 6/10 CONSEQUENCE
+  openers sharing one skeleton ("[decision] [committed/taken], {given_name}…") and rewrote g3/g6/g7/g8/g9 to
+  enter through different doors (newspapers/switchboard/dashboards/shipyard-thrum/tactical display) → 1/10.
+  Remaining backlog: a deeper rhythm/scannability pass on the BEAT prose + cross-act sentence-skeleton scan
+  with the Suzerain reference ([[suzerain-ui-reference]]) — fold into SPINE-CONTENT-QA-2 below.
+- [ ] **SPINE-WEAVE-PAYOFF-2 — extend matched flag→branch rules across the remaining signature flags.** The
+  pattern shipped with 2 rules; the other waves' branches (chinese exclusion_and_after, bavaria
+  the_great_war_rupture, scandinavian, baghdad) can each take a thematically-honest interstitial-flag gate
+  (e.g. g2_kept_faith_with_kin → a kin-loyalty arrival thread; g7_gathered_everything → a surveillance-age
+  thread). Enumerate matches FIRST (flag theme ↔ branch theme ↔ era window), one rule per genuine match;
+  never blanket-wire. Tests per rule (fires in-window, inert out-of-window).
+- [ ] **SPINE-CONTENT-QA-2 — beat-prose rhythm + cross-act skeleton scan.** First QA pass fixed the consequence
+  openers; this pass audits the 40 weave-BEAT prose lines + the second/third sentences of each interstitial
+  for shared rhythm, and runs a cross-act sentence-skeleton diff so no two acts' texture (or consequence)
+  read as the same template. Apply the scannability techniques ([[suzerain-ui-reference]],
+  [[scannability-game-novel-balance]]): varied sentence length, glance-readable density. Fix templated lines.
