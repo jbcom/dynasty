@@ -43,4 +43,35 @@ describe("OnboardingScreen — founding funnel (ONBOARDING-SCREEN-SHOT)", () => 
     expect(host.querySelector("article.card"), "a next phase renders").not.toBeNull();
     await page.screenshot({ element: host.firstElementChild as Element });
   });
+
+  it("ONBOARDING-FUNNEL-FULL-WALK-SHOT: captures EVERY funnel phase to confirm the register holds end-to-end", async () => {
+    component = mount(OnboardingScreen, {
+      target: host,
+      props: { content, onComplete: () => {}, onCancel: () => {} },
+    });
+    const seen: string[] = [];
+    // Walk the funnel: at each phase, screenshot it, then advance — click the first CHOICE if the phase offers
+    // choices, else (a text-input phase like surname/given) click the first non-back action button to proceed.
+    for (let step = 0; step < 12; step++) {
+      const card = host.querySelector("article.card");
+      if (!card) break;
+      const phase = card.getAttribute("data-phase") ?? `step-${step}`;
+      seen.push(phase);
+      await page.screenshot({ element: host.firstElementChild as Element });
+      const choice = card.querySelector<HTMLButtonElement>(".choices button");
+      if (choice) {
+        choice.click();
+      } else {
+        // A non-choice phase (text input + a confirm button) — click the first forward action that isn't Back.
+        const forward = [...card.querySelectorAll<HTMLButtonElement>("button")].find(
+          (b) => !/back/i.test(b.textContent ?? ""),
+        );
+        if (!forward) break;
+        forward.click();
+      }
+      flushSync();
+    }
+    // The funnel has multiple distinct phases (region → base → standing → naming → …); confirm we walked several.
+    expect(new Set(seen).size, `phases walked: ${seen.join(" → ")}`).toBeGreaterThanOrEqual(3);
+  });
 });
