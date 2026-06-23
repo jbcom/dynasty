@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.39.0](https://github.com/jbcom/dynasty/compare/v0.38.0...v0.39.0) (2026-06-23)
+
+
+### Features
+
+* credit the player's WV-3 interventions in the LegacyReport — by your own hand ([#139](https://github.com/jbcom/dynasty/issues/139)) ([b085c01](https://github.com/jbcom/dynasty/commit/b085c0188ea5075603d2a0f065c5224c6d35921a))
+
 ## [0.38.0](https://github.com/jbcom/dynasty/compare/v0.37.0...v0.38.0) (2026-06-23)
 
 
