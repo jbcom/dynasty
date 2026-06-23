@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.56.0](https://github.com/jbcom/dynasty/compare/v0.55.0...v0.56.0) (2026-06-23)
+
+
+### Features
+
+* **sim:** sensory place-emergence resolver (EI-2) ([#182](https://github.com/jbcom/dynasty/issues/182)) ([6e9307c](https://github.com/jbcom/dynasty/commit/6e9307cb09325ef9a1d2ae5b6dc251515186fb91))
+
 ## [0.55.0](https://github.com/jbcom/dynasty/compare/v0.54.0...v0.55.0) (2026-06-23)
 
 
