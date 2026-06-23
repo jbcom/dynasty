@@ -1096,14 +1096,16 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   the ONE ordered history log (HistoryEntry gains optional saga/index) + Game.reconstruct replaying the
   interleaved event+saga sequence through the engine — preserves the seed+history invariant. Tests: loop.unit
   SAGA-RESTORE-CURSOR + save.browser saga-deep round-trip. 817 node + 107 browser green.
-- [ ] **SPINE-ACT-DEPTH — deepen each spine act toward the hour+ mandate (UNBLOCKED — save-safe now).**
-  MEASURED: each of the 10 acts has only ~4 CORE scenes (~15-20 min total) — short of the "hour or more"
-  mandate. DESIGN DECIDED (spec §SPINE-ACT-DEPTH): interleave decisionless TEXTURE + CONSEQUENCE interstitials
-  (open → texture → [decision] → consequence → [decision] → close, ~6 scenes/act) via an idempotent script;
-  PROVEN on g0 (plays through correctly, byte-idempotent) but reverted earlier to expose SAGA-RESTORE-CURSOR —
-  now FIXED, so deepening is save-safe. NEXT: re-apply the g0 interstitials (re-author the idempotent
-  fs-spine-act-depth.mjs + spineActDepth.unit.test.ts), confirm the full suite stays green WITH the deepened
-  g0, then extend act-by-act and ship in batches. Author hand-crafted in the spine voice (no GenAI key here).
+- [x] **SPINE-ACT-DEPTH — DONE (commits ffab94d g0 + 658c5d6 g1-g9 on feat/spine-depth-content).** All 10
+  spine acts deepened with a TEXTURE interstitial (after open) + a CONSEQUENCE interstitial (after the first
+  major decision) — 20 new decisionless, weave-only scenes authored in each era's voice, with family tokens
+  + small motivator nudges. Every act now plays open → texture → decision → consequence → … → close (~6
+  scenes), reached from EVERY opening (the idempotent script repoints origin-flavor base variants through the
+  texture). Major DecisionArchitecture decisions stay the act pivots — anti-sameness invariant intact. Via
+  scripts/fs-spine-act-depth.mjs (idempotent; run order origin-flavor → act-depth). Tests: spineActDepth.unit
+  (all 10 acts pass both interstitials to close; interstitials are decisionless spine-voice texture). 830
+  node + 107 browser green; save-safe on SAGA-RESTORE-CURSOR. Roughly doubled each act's reading toward the
+  hour+ mandate. (Reviewer trio dispatched on the branch diff.)
 - [x] **FS-PR-LOOP — DONE → PR #100 MERGED (squash 94c694a).** First CI pass green; addressed all 6 CodeRabbit
   findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision pin) + a regression test in a
   forward commit + resolved all 6 threads → CLEAN; re-run CI green; self-squash-merged. release-please then
@@ -1124,3 +1126,18 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   marks the 4 macro-acts; with 10 generations + the convergence rivals, the map could plot per-generation
   progress + rival lines' positions, making the founding→stars journey legible at finer grain. Visual-polish
   depth; revisit after SPINE-ACT-DEPTH.
+- [ ] **SPINE-ACT-DEPTH-2 — a SECOND texture/consequence pass for the longest-arc acts.** SPINE-ACT-DEPTH took
+  each act to ~6 scenes; the founding (g0) + the three frontier-turn acts (g8 orbital, g9 interstellar, and the
+  g3 Gilded-Age consolidation) carry the heaviest narrative weight and can bear a third interstitial (a
+  mid-act REVERSAL beat between the two decisions) without diluting the pivots. Measure total reading time
+  after this pass; target the hour+ explicitly. Same idempotent-script + spine-voice approach; extend
+  INTERSTITIALS, keep the walk-through tests green.
+- [ ] **SPINE-WEAVE-PAYOFF — make interstitial weave-beat FLAGS matter downstream.** The 20 new interstitials
+  each set a flavor flag (g0_press_kept_open, g3_seized_the_moment, …) via gather beats, but nothing yet reads
+  them. Wire a handful into later-scene `requires`/`thread` gating or convergence-destiny nudges so the lived
+  texture has mechanical consequence (the player's small choices accrete), not just color. Enumerate which
+  flags pay off where FIRST (use-case pass), then gate — don't blanket-wire.
+- [ ] **SPINE-CONTENT-QA — prose-quality + uniqueness audit of the 20 interstitials.** They were hand-authored
+  in one pass; run the scannability + uniqueness lens ([[uniqueness-genuine-intersections]],
+  [[scannability-game-novel-balance]]): no two acts' texture/consequence should share a sentence skeleton, the
+  prose should be glance-readable with varied rhythm, and each must land its era. Fix any that read templated.
