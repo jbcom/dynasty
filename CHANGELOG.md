@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.62.0](https://github.com/jbcom/dynasty/compare/v0.61.0...v0.62.0) (2026-06-23)
+
+
+### Features
+
+* lived emergence opening + portrait magazine-wrap (EI-6b-ui + EI-7) ([#194](https://github.com/jbcom/dynasty/issues/194)) ([aff10e5](https://github.com/jbcom/dynasty/commit/aff10e5f5483cb8a24114ce03a0d138eb447c4b6))
+
 ## [0.61.0](https://github.com/jbcom/dynasty/compare/v0.60.0...v0.61.0) (2026-06-23)
 
 
