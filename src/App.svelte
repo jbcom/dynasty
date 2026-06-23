@@ -13,6 +13,7 @@ import {
 import { setSoundEnabled } from "./ui/sound";
 import type { Content } from "./sim/content";
 import { foundByComposition } from "./sim/founding";
+import { FOUNDING_YEAR } from "./sim/macroActs";
 import type { LifeSeedChoices } from "./sim/saga/lifeSeeds";
 import { dealComposition, placeById } from "./sim/places";
 import { type ArrivalClass, resolveWaveStart } from "./sim/waveSelect";
@@ -100,15 +101,20 @@ async function birthGame(
   // SS-7 + PF-6: seed the line's starting motivators from the PLAYER'S chosen arrival class (poor/
   // middle), not the place's default — so the class choice actually grounds the run + saga track.
   const { motivators } = resolveWaveStart(placeDef, cls);
-  // ONB-1: stamp the player's chosen progenitor identity over the seed-dealt defaults — naming STYLE
-  // (culture), GENDER, and GIVEN name are now founding choices, not auto-generated.
+  // FS-8c: the founding-spine pivot — the player's line is founded at America's FOUNDING (1776), the
+  // anchor of the authored spine, NOT the wave's 1885 immigration era. The waves are now the braid
+  // fabric that arrives across the centuries, not the line's start year. Overriding the dealt year
+  // anchors the saga clock + the era/News framing at 1776 so the HUD matches the founding spine acts.
+  // ONB-1: stamp the player's chosen progenitor identity over the seed-dealt defaults (naming STYLE,
+  // GENDER, GIVEN name); FS-7: the diegetic Epoch-0 life-seeds.
   const founded = foundByComposition(content, {
     ...composition,
+    year: FOUNDING_YEAR,
     culture,
     gender,
     given,
     seedMotivators: motivators,
-    lifeSeeds, // FS-7: the diegetic Epoch-0 life-seeds (first job / friend / partner)
+    lifeSeeds,
   }).state;
   store = new GameStore(content, seed, storage, founded, founded.archetype);
   screen = "play";

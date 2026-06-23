@@ -19,6 +19,10 @@ import { type Motivators, meetsMotivatorGate } from "./motivators";
 
 export type MacroAct = "founding" | "convergence" | "emergence" | "ascension";
 
+/** The American founding year — the anchor of the authored dynasty spine (FS-8c). The player's line is
+ *  founded here; the saga clock + era/News framing start at 1776, matching the spine's g0 act. */
+export const FOUNDING_YEAR = 1776;
+
 /**
  * The year bands for the four macro-acts (the line's per-generation acts flow through these by year).
  * FOUNDING (FS-2) anchors the spine at 1776; CONVERGENCE now starts at 1860 (it was -Infinity..1899 when
