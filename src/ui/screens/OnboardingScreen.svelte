@@ -229,7 +229,9 @@ function pickPartnerAndBegin(p: LifePartner): void {
      in the modal input — a11y review). `inert` on the page traps focus in the modal. -->
 <svelte:window onkeydown={(e) => modalOpen && e.key === "Escape" && (modalOpen = false)} />
 
-<main class="onboarding" inert={modalOpen}>
+<!-- ONBOARDING-A11Y-FUNNEL: a polite live region so a screen reader announces each new funnel phase's prompt as
+     the card swaps; the choice cards are native <button>s (keyboard-navigable for free). -->
+<main class="onboarding" inert={modalOpen} aria-live="polite">
   {#if !region}
     <article class="card" data-phase="region">
       <p class="prompt">

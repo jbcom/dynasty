@@ -155,6 +155,10 @@ describe("NewsTicker", () => {
     const buttons = [...host.querySelectorAll<HTMLButtonElement>(".rn-press")];
     // Only the FALTERED dispatch (a window) gets a press button — a surge doesn't.
     expect(buttons.length).toBe(1);
+    // A11Y-INVEST-PRESS-LABELS: the terse "Press the advantage" carries an aria-label naming the target line.
+    const label = buttons[0]?.getAttribute("aria-label") ?? "";
+    expect(label).toMatch(/press the advantage/i);
+    expect(label).toMatch(/italian/i);
     buttons[0]?.click();
     await vitest.waitFor(() => expect(onPress).toHaveBeenCalledWith("rival:italian"));
   });

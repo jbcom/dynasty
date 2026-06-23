@@ -1542,12 +1542,14 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [x] **TITLE-CONTINUE-STATE-SHOT — DONE.** The TitleScreen.visual screenshot test (props default hasSave:true) now
   asserts Continue is present; READ it: the gold Dynasty masthead + Seed input + New Game / Load Game — Continue /
   Settings all read legibly together in the with-save variant.
-- [ ] **A11Y-INVEST-PRESS-LABELS — the press-rival + invest buttons (NewsTicker / PlayScreen) should have clear
-  accessible names (aria-label where the visible text is terse), so a screen reader announces what each does.**
-  Mirror A11Y-TAB-ARIA. Pure UI; tested (the action buttons expose descriptive accessible names).
-- [ ] **REDUCED-MOTION-AUDIT — the shader backdrop + any transitions should respect `prefers-reduced-motion`** (a
-  player who sets it shouldn't get the animated WebGL bed / motion). Verify + gate the motion behind the media query.
-  Pure UI; tested (a reduced-motion media-query reference exists for the motion surfaces).
-- [ ] **ONBOARDING-A11Y-FUNNEL — the funnel choice cards should be keyboard-navigable + announce the current phase
-  (the prompt as an aria-live or heading), so the entry flow is screen-reader-usable end-to-end.** Pure UI; tested.
+- [x] **A11Y-INVEST-PRESS-LABELS — DONE (branch feat/a11y-labels-reduced-motion-funnel).** The "Press the advantage"
+  button now carries an aria-label naming the target line (`humanizeRivalLabel(id)`); the invest buttons carry
+  aria-labels ("Spend funds to strengthen the line's recovery" / "Call in favours … (raises heat)"). Tests:
+  NewsTicker.browser (press label names the line) + PlayScreen.visual (invest labels describe the spend).
+- [x] **REDUCED-MOTION-AUDIT — DONE.** Verified the ShaderBackdrop already gates its rAF loop on
+  `matchMedia(prefers-reduced-motion)` (static frame otherwise) and 6 motion surfaces carry the CSS media query. New
+  reducedMotion.unit asserts each surface references it + the backdrop's guard precedes the loop — guards regression.
+- [x] **ONBOARDING-A11Y-FUNNEL — DONE.** The `.onboarding` main is now `aria-live="polite"` so a screen reader
+  announces each new phase prompt as the card swaps; the choices are native keyboard-navigable `<button>`s. Test:
+  OnboardingScreen.browser (live region + enabled button choices).
 - [x] **WV-3 + SPINE shipped ledger — ARCHIVED to docs/STATE.md (DIRECTIVE-LEDGER-PRUNE).** 27 merged-PR / done entries (FORESHADOW-IN-TONE #134 … the spine-depth + QA wave) were moved to the "Shipped — WV-3 + spine wave" appendix in docs/STATE.md to keep this directive scannable. The code + git history are the source of truth; the appendix is the human-readable index.

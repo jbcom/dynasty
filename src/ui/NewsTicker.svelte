@@ -2,6 +2,7 @@
 import type { Content } from "../sim/content";
 import type { GameState } from "../sim/state";
 import { branchOf } from "../sim/branch";
+import { humanizeRivalLabel } from "../sim/dynastyWorld";
 import { newsForYear, timelinesForBranch } from "../sim/worldtime";
 
 interface Props {
@@ -71,7 +72,14 @@ const scopeLabel: Record<string, string> = {
           {#if r.kind === "faltered" && onPress && !pressedThisStep.has(r.id)}
             <!-- RIVAL-CROSSING-EXPLOIT: press the advantage — deepen the stumble for a heat cost. Hidden once
                  pressed this step (one press per step, matching the engine's exploit guard). -->
-            <button type="button" class="rn-press" onclick={() => onPress?.(r.id)}>
+            <!-- A11Y-INVEST-PRESS-LABELS: the visible text is terse ("Press the advantage"); the aria-label names
+                 WHICH line so a screen reader announces the target, not a context-free verb. -->
+            <button
+              type="button"
+              class="rn-press"
+              aria-label={`Press the advantage on the ${humanizeRivalLabel(r.id)} line`}
+              onclick={() => onPress?.(r.id)}
+            >
               Press the advantage
             </button>
           {/if}
