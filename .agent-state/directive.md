@@ -970,11 +970,16 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ## Rolling backlog (keep the queue non-empty — [[never-drain-queue]])
 
-- [ ] **CAST-RESEARCH — live-research the immigrant-WAVE cast guidance.json (the [[research-not-memory]]
-  other half).** The founding-era research is done; the wave histories/trades/obstacles/crime-arcs/braid
-  affinities for the recurring CAST families (Irish/Italian/Chinese/Jewish/Scandinavian/Bavarian/Arab) are
-  still a from-memory DRAFT in guidance.json. Research each ONLINE (WebSearch), cite + myth-flag, correct the
-  draft before it drives cast/braid generation. Pairs with the cast being woven as intersections.
+- [x] **CAST-RESEARCH — DONE (2nd verification pass).** Re-fact-checked all 7 wave-cast guidance.json briefs
+  via 4 parallel WebSearch/WebFetch agents against citable sources. The drafts were already strong (a prior
+  pass had corrected them); this pass caught + fixed residual errors: Italian Messina-quake-as-cause debunked
+  (NBER w27506), ~4M not 4.2M, return 30-50%, NYC Dept-of-Public-Works precision; Jewish Hollywood founders
+  span both waves (Laemmle/Zukor German/Hungarian not Eastern-European), quotas fell 1965 not post-WWII;
+  Chinese railroad ~12-15k peak/~20k total/~90% of CP, "first to bar a SPECIFIC ETHNIC group" (Page Act 1875
+  first restriction), tech founders Chen/Huang/Su Taiwanese + Yuan Shandong NOT PRD-Cantonese; Scandinavian
+  creameries 550+ by 1898 (the "630/1918" figure was unsupported); Baghdadi 1950-51 EXODUS not "expulsion",
+  Kadoorie CLP(1901)/Peninsula(1928) predate 1949. `_waves_doc` provenance updated; JSON valid, spine test +
+  biome check green. ([[research-not-memory]] both halves now done: founding-era + cast.)
 - [ ] **FS-SPINE-ORIGIN-FLAVOR — weave the founding-origin seed flags into the spine's decision flavoring.**
   The spine.act.json was authored BEFORE the FS-ONB-DRIFT founding-origin model; it doesn't read the new
   region:/base:/power:/standing: seed flags. A press founder vs. a land founder vs. a military founder should
