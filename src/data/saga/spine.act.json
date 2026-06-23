@@ -9,6 +9,11 @@
    "macroAct": "convergence",
    "title": "Act IV — The Iron and the Ivory",
    "scenes": [
+    "spine:g3:gildedage:open_land",
+    "spine:g3:gildedage:open_pulpit",
+    "spine:g3:gildedage:open_law",
+    "spine:g3:gildedage:open_military",
+    "spine:g3:gildedage:open_press",
     "spine:g3:gildedage:open",
     "spine:g3:gildedage:venture",
     "spine:g3:gildedage:forge",
@@ -168,6 +173,251 @@
  ],
  "scenes": [
   {
+   "id": "spine:g3:gildedage:open_land",
+   "sense": "sight",
+   "requires": {
+    "flags": [
+     "base:land"
+    ],
+    "notFlags": []
+   },
+   "next": "spine:g3:gildedage:venture",
+   "prose": [
+    "From the high window of the new railroad hotel {given_name} {surname} looked out over a continent the {family_name} land had helped to fence: cattle ranges the size of European duchies, wheat seas broken by combine and rail, and the western grants the family had banked on for a century now thick with settlers paying rent. The Gilded Age turned land into an empire of yield — but the homestead myth was souring into tenancy and mortgage, and the Granger and Populist farmers were beginning to ask who really owned the West.",
+    "Word came up the line of railroad land-grant scandals, of bonanza farms and busted homesteaders, of a frontier the census would soon declare closed. {given_name} weighed the family's vast holdings against the rising fury of the men who worked them, knowing that in this age land was no longer just acreage — it was a financial instrument, leveraged and mortgaged, as exposed to the panic as any stock."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "A railroad combine offers to buy the family's western grants at a baron's price — or freeze them out."
+     ],
+     "choice": {
+      "text": "Sell into the boom and convert the land to capital.",
+      "motivatorShift": {
+       "wealth": 1,
+       "reach": 1
+      },
+      "setFlags": [
+       "g3_land_sold_to_capital"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "Granger organizers ask the family to side with the farmers against the railroad's freight rates."
+     ],
+     "choice": {
+      "text": "Hold the land + the tenants — a landed dynasty outlasts a paper one.",
+      "motivatorShift": {
+       "lineage": 1,
+       "tradition": -1
+      },
+      "setFlags": [
+       "g3_land_held_the_acres"
+      ],
+      "gather": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "spine:g3:gildedage:open_pulpit",
+   "sense": "sound",
+   "requires": {
+    "flags": [
+     "base:pulpit"
+    ],
+    "notFlags": []
+   },
+   "next": "spine:g3:gildedage:venture",
+   "prose": [
+    "The new stone church the {family_name} money had built could seat a thousand, and {given_name} {surname} preached now to a city swollen with immigrants, factory smoke, and inequalities the founders never imagined. The Gilded Age was an age of gospels at war: the Gospel of Wealth that blessed the great fortunes as stewardship, and the Social Gospel that called the tenement a sin upon the nation. The {family_name} pulpit could sanctify the new Carnegies or thunder against them — and a city of the desperate was listening.",
+    "Word came up the avenue of Moody's revivals filling halls by the thousands, of settlement houses and temperance crusades, of a labor movement quoting scripture against the owners. {given_name} weighed the comfort of the moneyed pews against the multitude outside them, knowing the pulpit that named this age's true gospel would shape whether the century's faith served the fortune or the forgotten."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "A steel magnate offers to endow the church handsomely — if the sermons bless the Gospel of Wealth."
+     ],
+     "choice": {
+      "text": "Take the endowment — wealth, rightly stewarded, is God's work.",
+      "motivatorShift": {
+       "wealth": 1,
+       "worldview": -1
+      },
+      "setFlags": [
+       "g3_pulpit_gospel_of_wealth"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "A Social Gospel reformer begs the pulpit to name the tenement and the sweatshop as sin."
+     ],
+     "choice": {
+      "text": "Preach the Social Gospel — the church belongs to the least of these.",
+      "motivatorShift": {
+       "worldview": -1,
+       "honor": -1
+      },
+      "setFlags": [
+       "g3_pulpit_social_gospel"
+      ],
+      "gather": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "spine:g3:gildedage:open_law",
+   "sense": "sight",
+   "requires": {
+    "flags": [
+     "base:law"
+    ],
+    "notFlags": []
+   },
+   "next": "spine:g3:gildedage:venture",
+   "prose": [
+    "The mahogany and brass of the corporate law office gleamed with new money, and {given_name} {surname} read in the statute books the great legal invention of the age: the corporation as a person, the trust as an empire, the injunction as a weapon against the strike. The Gilded Age was lawyered into being — the Fourteenth Amendment's protections turned from the freedman to the railroad, the Sherman Act written and then defanged. A lawyer who could build a trust or break a union stood at the right hand of the century's power, and the {family_name} name was already on the great retainers.",
+    "Word came down from Washington of the great combinations and the first stirrings of antitrust, of Pullman and Haymarket and the courts enjoining the workers, of a Supreme Court remaking the Constitution into a charter for capital. {given_name} weighed the fortunes to be made serving the trusts against the reformers' rising demand to break them, knowing the law was, as ever, where the age decided who would be allowed to rule."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "A railroad trust retains the family to architect the holding company that will swallow its rivals."
+     ],
+     "choice": {
+      "text": "Build the trust — the corporation is the new sovereign, and you draft its charter.",
+      "motivatorShift": {
+       "wealth": 1,
+       "power": 1
+      },
+      "setFlags": [
+       "g3_law_built_the_trust"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "A reform coalition asks the family's name behind the new antitrust prosecutions."
+     ],
+     "choice": {
+      "text": "Take the reform brief — the law that made the trusts can break them.",
+      "motivatorShift": {
+       "politics": -1,
+       "honor": -1
+      },
+      "setFlags": [
+       "g3_law_trustbuster"
+      ],
+      "gather": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "spine:g3:gildedage:open_military",
+   "sense": "sound",
+   "requires": {
+    "flags": [
+     "base:military"
+    ],
+    "notFlags": []
+   },
+   "next": "spine:g3:gildedage:venture",
+   "prose": [
+    "The bugle on the parade ground sounded thinner in peacetime, and {given_name} {surname}, an officer between the Civil War's memory and the Spanish War's approach, heard in it the awkward place of the sword in an age of money. The Gilded Age soldier policed the frontier against the last free tribes and, more and more, the strike against the workers — the militia and the federal troops called out to Pullman and Homestead. The {family_name} commission still carried weight, but the century was asking what, exactly, an army was for when the real power sat in the counting-house.",
+    "Word came up from the West of Wounded Knee and the closing of the frontier, of regiments marched into mill towns to break the great strikes, of jingoes already beating the drum for an overseas empire. {given_name} weighed the dwindling glory of frontier duty against the ugly work of strikebreaking and the coming imperial adventure, knowing the officer who chose his war rightly could still ride reputation into power."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "The governor orders your regiment to break a steel strike — bayonets against the family's own workers."
+     ],
+     "choice": {
+      "text": "March on the strikers — order is order, and the owners remember who kept it.",
+      "motivatorShift": {
+       "power": 1,
+       "honor": 1
+      },
+      "setFlags": [
+       "g3_military_broke_the_strike"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "Imperialists court you for the coming overseas war — glory and rank in a new American empire."
+     ],
+     "choice": {
+      "text": "Angle for the imperial command — the next great reputations will be won abroad.",
+      "motivatorShift": {
+       "reach": 1,
+       "power": 1
+      },
+      "setFlags": [
+       "g3_military_imperial_turn"
+      ],
+      "gather": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "spine:g3:gildedage:open_press",
+   "sense": "sight",
+   "requires": {
+    "flags": [
+     "base:press"
+    ],
+    "notFlags": []
+   },
+   "next": "spine:g3:gildedage:venture",
+   "prose": [
+    "The presses in the {family_name} basement ran in five-story thunder now, and {given_name} {surname} stood over a newsroom that could make a war, a president, or a panic before breakfast. The Gilded Age was the dawn of the mass daily — Pulitzer and Hearst turning the front page into a weapon, the muckrakers turning it into a conscience. A family that owned a great paper owned a slice of the public mind in an age when the public was, for the first time, a national audience reachable in a single morning.",
+    "Word came up from the composing room of circulation wars and yellow journalism, of exposés that toppled trusts and headlines that started them, of a press torn between the advertisers who paid and the readers who trusted. {given_name} weighed sensation against substance, knowing the paper that chose rightly in this age would shape not just opinion but the century's idea of the truth itself."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "A circulation war beckons: run the lurid front page that sells, or the sober one that lasts."
+     ],
+     "choice": {
+      "text": "Run the sensation — circulation is power, and power makes the rules later.",
+      "motivatorShift": {
+       "reach": 1,
+       "honor": 1
+      },
+      "setFlags": [
+       "g3_press_yellow_journalism"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "A muckraker brings you a trust-busting exposé that will cost the paper its biggest advertiser."
+     ],
+     "choice": {
+      "text": "Print it — the press that fears its advertisers is no press at all.",
+      "motivatorShift": {
+       "worldview": 1,
+       "honor": -1
+      },
+      "setFlags": [
+       "g3_press_muckraker"
+      ],
+      "gather": true
+     }
+    }
+   ]
+  },
+  {
    "id": "spine:g3:gildedage:open",
    "sense": "sound",
    "prose": [
@@ -214,7 +464,13 @@
    "braidSlots": [],
    "requires": {
     "flags": [],
-    "notFlags": []
+    "notFlags": [
+     "base:land",
+     "base:pulpit",
+     "base:law",
+     "base:military",
+     "base:press"
+    ]
    },
    "next": "spine:g3:gildedage:venture"
   },
