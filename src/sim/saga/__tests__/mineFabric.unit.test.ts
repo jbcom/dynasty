@@ -58,6 +58,14 @@ describe("corpus miner (FS-4)", () => {
     expect(uUniq - uTmpl).toBeGreaterThan(0.15);
   });
 
+  it("UNIQUENESS: a single-scene corpus is maximally unique, not NaN (totalScenes<=1 guard)", () => {
+    // Math.log(1)=0 in the idf normalizer would divide by zero → NaN; the guard returns 1 instead.
+    const df = buildDocFreq([distinctive]);
+    const u = uniqueness(distinctive, df, 1);
+    expect(Number.isNaN(u)).toBe(false);
+    expect(u).toBe(1);
+  });
+
   it("crossing potential rewards source vignettes", () => {
     expect(crossingPotential(distinctive)).toBeGreaterThan(0);
     expect(crossingPotential(templated[0]!)).toBe(0); // no braid slots

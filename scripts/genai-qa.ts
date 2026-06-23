@@ -208,7 +208,9 @@ function normalizeAndPin(raw: string, original: Scene): Scene | null {
     sense: original.sense,
     next: original.next,
     requires: original.requires,
-    ...(original.decision ? { decision: original.decision } : {}),
+    // Always pin the ORIGINAL decision (even if undefined) so a hallucinated decision the model invented on
+    // a decisionless scene is overwritten, not preserved by a conditional spread.
+    decision: original.decision,
   };
   const v = SceneSchema.safeParse(candidate);
   return v.success ? v.data : null;

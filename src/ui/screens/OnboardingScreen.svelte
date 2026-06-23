@@ -113,7 +113,10 @@ const regionInfo = $derived(region ? regionDef(region) : undefined);
 const baseOptions = $derived.by(() => {
   if (!regionInfo) return POWER_BASES;
   const native = new Set(regionInfo.nativeBases);
-  return [...POWER_BASES].sort((a, b) => (native.has(a.id) ? -1 : native.has(b.id) ? 1 : 0));
+  // Rank natives 0, others 1, then subtract — a symmetric comparator (two natives compare equal → 0),
+  // unlike a -1/1 form that returns -1 both ways and breaks the sort's anti-symmetry contract.
+  const rank = (id: PowerBase) => (native.has(id) ? 0 : 1);
+  return [...POWER_BASES].sort((a, b) => rank(a.id) - rank(b.id));
 });
 
 // NAMING STYLE (ONB-1, user-ordered): an explicit list of every authored naming culture, the region's

@@ -120,11 +120,15 @@ export function buildDocFreq(scenes: MineScene[]): Map<string, number> {
 export function uniqueness(scene: MineScene, df: Map<string, number>, totalScenes: number): number {
   const words = [...new Set(contentWords(scene.prose))];
   if (words.length === 0) return 0;
+  // Guard totalScenes<=1: Math.log(1)=0 would make the idf normalizer divide by zero → NaN. With a single
+  // scene there's no corpus to be unique against, so treat it as maximally unique. Hoist the loop-invariant.
+  if (totalScenes <= 1) return 1;
+  const logTotal = Math.log(totalScenes);
   let acc = 0;
   for (const w of words) {
     const freq = df.get(w) ?? 1;
     // idf normalized to 0..1: a word in 1 scene → ~1; a word in every scene → ~0.
-    acc += Math.log(totalScenes / freq) / Math.log(totalScenes);
+    acc += Math.log(totalScenes / freq) / logTotal;
   }
   return Math.min(1, acc / words.length);
 }
@@ -182,7 +186,7 @@ export function selectFabric(scenes: MineScene[], keepFraction = 0.2): ScoredSce
   const df = buildDocFreq(scenes);
   const scored = scenes
     .map((s) => scoreScene(s, df, scenes.length))
-    .sort((a, b) => b.score - a.score || (a.id < b.id ? -1 : 1));
+    .sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
   const keep = Math.max(1, Math.round(scenes.length * keepFraction));
   return scored.slice(0, keep);
 }

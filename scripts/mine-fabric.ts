@@ -91,7 +91,7 @@ function main(): void {
   // Stable ordering: sort each era's list by score desc then id.
   for (const wave of Object.values(fabric))
     for (const list of Object.values(wave))
-      list.sort((a, b) => b.score - a.score || (a.sceneId < b.sceneId ? -1 : 1));
+      list.sort((a, b) => b.score - a.score || a.sceneId.localeCompare(b.sceneId));
 
   const out = {
     generated: "FS-4 mine-fabric (deterministic)",

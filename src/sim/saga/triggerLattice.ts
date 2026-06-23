@@ -114,10 +114,13 @@ export function evaluateTriggers(
     if (!conditionMet(rule.condition, s, rule.family)) continue;
     out.push({ family: rule.family, branch: rule.branch, priority: rule.priority ?? 0 });
   }
+  // Symmetric comparator (localeCompare returns 0 on equal) — anti-symmetry matters for deterministic,
+  // stable ordering across JS engines.
   return out.sort(
     (a, b) =>
       b.priority - a.priority ||
-      (a.family < b.family ? -1 : a.family > b.family ? 1 : a.branch < b.branch ? -1 : 1),
+      a.family.localeCompare(b.family) ||
+      a.branch.localeCompare(b.branch),
   );
 }
 
