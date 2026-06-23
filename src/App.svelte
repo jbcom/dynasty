@@ -169,7 +169,10 @@ function dumpTimeline(): void {
       {content}
       seed={pendingSeed}
       onComplete={birthGameFromEmergence}
-      onCancel={() => (screen = "title")}
+      onCancel={() => {
+        pendingSeed = undefined;
+        screen = "title";
+      }}
     />
   {/key}
 {:else if screen === "title" || !store}
