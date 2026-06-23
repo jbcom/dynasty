@@ -110,9 +110,13 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   the steps. Onboarding browser test walks the full funnel + asserts seeds. tsc 0, 726 unit + 97 browser green.
   (REMAINING for a deeper pass: a fully narrated birth scene vs. the current choice-card flow — the seeds +
   flow are in; richer diegetic prose is a polish follow-up, not blocking FS-8.)
-- [ ] [WAIT] **FS-8 live-verify the hour+ playthrough — after the spine is authored + wired.** One line
-  1776→stars, waves braiding in, era-distinct decisions, reads as ONE strong story. THEN revisit the visual
-  layer. [WAIT] FS-6/FS-7.
+- [x] **FS-8a engine-level live-verify — DONE.** Drove a founded run (Tobias Hale, political, 1776+life-seeds):
+  plays ALL 10 spine generations g0→g9 (founding→interstellar), ~year 2139, 364 scenes (genuine hour+),
+  era-distinct decisions in order, reaches a named destiny/convergence ending, deterministic. Caught + fixed
+  the gen-5 cap bug (spine now uses true gen up to SPINE_MAX_GEN); +1 regression test (all 10 gens). 727 green.
+- [ ] **FS-8b Chrome live-verify — confirm it READS right on screen.** Dev server + Chrome: play the founding
+  line, confirm the era-distinct decisions + woven family branches render well + it lands as ONE strong story
+  (not just at the engine level). Note the hour-length feel + any spine depth tuning. THEN revisit visual layer.
 
 ### VL (user, 2026-06-22): VISUAL LAYER — portraits + map, GenAI-generated — DEFERRED behind FS
 DEFERRED: fix the story architecture (FS) first; a prettier UI on structurally-identical stories doesn't
