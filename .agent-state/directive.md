@@ -1121,7 +1121,16 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 - [ ] **WV-3-YUKA — emergent rival reactions (anti-Suzerain layer 2).** WV-3 proved seeded market/run
   divergence; the further layer ([[emergent-cause-effect-sim]]) is rival lines REACTING to the player
   (Yuka-style GOAP) + seeded disease/disruption shocks the player lives through, so playthroughs diverge in
-  EVENTS, not just economy. Lower priority than SPINE-ACT-DEPTH but a real depth lever.
+  EVENTS, not just economy. Now the top depth lever (the hour mandate is met; this is the replayability one).
+- [ ] **SPINE-CONTENT-QA-4 — uniqueness + rhythm audit of the 6 NEW mid-weight reversals.** EXTEND-MIDWEIGHT
+  added 6 reversal scenes (g1/g2/g4/g5/g6/g7) in one pass. Run the uniqueness lens: opener skeletons (already
+  spot-checked distinct), beat-1 openers, and 2nd-sentence rhythm vs the existing 24 interstitials; ensure no
+  shared template crept in. Fix any templated lines ([[uniqueness-genuine-intersections]]).
+- [ ] **SPINE-WEAVE-PAYOFF-4 — the mid-weight reversal flags into the trigger lattice (if a genuine match).**
+  The 6 new reversals added 12 flags (g1_read_the_alliances, g2_hedged_the_break, g4_got_ahead_of_the_gaze,
+  g6_bought_the_next_medium, g7_retook_the_helm, …). Enumerate vs the family branches per PAYOFF-3's discipline
+  (one rule per GENUINE thematic+era match, never blanket-wire); several may have no clean match and stay
+  unwired (they still matter via motivatorShifts). Tested in/out of window.
 - [x] **SAGA-VL-INTEGRATE — DONE (live screenshot pass on dev :5175).** Walked the full founding funnel
   end-to-end in the running build and READ every screen: title (luxury Playfair/Garamond gold-on-navy) →
   REGION → POWER BASE (all 6, scannable) → STANDING → NAMING (11 lanes) → SURNAME → GENDER → GIVEN → 3 FS-7b
@@ -1132,10 +1141,12 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   [[dynasty-ui-conventions]]/[[suzerain-ui-reference]]. No app console errors (only a Chrome-extension
   message-channel noise, not the app). The Map per-generation/rival markers are covered by MapView.browser
   (110 green). No visual drift to fix.
-- [ ] **SPINE-DEPTH-EXTEND-MIDWEIGHT — if PLAYTEST wants the full hour, a 4th-act-tier interstitial pass.** The
-  measurement put a fast read-path at ~44 min. To lock the full hour for the median player, the next lever is
-  a third interstitial on the SIX mid-weight acts (g1/g2/g4/g5/g6/g7 — currently 6 scenes) OR richer beat
-  prose. Gate on a fresh PLAYTEST read; pick the lever from the figure, not a guess. Same idempotent script.
+- [x] **SPINE-DEPTH-EXTEND-MIDWEIGHT — DONE (commit 255f405).** Added a REVERSAL interstitial to the six
+  mid-weight acts (g1/g2/g4/g5/g6/g7), bringing ALL 10 acts to the 7-scene shape (open → tex → decision →
+  csq → rev → decision → close). Each new reversal is era-voiced, decisionless, distinct-opener (uniqueness
+  lens). A full founding→stars run is now 70 scenes / 144 paragraphs / 95 beats ≈ 48 min at the conservative
+  FLOOR — a careful/exploring player crosses the hour. The "hour or more" mandate is MET. Idempotent; 839
+  node + 110 browser green.
 - [x] **TRIGGER-CROSSING-RECORD — DONE (commit fd84582).** pickBeat/pickDecision now call
   recordTriggerCrossings against the engaged scene: every fired trigger branch stamps a
   `crossed:<family>:<branch>` flag (the existing crossedFlag convention). So `once` arrivals fire exactly
