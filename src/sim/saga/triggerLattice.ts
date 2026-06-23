@@ -157,3 +157,48 @@ export function recordCrossing(
 export function crossingsOf(cast: readonly CastFamily[]): Record<string, number> {
   return Object.fromEntries(cast.map((f) => [f.id, f.crossed.length]));
 }
+
+/**
+ * The flag CONVENTION for crossing memory in the deterministic save state: a crossing with `family` via
+ * `branch` sets the flag `crossed:<family>:<branch>`. This keeps the recurring-cast memory inside the
+ * already-saved+replayed `flags` set (no schema change needed) while staying fully deterministic. Pure.
+ */
+export const crossedFlag = (family: string, branch: string): string =>
+  `crossed:${family}:${branch}`;
+
+/** Count distinct crossings per family from the run's flags (the `crossed:<family>:<branch>` convention). */
+export function crossingsFromFlags(flags: Iterable<string>): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const f of flags) {
+    const m = /^crossed:([^:]+):/.exec(f);
+    if (m?.[1]) counts[m[1]] = (counts[m[1]] ?? 0) + 1;
+  }
+  return counts;
+}
+
+/**
+ * Build the deterministic SpineState projection the trigger lattice reads, from the engine's game state.
+ * Pure — `leanings` is the motivator vector, `era` comes from the caller (macroActForYear), crossings from
+ * the flag convention. Keeps the lattice decoupled from the full GameState shape (only the fields it needs).
+ */
+export function spineStateProjection(input: {
+  archetype: string;
+  leanings: Record<string, number>;
+  meters: Record<string, number>;
+  place: string;
+  year: number;
+  era: string;
+  flags: Iterable<string>;
+}): SpineState {
+  const flagSet = new Set(input.flags);
+  return {
+    archetype: input.archetype,
+    leanings: input.leanings,
+    meters: input.meters,
+    place: input.place,
+    year: input.year,
+    era: input.era,
+    flags: flagSet,
+    crossings: crossingsFromFlags(flagSet),
+  };
+}

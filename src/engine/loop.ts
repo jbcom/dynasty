@@ -1,4 +1,5 @@
 import { loadSaga } from "../data/loadSaga";
+import triggersData from "../data/saga/triggers.json" with { type: "json" };
 import { MAX_RUNG, sagaClassForWealth } from "../sim/classRung";
 import type { Content } from "../sim/content";
 import { type ConvergenceEnding, resolveConvergence } from "../sim/convergence";
@@ -12,17 +13,23 @@ import {
   nudgeRival,
 } from "../sim/dynastyWorld";
 import { advanceFamily, applyChoice, applySuccessionToFamily } from "../sim/effects";
+import { macroActForYear } from "../sim/macroActs";
 import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
 import { candidatesFromSnapshots, type RivalLike, selectBraid } from "../sim/saga/braidSelect";
 import { actsForTier, resolveThreads } from "../sim/saga/player";
 import type { BraidSlot } from "../sim/saga/schema";
+import { TriggerTableSchema } from "../sim/saga/schema";
+import { evaluateTriggers, spineStateProjection } from "../sim/saga/triggerLattice";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
 import { type GameState, initState, isMemberAlive, type LedgerEntry } from "../sim/state";
 import { advanceSagaClock, advanceTimeline, detectEnd } from "../sim/timeline";
 import { pickNextEventViaWorld } from "../sim/world";
 import { SagaDriver, type SagaFrame } from "./sagaDriver";
+
+/** The deterministic-trigger lattice table (FS-5b), parsed + validated once at module load. */
+const GAME_TRIGGERS = TriggerTableSchema.parse(triggersData);
 
 /** A snapshot the UI renders from. Immutable per turn. */
 export interface GameView {
@@ -177,10 +184,15 @@ export class Game {
     // threads). Bias-weighted, era-gated, seeded — borrows a rival's authored vignette at a destination
     // slot in the current scene. Deterministic per (scene, year, seed) so replay is identical.
     const emergent = this.emergentThreads(frame.scene);
+    // FS-5c: fold any DETERMINISTIC-TRIGGER branches that fire for the current spine state into the
+    // frame's threads (additive). Unlike the WV-2 braid (seeded), these are pure-deterministic: the same
+    // spine state fires the same family branches every replay.
+    const triggered = this.triggerThreads(frame.scene);
+    const extra = [...emergent, ...triggered];
     return {
       state: this.state,
       currentEvent: this.current,
-      saga: emergent.length ? { ...frame, threads: [...frame.threads, ...emergent] } : frame,
+      saga: extra.length ? { ...frame, threads: [...frame.threads, ...extra] } : frame,
       glimpses: this.currentGlimpses(),
       rivalStandings: this.rivalStandings(),
       rung: this.playerRung(),
@@ -222,6 +234,35 @@ export class Game {
     if (!match) return [];
     // Resolve the emergent ThreadRef the same way corpus threads resolve (rival's opening fragment).
     return resolveThreads(this.saga.corpus, { ...scene, thread: [match.thread] });
+  }
+
+  /**
+   * FS-5c: the DETERMINISTIC-TRIGGER lattice — fold any recurring-family branches whose compound
+   * conditions hold for the current spine state into the scene's threads. Pure-deterministic (no RNG):
+   * the projection reads archetype/leanings(motivators)/meters/place/year/era/flags(+crossing memory via
+   * the `crossed:` flag convention), evaluateTriggers fires the matching branches, and each resolves into
+   * a woven thread the SceneReader braids into the prose. Same spine state → same branches every replay.
+   */
+  private triggerThreads(scene: SagaFrame["scene"]): ReturnType<typeof resolveThreads> {
+    if (!scene) return [];
+    const place = this.state.founding?.place;
+    if (!place) return [];
+    const tier = this.playerRung();
+    const spine = spineStateProjection({
+      archetype: this.state.archetype,
+      leanings: this.state.personality as unknown as Record<string, number>,
+      meters: this.state.meters,
+      place,
+      year: this.state.year,
+      era: macroActForYear(this.state.year),
+      flags: this.state.flags,
+    });
+    const fired = evaluateTriggers(GAME_TRIGGERS.rules, spine);
+    if (fired.length === 0) return [];
+    // Each fired branch weaves as a thread naming the recurring family at this tier (the branch's mined
+    // fabric prose is borrowed downstream); resolveThreads braids the family's opening fragment in.
+    const threads = fired.map((b) => ({ wave: b.family, atTier: tier }));
+    return resolveThreads(this.saga.corpus, { ...scene, thread: threads });
   }
 
   /** Advance the rival world to the run's current year (deterministic). Called when the clock moves. */

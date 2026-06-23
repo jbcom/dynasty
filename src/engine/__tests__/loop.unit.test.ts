@@ -19,6 +19,15 @@ describe("Game loop", () => {
     expect(g.finished).toBe(false);
   });
 
+  it("FS-5c: the trigger-lattice view path is deterministic across re-reads", () => {
+    // The view folds in deterministic-trigger family branches (triggerThreads). Reading `view` twice
+    // for the same state must yield identical saga threads — no RNG advance, replay-safe.
+    const g = new Game(content(), "seed");
+    const a = g.view.saga?.threads ?? [];
+    const b = g.view.saga?.threads ?? [];
+    expect(JSON.stringify(a)).toBe(JSON.stringify(b));
+  });
+
   it("notifies subscribers immediately and on each choice", () => {
     const g = new Game(content(), "seed");
     const seen: Array<string | null> = [];
