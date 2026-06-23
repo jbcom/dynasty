@@ -1461,15 +1461,28 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [x] **OMEN-A11Y-AUDIT — DONE.** Extracted the badge map to a pure `omenBadgeLabel(tone)` + `FORESHADOW_TONES`
   in sagaShock (PlayScreen now uses it, no inline ternary). Audit: every tone maps to a non-empty, distinct label
   (no blank fall-through), guarding the a11y layer from a future tone slipping the map. Test: sagaShock.unit.
-- [ ] **DOSSIER-EMPTY-VOICE-IN-PLAYSCREEN — confirm the dossier grace note actually surfaces in the live PlayScreen
-  Dossier tab early-game (end-to-end wiring), not just in the RivalDossier unit.** Mirror MAP-FIELD-LINK-WIRING-CHECK:
-  mount PlayScreen with empty standings, open the Field/Dossier tab, assert the grace note. Pure; tested.
-- [ ] **CHRONICLE-FULL-PLAYTHROUGH-SCREENSHOTS — capture + READ a short SEQUENCE of screenshots across one founded
-  run (title → early dossier-empty → a shock omen → a recovery hope omen → the finale) to confirm the whole arc
-  reads coherently as a visual story, not just per-screen.** The pieces are each shot; the ARC isn't. Visual; READ all.
-- [ ] **OMEN-BADGE-CONTRAST-AUDIT — a deterministic WCAG contrast check that each omen badge's text-on-fill meets
-  AA (≥4.5:1): gold pill dark-text, red pill light-text.** Compute the contrast ratio from the brand tokens; assert
-  ≥4.5. Guards the a11y badges from a token change quietly dropping below legible contrast. Pure; tested.
+- [x] **DOSSIER-EMPTY-VOICE-IN-PLAYSCREEN — DONE (branch feat/chronicle-and-contrast-audit).** Found a real gap: the
+  Field tab was gated on `rivalStandings.length > 0`, so the empty-voice grace note was UNREACHABLE in the live app.
+  Fixed: the Field tab now gates on `hasLineage` (a founded line, same as the Map tab), so it's stable and the
+  grace note surfaces early-game. Test: PlayScreen.visual mounts a founded line + empty standings, opens the Field
+  tab, asserts the "still finding their feet" note.
+- [x] **CHRONICLE-FULL-PLAYTHROUGH-SCREENSHOTS — DONE.** New ChronicleArc.visual captures 5 frames across one run +
+  READ in order: title (Dynasty masthead, gold/navy) → an Act II scene → a dread omen (⚠ WARNING red) → a hope omen
+  (↻ RECOVERING gold + the invest "Press the rebound" beat) → the Total Victory finale (gold). The luxury register
+  holds across every beat, omen valence shifts red→gold with the narrative, finale pays off in gold — reads as ONE
+  coherent chronicle, not five disjoint screens. ✓
+- [x] **OMEN-BADGE-CONTRAST-AUDIT — DONE.** New omenBadgeContrast.unit reads the brand-token hexes from tokens.css
+  and computes WCAG contrast: hope (ink/gold) = 8.68:1, dread (cream/red) = 5.81:1 — both ≥ AA 4.5:1. Guards the
+  a11y badges from a token change quietly dropping below legible contrast. Prints the ratios.
+- [ ] **MAP-TAB-LABEL-ICON-DEDUP — the Map and Field tabs both use the `timeline` icon; give each a distinct icon so
+  the tab bar reads unambiguously.** A glance-readability nit surfaced by the chronicle screenshot (frame 3 shows
+  Map + Field with the same glyph). Pure UI; tested (the tab icons differ).
+- [ ] **HOPE-OMEN-INVEST-AFFORD-VOICE — when a hope omen shows but the player can't afford ANY invest, the
+  "Press the rebound" prompt still implies they can; soften the copy to "if you can spare it" (or hide the prompt)
+  when both invest options are unaffordable.** Pure UI; tested (PlayScreen.visual broke-but-hopeful state).
+- [ ] **TITLE-TO-FINALE-REGISTER-AUDIT — a deterministic check that the masthead, PlayScreen header, and finale all
+  pull from the SAME font/token registers (no drift),** mirroring the chronicle visual read but as a structural test
+  over the computed font-family/color tokens of each screen's heading. Guards the luxury register from CSS drift. Tested.
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,

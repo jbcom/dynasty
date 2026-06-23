@@ -246,6 +246,46 @@ describe("PlayScreen (composed game screen)", () => {
     expect(marker?.getAttribute("data-fallen")).toBe("true");
   });
 
+  it("DOSSIER-EMPTY-VOICE-IN-PLAYSCREEN: the empty-field grace note surfaces in the live Field tab", async () => {
+    // A founded line (Field tab shows) but EMPTY standings (early game, no rivals surfaced yet). Opening the
+    // Field tab must show the dossier's empty-voice grace note end-to-end, not a blank panel — proving the tab
+    // gate (hasLineage, not standings>0) keeps the surface reachable.
+    const base = view();
+    const v: GameView = {
+      ...base,
+      state: {
+        ...base.state,
+        family: {
+          members: [
+            {
+              id: "m0",
+              given: "X",
+              surname: "Vane",
+              sex: "male" as const,
+              born: 1885,
+              generation: 0,
+              traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
+              isProtagonist: true,
+            },
+          ],
+          protagonistId: "m0",
+          nextSeq: 1,
+        },
+      },
+      rivalStandings: [], // no rivals surfaced yet
+    };
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: v, busy: false, onchoose: () => {} },
+    });
+    // The Field tab is present despite empty standings (gated on the founded line).
+    await page.getByRole("button", { name: /Field/ }).click();
+    flushSync();
+    const empty = host.querySelector('[data-testid="rival-dossier-empty"]');
+    expect(empty, "the empty-field grace note surfaces in the live Field tab").not.toBeNull();
+    expect(empty?.textContent).toMatch(/still finding their feet/i);
+  });
+
   it("OMEN-BADGE-SCREENSHOT: captures the hope + dread omen badges for visual review", async () => {
     const scene = SceneSchema.parse({
       id: "sc:demo:badgeshot",

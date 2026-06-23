@@ -131,8 +131,10 @@ const hasNews = $derived(content.worldTimelines.length > 0 || view.rivalNews.len
 const hasMarkets = $derived(content.markets.length > 0 || content.ranks.length > 0);
 // The lineage tab appears only for a founded line (it has a live family tree).
 const hasLineage = $derived(view.state.family !== undefined);
-// RIVAL-DOSSIER-TAB: the Field tab shows when there's a rival world to track (a founded line's convergence race).
-const hasField = $derived(view.rivalStandings.length > 0);
+// RIVAL-DOSSIER-TAB: the Field tab shows for a FOUNDED line (which has a convergence world to track) — not gated
+// on standings being non-empty, so it's stable and the DOSSIER-EMPTY-VOICE grace note is reachable early-game
+// before the field takes shape (the dossier renders its own empty-state line). Same gate as the Map tab.
+const hasField = $derived(hasLineage);
 // In wide mode the "event" tab is shown directly in event-col, so the side nav
 // starts on the first info tab (timeline is always present; news/markets optional).
 const defaultTab = $derived<Tab>(wide ? (hasNews ? "news" : hasMarkets ? "markets" : "timeline") : "event");
