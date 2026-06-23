@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.0](https://github.com/jbcom/dynasty/compare/v0.46.0...v0.47.0) (2026-06-23)
+
+
+### Features
+
+* announce a rival's elimination in the NewsTicker (FALLEN-NEWS) ([#157](https://github.com/jbcom/dynasty/issues/157)) ([ffb010b](https://github.com/jbcom/dynasty/commit/ffb010b117a6d1c6d414c1991ed7cdb05a14b92f))
+
 ## [0.46.0](https://github.com/jbcom/dynasty/compare/v0.45.0...v0.46.0) (2026-06-23)
 
 
