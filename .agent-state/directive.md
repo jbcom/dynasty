@@ -1519,13 +1519,25 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [x] **SAFE-AREA-LEGACYREPORT — DONE.** Found a gap: `.report` (the tall, scrolling finale) didn't pad the bottom
   inset, so "Play Again" could sit under the home bar. Added `padding-bottom: max(--mmm-pad, env(safe-area-inset-
   bottom))`. Test: SafeAreaAudit.browser asserts `.report` references safe-area-inset-bottom.
-- [ ] **ONBOARDING-SCREEN-SHOT — capture + READ the OnboardingScreen (Period→Class→Race/Culture funnel) — the entry
-  flow between Title and Play, not yet visually verified.** Confirm it holds the luxury register + reads legibly at
-  each funnel step. Visual; READ.
-- [ ] **SAFE-AREA-ONBOARDING-TITLE — extend the safe-area audit to the Title + Onboarding screens (the first two a
-  player sees): verify their primary action buttons clear the top/bottom insets on a notched device.** Pure UI; tested
-  (SafeAreaAudit-style CSS-reference check over those screens).
-- [ ] **FULL-TAB-COVERAGE-ASSERT — now that every tab is screenshotted piecemeal, add ONE deterministic test that
-  iterates EVERY founded-line tab, clicks it, and asserts the tab's panel renders non-empty content** (a structural
-  guard that no tab is a dead/blank route), complementing the per-tab visual reads. Pure; tested.
+- [x] **ONBOARDING-SCREEN-SHOT — DONE (branch feat/onboarding-shot-safearea-tabcoverage).** Captured + READ the
+  founding funnel: phase 1 (Region — New England / Mid-Atlantic / South, gold cards + grounded prose under an italic
+  prompt) and phase 2 (Power base — Commerce / Pulpit / Law & Politics / Land / Press / Sword, the chosen region
+  threaded into the next prompt). Holds the luxury register, legible, the funnel reads coherently. Test:
+  OnboardingScreen.visual captures the opening phase + one advanced step.
+- [x] **SAFE-AREA-ONBOARDING-TITLE — DONE.** Found a gap: Title (.panel-screen) and Onboarding (.onboarding) padded
+  the top inset but the `padding` shorthand reused the TOP inset for the bottom — so action buttons could sit under
+  the home bar. Made top/bottom explicit (`max(1.25rem, env(safe-area-inset-bottom))`). Test: SafeAreaAudit.browser
+  asserts both screens reference top AND bottom insets.
+- [x] **FULL-TAB-COVERAGE-ASSERT — DONE.** PlayScreen.visual now iterates EVERY founded-line tab (≥6), clicks each,
+  and asserts its panel renders non-empty content — a structural guard that no tab is a dead/blank route,
+  complementing the per-tab visual reads.
+- [ ] **A11Y-TAB-ARIA — the tab bar buttons should expose `role="tab"` / `aria-selected` (or aria-current) so a
+  screen reader announces the active tab; verify + add the ARIA, mirroring the OMEN-TONE-A11Y non-color discipline.**
+  Pure UI; tested (the active tab carries aria-selected/aria-current).
+- [ ] **ONBOARDING-FUNNEL-FULL-WALK-SHOT — extend ONBOARDING-SCREEN-SHOT: capture + READ EVERY funnel phase
+  (region → base → standing → naming → surname → gender → given → life-seeds) to confirm the whole entry flow holds
+  the register end-to-end, not just the first two steps.** Visual; READ all phases.
+- [ ] **TITLE-CONTINUE-STATE-SHOT — capture + READ the Title screen WITH a save (the Continue button shown), the
+  variant not yet shot (only the no-save Begin-a-Line state was).** Confirm Continue + Begin + Settings read legibly
+  together. Visual; READ.
 - [x] **WV-3 + SPINE shipped ledger — ARCHIVED to docs/STATE.md (DIRECTIVE-LEDGER-PRUNE).** 27 merged-PR / done entries (FORESHADOW-IN-TONE #134 … the spine-depth + QA wave) were moved to the "Shipped — WV-3 + spine wave" appendix in docs/STATE.md to keep this directive scannable. The code + git history are the source of truth; the appendix is the human-readable index.
