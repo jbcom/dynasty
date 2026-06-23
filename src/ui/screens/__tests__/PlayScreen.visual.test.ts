@@ -205,4 +205,30 @@ describe("PlayScreen (composed game screen)", () => {
     });
     expect(host.querySelector(".shock-aftermath")).toBeNull();
   });
+
+  it("WV-3-SHOCK-RECOVERY: a recovery note is tagged data-shock=recovery (styled positive, not loss-red)", () => {
+    const scene = SceneSchema.parse({
+      id: "spine:g3:open",
+      sense: "sight",
+      prose: [
+        "The rebuilt warehouses stand again along the wharf, ledgers slowly filling back in.",
+      ],
+    });
+    const v: GameView = {
+      ...view(),
+      saga: { actTitle: "Act IV", scene, threads: [], ended: false },
+      shock: {
+        kind: "recovery",
+        text: "Brick by brick the house was rebuilt — the fortune clawed back from the ash.",
+        note: "rebuilt",
+      },
+    };
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: v, busy: false, onchoose: () => {} },
+    });
+    const aftermath = host.querySelector(".shock-aftermath");
+    expect(aftermath?.getAttribute("data-shock")).toBe("recovery");
+    expect(aftermath?.textContent).toContain("rebuilt");
+  });
 });

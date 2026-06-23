@@ -30,8 +30,10 @@ import {
 } from "../sim/saga/triggerLattice";
 import {
   applyFamilyDeathShock,
+  rollSagaRecovery,
   rollSagaShock,
   type SagaShockNote,
+  shockMeterFlag,
   shockNote,
 } from "../sim/sagaShock";
 import type { GameEvent } from "../sim/schema";
@@ -496,9 +498,16 @@ export class Game {
       era,
       this.rng.fork(`sagashock:${fromYear}`),
     );
-    if (shock.kind === "none") return;
+    // WV-3-SHOCK-RECOVERY: a tick with NO new shock is when a PRIOR meter blow can rebound (the two-act
+    // shape: blow → later partial recovery). Rolling recovery only on quiet ticks keeps a shock and its
+    // rebound from landing the same turn.
+    if (shock.kind === "none") {
+      this.applySagaRecovery(fromYear);
+      return;
+    }
     // Surface the shock as a one-turn aftermath note the SceneReader/PlayScreen narrates (WV-3-SHOCK-SCENES).
     this.lastShock = shockNote(shock);
+    const newFlags: string[] = [];
     if (shock.kind === "family_death" && this.state.family) {
       this.state = {
         ...this.state,
@@ -509,12 +518,51 @@ export class Game {
         ...this.state,
         meters: applyDelta(this.content.meters, this.state.meters, { [shock.meter]: shock.delta }),
       };
+      // Mark the blown meter as RECOVERABLE (a stable flag the later recovery roll finds). Heat is a danger
+      // spike, not a loss to rebound — it cools via the systemic tick, so it gets no recovery marker.
+      if (shock.meter !== "heat") newFlags.push(shockMeterFlag(shock.meter));
     }
     // Record the shock as a flag (inspectable + a hook for an authored loss/recovery scene downstream).
-    const flag = `shock:${shock.kind}:${fromYear}`;
-    if (!this.state.flags.includes(flag)) {
-      this.state = { ...this.state, flags: [...this.state.flags, flag] };
-    }
+    newFlags.push(`shock:${shock.kind}:${fromYear}`);
+    const fresh = newFlags.filter((f) => !this.state.flags.includes(f));
+    if (fresh.length > 0) this.state = { ...this.state, flags: [...this.state.flags, ...fresh] };
+  }
+
+  /**
+   * WV-3-SHOCK-RECOVERY: on a quiet saga tick, a previously-blown meter may partially REBOUND (the family
+   * rebuilds after the fire / lives down the scandal). Seeded; applies a positive meter delta + clears the
+   * `shock_meter:<meter>` marker + surfaces a recovery note for one move. No-op when nothing rebounds.
+   */
+  private applySagaRecovery(fromYear: number): void {
+    const recovery = rollSagaRecovery(
+      new Set(this.state.flags),
+      fromYear,
+      this.rng.fork(`sagarecover:${fromYear}`),
+    );
+    if (!recovery) return;
+    this.state = {
+      ...this.state,
+      meters: applyDelta(this.content.meters, this.state.meters, {
+        [recovery.meter]: recovery.delta,
+      }),
+      flags: this.state.flags.filter((f) => f !== recovery.clearFlag),
+    };
+    this.lastShock = {
+      kind: "recovery",
+      text: this.recoveryText(recovery.note),
+      note: recovery.note,
+    };
+  }
+
+  /** A one-line recovery aftermath, mirroring the loss note's voice (WV-3-SHOCK-RECOVERY). */
+  private recoveryText(note: string): string {
+    const TEXT: Record<string, string> = {
+      convalescence: "The sickness passed; the household's strength slowly returned.",
+      rebuilt: "Brick by brick the house was rebuilt — the fortune clawed back from the ash.",
+      redeemed: "Time and quiet work redeemed the name; the scandal faded from memory.",
+      reconciled: "Old wounds healed; the loyalty that had drained away was, in part, won back.",
+    };
+    return TEXT[note] ?? "The line steadied, and recovered some of what it had lost.";
   }
 
   /**

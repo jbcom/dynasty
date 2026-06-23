@@ -799,4 +799,43 @@ describe("Game loop", () => {
     expect(sawShockView, "a shock surfaced in view.shock during the run").toBe(true);
     expect(clearedAfter, "the one-turn aftermath note cleared on a later move").toBe(true);
   });
+
+  it("WV-3-SHOCK-RECOVERY: a recovery eventually surfaces as view.shock.kind=recovery (positive note)", () => {
+    const real = loadContent();
+    // Sweep a few seeds; a meter blow followed by a quiet-tick rebound surfaces a recovery-kind note. The
+    // recovery kind (distinct from the loss kinds) is what the UI accents positive (Gemini #114).
+    let sawRecovery = false;
+    for (const seed of ["rec1", "rec2", "rec3", "rec4", "rec5", "rec6"]) {
+      const comp = {
+        place: "ireland",
+        era: "origins",
+        culture: "anglo_protestant",
+        year: 1776,
+        archetype: "political" as const,
+        gender: "male" as const,
+        surname: "Rec",
+        seed,
+        originId: "composed:ireland:origins",
+      };
+      const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+      let guard = 0;
+      while (!g.finished && guard < 400) {
+        if (g.view.shock?.kind === "recovery") {
+          sawRecovery = true;
+          break;
+        }
+        const s = g.view.saga.scene;
+        if (s) {
+          if (s.decision) g.pickDecision(0);
+          else if (s.beats.length) g.pickBeat(0);
+          else break;
+        } else if (g.view.currentEvent?.choices[0]) {
+          g.choose(g.view.currentEvent.choices[0].id);
+        } else break;
+        guard++;
+      }
+      if (sawRecovery) break;
+    }
+    expect(sawRecovery, "a recovery surfaced with kind=recovery across the seed sweep").toBe(true);
+  });
 });

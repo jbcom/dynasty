@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { createRng } from "../rng";
-import { applyFamilyDeathShock, rollSagaShock, type SagaShock, shockNote } from "../sagaShock";
+import {
+  applyFamilyDeathShock,
+  rollSagaRecovery,
+  rollSagaShock,
+  type SagaShock,
+  shockMeterFlag,
+  shockNote,
+} from "../sagaShock";
 import type { FamilyState, LiveMember } from "../state";
 
 /**
@@ -99,5 +106,40 @@ describe("rollSagaShock (WV-3-MORTALITY)", () => {
     // An unknown note still yields a sensible fallback line (never empty).
     const odd = shockNote({ kind: "meter_blow", meter: "power", delta: -5, note: "mystery" });
     expect(odd?.text.length).toBeGreaterThan(0);
+  });
+});
+
+describe("rollSagaRecovery (WV-3-SHOCK-RECOVERY)", () => {
+  it("returns null when no meter is outstanding (nothing to rebound)", () => {
+    expect(rollSagaRecovery(new Set(), 1900, createRng("r0").fork("sagarecover:1900"))).toBeNull();
+  });
+
+  it("rebounds an outstanding blown meter with a POSITIVE delta + the flag to clear", () => {
+    // money was blown → its shock_meter flag is outstanding; sweep seeds to find a firing recovery.
+    const outstanding = new Set([shockMeterFlag("money")]);
+    let got = null;
+    for (let i = 0; i < 50 && !got; i++) {
+      got = rollSagaRecovery(outstanding, 1900, createRng(`r${i}`).fork("sagarecover:1900"));
+    }
+    expect(got, "a recovery eventually fires for an outstanding blow").not.toBeNull();
+    expect(got?.meter).toBe("money");
+    expect(got?.delta).toBeGreaterThan(0); // a rebound is a GAIN
+    expect(got?.clearFlag).toBe(shockMeterFlag("money"));
+  });
+
+  it("is deterministic — same (outstanding, year, seed) → identical recovery", () => {
+    const outstanding = new Set([shockMeterFlag("reputation")]);
+    const a = rollSagaRecovery(outstanding, 1950, createRng("rd").fork("sagarecover:1950"));
+    const b = rollSagaRecovery(outstanding, 1950, createRng("rd").fork("sagarecover:1950"));
+    expect(a).toEqual(b);
+  });
+
+  it("only rebounds meters that were actually blown (heat is never recovered here)", () => {
+    // heat has no recovery marker (it cools via the systemic tick), so an outstanding heat flag is ignored.
+    const outstanding = new Set([shockMeterFlag("heat")]);
+    for (let i = 0; i < 50; i++) {
+      const r = rollSagaRecovery(outstanding, 1900, createRng(`h${i}`).fork("sagarecover:1900"));
+      expect(r).toBeNull();
+    }
   });
 });

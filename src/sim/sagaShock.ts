@@ -93,12 +93,17 @@ export function rollSagaShock(
   return { kind: "meter_blow", meter: blow.meter, delta, note: blow.note };
 }
 
-/** A short, UI-facing aftermath note for a shock — what the player is told happened (WV-3-SHOCK-SCENES). */
+/** The TONE of an aftermath note — a loss (family_death/meter_blow) styles negative; a recovery styles
+ *  positive. Distinct from SagaShockKind (the roll outcome) so the UI can accent a rebound green, not red. */
+export type SagaNoteKind = Exclude<SagaShockKind, "none"> | "recovery";
+
+/** A short, UI-facing aftermath note for a shock OR a recovery — what the player is told happened
+ *  (WV-3-SHOCK-SCENES / WV-3-SHOCK-RECOVERY). */
 export interface SagaShockNote {
-  kind: Exclude<SagaShockKind, "none">;
+  kind: SagaNoteKind;
   /** A one-line era-neutral aftermath sentence (the SceneReader/PlayScreen surfaces it for one turn). */
   text: string;
-  /** The flavor tag (plague/fire/scandal/…) for any styling. */
+  /** The flavor tag (plague/fire/scandal / rebuilt/redeemed/…) for any styling. */
   note: string;
 }
 
@@ -118,6 +123,48 @@ export function shockNote(shock: SagaShock): SagaShockNote | null {
   const key = shock.kind === "family_death" ? "family_death" : `meter_blow:${shock.note ?? ""}`;
   const text = SHOCK_TEXT[key] ?? "A sudden reversal struck the line this season.";
   return { kind: shock.kind, text, note: shock.note ?? "" };
+}
+
+/**
+ * WV-3-SHOCK-RECOVERY — the two-act shape: a meter_blow can REBOUND on a later saga tick. Given the meters
+ * that were previously blown (the run carries a stable `shock_meter:<meter>` flag per outstanding blow), a
+ * seeded chance per tick grants a PARTIAL positive rebound to one of them — the family rebuilds after the
+ * fire, lives down the scandal. Returns the meter to rebound + its (positive) delta + the flag to clear, or
+ * null when no recovery fires. Pure + seeded; the caller applies the meter delta + clears the flag. Heat is
+ * never "recovered" here (a heat spike cools via the normal systemic tick, not a windfall).
+ */
+export interface SagaRecovery {
+  meter: MeterId;
+  delta: number;
+  /** The `shock_meter:<meter>` flag to clear once the rebound is applied. */
+  clearFlag: string;
+  note: string;
+}
+
+/** The stable flag marking an outstanding (un-recovered) meter blow, for the recovery roll to find. */
+export const shockMeterFlag = (meter: MeterId): string => `shock_meter:${meter}`;
+
+const RECOVERY_CHANCE = 0.5; // per tick, when at least one blown meter is outstanding
+const RECOVERABLE: ReadonlyArray<{ meter: MeterId; note: string; min: number; max: number }> = [
+  { meter: "health", note: "convalescence", min: 5, max: 16 },
+  { meter: "money", note: "rebuilt", min: 8, max: 28 },
+  { meter: "reputation", note: "redeemed", min: 4, max: 14 },
+  { meter: "loyalty", note: "reconciled", min: 4, max: 12 },
+];
+
+/** Roll a seeded partial rebound for one outstanding blown meter, or null. `outstanding` = the run's flags
+ *  set (read for `shock_meter:<meter>` markers). Deterministic for (outstanding, year, rng). */
+export function rollSagaRecovery(
+  outstanding: ReadonlySet<string>,
+  year: number,
+  rng: Rng,
+): SagaRecovery | null {
+  const candidates = RECOVERABLE.filter((r) => outstanding.has(shockMeterFlag(r.meter)));
+  if (candidates.length === 0) return null;
+  if (!rng.fork(`recover:${year}`).chance(RECOVERY_CHANCE)) return null;
+  const pick = rng.fork(`recover:pick:${year}`).pick(candidates);
+  const delta = rng.fork(`recover:mag:${year}`).int(pick.min, pick.max);
+  return { meter: pick.meter, delta, clearFlag: shockMeterFlag(pick.meter), note: pick.note };
 }
 
 /** Apply a resolved family_death shock to a family (mark the struck member died). Pure. No-op otherwise. */
