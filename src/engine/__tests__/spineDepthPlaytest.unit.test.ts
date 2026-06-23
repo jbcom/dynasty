@@ -73,6 +73,10 @@ describe("SPINE-DEPTH-PLAYTEST: a full founding→stars run's playable depth", (
     expect(gens.has("g0"), summary).toBe(true);
     expect(gens.has("g9"), summary).toBe(true);
     expect(gens.size, summary).toBe(10);
+    // …and a line that took succession at every close reaches the triumphant APEX ending, not extinction.
+    // (The divergence audit caught that g9's terminal close carried no succession, so a fully-succeeded run
+    // wrongly fell to `line-extinct`; the apex "carried the name to the stars" ending must be reachable.)
+    expect(g.view.state.end?.kind, `${summary} end=${g.view.state.end?.kind}`).toBe("apex");
     // The deepened spine is a substantial read — well past the pre-depth ~30 scenes. With all 10 acts at
     // the 7-scene shape (EXTEND-MIDWEIGHT), a full run is 70 scenes / 144 paragraphs / 95 beats.
     expect(scenes.size, summary).toBeGreaterThanOrEqual(70);

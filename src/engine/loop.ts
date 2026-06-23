@@ -14,6 +14,7 @@ import {
 } from "../sim/dynastyWorld";
 import { advanceFamily, applyChoice, applySuccessionToFamily, succeedToHeir } from "../sim/effects";
 import { macroActForYear } from "../sim/macroActs";
+import { applyDelta } from "../sim/meters";
 import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
 import { candidatesFromSnapshots, type RivalLike, selectBraid } from "../sim/saga/braidSelect";
@@ -27,6 +28,7 @@ import {
   evaluateTriggers,
   spineStateProjection,
 } from "../sim/saga/triggerLattice";
+import { applyFamilyDeathShock, rollSagaShock } from "../sim/sagaShock";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
 import { type GameState, initState, isMemberAlive, type LedgerEntry } from "../sim/state";
@@ -337,10 +339,13 @@ export class Game {
   /** Advance the rival world to the run's current year (deterministic). Called when the clock moves. */
   private advanceWorldToNow(): void {
     if (this.world) {
+      // WV-3-RIVAL-REACT: pass the player's vantage (rung + archetype strategy) so direct competitors
+      // escalate against the line — the world reacts to where the player is, not just to static motivators.
       this.world = advanceWorld(
         this.world,
         this.state.year,
         this.rng.fork(`world:${this.state.year}`),
+        { rung: this.playerRung(), strategy: strategyForArchetype(this.state.archetype) },
       );
     }
   }
@@ -443,6 +448,11 @@ export class Game {
       fromYear,
       this.rng.fork(`sagafam:${fromYear}`),
     );
+    // WV-3-MORTALITY: a year-advancing saga tick (a generational span, sagaYears>0 — NOT a 0-year texture
+    // beat) rolls a seeded, era-weighted DISRUPTION shock — the exogenous variability the divergence audit
+    // found missing on the saga path. It can take a (non-protagonist) family member or blow a meter, so runs
+    // diverge in events. Seeded on the from-year (fork distinct from sagafam) → replay bit-identical.
+    if (this.saga.active && sagaYears > 0) this.applySagaShock(fromYear);
     this.advanceWorldToNow();
     const end = detectEnd(this.content, this.state);
     if (end) {
@@ -456,6 +466,40 @@ export class Game {
     if (!this.saga.active) {
       this.current = this.pickWithProgress();
       if (this.state.end) this.current = null;
+    }
+  }
+
+  /**
+   * WV-3-MORTALITY: roll + apply one seeded disruption shock for a generational saga tick. A family_death
+   * marks a (non-protagonist) member died; a meter_blow applies a negative meter delta (or +heat). The shock
+   * flag (`shock:<kind>:<year>`) is unioned into state.flags so it (a) is inspectable/persisted and (b) can
+   * gate a downstream loss/recovery scene later. Seeded on `fromYear` via the run rng → replay-identical.
+   * No-op when the hazard doesn't fire. The macro-act era id tempers the hazard (better medicine → rarer).
+   */
+  private applySagaShock(fromYear: number): void {
+    const era = macroActForYear(fromYear);
+    const shock = rollSagaShock(
+      this.state.family,
+      fromYear,
+      era,
+      this.rng.fork(`sagashock:${fromYear}`),
+    );
+    if (shock.kind === "none") return;
+    if (shock.kind === "family_death" && this.state.family) {
+      this.state = {
+        ...this.state,
+        family: applyFamilyDeathShock(this.state.family, shock, fromYear),
+      };
+    } else if (shock.kind === "meter_blow" && shock.meter && shock.delta !== undefined) {
+      this.state = {
+        ...this.state,
+        meters: applyDelta(this.content.meters, this.state.meters, { [shock.meter]: shock.delta }),
+      };
+    }
+    // Record the shock as a flag (inspectable + a hook for an authored loss/recovery scene downstream).
+    const flag = `shock:${shock.kind}:${fromYear}`;
+    if (!this.state.flags.includes(flag)) {
+      this.state = { ...this.state, flags: [...this.state.flags, flag] };
     }
   }
 

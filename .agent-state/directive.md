@@ -1118,29 +1118,54 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ## Gameplay-depth backlog (the "hour+" mandate — keep the queue non-empty, [[never-drain-queue]])
 
-- [ ] [WAIT-REVIEW] **SPINE-DEPTH PR #106 — wait CI green + address CodeRabbit, then self-squash-merge.**
-  Pushed feat/spine-depth-content (27 commits) → PR #106. The whole spine-depth milestone: SAGA-RESTORE-CURSOR,
-  SPINE-ACT-DEPTH (all 10 acts, 3 interstitials each, hour mandate met), SAGA-CLOCK-DECOUPLE,
-  TRIGGER-CROSSING-RECORD, SPINE-WEAVE-PAYOFF ×2, MAP-ERA-PROGRESS-RICHER + content QA. Loop: wait
-  build-and-test + CodeQL green, read every CodeRabbit/Amazon-Q comment, fix in forward commits + resolve all
-  threads, keep Release/CD green, self-squash-merge once green + threads resolved ([[babysit-pr]],
-  [[jbcom-org-ruleset]]). After merge: sync main, new branch for WV-3-YUKA.
-- [ ] [WAIT-REVIEW] **WV-3-YUKA — emergent rival reactions (anti-Suzerain layer 2) — START AFTER #106 MERGES.**
-  WV-3 proved seeded market/run divergence; the further layer ([[emergent-cause-effect-sim]]) is rival lines
-  REACTING to the player (Yuka-style GOAP) + seeded disease/disruption shocks so playthroughs diverge in
-  EVENTS, not just economy. The top depth lever now (hour mandate met; this is replayability). A large net-new
-  feature → must start on a FRESH branch off updated main AFTER PR #106 squash-merges (one-branch discipline:
-  can't layer it on the in-review branch, can't branch off un-merged work). Begin with use-case enumeration.
+- [ ] [WAIT-REVIEW] **WV-3-YUKA PR #108 — wait CI green + address review, then self-squash-merge.** Pushed
+  feat/wv3-yuka-emergent (7 commits): the divergence audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks)
+  + WV-3-RIVAL-REACT (reactive rivals) — the saga path now diverges per seed while staying bit-reproducible.
+  Loop: wait build-and-test + CodeQL green, read CodeRabbit/Amazon-Q/Gemini, fix in forward commits + resolve
+  threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next branch for the
+  remaining WV-3 follow-ups (SHOCK-SCENES) + the deferred WAIT items below.
+
+- [x] **SPINE-DEPTH PR #106 — DONE, MERGED (squash 045f7d5; release 0.22.0 auto-cut).** The whole spine-depth
+  milestone shipped: SAGA-RESTORE-CURSOR, SPINE-ACT-DEPTH (all 10 acts, 3 interstitials each, hour mandate
+  met), SAGA-CLOCK-DECOUPLE, TRIGGER-CROSSING-RECORD, SPINE-WEAVE-PAYOFF ×2, MAP-ERA-PROGRESS-RICHER + content
+  QA ×4. CI all green; CodeRabbit pass + 0 unresolved threads; Amazon-Q + Gemini reviews positive, no
+  actionable findings. Self-squash-merged. Synced main, deleted the branch.
+- [x] **POST-MERGE-VERIFY #106 — DONE.** Release + CD + CodeQL on main all SUCCESS after the #106 merge —
+  release 0.22.0 shipped + deployed clean (the deepened spine is live).
+- [x] **WV-3-YUKA step 1 — DONE (commit fba598c): divergence audit + g9 apex bug.** Audited 8 seeds of the
+  same founding comp → FINDING: the saga path is near-IDENTICAL across seeds (same end/year/gens/money/
+  convergence; only family-alive varies) — the Suzerain trap, measured (the seeded market substrate is inert
+  on the saga clock). Also caught + fixed: g9's terminal close carried no succession, so a fully-succeeded
+  line wrongly fell to line-extinct instead of the `apex` stars ending (now reachable + guarded). Spec
+  §AUDIT-RESULT + §DECISION.
+- [x] **WV-3-MORTALITY — DONE (commit 28df954).** Seeded, era-weighted disruption hazard (src/sim/sagaShock.ts:
+  rollSagaShock) on year-advancing saga ticks: takes a non-protagonist member (family_death) or blows a meter
+  (plague/fire/scandal/betrayal/+heat). Wired into advanceRunClock beside advanceFamily; stamps a
+  `shock:<kind>:<year>` flag. Pure+seeded → replay bit-identical (save round-trip green). RESULT: the
+  divergence audit's saga path now spreads (moneyDistinct 1→6, familyAlive varies) — Suzerain trap broken on
+  the saga path. Tests: sagaShock.unit + audit assertions. 847 node + 110 browser green.
+- [ ] [WAIT-REVIEW] **WV-3-SHOCK-SCENES — author the loss/recovery scene a shock surfaces (after #108 merges).** WV-3-MORTALITY stamps a
+  `shock:<kind>:<year>` flag but nothing yet READS it in the prose — the loss is mechanical, not narrated.
+  Add a gated interstitial (or thread) that, when a `shock:family_death:*` / `shock:meter_blow:*` flag is set,
+  surfaces a short era-voiced loss/recovery beat in the next scene (the "magnitudes more writing" the spec
+  calls for). Gate via the trigger lattice or a scene `requires.flags`; keep it decisionless texture.
+- [x] **WV-3-RIVAL-REACT — DONE (commit 4e5a4d1).** advanceWorld takes an optional PlayerVantage (rung +
+  strategy); a rival on the SAME strategy within one rung of the player is a DIRECT COMPETITOR and escalates
+  (+25 climb chance) to contest the same ground — so the player's position perturbs the rival world + the
+  convergence race differently per run, not just static motivators. loop.ts passes the vantage from
+  playerRung() + strategyForArchetype(archetype). Deterministic (fixed bonus, seeded roll). Test:
+  dynastyWorld.unit WV-3-RIVAL-REACT. Both halves of WV-3-YUKA (mortality shocks + reactive rivals) now built.
+  848 node + 110 browser green.
 - [x] **SPINE-CONTENT-QA-4 — DONE (commit d35c7c4, pushed to PR #106).** Full uniqueness scan of all 30
   interstitials. Opening sentences + beat openers already varied (0 first-3-word opener repeats; 54/60
   distinct beat openers). CAUGHT: the reversal SECOND paragraphs shared one skeleton — 9/10 opened "The [X]
   ahead —". Rewrote all to distinct structures → 10/10 distinct 2nd-para openers. Prose-only, idempotent.
-- [ ] [WAIT-REVIEW] **SPINE-WEAVE-PAYOFF-4 — mid-weight reversal flags → trigger lattice (fold with PR #106
-  CodeRabbit pass).** The 6 new reversals added 12 flags (g1_read_the_alliances, g2_hedged_the_break,
-  g4_got_ahead_of_the_gaze, g6_bought_the_next_medium, g7_retook_the_helm, …). Enumerate vs the family
-  branches per PAYOFF-3's discipline (one rule per GENUINE thematic+era match, never blanket-wire; several may
-  have no clean match + stay unwired). Best done in the SAME forward batch as addressing PR #106's review
-  feedback (touches triggers.json — avoid churning the open review). Tested in/out of window.
+- [ ] [WAIT-REVIEW] **SPINE-WEAVE-PAYOFF-4 — mid-weight reversal flags → trigger lattice (post-#108 branch).**
+  (#106 merged; re-pointed.) The 6 mid-weight reversals added 12 flags (g1_read_the_alliances,
+  g2_hedged_the_break, g4_got_ahead_of_the_gaze, g6_bought_the_next_medium, g7_retook_the_helm, …). Enumerate
+  vs the family branches per PAYOFF-3's discipline (one rule per GENUINE thematic+era match, never
+  blanket-wire; several may have no clean match + stay unwired). On the next branch after #108 merges, with
+  WV-3-SHOCK-SCENES (both touch saga content/triggers — batch them). Tested in/out of window.
 - [x] **SAGA-VL-INTEGRATE — DONE (live screenshot pass on dev :5175).** Walked the full founding funnel
   end-to-end in the running build and READ every screen: title (luxury Playfair/Garamond gold-on-navy) →
   REGION → POWER BASE (all 6, scannable) → STANDING → NAMING (11 lanes) → SURNAME → GENDER → GIVEN → 3 FS-7b

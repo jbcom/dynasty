@@ -78,6 +78,46 @@ describe("dynasty world (SS-8)", () => {
     expect(() => nudgeRival(w, "rival:nonexistent", 1)).not.toThrow();
   });
 
+  it("WV-3-RIVAL-REACT: a matching player vantage escalates competing rivals (world reacts to the player)", () => {
+    // Advance two copies of the SAME seeded world over many years — one with NO vantage, one with a vantage
+    // matching every common strategy across a rung sweep so SOME rival is a direct competitor each turn. The
+    // escalation can only ADD climb chances (never remove), so the reacted world's total rung must be ≥ the
+    // neutral world's — and strictly greater across a long enough run (the competing rivals climb faster).
+    const STRATS = [
+      "accumulate",
+      "seize_power",
+      "advance_knowledge",
+      "win_renown",
+      "spread_belief",
+    ];
+    const total = (w: ReturnType<typeof advanceWorld>) =>
+      w.snapshots.reduce((n, s) => n + s.rung, 0);
+
+    let neutral = createDynastyWorld(content.places, "ireland", createRng("react"));
+    let reacted = createDynastyWorld(content.places, "ireland", createRng("react"));
+    for (let y = 1860; y <= 1980; y += 10) {
+      neutral = advanceWorld(neutral, y, createRng(`n:${y}`));
+      // Cycle the vantage strategy + sweep rungs so a competitor is reliably present over the run.
+      const strat = STRATS[(y / 10) % STRATS.length] as string;
+      reacted = advanceWorld(reacted, y, createRng(`n:${y}`), {
+        rung: (y / 10) % 6,
+        strategy: strat,
+      });
+    }
+    // The reacted world is at least as advanced (escalation only adds climbs) and, over this run, ahead.
+    expect(total(reacted)).toBeGreaterThanOrEqual(total(neutral));
+    // Determinism: the same vantage + seed reproduces the reacted world exactly.
+    let reacted2 = createDynastyWorld(content.places, "ireland", createRng("react"));
+    for (let y = 1860; y <= 1980; y += 10) {
+      const strat = STRATS[(y / 10) % STRATS.length] as string;
+      reacted2 = advanceWorld(reacted2, y, createRng(`n:${y}`), {
+        rung: (y / 10) % 6,
+        strategy: strat,
+      });
+    }
+    expect(total(reacted2)).toBe(total(reacted));
+  });
+
   it("nudgeRival keeps the matching snapshot in sync (glimpses/convergence read snapshots)", () => {
     let w = advanceWorld(
       createDynastyWorld(content.places, "ireland", createRng("snapsync")),

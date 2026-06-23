@@ -58,3 +58,29 @@ produce — not on bolting on more systems blindly.
 
 Determinism is non-negotiable: variability is SEEDED (same seed + choices → identical run); emergence ≠
 nondeterminism ([[emergent-cause-effect-sim]]).
+
+## AUDIT RESULT (2026-06-23, step 1 done — src/engine/__tests__/divergenceAudit.unit.test.ts)
+
+Drove the SAME founding composition (ireland/political/anglo, 1776) under 8 seeds with a fixed policy
+(take succession at every close). FINDING — the SAGA path is **near-identical** across all 8 seeds:
+same end kind, same end year (2013), same generations (g10), same money ($1000 = the starting value,
+unchanged), same convergence destination; ONLY the family-alive count varies. So on the founded saga
+path the seeded market substrate is INERT — `advanceSagaClock` ticks years + `advanceFamily` ages the
+line, but the systemic market tick (which diverges the EVENT path) never runs on the saga clock, and the
+rival world advances identically because nothing the player does perturbs it differently per seed. This
+is the Suzerain trap, measured.
+
+(The audit ALSO caught a real bug: the terminal g9 close carried no succession, so a fully-succeeded
+line fell to `line-extinct` instead of the triumphant `apex` ending — fixed in the same commit, now
+guarded by the playtest + audit.)
+
+## DECISION (2026-06-23): build the seeded MORTALITY/DISEASE hazard on the saga clock
+
+The audit confirms the spec's prior. The highest-leverage lever is a **per-saga-tick, era-weighted,
+SEEDED mortality/disruption hazard** that can strike the protagonist or a family member (and/or a meter)
+between generations — so the line's path is NOT fully player-controlled and runs DIVERGE in events
+(an early death forces an unplanned succession; a sibling lost reshapes the family; a meter shock alters
+the convergence gate). Pure + seeded (rng.fork keyed on year/history so replay is bit-identical),
+wired into `advanceRunClock`'s saga branch (mirroring how `advanceFamily` already ages the line), feeding
+the existing succession mechanic. Re-run the audit after to confirm the spread widens (endKinds > 1,
+familyAlive/gens range > 0 across seeds). Then author the content the new states need (disease/loss scenes).

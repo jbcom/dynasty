@@ -3,7 +3,7 @@ import { loadContent } from "../../data/loadContent";
 import { applyChoice } from "../effects";
 import { beget, childrenOf, kinFor, seedFamily } from "../family";
 import { foundDynasty } from "../founding";
-import { applyMortality, deathHazard, eraMedicine, isAlive } from "../mortality";
+import { applyMortality, deathHazard, eraMedicine, isAlive, macroActMedicine } from "../mortality";
 import { getCulture } from "../onomastics";
 import { createRng } from "../rng";
 import type { GameEvent } from "../schema";
@@ -15,6 +15,18 @@ import { isLineExtinct, succeed } from "../succession";
  * promotes the eldest living heir (or a named one), and an heirless death ends
  * the line.
  */
+
+describe("macroActMedicine (WV-3 saga-clock band medicine)", () => {
+  it("rises founding → ascension and returns 0 for an unknown band (no NaN)", () => {
+    // The saga clock runs on macro-act bands, not the fine era ladder — the shock hazard tempers off these.
+    expect(macroActMedicine("founding")).toBeLessThan(macroActMedicine("convergence"));
+    expect(macroActMedicine("convergence")).toBeLessThan(macroActMedicine("emergence"));
+    expect(macroActMedicine("emergence")).toBeLessThan(macroActMedicine("ascension"));
+    // Unknown id → 0 (Gemini #108: prevents 1 - undefined = NaN disabling the hazard tempering).
+    expect(macroActMedicine("not-a-band")).toBe(0);
+    expect(macroActMedicine("origins")).toBe(0); // a fine ERA id is NOT a macro-act band → 0
+  });
+});
 
 const content = loadContent();
 const culture = getCulture({ cultures: content.onomastics }, "bavarian_german");
