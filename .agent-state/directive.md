@@ -1126,12 +1126,25 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   marks the 4 macro-acts; with 10 generations + the convergence rivals, the map could plot per-generation
   progress + rival lines' positions, making the founding→stars journey legible at finer grain. Visual-polish
   depth; revisit after SPINE-ACT-DEPTH.
-- [ ] **SPINE-ACT-DEPTH-2 — a SECOND texture/consequence pass for the longest-arc acts.** SPINE-ACT-DEPTH took
-  each act to ~6 scenes; the founding (g0) + the three frontier-turn acts (g8 orbital, g9 interstellar, and the
-  g3 Gilded-Age consolidation) carry the heaviest narrative weight and can bear a third interstitial (a
-  mid-act REVERSAL beat between the two decisions) without diluting the pivots. Measure total reading time
-  after this pass; target the hour+ explicitly. Same idempotent-script + spine-voice approach; extend
-  INTERSTITIALS, keep the walk-through tests green.
+- [ ] **SAGA-CLOCK-DECOUPLE — a generation's in-world span must not scale with its scene COUNT (PREREQUISITE
+  for SPINE-ACT-DEPTH-2).** DISCOVERED building the depth-2 reversal: `advanceSagaClock` ticks SAGA_YEAR_STEP=1
+  year on EVERY pickBeat/pickDecision (src/sim/timeline.ts:169,179). So deepening an act (more scenes/beats)
+  ages the protagonist faster — adding a 7th scene to the 4 heavy acts pushed the FS-8 founding→stars run to
+  die of `line-extinct` at g7 (year 2132) before reaching g9, because mortality (advanceFamily, age-based)
+  caught the line mid-act before the close-scene succession begot an heir. The two loop.unit gen-count tests
+  (MAX_RUNG cap, FS-8 all-10-gens) are calibrated to the old per-gen year cost. FIX: decouple aging from
+  texture — a generation should span a roughly FIXED number of years driven by its ~3 DECISIONS, not its
+  interstitial count. Options: (a) only tick the saga year on `pickDecision` (+ beats of decision-bearing
+  scenes), NOT on decisionless gather interstitials; (b) a per-generation year BUDGET divided across the
+  act's decisions. Pick (a) or (b) by total-fit, update the year-coupled tests, keep replay deterministic.
+- [ ] **SPINE-ACT-DEPTH-2 — a third (REVERSAL) interstitial for the heaviest acts (BLOCKED on SAGA-CLOCK-DECOUPLE).**
+  The founding (g0) + the three frontier-turn acts (g3 Gilded-Age, g8 orbital, g9 interstellar) carry the most
+  weight and bear a mid-act REVERSAL scene (a complication after the consequence, before the 2nd decision) —
+  PROVEN authored + walks correctly (7 scenes each, idempotent) but REVERTED because the extra scenes aged the
+  line to extinction before g9 (the SAGA-CLOCK-DECOUPLE root). Once that's fixed: re-apply the 4 reversals
+  (re-author in fs-spine-act-depth.mjs: the `inter(…,"rev",…)` entries + the rev_ branch in isInterstitialId
+  + the depth-2 test block — all were drafted, revert them from git history of this branch's working tree).
+  Measure total reading time after; target the hour+ explicitly.
 - [x] **SPINE-WEAVE-PAYOFF — DONE (commit abe608e).** Enumerated the payoff channels: (1) the interstitial
   beats' motivatorShifts ALREADY accrete into the run + the convergence ending (real, by design); (2)
   convergence flag-gating REJECTED — it's deliberately motivators-pure; (3) the trigger lattice is the
