@@ -97,10 +97,8 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   [[crime-power-axis]] crime-leader finale. HOLDING the commit: 2 corpus-count tests (loadSaga "exactly 504",
   DEPTH-1 close-succession) now fail because the in-flight FS-6 spine.act.json adds a NEW corpus member — those
   are FS-6's tests to update once the spine run lands (counts stable). Commit FS-6b + FS-6 together when green.
-- [ ] [WAIT] **FS-6c update corpus-shape tests for the spine member — after the FS-6 run.** loadSaga "exactly
-  504 acts" + DEPTH-1 close-succession assume the 504-cell corpus; the spine.act.json is a new member with
-  spine: ids. Update both to account for the spine (count = 504 + spine acts; DEPTH-1 scopes to cell acts or
-  includes spine closes). Then commit FS-6 (spine prose) + FS-6b (destinies) + FS-6c together, green.
+- [x] **FS-6c corpus-shape tests for the spine member — DONE (in joint commit b3b019f).** loadSaga = 504
+  cell + 10 spine; DEPTH-1 scoped to cell closes + a new spine-close-succession test. Green.
 - [x] **FS-7a life-seeds composer CORE — DONE (committed).** src/sim/saga/lifeSeeds.ts: first job / best
   friend / life partner → seed flags (seed:job/friend/partner:*) + stacking motivator leans + clamp;
   partnerSeedsSuccession. +6 tests, 726 green. ([[novel-not-fragments]])
@@ -152,20 +150,21 @@ ELEVATE this, not bolt on art. Sim purity holds (gen is offline/cached, keyed by
   progressive disclosure, type hierarchy, WCAG contrast + touch targets, long-form on-screen reading) → a
   prioritized evidence checklist to bake into the design system. Feeds VL-1 + revisits [[scannability-game-novel-balance]]
   with citations (not just the Suzerain example). [WAIT] the agent.
-- [ ] [WAIT] **VL-1 DESIGN DOC(s) for the visual layer — after the reference study.** Ground in the study +
-  [[suzerain-ui-reference]]: the ART DIRECTION (signature polished style, palette, period-but-distinctive),
-  the MAP (form, migration/era progress, mobile layout, persistent vs transient), PORTRAITS (per-cell gen
-  prompts, framing, who's-present/speaking), the GenAI image/video GENERATION PASS (extend src/sim/genai +
-  scripts: prompt-per-cell → generate → license-log assets.json → load raster/video; deterministic-friendly,
-  offline/cached), compose without crowding. SIGN-OFF IS PRE-GRANTED ([[vl-autonomy-and-branch-split]]) — on
-  doc completion, do NOT wait: immediately decompose into the VL build queue + start (full autonomy).
-- [ ] [WAIT] **VL-BRANCH protocol ([[vl-autonomy-and-branch-split]]).** (1) FINISH everything NON-VL on the
-  current branch (feat/activate-braid: UQ-2c4 determinism verify + UQ-2d audit + any UQ/ONB/UI remainder),
-  (2) SHIP it — the ONE PR for this branch (full local gate + reviewer trio, [[one-branch-local-review]]),
-  (3) cut ONE new long-running branch `feat/<vl>` from origin/main, (4) land ALL VL work there as forward
-  commits, PR once at the end. VL-2+ build steps get decomposed under that branch after VL-1.
-- [ ] [WAIT] **VL-2+ BUILD the visual layer — on the new branch, after VL-1.** Generation pass → portraits →
-  map → compose into PlayScreen/SceneReader. Decomposed into build steps from the design doc(s).
+- [x] **VL-1 design doc — DONE (docs/.../2026-06-22-visual-layer-design.md + suzerain/80-days/scannability
+  research banked).** NOTE: written pre-pivot — must be re-grounded on the founding-spine model (the visual
+  subjects are now the ONE spine line's protagonist per generation + the recurring-cast families + an
+  era-progressing map, NOT wave×cell portraits). Branch protocol moot — all work on feat/founding-spine-redesign.
+- [ ] **VL-2 GenAI portrait generation for the SPINE — the active next milestone.** Now unblocked (founding-
+  spine complete). Extend the GenAI pipeline (generateImages) with a portrait pass keyed to the spine
+  protagonist per GENERATION + era (and the recurring-cast families), in the locked signature art style
+  (NOT cartoony, NOT procedural/hand-SVG — [[visual-layer-revival]]); license-log; offline/cached; load as
+  raster. Compose ONE speaker portrait into the SceneReader (Suzerain pattern, [[suzerain-ui-reference]]).
+- [ ] **VL-3 the MAP — era-progressing journey visual.** A real cartographic-art map (GenAI base + 2D
+  asset-lib Cartography Pack) showing the line's place + era PROGRESS founding→stars; persistent backdrop /
+  toggled mode (80 Days). Fixes the density/no-visual-progress problem. SVG data-overlay (nodes/route/fog)
+  over the raster base — NOT hand-drawn cartography.
+- [ ] **VL-4 compose + Chrome live-verify the visual layer.** Portrait + map into PlayScreen/SceneReader,
+  mobile-first; visual tests; Chrome-verify it reads as a polished, cohesive signature look.
 
 ### ONB (user, 2026-06-22): onboarding must let the player CHOOSE gender + given name
 The funnel is PERIOD→CLASS→WAVE→SURNAME; gender + given name are auto-defaulted (save.ts
@@ -215,18 +214,13 @@ round-trips). The gap is UI-only. NOT corpus-blocked — doable now while UQ-2 c
   scoped ireland/poor re-run PRESERVED the close-scene succession wiring exactly (matches pre-pass original;
   pre-fix had corrupted t0 to [P+2,P-1,P-1]) and the loop determinism test passed (18/18), full suite 690.
   Committed the validated batch.
-- [ ] [WAIT] **UQ-2c4 full-corpus lineage-pass with the fix — RUNNING (bg be7282sv7).** `genai:qa --pass
-  lineage --write` across the remaining 78 files. Pre-run commit (48292f6) is the revert point. ON completion:
-  run the loop determinism test + full suite on the regenerated corpus; if green keep + commit, else reset +
-  diff. [WAIT] the bg run.
-- [ ] [WAIT] **UQ-2d semantic-uniqueness + genuine-intersection audit — after UQ-2c4 (lineage now rewriting
-  the corpus it audits).** Large-context parallel-reader pass: confirm no two cells read structurally/
-  semantically alike + crossings are organic (woven, not walls). PRELIMINARY SIGNAL (gathered on stable
-  corpus, encouraging): only ~13% of `:open` scenes lead with the "smell-of-X" frame — the scene-pass
-  largely DID diversify (per-tier sense slots cluster tier-0 opens, but content varies); the gross
-  503/504-identical-skeleton problem looks substantially fixed. Full read still needed for SEMANTIC sameness
-  + crossings. ALSO CHECK: baghdad guidance enriched (018e198) AFTER the scene-pass (Kadoorie→HK, Dawud Pasha,
-  70%-flag) — verify baghdad convergence/future tiers reflect it, else targeted baghdad re-run. [WAIT] UQ-2c4.
+- [x] **UQ-2c4 full-corpus lineage-pass — DONE (committed 35706ec) + verified determinism.** Long since
+  landed; 504/504 succession invariant held. (Note: the lineage corpus is now the FS-4 branch-FABRIC source,
+  no longer the played corpus — the spine is.)
+- [x] **UQ-2d semantic-uniqueness audit — SUPERSEDED by the founding-spine pivot.** The 504-cell sameness
+  is moot: those cells are no longer the played game — they're the FS-4 branch-FABRIC source (mined for
+  best/unique). The PLAYED game is the ONE authored spine with era-distinct decisions (the sameness fix at
+  its root). No per-cell uniqueness audit needed. ([[founding-spine-pivot]])
 
 ### UQ-UI (user, 2026-06-22): the UI/UX/HUD is TOO TEXT-HEAVY — rethink for scannability
 The hud/views present everything as prose-dense text, not optimized for glance-scanning. Use UI-review
@@ -276,18 +270,14 @@ game-scannability with the novel reading experience ([[scannability-game-novel-b
   syndicate that EXITS to legitimacy by tier 2; chinese=West-Coast tong/vice); crime↔legit crossings reuse WV-2
   braid pool; new `syndicate` convergence Destination = the "crime planet" (Don of a Thousand Suns), gated to
   criminal/converted lines. Build order = schema+gate → ending → GOAP → guidance → generate → live-verify.
-- [ ] [WAIT] **UQ-3b crime schema + wave-gate — after UQ-2 lands.** Add `criminal` to Archetype/ARCHETYPES/
-  ARCHETYPE_CALLINGS; CRIME_WAVES set + offerability gate at the calling beat + wave-select; tests (non-crime
-  waves never offer/spawn criminal; calling face present). [WAIT] UQ-2 (don't add the archetype before its
-  corpus/guidance exist — avoids a half-state where ARCHETYPES has a track with no acts).
-- [ ] [WAIT] **UQ-3c syndicate ending — after UQ-3b.** Add the `syndicate` destination + 2 endings (dictator/
-  consigliere) + the archetype gate to convergence.ts; tests (only a criminal/converted line reaches it).
-- [ ] [WAIT] **UQ-3d crime GOAP evaluator — after UQ-3c.** `criminal` strategy + illicit-market epoch input
-  (Prohibition windfall, RICO decline); deterministic tests.
-- [ ] [WAIT] **UQ-3e crime guidance + generate — after UQ-3d.** guidance.json crime era×class briefs + 4
-  per-wave crimeArc shapes; genai:expand the 8 act files; WV-2 slot-tag; genai:qa to frontier; commit-before-run.
-- [ ] [WAIT] **UQ-3f live-verify a crime line — after UQ-3e.** Play italian/criminal/poor end-to-end in Chrome:
-  rise→Commission→RICO arc reads, crossings weave, a syndicate ending is reachable.
+- [ ] [WAIT] **UQ-3 CRIME power axis — REFRAMED by the founding-spine pivot; revisit after the visual layer.**
+  The crime-leader DESTINY already shipped (FS-6b ending, [[crime-power-axis]]); the founding tier-1
+  early-republic act already offers a crime-curious doctrine branch. The FULL criminal axis is no longer a
+  wave×cell archetype (that model is retired) — under the spine it becomes a crime-leaning BRANCH set + a
+  crime-flavored spine variant (trigger-lattice branches gated on a crime doctrine flag) reaching the
+  crime_leader/syndicate destiny. Re-spec UQ-3b-f against the spine model when picked up. [WAIT] after VL.
+  (The old UQ-3b-f wave×cell sub-steps — schema/CRIME_WAVES gate / per-wave crimeArc act files — are
+  superseded; the crime arc is authored INTO the spine + branches, not as separate playable cells.)
 
 - [x] **RB-2 per-tier content depth — DONE.** Audit showed prose depth already uniform (every scene
   2-4 paras); only 2 under-generated cells had <2 beats — regenerated to the full weave (0 thin-beat).
@@ -362,19 +352,15 @@ push + PR. See [[one-branch-local-review]].
   dispatch. Full gate green (678 unit, 92 browser, 7 e2e). Reviewer trio folded (code: replay-safe option
   sort + vignette-required source + all-scenes sources; purity/determinism confirmed; simplifier clean).
   PR #98 OPENED. [WAIT] CI + merge.
-- [ ] [WAIT] **WV-2b ACTIVATE the weave — `feat/activate-braid`; awaiting the GenAI re-run.** #98 merged.
-  The 1st dry-run FOUND a bug: the model returns `kind` as "DESTINATION"/"SOURCE" (caps) + synonyms, so
-  all 23 tags failed the lowercase enum → FIXED (normalizeBraidSlots coerces casing/synonyms + strips
-  stray destination vignettes, applied before the gate; + explicit lowercase-enum in the prompt; 680 unit).
-  2nd dry-run CONFIRMED the fix — all 6 ireland/poor files validate, 0 invalid. Now WRITING tags for
-  ireland/poor + italian/poor (a crossing PAIR: ireland's destination anchors + italian's source slots
-  at a shared tier/setting). VERIFIED: the UQ-2b scene rewrite PRESERVED paragraph counts, so the existing
-  38 ireland/religious.poor slot `at` indices are all still in-bounds (0 drift) — slots survived the rewrite.
-  REMAINING (after UQ-2c lands, on the FINAL corpus): full-corpus `--pass slot --write` tag, then Chrome
-  live-verify a crossing weaves italian's borrowed copy into an ireland scene. [WAIT] UQ-2c (corpus-write).
-- [ ] [WAIT] **WV-3 emergent variability systems (anti-Suzerain) — after WV-2.** Seeded market/disease
-  variability + Yuka rival reactions so playthroughs diverge; budget magnitudes more content
-  ([[emergent-cause-effect-sim]]). Keeps the queue non-empty; un-WAIT after WV-2.
+- [x] **WV-2b braid-slot weave — SUPERSEDED by the FS-5 trigger lattice.** Cross-line weaving is now the
+  deterministic-trigger lattice (compound conditions fire whole family branches into the ONE spine), not
+  per-cell braid-slot tagging between peer cells. The slot machinery + braidSelect remain as inputs; the
+  anchoring is the lattice. ([[founding-spine-pivot]])
+- [ ] **WV-3 emergent variability (anti-Suzerain) — PARTLY met by the deterministic-trigger lattice; revisit
+  after the visual layer.** The trigger lattice already makes playthroughs diverge (branches gated on
+  leanings/money/place/era/flags/crossings — emergent from authored material, no RNG). Seeded market/disease
+  variability + Yuka rival reactions are a further layer ([[emergent-cause-effect-sim]]); lower priority now
+  that the spine + lattice carry divergence. Revisit post-VL.
 - [x] **RB-4 surface interactive convergence — DONE (forward commit).** Added the rival's rung to the
   Glimpse + a ★-per-rung indicator in the "Other lines" strip, so the player sees their crossings move a
   rival's standing. Browser-tested.
