@@ -1189,15 +1189,10 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   `succeedToHeir` and advances SAGA_GENERATION_SPAN=25y at once. Generation now steps per-DECISION, not per
   mortality roll — replay bit-identical. Tests: 2 SAGA-CLOCK-DECOUPLE regressions + DEPTH-3 updated. 834 node
   green. This unblocks depth-2.
-- [ ] **SPINE-ACT-DEPTH-2 — a third (REVERSAL) interstitial for the heaviest acts (UNBLOCKED — clock fixed).**
-  The founding (g0) + the three frontier-turn acts (g3 Gilded-Age, g8 orbital, g9 interstellar) carry the most
-  weight and bear a mid-act REVERSAL scene (a complication after the consequence, before the 2nd decision) —
-  PROVEN authored + walks correctly (7 scenes each, idempotent) but reverted earlier to expose
-  SAGA-CLOCK-DECOUPLE, now FIXED so the deeper acts no longer age the line to death. NEXT: re-author the 4
-  reversals in fs-spine-act-depth.mjs (the `inter(…,"rev",…)` entries + the rev_ branch in isInterstitialId +
-  the depth-2 test block — recover from this branch's git history, commit 658c5d6..73c97bd working-tree
-  drafts), confirm the FS-8 founding→stars run still reaches g9 with the deeper heavy acts, measure reading
-  time toward the hour+.
+- [x] **SPINE-ACT-DEPTH-2 — DONE (commit 389e442; stale duplicate of the entry above, reconciled).** The 4
+  heavy-act reversals (g0/g3/g8/g9) shipped, then EXTEND-MIDWEIGHT (255f405) extended the reversal to all 10
+  acts. FS-8 founding→stars reaches g9 with the deeper acts; ~48 min playtest. (This lower copy was a leftover
+  from an in-place edit; marked done to match reality — the canonical record is the entry above.)
 - [x] **SPINE-WEAVE-PAYOFF — DONE (commit abe608e).** Enumerated the payoff channels: (1) the interstitial
   beats' motivatorShifts ALREADY accrete into the run + the convergence ending (real, by design); (2)
   convergence flag-gating REJECTED — it's deliberately motivators-pure; (3) the trigger lattice is the
