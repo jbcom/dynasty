@@ -1227,10 +1227,18 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   rivals' bars red), sorted high→low, so the player tracks the whole race mid-run, not just at the close.
   Reads view.rivalStandings + view.rung (wired through PlayScreen). Views.browser pins the sort order, player
   slot, faltering accent, and empty case. 881 node + 119 browser green, gate clean.
-- [ ] **RIVAL-CROSSING-EXPLOIT — let the player ACT on a faltering rival at a crossing (ACTIVE).**
-  A faltering rival is a window, but the player can't yet press it. At a braid crossing with a faltering rival,
-  offer a choice that nudges that rival further down (opposing) for a cost/risk — turning the stumble into an
-  interactive beat, not just a readout. Reuses nudgeRival + the crossing system; pure + seeded; tested.
+- [ ] **RIVAL-CROSSING-EXPLOIT — let the player ACT on a faltering rival (OWN branch — save-invariant design needed).**
+  A faltering rival is a window; let the player press it (nudgeRival -1 + a heat/attention cost). ARCHITECTURAL
+  FINDING (this analysis): a player-initiated press CANNOT go in the RNG-keyed `history` array — every saga RNG
+  fork is keyed on `history.length`, so inserting a press entry between beats shifts subsequent fork labels and
+  DESYNCS replay (breaks save=seed+history, [[mmm-save-and-chronology]]). Needs a SEPARATE press side-log keyed
+  by the history index it occurred at, interleaved in `reconstruct` WITHOUT perturbing the saga RNG. That's a
+  real design step deserving its own branch after the rival-race-presence PR — NOT a same-branch append. Decided:
+  defer to a dedicated branch; build the press side-log + reconstruct interleave + tests there. Logged, proceeding.
+- [ ] **RIVAL-RACE-PRESENCE PR — push the branch (falter/rise news + field strip), open PR, full remote loop.**
+  3 local commits on feat/rival-race-presence (f51cdfa news, f95c048 field). Full local gate passed
+  (check/typecheck/test/test:browser). Push ONCE, open PR, wait CI, fold review forward, resolve threads,
+  self-squash-merge ([[babysit-pr]], [[one-branch-local-review]]). Then RIVAL-CROSSING-EXPLOIT on a fresh branch.
 - [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
   audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
   diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock
