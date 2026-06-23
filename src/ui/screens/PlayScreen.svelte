@@ -167,7 +167,7 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
 
 {#snippet infoTab()}
   {#if tab === "map"}
-    <MapView gameState={view.state} />
+    <MapView gameState={view.state} rivalStandings={view.rivalStandings} playerRung={view.rung} />
   {:else if tab === "news"}
     <NewsTicker {content} gameState={view.state} {term} />
   {:else if tab === "markets"}
