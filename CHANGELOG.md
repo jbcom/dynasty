@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.0](https://github.com/jbcom/dynasty/compare/v0.48.0...v0.49.0) (2026-06-23)
+
+
+### Features
+
+* field extremes in the finale + a foreshadow-tone audit ([#161](https://github.com/jbcom/dynasty/issues/161)) ([638a4e9](https://github.com/jbcom/dynasty/commit/638a4e9d4bd08fe153dc143ecaa1a57c884c1309))
+
 ## [0.48.0](https://github.com/jbcom/dynasty/compare/v0.47.0...v0.48.0) (2026-06-23)
 
 
