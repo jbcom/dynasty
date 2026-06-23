@@ -442,13 +442,15 @@ onMount(() => {
     max-width: 30rem;
     text-align: left;
   }
-  /* SHOCK-LEDGER-EMPTY-VOICE: a charmed run's one-liner — a quiet, gold-tinged grace note, not a list. */
+  /* SHOCK-LEDGER-EMPTY-VOICE: a charmed run's one-liner — a quiet grace note, not a list. DOSSIER-EMPTY-VOICE-
+     A11Y-PARITY: it shares the dim-italic quiet-grace register with the dossier's empty-field note, so the two
+     empty states read as the same voice (the "achievement" framing comes from the WORDS, not a louder color). */
   .spared-line {
-    margin: 0.4rem 0 0;
+    margin: 0.3rem 0 0;
     font-family: var(--mmm-font-body);
     font-style: italic;
-    font-size: 0.9rem;
-    color: color-mix(in srgb, var(--mmm-gold) 55%, var(--mmm-text));
+    font-size: 0.85rem;
+    color: var(--mmm-text-dim);
   }
   .hard-seasons ul {
     list-style: none;

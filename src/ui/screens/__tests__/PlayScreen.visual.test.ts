@@ -115,6 +115,15 @@ describe("PlayScreen (composed game screen)", () => {
     expect(mapIcon, "the Map tab renders").toBeTruthy();
     expect(fieldIcon, "the Field tab renders").toBeTruthy();
     expect(fieldIcon, "Map and Field tabs use distinct icons").not.toBe(mapIcon);
+
+    // TAB-ICON-FULL-DEDUP: NO two tabs in the (founded-line) bar share an icon — every glyph is unique.
+    const allIcons = tabButtons
+      .map((b) => b.querySelector("img.tab-icon")?.getAttribute("src"))
+      .filter((s): s is string => Boolean(s));
+    expect(allIcons.length, "all tabs carry an icon").toBe(tabButtons.length);
+    expect(new Set(allIcons).size, `duplicate tab icons: ${allIcons.join(", ")}`).toBe(
+      allIcons.length,
+    );
   });
 
   it("RECOVERY-CHOICE: offers invest buttons when canInvestRecovery, firing oninvest with the meter", () => {
