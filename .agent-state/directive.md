@@ -1143,11 +1143,13 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   Add a gated interstitial (or thread) that, when a `shock:family_death:*` / `shock:meter_blow:*` flag is set,
   surfaces a short era-voiced loss/recovery beat in the next scene (the "magnitudes more writing" the spec
   calls for). Gate via the trigger lattice or a scene `requires.flags`; keep it decisionless texture.
-- [ ] **WV-3-RIVAL-REACT — rivals REACT to the player (the Yuka half).** advanceAgent currently picks strategy
-  from STATIC motivators, ignoring the player. Make a rival near the player's rung on the SAME strategy able
-  to escalate (compete harder → faster climb) or pivot, so the player's position perturbs the rival world
-  differently per run. Deterministic (reads player rung/strategy, seeded). Re-audit to confirm rival-driven
-  divergence. Lower priority than WV-3-MORTALITY (mortality is the bigger gap).
+- [x] **WV-3-RIVAL-REACT — DONE (commit 4e5a4d1).** advanceWorld takes an optional PlayerVantage (rung +
+  strategy); a rival on the SAME strategy within one rung of the player is a DIRECT COMPETITOR and escalates
+  (+25 climb chance) to contest the same ground — so the player's position perturbs the rival world + the
+  convergence race differently per run, not just static motivators. loop.ts passes the vantage from
+  playerRung() + strategyForArchetype(archetype). Deterministic (fixed bonus, seeded roll). Test:
+  dynastyWorld.unit WV-3-RIVAL-REACT. Both halves of WV-3-YUKA (mortality shocks + reactive rivals) now built.
+  848 node + 110 browser green.
 - [x] **SPINE-CONTENT-QA-4 — DONE (commit d35c7c4, pushed to PR #106).** Full uniqueness scan of all 30
   interstitials. Opening sentences + beat openers already varied (0 first-3-word opener repeats; 54/60
   distinct beat openers). CAUGHT: the reversal SECOND paragraphs shared one skeleton — 9/10 opened "The [X]
