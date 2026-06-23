@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.59.0](https://github.com/jbcom/dynasty/compare/v0.58.0...v0.59.0) (2026-06-23)
+
+
+### Features
+
+* **sim:** name gender + tongue in-fiction at the Epoch-0 naming beat (EI-5) ([#188](https://github.com/jbcom/dynasty/issues/188)) ([2266d44](https://github.com/jbcom/dynasty/commit/2266d44ba0e31635544809daac6741a64546b8f7))
+
 ## [0.58.0](https://github.com/jbcom/dynasty/compare/v0.57.0...v0.58.0) (2026-06-23)
 
 
