@@ -598,7 +598,7 @@ const INTERSTITIALS = [
     "touch",
     [
       "The telegram was thin paper but it sat in {given_name} {surname}'s hand like a stone: the venture that had bought the family its larger type had a flaw the prospectuses never mentioned, a tangle of overstated assets and friendly auditors that a rival's lawyers had just begun to pull at. In the Gilded Age a fortune and a fraud were often the same structure viewed from different angles, and someone with a motive had chosen this angle.",
-      "The forge ahead — the great industrial commitment the family had been building toward — now depended on credit that this single thread could unravel. {given_name} felt the era's brutal logic close in: the same boldness that built an empire in a morning could lose it in an afternoon, and the question was no longer simply how to grow, but how to grow with a knife already at the house's throat.",
+      "Everything the family had been building toward — the great industrial forge — now depended on credit that this single thread could unravel. {given_name} felt the era's brutal logic close in: the same boldness that built an empire in a morning could lose it in an afternoon, and the question was no longer simply how to grow, but how to grow with a knife already at the house's throat.",
     ],
     [
       beat(
@@ -623,7 +623,7 @@ const INTERSTITIALS = [
     "sight",
     [
       "The alert came as a single red bloom on the status board, and then a silence {given_name} {surname} had learned to dread more than any noise: a forward outpost gone dark, its telemetry cut mid-transmission, eleven months of the family's reach erased in the time it took a relay to fail to answer. Out here, distance turned every setback into a mystery solved too late to matter.",
-      "The transition ahead — the great reorientation of the line's orbital strategy — had assumed a frontier that held. Now {given_name} stood before the dark place on the board and understood that ambition at this scale was not a ladder climbed but a wager renewed each day against a void that did not negotiate. The question was no longer only which direction to reach, but whether to reach at all into a dark that had just shown what it could take.",
+      "Every plan for the line's next orbital reorientation had assumed a frontier that held. Now {given_name} stood before the dark place on the board and understood that ambition at this scale was not a ladder climbed but a wager renewed each day against a void that did not negotiate. The question was no longer only which direction to reach, but whether to reach at all into a dark that had just shown what it could take.",
     ],
     [
       beat(
@@ -648,7 +648,7 @@ const INTERSTITIALS = [
     "sound",
     [
       "It arrived as a whisper across decades of light — a signal from one of the first-seeded worlds, faint and time-lagged and utterly unexpected: the colony had not merely survived but had become something the {family_name} planners never modeled, a daughter-civilization with its own mind about what the dynasty's name should mean among the stars. The founders had planted a seed; it had grown into a question.",
-      "The close ahead — the terminal reckoning of everything the line had reached for since a colonial workshop — now had to account for children grown beyond their parents' design. {given_name} {surname} understood that a dynasty large enough to span the stars was no longer a thing one mind could steer, and that the last choice might not be where to send the name, but whether to hold it closed against its own descendants or open it to what they had become.",
+      "Now the terminal reckoning — everything the line had reached for since a colonial workshop — had to account for children grown beyond their parents' design. {given_name} {surname} understood that a dynasty large enough to span the stars was no longer a thing one mind could steer, and that the last choice might not be where to send the name, but whether to hold it closed against its own descendants or open it to what they had become.",
     ],
     [
       beat(
@@ -678,7 +678,7 @@ const INTERSTITIALS = [
     "sight",
     [
       "The doctrine had barely set before the world tested it. A federal man and a states' man, both former friends of the house, arrived on the same afternoon — each certain the {family_name} yard owed its loyalty to his vision of the republic, each prepared to make the family pay for choosing wrong. {given_name} {surname} received them in turn and understood that a young nation's politics was not yet a system but a brawl, and a shipwright with a name worth courting had become a prize in it.",
-      "The venture ahead — the great expansion of the yards the family had been building toward — now needed a charter, and a charter needed votes the family did not control. {given_name} saw the era's hard arithmetic plainly: in a republic still inventing its own rules, prosperity flowed to whoever read the shifting alliances fastest, and a wrong guess about which faction would hold the next assembly could beach the whole enterprise.",
+      "The great expansion of the yards — the family's whole next chapter — now needed a charter, and a charter needed votes the family did not control. {given_name} saw the era's hard arithmetic plainly: in a republic still inventing its own rules, prosperity flowed to whoever read the shifting alliances fastest, and a wrong guess about which faction would hold the next assembly could beach the whole enterprise.",
     ],
     [
       beat(
@@ -703,7 +703,7 @@ const INTERSTITIALS = [
     "sound",
     [
       "The mill had not gone quiet, but a new sound had entered it: the low, urgent murmur of men reading the same newspaper, the slam of a door as a foreman walked out over a word he would not abide. The sectional quarrel the {family_name} line had taken a side in was no longer distant politics — it was on the spinning floor, in the boarding houses, splitting the workforce the family depended on right down its middle.",
-      "The turn ahead — the family's next great commitment of capital — now had to be made in a country visibly cracking. {given_name} {surname} felt the ground shift: a rival house across the river had just gambled everything on the war coming, buying up what others feared to hold, and the question was no longer whether the union would break but whether the {family_name} line would be ruined or made by the breaking.",
+      "Whatever capital the house committed next would have to be committed in a country visibly cracking. {given_name} {surname} felt the ground shift: a rival house across the river had just gambled everything on the war coming, buying up what others feared to hold, and the question was no longer whether the union would break but whether the {family_name} line would be ruined or made by the breaking.",
     ],
     [
       beat(
@@ -728,7 +728,7 @@ const INTERSTITIALS = [
     "touch",
     [
       "The settlement's ink was barely dry when the second blow landed: a muckraker's photographs of the {surname} works — the child at the lathe, the maimed hand, the company town's company store — spread across a magazine with a circulation larger than any the family had ever reached from the other side of the press. The cold steel under {given_name} {surname}'s palm felt suddenly like evidence.",
-      "The turn ahead — the modernization the family had staked its future on — now had to be made under a public eye that had not existed a generation before. {given_name} understood the era's new law: capital was no longer answerable only to its workers and its markets but to a watching nation that had decided industry was its business too, and a dynasty that ignored that gaze would be legislated, not negotiated, into compliance.",
+      "The modernization the family had staked its future on now had to be made under a public eye that had not existed a generation before. {given_name} understood the era's new law: capital was no longer answerable only to its workers and its markets but to a watching nation that had decided industry was its business too, and a dynasty that ignored that gaze would be legislated, not negotiated, into compliance.",
     ],
     [
       beat(
@@ -753,7 +753,7 @@ const INTERSTITIALS = [
     "sight",
     [
       "The consent decree had answered the Senate, but a quieter reckoning waited in the family itself. From the glass tower {given_name} {surname} watched a competitor's tower rise higher across the avenue — a newer house, unburdened by the family's history, moving faster precisely because it had less to protect. The view that had felt like mastery now felt like a position to be defended.",
-      "The turn ahead — the leap into the post-war economy's new engines — would decide whether the {family_name} name led the next age or merely administered the last one. {given_name} felt the era's restless tempo: capital that stood still was capital falling behind, and the discipline that had carried the house through its reckoning could harden, if {given_name} let it, into the caution that lets a dynasty die respectable and irrelevant.",
+      "Whether the {family_name} name led the next age or merely administered the last one would turn on the leap into the post-war economy's new engines. {given_name} felt the era's restless tempo: capital that stood still was capital falling behind, and the discipline that had carried the house through its reckoning could harden, if {given_name} let it, into the caution that lets a dynasty die respectable and irrelevant.",
     ],
     [
       beat(
@@ -778,7 +778,7 @@ const INTERSTITIALS = [
     "sound",
     [
       "The platform was set, the ratings answered — and then the static of a new thing crept under the signal: a competitor broadcasting the opposite story to the same nation, and beneath them both, faint but rising, the chatter of a medium that needed no network at all. {given_name} {surname} heard in it the first hint that the family's command of the national story might not be permanent.",
-      "The turn ahead — the family's bet on what came after broadcast — would decide whether the {family_name} name carried its authority into the next medium or was left holding a transmitter no one tuned. {given_name} understood the era's vertigo: attention was migrating faster than the institutions built to hold it, and a house that mistook its current dominance for a law of nature would wake to find the audience simply gone.",
+      "The family's bet on what came after broadcast would decide whether the {family_name} name carried its authority into the next medium or was left holding a transmitter no one tuned. {given_name} understood the era's vertigo: attention was migrating faster than the institutions built to hold it, and a house that mistook its current dominance for a law of nature would wake to find the audience simply gone.",
     ],
     [
       beat(
@@ -803,7 +803,7 @@ const INTERSTITIALS = [
     "touch",
     [
       "A fault propagated through the cold aisles faster than any human could answer — a breach, or a regulator's subpoena, or the defection of the brilliant engineers who had built the thing and now doubted it. {given_name} {surname} felt the server farm's refrigerated wind and understood that a system large enough to govern a billion lives was also large enough to turn on the house that built it.",
-      "The turn ahead — the family's commitment to what the network would become — now had to reckon with the doctrine's own consequences coming home. {given_name} saw the era's recursion plainly: the architecture the family wrote to shape the world had begun to shape the family, and the last freedom might be the choice of whether to keep steering the machine or to let the machine's logic steer the line.",
+      "Whatever the network became next, the family's commitment to it now had to reckon with the doctrine's own consequences coming home. {given_name} saw the era's recursion plainly: the architecture the family wrote to shape the world had begun to shape the family, and the last freedom might be the choice of whether to keep steering the machine or to let the machine's logic steer the line.",
     ],
     [
       beat(
