@@ -164,7 +164,7 @@ ELEVATE this, not bolt on art. Sim purity holds (gen is offline/cached, keyed by
   derives portraitSrc (spine gen + founder gender); SceneReader renders the gold-framed engraved bust at the
   page edge (right-float wide / stacked mobile), fades in, pointer-events:none. Chrome: the founding colonial
   engraving shows beside "The Crucible of Flint and Ink." 97 browser green. All 20 portraits committed.
-- [ ] **VL-3 the MAP — era-progressing journey visual.** A real cartographic-art map (GenAI base + 2D
+- [x] **VL-3 the MAP — era-progressing journey visual.** A real cartographic-art map (GenAI base + 2D
   asset-lib Cartography Pack) showing the line's place + era PROGRESS founding→stars; persistent backdrop /
   toggled mode (80 Days). Fixes the density/no-visual-progress problem. SVG data-overlay (nodes/route/fog)
   over the raster base — NOT hand-drawn cartography.

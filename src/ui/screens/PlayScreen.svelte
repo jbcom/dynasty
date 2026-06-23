@@ -5,6 +5,7 @@ import ButterflyLog from "../ButterflyLog.svelte";
 import Dossier from "../Dossier.svelte";
 import EventCard from "../EventCard.svelte";
 import LineageView from "../LineageView.svelte";
+import MapView from "../saga/MapView.svelte";
 import MarketsView from "../MarketsView.svelte";
 import MeterHud from "../MeterHud.svelte";
 import NewsTicker from "../NewsTicker.svelte";
@@ -95,6 +96,7 @@ $effect(() => {
 
 type Tab =
   | "event"
+  | "map"
   | "news"
   | "markets"
   | "lineage"
@@ -115,6 +117,8 @@ $effect(() => { if (tab === "event" && wide) tab = defaultTab; });
 // Each tab carries a real 2D line-icon asset (public/assets/icons/ui/<icon>.svg).
 const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   { id: "event", label: "Now", icon: "now" },
+  // VL-3: the era-progressing journey map (founded lines only — it tracks the founding→stars arc).
+  ...(hasLineage ? [{ id: "map" as Tab, label: "Map", icon: "timeline" }] : []),
   ...(hasNews ? [{ id: "news" as Tab, label: "News", icon: "news" }] : []),
   ...(hasMarkets ? [{ id: "markets" as Tab, label: "Markets", icon: "markets" }] : []),
   ...(hasLineage ? [{ id: "lineage" as Tab, label: "Lineage", icon: "dossier" }] : []),
@@ -162,7 +166,9 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
 {/snippet}
 
 {#snippet infoTab()}
-  {#if tab === "news"}
+  {#if tab === "map"}
+    <MapView gameState={view.state} />
+  {:else if tab === "news"}
     <NewsTicker {content} gameState={view.state} {term} />
   {:else if tab === "markets"}
     <MarketsView {content} gameState={view.state} />
