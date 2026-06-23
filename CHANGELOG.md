@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.48.0](https://github.com/jbcom/dynasty/compare/v0.47.0...v0.48.0) (2026-06-23)
+
+
+### Features
+
+* cap the fallen-line arc — finale fate, press guard, hopeful rebound omen ([#159](https://github.com/jbcom/dynasty/issues/159)) ([a8bd990](https://github.com/jbcom/dynasty/commit/a8bd9900aaef1f3006c19c695d0812c8b91d117c))
+
 ## [0.47.0](https://github.com/jbcom/dynasty/compare/v0.46.0...v0.47.0) (2026-06-23)
 
 
