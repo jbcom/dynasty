@@ -192,8 +192,12 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   <archetype>:<rungTier>:<g>`, wardrobe muted for infant/child) and `EncounterFacets` +
   `buildEncounterPortraitPrompt`/`encounterPortraitKey` (`portrait:enc:<role>:<lifeStage>:<eraBand>:<g>`, role
   token normalized). Signature engraving style rides every prompt. 14 unit tests. Gate: check 0, typecheck 0/0.
-- [ ] **EI-8e on-demand generate+cache layer** — a cache keyed by composite key: hit → serve; miss → ONE generation,
-  write under the key, serve thereafter. Offline/cached, never at sim runtime (sim purity).
+- [x] **EI-8e on-demand generate+cache layer — DONE (branch feat/ei6b-ui-opening-screen).** New
+  src/sim/genai/portraitCache.ts: `PortraitCache` interface (has/get/put) + pure `resolvePortrait(key, prompt,
+  cache, generate)` (cache-first, ONE generation per missing key, store-then-serve; nulls NOT cached so they
+  retry) + `memoryPortraitCache`. Offline tooling — the sim only references keys, never calls a generator (sim
+  purity). 4 unit tests (hit, miss→gen-once→hit, null-not-cached-retries, ≤1 gen per distinct key). Gate: check 0,
+  typecheck 0/0.
 - [ ] **EI-8f wire SceneReader/PlayScreen portrait lookup to the composite key** — derive the key from the live
   (year→band, lifeStage, archetype, rung, encounter) instead of `spine_g{gen}_{gender}`; visual-verify a non-founding
   era + a high-rung archetype wardrobe render correctly (screenshot + READ).
