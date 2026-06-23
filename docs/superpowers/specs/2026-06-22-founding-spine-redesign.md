@@ -313,3 +313,31 @@ broke the loop.unit "crossing nudges replay-safe across save/restore" test
    GameState) breaks the invariant; Option C (separate side-channel array) is just
    Option A with a redundant parallel list — folding into `history` keeps ONE
    ordered choice log that already drives every RNG fork label.
+
+## DECISION (2026-06-23, SPINE-WEAVE-PAYOFF): interstitial flags pay off via the trigger lattice
+
+The 20 SPINE-ACT-DEPTH interstitials each set a flavor flag via a gather beat
+(g0_press_gathered_intelligence, g6_shaped_the_narrative, …). Enumeration of where
+a flag could "matter beyond color":
+
+1. **motivatorShifts (ALREADY mechanical).** Each interstitial beat also nudges
+   motivators, which the convergence lattice reads — so the *choices* already
+   accrete into the ending. This is real payoff, by design.
+2. **convergence gates — REJECTED.** The convergence lattice is deliberately
+   motivators-PURE (src/sim/convergence.ts header: a Community/Tradition line
+   *cannot* buy a Cunning-conquest stars ending). Adding flag-gates there would
+   violate that invariant. Don't.
+3. **trigger lattice (the right home).** `triggerLattice.conditionMet` already
+   supports `flags`/`notFlags` clauses, and the engine's `triggerThreads` weaves
+   fired family branches into the spine prose — this is the DESIGNED channel for
+   "a flag surfaces downstream woven content." So a signature interstitial flag,
+   era-matched to a thematically-honest recurring-family branch, can fire a
+   cross-family thread later in the run.
+
+**Decision:** wire a SMALL set of thematically-honest flag→branch trigger rules
+(not blanket — each must MATCH the branch it surfaces and its era window), e.g.
+`g6_shaped_the_narrative` (a media-shaping founder) → the ashkenazi_jewish
+`founding_of_hollywood` branch (the narrative-industry family) in the emergence
+era. Gate on the flag + era so it can't mis-fire. Tested via the trigger lattice's
+`conditionMet`/`evaluateTriggers`. Authoring more rules is incremental backlog;
+the payoff PATTERN (flag → matched branch via the existing lattice) is the unit.

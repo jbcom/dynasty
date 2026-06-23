@@ -158,4 +158,54 @@ describe("trigger lattice (FS-5)", () => {
     ).map((b) => `${b.family}:${b.branch}`);
     expect(railroad).toContain("chinese:arrival_railroad_west");
   });
+
+  it("SPINE-WEAVE-PAYOFF: a signature interstitial flag surfaces its matched family branch downstream", () => {
+    const table = TriggerTableSchema.parse(triggersJson);
+
+    // A media-shaping founder (g6 broadcast interstitial) surfaces the narrative-industry family thread in
+    // the emergence era WITHOUT a prior crossing — the early choice echoes forward.
+    const withoutFlag = evaluateTriggers(
+      table.rules,
+      baseState({ year: 1950, era: "emergence", crossings: {}, flags: new Set() }),
+    ).map((b) => `${b.family}:${b.branch}`);
+    expect(withoutFlag).not.toContain("ashkenazi_jewish:founding_of_hollywood");
+
+    const withFlag = evaluateTriggers(
+      table.rules,
+      baseState({
+        year: 1950,
+        era: "emergence",
+        crossings: {},
+        flags: new Set(["g6_shaped_the_narrative"]),
+      }),
+    ).map((b) => `${b.family}:${b.branch}`);
+    expect(withFlag).toContain("ashkenazi_jewish:founding_of_hollywood");
+
+    // The Gilded-Age influence flag surfaces the syndicate-power family thread in its window — flag + era
+    // + year gated so it cannot mis-fire outside the 1920-1960 syndicate era.
+    const syndicate = evaluateTriggers(
+      table.rules,
+      baseState({
+        year: 1935,
+        era: "emergence",
+        crossings: {},
+        leanings: {},
+        flags: new Set(["g3_bought_the_influence"]),
+      }),
+    ).map((b) => `${b.family}:${b.branch}`);
+    expect(syndicate).toContain("italian:syndicate_crossroads");
+
+    // …but the same flag does NOT fire the syndicate thread outside its year window.
+    const tooEarly = evaluateTriggers(
+      table.rules,
+      baseState({
+        year: 1905,
+        era: "emergence",
+        crossings: {},
+        leanings: {},
+        flags: new Set(["g3_bought_the_influence"]),
+      }),
+    ).map((b) => `${b.family}:${b.branch}`);
+    expect(tooEarly).not.toContain("italian:syndicate_crossroads");
+  });
 });
