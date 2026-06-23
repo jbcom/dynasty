@@ -354,29 +354,29 @@ const G2_VARIANTS = [
     ],
   },
   {
-    id: "spine:g2:antebellum:open_commerce",
-    base: "commerce",
+    id: "spine:g2:antebellum:open_press",
+    base: "press",
     sense: "sound",
     prose: [
-      "The telegraph key chattered its endless market news through the {family_name} counting-house, and {given_name} {surname} read in it a nation knitting itself together with rail and wire even as it tore itself apart over slavery. Northern mills spun Southern cotton; Northern banks financed Southern planters; the whole economy was a single body the politicians swore was two. A merchant house with ledgers on both sides of the line stood to profit from the union — and to be ruined by its breaking.",
-      "Word came down the wire of tariff fights and a panic on the markets, of cotton factors overextended and railroads racing for the western trade. {given_name} weighed which way to lean the house as the sections drifted toward war, knowing that commerce had bound North and South too tightly for either to cut free without bleeding — and that the house that read the rupture early would survive it.",
+      "The press in the {family_name} printing house thudded out broadsheet after broadsheet, and {given_name} {surname} read in the wet ink a nation arguing itself toward the abyss. The penny papers and the abolitionist sheets, the fire-eater editorials and the Free-Soil tracts — print was the powder of the sectional crisis, and a family that owned a press owned a voice in whether the county marched for the Union, for the South, or not at all. Uncle Tom's Cabin had sold by the hundred thousand; words were arming the country faster than any arsenal.",
+      "Word came up the post road of Garrison's Liberator and the gag rule, of editors mobbed and presses thrown in rivers, of a country reading itself into two nations. {given_name} weighed the lurid sensation that sold against the conviction that mattered, knowing the {family_name} sheet that spoke now would help decide which scripture, which cause, which war the county believed in.",
     ],
     beats: [
       {
-        prose: ["A railroad syndicate offers the house a stake in the line that will own the western trade."],
+        prose: ["An abolitionist editor offers to make your press the voice of the antislavery cause in the county."],
         choice: {
-          text: "Buy in — the rails will outlast whatever war is coming.",
-          motivatorShift: { wealth: 1, reach: 1 },
-          setFlags: ["g2_commerce_railroad"],
+          text: "Turn the press against slavery — print is the powder of this war.",
+          motivatorShift: { worldview: 1, honor: -1 },
+          setFlags: ["g2_press_abolitionist_sheet"],
           gather: true,
         },
       },
       {
-        prose: ["Your Southern factors beg for credit as the sectional crisis spooks the Northern banks."],
+        prose: ["The party machine offers patronage if the paper stays neutral and prints what sells."],
         choice: {
-          text: "Quietly call in the Southern debts before the storm breaks.",
-          motivatorShift: { wealth: 1, honor: 1 },
-          setFlags: ["g2_commerce_hedged_the_war"],
+          text: "Keep the press profitable + neutral — a paper survives by not choosing sides.",
+          motivatorShift: { wealth: 1, reach: 1 },
+          setFlags: ["g2_press_neutral_organ"],
           gather: true,
         },
       },
@@ -394,8 +394,10 @@ const G2_VARIANTS = [
       {
         prose: ["An abolitionist circuit-rider asks to thunder against slavery from your pulpit."],
         choice: {
+          // Aligns with the spine's authored Free-Soil decision (worldview+, honor toward the honor pole):
+          // the antislavery moral stance pushes the line the same direction the major g2 decision rewards.
           text: "Give him the pulpit — call the institution the sin it is.",
-          motivatorShift: { worldview: -1, honor: -1 },
+          motivatorShift: { worldview: 1, honor: -1 },
           setFlags: ["g2_pulpit_abolitionist"],
           gather: true,
         },
@@ -527,8 +529,11 @@ const G3_VARIANTS = [
       {
         prose: ["A Social Gospel reformer begs the pulpit to name the tenement and the sweatshop as sin."],
         choice: {
+          // The Social Gospel's reform/modernist turn leans worldview toward the progressive (science/reform)
+          // pole — distinct from the Gospel-of-Wealth's faith-ward conservatism, so a pulpit founder has a
+          // real worldview CHOICE rather than both options pulling the same way (CodeRabbit #102).
           text: "Preach the Social Gospel — the church belongs to the least of these.",
-          motivatorShift: { worldview: -1, honor: -1 },
+          motivatorShift: { worldview: 1, honor: -1 },
           setFlags: ["g3_pulpit_social_gospel"],
           gather: true,
         },
@@ -940,9 +945,12 @@ function applyAct(actId, openId, divertTo, variants) {
   const ids = variants.map((v) => v.id);
   const act = doc.acts.find((a) => a.id === actId);
   if (!act) throw new Error(`no act ${actId}`);
-  // 1. drop any prior variant scenes (idempotent re-apply).
-  doc.scenes = doc.scenes.filter((s) => !ids.includes(s.id));
-  act.scenes = act.scenes.filter((id) => !ids.includes(id));
+  // 1. drop ALL prior base-variant scenes for this act (any `<openId>_*`), so a base that was removed or
+  //    swapped (e.g. open_commerce → open_press) is cleaned up, not just the current ids. Idempotent.
+  const variantPrefix = `${openId}_`;
+  const isVariant = (id) => id.startsWith(variantPrefix);
+  doc.scenes = doc.scenes.filter((s) => !isVariant(s.id));
+  act.scenes = act.scenes.filter((id) => !isVariant(id));
   // 2. build the gated variant scenes (each diverts past the default open to divertTo).
   const built = variants.map((v) => ({
     id: v.id,

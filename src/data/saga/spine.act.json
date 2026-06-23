@@ -50,7 +50,7 @@
    "title": "Act III — The Sundered Threshold",
    "scenes": [
     "spine:g2:antebellum:open_land",
-    "spine:g2:antebellum:open_commerce",
+    "spine:g2:antebellum:open_press",
     "spine:g2:antebellum:open_pulpit",
     "spine:g2:antebellum:open_law",
     "spine:g2:antebellum:open_military",
@@ -269,7 +269,7 @@
      "choice": {
       "text": "Preach the Social Gospel — the church belongs to the least of these.",
       "motivatorShift": {
-       "worldview": -1,
+       "worldview": 1,
        "honor": -1
       },
       "setFlags": [
@@ -1159,48 +1159,48 @@
    ]
   },
   {
-   "id": "spine:g2:antebellum:open_commerce",
+   "id": "spine:g2:antebellum:open_press",
    "sense": "sound",
    "requires": {
     "flags": [
-     "base:commerce"
+     "base:press"
     ],
     "notFlags": []
    },
    "next": "spine:g2:antebellum:allegiance",
    "prose": [
-    "The telegraph key chattered its endless market news through the {family_name} counting-house, and {given_name} {surname} read in it a nation knitting itself together with rail and wire even as it tore itself apart over slavery. Northern mills spun Southern cotton; Northern banks financed Southern planters; the whole economy was a single body the politicians swore was two. A merchant house with ledgers on both sides of the line stood to profit from the union — and to be ruined by its breaking.",
-    "Word came down the wire of tariff fights and a panic on the markets, of cotton factors overextended and railroads racing for the western trade. {given_name} weighed which way to lean the house as the sections drifted toward war, knowing that commerce had bound North and South too tightly for either to cut free without bleeding — and that the house that read the rupture early would survive it."
+    "The press in the {family_name} printing house thudded out broadsheet after broadsheet, and {given_name} {surname} read in the wet ink a nation arguing itself toward the abyss. The penny papers and the abolitionist sheets, the fire-eater editorials and the Free-Soil tracts — print was the powder of the sectional crisis, and a family that owned a press owned a voice in whether the county marched for the Union, for the South, or not at all. Uncle Tom's Cabin had sold by the hundred thousand; words were arming the country faster than any arsenal.",
+    "Word came up the post road of Garrison's Liberator and the gag rule, of editors mobbed and presses thrown in rivers, of a country reading itself into two nations. {given_name} weighed the lurid sensation that sold against the conviction that mattered, knowing the {family_name} sheet that spoke now would help decide which scripture, which cause, which war the county believed in."
    ],
    "beats": [
     {
      "prose": [
-      "A railroad syndicate offers the house a stake in the line that will own the western trade."
+      "An abolitionist editor offers to make your press the voice of the antislavery cause in the county."
      ],
      "choice": {
-      "text": "Buy in — the rails will outlast whatever war is coming.",
+      "text": "Turn the press against slavery — print is the powder of this war.",
       "motivatorShift": {
-       "wealth": 1,
-       "reach": 1
+       "worldview": 1,
+       "honor": -1
       },
       "setFlags": [
-       "g2_commerce_railroad"
+       "g2_press_abolitionist_sheet"
       ],
       "gather": true
      }
     },
     {
      "prose": [
-      "Your Southern factors beg for credit as the sectional crisis spooks the Northern banks."
+      "The party machine offers patronage if the paper stays neutral and prints what sells."
      ],
      "choice": {
-      "text": "Quietly call in the Southern debts before the storm breaks.",
+      "text": "Keep the press profitable + neutral — a paper survives by not choosing sides.",
       "motivatorShift": {
        "wealth": 1,
-       "honor": 1
+       "reach": 1
       },
       "setFlags": [
-       "g2_commerce_hedged_the_war"
+       "g2_press_neutral_organ"
       ],
       "gather": true
      }
@@ -1229,7 +1229,7 @@
      "choice": {
       "text": "Give him the pulpit — call the institution the sin it is.",
       "motivatorShift": {
-       "worldview": -1,
+       "worldview": 1,
        "honor": -1
       },
       "setFlags": [
@@ -1402,7 +1402,7 @@
     "flags": [],
     "notFlags": [
      "base:land",
-     "base:commerce",
+     "base:press",
      "base:pulpit",
      "base:law",
      "base:military"

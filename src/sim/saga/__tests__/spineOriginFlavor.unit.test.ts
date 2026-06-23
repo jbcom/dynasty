@@ -47,8 +47,10 @@ const FLAVORED_ACTS = [
     open: "spine:g2:antebellum:open",
     divert: "spine:g2:antebellum:allegiance",
     base: "spine:g2:antebellum:open_",
-    bases: ["land", "commerce", "pulpit", "law", "military"],
-    defaultBase: "press",
+    // g2's default open is the {family_name} shipping concern — commerce-themed — so commerce is the default
+    // and press is the flavored variant (matching g3-g5; CodeRabbit #102).
+    bases: ["land", "press", "pulpit", "law", "military"],
+    defaultBase: "commerce",
   },
   {
     open: "spine:g3:gildedage:open",
