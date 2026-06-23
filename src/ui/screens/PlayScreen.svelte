@@ -27,6 +27,8 @@ import SlideOutMenu from "../saga/SlideOutMenu.svelte";
 import CodexView from "../saga/CodexView.svelte";
 import { loadCodex } from "../../data/loadSaga";
 import { setMusicEra } from "../sound";
+import { compositePortraitKey, eraBandForYear } from "../../sim/genai/portrait";
+import { lifeStageForAge, rungTierForState } from "../../sim/genai/portraitFacets";
 
 interface Props {
   content: Content;
@@ -63,15 +65,24 @@ const {
 const axis = $derived(tyrannyUtopiaAxis(view.state.personality));
 const drift = $derived(axis < -25 ? "utopia" : axis > 25 ? "tyranny" : "neutral");
 
-// VL-2b: the generation's PORTRAIT (the one speaker, Suzerain pattern). Derived from the spine scene's
-// generation id (spine:gN) + the founder's gender; the generated engraving loads beside the prose.
+// VL-2b/EI-8f: the generation's PORTRAIT (the one speaker, Suzerain pattern). The asset is keyed on the
+// EI-8 COMPOSITE facets derived from LIVE STATE — life-stage (age) × era band (year) × archetype/wardrobe
+// (+ rung tier) × gender — so the portrait tracks WHO the line is and WHEN, not just gen×gender. The
+// filename is the composite key with `:` → `_` (the cache writes assets under the same scheme).
 // Undefined for non-spine scenes (no portrait — the SceneReader renders prose-only as before).
 const portraitSrc = $derived.by(() => {
   const id = view.saga.scene?.id ?? "";
-  const m = id.match(/^spine:g(\d+):/);
-  if (!m) return undefined;
-  const gender = view.state.founding?.gender ?? "male";
-  return `/assets/generated/portraits/spine_g${m[1]}_${gender}.png`;
+  if (!/^spine:g\d+:/.test(id)) return undefined;
+  const s = view.state;
+  const key = compositePortraitKey({
+    lifeStage: lifeStageForAge(s.age),
+    eraBand: eraBandForYear(s.year),
+    archetype: s.archetype,
+    rungTier: rungTierForState(s.ranks),
+    gender: s.founding?.gender ?? "male",
+  });
+  // `portrait:adult:digital_modern:economic:high:m` → `portrait_adult_digital_modern_economic_high_m.png`
+  return `/assets/generated/portraits/${key.replace(/:/g, "_")}.png`;
 });
 
 // Branch-aware term interpolation: the same authored {head_of_state} resolves

@@ -4,6 +4,8 @@ import { page } from "vitest/browser";
 import type { GameView } from "../../../engine/loop";
 import { validRaw } from "../../../sim/__tests__/fixtures";
 import { buildContent } from "../../../sim/content";
+import { compositePortraitKey, eraBandForYear } from "../../../sim/genai/portrait";
+import { lifeStageForAge, rungTierForState } from "../../../sim/genai/portraitFacets";
 import { initMeters } from "../../../sim/meters";
 import { SceneSchema } from "../../../sim/saga/schema";
 import { initState } from "../../../sim/state";
@@ -82,10 +84,22 @@ describe("PlayScreen visual layer (VL-4, mobile)", () => {
     });
     // The novel page (not the event card) is showing.
     expect(host.querySelector("[data-testid='scene-reader']")).not.toBeNull();
-    // The portrait <img> for generation 0 / male loads beside the prose.
+    // The portrait <img> loads beside the prose. EI-8f: its src is the COMPOSITE-key asset derived from live
+    // state (life-stage × era band × archetype/wardrobe × rung × gender), not the old spine_g{gen}_{gender}.
     const portrait = host.querySelector("img.portrait") as HTMLImageElement | null;
     expect(portrait).not.toBeNull();
-    expect(portrait?.getAttribute("src")).toBe("/assets/generated/portraits/spine_g0_male.png");
+    const v = view();
+    const expectedKey = compositePortraitKey({
+      lifeStage: lifeStageForAge(v.state.age),
+      eraBand: eraBandForYear(v.state.year), // 1776 → founding_1700s
+      archetype: v.state.archetype,
+      rungTier: rungTierForState(v.state.ranks),
+      gender: v.state.founding?.gender ?? "male",
+    });
+    expect(portrait?.getAttribute("src")).toBe(
+      `/assets/generated/portraits/${expectedKey.replace(/:/g, "_")}.png`,
+    );
+    expect(expectedKey, "the founding-era band resolves").toContain(":founding_1700s:");
     // VL-5: the large founding portrait is fetch-prioritized so it decodes promptly (no empty-frame pop).
     expect(portrait?.getAttribute("fetchpriority")).toBe("high");
 
