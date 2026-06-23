@@ -125,12 +125,10 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   Wider World — 1885" (Gilded-Age headlines) while the act is the 1776 FOUNDING — because onboarding still
   deals an 1885 immigrant-wave composition (dealComposition picks year from the place's validEras), so the
   CLOCK/era/news are 1885 but the spine content is 1776. → FS-8c.
-- [ ] **FS-8c reconcile the founding year — the spine line is founded at 1776, not the wave's 1885 era.**
-  The founding-spine pivot means the player's line begins at the American founding; the onboarding/clock must
-  set year=1776 (founding macro-act) for a spine run, not deal the 1885 immigrant-wave era. Fix dealComposition/
-  birthGame so a founded line starts in the founding band; the era-clock + News "Wider World" + HUD header
-  follow. (The waves stay as the braid fabric arriving across the centuries — they're not the player's start
-  year anymore.) Re-verify in Chrome: header reads Founding · 1776, news is founding-era. tsc + tests green.
+- [x] **FS-8c reconcile the founding year — DONE (committed), Chrome-verified.** App.birthGame anchors the
+  composition at FOUNDING_YEAR (1776, new macroActs constant); clock + era("founding") + News + HUD all
+  follow. Chrome: header "Founding · 1776", clock 1776, News "The Wider World — 1776" — coherent with the
+  founding act. 727 green. ★THE FOUNDING-SPINE REDESIGN (FS-1..8) IS COMPLETE + LIVE.★ ([[founding-spine-pivot]])
 
 ### VL (user, 2026-06-22): VISUAL LAYER — portraits + map, GenAI-generated — DEFERRED behind FS
 DEFERRED: fix the story architecture (FS) first; a prettier UI on structurally-identical stories doesn't
