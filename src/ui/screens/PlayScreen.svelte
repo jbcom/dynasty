@@ -131,6 +131,11 @@ const hasNews = $derived(content.worldTimelines.length > 0 || view.rivalNews.len
 const hasMarkets = $derived(content.markets.length > 0 || content.ranks.length > 0);
 // The lineage tab appears only for a founded line (it has a live family tree).
 const hasLineage = $derived(view.state.family !== undefined);
+// HOPE-OMEN-INVEST-AFFORD-VOICE: the money invest costs INVEST_COST (18); when the coffers can't cover it, the
+// prompt shouldn't over-promise. (The heat invest — "Call in favours" — is always available, so there's still a
+// path; the copy just softens to acknowledge funds are short.)
+const INVEST_MONEY_COST = 18;
+const canAffordMoneyInvest = $derived(view.state.meters.money >= INVEST_MONEY_COST);
 // RIVAL-DOSSIER-TAB: the Field tab shows for a FOUNDED line (which has a convergence world to track) — not gated
 // on standings being non-empty, so it's stable and the DOSSIER-EMPTY-VOICE grace note is reachable early-game
 // before the field takes shape (the dossier renders its own empty-state line). Same gate as the Map tab.
@@ -147,7 +152,9 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   // VL-3: the era-progressing journey map (founded lines only — it tracks the founding→stars arc).
   ...(hasLineage ? [{ id: "map" as Tab, label: "Map", icon: "timeline" }] : []),
   ...(hasNews ? [{ id: "news" as Tab, label: "News", icon: "news" }] : []),
-  ...(hasField ? [{ id: "field" as Tab, label: "Field", icon: "timeline" }] : []),
+  // MAP-TAB-LABEL-ICON-DEDUP: the Field (rival-race standings) reads with the spread-of-positions `pole-centrist`
+  // glyph, distinct from the Map's `timeline` journey arc — so the tab bar disambiguates the two at a glance.
+  ...(hasField ? [{ id: "field" as Tab, label: "Field", icon: "pole-centrist" }] : []),
   ...(hasMarkets ? [{ id: "markets" as Tab, label: "Markets", icon: "markets" }] : []),
   ...(hasLineage ? [{ id: "lineage" as Tab, label: "Lineage", icon: "dossier" }] : []),
   { id: "timeline", label: "Timeline", icon: "timeline" },
@@ -202,16 +209,20 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
       {#if view.canInvestRecovery && oninvest}
         <div class="invest" data-testid="recovery-invest" data-after-hope={view.foreshadow?.tone === "hope"}>
           <span class="invest-label">
-            {view.foreshadow?.tone === "hope"
-              ? "Press the rebound — pour resources in to make it count?"
-              : "Pour resources into the recovery?"}
+            {#if view.foreshadow?.tone === "hope"}
+              {canAffordMoneyInvest
+                ? "Press the rebound — pour resources in to make it count?"
+                : "Press the rebound — call in favours if you can't spare the coin?"}
+            {:else}
+              Pour resources into the recovery?
+            {/if}
           </span>
           <!-- The money invest is disabled when unaffordable (mirrors the engine's affordability guard;
-               cost = Game.INVEST_COST = 18). Heat ("Call in favours") is always available — its cost is a rise. -->
+               cost = INVEST_MONEY_COST = 18). Heat ("Call in favours") is always available — its cost is a rise. -->
           <button
             type="button"
             class="invest-btn"
-            disabled={view.state.meters.money < 18}
+            disabled={!canAffordMoneyInvest}
             onclick={() => oninvest?.("money")}
           >
             Spend funds

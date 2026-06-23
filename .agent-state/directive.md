@@ -1474,15 +1474,26 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [x] **OMEN-BADGE-CONTRAST-AUDIT — DONE.** New omenBadgeContrast.unit reads the brand-token hexes from tokens.css
   and computes WCAG contrast: hope (ink/gold) = 8.68:1, dread (cream/red) = 5.81:1 — both ≥ AA 4.5:1. Guards the
   a11y badges from a token change quietly dropping below legible contrast. Prints the ratios.
-- [ ] **MAP-TAB-LABEL-ICON-DEDUP — the Map and Field tabs both use the `timeline` icon; give each a distinct icon so
-  the tab bar reads unambiguously.** A glance-readability nit surfaced by the chronicle screenshot (frame 3 shows
-  Map + Field with the same glyph). Pure UI; tested (the tab icons differ).
-- [ ] **HOPE-OMEN-INVEST-AFFORD-VOICE — when a hope omen shows but the player can't afford ANY invest, the
-  "Press the rebound" prompt still implies they can; soften the copy to "if you can spare it" (or hide the prompt)
-  when both invest options are unaffordable.** Pure UI; tested (PlayScreen.visual broke-but-hopeful state).
-- [ ] **TITLE-TO-FINALE-REGISTER-AUDIT — a deterministic check that the masthead, PlayScreen header, and finale all
-  pull from the SAME font/token registers (no drift),** mirroring the chronicle visual read but as a structural test
-  over the computed font-family/color tokens of each screen's heading. Guards the luxury register from CSS drift. Tested.
+- [x] **MAP-TAB-LABEL-ICON-DEDUP — DONE (branch feat/tab-icons-afford-voice-register).** The Field tab now uses the
+  `pole-centrist` (spread-of-positions) glyph, distinct from the Map's `timeline` journey arc, so the tab bar
+  disambiguates the two. Test: PlayScreen.visual asserts the Map and Field tab icons differ for a founded line.
+- [x] **HOPE-OMEN-INVEST-AFFORD-VOICE — DONE.** When the coffers can't cover the money invest, the hope-omen prompt
+  softens from "pour resources in to make it count" to "call in favours if you can't spare the coin" (the heat
+  invest is always available, so there's still a path) + the money button disables. With funds, the full copy
+  returns. Test: PlayScreen.visual (broke-but-hopeful softened copy + flush-funds full copy).
+- [x] **TITLE-TO-FINALE-REGISTER-AUDIT — DONE.** New RegisterAudit.browser asserts the masthead, the in-run header
+  (act-chapter), and the finale title all share the SAME display-font register (Playfair/serif) and none falls back
+  to the body font — guarding the luxury voice from CSS drift. (Color compared via font, since the masthead uses a
+  gradient-fill technique where `color` is transparent; font-family is the reliable cross-screen register signal.)
+- [ ] **DOSSIER-EMPTY-VOICE-A11Y-PARITY — the empty-field grace note + the empty-ledger "spared" note should share a
+  consistent quiet-grace register (italic, dim) so the two empty states read as the same voice.** Verify + align their
+  styling; a structural test over the two empty-state elements' computed font-style/color. Pure UI; tested.
+- [ ] **TAB-ICON-FULL-DEDUP — extend MAP-TAB-LABEL-ICON-DEDUP: Lineage+Dossier both use `dossier`, Timeline+(was)Map
+  use `timeline`; audit ALL tab icons are distinct (or intentionally shared with a logged reason).** A deterministic
+  test that the founded-line tab bar has no accidental duplicate icons. Pure UI; tested.
+- [ ] **CHRONICLE-RUIN-ARC-SCREENSHOTS — capture + READ the chronicle arc for a RUIN ending (the mirror of the
+  victory arc already shot): title → scene → dread omen → an UNRECOVERED shock → the extinguished finale,** to confirm
+  the down-arc reads as coherently as the up-arc. Visual; READ all frames.
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
