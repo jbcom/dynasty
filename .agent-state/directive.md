@@ -167,11 +167,17 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   vs-robber-baron example (commit 02826ab). 18 unit tests.
 - [ ] **EI-9 PORTRAIT-MATRIX ASSET SWEEP — IN PROGRESS.** All 6 early/mid era bands' ADULT matrices generated
   (founding→digital_modern), BUT they predate the presentation-medium change → must `--force` REGENERATE so every
-  era×station presents as its true artifact (the Gilded-Age economic band is already redone + verified). Per band:
-  `pnpm vite-node scripts/genai-portraits.ts -- --era <band> --force`, READ a low (humble medium) + a high (commissioned
-  medium) sample to confirm the medium varies, commit per band. THEN generate the remaining future bands (near_future,
-  stellar) fresh. On-demand cache covers gaps at runtime. (Life-stages beyond adult — infant/child/youth/elder — and
-  encounter-role portraits are a later sweep; adult is the play surface's current demand.)
+  era×station presents as its true artifact (Gilded-Age economic redone+verified = tintype-vs-oil; stellar economic
+  redone+verified = physical-oil flex). Per band: `pnpm vite-node scripts/genai-portraits.ts -- --era <band> --force`,
+  READ a low (humble medium) + a high (commissioned/physical medium) sample to confirm the medium varies, commit per
+  band. Remaining to regen: founding, federal, industrial(non-econ), early_1900s, midcentury, digital_modern; fresh:
+  near_future + stellar(non-econ). On-demand cache covers gaps at runtime meanwhile. (Life-stages beyond adult —
+  infant/child/youth/elder — + encounter-role portraits are a later sweep; adult is the play surface's current demand.)
+- [x] **EI-10 future-digital luminosity — DONE (commit e32b9cf).** Root cause: the aged-physical-plate
+  CHRONICLE_WRAPPER fought the holographic medium. `wrapperFor(era,tier)` now uses a luminous void-ground
+  ARCHIVE_WRAPPER for near_future/stellar low+mid (digital captures) + keeps CHRONICLE_WRAPPER for physical
+  artifacts (all historical + the future-HIGH physical-oil flex). READ-verified: stellar mid now reads as a
+  glowing translucent hologram; the digital-abundant vs physical-scarce contrast is stark. 20 unit tests.
 - [ ] [WAIT] **EI-6b-ui + EI-7 + EI-8 PR #194 — merge on green.** 3 local reviewers clean; Amazon-Q placeById-guard
   folded (29435b2). EI-8a–f shipped (composite portrait matrix, on-demand cache, founding-era assets). Live-verified
   in Chrome (emergence opens on "You are born…", senses→4 glowing inline sense-choices→naming speaks "Gwendolyn
