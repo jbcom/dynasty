@@ -309,6 +309,9 @@ describe("LegacyReport", () => {
     expect(line?.textContent).toContain("By your own hand");
     expect(line?.textContent).toMatch(/pressed 2 faltering rivals/);
     expect(line?.textContent).toMatch(/forced 1 recovery/);
+    // Two clauses join with a plain " and " — no awkward comma (Gemini #139 grammar).
+    expect(line?.textContent).toMatch(/rivals and forced/);
+    expect(line?.textContent).not.toMatch(/rivals, and forced/);
     // A passive run (no presses/invests) shows no agency line.
     unmount(component);
     component = mount(LegacyReport, {

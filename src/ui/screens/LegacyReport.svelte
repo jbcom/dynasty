@@ -105,6 +105,12 @@ const ledger = $derived(shockLedger(state.flags));
 // AGENCY-IN-LEGACY: tally what the PLAYER actively DID across the run from the side-logs — rivals pressed
 // (state.presses), recoveries invested (state.recoveryInvests). The close credits these interventions in a
 // "By Your Own Hand" line, distinct from the field/luck. Each count omitted from the line when zero.
+// Grammatical list-join: "a" → "a"; "a, b" → "a and b"; "a, b, c" → "a, b, and c" (Oxford comma at 3+).
+function joinClauses(parts: string[]): string {
+  if (parts.length <= 1) return parts.join("");
+  if (parts.length === 2) return `${parts[0]} and ${parts[1]}`;
+  return `${parts.slice(0, -1).join(", ")}, and ${parts[parts.length - 1]}`;
+}
 const agency = $derived.by(() => {
   const pressed = state.presses?.length ?? 0;
   const invested = state.recoveryInvests?.length ?? 0;
@@ -187,7 +193,7 @@ onMount(() => {
   {#if agency.length > 0}
     <!-- AGENCY-IN-LEGACY: what the player actively DID — the interventions that bent the saga by hand. -->
     <p class="agency" data-testid="agency">
-      <strong>By your own hand:</strong> you {agency.join(", and ")}.
+      <strong>By your own hand:</strong> you {joinClauses(agency)}.
     </p>
   {/if}
 
