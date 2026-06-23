@@ -98,6 +98,12 @@ function rivalFate(rung: number, faltering: boolean, fallen: boolean): string {
   if (rung >= 2) return "made its mark, then settled";
   return "never rose far from where it began";
 }
+// STELLAR-RIVAL-IN-ENDING: a line that reached the interstellar tier (rung at the ladder top, not faltering /
+// dropped out) is the field's OTHER extreme — marked in its own ascendant register, mirroring the dropped-out
+// treatment so both ends of the field (out / among the stars) read distinctly.
+function reachedStars(rung: number, faltering: boolean, fallen: boolean): boolean {
+  return rung >= RIVAL_MAX_RUNG && !faltering && !fallen;
+}
 // Sorted high→low already (the engine sorts standings); render every line so the field's whole arc shows.
 const rivals = $derived(
   rivalStandings.map((r) => ({
@@ -107,6 +113,7 @@ const rivals = $derived(
     fate: rivalFate(r.rung, r.faltering, r.fallen ?? false),
     faltering: r.faltering,
     fallen: r.fallen ?? false,
+    stars: reachedStars(r.rung, r.faltering, r.fallen ?? false),
   })),
 );
 
@@ -168,8 +175,9 @@ onMount(() => {
       <h2>The Other Lines</h2>
       <ul>
         {#each rivals as r (r.id)}
-          <!-- FALLEN-NEWS-IN-ENDING: a dropped-out line reads struck-through, set apart from a faltering one. -->
-          <li data-faltering={r.faltering} data-fallen={r.fallen}>
+          <!-- FALLEN-NEWS-IN-ENDING: a dropped-out line reads struck-through; STELLAR-RIVAL-IN-ENDING: a
+               star-reaching line reads in an ascendant gold register — the field's two extremes, set apart. -->
+          <li data-faltering={r.faltering} data-fallen={r.fallen} data-stars={r.stars}>
             <span class="rf-name">{r.name}</span>
             <span class="rf-fate">{r.fate}</span>
           </li>
@@ -363,6 +371,16 @@ onMount(() => {
     text-decoration: line-through;
     text-decoration-color: var(--mmm-text-dim);
     color: var(--mmm-text-dim);
+  }
+  /* STELLAR-RIVAL-IN-ENDING: a line that reached the stars reads in an ASCENDANT register — a bright gold border
+     + a gold-tinted background — the field's high extreme, mirroring the struck low extreme above. A star line is
+     never also fallen/faltering (the predicate excludes them), so no precedence conflict. */
+  .rival-finale li[data-stars="true"] {
+    border-left-color: var(--mmm-gold-bright, var(--mmm-gold));
+    background: color-mix(in srgb, var(--mmm-gold) 8%, transparent);
+  }
+  .rival-finale li[data-stars="true"] .rf-name {
+    color: var(--mmm-gold-bright, var(--mmm-gold));
   }
   .rf-name {
     font-weight: 700;

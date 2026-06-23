@@ -329,6 +329,44 @@ describe("LegacyReport", () => {
     expect(falterOnly?.textContent).not.toMatch(/dropped out/i);
   });
 
+  it("STELLAR-RIVAL-IN-ENDING: a star-reaching line reads in an ascendant register, the field's high extreme", () => {
+    const state = {
+      ...initState(content, "seed"),
+      end: { kind: "death" as const, year: 1990, reason: "x" },
+    };
+    // Set the brand tokens this register depends on so the computed colors are real, not unset-black. Distinct
+    // values for the star border (gold-bright) vs the default row border (gold-deep) make the comparison meaningful.
+    host.style.setProperty("--mmm-gold-bright", "rgb(255, 220, 120)");
+    host.style.setProperty("--mmm-gold-deep", "rgb(120, 90, 20)");
+    host.style.setProperty("--mmm-gold", "rgb(212, 175, 55)");
+    component = mount(LegacyReport, {
+      target: host,
+      props: {
+        content,
+        state,
+        end: state.end,
+        rivalStandings: [
+          // A line at the ladder top, not faltering / fallen → reached the stars (the high extreme).
+          { id: "rival:bavaria", label: "rival:bavaria", rung: 5, faltering: false, fallen: false },
+          // A mid line for contrast (no star register).
+          { id: "rival:italian", label: "rival:italian", rung: 2, faltering: false, fallen: false },
+        ],
+        onRestart: () => {},
+      },
+    });
+    const items = [...host.querySelectorAll("[data-testid='rival-finale'] li")];
+    const star = items.find((li) => li.getAttribute("data-stars") === "true");
+    const mid = items.find((li) => li.getAttribute("data-stars") === "false");
+    expect(star, "the star-reaching line is marked").toBeDefined();
+    expect(mid, "the non-star line is not marked").toBeDefined();
+    expect(star?.textContent).toMatch(/reached the stars/i);
+    expect(mid?.textContent).not.toMatch(/reached the stars/i);
+    // The ascendant register reads apart from a non-star line's border (gold-bright vs the default gold-deep).
+    expect(getComputedStyle(star as HTMLElement).borderLeftColor).not.toBe(
+      getComputedStyle(mid as HTMLElement).borderLeftColor,
+    );
+  });
+
   it("AGENCY-IN-LEGACY: tallies the player's WV-3 interventions in a 'By your own hand' line", () => {
     const state = {
       ...initState(content, "seed"),
