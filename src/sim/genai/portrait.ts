@@ -29,18 +29,63 @@ export const STYLE_NEGATIVE =
   "Avoid: cartoon, anime, cel-shading, 3D/CGI render, photo-realism, modern flat vector, watermark, text, " +
   "frame, signature, oversaturation.";
 
-/** The era's visual register (period dress + setting cue) by macro-act — keeps the portrait era-true. */
-const ERA_VISUAL: Record<string, string> = {
-  founding:
+/**
+ * EI-8a — the FINE era bands for portraits. The line runs 1776→the stars, and "a child in 1790 ≠ a child
+ * in 1990 ≠ a child among the stars," so the visual register is sub-banded finer than the 4 `MacroAct`s.
+ * Eight bands span the whole run; `eraBandForYear` maps the saga-clock year → band. Spec:
+ * docs/superpowers/specs/2026-06-23-emergent-infancy-onboarding-design.md §"EI-8 — the portrait-demand MATRIX".
+ */
+export type EraBand =
+  | "founding_1700s"
+  | "federal_1800s"
+  | "industrial_late1800s"
+  | "early_1900s"
+  | "midcentury"
+  | "digital_modern"
+  | "near_future"
+  | "stellar";
+
+/** Year → fine era band (ordered, inclusive upper bounds; the last band catches the far future). */
+export const ERA_BANDS: ReadonlyArray<{ band: EraBand; to: number }> = [
+  { band: "founding_1700s", to: 1799 },
+  { band: "federal_1800s", to: 1859 },
+  { band: "industrial_late1800s", to: 1899 },
+  { band: "early_1900s", to: 1939 },
+  { band: "midcentury", to: 1979 },
+  { band: "digital_modern", to: 2040 },
+  { band: "near_future", to: 2200 },
+  { band: "stellar", to: Number.POSITIVE_INFINITY },
+];
+
+/** The fine era band a given saga-clock year falls in (EI-8a). Pure. */
+export function eraBandForYear(year: number): EraBand {
+  for (const b of ERA_BANDS) {
+    if (year <= b.to) return b.band;
+  }
+  return "stellar";
+}
+
+/** The era's visual register (period dress + setting cue) by FINE era band — keeps the portrait era-true. */
+const ERA_VISUAL: Record<EraBand, string> = {
+  founding_1700s:
     "late-1700s American colonial dress (a founding generation): plain coat, cravat or shawl, " +
     "candle-lit interior",
-  convergence:
+  federal_1800s:
+    "early-19th-century Federal/antebellum dress: tailcoat or empire-waist gown, an oil-lamp parlor",
+  industrial_late1800s:
     "mid-to-late 1800s industrial-era dress: waistcoat or high-collared dress, gaslit hall",
-  emergence:
-    "20th-century dress evolving with the decade (1900s suit/dress → mid-century), a city interior",
-  ascension:
-    "a retro-futurist far-future bearing (NOT chrome sci-fi): tailored future formalwear with an " +
-    "engraved, antique-instrument quality, a stellar window beyond",
+  early_1900s:
+    "early-20th-century dress (1900s–1930s): three-piece suit or drop-waist dress, an electric-lit interior",
+  midcentury:
+    "mid-century dress (1940s–1970s): sharp tailored suit or shift dress, a modern city interior",
+  digital_modern:
+    "late-20th / early-21st-century dress (1980s–2030s): contemporary tailoring, a glass-and-screen interior",
+  near_future:
+    "a near-future bearing (NOT chrome sci-fi): refined future formalwear of engraved, antique-instrument " +
+    "quality, a quiet high-tech interior",
+  stellar:
+    "a retro-futurist far-future bearing among the stars (NOT chrome sci-fi): tailored future formalwear " +
+    "with an engraved, antique-instrument quality, a stellar window beyond",
 };
 
 /**
@@ -49,7 +94,8 @@ const ERA_VISUAL: Record<string, string> = {
  * "historical-memory" framing that reads at small size (the Disco Elysium / Suzerain lesson).
  */
 export function buildPortraitPrompt(act: SpineAct, gender: "male" | "female"): string {
-  const era = ERA_VISUAL[act.macroAct] ?? ERA_VISUAL.founding;
+  // EI-8a: resolve the FINE era band from the generation's in-world year (not the coarse macro-act).
+  const era = ERA_VISUAL[eraBandForYear(act.year)];
   const subject = gender === "male" ? "a man" : "a woman";
   return [
     `A dignified BUST / half-figure PORTRAIT of ${subject}, ${era}.`,

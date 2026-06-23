@@ -170,9 +170,11 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   low/mid/high) × optional ENCOUNTER role. Composite cache key `portrait:<lifeStage>:<eraBand>:<archetype>:<rungTier>`
   (+ `:enc:<role>` variant, gender suffix); 1680-key protagonist space → generate-on-demand + cache, never blanket.
   Surfaced 6 build sub-steps (below).
-- [ ] **EI-8a ERA-BAND RESOLVER + 8-entry ERA_VISUAL** — `eraBandForYear(year)` (sibling of macroActForYear) +
-  grow portrait.ts `ERA_VISUAL` from the 4 macro-acts to the 8 fine bands. Pure; unit test the band boundaries.
-  Doable now (genai pipeline files, not the entry flow — no merge dependency).
+- [x] **EI-8a ERA-BAND RESOLVER + 8-entry ERA_VISUAL — DONE (branch feat/ei6b-ui-opening-screen).** portrait.ts:
+  `EraBand` type + `ERA_BANDS` table + pure `eraBandForYear(year)` (8 fine bands, inclusive upper bounds) +
+  `ERA_VISUAL` grown 4→8 entries; `buildPortraitPrompt` now resolves the band from `act.year` (not the coarse
+  macro-act). 9 unit tests (band boundaries + the 1790≠1990≠stars distinction + the prompt tracks the fine band).
+  Gate: unit 954, browser 161, check 0, typecheck 0/0.
 - [ ] **EI-8b lifeStage + rungTier derivations** — pure helpers from sim state (life-stage from age/beat,
   rungTier from the max rung across the 4 ladders → low/mid/high). Unit-tested.
 - [ ] **EI-8c wardrobeFor(archetype, rungTier) register table (21 entries) + crime archetype wiring** — the

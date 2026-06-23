@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { DYNASTY_SPINE } from "../../saga/spineAuthored";
-import { buildPortraitPrompt, portraitKey, SIGNATURE_STYLE } from "../portrait";
+import { buildPortraitPrompt, eraBandForYear, portraitKey, SIGNATURE_STYLE } from "../portrait";
 
 /**
  * VL-2: the portrait prompt pass. The signature style must ride EVERY prompt verbatim (cohesion), the
@@ -42,5 +42,40 @@ describe("portrait prompts (VL-2)", () => {
     expect(portraitKey(g0, "male")).toBe("spine_g0_male");
     expect(portraitKey(g0, "female")).not.toBe(portraitKey(g0, "male"));
     expect(portraitKey(gStellar, "male")).toContain(`g${gStellar.gen}`);
+  });
+});
+
+describe("EI-8a eraBandForYear (fine era bands)", () => {
+  it("maps representative years to the right fine band (not the 4 coarse macro-acts)", () => {
+    expect(eraBandForYear(1776)).toBe("founding_1700s");
+    expect(eraBandForYear(1812)).toBe("federal_1800s");
+    expect(eraBandForYear(1875)).toBe("industrial_late1800s");
+    expect(eraBandForYear(1925)).toBe("early_1900s");
+    expect(eraBandForYear(1960)).toBe("midcentury");
+    expect(eraBandForYear(2010)).toBe("digital_modern");
+    expect(eraBandForYear(2100)).toBe("near_future");
+    expect(eraBandForYear(2500)).toBe("stellar");
+  });
+
+  it("places band boundaries on the correct side (inclusive upper bounds)", () => {
+    expect(eraBandForYear(1799)).toBe("founding_1700s");
+    expect(eraBandForYear(1800)).toBe("federal_1800s");
+    expect(eraBandForYear(1859)).toBe("federal_1800s");
+    expect(eraBandForYear(1860)).toBe("industrial_late1800s");
+    expect(eraBandForYear(2040)).toBe("digital_modern");
+    expect(eraBandForYear(2041)).toBe("near_future");
+  });
+
+  it("distinguishes a child's era across the centuries (the user's 1790 ≠ 1990 ≠ stars)", () => {
+    expect(eraBandForYear(1790)).not.toBe(eraBandForYear(1990));
+    expect(eraBandForYear(1990)).not.toBe(eraBandForYear(2300));
+  });
+
+  it("the prompt's era register tracks the FINE band, not just the macro-act", () => {
+    // g0 (1776) reads colonial; a mid-century generation reads mid-century — distinct registers within
+    // what the old 4-band map would have collapsed.
+    expect(buildPortraitPrompt(g0, "male")).toMatch(/colonial/i);
+    const midcenturyAct = { ...g0, gen: 5, year: 1960, macroAct: "emergence" as const };
+    expect(buildPortraitPrompt(midcenturyAct, "male")).toMatch(/mid-century/i);
   });
 });
