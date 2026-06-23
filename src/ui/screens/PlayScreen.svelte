@@ -428,6 +428,9 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   .content {
     flex: 1;
     overflow-y: auto;
+    /* MOBILE-SAFE-AREA-AUDIT: the scroll region is the screen's bottom edge — pad it by the home-indicator inset
+       so the last content clears the notch/home-bar on a notched device (the header already pads the top inset). */
+    padding-bottom: env(safe-area-inset-bottom);
   }
   .shock-aftermath {
     margin: 0 auto 0.4rem;
