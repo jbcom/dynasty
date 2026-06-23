@@ -101,10 +101,13 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   504 acts" + DEPTH-1 close-succession assume the 504-cell corpus; the spine.act.json is a new member with
   spine: ids. Update both to account for the spine (count = 504 + spine acts; DEPTH-1 scopes to cell acts or
   includes spine closes). Then commit FS-6 (spine prose) + FS-6b (destinies) + FS-6c together, green.
-- [ ] **FS-7 onboarding → diegetic EPOCH-0 BIRTH — UNBLOCKED (FS-6 committed).** One line cleans up
-  onboarding toward the original Epoch-0 plan ([[novel-not-fragments]]): start DIEGETICALLY + COMPOSE the
-  family as the progenitor grows from birth into a man/woman — given name, gender, class, FIRST JOB, BEST
-  FRIEND, LIFE PARTNER — story SEEDS lived, not a wave×class cell menu. Reuse ONB-1 naming.
+- [x] **FS-7a life-seeds composer CORE — DONE (committed).** src/sim/saga/lifeSeeds.ts: first job / best
+  friend / life partner → seed flags (seed:job/friend/partner:*) + stacking motivator leans + clamp;
+  partnerSeedsSuccession. +6 tests, 726 green. ([[novel-not-fragments]])
+- [ ] **FS-7b onboarding UI → diegetic birth steps.** Replace the wave×class cell picker with the Epoch-0
+  birth flow: start diegetically + COMPOSE the founder growing up — gender, given name (reuse ONB-1), first
+  job, best friend, life partner — consuming lifeSeeds. Thread the seeds (flags + motivator lean + first
+  succession) through founding (App.birthGame → foundByComposition). Visual tests + Chrome verify.
 - [ ] [WAIT] **FS-8 live-verify the hour+ playthrough — after the spine is authored + wired.** One line
   1776→stars, waves braiding in, era-distinct decisions, reads as ONE strong story. THEN revisit the visual
   layer. [WAIT] FS-6/FS-7.
