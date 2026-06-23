@@ -1,6 +1,6 @@
 ---
 title: State & Architecture
-updated: 2026-06-22
+updated: 2026-06-23
 status: current
 domain: context
 ---
@@ -64,6 +64,48 @@ Everything formerly "still being wired" is now wired, plus a full corpus QA pass
   Tooling: `genai:expand` (generate) + `genai:qa --pass scene|lineage|braid|all` (QA, pooled) +
   `retitle-saga.ts`. Leak floor unified in `src/sim/leak.ts` (case-sensitive, surname-scoped).
 - Audio (PF-15/17): page-turn + choice cues (Howler) + per-era ambient bed (Tone.js), gated by a Sound setting.
+
+### WV-3 — saga shocks, recoveries, agency & the rival race (SHIPPED; the in-run dynamics milestone)
+
+On top of the corpus + convergence world, WV-3 makes the hour-long saga *feel* alive turn to turn: the
+line is struck by seeded misfortune and rebounds, the player can ACT on the race, and the rival lines
+are surfaced as a living field — all deterministic and replay-safe. Shipped as a wave of small
+squash-merged PRs (releases ~0.31.0 → 0.45.0). Memory: build-complete, save-and-chronology.
+
+- **Shocks → recoveries** (`src/sim/sagaShock.ts`, `src/engine/loop.ts`): each saga generation may take a
+  seeded SHOCK (family death / meter blow), era-weighted via `macroActMedicine` (the founding era is harsh,
+  the medicine-rich future far gentler). A shock later draws a seeded RECOVERY. A `RECENT_SHOCK_DAMPENER`
+  cooldown (derived from `shock:*:<year>` flags within `SAGA_GENERATION_SPAN`) keeps shocks from clustering.
+- **Foreshadow omens** (`shockForeshadow`/`foreshadowWeight`): a coming shock casts a tiered omen
+  (none / marginal / grave) with tiered text + tone the player can brace against.
+- **Player agency**: PRESS a faltering rival (`pressRival` — deepen its stumble for a heat cost, one press
+  per step) and INVEST in a recovery (`investRecovery` — boost the next rebound's chance + magnitude, money
+  affordability-gated). Both are exposed in the NewsTicker / PlayScreen.
+- **The rival race surfaced**: `rivalNews()` dispatches near-vantage lines that **faltered** (a window),
+  **surged** past the player (pressure, tiered by rung gap), or went **fallen** (FALLEN-NEWS — dropped out,
+  one-time "Eliminated" dispatch). The `RivalDossier` **Field** tab shows every line's rung, state badge
+  (fallen > faltering > surging > steady), a ▲—▼ momentum trend (from `rungHistory`), and a one-line race
+  summary. Convergence endings fold in a `rivalEpilogue` + a stellar-destiny-keyed apex reason.
+
+#### The save-invariant side-log pattern (reuse this for any new player action)
+
+Player-initiated actions **cannot** live in the RNG-keyed `history` array: the saga RNG forks key on
+`history.length`, so inserting an entry would desync every subsequent fork and break bit-identical replay.
+Instead each such action is a **side-log** on `GameState`, tagged with `at: history.length` and re-applied
+during `Game.reconstruct` by record-free apply functions interleaved by `at` — so a loaded save replays
+identically. `presses` (RIVAL-CROSSING-EXPLOIT) and `recoveryInvests` (RECOVERY-CHOICE) are the two
+side-logs; `RecoveryInvest` stores the meter because meters aren't serialized (they're re-derived by replay).
+
+A related sub-pattern for one-time *news* (not actions): FALLEN-NEWS fires once via a `fallen_seen:<id>`
+**flag** stamped at the next `advanceWorldToNow` — the flag is a pure function of the deterministic world,
+so it needs no side-log and replays for free. Prefer a flag when the trigger is derivable from world state;
+use a side-log only when the player chose something the world can't re-derive.
+
+#### Determinism audit instruments
+
+Pure deterministic tests that print figures (via `--disable-console-intercept`) gate the dynamics:
+`SHOCK-CADENCE-AUDIT`, `SPINE-DEPTH-PLAYTEST-2/3` (confirms the hour mandate holds with margin),
+`OMEN-PAYOFF-AUDIT` (omens correlate with shocks), `AGENCY-PLAYSTYLE-AUDIT` (press/invest fire as designed).
 
 ## CONVERGENCE SAGA (folded into the novel model above; was the prior top model)
 

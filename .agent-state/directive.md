@@ -1366,10 +1366,11 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   derived purely from the deterministic world, so it replays bit-identically (save-invariant). Tests: loop.unit
   (fallen surfaces + one-time suppression + reconstruct replay), NewsTicker.browser (Eliminated render, no press,
   accented apart). RIVAL-RACE-PRESENCE test widened to accept the fallen kind. 908 node + 134 browser green, gate clean.
-- [ ] **WV-3-MILESTONE-DOC — write docs/STATE.md section capturing the WV-3 agency+atmosphere milestone.** The
-  shock→recovery→agency→atmosphere→rival-race layer is now broad (shocks, recoveries, foreshadow, press/invest,
-  rival dispatches, field dossier, trends, fallen, ending variety). docs/STATE.md should record the milestone
-  shape + the side-log/save-invariant pattern so the next session has the canonical map. Docs only; no code.
+- [x] **WV-3-MILESTONE-DOC — DONE.** docs/STATE.md now has a "WV-3 — saga shocks, recoveries, agency & the rival
+  race" section under Saga polish: the shock→recovery→foreshadow→press/invest→rival-race layer, the
+  save-invariant SIDE-LOG pattern (presses/recoveryInvests tagged `at: history.length`, re-applied in reconstruct)
+  + the one-time-news FLAG sub-pattern (fallen_seen, derived from world state), and the determinism audit
+  instruments. The canonical map for the next session. Docs only; frontmatter date bumped.
 - [ ] **FALLEN-NEWS-IN-ENDING — the LegacyReport rival-finale ("The Other Lines") distinctly marks lines that
   FELL OUT during the run (eliminated), not just their final rung.** The in-run fallen dispatch (FALLEN-NEWS) pays
   off at the saga's close: a line that went fallen reads as "dropped out of the race" in the finale, set apart from
