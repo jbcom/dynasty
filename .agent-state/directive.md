@@ -848,8 +848,16 @@ onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival frami
 
 ## FS-RETIRE-PROLOGUE — retire the dead 1885 Trump-line prologue era (milestone, split from FS-ONB-DRIFT d)
 
-- [ ] **FS-SPINE-BRANCH-ONRAMPS — move destiny branch on-ramps from origins choices into the spine
-  (PREREQUISITE for FS-RETIRE-PROLOGUE).** Discovered this session: the dead origins events are the LIVE
+- [x] **FS-SPINE-BRANCH-ONRAMPS — DONE.** The 6 destiny branches now fork off the SPINE: new
+  `src/sim/saga/spineBranch.ts` — a pure, regen-safe table (SPINE_FLAG_TO_BRANCH) + transform
+  (applySpineBranchOnRamps) wired into loadSaga, stamping each branch's signature flag onto spine choices
+  that already set the matching destiny-path flag (reusing the spine's own 98-flag vocabulary; no JSON
+  authoring, survives spine regen). All 6 branches verified reachable from the loaded spine corpus — incl.
+  oligarchy + media which were previously set NOWHERE (fixes a latent unreachability gap). 5 spineBranch
+  tests + existing branch.unit.test (origins reachability, still true) both green; 754 unit + tsc + check
+  clean. Step 3 (repoint branch.unit.test from origins→spine) correctly DEFERS to FS-RETIRE-PROLOGUE (when
+  origins is actually emptied). FS-RETIRE-PROLOGUE is now unblocked on the branch-onramp front.
+  (historical) Discovered this session: the dead origins events were the LIVE
   source of the destiny-signature flags (nazi/megachurch/theocracy/media/westcoast) that `branch.ts` +
   `branch.unit.test.ts` require for "every branch is reachable from an origins choice." Under the founding-
   spine pivot, branches should fork off the ONE spine (the design's "branches off the one timeline"). So the
@@ -866,16 +874,27 @@ onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival frami
     BACKDROP selector, which maps onto the founding-spine NAMED DESTINIES (theocracy↔religious leader,
     oligarchy↔oligarch, media↔media mogul, etc.). So the spine DecisionArchitecture choices are the natural
     new home for these on-ramps (a "doctrine"/"platform"/"allegiance" decision forks toward a destiny).
-  Remaining steps: (1) author per-era spine decision choices that set ≥1 signature flag per destiny (also
-    FIXES the latent oligarchy/media unreachability); (2) rewrite branch.unit.test to assert reachability
-    from SPINE choices; (3) confirm the destiny endings + term resolution stay reachable. Net-new pivot
-    fiction, milestone-sized; pairs with the convergence DESTINY endings already shipped (convergence.ts).
+  ARCHITECTURE DECIDED (this session): the spine.act.json is GenAI-GENERATED (regeneratable) — hand-editing
+    it loses on regen. So DON'T author flags into the JSON. Instead add a PURE, deterministic MAPPING in the
+    spine loader/player (applied at content build) that stamps the branch signature flag onto a choice when
+    that choice already sets the matching destiny-path spine flag. The 98 existing spine flags already encode
+    the destiny paths (g6_broadcast/g5_telecom_empire→media_dynasty; faith doctrine→evangelical_origin;
+    crush_labor/corporate_monolith→oligarch_dynasty; g9_manifest_state/militarist→axis_ascendant or its
+    successor; westcoast tech→west_coast_origin; revival/megachurch→megachurch_dynasty). Regen-safe, testable,
+    NO fiction authoring — it reuses the spine's own vocabulary. Remaining steps: (1) author the
+    SPINE_FLAG → BRANCH_SIGNATURE map (a table in a new spineBranch.ts or in the loader) + apply it where
+    spine scenes are loaded into content; (2) rewrite branch.unit.test to assert reachability from SPINE
+    choices; (3) confirm destiny endings + term resolution reachable; (4) verify the mapping covers all 6
+    branches incl. the currently-unreachable oligarchy/media. Pairs with convergence.ts DESTINY endings.
 - [x] **FS-SCHEMA-EMPTY-ERA — DONE.** Relaxed `EraEventsSchema.events` from `.min(1)` to allow `[]` (a
   spine-driven era legitimately has no event-card pool). Schema test added (empty pool validates; populated
   still does). 749 unit + tsc + biome check green. Unblocks the eventual FS-RETIRE-PROLOGUE emptying once
   FS-SPINE-BRANCH-ONRAMPS rehomes the branch flags.
 - [ ] **FS-RETIRE-PROLOGUE — retire/convert the dead 1885 Trump-line prologue era (milestone).**
-  BLOCKED on FS-SPINE-BRANCH-ONRAMPS (origins events are the live branch-flag source) + FS-SCHEMA-EMPTY-ERA.
+  NOW UNBLOCKED — both prerequisites DONE (FS-SPINE-BRANCH-ONRAMPS: branches fork off the spine;
+  FS-SCHEMA-EMPTY-ERA: empty event pool allowed). Ready to execute: empty origins events, remove the
+  ev_line_fails/end_line_failed chain, retire prologue-gating, repoint branch.unit.test origins→spine,
+  split terms.unit.test (keep live term-interp, drop prologue cases), verify the full gate + Chrome.
 The whole `new-york/1885-1946-origins` era (47 events: Friedrich-leaves-Kallstadt → Bavaria → Fred the
 builder → Queens → the 1946 birth, incl. the `ev_line_fails`→`end_line_failed` failure chain and the
 `dynasty_doomed`/`fred_builder`/`returned_to_ny` flags) is PRE-PIVOT content. The live game routes founded
