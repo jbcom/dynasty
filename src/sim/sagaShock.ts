@@ -93,12 +93,17 @@ export function rollSagaShock(
   return { kind: "meter_blow", meter: blow.meter, delta, note: blow.note };
 }
 
-/** A short, UI-facing aftermath note for a shock — what the player is told happened (WV-3-SHOCK-SCENES). */
+/** The TONE of an aftermath note — a loss (family_death/meter_blow) styles negative; a recovery styles
+ *  positive. Distinct from SagaShockKind (the roll outcome) so the UI can accent a rebound green, not red. */
+export type SagaNoteKind = Exclude<SagaShockKind, "none"> | "recovery";
+
+/** A short, UI-facing aftermath note for a shock OR a recovery — what the player is told happened
+ *  (WV-3-SHOCK-SCENES / WV-3-SHOCK-RECOVERY). */
 export interface SagaShockNote {
-  kind: Exclude<SagaShockKind, "none">;
+  kind: SagaNoteKind;
   /** A one-line era-neutral aftermath sentence (the SceneReader/PlayScreen surfaces it for one turn). */
   text: string;
-  /** The flavor tag (plague/fire/scandal/…) for any styling. */
+  /** The flavor tag (plague/fire/scandal / rebuilt/redeemed/…) for any styling. */
   note: string;
 }
 

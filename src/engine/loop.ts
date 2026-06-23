@@ -548,7 +548,7 @@ export class Game {
       flags: this.state.flags.filter((f) => f !== recovery.clearFlag),
     };
     this.lastShock = {
-      kind: "meter_blow",
+      kind: "recovery",
       text: this.recoveryText(recovery.note),
       note: recovery.note,
     };

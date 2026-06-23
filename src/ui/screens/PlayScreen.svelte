@@ -348,6 +348,12 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     font-size: 0.9rem;
     color: color-mix(in srgb, var(--mmm-red, #b22) 75%, var(--mmm-text));
   }
+  /* WV-3-SHOCK-RECOVERY: a rebound is GOOD news — accent it positive (gold), not loss-red. */
+  .shock-aftermath[data-shock="recovery"] {
+    border-left-color: var(--mmm-gold-deep, #9a7d2e);
+    background: color-mix(in srgb, var(--mmm-gold-deep, #9a7d2e) 9%, transparent);
+    color: color-mix(in srgb, var(--mmm-gold-deep, #9a7d2e) 80%, var(--mmm-text));
+  }
   .event-pane {
     display: flex;
     flex-direction: column;
