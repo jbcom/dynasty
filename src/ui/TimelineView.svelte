@@ -139,6 +139,11 @@ const eventsByYear = $derived(
     border-left: 2px solid var(--mmm-red, #b22);
     padding-left: 0.5rem;
   }
+  /* SHOCK-LEDGER-RECOVERIES: a comeback reads as a GOLD line, distinct from the red disaster — the log
+     shows blow → recover, not just loss. */
+  .ledger li[data-shock-kind="recovery"] {
+    border-left-color: var(--mmm-gold);
+  }
   .ledger-year {
     font-family: var(--mmm-font-ui);
     font-variant-numeric: tabular-nums;

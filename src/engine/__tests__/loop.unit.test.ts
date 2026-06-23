@@ -6,6 +6,7 @@ import { MAX_RUNG } from "../../sim/classRung";
 import { buildContent } from "../../sim/content";
 import { foundByComposition } from "../../sim/founding";
 import { createRng } from "../../sim/rng";
+import { shockLedger } from "../../sim/sagaShock";
 import { initState } from "../../sim/state";
 import { SAGA_GENERATION_SPAN } from "../../sim/timeline";
 import { pickNextEventViaWorld } from "../../sim/world";
@@ -822,6 +823,13 @@ describe("Game loop", () => {
       while (!g.finished && guard < 400) {
         if (g.view.shock?.kind === "recovery") {
           sawRecovery = true;
+          // SHOCK-LEDGER-RECOVERIES: the rebound must leave a PERSISTENT `recovered:<meter>:<year>` marker
+          // (not just clear the transient shock_meter flag) so the ledger can show the comeback.
+          const recoveredFlag = g.view.state.flags.find((f) => /^recovered:[a-z]+:\d+$/.test(f));
+          expect(recoveredFlag, "a recovery stamps a recovered:<meter>:<year> flag").toBeTruthy();
+          // …and that flag must surface in the ledger as a comeback entry.
+          const led = shockLedger(g.view.state.flags);
+          expect(led.some((e) => e.kind === "recovery")).toBe(true);
           break;
         }
         const s = g.view.saga.scene;

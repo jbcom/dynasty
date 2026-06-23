@@ -552,12 +552,19 @@ export class Game {
       this.rng.fork(`sagarecover:${fromYear}`),
     );
     if (!recovery) return;
+    // SHOCK-LEDGER-RECOVERIES: clear the outstanding `shock_meter:<meter>` marker AND stamp a persistent
+    // `recovered:<meter>:<year>` flag — so the ledger can read blow → comeback, not just the loss. The cleared
+    // marker is transient bookkeeping; the recovered flag is the durable record the "What Befell" log surfaces.
+    const recoveredFlag = `recovered:${recovery.meter}:${fromYear}`;
     this.state = {
       ...this.state,
       meters: applyDelta(this.content.meters, this.state.meters, {
         [recovery.meter]: recovery.delta,
       }),
-      flags: this.state.flags.filter((f) => f !== recovery.clearFlag),
+      flags: [
+        ...this.state.flags.filter((f) => f !== recovery.clearFlag),
+        ...(this.state.flags.includes(recoveredFlag) ? [] : [recoveredFlag]),
+      ],
     };
     this.lastShock = {
       kind: "recovery",

@@ -1120,35 +1120,39 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ### Rolling backlog (post-WV-3 — keep this section ≥3 actionable, append before draining)
 
-- [ ] [WAIT-REVIEW] **DOSSIER-SHOCK-LEDGER PR #122 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/dossier-shock-ledger. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix
-  forward + resolve threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next
-  branch for the rolling backlog (CONVERGENCE-RIVAL-FINALE / SPINE-DEPTH-PLAYTEST-2 / ledger-recoveries).
-- [ ] [WAIT-REVIEW] **SHOCK-LEDGER-RECOVERIES — add recoveries (not just disasters) to the ledger.** The
-  "What Befell the Family" log shows shock:* disasters; the WV-3-SHOCK-RECOVERY rebounds aren't recorded
-  (recovery only clears a flag, leaves no marker). Stamp a `recovered:<meter>:<year>` flag on a rebound +
-  show it in the ledger as a comeback line, so the log reads blow→recover, not just loss. Pure; tested.
-- [ ] [WAIT-REVIEW] **SHOCK-FAMILY-SUCCESSION-PRESSURE PR #120 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/shock-family-succession-pressure. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/
-  Gemini, fix forward + resolve threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main,
-  next branch for the rolling backlog (DOSSIER-SHOCK-LEDGER / CONVERGENCE-RIVAL-FINALE / playtest-2).
+- [ ] **SHOCK-LEDGER-RECOVERIES PR — wait CI green + address review, then self-squash-merge.** Pushed
+  feat/shock-ledger-recoveries (recovered:<meter>:<year> stamp + gold comeback ledger line). Loop: wait
+  build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge
+  once green ([[babysit-pr]]). After merge: sync main, next branch (CONVERGENCE-RIVAL-FINALE).
+- [ ] **LEDGER-IN-LEGACY-REPORT — surface the disaster/comeback ledger in the end-game LegacyReport too.** The
+  "What Befell the Family" log lives only in the in-run Timeline; the final reckoning (LegacyReport) summarizes
+  the convergence but never shows the line's hard seasons + comebacks as a whole. Render the full shockLedger as
+  a "The Family's Hard Seasons" section in LegacyReport so the close reflects the WHOLE saga's trials. Tested.
+- [ ] **SHOCK-CADENCE-AUDIT — instrument shock/recovery frequency across the hour, tune so neither dominates.**
+  WV-3 shocks fire era-weighted + recoveries on quiet ticks at 0.5/tick; no measurement confirms the felt
+  cadence (too sparse = no tension; too dense = noise). Add a deterministic instrument counting shocks +
+  recoveries per macro-act over many seeds; if a phase is starved or flooded, tune the era weights. Decide from figures.
+- [x] **DOSSIER-SHOCK-LEDGER PR #122 — DONE, MERGED (squash fc8c58e; release-please cuts 0.31.0).** Wait CI,
+  folded both Gemini findings forward (exhaustive `Record<ShockLedgerEntry["kind"]>` ledger label + `new Set`
+  flag dedup so a repeated `shock:*` can't crash the TimelineView `#each` key) in fe34b1b + regression test,
+  resolved both threads, merged CLEAN. main synced, branch deleted.
+- [x] **SHOCK-LEDGER-RECOVERIES — DONE (branch feat/shock-ledger-recoveries).** applySagaRecovery now stamps a
+  persistent `recovered:<meter>:<year>` flag (alongside clearing the transient shock_meter marker); shockLedger
+  parses it into a `recovery`-kind entry with a METER-AWARE comeback label (the fortune rebuilt / name redeemed);
+  TimelineView renders it GOLD, distinct from the red disaster, so the log reads blow→recover. 873 node + 115
+  browser green, typecheck clean. PR next.
+- [x] **SHOCK-FAMILY-SUCCESSION-PRESSURE PR #120 — DONE, MERGED (squash 4143a87).** Death shock can take the
+  groomed heir (tookHeir + sharper heir_lost note); fixed the systemic `heir_*`-flag-not-cleared-on-succession
+  bug Gemini caught. Threads resolved, merged green.
 
-- [ ] [WAIT-REVIEW] **CORPUS-MINE-INTERSECTIONS PR #118 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/corpus-mine-intersections: fabric wired into resolveThreads + all 7 families now have vignettes.
-  Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads,
-  self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next branch for the rolling backlog
-  (SHOCK-FAMILY-SUCCESSION-PRESSURE / DOSSIER-SHOCK-LEDGER).
+- [x] **CORPUS-MINE-INTERSECTIONS PR #118 — DONE, MERGED (squash bc548d1).** Fabric wired into resolveThreads;
+  all 7 families now have mined vignettes (prose fallback when no braid-slot). Threads resolved, merged green.
 
-- [ ] [WAIT-REVIEW] **SAGA-AUDIO-ATMOSPHERE PR #116 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/saga-audio-atmosphere: the ambient bed now shifts by saga macro-act. Loop: wait build-and-test
-  + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge once green
-  ([[babysit-pr]]). After merge: sync main, next branch for the rolling backlog (CORPUS-MINE / family-
-  succession-pressure / shock-ledger).
+- [x] **SAGA-AUDIO-ATMOSPHERE PR #116 — DONE, MERGED (squash cf2aecc).** Ambient bed now shifts by saga
+  macro-act (ERA_BANDS aligned to convergence→mogul / emergence→ascent). Threads resolved, merged green.
 
-- [ ] [WAIT-REVIEW] **WV-3-SHOCK-RECOVERY PR #114 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/wv3-shock-recovery: the blow→rebound two-act arc. Loop: wait build-and-test + CodeQL, read
-  CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge once green ([[babysit-pr]]).
-  After merge: sync main, next branch for the rolling backlog (SAGA-AUDIO-ATMOSPHERE / CORPUS-MINE / …).
+- [x] **WV-3-SHOCK-RECOVERY PR #114 — DONE, MERGED.** The blow→rebound two-act arc (rollSagaRecovery, gold
+  recovery note, SagaNoteKind). Threads resolved, merged green.
 
 - [x] **CONVERGENCE-ENDING-DEPTH PR #112 — DONE, MERGED (squash 7be3df2).** Reachability audit + earned-finale
   prose shipped. CI green; CodeRabbit pass; Gemini medium (hoist initMotivators in the test) FIXED + thread
