@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.35.0](https://github.com/jbcom/dynasty/compare/v0.34.0...v0.35.0) (2026-06-23)
+
+
+### Features
+
+* invest in a rebound — agency over the recovery (save-invariant side-log) ([#130](https://github.com/jbcom/dynasty/issues/130)) ([61f9061](https://github.com/jbcom/dynasty/commit/61f9061792226b74b21568131ce13c31e5187613))
+
 ## [0.34.0](https://github.com/jbcom/dynasty/compare/v0.33.0...v0.34.0) (2026-06-23)
 
 
