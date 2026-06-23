@@ -1438,13 +1438,27 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   now shows a grace note — "The line was spared the worst — no disaster struck across N generations" — instead of
   silently omitting the Hard Seasons section; a trivial/≤1-gen run still shows nothing. Test: screens.browser (the
   grace note + generation count for a 2-gen charmed run; silence for a no-family run).
-- [ ] **MAP-FIELD-LINK — the in-run MapView and the Field dossier should agree on each line's state.** Both surface the
-  rival lines; verify a line reading "fallen" in the dossier also reads as eliminated on the map (and surging/holding
-  match), so the two live surfaces never contradict. Pure; tested (a parity unit/browser test over shared standings).
-- [ ] **OMEN-BADGE-SCREENSHOT — capture + READ a PlayScreen with the hope badge AND the dread badge to confirm the
-  a11y badges read clearly (legible at size, the icon+text distinct) and don't crowd the prose.** Visual; READ both.
-- [ ] **FINALE-APEX-VS-RUIN-CONTRAST — screenshot + READ both a triumphant apex finale and a grim extinguished one to
-  confirm the LegacyReport's tone visibly differs (gold ascendance vs stark loss), not just the headline text.** Visual.
+- [x] **MAP-FIELD-LINK — DONE (branch feat/surface-parity-and-finale-contrast).** MapView now carries the SAME
+  faltering/fallen state the Field dossier does: a fallen line's marker reads eliminated (barely-there + grey), a
+  faltering one dimmer, and a fallen line is excluded from the map's "leads the convergence" note. Test:
+  MapFieldParity.browser mounts BOTH off shared standings — a fallen line reads fallen on both + never leads; an
+  all-fallen field yields no map leader.
+- [x] **OMEN-BADGE-SCREENSHOT — DONE.** Captured both omen badges + READ them: "↻ RECOVERING" renders a gold pill
+  (dark text), "⚠ WARNING" a red pill (light text), each legible at size, distinct, not crowding the prose. Confirms
+  the OMEN-TONE-A11Y badges read clearly. Test: PlayScreen.visual captures both tones.
+- [x] **FINALE-APEX-VS-RUIN-CONTRAST — DONE.** Captured + READ both finales: a triumphant ending reads "Total
+  Victory" in bright gold (endgame-good tier, gold "Play Again"); a ruin reads "The End" in stark red
+  ("YOUR LINE WAS EXTINGUISHED", endgame-bad tier). The tone visibly differs (gold ascendance vs stark loss), not
+  just the headline. Test: LegacyReportToneContrast.visual asserts the tier + title-color contrast + captures both.
+- [ ] **MAP-FIELD-LINK-WIRING-CHECK — confirm PlayScreen actually passes the full standings (with fallen/faltering)
+  to MapView, end-to-end.** The component supports it; verify the live wiring (PlayScreen → MapView prop) carries the
+  state, not just that MapView CAN render it — a browser test mounting PlayScreen on the map tab with a fallen line.
+- [ ] **DOSSIER-EMPTY-VOICE — when the rival world has no near-vantage lines yet (early game), the Field dossier
+  should read a one-line "the other lines are still finding their feet" rather than an empty panel**, mirroring the
+  SHOCK-LEDGER-EMPTY-VOICE grace note. Pure UI; tested (RivalDossier.browser empty-but-early state).
+- [ ] **OMEN-A11Y-AUDIT — a deterministic check that EVERY foreshadow the engine can emit carries a non-empty tone
+  badge label** (no tone falls through to a blank badge), guarding the a11y layer from a future tone value slipping
+  the badge map. Pure unit test over the foreshadow tone set. Tested.
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
