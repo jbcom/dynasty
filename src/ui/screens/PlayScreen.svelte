@@ -87,9 +87,14 @@ const sagaView = $derived(
 // Optional lore briefs (waves + macro-acts), shown in the slide-out menu's Codex. Static content.
 const codex = loadCodex();
 
-// PF-17: keep the ambient music bed on the run's current era (the AudioEngine starts on the first
-// reader tap; setMusicEra remembers the era until then, then crossfades on each era change).
-const currentEraId = $derived(content.eras[view.state.eraIndex]?.id ?? "");
+// PF-17 / SAGA-AUDIO-ATMOSPHERE: keep the ambient music bed on the run's current era. While the NOVEL is
+// playing, the era ladder (state.eraIndex) is frozen — the saga runs on the decoupled clock — so drive the
+// bed from the saga's MACRO-ACT (founding → convergence → emergence → ascension), which bandForEra maps to
+// the founding→stellar chord arc. Fall back to the event-era ladder on the event path. (AudioEngine starts
+// on the first reader tap; setMusicEra remembers the era until then, then crossfades on each change.)
+const currentEraId = $derived(
+  view.saga.scene ? (sagaView.macroAct ?? "") : (content.eras[view.state.eraIndex]?.id ?? ""),
+);
 $effect(() => {
   if (currentEraId) setMusicEra(currentEraId);
 });

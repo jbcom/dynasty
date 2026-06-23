@@ -31,6 +31,24 @@ describe("ERA_BANDS", () => {
     expect(bandForEra("Ascension").id).toBe("stars");
   });
 
+  it("SAGA-AUDIO-ATMOSPHERE: each saga MACRO-ACT maps to a DISTINCT band (the founding→stellar bed arc)", () => {
+    // The saga clock runs on macro-acts, not the era ladder; the ambient bed must shift across all four.
+    const byAct = {
+      founding: bandForEra("founding").id,
+      convergence: bandForEra("convergence").id,
+      emergence: bandForEra("emergence").id,
+      ascension: bandForEra("ascension").id,
+    };
+    expect(byAct).toEqual({
+      founding: "origins",
+      convergence: "mogul",
+      emergence: "ascent",
+      ascension: "stars",
+    });
+    // Four distinct beds — no two macro-acts collapse to the same chord mood.
+    expect(new Set(Object.values(byAct)).size).toBe(4);
+  });
+
   it("falls back to the rooted origins band for an unknown era", () => {
     expect(bandForEra("some-unmapped-period")).toBe(DEFAULT_ERA_BAND);
     expect(DEFAULT_ERA_BAND.id).toBe("origins");
