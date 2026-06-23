@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.53.0](https://github.com/jbcom/dynasty/compare/v0.52.0...v0.53.0) (2026-06-23)
+
+
+### Features
+
+* map↔dossier state parity + verified omen-badge & finale-tone contrast ([#169](https://github.com/jbcom/dynasty/issues/169)) ([da8b3cb](https://github.com/jbcom/dynasty/commit/da8b3cb668169b849cda1aa369a2049df2735e6a))
+
 ## [0.52.0](https://github.com/jbcom/dynasty/compare/v0.51.0...v0.52.0) (2026-06-23)
 
 
