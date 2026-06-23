@@ -11,6 +11,7 @@ import {
   type MotivatorAxis,
   type Motivators,
 } from "../motivators";
+import { fabricVignette } from "./fabricCrossing";
 import type { ActChapter, Scene } from "./schema";
 
 /** The loaded saga corpus the player walks (acts + scenes, indexed). */
@@ -305,8 +306,14 @@ export function resolveThreads(corpus: SagaCorpus, scene: Scene): BraidedThread[
       if (braided) break;
     }
     if (braided) {
-      // Prefer the ref's bespoke/woven crossing; else a generic-but-named fallback for the rival wave.
-      const crossing = ref.crossing ?? `The path of a ${waveLabel(ref.wave)} line crosses yours.`;
+      // Crossing prose, best first: the ref's bespoke/woven line → the MINED FABRIC's top vignette for this
+      // wave+tier (CORPUS-MINE-INTERSECTIONS — the curated, higher-quality fragment the FS-4 pass distilled)
+      // → a generic-but-named fallback. So a cross-dynasty intersection reads with the deliberately-selected
+      // prose, not just a placeholder.
+      const crossing =
+        ref.crossing ??
+        fabricVignette(ref.wave, ref.atTier) ??
+        `The path of a ${waveLabel(ref.wave)} line crosses yours.`;
       out.push({ wave: ref.wave, crossing, relation: ref.relation, scene: braided });
     }
   }
