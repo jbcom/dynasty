@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.45.0](https://github.com/jbcom/dynasty/compare/v0.44.0...v0.45.0) (2026-06-23)
+
+
+### Features
+
+* a fallen rival reads as out of the race in the field dossier ([#153](https://github.com/jbcom/dynasty/issues/153)) ([2f5720b](https://github.com/jbcom/dynasty/commit/2f5720b1e82f21b742bdbbf987456d999f1d9e09))
+
 ## [0.44.0](https://github.com/jbcom/dynasty/compare/v0.43.0...v0.44.0) (2026-06-23)
 
 
