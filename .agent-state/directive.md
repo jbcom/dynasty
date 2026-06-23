@@ -75,10 +75,13 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   priorCrossing) → evaluateTriggers fires whole family branches, priority-ordered, replay-deterministic,
   `once`-aware; recurring CastFamily with MEMORY (recordCrossing/crossingsOf gate priorCrossing branches).
   +7 tests, 713 green. ([[emergent-cause-effect-sim]], [[intersections-woven-not-walls]])
-- [ ] **FS-5b triggers.json data table + loop wiring — couples with FS-6.** Author src/data/saga/triggers.json
-  (the TriggerRule[] keyed to the mined fabric branches) + wire evaluateTriggers into loop.view to weave
-  fired branches INTO the spine prose + recordCrossing on activation; cast in the save state. Lands with the
-  spine prose (FS-6) since branches need spine acts to weave into. Live-verify a recurring crossing pays off
+- [x] **FS-5b triggers.json data table — DONE (committed).** 7-family cast + 12 branch fire-rules grounded
+  in real arrival history (Irish 1845-75 docks; Chinese 1863-82 railroad-WEST; etc.), each with an era-gated
+  arrival + a priorCrossing-gated recurrence. Trigger*Schema added; validates + fires correctly by era. +1
+  test, 714 green.
+- [ ] **FS-5c loop wiring — with FS-6.** Wire evaluateTriggers into loop.view to weave fired branches INTO
+  the spine prose + recordCrossing on activation; cast in the save state (deterministic). Lands with FS-6's
+  spine prose (branches need authored spine acts to weave into). Live-verify a recurring crossing pays off
   an earlier one.
 - [ ] **FS-6 author the spine prose.** GenAI flesh the authored spine acts to depth, era-distinct; QA vs
   guidance; commit-before-run.
