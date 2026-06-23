@@ -936,6 +936,159 @@ const G5_VARIANTS = [
 ];
 
 /**
+ * G6 (Act "Prime Time Dominion", the broadcast/cable era ~1970s-90s): the five base-flavored openings,
+ * diverting to the shared g6 `platform` scene. The existing TV-control-room `open` is the PRESS/default
+ * (this is the media generation). Voice: cable + satellite + the brand age, image as power, the culture war.
+ */
+const G6_VARIANTS = [
+  {
+    id: "spine:g6:broadcast:open_land",
+    base: "land",
+    sense: "sight",
+    prose: [
+      "From the helicopter the {family_name} holdings sprawled green and gold below {given_name} {surname}: the office parks and the master-planned communities, the mall pads and the leased farmland, real estate the broadcast age had turned into a brand. Land in this generation was development and REIT, the bedroom suburb and the edge city, the family name on the entrance monument of a thousand cul-de-sacs. The dynasty's oldest power — dirt — had become a portfolio traded on the strength of an image as much as an acre.",
+      "Word came up from the brokers of the Sun Belt boom and the savings-and-loan bust, of leveraged development and the first whispers of a property bubble, of farmland zoned overnight into subdivisions. {given_name} weighed the patient yield of the land against the fast money of the deal, knowing the family that branded its developments rightly would own the suburbs of the satellite age — and the one that overbuilt would be foreclosed on live at eleven.",
+    ],
+    beats: [
+      {
+        prose: ["A syndicate offers to take the family's land empire public as a REIT — liquidity for control."],
+        choice: {
+          text: "Go public — land is a financial product now, not a homestead.",
+          motivatorShift: { wealth: 1, reach: 1 },
+          setFlags: ["g6_land_reit"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A master-planned-community deal will brand a whole town with the family name — at a ruinous leverage."],
+        choice: {
+          text: "Build the branded city — the name on the gate is worth the debt.",
+          motivatorShift: { lineage: 1, power: 1 },
+          setFlags: ["g6_land_branded_city"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g6:broadcast:open_commerce",
+    base: "commerce",
+    sense: "sight",
+    prose: [
+      "The {family_name} brand glowed from a thousand storefronts and a million screens, and {given_name} {surname} ran a commercial empire the broadcast age had made into pure image: the logo, the jingle, the franchise, the leveraged buyout. Commerce in this generation was the brand and the balance sheet financed by junk bonds, the conglomerate assembled and raided and broken for parts on the evening business report. The merchant house of two centuries had become a ticker symbol whose worth rose and fell on a quarter and a quip.",
+      "Word came up from the Street of the LBO boom and Drexel's junk-bond machine, of corporate raiders and golden parachutes, of a Black Monday crash flickering red across the new financial cable channels. {given_name} weighed the slow build of the brand against the fast kill of the deal, knowing the house that mastered the leverage + the image would dominate the age — and the one that mistimed it would be the cautionary segment between commercials.",
+    ],
+    beats: [
+      {
+        prose: ["A raider offers to take the family conglomerate private in a junk-bond-financed buyout."],
+        choice: {
+          text: "Do the leveraged deal — debt is the lever that moves the broadcast age.",
+          motivatorShift: { wealth: 1, power: 1 },
+          setFlags: ["g6_commerce_lbo"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A marketing chief wants to bet the company on building the {family_name} name into a global brand."],
+        choice: {
+          text: "Build the brand — in the image age the logo outlives the ledger.",
+          motivatorShift: { reach: 1, wealth: 1 },
+          setFlags: ["g6_commerce_global_brand"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g6:broadcast:open_pulpit",
+    base: "pulpit",
+    sense: "sound",
+    prose: [
+      "The studio lights blazed hotter than any chancel, and {given_name} {surname} faced not a congregation but a camera — and through it, an audience of millions in their living rooms. The broadcast age had birthed the televangelist: the satellite ministry, the prayer line, the 700-strong phone bank, faith fused to broadcast reach and broadcast money. The {family_name} pulpit could become a media empire reaching more souls in an hour than a century of meetinghouses — or be swallowed by the scandals that stalked the electronic church.",
+      "Word came up the uplink of the Moral Majority and the religious right's march into politics, of PTL's collapse and the televangelist scandals, of a culture war fought in prime time over prayer and family and the nation's soul. {given_name} weighed the explosive reach of the broadcast ministry against its corruptions, knowing the pulpit that mastered the medium could move a presidential election — or end as a punchline on the late shows.",
+    ],
+    beats: [
+      {
+        prose: ["A satellite network offers the ministry a nightly slot — and a culture-war pulpit reaching millions."],
+        choice: {
+          text: "Build the broadcast ministry — the camera is the new tent revival.",
+          motivatorShift: { reach: 1, power: 1 },
+          setFlags: ["g6_pulpit_televangelist"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["Political operatives want the ministry to anchor a religious-right voting bloc."],
+        choice: {
+          text: "Mobilize the flock as a political army — faith into electoral power.",
+          motivatorShift: { politics: 1, worldview: -1 },
+          setFlags: ["g6_pulpit_religious_right"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g6:broadcast:open_law",
+    base: "law",
+    sense: "sight",
+    prose: [
+      "The glass tower housed three hundred {family_name} attorneys now, and {given_name} {surname} read the broadcast age as the era when law itself went prime time: the televised trial, the celebrity attorney, the mass tort and the class action playing out on Court TV. Law in this generation was the deal memo and the deregulation, the merger cleared and the takeover defended, the litigation that moved markets between commercials. A lawyer who could try a case to a jury and a camera at once stood at the intersection of the courtroom and the culture.",
+      "Word came down of Reagan-era deregulation and the savings-and-loan prosecutions, of RICO turned on the mob and the raiders alike, of a Supreme Court remaking corporate and speech law for the media age. {given_name} weighed the corporate suite against the trial-lawyer's spotlight, knowing the law of this generation was argued as much to the public as to the bench — and the {family_name} name would be made in whichever arena it chose.",
+    ],
+    beats: [
+      {
+        prose: ["A landmark televised case offers national fame — try it in the courtroom and on the evening news."],
+        choice: {
+          text: "Take the camera case — in this age the verdict of the public is the real one.",
+          motivatorShift: { reach: 1, power: 1 },
+          setFlags: ["g6_law_televised_trial"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["The conglomerates retain the firm to architect the mergers + defend the takeovers of the deal decade."],
+        choice: {
+          text: "Take the M&A practice — the deal lawyers run the broadcast economy.",
+          motivatorShift: { wealth: 1, power: 1 },
+          setFlags: ["g6_law_mergers"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g6:broadcast:open_military",
+    base: "military",
+    sense: "sound",
+    prose: [
+      "The briefing room's monitors glowed with grainy gun-camera footage, and {given_name} {surname}, a senior officer in the all-volunteer force, understood that the broadcast age had changed even war: Vietnam lost in the living room, the Gulf won on CNN, the smart bomb's-eye view replaying on a loop. The {family_name} sword now served a military that fought for the cameras as much as the objective — the embedded reporter, the Pentagon briefing as prime-time theater. Power still flowed from the uniform, but the uniform now performed for an audience of millions.",
+      "Word came up the chain of the Reagan buildup and the Cold War's strange end, of Grenada and Panama and the Gulf, of a military rebuilt from Vietnam's ashes into a broadcast-age colossus. {given_name} weighed the warrior's old code against the new theater of televised war, knowing the officer who understood the camera as well as the campaign would rise in a Pentagon that had learned its survival depended on the evening news.",
+    ],
+    beats: [
+      {
+        prose: ["A high command offers a role shaping the military's relationship with the broadcast press."],
+        choice: {
+          text: "Master the media war — the camera is now a theater of operations.",
+          motivatorShift: { reach: 1, power: 1 },
+          setFlags: ["g6_military_media_war"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A covert-operations command offers power far from the cameras — and far from oversight."],
+        choice: {
+          text: "Take the shadow command — real power moves where the lights don't.",
+          motivatorShift: { power: 1, honor: 1 },
+          setFlags: ["g6_military_covert"],
+          gather: true,
+        },
+      },
+    ],
+  },
+];
+
+/**
  * Apply one act's base-flavored opening variants, idempotently: each variant scene is gated on its
  * `base:*` flag + diverts to `divertTo` (skipping the default `open`); the default `open` is gated to NOT
  * fire for any covered base (so an uncovered/default base — press at g0 — gets it). `actId` is the act,
@@ -1009,8 +1162,14 @@ const n5 = applyAct(
   "spine:g5:midcentury:reckoning",
   G5_VARIANTS,
 );
+const n6 = applyAct(
+  "spine:g6:broadcast",
+  "spine:g6:broadcast:open",
+  "spine:g6:broadcast:platform",
+  G6_VARIANTS,
+);
 
 writeFileSync(PATH, `${JSON.stringify(doc, null, 1)}\n`);
 console.log(
-  `inserted base-variant openings — g0: ${n0}, g1: ${n1}, g2: ${n2}, g3: ${n3}, g4: ${n4}, g5: ${n5}`,
+  `inserted base-variant openings — g0:${n0} g1:${n1} g2:${n2} g3:${n3} g4:${n4} g5:${n5} g6:${n6}`,
 );

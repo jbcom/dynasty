@@ -73,6 +73,15 @@ const FLAVORED_ACTS = [
     bases: ["land", "pulpit", "law", "military", "press"],
     defaultBase: "commerce",
   },
+  {
+    // g6's default open is the TV control room — press-themed (the media generation) — so press is the
+    // default and commerce is the flavored variant.
+    open: "spine:g6:broadcast:open",
+    divert: "spine:g6:broadcast:platform",
+    base: "spine:g6:broadcast:open_",
+    bases: ["land", "commerce", "pulpit", "law", "military"],
+    defaultBase: "press",
+  },
 ];
 
 function actIdOf(open: string): string {
