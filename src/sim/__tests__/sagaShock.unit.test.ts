@@ -3,6 +3,7 @@ import { createRng } from "../rng";
 import {
   applyFamilyDeathShock,
   foreshadowWeight,
+  recoveryForeshadow,
   rollSagaRecovery,
   rollSagaShock,
   type SagaShock,
@@ -277,6 +278,16 @@ describe("shockExposure + shockForeshadow (SHOCK-FORESHADOW)", () => {
     expect(foreshadowWeight("ascension", [shockMeterFlag("money")], true)).toBe("none");
     // Strain DOMINATES kin: a strained line reads grave whether or not it has kin.
     expect(foreshadowWeight("founding", [shockMeterFlag("reputation")], true)).toBe("grave");
+  });
+
+  it("RECOVERY-FORESHADOW-TONE: a HOPEFUL rebound omen fires iff the line carries an outstanding blown meter", () => {
+    // An un-recovered blow → a rebound is plausibly near (hope), regardless of era (it keys on strain, not
+    // exposure — the recovery roll itself isn't era-gated the way the shock omen's dread is).
+    expect(recoveryForeshadow([shockMeterFlag("money")])).toBe(true);
+    expect(recoveryForeshadow([shockMeterFlag("reputation"), "base:press"])).toBe(true);
+    // No outstanding strain → no hope omen (nothing to rebound from).
+    expect(recoveryForeshadow([])).toBe(false);
+    expect(recoveryForeshadow(["base:press", "loud_baby"])).toBe(false);
   });
 });
 

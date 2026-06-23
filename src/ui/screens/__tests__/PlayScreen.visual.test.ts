@@ -121,7 +121,7 @@ describe("PlayScreen (composed game screen)", () => {
       const v: GameView = {
         ...view(),
         saga: { actTitle: "Act II", scene, threads: [], ended: false },
-        foreshadow: { text: "An omen looms.", weight },
+        foreshadow: { text: "An omen looms.", weight, tone: "dread" as const },
       };
       if (component) unmount(component);
       component = mount(PlayScreen, {
@@ -137,6 +137,35 @@ describe("PlayScreen (composed game screen)", () => {
     expect(grave.getAttribute("data-weight")).toBe("grave");
     // The grave omen's border reads in a different (heavier) register than the marginal one.
     expect(getComputedStyle(grave).borderLeftColor).not.toBe(marginalBorder);
+  });
+
+  it("RECOVERY-FORESHADOW-TONE: a hopeful rebound omen reads in a WARM register, apart from the grave dread omen", () => {
+    const scene = SceneSchema.parse({
+      id: "sc:demo:rebound",
+      sense: "sight",
+      prose: ["The worst of the blow has passed; the house steadies itself."],
+    });
+    const mountTone = (tone: "dread" | "hope") => {
+      const v: GameView = {
+        ...view(),
+        saga: { actTitle: "Act II", scene, threads: [], ended: false },
+        // Both at GRAVE weight — so the only difference under test is the TONE (valence), not the gravity.
+        foreshadow: { text: "An omen.", weight: "grave" as const, tone },
+      };
+      if (component) unmount(component);
+      component = mount(PlayScreen, {
+        target: host,
+        props: { content, view: v, busy: false, onchoose: () => {} },
+      });
+      return host.querySelector('[data-testid="foreshadow"]') as HTMLElement;
+    };
+    const dread = mountTone("dread");
+    expect(dread.getAttribute("data-tone")).toBe("dread");
+    const dreadBorder = getComputedStyle(dread).borderLeftColor;
+    const hope = mountTone("hope");
+    expect(hope.getAttribute("data-tone")).toBe("hope");
+    // Same weight, different tone → the hope omen reads in a different (warm) register than the dread one.
+    expect(getComputedStyle(hope).borderLeftColor).not.toBe(dreadBorder);
   });
 
   it("RECOVERY-CHOICE: the 'Spend funds' button is disabled when the player can't afford it", () => {

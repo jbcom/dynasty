@@ -175,8 +175,14 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
       <!-- SHOCK-FORESHADOW: an omen BEFORE the blow — the season turns against the house — so a hazard
            carries dread, not just aftermath. Deterministic (no roll); shown while the threat looms. -->
       {#if view.foreshadow}
-        <!-- FORESHADOW-IN-TONE: a grave omen reads in a heavier register than a marginal one. -->
-        <p class="foreshadow" data-testid="foreshadow" data-weight={view.foreshadow.weight}>
+        <!-- FORESHADOW-IN-TONE: a grave omen reads heavier than a marginal one. RECOVERY-FORESHADOW-TONE: a
+             hopeful rebound omen (data-tone="hope") reads in a warm register, apart from the dread of a loss. -->
+        <p
+          class="foreshadow"
+          data-testid="foreshadow"
+          data-weight={view.foreshadow.weight}
+          data-tone={view.foreshadow.tone}
+        >
           {view.foreshadow.text}
         </p>
       {/if}
@@ -467,6 +473,14 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     border-left: 3px solid var(--mmm-red, #b22);
     background: color-mix(in srgb, var(--mmm-red, #b22) 9%, transparent);
     color: color-mix(in srgb, var(--mmm-red, #b22) 70%, var(--mmm-text));
+    font-weight: 600;
+  }
+  /* RECOVERY-FORESHADOW-TONE: a HOPEFUL rebound omen reads in a WARM gold register — hope rising, not dread —
+     overriding the red of the grave dread styling even at the same weight. Valence, not just gravity. */
+  .foreshadow[data-tone="hope"] {
+    border-left: 3px solid var(--mmm-gold);
+    background: color-mix(in srgb, var(--mmm-gold) 10%, transparent);
+    color: color-mix(in srgb, var(--mmm-gold) 70%, var(--mmm-text));
     font-weight: 600;
   }
   .event-pane {
