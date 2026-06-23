@@ -1298,9 +1298,9 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   rhythm, no death spiral. The base cadence is preserved (the cooldown only dampens the tick AFTER a shock; the
   SHOCK-CADENCE-AUDIT single-tick figures are unchanged). Replay-safe (derived from flags, no new state). Tests:
   sagaShock.unit (cooled fires fewer than normal) + cadence audit re-confirmed. 900 node green, gate clean.
-- [ ] [WAIT-REVIEW] **SHOCK-CLUSTERING-GUARD PR — push, open PR, full remote loop.**
-  1 commit (the cooldown dampener). Full local gate passed. Push, open PR, wait CI, fold review forward +
-  resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-RISE-NEWS-WEIGHT.
+- [ ] [WAIT-REVIEW] **SHOCK-CLUSTERING-GUARD PR #142 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/shock-clustering-guard (148bd2e). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
+  review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-RISE-NEWS-WEIGHT.
 - [ ] **RIVAL-RISE-NEWS-WEIGHT — a rival's surge reads urgency proportional to how far it's pulled ahead.** The
   surge dispatch (RIVAL-RISE-NEWS) is flat — a rival one rung ahead reads the same as one near the stars while
   you're earthbound. Tier the "outpaced you" headline by the rung gap (just ahead → "pulling away" → "leaving
