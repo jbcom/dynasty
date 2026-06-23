@@ -118,9 +118,13 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   + `buildEpoch0Opening(cues)` returning the connected birth → naming → childhood chain. Real copy, saga-substrate
   scenes. Test: epoch0Opening.unit (naming tokens + named flag; childhood standing flags; connected chain). Flows
   `next: epoch0:formative` (EI-4).
-- [ ] [WAIT] **EI-4 FORMATIVE-BEATS (REAL COPY)** — author first-friend / first-betrayal / first-loss / first-romance /
-  early-schooling as emergent Epoch-0 → adulthood scenes (real authored prose) that set life-seeds + crystallize
-  facets (power base / standing / bent). Woven across the opening's beginning/middle/end. Tested (each sets its facet).
+- [x] **EI-4 FORMATIVE-BEATS (REAL COPY) — DONE (branch feat/ei4-formative-beats).** Authored the five named beats
+  as real-copy saga scenes in `src/sim/founding/epoch0Formative.ts`: first friend → schooling → betrayal → loss →
+  romance, chained from epoch0:childhood (next: epoch0:formative). Each sets a life-seed (`seed:*`) + nudges a power
+  base (`power_lean:*`, the bent crystallizes from how it's lived); the romance close carries the kept succession
+  hand-off (takesPartner) + `epoch0:emerged`. Wired into buildEpoch0Opening → the full birth→…→romance chain. Test:
+  epoch0Formative.unit (5 beats schema-valid, seeds + leans, connected chain, succession close) + the opening chain
+  test. EI-5 deepens naming; EI-6 wires the chain into the engine (retiring the funnel).
 - [ ] [WAIT] **EI-5 NAMING-IN-FICTION** — surname/gender/given/naming-tradition are named diegetically at the naming
   beat (by the parents, in the child's hearing), not picked on a card. Wire to foundByComposition. Tested.
 - [ ] [WAIT] **EI-6 RETIRE-THE-FUNNEL + WIRE** — replace the OnboardingScreen .card funnel with the lived opening's

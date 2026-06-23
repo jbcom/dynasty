@@ -81,12 +81,25 @@ describe("epoch-0 birth scene (EI-3 EPOCH-0 OPENING ACT)", () => {
     expect(scene.next).toBe("epoch0:formative");
   });
 
-  it("EI-3: buildEpoch0Opening returns the connected birth → naming → childhood chain", () => {
+  it("EI-3+EI-4: buildEpoch0Opening returns the full connected birth → … → romance chain", () => {
     const scenes = buildEpoch0Opening(dealSenseCues(createRng("chain")));
-    expect(scenes.map((s) => s.id)).toEqual(["epoch0:birth", "epoch0:naming", "epoch0:childhood"]);
-    // Every scene is schema-valid and the `next` links form an unbroken chain (each next is the following id).
+    // The full emergence: birth → naming → childhood → the five formative beats.
+    expect(scenes.map((s) => s.id)).toEqual([
+      "epoch0:birth",
+      "epoch0:naming",
+      "epoch0:childhood",
+      "epoch0:formative",
+      "epoch0:schooling",
+      "epoch0:betrayal",
+      "epoch0:loss",
+      "epoch0:romance",
+    ]);
+    // Every scene is schema-valid and the `next` links form an unbroken chain up to the romance close.
     for (const s of scenes) expect(() => SceneSchema.parse(s)).not.toThrow();
-    expect(scenes[0]?.next).toBe(scenes[1]?.id);
-    expect(scenes[1]?.next).toBe(scenes[2]?.id);
+    for (let i = 0; i < scenes.length - 1; i++) {
+      expect(scenes[i]?.next, `${scenes[i]?.id} → ${scenes[i + 1]?.id}`).toBe(scenes[i + 1]?.id);
+    }
+    // The romance close ends the emergence (no next) and marks emerged.
+    expect(scenes[scenes.length - 1]?.next).toBeUndefined();
   });
 });

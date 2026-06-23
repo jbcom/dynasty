@@ -16,6 +16,7 @@
  */
 
 import type { Scene } from "../saga/schema";
+import { buildFormativeBeats } from "./epoch0Formative";
 import type { SenseCue } from "./senseEmergence";
 
 /** The flag a sense-attend beat stamps; EI-2's resolvePlace reads these back to crystallize the place. */
@@ -197,9 +198,16 @@ export function buildChildhoodScene(): Scene {
 }
 
 /**
- * The Epoch-0 opening act so far (EI-3): birth → naming → childhood, in order. EI-4/EI-5 extend it forward
- * (formative beats, deeper naming). A pure builder; the cues come from EI-2's dealSenseCues for this seed.
+ * The FULL Epoch-0 opening act (EI-3 + EI-4): birth → naming → childhood → the formative beats (first friend
+ * → schooling → betrayal → loss → romance), in order, as one connected scene chain. The romance close
+ * carries the succession hand-off that ends the emergence and begins Act 1 proper. A pure builder; the cues
+ * come from EI-2's dealSenseCues for this seed. EI-5 deepens naming; EI-6 wires this into the engine.
  */
 export function buildEpoch0Opening(cues: readonly SenseCue[]): Scene[] {
-  return [buildBirthScene(cues), buildNamingScene(), buildChildhoodScene()];
+  return [
+    buildBirthScene(cues),
+    buildNamingScene(),
+    buildChildhoodScene(),
+    ...buildFormativeBeats(),
+  ];
 }
