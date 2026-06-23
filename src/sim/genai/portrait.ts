@@ -59,14 +59,32 @@ export const ARCHIVE_WRAPPER =
   "accent, on a plain dark void ground — a softly GLOWING, weightless projected-light capture (not a printed " +
   "plate, not aged paper). Cohesive with a family's kept record of its line. NOT cartoon, NOT cel-shaded.";
 
-/** Which media read as a glowing digital CAPTURE (vs a physical artifact) — the future low/mid cells. */
-function isDigitalCapture(eraBand: EraBand, tier: RungTier): boolean {
+/**
+ * The CONTEMPORARY-screen wrapper (EI-9b): a digital-age PHOTO (a phone snapshot / clean digital capture) is
+ * neither an aged physical plate nor a glowing hologram — forcing the chronicle plate made a casual modern
+ * photo read as a mounted painting. This wrapper keeps the gallery's restrained palette + dynastic-record
+ * intent but reads as a clean, screen-native digital PHOTOGRAPH (no plate, no aging, no projected glow).
+ */
+export const SCREEN_WRAPPER =
+  "A clean contemporary digital PHOTOGRAPH, screen-native: a restrained, limited palette with a single " +
+  "gold-ochre and oxblood accent, a plain modern ground — NOT a printed plate, NOT aged paper, NOT a glowing " +
+  "hologram, NOT a painting. Cohesive with a family's kept record of its line. NOT cartoon, NOT cel-shaded.";
+
+/** Which media read as a glowing HOLOGRAPHIC capture (the projected-light future) — future low/mid cells. */
+function isHologramCapture(eraBand: EraBand, tier: RungTier): boolean {
   return (eraBand === "near_future" || eraBand === "stellar") && tier !== "high";
 }
 
-/** The cohesion wrapper for an (era × tier): the archive wrapper for digital captures, else the chronicle one. */
+/** Which media read as a clean contemporary digital PHOTO (no plate, no glow) — the digital-modern low/mid. */
+function isScreenCapture(eraBand: EraBand, tier: RungTier): boolean {
+  return eraBand === "digital_modern" && tier !== "high";
+}
+
+/** The cohesion wrapper for an (era × tier): hologram → archive, modern photo → screen, else the chronicle one. */
 function wrapperFor(eraBand: EraBand, tier: RungTier): string {
-  return isDigitalCapture(eraBand, tier) ? ARCHIVE_WRAPPER : CHRONICLE_WRAPPER;
+  if (isHologramCapture(eraBand, tier)) return ARCHIVE_WRAPPER;
+  if (isScreenCapture(eraBand, tier)) return SCREEN_WRAPPER;
+  return CHRONICLE_WRAPPER;
 }
 
 /**

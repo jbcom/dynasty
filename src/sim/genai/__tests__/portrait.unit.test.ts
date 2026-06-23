@@ -12,6 +12,7 @@ import {
   type PortraitFacets,
   portraitKey,
   presentationFor,
+  SCREEN_WRAPPER,
   SIGNATURE_STYLE,
 } from "../portrait";
 
@@ -220,6 +221,29 @@ describe("EI-8 presentation medium (era × station — user 2026-06-23)", () => 
         eraBand: "industrial_late1800s",
         archetype: "economic",
         rungTier: "low",
+        gender: "male",
+      }),
+    ).toContain(CHRONICLE_WRAPPER);
+  });
+
+  it("EI-9b: digital_modern low/mid use the SCREEN (clean photo) wrapper, not the aged plate; high stays chronicle", () => {
+    // A casual phone snapshot must read screen-native, not as a mounted painting on an aged plate.
+    const low = buildCompositePortraitPrompt({
+      lifeStage: "adult",
+      eraBand: "digital_modern",
+      archetype: "economic",
+      rungTier: "low",
+      gender: "male",
+    });
+    expect(low).toContain(SCREEN_WRAPPER);
+    expect(low).not.toContain(CHRONICLE_WRAPPER);
+    // The corporate-headshot HIGH is a formal framed capture → chronicle wrapper.
+    expect(
+      buildCompositePortraitPrompt({
+        lifeStage: "adult",
+        eraBand: "digital_modern",
+        archetype: "economic",
+        rungTier: "high",
         gender: "male",
       }),
     ).toContain(CHRONICLE_WRAPPER);
