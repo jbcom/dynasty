@@ -114,9 +114,23 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   plays ALL 10 spine generations g0→g9 (founding→interstellar), ~year 2139, 364 scenes (genuine hour+),
   era-distinct decisions in order, reaches a named destiny/convergence ending, deterministic. Caught + fixed
   the gen-5 cap bug (spine now uses true gen up to SPINE_MAX_GEN); +1 regression test (all 10 gens). 727 green.
-- [ ] **FS-8b Chrome live-verify — confirm it READS right on screen.** Dev server + Chrome: play the founding
-  line, confirm the era-distinct decisions + woven family branches render well + it lands as ONE strong story
-  (not just at the engine level). Note the hour-length feel + any spine depth tuning. THEN revisit visual layer.
+- [x] **FS-8b Chrome live-verify — DONE, spine plays + reads beautifully on screen.** Walked the full new
+  onboarding in Chrome: the diegetic Epoch-0 birth (FS-7b) renders gorgeously — "Francesco Gallo comes of
+  age… what first put bread on the table?" (job), "who stood closest in those early years?" (friend), "how
+  did Francesco take a wife?" (partner), titled cards w/ evocative blurbs. The FOUNDING spine act plays:
+  "Act I — The Crucible of Flint and Ink" — Francesco in a printing house, "perfume of rebellion,"
+  delegates + signed parchment, the press that builds "a commonwealth or a traitor's scaffold" (1776
+  revolution, measured prose column). The pivot is LIVE + reads well.
+  TWO FRAMING BUGS FOUND (year/era desync): the HUD header says "Convergence · 1885" + News panel "The
+  Wider World — 1885" (Gilded-Age headlines) while the act is the 1776 FOUNDING — because onboarding still
+  deals an 1885 immigrant-wave composition (dealComposition picks year from the place's validEras), so the
+  CLOCK/era/news are 1885 but the spine content is 1776. → FS-8c.
+- [ ] **FS-8c reconcile the founding year — the spine line is founded at 1776, not the wave's 1885 era.**
+  The founding-spine pivot means the player's line begins at the American founding; the onboarding/clock must
+  set year=1776 (founding macro-act) for a spine run, not deal the 1885 immigrant-wave era. Fix dealComposition/
+  birthGame so a founded line starts in the founding band; the era-clock + News "Wider World" + HUD header
+  follow. (The waves stay as the braid fabric arriving across the centuries — they're not the player's start
+  year anymore.) Re-verify in Chrome: header reads Founding · 1776, news is founding-era. tsc + tests green.
 
 ### VL (user, 2026-06-22): VISUAL LAYER — portraits + map, GenAI-generated — DEFERRED behind FS
 DEFERRED: fix the story architecture (FS) first; a prettier UI on structurally-identical stories doesn't
