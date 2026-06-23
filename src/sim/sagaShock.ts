@@ -14,7 +14,7 @@
  * eras are gentler than the harsh founding centuries.
  */
 
-import { eraMedicine } from "./mortality";
+import { macroActMedicine } from "./mortality";
 import type { Rng } from "./rng";
 import type { MeterId } from "./schema";
 import { type FamilyState, isMemberAlive } from "./state";
@@ -54,22 +54,24 @@ const METER_BLOWS: ReadonlyArray<{ meter: MeterId; note: string; min: number; ma
 const BASE_SHOCK_CHANCE = 0.33;
 
 /**
- * Roll one seeded disruption shock for a saga tick. Era-weighted (better medicine → lower hazard) and
- * deterministic for a given (family, year, eraId, rng). Returns `{ kind: "none" }` when nothing fires, the
- * struck family (with the dead member marked `died: year`) for a family_death, or a meter delta for a
- * meter_blow. Never strikes the protagonist (their death is the existing age-based mortality's domain —
- * this hazard adds COLLATERAL loss + meter shocks, the exogenous variability the audit found missing).
- * Pure — applies no meter change itself (returns the delta for the caller to apply through its meter system).
+ * Roll one seeded disruption shock for a saga tick. Macro-act-weighted (better medicine → lower hazard) and
+ * deterministic for a given (family, year, macroActId, rng). `macroActId` is the saga's coarse band
+ * (founding/convergence/emergence/ascension — what `macroActForYear` returns), NOT a fine era id; the saga
+ * clock runs on macro-acts, so the hazard tempers off `macroActMedicine`. Returns `{ kind: "none" }` when
+ * nothing fires, a family_death (the struck member id), or a meter_blow (meter + delta). Never strikes the
+ * protagonist (their death is the existing age-based mortality's domain — this adds COLLATERAL loss + meter
+ * shocks, the exogenous variability the audit found missing). Pure — applies no meter change itself.
  */
 export function rollSagaShock(
   family: FamilyState | undefined,
   year: number,
-  eraId: string,
+  macroActId: string,
   rng: Rng,
 ): SagaShock {
-  // Era medicine (0 harsh … ~0.95 future) suppresses the shock chance — a founding-era line is far more
-  // exposed than an interstellar one. Floor at 15% of base so even the far future isn't fully safe.
-  const exposure = Math.max(0.15, 1 - eraMedicine(eraId));
+  // Macro-act medicine (0.1 founding … 0.9 ascension) suppresses the shock chance — a founding-era line is
+  // far more exposed than an interstellar one. `?? 0` via the lookup guards an unknown id (no NaN). Floor at
+  // 15% of base so even the far future isn't fully safe.
+  const exposure = Math.max(0.15, 1 - macroActMedicine(macroActId));
   const chance = BASE_SHOCK_CHANCE * exposure;
   if (!rng.fork(`shock:${year}`).chance(chance)) return { kind: "none" };
 

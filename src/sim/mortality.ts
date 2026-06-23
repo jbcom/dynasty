@@ -39,6 +39,24 @@ export function eraMedicine(eraId: string): number {
 }
 
 /**
+ * Medicine factor for a saga MACRO-ACT band (founding/convergence/emergence/ascension) — the coarse
+ * progression the saga clock runs on, distinct from the fine era ladder `eraMedicine` keys on. The saga
+ * path passes a macro-act id (not an era id), so the saga shock hazard tempers off THIS map. Values rise
+ * founding → the stars, mirroring the era ladder's arc. 0 for an unknown id (defensive).
+ */
+const MACRO_ACT_MEDICINE: Record<string, number> = {
+  founding: 0.1, // 1776–1859: pre-modern medicine, harsh
+  convergence: 0.35, // 1860–1899: industrializing
+  emergence: 0.6, // 1900–2040: modern medicine
+  ascension: 0.9, // 2041+: post-scarcity / future medicine
+};
+
+/** The medicine factor for a saga macro-act band id (0 when unknown). */
+export function macroActMedicine(actId: string): number {
+  return MACRO_ACT_MEDICINE[actId] ?? 0;
+}
+
+/**
  * Annual death probability for a member at `age`, given the era-medicine factor
  * and the member's vigor (0..100). A Gompertz-style curve: negligible in youth,
  * rising steeply past ~55, capped at 1. Medicine and vigor both push the curve

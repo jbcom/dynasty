@@ -28,8 +28,8 @@ const family = (): FamilyState => ({
 
 describe("rollSagaShock (WV-3-MORTALITY)", () => {
   it("is deterministic — same (family, year, era, seed) → identical shock", () => {
-    const a = rollSagaShock(family(), 1885, "origins", createRng("s1").fork("sagashock:1885"));
-    const b = rollSagaShock(family(), 1885, "origins", createRng("s1").fork("sagashock:1885"));
+    const a = rollSagaShock(family(), 1885, "founding", createRng("s1").fork("sagashock:1885"));
+    const b = rollSagaShock(family(), 1885, "founding", createRng("s1").fork("sagashock:1885"));
     expect(a).toEqual(b);
   });
 
@@ -38,9 +38,8 @@ describe("rollSagaShock (WV-3-MORTALITY)", () => {
     let future = 0;
     for (let i = 0; i < 200; i++) {
       const seed = createRng(`seed${i}`);
-      if (rollSagaShock(family(), 1820, "origins", seed.fork(`h:${i}`)).kind !== "none") harsh++;
-      if (rollSagaShock(family(), 2300, "interstellar", seed.fork(`f:${i}`)).kind !== "none")
-        future++;
+      if (rollSagaShock(family(), 1820, "founding", seed.fork(`h:${i}`)).kind !== "none") harsh++;
+      if (rollSagaShock(family(), 2300, "ascension", seed.fork(`f:${i}`)).kind !== "none") future++;
     }
     // Founding-era exposure (~0.9) far exceeds interstellar (floored ~0.15), so harsh fires more often.
     expect(harsh).toBeGreaterThan(future);
@@ -49,7 +48,7 @@ describe("rollSagaShock (WV-3-MORTALITY)", () => {
   it("never strikes the protagonist as the family_death victim", () => {
     // Sweep many seeds; every family_death victim must be a non-protagonist member.
     for (let i = 0; i < 300; i++) {
-      const shock = rollSagaShock(family(), 1810, "origins", createRng(`v${i}`).fork("sagashock"));
+      const shock = rollSagaShock(family(), 1810, "founding", createRng(`v${i}`).fork("sagashock"));
       if (shock.kind === "family_death") {
         expect(shock.memberId).not.toBe("p");
         expect(["c1", "c2"]).toContain(shock.memberId);
@@ -59,7 +58,7 @@ describe("rollSagaShock (WV-3-MORTALITY)", () => {
 
   it("a meter_blow carries a meter + a delta (a loss, or +heat)", () => {
     for (let i = 0; i < 300; i++) {
-      const shock = rollSagaShock(family(), 1810, "origins", createRng(`m${i}`).fork("sagashock"));
+      const shock = rollSagaShock(family(), 1810, "founding", createRng(`m${i}`).fork("sagashock"));
       if (shock.kind === "meter_blow") {
         expect(shock.meter).toBeTruthy();
         expect(typeof shock.delta).toBe("number");
