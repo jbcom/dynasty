@@ -625,6 +625,159 @@ const G3_VARIANTS = [
 ];
 
 /**
+ * G4 (Act V — The Iron Loom of Progress, Progressive Era ~1900s-1910s): the five base-flavored openings,
+ * diverting to the shared g4 `allegiance` scene. The existing {surname} Iron Works `open` is the commerce/
+ * default. Voice: reform + reaction — trust-busting, suffrage, the muckrakers, the Great War's approach.
+ */
+const G4_VARIANTS = [
+  {
+    id: "spine:g4:progressive:open_land",
+    base: "land",
+    sense: "smell",
+    prose: [
+      "The dust of a dry-farmed section blew across the {family_name} holdings, and {given_name} {surname} watched the new century remake even the land: dry-land wheat and irrigation projects, the Reclamation Act turning desert into district, the conservation crusade fencing the old open range into national forest. The Progressive Era brought the government onto the land as never before — grazing permits, crop science, the county agent — and a landed family had to learn to farm the bureaucracy as much as the soil.",
+      "Word came up the rural-free-delivery road of Roosevelt's conservation, of the Country Life movement and the Grange's old demands made policy, of tenant farming spreading even as the homestead myth faded. {given_name} weighed the family's acres against an age that wanted to manage them, knowing the line that mastered the new agencies + science would hold the land into the century, and the one that fought them would be regulated out of it.",
+    ],
+    beats: [
+      {
+        prose: ["A Reclamation project will irrigate the family's dry sections — if you sign onto the federal district."],
+        choice: {
+          text: "Join the federal water district — the future of land is managed, not wild.",
+          motivatorShift: { reach: 1, tradition: 1 },
+          setFlags: ["g4_land_reclamation"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["Conservationists want the family's range fenced into a forest reserve; the cattlemen want it left open."],
+        choice: {
+          text: "Side with conservation — stewardship is the new face of holding land.",
+          motivatorShift: { worldview: 1, honor: -1 },
+          setFlags: ["g4_land_conservation"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g4:progressive:open_pulpit",
+    base: "pulpit",
+    sense: "sound",
+    prose: [
+      "The {family_name} church bells rang over a city of reform, and {given_name} {surname} preached now in the high noon of the Social Gospel: settlement houses, the temperance crusade, the war on the saloon and the sweatshop alike. The Progressive Era fused pulpit and politics — ministers on vice commissions, in suffrage marches, behind Prohibition. The {family_name} voice could lead the moral army of reform, or warn that the church was trading the eternal for the merely civic.",
+      "Word came up the avenue of the Anti-Saloon League's triumphs, of women's-suffrage pulpits and fundamentalist backlash, of a Scopes-trial reckoning gathering between the old faith and the new science. {given_name} weighed the reformer's certainty against the modernist's doubt, knowing the pulpit that chose this age's battle would decide whether the {family_name} faith marched into the century or dug in against it.",
+    ],
+    beats: [
+      {
+        prose: ["The Anti-Saloon League wants the family's pulpit + purse behind the coming Prohibition amendment."],
+        choice: {
+          text: "Lead the dry crusade — moral law written into the Constitution itself.",
+          motivatorShift: { worldview: -1, power: 1 },
+          setFlags: ["g4_pulpit_prohibition"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["Suffragists ask the pulpit to bless the vote for women against the traditionalists in the pews."],
+        choice: {
+          text: "Preach for suffrage — the reform church widens the circle of the saved.",
+          motivatorShift: { worldview: 1, honor: -1 },
+          setFlags: ["g4_pulpit_suffrage"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g4:progressive:open_law",
+    base: "law",
+    sense: "sight",
+    prose: [
+      "The {family_name} law offices had grown a floor and a hundred clerks, and {given_name} {surname} read the Progressive Era as a war waged in statute and brief: trust-busting and the Clayton Act, the income tax and the Federal Reserve, the regulatory commission as a new branch of government. The reformers wanted law to leash the capital the last generation had unleashed; the corporations wanted it tamed. A lawyer who could draft the regulation — or the loophole — stood at the drafting table of the modern state.",
+      "Word came down from Washington of the Sixteenth and Seventeenth Amendments, of the FTC and the new administrative law, of a Supreme Court testing how far the people could regulate the trusts. {given_name} weighed the reformer's commission work against the corporate retainer, knowing the law of this age was building the machinery of government itself — and the {family_name} name would help decide whose hands ran it.",
+    ],
+    beats: [
+      {
+        prose: ["A reform governor offers a seat on the new regulatory commission — to leash the trusts from inside."],
+        choice: {
+          text: "Take the commission — the regulator writes the rules the barons must obey.",
+          motivatorShift: { politics: -1, power: 1 },
+          setFlags: ["g4_law_regulator"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["The trusts retain the family to fight the new antitrust + tax law in the high courts."],
+        choice: {
+          text: "Take the corporate brief — every regulation needs a lawyer to blunt it.",
+          motivatorShift: { wealth: 1, honor: 1 },
+          setFlags: ["g4_law_corporate_defense"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g4:progressive:open_military",
+    base: "military",
+    sense: "sound",
+    prose: [
+      "The drums beat for a modern army now, and {given_name} {surname}, an officer in the age of the Great White Fleet and the Plattsburg camps, heard in them the approach of a war that would dwarf all the family's prior service. The Progressive Era professionalized the sword — the General Staff, the new academies, the preparedness movement marching down Fifth Avenue. The {family_name} commission was being asked to become something larger: a place in the machine that would soon throw a million Americans across an ocean.",
+      "Word came up from Europe of the guns of August, of the Lusitania and the preparedness debate, of a country arguing whether the new century's war was America's to fight. {given_name} weighed neutral caution against the interventionists' fervor, knowing the officer who positioned the family rightly before the storm would ride the coming mobilization to a national name — or be swept under by it.",
+    ],
+    beats: [
+      {
+        prose: ["The preparedness movement offers a command in the expanding army before the war reaches America."],
+        choice: {
+          text: "Take the command early — the first officers of a great war write its history.",
+          motivatorShift: { power: 1, reach: 1 },
+          setFlags: ["g4_military_preparedness"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["Anti-war progressives ask the family's officer to lend his name against intervention."],
+        choice: {
+          text: "Counsel neutrality — a soldier who knows war is slow to spend the family's blood.",
+          motivatorShift: { honor: -1, worldview: 1 },
+          setFlags: ["g4_military_neutralist"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g4:progressive:open_press",
+    base: "press",
+    sense: "sight",
+    prose: [
+      "The {family_name} presses had gone electric, and {given_name} {surname} stood over a newsroom in the golden age of the muckrake: McClure's and Collier's exposing the trusts, the meatpackers, the patent-medicine frauds, the bosses. The Progressive Era ran on print that named the rot and demanded the cure — and a great paper could break a senator, pass a law, or launch a reform governor between editions. The {family_name} masthead was a power in the land, courted by reformers and trusts alike.",
+      "Word came up from the composing room of Sinclair's Jungle moving a nation to the Pure Food Act, of Tarbell dismantling Standard Oil in installments, of advertisers leaning on editors to soften the exposés that sold. {given_name} weighed crusade against caution, knowing the paper that chose rightly in this age could write reform into law — or, courted by the powerful, quietly become the thing it once exposed.",
+    ],
+    beats: [
+      {
+        prose: ["A muckraker brings an exposé that will topple a trust — and cost the paper its largest advertiser."],
+        choice: {
+          text: "Run the exposé — the muckrake is the press's highest calling now.",
+          motivatorShift: { worldview: 1, honor: -1 },
+          setFlags: ["g4_press_muckrake"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A reform machine offers the paper influence + access if it becomes their reliable organ."],
+        choice: {
+          text: "Make the paper the movement's voice — influence is worth a little independence.",
+          motivatorShift: { power: 1, reach: 1 },
+          setFlags: ["g4_press_reform_organ"],
+          gather: true,
+        },
+      },
+    ],
+  },
+];
+
+/**
  * Apply one act's base-flavored opening variants, idempotently: each variant scene is gated on its
  * `base:*` flag + diverts to `divertTo` (skipping the default `open`); the default `open` is gated to NOT
  * fire for any covered base (so an uncovered/default base — press at g0 — gets it). `actId` is the act,
@@ -683,6 +836,12 @@ const n3 = applyAct(
   "spine:g3:gildedage:venture",
   G3_VARIANTS,
 );
+const n4 = applyAct(
+  "spine:g4:progressive",
+  "spine:g4:progressive:open",
+  "spine:g4:progressive:allegiance",
+  G4_VARIANTS,
+);
 
 writeFileSync(PATH, `${JSON.stringify(doc, null, 1)}\n`);
-console.log(`inserted base-variant openings — g0: ${n0}, g1: ${n1}, g2: ${n2}, g3: ${n3}`);
+console.log(`inserted base-variant openings — g0: ${n0}, g1: ${n1}, g2: ${n2}, g3: ${n3}, g4: ${n4}`);
