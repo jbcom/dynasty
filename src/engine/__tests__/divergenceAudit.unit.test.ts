@@ -117,12 +117,11 @@ describe("WV-3 divergence audit (anti-Suzerain instrument)", () => {
     // A fully-succeeded line reaches the APEX ending across all seeds (the g9-succession fix the audit
     // surfaced — previously every seed wrongly extinguished at g9).
     for (const o of outcomes) expect(o.endKind, report).toBe("apex");
-    // FINDING (logged in `report`, recorded in the spec): on the SAGA path the run is near-IDENTICAL across
-    // seeds — same end kind/year/gens/money/convergence, only family-alive count varies. The seeded market
-    // substrate that diverges the EVENT path does not move the saga path (the saga clock doesn't run the
-    // systemic market tick). This near-zero divergence is exactly the Suzerain trap WV-3-YUKA must fix —
-    // the audit QUANTIFIES it rather than asserting it away. The next lever (per the spec) addresses it.
-    // This assertion just pins the instrument's own reproducibility (the report is the deliverable).
-    expect(spread.familyAliveDistinct, report).toBeGreaterThanOrEqual(1);
+    // WV-3-MORTALITY now diverges the saga path: the seeded disruption shocks (family deaths + meter blows)
+    // vary the runs in EVENTS — money is no longer flat across seeds (it was a single value before the
+    // lever), and the family-alive count spreads. The Suzerain trap is broken on the founded saga path while
+    // each seed stays bit-reproducible (the determinism test above). The `report` logs the full figure.
+    expect(spread.moneyDistinct, report).toBeGreaterThan(1);
+    expect(spread.familyAliveDistinct, report).toBeGreaterThan(1);
   });
 });
