@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.27.0](https://github.com/jbcom/dynasty/compare/v0.26.0...v0.27.0) (2026-06-23)
+
+
+### Features
+
+* **saga:** WV-3-SHOCK-RECOVERY — shocks rebound (two-act loss arc) ([#114](https://github.com/jbcom/dynasty/issues/114)) ([ec6da86](https://github.com/jbcom/dynasty/commit/ec6da86fe33366461ce929bfa89895ada273051f))
+
 ## [0.26.0](https://github.com/jbcom/dynasty/compare/v0.25.0...v0.26.0) (2026-06-23)
 
 
