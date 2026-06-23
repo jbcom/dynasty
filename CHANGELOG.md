@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.46.0](https://github.com/jbcom/dynasty/compare/v0.45.0...v0.46.0) (2026-06-23)
+
+
+### Features
+
+* a state-of-the-race summary line atop the Field dossier ([#155](https://github.com/jbcom/dynasty/issues/155)) ([1fa62ea](https://github.com/jbcom/dynasty/commit/1fa62ea69b99d68ad47d9c95819469ef3ab18ffd))
+
 ## [0.45.0](https://github.com/jbcom/dynasty/compare/v0.44.0...v0.45.0) (2026-06-23)
 
 
