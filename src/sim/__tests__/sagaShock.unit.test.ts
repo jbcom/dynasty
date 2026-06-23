@@ -56,6 +56,26 @@ describe("rollSagaShock (WV-3-MORTALITY)", () => {
     expect(harsh).toBeGreaterThan(future);
   });
 
+  it("SHOCK-CLUSTERING-GUARD: a recently-shocked line fires FEWER shocks (the cooldown dampens a death spiral)", () => {
+    let normal = 0;
+    let cooled = 0;
+    for (let i = 0; i < 400; i++) {
+      const seed = createRng(`cd${i}`);
+      // Same era/seed, only the recentlyShocked flag differs → the dampened roll fires strictly less often.
+      if (
+        rollSagaShock(family(), 1820, "founding", seed.fork(`n:${i}`), undefined, false).kind !==
+        "none"
+      )
+        normal++;
+      if (
+        rollSagaShock(family(), 1820, "founding", seed.fork(`c:${i}`), undefined, true).kind !==
+        "none"
+      )
+        cooled++;
+    }
+    expect(cooled).toBeLessThan(normal);
+  });
+
   it("never strikes the protagonist as the family_death victim", () => {
     // Sweep many seeds; every family_death victim must be a non-protagonist member.
     for (let i = 0; i < 300; i++) {

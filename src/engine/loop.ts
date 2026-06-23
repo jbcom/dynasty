@@ -652,12 +652,22 @@ export class Game {
     // SHOCK-FAMILY-SUCCESSION-PRESSURE: the GROOMED heir (the `heir_<id>` flag) is a likelier, sharper
     // target — so the shock can take the chosen successor, forcing a weaker fallback.
     const namedHeirId = this.state.flags.find((f) => f.startsWith("heir_"))?.slice("heir_".length);
+    // SHOCK-CLUSTERING-GUARD: was the line shocked within the last generation span? A `shock:*:<year>` flag
+    // with year in (fromYear - SPAN, fromYear) means a recent blow → dampen this tick (no death spirals).
+    // Derived from the persisted flags, so it replays identically without new state.
+    const recentlyShocked = this.state.flags.some((f) => {
+      const m = /^shock:(?:family_death|meter_blow):(\d+)$/.exec(f);
+      if (!m) return false;
+      const y = Number(m[1]);
+      return y < fromYear && fromYear - y < SAGA_GENERATION_SPAN;
+    });
     const shock = rollSagaShock(
       this.state.family,
       fromYear,
       era,
       this.rng.fork(`sagashock:${fromYear}`),
       namedHeirId,
+      recentlyShocked,
     );
     // WV-3-SHOCK-RECOVERY: a tick with NO new shock is when a PRIOR meter blow can rebound (the two-act
     // shape: blow → later partial recovery). Rolling recovery only on quiet ticks keeps a shock and its
