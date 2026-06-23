@@ -33,6 +33,10 @@ describe("TitleScreen — luxury Dynasty masthead + diegetic entry (CP-R5)", () 
     await new Promise((r) => setTimeout(r, 250));
     expect(host.querySelector("h1")?.textContent).toBe("Dynasty");
     expect(host.querySelector(".masthead .rule")).not.toBeNull();
+    // TITLE-CONTINUE-STATE-SHOT: props() defaults hasSave:true, so this captures the WITH-SAVE variant —
+    // Continue + Begin a Line + Settings together (the previously un-shot state). Assert Continue is present.
+    expect(host.textContent, "the with-save Title shows Continue").toContain("Continue");
+    expect(host.textContent).toContain("Begin a Line");
     await page.screenshot({ element: host.firstElementChild as Element });
   });
 
