@@ -1120,19 +1120,25 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ### Rolling backlog (post-WV-3 — keep this section ≥3 actionable, append before draining)
 
-- [ ] **SHOCK-LEDGER-RECOVERIES PR — wait CI green + address review, then self-squash-merge.** Pushed
-  feat/shock-ledger-recoveries (recovered:<meter>:<year> stamp + gold comeback ledger line). Loop: wait
-  build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge
-  once green ([[babysit-pr]]). After merge: sync main, next branch (CONVERGENCE-RIVAL-FINALE).
+- [ ] [WAIT-REVIEW] **SHOCK-LEDGER-RECOVERIES PR #124 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/shock-ledger-recoveries: recovered:<meter>:<year> stamp + gold comeback ledger line + the same
+  ledger in LegacyReport (LEDGER-IN-LEGACY-REPORT) + the shockCadence.unit audit (SHOCK-CADENCE-AUDIT), all as
+  forward commits. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve
+  threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next branch (CONVERGENCE-RIVAL-FINALE).
+- [ ] **SHOCK-AFTERMATH-IN-RIVALS — rivals weather their OWN shocks (the convergence layer feels alive).** WV-3
+  shocks + recoveries only touch the player's line; the reactive rival lines (advanceWorld escalation) never
+  stumble. Give rivals seeded setbacks/rebounds too, so a rival can falter mid-race (a window the player can
+  exploit) — surfaced in rivalStandings. Reuses rollSagaShock against rival state; pure + seeded; tested.
 - [x] **LEDGER-IN-LEGACY-REPORT — DONE (forward commit on feat/shock-ledger-recoveries / PR #124).** LegacyReport
   now renders the full shockLedger as a "The Family's Hard Seasons" section between the dynasty epitaph and the
   stats — every disaster (red) + comeback (gold) the line lived, so the close reflects the WHOLE saga's trials,
   not just the verdict. Hidden for a shock-free run. screens.browser test pins render + gold/red distinction +
   empty case. 873 node + 116 browser green, typecheck clean.
-- [ ] **SHOCK-CADENCE-AUDIT — instrument shock/recovery frequency across the hour, tune so neither dominates.**
-  WV-3 shocks fire era-weighted + recoveries on quiet ticks at 0.5/tick; no measurement confirms the felt
-  cadence (too sparse = no tension; too dense = noise). Add a deterministic instrument counting shocks +
-  recoveries per macro-act over many seeds; if a phase is starved or flooded, tune the era weights. Decide from figures.
+- [x] **SHOCK-CADENCE-AUDIT — DONE (forward commit on PR #124).** shockCadence.unit instruments the WV-3 shock +
+  recovery cadence per macro-act over 400 seeds. MEASURED figures: founding 31.5% → convergence 17.8% →
+  emergence 9.8% → ascension 4.5% shock rate (monotonic, founding 7× the future); recovery 48.5% on a quiet
+  tick with one outstanding blow. All in-band — no phase starved (0%) or flooded (100%), so NO tuning needed;
+  the test now guards the cadence as a regression. 877 node green.
 - [x] **DOSSIER-SHOCK-LEDGER PR #122 — DONE, MERGED (squash fc8c58e; release-please cuts 0.31.0).** Wait CI,
   folded both Gemini findings forward (exhaustive `Record<ShockLedgerEntry["kind"]>` ledger label + `new Set`
   flag dedup so a repeated `shock:*` can't crash the TimelineView `#each` key) in fe34b1b + regression test,
