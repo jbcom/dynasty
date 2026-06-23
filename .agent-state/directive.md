@@ -1125,10 +1125,12 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   ledger in LegacyReport (LEDGER-IN-LEGACY-REPORT) + the shockCadence.unit audit (SHOCK-CADENCE-AUDIT), all as
   forward commits. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve
   threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next branch (CONVERGENCE-RIVAL-FINALE).
-- [ ] **SHOCK-AFTERMATH-IN-RIVALS — rivals weather their OWN shocks (the convergence layer feels alive).** WV-3
-  shocks + recoveries only touch the player's line; the reactive rival lines (advanceWorld escalation) never
-  stumble. Give rivals seeded setbacks/rebounds too, so a rival can falter mid-race (a window the player can
-  exploit) — surfaced in rivalStandings. Reuses rollSagaShock against rival state; pure + seeded; tested.
+- [x] **SHOCK-AFTERMATH-IN-RIVALS — DONE (forward commit on PR #124).** advanceWorld now rolls a per-rival
+  seeded setback (rivalShock): a standing rival can STUMBLE (lose a rung, flagged `stumbled`/snapshot.faltering)
+  at an era-weighted rate (same macroActMedicine curve as the player's shock), then REBOUND (regain the rung) on
+  a later un-struck turn — the two-act blow→recover shape mirrored for the world. detectGlimpses surfaces a
+  faltering rival as "struggling" so the player SEES the window. The convergence race now feels alive: rivals
+  falter mid-climb, not just escalate. 879 node + 116 browser green, full gate (check/typecheck/test) clean.
 - [x] **LEDGER-IN-LEGACY-REPORT — DONE (forward commit on feat/shock-ledger-recoveries / PR #124).** LegacyReport
   now renders the full shockLedger as a "The Family's Hard Seasons" section between the dynasty epitaph and the
   stats — every disaster (red) + comeback (gold) the line lived, so the close reflects the WHOLE saga's trials,

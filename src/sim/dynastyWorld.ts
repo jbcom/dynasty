@@ -10,7 +10,8 @@
 
 import { climb, MAX_RUNG } from "./classRung";
 import { advanceAgent, createDynastyAgent, type DynastyAgent } from "./dynastyAgent";
-import { type Epoch, epochForYear, epochImpact } from "./macroActs";
+import { type Epoch, epochForYear, epochImpact, macroActForYear } from "./macroActs";
+import { macroActMedicine } from "./mortality";
 import { applyMotivators, type Motivators } from "./motivators";
 import type { Rng } from "./rng";
 import type { Place } from "./schema";
@@ -28,6 +29,9 @@ export interface RivalSnapshot {
   /** How the active epoch is treating this line this turn, [-1,1] (drives rise/fall). */
   tide: number;
   alive: boolean;
+  /** SHOCK-AFTERMATH-IN-RIVALS: the rival is in a seeded setback (lost a rung, not yet rebounded) — a
+   *  faltering competitor, a window the player can exploit. Surfaced in glimpses/standings. */
+  faltering: boolean;
 }
 
 /** The relation a rival holds toward the played line at an intersection. */
@@ -98,6 +102,7 @@ function snapshot(agent: DynastyAgent, epoch: Epoch | null): RivalSnapshot {
     strategy: agent.strategy ?? "endure",
     tide,
     alive: true,
+    faltering: agent.stumbled ?? false,
   };
 }
 
@@ -151,9 +156,45 @@ export function advanceWorld(
           marks: [],
         }).rung;
     }
+    // SHOCK-AFTERMATH-IN-RIVALS: rivals weather their OWN seeded setbacks, so the convergence race feels
+    // alive — a rival can falter mid-climb (a window the player can exploit), then rebound. Era-weighted off
+    // the same macro-act medicine as the player's shock (a founding-era rival is far more exposed than an
+    // interstellar one). Deterministic per (agent, year). A stumbled rival REBOUNDS (regains the rung) on a
+    // later turn it survives un-struck — the two-act blow→recover shape, mirrored for the world.
+    rivalShock(agent, year, rng.fork(`rivalshock:${agent.id}:${year}`));
     snapshots.push(snapshot(agent, epoch));
   }
   return { rivals: world.rivals, snapshots };
+}
+
+/** Per-turn base chance a rival takes a setback, before era-weighting. Tuned alongside the player's
+ *  BASE_SHOCK_CHANCE (0.33) but lower — the world shouldn't churn faster than the played line. */
+const RIVAL_SHOCK_CHANCE = 0.22;
+
+/**
+ * SHOCK-AFTERMATH-IN-RIVALS: roll + apply one seeded setback/rebound to a rival, in place. A rival not
+ * currently stumbled may STUMBLE (lose a rung, flagged `stumbled`) at an era-weighted rate; a rival that is
+ * stumbled REBOUNDS the next turn it isn't struck again (regains the rung, clears the flag) — the two-act
+ * blow→recover shape mirrored for the world. Floored exposure so even the far future isn't fully safe, and a
+ * rung-0 rival can't drop below the ladder. Deterministic for (agent, year, rng). Mutates the agent like the
+ * climb logic above (advanceWorld owns the world's mutation).
+ */
+function rivalShock(agent: DynastyAgent, year: number, rng: Rng): void {
+  const exposure = Math.max(0.15, 1 - macroActMedicine(macroActForYear(year)));
+  const struck = rng.fork("hit").chance(RIVAL_SHOCK_CHANCE * exposure);
+  if (agent.stumbled) {
+    // Already down — a turn without a fresh blow lets the line claw the rung back (rebound).
+    if (!struck) {
+      agent.rung = Math.min(MAX_RUNG, agent.rung + 1);
+      agent.stumbled = false;
+    }
+    return;
+  }
+  // Standing — a fresh setback drops a rung (never below the ladder floor) and marks the rival faltering.
+  if (struck && agent.rung > 0) {
+    agent.rung = Math.max(0, agent.rung - 1);
+    agent.stumbled = true;
+  }
 }
 
 /**
@@ -200,7 +241,15 @@ export function detectGlimpses(
     let relation: Relation = "neutral";
     if (s.strategy === playerStrategy) relation = "opposing";
     else if (COMPLEMENT[playerStrategy] === s.strategy) relation = "contributing";
-    const note = s.tide > 0.3 ? "rising" : s.tide < -0.3 ? "struggling" : "holding";
+    // SHOCK-AFTERMATH-IN-RIVALS: a faltering rival (mid-setback) reads "struggling" regardless of tide — the
+    // player should SEE the window the rival's stumble opens, not just its epoch fit.
+    const note = s.faltering
+      ? "struggling"
+      : s.tide > 0.3
+        ? "rising"
+        : s.tide < -0.3
+          ? "struggling"
+          : "holding";
     out.push({ rivalId: s.id, label: s.label, relation, note, rung: s.rung });
     if (out.length >= max) break;
   }

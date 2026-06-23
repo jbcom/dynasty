@@ -132,4 +132,56 @@ describe("dynasty world (SS-8)", () => {
     // The snapshot the UI/convergence reads reflects the nudge immediately (not just the agent).
     expect(after?.rung).toBe(Math.min(before + 1, 5));
   });
+
+  it("SHOCK-AFTERMATH-IN-RIVALS: rivals take seeded setbacks (faltering) and rebound, era-weighted + deterministic", () => {
+    // Over a founding-era run (harsh exposure), at least one rival must FALTER at some point — a snapshot with
+    // faltering=true — proving the world weathers its own shocks, not just the player's line.
+    const run = (seed: string) => {
+      let w = createDynastyWorld(content.places, "ireland", createRng(seed));
+      let sawFalter = false;
+      let sawRebound = false;
+      const wasFaltering = new Set<string>();
+      for (let y = 1780; y <= 1860; y += 5) {
+        w = advanceWorld(w, y, createRng(seed));
+        for (const s of w.snapshots) {
+          if (s.faltering) {
+            sawFalter = true;
+            wasFaltering.add(s.id);
+          } else if (wasFaltering.has(s.id)) {
+            // a rival that WAS faltering is no longer → it rebounded.
+            sawRebound = true;
+          }
+        }
+      }
+      return { sawFalter, sawRebound };
+    };
+    // Deterministic: the same seed yields the same falter/rebound history.
+    expect(run("rs1")).toEqual(run("rs1"));
+    // Across a harsh founding run, some rival falters AND some rebound is observed (the two-act shape).
+    const sweep = ["rs1", "rs2", "rs3", "rs4"].map(run);
+    expect(
+      sweep.some((r) => r.sawFalter),
+      "a rival falters in the harsh founding era",
+    ).toBe(true);
+    expect(
+      sweep.some((r) => r.sawRebound),
+      "a faltered rival rebounds on a later quiet turn",
+    ).toBe(true);
+  });
+
+  it("SHOCK-AFTERMATH-IN-RIVALS: the far-future (medicine-rich) world falters FAR less than the founding era", () => {
+    // Era-weighting: count faltering snapshots across a harsh founding sweep vs an interstellar sweep.
+    const falterCount = (startYear: number) => {
+      let total = 0;
+      for (const seed of ["e1", "e2", "e3"]) {
+        let w = createDynastyWorld(content.places, "ireland", createRng(seed));
+        for (let y = startYear; y < startYear + 60; y += 5) {
+          w = advanceWorld(w, y, createRng(seed));
+          total += w.snapshots.filter((s) => s.faltering).length;
+        }
+      }
+      return total;
+    };
+    expect(falterCount(1780)).toBeGreaterThan(falterCount(2300));
+  });
 });

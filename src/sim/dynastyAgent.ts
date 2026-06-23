@@ -42,6 +42,10 @@ export interface DynastyAgent extends GoapOwner {
   rung: number;
   /** The strategy the brain chose this turn (null until first tick). */
   strategy: DynastyStrategy | null;
+  /** SHOCK-AFTERMATH-IN-RIVALS: the rival took a seeded setback (lost a rung) and has not yet rebounded —
+   *  a window the player can exploit. Transient run state (rebuilt deterministically by advanceWorld), like
+   *  `strategy`; not serialized. */
+  stumbled?: boolean;
   /** The line's GOAP brain (not serialized directly; rebuilt from archetype+motivators on load). */
   brain?: GoapBrain<DynastyAgent>;
 }
