@@ -84,11 +84,11 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   validated GAME_TRIGGERS → woven threads, no RNG, replay-identical. Memory in the saved `flags` set via the
   `crossed:` convention (no schema change). +1 test, 715 green. (Full per-branch fabric PROSE weaving +
   recordCrossing-on-activation deepen with FS-6's authored spine; live-verify the recurring payoff there.)
-- [ ] [WAIT] **FS-6 author the spine prose — RUNNING (bg).** Tooling DONE (committed): scripts/genai-spine.ts
-  + validateSpineFile + sharpened buildSpinePrompt. Gen 0 (1776 Philadelphia) authored + VERIFIED: era-distinct
-  ALLEGIANCE turn (Patriot/Loyalist/Neutral — revolution factions, NOT the old template) + succession close.
-  Pipeline proven. Full 10-gen run launched in background (incremental write to src/data/saga/spine.act.json).
-  ON completion: read each generation, confirm era-distinct decisions + quality, commit; then QA pass.
+- [ ] [WAIT] **FS-6 author the spine prose — RUNNING (bg, ~7/10).** Gen 0 (1776) + several gens authored +
+  VERIFIED era-distinct (allegiance/platform/etc.). A few gens (g5/g7) hit schema object-drift the OLD
+  normalizer missed → IMPROVED normalizeSceneFile this turn (now coerces acts[]/acts[].scenes/requires.flags
+  object→array; uncommitted, part of held FS-6). ON run completion: re-gen the skipped gens with the fixed
+  normalizer, read each generation, then update corpus tests (FS-6c) + joint-commit FS-6/6b/6c. [WAIT] the run.
 - [x] **FS-6b archetypal-DESTINY endings — CODE DONE (uncommitted, holding for joint commit).** convergence.ts:
   added `Destiny` type + tagged the lattice: 3 distinct STELLAR finales (stellar_conquest=seize colonies /
   stellar_allies=forge allies / stellar_hidden=alone on a quiet world) + 6 NAMED earthly destinies (dictator/
