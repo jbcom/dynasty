@@ -1343,9 +1343,9 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   close reflects the path taken, not one flat line (the LegacyReport already showed the destiny-specific
   convergence prose; this fixes the reason line too). Tests: loop.unit (apex reason is path-specific). 905 node
   + 131 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **STELLAR-EPILOGUE-VARIETY PR — push, open PR, full remote loop.**
-  1 commit (destiny-keyed apex reason). Full local gate passed. Push, open PR, wait CI, fold review forward +
-  resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, DEAD-LINE-IN-FIELD.
+- [ ] [WAIT-REVIEW] **STELLAR-EPILOGUE-VARIETY PR #151 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/stellar-epilogue-variety (1b20414). Full local gate passed. Loop: wait build-and-test + CodeQL,
+  fold review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, DEAD-LINE-IN-FIELD.
 - [ ] **DEAD-LINE-IN-FIELD — a rival stuck at rung 0 reads as fallen, not just low.** A line stuck
   at the ladder floor is effectively out of the race, but the dossier shows it the same as a low-but-climbing one.
   Mark a long-rung-0 rival "fallen" (a distinct dossier state) so the field reads the eliminations, not just the
