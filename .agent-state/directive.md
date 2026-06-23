@@ -89,11 +89,18 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   ALLEGIANCE turn (Patriot/Loyalist/Neutral — revolution factions, NOT the old template) + succession close.
   Pipeline proven. Full 10-gen run launched in background (incremental write to src/data/saga/spine.act.json).
   ON completion: read each generation, confirm era-distinct decisions + quality, commit; then QA pass.
-- [ ] **FS-6b archetypal-DESTINY endings.** Re-skin/expand convergence.ts into NAMED dynasty destinies for
-  the ONE line (religious leader / communard / dictator / oligarch / crime leader / media mogul / …) +
-  multiple distinct STELLAR finales: forge allies, seize colonies, or end ISOLATED+ALONE on a quiet planet.
-  Gated by accumulated deterministic state (motivators/power-base/path); folds in [[crime-power-axis]]'s
-  crime-planet finale. Tests: each destiny reachable + gated; determinism.
+- [x] **FS-6b archetypal-DESTINY endings — CODE DONE (uncommitted, holding for joint commit).** convergence.ts:
+  added `Destiny` type + tagged the lattice: 3 distinct STELLAR finales (stellar_conquest=seize colonies /
+  stellar_allies=forge allies / stellar_hidden=alone on a quiet world) + 6 NAMED earthly destinies (dictator/
+  crime_leader/oligarch/media_mogul/religious_leader/communard), gated by motivators+tier; resolveConvergence
+  resolves stellar→destiny→contributed→earthbound. Convergence tests rewritten + GREEN. Folds in
+  [[crime-power-axis]] crime-leader finale. HOLDING the commit: 2 corpus-count tests (loadSaga "exactly 504",
+  DEPTH-1 close-succession) now fail because the in-flight FS-6 spine.act.json adds a NEW corpus member — those
+  are FS-6's tests to update once the spine run lands (counts stable). Commit FS-6b + FS-6 together when green.
+- [ ] [WAIT] **FS-6c update corpus-shape tests for the spine member — after the FS-6 run.** loadSaga "exactly
+  504 acts" + DEPTH-1 close-succession assume the 504-cell corpus; the spine.act.json is a new member with
+  spine: ids. Update both to account for the spine (count = 504 + spine acts; DEPTH-1 scopes to cell acts or
+  includes spine closes). Then commit FS-6 (spine prose) + FS-6b (destinies) + FS-6c together, green.
 - [ ] **FS-7 onboarding → diegetic EPOCH-0 BIRTH.** One line cleans up onboarding back toward the original
   Epoch-0 plan ([[novel-not-fragments]], the OB-* birth work): start DIEGETICALLY + COMPOSE the family as
   the progenitor grows from birth into a man/woman — given name, gender, class, FIRST JOB, BEST FRIEND,
