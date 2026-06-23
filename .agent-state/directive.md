@@ -84,13 +84,11 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   validated GAME_TRIGGERS → woven threads, no RNG, replay-identical. Memory in the saved `flags` set via the
   `crossed:` convention (no schema change). +1 test, 715 green. (Full per-branch fabric PROSE weaving +
   recordCrossing-on-activation deepen with FS-6's authored spine; live-verify the recurring payoff there.)
-- [ ] [WAIT] **FS-6 author the spine prose — ALL 10 AUTHORED + verified; cleaning orphans (bg regen g0/6/8).**
-  All 10 generations authored + VERIFIED era-distinct (bargain→allegiance→venture→reckoning→platform→doctrine→
-  expansion across the 10; the sameness is DISSOLVED). Fixed normalizeSceneFile (acts[]/requires object-drift)
-  + bumped runner retries to 4. Caught an ORPHAN-scene integrity bug (model emitted scenes not in the act's
-  scenes[]) → added orphan check to validateSpineFile + dropped+regenerating g0/g6/g8 cleanly (bg). Corpus
-  tests updated (loadSaga 504 cell + 10 spine; DEPTH-1 scoped to cell-acts + new spine-close test). ON regen
-  completion: full suite green → joint-commit FS-6/6b/6c. [WAIT] the regen.
+- [x] **FS-6/6b/6c — DONE (committed b3b019f).** All 10 spine generations (1776→stars) authored + verified
+  era-distinct (bargain→allegiance→venture→reckoning→platform→doctrine→expansion; sameness DISSOLVED). Named
+  destiny endings (3 stellar finales + 6 earthly). Spine clean (0 orphans/dangling) via hardened generator
+  (normalizer acts[]/requires coercion, validateSpineFile orphan check, retries=4). Corpus tests updated
+  (504 cell + 10 spine). tsc 0, 720 green.
 - [x] **FS-6b archetypal-DESTINY endings — CODE DONE (uncommitted, holding for joint commit).** convergence.ts:
   added `Destiny` type + tagged the lattice: 3 distinct STELLAR finales (stellar_conquest=seize colonies /
   stellar_allies=forge allies / stellar_hidden=alone on a quiet world) + 6 NAMED earthly destinies (dictator/
@@ -103,12 +101,10 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   504 acts" + DEPTH-1 close-succession assume the 504-cell corpus; the spine.act.json is a new member with
   spine: ids. Update both to account for the spine (count = 504 + spine acts; DEPTH-1 scopes to cell acts or
   includes spine closes). Then commit FS-6 (spine prose) + FS-6b (destinies) + FS-6c together, green.
-- [ ] [WAIT] **FS-7 onboarding → diegetic EPOCH-0 BIRTH — after FS-6 joint commit.** (Shares the working tree
-  with the uncommitted FS-6b/normalizer changes + the actively-writing spine.act.json; can't cleanly land
-  until FS-6/6b/6c commit.) One line cleans up onboarding toward the original Epoch-0 plan
-  ([[novel-not-fragments]]): start DIEGETICALLY + COMPOSE the family as the progenitor grows from birth into
-  a man/woman — given name, gender, class, FIRST JOB, BEST FRIEND, LIFE PARTNER — story SEEDS lived, not a
-  wave×class cell menu. Reuse ONB-1 naming. [WAIT] FS-6.
+- [ ] **FS-7 onboarding → diegetic EPOCH-0 BIRTH — UNBLOCKED (FS-6 committed).** One line cleans up
+  onboarding toward the original Epoch-0 plan ([[novel-not-fragments]]): start DIEGETICALLY + COMPOSE the
+  family as the progenitor grows from birth into a man/woman — given name, gender, class, FIRST JOB, BEST
+  FRIEND, LIFE PARTNER — story SEEDS lived, not a wave×class cell menu. Reuse ONB-1 naming.
 - [ ] [WAIT] **FS-8 live-verify the hour+ playthrough — after the spine is authored + wired.** One line
   1776→stars, waves braiding in, era-distinct decisions, reads as ONE strong story. THEN revisit the visual
   layer. [WAIT] FS-6/FS-7.
