@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
 import {
   applySuffix,
+  dealFoundingSurname,
   getCulture,
   type KinNames,
   nameChild,
@@ -66,6 +67,29 @@ describe("FD-5 pickGivenName", () => {
       expect(deduped).not.toBe(drawn);
       expect(irish.givenMale).toContain(deduped);
     }
+  });
+});
+
+describe("EI-6b dealFoundingSurname", () => {
+  it("deals a non-empty family name from the seed", () => {
+    const s = dealFoundingSurname(createRng("run1"));
+    expect(s).toMatch(/\S/);
+  });
+
+  it("is deterministic for a given seed (provisional == final founding name)", () => {
+    // The OpeningScreen provisional and App's final founding both deal with `${seed}::founding:surname`;
+    // they MUST agree so the naming beat speaks the exact name the founded line carries.
+    expect(dealFoundingSurname(createRng("seedA::founding:surname"))).toBe(
+      dealFoundingSurname(createRng("seedA::founding:surname")),
+    );
+  });
+
+  it("varies across seeds (different lines get different houses)", () => {
+    const names = new Set(
+      ["a", "b", "c", "d", "e", "f", "g", "h"].map((s) => dealFoundingSurname(createRng(s))),
+    );
+    // The neutral pool has 8 names; 8 distinct seeds should surface more than one house.
+    expect(names.size).toBeGreaterThan(1);
   });
 });
 

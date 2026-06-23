@@ -8,7 +8,7 @@ import { initMeters } from "../../../sim/meters";
 import { initState } from "../../../sim/state";
 import { applyBrandTokens, makeHost } from "../../__tests__/visualHarness";
 import LegacyReport from "../LegacyReport.svelte";
-import OnboardingScreen from "../OnboardingScreen.svelte";
+import OpeningScreen from "../OpeningScreen.svelte";
 import PlayScreen from "../PlayScreen.svelte";
 import TitleScreen from "../TitleScreen.svelte";
 
@@ -102,7 +102,7 @@ describe("safe-area audit (MOBILE-SAFE-AREA-AUDIT)", () => {
     );
   });
 
-  it("SAFE-AREA-ONBOARDING-TITLE: the Title and Onboarding screens pad BOTH the top and bottom insets", () => {
+  it("SAFE-AREA-OPENING-TITLE: the Title and Opening screens pad BOTH the top and bottom insets", () => {
     // Title — the first screen; its container pads top (masthead) + bottom (action buttons).
     component = mount(TitleScreen, {
       target: host,
@@ -114,18 +114,17 @@ describe("safe-area audit (MOBILE-SAFE-AREA-AUDIT)", () => {
       /\.panel-screen[^}]*safe-area-inset-bottom/,
     );
 
-    // Onboarding — the funnel; its container pads top + bottom so the choice cards clear the insets.
+    // Opening — the lived Epoch-0 emergence (EI-6b); its container pads top + bottom so the SceneReader's
+    // prose + glowing choices clear the insets.
     unmount(component);
-    component = mount(OnboardingScreen, {
+    component = mount(OpeningScreen, {
       target: host,
-      props: { content: realContent, onComplete: () => {}, onCancel: () => {} },
+      props: { content: realContent, seed: "audit-seed", onComplete: () => {}, onCancel: () => {} },
     });
     css = allCssText();
-    expect(css, "onboarding pads safe-area-inset-top").toMatch(
-      /\.onboarding[^}]*safe-area-inset-top/,
-    );
-    expect(css, "onboarding pads safe-area-inset-bottom").toMatch(
-      /\.onboarding[^}]*safe-area-inset-bottom/,
+    expect(css, "opening pads safe-area-inset-top").toMatch(/\.opening[^}]*safe-area-inset-top/);
+    expect(css, "opening pads safe-area-inset-bottom").toMatch(
+      /\.opening[^}]*safe-area-inset-bottom/,
     );
   });
 });

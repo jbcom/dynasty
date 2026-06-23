@@ -90,6 +90,18 @@ export function suggestSurnames(culture: Culture, rng: Rng, count = 3): string[]
 }
 
 /**
+ * EI-6b — DEAL the founding surname from the world seed alone (the emergent-infancy opening bestows no
+ * surname menu; the line's family name is dealt at birth, not picked). Region-INDEPENDENT by design: the
+ * surname must be identical whether resolved by the OpeningScreen's provisional line (to speak {full_name}
+ * during the naming beat) or by App's final emergent founding — and the emergent region isn't known until
+ * the opening ends. Drawing from the period-appropriate neutral Anglo-American pool keyed on the seed alone
+ * guarantees both sites agree. Pure + seeded → same seed → same family name.
+ */
+export function dealFoundingSurname(rng: Rng): string {
+  return rng.pick([...NEUTRAL_SURNAMES]);
+}
+
+/**
  * GIVEN-NAME SUGGESTIONS (OB-3 diegetic bestowal) — the parallel of suggestSurnames for the
  * founder's first name. A seeded, de-duplicated selection of `count` culture- + sex-
  * appropriate given names the player picks from at the naming beat (or types their own).

@@ -143,17 +143,84 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   the buildEpoch0Opening scene chain (reusing the saga's pure applyBeatChoice/applyDecision accrual), a gathering
   beat stays in-scene, the romance close ends it; the accumulated flags + cues resolve a valid founding via EI-6a.
   Test: openingRunner.unit (start, gather-then-advance, FULL walk → founding, determinism). 946 node green.
-- [ ] **EI-6b-ui OPENING SCREEN + WIRE + RETIRE FUNNEL (UI + engine + e2e)** — build an OpeningScreen that drives the
-  SceneReader through the opening runner (glowing-inline), seed-deals the diegetic identity (surname/given/gender so
-  the naming tokens resolve), and on openingEnded calls back the accumulated flags; App's New Game path opens it (not
-  the .card funnel), then resolveEmergentFounding → resolveFoundingStart → foundByComposition. Retire the
-  OnboardingScreen funnel + its tests; full gate INCL. e2e (the entry-flow e2e walks the new opening). The big
-  entry-flow change — scope carefully (founding reorder, term resolution during the opening, surname dealing). Tested.
-- [ ] [WAIT] **EI-7 PORTRAIT-TEXT-WRAP LAYOUT (user, 2026-06-23)** — the scene prose must FLOW alongside the portrait and
-  then continue DOWN BELOW it (a magazine wrap — float/shape the portrait, text wraps beside then under), not
-  portrait-block-then-text-block stacked. Applies to the SceneReader / play surface. Visual; screenshot + READ that
-  the wrap reads as intended at mobile width. (Portraits are an ESTABLISHED part of the game — [[visual-layer-revival]].)
-- [ ] [WAIT] **EI-8 GENAI LIFE-STAGE × ERA × ENCOUNTER PORTRAITS (user, 2026-06-23)** — the existing GenAI image pipeline
+- [x] **EI-6b-ui OPENING SCREEN + WIRE + RETIRE FUNNEL — DONE (branch feat/ei6b-ui-opening-screen).** New
+  `src/ui/screens/OpeningScreen.svelte` drives the SceneReader through the pure opening runner (glowing-inline beats +
+  decision), founding a PROVISIONAL line up front so the naming beat's {full_name}/{child_kind} tokens resolve, then on
+  openingEnded handing the accumulated flags + dealt cues to App. App's New Game now opens it via `{#key pendingSeed}`
+  (startNewGame draws a hidden seed → screen "opening"; birthGameFromEmergence runs resolveEmergentFounding →
+  resolveFoundingStart → foundByComposition). The family name is SEED-DEALT region-independently
+  (`dealFoundingSurname`, new onomastics export) so provisional == final founding name. Retired the OnboardingScreen
+  funnel + its two tests; rewired SafeAreaAudit + reducedMotion + e2e to the new opening. Full gate green: check 0,
+  typecheck 0/0, unit 950, browser 161, e2e 7, build OK.
+- [x] **EI-7 PORTRAIT-TEXT-WRAP LAYOUT — DONE (branch feat/ei6b-ui-opening-screen, commit 29435b2).** The
+  SceneReader portrait now FLOATS at the head of the prose block at every width: the scene text flows ALONGSIDE
+  the engraving and continues DOWN BELOW it (a magazine wrap), not a portrait-block-then-text-block stack. Moved
+  the portrait inside .scene-body (a float only wraps text within its own block); .scene-body carries the measured
+  ~62ch reading column so the float sits inside the measure; shape-outside rounds the wrap to the plate. Verified
+  live (mobile 412px screenshot — prose hugs the plate's left edge then reclaims the column below) + a structural
+  test (float:right, shape-outside set, portrait precedes the prose in .scene-body).
+- [ ] **EI-9 COMPLETE THE PORTRAIT-MATRIX ASSET SWEEP** — the EI-8 wiring is live + the founding-era slice is
+  generated, but the full composite matrix (other era bands × life-stages × encounter roles, ~294+ keys) isn't on
+  disk yet; the on-demand cache covers gaps at runtime but a pre-gen pass gives the shipped build real portraits
+  across the centuries. Run `pnpm vite-node scripts/genai-portraits.ts` (the Gemini image key is wired) era-band by
+  era-band; idempotent (skips existing). READ a sample from each era band + a high-rung archetype (CEO/celebrity/
+  cult-leader/crime) to confirm the wardrobe reads. Asset-only; commit per era band so the diff stays reviewable.
+- [ ] [WAIT] **EI-6b-ui + EI-7 + EI-8 PR #194 — merge on green.** 3 local reviewers clean; Amazon-Q placeById-guard
+  folded (29435b2). EI-8a–f shipped (composite portrait matrix, on-demand cache, founding-era assets). Live-verified
+  in Chrome (emergence opens on "You are born…", senses→4 glowing inline sense-choices→naming speaks "Gwendolyn
+  Calloway"/"daughter"; portrait magazine-wraps the prose). Squash-merge once
+  CLEAN + 0 unresolved threads, then sync main + a fresh branch for EI-8.
+- [x] **EI-8 ENUMERATE THE PORTRAIT-DEMAND MATRIX — DONE (spec).** Wrote the full demand matrix into the EI spec
+  (docs/.../2026-06-23-emergent-infancy-onboarding-design.md §"EI-8 — the portrait-demand MATRIX"), grounded in the
+  real enums: 5 LIFE-STAGES (infant/child/youth/adult/elder) × 8 fine ERA BANDS (founding_1700s…stellar, NOT the 4
+  macro-acts) × 7 ARCHETYPES (the 6 ARCHETYPES + crime/cult [[crime-power-axis]]) × 3 RUNG TIERS (the 4×6 ladders →
+  low/mid/high) × optional ENCOUNTER role. Composite cache key `portrait:<lifeStage>:<eraBand>:<archetype>:<rungTier>`
+  (+ `:enc:<role>` variant, gender suffix); 1680-key protagonist space → generate-on-demand + cache, never blanket.
+  Surfaced 6 build sub-steps (below).
+- [x] **EI-8a ERA-BAND RESOLVER + 8-entry ERA_VISUAL — DONE (branch feat/ei6b-ui-opening-screen).** portrait.ts:
+  `EraBand` type + `ERA_BANDS` table + pure `eraBandForYear(year)` (8 fine bands, inclusive upper bounds) +
+  `ERA_VISUAL` grown 4→8 entries; `buildPortraitPrompt` now resolves the band from `act.year` (not the coarse
+  macro-act). 9 unit tests (band boundaries + the 1790≠1990≠stars distinction + the prompt tracks the fine band).
+  Gate: unit 954, browser 161, check 0, typecheck 0/0.
+- [x] **EI-8b lifeStage + rungTier derivations — DONE (branch feat/ei6b-ui-opening-screen).** New pure module
+  src/sim/genai/portraitFacets.ts: `lifeStageForAge(age)` (5 stages, inclusive bands, neg→infant) +
+  `rungTierForRung`/`rungTierForState` (highest current rung across the ladders → low/mid/high). 7 unit tests
+  (stage + tier boundaries, peak-across-ladders, empty-ladder=low). Gate: check 0, typecheck 0/0.
+- [x] **EI-8c wardrobeFor(archetype, rungTier) register table (21 entries) — DONE (branch feat/ei6b-ui-opening-screen).**
+  portraitFacets.ts: `PortraitArchetype = Archetype | "crime"` (a PORTRAIT-LAYER superset — the full crime POWER
+  AXIS stays its own [[crime-power-axis]] milestone, NOT half-wired through every Record<Archetype> in the sim) +
+  a 21-entry `WARDROBE` table + `wardrobeFor(archetype, tier)`. High-rung registers read as the user's named paths
+  (CEO / celebrity / cult-leader / crime boss), deepening with rung. 10 unit tests (21-cell coverage + per-archetype
+  tier scaling + named-path checks). Gate: check 0, typecheck 0/0.
+  NOTE: adding `crime` to the SIM Archetype union (3 Record<Archetype> tables + callings + agents) remains the
+  separate crime-axis milestone; EI-8c deliberately scopes to portraits only.
+- [x] **EI-8d composite prompt + key + encounter variant — DONE (branch feat/ei6b-ui-opening-screen).** portrait.ts:
+  `PortraitFacets` + `buildCompositePortraitPrompt`/`compositePortraitKey` (key `portrait:<lifeStage>:<eraBand>:
+  <archetype>:<rungTier>:<g>`, wardrobe muted for infant/child) and `EncounterFacets` +
+  `buildEncounterPortraitPrompt`/`encounterPortraitKey` (`portrait:enc:<role>:<lifeStage>:<eraBand>:<g>`, role
+  token normalized). Signature engraving style rides every prompt. 14 unit tests. Gate: check 0, typecheck 0/0.
+- [x] **EI-8e on-demand generate+cache layer — DONE (branch feat/ei6b-ui-opening-screen).** New
+  src/sim/genai/portraitCache.ts: `PortraitCache` interface (has/get/put) + pure `resolvePortrait(key, prompt,
+  cache, generate)` (cache-first, ONE generation per missing key, store-then-serve; nulls NOT cached so they
+  retry) + `memoryPortraitCache`. Offline tooling — the sim only references keys, never calls a generator (sim
+  purity). 4 unit tests (hit, miss→gen-once→hit, null-not-cached-retries, ≤1 gen per distinct key). Gate: check 0,
+  typecheck 0/0.
+- [x] **EI-8f wire portrait lookup to the composite key + founding-era assets — DONE (branch feat/ei6b-ui-opening-screen).**
+  PlayScreen derives the portrait asset from the EI-8 composite key built from live state (lifeStage(age) ×
+  eraBand(year) × archetype/wardrobe × rungTier(ranks) × gender). Rewrote scripts/genai-portraits.ts to sweep the
+  composite matrix through the EI-8e on-demand cache + write composite-key filenames. GENERATED the founding-era
+  (1700s) adult slice (economic/political/technological × low/mid/high × both genders — 26 real engraving portraits,
+  READ the founding economic_low_m: a candle-lit colonial gentleman, signature aquatint). Retired the 20 orphaned
+  spine_g* assets. Gate: check 0, typecheck 0/0, browser 161, e2e 7.
+  FOLLOW-UP (umbrella, separate asset pass): complete the full 294-key matrix generation (other era bands /
+  life-stages / encounter roles) — on-demand cache fills gaps at runtime meanwhile; needs the Gemini image key, so
+  it runs as a dedicated keyed asset-gen pass, not blanket here.
+- [x] **EI-8 GENAI LIFE-STAGE × ERA × ENCOUNTER PORTRAITS — CORE DONE (EI-8a–f shipped).** The full demand matrix
+  (life-stage × fine era band × archetype/path-wardrobe × rung tier × encounter role) is enumerated, the composite
+  prompt + key + on-demand cache are built and wired into the play surface, and the founding-era slice is generated.
+  Remaining = the full-matrix ASSET generation pass (a keyed offline sweep — [[never ask direction]]: runs as its own
+  asset-gen task; the on-demand cache covers gaps at runtime). Below is the original user spec, kept for reference.
+- [ ] [WAIT] **EI-8 ORIGINAL SPEC (reference, user 2026-06-23):** the existing GenAI image pipeline
   must generate portraits matched to LIFE STAGE (infant / child / youth / adult / elder — the cycles of birth →
   growth → death recur every generation) AND to the ERA the beat sits in (not just the 3 coarse macro-bands —
   the line runs 1770s→stars over 300+ years, so a child in 1790 ≠ a child in 1990 ≠ a child among the stars), AND

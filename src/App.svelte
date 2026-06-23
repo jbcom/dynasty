@@ -14,25 +14,22 @@ import { setSoundEnabled } from "./ui/sound";
 import type { Content } from "./sim/content";
 import { foundByComposition } from "./sim/founding";
 import { FOUNDING_YEAR } from "./sim/macroActs";
-import type { LifeSeedChoices } from "./sim/saga/lifeSeeds";
 import { dealComposition, placeById } from "./sim/places";
-import {
-  type FoundingRegion,
-  type PowerBase,
-  regionPlaceId,
-  resolveFoundingStart,
-  type Standing,
-} from "./sim/foundingOrigin";
+import { regionPlaceId, resolveFoundingStart } from "./sim/foundingOrigin";
+import { dealFoundingSurname } from "./sim/onomastics";
+import { createRng } from "./sim/rng";
 import type { GameState } from "./sim/state";
 import { GameStore } from "./ui/gameStore.svelte";
 import { FormFactorStore } from "./ui/formFactor.svelte";
 import PlayScreen from "./ui/screens/PlayScreen.svelte";
 import LegacyReport from "./ui/screens/LegacyReport.svelte";
-import OnboardingScreen from "./ui/screens/OnboardingScreen.svelte";
+import OpeningScreen from "./ui/screens/OpeningScreen.svelte";
 import SettingsScreen from "./ui/screens/SettingsScreen.svelte";
 import TitleScreen from "./ui/screens/TitleScreen.svelte";
+import { resolveEmergentFounding } from "./sim/founding/resolveEmergentFounding";
+import type { SenseCue } from "./sim/founding/senseEmergence";
 
-type Screen = "title" | "onboarding" | "play" | "settings";
+type Screen = "title" | "opening" | "play" | "settings";
 
 const content: Content = loadContent();
 const formFactor = new FormFactorStore();
@@ -42,6 +39,8 @@ let storage = $state<Storage | undefined>();
 let saveExists = $state(false);
 let screen = $state<Screen>("title");
 let store = $state<GameStore | undefined>();
+// EI-6b-ui: the hidden seed for the in-progress emergence (drawn when New Game opens the OpeningScreen).
+let pendingSeed = $state<string | undefined>();
 let settings = $state<Settings>(DEFAULT_SETTINGS);
 
 // Resolve persistent storage, check for an existing save, and load settings on mount.
@@ -79,49 +78,45 @@ $effect(() => {
   setSoundEnabled(settings.sound);
 });
 
-// FOUND THE RUN (OB-3): the onboarding chose the PLACE (geography) + bestowed the family
-// name; the seed is a hidden random draw (world only). Found a composition for the chosen
-// place (era/gender/archetype seed-dealt as starting defaults the authored Epoch-0 lets the
-// player override in-game), then drop into the Epoch-0 story.
-async function birthGame(
-  seed: string,
-  region: FoundingRegion,
-  base: PowerBase,
-  standing: Standing,
-  surname: string,
-  gender: "male" | "female",
-  given: string,
-  culture: string,
-  lifeSeeds: LifeSeedChoices,
+// EI-6b-ui: NEW GAME opens the lived Epoch-0 EMERGENCE (no card funnel). A hidden seed is drawn; the
+// OpeningScreen plays the emergence and, on completion, hands back the accumulated flags + dealt cues.
+function startNewGame(): void {
+  const words = crypto.getRandomValues(new Uint32Array(2));
+  pendingSeed = `r${(words[0] ?? 0).toString(36)}${(words[1] ?? 0).toString(36)}`;
+  screen = "opening";
+}
+
+// EI-6b-ui: found the run from the EMERGENCE's accumulated flags. The lived opening's senses → region, its
+// power_lean beats → base, its childhood beat → standing (EI-6a resolveEmergentFounding); the name/gender are
+// the SAME seed-deal the OpeningScreen showed (dealComposition is deterministic for the seed). Then
+// resolveFoundingStart supplies motivators/archetype/class, exactly as the retired funnel did.
+async function birthGameFromEmergence(
+  flags: readonly string[],
+  cues: readonly SenseCue[],
 ): Promise<void> {
-  if (!storage) return;
-  // FS-ONB-DRIFT: the player FOUNDS the line at the 1776 founding in a chosen REGION (a kind:"founding"
-  // place) on a chosen POWER BASE at a chosen STANDING — not as an immigrant wave. The region maps to its
-  // founding place for the composition seam; resolveFoundingStart supplies the archetype + motivators.
+  if (!storage || !pendingSeed) return;
+  const seed = pendingSeed;
+  const { region, base, standing } = resolveEmergentFounding(cues, flags);
   const placeDef = placeById(content.places, regionPlaceId(region));
   if (!placeDef) {
-    console.error(`birthGame: unknown founding region place "${regionPlaceId(region)}"`);
+    console.error(`birthGameFromEmergence: unknown founding region place "${regionPlaceId(region)}"`);
     return;
   }
-  // Await the clear so a fast first choice can't race the old save's deletion.
   await clearSave(storage);
+  // Same seed → the same dealt family name/gender/given the OpeningScreen's provisional found showed. The
+  // surname is dealt region-independently from the identical seed label so the founded line carries the
+  // exact name the naming beat spoke (EI-6b).
+  const surname = dealFoundingSurname(createRng(`${seed}::founding:surname`));
   const composition = dealComposition(content.places, content.eras, seed, surname, placeDef);
-  // The (region × base × standing) selection seeds the line's starting motivators, its game-archetype
-  // coloring, and the class rung — grounded in the founding-era power-base research.
   const { motivators, archetype, flags: originFlags } = resolveFoundingStart({ region, base, standing });
-  // FS-8c: anchor the line at America's FOUNDING (1776) — the authored spine's start — overriding the
-  // dealt era year so the saga clock + HUD/News framing match the founding spine acts. ONB-1: stamp the
-  // chosen progenitor identity (naming STYLE, GENDER, GIVEN); FS-7: the diegetic Epoch-0 life-seeds.
   const founded = foundByComposition(content, {
     ...composition,
     year: FOUNDING_YEAR,
     archetype,
-    culture,
-    gender,
-    given,
     seedMotivators: motivators,
-    seedFlags: originFlags,
-    lifeSeeds,
+    // Carry the emergence's own flags forward too (the life-seeds/dispositions it stamped) alongside the
+    // origin flags, so the lived opening's choices persist into the run.
+    seedFlags: [...originFlags, ...flags],
   }).state;
   store = new GameStore(content, seed, storage, founded, founded.archetype);
   screen = "play";
@@ -166,12 +161,24 @@ function dumpTimeline(): void {
     onToggleSound={toggleSound}
     onBack={() => (screen = "title")}
   />
-{:else if screen === "onboarding"}
-  <OnboardingScreen {content} onComplete={birthGame} onCancel={() => (screen = "title")} />
+{:else if screen === "opening" && pendingSeed}
+  <!-- EI-6b-ui: the lived Epoch-0 emergence replaces the .card onboarding funnel. {#key} remounts it per run
+       (a fresh seed → a fresh emergence + runner state). -->
+  {#key pendingSeed}
+    <OpeningScreen
+      {content}
+      seed={pendingSeed}
+      onComplete={birthGameFromEmergence}
+      onCancel={() => {
+        pendingSeed = undefined;
+        screen = "title";
+      }}
+    />
+  {/key}
 {:else if screen === "title" || !store}
   <TitleScreen
     hasSave={saveExists}
-    onNewGame={() => (screen = "onboarding")}
+    onNewGame={startNewGame}
     onContinue={continueGame}
     onSettings={() => (screen = "settings")}
   />

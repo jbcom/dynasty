@@ -5,11 +5,12 @@ import { expect, test } from "@playwright/test";
  * way to an end state, exercising the whole stack (sim + engine + UI + persistence)
  * in a real mobile browser.
  *
- * Flow (FS-ONB-DRIFT onboarding): Title (New Game / Load / Settings, NO inputs) → New Game → founding
- * funnel (REGION → POWER BASE → STANDING → STYLE → SURNAME → GENDER → GIVEN → JOB → FRIEND → PARTNER) →
- * Play. The played narrative is the NOVEL
- * (NA-11): a founded line opens on its saga act (the SceneReader), with the event card as the
- * fallback surface for any cell without an authored act. The run seed is a hidden random draw.
+ * Flow (EI-6b EMERGENT-INFANCY onboarding): Title (New Game / Load / Settings, NO inputs) → New Game →
+ * the lived Epoch-0 EMERGENCE (the SceneReader plays birth → naming → childhood → formative beats; the
+ * player pages the prose and picks glowing inline choices — NO upfront card funnel) → the emergence
+ * resolves the founding → Play. The played narrative is the NOVEL (NA-11): a founded line opens on its
+ * saga act (the SceneReader), with the event card as the fallback for any cell without an authored act.
+ * The run seed is a hidden random draw.
  */
 
 /** The play surface's actionable CHOICE — a saga inline-option (glowing text), or an event-card choice. */
@@ -42,52 +43,52 @@ async function advancePlay(page: import("@playwright/test").Page): Promise<boole
   return false;
 }
 
-/** Click the first choice on the funnel card currently showing the given data-phase. */
-async function pickPhase(page: import("@playwright/test").Page, phase: string): Promise<void> {
-  const card = page.locator(`[data-phase="${phase}"]`);
-  await expect(card).toBeVisible({ timeout: 8000 });
-  await card.locator(".choices button").first().click();
+/** A glowing inline choice on the OPENING's SceneReader (a weave beat OR the terminal decision). */
+const OPENING_CHOICE =
+  "[data-testid='scene-reader'] [data-testid='weave'] .inline-option, " +
+  "[data-testid='scene-reader'] [data-testid='decision'] .inline-option";
+
+/**
+ * Advance the EMERGENCE one step: if a glowing inline choice is up (a sense weave-beat or the scene's
+ * terminal decision), pick the first; otherwise TAP the page to turn to the next paragraph. The tap layer
+ * sits behind the prose (z-index), so a real tap is a dispatched click on it. Returns false when neither a
+ * choice nor a tap layer is present (the emergence has ended → we've left the OpeningScreen).
+ */
+async function advanceOpening(page: import("@playwright/test").Page): Promise<boolean> {
+  const choice = page.locator(OPENING_CHOICE).first();
+  if (await choice.count()) {
+    await choice.click();
+    return true;
+  }
+  const tap = page.locator("[data-testid='scene-reader'] .tap-layer").first();
+  if (await tap.count()) {
+    await tap.dispatchEvent("click");
+    return true;
+  }
+  return false;
 }
 
 /**
- * Walk the FS-ONB-DRIFT founding funnel to the play screen: REGION → POWER BASE → STANDING → naming
- * STYLE → SURNAME → GENDER → GIVEN → the FS-7b life-seeds (JOB → FRIEND → PARTNER). Picks the first
- * choice at each step; bestows the first suggested surname, or `opts.surname` via the "name your own" modal.
+ * From the title, play the lived Epoch-0 EMERGENCE through to the play screen (EI-6b). New Game opens the
+ * OpeningScreen; we page its prose and pick the first glowing inline choice at every beat/decision until the
+ * emergence resolves the founding and the play surface (the slim saga header) appears. No upfront card
+ * funnel, no surname/seed inputs — the line's name is seed-dealt during the birth/naming beat.
  */
-async function startGame(
-  page: import("@playwright/test").Page,
-  opts: { surname?: string } = {},
-): Promise<void> {
+async function startGame(page: import("@playwright/test").Page): Promise<void> {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Dynasty" })).toBeVisible();
   await page.getByRole("button", { name: /Begin a Line/ }).click();
 
-  // Founding-era origin: region → power base → standing → naming style.
-  await pickPhase(page, "region");
-  await pickPhase(page, "base");
-  await pickPhase(page, "standing");
-  await pickPhase(page, "style");
-
-  // Surname bestowal (the data-phase="surname" card).
-  const surnamePhase = page.locator('[data-phase="surname"]');
-  await expect(surnamePhase).toBeVisible({ timeout: 8000 });
-  if (opts.surname) {
-    await surnamePhase.getByRole("button", { name: /Name your own line/ }).click();
-    await page.getByPlaceholder("a family name").fill(opts.surname);
-    await page.getByRole("button", { name: /Bestow it/ }).click();
-  } else {
-    await surnamePhase.locator(".choices button").first().click();
+  // The emergence plays on the SceneReader — page + pick until it founds the line and drops into play.
+  await expect(page.locator("[data-testid='scene-reader']")).toBeVisible({ timeout: 8000 });
+  const head = page.locator("[data-testid='saga-head']");
+  for (let i = 0; i < 80 && !(await head.count()); i++) {
+    if (!(await advanceOpening(page))) break;
+    await page.waitForTimeout(30);
   }
 
-  // Gender → given name → the diegetic Epoch-0 life-seeds (first job / best friend / life partner).
-  await pickPhase(page, "gender");
-  await pickPhase(page, "given");
-  await pickPhase(page, "job");
-  await pickPhase(page, "friend");
-  await pickPhase(page, "partner");
-
   // Land on the play screen: the slim header + the first play surface (novel scene or event card).
-  await expect(page.locator("[data-testid='saga-head']")).toBeVisible({ timeout: 8000 });
+  await expect(head).toBeVisible({ timeout: 8000 });
   await expect(playSurface(page).first()).toBeVisible({ timeout: 8000 });
 }
 
@@ -144,11 +145,13 @@ test("inter-era tabs render their views", async ({ page }) => {
 });
 
 test("the lineage tab shows the founded line (FD-13)", async ({ page }) => {
-  await startGame(page, { surname: "Sterling" });
+  // The surname is now SEED-DEALT during the emergence (EI-6b) — not picked — so assert the lineage shows
+  // a real founded house ("House of <name>") + the player ("You"), reading the dealt name from the DOM.
+  await startGame(page);
   await expect(page.locator("[data-testid='saga-head']")).toBeVisible();
   await page.getByRole("tab", { name: "Lineage" }).click();
   await expect(page.getByRole("heading", { name: "The Line" })).toBeVisible();
-  await expect(page.getByText("House of Sterling")).toBeVisible();
+  await expect(page.getByText(/House of \S+/)).toBeVisible();
   await expect(page.getByText("You")).toBeVisible();
 });
 
@@ -173,7 +176,7 @@ test("a saved run can be continued", async ({ page }) => {
   await expect(page.locator("[data-testid='saga-head']")).toBeVisible();
 });
 
-test("New Game has no upfront inputs and enters the diegetic onboarding (PL-3)", async ({
+test("New Game has no upfront inputs and enters the lived emergence (PL-3 / EI-6b)", async ({
   page,
 }) => {
   await page.goto("/");
@@ -183,11 +186,11 @@ test("New Game has no upfront inputs and enters the diegetic onboarding (PL-3)",
   const begin = page.getByRole("button", { name: /Begin a Line/ });
   await expect(begin).toBeEnabled();
   await begin.click();
-  // Straight into the founding funnel's REGION pick, no control panel / carousel.
-  await expect(page.locator('[data-phase="region"] .choices button').first()).toBeVisible({
-    timeout: 8000,
-  });
-  await expect(page.getByText("CHOOSE YOUR HINGE")).toHaveCount(0);
+  // Straight into the lived Epoch-0 EMERGENCE on the SceneReader — NO card funnel (no data-phase cards).
+  await expect(page.locator("[data-testid='scene-reader']")).toBeVisible({ timeout: 8000 });
+  await expect(page.locator("[data-phase]")).toHaveCount(0);
+  // It opens on the birth scene (the first emergence scene the runner starts at).
+  await expect(page.locator("[data-scene-id='epoch0:birth']")).toBeVisible();
 });
 
 test("the Settings screen stores no key by default and disables live mode (FD-12)", async ({

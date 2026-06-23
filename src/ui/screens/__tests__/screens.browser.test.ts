@@ -48,14 +48,14 @@ describe("TitleScreen (PL-3 diegetic entry — no upfront inputs)", () => {
     expect(host.textContent).toContain("Continue");
   });
 
-  it("has NO upfront surname or seed inputs — onboarding authors both diegetically", () => {
+  it("has NO upfront surname or seed inputs — the emergence authors both diegetically", () => {
     component = mount(TitleScreen, { target: host, props: fullProps() });
     expect(host.querySelector("#surname")).toBeNull();
     expect(host.querySelector("#seed")).toBeNull();
     expect(host.querySelectorAll("input").length).toBe(0);
   });
 
-  it("New Game fires onNewGame (which routes to the onboarding flow)", async () => {
+  it("New Game fires onNewGame (which routes to the lived emergence)", async () => {
     const onNewGame = vi.fn();
     component = mount(TitleScreen, { target: host, props: fullProps({ onNewGame }) });
     await page.getByRole("button", { name: /Begin a Line/ }).click();
