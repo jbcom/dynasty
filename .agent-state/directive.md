@@ -854,10 +854,22 @@ onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival frami
   `branch.unit.test.ts` require for "every branch is reachable from an origins choice." Under the founding-
   spine pivot, branches should fork off the ONE spine (the design's "branches off the one timeline"). So the
   spine's per-era DecisionArchitecture choices must set the destiny on-ramp flags, and branch reachability
-  must be provable from SPINE choices, not origins events. Steps: (1) enumerate the destiny on-ramp flags +
-  where origins sets them; (2) add them to the relevant spine decision points; (3) rewrite branch.unit.test
-  to assert reachability from spine choices; (4) confirm the destiny endings stay reachable. THEN
-  FS-RETIRE-PROLOGUE can empty origins. Net-new pivot fiction, milestone-sized.
+  must be provable from SPINE choices, not origins events.
+  ENUMERATION DONE (this session): branch.ts has 6 BranchKeys, each keyed by signature flags (branch.ts:35-40):
+    nazi(axis_ascendant/nazi_dynasty/arrived_as_nazi) · megachurch(megachurch_dynasty/televangelist_empire) ·
+    theocracy(evangelical_scion/faith_to_power/evangelical_origin) · media(pleasure_king/media_dynasty/vice_empire) ·
+    oligarchy(oligarch_dynasty/corporate_state/plutocracy) · westcoast(west_coast_origin/west_coast_dynasty).
+  Where set: ALL the live on-ramp flags are set ONLY in the dead `new-york/1885-1946-origins` events; the
+    oligarchy flags + media_dynasty are set NOWHERE (those branches reachable only if some flag is set —
+    currently unreachable, a latent gap). `branchOf` is consumed widely (effects world-timeline variant,
+    events bias, terms head_of_state resolution, moralAxis, slots, compiler, harness) — it's the alt-history
+    BACKDROP selector, which maps onto the founding-spine NAMED DESTINIES (theocracy↔religious leader,
+    oligarchy↔oligarch, media↔media mogul, etc.). So the spine DecisionArchitecture choices are the natural
+    new home for these on-ramps (a "doctrine"/"platform"/"allegiance" decision forks toward a destiny).
+  Remaining steps: (1) author per-era spine decision choices that set ≥1 signature flag per destiny (also
+    FIXES the latent oligarchy/media unreachability); (2) rewrite branch.unit.test to assert reachability
+    from SPINE choices; (3) confirm the destiny endings + term resolution stay reachable. Net-new pivot
+    fiction, milestone-sized; pairs with the convergence DESTINY endings already shipped (convergence.ts).
 - [x] **FS-SCHEMA-EMPTY-ERA — DONE.** Relaxed `EraEventsSchema.events` from `.min(1)` to allow `[]` (a
   spine-driven era legitimately has no event-card pool). Schema test added (empty pool validates; populated
   still does). 749 unit + tsc + biome check green. Unblocks the eventual FS-RETIRE-PROLOGUE emptying once
