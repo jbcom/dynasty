@@ -269,6 +269,9 @@ export interface ShockLedgerEntry {
   kind: "family_death" | "meter_blow" | "recovery";
   /** A short label for the season (the player reviews the line's hard seasons AND its comebacks). */
   label: string;
+  /** RECOVERY-INVEST-IN-LEDGER: a recovery the player INVESTED in (vs a lucky rebound) — "by your own hand".
+   *  Only meaningful for kind="recovery". */
+  invested?: boolean;
 }
 
 // Typed by ShockLedgerEntry["kind"] so adding a new entry kind forces a label here (exhaustiveness).
@@ -276,6 +279,14 @@ const LEDGER_LABEL: Record<ShockLedgerEntry["kind"], string> = {
   family_death: "A death in the family",
   meter_blow: "A reversal struck the line",
   recovery: "The line recovered",
+};
+
+// RECOVERY-INVEST-IN-LEDGER: a recovery the player paid for reads with agency — "by your own hand".
+const INVESTED_RECOVERY_LABEL: Partial<Record<MeterId, string>> = {
+  health: "The household's strength — restored by your own hand",
+  money: "The fortune — rebuilt by your own hand",
+  reputation: "The name — redeemed by your own hand",
+  loyalty: "Old loyalties — won back by your own hand",
 };
 
 // SHOCK-LEDGER-RECOVERIES: a comeback reads better naming WHAT was clawed back, so the recovery label is
@@ -305,13 +316,19 @@ export function shockLedger(flags: Iterable<string>): ShockLedgerEntry[] {
       out.push({ year: Number(shock[2]), kind, label: LEDGER_LABEL[kind] });
       continue;
     }
-    const recovered = /^recovered:([a-z]+):(\d+)$/.exec(f);
+    // RECOVERY-INVEST-IN-LEDGER: the optional `:invested` suffix marks a recovery the player paid for.
+    const recovered = /^recovered:([a-z]+):(\d+)(:invested)?$/.exec(f);
     if (recovered) {
       const meter = recovered[1] as MeterId;
+      const invested = recovered[3] !== undefined;
+      const label = invested
+        ? (INVESTED_RECOVERY_LABEL[meter] ?? "Rebuilt by your own hand")
+        : (RECOVERY_LABEL[meter] ?? LEDGER_LABEL.recovery);
       out.push({
         year: Number(recovered[2]),
         kind: "recovery",
-        label: RECOVERY_LABEL[meter] ?? LEDGER_LABEL.recovery,
+        label,
+        ...(invested && { invested }),
       });
     }
   }

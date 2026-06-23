@@ -329,4 +329,17 @@ describe("shockLedger (DOSSIER-SHOCK-LEDGER)", () => {
   it("SHOCK-LEDGER-RECOVERIES: skips malformed recovered flags (no year)", () => {
     expect(shockLedger(["recovered:money", "recovered::1900"])).toEqual([]);
   });
+
+  it("RECOVERY-INVEST-IN-LEDGER: an :invested recovery reads distinctly (by your own hand) + carries invested", () => {
+    const led = shockLedger(["recovered:money:1910:invested", "recovered:reputation:1920"]);
+    expect(led).toHaveLength(2);
+    const investedEntry = led.find((e) => e.year === 1910);
+    const luckyEntry = led.find((e) => e.year === 1920);
+    // The invested rebound is flagged + reads "by your own hand"; the lucky one is plain.
+    expect(investedEntry?.kind).toBe("recovery");
+    expect(investedEntry?.invested).toBe(true);
+    expect(investedEntry?.label).toMatch(/your own hand/i);
+    expect(luckyEntry?.invested).toBeFalsy();
+    expect(luckyEntry?.label).not.toMatch(/your own hand/i);
+  });
 });

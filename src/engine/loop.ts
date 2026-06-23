@@ -715,7 +715,8 @@ export class Game {
     // SHOCK-LEDGER-RECOVERIES: clear the outstanding `shock_meter:<meter>` marker AND stamp a persistent
     // `recovered:<meter>:<year>` flag — so the ledger can read blow → comeback, not just the loss. The cleared
     // marker is transient bookkeeping; the recovered flag is the durable record the "What Befell" log surfaces.
-    const recoveredFlag = `recovered:${recovery.meter}:${fromYear}`;
+    // RECOVERY-INVEST-IN-LEDGER: an INVESTED rebound gets a `:invested` suffix so the ledger credits the player.
+    const recoveredFlag = `recovered:${recovery.meter}:${fromYear}${invested ? ":invested" : ""}`;
     this.state = {
       ...this.state,
       meters: applyDelta(this.content.meters, this.state.meters, {

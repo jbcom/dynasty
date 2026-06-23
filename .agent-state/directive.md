@@ -1269,11 +1269,15 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT PR #136 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/omen-payoff-audit. Full local gate passed. Loop: wait build-and-test + CodeQL, fold review forward
   + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RECOVERY-INVEST-IN-LEDGER.
-- [ ] [WAIT-REVIEW] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger (after #136).** A rebound
-  the player paid for reads the same as a lucky one in the "What Befell" log; stamp the invested recovery (e.g.
-  recovered:<meter>:<year>:invested) so the ledger can mark "rebuilt by your own hand" — the player's agency
-  shows in the family history. Pure read-model extension; tested.
-- [ ] [WAIT-REVIEW] **AGENCY-IN-LEGACY — the LegacyReport tallies the player's WV-3 agency (after #136).**
+- [x] **RECOVERY-INVEST-IN-LEDGER — DONE (feat/recovery-invest-in-ledger).** An invested rebound now stamps
+  `recovered:<meter>:<year>:invested`; shockLedger parses the suffix into a distinct entry (invested:true, label
+  "…by your own hand") crediting the player's agency vs a lucky rebound. The distinct label flows to TimelineView
+  + LegacyReport automatically (they render entry.label). Tests: sagaShock.unit (invested vs lucky parse). 898
+  node + 127 browser green, gate clean.
+- [ ] [WAIT-REVIEW] **RECOVERY-INVEST-IN-LEDGER PR — push, open PR, full remote loop.**
+  1 commit (the :invested ledger stamp + parse). Full local gate passed. Push, open PR, wait CI, fold review
+  forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, AGENCY-IN-LEGACY.
+- [ ] **AGENCY-IN-LEGACY — the LegacyReport tallies the player's WV-3 agency.**
   The end-game shows the field + hard seasons but not what the PLAYER actively DID across the run — rivals
   pressed, recoveries invested, omens heeded. Tally these from the side-logs/flags into a "By Your Own Hand"
   line in the LegacyReport, so the close credits the player's interventions. Pure read-model; tested.
