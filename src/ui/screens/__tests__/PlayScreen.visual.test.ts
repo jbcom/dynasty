@@ -196,6 +196,56 @@ describe("PlayScreen (composed game screen)", () => {
     expect(hopeBadge.textContent?.trim()).not.toBe(dreadBadge.textContent?.trim());
   });
 
+  it("MAP-FIELD-LINK-WIRING-CHECK: PlayScreen passes the full standings (with fallen) through to MapView", async () => {
+    // A founded line (state.family present → the Map tab shows) + a fallen rival in the standings. Switching to
+    // the Map tab must render the rival marker carrying data-fallen — proving the live wiring (PlayScreen →
+    // MapView prop) carries the state end-to-end, not just that MapView CAN render it.
+    const base = view();
+    const v: GameView = {
+      ...base,
+      state: {
+        ...base.state,
+        family: {
+          members: [
+            {
+              id: "m0",
+              given: "X",
+              surname: "Vane",
+              sex: "male" as const,
+              born: 1885,
+              generation: 0,
+              traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
+              isProtagonist: true,
+            },
+          ],
+          protagonistId: "m0",
+          nextSeq: 1,
+        },
+      },
+      rivalStandings: [
+        {
+          id: "rival:chinese",
+          label: "rival:chinese",
+          rung: 0,
+          faltering: false,
+          trend: "falling" as const,
+          fallen: true,
+        },
+      ],
+    };
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: v, busy: false, onchoose: () => {} },
+    });
+    // Switch to the Map tab (shown because the line is founded).
+    await page.getByRole("button", { name: /Map/ }).click();
+    flushSync();
+    const marker = host.querySelector('circle.rival[data-rival="rival:chinese"]');
+    expect(marker, "the rival marker renders on the map").not.toBeNull();
+    // The fallen state flowed PlayScreen → MapView → the marker, not lost in the wiring.
+    expect(marker?.getAttribute("data-fallen")).toBe("true");
+  });
+
   it("OMEN-BADGE-SCREENSHOT: captures the hope + dread omen badges for visual review", async () => {
     const scene = SceneSchema.parse({
       id: "sc:demo:badgeshot",

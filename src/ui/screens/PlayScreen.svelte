@@ -17,6 +17,7 @@ import { branchOf } from "../../sim/branch";
 import { moralPoleOf, moralPoleLabel } from "../../sim/moralAxis";
 import { applyTerms, runTerms } from "../../sim/terms";
 import { projectSaga } from "../../sim/readModel";
+import { omenBadgeLabel } from "../../sim/sagaShock";
 import ShaderBackdrop from "../saga/ShaderBackdrop.svelte";
 import RivalField from "../saga/RivalField.svelte";
 import RivalDossier from "../saga/RivalDossier.svelte";
@@ -186,7 +187,7 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
           data-tone={view.foreshadow.tone}
         >
           <span class="omen-badge" data-tone={view.foreshadow.tone}>
-            {view.foreshadow.tone === "hope" ? "↻ Recovering" : "⚠ Warning"}
+            {omenBadgeLabel(view.foreshadow.tone)}
           </span>
           {view.foreshadow.text}
         </p>

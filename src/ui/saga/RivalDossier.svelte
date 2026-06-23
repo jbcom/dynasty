@@ -101,6 +101,13 @@ const TREND_ARROW: Record<"rising" | "steady" | "falling", string> = {
       {/each}
     </ul>
   </section>
+{:else}
+  <!-- DOSSIER-EMPTY-VOICE: early game, no near-vantage lines yet — a grace note, not a blank panel, mirroring
+       the finale's SHOCK-LEDGER-EMPTY-VOICE. The race exists; the other lines just haven't surfaced yet. -->
+  <section class="dossier" data-testid="rival-dossier-empty">
+    <h3 class="dossier-title">The Field — the race toward the stars</h3>
+    <p class="field-empty">The other lines are still finding their feet — the race has yet to take shape.</p>
+  </section>
 {/if}
 
 <style>
@@ -122,6 +129,14 @@ const TREND_ARROW: Record<"rising" | "steady" | "falling", string> = {
     font-family: var(--mmm-font-body);
     font-style: italic;
     font-size: 0.82rem;
+    color: var(--mmm-text-dim);
+  }
+  /* DOSSIER-EMPTY-VOICE: the early-game grace note — a quiet line, not a blank panel. */
+  .field-empty {
+    margin: 0.3rem 0 0;
+    font-family: var(--mmm-font-body);
+    font-style: italic;
+    font-size: 0.85rem;
     color: var(--mmm-text-dim);
   }
   .rows {

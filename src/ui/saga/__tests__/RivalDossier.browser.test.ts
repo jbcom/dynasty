@@ -150,8 +150,14 @@ describe("RivalDossier (RIVAL-DOSSIER-TAB)", () => {
     expect(sum).toMatch(/1 line has fallen out/);
   });
 
-  it("renders nothing when there are no rivals", () => {
+  it("DOSSIER-EMPTY-VOICE: with no rivals yet (early game), shows a grace note, not a blank panel", () => {
     component = mount(RivalDossier, { target: host, props: { standings: [], playerRung: 0 } });
+    // No per-line dossier renders, but the early-game grace note does (mirrors SHOCK-LEDGER-EMPTY-VOICE).
     expect(host.querySelector('[data-testid="rival-dossier"]')).toBeNull();
+    const empty = host.querySelector('[data-testid="rival-dossier-empty"]');
+    expect(empty, "the early-game grace note renders").not.toBeNull();
+    expect(empty?.textContent).toMatch(/still finding their feet/i);
+    // It keeps the field title so the panel still reads as "The Field", just unpopulated.
+    expect(empty?.textContent).toContain("The Field");
   });
 });

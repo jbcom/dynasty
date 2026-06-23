@@ -160,6 +160,22 @@ export function dreadForeshadowText(macroActId: string): string {
   return DREAD_OMEN_TEXT[macroActId] ?? DREAD_OMEN_FALLBACK;
 }
 
+/** The valence of a foreshadow omen — hope (a rebound near) vs dread (a loss looming). The canonical tone set,
+ *  so the a11y badge map is exhaustive over it (OMEN-A11Y-AUDIT). */
+export type ForeshadowTone = "hope" | "dread";
+export const FORESHADOW_TONES: readonly ForeshadowTone[] = ["hope", "dread"];
+
+/** OMEN-TONE-A11Y: the TEXT badge (icon + label) carrying the omen's valence WITHOUT relying on color alone
+ *  (WCAG 1.4.1). A TOTAL map over ForeshadowTone — every tone has a non-empty label, guarded by OMEN-A11Y-AUDIT
+ *  so a future tone can't silently fall through to a blank badge. Pure. */
+const OMEN_BADGE_LABEL: Record<ForeshadowTone, string> = {
+  hope: "↻ Recovering",
+  dread: "⚠ Warning",
+};
+export function omenBadgeLabel(tone: ForeshadowTone): string {
+  return OMEN_BADGE_LABEL[tone];
+}
+
 /**
  * Roll one seeded disruption shock for a saga tick. Macro-act-weighted (better medicine → lower hazard) and
  * deterministic for a given (family, year, macroActId, rng). `macroActId` is the saga's coarse band
