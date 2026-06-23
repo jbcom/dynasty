@@ -4,6 +4,7 @@ import {
   applyFamilyDeathShock,
   foreshadowWeight,
   recoveryForeshadow,
+  recoveryForeshadowText,
   rollSagaRecovery,
   rollSagaShock,
   type SagaShock,
@@ -288,6 +289,30 @@ describe("shockExposure + shockForeshadow (SHOCK-FORESHADOW)", () => {
     // No outstanding strain → no hope omen (nothing to rebound from).
     expect(recoveryForeshadow([])).toBe(false);
     expect(recoveryForeshadow(["base:press", "loud_baby"])).toBe(false);
+  });
+
+  it("HOPE-OMEN-COPY-VARIETY: the hope omen text is keyed to the strained meter (specific, not boilerplate)", () => {
+    // Each recognized meter reads in its own voice — fortune / name / health / bonds.
+    const money = recoveryForeshadowText([shockMeterFlag("money")]);
+    const rep = recoveryForeshadowText([shockMeterFlag("reputation")]);
+    const health = recoveryForeshadowText([shockMeterFlag("health")]);
+    const loyalty = recoveryForeshadowText([shockMeterFlag("loyalty")]);
+    expect(money).toMatch(/coffers|fortune|rebuilt/i);
+    expect(rep).toMatch(/scandal|name|grace/i);
+    expect(health).toMatch(/sickness|strength|health/i);
+    expect(loyalty).toMatch(/rift|bonds|reforged/i);
+    // The four variants are distinct lines, not the same boilerplate.
+    expect(new Set([money, rep, health, loyalty]).size).toBe(4);
+    // The FIRST outstanding meter flag wins (deterministic flag order → replay-stable).
+    expect(recoveryForeshadowText([shockMeterFlag("money"), shockMeterFlag("reputation")])).toBe(
+      money,
+    );
+    // An absent / unrecognized strain falls back to the generic line (still hopeful, non-empty).
+    const fallback = recoveryForeshadowText([]);
+    expect(fallback.length).toBeGreaterThan(0);
+    expect(fallback).not.toBe(money);
+    // `heat` has no recovery (a heat spike cools systemically, not via a windfall) → generic fallback.
+    expect(recoveryForeshadowText([shockMeterFlag("heat")])).toBe(fallback);
   });
 });
 
