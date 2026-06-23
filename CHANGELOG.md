@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.38.0](https://github.com/jbcom/dynasty/compare/v0.37.0...v0.38.0) (2026-06-23)
+
+
+### Features
+
+* credit an invested recovery in the ledger — by your own hand ([#137](https://github.com/jbcom/dynasty/issues/137)) ([edf9c67](https://github.com/jbcom/dynasty/commit/edf9c6762b4912cd5a82d361c6d4ce69bdf2630a))
+
 ## [0.37.0](https://github.com/jbcom/dynasty/compare/v0.36.0...v0.37.0) (2026-06-23)
 
 
