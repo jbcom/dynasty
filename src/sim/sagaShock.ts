@@ -65,20 +65,36 @@ export function shockExposure(macroActId: string): number {
   return Math.max(0.15, 1 - macroActMedicine(macroActId));
 }
 
+/** FORESHADOW-WEIGHT: how grave the looming-hazard omen reads. "none" = no warning; "marginal" = a faint
+ *  unease; "grave" = real dread. Tiered so the omen's certainty is PROPORTIONAL to the hazard. */
+export type ForeshadowWeight = "none" | "marginal" | "grave";
+
 /**
- * SHOCK-FORESHADOW: should the player be WARNED a hazard looms before the next tick? A deterministic threshold
- * (no RNG — replay-safe, view-derived): true when this macro-act's exposure is high AND the line carries
- * outstanding strain (a `shock_meter:*` marker from an un-recovered blow) OR there is a non-protagonist member
- * to lose. The omen gives loss DREAD, not just aftermath. Pure.
+ * SHOCK-FORESHADOW + FORESHADOW-WEIGHT: how strongly to WARN that a hazard looms before the next tick. A
+ * deterministic function (no RNG — replay-safe, view-derived) of this macro-act's exposure × the line's
+ * strain. "none" below the exposure threshold or with nothing at stake; "grave" when exposure is high AND the
+ * line carries an OUTSTANDING blown meter (un-recovered strain compounds the danger); else "marginal" (a
+ * harsh era with only kin to lose, no active strain). The omen gives loss DREAD, proportional to the threat.
  */
+export function foreshadowWeight(
+  macroActId: string,
+  flags: Iterable<string>,
+  hasKin: boolean,
+): ForeshadowWeight {
+  if (shockExposure(macroActId) < 0.75) return "none";
+  const strained = [...flags].some((f) => f.startsWith("shock_meter:"));
+  if (strained) return "grave"; // un-recovered loss + a harsh era → the worst is plausibly near
+  if (hasKin) return "marginal"; // exposed, kin to lose, but no active strain → a fainter unease
+  return "none";
+}
+
+/** SHOCK-FORESHADOW: the boolean predicate (any omen at all). Thin wrapper over foreshadowWeight. Pure. */
 export function shockForeshadow(
   macroActId: string,
   flags: Iterable<string>,
   hasKin: boolean,
 ): boolean {
-  if (shockExposure(macroActId) < 0.75) return false;
-  const strained = [...flags].some((f) => f.startsWith("shock_meter:"));
-  return strained || hasKin;
+  return foreshadowWeight(macroActId, flags, hasKin) !== "none";
 }
 
 /**

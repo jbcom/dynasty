@@ -31,10 +31,10 @@ import {
 } from "../sim/saga/triggerLattice";
 import {
   applyFamilyDeathShock,
+  foreshadowWeight,
   rollSagaRecovery,
   rollSagaShock,
   type SagaShockNote,
-  shockForeshadow,
   shockMeterFlag,
   shockNote,
 } from "../sim/sagaShock";
@@ -392,8 +392,15 @@ export class Game {
     const hasKin = !!family?.members.some(
       (m) => m.id !== family.protagonistId && isMemberAlive(m, this.state.year),
     );
-    const looming = shockForeshadow(macroActForYear(this.state.year), this.state.flags, hasKin);
-    return looming ? "The season turns against the house — hard days may be near." : null;
+    // FORESHADOW-WEIGHT: the omen's gravity scales with the hazard — a faint unease vs real dread.
+    const weight = foreshadowWeight(macroActForYear(this.state.year), this.state.flags, hasKin);
+    if (weight === "grave") {
+      return "The house braces for the worst — the season has turned hard against you.";
+    }
+    if (weight === "marginal") {
+      return "A shadow lies over the season; the years ahead feel uncertain.";
+    }
+    return null;
   }
 
   /**
