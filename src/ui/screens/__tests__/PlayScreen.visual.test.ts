@@ -168,6 +168,38 @@ describe("PlayScreen (composed game screen)", () => {
     expect(getComputedStyle(hope).borderLeftColor).not.toBe(dreadBorder);
   });
 
+  it("INVEST-WHILE-HOPE-OMEN: the hope omen renders ABOVE the invest prompt as one coherent beat", () => {
+    const scene = SceneSchema.parse({
+      id: "sc:demo:rebound-invest",
+      sense: "sight",
+      prose: ["The house steadies after the blow; a hand might yet tip the scales."],
+    });
+    const v: GameView = {
+      ...view(),
+      saga: { actTitle: "Act II", scene, threads: [], ended: false },
+      // Both fire on the SAME outstanding strain: a hope omen + an available recovery invest.
+      foreshadow: {
+        text: "The worst is behind you.",
+        weight: "grave" as const,
+        tone: "hope" as const,
+      },
+      canInvestRecovery: true,
+    };
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: v, busy: false, onchoose: () => {}, oninvest: () => {} },
+    });
+    const omen = host.querySelector('[data-testid="foreshadow"]') as HTMLElement;
+    const invest = host.querySelector('[data-testid="recovery-invest"]') as HTMLElement;
+    expect(omen, "the hope omen renders").not.toBeNull();
+    expect(invest, "the invest prompt renders").not.toBeNull();
+    // DOM order: the omen comes BEFORE the invest prompt (one "a rebound is near — press for it" beat).
+    expect(omen.compareDocumentPosition(invest) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    // The invest prompt is marked as following a hope omen + its copy connects to the rebound.
+    expect(invest.getAttribute("data-after-hope")).toBe("true");
+    expect(invest.textContent).toMatch(/press the rebound/i);
+  });
+
   it("RECOVERY-CHOICE: the 'Spend funds' button is disabled when the player can't afford it", () => {
     const scene = SceneSchema.parse({
       id: "sc:demo:broke",

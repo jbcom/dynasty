@@ -187,10 +187,17 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
         </p>
       {/if}
       <!-- RECOVERY-CHOICE: after a blow, the player may INVEST a meter to force a stronger rebound — agency
-           over the comeback, not just waiting on the seeded roll. Offered only while a blow is outstanding. -->
+           over the comeback, not just waiting on the seeded roll. Offered only while a blow is outstanding.
+           INVEST-WHILE-HOPE-OMEN: the hope omen (rendered directly above) and this prompt fire on the SAME
+           outstanding-strain condition, so they read as one beat — "a rebound is near, and you can press for
+           it". When the omen is hopeful the label connects the two; otherwise it stands alone. -->
       {#if view.canInvestRecovery && oninvest}
-        <div class="invest" data-testid="recovery-invest">
-          <span class="invest-label">Pour resources into the recovery?</span>
+        <div class="invest" data-testid="recovery-invest" data-after-hope={view.foreshadow?.tone === "hope"}>
+          <span class="invest-label">
+            {view.foreshadow?.tone === "hope"
+              ? "Press the rebound — pour resources in to make it count?"
+              : "Pour resources into the recovery?"}
+          </span>
           <!-- The money invest is disabled when unaffordable (mirrors the engine's affordability guard;
                cost = Game.INVEST_COST = 18). Heat ("Call in favours") is always available — its cost is a rise. -->
           <button
