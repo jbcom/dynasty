@@ -219,13 +219,26 @@ export class Game {
     const livingHeir = !!family?.members.some(
       (m) => m.id !== family.protagonistId && isMemberAlive(m, this.state.year),
     );
-    const rivalsReachedStars = (this.world?.snapshots ?? []).some((s) => s.rung >= MAX_RUNG);
+    const snaps = this.world?.snapshots ?? [];
+    const rivalsReachedStars = snaps.some((s) => s.rung >= MAX_RUNG);
+    // RIVAL-FATE-IN-CONVERGENCE-ENDING: a snapshot of the field's outcome relative to the player, for the
+    // epilogue coda. Undefined when there's no rival world (the resolver then emits no epilogue).
+    const playerTier = this.playerRung();
+    const rivalField = snaps.length
+      ? {
+          reachedStars: snaps.filter((s) => s.rung >= MAX_RUNG).length,
+          fallen: snaps.filter((s) => s.faltering || s.rung === 0).length,
+          abovePlayer: snaps.filter((s) => s.rung >= playerTier).length,
+          total: snaps.length,
+        }
+      : undefined;
     return resolveConvergence({
       motivators: this.state.personality,
-      tier: this.playerRung(),
+      tier: playerTier,
       survived: !Game.FAILURE_ENDS.has(this.state.end.kind),
       hasHeir: livingHeir,
       rivalsReachedStars,
+      rivalField,
     });
   }
 

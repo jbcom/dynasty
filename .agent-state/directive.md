@@ -1235,10 +1235,11 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   by the history index it occurred at, interleaved in `reconstruct` WITHOUT perturbing the saga RNG. That's a
   real design step deserving its own branch after the rival-race-presence PR — NOT a same-branch append. Decided:
   defer to a dedicated branch; build the press side-log + reconstruct interleave + tests there. Logged, proceeding.
-- [ ] **RIVAL-FATE-IN-CONVERGENCE-ENDING — a faltered/surged rival shifts the player's ending text.** The
-  convergence ending (convergence.ts) resolves on the player's motivators + survival; the rival field that
-  raced alongside doesn't color it. Have the dominant rival outcome (a rival reached the stars first / the whole
-  field collapsed behind you) tint the earned-finale prose, so the close reflects the race's result. Pure; tested.
+- [x] **RIVAL-FATE-IN-CONVERGENCE-ENDING — DONE (forward commit on PR #126).** resolveConvergence now computes a
+  `rivalEpilogue` coda from the field summary (rivalField: reachedStars/fallen/abovePlayer/total): a rival among
+  the stars (distinct for player-also-stars vs not), the whole field fallen behind you, or a still-contested
+  race. LegacyReport narrates it beneath the finale prose; a failed/unfounded run gets no coda. convergence.unit
+  (5 cases) + screens.browser (render + empty). 886 node + 120 browser green, gate clean.
 - [ ] **SHOCK-FORESHADOW — a near-future hazard hints before it strikes (dread, not just aftermath).** WV-3
   shocks land then narrate aftermath; the player never feels them coming. When the next saga tick carries an
   elevated shock chance (harsh era + outstanding strain), surface a one-line omen ("the season turns against

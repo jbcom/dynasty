@@ -120,6 +120,10 @@ onMount(() => {
     {#if convergence.prose}
       <p class="convergence-prose" data-testid="convergence-prose">{term(convergence.prose)}</p>
     {/if}
+    <!-- RIVAL-FATE-IN-CONVERGENCE-ENDING: how the field ended relative to you — the race's result, in a coda. -->
+    {#if convergence.rivalEpilogue}
+      <p class="rival-epilogue" data-testid="rival-epilogue">{term(convergence.rivalEpilogue)}</p>
+    {/if}
   {/if}
   {#if isApex}<p class="apex-kicker">★ Apex Ending ★</p>{/if}
   <h1>{title}</h1>
@@ -232,6 +236,15 @@ onMount(() => {
     font-size: 1rem;
     line-height: 1.55;
     color: var(--mmm-text);
+  }
+  /* RIVAL-FATE-IN-CONVERGENCE-ENDING: the field coda — quieter than the finale prose, the race's last word. */
+  .rival-epilogue {
+    margin: 0 auto 0.8rem;
+    max-width: 52ch;
+    font-family: var(--mmm-font-body);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--mmm-text-dim);
   }
   .convergence[data-destination="stars"] strong {
     color: var(--mmm-gold-bright);

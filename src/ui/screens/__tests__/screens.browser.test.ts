@@ -170,6 +170,42 @@ describe("LegacyReport", () => {
     expect(host.querySelector("[data-testid='convergence-prose']")).toBeNull();
   });
 
+  it("RIVAL-FATE-IN-CONVERGENCE-ENDING: narrates the field's coda beneath the finale prose", () => {
+    const state = {
+      ...initState(content, "seed"),
+      end: { kind: "apex" as const, year: 2200, reason: "Carried the name to the stars." },
+    };
+    const convergence = {
+      id: "stars_allies",
+      destination: "stars" as const,
+      title: "The Covenant Among the Stars",
+      prose: "The line ended as keeper of a covenant between worlds.",
+      rivalEpilogue:
+        "Another line reached the stars before yours; you watched their fire cross the sky.",
+      gate: {},
+    };
+    component = mount(LegacyReport, {
+      target: host,
+      props: { content, state, end: state.end, convergence, onRestart: () => {} },
+    });
+    const coda = host.querySelector("[data-testid='rival-epilogue']");
+    expect(coda, "the field coda renders").not.toBeNull();
+    expect(coda?.textContent).toContain("reached the stars before yours");
+    // No epilogue → no coda line.
+    unmount(component);
+    component = mount(LegacyReport, {
+      target: host,
+      props: {
+        content,
+        state,
+        end: state.end,
+        convergence: { ...convergence, rivalEpilogue: undefined },
+        onRestart: () => {},
+      },
+    });
+    expect(host.querySelector("[data-testid='rival-epilogue']")).toBeNull();
+  });
+
   it("LEDGER-IN-LEGACY-REPORT: surfaces the line's hard seasons + comebacks at the close", () => {
     const state = {
       ...initState(content, "seed"),
