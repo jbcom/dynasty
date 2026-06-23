@@ -86,4 +86,13 @@ describe("opening runner (EI-6b)", () => {
       drive(buildEpoch0Opening(dealSenseCues(createRng("run1")))),
     );
   });
+
+  it("an out-of-bounds beat/decision index is a NO-OP, not a crash (Amazon-Q #192 bounds guard)", () => {
+    const s = startOpening(scenes);
+    // Bad indices return the SAME state (no throw, no advance, no flag change).
+    expect(chooseOpeningBeat(scenes, s, 99)).toEqual(s);
+    expect(chooseOpeningBeat(scenes, s, -1)).toEqual(s);
+    expect(chooseOpeningDecision(scenes, s, 99)).toEqual(s);
+    expect(chooseOpeningDecision(scenes, s, -1)).toEqual(s);
+  });
 });

@@ -61,8 +61,11 @@ export function chooseOpeningBeat(
 ): OpeningState {
   const scene = currentOpeningScene(scenes, state);
   if (!scene) return state;
-  const outcome = applyBeatChoice(scene, beatIndex, state.motivators, state.flags);
+  // Guard an out-of-bounds beatIndex (the public API doesn't enforce it) — a no-op rather than a throw
+  // (Amazon-Q #192). applyBeatChoice already no-ops on a missing beat; this makes the contract explicit.
   const beat = scene.beats[beatIndex];
+  if (!beat) return state;
+  const outcome = applyBeatChoice(scene, beatIndex, state.motivators, state.flags);
   // A gathering beat stays in the scene (the player may attend other beats / reach the decision); a
   // diverting beat jumps. The default is gather:true.
   const stays = beat?.choice?.gather !== false && !outcome.divertTo;
@@ -85,6 +88,9 @@ export function chooseOpeningDecision(
 ): OpeningState {
   const scene = currentOpeningScene(scenes, state);
   if (!scene) return state;
+  // Guard an out-of-bounds optionIndex — a no-op rather than advancing on a non-existent choice (matches the
+  // beat guard; the public API doesn't enforce the index).
+  if (!scene.decision?.options[optionIndex]) return state;
   const outcome = applyDecision(scene, optionIndex, state.motivators, state.flags);
   return advance(outcome.divertTo ?? scene.next, outcome.flags, outcome.motivators);
 }
