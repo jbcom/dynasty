@@ -38,11 +38,9 @@ function* profiles(): Generator<Motivators> {
     { worldview: -60 }, // religious_leader
     { lineage: 40 }, // earthbound_legacy
   ];
-  for (const c of compounds) {
-    const m = initMotivators();
-    for (const [k, v] of Object.entries(c)) m[k as keyof Motivators] = v as number;
-    yield m;
-  }
+  // Hoist the centrist base out of the loop; spread each compound's overrides over it (Gemini #112).
+  const base = initMotivators();
+  for (const c of compounds) yield { ...base, ...c };
 }
 
 describe("CONVERGENCE-ENDING-DEPTH: every ending is reachable (reachability audit)", () => {
