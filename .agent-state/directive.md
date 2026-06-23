@@ -1057,7 +1057,9 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   on-ramps resolves to the higher-precedence oligarchy; the test asserts each on-ramp's own contribution.)
 ## Post-PR backlog (keep the queue non-empty — [[never-drain-queue]])
 
-- [ ] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G2+ — extend base-flavored openings to g2+ (antebellum onward).**
+- [ ] [WAIT] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G2+ — extend base-flavored openings to g2+ (antebellum onward).**
+  HELD until PR #100 merges — adding commits to the in-flight PR branch now would churn its CI + review;
+  this is post-merge incremental work by design. Resume on a fresh footing after the founding-spine PR lands.
   g0 (founding) + g1 (early republic) now open differently per power base. The applyAct() pattern in
   scripts/fs-spine-origin-flavor.mjs makes each further act one config block + 5 authored base-variant
   scenes diverting to that act's second scene. Author g2 (antebellum) next, then later gens as bandwidth
