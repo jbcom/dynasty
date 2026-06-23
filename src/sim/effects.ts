@@ -408,7 +408,7 @@ export function applySuccessionToFamily(
 export function replay(
   content: Content,
   seed: string,
-  history: ReadonlyArray<{ eventId: string; choiceId: string }>,
+  history: ReadonlyArray<{ eventId?: string; choiceId?: string; saga?: "beat" | "decision" }>,
   initState: (content: Content, seed: string, archetype?: Archetype) => GameState,
   createRng: (seed: string) => Rng,
   archetype: Archetype = "economic",
@@ -426,15 +426,18 @@ export function replay(
 export function replayFromState(
   content: Content,
   base: GameState,
-  history: ReadonlyArray<{ eventId: string; choiceId: string }>,
+  history: ReadonlyArray<{ eventId?: string; choiceId?: string; saga?: "beat" | "decision" }>,
   createRng: (seed: string) => Rng,
 ): GameState {
   let state = base;
   const rng = createRng(base.seed);
   for (const step of history) {
+    // Saga walk steps are replayed through the ENGINE (Game.reconstruct), not the pure sim — skip them
+    // here so this pure event replay stays event-only (it's used for unfounded runs, which have none).
+    if (step.saga) continue;
     const event = content.allEvents.find((e) => e.id === step.eventId);
     if (!event) throw new Error(`replay: unknown event "${step.eventId}"`);
-    state = applyChoice(content, state, event, step.choiceId, rng).state;
+    state = applyChoice(content, state, event, step.choiceId as string, rng).state;
   }
   return state;
 }

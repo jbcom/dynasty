@@ -134,3 +134,55 @@ describe("CP-6 founded-run save carries the full founding config", () => {
     expect(reconstructed.family).toEqual(founded.family);
   });
 });
+
+describe("SAGA-RESTORE-CURSOR: a saga-deep founded run survives the persisted save round-trip", () => {
+  it("toSave records saga walk steps, and fromSave reconstructs the exact mid-saga state", async () => {
+    const { loadContent } = await import("../../data/loadContent");
+    const { foundByComposition } = await import("../../sim/founding");
+    const { Game } = await import("../loop");
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Persist",
+      seed: "sagapersist",
+      originId: "composed:ireland:origins",
+    };
+    // Play DEEP into the saga — many beats + several generational decisions — so the run is far past the
+    // founded base and well into the novel walk (the surface a persisted save previously could not rebuild).
+    const live = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    for (let i = 0; i < 80 && !live.finished; i++) {
+      const s = live.view.saga.scene;
+      if (s) {
+        if (s.decision) {
+          const idx = s.decision.options.findIndex((o) => o.succession?.takesPartner);
+          live.pickDecision(idx >= 0 ? idx : 0);
+        } else if (s.beats.length) live.pickBeat(0);
+        else break;
+      } else if (live.view.currentEvent) {
+        const c = live.view.currentEvent.choices[0];
+        if (!c) break;
+        live.choose(c.id);
+      } else break;
+    }
+    const liveState = live.view.state;
+    // The choice log captured saga steps (not just events) — that's what makes the save reconstructable.
+    expect(liveState.history.some((h) => h.saga === "beat" || h.saga === "decision")).toBe(true);
+
+    // The PERSISTED save (seed + interleaved history) reconstructs the EXACT mid-saga state.
+    const save = toSave(liveState);
+    expect(save.history.some((h) => h.saga)).toBe(true);
+    const reconstructed = fromSave(real, save);
+    expect(reconstructed.year).toBe(liveState.year);
+    expect(reconstructed.flags).toEqual(liveState.flags);
+    expect(reconstructed.meters).toEqual(liveState.meters);
+    expect(reconstructed.family).toEqual(liveState.family);
+    expect(reconstructed.personality).toEqual(liveState.personality);
+    expect(reconstructed.saga).toEqual(liveState.saga);
+    expect(reconstructed.end).toEqual(liveState.end);
+  });
+});

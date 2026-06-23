@@ -34,6 +34,8 @@ export function buildMeterSeries(content: Content, state: GameState): MeterSerie
 
   sample(s); // starting point
   for (const step of state.history) {
+    // Saga walk steps carry no event — they don't move the event-driven meter series; skip them.
+    if (step.saga || !step.eventId || !step.choiceId) continue;
     const event = content.allEvents.find((e) => e.id === step.eventId);
     if (!event) continue;
     s = applyChoice(content, s, event, step.choiceId, rng).state;

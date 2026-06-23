@@ -272,3 +272,44 @@ prose, {given_name}/{surname}/{family_name} tokens, weave beats with small
 motivatorShifts), inserted via an idempotent script like the origin-flavor one
 (regen-safe — spine.act.json is GenAI-generated). Build g0 first as the
 pattern-setter, then extend act by act; ship in sensible batches as PRs.
+
+## DECISION (2026-06-23, SAGA-RESTORE-CURSOR): persist the saga walk in save/restore
+
+**Discovered building the act-depth interstitials:** deepening g0 from 4→6 scenes
+broke the loop.unit "crossing nudges replay-safe across save/restore" test
+(year diverged 2166→2182). Root cause is a real save/restore gap, in two layers:
+
+1. **In-memory layer:** `Game.beginSagaActForState()` always RESTARTED the
+   current generation's act at its OPENING on (re)construct. A `GameState`-object
+   restore taken mid-act therefore replayed the act's already-seen scenes,
+   over-advancing the decoupled saga clock. (4-scene acts only passed by luck —
+   restores happened to land on generation boundaries.) **Fixed** by persisting a
+   `SagaCursor` (actId + sceneId + beatCursor) on `GameState` and a
+   `SagaDriver.restore(cursor, motivators, flags)` that resumes at the saved
+   scene. The motivators/flags are NOT duplicated in the cursor — they live in
+   `personality`/`flags`, kept in sync — so the full ActState rebuilds from the
+   cursor + those.
+
+2. **Persisted-save layer (deeper):** the on-disk save (`toSave`/`fromSave`) is
+   **seed + event-history only** ([[mmm-save-and-chronology]]). The saga walk
+   choices (`pickBeat`/`pickDecision`) were NEVER recorded in `history`, so
+   `fromSave` (which replays only event `applyChoice` steps) reconstructs a
+   saga-deep run back to its FOUNDED BASE — losing all saga progress. Since a
+   founded line's primary surface IS the saga, a reload silently rewinds the run.
+
+   **Decision — Option A: record saga choices in `history`, reconstruct by
+   replaying them through the engine.** This preserves the "save = seed + history,
+   bit-identical replay" invariant rather than snapshotting mutable state (which
+   would have to capture the saga clock, family aging, and rival world — all
+   advanced OUTSIDE history by `advanceRunClock`). `HistoryEntry` gains an optional
+   saga discriminant (`{ saga: "beat" | "decision", index }`); `loop.ts` appends
+   one on every `pickBeat`/`pickDecision`; `toSave` carries them; reconstruction
+   replays the event steps to the founded base, then re-drives the SagaDriver
+   through the recorded saga steps. The saga clock/family/world all re-derive
+   deterministically from the choice sequence, so the reconstruction is identical.
+   The in-memory `SagaCursor` (layer 1) remains as the cheap mid-render position
+   for the `GameState`-object restore path used by tests + hot reload; the save
+   layer is the durable seed+history channel. Rejected: Option B (snapshot full
+   GameState) breaks the invariant; Option C (separate side-channel array) is just
+   Option A with a redundant parallel list — folding into `history` keeps ONE
+   ordered choice log that already drives every RNG fork label.

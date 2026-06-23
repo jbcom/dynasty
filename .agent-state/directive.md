@@ -1085,14 +1085,24 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   (folded the g8/g9 pulpit-fork nit); CI green; self-squash-merged; release-please cut 0.21.0 (#103). Synced
   main, deleted branch. Post-merge Release + CD verifying on main (monitor b8nwuo11a). The ORIGIN-FLAVOR DEPTH
   MILESTONE IS COMPLETE — the founder's power base colors all 10 generations, founding 1776 → the stars.
-- [ ] **SPINE-ACT-DEPTH — deepen each spine act toward the hour+ gameplay mandate.** MEASURED: each of the 10
-  acts has only ~4 CORE scenes + ~5-6 beats — at ~2 paragraphs/scene that's ~15-20 min of reading total, well
-  short of the user's "an hour or more of gameplay." The origin-flavor work added a rich PER-BASE OPENING to
-  each act; the next depth lever is MORE CORE SCENES/BEATS per generation between open and close (more lived
-  texture, more meaningful mid-act decisions, more weave). Approach: extend each act's authored scene chain
-  (the GenAI spine pipeline is the natural author — but NO key in this env, so either author hand-crafted
-  scenes in the spine voice OR gate on the key returning). Enumerate first: how many scenes/beats per act hits
-  ~6 min each × 10 = hour+; design the added scene SHAPES (not just more of the same). On `feat/spine-depth-content`.
+- [ ] **SAGA-RESTORE-CURSOR — persist the saga scene position across save/restore (PREREQUISITE for
+  SPINE-ACT-DEPTH).** DISCOVERED building the act-depth interstitials: there is NO saga scene cursor
+  (sceneId/beatCursor) in GameState/save — the Game constructor's `beginSagaActForState()` always RESTARTS the
+  current generation's act at its OPENING on restore. So restoring mid-act REPLAYS the act's already-seen
+  scenes, advancing the clock further than an uninterrupted run (the loop.unit "crossing nudges replay-safe"
+  test diverged 2166→2182 once g0 grew from 4→6 scenes). It only passed before by luck — 4-scene acts happened
+  to land restores on generation boundaries. ANY act-deepening exposes it. Fix: persist the SagaDriver ActState
+  (sceneId + beatCursor + flags + motivators) in GameState + the save, and reconstruct it on restore instead
+  of restarting from the act open. Then mid-act restore is bit-identical. This is the real root the deepening
+  needs. (The act-depth interstitial DESIGN + the idempotent script approach are proven — reverted only
+  pending this fix; see docs/superpowers/specs/2026-06-22-founding-spine-redesign.md §SPINE-ACT-DEPTH.)
+- [ ] **SPINE-ACT-DEPTH — deepen each spine act toward the hour+ mandate (BLOCKED on SAGA-RESTORE-CURSOR).**
+  MEASURED: each of the 10 acts has only ~4 CORE scenes (~15-20 min total) — short of the "hour or more"
+  mandate. DESIGN DECIDED (spec §SPINE-ACT-DEPTH): interleave decisionless TEXTURE + CONSEQUENCE interstitials
+  (open → texture → [decision] → consequence → [decision] → close, ~6 scenes/act) via an idempotent script;
+  PROVEN on g0 (plays through correctly, byte-idempotent) but REVERTED because it exposed SAGA-RESTORE-CURSOR.
+  Once that's fixed: re-apply the g0 interstitials, extend act-by-act, ship in batches. Author hand-crafted in
+  the spine voice (no GenAI key in this env).
 - [x] **FS-PR-LOOP — DONE → PR #100 MERGED (squash 94c694a).** First CI pass green; addressed all 6 CodeRabbit
   findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision pin) + a regression test in a
   forward commit + resolved all 6 threads → CLEAN; re-run CI green; self-squash-merged. release-please then

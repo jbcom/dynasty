@@ -134,6 +134,45 @@ export class SagaDriver {
     return this.state !== null && !actEnded(this.state);
   }
 
+  /**
+   * SAGA-RESTORE-CURSOR: the live walk position to persist — actId + sceneId + beatCursor. Null when no
+   * act is active. The motivators + flags are carried in `personality`/`flags` on the run state (the
+   * engine keeps them synced), so they're intentionally NOT part of the saved cursor; `restore` rebuilds
+   * the full ActState from this cursor + the run's live motivators/flags.
+   */
+  get cursor(): { actId: string; sceneId: string | null; beatCursor: number } | null {
+    if (!this.state) return null;
+    return {
+      actId: this.state.actId,
+      sceneId: this.state.sceneId,
+      beatCursor: this.state.beatCursor,
+    };
+  }
+
+  /**
+   * SAGA-RESTORE-CURSOR: resume an in-progress act at a SAVED position instead of restarting it at the
+   * opening. Reconstructs the ActState from the persisted cursor + the run's live motivators + flags, and
+   * recovers the act title from the corpus. Returns true on success; false (a no-op) if the act id is
+   * unknown (corpus drift) so the caller can fall back to a fresh begin. Pure.
+   */
+  restore(
+    cursor: { actId: string; sceneId: string | null; beatCursor: number },
+    motivators: Motivators,
+    flags: readonly string[] = [],
+  ): boolean {
+    const act = this.corpus.acts.get(cursor.actId);
+    if (!act) return false;
+    this.actTitle = act.title;
+    this.state = {
+      actId: cursor.actId,
+      sceneId: cursor.sceneId,
+      beatCursor: cursor.beatCursor,
+      flags: [...flags],
+      motivators,
+    };
+    return true;
+  }
+
   /** The line's accumulated flags (for save/replay + gating). */
   get flags(): string[] {
     return this.state ? [...this.state.flags] : [];

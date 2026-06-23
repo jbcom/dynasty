@@ -223,6 +223,12 @@ describe("CP-R2 foundByComposition — composed origin (place × era × culture 
     expect(restored.founding?.place).toBe("ireland");
     expect(restored.founding?.era).toBe("origins");
     expect(restored.archetype).toBe("entertainment");
-    expect(restored).toEqual(founded);
+    // SAGA-RESTORE-CURSOR: a founded run reconstructs through the engine, so the reload sits at the
+    // novel's OPENING with a saga cursor (the engine-ready position) — that's the only addition over the
+    // raw founded base. Strip it to assert the rest of the state is reconstructed bit-identically.
+    expect(restored.saga).toBeTruthy();
+    expect(restored.saga?.beatCursor).toBe(0);
+    const { saga: _saga, ...restWithoutSaga } = restored;
+    expect(restWithoutSaga).toEqual(founded);
   });
 });

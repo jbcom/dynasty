@@ -585,4 +585,50 @@ describe("Game loop", () => {
     // Any present thread is well-formed; with no destination slots authored yet, the selector is inert.
     for (const t of a) expect(t.crossing.length).toBeGreaterThan(0);
   });
+
+  it("SAGA-RESTORE-CURSOR: a save mid-act RESUMES at the exact scene, not the act opening", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Cursor",
+      seed: "sagacursor",
+      originId: "composed:ireland:origins",
+    };
+    // Advance a few WEAVE BEATS within the FOUNDING act WITHOUT crossing a generational decision, so the
+    // walk is genuinely paused mid-act (a non-opening scene, or beatCursor > 0).
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    const openingSceneId = g.view.saga.scene?.id ?? null;
+    expect(openingSceneId).toBeTruthy();
+    let advanced = false;
+    for (let i = 0; i < 6; i++) {
+      const s = g.view.saga.scene;
+      if (!s) break;
+      if (s.decision) break; // stop before the generational fork — we want a pure mid-act pause
+      if (!s.beats.length) break;
+      g.pickBeat(0);
+      advanced = true;
+      // Once we've left the opening scene (or moved the beat cursor on it), we're paused mid-act.
+      const cur = g.view.state.saga;
+      if (cur && (cur.sceneId !== openingSceneId || cur.beatCursor > 0)) break;
+    }
+    expect(advanced, "drove at least one weave beat").toBe(true);
+
+    const saved = g.view.state;
+    // The cursor was persisted into the run state — actId + a live scene position.
+    expect(saved.saga, "saga cursor persisted in GameState").toBeTruthy();
+    expect(saved.saga?.actId).toBeTruthy();
+    const savedSceneId = saved.saga?.sceneId ?? null;
+    const savedYear = saved.year;
+
+    // Restore into a fresh Game. The resumed reader sits on the SAVED scene — NOT the act opening — and
+    // the clock did not jump (no replay of already-read scenes).
+    const restored = new Game(real, comp.seed, saved, comp.archetype);
+    expect(restored.view.saga.scene?.id).toBe(savedSceneId);
+    expect(restored.view.state.year).toBe(savedYear);
+  });
 });

@@ -1,9 +1,10 @@
 import type { Content } from "../sim/content";
-import { replay, replayFromState } from "../sim/effects";
+import { replay } from "../sim/effects";
 import { type Composition, foundByComposition, foundDynasty } from "../sim/founding";
 import { createRng } from "../sim/rng";
 import type { Archetype } from "../sim/slots";
 import { type GameState, initState } from "../sim/state";
+import { Game } from "./loop";
 import type { Storage } from "./storage";
 
 const SAVE_KEY = "mmm.save.v1";
@@ -53,7 +54,19 @@ export interface SaveData {
   };
   /** Legacy v1 literal dynasty key, read only when migrating an old save. */
   dynasty?: string;
-  history: Array<{ eventId: string; choiceId: string }>;
+  /**
+   * The ordered choice log. An entry is EITHER an event-flow choice (eventId + choiceId) OR a SAGA walk
+   * step (SAGA-RESTORE-CURSOR: `saga` = "beat" | "decision", `index` = chosen beat/option). Replaying
+   * this whole sequence — event steps through the sim, saga steps through the engine's SagaDriver —
+   * reconstructs a saga-deep founded run bit-identically (the saga clock/family/world re-derive from the
+   * choice sequence). Legacy saves carry event-only entries; those still replay unchanged.
+   */
+  history: Array<{
+    eventId?: string;
+    choiceId?: string;
+    saga?: "beat" | "decision";
+    index?: number;
+  }>;
   savedYear: number;
 }
 
@@ -91,7 +104,11 @@ export function toSave(state: GameState): SaveData {
           },
         }
       : {}),
-    history: state.history.map((h) => ({ eventId: h.eventId, choiceId: h.choiceId })),
+    // Carry each step's discriminant verbatim — event steps keep eventId/choiceId, saga steps keep
+    // saga/index — so the full ordered choice log reconstructs an event- OR saga-deep run on replay.
+    history: state.history.map((h) =>
+      h.saga ? { saga: h.saga, index: h.index } : { eventId: h.eventId, choiceId: h.choiceId },
+    ),
     savedYear: state.year,
   };
 }
@@ -146,7 +163,11 @@ export function fromSave(content: Content, save: SaveData): GameState {
         axisChoices: f.axisChoices,
       }).state;
     }
-    return replayFromState(content, base, save.history, createRng);
+    // SAGA-RESTORE-CURSOR: a founded line plays the NOVEL, whose beat/decision steps live in the choice
+    // log alongside any event steps. Reconstruct by replaying the WHOLE interleaved sequence through the
+    // engine (event steps via choose, saga steps via pickBeat/pickDecision) — the saga clock, family
+    // aging, and rival world all re-derive from the choices, so the rebuild is bit-identical to live play.
+    return Game.reconstruct(content, base, save.history);
   }
   // Plain archetype run: archetype field (v2), else legacy literal dynasty (v1).
   const archetype: Archetype =

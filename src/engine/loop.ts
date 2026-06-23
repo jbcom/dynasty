@@ -166,8 +166,19 @@ export class Game {
     // FS-8: the founding-spine pivot — the ONE line plays the AUTHORED SPINE act for this GENERATION.
     // The spine has 10 generations (g0..g9), so spine play uses the TRUE generation (capped at the spine
     // length), NOT MAX_RUNG (5) — clamping to MAX_RUNG replayed g5 forever past the 6th generation.
+    // SAGA-RESTORE-CURSOR: if this is a RESTORE of a run paused mid-act, resume at the SAVED scene
+    // position rather than restarting the act at its opening (which replayed already-seen scenes and
+    // over-advanced the decoupled saga clock). The cursor carries only actId/sceneId/beatCursor; the
+    // motivators + flags come from the run's live personality/flags. Falls through to a fresh begin if
+    // the act id no longer resolves (corpus drift).
+    if (this.state.saga) {
+      if (this.saga.restore(this.state.saga, this.state.personality, this.state.flags)) return;
+    }
     const spineGen = Math.min(generation, SPINE_MAX_GEN);
-    if (this.saga.beginSpine(spineGen, this.state.personality, this.state.flags)) return;
+    if (this.saga.beginSpine(spineGen, this.state.personality, this.state.flags)) {
+      this.syncSagaCursor();
+      return;
+    }
     // Fall back to the 504-cell corpus only if the spine isn't authored that far (back-compat). The
     // cell lattice tops out at MAX_RUNG, so the cell path keeps the old cap.
     const tier = Math.min(generation, MAX_RUNG);
@@ -344,6 +355,20 @@ export class Game {
   }
 
   /**
+   * SAGA-RESTORE-CURSOR: mirror the driver's live walk position into the persisted run state, so a save
+   * taken at any point reloads at the exact scene. Cleared (undefined) when no act is active so a restore
+   * of a between-acts run begins the next act fresh. Deterministic — pure read of the driver's cursor.
+   */
+  private syncSagaCursor(): void {
+    const cursor = this.saga.cursor;
+    this.state = cursor
+      ? { ...this.state, saga: cursor }
+      : this.state.saga
+        ? { ...this.state, saga: undefined }
+        : this.state;
+  }
+
+  /**
    * Reading the novel passes in-world time: each saga choice ticks the timeline one step (years
    * advance, eras roll, the run can reach an end) so the run progresses toward its conclusion even
    * while the played surface is the novel rather than the event flow. Then, if the act has ended,
@@ -382,11 +407,27 @@ export class Game {
     }
   }
 
+  /**
+   * SAGA-RESTORE-CURSOR: record a saga walk step in the run's ONE ordered choice log, so the persisted
+   * save (seed + history) reconstructs the novel walk on reload. Appended AFTER the move's clock/
+   * succession logic — which keys RNG fork labels on `history.length` — so those labels (and thus replay
+   * determinism) are unchanged; the step counts toward history only for the NEXT move, identically in
+   * live play and reconstruction.
+   */
+  private recordSagaStep(kind: "beat" | "decision", index: number): void {
+    this.state = {
+      ...this.state,
+      history: [...this.state.history, { saga: kind, index, year: this.state.year }],
+    };
+  }
+
   /** Apply a weave-beat choice on the current novel scene; time passes; then re-emit. */
   pickBeat(beatIndex: number): void {
     this.syncMotivators(this.saga.pickBeat(beatIndex));
     this.syncSagaFlags();
     this.advanceRunClock();
+    this.recordSagaStep("beat", beatIndex);
+    this.syncSagaCursor();
     this.emit();
   }
 
@@ -449,6 +490,8 @@ export class Game {
     }
     // Don't tick the clock once the line has ended (here or via a prior end) — the run is over.
     if (!this.state.end) this.advanceRunClock();
+    this.recordSagaStep("decision", optionIndex);
+    this.syncSagaCursor();
     this.emit();
   }
 
@@ -529,5 +572,38 @@ export class Game {
 
   get finished(): boolean {
     return this.state.end !== null;
+  }
+
+  /**
+   * SAGA-RESTORE-CURSOR: reconstruct a run from a founded BASE state + the ordered choice log, replaying
+   * BOTH channels through the live engine — event steps via `choose`, saga steps via `pickBeat`/
+   * `pickDecision`. This is how a persisted save (seed + interleaved history) rebuilds a saga-deep run
+   * bit-identically: the saga clock, family aging, and rival world all re-derive deterministically from
+   * the choice sequence. Returns the reconstructed `GameState`. A step that no longer applies (corpus/
+   * content drift, or the run already ended) is skipped so a partial-compat save still loads.
+   */
+  static reconstruct(
+    content: Content,
+    base: GameState,
+    history: ReadonlyArray<{
+      eventId?: string;
+      choiceId?: string;
+      saga?: "beat" | "decision";
+      index?: number;
+    }>,
+  ): GameState {
+    const game = new Game(content, base.seed, base, base.archetype);
+    for (const step of history) {
+      if (game.finished) break;
+      if (step.saga === "beat") {
+        if (game.view.saga.scene) game.pickBeat(step.index ?? 0);
+      } else if (step.saga === "decision") {
+        if (game.view.saga.scene?.decision) game.pickDecision(step.index ?? 0);
+      } else if (step.eventId && step.choiceId) {
+        // Only replay the event step if it's the live current event (it always is in a faithful log).
+        if (game.view.currentEvent?.id === step.eventId) game.choose(step.choiceId);
+      }
+    }
+    return game.view.state;
   }
 }
