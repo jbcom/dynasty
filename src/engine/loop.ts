@@ -160,6 +160,9 @@ export class Game {
     const protagonist = family?.members.find((m) => m.id === family.protagonistId);
     const tier = Math.min(protagonist?.generation ?? 0, MAX_RUNG);
     const cls = sagaClassForWealth(this.state.personality.wealth);
+    // FS-8: the founding-spine pivot — the ONE line plays the AUTHORED SPINE act for this generation.
+    // Fall back to the 504-cell corpus only if the spine isn't authored that far (back-compat).
+    if (this.saga.beginSpine(tier, this.state.personality, this.state.flags)) return;
     this.saga.begin(
       { wave, archetype: this.state.archetype, tier, cls },
       this.state.personality,

@@ -265,6 +265,18 @@ export function actsForTier(
   return fallback;
 }
 
+/**
+ * FS-8: the AUTHORED dynasty-spine act for a generation (the ONE line, founding→stars). The spine acts
+ * carry `spine:g<gen>:*` ids (authored by genai-spine). Returns the act for `gen` whose id starts with
+ * `spine:g<gen>:`, or undefined if the spine isn't authored that far. This is how the engine plays the
+ * spine instead of the 504-cell corpus ([[founding-spine-pivot]]).
+ */
+export function spineActForGen(corpus: SagaCorpus, gen: number): ActChapter | undefined {
+  const prefix = `spine:g${gen}:`;
+  for (const a of corpus.acts.values()) if (a.id.startsWith(prefix)) return a;
+  return undefined;
+}
+
 /** A braided cross-family fragment: the rival wave, the bespoke crossing line, + the opening scene of
  *  its act at the thread's tier. */
 export interface BraidedThread {

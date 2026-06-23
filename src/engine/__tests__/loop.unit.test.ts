@@ -477,9 +477,11 @@ describe("Game loop", () => {
     };
     const a = play();
     // The saga clock is decoupled from the 1885 era ladder, so baghdad survives generations (was extinct
-    // ~16 scenes) AND the run caps at 6 generations (was infinite once decoupled) — a full, finite run.
+    // ~16 scenes) AND the run caps + finishes (was infinite once decoupled) — a full, finite run.
+    // FS-8: the engine now plays the AUTHORED SPINE (10 generations × ~3-5 scenes ≈ 40-110 base scenes,
+    // before woven branches), denser-but-shorter than the old 504-cell lattice. Assert a full finite run.
     expect(a.finished).toBe(true);
-    expect(a.scenes).toBeGreaterThan(120);
+    expect(a.scenes).toBeGreaterThan(30);
     expect(a.scenes).toBeLessThan(400);
     expect(a.conv).toBeTruthy();
     // Replay-deterministic.
