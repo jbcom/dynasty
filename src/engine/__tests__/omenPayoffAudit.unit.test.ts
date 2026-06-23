@@ -42,24 +42,28 @@ describe("omen payoff audit (OMEN-PAYOFF-AUDIT)", () => {
       const g = new Game(real, seed, base, "political");
       let guard = 0;
       // A shock is observable as a NEW `shock:*` flag appearing after a saga step.
-      const shockCount = () => g.view.state.flags.filter((f) => f.startsWith("shock:")).length;
+      const shockCount = (flags: readonly string[]) =>
+        flags.filter((f) => f.startsWith("shock:")).length;
       while (!g.finished && guard < 300) {
-        const s = g.view.saga.scene;
+        // `g.view` is a heavy getter (rebuilds the whole GameView) — snapshot it ONCE per iteration (Gemini #136).
+        const before = g.view;
+        const s = before.saga.scene;
         if (!s) {
-          if (g.view.currentEvent?.choices[0]) {
-            g.choose(g.view.currentEvent.choices[0].id);
+          if (before.currentEvent?.choices[0]) {
+            g.choose(before.currentEvent.choices[0].id);
             guard++;
             continue;
           }
           break;
         }
-        const omenBefore = g.view.foreshadow !== null;
-        const shocksBefore = shockCount();
+        const omenBefore = before.foreshadow !== null;
+        const shocksBefore = shockCount(before.state.flags);
         // Advance one saga step (a beat or decision) — the shock roll happens on this step if a clock passes.
         if (s.decision) g.pickDecision(0);
         else if (s.beats.length) g.pickBeat(0);
         else break;
-        const firedShock = shockCount() > shocksBefore;
+        // One fresh view read after the step (state changed) to detect a newly-stamped shock flag.
+        const firedShock = shockCount(g.view.state.flags) > shocksBefore;
         if (omenBefore) {
           omenSteps++;
           if (firedShock) omenThenShock++;
