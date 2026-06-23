@@ -1122,29 +1122,26 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   divergence; the further layer ([[emergent-cause-effect-sim]]) is rival lines REACTING to the player
   (Yuka-style GOAP) + seeded disease/disruption shocks the player lives through, so playthroughs diverge in
   EVENTS, not just economy. Lower priority than SPINE-ACT-DEPTH but a real depth lever.
-- [ ] **MAP-ERA-PROGRESS-RICHER — the journey map could show more than 4 macro-act waypoints.** VL-3's MapView
-  marks the 4 macro-acts; with 10 generations + the convergence rivals, the map could plot per-generation
-  progress + rival lines' positions, making the founding→stars journey legible at finer grain. Visual-polish
-  depth; revisit after SPINE-ACT-DEPTH.
-- [ ] **SAGA-CLOCK-DECOUPLE — a generation's in-world span must not scale with its scene COUNT (PREREQUISITE
-  for SPINE-ACT-DEPTH-2).** DISCOVERED building the depth-2 reversal: `advanceSagaClock` ticks SAGA_YEAR_STEP=1
-  year on EVERY pickBeat/pickDecision (src/sim/timeline.ts:169,179). So deepening an act (more scenes/beats)
-  ages the protagonist faster — adding a 7th scene to the 4 heavy acts pushed the FS-8 founding→stars run to
-  die of `line-extinct` at g7 (year 2132) before reaching g9, because mortality (advanceFamily, age-based)
-  caught the line mid-act before the close-scene succession begot an heir. The two loop.unit gen-count tests
-  (MAX_RUNG cap, FS-8 all-10-gens) are calibrated to the old per-gen year cost. FIX: decouple aging from
-  texture — a generation should span a roughly FIXED number of years driven by its ~3 DECISIONS, not its
-  interstitial count. Options: (a) only tick the saga year on `pickDecision` (+ beats of decision-bearing
-  scenes), NOT on decisionless gather interstitials; (b) a per-generation year BUDGET divided across the
-  act's decisions. Pick (a) or (b) by total-fit, update the year-coupled tests, keep replay deterministic.
-- [ ] **SPINE-ACT-DEPTH-2 — a third (REVERSAL) interstitial for the heaviest acts (BLOCKED on SAGA-CLOCK-DECOUPLE).**
+- [x] **MAP-ERA-PROGRESS-RICHER — DONE (commit 04413e5).** MapView now plots a per-GENERATION marker (g0..g9,
+  from the live family) sliding along the founding→stars axis + faint RIVAL dots per convergence line on the
+  same rung axis, with a caption naming the leading rival. Optional props from PlayScreen's existing
+  view.rivalStandings/view.rung; renders gracefully from gameState alone. Tests in MapView.browser.
+- [x] **SAGA-CLOCK-DECOUPLE — DONE (commit dcdc83b, root-caused by stuck-loop-debugger).** ROOT: generation
+  advanced ONLY as a side-effect of the protagonist dying in advanceFamily's per-YEAR mortality loop — so it
+  scaled with years, and the clock ticked 1y/scene. FIX: pickBeat advances 0 years (texture passes no time);
+  a succession pickDecision begins the next-gen act, then deterministically promotes the heir via the new pure
+  `succeedToHeir` and advances SAGA_GENERATION_SPAN=25y at once. Generation now steps per-DECISION, not per
+  mortality roll — replay bit-identical. Tests: 2 SAGA-CLOCK-DECOUPLE regressions + DEPTH-3 updated. 834 node
+  green. This unblocks depth-2.
+- [ ] **SPINE-ACT-DEPTH-2 — a third (REVERSAL) interstitial for the heaviest acts (UNBLOCKED — clock fixed).**
   The founding (g0) + the three frontier-turn acts (g3 Gilded-Age, g8 orbital, g9 interstellar) carry the most
   weight and bear a mid-act REVERSAL scene (a complication after the consequence, before the 2nd decision) —
-  PROVEN authored + walks correctly (7 scenes each, idempotent) but REVERTED because the extra scenes aged the
-  line to extinction before g9 (the SAGA-CLOCK-DECOUPLE root). Once that's fixed: re-apply the 4 reversals
-  (re-author in fs-spine-act-depth.mjs: the `inter(…,"rev",…)` entries + the rev_ branch in isInterstitialId
-  + the depth-2 test block — all were drafted, revert them from git history of this branch's working tree).
-  Measure total reading time after; target the hour+ explicitly.
+  PROVEN authored + walks correctly (7 scenes each, idempotent) but reverted earlier to expose
+  SAGA-CLOCK-DECOUPLE, now FIXED so the deeper acts no longer age the line to death. NEXT: re-author the 4
+  reversals in fs-spine-act-depth.mjs (the `inter(…,"rev",…)` entries + the rev_ branch in isInterstitialId +
+  the depth-2 test block — recover from this branch's git history, commit 658c5d6..73c97bd working-tree
+  drafts), confirm the FS-8 founding→stars run still reaches g9 with the deeper heavy acts, measure reading
+  time toward the hour+.
 - [x] **SPINE-WEAVE-PAYOFF — DONE (commit abe608e).** Enumerated the payoff channels: (1) the interstitial
   beats' motivatorShifts ALREADY accrete into the run + the convergence ending (real, by design); (2)
   convergence flag-gating REJECTED — it's deliberately motivators-pure; (3) the trigger lattice is the
@@ -1158,14 +1155,19 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   enter through different doors (newspapers/switchboard/dashboards/shipyard-thrum/tactical display) → 1/10.
   Remaining backlog: a deeper rhythm/scannability pass on the BEAT prose + cross-act sentence-skeleton scan
   with the Suzerain reference ([[suzerain-ui-reference]]) — fold into SPINE-CONTENT-QA-2 below.
-- [ ] **SPINE-WEAVE-PAYOFF-2 — extend matched flag→branch rules across the remaining signature flags.** The
-  pattern shipped with 2 rules; the other waves' branches (chinese exclusion_and_after, bavaria
-  the_great_war_rupture, scandinavian, baghdad) can each take a thematically-honest interstitial-flag gate
-  (e.g. g2_kept_faith_with_kin → a kin-loyalty arrival thread; g7_gathered_everything → a surveillance-age
-  thread). Enumerate matches FIRST (flag theme ↔ branch theme ↔ era window), one rule per genuine match;
-  never blanket-wire. Tests per rule (fires in-window, inert out-of-window).
-- [ ] **SPINE-CONTENT-QA-2 — beat-prose rhythm + cross-act skeleton scan.** First QA pass fixed the consequence
-  openers; this pass audits the 40 weave-BEAT prose lines + the second/third sentences of each interstitial
-  for shared rhythm, and runs a cross-act sentence-skeleton diff so no two acts' texture (or consequence)
-  read as the same template. Apply the scannability techniques ([[suzerain-ui-reference]],
-  [[scannability-game-novel-balance]]): varied sentence length, glance-readable density. Fix templated lines.
+- [x] **SPINE-WEAVE-PAYOFF-2 — DONE (commit b42a743).** Added 3 more thematically-matched flag→branch rules:
+  g2_kept_faith_with_kin → ireland machine_politics_return; g7_gathered_everything → chinese
+  exclusion_and_after; g4_co-opted_the_reform → bavaria the_great_war_rupture (1914-1933 window). Each flag +
+  era/year gated, tested (fires in-window, inert out). 5 of the 10 family branches now carry a matched
+  interstitial-flag gate. (scandinavian arrival + baghdad merchant_house remain — no clean flag match yet;
+  leave them unforced per the "never blanket-wire" rule.)
+- [x] **SPINE-CONTENT-QA-2 — DONE (commit 3cfdf58).** Cross-act skeleton scan of the 40 interstitial weave-beats
+  found the first beat of nearly every interstitial opening with the same perception-verb skeleton ("You
+  watch" 5×, "You read" 3×, "You walk" 3×). Diversified the clustered openers (object-first / sensation-first
+  / action-first) → 35 distinct first-2-word openers across 40 beats, dominant skeleton gone. Remaining
+  follow-on backlog (deeper sentence-rhythm + the new depth-2 reversal prose) folds into a future QA pass once
+  depth-2 lands.
+- [ ] **SPINE-CONTENT-QA-3 — QA the depth-2 reversal prose once it lands + a sentence-rhythm pass.** After
+  SPINE-ACT-DEPTH-2 re-adds the 4 reversal scenes, run the same uniqueness + scannability lens on them (no
+  shared skeleton with each other or with the existing tex/csq), plus a deeper 2nd/3rd-sentence rhythm audit
+  across all interstitials ([[suzerain-ui-reference]], [[scannability-game-novel-balance]]). Fix templated lines.
