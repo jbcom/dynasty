@@ -1063,10 +1063,15 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   abolitionist denominational split, Dred Scott + higher law, Union-vs-section). Same idempotent applyAct()
   pattern (now g0+g1+g2); spineOriginFlavor.unit asserts all three acts per base (21 tests). 757 unit + 106
   browser + tsc + check green. On branch `feat/spine-origin-depth`.
-- [ ] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G3+ — extend base-flavored openings to g3 (gilded age) onward.** The
-  pattern is now proven across 3 acts; each further gen is one applyAct() config block + 5 authored
-  base-variant scenes diverting to that act's second scene. Author g3 (gilded age) next, then later gens —
-  deepening how far the origin choice echoes toward the stars. Incremental.
+- [x] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G3 — DONE.** g3 (Act IV Gilded Age "The Iron and the Ivory") now has 5
+  base-flavored openings (land/pulpit/law/military/press; commerce is the default Broad-Street open). Gilded-Age
+  voiced; same applyAct() pattern (g0–g3); spineOriginFlavor.unit generalized to per-act base sets + asserts
+  all 4 acts (32 tests). 768 unit + tsc + check green. On `feat/spine-origin-depth`.
+- [ ] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G4+ — extend base-flavored openings to g4 (progressive era) onward.** The
+  applyAct() pattern is proven across 4 acts; each further gen is one config block + 5 authored base-variant
+  scenes diverting to the act's second scene. Author g4 (progressive) next, then g5+ as bandwidth allows —
+  deepening the origin echo toward the stars. NOTE: this branch (feat/spine-origin-depth) is accumulating the
+  g2/g3/g4+ depth work; ship it as ONE PR once a sensible batch (through ~g5) is done, per one-branch review.
 - [x] **FS-PR-LOOP — DONE → PR #100 MERGED (squash 94c694a).** First CI pass green; addressed all 6 CodeRabbit
   findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision pin) + a regression test in a
   forward commit + resolved all 6 threads → CLEAN; re-run CI green; self-squash-merged. release-please then
