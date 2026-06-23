@@ -1120,6 +1120,12 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ### Rolling backlog (post-WV-3 — keep this section ≥3 actionable, append before draining)
 
+- [ ] [WAIT-REVIEW] **CORPUS-MINE-INTERSECTIONS PR #118 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/corpus-mine-intersections: fabric wired into resolveThreads + all 7 families now have vignettes.
+  Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads,
+  self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next branch for the rolling backlog
+  (SHOCK-FAMILY-SUCCESSION-PRESSURE / DOSSIER-SHOCK-LEDGER).
+
 - [ ] [WAIT-REVIEW] **SAGA-AUDIO-ATMOSPHERE PR #116 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/saga-audio-atmosphere: the ambient bed now shifts by saga macro-act. Loop: wait build-and-test
   + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge once green
