@@ -1072,10 +1072,15 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   commerce default). The origin choice now echoes across SIX generations (g0 founding 1776 → g5 mid-century).
   Same applyAct() pattern (g0–g5); spineOriginFlavor.unit asserts all 6 acts (48 tests). 784 unit + tsc +
   check green. On `feat/spine-origin-depth` — ready to ship this g2-g5 depth batch as one PR.
-- [ ] [WAIT] **FS-SPINE-DEPTH-PR — g2–g5 origin-flavor batch → PR #102 OPEN.** Full local gate GREEN; reviewer
-  pass CLEAN (byte-idempotent, gating correct, 6-base coverage, non-vacuous). Pushed feat/spine-origin-depth +
-  opened PR #102 (https://github.com/jbcom/dynasty/pull/102). Babysitting: monitoring CI; address CodeRabbit +
-  resolve threads, self-squash-merge once green, verify post-merge Release/CD. Then g6+ on a fresh branch.
+- [x] **FS-SPINE-DEPTH-PR — DONE → PR #102 MERGED (squash e1f6f2e).** Reviewer pass CLEAN; opened PR #102;
+  addressed all 6 CodeRabbit findings (g2 commerce-default + press variant — the real one; pulpit worldview
+  alignment; idempotent-filter hardening) + resolved threads → CLEAN; re-run CI green; self-squash-merged.
+  Synced main, deleted the branch. Post-merge Release + CD verifying on main (monitor b0uxvdvx7).
+- [ ] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G6+ — extend base-flavored openings to g6 (broadcast) onward.** On a
+  fresh branch `feat/spine-origin-depth-g6`. The applyAct() pattern (now g0–g5) makes each further gen one
+  config block + 5 authored base-variant scenes diverting to the act's second scene. Author g6 (broadcast),
+  then g7 (networked), g8 (orbital), g9 (interstellar) — completing the origin echo all the way to the stars.
+  Batch through ~g9 then ship as one PR (per one-branch review).
 - [x] **FS-PR-LOOP — DONE → PR #100 MERGED (squash 94c694a).** First CI pass green; addressed all 6 CodeRabbit
   findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision pin) + a regression test in a
   forward commit + resolved all 6 threads → CLEAN; re-run CI green; self-squash-merged. release-please then
