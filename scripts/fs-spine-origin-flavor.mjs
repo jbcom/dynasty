@@ -1089,6 +1089,465 @@ const G6_VARIANTS = [
 ];
 
 /**
+ * G7 (Act "The Sovereign Algorithm", the networked/platform era ~2000s-2030s): five base-flavored openings
+ * diverting to the g7 `doctrine` scene. The existing server-farm `open` is the commerce/default (the
+ * platform firm). Voice: the dynasty's ancient power base reborn as data, platform, and algorithm.
+ */
+const G7_VARIANTS = [
+  {
+    id: "spine:g7:networked:open_land",
+    base: "land",
+    sense: "sight",
+    prose: [
+      "The satellite map on the wall glowed with the {family_name} parcels — but the land that mattered now was the land UNDER the data: the server farms drawing a small city's power, the fiber right-of-way, the cooling water rights that made a county worth a fortune to the cloud. {given_name} {surname} had inherited dirt and learned that in the networked age the most valuable acre was the one wired to the backbone. The dynasty's oldest asset had become infrastructure for the immaterial.",
+      "Word came up from the brokers of data-center sprawl and water wars, of small towns bidding their grids away to the platforms, of farmland worth more as a server campus than as a harvest. {given_name} weighed the patient land against the ravenous cloud, knowing the family that fed its acres to the network would own the ground the algorithm stood on — and the one that clung to the plow would be bought out beneath it.",
+    ],
+    beats: [
+      {
+        prose: ["A platform giant offers a fortune to wire the family's land into a hyperscale data campus."],
+        choice: {
+          text: "Lease the land to the cloud — infrastructure is the new tenancy.",
+          motivatorShift: { wealth: 1, reach: 1 },
+          setFlags: ["g7_land_data_campus"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A water-rights fight pits the data centers against the old farms — and the family owns both."],
+        choice: {
+          text: "Hoard the water rights — in the networked age, the utility IS the land.",
+          motivatorShift: { power: 1, lineage: 1 },
+          setFlags: ["g7_land_water_rights"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g7:networked:open_pulpit",
+    base: "pulpit",
+    sense: "sound",
+    prose: [
+      "The {family_name} ministry now lived in the feed, and {given_name} {surname} shepherded a flock that gathered not in a sanctuary but in a stream — the megachurch app, the livestreamed service, the algorithm that decided which sermon a million phones would surface. Faith in the networked age was a platform play: engagement, virality, the prayer request as data point. The dynasty's pulpit could become a digital congregation vaster than any cathedral — or be drowned in the infinite scroll of competing gods.",
+      "Word came up the feed of online radicalization and digital cults, of faith influencers and the gamified tithe, of a culture fracturing into a billion algorithmic chapels. {given_name} weighed the boundless reach of the networked ministry against the way the machine flattened the sacred into content, knowing the pulpit that mastered the algorithm would shape the soul of the age — or sell it for engagement.",
+    ],
+    beats: [
+      {
+        prose: ["A platform offers the ministry algorithmic amplification — a congregation of tens of millions."],
+        choice: {
+          text: "Preach to the algorithm — the feed is the new revival field.",
+          motivatorShift: { reach: 1, worldview: -1 },
+          setFlags: ["g7_pulpit_streamed_faith"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["Operatives want the digital flock weaponized into a networked political movement."],
+        choice: {
+          text: "Mobilize the feed as a movement — faith + the algorithm is raw power.",
+          motivatorShift: { politics: 1, power: 1 },
+          setFlags: ["g7_pulpit_networked_movement"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g7:networked:open_law",
+    base: "law",
+    sense: "sight",
+    prose: [
+      "The {family_name} firm now practiced law in a country whose statutes had not caught up to its machines, and {given_name} {surname} read the networked age as a frontier of code and contract: the platform's terms of service as private law, antitrust against the tech giants, the surveillance state and the data breach and the algorithm that discriminated without a face to blame. A lawyer who could govern the ungoverned — write the regulation or the loophole for the platforms — held the rule-book of a world run by software.",
+      "Word came down of antitrust suits against the platform monopolies, of data-privacy regimes and the fights over encryption and speech, of courts straining to apply old law to code. {given_name} weighed the regulator's leash against the platform's retainer, knowing the law of this age was deciding who governed the algorithms that governed everyone — and the {family_name} name would be on one side of that frontier or the other.",
+    ],
+    beats: [
+      {
+        prose: ["A government antitrust team recruits the firm to break the platform monopolies."],
+        choice: {
+          text: "Take the trustbusting brief — someone must leash the sovereigns of code.",
+          motivatorShift: { politics: -1, power: 1 },
+          setFlags: ["g7_law_platform_antitrust"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["The platforms retain the firm to write the terms of service that govern billions."],
+        choice: {
+          text: "Draft the platform's private law — terms of service rule more than statutes do.",
+          motivatorShift: { wealth: 1, power: 1 },
+          setFlags: ["g7_law_platform_counsel"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g7:networked:open_military",
+    base: "military",
+    sense: "sound",
+    prose: [
+      "The drones hummed in the {family_name} hangar with a sound nothing like the old engines of war, and {given_name} {surname}, a commander in the age of cyber and autonomy, understood the sword had become code: the network attack, the killer drone, the information operation that turned a population against itself before a shot was fired. Military power in the networked age flowed through the contractor and the algorithm as much as the soldier. The dynasty's commission now meant a hand on weapons that fought in the dark of the wire.",
+      "Word came up the secure channel of cyberwar and election interference, of autonomous weapons and the privatized battlefield, of a great-power contest waged in code below the threshold of declared war. {given_name} weighed the soldier's old honor against the cold logic of the algorithmic battlefield, knowing the officer who mastered the new domains would command the wars of the century — wars the public might never even see.",
+    ],
+    beats: [
+      {
+        prose: ["A cyber command offers control of the offensive network operations of a great power."],
+        choice: {
+          text: "Take the cyber command — the decisive battlefield is now the wire.",
+          motivatorShift: { power: 1, reach: 1 },
+          setFlags: ["g7_military_cyber_command"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A defense-tech firm offers the family a stake in the autonomous-weapons future — power and profit."],
+        choice: {
+          text: "Build the autonomous arsenal — the dynasty arms the wars to come.",
+          motivatorShift: { wealth: 1, power: 1 },
+          setFlags: ["g7_military_defense_tech"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g7:networked:open_press",
+    base: "press",
+    sense: "sight",
+    prose: [
+      "The {family_name} media holdings had dissolved into the feed, and {given_name} {surname} ran not a newspaper or a network but a platform — the recommendation engine, the trending algorithm, the firehose of user content that had eaten journalism alive. Information in the networked age was abundance and weapon at once: the deepfake, the bot swarm, the truth and the lie traveling at the same speed. The dynasty that owned a slice of the attention economy owned a piece of consensus reality itself.",
+      "Word came up the dashboard of misinformation cascades and platform manipulation, of the death of the shared front page and the rise of a billion personalized truths, of regulators and citizens alike losing the thread of the real. {given_name} weighed engagement against integrity, knowing the platform that chose rightly in this age could hold the line on a common reality — or, optimizing for outrage, dissolve it for clicks.",
+    ],
+    beats: [
+      {
+        prose: ["Your engineers can tune the algorithm for maximum engagement — outrage is the most engaging thing of all."],
+        choice: {
+          text: "Optimize for engagement — attention is the only currency that compounds.",
+          motivatorShift: { reach: 1, honor: 1 },
+          setFlags: ["g7_press_engagement_engine"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A coalition begs the platform to fight disinformation even at the cost of growth."],
+        choice: {
+          text: "Defend the shared reality — a platform that dissolves truth dissolves itself.",
+          motivatorShift: { worldview: 1, honor: -1 },
+          setFlags: ["g7_press_defend_truth"],
+          gather: true,
+        },
+      },
+    ],
+  },
+];
+
+/**
+ * G8 (Act "The Cold Gravity of Ambition", the orbital era): five base-flavored openings diverting to the g8
+ * `turn` scene. The existing high-orbital-shipyard `open` is the military/default (the space force). Voice:
+ * the dynasty extends its ancient power base off-world — orbital land, the space economy, the void's faith.
+ */
+const G8_VARIANTS = [
+  {
+    id: "spine:g8:orbital:open_land",
+    base: "land",
+    sense: "sight",
+    prose: [
+      "From the observation blister {given_name} {surname} looked down at the cratered grey the family now held title to: lunar mining claims, the Lagrange-point real estate, the orbital habitats leased by the acre of pressurized hull. Land in the orbital age was the most extreme frontier the {family_name} name had ever staked — there was no air, no water, no soil that was not bought and shipped, and the homestead had become the habitat. The dynasty's oldest hunger, for ground to own, had followed humanity off the Earth.",
+      "Word came up the comm-laser of the lunar land rush and the asteroid claims, of habitat developers and the first off-world property wars, of a body of law strained to govern who owned a crater. {given_name} weighed the cost of holding ground that had to be made habitable against the boundless acreage of the solar system, knowing the family that planted its stakes on the new frontier would be landed lords of the void — or bankrupted by the vacuum.",
+    ],
+    beats: [
+      {
+        prose: ["A consortium offers the family the mineral claims to a resource-rich asteroid — at staggering risk."],
+        choice: {
+          text: "Stake the asteroid — the solar system is the last open frontier.",
+          motivatorShift: { wealth: 1, reach: 1 },
+          setFlags: ["g8_land_asteroid_claim"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["The family can hold the Lagrange-point habitats as a rentier landlord of the orbital ring."],
+        choice: {
+          text: "Hold the habitats — own the ground humanity must live on off-world.",
+          motivatorShift: { lineage: 1, power: 1 },
+          setFlags: ["g8_land_habitat_landlord"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g8:orbital:open_commerce",
+    base: "commerce",
+    sense: "sight",
+    prose: [
+      "The {family_name} trading house spanned cislunar space now, and {given_name} {surname} read the orbital economy in the freight manifests of the high-gantry docks: helium-3 and rare earths down the gravity well, machinery and habitats up it, the launch-cost curve that made or broke every venture. Commerce in the orbital age was the most capital-hungry the dynasty had ever run — a single launch a fortune, a single failure a ruin — but the house that controlled the supply lines of space controlled the future the way the Atlantic merchants once controlled the new world's.",
+      "Word came up from the exchanges of the orbital boom and its busts, of launch monopolies and resource cartels, of a space economy doubling and crashing on the strength of a contract. {given_name} weighed the ruinous cost of off-world trade against its boundless reward, knowing the merchant house that mastered the gravity well would be the East India Company of the solar system — and the one that mistimed the market would be wreckage in a decaying orbit.",
+    ],
+    beats: [
+      {
+        prose: ["A launch cartel offers the house a controlling stake in the supply line off Earth."],
+        choice: {
+          text: "Corner the launch market — whoever owns the gravity well owns space.",
+          motivatorShift: { wealth: 1, power: 1 },
+          setFlags: ["g8_commerce_launch_cartel"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A resource venture offers the house the helium-3 trade — the fuel of the coming fusion age."],
+        choice: {
+          text: "Take the off-world resource trade — the new world's wealth flows down the well.",
+          motivatorShift: { reach: 1, wealth: 1 },
+          setFlags: ["g8_commerce_resource_trade"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g8:orbital:open_pulpit",
+    base: "pulpit",
+    sense: "sound",
+    prose: [
+      "In the chapel-dome of the orbital habitat, Earth a blue jewel turning beyond the glass, {given_name} {surname} ministered to colonists who had left the cradle of every faith behind. The orbital age birthed strange new creeds — the religion of the long dark, the cosmist hope, the cults that grew in the isolation of the void — and the {family_name} pulpit could shepherd the soul of a species learning to live where no scripture had foreseen. Faith off-world was the oldest comfort in the newest dark.",
+      "Word came up the relay of habitat schisms and void-born sects, of a humanity scattering across the system carrying its gods and inventing new ones, of the question every colonist asked the stars. {given_name} weighed the old Earth faiths against the new cosmist visions, knowing the pulpit that gave the off-world a creed to live by would shape what kind of people humanity became among the planets.",
+    ],
+    beats: [
+      {
+        prose: ["The colonists beg for a faith fit for the void — author the creed of the off-world generation."],
+        choice: {
+          text: "Forge the new creed — the species in the dark needs a god that fits it.",
+          motivatorShift: { worldview: -1, reach: 1 },
+          setFlags: ["g8_pulpit_void_creed"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A cosmist movement offers the ministry the helm of humanity's spiritual expansion to the stars."],
+        choice: {
+          text: "Lead the cosmist church — make the conquest of space a sacred mission.",
+          motivatorShift: { worldview: -1, power: 1 },
+          setFlags: ["g8_pulpit_cosmist"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g8:orbital:open_law",
+    base: "law",
+    sense: "sight",
+    prose: [
+      "The {family_name} chambers now argued before tribunals that governed three worlds, and {given_name} {surname} read the orbital age as the founding of a new legal order: the space treaties strained past breaking, the habitat charters that were half constitution and half corporate bylaw, the question of who held sovereignty over a crater or a colonist. A lawyer in this age was a framer again — writing the law of a frontier the way the founders once wrote a republic, deciding whether the off-world would be free or owned.",
+      "Word came up the channel of sovereignty disputes and habitat secessions, of corporate colonies claiming nationhood and Earth governments claiming them back, of a legal vacuum filling fast with precedent. {given_name} weighed the corporate charter against the colonist's rights, knowing the law of this age was founding the constitutions of new worlds — and the {family_name} name would be written into the charter of the solar system.",
+    ],
+    beats: [
+      {
+        prose: ["A habitat moves to declare independence; you can draft its charter — its constitution."],
+        choice: {
+          text: "Frame the new world's law — be the founder the off-world remembers.",
+          motivatorShift: { politics: 1, lineage: 1 },
+          setFlags: ["g8_law_habitat_charter"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["The corporate colonies retain the firm to defend their sovereignty against Earth's claims."],
+        choice: {
+          text: "Defend the corporate colonies — the new sovereigns write their own law.",
+          motivatorShift: { power: 1, reach: 1 },
+          setFlags: ["g8_law_corporate_sovereignty"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g8:orbital:open_press",
+    base: "press",
+    sense: "sight",
+    prose: [
+      "The {family_name} network now broadcast across a light-second of space, and {given_name} {surname} shaped the story a scattered humanity told itself about the void: the colony's triumph or its disaster, the Earth-vs-orbital resentments, the propaganda of the sovereignty wars relayed at the speed of light with a maddening lag. Information across the gulf was power and weapon — a habitat could be saved or doomed by the narrative that reached Earth first. The dynasty that owned the channels owned the off-world's image of itself.",
+      "Word came up the relay of the Earth-orbital information war, of colony myths and corporate spin, of a humanity split across worlds and struggling to share a single truth across the light-lag. {given_name} weighed the unifying story against the dividing one, knowing the network that mastered the gulf could hold a scattering species together — or, telling each world a different tale, drive them to war among the planets.",
+    ],
+    beats: [
+      {
+        prose: ["You can broadcast the colonists' cause to Earth — or the corporations' version of it."],
+        choice: {
+          text: "Champion the colonists' story — the narrative that reaches Earth first wins.",
+          motivatorShift: { worldview: 1, reach: 1 },
+          setFlags: ["g8_press_colonist_voice"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A sovereignty faction offers control of the relays — the off-world's whole flow of information."],
+        choice: {
+          text: "Seize the relays — own the channels and you own the off-world's mind.",
+          motivatorShift: { power: 1, reach: 1 },
+          setFlags: ["g8_press_seized_relays"],
+          gather: true,
+        },
+      },
+    ],
+  },
+];
+
+/**
+ * G9 (Act "The Archon of New Horizon", the interstellar era): five base-flavored openings diverting to the g9
+ * `transit` scene. The existing antimatter-dreadnought `open` is the military/default. Voice: the dynasty at
+ * the threshold of the stars — its ancient power base become the seed of an interstellar civilization.
+ */
+const G9_VARIANTS = [
+  {
+    id: "spine:g9:interstellar:open_land",
+    base: "land",
+    sense: "sight",
+    prose: [
+      "On the bridge's holotank a new world turned, green and unclaimed, and {given_name} {surname} understood that the {family_name} line's oldest hunger had reached its ultimate object: a whole planet to hold. Land at the interstellar threshold was no longer acreage but worlds — the founding charter of a colony, the terraforming claim, the right to name what no human had ever owned. The dynasty that had started by fencing a river-bottom in 1776 now stood to inherit the soil of another star.",
+      "Word came up the long transit of habitable worlds charted and contested, of colony charters and the law of first claim, of a humanity poised to plant its dynasties among the stars. {given_name} weighed the burden of holding a world against the glory of founding one, knowing the line that planted its name on a new Earth would be remembered as long as that world turned — the founders of a planet, as their ancestors were founders of a nation.",
+    ],
+    beats: [
+      {
+        prose: ["The colony charter is yours to claim — a whole world held in the family name."],
+        choice: {
+          text: "Claim the world — let the {family_name} name found a planet.",
+          motivatorShift: { lineage: 1, reach: 1 },
+          setFlags: ["g9_land_world_charter"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A rival line contests the claim; you can divide the world, or seize it whole."],
+        choice: {
+          text: "Seize the whole world — a dynasty does not share what it can hold.",
+          motivatorShift: { power: 1, honor: 1 },
+          setFlags: ["g9_land_seized_world"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g9:interstellar:open_commerce",
+    base: "commerce",
+    sense: "sight",
+    prose: [
+      "The {family_name} trade fleet hung in the dark between suns, and {given_name} {surname} read the interstellar economy in cargo that took years to cross the void: the antimatter, the seed-ships, the data and genome and machinery that knit a scattering of star systems into a single civilization. Commerce at this scale was the longest game the dynasty had ever played — a venture measured in decades and light-years — but the house that owned the trade lanes between the stars would be the merchant-sovereign of an interstellar age, as the East India Company once ruled an ocean.",
+      "Word came up the relay, years stale, of colony booms and failed settlements, of the staggering economics of trade at lightspeed's mercy, of a civilization stretched thin across the dark. {given_name} weighed the patience the void demanded against the empire it offered, knowing the house that mastered interstellar trade would bind the human stars together under the {family_name} name — or be lost, a cargo never arriving, between one sun and the next.",
+    ],
+    beats: [
+      {
+        prose: ["You can stake the family on the antimatter trade — the fuel that makes the stars reachable."],
+        choice: {
+          text: "Corner the antimatter trade — own the fuel and you own the reach of humanity.",
+          motivatorShift: { wealth: 1, reach: 1 },
+          setFlags: ["g9_commerce_antimatter_trade"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["The scattered colonies need a banker to bind them; the house can be the reserve of the stars."],
+        choice: {
+          text: "Become the bank of the interstellar age — credit binds the worlds.",
+          motivatorShift: { wealth: 1, power: 1 },
+          setFlags: ["g9_commerce_interstellar_bank"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g9:interstellar:open_pulpit",
+    base: "pulpit",
+    sense: "sound",
+    prose: [
+      "In the dreadnought's vast quiet chapel, the stars themselves the stained glass, {given_name} {surname} carried the faith of a species crossing the ultimate dark. The interstellar age asked the oldest questions in the newest void — what was humanity for, out here; what god travels at lightspeed; what creed could hold a civilization spread across suns that would never see each other's skies. The {family_name} pulpit could become the spiritual founder of an interstellar people, the prophet of the deep dark — or watch faith shatter into a thousand isolated stars.",
+      "Word came up the transit of colony creeds diverging into alien faiths, of a humanity carrying its gods to the stars and being changed by the distance, of the cosmist dream meeting the indifferent void. {given_name} weighed the comfort of the old faiths against the strange new revelations of the deep, knowing the pulpit that gave the interstellar age its creed would shape the soul of humanity for as long as it endured among the stars.",
+    ],
+    beats: [
+      {
+        prose: ["The colony fleets beg for a unifying faith to bind the scattering of humanity across the suns."],
+        choice: {
+          text: "Found the interstellar creed — give the species among the stars a soul in common.",
+          motivatorShift: { worldview: -1, reach: 1 },
+          setFlags: ["g9_pulpit_interstellar_creed"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["You can declare the line's faith the established church of the new worlds — faith as empire."],
+        choice: {
+          text: "Make the family's faith the church of the stars — the archon is also the prophet.",
+          motivatorShift: { power: 1, worldview: -1 },
+          setFlags: ["g9_pulpit_established_church"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g9:interstellar:open_law",
+    base: "law",
+    sense: "sight",
+    prose: [
+      "The {family_name} jurists convened the first interstellar congress, and {given_name} {surname} understood the line had come full circle: an ancestor had helped write a republic in 1776, and now the dynasty would help write the law of a civilization among the stars. The interstellar age was a founding age — the charter of the human worlds, the law of contact, the constitution that would govern beings separated by light-years and centuries. A lawyer here was a framer of the deepest kind, deciding whether the stars would be a federation or an empire.",
+      "Word came up the transit of secession and federation, of the law of first contact and the rights of colonies that would not hear Earth's voice for a generation, of a humanity inventing the constitution of the galaxy. {given_name} weighed the federation of free worlds against the empire of one, knowing the law founded now would govern the human stars for ten thousand years — and the {family_name} name would be on its first page, as it was on the republic's.",
+    ],
+    beats: [
+      {
+        prose: ["The interstellar congress will be founded on a charter you can draft — federation, or empire."],
+        choice: {
+          text: "Frame a federation of free worlds — the founder's oldest dream, written in starlight.",
+          motivatorShift: { politics: -1, honor: -1 },
+          setFlags: ["g9_law_federation"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["You can instead draft the charter of a single sovereign — the {family_name} line as galactic archon."],
+        choice: {
+          text: "Draft the empire — one law, one sovereign, the dynasty over all the stars.",
+          motivatorShift: { power: 1, lineage: 1 },
+          setFlags: ["g9_law_empire"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g9:interstellar:open_press",
+    base: "press",
+    sense: "sound",
+    prose: [
+      "Across light-years the {family_name} relays carried the only voice that bound the human stars, and {given_name} {surname} shaped the story a galaxy told itself: the founding myth of each colony, the news that arrived a decade stale, the propaganda of the federation wars crawling between suns. Information at interstellar distance was the rarest power of all — a civilization that could not share a present could be united or divided only by the stories that survived the crossing. The dynasty that owned the relays held the memory, and the myth, of the human stars.",
+      "Word came up the transit, years old, of worlds drifting into separate truths, of a humanity so scattered it risked forgetting it was one people, of the narrative that alone could span the dark. {given_name} weighed the unifying myth against the dividing one, knowing the network that mastered interstellar distance could keep a scattering species human and whole — or, telling each star a different story, let them become strangers across the void.",
+    ],
+    beats: [
+      {
+        prose: ["You can broadcast a single founding myth to bind the colonies — the story that makes them one people."],
+        choice: {
+          text: "Forge the unifying myth — the story that survives the crossing makes the civilization.",
+          motivatorShift: { reach: 1, lineage: 1 },
+          setFlags: ["g9_press_unifying_myth"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["You can instead control every relay — own the only voice that crosses the interstellar dark."],
+        choice: {
+          text: "Monopolize the relays — own the galaxy's memory and you own its mind.",
+          motivatorShift: { power: 1, reach: 1 },
+          setFlags: ["g9_press_relay_monopoly"],
+          gather: true,
+        },
+      },
+    ],
+  },
+];
+
+/**
  * Apply one act's base-flavored opening variants, idempotently: each variant scene is gated on its
  * `base:*` flag + diverts to `divertTo` (skipping the default `open`); the default `open` is gated to NOT
  * fire for any covered base (so an uncovered/default base — press at g0 — gets it). `actId` is the act,
@@ -1168,8 +1627,26 @@ const n6 = applyAct(
   "spine:g6:broadcast:platform",
   G6_VARIANTS,
 );
+const n7 = applyAct(
+  "spine:g7:networked",
+  "spine:g7:networked:open",
+  "spine:g7:networked:doctrine",
+  G7_VARIANTS,
+);
+const n8 = applyAct(
+  "spine:g8:orbital",
+  "spine:g8:orbital:open",
+  "spine:g8:orbital:turn",
+  G8_VARIANTS,
+);
+const n9 = applyAct(
+  "spine:g9:interstellar",
+  "spine:g9:interstellar:open",
+  "spine:g9:interstellar:transit",
+  G9_VARIANTS,
+);
 
 writeFileSync(PATH, `${JSON.stringify(doc, null, 1)}\n`);
 console.log(
-  `inserted base-variant openings — g0:${n0} g1:${n1} g2:${n2} g3:${n3} g4:${n4} g5:${n5} g6:${n6}`,
+  `inserted — g0:${n0} g1:${n1} g2:${n2} g3:${n3} g4:${n4} g5:${n5} g6:${n6} g7:${n7} g8:${n8} g9:${n9}`,
 );
