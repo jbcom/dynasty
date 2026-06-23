@@ -84,8 +84,11 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   validated GAME_TRIGGERS → woven threads, no RNG, replay-identical. Memory in the saved `flags` set via the
   `crossed:` convention (no schema change). +1 test, 715 green. (Full per-branch fabric PROSE weaving +
   recordCrossing-on-activation deepen with FS-6's authored spine; live-verify the recurring payoff there.)
-- [ ] **FS-6 author the spine prose.** GenAI flesh the authored spine acts to depth, era-distinct; QA vs
-  guidance; commit-before-run.
+- [ ] [WAIT] **FS-6 author the spine prose — RUNNING (bg).** Tooling DONE (committed): scripts/genai-spine.ts
+  + validateSpineFile + sharpened buildSpinePrompt. Gen 0 (1776 Philadelphia) authored + VERIFIED: era-distinct
+  ALLEGIANCE turn (Patriot/Loyalist/Neutral — revolution factions, NOT the old template) + succession close.
+  Pipeline proven. Full 10-gen run launched in background (incremental write to src/data/saga/spine.act.json).
+  ON completion: read each generation, confirm era-distinct decisions + quality, commit; then QA pass.
 - [ ] **FS-6b archetypal-DESTINY endings.** Re-skin/expand convergence.ts into NAMED dynasty destinies for
   the ONE line (religious leader / communard / dictator / oligarch / crime leader / media mogul / …) +
   multiple distinct STELLAR finales: forge allies, seize colonies, or end ISOLATED+ALONE on a quiet planet.
