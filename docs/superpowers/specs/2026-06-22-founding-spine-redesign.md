@@ -239,3 +239,36 @@ standing through onComplete → founding; (d) retire/rehome the dead 1885 new-yo
 origins line-failure content (FS-EARLY-TERMINATION); (e) tests + Chrome verify.
 Keep `waveSelect` + the wave places for the CAST/braid system (they're not the
 player origin anymore, but the cast still uses them).
+
+## DECISION (2026-06-23, SPINE-ACT-DEPTH): deepen each act toward the hour+ mandate
+
+MEASURED: each of the 10 spine acts has only ~4 CORE scenes (open + ~3
+DecisionArchitecture scenes) at ~2 prose paragraphs each — ~15-20 min of total
+reading, well short of the user's "an hour or more of gameplay." The
+origin-flavor work (g0-g9) added a rich per-base OPENING; the remaining depth
+lever is MORE lived texture between the major decisions.
+
+**Decision — interleave INTERSTITIAL scenes (not more major decisions):**
+Per [[novel-not-fragments]] the content should read as a NOVEL — not every scene
+a choice. So between the authored DecisionArchitecture beats, insert decisionless
+(or weave-only) interstitial scenes that develop world/family/consequence:
+
+- **TEXTURE** scene (after the open, before the first decision): grounds the
+  generation's world + the family's standing in it — sensory, 2-3 paras, 1-2
+  weave beats (flavor + a small motivator nudge, `gather:true`), falls forward.
+- **CONSEQUENCE/AFTERMATH** scene (after a major decision): shows the decision
+  landing — the cost, the rival's reaction, the next generation taking shape.
+  2-3 paras, 1-2 weave beats, falls forward.
+
+Target shape per act: open → texture → [decision] → consequence → [decision] →
+close (~6 scenes, ~10-12 beats), roughly doubling each act's reading + choices →
+~6 min/act × 10 ≈ the hour. Interstitials are decisionless/weave-only (the major
+DecisionArchitecture decisions stay the act's pivots — the anti-sameness
+invariant is unaffected).
+
+**Authoring:** the GenAI spine pipeline is the natural author, BUT no key in this
+env. So hand-author the interstitials in the spine voice (multi-para sensory
+prose, {given_name}/{surname}/{family_name} tokens, weave beats with small
+motivatorShifts), inserted via an idempotent script like the origin-flavor one
+(regen-safe — spine.act.json is GenAI-generated). Build g0 first as the
+pattern-setter, then extend act by act; ship in sensible batches as PRs.
