@@ -132,9 +132,17 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   flow from the live family via the term seam (foundByComposition stays the source of the names; EI-6 wires the
   emergent-opening state INTO foundByComposition). Test: terms.unit ({child_kind} son/daughter/unresolved) +
   epoch0Opening.unit (naming speaks {child_kind}).
-- [ ] [WAIT] **EI-6 RETIRE-THE-FUNNEL + WIRE** — replace the OnboardingScreen .card funnel with the lived opening's
-  accumulated state feeding foundByComposition; the New Game path opens the emergent infancy, not the menu.
-  Update/retire the funnel tests; full gate incl. e2e (the entry-flow e2e must walk the new opening). Tested.
+- [x] **EI-6a EMERGENCE→FOUNDING BRIDGE — DONE (branch feat/ei6-wire-emergent-opening).** Pure
+  `src/sim/founding/resolveEmergentFounding.ts`: turns the Epoch-0 emergence's accumulated FLAGS (attend:* →
+  region via EI-2 resolvePlace; power_lean:* → most-leaned base; epoch0:standing_* → standing) into the
+  `{region, base, standing}` the existing `resolveFoundingStart` consumes — so the lived opening feeds
+  foundByComposition with NO card menu. Test: resolveEmergentFounding.unit (valid choice, tie-break, defaults,
+  determinism, feeds resolveFoundingStart). 942 node green.
+- [ ] **EI-6b RETIRE-THE-FUNNEL + WIRE THE OPENING (UI + engine + e2e)** — the New Game path PLAYS the Epoch-0
+  emergence act (buildEpoch0Opening) through the SceneReader glowing-inline surface, accumulates its flags, then
+  resolveEmergentFounding → foundByComposition; retire the OnboardingScreen .card funnel. Update/retire the funnel
+  tests; full gate INCL. e2e (the entry-flow e2e walks the new opening, not the old card funnel). The big
+  integration step — scope carefully; it changes the entry flow. Tested.
 - [ ] [WAIT] **EI-7 PORTRAIT-TEXT-WRAP LAYOUT (user, 2026-06-23)** — the scene prose must FLOW alongside the portrait and
   then continue DOWN BELOW it (a magazine wrap — float/shape the portrait, text wraps beside then under), not
   portrait-block-then-text-block stacked. Applies to the SceneReader / play surface. Visual; screenshot + READ that
