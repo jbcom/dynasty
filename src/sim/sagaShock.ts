@@ -205,3 +205,32 @@ export function applyFamilyDeathShock(
     ),
   };
 }
+
+/** DOSSIER-SHOCK-LEDGER: one entry in the line's "what befell the family" log. */
+export interface ShockLedgerEntry {
+  year: number;
+  kind: "family_death" | "meter_blow";
+  /** A short label for the disaster (the player reviews the line's hard seasons). */
+  label: string;
+}
+
+const LEDGER_LABEL: Record<string, string> = {
+  family_death: "A death in the family",
+  meter_blow: "A reversal struck the line",
+};
+
+/**
+ * Parse the run's `shock:<kind>:<year>` flags into a chronological ledger of the line's disasters — the
+ * inspectable "what befell the family" history the Timeline/Dossier surfaces (DOSSIER-SHOCK-LEDGER). Pure
+ * read of state.flags; sorted by year then kind for stable output. Unknown/malformed flags are skipped.
+ */
+export function shockLedger(flags: Iterable<string>): ShockLedgerEntry[] {
+  const out: ShockLedgerEntry[] = [];
+  for (const f of flags) {
+    const m = /^shock:(family_death|meter_blow):(\d+)$/.exec(f);
+    if (!m) continue;
+    const kind = m[1] as "family_death" | "meter_blow";
+    out.push({ year: Number(m[2]), kind, label: LEDGER_LABEL[kind] ?? "A hard season" });
+  }
+  return out.sort((a, b) => a.year - b.year || a.kind.localeCompare(b.kind));
+}

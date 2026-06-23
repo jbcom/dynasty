@@ -80,6 +80,32 @@ describe("TimelineView", () => {
     expect(host.textContent).toContain("Apprentice Mogul");
     expect(host.textContent).not.toContain("Birth & Boyhood");
   });
+
+  it("DOSSIER-SHOCK-LEDGER: renders the line's disasters from shock:* flags, chronologically", () => {
+    const s = {
+      ...playedState(),
+      flags: [
+        ...playedState().flags,
+        "shock:meter_blow:1955",
+        "shock:family_death:1948",
+        "base:press",
+      ],
+    };
+    component = mount(TimelineView, { target: host, props: { content, gameState: s } });
+    const ledger = host.querySelector("[data-testid='shock-ledger']");
+    expect(ledger, "the shock ledger renders when shocks exist").not.toBeNull();
+    expect(ledger?.textContent).toContain("What Befell the Family");
+    const items = [...host.querySelectorAll("[data-testid='shock-ledger'] li")];
+    expect(items.length).toBe(2);
+    // Chronological: 1948 (death) before 1955 (reversal).
+    expect(items[0]?.textContent).toContain("1948");
+    expect(items[0]?.getAttribute("data-shock-kind")).toBe("family_death");
+    expect(items[1]?.textContent).toContain("1955");
+    // No shocks → no ledger.
+    unmount(component);
+    component = mount(TimelineView, { target: host, props: { content, gameState: playedState() } });
+    expect(host.querySelector("[data-testid='shock-ledger']")).toBeNull();
+  });
 });
 
 describe("StatsView", () => {

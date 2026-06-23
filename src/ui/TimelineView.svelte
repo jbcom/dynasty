@@ -1,4 +1,5 @@
 <script lang="ts">
+import { shockLedger } from "../sim/sagaShock";
 import type { Content } from "../sim/content";
 import type { GameState } from "../sim/state";
 
@@ -8,6 +9,10 @@ interface Props {
 }
 
 const { content, gameState }: Props = $props();
+
+// DOSSIER-SHOCK-LEDGER: the line's disasters across the run, parsed from the shock:* flags — a "what
+// befell the family" log so the player can review the hard seasons (deaths, reversals) over the hour.
+const ledger = $derived(shockLedger(gameState.flags));
 
 // Hand-rolled lightweight timeline. It shows the LINE'S OWN path: from the era it was
 // founded in through the current one — never the global era list. A modern line founded
@@ -60,6 +65,20 @@ const eventsByYear = $derived(
     {/if}
   </div>
   <p class="now">You are in {content.eras[gameState.eraIndex]?.title ?? "—"}, {gameState.year}.</p>
+  {#if ledger.length > 0}
+    <!-- DOSSIER-SHOCK-LEDGER: the line's disasters, in order — the family's hard seasons. -->
+    <div class="ledger" data-testid="shock-ledger">
+      <h4>What Befell the Family</h4>
+      <ul>
+        {#each ledger as entry (entry.year + entry.kind)}
+          <li data-shock-kind={entry.kind}>
+            <span class="ledger-year">{entry.year}</span>
+            <span class="ledger-label">{entry.label}</span>
+          </li>
+        {/each}
+      </ul>
+    </div>
+  {/if}
 </section>
 
 <style>
@@ -102,4 +121,28 @@ const eventsByYear = $derived(
   .markers { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 0.4rem; min-height: 10px; }
   .marker { width: 7px; height: 7px; border-radius: 50%; background: var(--mmm-gold); }
   .now { color: var(--mmm-text-dim); font-size: 0.85rem; margin-top: 0.5rem; }
+  .ledger { margin-top: 0.8rem; }
+  .ledger h4 {
+    margin: 0 0 0.4rem;
+    font-family: var(--mmm-font-display);
+    color: var(--mmm-gold);
+    font-size: 0.85rem;
+  }
+  .ledger ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+  .ledger li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+    font-family: var(--mmm-font-body);
+    font-size: 0.82rem;
+    color: var(--mmm-text);
+    border-left: 2px solid var(--mmm-red, #b22);
+    padding-left: 0.5rem;
+  }
+  .ledger-year {
+    font-family: var(--mmm-font-ui);
+    font-variant-numeric: tabular-nums;
+    color: var(--mmm-text-dim);
+    font-size: 0.72rem;
+  }
 </style>
