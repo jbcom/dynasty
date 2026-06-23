@@ -1334,8 +1334,8 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   + GameView carry it; the RivalDossier shows a ▲/—/▼ momentum arrow (gold/dim/red) beside each rival's rung.
   Pure + seeded (re-derived from advanceWorld, no new save state). Tests: dynastyWorld.unit (trend direction +
   determinism) + RivalDossier.browser (arrow render). 904 node + 131 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **RIVAL-RUNG-TREND PR — push, open PR, full remote loop.**
-  1 commit (rung history + trend + dossier arrow). Full local gate passed. Push, open PR, wait CI, fold review
+- [ ] [WAIT-REVIEW] **RIVAL-RUNG-TREND PR #149 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/rival-rung-trend (b41524b). Full local gate passed. Loop: wait build-and-test + CodeQL, fold review
   forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, STELLAR-EPILOGUE-VARIETY.
 - [ ] **STELLAR-EPILOGUE-VARIETY — the apex finale prose varies by HOW the line reached the stars.** The apex
   ending fires one prose for all stellar paths; a conquest-stars line should read different from an allies-stars
