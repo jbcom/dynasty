@@ -1120,35 +1120,48 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ### Rolling backlog (post-WV-3 — keep this section ≥3 actionable, append before draining)
 
-- [ ] [WAIT-REVIEW] **DOSSIER-SHOCK-LEDGER PR #122 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/dossier-shock-ledger. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix
-  forward + resolve threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next
-  branch for the rolling backlog (CONVERGENCE-RIVAL-FINALE / SPINE-DEPTH-PLAYTEST-2 / ledger-recoveries).
-- [ ] [WAIT-REVIEW] **SHOCK-LEDGER-RECOVERIES — add recoveries (not just disasters) to the ledger.** The
-  "What Befell the Family" log shows shock:* disasters; the WV-3-SHOCK-RECOVERY rebounds aren't recorded
-  (recovery only clears a flag, leaves no marker). Stamp a `recovered:<meter>:<year>` flag on a rebound +
-  show it in the ledger as a comeback line, so the log reads blow→recover, not just loss. Pure; tested.
-- [ ] [WAIT-REVIEW] **SHOCK-FAMILY-SUCCESSION-PRESSURE PR #120 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/shock-family-succession-pressure. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/
-  Gemini, fix forward + resolve threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main,
-  next branch for the rolling backlog (DOSSIER-SHOCK-LEDGER / CONVERGENCE-RIVAL-FINALE / playtest-2).
+- [ ] [WAIT-REVIEW] **SHOCK-LEDGER-RECOVERIES PR #124 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/shock-ledger-recoveries: recovered:<meter>:<year> stamp + gold comeback ledger line + the same
+  ledger in LegacyReport (LEDGER-IN-LEGACY-REPORT) + the shockCadence.unit audit (SHOCK-CADENCE-AUDIT), all as
+  forward commits. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve
+  threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next branch (CONVERGENCE-RIVAL-FINALE).
+- [x] **SHOCK-AFTERMATH-IN-RIVALS — DONE (forward commit on PR #124).** advanceWorld now rolls a per-rival
+  seeded setback (rivalShock): a standing rival can STUMBLE (lose a rung, flagged `stumbled`/snapshot.faltering)
+  at an era-weighted rate (same macroActMedicine curve as the player's shock), then REBOUND (regain the rung) on
+  a later un-struck turn — the two-act blow→recover shape mirrored for the world. detectGlimpses surfaces a
+  faltering rival as "struggling" so the player SEES the window. The convergence race now feels alive: rivals
+  falter mid-climb, not just escalate. 879 node + 116 browser green, full gate (check/typecheck/test) clean.
+- [x] **LEDGER-IN-LEGACY-REPORT — DONE (forward commit on feat/shock-ledger-recoveries / PR #124).** LegacyReport
+  now renders the full shockLedger as a "The Family's Hard Seasons" section between the dynasty epitaph and the
+  stats — every disaster (red) + comeback (gold) the line lived, so the close reflects the WHOLE saga's trials,
+  not just the verdict. Hidden for a shock-free run. screens.browser test pins render + gold/red distinction +
+  empty case. 873 node + 116 browser green, typecheck clean.
+- [x] **SHOCK-CADENCE-AUDIT — DONE (forward commit on PR #124).** shockCadence.unit instruments the WV-3 shock +
+  recovery cadence per macro-act over 400 seeds. MEASURED figures: founding 31.5% → convergence 17.8% →
+  emergence 9.8% → ascension 4.5% shock rate (monotonic, founding 7× the future); recovery 48.5% on a quiet
+  tick with one outstanding blow. All in-band — no phase starved (0%) or flooded (100%), so NO tuning needed;
+  the test now guards the cadence as a regression. 877 node green.
+- [x] **DOSSIER-SHOCK-LEDGER PR #122 — DONE, MERGED (squash fc8c58e; release-please cuts 0.31.0).** Wait CI,
+  folded both Gemini findings forward (exhaustive `Record<ShockLedgerEntry["kind"]>` ledger label + `new Set`
+  flag dedup so a repeated `shock:*` can't crash the TimelineView `#each` key) in fe34b1b + regression test,
+  resolved both threads, merged CLEAN. main synced, branch deleted.
+- [x] **SHOCK-LEDGER-RECOVERIES — DONE (branch feat/shock-ledger-recoveries).** applySagaRecovery now stamps a
+  persistent `recovered:<meter>:<year>` flag (alongside clearing the transient shock_meter marker); shockLedger
+  parses it into a `recovery`-kind entry with a METER-AWARE comeback label (the fortune rebuilt / name redeemed);
+  TimelineView renders it GOLD, distinct from the red disaster, so the log reads blow→recover. 873 node + 115
+  browser green, typecheck clean. PR next.
+- [x] **SHOCK-FAMILY-SUCCESSION-PRESSURE PR #120 — DONE, MERGED (squash 4143a87).** Death shock can take the
+  groomed heir (tookHeir + sharper heir_lost note); fixed the systemic `heir_*`-flag-not-cleared-on-succession
+  bug Gemini caught. Threads resolved, merged green.
 
-- [ ] [WAIT-REVIEW] **CORPUS-MINE-INTERSECTIONS PR #118 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/corpus-mine-intersections: fabric wired into resolveThreads + all 7 families now have vignettes.
-  Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads,
-  self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next branch for the rolling backlog
-  (SHOCK-FAMILY-SUCCESSION-PRESSURE / DOSSIER-SHOCK-LEDGER).
+- [x] **CORPUS-MINE-INTERSECTIONS PR #118 — DONE, MERGED (squash bc548d1).** Fabric wired into resolveThreads;
+  all 7 families now have mined vignettes (prose fallback when no braid-slot). Threads resolved, merged green.
 
-- [ ] [WAIT-REVIEW] **SAGA-AUDIO-ATMOSPHERE PR #116 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/saga-audio-atmosphere: the ambient bed now shifts by saga macro-act. Loop: wait build-and-test
-  + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge once green
-  ([[babysit-pr]]). After merge: sync main, next branch for the rolling backlog (CORPUS-MINE / family-
-  succession-pressure / shock-ledger).
+- [x] **SAGA-AUDIO-ATMOSPHERE PR #116 — DONE, MERGED (squash cf2aecc).** Ambient bed now shifts by saga
+  macro-act (ERA_BANDS aligned to convergence→mogul / emergence→ascent). Threads resolved, merged green.
 
-- [ ] [WAIT-REVIEW] **WV-3-SHOCK-RECOVERY PR #114 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/wv3-shock-recovery: the blow→rebound two-act arc. Loop: wait build-and-test + CodeQL, read
-  CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge once green ([[babysit-pr]]).
-  After merge: sync main, next branch for the rolling backlog (SAGA-AUDIO-ATMOSPHERE / CORPUS-MINE / …).
+- [x] **WV-3-SHOCK-RECOVERY PR #114 — DONE, MERGED.** The blow→rebound two-act arc (rollSagaRecovery, gold
+  recovery note, SagaNoteKind). Threads resolved, merged green.
 
 - [x] **CONVERGENCE-ENDING-DEPTH PR #112 — DONE, MERGED (squash 7be3df2).** Reachability audit + earned-finale
   prose shipped. CI green; CodeRabbit pass; Gemini medium (hoist initMotivators in the test) FIXED + thread
@@ -1191,14 +1204,33 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   flags into a chronological disaster list; TimelineView renders a "What Befell the Family" log beneath the
   era strip — the deaths + reversals the line lived through, inspectable across the hour. Pure read-model.
   Tests: sagaShock.unit shockLedger + Views.browser render. 869 node + 114 browser green. PR next.
-- [ ] [WAIT-REVIEW] **CONVERGENCE-RIVAL-FINALE — the rivals' fates in the LegacyReport.** The convergence ending
-  narrates the PLAYER's finale; the rival lines that raced alongside (the whole point of the convergence layer)
-  vanish at the end. Surface each surviving/fallen rival's final standing + a one-line fate in the LegacyReport
-  so the close reads as the whole field's reckoning, not just the player's. Reads view.rivalStandings; tested.
-- [ ] [WAIT-REVIEW] **SPINE-DEPTH-PLAYTEST-2 — re-measure the hour with shocks/recoveries/crossings live.** The
-  ~48-min playtest predates the WV-3 + fabric layers. Re-run the divergence/playtest instruments to measure
-  the CURRENT depth (shocks add beats, recoveries add ticks, fabric crossings add prose) and confirm a median
-  run crosses the hour; if short, the lever is more interstitial prose or a 4th-act beat. Decide from figures.
+- [x] **CONVERGENCE-RIVAL-FINALE — DONE (forward commit on PR #124).** LegacyReport now renders "The Other
+  Lines" — every rival's humanized place + a one-line fate read off its final rung + faltering state (reached
+  the stars / rose high / made its mark / faltered at the last), so the close is the whole field's reckoning,
+  not just the player's. rivalStandings now carries `faltering` (engine + App wire-through). screens.browser
+  pins render + humanized labels + star/faltered fates + empty case. 879 node + 117 browser green, gate clean.
+- [x] **SPINE-DEPTH-PLAYTEST-2 — DONE (forward commit on PR #124).** Added a 5-seed instrument to
+  spineDepthPlaytest.unit measuring the WV-3 dynamic surface ON TOP of the ~48-min authored floor. MEASURED:
+  29 shock beats + 42 ledger events across 5 seeds, median ~76s added/run (range 64–80s), firing EVERY run. So
+  floor ~48 min + dynamic layer + a careful player's deliberation (95 beats / 22 decisions vs the fast path)
+  clears the hour mandate comfortably — NO extra prose/4th-act beat needed. Test guards median ≥30s. Gate clean.
+- [ ] [WAIT-REVIEW] **RIVAL-FALTER-NEWS — surface a rival's stumble in the in-run NewsTicker (next branch after #124).**
+  A rival now falters mid-race (SHOCK-AFTERMATH-IN-RIVALS) + shows "struggling" in glimpses, but nothing ANNOUNCES
+  it as it happens. Emit a NewsTicker line when a near-vantage rival first falters ("Word reaches you: the <place>
+  line has stumbled") so the player can act on the window in the moment. Reads the glimpse faltering note; tested.
+  GATED: #124 must merge first (linear one-branch flow, [[one-branch-local-review]]).
+- [ ] [WAIT-REVIEW] **RIVAL-CROSSING-EXPLOIT — let the player ACT on a faltering rival at a crossing (after #124).**
+  A faltering rival is a window, but the player can't yet press it. At a braid crossing with a faltering rival,
+  offer a choice that nudges that rival further down (opposing) for a cost/risk — turning the stumble into an
+  interactive beat, not just a readout. Reuses nudgeRival + the crossing system; pure + seeded; tested.
+- [ ] [WAIT-REVIEW] **RIVAL-RISE-NEWS — surface a rival's BREAKOUT climb in the NewsTicker (after #124).** Falter
+  news (RIVAL-FALTER-NEWS) tells the player when a rival stumbles; the inverse — a rival surging past the player's
+  rung — is the pressure half. Emit a ticker line when a near-vantage rival climbs ABOVE the player ("The <place>
+  line has outpaced you") so the convergence race creates urgency, not just opportunity. Reads standings; tested.
+- [ ] [WAIT-REVIEW] **CONVERGENCE-FIELD-IN-TIMELINE — a compact rival-field readout in the in-run Timeline (after #124).**
+  The end-game shows the full field (CONVERGENCE-RIVAL-FINALE) but mid-run the player only sees near-vantage
+  glimpses. Add a small "The Field" strip to the Timeline showing each rival's rung relative to the player's, so
+  the player can track the whole race across the hour, not just at the close. Reads view.rivalStandings; tested.
 - [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
   audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
   diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock

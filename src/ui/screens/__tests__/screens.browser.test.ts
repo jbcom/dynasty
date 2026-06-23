@@ -169,4 +169,88 @@ describe("LegacyReport", () => {
     });
     expect(host.querySelector("[data-testid='convergence-prose']")).toBeNull();
   });
+
+  it("LEDGER-IN-LEGACY-REPORT: surfaces the line's hard seasons + comebacks at the close", () => {
+    const state = {
+      ...initState(content, "seed"),
+      flags: [
+        "shock:family_death:1885",
+        "shock:meter_blow:1920",
+        "recovered:money:1935",
+        "base:press",
+      ],
+      end: { kind: "death" as const, year: 1990, reason: "x" },
+    };
+    component = mount(LegacyReport, {
+      target: host,
+      props: { content, state, end: state.end, onRestart: () => {} },
+    });
+    const led = host.querySelector("[data-testid='legacy-ledger']");
+    expect(led, "the legacy ledger renders when the run had shocks").not.toBeNull();
+    expect(led?.textContent).toContain("The Family's Hard Seasons");
+    const items = [...host.querySelectorAll("[data-testid='legacy-ledger'] li")];
+    expect(items.length).toBe(3);
+    // The comeback is gold-accented, distinct from the red disasters.
+    // toBeDefined (not .not.toBeNull) — .find returns undefined, which passes vacuously vs null (Gemini #124).
+    const recovery = items.find((li) => li.getAttribute("data-shock-kind") === "recovery");
+    const death = items.find((li) => li.getAttribute("data-shock-kind") === "family_death");
+    expect(recovery, "a comeback line renders").toBeDefined();
+    expect(death, "a disaster line renders").toBeDefined();
+    expect(getComputedStyle(recovery as HTMLElement).borderLeftColor).not.toBe(
+      getComputedStyle(death as HTMLElement).borderLeftColor,
+    );
+    // A shock-free run shows no ledger section.
+    unmount(component);
+    component = mount(LegacyReport, {
+      target: host,
+      props: {
+        content,
+        state: { ...initState(content, "seed"), end: state.end },
+        end: state.end,
+        onRestart: () => {},
+      },
+    });
+    expect(host.querySelector("[data-testid='legacy-ledger']")).toBeNull();
+  });
+
+  it("CONVERGENCE-RIVAL-FINALE: surfaces the other lines + their fates at the close", () => {
+    const state = {
+      ...initState(content, "seed"),
+      end: { kind: "death" as const, year: 1990, reason: "x" },
+    };
+    component = mount(LegacyReport, {
+      target: host,
+      props: {
+        content,
+        state,
+        end: state.end,
+        rivalStandings: [
+          { id: "rival:bavaria", label: "rival:bavaria", rung: 5, faltering: false },
+          { id: "rival:italian", label: "rival:italian", rung: 1, faltering: true },
+        ],
+        onRestart: () => {},
+      },
+    });
+    const finale = host.querySelector("[data-testid='rival-finale']");
+    expect(finale, "the rival reckoning renders when there are rivals").not.toBeNull();
+    expect(finale?.textContent).toContain("The Other Lines");
+    // The place ids are humanized, not raw.
+    expect(finale?.textContent).toContain("Bavaria");
+    expect(finale?.textContent).toContain("Italian");
+    expect(finale?.textContent).not.toContain("rival:");
+    const items = [...host.querySelectorAll("[data-testid='rival-finale'] li")];
+    expect(items.length).toBe(2);
+    // The high-rung line reads as a star-reacher; the faltering one is marked + reads as broken.
+    expect(items[0]?.textContent).toMatch(/stars/i);
+    const faltered = items.find((li) => li.getAttribute("data-faltering") === "true");
+    expect(faltered, "the faltering line is marked").toBeDefined();
+    expect(faltered?.textContent).toMatch(/falter/i);
+    // No rivals → no section.
+    unmount(component);
+    component = mount(LegacyReport, {
+      target: host,
+      props: { content, state, end: state.end, onRestart: () => {} },
+    });
+    expect(host.querySelector("[data-testid='rival-finale']")).toBeNull();
+  });
 });

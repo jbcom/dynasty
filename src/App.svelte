@@ -181,6 +181,7 @@ function dumpTimeline(): void {
     state={store.view.state}
     end={store.view.state.end}
     convergence={store.view.convergence}
+    rivalStandings={store.view.rivalStandings}
     onRestart={restart}
   />
 {:else}

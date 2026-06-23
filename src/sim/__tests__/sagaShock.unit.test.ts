@@ -218,4 +218,33 @@ describe("shockLedger (DOSSIER-SHOCK-LEDGER)", () => {
     ]);
     expect(led.map((e) => `${e.year}:${e.kind}`)).toEqual(["1885:family_death", "1885:meter_blow"]);
   });
+
+  it("SHOCK-LEDGER-RECOVERIES: records `recovered:*` flags as comeback entries, sorted AFTER same-year shocks", () => {
+    // A blow at 1920 that rebounds at 1920 must read loss-then-comeback within the year; a later recovery sorts late.
+    const led = shockLedger([
+      "shock:meter_blow:1920",
+      "recovered:money:1920",
+      "recovered:reputation:1948",
+      "base:press",
+    ]);
+    expect(led.map((e) => `${e.year}:${e.kind}`)).toEqual([
+      "1920:meter_blow",
+      "1920:recovery",
+      "1948:recovery",
+    ]);
+    // The comeback label is METER-AWARE (names what was clawed back), not the generic fallback.
+    expect(led[1]?.label).toMatch(/fortune/i);
+    expect(led[2]?.label).toMatch(/name|redeem/i);
+  });
+
+  it("SHOCK-LEDGER-RECOVERIES: an unknown recovered-meter falls back to the generic comeback label", () => {
+    const led = shockLedger(["recovered:power:1900"]);
+    expect(led).toHaveLength(1);
+    expect(led[0]?.kind).toBe("recovery");
+    expect(led[0]?.label).toMatch(/recovered/i);
+  });
+
+  it("SHOCK-LEDGER-RECOVERIES: skips malformed recovered flags (no year)", () => {
+    expect(shockLedger(["recovered:money", "recovered::1900"])).toEqual([]);
+  });
 });

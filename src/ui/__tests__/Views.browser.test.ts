@@ -106,6 +106,32 @@ describe("TimelineView", () => {
     component = mount(TimelineView, { target: host, props: { content, gameState: playedState() } });
     expect(host.querySelector("[data-testid='shock-ledger']")).toBeNull();
   });
+
+  it("SHOCK-LEDGER-RECOVERIES: a recovery renders as a GOLD comeback line, distinct from red disasters", () => {
+    const s = {
+      ...playedState(),
+      flags: [
+        ...playedState().flags,
+        "shock:meter_blow:1920",
+        "recovered:money:1935",
+        "base:press",
+      ],
+    };
+    component = mount(TimelineView, { target: host, props: { content, gameState: s } });
+    const items = [...host.querySelectorAll("[data-testid='shock-ledger'] li")];
+    expect(items.length).toBe(2);
+    // The comeback entry carries kind=recovery, names the fortune, and is gold-accented (not the red disaster).
+    // .find returns undefined (not null) when absent, and .not.toBeNull() passes vacuously on undefined —
+    // use toBeDefined() so a missing element fails HERE, not later inside getComputedStyle (Gemini #124).
+    const recovery = items.find((li) => li.getAttribute("data-shock-kind") === "recovery");
+    expect(recovery, "a recovery line renders").toBeDefined();
+    expect(recovery?.textContent).toMatch(/fortune/i);
+    const blow = items.find((li) => li.getAttribute("data-shock-kind") === "meter_blow");
+    expect(blow, "a blow line renders").toBeDefined();
+    expect(getComputedStyle(recovery as HTMLElement).borderLeftColor).not.toBe(
+      getComputedStyle(blow as HTMLElement).borderLeftColor,
+    );
+  });
 });
 
 describe("StatsView", () => {

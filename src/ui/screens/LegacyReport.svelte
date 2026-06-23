@@ -6,6 +6,7 @@ import { spectrumLabel } from "../../sim/personality";
 import { branchOf } from "../../sim/branch";
 import { moralPoleLabel, moralPoleOf } from "../../sim/moralAxis";
 import { applyTerms, runTerms } from "../../sim/terms";
+import { shockLedger } from "../../sim/sagaShock";
 import type { EndState, GameState } from "../../sim/state";
 import ButterflyGraph from "../ButterflyGraph.svelte";
 import { formatMoney } from "../theme";
@@ -18,10 +19,13 @@ interface Props {
   end: EndState;
   /** The dynastic CONVERGENCE ending (toward the stars / contributed / earthbound / extinguished). */
   convergence?: ConvergenceEnding | null;
+  /** CONVERGENCE-RIVAL-FINALE: the whole field's final standings — every rival line that raced alongside,
+   *  so the close reads as the field's reckoning, not just the player's. */
+  rivalStandings?: Array<{ id: string; label: string; rung: number; faltering: boolean }>;
   onRestart: () => void;
 }
 
-const { content, state, end, convergence = null, onRestart }: Props = $props();
+const { content, state, end, convergence = null, rivalStandings = [], onRestart }: Props = $props();
 
 /** How the line's century-spanning arc finally read — the dynastic framing above the per-run end. */
 const CONVERGENCE_LABEL: Record<string, string> = {
@@ -70,6 +74,35 @@ const dynasty = $derived.by(() => {
   return { generations: topGen + 1, members: fam.members.length, span, houseName };
 });
 
+// CONVERGENCE-RIVAL-FINALE: the rivals that raced alongside get their own reckoning at the close — each
+// line's final station + a one-line fate, so the ending reads as the whole field's, not just the player's.
+// The fate is read off the rival's final rung (relative to the 0..MAX ladder) and whether it ended faltering.
+const RIVAL_MAX_RUNG = 5; // the convergence rung ladder height (classRung MAX_RUNG)
+function rivalFate(rung: number, faltering: boolean): string {
+  if (faltering) return "faltered at the last, its climb broken";
+  if (rung >= RIVAL_MAX_RUNG) return "reached the stars in its own right";
+  if (rung >= RIVAL_MAX_RUNG - 1) return "rose high, a power among the lines";
+  if (rung >= 2) return "made its mark, then settled";
+  return "never rose far from where it began";
+}
+const humanizePlace = (label: string): string =>
+  label.replace(/^rival:/, "").replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+// Sorted high→low already (the engine sorts standings); render every line so the field's whole arc shows.
+const rivals = $derived(
+  rivalStandings.map((r) => ({
+    id: r.id,
+    name: humanizePlace(r.label),
+    rung: r.rung,
+    fate: rivalFate(r.rung, r.faltering),
+    faltering: r.faltering,
+  })),
+);
+
+// LEDGER-IN-LEGACY-REPORT: the line's hard seasons + comebacks, gathered for the final reckoning. The
+// in-run Timeline shows this log live; the close shows it WHOLE — every disaster and recovery the line
+// lived through, so the finale reflects the trials, not just the verdict. Empty for a shock-free run.
+const ledger = $derived(shockLedger(state.flags));
+
 // A one-shot ending sting coloured by the convergence outcome, fired once when the report mounts
 // (audio-gated + fully guarded inside playEndingSting). The saga's close gets an audible punctuation.
 onMount(() => {
@@ -94,6 +127,21 @@ onMount(() => {
   <p class="pole" data-pole={pole}>You ended in <strong>{poleLabel}</strong>.</p>
   <p class="year">Final year: {end.year} · {spectrumLabel(state.personality)}</p>
 
+  {#if rivals.length > 0}
+    <!-- CONVERGENCE-RIVAL-FINALE: the field's reckoning — every line that raced alongside, and how it ended. -->
+    <section class="rival-finale" data-testid="rival-finale">
+      <h2>The Other Lines</h2>
+      <ul>
+        {#each rivals as r (r.id)}
+          <li data-faltering={r.faltering}>
+            <span class="rf-name">{r.name}</span>
+            <span class="rf-fate">{r.fate}</span>
+          </li>
+        {/each}
+      </ul>
+    </section>
+  {/if}
+
   {#if dynasty}
     <p class="dynasty">
       The House of <strong>{dynasty.houseName}</strong> endured
@@ -103,6 +151,21 @@ onMount(() => {
       <strong>{dynasty.members}</strong>
       {dynasty.members === 1 ? "soul" : "souls"} born into the line.
     </p>
+  {/if}
+
+  {#if ledger.length > 0}
+    <!-- LEDGER-IN-LEGACY-REPORT: the whole saga's trials — every disaster (red) and comeback (gold). -->
+    <section class="hard-seasons" data-testid="legacy-ledger">
+      <h2>The Family's Hard Seasons</h2>
+      <ul>
+        {#each ledger as entry (entry.year + entry.kind)}
+          <li data-shock-kind={entry.kind}>
+            <span class="ls-year">{entry.year}</span>
+            <span class="ls-label">{entry.label}</span>
+          </li>
+        {/each}
+      </ul>
+    </section>
   {/if}
 
   <dl class="stats">
@@ -210,6 +273,75 @@ onMount(() => {
   }
   .dynasty strong {
     color: var(--mmm-gold);
+  }
+  /* CONVERGENCE-RIVAL-FINALE: the field's reckoning — the other lines and their fates. */
+  .rival-finale {
+    margin: 1rem auto 0;
+    max-width: 30rem;
+    text-align: left;
+  }
+  .rival-finale ul {
+    list-style: none;
+    margin: 0.4rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .rival-finale li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+    font-family: var(--mmm-font-body);
+    font-size: 0.9rem;
+    border-left: 2px solid color-mix(in srgb, var(--mmm-gold-deep) 60%, transparent);
+    padding-left: 0.5rem;
+  }
+  /* A line that faltered at the close reads in the loss register. */
+  .rival-finale li[data-faltering="true"] {
+    border-left-color: var(--mmm-red, #b22);
+  }
+  .rf-name {
+    font-weight: 700;
+    color: var(--mmm-gold);
+  }
+  .rf-fate {
+    color: var(--mmm-text-dim);
+    font-style: italic;
+    font-size: 0.82rem;
+  }
+  /* LEDGER-IN-LEGACY-REPORT: the line's trials, mirroring the in-run Timeline ledger voice. */
+  .hard-seasons {
+    margin: 1rem auto 0;
+    max-width: 30rem;
+    text-align: left;
+  }
+  .hard-seasons ul {
+    list-style: none;
+    margin: 0.4rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .hard-seasons li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+    font-family: var(--mmm-font-body);
+    font-size: 0.9rem;
+    color: var(--mmm-text);
+    border-left: 2px solid var(--mmm-red, #b22);
+    padding-left: 0.5rem;
+  }
+  .hard-seasons li[data-shock-kind="recovery"] {
+    border-left-color: var(--mmm-gold);
+  }
+  .ls-year {
+    font-family: var(--mmm-font-ui);
+    font-variant-numeric: tabular-nums;
+    color: var(--mmm-text-dim);
+    font-size: 0.78rem;
   }
   .stats {
     display: grid;

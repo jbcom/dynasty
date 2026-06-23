@@ -209,31 +209,57 @@ export function applyFamilyDeathShock(
 /** DOSSIER-SHOCK-LEDGER: one entry in the line's "what befell the family" log. */
 export interface ShockLedgerEntry {
   year: number;
-  kind: "family_death" | "meter_blow";
-  /** A short label for the disaster (the player reviews the line's hard seasons). */
+  /** A disaster (death / reversal) or a comeback (a blown meter rebounding) — SHOCK-LEDGER-RECOVERIES. */
+  kind: "family_death" | "meter_blow" | "recovery";
+  /** A short label for the season (the player reviews the line's hard seasons AND its comebacks). */
   label: string;
 }
 
-// Typed by ShockLedgerEntry["kind"] so adding a new shock kind forces a label here (exhaustiveness).
+// Typed by ShockLedgerEntry["kind"] so adding a new entry kind forces a label here (exhaustiveness).
 const LEDGER_LABEL: Record<ShockLedgerEntry["kind"], string> = {
   family_death: "A death in the family",
   meter_blow: "A reversal struck the line",
+  recovery: "The line recovered",
+};
+
+// SHOCK-LEDGER-RECOVERIES: a comeback reads better naming WHAT was clawed back, so the recovery label is
+// meter-aware (the fortune rebuilt, the name redeemed…). Falls back to the generic "The line recovered".
+const RECOVERY_LABEL: Partial<Record<MeterId, string>> = {
+  health: "The household's strength returned",
+  money: "The fortune was rebuilt",
+  reputation: "The name was redeemed",
+  loyalty: "Old loyalties were won back",
 };
 
 /**
- * Parse the run's `shock:<kind>:<year>` flags into a chronological ledger of the line's disasters — the
- * inspectable "what befell the family" history the Timeline/Dossier surfaces (DOSSIER-SHOCK-LEDGER). Pure
- * read of state.flags; sorted by year then kind for stable output. Unknown/malformed flags are skipped.
- * Flags are de-duplicated first: a repeated `shock:*` flag would otherwise yield two entries with the same
- * (year, kind), and TimelineView keys its `#each` on `year + kind` — duplicate keys crash Svelte at render.
+ * Parse the run's `shock:<kind>:<year>` and `recovered:<meter>:<year>` flags into a chronological ledger of the
+ * line's hard seasons AND its comebacks — the inspectable "what befell the family" history the Timeline/Dossier
+ * surfaces (DOSSIER-SHOCK-LEDGER + SHOCK-LEDGER-RECOVERIES). Pure read of state.flags; sorted by year then kind
+ * (a recovery sorts AFTER the shocks in its year, so a same-year blow→recover reads loss-then-comeback). Unknown
+ * / malformed flags are skipped. Flags are de-duplicated first: a repeated flag would otherwise yield two
+ * entries with the same (year, kind), and TimelineView keys its `#each` on `year + kind` — duplicate keys crash
+ * Svelte at render.
  */
 export function shockLedger(flags: Iterable<string>): ShockLedgerEntry[] {
   const out: ShockLedgerEntry[] = [];
   for (const f of new Set(flags)) {
-    const m = /^shock:(family_death|meter_blow):(\d+)$/.exec(f);
-    if (!m) continue;
-    const kind = m[1] as "family_death" | "meter_blow";
-    out.push({ year: Number(m[2]), kind, label: LEDGER_LABEL[kind] ?? "A hard season" });
+    const shock = /^shock:(family_death|meter_blow):(\d+)$/.exec(f);
+    if (shock) {
+      const kind = shock[1] as "family_death" | "meter_blow";
+      out.push({ year: Number(shock[2]), kind, label: LEDGER_LABEL[kind] });
+      continue;
+    }
+    const recovered = /^recovered:([a-z]+):(\d+)$/.exec(f);
+    if (recovered) {
+      const meter = recovered[1] as MeterId;
+      out.push({
+        year: Number(recovered[2]),
+        kind: "recovery",
+        label: RECOVERY_LABEL[meter] ?? LEDGER_LABEL.recovery,
+      });
+    }
   }
-  return out.sort((a, b) => a.year - b.year || a.kind.localeCompare(b.kind));
+  // family_death < meter_blow < recovery alphabetically — so within a year a comeback sorts last (loss →
+  // recover). Plain codepoint compare (NOT localeCompare) — locale/engine-independent for bit-identical replay.
+  return out.sort((a, b) => a.year - b.year || (a.kind < b.kind ? -1 : a.kind > b.kind ? 1 : 0));
 }
