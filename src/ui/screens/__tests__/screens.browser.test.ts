@@ -249,6 +249,42 @@ describe("LegacyReport", () => {
     expect(host.querySelector("[data-testid='legacy-ledger']")).toBeNull();
   });
 
+  it("SHOCK-LEDGER-IN-FINALE-SORT: the Hard Seasons render chronologically, a same-year blow then its comeback", () => {
+    const state = {
+      ...initState(content, "seed"),
+      // Flags in SCRAMBLED order, with a same-year (1920) blow + recovery — the render must sort to a clean
+      // chronology with the 1920 comeback AFTER the 1920 blow (loss-then-comeback within the year).
+      flags: [
+        "recovered:money:1920",
+        "shock:family_death:1950",
+        "shock:meter_blow:1920",
+        "base:land",
+      ],
+      end: { kind: "death" as const, year: 1990, reason: "x" },
+    };
+    component = mount(LegacyReport, {
+      target: host,
+      props: { content, state, end: state.end, onRestart: () => {} },
+    });
+    const rows = [...host.querySelectorAll("[data-testid='legacy-ledger'] li")].map((li) => ({
+      year: Number(li.querySelector(".ls-year")?.textContent),
+      kind: li.getAttribute("data-shock-kind"),
+    }));
+    expect(rows.length).toBe(3);
+    // Years are non-decreasing (chronological).
+    const years = rows.map((r) => r.year);
+    for (let i = 1; i < years.length; i++) {
+      expect(years[i] ?? 0).toBeGreaterThanOrEqual(years[i - 1] ?? 0);
+    }
+    // Within 1920: the blow (meter_blow) renders BEFORE its same-year comeback (recovery) — loss then comeback.
+    const blowIdx = rows.findIndex((r) => r.year === 1920 && r.kind === "meter_blow");
+    const recIdx = rows.findIndex((r) => r.year === 1920 && r.kind === "recovery");
+    expect(blowIdx).toBeGreaterThanOrEqual(0);
+    expect(recIdx).toBeGreaterThan(blowIdx);
+    // The later (1950) death sorts last.
+    expect(rows[rows.length - 1]).toEqual({ year: 1950, kind: "family_death" });
+  });
+
   it("CONVERGENCE-RIVAL-FINALE: surfaces the other lines + their fates at the close", () => {
     const state = {
       ...initState(content, "seed"),

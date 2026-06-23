@@ -1413,16 +1413,28 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   first outstanding flag wins (replay-stable); heat + unrecognized fall back to the generic hopeful line. Wired into
   the engine foreshadow(). Test: sagaShock.unit (four distinct variants, first-flag-wins, fallback).
 - [ ] **FINALE-POLISH PR — wait CI green + address review, then self-squash-merge.** (filled in at push.)
-- [ ] **SHOCK-LEDGER-IN-FINALE-SORT — the LegacyReport "Hard Seasons" ledger should read chronologically with a
-  clear loss/comeback rhythm.** The ledger already lists disasters + recoveries; verify a same-year blow→recover
-  reads loss-then-comeback (the shockLedger sort) and that the FINALE surfaces tie to the omen/dossier vocabulary
-  (a line the player saw "drop out" in-run reads "dropped out" in the ledger too). Pure; tested (LegacyReport.browser).
-- [ ] **OMEN-DREAD-COPY-VARIETY — the DREAD omen (mirror of HOPE-OMEN-COPY-VARIETY) is also two fixed lines
-  (grave/marginal); vary the grave-dread text by the looming hazard the era favors** (a death-heavy founding era vs a
-  meter-blow-heavy later one), so dread reads specific like the hope omen now does. Pure; tested (sagaShock.unit).
-- [ ] **FIELD-EXTREMES-SCREENSHOT — capture + READ a LegacyReport screenshot with both extremes present (a star
-  line + a dropped-out line + a hope-omen mid-run) to confirm the registers read as intended visually**, per the
-  "own quality, especially visuals" doctrine — tests assert structure, not appearance. Visual harness screenshot.
+- [x] **SHOCK-LEDGER-IN-FINALE-SORT — DONE (branch feat/ledger-and-dread-polish).** Verified shockLedger already
+  sorts year-then-kind with a same-year comeback after the blow (codepoint compare, replay-stable). Added a
+  screens.browser test that feeds SCRAMBLED flags (incl. a same-year 1920 blow+recovery) and asserts the RENDERED
+  Hard Seasons list is chronological with the 1920 comeback after the 1920 blow and the 1950 death last.
+- [x] **OMEN-DREAD-COPY-VARIETY — DONE.** `dreadForeshadowText(macroActId)` keys the dread omen to the macro-act:
+  founding (fever/hard winters — loss of life), convergence (old-country troubles), emergence (markets/mood),
+  ascension (fortune-not-certain). Generic fallback for an unknown band. Wired into engine foreshadow() (the
+  reachable dread weight is "marginal" since strain → the hope branch). Test: sagaShock.unit (four distinct, fallback).
+- [x] **FIELD-EXTREMES-SCREENSHOT — DONE.** New LegacyReportFieldExtremes.visual test mounts the finale with a star
+  line + a mid line + a dropped-out line + a loss→comeback ledger, asserts both extreme markers present, and captures
+  a screenshot. READ the screenshot: Bavaria (stars) renders bright-gold/ascendant, Chinese (dropped out) struck +
+  dimmed grey, ledger shows 1920 reversal→rebuilt→1950 death. The two registers read distinctly as intended. ✓
+- [ ] **MID-RUN-FIELD-GLANCE-SCREENSHOT — capture + READ a mid-run PlayScreen with the Field dossier tab open
+  showing a mix of states (surging / faltering / fallen / steady + trend arrows) to confirm the in-run race reads
+  as clearly as the finale does.** The finale is screenshotted; the in-run dossier (the live race surface) is not.
+  Visual harness screenshot; READ + compare to the dossier intent. Closes the visual-coverage gap on the live surface.
+- [ ] **OMEN-TONE-A11Y — the hope (gold) vs dread (red) omen registers must not rely on color ALONE** (WCAG 1.4.1).
+  Add a non-color cue — an icon or a text prefix ("⟳ Recovering" / "⚠ Warning") — so a colorblind player distinguishes
+  them. Mirror on the finale field-extreme registers (stars/dropped-out) if they also lean on color alone. Pure UI; tested.
+- [ ] **SHOCK-LEDGER-EMPTY-VOICE — when a run had NO hard seasons, the finale silently omits the ledger; instead show
+  a one-line "the line was spared the worst — no disaster struck across N generations" so a charmed run reads as an
+  achievement, not a missing section.** Pure (a fallback line when shockLedger is empty + the run was long). Tested.
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
