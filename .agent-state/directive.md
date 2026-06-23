@@ -165,14 +165,21 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   state portrait among the stars), held cohesive by the chronicle wrapper. VALIDATED live: regenerated the Gilded-Age
   economic low (a worn tintype) vs high (a gilt-framed oil) — the medium reads station exactly per the user's miner-
   vs-robber-baron example (commit 02826ab). 18 unit tests.
-- [ ] **EI-9 PORTRAIT-MATRIX ASSET SWEEP — IN PROGRESS.** All 6 early/mid era bands' ADULT matrices generated
-  (founding→digital_modern), BUT they predate the presentation-medium change → must `--force` REGENERATE so every
-  era×station presents as its true artifact (Gilded-Age economic redone+verified = tintype-vs-oil; stellar economic
-  redone+verified = physical-oil flex). Per band: `pnpm vite-node scripts/genai-portraits.ts -- --era <band> --force`,
-  READ a low (humble medium) + a high (commissioned/physical medium) sample to confirm the medium varies, commit per
-  band. Remaining to regen: founding, federal, industrial(non-econ), early_1900s, midcentury, digital_modern; fresh:
-  near_future + stellar(non-econ). On-demand cache covers gaps at runtime meanwhile. (Life-stages beyond adult —
-  infant/child/youth/elder — + encounter-role portraits are a later sweep; adult is the play surface's current demand.)
+- [x] **EI-9 PORTRAIT-MATRIX ADULT SWEEP — DONE.** The full ADULT matrix is generated across all 8 era bands × 7
+  archetypes × 3 rung tiers × 2 genders (336 portraits) with the era×station presentation MEDIUM + scarcity
+  inversion. READ-verified one low (humble medium) + one high (commissioned/physical medium) per band: founding
+  charcoal-sketch→oil; federal silhouette→oil; Gilded-Age tintype→framed-oil; early-1900s snapshot→studio-photo;
+  midcentury snapshot→color-studio; digital headshot; near_future hologram→PHYSICAL-OIL; stellar hologram→PHYSICAL-OIL.
+- [ ] **EI-9b digital_modern low/mid = screen-native captures (tuning)** — like EI-10's stellar fix: digital_modern
+  low (phone snapshot) + mid still get the aged chronicle-PLATE framing, so a casual phone photo reads as a mounted
+  painting. Extend `isDigitalCapture` (or a "casual screen capture" wrapper) to digital_modern low/mid so they read
+  on-screen/casual, not plate-mounted; regen + READ to confirm. (digital_modern HIGH = corporate headshot stays a
+  framed/formal capture.)
+- [ ] **EI-9c LIFE-STAGE + ENCOUNTER portrait sweep** — the matrix beyond ADULT: infant/child/youth/elder per era
+  band (the cycles recur every generation; progeny-in-space need stellar children too — user 2026-06-23) + the
+  encounter-role portraits (first friend/betrayer/partner/rival/mentor) via `buildEncounterPortraitPrompt`. Generate
+  on-demand as the play surface requests them, or a targeted sweep per life-stage; READ a sample per stage. Large —
+  enumerate the demand the live runner actually hits first, don't blanket all 1680 keys.
 - [x] **EI-10 future-digital luminosity — DONE (commit e32b9cf).** Root cause: the aged-physical-plate
   CHRONICLE_WRAPPER fought the holographic medium. `wrapperFor(era,tier)` now uses a luminous void-ground
   ARCHIVE_WRAPPER for near_future/stellar low+mid (digital captures) + keeps CHRONICLE_WRAPPER for physical
