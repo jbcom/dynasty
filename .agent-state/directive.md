@@ -1132,13 +1132,17 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   on the saga clock). Also caught + fixed: g9's terminal close carried no succession, so a fully-succeeded
   line wrongly fell to line-extinct instead of the `apex` stars ending (now reachable + guarded). Spec
   §AUDIT-RESULT + §DECISION.
-- [ ] **WV-3-MORTALITY — seeded disease/mortality hazard on the saga clock (the audit's chosen lever).** Per
-  the audit + spec §DECISION: a per-saga-tick, era-weighted, SEEDED hazard that can strike the protagonist or
-  a family member (and/or a meter) between generations, so runs DIVERGE in events (early death forces unplanned
-  succession; a loss reshapes the family; a meter shock alters the convergence gate). Pure + seeded (rng.fork
-  on year/history, replay bit-identical), wired into advanceRunClock's saga branch beside advanceFamily,
-  feeding the existing succession mechanic. Re-run the divergence audit after — endKinds>1 / gens+familyAlive
-  range>0 across seeds proves it widened. Then author the disease/loss scenes the new states need.
+- [x] **WV-3-MORTALITY — DONE (commit 28df954).** Seeded, era-weighted disruption hazard (src/sim/sagaShock.ts:
+  rollSagaShock) on year-advancing saga ticks: takes a non-protagonist member (family_death) or blows a meter
+  (plague/fire/scandal/betrayal/+heat). Wired into advanceRunClock beside advanceFamily; stamps a
+  `shock:<kind>:<year>` flag. Pure+seeded → replay bit-identical (save round-trip green). RESULT: the
+  divergence audit's saga path now spreads (moneyDistinct 1→6, familyAlive varies) — Suzerain trap broken on
+  the saga path. Tests: sagaShock.unit + audit assertions. 847 node + 110 browser green.
+- [ ] **WV-3-SHOCK-SCENES — author the loss/recovery scene a shock surfaces.** WV-3-MORTALITY stamps a
+  `shock:<kind>:<year>` flag but nothing yet READS it in the prose — the loss is mechanical, not narrated.
+  Add a gated interstitial (or thread) that, when a `shock:family_death:*` / `shock:meter_blow:*` flag is set,
+  surfaces a short era-voiced loss/recovery beat in the next scene (the "magnitudes more writing" the spec
+  calls for). Gate via the trigger lattice or a scene `requires.flags`; keep it decisionless texture.
 - [ ] **WV-3-RIVAL-REACT — rivals REACT to the player (the Yuka half).** advanceAgent currently picks strategy
   from STATIC motivators, ignoring the player. Make a rival near the player's rung on the SAME strategy able
   to escalate (compete harder → faster climb) or pivot, so the player's position perturbs the rival world
