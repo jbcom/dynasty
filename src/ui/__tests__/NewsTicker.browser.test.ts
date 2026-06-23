@@ -1,5 +1,5 @@
 import { mount, unmount } from "svelte";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi, vitest } from "vitest";
 import { validRaw } from "../../sim/__tests__/fixtures";
 import { buildContent } from "../../sim/content";
 import { initState } from "../../sim/state";
@@ -88,6 +88,77 @@ describe("NewsTicker", () => {
     expect(getComputedStyle(faltered as HTMLElement).borderLeftColor).not.toBe(
       getComputedStyle(surged as HTMLElement).borderLeftColor,
     );
+  });
+
+  it("RIVAL-CROSSING-EXPLOIT: a faltered dispatch offers a Press button that fires onPress with the rival id", async () => {
+    const onPress = vi.fn();
+    component = mount(NewsTicker, {
+      target: host,
+      props: {
+        content,
+        gameState: { ...initState(content, "seed"), year: 2001 },
+        rivalNews: [
+          {
+            id: "rival:italian",
+            kind: "faltered" as const,
+            headline: "The Italian line has stumbled.",
+          },
+          {
+            id: "rival:bavaria",
+            kind: "surged" as const,
+            headline: "The Bavaria line has outpaced you.",
+          },
+        ],
+        onPress,
+      },
+    });
+    const buttons = [...host.querySelectorAll<HTMLButtonElement>(".rn-press")];
+    // Only the FALTERED dispatch (a window) gets a press button — a surge doesn't.
+    expect(buttons.length).toBe(1);
+    buttons[0]?.click();
+    await vitest.waitFor(() => expect(onPress).toHaveBeenCalledWith("rival:italian"));
+  });
+
+  it("RIVAL-CROSSING-EXPLOIT: no Press button when onPress is not provided (e.g. read-only contexts)", () => {
+    component = mount(NewsTicker, {
+      target: host,
+      props: {
+        content,
+        gameState: { ...initState(content, "seed"), year: 2001 },
+        rivalNews: [
+          {
+            id: "rival:italian",
+            kind: "faltered" as const,
+            headline: "The Italian line has stumbled.",
+          },
+        ],
+      },
+    });
+    expect(host.querySelector(".rn-press")).toBeNull();
+  });
+
+  it("RIVAL-CROSSING-EXPLOIT: the Press button hides once the rival has been pressed THIS step (exploit guard)", () => {
+    const onPress = vi.fn();
+    const gs = { ...initState(content, "seed"), year: 2001 };
+    // A press already recorded for this rival at the current history step (history.length === 0 here).
+    gs.presses = [{ at: gs.history.length, rivalId: "rival:italian", year: 2001 }];
+    component = mount(NewsTicker, {
+      target: host,
+      props: {
+        content,
+        gameState: gs,
+        rivalNews: [
+          {
+            id: "rival:italian",
+            kind: "faltered" as const,
+            headline: "The Italian line has stumbled.",
+          },
+        ],
+        onPress,
+      },
+    });
+    // Already pressed this step → no button (the action is spent until the next step).
+    expect(host.querySelector(".rn-press")).toBeNull();
   });
 
   it("shows a quiet-world empty state when there are no headlines (PL-11)", () => {

@@ -34,6 +34,7 @@ import {
   rollSagaRecovery,
   rollSagaShock,
   type SagaShockNote,
+  shockForeshadow,
   shockMeterFlag,
   shockNote,
 } from "../sim/sagaShock";
@@ -83,6 +84,9 @@ export interface GameView {
    *  that has stumbled (a window) or surged past the player (pressure). Surfaced in the NewsTicker so the
    *  convergence race is felt in-run, not just at the close. */
   rivalNews: RivalNewsItem[];
+  /** SHOCK-FORESHADOW: a one-line omen when the next saga tick carries an elevated hazard (harsh era +
+   *  strain/kin to lose) — surfaced BEFORE the blow so loss has dread, not just aftermath. Null otherwise. */
+  foreshadow: string | null;
 }
 
 /** A one-line dispatch about a near-vantage rival line (RIVAL-RACE-PRESENCE). */
@@ -207,6 +211,53 @@ export class Game {
     return out;
   }
 
+  /** RIVAL-CROSSING-EXPLOIT: the heat cost of pressing a faltering rival — pressing the advantage draws
+   *  dangerous attention to your own line. Flat + deterministic. */
+  private static readonly PRESS_HEAT = 12;
+
+  /**
+   * RIVAL-CROSSING-EXPLOIT: the player presses a FALTERING rival — deepening its stumble one more rung — for a
+   * heat cost (the advantage is not free; pressing draws notice). Only valid on a near-vantage faltering rival
+   * surfaced in rivalNews this turn; a no-op otherwise (so a replayed press that no longer applies is skipped,
+   * matching reconstruct's guard). Recorded in the press SIDE-LOG (not history) so it never perturbs the saga
+   * RNG. No time passes — it's an action within the turn; the view re-emits with the world + meters updated.
+   */
+  pressRival(rivalId: string): void {
+    if (!this.world || this.finished) return;
+    // Guard: only a rival currently dispatched as "faltered" (near-vantage + faltering) can be pressed.
+    const pressable = this.rivalNews().some((n) => n.id === rivalId && n.kind === "faltered");
+    if (!pressable) return;
+    // EXPLOIT GUARD (Gemini #128, high): one press per rival per history STEP — else a player could spam
+    // pressRival within a turn, draining the rival to rung 0 instantly while stacking heat. `at` is the
+    // current history.length; a press already recorded at this `at` for this rival is rejected.
+    const alreadyPressed = (this.state.presses ?? []).some(
+      (p) => p.rivalId === rivalId && p.at === this.state.history.length,
+    );
+    if (alreadyPressed) return;
+    this.applyPressEffect(rivalId);
+    this.state = {
+      ...this.state,
+      presses: [
+        ...(this.state.presses ?? []),
+        { at: this.state.history.length, rivalId, year: this.state.year },
+      ],
+    };
+    this.emit();
+  }
+
+  /** Apply a press's deterministic effects — deepen the rival's stumble + the heat cost — WITHOUT recording it
+   *  (the caller owns the side-log). Shared by live pressRival and the reconstruct interleave. */
+  private applyPressEffect(rivalId: string): void {
+    if (!this.world) return;
+    // nudgeRival returns a NEW world (re-synced snapshots that rivalStandings/glimpses read) — capture it,
+    // don't discard the return (the agent rung mutates in place but the snapshot array is rebuilt).
+    this.world = nudgeRival(this.world, rivalId, -1);
+    this.state = {
+      ...this.state,
+      meters: applyDelta(this.content.meters, this.state.meters, { heat: Game.PRESS_HEAT }),
+    };
+  }
+
   /** End kinds that mean the line FAILED (didn't survive to a convergence). */
   private static readonly FAILURE_ENDS = new Set(["death", "coup", "jail", "line-extinct", "ruin"]);
 
@@ -316,7 +367,21 @@ export class Game {
       lastLedger: this.lastLedger,
       shock: this.lastShock,
       rivalNews: this.rivalNews(),
+      foreshadow: this.foreshadow(),
     };
+  }
+
+  /** SHOCK-FORESHADOW: a one-line omen when the upcoming saga tick carries an elevated hazard. Only on an
+   *  active saga walk (the shock fires there); null on the event flow / a safe era / no strain or kin. The
+   *  text is era-neutral; deterministic (no RNG) so it's a stable view-derived hint, not a roll. */
+  private foreshadow(): string | null {
+    if (!this.saga.active || this.finished) return null;
+    const family = this.state.family;
+    const hasKin = !!family?.members.some(
+      (m) => m.id !== family.protagonistId && isMemberAlive(m, this.state.year),
+    );
+    const looming = shockForeshadow(macroActForYear(this.state.year), this.state.flags, hasKin);
+    return looming ? "The season turns against the house — hard days may be near." : null;
   }
 
   /**
@@ -866,8 +931,22 @@ export class Game {
       saga?: "beat" | "decision";
       index?: number;
     }>,
+    presses: ReadonlyArray<{ at: number; rivalId: string; year: number }> = [],
   ): GameState {
     const game = new Game(content, base.seed, base, base.archetype);
+    // RIVAL-CROSSING-EXPLOIT: the press side-log is interleaved by `at` (the history.length at which each
+    // press fired) so its deterministic effects (rival nudge + heat cost) land at the SAME point as live play
+    // — WITHOUT going through `history` (which would shift history.length and desync the saga RNG). Sorted by
+    // `at`; applied after each step once history.length has reached the press's mark.
+    const ordered = [...presses].sort((a, b) => a.at - b.at);
+    let pi = 0;
+    const applyDuePresses = () => {
+      while (pi < ordered.length && (ordered[pi]?.at ?? Infinity) <= game.state.history.length) {
+        game.applyPressEffect(ordered[pi]?.rivalId ?? "");
+        pi++;
+      }
+    };
+    applyDuePresses(); // any press recorded before the first step (at === 0)
     for (const step of history) {
       if (game.finished) break;
       if (step.saga === "beat") {
@@ -878,7 +957,10 @@ export class Game {
         // Only replay the event step if it's the live current event (it always is in a faithful log).
         if (game.view.currentEvent?.id === step.eventId) game.choose(step.choiceId);
       }
+      applyDuePresses();
     }
+    // Restore the press side-log onto the reconstructed state (its effects are already applied above).
+    game.state = { ...game.state, ...(presses.length ? { presses: [...presses] } : {}) };
     return game.view.state;
   }
 }

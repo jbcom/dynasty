@@ -1227,32 +1227,43 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   rivals' bars red), sorted high→low, so the player tracks the whole race mid-run, not just at the close.
   Reads view.rivalStandings + view.rung (wired through PlayScreen). Views.browser pins the sort order, player
   slot, faltering accent, and empty case. 881 node + 119 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **RIVAL-CROSSING-EXPLOIT — let the player ACT on a faltering rival (OWN branch after #126 — save-invariant design needed).**
-  A faltering rival is a window; let the player press it (nudgeRival -1 + a heat/attention cost). ARCHITECTURAL
-  FINDING (this analysis): a player-initiated press CANNOT go in the RNG-keyed `history` array — every saga RNG
-  fork is keyed on `history.length`, so inserting a press entry between beats shifts subsequent fork labels and
-  DESYNCS replay (breaks save=seed+history, [[mmm-save-and-chronology]]). Needs a SEPARATE press side-log keyed
-  by the history index it occurred at, interleaved in `reconstruct` WITHOUT perturbing the saga RNG. That's a
-  real design step deserving its own branch after the rival-race-presence PR — NOT a same-branch append. Decided:
-  defer to a dedicated branch; build the press side-log + reconstruct interleave + tests there. Logged, proceeding.
+- [x] **RIVAL-CROSSING-EXPLOIT — DONE (feat/rival-crossing-exploit).** The player can "Press the advantage" on a
+  faltering near-vantage rival (a NewsTicker button on faltered dispatches): nudgeRival -1 + a +12 heat cost.
+  SAVE-INVARIANT solved via a SEPARATE press side-log (state.presses: {at, rivalId, year}) — NOT history, so
+  history.length (the saga RNG fork key) is untouched; reconstruct interleaves presses by `at` (record-free
+  applyPressEffect) so replay is bit-identical. Wired engine→store→PlayScreen→App; presses round-trip in
+  toSave/fromSave. Tests: loop.unit (press effects + no-op guard + bit-identical reconstruct) + NewsTicker.browser
+  (button fires/absent). 888 node + 122 browser green, full gate clean. [[mmm-save-and-chronology]] preserved.
 - [x] **RIVAL-FATE-IN-CONVERGENCE-ENDING — DONE (forward commit on PR #126).** resolveConvergence now computes a
   `rivalEpilogue` coda from the field summary (rivalField: reachedStars/fallen/abovePlayer/total): a rival among
   the stars (distinct for player-also-stars vs not), the whole field fallen behind you, or a still-contested
   race. LegacyReport narrates it beneath the finale prose; a failed/unfounded run gets no coda. convergence.unit
   (5 cases) + screens.browser (render + empty). 886 node + 120 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **SHOCK-FORESHADOW — a near-future hazard hints before it strikes (after #126).** WV-3
-  shocks land then narrate aftermath; the player never feels them coming. When the next saga tick carries an
-  elevated shock chance (harsh era + outstanding strain), surface a one-line omen ("the season turns against
-  the house") the turn BEFORE, so loss has dread, not just consequence. Reads the era exposure; pure; tested.
-- [ ] [WAIT-REVIEW] **RECOVERY-CHOICE — let the player INVEST in a rebound rather than wait for the seeded roll (after #126).**
+- [x] **SHOCK-FORESHADOW — DONE (forward commit on PR #128).** Extracted shockExposure() (the ONE home for the
+  era-medicine hazard formula) + shockForeshadow() — a deterministic (NO RNG, replay-safe) predicate: true in a
+  harsh era when the line carries strain (a shock_meter:* marker) OR has kin to lose. view.foreshadow surfaces
+  "The season turns against the house — hard days may be near." in the PlayScreen above the scene (muted/dashed,
+  distinct from the red aftermath). Loss now has dread, not just consequence. Tests: sagaShock.unit (exposure
+  monotone + foreshadow gating) + loop.unit (omen surfaces + deterministic). 891 node + 122 browser green.
+- [ ] [WAIT-REVIEW] **RECOVERY-CHOICE — let the player INVEST in a rebound (next branch after #128).**
   Recoveries fire automatically on quiet ticks; give the player a beat after a blow to spend a meter (money/heat)
   to RAISE the next recovery's chance/magnitude — turning the comeback into agency, not just luck. Reuses
-  rollSagaRecovery with a player-set bonus; deterministic; tested. (Pairs with RIVAL-CROSSING-EXPLOIT's side-log.)
-- [ ] [WAIT-REVIEW] **RIVAL-RACE-PRESENCE PR #126 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/rival-race-presence (now 4 units: falter/rise news, field strip, rival-fate ending). All review
-  findings (Amazon-Q dedup, Gemini perf/DRY/test-comment) folded forward in 6d00934, all 4 threads resolved.
-  Loop: wait build-and-test + CodeQL, self-squash-merge once green ([[babysit-pr]]). After merge: sync main,
-  RIVAL-CROSSING-EXPLOIT on a fresh branch (the press side-log + reconstruct interleave design).
+  rollSagaRecovery with a player-set bonus; deterministic; tested. (Mirrors RIVAL-CROSSING-EXPLOIT's side-log.)
+- [ ] [WAIT-REVIEW] **FORESHADOW-WEIGHT — the omen's certainty scales with the actual hazard (after #128).** SHOCK-FORESHADOW
+  is binary (omen or not); a founding-era line with heavy strain should read a GRAVER omen than a marginal one.
+  Tier the foreshadow text by exposure×strain ("a shadow over the season" → "the house braces for the worst"),
+  so dread is proportional. Pure, view-derived, deterministic; tested.
+- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust (after #128).**
+  A foreshadow that rarely precedes a real blow trains the player to ignore it; one that always does is just a
+  spoiler. Instrument the foreshadow→next-shock correlation over many seeds; if it's miscalibrated, tune the
+  threshold so an omen is a meaningful-but-not-certain warning. Decide from figures (like SHOCK-CADENCE-AUDIT).
+- [x] **RIVAL-RACE-PRESENCE PR #126 — DONE, MERGED (squash 0cf8514; release cut 0.32.0).** 4 units: falter/rise
+  news, field strip, rival-fate ending. All review (Amazon-Q dedup, Gemini perf/DRY/test-comment) folded forward,
+  all threads resolved, merged CLEAN. Post-merge Release+CD+CodeQL all SUCCESS (deployed). main synced.
+- [ ] [WAIT-REVIEW] **RIVAL-CROSSING-EXPLOIT PR #128 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/rival-crossing-exploit (4de722b). Full local gate passed. Loop: wait build-and-test + CodeQL, read
+  CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge:
+  sync main, SHOCK-FORESHADOW on a fresh branch.
 - [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
   audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
   diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock

@@ -193,6 +193,7 @@ function dumpTimeline(): void {
     onchoose={(id) => store?.choose(id)}
     onpickbeat={(i) => store?.pickBeat(i)}
     onpickdecision={(i) => store?.pickDecision(i)}
+    onpress={(id) => store?.pressRival(id)}
   />
 {/if}
 

@@ -35,12 +35,15 @@ interface Props {
   onpickbeat?: (beatIndex: number) => void;
   /** Pick the current scene's terminal decision option (saga play). */
   onpickdecision?: (optionIndex: number) => void;
+  /** RIVAL-CROSSING-EXPLOIT: press a faltering rival (deepen its stumble for a heat cost). */
+  onpress?: (rivalId: string) => void;
   /** Medium-native layout: phones get a compact tab stack; wide tablets/foldables
       get the event + an info panel side-by-side. */
   wide?: boolean;
 }
 
-const { content, view, busy, onchoose, onpickbeat, onpickdecision, wide = false }: Props = $props();
+const { content, view, busy, onchoose, onpickbeat, onpickdecision, onpress, wide = false }: Props =
+  $props();
 
 // Diegetic ambient drift: the play area tints toward cyan (utopia) or red
 // (tyranny) as the personality vector shifts, so the slide is felt, not just read.
@@ -153,6 +156,11 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
       {#if view.shock}
         <p class="shock-aftermath" data-shock={view.shock.kind}>{view.shock.text}</p>
       {/if}
+      <!-- SHOCK-FORESHADOW: an omen BEFORE the blow — the season turns against the house — so a hazard
+           carries dread, not just aftermath. Deterministic (no roll); shown while the threat looms. -->
+      {#if view.foreshadow}
+        <p class="foreshadow" data-testid="foreshadow">{view.foreshadow}</p>
+      {/if}
       <!-- WV-1: cross-dynasty intersections are WOVEN into the scene's paged prose by the reader (not a
            detached "Where paths cross" wall under the choices). The reader folds the crossing in as
            narration the player turns through, so a crossing feels like a moment in the family's story. -->
@@ -181,7 +189,7 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   {#if tab === "map"}
     <MapView gameState={view.state} rivalStandings={view.rivalStandings} playerRung={view.rung} />
   {:else if tab === "news"}
-    <NewsTicker {content} gameState={view.state} {term} rivalNews={view.rivalNews} />
+    <NewsTicker {content} gameState={view.state} {term} rivalNews={view.rivalNews} onPress={onpress} />
   {:else if tab === "markets"}
     <MarketsView {content} gameState={view.state} />
   {:else if tab === "lineage"}
@@ -364,6 +372,19 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     border-left-color: var(--mmm-gold-deep, #9a7d2e);
     background: color-mix(in srgb, var(--mmm-gold-deep, #9a7d2e) 9%, transparent);
     color: color-mix(in srgb, var(--mmm-gold-deep, #9a7d2e) 80%, var(--mmm-text));
+  }
+  /* SHOCK-FORESHADOW: dread before the blow — a muted, ominous omen (not the sharp red of an actual loss). */
+  .foreshadow {
+    margin: 0 auto 0.4rem;
+    max-width: 64ch;
+    padding: 0.4rem 0.9rem;
+    border-left: 3px dashed var(--mmm-text-dim);
+    background: color-mix(in srgb, var(--mmm-text-dim) 6%, transparent);
+    border-radius: var(--mmm-radius);
+    font-family: var(--mmm-font-body);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--mmm-text-dim);
   }
   .event-pane {
     display: flex;
