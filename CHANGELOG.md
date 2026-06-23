@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.31.0](https://github.com/jbcom/dynasty/compare/v0.30.0...v0.31.0) (2026-06-23)
+
+
+### Features
+
+* **saga:** DOSSIER-SHOCK-LEDGER — a 'What Befell the Family' disaster log ([#122](https://github.com/jbcom/dynasty/issues/122)) ([fc8c58e](https://github.com/jbcom/dynasty/commit/fc8c58eb9509d482c8c5c1ebc875b9f0543c908a))
+
 ## [0.30.0](https://github.com/jbcom/dynasty/compare/v0.29.0...v0.30.0) (2026-06-23)
 
 
