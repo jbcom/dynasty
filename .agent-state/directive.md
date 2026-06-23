@@ -1235,10 +1235,21 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   by the history index it occurred at, interleaved in `reconstruct` WITHOUT perturbing the saga RNG. That's a
   real design step deserving its own branch after the rival-race-presence PR — NOT a same-branch append. Decided:
   defer to a dedicated branch; build the press side-log + reconstruct interleave + tests there. Logged, proceeding.
-- [ ] **RIVAL-RACE-PRESENCE PR — push the branch (falter/rise news + field strip), open PR, full remote loop.**
-  3 local commits on feat/rival-race-presence (f51cdfa news, f95c048 field). Full local gate passed
-  (check/typecheck/test/test:browser). Push ONCE, open PR, wait CI, fold review forward, resolve threads,
-  self-squash-merge ([[babysit-pr]], [[one-branch-local-review]]). Then RIVAL-CROSSING-EXPLOIT on a fresh branch.
+- [ ] **RIVAL-FATE-IN-CONVERGENCE-ENDING — a faltered/surged rival shifts the player's ending text.** The
+  convergence ending (convergence.ts) resolves on the player's motivators + survival; the rival field that
+  raced alongside doesn't color it. Have the dominant rival outcome (a rival reached the stars first / the whole
+  field collapsed behind you) tint the earned-finale prose, so the close reflects the race's result. Pure; tested.
+- [ ] **SHOCK-FORESHADOW — a near-future hazard hints before it strikes (dread, not just aftermath).** WV-3
+  shocks land then narrate aftermath; the player never feels them coming. When the next saga tick carries an
+  elevated shock chance (harsh era + outstanding strain), surface a one-line omen ("the season turns against
+  the house") the turn BEFORE, so loss has dread, not just consequence. Reads the era exposure; pure; tested.
+- [ ] **RECOVERY-CHOICE — let the player INVEST in a rebound rather than wait for the seeded roll.** Recoveries
+  fire automatically on quiet ticks; give the player a beat after a blow to spend a meter (money/heat) to RAISE
+  the next recovery's chance/magnitude — turning the comeback into agency, not just luck. Reuses rollSagaRecovery
+  with a player-set bonus; deterministic; tested. (Pairs with RIVAL-CROSSING-EXPLOIT's press side-log pattern.) — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/rival-race-presence (4 commits: falter/rise news, field strip, directive). Full local gate passed.
+  Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads,
+  self-squash-merge once green ([[babysit-pr]]). After merge: sync main, RIVAL-CROSSING-EXPLOIT on a fresh branch.
 - [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
   audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
   diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock
