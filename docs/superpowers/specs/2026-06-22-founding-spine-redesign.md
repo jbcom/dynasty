@@ -194,3 +194,48 @@ lattice + motivator gates are the mechanism; this re-skins/expands them as dynas
 - Mining score thresholds (how much corpus survives as fabric).
 - Whether the player's onboarding archetype still maps to a "power base" coloring of the one spine
   (likely yes — keeps agency without the 504 lattice).
+
+## DECISION (2026-06-22, FS-ONB-DRIFT): the founding-era origin funnel
+
+Grounded in `2026-06-22-founding-era-research.md`. The pre-pivot onboarding still
+narrates an immigrant CROSSING (period→class→wave, "what did they carry off the
+boat?") — wrong: the player FOUNDS the line at the 1776 American founding; the
+immigration waves are the recurring CAST woven as intersections, not the player's
+own origin. The live game already routes founded runs through the 1776 spine
+(`beginSpine`), so the wave-shaped onboarding + the old 1885 new-york origins
+events are dead-but-reachable drift.
+
+**Decision — replace the wave funnel with a founding-era ORIGIN funnel:**
+
+1. **REGION** (replaces PERIOD/wave-era): New England · Mid-Atlantic · South —
+   with the Tidewater/backcountry split surfaced in the South (and as flavor
+   elsewhere). Each region carries its researched economy/culture/faith.
+2. **POWER BASE / ARCHETYPE** (replaces poor/middle CLASS as the *primary* axis):
+   the six interlocking bases from the research — **Land** (planter/yeoman),
+   **Commerce** (merchant), **Pulpit** (minister), **Law & Politics** (lawyer/
+   officeholder), **Press** (printer), **Military** (officer). This IS the
+   archetype coloring of the one spine (answers the open question: yes). It seeds
+   the starting motivators + the spine's decision flavoring.
+3. **STANDING** (a lighter replacement for poor/middle): where the founder starts
+   within that base — established (gentry/master) vs. rising (apprentice/yeoman/
+   journeyman). Capital-gated mobility is the researched truth; standing sets the
+   starting rung, not a separate class identity.
+4. **STYLE → SURNAME → GENDER → GIVEN → JOB → FRIEND → PARTNER** — REUSE the ONB-1
+   naming flow + the FS-7b life-seeds verbatim. The naming-style options stay (a
+   founding family still has a cultural naming tradition — Anglo-Protestant,
+   Scots-Irish, Dutch, German, Huguenot, etc., per region), just no longer tied to
+   an immigration wave.
+
+**Why:** matches the founding-spine fiction, kills the "off the boat" drift, gives
+real researched agency (region × power base × standing) without resurrecting the
+504 cell lattice, and keeps the diegetic birth + life-seeds the user asked for.
+The self-made/log-cabin myth is deployed as in-world propaganda (flavor text), not
+the advancement mechanic — advancement is the convertible power-base flywheel.
+
+**Build order:** (a) a `foundingOrigin.ts` resolver (region/base/standing →
+motivators + seed flags), replacing the `waveSelect` role for the player; (b)
+rewrite OnboardingScreen's first three steps + copy; (c) thread region/base/
+standing through onComplete → founding; (d) retire/rehome the dead 1885 new-york
+origins line-failure content (FS-EARLY-TERMINATION); (e) tests + Chrome verify.
+Keep `waveSelect` + the wave places for the CAST/braid system (they're not the
+player origin anymore, but the cast still uses them).

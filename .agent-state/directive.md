@@ -784,11 +784,19 @@ These surfaced live-verifying the visual layer. The founding-spine pivot ([[mmm-
 WAVES becoming the recurring CAST woven as intersections ([[mmm-timelines-architecture]]). The
 onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival framing.
 
-- [ ] **FS-ONB-DRIFT — onboarding still narrates an IMMIGRANT CROSSING, not the 1776 founding.** UNBLOCKED:
-  research landed (`docs/superpowers/specs/2026-06-22-founding-era-research.md`). Scope enumerated: the whole
-  period→class→wave funnel (waveSelect + places.json wave entries + ArrivalClass) is immigration-shaped. Next:
-  make the architecture call (rewrite wave→founding-origin step using the researched region×class×trade×power-
-  base model, vs. reframe waves-as-cast), write the decision into the founding-spine design doc, then build.
+- [ ] **FS-ONB-DRIFT — onboarding still narrates an IMMIGRANT CROSSING, not the 1776 founding.** UNBLOCKED +
+  IN PROGRESS. Research landed (`docs/superpowers/specs/2026-06-22-founding-era-research.md`); architecture
+  DECIDED + logged in `2026-06-22-founding-spine-redesign.md` (§DECISION FS-ONB-DRIFT): replace the wave funnel
+  with REGION × POWER-BASE × STANDING, reusing the ONB-1 naming + FS-7b life-seed tail. Sub-steps:
+  - [x] (a) `src/sim/foundingOrigin.ts` resolver — region×base×standing → motivators + archetype + rung +
+    seed flags, grounded in the six researched power bases. 10 colocated unit tests, tsc 0. (committed)
+  - [ ] (b) rewrite OnboardingScreen first three steps (PERIOD/CLASS/WAVE → REGION/BASE/STANDING) + all copy
+    (kill "off the boat"); keep STYLE→SURNAME→GENDER→GIVEN→JOB→FRIEND→PARTNER.
+  - [ ] (c) thread region/base/standing through onComplete → App.birthGame → founding (replace resolveWaveStart
+    for the PLAYER; dealComposition needs a founding-era origin, not a wave place).
+  - [ ] (d) retire/rehome the dead 1885 new-york origins line-failure content (ev_line_fails chain).
+  - [ ] (e) tests + Chrome live-verify the new founding funnel end-to-end.
+  Keep `waveSelect` + wave places for the CAST/braid system (no longer the player origin).
   ORIGINAL NOTE: The
   funnel asks "Every American line begins with a crossing — when did your people make theirs?" then "what
   did they carry off the boat? — steerage, a tenement, the lowest rung." Under the pivot the player's
