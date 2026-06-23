@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.0](https://github.com/jbcom/dynasty/compare/v0.42.0...v0.43.0) (2026-06-23)
+
+
+### Features
+
+* rival rung trend — momentum arrows in the field dossier ([#149](https://github.com/jbcom/dynasty/issues/149)) ([31d68e2](https://github.com/jbcom/dynasty/commit/31d68e27efbcce34dc48440d5cd707230d9b8737))
+
 ## [0.42.0](https://github.com/jbcom/dynasty/compare/v0.41.0...v0.42.0) (2026-06-23)
 
 
