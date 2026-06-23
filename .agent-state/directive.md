@@ -168,8 +168,12 @@ ELEVATE this, not bolt on art. Sim purity holds (gen is offline/cached, keyed by
   asset-lib Cartography Pack) showing the line's place + era PROGRESS founding→stars; persistent backdrop /
   toggled mode (80 Days). Fixes the density/no-visual-progress problem. SVG data-overlay (nodes/route/fog)
   over the raster base — NOT hand-drawn cartography.
-- [ ] **VL-4 compose + Chrome live-verify the visual layer.** Portrait + map into PlayScreen/SceneReader,
-  mobile-first; visual tests; Chrome-verify it reads as a polished, cohesive signature look.
+- [x] **VL-4 compose + live-verify the visual layer — DONE + verified.** Portrait + map compose over the
+  SceneReader on the play screen. New colocated VL-4 visual suite (PlayScreenVisualLayer.visual.test.ts, 3
+  tests, mobile 412px): portrait keys off spine:gN + gender beside the prose; Map tab reachable for a founded
+  line + renders the journey; mobile screenshot captured and READ — gold-framed colonial engraving stacks
+  above the paged prose at mobile width, signature style cohesive, no overflow. Chrome (desktop) earlier
+  confirmed the Map tab journey overlay over the cartographic base.
 
 ### ONB (user, 2026-06-22): onboarding must let the player CHOOSE gender + given name
 The funnel is PERIOD→CLASS→WAVE→SURNAME; gender + given name are auto-defaulted (save.ts
@@ -769,3 +773,25 @@ full gate green + one Conventional Commit. Open PR ONCE at end; squash-merge.
 - [x] SS-15 full playthrough hour+ beat count, bit-identical replay incl all lines, 0 leaks, harness 0-findings; remove ALL dead old-model code; full gate green
 ### SS-16 Docs + PR
 - [x] SS-16 STATE.md+ARCHITECTURE.md updated; PR opened; CI green; post-merge Release/CD green
+
+## FS-FOLLOWUP — founding-spine pivot loose ends (rolling backlog; keep ACTIVE)
+
+These surfaced live-verifying the visual layer. The founding-spine pivot ([[mmm-convergence-pivot]],
+[[craft-spines-not-generator]]) moved the PLAYER's line to the 1776 founding, with the immigration
+WAVES becoming the recurring CAST woven as intersections ([[mmm-timelines-architecture]]). The
+onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival framing.
+
+- [ ] **FS-ONB-DRIFT — onboarding still narrates an IMMIGRANT CROSSING, not the 1776 founding.** The
+  funnel asks "Every American line begins with a crossing — when did your people make theirs?" then "what
+  did they carry off the boat? — steerage, a tenement, the lowest rung." Under the pivot the player's
+  progenitor FOUNDS the line at the American founding; the waves are the cast, not the player's origin.
+  `App.birthGame` already overrides `year: FOUNDING_YEAR` so the ACT renders 1776, but the player picks
+  immigrant-arrival SEEDS (period=wave, "off the boat" class). Re-enumerate the onboarding use-cases against
+  the founding-spine model: the diegetic birth should compose a FOUNDING-ERA progenitor (place/class/trade
+  in the revolutionary republic), with the wave-arrival framing reserved for the CAST. Decide: rewrite the
+  WAVE step into a founding-era origin step, or keep waves but reframe as which cast-family the line later
+  braids with. Author the copy + seed mapping; keep gender/given/job/friend/partner seeds.
+- [x] **FS-MOBILE-VERIFY — DONE (folded into VL-4).** The VL-4 visual suite mounts PlayScreen at 412px and
+  captures a screenshot; reading it confirmed the portrait stacks above the paged prose with no overflow and
+  the Map tab is reachable. Authoritative mobile check via the Vitest browser harness (not the desktop-width
+  chrome-in-* screenshots).
