@@ -147,29 +147,31 @@ function chooseBeat(i: number) {
     onclick={tapPage}
   ></button>
 
-  <!-- VL-2b: the generation's PORTRAIT (the one speaker, Suzerain pattern) — a generated engraving that
-       fades in with the scene at the page's edge. Decorative (the prose carries the story), so aria-hidden;
-       sits above the tap layer (z-index via .scene-body group) but is pointer-events:none so taps pass. -->
-  {#if portraitSrc}
-    {#key scene.id}
-      <img
-        class="portrait"
-        src={portraitSrc}
-        alt=""
-        aria-hidden="true"
-        decoding="async"
-        fetchpriority="high"
-        in:fade={{ duration: reduceMotion ? 0 : 320 }}
-      />
-    {/key}
-  {/if}
-
   <!-- One paragraph at a time. The outer key fades the whole page in when the SCENE changes (a composed
        between-scene transition, distinct from the per-paragraph page-turn); the inner key animates each
        paragraph turn within a scene. The fade is JS-driven (inline opacity), so it does NOT pick up the
        CSS reduced-motion rule — we gate its duration to 0 via the reactive `reduceMotion` flag instead. -->
   {#key scene.id}
     <div class="scene-body" in:fade={{ duration: reduceMotion ? 0 : 320 }}>
+      <!-- VL-2b/EI-7: the generation's PORTRAIT (the one speaker, Suzerain pattern) — a generated engraving
+           that FLOATS at the head of the prose flow so the text wraps ALONGSIDE it and then continues DOWN
+           BELOW it (a magazine wrap, at every width — not a portrait-block-then-text-block stack). It lives
+           INSIDE .scene-body (the block-flow box) so the float takes effect; shape-outside rounds the wrap to
+           the plate. Decorative (the prose carries the story), so aria-hidden; pointer-events:none so the
+           full-bleed tap layer still turns the page through it. -->
+      {#if portraitSrc}
+        {#key scene.id}
+          <img
+            class="portrait"
+            src={portraitSrc}
+            alt=""
+            aria-hidden="true"
+            decoding="async"
+            fetchpriority="high"
+            in:fade={{ duration: reduceMotion ? 0 : 320 }}
+          />
+        {/key}
+      {/if}
       {#key shownPara}
         <!-- A woven crossing page reads as narration with a subtle inline mark (CSS), not a labelled
              aside; its lead page opens the passage. WV-1 — the intersection is part of the story. -->
@@ -274,32 +276,36 @@ function chooseBeat(i: number) {
     position: relative;
     z-index: 1;
   }
-  /* VL-2b: the generation portrait — a contained engraved bust at the top of the page, above the prose.
-     Pointer-events:none so the full-bleed tap layer still turns the page through it. The engraving art
-     already carries its own plate framing; a soft gold edge + shadow seats it on the navy ground. */
+  /* VL-2b/EI-7: the generation portrait — an engraved bust the prose wraps AROUND (magazine wrap). It
+     FLOATS at the head of the block flow at EVERY width: the shown paragraph runs alongside it and, when
+     long enough, continues down below it — never a portrait-block-then-text-block stack. shape-outside
+     rounds the text wrap to the plate; pointer-events:none so the full-bleed tap layer still turns the page
+     through it. The engraving art carries its own plate framing; a soft gold edge + shadow seats it on the
+     navy ground. */
   .portrait {
-    display: block;
-    width: min(11rem, 38vw);
+    float: right;
+    width: min(11rem, 40vw);
     aspect-ratio: 1;
     object-fit: cover;
-    margin: 0 0 1.4rem;
+    /* Space the wrapped text off the plate (right-floated → margin on the LEFT + below). */
+    margin: 0.2rem 0 1rem 1.4rem;
     border-radius: var(--mmm-radius);
     border: 1px solid color-mix(in srgb, var(--mmm-gold-deep) 55%, transparent);
     box-shadow: var(--mmm-shadow);
+    /* Round the wrap to the plate so the prose hugs the engraving's rounded corner, not a hard box. */
+    shape-outside: inset(0 round var(--mmm-radius));
+    shape-margin: 0.9rem;
     pointer-events: none;
   }
-  /* On the wide layout the portrait floats to the right of the measured prose column. */
-  @media (min-width: 56rem) {
-    .portrait {
-      float: right;
-      margin: 0 0 1rem 1.5rem;
-    }
-  }
-  /* The scene-body holds the prose above the tap layer; flex so paragraphs stack as before. */
+  /* The scene-body is the block-flow box the portrait floats inside — block (not flex) so the float takes
+     effect and text wraps around it. Only ONE .para shows at a time (paged), so paragraph spacing lives on
+     .para's margin rather than a flex gap. clear:both is unnecessary — the single paragraph IS the wrap. */
   .scene-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
+    display: block;
+    /* The MEASURED reading column (Suzerain #1, ~62ch) lives on the block-flow box so the portrait floats
+       INSIDE the measure: the prose wraps beside the plate within the column, then reclaims the full column
+       width below it (the magazine wrap), instead of the float widening the line beyond a readable measure. */
+    max-width: 62ch;
   }
   .scene[data-sense="smell"] { --sense-accent: #8c6f4d; }
   .scene[data-sense="taste"] { --sense-accent: #a4564d; }
@@ -309,10 +315,8 @@ function chooseBeat(i: number) {
 
   .para {
     margin: 0;
-    /* UQ-UI-4 (Suzerain technique #1): cap the prose to a MEASURED reading column (~62ch) so a line
-       never runs the full panel width — the single biggest anti-wall-of-text lever. The container keeps
-       its sense-wash border at 42rem; the text itself reads as a narrow column within it. */
-    max-width: 62ch;
+    /* The measure now lives on .scene-body (EI-7) so the portrait float sits inside the reading column; the
+       paragraph fills that column, wrapping beside the plate then under it. */
     font-family: var(--mmm-font-body);
     /* Novel-readable: generous measure + leading, serif body. One paragraph holds the focus. */
     font-size: 1.18rem;

@@ -56,6 +56,12 @@ const scenes = buildEpoch0Opening(cues);
 // emergent facets at the end, keeping this dealt name.
 const provisional = $derived.by(() => {
   const placeDef = placeById(content.places, regionPlaceId("new_england"));
+  // Guard the missing-place case (Amazon-Q #194): dealComposition accepts an undefined place by random-dealing
+  // a NON-founding place, which would silently found the provisional somewhere wrong instead of at the
+  // founding seam. Fail loudly — the new_england founding place is required content.
+  if (!placeDef) {
+    throw new Error(`OpeningScreen: founding place "${regionPlaceId("new_england")}" not found in content`);
+  }
   // The family name is SEED-DEALT (region-independent), so this provisional speaks the SAME {full_name}
   // App's final emergent founding will carry (App deals it from the identical seed label). EI-6b.
   const surname = dealFoundingSurname(createRng(`${seed}::founding:surname`));

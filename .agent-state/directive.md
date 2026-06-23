@@ -152,6 +152,10 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   (`dealFoundingSurname`, new onomastics export) so provisional == final founding name. Retired the OnboardingScreen
   funnel + its two tests; rewired SafeAreaAudit + reducedMotion + e2e to the new opening. Full gate green: check 0,
   typecheck 0/0, unit 950, browser 161, e2e 7, build OK.
+- [ ] [WAIT] **EI-6b-ui PR #194 — merge on green.** All 3 local reviewers clean (code: no bugs; security: clean;
+  simplifier: pendingSeed-on-cancel folded as 18050b5). Live-verified in Chrome (the emergence opens on
+  "You are born…", senses arrive as weather, location emerges from 4 glowing inline sense-choices — no card funnel).
+  Waiting on build-and-test for 18050b5; squash-merge once CLEAN + 0 unresolved threads, then sync main + branch EI-7.
 - [ ] **EI-7 PORTRAIT-TEXT-WRAP LAYOUT (user, 2026-06-23)** — the scene prose must FLOW alongside the portrait and
   then continue DOWN BELOW it (a magazine wrap — float/shape the portrait, text wraps beside then under), not
   portrait-block-then-text-block stacked. Applies to the SceneReader / play surface. Visual; screenshot + READ that

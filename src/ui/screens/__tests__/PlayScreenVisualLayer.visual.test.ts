@@ -88,6 +88,27 @@ describe("PlayScreen visual layer (VL-4, mobile)", () => {
     expect(portrait?.getAttribute("src")).toBe("/assets/generated/portraits/spine_g0_male.png");
     // VL-5: the large founding portrait is fetch-prioritized so it decodes promptly (no empty-frame pop).
     expect(portrait?.getAttribute("fetchpriority")).toBe("high");
+
+    // EI-7 MAGAZINE WRAP: the portrait FLOATS at the head of the prose block so the text wraps alongside it
+    // then continues down below it — not a portrait-block-then-text-block stack. It must live INSIDE the
+    // .scene-body block-flow box (a float only wraps text in the same block), float right, and round the
+    // wrap to the plate via shape-outside.
+    const sceneBody = host.querySelector(".scene-body") as HTMLElement | null;
+    expect(sceneBody, "the portrait sits inside the prose block-flow box").toBe(
+      portrait?.parentElement,
+    );
+    const cs = getComputedStyle(portrait as HTMLImageElement);
+    expect(cs.float, "the portrait floats so prose wraps around it").toBe("right");
+    expect(cs.shapeOutside, "the wrap rounds to the plate").not.toBe("none");
+    // The paragraph is a following sibling of the float (so it wraps), not stacked under a block portrait.
+    const para = sceneBody?.querySelector(".para");
+    expect(para, "the prose paragraph shares the block with the floated portrait").not.toBeNull();
+    expect(
+      portrait && para
+        ? portrait.compareDocumentPosition(para) & Node.DOCUMENT_POSITION_FOLLOWING
+        : 0,
+      "the portrait precedes the prose in the flow (text wraps after it)",
+    ).toBeTruthy();
   });
 
   it("the Map tab is reachable for a founded line and renders the journey overlay", async () => {
