@@ -12,6 +12,7 @@ import {
   normalizeTitle,
   scenePassBrief,
   validateSceneFile,
+  validateSpineFile,
 } from "../scene";
 
 /**
@@ -285,5 +286,41 @@ describe("authored-spine generation (FS-3b) — per-era decision architecture in
   it("carries the optional founding-identity brief when given", () => {
     const p = buildSpinePrompt(spineActForGen(0)!, "FOUNDER: Tobias, a Boston printer's son.");
     expect(p).toContain("Tobias, a Boston printer's son");
+  });
+
+  it("validateSpineFile (FS-6) accepts a valid spine act, rejects an id mismatch", () => {
+    const g0 = spineActForGen(0)!;
+    const validFile = {
+      acts: [
+        {
+          id: g0.id,
+          wave: "spine",
+          archetype: "founding",
+          cls: "spine",
+          tier: 0,
+          macroAct: "founding",
+          title: "Act I — The Powder and the Pamphlet",
+          scenes: [`${g0.id}:open`],
+        },
+      ],
+      scenes: [
+        {
+          id: `${g0.id}:open`,
+          sense: "smell",
+          prose: [
+            "The print-shop reeked of lampblack and wet rag-paper, and of the tallow guttering low as the {family_name}s set the night's seditious type.",
+            "Outside, the harbor wind carried woodsmoke and the iron tang of a city deciding whether to become a country.",
+          ],
+          beats: [],
+        },
+      ],
+    };
+    const ok = validateSpineFile(validFile, g0);
+    expect(ok.ok).toBe(true);
+    // Wrong act id → rejected (the model must not relabel the spine act).
+    const wrong = { ...validFile, acts: [{ ...validFile.acts[0]!, id: "spine:g9:wrong" }] };
+    const bad = validateSpineFile(wrong, g0);
+    expect(bad.ok).toBe(false);
+    if (!bad.ok) expect(bad.reasons.join(" ")).toMatch(/spine act id mismatch/);
   });
 });

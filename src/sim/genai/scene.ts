@@ -281,6 +281,14 @@ export function buildSpinePrompt(act: SpineAct, gen0Brief = ""): string {
     `Ground the prose in the era's real American history (${act.era}, ~${act.year}); the founding family`,
     `moves through it. Other immigrant families braid in only as woven crossings (do not make them the focus).`,
     "",
+    `Emit ONE act chapter and ITS scenes (4-6 scenes: an open, the era's pivotal decision beat(s) in the`,
+    `architecture above, and a close). Use these EXACT act fields + scene ids:`,
+    `acts: [{ id:"${act.id}", wave:"spine", archetype:"founding", cls:"spine", tier:${Math.min(act.gen, 5)},`,
+    `  macroAct:"${act.macroAct}", title:"Act ${ROMAN_FOR(act.gen)} — <specific chapter title>",`,
+    `  scenes:["${act.id}:open", "${act.id}:turn", "${act.id}:close"] }]`,
+    `Each scene id MUST start with "${act.id}:". The pivotal decision scene carries a major \`decision\`;`,
+    `the close carries the succession decision (one option takesPartner+begets).`,
+    "",
     `Motivator axes for every motivatorShift: ${MOTIVATOR_AXES}.`,
     `Return ONLY the JSON object { "acts": [...], "scenes": [...] } for this generation's act + its scenes.`,
   ]
@@ -397,6 +405,32 @@ export function validateSceneFile(
       if (!sceneIds.has(sid)) reasons.push(`dangling scene ref ${act.id} → ${sid}`);
     }
   }
+  if (reasons.length) return { ok: false, reasons };
+  return { ok: true, file: parsed.data };
+}
+
+/**
+ * Validate a generated SPINE act file (FS-6) — the authored one-dynasty path. Same schema + leak +
+ * dangling-ref floor as the cell validator, but the act id must be the spine act's id (`spine:gN:*`),
+ * not a wave×cls×archetype cell id. Returns the parsed file or the reasons it was rejected.
+ */
+export function validateSpineFile(
+  raw: unknown,
+  act: SpineAct,
+): { ok: true; file: { acts: unknown[]; scenes: unknown[] } } | { ok: false; reasons: string[] } {
+  const reasons: string[] = [];
+  if (hasPresetLeak(raw)) reasons.push("preset-person leak");
+  const parsed = SagaFileSchema.safeParse(normalizeSceneFile(raw));
+  if (!parsed.success) {
+    reasons.push(`schema: ${parsed.error.issues.map((i) => i.message).join("; ")}`);
+    return { ok: false, reasons };
+  }
+  if (!parsed.data.acts.some((a) => a.id === act.id))
+    reasons.push(`spine act id mismatch (want ${act.id})`);
+  const sceneIds = new Set(parsed.data.scenes.map((s) => s.id));
+  for (const a of parsed.data.acts)
+    for (const sid of a.scenes)
+      if (!sceneIds.has(sid)) reasons.push(`dangling scene ref ${a.id} → ${sid}`);
   if (reasons.length) return { ok: false, reasons };
   return { ok: true, file: parsed.data };
 }
