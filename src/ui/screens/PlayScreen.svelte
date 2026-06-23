@@ -170,7 +170,10 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
       <!-- SHOCK-FORESHADOW: an omen BEFORE the blow — the season turns against the house — so a hazard
            carries dread, not just aftermath. Deterministic (no roll); shown while the threat looms. -->
       {#if view.foreshadow}
-        <p class="foreshadow" data-testid="foreshadow">{view.foreshadow}</p>
+        <!-- FORESHADOW-IN-TONE: a grave omen reads in a heavier register than a marginal one. -->
+        <p class="foreshadow" data-testid="foreshadow" data-weight={view.foreshadow.weight}>
+          {view.foreshadow.text}
+        </p>
       {/if}
       <!-- RECOVERY-CHOICE: after a blow, the player may INVEST a meter to force a stronger rebound — agency
            over the comeback, not just waiting on the seeded roll. Offered only while a blow is outstanding. -->
@@ -439,6 +442,7 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     cursor: not-allowed;
   }
   /* SHOCK-FORESHADOW: dread before the blow — a muted, ominous omen (not the sharp red of an actual loss). */
+  /* The base (marginal) omen: a faint, dim unease. */
   .foreshadow {
     margin: 0 auto 0.4rem;
     max-width: 64ch;
@@ -450,6 +454,13 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     font-style: italic;
     font-size: 0.85rem;
     color: var(--mmm-text-dim);
+  }
+  /* FORESHADOW-IN-TONE: a GRAVE omen reads heavier — a solid red-tinted border, brighter text, no dim. */
+  .foreshadow[data-weight="grave"] {
+    border-left: 3px solid var(--mmm-red, #b22);
+    background: color-mix(in srgb, var(--mmm-red, #b22) 9%, transparent);
+    color: color-mix(in srgb, var(--mmm-red, #b22) 70%, var(--mmm-text));
+    font-weight: 600;
   }
   .event-pane {
     display: flex;

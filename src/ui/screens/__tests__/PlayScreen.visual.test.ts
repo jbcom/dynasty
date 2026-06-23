@@ -111,6 +111,34 @@ describe("PlayScreen (composed game screen)", () => {
     expect(calls).toEqual(["money", "heat"]);
   });
 
+  it("FORESHADOW-IN-TONE: a grave omen reads in a heavier register than a marginal one", () => {
+    const scene = SceneSchema.parse({
+      id: "sc:demo:omen",
+      sense: "sight",
+      prose: ["The air over the house has changed; something is coming."],
+    });
+    const mountWith = (weight: "marginal" | "grave") => {
+      const v: GameView = {
+        ...view(),
+        saga: { actTitle: "Act II", scene, threads: [], ended: false },
+        foreshadow: { text: "An omen looms.", weight },
+      };
+      if (component) unmount(component);
+      component = mount(PlayScreen, {
+        target: host,
+        props: { content, view: v, busy: false, onchoose: () => {} },
+      });
+      return host.querySelector('[data-testid="foreshadow"]') as HTMLElement;
+    };
+    const marginal = mountWith("marginal");
+    expect(marginal.getAttribute("data-weight")).toBe("marginal");
+    const marginalBorder = getComputedStyle(marginal).borderLeftColor;
+    const grave = mountWith("grave");
+    expect(grave.getAttribute("data-weight")).toBe("grave");
+    // The grave omen's border reads in a different (heavier) register than the marginal one.
+    expect(getComputedStyle(grave).borderLeftColor).not.toBe(marginalBorder);
+  });
+
   it("RECOVERY-CHOICE: the 'Spend funds' button is disabled when the player can't afford it", () => {
     const scene = SceneSchema.parse({
       id: "sc:demo:broke",

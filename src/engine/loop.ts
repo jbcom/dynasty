@@ -84,9 +84,10 @@ export interface GameView {
    *  that has stumbled (a window) or surged past the player (pressure). Surfaced in the NewsTicker so the
    *  convergence race is felt in-run, not just at the close. */
   rivalNews: RivalNewsItem[];
-  /** SHOCK-FORESHADOW: a one-line omen when the next saga tick carries an elevated hazard (harsh era +
-   *  strain/kin to lose) — surfaced BEFORE the blow so loss has dread, not just aftermath. Null otherwise. */
-  foreshadow: string | null;
+  /** SHOCK-FORESHADOW + FORESHADOW-WEIGHT/IN-TONE: a one-line omen when the next saga tick carries an elevated
+   *  hazard, with its WEIGHT so the UI styles dread proportionally (grave reads heavier than marginal). Null
+   *  otherwise. */
+  foreshadow: { text: string; weight: "marginal" | "grave" } | null;
   /** RECOVERY-CHOICE: true when the player may invest in the next rebound — there's an outstanding blown
    *  meter and no invest is already pending. The UI offers the invest action only then. */
   canInvestRecovery: boolean;
@@ -386,19 +387,23 @@ export class Game {
   /** SHOCK-FORESHADOW: a one-line omen when the upcoming saga tick carries an elevated hazard. Only on an
    *  active saga walk (the shock fires there); null on the event flow / a safe era / no strain or kin. The
    *  text is era-neutral; deterministic (no RNG) so it's a stable view-derived hint, not a roll. */
-  private foreshadow(): string | null {
+  private foreshadow(): { text: string; weight: "marginal" | "grave" } | null {
     if (!this.saga.active || this.finished) return null;
     const family = this.state.family;
     const hasKin = !!family?.members.some(
       (m) => m.id !== family.protagonistId && isMemberAlive(m, this.state.year),
     );
-    // FORESHADOW-WEIGHT: the omen's gravity scales with the hazard — a faint unease vs real dread.
+    // FORESHADOW-WEIGHT: the omen's gravity scales with the hazard. FORESHADOW-IN-TONE: the weight rides along
+    // so the UI styles dread proportionally.
     const weight = foreshadowWeight(macroActForYear(this.state.year), this.state.flags, hasKin);
     if (weight === "grave") {
-      return "The house braces for the worst — the season has turned hard against you.";
+      return {
+        text: "The house braces for the worst — the season has turned hard against you.",
+        weight,
+      };
     }
     if (weight === "marginal") {
-      return "A shadow lies over the season; the years ahead feel uncertain.";
+      return { text: "A shadow lies over the season; the years ahead feel uncertain.", weight };
     }
     return null;
   }
