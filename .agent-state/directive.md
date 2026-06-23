@@ -1354,15 +1354,15 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **DEAD-LINE-IN-FIELD PR #153 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/dead-line-in-field (baae7ab). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
   review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, CONVERGENCE-FIELD-SUMMARY-LINE.
-- [ ] **CONVERGENCE-FIELD-SUMMARY-LINE — a one-line "state of the race" atop the Field tab.** The dossier lists
+- [ ] [WAIT-REVIEW] **CONVERGENCE-FIELD-SUMMARY-LINE — a one-line "state of the race" atop the Field tab (after #153).** The dossier lists
   every line but gives no at-a-glance read; add a header line ("You lead the field" / "N lines ahead of you" /
   "the field has thinned to M") derived from the standings, so the player gets the gestalt before the rows.
   Pure read-model; tested.
-- [ ] **FALLEN-NEWS — announce a rival's elimination in the NewsTicker.** A line going fallen (DEAD-LINE-IN-FIELD)
+- [ ] [WAIT-REVIEW] **FALLEN-NEWS — announce a rival's elimination in the NewsTicker (after #153).** A line going fallen (DEAD-LINE-IN-FIELD)
   is a major race event but only shows passively in the dossier. Emit a one-time NewsTicker dispatch when a
   near-vantage rival first falls ("The <place> line has dropped out of the race") so the player registers the
   field thinning. Reads the fallen transition (a side-marker like presses, to fire once); pure; tested.
-- [ ] **WV-3-MILESTONE-DOC — write docs/STATE.md section capturing the WV-3 agency+atmosphere milestone.** The
+- [ ] [WAIT-REVIEW] **WV-3-MILESTONE-DOC — write docs/STATE.md section capturing the WV-3 agency+atmosphere milestone (after #153).** The
   shock→recovery→agency→atmosphere→rival-race layer is now broad (shocks, recoveries, foreshadow, press/invest,
   rival dispatches, field dossier, trends, fallen, ending variety). docs/STATE.md should record the milestone
   shape + the side-log/save-invariant pattern so the next session has the canonical map. Docs only; no code.
