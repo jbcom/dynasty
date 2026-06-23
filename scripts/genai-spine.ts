@@ -27,7 +27,9 @@ const ONLY_GEN = arg("gen") !== undefined ? Number(arg("gen")) : undefined;
 
 async function authorAct(act: SpineAct, gen: ReturnType<typeof geminiGenerate>): Promise<unknown | null> {
   const label = `spine g${act.gen} (${act.era})`;
-  for (let attempt = 0; attempt < 2; attempt++) {
+  // 4 attempts: the model intermittently emits objects where the schema wants arrays (the normalizer
+  // rescues most, but a stubborn gen can lose two rolls running) — a few extra tries gets every gen.
+  for (let attempt = 0; attempt < 4; attempt++) {
     const raw = await gen(sceneSystemInstruction(), buildSpinePrompt(act));
     let parsed: unknown;
     try {

@@ -361,11 +361,31 @@ export function normalizeSceneFile(raw: unknown): unknown {
       dec.options = Array.isArray(opts) ? opts.map(fixFlags) : opts;
       scene.decision = dec;
     }
+    // Coerce `requires.flags`/`requires.notFlags` object-drift → arrays (the schema needs arrays).
+    if (scene.requires && typeof scene.requires === "object") {
+      const req = { ...(scene.requires as Record<string, unknown>) };
+      if (req.flags !== undefined) req.flags = asArray(req.flags);
+      if (req.notFlags !== undefined) req.notFlags = asArray(req.notFlags);
+      scene.requires = req;
+    }
     return scene;
   });
+  // Coerce the ACTS array + each act's `scenes` id-list from object-with-numeric-keys drift too (the
+  // FS-6 spine path hit "expected array, received object" here — the normalizer only fixed `scenes`,
+  // never `acts`/`acts[].scenes`).
+  const actsArr = asArray(obj.acts);
+  const acts = Array.isArray(actsArr)
+    ? actsArr.map((a) => {
+        if (!a || typeof a !== "object") return a;
+        const act = { ...(a as Record<string, unknown>) };
+        const sc = asArray(act.scenes);
+        if (Array.isArray(sc)) act.scenes = sc;
+        return act;
+      })
+    : actsArr;
   // Strip markdown the model sometimes wraps around identity tokens (`{surname}` → {surname}); it would
   // otherwise render as literal backticks in the reader. Deep-applied to every string in the file.
-  return stripTokenBackticks({ ...obj, scenes });
+  return stripTokenBackticks({ ...obj, ...(acts !== undefined ? { acts } : {}), scenes });
 }
 
 /** A run of identity tokens / spaces wrapped in backticks — a recurring model markdown artifact. */
@@ -432,9 +452,14 @@ export function validateSpineFile(
   if (!parsed.data.acts.some((a) => a.id === act.id))
     reasons.push(`spine act id mismatch (want ${act.id})`);
   const sceneIds = new Set(parsed.data.scenes.map((s) => s.id));
+  const declaredIds = new Set(parsed.data.acts.flatMap((a) => a.scenes));
   for (const a of parsed.data.acts)
     for (const sid of a.scenes)
       if (!sceneIds.has(sid)) reasons.push(`dangling scene ref ${a.id} → ${sid}`);
+  // ORPHAN check (FS-6): every emitted scene object MUST be listed in some act's scenes[] — else the
+  // model authored a scene the act never references (loader orphan). Catches the reverse of dangling.
+  for (const s of parsed.data.scenes)
+    if (!declaredIds.has(s.id)) reasons.push(`orphan scene ${s.id} (not in any act's scenes[])`);
   if (reasons.length) return { ok: false, reasons };
   return { ok: true, file: parsed.data };
 }

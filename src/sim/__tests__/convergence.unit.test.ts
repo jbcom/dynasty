@@ -19,29 +19,55 @@ const ctx = (over: Partial<ConvergenceContext> = {}): ConvergenceContext => ({
   ...over,
 });
 
-describe("convergence endings (SS-9)", () => {
-  it("the lattice spans the four destinations with star colorings + sub-variants", () => {
+describe("convergence endings (SS-9 + FS-6b destinies)", () => {
+  it("the lattice spans the four destinations with the three stellar finales + named destinies", () => {
     const dests = new Set(ENDINGS.map((e) => e.destination));
     expect(dests).toEqual(new Set(["stars", "contributed", "earthbound", "extinguished"]));
-    expect(ENDINGS.filter((e) => e.destination === "stars").length).toBeGreaterThanOrEqual(6);
-    expect(ENDINGS.length).toBeGreaterThanOrEqual(12);
+    // FS-6b: exactly three distinct STELLAR finales (allies / conquest / hidden).
+    const stellar = new Set(ENDINGS.filter((e) => e.destination === "stars").map((e) => e.destiny));
+    expect(stellar).toEqual(new Set(["stellar_allies", "stellar_conquest", "stellar_hidden"]));
+    // The named earthly destinies are all present.
+    const destinies = new Set(ENDINGS.map((e) => e.destiny));
+    for (const d of [
+      "religious_leader",
+      "communard",
+      "dictator",
+      "oligarch",
+      "crime_leader",
+      "media_mogul",
+    ])
+      expect(destinies).toContain(d);
   });
 
-  it("a power+cunning line at the stars reaches a Conquest ending", () => {
-    const e = resolveConvergence(ctx({ motivators: mot({ power: 70, honor: 60 }) }));
-    expect(e.id).toMatch(/^stars_conquest/);
+  it("a power+low-honor line at the stars SEIZES COLONIES (stellar conquest)", () => {
+    const e = resolveConvergence(ctx({ motivators: mot({ power: 70, honor: -40 }) }));
+    expect(e.destiny).toBe("stellar_conquest");
   });
 
-  it("a community line CANNOT reach a conquest ending — it reaches the Commonwealth", () => {
-    const e = resolveConvergence(ctx({ motivators: mot({ power: -70, reach: 40 }) }));
-    expect(e.destination).toBe("stars");
-    expect(e.id).toMatch(/^stars_commonwealth/);
-    expect(e.id).not.toMatch(/conquest/);
+  it("a reach+honor line at the stars FORGES ALLIES (stellar covenant)", () => {
+    const e = resolveConvergence(ctx({ motivators: mot({ reach: 60, honor: 40 }) }));
+    expect(e.destiny).toBe("stellar_allies");
   });
 
-  it("a faith line carries the Covenant outward", () => {
-    const e = resolveConvergence(ctx({ motivators: mot({ worldview: -70, reach: 50 }) }));
-    expect(e.id).toMatch(/^stars_covenant/);
+  it("a star-tier line clearing no other finale ends ALONE on a quiet world (hidden)", () => {
+    // Neutral motivators at the stars → the catch-all hidden finale.
+    const e = resolveConvergence(ctx({ motivators: mot({}) }));
+    expect(e.destiny).toBe("stellar_hidden");
+  });
+
+  it("FS-6b: a high-tier power+low-honor line that didn't reach the stars crowns a DICTATOR destiny", () => {
+    const e = resolveConvergence(ctx({ tier: 4, motivators: mot({ power: 70, honor: -30 }) }));
+    expect(e.destiny).toBe("dictator");
+  });
+
+  it("FS-6b: a high-tier wealth line crowns an OLIGARCH destiny", () => {
+    const e = resolveConvergence(ctx({ tier: 3, motivators: mot({ wealth: 70 }) }));
+    expect(e.destiny).toBe("oligarch");
+  });
+
+  it("FS-6b: a high-tier faith line crowns a RELIGIOUS-LEADER destiny", () => {
+    const e = resolveConvergence(ctx({ tier: 3, motivators: mot({ worldview: -70 }) }));
+    expect(e.destiny).toBe("religious_leader");
   });
 
   it("not surviving → extinguished (no-heir vs ruin)", () => {

@@ -225,17 +225,34 @@ describe("Game loop", () => {
     expect(g2.view.state.end?.kind).toBe(g.view.state.end?.kind);
   });
 
-  it("DEPTH-1: every close scene in the shipped corpus carries a take-partner succession decision", () => {
+  it("DEPTH-1: every CELL-act close carries a take-partner succession decision", () => {
     // The dynastic fork is real data, not just wiring: each generation's close offers a decision whose
     // take-partner option carries the succession effect the loop reads (loop.ts pickDecision →
     // beginNextGenerationAct). Asserts the authored corpus, so a regression that drops it fails CI.
+    // FS-6: scope to the 504 CELL-act closes (the spine has its own close shape, asserted separately).
     const corpus = loadSaga();
-    const closes = [...corpus.scenes.values()].filter((s) => s.id.endsWith(":close"));
+    const closes = [...corpus.scenes.values()].filter(
+      (s) => s.id.endsWith(":close") && !s.id.startsWith("spine:"),
+    );
     expect(closes.length).toBe(504);
     for (const close of closes) {
       const succ = close.decision?.options.find((o) => o.succession?.takesPartner);
       expect(succ?.succession?.takesPartner, close.id).toBe(true);
       expect(succ?.succession?.begets ?? 0, close.id).toBeGreaterThan(0);
+    }
+  });
+
+  it("FS-6: each SPINE close carries succession, except the terminal stellar act (ends in expansion)", () => {
+    const corpus = loadSaga();
+    const spineCloses = [...corpus.scenes.values()].filter(
+      (s) => s.id.startsWith("spine:") && s.id.endsWith(":close"),
+    );
+    // 9 of the 10 generations close on a succession fork; the terminal g9 act resolves into the ending.
+    expect(spineCloses.length).toBeGreaterThanOrEqual(8);
+    for (const close of spineCloses) {
+      if (close.id.startsWith("spine:g9:")) continue; // terminal stellar act — no succession
+      const succ = close.decision?.options.find((o) => o.succession?.takesPartner);
+      expect(succ?.succession?.takesPartner, close.id).toBe(true);
     }
   });
 
