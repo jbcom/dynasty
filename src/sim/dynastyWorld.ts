@@ -101,12 +101,29 @@ function snapshot(agent: DynastyAgent, epoch: Epoch | null): RivalSnapshot {
   };
 }
 
+/** The played line's vantage the rival world REACTS to (WV-3-RIVAL-REACT): its rung + chosen strategy. */
+export interface PlayerVantage {
+  rung: number;
+  strategy: string;
+}
+
 /**
  * Advance the whole rival world one turn at `year`: each rival plans (GOAP), the active epoch's
  * tide nudges it up (riding) or threatens it (a strong negative tide can stall the climb), and a
  * riding rival on a climbing strategy gains a rung. Re-snapshots. Pure + deterministic.
+ *
+ * WV-3-RIVAL-REACT: when `vantage` is given, a rival pursuing the SAME strategy as the player and within
+ * one rung of them is a DIRECT COMPETITOR — it escalates (a meaningfully higher climb chance) to contest
+ * the same ground, so the player's position perturbs the world differently per run (the Yuka-reactive
+ * half). Deterministic: the escalation is a fixed bonus read off the player vantage, the climb roll stays
+ * seeded on (agent, year). Without a vantage the world advances exactly as before (back-compat).
  */
-export function advanceWorld(world: DynastyWorld, year: number, rng: Rng): DynastyWorld {
+export function advanceWorld(
+  world: DynastyWorld,
+  year: number,
+  rng: Rng,
+  vantage?: PlayerVantage,
+): DynastyWorld {
   const epoch = epochForYear(year);
   const snapshots: RivalSnapshot[] = [];
   for (const agent of world.rivals) {
@@ -118,7 +135,15 @@ export function advanceWorld(world: DynastyWorld, year: number, rng: Rng): Dynas
     const climbing = strategy !== "endure" && tide > 0.1;
     if (climbing) {
       const r = rng.fork(`worldclimb:${agent.id}:${year}`);
-      if (r.int(1, 100) <= 40 + Math.round(tide * 40))
+      // A direct competitor (same strategy as the player, within one rung) digs in to contest the ground
+      // the player is also climbing — a +25 climb-chance escalation. The player's vantage thus changes the
+      // rival world's trajectory (and the convergence race) differently each run.
+      const competes =
+        vantage !== undefined &&
+        strategy === vantage.strategy &&
+        Math.abs(agent.rung - vantage.rung) <= 1;
+      const escalation = competes ? 25 : 0;
+      if (r.int(1, 100) <= 40 + Math.round(tide * 40) + escalation)
         agent.rung = climb({
           rung: agent.rung,
           peakRung: agent.rung,

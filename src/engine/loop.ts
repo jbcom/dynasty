@@ -339,10 +339,13 @@ export class Game {
   /** Advance the rival world to the run's current year (deterministic). Called when the clock moves. */
   private advanceWorldToNow(): void {
     if (this.world) {
+      // WV-3-RIVAL-REACT: pass the player's vantage (rung + archetype strategy) so direct competitors
+      // escalate against the line — the world reacts to where the player is, not just to static motivators.
       this.world = advanceWorld(
         this.world,
         this.state.year,
         this.rng.fork(`world:${this.state.year}`),
+        { rung: this.playerRung(), strategy: strategyForArchetype(this.state.archetype) },
       );
     }
   }
