@@ -105,14 +105,19 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   3-way pick). Sim-pure (RNG facade only); same seed + taps → same place; taps nudge. Test: senseEmergence.unit
   (cue shape / determinism / one-of-three / taps-nudge). The sim core for the SENSORY birth beat; EI-3 wires it
   into the Epoch-0 opening act on the SceneReader surface.
-- [ ] [WAIT-REVIEW] **EI-2 PR #182 — wait CI green + address review, then self-squash-merge.** Pushed
-  feat/ei2-sense-place-resolution (senseEmergence resolver + test, pure sim). Full local gate passed (926 node,
-  check/typecheck clean). Loop: wait build-and-test + CodeQL, fold review forward + resolve threads, self-squash-merge
-  ([[babysit-pr]]). After merge: sync main, fresh branch for EI-3 (builds ON EI-2's resolver).
-- [ ] [WAIT] **EI-3 EPOCH-0 OPENING ACT (glowing-inline, REAL COPY) (after #182)** — un-retire Epoch 0 as the played opening: the
-  progenitor's emergence built on the saga substrate, rendered via SceneReader glowing inline-dialogue choices
-  (bigger, scannable, woven in the prose), NOT the .card/.choices button menu. Author REAL copy for the spine
-  beats (birth/sensory-emergence → naming → childhood). Tested (inline-glow options, no .card button-list).
+- [x] **EI-2 PR #182 — DONE, MERGED (squash 6e9307c; release 0.55.0).** senseEmergence resolver shipped; post-merge green.
+- [x] **EI-3a EPOCH-0 BIRTH SCENE — DONE (branch feat/ei3-epoch0-opening-act).** Un-retired Epoch 0's FIRST scene
+  on the saga substrate: `src/sim/founding/epoch0Opening.ts` `buildBirthScene(cues)` — a schema-valid Scene
+  opening in the newborn's body (no menu, no place named) with the EI-2 sense cues as GLOWING INLINE beat-choices
+  (each stamps `attend:<sense>`), real authored prose, and a MAJOR close decision through which the place
+  crystallizes (resolvePlace reads the attend flags). Test: epoch0Opening.unit (schema-valid, sense beats,
+  close decision, resolvePlace end-to-end). Flows `next: epoch0:naming`.
+- [x] **EI-3b EPOCH-0 NAMING + CHILDHOOD SCENES (REAL COPY) — DONE (branch feat/ei3-epoch0-opening-act).** Authored
+  `epoch0:naming` (parents name the child in-fiction via {full_name}/{given_name} tokens; a secondary first-
+  disposition fork) + `epoch0:childhood` (the child reads the family's STANDING — established vs rising — diegetically)
+  + `buildEpoch0Opening(cues)` returning the connected birth → naming → childhood chain. Real copy, saga-substrate
+  scenes. Test: epoch0Opening.unit (naming tokens + named flag; childhood standing flags; connected chain). Flows
+  `next: epoch0:formative` (EI-4).
 - [ ] [WAIT] **EI-4 FORMATIVE-BEATS (REAL COPY)** — author first-friend / first-betrayal / first-loss / first-romance /
   early-schooling as emergent Epoch-0 → adulthood scenes (real authored prose) that set life-seeds + crystallize
   facets (power base / standing / bent). Woven across the opening's beginning/middle/end. Tested (each sets its facet).
