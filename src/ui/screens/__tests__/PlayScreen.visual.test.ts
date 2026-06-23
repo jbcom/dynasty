@@ -337,6 +337,23 @@ describe("PlayScreen (composed game screen)", () => {
     expect(empty?.textContent).toMatch(/still finding their feet/i);
   });
 
+  it("STATS-CHOICES-TAB-SCREENSHOT: captures the Stats and Choices tabs for visual review", async () => {
+    // The least-shot surfaces (the chronicle covered Now/omen/finale). Capture each for a legibility/register read.
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: view(), busy: false, onchoose: () => {} },
+    });
+    await page.getByRole("button", { name: /Stats/ }).click();
+    flushSync();
+    expect(host.querySelector(".content")?.textContent, "the Stats tab has content").toBeTruthy();
+    await page.screenshot({ element: host.firstElementChild as Element });
+
+    await page.getByRole("button", { name: /Choices/ }).click();
+    flushSync();
+    expect(host.querySelector(".content")?.textContent, "the Choices tab has content").toBeTruthy();
+    await page.screenshot({ element: host.firstElementChild as Element });
+  });
+
   it("OMEN-BADGE-SCREENSHOT: captures the hope + dread omen badges for visual review", async () => {
     const scene = SceneSchema.parse({
       id: "sc:demo:badgeshot",
