@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.57.0](https://github.com/jbcom/dynasty/compare/v0.56.0...v0.57.0) (2026-06-23)
+
+
+### Features
+
+* **sim:** un-retire Epoch 0 — birth → naming → childhood opening (EI-3) ([#184](https://github.com/jbcom/dynasty/issues/184)) ([4f25a3e](https://github.com/jbcom/dynasty/commit/4f25a3ea982472ecdb887ec920febe2063d6164f))
+
 ## [0.56.0](https://github.com/jbcom/dynasty/compare/v0.55.0...v0.56.0) (2026-06-23)
 
 
