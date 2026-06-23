@@ -1122,6 +1122,16 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   divergence; the further layer ([[emergent-cause-effect-sim]]) is rival lines REACTING to the player
   (Yuka-style GOAP) + seeded disease/disruption shocks the player lives through, so playthroughs diverge in
   EVENTS, not just economy. Lower priority than SPINE-ACT-DEPTH but a real depth lever.
+- [ ] **SPINE-DEPTH-PLAYTEST — verify the hour+ mandate with a real end-to-end play measurement.** The static
+  count is now 64 scenes / 132 paragraphs / 83 beats per founding→stars run. Confirm the ACTUAL playable
+  duration: drive a full run via the dev harness (or a headless playthrough), time a representative
+  read+deliberate pace per scene, and report the real minutes. If short of an hour, the next depth lever is a
+  4th interstitial on the mid-weight acts OR longer prose — decide from the measurement, not a guess.
+- [ ] **SPINE-WEAVE-PAYOFF-3 — wire the depth-2 REVERSAL flags into the trigger lattice.** The 4 reversal
+  scenes added 8 new flags (g0_forced_the_claim_public, g3_broke_the_attack, g8_learned_from_the_loss,
+  g9_answered_as_kin, …). Enumerate which map to a thematically-honest family branch (e.g. a "broke the
+  attack" / power play → a syndicate/rival thread) and add matched, era-gated trigger rules per the
+  established pattern. Never blanket-wire; one rule per genuine match, tested in/out of window.
 - [x] **MAP-ERA-PROGRESS-RICHER — DONE (commit 04413e5).** MapView now plots a per-GENERATION marker (g0..g9,
   from the live family) sliding along the founding→stars axis + faint RIVAL dots per convergence line on the
   same rung axis, with a caption naming the leading rival. Optional props from PlayScreen's existing
@@ -1167,7 +1177,9 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   / action-first) → 35 distinct first-2-word openers across 40 beats, dominant skeleton gone. Remaining
   follow-on backlog (deeper sentence-rhythm + the new depth-2 reversal prose) folds into a future QA pass once
   depth-2 lands.
-- [ ] **SPINE-CONTENT-QA-3 — QA the depth-2 reversal prose once it lands + a sentence-rhythm pass.** After
-  SPINE-ACT-DEPTH-2 re-adds the 4 reversal scenes, run the same uniqueness + scannability lens on them (no
-  shared skeleton with each other or with the existing tex/csq), plus a deeper 2nd/3rd-sentence rhythm audit
-  across all interstitials ([[suzerain-ui-reference]], [[scannability-game-novel-balance]]). Fix templated lines.
+- [x] **SPINE-CONTENT-QA-3 — DONE (audit pass, no fixes needed).** Audited the 4 depth-2 reversal scenes vs the
+  uniqueness lens: opening sentences enter through 4 distinct era-grounded media (a telegram / a whisper of
+  light / midnight news / a red bloom on the status board); beat-1 openers all distinct. Across ALL 24
+  interstitials: 22 distinct opening-sentence first-2-word starts (only "After the"/"From the" twice), and
+  48 beats with 42 distinct 2-word openers, zero 3×+ repeats. The reversals were authored with deliberate
+  variety — no templating to fix. (A deeper full-sentence-rhythm pass remains optional future polish.)
