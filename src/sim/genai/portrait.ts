@@ -49,6 +49,27 @@ export const CHRONICLE_WRAPPER =
   "kept record of its line. NOT cartoon, NOT cel-shaded, NOT a modern flat digital illustration.";
 
 /**
+ * The DIGITAL-era cohesion wrapper (EI-10): the aged-physical-plate framing of CHRONICLE_WRAPPER contradicts a
+ * luminous holographic/volumetric capture, so the digital future LOW/MID cells use a wrapper that keeps the
+ * gallery's palette + dynastic-record intent while ALLOWING projected light — cohesion without forcing a
+ * physical-plate look. (The future HIGH cells are physical oils → they keep CHRONICLE_WRAPPER.)
+ */
+export const ARCHIVE_WRAPPER =
+  "Catalogued in a dynastic ARCHIVE: a restrained, limited palette with a single gold-ochre and oxblood " +
+  "accent, on a plain dark void ground — a softly GLOWING, weightless projected-light capture (not a printed " +
+  "plate, not aged paper). Cohesive with a family's kept record of its line. NOT cartoon, NOT cel-shaded.";
+
+/** Which media read as a glowing digital CAPTURE (vs a physical artifact) — the future low/mid cells. */
+function isDigitalCapture(eraBand: EraBand, tier: RungTier): boolean {
+  return (eraBand === "near_future" || eraBand === "stellar") && tier !== "high";
+}
+
+/** The cohesion wrapper for an (era × tier): the archive wrapper for digital captures, else the chronicle one. */
+function wrapperFor(eraBand: EraBand, tier: RungTier): string {
+  return isDigitalCapture(eraBand, tier) ? ARCHIVE_WRAPPER : CHRONICLE_WRAPPER;
+}
+
+/**
  * EI-8 PRESENTATION MEDIUM by (era band × rung tier) — the real (and, for the future, extrapolated) ARTIFACT a
  * person of that station and time would have had their likeness captured in. A miner's worn tintype of his wife
  * vs a robber baron's gilt-framed oil (the user's examples); carried forward with plausible future media
@@ -90,13 +111,13 @@ const PRESENTATION: Record<EraBand, Record<RungTier, string>> = {
   // luxury precisely because it can't be copied. Low/mid stay digital/holographic (the default, abundant medium);
   // high flips to physical, the Gilded-Age oil returning at the very top — now a far more extreme status symbol.
   near_future: {
-    low: "a utilitarian identity scan-capture, plainly lit",
-    mid: "a clean volumetric portrait capture",
+    low: "a utilitarian GLOWING identity scan-capture, projected light, plainly lit",
+    mid: "a luminous VOLUMETRIC portrait — a softly glowing projected-light capture floating free, clearly digital",
     high: "a RARE hand-painted oil portrait on real canvas — an anachronistic luxury in a digital age, a flex of wealth",
   },
   stellar: {
-    low: "a worn archival hologram-still, faintly flickering with age",
-    mid: "a clear holographic portrait capture",
+    low: "a worn archival HOLOGRAM-still, a faintly glowing projected image flickering with age",
+    mid: "a clear luminous HOLOGRAPHIC portrait — a glowing projected-light capture, weightless and clearly not physical",
     high: "an extravagantly RARE physical oil painting on canvas, hand-made — in a post-scarcity star age the one thing that cannot be copied, the ultimate symbol of dynastic power",
   },
 };
@@ -233,7 +254,7 @@ export function buildCompositePortraitPrompt(f: PortraitFacets): string {
     `${presentation.charAt(0).toUpperCase()}${presentation.slice(1)} — a BUST / half-figure likeness of ${subject}, ${era}, ${wardrobe}.`,
     `A member of an American dynasty across the centuries. A composed bearing; let the face carry character`,
     `(resolve, cunning, or care), not a smile. Front or three-quarter view, plain ground.`,
-    CHRONICLE_WRAPPER,
+    wrapperFor(f.eraBand, f.rungTier),
     STYLE_NEGATIVE,
   ].join(" ");
 }
@@ -270,7 +291,7 @@ export function buildEncounterPortraitPrompt(f: EncounterFacets): string {
     `${presentation.charAt(0).toUpperCase()}${presentation.slice(1)} — a BUST / half-figure likeness of ${subject}, ${era}.`,
     `A distinct person encountered in a dynasty's story — their bearing reads as "${f.role}". A composed`,
     `face that carries character, not a smile. Front or three-quarter view, plain ground.`,
-    CHRONICLE_WRAPPER,
+    wrapperFor(f.eraBand, "mid"),
     STYLE_NEGATIVE,
   ].join(" ");
 }

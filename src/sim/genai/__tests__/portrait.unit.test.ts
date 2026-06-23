@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { DYNASTY_SPINE } from "../../saga/spineAuthored";
 import {
+  ARCHIVE_WRAPPER,
   buildCompositePortraitPrompt,
   buildEncounterPortraitPrompt,
   buildPortraitPrompt,
@@ -186,6 +187,42 @@ describe("EI-8 presentation medium (era × station — user 2026-06-23)", () => 
     expect(presentationFor("founding_1700s", "high")).toMatch(
       /engraving|oil miniature|commissioned/i,
     );
+  });
+
+  it("EI-10: digital future low/mid use the ARCHIVE (luminous) wrapper; physical cells use the CHRONICLE wrapper", () => {
+    // A glowing holographic capture can't read as an aged physical plate — the wrapper adapts so the cohesion
+    // framing doesn't fight the medium. Future HIGH cells are physical oils → they keep the chronicle wrapper.
+    const stellarMid = buildCompositePortraitPrompt({
+      lifeStage: "adult",
+      eraBand: "stellar",
+      archetype: "economic",
+      rungTier: "mid",
+      gender: "male",
+    });
+    expect(stellarMid).toContain(ARCHIVE_WRAPPER);
+    expect(stellarMid).not.toContain(CHRONICLE_WRAPPER);
+
+    const stellarHigh = buildCompositePortraitPrompt({
+      lifeStage: "adult",
+      eraBand: "stellar",
+      archetype: "economic",
+      rungTier: "high",
+      gender: "male",
+    });
+    expect(stellarHigh, "the physical-oil flex keeps the aged-artifact framing").toContain(
+      CHRONICLE_WRAPPER,
+    );
+
+    // A historical cell is always the chronicle wrapper.
+    expect(
+      buildCompositePortraitPrompt({
+        lifeStage: "adult",
+        eraBand: "industrial_late1800s",
+        archetype: "economic",
+        rungTier: "low",
+        gender: "male",
+      }),
+    ).toContain(CHRONICLE_WRAPPER);
   });
 });
 
