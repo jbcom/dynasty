@@ -49,7 +49,12 @@ function shockRate(year: number): number {
   const act = macroActForYear(year);
   let fired = 0;
   for (let i = 0; i < SEEDS; i++) {
-    const shock = rollSagaShock(family(), year, act, createRng(`cad${i}`).fork(`sagashock:${year}`));
+    const shock = rollSagaShock(
+      family(),
+      year,
+      act,
+      createRng(`cad${i}`).fork(`sagashock:${year}`),
+    );
     if (shock.kind !== "none") fired++;
   }
   return fired / SEEDS;
@@ -62,9 +67,10 @@ describe("shock cadence audit (SHOCK-CADENCE-AUDIT)", () => {
       // Print the measured cadence — this is the audit's figure, read when tuning.
       console.log(`[cadence] ${act} (${year}): shock rate ${(rate * 100).toFixed(1)}%`);
       expect(rate, `${act} is starved — no tension`).toBeGreaterThan(0);
-      expect(rate, `${act} is flooded — every tick a disaster, the beats become noise`).toBeLessThan(
-        1,
-      );
+      expect(
+        rate,
+        `${act} is flooded — every tick a disaster, the beats become noise`,
+      ).toBeLessThan(1);
     }
   });
 
@@ -81,9 +87,10 @@ describe("shock cadence audit (SHOCK-CADENCE-AUDIT)", () => {
       const prev = rates[i - 1] ?? 0;
       const cur = rates[i] ?? 0;
       // Each later act is no harsher than the one before (the medicine curve only improves over time).
-      expect(cur, `act ${i} is harsher than act ${i - 1} — medicine should only improve`).toBeLessThanOrEqual(
-        prev + 1e-9,
-      );
+      expect(
+        cur,
+        `act ${i} is harsher than act ${i - 1} — medicine should only improve`,
+      ).toBeLessThanOrEqual(prev + 1e-9);
     }
   });
 
