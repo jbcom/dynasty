@@ -99,26 +99,33 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   motivatorShift/flag accrual); 3 options → CHOSEN = **UN-RETIRE Epoch 0** as the progenitor's emergence
   infancy→adulthood, real authored copy, on the saga/SceneReader substrate (not the old event chain); EI-7/EI-8
   visuals; build order. Art-ban precision recorded: ban = hand-drawn SVG figures only; shaders are fine.
-- [ ] **EI-2 SENSORY-PLACE-RESOLUTION** — the opening beat(s): the newborn's hear/smell/touch/taste resolve
-  INTO one place (deterministic from seed + the player's sensory-reaction taps), replacing the 3-location pick.
-  Pure sim + the SceneReader inline-glow surface; tested (same seed → same resolved place; reactions nudge).
-- [ ] **EI-3 EPOCH-0 OPENING ACT (glowing-inline, REAL COPY)** — un-retire Epoch 0 as the played opening: the
+- [x] **EI-2 SENSORY-PLACE-RESOLUTION — DONE (branch feat/ei2-sense-place-resolution).** Pure
+  `src/sim/founding/senseEmergence.ts`: `dealSenseCues(rng)` deals one diegetic cue per sense leaning to a
+  founding region; `resolvePlace(cues, attendedSenses)` weights ambient + attended → ONE FoundingRegion (never a
+  3-way pick). Sim-pure (RNG facade only); same seed + taps → same place; taps nudge. Test: senseEmergence.unit
+  (cue shape / determinism / one-of-three / taps-nudge). The sim core for the SENSORY birth beat; EI-3 wires it
+  into the Epoch-0 opening act on the SceneReader surface.
+- [ ] [WAIT-REVIEW] **EI-2 PR #182 — wait CI green + address review, then self-squash-merge.** Pushed
+  feat/ei2-sense-place-resolution (senseEmergence resolver + test, pure sim). Full local gate passed (926 node,
+  check/typecheck clean). Loop: wait build-and-test + CodeQL, fold review forward + resolve threads, self-squash-merge
+  ([[babysit-pr]]). After merge: sync main, fresh branch for EI-3 (builds ON EI-2's resolver).
+- [ ] [WAIT] **EI-3 EPOCH-0 OPENING ACT (glowing-inline, REAL COPY) (after #182)** — un-retire Epoch 0 as the played opening: the
   progenitor's emergence built on the saga substrate, rendered via SceneReader glowing inline-dialogue choices
   (bigger, scannable, woven in the prose), NOT the .card/.choices button menu. Author REAL copy for the spine
   beats (birth/sensory-emergence → naming → childhood). Tested (inline-glow options, no .card button-list).
-- [ ] **EI-4 FORMATIVE-BEATS (REAL COPY)** — author first-friend / first-betrayal / first-loss / first-romance /
+- [ ] [WAIT] **EI-4 FORMATIVE-BEATS (REAL COPY)** — author first-friend / first-betrayal / first-loss / first-romance /
   early-schooling as emergent Epoch-0 → adulthood scenes (real authored prose) that set life-seeds + crystallize
   facets (power base / standing / bent). Woven across the opening's beginning/middle/end. Tested (each sets its facet).
-- [ ] **EI-5 NAMING-IN-FICTION** — surname/gender/given/naming-tradition are named diegetically at the naming
+- [ ] [WAIT] **EI-5 NAMING-IN-FICTION** — surname/gender/given/naming-tradition are named diegetically at the naming
   beat (by the parents, in the child's hearing), not picked on a card. Wire to foundByComposition. Tested.
-- [ ] **EI-6 RETIRE-THE-FUNNEL + WIRE** — replace the OnboardingScreen .card funnel with the lived opening's
+- [ ] [WAIT] **EI-6 RETIRE-THE-FUNNEL + WIRE** — replace the OnboardingScreen .card funnel with the lived opening's
   accumulated state feeding foundByComposition; the New Game path opens the emergent infancy, not the menu.
   Update/retire the funnel tests; full gate incl. e2e (the entry-flow e2e must walk the new opening). Tested.
-- [ ] **EI-7 PORTRAIT-TEXT-WRAP LAYOUT (user, 2026-06-23)** — the scene prose must FLOW alongside the portrait and
+- [ ] [WAIT] **EI-7 PORTRAIT-TEXT-WRAP LAYOUT (user, 2026-06-23)** — the scene prose must FLOW alongside the portrait and
   then continue DOWN BELOW it (a magazine wrap — float/shape the portrait, text wraps beside then under), not
   portrait-block-then-text-block stacked. Applies to the SceneReader / play surface. Visual; screenshot + READ that
   the wrap reads as intended at mobile width. (Portraits are an ESTABLISHED part of the game — [[visual-layer-revival]].)
-- [ ] **EI-8 GENAI LIFE-STAGE × ERA × ENCOUNTER PORTRAITS (user, 2026-06-23)** — the existing GenAI image pipeline
+- [ ] [WAIT] **EI-8 GENAI LIFE-STAGE × ERA × ENCOUNTER PORTRAITS (user, 2026-06-23)** — the existing GenAI image pipeline
   must generate portraits matched to LIFE STAGE (infant / child / youth / adult / elder — the cycles of birth →
   growth → death recur every generation) AND to the ERA the beat sits in (not just the 3 coarse macro-bands —
   the line runs 1770s→stars over 300+ years, so a child in 1790 ≠ a child in 1990 ≠ a child among the stars), AND
@@ -1501,7 +1508,7 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   outstanding-strain condition); tightened so they read as ONE beat — when the omen is hopeful the invest label
   becomes "Press the rebound — pour resources in to make it count?" and the prompt is marked `data-after-hope`.
   Test: PlayScreen.visual (DOM order omen-before-invest + the connecting copy + data-after-hope).
-- [ ] **FIELD-EXTREMES PR — wait CI green + address review, then self-squash-merge.** (filled in at push.)
+- [x] **FIELD-EXTREMES PR #161 — DONE, MERGED.** (stale placeholder reconciled — the unit's items below are all done.)
 - [x] **ENDING-FIELD-NARRATIVE-AUDIT — DONE (branch feat/finale-polish).** New endingFieldNarrativeAudit.unit: a
   28-case matrix asserting resolveConvergence's epilogue clause matches the documented field-count precedence
   (stars > whole-field-fallen > droppedOut > neck-and-neck > quiet-recede), the no-field/failed-run → no-epilogue
@@ -1515,7 +1522,7 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   money (coffers rebuilt) / reputation (name to grace) / health (back to strength) / loyalty (bonds reforged) —
   first outstanding flag wins (replay-stable); heat + unrecognized fall back to the generic hopeful line. Wired into
   the engine foreshadow(). Test: sagaShock.unit (four distinct variants, first-flag-wins, fallback).
-- [ ] **FINALE-POLISH PR — wait CI green + address review, then self-squash-merge.** (filled in at push.)
+- [x] **FINALE-POLISH PR #163 — DONE, MERGED.** (stale placeholder reconciled — the unit's items below are all done.)
 - [x] **SHOCK-LEDGER-IN-FINALE-SORT — DONE (branch feat/ledger-and-dread-polish).** Verified shockLedger already
   sorts year-then-kind with a same-year comeback after the blow (codepoint compare, replay-stable). Added a
   screens.browser test that feeds SCRAMBLED flags (incl. a same-year 1920 blow+recovery) and asserts the RENDERED
