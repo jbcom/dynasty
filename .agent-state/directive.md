@@ -784,10 +784,13 @@ These surfaced live-verifying the visual layer. The founding-spine pivot ([[mmm-
 WAVES becoming the recurring CAST woven as intersections ([[mmm-timelines-architecture]]). The
 onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival framing.
 
-- [ ] **FS-ONB-DRIFT — onboarding still narrates an IMMIGRANT CROSSING, not the 1776 founding.** UNBLOCKED +
-  IN PROGRESS. Research landed (`docs/superpowers/specs/2026-06-22-founding-era-research.md`); architecture
-  DECIDED + logged in `2026-06-22-founding-spine-redesign.md` (§DECISION FS-ONB-DRIFT): replace the wave funnel
-  with REGION × POWER-BASE × STANDING, reusing the ONB-1 naming + FS-7b life-seed tail. Sub-steps:
+- [x] **FS-ONB-DRIFT — DONE (the onboarding no longer drifts).** The founding funnel is rewritten REGION ×
+  POWER-BASE × STANDING at the 1776 founding; no immigrant-crossing framing remains. Research landed
+  (`docs/superpowers/specs/2026-06-22-founding-era-research.md`); architecture DECIDED + logged in
+  `2026-06-22-founding-spine-redesign.md` (§DECISION FS-ONB-DRIFT). Steps a/b/c/e done + Chrome-verified;
+  step (d) — retiring the dead 1885 prologue ERA — is bigger than a sub-step (it's load-bearing: initState's
+  default startEra="origins", order-0 in the chain, the prologue-gating contract) and is split out as
+  FS-RETIRE-PROLOGUE below. Sub-steps:
   - [x] (a) `src/sim/foundingOrigin.ts` resolver — region×base×standing → motivators + archetype + rung +
     seed flags, grounded in the six researched power bases. 10 colocated unit tests, tsc 0. (committed)
   - [x] (b) DONE — OnboardingScreen first three steps rewritten (PERIOD/CLASS/WAVE → REGION/BASE/STANDING),
@@ -796,7 +799,7 @@ onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival frami
   - [x] (c) DONE — region/base/standing thread onComplete → App.birthGame (regionPlaceId + resolveFoundingStart
     for archetype+motivators) → founding (new Composition.seedFlags stamps region/base/power/standing). founding
     unit test for seedFlags added. tsc 0; 745 unit + 104 browser green.
-  - [ ] (d) retire/rehome the dead 1885 new-york origins line-failure content (ev_line_fails chain).
+  - [→] (d) SPLIT OUT → FS-RETIRE-PROLOGUE (the whole 1885 prologue era, not just ev_line_fails).
   - [x] (e) DONE — Chrome-verified the new funnel: region step ("A new nation is being born… Where does it
     take root?" + 3 regions), base step (6 bases, region-natives first), standing step; copy clean. Full
     funnel→onComplete→play covered by the rewritten browser test.
@@ -844,3 +847,25 @@ onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival frami
   per CLAUDE.md should be GITIGNORED, not tracked. Move it to the gitignored cache (add to .gitignore +
   `git rm --cached`), or make the harness stop writing into a tracked path. Currently I hand-revert it out of
   every commit — that's a smell. Low-risk cleanup.
+
+## FS-RETIRE-PROLOGUE — retire the dead 1885 Trump-line prologue era (milestone, split from FS-ONB-DRIFT d)
+
+- [ ] **FS-RETIRE-PROLOGUE — retire/convert the dead 1885 Trump-line prologue era (milestone).**
+The whole `new-york/1885-1946-origins` era (47 events: Friedrich-leaves-Kallstadt → Bavaria → Fred the
+builder → Queens → the 1946 birth, incl. the `ev_line_fails`→`end_line_failed` failure chain and the
+`dynasty_doomed`/`fred_builder`/`returned_to_ny` flags) is PRE-PIVOT content. The live game routes founded
+runs through the 1776 spine (`beginSpine`); this era is dead-but-reachable only via the legacy event /
+autoPlaythrough path, where it causes early "line failed" deaths that pollute analytics.
+
+NOT a quick delete — it's LOAD-BEARING and needs use-case enumeration first:
+- `initState` defaults `startEra = "origins"` (state.ts:271) and origins is order-0 in the era chain — the
+  default cold-start path. Removing/replacing it touches every non-onboarding founding + tests.
+- `prologue-gating.unit.test.ts` asserts the game OPENS on "Friedrich leaving Kallstadt" + the birth is
+  reachable via dynasty-building — an entire pre-pivot contract to rewrite or retire.
+- The origins-era events may be cell-lattice FABRIC source (mined into `src/data/saga/fabric/`); confirm
+  before deleting (the mine already ran — check whether retiring the source invalidates fabric/index.json).
+- `end_line_failed` is in endings.json; `branch.ts` keys off Era-0 origin flags (branch.ts comment).
+Steps (enumerate fully when picked up): (1) decide origins-era fate — retire vs. convert to CAST backdrop;
+(2) repoint initState default startEra to the spine/founding path; (3) rewrite/retire prologue-gating +
+any origins-dependent tests; (4) remove the failure chain + dead flags; (5) confirm fabric integrity;
+(6) full gate + autoPlaythrough no longer early-deaths + Chrome verify a cold start opens on the spine.
