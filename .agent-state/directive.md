@@ -1064,9 +1064,10 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   scripts/fs-spine-origin-flavor.mjs makes each further act one config block + 5 authored base-variant
   scenes diverting to that act's second scene. Author g2 (antebellum) next, then later gens as bandwidth
   allows — deepening how far the origin choice echoes. Incremental; lower priority than live-PR feedback.
-- [ ] [WAIT] **FS-PR-LOOP — drive the founding-spine PR to merge (babysit-pr).** PR #100 OPEN; CI in flight
-  (build-and-test + Analyze pending; CodeRabbit + Amazon Q already passed). Monitoring CI; will address any
-  CHANGES_REQUESTED / review threads, then self-squash-merge once green + threads resolved + DoD met. Once the PR is open: wait CI green,
+- [ ] [WAIT] **FS-PR-LOOP — drive the founding-spine PR to merge (babysit-pr).** PR #100 OPEN. First CI pass
+  green; addressed all 6 CodeRabbit findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision
+  pin) in a forward commit (2773811) + resolved all 6 threads → mergeStateStatus BLOCKED→UNSTABLE (mergeable).
+  CI re-running on the fix commit (monitor by0sqkp5t); self-squash-merge once the re-run is green. Once the PR is open: wait CI green,
   read every comment + any CHANGES_REQUESTED, address/resolve all review threads (CodeRabbit etc.), keep
   Release/CD green, then self-squash-merge once green + threads resolved + DoD met. ([[babysit-pr]],
   [[jbcom-org-ruleset]] — PR-only/squash/linear.)
