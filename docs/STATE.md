@@ -232,3 +232,38 @@ adds fast-forward (+1/+10/+100) and a timeline JSON download.
 
 Vite + TypeScript + Svelte 5 + Capacitor (Android) + Biome + Vitest (node + browser)
 + Playwright e2e; seedrandom, Tone.js + Howler, Motion One, D3, uPlot, open-props, zod.
+
+## Shipped — WV-3 + spine wave (archived from the directive ledger)
+
+DIRECTIVE-LEDGER-PRUNE: these merged-PR / done entries were moved out of
+`.agent-state/directive.md` (which had grown to ~200 `[x]` lines) to keep the live
+directive scannable. The code + git history are the source of truth; this is the
+human-readable index of the WV-3 saga-dynamics + spine-depth wave.
+
+- FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).
+- FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).
+- RECOVERY-CHOICE PR #130 — DONE, MERGED (squash 61f9061; release cut 0.34.0).
+- RIVAL-RACE-PRESENCE PR #126 — DONE, MERGED (squash 0cf8514; release cut 0.32.0).
+- RIVAL-CROSSING-EXPLOIT PR #128 — DONE, MERGED (squash dc55867; release cut 0.33.0).
+- WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).
+- SPINE-DEPTH PR #106 — DONE, MERGED (squash 045f7d5; release 0.22.0 auto-cut).
+- POST-MERGE-VERIFY #106 — DONE.
+- WV-3-YUKA step 1 — DONE (commit fba598c): divergence audit + g9 apex bug.
+- WV-3-MORTALITY — DONE (commit 28df954).
+- WV-3-SHOCK-SCENES — DONE (commit 110e99e).
+- WV-3-RIVAL-REACT — DONE (commit 4e5a4d1).
+- SPINE-CONTENT-QA-4 — DONE (commit d35c7c4, pushed to PR #106).
+- SPINE-WEAVE-PAYOFF-4 — DONE (no-op by design, same finding as PAYOFF-3).
+- SAGA-VL-INTEGRATE — DONE (live screenshot pass on dev :5175).
+- SPINE-DEPTH-EXTEND-MIDWEIGHT — DONE (commit 255f405).
+- TRIGGER-CROSSING-RECORD — DONE (commit fd84582).
+- SPINE-DEPTH-PLAYTEST — DONE (commit dbc45ef).
+- SPINE-WEAVE-PAYOFF-3 — DONE (no-op by design, enumerated + rejected).
+- MAP-ERA-PROGRESS-RICHER — DONE (commit 04413e5).
+- SAGA-CLOCK-DECOUPLE — DONE (commit dcdc83b, root-caused by stuck-loop-debugger).
+- SPINE-ACT-DEPTH-2 — DONE (commit 389e442; stale duplicate of the entry above, reconciled).
+- SPINE-WEAVE-PAYOFF — DONE (commit abe608e).
+- SPINE-CONTENT-QA — DONE first pass (commit 73942c2).
+- SPINE-WEAVE-PAYOFF-2 — DONE (commit b42a743).
+- SPINE-CONTENT-QA-2 — DONE (commit 3cfdf58).
+- SPINE-CONTENT-QA-3 — DONE (audit pass, no fixes needed).
