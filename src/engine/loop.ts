@@ -91,6 +91,7 @@ export interface GameView {
     rung: number;
     faltering: boolean;
     trend: RungTrend;
+    fallen: boolean;
   }>;
   /** The player's class rung (generation depth, 0..5) — for the read-model's class readout. */
   rung: number;
@@ -196,6 +197,7 @@ export class Game {
         label: s.label,
         rung: s.rung,
         faltering: s.faltering,
+        fallen: s.fallen,
         trend: s.trend,
       }))
       .sort((a, b) => b.rung - a.rung || a.label.localeCompare(b.label));

@@ -13,6 +13,7 @@ interface Standing {
   rung: number;
   faltering: boolean;
   trend: "rising" | "steady" | "falling";
+  fallen: boolean;
 }
 interface Props {
   standings: Standing[];
@@ -21,7 +22,7 @@ interface Props {
 }
 const { standings, playerRung }: Props = $props();
 
-type State = "faltering" | "surging" | "steady" | "you";
+type State = "fallen" | "faltering" | "surging" | "steady" | "you";
 const field = $derived(
   [
     {
@@ -36,12 +37,15 @@ const field = $derived(
       id: s.id,
       name: humanizeRivalLabel(s.label),
       rung: s.rung,
-      // A faltering rival reads "faltering"; one above the player's rung is "surging"; else steady.
-      state: (s.faltering
-        ? "faltering"
-        : s.rung > playerRung
-          ? "surging"
-          : "steady") as State,
+      // DEAD-LINE-IN-FIELD: a fallen line (stuck at the floor) reads "fallen" — out of the race — taking
+      // precedence over faltering/surging. Else: faltering (mid-setback) > surging (above you) > steady.
+      state: (s.fallen
+        ? "fallen"
+        : s.faltering
+          ? "faltering"
+          : s.rung > playerRung
+            ? "surging"
+            : "steady") as State,
       // RIVAL-RUNG-TREND: the momentum arrow (rising/steady/falling) beside the rung.
       trend: s.trend,
       isPlayer: false,
@@ -52,6 +56,7 @@ const field = $derived(
 );
 
 const STATE_LABEL: Record<State, string> = {
+  fallen: "Fallen",
   faltering: "Faltering",
   surging: "Surging",
   steady: "Holding",
@@ -125,6 +130,13 @@ const TREND_ARROW: Record<"rising" | "steady" | "falling", string> = {
     color: var(--mmm-gold-bright);
     font-weight: 700;
   }
+  /* DEAD-LINE-IN-FIELD: a fallen line reads dimmed + struck — out of the race. */
+  .row[data-state="fallen"] {
+    opacity: 0.55;
+  }
+  .row[data-state="fallen"] .who {
+    text-decoration: line-through;
+  }
   .who {
     color: var(--mmm-text);
     text-transform: capitalize;
@@ -166,5 +178,8 @@ const TREND_ARROW: Record<"rising" | "steady" | "falling", string> = {
   }
   .state[data-state="you"] {
     color: var(--mmm-gold-bright);
+  }
+  .state[data-state="fallen"] {
+    color: var(--mmm-text-dim);
   }
 </style>

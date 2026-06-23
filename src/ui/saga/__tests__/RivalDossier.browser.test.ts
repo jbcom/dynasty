@@ -29,6 +29,7 @@ describe("RivalDossier (RIVAL-DOSSIER-TAB)", () => {
         rung: 4,
         faltering: false,
         trend: "rising" as const,
+        fallen: false,
       },
       {
         id: "rival:italian",
@@ -36,6 +37,7 @@ describe("RivalDossier (RIVAL-DOSSIER-TAB)", () => {
         rung: 1,
         faltering: true,
         trend: "falling" as const,
+        fallen: false,
       },
     ];
     component = mount(RivalDossier, { target: host, props: { standings, playerRung: 2 } });
@@ -68,12 +70,31 @@ describe("RivalDossier (RIVAL-DOSSIER-TAB)", () => {
         rung: 1,
         faltering: false,
         trend: "steady" as const,
+        fallen: false,
       },
     ];
     component = mount(RivalDossier, { target: host, props: { standings, playerRung: 3 } });
     const bav = [...host.querySelectorAll(".row")].find((r) => r.textContent?.includes("Bavaria"));
     expect(bav?.getAttribute("data-state")).toBe("steady");
     expect(bav?.textContent).toContain("Holding");
+  });
+
+  it("DEAD-LINE-IN-FIELD: a fallen rival reads 'Fallen' — out of the race — over faltering/low", () => {
+    const standings = [
+      // Fallen takes precedence even though rung 0 would also read low/faltering.
+      {
+        id: "rival:italian",
+        label: "rival:italian",
+        rung: 0,
+        faltering: true,
+        trend: "falling" as const,
+        fallen: true,
+      },
+    ];
+    component = mount(RivalDossier, { target: host, props: { standings, playerRung: 2 } });
+    const row = host.querySelector('[data-testid="rival-dossier"] .row[data-state="fallen"]');
+    expect(row, "the fallen rival reads as fallen").not.toBeNull();
+    expect(row?.textContent).toContain("Fallen");
   });
 
   it("renders nothing when there are no rivals", () => {

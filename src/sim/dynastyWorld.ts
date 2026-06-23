@@ -35,6 +35,9 @@ export interface RivalSnapshot {
   /** RIVAL-RUNG-TREND: the line's recent rung DIRECTION — "rising" / "steady" / "falling" — derived from its
    *  rung history, so the dossier can show momentum (a line peaked-and-sliding reads unlike one climbing). */
   trend: RungTrend;
+  /** DEAD-LINE-IN-FIELD: the line has been stuck at the ladder floor (rung 0) across a full window — it's
+   *  effectively out of the race, distinct from merely low. The dossier reads it as "fallen". */
+  fallen: boolean;
 }
 
 /** RIVAL-RUNG-TREND: a rival's rung momentum over its recent history. */
@@ -49,6 +52,13 @@ export function rungTrend(history: readonly number[]): RungTrend {
   if (last > first) return "rising";
   if (last < first) return "falling";
   return "steady";
+}
+
+/** DEAD-LINE-IN-FIELD: a rival is FALLEN (effectively out of the race) when it has been stuck at the ladder
+ *  floor (rung 0) across a FULL history window — not merely low or briefly down. Requires the window to be
+ *  filled (every reading 0) so a fresh rung-0 line isn't prematurely written off. Pure. */
+export function isFallen(history: readonly number[]): boolean {
+  return history.length >= RUNG_HISTORY_WINDOW && history.every((r) => r === 0);
 }
 
 /** The relation a rival holds toward the played line at an intersection. */
@@ -121,6 +131,7 @@ function snapshot(agent: DynastyAgent, epoch: Epoch | null): RivalSnapshot {
     alive: true,
     faltering: agent.stumbled ?? false,
     trend: rungTrend(agent.rungHistory ?? [agent.rung]),
+    fallen: isFallen(agent.rungHistory ?? [agent.rung]),
   };
 }
 
