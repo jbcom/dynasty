@@ -114,14 +114,21 @@ export function shockForeshadow(
  * protagonist (their death is the existing age-based mortality's domain — this adds COLLATERAL loss + meter
  * shocks, the exogenous variability the audit found missing). Pure — applies no meter change itself.
  */
+/** SHOCK-CLUSTERING-GUARD: the multiplier applied to the shock chance when the line was JUST shocked — a
+ *  cooldown so 3+ back-to-back blows (a death spiral) are rare and losses have rhythm, not a pile-on. */
+const RECENT_SHOCK_DAMPENER = 0.4;
+
 export function rollSagaShock(
   family: FamilyState | undefined,
   year: number,
   macroActId: string,
   rng: Rng,
   namedHeirId?: string,
+  recentlyShocked = false,
 ): SagaShock {
-  const chance = BASE_SHOCK_CHANCE * shockExposure(macroActId);
+  // SHOCK-CLUSTERING-GUARD: dampen the chance right after a shock so blows don't stack into a death spiral.
+  const cooldown = recentlyShocked ? RECENT_SHOCK_DAMPENER : 1;
+  const chance = BASE_SHOCK_CHANCE * shockExposure(macroActId) * cooldown;
   if (!rng.fork(`shock:${year}`).chance(chance)) return { kind: "none" };
 
   // Which kind? A living non-protagonist member can be struck (family_death); otherwise (or by the coin) a

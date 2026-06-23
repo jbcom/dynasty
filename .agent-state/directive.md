@@ -1292,15 +1292,20 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **AGENCY-PLAYSTYLE-AUDIT PR #141 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/agency-playstyle-audit. Full local gate passed. Loop: wait build-and-test + CodeQL, fold review
   forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, SHOCK-CLUSTERING-GUARD.
-- [ ] [WAIT-REVIEW] **SHOCK-CLUSTERING-GUARD — prevent a brutal run of back-to-back shocks (after #141).** Shocks roll
-  independently per tick; a harsh-era unlucky seed can stack 3+ blows in a row with no breathing room, which
-  reads as unfair rather than dramatic. Add a deterministic cooldown/dampener after a shock (lower the next
-  tick's chance) so losses have rhythm. Pure + seeded; SHOCK-CADENCE-AUDIT re-run to confirm; tested.
-- [ ] [WAIT-REVIEW] **RIVAL-RISE-NEWS-WEIGHT — a rival's surge reads urgency proportional to how far it's pulled ahead (after #141).** The
+- [x] **SHOCK-CLUSTERING-GUARD — DONE (feat/shock-clustering-guard).** rollSagaShock takes a `recentlyShocked`
+  flag that applies a 0.4× cooldown to the chance; applySagaShock derives it from the persisted shock:* flags
+  (any blow within one generation span before the tick). 3+ back-to-back blows are now rare — losses have
+  rhythm, no death spiral. The base cadence is preserved (the cooldown only dampens the tick AFTER a shock; the
+  SHOCK-CADENCE-AUDIT single-tick figures are unchanged). Replay-safe (derived from flags, no new state). Tests:
+  sagaShock.unit (cooled fires fewer than normal) + cadence audit re-confirmed. 900 node green, gate clean.
+- [ ] [WAIT-REVIEW] **SHOCK-CLUSTERING-GUARD PR — push, open PR, full remote loop.**
+  1 commit (the cooldown dampener). Full local gate passed. Push, open PR, wait CI, fold review forward +
+  resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-RISE-NEWS-WEIGHT.
+- [ ] **RIVAL-RISE-NEWS-WEIGHT — a rival's surge reads urgency proportional to how far it's pulled ahead.** The
   surge dispatch (RIVAL-RISE-NEWS) is flat — a rival one rung ahead reads the same as one near the stars while
   you're earthbound. Tier the "outpaced you" headline by the rung gap (just ahead → "pulling away" → "leaving
   you behind"), so the pressure scales like FORESHADOW-WEIGHT did for dread. View-derived, deterministic; tested.
-- [ ] [WAIT-REVIEW] **MERGE-CADENCE-HEALTH — verify the post-merge Release/CD/CodeQL chain is consistently green (after #141).** Many WV-3
+- [ ] **MERGE-CADENCE-HEALTH — verify the post-merge Release/CD/CodeQL chain is consistently green.** Many WV-3
   PRs have merged; instrument/check that each tagged release (release-please) actually produced its Release +
   CD + CodeQL success on main (no silent post-merge breakage accumulating). A quick gh-run audit over recent
   main SHAs; report any non-green post-merge run. Ops hygiene, not a feature; decide remediation from findings.
