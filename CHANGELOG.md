@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.52.0](https://github.com/jbcom/dynasty/compare/v0.51.0...v0.52.0) (2026-06-23)
+
+
+### Features
+
+* omen-tone a11y, charmed-run grace note, live-field glance screenshot ([#167](https://github.com/jbcom/dynasty/issues/167)) ([6fd3bd0](https://github.com/jbcom/dynasty/commit/6fd3bd052c98cbdd5e5bcbaacfb2c7a7136b82fe))
+
 ## [0.51.0](https://github.com/jbcom/dynasty/compare/v0.50.0...v0.51.0) (2026-06-23)
 
 
