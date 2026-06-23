@@ -159,12 +159,19 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   ~62ch reading column so the float sits inside the measure; shape-outside rounds the wrap to the plate. Verified
   live (mobile 412px screenshot — prose hugs the plate's left edge then reclaims the column below) + a structural
   test (float:right, shape-outside set, portrait precedes the prose in .scene-body).
-- [ ] **EI-9 PORTRAIT-MATRIX ASSET SWEEP — IN PROGRESS (4/8 era bands done).** Generated the adult matrix (7
-  archetypes incl. crime × 3 tiers × 2 genders) for founding_1700s, federal_1800s, industrial_late1800s,
-  early_1900s (committed e644ce1 + EI-8f). READ samples confirm wardrobe×era×archetype compose (e.g. early_1900s
-  crime-high = a watch-chained suited boss). REMAINING era bands: midcentury, digital_modern, near_future, stellar
-  — run `pnpm vite-node scripts/genai-portraits.ts -- --era <band>` (Gemini image key wired; ~38 imgs/band, idempotent),
-  READ a high-rung sample per band, commit per band. On-demand cache covers any ungenerated key at runtime meanwhile.
+- [x] **EI-PRESENTATION — portrait MEDIUM by era × station — DONE (code, commit 9319bc5; user 2026-06-23).**
+  `presentationFor(eraBand, tier)` + `CHRONICLE_WRAPPER`: the composite/encounter prompts now render the era×station
+  ARTIFACT (founding sketch→oil-miniature; Gilded-Age tintype-keepsake→gilt-framed-oil; …→volumetric→holographic
+  state portrait among the stars), held cohesive by the chronicle wrapper. VALIDATED live: regenerated the Gilded-Age
+  economic low (a worn tintype) vs high (a gilt-framed oil) — the medium reads station exactly per the user's miner-
+  vs-robber-baron example (commit 02826ab). 18 unit tests.
+- [ ] **EI-9 PORTRAIT-MATRIX ASSET SWEEP — IN PROGRESS.** All 6 early/mid era bands' ADULT matrices generated
+  (founding→digital_modern), BUT they predate the presentation-medium change → must `--force` REGENERATE so every
+  era×station presents as its true artifact (the Gilded-Age economic band is already redone + verified). Per band:
+  `pnpm vite-node scripts/genai-portraits.ts -- --era <band> --force`, READ a low (humble medium) + a high (commissioned
+  medium) sample to confirm the medium varies, commit per band. THEN generate the remaining future bands (near_future,
+  stellar) fresh. On-demand cache covers gaps at runtime. (Life-stages beyond adult — infant/child/youth/elder — and
+  encounter-role portraits are a later sweep; adult is the play surface's current demand.)
 - [ ] [WAIT] **EI-6b-ui + EI-7 + EI-8 PR #194 — merge on green.** 3 local reviewers clean; Amazon-Q placeById-guard
   folded (29435b2). EI-8a–f shipped (composite portrait matrix, on-demand cache, founding-era assets). Live-verified
   in Chrome (emergence opens on "You are born…", senses→4 glowing inline sense-choices→naming speaks "Gwendolyn
