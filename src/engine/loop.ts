@@ -78,6 +78,17 @@ export interface GameView {
   /** WV-3-SHOCK-SCENES: the disruption shock's one-line aftermath that struck on the last saga move, or
    *  null. The PlayScreen narrates it for one turn (a death/loss/scandal beat the player reads). */
   shock: SagaShockNote | null;
+  /** RIVAL-RACE-PRESENCE: dispatches about the rival lines near the player's station this turn — a rival
+   *  that has stumbled (a window) or surged past the player (pressure). Surfaced in the NewsTicker so the
+   *  convergence race is felt in-run, not just at the close. */
+  rivalNews: RivalNewsItem[];
+}
+
+/** A one-line dispatch about a near-vantage rival line (RIVAL-RACE-PRESENCE). */
+export interface RivalNewsItem {
+  id: string;
+  kind: "faltered" | "surged";
+  headline: string;
 }
 
 type Listener = (view: GameView) => void;
@@ -152,6 +163,46 @@ export class Game {
     return this.world.snapshots
       .map((s) => ({ id: s.id, label: s.label, rung: s.rung, faltering: s.faltering }))
       .sort((a, b) => b.rung - a.rung || a.label.localeCompare(b.label));
+  }
+
+  /**
+   * RIVAL-RACE-PRESENCE: dispatches about the rival lines near the player's station this turn. A near-vantage
+   * rival that is FALTERING (mid-setback) yields a "stumbled" line — a window the player can exploit; a rival
+   * that has SURGED above the player's rung yields an "outpaced you" line — the pressure half. Derived purely
+   * from the glimpses (faltering) + standings (rung vs player) — re-derived each turn, so it tracks the live
+   * race. Place ids are humanized. Empty when unfounded / no world.
+   */
+  private rivalNews(): RivalNewsItem[] {
+    if (!this.world) return [];
+    const playerRung = this.playerRung();
+    const humanize = (label: string): string =>
+      label
+        .replace(/^rival:/, "")
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+    const out: RivalNewsItem[] = [];
+    // FALTER news: a glimpsed (near-vantage) rival currently faltering — the glimpse note is "struggling".
+    for (const g of this.currentGlimpses()) {
+      const snap = this.world.snapshots.find((s) => s.id === g.rivalId);
+      if (snap?.faltering) {
+        out.push({
+          id: g.rivalId,
+          kind: "faltered",
+          headline: `Word reaches you: the ${humanize(g.label)} line has stumbled.`,
+        });
+      }
+    }
+    // SURGE news: a rival that has climbed ABOVE the player's rung (within sight) — the race's pressure half.
+    for (const s of this.world.snapshots) {
+      if (s.rung > playerRung && s.rung - playerRung <= 2 && !s.faltering) {
+        out.push({
+          id: s.id,
+          kind: "surged",
+          headline: `The ${humanize(s.label)} line has outpaced you — its star rises.`,
+        });
+      }
+    }
+    return out;
   }
 
   /** End kinds that mean the line FAILED (didn't survive to a convergence). */
@@ -249,6 +300,7 @@ export class Game {
       convergence: this.convergenceEnding(),
       lastLedger: this.lastLedger,
       shock: this.lastShock,
+      rivalNews: this.rivalNews(),
     };
   }
 

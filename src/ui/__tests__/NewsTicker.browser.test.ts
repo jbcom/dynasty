@@ -54,6 +54,42 @@ describe("NewsTicker", () => {
     expect(host.querySelector('[data-scope="science"]')?.textContent).toBe("Science");
   });
 
+  it("RIVAL-RACE-PRESENCE: surfaces rival dispatches (a stumble window + a surge pressure), accented apart", () => {
+    component = mount(NewsTicker, {
+      target: host,
+      props: {
+        content,
+        gameState: { ...initState(content, "seed"), year: 2001 },
+        rivalNews: [
+          {
+            id: "rival:italian",
+            kind: "faltered" as const,
+            headline: "Word reaches you: the Italian line has stumbled.",
+          },
+          {
+            id: "rival:bavaria",
+            kind: "surged" as const,
+            headline: "The Bavaria line has outpaced you — its star rises.",
+          },
+        ],
+      },
+    });
+    const block = host.querySelector("[data-testid='rival-news']");
+    expect(block, "the rival dispatch block renders").not.toBeNull();
+    expect(block?.textContent).toContain("Italian line has stumbled");
+    expect(block?.textContent).toContain("Bavaria line has outpaced you");
+    const items = [...host.querySelectorAll("[data-testid='rival-news'] li")];
+    expect(items.length).toBe(2);
+    const faltered = items.find((li) => li.getAttribute("data-kind") === "faltered");
+    const surged = items.find((li) => li.getAttribute("data-kind") === "surged");
+    expect(faltered, "a stumble window line renders").toBeDefined();
+    expect(surged, "a surge pressure line renders").toBeDefined();
+    // The window (gold) and the pressure (red) read apart.
+    expect(getComputedStyle(faltered as HTMLElement).borderLeftColor).not.toBe(
+      getComputedStyle(surged as HTMLElement).borderLeftColor,
+    );
+  });
+
   it("shows a quiet-world empty state when there are no headlines (PL-11)", () => {
     component = mount(NewsTicker, {
       target: host,
