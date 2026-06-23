@@ -304,4 +304,38 @@ describe("succeedToHeir (SAGA-CLOCK-DECOUPLE generational handoff)", () => {
     expect(after.end?.kind, "no heir → the line ends").toBe("line-extinct");
     expect(after.end?.year).toBe(comp.year + 25);
   });
+
+  it("clears stale heir_<id> markers on succession so each generation grooms its own (review #120)", () => {
+    // Gemini #120: a named-heir flag must NOT linger past the succession that consumes it, else every later
+    // generation's heir-targeting/named-succession reads the OLD heir forever.
+    const base = foundByComposition(real, comp).state;
+    const parentId = base.family?.protagonistId;
+    if (!base.family || !parentId) throw new Error("no founded family");
+    const withHeir = {
+      ...base,
+      flags: [...base.flags, "heir_m_heir"], // an estate-planning choice named m_heir the groomed heir
+      family: {
+        ...base.family,
+        members: [
+          ...base.family.members,
+          {
+            id: "m_heir",
+            given: "Heir",
+            surname: "X",
+            sex: "male" as const,
+            born: comp.year,
+            parentId,
+            generation: 1,
+            traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
+            isProtagonist: false,
+          },
+        ],
+        nextSeq: base.family.nextSeq + 1,
+      },
+    };
+    const after = succeedToHeir(withHeir, comp.year + 25);
+    expect(after.family?.protagonistId).toBe("m_heir");
+    // The consumed heir_ marker is gone — no stale heir flag lingers into the next generation.
+    expect(after.flags.some((f) => f.startsWith("heir_"))).toBe(false);
+  });
 });

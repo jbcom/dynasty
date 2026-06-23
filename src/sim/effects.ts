@@ -334,13 +334,17 @@ export function advanceFamily(
       // — else the line begets once and dies out). The founding emergence flags (emerged/named/
       // calling_chosen) persist; the heir is already a born, named member of the line.
       const lifeStageSet = new Set<string>(LIFE_STAGE_FLAGS);
-      const heirFlags = advanced.flags.filter((f) => !lifeStageSet.has(f));
+      // Drop life-stage + any `heir_<id>` named-heir markers (consumed by this succession) so a stale heir
+      // flag doesn't linger into the next generation. The founding emergence flags persist.
+      const survivingFlags = advanced.flags.filter(
+        (f) => !lifeStageSet.has(f) && !f.startsWith("heir_"),
+      );
       advanced = {
         ...advanced,
         family: fam,
         birthYear: heirBorn,
         age: Math.max(0, passYear - heirBorn),
-        flags: withFlag(heirFlags, "succession_occurred"),
+        flags: withFlag(survivingFlags, "succession_occurred"),
       };
     } else {
       advanced = { ...advanced, family: fam };
@@ -394,13 +398,16 @@ export function succeedToHeir(state: GameState, year: number): GameState {
   const heir = succ.family.members.find((m) => m.id === succ.heirId);
   const heirBorn = heir?.born ?? state.birthYear;
   const lifeStageSet = new Set<string>(LIFE_STAGE_FLAGS);
-  const heirFlags = state.flags.filter((f) => !lifeStageSet.has(f));
+  // Drop the per-generation life-stage flags AND any `heir_<id>` named-heir markers — the named heir has
+  // been consumed by this succession (promoted, or the choice resolved), so a stale heir_ flag must not
+  // linger into the next generation (else heir-targeting/named-succession always reads the old heir).
+  const survivingFlags = state.flags.filter((f) => !lifeStageSet.has(f) && !f.startsWith("heir_"));
   return {
     ...state,
     family: succ.family,
     birthYear: heirBorn,
     age: Math.max(0, year - heirBorn),
-    flags: withFlag(heirFlags, "succession_occurred"),
+    flags: withFlag(survivingFlags, "succession_occurred"),
   };
 }
 
