@@ -74,9 +74,15 @@ function main(): void {
     const m = meta.get(k.id);
     const sc = sceneById.get(k.id);
     if (!m || !sc) continue;
-    const vignettes = (sc.braidSlots ?? [])
+    // Prefer the GenAI-tagged source braid-slot vignettes (the bespoke borrowable fragments). When a kept
+    // scene has none — only italian/ireland got braid-slot tagging; the other 5 families have rich PROSE but
+    // no slots — fall back to the scene's first substantial prose paragraph, so EVERY family contributes
+    // borrowable crossing prose (CORPUS-MINE-INTERSECTIONS). Deterministic (first qualifying paragraph).
+    const slotVignettes = (sc.braidSlots ?? [])
       .filter((b) => b.kind === "source" && b.vignette)
       .map((b) => b.vignette as string);
+    const proseFallback = sc.prose.find((p) => p.length > 40);
+    const vignettes = slotVignettes.length > 0 ? slotVignettes : proseFallback ? [proseFallback] : [];
     (fabric[m.wave] ??= {});
     (fabric[m.wave]![m.era] ??= []);
     fabric[m.wave]![m.era]!.push({
