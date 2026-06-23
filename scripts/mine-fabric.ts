@@ -81,7 +81,7 @@ function main(): void {
     const slotVignettes = (sc.braidSlots ?? [])
       .filter((b) => b.kind === "source" && b.vignette)
       .map((b) => b.vignette as string);
-    const proseFallback = (sc.prose ?? []).find((p) => typeof p === "string" && p.length > 40);
+    const proseFallback = sc.prose.find((p) => p.length > 40);
     const vignettes = slotVignettes.length > 0 ? slotVignettes : proseFallback ? [proseFallback] : [];
     (fabric[m.wave] ??= {});
     (fabric[m.wave]![m.era] ??= []);
