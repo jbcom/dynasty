@@ -134,4 +134,39 @@ describe("LegacyReport", () => {
     expect(host.textContent).toMatch(/75 years/); // 1960 − 1885
     expect(host.querySelector(".dynasty")).not.toBeNull();
   });
+
+  it("CONVERGENCE-ENDING-DEPTH: narrates the convergence's earned-finale prose beneath the title", () => {
+    const state = {
+      ...initState(content, "seed"),
+      end: { kind: "apex" as const, year: 2200, reason: "Carried the name to the stars." },
+    };
+    const convergence = {
+      id: "stars_allies",
+      destination: "stars" as const,
+      title: "The Covenant Among the Stars",
+      prose:
+        "The line that began among immigrant strangers ended as the keeper of a covenant between worlds.",
+      gate: {},
+    };
+    component = mount(LegacyReport, {
+      target: host,
+      props: { content, state, end: state.end, convergence, onRestart: () => {} },
+    });
+    const prose = host.querySelector("[data-testid='convergence-prose']");
+    expect(prose, "the finale prose renders").not.toBeNull();
+    expect(prose?.textContent).toContain("keeper of a covenant between worlds");
+    // No prose → no prose line.
+    unmount(component);
+    component = mount(LegacyReport, {
+      target: host,
+      props: {
+        content,
+        state,
+        end: state.end,
+        convergence: { ...convergence, prose: undefined },
+        onRestart: () => {},
+      },
+    });
+    expect(host.querySelector("[data-testid='convergence-prose']")).toBeNull();
+  });
 });
