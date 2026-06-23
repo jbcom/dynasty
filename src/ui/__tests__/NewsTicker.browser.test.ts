@@ -137,6 +137,30 @@ describe("NewsTicker", () => {
     expect(host.querySelector(".rn-press")).toBeNull();
   });
 
+  it("RIVAL-CROSSING-EXPLOIT: the Press button hides once the rival has been pressed THIS step (exploit guard)", () => {
+    const onPress = vi.fn();
+    const gs = { ...initState(content, "seed"), year: 2001 };
+    // A press already recorded for this rival at the current history step (history.length === 0 here).
+    gs.presses = [{ at: gs.history.length, rivalId: "rival:italian", year: 2001 }];
+    component = mount(NewsTicker, {
+      target: host,
+      props: {
+        content,
+        gameState: gs,
+        rivalNews: [
+          {
+            id: "rival:italian",
+            kind: "faltered" as const,
+            headline: "The Italian line has stumbled.",
+          },
+        ],
+        onPress,
+      },
+    });
+    // Already pressed this step → no button (the action is spent until the next step).
+    expect(host.querySelector(".rn-press")).toBeNull();
+  });
+
   it("shows a quiet-world empty state when there are no headlines (PL-11)", () => {
     component = mount(NewsTicker, {
       target: host,

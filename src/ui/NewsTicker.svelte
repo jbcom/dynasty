@@ -34,6 +34,16 @@ const news = $derived(
     : [],
 );
 
+// RIVAL-CROSSING-EXPLOIT: rivals already pressed THIS history step — their press button hides (one press per
+// step, mirroring the engine's exploit guard) so the action doesn't read as still-available after it's spent.
+const pressedThisStep = $derived(
+  new Set(
+    (gameState.presses ?? [])
+      .filter((p) => p.at === gameState.history.length)
+      .map((p) => p.rivalId),
+  ),
+);
+
 const scopeLabel: Record<string, string> = {
   manhattan: "NYC",
   eastcoast: "East Coast",
@@ -54,8 +64,9 @@ const scopeLabel: Record<string, string> = {
         <li data-kind={r.kind}>
           <span class="rn-tag">{r.kind === "faltered" ? "Window" : "Pressure"}</span>
           <span class="headline">{r.headline}</span>
-          {#if r.kind === "faltered" && onPress}
-            <!-- RIVAL-CROSSING-EXPLOIT: press the advantage — deepen the stumble for a heat cost. -->
+          {#if r.kind === "faltered" && onPress && !pressedThisStep.has(r.id)}
+            <!-- RIVAL-CROSSING-EXPLOIT: press the advantage — deepen the stumble for a heat cost. Hidden once
+                 pressed this step (one press per step, matching the engine's exploit guard). -->
             <button type="button" class="rn-press" onclick={() => onPress?.(r.id)}>
               Press the advantage
             </button>

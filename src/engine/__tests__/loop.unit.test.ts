@@ -929,6 +929,12 @@ describe("Game loop", () => {
           g.pressRival("rival:nonexistent");
           expect(g.view.state.presses?.length ?? 0).toBe(presses);
           expect(g.view.state.meters.heat).toBe(heat2);
+          // EXPLOIT GUARD (Gemini #128): a SECOND press of the SAME rival in the same step is ignored — no
+          // extra record, no extra heat, no further rung drop (else the player could drain it to 0 instantly).
+          g.pressRival(falter.id);
+          expect(g.view.state.presses?.length ?? 0).toBe(presses);
+          expect(g.view.state.meters.heat).toBe(heat2);
+          expect(g.view.rivalStandings.find((s) => s.id === falter.id)?.rung ?? 0).toBe(after);
           pressed = true;
           break;
         }

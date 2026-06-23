@@ -227,6 +227,13 @@ export class Game {
     // Guard: only a rival currently dispatched as "faltered" (near-vantage + faltering) can be pressed.
     const pressable = this.rivalNews().some((n) => n.id === rivalId && n.kind === "faltered");
     if (!pressable) return;
+    // EXPLOIT GUARD (Gemini #128, high): one press per rival per history STEP — else a player could spam
+    // pressRival within a turn, draining the rival to rung 0 instantly while stacking heat. `at` is the
+    // current history.length; a press already recorded at this `at` for this rival is rejected.
+    const alreadyPressed = (this.state.presses ?? []).some(
+      (p) => p.rivalId === rivalId && p.at === this.state.history.length,
+    );
+    if (alreadyPressed) return;
     this.applyPressEffect(rivalId);
     this.state = {
       ...this.state,
