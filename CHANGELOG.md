@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.0](https://github.com/jbcom/dynasty/compare/v0.22.0...v0.23.0) (2026-06-23)
+
+
+### Features
+
+* **saga:** deepen the founding-spine to an hour+ of play + harden save/clock ([#106](https://github.com/jbcom/dynasty/issues/106)) ([045f7d5](https://github.com/jbcom/dynasty/commit/045f7d5a1ba1d5227a6ad3cdb14d9769743fa23e))
+
 ## [0.22.0](https://github.com/jbcom/dynasty/compare/v0.21.0...v0.22.0) (2026-06-23)
 
 
