@@ -16,7 +16,13 @@ import { foundByComposition } from "./sim/founding";
 import { FOUNDING_YEAR } from "./sim/macroActs";
 import type { LifeSeedChoices } from "./sim/saga/lifeSeeds";
 import { dealComposition, placeById } from "./sim/places";
-import { type ArrivalClass, resolveWaveStart } from "./sim/waveSelect";
+import {
+  type FoundingRegion,
+  type PowerBase,
+  regionPlaceId,
+  resolveFoundingStart,
+  type Standing,
+} from "./sim/foundingOrigin";
 import type { GameState } from "./sim/state";
 import { GameStore } from "./ui/gameStore.svelte";
 import { FormFactorStore } from "./ui/formFactor.svelte";
@@ -79,41 +85,42 @@ $effect(() => {
 // player override in-game), then drop into the Epoch-0 story.
 async function birthGame(
   seed: string,
-  place: string,
+  region: FoundingRegion,
+  base: PowerBase,
+  standing: Standing,
   surname: string,
-  cls: ArrivalClass,
   gender: "male" | "female",
   given: string,
   culture: string,
   lifeSeeds: LifeSeedChoices,
 ): Promise<void> {
   if (!storage) return;
-  const placeDef = placeById(content.places, place);
-  // Guard: the place comes from the onboarding catalog, so this should never miss — but bail
-  // rather than silently fall back to a random place if an invalid id ever reaches here.
+  // FS-ONB-DRIFT: the player FOUNDS the line at the 1776 founding in a chosen REGION (a kind:"founding"
+  // place) on a chosen POWER BASE at a chosen STANDING — not as an immigrant wave. The region maps to its
+  // founding place for the composition seam; resolveFoundingStart supplies the archetype + motivators.
+  const placeDef = placeById(content.places, regionPlaceId(region));
   if (!placeDef) {
-    console.error(`birthGame: unknown place "${place}"`);
+    console.error(`birthGame: unknown founding region place "${regionPlaceId(region)}"`);
     return;
   }
   // Await the clear so a fast first choice can't race the old save's deletion.
   await clearSave(storage);
   const composition = dealComposition(content.places, content.eras, seed, surname, placeDef);
-  // SS-7 + PF-6: seed the line's starting motivators from the PLAYER'S chosen arrival class (poor/
-  // middle), not the place's default — so the class choice actually grounds the run + saga track.
-  const { motivators } = resolveWaveStart(placeDef, cls);
-  // FS-8c: the founding-spine pivot — the player's line is founded at America's FOUNDING (1776), the
-  // anchor of the authored spine, NOT the wave's 1885 immigration era. The waves are now the braid
-  // fabric that arrives across the centuries, not the line's start year. Overriding the dealt year
-  // anchors the saga clock + the era/News framing at 1776 so the HUD matches the founding spine acts.
-  // ONB-1: stamp the player's chosen progenitor identity over the seed-dealt defaults (naming STYLE,
-  // GENDER, GIVEN name); FS-7: the diegetic Epoch-0 life-seeds.
+  // The (region × base × standing) selection seeds the line's starting motivators, its game-archetype
+  // coloring, and the class rung — grounded in the founding-era power-base research.
+  const { motivators, archetype, flags: originFlags } = resolveFoundingStart({ region, base, standing });
+  // FS-8c: anchor the line at America's FOUNDING (1776) — the authored spine's start — overriding the
+  // dealt era year so the saga clock + HUD/News framing match the founding spine acts. ONB-1: stamp the
+  // chosen progenitor identity (naming STYLE, GENDER, GIVEN); FS-7: the diegetic Epoch-0 life-seeds.
   const founded = foundByComposition(content, {
     ...composition,
     year: FOUNDING_YEAR,
+    archetype,
     culture,
     gender,
     given,
     seedMotivators: motivators,
+    seedFlags: originFlags,
     lifeSeeds,
   }).state;
   store = new GameStore(content, seed, storage, founded, founded.archetype);

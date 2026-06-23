@@ -144,6 +144,21 @@ describe("CP-R2 foundByComposition — composed origin (place × era × culture 
     expect(r.progenitorName.endsWith(" Donnelly")).toBe(true);
   });
 
+  it("FS-ONB-DRIFT: stamps founding-origin seed flags (region/base/power/standing) on the run", () => {
+    const r = foundByComposition(
+      content,
+      baseComposition({
+        place: "founding_south",
+        seedFlags: ["region:south", "base:land", "power:land", "standing:established"],
+      }),
+    );
+    for (const f of ["region:south", "base:land", "power:land", "standing:established"]) {
+      expect(r.state.flags).toContain(f);
+    }
+    // The generic founding flags still stamp alongside the origin flags.
+    expect(r.state.flags).toContain("founded_line");
+  });
+
   it("composes the two new archetypes (entertainment, athletic)", () => {
     for (const archetype of ["entertainment", "athletic"] as const) {
       const r = foundByComposition(content, baseComposition({ archetype }));

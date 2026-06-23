@@ -96,6 +96,12 @@ export interface Composition {
    * keeps the prior behavior (no life-seeds composed).
    */
   lifeSeeds?: LifeSeedChoices;
+  /**
+   * FS-ONB-DRIFT: extra seed FLAGS from the founding ORIGIN selection (region:/base:/power:/standing:),
+   * stamped on the run so the spine + trigger lattice can color decisions by the founder's power base.
+   * Optional — absent keeps the prior behavior.
+   */
+  seedFlags?: readonly string[];
 }
 
 /** The progenitor's given name + the founding state, for the UI + the run. */
@@ -197,6 +203,8 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
     personality = applyLifeSeeds(personality, c.lifeSeeds);
     for (const f of seedFlags(c.lifeSeeds)) flags = withFlag(flags, f);
   }
+  // FS-ONB-DRIFT: stamp the founding-origin flags (region/base/power/standing) for spine coloring.
+  for (const f of c.seedFlags ?? []) flags = withFlag(flags, f);
   const stack = resolveStack(content.worldStacks, c.place, c.era);
   for (const [axisKind, optionId] of Object.entries(c.axisChoices ?? {}) as [AxisKind, string][]) {
     const axis = axisByKind(content.axes, axisKind);

@@ -1,4 +1,13 @@
 <script lang="ts">
+import {
+  FOUNDING_REGIONS,
+  type FoundingRegion,
+  POWER_BASES,
+  type PowerBase,
+  powerBaseDef,
+  regionDef,
+  type Standing,
+} from "../../sim/foundingOrigin";
 import type { Content } from "../../sim/content";
 import { getCulture, type Sex, suggestGivenNames, suggestSurnames } from "../../sim/onomastics";
 import { createRng } from "../../sim/rng";
@@ -8,37 +17,29 @@ import type {
   LifePartner,
   LifeSeedChoices,
 } from "../../sim/saga/lifeSeeds";
-import type { Place } from "../../sim/schema";
-import {
-  type ArrivalClass,
-  availablePeriods,
-  classesForPeriod,
-  type PeriodBand,
-  wavesForCell,
-} from "../../sim/waveSelect";
 
 /**
- * ONBOARDING (Convergence Saga, SS-7). "The story of America": the player founds a line by
- * choosing its WAVE of immigration — a funnel: PERIOD (when they crossed) → CLASS (poor or middle,
- * the arrival tier) → RACE/CULTURE (which wave, when more than one fits the cell) → NAMING STYLE
- * (the cultural naming convention: Irish Catholic, Abbasid Arab, Anglo-Protestant… — defaults to the
- * wave's own but the player CHOOSES, so an Anglicized or cross-cultural founder is possible) → SURNAME
- * (the family name, suggested from the chosen style) → GENDER of the progenitor → GIVEN NAME (now
- * suggested from style + surname + gender). The class seeds the line's starting motivators. The run
- * seed is a HIDDEN random draw (world only). (ONB-1: naming style, surname, gender + given name are
- * PLAYER CHOICES at founding — the sim plumbs them end-to-end. Birth/date/calling unfold in-game.)
+ * ONBOARDING (founding-spine pivot, FS-ONB-DRIFT). "The story of America": the player FOUNDS a line at
+ * the 1776 American founding — NOT as a later immigrant (the immigration waves are now the recurring
+ * CAST woven as intersections). A diegetic funnel: REGION (where the line takes root — New England /
+ * Mid-Atlantic / South) → POWER BASE (the founder's lever: land, commerce, the pulpit, law, the press,
+ * the sword) → STANDING (established or rising) → NAMING STYLE (the cultural naming convention) →
+ * SURNAME → GENDER of the progenitor → GIVEN NAME → the FS-7b life-seeds (first job, best friend, life
+ * partner). The region×base×standing selection seeds the line's starting motivators + archetype + class
+ * rung (resolveFoundingStart). The run seed is a HIDDEN random draw (world only).
  */
 
 interface Props {
   content: Content;
-  /** Begin the founded run: hidden seed + chosen wave place id + bestowed family name + arrival class
-   *  (poor/middle) + the progenitor's chosen gender + given name + the chosen naming-style culture id.
-   *  Founding seeds the right class motivators + saga track and stamps the chosen progenitor identity. */
+  /** Begin the founded run: hidden seed + chosen founding REGION + POWER BASE + STANDING + bestowed
+   *  family name + the progenitor's chosen gender + given name + the chosen naming-style culture id +
+   *  the FS-7b life-seeds. Founding seeds the right motivators/archetype/rung + stamps the identity. */
   onComplete: (
     seed: string,
-    place: string,
+    region: FoundingRegion,
+    base: PowerBase,
+    standing: Standing,
     surname: string,
-    cls: ArrivalClass,
     gender: Sex,
     given: string,
     culture: string,
@@ -55,15 +56,21 @@ const seed = (() => {
   return `r${(words[0] ?? 0).toString(36)}${(words[1] ?? 0).toString(36)}`;
 })();
 
-const CLASS_LABEL: Record<ArrivalClass, { title: string; blurb: string }> = {
-  poor: { title: "With nothing but your hands", blurb: "You arrive poor — steerage, a tenement, the lowest rung." },
-  middle: { title: "With a trade and a little money", blurb: "You arrive with a skill or a small stake — the middling sort." },
+const STANDING_LABEL: Record<Standing, { title: string; blurb: string }> = {
+  established: {
+    title: "Already standing",
+    blurb: "Gentry, a master of the trade, a settled house — the line begins with a seat at the table.",
+  },
+  rising: {
+    title: "On the rise",
+    blurb: "An apprentice, a yeoman, a journeyman with little but ambition — the line begins hungry.",
+  },
 };
 
-// Funnel state: period → class → wave → naming-STYLE → surname → gender → given name.
-let period = $state<PeriodBand | undefined>();
-let cls = $state<ArrivalClass | undefined>();
-let chosen = $state<Place | undefined>();
+// Funnel state: region → power base → standing → naming-STYLE → surname → gender → given name.
+let region = $state<FoundingRegion | undefined>();
+let base = $state<PowerBase | undefined>();
+let standing = $state<Standing | undefined>();
 let styleId = $state<string | undefined>();
 let surnameChosen = $state<string | undefined>();
 let gender = $state<Sex | undefined>();
@@ -99,18 +106,26 @@ const GENDER_LABEL: Record<Sex, { title: string; blurb: string }> = {
   female: { title: "A daughter", blurb: "The progenitor of the line is a woman." },
 };
 
-const periods = $derived(availablePeriods(content.places));
-const classes = $derived(period ? classesForPeriod(content.places, period.id) : []);
-const cellWaves = $derived(period && cls ? wavesForCell(content.places, period.id, cls) : []);
+// The current region's def (cue + native bases) once chosen.
+const regionInfo = $derived(region ? regionDef(region) : undefined);
+// Power bases ordered with the chosen region's NATIVE bases first (its natural levers), then the rest —
+// every base remains selectable (a printer in the planter South is a real, if rarer, choice).
+const baseOptions = $derived.by(() => {
+  if (!regionInfo) return POWER_BASES;
+  const native = new Set(regionInfo.nativeBases);
+  return [...POWER_BASES].sort((a, b) => (native.has(a.id) ? -1 : native.has(b.id) ? 1 : 0));
+});
 
-// NAMING STYLE (ONB-1, user-ordered): an explicit list of every authored naming culture, the wave's
-// own first (the natural default) then the rest — so an Anglicized / cross-cultural founder is a real
-// choice, not forced from the wave. {id,label} from the onomastics file.
+// NAMING STYLE (ONB-1, user-ordered): an explicit list of every authored naming culture, the region's
+// default first (the natural default) then the rest — so a cross-cultural founder is a real choice, not
+// forced from the region. {id,label} from the onomastics file.
 const styleOptions = $derived.by(() => {
   const all = Object.entries(content.onomastics).map(([id, c]) => ({ id, label: c.label }));
-  if (!chosen) return all;
-  const own = chosen.defaultCulture;
-  return all.sort((a, b) => (a.id === own ? -1 : b.id === own ? 1 : 0));
+  const own = region ? `founding_${region}` : undefined;
+  // The founding-region place's defaultCulture is the natural naming default for the region.
+  const ownCulture = content.places.find((p) => p.id === own)?.defaultCulture;
+  if (!ownCulture) return all;
+  return all.sort((a, b) => (a.id === ownCulture ? -1 : b.id === ownCulture ? 1 : 0));
 });
 const culture = $derived(
   styleId ? getCulture({ cultures: content.onomastics }, styleId) : undefined,
@@ -124,25 +139,23 @@ const givenSuggestions = $derived(
     : [],
 );
 
-function pickPeriod(p: PeriodBand): void {
-  period = p;
-  cls = undefined;
-  chosen = undefined;
+function pickRegion(r: FoundingRegion): void {
+  region = r;
+  base = undefined;
+  standing = undefined;
   styleId = undefined;
   surnameChosen = undefined;
   gender = undefined;
 }
-function pickClass(c: ArrivalClass): void {
-  cls = c;
-  // If the (period, class) cell has exactly one wave, skip the race/culture step.
-  const waves = period ? wavesForCell(content.places, period.id, c) : [];
-  chosen = waves.length === 1 ? waves[0] : undefined;
+function pickBase(b: PowerBase): void {
+  base = b;
+  standing = undefined;
   styleId = undefined;
   surnameChosen = undefined;
   gender = undefined;
 }
-function pickWave(p: Place): void {
-  chosen = p;
+function pickStanding(s: Standing): void {
+  standing = s;
   styleId = undefined;
   surnameChosen = undefined;
   gender = undefined;
@@ -167,9 +180,9 @@ function back(): void {
   else if (gender) gender = undefined;
   else if (surnameChosen) surnameChosen = undefined;
   else if (styleId) styleId = undefined;
-  else if (chosen && cellWaves.length > 1) chosen = undefined;
-  else if (cls) cls = undefined;
-  else if (period) period = undefined;
+  else if (standing) standing = undefined;
+  else if (base) base = undefined;
+  else if (region) region = undefined;
   else onCancel();
 }
 
@@ -200,12 +213,11 @@ function pickFriend(f: BestFriend): void {
 }
 /** Life-seed step 3 (the founder takes — or doesn't — a partner): COMPLETE the founding. */
 function pickPartnerAndBegin(p: LifePartner): void {
-  const place = chosen;
   const fam = surnameChosen;
-  if (!place || !cls || !styleId || !fam || !gender || !givenChosen || !firstJob || !bestFriend)
+  if (!region || !base || !standing || !styleId || !fam || !gender || !givenChosen || !firstJob || !bestFriend)
     return;
   const lifeSeeds: LifeSeedChoices = { firstJob, bestFriend, lifePartner: p };
-  onComplete(seed, place.id, fam, cls, gender, givenChosen, styleId, lifeSeeds);
+  onComplete(seed, region, base, standing, fam, gender, givenChosen, styleId, lifeSeeds);
 }
 </script>
 
@@ -214,41 +226,44 @@ function pickPartnerAndBegin(p: LifePartner): void {
 <svelte:window onkeydown={(e) => modalOpen && e.key === "Escape" && (modalOpen = false)} />
 
 <main class="onboarding" inert={modalOpen}>
-  {#if !period}
-    <article class="card" data-phase="period">
+  {#if !region}
+    <article class="card" data-phase="region">
       <p class="prompt">
-        Every American line begins with a crossing. When did your people make theirs?
+        A new nation is being born, and your line will be born with it. Where does it take root?
       </p>
       <div class="choices">
-        {#each periods as p (p.id)}
-          <button type="button" onclick={() => pickPeriod(p)}>{p.title}</button>
-        {/each}
-      </div>
-    </article>
-  {:else if !cls}
-    <article class="card" data-phase="class">
-      <p class="prompt">
-        {period.title}. And what did they carry off the boat?
-      </p>
-      <div class="choices">
-        {#each classes as c (c)}
-          <button type="button" onclick={() => pickClass(c)}>
-            <span class="opt-title">{CLASS_LABEL[c].title}</span>
-            <span class="opt-blurb">{CLASS_LABEL[c].blurb}</span>
+        {#each FOUNDING_REGIONS as r (r.id)}
+          <button type="button" onclick={() => pickRegion(r.id)}>
+            <span class="opt-title">{r.label}</span>
+            <span class="opt-blurb">{r.blurb}</span>
           </button>
         {/each}
       </div>
     </article>
-  {:else if !chosen}
-    <article class="card" data-phase="culture">
+  {:else if !base}
+    <article class="card" data-phase="base">
       <p class="prompt">
-        {CLASS_LABEL[cls].blurb} But from where? Each people brought its own world.
+        {regionInfo?.blurb} On what will the line in {regionInfo?.label} build its standing?
       </p>
       <div class="choices">
-        {#each cellWaves as p (p.id)}
-          <button type="button" onclick={() => pickWave(p)}>
-            <span class="opt-title">{p.label}</span>
-            <span class="opt-blurb">{p.sensoryCue}{p.push ? ` — ${p.push}` : ""}</span>
+        {#each baseOptions as b (b.id)}
+          <button type="button" onclick={() => pickBase(b.id)}>
+            <span class="opt-title">{b.label}</span>
+            <span class="opt-blurb">{b.blurb}</span>
+          </button>
+        {/each}
+      </div>
+    </article>
+  {:else if !standing}
+    <article class="card" data-phase="standing">
+      <p class="prompt">
+        {powerBaseDef(base).blurb} And does the line begin already standing, or on the rise?
+      </p>
+      <div class="choices">
+        {#each ["established", "rising"] as const as s (s)}
+          <button type="button" onclick={() => pickStanding(s)}>
+            <span class="opt-title">{STANDING_LABEL[s].title}</span>
+            <span class="opt-blurb">{STANDING_LABEL[s].blurb}</span>
           </button>
         {/each}
       </div>
@@ -256,13 +271,13 @@ function pickPartnerAndBegin(p: LifePartner): void {
   {:else if !styleId}
     <article class="card" data-phase="style">
       <p class="prompt">
-        {chosen.sensoryCue} — this is where the {chosen.label} line takes root. In what tradition is
-        it named? (The {chosen.label} way is offered first, but the choice is yours.)
+        This is where the {regionInfo?.label} line takes root. In what tradition is it named? (The
+        region's own way is offered first, but the choice is yours.)
       </p>
       <div class="choices">
         {#each styleOptions as opt (opt.id)}
           <button type="button" onclick={() => pickStyle(opt.id)}>
-            {opt.label}{opt.id === chosen.defaultCulture ? " — its own" : ""}
+            {opt.label}
           </button>
         {/each}
       </div>

@@ -790,12 +790,16 @@ onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival frami
   with REGION × POWER-BASE × STANDING, reusing the ONB-1 naming + FS-7b life-seed tail. Sub-steps:
   - [x] (a) `src/sim/foundingOrigin.ts` resolver — region×base×standing → motivators + archetype + rung +
     seed flags, grounded in the six researched power bases. 10 colocated unit tests, tsc 0. (committed)
-  - [ ] (b) rewrite OnboardingScreen first three steps (PERIOD/CLASS/WAVE → REGION/BASE/STANDING) + all copy
-    (kill "off the boat"); keep STYLE→SURNAME→GENDER→GIVEN→JOB→FRIEND→PARTNER.
-  - [ ] (c) thread region/base/standing through onComplete → App.birthGame → founding (replace resolveWaveStart
-    for the PLAYER; dealComposition needs a founding-era origin, not a wave place).
+  - [x] (b) DONE — OnboardingScreen first three steps rewritten (PERIOD/CLASS/WAVE → REGION/BASE/STANDING),
+    all copy reworked (no "off the boat"/"crossing"); STYLE→SURNAME→GENDER→GIVEN→JOB→FRIEND→PARTNER kept.
+    2 browser tests rewritten + green.
+  - [x] (c) DONE — region/base/standing thread onComplete → App.birthGame (regionPlaceId + resolveFoundingStart
+    for archetype+motivators) → founding (new Composition.seedFlags stamps region/base/power/standing). founding
+    unit test for seedFlags added. tsc 0; 745 unit + 104 browser green.
   - [ ] (d) retire/rehome the dead 1885 new-york origins line-failure content (ev_line_fails chain).
-  - [ ] (e) tests + Chrome live-verify the new founding funnel end-to-end.
+  - [x] (e) DONE — Chrome-verified the new funnel: region step ("A new nation is being born… Where does it
+    take root?" + 3 regions), base step (6 bases, region-natives first), standing step; copy clean. Full
+    funnel→onComplete→play covered by the rewritten browser test.
   Keep `waveSelect` + wave places for the CAST/braid system (no longer the player origin).
   ORIGINAL NOTE: The
   funnel asks "Every American line begins with a crossing — when did your people make theirs?" then "what

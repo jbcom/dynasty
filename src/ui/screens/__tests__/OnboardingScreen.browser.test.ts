@@ -4,9 +4,10 @@ import { loadContent } from "../../../data/loadContent";
 import OnboardingScreen from "../OnboardingScreen.svelte";
 
 /**
- * ONB-1: the onboarding funnel now collects naming STYLE, surname, GENDER, and GIVEN name as player
- * choices (not auto-defaults). These tests walk the real-content funnel by clicking through each phase
- * and assert onComplete receives the full chosen identity in the right shape + order.
+ * FS-ONB-DRIFT: the founding funnel now opens on REGION → POWER BASE → STANDING (the 1776 founding-era
+ * origin), then NAMING STYLE → SURNAME → GENDER → GIVEN → the FS-7b life-seeds. These tests walk the
+ * real-content funnel by clicking through each phase and assert onComplete receives the full chosen
+ * founding identity in the right shape + order.
  */
 
 const content = loadContent();
@@ -34,18 +35,17 @@ function clickFirstChoice(): void {
   btn?.click();
 }
 
-describe("OnboardingScreen (ONB-1 + FS-7b: style/surname/gender/given + diegetic life-seeds)", () => {
-  it("walks the full funnel incl. the Epoch-0 life-seeds and onComplete gets the full identity + seeds", async () => {
+describe("OnboardingScreen (FS-ONB-DRIFT: region/base/standing + ONB-1 naming + FS-7b life-seeds)", () => {
+  it("walks the full founding funnel and onComplete gets (seed, region, base, standing, surname, gender, given, culture, lifeSeeds)", async () => {
     const onComplete = vi.fn();
     component = mount(OnboardingScreen, {
       target: host,
       props: { content, onComplete, onCancel: () => {} },
     });
 
-    // The funnel advances one phase per first-choice click. The (period,class) cell may auto-skip the
-    // wave step when it has a single wave, so drive by the data-phase the screen is actually showing.
+    // One phase per first-choice click; drive by the data-phase the screen is actually showing.
     const order: string[] = [];
-    for (let i = 0; i < 12 && !onComplete.mock.calls.length; i++) {
+    for (let i = 0; i < 14 && !onComplete.mock.calls.length; i++) {
       const p = phase();
       if (p) order.push(p);
       clickFirstChoice();
@@ -53,13 +53,13 @@ describe("OnboardingScreen (ONB-1 + FS-7b: style/surname/gender/given + diegetic
     }
 
     expect(onComplete).toHaveBeenCalledTimes(1);
-    // Every founding choice + the life-seeds: (seed, place, surname, cls, gender, given, culture, lifeSeeds).
-    const [seed, place, surname, cls, gender, given, culture, lifeSeeds] =
+    const [seed, region, base, standing, surname, gender, given, culture, lifeSeeds] =
       onComplete.mock.calls[0] ?? [];
     expect(typeof seed).toBe("string");
-    expect(typeof place).toBe("string");
+    expect(["new_england", "mid_atlantic", "south"]).toContain(region);
+    expect(["land", "commerce", "pulpit", "law", "press", "military"]).toContain(base);
+    expect(["established", "rising"]).toContain(standing);
     expect(surname).toBeTruthy();
-    expect(["poor", "middle"]).toContain(cls);
     expect(["male", "female"]).toContain(gender);
     expect(given).toBeTruthy();
     expect(typeof culture).toBe("string");
@@ -67,28 +67,31 @@ describe("OnboardingScreen (ONB-1 + FS-7b: style/surname/gender/given + diegetic
     expect(lifeSeeds.firstJob).toBeTruthy();
     expect(lifeSeeds.bestFriend).toBeTruthy();
     expect(lifeSeeds.lifePartner).toBeTruthy();
-    // The funnel surfaced the new diegetic-birth steps.
+    // The funnel opened on the founding-era origin steps and surfaced the diegetic-birth tail.
+    expect(order).toContain("region");
+    expect(order).toContain("base");
+    expect(order).toContain("standing");
     expect(order).toContain("gender");
     expect(order).toContain("given");
     expect(order).toContain("job");
     expect(order).toContain("friend");
     expect(order).toContain("partner");
+    // No pre-pivot immigrant-arrival framing remains.
+    expect(host.textContent ?? "").not.toContain("off the boat");
   });
 
-  it("offers the wave's own naming style first on the style step", async () => {
-    const onComplete = vi.fn();
+  it("opens on the region step with all three founding regions, not an immigration crossing", async () => {
     component = mount(OnboardingScreen, {
       target: host,
-      props: { content, onComplete, onCancel: () => {} },
+      props: { content, onComplete: vi.fn(), onCancel: () => {} },
     });
-    // Advance until the style card shows.
-    for (let i = 0; i < 6 && phase() !== "style"; i++) {
-      clickFirstChoice();
-      await Promise.resolve();
-    }
-    expect(phase()).toBe("style");
-    // The first style option is the wave's own (marked "— its own").
-    const first = host.querySelector<HTMLButtonElement>("article.card .choices button");
-    expect(first?.textContent).toContain("its own");
+    expect(phase()).toBe("region");
+    const labels = [...host.querySelectorAll("article.card .choices .opt-title")].map(
+      (el) => el.textContent ?? "",
+    );
+    expect(labels.join(" | ")).toContain("New England");
+    expect(labels.join(" | ")).toContain("The South");
+    // The prompt is the founding, not a crossing.
+    expect(host.querySelector(".prompt")?.textContent ?? "").not.toContain("crossing");
   });
 });
