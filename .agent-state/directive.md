@@ -1120,7 +1120,7 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ### Rolling backlog (post-WV-3 — keep this section ≥3 actionable, append before draining)
 
-- [ ] [WAIT-REVIEW] **SHOCK-LEDGER-RECOVERIES PR #124 — wait CI green + address review, then self-squash-merge.**
+- [x] **SHOCK-LEDGER-RECOVERIES PR #124 — DONE, MERGED.**
   Pushed feat/shock-ledger-recoveries: recovered:<meter>:<year> stamp + gold comeback ledger line + the same
   ledger in LegacyReport (LEDGER-IN-LEGACY-REPORT) + the shockCadence.unit audit (SHOCK-CADENCE-AUDIT), all as
   forward commits. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve
@@ -1266,7 +1266,7 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   measures foreshadow→next-shock correlation. MEASURED: P(shock|omen) ≈ 11.2% vs P(shock|calm) ≈ 6.3% — an omen
   makes the next shock ~1.8× likelier, a meaningful-but-not-certain warning (neither spoiler nor noise). The
   test guards P(omen)≥P(calm) AND <1 (well-calibrated; no threshold tuning needed). 897 node green, gate clean.
-- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT PR #136 — wait CI green + address review, then self-squash-merge.**
+- [x] **OMEN-PAYOFF-AUDIT PR #136 — DONE, MERGED.**
   Pushed feat/omen-payoff-audit. Full local gate passed. Loop: wait build-and-test + CodeQL, fold review forward
   + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RECOVERY-INVEST-IN-LEDGER.
 - [x] **RECOVERY-INVEST-IN-LEDGER — DONE (feat/recovery-invest-in-ledger).** An invested rebound now stamps
@@ -1274,7 +1274,7 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   "…by your own hand") crediting the player's agency vs a lucky rebound. The distinct label flows to TimelineView
   + LegacyReport automatically (they render entry.label). Tests: sagaShock.unit (invested vs lucky parse). 898
   node + 127 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **RECOVERY-INVEST-IN-LEDGER PR #137 — wait CI green + address review, then self-squash-merge.**
+- [x] **RECOVERY-INVEST-IN-LEDGER PR #137 — DONE, MERGED.**
   Pushed feat/recovery-invest-in-ledger (c065136). Full local gate passed. Loop: wait build-and-test + CodeQL,
   fold review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, AGENCY-IN-LEGACY.
 - [x] **AGENCY-IN-LEGACY — DONE (feat/agency-in-legacy).** LegacyReport now tallies the player's WV-3
@@ -1282,14 +1282,14 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   pressed N faltering rivals, and forced M recoveries…" line — the active counterpart to the passive ledger.
   Omitted for a fully-passive run. Tests: screens.browser (tally render + plural/empty). 898 node + 128 browser
   green, gate clean.
-- [ ] [WAIT-REVIEW] **AGENCY-IN-LEGACY PR #139 — wait CI green + address review, then self-squash-merge.**
+- [x] **AGENCY-IN-LEGACY PR #139 — DONE, MERGED.**
   Pushed feat/agency-in-legacy (d906833). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
   review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, AGENCY-PLAYSTYLE-AUDIT.
 - [x] **AGENCY-PLAYSTYLE-AUDIT — DONE (feat/agency-playstyle-audit).** agencyPlaystyleAudit.unit drives 16
   always-act runs. MEASURED: press offered 134 / fired 134; invest offered 24 / fired 24 — both levers surface
   + fire reliably (neither is dead UI; press is the frequent window, invest rarer but healthy). No trigger
   tuning needed; the test guards both are offered AND fire. 899 node green, gate clean.
-- [ ] [WAIT-REVIEW] **AGENCY-PLAYSTYLE-AUDIT PR #141 — wait CI green + address review, then self-squash-merge.**
+- [x] **AGENCY-PLAYSTYLE-AUDIT PR #141 — DONE, MERGED.**
   Pushed feat/agency-playstyle-audit. Full local gate passed. Loop: wait build-and-test + CodeQL, fold review
   forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, SHOCK-CLUSTERING-GUARD.
 - [x] **SHOCK-CLUSTERING-GUARD — DONE (feat/shock-clustering-guard).** rollSagaShock takes a `recentlyShocked`
@@ -1298,7 +1298,7 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   rhythm, no death spiral. The base cadence is preserved (the cooldown only dampens the tick AFTER a shock; the
   SHOCK-CADENCE-AUDIT single-tick figures are unchanged). Replay-safe (derived from flags, no new state). Tests:
   sagaShock.unit (cooled fires fewer than normal) + cadence audit re-confirmed. 900 node green, gate clean.
-- [ ] [WAIT-REVIEW] **SHOCK-CLUSTERING-GUARD PR #142 — wait CI green + address review, then self-squash-merge.**
+- [x] **SHOCK-CLUSTERING-GUARD PR #142 — DONE, MERGED.**
   Pushed feat/shock-clustering-guard (148bd2e). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
   review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-RISE-NEWS-WEIGHT.
 - [x] **RIVAL-RISE-NEWS-WEIGHT — DONE (feat/rival-rise-news-weight).** The surge dispatch headline now tiers by
@@ -1306,7 +1306,7 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   cap was also removed so a far-ahead rival surfaces as the MOST urgent dispatch (was silenced at gap>2). Pure,
   view-derived; the phrasing extracted to dynastyWorld.surgeHeadline (engine + tests share). Tests: dynastyWorld.unit
   (3-tier escalation + cap). 901 node + 128 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **RIVAL-RISE-NEWS-WEIGHT PR #144 — wait CI green + address review, then self-squash-merge.**
+- [x] **RIVAL-RISE-NEWS-WEIGHT PR #144 — DONE, MERGED.**
   Pushed feat/rival-rise-news-weight (ae68b1f). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
   review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, MERGE-CADENCE-HEALTH.
 - [x] **MERGE-CADENCE-HEALTH — DONE (inline gh-run audit, no PR — read-only ops verification).** Audited the
@@ -1318,7 +1318,7 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   9 omens + 29 dispatches + 54 agency acts, median ~180s (3 min) added/run. So ~48-min floor + PLAYTEST-2 ~76s +
   PLAYTEST-3 ~180s ≈ 52 min fast-path (a careful player far more) — the hour mandate holds with margin and the
   agency layer only WIDENS it. No prose lever needed. 902 node green, gate clean.
-- [ ] [WAIT-REVIEW] **WV-3-DEPTH-PLAYTEST-3 PR #146 — wait CI green + address review, then self-squash-merge.**
+- [x] **WV-3-DEPTH-PLAYTEST-3 PR #146 — DONE, MERGED.**
   Pushed feat/wv3-depth-playtest-3 (75b7803). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
   review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-DOSSIER-TAB.
 - [x] **RIVAL-DOSSIER-TAB — DONE (feat/rival-dossier-tab).** New RivalDossier component + a "Field" PlayScreen
@@ -1326,7 +1326,7 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   (gold window) / surging (red, above the player) / holding — with the player's line slotted in by rung. A
   fuller race readout than the compact Timeline strip. Tests: RivalDossier.browser (state badges, humanized
   labels, slotting, empty). 902 node + 131 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **RIVAL-DOSSIER-TAB PR #147 — wait CI green + address review, then self-squash-merge.**
+- [x] **RIVAL-DOSSIER-TAB PR #147 — DONE, MERGED.**
   Pushed feat/rival-dossier-tab. Full local gate passed. Loop: wait build-and-test + CodeQL, fold review forward
   + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-RUNG-TREND.
 - [x] **RIVAL-RUNG-TREND — DONE (feat/rival-rung-trend).** advanceWorld records a capped per-agent rungHistory
@@ -1334,7 +1334,7 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   + GameView carry it; the RivalDossier shows a ▲/—/▼ momentum arrow (gold/dim/red) beside each rival's rung.
   Pure + seeded (re-derived from advanceWorld, no new save state). Tests: dynastyWorld.unit (trend direction +
   determinism) + RivalDossier.browser (arrow render). 904 node + 131 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **RIVAL-RUNG-TREND PR #149 — wait CI green + address review, then self-squash-merge.**
+- [x] **RIVAL-RUNG-TREND PR #149 — DONE, MERGED.**
   Pushed feat/rival-rung-trend (b41524b). Full local gate passed. Loop: wait build-and-test + CodeQL, fold review
   forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, STELLAR-EPILOGUE-VARIETY.
 - [x] **STELLAR-EPILOGUE-VARIETY — DONE (feat/stellar-epilogue-variety).** The apex `end.reason` now resolves
@@ -1346,11 +1346,11 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **STELLAR-EPILOGUE-VARIETY PR #151 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/stellar-epilogue-variety (1b20414). Full local gate passed. Loop: wait build-and-test + CodeQL,
   fold review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, DEAD-LINE-IN-FIELD.
-- [ ] **DEAD-LINE-IN-FIELD — a rival stuck at rung 0 reads as fallen, not just low.** A line stuck
+- [ ] [WAIT-REVIEW] **DEAD-LINE-IN-FIELD — a rival stuck at rung 0 reads as fallen, not just low (after #151).** A line stuck
   at the ladder floor is effectively out of the race, but the dossier shows it the same as a low-but-climbing one.
   Mark a long-rung-0 rival "fallen" (a distinct dossier state) so the field reads the eliminations, not just the
   standings. Reads rungHistory (all-zero window); pure; tested.
-- [ ] **CONVERGENCE-FIELD-SUMMARY-LINE — a one-line "state of the race" atop the Field tab.** The dossier lists
+- [ ] [WAIT-REVIEW] **CONVERGENCE-FIELD-SUMMARY-LINE — a one-line "state of the race" atop the Field tab (after #151).** The dossier lists
   every line but gives no at-a-glance read; add a header line ("You lead the field" / "N lines ahead of you" /
   "the field has thinned to M") derived from the standings, so the player gets the gestalt before the rows.
   Pure read-model; tested.
