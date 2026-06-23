@@ -1285,11 +1285,11 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **AGENCY-IN-LEGACY PR #139 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/agency-in-legacy (d906833). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
   review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, AGENCY-PLAYSTYLE-AUDIT.
-- [ ] **AGENCY-PLAYSTYLE-AUDIT — measure how much the WV-3 agency levers actually get used.** Presses,
+- [ ] [WAIT-REVIEW] **AGENCY-PLAYSTYLE-AUDIT — measure how much the WV-3 agency levers actually get used (after #139).** Presses,
   invests, omen-heeds are now available; nothing measures whether a typical playthrough EXERCISES them or they
   sit unused (dead UI). Instrument per-run counts over many seeds + an always-press/always-invest policy vs a
   passive one; if a lever is near-zero-use, the trigger condition is too rare — tune it. Decide from figures.
-- [ ] **SHOCK-CLUSTERING-GUARD — prevent a brutal run of back-to-back shocks.** Shocks roll
+- [ ] [WAIT-REVIEW] **SHOCK-CLUSTERING-GUARD — prevent a brutal run of back-to-back shocks (after #139).** Shocks roll
   independently per tick; a harsh-era unlucky seed can stack 3+ blows in a row with no breathing room, which
   reads as unfair rather than dramatic. Add a deterministic cooldown/dampener after a shock (lower the next
   tick's chance) so losses have rhythm. Pure + seeded; SHOCK-CADENCE-AUDIT re-run to confirm; tested.
