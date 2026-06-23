@@ -228,15 +228,22 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
           </span>
           <!-- The money invest is disabled when unaffordable (mirrors the engine's affordability guard;
                cost = INVEST_MONEY_COST = 18). Heat ("Call in favours") is always available — its cost is a rise. -->
+          <!-- A11Y-INVEST-PRESS-LABELS: the visible labels are terse; the aria-labels say what the spend DOES. -->
           <button
             type="button"
             class="invest-btn"
+            aria-label="Spend funds to strengthen the line's recovery"
             disabled={!canAffordMoneyInvest}
             onclick={() => oninvest?.("money")}
           >
             Spend funds
           </button>
-          <button type="button" class="invest-btn" onclick={() => oninvest?.("heat")}>
+          <button
+            type="button"
+            class="invest-btn"
+            aria-label="Call in favours to strengthen the line's recovery (raises heat)"
+            onclick={() => oninvest?.("heat")}
+          >
             Call in favours
           </button>
         </div>

@@ -157,6 +157,9 @@ describe("PlayScreen (composed game screen)", () => {
       ...host.querySelectorAll<HTMLButtonElement>('[data-testid="recovery-invest"] .invest-btn'),
     ];
     expect(btns.length).toBe(2); // spend funds (money) + call in favours (heat)
+    // A11Y-INVEST-PRESS-LABELS: the terse button text carries a descriptive aria-label about what the spend does.
+    expect(btns[0]?.getAttribute("aria-label")).toMatch(/spend funds.*recovery/i);
+    expect(btns[1]?.getAttribute("aria-label")).toMatch(/favours.*recovery/i);
     btns[0]?.click();
     btns[1]?.click();
     expect(calls).toEqual(["money", "heat"]);

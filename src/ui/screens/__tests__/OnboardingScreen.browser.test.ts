@@ -96,4 +96,21 @@ describe("OnboardingScreen (FS-ONB-DRIFT: region/base/standing + ONB-1 naming + 
     // The prompt is the founding, not a crossing.
     expect(host.querySelector(".prompt")?.textContent ?? "").not.toContain("crossing");
   });
+
+  it("ONBOARDING-A11Y-FUNNEL: the funnel is a live region and the choice cards are keyboard-navigable buttons", () => {
+    component = mount(OnboardingScreen, {
+      target: host,
+      props: { content, onComplete: vi.fn(), onCancel: () => {} },
+    });
+    // A polite live region so a screen reader announces each new phase prompt as the card swaps.
+    const main = host.querySelector("main.onboarding");
+    expect(main?.getAttribute("aria-live"), "the funnel is a polite live region").toBe("polite");
+    // The choices are native <button>s — inherently tab-focusable / keyboard-activatable.
+    const choices = [...host.querySelectorAll("article.card .choices button")];
+    expect(choices.length, "the phase offers button choices").toBeGreaterThan(0);
+    expect(
+      choices.every((b) => b.tagName === "BUTTON" && !b.hasAttribute("disabled")),
+      "every choice is an enabled, keyboard-navigable button",
+    ).toBe(true);
+  });
 });
