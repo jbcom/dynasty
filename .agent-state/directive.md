@@ -1129,10 +1129,11 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   green; CodeRabbit pass; Gemini high finding (lastShock not cleared on the event-flow choose() path) FIXED +
   thread resolved; self-squash-merged. Post-merge Release + CD + CodeQL on main all SUCCESS (deployed). Synced
   main, deleted branch. Now on feat/convergence-ending-depth for the rolling backlog.
-- [ ] **WV-3-SHOCK-RECOVERY — a recovery ARC, not just a loss line (on feat/wv3-shock-recovery).** WV-3-SHOCK-SCENES narrates the loss for
-  one turn; the next lever is a RECOVERY beat — a shock that struck a meter/family should open a small later
-  opportunity to recover (rebuild after the fire, a remarriage after a death, clearing a scandal). Model it as
-  a seeded follow-on so the loss has a two-act shape (blow → recover/compound). Pure+seeded; re-audit divergence.
+- [x] **WV-3-SHOCK-RECOVERY — DONE (commit 71cdd79).** A meter blow now marks a stable shock_meter:<meter>
+  flag (heat excluded); on a QUIET saga tick rollSagaRecovery has a seeded chance to partially REBOUND one
+  outstanding blown meter (rebuilt/redeemed/convalescence/reconciled), apply the gain, clear the marker, and
+  surface a recovery note — the loss gets a blow→recover two-act shape, a missed recovery compounds. Pure +
+  seeded, replay bit-identical. Tests: sagaShock.unit rollSagaRecovery. 858 node + 112 browser green. PR next.
 - [x] **CONVERGENCE-ENDING-DEPTH — DONE (commit 40fdee0).** Reachability audit (convergenceReachability.unit)
   proves all 15 endings are reachable across a wide motivator×tier grid — caught + fixed a sweep blind spot
   (contributed_ally's reach[20,44] window shadowed by media_mogul). Every ending gained a distinct 1-2
@@ -1142,10 +1143,18 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   a gated, era-shifting ambient bed (founding → industrial → broadcast → stellar) would deepen the hour. Per
   the audio profile: gated, tested via the audio-graph harness, no autoplay. Enumerate the era→sound mapping
   first; keep it atmosphere (no melody-driven distraction from reading).
-- [ ] [WAIT-REVIEW] **CORPUS-MINE-INTERSECTIONS — mine the retired 504-cell corpus into braid fabric ([[FOUNDING-SPINE-PIVOT]]) (fresh branch post-#110).**
+- [ ] [WAIT-REVIEW] **CORPUS-MINE-INTERSECTIONS — mine the retired 504-cell corpus into braid fabric ([[FOUNDING-SPINE-PIVOT]]) (fresh branch).**
   The founding-spine pivot retired the 504 cells but the plan was to MINE them selectively into the braided
   intersection fabric the trigger lattice weaves. Audit what fabric exists vs the cells; mine the highest-value
   rival-family vignettes into the fabric index so cross-dynasty crossings have richer borrowed prose.
+- [ ] [WAIT-REVIEW] **SHOCK-FAMILY-SUCCESSION-PRESSURE — a family_death shock that takes the heir forces a real
+  succession scramble (fresh branch).** Today a family_death strikes a non-protagonist; deepen it so losing
+  the GROOMED heir (not just any member) makes the next succession harder/riskier (a weaker fallback heir,
+  a contested handoff), feeding the existing succession mechanic. Seeded; re-audit endKinds spread.
+- [ ] [WAIT-REVIEW] **DOSSIER-SHOCK-LEDGER — record shocks + recoveries in the run's inspectable history.** The
+  shock/recovery beats flash for one turn; add them to the Dossier/Timeline so a player can review the line's
+  disasters + comebacks across the hour (a "what befell the family" log). Reads the shock:* / recovered flags;
+  pure read-model, tested.
 - [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
   audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
   diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock
