@@ -1253,22 +1253,29 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   gates the PlayScreen invest prompt. Tests: sagaShock.unit (boost chance+mag, determinism) + loop.unit (spend
   + boost + one-pending guard + bit-identical reconstruct) + PlayScreen.visual (buttons fire/absent). 894 node
   + 125 browser green, full gate clean. [[mmm-save-and-chronology]] preserved.
-- [ ] [WAIT-REVIEW] **FORESHADOW-WEIGHT — the omen's certainty scales with the actual hazard (after #130).** SHOCK-FORESHADOW
-  is binary (omen or not); a founding-era line with heavy strain should read a GRAVER omen than a marginal one.
-  Tier the foreshadow text by exposure×strain ("a shadow over the season" → "the house braces for the worst"),
-  so dread is proportional. Pure, view-derived, deterministic; tested.
-- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust (after #130).**
+- [x] **FORESHADOW-WEIGHT — DONE (feat/foreshadow-weight).** foreshadowWeight() now tiers the omen by hazard:
+  "grave" (harsh era + un-recovered strain → "the house braces for the worst"), "marginal" (harsh era + only
+  kin to lose → "a shadow lies over the season"), or "none". shockForeshadow is a thin boolean wrapper; the
+  PlayScreen renders the tiered text. Dread is now proportional to the threat. Tests: sagaShock.unit (3-tier
+  gating + strain-dominates-kin) + the existing loop.unit omen test. 896 node + 126 browser green, gate clean.
+- [ ] [WAIT-REVIEW] **FORESHADOW-IN-TONE — the omen's visual register matches its weight (after #132).** FORESHADOW-WEIGHT
+  tiers the TEXT but the PlayScreen renders both the same muted style. Pass the weight to the view + style a
+  "grave" omen in a heavier register (deeper border, less dim) than a "marginal" one, so the dread is felt
+  visually, not just read. View-derived; tested.
+- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust (after #132).**
   A foreshadow that rarely precedes a real blow trains the player to ignore it; one that always does is just a
   spoiler. Instrument the foreshadow→next-shock correlation over many seeds; if it's miscalibrated, tune the
   threshold so an omen is a meaningful-but-not-certain warning. Decide from figures (like SHOCK-CADENCE-AUDIT).
-- [ ] [WAIT-REVIEW] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger (after #130).** A rebound
+- [ ] [WAIT-REVIEW] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger (after #132).** A rebound
   the player paid for reads the same as a lucky one in the "What Befell" log; stamp the invested recovery (e.g.
   recovered:<meter>:<year>:invested) so the ledger can mark "rebuilt by your own hand" — the player's agency
   shows in the family history. Pure read-model extension; tested.
-- [ ] [WAIT-REVIEW] **RECOVERY-CHOICE PR #130 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/recovery-choice (99b5213). Full local gate passed. Loop: wait build-and-test + CodeQL, read
-  CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge:
-  sync main, FORESHADOW-WEIGHT on a fresh branch.
+- [ ] [WAIT-REVIEW] **FORESHADOW-WEIGHT PR #132 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/foreshadow-weight (1fd5475). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
+  review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, FORESHADOW-IN-TONE.
+- [x] **RECOVERY-CHOICE PR #130 — DONE, MERGED (squash 61f9061; release cut 0.34.0).** Invest a meter to boost
+  the next rebound (side-log + deterministic boost + UI). Gemini caught a high-sev affordability exploit (free
+  money boost) — fixed (engine guard + disabled button), all 3 threads resolved, merged CLEAN. main synced.
 - [x] **RIVAL-RACE-PRESENCE PR #126 — DONE, MERGED (squash 0cf8514; release cut 0.32.0).** 4 units: falter/rise
   news, field strip, rival-fate ending. All review (Amazon-Q dedup, Gemini perf/DRY/test-comment) folded forward,
   all threads resolved, merged CLEAN. Post-merge Release+CD+CodeQL all SUCCESS (deployed). main synced.

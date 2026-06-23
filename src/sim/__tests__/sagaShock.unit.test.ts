@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { createRng } from "../rng";
 import {
   applyFamilyDeathShock,
+  foreshadowWeight,
   rollSagaRecovery,
   rollSagaShock,
   type SagaShock,
@@ -243,6 +244,19 @@ describe("shockExposure + shockForeshadow (SHOCK-FORESHADOW)", () => {
     expect(shockForeshadow("founding", ["base:press"], false)).toBe(false);
     // Medicine-rich far future (low exposure) → silent even with strain + kin.
     expect(shockForeshadow("ascension", [shockMeterFlag("money")], true)).toBe(false);
+  });
+
+  it("FORESHADOW-WEIGHT: the omen tiers by hazard — grave (strain) > marginal (kin only) > none", () => {
+    // Harsh era + un-recovered strain → GRAVE (the worst is plausibly near).
+    expect(foreshadowWeight("founding", [shockMeterFlag("money")], false)).toBe("grave");
+    // Harsh era + kin to lose but NO active strain → MARGINAL (a fainter unease).
+    expect(foreshadowWeight("founding", [], true)).toBe("marginal");
+    // Harsh era, nothing at stake → NONE.
+    expect(foreshadowWeight("founding", ["base:press"], false)).toBe("none");
+    // Safe era → NONE even with strain + kin.
+    expect(foreshadowWeight("ascension", [shockMeterFlag("money")], true)).toBe("none");
+    // Strain DOMINATES kin: a strained line reads grave whether or not it has kin.
+    expect(foreshadowWeight("founding", [shockMeterFlag("reputation")], true)).toBe("grave");
   });
 });
 
