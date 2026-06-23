@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createRng } from "../rng";
-import { applyFamilyDeathShock, rollSagaShock, type SagaShock } from "../sagaShock";
+import { applyFamilyDeathShock, rollSagaShock, type SagaShock, shockNote } from "../sagaShock";
 import type { FamilyState, LiveMember } from "../state";
 
 /**
@@ -86,5 +86,18 @@ describe("rollSagaShock (WV-3-MORTALITY)", () => {
       1885,
     );
     expect(after).toEqual(fam);
+  });
+
+  it("shockNote builds a one-line aftermath for each shock kind, null for none (WV-3-SHOCK-SCENES)", () => {
+    expect(shockNote({ kind: "none" })).toBeNull();
+    const death = shockNote({ kind: "family_death", memberId: "c1", note: "plague" });
+    expect(death?.kind).toBe("family_death");
+    expect(death?.text).toMatch(/death|family/i);
+    const fire = shockNote({ kind: "meter_blow", meter: "money", delta: -20, note: "fire" });
+    expect(fire?.kind).toBe("meter_blow");
+    expect(fire?.text).toMatch(/fire|loss/i);
+    // An unknown note still yields a sensible fallback line (never empty).
+    const odd = shockNote({ kind: "meter_blow", meter: "power", delta: -5, note: "mystery" });
+    expect(odd?.text.length).toBeGreaterThan(0);
   });
 });

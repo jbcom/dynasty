@@ -141,6 +141,12 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     <!-- The NOVEL: the line's act reads as paged scenes that frame the choice. The act-chapter title
          lives in the slim always-visible header (saga-head), not repeated here. -->
     <div class="event-pane">
+      <!-- WV-3-SHOCK-SCENES: a disruption shock (plague death / fire / scandal) that struck this turn
+           surfaces as a one-line aftermath above the scene — the line's loss, narrated, not just a silent
+           meter/family change. Shown for one move, then cleared. -->
+      {#if view.shock}
+        <p class="shock-aftermath" data-shock={view.shock.kind}>{view.shock.text}</p>
+      {/if}
       <!-- WV-1: cross-dynasty intersections are WOVEN into the scene's paged prose by the reader (not a
            detached "Where paths cross" wall under the choices). The reader folds the crossing in as
            narration the player turns through, so a crossing feels like a moment in the family's story. -->
@@ -329,6 +335,18 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   .content {
     flex: 1;
     overflow-y: auto;
+  }
+  .shock-aftermath {
+    margin: 0 auto 0.4rem;
+    max-width: 64ch;
+    padding: 0.5rem 0.9rem;
+    border-left: 3px solid var(--mmm-red, #b22);
+    background: color-mix(in srgb, var(--mmm-red, #b22) 8%, transparent);
+    border-radius: var(--mmm-radius);
+    font-family: var(--mmm-font-body);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: color-mix(in srgb, var(--mmm-red, #b22) 75%, var(--mmm-text));
   }
   .event-pane {
     display: flex;

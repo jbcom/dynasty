@@ -754,4 +754,49 @@ describe("Game loop", () => {
     const crossFlags = g.view.state.flags.filter((f) => f.startsWith("crossed:"));
     expect(new Set(crossFlags).size).toBe(crossFlags.length);
   });
+
+  it("WV-3-SHOCK-SCENES: a disruption shock surfaces in view.shock for one move, then clears", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "anglo_protestant",
+      year: 1776,
+      archetype: "political" as const,
+      gender: "male" as const,
+      surname: "Shock",
+      seed: "shockview",
+      originId: "composed:ireland:origins",
+    };
+    // Drive the run; a `shock:*` flag stamped means a shock fired that move — and view.shock must carry its
+    // one-line aftermath on that turn. (The founding-era hazard is ~0.9 exposure, so a multi-gen run hits one.)
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    let sawShockView = false;
+    let clearedAfter = false;
+    let prevHadShock = false;
+    let guard = 0;
+    while (!g.finished && guard < 400) {
+      const v = g.view;
+      // When the shock note is present, a matching shock:* flag must exist (the view reflects real state).
+      if (v.shock) {
+        sawShockView = true;
+        expect(v.state.flags.some((f) => f.startsWith("shock:"))).toBe(true);
+        prevHadShock = true;
+      } else if (prevHadShock) {
+        clearedAfter = true; // a later move cleared the one-turn note
+        prevHadShock = false;
+      }
+      const s = v.saga.scene;
+      if (s) {
+        if (s.decision) g.pickDecision(0);
+        else if (s.beats.length) g.pickBeat(0);
+        else break;
+      } else if (v.currentEvent?.choices[0]) {
+        g.choose(v.currentEvent.choices[0].id);
+      } else break;
+      guard++;
+    }
+    expect(sawShockView, "a shock surfaced in view.shock during the run").toBe(true);
+    expect(clearedAfter, "the one-turn aftermath note cleared on a later move").toBe(true);
+  });
 });

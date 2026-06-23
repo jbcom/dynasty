@@ -54,6 +54,7 @@ function view(): GameView {
     rung: 0,
     convergence: null,
     lastLedger: [],
+    shock: null,
   };
 }
 

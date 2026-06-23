@@ -93,6 +93,33 @@ export function rollSagaShock(
   return { kind: "meter_blow", meter: blow.meter, delta, note: blow.note };
 }
 
+/** A short, UI-facing aftermath note for a shock — what the player is told happened (WV-3-SHOCK-SCENES). */
+export interface SagaShockNote {
+  kind: Exclude<SagaShockKind, "none">;
+  /** A one-line era-neutral aftermath sentence (the SceneReader/PlayScreen surfaces it for one turn). */
+  text: string;
+  /** The flavor tag (plague/fire/scandal/…) for any styling. */
+  note: string;
+}
+
+/** The aftermath lines per (kind, note). Era-neutral + short — a loss beat the player reads once. */
+const SHOCK_TEXT: Record<string, string> = {
+  family_death: "A death in the family — the plague took one of your own this season.",
+  "meter_blow:plague": "Plague swept through; the household's health is broken for a time.",
+  "meter_blow:fire": "Fire took the stores — a hard, sudden loss of fortune.",
+  "meter_blow:scandal": "A scandal spread faster than any denial; the name is tarnished.",
+  "meter_blow:betrayal": "A trusted hand turned; loyalty bought over years drained in a day.",
+  "meter_blow:scrutiny": "Watchful eyes turned your way — the line draws dangerous attention.",
+};
+
+/** Build the one-line aftermath note for a resolved shock (null for `none`). Pure. */
+export function shockNote(shock: SagaShock): SagaShockNote | null {
+  if (shock.kind === "none") return null;
+  const key = shock.kind === "family_death" ? "family_death" : `meter_blow:${shock.note ?? ""}`;
+  const text = SHOCK_TEXT[key] ?? "A sudden reversal struck the line this season.";
+  return { kind: shock.kind, text, note: shock.note ?? "" };
+}
+
 /** Apply a resolved family_death shock to a family (mark the struck member died). Pure. No-op otherwise. */
 export function applyFamilyDeathShock(
   family: FamilyState,
