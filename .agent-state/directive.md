@@ -101,12 +101,15 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   504 acts" + DEPTH-1 close-succession assume the 504-cell corpus; the spine.act.json is a new member with
   spine: ids. Update both to account for the spine (count = 504 + spine acts; DEPTH-1 scopes to cell acts or
   includes spine closes). Then commit FS-6 (spine prose) + FS-6b (destinies) + FS-6c together, green.
-- [ ] **FS-7 onboarding → diegetic EPOCH-0 BIRTH.** One line cleans up onboarding back toward the original
-  Epoch-0 plan ([[novel-not-fragments]], the OB-* birth work): start DIEGETICALLY + COMPOSE the family as
-  the progenitor grows from birth into a man/woman — given name, gender, class, FIRST JOB, BEST FRIEND,
-  LIFE PARTNER — all story SEEDS, lived rather than picked from a wave×class cell menu. Reuse ONB-1 naming.
-- [ ] **FS-8 live-verify the hour+ playthrough** — one line 1776→stars, waves braiding in, era-distinct
-  decisions, reads as ONE strong story. THEN revisit the visual layer.
+- [ ] [WAIT] **FS-7 onboarding → diegetic EPOCH-0 BIRTH — after FS-6 joint commit.** (Shares the working tree
+  with the uncommitted FS-6b/normalizer changes + the actively-writing spine.act.json; can't cleanly land
+  until FS-6/6b/6c commit.) One line cleans up onboarding toward the original Epoch-0 plan
+  ([[novel-not-fragments]]): start DIEGETICALLY + COMPOSE the family as the progenitor grows from birth into
+  a man/woman — given name, gender, class, FIRST JOB, BEST FRIEND, LIFE PARTNER — story SEEDS lived, not a
+  wave×class cell menu. Reuse ONB-1 naming. [WAIT] FS-6.
+- [ ] [WAIT] **FS-8 live-verify the hour+ playthrough — after the spine is authored + wired.** One line
+  1776→stars, waves braiding in, era-distinct decisions, reads as ONE strong story. THEN revisit the visual
+  layer. [WAIT] FS-6/FS-7.
 
 ### VL (user, 2026-06-22): VISUAL LAYER — portraits + map, GenAI-generated — DEFERRED behind FS
 DEFERRED: fix the story architecture (FS) first; a prettier UI on structurally-identical stories doesn't
