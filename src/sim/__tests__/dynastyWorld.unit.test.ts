@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
-import { advanceWorld, createDynastyWorld, detectGlimpses, nudgeRival } from "../dynastyWorld";
+import {
+  advanceWorld,
+  createDynastyWorld,
+  detectGlimpses,
+  nudgeRival,
+  surgeHeadline,
+} from "../dynastyWorld";
 import { createRng } from "../rng";
 
 /** SS-8 — the multi-line world: every non-player wave grows as a deterministic GOAP agent; glimpses surface relations. */
@@ -183,5 +189,20 @@ describe("dynasty world (SS-8)", () => {
       return total;
     };
     expect(falterCount(1780)).toBeGreaterThan(falterCount(2300));
+  });
+
+  it("RIVAL-RISE-NEWS-WEIGHT: the surge headline tiers by the rung gap (mild → urgent)", () => {
+    const g1 = surgeHeadline("Bavaria", 1);
+    const g2 = surgeHeadline("Bavaria", 2);
+    const g3 = surgeHeadline("Bavaria", 3);
+    const g5 = surgeHeadline("Bavaria", 5);
+    // All name the rival; the wording escalates with the gap and 3+ shares the gravest tier.
+    for (const h of [g1, g2, g3, g5]) expect(h).toContain("Bavaria");
+    expect(g1).toMatch(/edged ahead/i);
+    expect(g2).toMatch(/pulling away/i);
+    expect(g3).toMatch(/left you behind/i);
+    expect(g5).toBe(g3); // gap >= 3 is the gravest, capped tier
+    // The three tiers are distinct phrasings.
+    expect(new Set([g1, g2, g3]).size).toBe(3);
   });
 });

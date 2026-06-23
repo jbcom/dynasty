@@ -12,6 +12,7 @@ import {
   type Glimpse,
   humanizeRivalLabel,
   nudgeRival,
+  surgeHeadline,
 } from "../sim/dynastyWorld";
 import { advanceFamily, applyChoice, applySuccessionToFamily, succeedToHeir } from "../sim/effects";
 import { macroActForYear } from "../sim/macroActs";
@@ -202,13 +203,17 @@ export class Game {
     }
     // SURGE news: a rival that has climbed ABOVE the player's rung (within sight) — the race's pressure half.
     // A faltering rival can't surge (the !faltering guard), and `seen` prevents any double-dispatch (Amazon-Q #126).
+    // RIVAL-RISE-NEWS-WEIGHT: the headline's urgency scales with the rung GAP — just ahead reads milder than a
+    // line pulling away toward the stars while you're earthbound. (No upper cap now: a far-ahead rival is the
+    // MOST urgent dispatch, not silenced.)
     for (const s of this.world.snapshots) {
-      if (s.rung > playerRung && s.rung - playerRung <= 2 && !s.faltering && !seen.has(s.id)) {
+      const gap = s.rung - playerRung;
+      if (gap > 0 && !s.faltering && !seen.has(s.id)) {
         seen.add(s.id);
         out.push({
           id: s.id,
           kind: "surged",
-          headline: `The ${humanizeRivalLabel(s.label)} line has outpaced you — its star rises.`,
+          headline: surgeHeadline(humanizeRivalLabel(s.label), gap),
         });
       }
     }
