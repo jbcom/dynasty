@@ -62,9 +62,11 @@ describe("epoch-0 birth scene (EI-3 EPOCH-0 OPENING ACT)", () => {
     const scene = buildNamingScene();
     expect(() => SceneSchema.parse(scene)).not.toThrow();
     expect(scene.id).toBe("epoch0:naming");
-    // The name is spoken in-fiction via identity tokens (resolved from the live family at render).
+    // The name is spoken in-fiction via identity tokens (resolved from the live family at render) — EI-5 also
+    // speaks the GENDER ({child_kind} = son/daughter) + grounds it in the family's tongue.
     const text = [...scene.prose, ...scene.beats.flatMap((b) => b.prose)].join(" ");
     expect(text).toMatch(/\{full_name\}|\{given_name\}/);
+    expect(text, "EI-5: the naming speaks gender diegetically").toContain("{child_kind}");
     expect(scene.beats.some((b) => b.choice?.setFlags.includes("epoch0:named"))).toBe(true);
     // It only runs after the place resolved, and flows to childhood.
     expect(scene.requires.flags).toContain("epoch0:place_resolved");

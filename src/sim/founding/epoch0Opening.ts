@@ -101,8 +101,8 @@ export function buildNamingScene(): Scene {
     sense: "sound",
     prose: [
       "A face leans close — the first face, vast and near — and a voice gives the warmth a shape.",
-      "“There now,” it says, and then your name, the first word that is only yours: {full_name}. The {family_name} line has a new pair of hands.",
-      "You do not understand the words. You understand that they are about you, and that they are glad.",
+      "“A {child_kind},” it says, the gladness plain even to you who have no words yet — and then your name, the first that is only yours, given in the family's own tongue: {full_name}. The {family_name} line has a new pair of hands.",
+      "You do not understand the words. You understand that they are about you, and that they are a kind of promise.",
     ],
     beats: [
       {
