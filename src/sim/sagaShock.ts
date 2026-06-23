@@ -82,7 +82,15 @@ export function foreshadowWeight(
   hasKin: boolean,
 ): ForeshadowWeight {
   if (shockExposure(macroActId) < 0.75) return "none";
-  const strained = [...flags].some((f) => f.startsWith("shock_meter:"));
+  // Iterate directly (no [...flags] spread) — this runs on the hot view path; a for-of short-circuits
+  // without allocating an array each call (Gemini #132 perf).
+  let strained = false;
+  for (const f of flags) {
+    if (f.startsWith("shock_meter:")) {
+      strained = true;
+      break;
+    }
+  }
   if (strained) return "grave"; // un-recovered loss + a harsh era → the worst is plausibly near
   if (hasKin) return "marginal"; // exposed, kin to lose, but no active strain → a fainter unease
   return "none";
