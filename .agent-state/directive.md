@@ -1118,6 +1118,13 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ## Gameplay-depth backlog (the "hour+" mandate — keep the queue non-empty, [[never-drain-queue]])
 
+- [ ] [WAIT-REVIEW] **SPINE-DEPTH PR #106 — wait CI green + address CodeRabbit, then self-squash-merge.**
+  Pushed feat/spine-depth-content (27 commits) → PR #106. The whole spine-depth milestone: SAGA-RESTORE-CURSOR,
+  SPINE-ACT-DEPTH (all 10 acts, 3 interstitials each, hour mandate met), SAGA-CLOCK-DECOUPLE,
+  TRIGGER-CROSSING-RECORD, SPINE-WEAVE-PAYOFF ×2, MAP-ERA-PROGRESS-RICHER + content QA. Loop: wait
+  build-and-test + CodeQL green, read every CodeRabbit/Amazon-Q comment, fix in forward commits + resolve all
+  threads, keep Release/CD green, self-squash-merge once green + threads resolved ([[babysit-pr]],
+  [[jbcom-org-ruleset]]). After merge: sync main, new branch for WV-3-YUKA.
 - [ ] **WV-3-YUKA — emergent rival reactions (anti-Suzerain layer 2).** WV-3 proved seeded market/run
   divergence; the further layer ([[emergent-cause-effect-sim]]) is rival lines REACTING to the player
   (Yuka-style GOAP) + seeded disease/disruption shocks the player lives through, so playthroughs diverge in
