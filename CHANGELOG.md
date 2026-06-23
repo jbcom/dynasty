@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.51.0](https://github.com/jbcom/dynasty/compare/v0.50.0...v0.51.0) (2026-06-23)
+
+
+### Features
+
+* era-keyed dread omen, ledger sort proof, finale screenshot verification ([#165](https://github.com/jbcom/dynasty/issues/165)) ([dd8b8bc](https://github.com/jbcom/dynasty/commit/dd8b8bc4ba0709eab7d5b4c8ea7915924254316a))
+
 ## [0.50.0](https://github.com/jbcom/dynasty/compare/v0.49.0...v0.50.0) (2026-06-23)
 
 
