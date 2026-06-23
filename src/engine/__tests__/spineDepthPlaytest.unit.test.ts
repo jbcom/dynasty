@@ -243,7 +243,9 @@ describe("SPINE-DEPTH-PLAYTEST: a full founding→stars run's playable depth", (
     // holds with margin (fast-path ~52 min; a careful player far more). The agency layer only widens the hour.
     console.log(`[${summary}]`);
 
-    // The agency+atmosphere layer must ACTUALLY surface across the sweep (not theoretical).
+    // The agency+atmosphere layer must ACTUALLY surface across the sweep (not theoretical) — including the
+    // foreshadow omens (Amazon-Q #146: guard against omens silently ceasing to fire).
+    expect(totalOmens, summary).toBeGreaterThan(0);
     expect(totalDispatches, summary).toBeGreaterThan(0);
     expect(totalAgencyActs, summary).toBeGreaterThan(0);
     // …and contribute real added time on top of the floor + PLAYTEST-2 surface — the hour only widens.
