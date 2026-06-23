@@ -678,6 +678,10 @@ export class Game {
   choose(choiceId: string): void {
     if (!this.current) throw new Error("No current event to choose on");
     if (this.state.end) throw new Error("Run has ended");
+    // The saga shock aftermath is a one-MOVE note: clear it on an event-flow advance too, else a note set
+    // as a saga act ended would linger across the event flow and reappear when the next saga act begins
+    // (Gemini #110). The event path doesn't roll saga shocks, so this only ever clears.
+    this.lastShock = null;
     const result = applyChoice(this.content, this.state, this.current, choiceId, this.rng);
     this.state = result.state;
     this.lastLedger = result.newLedger;
