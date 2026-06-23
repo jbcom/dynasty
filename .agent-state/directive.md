@@ -1277,15 +1277,15 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **RECOVERY-INVEST-IN-LEDGER PR #137 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/recovery-invest-in-ledger (c065136). Full local gate passed. Loop: wait build-and-test + CodeQL,
   fold review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, AGENCY-IN-LEGACY.
-- [ ] **AGENCY-IN-LEGACY — the LegacyReport tallies the player's WV-3 agency.**
+- [ ] [WAIT-REVIEW] **AGENCY-IN-LEGACY — the LegacyReport tallies the player's WV-3 agency (after #137).**
   The end-game shows the field + hard seasons but not what the PLAYER actively DID across the run — rivals
   pressed, recoveries invested, omens heeded. Tally these from the side-logs/flags into a "By Your Own Hand"
   line in the LegacyReport, so the close credits the player's interventions. Pure read-model; tested.
-- [ ] **AGENCY-PLAYSTYLE-AUDIT — measure how much the WV-3 agency levers actually get used across runs.** Presses,
+- [ ] [WAIT-REVIEW] **AGENCY-PLAYSTYLE-AUDIT — measure how much the WV-3 agency levers actually get used (after #137).** Presses,
   invests, omen-heeds are now available; nothing measures whether a typical playthrough EXERCISES them or they
   sit unused (dead UI). Instrument per-run counts over many seeds + an always-press/always-invest policy vs a
   passive one; if a lever is near-zero-use, the trigger condition is too rare — tune it. Decide from figures.
-- [ ] **SHOCK-CLUSTERING-GUARD — prevent a brutal run of back-to-back shocks (a death spiral).** Shocks roll
+- [ ] [WAIT-REVIEW] **SHOCK-CLUSTERING-GUARD — prevent a brutal run of back-to-back shocks (after #137).** Shocks roll
   independently per tick; a harsh-era unlucky seed can stack 3+ blows in a row with no breathing room, which
   reads as unfair rather than dramatic. Add a deterministic cooldown/dampener after a shock (lower the next
   tick's chance) so losses have rhythm. Pure + seeded; SHOCK-CADENCE-AUDIT re-run to confirm; tested.
