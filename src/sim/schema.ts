@@ -313,7 +313,10 @@ export type WorldTimeline = z.infer<typeof WorldTimelineSchema>;
 /** A single era's event pool file (data/eras/<id>.json). */
 export const EraEventsSchema = z.object({
   era: z.string().min(1),
-  events: z.array(EventSchema).min(1),
+  // May be empty (FS-SCHEMA-EMPTY-ERA): a SPINE-DRIVEN era legitimately has no event-card pool — the
+  // authored saga spine renders it instead. Non-spine eras still populate their pool; the schema no longer
+  // forces ≥1 so a future spine-only era can declare an empty pool without a placeholder event.
+  events: z.array(EventSchema),
 });
 export type EraEvents = z.infer<typeof EraEventsSchema>;
 

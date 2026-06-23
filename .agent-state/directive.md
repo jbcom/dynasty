@@ -848,7 +848,22 @@ onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival frami
 
 ## FS-RETIRE-PROLOGUE — retire the dead 1885 Trump-line prologue era (milestone, split from FS-ONB-DRIFT d)
 
+- [ ] **FS-SPINE-BRANCH-ONRAMPS — move destiny branch on-ramps from origins choices into the spine
+  (PREREQUISITE for FS-RETIRE-PROLOGUE).** Discovered this session: the dead origins events are the LIVE
+  source of the destiny-signature flags (nazi/megachurch/theocracy/media/westcoast) that `branch.ts` +
+  `branch.unit.test.ts` require for "every branch is reachable from an origins choice." Under the founding-
+  spine pivot, branches should fork off the ONE spine (the design's "branches off the one timeline"). So the
+  spine's per-era DecisionArchitecture choices must set the destiny on-ramp flags, and branch reachability
+  must be provable from SPINE choices, not origins events. Steps: (1) enumerate the destiny on-ramp flags +
+  where origins sets them; (2) add them to the relevant spine decision points; (3) rewrite branch.unit.test
+  to assert reachability from spine choices; (4) confirm the destiny endings stay reachable. THEN
+  FS-RETIRE-PROLOGUE can empty origins. Net-new pivot fiction, milestone-sized.
+- [x] **FS-SCHEMA-EMPTY-ERA — DONE.** Relaxed `EraEventsSchema.events` from `.min(1)` to allow `[]` (a
+  spine-driven era legitimately has no event-card pool). Schema test added (empty pool validates; populated
+  still does). 749 unit + tsc + biome check green. Unblocks the eventual FS-RETIRE-PROLOGUE emptying once
+  FS-SPINE-BRANCH-ONRAMPS rehomes the branch flags.
 - [ ] **FS-RETIRE-PROLOGUE — retire/convert the dead 1885 Trump-line prologue era (milestone).**
+  BLOCKED on FS-SPINE-BRANCH-ONRAMPS (origins events are the live branch-flag source) + FS-SCHEMA-EMPTY-ERA.
 The whole `new-york/1885-1946-origins` era (47 events: Friedrich-leaves-Kallstadt → Bavaria → Fred the
 builder → Queens → the 1946 birth, incl. the `ev_line_fails`→`end_line_failed` failure chain and the
 `dynasty_doomed`/`fred_builder`/`returned_to_ny` flags) is PRE-PIVOT content. The live game routes founded
@@ -876,8 +891,36 @@ EVENTS, NOT the origins ERA ID:
   They're reachable ONLY via autoPlaythrough's direct pickNextEvent. So EMPTYING the origins event pool is
   safe for the live game — the cleanest path (vs. authoring 47 replacement events). Decision: EMPTY the pool
   (keep the era id + budget), not rewrite it; if a founding-era event layer is wanted later it's additive.
-Steps when picked up: (1) replace the 47 pre-pivot origins EVENTS with founding-era-appropriate content (or
-empty the era's event pool so the spine drives it) — the era id + budget stay; (2) remove the ev_line_fails
-chain + end_line_failed + the dead doom/redemption flags; (3) rewrite prologue-gating for the founding open;
-(4) confirm branch.ts + initState default still resolve; (5) full gate + autoPlaythrough no longer
-early-deaths + Chrome verify cold start opens on the founding spine.
+⚠️ ATTEMPTED + REVERTED (this session) — emptying the origins events is NOT a cleanup, it's blocked on a
+REAL architecture gap. Two failed hypotheses, then stopped + reverted (kept the branch green):
+  1. Empty `events: []` → schema `EraEventsSchema.events.min(1)` rejects it. (Relaxable, did so.)
+  2. With schema relaxed → 11 tests across 6 files fail. ROOT CAUSE: **the origins events are the LIVE
+     branch-flag SOURCE.** `branch.unit.test.ts` asserts "every branch is reachable from an ORIGINS choice"
+     — the nazi/megachurch/theocracy/media/westcoast signature flags are set by origins-event choices.
+     Emptying origins removes the branch ON-RAMPS. Also breaks branch-density, timelines (brewing→bootlegger
+     bridge), terms (interp fixtures), effects/harness.
+THE REAL WORK (this is the pivot's unfinished business, not a delete): the destiny BRANCH ON-RAMPS must be
+REHOMED into the spine (the founding-spine design's "branches off the one timeline" model — the spine's
+DecisionArchitecture should set the destiny-signature flags) BEFORE the origins events can be retired.
+Until then the dead Trump-prologue events are load-bearing for branch reachability. Re-scope: FS-RETIRE-
+PROLOGUE now DEPENDS ON a prior unit "FS-SPINE-BRANCH-ONRAMPS — move destiny on-ramps from origins choices
+into the spine." Only after that can origins be emptied. Schema relax (events.min(1)→allow empty) is a
+prerequisite + harmless to land early. autoPlaythrough early-death is cosmetic (acceptance gate tolerates
+it) so there's NO urgency forcing a half-done retirement.
+
+PRIOR DEPENDENCY MAP (still valid for the eventual retirement) — touches exactly these:
+- `src/data/eras/new-york/1885-1946-origins/events.json` — empty `events: []` (keep `era`). NO downstream
+  era references any origins-set flag (dynasty_capital/fred_builder/real_capital/returned_to_ny/etc. — all
+  0 refs outside origins), so emptying is self-contained.
+- `src/data/endings.json` — remove `end_line_failed` (kind "origins", the only consumer of `line_failed`).
+- `src/data/__tests__/prologue-gating.unit.test.ts` — RETIRE (pure pre-pivot Trump-prologue contract:
+  asserts the game opens on Friedrich/Kallstadt + the 1946 birth — both false under the spine pivot).
+- `src/sim/__tests__/terms.unit.test.ts` — the TRICKY one: it uses origins events (Trump/Musk/Kennedy
+  prologue) as fixtures to test BOTH dead-prologue gating (retire those cases) AND still-live
+  TERM-INTERPOLATION logic ({family_name} etc., used by the live SceneReader). REPOINT the term-interp
+  cases to a spine/fixture event; retire only the prologue-gating cases. Don't lose live term coverage.
+- `branch.ts` comment about "origins.json" is stale (no such file); verify branch coloring is unaffected.
+Steps when picked up: (1) empty origins events.json; (2) remove end_line_failed + line_failed; (3) retire
+prologue-gating.unit.test.ts; (4) split terms.unit.test.ts — repoint live term-interp to a non-origins
+fixture, drop the prologue cases; (5) confirm branch.ts + initState default resolve; (6) full gate +
+autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the founding spine.
