@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.28.0](https://github.com/jbcom/dynasty/compare/v0.27.0...v0.28.0) (2026-06-23)
+
+
+### Features
+
+* **saga:** SAGA-AUDIO-ATMOSPHERE — ambient bed shifts across the saga journey ([#116](https://github.com/jbcom/dynasty/issues/116)) ([cf2aecc](https://github.com/jbcom/dynasty/commit/cf2aecc3d26a28a18b79a6d2a0cc1524af415c59))
+
 ## [0.27.0](https://github.com/jbcom/dynasty/compare/v0.26.0...v0.27.0) (2026-06-23)
 
 
