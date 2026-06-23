@@ -36,9 +36,12 @@ export function getCulture(file: OnomasticsFile, id: string): Culture {
 }
 
 /** A seeded given-name pick from the culture's pool for the given sex. */
-export function pickGivenName(culture: Culture, sex: Sex, rng: Rng): string {
+export function pickGivenName(culture: Culture, sex: Sex, rng: Rng, exclude?: string): string {
   const pool = sex === "male" ? culture.givenMale : culture.givenFemale;
-  return rng.pick(pool);
+  // ONO-DEDUP: avoid given==surname. Filter the surname out when the pool has another option; if it's the
+  // only name available, keep it (correctness over the cosmetic dedup) rather than return empty.
+  const candidates = exclude ? pool.filter((n) => n !== exclude) : pool;
+  return rng.pick(candidates.length > 0 ? candidates : pool);
 }
 
 /**
@@ -92,7 +95,14 @@ export function suggestSurnames(culture: Culture, rng: Rng, count = 3): string[]
  * appropriate given names the player picks from at the naming beat (or types their own).
  * Always has options (the culture pools are non-empty by schema). Pure + seeded.
  */
-export function suggestGivenNames(culture: Culture, sex: Sex, rng: Rng, count = 3): string[] {
+export function suggestGivenNames(
+  culture: Culture,
+  sex: Sex,
+  rng: Rng,
+  count = 3,
+  // ONO-DEDUP: exclude the chosen SURNAME so a given==surname collision ("Sterling Sterling") never offers.
+  exclude?: string,
+): string[] {
   const pool = sex === "male" ? culture.givenMale : culture.givenFemale;
   const bag = [...pool];
   const r = rng.fork(`given:${sex}`);
@@ -104,7 +114,7 @@ export function suggestGivenNames(culture: Culture, sex: Sex, rng: Rng, count = 
   const seen = new Set<string>();
   for (const s of bag) {
     if (out.length >= count) break;
-    if (!seen.has(s)) {
+    if (!seen.has(s) && s !== exclude) {
       seen.add(s);
       out.push(s);
     }

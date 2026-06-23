@@ -135,7 +135,8 @@ const surnameSuggestions = $derived(
 );
 const givenSuggestions = $derived(
   culture && gender
-    ? suggestGivenNames(culture, gender, createRng(`${seed}::given-offer`), 3)
+    ? // ONO-DEDUP: never offer a given name equal to the chosen surname (e.g. "Sterling Sterling").
+      suggestGivenNames(culture, gender, createRng(`${seed}::given-offer`), 3, surnameChosen)
     : [],
 );
 

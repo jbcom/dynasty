@@ -1016,11 +1016,11 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   Before opening the single PR ([[one-branch-local-review]]): full local gate + reviewer trio over the whole
   branch diff (origin..HEAD), fold findings, full e2e (pnpm test:e2e), build, and a final Chrome playthrough
   of an hour-ish run to confirm the founding→stars arc reads as one strong story. THEN open the PR.
-- [ ] **ONO-DEDUP — onomastics can draw given==surname (e.g. "Sterling Sterling").** Surfaced verifying
-  FS-SPINE-ORIGIN-FLAVOR: suggestGivenNames + suggestSurnames can independently land the same string for some
-  cultures (Anglo-Protestant "Sterling" is both a given + a surname). Add a guard so the auto-suggested given
-  name (and the default seeded pick) never equals the chosen/suggested surname — re-draw on collision. Small,
-  in src/sim/onomastics.ts + a unit test.
+- [x] **ONO-DEDUP — DONE.** Added an optional `exclude` param to `suggestGivenNames` + `pickGivenName`
+  (skip/re-draw when a given name equals the chosen surname), threaded the chosen surname through
+  OnboardingScreen's givenSuggestions + founding.ts's seeded pick. Falls back to the un-filtered pool only if
+  the surname is the sole available name (correctness over cosmetics). 2 dedup unit tests; 742 unit + onboarding
+  browser + tsc + check green. No more "Sterling Sterling".
 - [ ] **FS-SPINE-ORIGIN-FLAVOR-DEPTH — extend base-flavored openings beyond g0 (incremental).** The MVP
   flavored only the FOUNDING act (g0). The early-republic + antebellum acts (g1/g2) could likewise open
   differently for a press vs. land vs. military line, deepening how much the origin choice echoes forward.

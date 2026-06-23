@@ -161,7 +161,7 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
   const culture = getCulture({ cultures: content.onomastics }, c.culture);
   const nameRng = createRng(`${c.seed}::founding:${originId}:given`);
   const chosenGiven = c.given?.trim().replace(/\s+/g, " ").slice(0, 32);
-  const progenitorGiven = chosenGiven || pickGivenName(culture, c.gender, nameRng);
+  const progenitorGiven = chosenGiven || pickGivenName(culture, c.gender, nameRng, c.surname);
   const progenitorName = `${progenitorGiven} ${c.surname}`;
 
   const birthYear = c.year;

@@ -62,6 +62,8 @@ describe("OnboardingScreen (FS-ONB-DRIFT: region/base/standing + ONB-1 naming + 
     expect(surname).toBeTruthy();
     expect(["male", "female"]).toContain(gender);
     expect(given).toBeTruthy();
+    // ONO-DEDUP: the first-offered given name picked by the funnel is never equal to the chosen surname.
+    expect(given).not.toBe(surname);
     expect(typeof culture).toBe("string");
     // FS-7b: the diegetic Epoch-0 life-seeds are composed (first job / best friend / life partner).
     expect(lifeSeeds.firstJob).toBeTruthy();
