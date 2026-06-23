@@ -65,7 +65,7 @@ describe("PlayScreen (composed game screen)", () => {
     expect(host.textContent).toContain("Timeline");
     expect(host.textContent).toContain("Dossier");
     // Tabs render REAL 2D line-icon assets, not Unicode glyphs (de-ui-c).
-    const tabIcons = [...host.querySelectorAll("nav.tabs img.tab-icon")] as HTMLImageElement[];
+    const tabIcons = [...host.querySelectorAll(".tabs img.tab-icon")] as HTMLImageElement[];
     expect(tabIcons.length).toBeGreaterThanOrEqual(5);
     expect(tabIcons.every((i) => i.getAttribute("src")?.startsWith("/assets/icons/ui/"))).toBe(
       true,
@@ -104,7 +104,7 @@ describe("PlayScreen (composed game screen)", () => {
       target: host,
       props: { content, view: v, busy: false, onchoose: () => {} },
     });
-    const tabButtons = [...host.querySelectorAll("nav.tabs button")];
+    const tabButtons = [...host.querySelectorAll(".tabs button")];
     const iconSrcFor = (label: RegExp) =>
       tabButtons
         .find((b) => label.test(b.textContent ?? ""))
@@ -289,7 +289,7 @@ describe("PlayScreen (composed game screen)", () => {
       props: { content, view: v, busy: false, onchoose: () => {} },
     });
     // Switch to the Map tab (shown because the line is founded).
-    await page.getByRole("button", { name: /Map/ }).click();
+    await page.getByRole("tab", { name: /Map/ }).click();
     flushSync();
     const marker = host.querySelector('circle.rival[data-rival="rival:chinese"]');
     expect(marker, "the rival marker renders on the map").not.toBeNull();
@@ -330,7 +330,7 @@ describe("PlayScreen (composed game screen)", () => {
       props: { content, view: v, busy: false, onchoose: () => {} },
     });
     // The Field tab is present despite empty standings (gated on the founded line).
-    await page.getByRole("button", { name: /Field/ }).click();
+    await page.getByRole("tab", { name: /Field/ }).click();
     flushSync();
     const empty = host.querySelector('[data-testid="rival-dossier-empty"]');
     expect(empty, "the empty-field grace note surfaces in the live Field tab").not.toBeNull();
@@ -343,12 +343,12 @@ describe("PlayScreen (composed game screen)", () => {
       target: host,
       props: { content, view: view(), busy: false, onchoose: () => {} },
     });
-    await page.getByRole("button", { name: /Stats/ }).click();
+    await page.getByRole("tab", { name: /Stats/ }).click();
     flushSync();
     expect(host.querySelector(".content")?.textContent, "the Stats tab has content").toBeTruthy();
     await page.screenshot({ element: host.firstElementChild as Element });
 
-    await page.getByRole("button", { name: /Choices/ }).click();
+    await page.getByRole("tab", { name: /Choices/ }).click();
     flushSync();
     expect(host.querySelector(".content")?.textContent, "the Choices tab has content").toBeTruthy();
     await page.screenshot({ element: host.firstElementChild as Element });
@@ -396,16 +396,44 @@ describe("PlayScreen (composed game screen)", () => {
       target: host,
       props: { content, view: v, busy: false, onchoose: () => {} },
     });
-    const labels = [...host.querySelectorAll("nav.tabs button")].map((b) =>
+    const labels = [...host.querySelectorAll(".tabs button")].map((b) =>
       (b.textContent ?? "").trim(),
     );
     expect(labels.length, "the founded-line bar has several tabs").toBeGreaterThanOrEqual(6);
     for (const label of labels) {
-      await page.getByRole("button", { name: new RegExp(`^${label}`) }).click();
+      await page.getByRole("tab", { name: new RegExp(`^${label}`) }).click();
       flushSync();
       const panel = host.querySelector(".content") ?? host.querySelector("[data-event]");
       expect(panel?.textContent?.trim(), `tab "${label}" renders non-empty content`).toBeTruthy();
     }
+  });
+
+  it("A11Y-TAB-ARIA: the tab bar is a tablist and the active tab is aria-selected", async () => {
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: view(), busy: false, onchoose: () => {} },
+    });
+    // The nav is a tablist; the buttons are tabs.
+    expect(host.querySelector('.tabs[role="tablist"]'), "the tab bar is a tablist").not.toBeNull();
+    const tabs = [...host.querySelectorAll<HTMLButtonElement>('.tabs button[role="tab"]')];
+    expect(tabs.length, "the tabs expose role=tab").toBeGreaterThanOrEqual(5);
+    // Exactly one tab is aria-selected at a time, and it's the active one.
+    const selected = tabs.filter((t) => t.getAttribute("aria-selected") === "true");
+    expect(selected.length, "exactly one tab is aria-selected").toBe(1);
+    expect(selected[0]?.classList.contains("active"), "the selected tab is the active one").toBe(
+      true,
+    );
+    // Switching tabs moves aria-selected to the clicked tab.
+    const timeline = tabs.find((t) => /Timeline/.test(t.textContent ?? ""));
+    await page.elementLocator(timeline as HTMLButtonElement).click();
+    flushSync();
+    expect(timeline?.getAttribute("aria-selected"), "the clicked tab becomes aria-selected").toBe(
+      "true",
+    );
+    expect(
+      host.querySelectorAll('.tabs button[role="tab"][aria-selected="true"]').length,
+      "still exactly one selected after switching",
+    ).toBe(1);
   });
 
   it("OMEN-BADGE-SCREENSHOT: captures the hope + dread omen badges for visual review", async () => {
@@ -581,7 +609,7 @@ describe("PlayScreen (composed game screen)", () => {
       target: host,
       props: { content, view: view(), busy: false, onchoose: () => {} },
     });
-    const buttons = [...host.querySelectorAll("nav.tabs button")] as HTMLButtonElement[];
+    const buttons = [...host.querySelectorAll(".tabs button")] as HTMLButtonElement[];
     const dossierBtn = buttons.find((b) => b.textContent?.includes("Dossier"));
     if (!dossierBtn) throw new Error("no dossier tab");
     await page.elementLocator(dossierBtn).click();

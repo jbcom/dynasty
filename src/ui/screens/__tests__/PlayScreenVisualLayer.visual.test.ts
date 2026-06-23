@@ -95,7 +95,7 @@ describe("PlayScreen visual layer (VL-4, mobile)", () => {
       target: host,
       props: { content, view: view(), busy: false, onchoose: () => {} },
     });
-    const buttons = [...host.querySelectorAll("nav.tabs button")] as HTMLButtonElement[];
+    const buttons = [...host.querySelectorAll(".tabs button")] as HTMLButtonElement[];
     const mapBtn = buttons.find((b) => b.textContent?.includes("Map"));
     expect(mapBtn).toBeTruthy();
     await page.elementLocator(mapBtn as HTMLButtonElement).click();
