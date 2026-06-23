@@ -1351,9 +1351,9 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   it as "Fallen" (dimmed + struck-through), taking precedence over faltering/surging — the field now shows
   eliminations, not just low standings. Pure + seeded. Tests: dynastyWorld.unit (isFallen window gating) +
   RivalDossier.browser (fallen state). 906 node + 132 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **DEAD-LINE-IN-FIELD PR — push, open PR, full remote loop.**
-  1 commit (isFallen + fallen dossier state). Full local gate passed. Push, open PR, wait CI, fold review forward
-  + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, CONVERGENCE-FIELD-SUMMARY-LINE.
+- [ ] [WAIT-REVIEW] **DEAD-LINE-IN-FIELD PR #153 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/dead-line-in-field (baae7ab). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
+  review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, CONVERGENCE-FIELD-SUMMARY-LINE.
 - [ ] **CONVERGENCE-FIELD-SUMMARY-LINE — a one-line "state of the race" atop the Field tab.** The dossier lists
   every line but gives no at-a-glance read; add a header line ("You lead the field" / "N lines ahead of you" /
   "the field has thinned to M") derived from the standings, so the player gets the gestalt before the rows.
