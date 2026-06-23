@@ -158,4 +158,87 @@ describe("Chronicle arc (CHRONICLE-FULL-PLAYTHROUGH-SCREENSHOTS)", () => {
     expect(host.querySelector("main.report")).not.toBeNull();
     await shot();
   });
+
+  it("captures the RUIN arc: title → scene → dread omen → unrecovered shock → extinguished finale", async () => {
+    const shot = async () => {
+      await page.screenshot({ element: host.firstElementChild as Element });
+    };
+    const remount = (Comp: unknown, props: Record<string, unknown>) => {
+      if (component) unmount(component);
+      // biome-ignore lint/suspicious/noExplicitAny: opaque Svelte component constructor
+      component = mount(Comp as any, { target: host, props });
+    };
+
+    // 1. TITLE — the same masthead opens every run.
+    remount(TitleScreen, {
+      hasSave: false,
+      onNewGame: () => {},
+      onContinue: () => {},
+      onSettings: () => {},
+    });
+    await shot();
+
+    // 2. AN EARLY SCENE.
+    remount(PlayScreen, { content, view: foundedView(), busy: false, onchoose: () => {} });
+    await shot();
+
+    // 3. A DREAD OMEN — the down-arc's warning.
+    remount(PlayScreen, {
+      content,
+      view: foundedView({
+        foreshadow: {
+          text: "A shadow lies over the season — fever and hard winters stalk the young line.",
+          weight: "grave" as const,
+          tone: "dread" as const,
+        },
+      }),
+      busy: false,
+      onchoose: () => {},
+    });
+    expect(host.querySelector('[data-testid="foreshadow"][data-tone="dread"]')).not.toBeNull();
+    await shot();
+
+    // 4. AN UNRECOVERED SHOCK — the blow lands (a shock-aftermath note, no rebound).
+    remount(PlayScreen, {
+      content,
+      view: foundedView({
+        shock: {
+          kind: "meter_blow",
+          text: "Fire took the warehouses; the fortune is gutted.",
+          note: "fire",
+        },
+      }),
+      busy: false,
+      onchoose: () => {},
+    });
+    await shot();
+
+    // 5. THE EXTINGUISHED FINALE — the down-arc closes in ruin (stark, not gold).
+    const ruinState = {
+      ...initState(content, "seed"),
+      family: foundedView().state.family,
+      end: {
+        kind: "ruin" as const,
+        year: 1899,
+        reason: "The line collapsed into debt and disgrace.",
+      },
+    };
+    remount(LegacyReport, {
+      content,
+      state: ruinState,
+      end: ruinState.end,
+      convergence: {
+        id: "extinguished_ruin",
+        destination: "extinguished" as const,
+        title: "The Line Ends",
+        prose: "Nothing of the house survived the reckoning.",
+        gate: {},
+      },
+      onRestart: () => {},
+    });
+    const ruinMain = host.querySelector("main.report");
+    expect(ruinMain?.getAttribute("data-tier")).toBe("endgame-bad");
+    expect(host.querySelector(".apex-kicker")).toBeNull();
+    await shot();
+  });
 });

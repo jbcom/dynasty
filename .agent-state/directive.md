@@ -1485,15 +1485,26 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   (act-chapter), and the finale title all share the SAME display-font register (Playfair/serif) and none falls back
   to the body font — guarding the luxury voice from CSS drift. (Color compared via font, since the masthead uses a
   gradient-fill technique where `color` is transparent; font-family is the reliable cross-screen register signal.)
-- [ ] **DOSSIER-EMPTY-VOICE-A11Y-PARITY — the empty-field grace note + the empty-ledger "spared" note should share a
-  consistent quiet-grace register (italic, dim) so the two empty states read as the same voice.** Verify + align their
-  styling; a structural test over the two empty-state elements' computed font-style/color. Pure UI; tested.
-- [ ] **TAB-ICON-FULL-DEDUP — extend MAP-TAB-LABEL-ICON-DEDUP: Lineage+Dossier both use `dossier`, Timeline+(was)Map
-  use `timeline`; audit ALL tab icons are distinct (or intentionally shared with a logged reason).** A deterministic
-  test that the founded-line tab bar has no accidental duplicate icons. Pure UI; tested.
-- [ ] **CHRONICLE-RUIN-ARC-SCREENSHOTS — capture + READ the chronicle arc for a RUIN ending (the mirror of the
-  victory arc already shot): title → scene → dread omen → an UNRECOVERED shock → the extinguished finale,** to confirm
-  the down-arc reads as coherently as the up-arc. Visual; READ all frames.
+- [x] **DOSSIER-EMPTY-VOICE-A11Y-PARITY — DONE (branch feat/empty-parity-tab-dedup-ruin-arc).** Aligned the finale's
+  "spared the worst" note to the dossier's empty-field register (dim, italic, 0.85rem) — the "achievement" framing
+  comes from the WORDS, not a louder gold color, so both empty states read as one quiet-grace voice. Test:
+  emptyVoiceParity.browser asserts the two notes share computed font-style/color/size.
+- [x] **TAB-ICON-FULL-DEDUP — DONE.** Every founded-line tab now has a DISTINCT glyph: Map→`pole-utopian` (ascent),
+  Lineage→`pole-dictatorial`, freeing `timeline` for Timeline and `dossier` for Dossier (Field already `pole-centrist`).
+  Test: PlayScreen.visual asserts no two tabs in the founded-line bar share an icon (Set size == count).
+- [x] **CHRONICLE-RUIN-ARC-SCREENSHOTS — DONE.** Added a RUIN arc to ChronicleArc.visual + READ it: title (gold
+  masthead) → scene → dread omen (⚠ red) → an unrecovered shock (red loss note) → extinguished finale ("The End",
+  stark red). The down-arc builds the red loss register coherently — the mirror of the victory arc's gold ascent.
+  The two arcs are distinct in valence but consistent in luxury register. ✓
+- [ ] **STATS-CHOICES-TAB-SCREENSHOT — capture + READ the Stats and Choices(butterfly) tabs (the two least-shot
+  surfaces) to confirm they hold the luxury register + read legibly,** closing the per-tab visual-coverage gap left
+  after the chronicle (which shot Now/omen/finale but not Stats/Choices). Visual; READ both.
+- [ ] **EMPTY-VOICE-WORDING-DISTINCT-AUDIT — the empty-field + spared notes now share a REGISTER; assert their TEXT
+  stays DISTINCT (not accidentally identical copy) so the shared styling doesn't invite a copy-paste that says the
+  same thing in two places.** Pure unit/browser over the two notes' textContent. Tested.
+- [ ] **MOBILE-SAFE-AREA-AUDIT — a deterministic check that the PlayScreen header + tab bar respect
+  `env(safe-area-inset-*)` (the saga-head already uses it; verify the bottom tab nav does too on a notched device),**
+  per the mobile-first profile. Structural test over the computed padding using a safe-area-inset stub. Tested.
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
