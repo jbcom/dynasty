@@ -138,11 +138,17 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   `{region, base, standing}` the existing `resolveFoundingStart` consumes — so the lived opening feeds
   foundByComposition with NO card menu. Test: resolveEmergentFounding.unit (valid choice, tie-break, defaults,
   determinism, feeds resolveFoundingStart). 942 node green.
-- [ ] **EI-6b RETIRE-THE-FUNNEL + WIRE THE OPENING (UI + engine + e2e)** — the New Game path PLAYS the Epoch-0
-  emergence act (buildEpoch0Opening) through the SceneReader glowing-inline surface, accumulates its flags, then
-  resolveEmergentFounding → foundByComposition; retire the OnboardingScreen .card funnel. Update/retire the funnel
-  tests; full gate INCL. e2e (the entry-flow e2e walks the new opening, not the old card funnel). The big
-  integration step — scope carefully; it changes the entry flow. Tested.
+- [x] **EI-6b-sim OPENING RUNNER — DONE (branch feat/ei6b-wire-opening-live).** Pure
+  `src/sim/founding/openingRunner.ts`: startOpening / chooseOpeningBeat / chooseOpeningDecision / openingEnded walk
+  the buildEpoch0Opening scene chain (reusing the saga's pure applyBeatChoice/applyDecision accrual), a gathering
+  beat stays in-scene, the romance close ends it; the accumulated flags + cues resolve a valid founding via EI-6a.
+  Test: openingRunner.unit (start, gather-then-advance, FULL walk → founding, determinism). 946 node green.
+- [ ] **EI-6b-ui OPENING SCREEN + WIRE + RETIRE FUNNEL (UI + engine + e2e)** — build an OpeningScreen that drives the
+  SceneReader through the opening runner (glowing-inline), seed-deals the diegetic identity (surname/given/gender so
+  the naming tokens resolve), and on openingEnded calls back the accumulated flags; App's New Game path opens it (not
+  the .card funnel), then resolveEmergentFounding → resolveFoundingStart → foundByComposition. Retire the
+  OnboardingScreen funnel + its tests; full gate INCL. e2e (the entry-flow e2e walks the new opening). The big
+  entry-flow change — scope carefully (founding reorder, term resolution during the opening, surname dealing). Tested.
 - [ ] [WAIT] **EI-7 PORTRAIT-TEXT-WRAP LAYOUT (user, 2026-06-23)** — the scene prose must FLOW alongside the portrait and
   then continue DOWN BELOW it (a magazine wrap — float/shape the portrait, text wraps beside then under), not
   portrait-block-then-text-block stacked. Applies to the SceneReader / play surface. Visual; screenshot + READ that
