@@ -102,6 +102,25 @@ const rivals = $derived(
 // lived through, so the finale reflects the trials, not just the verdict. Empty for a shock-free run.
 const ledger = $derived(shockLedger(state.flags));
 
+// AGENCY-IN-LEGACY: tally what the PLAYER actively DID across the run from the side-logs — rivals pressed
+// (state.presses), recoveries invested (state.recoveryInvests). The close credits these interventions in a
+// "By Your Own Hand" line, distinct from the field/luck. Each count omitted from the line when zero.
+// Grammatical list-join: "a" → "a"; "a, b" → "a and b"; "a, b, c" → "a, b, and c" (Oxford comma at 3+).
+function joinClauses(parts: string[]): string {
+  if (parts.length <= 1) return parts.join("");
+  if (parts.length === 2) return `${parts[0]} and ${parts[1]}`;
+  return `${parts.slice(0, -1).join(", ")}, and ${parts[parts.length - 1]}`;
+}
+const agency = $derived.by(() => {
+  const pressed = state.presses?.length ?? 0;
+  const invested = state.recoveryInvests?.length ?? 0;
+  const parts: string[] = [];
+  if (pressed > 0) parts.push(`pressed ${pressed} faltering ${pressed === 1 ? "rival" : "rivals"}`);
+  if (invested > 0)
+    parts.push(`forced ${invested} ${invested === 1 ? "recovery" : "recoveries"} with your own resources`);
+  return parts;
+});
+
 // A one-shot ending sting coloured by the convergence outcome, fired once when the report mounts
 // (audio-gated + fully guarded inside playEndingSting). The saga's close gets an audible punctuation.
 onMount(() => {
@@ -169,6 +188,13 @@ onMount(() => {
         {/each}
       </ul>
     </section>
+  {/if}
+
+  {#if agency.length > 0}
+    <!-- AGENCY-IN-LEGACY: what the player actively DID — the interventions that bent the saga by hand. -->
+    <p class="agency" data-testid="agency">
+      <strong>By your own hand:</strong> you {joinClauses(agency)}.
+    </p>
   {/if}
 
   <dl class="stats">
@@ -321,6 +347,19 @@ onMount(() => {
     color: var(--mmm-text-dim);
     font-style: italic;
     font-size: 0.82rem;
+  }
+  /* AGENCY-IN-LEGACY: the player's own interventions — credited in gold, the active counterpart to the ledger. */
+  .agency {
+    margin: 0.8rem auto 0;
+    max-width: 30rem;
+    text-align: left;
+    font-family: var(--mmm-font-body);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--mmm-text);
+  }
+  .agency strong {
+    color: var(--mmm-gold);
   }
   /* LEDGER-IN-LEGACY-REPORT: the line's trials, mirroring the in-run Timeline ledger voice. */
   .hard-seasons {
