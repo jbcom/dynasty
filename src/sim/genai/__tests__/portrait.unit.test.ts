@@ -1,6 +1,16 @@
 import { describe, expect, it } from "vitest";
 import { DYNASTY_SPINE } from "../../saga/spineAuthored";
-import { buildPortraitPrompt, eraBandForYear, portraitKey, SIGNATURE_STYLE } from "../portrait";
+import {
+  buildCompositePortraitPrompt,
+  buildEncounterPortraitPrompt,
+  buildPortraitPrompt,
+  compositePortraitKey,
+  encounterPortraitKey,
+  eraBandForYear,
+  type PortraitFacets,
+  portraitKey,
+  SIGNATURE_STYLE,
+} from "../portrait";
 
 /**
  * VL-2: the portrait prompt pass. The signature style must ride EVERY prompt verbatim (cohesion), the
@@ -77,5 +87,66 @@ describe("EI-8a eraBandForYear (fine era bands)", () => {
     expect(buildPortraitPrompt(g0, "male")).toMatch(/colonial/i);
     const midcenturyAct = { ...g0, gen: 5, year: 1960, macroAct: "emergence" as const };
     expect(buildPortraitPrompt(midcenturyAct, "male")).toMatch(/mid-century/i);
+  });
+});
+
+describe("EI-8d composite portrait prompt + key", () => {
+  const adultCeo: PortraitFacets = {
+    lifeStage: "adult",
+    eraBand: "digital_modern",
+    archetype: "economic",
+    rungTier: "high",
+    gender: "male",
+  };
+
+  it("rides the signature style + folds in the era band, life stage, and wardrobe", () => {
+    const p = buildCompositePortraitPrompt(adultCeo);
+    expect(p).toContain(SIGNATURE_STYLE);
+    expect(p).toMatch(/an adult/i);
+    expect(p).toMatch(/magnate|CEO/i); // high economic wardrobe
+    expect(p).toMatch(/2030s|contemporary/i); // digital_modern era register
+  });
+
+  it("mutes the wardrobe for the youngest stages (an infant has no station yet)", () => {
+    const infant: PortraitFacets = { ...adultCeo, lifeStage: "infant" };
+    const p = buildCompositePortraitPrompt(infant);
+    expect(p).toMatch(/an infant/i);
+    expect(p).toMatch(/child of the household|plain period dress/i);
+    expect(p).not.toMatch(/magnate|CEO/i); // station deferred for the infant
+  });
+
+  it("keys deterministically on the full facet set (composite cache key)", () => {
+    expect(compositePortraitKey(adultCeo)).toBe("portrait:adult:digital_modern:economic:high:m");
+    // any facet change → a different key
+    expect(compositePortraitKey({ ...adultCeo, rungTier: "low" })).not.toBe(
+      compositePortraitKey(adultCeo),
+    );
+    expect(compositePortraitKey({ ...adultCeo, archetype: "crime" })).toContain(":crime:");
+  });
+});
+
+describe("EI-8d encounter portrait prompt + key", () => {
+  it("characterizes a distinct person by role, era, and age — not the line's archetype", () => {
+    const p = buildEncounterPortraitPrompt({
+      role: "first friend",
+      lifeStage: "child",
+      eraBand: "founding_1700s",
+      gender: "female",
+    });
+    expect(p).toContain(SIGNATURE_STYLE);
+    expect(p).toMatch(/first friend/i);
+    expect(p).toMatch(/a child/i);
+    expect(p).toMatch(/colonial/i);
+  });
+
+  it("keys encounter portraits under a normalized role token", () => {
+    expect(
+      encounterPortraitKey({
+        role: "Rival Head",
+        lifeStage: "adult",
+        eraBand: "midcentury",
+        gender: "male",
+      }),
+    ).toBe("portrait:enc:rival_head:adult:midcentury:m");
   });
 });

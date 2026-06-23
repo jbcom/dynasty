@@ -11,6 +11,12 @@
  */
 
 import type { SpineAct } from "../saga/spineAuthored";
+import {
+  type LifeStage,
+  type PortraitArchetype,
+  type RungTier,
+  wardrobeFor,
+} from "./portraitFacets";
 
 /**
  * THE SIGNATURE STYLE — a fixed period-engraving / aquatint ink-line look with a muted wash. Chosen
@@ -110,4 +116,95 @@ export function buildPortraitPrompt(act: SpineAct, gender: "male" | "female"): s
 /** The deterministic asset key (and filename stem) for a generation's portrait. */
 export function portraitKey(act: SpineAct, gender: "male" | "female"): string {
   return `spine_g${act.gen}_${gender}`;
+}
+
+/**
+ * EI-8d — the COMPOSITE portrait facets: everything the demand matrix keys on. `buildCompositePortraitPrompt`
+ * + `compositePortraitKey` generalize the gen×gender pair above to LIFE-STAGE × ERA-BAND × ARCHETYPE/WARDROBE
+ * (+ rung tier) × gender (EI-8a/8b/8c). Spec: §"EI-8 — the portrait-demand MATRIX".
+ */
+export interface PortraitFacets {
+  lifeStage: LifeStage;
+  eraBand: EraBand;
+  archetype: PortraitArchetype;
+  rungTier: RungTier;
+  gender: "male" | "female";
+}
+
+/** How each life stage reads in the bust framing (the wardrobe/bearing scales by stage, not just dress). */
+const LIFE_STAGE_SUBJECT: Record<LifeStage, string> = {
+  infant: "an infant",
+  child: "a child",
+  youth: "a youth",
+  adult: "an adult",
+  elder: "an elder",
+};
+
+/**
+ * Build the portrait prompt for a full facet set (EI-8d): the SIGNATURE STYLE + the fine era register + the
+ * life-stage subject + the archetype/rung WARDROBE. A bust/half-figure that reads at small size. The wardrobe
+ * is muted for the youngest stages (an infant/child has no station yet) so the look stays period-true.
+ */
+export function buildCompositePortraitPrompt(f: PortraitFacets): string {
+  const era = ERA_VISUAL[f.eraBand];
+  const sex = f.gender === "male" ? "male" : "female";
+  const subject = `${LIFE_STAGE_SUBJECT[f.lifeStage]} (${sex})`;
+  // An infant/child wears no station yet — let dress read period-plain rather than imposing an adult calling.
+  const stationed = f.lifeStage === "infant" || f.lifeStage === "child";
+  const wardrobe = stationed
+    ? "in plain period dress befitting the child of the household"
+    : wardrobeFor(f.archetype, f.rungTier);
+  return [
+    `A dignified BUST / half-figure PORTRAIT of ${subject}, ${era}, ${wardrobe}.`,
+    `A member of an American dynasty across the centuries. A composed bearing; let the face carry character`,
+    `(resolve, cunning, or care), not a smile. Front or three-quarter view, plain dark ground.`,
+    SIGNATURE_STYLE,
+    STYLE_NEGATIVE,
+  ].join(" ");
+}
+
+/**
+ * The deterministic composite asset key (EI-8d): `portrait:<lifeStage>:<eraBand>:<archetype>:<rungTier>:<g>`.
+ * Stable for a facet set → the same prompt → a reproducible cached asset (sim purity holds; gen is offline).
+ */
+export function compositePortraitKey(f: PortraitFacets): string {
+  const g = f.gender === "male" ? "m" : "f";
+  return `portrait:${f.lifeStage}:${f.eraBand}:${f.archetype}:${f.rungTier}:${g}`;
+}
+
+/**
+ * EI-8d — an ENCOUNTER figure's portrait: a storyline person met across the centuries (first friend,
+ * betrayer, partner, rival head, mentor, …). Keyed on their life-stage + the encounter's era band + a ROLE
+ * token (not the line's archetype/rung) so they read as distinct people.
+ */
+export interface EncounterFacets {
+  role: string;
+  lifeStage: LifeStage;
+  eraBand: EraBand;
+  gender: "male" | "female";
+}
+
+/** Build the prompt for an encounter figure (EI-8d): era-true, age-true, and characterized by their role. */
+export function buildEncounterPortraitPrompt(f: EncounterFacets): string {
+  const era = ERA_VISUAL[f.eraBand];
+  const sex = f.gender === "male" ? "male" : "female";
+  const subject = `${LIFE_STAGE_SUBJECT[f.lifeStage]} (${sex})`;
+  return [
+    `A BUST / half-figure PORTRAIT of ${subject}, ${era}.`,
+    `A distinct person encountered in a dynasty's story — their bearing reads as "${f.role}". A composed`,
+    `face that carries character, not a smile. Front or three-quarter view, plain dark ground.`,
+    SIGNATURE_STYLE,
+    STYLE_NEGATIVE,
+  ].join(" ");
+}
+
+/** The deterministic encounter asset key (EI-8d): `portrait:enc:<role>:<lifeStage>:<eraBand>:<g>`. */
+export function encounterPortraitKey(f: EncounterFacets): string {
+  const g = f.gender === "male" ? "m" : "f";
+  // Normalize the role token so it's filesystem/key safe (lowercase, non-alnum → underscore).
+  const role = f.role
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+  return `portrait:enc:${role}:${f.lifeStage}:${f.eraBand}:${g}`;
 }
