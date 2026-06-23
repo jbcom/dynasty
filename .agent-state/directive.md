@@ -1289,8 +1289,8 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   always-act runs. MEASURED: press offered 134 / fired 134; invest offered 24 / fired 24 — both levers surface
   + fire reliably (neither is dead UI; press is the frequent window, invest rarer but healthy). No trigger
   tuning needed; the test guards both are offered AND fire. 899 node green, gate clean.
-- [ ] [WAIT-REVIEW] **AGENCY-PLAYSTYLE-AUDIT PR — push, open PR, full remote loop.**
-  1 commit (the always-act lever-usage instrument). Full local gate passed. Push, open PR, wait CI, fold review
+- [ ] [WAIT-REVIEW] **AGENCY-PLAYSTYLE-AUDIT PR #141 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/agency-playstyle-audit. Full local gate passed. Loop: wait build-and-test + CodeQL, fold review
   forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, SHOCK-CLUSTERING-GUARD.
 - [ ] **SHOCK-CLUSTERING-GUARD — prevent a brutal run of back-to-back shocks.** Shocks roll
   independently per tick; a harsh-era unlucky seed can stack 3+ blows in a row with no breathing room, which
