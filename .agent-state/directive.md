@@ -1253,15 +1253,15 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   gates the PlayScreen invest prompt. Tests: sagaShock.unit (boost chance+mag, determinism) + loop.unit (spend
   + boost + one-pending guard + bit-identical reconstruct) + PlayScreen.visual (buttons fire/absent). 894 node
   + 125 browser green, full gate clean. [[mmm-save-and-chronology]] preserved.
-- [ ] **FORESHADOW-WEIGHT — the omen's certainty scales with the actual hazard.** SHOCK-FORESHADOW
+- [ ] [WAIT-REVIEW] **FORESHADOW-WEIGHT — the omen's certainty scales with the actual hazard (after #130).** SHOCK-FORESHADOW
   is binary (omen or not); a founding-era line with heavy strain should read a GRAVER omen than a marginal one.
   Tier the foreshadow text by exposure×strain ("a shadow over the season" → "the house braces for the worst"),
   so dread is proportional. Pure, view-derived, deterministic; tested.
-- [ ] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust.**
+- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust (after #130).**
   A foreshadow that rarely precedes a real blow trains the player to ignore it; one that always does is just a
   spoiler. Instrument the foreshadow→next-shock correlation over many seeds; if it's miscalibrated, tune the
   threshold so an omen is a meaningful-but-not-certain warning. Decide from figures (like SHOCK-CADENCE-AUDIT).
-- [ ] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the disaster ledger.** A rebound
+- [ ] [WAIT-REVIEW] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger (after #130).** A rebound
   the player paid for reads the same as a lucky one in the "What Befell" log; stamp the invested recovery (e.g.
   recovered:<meter>:<year>:invested) so the ledger can mark "rebuilt by your own hand" — the player's agency
   shows in the family history. Pure read-model extension; tested.
