@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.30.0](https://github.com/jbcom/dynasty/compare/v0.29.0...v0.30.0) (2026-06-23)
+
+
+### Features
+
+* **saga:** SHOCK-FAMILY-SUCCESSION-PRESSURE — a death shock can take the groomed heir ([#120](https://github.com/jbcom/dynasty/issues/120)) ([4143a87](https://github.com/jbcom/dynasty/commit/4143a87bd7c6a8e1326b90662af3020dd1c2ded3))
+
 ## [0.29.0](https://github.com/jbcom/dynasty/compare/v0.28.0...v0.29.0) (2026-06-23)
 
 
