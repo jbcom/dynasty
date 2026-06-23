@@ -1245,15 +1245,15 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   "The season turns against the house — hard days may be near." in the PlayScreen above the scene (muted/dashed,
   distinct from the red aftermath). Loss now has dread, not just consequence. Tests: sagaShock.unit (exposure
   monotone + foreshadow gating) + loop.unit (omen surfaces + deterministic). 891 node + 122 browser green.
-- [ ] **RECOVERY-CHOICE — let the player INVEST in a rebound rather than wait for the seeded roll (next branch).**
+- [ ] [WAIT-REVIEW] **RECOVERY-CHOICE — let the player INVEST in a rebound (next branch after #128).**
   Recoveries fire automatically on quiet ticks; give the player a beat after a blow to spend a meter (money/heat)
   to RAISE the next recovery's chance/magnitude — turning the comeback into agency, not just luck. Reuses
   rollSagaRecovery with a player-set bonus; deterministic; tested. (Mirrors RIVAL-CROSSING-EXPLOIT's side-log.)
-- [ ] **FORESHADOW-WEIGHT — the omen's certainty scales with the actual hazard (not a flat line).** SHOCK-FORESHADOW
+- [ ] [WAIT-REVIEW] **FORESHADOW-WEIGHT — the omen's certainty scales with the actual hazard (after #128).** SHOCK-FORESHADOW
   is binary (omen or not); a founding-era line with heavy strain should read a GRAVER omen than a marginal one.
   Tier the foreshadow text by exposure×strain ("a shadow over the season" → "the house braces for the worst"),
   so dread is proportional. Pure, view-derived, deterministic; tested.
-- [ ] **OMEN-PAYOFF-AUDIT — measure how often a foreshadow is actually followed by a shock (calibrate trust).**
+- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust (after #128).**
   A foreshadow that rarely precedes a real blow trains the player to ignore it; one that always does is just a
   spoiler. Instrument the foreshadow→next-shock correlation over many seeds; if it's miscalibrated, tune the
   threshold so an omen is a meaningful-but-not-certain warning. Decide from figures (like SHOCK-CADENCE-AUDIT).
