@@ -173,7 +173,7 @@ const INTERSTITIALS = [
     ],
     [
       beat(
-        "You walk the carding room, the air thick with lint, and reckon how much of the house rests on Southern fiber.",
+        "In the carding room the air hangs thick with lint, and the question of how much the house rests on Southern fiber hangs with it.",
         "Quietly begin sourcing wool and flax — a hedge against the day the cotton stops.",
         { wealth: 1, worldview: 1 },
         "g2_diversified_the_fiber",
@@ -223,7 +223,7 @@ const INTERSTITIALS = [
     ],
     [
       beat(
-        "You watch the floor from the gallery, reading the panic and greed in the runners' faces.",
+        "From the gallery the floor is a single organism of panic and greed, every runner's face an open ledger.",
         "Move while the others hesitate — buy the failing line before it knows it is failing.",
         { wealth: 1, honor: 1 },
         "g3_seized_the_moment",
@@ -247,7 +247,7 @@ const INTERSTITIALS = [
     ],
     [
       beat(
-        "You read the morning editions stacked on the desk — praise and venom in equal measure.",
+        "The morning editions are stacked on the desk — praise and venom in equal measure.",
         "Answer none of it; let the results speak and the critics exhaust themselves.",
         { power: 1, honor: 1 },
         "g3_ignored_the_press",
@@ -273,7 +273,7 @@ const INTERSTITIALS = [
     ],
     [
       beat(
-        "You watch the shift change from the gantry, ten thousand boots on iron stairs.",
+        "Ten thousand boots ring on the iron stairs below the gantry as the shift turns over.",
         "Walk the floor yourself before the trouble starts — let the men see the name has a face.",
         { power: 1, reach: 1 },
         "g4_walked_the_floor",
@@ -373,7 +373,7 @@ const INTERSTITIALS = [
     ],
     [
       beat(
-        "You watch the feeds cut and dissolve, the nation's attention pooling where you point it.",
+        "Across the bank of monitors the feeds cut and dissolve, the nation's attention pooling where you point it.",
         "Hold a segment back tonight — let the rivals run it first and own the fallout.",
         { power: 1, honor: 1 },
         "g6_held_the_segment",
@@ -447,7 +447,7 @@ const INTERSTITIALS = [
     ],
     [
       beat(
-        "You read the dashboards as the doctrine takes hold, behavior bending to the design.",
+        "On the dashboards the doctrine takes hold in real time, behavior bending to the design.",
         "Hold the course; an architecture is only sovereign if its author does not flinch.",
         { power: 1, worldview: 1 },
         "g7_held_the_architecture",
@@ -497,7 +497,7 @@ const INTERSTITIALS = [
     ],
     [
       beat(
-        "You watch the yards retool, the house's whole mass swinging onto the new heading.",
+        "All around, the yards retool — the house's whole mass swinging onto its new heading.",
         "Drive the schedule harder; in the orbital age, the first to arrive writes the rules.",
         { power: 1, reach: 1 },
         "g8_drove_the_schedule",
