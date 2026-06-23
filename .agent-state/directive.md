@@ -1496,15 +1496,28 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   masthead) → scene → dread omen (⚠ red) → an unrecovered shock (red loss note) → extinguished finale ("The End",
   stark red). The down-arc builds the red loss register coherently — the mirror of the victory arc's gold ascent.
   The two arcs are distinct in valence but consistent in luxury register. ✓
-- [ ] **STATS-CHOICES-TAB-SCREENSHOT — capture + READ the Stats and Choices(butterfly) tabs (the two least-shot
-  surfaces) to confirm they hold the luxury register + read legibly,** closing the per-tab visual-coverage gap left
-  after the chronicle (which shot Now/omen/finale but not Stats/Choices). Visual; READ both.
-- [ ] **EMPTY-VOICE-WORDING-DISTINCT-AUDIT — the empty-field + spared notes now share a REGISTER; assert their TEXT
-  stays DISTINCT (not accidentally identical copy) so the shared styling doesn't invite a copy-paste that says the
-  same thing in two places.** Pure unit/browser over the two notes' textContent. Tested.
-- [ ] **MOBILE-SAFE-AREA-AUDIT — a deterministic check that the PlayScreen header + tab bar respect
-  `env(safe-area-inset-*)` (the saga-head already uses it; verify the bottom tab nav does too on a notched device),**
-  per the mobile-first profile. Structural test over the computed padding using a safe-area-inset stub. Tested.
+- [x] **STATS-CHOICES-TAB-SCREENSHOT — DONE (branch feat/tab-shots-wording-safearea).** Captured + READ both: the
+  Stats tab shows "Trajectory" (gold heading) + a uPlot meter-trend chart with a color-coded legend + net worth; the
+  Choices tab shows "Butterfly Log" (gold) + the dim-italic "No ripples yet" empty-state. Both legible, hold the
+  luxury register (gold heading / navy bg). Test: PlayScreen.visual captures each tab.
+- [x] **EMPTY-VOICE-WORDING-DISTINCT-AUDIT — DONE.** emptyVoiceParity.browser now also asserts the two empty-state
+  notes say DISTINCT things ("finding their feet" vs "spared the worst") despite the shared register — so the parity
+  styling can't invite a copy-paste that repeats one line in two places.
+- [x] **MOBILE-SAFE-AREA-AUDIT — DONE.** Found + fixed a gap: the `.content` scroll region (the screen's bottom
+  edge) didn't pad the bottom inset, so the last content could sit under the home indicator. Added
+  `padding-bottom: env(safe-area-inset-bottom)`. Test: SafeAreaAudit.browser asserts the header rule references
+  safe-area-inset-top AND the content rule references safe-area-inset-bottom (jsdom resolves the inset to 0, so the
+  audit checks the CSS references the inset, not a pixel value).
+- [ ] **MARKETS-NEWS-TAB-SCREENSHOT — capture + READ the Markets and News tabs (the last two un-shot live surfaces)
+  to complete the per-tab visual coverage.** Mirror STATS-CHOICES-TAB-SCREENSHOT; READ both, confirm legibility +
+  register. Visual.
+- [ ] **DIRECTIVE-LEDGER-PRUNE — the WV-3 milestone's directive section has accumulated ~30 `[x]` PR-MERGED ledger
+  entries; archive the oldest into a docs/STATE.md "shipped" appendix (or trim to the last ~8) so the live directive
+  stays scannable.** Verify each is truly merged before trimming (per [[check-live-consumers-before-deleting-content]]).
+  Docs/bookkeeping only; no code.
+- [ ] **SAFE-AREA-LEGACYREPORT — extend MOBILE-SAFE-AREA-AUDIT to the LegacyReport: a long finale (ledger + field +
+  stats) scrolls; verify its scroll container pads the bottom inset too** so the "Play Again" button clears the home
+  bar on a notched device. Pure UI; tested (SafeAreaAudit-style CSS-reference check).
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
