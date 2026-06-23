@@ -1313,15 +1313,26 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   last 30 main runs + the per-workflow histories: Release 8/8 success, CD 7/7 success (latest d69cacd still
   in_progress, not failed), CodeQL 8/8 success — ZERO non-success post-merge runs across the WV-3 merge wave.
   No silent breakage accumulated; no remediation needed. The release-please→Release→CD→CodeQL chain is healthy.
-- [ ] [WAIT-REVIEW] **WV-3-DEPTH-PLAYTEST-3 — re-measure the hour with the FULL agency+atmosphere layer live (after #144).** SPINE-DEPTH-
-  PLAYTEST-2 measured shocks/recoveries/crossings; since then the layer gained foreshadow omens, rival
-  dispatches (falter/surge), press/invest agency, tiered tone, clustering guard, and the agency ledger. Re-run
-  the depth instrument to confirm the median run still clears the hour (the new beats add read+decide time) and
-  report the updated figure. Decide from figures; lever is more prose only if short.
-- [ ] [WAIT-REVIEW] **RIVAL-DOSSIER-TAB — a dedicated in-run "The Field" panel beyond the Timeline strip (after #144).** The field readout
+- [x] **WV-3-DEPTH-PLAYTEST-3 — DONE (feat/wv3-depth-playtest-3).** Extended spineDepthPlaytest.unit with a
+  5-seed always-act instrument counting the agency+atmosphere surface ON TOP of the floor + PLAYTEST-2. MEASURED:
+  9 omens + 29 dispatches + 54 agency acts, median ~180s (3 min) added/run. So ~48-min floor + PLAYTEST-2 ~76s +
+  PLAYTEST-3 ~180s ≈ 52 min fast-path (a careful player far more) — the hour mandate holds with margin and the
+  agency layer only WIDENS it. No prose lever needed. 902 node green, gate clean.
+- [ ] [WAIT-REVIEW] **WV-3-DEPTH-PLAYTEST-3 PR — push, open PR, full remote loop.**
+  1 commit (the full-layer depth instrument). Full local gate passed. Push, open PR, wait CI, fold review forward
+  + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-DOSSIER-TAB.
+- [ ] **RIVAL-DOSSIER-TAB — a dedicated in-run "The Field" panel beyond the Timeline strip.** The field readout
   lives as a compact strip in the Timeline (CONVERGENCE-FIELD-IN-TIMELINE); for a player tracking the race
   closely, a fuller dossier (each rival's place, archetype, rung trend, faltering/surging state) deserves its
   own tab. Reads view.rivalStandings + glimpses; pure read-model; tested. (UI surface, not new sim.)
+- [ ] **RIVAL-RUNG-TREND — track each rival's rung TREND (rising/steady/falling) for the dossier + glimpses.** The
+  field shows a rival's current rung but not its DIRECTION; a rival rising fast reads differently from one that
+  peaked and is sliding. Record a short per-rival rung history (last N snapshots, a side-store like presses) and
+  derive a trend arrow. Feeds RIVAL-DOSSIER-TAB. Pure + seeded (re-derived from advanceWorld); tested.
+- [ ] **STELLAR-EPILOGUE-VARIETY — the apex finale prose varies by HOW the line reached the stars.** The apex
+  ending fires one prose for all stellar paths; a conquest-stars line should read different from an allies-stars
+  or hidden-stars one (the three stellar destinies already exist in convergence.ts). Wire the destiny-specific
+  prose into the apex close so the ultimate ending reflects the path taken. Pure read-model; tested.
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release cut 0.36.0).** Weighted view.foreshadow
   + tiered styling (grave reads heavier than marginal). CI green, 0 review threads, merged CLEAN. main synced.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
