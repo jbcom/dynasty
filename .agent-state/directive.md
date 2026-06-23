@@ -154,11 +154,14 @@ ELEVATE this, not bolt on art. Sim purity holds (gen is offline/cached, keyed by
   research banked).** NOTE: written pre-pivot — must be re-grounded on the founding-spine model (the visual
   subjects are now the ONE spine line's protagonist per generation + the recurring-cast families + an
   era-progressing map, NOT wave×cell portraits). Branch protocol moot — all work on feat/founding-spine-redesign.
-- [ ] **VL-2 GenAI portrait generation for the SPINE — the active next milestone.** Now unblocked (founding-
-  spine complete). Extend the GenAI pipeline (generateImages) with a portrait pass keyed to the spine
-  protagonist per GENERATION + era (and the recurring-cast families), in the locked signature art style
-  (NOT cartoony, NOT procedural/hand-SVG — [[visual-layer-revival]]); license-log; offline/cached; load as
-  raster. Compose ONE speaker portrait into the SceneReader (Suzerain pattern, [[suzerain-ui-reference]]).
+- [x] **VL-2 GenAI portrait PIPELINE — DONE + verified (committed); bulk gen RUNNING (bg).** Imagen image
+  API confirmed working; geminiGenerateImage + portrait.ts (locked signature engraving style, per-era
+  register, NOT cartoony/procedural) + scripts/genai-portraits.ts (license-logged, idempotent). First
+  founding portrait generated + READ = a dignified colonial engraved bust, exactly the polished cohesive
+  look. +5 tests, schema/assets updated for the portrait revival, 732 green. All 20 portraits (10 gens × 2
+  genders) generating in background. ON completion: sample-verify the style holds colonial→retro-futurist + commit.
+- [ ] **VL-2b compose the portrait into the SceneReader (one speaker, Suzerain pattern).** Load the
+  generation's portrait into the play view ([[suzerain-ui-reference]]); mobile-first; visual test + Chrome.
 - [ ] **VL-3 the MAP — era-progressing journey visual.** A real cartographic-art map (GenAI base + 2D
   asset-lib Cartography Pack) showing the line's place + era PROGRESS founding→stars; persistent backdrop /
   toggled mode (80 Days). Fixes the density/no-visual-progress problem. SVG data-overlay (nodes/route/fog)
