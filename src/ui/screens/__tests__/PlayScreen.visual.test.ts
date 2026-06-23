@@ -354,6 +354,60 @@ describe("PlayScreen (composed game screen)", () => {
     await page.screenshot({ element: host.firstElementChild as Element });
   });
 
+  it("FULL-TAB-COVERAGE-ASSERT: every founded-line tab renders non-empty content (no dead route)", async () => {
+    // A founded line shows the full tab set. Click EACH tab and assert its panel renders real content — a
+    // structural guard that no tab is a dead/blank route (complements the per-tab visual reads).
+    const base = view();
+    const v: GameView = {
+      ...base,
+      state: {
+        ...base.state,
+        family: {
+          members: [
+            {
+              id: "m0",
+              given: "X",
+              surname: "Vane",
+              sex: "male" as const,
+              born: 1885,
+              generation: 0,
+              traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
+              isProtagonist: true,
+            },
+          ],
+          protagonistId: "m0",
+          nextSeq: 1,
+        },
+      },
+      // Standings so the Field tab is populated, a rival dispatch so News surfaces.
+      rivalStandings: [
+        {
+          id: "rival:bavaria",
+          label: "rival:bavaria",
+          rung: 3,
+          faltering: false,
+          trend: "rising",
+          fallen: false,
+        },
+      ],
+      rivalNews: [{ id: "rival:bavaria", kind: "surged", headline: "Bavaria edged ahead." }],
+    };
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: v, busy: false, onchoose: () => {} },
+    });
+    const labels = [...host.querySelectorAll("nav.tabs button")].map((b) =>
+      (b.textContent ?? "").trim(),
+    );
+    expect(labels.length, "the founded-line bar has several tabs").toBeGreaterThanOrEqual(6);
+    for (const label of labels) {
+      await page.getByRole("button", { name: new RegExp(`^${label}`) }).click();
+      flushSync();
+      const panel = host.querySelector(".content") ?? host.querySelector("[data-event]");
+      expect(panel?.textContent?.trim(), `tab "${label}" renders non-empty content`).toBeTruthy();
+    }
+  });
+
   it("OMEN-BADGE-SCREENSHOT: captures the hope + dread omen badges for visual review", async () => {
     const scene = SceneSchema.parse({
       id: "sc:demo:badgeshot",
