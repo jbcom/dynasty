@@ -1126,11 +1126,24 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 - [ ] [WAIT] **POST-MERGE-VERIFY #106 — Release + CD + CodeQL on main green.** Merge triggered Release/CD/CodeQL
   on main (in_progress). Monitor to SUCCESS; if Release or CD fails, investigate (it builds/deploys what
   shipped). DoD "verify the app RUNS" — the deployed 0.22.0 should serve the deepened spine.
-- [ ] **WV-3-YUKA — emergent rival reactions (anti-Suzerain layer 2) — UNBLOCKED, on feat/wv3-yuka-emergent.**
-  WV-3 proved seeded market/run divergence; the further layer ([[emergent-cause-effect-sim]]) is rival lines
-  REACTING to the player (Yuka-style GOAP) + seeded disease/disruption shocks so playthroughs diverge in
-  EVENTS, not just economy. The top depth lever now (hour mandate met; this is replayability). Fresh branch off
-  merged main. Begin with use-case enumeration before any code.
+- [x] **WV-3-YUKA step 1 — DONE (commit fba598c): divergence audit + g9 apex bug.** Audited 8 seeds of the
+  same founding comp → FINDING: the saga path is near-IDENTICAL across seeds (same end/year/gens/money/
+  convergence; only family-alive varies) — the Suzerain trap, measured (the seeded market substrate is inert
+  on the saga clock). Also caught + fixed: g9's terminal close carried no succession, so a fully-succeeded
+  line wrongly fell to line-extinct instead of the `apex` stars ending (now reachable + guarded). Spec
+  §AUDIT-RESULT + §DECISION.
+- [ ] **WV-3-MORTALITY — seeded disease/mortality hazard on the saga clock (the audit's chosen lever).** Per
+  the audit + spec §DECISION: a per-saga-tick, era-weighted, SEEDED hazard that can strike the protagonist or
+  a family member (and/or a meter) between generations, so runs DIVERGE in events (early death forces unplanned
+  succession; a loss reshapes the family; a meter shock alters the convergence gate). Pure + seeded (rng.fork
+  on year/history, replay bit-identical), wired into advanceRunClock's saga branch beside advanceFamily,
+  feeding the existing succession mechanic. Re-run the divergence audit after — endKinds>1 / gens+familyAlive
+  range>0 across seeds proves it widened. Then author the disease/loss scenes the new states need.
+- [ ] **WV-3-RIVAL-REACT — rivals REACT to the player (the Yuka half).** advanceAgent currently picks strategy
+  from STATIC motivators, ignoring the player. Make a rival near the player's rung on the SAME strategy able
+  to escalate (compete harder → faster climb) or pivot, so the player's position perturbs the rival world
+  differently per run. Deterministic (reads player rung/strategy, seeded). Re-audit to confirm rival-driven
+  divergence. Lower priority than WV-3-MORTALITY (mortality is the bigger gap).
 - [x] **SPINE-CONTENT-QA-4 — DONE (commit d35c7c4, pushed to PR #106).** Full uniqueness scan of all 30
   interstitials. Opening sentences + beat openers already varied (0 first-3-word opener repeats; 54/60
   distinct beat openers). CAUGHT: the reversal SECOND paragraphs shared one skeleton — 9/10 opened "The [X]
