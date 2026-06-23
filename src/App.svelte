@@ -13,6 +13,7 @@ import {
 import { setSoundEnabled } from "./ui/sound";
 import type { Content } from "./sim/content";
 import { foundByComposition } from "./sim/founding";
+import type { LifeSeedChoices } from "./sim/saga/lifeSeeds";
 import { dealComposition, placeById } from "./sim/places";
 import { type ArrivalClass, resolveWaveStart } from "./sim/waveSelect";
 import type { GameState } from "./sim/state";
@@ -83,6 +84,7 @@ async function birthGame(
   gender: "male" | "female",
   given: string,
   culture: string,
+  lifeSeeds: LifeSeedChoices,
 ): Promise<void> {
   if (!storage) return;
   const placeDef = placeById(content.places, place);
@@ -106,6 +108,7 @@ async function birthGame(
     gender,
     given,
     seedMotivators: motivators,
+    lifeSeeds, // FS-7: the diegetic Epoch-0 life-seeds (first job / friend / partner)
   }).state;
   store = new GameStore(content, seed, storage, founded, founded.archetype);
   screen = "play";

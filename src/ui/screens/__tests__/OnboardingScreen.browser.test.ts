@@ -34,8 +34,8 @@ function clickFirstChoice(): void {
   btn?.click();
 }
 
-describe("OnboardingScreen (ONB-1 funnel: style + surname + gender + given)", () => {
-  it("walks period→class→wave→style→surname→gender→given and onComplete gets the full identity", async () => {
+describe("OnboardingScreen (ONB-1 + FS-7b: style/surname/gender/given + diegetic life-seeds)", () => {
+  it("walks the full funnel incl. the Epoch-0 life-seeds and onComplete gets the full identity + seeds", async () => {
     const onComplete = vi.fn();
     component = mount(OnboardingScreen, {
       target: host,
@@ -45,7 +45,7 @@ describe("OnboardingScreen (ONB-1 funnel: style + surname + gender + given)", ()
     // The funnel advances one phase per first-choice click. The (period,class) cell may auto-skip the
     // wave step when it has a single wave, so drive by the data-phase the screen is actually showing.
     const order: string[] = [];
-    for (let i = 0; i < 8 && !onComplete.mock.calls.length; i++) {
+    for (let i = 0; i < 12 && !onComplete.mock.calls.length; i++) {
       const p = phase();
       if (p) order.push(p);
       clickFirstChoice();
@@ -53,8 +53,9 @@ describe("OnboardingScreen (ONB-1 funnel: style + surname + gender + given)", ()
     }
 
     expect(onComplete).toHaveBeenCalledTimes(1);
-    // Every founding choice must be present: (seed, place, surname, cls, gender, given, culture).
-    const [seed, place, surname, cls, gender, given, culture] = onComplete.mock.calls[0] ?? [];
+    // Every founding choice + the life-seeds: (seed, place, surname, cls, gender, given, culture, lifeSeeds).
+    const [seed, place, surname, cls, gender, given, culture, lifeSeeds] =
+      onComplete.mock.calls[0] ?? [];
     expect(typeof seed).toBe("string");
     expect(typeof place).toBe("string");
     expect(surname).toBeTruthy();
@@ -62,10 +63,16 @@ describe("OnboardingScreen (ONB-1 funnel: style + surname + gender + given)", ()
     expect(["male", "female"]).toContain(gender);
     expect(given).toBeTruthy();
     expect(typeof culture).toBe("string");
-    // The funnel surfaced the gender + given steps the gap was missing.
+    // FS-7b: the diegetic Epoch-0 life-seeds are composed (first job / best friend / life partner).
+    expect(lifeSeeds.firstJob).toBeTruthy();
+    expect(lifeSeeds.bestFriend).toBeTruthy();
+    expect(lifeSeeds.lifePartner).toBeTruthy();
+    // The funnel surfaced the new diegetic-birth steps.
     expect(order).toContain("gender");
     expect(order).toContain("given");
-    expect(order).toContain("style");
+    expect(order).toContain("job");
+    expect(order).toContain("friend");
+    expect(order).toContain("partner");
   });
 
   it("offers the wave's own naming style first on the style step", async () => {

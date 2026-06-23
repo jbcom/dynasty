@@ -2,6 +2,12 @@
 import type { Content } from "../../sim/content";
 import { getCulture, type Sex, suggestGivenNames, suggestSurnames } from "../../sim/onomastics";
 import { createRng } from "../../sim/rng";
+import type {
+  BestFriend,
+  FirstJob,
+  LifePartner,
+  LifeSeedChoices,
+} from "../../sim/saga/lifeSeeds";
 import type { Place } from "../../sim/schema";
 import {
   type ArrivalClass,
@@ -36,6 +42,7 @@ interface Props {
     gender: Sex,
     given: string,
     culture: string,
+    lifeSeeds: LifeSeedChoices,
   ) => void;
   /** Abandon onboarding and return to the title. */
   onCancel: () => void;
@@ -60,8 +67,32 @@ let chosen = $state<Place | undefined>();
 let styleId = $state<string | undefined>();
 let surnameChosen = $state<string | undefined>();
 let gender = $state<Sex | undefined>();
+// FS-7b: the diegetic Epoch-0 life-seeds — the founder growing up after they're named.
+let givenChosen = $state<string | undefined>();
+let firstJob = $state<FirstJob | undefined>();
+let bestFriend = $state<BestFriend | undefined>();
 let modalOpen = $state(false);
 let typedName = $state("");
+
+// The diegetic life-stage options the founder lives through (each a story seed).
+const JOB_OPTS: Array<{ id: FirstJob; title: string; blurb: string }> = [
+  { id: "apprentice_tradesman", title: "Apprenticed to a tradesman", blurb: "A craft in the hands — patient, proud work." },
+  { id: "dock_laborer", title: "Sent to the docks", blurb: "Hard labor among hard men; you learn loyalty and toil." },
+  { id: "shop_clerk", title: "A clerk's stool", blurb: "Ledgers and customers — the language of commerce." },
+  { id: "farmhand", title: "Bound to the land", blurb: "Soil, season, and the slow patience of the field." },
+  { id: "printers_devil", title: "A printer's devil", blurb: "Ink, type, and dangerous ideas set in lead." },
+];
+const FRIEND_OPTS: Array<{ id: BestFriend; title: string; blurb: string }> = [
+  { id: "a_loyal_equal", title: "A loyal equal", blurb: "Someone who would stand beside you, never above." },
+  { id: "an_ambitious_rival", title: "An ambitious rival", blurb: "A friend who is also a spur — you sharpen each other." },
+  { id: "a_mentor_elder", title: "A mentor, older + wise", blurb: "One who teaches you how the world really turns." },
+  { id: "none", title: "No one close", blurb: "A solitary start; you keep your own counsel." },
+];
+const PARTNER_OPTS: Array<{ id: NonNullable<LifePartner>; title: string; blurb: string }> = [
+  { id: "marry_for_love", title: "Marry for love", blurb: "A heart's choice — the line begins in devotion." },
+  { id: "marry_for_advantage", title: "Marry for advantage", blurb: "A match of standing — the line begins in strategy." },
+  { id: "remain_unwed", title: "Remain unwed (for now)", blurb: "The work before the family; the line waits." },
+];
 
 const GENDER_LABEL: Record<Sex, { title: string; blurb: string }> = {
   male: { title: "A son", blurb: "The progenitor of the line is a man." },
@@ -123,9 +154,17 @@ function pickStyle(id: string): void {
 }
 function pickGender(g: Sex): void {
   gender = g;
+  // Re-picking gender resets the downstream identity + life-seed tail (given name is gender-derived).
+  givenChosen = undefined;
+  firstJob = undefined;
+  bestFriend = undefined;
 }
 function back(): void {
-  if (gender) gender = undefined;
+  // Unwind the funnel newest-first: the FS-7b life-seed steps, then naming, then the cell choices.
+  if (bestFriend) bestFriend = undefined;
+  else if (firstJob) firstJob = undefined;
+  else if (givenChosen) givenChosen = undefined;
+  else if (gender) gender = undefined;
   else if (surnameChosen) surnameChosen = undefined;
   else if (styleId) styleId = undefined;
   else if (chosen && cellWaves.length > 1) chosen = undefined;
@@ -145,13 +184,28 @@ function chooseSurname(surname: string): void {
   typedName = "";
 }
 
-/** Naming step 3: bestow the given name and BEGIN THE RUN with the full chosen identity. */
+/** Naming step 3: bestow the given name, then advance into the diegetic Epoch-0 life-seed steps. */
 function bestowGiven(given: string): void {
+  const first = clean(given);
+  if (!first) return;
+  givenChosen = first;
+  modalOpen = false;
+  typedName = "";
+}
+function pickJob(j: FirstJob): void {
+  firstJob = j;
+}
+function pickFriend(f: BestFriend): void {
+  bestFriend = f;
+}
+/** Life-seed step 3 (the founder takes — or doesn't — a partner): COMPLETE the founding. */
+function pickPartnerAndBegin(p: LifePartner): void {
   const place = chosen;
   const fam = surnameChosen;
-  const first = clean(given);
-  if (!place || !cls || !styleId || !fam || !gender || !first) return;
-  onComplete(seed, place.id, fam, cls, gender, first, styleId);
+  if (!place || !cls || !styleId || !fam || !gender || !givenChosen || !firstJob || !bestFriend)
+    return;
+  const lifeSeeds: LifeSeedChoices = { firstJob, bestFriend, lifePartner: p };
+  onComplete(seed, place.id, fam, cls, gender, givenChosen, styleId, lifeSeeds);
 }
 </script>
 
@@ -242,7 +296,7 @@ function bestowGiven(given: string): void {
         {/each}
       </div>
     </article>
-  {:else}
+  {:else if !givenChosen}
     <article class="card" data-phase="given">
       <p class="prompt">
         {GENDER_LABEL[gender].title} of the {surnameChosen} line. And the name {gender === "male"
@@ -256,6 +310,50 @@ function bestowGiven(given: string): void {
         <button class="own" type="button" onclick={() => (modalOpen = true)}>
           Choose your own given name…
         </button>
+      </div>
+    </article>
+  {:else if !firstJob}
+    <article class="card" data-phase="job">
+      <p class="prompt">
+        {givenChosen} {surnameChosen} comes of age. What first put bread on the table — and shaped the
+        hands of the line to come?
+      </p>
+      <div class="choices">
+        {#each JOB_OPTS as o (o.id)}
+          <button type="button" onclick={() => pickJob(o.id)}>
+            <span class="opt-title">{o.title}</span>
+            <span class="opt-blurb">{o.blurb}</span>
+          </button>
+        {/each}
+      </div>
+    </article>
+  {:else if !bestFriend}
+    <article class="card" data-phase="friend">
+      <p class="prompt">
+        Every life turns on the people in it. Who stood closest to {givenChosen} in those early years?
+      </p>
+      <div class="choices">
+        {#each FRIEND_OPTS as o (o.id)}
+          <button type="button" onclick={() => pickFriend(o.id)}>
+            <span class="opt-title">{o.title}</span>
+            <span class="opt-blurb">{o.blurb}</span>
+          </button>
+        {/each}
+      </div>
+    </article>
+  {:else}
+    <article class="card" data-phase="partner">
+      <p class="prompt">
+        And when the time came for the {surnameChosen} line to begin in earnest — how did {givenChosen}
+        {gender === "male" ? "take a wife" : "take a husband"}, if at all?
+      </p>
+      <div class="choices">
+        {#each PARTNER_OPTS as o (o.id)}
+          <button type="button" onclick={() => pickPartnerAndBegin(o.id)}>
+            <span class="opt-title">{o.title}</span>
+            <span class="opt-blurb">{o.blurb}</span>
+          </button>
+        {/each}
       </div>
     </article>
   {/if}

@@ -7,6 +7,7 @@ import type { Motivators } from "./motivators";
 import { getCulture, pickGivenName } from "./onomastics";
 import { applyPersonality } from "./personality";
 import { createRng } from "./rng";
+import { applyLifeSeeds, type LifeSeedChoices, seedFlags } from "./saga/lifeSeeds";
 import type { AxisKind, StartMoment } from "./schema";
 import type { Archetype } from "./slots";
 import { type GameState, initState, withFlag } from "./state";
@@ -89,6 +90,12 @@ export interface Composition {
    * from turn one. Optional — absent = centrist start.
    */
   seedMotivators?: Motivators;
+  /**
+   * FS-7: the diegetic Epoch-0 birth life-seeds (first job / best friend / life partner). When present,
+   * their seed FLAGS are stamped on the run + their motivator LEANS tilt the founder. Optional — absent
+   * keeps the prior behavior (no life-seeds composed).
+   */
+  lifeSeeds?: LifeSeedChoices;
 }
 
 /** The progenitor's given name + the founding state, for the UI + the run. */
@@ -184,6 +191,12 @@ export function foundByComposition(content: Content, c: Composition): FoundingRe
   let meters = base.meters;
   // SS-7: start from the wave's class-seeded motivators when provided, else centrist.
   let personality = c.seedMotivators ?? base.personality;
+  // FS-7: the diegetic Epoch-0 life-seeds (first job / friend / partner) tilt the founder + stamp seed
+  // flags the spine + trigger lattice read.
+  if (c.lifeSeeds) {
+    personality = applyLifeSeeds(personality, c.lifeSeeds);
+    for (const f of seedFlags(c.lifeSeeds)) flags = withFlag(flags, f);
+  }
   const stack = resolveStack(content.worldStacks, c.place, c.era);
   for (const [axisKind, optionId] of Object.entries(c.axisChoices ?? {}) as [AxisKind, string][]) {
     const axis = axisByKind(content.axes, axisKind);
