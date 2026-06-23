@@ -104,17 +104,32 @@ function rivalFate(rung: number, faltering: boolean, fallen: boolean): string {
 function reachedStars(rung: number, faltering: boolean, fallen: boolean): boolean {
   return rung >= RIVAL_MAX_RUNG && !faltering && !fallen;
 }
-// Sorted high→low already (the engine sorts standings); render every line so the field's whole arc shows.
+// RIVAL-FINALE-SORT: rank a line by its FATE, not raw rung, so The Other Lines reads top-to-bottom as a clean
+// descent (stars → high → settled → low → faltered → dropped out). A faltering / dropped-out line sinks below the
+// rung tiers regardless of its number — a fallen line at rung 0 and a thriving low line at rung 0 read very
+// differently, so they must not sort together. Lower ordinal = higher in the list. Mirrors rivalFate's branches.
+function fateRank(rung: number, faltering: boolean, fallen: boolean): number {
+  if (fallen) return 6; // dropped out — the floor
+  if (faltering) return 5; // stumbled at the last
+  if (rung >= RIVAL_MAX_RUNG) return 0; // reached the stars — the summit
+  if (rung >= RIVAL_MAX_RUNG - 1) return 1; // rose high
+  if (rung >= 2) return 2; // made its mark, settled
+  return 3; // never rose far
+}
+// Render every line so the field's whole arc shows, sorted by finale fate (then rung, then name for stability).
 const rivals = $derived(
-  rivalStandings.map((r) => ({
-    id: r.id,
-    name: humanizeRivalLabel(r.label),
-    rung: r.rung,
-    fate: rivalFate(r.rung, r.faltering, r.fallen ?? false),
-    faltering: r.faltering,
-    fallen: r.fallen ?? false,
-    stars: reachedStars(r.rung, r.faltering, r.fallen ?? false),
-  })),
+  rivalStandings
+    .map((r) => ({
+      id: r.id,
+      name: humanizeRivalLabel(r.label),
+      rung: r.rung,
+      fate: rivalFate(r.rung, r.faltering, r.fallen ?? false),
+      faltering: r.faltering,
+      fallen: r.fallen ?? false,
+      stars: reachedStars(r.rung, r.faltering, r.fallen ?? false),
+      rank: fateRank(r.rung, r.faltering, r.fallen ?? false),
+    }))
+    .sort((a, b) => a.rank - b.rank || b.rung - a.rung || a.name.localeCompare(b.name)),
 );
 
 // LEDGER-IN-LEGACY-REPORT: the line's hard seasons + comebacks, gathered for the final reckoning. The
