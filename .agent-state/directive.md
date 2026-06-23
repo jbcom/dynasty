@@ -1136,14 +1136,13 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   measurement put a fast read-path at ~44 min. To lock the full hour for the median player, the next lever is
   a third interstitial on the SIX mid-weight acts (g1/g2/g4/g5/g6/g7 — currently 6 scenes) OR richer beat
   prose. Gate on a fresh PLAYTEST read; pick the lever from the figure, not a guess. Same idempotent script.
-- [ ] **TRIGGER-CROSSING-RECORD — wire crossing-recording so `once` rules are actually enforced.** Milestone
-  review [LOW]: `triggerThreads` now PASSES a firedBranches set (from `crossed:<family>:<branch>` flags) to
-  evaluateTriggers, but nothing yet RECORDS those flags when a branch fires (triggerThreads is a pure `view`
-  read). Wire the recurring-cast memory (recordCrossing/crossedFlag already exist in triggerLattice) into
-  pickBeat/pickDecision so a fired `once` arrival stamps its `crossed:` flag on advance — then `once` is
-  enforced + the Turtledove "we've met this family before" memory becomes real (priorCrossing-gated returns
-  unlock). Must stay deterministic (flag-add order matters for replay). This is the full cast-memory feature
-  the LOW finding's mechanism half is ready for.
+- [x] **TRIGGER-CROSSING-RECORD — DONE (commit fd84582).** pickBeat/pickDecision now call
+  recordTriggerCrossings against the engaged scene: every fired trigger branch stamps a
+  `crossed:<family>:<branch>` flag (the existing crossedFlag convention). So `once` arrivals fire exactly
+  once + the priorCrossing-gated RETURN branches unlock once their family was met — the Turtledove cast
+  memory is real. Deterministic (stable sorted fired order, new-only flags, no RNG-label impact); save =
+  seed+history reconstructs bit-identically. Shared firedTriggerBranches helper backs weave + record. Test:
+  loop.unit TRIGGER-CROSSING-RECORD. 839 node + 110 browser green.
 - [x] **SPINE-DEPTH-PLAYTEST — DONE (commit dbc45ef).** Permanent end-to-end measurement test
   (spineDepthPlaytest.unit). MEASURED a full founding→stars run: all 10 gens, 64 scenes, 132 paragraphs, 42
   beats (of 83 available), 22 decisions ≈ 44 min at a conservative single-read pace — up from ~15-20 min
