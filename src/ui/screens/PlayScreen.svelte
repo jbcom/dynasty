@@ -176,13 +176,18 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
            carries dread, not just aftermath. Deterministic (no roll); shown while the threat looms. -->
       {#if view.foreshadow}
         <!-- FORESHADOW-IN-TONE: a grave omen reads heavier than a marginal one. RECOVERY-FORESHADOW-TONE: a
-             hopeful rebound omen (data-tone="hope") reads in a warm register, apart from the dread of a loss. -->
+             hopeful rebound omen (data-tone="hope") reads in a warm register, apart from the dread of a loss.
+             OMEN-TONE-A11Y: a TEXT badge ("Recovering" / "Warning") carries the tone WITHOUT relying on color
+             (WCAG 1.4.1) — a colorblind / screen-reader player gets the valence from the label, not the hue. -->
         <p
           class="foreshadow"
           data-testid="foreshadow"
           data-weight={view.foreshadow.weight}
           data-tone={view.foreshadow.tone}
         >
+          <span class="omen-badge" data-tone={view.foreshadow.tone}>
+            {view.foreshadow.tone === "hope" ? "↻ Recovering" : "⚠ Warning"}
+          </span>
           {view.foreshadow.text}
         </p>
       {/if}
@@ -489,6 +494,29 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     background: color-mix(in srgb, var(--mmm-gold) 10%, transparent);
     color: color-mix(in srgb, var(--mmm-gold) 70%, var(--mmm-text));
     font-weight: 600;
+  }
+  /* OMEN-TONE-A11Y: the tone badge carries the valence in TEXT (+ an icon), not color alone — a small
+     uppercase pill before the omen. Its own tint reinforces (but does not solely convey) the tone. */
+  .omen-badge {
+    display: inline-block;
+    margin-right: 0.4rem;
+    padding: 0.05rem 0.4rem;
+    border-radius: 999px;
+    font-style: normal;
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .omen-badge[data-tone="hope"] {
+    color: var(--mmm-ink, #1a1206);
+    background: var(--mmm-gold);
+  }
+  .omen-badge[data-tone="dread"] {
+    color: var(--mmm-text);
+    background: var(--mmm-red, #b22);
   }
   .event-pane {
     display: flex;

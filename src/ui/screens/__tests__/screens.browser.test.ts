@@ -285,6 +285,54 @@ describe("LegacyReport", () => {
     expect(rows[rows.length - 1]).toEqual({ year: 1950, kind: "family_death" });
   });
 
+  it("SHOCK-LEDGER-EMPTY-VOICE: a charmed multi-generation run reads 'spared the worst', not a missing section", () => {
+    const mk = (id: string, born: number, generation: number, isProtagonist: boolean) => ({
+      id,
+      given: "X",
+      surname: "Vane",
+      sex: "male" as const,
+      born,
+      generation,
+      traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
+      isProtagonist,
+    });
+    // A 2-generation family with NO shock flags → the charmed-run grace note (not the list, not silence).
+    const state = {
+      ...initState(content, "seed"),
+      flags: ["base:land"], // no shock:* / recovered:* flags
+      family: {
+        members: [mk("m0", 1885, 0, false), mk("m1", 1915, 1, true)],
+        protagonistId: "m1",
+        nextSeq: 2,
+      },
+      end: { kind: "death" as const, year: 1980, reason: "x" },
+    };
+    component = mount(LegacyReport, {
+      target: host,
+      props: { content, state, end: state.end, onRestart: () => {} },
+    });
+    // No shock LIST renders, but the spared grace note does, naming the generation count.
+    expect(host.querySelector("[data-testid='legacy-ledger']")).toBeNull();
+    const spared = host.querySelector("[data-testid='legacy-ledger-spared']");
+    expect(spared, "the charmed-run grace note renders").not.toBeNull();
+    expect(spared?.textContent).toMatch(/spared the worst/i);
+    expect(spared?.textContent).toMatch(/2 generations/);
+
+    // A trivial run (no family / ≤1 generation) shows NOTHING — silence is correct there, not a charmed life.
+    unmount(component);
+    component = mount(LegacyReport, {
+      target: host,
+      props: {
+        content,
+        state: { ...initState(content, "seed"), flags: ["base:land"], end: state.end },
+        end: state.end,
+        onRestart: () => {},
+      },
+    });
+    expect(host.querySelector("[data-testid='legacy-ledger-spared']")).toBeNull();
+    expect(host.querySelector("[data-testid='legacy-ledger']")).toBeNull();
+  });
+
   it("CONVERGENCE-RIVAL-FINALE: surfaces the other lines + their fates at the close", () => {
     const state = {
       ...initState(content, "seed"),

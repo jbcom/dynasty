@@ -1425,16 +1425,26 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   line + a mid line + a dropped-out line + a loss→comeback ledger, asserts both extreme markers present, and captures
   a screenshot. READ the screenshot: Bavaria (stars) renders bright-gold/ascendant, Chinese (dropped out) struck +
   dimmed grey, ledger shows 1920 reversal→rebuilt→1950 death. The two registers read distinctly as intended. ✓
-- [ ] **MID-RUN-FIELD-GLANCE-SCREENSHOT — capture + READ a mid-run PlayScreen with the Field dossier tab open
-  showing a mix of states (surging / faltering / fallen / steady + trend arrows) to confirm the in-run race reads
-  as clearly as the finale does.** The finale is screenshotted; the in-run dossier (the live race surface) is not.
-  Visual harness screenshot; READ + compare to the dossier intent. Closes the visual-coverage gap on the live surface.
-- [ ] **OMEN-TONE-A11Y — the hope (gold) vs dread (red) omen registers must not rely on color ALONE** (WCAG 1.4.1).
-  Add a non-color cue — an icon or a text prefix ("⟳ Recovering" / "⚠ Warning") — so a colorblind player distinguishes
-  them. Mirror on the finale field-extreme registers (stars/dropped-out) if they also lean on color alone. Pure UI; tested.
-- [ ] **SHOCK-LEDGER-EMPTY-VOICE — when a run had NO hard seasons, the finale silently omits the ledger; instead show
-  a one-line "the line was spared the worst — no disaster struck across N generations" so a charmed run reads as an
-  achievement, not a missing section.** Pure (a fallback line when shockLedger is empty + the run was long). Tested.
+- [x] **MID-RUN-FIELD-GLANCE-SCREENSHOT — DONE (branch feat/a11y-and-finale-glance).** New RivalDossierGlance.visual
+  test captures the live Field dossier with every state (surging/faltering/fallen/holding + the player slotted in) +
+  trend arrows. READ the screenshot: Bavaria surging (5★ ▲), Your Line (3★, gold-outlined), Scandinavian holding (—),
+  Italian faltering (▼ red), Chinese fallen (struck + dim), summary "1 line leads you. 1 line has fallen out." Reads
+  clearly at a glance, as well as the finale. ✓
+- [x] **OMEN-TONE-A11Y — DONE.** The omen now carries a TEXT badge ("↻ Recovering" / "⚠ Warning") keyed on tone, so a
+  colorblind / screen-reader player gets the valence from the label, not the gold/red hue alone (WCAG 1.4.1). The
+  finale field-extreme registers already use non-color cues (struck-through "dropped out" text, "reached the stars"
+  text), so no mirror needed there. Test: PlayScreen.visual (the badge text distinguishes hope vs dread).
+- [x] **SHOCK-LEDGER-EMPTY-VOICE — DONE.** A charmed run (no shock/recovered flags) with a multi-generation dynasty
+  now shows a grace note — "The line was spared the worst — no disaster struck across N generations" — instead of
+  silently omitting the Hard Seasons section; a trivial/≤1-gen run still shows nothing. Test: screens.browser (the
+  grace note + generation count for a 2-gen charmed run; silence for a no-family run).
+- [ ] **MAP-FIELD-LINK — the in-run MapView and the Field dossier should agree on each line's state.** Both surface the
+  rival lines; verify a line reading "fallen" in the dossier also reads as eliminated on the map (and surging/holding
+  match), so the two live surfaces never contradict. Pure; tested (a parity unit/browser test over shared standings).
+- [ ] **OMEN-BADGE-SCREENSHOT — capture + READ a PlayScreen with the hope badge AND the dread badge to confirm the
+  a11y badges read clearly (legible at size, the icon+text distinct) and don't crowd the prose.** Visual; READ both.
+- [ ] **FINALE-APEX-VS-RUIN-CONTRAST — screenshot + READ both a triumphant apex finale and a grim extinguished one to
+  confirm the LegacyReport's tone visibly differs (gold ascendance vs stark loss), not just the headline text.** Visual.
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
