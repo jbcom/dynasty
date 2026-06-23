@@ -5,6 +5,7 @@ import {
   createDynastyWorld,
   detectGlimpses,
   nudgeRival,
+  rungTrend,
   surgeHeadline,
 } from "../dynastyWorld";
 import { createRng } from "../rng";
@@ -189,6 +190,29 @@ describe("dynasty world (SS-8)", () => {
       return total;
     };
     expect(falterCount(1780)).toBeGreaterThan(falterCount(2300));
+  });
+
+  it("RIVAL-RUNG-TREND: the trend reads the window's net direction (rising/steady/falling)", () => {
+    expect(rungTrend([1, 2, 3])).toBe("rising");
+    expect(rungTrend([3, 2, 1])).toBe("falling");
+    expect(rungTrend([2, 2, 2])).toBe("steady");
+    // A peak-and-slide nets down across the window (3→2) → falling, even though it rose first.
+    expect(rungTrend([2, 3, 2])).toBe("steady"); // first 2 == last 2 → net flat
+    expect(rungTrend([1, 3, 2])).toBe("rising"); // first 1 < last 2 → net up
+    // Degenerate inputs are steady (no direction).
+    expect(rungTrend([])).toBe("steady");
+    expect(rungTrend([4])).toBe("steady");
+  });
+
+  it("RIVAL-RUNG-TREND: advanceWorld records rung history → snapshots carry a trend", () => {
+    let w = createDynastyWorld(content.places, "ireland", createRng("trend"));
+    for (let y = 1900; y <= 2000; y += 20) w = advanceWorld(w, y, createRng("trend"));
+    // Every snapshot has a valid trend after several advances.
+    for (const s of w.snapshots) expect(["rising", "steady", "falling"]).toContain(s.trend);
+    // Deterministic: same seed → same trends.
+    let w2 = createDynastyWorld(content.places, "ireland", createRng("trend"));
+    for (let y = 1900; y <= 2000; y += 20) w2 = advanceWorld(w2, y, createRng("trend"));
+    expect(w2.snapshots.map((s) => s.trend)).toEqual(w.snapshots.map((s) => s.trend));
   });
 
   it("RIVAL-RISE-NEWS-WEIGHT: the surge headline tiers by the rung gap (mild → urgent)", () => {
