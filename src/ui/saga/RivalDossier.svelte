@@ -55,6 +55,16 @@ const field = $derived(
   ),
 );
 
+// CONVERGENCE-FIELD-SUMMARY-LINE: a one-line "state of the race" — how many rivals lead the player, and how
+// many have fallen out — so the player gets the gestalt before reading the rows. Derived from the standings.
+const summary = $derived.by(() => {
+  const ahead = standings.filter((s) => !s.fallen && s.rung > playerRung).length;
+  const fallen = standings.filter((s) => s.fallen).length;
+  const lead = ahead === 0 ? "You lead the field." : `${ahead} ${ahead === 1 ? "line leads" : "lines lead"} you.`;
+  const thinned = fallen > 0 ? ` ${fallen} ${fallen === 1 ? "line has" : "lines have"} fallen out.` : "";
+  return lead + thinned;
+});
+
 const STATE_LABEL: Record<State, string> = {
   fallen: "Fallen",
   faltering: "Faltering",
@@ -74,6 +84,8 @@ const TREND_ARROW: Record<"rising" | "steady" | "falling", string> = {
 {#if standings.length}
   <section class="dossier" data-testid="rival-dossier">
     <h3 class="dossier-title">The Field — the race toward the stars</h3>
+    <!-- CONVERGENCE-FIELD-SUMMARY-LINE: the state of the race at a glance, before the per-line rows. -->
+    <p class="field-summary" data-testid="field-summary">{summary}</p>
     <ul class="rows">
       {#each field as r (r.id)}
         <li class="row" class:you={r.isPlayer} data-state={r.state}>
@@ -103,6 +115,14 @@ const TREND_ARROW: Record<"rising" | "steady" | "falling", string> = {
     font-family: var(--mmm-font-display);
     color: var(--mmm-gold);
     font-size: 0.95rem;
+  }
+  /* CONVERGENCE-FIELD-SUMMARY-LINE: the at-a-glance race state, beneath the title. */
+  .field-summary {
+    margin: 0;
+    font-family: var(--mmm-font-body);
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--mmm-text-dim);
   }
   .rows {
     list-style: none;

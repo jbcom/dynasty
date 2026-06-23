@@ -97,6 +97,59 @@ describe("RivalDossier (RIVAL-DOSSIER-TAB)", () => {
     expect(row?.textContent).toContain("Fallen");
   });
 
+  it("CONVERGENCE-FIELD-SUMMARY-LINE: the header summarizes the race (lead / ahead / fallen)", () => {
+    // Player ahead of all: "You lead the field."
+    const leadStandings = [
+      {
+        id: "rival:a",
+        label: "rival:a",
+        rung: 1,
+        faltering: false,
+        trend: "steady" as const,
+        fallen: false,
+      },
+    ];
+    component = mount(RivalDossier, {
+      target: host,
+      props: { standings: leadStandings, playerRung: 3 },
+    });
+    expect(host.querySelector('[data-testid="field-summary"]')?.textContent).toContain(
+      "You lead the field",
+    );
+    unmount(component);
+    // Two ahead + one fallen: "2 lines lead you. 1 line has fallen out."
+    const mixed = [
+      {
+        id: "rival:b",
+        label: "rival:b",
+        rung: 4,
+        faltering: false,
+        trend: "rising" as const,
+        fallen: false,
+      },
+      {
+        id: "rival:c",
+        label: "rival:c",
+        rung: 3,
+        faltering: false,
+        trend: "steady" as const,
+        fallen: false,
+      },
+      {
+        id: "rival:d",
+        label: "rival:d",
+        rung: 0,
+        faltering: false,
+        trend: "falling" as const,
+        fallen: true,
+      },
+    ];
+    component = mount(RivalDossier, { target: host, props: { standings: mixed, playerRung: 2 } });
+    const sum = host.querySelector('[data-testid="field-summary"]')?.textContent ?? "";
+    expect(sum).toMatch(/2 lines lead you/);
+    expect(sum).toMatch(/1 line has fallen out/);
+  });
+
   it("renders nothing when there are no rivals", () => {
     component = mount(RivalDossier, { target: host, props: { standings: [], playerRung: 0 } });
     expect(host.querySelector('[data-testid="rival-dossier"]')).toBeNull();
