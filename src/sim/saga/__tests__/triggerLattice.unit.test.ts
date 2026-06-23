@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import triggersJson from "../../../data/saga/triggers.json" with { type: "json" };
+import { TriggerTableSchema } from "../schema";
 import {
   type CastFamily,
   conditionMet,
@@ -126,5 +128,34 @@ describe("trigger lattice (FS-5)", () => {
         "irish",
       ),
     ).toBe(true);
+  });
+
+  it("FS-5b: the real triggers.json validates + fires the right branches by era + memory", () => {
+    const table = TriggerTableSchema.parse(triggersJson);
+    expect(table.cast.length).toBe(7); // one recurring family per wave
+    expect(table.rules.length).toBeGreaterThan(7);
+
+    // 1845 convergence, never-met: the Irish famine-docks ARRIVAL fires; the memory-gated return does NOT.
+    const arrival = evaluateTriggers(
+      table.rules,
+      baseState({ year: 1850, era: "convergence", crossings: {} }),
+    ).map((b) => `${b.family}:${b.branch}`);
+    expect(arrival).toContain("ireland:arrival_famine_docks");
+    expect(arrival).not.toContain("ireland:machine_politics_return");
+
+    // 1925 emergence, HAVING met the Irish before: the memory-gated return now fires.
+    const later = evaluateTriggers(
+      table.rules,
+      baseState({ year: 1925, era: "emergence", crossings: { ireland: 1 } }),
+    ).map((b) => `${b.family}:${b.branch}`);
+    expect(later).toContain("ireland:machine_politics_return");
+    expect(later).not.toContain("ireland:arrival_famine_docks"); // arrival is era-gated to convergence
+
+    // The Chinese arrival is gated to the railroad-West window (1863-1882), not the East-Coast 1880s waves.
+    const railroad = evaluateTriggers(
+      table.rules,
+      baseState({ year: 1870, era: "convergence", crossings: {} }),
+    ).map((b) => `${b.family}:${b.branch}`);
+    expect(railroad).toContain("chinese:arrival_railroad_west");
   });
 });
