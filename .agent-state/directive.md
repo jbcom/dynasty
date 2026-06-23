@@ -1250,9 +1250,10 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [x] **RIVAL-RACE-PRESENCE PR #126 — DONE, MERGED (squash 0cf8514; release cut 0.32.0).** 4 units: falter/rise
   news, field strip, rival-fate ending. All review (Amazon-Q dedup, Gemini perf/DRY/test-comment) folded forward,
   all threads resolved, merged CLEAN. Post-merge Release+CD+CodeQL all SUCCESS (deployed). main synced.
-- [ ] [WAIT-REVIEW] **RIVAL-CROSSING-EXPLOIT PR — push feat/rival-crossing-exploit, open PR, full remote loop.**
-  1 local commit (press side-log + reconstruct interleave + UI button). Full local gate passed. Push, open PR,
-  wait CI, fold review forward + resolve threads, self-squash-merge ([[babysit-pr]]). Then SHOCK-FORESHADOW.
+- [ ] [WAIT-REVIEW] **RIVAL-CROSSING-EXPLOIT PR #128 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/rival-crossing-exploit (4de722b). Full local gate passed. Loop: wait build-and-test + CodeQL, read
+  CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge:
+  sync main, SHOCK-FORESHADOW on a fresh branch.
 - [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
   audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
   diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock
