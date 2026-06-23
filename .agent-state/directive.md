@@ -1120,6 +1120,11 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ### Rolling backlog (post-WV-3 — keep this section ≥3 actionable, append before draining)
 
+- [ ] [WAIT-REVIEW] **SHOCK-FAMILY-SUCCESSION-PRESSURE PR #120 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/shock-family-succession-pressure. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/
+  Gemini, fix forward + resolve threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main,
+  next branch for the rolling backlog (DOSSIER-SHOCK-LEDGER / CONVERGENCE-RIVAL-FINALE / playtest-2).
+
 - [ ] [WAIT-REVIEW] **CORPUS-MINE-INTERSECTIONS PR #118 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/corpus-mine-intersections: fabric wired into resolveThreads + all 7 families now have vignettes.
   Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads,
