@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.61.0](https://github.com/jbcom/dynasty/compare/v0.60.0...v0.61.0) (2026-06-23)
+
+
+### Features
+
+* **sim:** pure runner for the Epoch-0 opening chain (EI-6b sim spine) ([#192](https://github.com/jbcom/dynasty/issues/192)) ([7f35221](https://github.com/jbcom/dynasty/commit/7f3522146541a0cb50ca96e9222d2807851e2c15))
+
 ## [0.60.0](https://github.com/jbcom/dynasty/compare/v0.59.0...v0.60.0) (2026-06-23)
 
 
