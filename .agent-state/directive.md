@@ -104,10 +104,12 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
 - [x] **FS-7a life-seeds composer CORE — DONE (committed).** src/sim/saga/lifeSeeds.ts: first job / best
   friend / life partner → seed flags (seed:job/friend/partner:*) + stacking motivator leans + clamp;
   partnerSeedsSuccession. +6 tests, 726 green. ([[novel-not-fragments]])
-- [ ] **FS-7b onboarding UI → diegetic birth steps.** Replace the wave×class cell picker with the Epoch-0
-  birth flow: start diegetically + COMPOSE the founder growing up — gender, given name (reuse ONB-1), first
-  job, best friend, life partner — consuming lifeSeeds. Thread the seeds (flags + motivator lean + first
-  succession) through founding (App.birthGame → foundByComposition). Visual tests + Chrome verify.
+- [x] **FS-7b onboarding → diegetic Epoch-0 birth — DONE (committed).** OnboardingScreen gained 3 life-stage
+  phases (job/friend/partner) after gender+given; onComplete carries lifeSeeds → App.birthGame →
+  foundByComposition (Composition.lifeSeeds applies seed flags + motivator leans via FS-7a). back() unwinds
+  the steps. Onboarding browser test walks the full funnel + asserts seeds. tsc 0, 726 unit + 97 browser green.
+  (REMAINING for a deeper pass: a fully narrated birth scene vs. the current choice-card flow — the seeds +
+  flow are in; richer diegetic prose is a polish follow-up, not blocking FS-8.)
 - [ ] [WAIT] **FS-8 live-verify the hour+ playthrough — after the spine is authored + wired.** One line
   1776→stars, waves braiding in, era-distinct decisions, reads as ONE strong story. THEN revisit the visual
   layer. [WAIT] FS-6/FS-7.
