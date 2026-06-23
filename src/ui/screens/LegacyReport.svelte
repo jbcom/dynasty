@@ -137,6 +137,13 @@ const rivals = $derived(
 // lived through, so the finale reflects the trials, not just the verdict. Empty for a shock-free run.
 const ledger = $derived(shockLedger(state.flags));
 
+// SHOCK-LEDGER-EMPTY-VOICE: a run that weathered NO shocks shouldn't silently omit the Hard Seasons section —
+// a charmed line is an ACHIEVEMENT, not a missing surface. When the ledger is empty AND the line ran long
+// enough to have plausibly faced hardship (a multi-generation dynasty), show a one-line "spared the worst".
+// A trivial / unfounded run (≤1 generation) shows nothing — silence there is correct, not a charmed life.
+const sparedGenerations = $derived(dynasty?.generations ?? 0);
+const sparedTheWorst = $derived(ledger.length === 0 && sparedGenerations >= 2);
+
 // AGENCY-IN-LEGACY: tally what the PLAYER actively DID across the run from the side-logs — rivals pressed
 // (state.presses), recoveries invested (state.recoveryInvests). The close credits these interventions in a
 // "By Your Own Hand" line, distinct from the field/luck. Each count omitted from the line when zero.
@@ -224,6 +231,16 @@ onMount(() => {
           </li>
         {/each}
       </ul>
+    </section>
+  {:else if sparedTheWorst}
+    <!-- SHOCK-LEDGER-EMPTY-VOICE: a charmed run reads as an achievement, not a missing section. -->
+    <section class="hard-seasons spared" data-testid="legacy-ledger-spared">
+      <h2>The Family's Hard Seasons</h2>
+      <p class="spared-line">
+        The line was spared the worst — no disaster struck across {sparedGenerations === 1
+          ? "1 generation"
+          : `${sparedGenerations} generations`}.
+      </p>
     </section>
   {/if}
 
@@ -424,6 +441,14 @@ onMount(() => {
     margin: 1rem auto 0;
     max-width: 30rem;
     text-align: left;
+  }
+  /* SHOCK-LEDGER-EMPTY-VOICE: a charmed run's one-liner — a quiet, gold-tinged grace note, not a list. */
+  .spared-line {
+    margin: 0.4rem 0 0;
+    font-family: var(--mmm-font-body);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: color-mix(in srgb, var(--mmm-gold) 55%, var(--mmm-text));
   }
   .hard-seasons ul {
     list-style: none;
