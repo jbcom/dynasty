@@ -57,6 +57,31 @@ const METER_BLOWS: ReadonlyArray<{ meter: MeterId; note: string; min: number; ma
 const BASE_SHOCK_CHANCE = 0.33;
 
 /**
+ * The exposure multiplier for a macro-act: macro-act medicine (0.1 founding … 0.9 ascension) suppresses the
+ * hazard — a founding-era line is far more exposed than an interstellar one. Floored at 0.15 so even the far
+ * future isn't fully safe. The ONE home for the formula (shared by rollSagaShock + SHOCK-FORESHADOW).
+ */
+export function shockExposure(macroActId: string): number {
+  return Math.max(0.15, 1 - macroActMedicine(macroActId));
+}
+
+/**
+ * SHOCK-FORESHADOW: should the player be WARNED a hazard looms before the next tick? A deterministic threshold
+ * (no RNG — replay-safe, view-derived): true when this macro-act's exposure is high AND the line carries
+ * outstanding strain (a `shock_meter:*` marker from an un-recovered blow) OR there is a non-protagonist member
+ * to lose. The omen gives loss DREAD, not just aftermath. Pure.
+ */
+export function shockForeshadow(
+  macroActId: string,
+  flags: Iterable<string>,
+  hasKin: boolean,
+): boolean {
+  if (shockExposure(macroActId) < 0.75) return false;
+  const strained = [...flags].some((f) => f.startsWith("shock_meter:"));
+  return strained || hasKin;
+}
+
+/**
  * Roll one seeded disruption shock for a saga tick. Macro-act-weighted (better medicine → lower hazard) and
  * deterministic for a given (family, year, macroActId, rng). `macroActId` is the saga's coarse band
  * (founding/convergence/emergence/ascension — what `macroActForYear` returns), NOT a fine era id; the saga
@@ -72,11 +97,7 @@ export function rollSagaShock(
   rng: Rng,
   namedHeirId?: string,
 ): SagaShock {
-  // Macro-act medicine (0.1 founding … 0.9 ascension) suppresses the shock chance — a founding-era line is
-  // far more exposed than an interstellar one. `?? 0` via the lookup guards an unknown id (no NaN). Floor at
-  // 15% of base so even the far future isn't fully safe.
-  const exposure = Math.max(0.15, 1 - macroActMedicine(macroActId));
-  const chance = BASE_SHOCK_CHANCE * exposure;
+  const chance = BASE_SHOCK_CHANCE * shockExposure(macroActId);
   if (!rng.fork(`shock:${year}`).chance(chance)) return { kind: "none" };
 
   // Which kind? A living non-protagonist member can be struck (family_death); otherwise (or by the coin) a

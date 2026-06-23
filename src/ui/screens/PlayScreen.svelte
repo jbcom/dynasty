@@ -156,6 +156,11 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
       {#if view.shock}
         <p class="shock-aftermath" data-shock={view.shock.kind}>{view.shock.text}</p>
       {/if}
+      <!-- SHOCK-FORESHADOW: an omen BEFORE the blow — the season turns against the house — so a hazard
+           carries dread, not just aftermath. Deterministic (no roll); shown while the threat looms. -->
+      {#if view.foreshadow}
+        <p class="foreshadow" data-testid="foreshadow">{view.foreshadow}</p>
+      {/if}
       <!-- WV-1: cross-dynasty intersections are WOVEN into the scene's paged prose by the reader (not a
            detached "Where paths cross" wall under the choices). The reader folds the crossing in as
            narration the player turns through, so a crossing feels like a moment in the family's story. -->
@@ -367,6 +372,19 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     border-left-color: var(--mmm-gold-deep, #9a7d2e);
     background: color-mix(in srgb, var(--mmm-gold-deep, #9a7d2e) 9%, transparent);
     color: color-mix(in srgb, var(--mmm-gold-deep, #9a7d2e) 80%, var(--mmm-text));
+  }
+  /* SHOCK-FORESHADOW: dread before the blow — a muted, ominous omen (not the sharp red of an actual loss). */
+  .foreshadow {
+    margin: 0 auto 0.4rem;
+    max-width: 64ch;
+    padding: 0.4rem 0.9rem;
+    border-left: 3px dashed var(--mmm-text-dim);
+    background: color-mix(in srgb, var(--mmm-text-dim) 6%, transparent);
+    border-radius: var(--mmm-radius);
+    font-family: var(--mmm-font-body);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--mmm-text-dim);
   }
   .event-pane {
     display: flex;

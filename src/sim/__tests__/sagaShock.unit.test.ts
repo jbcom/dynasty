@@ -5,6 +5,8 @@ import {
   rollSagaRecovery,
   rollSagaShock,
   type SagaShock,
+  shockExposure,
+  shockForeshadow,
   shockLedger,
   shockMeterFlag,
   shockNote,
@@ -175,6 +177,27 @@ describe("rollSagaRecovery (WV-3-SHOCK-RECOVERY)", () => {
       const r = rollSagaRecovery(outstanding, 1900, createRng(`h${i}`).fork("sagarecover:1900"));
       expect(r).toBeNull();
     }
+  });
+});
+
+describe("shockExposure + shockForeshadow (SHOCK-FORESHADOW)", () => {
+  it("exposure is high in the founding era and floored low in the far future (monotone with medicine)", () => {
+    const founding = shockExposure("founding");
+    const ascension = shockExposure("ascension");
+    expect(founding).toBeGreaterThan(ascension);
+    expect(ascension).toBeGreaterThanOrEqual(0.15); // never fully safe
+    expect(founding).toBeLessThanOrEqual(1);
+  });
+
+  it("foreshadows in a harsh era when there's strain OR kin to lose; silent when safe or nothing at stake", () => {
+    // Harsh founding era + outstanding strain → omen.
+    expect(shockForeshadow("founding", [shockMeterFlag("money")], false)).toBe(true);
+    // Harsh era + kin to lose (no strain) → omen.
+    expect(shockForeshadow("founding", [], true)).toBe(true);
+    // Harsh era but NOTHING at stake (no strain, no kin) → silent.
+    expect(shockForeshadow("founding", ["base:press"], false)).toBe(false);
+    // Medicine-rich far future (low exposure) → silent even with strain + kin.
+    expect(shockForeshadow("ascension", [shockMeterFlag("money")], true)).toBe(false);
   });
 });
 

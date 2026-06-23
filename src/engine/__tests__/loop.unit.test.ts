@@ -999,4 +999,47 @@ describe("Game loop", () => {
     }
     throw new Error("no pressing run produced across the sweep");
   });
+
+  it("SHOCK-FORESHADOW: view.foreshadow surfaces an omen in a harsh era + is deterministic (no roll)", () => {
+    const real = loadContent();
+    const found = (seed: string) =>
+      foundByComposition(real, {
+        place: "ireland",
+        era: "origins",
+        culture: "anglo_protestant",
+        year: 1776,
+        archetype: "political" as const,
+        gender: "male" as const,
+        surname: "Fs",
+        seed,
+        originId: "composed:ireland:origins",
+      }).state;
+    let sawOmen = false;
+    for (const seed of ["fs1", "fs2", "fs3", "fs4"]) {
+      const base = found(seed);
+      const g = new Game(real, seed, base, "political");
+      // Determinism: the same state yields the same foreshadow on a second engine (no RNG consumed).
+      const g2 = new Game(real, seed, base, "political");
+      expect(g.view.foreshadow).toBe(g2.view.foreshadow);
+      let guard = 0;
+      while (!g.finished && guard < 200) {
+        if (g.view.foreshadow) {
+          expect(g.view.foreshadow).toMatch(/season|house|hard/i);
+          sawOmen = true;
+          break;
+        }
+        const s = g.view.saga.scene;
+        if (s) {
+          if (s.decision) g.pickDecision(0);
+          else if (s.beats.length) g.pickBeat(0);
+          else break;
+        } else if (g.view.currentEvent?.choices[0]) {
+          g.choose(g.view.currentEvent.choices[0].id);
+        } else break;
+        guard++;
+      }
+      if (sawOmen) break;
+    }
+    expect(sawOmen, "a foreshadow omen surfaced in a founding-era run").toBe(true);
+  });
 });

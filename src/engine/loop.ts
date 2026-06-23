@@ -34,6 +34,7 @@ import {
   rollSagaRecovery,
   rollSagaShock,
   type SagaShockNote,
+  shockForeshadow,
   shockMeterFlag,
   shockNote,
 } from "../sim/sagaShock";
@@ -83,6 +84,9 @@ export interface GameView {
    *  that has stumbled (a window) or surged past the player (pressure). Surfaced in the NewsTicker so the
    *  convergence race is felt in-run, not just at the close. */
   rivalNews: RivalNewsItem[];
+  /** SHOCK-FORESHADOW: a one-line omen when the next saga tick carries an elevated hazard (harsh era +
+   *  strain/kin to lose) — surfaced BEFORE the blow so loss has dread, not just aftermath. Null otherwise. */
+  foreshadow: string | null;
 }
 
 /** A one-line dispatch about a near-vantage rival line (RIVAL-RACE-PRESENCE). */
@@ -356,7 +360,21 @@ export class Game {
       lastLedger: this.lastLedger,
       shock: this.lastShock,
       rivalNews: this.rivalNews(),
+      foreshadow: this.foreshadow(),
     };
+  }
+
+  /** SHOCK-FORESHADOW: a one-line omen when the upcoming saga tick carries an elevated hazard. Only on an
+   *  active saga walk (the shock fires there); null on the event flow / a safe era / no strain or kin. The
+   *  text is era-neutral; deterministic (no RNG) so it's a stable view-derived hint, not a roll. */
+  private foreshadow(): string | null {
+    if (!this.saga.active || this.finished) return null;
+    const family = this.state.family;
+    const hasKin = !!family?.members.some(
+      (m) => m.id !== family.protagonistId && isMemberAlive(m, this.state.year),
+    );
+    const looming = shockForeshadow(macroActForYear(this.state.year), this.state.flags, hasKin);
+    return looming ? "The season turns against the house — hard days may be near." : null;
   }
 
   /**
