@@ -24,7 +24,7 @@ function openingSceneIdFor(actId: string, flags: string[]): string | null {
 }
 
 // Each spine act that has base-flavored openings: act id, its default open, the scene the variants divert
-// to, and the base→variant-scene map (FS-SPINE-ORIGIN-FLAVOR g0; FS-SPINE-ORIGIN-FLAVOR-DEPTH g1).
+// to, and the base→variant-scene id prefix (FS-SPINE-ORIGIN-FLAVOR g0; -DEPTH g1 + g2).
 const FLAVORED_ACTS = [
   {
     actId: "spine:g0:founding",
@@ -37,6 +37,12 @@ const FLAVORED_ACTS = [
     open: "spine:g1:earlyrepublic:open",
     divert: "spine:g1:earlyrepublic:doctrine",
     base: "spine:g1:earlyrepublic:open_",
+  },
+  {
+    actId: "spine:g2:antebellum",
+    open: "spine:g2:antebellum:open",
+    divert: "spine:g2:antebellum:allegiance",
+    base: "spine:g2:antebellum:open_",
   },
 ];
 const BASES = ["land", "commerce", "pulpit", "law", "military"];

@@ -319,6 +319,159 @@ const G1_VARIANTS = [
 ];
 
 /**
+ * G2 (Act III — The Sundered Threshold, antebellum / sectional crisis ~1840s-50s): the five base-flavored
+ * openings, diverting to the shared g2 `allegiance` scene. The existing industrial/textile `open` is the
+ * commerce/default. Voice: a nation pulling apart over slavery, expansion, and the coming war.
+ */
+const G2_VARIANTS = [
+  {
+    id: "spine:g2:antebellum:open_land",
+    base: "land",
+    sense: "smell",
+    prose: [
+      "The reek of green tobacco and turned red clay hung over the {family_name} fields, and {given_name} {surname} stood at the edge of the great house knowing the land had never been worth more — nor the bondage that worked it more bitterly contested. King Cotton had pushed the plantation frontier west to the black-soil prairies, and every acre the family held was a stake in a wager the whole republic was making: that the peculiar institution could expand forever. The price of land and the price of a human being had risen together, and the contradiction the founding generation had declined to settle was coming due.",
+      "Word came up the river road of Kansas bleeding, of a senator caned on the Senate floor, of a Dred Scott decision that made the family's human property a constitutional right and a moral abyss in the same breath. {given_name} weighed the ledger of the harvest against the gathering storm, knowing that a line built on land worked by the enslaved was about to be asked, by history and by armies, what it truly was.",
+    ],
+    beats: [
+      {
+        prose: ["A neighbor presses you to join the filibusters pushing slavery into the western territories."],
+        choice: {
+          text: "Throw the family's weight behind expansion — the institution must grow or die.",
+          motivatorShift: { power: 1, honor: 1 },
+          setFlags: ["g2_land_expansionist"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A Quaker cousin quietly asks whether the family has considered what the coming reckoning will cost."],
+        choice: {
+          text: "Hold your counsel — the land, and what works it, is not yours to question aloud.",
+          motivatorShift: { tradition: -1, lineage: 1 },
+          setFlags: ["g2_land_entrenched"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g2:antebellum:open_commerce",
+    base: "commerce",
+    sense: "sound",
+    prose: [
+      "The telegraph key chattered its endless market news through the {family_name} counting-house, and {given_name} {surname} read in it a nation knitting itself together with rail and wire even as it tore itself apart over slavery. Northern mills spun Southern cotton; Northern banks financed Southern planters; the whole economy was a single body the politicians swore was two. A merchant house with ledgers on both sides of the line stood to profit from the union — and to be ruined by its breaking.",
+      "Word came down the wire of tariff fights and a panic on the markets, of cotton factors overextended and railroads racing for the western trade. {given_name} weighed which way to lean the house as the sections drifted toward war, knowing that commerce had bound North and South too tightly for either to cut free without bleeding — and that the house that read the rupture early would survive it.",
+    ],
+    beats: [
+      {
+        prose: ["A railroad syndicate offers the house a stake in the line that will own the western trade."],
+        choice: {
+          text: "Buy in — the rails will outlast whatever war is coming.",
+          motivatorShift: { wealth: 1, reach: 1 },
+          setFlags: ["g2_commerce_railroad"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["Your Southern factors beg for credit as the sectional crisis spooks the Northern banks."],
+        choice: {
+          text: "Quietly call in the Southern debts before the storm breaks.",
+          motivatorShift: { wealth: 1, honor: 1 },
+          setFlags: ["g2_commerce_hedged_the_war"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g2:antebellum:open_pulpit",
+    base: "pulpit",
+    sense: "sound",
+    prose: [
+      "The congregation's hymn died away and the meetinghouse held its breath, for {given_name} {surname} was about to preach on the one subject that had already split the great denominations North from South: slavery. The Methodists had cleaved, the Baptists had cleaved, and a minister who named the institution sin or sanction could empty half the pews either way. The {family_name} pulpit had moral weight in the county — and the coming war would be fought, in part, over which scripture the nation believed.",
+      "Word came up the post road of Beecher's rifles and Garrison's burning of the Constitution, of a fugitive dragged back to bondage under federal law while crowds wept and raged. {given_name} weighed the gospel of order against the gospel of the oppressed, knowing the pulpit that spoke now would help decide whether the county marched to war for the Union, for the South, or not at all.",
+    ],
+    beats: [
+      {
+        prose: ["An abolitionist circuit-rider asks to thunder against slavery from your pulpit."],
+        choice: {
+          text: "Give him the pulpit — call the institution the sin it is.",
+          motivatorShift: { worldview: -1, honor: -1 },
+          setFlags: ["g2_pulpit_abolitionist"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["Deacons warn that naming slavery a sin will split the congregation as it split the denominations."],
+        choice: {
+          text: "Preach union and forbearance — hold the flock together above the quarrel.",
+          motivatorShift: { power: 1, tradition: -1 },
+          setFlags: ["g2_pulpit_union_peace"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g2:antebellum:open_law",
+    base: "law",
+    sense: "sight",
+    prose: [
+      "The statute books on the {family_name} shelf had doubled since the founding, and {given_name} {surname} read in them a republic arguing itself toward the precipice: Fugitive Slave Act, Compromise of 1850, the Kansas-Nebraska repeal of the old line. The law was where the sections fought before they fought with armies — every case a skirmish over whether the Constitution was a covenant for liberty or a bargain with bondage. A lawyer who could argue the great questions stood at the center of the storm, and on the road to the legislature, the Congress, perhaps the bench.",
+      "Word came down from Washington of Dred Scott, of a Supreme Court declaring that a Black man had no rights a white man was bound to respect, of a Constitution twisted to make slavery national. {given_name} weighed each brief knowing the law itself was failing to hold the union together — and that the men arguing now would either find the words to save it or write the terms of its breaking.",
+    ],
+    beats: [
+      {
+        prose: ["A fugitive-slave case lands on your desk: enforce the federal law, or find the loophole that frees the man."],
+        choice: {
+          text: "Argue the higher law — no statute can make a man property.",
+          motivatorShift: { politics: -1, honor: -1 },
+          setFlags: ["g2_law_higher_law"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A seat in Congress is open to a lawyer who can speak for the county in the great sectional debates."],
+        choice: {
+          text: "Take it — the union will be saved or lost in the chamber, not the courtroom.",
+          motivatorShift: { power: 1, politics: 1 },
+          setFlags: ["g2_law_congress"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g2:antebellum:open_military",
+    base: "military",
+    sense: "sound",
+    prose: [
+      "The militia drums beat a sharper cadence now, and {given_name} {surname}, an officer in a country sliding toward civil war, heard in them the approach of the test every soldier secretly waits for. The veterans of Mexico were the rising commanders; West Point had trained a generation of officers who would soon face each other across the same fields. The {family_name} sword had a reputation in the county — and a war between the states would make or break it utterly, depending on which way the line drew its blade.",
+      "Word came up from the territories of Bleeding Kansas, of John Brown's pikes and the arsenal at Harper's Ferry, of state militias arming on both sides of a line that no longer held. {given_name} weighed loyalty to the Union against loyalty to the section, knowing that the choice every officer in the country was about to be forced to make would define the family for a hundred years.",
+    ],
+    beats: [
+      {
+        prose: ["The state raises volunteer companies; a colonelcy is yours for the taking if you commit now."],
+        choice: {
+          text: "Raise the company — a war reputation is forged before the first battle.",
+          motivatorShift: { power: 1, reach: 1 },
+          setFlags: ["g2_military_raised_company"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["Old comrades on the other side of the line send word, asking which way your sword will turn."],
+        choice: {
+          text: "Hold your allegiance close — the line's survival may depend on choosing the winning side.",
+          motivatorShift: { honor: 1, lineage: 1 },
+          setFlags: ["g2_military_weighing_allegiance"],
+          gather: true,
+        },
+      },
+    ],
+  },
+];
+
+/**
  * Apply one act's base-flavored opening variants, idempotently: each variant scene is gated on its
  * `base:*` flag + diverts to `divertTo` (skipping the default `open`); the default `open` is gated to NOT
  * fire for any covered base (so an uncovered/default base — press at g0 — gets it). `actId` is the act,
@@ -365,6 +518,12 @@ const n1 = applyAct(
   "spine:g1:earlyrepublic:doctrine",
   G1_VARIANTS,
 );
+const n2 = applyAct(
+  "spine:g2:antebellum",
+  "spine:g2:antebellum:open",
+  "spine:g2:antebellum:allegiance",
+  G2_VARIANTS,
+);
 
 writeFileSync(PATH, `${JSON.stringify(doc, null, 1)}\n`);
-console.log(`inserted base-variant openings — g0: ${n0}, g1: ${n1}`);
+console.log(`inserted base-variant openings — g0: ${n0}, g1: ${n1}, g2: ${n2}`);
