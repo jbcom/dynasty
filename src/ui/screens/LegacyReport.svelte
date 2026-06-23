@@ -83,6 +83,10 @@ onMount(() => {
     <p class="convergence" data-destination={convergence.destination} data-testid="convergence">
       {CONVERGENCE_LABEL[convergence.destination] ?? convergence.title} — <strong>{term(convergence.title)}</strong>
     </p>
+    <!-- CONVERGENCE-ENDING-DEPTH: the earned finale, narrated — the century-spanning arc resolved in prose. -->
+    {#if convergence.prose}
+      <p class="convergence-prose" data-testid="convergence-prose">{term(convergence.prose)}</p>
+    {/if}
   {/if}
   {#if isApex}<p class="apex-kicker">★ Apex Ending ★</p>{/if}
   <h1>{title}</h1>
@@ -156,6 +160,15 @@ onMount(() => {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--mmm-text-dim);
+  }
+  .convergence-prose {
+    margin: 0 auto 0.8rem;
+    max-width: 56ch;
+    font-family: var(--mmm-font-body);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--mmm-text);
   }
   .convergence[data-destination="stars"] strong {
     color: var(--mmm-gold-bright);

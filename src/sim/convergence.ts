@@ -46,6 +46,9 @@ export interface ConvergenceEnding {
   gate: Parameters<typeof meetsMotivatorGate>[1];
   /** Reach tier the line must have attained (0 personal … 5 interstellar) for a stars ending. */
   minTier?: number;
+  /** CONVERGENCE-ENDING-DEPTH: a short earned finale (1-2 sentences) the LegacyReport narrates beneath the
+   *  title — the dynasty's century-spanning arc resolved into prose, not just a label. */
+  prose?: string;
 }
 
 /**
@@ -64,6 +67,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     // SEIZE COLONIES — power + low honor (conquest).
     gate: { power: { min: 45 }, honor: { max: 20 } },
     minTier: 5,
+    prose:
+      "From a colonial workshop to a thousand conquered suns, the name was carried outward by force and held by it — an empire that never asked the dark for permission, only took.",
   },
   {
     id: "stars_allies",
@@ -73,6 +78,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     // FORGE ALLIES — reach + honor (a commonwealth of worlds).
     gate: { reach: { min: 30 }, honor: { min: 0 } },
     minTier: 5,
+    prose:
+      "The line that began among immigrant strangers ended as the keeper of a covenant between worlds — its name trusted across light-years because, generation by generation, it had kept its word.",
   },
   {
     id: "stars_hidden",
@@ -82,6 +89,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     // GO QUIET + HIDDEN — a line that reaches a world far enough to draw no notice.
     gate: {},
     minTier: 5,
+    prose:
+      "Far enough out that no empire's charts would ever name it, the line set down its long burden and simply lived — the founding's hungers finally answered by a quiet horizon and no one left to impress.",
   },
   // ── EARTHLY ARCHETYPAL DESTINIES (high tier, didn't take the stars themselves) ──
   {
@@ -91,6 +100,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     title: "The Dictator's Dynasty",
     gate: { power: { min: 50 }, honor: { max: 0 } },
     minTier: 3,
+    prose:
+      "The name became a fist closed around a nation — power held so tightly that no rival, and in the end no conscience, could pry it loose. The line ruled, and was feared, and never reached the stars it had stopped looking at.",
   },
   {
     id: "destiny_crime_leader",
@@ -100,6 +111,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     // The crime-planet-scale earthly fate ([[crime-power-axis]]): power + cunning, built outside the law.
     gate: { power: { min: 35 }, worldview: { max: -10 } },
     minTier: 3,
+    prose:
+      "Everything the family touched it touched from underneath — the courts, the unions, the men who counted the votes. The name never appeared on a door, and yet nothing of consequence happened without it.",
   },
   {
     id: "destiny_oligarch",
@@ -108,6 +121,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     title: "The House That Owned the Age",
     gate: { wealth: { min: 50 } },
     minTier: 3,
+    prose:
+      "Fortune compounded across the generations until the family no longer chased the age but owned a piece of everything in it — a wealth so vast it became a kind of weather the whole country lived under.",
   },
   {
     id: "destiny_media_mogul",
@@ -116,6 +131,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     title: "The Voice of a Nation",
     gate: { reach: { min: 45 } },
     minTier: 3,
+    prose:
+      "From a colonial printing house to the signal every home received, the line never stopped controlling the story — and by the end the nation's idea of itself was, quietly, the family's to write.",
   },
   {
     id: "destiny_religious_leader",
@@ -124,6 +141,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     title: "The Prophet's Line",
     gate: { worldview: { max: -40 } },
     minTier: 3,
+    prose:
+      "What began as a single pulpit's conviction hardened into a faith that outlived its founders — the family's name spoken in prayer by people who never knew it had once been merely a name.",
   },
   {
     id: "destiny_communard",
@@ -132,6 +151,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     title: "The People's Commonwealth",
     gate: { power: { max: -35 }, lineage: { min: 20 } },
     minTier: 3,
+    prose:
+      "The line gave away the power it might have hoarded, generation after generation, until what it left behind was not a dynasty at all but a commonwealth — its name dissolved, on purpose, into the people it had served.",
   },
   // ── CONTRIBUTED — you helped/were absorbed by another line's ascent ──
   {
@@ -140,6 +161,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     title: "Ally of the Victors",
     gate: { reach: { min: 20 } },
     minTier: 4,
+    prose:
+      "The line never reached the stars under its own name, but it stood beside the house that did — and the histories of that greater ascent are written, in the margins, in the family's hand.",
   },
   {
     id: "contributed_absorbed",
@@ -147,6 +170,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     title: "Absorbed into a Greater House",
     gate: {},
     minTier: 4,
+    prose:
+      "In the end the line was folded into a larger ascent — its blood and its fortune carried onward under another name. The family did not vanish so much as become a tributary of someone else's river to the stars.",
   },
   // ── EARTHBOUND — endured, never crowned a destiny nor left the cradle ──
   {
@@ -155,6 +180,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     destiny: "earthbound",
     title: "A Quiet, Enduring Legacy",
     gate: { lineage: { min: 20 } },
+    prose:
+      "No empire, no stars — but the name endured, handed down intact through every hard century, so that descendants who would never know the founder still carried, unmistakably, the shape of the line.",
   },
   {
     id: "earthbound_twilight",
@@ -162,6 +189,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     destiny: "earthbound",
     title: "An Earthbound Twilight",
     gate: {},
+    prose:
+      "The line held on, but the great reach never came; the founding's wide horizons narrowed, generation by generation, to a single quiet house on a single quiet world.",
   },
   // ── EXTINGUISHED — fell at some tier ──
   {
@@ -170,6 +199,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     destiny: "fallen",
     title: "Ruin",
     gate: {},
+    prose:
+      "It ended in wreckage — fortune, standing, and name spent in a single ruinous fall, the long climb undone in less time than it took to begin.",
   },
   {
     id: "extinguished_no_heir",
@@ -177,6 +208,8 @@ export const ENDINGS: readonly ConvergenceEnding[] = [
     destiny: "fallen",
     title: "The Line That Failed",
     gate: {},
+    prose:
+      "There was no one left to carry it. Whatever the line had built, it built for descendants who never came, and the name closed quietly over an empty cradle.",
   },
 ];
 
