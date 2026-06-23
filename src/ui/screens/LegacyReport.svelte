@@ -22,7 +22,15 @@ interface Props {
   convergence?: ConvergenceEnding | null;
   /** CONVERGENCE-RIVAL-FINALE: the whole field's final standings — every rival line that raced alongside,
    *  so the close reads as the field's reckoning, not just the player's. */
-  rivalStandings?: Array<{ id: string; label: string; rung: number; faltering: boolean }>;
+  rivalStandings?: Array<{
+    id: string;
+    label: string;
+    rung: number;
+    faltering: boolean;
+    // FALLEN-NEWS-IN-ENDING: a line that dropped OUT of the race entirely (isFallen) gets a distinct finale
+    // fate, set apart from a line that merely finished low or faltering. Optional so older callers still type.
+    fallen?: boolean;
+  }>;
   onRestart: () => void;
 }
 
@@ -77,9 +85,13 @@ const dynasty = $derived.by(() => {
 
 // CONVERGENCE-RIVAL-FINALE: the rivals that raced alongside get their own reckoning at the close — each
 // line's final station + a one-line fate, so the ending reads as the whole field's, not just the player's.
-// The fate is read off the rival's final rung (relative to the 0..MAX ladder) and whether it ended faltering.
+// The fate is read off the rival's final rung (relative to the 0..MAX ladder), whether it dropped out of the
+// race entirely (FALLEN-NEWS-IN-ENDING — a line written off, the in-run "Eliminated" dispatch paid off here),
+// and whether it merely ended faltering.
 const RIVAL_MAX_RUNG = 5; // the convergence rung ladder height (classRung MAX_RUNG)
-function rivalFate(rung: number, faltering: boolean): string {
+function rivalFate(rung: number, faltering: boolean, fallen: boolean): string {
+  // A dropped-out line is set apart from one that merely finished low or stumbled at the last.
+  if (fallen) return "dropped out of the race entirely, its line spent";
   if (faltering) return "faltered at the last, its climb broken";
   if (rung >= RIVAL_MAX_RUNG) return "reached the stars in its own right";
   if (rung >= RIVAL_MAX_RUNG - 1) return "rose high, a power among the lines";
@@ -92,8 +104,9 @@ const rivals = $derived(
     id: r.id,
     name: humanizeRivalLabel(r.label),
     rung: r.rung,
-    fate: rivalFate(r.rung, r.faltering),
+    fate: rivalFate(r.rung, r.faltering, r.fallen ?? false),
     faltering: r.faltering,
+    fallen: r.fallen ?? false,
   })),
 );
 
@@ -155,7 +168,8 @@ onMount(() => {
       <h2>The Other Lines</h2>
       <ul>
         {#each rivals as r (r.id)}
-          <li data-faltering={r.faltering}>
+          <!-- FALLEN-NEWS-IN-ENDING: a dropped-out line reads struck-through, set apart from a faltering one. -->
+          <li data-faltering={r.faltering} data-fallen={r.fallen}>
             <span class="rf-name">{r.name}</span>
             <span class="rf-fate">{r.fate}</span>
           </li>
@@ -338,6 +352,17 @@ onMount(() => {
   /* A line that faltered at the close reads in the loss register. */
   .rival-finale li[data-faltering="true"] {
     border-left-color: var(--mmm-red, #b22);
+  }
+  /* FALLEN-NEWS-IN-ENDING: a line that dropped OUT of the race entirely reads dim + struck — out of contention,
+     set apart from one that merely stumbled at the last. Takes visual precedence over the faltering register. */
+  .rival-finale li[data-fallen="true"] {
+    border-left-color: var(--mmm-text-dim);
+    opacity: 0.7;
+  }
+  .rival-finale li[data-fallen="true"] .rf-name {
+    text-decoration: line-through;
+    text-decoration-color: var(--mmm-text-dim);
+    color: var(--mmm-text-dim);
   }
   .rf-name {
     font-weight: 700;

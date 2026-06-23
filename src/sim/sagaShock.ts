@@ -106,6 +106,19 @@ export function shockForeshadow(
 }
 
 /**
+ * RECOVERY-FORESHADOW-TONE: a HOPEFUL omen — the mirror of the shock omen. A line carrying an OUTSTANDING blown
+ * meter (`shock_meter:` flag) has a pending recovery roll (rollSagaRecovery looks for exactly that flag), so a
+ * rebound is plausibly near. That reads as HOPE rising, not dread. Pure, deterministic, view-derived (no RNG) —
+ * the same predicate the recovery roll keys on, surfaced as foresight. True iff the line has un-recovered strain.
+ */
+export function recoveryForeshadow(flags: Iterable<string>): boolean {
+  for (const f of flags) {
+    if (f.startsWith("shock_meter:")) return true;
+  }
+  return false;
+}
+
+/**
  * Roll one seeded disruption shock for a saga tick. Macro-act-weighted (better medicine → lower hazard) and
  * deterministic for a given (family, year, macroActId, rng). `macroActId` is the saga's coarse band
  * (founding/convergence/emergence/ascension — what `macroActForYear` returns), NOT a fine era id; the saga

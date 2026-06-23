@@ -1371,19 +1371,33 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   save-invariant SIDE-LOG pattern (presses/recoveryInvests tagged `at: history.length`, re-applied in reconstruct)
   + the one-time-news FLAG sub-pattern (fallen_seen, derived from world state), and the determinism audit
   instruments. The canonical map for the next session. Docs only; frontmatter date bumped.
-- [ ] **FALLEN-NEWS-IN-ENDING — the LegacyReport rival-finale ("The Other Lines") distinctly marks lines that
-  FELL OUT during the run (eliminated), not just their final rung.** The in-run fallen dispatch (FALLEN-NEWS) pays
-  off at the saga's close: a line that went fallen reads as "dropped out of the race" in the finale, set apart from
-  lines that merely finished behind. Reads rivalField.fallen (already carried into convergenceEnding); pure; tested
-  (loop.unit ending-shape + LegacyReport.browser render). Caps the fallen arc end-to-end (dossier → news → finale).
-- [ ] **PRESS-FALLEN-GUARD — the engine rejects pressing an already-FALLEN line, with a deterministic audit.**
-  The NewsTicker hides the Press button on a fallen dispatch, but pressRival should also guard at the engine layer
-  (you can't press a line that's out of the race — it's already at the floor). Add the guard if absent + an audit
-  test (press a fallen rival → no record, no heat, no rung change), mirroring the existing non-faltered no-op guard.
-- [ ] **RECOVERY-FORESHADOW-TONE — a hopeful-rebound omen reads in its OWN register, apart from the grave shock omen.**
-  Recovery foreshadow (a rebound coming) currently borrows the shock-omen styling/tone. Give the rebound its own
-  tier text + tone (hope rising, not dread) so foreshadow tone tracks valence, not just weight. Pure (shockForeshadow
-  sibling); tested (sagaShock.unit tier text + PlayScreen.browser tone class). Rounds out the foreshadow layer.
+- [x] **FALLEN-NEWS-IN-ENDING — DONE (branch feat/fallen-arc-followons).** The LegacyReport rival-finale now gives a
+  DROPPED-OUT (isFallen) line a distinct fate ("dropped out of the race entirely, its line spent"), struck + dimmed,
+  set apart from a merely-faltering line; rivalStandings threads `fallen` through to the finale. convergenceEnding
+  gained a `droppedOut` count + a dedicated epilogue clause (singular/plural). Also fixed: the falter dispatch +
+  rivalField.fallen previously conflated faltering with truly-fallen. Tests: convergence.unit (dropped-out coda),
+  screens.browser (struck "dropped out" fate). Caps the fallen arc end-to-end (dossier → news → finale).
+- [x] **PRESS-FALLEN-GUARD — DONE.** The falter dispatch now excludes fallen lines (`!snap.fallen`), and pressRival
+  has an engine-layer guard (a fallen snapshot → no-op), defense-in-depth even if a caller bypasses the news. Audit:
+  loop.unit drives seeds to a fallen line, asserts pressing it records nothing / costs no heat / drops no rung, and
+  that it's never offered as a pressable faltered dispatch. 911 node + 136 browser green, gate clean.
+- [x] **RECOVERY-FORESHADOW-TONE — DONE.** Added `recoveryForeshadow(flags)` (a strained line has a pending rebound)
+  + a `tone: "dread" | "hope"` on the foreshadow; a strained line now reads a HOPE omen ("the worst is behind you —
+  the line gathers itself for a turn back upward") in a warm gold register, taking precedence over the grave red
+  dread (same strain drives both). Tests: sagaShock.unit (predicate), PlayScreen.visual (hope vs dread register).
+- [ ] **STELLAR-RIVAL-IN-ENDING — the rival-finale + epilogue distinctly mark a line that REACHED THE STARS, not just
+  "rose high".** rivalField.reachedStars already feeds the epilogue, but the per-line finale fate caps at "reached the
+  stars in its own right" for rung>=MAX without confirming an actual interstellar finish vs a high earthbound rung.
+  Mark a star-reaching line with its own register (gold/ascendant) in The Other Lines, mirroring the dropped-out
+  treatment, so the field's two extremes (out / among the stars) both read distinctly. Pure; tested.
+- [ ] **FORESHADOW-AUDIT — a deterministic instrument proving the hope omen actually fires across a run.** Mirror the
+  OMEN-PAYOFF-AUDIT: drive seeds, count turns a hope omen (tone="hope") appears vs a dread omen, assert hope omens
+  fire after blows (the rebound foresight pays off) at a non-trivial rate. Guards the new valence layer from silent
+  regression (a strain that never surfaces hope would be a bug). Pure deterministic test; prints figures.
+- [ ] **INVEST-WHILE-HOPE-OMEN — the recovery-invest prompt and the hope omen should reinforce, not compete.** Both
+  fire on the same outstanding-strain condition (canInvestRecovery ⊆ recoveryForeshadow). Verify the PlayScreen shows
+  the hope omen ABOVE the invest prompt as one coherent "a rebound is near — and you can press for it" beat, not two
+  disconnected boxes; adjust ordering/copy if they read disjoint. Pure UI; tested (PlayScreen.visual ordering).
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,

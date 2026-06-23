@@ -290,6 +290,45 @@ describe("LegacyReport", () => {
     expect(host.querySelector("[data-testid='rival-finale']")).toBeNull();
   });
 
+  it("FALLEN-NEWS-IN-ENDING: a dropped-out line reads 'dropped out' + struck, set apart from a faltering one", () => {
+    const state = {
+      ...initState(content, "seed"),
+      end: { kind: "death" as const, year: 1990, reason: "x" },
+    };
+    component = mount(LegacyReport, {
+      target: host,
+      props: {
+        content,
+        state,
+        end: state.end,
+        rivalStandings: [
+          // A fallen (dropped-out) line — fallen takes precedence over its faltering/low rung.
+          { id: "rival:italian", label: "rival:italian", rung: 0, faltering: true, fallen: true },
+          // A merely-faltering line (not dropped out) reads in the faltering register, not dropped-out.
+          { id: "rival:bavaria", label: "rival:bavaria", rung: 2, faltering: true, fallen: false },
+        ],
+        onRestart: () => {},
+      },
+    });
+    const items = [...host.querySelectorAll("[data-testid='rival-finale'] li")];
+    const dropped = items.find((li) => li.getAttribute("data-fallen") === "true");
+    expect(dropped, "the dropped-out line is marked").toBeDefined();
+    expect(dropped?.textContent).toMatch(/dropped out of the race/i);
+    // The dropped-out name is struck through (out of contention), distinct from a faltering line.
+    expect(
+      getComputedStyle(dropped?.querySelector(".rf-name") as HTMLElement).textDecorationLine,
+    ).toBe("line-through");
+    const falterOnly = items.find(
+      (li) =>
+        li.getAttribute("data-faltering") === "true" && li.getAttribute("data-fallen") === "false",
+    );
+    expect(
+      falterOnly,
+      "a faltering-but-not-dropped line stays in the faltering register",
+    ).toBeDefined();
+    expect(falterOnly?.textContent).not.toMatch(/dropped out/i);
+  });
+
   it("AGENCY-IN-LEGACY: tallies the player's WV-3 interventions in a 'By your own hand' line", () => {
     const state = {
       ...initState(content, "seed"),
