@@ -51,15 +51,45 @@ function walk(actId: string, flags: string[]): string[] {
 }
 
 describe("SPINE-ACT-DEPTH: every spine act is deepened with texture + consequence interstitials", () => {
-  it("g0 walks open → texture → allegiance → consequence → bargain → close (the pattern-setter)", () => {
+  it("g0 walks open → texture → allegiance → consequence → reversal → bargain → close (heavy-act shape)", () => {
     expect(walk("spine:g0:founding", [])).toEqual([
       "open",
       "tex_pressroom",
       "allegiance",
       "csq_aftermath",
+      "rev_csq_aftermath",
       "bargain",
       "close",
     ]);
+  });
+
+  it("SPINE-ACT-DEPTH-2: the four heaviest-arc acts carry a third REVERSAL interstitial (7 scenes)", () => {
+    const heavy = [
+      "spine:g0:founding",
+      "spine:g3:gildedage",
+      "spine:g8:orbital",
+      "spine:g9:interstellar",
+    ];
+    for (const actId of heavy) {
+      const path = walk(actId, []);
+      expect(
+        path.some((id) => id.startsWith("rev_")),
+        `${actId} has a reversal scene`,
+      ).toBe(true);
+      expect(new Set(path).size, `${actId} reaches ≥7 scenes`).toBeGreaterThanOrEqual(7);
+      // The reversal sits AFTER the consequence and BEFORE the act's terminal close.
+      const revIdx = path.findIndex((id) => id.startsWith("rev_"));
+      const csqIdx = path.findIndex((id) => id.startsWith("csq_"));
+      expect(revIdx, `${actId} reversal follows the consequence`).toBeGreaterThan(csqIdx);
+      expect(revIdx, `${actId} reversal precedes close`).toBeLessThan(path.length - 1);
+    }
+    // Light acts stay at the ~6-scene shape (no reversal).
+    for (const actId of ["spine:g1:earlyrepublic", "spine:g5:midcentury"]) {
+      expect(
+        walk(actId, []).some((id) => id.startsWith("rev_")),
+        actId,
+      ).toBe(false);
+    }
   });
 
   for (const actId of SPINE_ACTS) {
@@ -92,8 +122,8 @@ describe("SPINE-ACT-DEPTH: every spine act is deepened with texture + consequenc
   it("every interstitial is decisionless TEXTURE — weave beats only, no terminal decision, falls forward", () => {
     for (const actId of SPINE_ACTS) {
       const a = act(actId);
-      const interstitials = a.scenes.filter((id) => /:(tex|csq)_/.test(id));
-      expect(interstitials.length, `${actId} has 2 interstitials`).toBe(2);
+      const interstitials = a.scenes.filter((id) => /:(tex|csq|rev)_/.test(id));
+      expect(interstitials.length, `${actId} has ≥2 interstitials`).toBeGreaterThanOrEqual(2);
       for (const id of interstitials) {
         const s = corpus.scenes.get(id);
         expect(s, id).toBeTruthy();

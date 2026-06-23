@@ -560,11 +560,120 @@ const INTERSTITIALS = [
       ),
     ],
   ),
+
+  // ════ SPINE-ACT-DEPTH-2: a THIRD interstitial — a mid-act REVERSAL — for the four heaviest-arc acts ════
+  // Placed AFTER the consequence scene, BEFORE the act's second decision (g9: before close): a complication
+  // that arrives unbidden and recontextualizes the choice ahead. Decisionless, weave-only, falls forward.
+  // Save-safe on SAGA-CLOCK-DECOUPLE (the extra scene no longer ages the line — texture passes 0 years).
+
+  inter(
+    "g0:founding",
+    "rev",
+    "spine:g0:founding:csq_aftermath",
+    "sound",
+    [
+      "Word came at the worst hour, the way bad news learns to: a hammering at the shutters after midnight, a breathless apprentice, the name of a rival house spoken like a curse. The loyalist faction {given_name} {surname} had crossed was not content to lose quietly — they had moved against the family's standing on the frontier, whispering to the land-office clerks that a house of known rebels could not be trusted with a Crown grant the Crown might soon reclaim.",
+      "Overnight the bargain ahead had changed its shape. What had looked like a simple purchase of acreage was now a contest of loyalties carried out in deeds and signatures, every clerk a potential friend or informer. {given_name} understood, with the cold clarity that comes only when a plan is already in motion, that the family's claim on the continent would have to be won twice now — once from the wilderness, and once from the men who would use the war's confusion to take what the {family_name} line had bled for.",
+    ],
+    [
+      beat(
+        "The rival's move is not an attack on your land but on your name's right to hold it — and that you can answer.",
+        "Meet it head-on: make the family's claim so public that retracting it would shame the colony.",
+        { power: 1, honor: 1 },
+        "g0_forced_the_claim_public",
+      ),
+      beat(
+        "A sympathetic clerk hints the records could be quietly set right — for a consideration.",
+        "Decline the bribe and win him with the cause instead; a man bought once is bought by anyone.",
+        { honor: -1, politics: 1 },
+        "g0_won_the_clerk_clean",
+      ),
+    ],
+  ),
+
+  inter(
+    "g3:gildedage",
+    "rev",
+    "spine:g3:gildedage:csq_venture",
+    "touch",
+    [
+      "The telegram was thin paper but it sat in {given_name} {surname}'s hand like a stone: the venture that had bought the family its larger type had a flaw the prospectuses never mentioned, a tangle of overstated assets and friendly auditors that a rival's lawyers had just begun to pull at. In the Gilded Age a fortune and a fraud were often the same structure viewed from different angles, and someone with a motive had chosen this angle.",
+      "The forge ahead — the great industrial commitment the family had been building toward — now depended on credit that this single thread could unravel. {given_name} felt the era's brutal logic close in: the same boldness that built an empire in a morning could lose it in an afternoon, and the question was no longer simply how to grow, but how to grow with a knife already at the house's throat.",
+    ],
+    [
+      beat(
+        "The rival's case has a weakest joint, where ambition outran the evidence.",
+        "Break the attack at its source before it reaches a courtroom or a newspaper.",
+        { power: 1, honor: 1 },
+        "g3_broke_the_attack",
+      ),
+      beat(
+        "An honest accountant offers to set the books truly right — at the cost of a public stumble.",
+        "Take the honest loss now; a house that survives its own audit fears no one's.",
+        { worldview: 1, honor: -1 },
+        "g3_took_the_honest_loss",
+      ),
+    ],
+  ),
+
+  inter(
+    "g8:orbital",
+    "rev",
+    "spine:g8:orbital:csq_turn",
+    "sight",
+    [
+      "The alert came as a single red bloom on the status board, and then a silence {given_name} {surname} had learned to dread more than any noise: a forward outpost gone dark, its telemetry cut mid-transmission, eleven months of the family's reach erased in the time it took a relay to fail to answer. Out here, distance turned every setback into a mystery solved too late to matter.",
+      "The transition ahead — the great reorientation of the line's orbital strategy — had assumed a frontier that held. Now {given_name} stood before the dark place on the board and understood that ambition at this scale was not a ladder climbed but a wager renewed each day against a void that did not negotiate. The question was no longer only which direction to reach, but whether to reach at all into a dark that had just shown what it could take.",
+    ],
+    [
+      beat(
+        "The last telemetry from the lost outpost reads like a lesson, if you are willing to learn it.",
+        "Push on, but build the next reach to survive what killed the last — learn, don't retreat.",
+        { reach: 1, worldview: 1 },
+        "g8_learned_from_the_loss",
+      ),
+      beat(
+        "The surviving crews signal, asking whether the family will spend more lives on the dark.",
+        "Promise them the line spends nothing it will not answer for — and means to answer for this.",
+        { honor: -1, lineage: 1 },
+        "g8_answered_for_the_dark",
+      ),
+    ],
+  ),
+
+  inter(
+    "g9:interstellar",
+    "rev",
+    "spine:g9:interstellar:csq_turn",
+    "sound",
+    [
+      "It arrived as a whisper across decades of light — a signal from one of the first-seeded worlds, faint and time-lagged and utterly unexpected: the colony had not merely survived but had become something the {family_name} planners never modeled, a daughter-civilization with its own mind about what the dynasty's name should mean among the stars. The founders had planted a seed; it had grown into a question.",
+      "The close ahead — the terminal reckoning of everything the line had reached for since a colonial workshop — now had to account for children grown beyond their parents' design. {given_name} {surname} understood that a dynasty large enough to span the stars was no longer a thing one mind could steer, and that the last choice might not be where to send the name, but whether to hold it closed against its own descendants or open it to what they had become.",
+    ],
+    [
+      beat(
+        "The daughter-world's signal carries both tribute and challenge, and asks to be answered as one or the other.",
+        "Answer as kin, not as sovereign; a name that cannot share itself dies with its bearer.",
+        { lineage: 1, reach: 1 },
+        "g9_answered_as_kin",
+      ),
+      beat(
+        "The bridge waits on whether to fold the new world into the dynasty's command or leave it free.",
+        "Leave it free, and let the name mean a beginning given, not a chain imposed.",
+        { honor: -1, worldview: 1 },
+        "g9_left_the_world_free",
+      ),
+    ],
+  ),
 ];
 
-/** A scene id is a prior interstitial for an act if it matches the act prefix + :tex_ or :csq_. */
+/** A scene id is a prior interstitial for an act if it matches the act prefix + :tex_, :csq_, or :rev_. */
 function isInterstitialId(actId, id) {
-  return id.startsWith(`${actId}:tex_`) || id.startsWith(`${actId}:csq_`);
+  return (
+    id.startsWith(`${actId}:tex_`) ||
+    id.startsWith(`${actId}:csq_`) ||
+    id.startsWith(`${actId}:rev_`)
+  );
 }
 
 /** The forward target of a scene: its explicit `next`, else the act-order successor, else null. */
