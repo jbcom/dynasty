@@ -36,7 +36,7 @@ describe("MapView (journey)", () => {
     expect(base.getAttribute("src")).toContain("/assets/generated/map/");
     // founding · convergence · emergence · the stars
     expect(host.querySelectorAll(".stage").length).toBe(4);
-    expect(host.querySelectorAll("svg.route circle").length).toBe(4);
+    expect(host.querySelectorAll("svg.route circle.waypoint").length).toBe(4);
   });
 
   it("at the founding (1776) lights ONLY the first waypoint and counts 3 stages to the stars", () => {
@@ -62,5 +62,50 @@ describe("MapView (journey)", () => {
     component = mount(MapView, { target: host, props: { gameState: atYear(2200) } });
     expect(stageLabel(host, "The Stars")?.classList.contains("here")).toBe(true);
     expect(host.querySelector(".caption")?.textContent).toContain("reached the stars");
+  });
+
+  it("MAP-ERA-PROGRESS-RICHER: plots the exact generation marker + the caption's generation count", () => {
+    // A founded line at generation 3 (g3) — the marker slides between the coarse waypoints, and the
+    // caption names the generation (1-based: gen index 3 → "Generation 4 of 10").
+    const gs = {
+      year: 1900,
+      family: {
+        protagonistId: "m3",
+        members: [{ id: "m3", generation: 3 }],
+      },
+    } as unknown as GameState;
+    component = mount(MapView, { target: host, props: { gameState: gs } });
+    expect(host.querySelector("svg.route circle.gen-marker")).not.toBeNull();
+    expect(host.querySelector(".gen-note")?.textContent).toContain("Generation 4 of 10");
+  });
+
+  it("MAP-ERA-PROGRESS-RICHER: overlays a dot per rival line and names the convergence leader", () => {
+    const gs = {
+      year: 1900,
+      family: { protagonistId: "m0", members: [{ id: "m0", generation: 1 }] },
+    } as unknown as GameState;
+    component = mount(MapView, {
+      target: host,
+      props: {
+        gameState: gs,
+        playerRung: 1,
+        rivalStandings: [
+          { id: "rival:italian", label: "The Ferraro line", rung: 4 },
+          { id: "rival:ireland", label: "The Donnelly line", rung: 2 },
+        ],
+      },
+    });
+    // One faint dot per rival on the founding→stars axis.
+    expect(host.querySelectorAll("svg.route circle.rival").length).toBe(2);
+    // The highest-rung rival (rung 4 > player rung 1) is named as the leader.
+    expect(host.querySelector(".rival-note")?.textContent).toContain("The Ferraro line");
+  });
+
+  it("MAP-ERA-PROGRESS-RICHER: still renders with no family + no rivals (graceful default)", () => {
+    component = mount(MapView, { target: host, props: { gameState: atYear(1776) } });
+    // The generation marker defaults to gen 0 (Generation 1); no rival dots, no leader note.
+    expect(host.querySelector(".gen-note")?.textContent).toContain("Generation 1 of 10");
+    expect(host.querySelectorAll("svg.route circle.rival").length).toBe(0);
+    expect(host.querySelector(".rival-note")).toBeNull();
   });
 });

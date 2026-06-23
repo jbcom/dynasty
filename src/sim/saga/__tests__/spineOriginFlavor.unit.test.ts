@@ -132,7 +132,15 @@ for (const a of FLAVORED_ACTS) {
         expect(s, `${a.base}${base}`).toBeTruthy();
         expect(s?.prose.length).toBeGreaterThanOrEqual(2);
         expect(s?.prose.join(" ")).toContain("{family_name}");
-        expect(s?.next).toBe(a.divert);
+        // The variant diverts FORWARD past the default open to a real, non-`open` scene. It points at the
+        // shared divert target UNLESS a SPINE-ACT-DEPTH interstitial has been interleaved between the
+        // opening and that target (e.g. g0's tex_pressroom) — in which case it points at the interstitial,
+        // which itself falls forward to the divert target. Either way it must be a real downstream scene.
+        const next = s?.next;
+        expect(next, `${a.base}${base} diverts forward`).toBeTruthy();
+        expect(next).not.toBe(`${a.base}${base}`);
+        expect(next).not.toBe(a.open);
+        expect(corpus.scenes.has(next as string), `${next} is a real scene`).toBe(true);
       }
     });
 

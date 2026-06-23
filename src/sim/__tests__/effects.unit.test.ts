@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../data/loadContent";
 import { buildContent } from "../content";
-import { applyChoice, autoPlaythrough, replay } from "../effects";
+import { applyChoice, autoPlaythrough, replay, succeedToHeir } from "../effects";
 import { foundByComposition } from "../founding";
 import { dealComposition } from "../places";
 import { createRng } from "../rng";
@@ -243,5 +243,65 @@ describe("life-stage beget normalizes the birth year (NA-11 regression guard)", 
     const newKids = (next.family?.members ?? []).filter((m) => !before.some((o) => o.id === m.id));
     expect(newKids.length).toBeGreaterThan(0);
     for (const k of newKids) expect(k.born, `child ${k.id} born`).toBeGreaterThanOrEqual(1978);
+  });
+});
+
+describe("succeedToHeir (SAGA-CLOCK-DECOUPLE generational handoff)", () => {
+  const real = loadContent();
+  const comp = {
+    place: "ireland",
+    era: "origins",
+    culture: "anglo_protestant",
+    year: 1776,
+    archetype: "political" as const,
+    gender: "male" as const,
+    surname: "Hale",
+    seed: "succheir",
+    originId: "composed:ireland:origins",
+  };
+
+  it("promotes a living heir + steps the generation deterministically", () => {
+    const base = foundByComposition(real, comp).state;
+    // Beget an heir on the protagonist, then succeed to them.
+    const parentId = base.family?.protagonistId;
+    if (!base.family || !parentId) throw new Error("no founded family");
+    const withHeir = {
+      ...base,
+      family: {
+        ...base.family,
+        members: [
+          ...base.family.members,
+          {
+            id: "m_heir",
+            given: "Heir",
+            surname: "Hale",
+            sex: "male" as const,
+            born: comp.year,
+            parentId,
+            generation: 1,
+            traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
+            isProtagonist: false,
+          },
+        ],
+        nextSeq: base.family.nextSeq + 1,
+      },
+    };
+    const after = succeedToHeir(withHeir, comp.year + 25);
+    expect(after.end, "a successful handoff does NOT end the run").toBeNull();
+    expect(after.family?.protagonistId, "the heir is the new protagonist").toBe("m_heir");
+    const oldProtagonist = after.family?.members.find(
+      (m) => m.id === withHeir.family.protagonistId,
+    );
+    expect(oldProtagonist?.died, "the outgoing protagonist is recorded died").toBe(comp.year + 25);
+  });
+
+  it("ends the line as line-extinct when there is NO heir to promote (the begets:0 guard)", () => {
+    // A protagonist with no children — a succession that took a partner but begot no heir reaches here.
+    const base = foundByComposition(real, comp).state;
+    const after = succeedToHeir(base, comp.year + 25);
+    // The fix: succeedToHeir sets the extinction end DIRECTLY (advanceFamily's mortality loop would skip
+    // the pre-marked-dead protagonist and never fire line-extinct, leaving the run silently stuck).
+    expect(after.end?.kind, "no heir → the line ends").toBe("line-extinct");
+    expect(after.end?.year).toBe(comp.year + 25);
   });
 });

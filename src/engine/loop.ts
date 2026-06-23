@@ -12,7 +12,7 @@ import {
   type Glimpse,
   nudgeRival,
 } from "../sim/dynastyWorld";
-import { advanceFamily, applyChoice, applySuccessionToFamily } from "../sim/effects";
+import { advanceFamily, applyChoice, applySuccessionToFamily, succeedToHeir } from "../sim/effects";
 import { macroActForYear } from "../sim/macroActs";
 import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
@@ -21,11 +21,22 @@ import { actsForTier, resolveThreads } from "../sim/saga/player";
 import type { BraidSlot } from "../sim/saga/schema";
 import { TriggerTableSchema } from "../sim/saga/schema";
 import { DYNASTY_SPINE } from "../sim/saga/spineAuthored";
-import { evaluateTriggers, spineStateProjection } from "../sim/saga/triggerLattice";
+import {
+  type ActivatedBranch,
+  crossedFlag,
+  evaluateTriggers,
+  spineStateProjection,
+} from "../sim/saga/triggerLattice";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
 import { type GameState, initState, isMemberAlive, type LedgerEntry } from "../sim/state";
-import { advanceSagaClock, advanceTimeline, detectEnd } from "../sim/timeline";
+import {
+  advanceSagaClock,
+  advanceTimeline,
+  detectEnd,
+  SAGA_GENERATION_SPAN,
+  SAGA_YEAR_STEP,
+} from "../sim/timeline";
 import { pickNextEventViaWorld } from "../sim/world";
 import { SagaDriver, type SagaFrame } from "./sagaDriver";
 
@@ -166,8 +177,19 @@ export class Game {
     // FS-8: the founding-spine pivot — the ONE line plays the AUTHORED SPINE act for this GENERATION.
     // The spine has 10 generations (g0..g9), so spine play uses the TRUE generation (capped at the spine
     // length), NOT MAX_RUNG (5) — clamping to MAX_RUNG replayed g5 forever past the 6th generation.
+    // SAGA-RESTORE-CURSOR: if this is a RESTORE of a run paused mid-act, resume at the SAVED scene
+    // position rather than restarting the act at its opening (which replayed already-seen scenes and
+    // over-advanced the decoupled saga clock). The cursor carries only actId/sceneId/beatCursor; the
+    // motivators + flags come from the run's live personality/flags. Falls through to a fresh begin if
+    // the act id no longer resolves (corpus drift).
+    if (this.state.saga) {
+      if (this.saga.restore(this.state.saga, this.state.personality, this.state.flags)) return;
+    }
     const spineGen = Math.min(generation, SPINE_MAX_GEN);
-    if (this.saga.beginSpine(spineGen, this.state.personality, this.state.flags)) return;
+    if (this.saga.beginSpine(spineGen, this.state.personality, this.state.flags)) {
+      this.syncSagaCursor();
+      return;
+    }
     // Fall back to the 504-cell corpus only if the spine isn't authored that far (back-compat). The
     // cell lattice tops out at MAX_RUNG, so the cell path keeps the old cap.
     const tier = Math.min(generation, MAX_RUNG);
@@ -255,11 +277,15 @@ export class Game {
    * the `crossed:` flag convention), evaluateTriggers fires the matching branches, and each resolves into
    * a woven thread the SceneReader braids into the prose. Same spine state → same branches every replay.
    */
-  private triggerThreads(scene: SagaFrame["scene"]): ReturnType<typeof resolveThreads> {
+  /**
+   * The DETERMINISTIC-TRIGGER branches that fire for the current spine state (pure — no RNG, no mutation).
+   * Shared by `triggerThreads` (weave) and `recordTriggerCrossings` (memory). Honors `once` by deriving the
+   * already-crossed set from the run's `crossed:<family>:<branch>` flags. Returns [] when unfounded / no scene.
+   */
+  private firedTriggerBranches(scene: SagaFrame["scene"]): ActivatedBranch[] {
     if (!scene) return [];
     const place = this.state.founding?.place;
     if (!place) return [];
-    const tier = this.playerRung();
     const spine = spineStateProjection({
       archetype: this.state.archetype,
       leanings: this.state.personality as unknown as Record<string, number>,
@@ -269,12 +295,43 @@ export class Game {
       era: macroActForYear(this.state.year),
       flags: this.state.flags,
     });
-    const fired = evaluateTriggers(GAME_TRIGGERS.rules, spine);
+    const alreadyCrossed = new Set<string>();
+    for (const f of this.state.flags) {
+      const m = /^crossed:([^:]+):(.+)$/.exec(f);
+      if (m) alreadyCrossed.add(`${m[1]}:${m[2]}`);
+    }
+    return evaluateTriggers(GAME_TRIGGERS.rules, spine, alreadyCrossed);
+  }
+
+  private triggerThreads(scene: SagaFrame["scene"]): ReturnType<typeof resolveThreads> {
+    if (!scene) return [];
+    const fired = this.firedTriggerBranches(scene);
     if (fired.length === 0) return [];
+    const tier = this.playerRung();
     // Each fired branch weaves as a thread naming the recurring family at this tier (the branch's mined
     // fabric prose is borrowed downstream); resolveThreads braids the family's opening fragment in.
     const threads = fired.map((b) => ({ wave: b.family, atTier: tier }));
     return resolveThreads(this.saga.corpus, { ...scene, thread: threads });
+  }
+
+  /**
+   * TRIGGER-CROSSING-RECORD: stamp a `crossed:<family>:<branch>` flag for every trigger branch the
+   * just-engaged scene fired, so (a) `once` arrivals don't re-fire and (b) the recurring-cast MEMORY is
+   * real — a `priorCrossing`-gated return branch unlocks once its family was met before (the Turtledove
+   * model). Called on advance (pickBeat/pickDecision) against the scene the player just acted on. The fired
+   * branches come from evaluateTriggers' stable sorted order, and flags are added in that order, so the
+   * flag set + ordering is deterministic and replays bit-identically. New flags only (idempotent).
+   */
+  private recordTriggerCrossings(scene: SagaFrame["scene"]): void {
+    const fired = this.firedTriggerBranches(scene);
+    if (fired.length === 0) return;
+    const existing = new Set(this.state.flags);
+    const fresh: string[] = [];
+    for (const b of fired) {
+      const flag = crossedFlag(b.family, b.branch);
+      if (!existing.has(flag)) fresh.push(flag);
+    }
+    if (fresh.length > 0) this.state = { ...this.state, flags: [...this.state.flags, ...fresh] };
   }
 
   /** Advance the rival world to the run's current year (deterministic). Called when the clock moves. */
@@ -344,19 +401,39 @@ export class Game {
   }
 
   /**
+   * SAGA-RESTORE-CURSOR: mirror the driver's live walk position into the persisted run state, so a save
+   * taken at any point reloads at the exact scene. Cleared (undefined) when no act is active so a restore
+   * of a between-acts run begins the next act fresh. Deterministic — pure read of the driver's cursor.
+   */
+  private syncSagaCursor(): void {
+    const cursor = this.saga.cursor;
+    this.state = cursor
+      ? { ...this.state, saga: cursor }
+      : this.state.saga
+        ? { ...this.state, saga: undefined }
+        : this.state;
+  }
+
+  /**
    * Reading the novel passes in-world time: each saga choice ticks the timeline one step (years
    * advance, eras roll, the run can reach an end) so the run progresses toward its conclusion even
    * while the played surface is the novel rather than the event flow. Then, if the act has ended,
    * the event flow resumes (so the run keeps moving once a generation's act closes). Pure ticks; the
    * timeline + end detection are deterministic.
    */
-  private advanceRunClock(): void {
+  private advanceRunClock(sagaYears: number = SAGA_YEAR_STEP): void {
     const fromYear = this.state.year;
-    // While a novel act is active, tick the SAGA clock (a fixed generational year-step decoupled from
-    // the era ladder) so any founding year — including baghdad's 762 CE — plays a full multi-generation
-    // run; the era-budget timeline only drives the EVENT path (the 1885 waves it's calibrated for).
+    // While a novel act is active, tick the SAGA clock by `sagaYears` (decoupled from the era ladder)
+    // so any founding year — including baghdad's 762 CE — plays a full multi-generation run; the
+    // era-budget timeline only drives the EVENT path (the 1885 waves it's calibrated for). The span is
+    // driven by DECISIONS, not scene count: a decisionless texture beat passes 0 years (so deepening an
+    // act with interstitial scenes never ages the line faster), while a succession decision advances a
+    // whole generation's worth of years at once — which is what drives advanceFamily's per-year
+    // mortality loop to age the protagonist to death and hand the line to the next-generation heir
+    // (the ONLY thing that steps `protagonist.generation`). Freezing years on EVERY saga move (the
+    // earlier attempt) froze aging → froze succession → the line never advanced a generation.
     this.state = this.saga.active
-      ? advanceSagaClock(this.state)
+      ? advanceSagaClock(this.state, sagaYears)
       : advanceTimeline(this.content, this.state);
     // PF-8: age + succeed the family over the elapsed years — the same logic the event path runs — so
     // reading the novel actually advances the lineage (mortality, heir handoff, extinction).
@@ -382,11 +459,34 @@ export class Game {
     }
   }
 
+  /**
+   * SAGA-RESTORE-CURSOR: record a saga walk step in the run's ONE ordered choice log, so the persisted
+   * save (seed + history) reconstructs the novel walk on reload. Appended AFTER the move's clock/
+   * succession logic — which keys RNG fork labels on `history.length` — so those labels (and thus replay
+   * determinism) are unchanged; the step counts toward history only for the NEXT move, identically in
+   * live play and reconstruction.
+   */
+  private recordSagaStep(kind: "beat" | "decision", index: number): void {
+    this.state = {
+      ...this.state,
+      history: [...this.state.history, { saga: kind, index, year: this.state.year }],
+    };
+  }
+
   /** Apply a weave-beat choice on the current novel scene; time passes; then re-emit. */
   pickBeat(beatIndex: number): void {
+    // Capture the scene the player just engaged BEFORE the driver advances off it, so any trigger branches
+    // it surfaced get their crossing recorded (TRIGGER-CROSSING-RECORD).
+    const engaged = this.saga.frame().scene;
     this.syncMotivators(this.saga.pickBeat(beatIndex));
     this.syncSagaFlags();
-    this.advanceRunClock();
+    this.recordTriggerCrossings(engaged);
+    // A weave-beat is TEXTURE within a generation, not a generational step — it passes NO in-world
+    // years, so an act's depth (how many interstitial beats it carries) no longer ages the line. The
+    // generation's whole span is advanced once, at its succession decision (see pickDecision).
+    this.advanceRunClock(0);
+    this.recordSagaStep("beat", beatIndex);
+    this.syncSagaCursor();
     this.emit();
   }
 
@@ -396,9 +496,12 @@ export class Game {
    * generation: the next tier's act begins, carrying the line's drifted motivators.
    */
   pickDecision(optionIndex: number): void {
+    // Capture the engaged scene before the driver advances (TRIGGER-CROSSING-RECORD).
+    const engaged = this.saga.frame().scene;
     const result = this.saga.pickDecision(optionIndex);
     this.syncMotivators(result?.motivators ?? null);
     this.syncSagaFlags();
+    this.recordTriggerCrossings(engaged);
     const continues =
       !!result?.succession && (result.succession.takesPartner || result.succession.begets > 0);
     // FS-8: the apex is the spine's TERMINAL generation (g9 = the stars), not MAX_RUNG (the cell cap).
@@ -430,7 +533,17 @@ export class Game {
         `saga:${this.state.year}:${this.state.history.length}`,
         this.rng.fork(`sagasucc:${this.state.year}:${this.state.history.length}`),
       );
+      // Begin the NEXT generation's spine act BEFORE promoting the heir — it reads the CURRENT
+      // protagonist's generation + 1 to pick the next act, so it must run while the protagonist is still
+      // the outgoing generation (else the post-promotion +1 would skip a generation's act).
       this.beginNextGenerationAct();
+      // The succession DECISION is the generational step: deterministically retire the current
+      // protagonist and promote the just-begotten heir at the year a generation later, so generation
+      // advancement is driven by the DECISION (one step per ~3-decision generation), NOT by whether a
+      // probabilistic mortality roll happens to kill the protagonist within the elapsed span. The heir
+      // begotten above (born this year) is eligible at year + SAGA_GENERATION_SPAN. This is what
+      // actually increments `protagonist.generation`.
+      this.state = succeedToHeir(this.state, this.state.year + SAGA_GENERATION_SPAN);
       // The line just reached the next tier — apply that tier's crossing nudge to the rivals (once).
       this.nudgeForTier(this.playerRung());
     } else if (result?.wasCloseDecision && !this.state.end) {
@@ -448,7 +561,13 @@ export class Game {
       };
     }
     // Don't tick the clock once the line has ended (here or via a prior end) — the run is over.
-    if (!this.state.end) this.advanceRunClock();
+    // A succession decision is the GENERATIONAL step: advance a whole generation's span at once so
+    // advanceFamily's per-year mortality loop ages the (now-heir-bearing) protagonist to death and the
+    // line hands off to the next generation — the only path that steps `protagonist.generation`. A
+    // non-succession terminal decision is in-generation, so it passes the small default step.
+    if (!this.state.end) this.advanceRunClock(continues ? SAGA_GENERATION_SPAN : SAGA_YEAR_STEP);
+    this.recordSagaStep("decision", optionIndex);
+    this.syncSagaCursor();
     this.emit();
   }
 
@@ -529,5 +648,38 @@ export class Game {
 
   get finished(): boolean {
     return this.state.end !== null;
+  }
+
+  /**
+   * SAGA-RESTORE-CURSOR: reconstruct a run from a founded BASE state + the ordered choice log, replaying
+   * BOTH channels through the live engine — event steps via `choose`, saga steps via `pickBeat`/
+   * `pickDecision`. This is how a persisted save (seed + interleaved history) rebuilds a saga-deep run
+   * bit-identically: the saga clock, family aging, and rival world all re-derive deterministically from
+   * the choice sequence. Returns the reconstructed `GameState`. A step that no longer applies (corpus/
+   * content drift, or the run already ended) is skipped so a partial-compat save still loads.
+   */
+  static reconstruct(
+    content: Content,
+    base: GameState,
+    history: ReadonlyArray<{
+      eventId?: string;
+      choiceId?: string;
+      saga?: "beat" | "decision";
+      index?: number;
+    }>,
+  ): GameState {
+    const game = new Game(content, base.seed, base, base.archetype);
+    for (const step of history) {
+      if (game.finished) break;
+      if (step.saga === "beat") {
+        if (game.view.saga.scene) game.pickBeat(step.index ?? 0);
+      } else if (step.saga === "decision") {
+        if (game.view.saga.scene?.decision) game.pickDecision(step.index ?? 0);
+      } else if (step.eventId && step.choiceId) {
+        // Only replay the event step if it's the live current event (it always is in a faithful log).
+        if (game.view.currentEvent?.id === step.eventId) game.choose(step.choiceId);
+      }
+    }
+    return game.view.state;
   }
 }

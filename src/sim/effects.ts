@@ -15,7 +15,7 @@ import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
 import type { Choice, GameEvent } from "./schema";
 import type { Archetype } from "./slots";
-import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
+import { type FamilyState, type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
 import { succeed } from "./succession";
 import { systemicTick } from "./systemic";
 import { advanceTimeline, applyJump, detectEnd } from "./timeline";
@@ -350,6 +350,61 @@ export function advanceFamily(
 }
 
 /**
+ * Deterministically RETIRE the current protagonist and promote their heir — the generational handoff
+ * triggered BY a saga succession decision (not by a probabilistic mortality roll). The saga's "raise the
+ * next generation" decision IS the generational step, so the line must advance deterministically per
+ * decision rather than waiting for the old protagonist to happen to die within the advanced span (which
+ * coupled generation advancement to how many years — and thus how many scenes — elapsed). Marks the late
+ * protagonist as died in `year`, runs `succeed` to anchor the eldest/ named living heir, re-anchors
+ * birthYear/age, and resets the per-generation life-stage flags so the heir runs their own arc. Returns
+ * the family unchanged (no end) when there is no heir yet — the caller's normal clock/ mortality path
+ * then resolves extinction. Pure + deterministic; no RNG (the heir is a function of recorded birth order).
+ */
+export function succeedToHeir(state: GameState, year: number): GameState {
+  const family = state.family;
+  if (!family) return state;
+  const protagonist = family.members.find((m) => m.id === family.protagonistId);
+  if (!protagonist) return state;
+  // Mark the late protagonist as died this year (if not already), so `succeed` and downstream mortality
+  // see a consistent tree and the heir's `born <= year` eligibility is measured against a real death year.
+  const deceased: FamilyState = {
+    ...family,
+    members: family.members.map((m) =>
+      m.id === family.protagonistId && m.died === undefined ? { ...m, died: year } : m,
+    ),
+  };
+  const namedHeir = state.flags.find((f) => f.startsWith("heir_"))?.slice("heir_".length);
+  const succ = succeed(deceased, year, namedHeir, state.founding?.successionMode);
+  if (succ.heirId === null) {
+    // No living heir to promote — the line ends here. We must set the end DIRECTLY: the protagonist is
+    // pre-marked died in `year` (above), so advanceFamily's mortality loop — which only flags
+    // `protagonistDied` for deaths it rolls WITHIN its [fromYear, year) span — will skip the already-dead
+    // member and never fire the line-extinct branch, leaving the run stuck with a dead protagonist and no
+    // heir. (A succession decision that takes a partner but begets no child can reach here.)
+    return {
+      ...state,
+      family: deceased,
+      end: {
+        kind: "line-extinct",
+        year,
+        reason: "No heir was raised to bear the name; the line ends here.",
+      },
+    };
+  }
+  const heir = succ.family.members.find((m) => m.id === succ.heirId);
+  const heirBorn = heir?.born ?? state.birthYear;
+  const lifeStageSet = new Set<string>(LIFE_STAGE_FLAGS);
+  const heirFlags = state.flags.filter((f) => !lifeStageSet.has(f));
+  return {
+    ...state,
+    family: succ.family,
+    birthYear: heirBorn,
+    age: Math.max(0, year - heirBorn),
+    flags: withFlag(heirFlags, "succession_occurred"),
+  };
+}
+
+/**
  * Apply a SUCCESSION effect (takePartner + beget) to the live family — the shared core behind both the
  * event-path life-stage beats (applyChoice CP-5/FD-8) and the SAGA close-scene decision (the dynastic
  * fork). Without this on the saga path the player picks "take a partner + raise heirs" but no heir is
@@ -408,7 +463,7 @@ export function applySuccessionToFamily(
 export function replay(
   content: Content,
   seed: string,
-  history: ReadonlyArray<{ eventId: string; choiceId: string }>,
+  history: ReadonlyArray<{ eventId?: string; choiceId?: string; saga?: "beat" | "decision" }>,
   initState: (content: Content, seed: string, archetype?: Archetype) => GameState,
   createRng: (seed: string) => Rng,
   archetype: Archetype = "economic",
@@ -426,15 +481,18 @@ export function replay(
 export function replayFromState(
   content: Content,
   base: GameState,
-  history: ReadonlyArray<{ eventId: string; choiceId: string }>,
+  history: ReadonlyArray<{ eventId?: string; choiceId?: string; saga?: "beat" | "decision" }>,
   createRng: (seed: string) => Rng,
 ): GameState {
   let state = base;
   const rng = createRng(base.seed);
   for (const step of history) {
+    // Saga walk steps are replayed through the ENGINE (Game.reconstruct), not the pure sim — skip them
+    // here so this pure event replay stays event-only (it's used for unfounded runs, which have none).
+    if (step.saga) continue;
     const event = content.allEvents.find((e) => e.id === step.eventId);
     if (!event) throw new Error(`replay: unknown event "${step.eventId}"`);
-    state = applyChoice(content, state, event, step.choiceId, rng).state;
+    state = applyChoice(content, state, event, step.choiceId as string, rng).state;
   }
   return state;
 }

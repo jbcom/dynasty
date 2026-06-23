@@ -158,4 +158,75 @@ describe("trigger lattice (FS-5)", () => {
     ).map((b) => `${b.family}:${b.branch}`);
     expect(railroad).toContain("chinese:arrival_railroad_west");
   });
+
+  it("SPINE-WEAVE-PAYOFF: a signature interstitial flag surfaces its matched family branch downstream", () => {
+    const table = TriggerTableSchema.parse(triggersJson);
+
+    // A media-shaping founder (g6 broadcast interstitial) surfaces the narrative-industry family thread in
+    // the emergence era WITHOUT a prior crossing — the early choice echoes forward.
+    const withoutFlag = evaluateTriggers(
+      table.rules,
+      baseState({ year: 1950, era: "emergence", crossings: {}, flags: new Set() }),
+    ).map((b) => `${b.family}:${b.branch}`);
+    expect(withoutFlag).not.toContain("ashkenazi_jewish:founding_of_hollywood");
+
+    const withFlag = evaluateTriggers(
+      table.rules,
+      baseState({
+        year: 1950,
+        era: "emergence",
+        crossings: {},
+        flags: new Set(["g6_shaped_the_narrative"]),
+      }),
+    ).map((b) => `${b.family}:${b.branch}`);
+    expect(withFlag).toContain("ashkenazi_jewish:founding_of_hollywood");
+
+    // The Gilded-Age influence flag surfaces the syndicate-power family thread in its window — flag + era
+    // + year gated so it cannot mis-fire outside the 1920-1960 syndicate era.
+    const syndicate = evaluateTriggers(
+      table.rules,
+      baseState({
+        year: 1935,
+        era: "emergence",
+        crossings: {},
+        leanings: {},
+        flags: new Set(["g3_bought_the_influence"]),
+      }),
+    ).map((b) => `${b.family}:${b.branch}`);
+    expect(syndicate).toContain("italian:syndicate_crossroads");
+
+    // …but the same flag does NOT fire the syndicate thread outside its year window.
+    const tooEarly = evaluateTriggers(
+      table.rules,
+      baseState({
+        year: 1905,
+        era: "emergence",
+        crossings: {},
+        leanings: {},
+        flags: new Set(["g3_bought_the_influence"]),
+      }),
+    ).map((b) => `${b.family}:${b.branch}`);
+    expect(tooEarly).not.toContain("italian:syndicate_crossroads");
+  });
+
+  it("SPINE-WEAVE-PAYOFF-2: the further matched flags surface their family threads (kin/surveillance/rupture)", () => {
+    const table = TriggerTableSchema.parse(triggersJson);
+    const fire = (flags: string[], year = 1950) =>
+      evaluateTriggers(
+        table.rules,
+        baseState({ year, era: "emergence", crossings: {}, leanings: {}, flags: new Set(flags) }),
+      ).map((b) => `${b.family}:${b.branch}`);
+
+    // kin-loyalty (g2) → Irish machine politics.
+    expect(fire(["g2_kept_faith_with_kin"])).toContain("ireland:machine_politics_return");
+    expect(fire([])).not.toContain("ireland:machine_politics_return");
+
+    // total data-gathering (g7) → the exclusion/surveillance family thread.
+    expect(fire(["g7_gathered_everything"])).toContain("chinese:exclusion_and_after");
+    expect(fire([])).not.toContain("chinese:exclusion_and_after");
+
+    // co-opted reform (g4) → the great-rupture thread IN its 1914-1933 window only.
+    expect(fire(["g4_co-opted_the_reform"], 1925)).toContain("bavaria:the_great_war_rupture");
+    expect(fire(["g4_co-opted_the_reform"], 1950)).not.toContain("bavaria:the_great_war_rupture");
+  });
 });

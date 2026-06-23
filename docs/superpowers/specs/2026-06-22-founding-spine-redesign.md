@@ -239,3 +239,105 @@ standing through onComplete → founding; (d) retire/rehome the dead 1885 new-yo
 origins line-failure content (FS-EARLY-TERMINATION); (e) tests + Chrome verify.
 Keep `waveSelect` + the wave places for the CAST/braid system (they're not the
 player origin anymore, but the cast still uses them).
+
+## DECISION (2026-06-23, SPINE-ACT-DEPTH): deepen each act toward the hour+ mandate
+
+MEASURED: each of the 10 spine acts has only ~4 CORE scenes (open + ~3
+DecisionArchitecture scenes) at ~2 prose paragraphs each — ~15-20 min of total
+reading, well short of the user's "an hour or more of gameplay." The
+origin-flavor work (g0-g9) added a rich per-base OPENING; the remaining depth
+lever is MORE lived texture between the major decisions.
+
+**Decision — interleave INTERSTITIAL scenes (not more major decisions):**
+Per [[novel-not-fragments]] the content should read as a NOVEL — not every scene
+a choice. So between the authored DecisionArchitecture beats, insert decisionless
+(or weave-only) interstitial scenes that develop world/family/consequence:
+
+- **TEXTURE** scene (after the open, before the first decision): grounds the
+  generation's world + the family's standing in it — sensory, 2-3 paras, 1-2
+  weave beats (flavor + a small motivator nudge, `gather:true`), falls forward.
+- **CONSEQUENCE/AFTERMATH** scene (after a major decision): shows the decision
+  landing — the cost, the rival's reaction, the next generation taking shape.
+  2-3 paras, 1-2 weave beats, falls forward.
+
+Target shape per act: open → texture → [decision] → consequence → [decision] →
+close (~6 scenes, ~10-12 beats), roughly doubling each act's reading + choices →
+~6 min/act × 10 ≈ the hour. Interstitials are decisionless/weave-only (the major
+DecisionArchitecture decisions stay the act's pivots — the anti-sameness
+invariant is unaffected).
+
+**Authoring:** the GenAI spine pipeline is the natural author, BUT no key in this
+env. So hand-author the interstitials in the spine voice (multi-para sensory
+prose, {given_name}/{surname}/{family_name} tokens, weave beats with small
+motivatorShifts), inserted via an idempotent script like the origin-flavor one
+(regen-safe — spine.act.json is GenAI-generated). Build g0 first as the
+pattern-setter, then extend act by act; ship in sensible batches as PRs.
+
+## DECISION (2026-06-23, SAGA-RESTORE-CURSOR): persist the saga walk in save/restore
+
+**Discovered building the act-depth interstitials:** deepening g0 from 4→6 scenes
+broke the loop.unit "crossing nudges replay-safe across save/restore" test
+(year diverged 2166→2182). Root cause is a real save/restore gap, in two layers:
+
+1. **In-memory layer:** `Game.beginSagaActForState()` always RESTARTED the
+   current generation's act at its OPENING on (re)construct. A `GameState`-object
+   restore taken mid-act therefore replayed the act's already-seen scenes,
+   over-advancing the decoupled saga clock. (4-scene acts only passed by luck —
+   restores happened to land on generation boundaries.) **Fixed** by persisting a
+   `SagaCursor` (actId + sceneId + beatCursor) on `GameState` and a
+   `SagaDriver.restore(cursor, motivators, flags)` that resumes at the saved
+   scene. The motivators/flags are NOT duplicated in the cursor — they live in
+   `personality`/`flags`, kept in sync — so the full ActState rebuilds from the
+   cursor + those.
+
+2. **Persisted-save layer (deeper):** the on-disk save (`toSave`/`fromSave`) is
+   **seed + event-history only** ([[mmm-save-and-chronology]]). The saga walk
+   choices (`pickBeat`/`pickDecision`) were NEVER recorded in `history`, so
+   `fromSave` (which replays only event `applyChoice` steps) reconstructs a
+   saga-deep run back to its FOUNDED BASE — losing all saga progress. Since a
+   founded line's primary surface IS the saga, a reload silently rewinds the run.
+
+   **Decision — Option A: record saga choices in `history`, reconstruct by
+   replaying them through the engine.** This preserves the "save = seed + history,
+   bit-identical replay" invariant rather than snapshotting mutable state (which
+   would have to capture the saga clock, family aging, and rival world — all
+   advanced OUTSIDE history by `advanceRunClock`). `HistoryEntry` gains an optional
+   saga discriminant (`{ saga: "beat" | "decision", index }`); `loop.ts` appends
+   one on every `pickBeat`/`pickDecision`; `toSave` carries them; reconstruction
+   replays the event steps to the founded base, then re-drives the SagaDriver
+   through the recorded saga steps. The saga clock/family/world all re-derive
+   deterministically from the choice sequence, so the reconstruction is identical.
+   The in-memory `SagaCursor` (layer 1) remains as the cheap mid-render position
+   for the `GameState`-object restore path used by tests + hot reload; the save
+   layer is the durable seed+history channel. Rejected: Option B (snapshot full
+   GameState) breaks the invariant; Option C (separate side-channel array) is just
+   Option A with a redundant parallel list — folding into `history` keeps ONE
+   ordered choice log that already drives every RNG fork label.
+
+## DECISION (2026-06-23, SPINE-WEAVE-PAYOFF): interstitial flags pay off via the trigger lattice
+
+The 20 SPINE-ACT-DEPTH interstitials each set a flavor flag via a gather beat
+(g0_press_gathered_intelligence, g6_shaped_the_narrative, …). Enumeration of where
+a flag could "matter beyond color":
+
+1. **motivatorShifts (ALREADY mechanical).** Each interstitial beat also nudges
+   motivators, which the convergence lattice reads — so the *choices* already
+   accrete into the ending. This is real payoff, by design.
+2. **convergence gates — REJECTED.** The convergence lattice is deliberately
+   motivators-PURE (src/sim/convergence.ts header: a Community/Tradition line
+   *cannot* buy a Cunning-conquest stars ending). Adding flag-gates there would
+   violate that invariant. Don't.
+3. **trigger lattice (the right home).** `triggerLattice.conditionMet` already
+   supports `flags`/`notFlags` clauses, and the engine's `triggerThreads` weaves
+   fired family branches into the spine prose — this is the DESIGNED channel for
+   "a flag surfaces downstream woven content." So a signature interstitial flag,
+   era-matched to a thematically-honest recurring-family branch, can fire a
+   cross-family thread later in the run.
+
+**Decision:** wire a SMALL set of thematically-honest flag→branch trigger rules
+(not blanket — each must MATCH the branch it surfaces and its era window), e.g.
+`g6_shaped_the_narrative` (a media-shaping founder) → the ashkenazi_jewish
+`founding_of_hollywood` branch (the narrative-industry family) in the emergence
+era. Gate on the flag + era so it can't mis-fire. Tested via the trigger lattice's
+`conditionMet`/`evaluateTriggers`. Authoring more rules is incremental backlog;
+the payoff PATTERN (flag → matched branch via the existing lattice) is the unit.

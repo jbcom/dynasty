@@ -3,17 +3,26 @@ import { macroActForYear, type MacroAct } from "../../sim/macroActs";
 import type { GameState } from "../../sim/state";
 
 /**
- * MAP VIEW (VL-3) — the era-progressing JOURNEY visual. A generated antique-engraving cartographic base
- * (the signature style, [[visual-layer-revival]]) under an SVG DATA-OVERLAY that shows the dynasty's
- * progress founding→stars: a lit path along the four macro-acts, the current era marked, the unreached
- * future dimmed (Roadwarden fog / 80 Days journey). The base is GenAI raster; the overlay is data-viz
- * (nodes/route/fog), NOT hand-drawn cartography — honoring the no-hand-drawn-SVG-art rule.
+ * MAP VIEW (VL-3 + MAP-ERA-PROGRESS-RICHER) — the era-progressing JOURNEY visual. A generated
+ * antique-engraving cartographic base (the signature style, [[visual-layer-revival]]) under an SVG
+ * DATA-OVERLAY that shows the dynasty's progress founding→stars: a lit path along the four macro-acts,
+ * the current era marked, the unreached future dimmed (Roadwarden fog / 80 Days journey). MAP-ERA-
+ * PROGRESS-RICHER adds finer grain: the line's exact GENERATION (g0..g9) as a marker sliding along the
+ * path, and the RIVAL lines' positions as faint dots on the same axis — so the convergence race is
+ * legible, not just the four coarse waypoints. The base is GenAI raster; the overlay is data-viz, NOT
+ * hand-drawn cartography — honoring the no-hand-drawn-SVG-art rule.
  */
 
 interface Props {
   gameState: GameState;
+  /** The whole convergence field — each rival line's standing (label + rung 0..MAX_RUNG). Optional so the
+   *  component still renders from `gameState` alone (the journey is meaningful without the rivals). */
+  rivalStandings?: Array<{ id: string; label: string; rung: number }>;
+  /** The player's rung (generation depth, 0..MAX_RUNG) as the rival world measures it — to place the
+   *  player on the SAME rung axis as the rivals for an apples-to-apples convergence readout. */
+  playerRung?: number;
 }
-const { gameState }: Props = $props();
+const { gameState, rivalStandings = [], playerRung }: Props = $props();
 
 // The four macro-acts as journey waypoints, founding → the stars.
 const STAGES: Array<{ act: MacroAct; label: string }> = [
@@ -28,6 +37,32 @@ const currentIdx = $derived(Math.max(0, STAGES.findIndex((s) => s.act === curren
 // Waypoint x-positions across the chart (left = founding, right = the stars).
 const xs = [14, 38, 62, 88];
 const y = 50;
+
+// MAP-ERA-PROGRESS-RICHER: the line's exact GENERATION (g0..g9), read from the live family (the
+// protagonist's generation depth). Defaults to 0 when no family is founded yet — the component still
+// renders the coarse journey. The spine runs 10 generations (g0 founding → g9 the stars).
+const SPINE_GENS = 10;
+const generation = $derived.by(() => {
+  const fam = gameState.family;
+  const protagonist = fam?.members.find((m) => m.id === fam.protagonistId);
+  return Math.min(protagonist?.generation ?? 0, SPINE_GENS - 1);
+});
+// Map a 0..9 generation onto the chart's left→right founding→stars axis (the same 14..88 span the
+// macro-act waypoints use), so the generation marker slides between the coarse waypoints.
+const genX = $derived(14 + (generation / (SPINE_GENS - 1)) * (88 - 14));
+
+// Rival positions on the SAME axis, by rung (0..MAX_RUNG). Rung maps to the founding→stars span; the
+// rivals cluster where they've reached, so a glance shows who is ahead. Sorted high→low for the readout.
+const MAX_RUNG = 5;
+const rivalDots = $derived(
+  rivalStandings.map((r) => ({
+    ...r,
+    x: 14 + (Math.min(r.rung, MAX_RUNG) / MAX_RUNG) * (88 - 14),
+  })),
+);
+const leader = $derived(
+  rivalStandings.length ? [...rivalStandings].sort((a, b) => b.rung - a.rung)[0] : null,
+);
 </script>
 
 <section class="map" aria-label="The dynasty's journey">
@@ -47,6 +82,7 @@ const y = 50;
       />
       {#each STAGES as s, i (s.act)}
         <circle
+          class="waypoint"
           cx={xs[i]}
           cy={y}
           r={i === currentIdx ? 2.6 : 1.8}
@@ -54,6 +90,12 @@ const y = 50;
           class:here={i === currentIdx}
         />
       {/each}
+      <!-- MAP-ERA-PROGRESS-RICHER: faint rival markers on the founding→stars axis (who's ahead). -->
+      {#each rivalDots as r (r.id)}
+        <circle class="rival" cx={r.x} cy={y - 4.5} r="1.1" data-rival={r.id} />
+      {/each}
+      <!-- the player's exact generation, sliding between the coarse waypoints. -->
+      <circle class="gen-marker" cx={genX} cy={y} r="1.5" />
     </svg>
     <div class="labels">
       {#each STAGES as s, i (s.act)}
@@ -68,6 +110,10 @@ const y = 50;
       The line has reached the stars.
     {:else}
       The {STAGES[currentIdx]?.label} of the line — {STAGES.length - 1 - currentIdx} stage{STAGES.length - 1 - currentIdx === 1 ? "" : "s"} from the stars.
+    {/if}
+    <span class="gen-note">Generation {generation + 1} of {SPINE_GENS}.</span>
+    {#if leader && playerRung !== undefined && leader.rung > playerRung}
+      <span class="rival-note">{leader.label} leads the convergence.</span>
     {/if}
   </p>
 </section>
@@ -127,6 +173,18 @@ const y = 50;
     fill: var(--mmm-gold);
     stroke: var(--mmm-gold);
   }
+  /* MAP-ERA-PROGRESS-RICHER markers. */
+  circle.gen-marker {
+    fill: var(--mmm-red, #b22);
+    stroke: var(--mmm-parchment, #e8dcc0);
+    stroke-width: 0.4;
+    filter: drop-shadow(0 0 1.2px var(--mmm-red, #b22));
+  }
+  circle.rival {
+    fill: color-mix(in srgb, var(--mmm-text-dim, #888) 70%, transparent);
+    stroke: none;
+    opacity: 0.7;
+  }
   .labels {
     position: absolute;
     inset: 0;
@@ -155,6 +213,22 @@ const y = 50;
     font-family: var(--mmm-font-body);
     font-style: italic;
     font-size: 0.85rem;
+    color: var(--mmm-text-dim);
+  }
+  .gen-note {
+    display: block;
+    margin-top: 0.2rem;
+    font-style: normal;
+    font-family: var(--mmm-font-ui);
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    color: color-mix(in srgb, var(--mmm-red, #b22) 80%, var(--mmm-text));
+  }
+  .rival-note {
+    display: block;
+    font-style: normal;
+    font-family: var(--mmm-font-ui);
+    font-size: 0.72rem;
     color: var(--mmm-text-dim);
   }
 </style>

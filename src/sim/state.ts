@@ -19,10 +19,22 @@ export interface LedgerEntry {
   ruleId?: string;
 }
 
-/** A recorded decision (seed + this list fully reconstructs any run). */
+/**
+ * A recorded decision (seed + this list fully reconstructs any run). An entry is EITHER an event-flow
+ * choice (eventId + choiceId) OR a SAGA walk step (SAGA-RESTORE-CURSOR): `saga` names the move kind and
+ * `index` the chosen beat/option. Both share `year`. Keeping saga steps in the ONE ordered history log
+ * means replay re-drives the novel walk deterministically — preserving the "save = seed + history"
+ * invariant — and every RNG fork keyed on `history.length` stays consistent.
+ */
 export interface HistoryEntry {
-  eventId: string;
-  choiceId: string;
+  /** Event id for an event-flow choice; absent for a saga step. */
+  eventId?: string;
+  /** Choice id for an event-flow choice; absent for a saga step. */
+  choiceId?: string;
+  /** Set for a SAGA walk step: which move was made. */
+  saga?: "beat" | "decision";
+  /** The chosen beat/option index, for a saga step. */
+  index?: number;
   year: number;
 }
 
@@ -156,6 +168,24 @@ export interface GameState {
    * deaths (FD-9), and succession (FD-10) all mutate this.
    */
   family?: FamilyState;
+  /**
+   * The SAGA reader cursor (SAGA-RESTORE-CURSOR) — where the played novel-act walk is paused: which act,
+   * which scene, and how many of that scene's weave beats have been chosen. Persisted so a save/restore
+   * mid-act RESUMES at the exact scene instead of restarting the act at its opening (which replayed
+   * already-seen scenes and advanced the decoupled saga clock further than an uninterrupted run). The
+   * carried motivators + flags are NOT duplicated here — they live in `personality` + `flags`, which the
+   * engine keeps in sync — so the full ActState is reconstructed from this cursor + those on restore.
+   * Absent when no act is active (unfounded line, or the act has ended).
+   */
+  saga?: SagaCursor;
+}
+
+/** The serializable saga reader position (SAGA-RESTORE-CURSOR). Reconstructs an ActState with the run's
+ *  live personality (motivators) + flags. `sceneId` null mirrors an ended act. */
+export interface SagaCursor {
+  actId: string;
+  sceneId: string | null;
+  beatCursor: number;
 }
 
 /** A living (or dead) member of the run's growing lineage (FD-8). */

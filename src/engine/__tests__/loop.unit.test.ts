@@ -7,6 +7,7 @@ import { buildContent } from "../../sim/content";
 import { foundByComposition } from "../../sim/founding";
 import { createRng } from "../../sim/rng";
 import { initState } from "../../sim/state";
+import { SAGA_GENERATION_SPAN } from "../../sim/timeline";
 import { pickNextEventViaWorld } from "../../sim/world";
 import { Game } from "../loop";
 
@@ -388,8 +389,11 @@ describe("Game loop", () => {
     };
     const a = play();
     // Choosing succession every generation carries the line deep — far past the gen-2 extinction that
-    // happened when begets weren't applied. Expect many scenes + a year well into the next century.
-    expect(a.sagaScenes).toBeGreaterThan(60);
+    // happened when begets weren't applied. With the saga clock decoupled from scene COUNT (texture beats
+    // pass no in-world years; a generation's span is advanced once at its succession decision), the line
+    // plays all ten spine generations and ages a full ~25y per generation — so it reaches deep into the
+    // future regardless of how many decisionless beats each act carries.
+    expect(a.sagaScenes).toBeGreaterThan(40);
     expect(a.year).toBeGreaterThan(1950);
     // Determinism: same seed + same choices → identical depth (replay-safe with the new beget draws).
     const b = play();
@@ -537,6 +541,82 @@ describe("Game loop", () => {
     expect(g.finished).toBe(true);
   });
 
+  it("SAGA-CLOCK-DECOUPLE: extra decisionless texture beats do NOT age the line (span is driven by decisions, not scene count)", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Texture",
+      seed: "clockdecouple",
+      originId: "composed:ireland:origins",
+    };
+    // Walk to the first saga scene, then exhaust ITS decisionless beats while recording the year before
+    // and after each beat. Every texture beat must leave the in-world year UNCHANGED — so deepening an act
+    // with interstitial scenes can never age the protagonist faster (the bug being fixed: 1 year per beat
+    // killed a deep run of old age before the final generation).
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    let beatsTaken = 0;
+    let guard = 0;
+    while (!g.finished && guard < 200) {
+      const s = g.view.saga.scene;
+      if (!s) break;
+      if (s.decision) break; // stop at the generational fork — that's where years are allowed to pass
+      if (!s.beats.length) break;
+      const before = g.view.state.year;
+      g.pickBeat(0);
+      const after = g.view.state.year;
+      expect(after, "a decisionless texture beat must pass NO in-world years").toBe(before);
+      beatsTaken++;
+      guard++;
+    }
+    expect(
+      beatsTaken,
+      "expected at least one decisionless texture beat to exercise the clock",
+    ).toBeGreaterThan(0);
+  });
+
+  it("SAGA-CLOCK-DECOUPLE: a succession decision advances exactly one generation's span and steps the generation", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Span",
+      seed: "spanstep",
+      originId: "composed:ireland:origins",
+    };
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    // Drive to the first succession decision, clearing the decisionless beats (which pass no years).
+    let guard = 0;
+    while (!g.finished && guard < 500) {
+      const s = g.view.saga.scene;
+      if (!s) break;
+      if (s.decision?.options.some((o) => o.succession?.takesPartner)) break;
+      if (s.beats.length) g.pickBeat(0);
+      else if (s.decision) g.pickDecision(0);
+      else break;
+      guard++;
+    }
+    const s = g.view.saga.scene;
+    const yearBefore = g.view.state.year;
+    const rungBefore = g.view.rung;
+    expect(s?.decision, "expected to reach a succession decision").toBeTruthy();
+    const i = s?.decision?.options.findIndex((o) => o.succession?.takesPartner) ?? -1;
+    expect(i, "expected a take-partner succession option").toBeGreaterThanOrEqual(0);
+    g.pickDecision(i);
+    // The generation must have stepped (deterministic per-decision, not a probabilistic mortality roll),
+    // and the in-world year must have advanced by exactly one generation's span (SAGA_GENERATION_SPAN=25).
+    expect(g.view.rung, "the succession decision steps the generation").toBe(rungBefore + 1);
+    expect(g.view.state.year - yearBefore).toBe(SAGA_GENERATION_SPAN);
+  });
+
   it("PF-14: a saga choice's setFlags reach the run's state.flags (not sealed in the driver)", () => {
     const real = loadContent();
     const comp = {
@@ -584,5 +664,94 @@ describe("Game loop", () => {
     expect(a).toEqual(b); // deterministic + stable across re-renders (the selector is seeded)
     // Any present thread is well-formed; with no destination slots authored yet, the selector is inert.
     for (const t of a) expect(t.crossing.length).toBeGreaterThan(0);
+  });
+
+  it("SAGA-RESTORE-CURSOR: a save mid-act RESUMES at the exact scene, not the act opening", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Cursor",
+      seed: "sagacursor",
+      originId: "composed:ireland:origins",
+    };
+    // Advance a few WEAVE BEATS within the FOUNDING act WITHOUT crossing a generational decision, so the
+    // walk is genuinely paused mid-act (a non-opening scene, or beatCursor > 0).
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    const openingSceneId = g.view.saga.scene?.id ?? null;
+    expect(openingSceneId).toBeTruthy();
+    let advanced = false;
+    for (let i = 0; i < 6; i++) {
+      const s = g.view.saga.scene;
+      if (!s) break;
+      if (s.decision) break; // stop before the generational fork — we want a pure mid-act pause
+      if (!s.beats.length) break;
+      g.pickBeat(0);
+      advanced = true;
+      // Once we've left the opening scene (or moved the beat cursor on it), we're paused mid-act.
+      const cur = g.view.state.saga;
+      if (cur && (cur.sceneId !== openingSceneId || cur.beatCursor > 0)) break;
+    }
+    expect(advanced, "drove at least one weave beat").toBe(true);
+
+    const saved = g.view.state;
+    // The cursor was persisted into the run state — actId + a live scene position.
+    expect(saved.saga, "saga cursor persisted in GameState").toBeTruthy();
+    expect(saved.saga?.actId).toBeTruthy();
+    const savedSceneId = saved.saga?.sceneId ?? null;
+    const savedYear = saved.year;
+
+    // Restore into a fresh Game. The resumed reader sits on the SAVED scene — NOT the act opening — and
+    // the clock did not jump (no replay of already-read scenes).
+    const restored = new Game(real, comp.seed, saved, comp.archetype);
+    expect(restored.view.saga.scene?.id).toBe(savedSceneId);
+    expect(restored.view.state.year).toBe(savedYear);
+  });
+
+  it("TRIGGER-CROSSING-RECORD: engaging a scene that fires a trigger stamps the crossing flag (memory)", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1845,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Cross",
+      seed: "crossrec",
+      originId: "composed:ireland:origins",
+    };
+    // A founded ireland line in the convergence/1845-1875 window fires the famine-docks ARRIVAL trigger
+    // (a `once` rule). Drive saga moves; once a scene surfaces the thread, advancing it must STAMP a
+    // `crossed:ireland:*` flag — the Turtledove cast-memory — so the once-rule won't re-fire and a later
+    // priorCrossing-gated return can unlock.
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    let sawCrossing = false;
+    let guard = 0;
+    while (!g.finished && guard < 200) {
+      const v = g.view;
+      const s = v.saga.scene;
+      if (s) {
+        if (s.decision) g.pickDecision(0);
+        else if (s.beats.length) g.pickBeat(0);
+        else break;
+      } else if (v.currentEvent?.choices[0]) {
+        g.choose(v.currentEvent.choices[0].id);
+      } else break;
+      if (g.view.state.flags.some((f) => f.startsWith("crossed:"))) {
+        sawCrossing = true;
+        break;
+      }
+      guard++;
+    }
+    // At least one crossing was recorded as a flag — the memory is real + persisted in state.flags.
+    expect(sawCrossing, "a fired trigger branch stamped a crossed: flag").toBe(true);
+    // The crossing flag is idempotent: it appears at most once (no duplicate stamping on re-render).
+    const crossFlags = g.view.state.flags.filter((f) => f.startsWith("crossed:"));
+    expect(new Set(crossFlags).size).toBe(crossFlags.length);
   });
 });
