@@ -4,11 +4,13 @@ import {
   buildCompositePortraitPrompt,
   buildEncounterPortraitPrompt,
   buildPortraitPrompt,
+  CHRONICLE_WRAPPER,
   compositePortraitKey,
   encounterPortraitKey,
   eraBandForYear,
   type PortraitFacets,
   portraitKey,
+  presentationFor,
   SIGNATURE_STYLE,
 } from "../portrait";
 
@@ -99,12 +101,14 @@ describe("EI-8d composite portrait prompt + key", () => {
     gender: "male",
   };
 
-  it("rides the signature style + folds in the era band, life stage, and wardrobe", () => {
+  it("rides the chronicle wrapper + folds in the presentation medium, era band, life stage, and wardrobe", () => {
     const p = buildCompositePortraitPrompt(adultCeo);
-    expect(p).toContain(SIGNATURE_STYLE);
+    expect(p).toContain(CHRONICLE_WRAPPER); // cohesion wrapper, NOT the locked engraving style
+    expect(p).not.toContain(SIGNATURE_STYLE); // composite portraits vary their medium by era×station
     expect(p).toMatch(/an adult/i);
     expect(p).toMatch(/magnate|CEO/i); // high economic wardrobe
     expect(p).toMatch(/2030s|contemporary/i); // digital_modern era register
+    expect(p).toMatch(/headshot/i); // digital_modern high presentation medium
   });
 
   it("mutes the wardrobe for the youngest stages (an infant has no station yet)", () => {
@@ -125,6 +129,53 @@ describe("EI-8d composite portrait prompt + key", () => {
   });
 });
 
+describe("EI-8 presentation medium (era × station — user 2026-06-23)", () => {
+  it("the Gilded-Age fortune-seeker (low) keeps a worn tintype keepsake; the magnate (high) a gilt-framed oil", () => {
+    // The user's examples: a miner's creased tintype of his wife back home vs a robber baron's commissioned oil.
+    expect(presentationFor("industrial_late1800s", "low")).toMatch(
+      /tintype|carte-de-visite|keepsake/i,
+    );
+    expect(presentationFor("industrial_late1800s", "high")).toMatch(
+      /gilt-framed oil|cabinet card|magnate/i,
+    );
+  });
+
+  it("the medium tracks era AND station (every era×tier is distinct)", () => {
+    const eras = [
+      "founding_1700s",
+      "federal_1800s",
+      "industrial_late1800s",
+      "early_1900s",
+      "midcentury",
+      "digital_modern",
+      "near_future",
+      "stellar",
+    ] as const;
+    const all = new Set<string>();
+    for (const e of eras) {
+      const lo = presentationFor(e, "low");
+      const hi = presentationFor(e, "high");
+      expect(lo).not.toBe(hi); // station shifts the medium within an era
+      all.add(lo);
+      all.add(hi);
+    }
+    expect(all.size, "media are distinct across eras + stations").toBe(eras.length * 2);
+  });
+
+  it("extrapolates into the future bands (volumetric / holographic keepsakes)", () => {
+    expect(presentationFor("near_future", "high")).toMatch(/volumetric/i);
+    expect(presentationFor("stellar", "high")).toMatch(/holographic/i);
+    expect(presentationFor("stellar", "low")).toMatch(/hologram|archival/i);
+  });
+
+  it("the founding fortune-seeker reads humble (a rough sketch), not a commissioned work", () => {
+    expect(presentationFor("founding_1700s", "low")).toMatch(/sketch|charcoal|humble/i);
+    expect(presentationFor("founding_1700s", "high")).toMatch(
+      /engraving|oil miniature|commissioned/i,
+    );
+  });
+});
+
 describe("EI-8d encounter portrait prompt + key", () => {
   it("characterizes a distinct person by role, era, and age — not the line's archetype", () => {
     const p = buildEncounterPortraitPrompt({
@@ -133,7 +184,7 @@ describe("EI-8d encounter portrait prompt + key", () => {
       eraBand: "founding_1700s",
       gender: "female",
     });
-    expect(p).toContain(SIGNATURE_STYLE);
+    expect(p).toContain(CHRONICLE_WRAPPER);
     expect(p).toMatch(/first friend/i);
     expect(p).toMatch(/a child/i);
     expect(p).toMatch(/colonial/i);

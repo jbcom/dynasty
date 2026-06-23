@@ -200,6 +200,33 @@ ladders are 6 rungs each → collapse to 3 tiers: `low` 0–1, `mid` 2–3, `hig
 
 So wardrobe = `f(archetype, rungTier)` — 7 × 3 = 21 wardrobe registers.
 
+### Axis 5 — PRESENTATION MEDIUM (era × station) — user, 2026-06-23
+The portrait is not just a face — it is an ARTIFACT of its time and station: how that society, at that
+class, would actually have *captured and kept* this person's likeness. The MEDIUM and framing track era ×
+rung, NOT a single locked engraving for all. The user's examples set the shape:
+- a **miner seeking fortune** keeps a cheap, worn **tintype / hand-tinted carte-de-visite** of his wife
+  back home — a humble, creased keepsake, not a commissioned work;
+- a **Gilded-Age robber baron** commissions a **gilt-framed oil painting** or a formal **studio cabinet
+  card** — the medium itself is a statement of wealth.
+
+So presentation = `f(eraBand, rungTier)` — the real historical object:
+- founding_1700s: low → a rough graphite/charcoal sketch or crude woodcut; high → a fine intaglio engraving
+  or a small oil miniature.
+- federal_1800s: low → a silhouette / cut-paper profile; high → an oil portrait in a gilt frame.
+- industrial_late1800s (Gilded Age): low → a worn tintype / carte-de-visite (a fortune-seeker's keepsake);
+  mid → a sepia cabinet card; high → a commissioned gilt-framed oil / formal studio cabinet card.
+- early_1900s: low → a plain black-and-white snapshot; high → a formal studio photograph.
+- midcentury: low → a square Polaroid / ID photo; high → a color studio portrait.
+- digital_modern: low → a phone snapshot; high → a polished corporate headshot.
+- near_future: low → a utilitarian scan/ID capture; high → a refined volumetric studio capture.
+- stellar: low → a worn archival hologram-still; high → a stately holographic state portrait.
+
+COHESION is preserved NOT by a single medium but by a shared framing wrapper — every asset reads as "an
+aged artifact in a dynastic chronicle": muted/limited palette, a restrained gold-ochre + oxblood accent,
+plate/keepsake framing, gentle age. The MEDIUM varies (the era+station signal); the chronicle wrapper holds
+the gallery together. A pure `presentationFor(eraBand, rungTier)` returns the medium descriptor; the
+composite prompt folds it in alongside the era register + wardrobe (replacing the blanket engraving lock).
+
 ### Axis 4 — ENCOUNTER ROLE (optional)
 Storyline figures met across the 300+ years (first friend, betrayer, partner, rival head, mentor, …) get
 their own era/age-appropriate portrait. Encounter portraits reuse axes 1–2 (their life-stage + the

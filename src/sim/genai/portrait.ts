@@ -32,8 +32,75 @@ export const SIGNATURE_STYLE =
 
 /** Negative direction folded into every prompt to hold the signature look. */
 export const STYLE_NEGATIVE =
-  "Avoid: cartoon, anime, cel-shading, 3D/CGI render, photo-realism, modern flat vector, watermark, text, " +
+  "Avoid: cartoon, anime, cel-shading, 3D/CGI render, modern flat vector, watermark, text, " +
   "frame, signature, oversaturation.";
+
+/**
+ * EI-8 PRESENTATION (user, 2026-06-23) — the COHESION wrapper for the composite portraits. Unlike the locked
+ * engraving SIGNATURE_STYLE (used by the legacy spine portraits + the map), the composite portraits vary their
+ * MEDIUM by era × station (a tintype keepsake vs a gilt-framed oil — see PRESENTATION). What holds the gallery
+ * together instead is this shared "aged artifact in a dynastic chronicle" framing: a muted/limited palette with
+ * one restrained gold-ochre + oxblood accent, keepsake framing, gentle age. The medium signals era+station; the
+ * wrapper signals "one family's chronicle."
+ */
+export const CHRONICLE_WRAPPER =
+  "Rendered as an AGED ARTIFACT in a dynastic chronicle: a muted, limited palette with a single restrained " +
+  "gold-ochre and oxblood accent, gentle age and patina, keepsake/plate framing. Cohesive with a family's " +
+  "kept record of its line. NOT cartoon, NOT cel-shaded, NOT a modern flat digital illustration.";
+
+/**
+ * EI-8 PRESENTATION MEDIUM by (era band × rung tier) — the real (and, for the future, extrapolated) ARTIFACT a
+ * person of that station and time would have had their likeness captured in. A miner's worn tintype of his wife
+ * vs a robber baron's gilt-framed oil (the user's examples); carried forward with plausible future media
+ * (volumetric captures, holographic state portraits). The medium itself reads station + era.
+ */
+const PRESENTATION: Record<EraBand, Record<RungTier, string>> = {
+  founding_1700s: {
+    low: "a rough graphite-and-charcoal sketch on coarse paper, a humble likeness",
+    mid: "a modest ink-and-wash drawing",
+    high: "a fine intaglio engraving or a small oil miniature, a commissioned likeness",
+  },
+  federal_1800s: {
+    low: "a cut-paper silhouette profile, a cheap keepsake",
+    mid: "a small watercolor portrait",
+    high: "an oil portrait in a gilt frame, a statement of standing",
+  },
+  industrial_late1800s: {
+    low: "a worn, hand-tinted tintype / carte-de-visite — a fortune-seeker's creased keepsake of home",
+    mid: "a sepia cabinet-card photograph",
+    high: "a commissioned gilt-framed oil painting, or a formal studio cabinet card of a Gilded-Age magnate",
+  },
+  early_1900s: {
+    low: "a plain black-and-white snapshot, slightly faded",
+    mid: "a black-and-white portrait photograph",
+    high: "a formal studio photograph in a pressed-card mount",
+  },
+  midcentury: {
+    low: "a small square Polaroid or an ID photo, a little worn",
+    mid: "a color portrait photograph",
+    high: "a polished color studio portrait",
+  },
+  digital_modern: {
+    low: "a candid phone snapshot",
+    mid: "a clean digital portrait photo",
+    high: "a polished corporate headshot",
+  },
+  near_future: {
+    low: "a utilitarian identity scan-capture, plainly lit",
+    mid: "a clean volumetric portrait capture",
+    high: "a refined volumetric studio capture, composed and stately",
+  },
+  stellar: {
+    low: "a worn archival hologram-still, faintly flickering with age",
+    mid: "a clear holographic portrait capture",
+    high: "a stately holographic state portrait, an heirloom of a stellar house",
+  },
+};
+
+/** The presentation medium for an (era band × rung tier) — EI-8 (user). Pure. */
+export function presentationFor(eraBand: EraBand, tier: RungTier): string {
+  return PRESENTATION[eraBand][tier];
+}
 
 /**
  * EI-8a — the FINE era bands for portraits. The line runs 1776→the stars, and "a child in 1790 ≠ a child
@@ -141,9 +208,11 @@ const LIFE_STAGE_SUBJECT: Record<LifeStage, string> = {
 };
 
 /**
- * Build the portrait prompt for a full facet set (EI-8d): the SIGNATURE STYLE + the fine era register + the
- * life-stage subject + the archetype/rung WARDROBE. A bust/half-figure that reads at small size. The wardrobe
- * is muted for the youngest stages (an infant/child has no station yet) so the look stays period-true.
+ * Build the portrait prompt for a full facet set (EI-8d + the presentation axis): the PRESENTATION MEDIUM
+ * (era × station — a tintype keepsake vs a gilt-framed oil) + the fine era register + the life-stage subject
+ * + the archetype/rung WARDROBE, held together by the CHRONICLE_WRAPPER. A bust/half-figure that reads at
+ * small size. The wardrobe is muted for the youngest stages (an infant/child has no station yet). The medium
+ * itself signals who could afford what, when — and extrapolates into the future bands (volumetric/holographic).
  */
 export function buildCompositePortraitPrompt(f: PortraitFacets): string {
   const era = ERA_VISUAL[f.eraBand];
@@ -154,11 +223,13 @@ export function buildCompositePortraitPrompt(f: PortraitFacets): string {
   const wardrobe = stationed
     ? "in plain period dress befitting the child of the household"
     : wardrobeFor(f.archetype, f.rungTier);
+  const presentation = presentationFor(f.eraBand, f.rungTier);
   return [
-    `A dignified BUST / half-figure PORTRAIT of ${subject}, ${era}, ${wardrobe}.`,
+    // The MEDIUM leads — this is "${presentation}" OF a person, so the artifact reads era + station first.
+    `${presentation.charAt(0).toUpperCase()}${presentation.slice(1)} — a BUST / half-figure likeness of ${subject}, ${era}, ${wardrobe}.`,
     `A member of an American dynasty across the centuries. A composed bearing; let the face carry character`,
-    `(resolve, cunning, or care), not a smile. Front or three-quarter view, plain dark ground.`,
-    SIGNATURE_STYLE,
+    `(resolve, cunning, or care), not a smile. Front or three-quarter view, plain ground.`,
+    CHRONICLE_WRAPPER,
     STYLE_NEGATIVE,
   ].join(" ");
 }
@@ -184,16 +255,18 @@ export interface EncounterFacets {
   gender: "male" | "female";
 }
 
-/** Build the prompt for an encounter figure (EI-8d): era-true, age-true, and characterized by their role. */
+/** Build the prompt for an encounter figure (EI-8d): era-true, age-true, and characterized by their role. The
+ *  presentation medium tracks the era at a middling station (an encountered person's standing isn't tracked). */
 export function buildEncounterPortraitPrompt(f: EncounterFacets): string {
   const era = ERA_VISUAL[f.eraBand];
   const sex = f.gender === "male" ? "male" : "female";
   const subject = `${LIFE_STAGE_SUBJECT[f.lifeStage]} (${sex})`;
+  const presentation = presentationFor(f.eraBand, "mid");
   return [
-    `A BUST / half-figure PORTRAIT of ${subject}, ${era}.`,
+    `${presentation.charAt(0).toUpperCase()}${presentation.slice(1)} — a BUST / half-figure likeness of ${subject}, ${era}.`,
     `A distinct person encountered in a dynasty's story — their bearing reads as "${f.role}". A composed`,
-    `face that carries character, not a smile. Front or three-quarter view, plain dark ground.`,
-    SIGNATURE_STYLE,
+    `face that carries character, not a smile. Front or three-quarter view, plain ground.`,
+    CHRONICLE_WRAPPER,
     STYLE_NEGATIVE,
   ].join(" ");
 }
