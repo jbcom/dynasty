@@ -67,6 +67,13 @@ export interface SaveData {
     saga?: "beat" | "decision";
     index?: number;
   }>;
+  /**
+   * RIVAL-CROSSING-EXPLOIT: the player-press side-log. Kept SEPARATE from `history` because a press must not
+   * shift `history.length` (the saga RNG fork key). On load, the press nudges are re-applied to the rebuilt
+   * rival world; the heat costs are already baked into the replayed meters, so only the rival nudge replays.
+   * Absent on saves made before this feature — those load with no presses.
+   */
+  presses?: Array<{ at: number; rivalId: string; year: number }>;
   savedYear: number;
 }
 
@@ -109,6 +116,8 @@ export function toSave(state: GameState): SaveData {
     history: state.history.map((h) =>
       h.saga ? { saga: h.saga, index: h.index } : { eventId: h.eventId, choiceId: h.choiceId },
     ),
+    // RIVAL-CROSSING-EXPLOIT: the press side-log (only when non-empty) — re-applied at load by the interleave.
+    ...(state.presses && state.presses.length ? { presses: state.presses } : {}),
     savedYear: state.year,
   };
 }
@@ -167,7 +176,7 @@ export function fromSave(content: Content, save: SaveData): GameState {
     // log alongside any event steps. Reconstruct by replaying the WHOLE interleaved sequence through the
     // engine (event steps via choose, saga steps via pickBeat/pickDecision) — the saga clock, family
     // aging, and rival world all re-derive from the choices, so the rebuild is bit-identical to live play.
-    return Game.reconstruct(content, base, save.history);
+    return Game.reconstruct(content, base, save.history, save.presses ?? []);
   }
   // Plain archetype run: archetype field (v2), else legacy literal dynasty (v1).
   const archetype: Archetype =

@@ -39,6 +39,20 @@ export interface HistoryEntry {
 }
 
 /**
+ * RIVAL-CROSSING-EXPLOIT: a player press on a faltering rival — a deterministic side-effect (deepen the
+ * rival's stumble + a heat cost) recorded OUTSIDE the RNG-keyed `history`. `at` is the `history.length` when
+ * it fired; `reconstruct` re-applies the press right after replaying that many history steps, so the saga RNG
+ * fork labels (keyed on history.length) are identical in live play and replay.
+ */
+export interface RivalPress {
+  /** history.length at the moment of the press (the interleave point for reconstruct). */
+  at: number;
+  /** The pressed rival's id. */
+  rivalId: string;
+  year: number;
+}
+
+/**
  * How a run can end. `kind` is free-form (death | coup | victory | jail |
  * bankruptcy | assassination | first_contact | …) so endings are authored data,
  * not a fixed enum. `endingId` references the winning ending definition.
@@ -91,6 +105,11 @@ export interface GameState {
   firedConsequences: string[];
   ledger: LedgerEntry[];
   history: HistoryEntry[];
+  /** RIVAL-CROSSING-EXPLOIT: player-initiated rival presses, recorded in a SEPARATE log from `history` so
+   *  they never shift `history.length` (which keys every saga RNG fork — putting them in history would desync
+   *  replay). Each is tagged with the history length at which it fired, so `reconstruct` re-applies it at the
+   *  exact point WITHOUT touching the saga RNG sequence. Save = seed + history + presses. */
+  presses?: RivalPress[];
   /** Live market state by market id (SIM1 systemic layer). */
   markets: Record<string, MarketState>;
   /** Current + peak rung per rank ladder (SIM1). Peak drives fall-from-grace. */

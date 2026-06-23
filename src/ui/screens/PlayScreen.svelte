@@ -35,12 +35,15 @@ interface Props {
   onpickbeat?: (beatIndex: number) => void;
   /** Pick the current scene's terminal decision option (saga play). */
   onpickdecision?: (optionIndex: number) => void;
+  /** RIVAL-CROSSING-EXPLOIT: press a faltering rival (deepen its stumble for a heat cost). */
+  onpress?: (rivalId: string) => void;
   /** Medium-native layout: phones get a compact tab stack; wide tablets/foldables
       get the event + an info panel side-by-side. */
   wide?: boolean;
 }
 
-const { content, view, busy, onchoose, onpickbeat, onpickdecision, wide = false }: Props = $props();
+const { content, view, busy, onchoose, onpickbeat, onpickdecision, onpress, wide = false }: Props =
+  $props();
 
 // Diegetic ambient drift: the play area tints toward cyan (utopia) or red
 // (tyranny) as the personality vector shifts, so the slide is felt, not just read.
@@ -181,7 +184,7 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   {#if tab === "map"}
     <MapView gameState={view.state} rivalStandings={view.rivalStandings} playerRung={view.rung} />
   {:else if tab === "news"}
-    <NewsTicker {content} gameState={view.state} {term} rivalNews={view.rivalNews} />
+    <NewsTicker {content} gameState={view.state} {term} rivalNews={view.rivalNews} onPress={onpress} />
   {:else if tab === "markets"}
     <MarketsView {content} gameState={view.state} />
   {:else if tab === "lineage"}

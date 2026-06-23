@@ -80,6 +80,22 @@ export class GameStore {
     }
   }
 
+  /** RIVAL-CROSSING-EXPLOIT: press a faltering rival (deepen its stumble for a heat cost). Best-effort autosave. */
+  async pressRival(rivalId: string): Promise<void> {
+    if (this.busy || this.game.finished) return;
+    this.busy = true;
+    try {
+      this.game.pressRival(rivalId);
+      try {
+        await saveGame(this.storage, this.view.state);
+      } catch {
+        // swallow — the press applied; next action retries the save.
+      }
+    } finally {
+      this.busy = false;
+    }
+  }
+
   get finished(): boolean {
     return this.game.finished;
   }

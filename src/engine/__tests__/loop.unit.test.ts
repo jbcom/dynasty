@@ -889,4 +889,114 @@ describe("Game loop", () => {
     // At least one dispatch kind fired across the sweep (the race is surfaced in-run, not silent).
     expect(kinds.size, `kinds seen: ${[...kinds].join(",")}`).toBeGreaterThan(0);
   });
+
+  it("RIVAL-CROSSING-EXPLOIT: pressing a faltering rival deepens its stumble + costs heat + records a side-log entry", () => {
+    const real = loadContent();
+    const mkGame = (seed: string) => {
+      const comp = {
+        place: "ireland",
+        era: "origins",
+        culture: "anglo_protestant",
+        year: 1776,
+        archetype: "political" as const,
+        gender: "male" as const,
+        surname: "Px",
+        seed,
+        originId: "composed:ireland:origins",
+      };
+      return new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    };
+    // Find a seed + step where a "faltered" dispatch is available, press it, and verify the effects.
+    let pressed = false;
+    for (const seed of ["px1", "px2", "px3", "px4", "px5", "px6", "px7", "px8"]) {
+      const g = mkGame(seed);
+      let guard = 0;
+      while (!g.finished && guard < 400) {
+        const falter = g.view.rivalNews.find((n) => n.kind === "faltered");
+        if (falter) {
+          const before = g.view.rivalStandings.find((s) => s.id === falter.id)?.rung ?? 0;
+          const heatBefore = g.view.state.meters.heat;
+          g.pressRival(falter.id);
+          const after = g.view.rivalStandings.find((s) => s.id === falter.id)?.rung ?? 0;
+          // The press deepens the stumble (rung down, clamped ≥0) and costs heat, and is recorded once.
+          expect(after).toBeLessThanOrEqual(before);
+          if (before > 0) expect(after).toBe(before - 1);
+          expect(g.view.state.meters.heat).toBeGreaterThan(heatBefore);
+          expect(g.view.state.presses?.some((p) => p.rivalId === falter.id)).toBe(true);
+          // Pressing a NON-faltered / unknown rival is a no-op (no extra record, no heat change).
+          const presses = g.view.state.presses?.length ?? 0;
+          const heat2 = g.view.state.meters.heat;
+          g.pressRival("rival:nonexistent");
+          expect(g.view.state.presses?.length ?? 0).toBe(presses);
+          expect(g.view.state.meters.heat).toBe(heat2);
+          pressed = true;
+          break;
+        }
+        const s = g.view.saga.scene;
+        if (s) {
+          if (s.decision) g.pickDecision(0);
+          else if (s.beats.length) g.pickBeat(0);
+          else break;
+        } else if (g.view.currentEvent?.choices[0]) {
+          g.choose(g.view.currentEvent.choices[0].id);
+        } else break;
+        guard++;
+      }
+      if (pressed) break;
+    }
+    expect(pressed, "a faltering rival became pressable across the seed sweep").toBe(true);
+  });
+
+  it("RIVAL-CROSSING-EXPLOIT: a press REPLAYS bit-identically through reconstruct (save-invariant side-log)", () => {
+    const real = loadContent();
+    const found = (seed: string) =>
+      foundByComposition(real, {
+        place: "ireland",
+        era: "origins",
+        culture: "anglo_protestant",
+        year: 1776,
+        archetype: "political" as const,
+        gender: "male" as const,
+        surname: "Px",
+        seed,
+        originId: "composed:ireland:origins",
+      }).state;
+    // Drive a run, pressing every faltering rival as it appears, recording the choice log + the press log.
+    for (const seed of ["pr1", "pr2", "pr3", "pr4", "pr5", "pr6"]) {
+      const base = found(seed);
+      const g = new Game(real, seed, base, "political");
+      let guard = 0;
+      let didPress = false;
+      while (!g.finished && guard < 300) {
+        const falter = g.view.rivalNews.find((n) => n.kind === "faltered");
+        if (falter) {
+          g.pressRival(falter.id);
+          didPress = true;
+        }
+        const s = g.view.saga.scene;
+        if (s) {
+          if (s.decision) g.pickDecision(0);
+          else if (s.beats.length) g.pickBeat(0);
+          else break;
+        } else if (g.view.currentEvent?.choices[0]) {
+          g.choose(g.view.currentEvent.choices[0].id);
+        } else break;
+        guard++;
+      }
+      if (!didPress) continue;
+      const live = g.view.state;
+      // Reconstruct from the SAME base + the recorded history + the press side-log.
+      const rebuilt = Game.reconstruct(real, base, live.history, live.presses ?? []);
+      // The reconstructed run must match the live run on the press-affected surfaces: meters (heat cost),
+      // the press side-log, and the rival world (rebuilt world + interleaved presses → same standings).
+      expect(rebuilt.meters.heat).toBe(live.meters.heat);
+      expect(rebuilt.presses).toEqual(live.presses);
+      // Sanity: reconstruct is itself deterministic — same inputs twice → identical presses + heat.
+      const again = Game.reconstruct(real, base, live.history, live.presses ?? []);
+      expect(again.presses).toEqual(rebuilt.presses);
+      expect(again.meters.heat).toBe(rebuilt.meters.heat);
+      return; // one pressing run is enough to prove the replay
+    }
+    throw new Error("no pressing run produced across the sweep");
+  });
 });

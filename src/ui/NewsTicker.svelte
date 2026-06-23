@@ -14,9 +14,13 @@ interface Props {
   /** RIVAL-RACE-PRESENCE: dispatches about the rival lines near the player's station — a stumble (a window)
    *  or a surge past the player (pressure). Rendered above the world news so the race is felt in-run. */
   rivalNews?: Array<{ id: string; kind: "faltered" | "surged"; headline: string }>;
+  /** RIVAL-CROSSING-EXPLOIT: press a faltering rival (deepen its stumble for a heat cost). When provided, a
+   *  "Press the advantage" button shows on each faltered dispatch. Omitted (e.g. visual fixtures) → no button. */
+  onPress?: (rivalId: string) => void;
 }
 
-const { content, gameState, perScope = 1, term = (t) => t, rivalNews = [] }: Props = $props();
+const { content, gameState, perScope = 1, term = (t) => t, rivalNews = [], onPress }: Props =
+  $props();
 
 // Diegetic news from the four (or five) parallel world timelines — the wider
 // world reported at the current in-world year.
@@ -50,6 +54,12 @@ const scopeLabel: Record<string, string> = {
         <li data-kind={r.kind}>
           <span class="rn-tag">{r.kind === "faltered" ? "Window" : "Pressure"}</span>
           <span class="headline">{r.headline}</span>
+          {#if r.kind === "faltered" && onPress}
+            <!-- RIVAL-CROSSING-EXPLOIT: press the advantage — deepen the stumble for a heat cost. -->
+            <button type="button" class="rn-press" onclick={() => onPress?.(r.id)}>
+              Press the advantage
+            </button>
+          {/if}
         </li>
       {/each}
     </ul>
@@ -129,8 +139,22 @@ const scopeLabel: Record<string, string> = {
     margin: 0 0 0.6rem;
   }
   .rival-news li {
-    grid-template-columns: 4.5rem 1fr;
+    grid-template-columns: 4.5rem 1fr auto;
     border-left-color: var(--mmm-gold);
+  }
+  /* RIVAL-CROSSING-EXPLOIT: the press action — a small gold button on a faltered (window) dispatch. */
+  .rn-press {
+    grid-column: 2 / -1;
+    justify-self: start;
+    margin-top: 0.25rem;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--mmm-ink);
+    background: var(--mmm-gold);
+    border: none;
+    border-radius: var(--mmm-radius);
+    cursor: pointer;
   }
   /* A stumble is an opportunity (gold); a surge past you is pressure (red). */
   .rival-news li[data-kind="surged"] {
