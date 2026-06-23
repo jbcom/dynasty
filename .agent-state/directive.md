@@ -1120,6 +1120,12 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ### Rolling backlog (post-WV-3 — keep this section ≥3 actionable, append before draining)
 
+- [ ] [WAIT-REVIEW] **CONVERGENCE-ENDING-DEPTH PR #112 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/convergence-ending-depth: reachability audit (all 15 endings reachable) + earned-finale prose
+  per ending in LegacyReport. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward
+  + resolve threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next branch off
+  main for the rolling backlog (WV-3-SHOCK-RECOVERY / SAGA-AUDIO-ATMOSPHERE / CORPUS-MINE).
+
 - [x] **WV-3-SHOCK-SCENES PR #110 — DONE, MERGED (squash 1452750).** Narrated-loss aftermath shipped. CI
   green; CodeRabbit pass; Gemini high finding (lastShock not cleared on the event-flow choose() path) FIXED +
   thread resolved; self-squash-merged. Post-merge Release + CD + CodeQL on main all SUCCESS (deployed). Synced
