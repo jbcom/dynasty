@@ -50,7 +50,11 @@ export function dealComposition(
   rng: Rng = createRng(`${seed}::birth`),
 ): Composition {
   if (places.length === 0) throw new Error("dealComposition: empty places catalog");
-  const chosen = place ?? rng.pick(places);
+  // When no place is given (tests / legacy random deal), exclude the FS-ONB-DRIFT founding regions
+  // (kind:"founding") — those are chosen explicitly via onboarding, never randomly dealt. This keeps the
+  // legacy random pool (wave + destination) intact. The production path (App.birthGame) passes a place.
+  const pool = places.filter((p) => p.kind !== "founding");
+  const chosen = place ?? rng.pick(pool.length > 0 ? pool : places);
   // The schema enforces validEras.min(1), but guard defensively so a malformed
   // catalog fails loudly here rather than picking from an empty array (Q review).
   if (chosen.validEras.length === 0) {

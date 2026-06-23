@@ -971,8 +971,10 @@ export const PlaceSchema = z.object({
    * to America defined by WHEN it arrived (mid-to-late 1800s), WHAT class it arrived as, and what
    * pushed it out. Optional during migration; the wave roster sets these. `wave` distinguishes a
    * source-wave (a playable origin) from a `destination` ground (where waves land + stratify).
+   * `founding` (FS-ONB-DRIFT) is a REGION the PLAYER's line is founded in at 1776 — the waves are
+   * now only the recurring CAST, no longer the player's own origin.
    */
-  kind: z.enum(["wave", "destination"]).default("wave"),
+  kind: z.enum(["wave", "destination", "founding"]).default("wave"),
   /** The year band the wave arrives (e.g. [1845, 1855] for the Famine Irish). */
   arrivalYears: z.tuple([z.number(), z.number()]).optional(),
   /** The class the wave arrives as (the Wealth-motivator starting rung). */

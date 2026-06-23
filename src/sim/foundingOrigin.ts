@@ -160,6 +160,11 @@ function standingMotivators(standing: Standing): Partial<Motivators> {
     : { wealth: -25, power: 10, reach: 10 };
 }
 
+/** The places.json `kind:"founding"` place id a region maps to (the composition seam needs a Place). */
+export function regionPlaceId(id: FoundingRegion): string {
+  return `founding_${id}`;
+}
+
 export function regionDef(id: FoundingRegion): RegionDef {
   const def = FOUNDING_REGIONS.find((r) => r.id === id);
   if (!def) throw new Error(`unknown founding region: ${id}`);

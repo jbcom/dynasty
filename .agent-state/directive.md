@@ -835,3 +835,8 @@ onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival frami
   entail/primogeniture (VA 1776/1785) myth-flags myself via WebSearch. Saved as
   `docs/superpowers/specs/2026-06-22-founding-era-research.md`; [[research-not-memory]] updated. This unblocks
   FS-ONB-DRIFT. (The immigrant-CAST guidance.json still needs the same live-research treatment — separate.)
+- [ ] **CHORE-UNTRACK-AUDIT-ARTIFACT — `artifacts/timeline-audit.json` is a tracked GENERATED file that
+  churns ~60k lines on every place/era change** (harness.unit.test writes it). It's re-derivable cache and
+  per CLAUDE.md should be GITIGNORED, not tracked. Move it to the gitignored cache (add to .gitignore +
+  `git rm --cached`), or make the harness stop writing into a tracked path. Currently I hand-revert it out of
+  every commit — that's a smell. Low-risk cleanup.
