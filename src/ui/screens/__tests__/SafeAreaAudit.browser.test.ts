@@ -1,5 +1,6 @@
 import { mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { loadContent } from "../../../data/loadContent";
 import type { GameView } from "../../../engine/loop";
 import { validRaw } from "../../../sim/__tests__/fixtures";
 import { buildContent } from "../../../sim/content";
@@ -7,7 +8,11 @@ import { initMeters } from "../../../sim/meters";
 import { initState } from "../../../sim/state";
 import { applyBrandTokens, makeHost } from "../../__tests__/visualHarness";
 import LegacyReport from "../LegacyReport.svelte";
+import OnboardingScreen from "../OnboardingScreen.svelte";
 import PlayScreen from "../PlayScreen.svelte";
+import TitleScreen from "../TitleScreen.svelte";
+
+const realContent = loadContent();
 
 /**
  * MOBILE-SAFE-AREA-AUDIT — on a notched device the PlayScreen must respect the system insets: the header pads the
@@ -94,6 +99,33 @@ describe("safe-area audit (MOBILE-SAFE-AREA-AUDIT)", () => {
     // The report rule references the bottom inset (the test browser resolves it to 0, so we audit the reference).
     expect(allCssText(), "the report pads safe-area-inset-bottom").toMatch(
       /\.report[^}]*safe-area-inset-bottom/,
+    );
+  });
+
+  it("SAFE-AREA-ONBOARDING-TITLE: the Title and Onboarding screens pad BOTH the top and bottom insets", () => {
+    // Title — the first screen; its container pads top (masthead) + bottom (action buttons).
+    component = mount(TitleScreen, {
+      target: host,
+      props: { hasSave: false, onNewGame: () => {}, onContinue: () => {}, onSettings: () => {} },
+    });
+    let css = allCssText();
+    expect(css, "title pads safe-area-inset-top").toMatch(/\.panel-screen[^}]*safe-area-inset-top/);
+    expect(css, "title pads safe-area-inset-bottom").toMatch(
+      /\.panel-screen[^}]*safe-area-inset-bottom/,
+    );
+
+    // Onboarding — the funnel; its container pads top + bottom so the choice cards clear the insets.
+    unmount(component);
+    component = mount(OnboardingScreen, {
+      target: host,
+      props: { content: realContent, onComplete: () => {}, onCancel: () => {} },
+    });
+    css = allCssText();
+    expect(css, "onboarding pads safe-area-inset-top").toMatch(
+      /\.onboarding[^}]*safe-area-inset-top/,
+    );
+    expect(css, "onboarding pads safe-area-inset-bottom").toMatch(
+      /\.onboarding[^}]*safe-area-inset-bottom/,
     );
   });
 });

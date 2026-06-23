@@ -426,7 +426,10 @@ function pickPartnerAndBegin(p: LifePartner): void {
     justify-content: center;
     gap: 1.5rem;
     min-height: 100dvh;
-    padding: max(1.25rem, env(safe-area-inset-top)) var(--mmm-pad);
+    /* SAFE-AREA-ONBOARDING-TITLE: pad top + bottom by their OWN insets so the funnel's choice cards clear the
+       notch + home bar on a notched device (the shorthand had reused the top inset for the bottom). */
+    padding: max(1.25rem, env(safe-area-inset-top)) var(--mmm-pad)
+      max(1.25rem, env(safe-area-inset-bottom));
     background: radial-gradient(120% 80% at 50% 0%, var(--mmm-navy-light) 0%, var(--mmm-navy) 55%, var(--mmm-navy-deep) 100%);
   }
   .card {
