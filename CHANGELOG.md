@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.40.0](https://github.com/jbcom/dynasty/compare/v0.39.0...v0.40.0) (2026-06-23)
+
+
+### Features
+
+* cooldown after a shock — losses have rhythm, no death spiral ([#142](https://github.com/jbcom/dynasty/issues/142)) ([d69cacd](https://github.com/jbcom/dynasty/commit/d69cacdc38bd07d27770923a2a17fd066d55725d))
+
 ## [0.39.0](https://github.com/jbcom/dynasty/compare/v0.38.0...v0.39.0) (2026-06-23)
 
 
