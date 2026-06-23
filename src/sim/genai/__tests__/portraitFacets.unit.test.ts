@@ -1,6 +1,14 @@
 import { describe, expect, it } from "vitest";
+import { ARCHETYPES } from "../../slots";
 import type { RankState } from "../../state";
-import { lifeStageForAge, rungTierForRung, rungTierForState } from "../portraitFacets";
+import {
+  lifeStageForAge,
+  type PortraitArchetype,
+  type RungTier,
+  rungTierForRung,
+  rungTierForState,
+  wardrobeFor,
+} from "../portraitFacets";
 
 /**
  * EI-8b — the live-state portrait facets: LIFE-STAGE from age, RUNG TIER from the rank ladders. Pure +
@@ -62,5 +70,37 @@ describe("EI-8b rungTier", () => {
 
   it("reads an empty ladder set as low", () => {
     expect(rungTierForState({})).toBe("low");
+  });
+});
+
+describe("EI-8c wardrobeFor", () => {
+  const TIERS: RungTier[] = ["low", "mid", "high"];
+  const PORTRAIT_ARCHETYPES: PortraitArchetype[] = [...ARCHETYPES, "crime"];
+
+  it("covers every (archetype × tier) — 7 archetypes (the 6 + crime) × 3 tiers = 21 registers", () => {
+    expect(PORTRAIT_ARCHETYPES).toHaveLength(7);
+    const all = new Set<string>();
+    for (const a of PORTRAIT_ARCHETYPES) {
+      for (const t of TIERS) {
+        const w = wardrobeFor(a, t);
+        expect(w, `${a}/${t} has a wardrobe register`).toMatch(/\S/);
+        all.add(`${a}:${t}`);
+      }
+    }
+    expect(all.size).toBe(21);
+  });
+
+  it("DEEPENS with the rung tier within an archetype (low ≠ mid ≠ high)", () => {
+    for (const a of PORTRAIT_ARCHETYPES) {
+      const [lo, mid, hi] = [wardrobeFor(a, "low"), wardrobeFor(a, "mid"), wardrobeFor(a, "high")];
+      expect(new Set([lo, mid, hi]).size, `${a} scales across tiers`).toBe(3);
+    }
+  });
+
+  it("the high-rung registers read as the user's named paths (CEO, celebrity, cult-leader, crime boss)", () => {
+    expect(wardrobeFor("economic", "high")).toMatch(/magnate|CEO/i);
+    expect(wardrobeFor("entertainment", "high")).toMatch(/celebrity|icon/i);
+    expect(wardrobeFor("religious", "high")).toMatch(/cult-leader|prelate|vestments/i);
+    expect(wardrobeFor("crime", "high")).toMatch(/crime boss|sovereign/i);
   });
 });

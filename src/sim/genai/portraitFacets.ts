@@ -8,6 +8,7 @@
  * portrait key is stable for a given run state (and the asset cache is reproducible).
  */
 
+import type { Archetype } from "../slots";
 import type { RankState } from "../state";
 
 /** The birth→growth→death stages a portrait is keyed on (recurs every generation). */
@@ -52,4 +53,62 @@ export function rungTierForState(ranks: Record<string, RankState>): RungTier {
     if (r.rung > top) top = r.rung;
   }
   return rungTierForRung(top);
+}
+
+/**
+ * EI-8c — the PORTRAIT archetype: the 6 sim power-base archetypes (slots.ts) PLUS `crime`. Crime is a local
+ * PORTRAIT-LAYER superset here — the full crime POWER AXIS is its own sim milestone ([[crime-power-axis]]);
+ * this lets the visual demand matrix (and wardrobe table) be COMPLETE without half-wiring crime through every
+ * `Record<Archetype>` in the sim. When the crime axis lands, it folds into the sim `Archetype` and this
+ * superset collapses to it.
+ */
+export type PortraitArchetype = Archetype | "crime";
+
+/**
+ * EI-8c — the WARDROBE register per (archetype × rung tier): the portrait reflects WHO the line has become,
+ * and the look DEEPENS as it climbs. 7 archetypes × 3 tiers = 21 registers. The strings are dress/bearing
+ * cues folded into the portrait prompt (alongside the era band + life stage). "cult-leader" reads as the
+ * religious path's high-rung extreme; the crime path scales corner-soldier → made operator → boss/sovereign.
+ */
+const WARDROBE: Record<PortraitArchetype, Record<RungTier, string>> = {
+  economic: {
+    low: "the plain working dress of a tradesman",
+    mid: "the respectable coat of an established merchant",
+    high: "the commanding tailoring of a magnate / industrial CEO",
+  },
+  political: {
+    low: "the modest dress of a ward heeler working the wards",
+    mid: "the sober attire of a seated official",
+    high: "the formal regalia of a statesman / ruler",
+  },
+  technological: {
+    low: "the work clothes of an apprentice at the bench",
+    mid: "the practical dress of a working engineer",
+    high: "the assured bearing of a visionary industrialist",
+  },
+  religious: {
+    low: "the plain garb of the lay devout",
+    mid: "the vestments of the ordained",
+    high: "the heavy ceremonial vestments of a prelate / cult-leader, an aura of authority",
+  },
+  entertainment: {
+    low: "the threadbare clothes of a street busker",
+    mid: "the stage dress of a working performer",
+    high: "the unmistakable dress of a celebrity / icon",
+  },
+  athletic: {
+    low: "the simple kit of a striver in training",
+    mid: "the gear of a serious competitor",
+    high: "the laureled bearing of a champion",
+  },
+  crime: {
+    low: "the guarded street dress of a corner soldier",
+    mid: "the sharp, deliberate attire of a made operator",
+    high: "the imperial bearing of a crime boss / sovereign of a criminal order",
+  },
+};
+
+/** The wardrobe register for an (archetype, rung tier) — EI-8c. Pure. */
+export function wardrobeFor(archetype: PortraitArchetype, tier: RungTier): string {
+  return WARDROBE[archetype][tier];
 }

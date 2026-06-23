@@ -179,8 +179,14 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   src/sim/genai/portraitFacets.ts: `lifeStageForAge(age)` (5 stages, inclusive bands, neg→infant) +
   `rungTierForRung`/`rungTierForState` (highest current rung across the ladders → low/mid/high). 7 unit tests
   (stage + tier boundaries, peak-across-ladders, empty-ladder=low). Gate: check 0, typecheck 0/0.
-- [ ] **EI-8c wardrobeFor(archetype, rungTier) register table (21 entries) + crime archetype wiring** — the
-  archetype×rung wardrobe registers from the spec; add `crime` to the Archetype union + ARCHETYPES + callings.
+- [x] **EI-8c wardrobeFor(archetype, rungTier) register table (21 entries) — DONE (branch feat/ei6b-ui-opening-screen).**
+  portraitFacets.ts: `PortraitArchetype = Archetype | "crime"` (a PORTRAIT-LAYER superset — the full crime POWER
+  AXIS stays its own [[crime-power-axis]] milestone, NOT half-wired through every Record<Archetype> in the sim) +
+  a 21-entry `WARDROBE` table + `wardrobeFor(archetype, tier)`. High-rung registers read as the user's named paths
+  (CEO / celebrity / cult-leader / crime boss), deepening with rung. 10 unit tests (21-cell coverage + per-archetype
+  tier scaling + named-path checks). Gate: check 0, typecheck 0/0.
+  NOTE: adding `crime` to the SIM Archetype union (3 Record<Archetype> tables + callings + agents) remains the
+  separate crime-axis milestone; EI-8c deliberately scopes to portraits only.
 - [ ] **EI-8d generalize buildPortraitPrompt/portraitKey to the composite key + encounter-role variant** — keep the
   signature engraving style; key off (lifeStage, eraBand, archetype, rungTier, gender) and an `enc:<role>` form.
 - [ ] **EI-8e on-demand generate+cache layer** — a cache keyed by composite key: hit → serve; miss → ONE generation,
