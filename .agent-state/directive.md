@@ -175,8 +175,10 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   `ERA_VISUAL` grown 4→8 entries; `buildPortraitPrompt` now resolves the band from `act.year` (not the coarse
   macro-act). 9 unit tests (band boundaries + the 1790≠1990≠stars distinction + the prompt tracks the fine band).
   Gate: unit 954, browser 161, check 0, typecheck 0/0.
-- [ ] **EI-8b lifeStage + rungTier derivations** — pure helpers from sim state (life-stage from age/beat,
-  rungTier from the max rung across the 4 ladders → low/mid/high). Unit-tested.
+- [x] **EI-8b lifeStage + rungTier derivations — DONE (branch feat/ei6b-ui-opening-screen).** New pure module
+  src/sim/genai/portraitFacets.ts: `lifeStageForAge(age)` (5 stages, inclusive bands, neg→infant) +
+  `rungTierForRung`/`rungTierForState` (highest current rung across the ladders → low/mid/high). 7 unit tests
+  (stage + tier boundaries, peak-across-ladders, empty-ladder=low). Gate: check 0, typecheck 0/0.
 - [ ] **EI-8c wardrobeFor(archetype, rungTier) register table (21 entries) + crime archetype wiring** — the
   archetype×rung wardrobe registers from the spec; add `crime` to the Archetype union + ARCHETYPES + callings.
 - [ ] **EI-8d generalize buildPortraitPrompt/portraitKey to the composite key + encounter-role variant** — keep the
