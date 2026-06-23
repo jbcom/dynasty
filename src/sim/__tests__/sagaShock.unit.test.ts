@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { createRng } from "../rng";
 import {
   applyFamilyDeathShock,
+  dreadForeshadowText,
   foreshadowWeight,
   recoveryForeshadow,
   recoveryForeshadowText,
@@ -313,6 +314,23 @@ describe("shockExposure + shockForeshadow (SHOCK-FORESHADOW)", () => {
     expect(fallback).not.toBe(money);
     // `heat` has no recovery (a heat spike cools systemically, not via a windfall) → generic fallback.
     expect(recoveryForeshadowText([shockMeterFlag("heat")])).toBe(fallback);
+  });
+
+  it("OMEN-DREAD-COPY-VARIETY: the dread omen text is keyed to the macro-act (era-specific, not boilerplate)", () => {
+    const founding = dreadForeshadowText("founding");
+    const convergence = dreadForeshadowText("convergence");
+    const emergence = dreadForeshadowText("emergence");
+    const ascension = dreadForeshadowText("ascension");
+    // The founding era leans toward LOSS OF LIFE; the later eras toward fortune/standing/market reversals.
+    expect(founding).toMatch(/fever|winter|life/i);
+    expect(emergence).toMatch(/market|mood|age/i);
+    // All four bands read distinctly (not one boilerplate line).
+    expect(new Set([founding, convergence, emergence, ascension]).size).toBe(4);
+    // An unrecognized band falls back to the generic dread line (still non-empty, still a "shadow").
+    const fallback = dreadForeshadowText("unknown-band");
+    expect(fallback.length).toBeGreaterThan(0);
+    expect(fallback).toMatch(/shadow/i);
+    expect([founding, convergence, emergence, ascension]).not.toContain(fallback);
   });
 });
 

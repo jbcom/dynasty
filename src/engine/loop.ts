@@ -33,6 +33,7 @@ import {
 } from "../sim/saga/triggerLattice";
 import {
   applyFamilyDeathShock,
+  dreadForeshadowText,
   foreshadowWeight,
   recoveryForeshadow,
   recoveryForeshadowText,
@@ -483,13 +484,12 @@ export class Game {
     }
     // FORESHADOW-WEIGHT: the omen's gravity scales with the hazard. FORESHADOW-IN-TONE: the weight rides along
     // so the UI styles dread proportionally. (Without strain, foreshadowWeight never returns "grave".)
-    const weight = foreshadowWeight(macroActForYear(this.state.year), this.state.flags, hasKin);
-    if (weight === "marginal") {
-      return {
-        text: "A shadow lies over the season; the years ahead feel uncertain.",
-        weight,
-        tone: "dread",
-      };
+    const macroAct = macroActForYear(this.state.year);
+    const weight = foreshadowWeight(macroAct, this.state.flags, hasKin);
+    if (weight !== "none") {
+      // OMEN-DREAD-COPY-VARIETY: the dread reads era-specific (founding fever vs later market/standing reversals).
+      // (A strained line is caught by the hope branch above, so the reachable dread weight here is "marginal".)
+      return { text: dreadForeshadowText(macroAct), weight, tone: "dread" };
     }
     return null;
   }

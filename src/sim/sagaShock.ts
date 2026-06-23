@@ -141,6 +141,25 @@ export function recoveryForeshadowText(flags: Iterable<string>): string {
   return RECOVERY_OMEN_FALLBACK;
 }
 
+/** OMEN-DREAD-COPY-VARIETY: the DREAD omen's text, keyed to the MACRO-ACT so dread reads era-specific (the
+ *  mirror of HOPE-OMEN-COPY-VARIETY). A founding-era hazard leans toward LOSS OF LIFE (plague, hard winters);
+ *  the later, medicine-richer eras lean toward fortune/standing reversals. Keyed on the coarse macro-act
+ *  (`macroActForYear`'s output), with a generic fallback for an unrecognized band. Pure, no RNG. */
+const DREAD_OMEN_TEXT: Record<string, string> = {
+  founding: "A shadow lies over the season — fever and hard winters stalk the young line.",
+  convergence:
+    "A shadow lies over the season — the old country's troubles follow the line across the water.",
+  emergence:
+    "A shadow lies over the season — the markets and the mood of the age turn against the house.",
+  ascension:
+    "A shadow lies over the season — even now, far from earth, fortune is not yet certain.",
+};
+const DREAD_OMEN_FALLBACK = "A shadow lies over the season; the years ahead feel uncertain.";
+
+export function dreadForeshadowText(macroActId: string): string {
+  return DREAD_OMEN_TEXT[macroActId] ?? DREAD_OMEN_FALLBACK;
+}
+
 /**
  * Roll one seeded disruption shock for a saga tick. Macro-act-weighted (better medicine → lower hazard) and
  * deterministic for a given (family, year, macroActId, rng). `macroActId` is the saga's coarse band
