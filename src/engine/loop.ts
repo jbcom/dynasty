@@ -492,11 +492,15 @@ export class Game {
    */
   private applySagaShock(fromYear: number): void {
     const era = macroActForYear(fromYear);
+    // SHOCK-FAMILY-SUCCESSION-PRESSURE: the GROOMED heir (the `heir_<id>` flag) is a likelier, sharper
+    // target — so the shock can take the chosen successor, forcing a weaker fallback.
+    const namedHeirId = this.state.flags.find((f) => f.startsWith("heir_"))?.slice("heir_".length);
     const shock = rollSagaShock(
       this.state.family,
       fromYear,
       era,
       this.rng.fork(`sagashock:${fromYear}`),
+      namedHeirId,
     );
     // WV-3-SHOCK-RECOVERY: a tick with NO new shock is when a PRIOR meter blow can rebound (the two-act
     // shape: blow → later partial recovery). Rolling recovery only on quiet ticks keeps a shock and its
@@ -513,6 +517,14 @@ export class Game {
         ...this.state,
         family: applyFamilyDeathShock(this.state.family, shock, fromYear),
       };
+      // SHOCK-FAMILY-SUCCESSION-PRESSURE: the shock took the groomed heir — drop the `heir_<id>` flag so the
+      // next succession falls back to the eldest living child (a weaker, unplanned handoff).
+      if (shock.tookHeir && namedHeirId) {
+        this.state = {
+          ...this.state,
+          flags: this.state.flags.filter((f) => f !== `heir_${namedHeirId}`),
+        };
+      }
     } else if (shock.kind === "meter_blow" && shock.meter && shock.delta !== undefined) {
       this.state = {
         ...this.state,

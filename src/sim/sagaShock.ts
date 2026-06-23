@@ -35,6 +35,9 @@ export interface SagaShock {
   delta?: number;
   /** A short situational tag for the prose/UI seed (e.g. "plague", "fire", "panic"). */
   note?: string;
+  /** SHOCK-FAMILY-SUCCESSION-PRESSURE: true when the family_death victim was the GROOMED/named heir — the
+   *  caller clears the `heir_<id>` flag so the next succession falls back to a weaker eldest-living heir. */
+  tookHeir?: boolean;
 }
 
 /** The meters a shock can blow, with the flavor note that frames it. Negative-only (shocks are losses). */
@@ -67,6 +70,7 @@ export function rollSagaShock(
   year: number,
   macroActId: string,
   rng: Rng,
+  namedHeirId?: string,
 ): SagaShock {
   // Macro-act medicine (0.1 founding … 0.9 ascension) suppresses the shock chance — a founding-era line is
   // far more exposed than an interstellar one. `?? 0` via the lookup guards an unknown id (no NaN). Floor at
@@ -83,9 +87,21 @@ export function rollSagaShock(
   const wantDeath = livingOthers.length > 0 && kindRng.chance(0.4);
 
   if (wantDeath && family) {
-    const victim = kindRng.fork("victim").pick(livingOthers);
-    // The caller applies the death via applyFamilyDeathShock (keeps this roll pure of family mutation).
-    return { kind: "family_death", memberId: victim.id, note: "plague" };
+    // SHOCK-FAMILY-SUCCESSION-PRESSURE: if a GROOMED heir is named + alive, the blow lands on THEM with a
+    // raised probability (a dynasty's hardest loss is its chosen successor) — else a random other member.
+    // Striking the heir flags `tookHeir` so the caller clears the named-heir flag → a weaker fallback heir.
+    const heir = namedHeirId ? livingOthers.find((m) => m.id === namedHeirId) : undefined;
+    const victim =
+      heir && kindRng.fork("heirhit").chance(0.5)
+        ? heir
+        : kindRng.fork("victim").pick(livingOthers);
+    const tookHeir = victim.id === namedHeirId;
+    return {
+      kind: "family_death",
+      memberId: victim.id,
+      note: tookHeir ? "heir_lost" : "plague",
+      ...(tookHeir ? { tookHeir: true } : {}),
+    };
   }
 
   const blow = rng.fork(`shock:meter:${year}`).pick(METER_BLOWS);
@@ -110,6 +126,8 @@ export interface SagaShockNote {
 /** The aftermath lines per (kind, note). Era-neutral + short — a loss beat the player reads once. */
 const SHOCK_TEXT: Record<string, string> = {
   family_death: "A death in the family — the plague took one of your own this season.",
+  "family_death:heir_lost":
+    "The groomed heir is dead — the succession you had planned for is undone, and a lesser hand must now take up the name.",
   "meter_blow:plague": "Plague swept through; the household's health is broken for a time.",
   "meter_blow:fire": "Fire took the stores — a hard, sudden loss of fortune.",
   "meter_blow:scandal": "A scandal spread faster than any denial; the name is tarnished.",
@@ -120,7 +138,13 @@ const SHOCK_TEXT: Record<string, string> = {
 /** Build the one-line aftermath note for a resolved shock (null for `none`). Pure. */
 export function shockNote(shock: SagaShock): SagaShockNote | null {
   if (shock.kind === "none") return null;
-  const key = shock.kind === "family_death" ? "family_death" : `meter_blow:${shock.note ?? ""}`;
+  // family_death distinguishes the groomed-heir loss (sharper); meter_blow keys on its flavor note.
+  const key =
+    shock.kind === "family_death"
+      ? shock.tookHeir
+        ? "family_death:heir_lost"
+        : "family_death"
+      : `meter_blow:${shock.note ?? ""}`;
   const text = SHOCK_TEXT[key] ?? "A sudden reversal struck the line this season.";
   return { kind: shock.kind, text, note: shock.note ?? "" };
 }
