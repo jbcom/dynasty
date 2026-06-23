@@ -1125,19 +1125,22 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   build-and-test + CodeQL green, read every CodeRabbit/Amazon-Q comment, fix in forward commits + resolve all
   threads, keep Release/CD green, self-squash-merge once green + threads resolved ([[babysit-pr]],
   [[jbcom-org-ruleset]]). After merge: sync main, new branch for WV-3-YUKA.
-- [ ] **WV-3-YUKA — emergent rival reactions (anti-Suzerain layer 2).** WV-3 proved seeded market/run
-  divergence; the further layer ([[emergent-cause-effect-sim]]) is rival lines REACTING to the player
-  (Yuka-style GOAP) + seeded disease/disruption shocks the player lives through, so playthroughs diverge in
-  EVENTS, not just economy. Now the top depth lever (the hour mandate is met; this is the replayability one).
-- [ ] **SPINE-CONTENT-QA-4 — uniqueness + rhythm audit of the 6 NEW mid-weight reversals.** EXTEND-MIDWEIGHT
-  added 6 reversal scenes (g1/g2/g4/g5/g6/g7) in one pass. Run the uniqueness lens: opener skeletons (already
-  spot-checked distinct), beat-1 openers, and 2nd-sentence rhythm vs the existing 24 interstitials; ensure no
-  shared template crept in. Fix any templated lines ([[uniqueness-genuine-intersections]]).
-- [ ] **SPINE-WEAVE-PAYOFF-4 — the mid-weight reversal flags into the trigger lattice (if a genuine match).**
-  The 6 new reversals added 12 flags (g1_read_the_alliances, g2_hedged_the_break, g4_got_ahead_of_the_gaze,
-  g6_bought_the_next_medium, g7_retook_the_helm, …). Enumerate vs the family branches per PAYOFF-3's discipline
-  (one rule per GENUINE thematic+era match, never blanket-wire); several may have no clean match and stay
-  unwired (they still matter via motivatorShifts). Tested in/out of window.
+- [ ] [WAIT-REVIEW] **WV-3-YUKA — emergent rival reactions (anti-Suzerain layer 2) — START AFTER #106 MERGES.**
+  WV-3 proved seeded market/run divergence; the further layer ([[emergent-cause-effect-sim]]) is rival lines
+  REACTING to the player (Yuka-style GOAP) + seeded disease/disruption shocks so playthroughs diverge in
+  EVENTS, not just economy. The top depth lever now (hour mandate met; this is replayability). A large net-new
+  feature → must start on a FRESH branch off updated main AFTER PR #106 squash-merges (one-branch discipline:
+  can't layer it on the in-review branch, can't branch off un-merged work). Begin with use-case enumeration.
+- [x] **SPINE-CONTENT-QA-4 — DONE (commit d35c7c4, pushed to PR #106).** Full uniqueness scan of all 30
+  interstitials. Opening sentences + beat openers already varied (0 first-3-word opener repeats; 54/60
+  distinct beat openers). CAUGHT: the reversal SECOND paragraphs shared one skeleton — 9/10 opened "The [X]
+  ahead —". Rewrote all to distinct structures → 10/10 distinct 2nd-para openers. Prose-only, idempotent.
+- [ ] [WAIT-REVIEW] **SPINE-WEAVE-PAYOFF-4 — mid-weight reversal flags → trigger lattice (fold with PR #106
+  CodeRabbit pass).** The 6 new reversals added 12 flags (g1_read_the_alliances, g2_hedged_the_break,
+  g4_got_ahead_of_the_gaze, g6_bought_the_next_medium, g7_retook_the_helm, …). Enumerate vs the family
+  branches per PAYOFF-3's discipline (one rule per GENUINE thematic+era match, never blanket-wire; several may
+  have no clean match + stay unwired). Best done in the SAME forward batch as addressing PR #106's review
+  feedback (touches triggers.json — avoid churning the open review). Tested in/out of window.
 - [x] **SAGA-VL-INTEGRATE — DONE (live screenshot pass on dev :5175).** Walked the full founding funnel
   end-to-end in the running build and READ every screen: title (luxury Playfair/Garamond gold-on-navy) →
   REGION → POWER BASE (all 6, scannable) → STANDING → NAMING (11 lanes) → SURNAME → GENDER → GIVEN → 3 FS-7b
