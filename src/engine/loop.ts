@@ -478,6 +478,7 @@ export class Game {
     // the foresight that matters now is the rebound ahead. A strained line is always at least "grave" weight.
     if (recoveryForeshadow(this.state.flags)) {
       // HOPE-OMEN-COPY-VARIETY: the rebound reads specific to WHAT is recovering (fortune / name / health / bonds).
+      // `state.flags` is `string[]` — a valid `Iterable<string>` for recoveryForeshadowText (it for-of's the flags).
       return { text: recoveryForeshadowText(this.state.flags), weight: "grave", tone: "hope" };
     }
     // FORESHADOW-WEIGHT: the omen's gravity scales with the hazard. FORESHADOW-IN-TONE: the weight rides along

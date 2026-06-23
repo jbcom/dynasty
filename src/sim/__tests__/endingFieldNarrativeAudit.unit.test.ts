@@ -104,6 +104,11 @@ describe("ending field narrative audit (ENDING-FIELD-NARRATIVE-AUDIT)", () => {
     expect(fateRank(5, false, false)).toBe(0);
     expect(fateRank(3, false, true)).toBe(6); // fallen at a mid rung still ranks last
     expect(fateRank(0, false, true)).toBe(6);
+    // Precedence edge: a HIGH-rung (MAX-1) line that is ALSO fallen hits the fallen branch FIRST → 6, never the
+    // "rose high" tier (1). The fallen check must short-circuit before any rung tier (Amazon-Q #163 verify).
+    expect(fateRank(RIVAL_MAX_RUNG - 1, false, true)).toBe(6);
+    expect(fateRank(RIVAL_MAX_RUNG, false, true)).toBe(6); // even a MAX-rung fallen line ranks last, not summit
+    expect(fateRank(RIVAL_MAX_RUNG, true, false)).toBe(5); // a MAX-rung faltering line ranks faltered, not summit
     // Fallen sinks below faltering, which sinks below every healthy rung tier — even when the fallen line's raw
     // rung is HIGHER than a thriving low line's (the bug RIVAL-FINALE-SORT fixed).
     expect(fateRank(3, false, true)).toBeGreaterThan(fateRank(0, false, false)); // fallen@3 below thriving@0
