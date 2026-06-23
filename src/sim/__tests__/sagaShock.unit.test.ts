@@ -5,6 +5,7 @@ import {
   rollSagaRecovery,
   rollSagaShock,
   type SagaShock,
+  shockLedger,
   shockMeterFlag,
   shockNote,
 } from "../sagaShock";
@@ -174,5 +175,47 @@ describe("rollSagaRecovery (WV-3-SHOCK-RECOVERY)", () => {
       const r = rollSagaRecovery(outstanding, 1900, createRng(`h${i}`).fork("sagarecover:1900"));
       expect(r).toBeNull();
     }
+  });
+});
+
+describe("shockLedger (DOSSIER-SHOCK-LEDGER)", () => {
+  it("parses shock:* flags into a chronological disaster log + ignores other flags", () => {
+    const flags = [
+      "base:press",
+      "shock:meter_blow:1920",
+      "shock:family_death:1885",
+      "succession_occurred",
+      "shock:meter_blow:1885",
+      "crossed:italian:syndicate",
+    ];
+    const led = shockLedger(flags);
+    // Only the shock:* flags, sorted by year then kind (family_death < meter_blow at 1885).
+    expect(led.map((e) => `${e.year}:${e.kind}`)).toEqual([
+      "1885:family_death",
+      "1885:meter_blow",
+      "1920:meter_blow",
+    ]);
+    expect(led[0]?.label).toMatch(/death/i);
+    expect(led[2]?.label).toMatch(/reversal/i);
+  });
+
+  it("returns an empty ledger when the run has had no shocks", () => {
+    expect(shockLedger(["base:land", "succession_occurred"])).toEqual([]);
+  });
+
+  it("skips malformed shock flags (no year / unknown kind)", () => {
+    expect(
+      shockLedger(["shock:meter_blow:notayear", "shock:weird:1900", "shock:family_death"]),
+    ).toEqual([]);
+  });
+
+  it("de-duplicates repeated shock flags (a duplicate would crash the Svelte #each on its key)", () => {
+    // A flag list with an exact duplicate must yield ONE entry — TimelineView keys #each on year+kind.
+    const led = shockLedger([
+      "shock:family_death:1885",
+      "shock:family_death:1885",
+      "shock:meter_blow:1885",
+    ]);
+    expect(led.map((e) => `${e.year}:${e.kind}`)).toEqual(["1885:family_death", "1885:meter_blow"]);
   });
 });
