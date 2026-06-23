@@ -1081,11 +1081,18 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   choice now colors ALL TEN generations (g0 founding 1776 → g9 the stars). Idempotent applyAct() (g0-g9,
   byte-idempotent verified); spineOriginFlavor.unit asserts all 10 acts (80 tests). 816 unit + tsc + check
   green. On `feat/spine-origin-depth-g6`.
-- [ ] [WAIT] **FS-SPINE-DEPTH2-PR — g6–g9 origin-flavor batch → PR #104 OPEN.** Full local gate GREEN; reviewer
-  pass CLEAN (folded its g8/g9 pulpit-fork consistency nit). Pushed + opened PR #104
-  (https://github.com/jbcom/dynasty/pull/104). Babysitting: monitoring CI; address CodeRabbit + resolve
-  threads, self-squash-merge once green, verify post-merge Release/CD. Completes the origin-flavor depth
-  milestone (all 10 generations, founding 1776 → the stars).
+- [x] **FS-SPINE-DEPTH2-PR — DONE → PR #104 MERGED (squash 970dcda).** g6-g9 origin-flavor; reviewer CLEAN
+  (folded the g8/g9 pulpit-fork nit); CI green; self-squash-merged; release-please cut 0.21.0 (#103). Synced
+  main, deleted branch. Post-merge Release + CD verifying on main (monitor b8nwuo11a). The ORIGIN-FLAVOR DEPTH
+  MILESTONE IS COMPLETE — the founder's power base colors all 10 generations, founding 1776 → the stars.
+- [ ] **SPINE-ACT-DEPTH — deepen each spine act toward the hour+ gameplay mandate.** MEASURED: each of the 10
+  acts has only ~4 CORE scenes + ~5-6 beats — at ~2 paragraphs/scene that's ~15-20 min of reading total, well
+  short of the user's "an hour or more of gameplay." The origin-flavor work added a rich PER-BASE OPENING to
+  each act; the next depth lever is MORE CORE SCENES/BEATS per generation between open and close (more lived
+  texture, more meaningful mid-act decisions, more weave). Approach: extend each act's authored scene chain
+  (the GenAI spine pipeline is the natural author — but NO key in this env, so either author hand-crafted
+  scenes in the spine voice OR gate on the key returning). Enumerate first: how many scenes/beats per act hits
+  ~6 min each × 10 = hour+; design the added scene SHAPES (not just more of the same). On `feat/spine-depth-content`.
 - [x] **FS-PR-LOOP — DONE → PR #100 MERGED (squash 94c694a).** First CI pass green; addressed all 6 CodeRabbit
   findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision pin) + a regression test in a
   forward commit + resolved all 6 threads → CLEAN; re-run CI green; self-squash-merged. release-please then
@@ -1095,3 +1102,14 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   read every comment + any CHANGES_REQUESTED, address/resolve all review threads (CodeRabbit etc.), keep
   Release/CD green, then self-squash-merge once green + threads resolved + DoD met. ([[babysit-pr]],
   [[jbcom-org-ruleset]] — PR-only/squash/linear.)
+
+## Gameplay-depth backlog (the "hour+" mandate — keep the queue non-empty, [[never-drain-queue]])
+
+- [ ] **WV-3-YUKA — emergent rival reactions (anti-Suzerain layer 2).** WV-3 proved seeded market/run
+  divergence; the further layer ([[emergent-cause-effect-sim]]) is rival lines REACTING to the player
+  (Yuka-style GOAP) + seeded disease/disruption shocks the player lives through, so playthroughs diverge in
+  EVENTS, not just economy. Lower priority than SPINE-ACT-DEPTH but a real depth lever.
+- [ ] **MAP-ERA-PROGRESS-RICHER — the journey map could show more than 4 macro-act waypoints.** VL-3's MapView
+  marks the 4 macro-acts; with 10 generations + the convergence rivals, the map could plot per-generation
+  progress + rival lines' positions, making the founding→stars journey legible at finer grain. Visual-polish
+  depth; revisit after SPINE-ACT-DEPTH.
