@@ -1144,10 +1144,12 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   (contributed_ally's reach[20,44] window shadowed by media_mogul). Every ending gained a distinct 1-2
   sentence earned-finale `prose`, rendered in LegacyReport beneath the title (italic body). 854 node + 112
   browser green. PR loop next.
-- [ ] [WAIT-REVIEW] **SAGA-AUDIO-ATMOSPHERE — Tone.js era-aware ambient bed for the spine reader (fresh branch post-#110).** The saga reads silently;
-  a gated, era-shifting ambient bed (founding → industrial → broadcast → stellar) would deepen the hour. Per
-  the audio profile: gated, tested via the audio-graph harness, no autoplay. Enumerate the era→sound mapping
-  first; keep it atmosphere (no melody-driven distraction from reading).
+- [x] **SAGA-AUDIO-ATMOSPHERE — DONE (commit ecc770c).** The audio engine + era-banded ambient bed already
+  existed but was driven by the FROZEN event-era ladder (state.eraIndex), so a founded saga run heard one
+  unchanging bed. Fixed: while a saga scene shows, drive setMusicEra from the saga MACRO-ACT (founding →
+  convergence → emergence → ascension) + added convergence/emergence keywords to ERA_BANDS so all four map to
+  distinct chord moods (origins/mogul/ascent/stars). The bed now crossfades across the founding→stellar
+  journey. Test: eras.unit (4 macro-acts → 4 distinct bands). 860 node + 113 browser green. PR next.
 - [ ] [WAIT-REVIEW] **CORPUS-MINE-INTERSECTIONS — mine the retired 504-cell corpus into braid fabric ([[FOUNDING-SPINE-PIVOT]]) (fresh branch).**
   The founding-spine pivot retired the 504 cells but the plan was to MINE them selectively into the braided
   intersection fabric the trigger lattice weaves. Audit what fabric exists vs the cells; mine the highest-value
