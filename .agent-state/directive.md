@@ -1270,9 +1270,9 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   the player paid for reads the same as a lucky one in the "What Befell" log; stamp the invested recovery (e.g.
   recovered:<meter>:<year>:invested) so the ledger can mark "rebuilt by your own hand" — the player's agency
   shows in the family history. Pure read-model extension; tested.
-- [ ] [WAIT-REVIEW] **FORESHADOW-WEIGHT PR — push feat/foreshadow-weight, open PR, full remote loop.**
-  1 local commit (tiered omen weight + text). Full local gate passed. Push, open PR, wait CI, fold review
-  forward + resolve threads, self-squash-merge ([[babysit-pr]]). Then FORESHADOW-IN-TONE on a fresh branch.
+- [ ] [WAIT-REVIEW] **FORESHADOW-WEIGHT PR #132 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/foreshadow-weight (1fd5475). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
+  review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, FORESHADOW-IN-TONE.
 - [x] **RECOVERY-CHOICE PR #130 — DONE, MERGED (squash 61f9061; release cut 0.34.0).** Invest a meter to boost
   the next rebound (side-log + deterministic boost + UI). Gemini caught a high-sev affordability exploit (free
   money boost) — fixed (engine guard + disabled button), all 3 threads resolved, merged CLEAN. main synced.
