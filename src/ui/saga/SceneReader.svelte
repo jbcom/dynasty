@@ -16,6 +16,9 @@ import type { BraidedThread } from "../../sim/saga/player";
 
 interface Props {
   scene: Scene;
+  /** VL-2b: the generation's portrait (the one speaker, Suzerain pattern) — a generated engraving shown
+   *  beside the prose. Undefined = prose-only (non-spine scenes). */
+  portraitSrc?: string;
   /** Cross-dynasty intersections to WEAVE into this scene's prose flow (WV-1). Empty when none fire. */
   threads?: BraidedThread[];
   /** Resolve {surname}/{given_name}/… tokens — the run's `applyTerms` binding (identity in tests). */
@@ -25,7 +28,7 @@ interface Props {
   /** The player picked the terminal decision option (index into scene.decision.options). */
   ondecision?: (optionIndex: number) => void;
 }
-const { scene, threads = [], term = (t) => t, onbeat, ondecision }: Props = $props();
+const { scene, portraitSrc, threads = [], term = (t) => t, onbeat, ondecision }: Props = $props();
 
 // WV-1: the PAGES the reader turns through = the scene's own prose, then the woven crossing passage(s).
 // A crossing is folded into the SAME paged flow as narration (a `woven` page gets a subtle inline mark),
@@ -144,6 +147,22 @@ function chooseBeat(i: number) {
     onclick={tapPage}
   ></button>
 
+  <!-- VL-2b: the generation's PORTRAIT (the one speaker, Suzerain pattern) — a generated engraving that
+       fades in with the scene at the page's edge. Decorative (the prose carries the story), so aria-hidden;
+       sits above the tap layer (z-index via .scene-body group) but is pointer-events:none so taps pass. -->
+  {#if portraitSrc}
+    {#key scene.id}
+      <img
+        class="portrait"
+        src={portraitSrc}
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+        in:fade={{ duration: reduceMotion ? 0 : 320 }}
+      />
+    {/key}
+  {/if}
+
   <!-- One paragraph at a time. The outer key fades the whole page in when the SCENE changes (a composed
        between-scene transition, distinct from the per-paragraph page-turn); the inner key animates each
        paragraph turn within a scene. The fade is JS-driven (inline opacity), so it does NOT pick up the
@@ -249,9 +268,31 @@ function chooseBeat(i: number) {
   .scene-body,
   .para,
   .turn-hint,
-  .choices {
+  .choices,
+  .portrait {
     position: relative;
     z-index: 1;
+  }
+  /* VL-2b: the generation portrait — a contained engraved bust at the top of the page, above the prose.
+     Pointer-events:none so the full-bleed tap layer still turns the page through it. The engraving art
+     already carries its own plate framing; a soft gold edge + shadow seats it on the navy ground. */
+  .portrait {
+    display: block;
+    width: min(11rem, 38vw);
+    aspect-ratio: 1;
+    object-fit: cover;
+    margin: 0 0 1.4rem;
+    border-radius: var(--mmm-radius);
+    border: 1px solid color-mix(in srgb, var(--mmm-gold-deep) 55%, transparent);
+    box-shadow: var(--mmm-shadow);
+    pointer-events: none;
+  }
+  /* On the wide layout the portrait floats to the right of the measured prose column. */
+  @media (min-width: 56rem) {
+    .portrait {
+      float: right;
+      margin: 0 0 1rem 1.5rem;
+    }
   }
   /* The scene-body holds the prose above the tap layer; flex so paragraphs stack as before. */
   .scene-body {

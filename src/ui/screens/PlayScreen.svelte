@@ -46,6 +46,17 @@ const { content, view, busy, onchoose, onpickbeat, onpickdecision, wide = false 
 const axis = $derived(tyrannyUtopiaAxis(view.state.personality));
 const drift = $derived(axis < -25 ? "utopia" : axis > 25 ? "tyranny" : "neutral");
 
+// VL-2b: the generation's PORTRAIT (the one speaker, Suzerain pattern). Derived from the spine scene's
+// generation id (spine:gN) + the founder's gender; the generated engraving loads beside the prose.
+// Undefined for non-spine scenes (no portrait — the SceneReader renders prose-only as before).
+const portraitSrc = $derived.by(() => {
+  const id = view.saga.scene?.id ?? "";
+  const m = id.match(/^spine:g(\d+):/);
+  if (!m) return undefined;
+  const gender = view.state.founding?.gender ?? "male";
+  return `/assets/generated/portraits/spine_g${m[1]}_${gender}.png`;
+});
+
 // Branch-aware term interpolation: the same authored {head_of_state} resolves
 // to "President" or "Reichskommissar" etc. by the run's alternate-history branch.
 const branch = $derived(branchOf(view.state));
@@ -132,6 +143,7 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
       <SceneReader
         scene={view.saga.scene}
         threads={view.saga.threads}
+        {portraitSrc}
         {term}
         onbeat={(i) => onpickbeat?.(i)}
         ondecision={(i) => onpickdecision?.(i)}
