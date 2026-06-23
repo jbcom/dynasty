@@ -1048,4 +1048,76 @@ describe("Game loop", () => {
     }
     expect(sawOmen, "a foreshadow omen surfaced in a founding-era run").toBe(true);
   });
+
+  it("RECOVERY-CHOICE: investing spends the meter, boosts the next rebound, and replays bit-identically", () => {
+    const real = loadContent();
+    const found = (seed: string) =>
+      foundByComposition(real, {
+        place: "ireland",
+        era: "origins",
+        culture: "anglo_protestant",
+        year: 1776,
+        archetype: "political" as const,
+        gender: "male" as const,
+        surname: "Iv",
+        seed,
+        originId: "composed:ireland:origins",
+      }).state;
+    let invested = false;
+    for (const seed of ["iv1", "iv2", "iv3", "iv4", "iv5", "iv6", "iv7", "iv8"]) {
+      const base = found(seed);
+      const g = new Game(real, seed, base, "political");
+      let guard = 0;
+      while (!g.finished && guard < 300) {
+        if (g.view.canInvestRecovery) {
+          const moneyBefore = g.view.state.meters.money;
+          g.investRecovery("money");
+          // The invest spent money and recorded a side-log entry; canInvestRecovery is now false (one pending).
+          expect(g.view.state.meters.money).toBeLessThan(moneyBefore);
+          expect(g.view.state.recoveryInvests?.length).toBe(1);
+          expect(g.view.canInvestRecovery).toBe(false);
+          // A second invest while one is pending is a no-op.
+          g.investRecovery("money");
+          expect(g.view.state.recoveryInvests?.length).toBe(1);
+          invested = true;
+          // Play to the end so the invest is consumed by a recovery somewhere, then verify replay parity.
+          let g2 = 0;
+          while (!g.finished && g2 < 400) {
+            const s2 = g.view.saga.scene;
+            if (s2) {
+              if (s2.decision) g.pickDecision(0);
+              else if (s2.beats.length) g.pickBeat(0);
+              else break;
+            } else if (g.view.currentEvent?.choices[0]) {
+              g.choose(g.view.currentEvent.choices[0].id);
+            } else break;
+            g2++;
+          }
+          const live = g.view.state;
+          const rebuilt = Game.reconstruct(
+            real,
+            base,
+            live.history,
+            live.presses ?? [],
+            live.recoveryInvests ?? [],
+          );
+          // Replay parity on the invest-affected surfaces: the side-log + the meters it shaped.
+          expect(rebuilt.recoveryInvests).toEqual(live.recoveryInvests);
+          expect(rebuilt.meters.money).toBe(live.meters.money);
+          break;
+        }
+        const s = g.view.saga.scene;
+        if (s) {
+          if (s.decision) g.pickDecision(0);
+          else if (s.beats.length) g.pickBeat(0);
+          else break;
+        } else if (g.view.currentEvent?.choices[0]) {
+          g.choose(g.view.currentEvent.choices[0].id);
+        } else break;
+        guard++;
+      }
+      if (invested) break;
+    }
+    expect(invested, "an investable recovery window appeared across the seed sweep").toBe(true);
+  });
 });

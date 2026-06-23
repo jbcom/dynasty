@@ -37,13 +37,24 @@ interface Props {
   onpickdecision?: (optionIndex: number) => void;
   /** RIVAL-CROSSING-EXPLOIT: press a faltering rival (deepen its stumble for a heat cost). */
   onpress?: (rivalId: string) => void;
+  /** RECOVERY-CHOICE: invest a meter (money/heat) to boost the next rebound. */
+  oninvest?: (meter: "money" | "heat") => void;
   /** Medium-native layout: phones get a compact tab stack; wide tablets/foldables
       get the event + an info panel side-by-side. */
   wide?: boolean;
 }
 
-const { content, view, busy, onchoose, onpickbeat, onpickdecision, onpress, wide = false }: Props =
-  $props();
+const {
+  content,
+  view,
+  busy,
+  onchoose,
+  onpickbeat,
+  onpickdecision,
+  onpress,
+  oninvest,
+  wide = false,
+}: Props = $props();
 
 // Diegetic ambient drift: the play area tints toward cyan (utopia) or red
 // (tyranny) as the personality vector shifts, so the slide is felt, not just read.
@@ -160,6 +171,19 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
            carries dread, not just aftermath. Deterministic (no roll); shown while the threat looms. -->
       {#if view.foreshadow}
         <p class="foreshadow" data-testid="foreshadow">{view.foreshadow}</p>
+      {/if}
+      <!-- RECOVERY-CHOICE: after a blow, the player may INVEST a meter to force a stronger rebound — agency
+           over the comeback, not just waiting on the seeded roll. Offered only while a blow is outstanding. -->
+      {#if view.canInvestRecovery && oninvest}
+        <div class="invest" data-testid="recovery-invest">
+          <span class="invest-label">Pour resources into the recovery?</span>
+          <button type="button" class="invest-btn" onclick={() => oninvest?.("money")}>
+            Spend funds
+          </button>
+          <button type="button" class="invest-btn" onclick={() => oninvest?.("heat")}>
+            Call in favours
+          </button>
+        </div>
       {/if}
       <!-- WV-1: cross-dynasty intersections are WOVEN into the scene's paged prose by the reader (not a
            detached "Where paths cross" wall under the choices). The reader folds the crossing in as
@@ -372,6 +396,35 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     border-left-color: var(--mmm-gold-deep, #9a7d2e);
     background: color-mix(in srgb, var(--mmm-gold-deep, #9a7d2e) 9%, transparent);
     color: color-mix(in srgb, var(--mmm-gold-deep, #9a7d2e) 80%, var(--mmm-text));
+  }
+  /* RECOVERY-CHOICE: the invest prompt after a blow — spend a meter to force a stronger rebound. */
+  .invest {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 auto 0.4rem;
+    max-width: 64ch;
+    padding: 0.4rem 0.9rem;
+    border-left: 3px solid var(--mmm-gold-deep, #9a7d2e);
+    background: color-mix(in srgb, var(--mmm-gold-deep, #9a7d2e) 8%, transparent);
+    border-radius: var(--mmm-radius);
+  }
+  .invest-label {
+    font-family: var(--mmm-font-body);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--mmm-text);
+  }
+  .invest-btn {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--mmm-ink);
+    background: var(--mmm-gold);
+    border: none;
+    border-radius: var(--mmm-radius);
+    cursor: pointer;
   }
   /* SHOCK-FORESHADOW: dread before the blow — a muted, ominous omen (not the sharp red of an actual loss). */
   .foreshadow {

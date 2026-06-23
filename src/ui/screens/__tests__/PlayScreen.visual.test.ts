@@ -25,6 +25,7 @@ function view(): GameView {
     rivalStandings: [],
     rivalNews: [],
     foreshadow: null,
+    canInvestRecovery: false,
     rung: 0,
     convergence: null,
     lastLedger: [],
@@ -72,6 +73,60 @@ describe("PlayScreen (composed game screen)", () => {
     // Event card on the Now tab (portraits removed — they distracted, reclaimed the space).
     expect(host.querySelector("[data-event]")).not.toBeNull();
     expect(host.querySelector("[data-portrait]")).toBeNull();
+  });
+
+  it("RECOVERY-CHOICE: offers invest buttons when canInvestRecovery, firing oninvest with the meter", () => {
+    const calls: Array<"money" | "heat"> = [];
+    // The invest prompt lives in the saga event-pane, so a scene must be present (it's a saga mechanic).
+    const scene = SceneSchema.parse({
+      id: "sc:demo:blow",
+      sense: "sight",
+      prose: [
+        "The house has taken a hard loss this season, and the question is what you spend to mend it.",
+      ],
+    });
+    const v: GameView = {
+      ...view(),
+      saga: { actTitle: "Act II", scene, threads: [], ended: false },
+      canInvestRecovery: true,
+    };
+    component = mount(PlayScreen, {
+      target: host,
+      props: {
+        content,
+        view: v,
+        busy: false,
+        onchoose: () => {},
+        oninvest: (m: "money" | "heat") => calls.push(m),
+      },
+    });
+    const block = host.querySelector('[data-testid="recovery-invest"]');
+    expect(block, "the invest prompt renders when canInvestRecovery").not.toBeNull();
+    const btns = [
+      ...host.querySelectorAll<HTMLButtonElement>('[data-testid="recovery-invest"] .invest-btn'),
+    ];
+    expect(btns.length).toBe(2); // spend funds (money) + call in favours (heat)
+    btns[0]?.click();
+    btns[1]?.click();
+    expect(calls).toEqual(["money", "heat"]);
+  });
+
+  it("RECOVERY-CHOICE: no invest prompt when canInvestRecovery is false", () => {
+    const scene = SceneSchema.parse({
+      id: "sc:demo:calm",
+      sense: "sight",
+      prose: ["A quiet season; the ledgers balance and the house holds steady."],
+    });
+    const v: GameView = {
+      ...view(),
+      saga: { actTitle: "Act II", scene, threads: [], ended: false },
+      canInvestRecovery: false,
+    };
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: v, busy: false, onchoose: () => {}, oninvest: () => {} },
+    });
+    expect(host.querySelector('[data-testid="recovery-invest"]')).toBeNull();
   });
 
   it("the hamburger opens the slide-out menu with the meters + motivators inside (PF-3)", async () => {

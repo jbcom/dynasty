@@ -96,6 +96,22 @@ export class GameStore {
     }
   }
 
+  /** RECOVERY-CHOICE: invest a meter (money/heat) to boost the next rebound. Best-effort autosave. */
+  async investRecovery(meter: "money" | "heat"): Promise<void> {
+    if (this.busy || this.game.finished) return;
+    this.busy = true;
+    try {
+      this.game.investRecovery(meter);
+      try {
+        await saveGame(this.storage, this.view.state);
+      } catch {
+        // swallow — the invest applied; next action retries the save.
+      }
+    } finally {
+      this.busy = false;
+    }
+  }
+
   get finished(): boolean {
     return this.game.finished;
   }
