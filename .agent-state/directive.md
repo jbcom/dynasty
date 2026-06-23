@@ -1282,9 +1282,9 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   pressed N faltering rivals, and forced M recoveries…" line — the active counterpart to the passive ledger.
   Omitted for a fully-passive run. Tests: screens.browser (tally render + plural/empty). 898 node + 128 browser
   green, gate clean.
-- [ ] [WAIT-REVIEW] **AGENCY-IN-LEGACY PR — push, open PR, full remote loop.**
-  1 commit (the "By your own hand" tally). Full local gate passed. Push, open PR, wait CI, fold review forward
-  + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, AGENCY-PLAYSTYLE-AUDIT.
+- [ ] [WAIT-REVIEW] **AGENCY-IN-LEGACY PR #139 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/agency-in-legacy (d906833). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
+  review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, AGENCY-PLAYSTYLE-AUDIT.
 - [ ] **AGENCY-PLAYSTYLE-AUDIT — measure how much the WV-3 agency levers actually get used.** Presses,
   invests, omen-heeds are now available; nothing measures whether a typical playthrough EXERCISES them or they
   sit unused (dead UI). Instrument per-run counts over many seeds + an always-press/always-invest policy vs a
