@@ -85,15 +85,19 @@ const PRESENTATION: Record<EraBand, Record<RungTier, string>> = {
     mid: "a clean digital portrait photo",
     high: "a polished corporate headshot",
   },
+  // SCARCITY INVERSION (user, 2026-06-23): in a post-scarcity digital future, captures are abundant and free,
+  // so the EXTREME-wealth flex is a RARE PHYSICAL artifact — a real hand-painted oil on canvas, an anachronistic
+  // luxury precisely because it can't be copied. Low/mid stay digital/holographic (the default, abundant medium);
+  // high flips to physical, the Gilded-Age oil returning at the very top — now a far more extreme status symbol.
   near_future: {
     low: "a utilitarian identity scan-capture, plainly lit",
     mid: "a clean volumetric portrait capture",
-    high: "a refined volumetric studio capture, composed and stately",
+    high: "a RARE hand-painted oil portrait on real canvas — an anachronistic luxury in a digital age, a flex of wealth",
   },
   stellar: {
     low: "a worn archival hologram-still, faintly flickering with age",
     mid: "a clear holographic portrait capture",
-    high: "a stately holographic state portrait, an heirloom of a stellar house",
+    high: "an extravagantly RARE physical oil painting on canvas, hand-made — in a post-scarcity star age the one thing that cannot be copied, the ultimate symbol of dynastic power",
   },
 };
 

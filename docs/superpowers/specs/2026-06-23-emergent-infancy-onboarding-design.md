@@ -218,8 +218,20 @@ So presentation = `f(eraBand, rungTier)` — the real historical object:
 - early_1900s: low → a plain black-and-white snapshot; high → a formal studio photograph.
 - midcentury: low → a square Polaroid / ID photo; high → a color studio portrait.
 - digital_modern: low → a phone snapshot; high → a polished corporate headshot.
-- near_future: low → a utilitarian scan/ID capture; high → a refined volumetric studio capture.
-- stellar: low → a worn archival hologram-still; high → a stately holographic state portrait.
+- near_future: low → a utilitarian scan/ID capture; mid → a volumetric capture; high → **a RARE physical
+  hand-painted oil on canvas** (scarcity inversion, below).
+- stellar: low → a worn archival hologram-still; mid → a holographic capture; high → **an extravagantly RARE
+  physical oil painting, hand-made** — the ultimate dynastic flex (scarcity inversion).
+
+**SCARCITY INVERSION (user, 2026-06-23).** In a post-scarcity DIGITAL future, captures are abundant and
+free — so the medium hierarchy INVERTS: a *physical* oil painting on real canvas becomes RARE, and rarity
+is the whole point. At the extreme high tier of near_future + stellar, the presentation flips back to a
+hand-painted physical oil — the Gilded-Age robber-baron oil returning, now an even more extreme status
+symbol *because* in a copy-everything age the one thing that cannot be copied is a singular physical
+artifact. Low/mid stay digital/holographic (the abundant default); only the apex commissions the physical
+thing. This scarcity theme is worth carrying into the STORIES too, not just the visual medium — the
+post-scarcity era's drama is about what stays scarce (singular artifacts, real presence, an authentic line)
+when everything else is abundant.
 
 COHESION is preserved NOT by a single medium but by a shared framing wrapper — every asset reads as "an
 aged artifact in a dynastic chronicle": muted/limited palette, a restrained gold-ochre + oxblood accent,

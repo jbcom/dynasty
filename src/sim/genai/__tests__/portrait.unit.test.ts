@@ -162,10 +162,23 @@ describe("EI-8 presentation medium (era × station — user 2026-06-23)", () => 
     expect(all.size, "media are distinct across eras + stations").toBe(eras.length * 2);
   });
 
-  it("extrapolates into the future bands (volumetric / holographic keepsakes)", () => {
-    expect(presentationFor("near_future", "high")).toMatch(/volumetric/i);
-    expect(presentationFor("stellar", "high")).toMatch(/holographic/i);
+  it("extrapolates into the future bands (digital/holographic is the abundant default)", () => {
+    expect(presentationFor("near_future", "low")).toMatch(/scan|identity/i);
+    expect(presentationFor("near_future", "mid")).toMatch(/volumetric/i);
     expect(presentationFor("stellar", "low")).toMatch(/hologram|archival/i);
+    expect(presentationFor("stellar", "mid")).toMatch(/holographic/i);
+  });
+
+  it("SCARCITY INVERSION: in the post-scarcity future the extreme-wealth flex is a RARE PHYSICAL oil (user 2026-06-23)", () => {
+    // A physical hand-painted oil becomes the ultimate status symbol BECAUSE it can't be copied — the
+    // Gilded-Age oil returns at the very top of the far future, an even more extreme flex.
+    const nf = presentationFor("near_future", "high");
+    const st = presentationFor("stellar", "high");
+    expect(nf).toMatch(/physical|oil|canvas/i);
+    expect(nf).toMatch(/rare|anachronis|luxury/i);
+    expect(st).toMatch(/physical oil|oil painting|canvas/i);
+    expect(st).toMatch(/rare|cannot be copied|ultimate/i);
+    expect(st).not.toMatch(/holographic/i); // the high flex is NOT a hologram — it's the rare physical thing
   });
 
   it("the founding fortune-seeker reads humble (a rough sketch), not a commissioned work", () => {
