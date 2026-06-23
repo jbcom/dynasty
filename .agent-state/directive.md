@@ -1266,9 +1266,9 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   measures foreshadow→next-shock correlation. MEASURED: P(shock|omen) ≈ 11.2% vs P(shock|calm) ≈ 6.3% — an omen
   makes the next shock ~1.8× likelier, a meaningful-but-not-certain warning (neither spoiler nor noise). The
   test guards P(omen)≥P(calm) AND <1 (well-calibrated; no threshold tuning needed). 897 node green, gate clean.
-- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT PR — push feat/omen-payoff-audit, open PR, full remote loop.**
-  1 commit (the audit instrument). Full local gate passed. Push, open PR, wait CI, fold review forward + resolve
-  threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RECOVERY-INVEST-IN-LEDGER.
+- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT PR #136 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/omen-payoff-audit. Full local gate passed. Loop: wait build-and-test + CodeQL, fold review forward
+  + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RECOVERY-INVEST-IN-LEDGER.
 - [ ] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger.** A rebound
   the player paid for reads the same as a lucky one in the "What Befell" log; stamp the invested recovery (e.g.
   recovered:<meter>:<year>:invested) so the ledger can mark "rebuilt by your own hand" — the player's agency
