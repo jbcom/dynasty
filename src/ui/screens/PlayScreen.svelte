@@ -19,6 +19,7 @@ import { applyTerms, runTerms } from "../../sim/terms";
 import { projectSaga } from "../../sim/readModel";
 import ShaderBackdrop from "../saga/ShaderBackdrop.svelte";
 import RivalField from "../saga/RivalField.svelte";
+import RivalDossier from "../saga/RivalDossier.svelte";
 import SagaPanel from "../saga/SagaPanel.svelte";
 import SceneReader from "../saga/SceneReader.svelte";
 import SlideOutMenu from "../saga/SlideOutMenu.svelte";
@@ -117,6 +118,7 @@ type Tab =
   | "event"
   | "map"
   | "news"
+  | "field"
   | "markets"
   | "lineage"
   | "timeline"
@@ -128,6 +130,8 @@ const hasNews = $derived(content.worldTimelines.length > 0 || view.rivalNews.len
 const hasMarkets = $derived(content.markets.length > 0 || content.ranks.length > 0);
 // The lineage tab appears only for a founded line (it has a live family tree).
 const hasLineage = $derived(view.state.family !== undefined);
+// RIVAL-DOSSIER-TAB: the Field tab shows when there's a rival world to track (a founded line's convergence race).
+const hasField = $derived(view.rivalStandings.length > 0);
 // In wide mode the "event" tab is shown directly in event-col, so the side nav
 // starts on the first info tab (timeline is always present; news/markets optional).
 const defaultTab = $derived<Tab>(wide ? (hasNews ? "news" : hasMarkets ? "markets" : "timeline") : "event");
@@ -140,6 +144,7 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   // VL-3: the era-progressing journey map (founded lines only — it tracks the founding→stars arc).
   ...(hasLineage ? [{ id: "map" as Tab, label: "Map", icon: "timeline" }] : []),
   ...(hasNews ? [{ id: "news" as Tab, label: "News", icon: "news" }] : []),
+  ...(hasField ? [{ id: "field" as Tab, label: "Field", icon: "timeline" }] : []),
   ...(hasMarkets ? [{ id: "markets" as Tab, label: "Markets", icon: "markets" }] : []),
   ...(hasLineage ? [{ id: "lineage" as Tab, label: "Lineage", icon: "dossier" }] : []),
   { id: "timeline", label: "Timeline", icon: "timeline" },
@@ -224,6 +229,8 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     <MapView gameState={view.state} rivalStandings={view.rivalStandings} playerRung={view.rung} />
   {:else if tab === "news"}
     <NewsTicker {content} gameState={view.state} {term} rivalNews={view.rivalNews} onPress={onpress} />
+  {:else if tab === "field"}
+    <RivalDossier standings={view.rivalStandings} playerRung={view.rung} />
   {:else if tab === "markets"}
     <MarketsView {content} gameState={view.state} />
   {:else if tab === "lineage"}
