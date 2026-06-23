@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.41.0](https://github.com/jbcom/dynasty/compare/v0.40.0...v0.41.0) (2026-06-23)
+
+
+### Features
+
+* tier the rival-surge dispatch by rung gap — proportional pressure ([#144](https://github.com/jbcom/dynasty/issues/144)) ([d63a0ae](https://github.com/jbcom/dynasty/commit/d63a0ae0f3a2eaf36da8b488325f6da7747b4c41))
+
 ## [0.40.0](https://github.com/jbcom/dynasty/compare/v0.39.0...v0.40.0) (2026-06-23)
 
 
