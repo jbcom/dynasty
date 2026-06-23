@@ -1306,9 +1306,9 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   cap was also removed so a far-ahead rival surfaces as the MOST urgent dispatch (was silenced at gap>2). Pure,
   view-derived; the phrasing extracted to dynastyWorld.surgeHeadline (engine + tests share). Tests: dynastyWorld.unit
   (3-tier escalation + cap). 901 node + 128 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **RIVAL-RISE-NEWS-WEIGHT PR — push, open PR, full remote loop.**
-  1 commit (gap-tiered surge headline). Full local gate passed. Push, open PR, wait CI, fold review forward +
-  resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, MERGE-CADENCE-HEALTH.
+- [ ] [WAIT-REVIEW] **RIVAL-RISE-NEWS-WEIGHT PR #144 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/rival-rise-news-weight (ae68b1f). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
+  review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, MERGE-CADENCE-HEALTH.
 - [ ] **MERGE-CADENCE-HEALTH — verify the post-merge Release/CD/CodeQL chain is consistently green.** Many WV-3
   PRs have merged; instrument/check that each tagged release (release-please) actually produced its Release +
   CD + CodeQL success on main (no silent post-merge breakage accumulating). A quick gh-run audit over recent
