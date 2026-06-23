@@ -28,7 +28,12 @@ import {
   evaluateTriggers,
   spineStateProjection,
 } from "../sim/saga/triggerLattice";
-import { applyFamilyDeathShock, rollSagaShock } from "../sim/sagaShock";
+import {
+  applyFamilyDeathShock,
+  rollSagaShock,
+  type SagaShockNote,
+  shockNote,
+} from "../sim/sagaShock";
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
 import { type GameState, initState, isMemberAlive, type LedgerEntry } from "../sim/state";
@@ -67,6 +72,9 @@ export interface GameView {
    *  resolved when the run ends; null while in progress. */
   convergence: ConvergenceEnding | null;
   lastLedger: LedgerEntry[];
+  /** WV-3-SHOCK-SCENES: the disruption shock's one-line aftermath that struck on the last saga move, or
+   *  null. The PlayScreen narrates it for one turn (a death/loss/scandal beat the player reads). */
+  shock: SagaShockNote | null;
 }
 
 type Listener = (view: GameView) => void;
@@ -83,6 +91,9 @@ export class Game {
   private state: GameState;
   private current: GameEvent | null;
   private lastLedger: LedgerEntry[] = [];
+  /** WV-3-SHOCK-SCENES: the disruption shock that struck on the LAST saga move, or null. Surfaced in the
+   *  view for one turn as an aftermath line, then cleared on the next move (a transient, like lastLedger). */
+  private lastShock: SagaShockNote | null = null;
   private readonly listeners = new Set<Listener>();
   private readonly saga: SagaDriver;
   /** The parallel world of RIVAL lines (the convergence layer) — created for a founded line, advanced
@@ -234,6 +245,7 @@ export class Game {
       rung: this.playerRung(),
       convergence: this.convergenceEnding(),
       lastLedger: this.lastLedger,
+      shock: this.lastShock,
     };
   }
 
@@ -485,6 +497,8 @@ export class Game {
       this.rng.fork(`sagashock:${fromYear}`),
     );
     if (shock.kind === "none") return;
+    // Surface the shock as a one-turn aftermath note the SceneReader/PlayScreen narrates (WV-3-SHOCK-SCENES).
+    this.lastShock = shockNote(shock);
     if (shock.kind === "family_death" && this.state.family) {
       this.state = {
         ...this.state,
@@ -519,6 +533,7 @@ export class Game {
 
   /** Apply a weave-beat choice on the current novel scene; time passes; then re-emit. */
   pickBeat(beatIndex: number): void {
+    this.lastShock = null; // the aftermath note surfaces for one move only
     // Capture the scene the player just engaged BEFORE the driver advances off it, so any trigger branches
     // it surfaced get their crossing recorded (TRIGGER-CROSSING-RECORD).
     const engaged = this.saga.frame().scene;
@@ -540,6 +555,7 @@ export class Game {
    * generation: the next tier's act begins, carrying the line's drifted motivators.
    */
   pickDecision(optionIndex: number): void {
+    this.lastShock = null; // the aftermath note surfaces for one move only
     // Capture the engaged scene before the driver advances (TRIGGER-CROSSING-RECORD).
     const engaged = this.saga.frame().scene;
     const result = this.saga.pickDecision(optionIndex);
@@ -662,6 +678,10 @@ export class Game {
   choose(choiceId: string): void {
     if (!this.current) throw new Error("No current event to choose on");
     if (this.state.end) throw new Error("Run has ended");
+    // The saga shock aftermath is a one-MOVE note: clear it on an event-flow advance too, else a note set
+    // as a saga act ended would linger across the event flow and reappear when the next saga act begins
+    // (Gemini #110). The event path doesn't roll saga shocks, so this only ever clears.
+    this.lastShock = null;
     const result = applyChoice(this.content, this.state, this.current, choiceId, this.rng);
     this.state = result.state;
     this.lastLedger = result.newLedger;

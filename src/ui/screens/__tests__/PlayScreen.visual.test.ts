@@ -26,6 +26,7 @@ function view(): GameView {
     rung: 0,
     convergence: null,
     lastLedger: [],
+    shock: null,
   };
 }
 
@@ -166,5 +167,42 @@ describe("PlayScreen (composed game screen)", () => {
     const para = host.querySelector("[data-testid='para']");
     expect(para?.getAttribute("data-woven")).toBe(""); // it's a woven narration page, inline
     expect(para?.textContent).toContain("An Italian line cuts across yours."); // the crossing, in-flow
+  });
+
+  it("WV-3-SHOCK-SCENES: a shock surfaces a one-line aftermath above the scene", () => {
+    const scene = SceneSchema.parse({
+      id: "spine:g4:open",
+      sense: "sound",
+      prose: ["The mill floor roars on, indifferent to the family's private grief."],
+    });
+    const v: GameView = {
+      ...view(),
+      saga: { actTitle: "Act V", scene, threads: [], ended: false },
+      shock: {
+        kind: "family_death",
+        text: "A death in the family — the plague took one of your own this season.",
+        note: "plague",
+      },
+    };
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: v, busy: false, onchoose: () => {} },
+    });
+    const aftermath = host.querySelector(".shock-aftermath");
+    expect(aftermath, "the shock aftermath line renders").not.toBeNull();
+    expect(aftermath?.textContent).toContain("A death in the family");
+    expect(aftermath?.getAttribute("data-shock")).toBe("family_death");
+    // No shock → no aftermath line.
+    unmount(component);
+    component = mount(PlayScreen, {
+      target: host,
+      props: {
+        content,
+        view: { ...v, shock: null },
+        busy: false,
+        onchoose: () => {},
+      },
+    });
+    expect(host.querySelector(".shock-aftermath")).toBeNull();
   });
 });
