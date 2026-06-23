@@ -1118,12 +1118,12 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ## Gameplay-depth backlog (the "hour+" mandate — keep the queue non-empty, [[never-drain-queue]])
 
-- [ ] [WAIT-REVIEW] **WV-3-YUKA PR #108 — wait CI green + address review, then self-squash-merge.** Pushed
-  feat/wv3-yuka-emergent (7 commits): the divergence audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks)
-  + WV-3-RIVAL-REACT (reactive rivals) — the saga path now diverges per seed while staying bit-reproducible.
-  Loop: wait build-and-test + CodeQL green, read CodeRabbit/Amazon-Q/Gemini, fix in forward commits + resolve
-  threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next branch for the
-  remaining WV-3 follow-ups (SHOCK-SCENES) + the deferred WAIT items below.
+- [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
+  audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
+  diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock
+  tempered off the wrong medicine map) FIXED in a forward commit + threads resolved; self-squash-merged.
+  Post-merge Release + CD + CodeQL on main all SUCCESS (shipped + deployed). Synced main, deleted branch.
+  Follow-ups now on feat/wv3-shock-scenes (below).
 
 - [x] **SPINE-DEPTH PR #106 — DONE, MERGED (squash 045f7d5; release 0.22.0 auto-cut).** The whole spine-depth
   milestone shipped: SAGA-RESTORE-CURSOR, SPINE-ACT-DEPTH (all 10 acts, 3 interstitials each, hour mandate
@@ -1144,7 +1144,7 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   `shock:<kind>:<year>` flag. Pure+seeded → replay bit-identical (save round-trip green). RESULT: the
   divergence audit's saga path now spreads (moneyDistinct 1→6, familyAlive varies) — Suzerain trap broken on
   the saga path. Tests: sagaShock.unit + audit assertions. 847 node + 110 browser green.
-- [ ] [WAIT-REVIEW] **WV-3-SHOCK-SCENES — author the loss/recovery scene a shock surfaces (after #108 merges).** WV-3-MORTALITY stamps a
+- [ ] **WV-3-SHOCK-SCENES — author the loss/recovery scene a shock surfaces (on feat/wv3-shock-scenes).** WV-3-MORTALITY stamps a
   `shock:<kind>:<year>` flag but nothing yet READS it in the prose — the loss is mechanical, not narrated.
   Add a gated interstitial (or thread) that, when a `shock:family_death:*` / `shock:meter_blow:*` flag is set,
   surfaces a short era-voiced loss/recovery beat in the next scene (the "magnitudes more writing" the spec
@@ -1160,7 +1160,7 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   interstitials. Opening sentences + beat openers already varied (0 first-3-word opener repeats; 54/60
   distinct beat openers). CAUGHT: the reversal SECOND paragraphs shared one skeleton — 9/10 opened "The [X]
   ahead —". Rewrote all to distinct structures → 10/10 distinct 2nd-para openers. Prose-only, idempotent.
-- [ ] [WAIT-REVIEW] **SPINE-WEAVE-PAYOFF-4 — mid-weight reversal flags → trigger lattice (post-#108 branch).**
+- [ ] **SPINE-WEAVE-PAYOFF-4 — mid-weight reversal flags → trigger lattice (on feat/wv3-shock-scenes).**
   (#106 merged; re-pointed.) The 6 mid-weight reversals added 12 flags (g1_read_the_alliances,
   g2_hedged_the_break, g4_got_ahead_of_the_gaze, g6_bought_the_next_medium, g7_retook_the_helm, …). Enumerate
   vs the family branches per PAYOFF-3's discipline (one rule per GENUINE thematic+era match, never
