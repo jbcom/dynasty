@@ -1358,9 +1358,9 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   shows a one-line "state of the race" header — "You lead the field." / "N lines lead you." + " M lines have
   fallen out." — derived from the standings (pluralized), so the player gets the gestalt before the rows.
   Tests: RivalDossier.browser (lead / ahead+fallen variants). 906 node + 133 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **CONVERGENCE-FIELD-SUMMARY-LINE PR — push, open PR, full remote loop.**
-  1 commit (the race-summary header). Full local gate passed. Push, open PR, wait CI, fold review forward +
-  resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, FALLEN-NEWS.
+- [ ] [WAIT-REVIEW] **CONVERGENCE-FIELD-SUMMARY-LINE PR #155 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/convergence-field-summary-line (8999070). Full local gate passed. Loop: wait build-and-test + CodeQL,
+  fold review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, FALLEN-NEWS.
 - [ ] **FALLEN-NEWS — announce a rival's elimination in the NewsTicker.** A line going fallen (DEAD-LINE-IN-FIELD)
   is a major race event but only shows passively in the dossier. Emit a one-time NewsTicker dispatch when a
   near-vantage rival first falls ("The <place> line has dropped out of the race") so the player registers the
