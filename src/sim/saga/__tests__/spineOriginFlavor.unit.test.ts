@@ -12,46 +12,57 @@ import { currentScene, startAct } from "../runner";
 
 const corpus = loadSaga();
 
-function g0() {
-  const act = corpus.acts.get("spine:g0:founding");
-  if (!act) throw new Error("no g0 founding act");
-  return act;
+function act(id: string) {
+  const a = corpus.acts.get(id);
+  if (!a) throw new Error(`no act ${id}`);
+  return a;
 }
 
-function openingSceneIdFor(flags: string[]): string | null {
-  const state = startAct(corpus, g0(), initMotivators(), flags);
+function openingSceneIdFor(actId: string, flags: string[]): string | null {
+  const state = startAct(corpus, act(actId), initMotivators(), flags);
   return currentScene(corpus, state)?.id ?? null;
 }
 
-describe("FS-SPINE-ORIGIN-FLAVOR: the founding base colors the g0 opening scene", () => {
-  const cases: Array<{ base: string; scene: string }> = [
-    { base: "land", scene: "spine:g0:founding:open_land" },
-    { base: "commerce", scene: "spine:g0:founding:open_commerce" },
-    { base: "pulpit", scene: "spine:g0:founding:open_pulpit" },
-    { base: "law", scene: "spine:g0:founding:open_law" },
-    { base: "military", scene: "spine:g0:founding:open_military" },
-  ];
+// Each spine act that has base-flavored openings: act id, its default open, the scene the variants divert
+// to, and the base→variant-scene map (FS-SPINE-ORIGIN-FLAVOR g0; FS-SPINE-ORIGIN-FLAVOR-DEPTH g1).
+const FLAVORED_ACTS = [
+  {
+    actId: "spine:g0:founding",
+    open: "spine:g0:founding:open",
+    divert: "spine:g0:founding:allegiance",
+    base: "spine:g0:founding:open_",
+  },
+  {
+    actId: "spine:g1:earlyrepublic",
+    open: "spine:g1:earlyrepublic:open",
+    divert: "spine:g1:earlyrepublic:doctrine",
+    base: "spine:g1:earlyrepublic:open_",
+  },
+];
+const BASES = ["land", "commerce", "pulpit", "law", "military"];
 
-  for (const { base, scene } of cases) {
-    it(`a ${base} founder opens on ${scene}`, () => {
-      expect(openingSceneIdFor([`base:${base}`])).toBe(scene);
-    });
-  }
-
-  it("a press founder (or an uncovered/no-base run) gets the default printing-house open", () => {
-    expect(openingSceneIdFor(["base:press"])).toBe("spine:g0:founding:open");
-    expect(openingSceneIdFor([])).toBe("spine:g0:founding:open");
-  });
-
-  it("each base variant carries real multi-paragraph prose + the family-name token", () => {
-    for (const { scene } of cases) {
-      const s = corpus.scenes.get(scene);
-      expect(s, scene).toBeTruthy();
-      expect(s?.prose.length).toBeGreaterThanOrEqual(2);
-      // The founding voice interpolates the line's name — proves it's authored prose, not a stub.
-      expect(s?.prose.join(" ")).toContain("{family_name}");
-      // It diverts forward to the shared allegiance scene (skipping the default open).
-      expect(s?.next).toBe("spine:g0:founding:allegiance");
+for (const a of FLAVORED_ACTS) {
+  describe(`FS-SPINE-ORIGIN-FLAVOR: the founding base colors ${a.actId}`, () => {
+    for (const base of BASES) {
+      it(`a ${base} founder opens on ${a.base}${base}`, () => {
+        expect(openingSceneIdFor(a.actId, [`base:${base}`])).toBe(`${a.base}${base}`);
+      });
     }
+
+    it("an uncovered/no-base run gets the default open", () => {
+      // g0 default is press (printing house); g1 default is maritime/commerce — both un-gated for press.
+      expect(openingSceneIdFor(a.actId, ["base:press"])).toBe(a.open);
+      expect(openingSceneIdFor(a.actId, [])).toBe(a.open);
+    });
+
+    it("each base variant carries real multi-paragraph prose + the family-name token + diverts forward", () => {
+      for (const base of BASES) {
+        const s = corpus.scenes.get(`${a.base}${base}`);
+        expect(s, `${a.base}${base}`).toBeTruthy();
+        expect(s?.prose.length).toBeGreaterThanOrEqual(2);
+        expect(s?.prose.join(" ")).toContain("{family_name}");
+        expect(s?.next).toBe(a.divert);
+      }
+    });
   });
-});
+}

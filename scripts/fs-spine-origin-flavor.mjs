@@ -14,13 +14,6 @@ const PATH = "src/data/saga/spine.act.json";
 const doc = JSON.parse(readFileSync(PATH, "utf-8"));
 
 const ALLEGIANCE = "spine:g0:founding:allegiance";
-const VARIANT_IDS = [
-  "spine:g0:founding:open_land",
-  "spine:g0:founding:open_commerce",
-  "spine:g0:founding:open_pulpit",
-  "spine:g0:founding:open_law",
-  "spine:g0:founding:open_military",
-];
 
 /** The five base-flavored opening scenes (press is the existing default `open`). Voice matches the spine:
  *  multi-paragraph sensory prose with {given_name}/{surname}/{family_name} tokens, 2 beats each. */
@@ -172,37 +165,206 @@ const VARIANTS = [
   },
 ];
 
-// --- idempotent rebuild ---
-// 1. drop any prior variant scenes + their ids from g0's scene list.
-doc.scenes = doc.scenes.filter((s) => !VARIANT_IDS.includes(s.id));
-const g0 = doc.acts.find((a) => a.id === "spine:g0:founding");
-if (!g0) throw new Error("no g0 act");
-g0.scenes = g0.scenes.filter((id) => !VARIANT_IDS.includes(id));
+/**
+ * G1 (Act II — The Crucible of the Young Republic, early republic ~1790s): the same five base-flavored
+ * openings, diverting to the shared g1 `doctrine` scene. The existing maritime/shipwright `open` is the
+ * press/commerce default. Voice matches the early-republic act (the young nation finding its feet).
+ */
+const G1_VARIANTS = [
+  {
+    id: "spine:g1:earlyrepublic:open_land",
+    base: "land",
+    sense: "sight",
+    prose: [
+      "From the porch of the new house {given_name} {surname} could see the whole of it: the cleared fields running down to the creek, the slave quarters and the tobacco barns, the survey line that the {family_name} name now held against the world. The Revolution was won, the king was gone, and a man who held land held a vote and a voice in the young republic's first quarrels. But the soil that made the family also bound it — to the crops, to the markets, and to the laboring hands whose freedom the new Constitution had carefully declined to settle.",
+      "Word came up the river road of conventions and compromises, of a federal city to be raised from a Potomac swamp, of assumption and tariff and the slow knitting of thirteen jealous states into one. {given_name} weighed it all against the ledger of the harvest, knowing that whichever way the republic tilted — toward the merchants' bank or the planters' fields — the {family_name} acres would have to feed it either way.",
+    ],
+    beats: [
+      {
+        prose: ["A surveyor's letter offers western grant land, cheap, if you can hold it against squatters and the tribes."],
+        choice: {
+          text: "Stake the family's future on the frontier grants.",
+          motivatorShift: { wealth: 1, reach: 1 },
+          setFlags: ["g1_land_frontier_grants"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["The county calls for a man of standing to sit its new court and fix the boundaries of a hundred farms."],
+        choice: {
+          text: "Take the seat — land disputes are settled by those who hold the most.",
+          motivatorShift: { power: 1, politics: 1 },
+          setFlags: ["g1_land_county_court"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g1:earlyrepublic:open_commerce",
+    base: "commerce",
+    sense: "smell",
+    prose: [
+      "Coffee, tar, and the ledger's iron-gall ink — the smells of the counting-house where {given_name} {surname} now traded under a flag the world did not yet wholly respect. The British ports were half-closed, the French were at war, and an American bottom carrying an American cargo ran a gauntlet of privateers and impressment — yet the same danger meant fortunes for the house bold enough to clear it. The {family_name} name was learning to be its own credit in a republic that had not yet built a bank to lend one.",
+      "Word came up from the wharves of Hamilton's funding scheme, of a national debt made into a national asset, of a Bank of the United States that would either make the merchant class or break the planters who feared it. {given_name} read the pamphlets with a trader's eye, weighing which way to lean the house — for in the young republic, commerce was choosing the shape of the nation as surely as any vote.",
+    ],
+    beats: [
+      {
+        prose: ["A China-trade venture is forming — a single voyage that could double the house, or sink it whole."],
+        choice: {
+          text: "Buy a share of the East-Indies gamble.",
+          motivatorShift: { wealth: 1, reach: 1 },
+          setFlags: ["g1_commerce_china_trade"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["Hamilton's men seek subscribers to the new national bank — a chance to bind the house to federal power."],
+        choice: {
+          text: "Subscribe, and tie the family's fortune to the union itself.",
+          motivatorShift: { politics: 1, power: 1 },
+          setFlags: ["g1_commerce_bank_subscription"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g1:earlyrepublic:open_pulpit",
+    base: "pulpit",
+    sense: "sound",
+    prose: [
+      "The new meetinghouse was raw pine still smelling of sap, and from its pulpit {given_name} {surname} addressed a congregation arguing, as the whole republic argued, over how free a free people ought to be. Disestablishment was spreading state by state; the old tax-supported churches were falling, and a minister now held his flock by conviction alone, not law. The {family_name} voice could still turn a county's conscience — toward the Federalists' ordered liberty or the Republicans' restless democracy — but it had to earn the hearing now.",
+      "Word came up the post road of revival stirring on the frontier, of camp-meetings where thousands wept and were saved, of a Second Awakening that would remake American faith from the bottom up. {given_name} weighed the cold reason of the age of Jefferson against the hot conviction rising in the backcountry, knowing the pulpit that read the moment rightly would shape the soul of the young nation.",
+    ],
+    beats: [
+      {
+        prose: ["An itinerant revivalist asks leave to preach from your pulpit — fire that could fill the pews or split them."],
+        choice: {
+          text: "Open the meetinghouse to the awakening.",
+          motivatorShift: { worldview: -1, reach: 1 },
+          setFlags: ["g1_pulpit_revival"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["The state moves to end its church tax; the old guard begs you to defend establishment."],
+        choice: {
+          text: "Preach for a faith that needs no law to compel it.",
+          motivatorShift: { worldview: -1, honor: -1 },
+          setFlags: ["g1_pulpit_disestablishment"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g1:earlyrepublic:open_law",
+    base: "law",
+    sense: "sight",
+    prose: [
+      "The new courthouse smelled of fresh plaster and ambition, and {given_name} {surname} read the republic's first quarrels in its docket: debt and contract, treason and sedition, the raw edges of a Constitution barely a decade old. The bar was where the young nation argued itself into being — where a lawyer who could marshal Blackstone and the new federal statutes alike could rise from the county court to the assembly, the Congress, perhaps the bench itself. The {family_name} name was being entered, case by case, into the record of how America would be governed.",
+      "Word came down from the federal city of Marshall's court claiming the power to judge the law itself, of the Alien and Sedition Acts and the furious resolves against them, of a republic testing whether its own words bound its own rulers. {given_name} weighed each brief knowing that the precedents set now — by men exactly this obscure — would be the iron frame every later generation argued inside.",
+    ],
+    beats: [
+      {
+        prose: ["A sedition case lands on your desk: defend a printer the government wants silenced, or prosecute him."],
+        choice: {
+          text: "Defend the press, and make your name on the Constitution's edge.",
+          motivatorShift: { politics: 1, honor: -1 },
+          setFlags: ["g1_law_sedition_defense"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A seat in the new state legislature is open to a lawyer who can be trusted to shape its first codes."],
+        choice: {
+          text: "Take it — the men who write the statutes outlast the men who argue them.",
+          motivatorShift: { power: 1, politics: 1 },
+          setFlags: ["g1_law_legislature"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g1:earlyrepublic:open_military",
+    base: "military",
+    sense: "sound",
+    prose: [
+      "The fifes of the new federal army carried thin over the parade ground, and {given_name} {surname}, an officer of a republic that distrusted standing armies, heard in them both opportunity and warning. The Revolution's veterans were the young nation's natural aristocracy — the Society of the Cincinnati, the bounty-land warrants, the easy slide from a wartime commission to a peacetime governorship. The {family_name} sword had been drawn for independence; now it had to find its place in a country unsure whether it wanted soldiers at all.",
+      "Word came up from the frontier of the tribes confederating against the settlements, of St. Clair's army shattered in the Ohio woods, of a republic forced to raise the very army it feared. {given_name} weighed a frontier command against the quieter ladder of militia rank and county office, knowing that in the young nation a reputation won under arms still opened every other door.",
+    ],
+    beats: [
+      {
+        prose: ["A commission in the Legion of the United States offers hard frontier service — and a national name."],
+        choice: {
+          text: "Take the frontier command, and win the family a federal reputation.",
+          motivatorShift: { power: 1, reach: 1 },
+          setFlags: ["g1_military_frontier_command"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["The Cincinnati offer the family a hereditary seat among the Revolution's officer-aristocracy."],
+        choice: {
+          text: "Accept the hereditary honor — and the whisper of an American nobility.",
+          motivatorShift: { lineage: 1, honor: 1 },
+          setFlags: ["g1_military_cincinnati"],
+          gather: true,
+        },
+      },
+    ],
+  },
+];
 
-// 2. build the variant scene objects (each diverts forward to allegiance, skipping the default `open`).
-const built = VARIANTS.map((v) => ({
-  id: v.id,
-  sense: v.sense,
-  requires: { flags: [`base:${v.base}`], notFlags: [] },
-  next: ALLEGIANCE,
-  prose: v.prose,
-  beats: v.beats,
-}));
+/**
+ * Apply one act's base-flavored opening variants, idempotently: each variant scene is gated on its
+ * `base:*` flag + diverts to `divertTo` (skipping the default `open`); the default `open` is gated to NOT
+ * fire for any covered base (so an uncovered/default base — press at g0 — gets it). `actId` is the act,
+ * `openId` its default opening scene, `divertTo` the scene the variants jump forward to.
+ */
+function applyAct(actId, openId, divertTo, variants) {
+  const ids = variants.map((v) => v.id);
+  const act = doc.acts.find((a) => a.id === actId);
+  if (!act) throw new Error(`no act ${actId}`);
+  // 1. drop any prior variant scenes (idempotent re-apply).
+  doc.scenes = doc.scenes.filter((s) => !ids.includes(s.id));
+  act.scenes = act.scenes.filter((id) => !ids.includes(id));
+  // 2. build the gated variant scenes (each diverts past the default open to divertTo).
+  const built = variants.map((v) => ({
+    id: v.id,
+    sense: v.sense,
+    requires: { flags: [`base:${v.base}`], notFlags: [] },
+    next: divertTo,
+    prose: v.prose,
+    beats: v.beats,
+  }));
+  // 3. insert before the default open in the scenes array (resolveEligible walks act.scenes in order).
+  const openIdx = doc.scenes.findIndex((s) => s.id === openId);
+  if (openIdx < 0) throw new Error(`no ${openId}`);
+  doc.scenes.splice(openIdx, 0, ...built);
+  // 4. prepend the variant ids before the default open in the act's scene list.
+  const openListIdx = act.scenes.indexOf(openId);
+  act.scenes.splice(openListIdx, 0, ...ids);
+  // 5. gate the default open to NOT fire for a covered base (the divert already skips it; this is explicit).
+  const open = doc.scenes.find((s) => s.id === openId);
+  open.requires = { flags: [], notFlags: variants.map((v) => `base:${v.base}`) };
+  return built.length;
+}
 
-// 3. insert the variant scenes immediately BEFORE the default `open` in the scenes array (order is the
-//    authoritative traversal sequence; resolveEligible walks act.scenes, so the variants must precede open).
-const openIdx = doc.scenes.findIndex((s) => s.id === "spine:g0:founding:open");
-if (openIdx < 0) throw new Error("no spine:g0:founding:open");
-doc.scenes.splice(openIdx, 0, ...built);
-
-// 4. prepend the variant ids before `open` in g0's scene list.
-const openListIdx = g0.scenes.indexOf("spine:g0:founding:open");
-g0.scenes.splice(openListIdx, 0, ...VARIANT_IDS);
-
-// 5. gate the default `open` (the press scene) to NOT fire when a non-press base variant would — the
-//    divert already skips it, but the notFlags make the default explicitly the press/uncovered case.
-const open = doc.scenes.find((s) => s.id === "spine:g0:founding:open");
-open.requires = { flags: [], notFlags: VARIANTS.map((v) => `base:${v.base}`) };
+const n0 = applyAct(
+  "spine:g0:founding",
+  "spine:g0:founding:open",
+  ALLEGIANCE,
+  VARIANTS,
+);
+const n1 = applyAct(
+  "spine:g1:earlyrepublic",
+  "spine:g1:earlyrepublic:open",
+  "spine:g1:earlyrepublic:doctrine",
+  G1_VARIANTS,
+);
 
 writeFileSync(PATH, `${JSON.stringify(doc, null, 1)}\n`);
-console.log(`inserted ${built.length} base-variant scenes; g0 scenes now: ${g0.scenes.length}`);
+console.log(`inserted base-variant openings — g0: ${n0}, g1: ${n1}`);

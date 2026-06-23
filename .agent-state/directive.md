@@ -1029,11 +1029,15 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   OnboardingScreen's givenSuggestions + founding.ts's seeded pick. Falls back to the un-filtered pool only if
   the surname is the sole available name (correctness over cosmetics). 2 dedup unit tests; 742 unit + onboarding
   browser + tsc + check green. No more "Sterling Sterling".
-- [ ] **FS-SPINE-ORIGIN-FLAVOR-DEPTH — extend base-flavored openings beyond g0 (incremental).** The MVP
-  flavored only the FOUNDING act (g0). The early-republic + antebellum acts (g1/g2) could likewise open
-  differently for a press vs. land vs. military line, deepening how much the origin choice echoes forward.
-  Same approach B pattern (base-gated scene variants via scripts/fs-spine-origin-flavor.mjs, extended). Lower
-  priority than the completion review; do after the PR or as bandwidth allows.
+- [x] **FS-SPINE-ORIGIN-FLAVOR-DEPTH — DONE for g1 (early republic).** Extended the base-flavored openings to
+  Act II (g1 "The Crucible of the Young Republic"): 5 base-gated early-republic opening scenes (land/commerce/
+  pulpit/law/military), each diverting to the g1 `doctrine` scene; the maritime/shipwright `open` stays the
+  press/default. Generalized scripts/fs-spine-origin-flavor.mjs into a reusable `applyAct(actId, open, divert,
+  variants)` covering both g0 + g1 (idempotent, regen-safe re-apply). spineOriginFlavor.unit generalized to
+  assert BOTH acts (g0 + g1) per base. Also folded the reviewer's out-of-scope find: family.ts partner naming
+  now excludes the protagonist surname (ONO-DEDUP applied uniformly — no "Sterling Sterling" in-law). 749 unit
+  + 106 browser + tsc + check green. g2+ (antebellum onward) remain a future incremental pass if wanted —
+  the applyAct pattern makes each act a config block + 5 authored scenes.
 - [x] **VL-5 — INVESTIGATED: not a bug + small polish applied.** The empty frame was a LOAD-TIMING artifact,
   not a derivation bug: the g0 scene id IS `spine:g0:founding:open` (matches the portraitSrc regex), the PNG
   exists, the path is correct — the 1.7MB portrait just hadn't finished decoding 1s after founding. 2s later
