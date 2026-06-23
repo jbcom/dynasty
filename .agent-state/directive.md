@@ -1120,17 +1120,16 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ### Rolling backlog (post-WV-3 — keep this section ≥3 actionable, append before draining)
 
-- [ ] [WAIT-REVIEW] **CONVERGENCE-ENDING-DEPTH PR #112 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/convergence-ending-depth: reachability audit (all 15 endings reachable) + earned-finale prose
-  per ending in LegacyReport. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward
-  + resolve threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main, next branch off
-  main for the rolling backlog (WV-3-SHOCK-RECOVERY / SAGA-AUDIO-ATMOSPHERE / CORPUS-MINE).
+- [x] **CONVERGENCE-ENDING-DEPTH PR #112 — DONE, MERGED (squash 7be3df2).** Reachability audit + earned-finale
+  prose shipped. CI green; CodeRabbit pass; Gemini medium (hoist initMotivators in the test) FIXED + thread
+  resolved; self-squash-merged. Post-merge Release + CD + CodeQL all SUCCESS (deployed). Synced main, deleted
+  branch. Now on feat/wv3-shock-recovery for the next backlog item.
 
 - [x] **WV-3-SHOCK-SCENES PR #110 — DONE, MERGED (squash 1452750).** Narrated-loss aftermath shipped. CI
   green; CodeRabbit pass; Gemini high finding (lastShock not cleared on the event-flow choose() path) FIXED +
   thread resolved; self-squash-merged. Post-merge Release + CD + CodeQL on main all SUCCESS (deployed). Synced
   main, deleted branch. Now on feat/convergence-ending-depth for the rolling backlog.
-- [ ] [WAIT-REVIEW] **WV-3-SHOCK-RECOVERY — a recovery ARC, not just a loss line.** WV-3-SHOCK-SCENES narrates the loss for
+- [ ] **WV-3-SHOCK-RECOVERY — a recovery ARC, not just a loss line (on feat/wv3-shock-recovery).** WV-3-SHOCK-SCENES narrates the loss for
   one turn; the next lever is a RECOVERY beat — a shock that struck a meter/family should open a small later
   opportunity to recover (rebuild after the fire, a remarriage after a death, clearing a scandal). Model it as
   a seeded follow-on so the loss has a two-act shape (blow → recover/compound). Pure+seeded; re-audit divergence.
