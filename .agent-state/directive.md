@@ -159,12 +159,12 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   ~62ch reading column so the float sits inside the measure; shape-outside rounds the wrap to the plate. Verified
   live (mobile 412px screenshot — prose hugs the plate's left edge then reclaims the column below) + a structural
   test (float:right, shape-outside set, portrait precedes the prose in .scene-body).
-- [ ] **EI-9 COMPLETE THE PORTRAIT-MATRIX ASSET SWEEP** — the EI-8 wiring is live + the founding-era slice is
-  generated, but the full composite matrix (other era bands × life-stages × encounter roles, ~294+ keys) isn't on
-  disk yet; the on-demand cache covers gaps at runtime but a pre-gen pass gives the shipped build real portraits
-  across the centuries. Run `pnpm vite-node scripts/genai-portraits.ts` (the Gemini image key is wired) era-band by
-  era-band; idempotent (skips existing). READ a sample from each era band + a high-rung archetype (CEO/celebrity/
-  cult-leader/crime) to confirm the wardrobe reads. Asset-only; commit per era band so the diff stays reviewable.
+- [ ] **EI-9 PORTRAIT-MATRIX ASSET SWEEP — IN PROGRESS (4/8 era bands done).** Generated the adult matrix (7
+  archetypes incl. crime × 3 tiers × 2 genders) for founding_1700s, federal_1800s, industrial_late1800s,
+  early_1900s (committed e644ce1 + EI-8f). READ samples confirm wardrobe×era×archetype compose (e.g. early_1900s
+  crime-high = a watch-chained suited boss). REMAINING era bands: midcentury, digital_modern, near_future, stellar
+  — run `pnpm vite-node scripts/genai-portraits.ts -- --era <band>` (Gemini image key wired; ~38 imgs/band, idempotent),
+  READ a high-rung sample per band, commit per band. On-demand cache covers any ungenerated key at runtime meanwhile.
 - [ ] [WAIT] **EI-6b-ui + EI-7 + EI-8 PR #194 — merge on green.** 3 local reviewers clean; Amazon-Q placeById-guard
   folded (29435b2). EI-8a–f shipped (composite portrait matrix, on-demand cache, founding-era assets). Live-verified
   in Chrome (emergence opens on "You are born…", senses→4 glowing inline sense-choices→naming speaks "Gwendolyn
