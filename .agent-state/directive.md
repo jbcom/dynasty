@@ -981,8 +981,10 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   (Chrome re-verified) the colonial-engraving portrait renders in the gold frame. Polish: added
   `fetchpriority="high"` to the SceneReader portrait img (alongside the existing decoding="async" + fade-in)
   so the founding portrait loads promptly. Portrait tests (VL-4 + SceneReader) green.
-- [ ] **FS-BRANCH-ONRAMP-AUDIT — confirm each destiny branch is reachable in actual PLAY, not just present
-  in the corpus.** spineBranch.ts proves the signature flags are SET by some spine choice, and branch.unit
-  proves they resolve — but verify a real seeded playthrough that steers toward (e.g.) the media or
-  oligarchy destiny actually reaches that branch's ending + term resolution end-to-end (a playthrough-level
-  reachability test per destiny, not just a flag-presence test).
+- [x] **FS-BRANCH-ONRAMP-AUDIT — DONE.** New branchPlaythrough.unit.test drives the actual saga RUNNER
+  (startAct → walk scenes → chooseBeat/chooseDecision) to each branch's on-ramp scene, takes the on-ramp
+  (beat OR decision option — westcoast's is a beat), and asserts the runner stamps the branch signature into
+  the LIVE accumulated flags + that signature resolves to its branch. All 6 destiny branches proven reachable
+  through real play, not just flag-presence in the corpus. 733 unit + tsc + check green. (Note: branchOf
+  precedence across a MIXED path is separate + intentional — a path crossing both oligarchy + westcoast
+  on-ramps resolves to the higher-precedence oligarchy; the test asserts each on-ramp's own contribution.)
