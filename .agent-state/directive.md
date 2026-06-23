@@ -30,6 +30,94 @@ by construction.
 
 ## ROLLING BACKLOG — always non-empty, work top-down, append before draining
 
+## ★TOP PRIORITY — EMERGENT-INFANCY ONBOARDING (user, 2026-06-23, HIGHEST-ORDER — outranks everything)★
+
+**Mandate (verbatim intent, two messages):** "i counted TEN choices before you even start. ALL could
+have been woven into the fabric of the journey either at the beginning middle or end of the first act.
+by removing formative years from infancy we remove diegetic sensory experience of some of those and keep
+them from emerging naturally. also instead of choices being sentences WITHIN scannable dialogue glowing
+and bigger sized we're still showing them below the paragraph of text just... without buttons. also by
+offering THREE locations to start at you force needing to write three competing storylines for at least
+part of the act. would be better to EMERGE location based on sensory experiences of the newborn that
+crystallize into an awareness of surroundings. what does the baby hear? smell? touch? taste? … also what
+is the first friend like? first betrayal? first loss? first romance? early schooling?"
+
+**The problem (confirmed by my own ONBOARDING-SCREEN-SHOT / FUNNEL-FULL-WALK screenshots this session):**
+the founding identity is chosen up-front as a ~10-step MENU funnel (region → power base → standing →
+naming tradition → surname → gender → given → life-seeds). That is the opposite of the diegetic,
+seed-dealt, *discovered-through-birth* identity the game's own CLAUDE.md promises ("identity is composed
+from PLACE × CULTURE × ERA × ARCHETYPE … discovered through a diegetic, seed-dealt birth"). The Epoch-0
+birth WAS that, and it was retired ([[mmm-epoch0-birth-beat]] / novel-acts cut-over) — which threw out
+the formative-years sensory texture with it.
+
+**The redesign — identity EMERGES through a lived infancy/childhood, not a menu:**
+1. **No upfront choice menu.** Deal the seed; open IN the newborn's body. Identity facets surface as the
+   child experiences the world, the player's reactions nudging (not picking) where ambiguous.
+2. **Location crystallizes from the SENSES.** What the baby HEARS (gulls + harbor bells vs mill-clatter
+   vs cicadas over tobacco rows), SMELLS (cod-and-brine vs coal vs river-mud), TOUCHES (rough wool vs
+   linen vs bare-board floor), TASTES — these resolve INTO an awareness of place. One emergent location,
+   not three competing picked storylines (which would force writing three Act-1 branches).
+3. **Choices are GLOWING INLINE dialogue** — bigger, scannable, woven INTO the prose (the Suzerain
+   pattern, [[suzerain-ui-reference]] / SceneReader inline-glow), NOT plain sentences dumped below a
+   paragraph "without buttons." (The SceneReader already has glowing inline options for saga beats — the
+   ONBOARDING/opening must use that same surface, not the .card/.choices button-list menu.)
+4. **Restore the formative-life beats as emergent diegetic moments** woven across Act 1's beginning /
+   middle / end: first friend, first betrayal, first loss, first romance, early schooling — each a SCENE
+   that both gives sensory/social texture AND lets an identity facet (power base, standing, naming, the
+   line's bent) crystallize from how it's lived, rather than be declared on a card.
+5. **The ~10 facets all still get SET** — just woven, not front-loaded: region/place (from senses, beat 1),
+   standing + power base (from the family's circumstances + the child's early inclinations, mid Act 1),
+   naming/surname/gender/given (named in-fiction as they would be — at the naming beat, by the parents),
+   life-seeds (from the formative beats). foundByComposition stays the pure seam; the funnel feeding it is
+   replaced by the lived opening's accumulated choices/flags.
+
+**This is a milestone, not a one-PR fix.** Step 1 of the unit (per agent-state doctrine) = USE-CASE
+ENUMERATION before code: list every identity facet the current funnel sets + where in a lived Act-1 each
+could emerge (sense / family-circumstance / formative-beat / naming-beat); read the retired Epoch-0 spec
+([[mmm-epoch0-birth-beat]], docs/STATE.md "diegetic birth (Epoch 0) — RETIRED") to mine its sensory-cue
+→ place mechanic; design the DATA MODEL for an emergent-opening act (how senses accumulate into a resolved
+place; how formative beats set life-seeds/flags) and write the decision into a spec doc BEFORE building.
+Then build the opening act, wire it to foundByComposition, retire the .card funnel, ship behind the gate.
+
+### EMERGENT-INFANCY queue (work top-down; expand as use-case enumeration surfaces sub-steps)
+- [ ] **EI-1 USE-CASE ENUMERATION + SPEC** — enumerate the ~10 funnel facets × where each emerges in a lived
+  Act 1 (sense / family-circumstance / formative-beat / naming-beat); mine the retired Epoch-0 sensory-cue→place
+  mechanic; pick the data model (sense-accumulation → resolved place; formative-beat → life-seed/flag); write
+  `docs/superpowers/specs/2026-06-23-emergent-infancy-onboarding-design.md` (decision + why) BEFORE any code.
+  Read [[never-ask-direction]] — decide + log, don't ask; but DO surface 2-3 architectural options in the spec.
+- [ ] **EI-2 SENSORY-PLACE-RESOLUTION** — the opening beat(s): the newborn's hear/smell/touch/taste resolve
+  INTO one place (deterministic from seed + the player's sensory-reaction taps), replacing the 3-location pick.
+  Pure sim + the SceneReader inline-glow surface; tested (same seed → same resolved place; reactions nudge).
+- [ ] **EI-3 GLOWING-INLINE-OPENING** — the opening uses the SceneReader's glowing inline-dialogue choices
+  (bigger, scannable, woven in the prose), NOT the .card/.choices button menu. Retire the funnel's menu surface.
+  Tested (the opening renders inline-glow options, no .card button-list).
+- [ ] **EI-4 FORMATIVE-BEATS** — author first-friend / first-betrayal / first-loss / first-romance / early-
+  schooling as emergent Act-1 scenes that set life-seeds + crystallize facets (power base / standing / bent).
+  Woven across beginning/middle/end of Act 1. Content + sim flags; tested (each beat sets its facet/seed).
+- [ ] **EI-5 NAMING-IN-FICTION** — surname/gender/given/naming-tradition are named diegetically at the naming
+  beat (by the parents, in the child's hearing), not picked on a card. Wire to foundByComposition. Tested.
+- [ ] **EI-6 RETIRE-THE-FUNNEL + WIRE** — replace the OnboardingScreen .card funnel with the lived opening's
+  accumulated state feeding foundByComposition; the New Game path opens the emergent infancy, not the menu.
+  Update/retire the funnel tests; full gate incl. e2e (the entry-flow e2e must walk the new opening). Tested.
+- [ ] **EI-7 PORTRAIT-TEXT-WRAP LAYOUT (user, 2026-06-23)** — the scene prose must FLOW alongside the portrait and
+  then continue DOWN BELOW it (a magazine wrap — float/shape the portrait, text wraps beside then under), not
+  portrait-block-then-text-block stacked. Applies to the SceneReader / play surface. Visual; screenshot + READ that
+  the wrap reads as intended at mobile width. (Portraits are an ESTABLISHED part of the game — [[visual-layer-revival]].)
+- [ ] **EI-8 GENAI LIFE-STAGE × ERA × ENCOUNTER PORTRAITS (user, 2026-06-23)** — the existing GenAI image pipeline
+  must generate portraits matched to LIFE STAGE (infant / child / youth / adult / elder — the cycles of birth →
+  growth → death recur every generation) AND to the ERA the beat sits in (not just the 3 coarse macro-bands —
+  the line runs 1770s→stars over 300+ years, so a child in 1790 ≠ a child in 1990 ≠ a child among the stars), AND
+  for ENCOUNTER characters (storyline figures met across the 300+ years get their own era/age-appropriate portrait).
+  ALSO key on the line's PATH / power-base WARDROBE (user, 2026-06-23): "different path ways — religious garb,
+  celebrity garb of different types, cult leader, CEO, etc. … the widest range of generative art." A portrait
+  reflects WHO the line has become — a religious archetype reads in vestments, an entertainment one in celebrity
+  dress, a crime/cult/CEO path each its own look — scaled by how far it's climbed (rung). So the portrait key is
+  LIFE-STAGE × ERA × ARCHETYPE/PATH(+rung) × (encounter role). Use the EXISTING genai pipeline (images+video), the
+  polished signature look, NEVER hand-drawn SVG ([[visual-layer-revival]]). Step 1 = enumerate the full portrait
+  DEMAND matrix (life-stages × eras × archetype-wardrobes × rung × encounter roles) + the prompt/asset key scheme +
+  caching strategy (the matrix is large — generate-on-demand + cache, not eagerly), write into the EI spec, THEN
+  generate. Milestone; many sub-steps will surface — DO NOT blanket-generate; enumerate + cache by key.
+
 ## TOP PRIORITY — UNIQUENESS milestone (user, 2026-06-22, highest-order)
 Three connected user directives, one root cause. AUDIT (cheap, computed): 503 of 504 acts share ONE
 identical structural skeleton (open[2]/turn[2,d2]/rising[2]/midpoint[2,d3]/close[2,d3]); prose is
