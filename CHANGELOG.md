@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.0](https://github.com/jbcom/dynasty/compare/v0.21.0...v0.22.0) (2026-06-23)
+
+
+### Features
+
+* **saga:** spine origin-flavor depth g6–g9 — the origin echoes to the stars ([#104](https://github.com/jbcom/dynasty/issues/104)) ([970dcda](https://github.com/jbcom/dynasty/commit/970dcda16cb1299c2b46595690649da08f4379c4))
+
 ## [0.21.0](https://github.com/jbcom/dynasty/compare/v0.20.0...v0.21.0) (2026-06-23)
 
 
