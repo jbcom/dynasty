@@ -1057,18 +1057,21 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   on-ramps resolves to the higher-precedence oligarchy; the test asserts each on-ramp's own contribution.)
 ## Post-PR backlog (keep the queue non-empty — [[never-drain-queue]])
 
-- [ ] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G2+ — extend base-flavored openings to g2+ (antebellum onward).**
-  UNBLOCKED — PR #100 merged; now on a fresh long-running branch `feat/spine-origin-depth`. Next: author g2
-  (antebellum) base-variant openings via the applyAct() pattern, then later gens as bandwidth allows.
-  g0 (founding) + g1 (early republic) now open differently per power base. The applyAct() pattern in
-  scripts/fs-spine-origin-flavor.mjs makes each further act one config block + 5 authored base-variant
-  scenes diverting to that act's second scene. Author g2 (antebellum) next, then later gens as bandwidth
-  allows — deepening how far the origin choice echoes. Incremental; lower priority than live-PR feedback.
+- [x] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G2 — DONE.** g2 (Act III antebellum "The Sundered Threshold") now has
+  5 base-flavored openings (land/commerce/pulpit/law/military) gated on base + diverting to its allegiance
+  scene; industrial/textile open is the commerce/default. Sectional-crisis voiced (King Cotton, the
+  abolitionist denominational split, Dred Scott + higher law, Union-vs-section). Same idempotent applyAct()
+  pattern (now g0+g1+g2); spineOriginFlavor.unit asserts all three acts per base (21 tests). 757 unit + 106
+  browser + tsc + check green. On branch `feat/spine-origin-depth`.
+- [ ] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G3+ — extend base-flavored openings to g3 (gilded age) onward.** The
+  pattern is now proven across 3 acts; each further gen is one applyAct() config block + 5 authored
+  base-variant scenes diverting to that act's second scene. Author g3 (gilded age) next, then later gens —
+  deepening how far the origin choice echoes toward the stars. Incremental.
 - [x] **FS-PR-LOOP — DONE → PR #100 MERGED (squash 94c694a).** First CI pass green; addressed all 6 CodeRabbit
   findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision pin) + a regression test in a
   forward commit + resolved all 6 threads → CLEAN; re-run CI green; self-squash-merged. release-please then
   auto-cut + merged release 0.20.0 (#101). Synced local main, deleted the merged branch (remote auto-deleted).
-  [WAIT-VERIFY] post-merge Release + CD workflows on main are in_progress (monitor bwrtttirq) — confirm green.
+  Post-merge Release + CD (+ CodeQL) on main all completed SUCCESS — release 0.20.0 shipped clean.
   (orig babysit-pr note kept below.) Once the PR is open: wait CI green,
   read every comment + any CHANGES_REQUESTED, address/resolve all review threads (CodeRabbit etc.), keep
   Release/CD green, then self-squash-merge once green + threads resolved + DoD met. ([[babysit-pr]],
