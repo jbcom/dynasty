@@ -1118,19 +1118,19 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ## Gameplay-depth backlog (the "hour+" mandate — keep the queue non-empty, [[never-drain-queue]])
 
-- [ ] [WAIT-REVIEW] **SPINE-DEPTH PR #106 — wait CI green + address CodeRabbit, then self-squash-merge.**
-  Pushed feat/spine-depth-content (27 commits) → PR #106. The whole spine-depth milestone: SAGA-RESTORE-CURSOR,
-  SPINE-ACT-DEPTH (all 10 acts, 3 interstitials each, hour mandate met), SAGA-CLOCK-DECOUPLE,
-  TRIGGER-CROSSING-RECORD, SPINE-WEAVE-PAYOFF ×2, MAP-ERA-PROGRESS-RICHER + content QA. Loop: wait
-  build-and-test + CodeQL green, read every CodeRabbit/Amazon-Q comment, fix in forward commits + resolve all
-  threads, keep Release/CD green, self-squash-merge once green + threads resolved ([[babysit-pr]],
-  [[jbcom-org-ruleset]]). After merge: sync main, new branch for WV-3-YUKA.
-- [ ] [WAIT-REVIEW] **WV-3-YUKA — emergent rival reactions (anti-Suzerain layer 2) — START AFTER #106 MERGES.**
+- [x] **SPINE-DEPTH PR #106 — DONE, MERGED (squash 045f7d5; release 0.22.0 auto-cut).** The whole spine-depth
+  milestone shipped: SAGA-RESTORE-CURSOR, SPINE-ACT-DEPTH (all 10 acts, 3 interstitials each, hour mandate
+  met), SAGA-CLOCK-DECOUPLE, TRIGGER-CROSSING-RECORD, SPINE-WEAVE-PAYOFF ×2, MAP-ERA-PROGRESS-RICHER + content
+  QA ×4. CI all green; CodeRabbit pass + 0 unresolved threads; Amazon-Q + Gemini reviews positive, no
+  actionable findings. Self-squash-merged. Synced main, deleted the branch.
+- [ ] [WAIT] **POST-MERGE-VERIFY #106 — Release + CD + CodeQL on main green.** Merge triggered Release/CD/CodeQL
+  on main (in_progress). Monitor to SUCCESS; if Release or CD fails, investigate (it builds/deploys what
+  shipped). DoD "verify the app RUNS" — the deployed 0.22.0 should serve the deepened spine.
+- [ ] **WV-3-YUKA — emergent rival reactions (anti-Suzerain layer 2) — UNBLOCKED, on feat/wv3-yuka-emergent.**
   WV-3 proved seeded market/run divergence; the further layer ([[emergent-cause-effect-sim]]) is rival lines
   REACTING to the player (Yuka-style GOAP) + seeded disease/disruption shocks so playthroughs diverge in
-  EVENTS, not just economy. The top depth lever now (hour mandate met; this is replayability). A large net-new
-  feature → must start on a FRESH branch off updated main AFTER PR #106 squash-merges (one-branch discipline:
-  can't layer it on the in-review branch, can't branch off un-merged work). Begin with use-case enumeration.
+  EVENTS, not just economy. The top depth lever now (hour mandate met; this is replayability). Fresh branch off
+  merged main. Begin with use-case enumeration before any code.
 - [x] **SPINE-CONTENT-QA-4 — DONE (commit d35c7c4, pushed to PR #106).** Full uniqueness scan of all 30
   interstitials. Opening sentences + beat openers already varied (0 first-3-word opener repeats; 54/60
   distinct beat openers). CAUGHT: the reversal SECOND paragraphs shared one skeleton — 9/10 opened "The [X]
