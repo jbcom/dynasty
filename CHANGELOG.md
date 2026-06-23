@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.54.0](https://github.com/jbcom/dynasty/compare/v0.53.0...v0.54.0) (2026-06-23)
+
+
+### Features
+
+* empty-state grace notes, guarded omen-badge a11y, map-wiring proof ([#171](https://github.com/jbcom/dynasty/issues/171)) ([79f3fd3](https://github.com/jbcom/dynasty/commit/79f3fd357a7819b79a8b7ecacf0ea16a042a38ed))
+
 ## [0.53.0](https://github.com/jbcom/dynasty/compare/v0.52.0...v0.53.0) (2026-06-23)
 
 
