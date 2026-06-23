@@ -87,14 +87,31 @@ export class GameStore {
   // ---- DEV HARNESS OVERLAY (CP-R7) — gated to dev builds by the caller ----
 
   /**
-   * Fast-forward: auto-resolve up to `n` beats by picking the first eligible choice
-   * of the current event each step. Stops at the run's end. Dev-only — lets a
-   * reviewer skip generations to inspect the late-game timeline quickly.
+   * Fast-forward: auto-resolve up to `n` steps, picking the first eligible choice each step. Stops at
+   * the run's end. Dev-only — lets a reviewer skip generations to inspect the late-game timeline quickly.
+   * Saga-aware: a FOUNDED line plays SAGA scenes (currentEvent is usually null), so resolve the current
+   * scene (its terminal decision, else its first weave beat); fall back to the event path otherwise.
    */
   async devFastForward(n: number): Promise<void> {
     for (let i = 0; i < n && !this.game.finished; i++) {
-      const ev = this.view.currentEvent;
-      const choice = ev?.choices[0];
+      const scene = this.view.saga.scene;
+      if (scene) {
+        if (scene.decision) {
+          // Prefer a SUCCESSION-bearing option (take partner / beget) so the line advances to the next
+          // generation — otherwise a non-succession close stalls the spine at the current gen.
+          const opts = scene.decision.options;
+          const succIdx = opts.findIndex(
+            (o) => o.succession && (o.succession.takesPartner || (o.succession.begets ?? 0) > 0),
+          );
+          // eslint-disable-next-line no-await-in-loop -- sequential by design
+          await this.pickDecision(succIdx >= 0 ? succIdx : 0);
+        } else {
+          // eslint-disable-next-line no-await-in-loop -- sequential by design
+          await this.pickBeat(0);
+        }
+        continue;
+      }
+      const choice = this.view.currentEvent?.choices[0];
       if (!choice) break;
       // eslint-disable-next-line no-await-in-loop -- sequential by design
       await this.choose(choice.id);
