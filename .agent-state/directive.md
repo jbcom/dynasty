@@ -1227,7 +1227,7 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   rivals' bars red), sorted high→low, so the player tracks the whole race mid-run, not just at the close.
   Reads view.rivalStandings + view.rung (wired through PlayScreen). Views.browser pins the sort order, player
   slot, faltering accent, and empty case. 881 node + 119 browser green, gate clean.
-- [ ] **RIVAL-CROSSING-EXPLOIT — let the player ACT on a faltering rival (OWN branch — save-invariant design needed).**
+- [ ] [WAIT-REVIEW] **RIVAL-CROSSING-EXPLOIT — let the player ACT on a faltering rival (OWN branch after #126 — save-invariant design needed).**
   A faltering rival is a window; let the player press it (nudgeRival -1 + a heat/attention cost). ARCHITECTURAL
   FINDING (this analysis): a player-initiated press CANNOT go in the RNG-keyed `history` array — every saga RNG
   fork is keyed on `history.length`, so inserting a press entry between beats shifts subsequent fork labels and
@@ -1240,17 +1240,19 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   the stars (distinct for player-also-stars vs not), the whole field fallen behind you, or a still-contested
   race. LegacyReport narrates it beneath the finale prose; a failed/unfounded run gets no coda. convergence.unit
   (5 cases) + screens.browser (render + empty). 886 node + 120 browser green, gate clean.
-- [ ] **SHOCK-FORESHADOW — a near-future hazard hints before it strikes (dread, not just aftermath).** WV-3
+- [ ] [WAIT-REVIEW] **SHOCK-FORESHADOW — a near-future hazard hints before it strikes (after #126).** WV-3
   shocks land then narrate aftermath; the player never feels them coming. When the next saga tick carries an
   elevated shock chance (harsh era + outstanding strain), surface a one-line omen ("the season turns against
   the house") the turn BEFORE, so loss has dread, not just consequence. Reads the era exposure; pure; tested.
-- [ ] **RECOVERY-CHOICE — let the player INVEST in a rebound rather than wait for the seeded roll.** Recoveries
-  fire automatically on quiet ticks; give the player a beat after a blow to spend a meter (money/heat) to RAISE
-  the next recovery's chance/magnitude — turning the comeback into agency, not just luck. Reuses rollSagaRecovery
-  with a player-set bonus; deterministic; tested. (Pairs with RIVAL-CROSSING-EXPLOIT's press side-log pattern.) — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/rival-race-presence (4 commits: falter/rise news, field strip, directive). Full local gate passed.
-  Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads,
-  self-squash-merge once green ([[babysit-pr]]). After merge: sync main, RIVAL-CROSSING-EXPLOIT on a fresh branch.
+- [ ] [WAIT-REVIEW] **RECOVERY-CHOICE — let the player INVEST in a rebound rather than wait for the seeded roll (after #126).**
+  Recoveries fire automatically on quiet ticks; give the player a beat after a blow to spend a meter (money/heat)
+  to RAISE the next recovery's chance/magnitude — turning the comeback into agency, not just luck. Reuses
+  rollSagaRecovery with a player-set bonus; deterministic; tested. (Pairs with RIVAL-CROSSING-EXPLOIT's side-log.)
+- [ ] [WAIT-REVIEW] **RIVAL-RACE-PRESENCE PR #126 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/rival-race-presence (now 4 units: falter/rise news, field strip, rival-fate ending). All review
+  findings (Amazon-Q dedup, Gemini perf/DRY/test-comment) folded forward in 6d00934, all 4 threads resolved.
+  Loop: wait build-and-test + CodeQL, self-squash-merge once green ([[babysit-pr]]). After merge: sync main,
+  RIVAL-CROSSING-EXPLOIT on a fresh branch (the press side-log + reconstruct interleave design).
 - [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
   audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
   diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock
