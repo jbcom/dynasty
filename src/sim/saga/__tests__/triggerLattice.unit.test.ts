@@ -208,4 +208,25 @@ describe("trigger lattice (FS-5)", () => {
     ).map((b) => `${b.family}:${b.branch}`);
     expect(tooEarly).not.toContain("italian:syndicate_crossroads");
   });
+
+  it("SPINE-WEAVE-PAYOFF-2: the further matched flags surface their family threads (kin/surveillance/rupture)", () => {
+    const table = TriggerTableSchema.parse(triggersJson);
+    const fire = (flags: string[], year = 1950) =>
+      evaluateTriggers(
+        table.rules,
+        baseState({ year, era: "emergence", crossings: {}, leanings: {}, flags: new Set(flags) }),
+      ).map((b) => `${b.family}:${b.branch}`);
+
+    // kin-loyalty (g2) → Irish machine politics.
+    expect(fire(["g2_kept_faith_with_kin"])).toContain("ireland:machine_politics_return");
+    expect(fire([])).not.toContain("ireland:machine_politics_return");
+
+    // total data-gathering (g7) → the exclusion/surveillance family thread.
+    expect(fire(["g7_gathered_everything"])).toContain("chinese:exclusion_and_after");
+    expect(fire([])).not.toContain("chinese:exclusion_and_after");
+
+    // co-opted reform (g4) → the great-rupture thread IN its 1914-1933 window only.
+    expect(fire(["g4_co-opted_the_reform"], 1925)).toContain("bavaria:the_great_war_rupture");
+    expect(fire(["g4_co-opted_the_reform"], 1950)).not.toContain("bavaria:the_great_war_rupture");
+  });
 });
