@@ -23,7 +23,6 @@ const MOTION_SURFACES = [
   "saga/SlideOutMenu.svelte",
   "EventCard.svelte",
   "MeterGauge.svelte",
-  "screens/OnboardingScreen.svelte",
 ];
 
 describe("reduced-motion audit (REDUCED-MOTION-AUDIT)", () => {

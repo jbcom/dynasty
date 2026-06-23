@@ -143,13 +143,16 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   the buildEpoch0Opening scene chain (reusing the saga's pure applyBeatChoice/applyDecision accrual), a gathering
   beat stays in-scene, the romance close ends it; the accumulated flags + cues resolve a valid founding via EI-6a.
   Test: openingRunner.unit (start, gather-then-advance, FULL walk → founding, determinism). 946 node green.
-- [ ] **EI-6b-ui OPENING SCREEN + WIRE + RETIRE FUNNEL (UI + engine + e2e)** — build an OpeningScreen that drives the
-  SceneReader through the opening runner (glowing-inline), seed-deals the diegetic identity (surname/given/gender so
-  the naming tokens resolve), and on openingEnded calls back the accumulated flags; App's New Game path opens it (not
-  the .card funnel), then resolveEmergentFounding → resolveFoundingStart → foundByComposition. Retire the
-  OnboardingScreen funnel + its tests; full gate INCL. e2e (the entry-flow e2e walks the new opening). The big
-  entry-flow change — scope carefully (founding reorder, term resolution during the opening, surname dealing). Tested.
-- [ ] [WAIT] **EI-7 PORTRAIT-TEXT-WRAP LAYOUT (user, 2026-06-23)** — the scene prose must FLOW alongside the portrait and
+- [x] **EI-6b-ui OPENING SCREEN + WIRE + RETIRE FUNNEL — DONE (branch feat/ei6b-ui-opening-screen).** New
+  `src/ui/screens/OpeningScreen.svelte` drives the SceneReader through the pure opening runner (glowing-inline beats +
+  decision), founding a PROVISIONAL line up front so the naming beat's {full_name}/{child_kind} tokens resolve, then on
+  openingEnded handing the accumulated flags + dealt cues to App. App's New Game now opens it via `{#key pendingSeed}`
+  (startNewGame draws a hidden seed → screen "opening"; birthGameFromEmergence runs resolveEmergentFounding →
+  resolveFoundingStart → foundByComposition). The family name is SEED-DEALT region-independently
+  (`dealFoundingSurname`, new onomastics export) so provisional == final founding name. Retired the OnboardingScreen
+  funnel + its two tests; rewired SafeAreaAudit + reducedMotion + e2e to the new opening. Full gate green: check 0,
+  typecheck 0/0, unit 950, browser 161, e2e 7, build OK.
+- [ ] **EI-7 PORTRAIT-TEXT-WRAP LAYOUT (user, 2026-06-23)** — the scene prose must FLOW alongside the portrait and
   then continue DOWN BELOW it (a magazine wrap — float/shape the portrait, text wraps beside then under), not
   portrait-block-then-text-block stacked. Applies to the SceneReader / play surface. Visual; screenshot + READ that
   the wrap reads as intended at mobile width. (Portraits are an ESTABLISHED part of the game — [[visual-layer-revival]].)
