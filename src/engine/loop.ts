@@ -286,7 +286,15 @@ export class Game {
       era: macroActForYear(this.state.year),
       flags: this.state.flags,
     });
-    const fired = evaluateTriggers(GAME_TRIGGERS.rules, spine);
+    // Honor `once: true` rules: a branch already crossed (recorded as a `crossed:<family>:<branch>` flag)
+    // must not re-fire on every render its window matches. Derive the already-fired set from those flags
+    // and pass it so once-branches (the arrival vignettes) surface exactly once. Pure (reads state.flags).
+    const firedBranches = new Set<string>();
+    for (const f of this.state.flags) {
+      const m = /^crossed:([^:]+):(.+)$/.exec(f);
+      if (m) firedBranches.add(`${m[1]}:${m[2]}`);
+    }
+    const fired = evaluateTriggers(GAME_TRIGGERS.rules, spine, firedBranches);
     if (fired.length === 0) return [];
     // Each fired branch weaves as a thread naming the recurring family at this tier (the branch's mined
     // fabric prose is borrowed downstream); resolveThreads braids the family's opening fragment in.

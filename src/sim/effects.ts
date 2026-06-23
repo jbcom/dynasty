@@ -376,9 +376,20 @@ export function succeedToHeir(state: GameState, year: number): GameState {
   const namedHeir = state.flags.find((f) => f.startsWith("heir_"))?.slice("heir_".length);
   const succ = succeed(deceased, year, namedHeir, state.founding?.successionMode);
   if (succ.heirId === null) {
-    // No living heir yet — leave the death recorded and let the caller's mortality/extinction path
-    // resolve the run (advanceFamily will detect the protagonist is dead with no heir).
-    return { ...state, family: deceased };
+    // No living heir to promote — the line ends here. We must set the end DIRECTLY: the protagonist is
+    // pre-marked died in `year` (above), so advanceFamily's mortality loop — which only flags
+    // `protagonistDied` for deaths it rolls WITHIN its [fromYear, year) span — will skip the already-dead
+    // member and never fire the line-extinct branch, leaving the run stuck with a dead protagonist and no
+    // heir. (A succession decision that takes a partner but begets no child can reach here.)
+    return {
+      ...state,
+      family: deceased,
+      end: {
+        kind: "line-extinct",
+        year,
+        reason: "No heir was raised to bear the name; the line ends here.",
+      },
+    };
   }
   const heir = succ.family.members.find((m) => m.id === succ.heirId);
   const heirBorn = heir?.born ?? state.birthYear;

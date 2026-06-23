@@ -65,7 +65,7 @@ const INTERSTITIALS = [
       },
       {
         prose: [
-          "A apprentice slips in from the street with the morning's rumor: redcoats counted on the post road, and a crowd already gathering at the wharf.",
+          "An apprentice slips in from the street with the morning's rumor: redcoats counted on the post road, and a crowd already gathering at the wharf.",
         ],
         choice: {
           text: "Send him to listen at the wharf and bring back names, not noise.",
