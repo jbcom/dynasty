@@ -1067,11 +1067,15 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   base-flavored openings (land/pulpit/law/military/press; commerce is the default Broad-Street open). Gilded-Age
   voiced; same applyAct() pattern (g0–g3); spineOriginFlavor.unit generalized to per-act base sets + asserts
   all 4 acts (32 tests). 768 unit + tsc + check green. On `feat/spine-origin-depth`.
-- [ ] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G4+ — extend base-flavored openings to g4 (progressive era) onward.** The
-  applyAct() pattern is proven across 4 acts; each further gen is one config block + 5 authored base-variant
-  scenes diverting to the act's second scene. Author g4 (progressive) next, then g5+ as bandwidth allows —
-  deepening the origin echo toward the stars. NOTE: this branch (feat/spine-origin-depth) is accumulating the
-  g2/g3/g4+ depth work; ship it as ONE PR once a sensible batch (through ~g5) is done, per one-branch review.
+- [x] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G4+G5 — DONE.** g4 (Progressive Era "The Iron Loom of Progress") + g5
+  (mid-century "The Chrome Horizon") each got 5 base-flavored openings (land/pulpit/law/military/press;
+  commerce default). The origin choice now echoes across SIX generations (g0 founding 1776 → g5 mid-century).
+  Same applyAct() pattern (g0–g5); spineOriginFlavor.unit asserts all 6 acts (48 tests). 784 unit + tsc +
+  check green. On `feat/spine-origin-depth` — ready to ship this g2-g5 depth batch as one PR.
+- [ ] **FS-SPINE-DEPTH-PR — ship the g2–g5 origin-flavor batch as one PR.** Full local gate + a reviewer pass
+  on the branch diff (main..HEAD), then push + open the PR, babysit to merge (CI green, address CodeRabbit,
+  resolve threads, self-squash-merge, verify post-merge Release/CD). Then g6+ origin-flavor continues on a
+  fresh branch.
 - [x] **FS-PR-LOOP — DONE → PR #100 MERGED (squash 94c694a).** First CI pass green; addressed all 6 CodeRabbit
   findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision pin) + a regression test in a
   forward commit + resolved all 6 threads → CLEAN; re-run CI green; self-squash-merged. release-please then
