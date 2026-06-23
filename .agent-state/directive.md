@@ -975,6 +975,18 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   affinities for the recurring CAST families (Irish/Italian/Chinese/Jewish/Scandinavian/Bavarian/Arab) are
   still a from-memory DRAFT in guidance.json. Research each ONLINE (WebSearch), cite + myth-flag, correct the
   draft before it drives cast/braid generation. Pairs with the cast being woven as intersections.
+- [ ] **FS-SPINE-ORIGIN-FLAVOR — weave the founding-origin seed flags into the spine's decision flavoring.**
+  The spine.act.json was authored BEFORE the FS-ONB-DRIFT founding-origin model; it doesn't read the new
+  region:/base:/power:/standing: seed flags. A press founder vs. a land founder vs. a military founder should
+  feel different in the early spine acts (gated/flavored options, or a power-base-aware prologue beat). Either
+  add `requires.flags` on existing spine options keyed to the base, or thread the base into the spine prompt
+  on the next regen. Make the player's onboarding choice MATTER in the prose, not just the motivator seed.
+- [ ] **FS-COMPLETION-REVIEW — milestone comprehensive review before the single PR.** The founding-spine
+  completion (VL-3/4/5, WV-3, FS-ONB-DRIFT, FS-SPINE-BRANCH-ONRAMPS, FS-RETIRE-PROLOGUE, UQ-3,
+  FS-BRANCH-ONRAMP-AUDIT) is a large body of work on the one branch. Before opening the single PR
+  ([[one-branch-local-review]]): full local gate + reviewer trio over the whole branch diff (origin..HEAD),
+  fold findings, full e2e (pnpm test:e2e), build, and a final Chrome playthrough of an hour-ish run to
+  confirm the founding→stars arc reads as one strong story. THEN open the PR.
 - [x] **VL-5 — INVESTIGATED: not a bug + small polish applied.** The empty frame was a LOAD-TIMING artifact,
   not a derivation bug: the g0 scene id IS `spine:g0:founding:open` (matches the portraitSrc regex), the PNG
   exists, the path is correct — the 1.7MB portrait just hadn't finished decoding 1s after founding. 2s later
