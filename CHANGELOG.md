@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.44.0](https://github.com/jbcom/dynasty/compare/v0.43.0...v0.44.0) (2026-06-23)
+
+
+### Features
+
+* the apex finale reflects how the line reached the stars ([#151](https://github.com/jbcom/dynasty/issues/151)) ([0d82a7e](https://github.com/jbcom/dynasty/commit/0d82a7ec0796fa6d539d68451c774e9d085a386c))
+
 ## [0.43.0](https://github.com/jbcom/dynasty/compare/v0.42.0...v0.43.0) (2026-06-23)
 
 
