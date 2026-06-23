@@ -1026,11 +1026,13 @@ describe("Game loop", () => {
       const g = new Game(real, seed, base, "political");
       // Determinism: the same state yields the same foreshadow on a second engine (no RNG consumed).
       const g2 = new Game(real, seed, base, "political");
-      expect(g.view.foreshadow).toBe(g2.view.foreshadow);
+      expect(g.view.foreshadow).toEqual(g2.view.foreshadow);
       let guard = 0;
       while (!g.finished && guard < 200) {
         if (g.view.foreshadow) {
-          expect(g.view.foreshadow).toMatch(/season|house|hard/i);
+          // FORESHADOW-IN-TONE: the omen carries text + a weight the UI styles by.
+          expect(g.view.foreshadow.text).toMatch(/season|house|hard/i);
+          expect(["marginal", "grave"]).toContain(g.view.foreshadow.weight);
           sawOmen = true;
           break;
         }

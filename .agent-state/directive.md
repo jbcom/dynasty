@@ -1258,21 +1258,28 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   kin to lose → "a shadow lies over the season"), or "none". shockForeshadow is a thin boolean wrapper; the
   PlayScreen renders the tiered text. Dread is now proportional to the threat. Tests: sagaShock.unit (3-tier
   gating + strain-dominates-kin) + the existing loop.unit omen test. 896 node + 126 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **FORESHADOW-IN-TONE — the omen's visual register matches its weight (after #132).** FORESHADOW-WEIGHT
-  tiers the TEXT but the PlayScreen renders both the same muted style. Pass the weight to the view + style a
-  "grave" omen in a heavier register (deeper border, less dim) than a "marginal" one, so the dread is felt
-  visually, not just read. View-derived; tested.
-- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust (after #132).**
+- [x] **FORESHADOW-IN-TONE — DONE (feat/foreshadow-in-tone).** view.foreshadow now carries {text, weight}; the
+  PlayScreen styles a "grave" omen in a heavier register (solid red-tinted border, brighter+bolder text) vs the
+  "marginal" one's faint dashed dim. Dread is felt visually, not just read. Tests: loop.unit (omen carries
+  text+weight, deterministic) + PlayScreen.visual (grave border ≠ marginal border). 896 node + 127 browser green.
+- [ ] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust.**
   A foreshadow that rarely precedes a real blow trains the player to ignore it; one that always does is just a
   spoiler. Instrument the foreshadow→next-shock correlation over many seeds; if it's miscalibrated, tune the
   threshold so an omen is a meaningful-but-not-certain warning. Decide from figures (like SHOCK-CADENCE-AUDIT).
-- [ ] [WAIT-REVIEW] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger (after #132).** A rebound
+- [ ] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger.** A rebound
   the player paid for reads the same as a lucky one in the "What Befell" log; stamp the invested recovery (e.g.
   recovered:<meter>:<year>:invested) so the ledger can mark "rebuilt by your own hand" — the player's agency
   shows in the family history. Pure read-model extension; tested.
-- [ ] [WAIT-REVIEW] **FORESHADOW-WEIGHT PR #132 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/foreshadow-weight (1fd5475). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
-  review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, FORESHADOW-IN-TONE.
+- [ ] **AGENCY-IN-LEGACY — the LegacyReport tallies the player's WV-3 agency (presses/invests/braced omens).**
+  The end-game shows the field + hard seasons but not what the PLAYER actively DID across the run — rivals
+  pressed, recoveries invested, omens heeded. Tally these from the side-logs/flags into a "By Your Own Hand"
+  line in the LegacyReport, so the close credits the player's interventions. Pure read-model; tested.
+- [ ] [WAIT-REVIEW] **FORESHADOW-IN-TONE PR — push feat/foreshadow-in-tone, open PR, full remote loop.**
+  1 local commit (weighted view.foreshadow + tiered styling). Full local gate passed. Push, open PR, wait CI,
+  fold review forward + resolve threads, self-squash-merge ([[babysit-pr]]). Then OMEN-PAYOFF-AUDIT.
+- [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
+  (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
+  merged CLEAN. main synced.
 - [x] **RECOVERY-CHOICE PR #130 — DONE, MERGED (squash 61f9061; release cut 0.34.0).** Invest a meter to boost
   the next rebound (side-log + deterministic boost + UI). Gemini caught a high-sev affordability exploit (free
   money boost) — fixed (engine guard + disabled button), all 3 threads resolved, merged CLEAN. main synced.
