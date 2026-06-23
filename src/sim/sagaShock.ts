@@ -281,7 +281,9 @@ const LEDGER_LABEL: Record<ShockLedgerEntry["kind"], string> = {
   recovery: "The line recovered",
 };
 
-// RECOVERY-INVEST-IN-LEDGER: a recovery the player paid for reads with agency — "by your own hand".
+// RECOVERY-INVEST-IN-LEDGER: a recovery the player paid for reads with agency — "by your own hand". The
+// fallback mirrors the plain `LEDGER_LABEL.recovery` voice ("The line recovered") + the agency credit.
+const INVESTED_RECOVERY_FALLBACK = "The line recovered — by your own hand";
 const INVESTED_RECOVERY_LABEL: Partial<Record<MeterId, string>> = {
   health: "The household's strength — restored by your own hand",
   money: "The fortune — rebuilt by your own hand",
@@ -320,9 +322,9 @@ export function shockLedger(flags: Iterable<string>): ShockLedgerEntry[] {
     const recovered = /^recovered:([a-z]+):(\d+)(:invested)?$/.exec(f);
     if (recovered) {
       const meter = recovered[1] as MeterId;
-      const invested = recovered[3] !== undefined;
+      const invested = recovered[3] === ":invested"; // explicit (the capture is literally `:invested`)
       const label = invested
-        ? (INVESTED_RECOVERY_LABEL[meter] ?? "Rebuilt by your own hand")
+        ? (INVESTED_RECOVERY_LABEL[meter] ?? INVESTED_RECOVERY_FALLBACK)
         : (RECOVERY_LABEL[meter] ?? LEDGER_LABEL.recovery);
       out.push({
         year: Number(recovered[2]),
