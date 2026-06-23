@@ -1301,14 +1301,27 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **SHOCK-CLUSTERING-GUARD PR #142 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/shock-clustering-guard (148bd2e). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
   review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-RISE-NEWS-WEIGHT.
-- [ ] [WAIT-REVIEW] **RIVAL-RISE-NEWS-WEIGHT — a rival's surge reads urgency proportional to the rung gap (after #142).** The
-  surge dispatch (RIVAL-RISE-NEWS) is flat — a rival one rung ahead reads the same as one near the stars while
-  you're earthbound. Tier the "outpaced you" headline by the rung gap (just ahead → "pulling away" → "leaving
-  you behind"), so the pressure scales like FORESHADOW-WEIGHT did for dread. View-derived, deterministic; tested.
-- [ ] [WAIT-REVIEW] **MERGE-CADENCE-HEALTH — verify the post-merge Release/CD/CodeQL chain is consistently green (after #142).** Many WV-3
+- [x] **RIVAL-RISE-NEWS-WEIGHT — DONE (feat/rival-rise-news-weight).** The surge dispatch headline now tiers by
+  the rung gap via surgeHeadline(): edged ahead (gap 1) → pulling away (2) → left you behind (3+, capped). The
+  cap was also removed so a far-ahead rival surfaces as the MOST urgent dispatch (was silenced at gap>2). Pure,
+  view-derived; the phrasing extracted to dynastyWorld.surgeHeadline (engine + tests share). Tests: dynastyWorld.unit
+  (3-tier escalation + cap). 901 node + 128 browser green, gate clean.
+- [ ] [WAIT-REVIEW] **RIVAL-RISE-NEWS-WEIGHT PR — push, open PR, full remote loop.**
+  1 commit (gap-tiered surge headline). Full local gate passed. Push, open PR, wait CI, fold review forward +
+  resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, MERGE-CADENCE-HEALTH.
+- [ ] **MERGE-CADENCE-HEALTH — verify the post-merge Release/CD/CodeQL chain is consistently green.** Many WV-3
   PRs have merged; instrument/check that each tagged release (release-please) actually produced its Release +
   CD + CodeQL success on main (no silent post-merge breakage accumulating). A quick gh-run audit over recent
   main SHAs; report any non-green post-merge run. Ops hygiene, not a feature; decide remediation from findings.
+- [ ] **WV-3-DEPTH-PLAYTEST-3 — re-measure the hour with the FULL agency+atmosphere layer live.** SPINE-DEPTH-
+  PLAYTEST-2 measured shocks/recoveries/crossings; since then the layer gained foreshadow omens, rival
+  dispatches (falter/surge), press/invest agency, tiered tone, clustering guard, and the agency ledger. Re-run
+  the depth instrument to confirm the median run still clears the hour (the new beats add read+decide time) and
+  report the updated figure. Decide from figures; lever is more prose only if short.
+- [ ] **RIVAL-DOSSIER-TAB — a dedicated in-run "The Field" panel beyond the Timeline strip.** The field readout
+  lives as a compact strip in the Timeline (CONVERGENCE-FIELD-IN-TIMELINE); for a player tracking the race
+  closely, a fuller dossier (each rival's place, archetype, rung trend, faltering/surging state) deserves its
+  own tab. Reads view.rivalStandings + glimpses; pure read-model; tested. (UI surface, not new sim.)
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release cut 0.36.0).** Weighted view.foreshadow
   + tiered styling (grave reads heavier than marginal). CI green, 0 review threads, merged CLEAN. main synced.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen

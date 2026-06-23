@@ -205,6 +205,17 @@ function rivalShock(agent: DynastyAgent, year: number, rng: Rng): void {
  * interaction. No-op for an unknown id. Pure given the world (mutates the agent in place, as
  * advanceWorld already does); returns the world for chaining.
  */
+/**
+ * RIVAL-RISE-NEWS-WEIGHT: the surge-dispatch headline, tiered by how far a rival has pulled ahead (the rung
+ * gap > 0). Mild when just ahead, urgent when leaving you behind — so the pressure scales like the foreshadow's
+ * dread did. Pure; `name` is the already-humanized place. The ONE home for the phrasing (engine + tests share it).
+ */
+export function surgeHeadline(name: string, gap: number): string {
+  if (gap >= 3) return `The ${name} line has left you behind — its star is nearly out of reach.`;
+  if (gap === 2) return `The ${name} line is pulling away — its star rises fast.`;
+  return `The ${name} line has edged ahead of you.`;
+}
+
 /** Humanize a rival snapshot label / id (`rival:east_coast` → "East Coast") for player-facing copy. The ONE
  *  home for this transform (was duplicated in loop.rivalNews + TimelineView — Gemini #126 DRY). */
 export function humanizeRivalLabel(label: string): string {
