@@ -168,6 +168,34 @@ describe("PlayScreen (composed game screen)", () => {
     expect(getComputedStyle(hope).borderLeftColor).not.toBe(dreadBorder);
   });
 
+  it("OMEN-TONE-A11Y: the tone is conveyed by a TEXT badge, not color alone (WCAG 1.4.1)", () => {
+    const scene = SceneSchema.parse({
+      id: "sc:demo:a11y",
+      sense: "sight",
+      prose: ["The season turns; what it brings depends on where the line stands."],
+    });
+    const badgeFor = (tone: "dread" | "hope") => {
+      const v: GameView = {
+        ...view(),
+        saga: { actTitle: "Act II", scene, threads: [], ended: false },
+        foreshadow: { text: "An omen.", weight: "grave" as const, tone },
+      };
+      if (component) unmount(component);
+      component = mount(PlayScreen, {
+        target: host,
+        props: { content, view: v, busy: false, onchoose: () => {} },
+      });
+      return host.querySelector('[data-testid="foreshadow"] .omen-badge') as HTMLElement;
+    };
+    const hopeBadge = badgeFor("hope");
+    expect(hopeBadge, "the hope omen carries a text badge").not.toBeNull();
+    expect(hopeBadge.textContent).toMatch(/recovering/i);
+    const dreadBadge = badgeFor("dread");
+    expect(dreadBadge.textContent).toMatch(/warning/i);
+    // The two tones are distinguishable by TEXT — a colorblind player doesn't need the hue.
+    expect(hopeBadge.textContent?.trim()).not.toBe(dreadBadge.textContent?.trim());
+  });
+
   it("INVEST-WHILE-HOPE-OMEN: the hope omen renders ABOVE the invest prompt as one coherent beat", () => {
     const scene = SceneSchema.parse({
       id: "sc:demo:rebound-invest",
