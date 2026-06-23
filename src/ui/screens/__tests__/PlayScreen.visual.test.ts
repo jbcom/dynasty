@@ -75,6 +75,48 @@ describe("PlayScreen (composed game screen)", () => {
     expect(host.querySelector("[data-portrait]")).toBeNull();
   });
 
+  it("MAP-TAB-LABEL-ICON-DEDUP: the Map and Field tabs use DISTINCT icons", () => {
+    // A founded line shows BOTH the Map and Field tabs — their icons must differ so the bar reads unambiguously.
+    const base = view();
+    const v: GameView = {
+      ...base,
+      state: {
+        ...base.state,
+        family: {
+          members: [
+            {
+              id: "m0",
+              given: "X",
+              surname: "Vane",
+              sex: "male" as const,
+              born: 1885,
+              generation: 0,
+              traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
+              isProtagonist: true,
+            },
+          ],
+          protagonistId: "m0",
+          nextSeq: 1,
+        },
+      },
+    };
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: v, busy: false, onchoose: () => {} },
+    });
+    const tabButtons = [...host.querySelectorAll("nav.tabs button")];
+    const iconSrcFor = (label: RegExp) =>
+      tabButtons
+        .find((b) => label.test(b.textContent ?? ""))
+        ?.querySelector("img.tab-icon")
+        ?.getAttribute("src");
+    const mapIcon = iconSrcFor(/Map/);
+    const fieldIcon = iconSrcFor(/Field/);
+    expect(mapIcon, "the Map tab renders").toBeTruthy();
+    expect(fieldIcon, "the Field tab renders").toBeTruthy();
+    expect(fieldIcon, "Map and Field tabs use distinct icons").not.toBe(mapIcon);
+  });
+
   it("RECOVERY-CHOICE: offers invest buttons when canInvestRecovery, firing oninvest with the meter", () => {
     const calls: Array<"money" | "heat"> = [];
     // The invest prompt lives in the saga event-pane, so a scene must be present (it's a saga mechanic).
@@ -374,6 +416,48 @@ describe("PlayScreen (composed game screen)", () => {
     const heat = btns.find((b) => b.textContent?.includes("Call in favours"));
     expect(money?.disabled).toBe(true);
     expect(heat?.disabled).toBeFalsy();
+  });
+
+  it("HOPE-OMEN-INVEST-AFFORD-VOICE: the hope-omen invest copy softens when funds are short", () => {
+    const scene = SceneSchema.parse({
+      id: "sc:demo:broke-hope",
+      sense: "sight",
+      prose: ["The worst has passed, but the coffers are bare — what can the house still spend?"],
+    });
+    const brokeHopeful: GameView = {
+      ...view(),
+      state: { ...view().state, meters: { ...view().state.meters, money: 5 } },
+      saga: { actTitle: "Act II", scene, threads: [], ended: false },
+      foreshadow: {
+        text: "The worst is behind you.",
+        weight: "grave" as const,
+        tone: "hope" as const,
+      },
+      canInvestRecovery: true,
+    };
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: brokeHopeful, busy: false, onchoose: () => {}, oninvest: () => {} },
+    });
+    const label =
+      host.querySelector('[data-testid="recovery-invest"] .invest-label')?.textContent ?? "";
+    // When funds are short, the copy doesn't over-promise "pour resources in" — it points to favours instead.
+    expect(label).toMatch(/call in favours if you can't spare the coin/i);
+    expect(label).not.toMatch(/pour resources in to make it count/i);
+
+    // With funds, the full "press the rebound — pour resources in" copy returns.
+    unmount(component);
+    const flushHopeful: GameView = {
+      ...brokeHopeful,
+      state: { ...brokeHopeful.state, meters: { ...brokeHopeful.state.meters, money: 5_000_000 } },
+    };
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: flushHopeful, busy: false, onchoose: () => {}, oninvest: () => {} },
+    });
+    expect(
+      host.querySelector('[data-testid="recovery-invest"] .invest-label')?.textContent,
+    ).toMatch(/pour resources in to make it count/i);
   });
 
   it("RECOVERY-CHOICE: no invest prompt when canInvestRecovery is false", () => {
