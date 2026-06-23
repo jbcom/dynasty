@@ -143,6 +143,37 @@ describe("convergence endings (SS-9 + FS-6b destinies)", () => {
       expect(e.rivalEpilogue).toMatch(/pressed close|undecided/i);
     });
 
+    it("FALLEN-NEWS-IN-ENDING: lines that DROPPED OUT entirely earn a distinct coda (singular vs plural)", () => {
+      // One line dropped out (but the field didn't wholly collapse) → the dropped-out clause, not neck-and-neck.
+      const one = resolveConvergence(
+        ctx({
+          tier: 3,
+          motivators: mot({ lineage: 40 }),
+          rivalField: { reachedStars: 0, fallen: 1, droppedOut: 1, abovePlayer: 1, total: 6 },
+        }),
+      );
+      expect(one.rivalEpilogue).toMatch(/dropped out of the race/i);
+      expect(one.rivalEpilogue).toMatch(/^One line/);
+      // Two+ dropped out → the pluralized clause naming the count.
+      const many = resolveConvergence(
+        ctx({
+          tier: 3,
+          motivators: mot({ lineage: 40 }),
+          rivalField: { reachedStars: 0, fallen: 3, droppedOut: 3, abovePlayer: 0, total: 6 },
+        }),
+      );
+      expect(many.rivalEpilogue).toMatch(/3 lines that raced beside you dropped out/i);
+      // droppedOut omitted/0 falls back to the prior codas (no dropped-out clause).
+      const none = resolveConvergence(
+        ctx({
+          tier: 3,
+          motivators: mot({ lineage: 40 }),
+          rivalField: { reachedStars: 0, fallen: 0, abovePlayer: 2, total: 6 },
+        }),
+      );
+      expect(none.rivalEpilogue).not.toMatch(/dropped out/i);
+    });
+
     it("no rival field (unfounded / no world) → no epilogue", () => {
       expect(resolveConvergence(ctx({ tier: 5 })).rivalEpilogue).toBeUndefined();
       expect(

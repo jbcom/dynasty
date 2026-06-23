@@ -235,6 +235,9 @@ export interface ConvergenceContext {
     reachedStars: number;
     /** How many rival lines ended faltering or failed (fell behind / collapsed). */
     fallen: number;
+    /** FALLEN-NEWS-IN-ENDING: how many rival lines DROPPED OUT of the race entirely (isFallen) — a stricter
+     *  count than `fallen`, surfaced as the in-run "Eliminated" dispatch. Optional for older callers. */
+    droppedOut?: number;
     /** How many rival lines ended at or above the player's own tier (still in the race). */
     abovePlayer: number;
     /** Total rival lines in the field. */
@@ -260,6 +263,14 @@ function rivalEpilogue(
   }
   if (field.fallen >= field.total) {
     return "Every line that raced beside you faltered and fell — yours alone endured to the end.";
+  }
+  // FALLEN-NEWS-IN-ENDING: name the lines that DROPPED OUT entirely when at least one did but the field didn't
+  // wholly collapse — the eliminations the player watched in-run are reckoned at the close.
+  const droppedOut = field.droppedOut ?? 0;
+  if (droppedOut > 0) {
+    return droppedOut === 1
+      ? "One line that raced beside you dropped out of the race entirely; yours pressed on past it."
+      : `${droppedOut} lines that raced beside you dropped out of the race entirely; yours pressed on past them.`;
   }
   if (field.abovePlayer > 0) {
     return "The other lines pressed close behind, the race still undecided when your chapter closed.";
