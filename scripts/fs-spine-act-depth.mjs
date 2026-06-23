@@ -925,5 +925,19 @@ const ACTS = [
 let total = 0;
 for (const actId of ACTS) total += applyInterstitials(actId);
 
+// FIX (divergence-audit caught): the TERMINAL stellar close (g9) carried NO succession on its options, so a
+// fully-succeeded founding→stars line fell to `line-extinct` at g9 instead of the triumphant `apex` ending
+// — the engine's apex branch fires only on `continues` (a succession option) at the terminal generation.
+// Both g9 close options ARE about carrying the line onward (marry / appoint an heir), so stamp succession on
+// them so reaching the stars resolves as the apex. Idempotent (sets the field whether or not it's present).
+const g9Close = doc.scenes.find((s) => s.id === "spine:g9:interstellar:close");
+if (g9Close?.decision) {
+  for (const opt of g9Close.decision.options) {
+    // takesPartner=true makes `continues` true → the apex branch (trueGen >= SPINE_MAX_GEN) fires; at the
+    // terminal generation the engine ends on apex WITHOUT begetting a (non-existent) next generation.
+    opt.succession = { takesPartner: true, begets: 0 };
+  }
+}
+
 writeFileSync(PATH, `${JSON.stringify(doc, null, 1)}\n`);
 console.log(`fs-spine-act-depth: inserted ${total} interstitial scene(s) across ${ACTS.length} acts.`);
