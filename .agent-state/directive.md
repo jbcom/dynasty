@@ -1120,6 +1120,11 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ### Rolling backlog (post-WV-3 — keep this section ≥3 actionable, append before draining)
 
+- [ ] [WAIT-REVIEW] **SHOCK-FAMILY-SUCCESSION-PRESSURE PR #120 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/shock-family-succession-pressure. Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/
+  Gemini, fix forward + resolve threads, self-squash-merge once green ([[babysit-pr]]). After merge: sync main,
+  next branch for the rolling backlog (DOSSIER-SHOCK-LEDGER / CONVERGENCE-RIVAL-FINALE / playtest-2).
+
 - [ ] [WAIT-REVIEW] **CORPUS-MINE-INTERSECTIONS PR #118 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/corpus-mine-intersections: fabric wired into resolveThreads + all 7 families now have vignettes.
   Loop: wait build-and-test + CodeQL, read CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads,
@@ -1169,14 +1174,23 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   vignette per (wave,tier), and resolveThreads now uses it (bespoke → fabric → generic); mine-fabric.ts falls
   back to scene PROSE when a kept scene has no braid-slot vignette → all 7 families now 100% vignette
   coverage. Re-mined (idempotent). Tests: fabricCrossing.unit. 864 node + 113 browser green. PR next.
-- [ ] [WAIT-REVIEW] **SHOCK-FAMILY-SUCCESSION-PRESSURE — a family_death shock that takes the heir forces a real
-  succession scramble (fresh branch).** Today a family_death strikes a non-protagonist; deepen it so losing
-  the GROOMED heir (not just any member) makes the next succession harder/riskier (a weaker fallback heir,
-  a contested handoff), feeding the existing succession mechanic. Seeded; re-audit endKinds spread.
+- [x] **SHOCK-FAMILY-SUCCESSION-PRESSURE — DONE (commit f8fe757).** A family_death shock now targets the
+  GROOMED heir (the heir_<id> flag) at a raised 50% probability when one is named+alive; striking them flags
+  tookHeir, the engine clears the heir_<id> flag → the next succession falls back to the eldest living child
+  (weaker, unplanned), and the aftermath reads the sharper "groomed heir is dead — the succession you planned
+  is undone" line. Pure+seeded. Tests: sagaShock.unit. 865 node + 113 browser green. PR next.
 - [ ] [WAIT-REVIEW] **DOSSIER-SHOCK-LEDGER — record shocks + recoveries in the run's inspectable history.** The
   shock/recovery beats flash for one turn; add them to the Dossier/Timeline so a player can review the line's
   disasters + comebacks across the hour (a "what befell the family" log). Reads the shock:* / recovered flags;
   pure read-model, tested.
+- [ ] [WAIT-REVIEW] **CONVERGENCE-RIVAL-FINALE — the rivals' fates in the LegacyReport.** The convergence ending
+  narrates the PLAYER's finale; the rival lines that raced alongside (the whole point of the convergence layer)
+  vanish at the end. Surface each surviving/fallen rival's final standing + a one-line fate in the LegacyReport
+  so the close reads as the whole field's reckoning, not just the player's. Reads view.rivalStandings; tested.
+- [ ] [WAIT-REVIEW] **SPINE-DEPTH-PLAYTEST-2 — re-measure the hour with shocks/recoveries/crossings live.** The
+  ~48-min playtest predates the WV-3 + fabric layers. Re-run the divergence/playtest instruments to measure
+  the CURRENT depth (shocks add beats, recoveries add ticks, fabric crossings add prose) and confirm a median
+  run crosses the hour; if short, the lever is more interstitial prose or a 4th-act beat. Decide from figures.
 - [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
   audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
   diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock

@@ -63,6 +63,30 @@ describe("rollSagaShock (WV-3-MORTALITY)", () => {
     }
   });
 
+  it("SHOCK-FAMILY-SUCCESSION-PRESSURE: a family_death can take the GROOMED heir, flagging tookHeir", () => {
+    // With c1 named as the groomed heir, across seeds SOME family_death must strike c1 with tookHeir + the
+    // heir_lost note (the raised heir-targeting probability), and any non-heir death must NOT set tookHeir.
+    let sawHeirLoss = false;
+    for (let i = 0; i < 300; i++) {
+      const shock = rollSagaShock(
+        family(),
+        1810,
+        "founding",
+        createRng(`hl${i}`).fork("sagashock"),
+        "c1",
+      );
+      if (shock.kind !== "family_death") continue;
+      if (shock.memberId === "c1") {
+        expect(shock.tookHeir, "striking the named heir flags tookHeir").toBe(true);
+        expect(shock.note).toBe("heir_lost");
+        sawHeirLoss = true;
+      } else {
+        expect(shock.tookHeir).toBeFalsy();
+      }
+    }
+    expect(sawHeirLoss, "the groomed heir is struck in at least one seeded roll").toBe(true);
+  });
+
   it("a meter_blow carries a meter + a delta (a loss, or +heat)", () => {
     for (let i = 0; i < 300; i++) {
       const shock = rollSagaShock(family(), 1810, "founding", createRng(`m${i}`).fork("sagashock"));
@@ -106,6 +130,15 @@ describe("rollSagaShock (WV-3-MORTALITY)", () => {
     // An unknown note still yields a sensible fallback line (never empty).
     const odd = shockNote({ kind: "meter_blow", meter: "power", delta: -5, note: "mystery" });
     expect(odd?.text.length).toBeGreaterThan(0);
+    // SHOCK-FAMILY-SUCCESSION-PRESSURE: a tookHeir family_death reads the SHARPER groomed-heir line.
+    const heirLoss = shockNote({
+      kind: "family_death",
+      memberId: "c1",
+      note: "heir_lost",
+      tookHeir: true,
+    });
+    expect(heirLoss?.text).toMatch(/groomed heir|succession/i);
+    expect(heirLoss?.text).not.toBe(death?.text); // distinct from the generic family death
   });
 });
 
