@@ -77,7 +77,11 @@ describe("resolveFoundingStart", () => {
   it("established founders start a rung up; rising founders start at the bottom + hungrier", () => {
     expect(startRungForStanding("established")).toBe(2);
     expect(startRungForStanding("rising")).toBe(0);
-    const rising = resolveFoundingStart({ region: "new_england", base: "pulpit", standing: "rising" });
+    const rising = resolveFoundingStart({
+      region: "new_england",
+      base: "pulpit",
+      standing: "rising",
+    });
     const established = resolveFoundingStart({
       region: "new_england",
       base: "pulpit",
@@ -90,8 +94,16 @@ describe("resolveFoundingStart", () => {
   });
 
   it("a pulpit founder is faith-led (worldview toward faith), a press founder is reach-led", () => {
-    const minister = resolveFoundingStart({ region: "new_england", base: "pulpit", standing: "rising" });
-    const printer = resolveFoundingStart({ region: "mid_atlantic", base: "press", standing: "rising" });
+    const minister = resolveFoundingStart({
+      region: "new_england",
+      base: "pulpit",
+      standing: "rising",
+    });
+    const printer = resolveFoundingStart({
+      region: "mid_atlantic",
+      base: "press",
+      standing: "rising",
+    });
     expect(minister.motivators.worldview).toBeLessThan(0); // faith pole
     expect(printer.motivators.reach).toBeGreaterThan(20); // expansive pole
   });

@@ -43,7 +43,12 @@ function view(): GameView {
   return {
     state,
     currentEvent: null,
-    saga: { actTitle: "Act I — The Crucible of Flint and Ink", scene: spineScene, threads: [], ended: false },
+    saga: {
+      actTitle: "Act I — The Crucible of Flint and Ink",
+      scene: spineScene,
+      threads: [],
+      ended: false,
+    },
     glimpses: [],
     rivalStandings: [],
     rung: 0,

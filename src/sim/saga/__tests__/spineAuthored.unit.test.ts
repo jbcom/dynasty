@@ -16,7 +16,9 @@ describe("authored dynasty spine (FS-3)", () => {
   it("spans founding → stars as one continuous line (gens 0..N, ascending years)", () => {
     // One line, contiguous generations.
     expect(DYNASTY_SPINE[0]?.gen).toBe(0);
-    DYNASTY_SPINE.forEach((a, i) => expect(a.gen).toBe(i));
+    DYNASTY_SPINE.forEach((a, i) => {
+      expect(a.gen).toBe(i);
+    });
     // Founded at the founding; reaches the stellar era.
     expect(DYNASTY_SPINE[0]?.macroAct).toBe("founding");
     expect(DYNASTY_SPINE.at(-1)?.macroAct).toBe("ascension");
