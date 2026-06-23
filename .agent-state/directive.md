@@ -50,6 +50,18 @@ from PLACE × CULTURE × ERA × ARCHETYPE … discovered through a diegetic, see
 birth WAS that, and it was retired ([[mmm-epoch0-birth-beat]] / novel-acts cut-over) — which threw out
 the formative-years sensory texture with it.
 
+**THE FIX = UN-RETIRE EPOCH 0 (user correction, 2026-06-23):** "you were supposed to UN-RETIRE Epoch 0
+as part of emergence — the emergence of the progenitor of the dynasty through infancy through adulthood —
+and write real copy for it." Epoch 0 returns as the lived emergence opening (infancy → childhood →
+adulthood), rebuilt on the saga/SceneReader substrate (NOT the old event chain), with REAL authored copy.
+docs/STATE.md's "Epoch 0 — RETIRED" section gets un-retired when EI lands. Spec:
+`docs/superpowers/specs/2026-06-23-emergent-infancy-onboarding-design.md` (EI-1, written).
+
+**ART BAN — PRECISE (user corrections, 2026-06-23):** the ban is HAND-DRAWN SVG FIGURE ART ("a big stupid
+sketch of a person as an SVG that looks like crayons"), NOT "procedural art" broadly. **SHADERS ARE NOT
+BANNED — a shader is a shader; a gorgeous shader is wanted, do NOT retire ShaderBackdrop.** Portraits =
+GenAI raster ([[visual-layer-revival]]). The one hard "no" is hand-drawn SVG people.
+
 **The redesign — identity EMERGES through a lived infancy/childhood, not a menu:**
 1. **No upfront choice menu.** Deal the seed; open IN the newborn's body. Identity facets surface as the
    child experiences the world, the player's reactions nudging (not picking) where ambiguous.
@@ -80,20 +92,23 @@ place; how formative beats set life-seeds/flags) and write the decision into a s
 Then build the opening act, wire it to foundByComposition, retire the .card funnel, ship behind the gate.
 
 ### EMERGENT-INFANCY queue (work top-down; expand as use-case enumeration surfaces sub-steps)
-- [ ] **EI-1 USE-CASE ENUMERATION + SPEC** — enumerate the ~10 funnel facets × where each emerges in a lived
-  Act 1 (sense / family-circumstance / formative-beat / naming-beat); mine the retired Epoch-0 sensory-cue→place
-  mechanic; pick the data model (sense-accumulation → resolved place; formative-beat → life-seed/flag); write
-  `docs/superpowers/specs/2026-06-23-emergent-infancy-onboarding-design.md` (decision + why) BEFORE any code.
-  Read [[never-ask-direction]] — decide + log, don't ask; but DO surface 2-3 architectural options in the spec.
+- [x] **EI-1 USE-CASE ENUMERATION + SPEC — DONE.** Wrote
+  `docs/superpowers/specs/2026-06-23-emergent-infancy-onboarding-design.md`: the 10 funnel facets × where each
+  emerges in a lived Act 1 (sense / family-circumstance / formative-beat / naming-beat); the data model
+  (senseEmergence resolver → one place; formative beats on the saga substrate set facets via existing
+  motivatorShift/flag accrual); 3 options → CHOSEN = **UN-RETIRE Epoch 0** as the progenitor's emergence
+  infancy→adulthood, real authored copy, on the saga/SceneReader substrate (not the old event chain); EI-7/EI-8
+  visuals; build order. Art-ban precision recorded: ban = hand-drawn SVG figures only; shaders are fine.
 - [ ] **EI-2 SENSORY-PLACE-RESOLUTION** — the opening beat(s): the newborn's hear/smell/touch/taste resolve
   INTO one place (deterministic from seed + the player's sensory-reaction taps), replacing the 3-location pick.
   Pure sim + the SceneReader inline-glow surface; tested (same seed → same resolved place; reactions nudge).
-- [ ] **EI-3 GLOWING-INLINE-OPENING** — the opening uses the SceneReader's glowing inline-dialogue choices
-  (bigger, scannable, woven in the prose), NOT the .card/.choices button menu. Retire the funnel's menu surface.
-  Tested (the opening renders inline-glow options, no .card button-list).
-- [ ] **EI-4 FORMATIVE-BEATS** — author first-friend / first-betrayal / first-loss / first-romance / early-
-  schooling as emergent Act-1 scenes that set life-seeds + crystallize facets (power base / standing / bent).
-  Woven across beginning/middle/end of Act 1. Content + sim flags; tested (each beat sets its facet/seed).
+- [ ] **EI-3 EPOCH-0 OPENING ACT (glowing-inline, REAL COPY)** — un-retire Epoch 0 as the played opening: the
+  progenitor's emergence built on the saga substrate, rendered via SceneReader glowing inline-dialogue choices
+  (bigger, scannable, woven in the prose), NOT the .card/.choices button menu. Author REAL copy for the spine
+  beats (birth/sensory-emergence → naming → childhood). Tested (inline-glow options, no .card button-list).
+- [ ] **EI-4 FORMATIVE-BEATS (REAL COPY)** — author first-friend / first-betrayal / first-loss / first-romance /
+  early-schooling as emergent Epoch-0 → adulthood scenes (real authored prose) that set life-seeds + crystallize
+  facets (power base / standing / bent). Woven across the opening's beginning/middle/end. Tested (each sets its facet).
 - [ ] **EI-5 NAMING-IN-FICTION** — surname/gender/given/naming-tradition are named diegetically at the naming
   beat (by the parents, in the child's hearing), not picked on a card. Wire to foundByComposition. Tested.
 - [ ] **EI-6 RETIRE-THE-FUNNEL + WIRE** — replace the OnboardingScreen .card funnel with the lived opening's
