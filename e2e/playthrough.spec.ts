@@ -132,20 +132,21 @@ test("inter-era tabs render their views", async ({ page }) => {
   await startGame(page);
   await expect(page.locator("[data-testid='saga-head']")).toBeVisible();
 
-  await page.getByRole("button", { name: "Timeline" }).click();
+  // A11Y-TAB-ARIA: the tab buttons are now role="tab" (in a tablist), not role="button".
+  await page.getByRole("tab", { name: "Timeline" }).click();
   await expect(page.getByRole("heading", { name: "Timeline" })).toBeVisible();
 
-  await page.getByRole("button", { name: "Dossier" }).click();
+  await page.getByRole("tab", { name: "Dossier" }).click();
   await expect(page.getByText(/Dossier —/)).toBeVisible();
 
-  await page.getByRole("button", { name: "Stats" }).click();
+  await page.getByRole("tab", { name: "Stats" }).click();
   await expect(page.getByRole("heading", { name: "Trajectory" })).toBeVisible();
 });
 
 test("the lineage tab shows the founded line (FD-13)", async ({ page }) => {
   await startGame(page, { surname: "Sterling" });
   await expect(page.locator("[data-testid='saga-head']")).toBeVisible();
-  await page.getByRole("button", { name: "Lineage" }).click();
+  await page.getByRole("tab", { name: "Lineage" }).click();
   await expect(page.getByRole("heading", { name: "The Line" })).toBeVisible();
   await expect(page.getByText("House of Sterling")).toBeVisible();
   await expect(page.getByText("You")).toBeVisible();

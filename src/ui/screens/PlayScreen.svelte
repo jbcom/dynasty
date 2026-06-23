@@ -166,7 +166,15 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
 </script>
 
 {#snippet tabButton(t: { id: Tab; label: string; icon: string })}
-  <button type="button" class:active={tab === t.id} onclick={() => (tab = t.id)}>
+  <!-- A11Y-TAB-ARIA: role="tab" + aria-selected so a screen reader announces which tab is active (the gold
+       `.active` highlight is the sighted cue; this is its non-visual counterpart, mirroring OMEN-TONE-A11Y). -->
+  <button
+    type="button"
+    role="tab"
+    aria-selected={tab === t.id}
+    class:active={tab === t.id}
+    onclick={() => (tab = t.id)}
+  >
     <img class="tab-icon" src={`/assets/icons/ui/${t.icon}.svg`} alt="" aria-hidden="true" />
     {t.label}
   </button>
@@ -312,20 +320,20 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     <div class="split">
       <div class="event-col">{@render eventPane()}</div>
       <aside class="info-col">
-        <nav class="tabs side">
+        <div class="tabs side" role="tablist" aria-label="Game views">
           {#each tabs.filter((t) => t.id !== "event") as t (t.id)}
             {@render tabButton(t)}
           {/each}
-        </nav>
+        </div>
         <div class="content">{@render infoTab()}</div>
       </aside>
     </div>
   {:else}
-    <nav class="tabs">
+    <div class="tabs" role="tablist" aria-label="Game views">
       {#each tabs as t (t.id)}
         {@render tabButton(t)}
       {/each}
-    </nav>
+    </div>
     <div class="content">
       {#if tab === "event"}{@render eventPane()}{:else}{@render infoTab()}{/if}
     </div>

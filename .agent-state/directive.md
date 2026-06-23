@@ -1531,13 +1531,23 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [x] **FULL-TAB-COVERAGE-ASSERT — DONE.** PlayScreen.visual now iterates EVERY founded-line tab (≥6), clicks each,
   and asserts its panel renders non-empty content — a structural guard that no tab is a dead/blank route,
   complementing the per-tab visual reads.
-- [ ] **A11Y-TAB-ARIA — the tab bar buttons should expose `role="tab"` / `aria-selected` (or aria-current) so a
-  screen reader announces the active tab; verify + add the ARIA, mirroring the OMEN-TONE-A11Y non-color discipline.**
-  Pure UI; tested (the active tab carries aria-selected/aria-current).
-- [ ] **ONBOARDING-FUNNEL-FULL-WALK-SHOT — extend ONBOARDING-SCREEN-SHOT: capture + READ EVERY funnel phase
-  (region → base → standing → naming → surname → gender → given → life-seeds) to confirm the whole entry flow holds
-  the register end-to-end, not just the first two steps.** Visual; READ all phases.
-- [ ] **TITLE-CONTINUE-STATE-SHOT — capture + READ the Title screen WITH a save (the Continue button shown), the
-  variant not yet shot (only the no-save Begin-a-Line state was).** Confirm Continue + Begin + Settings read legibly
-  together. Visual; READ.
+- [x] **A11Y-TAB-ARIA — DONE (branch feat/tab-aria-funnel-walk-title-continue).** The tab bar is now a
+  `role="tablist"` (changed `<nav>`→`<div>` to satisfy the Svelte a11y rule — nav is a landmark, can't be a tablist)
+  and each tab button carries `role="tab"` + `aria-selected`, so a screen reader announces the active tab (the
+  non-visual counterpart of the gold `.active` highlight). Updated all tab-clicking tests to getByRole("tab", …).
+  Test: PlayScreen.visual asserts exactly one tab aria-selected, moving on click.
+- [x] **ONBOARDING-FUNNEL-FULL-WALK-SHOT — DONE.** OnboardingScreen.visual now walks EVERY funnel phase, capturing
+  each. READ the un-shot ones: Naming tradition (10 cultures, prior region threaded in), Founder gender ("The
+  Carrington line. Who founds it?" — surname woven in, A son / A daughter). The luxury register holds end-to-end.
+- [x] **TITLE-CONTINUE-STATE-SHOT — DONE.** The TitleScreen.visual screenshot test (props default hasSave:true) now
+  asserts Continue is present; READ it: the gold Dynasty masthead + Seed input + New Game / Load Game — Continue /
+  Settings all read legibly together in the with-save variant.
+- [ ] **A11Y-INVEST-PRESS-LABELS — the press-rival + invest buttons (NewsTicker / PlayScreen) should have clear
+  accessible names (aria-label where the visible text is terse), so a screen reader announces what each does.**
+  Mirror A11Y-TAB-ARIA. Pure UI; tested (the action buttons expose descriptive accessible names).
+- [ ] **REDUCED-MOTION-AUDIT — the shader backdrop + any transitions should respect `prefers-reduced-motion`** (a
+  player who sets it shouldn't get the animated WebGL bed / motion). Verify + gate the motion behind the media query.
+  Pure UI; tested (a reduced-motion media-query reference exists for the motion surfaces).
+- [ ] **ONBOARDING-A11Y-FUNNEL — the funnel choice cards should be keyboard-navigable + announce the current phase
+  (the prompt as an aria-live or heading), so the entry flow is screen-reader-usable end-to-end.** Pure UI; tested.
 - [x] **WV-3 + SPINE shipped ledger — ARCHIVED to docs/STATE.md (DIRECTIVE-LEDGER-PRUNE).** 27 merged-PR / done entries (FORESHADOW-IN-TONE #134 … the spine-depth + QA wave) were moved to the "Shipped — WV-3 + spine wave" appendix in docs/STATE.md to keep this directive scannable. The code + git history are the source of truth; the appendix is the human-readable index.

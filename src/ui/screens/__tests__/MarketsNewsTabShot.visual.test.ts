@@ -60,13 +60,13 @@ describe("Markets + News tab shots (MARKETS-NEWS-TAB-SCREENSHOT)", () => {
     });
 
     // NEWS — rival dispatches + world timeline.
-    await page.getByRole("button", { name: /News/ }).click();
+    await page.getByRole("tab", { name: /News/ }).click();
     flushSync();
     expect(host.querySelector(".content")?.textContent, "the News tab has content").toBeTruthy();
     await page.screenshot({ element: host.firstElementChild as Element });
 
     // MARKETS — the era markets / ranks readout.
-    await page.getByRole("button", { name: /Markets/ }).click();
+    await page.getByRole("tab", { name: /Markets/ }).click();
     flushSync();
     expect(host.querySelector(".content")?.textContent, "the Markets tab has content").toBeTruthy();
     await page.screenshot({ element: host.firstElementChild as Element });
