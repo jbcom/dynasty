@@ -214,7 +214,8 @@ export interface ShockLedgerEntry {
   label: string;
 }
 
-const LEDGER_LABEL: Record<string, string> = {
+// Typed by ShockLedgerEntry["kind"] so adding a new shock kind forces a label here (exhaustiveness).
+const LEDGER_LABEL: Record<ShockLedgerEntry["kind"], string> = {
   family_death: "A death in the family",
   meter_blow: "A reversal struck the line",
 };
@@ -223,10 +224,12 @@ const LEDGER_LABEL: Record<string, string> = {
  * Parse the run's `shock:<kind>:<year>` flags into a chronological ledger of the line's disasters — the
  * inspectable "what befell the family" history the Timeline/Dossier surfaces (DOSSIER-SHOCK-LEDGER). Pure
  * read of state.flags; sorted by year then kind for stable output. Unknown/malformed flags are skipped.
+ * Flags are de-duplicated first: a repeated `shock:*` flag would otherwise yield two entries with the same
+ * (year, kind), and TimelineView keys its `#each` on `year + kind` — duplicate keys crash Svelte at render.
  */
 export function shockLedger(flags: Iterable<string>): ShockLedgerEntry[] {
   const out: ShockLedgerEntry[] = [];
-  for (const f of flags) {
+  for (const f of new Set(flags)) {
     const m = /^shock:(family_death|meter_blow):(\d+)$/.exec(f);
     if (!m) continue;
     const kind = m[1] as "family_death" | "meter_blow";

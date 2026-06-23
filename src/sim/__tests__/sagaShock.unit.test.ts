@@ -208,4 +208,14 @@ describe("shockLedger (DOSSIER-SHOCK-LEDGER)", () => {
       shockLedger(["shock:meter_blow:notayear", "shock:weird:1900", "shock:family_death"]),
     ).toEqual([]);
   });
+
+  it("de-duplicates repeated shock flags (a duplicate would crash the Svelte #each on its key)", () => {
+    // A flag list with an exact duplicate must yield ONE entry — TimelineView keys #each on year+kind.
+    const led = shockLedger([
+      "shock:family_death:1885",
+      "shock:family_death:1885",
+      "shock:meter_blow:1885",
+    ]);
+    expect(led.map((e) => `${e.year}:${e.kind}`)).toEqual(["1885:family_death", "1885:meter_blow"]);
+  });
 });
