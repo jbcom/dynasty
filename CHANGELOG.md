@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.0](https://github.com/jbcom/dynasty/compare/v0.25.0...v0.26.0) (2026-06-23)
+
+
+### Features
+
+* **saga:** CONVERGENCE-ENDING-DEPTH — earned-finale prose + reachability audit ([#112](https://github.com/jbcom/dynasty/issues/112)) ([7be3df2](https://github.com/jbcom/dynasty/commit/7be3df2b93d141792b71a7469c43a38b27145d6d))
+
 ## [0.25.0](https://github.com/jbcom/dynasty/compare/v0.24.0...v0.25.0) (2026-06-23)
 
 
