@@ -143,7 +143,9 @@ export const POWER_BASES: readonly PowerBaseDef[] = [
     blurb:
       "A commission is a social title — militia colonel or Continental officer, war reputation that converts to bounty land and high office.",
     archetype: "athletic",
-    motivators: { power: 30, honor: 20, lineage: 15 },
+    // honor axis is {neg:"honor", pos:"cunning"} — the sword/commission is HONOR-framed (an officer is a
+    // gentleman; a title that IS social status), so it leans toward the honor pole (negative).
+    motivators: { power: 30, honor: -20, lineage: 15 },
     flags: ["base:military", "power:military"],
   },
 ];

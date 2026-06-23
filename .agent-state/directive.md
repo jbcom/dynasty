@@ -855,15 +855,23 @@ builder → Queens → the 1946 birth, incl. the `ev_line_fails`→`end_line_fai
 runs through the 1776 spine (`beginSpine`); this era is dead-but-reachable only via the legacy event /
 autoPlaythrough path, where it causes early "line failed" deaths that pollute analytics.
 
-NOT a quick delete — it's LOAD-BEARING and needs use-case enumeration first:
-- `initState` defaults `startEra = "origins"` (state.ts:271) and origins is order-0 in the era chain — the
-  default cold-start path. Removing/replacing it touches every non-onboarding founding + tests.
-- `prologue-gating.unit.test.ts` asserts the game OPENS on "Friedrich leaving Kallstadt" + the birth is
-  reachable via dynasty-building — an entire pre-pivot contract to rewrite or retire.
-- The origins-era events may be cell-lattice FABRIC source (mined into `src/data/saga/fabric/`); confirm
-  before deleting (the mine already ran — check whether retiring the source invalidates fabric/index.json).
-- `end_line_failed` is in endings.json; `branch.ts` keys off Era-0 origin flags (branch.ts comment).
-Steps (enumerate fully when picked up): (1) decide origins-era fate — retire vs. convert to CAST backdrop;
-(2) repoint initState default startEra to the spine/founding path; (3) rewrite/retire prologue-gating +
-any origins-dependent tests; (4) remove the failure chain + dead flags; (5) confirm fabric integrity;
-(6) full gate + autoPlaythrough no longer early-deaths + Chrome verify a cold start opens on the spine.
+ENUMERATION DONE (this session) — the scope is NARROWER + SAFER than first feared. Retire the dead origins
+EVENTS, NOT the origins ERA ID:
+- **The origins era ID STAYS** — load-bearing for the NEW founding path: the FS-ONB-DRIFT founding-region
+  places use `validEras:["origins"]`, so the player's founded run still composes in era "origins" (year
+  overridden to 1776, routed through the spine). `initState` also defaults `startEra="origins"` and several
+  callers (statsSeries, compiler, effects/autoPlaythrough, loop.ts) rely on that default. So DON'T remove
+  the era; only its pre-pivot EVENT CONTENT.
+- **Fabric is SAFE** — fabric/index.json has ZERO references to new-york/origins/kallstadt/friedrich/fred;
+  retiring the origins events does NOT invalidate the mined fabric.
+- `prologue-gating.unit.test.ts` asserts the game OPENS on "Friedrich leaving Kallstadt" — a pre-pivot
+  contract; rewrite it for the spine/founding open (the live game already routes through beginSpine).
+- `branch.ts`'s "Era-0 origin flags authored in origins.json" comment is STALE — no origins.json file
+  exists; origin flags live in the events. Verify branch coloring doesn't depend on the dead events.
+- `end_line_failed` (kind "origins") in endings.json + the ev_line_fails/`dynasty_doomed`/`fred_builder`/
+  `returned_to_ny` chain in the origins events are the harmful dead content (early autoPlaythrough deaths).
+Steps when picked up: (1) replace the 47 pre-pivot origins EVENTS with founding-era-appropriate content (or
+empty the era's event pool so the spine drives it) — the era id + budget stay; (2) remove the ev_line_fails
+chain + end_line_failed + the dead doom/redemption flags; (3) rewrite prologue-gating for the founding open;
+(4) confirm branch.ts + initState default still resolve; (5) full gate + autoPlaythrough no longer
+early-deaths + Chrome verify cold start opens on the founding spine.

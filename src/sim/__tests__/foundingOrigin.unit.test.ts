@@ -108,6 +108,24 @@ describe("resolveFoundingStart", () => {
     expect(printer.motivators.reach).toBeGreaterThan(20); // expansive pole
   });
 
+  it("the sword/military base leans toward HONOR, not cunning (honor axis sign)", () => {
+    // honor axis = {neg:"honor", pos:"cunning"}; the commission is honor-framed (an officer is a gentleman),
+    // so honor must be NEGATIVE (toward the honor pole) — guards the inverted-sign regression.
+    const officer = resolveFoundingStart({
+      region: "south",
+      base: "military",
+      standing: "established",
+    });
+    expect(officer.motivators.honor).toBeLessThan(0);
+    // The pulpit is likewise honor-framed (a minister's moral authority).
+    const minister = resolveFoundingStart({
+      region: "new_england",
+      base: "pulpit",
+      standing: "rising",
+    });
+    expect(minister.motivators.honor).toBeLessThan(0);
+  });
+
   it("stamps region + base + standing seed flags for spine/branch coloring", () => {
     const start = resolveFoundingStart(choice);
     expect(start.flags).toContain("region:south");
