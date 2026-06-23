@@ -1010,7 +1010,7 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   spine pipeline (matches the spine voice), license/validate, then Chrome-verify a press vs. land founder sees
   different opening prose. Later gens can follow the same pattern incrementally. Make the choice MATTER in the
   prose, not just the motivator seed.
-- [ ] [WAIT-REVIEW] **FS-COMPLETION-REVIEW — milestone comprehensive review before the single PR.** The founding-spine
+- [ ] **FS-COMPLETION-REVIEW — review CLEAN, opening the PR.** The founding-spine
   completion (VL-3/4/5, WV-3, FS-ONB-DRIFT, FS-SPINE-BRANCH-ONRAMPS, FS-RETIRE-PROLOGUE, UQ-3,
   FS-BRANCH-ONRAMP-AUDIT, CAST-RESEARCH, FS-SPINE-ORIGIN-FLAVOR) is a large body of work on the one branch.
   Before opening the single PR ([[one-branch-local-review]]): full local gate + reviewer trio over the whole
@@ -1022,8 +1022,10 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   scene (FS-SPINE-ORIGIN-FLAVOR) and ONE dev +100 advanced the Sterling line g0→g3, founding 1776 → "Act IV —
   The Iron and the Ivory / Convergence 1876" (Theodore Jr. III Sterling — 3 generations of succession,
   era-distinct Gilded-Age prose, era-appropriate News) — the founding→stars arc reads as one continuous,
-  advancing story. [ ] REMAINING: the final pre-PR reviewer pass (dispatched, abe24f28…) — fold findings,
-  then open the PR.
+  advancing story. [x] Final pre-PR reviewer pass came back CLEAN ("Ready for PR") — verified UQ-3 crime
+  reachability non-vacuous, branchPlaythrough genuinely exercises the runner, guidance.json valid, the
+  origin-flavor script byte-idempotent + scenes schema-valid, ONO-DEDUP correct, devFastForward can't stall.
+  Its one out-of-scope find (family.ts partner naming not deduped) was FOLDED. [ ] OPENING the single PR now.
 - [x] **ONO-DEDUP — DONE.** Added an optional `exclude` param to `suggestGivenNames` + `pickGivenName`
   (skip/re-draw when a given name equals the chosen surname), threaded the chosen surname through
   OnboardingScreen's givenSuggestions + founding.ts's seeded pick. Falls back to the un-filtered pool only if
@@ -1051,3 +1053,14 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   through real play, not just flag-presence in the corpus. 733 unit + tsc + check green. (Note: branchOf
   precedence across a MIXED path is separate + intentional — a path crossing both oligarchy + westcoast
   on-ramps resolves to the higher-precedence oligarchy; the test asserts each on-ramp's own contribution.)
+## Post-PR backlog (keep the queue non-empty — [[never-drain-queue]])
+
+- [ ] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G2+ — extend base-flavored openings to g2+ (antebellum onward).**
+  g0 (founding) + g1 (early republic) now open differently per power base. The applyAct() pattern in
+  scripts/fs-spine-origin-flavor.mjs makes each further act one config block + 5 authored base-variant
+  scenes diverting to that act's second scene. Author g2 (antebellum) next, then later gens as bandwidth
+  allows — deepening how far the origin choice echoes. Incremental; lower priority than live-PR feedback.
+- [ ] **FS-PR-LOOP — drive the founding-spine PR to merge (babysit-pr).** Once the PR is open: wait CI green,
+  read every comment + any CHANGES_REQUESTED, address/resolve all review threads (CodeRabbit etc.), keep
+  Release/CD green, then self-squash-merge once green + threads resolved + DoD met. ([[babysit-pr]],
+  [[jbcom-org-ruleset]] — PR-only/squash/linear.)
