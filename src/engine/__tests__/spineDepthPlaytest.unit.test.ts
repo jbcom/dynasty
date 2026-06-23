@@ -73,13 +73,13 @@ describe("SPINE-DEPTH-PLAYTEST: a full founding→stars run's playable depth", (
     expect(gens.has("g0"), summary).toBe(true);
     expect(gens.has("g9"), summary).toBe(true);
     expect(gens.size, summary).toBe(10);
-    // The deepened spine is a substantial read — well past the pre-depth ~30 scenes.
-    expect(scenes.size, summary).toBeGreaterThanOrEqual(60);
-    expect(paragraphs, summary).toBeGreaterThanOrEqual(120);
-    // Record the estimate in the assertion message so it's always inspectable.
-    // The deepened spine estimates ~44 min for a single fast read-path (12s/para, 10s/beat, 30s/decision)
-    // — a conservative FLOOR (a player exploring more beats + reading carefully runs longer). Assert a
-    // healthy floor well past the pre-depth ~15-20 min; the exact figure is logged in `summary`.
-    expect(estMinutes, summary).toBeGreaterThanOrEqual(35);
+    // The deepened spine is a substantial read — well past the pre-depth ~30 scenes. With all 10 acts at
+    // the 7-scene shape (EXTEND-MIDWEIGHT), a full run is 70 scenes / 144 paragraphs / 95 beats.
+    expect(scenes.size, summary).toBeGreaterThanOrEqual(70);
+    expect(paragraphs, summary).toBeGreaterThanOrEqual(140);
+    // The deepened spine estimates ~48 min for a single FAST read-path (12s/para, 10s/beat, 30s/decision)
+    // — a conservative FLOOR. A careful player exploring more of the 95 available beats + deliberating on
+    // the 22 decisions comfortably crosses the hour mandate. The exact figure is logged in `summary`.
+    expect(estMinutes, summary).toBeGreaterThanOrEqual(44);
   });
 });

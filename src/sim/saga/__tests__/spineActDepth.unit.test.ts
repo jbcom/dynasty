@@ -63,14 +63,11 @@ describe("SPINE-ACT-DEPTH: every spine act is deepened with texture + consequenc
     ]);
   });
 
-  it("SPINE-ACT-DEPTH-2: the four heaviest-arc acts carry a third REVERSAL interstitial (7 scenes)", () => {
-    const heavy = [
-      "spine:g0:founding",
-      "spine:g3:gildedage",
-      "spine:g8:orbital",
-      "spine:g9:interstellar",
-    ];
-    for (const actId of heavy) {
+  it("SPINE-ACT-DEPTH-2 + EXTEND-MIDWEIGHT: EVERY act carries a third REVERSAL interstitial (7 scenes)", () => {
+    // The heavy acts got the reversal first (SPINE-ACT-DEPTH-2); EXTEND-MIDWEIGHT brought the six
+    // mid-weight acts to the same 7-scene shape, so all 10 now run open → tex → decision → csq → rev →
+    // decision → close, locking the full-hour playtest.
+    for (const actId of SPINE_ACTS) {
       const path = walk(actId, []);
       expect(
         path.some((id) => id.startsWith("rev_")),
@@ -82,13 +79,6 @@ describe("SPINE-ACT-DEPTH: every spine act is deepened with texture + consequenc
       const csqIdx = path.findIndex((id) => id.startsWith("csq_"));
       expect(revIdx, `${actId} reversal follows the consequence`).toBeGreaterThan(csqIdx);
       expect(revIdx, `${actId} reversal precedes close`).toBeLessThan(path.length - 1);
-    }
-    // Light acts stay at the ~6-scene shape (no reversal).
-    for (const actId of ["spine:g1:earlyrepublic", "spine:g5:midcentury"]) {
-      expect(
-        walk(actId, []).some((id) => id.startsWith("rev_")),
-        actId,
-      ).toBe(false);
     }
   });
 

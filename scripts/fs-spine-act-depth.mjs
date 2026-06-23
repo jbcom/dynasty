@@ -665,6 +665,161 @@ const INTERSTITIALS = [
       ),
     ],
   ),
+
+  // ════ SPINE-DEPTH-EXTEND-MIDWEIGHT: a REVERSAL interstitial for the six MID-WEIGHT acts too ════
+  // Brings g1/g2/g4/g5/g6/g7 to the 7-scene shape (open → tex → decision → csq → rev → decision → close),
+  // matching the heavy acts — locking the full hour. Placed after the consequence, before the 2nd decision.
+  // Save-safe (SAGA-CLOCK-DECOUPLE: texture passes 0 years).
+
+  inter(
+    "g1:earlyrepublic",
+    "rev",
+    "spine:g1:earlyrepublic:csq_doctrine",
+    "sight",
+    [
+      "The doctrine had barely set before the world tested it. A federal man and a states' man, both former friends of the house, arrived on the same afternoon — each certain the {family_name} yard owed its loyalty to his vision of the republic, each prepared to make the family pay for choosing wrong. {given_name} {surname} received them in turn and understood that a young nation's politics was not yet a system but a brawl, and a shipwright with a name worth courting had become a prize in it.",
+      "The venture ahead — the great expansion of the yards the family had been building toward — now needed a charter, and a charter needed votes the family did not control. {given_name} saw the era's hard arithmetic plainly: in a republic still inventing its own rules, prosperity flowed to whoever read the shifting alliances fastest, and a wrong guess about which faction would hold the next assembly could beach the whole enterprise.",
+    ],
+    [
+      beat(
+        "Two former friends, two irreconcilable demands — and the yard's charter hanging on which you choose.",
+        "Back the faction whose vision the next decade will vindicate, and let the other friendship cool.",
+        { politics: 1, power: 1 },
+        "g1_read_the_alliances",
+      ),
+      beat(
+        "A clerk suggests the charter could pass quietly if the family's name went on a bill it dislikes.",
+        "Refuse the quiet bargain; a house that trades its name for a charter has sold the charter's worth.",
+        { honor: -1, lineage: 1 },
+        "g1_kept_the_name_clean",
+      ),
+    ],
+  ),
+
+  inter(
+    "g2:antebellum",
+    "rev",
+    "spine:g2:antebellum:csq_allegiance",
+    "sound",
+    [
+      "The mill had not gone quiet, but a new sound had entered it: the low, urgent murmur of men reading the same newspaper, the slam of a door as a foreman walked out over a word he would not abide. The sectional quarrel the {family_name} line had taken a side in was no longer distant politics — it was on the spinning floor, in the boarding houses, splitting the workforce the family depended on right down its middle.",
+      "The turn ahead — the family's next great commitment of capital — now had to be made in a country visibly cracking. {given_name} {surname} felt the ground shift: a rival house across the river had just gambled everything on the war coming, buying up what others feared to hold, and the question was no longer whether the union would break but whether the {family_name} line would be ruined or made by the breaking.",
+    ],
+    [
+      beat(
+        "The floor itself is dividing — your own men reading the same page and reaching opposite conclusions.",
+        "Hold the workforce together with a wage that buys peace, whatever the politics outside.",
+        { wealth: -1, reach: 1 },
+        "g2_held_the_floor",
+      ),
+      beat(
+        "A rival is buying up everything that fears the war; you could match them, or hedge against ruin.",
+        "Hedge — a house that survives the break inherits the rivals who bet wrong.",
+        { worldview: 1, honor: 1 },
+        "g2_hedged_the_break",
+      ),
+    ],
+  ),
+
+  inter(
+    "g4:progressive",
+    "rev",
+    "spine:g4:progressive:csq_allegiance",
+    "touch",
+    [
+      "The settlement's ink was barely dry when the second blow landed: a muckraker's photographs of the {surname} works — the child at the lathe, the maimed hand, the company town's company store — spread across a magazine with a circulation larger than any the family had ever reached from the other side of the press. The cold steel under {given_name} {surname}'s palm felt suddenly like evidence.",
+      "The turn ahead — the modernization the family had staked its future on — now had to be made under a public eye that had not existed a generation before. {given_name} understood the era's new law: capital was no longer answerable only to its workers and its markets but to a watching nation that had decided industry was its business too, and a dynasty that ignored that gaze would be legislated, not negotiated, into compliance.",
+    ],
+    [
+      beat(
+        "The photographs are real, and damning, and already in a million hands — the gaze cannot be unmet.",
+        "Get ahead of it: announce the reforms as the family's own idea before the law compels them.",
+        { worldview: 1, reach: 1 },
+        "g4_got_ahead_of_the_gaze",
+      ),
+      beat(
+        "A senator offers to bury the hearing for an understanding the family would rather not put in writing.",
+        "Decline; a reform bought with a bribe is a scandal waiting one election to detonate.",
+        { honor: -1, politics: 1 },
+        "g4_refused_to_bury_it",
+      ),
+    ],
+  ),
+
+  inter(
+    "g5:midcentury",
+    "rev",
+    "spine:g5:midcentury:csq_reckoning",
+    "sight",
+    [
+      "The consent decree had answered the Senate, but a quieter reckoning waited in the family itself. From the glass tower {given_name} {surname} watched a competitor's tower rise higher across the avenue — a newer house, unburdened by the family's history, moving faster precisely because it had less to protect. The view that had felt like mastery now felt like a position to be defended.",
+      "The turn ahead — the leap into the post-war economy's new engines — would decide whether the {family_name} name led the next age or merely administered the last one. {given_name} felt the era's restless tempo: capital that stood still was capital falling behind, and the discipline that had carried the house through its reckoning could harden, if {given_name} let it, into the caution that lets a dynasty die respectable and irrelevant.",
+    ],
+    [
+      beat(
+        "A younger, lighter rival is climbing faster for having less to lose — and you can feel the gap.",
+        "Spend the house's reserves on the new engines now, while the lead is only a story and not yet a fact.",
+        { wealth: -1, reach: 1 },
+        "g5_spent_to_stay_ahead",
+      ),
+      beat(
+        "The board counsels caution — the family has survived enough; why risk the settled peace?",
+        "Overrule them; a dynasty that plays only defense has already chosen how it ends.",
+        { power: 1, worldview: 1 },
+        "g5_chose_offense",
+      ),
+    ],
+  ),
+
+  inter(
+    "g6:broadcast",
+    "rev",
+    "spine:g6:broadcast:csq_platform",
+    "sound",
+    [
+      "The platform was set, the ratings answered — and then the static of a new thing crept under the signal: a competitor broadcasting the opposite story to the same nation, and beneath them both, faint but rising, the chatter of a medium that needed no network at all. {given_name} {surname} heard in it the first hint that the family's command of the national story might not be permanent.",
+      "The turn ahead — the family's bet on what came after broadcast — would decide whether the {family_name} name carried its authority into the next medium or was left holding a transmitter no one tuned. {given_name} understood the era's vertigo: attention was migrating faster than the institutions built to hold it, and a house that mistook its current dominance for a law of nature would wake to find the audience simply gone.",
+    ],
+    [
+      beat(
+        "A rival's counter-narrative and a network-less new medium are both eating at the edges of your reach.",
+        "Buy into the new medium now, before it learns it doesn't need you at all.",
+        { reach: 1, worldview: 1 },
+        "g6_bought_the_next_medium",
+      ),
+      beat(
+        "Your own anchors urge doubling down on what works; the new thing is unproven, beneath the house.",
+        "Tell them the house has always lived one medium ahead — and means to again.",
+        { power: 1, lineage: 1 },
+        "g6_stayed_one_ahead",
+      ),
+    ],
+  ),
+
+  inter(
+    "g7:networked",
+    "rev",
+    "spine:g7:networked:csq_doctrine",
+    "touch",
+    [
+      "A fault propagated through the cold aisles faster than any human could answer — a breach, or a regulator's subpoena, or the defection of the brilliant engineers who had built the thing and now doubted it. {given_name} {surname} felt the server farm's refrigerated wind and understood that a system large enough to govern a billion lives was also large enough to turn on the house that built it.",
+      "The turn ahead — the family's commitment to what the network would become — now had to reckon with the doctrine's own consequences coming home. {given_name} saw the era's recursion plainly: the architecture the family wrote to shape the world had begun to shape the family, and the last freedom might be the choice of whether to keep steering the machine or to let the machine's logic steer the line.",
+    ],
+    [
+      beat(
+        "The system you built to hold a billion lives has just shown it can turn on its own architect.",
+        "Re-take the helm personally; an architecture no one is steering steers itself, and badly.",
+        { power: 1, worldview: 1 },
+        "g7_retook_the_helm",
+      ),
+      beat(
+        "A founding engineer, ready to walk, asks whether the house still believes its own doctrine.",
+        "Answer honestly, and let the answer decide whether the doctrine deserves to survive.",
+        { honor: -1, worldview: 1 },
+        "g7_faced_the_doubt",
+      ),
+    ],
+  ),
 ];
 
 /** A scene id is a prior interstitial for an act if it matches the act prefix + :tex_, :csq_, or :rev_. */

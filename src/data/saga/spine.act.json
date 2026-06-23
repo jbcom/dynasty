@@ -41,6 +41,7 @@
     "spine:g1:earlyrepublic:tex_open",
     "spine:g1:earlyrepublic:doctrine",
     "spine:g1:earlyrepublic:csq_doctrine",
+    "spine:g1:earlyrepublic:rev_csq_doctrine",
     "spine:g1:earlyrepublic:venture",
     "spine:g1:earlyrepublic:close"
    ]
@@ -63,6 +64,7 @@
     "spine:g2:antebellum:tex_open",
     "spine:g2:antebellum:allegiance",
     "spine:g2:antebellum:csq_allegiance",
+    "spine:g2:antebellum:rev_csq_allegiance",
     "spine:g2:antebellum:turn",
     "spine:g2:antebellum:close"
    ]
@@ -85,6 +87,7 @@
     "spine:g5:midcentury:tex_open",
     "spine:g5:midcentury:reckoning",
     "spine:g5:midcentury:csq_reckoning",
+    "spine:g5:midcentury:rev_csq_reckoning",
     "spine:g5:midcentury:turn",
     "spine:g5:midcentury:close"
    ]
@@ -130,6 +133,7 @@
     "spine:g4:progressive:tex_open",
     "spine:g4:progressive:allegiance",
     "spine:g4:progressive:csq_allegiance",
+    "spine:g4:progressive:rev_csq_allegiance",
     "spine:g4:progressive:turn",
     "spine:g4:progressive:close"
    ]
@@ -152,6 +156,7 @@
     "spine:g7:networked:tex_open",
     "spine:g7:networked:doctrine",
     "spine:g7:networked:csq_doctrine",
+    "spine:g7:networked:rev_csq_doctrine",
     "spine:g7:networked:turn",
     "spine:g7:networked:close"
    ]
@@ -197,6 +202,7 @@
     "spine:g6:broadcast:tex_open",
     "spine:g6:broadcast:platform",
     "spine:g6:broadcast:csq_platform",
+    "spine:g6:broadcast:rev_csq_platform",
     "spine:g6:broadcast:turn",
     "spine:g6:broadcast:close"
    ]
@@ -1240,7 +1246,7 @@
     "notFlags": []
    },
    "gather": true,
-   "next": "spine:g1:earlyrepublic:venture",
+   "next": "spine:g1:earlyrepublic:rev_csq_doctrine",
    "prose": [
     "The doctrine, once spoken aloud, began to make enemies and allies of its own accord. Word of where the {surname} house stood traveled the wharves faster than any pamphlet, and within a week the character of the family's visitors had changed — fewer cautious neutrals, more men who wanted something specific from a house that had finally declared itself.",
     "A position is a debt the future pays. {given_name} found that the creed cost custom in one quarter and won it in another, and that a doctrine spoken in a young republic does not stay private — it becomes a fixed point others steer by or steer against. Down the coast, rival houses adjusted to the news, and the slow contest of the next decades quietly took its shape from this single morning's certainty."
@@ -1274,6 +1280,54 @@
       },
       "setFlags": [
        "g1_kept_the_bridge"
+      ],
+      "gather": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "spine:g1:earlyrepublic:rev_csq_doctrine",
+   "sense": "sight",
+   "requires": {
+    "flags": [],
+    "notFlags": []
+   },
+   "gather": true,
+   "next": "spine:g1:earlyrepublic:venture",
+   "prose": [
+    "The doctrine had barely set before the world tested it. A federal man and a states' man, both former friends of the house, arrived on the same afternoon — each certain the {family_name} yard owed its loyalty to his vision of the republic, each prepared to make the family pay for choosing wrong. {given_name} {surname} received them in turn and understood that a young nation's politics was not yet a system but a brawl, and a shipwright with a name worth courting had become a prize in it.",
+    "The venture ahead — the great expansion of the yards the family had been building toward — now needed a charter, and a charter needed votes the family did not control. {given_name} saw the era's hard arithmetic plainly: in a republic still inventing its own rules, prosperity flowed to whoever read the shifting alliances fastest, and a wrong guess about which faction would hold the next assembly could beach the whole enterprise."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "Two former friends, two irreconcilable demands — and the yard's charter hanging on which you choose."
+     ],
+     "choice": {
+      "text": "Back the faction whose vision the next decade will vindicate, and let the other friendship cool.",
+      "motivatorShift": {
+       "politics": 1,
+       "power": 1
+      },
+      "setFlags": [
+       "g1_read_the_alliances"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "A clerk suggests the charter could pass quietly if the family's name went on a bill it dislikes."
+     ],
+     "choice": {
+      "text": "Refuse the quiet bargain; a house that trades its name for a charter has sold the charter's worth.",
+      "motivatorShift": {
+       "honor": -1,
+       "lineage": 1
+      },
+      "setFlags": [
+       "g1_kept_the_name_clean"
       ],
       "gather": true
      }
@@ -1796,7 +1850,7 @@
     "notFlags": []
    },
    "gather": true,
-   "next": "spine:g2:antebellum:turn",
+   "next": "spine:g2:antebellum:rev_csq_allegiance",
    "prose": [
     "After the allegiance was chosen, the sound of the mill never changed but everything around it did. {given_name} {surname} heard it first in the way men talked in the counting-room — guarded where they had been easy, or suddenly frank where they had been careful — the whole social weather of the town reorganizing itself around where the {family_name} house had finally planted its flag.",
     "The cost arrived as it always does, sideways and certain. A correspondent in the other section closed his books. A shipment was held at a wharf that had never troubled the family before. And in a hundred parlors across a fracturing nation, other houses were making the same hard arithmetic at the same hour — so that the war still years off was already being fought, quietly, in ledgers and loyalties, with the next generation's inheritance as the stake."
@@ -1830,6 +1884,54 @@
       },
       "setFlags": [
        "g2_kept_faith_with_kin"
+      ],
+      "gather": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "spine:g2:antebellum:rev_csq_allegiance",
+   "sense": "sound",
+   "requires": {
+    "flags": [],
+    "notFlags": []
+   },
+   "gather": true,
+   "next": "spine:g2:antebellum:turn",
+   "prose": [
+    "The mill had not gone quiet, but a new sound had entered it: the low, urgent murmur of men reading the same newspaper, the slam of a door as a foreman walked out over a word he would not abide. The sectional quarrel the {family_name} line had taken a side in was no longer distant politics — it was on the spinning floor, in the boarding houses, splitting the workforce the family depended on right down its middle.",
+    "The turn ahead — the family's next great commitment of capital — now had to be made in a country visibly cracking. {given_name} {surname} felt the ground shift: a rival house across the river had just gambled everything on the war coming, buying up what others feared to hold, and the question was no longer whether the union would break but whether the {family_name} line would be ruined or made by the breaking."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "The floor itself is dividing — your own men reading the same page and reaching opposite conclusions."
+     ],
+     "choice": {
+      "text": "Hold the workforce together with a wage that buys peace, whatever the politics outside.",
+      "motivatorShift": {
+       "wealth": -1,
+       "reach": 1
+      },
+      "setFlags": [
+       "g2_held_the_floor"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "A rival is buying up everything that fears the war; you could match them, or hedge against ruin."
+     ],
+     "choice": {
+      "text": "Hedge — a house that survives the break inherits the rivals who bet wrong.",
+      "motivatorShift": {
+       "worldview": 1,
+       "honor": 1
+      },
+      "setFlags": [
+       "g2_hedged_the_break"
       ],
       "gather": true
      }
@@ -2385,7 +2487,7 @@
     "notFlags": []
    },
    "gather": true,
-   "next": "spine:g5:midcentury:turn",
+   "next": "spine:g5:midcentury:rev_csq_reckoning",
    "prose": [
     "After the reckoning, the silence in the tower was its own verdict. {given_name} {surname} heard it in the hush of the outer offices, in the careful phrasing of the lawyers, in the way the telephone rang either too much or not at all — the sound of an institution learning, in real time, whether it had survived its own history.",
     "Consequence at this altitude is structural. A consent decree reshaped a division; a headline rewrote the family's public meaning; a generation of bright young managers decided whether the {family_name} name was one to join or to flee. And in the boardrooms of the era's other dynasties, the outcome of the {surname} reckoning became a lesson studied and applied — so that this one hard season set the terms on which the whole class of great houses would enter the second half of the century."
@@ -2419,6 +2521,54 @@
       },
       "setFlags": [
        "g5_renewed_the_name"
+      ],
+      "gather": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "spine:g5:midcentury:rev_csq_reckoning",
+   "sense": "sight",
+   "requires": {
+    "flags": [],
+    "notFlags": []
+   },
+   "gather": true,
+   "next": "spine:g5:midcentury:turn",
+   "prose": [
+    "The consent decree had answered the Senate, but a quieter reckoning waited in the family itself. From the glass tower {given_name} {surname} watched a competitor's tower rise higher across the avenue — a newer house, unburdened by the family's history, moving faster precisely because it had less to protect. The view that had felt like mastery now felt like a position to be defended.",
+    "The turn ahead — the leap into the post-war economy's new engines — would decide whether the {family_name} name led the next age or merely administered the last one. {given_name} felt the era's restless tempo: capital that stood still was capital falling behind, and the discipline that had carried the house through its reckoning could harden, if {given_name} let it, into the caution that lets a dynasty die respectable and irrelevant."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "A younger, lighter rival is climbing faster for having less to lose — and you can feel the gap."
+     ],
+     "choice": {
+      "text": "Spend the house's reserves on the new engines now, while the lead is only a story and not yet a fact.",
+      "motivatorShift": {
+       "wealth": -1,
+       "reach": 1
+      },
+      "setFlags": [
+       "g5_spent_to_stay_ahead"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "The board counsels caution — the family has survived enough; why risk the settled peace?"
+     ],
+     "choice": {
+      "text": "Overrule them; a dynasty that plays only defense has already chosen how it ends.",
+      "motivatorShift": {
+       "power": 1,
+       "worldview": 1
+      },
+      "setFlags": [
+       "g5_chose_offense"
       ],
       "gather": true
      }
@@ -3622,7 +3772,7 @@
     "notFlags": []
    },
    "gather": true,
-   "next": "spine:g4:progressive:turn",
+   "next": "spine:g4:progressive:rev_csq_allegiance",
    "prose": [
     "Whatever the family chose when the strike met the militia, {given_name} {surname} felt the result in the very air of the works — a stiffness in the men's nods, or a sudden ease, the temperature of ten thousand relationships shifting at once. A position taken in a labor war is felt on the body before it is understood in the mind.",
     "The cost came in coin and in something harder to price. Production faltered or steadied; the newspapers assigned the family a character it would wear for decades; and across the industrial cities, other dynasties read the {surname} choice as a signal and adjusted their own. The Progressive age was teaching the great houses that they were no longer private — and this generation's stand fixed, for those that came after, what kind of master the family would be remembered as."
@@ -3656,6 +3806,54 @@
       },
       "setFlags": [
        "g4_rewarded_loyalty"
+      ],
+      "gather": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "spine:g4:progressive:rev_csq_allegiance",
+   "sense": "touch",
+   "requires": {
+    "flags": [],
+    "notFlags": []
+   },
+   "gather": true,
+   "next": "spine:g4:progressive:turn",
+   "prose": [
+    "The settlement's ink was barely dry when the second blow landed: a muckraker's photographs of the {surname} works — the child at the lathe, the maimed hand, the company town's company store — spread across a magazine with a circulation larger than any the family had ever reached from the other side of the press. The cold steel under {given_name} {surname}'s palm felt suddenly like evidence.",
+    "The turn ahead — the modernization the family had staked its future on — now had to be made under a public eye that had not existed a generation before. {given_name} understood the era's new law: capital was no longer answerable only to its workers and its markets but to a watching nation that had decided industry was its business too, and a dynasty that ignored that gaze would be legislated, not negotiated, into compliance."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "The photographs are real, and damning, and already in a million hands — the gaze cannot be unmet."
+     ],
+     "choice": {
+      "text": "Get ahead of it: announce the reforms as the family's own idea before the law compels them.",
+      "motivatorShift": {
+       "worldview": 1,
+       "reach": 1
+      },
+      "setFlags": [
+       "g4_got_ahead_of_the_gaze"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "A senator offers to bury the hearing for an understanding the family would rather not put in writing."
+     ],
+     "choice": {
+      "text": "Decline; a reform bought with a bribe is a scandal waiting one election to detonate.",
+      "motivatorShift": {
+       "honor": -1,
+       "politics": 1
+      },
+      "setFlags": [
+       "g4_refused_to_bury_it"
       ],
       "gather": true
      }
@@ -4234,7 +4432,7 @@
     "notFlags": []
    },
    "gather": true,
-   "next": "spine:g7:networked:turn",
+   "next": "spine:g7:networked:rev_csq_doctrine",
    "prose": [
     "On a wall of dashboards the doctrine's first effects were already scrolling past — adoption curves, sentiment graphs, the slow visible bending of behavior toward what the family's systems rewarded. {given_name} {surname} watched it the way one watches weather form: a doctrine written into code does not argue, it simply becomes the world its users live in.",
     "The reckoning, when it came, came in many registers at once: regulators in three capitals opening files, a press cycle naming the family the architect of the age, brilliant engineers choosing whether the {family_name} name was one to build under or to resist. And the rival houses of the network era, reading the doctrine, moved to copy or to counter it — so that this single architectural choice set the grammar of power for everyone who would live inside the machine the family had built."
@@ -4268,6 +4466,54 @@
       },
       "setFlags": [
        "g7_faced_the_regulator"
+      ],
+      "gather": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "spine:g7:networked:rev_csq_doctrine",
+   "sense": "touch",
+   "requires": {
+    "flags": [],
+    "notFlags": []
+   },
+   "gather": true,
+   "next": "spine:g7:networked:turn",
+   "prose": [
+    "A fault propagated through the cold aisles faster than any human could answer — a breach, or a regulator's subpoena, or the defection of the brilliant engineers who had built the thing and now doubted it. {given_name} {surname} felt the server farm's refrigerated wind and understood that a system large enough to govern a billion lives was also large enough to turn on the house that built it.",
+    "The turn ahead — the family's commitment to what the network would become — now had to reckon with the doctrine's own consequences coming home. {given_name} saw the era's recursion plainly: the architecture the family wrote to shape the world had begun to shape the family, and the last freedom might be the choice of whether to keep steering the machine or to let the machine's logic steer the line."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "The system you built to hold a billion lives has just shown it can turn on its own architect."
+     ],
+     "choice": {
+      "text": "Re-take the helm personally; an architecture no one is steering steers itself, and badly.",
+      "motivatorShift": {
+       "power": 1,
+       "worldview": 1
+      },
+      "setFlags": [
+       "g7_retook_the_helm"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "A founding engineer, ready to walk, asks whether the house still believes its own doctrine."
+     ],
+     "choice": {
+      "text": "Answer honestly, and let the answer decide whether the doctrine deserves to survive.",
+      "motivatorShift": {
+       "honor": -1,
+       "worldview": 1
+      },
+      "setFlags": [
+       "g7_faced_the_doubt"
       ],
       "gather": true
      }
@@ -5437,7 +5683,7 @@
     "notFlags": []
    },
    "gather": true,
-   "next": "spine:g6:broadcast:turn",
+   "next": "spine:g6:broadcast:rev_csq_platform",
    "prose": [
     "The switchboard told the story before any executive could: lines overloaded, affiliates calling in, the low hum of a country reacting all at once to having been told what it was. {given_name} {surname} read the noise like a meter — to shape the national story is to be answerable to everyone who heard it, in the same instant they hear it.",
     "The consequence rippled outward at the speed of the signal itself. Advertisers recalculated; politicians who had courted the network now feared or flattered it; rival broadcasters defined themselves against the {family_name} line. The era of mass attention rewarded boldness and punished it in the same breath, and {given_name} saw that the platform chosen here would become the frame through which a generation understood its own country."
@@ -5471,6 +5717,54 @@
       },
       "setFlags": [
        "g6_steadied_the_voice"
+      ],
+      "gather": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "spine:g6:broadcast:rev_csq_platform",
+   "sense": "sound",
+   "requires": {
+    "flags": [],
+    "notFlags": []
+   },
+   "gather": true,
+   "next": "spine:g6:broadcast:turn",
+   "prose": [
+    "The platform was set, the ratings answered — and then the static of a new thing crept under the signal: a competitor broadcasting the opposite story to the same nation, and beneath them both, faint but rising, the chatter of a medium that needed no network at all. {given_name} {surname} heard in it the first hint that the family's command of the national story might not be permanent.",
+    "The turn ahead — the family's bet on what came after broadcast — would decide whether the {family_name} name carried its authority into the next medium or was left holding a transmitter no one tuned. {given_name} understood the era's vertigo: attention was migrating faster than the institutions built to hold it, and a house that mistook its current dominance for a law of nature would wake to find the audience simply gone."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "A rival's counter-narrative and a network-less new medium are both eating at the edges of your reach."
+     ],
+     "choice": {
+      "text": "Buy into the new medium now, before it learns it doesn't need you at all.",
+      "motivatorShift": {
+       "reach": 1,
+       "worldview": 1
+      },
+      "setFlags": [
+       "g6_bought_the_next_medium"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "Your own anchors urge doubling down on what works; the new thing is unproven, beneath the house."
+     ],
+     "choice": {
+      "text": "Tell them the house has always lived one medium ahead — and means to again.",
+      "motivatorShift": {
+       "power": 1,
+       "lineage": 1
+      },
+      "setFlags": [
+       "g6_stayed_one_ahead"
       ],
       "gather": true
      }
