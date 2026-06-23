@@ -124,6 +124,59 @@ describe("autoPlaythrough", () => {
   });
 });
 
+describe("WV-3 emergent variability (anti-Suzerain)", () => {
+  // The anti-Suzerain property: the SAME authored content must NOT collapse to one canonical
+  // walkthrough. Divergence is emergent from the seeded systemic substrate (market regime walks +
+  // bounded shocks in systemicTick) AND the seeded choice/event selection — no Math.random, fully
+  // replayable. Two different run seeds over the REAL content must produce materially different
+  // economic worlds; the same seed must still reconstruct to the bit. ([[emergent-cause-effect-sim]])
+  const real = loadContent();
+  const fingerprint = (s: ReturnType<typeof autoPlaythrough>) =>
+    JSON.stringify({
+      year: s.year,
+      flags: s.flags.length,
+      hist: s.history.length,
+      money: Math.round(s.meters.money),
+      // Market regimes + indices are the clearest emergent signal of a divergent economy.
+      markets: Object.entries(s.markets ?? {}).map(([id, m]) => [
+        id,
+        Math.round((m as { index?: number }).index ?? 0),
+        (m as { regime?: string }).regime,
+      ]),
+    });
+
+  it("different seeds produce materially divergent playthroughs on real content", () => {
+    const seeds = ["alpha", "bravo", "charlie", "delta"];
+    const runs = seeds.map((s) => autoPlaythrough(real, s, initState, createRng, 500, "economic"));
+    const fps = new Set(runs.map(fingerprint));
+    // Every seed is its own world — no two collapse to the same economic fingerprint.
+    expect(fps.size).toBe(seeds.length);
+  });
+
+  it("is still bit-identical on replay for a fixed seed (divergence is seeded, not random)", () => {
+    const a = autoPlaythrough(real, "anti-suzerain", initState, createRng, 500, "economic");
+    const b = autoPlaythrough(real, "anti-suzerain", initState, createRng, 500, "economic");
+    expect(fingerprint(a)).toEqual(fingerprint(b));
+    expect(a).toEqual(b);
+  });
+
+  it("the seeded market substrate visits different regimes across seeds (not a fixed economy)", () => {
+    // Collect the set of market regimes reached per seed; across seeds the union must show the
+    // economy genuinely walking (boom/crash/slump/etc.), not every run sitting in one regime.
+    const seeds = ["one", "two", "three", "four", "five", "six"];
+    const regimesSeen = new Set<string>();
+    for (const s of seeds) {
+      const run = autoPlaythrough(real, s, initState, createRng, 500, "economic");
+      for (const m of Object.values(run.markets ?? {})) {
+        const regime = (m as { regime?: string }).regime;
+        if (regime) regimesSeen.add(regime);
+      }
+    }
+    // The substrate is alive: more than a single regime is reachable across seeds.
+    expect(regimesSeen.size).toBeGreaterThan(1);
+  });
+});
+
 describe("market operations (SIM1 nb-006)", () => {
   it("a choice's marketOps take/adjust a position so the market is no longer inert", () => {
     const raw = validRaw();

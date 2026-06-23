@@ -365,11 +365,14 @@ push + PR. See [[one-branch-local-review]].
   deterministic-trigger lattice (compound conditions fire whole family branches into the ONE spine), not
   per-cell braid-slot tagging between peer cells. The slot machinery + braidSelect remain as inputs; the
   anchoring is the lattice. ([[founding-spine-pivot]])
-- [ ] **WV-3 emergent variability (anti-Suzerain) — PARTLY met by the deterministic-trigger lattice; revisit
-  after the visual layer.** The trigger lattice already makes playthroughs diverge (branches gated on
-  leanings/money/place/era/flags/crossings — emergent from authored material, no RNG). Seeded market/disease
-  variability + Yuka rival reactions are a further layer ([[emergent-cause-effect-sim]]); lower priority now
-  that the spine + lattice carry divergence. Revisit post-VL.
+- [x] **WV-3 emergent variability (anti-Suzerain) — DONE + PROVEN/LOCKED.** The seeded systemic substrate
+  (market regime walks + bounded shocks in systemicTick, forked from the run-seed rng) + seeded choice/event
+  selection already make playthroughs diverge with zero Math.random. Added a WV-3 test trio in
+  effects.unit.test.ts on REAL content: (1) 4 seeds → 4 unique economic fingerprints (markets, regimes,
+  money, run-depth all differ — e.g. us_equities stable@97 vs crash@199, crypto flat vs rug); (2) same seed
+  → bit-identical replay (divergence is seeded, not random); (3) the substrate visits >1 market regime across
+  seeds (alive economy). 14/14 green. ([[emergent-cause-effect-sim]]) Yuka rival-reaction layer remains a
+  larger separate system, not needed now that spine+lattice+substrate carry divergence.
 - [x] **RB-4 surface interactive convergence — DONE (forward commit).** Added the rival's rung to the
   Glimpse + a ★-per-rung indicator in the "Other lines" strip, so the player sees their crossings move a
   rival's standing. Browser-tested.
@@ -781,7 +784,11 @@ These surfaced live-verifying the visual layer. The founding-spine pivot ([[mmm-
 WAVES becoming the recurring CAST woven as intersections ([[mmm-timelines-architecture]]). The
 onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival framing.
 
-- [ ] **FS-ONB-DRIFT — onboarding still narrates an IMMIGRANT CROSSING, not the 1776 founding.** The
+- [ ] [WAIT] **FS-ONB-DRIFT — onboarding still narrates an IMMIGRANT CROSSING, not the 1776 founding.** BLOCKED on
+  the dispatched founding-era research agent (real 1765–1800 class/region/trade structure) before the
+  architecture call (rewrite wave→founding-origin vs. reframe waves-as-cast). Scope already enumerated: the
+  whole period→class→wave funnel (waveSelect + places.json wave entries + ArrivalClass) is immigration-shaped.
+  Resume the moment research lands. ORIGINAL NOTE: The
   funnel asks "Every American line begins with a crossing — when did your people make theirs?" then "what
   did they carry off the boat? — steerage, a tenement, the lowest rung." Under the pivot the player's
   progenitor FOUNDS the line at the American founding; the waves are the cast, not the player's origin.
@@ -795,3 +802,19 @@ onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival frami
   captures a screenshot; reading it confirmed the portrait stacks above the paged prose with no overflow and
   the Map tab is reachable. Authoritative mobile check via the Vitest browser harness (not the desktop-width
   chrome-in-* screenshots).
+- [ ] **FS-EARLY-TERMINATION — most autoPlaythrough runs die in the founding era (~1893–1905, "origins"
+  ending, 3–6 history steps).** Surfaced probing WV-3: of 4 seeds, only one (bravo) reached 2010; the other
+  three terminated very early at the "origins" end with tiny history. Either autoPlaythrough's choice-picking
+  dead-ends (no eligible choices → break) or the founding-era content lacks the connective tissue to carry a
+  line forward. Investigate: is this an AUTO-PLAY artifact (the bot picks era-exhausting choices) or a REAL
+  playability gap (a human would also stall)? Drive a seeded run, log where/why it breaks (no eligible
+  choices? era won't advance? end fired?), and fix the root — the spine must carry founding→stars for most
+  seeds, not one in four. This gates the "hour+ of gameplay" mandate.
+- [ ] **FS-RESEARCH-REVERIFY — re-fetch the founding-era power-base/class research from LIVE sources.** A prior
+  agent's "colonial power bases" report (six bases: land, commerce, pulpit, law/politics, press, military)
+  is excellent raw material BUT its web tools were blocked — every citation is from MEMORY, not fetched
+  ([[research-not-memory]]). Before it drives FS-ONB-DRIFT content, re-fetch + confirm the load-bearing facts
+  and URLs, especially the agent's own myth-flags: headright fraud, entail/primogeniture's modest practical
+  effect, the triangular-trade simplification, Great Awakening causation, Common Sense sales numbers, Zenger's
+  limited legal precedent. The currently-running agent (a3a2386c…, this-session) may already cover this —
+  reconcile both reports when they land.
