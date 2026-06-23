@@ -99,9 +99,12 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   motivatorShift/flag accrual); 3 options → CHOSEN = **UN-RETIRE Epoch 0** as the progenitor's emergence
   infancy→adulthood, real authored copy, on the saga/SceneReader substrate (not the old event chain); EI-7/EI-8
   visuals; build order. Art-ban precision recorded: ban = hand-drawn SVG figures only; shaders are fine.
-- [ ] **EI-2 SENSORY-PLACE-RESOLUTION** — the opening beat(s): the newborn's hear/smell/touch/taste resolve
-  INTO one place (deterministic from seed + the player's sensory-reaction taps), replacing the 3-location pick.
-  Pure sim + the SceneReader inline-glow surface; tested (same seed → same resolved place; reactions nudge).
+- [x] **EI-2 SENSORY-PLACE-RESOLUTION — DONE (branch feat/ei2-sense-place-resolution).** Pure
+  `src/sim/founding/senseEmergence.ts`: `dealSenseCues(rng)` deals one diegetic cue per sense leaning to a
+  founding region; `resolvePlace(cues, attendedSenses)` weights ambient + attended → ONE FoundingRegion (never a
+  3-way pick). Sim-pure (RNG facade only); same seed + taps → same place; taps nudge. Test: senseEmergence.unit
+  (cue shape / determinism / one-of-three / taps-nudge). The sim core for the SENSORY birth beat; EI-3 wires it
+  into the Epoch-0 opening act on the SceneReader surface.
 - [ ] **EI-3 EPOCH-0 OPENING ACT (glowing-inline, REAL COPY)** — un-retire Epoch 0 as the played opening: the
   progenitor's emergence built on the saga substrate, rendered via SceneReader glowing inline-dialogue choices
   (bigger, scannable, woven in the prose), NOT the .card/.choices button menu. Author REAL copy for the spine
