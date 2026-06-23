@@ -191,9 +191,11 @@ describe("LegacyReport", () => {
     const items = [...host.querySelectorAll("[data-testid='legacy-ledger'] li")];
     expect(items.length).toBe(3);
     // The comeback is gold-accented, distinct from the red disasters.
+    // toBeDefined (not .not.toBeNull) — .find returns undefined, which passes vacuously vs null (Gemini #124).
     const recovery = items.find((li) => li.getAttribute("data-shock-kind") === "recovery");
     const death = items.find((li) => li.getAttribute("data-shock-kind") === "family_death");
-    expect(recovery, "a comeback line renders").not.toBeNull();
+    expect(recovery, "a comeback line renders").toBeDefined();
+    expect(death, "a disaster line renders").toBeDefined();
     expect(getComputedStyle(recovery as HTMLElement).borderLeftColor).not.toBe(
       getComputedStyle(death as HTMLElement).borderLeftColor,
     );
@@ -241,6 +243,7 @@ describe("LegacyReport", () => {
     // The high-rung line reads as a star-reacher; the faltering one is marked + reads as broken.
     expect(items[0]?.textContent).toMatch(/stars/i);
     const faltered = items.find((li) => li.getAttribute("data-faltering") === "true");
+    expect(faltered, "the faltering line is marked").toBeDefined();
     expect(faltered?.textContent).toMatch(/falter/i);
     // No rivals → no section.
     unmount(component);

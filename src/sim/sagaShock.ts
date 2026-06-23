@@ -259,6 +259,7 @@ export function shockLedger(flags: Iterable<string>): ShockLedgerEntry[] {
       });
     }
   }
-  // family_death < meter_blow < recovery alphabetically — so within a year a comeback sorts last (loss → recover).
-  return out.sort((a, b) => a.year - b.year || a.kind.localeCompare(b.kind));
+  // family_death < meter_blow < recovery alphabetically — so within a year a comeback sorts last (loss →
+  // recover). Plain codepoint compare (NOT localeCompare) — locale/engine-independent for bit-identical replay.
+  return out.sort((a, b) => a.year - b.year || (a.kind < b.kind ? -1 : a.kind > b.kind ? 1 : 0));
 }
