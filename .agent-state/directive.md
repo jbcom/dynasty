@@ -159,9 +159,16 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   ~62ch reading column so the float sits inside the measure; shape-outside rounds the wrap to the plate. Verified
   live (mobile 412px screenshot — prose hugs the plate's left edge then reclaims the column below) + a structural
   test (float:right, shape-outside set, portrait precedes the prose in .scene-body).
-- [ ] [WAIT] **EI-6b-ui + EI-7 PR #194 — merge on green.** 3 local reviewers clean; Amazon-Q placeById-guard finding
-  folded (29435b2). Both live-verified in Chrome (emergence opens on "You are born…", senses→4 glowing inline
-  sense-choices→naming speaks "Gwendolyn Calloway"/"daughter"; portrait magazine-wraps the prose). Squash-merge once
+- [ ] **EI-9 COMPLETE THE PORTRAIT-MATRIX ASSET SWEEP** — the EI-8 wiring is live + the founding-era slice is
+  generated, but the full composite matrix (other era bands × life-stages × encounter roles, ~294+ keys) isn't on
+  disk yet; the on-demand cache covers gaps at runtime but a pre-gen pass gives the shipped build real portraits
+  across the centuries. Run `pnpm vite-node scripts/genai-portraits.ts` (the Gemini image key is wired) era-band by
+  era-band; idempotent (skips existing). READ a sample from each era band + a high-rung archetype (CEO/celebrity/
+  cult-leader/crime) to confirm the wardrobe reads. Asset-only; commit per era band so the diff stays reviewable.
+- [ ] [WAIT] **EI-6b-ui + EI-7 + EI-8 PR #194 — merge on green.** 3 local reviewers clean; Amazon-Q placeById-guard
+  folded (29435b2). EI-8a–f shipped (composite portrait matrix, on-demand cache, founding-era assets). Live-verified
+  in Chrome (emergence opens on "You are born…", senses→4 glowing inline sense-choices→naming speaks "Gwendolyn
+  Calloway"/"daughter"; portrait magazine-wraps the prose). Squash-merge once
   CLEAN + 0 unresolved threads, then sync main + a fresh branch for EI-8.
 - [x] **EI-8 ENUMERATE THE PORTRAIT-DEMAND MATRIX — DONE (spec).** Wrote the full demand matrix into the EI spec
   (docs/.../2026-06-23-emergent-infancy-onboarding-design.md §"EI-8 — the portrait-demand MATRIX"), grounded in the
@@ -198,10 +205,22 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   retry) + `memoryPortraitCache`. Offline tooling — the sim only references keys, never calls a generator (sim
   purity). 4 unit tests (hit, miss→gen-once→hit, null-not-cached-retries, ≤1 gen per distinct key). Gate: check 0,
   typecheck 0/0.
-- [ ] **EI-8f wire SceneReader/PlayScreen portrait lookup to the composite key** — derive the key from the live
-  (year→band, lifeStage, archetype, rung, encounter) instead of `spine_g{gen}_{gender}`; visual-verify a non-founding
-  era + a high-rung archetype wardrobe render correctly (screenshot + READ).
-- [ ] [WAIT] **EI-8 GENAI LIFE-STAGE × ERA × ENCOUNTER PORTRAITS (user, 2026-06-23) — umbrella, tracked by EI-8a–f above.** the existing GenAI image pipeline
+- [x] **EI-8f wire portrait lookup to the composite key + founding-era assets — DONE (branch feat/ei6b-ui-opening-screen).**
+  PlayScreen derives the portrait asset from the EI-8 composite key built from live state (lifeStage(age) ×
+  eraBand(year) × archetype/wardrobe × rungTier(ranks) × gender). Rewrote scripts/genai-portraits.ts to sweep the
+  composite matrix through the EI-8e on-demand cache + write composite-key filenames. GENERATED the founding-era
+  (1700s) adult slice (economic/political/technological × low/mid/high × both genders — 26 real engraving portraits,
+  READ the founding economic_low_m: a candle-lit colonial gentleman, signature aquatint). Retired the 20 orphaned
+  spine_g* assets. Gate: check 0, typecheck 0/0, browser 161, e2e 7.
+  FOLLOW-UP (umbrella, separate asset pass): complete the full 294-key matrix generation (other era bands /
+  life-stages / encounter roles) — on-demand cache fills gaps at runtime meanwhile; needs the Gemini image key, so
+  it runs as a dedicated keyed asset-gen pass, not blanket here.
+- [x] **EI-8 GENAI LIFE-STAGE × ERA × ENCOUNTER PORTRAITS — CORE DONE (EI-8a–f shipped).** The full demand matrix
+  (life-stage × fine era band × archetype/path-wardrobe × rung tier × encounter role) is enumerated, the composite
+  prompt + key + on-demand cache are built and wired into the play surface, and the founding-era slice is generated.
+  Remaining = the full-matrix ASSET generation pass (a keyed offline sweep — [[never ask direction]]: runs as its own
+  asset-gen task; the on-demand cache covers gaps at runtime). Below is the original user spec, kept for reference.
+- [ ] [WAIT] **EI-8 ORIGINAL SPEC (reference, user 2026-06-23):** the existing GenAI image pipeline
   must generate portraits matched to LIFE STAGE (infant / child / youth / adult / elder — the cycles of birth →
   growth → death recur every generation) AND to the ERA the beat sits in (not just the 3 coarse macro-bands —
   the line runs 1770s→stars over 300+ years, so a child in 1790 ≠ a child in 1990 ≠ a child among the stars), AND
