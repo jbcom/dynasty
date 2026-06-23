@@ -15,9 +15,17 @@ import type { GameState } from "../../sim/state";
 
 interface Props {
   gameState: GameState;
+  // MAP-FIELD-LINK: the map carries the SAME per-line state the Field dossier does (faltering / fallen), so a
+  // line the player sees "fallen" in the dossier reads as eliminated on the map too — the two live surfaces agree.
   /** The whole convergence field — each rival line's standing (label + rung 0..MAX_RUNG). Optional so the
    *  component still renders from `gameState` alone (the journey is meaningful without the rivals). */
-  rivalStandings?: Array<{ id: string; label: string; rung: number }>;
+  rivalStandings?: Array<{
+    id: string;
+    label: string;
+    rung: number;
+    faltering?: boolean;
+    fallen?: boolean;
+  }>;
   /** The player's rung (generation depth, 0..MAX_RUNG) as the rival world measures it — to place the
    *  player on the SAME rung axis as the rivals for an apples-to-apples convergence readout. */
   playerRung?: number;
@@ -60,9 +68,12 @@ const rivalDots = $derived(
     x: 14 + (Math.min(r.rung, MAX_RUNG) / MAX_RUNG) * (88 - 14),
   })),
 );
-const leader = $derived(
-  rivalStandings.length ? [...rivalStandings].sort((a, b) => b.rung - a.rung)[0] : null,
-);
+// MAP-FIELD-LINK: a FALLEN line (dropped out) can't lead the convergence — exclude it, matching the dossier
+// where a fallen line never reads as "leads you".
+const leader = $derived.by(() => {
+  const live = rivalStandings.filter((r) => !r.fallen);
+  return live.length ? [...live].sort((a, b) => b.rung - a.rung)[0] : null;
+});
 </script>
 
 <section class="map" aria-label="The dynasty's journey">
@@ -92,7 +103,17 @@ const leader = $derived(
       {/each}
       <!-- MAP-ERA-PROGRESS-RICHER: faint rival markers on the founding→stars axis (who's ahead). -->
       {#each rivalDots as r (r.id)}
-        <circle class="rival" cx={r.x} cy={y - 4.5} r="1.1" data-rival={r.id} />
+        <!-- MAP-FIELD-LINK: a fallen line reads eliminated (dim X-marked), a faltering one dimmer — the same
+             states the Field dossier shows, so the two live surfaces never contradict. -->
+        <circle
+          class="rival"
+          cx={r.x}
+          cy={y - 4.5}
+          r="1.1"
+          data-rival={r.id}
+          data-fallen={r.fallen ? "true" : "false"}
+          data-faltering={r.faltering ? "true" : "false"}
+        />
       {/each}
       <!-- the player's exact generation, sliding between the coarse waypoints. -->
       <circle class="gen-marker" cx={genX} cy={y} r="1.5" />
@@ -184,6 +205,15 @@ const leader = $derived(
     fill: color-mix(in srgb, var(--mmm-text-dim, #888) 70%, transparent);
     stroke: none;
     opacity: 0.7;
+  }
+  /* MAP-FIELD-LINK: a faltering line reads dimmer; a fallen (dropped-out) line is barely-there — eliminated,
+     matching the Field dossier's struck/dim register so the two live surfaces agree at a glance. */
+  circle.rival[data-faltering="true"] {
+    opacity: 0.4;
+  }
+  circle.rival[data-fallen="true"] {
+    opacity: 0.18;
+    fill: var(--mmm-text-dim, #888);
   }
   .labels {
     position: absolute;

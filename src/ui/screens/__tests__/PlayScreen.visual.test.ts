@@ -196,6 +196,38 @@ describe("PlayScreen (composed game screen)", () => {
     expect(hopeBadge.textContent?.trim()).not.toBe(dreadBadge.textContent?.trim());
   });
 
+  it("OMEN-BADGE-SCREENSHOT: captures the hope + dread omen badges for visual review", async () => {
+    const scene = SceneSchema.parse({
+      id: "sc:demo:badgeshot",
+      sense: "sight",
+      prose: ["The season's turn hangs in the balance — read the omen and brace, or hope."],
+    });
+    for (const tone of ["hope", "dread"] as const) {
+      const v: GameView = {
+        ...view(),
+        saga: { actTitle: "Act II", scene, threads: [], ended: false },
+        foreshadow: {
+          text:
+            tone === "hope"
+              ? "The worst of the blow is behind you — the line gathers itself for a turn upward."
+              : "A shadow lies over the season — fever and hard winters stalk the young line.",
+          weight: "grave" as const,
+          tone,
+        },
+      };
+      if (component) unmount(component);
+      component = mount(PlayScreen, {
+        target: host,
+        props: { content, view: v, busy: false, onchoose: () => {} },
+      });
+      // The badge renders with its icon + label; capture for the author to read (legibility, no prose-crowding).
+      expect(
+        host.querySelector('[data-testid="foreshadow"] .omen-badge')?.textContent?.trim(),
+      ).toMatch(tone === "hope" ? /recovering/i : /warning/i);
+      await page.screenshot({ element: host.firstElementChild as Element });
+    }
+  });
+
   it("INVEST-WHILE-HOPE-OMEN: the hope omen renders ABOVE the invest prompt as one coherent beat", () => {
     const scene = SceneSchema.parse({
       id: "sc:demo:rebound-invest",
