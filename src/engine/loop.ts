@@ -60,6 +60,19 @@ const GAME_TRIGGERS = TriggerTableSchema.parse(triggersData);
  *  this, NOT MAX_RUNG (the cell-lattice cap), so the run reaches the broadcast/orbital/stellar acts. */
 const SPINE_MAX_GEN = Math.max(...DYNASTY_SPINE.map((a) => a.gen));
 
+/** STELLAR-EPILOGUE-VARIETY: the apex end's `reason` line, keyed by the stellar DESTINY the line crowned — so
+ *  the ultimate close reflects HOW it reached the stars, not one flat line. Any star path that didn't resolve
+ *  to a distinct destiny falls back to APEX_REASON_DEFAULT (the quiet/hidden finale). */
+const APEX_REASON_DEFAULT =
+  "The dynasty carried its name to the stars — and found, at last, a quiet horizon.";
+const APEX_REASON: Record<string, string> = {
+  stellar_conquest:
+    "The dynasty carried its name to the stars — and took them by force, an empire of suns.",
+  stellar_allies:
+    "The dynasty carried its name to the stars — trusted across worlds, a covenant kept.",
+  stellar_hidden: APEX_REASON_DEFAULT,
+};
+
 /** A snapshot the UI renders from. Immutable per turn. */
 export interface GameView {
   state: GameState;
@@ -877,13 +890,18 @@ export class Game {
       // The line carried succession THROUGH the terminal stellar generation — the dynasty reaches its
       // apex among the stars. End on the survived convergence/destiny ending rather than looping the
       // last act forever (the decoupled clock would otherwise never terminate).
+      // Set a provisional apex end so convergenceEnding() (which requires state.end) can resolve the destiny.
       this.state = {
         ...this.state,
-        end: {
-          kind: "apex",
-          year: this.state.year,
-          reason: "The dynasty carried its name from the founding to the stars.",
-        },
+        end: { kind: "apex", year: this.state.year, reason: APEX_REASON_DEFAULT },
+      };
+      // STELLAR-EPILOGUE-VARIETY: tailor the apex reason to HOW the line reached the stars (conquest / allies /
+      // hidden) so the ultimate close reflects the path taken.
+      const destiny = this.convergenceEnding()?.destiny;
+      const reason = (destiny && APEX_REASON[destiny]) || APEX_REASON_DEFAULT;
+      this.state = {
+        ...this.state,
+        end: { kind: "apex", year: this.state.year, reason },
       };
     } else if (continues && result?.succession) {
       // Apply the succession effect to the LIVE family (take a partner + beget heirs) BEFORE stepping

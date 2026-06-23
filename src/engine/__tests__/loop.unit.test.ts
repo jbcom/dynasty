@@ -1154,4 +1154,46 @@ describe("Game loop", () => {
     expect(g.view.state.recoveryInvests?.length).toBe(1);
     expect(g.view.state.meters.heat).toBeGreaterThan(base.meters.heat);
   });
+
+  it("STELLAR-EPILOGUE-VARIETY: the apex reason reflects HOW the line reached the stars (path-specific)", () => {
+    const real = loadContent();
+    // Drive the full spine to apex (the playtest path reaches g9 + takes succession through the stars).
+    const base = foundByComposition(real, {
+      place: "ireland",
+      era: "origins",
+      culture: "anglo_protestant",
+      year: 1776,
+      archetype: "political" as const,
+      gender: "male" as const,
+      surname: "Apex",
+      given: "Tobias",
+      seed: "playtest",
+      originId: "composed:ireland:origins",
+      lifeSeeds: {
+        firstJob: "printers_devil" as const,
+        bestFriend: "an_ambitious_rival" as const,
+        lifePartner: "marry_for_love" as const,
+      },
+    }).state;
+    const g = new Game(real, "playtest", base, "political");
+    let n = 0;
+    while (!g.finished && n < 20000) {
+      const s = g.view.saga.scene;
+      if (s) {
+        const i = s.decision?.options.findIndex((o) => o.succession?.takesPartner) ?? -1;
+        if (s.decision) g.pickDecision(i >= 0 ? i : 0);
+        else if (s.beats.length) g.pickBeat(0);
+        else break;
+      } else if (g.view.currentEvent?.choices[0]) {
+        g.choose(g.view.currentEvent.choices[0].id);
+      } else break;
+      n++;
+    }
+    expect(g.view.state.end?.kind).toBe("apex");
+    // The apex reason is one of the three path-specific stellar lines — NOT the old flat "founding to the
+    // stars" line. It mentions the stars + a path flavor (force/covenant/quiet horizon).
+    const reason = g.view.state.end?.reason ?? "";
+    expect(reason).toMatch(/stars/i);
+    expect(reason).toMatch(/by force|empire of suns|covenant|trusted across worlds|quiet horizon/i);
+  });
 });

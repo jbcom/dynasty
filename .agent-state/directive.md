@@ -1337,15 +1337,20 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **RIVAL-RUNG-TREND PR #149 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/rival-rung-trend (b41524b). Full local gate passed. Loop: wait build-and-test + CodeQL, fold review
   forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, STELLAR-EPILOGUE-VARIETY.
-- [ ] [WAIT-REVIEW] **STELLAR-EPILOGUE-VARIETY — the apex finale prose varies by HOW the line reached the stars (after #149).** The apex
-  ending fires one prose for all stellar paths; a conquest-stars line should read different from an allies-stars
-  or hidden-stars one (the three stellar destinies already exist in convergence.ts). Wire the destiny-specific
-  prose into the apex close so the ultimate ending reflects the path taken. Pure read-model; tested.
-- [ ] [WAIT-REVIEW] **DEAD-LINE-IN-FIELD — a rival stuck at rung 0 reads as fallen, not just low (after #149).** A line stuck
+- [x] **STELLAR-EPILOGUE-VARIETY — DONE (feat/stellar-epilogue-variety).** The apex `end.reason` now resolves
+  from the stellar DESTINY (conquest → "took them by force, an empire of suns" / allies → "a covenant kept" /
+  hidden → "a quiet horizon") via APEX_REASON, set by resolving the convergence at apex-set time. The ultimate
+  close reflects the path taken, not one flat line (the LegacyReport already showed the destiny-specific
+  convergence prose; this fixes the reason line too). Tests: loop.unit (apex reason is path-specific). 905 node
+  + 131 browser green, gate clean.
+- [ ] [WAIT-REVIEW] **STELLAR-EPILOGUE-VARIETY PR — push, open PR, full remote loop.**
+  1 commit (destiny-keyed apex reason). Full local gate passed. Push, open PR, wait CI, fold review forward +
+  resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, DEAD-LINE-IN-FIELD.
+- [ ] **DEAD-LINE-IN-FIELD — a rival stuck at rung 0 reads as fallen, not just low.** A line stuck
   at the ladder floor is effectively out of the race, but the dossier shows it the same as a low-but-climbing one.
   Mark a long-rung-0 rival "fallen" (a distinct dossier state) so the field reads the eliminations, not just the
   standings. Reads rungHistory (all-zero window); pure; tested.
-- [ ] [WAIT-REVIEW] **CONVERGENCE-FIELD-SUMMARY-LINE — a one-line "state of the race" atop the Field tab (after #149).** The dossier lists
+- [ ] **CONVERGENCE-FIELD-SUMMARY-LINE — a one-line "state of the race" atop the Field tab.** The dossier lists
   every line but gives no at-a-glance read; add a header line ("You lead the field" / "N lines ahead of you" /
   "the field has thinned to M") derived from the standings, so the player gets the gestalt before the rows.
   Pure read-model; tested.
