@@ -1329,11 +1329,11 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **RIVAL-DOSSIER-TAB PR #147 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/rival-dossier-tab. Full local gate passed. Loop: wait build-and-test + CodeQL, fold review forward
   + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-RUNG-TREND.
-- [ ] **RIVAL-RUNG-TREND — track each rival's rung TREND (rising/steady/falling).** The
+- [ ] [WAIT-REVIEW] **RIVAL-RUNG-TREND — track each rival's rung TREND (rising/steady/falling) (after #147).** The
   field shows a rival's current rung but not its DIRECTION; a rival rising fast reads differently from one that
   peaked and is sliding. Record a short per-rival rung history (last N snapshots, a side-store like presses) and
   derive a trend arrow. Feeds RIVAL-DOSSIER-TAB. Pure + seeded (re-derived from advanceWorld); tested.
-- [ ] **STELLAR-EPILOGUE-VARIETY — the apex finale prose varies by HOW the line reached the stars.** The apex
+- [ ] [WAIT-REVIEW] **STELLAR-EPILOGUE-VARIETY — the apex finale prose varies by HOW the line reached the stars (after #147).** The apex
   ending fires one prose for all stellar paths; a conquest-stars line should read different from an allies-stars
   or hidden-stars one (the three stellar destinies already exist in convergence.ts). Wire the destiny-specific
   prose into the apex close so the ultimate ending reflects the path taken. Pure read-model; tested.
