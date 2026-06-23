@@ -8,13 +8,16 @@ describe("assets manifest", () => {
     expect(result.success).toBe(true);
   });
 
-  it("every asset declares a recognized free license", () => {
+  it("every asset declares a recognized license (free upstream, or Generated for GenAI assets)", () => {
     const parsed = AssetsFileSchema.parse(assetsJson);
-    const allowed = new Set(["CC0", "CC-BY", "CC-BY-SA", "PD", "OFL", "MIT"]);
+    // VL-2: GenAI portraits/map carry "Generated"; all sourced upstream assets stay free-licensed.
+    const allowed = new Set(["CC0", "CC-BY", "CC-BY-SA", "PD", "OFL", "MIT", "Generated"]);
     for (const a of parsed.assets) {
       expect(allowed.has(a.license)).toBe(true);
       expect(a.attribution.length).toBeGreaterThan(0);
       expect(a.path.length).toBeGreaterThan(0);
+      // A sourced (non-Generated) asset must cite a real upstream free license, never "Generated".
+      if (a.kind === "icon" || a.kind === "font") expect(a.license).not.toBe("Generated");
     }
   });
 
@@ -40,8 +43,15 @@ describe("assets manifest", () => {
     }
   });
 
-  it("no portrait assets remain — portraits were removed (they distracted)", () => {
+  it("VL-2: generated spine portraits are logged as 'Generated' assets", () => {
+    // The visual-layer revival ([[visual-layer-revival]]) brings portraits BACK — GenAI-generated in the
+    // signature style, license-logged. (Supersedes the old no-portraits rule.)
     const parsed = AssetsFileSchema.parse(assetsJson);
-    expect(parsed.assets.filter((a) => a.kind === "portrait")).toEqual([]);
+    const portraits = parsed.assets.filter((a) => a.kind === "portrait");
+    expect(portraits.length).toBeGreaterThan(0);
+    for (const p of portraits) {
+      expect(p.license).toBe("Generated");
+      expect(p.path).toMatch(/assets\/generated\/.+\.png$/);
+    }
   });
 });

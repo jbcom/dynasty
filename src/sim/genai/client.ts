@@ -20,6 +20,31 @@ export const DEFAULT_GEN_MODEL = "gemini-3.5-flash";
 /** The model used for the editorial QA pass. Same frontier Flash. Override with GEMINI_QA_MODEL. */
 export const DEFAULT_QA_MODEL = "gemini-3.5-flash";
 
+/** The IMAGE-generation model (VL-2) — Imagen 4 fast. Override with GEMINI_IMAGE_MODEL. */
+export const DEFAULT_IMAGE_MODEL = "imagen-4.0-fast-generate-001";
+
+/** Generate one image → raw PNG/JPEG bytes (Uint8Array), or null on no image. (impl, key-gated.) */
+export type GenerateImageFn = (prompt: string) => Promise<Uint8Array | null>;
+
+/**
+ * Build a live image generator backed by Imagen (VL-2 — the visual layer). Throws without a key. Returns
+ * the first generated image's decoded bytes (the SDK gives base64), or null if the model produced none.
+ */
+export function geminiGenerateImage(apiKey: string, model = DEFAULT_IMAGE_MODEL): GenerateImageFn {
+  if (!apiKey)
+    throw new Error("geminiGenerateImage: missing API key — image generation needs a Gemini key");
+  const ai = new GoogleGenAI({ apiKey });
+  return async (prompt) => {
+    const res = await ai.models.generateImages({
+      model,
+      prompt,
+      config: { numberOfImages: 1 },
+    });
+    const b64 = res?.generatedImages?.[0]?.image?.imageBytes;
+    return b64 ? Buffer.from(b64, "base64") : null;
+  };
+}
+
 /**
  * Build a live GenerateFn backed by Gemini. Throws if no key — generation is opt-in
  * and never silently no-ops. `model` defaults to the current GA Gemini model id.

@@ -423,7 +423,9 @@ export const AssetSchema = z.object({
   path: z.string().min(1),
   kind: z.enum(["icon", "portrait", "background", "texture", "audio", "sprite", "font"]),
   source: z.string().min(1),
-  license: z.enum(["CC0", "CC-BY", "CC-BY-SA", "PD", "OFL", "MIT"]),
+  // "Generated" = produced by the project's GenAI pipeline (VL-2 portraits/map); rights per the model
+  // provider's terms (review before external distribution). The rest are the upstream open licenses.
+  license: z.enum(["CC0", "CC-BY", "CC-BY-SA", "PD", "OFL", "MIT", "Generated"]),
   attribution: z.string().default(""),
 });
 export type Asset = z.infer<typeof AssetSchema>;
