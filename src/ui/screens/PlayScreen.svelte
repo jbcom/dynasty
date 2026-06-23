@@ -93,7 +93,7 @@ const codex = loadCodex();
 // the founding→stellar chord arc. Fall back to the event-era ladder on the event path. (AudioEngine starts
 // on the first reader tap; setMusicEra remembers the era until then, then crossfades on each change.)
 const currentEraId = $derived(
-  view.saga.scene ? sagaView.macroAct : (content.eras[view.state.eraIndex]?.id ?? ""),
+  view.saga.scene ? (sagaView.macroAct ?? "") : (content.eras[view.state.eraIndex]?.id ?? ""),
 );
 $effect(() => {
   if (currentEraId) setMusicEra(currentEraId);
