@@ -79,10 +79,11 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   in real arrival history (Irish 1845-75 docks; Chinese 1863-82 railroad-WEST; etc.), each with an era-gated
   arrival + a priorCrossing-gated recurrence. Trigger*Schema added; validates + fires correctly by era. +1
   test, 714 green.
-- [ ] **FS-5c loop wiring — with FS-6.** Wire evaluateTriggers into loop.view to weave fired branches INTO
-  the spine prose + recordCrossing on activation; cast in the save state (deterministic). Lands with FS-6's
-  spine prose (branches need authored spine acts to weave into). Live-verify a recurring crossing pays off
-  an earlier one.
+- [x] **FS-5c loop wiring — DONE (committed).** loop.view folds deterministic-trigger family branches into
+  the scene threads (triggerThreads): SpineState projection from saved state → evaluateTriggers over the
+  validated GAME_TRIGGERS → woven threads, no RNG, replay-identical. Memory in the saved `flags` set via the
+  `crossed:` convention (no schema change). +1 test, 715 green. (Full per-branch fabric PROSE weaving +
+  recordCrossing-on-activation deepen with FS-6's authored spine; live-verify the recurring payoff there.)
 - [ ] **FS-6 author the spine prose.** GenAI flesh the authored spine acts to depth, era-distinct; QA vs
   guidance; commit-before-run.
 - [ ] **FS-6b archetypal-DESTINY endings.** Re-skin/expand convergence.ts into NAMED dynasty destinies for
