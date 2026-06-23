@@ -149,14 +149,15 @@ $effect(() => { if (tab === "event" && wide) tab = defaultTab; });
 // Each tab carries a real 2D line-icon asset (public/assets/icons/ui/<icon>.svg).
 const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   { id: "event", label: "Now", icon: "now" },
-  // VL-3: the era-progressing journey map (founded lines only — it tracks the founding→stars arc).
-  ...(hasLineage ? [{ id: "map" as Tab, label: "Map", icon: "timeline" }] : []),
+  // TAB-ICON-FULL-DEDUP: every founded-line tab gets a DISTINCT glyph — no accidental shared icons. The Map
+  // (founding→stars ascent) takes `pole-utopian` (a rising arc), freeing `timeline` for the Timeline tab; the
+  // Lineage (the line itself, ascending) takes `pole-dictatorial`, freeing `dossier` for the Dossier tab.
+  ...(hasLineage ? [{ id: "map" as Tab, label: "Map", icon: "pole-utopian" }] : []),
   ...(hasNews ? [{ id: "news" as Tab, label: "News", icon: "news" }] : []),
-  // MAP-TAB-LABEL-ICON-DEDUP: the Field (rival-race standings) reads with the spread-of-positions `pole-centrist`
-  // glyph, distinct from the Map's `timeline` journey arc — so the tab bar disambiguates the two at a glance.
+  // MAP-TAB-LABEL-ICON-DEDUP: the Field (rival-race standings) reads with the spread-of-positions `pole-centrist`.
   ...(hasField ? [{ id: "field" as Tab, label: "Field", icon: "pole-centrist" }] : []),
   ...(hasMarkets ? [{ id: "markets" as Tab, label: "Markets", icon: "markets" }] : []),
-  ...(hasLineage ? [{ id: "lineage" as Tab, label: "Lineage", icon: "dossier" }] : []),
+  ...(hasLineage ? [{ id: "lineage" as Tab, label: "Lineage", icon: "pole-dictatorial" }] : []),
   { id: "timeline", label: "Timeline", icon: "timeline" },
   { id: "stats", label: "Stats", icon: "stats" },
   { id: "butterfly", label: "Choices", icon: "butterfly" },
