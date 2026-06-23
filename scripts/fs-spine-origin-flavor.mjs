@@ -1326,8 +1326,11 @@ const G8_VARIANTS = [
       {
         prose: ["A cosmist movement offers the ministry the helm of humanity's spiritual expansion to the stars."],
         choice: {
+          // Cosmism fuses faith with the science/progress drive to the stars — worldview toward the
+          // science pole, so the pulpit founder has a real faith-vs-progress fork (vs. the void-creed
+          // option's worldview:-1), matching the g3/g5 pulpit-choice pattern.
           text: "Lead the cosmist church — make the conquest of space a sacred mission.",
-          motivatorShift: { worldview: -1, power: 1 },
+          motivatorShift: { worldview: 1, power: 1 },
           setFlags: ["g8_pulpit_cosmist"],
           gather: true,
         },
@@ -1470,8 +1473,11 @@ const G9_VARIANTS = [
       {
         prose: ["The colony fleets beg for a unifying faith to bind the scattering of humanity across the suns."],
         choice: {
+          // A new synthesizing creed for the star age leans worldview toward the forward/progress pole —
+          // the fork against the established-church-as-empire option below (which holds the faith pole),
+          // so the g9 pulpit founder has a real faith-vs-progress choice (matching g3/g5/g8).
           text: "Found the interstellar creed — give the species among the stars a soul in common.",
-          motivatorShift: { worldview: -1, reach: 1 },
+          motivatorShift: { worldview: 1, reach: 1 },
           setFlags: ["g9_pulpit_interstellar_creed"],
           gather: true,
         },
