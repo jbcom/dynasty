@@ -1262,15 +1262,15 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   PlayScreen styles a "grave" omen in a heavier register (solid red-tinted border, brighter+bolder text) vs the
   "marginal" one's faint dashed dim. Dread is felt visually, not just read. Tests: loop.unit (omen carries
   text+weight, deterministic) + PlayScreen.visual (grave border ≠ marginal border). 896 node + 127 browser green.
-- [ ] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust.**
+- [ ] [WAIT-REVIEW] **OMEN-PAYOFF-AUDIT — measure foreshadow→shock correlation, calibrate trust (after #134).**
   A foreshadow that rarely precedes a real blow trains the player to ignore it; one that always does is just a
   spoiler. Instrument the foreshadow→next-shock correlation over many seeds; if it's miscalibrated, tune the
   threshold so an omen is a meaningful-but-not-certain warning. Decide from figures (like SHOCK-CADENCE-AUDIT).
-- [ ] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger.** A rebound
+- [ ] [WAIT-REVIEW] **RECOVERY-INVEST-IN-LEDGER — record an INVESTED comeback distinctly in the ledger (after #134).** A rebound
   the player paid for reads the same as a lucky one in the "What Befell" log; stamp the invested recovery (e.g.
   recovered:<meter>:<year>:invested) so the ledger can mark "rebuilt by your own hand" — the player's agency
   shows in the family history. Pure read-model extension; tested.
-- [ ] **AGENCY-IN-LEGACY — the LegacyReport tallies the player's WV-3 agency (presses/invests/braced omens).**
+- [ ] [WAIT-REVIEW] **AGENCY-IN-LEGACY — the LegacyReport tallies the player's WV-3 agency (after #134).**
   The end-game shows the field + hard seasons but not what the PLAYER actively DID across the run — rivals
   pressed, recoveries invested, omens heeded. Tally these from the side-logs/flags into a "By Your Own Hand"
   line in the LegacyReport, so the close credits the player's interventions. Pure read-model; tested.
