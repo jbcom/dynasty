@@ -1072,10 +1072,20 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   commerce default). The origin choice now echoes across SIX generations (g0 founding 1776 → g5 mid-century).
   Same applyAct() pattern (g0–g5); spineOriginFlavor.unit asserts all 6 acts (48 tests). 784 unit + tsc +
   check green. On `feat/spine-origin-depth` — ready to ship this g2-g5 depth batch as one PR.
-- [ ] [WAIT] **FS-SPINE-DEPTH-PR — g2–g5 origin-flavor batch → PR #102 OPEN.** Full local gate GREEN; reviewer
-  pass CLEAN (byte-idempotent, gating correct, 6-base coverage, non-vacuous). Pushed feat/spine-origin-depth +
-  opened PR #102 (https://github.com/jbcom/dynasty/pull/102). Babysitting: monitoring CI; address CodeRabbit +
-  resolve threads, self-squash-merge once green, verify post-merge Release/CD. Then g6+ on a fresh branch.
+- [x] **FS-SPINE-DEPTH-PR — DONE → PR #102 MERGED (squash e1f6f2e).** Reviewer pass CLEAN; opened PR #102;
+  addressed all 6 CodeRabbit findings (g2 commerce-default + press variant — the real one; pulpit worldview
+  alignment; idempotent-filter hardening) + resolved threads → CLEAN; re-run CI green; self-squash-merged.
+  Synced main, deleted the branch. Post-merge Release + CD verifying on main (monitor b0uxvdvx7).
+- [x] **FS-SPINE-ORIGIN-FLAVOR-DEPTH-G6–G9 — DONE (the depth arc is COMPLETE).** g6 (broadcast), g7
+  (networked), g8 (orbital), g9 (interstellar) each got 5 base-flavored openings. The founder's power-base
+  choice now colors ALL TEN generations (g0 founding 1776 → g9 the stars). Idempotent applyAct() (g0-g9,
+  byte-idempotent verified); spineOriginFlavor.unit asserts all 10 acts (80 tests). 816 unit + tsc + check
+  green. On `feat/spine-origin-depth-g6`.
+- [ ] [WAIT] **FS-SPINE-DEPTH2-PR — g6–g9 origin-flavor batch → PR #104 OPEN.** Full local gate GREEN; reviewer
+  pass CLEAN (folded its g8/g9 pulpit-fork consistency nit). Pushed + opened PR #104
+  (https://github.com/jbcom/dynasty/pull/104). Babysitting: monitoring CI; address CodeRabbit + resolve
+  threads, self-squash-merge once green, verify post-merge Release/CD. Completes the origin-flavor depth
+  milestone (all 10 generations, founding 1776 → the stars).
 - [x] **FS-PR-LOOP — DONE → PR #100 MERGED (squash 94c694a).** First CI pass green; addressed all 6 CodeRabbit
   findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision pin) + a regression test in a
   forward commit + resolved all 6 threads → CLEAN; re-run CI green; self-squash-merged. release-please then

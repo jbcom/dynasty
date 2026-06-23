@@ -73,6 +73,39 @@ const FLAVORED_ACTS = [
     bases: ["land", "pulpit", "law", "military", "press"],
     defaultBase: "commerce",
   },
+  {
+    // g6's default open is the TV control room — press-themed (the media generation) — so press is the
+    // default and commerce is the flavored variant.
+    open: "spine:g6:broadcast:open",
+    divert: "spine:g6:broadcast:platform",
+    base: "spine:g6:broadcast:open_",
+    bases: ["land", "commerce", "pulpit", "law", "military"],
+    defaultBase: "press",
+  },
+  {
+    // g7's default open is the server farm — commerce/platform-themed.
+    open: "spine:g7:networked:open",
+    divert: "spine:g7:networked:doctrine",
+    base: "spine:g7:networked:open_",
+    bases: ["land", "pulpit", "law", "military", "press"],
+    defaultBase: "commerce",
+  },
+  {
+    // g8's default open is the high-orbital shipyard — military/default (the space force).
+    open: "spine:g8:orbital:open",
+    divert: "spine:g8:orbital:turn",
+    base: "spine:g8:orbital:open_",
+    bases: ["land", "commerce", "pulpit", "law", "press"],
+    defaultBase: "military",
+  },
+  {
+    // g9's default open is the antimatter dreadnought — military/default.
+    open: "spine:g9:interstellar:open",
+    divert: "spine:g9:interstellar:transit",
+    base: "spine:g9:interstellar:open_",
+    bases: ["land", "commerce", "pulpit", "law", "press"],
+    defaultBase: "military",
+  },
 ];
 
 function actIdOf(open: string): string {
