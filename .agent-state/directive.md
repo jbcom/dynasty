@@ -983,9 +983,16 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   but DecisionOptionSchema has NO `requires` field — option-level gating isn't supported today. So the three
   approaches are: (A) add `requires` to DecisionOptionSchema + runner option-filter + author per-base option
   variants; (B) author base-GATED bonus SCENES that divert in for the matching founder (uses existing scene
-  `requires`, no schema change) — likely the cleanest; (C) thread the base into the spine GenAI prompt on the
-  next regen so the authored prose is base-aware from the start. Pick one (enumerate first), then author.
-  Make the player's onboarding choice MATTER in the prose, not just the motivator seed.
+  `requires`, no schema change); (C) thread the base into the spine GenAI prompt on the next regen.
+  DECISION (this session): approach B. VERIFIED viable end-to-end — `resolveEligible` (runner.ts:77-82) skips
+  scenes whose `requires.flags` aren't met, walking `act.scenes` in order to the next eligible; and beginSpine
+  passes `state.flags` (which carry the founding `base:*` seed flags from foundByComposition) into startAct,
+  so a scene gated `requires.flags:["base:press"]` sees the flag at act open. MVP: insert ONE base-flavored
+  opening variant per power base into the FOUNDING act (g0) — 6 gated scenes — so the chosen base colors the
+  founding scene from beat one; a 7th un-gated default stays for any uncovered case. Author via the GenAI
+  spine pipeline (matches the spine voice), license/validate, then Chrome-verify a press vs. land founder sees
+  different opening prose. Later gens can follow the same pattern incrementally. Make the choice MATTER in the
+  prose, not just the motivator seed.
 - [ ] **FS-COMPLETION-REVIEW — milestone comprehensive review before the single PR.** The founding-spine
   completion (VL-3/4/5, WV-3, FS-ONB-DRIFT, FS-SPINE-BRANCH-ONRAMPS, FS-RETIRE-PROLOGUE, UQ-3,
   FS-BRANCH-ONRAMP-AUDIT) is a large body of work on the one branch. Before opening the single PR
