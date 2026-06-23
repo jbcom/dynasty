@@ -1081,10 +1081,11 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   choice now colors ALL TEN generations (g0 founding 1776 → g9 the stars). Idempotent applyAct() (g0-g9,
   byte-idempotent verified); spineOriginFlavor.unit asserts all 10 acts (80 tests). 816 unit + tsc + check
   green. On `feat/spine-origin-depth-g6`.
-- [ ] [WAIT-REVIEW] **FS-SPINE-DEPTH2-PR — ship the g6–g9 origin-flavor batch as one PR.** Full local gate
-  GREEN (816 unit + 106 browser + 7 e2e + build + tsc + check). Reviewer pass dispatched (a12d5ff9…) on the
-  branch diff; once it lands, fold any findings, then push + open + babysit to merge (CI green, CodeRabbit,
-  resolve threads, self-squash-merge, verify Release/CD). Completes the origin-flavor depth milestone (g0-g9).
+- [ ] [WAIT] **FS-SPINE-DEPTH2-PR — g6–g9 origin-flavor batch → PR #104 OPEN.** Full local gate GREEN; reviewer
+  pass CLEAN (folded its g8/g9 pulpit-fork consistency nit). Pushed + opened PR #104
+  (https://github.com/jbcom/dynasty/pull/104). Babysitting: monitoring CI; address CodeRabbit + resolve
+  threads, self-squash-merge once green, verify post-merge Release/CD. Completes the origin-flavor depth
+  milestone (all 10 generations, founding 1776 → the stars).
 - [x] **FS-PR-LOOP — DONE → PR #100 MERGED (squash 94c694a).** First CI pass green; addressed all 6 CodeRabbit
   findings (sort anti-symmetry ×4, mineFabric div-by-zero, genai-qa decision pin) + a regression test in a
   forward commit + resolved all 6 threads → CLEAN; re-run CI green; self-squash-merged. release-please then
