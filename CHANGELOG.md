@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.20.0](https://github.com/jbcom/dynasty/compare/v0.19.0...v0.20.0) (2026-06-23)
+
+
+### Features
+
+* founding-spine completion (visual layer, founding-era onboarding, spine branches, prologue retirement) ([#100](https://github.com/jbcom/dynasty/issues/100)) ([94c694a](https://github.com/jbcom/dynasty/commit/94c694a1b350b94a6412c8871881b8694bd73749))
+
 ## [0.19.0](https://github.com/jbcom/dynasty/compare/v0.18.0...v0.19.0) (2026-06-22)
 
 
