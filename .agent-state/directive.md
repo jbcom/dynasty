@@ -84,11 +84,13 @@ Branch: feat/founding-spine-redesign. THIS supersedes the visual layer + the rem
   validated GAME_TRIGGERS → woven threads, no RNG, replay-identical. Memory in the saved `flags` set via the
   `crossed:` convention (no schema change). +1 test, 715 green. (Full per-branch fabric PROSE weaving +
   recordCrossing-on-activation deepen with FS-6's authored spine; live-verify the recurring payoff there.)
-- [ ] [WAIT] **FS-6 author the spine prose — RUNNING (bg, ~7/10).** Gen 0 (1776) + several gens authored +
-  VERIFIED era-distinct (allegiance/platform/etc.). A few gens (g5/g7) hit schema object-drift the OLD
-  normalizer missed → IMPROVED normalizeSceneFile this turn (now coerces acts[]/acts[].scenes/requires.flags
-  object→array; uncommitted, part of held FS-6). ON run completion: re-gen the skipped gens with the fixed
-  normalizer, read each generation, then update corpus tests (FS-6c) + joint-commit FS-6/6b/6c. [WAIT] the run.
+- [ ] [WAIT] **FS-6 author the spine prose — ALL 10 AUTHORED + verified; cleaning orphans (bg regen g0/6/8).**
+  All 10 generations authored + VERIFIED era-distinct (bargain→allegiance→venture→reckoning→platform→doctrine→
+  expansion across the 10; the sameness is DISSOLVED). Fixed normalizeSceneFile (acts[]/requires object-drift)
+  + bumped runner retries to 4. Caught an ORPHAN-scene integrity bug (model emitted scenes not in the act's
+  scenes[]) → added orphan check to validateSpineFile + dropped+regenerating g0/g6/g8 cleanly (bg). Corpus
+  tests updated (loadSaga 504 cell + 10 spine; DEPTH-1 scoped to cell-acts + new spine-close test). ON regen
+  completion: full suite green → joint-commit FS-6/6b/6c. [WAIT] the regen.
 - [x] **FS-6b archetypal-DESTINY endings — CODE DONE (uncommitted, holding for joint commit).** convergence.ts:
   added `Destiny` type + tagged the lattice: 3 distinct STELLAR finales (stellar_conquest=seize colonies /
   stellar_allies=forge allies / stellar_hidden=alone on a quiet world) + 6 NAMED earthly destinies (dictator/
