@@ -4,6 +4,7 @@ import {
   advanceWorld,
   createDynastyWorld,
   detectGlimpses,
+  isFallen,
   nudgeRival,
   rungTrend,
   surgeHeadline,
@@ -202,6 +203,15 @@ describe("dynasty world (SS-8)", () => {
     // Degenerate inputs are steady (no direction).
     expect(rungTrend([])).toBe("steady");
     expect(rungTrend([4])).toBe("steady");
+  });
+
+  it("DEAD-LINE-IN-FIELD: isFallen is true only for a FULL all-zero window (not a fresh or recovering line)", () => {
+    expect(isFallen([0, 0, 0, 0])).toBe(true); // stuck at the floor across the window
+    expect(isFallen([0, 0, 0])).toBe(false); // window not yet full → not written off
+    expect(isFallen([0, 1, 0, 0])).toBe(false); // climbed once → not fallen
+    expect(isFallen([1, 0, 0, 0])).toBe(false); // had a rung within the window
+    expect(isFallen([])).toBe(false);
+    expect(isFallen([0])).toBe(false);
   });
 
   it("RIVAL-RUNG-TREND: advanceWorld records rung history → snapshots carry a trend", () => {

@@ -1346,14 +1346,26 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **STELLAR-EPILOGUE-VARIETY PR #151 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/stellar-epilogue-variety (1b20414). Full local gate passed. Loop: wait build-and-test + CodeQL,
   fold review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, DEAD-LINE-IN-FIELD.
-- [ ] [WAIT-REVIEW] **DEAD-LINE-IN-FIELD — a rival stuck at rung 0 reads as fallen, not just low (after #151).** A line stuck
-  at the ladder floor is effectively out of the race, but the dossier shows it the same as a low-but-climbing one.
-  Mark a long-rung-0 rival "fallen" (a distinct dossier state) so the field reads the eliminations, not just the
-  standings. Reads rungHistory (all-zero window); pure; tested.
-- [ ] [WAIT-REVIEW] **CONVERGENCE-FIELD-SUMMARY-LINE — a one-line "state of the race" atop the Field tab (after #151).** The dossier lists
+- [x] **DEAD-LINE-IN-FIELD — DONE (feat/dead-line-in-field).** isFallen(history) flags a rival stuck at rung 0
+  across a FULL window (not fresh/recovering); RivalSnapshot + standings carry `fallen`; the RivalDossier reads
+  it as "Fallen" (dimmed + struck-through), taking precedence over faltering/surging — the field now shows
+  eliminations, not just low standings. Pure + seeded. Tests: dynastyWorld.unit (isFallen window gating) +
+  RivalDossier.browser (fallen state). 906 node + 132 browser green, gate clean.
+- [ ] [WAIT-REVIEW] **DEAD-LINE-IN-FIELD PR — push, open PR, full remote loop.**
+  1 commit (isFallen + fallen dossier state). Full local gate passed. Push, open PR, wait CI, fold review forward
+  + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, CONVERGENCE-FIELD-SUMMARY-LINE.
+- [ ] **CONVERGENCE-FIELD-SUMMARY-LINE — a one-line "state of the race" atop the Field tab.** The dossier lists
   every line but gives no at-a-glance read; add a header line ("You lead the field" / "N lines ahead of you" /
   "the field has thinned to M") derived from the standings, so the player gets the gestalt before the rows.
   Pure read-model; tested.
+- [ ] **FALLEN-NEWS — announce a rival's elimination in the NewsTicker.** A line going fallen (DEAD-LINE-IN-FIELD)
+  is a major race event but only shows passively in the dossier. Emit a one-time NewsTicker dispatch when a
+  near-vantage rival first falls ("The <place> line has dropped out of the race") so the player registers the
+  field thinning. Reads the fallen transition (a side-marker like presses, to fire once); pure; tested.
+- [ ] **WV-3-MILESTONE-DOC — write docs/STATE.md section capturing the WV-3 agency+atmosphere milestone.** The
+  shock→recovery→agency→atmosphere→rival-race layer is now broad (shocks, recoveries, foreshadow, press/invest,
+  rival dispatches, field dossier, trends, fallen, ending variety). docs/STATE.md should record the milestone
+  shape + the side-log/save-invariant pattern so the next session has the canonical map. Docs only; no code.
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
