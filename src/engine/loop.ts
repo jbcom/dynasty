@@ -742,6 +742,9 @@ export class Game {
     if (this.state.flags.includes(Game.RECOVERY_INVEST_FLAG)) return; // one pending invest at a time
     const hasOutstanding = this.state.flags.some((f) => f.startsWith("shock_meter:"));
     if (!hasOutstanding) return; // nothing to rebound — investing would be wasted
+    // AFFORDABILITY GUARD (Gemini #130, high): a money invest must be affordable — else the player gets a
+    // free/discounted boost (money would go negative). Heat invest is always allowed (a heat RISE is the cost).
+    if (meter === "money" && this.state.meters.money < Game.INVEST_COST) return;
     this.applyInvestEffect(meter);
     this.state = {
       ...this.state,

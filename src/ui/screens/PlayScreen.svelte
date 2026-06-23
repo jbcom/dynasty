@@ -177,7 +177,14 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
       {#if view.canInvestRecovery && oninvest}
         <div class="invest" data-testid="recovery-invest">
           <span class="invest-label">Pour resources into the recovery?</span>
-          <button type="button" class="invest-btn" onclick={() => oninvest?.("money")}>
+          <!-- The money invest is disabled when unaffordable (mirrors the engine's affordability guard;
+               cost = Game.INVEST_COST = 18). Heat ("Call in favours") is always available — its cost is a rise. -->
+          <button
+            type="button"
+            class="invest-btn"
+            disabled={view.state.meters.money < 18}
+            onclick={() => oninvest?.("money")}
+          >
             Spend funds
           </button>
           <button type="button" class="invest-btn" onclick={() => oninvest?.("heat")}>
@@ -425,6 +432,11 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
     border: none;
     border-radius: var(--mmm-radius);
     cursor: pointer;
+  }
+  /* Clear visual feedback when an invest is unaffordable (Gemini #130). */
+  .invest-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
   /* SHOCK-FORESHADOW: dread before the blow — a muted, ominous omen (not the sharp red of an actual loss). */
   .foreshadow {

@@ -1120,4 +1120,36 @@ describe("Game loop", () => {
     }
     expect(invested, "an investable recovery window appeared across the seed sweep").toBe(true);
   });
+
+  it("RECOVERY-CHOICE: a money invest is REJECTED when the player can't afford it (affordability guard)", () => {
+    const real = loadContent();
+    // A founded, saga-active state with an outstanding blown meter but money below the invest cost (18).
+    const base = foundByComposition(real, {
+      place: "ireland",
+      era: "origins",
+      culture: "anglo_protestant",
+      year: 1776,
+      archetype: "political" as const,
+      gender: "male" as const,
+      surname: "Af",
+      seed: "afford",
+      originId: "composed:ireland:origins",
+    }).state;
+    const poor = {
+      ...base,
+      meters: { ...base.meters, money: 5 },
+      flags: [...base.flags, "shock_meter:money"],
+    };
+    const g = new Game(real, "afford", poor, "political");
+    // canInvestRecovery is true (outstanding strain), but a MONEY invest is rejected (can't afford) …
+    expect(g.view.canInvestRecovery).toBe(true);
+    const moneyBefore = g.view.state.meters.money;
+    g.investRecovery("money");
+    expect(g.view.state.meters.money).toBe(moneyBefore); // no spend
+    expect(g.view.state.recoveryInvests ?? []).toEqual([]); // no record
+    // … while a HEAT invest (cost is a heat RISE, always affordable) DOES apply.
+    g.investRecovery("heat");
+    expect(g.view.state.recoveryInvests?.length).toBe(1);
+    expect(g.view.state.meters.heat).toBeGreaterThan(base.meters.heat);
+  });
 });

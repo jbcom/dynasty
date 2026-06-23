@@ -111,6 +111,32 @@ describe("PlayScreen (composed game screen)", () => {
     expect(calls).toEqual(["money", "heat"]);
   });
 
+  it("RECOVERY-CHOICE: the 'Spend funds' button is disabled when the player can't afford it", () => {
+    const scene = SceneSchema.parse({
+      id: "sc:demo:broke",
+      sense: "sight",
+      prose: ["The coffers are all but empty, yet the house still reels from its loss."],
+    });
+    const v: GameView = {
+      ...view(),
+      state: { ...view().state, meters: { ...view().state.meters, money: 5 } },
+      saga: { actTitle: "Act II", scene, threads: [], ended: false },
+      canInvestRecovery: true,
+    };
+    component = mount(PlayScreen, {
+      target: host,
+      props: { content, view: v, busy: false, onchoose: () => {}, oninvest: () => {} },
+    });
+    const btns = [
+      ...host.querySelectorAll<HTMLButtonElement>('[data-testid="recovery-invest"] .invest-btn'),
+    ];
+    // "Spend funds" (money) is disabled (can't afford 18); "Call in favours" (heat) stays enabled.
+    const money = btns.find((b) => b.textContent?.includes("Spend funds"));
+    const heat = btns.find((b) => b.textContent?.includes("Call in favours"));
+    expect(money?.disabled).toBe(true);
+    expect(heat?.disabled).toBeFalsy();
+  });
+
   it("RECOVERY-CHOICE: no invest prompt when canInvestRecovery is false", () => {
     const scene = SceneSchema.parse({
       id: "sc:demo:calm",
