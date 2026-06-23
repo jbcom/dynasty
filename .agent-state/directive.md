@@ -1329,16 +1329,27 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **RIVAL-DOSSIER-TAB PR #147 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/rival-dossier-tab. Full local gate passed. Loop: wait build-and-test + CodeQL, fold review forward
   + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-RUNG-TREND.
-- [ ] [WAIT-REVIEW] **RIVAL-RUNG-TREND — track each rival's rung TREND (rising/steady/falling) (after #147).** The
-  field shows a rival's current rung but not its DIRECTION; a rival rising fast reads differently from one that
-  peaked and is sliding. Record a short per-rival rung history (last N snapshots, a side-store like presses) and
-  derive a trend arrow. Feeds RIVAL-DOSSIER-TAB. Pure + seeded (re-derived from advanceWorld); tested.
-- [ ] [WAIT-REVIEW] **STELLAR-EPILOGUE-VARIETY — the apex finale prose varies by HOW the line reached the stars (after #147).** The apex
+- [x] **RIVAL-RUNG-TREND — DONE (feat/rival-rung-trend).** advanceWorld records a capped per-agent rungHistory
+  each tick; the snapshot derives a trend (rising/steady/falling) via rungTrend(). RivalSnapshot + rivalStandings
+  + GameView carry it; the RivalDossier shows a ▲/—/▼ momentum arrow (gold/dim/red) beside each rival's rung.
+  Pure + seeded (re-derived from advanceWorld, no new save state). Tests: dynastyWorld.unit (trend direction +
+  determinism) + RivalDossier.browser (arrow render). 904 node + 131 browser green, gate clean.
+- [ ] [WAIT-REVIEW] **RIVAL-RUNG-TREND PR #149 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/rival-rung-trend (b41524b). Full local gate passed. Loop: wait build-and-test + CodeQL, fold review
+  forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, STELLAR-EPILOGUE-VARIETY.
+- [ ] [WAIT-REVIEW] **STELLAR-EPILOGUE-VARIETY — the apex finale prose varies by HOW the line reached the stars (after #149).** The apex
   ending fires one prose for all stellar paths; a conquest-stars line should read different from an allies-stars
   or hidden-stars one (the three stellar destinies already exist in convergence.ts). Wire the destiny-specific
   prose into the apex close so the ultimate ending reflects the path taken. Pure read-model; tested.
-- [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release cut 0.36.0).** Weighted view.foreshadow
-  + tiered styling (grave reads heavier than marginal). CI green, 0 review threads, merged CLEAN. main synced.
+- [ ] [WAIT-REVIEW] **DEAD-LINE-IN-FIELD — a rival stuck at rung 0 reads as fallen, not just low (after #149).** A line stuck
+  at the ladder floor is effectively out of the race, but the dossier shows it the same as a low-but-climbing one.
+  Mark a long-rung-0 rival "fallen" (a distinct dossier state) so the field reads the eliminations, not just the
+  standings. Reads rungHistory (all-zero window); pure; tested.
+- [ ] [WAIT-REVIEW] **CONVERGENCE-FIELD-SUMMARY-LINE — a one-line "state of the race" atop the Field tab (after #149).** The dossier lists
+  every line but gives no at-a-glance read; add a header line ("You lead the field" / "N lines ahead of you" /
+  "the field has thinned to M") derived from the standings, so the player gets the gestalt before the rows.
+  Pure read-model; tested.
+- [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
   merged CLEAN. main synced.

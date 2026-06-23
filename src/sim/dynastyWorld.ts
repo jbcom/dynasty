@@ -32,6 +32,23 @@ export interface RivalSnapshot {
   /** SHOCK-AFTERMATH-IN-RIVALS: the rival is in a seeded setback (lost a rung, not yet rebounded) — a
    *  faltering competitor, a window the player can exploit. Surfaced in glimpses/standings. */
   faltering: boolean;
+  /** RIVAL-RUNG-TREND: the line's recent rung DIRECTION — "rising" / "steady" / "falling" — derived from its
+   *  rung history, so the dossier can show momentum (a line peaked-and-sliding reads unlike one climbing). */
+  trend: RungTrend;
+}
+
+/** RIVAL-RUNG-TREND: a rival's rung momentum over its recent history. */
+export type RungTrend = "rising" | "steady" | "falling";
+
+/** Derive the rung trend from a (oldest→newest) rung history: compare the latest reading to the earliest in
+ *  the window. Net up → rising, net down → falling, flat/empty → steady. Pure. */
+export function rungTrend(history: readonly number[]): RungTrend {
+  if (history.length < 2) return "steady";
+  const first = history[0] ?? 0;
+  const last = history[history.length - 1] ?? 0;
+  if (last > first) return "rising";
+  if (last < first) return "falling";
+  return "steady";
 }
 
 /** The relation a rival holds toward the played line at an intersection. */
@@ -103,6 +120,7 @@ function snapshot(agent: DynastyAgent, epoch: Epoch | null): RivalSnapshot {
     tide,
     alive: true,
     faltering: agent.stumbled ?? false,
+    trend: rungTrend(agent.rungHistory ?? [agent.rung]),
   };
 }
 
@@ -162,10 +180,16 @@ export function advanceWorld(
     // interstellar one). Deterministic per (agent, year). A stumbled rival REBOUNDS (regains the rung) on a
     // later turn it survives un-struck — the two-act blow→recover shape, mirrored for the world.
     rivalShock(agent, year, rng.fork(`rivalshock:${agent.id}:${year}`));
+    // RIVAL-RUNG-TREND: record this tick's rung (capped window) so the snapshot can read the line's momentum.
+    agent.rungHistory = [...(agent.rungHistory ?? []), agent.rung].slice(-RUNG_HISTORY_WINDOW);
     snapshots.push(snapshot(agent, epoch));
   }
   return { rivals: world.rivals, snapshots };
 }
+
+/** RIVAL-RUNG-TREND: how many recent rung readings to keep — enough to read a trend, short enough that a
+ *  recent reversal (a peak-and-slide) shows promptly. */
+const RUNG_HISTORY_WINDOW = 4;
 
 /** Per-turn base chance a rival takes a setback, before era-weighting. Tuned alongside the player's
  *  BASE_SHOCK_CHANCE (0.33) but lower — the world shouldn't churn faster than the played line. */

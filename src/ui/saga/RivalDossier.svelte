@@ -12,6 +12,7 @@ interface Standing {
   label: string;
   rung: number;
   faltering: boolean;
+  trend: "rising" | "steady" | "falling";
 }
 interface Props {
   standings: Standing[];
@@ -28,6 +29,7 @@ const field = $derived(
       name: "Your line",
       rung: playerRung,
       state: "you" as State,
+      trend: "steady" as const,
       isPlayer: true,
     },
     ...standings.map((s) => ({
@@ -40,6 +42,8 @@ const field = $derived(
         : s.rung > playerRung
           ? "surging"
           : "steady") as State,
+      // RIVAL-RUNG-TREND: the momentum arrow (rising/steady/falling) beside the rung.
+      trend: s.trend,
       isPlayer: false,
     })),
   ].sort(
@@ -53,6 +57,13 @@ const STATE_LABEL: Record<State, string> = {
   steady: "Holding",
   you: "You",
 };
+
+// RIVAL-RUNG-TREND: a momentum arrow beside the rung (rising / steady / falling).
+const TREND_ARROW: Record<"rising" | "steady" | "falling", string> = {
+  rising: "▲",
+  steady: "—",
+  falling: "▼",
+};
 </script>
 
 {#if standings.length}
@@ -62,7 +73,12 @@ const STATE_LABEL: Record<State, string> = {
       {#each field as r (r.id)}
         <li class="row" class:you={r.isPlayer} data-state={r.state}>
           <span class="who">{r.name}</span>
-          <RungStars rung={r.rung} />
+          <span class="rung-line">
+            <RungStars rung={r.rung} />
+            {#if !r.isPlayer}
+              <span class="trend" data-trend={r.trend} title={r.trend}>{TREND_ARROW[r.trend]}</span>
+            {/if}
+          </span>
           <span class="state" data-state={r.state}>{STATE_LABEL[r.state]}</span>
         </li>
       {/each}
@@ -115,6 +131,24 @@ const STATE_LABEL: Record<State, string> = {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .rung-line {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  /* RIVAL-RUNG-TREND: a rising line reads gold, a falling one red, steady dim. */
+  .trend {
+    font-size: 0.7rem;
+  }
+  .trend[data-trend="rising"] {
+    color: var(--mmm-gold);
+  }
+  .trend[data-trend="falling"] {
+    color: var(--mmm-red, #b22);
+  }
+  .trend[data-trend="steady"] {
+    color: var(--mmm-text-dim);
   }
   .state {
     font-size: 0.66rem;

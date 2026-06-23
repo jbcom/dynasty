@@ -46,6 +46,10 @@ export interface DynastyAgent extends GoapOwner {
    *  a window the player can exploit. Transient run state (rebuilt deterministically by advanceWorld), like
    *  `strategy`; not serialized. */
   stumbled?: boolean;
+  /** RIVAL-RUNG-TREND: the recent rung readings (oldest→newest, capped), pushed each advanceWorld tick, so the
+   *  snapshot can derive a rising/steady/falling trend. Transient + deterministic (re-derived from the world's
+   *  advance), like `strategy`; not serialized. */
+  rungHistory?: number[];
   /** The line's GOAP brain (not serialized directly; rebuilt from archetype+motivators on load). */
   brain?: GoapBrain<DynastyAgent>;
 }

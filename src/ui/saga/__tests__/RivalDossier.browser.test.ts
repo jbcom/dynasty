@@ -23,8 +23,20 @@ afterEach(() => {
 describe("RivalDossier (RIVAL-DOSSIER-TAB)", () => {
   it("renders each rival with a humanized place + a state badge relative to the player", () => {
     const standings = [
-      { id: "rival:east_coast", label: "rival:east_coast", rung: 4, faltering: false },
-      { id: "rival:italian", label: "rival:italian", rung: 1, faltering: true },
+      {
+        id: "rival:east_coast",
+        label: "rival:east_coast",
+        rung: 4,
+        faltering: false,
+        trend: "rising" as const,
+      },
+      {
+        id: "rival:italian",
+        label: "rival:italian",
+        rung: 1,
+        faltering: true,
+        trend: "falling" as const,
+      },
     ];
     component = mount(RivalDossier, { target: host, props: { standings, playerRung: 2 } });
     const panel = host.querySelector('[data-testid="rival-dossier"]');
@@ -40,10 +52,24 @@ describe("RivalDossier (RIVAL-DOSSIER-TAB)", () => {
     const faltering = rows.find((r) => r.getAttribute("data-state") === "faltering");
     expect(surging?.textContent).toContain("Surging");
     expect(faltering?.textContent).toContain("Faltering");
+    // RIVAL-RUNG-TREND: each rival shows a momentum arrow (the player row has none).
+    expect(surging?.querySelector(".trend")?.getAttribute("data-trend")).toBe("rising");
+    expect(faltering?.querySelector(".trend")?.getAttribute("data-trend")).toBe("falling");
+    expect(
+      rows.find((r) => r.getAttribute("data-state") === "you")?.querySelector(".trend"),
+    ).toBeNull();
   });
 
   it("a non-faltering rival at or below the player's rung reads as holding", () => {
-    const standings = [{ id: "rival:bavaria", label: "rival:bavaria", rung: 1, faltering: false }];
+    const standings = [
+      {
+        id: "rival:bavaria",
+        label: "rival:bavaria",
+        rung: 1,
+        faltering: false,
+        trend: "steady" as const,
+      },
+    ];
     component = mount(RivalDossier, { target: host, props: { standings, playerRung: 3 } });
     const bav = [...host.querySelectorAll(".row")].find((r) => r.textContent?.includes("Bavaria"));
     expect(bav?.getAttribute("data-state")).toBe("steady");
