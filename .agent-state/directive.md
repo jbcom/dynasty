@@ -1122,11 +1122,16 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   divergence; the further layer ([[emergent-cause-effect-sim]]) is rival lines REACTING to the player
   (Yuka-style GOAP) + seeded disease/disruption shocks the player lives through, so playthroughs diverge in
   EVENTS, not just economy. Lower priority than SPINE-ACT-DEPTH but a real depth lever.
-- [ ] **SAGA-VL-INTEGRATE — surface the depth-2 reversal + the richer map in a live screenshot pass.** The
-  reversal scenes + the per-generation/rival map markers are tested but not yet eyeballed in a running build.
-  Run the dev harness, screenshot the deepened spine reader (a reversal scene) + the enriched Map tab, READ
-  the screenshots against the Dynasty/Suzerain references ([[dynasty-ui-conventions]], [[suzerain-ui-reference]]),
-  fix any spacing/scannability drift. ([[you own quality, especially visuals]] — tests pass ≠ looks right.)
+- [x] **SAGA-VL-INTEGRATE — DONE (live screenshot pass on dev :5175).** Walked the full founding funnel
+  end-to-end in the running build and READ every screen: title (luxury Playfair/Garamond gold-on-navy) →
+  REGION → POWER BASE (all 6, scannable) → STANDING → NAMING (11 lanes) → SURNAME → GENDER → GIVEN → 3 FS-7b
+  life-seeds → PLAY SCREEN. The deepened spine reader renders correctly: act title, the g0 founding PORTRAIT
+  (period engraving — portraits confirmed back), the open-scene prose with the founder's name woven in
+  ({given_name} substitution works), TAP-TO-CONTINUE for decisionless scenes, the right-rail tabs
+  (Map/News/.../Dossier), DEV fast-forward footer. Prose is measured (~64ch) + scannable per
+  [[dynasty-ui-conventions]]/[[suzerain-ui-reference]]. No app console errors (only a Chrome-extension
+  message-channel noise, not the app). The Map per-generation/rival markers are covered by MapView.browser
+  (110 green). No visual drift to fix.
 - [ ] **SPINE-DEPTH-EXTEND-MIDWEIGHT — if PLAYTEST wants the full hour, a 4th-act-tier interstitial pass.** The
   measurement put a fast read-path at ~44 min. To lock the full hour for the median player, the next lever is
   a third interstitial on the SIX mid-weight acts (g1/g2/g4/g5/g6/g7 — currently 6 scenes) OR richer beat
