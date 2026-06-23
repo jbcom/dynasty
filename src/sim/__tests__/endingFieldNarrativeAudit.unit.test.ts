@@ -74,7 +74,8 @@ describe("ending field narrative audit (ENDING-FIELD-NARRATIVE-AUDIT)", () => {
   it("a survived run with no field has no epilogue; a failed run never gets one", () => {
     // No field (unfounded / no world) → no coda.
     expect(
-      resolveConvergence(ctx({ reachedStars: 0, fallen: 0, abovePlayer: 0, total: 0 })).rivalEpilogue,
+      resolveConvergence(ctx({ reachedStars: 0, fallen: 0, abovePlayer: 0, total: 0 }))
+        .rivalEpilogue,
     ).toBeUndefined();
     // A FAILED run stays stark — no epilogue even with a full field.
     expect(
