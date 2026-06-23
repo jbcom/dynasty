@@ -90,6 +90,46 @@ describe("NewsTicker", () => {
     );
   });
 
+  it("FALLEN-NEWS: a fallen line renders an 'Eliminated' dispatch (struck, no Press button), accented apart", () => {
+    const onPress = vi.fn();
+    component = mount(NewsTicker, {
+      target: host,
+      props: {
+        content,
+        gameState: { ...initState(content, "seed"), year: 2001 },
+        rivalNews: [
+          {
+            id: "rival:italian",
+            kind: "fallen" as const,
+            headline: "The Italian line has dropped out of the race.",
+          },
+          {
+            id: "rival:bavaria",
+            kind: "faltered" as const,
+            headline: "Word reaches you: the Bavaria line has stumbled.",
+          },
+        ],
+        onPress,
+      },
+    });
+    const block = host.querySelector("[data-testid='rival-news']");
+    expect(block?.textContent).toContain("Italian line has dropped out");
+    expect(block?.textContent).toContain("Eliminated");
+    const items = [...host.querySelectorAll("[data-testid='rival-news'] li")];
+    const fallen = items.find((li) => li.getAttribute("data-kind") === "fallen") as HTMLElement;
+    const faltered = items.find((li) => li.getAttribute("data-kind") === "faltered") as HTMLElement;
+    expect(fallen, "a fallen line renders").toBeDefined();
+    // A fallen line is out of the race — no Press button (you can't press a dropped-out line).
+    expect(fallen.querySelector(".rn-press")).toBeNull();
+    // The struck-out headline reads "eliminated" distinctly from a live faltering window.
+    expect(
+      getComputedStyle(fallen.querySelector(".headline") as HTMLElement).textDecorationLine,
+    ).toBe("line-through");
+    expect(getComputedStyle(fallen).borderLeftColor).not.toBe(
+      getComputedStyle(faltered).borderLeftColor,
+    );
+  });
+
   it("RIVAL-CROSSING-EXPLOIT: a faltered dispatch offers a Press button that fires onPress with the rival id", async () => {
     const onPress = vi.fn();
     component = mount(NewsTicker, {

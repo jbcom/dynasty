@@ -1358,17 +1358,32 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   shows a one-line "state of the race" header — "You lead the field." / "N lines lead you." + " M lines have
   fallen out." — derived from the standings (pluralized), so the player gets the gestalt before the rows.
   Tests: RivalDossier.browser (lead / ahead+fallen variants). 906 node + 133 browser green, gate clean.
-- [ ] [WAIT-REVIEW] **CONVERGENCE-FIELD-SUMMARY-LINE PR #155 — wait CI green + address review, then self-squash-merge.**
-  Pushed feat/convergence-field-summary-line (8999070). Full local gate passed. Loop: wait build-and-test + CodeQL,
-  fold review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, FALLEN-NEWS.
-- [ ] [WAIT-REVIEW] **FALLEN-NEWS — announce a rival's elimination in the NewsTicker (after #155).** A line going fallen (DEAD-LINE-IN-FIELD)
-  is a major race event but only shows passively in the dossier. Emit a one-time NewsTicker dispatch when a
-  near-vantage rival first falls ("The <place> line has dropped out of the race") so the player registers the
-  field thinning. Reads the fallen transition (a side-marker like presses, to fire once); pure; tested.
-- [ ] [WAIT-REVIEW] **WV-3-MILESTONE-DOC — write docs/STATE.md section capturing the WV-3 agency+atmosphere milestone (after #155).** The
-  shock→recovery→agency→atmosphere→rival-race layer is now broad (shocks, recoveries, foreshadow, press/invest,
-  rival dispatches, field dossier, trends, fallen, ending variety). docs/STATE.md should record the milestone
-  shape + the side-log/save-invariant pattern so the next session has the canonical map. Docs only; no code.
+- [x] **CONVERGENCE-FIELD-SUMMARY-LINE PR #155 — DONE, MERGED (squash 1fa62ea; release 0.44.0).** "State of the
+  race" header on the dossier. Post-merge Release/CD/CodeQL all green. main synced.
+- [x] **FALLEN-NEWS — DONE.** A line dropping out now emits a one-time NewsTicker dispatch ("The <place> line has
+  dropped out of the race"), kind "fallen", rendered "Eliminated" (dim + struck, no Press button). Fires ONCE via a
+  `fallen_seen:<id>` flag stamped at the next advanceWorldToNow (same one-turn cadence as the shock aftermath) —
+  derived purely from the deterministic world, so it replays bit-identically (save-invariant). Tests: loop.unit
+  (fallen surfaces + one-time suppression + reconstruct replay), NewsTicker.browser (Eliminated render, no press,
+  accented apart). RIVAL-RACE-PRESENCE test widened to accept the fallen kind. 908 node + 134 browser green, gate clean.
+- [x] **WV-3-MILESTONE-DOC — DONE.** docs/STATE.md now has a "WV-3 — saga shocks, recoveries, agency & the rival
+  race" section under Saga polish: the shock→recovery→foreshadow→press/invest→rival-race layer, the
+  save-invariant SIDE-LOG pattern (presses/recoveryInvests tagged `at: history.length`, re-applied in reconstruct)
+  + the one-time-news FLAG sub-pattern (fallen_seen, derived from world state), and the determinism audit
+  instruments. The canonical map for the next session. Docs only; frontmatter date bumped.
+- [ ] **FALLEN-NEWS-IN-ENDING — the LegacyReport rival-finale ("The Other Lines") distinctly marks lines that
+  FELL OUT during the run (eliminated), not just their final rung.** The in-run fallen dispatch (FALLEN-NEWS) pays
+  off at the saga's close: a line that went fallen reads as "dropped out of the race" in the finale, set apart from
+  lines that merely finished behind. Reads rivalField.fallen (already carried into convergenceEnding); pure; tested
+  (loop.unit ending-shape + LegacyReport.browser render). Caps the fallen arc end-to-end (dossier → news → finale).
+- [ ] **PRESS-FALLEN-GUARD — the engine rejects pressing an already-FALLEN line, with a deterministic audit.**
+  The NewsTicker hides the Press button on a fallen dispatch, but pressRival should also guard at the engine layer
+  (you can't press a line that's out of the race — it's already at the floor). Add the guard if absent + an audit
+  test (press a fallen rival → no record, no heat, no rung change), mirroring the existing non-faltered no-op guard.
+- [ ] **RECOVERY-FORESHADOW-TONE — a hopeful-rebound omen reads in its OWN register, apart from the grave shock omen.**
+  Recovery foreshadow (a rebound coming) currently borrows the shock-omen styling/tone. Give the rebound its own
+  tier text + tone (hope rising, not dread) so foreshadow tone tracks valence, not just weight. Pure (shockForeshadow
+  sibling); tested (sagaShock.unit tier text + PlayScreen.browser tone class). Rounds out the foreshadow layer.
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,

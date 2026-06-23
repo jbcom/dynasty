@@ -119,11 +119,9 @@ export function toSave(state: GameState): SaveData {
       h.saga ? { saga: h.saga, index: h.index } : { eventId: h.eventId, choiceId: h.choiceId },
     ),
     // RIVAL-CROSSING-EXPLOIT: the press side-log (only when non-empty) — re-applied at load by the interleave.
-    ...(state.presses && state.presses.length ? { presses: state.presses } : {}),
+    ...(state.presses?.length ? { presses: state.presses } : {}),
     // RECOVERY-CHOICE: the invest side-log — same re-application at load.
-    ...(state.recoveryInvests && state.recoveryInvests.length
-      ? { recoveryInvests: state.recoveryInvests }
-      : {}),
+    ...(state.recoveryInvests?.length ? { recoveryInvests: state.recoveryInvests } : {}),
     savedYear: state.year,
   };
 }

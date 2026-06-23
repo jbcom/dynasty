@@ -118,7 +118,7 @@ export interface GameView {
 /** A one-line dispatch about a near-vantage rival line (RIVAL-RACE-PRESENCE). */
 export interface RivalNewsItem {
   id: string;
-  kind: "faltered" | "surged";
+  kind: "faltered" | "surged" | "fallen";
   headline: string;
 }
 
@@ -245,7 +245,36 @@ export class Game {
         });
       }
     }
+    // FALLEN news (FALLEN-NEWS): a rival that has dropped OUT of the race — fired ONCE, when first seen fallen
+    // and not yet announced (the `fallen_seen:<id>` flag, stamped at the next saga advance). A major field event.
+    for (const s of this.world.snapshots) {
+      if (s.fallen && !seen.has(s.id) && !this.state.flags.includes(Game.fallenSeenFlag(s.id))) {
+        seen.add(s.id);
+        out.push({
+          id: s.id,
+          kind: "fallen",
+          headline: `The ${humanizeRivalLabel(s.label)} line has dropped out of the race.`,
+        });
+      }
+    }
     return out;
+  }
+
+  /** FALLEN-NEWS: the flag marking a rival whose elimination has already been ANNOUNCED, so the dispatch
+   *  fires once. Stamped at the next saga advance (markFallenSeen) after the news surfaced. */
+  private static fallenSeenFlag(rivalId: string): string {
+    return `fallen_seen:${rivalId}`;
+  }
+
+  /** FALLEN-NEWS: stamp `fallen_seen:<id>` for every currently-fallen rival, so its elimination dispatch isn't
+   *  re-announced. Called after each saga advance (the news for THIS turn has already surfaced in the view).
+   *  Pure flag bookkeeping — derived from the deterministic world, so it replays identically. */
+  private markFallenSeen(): void {
+    if (!this.world) return;
+    const fresh = this.world.snapshots
+      .filter((s) => s.fallen && !this.state.flags.includes(Game.fallenSeenFlag(s.id)))
+      .map((s) => Game.fallenSeenFlag(s.id));
+    if (fresh.length > 0) this.state = { ...this.state, flags: [...this.state.flags, ...fresh] };
   }
 
   /** RIVAL-CROSSING-EXPLOIT: the heat cost of pressing a faltering rival — pressing the advantage draws
@@ -543,6 +572,11 @@ export class Game {
   /** Advance the rival world to the run's current year (deterministic). Called when the clock moves. */
   private advanceWorldToNow(): void {
     if (this.world) {
+      // FALLEN-NEWS: stamp the PREVIOUS turn's fallen rivals as announced BEFORE re-advancing. A rival that
+      // went fallen last turn surfaced its one-time dispatch in the view that was shown; marking it here means
+      // it won't re-announce. A rival that falls on THIS advance surfaces its dispatch now, and is stamped on
+      // the next advance — the same one-turn cadence as the shock aftermath.
+      this.markFallenSeen();
       // WV-3-RIVAL-REACT: pass the player's vantage (rung + archetype strategy) so direct competitors
       // escalate against the line — the world reacts to where the player is, not just to static motivators.
       this.world = advanceWorld(
