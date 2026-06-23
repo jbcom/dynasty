@@ -15,7 +15,7 @@ import { applyPersonality } from "./personality";
 import type { Rng } from "./rng";
 import type { Choice, GameEvent } from "./schema";
 import type { Archetype } from "./slots";
-import { type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
+import { type FamilyState, type GameState, type LedgerEntry, withFlag, withoutFlag } from "./state";
 import { succeed } from "./succession";
 import { systemicTick } from "./systemic";
 import { advanceTimeline, applyJump, detectEnd } from "./timeline";
@@ -347,6 +347,50 @@ export function advanceFamily(
     }
   }
   return advanced;
+}
+
+/**
+ * Deterministically RETIRE the current protagonist and promote their heir — the generational handoff
+ * triggered BY a saga succession decision (not by a probabilistic mortality roll). The saga's "raise the
+ * next generation" decision IS the generational step, so the line must advance deterministically per
+ * decision rather than waiting for the old protagonist to happen to die within the advanced span (which
+ * coupled generation advancement to how many years — and thus how many scenes — elapsed). Marks the late
+ * protagonist as died in `year`, runs `succeed` to anchor the eldest/ named living heir, re-anchors
+ * birthYear/age, and resets the per-generation life-stage flags so the heir runs their own arc. Returns
+ * the family unchanged (no end) when there is no heir yet — the caller's normal clock/ mortality path
+ * then resolves extinction. Pure + deterministic; no RNG (the heir is a function of recorded birth order).
+ */
+export function succeedToHeir(state: GameState, year: number): GameState {
+  const family = state.family;
+  if (!family) return state;
+  const protagonist = family.members.find((m) => m.id === family.protagonistId);
+  if (!protagonist) return state;
+  // Mark the late protagonist as died this year (if not already), so `succeed` and downstream mortality
+  // see a consistent tree and the heir's `born <= year` eligibility is measured against a real death year.
+  const deceased: FamilyState = {
+    ...family,
+    members: family.members.map((m) =>
+      m.id === family.protagonistId && m.died === undefined ? { ...m, died: year } : m,
+    ),
+  };
+  const namedHeir = state.flags.find((f) => f.startsWith("heir_"))?.slice("heir_".length);
+  const succ = succeed(deceased, year, namedHeir, state.founding?.successionMode);
+  if (succ.heirId === null) {
+    // No living heir yet — leave the death recorded and let the caller's mortality/extinction path
+    // resolve the run (advanceFamily will detect the protagonist is dead with no heir).
+    return { ...state, family: deceased };
+  }
+  const heir = succ.family.members.find((m) => m.id === succ.heirId);
+  const heirBorn = heir?.born ?? state.birthYear;
+  const lifeStageSet = new Set<string>(LIFE_STAGE_FLAGS);
+  const heirFlags = state.flags.filter((f) => !lifeStageSet.has(f));
+  return {
+    ...state,
+    family: succ.family,
+    birthYear: heirBorn,
+    age: Math.max(0, year - heirBorn),
+    flags: withFlag(heirFlags, "succession_occurred"),
+  };
 }
 
 /**

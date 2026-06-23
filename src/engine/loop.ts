@@ -12,7 +12,7 @@ import {
   type Glimpse,
   nudgeRival,
 } from "../sim/dynastyWorld";
-import { advanceFamily, applyChoice, applySuccessionToFamily } from "../sim/effects";
+import { advanceFamily, applyChoice, applySuccessionToFamily, succeedToHeir } from "../sim/effects";
 import { macroActForYear } from "../sim/macroActs";
 import type { Motivators } from "../sim/motivators";
 import { createRng, type Rng } from "../sim/rng";
@@ -25,7 +25,13 @@ import { evaluateTriggers, spineStateProjection } from "../sim/saga/triggerLatti
 import type { GameEvent } from "../sim/schema";
 import type { Archetype } from "../sim/slots";
 import { type GameState, initState, isMemberAlive, type LedgerEntry } from "../sim/state";
-import { advanceSagaClock, advanceTimeline, detectEnd } from "../sim/timeline";
+import {
+  advanceSagaClock,
+  advanceTimeline,
+  detectEnd,
+  SAGA_GENERATION_SPAN,
+  SAGA_YEAR_STEP,
+} from "../sim/timeline";
 import { pickNextEventViaWorld } from "../sim/world";
 import { SagaDriver, type SagaFrame } from "./sagaDriver";
 
@@ -375,13 +381,19 @@ export class Game {
    * the event flow resumes (so the run keeps moving once a generation's act closes). Pure ticks; the
    * timeline + end detection are deterministic.
    */
-  private advanceRunClock(): void {
+  private advanceRunClock(sagaYears: number = SAGA_YEAR_STEP): void {
     const fromYear = this.state.year;
-    // While a novel act is active, tick the SAGA clock (a fixed generational year-step decoupled from
-    // the era ladder) so any founding year — including baghdad's 762 CE — plays a full multi-generation
-    // run; the era-budget timeline only drives the EVENT path (the 1885 waves it's calibrated for).
+    // While a novel act is active, tick the SAGA clock by `sagaYears` (decoupled from the era ladder)
+    // so any founding year — including baghdad's 762 CE — plays a full multi-generation run; the
+    // era-budget timeline only drives the EVENT path (the 1885 waves it's calibrated for). The span is
+    // driven by DECISIONS, not scene count: a decisionless texture beat passes 0 years (so deepening an
+    // act with interstitial scenes never ages the line faster), while a succession decision advances a
+    // whole generation's worth of years at once — which is what drives advanceFamily's per-year
+    // mortality loop to age the protagonist to death and hand the line to the next-generation heir
+    // (the ONLY thing that steps `protagonist.generation`). Freezing years on EVERY saga move (the
+    // earlier attempt) froze aging → froze succession → the line never advanced a generation.
     this.state = this.saga.active
-      ? advanceSagaClock(this.state)
+      ? advanceSagaClock(this.state, sagaYears)
       : advanceTimeline(this.content, this.state);
     // PF-8: age + succeed the family over the elapsed years — the same logic the event path runs — so
     // reading the novel actually advances the lineage (mortality, heir handoff, extinction).
@@ -425,7 +437,10 @@ export class Game {
   pickBeat(beatIndex: number): void {
     this.syncMotivators(this.saga.pickBeat(beatIndex));
     this.syncSagaFlags();
-    this.advanceRunClock();
+    // A weave-beat is TEXTURE within a generation, not a generational step — it passes NO in-world
+    // years, so an act's depth (how many interstitial beats it carries) no longer ages the line. The
+    // generation's whole span is advanced once, at its succession decision (see pickDecision).
+    this.advanceRunClock(0);
     this.recordSagaStep("beat", beatIndex);
     this.syncSagaCursor();
     this.emit();
@@ -471,7 +486,17 @@ export class Game {
         `saga:${this.state.year}:${this.state.history.length}`,
         this.rng.fork(`sagasucc:${this.state.year}:${this.state.history.length}`),
       );
+      // Begin the NEXT generation's spine act BEFORE promoting the heir — it reads the CURRENT
+      // protagonist's generation + 1 to pick the next act, so it must run while the protagonist is still
+      // the outgoing generation (else the post-promotion +1 would skip a generation's act).
       this.beginNextGenerationAct();
+      // The succession DECISION is the generational step: deterministically retire the current
+      // protagonist and promote the just-begotten heir at the year a generation later, so generation
+      // advancement is driven by the DECISION (one step per ~3-decision generation), NOT by whether a
+      // probabilistic mortality roll happens to kill the protagonist within the elapsed span. The heir
+      // begotten above (born this year) is eligible at year + SAGA_GENERATION_SPAN. This is what
+      // actually increments `protagonist.generation`.
+      this.state = succeedToHeir(this.state, this.state.year + SAGA_GENERATION_SPAN);
       // The line just reached the next tier — apply that tier's crossing nudge to the rivals (once).
       this.nudgeForTier(this.playerRung());
     } else if (result?.wasCloseDecision && !this.state.end) {
@@ -489,7 +514,11 @@ export class Game {
       };
     }
     // Don't tick the clock once the line has ended (here or via a prior end) — the run is over.
-    if (!this.state.end) this.advanceRunClock();
+    // A succession decision is the GENERATIONAL step: advance a whole generation's span at once so
+    // advanceFamily's per-year mortality loop ages the (now-heir-bearing) protagonist to death and the
+    // line hands off to the next generation — the only path that steps `protagonist.generation`. A
+    // non-succession terminal decision is in-generation, so it passes the small default step.
+    if (!this.state.end) this.advanceRunClock(continues ? SAGA_GENERATION_SPAN : SAGA_YEAR_STEP);
     this.recordSagaStep("decision", optionIndex);
     this.syncSagaCursor();
     this.emit();

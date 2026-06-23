@@ -164,19 +164,34 @@ export function advanceTimeline(content: Content, state: GameState): GameState {
   return { ...advanced, end: detectEnd(content, advanced) };
 }
 
-/** Years the saga clock advances per scene — a generation's six tiers × ~25 scenes spans ~150-180y,
- *  matching a human multi-generation arc regardless of founding year. */
+/** Years the saga clock advances per scene — kept only for back-compat callers that pass no step.
+ *  In-world span is no longer metered per scene (that coupled aging to scene COUNT); see
+ *  `SAGA_GENERATION_SPAN` and `advanceSagaClock(state, years)`. */
 export const SAGA_YEAR_STEP = 1;
 
 /**
- * Advance the clock for the SAGA (novel) path — a small FIXED year step, decoupled from the era
- * budget/rollover that drives the event path. The era ladder is calibrated for the 1885 waves; a
- * non-1885 origin (baghdad founds 762 CE) would have its line aged to death by the era's yearEnd cap
- * + the jump to a 1885-based next era. The novel is generational, not era-budget-driven, so it just
- * ticks years forward (clamped to a sane ceiling) and lets advanceFamily age the line over that span.
- * Era index is left untouched (the saga doesn't roll eras); ageInYear keeps age in sync. Pure.
+ * The in-world span a single GENERATION occupies. A generation's arc is driven by its ~3 DECISIONS,
+ * not by how many decisionless texture beats surround them — so a generation's worth of years is
+ * advanced ONCE, at the generation's succession decision, not metered out per scene. This decouples
+ * the line's aging (and thus the death→succession that steps `generation`) from the scene COUNT, so
+ * deepening an act with interstitial texture beats no longer ages the line faster. ~25y ≈ the span
+ * from one protagonist's majority to their heir's, the classic demographic generation length.
  */
-export function advanceSagaClock(state: GameState): GameState {
-  const year = Math.min(state.year + SAGA_YEAR_STEP, 99999);
+export const SAGA_GENERATION_SPAN = 25;
+
+/**
+ * Advance the clock for the SAGA (novel) path by an explicit number of in-world `years`, decoupled
+ * from the era budget/rollover that drives the event path. The era ladder is calibrated for the 1885
+ * waves; a non-1885 origin (baghdad founds 762 CE) would have its line aged to death by the era's
+ * yearEnd cap + the jump to a 1885-based next era. The novel is generational, not era-budget-driven,
+ * so it just ticks years forward (clamped to a sane ceiling) and lets advanceFamily age the line over
+ * that span. Passing `years = 0` (a decisionless texture beat) holds the clock — texture adds no time,
+ * so span scales with decisions, not scene count. Era index is left untouched (the saga doesn't roll
+ * eras); ageInYear keeps age in sync. Pure.
+ */
+export function advanceSagaClock(state: GameState, years: number = SAGA_YEAR_STEP): GameState {
+  const delta = Math.max(0, Math.trunc(years));
+  if (delta === 0) return state;
+  const year = Math.min(state.year + delta, 99999);
   return { ...state, year, age: ageInYear(year, state.birthYear) };
 }

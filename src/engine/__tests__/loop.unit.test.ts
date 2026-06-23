@@ -7,6 +7,7 @@ import { buildContent } from "../../sim/content";
 import { foundByComposition } from "../../sim/founding";
 import { createRng } from "../../sim/rng";
 import { initState } from "../../sim/state";
+import { SAGA_GENERATION_SPAN } from "../../sim/timeline";
 import { pickNextEventViaWorld } from "../../sim/world";
 import { Game } from "../loop";
 
@@ -388,8 +389,11 @@ describe("Game loop", () => {
     };
     const a = play();
     // Choosing succession every generation carries the line deep — far past the gen-2 extinction that
-    // happened when begets weren't applied. Expect many scenes + a year well into the next century.
-    expect(a.sagaScenes).toBeGreaterThan(60);
+    // happened when begets weren't applied. With the saga clock decoupled from scene COUNT (texture beats
+    // pass no in-world years; a generation's span is advanced once at its succession decision), the line
+    // plays all ten spine generations and ages a full ~25y per generation — so it reaches deep into the
+    // future regardless of how many decisionless beats each act carries.
+    expect(a.sagaScenes).toBeGreaterThan(40);
     expect(a.year).toBeGreaterThan(1950);
     // Determinism: same seed + same choices → identical depth (replay-safe with the new beget draws).
     const b = play();
@@ -535,6 +539,82 @@ describe("Game loop", () => {
     expect(gens.has("g9"), `gens reached: ${[...gens].sort().join(",")}`).toBe(true); // the stars
     expect(gens.size).toBe(10);
     expect(g.finished).toBe(true);
+  });
+
+  it("SAGA-CLOCK-DECOUPLE: extra decisionless texture beats do NOT age the line (span is driven by decisions, not scene count)", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Texture",
+      seed: "clockdecouple",
+      originId: "composed:ireland:origins",
+    };
+    // Walk to the first saga scene, then exhaust ITS decisionless beats while recording the year before
+    // and after each beat. Every texture beat must leave the in-world year UNCHANGED — so deepening an act
+    // with interstitial scenes can never age the protagonist faster (the bug being fixed: 1 year per beat
+    // killed a deep run of old age before the final generation).
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    let beatsTaken = 0;
+    let guard = 0;
+    while (!g.finished && guard < 200) {
+      const s = g.view.saga.scene;
+      if (!s) break;
+      if (s.decision) break; // stop at the generational fork — that's where years are allowed to pass
+      if (!s.beats.length) break;
+      const before = g.view.state.year;
+      g.pickBeat(0);
+      const after = g.view.state.year;
+      expect(after, "a decisionless texture beat must pass NO in-world years").toBe(before);
+      beatsTaken++;
+      guard++;
+    }
+    expect(
+      beatsTaken,
+      "expected at least one decisionless texture beat to exercise the clock",
+    ).toBeGreaterThan(0);
+  });
+
+  it("SAGA-CLOCK-DECOUPLE: a succession decision advances exactly one generation's span and steps the generation", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Span",
+      seed: "spanstep",
+      originId: "composed:ireland:origins",
+    };
+    const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    // Drive to the first succession decision, clearing the decisionless beats (which pass no years).
+    let guard = 0;
+    while (!g.finished && guard < 500) {
+      const s = g.view.saga.scene;
+      if (!s) break;
+      if (s.decision?.options.some((o) => o.succession?.takesPartner)) break;
+      if (s.beats.length) g.pickBeat(0);
+      else if (s.decision) g.pickDecision(0);
+      else break;
+      guard++;
+    }
+    const s = g.view.saga.scene;
+    const yearBefore = g.view.state.year;
+    const rungBefore = g.view.rung;
+    expect(s?.decision, "expected to reach a succession decision").toBeTruthy();
+    const i = s?.decision?.options.findIndex((o) => o.succession?.takesPartner) ?? -1;
+    expect(i, "expected a take-partner succession option").toBeGreaterThanOrEqual(0);
+    g.pickDecision(i);
+    // The generation must have stepped (deterministic per-decision, not a probabilistic mortality roll),
+    // and the in-world year must have advanced by exactly one generation's span (SAGA_GENERATION_SPAN=25).
+    expect(g.view.rung, "the succession decision steps the generation").toBe(rungBefore + 1);
+    expect(g.view.state.year - yearBefore).toBe(SAGA_GENERATION_SPAN);
   });
 
   it("PF-14: a saga choice's setFlags reach the run's state.flags (not sealed in the driver)", () => {
