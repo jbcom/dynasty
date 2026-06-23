@@ -1301,11 +1301,11 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
 - [ ] [WAIT-REVIEW] **SHOCK-CLUSTERING-GUARD PR #142 — wait CI green + address review, then self-squash-merge.**
   Pushed feat/shock-clustering-guard (148bd2e). Full local gate passed. Loop: wait build-and-test + CodeQL, fold
   review forward + resolve threads, self-squash-merge ([[babysit-pr]]). After merge: sync main, RIVAL-RISE-NEWS-WEIGHT.
-- [ ] **RIVAL-RISE-NEWS-WEIGHT — a rival's surge reads urgency proportional to how far it's pulled ahead.** The
+- [ ] [WAIT-REVIEW] **RIVAL-RISE-NEWS-WEIGHT — a rival's surge reads urgency proportional to the rung gap (after #142).** The
   surge dispatch (RIVAL-RISE-NEWS) is flat — a rival one rung ahead reads the same as one near the stars while
   you're earthbound. Tier the "outpaced you" headline by the rung gap (just ahead → "pulling away" → "leaving
   you behind"), so the pressure scales like FORESHADOW-WEIGHT did for dread. View-derived, deterministic; tested.
-- [ ] **MERGE-CADENCE-HEALTH — verify the post-merge Release/CD/CodeQL chain is consistently green.** Many WV-3
+- [ ] [WAIT-REVIEW] **MERGE-CADENCE-HEALTH — verify the post-merge Release/CD/CodeQL chain is consistently green (after #142).** Many WV-3
   PRs have merged; instrument/check that each tagged release (release-please) actually produced its Release +
   CD + CodeQL success on main (no silent post-merge breakage accumulating). A quick gh-run audit over recent
   main SHAs; report any non-green post-merge run. Ops hygiene, not a feature; decide remediation from findings.
