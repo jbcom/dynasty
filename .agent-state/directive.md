@@ -890,11 +890,20 @@ onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival frami
   spine-driven era legitimately has no event-card pool). Schema test added (empty pool validates; populated
   still does). 749 unit + tsc + biome check green. Unblocks the eventual FS-RETIRE-PROLOGUE emptying once
   FS-SPINE-BRANCH-ONRAMPS rehomes the branch flags.
-- [ ] **FS-RETIRE-PROLOGUE — retire/convert the dead 1885 Trump-line prologue era (milestone).**
-  NOW UNBLOCKED — both prerequisites DONE (FS-SPINE-BRANCH-ONRAMPS: branches fork off the spine;
-  FS-SCHEMA-EMPTY-ERA: empty event pool allowed). Ready to execute: empty origins events, remove the
-  ev_line_fails/end_line_failed chain, retire prologue-gating, repoint branch.unit.test origins→spine,
-  split terms.unit.test (keep live term-interp, drop prologue cases), verify the full gate + Chrome.
+- [x] **FS-RETIRE-PROLOGUE — DONE + Chrome-verified.** The dead 1885 Trump-line prologue is retired. The
+  new-york origins events file now holds ONLY the 2 LIVE life-stage succession beats (ev_cp_take_partner →
+  ev_cp_raise_heirs, which founding.ts/effects.ts need for generational succession) — the other 45 dead
+  prologue events (Friedrich/Kallstadt/Fred/Queens/1946 + the ev_line_fails failure chain) removed.
+  end_line_failed removed from endings.json (line_failed no longer set anywhere). prologue-gating.unit.test
+  RETIRED; branch.unit.test repointed origins→SPINE reachability (+oligarchy); terms.unit.test split (live
+  term-interp kept, Trump/Musk/Kennedy prologue cases dropped); timelines brewing→bootlegger origins case
+  retired (live Kennedy arc stays in eastcoast); branch-density exempts the now-spine-driven origins from the
+  branching-ratio gates. RESULT: autoPlaythrough no longer early-deaths at end_line_failed — runs now reach
+  1970–2014 with 70–128 history beats (was 3–6 at 1893) on real endings. Chrome cold-start verified: the new
+  region×base×standing funnel → "Act I — The Crucible of Flint and Ink / Founding · 1776" spine act naming
+  the chosen progenitor (Endicott Vance), NOT the dead prologue. 724 unit + 104 browser + tsc + check green.
+  NOTE: only new-york carried the dead prologue; the 13 immigration-WAVE origins files (ireland/italian/…)
+  are CAST vignettes and were left intact.
 The whole `new-york/1885-1946-origins` era (47 events: Friedrich-leaves-Kallstadt → Bavaria → Fred the
 builder → Queens → the 1946 birth, incl. the `ev_line_fails`→`end_line_failed` failure chain and the
 `dynasty_doomed`/`fred_builder`/`returned_to_ny` flags) is PRE-PIVOT content. The live game routes founded
