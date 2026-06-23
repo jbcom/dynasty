@@ -1204,14 +1204,23 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   flags into a chronological disaster list; TimelineView renders a "What Befell the Family" log beneath the
   era strip — the deaths + reversals the line lived through, inspectable across the hour. Pure read-model.
   Tests: sagaShock.unit shockLedger + Views.browser render. 869 node + 114 browser green. PR next.
-- [ ] [WAIT-REVIEW] **CONVERGENCE-RIVAL-FINALE — the rivals' fates in the LegacyReport.** The convergence ending
-  narrates the PLAYER's finale; the rival lines that raced alongside (the whole point of the convergence layer)
-  vanish at the end. Surface each surviving/fallen rival's final standing + a one-line fate in the LegacyReport
-  so the close reads as the whole field's reckoning, not just the player's. Reads view.rivalStandings; tested.
-- [ ] [WAIT-REVIEW] **SPINE-DEPTH-PLAYTEST-2 — re-measure the hour with shocks/recoveries/crossings live.** The
+- [x] **CONVERGENCE-RIVAL-FINALE — DONE (forward commit on PR #124).** LegacyReport now renders "The Other
+  Lines" — every rival's humanized place + a one-line fate read off its final rung + faltering state (reached
+  the stars / rose high / made its mark / faltered at the last), so the close is the whole field's reckoning,
+  not just the player's. rivalStandings now carries `faltering` (engine + App wire-through). screens.browser
+  pins render + humanized labels + star/faltered fates + empty case. 879 node + 117 browser green, gate clean.
+- [ ] **SPINE-DEPTH-PLAYTEST-2 — re-measure the hour with shocks/recoveries/crossings live.** The
   ~48-min playtest predates the WV-3 + fabric layers. Re-run the divergence/playtest instruments to measure
   the CURRENT depth (shocks add beats, recoveries add ticks, fabric crossings add prose) and confirm a median
   run crosses the hour; if short, the lever is more interstitial prose or a 4th-act beat. Decide from figures.
+- [ ] **RIVAL-FALTER-NEWS — surface a rival's stumble in the in-run NewsTicker, not just the end.** A rival now
+  falters mid-race (SHOCK-AFTERMATH-IN-RIVALS) + shows "struggling" in glimpses, but nothing ANNOUNCES it as it
+  happens. Emit a NewsTicker line when a near-vantage rival first falters ("Word reaches you: the <place> line
+  has stumbled") so the player can act on the window in the moment. Reads the glimpse faltering note; tested.
+- [ ] **RIVAL-CROSSING-EXPLOIT — let the player ACT on a faltering rival at a crossing.** A faltering rival is a
+  window, but the player can't yet press it. At a braid crossing with a faltering rival, offer a choice that
+  nudges that rival further down (opposing) for a cost/risk — turning the stumble into an interactive beat, not
+  just a readout. Reuses nudgeRival + the crossing system; pure + seeded; tested.
 - [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
   audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
   diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock
