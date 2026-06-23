@@ -1349,7 +1349,7 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   every line but gives no at-a-glance read; add a header line ("You lead the field" / "N lines ahead of you" /
   "the field has thinned to M") derived from the standings, so the player gets the gestalt before the rows.
   Pure read-model; tested.
-  + tiered styling (grave reads heavier than marginal). CI green, 0 review threads, merged CLEAN. main synced.
+- [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
   merged CLEAN. main synced.
