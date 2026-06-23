@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.25.0](https://github.com/jbcom/dynasty/compare/v0.24.0...v0.25.0) (2026-06-23)
+
+
+### Features
+
+* **saga:** WV-3-SHOCK-SCENES — narrate the disruption shock (one-turn aftermath) ([#110](https://github.com/jbcom/dynasty/issues/110)) ([1452750](https://github.com/jbcom/dynasty/commit/145275089d8a5b473a37b037fd55440d4e1a74f1))
+
 ## [0.24.0](https://github.com/jbcom/dynasty/compare/v0.23.0...v0.24.0) (2026-06-23)
 
 
