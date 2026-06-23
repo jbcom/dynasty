@@ -160,6 +160,70 @@ not a historical artifact.
   atmospheric shader) STAYS, it is not "procedural art to retire." Portraits = GenAI raster; backdrops/
   atmosphere may use shaders + CSS; the hard no is hand-drawn SVG people.
 
+## EI-8 — the portrait-demand MATRIX (enumeration, grounded in the real sim enums)
+
+The current pipeline (`src/sim/genai/portrait.ts`) keys a portrait on **generation × gender** only
+(`portraitKey(act, gender) → spine_g{gen}_{gender}`) with a 4-band `ERA_VISUAL` (the macro-acts). EI-8
+generalizes that to the full demand matrix below. Each axis is enumerated against the actual code so the
+key space is finite and cacheable.
+
+### Axis 1 — LIFE-STAGE (5)
+The birth→growth→death cycle recurs every generation, so a portrait is keyed on where in a life the
+subject is, NOT just "the gen's adult":
+`infant` · `child` · `youth` · `adult` · `elder`.
+(The Epoch-0 emergence walks infant→child→youth→adult for the progenitor; later generations re-enter the
+cycle. Encounter characters carry their own life-stage.)
+
+### Axis 2 — ERA BAND (8, fine — NOT the 4 macro-acts)
+The line runs 1776→the stars; "a child in 1790 ≠ a child in 1990 ≠ a child among the stars," so the
+visual register is sub-banded finer than `MacroAct`. Bands (period dress + setting cue), derived from the
+saga clock year:
+`founding_1700s` (1776–1799) · `federal_1800s` (1800–1859) · `industrial_late1800s` (1860–1899) ·
+`early_1900s` (1900–1939) · `midcentury` (1940–1979) · `digital_modern` (1980–2040) ·
+`near_future` (2041–2200) · `stellar` (2201+).
+A pure `eraBandForYear(year)` resolver (sibling of `macroActForYear`) maps the year → band; `ERA_VISUAL`
+grows from 4 → 8 entries.
+
+### Axis 3 — ARCHETYPE / PATH WARDROBE (7) × RUNG TIER (3)
+The portrait reflects WHO the line has become. Archetype is the existing union
+(`src/sim/slots.ts` ARCHETYPES: economic, political, technological, religious, entertainment, athletic)
+**plus `crime`** (the planned 7th power axis — [[crime-power-axis]]; cult-leader reads as a religious-path
+extreme at high rung). Each archetype has a WARDROBE register that scales by **rung tier** (the 4 rank
+ladders are 6 rungs each → collapse to 3 tiers: `low` 0–1, `mid` 2–3, `high` 4–5):
+- economic → tradesman → merchant → magnate/CEO
+- political → ward heeler → official → statesman/ruler
+- technological → apprentice → engineer → visionary-industrialist
+- religious → lay devout → ordained → prelate/cult-leader (vestments deepen with rung)
+- entertainment → busker → performer → celebrity/icon (celebrity dress at high rung)
+- athletic → striver → competitor → champion
+- crime → corner soldier → made operator → boss/"crime planet" sovereign
+
+So wardrobe = `f(archetype, rungTier)` — 7 × 3 = 21 wardrobe registers.
+
+### Axis 4 — ENCOUNTER ROLE (optional)
+Storyline figures met across the 300+ years (first friend, betrayer, partner, rival head, mentor, …) get
+their own era/age-appropriate portrait. Encounter portraits reuse axes 1–2 (their life-stage + the
+encounter's era band) but carry a `role` token instead of the line's archetype/rung, so they read as
+distinct people, not the protagonist.
+
+### Composite key + caching
+`portrait:<lifeStage>:<eraBand>:<archetype>:<rungTier>` for the line's own portraits, and
+`portrait:enc:<role>:<lifeStage>:<eraBand>` for encounter figures. Gender folds in as a suffix
+(`:m`/`:f`) where it applies. The full protagonist key space is 5 × 8 × 7 × 3 × 2 = **1680** — far too many
+to blanket-generate, so generation is **on-demand + cached**: the runner asks for a key, the cache serves a
+hit or triggers ONE generation, writes the asset under the key, and serves it thereafter. Offline/cached —
+never at sim runtime (sim purity holds). Deterministic: the same (key) → the same prompt → a stable asset,
+so a seed reproduces the same portrait references.
+
+### Build sub-steps that follow (surfaced by this enumeration)
+1. `eraBandForYear` resolver + the 8-entry `ERA_VISUAL` (replaces the 4-band map).
+2. `lifeStage` + `rungTier` derivations (pure, from sim state).
+3. `wardrobeFor(archetype, rungTier)` register table (21 entries) + crime archetype wiring.
+4. `buildPortraitPrompt`/`portraitKey` generalized to the composite key; encounter-role variant.
+5. An on-demand generate+cache layer keyed by composite key (no blanket gen).
+6. Wire the SceneReader/PlayScreen portrait lookup to derive the key from the live (year, lifeStage,
+   archetype, rung, encounter) instead of `spine_g{gen}_{gender}`.
+
 ## Build order (the EI queue)
 
 EI-1 (this spec) → EI-2 sense→place resolver → EI-3 glowing-inline opening (the EI Act-1 spine, rendered

@@ -163,11 +163,28 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   folded (29435b2). Both live-verified in Chrome (emergence opens on "You are born…", senses→4 glowing inline
   sense-choices→naming speaks "Gwendolyn Calloway"/"daughter"; portrait magazine-wraps the prose). Squash-merge once
   CLEAN + 0 unresolved threads, then sync main + a fresh branch for EI-8.
-- [ ] **EI-8 ENUMERATE THE PORTRAIT-DEMAND MATRIX (spec step, doable now)** — before any generation: enumerate the full
-  portrait demand matrix (LIFE-STAGE × ERA × ARCHETYPE/PATH-WARDROBE(+rung) × encounter-role) + the prompt/asset key
-  scheme + the generate-on-demand caching strategy, and write it into the EI spec. This spec/enumeration step does NOT
-  need the merge; it precedes EI-8 generation. (Then the generation sub-steps surface — see below.)
-- [ ] [WAIT] **EI-8 GENAI LIFE-STAGE × ERA × ENCOUNTER PORTRAITS (user, 2026-06-23)** — the existing GenAI image pipeline
+- [x] **EI-8 ENUMERATE THE PORTRAIT-DEMAND MATRIX — DONE (spec).** Wrote the full demand matrix into the EI spec
+  (docs/.../2026-06-23-emergent-infancy-onboarding-design.md §"EI-8 — the portrait-demand MATRIX"), grounded in the
+  real enums: 5 LIFE-STAGES (infant/child/youth/adult/elder) × 8 fine ERA BANDS (founding_1700s…stellar, NOT the 4
+  macro-acts) × 7 ARCHETYPES (the 6 ARCHETYPES + crime/cult [[crime-power-axis]]) × 3 RUNG TIERS (the 4×6 ladders →
+  low/mid/high) × optional ENCOUNTER role. Composite cache key `portrait:<lifeStage>:<eraBand>:<archetype>:<rungTier>`
+  (+ `:enc:<role>` variant, gender suffix); 1680-key protagonist space → generate-on-demand + cache, never blanket.
+  Surfaced 6 build sub-steps (below).
+- [ ] **EI-8a ERA-BAND RESOLVER + 8-entry ERA_VISUAL** — `eraBandForYear(year)` (sibling of macroActForYear) +
+  grow portrait.ts `ERA_VISUAL` from the 4 macro-acts to the 8 fine bands. Pure; unit test the band boundaries.
+  Doable now (genai pipeline files, not the entry flow — no merge dependency).
+- [ ] **EI-8b lifeStage + rungTier derivations** — pure helpers from sim state (life-stage from age/beat,
+  rungTier from the max rung across the 4 ladders → low/mid/high). Unit-tested.
+- [ ] **EI-8c wardrobeFor(archetype, rungTier) register table (21 entries) + crime archetype wiring** — the
+  archetype×rung wardrobe registers from the spec; add `crime` to the Archetype union + ARCHETYPES + callings.
+- [ ] **EI-8d generalize buildPortraitPrompt/portraitKey to the composite key + encounter-role variant** — keep the
+  signature engraving style; key off (lifeStage, eraBand, archetype, rungTier, gender) and an `enc:<role>` form.
+- [ ] **EI-8e on-demand generate+cache layer** — a cache keyed by composite key: hit → serve; miss → ONE generation,
+  write under the key, serve thereafter. Offline/cached, never at sim runtime (sim purity).
+- [ ] **EI-8f wire SceneReader/PlayScreen portrait lookup to the composite key** — derive the key from the live
+  (year→band, lifeStage, archetype, rung, encounter) instead of `spine_g{gen}_{gender}`; visual-verify a non-founding
+  era + a high-rung archetype wardrobe render correctly (screenshot + READ).
+- [ ] [WAIT] **EI-8 GENAI LIFE-STAGE × ERA × ENCOUNTER PORTRAITS (user, 2026-06-23) — umbrella, tracked by EI-8a–f above.** the existing GenAI image pipeline
   must generate portraits matched to LIFE STAGE (infant / child / youth / adult / elder — the cycles of birth →
   growth → death recur every generation) AND to the ERA the beat sits in (not just the 3 coarse macro-bands —
   the line runs 1770s→stars over 300+ years, so a child in 1790 ≠ a child in 1990 ≠ a child among the stars), AND
