@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.36.0](https://github.com/jbcom/dynasty/compare/v0.35.0...v0.36.0) (2026-06-23)
+
+
+### Features
+
+* tier the foreshadow omen by hazard — proportional dread ([#132](https://github.com/jbcom/dynasty/issues/132)) ([b42080f](https://github.com/jbcom/dynasty/commit/b42080f37f327bad033ab6b93f9cffde674b40bd))
+
 ## [0.35.0](https://github.com/jbcom/dynasty/compare/v0.34.0...v0.35.0) (2026-06-23)
 
 
