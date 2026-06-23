@@ -852,7 +852,7 @@ describe("Game loop", () => {
     // Drive several founding-era seeds; a near-vantage rival that falters yields a "faltered" dispatch, one
     // surging above the player yields "surged". At least one kind must appear across the sweep (the race is
     // surfaced in-run, not silent — which kind fires is seed-dependent, so we don't require BOTH), and every
-    // dispatch's kind+headline must be well-formed (only "faltered"/"surged", no raw rival: ids, non-empty).
+    // dispatch's kind+headline must be well-formed (faltered/surged/fallen, no raw rival: ids, non-empty).
     const kinds = new Set<string>();
     for (const seed of ["rn1", "rn2", "rn3", "rn4", "rn5", "rn6"]) {
       const comp = {
@@ -871,7 +871,7 @@ describe("Game loop", () => {
       while (!g.finished && guard < 400) {
         for (const item of g.view.rivalNews) {
           kinds.add(item.kind);
-          expect(["faltered", "surged"]).toContain(item.kind);
+          expect(["faltered", "surged", "fallen"]).toContain(item.kind);
           expect(item.headline.length).toBeGreaterThan(0);
           expect(item.headline).not.toContain("rival:"); // place is humanized
         }
@@ -888,6 +888,108 @@ describe("Game loop", () => {
     }
     // At least one dispatch kind fired across the sweep (the race is surfaced in-run, not silent).
     expect(kinds.size, `kinds seen: ${[...kinds].join(",")}`).toBeGreaterThan(0);
+  });
+
+  it("FALLEN-NEWS: a line dropping out surfaces a one-time 'fallen' dispatch that doesn't re-announce", () => {
+    const real = loadContent();
+    const mkGame = (seed: string) => {
+      const comp = {
+        place: "ireland",
+        era: "origins",
+        culture: "anglo_protestant",
+        year: 1776,
+        archetype: "political" as const,
+        gender: "male" as const,
+        surname: "Fn",
+        seed,
+        originId: "composed:ireland:origins",
+      };
+      return new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    };
+    const advance = (g: ReturnType<typeof mkGame>): boolean => {
+      const s = g.view.saga.scene;
+      if (s) {
+        if (s.decision) g.pickDecision(0);
+        else if (s.beats.length) g.pickBeat(0);
+        else return false;
+      } else if (g.view.currentEvent?.choices[0]) {
+        g.choose(g.view.currentEvent.choices[0].id);
+      } else return false;
+      return true;
+    };
+    // Drive seeds until a "fallen" dispatch appears. When it does: its headline is well-formed (humanized place,
+    // names the drop-out), it carries kind "fallen", and on the NEXT step that same rival's fallen dispatch is
+    // GONE (fired once — the `fallen_seen` flag suppresses the re-announce, even though the line stays fallen).
+    let sawFallen = false;
+    for (const seed of ["fn1", "fn2", "fn3", "fn4", "fn5", "fn6", "fn7", "fn8"]) {
+      const g = mkGame(seed);
+      let guard = 0;
+      while (!g.finished && guard < 400) {
+        const fallen = g.view.rivalNews.find((n) => n.kind === "fallen");
+        if (fallen) {
+          expect(fallen.headline.length).toBeGreaterThan(0);
+          expect(fallen.headline).not.toContain("rival:"); // place humanized
+          expect(fallen.headline).toMatch(/dropped out/i);
+          // The dossier still shows the line as fallen (it didn't recover) — the news just doesn't repeat.
+          if (advance(g)) {
+            expect(
+              g.view.rivalNews.some((n) => n.kind === "fallen" && n.id === fallen.id),
+              "the same fallen line does not re-announce on the next step",
+            ).toBe(false);
+          }
+          sawFallen = true;
+          break;
+        }
+        if (!advance(g)) break;
+        guard++;
+      }
+      if (sawFallen) break;
+    }
+    expect(sawFallen, "a line drops out of the race across the founding-era seed sweep").toBe(true);
+  });
+
+  it("FALLEN-NEWS: the fallen dispatch + suppression REPLAY bit-identically through reconstruct (save-invariant)", () => {
+    const real = loadContent();
+    const found = (seed: string) =>
+      foundByComposition(real, {
+        place: "ireland",
+        era: "origins",
+        culture: "anglo_protestant",
+        year: 1776,
+        archetype: "political" as const,
+        gender: "male" as const,
+        surname: "Fn",
+        seed,
+        originId: "composed:ireland:origins",
+      }).state;
+    // The fallen-news bookkeeping (the `fallen_seen` flags) is derived purely from the deterministic world, so a
+    // run and its replay (same seed, same choices) must reach the SAME flag set + end state — proving the
+    // one-time-news mechanism is save-invariant (no transient state a save/restore would lose).
+    for (const seed of ["fr1", "fr2", "fr3", "fr4"]) {
+      const run = () => {
+        const g = new Game(real, seed, found(seed), "political");
+        let guard = 0;
+        while (!g.finished && guard < 400) {
+          const s = g.view.saga.scene;
+          if (s) {
+            if (s.decision) g.pickDecision(0);
+            else if (s.beats.length) g.pickBeat(0);
+            else break;
+          } else if (g.view.currentEvent?.choices[0]) {
+            g.choose(g.view.currentEvent.choices[0].id);
+          } else break;
+          guard++;
+        }
+        return g.view.state;
+      };
+      const a = run();
+      const b = run();
+      const fallenFlags = (st: typeof a) =>
+        st.flags.filter((f) => f.startsWith("fallen_seen:")).sort();
+      expect(fallenFlags(b)).toEqual(fallenFlags(a));
+      expect(b.year).toBe(a.year);
+      expect(b.end?.kind).toBe(a.end?.kind);
+    }
   });
 
   it("RIVAL-CROSSING-EXPLOIT: pressing a faltering rival deepens its stumble + costs heat + records a side-log entry", () => {

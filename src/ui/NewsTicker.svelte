@@ -13,7 +13,7 @@ interface Props {
   term?: (text: string) => string;
   /** RIVAL-RACE-PRESENCE: dispatches about the rival lines near the player's station — a stumble (a window)
    *  or a surge past the player (pressure). Rendered above the world news so the race is felt in-run. */
-  rivalNews?: Array<{ id: string; kind: "faltered" | "surged"; headline: string }>;
+  rivalNews?: Array<{ id: string; kind: "faltered" | "surged" | "fallen"; headline: string }>;
   /** RIVAL-CROSSING-EXPLOIT: press a faltering rival (deepen its stumble for a heat cost). When provided, a
    *  "Press the advantage" button shows on each faltered dispatch. Omitted (e.g. visual fixtures) → no button. */
   onPress?: (rivalId: string) => void;
@@ -62,7 +62,11 @@ const scopeLabel: Record<string, string> = {
     <ul class="rival-news" data-testid="rival-news">
       {#each rivalNews as r (r.id + r.kind)}
         <li data-kind={r.kind}>
-          <span class="rn-tag">{r.kind === "faltered" ? "Window" : "Pressure"}</span>
+          <!-- FALLEN-NEWS: a fallen line reads "Eliminated" — a major field event, distinct from a stumble
+               (Window) or a surge (Pressure). -->
+          <span class="rn-tag"
+            >{r.kind === "faltered" ? "Window" : r.kind === "surged" ? "Pressure" : "Eliminated"}</span
+          >
           <span class="headline">{r.headline}</span>
           {#if r.kind === "faltered" && onPress && !pressedThisStep.has(r.id)}
             <!-- RIVAL-CROSSING-EXPLOIT: press the advantage — deepen the stumble for a heat cost. Hidden once
@@ -184,5 +188,18 @@ const scopeLabel: Record<string, string> = {
   .rival-news li[data-kind="surged"] .rn-tag {
     background: var(--mmm-red, #b22);
     color: var(--mmm-text);
+  }
+  /* FALLEN-NEWS: a line dropping out of the race reads dim + struck — out of contention, not a live threat. */
+  .rival-news li[data-kind="fallen"] {
+    border-left-color: var(--mmm-text-dim);
+    opacity: 0.8;
+  }
+  .rival-news li[data-kind="fallen"] .headline {
+    text-decoration: line-through;
+    text-decoration-color: var(--mmm-text-dim);
+  }
+  .rival-news li[data-kind="fallen"] .rn-tag {
+    background: var(--mmm-text-dim);
+    color: var(--mmm-surface);
   }
 </style>
