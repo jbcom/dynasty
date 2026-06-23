@@ -1128,10 +1128,11 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   one turn; the next lever is a RECOVERY beat — a shock that struck a meter/family should open a small later
   opportunity to recover (rebuild after the fire, a remarriage after a death, clearing a scandal). Model it as
   a seeded follow-on so the loss has a two-act shape (blow → recover/compound). Pure+seeded; re-audit divergence.
-- [ ] **CONVERGENCE-ENDING-DEPTH — richer named-destiny resolution prose + reachability audit (on feat/convergence-ending-depth).** The apex
-  ending is now reachable (g9 fix); audit which convergence destinations (stars/contributed/earthbound/
-  extinguished + the named earthly destinies) are actually REACHABLE across motivator profiles, and deepen the
-  resolution prose for each so the hour-long run lands on a distinct, earned finale. Enumerate gates first.
+- [x] **CONVERGENCE-ENDING-DEPTH — DONE (commit 40fdee0).** Reachability audit (convergenceReachability.unit)
+  proves all 15 endings are reachable across a wide motivator×tier grid — caught + fixed a sweep blind spot
+  (contributed_ally's reach[20,44] window shadowed by media_mogul). Every ending gained a distinct 1-2
+  sentence earned-finale `prose`, rendered in LegacyReport beneath the title (italic body). 854 node + 112
+  browser green. PR loop next.
 - [ ] [WAIT-REVIEW] **SAGA-AUDIO-ATMOSPHERE — Tone.js era-aware ambient bed for the spine reader (fresh branch post-#110).** The saga reads silently;
   a gated, era-shifting ambient bed (founding → industrial → broadcast → stellar) would deepen the hour. Per
   the audio profile: gated, tested via the audio-graph harness, no autoplay. Enumerate the era→sound mapping
