@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.55.0](https://github.com/jbcom/dynasty/compare/v0.54.0...v0.55.0) (2026-06-23)
+
+
+### Features
+
+* a11y action labels, reduced-motion audit, onboarding live region ([#180](https://github.com/jbcom/dynasty/issues/180)) ([0db0bae](https://github.com/jbcom/dynasty/commit/0db0baef19ec763ac9a571e580fcdacbf5c395e6))
+
 ## [0.54.0](https://github.com/jbcom/dynasty/compare/v0.53.0...v0.54.0) (2026-06-23)
 
 
