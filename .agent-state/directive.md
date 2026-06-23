@@ -1385,19 +1385,32 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   + a `tone: "dread" | "hope"` on the foreshadow; a strained line now reads a HOPE omen ("the worst is behind you —
   the line gathers itself for a turn back upward") in a warm gold register, taking precedence over the grave red
   dread (same strain drives both). Tests: sagaShock.unit (predicate), PlayScreen.visual (hope vs dread register).
-- [ ] **STELLAR-RIVAL-IN-ENDING — the rival-finale + epilogue distinctly mark a line that REACHED THE STARS, not just
-  "rose high".** rivalField.reachedStars already feeds the epilogue, but the per-line finale fate caps at "reached the
-  stars in its own right" for rung>=MAX without confirming an actual interstellar finish vs a high earthbound rung.
-  Mark a star-reaching line with its own register (gold/ascendant) in The Other Lines, mirroring the dropped-out
-  treatment, so the field's two extremes (out / among the stars) both read distinctly. Pure; tested.
-- [ ] **FORESHADOW-AUDIT — a deterministic instrument proving the hope omen actually fires across a run.** Mirror the
-  OMEN-PAYOFF-AUDIT: drive seeds, count turns a hope omen (tone="hope") appears vs a dread omen, assert hope omens
-  fire after blows (the rebound foresight pays off) at a non-trivial rate. Guards the new valence layer from silent
-  regression (a strain that never surfaces hope would be a bug). Pure deterministic test; prints figures.
-- [ ] **INVEST-WHILE-HOPE-OMEN — the recovery-invest prompt and the hope omen should reinforce, not compete.** Both
-  fire on the same outstanding-strain condition (canInvestRecovery ⊆ recoveryForeshadow). Verify the PlayScreen shows
-  the hope omen ABOVE the invest prompt as one coherent "a rebound is near — and you can press for it" beat, not two
-  disconnected boxes; adjust ordering/copy if they read disjoint. Pure UI; tested (PlayScreen.visual ordering).
+- [x] **STELLAR-RIVAL-IN-ENDING — DONE (branch feat/field-extremes-and-omen-audit).** A line that reached the
+  interstellar tier (rung at the ladder top, not faltering/fallen) now reads in an ASCENDANT gold register in The
+  Other Lines (`data-stars`, bright-gold border + name), mirroring the struck dropped-out treatment so the field's
+  two extremes read distinctly. `reachedStars(rung,faltering,fallen)` derives the marker. Test: screens.browser
+  (star register apart from a mid line, with brand tokens set so the colors are real).
+- [x] **FORESHADOW-AUDIT — DONE.** New foreshadowToneAudit.unit instrument: drives 24 founding-era seeds, counts
+  hope vs dread omens, and asserts the hope omen FIRES (live feature) + appears EXACTLY on a strained line (0 false
+  positives, every hope omen coincides with `shock_meter:` strain) + both tones occur. MEASURED: 675 omen-steps,
+  hope 47.9% / dread 52.1%, hopeWithoutStrain=0. Guards the valence layer from silent regression. Prints figures.
+- [x] **INVEST-WHILE-HOPE-OMEN — DONE.** The hope omen already renders directly ABOVE the invest prompt (same
+  outstanding-strain condition); tightened so they read as ONE beat — when the omen is hopeful the invest label
+  becomes "Press the rebound — pour resources in to make it count?" and the prompt is marked `data-after-hope`.
+  Test: PlayScreen.visual (DOM order omen-before-invest + the connecting copy + data-after-hope).
+- [ ] **FIELD-EXTREMES PR — wait CI green + address review, then self-squash-merge.** (filled in at push.)
+- [ ] **ENDING-FIELD-NARRATIVE-AUDIT — a deterministic instrument that the convergence epilogue + per-line finale
+  fates are CONSISTENT with the field state.** Drive finished runs; for each, assert the epilogue clause that fired
+  matches the rivalField counts (droppedOut>0 → dropped-out clause, reachedStars>0 → stars clause, etc.) AND that
+  every per-line finale fate matches its standing (fallen→dropped-out fate, rung>=MAX→stars fate). Catches a drift
+  between the two surfaces (epilogue vs per-line) that a unit test of either alone would miss. Pure; prints figures.
+- [ ] **RIVAL-FINALE-SORT — The Other Lines should read top-to-bottom as a clear ranking (stars → high → settled →
+  faltered → dropped out), not just raw rung order.** Currently sorted by rung; a fallen line at rung 0 and a low
+  line at rung 0 sort together though they read very differently. Sort by a finale-fate ORDINAL (stars highest,
+  dropped-out lowest) so the field's arc reads as a clean descent. Pure; tested (screens.browser ordering).
+- [ ] **HOPE-OMEN-COPY-VARIETY — the hope omen is one fixed line; give it 2-3 deterministic variants keyed on the
+  strained meter (money vs reputation vs heat) so a rebrand of fortune reads specific, not boilerplate.** Mirrors the
+  shock-note specificity. Pure (a keyed lookup in the foreshadow text); tested (sagaShock.unit or loop.unit variants).
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
