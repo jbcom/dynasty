@@ -1120,6 +1120,11 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 
 ### Rolling backlog (post-WV-3 — keep this section ≥3 actionable, append before draining)
 
+- [ ] [WAIT-REVIEW] **WV-3-SHOCK-RECOVERY PR #114 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/wv3-shock-recovery: the blow→rebound two-act arc. Loop: wait build-and-test + CodeQL, read
+  CodeRabbit/Amazon-Q/Gemini, fix forward + resolve threads, self-squash-merge once green ([[babysit-pr]]).
+  After merge: sync main, next branch for the rolling backlog (SAGA-AUDIO-ATMOSPHERE / CORPUS-MINE / …).
+
 - [x] **CONVERGENCE-ENDING-DEPTH PR #112 — DONE, MERGED (squash 7be3df2).** Reachability audit + earned-finale
   prose shipped. CI green; CodeRabbit pass; Gemini medium (hoist initMotivators in the test) FIXED + thread
   resolved; self-squash-merged. Post-merge Release + CD + CodeQL all SUCCESS (deployed). Synced main, deleted
