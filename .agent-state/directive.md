@@ -1156,10 +1156,13 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   convergence → emergence → ascension) + added convergence/emergence keywords to ERA_BANDS so all four map to
   distinct chord moods (origins/mogul/ascent/stars). The bed now crossfades across the founding→stellar
   journey. Test: eras.unit (4 macro-acts → 4 distinct bands). 860 node + 113 browser green. PR next.
-- [ ] [WAIT-REVIEW] **CORPUS-MINE-INTERSECTIONS — mine the retired 504-cell corpus into braid fabric ([[FOUNDING-SPINE-PIVOT]]) (fresh branch).**
-  The founding-spine pivot retired the 504 cells but the plan was to MINE them selectively into the braided
-  intersection fabric the trigger lattice weaves. Audit what fabric exists vs the cells; mine the highest-value
-  rival-family vignettes into the fabric index so cross-dynasty crossings have richer borrowed prose.
+- [x] **CORPUS-MINE-INTERSECTIONS — DONE (commit 8d6b835).** AUDIT: the mined fabric (fabric/index.json) was
+  GENERATED but NEVER READ — resolveThreads wove crossings from the family's plain act-open, not the curated
+  vignettes; and only italian+ireland had vignettes (the other 5 families had entries but 0 vignettes, as
+  braid-slot tagging only ran on 2). FIXED both: new fabricCrossing.ts loads the index + picks the top-scored
+  vignette per (wave,tier), and resolveThreads now uses it (bespoke → fabric → generic); mine-fabric.ts falls
+  back to scene PROSE when a kept scene has no braid-slot vignette → all 7 families now 100% vignette
+  coverage. Re-mined (idempotent). Tests: fabricCrossing.unit. 864 node + 113 browser green. PR next.
 - [ ] [WAIT-REVIEW] **SHOCK-FAMILY-SUCCESSION-PRESSURE — a family_death shock that takes the heir forces a real
   succession scramble (fresh branch).** Today a family_death strikes a non-protagonist; deepen it so losing
   the GROOMED heir (not just any member) makes the next succession harder/riskier (a weaker fallback heir,
