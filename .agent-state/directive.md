@@ -1450,15 +1450,26 @@ end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate
   Victory" in bright gold (endgame-good tier, gold "Play Again"); a ruin reads "The End" in stark red
   ("YOUR LINE WAS EXTINGUISHED", endgame-bad tier). The tone visibly differs (gold ascendance vs stark loss), not
   just the headline. Test: LegacyReportToneContrast.visual asserts the tier + title-color contrast + captures both.
-- [ ] **MAP-FIELD-LINK-WIRING-CHECK — confirm PlayScreen actually passes the full standings (with fallen/faltering)
-  to MapView, end-to-end.** The component supports it; verify the live wiring (PlayScreen → MapView prop) carries the
-  state, not just that MapView CAN render it — a browser test mounting PlayScreen on the map tab with a fallen line.
-- [ ] **DOSSIER-EMPTY-VOICE — when the rival world has no near-vantage lines yet (early game), the Field dossier
-  should read a one-line "the other lines are still finding their feet" rather than an empty panel**, mirroring the
-  SHOCK-LEDGER-EMPTY-VOICE grace note. Pure UI; tested (RivalDossier.browser empty-but-early state).
-- [ ] **OMEN-A11Y-AUDIT — a deterministic check that EVERY foreshadow the engine can emit carries a non-empty tone
-  badge label** (no tone falls through to a blank badge), guarding the a11y layer from a future tone value slipping
-  the badge map. Pure unit test over the foreshadow tone set. Tested.
+- [x] **MAP-FIELD-LINK-WIRING-CHECK — DONE (branch feat/empty-voice-and-a11y-audit).** Verified PlayScreen passes
+  `view.rivalStandings` (full object incl. fallen/faltering) to MapView at the call site. Test: PlayScreen.visual
+  mounts a founded line + a fallen rival, clicks the Map tab, and asserts the rival marker carries data-fallen —
+  the state flows PlayScreen → MapView → marker end-to-end, not lost in the wiring.
+- [x] **DOSSIER-EMPTY-VOICE — DONE.** An empty Field dossier (early game, no near-vantage lines) now shows a grace
+  note — "The other lines are still finding their feet — the race has yet to take shape." — under the field title,
+  instead of rendering nothing, mirroring SHOCK-LEDGER-EMPTY-VOICE. Test: RivalDossier.browser (the grace note +
+  title for empty standings).
+- [x] **OMEN-A11Y-AUDIT — DONE.** Extracted the badge map to a pure `omenBadgeLabel(tone)` + `FORESHADOW_TONES`
+  in sagaShock (PlayScreen now uses it, no inline ternary). Audit: every tone maps to a non-empty, distinct label
+  (no blank fall-through), guarding the a11y layer from a future tone slipping the map. Test: sagaShock.unit.
+- [ ] **DOSSIER-EMPTY-VOICE-IN-PLAYSCREEN — confirm the dossier grace note actually surfaces in the live PlayScreen
+  Dossier tab early-game (end-to-end wiring), not just in the RivalDossier unit.** Mirror MAP-FIELD-LINK-WIRING-CHECK:
+  mount PlayScreen with empty standings, open the Field/Dossier tab, assert the grace note. Pure; tested.
+- [ ] **CHRONICLE-FULL-PLAYTHROUGH-SCREENSHOTS — capture + READ a short SEQUENCE of screenshots across one founded
+  run (title → early dossier-empty → a shock omen → a recovery hope omen → the finale) to confirm the whole arc
+  reads coherently as a visual story, not just per-screen.** The pieces are each shot; the ARC isn't. Visual; READ all.
+- [ ] **OMEN-BADGE-CONTRAST-AUDIT — a deterministic WCAG contrast check that each omen badge's text-on-fill meets
+  AA (≥4.5:1): gold pill dark-text, red pill light-text.** Compute the contrast ratio from the brand tokens; assert
+  ≥4.5. Guards the a11y badges from a token change quietly dropping below legible contrast. Pure; tested.
 - [x] **FORESHADOW-IN-TONE PR #134 — DONE, MERGED (squash 6dfdfd4; release 0.36.0).** Tiered omen styling.
 - [x] **FORESHADOW-WEIGHT PR #132 — DONE, MERGED (squash b42080f; release cut 0.35.0).** Tiered omen
   (grave/marginal/none). Gemini perf finding (array alloc on hot view path) folded forward, thread resolved,
