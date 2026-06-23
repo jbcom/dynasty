@@ -978,9 +978,14 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
 - [ ] **FS-SPINE-ORIGIN-FLAVOR — weave the founding-origin seed flags into the spine's decision flavoring.**
   The spine.act.json was authored BEFORE the FS-ONB-DRIFT founding-origin model; it doesn't read the new
   region:/base:/power:/standing: seed flags. A press founder vs. a land founder vs. a military founder should
-  feel different in the early spine acts (gated/flavored options, or a power-base-aware prologue beat). Either
-  add `requires.flags` on existing spine options keyed to the base, or thread the base into the spine prompt
-  on the next regen. Make the player's onboarding choice MATTER in the prose, not just the motivator seed.
+  feel different in the early spine acts (gated/flavored options, or a power-base-aware prologue beat).
+  DESIGN FINDING (this session): SCENES support `requires` (runner filters scenes by flags, runner.ts:77-79)
+  but DecisionOptionSchema has NO `requires` field — option-level gating isn't supported today. So the three
+  approaches are: (A) add `requires` to DecisionOptionSchema + runner option-filter + author per-base option
+  variants; (B) author base-GATED bonus SCENES that divert in for the matching founder (uses existing scene
+  `requires`, no schema change) — likely the cleanest; (C) thread the base into the spine GenAI prompt on the
+  next regen so the authored prose is base-aware from the start. Pick one (enumerate first), then author.
+  Make the player's onboarding choice MATTER in the prose, not just the motivator seed.
 - [ ] **FS-COMPLETION-REVIEW — milestone comprehensive review before the single PR.** The founding-spine
   completion (VL-3/4/5, WV-3, FS-ONB-DRIFT, FS-SPINE-BRANCH-ONRAMPS, FS-RETIRE-PROLOGUE, UQ-3,
   FS-BRANCH-ONRAMP-AUDIT) is a large body of work on the one branch. Before opening the single PR
