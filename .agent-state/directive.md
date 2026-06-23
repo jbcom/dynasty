@@ -1016,6 +1016,14 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   Before opening the single PR ([[one-branch-local-review]]): full local gate + reviewer trio over the whole
   branch diff (origin..HEAD), fold findings, full e2e (pnpm test:e2e), build, and a final Chrome playthrough
   of an hour-ish run to confirm the founding→stars arc reads as one strong story. THEN open the PR.
+  PROGRESS (this session): [x] full local gate GREEN — tsc + biome check + 742 unit + 106 browser + 7 e2e +
+  build (fixed the e2e onboarding walk for the new funnel + made gameStore.devFastForward saga-aware so it
+  drives founded runs). [x] Chrome playthrough verified: a South/Sword founder opened on the militia-muster
+  scene (FS-SPINE-ORIGIN-FLAVOR) and ONE dev +100 advanced the Sterling line g0→g3, founding 1776 → "Act IV —
+  The Iron and the Ivory / Convergence 1876" (Theodore Jr. III Sterling — 3 generations of succession,
+  era-distinct Gilded-Age prose, era-appropriate News) — the founding→stars arc reads as one continuous,
+  advancing story. [ ] REMAINING: the final pre-PR reviewer pass (dispatched, abe24f28…) — fold findings,
+  then open the PR.
 - [x] **ONO-DEDUP — DONE.** Added an optional `exclude` param to `suggestGivenNames` + `pickGivenName`
   (skip/re-draw when a given name equals the chosen surname), threaded the chosen surname through
   OnboardingScreen's givenSuggestions + founding.ts's seeded pick. Falls back to the un-filtered pool only if
