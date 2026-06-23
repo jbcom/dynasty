@@ -3,7 +3,9 @@ import { createRng } from "../rng";
 import {
   applyFamilyDeathShock,
   dreadForeshadowText,
+  FORESHADOW_TONES,
   foreshadowWeight,
+  omenBadgeLabel,
   recoveryForeshadow,
   recoveryForeshadowText,
   rollSagaRecovery,
@@ -331,6 +333,20 @@ describe("shockExposure + shockForeshadow (SHOCK-FORESHADOW)", () => {
     expect(fallback.length).toBeGreaterThan(0);
     expect(fallback).toMatch(/shadow/i);
     expect([founding, convergence, emergence, ascension]).not.toContain(fallback);
+  });
+
+  it("OMEN-A11Y-AUDIT: EVERY foreshadow tone maps to a non-empty, distinct badge label (no blank fall-through)", () => {
+    // Exhaustive over the canonical tone set — a future tone added without a badge label would fail here, so the
+    // a11y layer can't silently regress to a blank badge (WCAG 1.4.1 relies on the TEXT carrying the valence).
+    const labels = FORESHADOW_TONES.map((t) => omenBadgeLabel(t));
+    for (const label of labels) {
+      expect(label.trim().length, "every tone has a non-empty badge label").toBeGreaterThan(0);
+    }
+    // Each tone reads distinctly (a colorblind player tells them apart by text).
+    expect(new Set(labels).size).toBe(FORESHADOW_TONES.length);
+    // The labels carry recognizable valence words (not just an icon).
+    expect(omenBadgeLabel("hope")).toMatch(/recovering/i);
+    expect(omenBadgeLabel("dread")).toMatch(/warning/i);
   });
 });
 
