@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { attendFlag, buildBirthScene } from "../founding/epoch0Opening";
+import {
+  attendFlag,
+  buildBirthScene,
+  buildChildhoodScene,
+  buildEpoch0Opening,
+  buildNamingScene,
+} from "../founding/epoch0Opening";
 import { dealSenseCues, resolvePlace, type Sense } from "../founding/senseEmergence";
 import { createRng } from "../rng";
 import { SceneSchema } from "../saga/schema";
@@ -50,5 +56,37 @@ describe("epoch-0 birth scene (EI-3 EPOCH-0 OPENING ACT)", () => {
     expect(["new_england", "mid_atlantic", "south"]).toContain(place);
     // Deterministic: the same cues + attentions resolve the same place.
     expect(resolvePlace(dealSenseCues(createRng("b3")), attended)).toBe(place);
+  });
+
+  it("EI-3b: the NAMING scene names the line in-fiction (identity tokens) + sets the named flag", () => {
+    const scene = buildNamingScene();
+    expect(() => SceneSchema.parse(scene)).not.toThrow();
+    expect(scene.id).toBe("epoch0:naming");
+    // The name is spoken in-fiction via identity tokens (resolved from the live family at render).
+    const text = [...scene.prose, ...scene.beats.flatMap((b) => b.prose)].join(" ");
+    expect(text).toMatch(/\{full_name\}|\{given_name\}/);
+    expect(scene.beats.some((b) => b.choice?.setFlags.includes("epoch0:named"))).toBe(true);
+    // It only runs after the place resolved, and flows to childhood.
+    expect(scene.requires.flags).toContain("epoch0:place_resolved");
+    expect(scene.next).toBe("epoch0:childhood");
+  });
+
+  it("EI-3b: the CHILDHOOD scene reads standing diegetically (established vs rising) and bridges to formative", () => {
+    const scene = buildChildhoodScene();
+    expect(() => SceneSchema.parse(scene)).not.toThrow();
+    const standingFlags = (scene.decision?.options ?? []).flatMap((o) => o.setFlags);
+    expect(standingFlags).toContain("epoch0:standing_established");
+    expect(standingFlags).toContain("epoch0:standing_rising");
+    expect(scene.requires.flags).toContain("epoch0:named");
+    expect(scene.next).toBe("epoch0:formative");
+  });
+
+  it("EI-3: buildEpoch0Opening returns the connected birth → naming → childhood chain", () => {
+    const scenes = buildEpoch0Opening(dealSenseCues(createRng("chain")));
+    expect(scenes.map((s) => s.id)).toEqual(["epoch0:birth", "epoch0:naming", "epoch0:childhood"]);
+    // Every scene is schema-valid and the `next` links form an unbroken chain (each next is the following id).
+    for (const s of scenes) expect(() => SceneSchema.parse(s)).not.toThrow();
+    expect(scenes[0]?.next).toBe(scenes[1]?.id);
+    expect(scenes[1]?.next).toBe(scenes[2]?.id);
   });
 });

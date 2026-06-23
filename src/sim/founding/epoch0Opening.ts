@@ -86,3 +86,120 @@ export function buildBirthScene(cues: readonly SenseCue[]): Scene {
     next: "epoch0:naming",
   };
 }
+
+/**
+ * EI-3b — the NAMING scene. The parents name the child IN-FICTION (surname/given/gender spoken over the
+ * cradle), not picked on a card. Identity tokens ({full_name}/{given_name}/{surname}/{family_name}) resolve
+ * from the run's live family at render time (the term-resolution seam), so the dealt name renders here. The
+ * lighter `secondary` decision is the child's first felt disposition — a faint nudge, not a power-base pick.
+ * Real copy. (EI-5 deepens the naming mechanics; this is the diegetic naming beat itself.)
+ */
+export function buildNamingScene(): Scene {
+  return {
+    id: "epoch0:naming",
+    sense: "sound",
+    prose: [
+      "A face leans close — the first face, vast and near — and a voice gives the warmth a shape.",
+      "“There now,” it says, and then your name, the first word that is only yours: {full_name}. The {family_name} line has a new pair of hands.",
+      "You do not understand the words. You understand that they are about you, and that they are glad.",
+    ],
+    beats: [
+      {
+        prose: [
+          "They say {given_name} again, softer, the way a thing is said when it is being decided to be loved.",
+        ],
+        choice: {
+          text: "Hold to the voice.",
+          motivatorShift: {},
+          setFlags: ["epoch0:named"],
+          gather: true,
+        },
+      },
+    ],
+    decision: {
+      tier: "secondary",
+      prompt: "What does the infant {given_name} reach for first?",
+      options: [
+        {
+          text: "The bright thing — anything that glints.",
+          motivatorShift: {},
+          setFlags: ["epoch0:disposition_acquisitive"],
+        },
+        {
+          text: "The voices — the room full of people.",
+          motivatorShift: {},
+          setFlags: ["epoch0:disposition_social"],
+        },
+        {
+          text: "The quiet at the edge of it all.",
+          motivatorShift: {},
+          setFlags: ["epoch0:disposition_watchful"],
+        },
+      ],
+    },
+    thread: [],
+    braidSlots: [],
+    requires: { flags: ["epoch0:place_resolved"], notFlags: [] },
+    next: "epoch0:childhood",
+  };
+}
+
+/**
+ * EI-3b — the CHILDHOOD bridge scene. The child grows into an awareness of the family's circumstances (the
+ * house, the table, the work seen) — which is where STANDING begins to read — and the act turns toward the
+ * formative beats (EI-4: first friend / betrayal / loss / romance / schooling). Real copy; the decision is
+ * the first standing-felt fork (what the child learns the family IS), grounding class without a card pick.
+ */
+export function buildChildhoodScene(): Scene {
+  return {
+    id: "epoch0:childhood",
+    sense: "sight",
+    prose: [
+      "The years that follow come in fragments that will harden, later, into memory: a table, a doorway, the particular light of the room where the family gathers.",
+      "You learn the shape of the household before you learn its name for itself — who eats first, whose word ends an argument, what work fills the hands of the people you belong to.",
+      "And you begin, without knowing it, to take the measure of where the {family_name}s stand.",
+    ],
+    beats: [
+      {
+        prose: [
+          "There is plenty, or there is not; there is deference shown to your people, or there is none. The child reads it in the air.",
+        ],
+        choice: {
+          text: "Learn where you stand.",
+          motivatorShift: {},
+          setFlags: ["epoch0:childhood_seen"],
+          gather: true,
+        },
+      },
+    ],
+    decision: {
+      tier: "secondary",
+      prompt: "What does the young {given_name} come to understand the family to be?",
+      options: [
+        {
+          text: "People of some standing — a name others already know.",
+          motivatorShift: {},
+          setFlags: ["epoch0:standing_established"],
+        },
+        {
+          text: "People on the rise — owed nothing, reaching for everything.",
+          motivatorShift: {},
+          setFlags: ["epoch0:standing_rising"],
+        },
+      ],
+    },
+    thread: [],
+    braidSlots: [],
+    requires: { flags: ["epoch0:named"], notFlags: [] },
+    // EI-4 authors the formative beats this flows into (first friend / schooling / …).
+    next: "epoch0:formative",
+  };
+}
+
+/**
+ * The Epoch-0 opening act so far (EI-3): birth → naming → childhood, in order. EI-4/EI-5 extend it forward
+ * (formative beats, deeper naming). A pure builder; the cues come from EI-2's dealSenseCues for this seed.
+ */
+export function buildEpoch0Opening(cues: readonly SenseCue[]): Scene[] {
+  return [buildBirthScene(cues), buildNamingScene(), buildChildhoodScene()];
+}

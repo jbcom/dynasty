@@ -112,10 +112,12 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   (each stamps `attend:<sense>`), real authored prose, and a MAJOR close decision through which the place
   crystallizes (resolvePlace reads the attend flags). Test: epoch0Opening.unit (schema-valid, sense beats,
   close decision, resolvePlace end-to-end). Flows `next: epoch0:naming`.
-- [ ] **EI-3b EPOCH-0 NAMING + CHILDHOOD SCENES (REAL COPY)** — author the `epoch0:naming` scene (parents name the
-  child in-fiction — surname/given/gender spoken, EI-5 territory) + the early-childhood scenes that carry the act
-  from birth toward the formative beats (EI-4). Real copy, saga-substrate scenes flowing from the birth scene.
-  Tested (schema-valid, naming sets the name facets, the act chain is connected birth → naming → childhood).
+- [x] **EI-3b EPOCH-0 NAMING + CHILDHOOD SCENES (REAL COPY) — DONE (branch feat/ei3-epoch0-opening-act).** Authored
+  `epoch0:naming` (parents name the child in-fiction via {full_name}/{given_name} tokens; a secondary first-
+  disposition fork) + `epoch0:childhood` (the child reads the family's STANDING — established vs rising — diegetically)
+  + `buildEpoch0Opening(cues)` returning the connected birth → naming → childhood chain. Real copy, saga-substrate
+  scenes. Test: epoch0Opening.unit (naming tokens + named flag; childhood standing flags; connected chain). Flows
+  `next: epoch0:formative` (EI-4).
 - [ ] [WAIT] **EI-4 FORMATIVE-BEATS (REAL COPY)** — author first-friend / first-betrayal / first-loss / first-romance /
   early-schooling as emergent Epoch-0 → adulthood scenes (real authored prose) that set life-seeds + crystallize
   facets (power base / standing / bent). Woven across the opening's beginning/middle/end. Tested (each sets its facet).
