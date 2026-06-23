@@ -784,11 +784,12 @@ These surfaced live-verifying the visual layer. The founding-spine pivot ([[mmm-
 WAVES becoming the recurring CAST woven as intersections ([[mmm-timelines-architecture]]). The
 onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival framing.
 
-- [ ] [WAIT] **FS-ONB-DRIFT — onboarding still narrates an IMMIGRANT CROSSING, not the 1776 founding.** BLOCKED on
-  the dispatched founding-era research agent (real 1765–1800 class/region/trade structure) before the
-  architecture call (rewrite wave→founding-origin vs. reframe waves-as-cast). Scope already enumerated: the
-  whole period→class→wave funnel (waveSelect + places.json wave entries + ArrivalClass) is immigration-shaped.
-  Resume the moment research lands. ORIGINAL NOTE: The
+- [ ] **FS-ONB-DRIFT — onboarding still narrates an IMMIGRANT CROSSING, not the 1776 founding.** UNBLOCKED:
+  research landed (`docs/superpowers/specs/2026-06-22-founding-era-research.md`). Scope enumerated: the whole
+  period→class→wave funnel (waveSelect + places.json wave entries + ArrivalClass) is immigration-shaped. Next:
+  make the architecture call (rewrite wave→founding-origin step using the researched region×class×trade×power-
+  base model, vs. reframe waves-as-cast), write the decision into the founding-spine design doc, then build.
+  ORIGINAL NOTE: The
   funnel asks "Every American line begins with a crossing — when did your people make theirs?" then "what
   did they carry off the boat? — steerage, a tenement, the lowest rung." Under the pivot the player's
   progenitor FOUNDS the line at the American founding; the waves are the cast, not the player's origin.
@@ -818,11 +819,11 @@ onboarding copy + seed semantics are still the PRE-pivot immigrant-arrival frami
   as the hour-case. Why: the dead Trump-line origins content (the whole 1885 era) is the SAME pivot-drift root
   as FS-ONB-DRIFT — fold its removal/replacement into that unit (research-gated), don't band-aid one ending.
   Resolves: [[mmm-convergence-pivot]] drift in the founding era is one problem, addressed holistically.
-- [ ] **FS-RESEARCH-REVERIFY — re-fetch the founding-era power-base/class research from LIVE sources.** A prior
-  agent's "colonial power bases" report (six bases: land, commerce, pulpit, law/politics, press, military)
-  is excellent raw material BUT its web tools were blocked — every citation is from MEMORY, not fetched
-  ([[research-not-memory]]). Before it drives FS-ONB-DRIFT content, re-fetch + confirm the load-bearing facts
-  and URLs, especially the agent's own myth-flags: headright fraud, entail/primogeniture's modest practical
-  effect, the triangular-trade simplification, Great Awakening causation, Common Sense sales numbers, Zenger's
-  limited legal precedent. The currently-running agent (a3a2386c…, this-session) may already cover this —
-  reconcile both reports when they land.
+- [x] **FS-RESEARCH-REVERIFY — DONE.** The this-session agent (a3a2386c…) returned a deeply-cited, fact-checked
+  founding-era report (5 sub-agents, working web tools, every fact w/ URL + myth-flags); it reconciles with the
+  prior memory-only "six power bases" report (same six bases) and ADDS the load-bearing corrective: founding-era
+  power was a self-recruiting oligarchy of interlinked families w/ LAND as substrate; self-made/log-cabin =
+  19thc myth = in-world propaganda, not the advancement mechanic. Hand-verified the headright-fraud and
+  entail/primogeniture (VA 1776/1785) myth-flags myself via WebSearch. Saved as
+  `docs/superpowers/specs/2026-06-22-founding-era-research.md`; [[research-not-memory]] updated. This unblocks
+  FS-ONB-DRIFT. (The immigrant-CAST guidance.json still needs the same live-research treatment — separate.)
