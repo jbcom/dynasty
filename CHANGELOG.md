@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.60.0](https://github.com/jbcom/dynasty/compare/v0.59.0...v0.60.0) (2026-06-23)
+
+
+### Features
+
+* **sim:** bridge the Epoch-0 emergence to the founding seam (EI-6a) ([#190](https://github.com/jbcom/dynasty/issues/190)) ([53d13d9](https://github.com/jbcom/dynasty/commit/53d13d922e833172a139ecc668938bf6545e652c))
+
 ## [0.59.0](https://github.com/jbcom/dynasty/compare/v0.58.0...v0.59.0) (2026-06-23)
 
 
