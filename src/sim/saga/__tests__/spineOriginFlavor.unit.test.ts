@@ -64,6 +64,13 @@ const FLAVORED_ACTS = [
     bases: ["land", "pulpit", "law", "military", "press"],
     defaultBase: "commerce",
   },
+  {
+    open: "spine:g5:midcentury:open",
+    divert: "spine:g5:midcentury:reckoning",
+    base: "spine:g5:midcentury:open_",
+    bases: ["land", "pulpit", "law", "military", "press"],
+    defaultBase: "commerce",
+  },
 ];
 
 function actIdOf(open: string): string {

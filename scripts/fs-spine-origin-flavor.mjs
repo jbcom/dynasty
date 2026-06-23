@@ -778,6 +778,159 @@ const G4_VARIANTS = [
 ];
 
 /**
+ * G5 (Act VI — The Chrome Horizon, mid-century ~1950s-60s): the five base-flavored openings, diverting to
+ * the shared g5 `reckoning` scene. The existing Manhattan-skyline executive `open` is the commerce/default.
+ * Voice: postwar triumph + its shadows — suburbia, the Cold War, civil rights, television, the bomb.
+ */
+const G5_VARIANTS = [
+  {
+    id: "spine:g5:midcentury:open_land",
+    base: "land",
+    sense: "sight",
+    prose: [
+      "Bulldozers crawled across what had been the {family_name} back-forty, and {given_name} {surname} watched the postwar boom turn farmland into a grid of identical roofs — Levittown by the thousand, the interstate slicing through the old sections, the suburb devouring the field. Mid-century made the family's land worth more as subdivision than as soil: FHA mortgages, the GI Bill, white flight pricing the acres like gold. The agrarian century was ending in cul-de-sacs, and a landed family had to decide whether to farm or to develop.",
+      "Word came up the new four-lane of agribusiness consolidation and the dying family farm, of redlined suburbs and the Sun Belt's rise, of a interstate program remaking the map. {given_name} weighed the old homestead against the developer's check, knowing the land that built the line over two centuries could be cashed out into the boom — or held, against the grain, as the last green in a paving age.",
+    ],
+    beats: [
+      {
+        prose: ["A developer offers a fortune to subdivide the home sections into a new suburb."],
+        choice: {
+          text: "Sell to the bulldozers — the future of land is the cul-de-sac.",
+          motivatorShift: { wealth: 1, tradition: 1 },
+          setFlags: ["g5_land_subdivided"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["An agribusiness combine offers to fold the farm into an industrial operation."],
+        choice: {
+          text: "Hold and modernize — keep the line on the land it came from.",
+          motivatorShift: { lineage: 1, reach: 1 },
+          setFlags: ["g5_land_agribusiness"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g5:midcentury:open_pulpit",
+    base: "pulpit",
+    sense: "sound",
+    prose: [
+      "The {family_name} church had become a suburban campus with a parking lot the size of a field, and {given_name} {surname} preached to a postwar congregation in the great religious boom: full pews, the under-God Pledge, Billy Graham filling stadiums, faith fused to the Cold War crusade against godless communism. But the same decade was stirring the civil-rights pulpits of the South, where the gospel was a marching song. The {family_name} voice could bless the comfortable consensus — or risk it for the movement gathering in the streets.",
+      "Word came up the new freeway of Montgomery and the bus boycott, of a young preacher named King turning the pulpit into a battering ram against Jim Crow, of white churches choosing silence or sides. {given_name} weighed the safe civic faith of the suburb against the costly gospel of the movement, knowing the pulpit that chose this age's true test would mark the family for the century to come.",
+    ],
+    beats: [
+      {
+        prose: ["A revival crusade wants the family's church as its anchor — faith as Cold War bulwark."],
+        choice: {
+          text: "Anchor the crusade — God and country against the godless East.",
+          motivatorShift: { worldview: -1, politics: 1 },
+          setFlags: ["g5_pulpit_cold_war_revival"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["A civil-rights organizer asks the pulpit to join the movement — at the cost of the comfortable pews."],
+        choice: {
+          text: "Join the movement — the gospel that costs nothing is worth nothing.",
+          motivatorShift: { honor: -1, worldview: 1 },
+          setFlags: ["g5_pulpit_civil_rights"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g5:midcentury:open_law",
+    base: "law",
+    sense: "sight",
+    prose: [
+      "The {family_name} firm filled a chrome-and-glass floor downtown, and {given_name} {surname} read mid-century as the age when law remade the nation from the bench: Brown v. Board, the due-process revolution, the antitrust and securities regimes that policed the postwar boom. The Cold War lawyered too — loyalty boards, the blacklist, the security state. A lawyer could ride the great civil-rights cases into history, or defend the corporate order, or serve the security apparatus hunting subversion in every shadow.",
+      "Word came down from the Warren Court of desegregation and the rights of the accused, of McCarthy's hearings and the loyalty oaths, of a Constitution being rewritten in real time. {given_name} weighed the movement brief against the corporate retainer against the government's call, knowing the law of this age was deciding who counted as a full American — and the {family_name} name would be written on one side or another of that line.",
+    ],
+    beats: [
+      {
+        prose: ["A civil-rights legal fund seeks the family's name on the desegregation cases moving toward the Court."],
+        choice: {
+          text: "Join the civil-rights bar — the law's highest work in this age.",
+          motivatorShift: { politics: -1, honor: -1 },
+          setFlags: ["g5_law_civil_rights_bar"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["The government recruits the firm for the loyalty boards + security apparatus of the Cold War."],
+        choice: {
+          text: "Serve the security state — power flows to those who guard the order.",
+          motivatorShift: { power: 1, honor: 1 },
+          setFlags: ["g5_law_security_state"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g5:midcentury:open_military",
+    base: "military",
+    sense: "sound",
+    prose: [
+      "The jet engines screamed over the airbase where {given_name} {surname} commanded, and the mid-century officer stood at the apex of American power: the largest peacetime military in history, the bomb, the bases ringing the globe, the military-industrial complex Eisenhower would warn of in his farewell. The {family_name} sword had become a career in a permanent war machine — Korea, the missile gap, the advisers shipping to a place called Vietnam. Cold War rank meant proximity to the gravest power any officers had ever held.",
+      "Word came up the chain of command of Korea's stalemate, of the H-bomb tests and the Strategic Air Command's airborne alert, of a quagmire gathering in Southeast Asia. {given_name} weighed the nuclear deterrent's cold logic against the counterinsurgent's coming war, knowing the officer who chose his command rightly in this age would either help hold the peace by the threat of annihilation — or march the family into the century's longest war.",
+    ],
+    beats: [
+      {
+        prose: ["A Strategic Air Command posting offers a hand on the nuclear trigger — the apex of Cold War power."],
+        choice: {
+          text: "Take the nuclear command — deterrence is the gravest power ever held.",
+          motivatorShift: { power: 1, reach: 1 },
+          setFlags: ["g5_military_strategic_command"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["The advisory mission to Vietnam wants experienced officers before the war fully ignites."],
+        choice: {
+          text: "Ship out early — the next war's reputations are being staked now.",
+          motivatorShift: { honor: 1, power: 1 },
+          setFlags: ["g5_military_vietnam_early"],
+          gather: true,
+        },
+      },
+    ],
+  },
+  {
+    id: "spine:g5:midcentury:open_press",
+    base: "press",
+    sense: "sound",
+    prose: [
+      "The {family_name} presses now fed a television studio, and {given_name} {surname} stood at the birth of the broadcast age: Murrow against McCarthy, the evening news entering every living room, the image becoming the message. Mid-century media could end a demagogue, sell a president, or look away from the South's burning churches — and the family that owned a network owned a slice of the national nervous system in the decade it learned to watch itself. The chrome promise and the things it declined to show were both the {family_name} broadcast's to shape.",
+      "Word came up from the control room of Murrow's stand and the quiz-show scandals, of the civil-rights footage that shamed a nation and the Cold War consensus that policed the airwaves. {given_name} weighed courage against sponsorship, knowing the broadcast that chose rightly in this age could topple a McCarthy or expose Birmingham — or, fearing the advertisers and the FCC, become the bland mirror of a country avoiding its own reflection.",
+    ],
+    beats: [
+      {
+        prose: ["Your news division wants to run the broadcast that will take down a red-baiting senator."],
+        choice: {
+          text: "Air it — the camera that fears power is no journalism at all.",
+          motivatorShift: { worldview: 1, honor: -1 },
+          setFlags: ["g5_press_murrow_moment"],
+          gather: true,
+        },
+      },
+      {
+        prose: ["Sponsors + the FCC press the network to keep the civil-rights footage off the air."],
+        choice: {
+          text: "Keep the consensus — a network survives by not frightening its sponsors.",
+          motivatorShift: { wealth: 1, power: 1 },
+          setFlags: ["g5_press_safe_consensus"],
+          gather: true,
+        },
+      },
+    ],
+  },
+];
+
+/**
  * Apply one act's base-flavored opening variants, idempotently: each variant scene is gated on its
  * `base:*` flag + diverts to `divertTo` (skipping the default `open`); the default `open` is gated to NOT
  * fire for any covered base (so an uncovered/default base — press at g0 — gets it). `actId` is the act,
@@ -842,6 +995,14 @@ const n4 = applyAct(
   "spine:g4:progressive:allegiance",
   G4_VARIANTS,
 );
+const n5 = applyAct(
+  "spine:g5:midcentury",
+  "spine:g5:midcentury:open",
+  "spine:g5:midcentury:reckoning",
+  G5_VARIANTS,
+);
 
 writeFileSync(PATH, `${JSON.stringify(doc, null, 1)}\n`);
-console.log(`inserted base-variant openings — g0: ${n0}, g1: ${n1}, g2: ${n2}, g3: ${n3}, g4: ${n4}`);
+console.log(
+  `inserted base-variant openings — g0: ${n0}, g1: ${n1}, g2: ${n2}, g3: ${n3}, g4: ${n4}, g5: ${n5}`,
+);
