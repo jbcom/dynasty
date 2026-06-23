@@ -1209,10 +1209,11 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   the stars / rose high / made its mark / faltered at the last), so the close is the whole field's reckoning,
   not just the player's. rivalStandings now carries `faltering` (engine + App wire-through). screens.browser
   pins render + humanized labels + star/faltered fates + empty case. 879 node + 117 browser green, gate clean.
-- [ ] **SPINE-DEPTH-PLAYTEST-2 — re-measure the hour with shocks/recoveries/crossings live.** The
-  ~48-min playtest predates the WV-3 + fabric layers. Re-run the divergence/playtest instruments to measure
-  the CURRENT depth (shocks add beats, recoveries add ticks, fabric crossings add prose) and confirm a median
-  run crosses the hour; if short, the lever is more interstitial prose or a 4th-act beat. Decide from figures.
+- [x] **SPINE-DEPTH-PLAYTEST-2 — DONE (forward commit on PR #124).** Added a 5-seed instrument to
+  spineDepthPlaytest.unit measuring the WV-3 dynamic surface ON TOP of the ~48-min authored floor. MEASURED:
+  29 shock beats + 42 ledger events across 5 seeds, median ~76s added/run (range 64–80s), firing EVERY run. So
+  floor ~48 min + dynamic layer + a careful player's deliberation (95 beats / 22 decisions vs the fast path)
+  clears the hour mandate comfortably — NO extra prose/4th-act beat needed. Test guards median ≥30s. Gate clean.
 - [ ] **RIVAL-FALTER-NEWS — surface a rival's stumble in the in-run NewsTicker, not just the end.** A rival now
   falters mid-race (SHOCK-AFTERMATH-IN-RIVALS) + shows "struggling" in glimpses, but nothing ANNOUNCES it as it
   happens. Emit a NewsTicker line when a near-vantage rival first falters ("Word reaches you: the <place> line
@@ -1221,6 +1222,14 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   window, but the player can't yet press it. At a braid crossing with a faltering rival, offer a choice that
   nudges that rival further down (opposing) for a cost/risk — turning the stumble into an interactive beat, not
   just a readout. Reuses nudgeRival + the crossing system; pure + seeded; tested.
+- [ ] **RIVAL-RISE-NEWS — surface a rival's BREAKOUT climb in the NewsTicker (the race cuts both ways).** Falter
+  news (RIVAL-FALTER-NEWS) tells the player when a rival stumbles; the inverse — a rival surging past the player's
+  rung — is the pressure half. Emit a ticker line when a near-vantage rival climbs ABOVE the player ("The <place>
+  line has outpaced you") so the convergence race creates urgency, not just opportunity. Reads standings; tested.
+- [ ] **CONVERGENCE-FIELD-IN-TIMELINE — a compact rival-field readout in the in-run Timeline.** The end-game shows
+  the full field (CONVERGENCE-RIVAL-FINALE) but mid-run the player only sees near-vantage glimpses. Add a small
+  "The Field" strip to the Timeline showing each rival's rung relative to the player's, so the player can track
+  the whole race across the hour, not just at the close. Reads view.rivalStandings; pure read-model; tested.
 - [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
   audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
   diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock
