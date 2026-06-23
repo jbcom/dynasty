@@ -1010,7 +1010,7 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   spine pipeline (matches the spine voice), license/validate, then Chrome-verify a press vs. land founder sees
   different opening prose. Later gens can follow the same pattern incrementally. Make the choice MATTER in the
   prose, not just the motivator seed.
-- [ ] **FS-COMPLETION-REVIEW — milestone comprehensive review before the single PR.** The founding-spine
+- [ ] [WAIT-REVIEW] **FS-COMPLETION-REVIEW — milestone comprehensive review before the single PR.** The founding-spine
   completion (VL-3/4/5, WV-3, FS-ONB-DRIFT, FS-SPINE-BRANCH-ONRAMPS, FS-RETIRE-PROLOGUE, UQ-3,
   FS-BRANCH-ONRAMP-AUDIT, CAST-RESEARCH, FS-SPINE-ORIGIN-FLAVOR) is a large body of work on the one branch.
   Before opening the single PR ([[one-branch-local-review]]): full local gate + reviewer trio over the whole
