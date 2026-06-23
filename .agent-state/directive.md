@@ -279,14 +279,16 @@ game-scannability with the novel reading experience ([[scannability-game-novel-b
   syndicate that EXITS to legitimacy by tier 2; chinese=West-Coast tong/vice); crime↔legit crossings reuse WV-2
   braid pool; new `syndicate` convergence Destination = the "crime planet" (Don of a Thousand Suns), gated to
   criminal/converted lines. Build order = schema+gate → ending → GOAP → guidance → generate → live-verify.
-- [ ] [WAIT] **UQ-3 CRIME power axis — REFRAMED by the founding-spine pivot; revisit after the visual layer.**
+- [ ] **UQ-3 CRIME power axis — UNBLOCKED (visual layer done) + now fits the spine-branch machinery.**
   The crime-leader DESTINY already shipped (FS-6b ending, [[crime-power-axis]]); the founding tier-1
   early-republic act already offers a crime-curious doctrine branch. The FULL criminal axis is no longer a
-  wave×cell archetype (that model is retired) — under the spine it becomes a crime-leaning BRANCH set + a
-  crime-flavored spine variant (trigger-lattice branches gated on a crime doctrine flag) reaching the
-  crime_leader/syndicate destiny. Re-spec UQ-3b-f against the spine model when picked up. [WAIT] after VL.
-  (The old UQ-3b-f wave×cell sub-steps — schema/CRIME_WAVES gate / per-wave crimeArc act files — are
-  superseded; the crime arc is authored INTO the spine + branches, not as separate playable cells.)
+  wave×cell archetype (retired) — under the spine it becomes a 7th DESTINY BRANCH, exactly the pattern
+  FS-SPINE-BRANCH-ONRAMPS just built (spineBranch.ts). Concretely: (1) add a `crime` BranchKey + signature
+  flags to branch.ts; (2) map the spine's crime-doctrine path flags → the crime signature in
+  SPINE_FLAG_TO_BRANCH; (3) ensure a `syndicate`/crime-leader destiny ending + term resolution for the crime
+  branch; (4) prove crime reachability from a spine choice in the branch test. Net-new but small now that the
+  on-ramp machinery exists. (The old UQ-3b-f wave×cell sub-steps — schema/CRIME_WAVES gate / per-wave
+  crimeArc act files — are superseded; the crime arc is authored INTO the spine + branches.)
 
 - [x] **RB-2 per-tier content depth — DONE.** Audit showed prose depth already uniform (every scene
   2-4 paras); only 2 under-generated cells had <2 beats — regenerated to the full weave (0 thin-beat).
@@ -964,3 +966,22 @@ Steps when picked up: (1) empty origins events.json; (2) remove end_line_failed 
 prologue-gating.unit.test.ts; (4) split terms.unit.test.ts — repoint live term-interp to a non-origins
 fixture, drop the prologue cases; (5) confirm branch.ts + initState default resolve; (6) full gate +
 autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the founding spine.
+
+## Rolling backlog (keep the queue non-empty — [[never-drain-queue]])
+
+- [ ] **CAST-RESEARCH — live-research the immigrant-WAVE cast guidance.json (the [[research-not-memory]]
+  other half).** The founding-era research is done; the wave histories/trades/obstacles/crime-arcs/braid
+  affinities for the recurring CAST families (Irish/Italian/Chinese/Jewish/Scandinavian/Bavarian/Arab) are
+  still a from-memory DRAFT in guidance.json. Research each ONLINE (WebSearch), cite + myth-flag, correct the
+  draft before it drives cast/braid generation. Pairs with the cast being woven as intersections.
+- [ ] **VL-5 — the dynasty PORTRAIT for the player's CHOSEN gender/region isn't always present.** Chrome
+  cold-start showed an empty portrait frame on a fresh New England founder (the gold frame rendered, no
+  image). The 20 spine portraits (g0–g9 × M/F) exist, but verify the PlayScreen portraitSrc derivation
+  fires for a freshly-founded line at g0 (it keys off view.saga.scene?.id `spine:gN` + founding.gender) —
+  the scene id at the very first beat may not yet be `spine:g0:` when the act opens. Investigate + ensure the
+  founding portrait shows from beat one.
+- [ ] **FS-BRANCH-ONRAMP-AUDIT — confirm each destiny branch is reachable in actual PLAY, not just present
+  in the corpus.** spineBranch.ts proves the signature flags are SET by some spine choice, and branch.unit
+  proves they resolve — but verify a real seeded playthrough that steers toward (e.g.) the media or
+  oligarchy destiny actually reaches that branch's ending + term resolution end-to-end (a playthrough-level
+  reachability test per destiny, not just a flag-presence test).
