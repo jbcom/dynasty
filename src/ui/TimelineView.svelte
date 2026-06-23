@@ -1,4 +1,5 @@
 <script lang="ts">
+import { humanizeRivalLabel } from "../sim/dynastyWorld";
 import { shockLedger } from "../sim/sagaShock";
 import type { Content } from "../sim/content";
 import type { GameState } from "../sim/state";
@@ -6,13 +7,34 @@ import type { GameState } from "../sim/state";
 interface Props {
   content: Content;
   gameState: GameState;
+  /** CONVERGENCE-FIELD-IN-TIMELINE: the whole rival field (label + rung + faltering), so the player can
+   *  track the race mid-run, not just at the close. Omitted (unfounded / no world) → the strip hides. */
+  rivalStandings?: Array<{ id: string; label: string; rung: number; faltering: boolean }>;
+  /** The player's own rung, to render the field RELATIVE to the played line. */
+  playerRung?: number;
 }
 
-const { content, gameState }: Props = $props();
+const { content, gameState, rivalStandings = [], playerRung = 0 }: Props = $props();
 
 // DOSSIER-SHOCK-LEDGER: the line's disasters across the run, parsed from the shock:* flags — a "what
 // befell the family" log so the player can review the hard seasons (deaths, reversals) over the hour.
 const ledger = $derived(shockLedger(gameState.flags));
+
+// CONVERGENCE-FIELD-IN-TIMELINE: the field, sorted high→low with the player's own line slotted in by rung,
+// so the in-run Timeline shows where every line stands in the race (ahead/level/behind), not just the close.
+const RUNG_MAX = 5;
+const field = $derived(
+  [
+    { id: "you", name: "Your line", rung: playerRung, faltering: false, isPlayer: true },
+    ...rivalStandings.map((r) => ({
+      id: r.id,
+      name: humanizeRivalLabel(r.label),
+      rung: r.rung,
+      faltering: r.faltering,
+      isPlayer: false,
+    })),
+  ].sort((a, b) => b.rung - a.rung || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0)),
+);
 
 // Hand-rolled lightweight timeline. It shows the LINE'S OWN path: from the era it was
 // founded in through the current one — never the global era list. A modern line founded
@@ -74,6 +96,23 @@ const eventsByYear = $derived(
           <li data-shock-kind={entry.kind}>
             <span class="ledger-year">{entry.year}</span>
             <span class="ledger-label">{entry.label}</span>
+          </li>
+        {/each}
+      </ul>
+    </div>
+  {/if}
+  {#if rivalStandings.length > 0}
+    <!-- CONVERGENCE-FIELD-IN-TIMELINE: where every line stands in the race, mid-run — a rung bar per line. -->
+    <div class="field" data-testid="convergence-field">
+      <h4>The Field</h4>
+      <ul>
+        {#each field as line (line.id)}
+          <li data-player={line.isPlayer} data-faltering={line.faltering}>
+            <span class="field-name">{line.name}</span>
+            <span class="field-bar" aria-hidden="true">
+              <span class="field-fill" style={`width: ${Math.round((line.rung / RUNG_MAX) * 100)}%`}></span>
+            </span>
+            <span class="field-rung">{line.rung}</span>
           </li>
         {/each}
       </ul>
@@ -149,5 +188,53 @@ const eventsByYear = $derived(
     font-variant-numeric: tabular-nums;
     color: var(--mmm-text-dim);
     font-size: 0.72rem;
+  }
+  /* CONVERGENCE-FIELD-IN-TIMELINE: the race readout — a rung bar per line, the player's own highlighted. */
+  .field { margin-top: 0.8rem; }
+  .field h4 {
+    margin: 0 0 0.4rem;
+    font-family: var(--mmm-font-display);
+    color: var(--mmm-gold);
+    font-size: 0.85rem;
+  }
+  .field ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.3rem; }
+  .field li {
+    display: grid;
+    grid-template-columns: 7rem 1fr 1.2rem;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.78rem;
+  }
+  .field-name {
+    color: var(--mmm-text-dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* The player's own line is named in gold + bold so "where am I" reads at a glance. */
+  .field li[data-player="true"] .field-name {
+    color: var(--mmm-gold);
+    font-weight: 700;
+  }
+  .field-bar {
+    height: 8px;
+    background: var(--mmm-surface);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .field-fill {
+    display: block;
+    height: 100%;
+    background: var(--mmm-gold-deep);
+    border-radius: 999px;
+  }
+  .field li[data-player="true"] .field-fill { background: var(--mmm-gold); }
+  /* A faltering rival's bar reads in the loss register. */
+  .field li[data-faltering="true"] .field-fill { background: var(--mmm-red, #b22); }
+  .field-rung {
+    font-family: var(--mmm-font-ui);
+    font-variant-numeric: tabular-nums;
+    color: var(--mmm-text-dim);
+    text-align: right;
   }
 </style>

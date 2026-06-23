@@ -1214,23 +1214,45 @@ autoPlaythrough no longer early-deaths + Chrome verify cold start opens on the f
   29 shock beats + 42 ledger events across 5 seeds, median ~76s added/run (range 64–80s), firing EVERY run. So
   floor ~48 min + dynamic layer + a careful player's deliberation (95 beats / 22 decisions vs the fast path)
   clears the hour mandate comfortably — NO extra prose/4th-act beat needed. Test guards median ≥30s. Gate clean.
-- [ ] [WAIT-REVIEW] **RIVAL-FALTER-NEWS — surface a rival's stumble in the in-run NewsTicker (next branch after #124).**
-  A rival now falters mid-race (SHOCK-AFTERMATH-IN-RIVALS) + shows "struggling" in glimpses, but nothing ANNOUNCES
-  it as it happens. Emit a NewsTicker line when a near-vantage rival first falters ("Word reaches you: the <place>
-  line has stumbled") so the player can act on the window in the moment. Reads the glimpse faltering note; tested.
-  GATED: #124 must merge first (linear one-branch flow, [[one-branch-local-review]]).
-- [ ] [WAIT-REVIEW] **RIVAL-CROSSING-EXPLOIT — let the player ACT on a faltering rival at a crossing (after #124).**
-  A faltering rival is a window, but the player can't yet press it. At a braid crossing with a faltering rival,
-  offer a choice that nudges that rival further down (opposing) for a cost/risk — turning the stumble into an
-  interactive beat, not just a readout. Reuses nudgeRival + the crossing system; pure + seeded; tested.
-- [ ] [WAIT-REVIEW] **RIVAL-RISE-NEWS — surface a rival's BREAKOUT climb in the NewsTicker (after #124).** Falter
-  news (RIVAL-FALTER-NEWS) tells the player when a rival stumbles; the inverse — a rival surging past the player's
-  rung — is the pressure half. Emit a ticker line when a near-vantage rival climbs ABOVE the player ("The <place>
-  line has outpaced you") so the convergence race creates urgency, not just opportunity. Reads standings; tested.
-- [ ] [WAIT-REVIEW] **CONVERGENCE-FIELD-IN-TIMELINE — a compact rival-field readout in the in-run Timeline (after #124).**
-  The end-game shows the full field (CONVERGENCE-RIVAL-FINALE) but mid-run the player only sees near-vantage
-  glimpses. Add a small "The Field" strip to the Timeline showing each rival's rung relative to the player's, so
-  the player can track the whole race across the hour, not just at the close. Reads view.rivalStandings; tested.
+**RIVAL-RACE-PRESENCE milestone (feat/rival-race-presence) — all four on ONE local branch, single push at the
+end ([[one-branch-local-review]]). #124 MERGED (squash 32bad64) cleared the gate.**
+- [x] **RIVAL-FALTER-NEWS + RIVAL-RISE-NEWS — DONE (local commit on feat/rival-race-presence).** Added a
+  `rivalNews()` engine channel surfaced as `view.rivalNews`: a near-vantage faltering rival yields a "stumbled"
+  WINDOW dispatch (gold), a rival surged above the player's rung yields an "outpaced you" PRESSURE dispatch
+  (red). NewsTicker renders them above the world news (the News tab now shows when there's rival news even with
+  no world timelines). Both halves of the race felt in-run. Tests: NewsTicker.browser (render+accent) +
+  loop.unit (both kinds fire over a seed sweep, humanized). 881 node + 118 browser green, gate clean.
+- [x] **CONVERGENCE-FIELD-IN-TIMELINE — DONE (local commit on feat/rival-race-presence).** TimelineView now
+  renders "The Field" — a rung bar per line (the player's own slotted in by rung + highlighted gold, faltering
+  rivals' bars red), sorted high→low, so the player tracks the whole race mid-run, not just at the close.
+  Reads view.rivalStandings + view.rung (wired through PlayScreen). Views.browser pins the sort order, player
+  slot, faltering accent, and empty case. 881 node + 119 browser green, gate clean.
+- [ ] [WAIT-REVIEW] **RIVAL-CROSSING-EXPLOIT — let the player ACT on a faltering rival (OWN branch after #126 — save-invariant design needed).**
+  A faltering rival is a window; let the player press it (nudgeRival -1 + a heat/attention cost). ARCHITECTURAL
+  FINDING (this analysis): a player-initiated press CANNOT go in the RNG-keyed `history` array — every saga RNG
+  fork is keyed on `history.length`, so inserting a press entry between beats shifts subsequent fork labels and
+  DESYNCS replay (breaks save=seed+history, [[mmm-save-and-chronology]]). Needs a SEPARATE press side-log keyed
+  by the history index it occurred at, interleaved in `reconstruct` WITHOUT perturbing the saga RNG. That's a
+  real design step deserving its own branch after the rival-race-presence PR — NOT a same-branch append. Decided:
+  defer to a dedicated branch; build the press side-log + reconstruct interleave + tests there. Logged, proceeding.
+- [x] **RIVAL-FATE-IN-CONVERGENCE-ENDING — DONE (forward commit on PR #126).** resolveConvergence now computes a
+  `rivalEpilogue` coda from the field summary (rivalField: reachedStars/fallen/abovePlayer/total): a rival among
+  the stars (distinct for player-also-stars vs not), the whole field fallen behind you, or a still-contested
+  race. LegacyReport narrates it beneath the finale prose; a failed/unfounded run gets no coda. convergence.unit
+  (5 cases) + screens.browser (render + empty). 886 node + 120 browser green, gate clean.
+- [ ] [WAIT-REVIEW] **SHOCK-FORESHADOW — a near-future hazard hints before it strikes (after #126).** WV-3
+  shocks land then narrate aftermath; the player never feels them coming. When the next saga tick carries an
+  elevated shock chance (harsh era + outstanding strain), surface a one-line omen ("the season turns against
+  the house") the turn BEFORE, so loss has dread, not just consequence. Reads the era exposure; pure; tested.
+- [ ] [WAIT-REVIEW] **RECOVERY-CHOICE — let the player INVEST in a rebound rather than wait for the seeded roll (after #126).**
+  Recoveries fire automatically on quiet ticks; give the player a beat after a blow to spend a meter (money/heat)
+  to RAISE the next recovery's chance/magnitude — turning the comeback into agency, not just luck. Reuses
+  rollSagaRecovery with a player-set bonus; deterministic; tested. (Pairs with RIVAL-CROSSING-EXPLOIT's side-log.)
+- [ ] [WAIT-REVIEW] **RIVAL-RACE-PRESENCE PR #126 — wait CI green + address review, then self-squash-merge.**
+  Pushed feat/rival-race-presence (now 4 units: falter/rise news, field strip, rival-fate ending). All review
+  findings (Amazon-Q dedup, Gemini perf/DRY/test-comment) folded forward in 6d00934, all 4 threads resolved.
+  Loop: wait build-and-test + CodeQL, self-squash-merge once green ([[babysit-pr]]). After merge: sync main,
+  RIVAL-CROSSING-EXPLOIT on a fresh branch (the press side-log + reconstruct interleave design).
 - [x] **WV-3-YUKA PR #108 — DONE, MERGED (squash e3b9f17; release-please will cut 0.24.0).** The divergence
   audit + g9 apex fix, WV-3-MORTALITY (seeded saga shocks) + WV-3-RIVAL-REACT (reactive rivals) — saga path
   diverges per seed while bit-reproducible. CI green; CodeRabbit pass; Gemini high+medium findings (saga shock

@@ -106,4 +106,62 @@ describe("convergence endings (SS-9 + FS-6b destinies)", () => {
     expect(resolveConvergence(c)).toEqual(resolveConvergence(c));
     expect(endingColoring(mot({ worldview: -80 }))).toBe("faith");
   });
+
+  describe("RIVAL-FATE-IN-CONVERGENCE-ENDING: the field's outcome tints the close", () => {
+    it("a rival reaching the stars yields a coda (distinct for player-also-stars vs not)", () => {
+      const youStars = resolveConvergence(
+        ctx({ tier: 5, rivalField: { reachedStars: 1, fallen: 0, abovePlayer: 1, total: 6 } }),
+      );
+      expect(youStars.rivalEpilogue, "a stars coda renders").toMatch(/stars/i);
+      // A run that did NOT itself reach the stars but a rival did reads the "before yours" line.
+      const notYou = resolveConvergence(
+        ctx({
+          tier: 4,
+          motivators: mot({ reach: 40 }),
+          rivalField: { reachedStars: 1, fallen: 0, abovePlayer: 2, total: 6 },
+        }),
+      );
+      expect(notYou.rivalEpilogue).toMatch(/before yours|watched/i);
+      expect(notYou.rivalEpilogue).not.toBe(youStars.rivalEpilogue);
+    });
+
+    it("the whole field fallen behind you yields a lonely-summit coda", () => {
+      const e = resolveConvergence(
+        ctx({ tier: 5, rivalField: { reachedStars: 0, fallen: 6, abovePlayer: 0, total: 6 } }),
+      );
+      expect(e.rivalEpilogue).toMatch(/faltered|alone|endured/i);
+    });
+
+    it("a still-contested field yields a neck-and-neck coda", () => {
+      const e = resolveConvergence(
+        ctx({
+          tier: 3,
+          motivators: mot({ lineage: 40 }),
+          rivalField: { reachedStars: 0, fallen: 0, abovePlayer: 2, total: 6 },
+        }),
+      );
+      expect(e.rivalEpilogue).toMatch(/pressed close|undecided/i);
+    });
+
+    it("no rival field (unfounded / no world) → no epilogue", () => {
+      expect(resolveConvergence(ctx({ tier: 5 })).rivalEpilogue).toBeUndefined();
+      expect(
+        resolveConvergence(
+          ctx({ rivalField: { reachedStars: 0, fallen: 0, abovePlayer: 0, total: 0 } }),
+        ).rivalEpilogue,
+      ).toBeUndefined();
+    });
+
+    it("a FAILED (extinguished) run stays stark — no field coda", () => {
+      const e = resolveConvergence(
+        ctx({
+          survived: false,
+          hasHeir: false,
+          rivalField: { reachedStars: 2, fallen: 1, abovePlayer: 3, total: 6 },
+        }),
+      );
+      expect(e.destination).toBe("extinguished");
+      expect(e.rivalEpilogue).toBeUndefined();
+    });
+  });
 });

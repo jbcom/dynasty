@@ -6,6 +6,7 @@ import { spectrumLabel } from "../../sim/personality";
 import { branchOf } from "../../sim/branch";
 import { moralPoleLabel, moralPoleOf } from "../../sim/moralAxis";
 import { applyTerms, runTerms } from "../../sim/terms";
+import { humanizeRivalLabel } from "../../sim/dynastyWorld";
 import { shockLedger } from "../../sim/sagaShock";
 import type { EndState, GameState } from "../../sim/state";
 import ButterflyGraph from "../ButterflyGraph.svelte";
@@ -85,13 +86,11 @@ function rivalFate(rung: number, faltering: boolean): string {
   if (rung >= 2) return "made its mark, then settled";
   return "never rose far from where it began";
 }
-const humanizePlace = (label: string): string =>
-  label.replace(/^rival:/, "").replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 // Sorted high→low already (the engine sorts standings); render every line so the field's whole arc shows.
 const rivals = $derived(
   rivalStandings.map((r) => ({
     id: r.id,
-    name: humanizePlace(r.label),
+    name: humanizeRivalLabel(r.label),
     rung: r.rung,
     fate: rivalFate(r.rung, r.faltering),
     faltering: r.faltering,
@@ -119,6 +118,10 @@ onMount(() => {
     <!-- CONVERGENCE-ENDING-DEPTH: the earned finale, narrated — the century-spanning arc resolved in prose. -->
     {#if convergence.prose}
       <p class="convergence-prose" data-testid="convergence-prose">{term(convergence.prose)}</p>
+    {/if}
+    <!-- RIVAL-FATE-IN-CONVERGENCE-ENDING: how the field ended relative to you — the race's result, in a coda. -->
+    {#if convergence.rivalEpilogue}
+      <p class="rival-epilogue" data-testid="rival-epilogue">{term(convergence.rivalEpilogue)}</p>
     {/if}
   {/if}
   {#if isApex}<p class="apex-kicker">★ Apex Ending ★</p>{/if}
@@ -232,6 +235,15 @@ onMount(() => {
     font-size: 1rem;
     line-height: 1.55;
     color: var(--mmm-text);
+  }
+  /* RIVAL-FATE-IN-CONVERGENCE-ENDING: the field coda — quieter than the finale prose, the race's last word. */
+  .rival-epilogue {
+    margin: 0 auto 0.8rem;
+    max-width: 52ch;
+    font-family: var(--mmm-font-body);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--mmm-text-dim);
   }
   .convergence[data-destination="stars"] strong {
     color: var(--mmm-gold-bright);

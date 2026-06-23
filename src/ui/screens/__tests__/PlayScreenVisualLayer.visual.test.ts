@@ -51,6 +51,7 @@ function view(): GameView {
     },
     glimpses: [],
     rivalStandings: [],
+    rivalNews: [],
     rung: 0,
     convergence: null,
     lastLedger: [],

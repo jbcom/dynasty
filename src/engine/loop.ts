@@ -10,6 +10,7 @@ import {
   type DynastyWorld,
   detectGlimpses,
   type Glimpse,
+  humanizeRivalLabel,
   nudgeRival,
 } from "../sim/dynastyWorld";
 import { advanceFamily, applyChoice, applySuccessionToFamily, succeedToHeir } from "../sim/effects";
@@ -78,6 +79,17 @@ export interface GameView {
   /** WV-3-SHOCK-SCENES: the disruption shock's one-line aftermath that struck on the last saga move, or
    *  null. The PlayScreen narrates it for one turn (a death/loss/scandal beat the player reads). */
   shock: SagaShockNote | null;
+  /** RIVAL-RACE-PRESENCE: dispatches about the rival lines near the player's station this turn — a rival
+   *  that has stumbled (a window) or surged past the player (pressure). Surfaced in the NewsTicker so the
+   *  convergence race is felt in-run, not just at the close. */
+  rivalNews: RivalNewsItem[];
+}
+
+/** A one-line dispatch about a near-vantage rival line (RIVAL-RACE-PRESENCE). */
+export interface RivalNewsItem {
+  id: string;
+  kind: "faltered" | "surged";
+  headline: string;
 }
 
 type Listener = (view: GameView) => void;
@@ -154,6 +166,47 @@ export class Game {
       .sort((a, b) => b.rung - a.rung || a.label.localeCompare(b.label));
   }
 
+  /**
+   * RIVAL-RACE-PRESENCE: dispatches about the rival lines near the player's station this turn. A near-vantage
+   * rival that is FALTERING (mid-setback) yields a "stumbled" line — a window the player can exploit; a rival
+   * that has SURGED above the player's rung yields an "outpaced you" line — the pressure half. Derived purely
+   * from the glimpses (faltering) + standings (rung vs player) — re-derived each turn, so it tracks the live
+   * race. Place ids are humanized. Empty when unfounded / no world.
+   */
+  private rivalNews(): RivalNewsItem[] {
+    if (!this.world) return [];
+    const playerRung = this.playerRung();
+    // Snapshot-by-id map for O(1) lookup in the glimpse loop (Gemini #126 perf — was a find-in-loop).
+    const byId = new Map(this.world.snapshots.map((s) => [s.id, s]));
+    const out: RivalNewsItem[] = [];
+    const seen = new Set<string>(); // one dispatch per rival — a faltering rival never also surges, but guard
+    // FALTER news: a glimpsed (near-vantage) rival currently faltering — the glimpse note is "struggling".
+    for (const g of this.currentGlimpses()) {
+      const snap = byId.get(g.rivalId);
+      if (snap?.faltering && !seen.has(g.rivalId)) {
+        seen.add(g.rivalId);
+        out.push({
+          id: g.rivalId,
+          kind: "faltered",
+          headline: `Word reaches you: the ${humanizeRivalLabel(g.label)} line has stumbled.`,
+        });
+      }
+    }
+    // SURGE news: a rival that has climbed ABOVE the player's rung (within sight) — the race's pressure half.
+    // A faltering rival can't surge (the !faltering guard), and `seen` prevents any double-dispatch (Amazon-Q #126).
+    for (const s of this.world.snapshots) {
+      if (s.rung > playerRung && s.rung - playerRung <= 2 && !s.faltering && !seen.has(s.id)) {
+        seen.add(s.id);
+        out.push({
+          id: s.id,
+          kind: "surged",
+          headline: `The ${humanizeRivalLabel(s.label)} line has outpaced you — its star rises.`,
+        });
+      }
+    }
+    return out;
+  }
+
   /** End kinds that mean the line FAILED (didn't survive to a convergence). */
   private static readonly FAILURE_ENDS = new Set(["death", "coup", "jail", "line-extinct", "ruin"]);
 
@@ -168,13 +221,26 @@ export class Game {
     const livingHeir = !!family?.members.some(
       (m) => m.id !== family.protagonistId && isMemberAlive(m, this.state.year),
     );
-    const rivalsReachedStars = (this.world?.snapshots ?? []).some((s) => s.rung >= MAX_RUNG);
+    const snaps = this.world?.snapshots ?? [];
+    const rivalsReachedStars = snaps.some((s) => s.rung >= MAX_RUNG);
+    // RIVAL-FATE-IN-CONVERGENCE-ENDING: a snapshot of the field's outcome relative to the player, for the
+    // epilogue coda. Undefined when there's no rival world (the resolver then emits no epilogue).
+    const playerTier = this.playerRung();
+    const rivalField = snaps.length
+      ? {
+          reachedStars: snaps.filter((s) => s.rung >= MAX_RUNG).length,
+          fallen: snaps.filter((s) => s.faltering || s.rung === 0).length,
+          abovePlayer: snaps.filter((s) => s.rung >= playerTier).length,
+          total: snaps.length,
+        }
+      : undefined;
     return resolveConvergence({
       motivators: this.state.personality,
-      tier: this.playerRung(),
+      tier: playerTier,
       survived: !Game.FAILURE_ENDS.has(this.state.end.kind),
       hasHeir: livingHeir,
       rivalsReachedStars,
+      rivalField,
     });
   }
 
@@ -249,6 +315,7 @@ export class Game {
       convergence: this.convergenceEnding(),
       lastLedger: this.lastLedger,
       shock: this.lastShock,
+      rivalNews: this.rivalNews(),
     };
   }
 

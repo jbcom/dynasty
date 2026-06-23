@@ -49,6 +49,10 @@ export interface ConvergenceEnding {
   /** CONVERGENCE-ENDING-DEPTH: a short earned finale (1-2 sentences) the LegacyReport narrates beneath the
    *  title — the dynasty's century-spanning arc resolved into prose, not just a label. */
   prose?: string;
+  /** RIVAL-FATE-IN-CONVERGENCE-ENDING: a one-line coda about how the FIELD ended relative to the player — a
+   *  rival reached the stars first, the field collapsed behind you, or the lines ran neck-and-neck. Tints the
+   *  close with the race's result. Computed at resolve time from the rival field, so it's run-specific. */
+  rivalEpilogue?: string;
 }
 
 /**
@@ -224,6 +228,43 @@ export interface ConvergenceContext {
   hasHeir: boolean;
   /** Whether ANY rival line reached the stars (folds the others' fates into your ending). */
   rivalsReachedStars: boolean;
+  /** RIVAL-FATE-IN-CONVERGENCE-ENDING: a snapshot of the field's outcome relative to the player, for the
+   *  epilogue coda. Omitted for an unfounded/no-world run (no epilogue then). */
+  rivalField?: {
+    /** How many rival lines reached the interstellar tier. */
+    reachedStars: number;
+    /** How many rival lines ended faltering or failed (fell behind / collapsed). */
+    fallen: number;
+    /** How many rival lines ended at or above the player's own tier (still in the race). */
+    abovePlayer: number;
+    /** Total rival lines in the field. */
+    total: number;
+  };
+}
+
+/**
+ * RIVAL-FATE-IN-CONVERGENCE-ENDING: a one-line coda about how the FIELD ended relative to the player. Pure
+ * function of the field summary; null when there's no field (unfounded run). The dominant outcome wins: a
+ * rival among the stars (you weren't alone / weren't first) → that; the whole field fallen behind you → a
+ * lonely-summit line; rivals still neck-and-neck → a contested line; otherwise the field quietly receded.
+ */
+function rivalEpilogue(
+  field: ConvergenceContext["rivalField"],
+  playerStars: boolean,
+): string | null {
+  if (!field || field.total === 0) return null;
+  if (field.reachedStars > 0) {
+    return playerStars
+      ? "You were not the only line to reach the stars — others climbed beside you into the dark."
+      : "Another line reached the stars before yours; you watched their fire cross the sky.";
+  }
+  if (field.fallen >= field.total) {
+    return "Every line that raced beside you faltered and fell — yours alone endured to the end.";
+  }
+  if (field.abovePlayer > 0) {
+    return "The other lines pressed close behind, the race still undecided when your chapter closed.";
+  }
+  return "The lines that once raced beside you receded into the long quiet of history.";
 }
 
 /**
@@ -235,6 +276,17 @@ export interface ConvergenceContext {
  *  - otherwise earthbound. Pure + deterministic; the FIRST matching lattice entry (in array order) wins.
  */
 export function resolveConvergence(ctx: ConvergenceContext): ConvergenceEnding {
+  const base = resolveBase(ctx);
+  // RIVAL-FATE-IN-CONVERGENCE-ENDING: tint the close with the field's outcome. A survived run keeps its
+  // motivator-earned prose AND gains the field coda; a failed run (extinguished) stays stark, no epilogue.
+  const epilogue = ctx.survived
+    ? rivalEpilogue(ctx.rivalField, base.destination === "stars")
+    : null;
+  return epilogue ? { ...base, rivalEpilogue: epilogue } : base;
+}
+
+/** The motivators+tier+survival lattice resolution (the FIRST matching entry in ENDINGS wins). Pure. */
+function resolveBase(ctx: ConvergenceContext): ConvergenceEnding {
   if (!ctx.survived) {
     return (
       (ctx.hasHeir ? byId("extinguished_ruin") : byId("extinguished_no_heir")) ??

@@ -846,4 +846,47 @@ describe("Game loop", () => {
     }
     expect(sawRecovery, "a recovery surfaced with kind=recovery across the seed sweep").toBe(true);
   });
+
+  it("RIVAL-RACE-PRESENCE: view.rivalNews dispatches a faltered (window) and/or surged (pressure) line over a run", () => {
+    const real = loadContent();
+    // Drive several founding-era seeds; a near-vantage rival that falters yields a "faltered" dispatch, one
+    // surging above the player yields "surged". At least one kind must appear across the sweep (the race is
+    // surfaced in-run, not silent — which kind fires is seed-dependent, so we don't require BOTH), and every
+    // dispatch's kind+headline must be well-formed (only "faltered"/"surged", no raw rival: ids, non-empty).
+    const kinds = new Set<string>();
+    for (const seed of ["rn1", "rn2", "rn3", "rn4", "rn5", "rn6"]) {
+      const comp = {
+        place: "ireland",
+        era: "origins",
+        culture: "anglo_protestant",
+        year: 1776,
+        archetype: "political" as const,
+        gender: "male" as const,
+        surname: "Rn",
+        seed,
+        originId: "composed:ireland:origins",
+      };
+      const g = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+      let guard = 0;
+      while (!g.finished && guard < 400) {
+        for (const item of g.view.rivalNews) {
+          kinds.add(item.kind);
+          expect(["faltered", "surged"]).toContain(item.kind);
+          expect(item.headline.length).toBeGreaterThan(0);
+          expect(item.headline).not.toContain("rival:"); // place is humanized
+        }
+        const s = g.view.saga.scene;
+        if (s) {
+          if (s.decision) g.pickDecision(0);
+          else if (s.beats.length) g.pickBeat(0);
+          else break;
+        } else if (g.view.currentEvent?.choices[0]) {
+          g.choose(g.view.currentEvent.choices[0].id);
+        } else break;
+        guard++;
+      }
+    }
+    // At least one dispatch kind fired across the sweep (the race is surfaced in-run, not silent).
+    expect(kinds.size, `kinds seen: ${[...kinds].join(",")}`).toBeGreaterThan(0);
+  });
 });

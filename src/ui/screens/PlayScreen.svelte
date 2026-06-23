@@ -109,7 +109,8 @@ type Tab =
   | "stats"
   | "butterfly"
   | "dossier";
-const hasNews = $derived(content.worldTimelines.length > 0);
+// The News tab shows when there's wider-world news OR a rival dispatch this turn (RIVAL-RACE-PRESENCE).
+const hasNews = $derived(content.worldTimelines.length > 0 || view.rivalNews.length > 0);
 const hasMarkets = $derived(content.markets.length > 0 || content.ranks.length > 0);
 // The lineage tab appears only for a founded line (it has a live family tree).
 const hasLineage = $derived(view.state.family !== undefined);
@@ -180,13 +181,18 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   {#if tab === "map"}
     <MapView gameState={view.state} rivalStandings={view.rivalStandings} playerRung={view.rung} />
   {:else if tab === "news"}
-    <NewsTicker {content} gameState={view.state} {term} />
+    <NewsTicker {content} gameState={view.state} {term} rivalNews={view.rivalNews} />
   {:else if tab === "markets"}
     <MarketsView {content} gameState={view.state} />
   {:else if tab === "lineage"}
     <LineageView gameState={view.state} />
   {:else if tab === "timeline"}
-    <TimelineView {content} gameState={view.state} />
+    <TimelineView
+      {content}
+      gameState={view.state}
+      rivalStandings={view.rivalStandings}
+      playerRung={view.rung}
+    />
   {:else if tab === "stats"}
     <StatsView {content} gameState={view.state} />
   {:else if tab === "butterfly"}

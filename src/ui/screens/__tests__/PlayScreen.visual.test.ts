@@ -23,6 +23,7 @@ function view(): GameView {
     saga: { actTitle: null, scene: null, threads: [], ended: false },
     glimpses: [],
     rivalStandings: [],
+    rivalNews: [],
     rung: 0,
     convergence: null,
     lastLedger: [],

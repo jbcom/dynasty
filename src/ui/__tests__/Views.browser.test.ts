@@ -132,6 +132,35 @@ describe("TimelineView", () => {
       getComputedStyle(blow as HTMLElement).borderLeftColor,
     );
   });
+
+  it("CONVERGENCE-FIELD-IN-TIMELINE: renders the rival field with the player's line slotted in by rung", () => {
+    component = mount(TimelineView, {
+      target: host,
+      props: {
+        content,
+        gameState: playedState(),
+        playerRung: 2,
+        rivalStandings: [
+          { id: "rival:bavaria", label: "rival:bavaria", rung: 4, faltering: false },
+          { id: "rival:italian", label: "rival:italian", rung: 1, faltering: true },
+        ],
+      },
+    });
+    const fieldEl = host.querySelector("[data-testid='convergence-field']");
+    expect(fieldEl, "the field strip renders when there are rivals").not.toBeNull();
+    expect(fieldEl?.textContent).toContain("The Field");
+    const rows = [...host.querySelectorAll("[data-testid='convergence-field'] li")];
+    // The player + both rivals, sorted high→low by rung: Bavaria(4), Your line(2), Italian(1).
+    expect(rows.length).toBe(3);
+    expect(rows[0]?.textContent).toContain("Bavaria");
+    expect(rows[1]?.getAttribute("data-player")).toBe("true");
+    expect(rows[2]?.textContent).toContain("Italian");
+    expect(rows[2]?.getAttribute("data-faltering")).toBe("true");
+    // No rivals → no field strip.
+    unmount(component);
+    component = mount(TimelineView, { target: host, props: { content, gameState: playedState() } });
+    expect(host.querySelector("[data-testid='convergence-field']")).toBeNull();
+  });
 });
 
 describe("StatsView", () => {
