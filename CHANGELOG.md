@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.29.0](https://github.com/jbcom/dynasty/compare/v0.28.0...v0.29.0) (2026-06-23)
+
+
+### Features
+
+* **saga:** CORPUS-MINE-INTERSECTIONS — wire mined fabric into crossings + cover all 7 families ([#118](https://github.com/jbcom/dynasty/issues/118)) ([bc548d1](https://github.com/jbcom/dynasty/commit/bc548d19a1e499295c5b53384fa12d83cedbcd10))
+
 ## [0.28.0](https://github.com/jbcom/dynasty/compare/v0.27.0...v0.28.0) (2026-06-23)
 
 
