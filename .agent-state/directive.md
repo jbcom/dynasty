@@ -63,9 +63,13 @@ when the WHOLE milestone is solid — NOT a PR per VD-step.
   real meter trajectory + rival field + reach, built purely from the live view via buildDossier + buildMeterSeries)
   in place of the one-line "generation closes" interlude. check 0, typecheck 0/0, PlayScreen visual tests 26. (e2e
   walk of the boundary + a richer continue affordance fold into VD-6/VD-7.)
-- [ ] **VD-5 GenAI brief + figure pipelines** — `buildDossierBrief(kind, view)` path-voice prompts + QA + cache;
-  `dossierFigureKey` → Imagen on-demand+cache (portrait pattern, EI-9d fallback). Far-future dossiers reuse the
-  scarcity guidance. Tests.
+- [x] **VD-5 GenAI brief + figure PROMPTS — DONE (branch feat/visual-dossiers).** `src/sim/dossier/dossierGenai.ts`:
+  `buildDossierBriefPrompt` (path VOICE per kind — consigliere intel / visionary R&D / magnate portfolio / star
+  marketing / statesman war-room / prophet doctrine / champion scouting — × era register + the run's state digest,
+  with the far-future SCARCITY stake folded in), `dossierBriefSystem` (leak-safe: no real names, {family_name}, a
+  briefing not prose), and `buildDossierFigurePrompt` (a NO-PEOPLE establishing PLATE per kind in the signature
+  engraving style — cohesive with portraits/map). Pure + deterministic. 5 unit tests. check 0, typecheck 0/0.
+  (The runner WIRING — resolving the keys through the text/Imagen on-demand cache — lands in VD-6 end-to-end.)
 - [ ] **VD-6 wire ONE full path end-to-end** for the run's actual archetype (real data + brief + figure) +
   live-verify in Chrome (screenshot + READ the composed dossier).
 - [ ] **VD-7 remaining placements + other paths** — decision-aid panel + upgraded path-keyed tabs + the other
