@@ -157,7 +157,9 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   captioned diagram variant (DossierView renders the full-width cell); genai-dossiers.ts also generates the diagrams
   (kind×era, license-logged). Tests: unit (key + per-kind prompt + era-keying + caption) + browser (captioned diagram
   renders + hides on error). Gate: check 0, typecheck 0/0, unit 1018, browser 174. Live-gen BLOCKED here (no key) —
-  degrades via hide-on-error. NEXT: reviewer trio (running) folded → ONE PR.
+  degrades via hide-on-error. Reviewer trio CLEAN (code-reviewer + simplifier, no findings to fold).
+- [ ] [WAIT] **GA-DOSSIER-DIAGRAMS PR #209 — merge on green.** Reviewer trio clean (cb8202d). Monitor bcrln2117 armed
+  on CI; merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has the diagram panel + buildDossierDiagramPrompt.
 - [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt** — exists, no live consumer (EI-9f); needs a
   single-figure FOCUS surface (a rival-head dossier / a braid-crossing close-up) to drive it.
   DECISION (log, [[never-ask-direction]]): sequence after the VD milestone — GA-NEWS + GA-MUSIC first (highest
