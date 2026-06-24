@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.72.1](https://github.com/jbcom/dynasty/compare/v0.72.0...v0.72.1) (2026-06-24)
+
+
+### Documentation
+
+* mark reader visual rhythm merged ([#238](https://github.com/jbcom/dynasty/issues/238)) ([522ab5f](https://github.com/jbcom/dynasty/commit/522ab5fbca78c1994a6a7f0e01527be8bf8003be))
+
 ## [0.72.0](https://github.com/jbcom/dynasty/compare/v0.71.1...v0.72.0) (2026-06-24)
 
 
