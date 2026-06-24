@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.67.0](https://github.com/jbcom/dynasty/compare/v0.66.0...v0.67.0) (2026-06-24)
+
+
+### Features
+
+* period-voice narration of the saga's key beats via Gemini TTS (GA-TTS) ([#211](https://github.com/jbcom/dynasty/issues/211)) ([22fb37d](https://github.com/jbcom/dynasty/commit/22fb37deecbba29e87e0f514165736fb44b52c98))
+
 ## [0.66.0](https://github.com/jbcom/dynasty/compare/v0.65.0...v0.66.0) (2026-06-24)
 
 
