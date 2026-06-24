@@ -44,6 +44,36 @@ describe("spine scaffold (scene-slot)", () => {
     }
   });
 
+  it("SHAPE-DIVERSIFY-1: the spine scaffold is STRUCTURALLY DIVERSE — no one skeleton stamped across cells", () => {
+    // The corpus on disk predates the arc-shape scaffold (one skeleton, ratio 0.012). The SPINE — the source
+    // of truth a regeneration draws from — must be diverse: each cell (a lineage run) gets its own structural
+    // fingerprint (sense + decision sequence across its 6 acts), via the arc SHAPE × the per-cell sense ROTATION.
+    const fingerprint = (wave: string, cls: Rung, archetype: (typeof ARCHETYPES)[number]) =>
+      spineFor({ wave, cls, archetype })
+        .flatMap((a) => a.scenes.map((s) => `${s.sense}${s.decision ? "D" : ""}`))
+        .join("|");
+    const fps = new Map<string, number>();
+    let cells = 0;
+    for (const wave of wavePlaces) {
+      for (const cls of CLASSES) {
+        for (const archetype of ARCHETYPES) {
+          cells++;
+          const fp = fingerprint(wave, cls, archetype);
+          fps.set(fp, (fps.get(fp) ?? 0) + 1);
+        }
+      }
+    }
+    const distinctRatio = fps.size / cells;
+    const largest = Math.max(...fps.values());
+    // The skeleton is broken: the cell-level fingerprint ratio is HIGH (most runs structurally unique), nothing
+    // like the stale corpus's 0.012. A regression that re-collapses the spine to one shape fails here.
+    expect(distinctRatio, `cell fingerprint ratio ${distinctRatio.toFixed(3)}`).toBeGreaterThan(
+      0.7,
+    );
+    // No single skeleton dominates more than a small slice of the lattice.
+    expect(largest, `largest cluster ${largest}/${cells}`).toBeLessThan(cells * 0.1);
+  });
+
   it("each act carries a major and a secondary decision (Suzerain tiering)", () => {
     for (const act of spineFor({ wave: "bavaria", cls: "middle", archetype: "political" })) {
       const tiers = act.scenes.map((s) => s.decision).filter(Boolean);
