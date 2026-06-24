@@ -29,6 +29,7 @@ import { setMusicEra } from "../sound";
 import { compositePortraitKey, eraBandForYear } from "../../sim/genai/portrait";
 import { lifeStageForAge, rungTierForState } from "../../sim/genai/portraitFacets";
 import { buildDossier } from "../../sim/dossier/dossier";
+import { moodForRanks } from "../../sim/news/genaiNews";
 import { buildMeterSeries } from "../statsSeries";
 import DossierView from "../dossier/DossierView.svelte";
 
@@ -313,7 +314,14 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   {#if tab === "map"}
     <MapView gameState={view.state} rivalStandings={view.rivalStandings} playerRung={view.rung} />
   {:else if tab === "news"}
-    <NewsTicker {content} gameState={view.state} {term} rivalNews={view.rivalNews} onPress={onpress} />
+    <NewsTicker
+      {content}
+      gameState={view.state}
+      mood={moodForRanks(view.state.ranks)}
+      {term}
+      rivalNews={view.rivalNews}
+      onPress={onpress}
+    />
   {:else if tab === "field"}
     <RivalDossier standings={view.rivalStandings} playerRung={view.rung} />
   {:else if tab === "markets"}

@@ -90,9 +90,9 @@ when the WHOLE milestone is solid — NOT a PR per VD-step.
   locally reviewed (full gate green: check 0, typecheck 0/0, unit 995, browser 167, e2e 7) + the reviewer trio
   (code-reviewer + simplifier) findings folded forward (ChartPanel double-destroy, typed predicate, dead-seed
   removal, era-band DRY via ERA_BAND_ORDER, fence-regex). One PR for the whole milestone per [[one-branch-local-review]].
-- [ ] [WAIT] **#200 (visual dossiers) — merge on green.** Monitor armed; merge once CI green + 0 threads, then VERIFY
-  main has src/sim/dossier/ + src/ui/dossier/ ([[gh-squash-stale-head-gotcha]]), sync main + fresh branch for the
-  next milestone (GA-NEWS or GA-MUSIC — the GenAI-surface expansion, highest feel-per-effort).
+- [x] **#200 (visual dossiers) — MERGED (squash 317e533).** VERIFIED main has src/sim/dossier/ + src/ui/dossier/ +
+  the 7 founding dossier figures (no stale-head recurrence — clean tree at merge). The whole VD milestone is on main.
+  Now on a fresh branch feat/ga-news for the first GenAI-expansion milestone.
 
 ## ★FULL GENAI-SURFACE EXPANSION (user 2026-06-23: "are we SURE you have FULLY explored all the areas for genai?")★
 AUDIT (honest, this session): currently GenAI is used for TEXT (gemini-3.5-flash: scene/act prose, the QA
@@ -106,8 +106,14 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   hugely lift the "feel". Gated, cached, offline.
 - [ ] **GA-TTS — period-voice narration of key beats (optional)** — TTS read of the naming beat / a generation's
   pivotal decision in an era-true voice. Lower priority; accessibility + immersion.
-- [ ] **GA-NEWS — GenAI period headlines** — the NewsTicker/rival-news is templated; GenAI real period-voiced
-  headlines reacting to the run's ACTUAL events (cheap, high-show). Cached per (year, event-digest).
+- [x] **GA-NEWS — GenAI period DISPATCHES — BUILT (branch feat/ga-news).** GN-1 pure `src/sim/news/genaiNews.ts`
+  (buildNewsDispatchPrompt + newsDispatchKey, era × mood, leak-safe, JSON-unwrap defense). GN-2 loadNewsDispatch +
+  a NewsTicker "Dispatch" layer (term-resolved). GN-3 scripts/genai-news.ts generated ALL 24 era×mood dispatch sets
+  (8 bands × 3 moods × 3 headlines) — READ-verified period-true ("A NEW POWER IN THE NEW REPUBLIC: The Meteoric and
+  Envied Rise of the {family_name} Interest"). GN-4 NewsTicker browser test + the PL-11 quiet-world test updated for
+  the new layer. Gate: check 0, typecheck 0/0, unit 1000, browser 168. FOLLOW-UP: thread the live rung-trend into the
+  `mood` prop (PlayScreen passes "steady" today). THEN local review trio + ONE PR ([[one-branch-local-review]]).
+- [ ] **GA-NEWS PR — local review + ship.** Run the reviewer trio on the GA-NEWS diff, fold forward, open the ONE PR.
 - [ ] **GA-MAP-ART — GenAI cartographic base per era** — MapView is CSS; a generated period map base (the journey
   as a real period map) was speced, only partially built. Reuse the dossier/portrait image pipeline.
 - [ ] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers** — beyond atmosphere: generate the dossier's diagrams
