@@ -1,19 +1,5 @@
 # Changelog
 
-## [0.62.0](https://github.com/jbcom/dynasty/compare/v0.61.0...v0.62.0) (2026-06-23)
-
-
-### Features
-
-* lived emergence opening + portrait magazine-wrap (EI-6b-ui + EI-7) ([#194](https://github.com/jbcom/dynasty/issues/194)) ([aff10e5](https://github.com/jbcom/dynasty/commit/aff10e5f5483cb8a24114ce03a0d138eb447c4b6))
-
-## [0.61.0](https://github.com/jbcom/dynasty/compare/v0.60.0...v0.61.0) (2026-06-23)
-
-
-### Features
-
-* **sim:** pure runner for the Epoch-0 opening chain (EI-6b sim spine) ([#192](https://github.com/jbcom/dynasty/issues/192)) ([7f35221](https://github.com/jbcom/dynasty/commit/7f3522146541a0cb50ca96e9222d2807851e2c15))
-
 ## [0.60.0](https://github.com/jbcom/dynasty/compare/v0.59.0...v0.60.0) (2026-06-23)
 
 

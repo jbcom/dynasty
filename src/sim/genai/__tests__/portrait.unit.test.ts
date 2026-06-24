@@ -1,14 +1,18 @@
 import { describe, expect, it } from "vitest";
 import { DYNASTY_SPINE } from "../../saga/spineAuthored";
 import {
+  ARCHIVE_WRAPPER,
   buildCompositePortraitPrompt,
   buildEncounterPortraitPrompt,
   buildPortraitPrompt,
+  CHRONICLE_WRAPPER,
   compositePortraitKey,
   encounterPortraitKey,
   eraBandForYear,
   type PortraitFacets,
   portraitKey,
+  presentationFor,
+  SCREEN_WRAPPER,
   SIGNATURE_STYLE,
 } from "../portrait";
 
@@ -99,12 +103,14 @@ describe("EI-8d composite portrait prompt + key", () => {
     gender: "male",
   };
 
-  it("rides the signature style + folds in the era band, life stage, and wardrobe", () => {
+  it("rides the chronicle wrapper + folds in the presentation medium, era band, life stage, and wardrobe", () => {
     const p = buildCompositePortraitPrompt(adultCeo);
-    expect(p).toContain(SIGNATURE_STYLE);
+    expect(p).toContain(CHRONICLE_WRAPPER); // cohesion wrapper, NOT the locked engraving style
+    expect(p).not.toContain(SIGNATURE_STYLE); // composite portraits vary their medium by era×station
     expect(p).toMatch(/an adult/i);
     expect(p).toMatch(/magnate|CEO/i); // high economic wardrobe
     expect(p).toMatch(/2030s|contemporary/i); // digital_modern era register
+    expect(p).toMatch(/headshot/i); // digital_modern high presentation medium
   });
 
   it("mutes the wardrobe for the youngest stages (an infant has no station yet)", () => {
@@ -125,6 +131,125 @@ describe("EI-8d composite portrait prompt + key", () => {
   });
 });
 
+describe("EI-8 presentation medium (era × station — user 2026-06-23)", () => {
+  it("the Gilded-Age fortune-seeker (low) keeps a worn tintype keepsake; the magnate (high) a gilt-framed oil", () => {
+    // The user's examples: a miner's creased tintype of his wife back home vs a robber baron's commissioned oil.
+    expect(presentationFor("industrial_late1800s", "low")).toMatch(
+      /tintype|carte-de-visite|keepsake/i,
+    );
+    expect(presentationFor("industrial_late1800s", "high")).toMatch(
+      /gilt-framed oil|cabinet card|magnate/i,
+    );
+  });
+
+  it("the medium tracks era AND station (every era×tier is distinct)", () => {
+    const eras = [
+      "founding_1700s",
+      "federal_1800s",
+      "industrial_late1800s",
+      "early_1900s",
+      "midcentury",
+      "digital_modern",
+      "near_future",
+      "stellar",
+    ] as const;
+    const all = new Set<string>();
+    for (const e of eras) {
+      const lo = presentationFor(e, "low");
+      const hi = presentationFor(e, "high");
+      expect(lo).not.toBe(hi); // station shifts the medium within an era
+      all.add(lo);
+      all.add(hi);
+    }
+    expect(all.size, "media are distinct across eras + stations").toBe(eras.length * 2);
+  });
+
+  it("extrapolates into the future bands (digital/holographic is the abundant default)", () => {
+    expect(presentationFor("near_future", "low")).toMatch(/scan|identity/i);
+    expect(presentationFor("near_future", "mid")).toMatch(/volumetric/i);
+    expect(presentationFor("stellar", "low")).toMatch(/hologram|archival/i);
+    expect(presentationFor("stellar", "mid")).toMatch(/holographic/i);
+  });
+
+  it("SCARCITY INVERSION: in the post-scarcity future the extreme-wealth flex is a RARE PHYSICAL oil (user 2026-06-23)", () => {
+    // A physical hand-painted oil becomes the ultimate status symbol BECAUSE it can't be copied — the
+    // Gilded-Age oil returns at the very top of the far future, an even more extreme flex.
+    const nf = presentationFor("near_future", "high");
+    const st = presentationFor("stellar", "high");
+    expect(nf).toMatch(/physical|oil|canvas/i);
+    expect(nf).toMatch(/rare|anachronis|luxury/i);
+    expect(st).toMatch(/physical oil|oil painting|canvas/i);
+    expect(st).toMatch(/rare|cannot be copied|ultimate/i);
+    expect(st).not.toMatch(/holographic/i); // the high flex is NOT a hologram — it's the rare physical thing
+  });
+
+  it("the founding fortune-seeker reads humble (a rough sketch), not a commissioned work", () => {
+    expect(presentationFor("founding_1700s", "low")).toMatch(/sketch|charcoal|humble/i);
+    expect(presentationFor("founding_1700s", "high")).toMatch(
+      /engraving|oil miniature|commissioned/i,
+    );
+  });
+
+  it("EI-10: digital future low/mid use the ARCHIVE (luminous) wrapper; physical cells use the CHRONICLE wrapper", () => {
+    // A glowing holographic capture can't read as an aged physical plate — the wrapper adapts so the cohesion
+    // framing doesn't fight the medium. Future HIGH cells are physical oils → they keep the chronicle wrapper.
+    const stellarMid = buildCompositePortraitPrompt({
+      lifeStage: "adult",
+      eraBand: "stellar",
+      archetype: "economic",
+      rungTier: "mid",
+      gender: "male",
+    });
+    expect(stellarMid).toContain(ARCHIVE_WRAPPER);
+    expect(stellarMid).not.toContain(CHRONICLE_WRAPPER);
+
+    const stellarHigh = buildCompositePortraitPrompt({
+      lifeStage: "adult",
+      eraBand: "stellar",
+      archetype: "economic",
+      rungTier: "high",
+      gender: "male",
+    });
+    expect(stellarHigh, "the physical-oil flex keeps the aged-artifact framing").toContain(
+      CHRONICLE_WRAPPER,
+    );
+
+    // A historical cell is always the chronicle wrapper.
+    expect(
+      buildCompositePortraitPrompt({
+        lifeStage: "adult",
+        eraBand: "industrial_late1800s",
+        archetype: "economic",
+        rungTier: "low",
+        gender: "male",
+      }),
+    ).toContain(CHRONICLE_WRAPPER);
+  });
+
+  it("EI-9b: digital_modern low/mid use the SCREEN (clean photo) wrapper, not the aged plate; high stays chronicle", () => {
+    // A casual phone snapshot must read screen-native, not as a mounted painting on an aged plate.
+    const low = buildCompositePortraitPrompt({
+      lifeStage: "adult",
+      eraBand: "digital_modern",
+      archetype: "economic",
+      rungTier: "low",
+      gender: "male",
+    });
+    expect(low).toContain(SCREEN_WRAPPER);
+    expect(low).not.toContain(CHRONICLE_WRAPPER);
+    // The corporate-headshot HIGH is a formal framed capture → chronicle wrapper.
+    expect(
+      buildCompositePortraitPrompt({
+        lifeStage: "adult",
+        eraBand: "digital_modern",
+        archetype: "economic",
+        rungTier: "high",
+        gender: "male",
+      }),
+    ).toContain(CHRONICLE_WRAPPER);
+  });
+});
+
 describe("EI-8d encounter portrait prompt + key", () => {
   it("characterizes a distinct person by role, era, and age — not the line's archetype", () => {
     const p = buildEncounterPortraitPrompt({
@@ -133,7 +258,7 @@ describe("EI-8d encounter portrait prompt + key", () => {
       eraBand: "founding_1700s",
       gender: "female",
     });
-    expect(p).toContain(SIGNATURE_STYLE);
+    expect(p).toContain(CHRONICLE_WRAPPER);
     expect(p).toMatch(/first friend/i);
     expect(p).toMatch(/a child/i);
     expect(p).toMatch(/colonial/i);
