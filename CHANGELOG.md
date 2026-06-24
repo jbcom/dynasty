@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.70.0](https://github.com/jbcom/dynasty/compare/v0.69.0...v0.70.0) (2026-06-24)
+
+
+### Features
+
+* structural-uniqueness metric — the sameness, quantified (CONTENT-UNIQUENESS-AUDIT) ([#220](https://github.com/jbcom/dynasty/issues/220)) ([3062ca9](https://github.com/jbcom/dynasty/commit/3062ca9b655a29643d09e85f631a8e1a2f0cfa1c))
+
 ## [0.69.0](https://github.com/jbcom/dynasty/compare/v0.68.1...v0.69.0) (2026-06-24)
 
 
