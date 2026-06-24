@@ -14,6 +14,7 @@ import { join } from "node:path";
 import { DEFAULT_IMAGE_MODEL, geminiGenerateImage } from "../src/sim/genai/client";
 import { allMapJobs } from "../src/sim/genai/mapArt";
 import { ERA_BAND_ORDER } from "../src/sim/genai/portrait";
+import { registerGeneratedAsset } from "./generated-assets";
 
 const OUT_DIR = "public/assets/generated/map";
 
@@ -42,14 +43,25 @@ async function main(): Promise<void> {
     console.error("GEMINI_API_KEY not set — map generation needs a Gemini key.");
     process.exit(1);
   }
-  const genImage = geminiGenerateImage(key, process.env.GEMINI_IMAGE_MODEL || DEFAULT_IMAGE_MODEL);
+  const model = process.env.GEMINI_IMAGE_MODEL || DEFAULT_IMAGE_MODEL;
+  const genImage = geminiGenerateImage(key, model);
   mkdirSync(OUT_DIR, { recursive: true });
 
   let made = 0;
   for (const job of jobs()) {
     const stem = job.key.replace(/:/g, "_");
     const abs = join(OUT_DIR, `${stem}.png`);
+    const register = () =>
+      registerGeneratedAsset({
+        id: `map_era_${job.eraBand}`,
+        path: `assets/generated/map/${stem}.png`,
+        kind: "background",
+        source: `GenAI (${model}) — signature engraving style`,
+        license: "Generated",
+        attribution: `Era-keyed cartographic base for the journey map (GA-MAP-ART): ${job.eraBand}.`,
+      });
     if (!FORCE && existsSync(abs)) {
+      register();
       console.error(`  · ${stem}: exists, skipping`);
       continue;
     }
@@ -60,6 +72,7 @@ async function main(): Promise<void> {
       continue;
     }
     writeFileSync(abs, bytes);
+    register();
     made++;
     console.error(`  ✓ ${stem}: ${(bytes.length / 1024).toFixed(0)} KiB → ${stem}.png`);
   }

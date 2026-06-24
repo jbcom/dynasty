@@ -245,13 +245,23 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   text-heavy fatigue; library-backed prose scannability/clarity/consistency gates; choices fully WITHIN prose
   (glowing/larger, but not detached buttons below); similarity-based mining to separate the best legacy class
   JSON from chaff and rewrite keepers as non-first-person encounters/fabric in the main dynasty storyline.
-- [ ] **GENAI-GENERATE — regenerate/prove the AUTHORED SPINE + the 7 asset surfaces.**
+- [x] **GENAI-GENERATE — BUILT locally (branch codex/genai-generate-live-assets).**
   `.env` contains `GEMINI_API_KEY`, so this is no longer blocked on credentials. IMPORTANT PIVOT
   ([[founding-spine-pivot]]): do **not** run the old 504-cell class sweeps as the played corpus. The player steers
   ONE dynasty founded with America; class/rung is texture inside that story and the immigrant-wave corpus is mined
   fabric/encounter material. Correct scene-gen path: `pnpm genai:spine`, then re-apply the regen-safe postprocessors
   (`node scripts/fs-spine-origin-flavor.mjs && node scripts/fs-spine-act-depth.mjs`), run the spine/depth/load gates,
-  then run/verify the offline asset scripts in `docs/genai-surfaces.md` with screenshots/read checks.
+  then run/verify the offline asset scripts in `docs/genai-surfaces.md` with screenshots/read checks. DONE:
+  regenerated all 10 authored spine generations on Gemini, re-applied origin flavor + 30 depth interstitials,
+  added a generated-spine structural uniqueness ratchet (10/10 distinct fingerprints; floor >=0.9), generated
+  the missing live assets (5 cinematics, 7 map bases, 49 dossier figures, 56 dossier diagrams, 49 dossier briefs,
+  16 narration WAVs, 56 encounter portraits; news/music/protagonist portraits proved idempotent), reconciled
+  `assets.json` to 554 generated entries with zero missing files, and visually read-checked stellar map,
+  intelligence figure/diagram, rival portrait, and a cinematic frame. Local gates: focused spine/load/depth/genai
+  unit 53, asset/schema unit 23, combined focused unit 76, `tsc`, `prose:audit`.
+- [ ] [WAIT] **GENAI-GENERATE PR — open active PR, resolve review threads, merge on green.** Publish the generated
+  spine/assets branch as a ready PR (not draft), run remote checks, address actionable feedback, resolve threads,
+  then squash-merge and verify main.
 - [x] **GA-MAP-ART PR #207 — MERGED (squash ece0be9); v0.64.0 cut.** Reviewer trio folded; CI green; squash-merged
   CLEAN. VERIFIED main has src/sim/genai/mapArt.ts + the MapView era-base wiring + map_founding_1700s.png. Five
   GenAI-expansion milestones now shipped (GA-NEWS #202, GA-MUSIC #203, GA-VIDEO #205, GA-MAP-ART #207).

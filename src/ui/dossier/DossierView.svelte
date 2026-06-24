@@ -40,6 +40,13 @@ const ERA_LABEL: Record<EraBand, string> = {
   near_future: "The Near Future",
   stellar: "Among the Stars",
 };
+
+function panelKey(panel: DossierPanel, index: number): string {
+  if (panel.type === "figure" || panel.type === "brief" || panel.type === "diagram") {
+    return `${panel.type}:${panel.key}`;
+  }
+  return `${panel.type}:${index}`;
+}
 </script>
 
 <section class="dossier-view" data-kind={dossier.kind} data-testid="dossier-view">
@@ -49,7 +56,7 @@ const ERA_LABEL: Record<EraBand, string> = {
   </header>
 
   <div class="spread">
-    {#each dossier.panels as panel, i (i)}
+    {#each dossier.panels as panel, i (panelKey(panel, i))}
       {#if panel.type === "figure"}
         <div class="cell figure-cell"><FigurePanel figureKey={panel.key} /></div>
       {:else if panel.type === "diagram"}

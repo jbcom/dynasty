@@ -18,12 +18,8 @@ const { figureKey, caption }: Props = $props();
 
 const src = $derived(`/assets/generated/dossiers/${figureKey.replace(/:/g, "_")}.png`);
 // On a missing asset, hide the WHOLE figure (image + caption) — a captioned empty space reads oddly; the
-// data panels carry the dossier. Reset when the key changes so a later (generated) asset can show.
+// data panels carry the dossier. DossierView keys this component by figure key, so key changes remount clean.
 let failed = $state(false);
-$effect(() => {
-  void src; // re-arm the visibility when the source key changes
-  failed = false;
-});
 </script>
 
 {#if !failed}

@@ -18,6 +18,7 @@ import {
   LYRIA_SAMPLE_RATE,
 } from "../src/sim/genai/client";
 import { buildMusicPrompt, type MusicTrack, MUSIC_TRACKS } from "../src/sim/music/genaiMusic";
+import { registerGeneratedAsset } from "./generated-assets";
 
 const OUT_DIR = "public/assets/audio";
 
@@ -56,7 +57,8 @@ async function main(): Promise<void> {
     console.error("GEMINI_API_KEY not set — music capture needs a Gemini key.");
     process.exit(1);
   }
-  const capture = geminiCaptureMusic(key, process.env.GEMINI_MUSIC_MODEL || DEFAULT_MUSIC_MODEL);
+  const model = process.env.GEMINI_MUSIC_MODEL || DEFAULT_MUSIC_MODEL;
+  const capture = geminiCaptureMusic(key, model);
   mkdirSync(OUT_DIR, { recursive: true });
 
   const trackFlag = arg("track") as MusicTrack | undefined;
@@ -65,7 +67,17 @@ async function main(): Promise<void> {
   let made = 0;
   for (const track of tracks) {
     const abs = join(OUT_DIR, `${track}.wav`);
+    const register = () =>
+      registerGeneratedAsset({
+        id: `music_${track}`,
+        path: `assets/audio/${track}.wav`,
+        kind: "audio",
+        source: `GenAI (${model}) — era score bed`,
+        license: "Generated",
+        attribution: `Generated era score bed: ${track}`,
+      });
     if (!FORCE && existsSync(abs)) {
+      register();
       console.error(`  · ${track}: exists, skipping`);
       continue;
     }
@@ -76,6 +88,7 @@ async function main(): Promise<void> {
       continue;
     }
     writeFileSync(abs, pcmToWav(pcm, LYRIA_SAMPLE_RATE, LYRIA_CHANNELS));
+    register();
     made++;
     console.error(`  ✓ ${track}: ${(pcm.length / 1024).toFixed(0)} KiB PCM → ${track}.wav`);
   }

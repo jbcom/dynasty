@@ -17,6 +17,7 @@ import {
   TTS_SAMPLE_RATE,
 } from "../src/sim/genai/client";
 import { allNarrationJobs } from "../src/sim/narration/genaiNarration";
+import { registerGeneratedAsset } from "./generated-assets";
 
 const OUT_DIR = "public/assets/audio/narration";
 
@@ -54,7 +55,8 @@ async function main(): Promise<void> {
     console.error("GEMINI_API_KEY not set — narration synthesis needs a Gemini key.");
     process.exit(1);
   }
-  const genSpeech = geminiGenerateSpeech(key, process.env.GEMINI_TTS_MODEL || DEFAULT_TTS_MODEL);
+  const model = process.env.GEMINI_TTS_MODEL || DEFAULT_TTS_MODEL;
+  const genSpeech = geminiGenerateSpeech(key, model);
   mkdirSync(OUT_DIR, { recursive: true });
 
   const beatFlag = arg("beat");
@@ -71,7 +73,17 @@ async function main(): Promise<void> {
   for (const job of jobs) {
     const stem = job.key.replace(/:/g, "_");
     const abs = join(OUT_DIR, `${stem}.wav`);
+    const register = () =>
+      registerGeneratedAsset({
+        id: `narration_${stem}`,
+        path: `assets/audio/narration/${stem}.wav`,
+        kind: "audio",
+        source: `GenAI (${model}) — Gemini TTS`,
+        license: "Generated",
+        attribution: `Generated narration read: ${job.key}`,
+      });
     if (!FORCE && existsSync(abs)) {
+      register();
       console.error(`  · ${stem}: exists, skipping`);
       continue;
     }
@@ -82,6 +94,7 @@ async function main(): Promise<void> {
       continue;
     }
     writeFileSync(abs, pcmToWav(pcm, TTS_SAMPLE_RATE, TTS_CHANNELS));
+    register();
     made++;
     console.error(`  ✓ ${stem}: ${(pcm.length / 1024).toFixed(0)} KiB PCM → ${stem}.wav`);
   }
