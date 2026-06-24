@@ -174,21 +174,32 @@ export function cheapPruneSignals(entry: FabricEntry, duplicateLeadCount = 1): C
 }
 
 export function cheapPruneScore(signals: CheapPruneSignals): number {
-  return (
+  const averageSentencePenalty =
     Math.max(0, signals.averageSentenceWords - CHEAP_SCORE_AVG_SENTENCE_WORDS_THRESHOLD) /
-      CHEAP_SCORE_AVG_SENTENCE_WORDS_SCALE +
+    CHEAP_SCORE_AVG_SENTENCE_WORDS_SCALE;
+  const maxSentencePenalty =
     Math.max(0, signals.maxSentenceWords - CHEAP_SCORE_MAX_SENTENCE_WORDS_THRESHOLD) /
-      CHEAP_SCORE_MAX_SENTENCE_WORDS_SCALE +
-    signals.longSentenceRatio +
+    CHEAP_SCORE_MAX_SENTENCE_WORDS_SCALE;
+  const wordCountPenalty =
     Math.max(0, signals.wordCount - CHEAP_SCORE_WORD_COUNT_THRESHOLD) /
-      CHEAP_SCORE_WORD_COUNT_SCALE +
-    (signals.emptySettings ? CHEAP_SCORE_EMPTY_SETTINGS_PENALTY : 0) +
+    CHEAP_SCORE_WORD_COUNT_SCALE;
+  const emptySettingsPenalty = signals.emptySettings ? CHEAP_SCORE_EMPTY_SETTINGS_PENALTY : 0;
+  const similarityPenalty =
     Math.max(0, signals.maxSimilarity - CHEAP_SCORE_SIMILARITY_THRESHOLD) /
-      CHEAP_SCORE_SIMILARITY_SCALE +
-    Math.min(
-      CHEAP_SCORE_DUPLICATE_LEAD_CAP,
-      Math.max(0, signals.duplicateLeadCount - 1) * CHEAP_SCORE_DUPLICATE_LEAD_PENALTY,
-    )
+    CHEAP_SCORE_SIMILARITY_SCALE;
+  const duplicateLeadPenalty = Math.min(
+    CHEAP_SCORE_DUPLICATE_LEAD_CAP,
+    Math.max(0, signals.duplicateLeadCount - 1) * CHEAP_SCORE_DUPLICATE_LEAD_PENALTY,
+  );
+
+  return (
+    averageSentencePenalty +
+    maxSentencePenalty +
+    signals.longSentenceRatio +
+    wordCountPenalty +
+    emptySettingsPenalty +
+    similarityPenalty +
+    duplicateLeadPenalty
   );
 }
 
