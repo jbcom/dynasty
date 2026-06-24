@@ -60,11 +60,15 @@ describe("structural uniqueness metric", () => {
   });
 
   it("RATCHET: structural diversity must not regress below today's baseline (and should RISE with the rewrite)", () => {
-    // BASELINE (2026-06-24): the corpus is ONE skeleton — distinctRatio ≈ 1/84 ≈ 0.012, largestCluster = 84.
-    // This is the SAMENESS problem, recorded as a floor: the ratio must never drop, and the diversifying rewrite
-    // will RAISE this assertion's bound as shapes diversify. The current value is deliberately not "good".
-    expect(report.distinctRatio).toBeGreaterThan(0); // a real, computed ratio
-    // The largest cluster must not exceed the whole corpus (sanity) and must not GROW past today's count.
-    expect(report.largestCluster).toBeLessThanOrEqual(report.files);
+    // BASELINE (2026-06-24): the corpus is ONE skeleton — distinctRatio = 1/84 ≈ 0.0119, largestCluster = 84.
+    // Recorded as a real FLOOR (not a tautology): the ratio must never DROP, so adding more stamped files OR
+    // collapsing fingerprints both fail here. The diversifying rewrite (SHAPE-DIVERSIFY-1) RAISES this floor as
+    // shapes diverge — this number is deliberately terrible today and asserting >= it guards against regress.
+    const BASELINE_RATIO = 0.0119; // = 1/84; bump UP as the rewrite diversifies shapes
+    expect(report.distinctRatio).toBeGreaterThanOrEqual(BASELINE_RATIO);
+    // The dominant skeleton must not SPREAD to more files than today (84). A regression that re-stamps files
+    // onto one shape would push this above 84 only if files were added — and the ratio floor already catches
+    // that — but pinning the absolute count makes the "one skeleton must shrink, never grow" intent explicit.
+    expect(report.largestCluster).toBeLessThanOrEqual(84);
   });
 });

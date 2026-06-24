@@ -10,6 +10,10 @@
  * is the DISTINCT-fingerprint RATIO: distinctFingerprints / files (1.0 = every run is structurally unique;
  * near 0 = one skeleton everywhere).
  *
+ * The fingerprint is intentionally COARSE — it captures the skeleton (sense order, beat count, decision
+ * placement), NOT beat internals or decision option counts. So varying option counts alone won't move the
+ * number; what moves it is real SHAPE diversification (sense order / beat layout / scene count per act-type).
+ *
  * Pure (given the eager glob, like loadSaga) — no Date/Math.random; deterministic over the bundled corpus.
  */
 
