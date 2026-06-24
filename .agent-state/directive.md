@@ -175,11 +175,18 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   stays chronicle. KNOWN LIMIT: Imagen renders "modern photo + accent border" as a phone/device frame and ignores
   the negative prompt — settled rather than prompt-fought (debug-stop-rule); the casual-vs-formal-vs-aged distinction
   reads regardless. A later post-crop pass could remove the device frame. 21 unit tests.
-- [ ] **EI-9c LIFE-STAGE + ENCOUNTER portrait sweep** — the matrix beyond ADULT: infant/child/youth/elder per era
-  band (the cycles recur every generation; progeny-in-space need stellar children too — user 2026-06-23) + the
-  encounter-role portraits (first friend/betrayer/partner/rival/mentor) via `buildEncounterPortraitPrompt`. Generate
-  on-demand as the play surface requests them, or a targeted sweep per life-stage; READ a sample per stage. Large —
-  enumerate the demand the live runner actually hits first, don't blanket all 1680 keys.
+- [x] **EI-9c OPENING life-stage portraits — DONE (branch feat/ei9c-lifestage-encounter-portraits, PR pending).**
+  The Epoch-0 emergence now shows a portrait that GROWS with the progenitor (birth/naming→infant, childhood/first-
+  friend/schooling→child, late beats→youth) via `lifeStageForOpeningScene`; OpeningScreen passes the founding-era
+  composite-key portrait to the SceneReader (magazine-wrapped, EI-7). Generated the founding infant/child/youth low
+  portraits (period-correct children, humble sketch medium). LIVE-VERIFIED in Chrome: the birth scene shows the
+  sketched founding infant beside "You are born…". Gate: check 0, typecheck 0/0, unit 982, browser 161, e2e 7.
+- [ ] **EI-9d play-surface life-stage + ENCOUNTER portraits (remaining EI-9c scope)** — beyond the opening: when the
+  PLAY surface protagonist's age falls in a non-adult stage (early-life scenes / an elder late in a generation), or a
+  generation re-enters the cycle, PlayScreen requests infant/child/youth/elder keys per era — generate those on the
+  eras the spine actually hits (founding→stellar; progeny-in-space need stellar children too). PLUS the encounter-role
+  portraits (first friend/betrayer/partner/rival/mentor) via `buildEncounterPortraitPrompt` — wire the SceneReader's
+  thread/encounter surfaces to request them. Enumerate the live runner's actual demand first; don't blanket all keys.
 - [ ] **EI-SCARCITY-STORIES — carry the scarcity theme into the NARRATIVE (user, 2026-06-23)** — the user's
   scarcity insight ("worth thinking about scarcity both in the stories we tell and in the visual medium") applies to
   CONTENT, not just portraits: in the post-scarcity star era the drama shifts to what STAYS scarce when all else is
