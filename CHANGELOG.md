@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.73.1](https://github.com/jbcom/dynasty/compare/v0.73.0...v0.73.1) (2026-06-24)
+
+
+### Documentation
+
+* mark fabric keeper report merged ([#242](https://github.com/jbcom/dynasty/issues/242)) ([455c8cf](https://github.com/jbcom/dynasty/commit/455c8cfaa580e06595e7c02b6069903e0e3ecef6))
+
 ## [0.73.0](https://github.com/jbcom/dynasty/compare/v0.72.1...v0.73.0) (2026-06-24)
 
 
