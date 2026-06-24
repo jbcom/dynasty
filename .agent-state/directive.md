@@ -101,12 +101,14 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
 - [ ] **GA-VIDEO — GenAI video (Veo) era/generation cinematics** — the spec said video; zero today. Candidates: a
   generation-handoff "passing of the line" motion piece, an era-transition stinger, the ascension/stellar finale
   cinematic, an animated journey map. On-demand+cache like portraits (key × era × archetype); EI-9d fallback.
-- [ ] **GA-MUSIC — GenAI era-shifting score (Lyria) — IN PROGRESS (branch feat/ga-music).** Audio WIRING already
-  exists: AudioEngine.setEra loads `/assets/audio/<eraId>.ogg` with a synth-chord fallback; eras carry an
-  `ambientTrack`. GA-MUSIC GENERATES era-appropriate Lyria score `.ogg`s into those slots. Lyria is REALTIME-stream
-  (@google/genai ai.live.music, WS PCM chunks) — heavier than Imagen. Sub-steps: GM-1 pure prompt builder + key
-  (src/sim/music/), GM-2 a Lyria capture client (stream→PCM→WAV/OGG) + offline script, GM-3 generate the era tracks,
-  GM-4 live-verify the era bed crossfades. Milestone branch, ONE PR ([[one-branch-local-review]], [[genai-surface-audit]]).
+- [x] **GA-MUSIC — GenAI era-shifting score (Lyria) — BUILT (branch feat/ga-music).** GM-1 pure
+  src/sim/music/genaiMusic.ts (buildMusicPrompt + the 10 ambient-track slots, era moods, loopable/instrumental;
+  5 tests). GM-2 `geminiCaptureMusic` (Lyria realtime-stream → PCM capture) + scripts/genai-music.ts (PCM→WAV);
+  AudioEngine.setEra now chains .ogg → .wav → synth-chord so the GenAI beds drop into the existing era slots. GM-3
+  captured ALL 10 era tracks (boyhood→redplanet, real ~16-24s Lyria beds, verified non-silent). GM-4: engine.audio
+  tests exercise the .wav fallback; the era bed shifts via the existing setMusicEra wiring (no new wiring). Gate:
+  check 0, typecheck 0/0, music unit 5, engine.audio 5. NEXT: local review trio + ONE PR.
+- [ ] **GA-MUSIC PR — local review + ship.** Reviewer trio on the GA-MUSIC diff, fold forward, open the ONE PR.
 - [ ] **GA-TTS — period-voice narration of key beats (optional)** — TTS read of the naming beat / a generation's
   pivotal decision in an era-true voice. Lower priority; accessibility + immersion.
 - [x] **GA-NEWS — GenAI period DISPATCHES — BUILT (branch feat/ga-news).** GN-1 pure `src/sim/news/genaiNews.ts`
