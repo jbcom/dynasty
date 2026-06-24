@@ -286,6 +286,13 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   typecheck 0; build 0; unit 1052; check 0 with 39 pre-existing non-null assertion warnings outside this
   slice. Remote proof: ready PR, build-and-test + CodeQL green, Amazon Q clean/no blockers, CodeRabbit/Gemini
   quota notices non-blocking per user directive, zero review threads, and squash-merged to main.
+- [x] **KEY-PILLARS-1e READER-VISUAL-RHYTHM — BUILT locally (branch codex/reader-visual-progress).**
+  `SceneReader` now renders a non-text visual progress rail: one stable mark per paged prose/thread passage,
+  active/past state as the player taps, and diamond marks for woven cross-line thread pages. This gives long
+  prose a visual cadence and makes encounters legible as part of the reading flow without adding menu text or
+  explanatory UI copy. Local proof: touched-file Biome 0; targeted SceneReader browser 11 including screenshot
+  proof; typecheck 0; build 0; unit 1052; browser 181; e2e 8; check 0 with 39 pre-existing non-null assertion
+  warnings outside this slice.
 - [x] **GENAI-GENERATE — BUILT locally (branch codex/genai-generate-live-assets).**
   `.env` contains `GEMINI_API_KEY`, so this is no longer blocked on credentials. IMPORTANT PIVOT
   ([[founding-spine-pivot]]): do **not** run the old 504-cell class sweeps as the played corpus. The player steers

@@ -20,6 +20,9 @@ class lattice as the protagonist model.
 - Text-heavy reading needs visual relief: portraits, dossiers, maps, charts, diagrams,
   music, narration, and scene-transition pieces should break fatigue without turning the
   game into a menu.
+- Reader surfaces should use non-text visual rhythm where it helps: page progress,
+  woven-thread marks, portraits, sense tint, and transitions should orient the player
+  without adding explanatory UI copy.
 
 ## Portrait And Gender Pillars
 
