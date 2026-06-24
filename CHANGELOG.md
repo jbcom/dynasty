@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.74.2](https://github.com/jbcom/dynasty/compare/v0.74.1...v0.74.2) (2026-06-24)
+
+
+### Documentation
+
+* close key pillars milestone ([#248](https://github.com/jbcom/dynasty/issues/248)) ([caa7c5d](https://github.com/jbcom/dynasty/commit/caa7c5d154c67bb5d7f51002395ed8acbc47bd78))
+
 ## [0.74.1](https://github.com/jbcom/dynasty/compare/v0.74.0...v0.74.1) (2026-06-24)
 
 
