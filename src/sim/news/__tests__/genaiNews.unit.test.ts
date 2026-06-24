@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   buildNewsDispatchPrompt,
+  moodForRanks,
   moodForTrend,
   newsDispatchKey,
   newsDispatchSystem,
@@ -23,6 +24,22 @@ describe("GA-NEWS dispatch key + mood", () => {
     expect(moodForTrend("rising")).toBe("rising");
     expect(moodForTrend("steady")).toBe("steady");
     expect(moodForTrend("falling")).toBe("falling");
+  });
+
+  it("moodForRanks derives the mood from the rank ladders (fallen-from-grace → falling)", () => {
+    // Slipped below peak on a ladder → falling.
+    expect(moodForRanks({ social: { rung: 2, peak: 4 }, commercial: { rung: 1, peak: 1 } })).toBe(
+      "falling",
+    );
+    // Climbing, at peak (top rung ≥ 2) → rising.
+    expect(moodForRanks({ social: { rung: 3, peak: 3 }, commercial: { rung: 2, peak: 2 } })).toBe(
+      "rising",
+    );
+    // Bottom, at peak → steady (a line just starting out).
+    expect(moodForRanks({ social: { rung: 0, peak: 0 }, commercial: { rung: 1, peak: 1 } })).toBe(
+      "steady",
+    );
+    expect(moodForRanks({})).toBe("steady");
   });
 });
 

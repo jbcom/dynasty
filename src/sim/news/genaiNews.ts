@@ -64,3 +64,22 @@ export function buildNewsDispatchPrompt(eraBand: EraBand, mood: NewsMood): strin
 export function moodForTrend(trend: "rising" | "steady" | "falling"): NewsMood {
   return trend;
 }
+
+/**
+ * Derive the dispatch mood from the run's rank ladders (GA-NEWS): the press reacts to the line's trajectory.
+ * Below its peak on any ladder → "falling" (fallen from grace); climbing (top rung ≥ 2, at peak) → "rising";
+ * else "steady". Pure — reads the highest current rung + whether it has slipped from its peak.
+ */
+export function moodForRanks(ranks: Record<string, { rung: number; peak: number }>): NewsMood {
+  let topRung = 0;
+  let topPeak = 0;
+  let belowPeak = false;
+  for (const r of Object.values(ranks)) {
+    if (r.rung > topRung) topRung = r.rung;
+    if (r.peak > topPeak) topPeak = r.peak;
+    if (r.rung < r.peak) belowPeak = true;
+  }
+  if (belowPeak && topRung < topPeak) return "falling";
+  if (topRung >= 2) return "rising";
+  return "steady";
+}
