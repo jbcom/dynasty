@@ -228,9 +228,11 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   ROTATION (senseShiftFor, archetype×wave×tier) → the SPINE'S cell-fingerprint ratio is now ~0.92 (90/98; was 0.012);
   per-act distinct shapes 8→40. spine.unit.test.ts guards ratio >0.7 / largest <10%. The skeleton is broken AT THE
   SOURCE. ⚠️ on-disk JSON realization awaits the key-gated GenAI regen. Gate: check 0, typecheck 0/0, unit 1032, e2e 8.
-  NEXT: reviewer trio (running) → ONE PR.
-- [ ] [WAIT] **SHAPE-DIVERSIFY-1 PR — merge on green (after open).** Gated on the open PR's CI + threads.
-- [ ] **SHAPE-PROMPT-WIRING — verify the new shapes flow into the generation prompt (next actionable, own branch post-merge).**
+  Reviewers CLEAN (code-reviewer: SOUND/ship — invariants verified across all 588 acts, determinism, totality, the
+  one consumer scene.ts unaffected; simplifier clean).
+- [ ] [WAIT] **SHAPE-DIVERSIFY-1 PR #222 — merge on green.** Reviewers clean (f1820e1). Monitor bla5jp5d2 armed on CI;
+  merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has the ARC_FRAME + senseShiftFor + the diversity test.
+- [ ] [WAIT] **SHAPE-PROMPT-WIRING — verify the new shapes flow into the generation prompt (next milestone, own branch GATED on the SHAPE-DIVERSIFY-1 PR merge).**
   SHAPE-DIVERSIFY-1 added siege/exodus + per-shape frame senses + the sense rotation to the spine. Confirm the
   GENERATION path (src/sim/genai/expand.ts / genai-expand) reads the act's `shape` + the slot `intent`/`sense` so a
   future regen actually USES the diversified scaffold (not a stale hardcoded prompt). A pure check: the per-shape/
