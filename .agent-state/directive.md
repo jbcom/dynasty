@@ -305,13 +305,16 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   warnings outside this slice. Remote proof: ready PR, build-and-test + CodeQL green, Amazon Q/CodeRabbit
   clean/no blockers, Gemini quota notice non-blocking per user directive, zero review threads, and
   squash-merged to main.
-- [x] **KEY-PILLARS-1g KEEPER-CROSSING-PROMOTION — BUILT locally (branch codex/fabric-keeper-crossings).**
+- [x] **KEY-PILLARS-1g KEEPER-CROSSING-PROMOTION PR #244 — MERGED (squash 192c5b0).**
   `fabricVignette` now reads `src/data/saga/fabric/keepers.json` and prefers keeper-ranked entries when
   selecting live cross-dynasty crossing prose for the same wave/tier, falling back to the older source-score
   ranking for unranked fabric. This starts moving the "wheat" from the legacy corpus into the actual
   one-dynasty reading flow instead of leaving keeper mining as an offline report. Local proof:
   touched-file Biome 0; fabricCrossing unit 5; typecheck 0; build 0; unit 1056; browser 181; e2e 8;
   prose:audit 0; prose:ratchet 0; check 0 with 39 pre-existing non-null assertion warnings outside this slice.
+  Remote proof: ready PR, build-and-test + CodeQL green, Amazon Q clean/no blockers, CodeRabbit pass after an
+  initial quota notice, Gemini quota notice non-blocking per user directive, zero review threads, and
+  squash-merged to main.
 - [x] **GENAI-GENERATE — BUILT locally (branch codex/genai-generate-live-assets).**
   `.env` contains `GEMINI_API_KEY`, so this is no longer blocked on credentials. IMPORTANT PIVOT
   ([[founding-spine-pivot]]): do **not** run the old 504-cell class sweeps as the played corpus. The player steers
