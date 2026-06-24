@@ -39,6 +39,22 @@ const PRUNE_N = arg("prune-n") !== undefined ? Number(arg("prune-n")) : undefine
 const PRUNE_AUTO = process.argv.includes("--prune-auto");
 const PRUNE_ALL = process.argv.includes("--prune-all");
 
+// Cheap pre-read scoring: rough size/scannability signals used before the full prose audit.
+const CHEAP_SCORE_AVG_SENTENCE_WORDS_THRESHOLD = 32;
+const CHEAP_SCORE_AVG_SENTENCE_WORDS_SCALE = 28;
+const CHEAP_SCORE_LONG_SENTENCE_WORD_COUNT = 36;
+const CHEAP_SCORE_MAX_SENTENCE_WORDS_THRESHOLD = 48;
+const CHEAP_SCORE_MAX_SENTENCE_WORDS_SCALE = 40;
+const CHEAP_SCORE_WORD_COUNT_THRESHOLD = 120;
+const CHEAP_SCORE_WORD_COUNT_SCALE = 160;
+const CHEAP_SCORE_EMPTY_SETTINGS_PENALTY = 0.25;
+
+// Prune-mode thresholds: keep auto bounded, and make all-mode only remove severe chaff.
+const PRUNE_AUTO_CANDIDATE_POOL_SIZE = 64;
+const PRUNE_ALL_SCAN_SCORE_THRESHOLD = 0.2;
+const PRUNE_ALL_AVG_SENTENCE_WORDS_THRESHOLD = 40;
+const PRUNE_ALL_CHEAP_SCORE_THRESHOLD = 1.1;
+
 interface ActFile {
   acts: Array<{ id: string; wave?: string; tier: number; macroAct: string; scenes: string[] }>;
   scenes: MineScene[];
@@ -137,14 +153,18 @@ function cheapPruneScore(entry: FabricEntry): number {
     : wordCount;
   const maxSentenceWords = Math.max(0, ...counts);
   const longSentenceRatio = counts.length
-    ? counts.filter((count) => count >= 36).length / counts.length
+    ? counts.filter((count) => count >= CHEAP_SCORE_LONG_SENTENCE_WORD_COUNT).length / counts.length
     : 0;
-  const emptySettingsPenalty = entry.settings.length === 0 ? 0.25 : 0;
+  const emptySettingsPenalty =
+    entry.settings.length === 0 ? CHEAP_SCORE_EMPTY_SETTINGS_PENALTY : 0;
   return (
-    Math.max(0, avgSentenceWords - 32) / 28 +
-    Math.max(0, maxSentenceWords - 48) / 40 +
+    Math.max(0, avgSentenceWords - CHEAP_SCORE_AVG_SENTENCE_WORDS_THRESHOLD) /
+      CHEAP_SCORE_AVG_SENTENCE_WORDS_SCALE +
+    Math.max(0, maxSentenceWords - CHEAP_SCORE_MAX_SENTENCE_WORDS_THRESHOLD) /
+      CHEAP_SCORE_MAX_SENTENCE_WORDS_SCALE +
     longSentenceRatio +
-    Math.max(0, wordCount - 120) / 160 +
+    Math.max(0, wordCount - CHEAP_SCORE_WORD_COUNT_THRESHOLD) /
+      CHEAP_SCORE_WORD_COUNT_SCALE +
     emptySettingsPenalty
   );
 }
@@ -236,7 +256,7 @@ function prune(mode: "one" | "n" | "auto" | "all", count = 1): void {
   if (mode === "auto") {
     candidates = candidates
       .sort((a, b) => b.cheapScore - a.cheapScore || a.entry.sceneId.localeCompare(b.entry.sceneId))
-      .slice(0, Math.min(64, candidates.length));
+      .slice(0, Math.min(PRUNE_AUTO_CANDIDATE_POOL_SIZE, candidates.length));
   }
   const audited = candidates.map(auditCandidate).sort(compareAuditedPruneCandidates);
   const picked =
@@ -244,9 +264,9 @@ function prune(mode: "one" | "n" | "auto" | "all", count = 1): void {
       ? audited.filter(
           (candidate) =>
             !candidate.report.pass &&
-            (candidate.report.scanScore < 0.2 ||
-              candidate.report.averageSentenceWords > 40 ||
-              candidate.cheapScore >= 1.1),
+            (candidate.report.scanScore < PRUNE_ALL_SCAN_SCORE_THRESHOLD ||
+              candidate.report.averageSentenceWords > PRUNE_ALL_AVG_SENTENCE_WORDS_THRESHOLD ||
+              candidate.cheapScore >= PRUNE_ALL_CHEAP_SCORE_THRESHOLD),
         )
       : audited.slice(0, Math.max(1, count));
   if (picked.length === 0) throw new Error(`No prune candidate found in ${OUT}`);

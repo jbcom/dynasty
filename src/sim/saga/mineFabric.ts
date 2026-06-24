@@ -12,6 +12,11 @@
 
 import { JaroWinklerDistance } from "natural/lib/natural/distance/index.js";
 
+const UNIQUENESS_WEIGHT = 0.45;
+const CROSSING_POTENTIAL_WEIGHT = 0.25;
+const PROSE_QUALITY_WEIGHT = 0.15;
+const DISTINCTIVENESS_WEIGHT = 0.15;
+
 /** The minimal scene shape the miner reads (a subset of the saga Scene). */
 export interface MineScene {
   id: string;
@@ -254,7 +259,8 @@ export function sceneSettings(scene: MineScene): string[] {
 
 /**
  * Composite score — UNIQUENESS-weighted (the FS-4 priority), then crossing + quality. Weights:
- * uniqueness 0.55, crossing 0.30, quality 0.15. A scene must be distinctive AND weave-able to be fabric.
+ * uniqueness 0.45, crossing 0.25, quality 0.15, distinctiveness 0.15. A scene must be
+ * distinctive AND weave-able to be fabric.
  */
 export function scoreScene(
   scene: MineScene,
@@ -268,7 +274,11 @@ export function scoreScene(
   const d = 1 - Math.max(0, Math.min(1, maxSimilarity));
   return {
     id: scene.id,
-    score: 0.45 * u + 0.25 * c + 0.15 * q + 0.15 * d,
+    score:
+      UNIQUENESS_WEIGHT * u +
+      CROSSING_POTENTIAL_WEIGHT * c +
+      PROSE_QUALITY_WEIGHT * q +
+      DISTINCTIVENESS_WEIGHT * d,
     maxSimilarity,
     parts: { uniqueness: u, crossing: c, quality: q, distinctiveness: d },
     settings: sceneSettings(scene),
