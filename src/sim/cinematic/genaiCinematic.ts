@@ -15,8 +15,9 @@ export type CinematicKind =
   | "handoff" // a generation closes → the line passes to the heir (per era band)
   | "finale"; // the run ends → the dynastic close (per ending outcome)
 
-/** The dynastic ending outcomes a finale cinematic can score (mirrors the convergence endings). */
-export type FinaleOutcome = "stars" | "contributed" | "earthbound" | "extinguished";
+/** The dynastic ending outcomes a finale cinematic can score (mirrors the convergence Destination union). */
+export const FINALE_OUTCOMES = ["stars", "contributed", "earthbound", "extinguished"] as const;
+export type FinaleOutcome = (typeof FINALE_OUTCOMES)[number];
 
 /** The era register for a handoff film (period look + setting, cohesive with the portrait/dossier signature). */
 const ERA_FILM: Record<EraBand, string> = {

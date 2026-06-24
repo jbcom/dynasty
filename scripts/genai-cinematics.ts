@@ -14,10 +14,10 @@ import {
   buildFinalePrompt,
   buildHandoffPrompt,
   cinematicKey,
-  type FinaleOutcome,
+  FINALE_OUTCOMES,
 } from "../src/sim/cinematic/genaiCinematic";
 import { DEFAULT_VIDEO_MODEL, geminiGenerateVideo } from "../src/sim/genai/client";
-import type { EraBand } from "../src/sim/genai/portrait";
+import { ERA_BAND_ORDER } from "../src/sim/genai/portrait";
 
 const OUT_DIR = "public/assets/generated/cinematics";
 
@@ -27,7 +27,14 @@ const arg = (name: string): string | undefined => {
 };
 const FORCE = process.argv.includes("--force");
 
-const FINALES: FinaleOutcome[] = ["stars", "contributed", "earthbound", "extinguished"];
+/** Validate a raw flag value against the allowed set, exiting with a clear message before any (paid, slow) Veo call. */
+function validate<T extends string>(flag: string, raw: string, allowed: readonly T[]): T {
+  if (!(allowed as readonly string[]).includes(raw)) {
+    console.error(`--${flag}: "${raw}" is not one of: ${allowed.join(", ")}`);
+    process.exit(1);
+  }
+  return raw as T;
+}
 
 interface Job {
   key: string;
@@ -35,18 +42,20 @@ interface Job {
 }
 
 function jobs(): Job[] {
-  const handoffFlag = arg("handoff") as EraBand | undefined;
-  const finaleFlag = arg("finale") as FinaleOutcome | undefined;
-  if (handoffFlag) {
-    return [{ key: cinematicKey("handoff", handoffFlag), prompt: buildHandoffPrompt(handoffFlag) }];
+  const handoffRaw = arg("handoff");
+  const finaleRaw = arg("finale");
+  if (handoffRaw !== undefined) {
+    const band = validate("handoff", handoffRaw, ERA_BAND_ORDER);
+    return [{ key: cinematicKey("handoff", band), prompt: buildHandoffPrompt(band) }];
   }
-  if (finaleFlag) {
-    return [{ key: cinematicKey("finale", finaleFlag), prompt: buildFinalePrompt(finaleFlag) }];
+  if (finaleRaw !== undefined) {
+    const outcome = validate("finale", finaleRaw, FINALE_OUTCOMES);
+    return [{ key: cinematicKey("finale", outcome), prompt: buildFinalePrompt(outcome) }];
   }
   // Default high-value set: the founding handoff + every finale.
   return [
     { key: cinematicKey("handoff", "founding_1700s"), prompt: buildHandoffPrompt("founding_1700s") },
-    ...FINALES.map((o) => ({ key: cinematicKey("finale", o), prompt: buildFinalePrompt(o) })),
+    ...FINALE_OUTCOMES.map((o) => ({ key: cinematicKey("finale", o), prompt: buildFinalePrompt(o) })),
   ];
 }
 

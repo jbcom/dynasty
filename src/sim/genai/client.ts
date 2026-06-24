@@ -56,6 +56,19 @@ export function geminiGenerateVideo(
       await new Promise((r) => setTimeout(r, pollMs));
       op = await ai.operations.getVideosOperation({ operation: op });
     }
+    // Distinguish the three "no bytes" cases so a slow Veo run is debuggable (review: flatten-to-null hid them):
+    // a surfaced op.error is a real failure (throw, loud); a still-running op is a timeout (throw, name the bound);
+    // a done op with no video is a genuine empty result (return null, the soft "produced nothing" path).
+    if (op.error) {
+      throw new Error(
+        `geminiGenerateVideo: Veo operation failed — ${op.error.message ?? "unknown error"}`,
+      );
+    }
+    if (!op.done) {
+      throw new Error(
+        `geminiGenerateVideo: Veo operation did not finish within ${maxPolls} polls (${(maxPolls * pollMs) / 1000}s)`,
+      );
+    }
     const video = op.response?.generatedVideos?.[0]?.video;
     if (!video) return null;
     if (video.videoBytes) return Buffer.from(video.videoBytes, "base64");
