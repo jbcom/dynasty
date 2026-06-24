@@ -210,15 +210,24 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   typecheck 0/0, unit 1028. Gap note: thinnest paths (~49 min) are the religious/middle cells — fine vs. the floor, but
   the natural next quality lever is CONTENT UNIQUENESS, not more depth. Reviewers folded (47382f6): lineageRuns()
   extracted (DRY); spine.act.json excluded (it's not a class run) → range tightened to 49–63 min across 84 files.
-- [ ] [WAIT] **PLAYTIME-DEPTH-AUDIT PR #218 — merge on green.** Reviewers folded (47382f6). Monitor bejuxadtz armed on
-  CI; merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has src/sim/saga/playtimeDepth.ts + the floor test.
-- [ ] [WAIT] **CONTENT-UNIQUENESS-AUDIT — measure structural sameness across the corpus (next milestone, own branch GATED on the PLAYTIME-DEPTH-AUDIT PR merge).**
-  The highest-order standing directive ([[uniqueness-genuine-intersections]] / [[craft-spines-not-generator]]): every
-  act storyline must read UNIQUE; a prior audit found 503/504 acts shared ONE structural skeleton. Now that depth is
-  confirmed, MEASURE uniqueness: a metric over the corpus (scene-shape fingerprints / opening-line + decision-architecture
-  similarity / n-gram overlap across files) that quantifies how same-y the acts read, reports the worst clusters, and
-  installs a durable ceiling test (similarity must stay below a threshold). Pure analysis + a metric/test; the rewrite to
-  FIX sameness is the follow-on milestone this enumerates. Milestone branch, ONE PR.
+- [x] **PLAYTIME-DEPTH-AUDIT PR #218 — MERGED (squash 271ed34).** Reviewers folded; CI green; merged CLEAN + verified
+  on main (src/sim/saga/playtimeDepth.ts + the floor test).
+- [x] **CONTENT-UNIQUENESS-AUDIT — structural sameness QUANTIFIED — BUILT (branch feat/content-uniqueness-audit, commit
+  db13230).** The highest-order standing directive ([[uniqueness-genuine-intersections]] / [[craft-spines-not-generator]]).
+  FINDING: all 84 lineage files share the IDENTICAL structural fingerprint (smell:2|touch:2D|sound:2|sight:2D|taste:2D × 6
+  = 30 scenes); distinct-fingerprint ratio **0.012** (1/84). Prose varies, SHAPE doesn't — one skeleton stamped 84×. Pure
+  metric (src/sim/saga/uniquenessMetric.ts: structuralFingerprint + uniquenessReport) + report (scripts/uniqueness-audit.ts)
+  + a RATCHET test (records the baseline, prevents regress, asserts a floor NOT goodness). docs/STATE.md records it. Gate:
+  check 0, typecheck 0/0, unit 1031. NEXT: reviewer trio (running) → ONE PR. The diversifying REWRITE is the milestone below.
+- [ ] [WAIT] **CONTENT-UNIQUENESS-AUDIT PR — merge on green (after open).** Gated on the open PR's CI + threads.
+- [ ] **SHAPE-DIVERSIFY-1 — vary the per-act scene SHAPE so the skeleton stops repeating (THE fix, next actionable, own branch post-merge).**
+  The audit proved one skeleton × 84 (ratio 0.012). FIX the generator/spine so the scene SHAPE varies per act-type:
+  the SENSE ORDER (not always smell→touch→sound→sight→taste), the beat/decision LAYOUT (not always 2|2D|2|2D|2D|2),
+  and scene COUNT — keyed off the spine act's DecisionArchitecture + the macroAct, so a founding bargain reads
+  structurally unlike a broadcast-age reckoning. Raise the uniquenessMetric ratchet floor as shapes diverge (the
+  metric is the acceptance test — drive distinctRatio up materially). Start with the SHAPE scaffold (spine.ts /
+  the scene-slot seeding), regenerate, re-measure. Milestone branch, ONE PR. (This is net-new structural fiction —
+  the [[craft-spines-not-generator]] rewrite, scoped to SHAPE first; prose-voice diversity is a later pass.)
 - [ ] [WAIT] **GENAI-GENERATE — produce the live cached assets (BLOCKED: needs GEMINI_API_KEY in the env).** Run the
   seven offline scripts (genai-news/music/cinematics/map-art/dossiers/narration/encounter-portraits) to fill the
   caches, READ-verify a sample of each, commit the assets. True blocker here (no key); un-WAIT when a key is available.
