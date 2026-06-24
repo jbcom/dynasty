@@ -65,10 +65,16 @@ export const ARCHIVE_WRAPPER =
  * photo read as a mounted painting. This wrapper keeps the gallery's restrained palette + dynastic-record
  * intent but reads as a clean, screen-native digital PHOTOGRAPH (no plate, no aging, no projected glow).
  */
+// NOTE (EI-9b): Imagen strongly associates "contemporary digital photo + a colored accent border" with a
+// phone/device frame, and negative prompts ("no phone/device/screen") don't reliably override it. Rather than
+// loop on prompt-fighting, the wrapper just asks for a plain present-day photograph on a neutral ground; the
+// distinction we need (a CASUAL modern capture vs the aged formal plate / hologram) reads regardless. A later
+// pass could post-crop the device frame if it bothers, but the era + casualness signal is intact.
 export const SCREEN_WRAPPER =
-  "A clean contemporary digital PHOTOGRAPH, screen-native: a restrained, limited palette with a single " +
-  "gold-ochre and oxblood accent, a plain modern ground — NOT a printed plate, NOT aged paper, NOT a glowing " +
-  "hologram, NOT a painting. Cohesive with a family's kept record of its line. NOT cartoon, NOT cel-shaded.";
+  "A plain, candid present-day PHOTOGRAPH of the person on a neutral background in natural light, framed tight " +
+  "on the bust, a restrained limited palette with a single gold-ochre and oxblood accent — a real modern photo, " +
+  "NOT a printed plate, NOT aged paper, NOT a hologram, NOT a painting. Cohesive with a family's kept record. " +
+  "NOT cartoon, NOT cel-shaded.";
 
 /** Which media read as a glowing HOLOGRAPHIC capture (the projected-light future) — future low/mid cells. */
 function isHologramCapture(eraBand: EraBand, tier: RungTier): boolean {
