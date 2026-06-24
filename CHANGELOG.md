@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.68.1](https://github.com/jbcom/dynasty/compare/v0.68.0...v0.68.1) (2026-06-24)
+
+
+### Documentation
+
+* GenAI-surfaces audit + clean figure unmount on missing asset (GENAI-VERIFY-1) ([#215](https://github.com/jbcom/dynasty/issues/215)) ([2821451](https://github.com/jbcom/dynasty/commit/2821451dda963eb304bcf98415d26b8c3bb2e403))
+
 ## [0.68.0](https://github.com/jbcom/dynasty/compare/v0.67.0...v0.68.0) (2026-06-24)
 
 
