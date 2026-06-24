@@ -26,6 +26,50 @@ export const DEFAULT_IMAGE_MODEL = "imagen-4.0-fast-generate-001";
 /** The MUSIC model (GA-MUSIC) — Lyria realtime. Override with GEMINI_MUSIC_MODEL. */
 export const DEFAULT_MUSIC_MODEL = "models/lyria-realtime-exp";
 
+/** The VIDEO model (GA-VIDEO) — Veo. Override with GEMINI_VIDEO_MODEL. */
+export const DEFAULT_VIDEO_MODEL = "veo-3.0-generate-001";
+
+/** Generate one short video → raw mp4 bytes, or null on no video. (impl, key-gated.) */
+export type GenerateVideoFn = (prompt: string) => Promise<Uint8Array | null>;
+
+/**
+ * Build a Veo video generator (GA-VIDEO, key-gated). generateVideos returns a long-running operation; this
+ * polls it to completion, then returns the first video's decoded mp4 bytes (inline videoBytes, or downloaded
+ * from its uri). Offline tooling — never called at sim runtime. `pollMs`/`maxPolls` bound the wait.
+ */
+export function geminiGenerateVideo(
+  apiKey: string,
+  model = DEFAULT_VIDEO_MODEL,
+  pollMs = 10_000,
+  maxPolls = 60,
+): GenerateVideoFn {
+  if (!apiKey)
+    throw new Error("geminiGenerateVideo: missing API key — video generation needs a Gemini key");
+  const ai = new GoogleGenAI({ apiKey });
+  return async (prompt) => {
+    let op = await ai.models.generateVideos({
+      model,
+      source: { prompt },
+      config: { numberOfVideos: 1 },
+    });
+    for (let i = 0; i < maxPolls && !op.done; i++) {
+      await new Promise((r) => setTimeout(r, pollMs));
+      op = await ai.operations.getVideosOperation({ operation: op });
+    }
+    const video = op.response?.generatedVideos?.[0]?.video;
+    if (!video) return null;
+    if (video.videoBytes) return Buffer.from(video.videoBytes, "base64");
+    // A uri result must be fetched (the SDK appends the key); a plain fetch suffices for the bytes.
+    if (video.uri) {
+      const sep = video.uri.includes("?") ? "&" : "?";
+      const res = await fetch(`${video.uri}${sep}key=${apiKey}`);
+      if (!res.ok) return null;
+      return new Uint8Array(await res.arrayBuffer());
+    }
+    return null;
+  };
+}
+
 /** Lyria streams 48kHz stereo 16-bit PCM. The capture wraps the concatenated chunks in a WAV with this format. */
 export const LYRIA_SAMPLE_RATE = 48_000;
 export const LYRIA_CHANNELS = 2;

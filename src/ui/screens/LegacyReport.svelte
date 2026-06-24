@@ -2,6 +2,8 @@
 import type { Content } from "../../sim/content";
 import type { ConvergenceEnding } from "../../sim/convergence";
 import type { Ending } from "../../sim/schema";
+import { cinematicKey } from "../../sim/cinematic/genaiCinematic";
+import CinematicView from "../cinematic/CinematicView.svelte";
 import { spectrumLabel } from "../../sim/personality";
 import { branchOf } from "../../sim/branch";
 import { moralPoleLabel, moralPoleOf } from "../../sim/moralAxis";
@@ -172,6 +174,8 @@ onMount(() => {
 
 <main class="report" data-end={end.kind} data-tier={tier} class:apex={isApex}>
   {#if convergence}
+    <!-- GA-VIDEO: the dynastic FINALE cinematic, keyed by the convergence destination (hides if not generated). -->
+    <CinematicView cinematicKey={cinematicKey("finale", convergence.destination)} />
     <!-- The dynastic CONVERGENCE framing: how the line's century-spanning arc finally read. -->
     <p class="convergence" data-destination={convergence.destination} data-testid="convergence">
       {CONVERGENCE_LABEL[convergence.destination] ?? convergence.title} — <strong>{term(convergence.title)}</strong>
