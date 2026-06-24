@@ -248,7 +248,7 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   through seven ready PRs: prune-auto, inline event choices, portrait/gender alignment, prose ratchet, visual
   reading rhythm, keeper report, and keeper-ranked live crossings. Remote proof is recorded on each child item
   below, with quota notices treated as non-blocking and zero unresolved review threads at merge.
-- [x] **KEY-PILLARS-2 — BUILT locally (branch codex/keeper-to-spine-encounter).**
+- [x] **KEY-PILLARS-2 PR #250 — MERGED (squash 00f1ca7).**
   Use `src/data/saga/fabric/keepers.json` as the positive queue, not just a runtime crossing selector: pick the
   highest-signal keeper that can deepen the one-dynasty America-to-stars spine, rewrite it as non-first-person
   encounter/fabric inside the main storyline, preserve diegetic inline choices where relevant, and ratchet
@@ -261,6 +261,9 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   to 623 total / 286 failed / passRate 0.541. Local proof: touched-file Biome 0 (1 TS fix); targeted
   spineActDepth unit 16; typecheck 0; build 0; unit 1057; browser 181; e2e 8; prose:audit 0; prose:ratchet
   0; check 0 with 39 pre-existing non-null assertion warnings outside this slice; git diff --check 0.
+  Remote proof: ready PR, build-and-test + CodeQL green, Amazon Q/CodeRabbit status green, Gemini/CodeRabbit
+  quota notices non-blocking per user directive, one Amazon Q false-positive thread about Jest globals resolved
+  without code change because the test imports Vitest correctly, and squash-merged to main.
 - [ ] **KEY-PILLARS-3 — second keeper-promotion breadth pass.**
   Promote the next keeper-ranked legacy fragment into a different era band of the one-dynasty spine, so the
   pattern proves beyond a single Gilded Age insertion. Prefer a candidate that adds visual/sensory relief and
