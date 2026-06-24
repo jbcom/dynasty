@@ -101,9 +101,12 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
 - [ ] **GA-VIDEO — GenAI video (Veo) era/generation cinematics** — the spec said video; zero today. Candidates: a
   generation-handoff "passing of the line" motion piece, an era-transition stinger, the ascension/stellar finale
   cinematic, an animated journey map. On-demand+cache like portraits (key × era × archetype); EI-9d fallback.
-- [ ] **GA-MUSIC — GenAI score (Lyria) that shifts with the era** — audio is fully authored (Tone/Howl), zero
-  GenAI. An era-appropriate generative score founding→Gilded→midcentury→stellar + per-`sense` ambient beds would
-  hugely lift the "feel". Gated, cached, offline.
+- [ ] **GA-MUSIC — GenAI era-shifting score (Lyria) — IN PROGRESS (branch feat/ga-music).** Audio WIRING already
+  exists: AudioEngine.setEra loads `/assets/audio/<eraId>.ogg` with a synth-chord fallback; eras carry an
+  `ambientTrack`. GA-MUSIC GENERATES era-appropriate Lyria score `.ogg`s into those slots. Lyria is REALTIME-stream
+  (@google/genai ai.live.music, WS PCM chunks) — heavier than Imagen. Sub-steps: GM-1 pure prompt builder + key
+  (src/sim/music/), GM-2 a Lyria capture client (stream→PCM→WAV/OGG) + offline script, GM-3 generate the era tracks,
+  GM-4 live-verify the era bed crossfades. Milestone branch, ONE PR ([[one-branch-local-review]], [[genai-surface-audit]]).
 - [ ] **GA-TTS — period-voice narration of key beats (optional)** — TTS read of the naming beat / a generation's
   pivotal decision in an era-true voice. Lower priority; accessibility + immersion.
 - [x] **GA-NEWS — GenAI period DISPATCHES — BUILT (branch feat/ga-news).** GN-1 pure `src/sim/news/genaiNews.ts`
@@ -113,7 +116,9 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   Envied Rise of the {family_name} Interest"). GN-4 NewsTicker browser test + the PL-11 quiet-world test updated for
   the new layer. Gate: check 0, typecheck 0/0, unit 1000, browser 168. FOLLOW-UP: thread the live rung-trend into the
   `mood` prop (PlayScreen passes "steady" today). THEN local review trio + ONE PR ([[one-branch-local-review]]).
-- [ ] **GA-NEWS PR — local review + ship.** Run the reviewer trio on the GA-NEWS diff, fold forward, open the ONE PR.
+- [x] **GA-NEWS PR — MERGED #202 (squash 20c61dd).** Reviewer trio folded (moodForRanks cross-ladder bug,
+  toHeadlines trailing-md, PL-11 testid). VERIFIED on main (src/sim/news/ + 24 dispatch keys). The first
+  GenAI-expansion milestone is shipped.
 - [ ] **GA-MAP-ART — GenAI cartographic base per era** — MapView is CSS; a generated period map base (the journey
   as a real period map) was speced, only partially built. Reuse the dossier/portrait image pipeline.
 - [ ] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers** — beyond atmosphere: generate the dossier's diagrams
