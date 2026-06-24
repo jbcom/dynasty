@@ -607,7 +607,7 @@ describe("PlayScreen (composed game screen)", () => {
     expect(host.querySelector('[data-testid="hud-menu"]')).toBeNull();
   });
 
-  it("switches tabs to show the dossier", async () => {
+  it("switches tabs to show the rich path-keyed visual dossier (VD-7)", async () => {
     component = mount(PlayScreen, {
       target: host,
       props: { content, view: view(), busy: false, onchoose: () => {} },
@@ -616,7 +616,11 @@ describe("PlayScreen (composed game screen)", () => {
     const dossierBtn = buttons.find((b) => b.textContent?.includes("Dossier"));
     if (!dossierBtn) throw new Error("no dossier tab");
     await page.elementLocator(dossierBtn).click();
-    expect(host.textContent).toContain("Dossier —");
+    // VD-7: the Dossier tab now renders the DossierView briefing (the path-keyed masthead + the real data
+    // panels), not the old meter-bar list. Assert the set piece + its data anchors.
+    expect(host.querySelector("[data-testid='dossier-view']")).not.toBeNull();
+    expect(host.textContent).toMatch(/Dossier|Dashboard|Brief|War-Room|Study|Report|Deck/);
+    expect(host.textContent).toMatch(/THE FIELD|TRAJECTORY|REACH/i);
   });
 
   it("captures a screenshot of the full play screen", async () => {

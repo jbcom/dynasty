@@ -79,8 +79,18 @@ when the WHOLE milestone is solid — NOT a PR per VD-step.
   like the scene corpus), with a defensive JSON-unwrap on the model reply. LIVE-VERIFIED: the founding dossier now
   shows the REAL magnate assessment ("The {family_name} interest remains concentrated in the mid-Atlantic shipping
   lanes…second tier of the republic's financial hierarchy…"). 5 browser tests.
-- [ ] **VD-7 remaining placements + other paths** — decision-aid panel + upgraded path-keyed tabs + the other
-  archetypes' dossier kinds. THEN open the single milestone PR.
+- [x] **VD-7 tab upgrade + all founding-era paths — DONE (branch feat/visual-dossiers).** (a) The Dossier TAB now
+  renders the rich path-keyed DossierView (the same set piece the generation boundary fires) instead of the old
+  meter-bar list — a full SHOW surface on demand. (b) Generated the founding-era figures + path-voice briefs for ALL
+  7 dossier kinds (portfolio/intelligence/rnd/marketing/warroom/doctrine/scouting) — READ-verified the crime intel
+  plate (a red-marked surveillance waterfront) is path-distinct from the economic counting-house. Fixed the asset
+  schema to allow `dossier-figure`. Gate: check 0, unit 995, browser 167. The decision-aid placement + the other
+  ERA bands' dossier assets are a follow-up (the on-demand cache + EI-9d fallback cover ungenerated keys).
+- [ ] **VD-8 OPEN THE MILESTONE PR — comprehensive LOCAL review first.** The visual-dossier milestone (VD-1…VD-7) is
+  built on feat/visual-dossiers. Per [[one-branch-local-review]]: run the FULL local gate (check/typecheck/unit/
+  browser/e2e) + dispatch the reviewer trio (full-review / security / simplifier) on the accumulated diff, fold
+  findings into forward commits, THEN open the ONE remote PR. Live-verify the dossier in Chrome (the boundary set
+  piece + the tab) before the PR.
 
 ## ★FULL GENAI-SURFACE EXPANSION (user 2026-06-23: "are we SURE you have FULLY explored all the areas for genai?")★
 AUDIT (honest, this session): currently GenAI is used for TEXT (gemini-3.5-flash: scene/act prose, the QA

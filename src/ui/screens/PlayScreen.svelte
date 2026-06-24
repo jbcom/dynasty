@@ -2,7 +2,6 @@
 import type { Content } from "../../sim/content";
 import type { GameView } from "../../engine/loop";
 import ButterflyLog from "../ButterflyLog.svelte";
-import Dossier from "../Dossier.svelte";
 import EventCard from "../EventCard.svelte";
 import LineageView from "../LineageView.svelte";
 import MapView from "../saga/MapView.svelte";
@@ -334,7 +333,9 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   {:else if tab === "butterfly"}
     <ButterflyLog ledger={view.state.ledger} />
   {:else if tab === "dossier"}
-    <Dossier defs={content.meters} gameState={view.state} />
+    <!-- VD-7: the Dossier tab is the rich path-keyed visual briefing (the same set piece the generation
+         boundary fires), available on demand — a full SHOW surface, not the old meter-bar list. -->
+    <DossierView dossier={boundaryDossier} />
   {/if}
 {/snippet}
 
