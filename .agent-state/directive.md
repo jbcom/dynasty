@@ -180,8 +180,10 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   feel-per-effort), then GA-VIDEO finale, then the rest. ALL SEVEN GenAI-surface milestones now built.
 
 ## ★GenAI-surface expansion COMPLETE — next: holistic verification + live asset generation★
-- [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS PR — merge on green (after open).** Gated on the open PR's CI + threads.
-- [ ] **GENAI-VERIFY-1 — holistic GenAI-surface audit (next actionable milestone, own branch post-merge).** All seven
+- [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS PR #213 — merge on green.** Reviewer trio clean (7198f54+da02eb3 fold). Monitor
+  b0qz8d66r armed on CI; merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has rivalEncounterFacets +
+  the RivalDossier head wiring.
+- [ ] [WAIT] **GENAI-VERIFY-1 — holistic GenAI-surface audit (next milestone, own branch GATED on #213 merge).** All seven
   surfaces (news/music/video/map/dossier-diagrams/tts/encounter-portraits) ship with pure builders + offline scripts +
   hide-on-error runtime + tests, but the live assets are key-gated (none generated in this env). Audit: (a) confirm
   every surface's runtime fallback is graceful (no broken-image/empty-panel/throw on a missing asset) via a sweep of
