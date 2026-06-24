@@ -145,6 +145,45 @@ test("inter-era tabs render their views", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Trajectory" })).toBeVisible();
 });
 
+test("APP-RUNS-VERIFY: every GenAI surface degrades cleanly with NO generated assets (no broken images)", async ({
+  page,
+}) => {
+  // The doctrine DoD: "tests pass" ≠ "app runs". With zero generated assets (the live env), every GenAI image
+  // surface (map base, dossier figure/diagram, rival head) must hide-on-error — never a broken-image icon. A
+  // broken <img> reports naturalWidth 0 AND complete=true AND is still displayed; a hidden one is display:none.
+  await startGame(page);
+  await expect(page.locator("[data-testid='saga-head']")).toBeVisible();
+
+  // No <img> that errored is left VISIBLE: every GenAI image either loaded (naturalWidth>0) or is hidden/unmounted.
+  const noVisibleBrokenImages = async (label: string) => {
+    const broken = await page.evaluate(
+      () =>
+        [...document.querySelectorAll("img")].filter((img) => {
+          const visible = img.offsetParent !== null && getComputedStyle(img).display !== "none";
+          return visible && img.complete && img.naturalWidth === 0;
+        }).length,
+    );
+    expect(broken, `${label}: no visible broken images`).toBe(0);
+  };
+
+  // Field — the rival heads (encounter portraits) must hide, the rows still read.
+  await page.getByRole("tab", { name: "Field" }).click();
+  await expect(
+    page.locator("[data-testid='rival-dossier'], [data-testid='rival-dossier-empty']"),
+  ).toBeVisible();
+  await noVisibleBrokenImages("Field");
+
+  // Map — the era cartographic base must fall back (founding base → hide), the journey overlay still renders.
+  await page.getByRole("tab", { name: "Map" }).click();
+  await expect(page.locator("svg.route")).toBeVisible();
+  await noVisibleBrokenImages("Map");
+
+  // Dossier — the atmospheric figure + the informational diagram must hide, the data panels carry the briefing.
+  await page.getByRole("tab", { name: "Dossier" }).click();
+  await expect(page.locator("[data-testid='dossier-view']")).toBeVisible();
+  await noVisibleBrokenImages("Dossier");
+});
+
 test("the lineage tab shows the founded line (FD-13)", async ({ page }) => {
   // The surname is now SEED-DEALT during the emergence (EI-6b) — not picked — so assert the lineage shows
   // a real founded house ("House of <name>") + the player ("You"), reading the dealt name from the DOM.
