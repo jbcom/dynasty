@@ -238,13 +238,22 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   finds a live scaffold sample, builds `buildScenePrompt`, and asserts the prompt carries the selected shape,
   every slot's rotated `sense`, and every slot's exact `intent`. No GenAI call required; this proves a future
   regen uses the diversified scaffold rather than a stale prompt.
-- [ ] **KEY-PILLARS-1 — inline prose choices, prose gates, and legacy-fabric triage (user 2026-06-24).**
+- [x] **KEY-PILLARS-1 — MILESTONE COMPLETE (PRs #229, #231, #232, #234, #236, #240, #244).**
   Highest-order correction: the game is ONE dynasty story as old as America itself; class/rung material is
   supporting texture, not the played lattice. Immediate pillars to build into this milestone: portrait alignment;
   gender availability across naming/portrait surfaces; diegetic immersion; enough visual anchors to break up
   text-heavy fatigue; library-backed prose scannability/clarity/consistency gates; choices fully WITHIN prose
   (glowing/larger, but not detached buttons below); similarity-based mining to separate the best legacy class
-  JSON from chaff and rewrite keepers as non-first-person encounters/fabric in the main dynasty storyline.
+  JSON from chaff and rewrite keepers as non-first-person encounters/fabric in the main dynasty storyline. Closed
+  through seven ready PRs: prune-auto, inline event choices, portrait/gender alignment, prose ratchet, visual
+  reading rhythm, keeper report, and keeper-ranked live crossings. Remote proof is recorded on each child item
+  below, with quota notices treated as non-blocking and zero unresolved review threads at merge.
+- [ ] **KEY-PILLARS-2 — keeper-to-spine authored encounter rewrite pass.**
+  Use `src/data/saga/fabric/keepers.json` as the positive queue, not just a runtime crossing selector: pick the
+  highest-signal keeper that can deepen the one-dynasty America-to-stars spine, rewrite it as non-first-person
+  encounter/fabric inside the main storyline, preserve diegetic inline choices where relevant, and ratchet
+  prose/similarity proof so legacy class material keeps becoming authored spine texture instead of parallel
+  class lattice.
 - [x] **KEY-PILLARS-1a PRUNE-AUTO PR #229 — MERGED (squash 6ae3e5e).** Refactored the
   reductive legacy-fabric pruning policy out of `scripts/mine-fabric.ts` into pure/tested
   `src/sim/saga/pruneFabric.ts`; `--prune-one`, `--prune-n`, `--prune-auto`, and `--prune-all` now share
