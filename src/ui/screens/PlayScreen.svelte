@@ -30,6 +30,8 @@ import { compositePortraitKey, eraBandForYear } from "../../sim/genai/portrait";
 import { lifeStageForAge, rungTierForState } from "../../sim/genai/portraitFacets";
 import { buildDossier } from "../../sim/dossier/dossier";
 import { moodForRanks } from "../../sim/news/genaiNews";
+import { cinematicKey } from "../../sim/cinematic/genaiCinematic";
+import CinematicView from "../cinematic/CinematicView.svelte";
 import { buildMeterSeries } from "../statsSeries";
 import DossierView from "../dossier/DossierView.svelte";
 
@@ -300,8 +302,10 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
       <EventCard event={view.currentEvent} year={view.state.year} {busy} {onchoose} {term} />
     </div>
   {:else if view.saga.ended}
-    <!-- VD-4: the generation-boundary DOSSIER set piece — a path-keyed "state of the dynasty" briefing. -->
+    <!-- VD-4 + GA-VIDEO: the generation boundary — a "passing of the line" CINEMATIC (era-keyed, hides if not
+         generated) over the path-keyed DOSSIER briefing. -->
     <div class="dossier-interstitial" data-testid="dossier-interstitial">
+      <CinematicView cinematicKey={cinematicKey("handoff", eraBandForYear(view.state.year))} />
       <DossierView dossier={boundaryDossier} />
       <p class="interlude">The generation closes…</p>
     </div>

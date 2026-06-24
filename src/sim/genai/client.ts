@@ -26,6 +26,63 @@ export const DEFAULT_IMAGE_MODEL = "imagen-4.0-fast-generate-001";
 /** The MUSIC model (GA-MUSIC) — Lyria realtime. Override with GEMINI_MUSIC_MODEL. */
 export const DEFAULT_MUSIC_MODEL = "models/lyria-realtime-exp";
 
+/** The VIDEO model (GA-VIDEO) — Veo. Override with GEMINI_VIDEO_MODEL. */
+export const DEFAULT_VIDEO_MODEL = "veo-3.0-generate-001";
+
+/** Generate one short video → raw mp4 bytes, or null on no video. (impl, key-gated.) */
+export type GenerateVideoFn = (prompt: string) => Promise<Uint8Array | null>;
+
+/**
+ * Build a Veo video generator (GA-VIDEO, key-gated). generateVideos returns a long-running operation; this
+ * polls it to completion, then returns the first video's decoded mp4 bytes (inline videoBytes, or downloaded
+ * from its uri). Offline tooling — never called at sim runtime. `pollMs`/`maxPolls` bound the wait.
+ */
+export function geminiGenerateVideo(
+  apiKey: string,
+  model = DEFAULT_VIDEO_MODEL,
+  pollMs = 10_000,
+  maxPolls = 60,
+): GenerateVideoFn {
+  if (!apiKey)
+    throw new Error("geminiGenerateVideo: missing API key — video generation needs a Gemini key");
+  const ai = new GoogleGenAI({ apiKey });
+  return async (prompt) => {
+    let op = await ai.models.generateVideos({
+      model,
+      source: { prompt },
+      config: { numberOfVideos: 1 },
+    });
+    for (let i = 0; i < maxPolls && !op.done; i++) {
+      await new Promise((r) => setTimeout(r, pollMs));
+      op = await ai.operations.getVideosOperation({ operation: op });
+    }
+    // Distinguish the three "no bytes" cases so a slow Veo run is debuggable (review: flatten-to-null hid them):
+    // a surfaced op.error is a real failure (throw, loud); a still-running op is a timeout (throw, name the bound);
+    // a done op with no video is a genuine empty result (return null, the soft "produced nothing" path).
+    if (op.error) {
+      throw new Error(
+        `geminiGenerateVideo: Veo operation failed — ${op.error.message ?? "unknown error"}`,
+      );
+    }
+    if (!op.done) {
+      throw new Error(
+        `geminiGenerateVideo: Veo operation did not finish within ${maxPolls} polls (${(maxPolls * pollMs) / 1000}s)`,
+      );
+    }
+    const video = op.response?.generatedVideos?.[0]?.video;
+    if (!video) return null;
+    if (video.videoBytes) return Buffer.from(video.videoBytes, "base64");
+    // A uri result must be fetched with the key. Pass it in the x-goog-api-key HEADER, never as a `?key=` query
+    // param — a query string leaks the secret into network/server logs and history (CWE-598; review: amazon-q).
+    if (video.uri) {
+      const res = await fetch(video.uri, { headers: { "x-goog-api-key": apiKey } });
+      if (!res.ok) return null;
+      return new Uint8Array(await res.arrayBuffer());
+    }
+    return null;
+  };
+}
+
 /** Lyria streams 48kHz stereo 16-bit PCM. The capture wraps the concatenated chunks in a WAV with this format. */
 export const LYRIA_SAMPLE_RATE = 48_000;
 export const LYRIA_CHANNELS = 2;
