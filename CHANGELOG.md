@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.62.0](https://github.com/jbcom/dynasty/compare/v0.61.0...v0.62.0) (2026-06-24)
+
+
+### Features
+
+* life-stage portraits in the emergence opening (EI-9c) ([#199](https://github.com/jbcom/dynasty/issues/199)) ([4ffcead](https://github.com/jbcom/dynasty/commit/4ffcead17e125f2e5e0036ab0caade35585cee83))
+* lived emergence opening + portrait magazine-wrap (EI-6b-ui + EI-7) ([#194](https://github.com/jbcom/dynasty/issues/194)) ([aff10e5](https://github.com/jbcom/dynasty/commit/aff10e5f5483cb8a24114ce03a0d138eb447c4b6))
+* portrait demand matrix, presentation medium, scarcity inversion (EI-8c…EI-10) ([#197](https://github.com/jbcom/dynasty/issues/197)) ([de2174c](https://github.com/jbcom/dynasty/commit/de2174ce32647e317a4a4a2dc44c6e04924fdfae))
+* SHOW-DON'T-TELL visual dossier system (VD-1…VD-7) ([#200](https://github.com/jbcom/dynasty/issues/200)) ([317e533](https://github.com/jbcom/dynasty/commit/317e53393b3921bad379e0a1e8d080cbd0742ce5))
+
 ## [0.61.0](https://github.com/jbcom/dynasty/compare/v0.60.0...v0.61.0) (2026-06-24)
 
 
