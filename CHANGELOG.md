@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.74.0](https://github.com/jbcom/dynasty/compare/v0.73.1...v0.74.0) (2026-06-24)
+
+
+### Features
+
+* promote keeper-ranked fabric crossings ([#244](https://github.com/jbcom/dynasty/issues/244)) ([192c5b0](https://github.com/jbcom/dynasty/commit/192c5b037978c34c31a2aa5fd5bd80f5a6d33ef4))
+
 ## [0.73.1](https://github.com/jbcom/dynasty/compare/v0.73.0...v0.73.1) (2026-06-24)
 
 
