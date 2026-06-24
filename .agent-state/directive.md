@@ -180,15 +180,21 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   feel-per-effort), then GA-VIDEO finale, then the rest. ALL SEVEN GenAI-surface milestones now built.
 
 ## ★GenAI-surface expansion COMPLETE — next: holistic verification + live asset generation★
-- [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS PR #213 — merge on green.** Reviewer trio clean (7198f54+da02eb3 fold). Monitor
-  b0qz8d66r armed on CI; merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has rivalEncounterFacets +
-  the RivalDossier head wiring.
-- [ ] [WAIT] **GENAI-VERIFY-1 — holistic GenAI-surface audit (next milestone, own branch GATED on #213 merge).** All seven
-  surfaces (news/music/video/map/dossier-diagrams/tts/encounter-portraits) ship with pure builders + offline scripts +
-  hide-on-error runtime + tests, but the live assets are key-gated (none generated in this env). Audit: (a) confirm
-  every surface's runtime fallback is graceful (no broken-image/empty-panel/throw on a missing asset) via a sweep of
-  the loader/onerror paths; (b) write/refresh docs/STATE.md + the genai-surface-audit doc to record the 7 shipped
-  surfaces + the offline-generation commands; (c) enumerate any remaining GenAI gap. Milestone branch, ONE PR.
+- [x] **GA-ENCOUNTER-PORTRAITS PR #213 — MERGED (squash 8112d89); v0.67.0 cut.** Reviewer trio clean; CI green; merged
+  CLEAN + verified on main (rivalEncounterFacets + the RivalDossier head wiring). ALL SEVEN GenAI-surface milestones shipped.
+- [x] **GENAI-VERIFY-1 — holistic GenAI-surface audit — BUILT (branch feat/genai-verify, commit 2981451).** Read-only
+  audit of all 7 surfaces' runtime fallbacks: news/music/video/map/dossier-diagrams/tts/encounter-portraits + the dossier
+  brief ALL degrade gracefully on a missing key-gated asset (no throw / broken-image / empty panel) — verified per
+  file:line. (b) docs/genai-surfaces.md written (the 7 surfaces, model tiers, offline-gen commands). (c) One polish
+  folded: FigurePanel now unmounts the WHOLE figure (img + caption) on error (was a captioned empty space). Gap
+  enumeration: the only remaining GenAI work is producing the LIVE assets (key-gated). Gate: check 0, typecheck 0/0,
+  browser 177. NEXT: reviewer (running) → ONE PR.
+- [ ] [WAIT] **GENAI-VERIFY-1 PR — merge on green (after open).** Gated on the open PR's CI + threads.
+- [ ] [WAIT] **APP-RUNS-VERIFY — live smoke of the app + all 7 GenAI fallbacks in a real browser (next milestone, own branch GATED on the GENAI-VERIFY-1 PR merge).**
+  Doctrine DoD: "tests pass" ≠ "app runs". Run `pnpm dev`, drive a founded line through a generation boundary +
+  the Field/dossier/map/news tabs + a finale, screenshot each, READ the screenshots, confirm every GenAI surface
+  renders its graceful fallback (no broken-image/empty-panel) with NO assets generated. Record findings + fix any
+  real visual break. Milestone branch, ONE PR. (chrome-devtools-mcp / the repo's Playwright e2e as the harness.)
 - [ ] [WAIT] **GENAI-GENERATE — produce the live cached assets (BLOCKED: needs GEMINI_API_KEY in the env).** Run the
   seven offline scripts (genai-news/music/cinematics/map-art/dossiers/narration/encounter-portraits) to fill the
   caches, READ-verify a sample of each, commit the assets. True blocker here (no key); un-WAIT when a key is available.
