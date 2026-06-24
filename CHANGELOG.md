@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.69.0](https://github.com/jbcom/dynasty/compare/v0.68.1...v0.69.0) (2026-06-24)
+
+
+### Features
+
+* playtime-depth audit — the hour+ goal is met (PLAYTIME-DEPTH-AUDIT) ([#218](https://github.com/jbcom/dynasty/issues/218)) ([271ed34](https://github.com/jbcom/dynasty/commit/271ed3484630deaef23b2b2fd071366e170bd309))
+
 ## [0.68.1](https://github.com/jbcom/dynasty/compare/v0.68.0...v0.68.1) (2026-06-24)
 
 
