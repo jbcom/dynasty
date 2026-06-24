@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.72.0](https://github.com/jbcom/dynasty/compare/v0.71.1...v0.72.0) (2026-06-24)
+
+
+### Features
+
+* add reader visual rhythm rail ([#236](https://github.com/jbcom/dynasty/issues/236)) ([df62686](https://github.com/jbcom/dynasty/commit/df62686ea72a9e6913106678892467698eb34da9))
+
 ## [0.71.1](https://github.com/jbcom/dynasty/compare/v0.71.0...v0.71.1) (2026-06-24)
 
 
