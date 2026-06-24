@@ -27,7 +27,11 @@ import CodexView from "../saga/CodexView.svelte";
 import { loadCodex } from "../../data/loadSaga";
 import { setMusicEra } from "../sound";
 import { compositePortraitKey, eraBandForYear } from "../../sim/genai/portrait";
-import { lifeStageForAge, rungTierForState } from "../../sim/genai/portraitFacets";
+import {
+  lifeStageForAge,
+  portraitGenderForState,
+  rungTierForState,
+} from "../../sim/genai/portraitFacets";
 import { buildDossier } from "../../sim/dossier/dossier";
 import { moodForRanks } from "../../sim/news/genaiNews";
 import { cinematicKey } from "../../sim/cinematic/genaiCinematic";
@@ -84,7 +88,7 @@ const portraitSrc = $derived.by(() => {
     eraBand: eraBandForYear(s.year),
     archetype: s.archetype,
     rungTier: rungTierForState(s.ranks),
-    gender: s.founding?.gender ?? "male",
+    gender: portraitGenderForState(s),
   });
   // `portrait:adult:digital_modern:economic:high:m` → `portrait_adult_digital_modern_economic_high_m.png`
   return `/assets/generated/portraits/${key.replace(/:/g, "_")}.png`;

@@ -5,6 +5,7 @@ import {
   lifeStageForAge,
   lifeStageForOpeningScene,
   type PortraitArchetype,
+  portraitGenderForState,
   type RungTier,
   rungTierForRung,
   rungTierForState,
@@ -89,6 +90,66 @@ describe("EI-8b rungTier", () => {
 
   it("reads an empty ladder set as low", () => {
     expect(rungTierForState({})).toBe("low");
+  });
+});
+
+describe("KEY-PILLARS-1c portraitGenderForState", () => {
+  it("follows the current protagonist after succession, not the founder's bootstrap gender", () => {
+    expect(
+      portraitGenderForState({
+        founding: {
+          momentId: "founding:demo",
+          surname: "Vane",
+          culture: "irish",
+          place: "new_york",
+          gender: "male",
+        },
+        family: {
+          protagonistId: "m1",
+          nextSeq: 2,
+          members: [
+            {
+              id: "m0",
+              given: "Alden",
+              surname: "Vane",
+              sex: "male",
+              born: 1776,
+              died: 1820,
+              generation: 0,
+              traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
+              isProtagonist: false,
+            },
+            {
+              id: "m1",
+              given: "Mara",
+              surname: "Vane",
+              sex: "female",
+              born: 1801,
+              generation: 1,
+              traits: { ambition: 55, cunning: 52, vigor: 48, piety: 45 },
+              isProtagonist: true,
+            },
+          ],
+        },
+      }),
+    ).toBe("female");
+  });
+
+  it("falls back through founding gender, then male for legacy or skeletal states", () => {
+    expect(
+      portraitGenderForState({
+        founding: {
+          momentId: "founding:demo",
+          surname: "Vane",
+          culture: "irish",
+          place: "new_york",
+          gender: "female",
+        },
+      }),
+    ).toBe("female");
+    expect(
+      portraitGenderForState({ family: { members: [], protagonistId: "missing", nextSeq: 0 } }),
+    ).toBe("male");
   });
 });
 

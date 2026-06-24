@@ -5,7 +5,11 @@ import type { GameView } from "../../../engine/loop";
 import { validRaw } from "../../../sim/__tests__/fixtures";
 import { buildContent } from "../../../sim/content";
 import { compositePortraitKey, eraBandForYear } from "../../../sim/genai/portrait";
-import { lifeStageForAge, rungTierForState } from "../../../sim/genai/portraitFacets";
+import {
+  lifeStageForAge,
+  portraitGenderForState,
+  rungTierForState,
+} from "../../../sim/genai/portraitFacets";
 import { initMeters } from "../../../sim/meters";
 import { SceneSchema } from "../../../sim/saga/schema";
 import { initState } from "../../../sim/state";
@@ -16,7 +20,8 @@ import PlayScreen from "../PlayScreen.svelte";
  * VL-4 — compose + verify the full VISUAL LAYER on the play screen, mobile-first (412px / Pixel-5a class).
  * The two GenAI signature-style pieces from VL-2b (the generation PORTRAIT beside the prose) and VL-3 (the
  * era-progressing journey MAP tab) must compose together over the SceneReader: the portrait keys off the
- * `spine:gN:` scene id + founder gender; the Map tab is reachable (gated on a founded `family`).
+ * `spine:gN:` scene id + the current protagonist's gender; the Map tab is reachable (gated on a founded
+ * `family`).
  */
 
 const content = buildContent(validRaw());
@@ -37,10 +42,44 @@ function view(): GameView {
     ...base,
     meters: { ...initMeters(content.meters), money: 5_000_000, heat: 40 },
     year: 1776,
-    // A live family unlocks the Map tab. The portrait derives gender from founding?.gender, defaulting to
-    // "male" when founding is unset — so the spine_g0_male variant loads without a full founding record.
-    // biome-ignore lint/suspicious/noExplicitAny: MapView + the tab gate only need `family` to be defined.
-    family: { members: [] } as any,
+    age: 31,
+    birthYear: 1745,
+    // A live family unlocks the Map tab. Founder gender is deliberately male while the current protagonist is
+    // female, proving the portrait follows the live member after succession instead of the bootstrap founder.
+    founding: {
+      momentId: "founding:demo",
+      surname: "Vane",
+      culture: "irish",
+      place: "new_york",
+      gender: "male" as const,
+    },
+    family: {
+      protagonistId: "m1",
+      nextSeq: 2,
+      members: [
+        {
+          id: "m0",
+          given: "Alden",
+          surname: "Vane",
+          sex: "male" as const,
+          born: 1745,
+          died: 1775,
+          generation: 0,
+          traits: { ambition: 50, cunning: 50, vigor: 50, piety: 50 },
+          isProtagonist: false,
+        },
+        {
+          id: "m1",
+          given: "Mara",
+          surname: "Vane",
+          sex: "female" as const,
+          born: 1745,
+          generation: 1,
+          traits: { ambition: 56, cunning: 52, vigor: 49, piety: 46 },
+          isProtagonist: true,
+        },
+      ],
+    },
   };
   return {
     state,
@@ -94,12 +133,13 @@ describe("PlayScreen visual layer (VL-4, mobile)", () => {
       eraBand: eraBandForYear(v.state.year), // 1776 → founding_1700s
       archetype: v.state.archetype,
       rungTier: rungTierForState(v.state.ranks),
-      gender: v.state.founding?.gender ?? "male",
+      gender: portraitGenderForState(v.state),
     });
     expect(portrait?.getAttribute("src")).toBe(
       `/assets/generated/portraits/${expectedKey.replace(/:/g, "_")}.png`,
     );
     expect(expectedKey, "the founding-era band resolves").toContain(":founding_1700s:");
+    expect(expectedKey, "the live successor's female portrait variant is used").toMatch(/:f$/);
     // VL-5: the large founding portrait is fetch-prioritized so it decodes promptly (no empty-frame pop).
     expect(portrait?.getAttribute("fetchpriority")).toBe("high");
 
