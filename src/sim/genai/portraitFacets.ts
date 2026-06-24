@@ -32,6 +32,20 @@ export function lifeStageForAge(age: number): LifeStage {
   return "elder";
 }
 
+/**
+ * EI-9c — the life stage a given EMERGENCE (Epoch-0 opening) scene depicts, so the OpeningScreen can show a
+ * life-stage portrait that grows with the progenitor: birth/naming → infant, childhood/first-friend/schooling
+ * → child, the later formative beats (betrayal/loss/romance, the threshold to adulthood) → youth. Scene ids
+ * are `epoch0:<beat>`. Defaults to "child" for any unmapped opening scene. Pure.
+ */
+export function lifeStageForOpeningScene(sceneId: string): LifeStage {
+  const beat = sceneId.startsWith("epoch0:") ? sceneId.slice("epoch0:".length) : sceneId;
+  if (beat === "birth" || beat === "naming") return "infant";
+  if (beat === "childhood" || beat === "formative" || beat === "schooling") return "child";
+  if (beat === "betrayal" || beat === "loss" || beat === "romance") return "youth";
+  return "child";
+}
+
 /** The wardrobe-scaling tier (the 4 rank ladders are 6 rungs each → 3 tiers). */
 export type RungTier = "low" | "mid" | "high";
 

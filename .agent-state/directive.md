@@ -198,12 +198,11 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   "You are born…", senses→4 glowing inline sense-choices→naming speaks "Gwendolyn Calloway"/"daughter"; portrait
   magazine-wraps). WARNING: the squash captured a STALE HEAD — it DROPPED EI-8f's PNGs + everything after
   (presentation/scarcity/EI-9/EI-10/EI-9b). Recovered in #197. [[gh-squash-stale-head-gotcha]].
-- [ ] [WAIT] **PR #197 — the recovered EI-8c…EI-10 portrait work — merge on green.** Clean delta off main (345 files,
-  MERGEABLE, no conflict): the full portrait demand matrix + presentation medium + scarcity inversion + 336 adult
-  portraits that #194's partial squash dropped. Gate green (check 0, typecheck 0/0, unit 980, browser 161, 21 portrait
-  tests). Merge once CI green + 0 threads — VERIFY main has portrait.ts's `presentationFor`/`SCREEN_WRAPPER` after
-  (don't push during the merge window; keep the tree clean — [[gh-squash-stale-head-gotcha]]). Then sync main + fresh
-  branch for EI-9c / EI-SCARCITY-STORIES.
+- [x] **PR #197 — recovered EI-8c…EI-10 portrait work — MERGED (squash de2174c).** The full portrait demand matrix +
+  presentation medium + scarcity inversion + 336 adult portraits are on main. VERIFIED post-merge: main has
+  portrait.ts's `presentationFor`/`CHRONICLE_WRAPPER`/`SCREEN_WRAPPER` + 336 portrait_adult_*.png. Both feature
+  branches deleted (local + remote); main synced clean. The whole EMERGENT-INFANCY milestone (EI-1→EI-10) + the adult
+  portrait matrix is shipped. Now on a fresh branch feat/ei9c-lifestage-encounter-portraits for EI-9c.
 - [x] **EI-8 ENUMERATE THE PORTRAIT-DEMAND MATRIX — DONE (spec).** Wrote the full demand matrix into the EI spec
   (docs/.../2026-06-23-emergent-infancy-onboarding-design.md §"EI-8 — the portrait-demand MATRIX"), grounded in the
   real enums: 5 LIFE-STAGES (infant/child/youth/adult/elder) × 8 fine ERA BANDS (founding_1700s…stellar, NOT the 4
