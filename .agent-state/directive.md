@@ -126,11 +126,17 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   below + EI-9g each their own fresh-branch milestone, gated on the #203 merge.
 - [x] **#203 (GA-MUSIC) — MERGED (squash cdc4a67).** VERIFIED main has src/sim/music/ + 10 .wav tracks +
   trackForEra. Two GenAI-expansion milestones now shipped (GA-NEWS #202, GA-MUSIC #203). On feat/ga-video next.
-- [ ] [WAIT] **GA-TTS — period-voice narration of key beats — NEXT milestone (own fresh branch, GATED on the GA-DOSSIER-DIAGRAMS PR merge).**
-  A TTS read of the naming beat / a generation's pivotal decision in an era-true voice (accessibility + immersion).
-  Pattern: pure prompt/voice-config builder + key (per beat-kind × era), the Gemini TTS client in client.ts, an
-  offline gen script → cached audio, a runtime player surface with graceful (silent) fallback, tests. Milestone branch,
-  ONE PR. Fresh branch cuts from main AFTER the GA-DOSSIER-DIAGRAMS PR squash-merges ([[one-branch-local-review]]).
+- [x] **GA-TTS — period-voice narration of the bookend beats — BUILT (branch feat/ga-tts, commit c4bef5b).** A short
+  era-true read frames the FOUNDING + FINALE (register shifts founding→stellar). Like the dossier brief, it's the
+  run-independent framing (UI shows the name), keyed beat×era + generated OFFLINE (Gemini TTS → cached .wav), never at
+  sim runtime. GT-1 pure genaiNarration.ts (narrationText/Voice/Key + allNarrationJobs, 2 beats × 8 bands; 4 tests).
+  GT-2 geminiGenerateSpeech (AUDIO modality + prebuilt voice → 24kHz PCM) + scripts/genai-narration.ts (PCM→WAV,
+  --beat/--era/--force). GT-3 AudioEngine.playNarration (one-shot, silent fallback pre-start/muted/missing; engine.audio
+  test) + sound.ts facade; LegacyReport fires the finale read on mount (no-visual-impact override — audio-only side
+  effect). Gate: check 0, typecheck 0/0, unit 1022, browser 175. Live-synth BLOCKED here (no key) — degrades silently.
+  Reviewer trio CLEAN (code-reviewer incl. security pass: SDK auth no key-leak, null-safe, totality; simplifier clean).
+- [ ] [WAIT] **GA-TTS PR #211 — merge on green.** Reviewer trio clean (c4bef5b). Monitor bjq6v5cqv armed on CI; merge on
+  CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has src/sim/narration/ + AudioEngine.playNarration.
 - [x] **GA-NEWS — GenAI period DISPATCHES — BUILT (branch feat/ga-news).** GN-1 pure `src/sim/news/genaiNews.ts`
   (buildNewsDispatchPrompt + newsDispatchKey, era × mood, leak-safe, JSON-unwrap defense). GN-2 loadNewsDispatch +
   a NewsTicker "Dispatch" layer (term-resolved). GN-3 scripts/genai-news.ts generated ALL 24 era×mood dispatch sets
@@ -158,10 +164,13 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   (kind×era, license-logged). Tests: unit (key + per-kind prompt + era-keying + caption) + browser (captioned diagram
   renders + hides on error). Gate: check 0, typecheck 0/0, unit 1018, browser 174. Live-gen BLOCKED here (no key) —
   degrades via hide-on-error. Reviewer trio CLEAN (code-reviewer + simplifier, no findings to fold).
-- [ ] [WAIT] **GA-DOSSIER-DIAGRAMS PR #209 — merge on green.** Reviewer trio clean (cb8202d). Monitor bcrln2117 armed
-  on CI; merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has the diagram panel + buildDossierDiagramPrompt.
-- [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt** — exists, no live consumer (EI-9f); needs a
-  single-figure FOCUS surface (a rival-head dossier / a braid-crossing close-up) to drive it.
+- [x] **GA-DOSSIER-DIAGRAMS PR #209 — MERGED (squash 047d5b1); v0.65.0 cut.** Reviewer trio clean; CI green; merged
+  CLEAN + verified on main (the diagram panel + buildDossierDiagramPrompt). SIX GenAI-expansion milestones shipped
+  (GA-NEWS #202, GA-MUSIC #203, GA-VIDEO #205, GA-MAP-ART #207, GA-DOSSIER-DIAGRAMS #209).
+- [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt — LAST GenAI-surface milestone (fresh branch, GATED on the GA-TTS PR merge).**
+  buildEncounterPortraitPrompt exists, no live consumer (EI-9f); needs a single-figure FOCUS surface (a rival-head
+  dossier / a braid-crossing close-up) to drive it. Reuse the portrait Imagen pipeline + hide-on-error. Milestone
+  branch, ONE PR. Fresh branch cuts from main AFTER the GA-TTS PR squash-merges ([[one-branch-local-review]]).
   DECISION (log, [[never-ask-direction]]): sequence after the VD milestone — GA-NEWS + GA-MUSIC first (highest
   feel-per-effort), then GA-VIDEO finale, then the rest. Each its own milestone branch.
 - [x] **GA-MAP-ART PR #207 — MERGED (squash ece0be9); v0.64.0 cut.** Reviewer trio folded; CI green; squash-merged

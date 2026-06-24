@@ -125,6 +125,21 @@ export function playEndingSting(outcome: string): void {
   }
 }
 
+/**
+ * GA-TTS: play a one-shot period-voice NARRATION (the founding / finale read) by its narrationKey. No-ops
+ * outside the browser, when sound is off, or on any failure; if the graph isn't started yet it starts it first
+ * (so a finale read lands even without a prior tap). The clip degrades silently if not generated (engine onerror).
+ */
+export function playNarration(narrationKey: string): void {
+  if (!enabled || typeof window === "undefined") return;
+  try {
+    if (!music?.isStarted) startMusic();
+    music?.playNarration(narrationKey);
+  } catch {
+    // Narration is atmospheric, non-essential — never let it break the beat.
+  }
+}
+
 /** Play a one-shot cue if sound is enabled. No-ops outside the browser or on any audio failure. */
 export function playCue(id: SfxId): void {
   if (!enabled || typeof window === "undefined") return;
