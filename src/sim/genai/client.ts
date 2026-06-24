@@ -83,6 +83,39 @@ export function geminiGenerateVideo(
   };
 }
 
+/** The TTS model (GA-TTS) — Gemini's text-to-speech preview. Override with GEMINI_TTS_MODEL. */
+export const DEFAULT_TTS_MODEL = "gemini-2.5-flash-preview-tts";
+
+/** Gemini TTS returns 24kHz mono 16-bit PCM. The offline script wraps it in a WAV with this format. */
+export const TTS_SAMPLE_RATE = 24_000;
+export const TTS_CHANNELS = 1;
+
+/** Synthesize `text` in a named prebuilt voice → raw PCM bytes (s16le, 24kHz mono), or null on no audio. */
+export type GenerateSpeechFn = (text: string, voiceName: string) => Promise<Uint8Array | null>;
+
+/**
+ * Build a Gemini TTS speech generator (GA-TTS, key-gated). generateContent with an AUDIO response modality +
+ * a single prebuilt voice; returns the first inline audio part's decoded PCM (the offline script wraps it in a
+ * WAV). Offline tooling only — never called at sim runtime (sim purity).
+ */
+export function geminiGenerateSpeech(apiKey: string, model = DEFAULT_TTS_MODEL): GenerateSpeechFn {
+  if (!apiKey)
+    throw new Error("geminiGenerateSpeech: missing API key — speech synthesis needs a Gemini key");
+  const ai = new GoogleGenAI({ apiKey });
+  return async (text, voiceName) => {
+    const res = await ai.models.generateContent({
+      model,
+      contents: text,
+      config: {
+        responseModalities: ["AUDIO"],
+        speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName } } },
+      },
+    });
+    const b64 = res.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+    return b64 ? Buffer.from(b64, "base64") : null;
+  };
+}
+
 /** Lyria streams 48kHz stereo 16-bit PCM. The capture wraps the concatenated chunks in a WAV with this format. */
 export const LYRIA_SAMPLE_RATE = 48_000;
 export const LYRIA_CHANNELS = 2;

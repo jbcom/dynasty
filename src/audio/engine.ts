@@ -116,12 +116,47 @@ export class AudioEngine {
     tryUrls([`${eraId}.ogg`, `${eraId}.wav`]);
   }
 
+  private narrationPlayer: Tone.Player | null = null;
+
+  /**
+   * GA-TTS: play a one-shot period-voice NARRATION for a beat (the founding / finale read), from a generated
+   * `/assets/audio/narration/<key>.wav` (the narrationKey, `:` → `_`). A one-shot over the ambient bed — if the
+   * clip isn't generated yet (or the context isn't started / is muted) it SILENTLY no-ops, so the beat plays on
+   * without it. Returns the Player (or null) for tests; never throws on a missing asset (onerror cleans up).
+   */
+  playNarration(narrationKey: string): Tone.Player | null {
+    if (!this.started || this.muted) return null;
+    this.narrationPlayer?.stop();
+    this.narrationPlayer?.dispose();
+    const stem = narrationKey.replace(/:/g, "_");
+    try {
+      this.narrationPlayer = new Tone.Player({
+        url: `/assets/audio/narration/${stem}.wav`,
+        loop: false,
+        volume: -6,
+        autostart: true,
+        onerror: () => {
+          // The narration isn't generated yet — drop it silently; the beat carries on without the read.
+          this.narrationPlayer?.dispose();
+          this.narrationPlayer = null;
+        },
+      }).connect(this.master);
+      return this.narrationPlayer;
+    } catch {
+      this.narrationPlayer = null;
+      return null;
+    }
+  }
+
   /** Stop everything and free nodes. */
   dispose(): void {
     this.padLoop?.dispose();
     this.eraPlayer?.stop();
     this.eraPlayer?.dispose();
     this.eraPlayer = null;
+    this.narrationPlayer?.stop();
+    this.narrationPlayer?.dispose();
+    this.narrationPlayer = null;
     if (this.started) {
       this.stinger.dispose();
       this.blip.dispose();

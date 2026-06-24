@@ -3,6 +3,8 @@ import type { Content } from "../../sim/content";
 import type { ConvergenceEnding } from "../../sim/convergence";
 import type { Ending } from "../../sim/schema";
 import { cinematicKey } from "../../sim/cinematic/genaiCinematic";
+import { eraBandForYear } from "../../sim/genai/portrait";
+import { narrationKey } from "../../sim/narration/genaiNarration";
 import CinematicView from "../cinematic/CinematicView.svelte";
 import { spectrumLabel } from "../../sim/personality";
 import { branchOf } from "../../sim/branch";
@@ -14,7 +16,7 @@ import type { EndState, GameState } from "../../sim/state";
 import ButterflyGraph from "../ButterflyGraph.svelte";
 import { formatMoney } from "../theme";
 import { onMount } from "svelte";
-import { playEndingSting } from "../sound";
+import { playEndingSting, playNarration } from "../sound";
 
 interface Props {
   content: Content;
@@ -167,8 +169,10 @@ const agency = $derived.by(() => {
 
 // A one-shot ending sting coloured by the convergence outcome, fired once when the report mounts
 // (audio-gated + fully guarded inside playEndingSting). The saga's close gets an audible punctuation.
+// GA-TTS: also play the period-voice FINALE narration for the closing era (degrades silently if ungenerated).
 onMount(() => {
   playEndingSting(convergence?.destination ?? "earthbound");
+  playNarration(narrationKey("finale", eraBandForYear(state.year)));
 });
 </script>
 
