@@ -58,6 +58,10 @@ low similarity, duplicate-opening risk, and weave readiness. Treat the top entri
 positive rewrite candidates for non-first-person encounters or branch beats in the
 one-dynasty spine. Runtime crossing selection should prefer keeper-ranked entries when
 they match the same family wave and tier, then fall back to the older source score.
+The next rung is authored promotion: when a keeper can deepen the one-dynasty spine,
+rewrite it as a third-person encounter in `src/data/saga/spine.act.json`, add local
+prose/similarity proof, and record the provenance in
+`src/data/saga/fabric/transactions.ndjson` with `type:"fabric-promote-keeper"`.
 
 The preferred pruning workflow is reductive and transactional:
 
