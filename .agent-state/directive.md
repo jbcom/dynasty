@@ -197,8 +197,11 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   line, visits Field/Map/Dossier, asserts NO GenAI image (map base / dossier figure+diagram / rival head) renders a
   broken-image icon with zero generated assets — every one hides/unmounts, the data panels + overlays carry the view.
   Full e2e suite GREEN (8 tests). The GENAI-VERIFY-1 known-minor did NOT surface as a visible break. Gate: check 0,
-  typecheck 0/0, e2e 8. NEXT: reviewer (running) → ONE PR.
-- [ ] [WAIT] **APP-RUNS-VERIFY PR — merge on green (after open).** Gated on the open PR's CI + threads.
+  typecheck 0/0, e2e 8. Reviewer caught a REAL epistemic defect (355 generated assets ARE tracked → the test hit the
+  happy path, not the fallback) — FOLDED (bf19681): abort **/assets/generated/** so onerror fires + assert fallback
+  content (not just the container). Re-verified: 8 e2e green WITH assets aborted.
+- [ ] [WAIT] **APP-RUNS-VERIFY PR #217 — merge on green.** Reviewer folded (bf19681). Monitor b6blfhfy7 armed on CI;
+  merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has the assets-aborted e2e fallback test.
 - [ ] [WAIT] **PLAYTIME-DEPTH-AUDIT — measure the founding-spine run length against the hour+ goal (next milestone, own branch GATED on the APP-RUNS-VERIFY PR merge).**
   The user's standing vision: the game should run an HOUR+ ([[hour-long-depth]] → [[convergence-pivot]]). The spine is
   g0→g9 with ~6 scenes/act ([[mmm-spine-act-depth]]). MEASURE: instrument a representative playthrough (scene count ×
