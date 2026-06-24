@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.64.0](https://github.com/jbcom/dynasty/compare/v0.63.0...v0.64.0) (2026-06-24)
+
+
+### Features
+
+* GenAI dynasty cinematics via Veo (GA-VIDEO) ([#205](https://github.com/jbcom/dynasty/issues/205)) ([5e29211](https://github.com/jbcom/dynasty/commit/5e292110180fb36004dc52f342ddc85f0d651f19))
+
 ## [0.63.0](https://github.com/jbcom/dynasty/compare/v0.62.0...v0.63.0) (2026-06-24)
 
 
