@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadSaga } from "../../../data/loadSaga";
+import keeperReport from "../../../data/saga/fabric/keepers.json" with { type: "json" };
 import { fabricVignette } from "../fabricCrossing";
 import { resolveThreads } from "../player";
 import { SceneSchema } from "../schema";
@@ -13,6 +14,17 @@ import { SceneSchema } from "../schema";
  */
 
 const FAMILIES = ["italian", "ireland", "ashkenazi_jewish", "chinese", "bavaria", "scandinavian"];
+const KEEPERS = (
+  keeperReport as {
+    keepers: Array<{ wave: string; tier: number; keeperScore: number; vignettes: string[] }>;
+  }
+).keepers;
+
+function topKeeperFor(wave: string, tier: number): (typeof KEEPERS)[number] | undefined {
+  return KEEPERS.filter((keeper) => keeper.wave === wave && keeper.tier === tier).sort(
+    (a, b) => b.keeperScore - a.keeperScore,
+  )[0];
+}
 
 describe("fabricVignette (mined-fabric crossing prose)", () => {
   it("returns a real, non-empty vignette for every recurring family", () => {
@@ -26,6 +38,13 @@ describe("fabricVignette (mined-fabric crossing prose)", () => {
   it("is deterministic — same (wave, tier) → identical vignette", () => {
     expect(fabricVignette("italian", 4)).toBe(fabricVignette("italian", 4));
     expect(fabricVignette("chinese", 2)).toBe(fabricVignette("chinese", 2));
+  });
+
+  it("KEY-PILLARS-1g: promotes the keeper-ranked vignette for live crossings", () => {
+    const keeper = topKeeperFor("ireland", 0);
+
+    expect(keeper, "keeper report should cover the Ireland tier-0 crossing").toBeTruthy();
+    expect(fabricVignette("ireland", 0)).toBe(keeper?.vignettes[0]);
   });
 
   it("returns null for a wave the corpus never covered (caller keeps its generic fallback)", () => {
