@@ -189,7 +189,10 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   folded: FigurePanel now unmounts the WHOLE figure (img + caption) on error (was a captioned empty space). Gap
   enumeration: the only remaining GenAI work is producing the LIVE assets (key-gated). Gate: check 0, typecheck 0/0,
   browser 177. NEXT: reviewer (running) → ONE PR.
-- [ ] [WAIT] **GENAI-VERIFY-1 PR — merge on green (after open).** Gated on the open PR's CI + threads.
+- [ ] [WAIT] **GENAI-VERIFY-1 PR #215 — merge on green.** Reviewer clean (2981451). Monitor b9k982new armed on CI;
+  merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has docs/genai-surfaces.md + the FigurePanel unmount.
+  KNOWN-MINOR (logged, not a regression): an errored diagram leaves the .diagram-cell top rule in an asset-absent env;
+  fix needs a DossierView-level cell-collapse signal — defer to APP-RUNS-VERIFY if it reads visibly wrong on screen.
 - [ ] [WAIT] **APP-RUNS-VERIFY — live smoke of the app + all 7 GenAI fallbacks in a real browser (next milestone, own branch GATED on the GENAI-VERIFY-1 PR merge).**
   Doctrine DoD: "tests pass" ≠ "app runs". Run `pnpm dev`, drive a founded line through a generation boundary +
   the Field/dossier/map/news tabs + a finale, screenshot each, READ the screenshots, confirm every GenAI surface
