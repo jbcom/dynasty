@@ -49,7 +49,16 @@ the baseline in the same PR as the content change.
 ## Legacy Fabric Triage
 
 Similarity mining should find the wheat from the chaff in legacy class JSON. The preferred
-workflow is reductive and transactional:
+workflow has two sides: keeper reports for the best rewrite sources, and reductive pruning
+for the worst played fabric.
+
+Use `pnpm fabric:keepers` to regenerate `src/data/saga/fabric/keepers.json`. This report is
+read-only: it ranks retained fabric by source score, prose scan/clarity/consistency,
+low similarity, duplicate-opening risk, and weave readiness. Treat the top entries as
+positive rewrite candidates for non-first-person encounters or branch beats in the
+one-dynasty spine.
+
+The preferred pruning workflow is reductive and transactional:
 
 1. Find the most duplicative or least scannable kept fabric item.
 2. Remove or quarantine exactly that item from the played fabric.

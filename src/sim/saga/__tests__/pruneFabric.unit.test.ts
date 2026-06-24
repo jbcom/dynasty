@@ -1,12 +1,15 @@
 import { describe, expect, it } from "vitest";
 import {
   applyPruneToIndex,
+  buildKeeperReport,
   buildPruneTransactions,
   cheapPruneScore,
   cheapPruneSignals,
   collectPruneCandidates,
   type FabricEntry,
   type FabricIndex,
+  keeperScore,
+  selectKeeperCandidates,
   selectPruneCandidates,
 } from "../pruneFabric";
 
@@ -163,5 +166,73 @@ describe("fabric prune policy", () => {
     });
     expect(transactions[0]?.gap).toContain("rewritten non-first-person replacement");
     expect(transactions[0]?.reason).toContain("cheap pre-read score");
+  });
+
+  it("keeper ranking selects scannable, distinct fabric for rewrite first", () => {
+    const picked = selectKeeperCandidates(
+      index([
+        entry("dense", denseVignette, { score: 0.92, maxSimilarity: 0.97 }),
+        entry("clear:a", clearVignette, { score: 0.72, maxSimilarity: 0.12 }),
+        entry("clear:b", secondClearVignette, { score: 0.68, maxSimilarity: 0.18 }),
+      ]),
+      2,
+    );
+
+    expect(picked.map((candidate) => candidate.entry.sceneId)).toEqual(["clear:a", "clear:b"]);
+    expect(picked[0]?.keeperScore).toBeGreaterThan(picked[1]?.keeperScore ?? 0);
+    expect(picked.every((candidate) => candidate.report.pass)).toBe(true);
+  });
+
+  it("scores keeper candidates with source quality, prose quality, uniqueness, and weave readiness", () => {
+    const strong = keeperScore({
+      sourceScore: 0.8,
+      scanScore: 0.9,
+      clarityScore: 0.9,
+      consistencyScore: 0.9,
+      maxSimilarity: 0.1,
+      duplicateLeadCount: 1,
+      wordCount: 70,
+      averageSentenceWords: 18,
+      maxSentenceWords: 24,
+      settingsCount: 2,
+      vignettesCount: 1,
+    });
+    const weak = keeperScore({
+      sourceScore: 0.8,
+      scanScore: 0.1,
+      clarityScore: 0.1,
+      consistencyScore: 0.1,
+      maxSimilarity: 0.96,
+      duplicateLeadCount: 3,
+      wordCount: 190,
+      averageSentenceWords: 52,
+      maxSentenceWords: 96,
+      settingsCount: 0,
+      vignettesCount: 1,
+    });
+
+    expect(strong).toBeGreaterThan(weak);
+  });
+
+  it("builds a keeper report with rewrite guidance instead of mutating the index", () => {
+    const source = index([
+      entry("clear:a", clearVignette, { score: 0.72, maxSimilarity: 0.12 }),
+      entry("dense", denseVignette, { score: 0.92, maxSimilarity: 0.97 }),
+      entry("clear:b", secondClearVignette, { score: 0.68, maxSimilarity: 0.18 }),
+    ]);
+    const report = buildKeeperReport(source, 1);
+
+    expect(report).toMatchObject({
+      generated: "KEY-PILLARS-1f fabric keeper report",
+      source: "scripts/mine-fabric.ts --keepers 1",
+      requested: 1,
+      totalCandidates: 3,
+      selectedCount: 1,
+      byEra: { emergence: 1 },
+    });
+    expect(report.keepers[0]?.sceneId).toBe("clear:a");
+    expect(report.keepers[0]?.reason).toContain("keeperScore");
+    expect(report.keepers[0]?.rewrite).toContain("non-first-person encounter");
+    expect(source.keptScenes).toBe(3);
   });
 });

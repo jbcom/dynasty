@@ -60,10 +60,64 @@ export interface PruneSelectionOptions {
   autoCandidatePoolSize?: number;
 }
 
+export interface KeeperSignals {
+  sourceScore: number;
+  scanScore: number;
+  clarityScore: number;
+  consistencyScore: number;
+  maxSimilarity: number;
+  duplicateLeadCount: number;
+  wordCount: number;
+  averageSentenceWords: number;
+  maxSentenceWords: number;
+  settingsCount: number;
+  vignettesCount: number;
+}
+
+export interface KeeperCandidate extends AuditedPruneCandidate {
+  keeperScore: number;
+  keeperSignals: KeeperSignals;
+}
+
+export interface KeeperRecord {
+  sceneId: string;
+  wave: string;
+  era: string;
+  tier: number;
+  keeperScore: number;
+  sourceScore: number;
+  maxSimilarity: number;
+  settings: string[];
+  vignettes: string[];
+  prose: {
+    pass: boolean;
+    scanScore: number;
+    clarityScore: number;
+    consistencyScore: number;
+    fleschReadingEase: number;
+    fleschKincaidGrade: number;
+    averageSentenceWords: number;
+    maxSentenceWords: number;
+  };
+  reason: string;
+  rewrite: string;
+}
+
+export interface KeeperReport {
+  generated: string;
+  source: string;
+  requested: number;
+  totalCandidates: number;
+  selectedCount: number;
+  byEra: Record<string, number>;
+  keepers: KeeperRecord[];
+}
+
 export const PRUNE_AUTO_CANDIDATE_POOL_SIZE = 64;
 export const PRUNE_ALL_SCAN_SCORE_THRESHOLD = 0.2;
 export const PRUNE_ALL_AVG_SENTENCE_WORDS_THRESHOLD = 40;
 export const PRUNE_ALL_CHEAP_SCORE_THRESHOLD = 1.1;
+export const DEFAULT_KEEPER_REPORT_COUNT = 24;
 
 const CHEAP_SCORE_AVG_SENTENCE_WORDS_THRESHOLD = 32;
 const CHEAP_SCORE_AVG_SENTENCE_WORDS_SCALE = 28;
@@ -134,6 +188,10 @@ function sentenceWordCounts(text: string): number[] {
 function round(n: number, places = 3): number {
   const mult = 10 ** places;
   return Math.round(n * mult) / mult;
+}
+
+function clamp01(n: number): number {
+  return Math.max(0, Math.min(1, n));
 }
 
 function entryText(entry: FabricEntry): string {
@@ -281,6 +339,133 @@ export function selectPruneCandidates(
   }
 
   return audited.slice(0, Math.max(1, count));
+}
+
+export function keeperSignals(candidate: AuditedPruneCandidate): KeeperSignals {
+  return {
+    sourceScore: candidate.entry.score,
+    scanScore: candidate.report.scanScore,
+    clarityScore: candidate.report.clarityScore,
+    consistencyScore: candidate.report.consistencyScore,
+    maxSimilarity: candidate.cheapSignals.maxSimilarity,
+    duplicateLeadCount: candidate.cheapSignals.duplicateLeadCount,
+    wordCount: candidate.cheapSignals.wordCount,
+    averageSentenceWords: candidate.cheapSignals.averageSentenceWords,
+    maxSentenceWords: candidate.cheapSignals.maxSentenceWords,
+    settingsCount: candidate.entry.settings.length,
+    vignettesCount: candidate.entry.vignettes.length,
+  };
+}
+
+export function keeperScore(signals: KeeperSignals): number {
+  const proseScore = (signals.scanScore + signals.clarityScore + signals.consistencyScore) / 3;
+  const uniquenessScore = 1 - clamp01(signals.maxSimilarity);
+  const weaveScore = clamp01(signals.settingsCount * 0.35 + signals.vignettesCount * 0.35);
+  const substanceScore =
+    signals.wordCount < 40
+      ? clamp01(signals.wordCount / 40)
+      : signals.wordCount <= 140
+        ? 1
+        : clamp01(1 - (signals.wordCount - 140) / 220);
+  const sentenceScore = clamp01(1 - Math.max(0, signals.averageSentenceWords - 28) / 32);
+  const duplicatePenalty = Math.min(0.25, Math.max(0, signals.duplicateLeadCount - 1) * 0.08);
+
+  return round(
+    signals.sourceScore * 0.22 +
+      proseScore * 0.28 +
+      uniquenessScore * 0.2 +
+      weaveScore * 0.14 +
+      substanceScore * 0.08 +
+      sentenceScore * 0.08 -
+      duplicatePenalty,
+  );
+}
+
+function compareKeeperCandidates(a: KeeperCandidate, b: KeeperCandidate): number {
+  return (
+    b.keeperScore - a.keeperScore ||
+    Number(b.report.pass) - Number(a.report.pass) ||
+    a.keeperSignals.maxSimilarity - b.keeperSignals.maxSimilarity ||
+    b.entry.score - a.entry.score ||
+    a.entry.sceneId.localeCompare(b.entry.sceneId)
+  );
+}
+
+export function selectKeeperCandidates(
+  index: FabricIndex,
+  count = DEFAULT_KEEPER_REPORT_COUNT,
+): KeeperCandidate[] {
+  return collectPruneCandidates(index)
+    .map(auditPruneCandidate)
+    .map((candidate) => {
+      const signals = keeperSignals(candidate);
+      return {
+        ...candidate,
+        keeperSignals: signals,
+        keeperScore: keeperScore(signals),
+      };
+    })
+    .sort(compareKeeperCandidates)
+    .slice(0, Math.max(1, count));
+}
+
+function sourceForKeepers(count: number): string {
+  return `scripts/mine-fabric.ts --keepers ${count}`;
+}
+
+function keeperRecord(candidate: KeeperCandidate): KeeperRecord {
+  return {
+    sceneId: candidate.entry.sceneId,
+    wave: candidate.wave,
+    era: candidate.era,
+    tier: candidate.entry.tier,
+    keeperScore: candidate.keeperScore,
+    sourceScore: round(candidate.entry.score),
+    maxSimilarity: round(candidate.keeperSignals.maxSimilarity),
+    settings: candidate.entry.settings,
+    vignettes: candidate.entry.vignettes,
+    prose: {
+      pass: candidate.report.pass,
+      scanScore: candidate.report.scanScore,
+      clarityScore: candidate.report.clarityScore,
+      consistencyScore: candidate.report.consistencyScore,
+      fleschReadingEase: candidate.report.fleschReadingEase,
+      fleschKincaidGrade: candidate.report.fleschKincaidGrade,
+      averageSentenceWords: candidate.report.averageSentenceWords,
+      maxSentenceWords: candidate.report.maxSentenceWords,
+    },
+    reason: [
+      "Keeper candidate",
+      `keeperScore ${candidate.keeperScore}`,
+      `source score ${round(candidate.entry.score)}`,
+      `scanScore ${candidate.report.scanScore}`,
+      `clarityScore ${candidate.report.clarityScore}`,
+      `consistencyScore ${candidate.report.consistencyScore}`,
+      `maxSimilarity ${round(candidate.keeperSignals.maxSimilarity)}`,
+      `settings ${candidate.entry.settings.length}`,
+      `vignettes ${candidate.entry.vignettes.length}`,
+    ].join("; "),
+    rewrite: `${candidate.era} ${candidate.wave} tier-${candidate.entry.tier} ${candidate.entry.sceneId} is a high-signal legacy fabric source for a rewritten non-first-person encounter or branch beat in the one-dynasty spine.`,
+  };
+}
+
+export function buildKeeperReport(
+  index: FabricIndex,
+  count = DEFAULT_KEEPER_REPORT_COUNT,
+): KeeperReport {
+  const candidates = collectPruneCandidates(index);
+  const keepers = selectKeeperCandidates(index, count);
+  const byEra: Record<string, number> = {};
+  for (const keeper of keepers) byEra[keeper.era] = (byEra[keeper.era] ?? 0) + 1;
+  return {
+    generated: "KEY-PILLARS-1f fabric keeper report",
+    source: sourceForKeepers(count),
+    requested: count,
+    totalCandidates: candidates.length,
+    selectedCount: keepers.length,
+    byEra,
+    keepers: keepers.map(keeperRecord),
+  };
 }
 
 function recomputeCounts(fabric: FabricIndex["fabric"]): {
