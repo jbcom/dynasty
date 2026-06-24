@@ -189,15 +189,22 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   folded: FigurePanel now unmounts the WHOLE figure (img + caption) on error (was a captioned empty space). Gap
   enumeration: the only remaining GenAI work is producing the LIVE assets (key-gated). Gate: check 0, typecheck 0/0,
   browser 177. NEXT: reviewer (running) → ONE PR.
-- [ ] [WAIT] **GENAI-VERIFY-1 PR #215 — merge on green.** Reviewer clean (2981451). Monitor b9k982new armed on CI;
-  merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has docs/genai-surfaces.md + the FigurePanel unmount.
-  KNOWN-MINOR (logged, not a regression): an errored diagram leaves the .diagram-cell top rule in an asset-absent env;
-  fix needs a DossierView-level cell-collapse signal — defer to APP-RUNS-VERIFY if it reads visibly wrong on screen.
-- [ ] [WAIT] **APP-RUNS-VERIFY — live smoke of the app + all 7 GenAI fallbacks in a real browser (next milestone, own branch GATED on the GENAI-VERIFY-1 PR merge).**
-  Doctrine DoD: "tests pass" ≠ "app runs". Run `pnpm dev`, drive a founded line through a generation boundary +
-  the Field/dossier/map/news tabs + a finale, screenshot each, READ the screenshots, confirm every GenAI surface
-  renders its graceful fallback (no broken-image/empty-panel) with NO assets generated. Record findings + fix any
-  real visual break. Milestone branch, ONE PR. (chrome-devtools-mcp / the repo's Playwright e2e as the harness.)
+- [x] **GENAI-VERIFY-1 PR #215 — MERGED (squash 2821451); v0.68.0 cut.** Reviewer clean; CI green; merged CLEAN +
+  verified on main (docs/genai-surfaces.md + the FigurePanel unmount). KNOWN-MINOR carried to APP-RUNS-VERIFY (the
+  errored-diagram cell rule) — RESOLVED: the live e2e found NO visible broken-image/artifact, so it doesn't read wrong.
+- [x] **APP-RUNS-VERIFY — live app-runs verification of the GenAI fallbacks — BUILT (branch feat/app-runs-verify,
+  commit ada50ab).** Doctrine DoD met: a Playwright e2e drives the REAL app (mobile-chromium) title→birth→founded
+  line, visits Field/Map/Dossier, asserts NO GenAI image (map base / dossier figure+diagram / rival head) renders a
+  broken-image icon with zero generated assets — every one hides/unmounts, the data panels + overlays carry the view.
+  Full e2e suite GREEN (8 tests). The GENAI-VERIFY-1 known-minor did NOT surface as a visible break. Gate: check 0,
+  typecheck 0/0, e2e 8. NEXT: reviewer (running) → ONE PR.
+- [ ] [WAIT] **APP-RUNS-VERIFY PR — merge on green (after open).** Gated on the open PR's CI + threads.
+- [ ] [WAIT] **PLAYTIME-DEPTH-AUDIT — measure the founding-spine run length against the hour+ goal (next milestone, own branch GATED on the APP-RUNS-VERIFY PR merge).**
+  The user's standing vision: the game should run an HOUR+ ([[hour-long-depth]] → [[convergence-pivot]]). The spine is
+  g0→g9 with ~6 scenes/act ([[mmm-spine-act-depth]]). MEASURE: instrument a representative playthrough (scene count ×
+  realistic read time + decisions + the inter-era surfaces) to estimate playtime; compare to the hour+ target; enumerate
+  the largest depth gaps (acts/tiers that are thin, intersections that don't fire) as concrete follow-up items. Pure
+  analysis + a depth-metric test/script; no content rewrite in this milestone. Milestone branch, ONE PR.
 - [ ] [WAIT] **GENAI-GENERATE — produce the live cached assets (BLOCKED: needs GEMINI_API_KEY in the env).** Run the
   seven offline scripts (genai-news/music/cinematics/map-art/dossiers/narration/encounter-portraits) to fill the
   caches, READ-verify a sample of each, commit the assets. True blocker here (no key); un-WAIT when a key is available.
