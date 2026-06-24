@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.75.1](https://github.com/jbcom/dynasty/compare/v0.75.0...v0.75.1) (2026-06-24)
+
+
+### Documentation
+
+* mark keeper spine promotion merged ([#252](https://github.com/jbcom/dynasty/issues/252)) ([3e68762](https://github.com/jbcom/dynasty/commit/3e6876235f52c2782afb48b1724c3a1d13471455))
+
 ## [0.75.0](https://github.com/jbcom/dynasty/compare/v0.74.2...v0.75.0) (2026-06-24)
 
 
