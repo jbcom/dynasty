@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.71.0](https://github.com/jbcom/dynasty/compare/v0.70.0...v0.71.0) (2026-06-24)
+
+
+### Features
+
+* diversify the spine scene-shape ([bb8f10b](https://github.com/jbcom/dynasty/commit/bb8f10b122d860c28fe5de96357fc9b257697a66))
+
 ## [0.70.0](https://github.com/jbcom/dynasty/compare/v0.69.0...v0.70.0) (2026-06-24)
 
 
