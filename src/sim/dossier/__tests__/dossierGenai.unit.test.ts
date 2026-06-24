@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { SIGNATURE_STYLE } from "../../genai/portrait";
 import {
   buildDossierBriefPrompt,
+  buildDossierDiagramPrompt,
   buildDossierFigurePrompt,
   type DossierState,
   dossierBriefSystem,
@@ -69,6 +70,28 @@ describe("VD-5 dossier figure prompt", () => {
     );
     expect(buildDossierFigurePrompt("warroom", "early_1900s", "political")).toMatch(
       /war-room|campaign|maps/i,
+    );
+  });
+});
+
+describe("GA-DOSSIER-DIAGRAMS dossier diagram prompt", () => {
+  it("depicts a NO-PEOPLE informational DIAGRAM per kind, with no baked-in text", () => {
+    const p = buildDossierDiagramPrompt("intelligence", "midcentury");
+    expect(p).toMatch(/NO people/i);
+    expect(p).toMatch(/diagram|chart|schematic/i);
+    // The briefing captions it — no legible text/numbers should be baked into the raster.
+    expect(p).toMatch(/no legible text/i);
+    expect(p).toContain(SIGNATURE_STYLE);
+  });
+
+  it("the diagram tracks the kind (R&D = a development tree, intelligence = a surveillance chart)", () => {
+    expect(buildDossierDiagramPrompt("rnd", "early_1900s")).toMatch(/tree|tech/i);
+    expect(buildDossierDiagramPrompt("intelligence", "early_1900s")).toMatch(/surveillance/i);
+  });
+
+  it("is era-keyed — the same kind reads different across eras", () => {
+    expect(buildDossierDiagramPrompt("rnd", "founding_1700s")).not.toBe(
+      buildDossierDiagramPrompt("rnd", "stellar"),
     );
   });
 });
