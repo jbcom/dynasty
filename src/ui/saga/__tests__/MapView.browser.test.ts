@@ -108,4 +108,32 @@ describe("MapView (journey)", () => {
     expect(host.querySelectorAll("svg.route circle.rival").length).toBe(0);
     expect(host.querySelector(".rival-note")).toBeNull();
   });
+
+  it("GA-MAP-ART: the cartographic base tracks the ERA — a 1700s year vs. a stellar year load different bases", () => {
+    component = mount(MapView, { target: host, props: { gameState: atYear(1776) } });
+    const founding = (
+      host.querySelector("[data-testid='map-base']") as HTMLImageElement
+    ).getAttribute("src");
+    expect(founding).toBe("/assets/generated/map/map_founding_1700s.png");
+    unmount(component);
+    component = mount(MapView, { target: host, props: { gameState: atYear(2300) } });
+    const stellar = (
+      host.querySelector("[data-testid='map-base']") as HTMLImageElement
+    ).getAttribute("src");
+    expect(stellar).toBe("/assets/generated/map/map_stellar.png");
+    expect(stellar).not.toBe(founding);
+  });
+
+  it("GA-MAP-ART: a missing era base falls back to the founding base, then hides (graceful degradation)", () => {
+    // A near-future year whose era base may not be generated yet.
+    component = mount(MapView, { target: host, props: { gameState: atYear(2100) } });
+    const img = host.querySelector("[data-testid='map-base']") as HTMLImageElement;
+    expect(img.getAttribute("src")).toBe("/assets/generated/map/map_near_future.png");
+    // First error → fall back to the founding base (which always exists).
+    img.dispatchEvent(new Event("error"));
+    expect(img.src).toContain("founding-map.png");
+    // A second error (even the founding base missing) → hide so the CSS base shows through.
+    img.dispatchEvent(new Event("error"));
+    expect(img.style.display).toBe("none");
+  });
 });

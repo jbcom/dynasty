@@ -1,4 +1,6 @@
 <script lang="ts">
+import { eraBandForYear } from "../../sim/genai/portrait";
+import { mapKey } from "../../sim/genai/mapArt";
 import { macroActForYear, type MacroAct } from "../../sim/macroActs";
 import type { GameState } from "../../sim/state";
 
@@ -40,6 +42,15 @@ const STAGES: Array<{ act: MacroAct; label: string }> = [
   { act: "ascension", label: "The Stars" },
 ];
 
+// GA-MAP-ART: the cartographic base shifts with the ERA — a colonial chart at the founding becomes an
+// industrial survey, a digital globe, a stellar star-chart as the line advances. The base for the current era
+// is `map_<eraBand>.png`; if it isn't generated yet, onerror falls back to the founding base (which always
+// exists), and failing that the CSS base shows. So the journey reads period-true without blocking on coverage.
+const FOUNDING_BASE = "/assets/generated/map/founding-map.png";
+const baseSrc = $derived(
+  `/assets/generated/map/${mapKey(eraBandForYear(gameState.year)).replace(/:/g, "_")}.png`,
+);
+
 const current = $derived(macroActForYear(gameState.year));
 const currentIdx = $derived(Math.max(0, STAGES.findIndex((s) => s.act === current)));
 // Waypoint x-positions across the chart (left = founding, right = the stars).
@@ -79,7 +90,23 @@ const leader = $derived.by(() => {
 <section class="map" aria-label="The dynasty's journey">
   <h3>The Journey — {gameState.year}</h3>
   <div class="chart">
-    <img class="base" src="/assets/generated/map/founding-map.png" alt="" aria-hidden="true" decoding="async" />
+    <img
+      class="base"
+      src={baseSrc}
+      alt=""
+      aria-hidden="true"
+      decoding="async"
+      data-testid="map-base"
+      onerror={(e) => {
+        // The era base isn't generated — fall back to the founding base once, then hide (the CSS base shows).
+        const img = e.currentTarget as HTMLImageElement;
+        if (!img.src.endsWith("founding-map.png")) {
+          img.src = FOUNDING_BASE;
+        } else {
+          img.style.display = "none";
+        }
+      }}
+    />
     <!-- Data-overlay: the lit route to here, the current waypoint, the dimmed future. -->
     <svg class="route" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
       <!-- the full path (dim), then the traversed portion (lit) -->

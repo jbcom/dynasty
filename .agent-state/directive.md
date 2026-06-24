@@ -109,10 +109,10 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   when the mp4 is absent (browser test); generates offline when a key is present, like the portrait/dossier/news/music
   pipelines. Reviewer trio folded forward (1f0d38d): code-reviewer clean+2 low-sev folded (CLI flag validation,
   Veo op-error/timeout surfaced); simplifier clean.
-- [ ] [WAIT] **GA-VIDEO PR #205 — merge on green (CI re-running after security fix).** First CI pass GREEN
-  (build-and-test, Analyze, CodeRabbit all pass). amazon-q flagged a real CWE-598 (Veo uri fetch leaked the key via
-  `?key=` query param) → fixed (ff68ed8: x-goog-api-key header) + thread resolved. Monitor b91t3da65 armed on the
-  re-run; merge on CLEAN/UNSTABLE. Then verify main has src/sim/cinematic/ + the CinematicView wiring.
+- [x] **GA-VIDEO PR #205 — MERGED (squash 5e29211); v0.63.0 cut.** First CI pass GREEN; amazon-q CWE-598 (Veo uri
+  fetch leaked the key via `?key=`) → fixed (ff68ed8: x-goog-api-key header) + thread resolved; re-run GREEN;
+  squash-merged CLEAN. VERIFIED main has src/sim/cinematic/ + CinematicView wired into PlayScreen+LegacyReport +
+  the x-goog-api-key fix. Three GenAI-expansion milestones now shipped (GA-NEWS #202, GA-MUSIC #203, GA-VIDEO #205).
 - [x] **GA-MUSIC — GenAI era-shifting score (Lyria) — BUILT (branch feat/ga-music).** GM-1 pure
   src/sim/music/genaiMusic.ts (buildMusicPrompt + the 10 ambient-track slots, era moods, loopable/instrumental;
   5 tests). GM-2 `geminiCaptureMusic` (Lyria realtime-stream → PCM capture) + scripts/genai-music.ts (PCM→WAV);
@@ -138,17 +138,26 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
 - [x] **GA-NEWS PR — MERGED #202 (squash 20c61dd).** Reviewer trio folded (moodForRanks cross-ladder bug,
   toHeadlines trailing-md, PL-11 testid). VERIFIED on main (src/sim/news/ + 24 dispatch keys). The first
   GenAI-expansion milestone is shipped.
-- [ ] [WAIT] **GA-MAP-ART — GenAI cartographic base per era — NEXT milestone (own fresh branch, GATED on #205 merge).**
-  MapView is CSS; a generated period map base (the journey as a real period map) was speced, only partially built.
-  Reuse the dossier/portrait image pipeline: pure prompt builder + key (per era band), offline gen script, a MapView
-  base-layer loader with hide-on-error fallback to the current CSS, a browser test. Milestone branch, ONE PR.
-  Fresh branch cuts from main AFTER #205 squash-merges ([[one-branch-local-review]]).
-- [ ] [WAIT] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers** — beyond atmosphere: generate the dossier's diagrams
-  (an R&D tech-tree sketch, a redacted intel surveillance chart) keyed to real state, as a FigurePanel variant.
+- [x] **GA-MAP-ART — GenAI cartographic base per era — BUILT (branch feat/ga-map-art, commit 1081a0d).** The MapView
+  base was a fixed 1700s chart for the whole founding→stars journey. GM-1 pure src/sim/genai/mapArt.ts (buildMapPrompt
+  + mapKey + allMapJobs, one period register per era band, engraving-chronicle MAP_STYLE base-only; 3 tests). GM-2
+  scripts/genai-map-art.ts (offline Imagen per band, --era/--force). GM-3 MapView loads map_<eraBand>.png for the
+  current era with a graceful onerror chain (era base → founding base → hide → CSS); seeded map_founding_1700s.png from
+  the existing founding base so the founding era loads directly; 2 browser tests (era tracks base; fallback). assets.json
+  license entry. Gate: check 0, typecheck 0/0, unit 1014, browser 172. Live-gen of the other 7 bands BLOCKED here (no
+  key) — degrades to the founding base until generated. NEXT: reviewer trio (running) folded → ONE PR.
+- [ ] [WAIT] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers — NEXT milestone (own fresh branch, GATED on #207 merge).**
+  Beyond atmosphere: generate the dossier's diagrams (an R&D tech-tree sketch, a redacted intel surveillance chart)
+  keyed to real state, as a FigurePanel variant. Pure prompt builder + key (per dossier kind × era), offline gen
+  script, a FigurePanel diagram variant with hide-on-error fallback, a browser test. Milestone branch, ONE PR.
+  Fresh branch cuts from main AFTER #207 squash-merges ([[one-branch-local-review]]).
 - [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt** — exists, no live consumer (EI-9f); needs a
   single-figure FOCUS surface (a rival-head dossier / a braid-crossing close-up) to drive it.
   DECISION (log, [[never-ask-direction]]): sequence after the VD milestone — GA-NEWS + GA-MUSIC first (highest
   feel-per-effort), then GA-VIDEO finale, then the rest. Each its own milestone branch.
+- [ ] [WAIT] **GA-MAP-ART PR #207 — merge on green.** Reviewer trio folded (1081a0d+fa09f3e): code-reviewer clean;
+  simplifier dropped a redundant Job interface. Monitor bt7poya25 armed on CI; merge on CLEAN/UNSTABLE + 0 unresolved
+  threads. Then verify main has src/sim/genai/mapArt.ts + the MapView era-base wiring + map_founding_1700s.png.
 
 ## ★TOP PRIORITY — EMERGENT-INFANCY ONBOARDING (user, 2026-06-23, HIGHEST-ORDER — outranks everything)★
 
