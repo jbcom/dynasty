@@ -72,10 +72,10 @@ export function geminiGenerateVideo(
     const video = op.response?.generatedVideos?.[0]?.video;
     if (!video) return null;
     if (video.videoBytes) return Buffer.from(video.videoBytes, "base64");
-    // A uri result must be fetched (the SDK appends the key); a plain fetch suffices for the bytes.
+    // A uri result must be fetched with the key. Pass it in the x-goog-api-key HEADER, never as a `?key=` query
+    // param — a query string leaks the secret into network/server logs and history (CWE-598; review: amazon-q).
     if (video.uri) {
-      const sep = video.uri.includes("?") ? "&" : "?";
-      const res = await fetch(`${video.uri}${sep}key=${apiKey}`);
+      const res = await fetch(video.uri, { headers: { "x-goog-api-key": apiKey } });
       if (!res.ok) return null;
       return new Uint8Array(await res.arrayBuffer());
     }
