@@ -14,6 +14,7 @@
  */
 
 import fabricIndex from "../../data/saga/fabric/index.json" with { type: "json" };
+import keeperReport from "../../data/saga/fabric/keepers.json" with { type: "json" };
 
 interface FabricEntry {
   sceneId: string;
@@ -24,6 +25,11 @@ interface FabricEntry {
 }
 type FabricByEra = Record<string, FabricEntry[]>;
 const FABRIC = (fabricIndex as { fabric: Record<string, FabricByEra> }).fabric;
+const KEEPER_SCORES = new Map(
+  (keeperReport as { keepers: Array<{ sceneId: string; keeperScore: number }> }).keepers.map(
+    (keeper) => [keeper.sceneId, keeper.keeperScore],
+  ),
+);
 
 /**
  * The best mined vignette for a rival WAVE crossing at (or nearest) a reach TIER — the highest-scored
@@ -35,11 +41,20 @@ export function fabricVignette(wave: string, tier: number): string | null {
   const byEra = FABRIC[wave];
   if (!byEra) return null;
   let best: FabricEntry | null = null;
-  let bestKey: [number, number, string] | null = null; // [tier-distance (asc), -score (asc), sceneId]
+  let bestKey: [number, number, number, number, string] | null = null;
   for (const entries of Object.values(byEra)) {
     for (const e of entries) {
       if (!e.vignettes?.length) continue;
-      const key: [number, number, string] = [Math.abs(e.tier - tier), -e.score, e.sceneId];
+      const keeperScore = KEEPER_SCORES.get(e.sceneId) ?? 0;
+      // KEY-PILLARS-1g: prefer high-signal keeper-report entries when they are relevant to the same
+      // wave/tier, then preserve the old source-score fallback for all unranked fabric.
+      const key: [number, number, number, number, string] = [
+        Math.abs(e.tier - tier),
+        keeperScore > 0 ? 0 : 1,
+        -keeperScore,
+        -e.score,
+        e.sceneId,
+      ];
       if (bestKey === null || lessThan(key, bestKey)) {
         best = e;
         bestKey = key;
@@ -49,9 +64,14 @@ export function fabricVignette(wave: string, tier: number): string | null {
   return best ? (best.vignettes[0] ?? null) : null;
 }
 
-/** Lexicographic compare of the [tierDistance, -score, sceneId] sort key. */
-function lessThan(a: [number, number, string], b: [number, number, string]): boolean {
+/** Lexicographic compare of the [tierDistance, unranked, -keeperScore, -sourceScore, sceneId] sort key. */
+function lessThan(
+  a: [number, number, number, number, string],
+  b: [number, number, number, number, string],
+): boolean {
   if (a[0] !== b[0]) return a[0] < b[0];
   if (a[1] !== b[1]) return a[1] < b[1];
-  return a[2] < b[2];
+  if (a[2] !== b[2]) return a[2] < b[2];
+  if (a[3] !== b[3]) return a[3] < b[3];
+  return a[4] < b[4];
 }

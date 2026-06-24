@@ -56,7 +56,8 @@ Use `pnpm fabric:keepers` to regenerate `src/data/saga/fabric/keepers.json`. Thi
 read-only: it ranks retained fabric by source score, prose scan/clarity/consistency,
 low similarity, duplicate-opening risk, and weave readiness. Treat the top entries as
 positive rewrite candidates for non-first-person encounters or branch beats in the
-one-dynasty spine.
+one-dynasty spine. Runtime crossing selection should prefer keeper-ranked entries when
+they match the same family wave and tier, then fall back to the older source score.
 
 The preferred pruning workflow is reductive and transactional:
 
