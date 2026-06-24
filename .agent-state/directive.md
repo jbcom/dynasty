@@ -30,6 +30,93 @@ by construction.
 
 ## ROLLING BACKLOG — always non-empty, work top-down, append before draining
 
+## ★★TOP PRIORITY — SHOW-DON'T-TELL VISUAL DOSSIERS (user, 2026-06-23, NEW HIGHEST-ORDER)★★
+
+**Mandate (verbatim):** "right now we have a LOT of tell and very little show. exploring ideas like
+intelligence dossiers / research dossiers / marketing r&d based on the context of the dynasty path, as
+distinct visual pieces with text but also charts graphs maps and other visual anchors and set pieces would
+be AMAZING layered onto the existing directives." + "create full scene transition pieces" + content = HYBRID
+(real data viz + GenAI path-voice prose + GenAI atmospheric art) + PROCESS = MILESTONE PRs not slices
+([[one-branch-local-review]], [[show-dont-tell-visual-dossiers]]).
+
+SPEC: docs/superpowers/specs/2026-06-23-visual-dossiers-design.md. BUILD AS ONE MILESTONE on this long-running
+local branch `feat/visual-dossiers`; full local gate + reviewer trio per commit folded forward; ONE remote PR
+when the WHOLE milestone is solid — NOT a PR per VD-step.
+
+- [x] **VD-1 BRAINSTORM → SPEC — DONE.** Wrote the visual-dossier design spec (hybrid content, all placements,
+  the Dossier typed-panel model, path→kind mapping, the interstitial scene-transition headline, the GenAI
+  brief+figure pipelines reusing the portrait/scarcity infra). User gave the design inputs; building per the spec.
+- [x] **VD-2 Dossier content model + read-model selectors — DONE (branch feat/visual-dossiers).** Pure
+  `src/sim/dossier/dossier.ts`: `DossierKind` (7, path-keyed), `Dossier`/`DossierPanel`
+  (chart/graph/map/figure/brief), `dossierKindForArchetype` (total over the 7 paths incl. crime), `buildDossier`
+  mapping live state → a real meter-trajectory CHART + the rival-field GRAPH + the era-reach MAP + the figure/brief
+  KEYS (`dossierFigureKey`/`dossierBriefKey`, deterministic). Pure (no DOM/Date/random). 7 unit tests. check 0,
+  typecheck 0/0.
+- [x] **VD-3 panel components + DossierView — DONE (branch feat/visual-dossiers).** `src/ui/dossier/`: ChartPanel
+  (uPlot, reuses StatsView's chart), GraphPanel (SVG rival network, player-centered, adapts ButterflyGraph),
+  MapPanel (era-reach strip), FigurePanel (Imagen image + EI-9d onerror fallback), BriefPanel (path-voice prose +
+  pending state) + DossierView briefing-spread (masthead + magazine grid, Suzerain scannability). 4 browser tests;
+  LIVE-VERIFIED via screenshot READ: the crime "Intelligence Dossier · MID-CENTURY" renders a real Reputation/Heat
+  chart + the You-centered rival graph + the 1776→Mid-C reach strip. check 0, typecheck 0/0, browser 166.
+- [x] **VD-4 DossierInterstitial placement — DONE (branch feat/visual-dossiers).** At a GENERATION boundary
+  (view.saga.ended), PlayScreen now fires the path-keyed DossierView set piece (a "state of the dynasty" briefing —
+  real meter trajectory + rival field + reach, built purely from the live view via buildDossier + buildMeterSeries)
+  in place of the one-line "generation closes" interlude. check 0, typecheck 0/0, PlayScreen visual tests 26. (e2e
+  walk of the boundary + a richer continue affordance fold into VD-6/VD-7.)
+- [x] **VD-5 GenAI brief + figure PROMPTS — DONE (branch feat/visual-dossiers).** `src/sim/dossier/dossierGenai.ts`:
+  `buildDossierBriefPrompt` (path VOICE per kind — consigliere intel / visionary R&D / magnate portfolio / star
+  marketing / statesman war-room / prophet doctrine / champion scouting — × era register + the run's state digest,
+  with the far-future SCARCITY stake folded in), `dossierBriefSystem` (leak-safe: no real names, {family_name}, a
+  briefing not prose), and `buildDossierFigurePrompt` (a NO-PEOPLE establishing PLATE per kind in the signature
+  engraving style — cohesive with portraits/map). Pure + deterministic. 5 unit tests. check 0, typecheck 0/0.
+  (The runner WIRING — resolving the keys through the text/Imagen on-demand cache — lands in VD-6 end-to-end.)
+- [x] **VD-6 ONE full path end-to-end — DONE (branch feat/visual-dossiers).** The economic founding "Holdings &
+  Market Dossier" composes the HYBRID: the real generated counting-house figure plate (scripts/genai-dossiers.ts) +
+  the path-voice brief + the real Reputation/Money trajectory chart + the rival graph + the reach strip — LIVE-
+  VERIFIED via screenshot READ (a complete, designed briefing set piece). The figure pipeline + FigurePanel +
+  DossierView all integrate. The BRIEF is now wired too: keyed kind×era (run-independent, generated OFFLINE into
+  src/data/dossierBriefs.json by genai-dossiers.ts, loaded at runtime via loadDossierBrief — no API at sim runtime,
+  like the scene corpus), with a defensive JSON-unwrap on the model reply. LIVE-VERIFIED: the founding dossier now
+  shows the REAL magnate assessment ("The {family_name} interest remains concentrated in the mid-Atlantic shipping
+  lanes…second tier of the republic's financial hierarchy…"). 5 browser tests.
+- [x] **VD-7 tab upgrade + all founding-era paths — DONE (branch feat/visual-dossiers).** (a) The Dossier TAB now
+  renders the rich path-keyed DossierView (the same set piece the generation boundary fires) instead of the old
+  meter-bar list — a full SHOW surface on demand. (b) Generated the founding-era figures + path-voice briefs for ALL
+  7 dossier kinds (portfolio/intelligence/rnd/marketing/warroom/doctrine/scouting) — READ-verified the crime intel
+  plate (a red-marked surveillance waterfront) is path-distinct from the economic counting-house. Fixed the asset
+  schema to allow `dossier-figure`. Gate: check 0, unit 995, browser 167. The decision-aid placement + the other
+  ERA bands' dossier assets are a follow-up (the on-demand cache + EI-9d fallback cover ungenerated keys).
+- [x] **VD-8 MILESTONE PR — OPENED #200.** The visual-dossier milestone (VD-1…VD-7, 14 commits) is comprehensively
+  locally reviewed (full gate green: check 0, typecheck 0/0, unit 995, browser 167, e2e 7) + the reviewer trio
+  (code-reviewer + simplifier) findings folded forward (ChartPanel double-destroy, typed predicate, dead-seed
+  removal, era-band DRY via ERA_BAND_ORDER, fence-regex). One PR for the whole milestone per [[one-branch-local-review]].
+- [ ] [WAIT] **#200 (visual dossiers) — merge on green.** Monitor armed; merge once CI green + 0 threads, then VERIFY
+  main has src/sim/dossier/ + src/ui/dossier/ ([[gh-squash-stale-head-gotcha]]), sync main + fresh branch for the
+  next milestone (GA-NEWS or GA-MUSIC — the GenAI-surface expansion, highest feel-per-effort).
+
+## ★FULL GENAI-SURFACE EXPANSION (user 2026-06-23: "are we SURE you have FULLY explored all the areas for genai?")★
+AUDIT (honest, this session): currently GenAI is used for TEXT (gemini-3.5-flash: scene/act prose, the QA
+editor, spine gen, retitle, + the VD dossier briefs) and IMAGE (imagen-4.0-fast: the portrait matrix + the VD
+dossier figures). NOT yet used, though the visual-layer spec called for "imagery + VIDEO":
+- [ ] **GA-VIDEO — GenAI video (Veo) era/generation cinematics** — the spec said video; zero today. Candidates: a
+  generation-handoff "passing of the line" motion piece, an era-transition stinger, the ascension/stellar finale
+  cinematic, an animated journey map. On-demand+cache like portraits (key × era × archetype); EI-9d fallback.
+- [ ] **GA-MUSIC — GenAI score (Lyria) that shifts with the era** — audio is fully authored (Tone/Howl), zero
+  GenAI. An era-appropriate generative score founding→Gilded→midcentury→stellar + per-`sense` ambient beds would
+  hugely lift the "feel". Gated, cached, offline.
+- [ ] **GA-TTS — period-voice narration of key beats (optional)** — TTS read of the naming beat / a generation's
+  pivotal decision in an era-true voice. Lower priority; accessibility + immersion.
+- [ ] **GA-NEWS — GenAI period headlines** — the NewsTicker/rival-news is templated; GenAI real period-voiced
+  headlines reacting to the run's ACTUAL events (cheap, high-show). Cached per (year, event-digest).
+- [ ] **GA-MAP-ART — GenAI cartographic base per era** — MapView is CSS; a generated period map base (the journey
+  as a real period map) was speced, only partially built. Reuse the dossier/portrait image pipeline.
+- [ ] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers** — beyond atmosphere: generate the dossier's diagrams
+  (an R&D tech-tree sketch, a redacted intel surveillance chart) keyed to real state, as a FigurePanel variant.
+- [ ] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt** — exists, no live consumer (EI-9f); needs a
+  single-figure FOCUS surface (a rival-head dossier / a braid-crossing close-up) to drive it.
+  DECISION (log, [[never-ask-direction]]): sequence after the VD milestone — GA-NEWS + GA-MUSIC first (highest
+  feel-per-effort), then GA-VIDEO finale, then the rest. Each its own milestone branch.
+
 ## ★TOP PRIORITY — EMERGENT-INFANCY ONBOARDING (user, 2026-06-23, HIGHEST-ORDER — outranks everything)★
 
 **Mandate (verbatim intent, two messages):** "i counted TEN choices before you even start. ALL could
