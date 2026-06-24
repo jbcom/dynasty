@@ -220,19 +220,26 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   + a RATCHET test (records the baseline, prevents regress, asserts a floor NOT goodness). docs/STATE.md records it. Gate:
   check 0, typecheck 0/0, unit 1031. Reviewer folded (bef8723): the ratchet was VACUOUS (tautologies) → now asserts
   the real >= floor (distinctRatio >= 0.0119, largestCluster <= 84), so a regression FAILS. The diversifying REWRITE is below.
-- [ ] [WAIT] **CONTENT-UNIQUENESS-AUDIT PR #220 — merge on green.** Reviewer folded (bef8723). Monitor bv2rg6yyk armed
-  on CI; merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has src/sim/saga/uniquenessMetric.ts + the ratchet.
-- [ ] [WAIT] **SHAPE-DIVERSIFY-1 — vary the per-act scene SHAPE so the skeleton stops repeating (THE fix, next milestone, own branch GATED on the CONTENT-UNIQUENESS-AUDIT PR merge).**
-  The audit proved one skeleton × 84 (ratio 0.012). FIX the generator/spine so the scene SHAPE varies per act-type:
-  the SENSE ORDER (not always smell→touch→sound→sight→taste), the beat/decision LAYOUT (not always 2|2D|2|2D|2D|2),
-  and scene COUNT — keyed off the spine act's DecisionArchitecture + the macroAct, so a founding bargain reads
-  structurally unlike a broadcast-age reckoning. Raise the uniquenessMetric ratchet floor as shapes diverge (the
-  metric is the acceptance test — drive distinctRatio up materially). Start with the SHAPE scaffold (spine.ts /
-  the scene-slot seeding), regenerate, re-measure. Milestone branch, ONE PR. (This is net-new structural fiction —
-  the [[craft-spines-not-generator]] rewrite, scoped to SHAPE first; prose-voice diversity is a later pass.)
-- [ ] [WAIT] **GENAI-GENERATE — produce the live cached assets (BLOCKED: needs GEMINI_API_KEY in the env).** Run the
-  seven offline scripts (genai-news/music/cinematics/map-art/dossiers/narration/encounter-portraits) to fill the
-  caches, READ-verify a sample of each, commit the assets. True blocker here (no key); un-WAIT when a key is available.
+- [x] **CONTENT-UNIQUENESS-AUDIT PR #220 — MERGED (squash 3062ca9).** Reviewer folded; CI green; merged CLEAN +
+  verified on main (src/sim/saga/uniquenessMetric.ts + the ratchet).
+- [x] **SHAPE-DIVERSIFY-1 — spine scene-shape diversified — BUILT (branch feat/shape-diversify, commit f1820e1).** ROOT
+  CAUSE: the on-disk corpus predated the arc-shape scaffold + the per-act fingerprint was capped at |ARC_SHAPES|
+  (shape-only). FIX (src/sim/spine.ts): 8 ARC_SHAPES (+siege/exodus) × per-shape ARC_FRAME senses × a per-cell SENSE
+  ROTATION (senseShiftFor, archetype×wave×tier) → the SPINE'S cell-fingerprint ratio is now ~0.92 (90/98; was 0.012);
+  per-act distinct shapes 8→40. spine.unit.test.ts guards ratio >0.7 / largest <10%. The skeleton is broken AT THE
+  SOURCE. ⚠️ on-disk JSON realization awaits the key-gated GenAI regen. Gate: check 0, typecheck 0/0, unit 1032, e2e 8.
+  NEXT: reviewer trio (running) → ONE PR.
+- [ ] [WAIT] **SHAPE-DIVERSIFY-1 PR — merge on green (after open).** Gated on the open PR's CI + threads.
+- [ ] **SHAPE-PROMPT-WIRING — verify the new shapes flow into the generation prompt (next actionable, own branch post-merge).**
+  SHAPE-DIVERSIFY-1 added siege/exodus + per-shape frame senses + the sense rotation to the spine. Confirm the
+  GENERATION path (src/sim/genai/expand.ts / genai-expand) reads the act's `shape` + the slot `intent`/`sense` so a
+  future regen actually USES the diversified scaffold (not a stale hardcoded prompt). A pure check: the per-shape/
+  per-slot prompt varies by shape (incl. the 2 new ones) + carries the slot sense; add a test. If a gap exists (the
+  prompt ignores shape), wire it. No GenAI call (key-free) — just the prompt-builder path. Milestone branch, ONE PR.
+- [ ] [WAIT] **GENAI-GENERATE — regen the corpus (realizes SHAPE-DIVERSIFY-1 on disk) + the 7 asset surfaces (BLOCKED: needs GEMINI_API_KEY).**
+  With a key: `genai:expand --type scene --all` regenerates the corpus from the diversified spine (uniquenessMetric
+  ratchet then climbs 0.012 → ~0.92), then the seven offline asset scripts. READ-verify a sample of each, commit.
+  True blocker here (no key); un-WAIT when a key is available.
 - [x] **GA-MAP-ART PR #207 — MERGED (squash ece0be9); v0.64.0 cut.** Reviewer trio folded; CI green; squash-merged
   CLEAN. VERIFIED main has src/sim/genai/mapArt.ts + the MapView era-base wiring + map_founding_1700s.png. Five
   GenAI-expansion milestones now shipped (GA-NEWS #202, GA-MUSIC #203, GA-VIDEO #205, GA-MAP-ART #207).
