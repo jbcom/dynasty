@@ -259,9 +259,10 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   `assets.json` to 554 generated entries with zero missing files, and visually read-checked stellar map,
   intelligence figure/diagram, rival portrait, and a cinematic frame. Local gates: focused spine/load/depth/genai
   unit 53, asset/schema unit 23, combined focused unit 76, `tsc`, `prose:audit`.
-- [ ] [WAIT] **GENAI-GENERATE PR — open active PR, resolve review threads, merge on green.** Publish the generated
-  spine/assets branch as a ready PR (not draft), run remote checks, address actionable feedback, resolve threads,
-  then squash-merge and verify main.
+- [x] **GENAI-GENERATE PR #227 — MERGED (squash da6b174).** Published as a ready PR (not draft), remote
+  checks passed (CI build-and-test, CodeQL, CodeRabbit; dependabot/release-please skipped), Gemini quota warning
+  was non-blocking per user directive, Amazon Q's manifest-parse thread was fixed in `a7349d1` and resolved,
+  then the PR was squash-merged and local `main` fast-forwarded.
 - [x] **GA-MAP-ART PR #207 — MERGED (squash ece0be9); v0.64.0 cut.** Reviewer trio folded; CI green; squash-merged
   CLEAN. VERIFIED main has src/sim/genai/mapArt.ts + the MapView era-base wiring + map_founding_1700s.png. Five
   GenAI-expansion milestones now shipped (GA-NEWS #202, GA-MUSIC #203, GA-VIDEO #205, GA-MAP-ART #207).
