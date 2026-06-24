@@ -105,20 +105,23 @@ const TREND_ARROW: Record<"rising" | "steady" | "falling", string> = {
     <ul class="rows">
       {#each field as r (r.id)}
         <li class="row" class:you={r.isPlayer} data-state={r.state}>
-          {#if !r.isPlayer && rivalHeadSrc(r.id)}
-            <!-- GA-ENCOUNTER-PORTRAITS: the rival line's era-true head; hides on error (ungenerated → no head,
-                 the row still reads). aria-hidden — the name beside it is the accessible label. -->
-            <img
-              class="head"
-              src={rivalHeadSrc(r.id)}
-              alt=""
-              aria-hidden="true"
-              decoding="async"
-              data-testid="rival-head"
-              onerror={(e) => {
-                (e.currentTarget as HTMLImageElement).style.display = "none";
-              }}
-            />
+          {#if !r.isPlayer}
+            {@const headSrc = rivalHeadSrc(r.id)}
+            {#if headSrc}
+              <!-- GA-ENCOUNTER-PORTRAITS: the rival line's era-true head; hides on error (ungenerated → no head,
+                   the row still reads). aria-hidden — the name beside it is the accessible label. -->
+              <img
+                class="head"
+                src={headSrc}
+                alt=""
+                aria-hidden="true"
+                decoding="async"
+                data-testid="rival-head"
+                onerror={(e) => {
+                  (e.currentTarget as HTMLImageElement).style.display = "none";
+                }}
+              />
+            {/if}
           {/if}
           <span class="who">{r.name}</span>
           <span class="rung-line">
