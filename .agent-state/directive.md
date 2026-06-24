@@ -98,9 +98,11 @@ when the WHOLE milestone is solid — NOT a PR per VD-step.
 AUDIT (honest, this session): currently GenAI is used for TEXT (gemini-3.5-flash: scene/act prose, the QA
 editor, spine gen, retitle, + the VD dossier briefs) and IMAGE (imagen-4.0-fast: the portrait matrix + the VD
 dossier figures). NOT yet used, though the visual-layer spec called for "imagery + VIDEO":
-- [ ] [WAIT] **GA-VIDEO — GenAI video (Veo) era/generation cinematics (own branch post-GA-MUSIC-merge).** A
-  generation-handoff "passing of the line" piece / era-transition stinger / the stellar finale. On-demand+cache
-  like portraits (key × era × archetype); EI-9d fallback.
+- [ ] **GA-VIDEO — GenAI video (Veo) cinematics — IN PROGRESS (branch feat/ga-video).** Veo via
+  `ai.models.generateVideos` (long-running operation → poll → mp4). A cinematic set piece at the generation
+  boundary / the finale. Sub-steps: GV-1 pure prompt builder + key (src/sim/cinematic/), GV-2 a Veo capture
+  client (poll the operation → mp4) + offline script, GV-3 generate a cinematic, GV-4 a CinematicView `<video>`
+  surface wired into the boundary with a graceful (hide-on-error) fallback. Milestone branch, ONE PR.
 - [x] **GA-MUSIC — GenAI era-shifting score (Lyria) — BUILT (branch feat/ga-music).** GM-1 pure
   src/sim/music/genaiMusic.ts (buildMusicPrompt + the 10 ambient-track slots, era moods, loopable/instrumental;
   5 tests). GM-2 `geminiCaptureMusic` (Lyria realtime-stream → PCM capture) + scripts/genai-music.ts (PCM→WAV);
@@ -112,9 +114,8 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   (beds were dead on the saga path — fixed via trackForEra + a new eras test) + the MEDIUM capture stop() guard.
   Gate: check 0, typecheck 0/0, unit 1006, audio browser 8, e2e 7. PR #203 OPENED. Remaining GA-*
   below + EI-9g each their own fresh-branch milestone, gated on the #203 merge.
-- [ ] [WAIT] **#203 (GA-MUSIC) — merge on green.** Monitor armed; merge once CI green + 0 threads, then VERIFY main
-  has src/sim/music/ + public/assets/audio/*.wav ([[gh-squash-stale-head-gotcha]]), sync main + fresh branch for
-  GA-VIDEO (the next GenAI milestone — Veo era/generation cinematics).
+- [x] **#203 (GA-MUSIC) — MERGED (squash cdc4a67).** VERIFIED main has src/sim/music/ + 10 .wav tracks +
+  trackForEra. Two GenAI-expansion milestones now shipped (GA-NEWS #202, GA-MUSIC #203). On feat/ga-video next.
 - [ ] [WAIT] **GA-TTS — period-voice narration of key beats (optional)** — TTS read of the naming beat / a generation's
   pivotal decision in an era-true voice. Lower priority; accessibility + immersion.
 - [x] **GA-NEWS — GenAI period DISPATCHES — BUILT (branch feat/ga-news).** GN-1 pure `src/sim/news/genaiNews.ts`
