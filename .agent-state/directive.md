@@ -170,11 +170,11 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   inversion. READ-verified one low (humble medium) + one high (commissioned/physical medium) per band: founding
   charcoal-sketch→oil; federal silhouette→oil; Gilded-Age tintype→framed-oil; early-1900s snapshot→studio-photo;
   midcentury snapshot→color-studio; digital headshot; near_future hologram→PHYSICAL-OIL; stellar hologram→PHYSICAL-OIL.
-- [ ] **EI-9b digital_modern low/mid = screen-native captures (tuning)** — like EI-10's stellar fix: digital_modern
-  low (phone snapshot) + mid still get the aged chronicle-PLATE framing, so a casual phone photo reads as a mounted
-  painting. Extend `isDigitalCapture` (or a "casual screen capture" wrapper) to digital_modern low/mid so they read
-  on-screen/casual, not plate-mounted; regen + READ to confirm. (digital_modern HIGH = corporate headshot stays a
-  framed/formal capture.)
+- [x] **EI-9b digital_modern screen-native captures — DONE (commits 499e079, 9a94e10).** Added SCREEN_WRAPPER +
+  `isScreenCapture`: digital_modern low/mid now route to a clean modern-photo wrapper (not the aged plate), HIGH
+  stays chronicle. KNOWN LIMIT: Imagen renders "modern photo + accent border" as a phone/device frame and ignores
+  the negative prompt — settled rather than prompt-fought (debug-stop-rule); the casual-vs-formal-vs-aged distinction
+  reads regardless. A later post-crop pass could remove the device frame. 21 unit tests.
 - [ ] **EI-9c LIFE-STAGE + ENCOUNTER portrait sweep** — the matrix beyond ADULT: infant/child/youth/elder per era
   band (the cycles recur every generation; progeny-in-space need stellar children too — user 2026-06-23) + the
   encounter-role portraits (first friend/betrayer/partner/rival/mentor) via `buildEncounterPortraitPrompt`. Generate
