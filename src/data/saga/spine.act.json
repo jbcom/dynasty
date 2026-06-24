@@ -85,6 +85,7 @@
     "spine:g3:gildedage:open_press",
     "spine:g3:gildedage:open",
     "spine:g3:gildedage:tex_open",
+    "spine:g3:gildedage:keeper_ireland_coal",
     "spine:g3:gildedage:venture",
     "spine:g3:gildedage:csq_venture",
     "spine:g3:gildedage:rev_csq_venture",
@@ -2356,7 +2357,7 @@
     "notFlags": []
    },
    "gather": true,
-   "next": "spine:g3:gildedage:venture",
+   "next": "spine:g3:gildedage:keeper_ireland_coal",
    "prose": [
     "The brass rail of the gallery above the exchange was worn smooth and faintly warm under {given_name} {surname}'s hand, polished by a generation of gloves that had gripped it while fortunes were made and unmade on the floor below. This was the age of consolidation, when a man with nerve and credit could swallow a dozen smaller men in a morning, and the {family_name} name had grown large enough to be either a predator or prey — there was no longer a comfortable middle.",
     "Wealth at this scale had stopped being about goods and become about control: of rails, of ore, of the courts and legislatures that decided whose contracts held. {given_name} could feel the era's logic pressing in — grow or be absorbed — and knew that the choices the family made now, about how much to take and how openly, would set whether the line was remembered as builders or robbers, and whether that distinction would even survive into the century to come."
@@ -2395,6 +2396,55 @@
      }
     }
    ]
+  },
+  {
+   "id": "spine:g3:gildedage:keeper_ireland_coal",
+   "sense": "smell",
+   "prose": [
+    "Coal smoke hangs low outside the exchange. A hollow-cheeked child darts under a dray cart to snatch a dropped bit of coal before the wheels grind forward.",
+    "The boardroom calls children like him a cost of fuel and freight. On the curb, {given_name} sees a future witness: the {surname} ledgers climbing while another household learns the city from cinders."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "The child pockets the coal and meets {given_name}'s eye for one sharp second."
+     ],
+     "choice": {
+      "text": "Keep the image in the ledger margin before the next bargain is signed.",
+      "motivatorShift": {
+       "honor": 1,
+       "worldview": 1
+      },
+      "setFlags": [
+       "g3_keeper_ireland_coal_witnessed"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "A driver curses the delay while the exchange doors shine behind him."
+     ],
+     "choice": {
+      "text": "Ask which contractor leaves children hunting fuel under the company carts.",
+      "motivatorShift": {
+       "power": 1,
+       "honor": 1
+      },
+      "setFlags": [
+       "g3_keeper_ireland_coal_questioned"
+      ],
+      "gather": true
+     }
+    }
+   ],
+   "thread": [],
+   "braidSlots": [],
+   "requires": {
+    "flags": [],
+    "notFlags": []
+   },
+   "next": "spine:g3:gildedage:venture"
   },
   {
    "id": "spine:g3:gildedage:venture",

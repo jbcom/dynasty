@@ -248,12 +248,24 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   through seven ready PRs: prune-auto, inline event choices, portrait/gender alignment, prose ratchet, visual
   reading rhythm, keeper report, and keeper-ranked live crossings. Remote proof is recorded on each child item
   below, with quota notices treated as non-blocking and zero unresolved review threads at merge.
-- [ ] **KEY-PILLARS-2 — keeper-to-spine authored encounter rewrite pass.**
+- [x] **KEY-PILLARS-2 — BUILT locally (branch codex/keeper-to-spine-encounter).**
   Use `src/data/saga/fabric/keepers.json` as the positive queue, not just a runtime crossing selector: pick the
   highest-signal keeper that can deepen the one-dynasty America-to-stars spine, rewrite it as non-first-person
   encounter/fabric inside the main storyline, preserve diegetic inline choices where relevant, and ratchet
   prose/similarity proof so legacy class material keeps becoming authored spine texture instead of parallel
-  class lattice.
+  class lattice. DONE: promoted top keeper `act:ireland:economic:poor:t0:turn` into
+  `spine:g3:gildedage:keeper_ireland_coal`, a decisionless third-person Gilded Age encounter between the
+  exchange texture and industrial venture. It preserves the keeper image (hollow-cheeked child, dray cart,
+  dropped coal), adds two inline beat choices, records `fabric-promote-keeper` provenance in
+  `src/data/saga/fabric/transactions.ndjson`, and ratchets `src/data/saga/prose-quality-baseline.json` forward
+  to 623 total / 286 failed / passRate 0.541. Local proof: touched-file Biome 0 (1 TS fix); targeted
+  spineActDepth unit 16; typecheck 0; build 0; unit 1057; browser 181; e2e 8; prose:audit 0; prose:ratchet
+  0; check 0 with 39 pre-existing non-null assertion warnings outside this slice; git diff --check 0.
+- [ ] **KEY-PILLARS-3 — second keeper-promotion breadth pass.**
+  Promote the next keeper-ranked legacy fragment into a different era band of the one-dynasty spine, so the
+  pattern proves beyond a single Gilded Age insertion. Prefer a candidate that adds visual/sensory relief and
+  does not duplicate the new coal-child encounter; keep the transaction ledger, prose ratchet, and runner-path
+  proof as the repeatable gate.
 - [x] **KEY-PILLARS-1a PRUNE-AUTO PR #229 — MERGED (squash 6ae3e5e).** Refactored the
   reductive legacy-fabric pruning policy out of `scripts/mine-fabric.ts` into pure/tested
   `src/sim/saga/pruneFabric.ts`; `--prune-one`, `--prune-n`, `--prune-auto`, and `--prune-all` now share

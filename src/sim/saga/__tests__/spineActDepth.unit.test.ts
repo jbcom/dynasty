@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { loadSaga } from "../../../data/loadSaga";
+import keeperReport from "../../../data/saga/fabric/keepers.json" with { type: "json" };
 import { initMotivators } from "../../motivators";
+import { auditProseQuality } from "../../proseQuality";
 import { actEnded, chooseBeat, chooseDecision, currentScene, startAct } from "../runner";
 
 /**
@@ -14,6 +16,18 @@ import { actEnded, chooseBeat, chooseDecision, currentScene, startAct } from "..
  */
 
 const corpus = loadSaga();
+const PROMOTED_KEEPER_ID = "act:ireland:economic:poor:t0:turn";
+const KEEPERS = (
+  keeperReport as {
+    keepers: Array<{
+      sceneId: string;
+      wave: string;
+      tier: number;
+      keeperScore: number;
+      maxSimilarity: number;
+    }>;
+  }
+).keepers;
 
 /** Every authored spine generation act — all are deepened with a texture + consequence interstitial. */
 const SPINE_ACTS = [
@@ -33,6 +47,28 @@ function act(actId: string) {
   const a = corpus.acts.get(actId);
   if (!a) throw new Error(`no act ${actId}`);
   return a;
+}
+
+function scene(sceneId: string) {
+  const s = corpus.scenes.get(sceneId);
+  if (!s) throw new Error(`no scene ${sceneId}`);
+  return s;
+}
+
+function qualityParts(sceneId: string): string[] {
+  const s = scene(sceneId);
+  return [
+    ...s.prose,
+    ...s.beats.flatMap((beat) => [...beat.prose, beat.choice?.text ?? ""]),
+    s.decision?.prompt ?? "",
+    ...(s.decision?.options.map((option) => option.text) ?? []),
+  ].filter(Boolean);
+}
+
+function topKeeperFor(wave: string, tier: number): (typeof KEEPERS)[number] | undefined {
+  return KEEPERS.filter((keeper) => keeper.wave === wave && keeper.tier === tier).sort(
+    (a, b) => b.keeperScore - a.keeperScore,
+  )[0];
 }
 
 /** Walk an act from a founding flag set, always taking beat 0 / decision option 0, collecting scene ids
@@ -88,6 +124,39 @@ describe("SPINE-ACT-DEPTH: every spine act is deepened with texture + consequenc
       "bargain",
       "close",
     ]);
+  });
+
+  it("KEY-PILLARS-2: keeper-ranked legacy fabric is rewritten into the authored Gilded Age spine", () => {
+    const encounterId = "spine:g3:gildedage:keeper_ireland_coal";
+    const keeper = topKeeperFor("ireland", 0);
+    expect(keeper?.sceneId).toBe(PROMOTED_KEEPER_ID);
+    expect(keeper?.keeperScore).toBeGreaterThanOrEqual(0.85);
+    expect(keeper?.maxSimilarity).toBe(0);
+
+    const gilded = act("spine:g3:gildedage");
+    const texIndex = gilded.scenes.indexOf("spine:g3:gildedage:tex_open");
+    expect(gilded.scenes.slice(texIndex, texIndex + 3)).toEqual([
+      "spine:g3:gildedage:tex_open",
+      encounterId,
+      "spine:g3:gildedage:venture",
+    ]);
+
+    const encounter = scene(encounterId);
+    const prose = encounter.prose.join(" ");
+    expect(prose).toMatch(/hollow-cheeked child/i);
+    expect(prose).toMatch(/dray cart/i);
+    expect(prose).toMatch(/dropped bit of coal/i);
+    expect(prose).not.toMatch(/\b(I|me|my|mine|we|our|ours|us)\b/i);
+    expect(prose).toMatch(/\{given_name\}|\{surname\}/);
+    expect(encounter.decision).toBeUndefined();
+    expect(encounter.beats.length).toBeGreaterThanOrEqual(2);
+    expect(encounter.next).toBe("spine:g3:gildedage:venture");
+
+    const report = auditProseQuality(
+      "spine:g3:gildedage:keeper_ireland_coal",
+      qualityParts(encounterId),
+    );
+    expect(report.pass, JSON.stringify(report.findings, null, 2)).toBe(true);
   });
 
   it("SPINE-ACT-DEPTH-2 + EXTEND-MIDWEIGHT: EVERY act carries a third REVERSAL interstitial (7 scenes)", () => {
