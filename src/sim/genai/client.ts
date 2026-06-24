@@ -69,11 +69,13 @@ export function geminiCaptureMusic(apiKey: string, model = DEFAULT_MUSIC_MODEL):
     for (let t = 0; t < deadline && !closed; t += step) {
       await new Promise((r) => setTimeout(r, step));
     }
-    // Guard + await stop: if the session already closed (onerror/onclose set `closed`, the path that exits the
-    // poll early), stop() can reject — an unhandled rejection would crash the capture sweep (review).
+    // Guard + settle stop(): if the session already closed (onerror/onclose set `closed`, the path that exits
+    // the poll early), stop() can throw OR (the SDK is experimental, typed `void` but may return a promise)
+    // reject — both would crash the capture sweep. `Promise.resolve(...)` awaits a promise if one is returned
+    // and no-ops a void, and the await+catch absorbs either failure (review: Amazon-Q + the linter's no-await).
     if (!closed) {
       try {
-        session.stop();
+        await Promise.resolve(session.stop());
       } catch {
         // already closed
       }
