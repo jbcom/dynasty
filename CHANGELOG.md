@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.68.0](https://github.com/jbcom/dynasty/compare/v0.67.0...v0.68.0) (2026-06-24)
+
+
+### Features
+
+* rival-line head encounter portraits on the Field (GA-ENCOUNTER-PORTRAITS) ([#213](https://github.com/jbcom/dynasty/issues/213)) ([8112d89](https://github.com/jbcom/dynasty/commit/8112d89eee4f3dd82fc5709514ec5c3dcb7f7ba4))
+
 ## [0.67.0](https://github.com/jbcom/dynasty/compare/v0.66.0...v0.67.0) (2026-06-24)
 
 
