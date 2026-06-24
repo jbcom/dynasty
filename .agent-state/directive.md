@@ -71,6 +71,29 @@ when the WHOLE milestone is solid — NOT a PR per VD-step.
 - [ ] **VD-7 remaining placements + other paths** — decision-aid panel + upgraded path-keyed tabs + the other
   archetypes' dossier kinds. THEN open the single milestone PR.
 
+## ★FULL GENAI-SURFACE EXPANSION (user 2026-06-23: "are we SURE you have FULLY explored all the areas for genai?")★
+AUDIT (honest, this session): currently GenAI is used for TEXT (gemini-3.5-flash: scene/act prose, the QA
+editor, spine gen, retitle, + the VD dossier briefs) and IMAGE (imagen-4.0-fast: the portrait matrix + the VD
+dossier figures). NOT yet used, though the visual-layer spec called for "imagery + VIDEO":
+- [ ] **GA-VIDEO — GenAI video (Veo) era/generation cinematics** — the spec said video; zero today. Candidates: a
+  generation-handoff "passing of the line" motion piece, an era-transition stinger, the ascension/stellar finale
+  cinematic, an animated journey map. On-demand+cache like portraits (key × era × archetype); EI-9d fallback.
+- [ ] **GA-MUSIC — GenAI score (Lyria) that shifts with the era** — audio is fully authored (Tone/Howl), zero
+  GenAI. An era-appropriate generative score founding→Gilded→midcentury→stellar + per-`sense` ambient beds would
+  hugely lift the "feel". Gated, cached, offline.
+- [ ] **GA-TTS — period-voice narration of key beats (optional)** — TTS read of the naming beat / a generation's
+  pivotal decision in an era-true voice. Lower priority; accessibility + immersion.
+- [ ] **GA-NEWS — GenAI period headlines** — the NewsTicker/rival-news is templated; GenAI real period-voiced
+  headlines reacting to the run's ACTUAL events (cheap, high-show). Cached per (year, event-digest).
+- [ ] **GA-MAP-ART — GenAI cartographic base per era** — MapView is CSS; a generated period map base (the journey
+  as a real period map) was speced, only partially built. Reuse the dossier/portrait image pipeline.
+- [ ] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers** — beyond atmosphere: generate the dossier's diagrams
+  (an R&D tech-tree sketch, a redacted intel surveillance chart) keyed to real state, as a FigurePanel variant.
+- [ ] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt** — exists, no live consumer (EI-9f); needs a
+  single-figure FOCUS surface (a rival-head dossier / a braid-crossing close-up) to drive it.
+  DECISION (log, [[never-ask-direction]]): sequence after the VD milestone — GA-NEWS + GA-MUSIC first (highest
+  feel-per-effort), then GA-VIDEO finale, then the rest. Each its own milestone branch.
+
 ## ★TOP PRIORITY — EMERGENT-INFANCY ONBOARDING (user, 2026-06-23, HIGHEST-ORDER — outranks everything)★
 
 **Mandate (verbatim intent, two messages):** "i counted TEN choices before you even start. ALL could
