@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.75.0](https://github.com/jbcom/dynasty/compare/v0.74.2...v0.75.0) (2026-06-24)
+
+
+### Features
+
+* promote keeper fabric into spine encounter ([#250](https://github.com/jbcom/dynasty/issues/250)) ([00f1ca7](https://github.com/jbcom/dynasty/commit/00f1ca7fe5e9f69728f278a874dc6c88062dcd84))
+
 ## [0.74.2](https://github.com/jbcom/dynasty/compare/v0.74.1...v0.74.2) (2026-06-24)
 
 
