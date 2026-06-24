@@ -98,11 +98,16 @@ when the WHOLE milestone is solid — NOT a PR per VD-step.
 AUDIT (honest, this session): currently GenAI is used for TEXT (gemini-3.5-flash: scene/act prose, the QA
 editor, spine gen, retitle, + the VD dossier briefs) and IMAGE (imagen-4.0-fast: the portrait matrix + the VD
 dossier figures). NOT yet used, though the visual-layer spec called for "imagery + VIDEO":
-- [ ] **GA-VIDEO — GenAI video (Veo) cinematics — IN PROGRESS (branch feat/ga-video).** Veo via
-  `ai.models.generateVideos` (long-running operation → poll → mp4). A cinematic set piece at the generation
-  boundary / the finale. Sub-steps: GV-1 pure prompt builder + key (src/sim/cinematic/), GV-2 a Veo capture
-  client (poll the operation → mp4) + offline script, GV-3 generate a cinematic, GV-4 a CinematicView `<video>`
-  surface wired into the boundary with a graceful (hide-on-error) fallback. Milestone branch, ONE PR.
+- [x] **GA-VIDEO — GenAI video (Veo) cinematics — BUILT (branch feat/ga-video, commit b85c6e8).** GV-1 pure
+  `src/sim/cinematic/genaiCinematic.ts` (buildHandoffPrompt per era band + buildFinalePrompt per ending outcome +
+  cinematicKey; the engraving-chronicle CINEMATIC_STYLE; 5 unit tests). GV-2 `geminiGenerateVideo` (Veo
+  long-running op polled → mp4 bytes, bounded maxPolls; inline videoBytes OR fetch the uri) + scripts/genai-cinematics.ts
+  (offline, idempotent, --handoff/--finale/--force). GV-4 CinematicView `<video>` (hide-on-error) wired into the
+  PlayScreen generation boundary (handoff, above the dossier) AND LegacyReport (finale, keyed by convergence.destination);
+  2 browser tests (src maps key, hide-on-error). Gate: check 0, typecheck 0/0, unit 1011, browser 170.
+  GV-3 (live Veo generation): BLOCKED in this env (no GEMINI_API_KEY) — pipeline proven, runtime degrades gracefully
+  when the mp4 is absent (browser test); generates offline when a key is present, like the portrait/dossier/news/music
+  pipelines. NEXT: reviewer trio (running) folded → ONE PR.
 - [x] **GA-MUSIC — GenAI era-shifting score (Lyria) — BUILT (branch feat/ga-music).** GM-1 pure
   src/sim/music/genaiMusic.ts (buildMusicPrompt + the 10 ambient-track slots, era moods, loopable/instrumental;
   5 tests). GM-2 `geminiCaptureMusic` (Lyria realtime-stream → PCM capture) + scripts/genai-music.ts (PCM→WAV);
@@ -128,8 +133,10 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
 - [x] **GA-NEWS PR — MERGED #202 (squash 20c61dd).** Reviewer trio folded (moodForRanks cross-ladder bug,
   toHeadlines trailing-md, PL-11 testid). VERIFIED on main (src/sim/news/ + 24 dispatch keys). The first
   GenAI-expansion milestone is shipped.
-- [ ] [WAIT] **GA-MAP-ART — GenAI cartographic base per era** — MapView is CSS; a generated period map base (the journey
-  as a real period map) was speced, only partially built. Reuse the dossier/portrait image pipeline.
+- [ ] **GA-MAP-ART — GenAI cartographic base per era — NEXT milestone (own fresh branch, post GA-VIDEO merge).**
+  MapView is CSS; a generated period map base (the journey as a real period map) was speced, only partially built.
+  Reuse the dossier/portrait image pipeline: pure prompt builder + key (per era band), offline gen script, a MapView
+  base-layer loader with hide-on-error fallback to the current CSS, a browser test. Milestone branch, ONE PR.
 - [ ] [WAIT] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers** — beyond atmosphere: generate the dossier's diagrams
   (an R&D tech-tree sketch, a redacted intel surveillance chart) keyed to real state, as a FigurePanel variant.
 - [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt** — exists, no live consumer (EI-9f); needs a
