@@ -134,7 +134,9 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   --beat/--era/--force). GT-3 AudioEngine.playNarration (one-shot, silent fallback pre-start/muted/missing; engine.audio
   test) + sound.ts facade; LegacyReport fires the finale read on mount (no-visual-impact override — audio-only side
   effect). Gate: check 0, typecheck 0/0, unit 1022, browser 175. Live-synth BLOCKED here (no key) — degrades silently.
-  NEXT: reviewer trio (running) folded → ONE PR.
+  Reviewer trio CLEAN (code-reviewer incl. security pass: SDK auth no key-leak, null-safe, totality; simplifier clean).
+- [ ] [WAIT] **GA-TTS PR #211 — merge on green.** Reviewer trio clean (c4bef5b). Monitor bjq6v5cqv armed on CI; merge on
+  CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has src/sim/narration/ + AudioEngine.playNarration.
 - [x] **GA-NEWS — GenAI period DISPATCHES — BUILT (branch feat/ga-news).** GN-1 pure `src/sim/news/genaiNews.ts`
   (buildNewsDispatchPrompt + newsDispatchKey, era × mood, leak-safe, JSON-unwrap defense). GN-2 loadNewsDispatch +
   a NewsTicker "Dispatch" layer (term-resolved). GN-3 scripts/genai-news.ts generated ALL 24 era×mood dispatch sets
