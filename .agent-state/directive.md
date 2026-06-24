@@ -245,7 +245,7 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   text-heavy fatigue; library-backed prose scannability/clarity/consistency gates; choices fully WITHIN prose
   (glowing/larger, but not detached buttons below); similarity-based mining to separate the best legacy class
   JSON from chaff and rewrite keepers as non-first-person encounters/fabric in the main dynasty storyline.
-- [x] **KEY-PILLARS-1a PRUNE-AUTO — BUILT locally (branch codex/key-pillars-prune-auto).** Refactored the
+- [x] **KEY-PILLARS-1a PRUNE-AUTO PR #229 — MERGED (squash 6ae3e5e).** Refactored the
   reductive legacy-fabric pruning policy out of `scripts/mine-fabric.ts` into pure/tested
   `src/sim/saga/pruneFabric.ts`; `--prune-one`, `--prune-n`, `--prune-auto`, and `--prune-all` now share
   deterministic selection, count recomputation, and transaction construction. `--prune-auto` now uses cheap
@@ -256,7 +256,8 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   `src/data/saga/fabric/transactions.ndjson`; fabric count 503→502 and prose audit 623/287→622/286 failed
   surfaces (passRate 0.54). Local proof: touched-file Biome clean; typecheck 0; build 0; unit 1047;
   browser 177; e2e 8; prose:audit 0. Repo-wide `pnpm check` still reports pre-existing non-null assertion
-  warnings outside this slice.
+  warnings outside this slice. Remote proof: ready PR, build-and-test + CodeQL green, quota/rate-limit comments
+  non-blocking by user directive, Amazon Q's stale syntax thread resolved after the explicit-score follow-up commit.
 - [x] **GENAI-GENERATE — BUILT locally (branch codex/genai-generate-live-assets).**
   `.env` contains `GEMINI_API_KEY`, so this is no longer blocked on credentials. IMPORTANT PIVOT
   ([[founding-spine-pivot]]): do **not** run the old 504-cell class sweeps as the played corpus. The player steers
