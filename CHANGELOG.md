@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.66.0](https://github.com/jbcom/dynasty/compare/v0.65.0...v0.66.0) (2026-06-24)
+
+
+### Features
+
+* GenAI informational diagrams in the visual dossiers (GA-DOSSIER-DIAGRAMS) ([#209](https://github.com/jbcom/dynasty/issues/209)) ([047d5b1](https://github.com/jbcom/dynasty/commit/047d5b13a0b2aedec7196650df10172140596971))
+
 ## [0.65.0](https://github.com/jbcom/dynasty/compare/v0.64.0...v0.65.0) (2026-06-24)
 
 
