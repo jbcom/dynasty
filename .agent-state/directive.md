@@ -58,8 +58,11 @@ when the WHOLE milestone is solid — NOT a PR per VD-step.
   pending state) + DossierView briefing-spread (masthead + magazine grid, Suzerain scannability). 4 browser tests;
   LIVE-VERIFIED via screenshot READ: the crime "Intelligence Dossier · MID-CENTURY" renders a real Reputation/Heat
   chart + the You-centered rival graph + the 1776→Mid-C reach strip. check 0, typecheck 0/0, browser 166.
-- [ ] **VD-4 DossierInterstitial placement** — a full-screen dossier fires at a generation/era boundary (the
-  headline scene-transition set piece), wired into the act/opening flow; e2e walks it.
+- [x] **VD-4 DossierInterstitial placement — DONE (branch feat/visual-dossiers).** At a GENERATION boundary
+  (view.saga.ended), PlayScreen now fires the path-keyed DossierView set piece (a "state of the dynasty" briefing —
+  real meter trajectory + rival field + reach, built purely from the live view via buildDossier + buildMeterSeries)
+  in place of the one-line "generation closes" interlude. check 0, typecheck 0/0, PlayScreen visual tests 26. (e2e
+  walk of the boundary + a richer continue affordance fold into VD-6/VD-7.)
 - [ ] **VD-5 GenAI brief + figure pipelines** — `buildDossierBrief(kind, view)` path-voice prompts + QA + cache;
   `dossierFigureKey` → Imagen on-demand+cache (portrait pattern, EI-9d fallback). Far-future dossiers reuse the
   scarcity guidance. Tests.

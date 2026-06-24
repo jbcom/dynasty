@@ -29,6 +29,9 @@ import { loadCodex } from "../../data/loadSaga";
 import { setMusicEra } from "../sound";
 import { compositePortraitKey, eraBandForYear } from "../../sim/genai/portrait";
 import { lifeStageForAge, rungTierForState } from "../../sim/genai/portraitFacets";
+import { buildDossier } from "../../sim/dossier/dossier";
+import { buildMeterSeries } from "../statsSeries";
+import DossierView from "../dossier/DossierView.svelte";
 
 interface Props {
   content: Content;
@@ -83,6 +86,27 @@ const portraitSrc = $derived.by(() => {
   });
   // `portrait:adult:digital_modern:economic:high:m` → `portrait_adult_digital_modern_economic_high_m.png`
   return `/assets/generated/portraits/${key.replace(/:/g, "_")}.png`;
+});
+
+// VD-4: at a GENERATION boundary (the saga act ends), the path-keyed DOSSIER fires as a full set piece — a
+// "state of the dynasty" briefing (real meter trajectory + the rival field + the line's reach) instead of a
+// one-line interlude. Built purely from the live view; the GenAI brief/figure resolve from their cached keys.
+const boundaryDossier = $derived.by(() => {
+  const s = view.state;
+  const series = buildMeterSeries(content, s);
+  return buildDossier({
+    archetype: s.archetype,
+    year: s.year,
+    seed: s.seed,
+    series,
+    rivals: view.rivalStandings.map((r) => ({
+      id: r.id,
+      label: r.label,
+      rung: r.rung,
+      fallen: r.fallen,
+    })),
+    rung: view.rung,
+  });
 });
 
 // Branch-aware term interpolation: the same authored {head_of_state} resolves
@@ -277,7 +301,11 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
       <EventCard event={view.currentEvent} year={view.state.year} {busy} {onchoose} {term} />
     </div>
   {:else if view.saga.ended}
-    <p class="interlude">The generation closes…</p>
+    <!-- VD-4: the generation-boundary DOSSIER set piece — a path-keyed "state of the dynasty" briefing. -->
+    <div class="dossier-interstitial" data-testid="dossier-interstitial">
+      <DossierView dossier={boundaryDossier} />
+      <p class="interlude">The generation closes…</p>
+    </div>
   {:else}
     <p class="interlude">The era turns…</p>
   {/if}
