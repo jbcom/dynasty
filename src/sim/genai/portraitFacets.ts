@@ -34,15 +34,24 @@ export function lifeStageForAge(age: number): LifeStage {
 
 /**
  * EI-9c — the life stage a given EMERGENCE (Epoch-0 opening) scene depicts, so the OpeningScreen can show a
- * life-stage portrait that grows with the progenitor: birth/naming → infant, childhood/first-friend/schooling
- * → child, the later formative beats (betrayal/loss/romance, the threshold to adulthood) → youth. Scene ids
- * are `epoch0:<beat>`. Defaults to "child" for any unmapped opening scene. Pure.
+ * life-stage portrait that grows with the progenitor. The mapping is intentionally TOTAL over the authored
+ * opening (every scene `buildEpoch0Opening` emits is covered):
+ *   - `epoch0:birth`, `epoch0:naming`                                   → infant
+ *   - `epoch0:childhood`, `epoch0:formative`, `epoch0:schooling`        → child
+ *   - `epoch0:betrayal`, `epoch0:loss`, `epoch0:romance`               → youth (the threshold to adulthood)
+ *
+ * DEFAULT (by design): any UNMAPPED id falls back to "child" — the safe middle of the emergence, so a future
+ * opening scene added without updating this map degrades gracefully to a plausible portrait rather than
+ * throwing or showing an out-of-range stage. This function is ONLY called with Epoch-0 opening scene ids
+ * (the OpeningScreen drives it); it is not a general scene→stage resolver (play-surface stages come from
+ * `lifeStageForAge`). Pure.
  */
 export function lifeStageForOpeningScene(sceneId: string): LifeStage {
   const beat = sceneId.startsWith("epoch0:") ? sceneId.slice("epoch0:".length) : sceneId;
   if (beat === "birth" || beat === "naming") return "infant";
   if (beat === "childhood" || beat === "formative" || beat === "schooling") return "child";
   if (beat === "betrayal" || beat === "loss" || beat === "romance") return "youth";
+  // Unmapped → "child" by design (see JSDoc): graceful degradation for any future/unknown opening scene.
   return "child";
 }
 

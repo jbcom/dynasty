@@ -187,14 +187,13 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   eras the spine actually hits (founding→stellar; progeny-in-space need stellar children too). PLUS the encounter-role
   portraits (first friend/betrayer/partner/rival/mentor) via `buildEncounterPortraitPrompt` — wire the SceneReader's
   thread/encounter surfaces to request them. Enumerate the live runner's actual demand first; don't blanket all keys.
-- [ ] **EI-SCARCITY-STORIES — carry the scarcity theme into the NARRATIVE (user, 2026-06-23)** — the user's
-  scarcity insight ("worth thinking about scarcity both in the stories we tell and in the visual medium") applies to
-  CONTENT, not just portraits: in the post-scarcity star era the drama shifts to what STAYS scarce when all else is
-  abundant — singular physical artifacts, real (non-copied) presence, an authentic bloodline/name, scarce attention/
-  legitimacy. The far-future spine/era acts + GenAI scene prompting for near_future+stellar should foreground these
-  stakes (a physical heirloom oil as a plot object; an authenticity/legitimacy conflict) rather than reusing
-  industrial-era scarcity (money/land). Enumerate the post-scarcity story beats, fold into the spine/era guidance +
-  the GenAI prompt briefs, then verify a generated stellar act reflects it. (Pairs with the physical-oil portrait flex.)
+- [x] **EI-SCARCITY-STORIES — post-scarcity narrative theme in the guidance — DONE (code, branch ei9c).** Added a
+  `scarcity` field to the far-future era guidance (t4/t5 × poor/middle in guidance.json) naming the post-scarcity
+  stakes (what STAYS scarce when all else is abundant: un-copyable physical artifacts, real presence, authentic line,
+  legitimacy), and wove it into both the scene-generation prompt (`buildScenePrompt` eraBrief) and the QA editor brief
+  (`scenePassBrief`) — so generated near_future/stellar acts foreground it instead of recycled money/land scarcity. 23
+  scene unit tests (far-future tiers carry the stake, earlier tiers don't). FOLLOW-UP: when the spine acts regenerate,
+  verify a stellar act actually reflects it (live-read a generated far-future act).
 - [x] **EI-10 future-digital luminosity — DONE (commit e32b9cf).** Root cause: the aged-physical-plate
   CHRONICLE_WRAPPER fought the holographic medium. `wrapperFor(era,tier)` now uses a luminous void-ground
   ARCHIVE_WRAPPER for near_future/stellar low+mid (digital captures) + keeps CHRONICLE_WRAPPER for physical

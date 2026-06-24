@@ -27,6 +27,11 @@ interface EraGuidance {
   avoid: string;
   qaLookFor: string;
   qaReject: string;
+  /** EI-SCARCITY-STORIES (user 2026-06-23): in the post-scarcity far future the drama is what STAYS scarce
+   *  when all else is abundant (singular physical artifacts, real presence, authentic line, legitimacy).
+   *  Present only on the far-future tiers; folded into the brief so generated near-future/stellar acts
+   *  foreground it instead of reusing industrial-era money/land scarcity. */
+  scarcity?: string;
 }
 /** A bespoke per-WAVE/people brief — real history + motivations that make each line + its crossings unique. */
 interface WaveGuidance {
@@ -72,6 +77,9 @@ export function scenePassBrief(wave: string, tier: number, cls: Rung): string {
       `- THIS ERA MUST NOT: ${era.qaReject}`,
       `- SCANNABILITY: ${era.scannability}`,
     );
+    // EI-SCARCITY-STORIES: hold the far-future scene to the post-scarcity stakes too (when present).
+    if (era.scarcity)
+      lines.push(`- SCARCITY (the post-scarcity stakes must drive it): ${era.scarcity}`);
   }
   if (w) {
     lines.push(
@@ -200,6 +208,11 @@ export function buildScenePrompt(req: SceneRequest): string {
         `- RHYTHM: ${era.rhythm}`,
         `- SCANNABILITY: ${era.scannability}`,
         `- AVOID: ${era.avoid}`,
+        // EI-SCARCITY-STORIES: only the far-future tiers carry a scarcity note; fold it in when present so
+        // the post-scarcity drama (what stays scarce) drives the act, not recycled money/land stakes.
+        ...(era.scarcity
+          ? [`- SCARCITY (the post-scarcity stakes — make these the drama): ${era.scarcity}`]
+          : []),
         `- THIS ERA MUST HAVE: ${era.qaLookFor}`,
         `- THIS ERA MUST NOT: ${era.qaReject}`,
       ].join("\n")
