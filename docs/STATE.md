@@ -31,13 +31,18 @@ Shipped on `feat/narrative-acts` (PRs #65/#67); polished on `feat/saga-polish` (
   scene-slot scaffold (open/rising+secondary/midpoint+intersection/turn+major/close), seeded per
   cell; GenAI fleshes it. **GenAI** `genai:expand --type scene [--all --cls <poor|middle>]` +
   `scripts/retitle-saga.ts` (distinct meso act titles) + `scripts/prune-saga-orphans.ts`.
-- **Structural sameness (CONTENT-UNIQUENESS-AUDIT):** the corpus is currently ONE skeleton — all 84 lineage
-  files share the IDENTICAL per-scene shape (`smell:2|touch:2D|sound:2|sight:2D|taste:2D` × 6 = 30 scenes);
-  distinct-fingerprint ratio **0.012** (1/84). The prose varies, the SHAPE does not — the
-  [[craft-spines-not-generator]] problem, quantified. Metric: `src/sim/saga/uniquenessMetric.ts`; report:
-  `pnpm vite-node scripts/uniqueness-audit.ts`; ratchet test: `uniquenessMetric.unit.test.ts`. FIX (the
-  diversifying rewrite — vary sense order / beat+decision layout / scene count per act-type) is the follow-on
-  milestone this enumerates; it must RAISE the ratchet's floor as shapes diversify.
+- **Structural sameness (CONTENT-UNIQUENESS-AUDIT → SHAPE-DIVERSIFY-1):** the corpus ON DISK was one skeleton
+  (all 84 files `smell:2|touch:2D|sound:2|sight:2D|taste:2D` × 6; ratio **0.012**) because it predated the
+  arc-shape scaffold and was never regenerated. SHAPE-DIVERSIFY-1 fixed the SOURCE: `src/sim/spine.ts` now
+  produces **cell-fingerprint ratio ~0.92** (90 distinct of 98 cells) via 8 ARC_SHAPES × per-shape FRAME senses
+  (`ARC_FRAME`) × a per-cell SENSE ROTATION (`senseShiftFor`, keyed on archetype×wave×tier). Per-act distinct
+  shapes went 8 → 40. The skeleton is broken at the spine; the `spine.unit.test.ts` SHAPE-DIVERSIFY-1 test guards
+  ratio >0.7 / largest cluster <10%. `scene.unit.test.ts` also guards the `buildScenePrompt` path: every arc
+  shape (including `siege`/`exodus`) must carry its rotated slot `sense` + exact `intent` into the generation
+  prompt. ⚠️ The on-disk corpus JSON still reflects the OLD skeleton — a GenAI REGENERATION (`genai:expand`,
+  key-gated) is needed to realize the diversity on disk; once regenerated, the uniquenessMetric ratchet floor
+  rises from 0.012 toward the spine's ~0.92. Metric: `src/sim/saga/uniquenessMetric.ts`; reports:
+  `scripts/uniqueness-audit.ts`.
 - **Playtime depth (PLAYTIME-DEPTH-AUDIT):** one lineage run (a wave×archetype×class corpus file = 6 acts,
   founding→stars) is **~57 min median** of authored scene depth (range 49–63 min across the 84 class files;
   thinnest ~49 min), read @220wpm + decision deliberation — BEFORE the emergence opening, the surfaces, and the

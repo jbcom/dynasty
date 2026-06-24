@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "../../../data/loadContent";
+import type { Rung } from "../../classRung";
 import { DYNASTY_SPINE, spineActForGen } from "../../saga/spineAuthored";
+import { ARCHETYPES } from "../../slots";
+import { ARC_SHAPES, SPINE_TIERS, spineFor } from "../../spine";
 import type { GenerateFn } from "../client";
 import { expand } from "../expand";
 import {
@@ -22,6 +25,7 @@ import {
 
 const content = loadContent();
 const req = { wave: "bavaria", cls: "middle" as const, archetype: "economic" as const, tier: 1 };
+const CLASSES: Rung[] = ["poor", "middle"];
 
 /** A minimal-but-valid generated act file for the bavaria/economic tier-1 act. */
 function validActFile() {
@@ -72,6 +76,43 @@ describe("genai scene mode", () => {
     expect(p).toContain("act:bavaria:economic:middle:t1");
     expect(p).toContain("act:bavaria:economic:middle:t1:open");
     expect(p).toContain("never re-stating when/where"); // the no-when/where rule via the opening slot intent
+  });
+
+  it("SHAPE-PROMPT-WIRING: scene prompts carry each scaffold shape, slot sense, and slot intent", () => {
+    const waves = content.places.filter((p) => p.kind !== "destination").map((p) => p.id);
+    for (const shape of ARC_SHAPES) {
+      let found: {
+        req: Parameters<typeof buildScenePrompt>[0];
+        act: ReturnType<typeof spineFor>[number];
+      } | null = null;
+
+      for (const wave of waves) {
+        for (const cls of CLASSES) {
+          for (const archetype of ARCHETYPES) {
+            for (const tier of SPINE_TIERS) {
+              const act = spineFor({ wave, cls, archetype }).find((a) => a.tier === tier);
+              if (act?.shape === shape) {
+                found = { req: { wave, cls, archetype, tier }, act };
+                break;
+              }
+            }
+            if (found) break;
+          }
+          if (found) break;
+        }
+        if (found) break;
+      }
+
+      if (!found) throw new Error(`no sample act for ${shape}`);
+      const prompt = buildScenePrompt(found.req);
+      expect(prompt).toContain(`this act moves as a ${shape}`);
+      expect(prompt).toContain(`how this ${shape}-movement act turns`);
+      expect(prompt).toContain(`the act (a ${shape} movement) closes`);
+      for (const slot of found.act.scenes) {
+        expect(prompt).toContain(`id "${slot.id}", sense "${slot.sense}"`);
+        expect(prompt).toContain(slot.intent);
+      }
+    }
   });
 
   it("accepts a schema-valid act file and merges it into the canonical saga file", async () => {
