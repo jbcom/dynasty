@@ -230,18 +230,20 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   SOURCE. ⚠️ on-disk JSON realization awaits the key-gated GenAI regen. Gate: check 0, typecheck 0/0, unit 1032, e2e 8.
   Reviewers CLEAN (code-reviewer: SOUND/ship — invariants verified across all 588 acts, determinism, totality, the
   one consumer scene.ts unaffected; simplifier clean).
-- [ ] [WAIT] **SHAPE-DIVERSIFY-1 PR #222 — merge on green.** Reviewers clean (f1820e1). Monitor bla5jp5d2 armed on CI;
-  merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has the ARC_FRAME + senseShiftFor + the diversity test.
-- [ ] [WAIT] **SHAPE-PROMPT-WIRING — verify the new shapes flow into the generation prompt (next milestone, own branch GATED on the SHAPE-DIVERSIFY-1 PR merge).**
-  SHAPE-DIVERSIFY-1 added siege/exodus + per-shape frame senses + the sense rotation to the spine. Confirm the
-  GENERATION path (src/sim/genai/expand.ts / genai-expand) reads the act's `shape` + the slot `intent`/`sense` so a
-  future regen actually USES the diversified scaffold (not a stale hardcoded prompt). A pure check: the per-shape/
-  per-slot prompt varies by shape (incl. the 2 new ones) + carries the slot sense; add a test. If a gap exists (the
-  prompt ignores shape), wire it. No GenAI call (key-free) — just the prompt-builder path. Milestone branch, ONE PR.
-- [ ] [WAIT] **GENAI-GENERATE — regen the corpus (realizes SHAPE-DIVERSIFY-1 on disk) + the 7 asset surfaces (BLOCKED: needs GEMINI_API_KEY).**
-  With a key: `genai:expand --type scene --all` regenerates the corpus from the diversified spine (uniquenessMetric
-  ratchet then climbs 0.012 → ~0.92), then the seven offline asset scripts. READ-verify a sample of each, commit.
-  True blocker here (no key); un-WAIT when a key is available.
+- [ ] [WAIT] **SHAPE-DIVERSIFY-1 PR #222 — merge on green.** Remote checks are green and review-thread GraphQL
+  confirms 0 unresolved threads. Follow-up local closeout folded in SHAPE-PROMPT-WIRING below; push the commit,
+  wait for CI to return green, then squash-merge. Verify main has ARC_FRAME + senseShiftFor + the diversity test
+  + the prompt-wiring test.
+- [x] **SHAPE-PROMPT-WIRING — DONE (folded into PR #222 closeout).** Added a pure regression test in
+  `src/sim/genai/__tests__/scene.unit.test.ts` that enumerates every ARC_SHAPE (including the new siege/exodus),
+  finds a live scaffold sample, builds `buildScenePrompt`, and asserts the prompt carries the selected shape,
+  every slot's rotated `sense`, and every slot's exact `intent`. No GenAI call required; this proves a future
+  regen uses the diversified scaffold rather than a stale prompt.
+- [ ] **GENAI-GENERATE — regen the corpus (realizes SHAPE-DIVERSIFY-1 on disk) + the 7 asset surfaces.**
+  `.env` contains `GEMINI_API_KEY`, so this is no longer blocked on credentials. After #222 merges, run the scene
+  sweeps (`genai:expand --type scene --all --cls poor --write` and `--cls middle --write`) from a fresh branch,
+  re-run the uniqueness ratchet and raise its floor, then run/verify the offline asset scripts and commit the
+  generated corpus/assets with screenshots/read checks.
 - [x] **GA-MAP-ART PR #207 — MERGED (squash ece0be9); v0.64.0 cut.** Reviewer trio folded; CI green; squash-merged
   CLEAN. VERIFIED main has src/sim/genai/mapArt.ts + the MapView era-base wiring + map_founding_1700s.png. Five
   GenAI-expansion milestones now shipped (GA-NEWS #202, GA-MUSIC #203, GA-VIDEO #205, GA-MAP-ART #207).

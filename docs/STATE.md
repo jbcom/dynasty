@@ -37,10 +37,12 @@ Shipped on `feat/narrative-acts` (PRs #65/#67); polished on `feat/saga-polish` (
   produces **cell-fingerprint ratio ~0.92** (90 distinct of 98 cells) via 8 ARC_SHAPES × per-shape FRAME senses
   (`ARC_FRAME`) × a per-cell SENSE ROTATION (`senseShiftFor`, keyed on archetype×wave×tier). Per-act distinct
   shapes went 8 → 40. The skeleton is broken at the spine; the `spine.unit.test.ts` SHAPE-DIVERSIFY-1 test guards
-  ratio >0.7 / largest cluster <10%. ⚠️ The on-disk corpus JSON still reflects the OLD skeleton — a GenAI
-  REGENERATION (`genai:expand`, key-gated) is needed to realize the diversity on disk; once regenerated, the
-  uniquenessMetric ratchet floor rises from 0.012 toward the spine's ~0.92. Metric: `src/sim/saga/uniquenessMetric.ts`;
-  reports: `scripts/uniqueness-audit.ts`.
+  ratio >0.7 / largest cluster <10%. `scene.unit.test.ts` also guards the `buildScenePrompt` path: every arc
+  shape (including `siege`/`exodus`) must carry its rotated slot `sense` + exact `intent` into the generation
+  prompt. ⚠️ The on-disk corpus JSON still reflects the OLD skeleton — a GenAI REGENERATION (`genai:expand`,
+  key-gated) is needed to realize the diversity on disk; once regenerated, the uniquenessMetric ratchet floor
+  rises from 0.012 toward the spine's ~0.92. Metric: `src/sim/saga/uniquenessMetric.ts`; reports:
+  `scripts/uniqueness-audit.ts`.
 - **Playtime depth (PLAYTIME-DEPTH-AUDIT):** one lineage run (a wave×archetype×class corpus file = 6 acts,
   founding→stars) is **~57 min median** of authored scene depth (range 49–63 min across the 84 class files;
   thinnest ~49 min), read @220wpm + decision deliberation — BEFORE the emergence opening, the surfaces, and the
