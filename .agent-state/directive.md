@@ -267,14 +267,16 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   SceneReader browser 8; EventCard visual screenshot test 1; typecheck 0; build 0; unit 1047; browser 178; e2e
   8. Remote proof: ready PR, build-and-test + CodeQL green, Amazon Q + CodeRabbit green/no actionable threads,
   and squash-merged to main.
-- [x] **KEY-PILLARS-1c PORTRAIT-GENDER-ALIGNMENT — BUILT locally (branch codex/portrait-gender-alignment).**
+- [x] **KEY-PILLARS-1c PORTRAIT-GENDER-ALIGNMENT PR #232 — MERGED (squash a5c5179).**
   Portrait keys now derive gender from the live family protagonist, not from the founder's bootstrap gender,
   while preserving founding-gender and male fallbacks for pre-family/legacy states. Added a pure
   `portraitGenderForState` helper plus unit coverage for a male founder/female successor, and updated the
   PlayScreen visual fixture to render a female successor portrait URL inside the spine-scene reader. Local
   proof: touched-file Biome clean; portraitFacets unit 14; PlayScreen visual layer browser 3; typecheck 0;
   build 0; unit 1049; browser 178; e2e 8. Repo-wide `pnpm check` exits 0 and still reports 39 pre-existing
-  non-null assertion warnings outside this slice.
+  non-null assertion warnings outside this slice. Remote proof: ready PR, build-and-test + CodeQL green,
+  Amazon Q + CodeRabbit green/no actionable threads, Gemini quota warning treated as non-blocking per user
+  directive, and squash-merged to main.
 - [x] **GENAI-GENERATE — BUILT locally (branch codex/genai-generate-live-assets).**
   `.env` contains `GEMINI_API_KEY`, so this is no longer blocked on credentials. IMPORTANT PIVOT
   ([[founding-spine-pivot]]): do **not** run the old 504-cell class sweeps as the played corpus. The player steers
