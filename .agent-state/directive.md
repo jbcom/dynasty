@@ -30,6 +30,38 @@ by construction.
 
 ## ROLLING BACKLOG — always non-empty, work top-down, append before draining
 
+## ★★TOP PRIORITY — SHOW-DON'T-TELL VISUAL DOSSIERS (user, 2026-06-23, NEW HIGHEST-ORDER)★★
+
+**Mandate (verbatim):** "right now we have a LOT of tell and very little show. exploring ideas like
+intelligence dossiers / research dossiers / marketing r&d based on the context of the dynasty path, as
+distinct visual pieces with text but also charts graphs maps and other visual anchors and set pieces would
+be AMAZING layered onto the existing directives." + "create full scene transition pieces" + content = HYBRID
+(real data viz + GenAI path-voice prose + GenAI atmospheric art) + PROCESS = MILESTONE PRs not slices
+([[one-branch-local-review]], [[show-dont-tell-visual-dossiers]]).
+
+SPEC: docs/superpowers/specs/2026-06-23-visual-dossiers-design.md. BUILD AS ONE MILESTONE on this long-running
+local branch `feat/visual-dossiers`; full local gate + reviewer trio per commit folded forward; ONE remote PR
+when the WHOLE milestone is solid — NOT a PR per VD-step.
+
+- [x] **VD-1 BRAINSTORM → SPEC — DONE.** Wrote the visual-dossier design spec (hybrid content, all placements,
+  the Dossier typed-panel model, path→kind mapping, the interstitial scene-transition headline, the GenAI
+  brief+figure pipelines reusing the portrait/scarcity infra). User gave the design inputs; building per the spec.
+- [ ] **VD-2 Dossier content model + read-model selectors** — pure `src/sim/dossier/`: `DossierKind`, `Dossier`,
+  `DossierPanel` (chart/graph/map/figure/brief), `buildDossier(kind, view)` mapping real GameView state →
+  chart/graph/map specs + figure/brief keys, `dossierKindForArchetype`. Unit-tested. Pure (no DOM/Date/random).
+- [ ] **VD-3 panel components + DossierView** — `src/ui/dossier/`: ChartPanel/GraphPanel/MapPanel/FigurePanel/
+  BriefPanel (reuse StatsView chart / ButterflyGraph / MapView primitives) + DossierView briefing-spread layout
+  (Suzerain scannability); FigurePanel uses the EI-9d image fallback. Browser/visual tests + READ a screenshot.
+- [ ] **VD-4 DossierInterstitial placement** — a full-screen dossier fires at a generation/era boundary (the
+  headline scene-transition set piece), wired into the act/opening flow; e2e walks it.
+- [ ] **VD-5 GenAI brief + figure pipelines** — `buildDossierBrief(kind, view)` path-voice prompts + QA + cache;
+  `dossierFigureKey` → Imagen on-demand+cache (portrait pattern, EI-9d fallback). Far-future dossiers reuse the
+  scarcity guidance. Tests.
+- [ ] **VD-6 wire ONE full path end-to-end** for the run's actual archetype (real data + brief + figure) +
+  live-verify in Chrome (screenshot + READ the composed dossier).
+- [ ] **VD-7 remaining placements + other paths** — decision-aid panel + upgraded path-keyed tabs + the other
+  archetypes' dossier kinds. THEN open the single milestone PR.
+
 ## ★TOP PRIORITY — EMERGENT-INFANCY ONBOARDING (user, 2026-06-23, HIGHEST-ORDER — outranks everything)★
 
 **Mandate (verbatim intent, two messages):** "i counted TEN choices before you even start. ALL could
