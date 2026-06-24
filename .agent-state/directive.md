@@ -146,14 +146,18 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   the existing founding base so the founding era loads directly; 2 browser tests (era tracks base; fallback). assets.json
   license entry. Gate: check 0, typecheck 0/0, unit 1014, browser 172. Live-gen of the other 7 bands BLOCKED here (no
   key) — degrades to the founding base until generated. NEXT: reviewer trio (running) folded → ONE PR.
-- [ ] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers — NEXT milestone (own fresh branch, post GA-MAP-ART merge).**
+- [ ] [WAIT] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers — NEXT milestone (own fresh branch, GATED on #207 merge).**
   Beyond atmosphere: generate the dossier's diagrams (an R&D tech-tree sketch, a redacted intel surveillance chart)
   keyed to real state, as a FigurePanel variant. Pure prompt builder + key (per dossier kind × era), offline gen
   script, a FigurePanel diagram variant with hide-on-error fallback, a browser test. Milestone branch, ONE PR.
+  Fresh branch cuts from main AFTER #207 squash-merges ([[one-branch-local-review]]).
 - [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt** — exists, no live consumer (EI-9f); needs a
   single-figure FOCUS surface (a rival-head dossier / a braid-crossing close-up) to drive it.
   DECISION (log, [[never-ask-direction]]): sequence after the VD milestone — GA-NEWS + GA-MUSIC first (highest
   feel-per-effort), then GA-VIDEO finale, then the rest. Each its own milestone branch.
+- [ ] [WAIT] **GA-MAP-ART PR #207 — merge on green.** Reviewer trio folded (1081a0d+fa09f3e): code-reviewer clean;
+  simplifier dropped a redundant Job interface. Monitor bt7poya25 armed on CI; merge on CLEAN/UNSTABLE + 0 unresolved
+  threads. Then verify main has src/sim/genai/mapArt.ts + the MapView era-base wiring + map_founding_1700s.png.
 
 ## ★TOP PRIORITY — EMERGENT-INFANCY ONBOARDING (user, 2026-06-23, HIGHEST-ORDER — outranks everything)★
 
