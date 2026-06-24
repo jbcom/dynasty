@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.73.0](https://github.com/jbcom/dynasty/compare/v0.72.1...v0.73.0) (2026-06-24)
+
+
+### Features
+
+* report fabric keeper candidates ([#240](https://github.com/jbcom/dynasty/issues/240)) ([3c10733](https://github.com/jbcom/dynasty/commit/3c107339f0f2ab76a44309b2bd4fd7603fe6c844))
+
 ## [0.72.1](https://github.com/jbcom/dynasty/compare/v0.72.0...v0.72.1) (2026-06-24)
 
 
