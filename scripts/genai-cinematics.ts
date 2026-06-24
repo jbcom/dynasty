@@ -19,6 +19,7 @@ import {
 } from "../src/sim/cinematic/genaiCinematic";
 import { DEFAULT_VIDEO_MODEL, geminiGenerateVideo } from "../src/sim/genai/client";
 import { ERA_BAND_ORDER } from "../src/sim/genai/portrait";
+import { registerGeneratedAsset } from "./generated-assets";
 
 const OUT_DIR = "public/assets/generated/cinematics";
 
@@ -66,14 +67,25 @@ async function main(): Promise<void> {
     console.error("GEMINI_API_KEY not set — cinematic generation needs a Gemini key.");
     process.exit(1);
   }
-  const genVideo = geminiGenerateVideo(key, process.env.GEMINI_VIDEO_MODEL || DEFAULT_VIDEO_MODEL);
+  const model = process.env.GEMINI_VIDEO_MODEL || DEFAULT_VIDEO_MODEL;
+  const genVideo = geminiGenerateVideo(key, model);
   mkdirSync(OUT_DIR, { recursive: true });
 
   let made = 0;
   for (const job of jobs()) {
     const stem = job.key.replace(/:/g, "_");
     const abs = join(OUT_DIR, `${stem}.mp4`);
+    const register = () =>
+      registerGeneratedAsset({
+        id: `cinematic_${stem}`,
+        path: `assets/generated/cinematics/${stem}.mp4`,
+        kind: "video",
+        source: `GenAI (${model}) — engraving-chronicle cinematic`,
+        license: "Generated",
+        attribution: `Generated dynasty cinematic: ${job.key}`,
+      });
     if (!FORCE && existsSync(abs)) {
+      register();
       console.error(`  · ${stem}: exists, skipping`);
       continue;
     }
@@ -84,6 +96,7 @@ async function main(): Promise<void> {
       continue;
     }
     writeFileSync(abs, bytes);
+    register();
     made++;
     console.error(`  ✓ ${stem}: ${(bytes.length / 1024 / 1024).toFixed(1)} MiB → ${stem}.mp4`);
   }

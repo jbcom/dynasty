@@ -51,6 +51,33 @@ function walk(actId: string, flags: string[]): string[] {
 }
 
 describe("SPINE-ACT-DEPTH: every spine act is deepened with texture + consequence interstitials", () => {
+  it("GENAI-GENERATE ratchet: regenerated spine generations keep distinct structural fingerprints", () => {
+    const fingerprints = SPINE_ACTS.map((actId) => {
+      const a = act(actId);
+      return a.scenes
+        .map((id) => {
+          const scene = corpus.scenes.get(id);
+          if (!scene) throw new Error(`no scene ${id}`);
+          return `${scene.sense}:${scene.beats.length}${scene.decision ? "D" : ""}${
+            scene.decision ? `:${scene.decision.options.length}` : ""
+          }`;
+        })
+        .join("|");
+    });
+    const distinct = new Set(fingerprints).size;
+    const largestCluster = Math.max(
+      0,
+      ...[...new Set(fingerprints)].map(
+        (fingerprint) => fingerprints.filter((candidate) => candidate === fingerprint).length,
+      ),
+    );
+    expect(
+      distinct / SPINE_ACTS.length,
+      "distinct structural fingerprint ratio",
+    ).toBeGreaterThanOrEqual(0.9);
+    expect(largestCluster, "no repeated generated spine skeleton cluster").toBeLessThanOrEqual(2);
+  });
+
   it("g0 walks open → texture → allegiance → consequence → reversal → bargain → close (heavy-act shape)", () => {
     expect(walk("spine:g0:founding", [])).toEqual([
       "open",

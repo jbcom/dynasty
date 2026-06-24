@@ -28,6 +28,7 @@ interface OnRamp {
   sceneId: string;
   kind: "decision" | "beat";
   index: number;
+  seedFlags: string[];
 }
 
 /** Find a spine act + scene + the decision-option OR beat index whose setFlags include `sig`. */
@@ -39,9 +40,23 @@ function findOnRamp(sig: string): OnRamp | null {
       const optionIndex = (scene.decision?.options ?? []).findIndex((o) =>
         o.setFlags.includes(sig),
       );
-      if (optionIndex >= 0) return { actId: act.id, sceneId, kind: "decision", index: optionIndex };
+      if (optionIndex >= 0)
+        return {
+          actId: act.id,
+          sceneId,
+          kind: "decision",
+          index: optionIndex,
+          seedFlags: [...scene.requires.flags],
+        };
       const beatIndex = (scene.beats ?? []).findIndex((b) => b.choice?.setFlags.includes(sig));
-      if (beatIndex >= 0) return { actId: act.id, sceneId, kind: "beat", index: beatIndex };
+      if (beatIndex >= 0)
+        return {
+          actId: act.id,
+          sceneId,
+          kind: "beat",
+          index: beatIndex,
+          seedFlags: [...scene.requires.flags],
+        };
     }
   }
   return null;
@@ -51,7 +66,9 @@ function findOnRamp(sig: string): OnRamp | null {
 function playToOnRamp(onRamp: OnRamp): string[] {
   const act = corpus.acts.get(onRamp.actId);
   if (!act) throw new Error(`no act ${onRamp.actId}`);
-  let state = startAct(corpus, act, initMotivators());
+  // Some branch on-ramps live in base-flavored opening variants; seed those founding-composition flags
+  // so the runner proves a real reachable path through the same gate the player would satisfy.
+  let state = startAct(corpus, act, initMotivators(), onRamp.seedFlags);
   for (let guard = 0; guard < 50 && state.sceneId && state.sceneId !== onRamp.sceneId; guard++) {
     const scene = currentScene(corpus, state);
     if (!scene) break;

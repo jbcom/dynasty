@@ -1,7 +1,7 @@
 import { mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { page } from "vitest/browser";
-import { buildDossier, type DossierInput } from "../../../sim/dossier/dossier";
+import { buildDossier, type Dossier, type DossierInput } from "../../../sim/dossier/dossier";
 import { applyBrandTokens, makeHost } from "../../__tests__/visualHarness";
 import DossierView from "../DossierView.svelte";
 
@@ -25,6 +25,15 @@ const input: DossierInput = {
 let host: HTMLElement;
 // biome-ignore lint/suspicious/noExplicitAny: opaque Svelte component instance
 let component: any;
+
+function withMissingBrief(dossier: Dossier): Dossier {
+  return {
+    ...dossier,
+    panels: dossier.panels.map((panel) =>
+      panel.type === "brief" ? { ...panel, key: "dossier:brief:test:missing" } : panel,
+    ),
+  };
+}
 
 beforeEach(() => {
   applyBrandTokens();
@@ -67,7 +76,10 @@ describe("DossierView (VD-3)", () => {
     });
     expect(host.textContent).toMatch(/press the docks/);
     unmount(component);
-    component = mount(DossierView, { target: host, props: { dossier: buildDossier(input) } });
+    component = mount(DossierView, {
+      target: host,
+      props: { dossier: withMissingBrief(buildDossier(input)) },
+    });
     expect(host.textContent).toMatch(/Compiling the assessment/);
   });
 

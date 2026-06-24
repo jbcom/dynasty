@@ -152,6 +152,18 @@ describe("schema validation", () => {
     });
     expect(result.success).toBe(true);
   });
+
+  it("AssetSchema accepts 'video' as a valid kind (GA-VIDEO)", () => {
+    const result = AssetSchema.safeParse({
+      id: "cinematic_finale_stars",
+      path: "assets/generated/cinematics/cinematic_finale_stars.mp4",
+      kind: "video",
+      source: "GenAI (veo-3.0-generate-001) — engraving-chronicle cinematic",
+      license: "Generated",
+      attribution: "Generated dynasty cinematic: cinematic:finale:stars",
+    });
+    expect(result.success).toBe(true);
+  });
 });
 
 describe("FD-3 trope catalog + cross-ref gate", () => {

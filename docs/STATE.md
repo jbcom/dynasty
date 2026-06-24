@@ -40,11 +40,15 @@ Shipped on `feat/narrative-acts` (PRs #65/#67); polished on `feat/saga-polish` (
 - **GenAI scene authoring**: use `pnpm genai:spine` (`scripts/genai-spine.ts`) to regenerate
   `spine.act.json`, then re-apply `node scripts/fs-spine-origin-flavor.mjs &&
   node scripts/fs-spine-act-depth.mjs`. The old `genai:expand --type scene --all --cls …` path is legacy
-  source/fabric tooling; do not use it to define the played game.
+  source/fabric tooling; do not use it to define the played game. Latest live generation (2026-06-24):
+  10/10 spine generations authored with Gemini, origin-flavor variants reapplied, and 30 depth interstitials
+  inserted.
 - **Structural sameness status**: the 504-cell uniqueness audit remains a historical/fabric metric. The
   live sameness fix is the founding-spine pivot itself: one authored line with era-distinct decision
   architectures, power-base flavored openings, deterministic trigger branches, and recurring cast
-  encounters.
+  encounters. `spineActDepth.unit.test.ts` now ratchets the generated spine's structural fingerprints:
+  10/10 generated generation acts are distinct, with a durable floor of >=0.9 distinct ratio and no repeated
+  skeleton cluster above 2.
 - **Playtime depth**: the live proof is the spine path, not a class file. `spineActDepth.unit.test.ts`
   guards every g0-g9 act's interstitial depth, and `src/engine/__tests__/spineDepthPlaytest.unit.test.ts`
   measures a full founding→stars run with the shock/recovery/agency layers on top.
@@ -57,6 +61,11 @@ Shipped on `feat/narrative-acts` (PRs #65/#67); polished on `feat/saga-polish` (
   SPAN, not the act title); `SlideOutMenu.svelte` top-right hamburger holds the non-essential HUD
   (meters, motivators, utopia–tyranny). Cross-family intersections render as an "Elsewhere — another
   line" aside.
+- **Generated visual/audio surface status**: the live GenAI asset pass is populated and license-logged:
+  news dispatches (24 keys), Lyria era beds (10 WAVs), cinematics (5 MP4s), map bases (8 era keys plus the
+  original founding map), dossier figures+diagrams (112 PNGs) and briefs (56 keys), narration (16 WAVs),
+  encounter portraits (56 PNGs), and the protagonist portrait matrix. `src/data/assets.json` records 554
+  generated entries with zero missing files.
 - **Retired**: the Epoch-0 NARRATIVE (birth/naming/station/schooling/calling) is gone; the saga acts
   are the played story. The SUCCESSION mechanic survives (events tagged `life-stage`,
   ev_cp_take_partner/raise_heirs; founding sets emerged/named/calling_chosen).

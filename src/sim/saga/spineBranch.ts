@@ -27,38 +27,74 @@ import type { Scene } from "./schema";
 export const SPINE_FLAG_TO_BRANCH: Readonly<Record<string, BranchKey>> = {
   // OLIGARCHY — concentrated capital, crushed labor, the corporate monolith / techno-feudal state.
   g3_crush_labor: "oligarchy",
+  g3_land_sold_to_capital: "oligarchy",
+  g3_law_built_the_trust: "oligarchy",
+  g3_military_broke_the_strike: "oligarchy",
   g3_succession_corporate_monolith: "oligarchy",
   g4_sided_with_capital: "oligarchy",
+  g4_industrial_baron: "oligarchy",
+  g4_labor_crushed: "oligarchy",
+  g6_commerce_lbo: "oligarchy",
+  g6_succession_corporate: "oligarchy",
+  g8_law_corporate_sovereignty: "oligarchy",
+  g8_trust_succession: "oligarchy",
   g7_monopoly_secured: "oligarchy",
   doctrine_techno_feudal: "oligarchy",
 
   // MEDIA — the telecom/broadcast/multimedia empire, spectacle, the platform that shapes opinion.
+  g3_press_yellow_journalism: "media",
+  g5_press_safe_consensus: "media",
   g5_telecom_empire: "media",
+  g6_bought_the_next_medium: "media",
+  g6_cable_secured: "media",
   g6_multimedia_empire: "media",
   g6_platform_spectacle: "media",
+  g6_truth_spectacle: "media",
+  g6_tuned_in: "media",
   g6_exposed_government: "media",
   g6_succession_digital_pioneer: "media",
+  g9_press_relay_monopoly: "media",
 
   // MEGACHURCH — sincerity-platform broadcast faith, the televangelist empire.
+  g6_pulpit_televangelist: "megachurch",
+  g6_pulpit_religious_right: "megachurch",
   g6_platform_sincerity: "megachurch",
+  g7_pulpit_streamed_faith: "megachurch",
+  g7_pulpit_networked_movement: "megachurch",
 
   // THEOCRACY — faith carried to power: the covenant path, the martyr/scholar faith successions.
+  g0_pulpit_blessed_cause: "theocracy",
+  g0_pulpit_defied_magistrates: "theocracy",
+  g1_doctrine_faith: "theocracy",
+  g1_pulpit_revival: "theocracy",
   g9_path_covenant: "theocracy",
+  g9_pulpit_interstellar_creed: "theocracy",
+  g9_pulpit_established_church: "theocracy",
   g1_succession_martyr: "theocracy",
   g0_succession_scholar: "theocracy",
 
   // NAZI / authoritarian state — the citadel doctrine, the manifest-state + conquest interstellar path,
   // the armed militia that seizes order.
   doctrine_state_citadel: "nazi",
+  g7_doctrine_state: "nazi",
+  g7_succession_state: "nazi",
+  g9_law_empire: "nazi",
   g9_manifest_state: "nazi",
+  g9_conquest: "nazi",
   g9_path_conquest: "nazi",
   armed_militia: "nazi",
 
   // WESTCOAST — the technologist/space frontier: the space race, satellites, the reach for the stars.
+  g5_aerospace_pioneer: "westcoast",
   g4_focused_on_technology: "westcoast",
   g5_space_race: "westcoast",
+  g6_succession_satellite: "westcoast",
   g6_satellite_pioneer: "westcoast",
+  g8_committed_to_the_deep: "westcoast",
   g8_focused_on_stars: "westcoast",
+  g8_orbital_succession: "westcoast",
+  g8_colony_succession: "westcoast",
+  g9_ordered_the_deep_jump: "westcoast",
 };
 
 /**

@@ -433,6 +433,7 @@ export const AssetSchema = z.object({
     "sprite",
     "font",
     "dossier-figure", // VD-6: the visual-dossier atmospheric establishing plates
+    "video", // GA-VIDEO: generated cinematic transition/finale clips
   ]),
   source: z.string().min(1),
   // "Generated" = produced by the project's GenAI pipeline (VL-2 portraits/map); rights per the model

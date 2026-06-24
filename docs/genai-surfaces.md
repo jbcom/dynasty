@@ -78,3 +78,19 @@ All seven surfaces are SHIPPED (builders + scripts + graceful runtime + tests), 
 #202 (news), #203 (music), #205 (video), #207 (map), #209 (dossier diagrams), #211 (TTS), #213
 (encounter portraits). The live assets are produced offline when a key is available; until then every
 surface degrades cleanly per the table above.
+
+Live asset pass, 2026-06-24: `GEMINI_API_KEY` was available in the repo `.env`, so the full documented
+offline pass ran from current main. Results on disk:
+
+- Authored spine: 10/10 generations regenerated, then origin flavor and 30 depth interstitials reapplied.
+- News: 24 dispatch keys already present; idempotent skip verified.
+- Music: 10 Lyria era beds already present; idempotent skip verified and license-log reconciliation added.
+- Cinematics: 5 MP4s generated (founding handoff + four finale outcomes).
+- Map bases: 7 missing era bases generated; founding already present.
+- Dossiers: 49 missing atmospheric figures, 56 informational diagrams, and 49 missing briefs generated.
+- Narration: 16 WAV reads generated.
+- Encounter portraits: 56 rival-head PNGs generated.
+- Protagonist portraits: default matrix proved complete; 294 keys skipped.
+
+Manifest proof: `src/data/assets.json` now records 554 generated assets (`audio`, `background`,
+`dossier-figure`, `portrait`, `video`) and a zero-missing generated-file check passes.
