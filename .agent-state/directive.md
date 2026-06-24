@@ -181,12 +181,18 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   composite-key portrait to the SceneReader (magazine-wrapped, EI-7). Generated the founding infant/child/youth low
   portraits (period-correct children, humble sketch medium). LIVE-VERIFIED in Chrome: the birth scene shows the
   sketched founding infant beside "You are born…". Gate: check 0, typecheck 0/0, unit 982, browser 161, e2e 7.
-- [ ] **EI-9d play-surface life-stage + ENCOUNTER portraits (remaining EI-9c scope)** — beyond the opening: when the
-  PLAY surface protagonist's age falls in a non-adult stage (early-life scenes / an elder late in a generation), or a
-  generation re-enters the cycle, PlayScreen requests infant/child/youth/elder keys per era — generate those on the
-  eras the spine actually hits (founding→stellar; progeny-in-space need stellar children too). PLUS the encounter-role
-  portraits (first friend/betrayer/partner/rival/mentor) via `buildEncounterPortraitPrompt` — wire the SceneReader's
-  thread/encounter surfaces to request them. Enumerate the live runner's actual demand first; don't blanket all keys.
+- [x] **EI-9d portrait graceful-fallback — DONE (branch ei9c).** ENUMERATED the live non-adult demand: `age = year −
+  birthYear` and each succession re-anchors birthYear (effects.ts), so every generation's protagonist ages
+  child→youth→adult→elder through its span — PlayScreen DOES request non-adult life-stage keys across all eras the
+  spine hits. Since the matrix is on-demand (not all keys pre-generated), the SceneReader portrait `<img>` now has an
+  `onerror` that HIDES it (degrades to prose-only, no broken-image icon). Browser-tested (a missing asset hides the
+  portrait). The on-demand cache (EI-8e) generates real keys at runtime; this is the missing-asset safety net.
+- [ ] **EI-9e play-surface non-adult + ENCOUNTER portrait GENERATION (remaining)** — generate the common non-adult
+  life-stage portraits the spine actually hits (youth/elder per era band × the spine's archetypes/tiers — child/infant
+  mainly in the opening, already seeded for founding). PLUS encounter-role portraits: the formative beats
+  (first-friend/betrayer/loss/romance) + braid crossings introduce OTHER people — decide whether to show their
+  `buildEncounterPortraitPrompt` portrait (a second figure) or keep the progenitor-only Suzerain pattern, then wire +
+  generate the chosen set. Targeted, not blanket; READ a sample per stage/role. (Needs a fresh branch post-#199.)
 - [x] **EI-SCARCITY-STORIES — post-scarcity narrative theme in the guidance — DONE (code, branch ei9c).** Added a
   `scarcity` field to the far-future era guidance (t4/t5 × poor/middle in guidance.json) naming the post-scarcity
   stakes (what STAYS scarce when all else is abundant: un-copyable physical artifacts, real presence, authentic line,
