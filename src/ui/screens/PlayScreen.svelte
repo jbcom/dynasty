@@ -96,7 +96,6 @@ const boundaryDossier = $derived.by(() => {
   return buildDossier({
     archetype: s.archetype,
     year: s.year,
-    seed: s.seed,
     series,
     rivals: view.rivalStandings.map((r) => ({
       id: r.id,

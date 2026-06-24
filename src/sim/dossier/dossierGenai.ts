@@ -107,6 +107,9 @@ const KIND_FIGURE: Record<DossierKind, string> = {
 export function buildDossierFigurePrompt(
   kind: DossierKind,
   eraBand: EraBand,
+  // `archetype` is part of the figure KEY (1:1 with kind today) but the prompt derives purely from kind+era —
+  // the establishing plate depicts the kind's setting, which the archetype already determines. Accepted so the
+  // signature matches the keyed call site; if archetypes ever share a kind, vary the prompt on it here.
   _archetype: PortraitArchetype,
 ): string {
   return [

@@ -10,7 +10,7 @@
  */
 
 import type { EraBand } from "../genai/portrait";
-import { eraBandForYear } from "../genai/portrait";
+import { ERA_BAND_ORDER, eraBandForYear } from "../genai/portrait";
 import type { PortraitArchetype } from "../genai/portraitFacets";
 
 /** The dossier flavor, keyed to the dynasty's archetype PATH (the "context of the dynasty path"). */
@@ -94,7 +94,6 @@ export interface DossierInput {
   /** The run's path — the sim Archetype plus crime (the intelligence-dossier path), so all 7 kinds are reachable. */
   archetype: PortraitArchetype;
   year: number;
-  seed: string;
   /** Per-meter time series (reuse buildMeterSeries): years + one value line per meter. */
   series: { years: number[]; byMeter: Record<string, number[]> };
   /** The rival field — each line's standing, for the network graph. */
@@ -159,20 +158,10 @@ export function buildDossier(input: DossierInput): Dossier {
   };
 
   // MAP: the journey so far — every era band up to the current one is reached (the line's reach over centuries).
-  const order: EraBand[] = [
-    "founding_1700s",
-    "federal_1800s",
-    "industrial_late1800s",
-    "early_1900s",
-    "midcentury",
-    "digital_modern",
-    "near_future",
-    "stellar",
-  ];
-  const reachedIdx = order.indexOf(eraBand);
+  const reachedIdx = ERA_BAND_ORDER.indexOf(eraBand);
   const map: MapSpec = {
     title: "Reach",
-    reached: order.slice(0, reachedIdx + 1),
+    reached: ERA_BAND_ORDER.slice(0, reachedIdx + 1),
     current: eraBand,
   };
 

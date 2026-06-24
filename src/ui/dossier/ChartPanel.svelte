@@ -42,7 +42,8 @@ $effect(() => {
       })),
     ],
   };
-  plot?.destroy();
+  // No eager destroy here — the $effect cleanup (below) tears down the prior instance before this re-runs.
+  // (Calling uPlot.destroy() twice on the same instance throws, so we destroy ONLY in cleanup.)
   plot = new uPlot(opts, data, el);
   return () => {
     plot?.destroy();

@@ -13,7 +13,6 @@ import DossierView from "../DossierView.svelte";
 const input: DossierInput = {
   archetype: "crime",
   year: 1960,
-  seed: "run1",
   series: { years: [1930, 1945, 1960], byMeter: { reputation: [10, 25, 40], heat: [5, 30, 55] } },
   rivals: [
     { id: "r1", label: "italian", rung: 4, fallen: false },
@@ -89,7 +88,6 @@ describe("DossierView (VD-3)", () => {
     const founding = buildDossier({
       archetype: "economic",
       year: 1776,
-      seed: "found1",
       series: {
         years: [1776, 1790, 1805],
         byMeter: { reputation: [5, 18, 35], money: [2, 10, 24] },

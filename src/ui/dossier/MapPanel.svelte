@@ -5,6 +5,7 @@
  * companion to the full MapView). Pure presentation, Svelte+CSS data viz.
  */
 import type { EraBand } from "../../sim/genai/portrait";
+import { ERA_BAND_ORDER } from "../../sim/genai/portrait";
 import type { MapSpec } from "../../sim/dossier/dossier";
 
 interface Props {
@@ -23,23 +24,13 @@ const ERA_LABEL: Record<EraBand, string> = {
   near_future: "Near",
   stellar: "Stars",
 };
-const ALL: EraBand[] = [
-  "founding_1700s",
-  "federal_1800s",
-  "industrial_late1800s",
-  "early_1900s",
-  "midcentury",
-  "digital_modern",
-  "near_future",
-  "stellar",
-];
 const reached = $derived(new Set(spec.reached));
 </script>
 
 <figure class="map-panel">
   <figcaption>{spec.title}</figcaption>
   <ol class="reach" aria-label="The line's reach across the eras">
-    {#each ALL as band (band)}
+    {#each ERA_BAND_ORDER as band (band)}
       <li class="stop" class:lit={reached.has(band)} class:current={band === spec.current}>
         <span class="dot" aria-hidden="true"></span>
         <span class="label">{ERA_LABEL[band]}</span>

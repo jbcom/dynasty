@@ -28,7 +28,7 @@ import {
   geminiGenerate,
   geminiGenerateImage,
 } from "../src/sim/genai/client";
-import type { EraBand } from "../src/sim/genai/portrait";
+import { ERA_BAND_ORDER, type EraBand } from "../src/sim/genai/portrait";
 import type { PortraitArchetype } from "../src/sim/genai/portraitFacets";
 import { type PortraitCache, resolvePortrait } from "../src/sim/genai/portraitCache";
 import { ARCHETYPES } from "../src/sim/slots";
@@ -61,7 +61,7 @@ function representativeState(eraBand: EraBand): DossierState {
 /** Parse the model's brief into paragraphs. Defensively unwraps a JSON-wrapped reply (some models return
  *  `{ "briefing": "..." }` despite the prompt) + strips code fences before splitting on blank lines. */
 function toParagraphs(text: string): string[] {
-  let body = text.trim().replace(/^```(?:json)?\s*|\s*```$/g, "");
+  let body = text.trim().replace(/^```\w*\s*|\s*```$/g, "");
   // If the model wrapped the prose in JSON, pull the longest string field (the briefing) out.
   if (body.startsWith("{") || body.startsWith("[")) {
     try {
@@ -93,16 +93,7 @@ const arg = (name: string): string | undefined => {
 const FORCE = process.argv.includes("--force");
 
 const ALL_ARCHETYPES: PortraitArchetype[] = [...ARCHETYPES, "crime"];
-const ALL_ERAS: EraBand[] = [
-  "founding_1700s",
-  "federal_1800s",
-  "industrial_late1800s",
-  "early_1900s",
-  "midcentury",
-  "digital_modern",
-  "near_future",
-  "stellar",
-];
+const ALL_ERAS: readonly EraBand[] = ERA_BAND_ORDER;
 
 interface AssetEntry {
   id: string;

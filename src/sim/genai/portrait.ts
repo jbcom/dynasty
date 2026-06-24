@@ -179,6 +179,9 @@ export const ERA_BANDS: ReadonlyArray<{ band: EraBand; to: number }> = [
   { band: "stellar", to: Number.POSITIVE_INFINITY },
 ];
 
+/** The 8 fine era bands in chronological order (the canonical sequence — reuse instead of re-listing them). */
+export const ERA_BAND_ORDER: readonly EraBand[] = ERA_BANDS.map((b) => b.band);
+
 /** The fine era band a given saga-clock year falls in (EI-8a). Pure. */
 export function eraBandForYear(year: number): EraBand {
   for (const b of ERA_BANDS) {

@@ -15,7 +15,6 @@ import {
 const input = (over: Partial<DossierInput> = {}): DossierInput => ({
   archetype: "economic",
   year: 1880,
-  seed: "run1",
   series: { years: [1850, 1865, 1880], byMeter: { reputation: [10, 30, 55], heat: [0, 5, 20] } },
   rivals: [
     { id: "r1", label: "italian", rung: 3, fallen: false },
@@ -77,7 +76,7 @@ describe("VD-2 buildDossier (live state → visual briefing)", () => {
     expect(map.data.reached).toEqual(["founding_1700s", "federal_1800s", "industrial_late1800s"]);
   });
 
-  it("is DETERMINISTIC — the figure/brief keys are stable per (kind, era, archetype/seed)", () => {
+  it("is DETERMINISTIC — the figure key is kind×era×archetype, the brief key kind×era", () => {
     expect(dossierFigureKey("rnd", "stellar", "technological")).toBe(
       "dossier:fig:rnd:stellar:technological",
     );

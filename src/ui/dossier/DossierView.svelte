@@ -5,7 +5,9 @@
  * brief reads beside it, and the real data-viz panels (chart / graph / map) anchor the assessment. Suzerain
  * scannability: measured columns, lifted set pieces, real anchors. Pure presentation over the pure Dossier.
  */
+import type { DossierPanel } from "../../sim/dossier/dossier";
 import type { Dossier } from "../../sim/dossier/dossier";
+import type { EraBand } from "../../sim/genai/portrait";
 import BriefPanel from "./BriefPanel.svelte";
 import ChartPanel from "./ChartPanel.svelte";
 import FigurePanel from "./FigurePanel.svelte";
@@ -21,13 +23,14 @@ interface Props {
 const { dossier, brief }: Props = $props();
 
 // VD-6: resolve the brief from the offline-generated map by the brief panel's key, unless an override is given.
+// A typed predicate narrows the discriminated union (no unsafe cast — review).
 const briefPanelKey = $derived(
-  (dossier.panels.find((p) => p.type === "brief") as { key: string } | undefined)?.key,
+  dossier.panels.find((p): p is Extract<DossierPanel, { type: "brief" }> => p.type === "brief")?.key,
 );
 const resolvedBrief = $derived(brief ?? (briefPanelKey ? loadDossierBrief(briefPanelKey) : undefined));
 
-// A short era label for the masthead.
-const ERA_LABEL: Record<string, string> = {
+// A short era label for the masthead — total over EraBand (the type guarantees coverage, no fallback needed).
+const ERA_LABEL: Record<EraBand, string> = {
   founding_1700s: "The Founding · 1770s",
   federal_1800s: "The Early Republic",
   industrial_late1800s: "The Gilded Age",
@@ -42,7 +45,7 @@ const ERA_LABEL: Record<string, string> = {
 <section class="dossier-view" data-kind={dossier.kind} data-testid="dossier-view">
   <header class="masthead">
     <h2>{dossier.title}</h2>
-    <p class="era">{ERA_LABEL[dossier.eraBand] ?? dossier.eraBand}</p>
+    <p class="era">{ERA_LABEL[dossier.eraBand]}</p>
   </header>
 
   <div class="spread">
