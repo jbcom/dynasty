@@ -31,6 +31,11 @@ Shipped on `feat/narrative-acts` (PRs #65/#67); polished on `feat/saga-polish` (
   scene-slot scaffold (open/rising+secondary/midpoint+intersection/turn+major/close), seeded per
   cell; GenAI fleshes it. **GenAI** `genai:expand --type scene [--all --cls <poor|middle>]` +
   `scripts/retitle-saga.ts` (distinct meso act titles) + `scripts/prune-saga-orphans.ts`.
+- **Playtime depth (PLAYTIME-DEPTH-AUDIT):** one lineage run (a wave×archetype×class corpus file = 6 acts,
+  founding→stars) is **~57 min median** of authored scene depth (range 49–63 min across the 84 class files;
+  thinnest ~49 min), read @220wpm + decision deliberation — BEFORE the emergence opening, the surfaces, and the
+  hour+ goal is met. Metric: `src/sim/saga/playtimeDepth.ts`; report: `pnpm vite-node scripts/playtime-depth.ts`;
+  durable floor: `playtimeDepth.unit.test.ts` (fails on any thinning regression).
 - **Engine cut-over** (`src/engine/sagaDriver.ts` + `loop.ts`): Game holds a SagaDriver; begins the
   founded line's act by cell (wave = founding place, archetype, tier = protagonist generation, cls =
   sagaClassForWealth(personality.wealth)); a saga beat/decision advances the run clock + resumes the
