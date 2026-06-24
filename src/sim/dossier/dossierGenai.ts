@@ -119,3 +119,48 @@ export function buildDossierFigurePrompt(
     "Empty of figures — a place/object plate that frames a briefing.",
   ].join(" ");
 }
+
+/**
+ * GA-DOSSIER-DIAGRAMS — what each kind's INFORMATIONAL diagram depicts. Distinct from KIND_FIGURE (atmosphere):
+ * this is a labeled schematic/chart/map — a tech-tree, a surveillance plot, a flow chart — the briefing's
+ * data-figure centerpiece. Still NO people; nodes/lines/markers, not a scene.
+ */
+const KIND_DIAGRAM: Record<DossierKind, string> = {
+  intelligence:
+    "a redacted SURVEILLANCE CHART of a contested district — a street plan with marked nodes, sightlines, and " +
+    "connecting lines between watched locations; a hand-annotated intelligence plot",
+  rnd:
+    "a branching TECHNOLOGY / DEVELOPMENT TREE — nodes for inventions joined by progression lines, some lit " +
+    "as achieved and some dim ahead; an inventor's research diagram",
+  portfolio:
+    "a CAPITAL-FLOW diagram — holdings as boxes joined by weighted flow arrows, a ledger's-eye schematic of " +
+    "positions and exposure",
+  marketing:
+    "a REACH MAP — the audience as a radiating network of channels and venues, nodes sized by attention, lines " +
+    "carrying the name outward",
+  warroom:
+    "an ORDER-OF-BATTLE diagram — a campaign map with coalition blocs, marked contested ground, and arrows of " +
+    "advance; a strategist's plot",
+  doctrine:
+    "a CONGREGATION map — the flock as clustered nodes spreading along routes from a central seat, the message's " +
+    "diffusion charted",
+  scouting:
+    "a FORM CHART / bracket — competitors as ranked nodes on a path-to-the-title diagram, lines tracing the " +
+    "contest",
+};
+
+/**
+ * Build the dossier DIAGRAM prompt (GA-DOSSIER-DIAGRAMS): the kind's informational diagram + the era register,
+ * rendered as a period-true SCHEMATIC in the signature engraving style (a hand-annotated chart in the 1700s; a
+ * luminous holographic schematic in the star age), NO people, NO real labels/text baked in (the panel captions
+ * it). Pure; the runner resolves it via the Imagen on-demand+cache (dossierDiagramKey).
+ */
+export function buildDossierDiagramPrompt(kind: DossierKind, eraBand: EraBand): string {
+  return [
+    `A period INFORMATIONAL DIAGRAM (a chart/schematic, NO people, no portrait): ${KIND_DIAGRAM[kind]}, in the`,
+    `visual idiom of ${ERA_REGISTER[eraBand]}.`,
+    SIGNATURE_STYLE,
+    STYLE_NEGATIVE,
+    "A diagram of nodes, lines and markers — NO legible text or numbers baked in (the briefing labels it).",
+  ].join(" ");
+}

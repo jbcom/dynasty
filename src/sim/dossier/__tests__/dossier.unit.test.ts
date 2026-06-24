@@ -3,6 +3,7 @@ import {
   buildDossier,
   type DossierInput,
   dossierBriefKey,
+  dossierDiagramKey,
   dossierFigureKey,
   dossierKindForArchetype,
 } from "../dossier";
@@ -45,10 +46,21 @@ describe("VD-2 buildDossier (live state → visual briefing)", () => {
     expect(d.title).toMatch(/Intelligence/);
   });
 
-  it("emits a fixed coherent panel set: figure + brief + chart + graph + map", () => {
+  it("emits a fixed coherent panel set: figure + brief + diagram + chart + graph + map", () => {
     const d = buildDossier(input());
     const types = d.panels.map((p) => p.type);
-    expect(new Set(types)).toEqual(new Set(["figure", "brief", "chart", "graph", "map"]));
+    expect(new Set(types)).toEqual(
+      new Set(["figure", "brief", "diagram", "chart", "graph", "map"]),
+    );
+  });
+
+  it("GA-DOSSIER-DIAGRAMS: emits a captioned diagram panel keyed kind×era", () => {
+    const d = buildDossier(input({ archetype: "technological", year: 1950 }));
+    const diagram = d.panels.find((p) => p.type === "diagram");
+    if (diagram?.type !== "diagram") throw new Error("no diagram panel");
+    expect(diagram.key).toBe("dossier:diagram:rnd:midcentury");
+    // The caption labels the path's signature figure (an R&D tree for the technological path).
+    expect(diagram.caption).toMatch(/tree/i);
   });
 
   it("the CHART binds to the real meter series (one line per meter, aligned to years)", () => {
@@ -84,6 +96,8 @@ describe("VD-2 buildDossier (live state → visual briefing)", () => {
     expect(dossierBriefKey("intelligence", "midcentury")).toBe(
       "dossier:brief:intelligence:midcentury",
     );
+    // GA-DOSSIER-DIAGRAMS: the diagram is keyed kind×era too (informational, run-independent, cached).
+    expect(dossierDiagramKey("rnd", "stellar")).toBe("dossier:diagram:rnd:stellar");
     // Same input → byte-identical dossier (pure).
     expect(buildDossier(input())).toEqual(buildDossier(input()));
   });

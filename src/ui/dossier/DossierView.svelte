@@ -52,6 +52,11 @@ const ERA_LABEL: Record<EraBand, string> = {
     {#each dossier.panels as panel, i (i)}
       {#if panel.type === "figure"}
         <div class="cell figure-cell"><FigurePanel figureKey={panel.key} /></div>
+      {:else if panel.type === "diagram"}
+        <!-- GA-DOSSIER-DIAGRAMS: the path's informational diagram, captioned, spanning the full width. -->
+        <div class="cell diagram-cell">
+          <FigurePanel figureKey={panel.key} caption={panel.caption} />
+        </div>
       {:else if panel.type === "brief"}
         <div class="cell brief-cell"><BriefPanel paragraphs={resolvedBrief} /></div>
       {:else if panel.type === "chart"}
@@ -113,7 +118,8 @@ const ERA_LABEL: Record<EraBand, string> = {
       grid-template-columns: 1fr 1fr;
       align-items: start;
     }
-    .map-cell {
+    .map-cell,
+    .diagram-cell {
       grid-column: 1 / -1;
     }
   }

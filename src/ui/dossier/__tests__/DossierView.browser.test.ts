@@ -71,6 +71,27 @@ describe("DossierView (VD-3)", () => {
     expect(host.textContent).toMatch(/Compiling the assessment/);
   });
 
+  it("GA-DOSSIER-DIAGRAMS: renders the captioned informational diagram, keyed kind×era", () => {
+    component = mount(DossierView, { target: host, props: { dossier: buildDossier(input) } });
+    const diagram = host.querySelector("[data-testid='dossier-diagram']") as HTMLImageElement;
+    expect(diagram, "the diagram panel renders").not.toBeNull();
+    // crime/midcentury → dossier:diagram:intelligence:midcentury → the underscore-mapped asset path.
+    expect(diagram.getAttribute("src")).toBe(
+      "/assets/generated/dossiers/dossier_diagram_intelligence_midcentury.png",
+    );
+    // The caption labels it as the briefing's data-figure (the surveillance chart for the crime/intel path).
+    expect(host.querySelector("[data-testid='diagram-caption']")?.textContent).toMatch(
+      /surveillance/i,
+    );
+  });
+
+  it("GA-DOSSIER-DIAGRAMS: the diagram hides on error when the asset isn't generated (graceful)", () => {
+    component = mount(DossierView, { target: host, props: { dossier: buildDossier(input) } });
+    const diagram = host.querySelector("[data-testid='dossier-diagram']") as HTMLImageElement;
+    diagram.dispatchEvent(new Event("error"));
+    expect(diagram.style.display).toBe("none");
+  });
+
   it("captures a mobile screenshot of the composed dossier", async () => {
     component = mount(DossierView, {
       target: host,

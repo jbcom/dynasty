@@ -126,8 +126,11 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   below + EI-9g each their own fresh-branch milestone, gated on the #203 merge.
 - [x] **#203 (GA-MUSIC) — MERGED (squash cdc4a67).** VERIFIED main has src/sim/music/ + 10 .wav tracks +
   trackForEra. Two GenAI-expansion milestones now shipped (GA-NEWS #202, GA-MUSIC #203). On feat/ga-video next.
-- [ ] [WAIT] **GA-TTS — period-voice narration of key beats (optional)** — TTS read of the naming beat / a generation's
-  pivotal decision in an era-true voice. Lower priority; accessibility + immersion.
+- [ ] [WAIT] **GA-TTS — period-voice narration of key beats — NEXT milestone (own fresh branch, GATED on the GA-DOSSIER-DIAGRAMS PR merge).**
+  A TTS read of the naming beat / a generation's pivotal decision in an era-true voice (accessibility + immersion).
+  Pattern: pure prompt/voice-config builder + key (per beat-kind × era), the Gemini TTS client in client.ts, an
+  offline gen script → cached audio, a runtime player surface with graceful (silent) fallback, tests. Milestone branch,
+  ONE PR. Fresh branch cuts from main AFTER the GA-DOSSIER-DIAGRAMS PR squash-merges ([[one-branch-local-review]]).
 - [x] **GA-NEWS — GenAI period DISPATCHES — BUILT (branch feat/ga-news).** GN-1 pure `src/sim/news/genaiNews.ts`
   (buildNewsDispatchPrompt + newsDispatchKey, era × mood, leak-safe, JSON-unwrap defense). GN-2 loadNewsDispatch +
   a NewsTicker "Dispatch" layer (term-resolved). GN-3 scripts/genai-news.ts generated ALL 24 era×mood dispatch sets
@@ -146,18 +149,24 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   the existing founding base so the founding era loads directly; 2 browser tests (era tracks base; fallback). assets.json
   license entry. Gate: check 0, typecheck 0/0, unit 1014, browser 172. Live-gen of the other 7 bands BLOCKED here (no
   key) — degrades to the founding base until generated. NEXT: reviewer trio (running) folded → ONE PR.
-- [ ] [WAIT] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers — NEXT milestone (own fresh branch, GATED on #207 merge).**
-  Beyond atmosphere: generate the dossier's diagrams (an R&D tech-tree sketch, a redacted intel surveillance chart)
-  keyed to real state, as a FigurePanel variant. Pure prompt builder + key (per dossier kind × era), offline gen
-  script, a FigurePanel diagram variant with hide-on-error fallback, a browser test. Milestone branch, ONE PR.
-  Fresh branch cuts from main AFTER #207 squash-merges ([[one-branch-local-review]]).
+- [x] **GA-DOSSIER-DIAGRAMS — GenAI informational diagrams in the dossiers — BUILT (branch feat/ga-dossier-diagrams,
+  commit cb8202d).** The dossier had data-viz + atmospheric figure + prose but no INFORMATIONAL diagram. Added a
+  { type:"diagram"; key; caption } panel + dossierDiagramKey (kind×era) + per-kind caption (dossier.ts); a period-true
+  SCHEMATIC prompt per kind (buildDossierDiagramPrompt: R&D tree, surveillance chart, capital-flow, order-of-battle…,
+  no people/no baked text — the panel captions it; dossierGenai.ts); FigurePanel grew an optional caption → the
+  captioned diagram variant (DossierView renders the full-width cell); genai-dossiers.ts also generates the diagrams
+  (kind×era, license-logged). Tests: unit (key + per-kind prompt + era-keying + caption) + browser (captioned diagram
+  renders + hides on error). Gate: check 0, typecheck 0/0, unit 1018, browser 174. Live-gen BLOCKED here (no key) —
+  degrades via hide-on-error. Reviewer trio CLEAN (code-reviewer + simplifier, no findings to fold).
+- [ ] [WAIT] **GA-DOSSIER-DIAGRAMS PR #209 — merge on green.** Reviewer trio clean (cb8202d). Monitor bcrln2117 armed
+  on CI; merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has the diagram panel + buildDossierDiagramPrompt.
 - [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt** — exists, no live consumer (EI-9f); needs a
   single-figure FOCUS surface (a rival-head dossier / a braid-crossing close-up) to drive it.
   DECISION (log, [[never-ask-direction]]): sequence after the VD milestone — GA-NEWS + GA-MUSIC first (highest
   feel-per-effort), then GA-VIDEO finale, then the rest. Each its own milestone branch.
-- [ ] [WAIT] **GA-MAP-ART PR #207 — merge on green.** Reviewer trio folded (1081a0d+fa09f3e): code-reviewer clean;
-  simplifier dropped a redundant Job interface. Monitor bt7poya25 armed on CI; merge on CLEAN/UNSTABLE + 0 unresolved
-  threads. Then verify main has src/sim/genai/mapArt.ts + the MapView era-base wiring + map_founding_1700s.png.
+- [x] **GA-MAP-ART PR #207 — MERGED (squash ece0be9); v0.64.0 cut.** Reviewer trio folded; CI green; squash-merged
+  CLEAN. VERIFIED main has src/sim/genai/mapArt.ts + the MapView era-base wiring + map_founding_1700s.png. Five
+  GenAI-expansion milestones now shipped (GA-NEWS #202, GA-MUSIC #203, GA-VIDEO #205, GA-MAP-ART #207).
 
 ## ★TOP PRIORITY — EMERGENT-INFANCY ONBOARDING (user, 2026-06-23, HIGHEST-ORDER — outranks everything)★
 

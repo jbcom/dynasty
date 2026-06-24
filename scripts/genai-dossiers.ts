@@ -12,12 +12,14 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import {
   dossierBriefKey,
+  dossierDiagramKey,
   dossierFigureKey,
   type DossierKind,
   dossierKindForArchetype,
 } from "../src/sim/dossier/dossier";
 import {
   buildDossierBriefPrompt,
+  buildDossierDiagramPrompt,
   buildDossierFigurePrompt,
   type DossierState,
   dossierBriefSystem,
@@ -172,6 +174,43 @@ async function main(): Promise<void> {
     }
   }
   console.error(`Dossier figure generation complete: ${made} written.`);
+
+  // GA-DOSSIER-DIAGRAMS: the informational diagram per kind×era (a tech-tree / surveillance chart). Keyed on
+  // kind×era — archetype→kind is 1:1, so each kind is hit once across the archetype sweep (no dedup needed).
+  let diagramsMade = 0;
+  for (const archetype of archetypes) {
+    const kind = dossierKindForArchetype(archetype);
+    if (kindFlag && kind !== kindFlag) continue;
+    for (const eraBand of eras) {
+      const dKey = dossierDiagramKey(kind, eraBand);
+      const stem = dKey.replace(/:/g, "_");
+      const r = await resolvePortrait(stem, buildDossierDiagramPrompt(kind, eraBand), fsCache, genImage);
+      if (r.cached) {
+        console.error(`  · ${stem}: exists, skipping`);
+        continue;
+      }
+      if (!r.bytes) {
+        console.error(`  ✗ ${stem}: model produced no image`);
+        continue;
+      }
+      const id = `dossierdiagram_${stem}`;
+      if (!existingIds.has(id)) {
+        assetsFile.assets.push({
+          id,
+          path: `assets/generated/dossiers/${stem}.png`,
+          kind: "dossier-figure",
+          source: `GenAI (${model}) — signature engraving style`,
+          license: "Generated",
+          attribution: `Dossier diagram: ${kind} / ${eraBand}`,
+        });
+        existingIds.add(id);
+      }
+      diagramsMade++;
+      console.error(`  ✓ ${stem}: ${r.bytes.length} bytes`);
+      writeFileSync(ASSETS_JSON, `${JSON.stringify(assetsFile, null, 2)}\n`);
+    }
+  }
+  console.error(`Dossier diagram generation complete: ${diagramsMade} written.`);
 
   // BRIEFS: the path-voice prose per kind×era, generated offline into a JSON map (loaded at runtime like the
   // scene corpus — no API at sim runtime). Run-independent (the live charts carry the run's exact numbers).

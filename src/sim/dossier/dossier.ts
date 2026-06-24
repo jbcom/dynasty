@@ -78,6 +78,7 @@ export type DossierPanel =
   | { type: "graph"; data: GraphSpec }
   | { type: "map"; data: MapSpec }
   | { type: "figure"; key: string } // GenAI atmospheric artifact (Imagen on-demand+cache)
+  | { type: "diagram"; key: string; caption: string } // GA-DOSSIER-DIAGRAMS: a GenAI INFORMATIONAL diagram
   | { type: "brief"; key: string }; // GenAI path-voice analytical prose (resolved by the runner)
 
 /** A composed dossier: a path-keyed visual briefing over the run's live state. */
@@ -120,6 +121,27 @@ export function dossierFigureKey(
 export function dossierBriefKey(kind: DossierKind, eraBand: EraBand): string {
   return `dossier:brief:${kind}:${eraBand}`;
 }
+
+/**
+ * The deterministic key for a dossier's GenAI DIAGRAM (GA-DOSSIER-DIAGRAMS) — an INFORMATIONAL figure (an R&D
+ * tech-tree, a redacted surveillance chart), distinct from the atmospheric `dossierFigureKey`. Keyed on kind ×
+ * era (offline-generated + cached, sim purity) — the diagram reads as a period-and-path artifact; the run's
+ * exact numbers live in the chart/graph panels beside it.
+ */
+export function dossierDiagramKey(kind: DossierKind, eraBand: EraBand): string {
+  return `dossier:diagram:${kind}:${eraBand}`;
+}
+
+/** The in-fiction caption for each kind's diagram (the briefing labels its centerpiece figure). */
+const KIND_DIAGRAM_CAPTION: Record<DossierKind, string> = {
+  intelligence: "Surveillance Chart — territory & known associates",
+  rnd: "Development Tree — the line's research path",
+  portfolio: "Capital Flows — positions & exposure",
+  marketing: "Reach Map — the audience & the channels",
+  warroom: "Order of Battle — coalitions & contested ground",
+  doctrine: "The Flock — congregations & the spread of the message",
+  scouting: "Form Chart — the field & the path to the title",
+};
 
 /** Title-case a meter id for a chart legend ("reputation" → "Reputation"). */
 function legendLabel(id: string): string {
@@ -173,6 +195,13 @@ export function buildDossier(input: DossierInput): Dossier {
     panels: [
       { type: "figure", key: dossierFigureKey(kind, eraBand, archetype) },
       { type: "brief", key: dossierBriefKey(kind, eraBand) },
+      // GA-DOSSIER-DIAGRAMS: the path's signature INFORMATIONAL diagram (tech-tree / surveillance chart),
+      // the briefing's centerpiece, leading the real data anchors (chart/graph/map) below it.
+      {
+        type: "diagram",
+        key: dossierDiagramKey(kind, eraBand),
+        caption: KIND_DIAGRAM_CAPTION[kind],
+      },
       { type: "chart", data: chart },
       { type: "graph", data: graph },
       { type: "map", data: map },
