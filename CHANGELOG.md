@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.71.1](https://github.com/jbcom/dynasty/compare/v0.71.0...v0.71.1) (2026-06-24)
+
+
+### Documentation
+
+* mark shape diversify milestone merged ([cafb6b4](https://github.com/jbcom/dynasty/commit/cafb6b4e0a84aecda3adcb438bd061594728fc7a))
+
 ## [0.71.0](https://github.com/jbcom/dynasty/compare/v0.70.0...v0.71.0) (2026-06-24)
 
 
