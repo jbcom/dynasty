@@ -23,6 +23,57 @@ export const DEFAULT_QA_MODEL = "gemini-3.5-flash";
 /** The IMAGE-generation model (VL-2) — Imagen 4 fast. Override with GEMINI_IMAGE_MODEL. */
 export const DEFAULT_IMAGE_MODEL = "imagen-4.0-fast-generate-001";
 
+/** The MUSIC model (GA-MUSIC) — Lyria realtime. Override with GEMINI_MUSIC_MODEL. */
+export const DEFAULT_MUSIC_MODEL = "models/lyria-realtime-exp";
+
+/** Lyria streams 48kHz stereo 16-bit PCM. The capture wraps the concatenated chunks in a WAV with this format. */
+export const LYRIA_SAMPLE_RATE = 48_000;
+export const LYRIA_CHANNELS = 2;
+
+/** Capture `seconds` of a Lyria score for a prompt → raw concatenated PCM bytes (s16le, 48kHz stereo). */
+export type CaptureMusicFn = (prompt: string, seconds: number) => Promise<Uint8Array>;
+
+/**
+ * Build a Lyria music-capture function (GA-MUSIC, key-gated). Connects to the realtime music stream, sets
+ * the weighted prompt, plays for `seconds`, concatenates the base64 PCM audio chunks, and returns the raw
+ * PCM (the offline script wraps it in a WAV/OGG). Offline tooling only — never called at sim runtime.
+ */
+export function geminiCaptureMusic(apiKey: string, model = DEFAULT_MUSIC_MODEL): CaptureMusicFn {
+  if (!apiKey)
+    throw new Error("geminiCaptureMusic: missing API key — music capture needs a Gemini key");
+  const ai = new GoogleGenAI({ apiKey, apiVersion: "v1alpha" });
+  return async (prompt, seconds) => {
+    const chunks: Buffer[] = [];
+    let closed = false;
+    const session = await ai.live.music.connect({
+      model,
+      callbacks: {
+        onmessage: (msg) => {
+          for (const c of msg.serverContent?.audioChunks ?? []) {
+            if (c.data) chunks.push(Buffer.from(c.data, "base64"));
+          }
+        },
+        onerror: () => {
+          closed = true;
+        },
+        onclose: () => {
+          closed = true;
+        },
+      },
+    });
+    await session.setWeightedPrompts({ weightedPrompts: [{ text: prompt, weight: 1 }] });
+    session.play();
+    // Collect for `seconds` (the stream is realtime ~1×), then stop. A small poll keeps it simple + bounded.
+    const deadline = seconds * 1000;
+    const step = 250;
+    for (let t = 0; t < deadline && !closed; t += step) {
+      await new Promise((r) => setTimeout(r, step));
+    }
+    session.stop();
+    return Buffer.concat(chunks);
+  };
+}
+
 /** Generate one image → raw PNG/JPEG bytes (Uint8Array), or null on no image. (impl, key-gated.) */
 export type GenerateImageFn = (prompt: string) => Promise<Uint8Array | null>;
 

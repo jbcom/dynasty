@@ -64,9 +64,9 @@ export class AudioEngine {
   private eraPlayer: Tone.Player | null = null;
 
   /**
-   * Switch the ambient bed to an era. Prefers a real CC0 loop at
-   * `/assets/audio/<eraId>.ogg`; falls back to a synth pad chord if the file is
-   * absent (e.g. in tests). Safe to call repeatedly; no-ops if already on that era.
+   * Switch the ambient bed to an era. Prefers a real loop at `/assets/audio/<eraId>.ogg`, then the GA-MUSIC
+   * GenAI score at `/assets/audio/<eraId>.wav`, then a synth pad chord (e.g. in tests / ungenerated eras).
+   * Safe to call repeatedly; no-ops if already on that era.
    */
   setEra(eraId: string, chord: string[] = ["C3", "E3", "G3"]): void {
     if (!this.started || this.currentEra === eraId) return;
@@ -87,19 +87,33 @@ export class AudioEngine {
       if (Tone.getTransport().state !== "started") Tone.getTransport().start();
     };
 
-    try {
-      // Tone.Player loads the buffer asynchronously, so a 404/decode failure
-      // surfaces via onerror (not a synchronous throw) — handle both paths.
-      this.eraPlayer = new Tone.Player({
-        url: `/assets/audio/${eraId}.ogg`,
-        loop: true,
-        volume: -12,
-        autostart: true,
-        onerror: fallbackToPad,
-      }).connect(this.master);
-    } catch {
-      fallbackToPad();
-    }
+    // Try the era audio files in order (.ogg, then the GA-MUSIC .wav), falling through to the synth chord.
+    // Tone.Player loads the buffer async, so a 404/decode failure surfaces via onerror (not a sync throw).
+    const tryUrls = (urls: string[]): void => {
+      const [url, ...rest] = urls;
+      if (!url) {
+        fallbackToPad();
+        return;
+      }
+      try {
+        this.eraPlayer = new Tone.Player({
+          url: `/assets/audio/${url}`,
+          loop: true,
+          volume: -12,
+          autostart: true,
+          onerror: () => {
+            if (this.currentEra !== eraId) return; // a newer era already took over
+            this.eraPlayer?.dispose();
+            this.eraPlayer = null;
+            tryUrls(rest);
+          },
+        }).connect(this.master);
+      } catch {
+        tryUrls(rest);
+      }
+    };
+
+    tryUrls([`${eraId}.ogg`, `${eraId}.wav`]);
   }
 
   /** Stop everything and free nodes. */
