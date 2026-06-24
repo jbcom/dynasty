@@ -9,7 +9,7 @@
  */
 
 import type { Archetype } from "../slots";
-import type { RankState } from "../state";
+import type { GameState, RankState } from "../state";
 
 /** The birth→growth→death stages a portrait is keyed on (recurs every generation). */
 export type LifeStage = "infant" | "child" | "youth" | "adult" | "elder";
@@ -76,6 +76,22 @@ export function rungTierForState(ranks: Record<string, RankState>): RungTier {
     if (r.rung > top) top = r.rung;
   }
   return rungTierForRung(top);
+}
+
+/** The binary portrait matrix currently generated for lineage subjects. */
+export type PortraitGender = "male" | "female";
+
+/**
+ * Current protagonist gender for the portrait matrix. The founder's selected gender is only the bootstrap
+ * fallback; once a live family exists, the portrait must follow the member the player is steering after
+ * succession. Pure + tolerant of older saves/lean test fixtures with incomplete family records.
+ */
+export function portraitGenderForState(
+  state: Pick<GameState, "family" | "founding">,
+): PortraitGender {
+  const family = state.family;
+  const protagonist = family?.members.find((m) => m.id === family.protagonistId);
+  return protagonist?.sex ?? state.founding?.gender ?? "male";
 }
 
 /**
