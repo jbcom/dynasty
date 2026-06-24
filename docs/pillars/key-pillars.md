@@ -48,7 +48,7 @@ workflow is reductive and transactional:
 4. Later refill the gap with a rewritten encounter or non-first-person branch piece that
    serves the one-dynasty spine.
 
-After `--prune-one` proves itself, expand the same transaction model:
+The same transaction model now supports:
 
 - `--prune-n <count>`: remove the next N worst entries in one reviewed transaction batch.
 - `--prune-auto`: run cheap pre-read heuristics first (word count, sentence length,
