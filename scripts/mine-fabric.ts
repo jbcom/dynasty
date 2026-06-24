@@ -5,14 +5,20 @@
  * stay as the source of record; the fabric is the curated subset the spine's trigger lattice draws from).
  *
  *   pnpm vite-node scripts/mine-fabric.ts -- [--keep 0.2] [--out src/data/saga/fabric/index.json]
+ *   pnpm vite-node scripts/mine-fabric.ts -- --prune-one
  *
  * Output: a fabric index keyed by family(wave) × era × setting, each entry the kept scene's id + provenance
  * + the borrowable source vignettes. Deterministic — same corpus → same fabric. Reviewable as a diff.
+ * `--prune-one` is the reductive editorial path: remove exactly one least-scannable kept entry from the
+ * existing index and append a transaction record describing the gap to refill later.
+ * NEXT after proving it: `--prune-n`, `--prune-auto`, and `--prune-all` should reuse this transaction
+ * model, with `--prune-auto` choosing candidates through cheap pre-read heuristics before expensive scans.
  * (POV-shift rewrite of the kept scenes into spine branches is FS-5's authoring step, fed by this index.)
  */
 
-import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { appendFileSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { auditProseQuality, type ProseQualityReport } from "../src/sim/proseQuality";
 import { type MineScene, selectFabric } from "../src/sim/saga/mineFabric";
 
 const SAGA_ROOT = "src/data/saga";
@@ -24,10 +30,30 @@ const arg = (name: string): string | undefined => {
 };
 const KEEP = Number(arg("keep") ?? "0.2");
 const OUT = arg("out") ?? "src/data/saga/fabric/index.json";
+const TRANSACTIONS = arg("transactions") ?? "src/data/saga/fabric/transactions.ndjson";
+const PRUNE_ONE = process.argv.includes("--prune-one");
 
 interface ActFile {
   acts: Array<{ id: string; wave?: string; tier: number; macroAct: string; scenes: string[] }>;
   scenes: MineScene[];
+}
+
+interface FabricEntry {
+  sceneId: string;
+  tier: number;
+  score: number;
+  maxSimilarity?: number;
+  settings: string[];
+  vignettes: string[];
+}
+
+interface FabricIndex {
+  generated: string;
+  keepFraction: number;
+  totalScenes: number;
+  keptScenes: number;
+  byEra: Record<string, number>;
+  fabric: Record<string, Record<string, FabricEntry[]>>;
 }
 
 /** Walk the corpus → every scene tagged with its wave + the act/era it came from. */
@@ -58,7 +84,91 @@ function loadCorpus(): {
   return { scenes, meta };
 }
 
+function recomputeCounts(fabric: FabricIndex["fabric"]): {
+  keptScenes: number;
+  byEra: Record<string, number>;
+} {
+  const byEra: Record<string, number> = {};
+  let keptScenes = 0;
+  for (const eras of Object.values(fabric)) {
+    for (const [era, list] of Object.entries(eras)) {
+      byEra[era] = (byEra[era] ?? 0) + list.length;
+      keptScenes += list.length;
+    }
+  }
+  return { keptScenes, byEra };
+}
+
+function pruneOne(): void {
+  const index = JSON.parse(readFileSync(OUT, "utf8")) as FabricIndex;
+  const candidates: Array<{
+    wave: string;
+    era: string;
+    index: number;
+    entry: FabricEntry;
+    report: ProseQualityReport;
+  }> = [];
+
+  for (const [wave, eras] of Object.entries(index.fabric)) {
+    for (const [era, list] of Object.entries(eras)) {
+      for (let i = 0; i < list.length; i += 1) {
+        const entry = list[i];
+        if (!entry || entry.vignettes.length === 0) continue;
+        candidates.push({
+          wave,
+          era,
+          index: i,
+          entry,
+          report: auditProseQuality(`fabric:${wave}:${era}:${entry.sceneId}`, entry.vignettes),
+        });
+      }
+    }
+  }
+
+  candidates.sort(
+    (a, b) =>
+      Number(a.report.pass) - Number(b.report.pass) ||
+      a.report.scanScore - b.report.scanScore ||
+      a.report.clarityScore - b.report.clarityScore ||
+      a.report.consistencyScore - b.report.consistencyScore ||
+      b.report.averageSentenceWords - a.report.averageSentenceWords ||
+      a.entry.sceneId.localeCompare(b.entry.sceneId),
+  );
+  const pick = candidates[0];
+  if (!pick) throw new Error(`No prune candidate found in ${OUT}`);
+
+  index.fabric[pick.wave]?.[pick.era]?.splice(pick.index, 1);
+  const counts = recomputeCounts(index.fabric);
+  index.keptScenes = counts.keptScenes;
+  index.byEra = Object.fromEntries(
+    [...new Set([...Object.keys(index.byEra ?? {}), ...Object.keys(counts.byEra)])].map((era) => [
+      era,
+      counts.byEra[era] ?? 0,
+    ]),
+  );
+  writeFileSync(OUT, `${JSON.stringify(index, null, 2)}\n`);
+
+  const tx = {
+    ts: new Date().toISOString(),
+    type: "fabric-prune-one",
+    sceneId: pick.entry.sceneId,
+    wave: pick.wave,
+    era: pick.era,
+    tier: pick.entry.tier,
+    reason: `Removed exactly one played-fabric item: least-scannable current kept entry, scanScore ${pick.report.scanScore}, clarityScore ${pick.report.clarityScore}, Flesch reading ease ${pick.report.fleschReadingEase}, Flesch-Kincaid ${pick.report.fleschKincaidGrade}, average sentence ${pick.report.averageSentenceWords} words.`,
+    gap: `${pick.era} ${pick.wave} tier-${pick.entry.tier} ${pick.entry.sceneId} needs a rewritten non-first-person replacement that serves the one-dynasty spine without dense legacy prose.`,
+    source: "scripts/mine-fabric.ts --prune-one",
+  };
+  appendFileSync(TRANSACTIONS, `${JSON.stringify(tx)}\n`);
+  console.error(`Pruned ${pick.entry.sceneId} from ${OUT}; transaction appended to ${TRANSACTIONS}.`);
+}
+
 function main(): void {
+  if (PRUNE_ONE) {
+    pruneOne();
+    return;
+  }
+
   const { scenes, meta } = loadCorpus();
   console.error(`Mining ${scenes.length} scenes across the corpus (keep top ${KEEP})…`);
 

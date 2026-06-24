@@ -47,3 +47,15 @@ workflow is reductive and transactional:
 3. Record the gap with provenance and reason.
 4. Later refill the gap with a rewritten encounter or non-first-person branch piece that
    serves the one-dynasty spine.
+
+After `--prune-one` proves itself, expand the same transaction model:
+
+- `--prune-n <count>`: remove the next N worst entries in one reviewed transaction batch.
+- `--prune-auto`: run cheap pre-read heuristics first (word count, sentence length,
+  duplicate openings, empty settings, similarity if available) to choose the next
+  reductive scan target efficiently.
+- `--prune-all`: apply the proven heuristic threshold across the retained fabric, with
+  transaction records for every removed item and no silent drops.
+
+The goal is broader coverage without reverting to whole-cloth review. Batch pruning should
+remove obvious chaff, preserve provenance, and leave explicit rewrite gaps.
