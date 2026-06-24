@@ -10,7 +10,7 @@
  * removed — UI atmosphere is Svelte + CSS, not asset layers — so this is chord-only.)
  */
 
-/** One era band: its id, the era-id keyword family it matches, and the ambient pad chord. */
+/** One era band: its id, the era-id keyword family it matches, the ambient pad chord, and the GA-MUSIC track. */
 export interface EraBand {
   /** Stable id (origins, mogul, ascent, interregnum, stars). */
   id: string;
@@ -18,21 +18,41 @@ export interface EraBand {
   match: RegExp;
   /** Tone.js note names for the ambient pad chord. */
   chord: readonly string[];
+  /** GA-MUSIC: the generated Lyria score stem (`/assets/audio/<track>.wav`) for this band — a real
+   *  generated `ambientTrack`, so a macro-act / era id resolves to an existing bed (review: namespace match). */
+  track: string;
 }
 
 /** The era arc, origins → stars (chord mood: rooted/warm early → open/luminous late). */
 export const ERA_BANDS: readonly EraBand[] = [
   // The `match` families ALSO cover the saga MACRO-ACT ids (founding/convergence/emergence/ascension) so the
   // ambient bed shifts across the decoupled saga clock, not just the event-era ladder (SAGA-AUDIO-ATMOSPHERE).
-  { id: "origins", match: /origins|1885|founding/i, chord: ["C3", "E3", "G3"] }, // rooted, warm
-  { id: "mogul", match: /mogul|1964|industr|convergence/i, chord: ["A2", "C3", "E3", "G3"] }, // minor-7 weight
+  // `track` is the representative generated Lyria bed for the band (GA-MUSIC, GM-3).
+  { id: "origins", match: /origins|1885|founding/i, chord: ["C3", "E3", "G3"], track: "boyhood" }, // rooted, warm
+  {
+    id: "mogul",
+    match: /mogul|1964|industr|convergence/i,
+    chord: ["A2", "C3", "E3", "G3"],
+    track: "mogul",
+  }, // minor-7 weight
   {
     id: "ascent",
     match: /brand|primetime|ascent|emergence|1988|2004|2015/i,
     chord: ["D3", "F#3", "A3"],
+    track: "ascent",
   }, // striving
-  { id: "interregnum", match: /interregnum|mars|2021|2028/i, chord: ["E3", "G#3", "B3", "D#4"] }, // suspended maj7
-  { id: "stars", match: /contact|interstellar|ascension|stars/i, chord: ["G2", "D3", "A3", "E4"] }, // open fifths
+  {
+    id: "interregnum",
+    match: /interregnum|mars|2021|2028/i,
+    chord: ["E3", "G#3", "B3", "D#4"],
+    track: "interregnum",
+  }, // suspended maj7
+  {
+    id: "stars",
+    match: /contact|interstellar|ascension|stars/i,
+    chord: ["G2", "D3", "A3", "E4"],
+    track: "redplanet",
+  }, // open fifths
 ];
 
 /** The default band (rooted origins) when an era id matches no family. */
@@ -42,4 +62,14 @@ export const DEFAULT_ERA_BAND: EraBand = ERA_BANDS[0] as EraBand;
 export function bandForEra(eraId: string): EraBand {
   for (const band of ERA_BANDS) if (band.match.test(eraId)) return band;
   return DEFAULT_ERA_BAND;
+}
+
+/**
+ * GA-MUSIC: the generated Lyria score STEM for an era id (a wave/period id or a saga macro-act). Resolves
+ * through the same band family as the chord, so a macro-act ("convergence") or an era whose id ≠ track
+ * ("caliphate", "firstcontact") maps to an EXISTING `/assets/audio/<track>.wav` — fixing the namespace
+ * mismatch where setMusicEra requested `<eraId>.wav` that was never generated (review). Pure.
+ */
+export function trackForEra(eraId: string): string {
+  return bandForEra(eraId).track;
 }

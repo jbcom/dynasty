@@ -69,7 +69,15 @@ export function geminiCaptureMusic(apiKey: string, model = DEFAULT_MUSIC_MODEL):
     for (let t = 0; t < deadline && !closed; t += step) {
       await new Promise((r) => setTimeout(r, step));
     }
-    session.stop();
+    // Guard + await stop: if the session already closed (onerror/onclose set `closed`, the path that exits the
+    // poll early), stop() can reject — an unhandled rejection would crash the capture sweep (review).
+    if (!closed) {
+      try {
+        session.stop();
+      } catch {
+        // already closed
+      }
+    }
     return Buffer.concat(chunks);
   };
 }

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { bandForEra, DEFAULT_ERA_BAND, ERA_BANDS } from "../eras";
+import { bandForEra, DEFAULT_ERA_BAND, ERA_BANDS, trackForEra } from "../eras";
+import { MUSIC_TRACKS } from "../music/genaiMusic";
 
 /**
  * Era bands — the single source the audio chord reads (chordForEra in ui/sound.ts). Pure + deterministic:
@@ -60,5 +61,32 @@ describe("ERA_BANDS", () => {
 
   it("the chord mood shifts across the arc (rooted origins ≠ open stars)", () => {
     expect(bandForEra("origins").chord).not.toEqual(bandForEra("stars").chord);
+  });
+
+  it("GA-MUSIC: trackForEra resolves the saga MACRO-ACTS + mismatched era ids to REAL generated tracks", () => {
+    // The review HIGH bug: setMusicEra requested <eraId>.wav, but the generated beds are keyed by track. The
+    // saga path passes macro-acts (founding/convergence/…) + some era ids differ from their track — all must
+    // resolve to one of the 10 GENERATED MUSIC_TRACKS (a real /assets/audio/<track>.wav), never a missing file.
+    const generated = new Set<string>(MUSIC_TRACKS);
+    for (const id of [
+      "founding",
+      "convergence",
+      "emergence",
+      "ascension", // saga macro-acts (the main play path)
+      "caliphate",
+      "origins",
+      "firstcontact",
+      "interstellar", // era ids whose id ≠ ambientTrack
+      "some-unmapped-period", // unknown → default band's track
+    ]) {
+      expect(
+        generated.has(trackForEra(id)),
+        `${id} → ${trackForEra(id)} is a generated track`,
+      ).toBe(true);
+    }
+    // The macro-acts still map to DISTINCT beds across the arc (not all collapsed to one).
+    expect(
+      new Set(["founding", "convergence", "emergence", "ascension"].map(trackForEra)).size,
+    ).toBe(4);
   });
 });

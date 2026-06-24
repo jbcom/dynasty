@@ -1,6 +1,6 @@
 import { AudioEngine } from "../audio/engine";
 import { Sfx, type SfxId } from "../audio/sfx";
-import { bandForEra } from "../sim/eras";
+import { bandForEra, trackForEra } from "../sim/eras";
 
 /**
  * SOUND CUES (PF-15) — a single lazily-constructed Sfx the play surface uses for page-turn + choice
@@ -63,7 +63,8 @@ export function startMusic(): void {
             music.setEra("ending-sting", pendingStingChord);
             pendingStingChord = null;
           } else if (pendingEra) {
-            music.setEra(pendingEra, chordForEra(pendingEra));
+            // pendingEra is the original era id; load by its generated track, fall back to its chord (GA-MUSIC).
+            music.setEra(trackForEra(pendingEra), chordForEra(pendingEra));
           }
         })
         .catch(() => {
@@ -75,11 +76,13 @@ export function startMusic(): void {
   }
 }
 
-/** Switch the ambient bed to a run era. Remembered + applied once the graph has started. */
+/** Switch the ambient bed to a run era. Remembered + applied once the graph has started. GA-MUSIC: the bed
+ *  LOADS by the era's generated TRACK stem (trackForEra — a real `/assets/audio/<track>.wav`), while the
+ *  synth-fallback chord still tracks the ORIGINAL era id so the mood is right even when no asset exists. */
 export function setMusicEra(eraId: string): void {
-  pendingEra = eraId;
+  pendingEra = eraId; // keep the ORIGINAL era id — the track + chord are both resolved from it at apply time.
   try {
-    if (music?.isStarted) music.setEra(eraId, chordForEra(eraId));
+    if (music?.isStarted) music.setEra(trackForEra(eraId), chordForEra(eraId));
   } catch {
     // ignore
   }
