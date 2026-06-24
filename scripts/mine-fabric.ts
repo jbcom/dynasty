@@ -21,7 +21,14 @@
 
 import { appendFileSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { auditProseQuality, type ProseQualityReport } from "../src/sim/proseQuality";
+import {
+  applyPruneToIndex,
+  buildPruneTransactions,
+  type FabricEntry,
+  type FabricIndex,
+  type PruneMode,
+  selectPruneCandidates,
+} from "../src/sim/saga/pruneFabric";
 import { type MineScene, selectFabric } from "../src/sim/saga/mineFabric";
 
 const SAGA_ROOT = "src/data/saga";
@@ -39,55 +46,9 @@ const PRUNE_N = arg("prune-n") !== undefined ? Number(arg("prune-n")) : undefine
 const PRUNE_AUTO = process.argv.includes("--prune-auto");
 const PRUNE_ALL = process.argv.includes("--prune-all");
 
-// Cheap pre-read scoring: rough size/scannability signals used before the full prose audit.
-const CHEAP_SCORE_AVG_SENTENCE_WORDS_THRESHOLD = 32;
-const CHEAP_SCORE_AVG_SENTENCE_WORDS_SCALE = 28;
-const CHEAP_SCORE_LONG_SENTENCE_WORD_COUNT = 36;
-const CHEAP_SCORE_MAX_SENTENCE_WORDS_THRESHOLD = 48;
-const CHEAP_SCORE_MAX_SENTENCE_WORDS_SCALE = 40;
-const CHEAP_SCORE_WORD_COUNT_THRESHOLD = 120;
-const CHEAP_SCORE_WORD_COUNT_SCALE = 160;
-const CHEAP_SCORE_EMPTY_SETTINGS_PENALTY = 0.25;
-
-// Prune-mode thresholds: keep auto bounded, and make all-mode only remove severe chaff.
-const PRUNE_AUTO_CANDIDATE_POOL_SIZE = 64;
-const PRUNE_ALL_SCAN_SCORE_THRESHOLD = 0.2;
-const PRUNE_ALL_AVG_SENTENCE_WORDS_THRESHOLD = 40;
-const PRUNE_ALL_CHEAP_SCORE_THRESHOLD = 1.1;
-
 interface ActFile {
   acts: Array<{ id: string; wave?: string; tier: number; macroAct: string; scenes: string[] }>;
   scenes: MineScene[];
-}
-
-interface FabricEntry {
-  sceneId: string;
-  tier: number;
-  score: number;
-  maxSimilarity?: number;
-  settings: string[];
-  vignettes: string[];
-}
-
-interface FabricIndex {
-  generated: string;
-  keepFraction: number;
-  totalScenes: number;
-  keptScenes: number;
-  byEra: Record<string, number>;
-  fabric: Record<string, Record<string, FabricEntry[]>>;
-}
-
-interface PruneCandidate {
-  wave: string;
-  era: string;
-  index: number;
-  entry: FabricEntry;
-  cheapScore: number;
-}
-
-interface AuditedPruneCandidate extends PruneCandidate {
-  report: ProseQualityReport;
 }
 
 /** Walk the corpus → every scene tagged with its wave + the act/era it came from. */
@@ -118,168 +79,28 @@ function loadCorpus(): {
   return { scenes, meta };
 }
 
-function recomputeCounts(fabric: FabricIndex["fabric"]): {
-  keptScenes: number;
-  byEra: Record<string, number>;
-} {
-  const byEra: Record<string, number> = {};
-  let keptScenes = 0;
-  for (const eras of Object.values(fabric)) {
-    for (const [era, list] of Object.entries(eras)) {
-      byEra[era] = (byEra[era] ?? 0) + list.length;
-      keptScenes += list.length;
-    }
-  }
-  return { keptScenes, byEra };
-}
-
-function words(text: string): string[] {
-  return text.toLowerCase().match(/[a-z]+(?:'[a-z]+)?/g) ?? [];
-}
-
-function sentenceWordCounts(text: string): number[] {
-  return text
-    .split(/(?<=[.!?])\s+/)
-    .map((sentence) => words(sentence).length)
-    .filter((count) => count > 0);
-}
-
-function cheapPruneScore(entry: FabricEntry): number {
-  const text = entry.vignettes.join(" ");
-  const counts = sentenceWordCounts(text);
-  const wordCount = words(text).length;
-  const avgSentenceWords = counts.length
-    ? counts.reduce((sum, count) => sum + count, 0) / counts.length
-    : wordCount;
-  const maxSentenceWords = Math.max(0, ...counts);
-  const longSentenceRatio = counts.length
-    ? counts.filter((count) => count >= CHEAP_SCORE_LONG_SENTENCE_WORD_COUNT).length / counts.length
-    : 0;
-  const emptySettingsPenalty =
-    entry.settings.length === 0 ? CHEAP_SCORE_EMPTY_SETTINGS_PENALTY : 0;
-  return (
-    Math.max(0, avgSentenceWords - CHEAP_SCORE_AVG_SENTENCE_WORDS_THRESHOLD) /
-      CHEAP_SCORE_AVG_SENTENCE_WORDS_SCALE +
-    Math.max(0, maxSentenceWords - CHEAP_SCORE_MAX_SENTENCE_WORDS_THRESHOLD) /
-      CHEAP_SCORE_MAX_SENTENCE_WORDS_SCALE +
-    longSentenceRatio +
-    Math.max(0, wordCount - CHEAP_SCORE_WORD_COUNT_THRESHOLD) /
-      CHEAP_SCORE_WORD_COUNT_SCALE +
-    emptySettingsPenalty
-  );
-}
-
-function collectCandidates(index: FabricIndex): PruneCandidate[] {
-  const candidates: PruneCandidate[] = [];
-  for (const [wave, eras] of Object.entries(index.fabric)) {
-    for (const [era, list] of Object.entries(eras)) {
-      for (let i = 0; i < list.length; i += 1) {
-        const entry = list[i];
-        if (!entry || entry.vignettes.length === 0) continue;
-        candidates.push({
-          wave,
-          era,
-          index: i,
-          entry,
-          cheapScore: cheapPruneScore(entry),
-        });
-      }
-    }
-  }
-  return candidates;
-}
-
-function auditCandidate(candidate: PruneCandidate): AuditedPruneCandidate {
-  return {
-    ...candidate,
-    report: auditProseQuality(
-      `fabric:${candidate.wave}:${candidate.era}:${candidate.entry.sceneId}`,
-      candidate.entry.vignettes,
-    ),
-  };
-}
-
-function compareAuditedPruneCandidates(a: AuditedPruneCandidate, b: AuditedPruneCandidate): number {
-  return (
-    Number(a.report.pass) - Number(b.report.pass) ||
-    a.report.scanScore - b.report.scanScore ||
-    a.report.clarityScore - b.report.clarityScore ||
-    a.report.consistencyScore - b.report.consistencyScore ||
-    b.cheapScore - a.cheapScore ||
-    b.report.averageSentenceWords - a.report.averageSentenceWords ||
-    a.entry.sceneId.localeCompare(b.entry.sceneId)
-  );
-}
-
-function removePicked(index: FabricIndex, picked: AuditedPruneCandidate[]): void {
-  const pickedIds = new Set(picked.map((candidate) => candidate.entry.sceneId));
-  for (const eras of Object.values(index.fabric)) {
-    for (const [era, list] of Object.entries(eras)) {
-      eras[era] = list.filter((entry) => !pickedIds.has(entry.sceneId));
-    }
-  }
-}
-
 function writePrunedIndex(index: FabricIndex): void {
-  const counts = recomputeCounts(index.fabric);
-  index.keptScenes = counts.keptScenes;
-  index.byEra = Object.fromEntries(
-    [...new Set([...Object.keys(index.byEra ?? {}), ...Object.keys(counts.byEra)])].map((era) => [
-      era,
-      counts.byEra[era] ?? 0,
-    ]),
-  );
   writeFileSync(OUT, `${JSON.stringify(index, null, 2)}\n`);
 }
 
-function appendTransactions(mode: string, picked: AuditedPruneCandidate[]): void {
-  const ts = new Date().toISOString();
-  for (const pick of picked) {
-    const tx = {
-      ts,
-      type: `fabric-prune-${mode}`,
-      sceneId: pick.entry.sceneId,
-      wave: pick.wave,
-      era: pick.era,
-      tier: pick.entry.tier,
-      reason: `Removed played-fabric item: scanScore ${pick.report.scanScore}, clarityScore ${pick.report.clarityScore}, Flesch reading ease ${pick.report.fleschReadingEase}, Flesch-Kincaid ${pick.report.fleschKincaidGrade}, average sentence ${pick.report.averageSentenceWords} words, cheap pre-read score ${Number(pick.cheapScore.toFixed(3))}.`,
-      gap: `${pick.era} ${pick.wave} tier-${pick.entry.tier} ${pick.entry.sceneId} needs a rewritten non-first-person replacement that serves the one-dynasty spine without dense legacy prose.`,
-      source: `scripts/mine-fabric.ts --prune-${mode}`,
-    };
-    appendFileSync(TRANSACTIONS, `${JSON.stringify(tx)}\n`);
-  }
+function appendTransactions(mode: PruneMode, picked: ReturnType<typeof selectPruneCandidates>, count?: number): void {
+  const transactions = buildPruneTransactions(mode, picked, new Date().toISOString(), count);
+  for (const tx of transactions) appendFileSync(TRANSACTIONS, `${JSON.stringify(tx)}\n`);
 }
 
-function prune(mode: "one" | "n" | "auto" | "all", count = 1): void {
+function prune(mode: PruneMode, count = 1): void {
   const index = JSON.parse(readFileSync(OUT, "utf8")) as FabricIndex;
-  let candidates = collectCandidates(index);
-  if (mode === "auto") {
-    candidates = candidates
-      .sort((a, b) => b.cheapScore - a.cheapScore || a.entry.sceneId.localeCompare(b.entry.sceneId))
-      .slice(0, Math.min(PRUNE_AUTO_CANDIDATE_POOL_SIZE, candidates.length));
-  }
-  const audited = candidates.map(auditCandidate).sort(compareAuditedPruneCandidates);
-  const picked =
-    mode === "all"
-      ? audited.filter(
-          (candidate) =>
-            !candidate.report.pass &&
-            (candidate.report.scanScore < PRUNE_ALL_SCAN_SCORE_THRESHOLD ||
-              candidate.report.averageSentenceWords > PRUNE_ALL_AVG_SENTENCE_WORDS_THRESHOLD ||
-              candidate.cheapScore >= PRUNE_ALL_CHEAP_SCORE_THRESHOLD),
-        )
-      : audited.slice(0, Math.max(1, count));
+  const picked = selectPruneCandidates(index, mode, count);
   if (picked.length === 0) throw new Error(`No prune candidate found in ${OUT}`);
 
-  removePicked(index, picked);
-  writePrunedIndex(index);
-  appendTransactions(mode, picked);
+  writePrunedIndex(applyPruneToIndex(index, picked));
+  appendTransactions(mode, picked, count);
   console.error(
     `Pruned ${picked.length} fabric entr${picked.length === 1 ? "y" : "ies"} from ${OUT}; transactions appended to ${TRANSACTIONS}.`,
   );
 }
 
-function pruneRequest(): { mode: "one" | "n" | "auto" | "all"; count?: number } | null {
+function pruneRequest(): { mode: PruneMode; count?: number } | null {
   const requested = [PRUNE_ONE, PRUNE_N !== undefined, PRUNE_AUTO, PRUNE_ALL].filter(Boolean).length;
   if (requested > 1) throw new Error("Choose only one prune mode.");
   if (PRUNE_ONE) return { mode: "one", count: 1 };
