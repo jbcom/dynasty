@@ -108,9 +108,10 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   captured ALL 10 era tracks (boyhood→redplanet, real ~16-24s Lyria beds, verified non-silent). GM-4: engine.audio
   tests exercise the .wav fallback; the era bed shifts via the existing setMusicEra wiring (no new wiring). Gate:
   check 0, typecheck 0/0, music unit 5, engine.audio 5. NEXT: local review trio + ONE PR.
-- [ ] [WAIT-REVIEW] **GA-MUSIC PR — local review + ship.** Code-reviewer dispatched on the GA-MUSIC diff (in
-  flight, auto-notifies); fold its findings forward, then open the ONE PR. The remaining GA-* below + EI-9g are
-  each their own fresh-branch milestone, gated on the GA-MUSIC merge.
+- [x] **GA-MUSIC PR — local review folded, PR OPENING.** Code-reviewer folded: the HIGH era→track namespace bug
+  (beds were dead on the saga path — fixed via trackForEra + a new eras test) + the MEDIUM capture stop() guard.
+  Gate: check 0, typecheck 0/0, unit 1006, audio browser 8, e2e 7. Opening the ONE GA-MUSIC PR. Remaining GA-*
+  below + EI-9g each their own fresh-branch milestone, gated on the GA-MUSIC merge.
 - [ ] [WAIT] **GA-TTS — period-voice narration of key beats (optional)** — TTS read of the naming beat / a generation's
   pivotal decision in an era-true voice. Lower priority; accessibility + immersion.
 - [x] **GA-NEWS — GenAI period DISPATCHES — BUILT (branch feat/ga-news).** GN-1 pure `src/sim/news/genaiNews.ts`
