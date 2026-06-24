@@ -98,9 +98,9 @@ when the WHOLE milestone is solid — NOT a PR per VD-step.
 AUDIT (honest, this session): currently GenAI is used for TEXT (gemini-3.5-flash: scene/act prose, the QA
 editor, spine gen, retitle, + the VD dossier briefs) and IMAGE (imagen-4.0-fast: the portrait matrix + the VD
 dossier figures). NOT yet used, though the visual-layer spec called for "imagery + VIDEO":
-- [ ] **GA-VIDEO — GenAI video (Veo) era/generation cinematics** — the spec said video; zero today. Candidates: a
-  generation-handoff "passing of the line" motion piece, an era-transition stinger, the ascension/stellar finale
-  cinematic, an animated journey map. On-demand+cache like portraits (key × era × archetype); EI-9d fallback.
+- [ ] [WAIT] **GA-VIDEO — GenAI video (Veo) era/generation cinematics (own branch post-GA-MUSIC-merge).** A
+  generation-handoff "passing of the line" piece / era-transition stinger / the stellar finale. On-demand+cache
+  like portraits (key × era × archetype); EI-9d fallback.
 - [x] **GA-MUSIC — GenAI era-shifting score (Lyria) — BUILT (branch feat/ga-music).** GM-1 pure
   src/sim/music/genaiMusic.ts (buildMusicPrompt + the 10 ambient-track slots, era moods, loopable/instrumental;
   5 tests). GM-2 `geminiCaptureMusic` (Lyria realtime-stream → PCM capture) + scripts/genai-music.ts (PCM→WAV);
@@ -108,8 +108,10 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   captured ALL 10 era tracks (boyhood→redplanet, real ~16-24s Lyria beds, verified non-silent). GM-4: engine.audio
   tests exercise the .wav fallback; the era bed shifts via the existing setMusicEra wiring (no new wiring). Gate:
   check 0, typecheck 0/0, music unit 5, engine.audio 5. NEXT: local review trio + ONE PR.
-- [ ] **GA-MUSIC PR — local review + ship.** Reviewer trio on the GA-MUSIC diff, fold forward, open the ONE PR.
-- [ ] **GA-TTS — period-voice narration of key beats (optional)** — TTS read of the naming beat / a generation's
+- [ ] [WAIT-REVIEW] **GA-MUSIC PR — local review + ship.** Code-reviewer dispatched on the GA-MUSIC diff (in
+  flight, auto-notifies); fold its findings forward, then open the ONE PR. The remaining GA-* below + EI-9g are
+  each their own fresh-branch milestone, gated on the GA-MUSIC merge.
+- [ ] [WAIT] **GA-TTS — period-voice narration of key beats (optional)** — TTS read of the naming beat / a generation's
   pivotal decision in an era-true voice. Lower priority; accessibility + immersion.
 - [x] **GA-NEWS — GenAI period DISPATCHES — BUILT (branch feat/ga-news).** GN-1 pure `src/sim/news/genaiNews.ts`
   (buildNewsDispatchPrompt + newsDispatchKey, era × mood, leak-safe, JSON-unwrap defense). GN-2 loadNewsDispatch +
@@ -121,11 +123,11 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
 - [x] **GA-NEWS PR — MERGED #202 (squash 20c61dd).** Reviewer trio folded (moodForRanks cross-ladder bug,
   toHeadlines trailing-md, PL-11 testid). VERIFIED on main (src/sim/news/ + 24 dispatch keys). The first
   GenAI-expansion milestone is shipped.
-- [ ] **GA-MAP-ART — GenAI cartographic base per era** — MapView is CSS; a generated period map base (the journey
+- [ ] [WAIT] **GA-MAP-ART — GenAI cartographic base per era** — MapView is CSS; a generated period map base (the journey
   as a real period map) was speced, only partially built. Reuse the dossier/portrait image pipeline.
-- [ ] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers** — beyond atmosphere: generate the dossier's diagrams
+- [ ] [WAIT] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers** — beyond atmosphere: generate the dossier's diagrams
   (an R&D tech-tree sketch, a redacted intel surveillance chart) keyed to real state, as a FigurePanel variant.
-- [ ] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt** — exists, no live consumer (EI-9f); needs a
+- [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt** — exists, no live consumer (EI-9f); needs a
   single-figure FOCUS surface (a rival-head dossier / a braid-crossing close-up) to drive it.
   DECISION (log, [[never-ask-direction]]): sequence after the VD milestone — GA-NEWS + GA-MUSIC first (highest
   feel-per-effort), then GA-VIDEO finale, then the rest. Each its own milestone branch.
@@ -307,7 +309,7 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   consumer yet — the infra stays ready (built + tested in EI-8d) for when a single-rival-head / braid-crossing FOCUS
   view is designed. Not force-fitting it into the roster. DECISION logged; the portrait milestone's live demand
   (progenitor life-stage portraits) is fully served.
-- [ ] **EI-9g per-rival roster avatars (optional polish, post-#199)** — IF wanted: give each RivalDossier/RivalField
+- [ ] [WAIT] **EI-9g per-rival roster avatars (optional polish, post-#199)** — IF wanted: give each RivalDossier/RivalField
   row a small head-avatar keyed on the rival's wave + current era band + rung tier (pass the game year in; default
   gender), with the EI-9d fallback. Lighter than a focus portrait; a roster-glance enrichment. Lower priority than
   any narrative/gameplay work — pick up only if the portrait polish is the best next use.
