@@ -327,7 +327,11 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
       onPress={onpress}
     />
   {:else if tab === "field"}
-    <RivalDossier standings={view.rivalStandings} playerRung={view.rung} />
+    <RivalDossier
+      standings={view.rivalStandings}
+      playerRung={view.rung}
+      eraBand={eraBandForYear(view.state.year)}
+    />
   {:else if tab === "markets"}
     <MarketsView {content} gameState={view.state} />
   {:else if tab === "lineage"}

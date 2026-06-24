@@ -333,3 +333,29 @@ export function encounterPortraitKey(f: EncounterFacets): string {
     .replace(/^_+|_+$/g, "");
   return `portrait:enc:${role}:${f.lifeStage}:${f.eraBand}:${g}`;
 }
+
+/** A tiny stable hash of a string → an unsigned int (FNV-1a). Deterministic; no Math.random (sim purity). */
+function stableHash(s: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return h >>> 0;
+}
+
+/**
+ * GA-ENCOUNTER-PORTRAITS — the EncounterFacets for a RIVAL line's "head", to drive the encounter portrait on the
+ * Field surface. The role is the rival's place token (its line identity, stable per id); the era band is the
+ * current era; the gender is a stable hash of the id (deterministic, reproducible — never Math.random). The head
+ * of a rival line is presented as an adult. Pure.
+ */
+export function rivalEncounterFacets(rivalId: string, eraBand: EraBand): EncounterFacets {
+  const role = `rival_${rivalId.replace(/^rival:/, "")}`;
+  return {
+    role,
+    lifeStage: "adult",
+    eraBand,
+    gender: stableHash(rivalId) % 2 === 0 ? "male" : "female",
+  };
+}

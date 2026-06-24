@@ -1,5 +1,10 @@
 <script lang="ts">
 import { humanizeRivalLabel } from "../../sim/dynastyWorld";
+import {
+  type EraBand,
+  encounterPortraitKey,
+  rivalEncounterFacets,
+} from "../../sim/genai/portrait";
 import RungStars from "./RungStars.svelte";
 /**
  * RIVAL-DOSSIER-TAB — a fuller "The Field" panel than the compact slide-out RivalField: every rival line
@@ -19,8 +24,19 @@ interface Props {
   standings: Standing[];
   /** The player's own rung, so each rival's state reads RELATIVE to the played line. */
   playerRung: number;
+  /** GA-ENCOUNTER-PORTRAITS: the current era band, so each rival line gets an era-true "head" portrait.
+   *  Optional — without it the field still renders (the portrait is enrichment, not load-bearing). */
+  eraBand?: EraBand;
 }
-const { standings, playerRung }: Props = $props();
+const { standings, playerRung, eraBand }: Props = $props();
+
+// GA-ENCOUNTER-PORTRAITS: the encounter-portrait asset path for a rival line's head (era × line identity), or
+// null when no era band is supplied. `:` → `_` maps the composite key to the cached portrait file.
+function rivalHeadSrc(rivalId: string): string | null {
+  if (!eraBand) return null;
+  const key = encounterPortraitKey(rivalEncounterFacets(rivalId, eraBand));
+  return `/assets/generated/portraits/${key.replace(/:/g, "_")}.png`;
+}
 
 type State = "fallen" | "faltering" | "surging" | "steady" | "you";
 const field = $derived(
@@ -89,6 +105,21 @@ const TREND_ARROW: Record<"rising" | "steady" | "falling", string> = {
     <ul class="rows">
       {#each field as r (r.id)}
         <li class="row" class:you={r.isPlayer} data-state={r.state}>
+          {#if !r.isPlayer && rivalHeadSrc(r.id)}
+            <!-- GA-ENCOUNTER-PORTRAITS: the rival line's era-true head; hides on error (ungenerated → no head,
+                 the row still reads). aria-hidden — the name beside it is the accessible label. -->
+            <img
+              class="head"
+              src={rivalHeadSrc(r.id)}
+              alt=""
+              aria-hidden="true"
+              decoding="async"
+              data-testid="rival-head"
+              onerror={(e) => {
+                (e.currentTarget as HTMLImageElement).style.display = "none";
+              }}
+            />
+          {/if}
           <span class="who">{r.name}</span>
           <span class="rung-line">
             <RungStars rung={r.rung} />
@@ -157,6 +188,18 @@ const TREND_ARROW: Record<"rising" | "steady" | "falling", string> = {
     background: var(--mmm-surface);
     font-family: var(--mmm-font-body);
     font-size: 0.9rem;
+  }
+  /* GA-ENCOUNTER-PORTRAITS: the rival head sits in the first column beside the name (which stays the label).
+     A small circular era-true bust; if it errors it hides and the name column simply reads alone. */
+  .row:has(.head) {
+    grid-template-columns: 1.7rem calc(8rem - 2.3rem) 1fr auto;
+  }
+  .head {
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid color-mix(in srgb, var(--mmm-gold-deep) 50%, transparent);
   }
   .row.you {
     outline: 1px solid var(--mmm-gold-deep);

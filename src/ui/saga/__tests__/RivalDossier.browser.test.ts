@@ -150,6 +150,53 @@ describe("RivalDossier (RIVAL-DOSSIER-TAB)", () => {
     expect(sum).toMatch(/1 line has fallen out/);
   });
 
+  it("GA-ENCOUNTER-PORTRAITS: with an era band, each rival row gets an era-true head; hides on error", () => {
+    const standings = [
+      {
+        id: "rival:italian",
+        label: "rival:italian",
+        rung: 3,
+        faltering: false,
+        trend: "rising" as const,
+        fallen: false,
+      },
+    ];
+    component = mount(RivalDossier, {
+      target: host,
+      props: { standings, playerRung: 2, eraBand: "industrial_late1800s" as const },
+    });
+    const head = host.querySelector('[data-testid="rival-head"]') as HTMLImageElement;
+    expect(head, "the rival head renders with an era band").not.toBeNull();
+    // The encounter key (rival_italian / adult / era / gender) maps to the portraits asset path.
+    expect(head.getAttribute("src")).toMatch(
+      /\/assets\/generated\/portraits\/portrait_enc_rival_italian_adult_industrial_late1800s_[mf]\.png/,
+    );
+    // The player row never gets a head (only rival lines do).
+    const youRow = [...host.querySelectorAll(".row")].find(
+      (r) => r.getAttribute("data-state") === "you",
+    );
+    expect(youRow?.querySelector(".head")).toBeNull();
+    // Ungenerated asset → hide-on-error, the row still reads.
+    head.dispatchEvent(new Event("error"));
+    expect(head.style.display).toBe("none");
+  });
+
+  it("GA-ENCOUNTER-PORTRAITS: without an era band the field still renders (no heads — enrichment only)", () => {
+    const standings = [
+      {
+        id: "rival:italian",
+        label: "rival:italian",
+        rung: 3,
+        faltering: false,
+        trend: "steady" as const,
+        fallen: false,
+      },
+    ];
+    component = mount(RivalDossier, { target: host, props: { standings, playerRung: 2 } });
+    expect(host.querySelector('[data-testid="rival-dossier"]')).not.toBeNull();
+    expect(host.querySelector('[data-testid="rival-head"]')).toBeNull();
+  });
+
   it("DOSSIER-EMPTY-VOICE: with no rivals yet (early game), shows a grace note, not a blank panel", () => {
     component = mount(RivalDossier, { target: host, props: { standings: [], playerRung: 0 } });
     // No per-line dossier renders, but the early-game grace note does (mirrors SHOCK-LEDGER-EMPTY-VOICE).
