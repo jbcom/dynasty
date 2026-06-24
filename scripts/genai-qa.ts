@@ -19,6 +19,7 @@
  *   --concurrency N (default 4)      GEMINI_MODEL / GEMINI_QA_MODEL override the model id.
  */
 
+import "./env";
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { DEFAULT_QA_MODEL, geminiGenerate, parseGeneratedObject } from "../src/sim/genai/client";

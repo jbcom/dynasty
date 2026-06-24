@@ -56,6 +56,8 @@ describe("SceneReader (paged)", () => {
       props: { scene: open, onbeat: (i: number) => (picked = i) },
     });
     tapPage(); // page to the last paragraph → options reveal
+    const para = host.querySelector('[data-testid="para"]');
+    expect(para?.querySelector('[data-testid="weave"]')).not.toBeNull();
     const options = host.querySelectorAll('[data-testid="weave"] .inline-option');
     expect(options.length).toBe(2);
     (options[1] as HTMLButtonElement).click();
@@ -102,10 +104,10 @@ describe("SceneReader (paged)", () => {
     expect(decision?.getAttribute("data-tier")).toBe("major");
     const options = host.querySelectorAll('[data-testid="decision"] .inline-option');
     expect(options.length).toBe(3);
-    // UQ-UI-4 (Suzerain #4/#5): the choice block is lifted off the prose with a hairline rule so it
-    // reads as a discrete decision, not more glowing prose — while keeping the folded-in glow design.
+    // KP-1: the choice run is physically inside the prose paragraph, not a detached ruled-off block.
     const choices = host.querySelector<HTMLElement>('[data-testid="decision"]');
-    expect(getComputedStyle(choices as HTMLElement).borderTopWidth).not.toBe("0px");
+    expect(choices?.parentElement?.getAttribute("data-testid")).toBe("para");
+    expect(getComputedStyle(choices as HTMLElement).borderTopWidth).toBe("0px");
     (options[0] as HTMLButtonElement).click();
     expect(opt).toBe(0);
   });

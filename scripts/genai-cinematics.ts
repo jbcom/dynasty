@@ -8,6 +8,7 @@
  * With no flag it generates the founding handoff + the 4 finales (the highest-value set); flags narrow it.
  */
 
+import "./env";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import {

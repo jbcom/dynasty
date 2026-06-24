@@ -2,14 +2,14 @@ import { describe, expect, it } from "vitest";
 import { structuralFingerprint, uniquenessReport } from "../uniquenessMetric";
 
 /**
- * CONTENT-UNIQUENESS-AUDIT — the structural-sameness metric + a RATCHET on the current corpus.
+ * CONTENT-UNIQUENESS-AUDIT — the structural-sameness metric + a RATCHET on the retained class/fabric corpus.
  *
- * The corpus today is structurally UNIFORM: a prior audit found one skeleton stamped across the acts, and this
- * metric quantifies it (all lineage files share the same per-scene sense/beat/decision shape). These tests:
+ * The old class-keyed corpus was structurally uniform: a prior audit found one skeleton stamped across the
+ * acts, and this metric quantifies it. The live game now uses the authored dynasty spine; this guard remains
+ * so the retired source/fabric corpus does not regress while it is still loaded and mined. These tests:
  *  1. prove the fingerprint + report math is correct, and
  *  2. record the (bad) baseline as a RATCHET — the distinct-fingerprint ratio must not get WORSE, and the
- *     eventual diversifying rewrite will RAISE this floor as it lands. (We assert a floor, not goodness — the
- *     corpus is NOT yet diverse; pretending otherwise would hide the very problem this milestone surfaces.)
+ *     eventual fabric rewrite can RAISE this floor if it touches those files. (We assert a floor, not goodness.)
  */
 
 const report = uniquenessReport();
@@ -59,8 +59,9 @@ describe("structural uniqueness metric", () => {
     expect(report.clusters.reduce((s, c) => s + c.count, 0)).toBe(report.files);
   });
 
-  it("RATCHET: structural diversity must not regress below today's baseline (and should RISE with the rewrite)", () => {
-    // BASELINE (2026-06-24): the corpus is ONE skeleton — distinctRatio = 1/84 ≈ 0.0119, largestCluster = 84.
+  it("RATCHET: retained fabric structural diversity must not regress below today's baseline", () => {
+    // BASELINE (2026-06-24): the class/fabric corpus is ONE skeleton — distinctRatio = 1/84 ≈ 0.0119,
+    // largestCluster = 84. The played-story uniqueness fix is the authored spine, not a 504-cell regen.
     // Recorded as a real FLOOR (not a tautology): the ratio must never DROP, so adding more stamped files OR
     // collapsing fingerprints both fail here. The diversifying rewrite (SHAPE-DIVERSIFY-1) RAISES this floor as
     // shapes diverge — this number is deliberately terrible today and asserting >= it guards against regress.

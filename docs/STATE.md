@@ -1,15 +1,16 @@
 ---
 title: State & Architecture
-updated: 2026-06-23
+updated: 2026-06-24
 status: current
 domain: context
 ---
 
 # Dynasty — current state & architecture
 
-The canonical description of the game as it stands. The NARRATIVE ACTS (novel) model below is the
-current top model; the CONVERGENCE SAGA and earlier founding-pivot sections are kept as historical
-context (each piece either folded into the novel model or noted where still being wired).
+The canonical description of the game as it stands. The current played model is the **FOUNDING-SPINE
+NOVEL**: one dynasty line founded with America, carried from 1776 to the stars. The older class-keyed
+wave corpus remains loaded as mined fabric/encounter source material, not as the protagonist model.
+Historical specs remain below only as context.
 
 ## NARRATIVE ACTS — the NOVEL (current top model)
 
@@ -18,40 +19,38 @@ PLAYED content reads as NOVELS, not sentence fragments — titled acts of multi-
 SCENES that frame choices (Suzerain), with a fall-forward weave + cross-family intersections (ink).
 Shipped on `feat/narrative-acts` (PRs #65/#67); polished on `feat/saga-polish` (in progress).
 
-- **Model** (`src/sim/saga/`): `schema.ts` (Act → Scene[sense + multi-paragraph prose] → Beat[ink
-  weave, alternatives] → Decision[major|secondary, options may carry a `succession` effect] +
-  ThreadRef[cross-family] + Codex); `player.ts` (pure: buildCorpus — which also `weaveThreads` a
-  midpoint intersection per act —, applyBeatChoice, applyDecision, nextScene, openingScene,
-  resolveThreads, actsForTier(…, cls) with poor-fallback); `runner.ts` (pure ActState walk:
-  startAct/chooseBeat/chooseDecision; deterministic = save/replay invariant).
-- **Class-keyed corpus** (`src/data/saga/<wave>/<archetype>.<cls>.act.json`): act id
-  `act:<wave>:<archetype>:<cls>:t<tier>`. Two tracks, BOTH complete: `poor` (252) + `middle` (252) = 504 acts.
-  42 cells (7 waves × 6 archetypes) × 6 reach tiers per track. 0 leaks / 0 dangling / 0 orphans.
-- **Loader** `src/data/loadSaga.ts` (eager glob + zod). **Spine** `src/sim/spine.ts` declares the
-  scene-slot scaffold (open/rising+secondary/midpoint+intersection/turn+major/close), seeded per
-  cell; GenAI fleshes it. **GenAI** `genai:expand --type scene [--all --cls <poor|middle>]` +
-  `scripts/retitle-saga.ts` (distinct meso act titles) + `scripts/prune-saga-orphans.ts`.
-- **Structural sameness (CONTENT-UNIQUENESS-AUDIT → SHAPE-DIVERSIFY-1):** the corpus ON DISK was one skeleton
-  (all 84 files `smell:2|touch:2D|sound:2|sight:2D|taste:2D` × 6; ratio **0.012**) because it predated the
-  arc-shape scaffold and was never regenerated. SHAPE-DIVERSIFY-1 fixed the SOURCE: `src/sim/spine.ts` now
-  produces **cell-fingerprint ratio ~0.92** (90 distinct of 98 cells) via 8 ARC_SHAPES × per-shape FRAME senses
-  (`ARC_FRAME`) × a per-cell SENSE ROTATION (`senseShiftFor`, keyed on archetype×wave×tier). Per-act distinct
-  shapes went 8 → 40. The skeleton is broken at the spine; the `spine.unit.test.ts` SHAPE-DIVERSIFY-1 test guards
-  ratio >0.7 / largest cluster <10%. `scene.unit.test.ts` also guards the `buildScenePrompt` path: every arc
-  shape (including `siege`/`exodus`) must carry its rotated slot `sense` + exact `intent` into the generation
-  prompt. ⚠️ The on-disk corpus JSON still reflects the OLD skeleton — a GenAI REGENERATION (`genai:expand`,
-  key-gated) is needed to realize the diversity on disk; once regenerated, the uniquenessMetric ratchet floor
-  rises from 0.012 toward the spine's ~0.92. Metric: `src/sim/saga/uniquenessMetric.ts`; reports:
-  `scripts/uniqueness-audit.ts`.
-- **Playtime depth (PLAYTIME-DEPTH-AUDIT):** one lineage run (a wave×archetype×class corpus file = 6 acts,
-  founding→stars) is **~57 min median** of authored scene depth (range 49–63 min across the 84 class files;
-  thinnest ~49 min), read @220wpm + decision deliberation — BEFORE the emergence opening, the surfaces, and the
-  hour+ goal is met. Metric: `src/sim/saga/playtimeDepth.ts`; report: `pnpm vite-node scripts/playtime-depth.ts`;
-  durable floor: `playtimeDepth.unit.test.ts` (fails on any thinning regression).
-- **Engine cut-over** (`src/engine/sagaDriver.ts` + `loop.ts`): Game holds a SagaDriver; begins the
-  founded line's act by cell (wave = founding place, archetype, tier = protagonist generation, cls =
-  sagaClassForWealth(personality.wealth)); a saga beat/decision advances the run clock + resumes the
-  event flow on act-end; `GameView.saga` = {actTitle, scene, threads, ended}.
+- **Model** (`src/sim/saga/`): `schema.ts` defines the novel shape (Act → Scene[sense +
+  multi-paragraph prose] → Beat[ink-weave alternatives] → Decision[major|secondary, optional
+  `succession`] + ThreadRef + Codex). `runner.ts` is the pure ActState walk
+  (`startAct`/`chooseBeat`/`chooseDecision`). `player.ts` builds the indexed corpus, resolves threads,
+  and exposes `spineActForGen(corpus, gen)` for the live one-line route.
+- **Played corpus: authored dynasty spine** (`src/sim/saga/spineAuthored.ts` +
+  `src/data/saga/spine.act.json`): 10 generations, g0 founding → g9 interstellar. Each era carries a
+  distinct pivotal decision architecture (bargain/allegiance/venture/reckoning/platform/doctrine/
+  expansion) and the founder's power base colors every generation through gated opening variants.
+  Depth postprocessors add texture/consequence/reversal interstitials so acts read as chapters, not
+  template forks.
+- **Fabric corpus** (`src/data/saga/<wave>/<archetype>.<cls>.act.json` +
+  `src/data/saga/fabric/index.json`): the old 504 wave×archetype×class acts are **not** the player's
+  protagonist lattice anymore. They are retained as mined branch/fabric and encounter source material:
+  the seven immigrant waves are people the dynasty meets along the way, recurring inside the one story.
+- **Loader + branch transforms**: `src/data/loadSaga.ts` eagerly validates every `.act.json`, then applies
+  `applySpineBranchOnRamps` so destiny branch signature flags fork from spine choices, not from the old
+  1885 prologue events.
+- **GenAI scene authoring**: use `pnpm genai:spine` (`scripts/genai-spine.ts`) to regenerate
+  `spine.act.json`, then re-apply `node scripts/fs-spine-origin-flavor.mjs &&
+  node scripts/fs-spine-act-depth.mjs`. The old `genai:expand --type scene --all --cls …` path is legacy
+  source/fabric tooling; do not use it to define the played game.
+- **Structural sameness status**: the 504-cell uniqueness audit remains a historical/fabric metric. The
+  live sameness fix is the founding-spine pivot itself: one authored line with era-distinct decision
+  architectures, power-base flavored openings, deterministic trigger branches, and recurring cast
+  encounters.
+- **Playtime depth**: the live proof is the spine path, not a class file. `spineActDepth.unit.test.ts`
+  guards every g0-g9 act's interstitial depth, and `src/engine/__tests__/spineDepthPlaytest.unit.test.ts`
+  measures a full founding→stars run with the shock/recovery/agency layers on top.
+- **Engine cut-over** (`src/engine/sagaDriver.ts` + `loop.ts`): Game holds a SagaDriver and prefers
+  `beginSpine(gen, motivators, flags)` for the true generation index, capped only by the authored spine.
+  Class/rung remains simulation texture, not a separate protagonist section.
 - **Play surface (PF-3)** `src/ui/saga/SceneReader.svelte` + `PlayScreen.svelte`: PAGED prose (one
   paragraph per tap, full-bleed tap layer), choices folded in as GLOWING inline options (tap-away
   urges, doesn't advance); slim header = act-chapter (MESO) + macro·year (the macro is the ~100-yr

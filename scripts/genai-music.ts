@@ -8,6 +8,7 @@
  * Lyria is a realtime stream (~1× wall-clock), so capturing all 10 tracks at the default length takes minutes.
  */
 
+import "./env";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import {

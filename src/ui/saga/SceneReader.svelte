@@ -6,9 +6,10 @@ import { playCue, startMusic } from "../sound";
 /**
  * SCENE READER (Narrative Acts model) — renders a scene as a PAGED novel, Suzerain-style: ONE
  * paragraph at a time, tap ANYWHERE to turn to the next. When the prose is spent, the scene's CHOICE
- * folds into the story as GLOWING PULSING text (no buttons) — the weave beats (alternatives) or the
- * terminal tiered decision. Tapping a non-option area while a choice is up makes the options pulse
- * FASTER (it does not advance) to say "pick one". Pure presentation: resolves identity tokens via the
+ * folds into the same paragraph as GLOWING PULSING text — the weave beats (alternatives) or the
+ * terminal tiered decision. The options remain real buttons for accessibility, but visually they are
+ * part of the prose, not a detached block below it. Tapping a non-option area while a choice is up makes
+ * the options pulse faster (it does not advance) to say "pick one". Pure presentation: resolves identity tokens via the
  * injected `term` fn and emits the player's choice upward — never the sim.
  */
 
@@ -143,7 +144,7 @@ function chooseBeat(i: number) {
   <button
     type="button"
     class="tap-layer"
-    aria-label={optionsUp ? "Choose an option below" : "Continue"}
+    aria-label={optionsUp ? "Choose an inline option" : "Continue"}
     onclick={tapPage}
   ></button>
 
@@ -187,7 +188,55 @@ function chooseBeat(i: number) {
           class:woven-lead={pages[shownPara]?.lead}
           data-testid="para"
           data-woven={pages[shownPara]?.woven ? "" : undefined}
-        >{term(pages[shownPara]?.text ?? "")}</p>
+        >
+          {term(pages[shownPara]?.text ?? "")}
+          {#if showWeave}
+            <span
+              class="choices"
+              class:urging
+              data-testid="weave"
+              aria-label="Choose how the moment turns"
+            >
+              {#each scene.beats as beat, i (i)}
+                {#if beat.choice}
+                  <button
+                    type="button"
+                    class="inline-option"
+                    onclick={(e) => {
+                      e.stopPropagation();
+                      chooseBeat(i);
+                    }}
+                  >
+                    {term(beat.choice.text)}
+                  </button>
+                {/if}
+              {/each}
+            </span>
+          {/if}
+          {#if showDecision && scene.decision}
+            <span
+              class="choices decision"
+              class:urging
+              data-tier={scene.decision.tier}
+              data-testid="decision"
+              aria-label="Choose the line's decision"
+            >
+              {#each scene.decision.options as opt, i (i)}
+                <button
+                  type="button"
+                  class="inline-option"
+                  onclick={(e) => {
+                    e.stopPropagation();
+                    playCue("stinger");
+                    ondecision?.(i);
+                  }}
+                >
+                  {term(opt.text)}
+                </button>
+              {/each}
+            </span>
+          {/if}
+        </p>
       {/key}
     </div>
   {/key}
@@ -197,47 +246,6 @@ function chooseBeat(i: number) {
     <span class="turn-hint" aria-hidden="true">{lastPara ? "" : "tap to continue"}</span>
   {/if}
 
-  {#if showWeave}
-    <div class="choices" class:urging data-testid="weave">
-      {#each scene.beats as beat, i (i)}
-        {#if beat.choice}
-          <button
-            type="button"
-            class="inline-option"
-            onclick={(e) => {
-              e.stopPropagation();
-              chooseBeat(i);
-            }}
-          >
-            {term(beat.choice.text)}
-          </button>
-        {/if}
-      {/each}
-    </div>
-  {/if}
-
-  {#if showDecision && scene.decision}
-    <div
-      class="choices decision"
-      class:urging
-      data-tier={scene.decision.tier}
-      data-testid="decision"
-    >
-      {#each scene.decision.options as opt, i (i)}
-        <button
-          type="button"
-          class="inline-option"
-          onclick={(e) => {
-            e.stopPropagation();
-            playCue("stinger");
-            ondecision?.(i);
-          }}
-        >
-          {term(opt.text)}
-        </button>
-      {/each}
-    </div>
-  {/if}
 </section>
 
 <style>
@@ -360,32 +368,29 @@ function chooseBeat(i: number) {
     50% { opacity: 0.7; }
   }
 
-  /* OPTIONS folded into the story: glowing, pulsing, bigger than the body — not buttons.
-     UQ-UI-4 (Suzerain #4/#5): a hairline rule lifts the choice block off the prose (the "section break"
-     that signals story→decision) + a measured column, WITHOUT turning the glow into generic buttons. */
+  /* OPTIONS folded into the story: glowing, pulsing, bigger than the body, and physically part of the
+     paragraph flow — no ruled-off choice block that interrupts the reading cadence. */
   .choices {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1.1rem;
-    padding-top: 1rem;
-    max-width: 62ch;
-    border-top: 1px solid color-mix(in srgb, var(--sense-accent, var(--mmm-gold-deep)) 40%, transparent);
+    display: inline;
+    margin-left: 0.35em;
+    border-top: 0;
   }
   .inline-option {
     appearance: none;
     border: none;
     background: none;
     text-align: left;
-    align-self: flex-start;
-    /* A leading glyph marks each as a discrete, choosable thing (the Suzerain affordance) — a glow dash,
-       not a box, so it reads as "a path you take," consistent with the folded-into-story design. */
-    padding: 0.2rem 0 0.2rem 1.4rem;
+    display: inline-block;
+    vertical-align: baseline;
+    /* A leading glyph marks each as a discrete, choosable phrase — a glow dash, not a box, so it reads
+       as "a path you take" while remaining part of the sentence-level prose surface. */
+    margin: 0.05rem 0.55rem 0.05rem 0;
+    padding: 0 0 0 1.05rem;
     position: relative;
     cursor: pointer;
     font-family: var(--mmm-font-display);
-    font-size: 1.3rem;
-    line-height: 1.45;
+    font-size: 1.18em;
+    line-height: inherit;
     letter-spacing: 0.01em;
     color: var(--mmm-gold-bright);
     text-shadow: 0 0 8px color-mix(in srgb, var(--mmm-gold) 55%, transparent);
@@ -395,14 +400,14 @@ function chooseBeat(i: number) {
     content: "›";
     position: absolute;
     left: 0;
-    top: 0.2rem;
+    top: 0;
     color: var(--sense-accent, var(--mmm-gold));
     opacity: 0.8;
   }
   /* A major (fate-fork) decision's options read heavier. */
   .decision[data-tier="major"] .inline-option {
     font-weight: 800;
-    font-size: 1.4rem;
+    font-size: 1.26em;
   }
   .inline-option:hover {
     color: #fff;

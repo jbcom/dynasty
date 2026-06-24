@@ -4,6 +4,8 @@ import {
   contentWords,
   crossingPotential,
   type MineScene,
+  maxCorpusSimilarities,
+  sceneSimilarity,
   scoreScene,
   selectFabric,
   uniqueness,
@@ -39,6 +41,12 @@ const distinctive: MineScene = {
   ],
 };
 
+function templateScene(): MineScene {
+  const scene = templated[0];
+  if (!scene) throw new Error("template fixture missing");
+  return scene;
+}
+
 describe("corpus miner (FS-4)", () => {
   it("contentWords drops stopwords, punctuation, and identity tokens", () => {
     const w = contentWords(["The {surname}s walked, slowly, into the cold harbor at dawn."]);
@@ -51,7 +59,7 @@ describe("corpus miner (FS-4)", () => {
   it("UNIQUENESS: a distinctive scene scores far above the templated bulk", () => {
     const all = [...templated, distinctive];
     const df = buildDocFreq(all);
-    const uTmpl = uniqueness(templated[0]!, df, all.length);
+    const uTmpl = uniqueness(templateScene(), df, all.length);
     const uUniq = uniqueness(distinctive, df, all.length);
     expect(uUniq).toBeGreaterThan(uTmpl);
     // The distinctive scene's rare words push it well clear of the shared-vocabulary template.
@@ -68,7 +76,7 @@ describe("corpus miner (FS-4)", () => {
 
   it("crossing potential rewards source vignettes", () => {
     expect(crossingPotential(distinctive)).toBeGreaterThan(0);
-    expect(crossingPotential(templated[0]!)).toBe(0); // no braid slots
+    expect(crossingPotential(templateScene())).toBe(0); // no braid slots
   });
 
   it("composite score ranks the distinctive scene first", () => {
@@ -76,6 +84,40 @@ describe("corpus miner (FS-4)", () => {
     const df = buildDocFreq(all);
     const scored = all.map((s) => scoreScene(s, df, all.length)).sort((a, b) => b.score - a.score);
     expect(scored[0]?.id).toBe("uniq:1");
+  });
+
+  it("SIMILARITY: near-duplicate legacy scenes measure as chaff while singular scenes stay distant", () => {
+    const template = templateScene();
+    const nearDuplicate: MineScene = {
+      ...template,
+      id: "tmpl:near",
+      prose: [
+        "The steerage hold smelled of rancid tallow, sour vinegar, and rotted straw.",
+        "The ward stood at a crossroads between survival and a long despair.",
+      ],
+    };
+
+    expect(sceneSimilarity(template, nearDuplicate)).toBeGreaterThan(0.75);
+    expect(sceneSimilarity(template, distinctive)).toBeLessThan(0.65);
+  });
+
+  it("similarity lowers the keeper score for scenes whose nearest neighbor is too close", () => {
+    const all = [...templated, distinctive];
+    const df = buildDocFreq(all);
+    const similarities = maxCorpusSimilarities(all);
+    const template = templateScene();
+    const templatedScore = scoreScene(template, df, all.length, similarities.get(template.id) ?? 0);
+    const distinctiveScore = scoreScene(
+      distinctive,
+      df,
+      all.length,
+      similarities.get(distinctive.id) ?? 0,
+    );
+
+    expect(templatedScore.maxSimilarity).toBeGreaterThan(distinctiveScore.maxSimilarity);
+    expect(templatedScore.parts.distinctiveness).toBeLessThan(
+      distinctiveScore.parts.distinctiveness,
+    );
   });
 
   it("selectFabric keeps the standouts and retires the templated bulk", () => {

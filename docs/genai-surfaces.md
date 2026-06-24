@@ -32,7 +32,8 @@ The composite key → filename map always replaces `:` with `_`.
 | 6 | **Beat narration (TTS)** | `narration/genaiNarration.ts` | `scripts/genai-narration.ts` | `audio/engine.ts` `playNarration` → `ui/sound.ts` | silent no-op (pre-start / muted / missing asset) |
 | 7 | **Encounter portraits** | `genai/portrait.ts` (`rivalEncounterFacets`) | `scripts/genai-encounter-portraits.ts` | `ui/saga/RivalDossier.svelte` | the rival head `<img>` hides on error (the row still reads) |
 
-Earlier passes on the same pattern: the **scene corpus** (text), the **dossier brief** prose
+Earlier passes on the same pattern: the **authored dynasty spine** (text, `pnpm genai:spine`), the
+retired class-cell scene corpus retained as mined fabric/source material, the **dossier brief** prose
 (`dossier/dossierGenai.ts` → `dossierBriefs.json` → `ui/dossier/loadDossierBrief.ts`, which shows a
 "Compiling the assessment…" pending line when absent), the **dossier atmospheric figure**, and the
 **protagonist portrait matrix** (`genai/portrait.ts` → `scripts/genai-portraits.ts`).
@@ -56,6 +57,9 @@ All scripts require `GEMINI_API_KEY` in the env and are **idempotent** (skip alr
 `--force`). Run via `pnpm vite-node`:
 
 ```sh
+pnpm genai:spine                                # 10 authored spine generations → src/data/saga/spine.act.json
+node scripts/fs-spine-origin-flavor.mjs         # reapply power-base opening variants after spine regen
+node scripts/fs-spine-act-depth.mjs             # reapply depth interstitials after origin flavor
 pnpm vite-node scripts/genai-news.ts               # 24 era×mood dispatch sets → src/data/genaiNews.json
 pnpm vite-node scripts/genai-music.ts              # 10 era beds → public/assets/audio/<track>.wav
 pnpm vite-node scripts/genai-cinematics.ts         # founding handoff + 4 finales → …/cinematics/<key>.mp4

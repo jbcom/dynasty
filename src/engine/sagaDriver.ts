@@ -2,14 +2,11 @@
  * SAGA DRIVER (Narrative Acts model) — the engine-side bridge that drives the NOVEL during play.
  *
  * It owns the corpus + a per-line ActState and answers two questions the UI needs: "what scene is the
- * player reading?" and "what happens when they pick a beat/decision?". It derives the act for a founded
- * line from the run state (wave = founding place, archetype = run archetype, tier = reach tier) and
- * walks it via the pure runner. Motivators carried in/out keep the line's drift in sync with the rest
- * of the sim. Pure given the corpus — no DOM, no randomness; the walk is deterministic for replay.
- *
- * When a cell has no authored act yet (the corpus is still being fleshed by GenAI), the driver yields
- * a null scene and the engine falls back to its existing event flow — so partial content never breaks
- * play. As the lattice fills, more of the run reads as the novel.
+ * player reading?" and "what happens when they pick a beat/decision?". The live route is the authored
+ * dynasty spine (`beginSpine`): one line, true generation index, founding→stars. The older cell lookup is
+ * retained for fabric/source compatibility and fallback reads, not as the protagonist model. Motivators
+ * carried in/out keep the line's drift in sync with the rest of the sim. Pure given the corpus — no DOM,
+ * no randomness; the walk is deterministic for replay.
  */
 
 import type { Motivators } from "../sim/motivators";

@@ -8,6 +8,7 @@
  *   pnpm vite-node scripts/genai-encounter-portraits.ts -- [--era <eraBand>] [--rival <placeId>] [--force]
  */
 
+import "./env";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import placesData from "../src/data/world/places.json";

@@ -14,6 +14,7 @@
  * large by design (the spec) — narrow with flags rather than blanket-running.
  */
 
+import "./env";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { DEFAULT_IMAGE_MODEL, geminiGenerateImage } from "../src/sim/genai/client";

@@ -13,6 +13,7 @@
  *   node scripts/fetch-itch-audio.mjs --dry   # list what would download
  *   node scripts/fetch-itch-audio.mjs         # download + extract
  */
+import "./env.mjs";
 import { execFileSync, spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from "node:fs";
