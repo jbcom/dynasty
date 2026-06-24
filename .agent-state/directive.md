@@ -258,6 +258,13 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   browser 177; e2e 8; prose:audit 0. Repo-wide `pnpm check` still reports pre-existing non-null assertion
   warnings outside this slice. Remote proof: ready PR, build-and-test + CodeQL green, quota/rate-limit comments
   non-blocking by user directive, Amazon Q's stale syntax thread resolved after the explicit-score follow-up commit.
+- [x] **KEY-PILLARS-1b INLINE-EVENT-CHOICES — BUILT locally (branch codex/inline-event-choices).** The
+  saga `SceneReader` was already compliant and tested; the remaining live fallback was `EventCard`, whose
+  choices still rendered as a detached button stack below the scene paragraph. Moved event choices into the
+  scene prose as glowing inline button-options (accessibility semantics preserved; meter hint icons stay inline),
+  and added a browser regression asserting the choice span is physically inside `[data-testid="event-prose"]`,
+  displays inline, and has no button-box border. Local proof: touched-file Biome clean; EventCard browser 7;
+  SceneReader browser 8; EventCard visual screenshot test 1; typecheck 0; build 0; unit 1047; browser 178; e2e 8.
 - [x] **GENAI-GENERATE — BUILT locally (branch codex/genai-generate-live-assets).**
   `.env` contains `GEMINI_API_KEY`, so this is no longer blocked on credentials. IMPORTANT PIVOT
   ([[founding-spine-pivot]]): do **not** run the old 504-cell class sweeps as the played corpus. The player steers
