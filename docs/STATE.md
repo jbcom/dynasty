@@ -31,6 +31,13 @@ Shipped on `feat/narrative-acts` (PRs #65/#67); polished on `feat/saga-polish` (
   scene-slot scaffold (open/rising+secondary/midpoint+intersection/turn+major/close), seeded per
   cell; GenAI fleshes it. **GenAI** `genai:expand --type scene [--all --cls <poor|middle>]` +
   `scripts/retitle-saga.ts` (distinct meso act titles) + `scripts/prune-saga-orphans.ts`.
+- **Structural sameness (CONTENT-UNIQUENESS-AUDIT):** the corpus is currently ONE skeleton — all 84 lineage
+  files share the IDENTICAL per-scene shape (`smell:2|touch:2D|sound:2|sight:2D|taste:2D` × 6 = 30 scenes);
+  distinct-fingerprint ratio **0.012** (1/84). The prose varies, the SHAPE does not — the
+  [[craft-spines-not-generator]] problem, quantified. Metric: `src/sim/saga/uniquenessMetric.ts`; report:
+  `pnpm vite-node scripts/uniqueness-audit.ts`; ratchet test: `uniquenessMetric.unit.test.ts`. FIX (the
+  diversifying rewrite — vary sense order / beat+decision layout / scene count per act-type) is the follow-on
+  milestone this enumerates; it must RAISE the ratchet's floor as shapes diversify.
 - **Playtime depth (PLAYTIME-DEPTH-AUDIT):** one lineage run (a wave×archetype×class corpus file = 6 acts,
   founding→stars) is **~57 min median** of authored scene depth (range 49–63 min across the 84 class files;
   thinnest ~49 min), read @220wpm + decision deliberation — BEFORE the emergence opening, the surfaces, and the
