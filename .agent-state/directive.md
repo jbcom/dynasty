@@ -195,10 +195,22 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   competing second portrait ([[intersections-woven-not-walls]]). Distinct-figure portraits belong to the dedicated
   RivalDossier / braid-crossing surfaces, not the main reader. So `buildEncounterPortraitPrompt` stays available for
   THOSE surfaces (future), not the scene reader.
-- [ ] **EI-9f wire encounter portraits into the RivalDossier surface (future)** — the one place a DISTINCT figure is
-  the focus: RivalDossier (a rival house's head) + braid-crossing dossiers. Wire those to request a
-  `buildEncounterPortraitPrompt` portrait keyed on the rival's era/role, with the EI-9d fallback; generate a sample
-  per role. Other eras' non-adult protagonist stages stay on-demand (EI-8e cache) — don't blanket-generate.
+- [ ] [WAIT] **#199 (EI-9c/9d/9e + EI-SCARCITY-STORIES) — merge on green.** Monitor bo55n1uio armed; CI re-running on
+  d7877a8 (CodeRabbit pass, build-and-test pending). Merge once green + 0 threads, then VERIFY main has the EI-9c/9e
+  files (lifeStageForOpeningScene, founding life-stage portraits) — [[gh-squash-stale-head-gotcha]] — sync main + fresh
+  branch for EI-9f.
+- [x] **EI-9f encounter-portrait consumer ANALYSIS — DONE (no live surface yet; infra ready).** Inspected the
+  candidate surfaces: `RivalDossier` is a ROSTER (Standing = id/label/rung/trend — whole LINES, no era/year/gender,
+  no single-figure focus), so a per-row avatar would be scope-creep, not the dramatic single-figure the encounter
+  portrait is for. There is NO current surface where ONE encounter figure is the focus (rivals are lines in a list;
+  formative-beat figures are woven in prose per the EI-9e decision). So `buildEncounterPortraitPrompt` has no live
+  consumer yet — the infra stays ready (built + tested in EI-8d) for when a single-rival-head / braid-crossing FOCUS
+  view is designed. Not force-fitting it into the roster. DECISION logged; the portrait milestone's live demand
+  (progenitor life-stage portraits) is fully served.
+- [ ] **EI-9g per-rival roster avatars (optional polish, post-#199)** — IF wanted: give each RivalDossier/RivalField
+  row a small head-avatar keyed on the rival's wave + current era band + rung tier (pass the game year in; default
+  gender), with the EI-9d fallback. Lighter than a focus portrait; a roster-glance enrichment. Lower priority than
+  any narrative/gameplay work — pick up only if the portrait polish is the best next use.
 - [x] **EI-SCARCITY-STORIES — post-scarcity narrative theme in the guidance — DONE (code, branch ei9c).** Added a
   `scarcity` field to the far-future era guidance (t4/t5 × poor/middle in guidance.json) naming the post-scarcity
   stakes (what STAYS scarce when all else is abundant: un-copyable physical artifacts, real presence, authentic line,
