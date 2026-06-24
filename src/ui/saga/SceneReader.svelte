@@ -148,6 +148,28 @@ function chooseBeat(i: number) {
     onclick={tapPage}
   ></button>
 
+  <!-- KEY-PILLARS-1e: a non-text reader rail gives long prose a visual rhythm. Each mark is one page in
+       the current scene flow; woven thread pages get their own mark so cross-line encounters are felt as
+       part of the read, not only as more text. Decorative only: screen readers already get the prose. -->
+  <div
+    class="reader-progress"
+    aria-hidden="true"
+    data-testid="reader-progress"
+    data-page-count={pages.length}
+    data-current-page={shownPara + 1}
+  >
+    {#each pages as page, i (`${scene.id}:${i}`)}
+      <span
+        class="progress-step"
+        class:active={i === shownPara}
+        class:past={i < shownPara}
+        class:woven={page.woven}
+        data-active={i === shownPara ? "" : undefined}
+        data-woven={page.woven ? "" : undefined}
+      ></span>
+    {/each}
+  </div>
+
   <!-- One paragraph at a time. The outer key fades the whole page in when the SCENE changes (a composed
        between-scene transition, distinct from the per-paragraph page-turn); the inner key animates each
        paragraph turn within a scene. The fade is JS-driven (inline opacity), so it does NOT pick up the
@@ -286,9 +308,42 @@ function chooseBeat(i: number) {
   .para,
   .turn-hint,
   .choices,
-  .portrait {
+  .portrait,
+  .reader-progress {
     position: relative;
     z-index: 1;
+  }
+  /* KEY-PILLARS-1e: visual relief without more labels. This reader rail gives each paged scene a small
+     visual cadence, with stable dot dimensions so progressing through prose does not shift layout. */
+  .reader-progress {
+    position: absolute;
+    left: 0.55rem;
+    top: 0.85rem;
+    display: grid;
+    grid-template-columns: 0.42rem;
+    grid-auto-rows: 0.42rem;
+    gap: 0.38rem;
+    pointer-events: none;
+  }
+  .progress-step {
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--mmm-text-dim) 24%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--sense-accent, var(--mmm-gold-deep)) 20%, transparent);
+  }
+  .progress-step.past {
+    background: color-mix(in srgb, var(--sense-accent, var(--mmm-gold-deep)) 42%, transparent);
+  }
+  .progress-step.active {
+    background: var(--sense-accent, var(--mmm-gold));
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--sense-accent, var(--mmm-gold)) 70%, transparent),
+      0 0 12px color-mix(in srgb, var(--sense-accent, var(--mmm-gold)) 55%, transparent);
+  }
+  .progress-step.woven {
+    border-radius: 0.08rem;
+    transform: rotate(45deg);
   }
   /* VL-2b/EI-7: the generation portrait — an engraved bust the prose wraps AROUND (magazine wrap). It
      FLOATS at the head of the block flow at EVERY width: the shown paragraph runs alongside it and, when

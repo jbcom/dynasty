@@ -1,6 +1,8 @@
 import { flushSync, mount, unmount } from "svelte";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { page } from "vitest/browser";
 import { FIXTURE_ACT } from "../../../sim/saga/__tests__/fixture";
+import type { BraidedThread } from "../../../sim/saga/player";
 import { buildCorpus } from "../../../sim/saga/player";
 import SceneReader from "../SceneReader.svelte";
 
@@ -27,6 +29,7 @@ function tapPage() {
 
 beforeEach(() => {
   host = document.createElement("div");
+  host.style.width = "412px";
   document.body.appendChild(host);
 });
 afterEach(() => {
@@ -126,6 +129,46 @@ describe("SceneReader (paged)", () => {
   it("tints the page by the scene's sense", () => {
     component = mount(SceneReader, { target: host, props: { scene: open } });
     expect(host.querySelector('[data-sense="smell"]')).toBeTruthy();
+  });
+
+  it("KEY-PILLARS-1e: renders a non-text reader progress rail that advances with page turns", () => {
+    component = mount(SceneReader, { target: host, props: { scene: open } });
+    const rail = host.querySelector<HTMLElement>('[data-testid="reader-progress"]');
+    expect(rail).not.toBeNull();
+    expect(rail?.textContent?.trim()).toBe("");
+    expect(rail?.getAttribute("aria-hidden")).toBe("true");
+    expect(rail?.querySelectorAll(".progress-step").length).toBe(2);
+    expect(rail?.getAttribute("data-current-page")).toBe("1");
+    expect(rail?.querySelector(".progress-step.active")).toBe(
+      rail?.querySelectorAll(".progress-step")[0],
+    );
+
+    tapPage();
+    expect(rail?.getAttribute("data-current-page")).toBe("2");
+    expect(rail?.querySelector(".progress-step.active")).toBe(
+      rail?.querySelectorAll(".progress-step")[1],
+    );
+    expect(rail?.querySelector(".progress-step.past")).toBe(
+      rail?.querySelectorAll(".progress-step")[0],
+    );
+  });
+
+  it("KEY-PILLARS-1e: marks woven thread pages in the same reader rail", () => {
+    const thread: BraidedThread = {
+      wave: "fixture-neighbor",
+      crossing: "Another family crosses the landing, carrying its hunger in a different tongue.",
+      relation: "neutral",
+      scene: close,
+    };
+    component = mount(SceneReader, { target: host, props: { scene: open, threads: [thread] } });
+    const rail = host.querySelector<HTMLElement>('[data-testid="reader-progress"]');
+    expect(rail?.querySelectorAll(".progress-step").length).toBe(5);
+    expect(rail?.querySelectorAll("[data-woven]").length).toBe(3);
+  });
+
+  it("KEY-PILLARS-1e: captures the reader rail as visual proof", async () => {
+    component = mount(SceneReader, { target: host, props: { scene: open } });
+    await page.screenshot({ element: host.firstElementChild as Element });
   });
 
   it("exposes the scene id + a scene-keyed body for between-scene transitions (RB-3)", () => {
