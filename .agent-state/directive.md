@@ -98,13 +98,24 @@ when the WHOLE milestone is solid — NOT a PR per VD-step.
 AUDIT (honest, this session): currently GenAI is used for TEXT (gemini-3.5-flash: scene/act prose, the QA
 editor, spine gen, retitle, + the VD dossier briefs) and IMAGE (imagen-4.0-fast: the portrait matrix + the VD
 dossier figures). NOT yet used, though the visual-layer spec called for "imagery + VIDEO":
-- [ ] **GA-VIDEO — GenAI video (Veo) era/generation cinematics** — the spec said video; zero today. Candidates: a
-  generation-handoff "passing of the line" motion piece, an era-transition stinger, the ascension/stellar finale
-  cinematic, an animated journey map. On-demand+cache like portraits (key × era × archetype); EI-9d fallback.
-- [ ] **GA-MUSIC — GenAI score (Lyria) that shifts with the era** — audio is fully authored (Tone/Howl), zero
-  GenAI. An era-appropriate generative score founding→Gilded→midcentury→stellar + per-`sense` ambient beds would
-  hugely lift the "feel". Gated, cached, offline.
-- [ ] **GA-TTS — period-voice narration of key beats (optional)** — TTS read of the naming beat / a generation's
+- [ ] [WAIT] **GA-VIDEO — GenAI video (Veo) era/generation cinematics (own branch post-GA-MUSIC-merge).** A
+  generation-handoff "passing of the line" piece / era-transition stinger / the stellar finale. On-demand+cache
+  like portraits (key × era × archetype); EI-9d fallback.
+- [x] **GA-MUSIC — GenAI era-shifting score (Lyria) — BUILT (branch feat/ga-music).** GM-1 pure
+  src/sim/music/genaiMusic.ts (buildMusicPrompt + the 10 ambient-track slots, era moods, loopable/instrumental;
+  5 tests). GM-2 `geminiCaptureMusic` (Lyria realtime-stream → PCM capture) + scripts/genai-music.ts (PCM→WAV);
+  AudioEngine.setEra now chains .ogg → .wav → synth-chord so the GenAI beds drop into the existing era slots. GM-3
+  captured ALL 10 era tracks (boyhood→redplanet, real ~16-24s Lyria beds, verified non-silent). GM-4: engine.audio
+  tests exercise the .wav fallback; the era bed shifts via the existing setMusicEra wiring (no new wiring). Gate:
+  check 0, typecheck 0/0, music unit 5, engine.audio 5. NEXT: local review trio + ONE PR.
+- [x] **GA-MUSIC PR — local review folded, PR OPENING.** Code-reviewer folded: the HIGH era→track namespace bug
+  (beds were dead on the saga path — fixed via trackForEra + a new eras test) + the MEDIUM capture stop() guard.
+  Gate: check 0, typecheck 0/0, unit 1006, audio browser 8, e2e 7. PR #203 OPENED. Remaining GA-*
+  below + EI-9g each their own fresh-branch milestone, gated on the #203 merge.
+- [ ] [WAIT] **#203 (GA-MUSIC) — merge on green.** Monitor armed; merge once CI green + 0 threads, then VERIFY main
+  has src/sim/music/ + public/assets/audio/*.wav ([[gh-squash-stale-head-gotcha]]), sync main + fresh branch for
+  GA-VIDEO (the next GenAI milestone — Veo era/generation cinematics).
+- [ ] [WAIT] **GA-TTS — period-voice narration of key beats (optional)** — TTS read of the naming beat / a generation's
   pivotal decision in an era-true voice. Lower priority; accessibility + immersion.
 - [x] **GA-NEWS — GenAI period DISPATCHES — BUILT (branch feat/ga-news).** GN-1 pure `src/sim/news/genaiNews.ts`
   (buildNewsDispatchPrompt + newsDispatchKey, era × mood, leak-safe, JSON-unwrap defense). GN-2 loadNewsDispatch +
@@ -113,12 +124,14 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   Envied Rise of the {family_name} Interest"). GN-4 NewsTicker browser test + the PL-11 quiet-world test updated for
   the new layer. Gate: check 0, typecheck 0/0, unit 1000, browser 168. FOLLOW-UP: thread the live rung-trend into the
   `mood` prop (PlayScreen passes "steady" today). THEN local review trio + ONE PR ([[one-branch-local-review]]).
-- [ ] **GA-NEWS PR — local review + ship.** Run the reviewer trio on the GA-NEWS diff, fold forward, open the ONE PR.
-- [ ] **GA-MAP-ART — GenAI cartographic base per era** — MapView is CSS; a generated period map base (the journey
+- [x] **GA-NEWS PR — MERGED #202 (squash 20c61dd).** Reviewer trio folded (moodForRanks cross-ladder bug,
+  toHeadlines trailing-md, PL-11 testid). VERIFIED on main (src/sim/news/ + 24 dispatch keys). The first
+  GenAI-expansion milestone is shipped.
+- [ ] [WAIT] **GA-MAP-ART — GenAI cartographic base per era** — MapView is CSS; a generated period map base (the journey
   as a real period map) was speced, only partially built. Reuse the dossier/portrait image pipeline.
-- [ ] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers** — beyond atmosphere: generate the dossier's diagrams
+- [ ] [WAIT] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers** — beyond atmosphere: generate the dossier's diagrams
   (an R&D tech-tree sketch, a redacted intel surveillance chart) keyed to real state, as a FigurePanel variant.
-- [ ] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt** — exists, no live consumer (EI-9f); needs a
+- [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt** — exists, no live consumer (EI-9f); needs a
   single-figure FOCUS surface (a rival-head dossier / a braid-crossing close-up) to drive it.
   DECISION (log, [[never-ask-direction]]): sequence after the VD milestone — GA-NEWS + GA-MUSIC first (highest
   feel-per-effort), then GA-VIDEO finale, then the rest. Each its own milestone branch.
@@ -300,7 +313,7 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   consumer yet — the infra stays ready (built + tested in EI-8d) for when a single-rival-head / braid-crossing FOCUS
   view is designed. Not force-fitting it into the roster. DECISION logged; the portrait milestone's live demand
   (progenitor life-stage portraits) is fully served.
-- [ ] **EI-9g per-rival roster avatars (optional polish, post-#199)** — IF wanted: give each RivalDossier/RivalField
+- [ ] [WAIT] **EI-9g per-rival roster avatars (optional polish, post-#199)** — IF wanted: give each RivalDossier/RivalField
   row a small head-avatar keyed on the rival's wave + current era band + rung tier (pass the game year in; default
   gender), with the EI-9d fallback. Lighter than a focus portrait; a roster-glance enrichment. Lower priority than
   any narrative/gameplay work — pick up only if the portrait polish is the best next use.
