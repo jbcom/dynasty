@@ -82,4 +82,37 @@ describe("DossierView (VD-3)", () => {
     });
     await page.screenshot({ element: host.firstElementChild as Element });
   });
+
+  it("VD-6: captures the FOUNDING economic dossier with its real generated figure + brief", async () => {
+    // The economic founding portfolio figure exists (generated in VD-6) — this shows the full composed
+    // set piece (atmospheric plate + brief + real chart/graph/map) for the visual review.
+    const founding = buildDossier({
+      archetype: "economic",
+      year: 1776,
+      seed: "found1",
+      series: {
+        years: [1776, 1790, 1805],
+        byMeter: { reputation: [5, 18, 35], money: [2, 10, 24] },
+      },
+      rivals: [
+        { id: "r1", label: "italian", rung: 1, fallen: false },
+        { id: "r2", label: "irish", rung: 0, fallen: false },
+      ],
+      rung: 1,
+    });
+    component = mount(DossierView, {
+      target: host,
+      props: {
+        dossier: founding,
+        brief: [
+          "The house holds two ledgers and a leased counting-room. Capital is thin but the books are honest.",
+          "Two rival lines crowd the same wharves; neither yet commands credit. The opening is real.",
+        ],
+      },
+    });
+    // The figure path resolves to the generated portfolio plate.
+    const img = host.querySelector("img.figure") as HTMLImageElement | null;
+    expect(img?.getAttribute("src")).toContain("dossier_fig_portfolio_founding_1700s_economic.png");
+    await page.screenshot({ element: host.firstElementChild as Element });
+  });
 });

@@ -70,8 +70,13 @@ when the WHOLE milestone is solid — NOT a PR per VD-step.
   briefing not prose), and `buildDossierFigurePrompt` (a NO-PEOPLE establishing PLATE per kind in the signature
   engraving style — cohesive with portraits/map). Pure + deterministic. 5 unit tests. check 0, typecheck 0/0.
   (The runner WIRING — resolving the keys through the text/Imagen on-demand cache — lands in VD-6 end-to-end.)
-- [ ] **VD-6 wire ONE full path end-to-end** for the run's actual archetype (real data + brief + figure) +
-  live-verify in Chrome (screenshot + READ the composed dossier).
+- [x] **VD-6 ONE full path end-to-end — DONE (branch feat/visual-dossiers).** The economic founding "Holdings &
+  Market Dossier" composes the HYBRID: the real generated counting-house figure plate (scripts/genai-dossiers.ts) +
+  the path-voice brief + the real Reputation/Money trajectory chart + the rival graph + the reach strip — LIVE-
+  VERIFIED via screenshot READ (a complete, designed briefing set piece). The figure pipeline + FigurePanel +
+  DossierView all integrate. REMAINING (folds into VD-7): wire the LIVE brief generation in the gameStore runner
+  (resolve dossierBriefKey through the Gemini text cache at the boundary) so a real run's brief is generated, not
+  passed in. 5 browser tests.
 - [ ] **VD-7 remaining placements + other paths** — decision-aid panel + upgraded path-keyed tabs + the other
   archetypes' dossier kinds. THEN open the single milestone PR.
 
