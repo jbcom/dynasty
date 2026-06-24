@@ -1,5 +1,5 @@
 import { mount, unmount } from "svelte";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { page } from "vitest/browser";
 import { buildDossier, type DossierInput } from "../../../sim/dossier/dossier";
 import { applyBrandTokens, makeHost } from "../../__tests__/visualHarness";
@@ -85,11 +85,15 @@ describe("DossierView (VD-3)", () => {
     );
   });
 
-  it("GA-DOSSIER-DIAGRAMS: the diagram hides on error when the asset isn't generated (graceful)", () => {
+  it("GA-DOSSIER-DIAGRAMS: the diagram (image + caption) hides on error when the asset isn't generated", async () => {
     component = mount(DossierView, { target: host, props: { dossier: buildDossier(input) } });
     const diagram = host.querySelector("[data-testid='dossier-diagram']") as HTMLImageElement;
     diagram.dispatchEvent(new Event("error"));
-    expect(diagram.style.display).toBe("none");
+    // GENAI-VERIFY-1: the WHOLE figure unmounts (img + caption) — no captioned empty space.
+    await vi.waitFor(() => {
+      expect(host.querySelector("[data-testid='dossier-diagram']")).toBeNull();
+      expect(host.querySelector("[data-testid='diagram-caption']")).toBeNull();
+    });
   });
 
   it("captures a mobile screenshot of the composed dossier", async () => {

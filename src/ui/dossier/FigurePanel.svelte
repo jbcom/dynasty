@@ -17,24 +17,33 @@ interface Props {
 const { figureKey, caption }: Props = $props();
 
 const src = $derived(`/assets/generated/dossiers/${figureKey.replace(/:/g, "_")}.png`);
+// On a missing asset, hide the WHOLE figure (image + caption) — a captioned empty space reads oddly; the
+// data panels carry the dossier. Reset when the key changes so a later (generated) asset can show.
+let failed = $state(false);
+$effect(() => {
+  void src; // re-arm the visibility when the source key changes
+  failed = false;
+});
 </script>
 
-<figure class="figure-panel" class:diagram={caption}>
-  <img
-    class="figure"
-    {src}
-    alt={caption ?? ""}
-    aria-hidden={caption ? undefined : "true"}
-    decoding="async"
-    data-testid={caption ? "dossier-diagram" : "dossier-figure"}
-    onerror={(e) => {
-      (e.currentTarget as HTMLImageElement).style.display = "none";
-    }}
-  />
-  {#if caption}
-    <figcaption data-testid="diagram-caption">{caption}</figcaption>
-  {/if}
-</figure>
+{#if !failed}
+  <figure class="figure-panel" class:diagram={caption}>
+    <img
+      class="figure"
+      {src}
+      alt={caption ?? ""}
+      aria-hidden={caption ? undefined : "true"}
+      decoding="async"
+      data-testid={caption ? "dossier-diagram" : "dossier-figure"}
+      onerror={() => {
+        failed = true;
+      }}
+    />
+    {#if caption}
+      <figcaption data-testid="diagram-caption">{caption}</figcaption>
+    {/if}
+  </figure>
+{/if}
 
 <style>
   .figure-panel {
