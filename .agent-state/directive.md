@@ -46,9 +46,12 @@ when the WHOLE milestone is solid — NOT a PR per VD-step.
 - [x] **VD-1 BRAINSTORM → SPEC — DONE.** Wrote the visual-dossier design spec (hybrid content, all placements,
   the Dossier typed-panel model, path→kind mapping, the interstitial scene-transition headline, the GenAI
   brief+figure pipelines reusing the portrait/scarcity infra). User gave the design inputs; building per the spec.
-- [ ] **VD-2 Dossier content model + read-model selectors** — pure `src/sim/dossier/`: `DossierKind`, `Dossier`,
-  `DossierPanel` (chart/graph/map/figure/brief), `buildDossier(kind, view)` mapping real GameView state →
-  chart/graph/map specs + figure/brief keys, `dossierKindForArchetype`. Unit-tested. Pure (no DOM/Date/random).
+- [x] **VD-2 Dossier content model + read-model selectors — DONE (branch feat/visual-dossiers).** Pure
+  `src/sim/dossier/dossier.ts`: `DossierKind` (7, path-keyed), `Dossier`/`DossierPanel`
+  (chart/graph/map/figure/brief), `dossierKindForArchetype` (total over the 7 paths incl. crime), `buildDossier`
+  mapping live state → a real meter-trajectory CHART + the rival-field GRAPH + the era-reach MAP + the figure/brief
+  KEYS (`dossierFigureKey`/`dossierBriefKey`, deterministic). Pure (no DOM/Date/random). 7 unit tests. check 0,
+  typecheck 0/0.
 - [ ] **VD-3 panel components + DossierView** — `src/ui/dossier/`: ChartPanel/GraphPanel/MapPanel/FigurePanel/
   BriefPanel (reuse StatsView chart / ButterflyGraph / MapView primitives) + DossierView briefing-spread layout
   (Suzerain scannability); FigurePanel uses the EI-9d image fallback. Browser/visual tests + READ a screenshot.
