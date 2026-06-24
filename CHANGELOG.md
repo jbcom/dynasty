@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.65.0](https://github.com/jbcom/dynasty/compare/v0.64.0...v0.65.0) (2026-06-24)
+
+
+### Features
+
+* era-progressing GenAI cartographic base for the journey map (GA-MAP-ART) ([#207](https://github.com/jbcom/dynasty/issues/207)) ([ece0be9](https://github.com/jbcom/dynasty/commit/ece0be94cf5e83ef9d11b1624e4b25446624018e))
+
 ## [0.64.0](https://github.com/jbcom/dynasty/compare/v0.63.0...v0.64.0) (2026-06-24)
 
 
