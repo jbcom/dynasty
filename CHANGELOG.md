@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.74.1](https://github.com/jbcom/dynasty/compare/v0.74.0...v0.74.1) (2026-06-24)
+
+
+### Documentation
+
+* mark fabric keeper crossings merged ([#246](https://github.com/jbcom/dynasty/issues/246)) ([538c37c](https://github.com/jbcom/dynasty/commit/538c37c86c2aab490f12ebd2881fa3a74d82ea6b))
+
 ## [0.74.0](https://github.com/jbcom/dynasty/compare/v0.73.1...v0.74.0) (2026-06-24)
 
 
