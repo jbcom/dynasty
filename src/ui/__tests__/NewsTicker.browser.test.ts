@@ -235,8 +235,7 @@ describe("NewsTicker", () => {
     expect(host.querySelector(".news")).not.toBeNull();
     expect(host.querySelector(".empty")).not.toBeNull();
     expect(host.textContent).toMatch(/quiet for now/);
-    // No WORLD-news rows: the only <li>s present (if any) are the GA-NEWS dispatch layer, never world-news rows.
-    const worldNewsRows = host.querySelectorAll("ul:not(.dispatches):not(.rival-news) li");
-    expect(worldNewsRows.length).toBe(0);
+    // No WORLD-news rows (scoped to the world-news ul by its testid — robust to other ul layers).
+    expect(host.querySelectorAll("[data-testid='news-world-rows'] li").length).toBe(0);
   });
 });

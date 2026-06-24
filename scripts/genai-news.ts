@@ -43,7 +43,13 @@ function toHeadlines(text: string): string[] {
   }
   return body
     .split(/\n+/)
-    .map((l) => l.replace(/^\s*[-*\d.)\]]+\s*/, "").trim())
+    // Strip a leading list marker AND any trailing markdown emphasis (** or _ from a bolded headline).
+    .map((l) =>
+      l
+        .replace(/^\s*[-*\d.)\]]+\s*/, "")
+        .replace(/[*_]+$/, "")
+        .trim(),
+    )
     .filter((l) => l.length > 0 && l !== "[" && l !== "]")
     .slice(0, 3);
 }

@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import {
   buildNewsDispatchPrompt,
   moodForRanks,
-  moodForTrend,
   newsDispatchKey,
   newsDispatchSystem,
 } from "../genaiNews";
@@ -20,12 +19,6 @@ describe("GA-NEWS dispatch key + mood", () => {
     expect(newsDispatchKey("stellar", "falling")).toBe("news:stellar:falling");
   });
 
-  it("maps a rung trend to a dispatch mood", () => {
-    expect(moodForTrend("rising")).toBe("rising");
-    expect(moodForTrend("steady")).toBe("steady");
-    expect(moodForTrend("falling")).toBe("falling");
-  });
-
   it("moodForRanks derives the mood from the rank ladders (fallen-from-grace → falling)", () => {
     // Slipped below peak on a ladder → falling.
     expect(moodForRanks({ social: { rung: 2, peak: 4 }, commercial: { rung: 1, peak: 1 } })).toBe(
@@ -40,6 +33,10 @@ describe("GA-NEWS dispatch key + mood", () => {
       "steady",
     );
     expect(moodForRanks({})).toBe("steady");
+    // A COLLAPSED ladder is not masked by a high one elsewhere (per-ladder slip → falling; review).
+    expect(moodForRanks({ social: { rung: 0, peak: 3 }, commercial: { rung: 3, peak: 3 } })).toBe(
+      "falling",
+    );
   });
 });
 

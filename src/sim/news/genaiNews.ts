@@ -60,11 +60,6 @@ export function buildNewsDispatchPrompt(eraBand: EraBand, mood: NewsMood): strin
   ].join(" ");
 }
 
-/** Map a coarse standing signal (the line's rung trend) to a dispatch mood. Pure. */
-export function moodForTrend(trend: "rising" | "steady" | "falling"): NewsMood {
-  return trend;
-}
-
 /**
  * Derive the dispatch mood from the run's rank ladders (GA-NEWS): the press reacts to the line's trajectory.
  * Below its peak on any ladder → "falling" (fallen from grace); climbing (top rung ≥ 2, at peak) → "rising";
@@ -72,14 +67,14 @@ export function moodForTrend(trend: "rising" | "steady" | "falling"): NewsMood {
  */
 export function moodForRanks(ranks: Record<string, { rung: number; peak: number }>): NewsMood {
   let topRung = 0;
-  let topPeak = 0;
   let belowPeak = false;
   for (const r of Object.values(ranks)) {
     if (r.rung > topRung) topRung = r.rung;
-    if (r.peak > topPeak) topPeak = r.peak;
-    if (r.rung < r.peak) belowPeak = true;
+    // A real slip on THIS ladder (rung below its own non-trivial peak) — checked per-ladder so a collapsed
+    // ladder isn't masked by a high one elsewhere (review).
+    if (r.rung < r.peak && r.peak > 0) belowPeak = true;
   }
-  if (belowPeak && topRung < topPeak) return "falling";
+  if (belowPeak) return "falling"; // any genuine fall-from-grace reads as falling
   if (topRung >= 2) return "rising";
   return "steady";
 }

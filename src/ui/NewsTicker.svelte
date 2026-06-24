@@ -118,7 +118,7 @@ const scopeLabel: Record<string, string> = {
     <img class="h-icon" src="/assets/icons/ui/news.svg" alt="" aria-hidden="true" />The Wider World — {gameState.year}
   </h3>
   {#if news.length > 0}
-    <ul>
+    <ul data-testid="news-world-rows">
       {#each news as item (item.scope + item.headline)}
         <li>
           <span class="scope" data-scope={item.scope}>{scopeLabel[item.scope] ?? item.scope}</span>
