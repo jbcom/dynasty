@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { computeDepth, estPlaytimeMinutes, loadLineageFiles, READ_WPM } from "../playtimeDepth";
+import { computeDepth, estPlaytimeMinutes, lineageRuns, READ_WPM } from "../playtimeDepth";
 
 /**
  * PLAYTIME-DEPTH-AUDIT — a durable floor on the corpus depth, guarding the user's hour+ goal
@@ -9,12 +9,7 @@ import { computeDepth, estPlaytimeMinutes, loadLineageFiles, READ_WPM } from "..
  * future thinning regression fails here instead of silently shrinking the game.
  */
 
-const rows = loadLineageFiles()
-  .map((f) => {
-    const d = computeDepth(f.act);
-    return { name: f.name, d, minutes: estPlaytimeMinutes(d) };
-  })
-  .sort((a, b) => a.minutes - b.minutes);
+const rows = lineageRuns(); // sorted shortest→longest
 
 describe("playtime depth metric", () => {
   it("computeDepth sums scenes / paragraphs / words / beats / decisions", () => {

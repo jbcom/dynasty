@@ -11,15 +11,10 @@
  * keep enough depth for the hour+ run; a thinning regression fails the test).
  */
 
-import { computeDepth, estPlaytimeMinutes, loadLineageFiles } from "../src/sim/saga/playtimeDepth";
+import { lineageRuns } from "../src/sim/saga/playtimeDepth";
 
 function main(): void {
-  const files = loadLineageFiles();
-  const rows = files.map((f) => {
-    const d = computeDepth(f.act);
-    return { name: f.name, ...d, minutes: estPlaytimeMinutes(d) };
-  });
-  rows.sort((a, b) => a.minutes - b.minutes);
+  const rows = lineageRuns();
   if (rows.length === 0) {
     console.error("No lineage corpus files found.");
     return;

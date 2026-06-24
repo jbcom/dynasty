@@ -200,14 +200,23 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   typecheck 0/0, e2e 8. Reviewer caught a REAL epistemic defect (355 generated assets ARE tracked → the test hit the
   happy path, not the fallback) — FOLDED (bf19681): abort **/assets/generated/** so onerror fires + assert fallback
   content (not just the container). Re-verified: 8 e2e green WITH assets aborted.
-- [ ] [WAIT] **APP-RUNS-VERIFY PR #217 — merge on green.** Reviewer folded (bf19681). Monitor b6blfhfy7 armed on CI;
-  merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has the assets-aborted e2e fallback test.
-- [ ] [WAIT] **PLAYTIME-DEPTH-AUDIT — measure the founding-spine run length against the hour+ goal (next milestone, own branch GATED on the APP-RUNS-VERIFY PR merge).**
-  The user's standing vision: the game should run an HOUR+ ([[hour-long-depth]] → [[convergence-pivot]]). The spine is
-  g0→g9 with ~6 scenes/act ([[mmm-spine-act-depth]]). MEASURE: instrument a representative playthrough (scene count ×
-  realistic read time + decisions + the inter-era surfaces) to estimate playtime; compare to the hour+ target; enumerate
-  the largest depth gaps (acts/tiers that are thin, intersections that don't fire) as concrete follow-up items. Pure
-  analysis + a depth-metric test/script; no content rewrite in this milestone. Milestone branch, ONE PR.
+- [x] **APP-RUNS-VERIFY PR #217 — MERGED (squash 7c9fb67); v0.68.1 cut.** Reviewer folded; CI green; merged CLEAN +
+  verified on main (the assets-aborted e2e fallback test).
+- [x] **PLAYTIME-DEPTH-AUDIT — hour+ goal MET — BUILT (branch feat/playtime-depth-audit, commit 2c77ce8).** Measured a
+  single founding→stars lineage run (one corpus file = 6 acts, tiers 0..5): **~57 min MEDIAN** of authored scene depth
+  (read @220wpm + decision deliberation), range 49–121 min, thinnest path ~49 min — BEFORE the emergence opening,
+  inter-era surfaces, and finale. The hour+ target is met. Pure metric (src/sim/saga/playtimeDepth.ts) + report
+  (scripts/playtime-depth.ts) + a DURABLE FLOOR test (median >40, no path <25). docs/STATE.md records it. Gate: check 0,
+  typecheck 0/0, unit 1028. Gap note: thinnest paths (~49 min) are the religious/middle cells — fine vs. the floor, but
+  the natural next quality lever is CONTENT UNIQUENESS, not more depth. NEXT: reviewer trio (running) → ONE PR.
+- [ ] [WAIT] **PLAYTIME-DEPTH-AUDIT PR — merge on green (after open).** Gated on the open PR's CI + threads.
+- [ ] **CONTENT-UNIQUENESS-AUDIT — measure structural sameness across the corpus (next actionable, own branch post-merge).**
+  The highest-order standing directive ([[uniqueness-genuine-intersections]] / [[craft-spines-not-generator]]): every
+  act storyline must read UNIQUE; a prior audit found 503/504 acts shared ONE structural skeleton. Now that depth is
+  confirmed, MEASURE uniqueness: a metric over the corpus (scene-shape fingerprints / opening-line + decision-architecture
+  similarity / n-gram overlap across files) that quantifies how same-y the acts read, reports the worst clusters, and
+  installs a durable ceiling test (similarity must stay below a threshold). Pure analysis + a metric/test; the rewrite to
+  FIX sameness is the follow-on milestone this enumerates. Milestone branch, ONE PR.
 - [ ] [WAIT] **GENAI-GENERATE — produce the live cached assets (BLOCKED: needs GEMINI_API_KEY in the env).** Run the
   seven offline scripts (genai-news/music/cinematics/map-art/dossiers/narration/encounter-portraits) to fill the
   caches, READ-verify a sample of each, commit the assets. True blocker here (no key); un-WAIT when a key is available.
