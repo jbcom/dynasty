@@ -12,6 +12,7 @@ import {
   type PortraitFacets,
   portraitKey,
   presentationFor,
+  rivalEncounterFacets,
   SCREEN_WRAPPER,
   SIGNATURE_STYLE,
 } from "../portrait";
@@ -273,5 +274,39 @@ describe("EI-8d encounter portrait prompt + key", () => {
         gender: "male",
       }),
     ).toBe("portrait:enc:rival_head:adult:midcentury:m");
+  });
+});
+
+describe("GA-ENCOUNTER-PORTRAITS rivalEncounterFacets", () => {
+  it("maps a rival id + era to an adult head keyed on the line identity", () => {
+    const f = rivalEncounterFacets("rival:italian", "industrial_late1800s");
+    expect(f.role).toBe("rival_italian");
+    expect(f.lifeStage).toBe("adult");
+    expect(f.eraBand).toBe("industrial_late1800s");
+    expect(["male", "female"]).toContain(f.gender);
+    // The composite key resolves under the normalized role token.
+    expect(encounterPortraitKey(f)).toBe(
+      `portrait:enc:rival_italian:adult:industrial_late1800s:${f.gender === "male" ? "m" : "f"}`,
+    );
+  });
+
+  it("is DETERMINISTIC — same id → same gender (a stable hash, never Math.random)", () => {
+    const a = rivalEncounterFacets("rival:chinese", "midcentury");
+    const b = rivalEncounterFacets("rival:chinese", "stellar");
+    expect(a.gender).toBe(b.gender); // gender keys on the id, independent of era
+    // Different ids can differ; the roster spreads across both genders (not all one).
+    const roster = [
+      "ireland",
+      "bavaria",
+      "italian",
+      "ashkenazi_jewish",
+      "scandinavian",
+      "chinese",
+      "baghdad",
+    ];
+    const genders = new Set(
+      roster.map((p) => rivalEncounterFacets(`rival:${p}`, "midcentury").gender),
+    );
+    expect(genders.size).toBe(2);
   });
 });
