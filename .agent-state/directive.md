@@ -159,17 +159,51 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   ~62ch reading column so the float sits inside the measure; shape-outside rounds the wrap to the plate. Verified
   live (mobile 412px screenshot — prose hugs the plate's left edge then reclaims the column below) + a structural
   test (float:right, shape-outside set, portrait precedes the prose in .scene-body).
-- [ ] **EI-9 COMPLETE THE PORTRAIT-MATRIX ASSET SWEEP** — the EI-8 wiring is live + the founding-era slice is
-  generated, but the full composite matrix (other era bands × life-stages × encounter roles, ~294+ keys) isn't on
-  disk yet; the on-demand cache covers gaps at runtime but a pre-gen pass gives the shipped build real portraits
-  across the centuries. Run `pnpm vite-node scripts/genai-portraits.ts` (the Gemini image key is wired) era-band by
-  era-band; idempotent (skips existing). READ a sample from each era band + a high-rung archetype (CEO/celebrity/
-  cult-leader/crime) to confirm the wardrobe reads. Asset-only; commit per era band so the diff stays reviewable.
-- [ ] [WAIT] **EI-6b-ui + EI-7 + EI-8 PR #194 — merge on green.** 3 local reviewers clean; Amazon-Q placeById-guard
-  folded (29435b2). EI-8a–f shipped (composite portrait matrix, on-demand cache, founding-era assets). Live-verified
-  in Chrome (emergence opens on "You are born…", senses→4 glowing inline sense-choices→naming speaks "Gwendolyn
-  Calloway"/"daughter"; portrait magazine-wraps the prose). Squash-merge once
-  CLEAN + 0 unresolved threads, then sync main + a fresh branch for EI-8.
+- [x] **EI-PRESENTATION — portrait MEDIUM by era × station — DONE (code, commit 9319bc5; user 2026-06-23).**
+  `presentationFor(eraBand, tier)` + `CHRONICLE_WRAPPER`: the composite/encounter prompts now render the era×station
+  ARTIFACT (founding sketch→oil-miniature; Gilded-Age tintype-keepsake→gilt-framed-oil; …→volumetric→holographic
+  state portrait among the stars), held cohesive by the chronicle wrapper. VALIDATED live: regenerated the Gilded-Age
+  economic low (a worn tintype) vs high (a gilt-framed oil) — the medium reads station exactly per the user's miner-
+  vs-robber-baron example (commit 02826ab). 18 unit tests.
+- [x] **EI-9 PORTRAIT-MATRIX ADULT SWEEP — DONE.** The full ADULT matrix is generated across all 8 era bands × 7
+  archetypes × 3 rung tiers × 2 genders (336 portraits) with the era×station presentation MEDIUM + scarcity
+  inversion. READ-verified one low (humble medium) + one high (commissioned/physical medium) per band: founding
+  charcoal-sketch→oil; federal silhouette→oil; Gilded-Age tintype→framed-oil; early-1900s snapshot→studio-photo;
+  midcentury snapshot→color-studio; digital headshot; near_future hologram→PHYSICAL-OIL; stellar hologram→PHYSICAL-OIL.
+- [x] **EI-9b digital_modern screen-native captures — DONE (commits 499e079, 9a94e10).** Added SCREEN_WRAPPER +
+  `isScreenCapture`: digital_modern low/mid now route to a clean modern-photo wrapper (not the aged plate), HIGH
+  stays chronicle. KNOWN LIMIT: Imagen renders "modern photo + accent border" as a phone/device frame and ignores
+  the negative prompt — settled rather than prompt-fought (debug-stop-rule); the casual-vs-formal-vs-aged distinction
+  reads regardless. A later post-crop pass could remove the device frame. 21 unit tests.
+- [ ] **EI-9c LIFE-STAGE + ENCOUNTER portrait sweep** — the matrix beyond ADULT: infant/child/youth/elder per era
+  band (the cycles recur every generation; progeny-in-space need stellar children too — user 2026-06-23) + the
+  encounter-role portraits (first friend/betrayer/partner/rival/mentor) via `buildEncounterPortraitPrompt`. Generate
+  on-demand as the play surface requests them, or a targeted sweep per life-stage; READ a sample per stage. Large —
+  enumerate the demand the live runner actually hits first, don't blanket all 1680 keys.
+- [ ] **EI-SCARCITY-STORIES — carry the scarcity theme into the NARRATIVE (user, 2026-06-23)** — the user's
+  scarcity insight ("worth thinking about scarcity both in the stories we tell and in the visual medium") applies to
+  CONTENT, not just portraits: in the post-scarcity star era the drama shifts to what STAYS scarce when all else is
+  abundant — singular physical artifacts, real (non-copied) presence, an authentic bloodline/name, scarce attention/
+  legitimacy. The far-future spine/era acts + GenAI scene prompting for near_future+stellar should foreground these
+  stakes (a physical heirloom oil as a plot object; an authenticity/legitimacy conflict) rather than reusing
+  industrial-era scarcity (money/land). Enumerate the post-scarcity story beats, fold into the spine/era guidance +
+  the GenAI prompt briefs, then verify a generated stellar act reflects it. (Pairs with the physical-oil portrait flex.)
+- [x] **EI-10 future-digital luminosity — DONE (commit e32b9cf).** Root cause: the aged-physical-plate
+  CHRONICLE_WRAPPER fought the holographic medium. `wrapperFor(era,tier)` now uses a luminous void-ground
+  ARCHIVE_WRAPPER for near_future/stellar low+mid (digital captures) + keeps CHRONICLE_WRAPPER for physical
+  artifacts (all historical + the future-HIGH physical-oil flex). READ-verified: stellar mid now reads as a
+  glowing translucent hologram; the digital-abundant vs physical-scarce contrast is stark. 20 unit tests.
+- [x] **PR #194 (EI-6b-ui + EI-7 + EI-8 enumeration) — MERGED (squash aff10e5, release 0.62.0).** The lived
+  emergence opening + portrait magazine-wrap + EI-8a–e are on main. Live-verified in Chrome (emergence opens on
+  "You are born…", senses→4 glowing inline sense-choices→naming speaks "Gwendolyn Calloway"/"daughter"; portrait
+  magazine-wraps). WARNING: the squash captured a STALE HEAD — it DROPPED EI-8f's PNGs + everything after
+  (presentation/scarcity/EI-9/EI-10/EI-9b). Recovered in #197. [[gh-squash-stale-head-gotcha]].
+- [ ] [WAIT] **PR #197 — the recovered EI-8c…EI-10 portrait work — merge on green.** Clean delta off main (345 files,
+  MERGEABLE, no conflict): the full portrait demand matrix + presentation medium + scarcity inversion + 336 adult
+  portraits that #194's partial squash dropped. Gate green (check 0, typecheck 0/0, unit 980, browser 161, 21 portrait
+  tests). Merge once CI green + 0 threads — VERIFY main has portrait.ts's `presentationFor`/`SCREEN_WRAPPER` after
+  (don't push during the merge window; keep the tree clean — [[gh-squash-stale-head-gotcha]]). Then sync main + fresh
+  branch for EI-9c / EI-SCARCITY-STORIES.
 - [x] **EI-8 ENUMERATE THE PORTRAIT-DEMAND MATRIX — DONE (spec).** Wrote the full demand matrix into the EI spec
   (docs/.../2026-06-23-emergent-infancy-onboarding-design.md §"EI-8 — the portrait-demand MATRIX"), grounded in the
   real enums: 5 LIFE-STAGES (infant/child/youth/adult/elder) × 8 fine ERA BANDS (founding_1700s…stellar, NOT the 4
