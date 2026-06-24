@@ -193,11 +193,17 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   ARCHIVE_WRAPPER for near_future/stellar low+mid (digital captures) + keeps CHRONICLE_WRAPPER for physical
   artifacts (all historical + the future-HIGH physical-oil flex). READ-verified: stellar mid now reads as a
   glowing translucent hologram; the digital-abundant vs physical-scarce contrast is stark. 20 unit tests.
-- [ ] [WAIT] **EI-6b-ui + EI-7 + EI-8 PR #194 — merge on green.** 3 local reviewers clean; Amazon-Q placeById-guard
-  folded (29435b2). EI-8a–f shipped (composite portrait matrix, on-demand cache, founding-era assets). Live-verified
-  in Chrome (emergence opens on "You are born…", senses→4 glowing inline sense-choices→naming speaks "Gwendolyn
-  Calloway"/"daughter"; portrait magazine-wraps the prose). Squash-merge once
-  CLEAN + 0 unresolved threads, then sync main + a fresh branch for EI-8.
+- [x] **PR #194 (EI-6b-ui + EI-7 + EI-8 enumeration) — MERGED (squash aff10e5, release 0.62.0).** The lived
+  emergence opening + portrait magazine-wrap + EI-8a–e are on main. Live-verified in Chrome (emergence opens on
+  "You are born…", senses→4 glowing inline sense-choices→naming speaks "Gwendolyn Calloway"/"daughter"; portrait
+  magazine-wraps). WARNING: the squash captured a STALE HEAD — it DROPPED EI-8f's PNGs + everything after
+  (presentation/scarcity/EI-9/EI-10/EI-9b). Recovered in #197. [[gh-squash-stale-head-gotcha]].
+- [ ] [WAIT] **PR #197 — the recovered EI-8c…EI-10 portrait work — merge on green.** Clean delta off main (345 files,
+  MERGEABLE, no conflict): the full portrait demand matrix + presentation medium + scarcity inversion + 336 adult
+  portraits that #194's partial squash dropped. Gate green (check 0, typecheck 0/0, unit 980, browser 161, 21 portrait
+  tests). Merge once CI green + 0 threads — VERIFY main has portrait.ts's `presentationFor`/`SCREEN_WRAPPER` after
+  (don't push during the merge window; keep the tree clean — [[gh-squash-stale-head-gotcha]]). Then sync main + fresh
+  branch for EI-9c / EI-SCARCITY-STORIES.
 - [x] **EI-8 ENUMERATE THE PORTRAIT-DEMAND MATRIX — DONE (spec).** Wrote the full demand matrix into the EI spec
   (docs/.../2026-06-23-emergent-infancy-onboarding-design.md §"EI-8 — the portrait-demand MATRIX"), grounded in the
   real enums: 5 LIFE-STAGES (infant/child/youth/adult/elder) × 8 fine ERA BANDS (founding_1700s…stellar, NOT the 4
