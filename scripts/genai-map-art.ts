@@ -11,8 +11,8 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { DEFAULT_IMAGE_MODEL, geminiGenerateImage } from "../src/sim/genai/client";
-import { allMapJobs, buildMapPrompt, mapKey } from "../src/sim/genai/mapArt";
-import { type EraBand, ERA_BAND_ORDER } from "../src/sim/genai/portrait";
+import { allMapJobs } from "../src/sim/genai/mapArt";
+import { ERA_BAND_ORDER } from "../src/sim/genai/portrait";
 
 const OUT_DIR = "public/assets/generated/map";
 
@@ -22,22 +22,17 @@ const arg = (name: string): string | undefined => {
 };
 const FORCE = process.argv.includes("--force");
 
-interface Job {
-  key: string;
-  prompt: string;
-}
-
-function jobs(): Job[] {
+/** The jobs to run — every era band by default, or just the one named by --era (validated). Reuses allMapJobs. */
+function jobs(): ReturnType<typeof allMapJobs> {
+  const all = allMapJobs();
   const eraRaw = arg("era");
-  if (eraRaw !== undefined) {
-    if (!(ERA_BAND_ORDER as readonly string[]).includes(eraRaw)) {
-      console.error(`--era: "${eraRaw}" is not one of: ${ERA_BAND_ORDER.join(", ")}`);
-      process.exit(1);
-    }
-    const band = eraRaw as EraBand;
-    return [{ key: mapKey(band), prompt: buildMapPrompt(band) }];
+  if (eraRaw === undefined) return all;
+  const job = all.find((j) => j.eraBand === eraRaw);
+  if (!job) {
+    console.error(`--era: "${eraRaw}" is not one of: ${ERA_BAND_ORDER.join(", ")}`);
+    process.exit(1);
   }
-  return allMapJobs().map((j) => ({ key: j.key, prompt: j.prompt }));
+  return [job];
 }
 
 async function main(): Promise<void> {
