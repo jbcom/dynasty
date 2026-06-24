@@ -37,6 +37,12 @@ Use library-backed metrics to quantify scannability, clarity, consistency, and s
 rewrite, or split the worst passages incrementally instead of trying to certify the whole
 legacy corpus in one pass.
 
+`pnpm prose:ratchet` compares the current audit against
+`src/data/saga/prose-quality-baseline.json`. It is allowed to pass while legacy failures
+remain, but it must fail if the corpus regresses on failed count, pass rate, score floors,
+or sentence-load ceilings. When an intentional prune/rewrite improves the corpus, update
+the baseline in the same PR as the content change.
+
 ## Legacy Fabric Triage
 
 Similarity mining should find the wheat from the chaff in legacy class JSON. The preferred

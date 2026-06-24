@@ -277,6 +277,12 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   non-null assertion warnings outside this slice. Remote proof: ready PR, build-and-test + CodeQL green,
   Amazon Q + CodeRabbit green/no actionable threads, Gemini quota warning treated as non-blocking per user
   directive, and squash-merged to main.
+- [x] **KEY-PILLARS-1d PROSE-RATCHET — BUILT locally (branch codex/prose-quality-ratchet).** `pnpm
+  prose:audit` still reports the current text-readability-backed state (622 surfaces, 286 failures, passRate
+  0.54), but the new `pnpm prose:ratchet` compares against `src/data/saga/prose-quality-baseline.json` and
+  fails on regression in failed count, pass rate, scan/clarity/consistency floors, or sentence-load ceilings.
+  This makes scannability/clarity/consistency a practical gate while legacy fabric is still being pruned.
+  Local proof: touched-file Biome clean; proseQuality/proseQualityRatchet unit 5; prose:audit 0; prose:ratchet 0.
 - [x] **GENAI-GENERATE — BUILT locally (branch codex/genai-generate-live-assets).**
   `.env` contains `GEMINI_API_KEY`, so this is no longer blocked on credentials. IMPORTANT PIVOT
   ([[founding-spine-pivot]]): do **not** run the old 504-cell class sweeps as the played corpus. The player steers

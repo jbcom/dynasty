@@ -5,8 +5,13 @@
  *   pnpm prose:audit -- --fail
  */
 
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { auditProseQuality } from "../src/sim/proseQuality";
+import {
+  compareProseQualityToBaseline,
+  summarizeProseQualityReports,
+  type ProseQualitySummary,
+} from "../src/sim/proseQualityRatchet";
 
 interface SpineScene {
   id: string;
@@ -30,6 +35,13 @@ function arg(name: string): boolean {
   return process.argv.includes(`--${name}`);
 }
 
+function argValue(name: string, fallback: string): string {
+  const index = process.argv.indexOf(`--${name}`);
+  if (index < 0) return fallback;
+  const value = process.argv[index + 1];
+  return value && !value.startsWith("--") ? value : fallback;
+}
+
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(path, "utf8")) as T;
 }
@@ -44,6 +56,7 @@ function sceneParts(scene: SpineScene): string[] {
 }
 
 function main(): void {
+  const baselinePath = argValue("baseline", "src/data/saga/prose-quality-baseline.json");
   const spine = readJson<SpineFile>("src/data/saga/spine.act.json");
   const fabric = readJson<FabricIndex>("src/data/saga/fabric/index.json");
   const targets: Array<{ label: string; parts: string[] }> = spine.scenes.map((scene) => ({
@@ -64,43 +77,23 @@ function main(): void {
   }
 
   const reports = targets.map((target) => auditProseQuality(target.label, target.parts));
-  const failed = reports.filter((r) => !r.pass);
-  const worst = [...reports]
-    .sort(
-      (a, b) =>
-        a.scanScore - b.scanScore ||
-        a.clarityScore - b.clarityScore ||
-        b.findings.length - a.findings.length,
-    )
-    .slice(0, 12)
-    .map((r) => ({
-      label: r.label,
-      pass: r.pass,
-      scanScore: r.scanScore,
-      clarityScore: r.clarityScore,
-      consistencyScore: r.consistencyScore,
-      fleschReadingEase: r.fleschReadingEase,
-      fleschKincaidGrade: r.fleschKincaidGrade,
-      averageSentenceWords: r.averageSentenceWords,
-      maxSentenceWords: r.maxSentenceWords,
-      findings: r.findings,
-    }));
+  const summary = summarizeProseQualityReports(reports);
+  const ratchet = arg("ratchet")
+    ? {
+        baselinePath,
+        ...compareProseQualityToBaseline(summary, readJson<ProseQualitySummary>(baselinePath)),
+      }
+    : undefined;
 
-  console.log(
-    JSON.stringify(
-      {
-        generated: "prose-quality-audit",
-        total: reports.length,
-        failed: failed.length,
-        passRate: Number(((reports.length - failed.length) / reports.length).toFixed(3)),
-        worst,
-      },
-      null,
-      2,
-    ),
-  );
+  const output = ratchet ? { ...summary, ratchet } : summary;
+  const json = JSON.stringify(output, null, 2);
 
-  if (arg("fail") && failed.length > 0) process.exitCode = 1;
+  if (arg("write-baseline")) writeFileSync(baselinePath, `${JSON.stringify(summary, null, 2)}\n`);
+
+  console.log(json);
+
+  if (arg("fail") && summary.failed > 0) process.exitCode = 1;
+  if (ratchet && !ratchet.pass) process.exitCode = 1;
 }
 
 main();
