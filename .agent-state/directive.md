@@ -135,8 +135,9 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   test) + sound.ts facade; LegacyReport fires the finale read on mount (no-visual-impact override — audio-only side
   effect). Gate: check 0, typecheck 0/0, unit 1022, browser 175. Live-synth BLOCKED here (no key) — degrades silently.
   Reviewer trio CLEAN (code-reviewer incl. security pass: SDK auth no key-leak, null-safe, totality; simplifier clean).
-- [ ] [WAIT] **GA-TTS PR #211 — merge on green.** Reviewer trio clean (c4bef5b). Monitor bjq6v5cqv armed on CI; merge on
-  CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has src/sim/narration/ + AudioEngine.playNarration.
+- [x] **GA-TTS PR #211 — MERGED (squash 22fb37d); v0.66.0 cut.** Reviewer trio clean (incl. security pass); CI green;
+  merged CLEAN + verified on main (src/sim/narration/ + AudioEngine.playNarration). SEVEN GenAI-surface milestones
+  shipped (GA-NEWS #202, GA-MUSIC #203, GA-VIDEO #205, GA-MAP-ART #207, GA-DOSSIER-DIAGRAMS #209, GA-TTS #211).
 - [x] **GA-NEWS — GenAI period DISPATCHES — BUILT (branch feat/ga-news).** GN-1 pure `src/sim/news/genaiNews.ts`
   (buildNewsDispatchPrompt + newsDispatchKey, era × mood, leak-safe, JSON-unwrap defense). GN-2 loadNewsDispatch +
   a NewsTicker "Dispatch" layer (term-resolved). GN-3 scripts/genai-news.ts generated ALL 24 era×mood dispatch sets
@@ -167,12 +168,28 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
 - [x] **GA-DOSSIER-DIAGRAMS PR #209 — MERGED (squash 047d5b1); v0.65.0 cut.** Reviewer trio clean; CI green; merged
   CLEAN + verified on main (the diagram panel + buildDossierDiagramPrompt). SIX GenAI-expansion milestones shipped
   (GA-NEWS #202, GA-MUSIC #203, GA-VIDEO #205, GA-MAP-ART #207, GA-DOSSIER-DIAGRAMS #209).
-- [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt — LAST GenAI-surface milestone (fresh branch, GATED on the GA-TTS PR merge).**
-  buildEncounterPortraitPrompt exists, no live consumer (EI-9f); needs a single-figure FOCUS surface (a rival-head
-  dossier / a braid-crossing close-up) to drive it. Reuse the portrait Imagen pipeline + hide-on-error. Milestone
-  branch, ONE PR. Fresh branch cuts from main AFTER the GA-TTS PR squash-merges ([[one-branch-local-review]]).
-  DECISION (log, [[never-ask-direction]]): sequence after the VD milestone — GA-NEWS + GA-MUSIC first (highest
-  feel-per-effort), then GA-VIDEO finale, then the rest. Each its own milestone branch.
+- [x] **GA-ENCOUNTER-PORTRAITS — rival-line head portraits on the Field — BUILT (branch feat/ga-encounter-portraits,
+  commit 7198f54).** buildEncounterPortraitPrompt/encounterPortraitKey existed (EI-8d) with no consumer. Now the
+  convergence Field has faces: rivalEncounterFacets(rivalId, eraBand) (pure, deterministic — role=line identity,
+  adult, current era, gender = a stable FNV-1a hash of the id, never Math.random) drives a small era-true head per
+  RivalDossier row (hide-on-error; PlayScreen passes the era). scripts/genai-encounter-portraits.ts sweeps every
+  eligible rival place × era band offline. Tests: unit (deterministic facets + roster spans both genders) + browser
+  (head src + hide-on-error + none without era / on the player row). Gate: check 0, typecheck 0/0, unit 1024, browser
+  177. Live-gen BLOCKED here (no key). NEXT: reviewer trio (running) folded → ONE PR.
+  DECISION (log, [[never-ask-direction]]): sequenced after the VD milestone — GA-NEWS + GA-MUSIC first (highest
+  feel-per-effort), then GA-VIDEO finale, then the rest. ALL SEVEN GenAI-surface milestones now built.
+
+## ★GenAI-surface expansion COMPLETE — next: holistic verification + live asset generation★
+- [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS PR — merge on green (after open).** Gated on the open PR's CI + threads.
+- [ ] **GENAI-VERIFY-1 — holistic GenAI-surface audit (next actionable milestone, own branch post-merge).** All seven
+  surfaces (news/music/video/map/dossier-diagrams/tts/encounter-portraits) ship with pure builders + offline scripts +
+  hide-on-error runtime + tests, but the live assets are key-gated (none generated in this env). Audit: (a) confirm
+  every surface's runtime fallback is graceful (no broken-image/empty-panel/throw on a missing asset) via a sweep of
+  the loader/onerror paths; (b) write/refresh docs/STATE.md + the genai-surface-audit doc to record the 7 shipped
+  surfaces + the offline-generation commands; (c) enumerate any remaining GenAI gap. Milestone branch, ONE PR.
+- [ ] [WAIT] **GENAI-GENERATE — produce the live cached assets (BLOCKED: needs GEMINI_API_KEY in the env).** Run the
+  seven offline scripts (genai-news/music/cinematics/map-art/dossiers/narration/encounter-portraits) to fill the
+  caches, READ-verify a sample of each, commit the assets. True blocker here (no key); un-WAIT when a key is available.
 - [x] **GA-MAP-ART PR #207 — MERGED (squash ece0be9); v0.64.0 cut.** Reviewer trio folded; CI green; squash-merged
   CLEAN. VERIFIED main has src/sim/genai/mapArt.ts + the MapView era-base wiring + map_founding_1700s.png. Five
   GenAI-expansion milestones now shipped (GA-NEWS #202, GA-MUSIC #203, GA-VIDEO #205, GA-MAP-ART #207).
