@@ -57,6 +57,8 @@ export function dossierBriefSystem(): string {
     "voice, 2-3 tight paragraphs. NOT a story; a briefing. Ground it in the supplied state.",
     "RULES: never write a real person's name; refer to the line only as {family_name}. No meta ('as an AI').",
     "Period-true to the era. Terse, concrete, scannable — this is a briefing, not prose.",
+    "OUTPUT PLAIN PROSE ONLY: 2-3 paragraphs separated by a blank line. Do NOT wrap it in JSON, markdown,",
+    "code fences, keys, or a header — return the paragraphs themselves and nothing else.",
   ].join("\n");
 }
 

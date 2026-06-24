@@ -81,8 +81,9 @@ describe("VD-2 buildDossier (live state → visual briefing)", () => {
     expect(dossierFigureKey("rnd", "stellar", "technological")).toBe(
       "dossier:fig:rnd:stellar:technological",
     );
-    expect(dossierBriefKey("intelligence", "midcentury", "abc")).toBe(
-      "dossier:brief:intelligence:midcentury:abc",
+    // The brief is keyed kind×era (run-independent — generated offline, cached as an asset).
+    expect(dossierBriefKey("intelligence", "midcentury")).toBe(
+      "dossier:brief:intelligence:midcentury",
     );
     // Same input → byte-identical dossier (pure).
     expect(buildDossier(input())).toEqual(buildDossier(input()));

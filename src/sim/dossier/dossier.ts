@@ -112,9 +112,14 @@ export function dossierFigureKey(
   return `dossier:fig:${kind}:${eraBand}:${archetype}`;
 }
 
-/** The deterministic key for a dossier's GenAI BRIEF (path-voice prose) — cached, seeded by the run + era. */
-export function dossierBriefKey(kind: DossierKind, eraBand: EraBand, seed: string): string {
-  return `dossier:brief:${kind}:${eraBand}:${seed}`;
+/**
+ * The deterministic key for a dossier's GenAI BRIEF (path-voice prose). Keyed on kind × era (NOT the per-run
+ * seed) because the brief — like the scene corpus + portraits — is GENERATED OFFLINE and cached as an asset
+ * (no API at sim runtime, sim purity); it reads as a period-and-path assessment, and the run's exact numbers
+ * are carried by the live chart/graph/map panels beside it. So one brief serves every run on that kind×era.
+ */
+export function dossierBriefKey(kind: DossierKind, eraBand: EraBand): string {
+  return `dossier:brief:${kind}:${eraBand}`;
 }
 
 /** Title-case a meter id for a chart legend ("reputation" → "Reputation"). */
@@ -178,7 +183,7 @@ export function buildDossier(input: DossierInput): Dossier {
     title: KIND_TITLE[kind],
     panels: [
       { type: "figure", key: dossierFigureKey(kind, eraBand, archetype) },
-      { type: "brief", key: dossierBriefKey(kind, eraBand, input.seed) },
+      { type: "brief", key: dossierBriefKey(kind, eraBand) },
       { type: "chart", data: chart },
       { type: "graph", data: graph },
       { type: "map", data: map },

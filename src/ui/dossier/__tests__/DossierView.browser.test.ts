@@ -100,19 +100,15 @@ describe("DossierView (VD-3)", () => {
       ],
       rung: 1,
     });
-    component = mount(DossierView, {
-      target: host,
-      props: {
-        dossier: founding,
-        brief: [
-          "The house holds two ledgers and a leased counting-room. Capital is thin but the books are honest.",
-          "Two rival lines crowd the same wharves; neither yet commands credit. The opening is real.",
-        ],
-      },
-    });
+    // No brief override — DossierView LOADS the real generated brief from dossierBriefs.json by its key.
+    component = mount(DossierView, { target: host, props: { dossier: founding } });
     // The figure path resolves to the generated portfolio plate.
     const img = host.querySelector("img.figure") as HTMLImageElement | null;
     expect(img?.getAttribute("src")).toContain("dossier_fig_portfolio_founding_1700s_economic.png");
+    // The generated path-voice brief loaded (the magnate assessment of {family_name}'s position) — NOT the
+    // pending placeholder.
+    expect(host.textContent).not.toMatch(/Compiling the assessment/);
+    expect(host.textContent).toMatch(/\{family_name\}|interest|tier|position/i);
     await page.screenshot({ element: host.firstElementChild as Element });
   });
 });

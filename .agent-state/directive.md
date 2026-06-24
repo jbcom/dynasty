@@ -74,9 +74,11 @@ when the WHOLE milestone is solid — NOT a PR per VD-step.
   Market Dossier" composes the HYBRID: the real generated counting-house figure plate (scripts/genai-dossiers.ts) +
   the path-voice brief + the real Reputation/Money trajectory chart + the rival graph + the reach strip — LIVE-
   VERIFIED via screenshot READ (a complete, designed briefing set piece). The figure pipeline + FigurePanel +
-  DossierView all integrate. REMAINING (folds into VD-7): wire the LIVE brief generation in the gameStore runner
-  (resolve dossierBriefKey through the Gemini text cache at the boundary) so a real run's brief is generated, not
-  passed in. 5 browser tests.
+  DossierView all integrate. The BRIEF is now wired too: keyed kind×era (run-independent, generated OFFLINE into
+  src/data/dossierBriefs.json by genai-dossiers.ts, loaded at runtime via loadDossierBrief — no API at sim runtime,
+  like the scene corpus), with a defensive JSON-unwrap on the model reply. LIVE-VERIFIED: the founding dossier now
+  shows the REAL magnate assessment ("The {family_name} interest remains concentrated in the mid-Atlantic shipping
+  lanes…second tier of the republic's financial hierarchy…"). 5 browser tests.
 - [ ] **VD-7 remaining placements + other paths** — decision-aid panel + upgraded path-keyed tabs + the other
   archetypes' dossier kinds. THEN open the single milestone PR.
 

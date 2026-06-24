@@ -10,14 +10,21 @@ import BriefPanel from "./BriefPanel.svelte";
 import ChartPanel from "./ChartPanel.svelte";
 import FigurePanel from "./FigurePanel.svelte";
 import GraphPanel from "./GraphPanel.svelte";
+import { loadDossierBrief } from "./loadDossierBrief";
 import MapPanel from "./MapPanel.svelte";
 
 interface Props {
   dossier: Dossier;
-  /** The resolved brief prose for the dossier's brief panel (undefined → the panel shows its pending state). */
+  /** An explicit brief override (tests/preview). When omitted, the brief loads from its panel key (VD-6). */
   brief?: string[];
 }
 const { dossier, brief }: Props = $props();
+
+// VD-6: resolve the brief from the offline-generated map by the brief panel's key, unless an override is given.
+const briefPanelKey = $derived(
+  (dossier.panels.find((p) => p.type === "brief") as { key: string } | undefined)?.key,
+);
+const resolvedBrief = $derived(brief ?? (briefPanelKey ? loadDossierBrief(briefPanelKey) : undefined));
 
 // A short era label for the masthead.
 const ERA_LABEL: Record<string, string> = {
@@ -43,7 +50,7 @@ const ERA_LABEL: Record<string, string> = {
       {#if panel.type === "figure"}
         <div class="cell figure-cell"><FigurePanel figureKey={panel.key} /></div>
       {:else if panel.type === "brief"}
-        <div class="cell brief-cell"><BriefPanel paragraphs={brief} /></div>
+        <div class="cell brief-cell"><BriefPanel paragraphs={resolvedBrief} /></div>
       {:else if panel.type === "chart"}
         <div class="cell"><ChartPanel spec={panel.data} /></div>
       {:else if panel.type === "graph"}
