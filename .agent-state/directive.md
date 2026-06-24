@@ -208,9 +208,11 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   inter-era surfaces, and finale. The hour+ target is met. Pure metric (src/sim/saga/playtimeDepth.ts) + report
   (scripts/playtime-depth.ts) + a DURABLE FLOOR test (median >40, no path <25). docs/STATE.md records it. Gate: check 0,
   typecheck 0/0, unit 1028. Gap note: thinnest paths (~49 min) are the religious/middle cells — fine vs. the floor, but
-  the natural next quality lever is CONTENT UNIQUENESS, not more depth. NEXT: reviewer trio (running) → ONE PR.
-- [ ] [WAIT] **PLAYTIME-DEPTH-AUDIT PR — merge on green (after open).** Gated on the open PR's CI + threads.
-- [ ] **CONTENT-UNIQUENESS-AUDIT — measure structural sameness across the corpus (next actionable, own branch post-merge).**
+  the natural next quality lever is CONTENT UNIQUENESS, not more depth. Reviewers folded (47382f6): lineageRuns()
+  extracted (DRY); spine.act.json excluded (it's not a class run) → range tightened to 49–63 min across 84 files.
+- [ ] [WAIT] **PLAYTIME-DEPTH-AUDIT PR #218 — merge on green.** Reviewers folded (47382f6). Monitor bejuxadtz armed on
+  CI; merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has src/sim/saga/playtimeDepth.ts + the floor test.
+- [ ] [WAIT] **CONTENT-UNIQUENESS-AUDIT — measure structural sameness across the corpus (next milestone, own branch GATED on the PLAYTIME-DEPTH-AUDIT PR merge).**
   The highest-order standing directive ([[uniqueness-genuine-intersections]] / [[craft-spines-not-generator]]): every
   act storyline must read UNIQUE; a prior audit found 503/504 acts shared ONE structural skeleton. Now that depth is
   confirmed, MEASURE uniqueness: a metric over the corpus (scene-shape fingerprints / opening-line + decision-architecture
