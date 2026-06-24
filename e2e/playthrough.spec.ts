@@ -145,16 +145,19 @@ test("inter-era tabs render their views", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Trajectory" })).toBeVisible();
 });
 
-test("APP-RUNS-VERIFY: every GenAI surface degrades cleanly with NO generated assets (no broken images)", async ({
+test("APP-RUNS-VERIFY: every GenAI surface degrades cleanly when its assets are ABSENT (real fallback path)", async ({
   page,
 }) => {
-  // The doctrine DoD: "tests pass" ≠ "app runs". With zero generated assets (the live env), every GenAI image
-  // surface (map base, dossier figure/diagram, rival head) must hide-on-error — never a broken-image icon. A
-  // broken <img> reports naturalWidth 0 AND complete=true AND is still displayed; a hidden one is display:none.
+  // The doctrine DoD: "tests pass" ≠ "app runs". The repo SHIPS generated assets (incl. the founding-era ones a
+  // freshly-founded line renders), so the run normally hits the assets-PRESENT path. To genuinely prove the
+  // hide-on-error FALLBACK (the point of this test), ABORT every generated asset so each surface's onerror fires —
+  // then assert (a) no broken <img> is left visible AND (b) the fallback CONTENT renders, so the pass isn't vacuous.
+  await page.route("**/assets/generated/**", (r) => r.abort());
   await startGame(page);
   await expect(page.locator("[data-testid='saga-head']")).toBeVisible();
 
-  // No <img> that errored is left VISIBLE: every GenAI image either loaded (naturalWidth>0) or is hidden/unmounted.
+  // No <img> that errored is left VISIBLE: a broken img reports complete=true + naturalWidth=0 while still shown;
+  // a gracefully-handled one is display:none / unmounted (offsetParent null). Mid-load (complete=false) is excluded.
   const noVisibleBrokenImages = async (label: string) => {
     const broken = await page.evaluate(
       () =>
@@ -166,21 +169,27 @@ test("APP-RUNS-VERIFY: every GenAI surface degrades cleanly with NO generated as
     expect(broken, `${label}: no visible broken images`).toBe(0);
   };
 
-  // Field — the rival heads (encounter portraits) must hide, the rows still read.
+  // Field — the rival heads (encounter portraits) hide; the field rows + the summary line (asset-independent) read.
   await page.getByRole("tab", { name: "Field" }).click();
   await expect(
     page.locator("[data-testid='rival-dossier'], [data-testid='rival-dossier-empty']"),
   ).toBeVisible();
   await noVisibleBrokenImages("Field");
 
-  // Map — the era cartographic base must fall back (founding base → hide), the journey overlay still renders.
+  // Map — the era base + the founding fallback both abort → the base hides; the journey overlay + labels still
+  // render (the .chart keeps its aspect-ratio box; the SVG route + the stage labels are the asset-independent
+  // fallback content). Assert a layout-bearing element (a stage label), not an inner SVG geometry node (which has
+  // no CSS box and reads "hidden" to Playwright even when painted).
   await page.getByRole("tab", { name: "Map" }).click();
   await expect(page.locator("svg.route")).toBeVisible();
+  await expect(page.locator(".chart .labels .stage").first()).toBeVisible(); // the journey labels are the fallback content
   await noVisibleBrokenImages("Map");
 
-  // Dossier — the atmospheric figure + the informational diagram must hide, the data panels carry the briefing.
+  // Dossier — the figure + diagram hide; the real data-viz panels carry the briefing. Assert the chart panel's
+  // title (a layout-bearing element), not a raw SVG node.
   await page.getByRole("tab", { name: "Dossier" }).click();
   await expect(page.locator("[data-testid='dossier-view']")).toBeVisible();
+  await expect(page.getByText("Trajectory").first()).toBeVisible(); // the chart data panel rendered (the briefing's anchor)
   await noVisibleBrokenImages("Dossier");
 });
 
