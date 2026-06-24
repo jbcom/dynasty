@@ -21,7 +21,16 @@ interface AssetFile {
 
 function loadAssets(): AssetFile {
   if (!existsSync(ASSETS_JSON)) return { assets: [] };
-  return JSON.parse(readFileSync(ASSETS_JSON, "utf8")) as AssetFile;
+  try {
+    const parsed = JSON.parse(readFileSync(ASSETS_JSON, "utf8")) as Partial<AssetFile>;
+    if (!Array.isArray(parsed.assets)) {
+      throw new Error("expected top-level assets array");
+    }
+    return { assets: parsed.assets };
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    throw new Error(`Unable to read ${ASSETS_JSON}; fix the asset manifest before registration: ${detail}`);
+  }
 }
 
 export function registerGeneratedAsset(entry: GeneratedAssetEntry): void {
