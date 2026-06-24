@@ -424,7 +424,16 @@ export type MetersFile = z.infer<typeof MetersFileSchema>;
 export const AssetSchema = z.object({
   id: z.string().min(1),
   path: z.string().min(1),
-  kind: z.enum(["icon", "portrait", "background", "texture", "audio", "sprite", "font"]),
+  kind: z.enum([
+    "icon",
+    "portrait",
+    "background",
+    "texture",
+    "audio",
+    "sprite",
+    "font",
+    "dossier-figure", // VD-6: the visual-dossier atmospheric establishing plates
+  ]),
   source: z.string().min(1),
   // "Generated" = produced by the project's GenAI pipeline (VL-2 portraits/map); rights per the model
   // provider's terms (review before external distribution). The rest are the upstream open licenses.
