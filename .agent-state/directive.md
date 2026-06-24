@@ -230,10 +230,9 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   SOURCE. ⚠️ on-disk JSON realization awaits the key-gated GenAI regen. Gate: check 0, typecheck 0/0, unit 1032, e2e 8.
   Reviewers CLEAN (code-reviewer: SOUND/ship — invariants verified across all 588 acts, determinism, totality, the
   one consumer scene.ts unaffected; simplifier clean).
-- [ ] [WAIT] **SHAPE-DIVERSIFY-1 PR #222 — merge on green.** Remote checks are green and review-thread GraphQL
-  confirms 0 unresolved threads. Follow-up local closeout folded in SHAPE-PROMPT-WIRING below; push the commit,
-  wait for CI to return green, then squash-merge. Verify main has ARC_FRAME + senseShiftFor + the diversity test
-  + the prompt-wiring test.
+- [x] **SHAPE-DIVERSIFY-1 PR #222 — MERGED (squash bb8f10b).** Remote checks green
+  (build-and-test, CodeQL, CodeRabbit), review-thread GraphQL confirmed 0 unresolved threads, and main now has
+  ARC_FRAME + senseShiftFor + the diversity test + the prompt-wiring test.
 - [x] **SHAPE-PROMPT-WIRING — DONE (folded into PR #222 closeout).** Added a pure regression test in
   `src/sim/genai/__tests__/scene.unit.test.ts` that enumerates every ARC_SHAPE (including the new siege/exodus),
   finds a live scaffold sample, builds `buildScenePrompt`, and asserts the prompt carries the selected shape,
