@@ -4,12 +4,18 @@ import type { GameState } from "../sim/state";
 import { branchOf } from "../sim/branch";
 import { humanizeRivalLabel } from "../sim/dynastyWorld";
 import { newsForYear, timelinesForBranch } from "../sim/worldtime";
+import { eraBandForYear } from "../sim/genai/portrait";
+import { type NewsMood, newsDispatchKey } from "../sim/news/genaiNews";
+import { loadNewsDispatch } from "./loadNewsDispatch";
 
 interface Props {
   content: Content;
   gameState: GameState;
   /** How many headlines per scope to surface. */
   perScope?: number;
+  /** GA-NEWS: the line's standing trend → the period-dispatch mood (the world reacting to its trajectory).
+   *  Defaults to "steady" when the caller doesn't thread a trend. */
+  mood?: NewsMood;
   /** Branch-aware term interpolation; identity by default (alt-history AH1). */
   term?: (text: string) => string;
   /** RIVAL-RACE-PRESENCE: dispatches about the rival lines near the player's station — a stumble (a window)
@@ -20,8 +26,21 @@ interface Props {
   onPress?: (rivalId: string) => void;
 }
 
-const { content, gameState, perScope = 1, term = (t) => t, rivalNews = [], onPress }: Props =
-  $props();
+const {
+  content,
+  gameState,
+  perScope = 1,
+  mood = "steady",
+  term = (t) => t,
+  rivalNews = [],
+  onPress,
+}: Props = $props();
+
+// GA-NEWS: the GenAI period "Dispatches" for the current era × mood — the world's voice reacting to the line,
+// generated offline + loaded from the cache (term-resolved so {family_name} reads as the run's house).
+const dispatches = $derived(
+  loadNewsDispatch(newsDispatchKey(eraBandForYear(gameState.year), mood)).map((h) => term(h)),
+);
 
 // Diegetic news from the four (or five) parallel world timelines — the wider
 // world reported at the current in-world year.
@@ -84,6 +103,14 @@ const scopeLabel: Record<string, string> = {
             </button>
           {/if}
         </li>
+      {/each}
+    </ul>
+  {/if}
+  {#if dispatches.length > 0}
+    <!-- GA-NEWS: the GenAI period DISPATCHES — the era's press reacting to the line, in its own voice. -->
+    <ul class="dispatches" data-testid="news-dispatches">
+      {#each dispatches as h, i (i)}
+        <li><span class="rn-tag dispatch-tag">Dispatch</span><span class="headline">{h}</span></li>
       {/each}
     </ul>
   {/if}
@@ -164,6 +191,18 @@ const scopeLabel: Record<string, string> = {
   .rival-news li {
     grid-template-columns: 4.5rem 1fr auto;
     border-left-color: var(--mmm-gold);
+  }
+  /* GA-NEWS: the period dispatches — the era's press voice, set apart from the rival news + world news. */
+  .dispatches {
+    margin: 0 0 0.6rem;
+  }
+  .dispatches li {
+    grid-template-columns: 4.5rem 1fr;
+    border-left-color: var(--mmm-gold-deep);
+  }
+  .dispatch-tag {
+    background: color-mix(in srgb, var(--mmm-gold-deep) 70%, transparent);
+    color: var(--mmm-text);
   }
   /* RIVAL-CROSSING-EXPLOIT: the press action — a small gold button on a faltered (window) dispatch. */
   .rn-press {

@@ -106,11 +106,14 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   hugely lift the "feel". Gated, cached, offline.
 - [ ] **GA-TTS — period-voice narration of key beats (optional)** — TTS read of the naming beat / a generation's
   pivotal decision in an era-true voice. Lower priority; accessibility + immersion.
-- [ ] **GA-NEWS — GenAI period headlines (IN PROGRESS, branch feat/ga-news).** The NewsTicker is templated; add a
-  GenAI "Dispatches" layer — period-voiced headlines keyed to the era band (+ a situation bucket), generated OFFLINE
-  into a JSON map + loaded at runtime (the dossier-brief pattern, no API at runtime). Sub-steps: GN-1 pure prompt
-  builder + key (src/sim/news/), GN-2 loader + NewsTicker "Dispatches" section, GN-3 offline gen script + generate
-  the era set, GN-4 live-verify. Milestone branch, ONE PR at the end ([[one-branch-local-review]]).
+- [x] **GA-NEWS — GenAI period DISPATCHES — BUILT (branch feat/ga-news).** GN-1 pure `src/sim/news/genaiNews.ts`
+  (buildNewsDispatchPrompt + newsDispatchKey, era × mood, leak-safe, JSON-unwrap defense). GN-2 loadNewsDispatch +
+  a NewsTicker "Dispatch" layer (term-resolved). GN-3 scripts/genai-news.ts generated ALL 24 era×mood dispatch sets
+  (8 bands × 3 moods × 3 headlines) — READ-verified period-true ("A NEW POWER IN THE NEW REPUBLIC: The Meteoric and
+  Envied Rise of the {family_name} Interest"). GN-4 NewsTicker browser test + the PL-11 quiet-world test updated for
+  the new layer. Gate: check 0, typecheck 0/0, unit 1000, browser 168. FOLLOW-UP: thread the live rung-trend into the
+  `mood` prop (PlayScreen passes "steady" today). THEN local review trio + ONE PR ([[one-branch-local-review]]).
+- [ ] **GA-NEWS PR — local review + ship.** Run the reviewer trio on the GA-NEWS diff, fold forward, open the ONE PR.
 - [ ] **GA-MAP-ART — GenAI cartographic base per era** — MapView is CSS; a generated period map base (the journey
   as a real period map) was speced, only partially built. Reuse the dossier/portrait image pipeline.
 - [ ] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers** — beyond atmosphere: generate the dossier's diagrams

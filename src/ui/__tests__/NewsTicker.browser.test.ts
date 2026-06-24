@@ -54,6 +54,25 @@ describe("NewsTicker", () => {
     expect(host.querySelector('[data-scope="science"]')?.textContent).toBe("Science");
   });
 
+  it("GA-NEWS: surfaces the GenAI period DISPATCHES for the era×mood, term-resolved", () => {
+    // A founding-era year + the rising mood loads the generated founding dispatches; {family_name} resolves.
+    component = mount(NewsTicker, {
+      target: host,
+      props: {
+        content,
+        gameState: { ...initState(content, "seed"), year: 1776 },
+        mood: "rising",
+        term: (t: string) => t.replaceAll("{family_name}", "Calloway"),
+      },
+    });
+    const block = host.querySelector("[data-testid='news-dispatches']");
+    expect(block, "the dispatch layer renders for a generated era×mood").not.toBeNull();
+    expect(host.textContent).toMatch(/Dispatch/);
+    // The generated founding rising headlines mention the line + read period-true; tokens resolved.
+    expect(host.textContent).toMatch(/Calloway/);
+    expect(host.textContent).not.toMatch(/\{family_name\}/);
+  });
+
   it("RIVAL-RACE-PRESENCE: surfaces rival dispatches (a stumble window + a surge pressure), accented apart", () => {
     component = mount(NewsTicker, {
       target: host,
@@ -205,15 +224,19 @@ describe("NewsTicker", () => {
     expect(host.querySelector(".rn-press")).toBeNull();
   });
 
-  it("shows a quiet-world empty state when there are no headlines (PL-11)", () => {
+  it("shows a quiet-WORLD empty state when there are no world-timeline headlines (PL-11)", () => {
+    // No world-timeline events at/<= 1776 (the fixture timelines start in the 1900s) → the WORLD-news section
+    // shows its empty state. The GA-NEWS dispatch layer (a separate block) may still render — PL-11 only
+    // requires the WORLD-news section isn't a blank panel.
     component = mount(NewsTicker, {
       target: host,
-      props: { content, gameState: { ...initState(content, "seed"), year: 1900 } },
+      props: { content, gameState: { ...initState(content, "seed"), year: 1776 } },
     });
-    // The section renders with its header + an empty-state line (not a blank panel).
     expect(host.querySelector(".news")).not.toBeNull();
     expect(host.querySelector(".empty")).not.toBeNull();
     expect(host.textContent).toMatch(/quiet for now/);
-    expect(host.querySelector("li")).toBeNull(); // no headline rows
+    // No WORLD-news rows: the only <li>s present (if any) are the GA-NEWS dispatch layer, never world-news rows.
+    const worldNewsRows = host.querySelectorAll("ul:not(.dispatches):not(.rival-news) li");
+    expect(worldNewsRows.length).toBe(0);
   });
 });
