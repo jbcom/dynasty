@@ -8,6 +8,7 @@
  *
  * Usage: GEMINI_API_KEY=… pnpm vite-node scripts/retitle-saga.ts [--dry]
  */
+import "./env";
 import { globSync, readFileSync, writeFileSync } from "node:fs";
 import { geminiGenerate } from "../src/sim/genai/client";
 import { buildTitlePrompt, normalizeTitle, titleSystemInstruction } from "../src/sim/genai/scene";

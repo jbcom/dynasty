@@ -68,7 +68,17 @@ function main(): void {
   // Fabric index: family(wave) → era → list of kept branch sources.
   const fabric: Record<
     string,
-    Record<string, Array<{ sceneId: string; tier: number; score: number; settings: string[]; vignettes: string[] }>>
+    Record<
+      string,
+      Array<{
+        sceneId: string;
+        tier: number;
+        score: number;
+        maxSimilarity: number;
+        settings: string[];
+        vignettes: string[];
+      }>
+    >
   > = {};
   for (const k of kept) {
     const m = meta.get(k.id);
@@ -89,6 +99,7 @@ function main(): void {
       sceneId: k.id,
       tier: m.tier,
       score: Number(k.score.toFixed(4)),
+      maxSimilarity: Number(k.maxSimilarity.toFixed(4)),
       settings: k.settings,
       vignettes,
     });
@@ -104,6 +115,12 @@ function main(): void {
     keepFraction: KEEP,
     totalScenes: scenes.length,
     keptScenes: kept.length,
+    similarity: {
+      meanMaxSimilarity: Number(
+        (kept.reduce((sum, k) => sum + k.maxSimilarity, 0) / Math.max(1, kept.length)).toFixed(4),
+      ),
+      highSimilarityKept: kept.filter((k) => k.maxSimilarity >= 0.82).length,
+    },
     byEra: Object.fromEntries(
       ["founding", "convergence", "emergence", "ascension"].map((e) => [
         e,

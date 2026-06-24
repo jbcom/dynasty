@@ -8,6 +8,7 @@
  *   pnpm vite-node scripts/genai-dossiers.ts -- [--kind <k>] [--era <band>] [--archetype <a>] [--force]
  */
 
+import "./env";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import {

@@ -18,6 +18,7 @@
  *
  * Never shipped in the game bundle — a dev script (vite-node).
  */
+import "./env";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { loadContent } from "../src/data/loadContent";

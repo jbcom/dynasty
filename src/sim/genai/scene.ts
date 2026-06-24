@@ -13,7 +13,11 @@ import guidanceData from "../../data/saga/guidance.json" with { type: "json" };
 import type { Rung } from "../classRung";
 import { hasPresetLeak } from "../leak";
 import { SagaFileSchema } from "../saga/schema";
-import type { DecisionArchitecture, SpineAct } from "../saga/spineAuthored";
+import {
+  type DecisionArchitecture,
+  pivotalArchitecture,
+  type SpineAct,
+} from "../saga/spineAuthored";
 import type { Archetype } from "../slots";
 import { type SceneSlot, spineFor } from "../spine";
 
@@ -270,6 +274,211 @@ const ARCHITECTURE_PROMPT: Record<DecisionArchitecture, string> = {
     "DOCTRINE: a worldview COMMITMENT — the line binds itself to a creed (faith / ideology / omertà / a dynastic code) that will gate later branches. Mutually-exclusive identity choice; options are creeds, and the choice is irreversible in spirit.",
 };
 
+interface SpineScenePlan {
+  suffix: string;
+  role: string;
+  decision?: DecisionArchitecture | "succession";
+  tier?: "major" | "secondary";
+}
+
+const SPINE_SCENE_PLANS: Record<string, SpineScenePlan[]> = {
+  "spine:g0:founding": [
+    { suffix: "open", role: "the sensory opening of the founding household" },
+    {
+      suffix: "allegiance",
+      role: "the revolutionary side-taking scene",
+      decision: "allegiance",
+      tier: "major",
+    },
+    {
+      suffix: "bargain",
+      role: "the founding compact/cost scene",
+      decision: "bargain",
+      tier: "major",
+    },
+    {
+      suffix: "close",
+      role: "the generational succession close",
+      decision: "succession",
+      tier: "major",
+    },
+  ],
+  "spine:g1:earlyrepublic": [
+    { suffix: "open", role: "the young-republic sensory opening" },
+    {
+      suffix: "doctrine",
+      role: "the line's first governing creed",
+      decision: "doctrine",
+      tier: "major",
+    },
+    { suffix: "venture", role: "the early-republic wager", decision: "venture", tier: "secondary" },
+    {
+      suffix: "close",
+      role: "the generational succession close",
+      decision: "succession",
+      tier: "major",
+    },
+  ],
+  "spine:g2:antebellum": [
+    { suffix: "open", role: "the antebellum sensory opening" },
+    {
+      suffix: "allegiance",
+      role: "the sectional side-taking scene",
+      decision: "allegiance",
+      tier: "major",
+    },
+    { suffix: "turn", role: "the aftermath turn toward the close" },
+    {
+      suffix: "close",
+      role: "the generational succession close",
+      decision: "succession",
+      tier: "major",
+    },
+  ],
+  "spine:g3:gildedage": [
+    { suffix: "open", role: "the Gilded-Age sensory opening" },
+    { suffix: "venture", role: "the consolidation wager", decision: "venture", tier: "major" },
+    { suffix: "forge", role: "the institutional forge before succession" },
+    {
+      suffix: "close",
+      role: "the generational succession close",
+      decision: "succession",
+      tier: "major",
+    },
+  ],
+  "spine:g4:progressive": [
+    { suffix: "open", role: "the Progressive-Era sensory opening" },
+    {
+      suffix: "allegiance",
+      role: "the labor-vs-capital side-taking scene",
+      decision: "allegiance",
+      tier: "major",
+    },
+    { suffix: "turn", role: "the reform-era turn toward the close" },
+    {
+      suffix: "close",
+      role: "the generational succession close",
+      decision: "succession",
+      tier: "major",
+    },
+  ],
+  "spine:g5:midcentury": [
+    { suffix: "open", role: "the mid-century sensory opening" },
+    {
+      suffix: "reckoning",
+      role: "the moral/legal debt coming due",
+      decision: "reckoning",
+      tier: "major",
+    },
+    { suffix: "turn", role: "the post-reckoning turn toward the close" },
+    {
+      suffix: "close",
+      role: "the generational succession close",
+      decision: "succession",
+      tier: "major",
+    },
+  ],
+  "spine:g6:broadcast": [
+    { suffix: "open", role: "the broadcast-age sensory opening" },
+    {
+      suffix: "platform",
+      role: "the mass-reach narrative play",
+      decision: "platform",
+      tier: "major",
+    },
+    { suffix: "turn", role: "the broadcast-to-network turn" },
+    {
+      suffix: "close",
+      role: "the generational succession close",
+      decision: "succession",
+      tier: "major",
+    },
+  ],
+  "spine:g7:networked": [
+    { suffix: "open", role: "the networked-world sensory opening" },
+    {
+      suffix: "doctrine",
+      role: "the algorithmic doctrine commitment",
+      decision: "doctrine",
+      tier: "major",
+    },
+    { suffix: "turn", role: "the system consequence turn" },
+    {
+      suffix: "close",
+      role: "the generational succession close",
+      decision: "succession",
+      tier: "major",
+    },
+  ],
+  "spine:g8:orbital": [
+    { suffix: "open", role: "the orbital-age sensory opening" },
+    { suffix: "turn", role: "the orbital venture decision", decision: "venture", tier: "major" },
+    { suffix: "transition", role: "the transition from orbit toward the stars" },
+    {
+      suffix: "close",
+      role: "the generational succession close",
+      decision: "succession",
+      tier: "major",
+    },
+  ],
+  "spine:g9:interstellar": [
+    { suffix: "open", role: "the interstellar sensory opening" },
+    { suffix: "transit", role: "the long-transit threshold before the final gambit" },
+    {
+      suffix: "turn",
+      role: "the terminal stellar expansion gambit",
+      decision: "expansion",
+      tier: "major",
+    },
+    {
+      suffix: "close",
+      role: "the final continuity close among the stars",
+      decision: "succession",
+      tier: "secondary",
+    },
+  ],
+};
+
+function spineScenePlan(act: SpineAct): SpineScenePlan[] {
+  return (
+    SPINE_SCENE_PLANS[act.id] ?? [
+      { suffix: "open", role: "the sensory opening" },
+      {
+        suffix: "turn",
+        role: "the pivotal turn",
+        decision: pivotalArchitecture(act),
+        tier: "major",
+      },
+      {
+        suffix: "close",
+        role: "the generational succession close",
+        decision: "succession",
+        tier: "major",
+      },
+    ]
+  );
+}
+
+export function spineSceneIdsFor(act: SpineAct): string[] {
+  return spineScenePlan(act).map((s) => `${act.id}:${s.suffix}`);
+}
+
+function spineSceneBlock(act: SpineAct, plan: SpineScenePlan, nextId: string | null): string {
+  const id = `${act.id}:${plan.suffix}`;
+  const decision =
+    plan.decision === "succession"
+      ? `decision: tier "${plan.tier}" — succession fork; exactly one viable continuity option must carry succession/takesPartner or begets as appropriate.`
+      : plan.decision
+        ? `decision: tier "${plan.tier}" — ${ARCHITECTURE_PROMPT[plan.decision]}`
+        : "no decision; use beats only if the scene needs small gather/weave nudges.";
+  return [
+    `  - id "${id}": ${plan.role}.`,
+    `    ${decision}`,
+    `    prose: 2-4 full paragraphs; beats: [] or 1-2 weave beats.`,
+    ...(nextId ? [`    next: "${nextId}".`] : []),
+  ].join("\n");
+}
+
 /**
  * Build the GenAI prompt for one AUTHORED SPINE act (FS-3b). Unlike `buildScenePrompt` (the 504-cell
  * path), this drives the ONE dynasty line and injects the era's DECISION ARCHITECTURE so the pivotal
@@ -278,6 +487,11 @@ const ARCHITECTURE_PROMPT: Record<DecisionArchitecture, string> = {
 export function buildSpinePrompt(act: SpineAct, gen0Brief = ""): string {
   const architectures = [...new Set(act.beats)];
   const archBlock = architectures.map((a) => `- ${ARCHITECTURE_PROMPT[a]}`).join("\n");
+  const plan = spineScenePlan(act);
+  const sceneIds = spineSceneIdsFor(act);
+  const sceneBlocks = plan
+    .map((p, i) => spineSceneBlock(act, p, sceneIds[i + 1] ?? null))
+    .join("\n");
   return [
     `Flesh this generation of the ONE dynasty line into the novel. This is the line FOUNDED at America's`,
     `founding and carried toward the stars — America's story as this family's story.`,
@@ -294,13 +508,14 @@ export function buildSpinePrompt(act: SpineAct, gen0Brief = ""): string {
     `Ground the prose in the era's real American history (${act.era}, ~${act.year}); the founding family`,
     `moves through it. Other immigrant families braid in only as woven crossings (do not make them the focus).`,
     "",
-    `Emit ONE act chapter and ITS scenes (4-6 scenes: an open, the era's pivotal decision beat(s) in the`,
-    `architecture above, and a close). Use these EXACT act fields + scene ids:`,
+    `Emit ONE act chapter and ITS scenes. Use these EXACT act fields + scene ids:`,
     `acts: [{ id:"${act.id}", wave:"spine", archetype:"founding", cls:"spine", tier:${Math.min(act.gen, 5)},`,
     `  macroAct:"${act.macroAct}", title:"Act ${ROMAN_FOR(act.gen)} — <specific chapter title>",`,
-    `  scenes:["${act.id}:open", "${act.id}:turn", "${act.id}:close"] }]`,
-    `Each scene id MUST start with "${act.id}:". The pivotal decision scene carries a major \`decision\`;`,
-    `the close carries the succession decision (one option takesPartner+begets).`,
+    `  scenes:[${sceneIds.map((id) => `"${id}"`).join(", ")}] }]`,
+    `Each scene id MUST be exactly one listed below, in this order. Do not invent extra scene ids.`,
+    "",
+    `SCENES:`,
+    sceneBlocks,
     "",
     `SCENE SHAPE (strict): each scene = { id, sense, prose:[2-4 strings], beats:[], decision?, next? }.`,
     `\`sense\` MUST be EXACTLY one of: "sound" | "sight" | "touch" | "taste" | "smell". \`prose\` is an`,
@@ -344,11 +559,23 @@ export function normalizeSceneFile(raw: unknown): unknown {
   const scenesArr = asArray(obj.scenes);
   if (!Array.isArray(scenesArr)) return raw;
   // Coerce a `choice`/option object's `setFlags` from an object-with-numeric-keys back to an array
-  // (the same Gemini drift `asArray` handles for prose/beats); a real array passes through.
+  // (the same Gemini drift `asArray` handles for prose/beats), and from a boolean flag map
+  // (`{ "flag": true }`) into `["flag"]`; a real array passes through.
+  const asFlagArray = (v: unknown): unknown => {
+    if (typeof v === "string") return [v];
+    const arr = asArray(v);
+    if (Array.isArray(arr)) return arr;
+    if (arr && typeof arr === "object") {
+      return Object.entries(arr as Record<string, unknown>)
+        .filter(([, on]) => on !== false)
+        .map(([flag]) => flag);
+    }
+    return arr;
+  };
   const fixFlags = (c: unknown): unknown => {
     if (!c || typeof c !== "object") return c;
     const obj2 = { ...(c as Record<string, unknown>) };
-    if (obj2.setFlags !== undefined) obj2.setFlags = asArray(obj2.setFlags);
+    if (obj2.setFlags !== undefined) obj2.setFlags = asFlagArray(obj2.setFlags);
     return obj2;
   };
   const fixBeat = (b: unknown): unknown => {
@@ -374,6 +601,8 @@ export function normalizeSceneFile(raw: unknown): unknown {
       dec.options = Array.isArray(opts) ? opts.map(fixFlags) : opts;
       scene.decision = dec;
     }
+    if (scene.thread !== undefined) scene.thread = asArray(scene.thread);
+    if (scene.braidSlots !== undefined) scene.braidSlots = asArray(scene.braidSlots);
     // Coerce `requires.flags`/`requires.notFlags` object-drift → arrays (the schema needs arrays).
     if (scene.requires && typeof scene.requires === "object") {
       const req = { ...(scene.requires as Record<string, unknown>) };
@@ -462,8 +691,14 @@ export function validateSpineFile(
     reasons.push(`schema: ${parsed.error.issues.map((i) => i.message).join("; ")}`);
     return { ok: false, reasons };
   }
-  if (!parsed.data.acts.some((a) => a.id === act.id))
-    reasons.push(`spine act id mismatch (want ${act.id})`);
+  const spineAct = parsed.data.acts.find((a) => a.id === act.id);
+  if (!spineAct) reasons.push(`spine act id mismatch (want ${act.id})`);
+  else {
+    const wantedSceneIds = spineSceneIdsFor(act);
+    if (spineAct.scenes.join("|") !== wantedSceneIds.join("|")) {
+      reasons.push(`spine scene list mismatch (want ${wantedSceneIds.join(", ")})`);
+    }
+  }
   const sceneIds = new Set(parsed.data.scenes.map((s) => s.id));
   const declaredIds = new Set(parsed.data.acts.flatMap((a) => a.scenes));
   for (const a of parsed.data.acts)

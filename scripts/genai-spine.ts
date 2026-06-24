@@ -11,9 +11,9 @@
  * re-running regenerates (merge dedups by act/scene id, new wins).
  */
 
-import { readFileSync, writeFileSync } from "node:fs";
-import { existsSync } from "node:fs";
-import { DEFAULT_GEN_MODEL, geminiGenerate } from "../src/sim/genai/client";
+import "./env";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { DEFAULT_GEN_MODEL, geminiGenerate, parseGeneratedObject } from "../src/sim/genai/client";
 import { mergeSceneFile, sceneSystemInstruction } from "../src/sim/genai/scene";
 import { buildSpinePrompt, validateSpineFile } from "../src/sim/genai/scene";
 import { DYNASTY_SPINE, type SpineAct } from "../src/sim/saga/spineAuthored";
@@ -24,18 +24,29 @@ const arg = (name: string): string | undefined => {
 };
 const OUT = arg("out") ?? "src/data/saga/spine.act.json";
 const ONLY_GEN = arg("gen") !== undefined ? Number(arg("gen")) : undefined;
+const REJECTION_DIR = "/tmp/dynasty-genai-spine-rejections";
+
+function dumpRejection(label: string, raw: unknown, reasons: readonly string[]): void {
+  mkdirSync(REJECTION_DIR, { recursive: true });
+  const safeLabel = label.replace(/[^a-zA-Z0-9._-]+/g, "_");
+  writeFileSync(
+    `${REJECTION_DIR}/${safeLabel}.json`,
+    `${JSON.stringify({ label, raw, reasons }, null, 2)}\n`,
+  );
+  console.error(`    rejection debug → ${REJECTION_DIR}/${safeLabel}.json`);
+}
 
 async function authorAct(act: SpineAct, gen: ReturnType<typeof geminiGenerate>): Promise<unknown | null> {
   const label = `spine g${act.gen} (${act.era})`;
   // 4 attempts: the model intermittently emits objects where the schema wants arrays (the normalizer
   // rescues most, but a stubborn gen can lose two rolls running) — a few extra tries gets every gen.
   for (let attempt = 0; attempt < 4; attempt++) {
-    const raw = await gen(sceneSystemInstruction(), buildSpinePrompt(act));
-    let parsed: unknown;
-    try {
-      parsed = JSON.parse(raw.replace(/^```json\s*/i, "").replace(/```\s*$/, "").trim());
-    } catch {
-      console.error(`  · ${label}: unparseable JSON — ${attempt === 0 ? "retry" : "skipped"}`);
+    const text = await gen(sceneSystemInstruction(), buildSpinePrompt(act));
+    const parsed = parseGeneratedObject(text);
+    if (parsed === null) {
+      const reasons = ["unparseable JSON object"];
+      console.error(`  · ${label}: ${reasons[0]} — ${attempt === 0 ? "retry" : "skipped"}`);
+      if (attempt === 3) dumpRejection(label, { unparseableText: text }, reasons);
       continue;
     }
     const v = validateSpineFile(parsed, act);
@@ -46,6 +57,7 @@ async function authorAct(act: SpineAct, gen: ReturnType<typeof geminiGenerate>):
     console.error(
       `  ✗ ${label}: rejected (${v.reasons.join("; ")}) — ${attempt === 0 ? "retry" : "skipped"}`,
     );
+    if (attempt === 3) dumpRejection(label, parsed, v.reasons);
   }
   return null;
 }

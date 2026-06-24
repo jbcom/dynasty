@@ -238,11 +238,20 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   finds a live scaffold sample, builds `buildScenePrompt`, and asserts the prompt carries the selected shape,
   every slot's rotated `sense`, and every slot's exact `intent`. No GenAI call required; this proves a future
   regen uses the diversified scaffold rather than a stale prompt.
-- [ ] **GENAI-GENERATE — regen the corpus (realizes SHAPE-DIVERSIFY-1 on disk) + the 7 asset surfaces.**
-  `.env` contains `GEMINI_API_KEY`, so this is no longer blocked on credentials. After #222 merges, run the scene
-  sweeps (`genai:expand --type scene --all --cls poor --write` and `--cls middle --write`) from a fresh branch,
-  re-run the uniqueness ratchet and raise its floor, then run/verify the offline asset scripts and commit the
-  generated corpus/assets with screenshots/read checks.
+- [ ] **KEY-PILLARS-1 — inline prose choices, prose gates, and legacy-fabric triage (user 2026-06-24).**
+  Highest-order correction: the game is ONE dynasty story as old as America itself; class/rung material is
+  supporting texture, not the played lattice. Immediate pillars to build into this milestone: portrait alignment;
+  gender availability across naming/portrait surfaces; diegetic immersion; enough visual anchors to break up
+  text-heavy fatigue; library-backed prose scannability/clarity/consistency gates; choices fully WITHIN prose
+  (glowing/larger, but not detached buttons below); similarity-based mining to separate the best legacy class
+  JSON from chaff and rewrite keepers as non-first-person encounters/fabric in the main dynasty storyline.
+- [ ] **GENAI-GENERATE — regenerate/prove the AUTHORED SPINE + the 7 asset surfaces.**
+  `.env` contains `GEMINI_API_KEY`, so this is no longer blocked on credentials. IMPORTANT PIVOT
+  ([[founding-spine-pivot]]): do **not** run the old 504-cell class sweeps as the played corpus. The player steers
+  ONE dynasty founded with America; class/rung is texture inside that story and the immigrant-wave corpus is mined
+  fabric/encounter material. Correct scene-gen path: `pnpm genai:spine`, then re-apply the regen-safe postprocessors
+  (`node scripts/fs-spine-origin-flavor.mjs && node scripts/fs-spine-act-depth.mjs`), run the spine/depth/load gates,
+  then run/verify the offline asset scripts in `docs/genai-surfaces.md` with screenshots/read checks.
 - [x] **GA-MAP-ART PR #207 — MERGED (squash ece0be9); v0.64.0 cut.** Reviewer trio folded; CI green; squash-merged
   CLEAN. VERIFIED main has src/sim/genai/mapArt.ts + the MapView era-base wiring + map_founding_1700s.png. Five
   GenAI-expansion milestones now shipped (GA-NEWS #202, GA-MUSIC #203, GA-VIDEO #205, GA-MAP-ART #207).

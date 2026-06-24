@@ -8,6 +8,7 @@
  * (the same pipeline as portraits/dossiers).
  */
 
+import "./env";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { DEFAULT_IMAGE_MODEL, geminiGenerateImage } from "../src/sim/genai/client";

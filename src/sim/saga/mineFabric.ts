@@ -10,6 +10,8 @@
  * Pure + deterministic — no DOM, no IO, no RNG. Same corpus → same scores → same kept set.
  */
 
+import { JaroWinklerDistance } from "natural/lib/natural/distance/index.js";
+
 /** The minimal scene shape the miner reads (a subset of the saga Scene). */
 export interface MineScene {
   id: string;
@@ -26,8 +28,10 @@ export interface ScoredScene {
   id: string;
   /** 0..1 composite. Higher = more worth keeping as fabric. */
   score: number;
+  /** Highest measured similarity against any other scene in the source corpus. Lower is better. */
+  maxSimilarity: number;
   /** The breakdown (for the runner's report + the tests). */
-  parts: { uniqueness: number; crossing: number; quality: number };
+  parts: { uniqueness: number; crossing: number; quality: number; distinctiveness: number };
   /** The settings this scene can braid at (from braidSlots) — the fabric key dimension. */
   settings: string[];
 }
@@ -99,6 +103,96 @@ export function contentWords(prose: string[]): string[] {
     .filter((w) => w.length > 3 && !STOP.has(w));
 }
 
+function wordCounts(words: string[]): Map<string, number> {
+  const out = new Map<string, number>();
+  for (const word of words) out.set(word, (out.get(word) ?? 0) + 1);
+  return out;
+}
+
+interface SceneVector {
+  id: string;
+  bucket: string;
+  counts: Map<string, number>;
+  magnitude: number;
+  signature: string;
+}
+
+function sceneSlot(id: string): string {
+  const slot = /:([^:]+)$/.exec(id)?.[1] ?? "scene";
+  return /^(open|turn|rising|midpoint|close)$/.test(slot) ? slot : "scene";
+}
+
+function sceneTier(id: string): string {
+  return /:t(\d+):/.exec(id)?.[1] ?? "x";
+}
+
+function vectorFor(scene: MineScene): SceneVector {
+  const words = contentWords(scene.prose);
+  const counts = wordCounts(words);
+  let magnitude = 0;
+  for (const v of counts.values()) magnitude += v * v;
+  return {
+    id: scene.id,
+    bucket: `${scene.sense}:t${sceneTier(scene.id)}:${sceneSlot(scene.id)}`,
+    counts,
+    magnitude: Math.sqrt(magnitude),
+    signature: signature(words),
+  };
+}
+
+function cosineSimilarity(a: SceneVector, b: SceneVector): number {
+  let dot = 0;
+  if (a.magnitude === 0 || b.magnitude === 0) return 0;
+  for (const [word, v] of a.counts) dot += v * (b.counts.get(word) ?? 0);
+  return dot / (a.magnitude * b.magnitude);
+}
+
+function signature(words: string[]): string {
+  return [...new Set(words)].sort().join(" ");
+}
+
+function vectorSimilarity(a: SceneVector, b: SceneVector): number {
+  const cosine = cosineSimilarity(a, b);
+  // Jaro-Winkler is the library-backed near-duplicate check; gate it behind cosine so the full 2.5k-scene
+  // corpus does not pay expensive string distance on obviously unrelated pairs.
+  const lexical =
+    cosine >= 0.18
+      ? JaroWinklerDistance(a.signature, b.signature, { ignoreCase: true })
+      : Math.min(cosine, 0.18);
+  return Math.max(0, Math.min(1, cosine * 0.7 + lexical * 0.3));
+}
+
+/** Library-backed prose similarity 0..1. Combines content-word cosine with natural's Jaro-Winkler. */
+export function sceneSimilarity(a: MineScene, b: MineScene): number {
+  return vectorSimilarity(vectorFor(a), vectorFor(b));
+}
+
+/** For every scene, measure its nearest neighbor in the corpus. High values are chaff/duplication risk. */
+export function maxCorpusSimilarities(scenes: MineScene[]): Map<string, number> {
+  const out = new Map<string, number>(scenes.map((s) => [s.id, 0]));
+  const vectors = scenes.map(vectorFor);
+  const buckets = new Map<string, SceneVector[]>();
+  for (const vector of vectors) {
+    const list = buckets.get(vector.bucket);
+    if (list) list.push(vector);
+    else buckets.set(vector.bucket, [vector]);
+  }
+  for (const bucket of buckets.values()) {
+    for (let i = 0; i < bucket.length; i += 1) {
+      const a = bucket[i];
+      if (!a) continue;
+      for (let j = i + 1; j < bucket.length; j += 1) {
+        const b = bucket[j];
+        if (!b) continue;
+        const similarity = vectorSimilarity(a, b);
+        out.set(a.id, Math.max(out.get(a.id) ?? 0, similarity));
+        out.set(b.id, Math.max(out.get(b.id) ?? 0, similarity));
+      }
+    }
+  }
+  return out;
+}
+
 /**
  * Build a corpus-wide word-frequency map (how many scenes each content word appears in). This is the
  * basis of UNIQUENESS: words shared across many scenes are the TEMPLATE (smell/tallow/ward/crossroads…),
@@ -166,14 +260,17 @@ export function scoreScene(
   scene: MineScene,
   df: Map<string, number>,
   totalScenes: number,
+  maxSimilarity = 0,
 ): ScoredScene {
   const u = uniqueness(scene, df, totalScenes);
   const c = crossingPotential(scene);
   const q = proseQuality(scene);
+  const d = 1 - Math.max(0, Math.min(1, maxSimilarity));
   return {
     id: scene.id,
-    score: 0.55 * u + 0.3 * c + 0.15 * q,
-    parts: { uniqueness: u, crossing: c, quality: q },
+    score: 0.45 * u + 0.25 * c + 0.15 * q + 0.15 * d,
+    maxSimilarity,
+    parts: { uniqueness: u, crossing: c, quality: q, distinctiveness: d },
     settings: sceneSettings(scene),
   };
 }
@@ -184,8 +281,9 @@ export function scoreScene(
  */
 export function selectFabric(scenes: MineScene[], keepFraction = 0.2): ScoredScene[] {
   const df = buildDocFreq(scenes);
+  const similarities = maxCorpusSimilarities(scenes);
   const scored = scenes
-    .map((s) => scoreScene(s, df, scenes.length))
+    .map((s) => scoreScene(s, df, scenes.length, similarities.get(s.id) ?? 0))
     .sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
   const keep = Math.max(1, Math.round(scenes.length * keepFraction));
   return scored.slice(0, keep);

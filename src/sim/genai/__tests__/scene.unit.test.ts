@@ -14,6 +14,7 @@ import {
   mergeSceneFile,
   normalizeTitle,
   scenePassBrief,
+  spineSceneIdsFor,
   validateSceneFile,
   validateSpineFile,
 } from "../scene";
@@ -192,9 +193,15 @@ describe("genai scene mode", () => {
     }
   });
 
-  it("normalizes object-with-numeric-keys drift (prose/beats as object → array)", () => {
+  it("normalizes object-with-numeric-keys drift (prose/beats/thread/braidSlots as object → array)", () => {
     const drifted = validActFile() as unknown as {
-      scenes: Array<{ prose: unknown; beats: unknown }>;
+      scenes: Array<{
+        prose: unknown;
+        beats: unknown;
+        decision?: unknown;
+        thread?: unknown;
+        braidSlots?: unknown;
+      }>;
     };
     // Simulate Gemini emitting prose + beats as objects instead of arrays.
     const sc = drifted.scenes[0]!;
@@ -205,16 +212,53 @@ describe("genai scene mode", () => {
     sc.beats = {
       "0": {
         prose: ["A framing line."],
-        choice: { text: "Pick me.", motivatorShift: { wealth: 3 }, setFlags: [] },
+        choice: {
+          text: "Pick me.",
+          motivatorShift: { wealth: 3 },
+          setFlags: { kept_token: true, dropped_token: false },
+        },
       },
+    };
+    sc.decision = {
+      tier: "major",
+      prompt: "Which bargain anchors the household now?",
+      options: {
+        "0": {
+          text: "Trust the padrone for one more season.",
+          motivatorShift: { wealth: 2 },
+          setFlags: "padrone_placated",
+        },
+        "1": {
+          text: "Break from the contract and risk hunger.",
+          motivatorShift: { honor: 4 },
+          setFlags: { contract_broken: true, old_debt_kept: false },
+        },
+      },
+    };
+    sc.thread = {
+      "0": { wave: "ireland", atTier: 1, crossing: "A neighboring line passes through." },
+    };
+    sc.braidSlots = {
+      "0": { kind: "destination", at: 0, setting: "market" },
     };
     const out = validateSceneFile(drifted, req);
     expect(out.ok).toBe(true);
     if (out.ok) {
-      const scene = out.file.scenes[0] as { prose: string[]; beats: unknown[] };
+      const scene = out.file.scenes[0] as {
+        prose: string[];
+        beats: Array<{ choice?: { setFlags: string[] } }>;
+        decision?: { options: Array<{ setFlags?: string[] }> };
+        thread: unknown[];
+        braidSlots: unknown[];
+      };
       expect(Array.isArray(scene.prose)).toBe(true);
       expect(scene.prose).toHaveLength(2);
       expect(Array.isArray(scene.beats)).toBe(true);
+      expect(scene.beats[0]?.choice?.setFlags).toEqual(["kept_token"]);
+      expect(scene.decision?.options[0]?.setFlags).toEqual(["padrone_placated"]);
+      expect(scene.decision?.options[1]?.setFlags).toEqual(["contract_broken"]);
+      expect(Array.isArray(scene.thread)).toBe(true);
+      expect(Array.isArray(scene.braidSlots)).toBe(true);
     }
   });
 
@@ -314,6 +358,9 @@ describe("authored-spine generation (FS-3b) — per-era decision architecture in
     expect(p).toMatch(/America's\s+founding/i);
     expect(p).toMatch(/BARGAIN:/); // g0 uses bargain + allegiance
     expect(p).toMatch(/ALLEGIANCE:/);
+    expect(p).toContain('"spine:g0:founding:allegiance"');
+    expect(p).toContain('"spine:g0:founding:bargain"');
+    expect(p).not.toContain('"spine:g0:founding:turn"');
     // It must explicitly steer AWAY from the old generic template.
     expect(p).toMatch(/do NOT default to a generic/i);
   });
@@ -340,6 +387,7 @@ describe("authored-spine generation (FS-3b) — per-era decision architecture in
 
   it("validateSpineFile (FS-6) accepts a valid spine act, rejects an id mismatch", () => {
     const g0 = spineActForGen(0)!;
+    const sceneIds = spineSceneIdsFor(g0);
     const validFile = {
       acts: [
         {
@@ -350,20 +398,42 @@ describe("authored-spine generation (FS-3b) — per-era decision architecture in
           tier: 0,
           macroAct: "founding",
           title: "Act I — The Powder and the Pamphlet",
-          scenes: [`${g0.id}:open`],
+          scenes: sceneIds,
         },
       ],
-      scenes: [
-        {
-          id: `${g0.id}:open`,
-          sense: "smell",
-          prose: [
-            "The print-shop reeked of lampblack and wet rag-paper, and of the tallow guttering low as the {family_name}s set the night's seditious type.",
-            "Outside, the harbor wind carried woodsmoke and the iron tang of a city deciding whether to become a country.",
-          ],
-          beats: [],
-        },
-      ],
+      scenes: sceneIds.map((id, i) => ({
+        id,
+        sense: "smell",
+        prose: [
+          "The print-shop reeked of lampblack and wet rag-paper, and of the tallow guttering low as the {family_name}s set the night's seditious type.",
+          "Outside, the harbor wind carried woodsmoke and the iron tang of a city deciding whether to become a country.",
+        ],
+        beats: [],
+        ...(i < sceneIds.length - 1 ? { next: sceneIds[i + 1] } : {}),
+        ...(id.endsWith(":close") || id.endsWith(":allegiance") || id.endsWith(":bargain")
+          ? {
+              decision: {
+                tier: "major",
+                prompt: "Which way does the family turn?",
+                options: [
+                  {
+                    text: "Carry the name forward.",
+                    motivatorShift: { lineage: 2 },
+                    setFlags: ["spine_test_forward"],
+                    ...(id.endsWith(":close")
+                      ? { succession: { takesPartner: true, begets: 1 } }
+                      : {}),
+                  },
+                  {
+                    text: "Harden the house for what comes.",
+                    motivatorShift: { power: 2 },
+                    setFlags: ["spine_test_hardened"],
+                  },
+                ],
+              },
+            }
+          : {}),
+      })),
     };
     const ok = validateSpineFile(validFile, g0);
     expect(ok.ok).toBe(true);
@@ -372,5 +442,58 @@ describe("authored-spine generation (FS-3b) — per-era decision architecture in
     const bad = validateSpineFile(wrong, g0);
     expect(bad.ok).toBe(false);
     if (!bad.ok) expect(bad.reasons.join(" ")).toMatch(/spine act id mismatch/);
+  });
+
+  it("validateSpineFile rejects a generic open/turn/close spine scene list", () => {
+    const g0 = spineActForGen(0)!;
+    const wrongIds = [`${g0.id}:open`, `${g0.id}:turn`, `${g0.id}:close`];
+    const genericFile = {
+      acts: [
+        {
+          id: g0.id,
+          wave: "spine",
+          archetype: "founding",
+          cls: "spine",
+          tier: 0,
+          macroAct: "founding",
+          title: "Act I — Generic Turn",
+          scenes: wrongIds,
+        },
+      ],
+      scenes: wrongIds.map((id, i) => ({
+        id,
+        sense: "smell",
+        prose: [
+          "The print-shop reeked of lampblack and wet rag-paper, and of the tallow guttering low as the {family_name}s set the night's seditious type.",
+          "Outside, the harbor wind carried woodsmoke and the iron tang of a city deciding whether to become a country.",
+        ],
+        beats: [],
+        ...(i < wrongIds.length - 1 ? { next: wrongIds[i + 1] } : {}),
+        ...(id.endsWith(":close")
+          ? {
+              decision: {
+                tier: "major",
+                prompt: "How does the name continue?",
+                options: [
+                  {
+                    text: "Marry and beget heirs.",
+                    motivatorShift: { lineage: 2 },
+                    setFlags: ["spine_test_forward"],
+                    succession: { takesPartner: true, begets: 1 },
+                  },
+                  {
+                    text: "Name a ward as heir.",
+                    motivatorShift: { honor: 2 },
+                    setFlags: ["spine_test_ward"],
+                  },
+                ],
+              },
+            }
+          : {}),
+      })),
+    };
+    const bad = validateSpineFile(genericFile, g0);
+    expect(bad.ok).toBe(false);
+    if (!bad.ok) expect(bad.reasons.join(" ")).toMatch(/spine scene list mismatch/);
   });
 });

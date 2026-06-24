@@ -209,9 +209,11 @@ async function expandScene(req: ExpandRequest, generate: GenerateFn): Promise<Ex
   if (!req.scene) throw new Error("scene mode requires a `scene` cell+tier target");
   const sceneReq: SceneRequest = req.scene;
   let lastRaw: unknown = null;
+  let lastText = "";
   let lastReasons: string[] = ["no attempt"];
   for (let attempt = 0; attempt < SCENE_GEN_ATTEMPTS; attempt++) {
     const text = await generate(sceneSystemInstruction(), buildScenePrompt(sceneReq));
+    lastText = text;
     const raw = parseGeneratedObject(text);
     const result =
       raw === null
@@ -227,7 +229,7 @@ async function expandScene(req: ExpandRequest, generate: GenerateFn): Promise<Ex
         merge: (existing) => mergeSceneFile(existing, result.file),
       };
     }
-    lastRaw = raw;
+    lastRaw = raw ?? { unparseableText: text };
     lastReasons = result.reasons;
   }
   return {
@@ -235,7 +237,7 @@ async function expandScene(req: ExpandRequest, generate: GenerateFn): Promise<Ex
     accepted: [],
     rejected: [
       {
-        raw: lastRaw,
+        raw: lastRaw ?? { unparseableText: lastText },
         reasons: [`after ${SCENE_GEN_ATTEMPTS} attempts: ${lastReasons.join("; ")}`],
       },
     ],

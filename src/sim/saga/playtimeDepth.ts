@@ -1,9 +1,8 @@
 /**
- * PLAYTIME-DEPTH-AUDIT — a pure depth metric over the authored saga corpus, used to estimate a single
- * founding→stars lineage run's playtime against the hour+ goal ([[hour-long-depth]]). A lineage plays ONE
- * class-keyed corpus file (a wave × archetype × class) = its 6 acts (reach tiers 0..5). `computeDepth` sums
- * the scenes / prose words / decision beats for a file's scenes; `estPlaytimeMinutes` turns that into an
- * estimate (read pace + decision deliberation). `loadLineageFiles` groups the corpus per file (the run unit).
+ * PLAYTIME-DEPTH-AUDIT — a pure depth metric over the retained class-keyed corpus/fabric files. The live
+ * protagonist route is now the authored dynasty spine; its hour+ proof lives in the spine-depth engine
+ * playtests. This metric remains useful as a guard that the wave/class source material does not silently
+ * thin while it serves as branch/fabric material.
  *
  * Pure (given the eager glob, like loadSaga) — no Date/Math.random; deterministic over the bundled corpus.
  */
@@ -58,12 +57,12 @@ interface RawActFile {
   default: unknown;
 }
 
-// The corpus files, eagerly bundled (the run unit is one file = one wave×archetype×class lineage path).
+// The corpus files, eagerly bundled (one file = one wave×archetype×class fabric path).
 const actGlob = import.meta.glob("../../data/saga/**/*.act.json", { eager: true });
 
 /** Load every lineage corpus file's scenes (validated), grouped per file. Pure given the glob. The shared
- *  branch SPINE (spine.act.json) is excluded — it isn't a class-keyed RUN unit (a real run plays a class file
- *  PLUS spine scenes), so counting it as its own lineage would misreport the per-run estimate. */
+ *  branch SPINE (spine.act.json) is excluded — it is measured by the live spine playtests, not this
+ *  class-keyed fabric guard. */
 export function loadLineageFiles(): Array<{ name: string; act: Scene[] }> {
   const out: Array<{ name: string; act: Scene[] }> = [];
   for (const [path, mod] of Object.entries(actGlob)) {

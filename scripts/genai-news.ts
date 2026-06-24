@@ -6,6 +6,7 @@
  *   pnpm vite-node scripts/genai-news.ts -- [--era <band>] [--mood rising|steady|falling] [--force]
  */
 
+import "./env";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { DEFAULT_GEN_MODEL, geminiGenerate } from "../src/sim/genai/client";
 import { ERA_BAND_ORDER, type EraBand } from "../src/sim/genai/portrait";

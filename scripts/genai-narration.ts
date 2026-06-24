@@ -7,6 +7,7 @@
  *   pnpm vite-node scripts/genai-narration.ts -- [--beat <founding|finale>] [--era <eraBand>] [--force]
  */
 
+import "./env";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import {

@@ -2,11 +2,9 @@ import { describe, expect, it } from "vitest";
 import { computeDepth, estPlaytimeMinutes, lineageRuns, READ_WPM } from "../playtimeDepth";
 
 /**
- * PLAYTIME-DEPTH-AUDIT — a durable floor on the corpus depth, guarding the user's hour+ goal
- * ([[hour-long-depth]]). One lineage run plays ONE corpus file's scenes (6 acts, tiers 0..5, founding→stars).
- * These assert the depth metric is sound AND that the median lineage run clears a meaningful playtime floor
- * (the authored SCENE depth alone — the emergence opening + inter-era surfaces + finale add more on top), so a
- * future thinning regression fails here instead of silently shrinking the game.
+ * PLAYTIME-DEPTH-AUDIT — a durable floor on the retained class-keyed corpus/fabric depth. The live played
+ * hour+ proof is the authored spine playtest; this guard remains so the wave/class source material does not
+ * silently thin.
  */
 
 const rows = lineageRuns(); // sorted shortest→longest
@@ -52,11 +50,10 @@ describe("playtime depth metric", () => {
     expect(withDecisions).toBeGreaterThan(base); // deliberation adds time
   });
 
-  it("HOUR+ GOAL: the median lineage run clears a 40-minute scene-depth floor", () => {
+  it("FABRIC FLOOR: the median retained lineage file clears a 40-minute scene-depth floor", () => {
     expect(rows.length).toBeGreaterThan(0);
     const median = rows[Math.floor(rows.length / 2)];
-    // The authored scene depth alone (no opening/surfaces/finale) must hold a strong fraction of the hour —
-    // ~40 min here, which with the surrounding play comfortably reaches the hour+ target.
+    // The retained fabric should stay substantive even though the live play route is the authored spine.
     expect(
       median?.minutes,
       `median lineage run ~${median?.minutes.toFixed(0)} min`,
