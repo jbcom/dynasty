@@ -175,19 +175,49 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   stays chronicle. KNOWN LIMIT: Imagen renders "modern photo + accent border" as a phone/device frame and ignores
   the negative prompt — settled rather than prompt-fought (debug-stop-rule); the casual-vs-formal-vs-aged distinction
   reads regardless. A later post-crop pass could remove the device frame. 21 unit tests.
-- [ ] **EI-9c LIFE-STAGE + ENCOUNTER portrait sweep** — the matrix beyond ADULT: infant/child/youth/elder per era
-  band (the cycles recur every generation; progeny-in-space need stellar children too — user 2026-06-23) + the
-  encounter-role portraits (first friend/betrayer/partner/rival/mentor) via `buildEncounterPortraitPrompt`. Generate
-  on-demand as the play surface requests them, or a targeted sweep per life-stage; READ a sample per stage. Large —
-  enumerate the demand the live runner actually hits first, don't blanket all 1680 keys.
-- [ ] **EI-SCARCITY-STORIES — carry the scarcity theme into the NARRATIVE (user, 2026-06-23)** — the user's
-  scarcity insight ("worth thinking about scarcity both in the stories we tell and in the visual medium") applies to
-  CONTENT, not just portraits: in the post-scarcity star era the drama shifts to what STAYS scarce when all else is
-  abundant — singular physical artifacts, real (non-copied) presence, an authentic bloodline/name, scarce attention/
-  legitimacy. The far-future spine/era acts + GenAI scene prompting for near_future+stellar should foreground these
-  stakes (a physical heirloom oil as a plot object; an authenticity/legitimacy conflict) rather than reusing
-  industrial-era scarcity (money/land). Enumerate the post-scarcity story beats, fold into the spine/era guidance +
-  the GenAI prompt briefs, then verify a generated stellar act reflects it. (Pairs with the physical-oil portrait flex.)
+- [x] **EI-9c OPENING life-stage portraits — DONE (branch feat/ei9c-lifestage-encounter-portraits, PR pending).**
+  The Epoch-0 emergence now shows a portrait that GROWS with the progenitor (birth/naming→infant, childhood/first-
+  friend/schooling→child, late beats→youth) via `lifeStageForOpeningScene`; OpeningScreen passes the founding-era
+  composite-key portrait to the SceneReader (magazine-wrapped, EI-7). Generated the founding infant/child/youth low
+  portraits (period-correct children, humble sketch medium). LIVE-VERIFIED in Chrome: the birth scene shows the
+  sketched founding infant beside "You are born…". Gate: check 0, typecheck 0/0, unit 982, browser 161, e2e 7.
+- [x] **EI-9d portrait graceful-fallback — DONE (branch ei9c).** ENUMERATED the live non-adult demand: `age = year −
+  birthYear` and each succession re-anchors birthYear (effects.ts), so every generation's protagonist ages
+  child→youth→adult→elder through its span — PlayScreen DOES request non-adult life-stage keys across all eras the
+  spine hits. Since the matrix is on-demand (not all keys pre-generated), the SceneReader portrait `<img>` now has an
+  `onerror` that HIDES it (degrades to prose-only, no broken-image icon). Browser-tested (a missing asset hides the
+  portrait). The on-demand cache (EI-8e) generates real keys at runtime; this is the missing-asset safety net.
+- [x] **EI-9e founding life-stage seed + encounter-portrait DECISION — DONE (branch ei9c).** Generated founding_1700s
+  ELDER economic low/mid (the founder aging) — with EI-9c's infant/child/youth + the adult matrix, the founding era
+  (the opening + gen-0's whole span) has the full life-stage set; READ-verified the elder reads aged + period-correct.
+  DECISION on encounter portraits: KEEP the Suzerain single-speaker pattern — the SceneReader portrait stays the
+  PROGENITOR (the story is THEIR life); a formative-beat figure (first friend/betrayer) is woven in PROSE, not given a
+  competing second portrait ([[intersections-woven-not-walls]]). Distinct-figure portraits belong to the dedicated
+  RivalDossier / braid-crossing surfaces, not the main reader. So `buildEncounterPortraitPrompt` stays available for
+  THOSE surfaces (future), not the scene reader.
+- [ ] [WAIT] **#199 (EI-9c/9d/9e + EI-SCARCITY-STORIES) — merge on green.** Monitor bo55n1uio armed; CI re-running on
+  d7877a8 (CodeRabbit pass, build-and-test pending). Merge once green + 0 threads, then VERIFY main has the EI-9c/9e
+  files (lifeStageForOpeningScene, founding life-stage portraits) — [[gh-squash-stale-head-gotcha]] — sync main + fresh
+  branch for EI-9f.
+- [x] **EI-9f encounter-portrait consumer ANALYSIS — DONE (no live surface yet; infra ready).** Inspected the
+  candidate surfaces: `RivalDossier` is a ROSTER (Standing = id/label/rung/trend — whole LINES, no era/year/gender,
+  no single-figure focus), so a per-row avatar would be scope-creep, not the dramatic single-figure the encounter
+  portrait is for. There is NO current surface where ONE encounter figure is the focus (rivals are lines in a list;
+  formative-beat figures are woven in prose per the EI-9e decision). So `buildEncounterPortraitPrompt` has no live
+  consumer yet — the infra stays ready (built + tested in EI-8d) for when a single-rival-head / braid-crossing FOCUS
+  view is designed. Not force-fitting it into the roster. DECISION logged; the portrait milestone's live demand
+  (progenitor life-stage portraits) is fully served.
+- [ ] **EI-9g per-rival roster avatars (optional polish, post-#199)** — IF wanted: give each RivalDossier/RivalField
+  row a small head-avatar keyed on the rival's wave + current era band + rung tier (pass the game year in; default
+  gender), with the EI-9d fallback. Lighter than a focus portrait; a roster-glance enrichment. Lower priority than
+  any narrative/gameplay work — pick up only if the portrait polish is the best next use.
+- [x] **EI-SCARCITY-STORIES — post-scarcity narrative theme in the guidance — DONE (code, branch ei9c).** Added a
+  `scarcity` field to the far-future era guidance (t4/t5 × poor/middle in guidance.json) naming the post-scarcity
+  stakes (what STAYS scarce when all else is abundant: un-copyable physical artifacts, real presence, authentic line,
+  legitimacy), and wove it into both the scene-generation prompt (`buildScenePrompt` eraBrief) and the QA editor brief
+  (`scenePassBrief`) — so generated near_future/stellar acts foreground it instead of recycled money/land scarcity. 23
+  scene unit tests (far-future tiers carry the stake, earlier tiers don't). FOLLOW-UP: when the spine acts regenerate,
+  verify a stellar act actually reflects it (live-read a generated far-future act).
 - [x] **EI-10 future-digital luminosity — DONE (commit e32b9cf).** Root cause: the aged-physical-plate
   CHRONICLE_WRAPPER fought the holographic medium. `wrapperFor(era,tier)` now uses a luminous void-ground
   ARCHIVE_WRAPPER for near_future/stellar low+mid (digital captures) + keeps CHRONICLE_WRAPPER for physical
@@ -198,12 +228,11 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   "You are born…", senses→4 glowing inline sense-choices→naming speaks "Gwendolyn Calloway"/"daughter"; portrait
   magazine-wraps). WARNING: the squash captured a STALE HEAD — it DROPPED EI-8f's PNGs + everything after
   (presentation/scarcity/EI-9/EI-10/EI-9b). Recovered in #197. [[gh-squash-stale-head-gotcha]].
-- [ ] [WAIT] **PR #197 — the recovered EI-8c…EI-10 portrait work — merge on green.** Clean delta off main (345 files,
-  MERGEABLE, no conflict): the full portrait demand matrix + presentation medium + scarcity inversion + 336 adult
-  portraits that #194's partial squash dropped. Gate green (check 0, typecheck 0/0, unit 980, browser 161, 21 portrait
-  tests). Merge once CI green + 0 threads — VERIFY main has portrait.ts's `presentationFor`/`SCREEN_WRAPPER` after
-  (don't push during the merge window; keep the tree clean — [[gh-squash-stale-head-gotcha]]). Then sync main + fresh
-  branch for EI-9c / EI-SCARCITY-STORIES.
+- [x] **PR #197 — recovered EI-8c…EI-10 portrait work — MERGED (squash de2174c).** The full portrait demand matrix +
+  presentation medium + scarcity inversion + 336 adult portraits are on main. VERIFIED post-merge: main has
+  portrait.ts's `presentationFor`/`CHRONICLE_WRAPPER`/`SCREEN_WRAPPER` + 336 portrait_adult_*.png. Both feature
+  branches deleted (local + remote); main synced clean. The whole EMERGENT-INFANCY milestone (EI-1→EI-10) + the adult
+  portrait matrix is shipped. Now on a fresh branch feat/ei9c-lifestage-encounter-portraits for EI-9c.
 - [x] **EI-8 ENUMERATE THE PORTRAIT-DEMAND MATRIX — DONE (spec).** Wrote the full demand matrix into the EI spec
   (docs/.../2026-06-23-emergent-infancy-onboarding-design.md §"EI-8 — the portrait-demand MATRIX"), grounded in the
   real enums: 5 LIFE-STAGES (infant/child/youth/adult/elder) × 8 fine ERA BANDS (founding_1700s…stellar, NOT the 4

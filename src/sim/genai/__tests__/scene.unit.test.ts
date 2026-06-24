@@ -254,6 +254,15 @@ describe("QA guidance briefs (UQ-2) — fed from the corrected guidance.json", (
     expect(lineagePassBrief("atlantis")).toBe("");
     expect(scenePassBrief("atlantis", 99, "poor")).toBe("");
   });
+
+  it("EI-SCARCITY-STORIES: far-future tiers carry the post-scarcity SCARCITY stake; earlier tiers don't", () => {
+    // t5 (stellar) + t4 (near-future) foreground what stays scarce when all else is abundant.
+    expect(scenePassBrief("ireland", 5, "middle")).toMatch(/SCARCITY \(the post-scarcity stakes/);
+    expect(scenePassBrief("ireland", 5, "middle")).toMatch(/un-copyable|authentic|legitimacy/i);
+    expect(scenePassBrief("ireland", 4, "poor")).toMatch(/SCARCITY \(the post-scarcity stakes/);
+    // An industrial-era tier has no post-scarcity note (money/land scarcity isn't this theme).
+    expect(scenePassBrief("ireland", 1, "poor")).not.toMatch(/post-scarcity stakes/);
+  });
 });
 
 describe("authored-spine generation (FS-3b) — per-era decision architecture in the prompt", () => {

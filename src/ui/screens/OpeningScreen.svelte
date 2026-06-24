@@ -18,6 +18,8 @@ import { FOUNDING_YEAR } from "../../sim/macroActs";
 import { regionPlaceId } from "../../sim/foundingOrigin";
 import { createRng } from "../../sim/rng";
 import { dealFoundingSurname } from "../../sim/onomastics";
+import { compositePortraitKey } from "../../sim/genai/portrait";
+import { lifeStageForOpeningScene } from "../../sim/genai/portraitFacets";
 import { dealSenseCues, type SenseCue } from "../../sim/founding/senseEmergence";
 import { buildEpoch0Opening } from "../../sim/founding/epoch0Opening";
 import {
@@ -76,6 +78,21 @@ const term = $derived((text: string) =>
 let runState = $state<OpeningState>(startOpening(scenes));
 const scene = $derived(currentOpeningScene(scenes, runState));
 
+// EI-9c: a LIFE-STAGE portrait that grows with the progenitor through the emergence (infant → child → youth),
+// founding-era, at the neutral starting station (the line's power base/rung hasn't emerged yet). The composite
+// key maps to the same generated asset scheme PlayScreen uses; missing keys fall back to prose-only.
+const portraitSrc = $derived.by(() => {
+  if (!scene) return undefined;
+  const key = compositePortraitKey({
+    lifeStage: lifeStageForOpeningScene(scene.id),
+    eraBand: "founding_1700s",
+    archetype: "economic",
+    rungTier: "low",
+    gender: provisional.founding?.gender ?? "male",
+  });
+  return `/assets/generated/portraits/${key.replace(/:/g, "_")}.png`;
+});
+
 function onbeat(i: number): void {
   runState = chooseOpeningBeat(scenes, runState, i);
   finishIfEnded();
@@ -91,7 +108,7 @@ function finishIfEnded(): void {
 
 <main class="opening" aria-live="polite">
   {#if scene}
-    <SceneReader {scene} {term} {onbeat} {ondecision} />
+    <SceneReader {scene} {portraitSrc} {term} {onbeat} {ondecision} />
   {/if}
   <button type="button" class="abandon" onclick={onCancel}>Back</button>
 </main>

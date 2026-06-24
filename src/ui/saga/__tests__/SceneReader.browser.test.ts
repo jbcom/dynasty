@@ -69,6 +69,28 @@ describe("SceneReader (paged)", () => {
     expect(host.textContent).not.toContain("{family_name}");
   });
 
+  it("EI-9d: a portrait whose asset fails to load HIDES itself (graceful prose-only fallback)", async () => {
+    // A non-adult life-stage / era key may not be generated yet (the matrix is on-demand) — a 404 must
+    // degrade to prose-only, not a broken-image icon. Point at a guaranteed-missing asset and await its error.
+    component = mount(SceneReader, {
+      target: host,
+      props: {
+        scene: open,
+        portraitSrc: "/assets/generated/portraits/__nonexistent_ei9d_test__.png",
+      },
+    });
+    const img = host.querySelector("img.portrait") as HTMLImageElement;
+    expect(img, "the portrait img mounts").not.toBeNull();
+    await new Promise<void>((resolve) => {
+      if (img.style.display === "none") return resolve();
+      img.addEventListener("error", () => resolve(), { once: true });
+      // Fallback timeout so the test can't hang if the browser doesn't fire error.
+      setTimeout(resolve, 2000);
+    });
+    flushSync();
+    expect(img.style.display, "the broken portrait is hidden").toBe("none");
+  });
+
   it("shows a tiered decision as inline options and emits the chosen one", () => {
     let opt = -1;
     component = mount(SceneReader, {

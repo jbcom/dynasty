@@ -161,6 +161,9 @@ function chooseBeat(i: number) {
            full-bleed tap layer still turns the page through it. -->
       {#if portraitSrc}
         {#key scene.id}
+          <!-- EI-9d: a life-stage/era portrait key may not be generated yet (the matrix is on-demand) — if the
+               asset 404s, HIDE the img so the page degrades cleanly to prose-only instead of showing a broken-
+               image icon in the magazine wrap. -->
           <img
             class="portrait"
             src={portraitSrc}
@@ -168,6 +171,9 @@ function chooseBeat(i: number) {
             aria-hidden="true"
             decoding="async"
             fetchpriority="high"
+            onerror={(e) => {
+              (e.currentTarget as HTMLImageElement).style.display = "none";
+            }}
             in:fade={{ duration: reduceMotion ? 0 : 320 }}
           />
         {/key}

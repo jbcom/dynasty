@@ -3,6 +3,7 @@ import { ARCHETYPES } from "../../slots";
 import type { RankState } from "../../state";
 import {
   lifeStageForAge,
+  lifeStageForOpeningScene,
   type PortraitArchetype,
   type RungTier,
   rungTierForRung,
@@ -37,6 +38,24 @@ describe("EI-8b lifeStageForAge", () => {
 
   it("clamps a negative age to infant (the emergence opens before age 0 is meaningful)", () => {
     expect(lifeStageForAge(-1)).toBe("infant");
+  });
+});
+
+describe("EI-9c lifeStageForOpeningScene", () => {
+  it("grows the progenitor through the emergence: birth/naming → infant, childhood → child, late beats → youth", () => {
+    expect(lifeStageForOpeningScene("epoch0:birth")).toBe("infant");
+    expect(lifeStageForOpeningScene("epoch0:naming")).toBe("infant");
+    expect(lifeStageForOpeningScene("epoch0:childhood")).toBe("child");
+    expect(lifeStageForOpeningScene("epoch0:formative")).toBe("child");
+    expect(lifeStageForOpeningScene("epoch0:schooling")).toBe("child");
+    expect(lifeStageForOpeningScene("epoch0:betrayal")).toBe("youth");
+    expect(lifeStageForOpeningScene("epoch0:loss")).toBe("youth");
+    expect(lifeStageForOpeningScene("epoch0:romance")).toBe("youth");
+  });
+
+  it("defaults an unmapped opening scene to child", () => {
+    expect(lifeStageForOpeningScene("epoch0:unknown")).toBe("child");
+    expect(lifeStageForOpeningScene("whatever")).toBe("child");
   });
 });
 
