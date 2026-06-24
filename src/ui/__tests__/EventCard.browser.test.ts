@@ -66,6 +66,18 @@ describe("EventCard", () => {
     expect(host.querySelectorAll("button")).toHaveLength(2);
   });
 
+  it("KP-1: renders choices inside the prose flow, not as a detached button stack", () => {
+    component = mount(EventCard, { target: host, props: { event: baseEvent, onchoose: () => {} } });
+    const prose = host.querySelector<HTMLElement>('[data-testid="event-prose"]');
+    const choices = host.querySelector<HTMLElement>('[data-testid="event-choices"]');
+    const firstButton = host.querySelector<HTMLElement>('[data-testid="event-choices"] button');
+
+    expect(choices?.parentElement).toBe(prose);
+    expect(getComputedStyle(choices as HTMLElement).display).toBe("inline");
+    expect(getComputedStyle(firstButton as HTMLElement).display).toBe("inline-flex");
+    expect(getComputedStyle(firstButton as HTMLElement).borderTopWidth).toBe("0px");
+  });
+
   it("shows the run's current year (prop) over the beat's nominal year — epoch0 in another era", () => {
     // A generic life-stage epoch0 beat carries a nominal default year (1885) but is injected
     // into whatever era the run is in. On a caliphate (762) run the card must show 762, not 1885.

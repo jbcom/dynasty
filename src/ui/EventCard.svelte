@@ -47,34 +47,35 @@ function touchedMeters(choice: Choice): MeterId[] {
   </div>
 
   <h2>{term(event.title)}</h2>
-  <p class="scene">{term(event.scene)}</p>
+  <p class="scene" data-testid="event-prose">
+    {term(event.scene)}
+    <span class="choices" data-testid="event-choices" aria-label="Choose how the moment turns">
+      {#each event.choices as choice (choice.id)}
+        {@const touched = touchedMeters(choice)}
+        <button type="button" disabled={busy} onclick={() => choose(choice)}>
+          <span class="choice-text">{term(choice.text)}</span>
+          {#if touched.length > 0}
+            <span class="hints" role="img" aria-label={`Touches ${touched.join(", ")}`}>
+              {#each touched as id (id)}
+                <img
+                  class="hint"
+                  src={`/assets/icons/${id}.svg`}
+                  alt=""
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                  decoding="async"
+                />
+              {/each}
+            </span>
+          {/if}
+        </button>
+      {/each}
+    </span>
+  </p>
   <!-- researchNote stays in the data as authoring provenance, but is NOT shown
        as a separate panel — the factual grounding is woven into the scene prose
        so the player never pivots between game-fiction and a footnote. -->
-
-  <div class="choices">
-    {#each event.choices as choice (choice.id)}
-      {@const touched = touchedMeters(choice)}
-      <button type="button" disabled={busy} onclick={() => choose(choice)}>
-        <span class="choice-text">{term(choice.text)}</span>
-        {#if touched.length > 0}
-          <span class="hints" role="img" aria-label={`Touches ${touched.join(", ")}`}>
-            {#each touched as id (id)}
-              <img
-                class="hint"
-                src={`/assets/icons/${id}.svg`}
-                alt=""
-                aria-hidden="true"
-                width="14"
-                height="14"
-                decoding="async"
-              />
-            {/each}
-          </span>
-        {/if}
-      </button>
-    {/each}
-  </div>
 </article>
 
 <style>
@@ -117,7 +118,7 @@ function touchedMeters(choice: Choice): MeterId[] {
     color: var(--mmm-text);
   }
   .scene {
-    margin: 0 0 1rem;
+    margin: 0;
     font-family: var(--mmm-font-body);
     font-size: 1rem;
     line-height: 1.6;
@@ -126,42 +127,59 @@ function touchedMeters(choice: Choice): MeterId[] {
     padding-left: 0.75rem;
   }
   .choices {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
+    display: inline;
+    margin-left: 0.35em;
   }
   button {
-    display: flex;
+    appearance: none;
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.6rem;
+    gap: 0.35rem;
+    vertical-align: baseline;
     text-align: left;
-    padding: 0.65rem 0.9rem;
-    background: color-mix(in srgb, var(--mmm-navy-light) 80%, var(--mmm-navy-deep));
-    color: var(--mmm-text);
-    border: 1px solid var(--mmm-gold-deep);
-    border-radius: var(--mmm-radius);
-    font-family: var(--mmm-font-body);
-    font-size: 0.97rem;
-    line-height: 1.45;
+    margin: 0.05rem 0.55rem 0.05rem 0;
+    padding: 0 0 0 1.05rem;
+    position: relative;
+    background: none;
+    color: var(--mmm-gold-bright);
+    border: none;
+    border-radius: 0;
+    font-family: var(--mmm-font-display);
+    font-size: 1.15em;
+    font-weight: 700;
+    line-height: inherit;
     cursor: pointer;
+    text-shadow: 0 0 8px color-mix(in srgb, var(--mmm-gold) 55%, transparent);
+    animation: option-glow 2.6s ease-in-out infinite;
     transition:
       transform var(--mmm-dur-fast) var(--mmm-ease),
-      background var(--mmm-dur-fast) var(--mmm-ease),
-      border-color var(--mmm-dur-fast) var(--mmm-ease);
+      color var(--mmm-dur-fast) var(--mmm-ease),
+      text-shadow var(--mmm-dur-fast) var(--mmm-ease);
+  }
+  button::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--mmm-gold);
+    opacity: 0.85;
   }
   button:hover:not(:disabled) {
-    background: var(--mmm-navy-light);
+    color: #fff;
     transform: translateY(-1px);
-    border-color: var(--mmm-gold);
-    box-shadow: 0 2px 8px rgb(212 175 55 / 0.15);
+    text-shadow: 0 0 14px color-mix(in srgb, var(--mmm-gold) 80%, transparent);
+  }
+  button:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--mmm-gold) 50%, transparent);
+    outline-offset: 2px;
   }
   button:disabled {
     opacity: 0.5;
     cursor: default;
+    animation: none;
   }
   .choice-text {
-    flex: 1;
+    flex: 0 1 auto;
   }
   /* Consequence hints (PL-6): which meters this choice stirs — shape of the stakes, not
      the size. Dimmed so they sit quietly beside the prose; they brighten on hover/focus
@@ -170,8 +188,7 @@ function touchedMeters(choice: Choice): MeterId[] {
     display: inline-flex;
     flex-shrink: 0;
     gap: 0.25rem;
-    align-self: flex-start;
-    margin-top: 0.1rem;
+    align-self: center;
   }
   .hint {
     width: 14px;
@@ -184,7 +201,21 @@ function touchedMeters(choice: Choice): MeterId[] {
   button:focus-visible .hint {
     opacity: 0.85;
   }
+  @keyframes option-glow {
+    0%, 100% {
+      text-shadow: 0 0 6px color-mix(in srgb, var(--mmm-gold) 35%, transparent);
+      opacity: 0.9;
+    }
+    50% {
+      text-shadow: 0 0 14px color-mix(in srgb, var(--mmm-gold) 75%, transparent);
+      opacity: 1;
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
+    button {
+      animation: none;
+      text-shadow: 0 0 10px color-mix(in srgb, var(--mmm-gold) 60%, transparent);
+    }
     .hint {
       transition: none;
     }
