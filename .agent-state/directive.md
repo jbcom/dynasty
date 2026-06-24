@@ -187,12 +187,18 @@ Then build the opening act, wire it to foundByComposition, retire the .card funn
   spine hits. Since the matrix is on-demand (not all keys pre-generated), the SceneReader portrait `<img>` now has an
   `onerror` that HIDES it (degrades to prose-only, no broken-image icon). Browser-tested (a missing asset hides the
   portrait). The on-demand cache (EI-8e) generates real keys at runtime; this is the missing-asset safety net.
-- [ ] **EI-9e play-surface non-adult + ENCOUNTER portrait GENERATION (remaining)** — generate the common non-adult
-  life-stage portraits the spine actually hits (youth/elder per era band × the spine's archetypes/tiers — child/infant
-  mainly in the opening, already seeded for founding). PLUS encounter-role portraits: the formative beats
-  (first-friend/betrayer/loss/romance) + braid crossings introduce OTHER people — decide whether to show their
-  `buildEncounterPortraitPrompt` portrait (a second figure) or keep the progenitor-only Suzerain pattern, then wire +
-  generate the chosen set. Targeted, not blanket; READ a sample per stage/role. (Needs a fresh branch post-#199.)
+- [x] **EI-9e founding life-stage seed + encounter-portrait DECISION — DONE (branch ei9c).** Generated founding_1700s
+  ELDER economic low/mid (the founder aging) — with EI-9c's infant/child/youth + the adult matrix, the founding era
+  (the opening + gen-0's whole span) has the full life-stage set; READ-verified the elder reads aged + period-correct.
+  DECISION on encounter portraits: KEEP the Suzerain single-speaker pattern — the SceneReader portrait stays the
+  PROGENITOR (the story is THEIR life); a formative-beat figure (first friend/betrayer) is woven in PROSE, not given a
+  competing second portrait ([[intersections-woven-not-walls]]). Distinct-figure portraits belong to the dedicated
+  RivalDossier / braid-crossing surfaces, not the main reader. So `buildEncounterPortraitPrompt` stays available for
+  THOSE surfaces (future), not the scene reader.
+- [ ] **EI-9f wire encounter portraits into the RivalDossier surface (future)** — the one place a DISTINCT figure is
+  the focus: RivalDossier (a rival house's head) + braid-crossing dossiers. Wire those to request a
+  `buildEncounterPortraitPrompt` portrait keyed on the rival's era/role, with the EI-9d fallback; generate a sample
+  per role. Other eras' non-adult protagonist stages stay on-demand (EI-8e cache) — don't blanket-generate.
 - [x] **EI-SCARCITY-STORIES — post-scarcity narrative theme in the guidance — DONE (code, branch ei9c).** Added a
   `scarcity` field to the far-future era guidance (t4/t5 × poor/middle in guidance.json) naming the post-scarcity
   stakes (what STAYS scarce when all else is abundant: un-copyable physical artifacts, real presence, authentic line,
