@@ -9,6 +9,7 @@
  *   pnpm vite-node scripts/mine-fabric.ts -- --prune-n 5
  *   pnpm vite-node scripts/mine-fabric.ts -- --prune-auto
  *   pnpm vite-node scripts/mine-fabric.ts -- --prune-all
+ *   pnpm vite-node scripts/mine-fabric.ts -- --keepers 24
  *
  * Output: a fabric index keyed by family(wave) × era × setting, each entry the kept scene's id + provenance
  * + the borrowable source vignettes. Deterministic — same corpus → same fabric. Reviewable as a diff.
@@ -23,7 +24,9 @@ import { appendFileSync, readdirSync, readFileSync, writeFileSync } from "node:f
 import { join } from "node:path";
 import {
   applyPruneToIndex,
+  buildKeeperReport,
   buildPruneTransactions,
+  DEFAULT_KEEPER_REPORT_COUNT,
   type FabricEntry,
   type FabricIndex,
   type PruneMode,
@@ -41,10 +44,23 @@ const arg = (name: string): string | undefined => {
 const KEEP = Number(arg("keep") ?? "0.2");
 const OUT = arg("out") ?? "src/data/saga/fabric/index.json";
 const TRANSACTIONS = arg("transactions") ?? "src/data/saga/fabric/transactions.ndjson";
+const KEEPER_OUT = arg("keeper-out") ?? "src/data/saga/fabric/keepers.json";
 const PRUNE_ONE = process.argv.includes("--prune-one");
 const PRUNE_N = arg("prune-n") !== undefined ? Number(arg("prune-n")) : undefined;
 const PRUNE_AUTO = process.argv.includes("--prune-auto");
 const PRUNE_ALL = process.argv.includes("--prune-all");
+
+function optionalPositiveIntegerFlag(name: string, fallback: number): number | null {
+  const i = process.argv.indexOf(`--${name}`);
+  if (i < 0) return null;
+  const raw = process.argv[i + 1];
+  if (!raw || raw.startsWith("--")) return fallback;
+  const n = Number(raw);
+  if (!Number.isInteger(n) || n < 1) throw new Error(`--${name} must be a positive integer.`);
+  return n;
+}
+
+const KEEPERS = optionalPositiveIntegerFlag("keepers", DEFAULT_KEEPER_REPORT_COUNT);
 
 interface ActFile {
   acts: Array<{ id: string; wave?: string; tier: number; macroAct: string; scenes: string[] }>;
@@ -100,6 +116,15 @@ function prune(mode: PruneMode, count = 1): void {
   );
 }
 
+function writeKeeperReport(count: number): void {
+  const index = JSON.parse(readFileSync(OUT, "utf8")) as FabricIndex;
+  const report = buildKeeperReport(index, count);
+  writeFileSync(KEEPER_OUT, `${JSON.stringify(report, null, 2)}\n`);
+  console.error(
+    `Wrote ${KEEPER_OUT}: selected ${report.selectedCount}/${report.totalCandidates} keeper candidates from ${OUT}.`,
+  );
+}
+
 function pruneRequest(): { mode: PruneMode; count?: number } | null {
   const requested = [PRUNE_ONE, PRUNE_N !== undefined, PRUNE_AUTO, PRUNE_ALL].filter(Boolean).length;
   if (requested > 1) throw new Error("Choose only one prune mode.");
@@ -114,9 +139,16 @@ function pruneRequest(): { mode: PruneMode; count?: number } | null {
 }
 
 function main(): void {
+  const requested = [PRUNE_ONE, PRUNE_N !== undefined, PRUNE_AUTO, PRUNE_ALL, KEEPERS !== null].filter(Boolean).length;
+  if (requested > 1) throw new Error("Choose only one mine-fabric action.");
+
   const pruneReq = pruneRequest();
   if (pruneReq) {
     prune(pruneReq.mode, pruneReq.count);
+    return;
+  }
+  if (KEEPERS !== null) {
+    writeKeeperReport(KEEPERS);
     return;
   }
 
