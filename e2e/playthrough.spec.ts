@@ -138,7 +138,8 @@ test("inter-era tabs render their views", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Timeline" })).toBeVisible();
 
   await page.getByRole("tab", { name: "Dossier" }).click();
-  await expect(page.getByText(/Dossier —/)).toBeVisible();
+  // VD-7: the Dossier tab is the rich path-keyed visual briefing (DossierView), not the old meter-bar list.
+  await expect(page.locator("[data-testid='dossier-view']")).toBeVisible();
 
   await page.getByRole("tab", { name: "Stats" }).click();
   await expect(page.getByRole("heading", { name: "Trajectory" })).toBeVisible();
