@@ -52,9 +52,12 @@ when the WHOLE milestone is solid — NOT a PR per VD-step.
   mapping live state → a real meter-trajectory CHART + the rival-field GRAPH + the era-reach MAP + the figure/brief
   KEYS (`dossierFigureKey`/`dossierBriefKey`, deterministic). Pure (no DOM/Date/random). 7 unit tests. check 0,
   typecheck 0/0.
-- [ ] **VD-3 panel components + DossierView** — `src/ui/dossier/`: ChartPanel/GraphPanel/MapPanel/FigurePanel/
-  BriefPanel (reuse StatsView chart / ButterflyGraph / MapView primitives) + DossierView briefing-spread layout
-  (Suzerain scannability); FigurePanel uses the EI-9d image fallback. Browser/visual tests + READ a screenshot.
+- [x] **VD-3 panel components + DossierView — DONE (branch feat/visual-dossiers).** `src/ui/dossier/`: ChartPanel
+  (uPlot, reuses StatsView's chart), GraphPanel (SVG rival network, player-centered, adapts ButterflyGraph),
+  MapPanel (era-reach strip), FigurePanel (Imagen image + EI-9d onerror fallback), BriefPanel (path-voice prose +
+  pending state) + DossierView briefing-spread (masthead + magazine grid, Suzerain scannability). 4 browser tests;
+  LIVE-VERIFIED via screenshot READ: the crime "Intelligence Dossier · MID-CENTURY" renders a real Reputation/Heat
+  chart + the You-centered rival graph + the 1776→Mid-C reach strip. check 0, typecheck 0/0, browser 166.
 - [ ] **VD-4 DossierInterstitial placement** — a full-screen dossier fires at a generation/era boundary (the
   headline scene-transition set piece), wired into the act/opening flow; e2e walks it.
 - [ ] **VD-5 GenAI brief + figure pipelines** — `buildDossierBrief(kind, view)` path-voice prompts + QA + cache;
