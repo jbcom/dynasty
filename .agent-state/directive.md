@@ -107,7 +107,10 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   2 browser tests (src maps key, hide-on-error). Gate: check 0, typecheck 0/0, unit 1011, browser 170.
   GV-3 (live Veo generation): BLOCKED in this env (no GEMINI_API_KEY) — pipeline proven, runtime degrades gracefully
   when the mp4 is absent (browser test); generates offline when a key is present, like the portrait/dossier/news/music
-  pipelines. NEXT: reviewer trio (running) folded → ONE PR.
+  pipelines. Reviewer trio folded forward (1f0d38d): code-reviewer clean+2 low-sev folded (CLI flag validation,
+  Veo op-error/timeout surfaced); simplifier clean.
+- [ ] [WAIT] **GA-VIDEO PR #205 — merge on green.** Monitor bqo1ocye5 armed on CI; merge on CLEAN/UNSTABLE + 0
+  unresolved threads (resolve via GraphQL). Then verify main has src/sim/cinematic/ + the CinematicView wiring.
 - [x] **GA-MUSIC — GenAI era-shifting score (Lyria) — BUILT (branch feat/ga-music).** GM-1 pure
   src/sim/music/genaiMusic.ts (buildMusicPrompt + the 10 ambient-track slots, era moods, loopable/instrumental;
   5 tests). GM-2 `geminiCaptureMusic` (Lyria realtime-stream → PCM capture) + scripts/genai-music.ts (PCM→WAV);
@@ -133,10 +136,11 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
 - [x] **GA-NEWS PR — MERGED #202 (squash 20c61dd).** Reviewer trio folded (moodForRanks cross-ladder bug,
   toHeadlines trailing-md, PL-11 testid). VERIFIED on main (src/sim/news/ + 24 dispatch keys). The first
   GenAI-expansion milestone is shipped.
-- [ ] **GA-MAP-ART — GenAI cartographic base per era — NEXT milestone (own fresh branch, post GA-VIDEO merge).**
+- [ ] [WAIT] **GA-MAP-ART — GenAI cartographic base per era — NEXT milestone (own fresh branch, GATED on #205 merge).**
   MapView is CSS; a generated period map base (the journey as a real period map) was speced, only partially built.
   Reuse the dossier/portrait image pipeline: pure prompt builder + key (per era band), offline gen script, a MapView
   base-layer loader with hide-on-error fallback to the current CSS, a browser test. Milestone branch, ONE PR.
+  Fresh branch cuts from main AFTER #205 squash-merges ([[one-branch-local-review]]).
 - [ ] [WAIT] **GA-DOSSIER-DIAGRAMS — GenAI data-figures in dossiers** — beyond atmosphere: generate the dossier's diagrams
   (an R&D tech-tree sketch, a redacted intel surveillance chart) keyed to real state, as a FigurePanel variant.
 - [ ] [WAIT] **GA-ENCOUNTER-PORTRAITS — wire buildEncounterPortraitPrompt** — exists, no live consumer (EI-9f); needs a
