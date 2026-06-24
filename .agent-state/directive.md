@@ -218,9 +218,11 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   = 30 scenes); distinct-fingerprint ratio **0.012** (1/84). Prose varies, SHAPE doesn't — one skeleton stamped 84×. Pure
   metric (src/sim/saga/uniquenessMetric.ts: structuralFingerprint + uniquenessReport) + report (scripts/uniqueness-audit.ts)
   + a RATCHET test (records the baseline, prevents regress, asserts a floor NOT goodness). docs/STATE.md records it. Gate:
-  check 0, typecheck 0/0, unit 1031. NEXT: reviewer trio (running) → ONE PR. The diversifying REWRITE is the milestone below.
-- [ ] [WAIT] **CONTENT-UNIQUENESS-AUDIT PR — merge on green (after open).** Gated on the open PR's CI + threads.
-- [ ] **SHAPE-DIVERSIFY-1 — vary the per-act scene SHAPE so the skeleton stops repeating (THE fix, next actionable, own branch post-merge).**
+  check 0, typecheck 0/0, unit 1031. Reviewer folded (bef8723): the ratchet was VACUOUS (tautologies) → now asserts
+  the real >= floor (distinctRatio >= 0.0119, largestCluster <= 84), so a regression FAILS. The diversifying REWRITE is below.
+- [ ] [WAIT] **CONTENT-UNIQUENESS-AUDIT PR #220 — merge on green.** Reviewer folded (bef8723). Monitor bv2rg6yyk armed
+  on CI; merge on CLEAN/UNSTABLE + 0 unresolved threads. Then verify main has src/sim/saga/uniquenessMetric.ts + the ratchet.
+- [ ] [WAIT] **SHAPE-DIVERSIFY-1 — vary the per-act scene SHAPE so the skeleton stops repeating (THE fix, next milestone, own branch GATED on the CONTENT-UNIQUENESS-AUDIT PR merge).**
   The audit proved one skeleton × 84 (ratio 0.012). FIX the generator/spine so the scene SHAPE varies per act-type:
   the SENSE ORDER (not always smell→touch→sound→sight→taste), the beat/decision LAYOUT (not always 2|2D|2|2D|2D|2),
   and scene COUNT — keyed off the spine act's DecisionArchitecture + the macroAct, so a founding bargain reads
