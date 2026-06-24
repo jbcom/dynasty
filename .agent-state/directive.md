@@ -294,7 +294,7 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   proof; typecheck 0; build 0; unit 1052; browser 181; e2e 8; check 0 with 39 pre-existing non-null assertion
   warnings outside this slice. Remote proof: ready PR, build-and-test + CodeQL green, Amazon Q clean/no blockers,
   Gemini/CodeRabbit quota notices non-blocking per user directive, zero review threads, and squash-merged to main.
-- [x] **KEY-PILLARS-1f FABRIC-KEEPER-REPORT — BUILT locally (branch codex/fabric-keeper-report).**
+- [x] **KEY-PILLARS-1f FABRIC-KEEPER-REPORT PR #240 — MERGED (squash 3c10733).**
   Added the positive counterpart to prune-auto: `pnpm fabric:keepers` now writes
   `src/data/saga/fabric/keepers.json`, a deterministic top-24 report ranking retained legacy fabric by source
   score, library-backed scan/clarity/consistency, low similarity, duplicate-opening risk, and weave readiness.
@@ -302,7 +302,9 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   high-signal legacy moments into the one-dynasty spine instead of only removing chaff. Local proof:
   touched-file Biome 0; pruneFabric unit 10; fabric:keepers 24/502 generated; typecheck 0; build 0; unit
   1055; browser 181; e2e 8; prose:audit 0; prose:ratchet 0; check 0 with 39 pre-existing non-null assertion
-  warnings outside this slice.
+  warnings outside this slice. Remote proof: ready PR, build-and-test + CodeQL green, Amazon Q/CodeRabbit
+  clean/no blockers, Gemini quota notice non-blocking per user directive, zero review threads, and
+  squash-merged to main.
 - [x] **GENAI-GENERATE — BUILT locally (branch codex/genai-generate-live-assets).**
   `.env` contains `GEMINI_API_KEY`, so this is no longer blocked on credentials. IMPORTANT PIVOT
   ([[founding-spine-pivot]]): do **not** run the old 504-cell class sweeps as the played corpus. The player steers
