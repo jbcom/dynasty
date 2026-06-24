@@ -109,8 +109,10 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   when the mp4 is absent (browser test); generates offline when a key is present, like the portrait/dossier/news/music
   pipelines. Reviewer trio folded forward (1f0d38d): code-reviewer clean+2 low-sev folded (CLI flag validation,
   Veo op-error/timeout surfaced); simplifier clean.
-- [ ] [WAIT] **GA-VIDEO PR #205 — merge on green.** Monitor bqo1ocye5 armed on CI; merge on CLEAN/UNSTABLE + 0
-  unresolved threads (resolve via GraphQL). Then verify main has src/sim/cinematic/ + the CinematicView wiring.
+- [ ] [WAIT] **GA-VIDEO PR #205 — merge on green (CI re-running after security fix).** First CI pass GREEN
+  (build-and-test, Analyze, CodeRabbit all pass). amazon-q flagged a real CWE-598 (Veo uri fetch leaked the key via
+  `?key=` query param) → fixed (ff68ed8: x-goog-api-key header) + thread resolved. Monitor b91t3da65 armed on the
+  re-run; merge on CLEAN/UNSTABLE. Then verify main has src/sim/cinematic/ + the CinematicView wiring.
 - [x] **GA-MUSIC — GenAI era-shifting score (Lyria) — BUILT (branch feat/ga-music).** GM-1 pure
   src/sim/music/genaiMusic.ts (buildMusicPrompt + the 10 ambient-track slots, era moods, loopable/instrumental;
   5 tests). GM-2 `geminiCaptureMusic` (Lyria realtime-stream → PCM capture) + scripts/genai-music.ts (PCM→WAV);
