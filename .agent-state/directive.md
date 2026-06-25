@@ -292,10 +292,19 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   with the existing 39 non-null assertion warnings. Remote proof: ready PR, build-and-test + CodeQL + Amazon Q
   successful, CodeRabbit status successful but full review quota-limited, Gemini quota notice non-blocking per
   user directive, zero review threads, squash-merged to main.
-- [ ] **KEY-PILLARS-5 — prune a small reviewed batch of worst prose chaff.**
-  Use `--prune-auto`/`--prune-n` heuristics plus `pnpm prose:audit` evidence to remove a deliberately small
-  set of the least scannable retained legacy fabric entries, recording every gap in
-  `src/data/saga/fabric/transactions.ndjson` and ratcheting the prose baseline only if the corpus improves.
+- [x] **KEY-PILLARS-5 — prune a small reviewed batch of worst prose chaff — MERGED PR #262 (squash
+  259198d).** Used `--prune-n 3` after a temp `--prune-auto`/`--prune-n` dry run and manual read to remove the
+  three least scannable retained legacy fabric entries: `act:bavaria:entertainment:poor:t3:midpoint`,
+  `act:bavaria:technological:poor:t3:midpoint`, and `act:bavaria:athletic:poor:t4:turn`. Each removal records
+  a rewrite gap in `src/data/saga/fabric/transactions.ndjson`, refreshes the keeper and prose baselines, and
+  improves the prose baseline to 622 total / 283 failed / passRate 0.545 / minScanScore > 0 while preserving
+  the reductive policy that legacy class JSON is source fabric, not separate playable class structure. Local
+  proof: targeted prune/fabric/crossing/spine unit set 35 passed; `pnpm prose:ratchet`; `pnpm test` 1062 passed;
+  `pnpm typecheck`; `pnpm build`; browser 181 passed with existing Svelte double-unmount warnings; e2e 8 passed;
+  `pnpm check` exits 0 with the existing 39 non-null assertion warnings; `git diff --check`. Remote proof:
+  ready PR, build-and-test + CodeQL + CodeRabbit green, Gemini quota notice non-blocking per user directive,
+  Amazon Q review feedback answered by pinning exact prune metrics/gaps in live-data tests, all review threads
+  resolved, and squash-merged to main.
 - [ ] **KEY-PILLARS-6 — promotion diversity map.**
   Add a tiny generated/read-only report or test fixture that lists promoted keeper sources by source era, wave,
   tier, keeperScore, and spine target, so future keeper promotions can avoid overfitting one wave/era and can
