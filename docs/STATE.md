@@ -70,7 +70,10 @@ Shipped on `feat/narrative-acts` (PRs #65/#67); polished on `feat/saga-polish` (
   generated entries with zero missing files. `src/data/saga/portrait-availability.json` is the read-only
   KEY-PILLARS-8 coverage map: adult protagonist rows are complete across era/archetype/rung/gender, encounter
   rival heads are complete across current roles/eras, and non-adult protagonist rows remain the next visual
-  availability gap before more age-sensitive spine scenes are added.
+  availability gap before more age-sensitive spine scenes are added. `src/data/saga/visual-relief-cadence.json`
+  is the KEY-PILLARS-9 reading-fatigue audit over the authored spine: current baseline is 10 acts, 60 playable
+  route variants, 4 promoted encounter hooks, 10 generation-boundary dossier/cinematic anchors, and 13 dense
+  route stretches needing larger relief; the next flagged target is `spine:g2:antebellum:allegiance`.
 - **Retired**: the Epoch-0 NARRATIVE (birth/naming/station/schooling/calling) is gone; the saga acts
   are the played story. The SUCCESSION mechanic survives (events tagged `life-stage`,
   ev_cp_take_partner/raise_heirs; founding sets emerged/named/calling_chosen).
