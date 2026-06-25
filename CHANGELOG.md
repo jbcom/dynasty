@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.80.0](https://github.com/jbcom/dynasty/compare/v0.79.0...v0.80.0) (2026-06-25)
+
+
+### Features
+
+* map portrait gender availability ([1073b39](https://github.com/jbcom/dynasty/commit/1073b395ae07610a643956f908f3d40791608f68))
+
 ## [0.79.0](https://github.com/jbcom/dynasty/compare/v0.78.1...v0.79.0) (2026-06-25)
 
 
