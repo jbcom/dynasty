@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.77.2](https://github.com/jbcom/dynasty/compare/v0.77.1...v0.77.2) (2026-06-25)
+
+
+### Documentation
+
+* close key pillars prune batch ([7f6b31c](https://github.com/jbcom/dynasty/commit/7f6b31c4e44f7c4fa56729eb5d027c5228f1e87e))
+
 ## [0.77.1](https://github.com/jbcom/dynasty/compare/v0.77.0...v0.77.1) (2026-06-25)
 
 
