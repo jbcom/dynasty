@@ -69,6 +69,12 @@ strong enough to break late-spine text fatigue. A healthy promotion cadence shou
 cover convergence, emergence, and ascension keepers so the mining loop proves the
 legacy corpus can enrich the whole America-to-stars arc.
 
+Use `pnpm fabric:promotion-map` to regenerate
+`src/data/saga/fabric/promotion-diversity.json` from `fabric-promote-keeper`
+transactions. The report is read-only decision support: it lists each promoted keeper
+by source era, wave, tier, keeperScore, and spine target, then names the next diversity
+pressure before another keeper is promoted.
+
 The preferred pruning workflow is reductive and transactional:
 
 1. Find the most duplicative or least scannable kept fabric item.
