@@ -305,10 +305,30 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   ready PR, build-and-test + CodeQL + CodeRabbit green, Gemini quota notice non-blocking per user directive,
   Amazon Q review feedback answered by pinning exact prune metrics/gaps in live-data tests, all review threads
   resolved, and squash-merged to main.
-- [ ] **KEY-PILLARS-6 — promotion diversity map.**
-  Add a tiny generated/read-only report or test fixture that lists promoted keeper sources by source era, wave,
-  tier, keeperScore, and spine target, so future keeper promotions can avoid overfitting one wave/era and can
-  choose the next gap deliberately.
+- [x] **KEY-PILLARS-6 — promotion diversity map — MERGED PR #265 (squash 0a6ffc5).** Added pure
+  `src/sim/saga/promotionDiversity.ts`, generator `pnpm fabric:promotion-map`, and checked-in
+  `src/data/saga/fabric/promotion-diversity.json` built from `fabric-promote-keeper` transactions. The map
+  lists promoted keeper sources by source era, wave, tier, keeperScore, and spine target; current cadence
+  covers convergence / emergence / ascension but is concentrated on `ireland`, so the next promotion pressure
+  is a non-Ireland keeper. Local proof: generator 0; targeted promotion/spine/prune unit set 22 passed;
+  `pnpm typecheck`; `pnpm test` 1064 passed; `pnpm build`; touched-file Biome 0; `git diff --check`;
+  browser 181 passed with existing Svelte double-unmount warnings; e2e 8 passed. Repo-wide `pnpm check`
+  still exits on the existing 39 non-null assertion diagnostics outside this slice. Remote proof: ready PR,
+  build-and-test + CodeQL + Amazon Q + CodeRabbit green, Gemini/CodeRabbit quota notices non-blocking per
+  user directive, zero review threads, and squash-merged to main.
+- [ ] **KEY-PILLARS-7 — non-Ireland keeper promotion using the diversity map.**
+  Use `src/data/saga/fabric/promotion-diversity.json` and `src/data/saga/fabric/keepers.json` to pick the
+  strongest non-Ireland keeper that deepens a weak spine moment, rewrite it as a third-person encounter or
+  branch beat in the one-dynasty story, record `fabric-promote-keeper` provenance, regenerate the promotion
+  map, and prove prose/readability plus spine placement.
+- [ ] **KEY-PILLARS-8 — portrait and gender availability map.**
+  Add a small generated/read-only report or test fixture that lists protagonist/encounter portrait demand by
+  era, life stage, archetype, and available gender keys. The goal is to expose missing or misaligned portrait
+  slots before more narrative promotions increase visual fatigue.
+- [ ] **KEY-PILLARS-9 — diegetic visual-relief cadence audit.**
+  Add a lightweight audit over the main reading path that counts prose-heavy stretches between visual relief
+  anchors (portrait, dossier, map/chart, transition, or promoted encounter art hook) and flags the next place
+  where a text-heavy spine segment should gain a visual or sensory break.
 - [x] **KEY-PILLARS-1a PRUNE-AUTO PR #229 — MERGED (squash 6ae3e5e).** Refactored the
   reductive legacy-fabric pruning policy out of `scripts/mine-fabric.ts` into pure/tested
   `src/sim/saga/pruneFabric.ts`; `--prune-one`, `--prune-n`, `--prune-auto`, and `--prune-all` now share
