@@ -16,12 +16,14 @@ import { actEnded, chooseBeat, chooseDecision, currentScene, startAct } from "..
  */
 
 const corpus = loadSaga();
-const PROMOTED_KEEPER_ID = "act:ireland:economic:poor:t0:turn";
+const PROMOTED_CONVERGENCE_KEEPER_ID = "act:ireland:economic:poor:t0:turn";
+const PROMOTED_ASCENSION_KEEPER_ID = "act:ireland:religious:poor:t5:midpoint";
 const KEEPERS = (
   keeperReport as {
     keepers: Array<{
       sceneId: string;
       wave: string;
+      era: string;
       tier: number;
       keeperScore: number;
       maxSimilarity: number;
@@ -69,6 +71,10 @@ function topKeeperFor(wave: string, tier: number): (typeof KEEPERS)[number] | un
   return KEEPERS.filter((keeper) => keeper.wave === wave && keeper.tier === tier).sort(
     (a, b) => b.keeperScore - a.keeperScore,
   )[0];
+}
+
+function keeperBySceneId(sceneId: string): (typeof KEEPERS)[number] | undefined {
+  return KEEPERS.find((keeper) => keeper.sceneId === sceneId);
 }
 
 /** Walk an act from a founding flag set, always taking beat 0 / decision option 0, collecting scene ids
@@ -129,7 +135,7 @@ describe("SPINE-ACT-DEPTH: every spine act is deepened with texture + consequenc
   it("KEY-PILLARS-2: keeper-ranked legacy fabric is rewritten into the authored Gilded Age spine", () => {
     const encounterId = "spine:g3:gildedage:keeper_ireland_coal";
     const keeper = topKeeperFor("ireland", 0);
-    expect(keeper?.sceneId).toBe(PROMOTED_KEEPER_ID);
+    expect(keeper?.sceneId).toBe(PROMOTED_CONVERGENCE_KEEPER_ID);
     expect(keeper?.keeperScore).toBeGreaterThanOrEqual(0.85);
     expect(keeper?.maxSimilarity).toBe(0);
 
@@ -154,6 +160,42 @@ describe("SPINE-ACT-DEPTH: every spine act is deepened with texture + consequenc
 
     const report = auditProseQuality(
       "spine:g3:gildedage:keeper_ireland_coal",
+      qualityParts(encounterId),
+    );
+    expect(report.pass, JSON.stringify(report.findings, null, 2)).toBe(true);
+  });
+
+  it("KEY-PILLARS-3: ascension keeper fabric broadens promotion into the interstellar spine", () => {
+    const encounterId = "spine:g9:interstellar:keeper_ireland_receiver";
+    const keeper = keeperBySceneId(PROMOTED_ASCENSION_KEEPER_ID);
+    expect(keeper?.wave).toBe("ireland");
+    expect(keeper?.era).toBe("ascension");
+    expect(keeper?.tier).toBe(5);
+    expect(keeper?.keeperScore).toBeGreaterThanOrEqual(0.82);
+    expect(keeper?.maxSimilarity).toBe(0);
+
+    const interstellar = act("spine:g9:interstellar");
+    const texIndex = interstellar.scenes.indexOf("spine:g9:interstellar:tex_open");
+    expect(interstellar.scenes.slice(texIndex, texIndex + 3)).toEqual([
+      "spine:g9:interstellar:tex_open",
+      encounterId,
+      "spine:g9:interstellar:transit",
+    ]);
+
+    const encounter = scene(encounterId);
+    const prose = encounter.prose.join(" ");
+    expect(prose).toMatch(/copper coils/i);
+    expect(prose).toMatch(/crackling console/i);
+    expect(prose).toMatch(/clockwork rhythms of the far-born/i);
+    expect(prose).not.toMatch(/\b(I|me|my|mine|we|our|ours|us)\b/i);
+    expect(prose).toMatch(/\{given_name\}|\{surname\}/);
+    expect(encounter.decision).toBeUndefined();
+    expect(encounter.beats.length).toBeGreaterThanOrEqual(2);
+    expect(encounter.next).toBe("spine:g9:interstellar:transit");
+    expect(walk("spine:g9:interstellar", [])).toContain("keeper_ireland_receiver");
+
+    const report = auditProseQuality(
+      "spine:g9:interstellar:keeper_ireland_receiver",
       qualityParts(encounterId),
     );
     expect(report.pass, JSON.stringify(report.findings, null, 2)).toBe(true);
