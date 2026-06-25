@@ -276,6 +276,24 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   outside this slice; git diff --check 0; browser 181 with existing Svelte double-unmount warnings; e2e 8.
   Remote proof: ready PR, build-and-test + CodeQL green, Amazon Q/CodeRabbit status green, Gemini quota notice
   non-blocking per user directive, zero unresolved review threads at merge, and squash-merged to main.
+- [x] **BACKLOG-AUDIT-2026-06-25 — enumerated next non-WAIT key-pillar units.** Current scan found no actionable
+  non-WAIT `[ ]` entries in the top key-pillar queue after KEY-PILLARS-3; only WAIT/reference items remained.
+  Per the never-drain-queue rule, appended concrete units that continue the one-dynasty/key-pillar direction:
+  a third source-era keeper promotion, a reductive prose chaff batch, and a promotion diversity map.
+- [ ] **KEY-PILLARS-4 — emergence keeper promotion into the Progressive spine.**
+  Promote `act:ireland:athletic:poor:t3:rising` (keeperScore 0.841, emergence, maxSimilarity 0) into a
+  decisionless third-person Progressive-era encounter between `tex_open` and `allegiance`, preserving the ward
+  crowd/heavy-tweed-sleeve image as civic sensory relief before the labor crisis. Gate: transaction ledger,
+  spine path proof, non-first-person prose proof, prose ratchet, full local suite, ready PR, zero unresolved
+  review threads, squash merge.
+- [ ] **KEY-PILLARS-5 — prune a small reviewed batch of worst prose chaff.**
+  Use `--prune-auto`/`--prune-n` heuristics plus `pnpm prose:audit` evidence to remove a deliberately small
+  set of the least scannable retained legacy fabric entries, recording every gap in
+  `src/data/saga/fabric/transactions.ndjson` and ratcheting the prose baseline only if the corpus improves.
+- [ ] **KEY-PILLARS-6 — promotion diversity map.**
+  Add a tiny generated/read-only report or test fixture that lists promoted keeper sources by source era, wave,
+  tier, keeperScore, and spine target, so future keeper promotions can avoid overfitting one wave/era and can
+  choose the next gap deliberately.
 - [x] **KEY-PILLARS-1a PRUNE-AUTO PR #229 — MERGED (squash 6ae3e5e).** Refactored the
   reductive legacy-fabric pruning policy out of `scripts/mine-fabric.ts` into pure/tested
   `src/sim/saga/pruneFabric.ts`; `--prune-one`, `--prune-n`, `--prune-auto`, and `--prune-all` now share

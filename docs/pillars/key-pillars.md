@@ -65,7 +65,9 @@ prose/similarity proof, and record the provenance in
 Promotion should keep broadening across source-era bands, not simply repeat the
 first successful convergence insertion. After a keeper lands in the Gilded Age,
 the next priority is a different era band such as ascension, with sensory relief
-strong enough to break late-spine text fatigue.
+strong enough to break late-spine text fatigue. A healthy promotion cadence should
+cover convergence, emergence, and ascension keepers so the mining loop proves the
+legacy corpus can enrich the whole America-to-stars arc.
 
 The preferred pruning workflow is reductive and transactional:
 

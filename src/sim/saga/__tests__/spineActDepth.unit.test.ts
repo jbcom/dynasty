@@ -18,6 +18,7 @@ import { actEnded, chooseBeat, chooseDecision, currentScene, startAct } from "..
 const corpus = loadSaga();
 const PROMOTED_CONVERGENCE_KEEPER_ID = "act:ireland:economic:poor:t0:turn";
 const PROMOTED_ASCENSION_KEEPER_ID = "act:ireland:religious:poor:t5:midpoint";
+const PROMOTED_EMERGENCE_KEEPER_ID = "act:ireland:athletic:poor:t3:rising";
 const KEEPERS = (
   keeperReport as {
     keepers: Array<{
@@ -196,6 +197,42 @@ describe("SPINE-ACT-DEPTH: every spine act is deepened with texture + consequenc
 
     const report = auditProseQuality(
       "spine:g9:interstellar:keeper_ireland_receiver",
+      qualityParts(encounterId),
+    );
+    expect(report.pass, JSON.stringify(report.findings, null, 2)).toBe(true);
+  });
+
+  it("KEY-PILLARS-4: emergence keeper fabric broadens promotion into the Progressive spine", () => {
+    const encounterId = "spine:g4:progressive:keeper_ireland_ward_champion";
+    const keeper = keeperBySceneId(PROMOTED_EMERGENCE_KEEPER_ID);
+    expect(keeper?.wave).toBe("ireland");
+    expect(keeper?.era).toBe("emergence");
+    expect(keeper?.tier).toBe(3);
+    expect(keeper?.keeperScore).toBeGreaterThanOrEqual(0.84);
+    expect(keeper?.maxSimilarity).toBe(0);
+
+    const progressive = act("spine:g4:progressive");
+    const texIndex = progressive.scenes.indexOf("spine:g4:progressive:tex_open");
+    expect(progressive.scenes.slice(texIndex, texIndex + 3)).toEqual([
+      "spine:g4:progressive:tex_open",
+      encounterId,
+      "spine:g4:progressive:allegiance",
+    ]);
+
+    const encounter = scene(encounterId);
+    const prose = encounter.prose.join(" ");
+    expect(prose).toMatch(/ward office/i);
+    expect(prose).toMatch(/heavy tweed coat/i);
+    expect(prose).toMatch(/hopeful locals reach for the sleeve/i);
+    expect(prose).not.toMatch(/\b(I|me|my|mine|we|our|ours|us)\b/i);
+    expect(prose).toMatch(/\{given_name\}|\{family_name\}/);
+    expect(encounter.decision).toBeUndefined();
+    expect(encounter.beats.length).toBeGreaterThanOrEqual(2);
+    expect(encounter.next).toBe("spine:g4:progressive:allegiance");
+    expect(walk("spine:g4:progressive", [])).toContain("keeper_ireland_ward_champion");
+
+    const report = auditProseQuality(
+      "spine:g4:progressive:keeper_ireland_ward_champion",
       qualityParts(encounterId),
     );
     expect(report.pass, JSON.stringify(report.findings, null, 2)).toBe(true);

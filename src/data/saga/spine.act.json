@@ -109,6 +109,7 @@
     "spine:g4:progressive:open_press",
     "spine:g4:progressive:open",
     "spine:g4:progressive:tex_open",
+    "spine:g4:progressive:keeper_ireland_ward_champion",
     "spine:g4:progressive:allegiance",
     "spine:g4:progressive:csq_allegiance",
     "spine:g4:progressive:rev_csq_allegiance",
@@ -2989,7 +2990,7 @@
     "notFlags": []
    },
    "gather": true,
-   "next": "spine:g4:progressive:allegiance",
+   "next": "spine:g4:progressive:keeper_ireland_ward_champion",
    "prose": [
     "The machine shops of the {surname} Iron Works ran with a noise that had its own grammar — the syncopated hammer of the drop-forges, the shriek of steel on the lathe, the human undertone of a thousand men who had begun, lately, to speak of themselves as a single voice. {given_name} {surname} walked the gantry above the floor and heard in that undertone the sound of the new century arguing with the old.",
     "Progress had a price the founding generations had never had to name. The works that made the family rich had also made a class of men who could shut it down, and the reformers in the capital had begun to write the rules of capital and labor into law. {given_name} understood that the house could no longer simply own — it would have to answer: to the men, to the state, to a public that had decided it had a stake in how fortunes were made."
@@ -3028,6 +3029,55 @@
      }
     }
    ]
+  },
+  {
+   "id": "spine:g4:progressive:keeper_ireland_ward_champion",
+   "sense": "sight",
+   "prose": [
+    "At the ward office door, the street folds into a dense human weather. A champion of the {family_name} line wades through the crowd in a heavy tweed coat, and hopeful locals reach for the sleeve as if one touch might carry their petitions inside.",
+    "The mills made the fortune, but the ward teaches {given_name} how power looks when it leaves the ledger. Faces rise from the curb: widows with rent slips, boys with factory burns, aldermen's runners counting every nod."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "A boy with a bandaged hand keeps pace beside the tweed sleeve, too proud to beg and too young to hide the burn."
+     ],
+     "choice": {
+      "text": "Let the boy walk beside you into the office, where every ward captain can see what the mills have made.",
+      "motivatorShift": {
+       "honor": 1,
+       "politics": 1
+      },
+      "setFlags": [
+       "g4_keeper_ireland_ward_champion_witnessed"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "A precinct runner whispers that the crowd will cheer any promise spoken loudly enough."
+     ],
+     "choice": {
+      "text": "Promise less and listen longer; the ward remembers which families confuse applause with trust.",
+      "motivatorShift": {
+       "worldview": 1,
+       "power": 1
+      },
+      "setFlags": [
+       "g4_keeper_ireland_ward_champion_listened"
+      ],
+      "gather": true
+     }
+    }
+   ],
+   "thread": [],
+   "braidSlots": [],
+   "requires": {
+    "flags": [],
+    "notFlags": []
+   },
+   "next": "spine:g4:progressive:allegiance"
   },
   {
    "id": "spine:g4:progressive:allegiance",
