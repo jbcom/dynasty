@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.78.0](https://github.com/jbcom/dynasty/compare/v0.77.2...v0.78.0) (2026-06-25)
+
+
+### Features
+
+* map keeper promotion diversity ([0a6ffc5](https://github.com/jbcom/dynasty/commit/0a6ffc54b54150264a600ad76843a00e7c7f742b))
+
 ## [0.77.2](https://github.com/jbcom/dynasty/compare/v0.77.1...v0.77.2) (2026-06-25)
 
 
