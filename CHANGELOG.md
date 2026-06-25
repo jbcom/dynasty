@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.78.1](https://github.com/jbcom/dynasty/compare/v0.78.0...v0.78.1) (2026-06-25)
+
+
+### Documentation
+
+* close key pillars diversity map ([e95cef7](https://github.com/jbcom/dynasty/commit/e95cef7a615372648770b895b018cb8df40d4db3))
+
 ## [0.78.0](https://github.com/jbcom/dynasty/compare/v0.77.2...v0.78.0) (2026-06-25)
 
 
