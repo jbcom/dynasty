@@ -280,12 +280,18 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   non-WAIT `[ ]` entries in the top key-pillar queue after KEY-PILLARS-3; only WAIT/reference items remained.
   Per the never-drain-queue rule, appended concrete units that continue the one-dynasty/key-pillar direction:
   a third source-era keeper promotion, a reductive prose chaff batch, and a promotion diversity map.
-- [ ] **KEY-PILLARS-4 — emergence keeper promotion into the Progressive spine.**
-  Promote `act:ireland:athletic:poor:t3:rising` (keeperScore 0.841, emergence, maxSimilarity 0) into a
-  decisionless third-person Progressive-era encounter between `tex_open` and `allegiance`, preserving the ward
-  crowd/heavy-tweed-sleeve image as civic sensory relief before the labor crisis. Gate: transaction ledger,
-  spine path proof, non-first-person prose proof, prose ratchet, full local suite, ready PR, zero unresolved
-  review threads, squash merge.
+- [x] **KEY-PILLARS-4 — emergence keeper promotion into the Progressive spine — MERGED PR #258 (squash
+  4300794).** Promoted `act:ireland:athletic:poor:t3:rising` (keeperScore 0.841, emergence, maxSimilarity 0)
+  into decisionless third-person Progressive encounter `spine:g4:progressive:keeper_ireland_ward_champion`
+  between `tex_open` and `allegiance`, preserving the ward crowd/heavy-tweed-sleeve image as civic sensory
+  relief before the labor crisis. Added the transaction record, broadened the pillar cadence to convergence /
+  emergence / ascension keepers, refreshed the 625-item prose baseline, and hardened saga-family RNG so added
+  texture beats cannot perturb succession or skip visible spine generations. Local proof: targeted spine/loop/
+  divergence/act-depth unit set 61 passed; `pnpm test` 1060 passed; browser 181 passed with existing Svelte
+  double-unmount warnings; e2e 8 passed; typecheck/build/prose ratchet/diff-check clean; `pnpm check` exits 0
+  with the existing 39 non-null assertion warnings. Remote proof: ready PR, build-and-test + CodeQL + Amazon Q
+  successful, CodeRabbit status successful but full review quota-limited, Gemini quota notice non-blocking per
+  user directive, zero review threads, squash-merged to main.
 - [ ] **KEY-PILLARS-5 — prune a small reviewed batch of worst prose chaff.**
   Use `--prune-auto`/`--prune-n` heuristics plus `pnpm prose:audit` evidence to remove a deliberately small
   set of the least scannable retained legacy fabric entries, recording every gap in
