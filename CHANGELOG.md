@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.76.1](https://github.com/jbcom/dynasty/compare/v0.76.0...v0.76.1) (2026-06-25)
+
+
+### Documentation
+
+* mark key pillars breadth pass merged ([befba58](https://github.com/jbcom/dynasty/commit/befba58a932b46106ca2c2c7bc75c95fea22d712))
+
 ## [0.76.0](https://github.com/jbcom/dynasty/compare/v0.75.1...v0.76.0) (2026-06-25)
 
 
