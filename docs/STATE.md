@@ -1,6 +1,6 @@
 ---
 title: State & Architecture
-updated: 2026-06-24
+updated: 2026-06-25
 status: current
 domain: context
 ---
@@ -34,6 +34,8 @@ Shipped on `feat/narrative-acts` (PRs #65/#67); polished on `feat/saga-polish` (
   `src/data/saga/fabric/index.json`): the old 504 wave×archetype×class acts are **not** the player's
   protagonist lattice anymore. They are retained as mined branch/fabric and encounter source material:
   the seven immigrant waves are people the dynasty meets along the way, recurring inside the one story.
+  `src/data/saga/fabric/keepers.json` ranks rewrite candidates; `src/data/saga/fabric/promotion-diversity.json`
+  maps promoted keepers by source era, wave, tier, keeperScore, and spine target.
 - **Loader + branch transforms**: `src/data/loadSaga.ts` eagerly validates every `.act.json`, then applies
   `applySpineBranchOnRamps` so destiny branch signature flags fork from spine choices, not from the old
   1885 prologue events.
