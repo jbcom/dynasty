@@ -5,9 +5,48 @@ import keeperReport from "../../../data/saga/fabric/keepers.json" with { type: "
 import proseBaseline from "../../../data/saga/prose-quality-baseline.json" with { type: "json" };
 
 const KEY_PILLARS_5_PRUNED = [
-  "act:bavaria:entertainment:poor:t3:midpoint",
-  "act:bavaria:technological:poor:t3:midpoint",
-  "act:bavaria:athletic:poor:t4:turn",
+  {
+    sceneId: "act:bavaria:entertainment:poor:t3:midpoint",
+    wave: "bavaria",
+    era: "emergence",
+    tier: 3,
+    reason: [
+      "scanScore 0",
+      "clarityScore 0.044",
+      "Flesch reading ease 8.6",
+      "Flesch-Kincaid 23.3",
+      "average sentence 45.33 words",
+      "cheap pre-read score 2.337",
+    ],
+  },
+  {
+    sceneId: "act:bavaria:technological:poor:t3:midpoint",
+    wave: "bavaria",
+    era: "emergence",
+    tier: 3,
+    reason: [
+      "scanScore 0",
+      "clarityScore 0.175",
+      "Flesch reading ease 8.7",
+      "Flesch-Kincaid 25.3",
+      "average sentence 53.5 words",
+      "cheap pre-read score 1.167",
+    ],
+  },
+  {
+    sceneId: "act:bavaria:athletic:poor:t4:turn",
+    wave: "bavaria",
+    era: "ascension",
+    tier: 4,
+    reason: [
+      "scanScore 0.005",
+      "clarityScore 0.123",
+      "Flesch reading ease 13.2",
+      "Flesch-Kincaid 21.5",
+      "average sentence 40.67 words",
+      "cheap pre-read score 1.84",
+    ],
+  },
 ] as const;
 
 function retainedSceneIds(): Set<string> {
@@ -39,27 +78,34 @@ describe("KEY-PILLARS-5 fabric chaff prune data", () => {
     expect(fabricIndex.keptScenes).toBe(499);
     expect(keeperReport.totalCandidates).toBe(499);
 
-    for (const sceneId of KEY_PILLARS_5_PRUNED) {
+    expect(fabricIndex.byEra.emergence).toBe(153);
+    expect(fabricIndex.byEra.ascension).toBe(223);
+
+    for (const { sceneId } of KEY_PILLARS_5_PRUNED) {
       expect(retained.has(sceneId), `${sceneId} should be pruned from played fabric`).toBe(false);
     }
 
+    const prunedSceneIds = KEY_PILLARS_5_PRUNED.map((expected) => expected.sceneId);
     const txByScene = new Map(
       transactions()
-        .filter((tx) =>
-          KEY_PILLARS_5_PRUNED.includes(tx.sceneId as (typeof KEY_PILLARS_5_PRUNED)[number]),
-        )
+        .filter((tx) => prunedSceneIds.includes(tx.sceneId as (typeof prunedSceneIds)[number]))
         .map((tx) => [tx.sceneId, tx]),
     );
     expect(txByScene.size).toBe(KEY_PILLARS_5_PRUNED.length);
-    for (const sceneId of KEY_PILLARS_5_PRUNED) {
+    for (const expected of KEY_PILLARS_5_PRUNED) {
+      const { sceneId, wave, era, tier } = expected;
       const tx = txByScene.get(sceneId);
       expect(tx).toMatchObject({
         type: "fabric-prune-n",
+        sceneId,
+        wave,
+        era,
+        tier,
         source: "scripts/mine-fabric.ts --prune-n 3",
       });
-      expect(tx?.reason).toContain("scanScore");
-      expect(tx?.reason).toContain("cheap pre-read score");
+      for (const reasonFragment of expected.reason) expect(tx?.reason).toContain(reasonFragment);
       expect(tx?.gap).toContain("rewritten non-first-person replacement");
+      expect(tx?.gap).toContain(`${era} ${wave} tier-${tier} ${sceneId}`);
     }
   });
 
@@ -69,9 +115,8 @@ describe("KEY-PILLARS-5 fabric chaff prune data", () => {
     expect(proseBaseline.passRate).toBeGreaterThanOrEqual(0.545);
     expect(proseBaseline.minScanScore).toBeGreaterThan(0);
     const worstLabels = new Set(proseBaseline.worst.map((entry) => entry.label));
-    for (const sceneId of KEY_PILLARS_5_PRUNED) {
-      expect(worstLabels.has(`fabric:bavaria:emergence:${sceneId}`)).toBe(false);
-      expect(worstLabels.has(`fabric:bavaria:ascension:${sceneId}`)).toBe(false);
+    for (const { sceneId, wave, era } of KEY_PILLARS_5_PRUNED) {
+      expect(worstLabels.has(`fabric:${wave}:${era}:${sceneId}`)).toBe(false);
     }
   });
 });
