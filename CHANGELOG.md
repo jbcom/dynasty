@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.77.0](https://github.com/jbcom/dynasty/compare/v0.76.1...v0.77.0) (2026-06-25)
+
+
+### Features
+
+* promote emergence keeper into progressive spine ([4300794](https://github.com/jbcom/dynasty/commit/4300794e6e5db829199dc6407dcf7e70019439fd))
+
 ## [0.76.1](https://github.com/jbcom/dynasty/compare/v0.76.0...v0.76.1) (2026-06-25)
 
 
