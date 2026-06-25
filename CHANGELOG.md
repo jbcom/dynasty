@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.79.0](https://github.com/jbcom/dynasty/compare/v0.78.1...v0.79.0) (2026-06-25)
+
+
+### Features
+
+* promote Italian keeper into saga spine ([10313f5](https://github.com/jbcom/dynasty/commit/10313f59a3511ac5aa9507a85c32899090c3f090))
+
 ## [0.78.1](https://github.com/jbcom/dynasty/compare/v0.78.0...v0.78.1) (2026-06-25)
 
 
