@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.76.0](https://github.com/jbcom/dynasty/compare/v0.75.1...v0.76.0) (2026-06-25)
+
+
+### Features
+
+* broaden keeper promotion into interstellar spine ([e7c461b](https://github.com/jbcom/dynasty/commit/e7c461b3b45c7e26b129a528b683f7f29d9fe75d))
+
 ## [0.75.1](https://github.com/jbcom/dynasty/compare/v0.75.0...v0.75.1) (2026-06-24)
 
 
