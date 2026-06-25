@@ -325,10 +325,18 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   passRate 0.546. Local proof: targeted spine/promotion/prune unit set 23 passed; `pnpm test` 1065 passed;
   `pnpm typecheck`; `pnpm prose:ratchet`; touched-file Biome 0; `git diff --check`; `pnpm build`; browser
   181 passed with existing Svelte double-unmount warnings; e2e 8 passed.
-- [ ] **KEY-PILLARS-8 — portrait and gender availability map.**
-  Add a small generated/read-only report or test fixture that lists protagonist/encounter portrait demand by
-  era, life stage, archetype, and available gender keys. The goal is to expose missing or misaligned portrait
-  slots before more narrative promotions increase visual fatigue.
+- [x] **KEY-PILLARS-8 PR #272 — portrait and gender availability map.**
+  Added pure `src/sim/genai/portraitAvailability.ts`, generator `pnpm portrait:availability`, and checked-in
+  `src/data/saga/portrait-availability.json` from `src/data/assets.json` plus generated portrait files. The
+  report lists protagonist demand by surface, era, life stage, archetype, rung tier, and available/missing
+  gender keys; it also lists encounter rival-head demand by role/era/gender and flags manifest/file drift.
+  Current baseline: 402 manifest portrait files match 402 generated PNGs; adult protagonist rows are complete
+  at 336/336 gender-key slots; opening life-stage seed rows are complete at 6/6; encounter rival heads are
+  complete at 56/56 across 7 roles and 8 eras; non-adult live protagonist rows remain the largest visual gap
+  at 1334 missing gender-key slots. Local proof: generator 0; focused portrait availability/prompt/facet unit
+  set 39 passed; `pnpm typecheck`; touched-file Biome 0; `git diff --check`; `pnpm test` 1067 passed;
+  `pnpm build`; browser 181 passed with existing Svelte double-unmount warnings; e2e 8 passed; `pnpm check`
+  exits 0 with the existing 39 non-null assertion warnings outside this slice.
 - [ ] **KEY-PILLARS-9 — diegetic visual-relief cadence audit.**
   Add a lightweight audit over the main reading path that counts prose-heavy stretches between visual relief
   anchors (portrait, dossier, map/chart, transition, or promoted encounter art hook) and flags the next place

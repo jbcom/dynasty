@@ -68,6 +68,7 @@ pnpm vite-node scripts/genai-dossiers.ts           # dossier figures + diagrams 
 pnpm vite-node scripts/genai-narration.ts          # 2 beats × 8 eras → …/audio/narration/<key>.wav
 pnpm vite-node scripts/genai-encounter-portraits.ts# 7 rival heads × 8 eras → …/portraits/<key>.png
 pnpm vite-node scripts/genai-portraits.ts          # the protagonist portrait matrix
+pnpm portrait:availability                         # read-only coverage map → src/data/saga/portrait-availability.json
 ```
 
 Each image/audio/video asset is license-logged in `src/data/assets.json` (`license: "Generated"`).
@@ -91,6 +92,8 @@ offline pass ran from current main. Results on disk:
 - Narration: 16 WAV reads generated.
 - Encounter portraits: 56 rival-head PNGs generated.
 - Protagonist portraits: default matrix proved complete; 294 keys skipped.
+- Portrait availability: adult protagonist matrix and encounter rival-heads are complete; non-adult
+  protagonist rows remain the next coverage gap.
 
 Manifest proof: `src/data/assets.json` now records 554 generated assets (`audio`, `background`,
 `dossier-figure`, `portrait`, `video`) and a zero-missing generated-file check passes.
