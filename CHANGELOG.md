@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.81.0](https://github.com/jbcom/dynasty/compare/v0.80.0...v0.81.0) (2026-06-25)
+
+
+### Features
+
+* audit spine visual relief cadence ([277e223](https://github.com/jbcom/dynasty/commit/277e2236d6013fc3f53d2ba35d21b4409eeb93cd))
+
 ## [0.80.0](https://github.com/jbcom/dynasty/compare/v0.79.0...v0.80.0) (2026-06-25)
 
 
