@@ -568,9 +568,14 @@ describe("Game loop", () => {
       if (s.decision) break; // stop at the generational fork — that's where years are allowed to pass
       if (!s.beats.length) break;
       const before = g.view.state.year;
+      const familyBefore = JSON.stringify(g.view.state.family);
       g.pickBeat(0);
       const after = g.view.state.year;
       expect(after, "a decisionless texture beat must pass NO in-world years").toBe(before);
+      expect(
+        JSON.stringify(g.view.state.family),
+        "a 0-year texture beat must not roll mortality or alter succession",
+      ).toBe(familyBefore);
       beatsTaken++;
       guard++;
     }
@@ -578,6 +583,58 @@ describe("Game loop", () => {
       beatsTaken,
       "expected at least one decisionless texture beat to exercise the clock",
     ).toBeGreaterThan(0);
+  });
+
+  it("SAGA-CLOCK-DECOUPLE: padded texture history does not perturb saga succession or mortality rolls", () => {
+    const real = loadContent();
+    const comp = {
+      place: "ireland",
+      era: "origins",
+      culture: "irish_catholic",
+      year: 1885,
+      archetype: "economic" as const,
+      gender: "male" as const,
+      surname: "Salt",
+      seed: "saltdecouple",
+      originId: "composed:ireland:origins",
+    };
+    const setup = new Game(real, comp.seed, foundByComposition(real, comp).state, comp.archetype);
+    let guard = 0;
+    while (!setup.finished && guard < 500) {
+      const s = setup.view.saga.scene;
+      if (!s) break;
+      if (s.decision?.options.some((o) => o.succession?.takesPartner)) break;
+      if (s.beats.length) setup.pickBeat(0);
+      else if (s.decision) setup.pickDecision(0);
+      else break;
+      guard++;
+    }
+    const atSuccession = setup.view.state;
+    const chooseSuccession = (game: Game) => {
+      const scene = game.view.saga.scene;
+      const index = scene?.decision?.options.findIndex((o) => o.succession?.takesPartner) ?? -1;
+      expect(index, "expected a take-partner succession option").toBeGreaterThanOrEqual(0);
+      game.pickDecision(index);
+      return game.view.state;
+    };
+    const normal = chooseSuccession(new Game(real, comp.seed, atSuccession, comp.archetype));
+    const padded = chooseSuccession(
+      new Game(
+        real,
+        comp.seed,
+        {
+          ...atSuccession,
+          history: [
+            ...atSuccession.history,
+            { saga: "beat" as const, index: 999, year: atSuccession.year },
+          ],
+        },
+        comp.archetype,
+      ),
+    );
+    expect(padded.year).toBe(normal.year);
+    expect(padded.end?.kind).toBe(normal.end?.kind);
+    expect(JSON.stringify(padded.family)).toBe(JSON.stringify(normal.family));
   });
 
   it("SAGA-CLOCK-DECOUPLE: a succession decision advances exactly one generation's span and steps the generation", () => {

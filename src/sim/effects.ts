@@ -298,9 +298,11 @@ export function advanceFamily(
   state: GameState,
   fromYear: number,
   rng: Rng,
+  options: { mortalitySalt?: string } = {},
 ): GameState {
   if (!state.family) return state;
   let advanced = state;
+  const mortalitySalt = options.mortalitySalt ?? String(advanced.history.length);
   const years = Math.max(0, advanced.year - fromYear);
   const steps = years > 0 ? years : 1;
   for (let y = 0; y < steps && !advanced.end; y++) {
@@ -311,7 +313,7 @@ export function advanceFamily(
       currentFamily,
       passYear,
       content.eras[advanced.eraIndex]?.id ?? "",
-      rng.fork(`mortality:${passYear}:${advanced.history.length}`),
+      rng.fork(`mortality:${passYear}:${mortalitySalt}`),
     );
     let fam = mort.family;
     if (mort.protagonistDied) {
