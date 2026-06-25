@@ -224,6 +224,7 @@
     "spine:g9:interstellar:open_press",
     "spine:g9:interstellar:open",
     "spine:g9:interstellar:tex_open",
+    "spine:g9:interstellar:keeper_ireland_receiver",
     "spine:g9:interstellar:transit",
     "spine:g9:interstellar:turn",
     "spine:g9:interstellar:csq_turn",
@@ -5888,7 +5889,7 @@
     "notFlags": []
    },
    "gather": true,
-   "next": "spine:g9:interstellar:transit",
+   "next": "spine:g9:interstellar:keeper_ireland_receiver",
    "prose": [
     "The antimatter containment grid filled the dreadnought with a low, ceaseless thrum that {given_name} {surname} had stopped hearing and never stopped feeling, the heartbeat of a vessel that carried the {family_name} name between the stars. The line that had begun in a colonial workshop now spanned light-years, and the old questions of the founding — what the family owed, what it would risk, whom it would carry with it — had returned, transposed into a scale the first ancestors could not have dreamed.",
     "Interstellar expansion was the last and largest wager. Each seeded world was a generation's commitment that would not be answered in {given_name}'s lifetime, or the next, or the next; the dynasty had become a thing measured in centuries and parsecs. And {given_name} understood that this terminal reach — how far, how fast, at what cost to those aboard — was the choice toward which every generation since the founding had been quietly bending, the act that would decide what the whole long line had finally been for."
@@ -5927,6 +5928,55 @@
      }
     }
    ]
+  },
+  {
+   "id": "spine:g9:interstellar:keeper_ireland_receiver",
+   "sense": "sound",
+   "prose": [
+    "The receiver bay sits aft of the chapel deck, all copper coils and cold indicator glass. A silent {surname} technician bends over the crackling console, mapping the strange clockwork rhythms of the far-born against the static.",
+    "No ancestor in the founding house would have called this a voice, yet the pattern keeps returning: three clipped pulses, a pause, then seven more. {given_name} hears the dynasty's oldest question inside the noise, whether a line built to claim a frontier can also learn to listen before it names one."
+   ],
+   "beats": [
+    {
+     "prose": [
+      "The copper receiver spits a clean seven-note answer through the hiss."
+     ],
+     "choice": {
+      "text": "Log the rhythm as speech and keep the channel open through the jump.",
+      "motivatorShift": {
+       "reach": 1,
+       "worldview": 1
+      },
+      "setFlags": [
+       "g9_keeper_ireland_receiver_listened"
+      ],
+      "gather": true
+     }
+    },
+    {
+     "prose": [
+      "A mission lawyer waits at the hatch with a sealed first-contact injunction."
+     ],
+     "choice": {
+      "text": "Hold the transmission until the family can answer without mistaking silence for ownership.",
+      "motivatorShift": {
+       "honor": 1,
+       "power": 1
+      },
+      "setFlags": [
+       "g9_keeper_ireland_receiver_guarded"
+      ],
+      "gather": true
+     }
+    }
+   ],
+   "thread": [],
+   "braidSlots": [],
+   "requires": {
+    "flags": [],
+    "notFlags": []
+   },
+   "next": "spine:g9:interstellar:transit"
   },
   {
    "id": "spine:g9:interstellar:transit",

@@ -62,6 +62,10 @@ The next rung is authored promotion: when a keeper can deepen the one-dynasty sp
 rewrite it as a third-person encounter in `src/data/saga/spine.act.json`, add local
 prose/similarity proof, and record the provenance in
 `src/data/saga/fabric/transactions.ndjson` with `type:"fabric-promote-keeper"`.
+Promotion should keep broadening across source-era bands, not simply repeat the
+first successful convergence insertion. After a keeper lands in the Gilded Age,
+the next priority is a different era band such as ascension, with sensory relief
+strong enough to break late-spine text fatigue.
 
 The preferred pruning workflow is reductive and transactional:
 
