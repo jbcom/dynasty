@@ -264,11 +264,18 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   Remote proof: ready PR, build-and-test + CodeQL green, Amazon Q/CodeRabbit status green, Gemini/CodeRabbit
   quota notices non-blocking per user directive, one Amazon Q false-positive thread about Jest globals resolved
   without code change because the test imports Vitest correctly, and squash-merged to main.
-- [ ] **KEY-PILLARS-3 — second keeper-promotion breadth pass.**
-  Promote the next keeper-ranked legacy fragment into a different era band of the one-dynasty spine, so the
-  pattern proves beyond a single Gilded Age insertion. Prefer a candidate that adds visual/sensory relief and
-  does not duplicate the new coal-child encounter; keep the transaction ledger, prose ratchet, and runner-path
-  proof as the repeatable gate.
+- [x] **KEY-PILLARS-3 PR #254 — MERGED (squash e7c461b).**
+  Promoted ascension keeper `act:ireland:religious:poor:t5:midpoint` into
+  `spine:g9:interstellar:keeper_ireland_receiver`, a decisionless third-person interstellar receiver-bay
+  encounter between the terminal texture and transit path. It preserves the keeper image (crackling copper
+  receiver, far-born clockwork rhythms, static), adds two inline beat choices, records
+  `fabric-promote-keeper` provenance in `src/data/saga/fabric/transactions.ndjson`, broadens the pillar doc
+  beyond the first convergence-era promotion, and ratchets `src/data/saga/prose-quality-baseline.json` forward
+  to 624 total / 286 failed / passRate 0.542. Local proof: targeted spineActDepth unit 17; prose:audit 0;
+  prose:ratchet 0; typecheck 0; build 0; unit 1058; check 0 with 39 pre-existing non-null assertion warnings
+  outside this slice; git diff --check 0; browser 181 with existing Svelte double-unmount warnings; e2e 8.
+  Remote proof: ready PR, build-and-test + CodeQL green, Amazon Q/CodeRabbit status green, Gemini quota notice
+  non-blocking per user directive, zero unresolved review threads at merge, and squash-merged to main.
 - [x] **KEY-PILLARS-1a PRUNE-AUTO PR #229 — MERGED (squash 6ae3e5e).** Refactored the
   reductive legacy-fabric pruning policy out of `scripts/mine-fabric.ts` into pure/tested
   `src/sim/saga/pruneFabric.ts`; `--prune-one`, `--prune-n`, `--prune-auto`, and `--prune-all` now share
