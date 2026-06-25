@@ -70,27 +70,30 @@ jobs:
         run: |
           echo "${ANDROID_KEYSTORE_BASE64}" | base64 --decode > android/release.keystore
 
-      - name: Build Android AAB
+      - name: Build Android artifact
         env:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         working-directory: android
         run: |
+          mkdir -p release-artifacts
           if [[ -f release.keystore ]]; then
             ./gradlew bundleRelease \
               -Pandroid.injected.signing.store.file="$PWD/release.keystore" \
               -Pandroid.injected.signing.store.password="${ANDROID_KEYSTORE_PASSWORD}" \
               -Pandroid.injected.signing.key.alias="${ANDROID_KEY_ALIAS}" \
               -Pandroid.injected.signing.key.password="${ANDROID_KEY_PASSWORD}"
+            cp app/build/outputs/bundle/release/app-release.aab release-artifacts/
           else
-            echo "No signing keystore — building debug AAB"
-            ./gradlew bundleDebug
+            echo "No signing keystore - building debug APK"
+            ./gradlew assembleDebug
+            cp app/build/outputs/apk/debug/app-debug.apk release-artifacts/
           fi
 
-      - name: Upload AAB
+      - name: Upload Android artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: dynasty-android-${{ env.TARGET_REF }}
-          path: android/app/build/outputs/bundle/*/app-*.aab
+          path: android/release-artifacts/*
           if-no-files-found: error
