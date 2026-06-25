@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.77.1](https://github.com/jbcom/dynasty/compare/v0.77.0...v0.77.1) (2026-06-25)
+
+
+### Documentation
+
+* close key pillars emergence keeper ([0b89f18](https://github.com/jbcom/dynasty/commit/0b89f181c238a5f7f7c83808007d69a634367993))
+
 ## [0.77.0](https://github.com/jbcom/dynasty/compare/v0.76.1...v0.77.0) (2026-06-25)
 
 
