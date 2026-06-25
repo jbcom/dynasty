@@ -69,6 +69,7 @@ pnpm vite-node scripts/genai-narration.ts          # 2 beats × 8 eras → …/a
 pnpm vite-node scripts/genai-encounter-portraits.ts# 7 rival heads × 8 eras → …/portraits/<key>.png
 pnpm vite-node scripts/genai-portraits.ts          # the protagonist portrait matrix
 pnpm portrait:availability                         # read-only coverage map → src/data/saga/portrait-availability.json
+pnpm visual:relief                                 # reading-fatigue map → src/data/saga/visual-relief-cadence.json
 ```
 
 Each image/audio/video asset is license-logged in `src/data/assets.json` (`license: "Generated"`).
@@ -94,6 +95,9 @@ offline pass ran from current main. Results on disk:
 - Protagonist portraits: default matrix proved complete; 294 keys skipped.
 - Portrait availability: adult protagonist matrix and encounter rival-heads are complete; non-adult
   protagonist rows remain the next coverage gap.
+- Visual-relief cadence: 60 playable spine route variants audited; 13 dense stretches exceed the current
+  major-anchor target, with `spine:g2:antebellum:allegiance` flagged as the next compact visual/sensory
+  relief target.
 
 Manifest proof: `src/data/assets.json` now records 554 generated assets (`audio`, `background`,
 `dossier-figure`, `portrait`, `video`) and a zero-missing generated-file check passes.

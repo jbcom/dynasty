@@ -23,6 +23,8 @@ class lattice as the protagonist model.
 - Reader surfaces should use non-text visual rhythm where it helps: page progress,
   woven-thread marks, portraits, sense tint, and transitions should orient the player
   without adding explanatory UI copy.
+- `pnpm visual:relief` audits the authored spine's route variants for dense stretches
+  between major visual anchors and names the next compact visual/sensory relief target.
 
 ## Portrait And Gender Pillars
 

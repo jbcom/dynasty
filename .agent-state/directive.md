@@ -337,10 +337,19 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   set 39 passed; `pnpm typecheck`; touched-file Biome 0; `git diff --check`; `pnpm test` 1067 passed;
   `pnpm build`; browser 181 passed with existing Svelte double-unmount warnings; e2e 8 passed; `pnpm check`
   exits 0 with the existing 39 non-null assertion warnings outside this slice.
-- [ ] **KEY-PILLARS-9 — diegetic visual-relief cadence audit.**
-  Add a lightweight audit over the main reading path that counts prose-heavy stretches between visual relief
-  anchors (portrait, dossier, map/chart, transition, or promoted encounter art hook) and flags the next place
-  where a text-heavy spine segment should gain a visual or sensory break.
+- [x] **KEY-PILLARS-9 PR #274 — diegetic visual-relief cadence audit.**
+  Added pure `src/sim/saga/visualReliefCadence.ts`, generator `pnpm visual:relief`, and checked-in
+  `src/data/saga/visual-relief-cadence.json` over the authored dynasty spine. The report counts rendered
+  prose and inline choice text across 60 playable route variants, treats portraits/sense frames/scene
+  transitions/inline choices as light anchors, treats promoted keeper hooks plus generation-boundary
+  cinematic+dossier chart/map panels as major anchors, and names the next compact visual/sensory relief target.
+  Current baseline: 10 acts, 124 unique spine scenes, 15 heavy scenes, 4 promoted encounter hooks, 10
+  generation-boundary anchors, 13 dense route stretches needing larger relief, max stretch 1789 words / 18
+  pages, next target `spine:g2:antebellum:allegiance` (325 rendered words / 3 prose pages). Local proof:
+  generator 0; focused visual-relief/promotion/portrait availability unit set 6 passed; `pnpm typecheck`;
+  touched-file Biome 0; `git diff --check`; `pnpm test` 1069 passed; `pnpm build`; browser 181 passed with
+  existing Svelte double-unmount warnings; e2e 8 passed; `pnpm check` exits 0 with the existing 39 non-null
+  assertion warnings outside this slice.
 - [x] **KEY-PILLARS-1a PRUNE-AUTO PR #229 — MERGED (squash 6ae3e5e).** Refactored the
   reductive legacy-fabric pruning policy out of `scripts/mine-fabric.ts` into pure/tested
   `src/sim/saga/pruneFabric.ts`; `--prune-one`, `--prune-n`, `--prune-auto`, and `--prune-all` now share
