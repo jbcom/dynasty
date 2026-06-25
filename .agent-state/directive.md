@@ -316,11 +316,15 @@ dossier figures). NOT yet used, though the visual-layer spec called for "imagery
   still exits on the existing 39 non-null assertion diagnostics outside this slice. Remote proof: ready PR,
   build-and-test + CodeQL + Amazon Q + CodeRabbit green, Gemini/CodeRabbit quota notices non-blocking per
   user directive, zero review threads, and squash-merged to main.
-- [ ] **KEY-PILLARS-7 — non-Ireland keeper promotion using the diversity map.**
-  Use `src/data/saga/fabric/promotion-diversity.json` and `src/data/saga/fabric/keepers.json` to pick the
-  strongest non-Ireland keeper that deepens a weak spine moment, rewrite it as a third-person encounter or
-  branch beat in the one-dynasty story, record `fabric-promote-keeper` provenance, regenerate the promotion
-  map, and prove prose/readability plus spine placement.
+- [x] **KEY-PILLARS-7 PR #270 — non-Ireland keeper promotion using the diversity map.**
+  Promoted the strongest non-Ireland keeper, `act:italian:athletic:poor:t1:midpoint`, into decisionless
+  third-person Gilded Age encounter `spine:g3:gildedage:keeper_italian_common` between the coal-curb keeper
+  and the venture scene. It preserves the dust-covered Italian youth / stray ball / hard-packed common image,
+  adds two inline beat choices, records `fabric-promote-keeper` provenance, regenerates the promotion-diversity
+  map to 4 promotions with `italian` represented, and ratchets the prose baseline to 623 total / 283 failed /
+  passRate 0.546. Local proof: targeted spine/promotion/prune unit set 23 passed; `pnpm test` 1065 passed;
+  `pnpm typecheck`; `pnpm prose:ratchet`; touched-file Biome 0; `git diff --check`; `pnpm build`; browser
+  181 passed with existing Svelte double-unmount warnings; e2e 8 passed.
 - [ ] **KEY-PILLARS-8 — portrait and gender availability map.**
   Add a small generated/read-only report or test fixture that lists protagonist/encounter portrait demand by
   era, life stage, archetype, and available gender keys. The goal is to expose missing or misaligned portrait

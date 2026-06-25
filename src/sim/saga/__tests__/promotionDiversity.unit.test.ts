@@ -19,6 +19,14 @@ const EXPECTED_PROMOTIONS = [
     spineTarget: "spine:g3:gildedage:keeper_ireland_coal",
   },
   {
+    sceneId: "act:italian:athletic:poor:t1:midpoint",
+    sourceEra: "convergence",
+    wave: "italian",
+    tier: 1,
+    keeperScore: 0.838,
+    spineTarget: "spine:g3:gildedage:keeper_italian_common",
+  },
+  {
     sceneId: "act:ireland:athletic:poor:t3:rising",
     sourceEra: "emergence",
     wave: "ireland",
@@ -93,10 +101,10 @@ describe("KEY-PILLARS-6 promotion diversity map", () => {
   it("matches the live transaction log and names the next diversity pressure", () => {
     const report = promotionMap as PromotionDiversityMap;
     expect(report).toEqual(buildPromotionDiversityMap(transactions()));
-    expect(report.promotedCount).toBe(3);
-    expect(report.bySourceEra).toEqual({ convergence: 1, emergence: 1, ascension: 1 });
-    expect(report.byWave).toEqual({ ireland: 3 });
-    expect(report.byTier).toEqual({ "0": 1, "3": 1, "5": 1 });
+    expect(report.promotedCount).toBe(4);
+    expect(report.bySourceEra).toEqual({ convergence: 2, emergence: 1, ascension: 1 });
+    expect(report.byWave).toEqual({ ireland: 3, italian: 1 });
+    expect(report.byTier).toEqual({ "0": 1, "1": 1, "3": 1, "5": 1 });
     expect(report.nextDiversification.sourceEraGaps).toEqual([]);
     expect(report.nextDiversification.overrepresentedWaves).toEqual(["ireland"]);
     expect(report.nextDiversification.guidance).toContain("non-ireland");

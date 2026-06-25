@@ -19,6 +19,7 @@ const corpus = loadSaga();
 const PROMOTED_CONVERGENCE_KEEPER_ID = "act:ireland:economic:poor:t0:turn";
 const PROMOTED_ASCENSION_KEEPER_ID = "act:ireland:religious:poor:t5:midpoint";
 const PROMOTED_EMERGENCE_KEEPER_ID = "act:ireland:athletic:poor:t3:rising";
+const PROMOTED_NON_IRELAND_KEEPER_ID = "act:italian:athletic:poor:t1:midpoint";
 const KEEPERS = (
   keeperReport as {
     keepers: Array<{
@@ -142,9 +143,10 @@ describe("SPINE-ACT-DEPTH: every spine act is deepened with texture + consequenc
 
     const gilded = act("spine:g3:gildedage");
     const texIndex = gilded.scenes.indexOf("spine:g3:gildedage:tex_open");
-    expect(gilded.scenes.slice(texIndex, texIndex + 3)).toEqual([
+    expect(gilded.scenes.slice(texIndex, texIndex + 4)).toEqual([
       "spine:g3:gildedage:tex_open",
       encounterId,
+      "spine:g3:gildedage:keeper_italian_common",
       "spine:g3:gildedage:venture",
     ]);
 
@@ -157,10 +159,47 @@ describe("SPINE-ACT-DEPTH: every spine act is deepened with texture + consequenc
     expect(prose).toMatch(/\{given_name\}|\{surname\}/);
     expect(encounter.decision).toBeUndefined();
     expect(encounter.beats.length).toBeGreaterThanOrEqual(2);
-    expect(encounter.next).toBe("spine:g3:gildedage:venture");
+    expect(encounter.next).toBe("spine:g3:gildedage:keeper_italian_common");
 
     const report = auditProseQuality(
       "spine:g3:gildedage:keeper_ireland_coal",
+      qualityParts(encounterId),
+    );
+    expect(report.pass, JSON.stringify(report.findings, null, 2)).toBe(true);
+  });
+
+  it("KEY-PILLARS-7: strongest non-Ireland keeper broadens the Gilded Age spine", () => {
+    const encounterId = "spine:g3:gildedage:keeper_italian_common";
+    const keeper = topKeeperFor("italian", 1);
+    expect(keeper?.sceneId).toBe(PROMOTED_NON_IRELAND_KEEPER_ID);
+    expect(keeper?.wave).toBe("italian");
+    expect(keeper?.era).toBe("convergence");
+    expect(keeper?.tier).toBe(1);
+    expect(keeper?.keeperScore).toBeGreaterThanOrEqual(0.838);
+    expect(keeper?.maxSimilarity).toBe(0);
+
+    const gilded = act("spine:g3:gildedage");
+    const coalIndex = gilded.scenes.indexOf("spine:g3:gildedage:keeper_ireland_coal");
+    expect(gilded.scenes.slice(coalIndex, coalIndex + 3)).toEqual([
+      "spine:g3:gildedage:keeper_ireland_coal",
+      encounterId,
+      "spine:g3:gildedage:venture",
+    ]);
+
+    const encounter = scene(encounterId);
+    const prose = encounter.prose.join(" ");
+    expect(prose).toMatch(/dust-covered Italian youth/i);
+    expect(prose).toMatch(/stray ball/i);
+    expect(prose).toMatch(/hard-packed common/i);
+    expect(prose).not.toMatch(/\b(I|me|my|mine|we|our|ours|us)\b/i);
+    expect(prose).toMatch(/\{given_name\}/);
+    expect(encounter.decision).toBeUndefined();
+    expect(encounter.beats.length).toBeGreaterThanOrEqual(2);
+    expect(encounter.next).toBe("spine:g3:gildedage:venture");
+    expect(walk("spine:g3:gildedage", [])).toContain("keeper_italian_common");
+
+    const report = auditProseQuality(
+      "spine:g3:gildedage:keeper_italian_common",
       qualityParts(encounterId),
     );
     expect(report.pass, JSON.stringify(report.findings, null, 2)).toBe(true);

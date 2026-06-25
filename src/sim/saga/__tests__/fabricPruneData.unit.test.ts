@@ -110,9 +110,9 @@ describe("KEY-PILLARS-5 fabric chaff prune data", () => {
   });
 
   it("ratchets the prose baseline after removing the worst live fabric failures", () => {
-    expect(proseBaseline.total).toBe(622);
+    expect(proseBaseline.total).toBe(623);
     expect(proseBaseline.failed).toBe(283);
-    expect(proseBaseline.passRate).toBeGreaterThanOrEqual(0.545);
+    expect(proseBaseline.passRate).toBeGreaterThanOrEqual(0.546);
     expect(proseBaseline.minScanScore).toBeGreaterThan(0);
     const worstLabels = new Set(proseBaseline.worst.map((entry) => entry.label));
     for (const { sceneId, wave, era } of KEY_PILLARS_5_PRUNED) {
