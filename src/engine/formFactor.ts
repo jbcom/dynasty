@@ -44,12 +44,14 @@ export function classify(
   const foldableByAspect = shortest >= 580 && aspect < 1.4;
   const foldableBySegments = viewportSegments > 1;
   const foldable = foldableByAspect || foldableBySegments;
-  const tablet = isTabletDevice || foldable || shortest >= 700 || (shortest >= 600 && longest >= 960);
+  const tablet =
+    isTabletDevice || foldable || shortest >= 700 || (shortest >= 600 && longest >= 960);
 
   const factor: FormFactor = foldable ? "foldable" : tablet ? "tablet" : "phone";
   // Wide mode is intentionally conservative for phones (including phone-landscape):
   // two-pane surfaces need enough BOTH-WAYS room to keep choices and tabs readable.
-  const wide = factor !== "phone" && (orientation === "landscape" || width >= 900 || shortest >= 650);
+  const wide =
+    factor !== "phone" && (orientation === "landscape" || width >= 900 || shortest >= 650);
   return { factor, width, height, orientation, viewportSegments, isTabletDevice, wide };
 }
 

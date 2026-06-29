@@ -44,7 +44,9 @@ export class FormFactorStore {
 
       if (window.visualViewport) {
         window.visualViewport.addEventListener("resize", this.onViewportChange);
-        stops.push(() => window.visualViewport?.removeEventListener("resize", this.onViewportChange));
+        stops.push(() =>
+          window.visualViewport?.removeEventListener("resize", this.onViewportChange),
+        );
       }
 
       if (typeof window.matchMedia === "function") {
