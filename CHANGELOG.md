@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.81.2](https://github.com/jbcom/dynasty/compare/v0.81.1...v0.81.2) (2026-06-29)
+
+
+### Bug Fixes
+
+* set Vite base path for GitHub Pages /dynasty/ subpath ([#281](https://github.com/jbcom/dynasty/issues/281)) ([e7521c3](https://github.com/jbcom/dynasty/commit/e7521c3ae8445c1785db8ff60f095c0c1186e4dc))
+
 ## [0.81.1](https://github.com/jbcom/dynasty/compare/v0.81.0...v0.81.1) (2026-06-29)
 
 
