@@ -38,6 +38,7 @@ import { cinematicKey } from "../../sim/cinematic/genaiCinematic";
 import CinematicView from "../cinematic/CinematicView.svelte";
 import { buildMeterSeries } from "../statsSeries";
 import DossierView from "../dossier/DossierView.svelte";
+import type { FormFactorInfo } from "../../engine/formFactor";
 
 interface Props {
   content: Content;
@@ -55,6 +56,8 @@ interface Props {
   /** Medium-native layout: phones get a compact tab stack; wide tablets/foldables
       get the event + an info panel side-by-side. */
   wide?: boolean;
+  /** Current viewport/form-factor info for responsive split sizing tweaks. */
+  layout?: FormFactorInfo;
 }
 
 const {
@@ -67,6 +70,7 @@ const {
   onpress,
   oninvest,
   wide = false,
+  layout,
 }: Props = $props();
 
 // Diegetic ambient drift: the play area tints toward cyan (utopia) or red
@@ -185,6 +189,18 @@ const hasField = $derived(hasLineage);
 const defaultTab = $derived<Tab>(wide ? (hasNews ? "news" : hasMarkets ? "markets" : "timeline") : "event");
 let tab = $state<Tab>("event");
 $effect(() => { if (tab === "event" && wide) tab = defaultTab; });
+const layoutFactor = $derived(layout?.factor ?? "phone");
+const layoutOrientation = $derived(layout?.orientation ?? "portrait");
+const splitColumns = $derived.by(() => {
+  if (!wide) return "1fr";
+  if (layoutFactor === "foldable") {
+    return layoutOrientation === "portrait" ? "1fr 1fr" : "1.2fr 1fr";
+  }
+  if (layoutFactor === "tablet") {
+    return layoutOrientation === "portrait" ? "1.1fr 1fr" : "1.35fr 1fr";
+  }
+  return "1.4fr 1fr";
+});
 
 // Each tab carries a real 2D line-icon asset (public/assets/icons/ui/<icon>.svg).
 const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
@@ -360,7 +376,14 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
 
 <ShaderBackdrop macroAct={sagaView.macroAct} />
 
-<div class="play" data-drift={drift} class:wide>
+<div
+  class="play"
+  data-drift={drift}
+  data-factor={layoutFactor}
+  data-orientation={layoutOrientation}
+  class:wide
+  style={`--play-split:${splitColumns};`}
+>
   <!-- Slim always-visible header: the ACT CHAPTER (meso) headline + year, with the macro span as
        quiet context. Everything else (meters, motivators, axis, settings) lives in the slide-out menu. -->
   <header class="saga-head" data-testid="saga-head">
@@ -420,7 +443,7 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   /* Wide (tablet/foldable): event + info side-by-side. */
   .split {
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
+    grid-template-columns: var(--play-split, 1.4fr 1fr);
     gap: var(--mmm-gap);
     flex: 1;
     min-height: 0;
@@ -428,6 +451,16 @@ const tabs = $derived<Array<{ id: Tab; label: string; icon: string }>>([
   .event-col {
     overflow-y: auto;
     padding-top: var(--mmm-pad);
+  }
+  .play.wide .event-col {
+    padding-inline: var(--mmm-pad);
+  }
+  /* Give wide/tablet/foldable layouts a broader readable column before hitting caps. */
+  .play.wide .event-col :global(.event-pane > .card) {
+    max-width: min(100%, 52rem);
+  }
+  .play.wide .event-col :global(.event-pane > .scene) {
+    max-width: min(100%, 56rem);
   }
   .info-col {
     display: flex;

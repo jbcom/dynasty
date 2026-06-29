@@ -23,8 +23,23 @@ describe("form-factor classify", () => {
     expect(classify(500, 800, true).factor).toBe("tablet");
   });
 
-  it("flags wide landscape for side-by-side diegetic panels", () => {
+  it("keeps phone-landscape compact while allowing true tablet landscape split", () => {
+    expect(classify(915, 412).factor).toBe("phone");
+    expect(classify(915, 412).wide).toBe(false);
     expect(classify(1280, 720).wide).toBe(true);
-    expect(classify(720, 1280).wide).toBe(false);
+  });
+
+  it("treats tablet portrait as wide enough for the split play surface", () => {
+    const f = classify(820, 1180);
+    expect(f.factor).toBe("tablet");
+    expect(f.wide).toBe(true);
+    expect(f.orientation).toBe("portrait");
+  });
+
+  it("treats segmented viewports as foldable for unfolded/posture-aware layouts", () => {
+    const f = classify(720, 900, false, 2);
+    expect(f.factor).toBe("foldable");
+    expect(f.viewportSegments).toBe(2);
+    expect(f.wide).toBe(true);
   });
 });
