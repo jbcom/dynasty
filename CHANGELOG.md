@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.81.1](https://github.com/jbcom/dynasty/compare/v0.81.0...v0.81.1) (2026-06-29)
+
+
+### Bug Fixes
+
+* apply Biome formatting to formFactor files ([#279](https://github.com/jbcom/dynasty/issues/279)) ([c283460](https://github.com/jbcom/dynasty/commit/c2834607af1515ea7d4c18c76275eb01aef04fc9))
+
 ## [0.81.0](https://github.com/jbcom/dynasty/compare/v0.80.0...v0.81.0) (2026-06-25)
 
 
